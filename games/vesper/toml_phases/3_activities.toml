@@ -1808,7 +1808,7 @@ time_progression_minutes = 120
 [[canvases]]
 id          = "underworld_market_shop"
 name        = "Work the stalls"
-description = "Wren-solo at underworld_market. Coin SINK: buy a weapon edge (coin 40 -> +fighting 5) / infiltration gear (coin 30 -> +stealth 5). The humans pen = a witness/awakening beat (no buy). costs coin (per buy)."
+description = "Wren-solo at underworld_market. Coin SINK: buy a weapon edge (coin 40 -> +fighting 5) / infiltration gear (coin 30 -> +stealth 5), EACH ONCE (flags market_weapon_bought / market_gear_bought hide the button after). The humans pen = a witness/awakening beat (no buy). costs coin (per buy)."
 [canvases.trigger]
 location      = "underworld_market"
 is_repeatable = true
@@ -1829,12 +1829,23 @@ targetType = "node"
 nodeId     = "underworld_market_shop.weapon"
 costs      = [{ trait = "coin", value = 40 }]
 effects    = [{ targetType = "player", trait = "fighting", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "market_weapon_bought", op = "set" }]
+# One-time buy (LO 2026-10-02, design_cheat_page.md §11.1): repeatable, this choice was an uncapped
+# coin-to-fighting pump that outran the cheat page's caps. One blade, once; the button is gone after.
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "market_weapon_bought", operator = "is_false" },
+] }
 [[canvases.nodes.exit_block.choices]]
 text       = "Buy infiltration gear."
 targetType = "node"
 nodeId     = "underworld_market_shop.gear"
 costs      = [{ trait = "coin", value = 30 }]
 effects    = [{ targetType = "player", trait = "stealth", op = "add", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "market_gear_bought", op = "set" }]
+# One-time buy, same reason: the uncapped coin-to-stealth pump.
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "market_gear_bought", operator = "is_false" },
+] }
 [[canvases.nodes.exit_block.choices]]
 text       = "Walk the pens."
 targetType = "node"
@@ -2854,6 +2865,11 @@ priority      = 3
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "raid_done", operator = "is_true" },
+  # ⚠️ 0.2.3 (beat_0212): CLOSES WHEN THE CLEARING STARTS. Its prose is the burned back room ("a burned floor two
+  # inches deep in other people's paperwork"), and the rebuild's first stage carries the ash out; what paper is
+  # left goes into boxes for Bastien (activity_rebuild_undertow .done, stage 1). A player who never finished the
+  # crawl loses its remaining bands at that point — a call recorded for LO in design_the_hunt.md.
+  { type = "trait", subject = "player", trait_key = "undertow_build", operator = "lt", value = 1 },
 ] }
 
 [[canvases.nodes]]
@@ -4690,3 +4706,538 @@ text = "Take it home."
 destinationType          = "specific"
 locationId               = "the_cot"
 time_progression_minutes = 240
+
+# ── kess_patch_up — 0.2.3 THE HUNT's repair. beat_0209. Wren-solo @kess_berth, SUBSTITUTION_ONLY. ─────────────
+# Reached only from hub_kess_berth's "Have him fix what she did." choice (vega_damage gte 1 + seam_known). The
+# kess_makes_the_brace shape: a located, substitution-only trigger, so it is never a second Kess card (the build
+# allows one repeatable card per NPC per window — the salvage_repair_hub overlap warning is that rule) and never
+# shows on its own.
+# ⚠️ REPEATABLE, SO EVERY LINE IS TRUE ON EVERY VISIT. The base node carries one line per damage band (the same
+# edges as the "Body:" sidebar row in 0_systems_spec), so what Kess says always matches what the sidebar says.
+# ⚠️ clamp = true ON THE EFFECT, because choice effects default to NO clamp (v2.py:15684), and -25 on 10 must
+# land on 0, not -15 (which would hide the row and make the next hit read 20 instead of 35).
+# 10 coin, 60 minutes, -25: two visits take her from Badly hurt to Fine.
+[[canvases]]
+id          = "kess_patch_up"
+name        = "Patched up"
+description = "beat_0209 (0.2.3). Wren-solo @kess_berth, SUBSTITUTION_ONLY, repeatable, gated seam_known is_true + vega_damage gte 1. Reached from hub_kess_berth's repair choice. One Kess line per damage band (Badly hurt / Hurt / Fine, the sidebar's edges). 'Pay him. (10 coin.)' -> vega_damage -25 (clamped) -> done, 60 minutes."
+[canvases.trigger]
+location      = "kess_berth"
+is_repeatable = true
+priority      = 4
+is_active     = true
+substitution_only = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "seam_known",  operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "vega_damage", operator = "gte", value = 1 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Patched up"
+blocks = [
+  { type = "paragraph", content = "He looks at the way she is standing before he looks at her face, and points his torch at the bench." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_damage", operator = "gte", value = 60 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Again. You are walking on half of yourself. Every time you go at her from the front, this is what comes back down my ladder." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_damage", operator = "gte", value = 30 },
+      { type = "trait", subject = "player", trait_key = "vega_damage", operator = "lt",  value = 60 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Not as bad as it could be. Bad enough. On the bench." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_damage", operator = "lt", value = 30 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "A few loose things. You could walk on it. You would be stupid to fight on it." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Pay him. (10 coin.)"
+targetType = "node"
+nodeId     = "kess_patch_up.done"
+costs      = [{ trait = "coin", value = 10 }]
+effects    = [{ targetType = "player", trait = "vega_damage", op = "add", value = -25, clamp = true }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Not now."
+targetType = "location"
+locationId = "kess_berth"
+
+[[canvases.nodes]]
+id   = "done"
+name = "Patched up"
+blocks = [
+  { type = "paragraph", content = "An hour face down on the bench, his torch hissing. When she sits up, it hurts less." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Try to come back with fewer holes in you." },
+  { type = "dialog", props = { speaker = "player" }, content = "Tell her that." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get up."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "kess_berth"
+time_progression_minutes = 60
+
+# ── activity_cain_trains — 0.2.3 THE HUNT, the fight half. beat_0211. Lane-1 portrait hub @the_site. ───────────
+# LO, 2026-10-03: Cain trains her for the fight route (yes); design_the_hunt.md "How Wren learns to fight her" 2.
+# Cain's first standing surface in the game: his schedule rows (1_metadata, under npc_cain) put him at the Site
+# 21:00-03:00 once it is open, and this card is what he does there.
+# ⚠️ THE ONLY WAY PAST FIGHTING 70. The drills stop at 70 (activity_train / activity_train_cot, the gte 50 lt 70
+# band); this card takes her from 70 to 85, +1 a session, cap 85. The take needs 85 (beat_0216).
+# ⚠️ WORK, NOT WARMTH (design_the_hunt.md): two hours on the floor, nothing said but the work. The Site scene left
+# them "only a little closer", and this card keeps it there. No sex (LO).
+# ⚠️ THE RULE IS SAID ONCE. Two same-label "Train with him." choices split on cain_rule_heard: the first goes to
+# .first, which carries the rule and sets the flag on render (a location exit's flagEffects fire at paint,
+# engine-reference.md:230); every later one goes to .session.
+# ⚠️ LOCK-AS-PROSE, NOT A GREYED BUTTON. Below 70 and at 85 the training choices are simply absent and his band
+# line says why. A show_when_locked button cannot carry two different reasons (not yet / nothing left), and one
+# of them would be a lie.
+# ⚠️ .session's BANDS READ THE POST-INCREMENT VALUE: a CHOICE's effects fire on click (engine-reference.md §3),
+# before the node paints. So the 85 band is the session that got her there.
+# MEDIA: one new slot, scenes/cain_training.jpg (on .first and .session would be two blocks of one asset — the
+# one-asset-one-block rule — so it rides .first only; .session reuses nothing).
+[[canvases]]
+id          = "activity_cain_trains"
+name        = "Cain"
+description = "beat_0211 (0.2.3). Lane-1 portrait hub @the_site (npc + requires_npc = npc_cain; his rows 21:00-03:00, when the_site_open). Gated the_site_open + marrow_known. Three fighting bands on his line: under 70 'not yet, drill', 70-84 'again', 85+ 'nothing more I can show you'. Two same-label 'Train with him.' choices (fighting gte 70 + lt 85, 15 energy, fighting +1 cap 85): the first goes to .first (the rule, sets cain_rule_heard), later ones to .session (four post-increment bands). 120 minutes each, back to the_site."
+[canvases.trigger]
+location      = "the_site"
+npc           = "npc_cain"
+requires_npc  = "npc_cain"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "the_site_open", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "marrow_known",  operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Cain"
+blocks = [
+  { type = "paragraph", content = "Cain is at the far end of the lab." },
+  # beat_0216 — AFTER THE TAKE. First in the chain, so it beats the 85 band, whose "somebody behind her" is spent.
+  # Worded to stay true through the table (beat_0217) and after: the transfer is the next hard part either way.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "vega_taken", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "You did the wrong thing at the right time. That is all there ever is to it." },
+    { type = "dialog", props = { speaker = "player" }, content = "Three men died for it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Yes. Now comes the hard part." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 85 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "There is nothing more I can show you. The rest is you, and her, and somebody behind her." },
+    { type = "dialog", props = { speaker = "player" }, content = "And if that is not enough?" },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Then it is not. Go to bed." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 70 },
+      { type = "trait", subject = "player", trait_key = "fighting", operator = "lt",  value = 85 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Again?" },
+    { type = "dialog", props = { speaker = "player" }, content = "Again." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Coat off, then." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "fighting", operator = "lt", value = 70 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Not yet. You would be guessing, and she does not guess. Drill until you can stand up to me for more than a breath." },
+    { type = "dialog", props = { speaker = "player" }, content = "How long is that?" },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "You will know." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Train with him."
+targetType = "node"
+nodeId     = "activity_cain_trains.first"
+costs      = [{ trait = "energy", value = 15 }]
+effects    = [{ targetType = "player", trait = "fighting", op = "add", value = 1, cap = 85, clamp = true }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 70 },
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "lt",  value = 85 },
+  { type = "flag",  subject = "player", flag_key  = "cain_rule_heard", operator = "is_false" },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Train with him."
+targetType = "node"
+nodeId     = "activity_cain_trains.session"
+costs      = [{ trait = "energy", value = 15 }]
+effects    = [{ targetType = "player", trait = "fighting", op = "add", value = 1, cap = 85, clamp = true }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 70 },
+  { type = "trait", subject = "player", trait_key = "fighting", operator = "lt",  value = 85 },
+  { type = "flag",  subject = "player", flag_key  = "cain_rule_heard", operator = "is_true" },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave him to it."
+targetType = "location"
+locationId = "the_site"
+
+[[canvases.nodes]]
+id   = "first"
+name = "The wrong one"
+blocks = [
+  { type = "image", props = { file = "scenes/cain_training.jpg", description = "A man and a woman sparring hand to hand on the bare floor of a dim, abandoned laboratory by the light of a single work lamp, benches pushed back. Must show: close sparring, a lab, low light. Avoid: weapons, blood, a gym, romance.", search_queries = ["man and woman sparring hand to hand dim abandoned room lamp", "close combat training two people old laboratory night"] } },
+  { type = "paragraph", content = "He clears the floor between the bench and the two cradles and takes his coat off." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I have fought them before. I am alive because of one thing I learned the first time." },
+  { type = "dialog", props = { speaker = "player" }, content = "What?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "She'll always do the right thing. You have to do the wrong one." },
+  { type = "paragraph", content = "Then he comes at her, and every time she does what the drills taught her, he puts her on the floor." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Wrong. Do it wrong. Every part of her was built to do it right." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Again." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Enough for tonight."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 120
+flagEffects = [
+  { targetType = "player", flag = "cain_rule_heard", op = "set" },
+]
+
+[[canvases.nodes]]
+id   = "session"
+name = "Again"
+blocks = [
+  { type = "paragraph", content = "He clears the floor. Nothing gets said but the work." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 85 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Near the end she does the wrong thing on purpose, and he is on the floor, looking at the ceiling." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "That is as far as I can take you." },
+    { type = "dialog", props = { speaker = "player" }, content = "Get up, then." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "In a minute. I mean it. There is no more." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 80 },
+      { type = "trait", subject = "player", trait_key = "fighting", operator = "lt",  value = 85 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She puts him down one time in three now." },
+    { type = "dialog", props = { speaker = "player" }, content = "One in three." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "One in three is not enough against her. Better, though. Again." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 75 },
+      { type = "trait", subject = "player", trait_key = "fighting", operator = "lt",  value = 80 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Twice she does the wrong thing, and twice it nearly works." },
+    { type = "dialog", props = { speaker = "player" }, content = "That nearly worked. Twice." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Nearly is how you die. Get up. Again." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "fighting", operator = "lt", value = 75 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Most of the two hours is spent on her back." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "You are still doing it right. Stop doing it right." },
+    { type = "dialog", props = { speaker = "player" }, content = "I don't know how." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Enough for tonight."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 120
+
+# ── activity_rebuild_undertow — 0.2.3 B2. beat_0212. Wren-solo card @underworld_bar while Sol is there. ─────────
+# LO, 2026-10-03: "Bar needs to get in place again, maybe some money too. Rebuild, renovate, and then hire those
+# men again." Bastien put in Rue's money; the rest is her coin, in three stages.
+# ⚠️ THE STAGES ARE ORDERED SO EVERY OTHER SURFACE STAYS TRUE: 1 clears the ash, 2 builds the floor and the counter,
+# 3 closes the back wall and opens the doors. The burned back room is the LAST thing fixed, so Colm's post-raid
+# lines (the taped hole, nothing to drink, a room that does not open) and "Take him through the tape" stay true
+# through stage 2 and change at 3 (hub_colm_undertow, loop_colm_backroom); Sol's card has one band per stage
+# (hub_sol_undertow); the ruin crawl closes at stage 1 (activity_sift_the_ruin).
+# ⚠️ A SOLO CARD, NEVER A SECOND SOL CARD. One repeatable portrait card per NPC per window (the salvage_repair_hub
+# overlap rule), so Sol's presence is a CONDITION (npc_at_location), not npc/requires_npc — requires_npc without
+# npc is the render-bucket trap (check_render_buckets.py).
+# ⚠️ .done READS THE POST-INCREMENT STAGE: choice effects fire on click (engine-reference.md §3).
+# ⚠️ STAGE 1's .done IS WHERE SOL LEARNS WHOSE MONEY IT IS ("Alive." / "Don't tell me where."), once, because it is
+# the only screen that renders exactly once per save — the base node repeats every visit.
+# undertow_open is set on the third stage's CHOICE (click), so the bar is open by the time .done paints.
+# MEDIA: three new slots, scenes/undertow_rebuild_1..3.jpg, one per stage on .done.
+[[canvases]]
+id          = "activity_rebuild_undertow"
+name        = "Put money into the Undertow"
+description = "beat_0212 (0.2.3). B2. Wren-solo card @underworld_bar, repeatable, pri 3, gated crew_asked is_true + undertow_build lt 3 + Sol present. Three stage bands on undertow_build (0 the ruin / 1 cleared / 2 rebuilt) each with one paying choice: the clearing (40 coin), the floor and counter (60), the back wall and the doors open (80, sets undertow_open). undertow_build +1 cap 3 per stage. .done is banded post-increment with one image per stage; stage 1 is where Sol learns it is Bastien's money. 240 minutes."
+[canvases.trigger]
+location      = "underworld_bar"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "crew_asked",     operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "undertow_build", operator = "lt", value = 3 },
+  { type = "npc_at_location", location_id = "underworld_bar", operator = "is_present", npc_id = "npc_sol" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Put money into the Undertow"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "lt", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Burned timber, wet ash, and Sol with his shovel." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Clearing this properly is men and a cart, and men and a cart is coin. I've got a shovel." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "lt",  value = 2 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Swept concrete and chalk marks where the counter goes." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Floor and counter next. Timber's dear down here, and so are the men who can cut it straight." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "gte", value = 2 },
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "lt",  value = 3 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "A counter, stools, and a sheet over the hole in the back wall." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Last of it is the back. A wall, a door that locks, and then I open." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Pay for the clearing. (40 coin.)"
+targetType = "node"
+nodeId     = "activity_rebuild_undertow.done"
+costs      = [{ trait = "coin", value = 40 }]
+effects    = [{ targetType = "player", trait = "undertow_build", op = "add", value = 1, cap = 3, clamp = true }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "undertow_build", operator = "lt", value = 1 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Pay for the floor and the counter. (60 coin.)"
+targetType = "node"
+nodeId     = "activity_rebuild_undertow.done"
+costs      = [{ trait = "coin", value = 60 }]
+effects    = [{ targetType = "player", trait = "undertow_build", op = "add", value = 1, cap = 3, clamp = true }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "undertow_build", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "undertow_build", operator = "lt",  value = 2 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Pay for the back wall, and open the doors. (80 coin.)"
+targetType = "node"
+nodeId     = "activity_rebuild_undertow.done"
+costs      = [{ trait = "coin", value = 80 }]
+effects    = [{ targetType = "player", trait = "undertow_build", op = "add", value = 1, cap = 3, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "undertow_open", op = "set" }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "undertow_build", operator = "gte", value = 2 },
+  { type = "trait", subject = "player", trait_key = "undertow_build", operator = "lt",  value = 3 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Not today."
+targetType = "location"
+locationId = "underworld_bar"
+
+[[canvases.nodes]]
+id   = "done"
+name = "The Undertow"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "gte", value = 3 },
+    ] } }, blocks = [
+    { type = "image", props = { file = "scenes/undertow_rebuild_3.jpg", description = "A small underground bar freshly rebuilt, new timber counter and back wall, the taps running, an older barman behind the counter, the room still empty of customers. Must show: new wood, a working bar, nobody drinking yet. Avoid: fire damage, crowds.", search_queries = ["newly rebuilt small bar new wooden counter empty", "freshly renovated underground pub barman empty room"] } },
+    { type = "paragraph", content = "Four days of men with timber, and the back wall goes up with a door in it that locks. Sol opens the taps and lets them run into the drain until the beer comes through clear." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Tell him his bar's open. Tell him I'll keep the corner stools for whoever he sends." },
+    { type = "dialog", props = { speaker = "player" }, content = "I'll tell him." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "gte", value = 2 },
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "lt",  value = 3 },
+    ] } }, blocks = [
+    { type = "image", props = { file = "scenes/undertow_rebuild_2.jpg", description = "A half-rebuilt bar room: a new wooden counter and stools on swept concrete, and a dust sheet still hanging over a hole in the back wall. Must show: the new counter, the sheet over the hole. Avoid: people drinking, fire.", search_queries = ["half renovated bar new counter dust sheet over wall", "bar under renovation wooden counter bare concrete"] } },
+    { type = "paragraph", content = "Two days of saws, and there is a counter where the chalk was, and stools, and nothing behind it yet." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Looks like a bar if you squint. Doesn't smell like one." },
+    { type = "dialog", props = { speaker = "player" }, content = "It will." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "undertow_build", operator = "lt",  value = 2 },
+    ] } }, blocks = [
+    { type = "image", props = { file = "scenes/undertow_rebuild_1.jpg", description = "Men with handcarts carrying charred timber and ash out of a gutted underground bar, the floor swept to bare concrete behind them. Must show: clearing work, carts, a swept floor. Avoid: fire, firefighters.", search_queries = ["workers clearing burned debris out of gutted bar handcart", "men carrying charred timber out of burned building"] } },
+    { type = "paragraph", content = "She tells him whose money it is. Sol puts the shovel down for the first time since the raid." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Alive." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Don't tell me where. I've been asked a lot of questions in this room, and I'd like to keep not knowing that one." },
+    { type = "paragraph", content = "Men and a cart by noon. What paper is left in the back goes into boxes for Bastien, and the ash goes out to the water." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave him to it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_bar"
+time_progression_minutes = 240
+
+# ── activity_draw_her_out — 0.2.3 THE TAKE. beat_0216. Wren-solo card @underworld_strip. ─────────────────────────
+# LO, 2026-10-03: beating Vega takes BOTH the fight and Bastien's men; some men die; Bastien holds her in the room
+# he kept Wren in. design_the_hunt.md "Beating her takes both".
+# ⚠️ ITS OWN CARD, NOT A CHOICE ON underworld_strip_hub as the blueprint had it: that canvas is the single-exit
+# "Exit Underworld" card (a location exit; it carries no choices). This card is LOCATED and not substitution-only,
+# so vega_taken — read by triggers (rand_vega_street, cap_the_table) — has a legal setter in .take.
+# ⚠️ THE DOOR IS VISIBLE THE WHOLE HUNT: the card shows from Kess's seam on, and "Draw her out." renders greyed
+# (show_when_locked) until fighting 85 + all four habits + damage under 30 + Bastien's men. The engine appends each
+# unmet TRAIT gate in a bracket (setup.requirementSuffix); the crew flag is not appended (flags stay silent), so
+# the voiced locked_text names "men behind her" itself. Labels for vega_damage / vega_habits were added in
+# 0_systems_spec so the bracket reads as words.
+# ⚠️ .take USES EVERY HABIT AND EVERY LESSON, IN ORDER: two steps and the right hand (she goes the wrong way, into
+# it), the side she cuts off (Wren goes to the dark side she never wanted), the minute (she lasts past it; the hands
+# go late), the hold (Vega will not break her, so Wren takes the risk), Cain's rule, Kess's seam, Bastien's bag.
+# ⚠️ MEN DIE (LO: yes) — three, said by Dace, on the same strip as the first time.
+# ⚠️ BASTIEN IN THE ROOM IS SAFE: the Room is his hidden place (captive_room), not the bar; nobody on the strip
+# learns where he is. He is out of the brace (the owner band, beat_0215).
+# ⚠️ NO PORT INTO captive_room. That room is teleport-only with a door that never opens (cell_door is never set);
+# porting the player there would seal her in. The Room is narrated in .take's last beats, and the exit goes to
+# Kess, where cap_the_table fires (Kess present).
+# Damage: +25 (clamped) — the fight costs her, and Kess sees to it at the table. 720 minutes: the next day.
+# MEDIA: two new slots, scenes/the_take.jpg (the lead) and scenes/vega_in_the_room.jpg (the Room's beat).
+[[canvases]]
+id          = "activity_draw_her_out"
+name        = "Vega"
+description = "beat_0216 (0.2.3). THE TAKE. Wren-solo card @underworld_strip, repeatable, gated seam_known is_true + vega_taken is_false. Base: 'Draw her out.' — show_when_locked until fighting gte 85 + vega_habits gte 4 + vega_damage lt 30 + crew_back. .take (Tier-3): she waits on the night strip with Dace's men hidden; every habit and lesson used in order; Vega's power runs low; the men close; three die; her thumb on the seam; the bag; the Room, Bastien in the chair; Dace counts his dead. Exit -> kess_berth, 720 min, vega_damage +25 (clamped), SETS vega_taken."
+[canvases.trigger]
+location      = "underworld_strip"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "seam_known", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "vega_taken", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Vega"
+blocks = [
+  { type = "paragraph", content = "The strip goes on round her: the stalls, the noise, the crowd. Somewhere in it, Vega." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Draw her out."
+targetType = "node"
+nodeId     = "activity_draw_her_out.take"
+show_when_locked = true
+# ⚠️ A GREYED CHOICE SHOWS ONLY locked_text + THE ENGINE'S BRACKET, NOT ITS LABEL (seen live at beat_0216), so the
+# text names the action itself or the player sees a reason with no door attached.
+locked_text = "Draw her out. Not yet: she has to know how Vega moves, be able to stand with her, be in one piece, and have men behind her."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "fighting",    operator = "gte", value = 85 },
+  { type = "trait", subject = "player", trait_key = "vega_habits", operator = "gte", value = 4 },
+  { type = "trait", subject = "player", trait_key = "vega_damage", operator = "lt",  value = 30 },
+  { type = "flag",  subject = "player", flag_key  = "crew_back",   operator = "is_true" },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Not tonight."
+targetType = "location"
+locationId = "underworld_strip"
+
+[[canvases.nodes]]
+id   = "take"
+name = "The take"
+blocks = [
+  { type = "image", props = { file = "scenes/the_take.jpg", description = "A near-empty underground market street at night, stalls shuttered, one woman standing alone in the middle of it waiting, shapes of men hidden in doorways and between the stalls. Must show: her alone in the open, men hidden at the edges, night. Avoid: daylight, crowds, weapons in hand.", search_queries = ["woman standing alone empty market street night men hiding doorways", "lone figure waiting middle of dark alley shapes in shadows"] } },
+  { type = "paragraph", content = "Night. Dace's men are in the stalls and doorways, out of sight. She walks up the middle of the strip and waits." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "Vega comes down the stair at the far end, and the last of the crowd goes." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "Asset Wren. You have been repaired." },
+        { type = "dialog", props = { speaker = "player" }, content = "Come and see." },
+    ] },
+    { advance_text = "Wait for the opening.", blocks = [
+        { type = "paragraph", content = "Two steps and the right hand, and Wren is not there. She went the wrong way, into it, and the hand closes on air." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "That was wrong." },
+        { type = "dialog", props = { speaker = "player" }, content = "Yes." },
+    ] },
+    { advance_text = "Go where she doesn't want you.", blocks = [
+        { type = "paragraph", content = "Vega takes the stair side before Wren wants it. Wren never wanted it. She goes into the dark under the stalls instead." },
+        { type = "dialog", props = { speaker = "player" }, content = "You don't like it in here. It isn't logged." },
+    ] },
+    { advance_text = "Last.", blocks = [
+        { type = "paragraph", content = "A minute. Wren stays with her past the minute, taking it on the forearms and the ribs." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "You cannot sustain this." },
+        { type = "dialog", props = { speaker = "player" }, content = "Neither can you. Your hands are late." },
+    ] },
+    { advance_text = "Watch her hands.", blocks = [
+        { type = "paragraph", content = "They are. A beat late, then two. Whatever runs her is running low." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "Output reduced. Adjusting." },
+        { type = "dialog", props = { speaker = "player" }, content = "Adjust faster." },
+    ] },
+    { advance_text = "Let her hold you.", blocks = [
+        { type = "paragraph", content = "Vega puts her down and kneels on her, a hand on her neck, and holds." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "Stay down. I am not permitted to break you." },
+        { type = "dialog", props = { speaker = "player" }, content = "I know. That's the point." },
+        { type = "paragraph", content = "Wren drives the back of her own head into Vega's face, which nothing built to last would do to itself." },
+    ] },
+    { advance_text = "\"Now!\"", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Now!" },
+        { type = "paragraph", content = "The men come out of the stalls at Vega's back, ten of them, with a bag and a chain and lengths of pipe." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "Arms! Get her arms!" },
+    ] },
+    { advance_text = "Hold on.", blocks = [
+        { type = "paragraph", content = "Vega turns. The first man to reach her dies with his neck the wrong way round. The second goes through a shutter." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Hold her! Hold her!" },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Jesus, Tam. Tam's down." },
+    ] },
+    { advance_text = "Get up.", blocks = [
+        { type = "paragraph", content = "Three of them hang off each arm and she lifts them. A third man dies under her foot." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "She's lifting us! She's lifting all of us!" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "Wren! Get behind her!" },
+    ] },
+    { advance_text = "Get behind her.", blocks = [
+        { type = "paragraph", content = "Wren gets behind her and finds the seam at the base of Vega's spine, the way Kess found hers, and pushes, hard." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "That is not perm—" },
+        { type = "paragraph", content = "Vega stops the way a man stops when you put him to sleep. All of her at once." },
+    ] },
+    { advance_text = "Bag her.", blocks = [
+        { type = "paragraph", content = "The bag goes over her head. A knee in her back, and hands that know how much pressure a body takes." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Is she out? Is she out?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "She's out. Down the stair. Further than a stair should go. He told us the place." },
+        { type = "dialog", props = { speaker = "player" }, content = "I know the place." },
+    ] },
+    { advance_text = "The Room.", blocks = [
+        { type = "image", props = { file = "scenes/vega_in_the_room.jpg", description = "A bare concrete cell lit by one bulb, a bed bolted to the floor with a still, hooded figure lying on it, and a man sitting in a plain chair beside it, watching. Must show: the bare room, the bolted bed, the seated man. Avoid: gore, chains on show, bright light.", search_queries = ["bare concrete cell bed bolted to floor man sitting in chair one bulb", "dim prison room hooded figure on bed seated man watching"] } },
+        { type = "paragraph", content = "Concrete, a bed bolted to the floor, the light that stays on. Bastien is in the chair, out of the brace." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Put her on the bed. She'll keep." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "I kept you in here three days. She can do a night." },
+        { type = "dialog", props = { speaker = "player" }, content = "Then Kess. In the morning." },
+    ] },
+    { advance_text = "Look at Dace.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "Three of mine dead. On the same strip as last time." },
+        { type = "dialog", props = { speaker = "player" }, content = "I'm sorry." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "Don't be. They came back for it. That was the price too." },
+    ] },
+    { advance_text = "Breathe.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Three men dead for her, and the thing on the bed felt none of it. Cold in here, she decides. It is not cold in here." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get Kess."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "kess_berth"
+time_progression_minutes = 720
+effects = [
+  { targetType = "player", trait = "vega_damage", op = "add", value = 25, clamp = true },
+]
+flagEffects = [
+  { targetType = "player", flag = "vega_taken", op = "set" },
+]

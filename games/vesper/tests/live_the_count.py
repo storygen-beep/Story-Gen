@@ -368,7 +368,8 @@ def main():
         cards = live_cards()
         term = page.evaluate("""() => (SugarCube.setup.pickQuestsCards('story_goals') || [])
             .filter(c => (c.text || '').startsWith('He counted it out on your blanket')).map(c => !!c.terminal)""")
-        check(cards == ["H"] and term == [True], f"card H, terminal, is the one live (live {cards}, terminal {term})")
+        # Terminal until 0.2.3 opened (beat_0207); now card H hands over to card I, so it is live and NOT terminal.
+        check(cards == ["H"] and term == [False], f"card H, handed over to 0.2.3, is the one live (live {cards}, terminal {term})")
         check(passage() == "Location_the_cot", f"nothing of the chain fires again at the cot (on {passage()})")
         check(open_hub() and "Remind me to pay her properly." in prose(), "his card reads the BACK band")
         check("Go to him." in labels(), "and the loop stays open after the chunk ends")

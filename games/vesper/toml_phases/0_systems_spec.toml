@@ -270,6 +270,24 @@ bands = [
   { min = 72,           text = "Core: Failing",  icon = "◕" },   # NO max — survives the frozen 96
 ]
 
+# ─── 0.2.3 — what Vega has done to her. beat_0206. ─────────────────────────────────────────────────
+# The ONE number of THE HUNT the player sees, so she knows when to go to Kess. Same two band rules as the
+# core_strain row above: bands start at 1, so the row is ABSENT until the ambush (and gone again once Kess
+# has her back to 0); the top band carries no max.
+# Edges match the design's arithmetic: the ambush lands her at 60 (Badly hurt); one repair (-25) takes her
+# to 35 (Hurt); the take wants her under 30, which is the Fine band — so "Fine" in the sidebar and "in one
+# piece" on the take's locked choice mean the same number. +35 a street loss moves her a whole band.
+# ⚠️ WORDS, NOT CORE: the core rows above are the captivity/salvage meter and keep their meaning. This is
+# bruising and broken parts from a fight, so it says "Body", and its icons (▫ ▪ ■) share nothing with ○◔◑◕.
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "vega_damage"
+bands = [
+  { min = 1,  max = 29, text = "Body: Fine",       icon = "▫" },
+  { min = 30, max = 59, text = "Body: Hurt",       icon = "▪" },
+  { min = 60,           text = "Body: Badly hurt", icon = "■" },   # NO max
+]
+
 # ─── THE WEAPON ON HER — beat_0160 (rev 211). FOUR ROWS, EXACTLY ONE EVER ON SCREEN. ──────────────
 #
 # ⚠️ THE DEFECT THESE FIX IS WRITTEN TWENTY LINES BELOW, in the labels block: "Weapon charges — internal;
@@ -699,6 +717,24 @@ hidden = true
 [[traits.labels]]
 key    = "bottle_held"
 hidden = true
+# 0.2.3 (beat_0206) — THE HUNT's three counters (design_the_hunt.md "BLUEPRINT · The numbers"). All hidden
+# from the traits dump. vega_damage still draws its banded sidebar row: `hidden` is read only by the dump
+# widgets, and trait_status_text reads $player.core_traits directly (the core_strain note above).
+# vega_habits and undertow_build have no row: the quest card names how many habits she has, and the
+# Undertow's own card shows the rebuild stage in words.
+# ⚠️ LABELS ADDED beat_0216: the take's locked choice appends every unmet trait gate in a bracket, named by
+# setup.traitLabel (v2.py:4700) — label if declared, else the key humanised ("Vega habits"). These read as words.
+[[traits.labels]]
+key    = "vega_damage"
+label  = "Damage"
+hidden = true
+[[traits.labels]]
+key    = "vega_habits"
+label  = "Vega's habits learned"
+hidden = true
+[[traits.labels]]
+key    = "undertow_build"
+hidden = true
 
 # ══════════════════════════════════════════════════════════════════
 # THE LEDGER — the player cheat page ([ui.cheat_page])
@@ -759,15 +795,21 @@ button_text = "Coin +25"
 # re-derived every time the ladder grows; nothing checks it for us.
 # ⚠️ RAISING FIGHTING DELETES NO CONTENT — measured, the only `fighting lt` gates in the
 # build are the drill's own bands. Stealth is the opposite case; see the next row.
+# ⚠️ CAP RAISED 70 -> 85 (beat_0210, 0.2.3) — the same re-derivation the rev-227 note above asks for. THE HUNT
+# puts the take behind fighting 85 (card J's goal; the take's choice at beat_0216), and the build's own cheat-page
+# check refused cap 70 ("the code cannot reach the content it is sold for"). The rev-227 precedent is LO's stealth
+# call: sell the full ladder rather than stop short of a door. The only new `fighting lt` gate is Cain's training
+# closing at 85 (activity_cain_trains, beat_0211) — a code to 85 skips his sessions, it deletes nothing. The rule he
+# teaches on the first session is flavour on that card, not a gate.
 [[ui.cheat_page.grants]]
 id          = "fighting"
 label       = "Fighting"
 trait       = "fighting"
 op          = "add"
 value       = 5
-cap         = 70
+cap         = 85
 clamp       = true
-hint        = "the door at 15 · hard bouts at 30 · the yard at 55 · the plant room door at 70"
+hint        = "the door at 15 · hard bouts at 30 · the yard at 55 · the plant room door at 70 · Vega at 85"
 at_cap_text = "As sharp as this will make her."
 
 # STEALTH — THE ROW THAT CAN COST YOU CONTENT, and it is now sold anyway, with the
