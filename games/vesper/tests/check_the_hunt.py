@@ -555,8 +555,10 @@ def main():
               "0213: cap_crew_refuses is a located one-shot auto-fire at underworld_bar, pri 11+")
         check(has_flag(its, "undertow_open", "is_true") and has_flag(its, "crew_refused", "is_false"),
               "0213: gated undertow_open + crew_refused is_false")
-        check(any(i.get("type") == "days_since_flag" and i.get("flag_key") == "undertow_open" and i.get("operator") == "gte"
-                  and i.get("value") == 1 for i in its), "0213: a day after the bar opens (never in the breath of the last payment)")
+        # beat_0219 (LO): the men come because Bastien called them, through Rue — a day after she delivered his list.
+        check(has_flag(its, "crew_called", "is_true"), "0219: the men come only after Bastien's call (crew_called)")
+        check(any(i.get("type") == "days_since_flag" and i.get("flag_key") == "crew_called" and i.get("operator") == "gte"
+                  and i.get("value") == 1 for i in its), "0219: the evening AFTER Rue puts the word out (days_since_flag crew_called gte 1)")
         check(any(i.get("type") == "time_of_day" for i in its), "0213: in the evening (time_of_day)")
         check(any(i.get("type") == "npc_at_location" and i.get("npc_id") == "npc_sol" for i in its), "0213: Sol is behind the bar")
         text = " ".join(b.get("content") or "" for b in all_blocks(cr.get("nodes", []), []))
@@ -583,7 +585,7 @@ def main():
         cfg = (dp["nodes"][-1].get("exit_block") or {}).get("config") or {}
         check({f.get("flag"): f.get("op") for f in cfg.get("flagEffects", [])}.get("dace_met") == "set", "0213: sets dace_met")
     bc = [c for c in cards if c.get("npc_id") == "npc_bastien"]
-    c22 = [c for c in bc if {"flag": "undertow_open", "op": "is_true"} in c.get("when", []) and {"flag": "crew_refused", "op": "is_false"} in c.get("when", [])]
+    c22 = [c for c in bc if {"flag": "crew_called", "op": "is_true"} in c.get("when", []) and {"flag": "crew_refused", "op": "is_false"} in c.get("when", [])]
     c23 = [c for c in bc if {"flag": "crew_refused", "op": "is_true"} in c.get("when", []) and {"flag": "dace_met", "op": "is_false"} in c.get("when", [])]
     check(len(c22) == 1 and len(c23) == 1, f"0213: Bastien cards 22 (the men) and 23 (Dace), got {len(c22)}/{len(c23)}")
     if j:
@@ -591,6 +593,47 @@ def main():
         fl = {f.get("flag"): f.get("op") for f in ch[0].get("flagEffects", [])}
         for f in ("crew_refused", "dace_met"):
             check(fl.get(f) == "unset", f"0213: the dev jump must UNSET {f}")
+
+    # ── beat_0219 — LO's amendment: Bastien hears the bar is open and calls his men, through Rue ─────────
+    amb_ = canvases.get("amb_bastien_cot") or {}
+    bo = [c for c in (node(amb_, "base").get("exit_block") or {}).get("choices", []) if c.get("text") == "Tell him the bar is open."]
+    check(len(bo) == 1, "0219: amb_bastien_cot needs one 'Tell him the bar is open.' choice")
+    if bo:
+        ci = cond_items(bo[0])
+        check(has_flag(ci, "undertow_open", "is_true") and has_flag(ci, "crew_list_held", "is_false") and has_flag(ci, "face_worn", "is_false"),
+              "0219: gated undertow_open + crew_list_held is_false + face_worn is_false")
+    bn = node(amb_, "bar_open")
+    bcfg = (bn.get("exit_block") or {}).get("config") or {}
+    check({f.get("flag"): f.get("op") for f in bcfg.get("flagEffects", [])}.get("crew_list_held") == "set", "0219: .bar_open sets crew_list_held")
+    btext = " ".join(b.get("content") or "" for b in all_blocks(bn.get("blocks", []), []))
+    check("Rue" in btext and "names" in btext, "0219: Bastien writes the names, for Rue")
+    rl = canvases.get("cap_rue_takes_the_list")
+    check(rl is not None, "0219: cap_rue_takes_the_list is missing")
+    if rl:
+        tr = rl.get("trigger") or {}
+        its = items(rl)
+        check(tr.get("location") == "underworld_brothel" and tr.get("is_repeatable") is False and (tr.get("priority") or 0) >= 10,
+              "0219: a located one-shot auto-fire at the House")
+        check(has_flag(its, "crew_list_held", "is_true") and has_flag(its, "crew_called", "is_false") and has_flag(its, "rue_introduced", "is_true"),
+              "0219: gated crew_list_held + crew_called is_false + rue_introduced")
+        check(any(i.get("type") == "npc_at_location" and i.get("npc_id") == "npc_rue" for i in its), "0219: Rue present (08:00-03:00)")
+        check({"npc_rue", "player"} <= dialog_speakers(rl), "0219: Rue and Wren speak")
+        rcfg = (rl["nodes"][-1].get("exit_block") or {}).get("config") or {}
+        check({f.get("flag"): f.get("op") for f in rcfg.get("flagEffects", [])}.get("crew_called") == "set", "0219: sets crew_called")
+    crf = canvases.get("cap_crew_refuses") or {}
+    crtext = " ".join(b.get("content") or "" for b in all_blocks(crf.get("nodes", []), []))
+    check("Rue said" in crtext, "0219: the men answer Rue's word ('Rue said ...')")
+    c22a = [c for c in bc if {"flag": "undertow_open", "op": "is_true"} in c.get("when", []) and {"flag": "crew_list_held", "op": "is_false"} in c.get("when", [])]
+    c22b = [c for c in bc if {"flag": "crew_list_held", "op": "is_true"} in c.get("when", []) and {"flag": "crew_called", "op": "is_false"} in c.get("when", [])]
+    check(len(c22a) == 1 and len(c22b) == 1, f"0219: Bastien cards 'tell him' and 'take the list to Rue' (got {len(c22a)}/{len(c22b)})")
+    for jid, want in (("dev_jump_hunt_start", "unset"), ("dev_jump_hunt_on", "unset"), ("dev_jump_hunt_crew", "set"),
+                      ("dev_jump_hunt_take", "set"), ("dev_jump_hunt_table", "set")):
+        jj_ = canvases.get(jid)
+        if jj_:
+            ch = ((jj_.get("nodes") or [{}])[0].get("exit_block") or {}).get("choices") or [{}]
+            fl = {f.get("flag"): f.get("op") for f in ch[0].get("flagEffects", [])}
+            for f in ("crew_list_held", "crew_called"):
+                check(fl.get(f) == want, f"0219: {jid} must {want.upper()} {f}")
 
     # ── beat_0214 — B5 the crew night (Tier-3, the release's explicit capstone) + card 24 + J's crew goal ──
     import re
@@ -797,7 +840,7 @@ def main():
     # measured with the node's ungrouped blocks, never summed with the others. A node with no NPC line is SOLO
     # (nobody there to speak — the skill's exemption) and is skipped. beat_0209's first ambush measured 3.29.
     CHUNK = ("cap_cain_comes", "cap_the_site", "cap_the_ambush", "cap_kess_seam", "kess_patch_up",
-             "rand_vega_street", "activity_cain_trains", "activity_rebuild_undertow", "cap_crew_refuses", "cap_dace_price", "cap_the_crew_night", "activity_draw_her_out", "cap_the_table")
+             "rand_vega_street", "activity_cain_trains", "activity_rebuild_undertow", "cap_crew_refuses", "cap_dace_price", "cap_the_crew_night", "activity_draw_her_out", "cap_the_table", "cap_rue_takes_the_list")
 
     def screens(node):
         """Every screen a visit can paint. Adjacent groups form ONE if/elseif chain (one of them renders);

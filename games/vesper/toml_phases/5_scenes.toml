@@ -11821,20 +11821,48 @@ when = [
   { flag = "undertow_open", op = "is_false" },
 ]
 
-# ── 22 · 0.2.3, beat_0213. The bar is open; now the men. ──
-# ⚠️ "THE DAY AFTER IT OPENED" IS IN THE TIP BECAUSE THE SCENE WAITS FOR IT (cap_crew_refuses: days_since_flag
-# undertow_open gte 1, evenings). A player who walks straight back in finds an empty bar and must be told why.
+# ── 22a · 0.2.3, beat_0219 (LO). The bar is open; he has not heard. ──
 [[quest_cards]]
 npc_id     = "npc_bastien"
 priority   = 22
-text       = "The Undertow is open, on his money and yours. A bar wants men in it, and the men it wants are the ones who walked away from the strip."
-tip        = "Go back in the evening, the day after it opened. Word has to get round."
+text       = "The Undertow is open, on his money and yours, and he has not seen it. He cannot go and look. He can still call his men."
+tip        = "He is at the cot. Tell him the bar is open."
+goals = [
+  { flag = "crew_list_held", op = "is_true", label = "Tell Bastien the bar is open" },
+]
+when = [
+  { flag = "undertow_open",  op = "is_true"  },
+  { flag = "crew_list_held", op = "is_false" },
+]
+
+# ── 22b · 0.2.3, beat_0219. The list, to Rue. ──
+[[quest_cards]]
+npc_id     = "npc_bastien"
+priority   = 22
+text       = "He tore a page out of his ledger and wrote the names of his old crew on it, and crossed some out. Rue puts the word out on the strip. Nobody else."
+tip        = "Rue, at the House, from eight in the morning to three at night."
+goals = [
+  { flag = "crew_called", op = "is_true", label = "Take his list to Rue" },
+]
+when = [
+  { flag = "crew_list_held", op = "is_true"  },
+  { flag = "crew_called",    op = "is_false" },
+]
+
+# ── 22 · 0.2.3, beat_0213, re-gated beat_0219. The word is out; now the men. ──
+# ⚠️ "THE NEXT EVENING" IS IN THE TIP BECAUSE THE SCENE WAITS FOR IT (cap_crew_refuses: days_since_flag crew_called
+# gte 1, evenings). A player who walks straight back in finds an empty bar and must be told why.
+[[quest_cards]]
+npc_id     = "npc_bastien"
+priority   = 22
+text       = "Rue has put the word out: the Undertow is open, the old crew is wanted, the money is good. The men it wants are the ones who walked away from the strip."
+tip        = "Go to the Undertow the next evening, after six."
 goals = [
   { flag = "crew_refused", op = "is_true", label = "Make his offer to his old men" },
 ]
 when = [
-  { flag = "undertow_open", op = "is_true"  },
-  { flag = "crew_refused",  op = "is_false" },
+  { flag = "crew_called",  op = "is_true"  },
+  { flag = "crew_refused", op = "is_false" },
 ]
 
 # ── 23 · 0.2.3, beat_0213. Dace. ──
@@ -20785,12 +20813,55 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "crew_asked",    operator = "is_false" },
   { type = "flag", subject = "player", flag_key = "face_worn",     operator = "is_false" },
 ] }
+# ── 0.2.3 beat_0219 (LO) — "Tell him the bar is open." One-time: once the rebuild is paid, until he writes the list.
+# ⚠️ LO, 2026-10-04: "who brought them there. Bastien should first get to know that the bar has been rebuilt,
+# bastien still cant go there but there has to be something." He hears it from her, and calls his men without
+# showing himself: a list of names, carried by her to Rue, who puts the word out.
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell him the bar is open."
+targetType = "node"
+nodeId     = "bar_open"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "undertow_open",  operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "crew_list_held", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "face_worn",      operator = "is_false" },
+] }
 # ── ALWAYS LAST — the shipped exit, now a choice. ──
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave him."
 targetType = "location"
 locationId = "the_cot"
 time_progression_minutes = 15
+
+# ── bar_open — 0.2.3, beat_0219 (LO's amendment). He hears the bar is open and writes the list. Sets crew_list_held.
+# ⚠️ HE STILL CANNOT GO THERE (The Count: "none of them will know where I am"), so the call goes through the one
+# person who has carried his paper before: Rue (cap_rue_reads_it, step 6 of The Count). LO: she carries it herself.
+# ⚠️ THE PAGE COMES OUT OF HIS LEDGER — the book he does on her blanket — and he tears it out, which he would not do
+# for anything less.
+[[canvases.nodes]]
+id   = "bar_open"
+name = "The bar is open"
+blocks = [
+  { type = "paragraph", content = "She tells him at the bench: the back wall up, the taps running, Sol behind the counter where he belongs." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Open. On my money and yours, and I have not seen it." },
+  { type = "dialog", props = { speaker = "player" }, content = "Sol says a bar wants men in it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Sol is right. He usually is, and he never says so." },
+  { type = "paragraph", content = "He tears a page out of his ledger and writes on it in the small hand he does his figures in: the names of his old crew, a column of them, and some he crosses out." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Take this to Rue. Nobody else. She puts the word out on the strip: the Undertow is open and the old crew is wanted, and the money is good." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Not whose money. Not where I am. They will come to look at you, not for me." },
+  { type = "dialog", props = { speaker = "player" }, content = "And the ones you crossed out?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Were on the strip that night." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take it to Rue."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "crew_list_held", op = "set" },
+]
 
 # ── vega — 0.2.3 B1. beat_0212. Bastien hears about Vega and asks for his bar back. Sets crew_asked on render. ──
 # ⚠️ WHERE HIS MEN DIED: ON THE STRIP. cap_the_raid empties the bar before the units arrive and shows no body on
@@ -22594,7 +22665,7 @@ when = [
 [[canvases]]
 id          = "cap_crew_refuses"
 name        = "The men"
-description = "beat_0213 (0.2.3). B3. Auto-fire @underworld_bar, pri 11, one-shot, gated undertow_open is_true + days_since_flag undertow_open gte 1 + evening (18:00-24:00) + crew_refused is_false + Sol present. Six of Bastien's old men come to the reopened bar; she makes his offer with Rue's money; they will not come back for money after what came down the strip; if Dace comes back, they come back. SETS crew_refused."
+description = "beat_0213 (0.2.3), re-gated beat_0219. B3. Auto-fire @underworld_bar, pri 11, one-shot, gated undertow_open + crew_called + days_since_flag crew_called gte 1 + evening (18:00-24:00) + crew_refused is_false + Sol present. Six of Bastien's old men come to the reopened bar; she makes his offer with Rue's money; they will not come back for money after what came down the strip; if Dace comes back, they come back. SETS crew_refused."
 [canvases.trigger]
 location      = "underworld_bar"
 is_repeatable = false
@@ -22602,7 +22673,9 @@ priority      = 11
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "undertow_open", operator = "is_true"  },
-  { type = "days_since_flag", subject = "player", flag_key = "undertow_open", operator = "gte", value = 1 },
+  # beat_0219 (LO): they come because Bastien called them through Rue — the evening after she put the word out.
+  { type = "flag", subject = "player", flag_key = "crew_called",   operator = "is_true"  },
+  { type = "days_since_flag", subject = "player", flag_key = "crew_called", operator = "gte", value = 1 },
   { type = "time_of_day", start_time = "18:00", end_time = "00:00" },
   { type = "flag", subject = "player", flag_key = "crew_refused",  operator = "is_false" },
   { type = "npc_at_location", location_id = "underworld_bar", operator = "is_present", npc_id = "npc_sol" },
@@ -22613,10 +22686,11 @@ id   = "base"
 name = "The men"
 blocks = [
   { type = "image", props = { file = "scenes/undertow_reopened.jpg", description = "A small newly rebuilt underground bar in the evening, half a dozen hard-looking men in work clothes standing at the new counter with drinks, not sitting, wary. Must show: new wood, a group of rough men, low warm light. Avoid: a party, women, fighting.", search_queries = ["group of rough men standing at bar counter evening dim", "working men drinking at new wooden bar wary"] } },
-  { type = "paragraph", content = "Word goes round the strip that the Undertow is open. By evening there are six men at the new counter, standing, not sitting." },
+  { type = "paragraph", content = "Rue's word went round the strip last night. By evening there are six men at the new counter, standing, not sitting." },
   { type = "cascade", props = { beats = [
     { blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_sol" }, content = "Told you a bar wants men in it. These are some of the ones he had." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Rue said he wants us back. Rue said a lot of things." },
     ] },
     { advance_text = "Make his offer.", blocks = [
         { type = "dialog", props = { speaker = "player" }, content = "He wants you back. Same work, better money. Rue's money, if you want to know where it comes from." },
@@ -22967,4 +23041,49 @@ terminal      = true
 terminal_text = "Chapter complete. The story continues in the next release"
 when = [
   { flag = "vega_dismantled", op = "is_true" },
+]
+
+# ── cap_rue_takes_the_list — 0.2.3, beat_0219 (LO's amendment). Auto-fire @underworld_brothel, pri 10, ONE-SHOT. ───
+# She carries Bastien's list to Rue herself (LO: "she carries it to Rue"). The cap_rue_reads_it pattern from The
+# Count: Rue present (08:00-03:00), rue_introduced, priority 10 over the House's older one-shots.
+# ⚠️ RUE ALREADY KNOWS HE IS ALIVE (she read his note and sent the money back in The Count), so there is no reveal
+# here — just the work, done her way: she reads the names, notices the crossed-out ones, and does not ask.
+# ⚠️ "TOMORROW NIGHT" IS TRUE: cap_crew_refuses waits a day on crew_called and comes in the evening.
+[[canvases]]
+id          = "cap_rue_takes_the_list"
+name        = "The list"
+description = "beat_0219 (0.2.3, LO's amendment). Auto-fire @underworld_brothel, pri 10, one-shot, gated crew_list_held is_true + crew_called is_false + rue_introduced is_true + Rue present. Wren hands Rue the page Bastien tore out of his ledger; Rue reads the names, sees the crossed-out ones, and puts the word out: the Undertow is open, the old crew is wanted, the money is good. Tomorrow night they will be at the counter. SETS crew_called."
+[canvases.trigger]
+location      = "underworld_brothel"
+is_repeatable = false
+priority      = 10
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",            subject = "player", flag_key = "crew_list_held", operator = "is_true"  },
+  { type = "flag",            subject = "player", flag_key = "crew_called",    operator = "is_false" },
+  { type = "flag",            subject = "player", flag_key = "rue_introduced", operator = "is_true"  },
+  { type = "npc_at_location", location_id = "underworld_brothel", npc_id = "npc_rue", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The list"
+blocks = [
+  { type = "paragraph", content = "Rue is at the book. She knows the hand on the page before she has it open." },
+  { type = "dialog", props = { speaker = "player" }, content = "He wants these men at the Undertow." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "He tore a page out of his book for this. He never tears a page out of his book." },
+  { type = "paragraph", content = "She reads it down to the bottom. Her finger stops on the names he crossed out, one at a time, and moves on." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "Tonight the girls tell every man who comes through that door: the Undertow is open, the old crew is wanted, and the money is good. By morning the strip will know." },
+  { type = "dialog", props = { speaker = "player" }, content = "And whose money?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_rue" }, content = "Nobody asks me that twice. Tomorrow night, they'll be at the counter. Whether they stay is your problem." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave her to it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_brothel"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "crew_called", op = "set" },
 ]

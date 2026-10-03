@@ -492,6 +492,20 @@ committed; LO commits.
 | 0216 | a choice on `underworld_strip_hub` | its own card, `activity_draw_her_out` | that card is the single-exit "Exit Underworld" card and holds no choices |
 | 0216 | port into the Room | the Room narrated | `captive_room`'s door never opens; a port would seal her in |
 
+## LO's amendment — beat_0219 (2026-10-04, rev 241)
+
+LO: *"who brought them there. Bastien should first get to know that the bar has been rebuilt, bastien still cant go
+there but there has to be something."* — and: *"she carries it to Rue."* Between the rebuild and the men:
+1. **"Tell him the bar is open."** — a one-time choice on Bastien's cot card. He tears a page out of his ledger and
+   writes the names of his old crew, crossing out the ones who were on the strip that night. *"Take this to Rue.
+   Nobody else… Not whose money. Not where I am."*
+2. **Rue takes the list** at the House (`cap_rue_takes_the_list`): the girls tell every man through the door that the
+   Undertow is open, the old crew is wanted, the money is good. *"Tomorrow night, they'll be at the counter."*
+3. **The men come the next evening** (`cap_crew_refuses`, now gated on `crew_called`), and their first line answers
+   her word: *"Rue said he wants us back. Rue said a lot of things."*
+
+New flags `crew_list_held`, `crew_called`; Bastien cards 22a / 22b / 22 re-gated; all five dev jumps updated.
+
 ## Media — 21 slots, all missing, the harvest is LO's
 
 Portraits: `portraits/vega.jpg`, `portraits/dace.jpg`. Scenes: `scenes/the_site_lab.jpg`, `scenes/marrow_photo.jpg`,
