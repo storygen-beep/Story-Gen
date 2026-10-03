@@ -682,9 +682,20 @@ def main():
         check(not any((b.get("props") or {}).get("npcId") == "npc_bastien" for b in all_blocks(cn.get("nodes", []), [])),
               "0214: Bastien is not in the bar")
         vids = [b for b in all_blocks(cn.get("nodes", []), []) if b.get("type") == "video"]
-        check(len(vids) == 1 and (vids[0].get("props") or {}).get("file") == "sex/crew_night_t5.webm"
-              and (vids[0].get("props") or {}).get("description") and (vids[0].get("props") or {}).get("search_queries"),
-              "0214: one clip, sex/crew_night_t5.webm (a one-time screen takes one file), with description + queries")
+        # LO, 2026-10-04: one clip per act beat (was one for the whole scene). Each beat with 3+ frozen words carries
+        # exactly one video block of its own; every file distinct (one asset, one block); single files, no pools.
+        files_ = [(v.get("props") or {}).get("file") for v in vids]
+        check(len(files_) == len(set(files_)) and all(files_) and not any((v.get("props") or {}).get("pool_dir") for v in vids),
+              f"0214: every crew-night clip is its own single file ({files_})")
+        for v in vids:
+            pr = v.get("props") or {}
+            check(pr.get("description") and pr.get("search_queries"), f"0214: {pr.get('file')} needs description + queries")
+        for i, u in enumerate(units[1:], 1):
+            narr = " ".join(b.get("content") or "" for b in u if b.get("type") == "paragraph")
+            nv = sum(1 for b in u if b.get("type") == "video")
+            if len(EXPLICIT.findall(narr)) >= 3:
+                check(nv == 1, f"0214: explicit beat {i} must carry exactly one clip of its own (has {nv})")
+        check(len(vids) == 8, f"0214: eight clips, one per act beat (has {len(vids)})")
         check(not any(b.get("type") == "video" for b in units[0]), "0214: the clip rides its beat, never the node's lead")
         cfg = (cn["nodes"][-1].get("exit_block") or {}).get("config") or {}
         check({f.get("flag"): f.get("op") for f in cfg.get("flagEffects", [])}.get("crew_back") == "set", "0214: sets crew_back")
