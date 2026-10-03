@@ -563,6 +563,9 @@ def main():
         check(any(i.get("type") == "npc_at_location" and i.get("npc_id") == "npc_sol" for i in its), "0213: Sol is behind the bar")
         text = " ".join(b.get("content") or "" for b in all_blocks(cr.get("nodes", []), []))
         check("strip" in text and "Dace" in text, "0213: they died on the strip; they send her to Dace")
+        # LO, 2026-10-04: "Who tells her dace is at the pit after 6pm??" — the men do, in the scene, where and when
+        # (his row is 18:00-23:59 at underworld_pit), not only the quest card's tip.
+        check("pit every night from six" in text, "0213: the men tell her where AND when Dace drinks (the pit, from six)")
         check(not any((b.get("props") or {}).get("npcId") == "npc_bastien" for b in all_blocks(cr.get("nodes", []), [])),
               "0213: Bastien does not appear at the bar (none of them will know where he is)")
         cfg = (cr["nodes"][-1].get("exit_block") or {}).get("config") or {}
