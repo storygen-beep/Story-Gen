@@ -11884,7 +11884,7 @@ when = [
 [[quest_cards]]
 npc_id     = "npc_bastien"
 priority   = 24
-text       = "Dace will bring about ten of them back. The price is you, with all of them at once, in the bar after Sol shuts. You said yes."
+text       = "Dace will bring about ten of them back. The price is you, with all of them at once, in the bar after ten, when Sol has gone home. You said yes."
 tip        = "The Undertow, tomorrow night, after ten."
 goals = [
   { flag = "crew_back", op = "is_true", label = "Pay Dace's price" },
@@ -11922,11 +11922,14 @@ when = [
   { flag = "vega_taken", op = "is_false" },
 ]
 
-# ── 26 · 0.2.3, beat_0217. Bastien's section closes on the take: his men, his bar, and the thing in his room. ──
+# ── 26 · 0.2.3, beat_0217. Bastien's section closes on the take: his men, his bar, and the thing that came for him. ──
+# ⚠️ NO PLACE FOR VEGA (quests-page audit, 2026-10-05). This terminal card is live forever from vega_taken, and since
+# beat_0222 she is in his room for a few lines, then on Kess's table, then in the cradle at the Site. "Lying in his
+# room" was false for nearly every visit; what stays true on all of them is that she will not come back.
 [[quest_cards]]
 npc_id     = "npc_bastien"
 priority   = 26
-text       = "His men are his again, his bar is open, and the thing that came down the strip for him is lying in his room. Three of Dace's men paid for it. He paid for the coffins."
+text       = "His men are his again, his bar is open, and the thing that came down the strip for him will never come down it again. Three of Dace's men paid for it. He paid for the coffins."
 tip        = "He is at the cot, any hour, and he has his habits back. Go to him when you want him."
 terminal      = true
 terminal_text = "He is himself, and he has his men."
@@ -22162,20 +22165,25 @@ flagEffects = [
   { targetType = "player", flag = "the_site_open", op = "set" },
 ]
 
-# ── I · CAIN IS WAITING. beat_0207. Live from cap_cain_comes until she has seen the photo (beat_0208). ──
+# ── I · CAIN IS WAITING. beat_0207. Live from cap_cain_comes until the ambush (beat_0209). ──
 # ⚠️ ONE CARD LIVE AT A TIME: card H closes on site_offered in the same click that opens this one.
+# ⚠️ IT CLOSES ON site_ambushed, NOT marrow_known (quests-page audit, 2026-10-05). marrow_known is set by
+# cap_the_site's exit, which renders with the scene, and card K waits for the strip; closing on marrow_known left
+# Story Goals blank for the whole Site scene. Once marrow_known is true the goal is met and ready_text takes over;
+# it names no reveal, because the page can be opened on the scene's first line.
 # ⚠️ THE TIP SAYS WHERE THE SITE IS, because the exit teleports her there and a player who walks back out
 # before the scene (there is nothing yet to stop her at this beat) must be able to find it again.
 [[quest_cards]]
 priority   = 10
 text       = "Cain was on the end of your bunk this morning with his coat over his knees. He said there is a place out past the strip, where the city stops, and that it is where you were made. He wants you to see it."
+ready_text = "Cain brought you out past the strip, where the city stops, to the place where you were made. When you have seen it, he will walk you back."
 tip        = "The Site is open now, off the Underground. Go with him."
 goals = [
   { flag = "marrow_known", op = "is_true", label = "See the place where you were made" },
 ]
 when = [
-  { flag = "site_offered", op = "is_true"  },
-  { flag = "marrow_known", op = "is_false" },
+  { flag = "site_offered",  op = "is_true"  },
+  { flag = "site_ambushed", op = "is_false" },
 ]
 
 # ── cap_the_site — PART ONE, SCENE 2. beat_0208. Auto-fire @the_site, pri 11, ONE-SHOT, TIER-3. ──────────────
@@ -22655,13 +22663,19 @@ effects = [
 [[quest_cards]]
 priority   = 10
 text       = "Vega is in the underworld and she will keep coming. You cannot beat her from the front and you cannot hide from her. Every fight teaches you something about how she moves, and costs you."
-tip        = "She finds you on the Underground. Lose, run, learn. Kess fixes the damage for coin. Kess showed you the seam: get behind her and it ends."
+ready_text = "Vega is in the underworld and she will keep coming. You know how she moves, you can stand with her, you are in one piece, and Bastien's men are in the stalls. Now you go and get her."
+tip        = "She finds you on the Underground. Lose, run, learn. Kess fixes the damage for coin. Kess showed you the seam: get behind her and it ends. When every line is ticked, draw her out on the Underground."
+# ⚠️ THE PLAN GOAL AND ready_text, quests-page audit 2026-10-05. The engine hides the goal list once every goal is
+# met (v2.py renderQuestsGoalBlock); without ready_text the card fell back to "every fight teaches you" with no
+# list, and activity_draw_her_out also needs vega_plan, which was on no line. The damage goal is "lt", but the page
+# prints every trait goal as "current / value", so its label says "under 30" or "35 / 30" reads as progress.
 goals = [
   { trait = "vega_habits", subject = "player", op = "gte", value = 4,  label = "Learn how Vega fights (survive her on the Underground)" },
   { trait = "fighting",    subject = "player", op = "gte", value = 85, label = "Get good enough to stand with her" },
-  { trait = "vega_damage", subject = "player", op = "lt",  value = 30, label = "Be in one piece (Kess, at the Berth)" },
+  { trait = "vega_damage", subject = "player", op = "lt",  value = 30, label = "Damage under 30 (Kess, at the Berth)" },
   # beat_0214: joins the card now that crew_back has a setter (cap_the_crew_night) — the whole-amendment rule.
   { flag = "crew_back", op = "is_true", label = "Get men behind her (Bastien's crew, at the Undertow)" },
+  { flag = "vega_plan", op = "is_true", label = "Make the plan (Bastien and Cain, at the cot)" },
 ]
 when = [
   { flag = "seam_known", op = "is_true"  },
