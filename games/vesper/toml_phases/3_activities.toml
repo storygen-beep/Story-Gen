@@ -5243,3 +5243,52 @@ effects = [
 flagEffects = [
   { targetType = "player", flag = "vega_taken", op = "set" },
 ]
+
+# ── site_the_cradles — 0.2.3, beat_0222. The standing view of the shell, @the_site, after the cradle scene. ─────────
+# LO, 2026-10-04: "player can still see the vega lying there." cap_the_cradles is a one-shot; this solo card is what
+# the player finds on every visit to the Site afterwards: Vega's shell in the second cradle, her own empty one
+# beside it, and Cain's chair — with him in it at night (his Site rows 21:00-03:00), his coat on it by day.
+# ⚠️ A SOLO CARD, NOT A SECOND CAIN CARD: activity_cain_trains is his portrait hub here (one repeatable per NPC per
+# window), so his presence is a GROUP condition on this card, never npc/requires_npc on its trigger.
+# ⚠️ IT STAYS TRUE ALL THE WAY TO 0.2.4: nothing is transferred, so every line is about waiting.
+# MEDIA: one new slot, scenes/the_shell_in_the_cradle.jpg (one asset, one block — not the cradle scene's image).
+[[canvases]]
+id          = "site_the_cradles"
+name        = "The cradles"
+description = "beat_0222 (0.2.3, LO's ask). Wren-solo card @the_site, repeatable, gated cradles_ready. Vega's shell lying in the second cradle beside her own empty one; Cain in the chair by the empty cradle at night (npc_at_location band), his coat on it by day. Nothing transferred."
+[canvases.trigger]
+location      = "the_site"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "cradles_ready", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The cradles"
+blocks = [
+  { type = "image", props = { file = "scenes/the_shell_in_the_cradle.jpg", description = "A close view into a dusty machine cradle in a dim abandoned lab: a perfectly made, still, woman-shaped figure lying in it with closed eyes and folded hands, cables running from the cradle into the dark, the edge of a second, empty cradle beside it. Must show: the still figure in the cradle, the empty one at the edge. Avoid: gore, blood, bright light, open eyes.", search_queries = ["still android woman lying in pod closed eyes dim lab", "sci fi body in cradle cables dark abandoned laboratory"] } },
+  { type = "paragraph", content = "Vega lies in the second cradle the way Kess left her. The first cradle is empty, her own shape worn into it." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "npc_at_location", location_id = "the_site", operator = "is_present", npc_id = "npc_cain" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Cain is in the chair by the empty cradle." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Still here. I said I would be." },
+    { type = "dialog", props = { speaker = "player" }, content = "So is she." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "When you are ready. Not before. Go and live a little first." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "npc_at_location", location_id = "the_site", operator = "is_absent", npc_id = "npc_cain" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Cain's chair is pulled up to the empty cradle with his coat over the back of it. He will be back when it is dark." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Not tonight. Soon." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave them."
+targetType = "location"
+locationId = "the_site"
