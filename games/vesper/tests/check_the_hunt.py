@@ -814,7 +814,8 @@ def main():
               "0217: a located one-shot auto-fire at kess_berth, pri 11+")
         check(has_flag(its, "vega_taken", "is_true") and has_flag(its, "vega_dismantled", "is_false"),
               "0217: gated vega_taken + vega_dismantled is_false")
-        check(any(i.get("type") == "npc_at_location" and i.get("npc_id") == "npc_kess" for i in its), "0217: Kess present")
+        # beat_0222 (LO): one unbroken run after the take — Kess waits up for them, so no hours gate.
+        check(not any(i.get("type") == "npc_at_location" for i in its), "0222: the table must not wait for Kess's hours")
         spk = dialog_speakers(tb)
         check({"npc_kess", "npc_cain", "player"} <= spk, f"0217: Kess, Cain and Wren speak (got {sorted(map(str, spk))})")
         text = " ".join(b.get("content") or "" for b in all_blocks(tb.get("nodes", []), []))
@@ -823,6 +824,7 @@ def main():
         check("Undertow" not in text, "0217: no Undertow at Kess's")
         cfg = (tb["nodes"][-1].get("exit_block") or {}).get("config") or {}
         check({f.get("flag"): f.get("op") for f in cfg.get("flagEffects", [])}.get("vega_dismantled") == "set", "0217: sets vega_dismantled")
+        check(cfg.get("locationId") == "the_site", "0222: the table leads straight to the Site, where the cradle scene fires")
         e = {x.get("trait"): x for x in cfg.get("effects", [])}.get("vega_damage") or {}
         check(e.get("op") == "set" and e.get("value") == 0, "0217: Kess sees to her too (vega_damage set 0)")
         imgs = {(b.get("props") or {}).get("file") for b in all_blocks(tb.get("nodes", []), []) if b.get("type") == "image"}
@@ -890,7 +892,7 @@ def main():
               "0221: a located one-shot auto-fire at the Site")
         check(has_flag(its, "vega_dismantled", "is_true") and has_flag(its, "cradles_ready", "is_false"),
               "0221: gated vega_dismantled + cradles_ready is_false")
-        check(any(i.get("type") == "npc_at_location" and i.get("npc_id") == "npc_cain" for i in its), "0221: Cain present (his Site rows)")
+        check(not any(i.get("type") == "npc_at_location" for i in its), "0222: the cradles must not wait for Cain's hours (he came with them)")
         check({"npc_cain", "npc_kess", "player"} <= dialog_speakers(cr), "0221: Cain, Kess and Wren speak")
         ctext = " ".join(b.get("content") or "" for b in all_blocks(cr.get("nodes", []), []))
         check("Two cradles. Now she knows why." in ctext, "0221: the release's last thought")
@@ -912,13 +914,32 @@ def main():
             check(fl.get(f) == want, f"0221: {jid} must {want.upper()} {f}")
             check(fl.get("cradles_ready") == "unset", f"0221: {jid} must UNSET cradles_ready")
 
+    # ── beat_0222 — LO: "player can still see the vega lying there" ─────────────────────────────────────
+    sc = canvases.get("site_the_cradles")
+    check(sc is not None, "0222: site_the_cradles (the standing view of the shell) is missing")
+    if sc:
+        tr = sc.get("trigger") or {}
+        check(tr.get("location") == "the_site" and tr.get("is_repeatable") is True and not tr.get("npc")
+              and not tr.get("requires_npc") and tr.get("trigger_mode", "manual") == "manual",
+              "0222: a repeatable solo card at the Site")
+        check(has_flag(items(sc), "cradles_ready", "is_true"), "0222: it exists from the cradle scene on (cradles_ready)")
+        imgs = {(b.get("props") or {}).get("file") for b in all_blocks(sc.get("nodes", []), []) if b.get("type") == "image"}
+        check("scenes/the_shell_in_the_cradle.jpg" in imgs, "0222: its own image (one asset, one block)")
+        stext = " ".join(b.get("content") or "" for b in all_blocks(sc.get("nodes", []), []))
+        check("Vega" in stext and "cradle" in stext, "0222: it shows Vega lying in the cradle")
+    ab = canvases.get("amb_bastien_cot") or {}
+    abg = [b for b in node(ab, "base").get("blocks", []) if b.get("type") == "group"]
+    order = [next((i.get("flag_key") for i in ((g.get("props") or {}).get("conditions") or {}).get("items", [])), None) for g in abg]
+    check("cradles_ready" in order and order.index("cradles_ready") < order.index("crew_back") and order[0] == "face_worn",
+          f"0222: Bastien's card has a cradles_ready band after the face band and before the crew band (order {order[:4]})")
+
     # ── every beat — narration : dialogue, PER VISIT, on every spoken screen of the chunk ──────────────────
     # The game's standing target is 2.14:1 (design_book "Register debt"); the skill's hard fail is 3:1. Measured
     # here so it is checked every build. PER VISIT: a node's top-level groups are exclusive bands, so each band is
     # measured with the node's ungrouped blocks, never summed with the others. A node with no NPC line is SOLO
     # (nobody there to speak — the skill's exemption) and is skipped. beat_0209's first ambush measured 3.29.
     CHUNK = ("cap_cain_comes", "cap_the_site", "cap_the_ambush", "cap_kess_seam", "kess_patch_up",
-             "rand_vega_street", "activity_cain_trains", "activity_rebuild_undertow", "cap_crew_refuses", "cap_dace_price", "cap_the_crew_night", "activity_draw_her_out", "cap_the_table", "cap_rue_takes_the_list", "cap_the_plan", "cap_the_cradles")
+             "rand_vega_street", "activity_cain_trains", "activity_rebuild_undertow", "cap_crew_refuses", "cap_dace_price", "cap_the_crew_night", "activity_draw_her_out", "cap_the_table", "cap_rue_takes_the_list", "cap_the_plan", "cap_the_cradles", "site_the_cradles")
 
     def screens(node):
         """Every screen a visit can paint. Adjacent groups form ONE if/elseif chain (one of them renders);

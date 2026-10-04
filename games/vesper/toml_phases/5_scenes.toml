@@ -20645,6 +20645,15 @@ blocks = [
     { type = "thought_bubble", props = { speaker = "player" }, content = "Not in this one. Never near him in this one. The bag is under the bench. It comes off behind the hull, out of his sight." },
   ] },
   # BAND BACK — bastien_back. Step 7 has happened: the House answered and he is in business from her bench.
+  # 0.2.3 (beat_0222) — VEGA IS IN THE CRADLE (cradles_ready). After the face band, before the crew band.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "cradles_ready", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He is at her bench without the brace, doing his men's wages." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "She is in Marrow's cradle, then. Good. My Room smelled of her for a week." },
+    { type = "dialog", props = { speaker = "player" }, content = "She doesn't smell of anything." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Exactly." },
+  ] },
   # 0.2.3 (beat_0215) — HIS MEN ARE BACK (crew_back). After the face band (which must win first) and before the 0.2.2
   # band, which says he works "in the brace": loop_bastien_cot's owner intro has the brace on the floor, so this card
   # must not contradict it one click earlier.
@@ -22948,8 +22957,8 @@ flagEffects = [
 # the feeling goes with her is NOT said here — it is what she finds out in 0.2.4.
 # ⚠️ VEGA SHOWS NOTHING (design: "She shows nothing as it happens, because there is nothing in her to show. Wren is
 # the one who feels it"). Her one line is a report about herself, in the third person, the units' register.
-# ⚠️ npc_at_location npc_kess: his yard hours are 10:00-22:00 and the take exits here 12 hours on, so it can land
-# outside them; card K names the hours. Cain needs no gate — he is a speaker in a one-shot, like every scene of his.
+# ⚠️ NO PRESENCE GATE since beat_0222: Kess waits up (the plan's "Then Kess. In the morning."), and the exit goes
+# straight to the Site, where cap_the_cradles fires on arrival — take, table, cradle, end card in one unbroken run.
 # Kess sees to her damage at the same time: vega_damage set 0 (the take cost her 25).
 # MEDIA: one new slot, scenes/kess_table_vega.jpg, on the dismantling beat.
 [[canvases]]
@@ -22961,17 +22970,20 @@ location      = "kess_berth"
 is_repeatable = false
 priority      = 11
 is_active     = true
+# ⚠️ beat_0222 (LO): NO HOURS GATE. The plan said "Then Kess. In the morning." — he waits up for them, so the table
+# fires the moment the take lands her at the berth, whatever the clock says. With the old npc_at_location gate a
+# take that landed outside 10:00-22:00 left her standing in an empty berth with Vega nowhere ("wren directly goes
+# to berth, and vega is no where" — LO, playing it).
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "vega_taken",      operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "vega_dismantled", operator = "is_false" },
-  { type = "npc_at_location", location_id = "kess_berth", operator = "is_present", npc_id = "npc_kess" },
 ] }
 
 [[canvases.nodes]]
 id   = "base"
 name = "The table"
 blocks = [
-  { type = "paragraph", content = "Four of Dace's men bring her down Kess's ladder in the bag and lay her on the bench he has cleared. Cain is already there, in the corner." },
+  { type = "paragraph", content = "Kess has waited up for them, the bench cleared and the lamp lit. Four of Dace's men bring her down the ladder in the bag and lay her on it. Cain is already there, in the corner." },
   { type = "cascade", props = { beats = [
     { blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Same family, better parts. I said. Is she off?" },
@@ -23017,16 +23029,16 @@ blocks = [
     { advance_text = "Morning.", blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "She's ready. An empty shell in your shape, near enough. I saw to your side while I was in there." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Then we take her to the Site." },
-        { type = "dialog", props = { speaker = "player" }, content = "Not yet. Let me sleep first. Then the Site." },
+        { type = "dialog", props = { speaker = "player" }, content = "Now. Before I think about it." },
     ] },
   ] } },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Sleep."
+text = "Carry her to the Site."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "kess_berth"
+locationId               = "the_site"
 time_progression_minutes = 600
 effects = [
   { targetType = "player", trait = "vega_damage", op = "set", value = 0, clamp = true },
@@ -23039,7 +23051,7 @@ flagEffects = [
 [[quest_cards]]
 priority   = 10
 text       = "Vega is in Bastien's room, asleep with the seam pushed in. Three of Dace's men died on the strip getting her there. Kess has opened you twice. Now he opens her."
-tip        = "Kess, at the Berth. He keeps the bench from ten in the morning to ten at night."
+tip        = "Kess, at the Berth. He is waiting up for her."
 goals = [
   { flag = "vega_dismantled", op = "is_true", label = "Get Vega onto Kess's table" },
 ]
@@ -23053,7 +23065,7 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "Kess has her ready: a company machine in your shape, near enough, and nobody inside it. It goes where you were made, in the second cradle."
-tip        = "The Site, off the Underground, at night. Cain is there from nine."
+tip        = "The Site, off the Underground."
 goals = [
   { flag = "cradles_ready", op = "is_true", label = "Take the shell to the Site" },
 ]
@@ -23208,8 +23220,8 @@ flagEffects = [
 # ⚠️ IT STOPS ONE BREATH BEFORE THE TRANSFER, ON PURPOSE: the end card leaves free play open, and every surface she
 # can still reach describes Wren's own body (Bastien's loop, her covers, the weapon, the portrait). So Kess says
 # "Not tonight", nothing is transferred, and 0.2.4 opens with her lying down. LO agreed: the transfer is 0.2.4.
-# ⚠️ CAIN PRESENT (his Site rows 21:00-03:00, npc_at_location): the scene is his place and his promise. Kess is a
-# speaker here — he carried the shell with them; card K2's tip names Cain's hours.
+# ⚠️ CAIN AND KESS CARRY IT WITH HER, straight from the table (beat_0222), so neither is presence-gated. After it,
+# the shell stays visible: site_the_cradles (3_activities) shows it on every visit to the Site.
 # MEDIA: one new slot, scenes/the_two_cradles.jpg, on the beat that shows them.
 [[canvases]]
 id          = "cap_the_cradles"
@@ -23220,10 +23232,10 @@ location      = "the_site"
 is_repeatable = false
 priority      = 11
 is_active     = true
+# ⚠️ beat_0222: NO PRESENCE GATE — Cain is in the table scene and comes with them; the table exits straight here.
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "vega_dismantled", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "cradles_ready",   operator = "is_false" },
-  { type = "npc_at_location", location_id = "the_site", operator = "is_present", npc_id = "npc_cain" },
 ] }
 
 [[canvases.nodes]]

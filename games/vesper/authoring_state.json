@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 242,
+  "book_revision": 243,
   "register": {
     "person": "third"
   },
@@ -3127,6 +3127,20 @@
         "cap_the_cradles"
       ],
       "notes": "Built 2026-10-04. Auto-fire @the_site pri 11, vega_dismantled + cradles_ready is_false + Cain present (21-03). The shell laid in the second cradle beside her empty one (pays off 'Why are there two?'), Kess runs the lines, Cain sits by the empty cradle; 'Not tonight.'; her last thought 'Two cradles. Now she knows why.' Stops one breath before the transfer so free play stays true (the transfer is 0.2.4). Sets cradles_ready; end card L moved to it; new card K2. Media scenes/the_two_cradles.jpg (harvest 29)."
+    },
+    {
+      "id": "beat_0222",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.3 — LO's ask: the take -> table -> cradles in one unbroken run; the shell stays visible at the Site",
+      "introduces": [],
+      "canvases": [
+        "cap_the_table",
+        "cap_the_cradles",
+        "site_the_cradles",
+        "amb_bastien_cot"
+      ],
+      "notes": "Built 2026-10-05. LO, playing it: 'wren directly goes to berth/cot, and vega is no where... player can still see the vega lying there.' cap_the_table lost its Kess-hours gate (he waits up: 'Kess has waited up for them') and exits straight to the_site; cap_the_cradles lost its Cain-hours gate (he came with them) and fires on arrival — take, table, cradles, end card with no gap. New standing card site_the_cradles @the_site (cradles_ready): Vega's shell in the second cradle, her empty one beside it, Cain in the chair at night / his coat on it by day; new image scenes/the_shell_in_the_cradle.jpg. Bastien's cot card gains a cradles_ready band ('She is in Marrow's cradle, then. Good.'). Permanent live tests added: tests/live_the_hunt.py (the whole chapter, 33 checks) and tests/live_the_hunt_end.py (the ending + the standing view) — the scratch probes were lost when the scratchpad was cleared between sessions."
     }
   ],
   "structure_registry": {
@@ -4048,7 +4062,7 @@
     ]
   },
   "next_up": [
-    "0.2.3 — HER FATHER'S HOUSE and THE HUNT is BUILT (beats 0206-0218, rev 240), uncommitted. LO's, in order: (1) review + commit; (2) the media harvest — 29 slots (design_the_hunt.md 'BUILT · Media'); (3) sign the crew-night ceiling row; (4) the paid guide needs 0.2.3 chapters and the fighting 85 gate; (5) version bump + publish build (drop --dev/--debug) at release; (6) flip-able calls listed in design_the_hunt.md.",
+    "0.2.3 — HER FATHER'S HOUSE and THE HUNT is BUILT (beats 0206-0218, rev 240), uncommitted. LO's, in order: (1) review + commit; (2) the media harvest — 30 slots (design_the_hunt.md 'BUILT · Media'); (3) sign the crew-night ceiling row; (4) the paid guide needs 0.2.3 chapters and the fighting 85 gate; (5) version bump + publish build (drop --dev/--debug) at release; (6) flip-able calls listed in design_the_hunt.md.",
     "RESOLVED 2026-10-02 — MARKET CAP. underworld_market_shop's two buys are one-time now (flags market_weapon_bought / market_gear_bought, each choice gated is_false). design_cheat_page.md §11.1 marked resolved.",
     "THE RINGS, two calls flagged to LO and not yet answered (design_the_rings.md 'Decisions'): (1) the door man is emitter-or-grind — the clean pass needs a silent run AND an unspent budget, so in practice the rescue is gated behind the emitter's 10-coin-and-a-day reload or fighting 70; (2) the slab's round runs 20:00-23:59, night rather than day. Both are one-line flips.",
     "THE WAY DOWN media harvest — 8 slots authored and empty: portraits/loder.jpg, scenes/the_plant_room.jpg, and sex/bunker_g1_crate_t5 / g2_water_t5 / g3_table_t5 / g4_bench_t5 / g5_desk_t5 / bunker_door_t5 (pool = 4 each). Every block already carries description + search_queries. Needs the find-media pipeline; nothing else in the release is outstanding.",
@@ -5212,6 +5226,7 @@
     "2026-10-04 — beat_0219, LO's amendment: 'who brought them there. Bastien should first get to know that the bar has been rebuilt, bastien still cant go there but there has to be something.' LO chose: she carries the list to Rue herself. Built: the cot choice + Bastien's list scene, Rue's scene at the House, the refusal re-gated on the call, three Bastien cards, five dev jumps updated. Verified: guard red then green; merge OK; package green, flag chains valid; p0213 rewritten through the new path (no men without the call; the list; Rue; not the same night; not at 13:00; the men the next evening with 'Rue said he wants us back'); the whole-chunk playthrough (p0218_full) passes through Bastien and Rue to the end card; all six Vesper tests + p0206-p0218 pass.",
     "2026-10-04 — LO: 'Who tells her dace is at the pit after 6pm??' Only card 23's tip did; the men said 'He drinks at the pit now' with no time. cap_crew_refuses' line is now 'He's at the pit every night from six, at the rail over the fights. Ask him. He won't say yes.' (his row is underworld_pit 18:00-23:59). check_the_hunt §0213 asserts it; p0213 and the full playthrough pass.",
     "2026-10-04 — LO asked why cap_the_crew_night had one clip across eight act beats. Honest answer: a media-budget call no rule asked for (gates.py had flagged '7 explicit beats with no clip'). Seven single-file clips added, one riding each act beat: sex/crew_night_strip_t5, _counter_t5, _turns_t5, _floor_t5, _finish_t5, _second_t5, _after_t5 (each with description + 3 search_queries). check_the_hunt §0214 now requires exactly one clip on every explicit beat, all distinct single files; p0214 strips every clip's --debug description before its absence check. gates.py: explicit beats with their own clip 58 -> 65 (59%); the crew night no longer listed. Media harvest now 28 slots.",
-    "2026-10-04 — beats 0220-0221, LO's asks: (1) 'is there anything cain, bastien and wren planning about this?' — no scene had them plan together; cap_the_plan added at the cot and the take now requires it; (2) show Vega's body before the transfer — cap_the_cradles at the Site lays the shell in the second cradle; the transfer stays 0.2.4 (LO agreed), and the scene ends one breath earlier than first pitched ('Not tonight', not her lying down) so free play after the end card stays true. All five dev jumps carry vega_plan / cradles_ready. Verified: guard red then green; merge OK; package green (validation + flag chains; its only reported errors are the two portrait files vega.jpg / dace.jpg awaiting the harvest); p0216 (no plan -> locked), p0217 (K2, no cradles without Cain, cradles at 22:00, end card after), the whole-chunk playthrough through the plan and the cradles, and all six Vesper tests pass. Session note: a stray `git stash` was run and immediately popped — nothing lost, verified by guard + diff."
+    "2026-10-04 — beats 0220-0221, LO's asks: (1) 'is there anything cain, bastien and wren planning about this?' — no scene had them plan together; cap_the_plan added at the cot and the take now requires it; (2) show Vega's body before the transfer — cap_the_cradles at the Site lays the shell in the second cradle; the transfer stays 0.2.4 (LO agreed), and the scene ends one breath earlier than first pitched ('Not tonight', not her lying down) so free play after the end card stays true. All five dev jumps carry vega_plan / cradles_ready. Verified: guard red then green; merge OK; package green (validation + flag chains; its only reported errors are the two portrait files vega.jpg / dace.jpg awaiting the harvest); p0216 (no plan -> locked), p0217 (K2, no cradles without Cain, cradles at 22:00, end card after), the whole-chunk playthrough through the plan and the cradles, and all six Vesper tests pass. Session note: a stray `git stash` was run and immediately popped — nothing lost, verified by guard + diff.",
+    "2026-10-05 — beat_0222 (LO's ask): after the take Vega never vanishes. The table fires on arrival at any hour and leads straight to the Site; the cradle scene fires on arrival; the shell stays visible on every later visit (site_the_cradles, Cain's chair by day and night); Bastien's line at the cot. The body lies in the Site's second cradle, not the cot (LO: go with the pick) — the transfer happens there in 0.2.4. Lesson recorded: browser probes belong in games/vesper/tests/, not the scratchpad — the beat_0206-0221 probes were lost when it was cleared; the two that matter most are rebuilt there as live_the_hunt.py and live_the_hunt_end.py. Verified: guard red then green; merge OK; package green (only the vega/dace portrait files missing, awaiting the harvest); all eight Vesper tests pass. Media harvest 30."
   ]
 }
