@@ -161,10 +161,13 @@ def main():
         check(not h.get("terminal") and not h.get("terminal_text"), "0207: card H must lose terminal and terminal_text")
         check({"flag": "site_offered", "op": "is_false"} in h.get("when", []), "0207: card H must close on site_offered")
     ci = [c for c in cards if {"flag": "site_offered", "op": "is_true"} in c.get("when", [])
-          and {"flag": "marrow_known", "op": "is_false"} in c.get("when", [])]
-    check(len(ci) == 1, f"0207: expected one card I (site_offered + marrow_known is_false), found {len(ci)}")
+          and {"flag": "site_ambushed", "op": "is_false"} in c.get("when", [])]
+    # Card I closes on site_ambushed, not marrow_known: cap_the_site's exit sets marrow_known on render and card K
+    # waits for the strip, so closing on marrow_known left Story Goals blank for the whole Site scene (2026-10-05).
+    check(len(ci) == 1, f"0207: expected one card I (site_offered + site_ambushed is_false), found {len(ci)}")
     if ci:
         check(any(g.get("flag") == "marrow_known" for g in ci[0].get("goals", [])), "0207: card I's goal is marrow_known")
+        check(bool(ci[0].get("ready_text")), "0207: card I needs ready_text for the Site scene, when its goal is met")
         check("Site" in (ci[0].get("tip") or ""), "0207: card I's tip must name the Site")
 
     j = canvases.get("dev_jump_hunt_start")
