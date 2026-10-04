@@ -527,12 +527,14 @@ Afterwards the shell stays visible: **The cradles** card at the Site shows Vega 
 one, Cain in the chair at night and his coat on it by day. Bastien's card: *"She is in Marrow's cradle, then. Good."*
 The body lies at the Site, not the cot, because the transfer happens there in 0.2.4.
 
-## Media — 30 slots, all missing, the harvest is LO's
+## Media — 25 slots, the harvest is LO's
+
+*(2026-10-05: `sex/colm_rebuilt_t4` is filled — a byte copy of `sex/colm_backroom_t4.mp4`, the intact pre-raid storeroom, at LO's call; a copy and not a shared file, per the one-asset-one-block rule.)*
 
 Portraits: `portraits/vega.jpg`, `portraits/dace.jpg`. Scenes: `scenes/the_site_lab.jpg`, `scenes/marrow_photo.jpg`,
-`scenes/vega_ambush.jpg`, `scenes/vega_street_t1..t5.jpg`, `scenes/cain_training.jpg`, `scenes/undertow_rebuild_1..3.jpg`,
+`scenes/vega_street_t1 / t3.jpg` (the ambush image and street t2, t4, t5 removed 2026-10-05, LO), `scenes/cain_training.jpg`, `scenes/undertow_rebuild_1..3.jpg`,
 `scenes/undertow_reopened.jpg`, `scenes/the_take.jpg`, `scenes/vega_in_the_room.jpg`, `scenes/kess_table_vega.jpg`, `scenes/the_two_cradles.jpg` (beat_0221), `scenes/the_shell_in_the_cradle.jpg` (beat_0222).
-Clips (one file each): the crew night's eight, one per act beat (`sex/crew_night_t5.webm` on the knees beat, plus `sex/crew_night_strip_t5`, `_counter_t5`, `_turns_t5`, `_floor_t5`, `_finish_t5`, `_second_t5`, `_after_t5` — added 2026-10-04 at LO's ask), `sex/bastien_cot_owner_t5.webm`, `sex/colm_rebuilt_t4.webm`. Every
+Clips (one file each): the crew night's eight, one per act beat (`sex/crew_night_t5.webm` on the knees beat, plus `sex/crew_night_strip_t5`, `_counter_t5`, `_turns_t5`, `_floor_t5`, `_finish_t5`, `_second_t5`, `_after_t5` — added 2026-10-04 at LO's ask), `sex/bastien_cot_owner_t5.webm`, `sex/colm_rebuilt_t4.webm` (filled, see above). Every
 scene and clip block carries `description` + `search_queries`.
 
 ## Measured

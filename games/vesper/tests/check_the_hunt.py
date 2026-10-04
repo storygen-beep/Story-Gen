@@ -258,7 +258,8 @@ def main():
         text = " ".join(b.get("content") or "" for b in all_blocks(am.get("nodes", []), []))
         check("Undertow" not in text, "0209: no Undertow in the ambush")
         imgs = [b for b in all_blocks(am.get("nodes", []), []) if b.get("type") == "image"]
-        check(any((b.get("props") or {}).get("file") == "scenes/vega_ambush.jpg" for b in imgs), "0209: scenes/vega_ambush.jpg")
+        # LO, 2026-10-05: the ambush carries no image (scenes/vega_ambush.jpg removed).
+        check(not any((b.get("props") or {}).get("file") == "scenes/vega_ambush.jpg" for b in imgs), "0209: no scenes/vega_ambush.jpg (removed)")
 
     ks = canvases.get("cap_kess_seam")
     check(ks is not None, "0209: cap_kess_seam is missing")
@@ -358,7 +359,10 @@ def main():
         text = " ".join(b.get("content") or "" for b in all_blocks(rv.get("nodes", []), []))
         check("Undertow" not in text, "0210: no Undertow on the street")
         imgs = {(b.get("props") or {}).get("file") for b in all_blocks(rv.get("nodes", []), []) if b.get("type") == "image"}
-        check({f"scenes/vega_street_t{k}.jpg" for k in (1, 2, 3, 4, 5)} <= imgs, f"0210: the five street media slots, one per band (got {imgs})")
+        # LO, 2026-10-05: the habit-1 band (the stair cut-off) and the habit-4 band carry no image — t2 and t5 removed.
+        check({f"scenes/vega_street_t{k}.jpg" for k in (1, 3)} <= imgs
+              and not ({"scenes/vega_street_t2.jpg", "scenes/vega_street_t4.jpg", "scenes/vega_street_t5.jpg"} & imgs),
+              f"0210: street media t1/t3 only — t2, t4, t5 removed by LO (got {imgs})")
 
     jj = [c for c in cards if {"flag": "seam_known", "op": "is_true"} in c.get("when", [])
           and {"flag": "vega_taken", "op": "is_false"} in c.get("when", [])]

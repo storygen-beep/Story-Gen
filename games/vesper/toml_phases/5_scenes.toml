@@ -22317,7 +22317,7 @@ flagEffects = [
 # Vega, Lyra, Nova", 2_one_shots:30), so Wren knows the face. Three units came down this strip the night of the
 # raid (cap_the_raid, "Three of them came down the strip"), so the crowd knows what she is.
 # Damage: vega_damage SET to 60 (Body: Badly hurt), not added — whatever she had, this is where it starts.
-# MEDIA: one new slot, scenes/vega_ambush.jpg, on the lead.
+# MEDIA: none — scenes/vega_ambush.jpg removed 2026-10-05 at LO's call.
 [[canvases]]
 id          = "cap_the_ambush"
 name        = "Vega"
@@ -22336,7 +22336,6 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "Vega"
 blocks = [
-  { type = "image", props = { file = "scenes/vega_ambush.jpg", description = "A crowded underground market street gone suddenly still, people pressed back against the stalls, and down the empty middle of it a tall, perfectly made woman in plain dark clothes walking straight toward the camera, calm, hands empty. Must show: one figure walking, a crowd pressed to the sides, a low industrial ceiling. Avoid: weapons, robots with visible metal, gore.", search_queries = ["woman walking down empty middle of crowded market crowd parting", "tall woman calm walking crowd pressed against walls underground street"] } },
   { type = "paragraph", content = "Two hours of walking and neither of them says a word. They come up the last stair onto the Underground, and the strip is wrong. People are standing flat against the stalls." },
   { type = "cascade", props = { beats = [
     { blocks = [
@@ -22517,7 +22516,8 @@ flagEffects = [
 # engine's per-location cooldown (v2.py checkRandomEncounters).
 # Effects: vega_damage +35 (clamp = true: exit effects default to no clamp, v2.py:15684), vega_habits +1 with
 # cap = 4, 540 minutes (the day), home to the cot.
-# MEDIA: five new slots, scenes/vega_street_t1..t5.jpg, one per band (one asset, one block).
+# MEDIA: two slots, scenes/vega_street_t1 / t3.jpg (one asset, one block). The habit-1, habit-3 and habit-4 bands carry
+# NO image — t2, t4 and t5 removed 2026-10-05 at LO's call.
 [[canvases]]
 id          = "rand_vega_street"
 name        = "Vega on the strip"
@@ -22549,7 +22549,6 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "vega_habits", operator = "gte", value = 4 },
     ] } }, blocks = [
-    { type = "image", props = { file = "scenes/vega_street_t5.jpg", description = "Two women fighting hard in a dim underground market street, the smaller one landing a blow and the taller, perfectly composed one not reacting at all, a crowd at a distance. Must show: an even, fast fight, both on their feet. Avoid: weapons, blood, gore.", search_queries = ["two women fighting street dim market crowd watching", "woman landing punch on calm taller woman fight scene"] } },
     { type = "paragraph", content = "She knows all of it now. She stays with Vega longer than anybody in the Reach could, and lands four times." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "You have improved. It is not enough alone." },
     { type = "dialog", props = { speaker = "player" }, content = "I know. I know exactly what it is not enough for." },
@@ -22559,7 +22558,6 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "vega_habits", operator = "gte", value = 3 },
       { type = "trait", subject = "player", trait_key = "vega_habits", operator = "lt",  value = 4 },
     ] } }, blocks = [
-    { type = "image", props = { file = "scenes/vega_street_t4.jpg", description = "A woman pinned face down on wet stone in a dim street, a tall calm woman kneeling on her back with one hand resting on the back of her neck, not squeezing. Must show: the pin, the hand on the neck, restraint not violence. Avoid: blood, choking, weapons.", search_queries = ["woman pinned face down kneeling on her back hand on neck", "fighter holding opponent down on street calm"] } },
     { type = "paragraph", content = "Vega puts her on the stones and kneels on her back, one hand on her neck. She never squeezes." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "Stay down. I am not permitted to break you." },
     { type = "dialog", props = { speaker = "player" }, content = "Then you're going to have to let me up." },
@@ -22580,7 +22578,6 @@ blocks = [
       { type = "trait", subject = "player", trait_key = "vega_habits", operator = "gte", value = 1 },
       { type = "trait", subject = "player", trait_key = "vega_habits", operator = "lt",  value = 2 },
     ] } }, blocks = [
-    { type = "image", props = { file = "scenes/vega_street_t2.jpg", description = "A woman trying to break away toward a stairway in a crowded underground market and a tall calm woman already standing in her path. Must show: the cut-off, the stair behind. Avoid: weapons, blood.", search_queries = ["woman blocked from escape stairway crowded market", "tall woman standing in the way of fleeing woman stairs"] } },
     { type = "paragraph", content = "Wren breaks for the stairs, and Vega is already there. She breaks left. Vega is there first." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_vega" }, content = "You run toward the light. Logged." },
     { type = "dialog", props = { speaker = "player" }, content = "Everybody runs toward the light." },
