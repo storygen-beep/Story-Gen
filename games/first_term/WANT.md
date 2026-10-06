@@ -89,7 +89,7 @@ Zoe is the companion, one step ahead of Ella.
 | `college` | `npc_hale` | `campus` | college (lectures, grades) | her grades go home to Laura |
 | `job` | `npc_tom` | `cafe` | job (shifts, tips) | it pays her cut of the rent |
 | `friends` | `npc_zoe` | `zoe_apartment` | parties | what she brings home late |
-| `dating` | `npc_jake` | `campus` | dating | Ryan sees |
+| `dating` | `npc_jake` | `campus` | none — Jake's Saturday dates, booked on his phone thread (not a system, `SYSTEMS.md` §12, LO 2026-10-07) | Ryan sees |
 | `neighbourhood` | `npc_vance` | `vance_house` | money pressure | her $75 is part of what Mark owes him |
 
 ---

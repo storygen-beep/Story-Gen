@@ -23,8 +23,9 @@
 
 These are not her choices; everything else in her day is.
 
-- **Weekday mornings:** the bathroom after Ryan, then lectures. Lecture hours come with the college
-  system.
+- **Weekdays:** the bathroom after Ryan, then three classes a day, two in the morning and one in the
+  afternoon (Friday: one). The timetable is on `SYSTEMS.md` §1; the hours come with the
+  college card (LO, 2026-10-07).
 - **Sunday morning:** rent at the kitchen table.
 
 ## 2. The family
@@ -165,17 +166,21 @@ Kayla's.
   the main room, so the parties have a door to leave open.
 - **Most hours at:** her apartment.
 
-- **Weekday mornings:** lectures, off screen.
-- **Weekday afternoons:** the quad.
+- **Weekday classes:** Biology and Figure drawing, inside the class scenes, no row
+  (`SYSTEMS.md` §1; LO, 2026-10-07).
+- **Weekday lunch:** the canteen **(new, 10-07)**.
+- **Tuesday, Thursday and Friday afternoons:** the quad (Monday and Wednesday afternoons are her
+  classes; 10-07).
 - **Evenings:** her apartment.
 - **Friday night:** **the party is at her apartment (new)** and runs past midnight. Parties are
   Fridays (Saturday party cut 10-06).
 - **Sunday:** her apartment (she sleeps in her bedroom).
 
-**Rows (3):**
-1. quad · weekday afternoons
+**Rows (4):**
+1. quad · Tuesday, Thursday and Friday afternoons (10-07)
 2. her apartment · evenings, Monday to Saturday
 3. her apartment · after midnight on Saturday (the end of Friday's party)
+4. canteen · weekday lunch (new, 10-07)
 
 **What changes her week:** from Zoe A step 4, Ella sets the dares.
 
@@ -191,14 +196,16 @@ one-time step there, so nobody has a weekly row at the party house.
 - **Sleeps:** offscreen.
 - **Most hours at:** the lecture hall (since the afternoon office row was cut, 10-06).
 
-- **Lecture days:** the lecture hall. The days and hours come with the college system.
-- **Thursday evening:** his office (from the idea page). His wife Claire, 38, picks him up at the
-  end of it.
+- **Psychology:** the lecture hall, first class on Monday, Wednesday and Friday, and the Thursday
+  afternoon class (`SYSTEMS.md` §1; 10-07). The hours come with the college card.
+- **Thursday evening:** his office, now on the faculty floor (LO, 2026-10-07). His wife Claire, 38,
+  picks him up at the end of it.
 - **Weekends:** off screen.
 
-**Rows (2):**
-1. lecture hall · his lecture days
-2. his office · Thursday evening
+**Rows (3):**
+1. lecture hall · first class, Monday, Wednesday and Friday (10-07)
+2. lecture hall · Thursday afternoon class (10-07)
+3. faculty floor, his office · Thursday evening (moved onto the faculty floor, 10-07)
 
 (His weekday-afternoon office row was cut 10-06: it carried no step.)
 
@@ -209,15 +216,47 @@ one-time step there, so nobody has a weekly row at the party house.
 - **Sleeps:** offscreen.
 - **Most hours at:** the library.
 
-- **Lecture days:** beside Ella in Hale's lectures.
-- **Weekday afternoons:** the library **(new)**.
+- **Psychology:** beside Ella in Hale's classes (10-07).
+- **Weekday lunch:** the canteen **(new, 10-07)**.
+- **Monday, Tuesday, Wednesday and Friday afternoons:** the library **(new)**; Thursday afternoon is
+  Psychology (10-07).
 - **Evenings and weekends:** off screen.
 
-**Rows (2):**
-1. lecture hall · Hale's lecture days
-2. library · weekday afternoons
+**Rows (4):**
+1. lecture hall · first class, Monday, Wednesday and Friday (10-07)
+2. lecture hall · Thursday afternoon class (10-07)
+3. library · Monday, Tuesday, Wednesday and Friday afternoons
+4. canteen · weekday lunch (new, 10-07)
 
 Her most-hours place may move to the lecture hall once the college system sets lecture hours.
+
+### College staff (LO, 2026-10-07) · met at their first class (the dean: at her first trouble)
+
+All four are light this release, and all are 18+ (ages proposed on `SYSTEMS.md`).
+They sleep offscreen; most hours: the faculty floor. Their class slots are the timetable on
+`SYSTEMS.md` §1, and office hours are the afternoons they don't teach. The hours come
+with the college card.
+
+- **The art lecturer** (Figure drawing), a woman.
+- **The Business lecturer**, "the strict man": he can't be bought; his office is an honest retake (`SYSTEMS.md` §1, LO 2026-10-07).
+- **The Biology TA**, a woman.
+- **The dean:** probation and complaints.
+
+**Rows (10):**
+1. art lecturer · lecture hall · first class, Tuesday and Thursday
+2. art lecturer · lecture hall · Wednesday afternoon class
+3. art lecturer · faculty floor, her office · Monday, Tuesday, Thursday and Friday afternoons
+4. Business lecturer · lecture hall · second class, Monday and Wednesday
+5. Business lecturer · lecture hall · Tuesday afternoon class
+6. Business lecturer · faculty floor, his office · Monday, Wednesday, Thursday and Friday afternoons
+7. Biology TA · lecture hall · second class, Tuesday and Thursday
+8. Biology TA · lecture hall · Monday afternoon class
+9. Biology TA · faculty floor, her office · Tuesday, Wednesday, Thursday and Friday afternoons
+10. dean · faculty floor, his office · weekday daytime
+
+**Inside the scenes, no rows:** the four classmates (the boner guy, the rival girl, the study guy, the
+cocky guy) and the figure-drawing model, a woman. They live in their class scenes and the canteen
+scene, like Claire and Kayla. Their seats are on `SYSTEMS.md`.
 
 ### Mr. Vance, 54 — owns the house, lives next door · met on the first evening walk past his porch · **release 1**
 
@@ -245,15 +284,21 @@ waits for later (`DIRECTION.md` §4).
 
 His arc is Jake B (`proposals/ARC_IDEAS.md`).
 
-- **Weekday mornings:** the quad **(new)**.
-- **Weekday afternoons:** team practice **(new)**, off screen.
+- **Figure drawing:** in her class, inside the class scenes, no row (10-07).
+- **Monday, Wednesday and Friday mornings:** the quad **(new)**. Ella is free there on Friday's second
+  morning slot (10-07).
+- **Weekday lunch:** the canteen **(new, 10-07)**.
+- **Monday, Tuesday, Thursday and Friday afternoons:** team practice **(new)**, off screen. Not on
+  Wednesday, his Figure drawing class (10-07).
 - **Friday evening:** Zoe's party, leaving by midnight.
-- **Saturday evening:** dates **(new)**, set up through the dating system. He brings her to the door
-  at night, and Laura is home by then.
+- **Saturday evening:** dates **(new)**: Jake's Saturday dates, booked on his phone thread (dating is
+  not a system, `SYSTEMS.md`, LO 2026-10-07). He brings her to the door at night, and
+  Laura is home by then.
 
-**Rows (2):**
-1. quad · weekday mornings
+**Rows (3):**
+1. quad · Monday, Wednesday and Friday mornings (10-07)
 2. Zoe's apartment · Friday evening
+3. canteen · weekday lunch (new, 10-07)
 
 ### The man from town
 
@@ -338,6 +383,8 @@ day loses the person at midnight, so it is split into two rows.
 - **Tom:** when she gets the café job.
 - **Jake:** Zoe's first party.
 - **Gary:** Tom B step 4.
+- **The three lecturers:** the first class of their subject, week 1 (10-07).
+- **The dean:** her first probation or complaint (10-07).
 
 **Each first meeting fires in a window where the person really is** (`the-first-hour.md:618-622`):
 - **Ryan A 1:** bathroom, weekday morning.
@@ -350,6 +397,7 @@ day loses the person at midnight, so it is split into two rows.
 - **Vance:** his porch, in the evening.
 - **Jake:** Zoe's apartment, Friday.
 - **Gary:** booth four.
+- **The lecturers:** their first class in the lecture hall (10-07).
 - **Claire (Hale B 4):** inside Hale's Thursday evening.
 - **Kayla (Ryan A 6):** inside Ryan's Saturday morning.
 
@@ -372,17 +420,21 @@ Ryan A 9 is the Kayla talk (fixed 10-06).
 
 ## 8. Rows: the full week and release 1
 
-**Full week: 30 rows** (10-06: Hale's afternoon office row cut; Laura's Saturday waiting-up row
-added; Mark's late row split in two).
+**Full week: 45 rows** (10-07: the college timetable; was 30 on 10-06, after Hale's afternoon office
+row was cut, Laura's Saturday waiting-up row added and Mark's late row split in two).
 - **The household (16):** Laura 5, Mark 7, Ryan 4.
-- **Outside (13):** Tom 1, Gary 2, Zoe 3, Hale 2, Nadia 2, Jake 2, Vance 1.
-- **Gated (1):** Ryan's gated Saturday row.
+- **Outside (18):** Tom 1, Gary 2, Zoe 4, Hale 3, Nadia 4, Jake 3, Vance 1.
+- **College staff (10):** the art lecturer 3, the Business lecturer 3, the Biology TA 3, the dean 1.
+- **Gated (1):** Ryan's gated Saturday row. (The gated Friday rows on §10 are not counted yet.)
 
 **Release 1:** page 7 decides.
 
 **Places this week uses:** the garage, Hale's office, Zoe's bedroom (new, for Zoe A 5), Zoe's party
 house (new, for Zoe A 3's hot tub) and the front door/porch. Ella's own party is at home, so it
 doesn't use the party house. All are in the ledger's `want.places` (10-06).
+**New with the college (10-07), not yet in the ledger:** the canteen, the college toilets (women's and
+men's), the faculty floor (Hale's office moves onto it, with the lecturers' and the dean's offices) and
+the clothes shop in town.
 
 ## 9. Borrowed facts about people
 
@@ -432,7 +484,15 @@ Nobody had decided these before this page. LO approved the week plan on 2026-10-
 - **Ryan:** Fridays stay Kayla's. Ryan A 14 needs a Friday Kayla isn't over: Ella asks him to skip her
   (a flag, like Ryan A 11's "Cancel Kayla"). That flag switches off the Kayla prose in his Friday-night
   scene and switches on a gated row, Zoe's apartment · that Friday evening, `when` the flag is set; the
-  overnight tick clears it, so the next Friday is Kayla's again (LO, 2026-10-06).
+  flag is read by hours since it was set, so it holds through that night only and the next Friday is Kayla's
+  again; the overnight tick never clears it (`SP1_time.md`, LO 2026-10-07).
 - **Laura:** after Laura C 15, she comes to Zoe's Fridays (a recorded change; a gated Friday row).
 - **Vance:** after Mark A 14, he watches Ella pass from his porch every evening (his existing row).
 - **Tom:** after Tom B 13, "after hours" runs every Friday after close (the café's Friday row).
+
+**From the college brainstorm (LO, 2026-10-07)**
+- Three classes a weekday, Friday one (`SYSTEMS.md` §1).
+- The three lecturers and the dean, with their class and office rows; Hale's office on the faculty floor.
+- Zoe, Nadia and Jake at the canteen at weekday lunch; Jake in Figure drawing, Zoe in Biology and
+  Figure drawing; Jake's practice off Wednesday.
+- Places: the canteen, the college toilets, the faculty floor, the clothes shop.

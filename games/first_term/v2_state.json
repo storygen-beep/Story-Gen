@@ -127,6 +127,51 @@
         "id": "npc_claire",
         "age": 38,
         "keeps": "none — inside Hale's scenes"
+      },
+      {
+        "id": "npc_art_lecturer",
+        "age": 45,
+        "keeps": "step counter + memory flags"
+      },
+      {
+        "id": "npc_business_lecturer",
+        "age": 50,
+        "keeps": "none — he can't be bought: an honest retake, no route"
+      },
+      {
+        "id": "npc_bio_ta",
+        "age": 28,
+        "keeps": "step counter + memory flags"
+      },
+      {
+        "id": "npc_dean",
+        "age": 55,
+        "keeps": "step counter + memory flags"
+      },
+      {
+        "id": "npc_desk_guy",
+        "age": 21,
+        "keeps": "none — inside the class scenes (a pool event)"
+      },
+      {
+        "id": "npc_rival",
+        "age": 21,
+        "keeps": "none — inside the class and canteen scenes"
+      },
+      {
+        "id": "npc_study_guy",
+        "age": 21,
+        "keeps": "none — inside the class scenes"
+      },
+      {
+        "id": "npc_cocky_guy",
+        "age": 21,
+        "keeps": "none — inside the class scenes"
+      },
+      {
+        "id": "npc_figure_model",
+        "age": 25,
+        "keeps": "none — inside the Figure drawing class"
       }
     ],
     "why_this_person": {
@@ -228,6 +273,42 @@
       {
         "id": "home_front_door",
         "name": "Front Door"
+      },
+      {
+        "id": "canteen",
+        "name": "Canteen"
+      },
+      {
+        "id": "college_womens_toilet",
+        "name": "Women's Toilet"
+      },
+      {
+        "id": "college_mens_toilet",
+        "name": "Men's Toilet"
+      },
+      {
+        "id": "faculty_floor",
+        "name": "Faculty Floor"
+      },
+      {
+        "id": "art_office",
+        "name": "Art Lecturer's Office"
+      },
+      {
+        "id": "business_office",
+        "name": "Business Lecturer's Office"
+      },
+      {
+        "id": "ta_office",
+        "name": "TA's Office"
+      },
+      {
+        "id": "dean_office",
+        "name": "Dean's Office"
+      },
+      {
+        "id": "clothes_shop",
+        "name": "Clothes Shop"
       }
     ],
     "threads": [
@@ -260,7 +341,7 @@
         "name": "Dating",
         "person": "npc_jake",
         "place": "campus",
-        "system": "dating",
+        "system": "none — Jake's Saturday dates, booked on his phone thread",
         "link": "Ryan sees"
       },
       {
@@ -300,7 +381,7 @@
       "sticks": "ryan_hall_seen + ryan_hall_tease|talked|knock; Ryan want/warmth",
       "remember": "You can look. You were going to anyway.",
       "door": "Ryan's ladder and Laura's watching",
-      "opens": "step 2: Ryan's door, after the first Sunday"
+      "opens": "step 3: his phone on the sink (Ryan A step 2 was cut 10-06; IDEA.md:105)"
     }
   },
   "spine": {
@@ -309,17 +390,17 @@
         "id": "SP1",
         "status": "READY",
         "drafted_at": "2026-10-03",
-        "updated_at": "2026-10-06",
+        "updated_at": "2026-10-07",
         "signed_by": "LO",
-        "signed_at": "2026-10-06"
+        "signed_at": "2026-10-07"
       },
       {
         "id": "SP2",
         "status": "READY",
         "drafted_at": "2026-10-04",
-        "updated_at": "2026-10-06",
+        "updated_at": "2026-10-07",
         "signed_by": "LO",
-        "signed_at": "2026-10-06"
+        "signed_at": "2026-10-07"
       }
     ]
   }

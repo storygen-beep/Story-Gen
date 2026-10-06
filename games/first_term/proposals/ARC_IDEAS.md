@@ -139,12 +139,12 @@ Both are LO's call.
 
 ### Laura C — The Catch (suspicion turns to complicity, she walks in) · **PICKED**
 **Pitch:** Laura is the one who walks in. Each catch (home late, with Ryan, with a guy, in her mother's dress) moves a little further from punishment, through keeping secrets, to wanting her. "Where were you?" becomes the way into Ella's bed.
-**The rule under every catch:** it fires on an act the player chooses, and a guidance card names it. Low Warmth means grounding, high Warmth means "tell me everything". Lying is labelled *"(she'll know)"* and costs Warmth.
+**The rule under every catch:** it fires on an act the player chooses, and a guidance card names it. Low Warmth means a curfew, high Warmth means "tell me everything". Lying is labelled *"(she'll know)"* and costs Warmth.
 
 | # | stage | place | new | moment | heat: sees/knows · risk · yes | kind · map |
 |---|---|---|---|---|---|---|
 | 1 R1 | C1/E1 | master bedroom, Tuesday evening | first | Ella in Laura's blue dress, tight across her chest; behind her in the mirror Laura smooths it over Ella's hips, slower than she needs to: *"It never fit me like that."* — *"Is that bad?"* — *"No."* (heat 10-06) | Laura · — · "Is that bad?" · +W own | 1 (clothes) · ok |
-| 2 R1 | C1/E2 | hall, coming home late | first | Catch 1: shoes in her hand, the dress hem hiked; Laura on the dark stairs in her robe. Low Warmth: grounded. High: *"Did anyone look at you in it?"* — *"Everyone."* (heat 10-06) | Laura catches her · grounded · "Everyone." · +R +Y own | 1 (caught) · ok |
+| 2 R1 | C1/E2 | hall, coming home late | first | Catch 1: shoes in her hand, the dress hem hiked; Laura on the dark stairs in her robe. Low Warmth: a curfew. High: *"Did anyone look at you in it?"* — *"Everyone."* (heat 10-06) | Laura catches her · a curfew · "Everyone." · +R +Y own | 1 (caught) · ok |
 | 3 R1 | C2/E2 | kitchen, late evening | info | Laura with wine, robe open at the collar: at 19 she snuck out in her own mother's dress. *"Mark hasn't looked at my body like that since the wedding."* — *"Like what?"* — *"Like you get looked at."* (heat 10-06) | she knows Laura's past · — · "Like what?" · +W own | — |
 | 4 R1 | C2/E2 | Ryan's door, then Ella's room | first | Catch 2: Laura opens Ryan's door on Ella's bare feet in his lap, his hand on her calf (reads Ryan A 5). In Ella's room Laura sits close, knee against hers: *"Mark doesn't need to hear about this."* — *"Then don't tell him."* (fixed 10-06, lead's default) (heat 10-06) | Laura sees her with Ryan · Mark finding out · "Then don't tell him." · +W +R own | 1/2 · ok |
 | 5 R1 | C3/E3 | the front door, Saturday night; Laura waiting up in the dark living room | first | Catch 3 (= Jake B 4; needs Jake B 1–3 first): Jake's hands under Laura's dress on Ella; Laura watches from the dark couch, her hand at her own throat. After: *"Was he any good?"* — *"Better in your dress."* Release 1's scope is page 7's call. (heat 10-06) | Laura watches; Jake · — · "Better in your dress." · +W +Y own | 2 · ok |
@@ -167,7 +167,7 @@ Both are LO's call.
 - Every step adds a column. Witnesses grow catch by catch: Laura, then Jake, then Ryan, then Ryan, then Ryan again.
 - The top pair (13–14) is Laura, with Mark through the wall and then Ryan in the hall. It pays the catch frame by turning it on the catcher.
 
-**Order:** follows the field's order. **Map:** ok. **Turn-offs:** none. Grounding at low Warmth is a punishment, not a forced act.
+**Order:** follows the field's order. **Map:** ok. **Turn-offs:** none. A curfew at low Warmth is a punishment, not a forced act.
 
 
 ---
@@ -424,7 +424,7 @@ This idea runs the map early on purpose: each near-catch is the escalation. LO d
 | 3 R1 | C1/E1 | kitchen, wine night | info | Mark's asleep by eleven after two beers; *"he hasn't touched me since spring."* | she knows Mark's habits and the marriage · — · — · +W own | — |
 | 4 R1 | C2/E2 | master bedroom, Saturday | first | Ella zips her up; Mark sleeps before the starter. *"Somebody should've seen me in this." "I saw you."* | Ella sees Laura · — · "I saw you" · +Y own | 2 · ok |
 | 5 R1 | C2/E2 | kitchen, wine night | info | Dana, her roommate at 19: one kiss on the dorm floor. *"I think about her body more than your father."* | she knows Laura's secret · — · — · +W own | — |
-| 6 R1 | C2/E2 | kitchen, 1 a.m. | first | High Warmth, so no grounding: *"Tell me everything. Did he touch your chest?"* | Laura knows about Ella's night · telling her mother · tells it out loud · +Y own | — |
+| 6 R1 | C2/E2 | kitchen, 1 a.m. | first | High Warmth, so no curfew: *"Tell me everything. Did he touch your chest?"* | Laura knows about Ella's night · telling her mother · tells it out loud · +Y own | — |
 | 7 R1 | C3/E3 | master bedroom | first | *"Show me how girls kiss now."* Bold choice: kiss her the way Dana did. Her no: *"I'm your mother."* (parked) | Laura · the taboo said aloud · Ella kisses her · +R +Y own | 4 (F/F) · ok |
 | 8 R1 | C3/E3 | breakfast, Mark at the table | talk | *"That was the wine."* New rule: *"Not while he's awake."* | Mark at the table, unknowing · Mark · a new rule · +W +R own | — |
 | 9 | C4/E3 | Ella's bed | first | *"I can't sleep next to him."* Her hand on Ella's tits; she doesn't take it back. | Mark asleep · being found · Laura doesn't take her hand back · +Y own | 4 · ok |

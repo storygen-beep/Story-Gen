@@ -1,6 +1,6 @@
 # SP2 · The ladders — First Term
 
-> [READY] · drafted 2026-10-04 · updated 2026-10-06 · signed by LO: LO, 2026-10-06
+> [READY] · drafted 2026-10-04 · updated 2026-10-07 · signed by LO: LO, 2026-10-07
 > A scaffold: what every later step stands on, so later releases add steps without breaking shipped
 > scenes, numbers or saves. No steps here — they live in `proposals/ARC_IDEAS.md` now and on each
 > person's sheet later. Rules: `the-arc.md` A1–A5b, A13–A14 · `the-meters.md` W1, W1b.
@@ -39,7 +39,8 @@
   - Bold · Showing: private sexual contact with someone she knows (hands, oral, sex); naked by choice
     for someone she knows; paid at the first price; a first D/s night with a check-in.
   - Hungry · Watched: sex with strangers able to see; a threesome with known people; sharing; prices
-    past the first; the taboo act at home.
+    past the first; the taboo act at home; naked or a flash for a group, known or not (posing for the
+    figure-drawing class; LO, 2026-10-07: the stage turns on how many see her).
   - Shameless · On Display: sex in front of a crowd; group or free use; her own plan built on sex.
 
 ## 2. How each arc rises
@@ -86,7 +87,7 @@ Arc: Ryan A · Two Knocks in proposals/ARC_IDEAS.md
   Laura's dress (Want) · confiding (Warmth) · Lowered by: lying when caught, labelled "(she'll know)";
   suspicion rises (Warmth).
 - As it rises: looks too long → keeps Ella's secrets → kisses her on the dark stairs → takes the man's
-  place in Ryan's room. Warmth colours each catch: low, she grounds her; high, "Tell me everything."
+  place in Ryan's room. Warmth colours each catch: low, a curfew; high, "Tell me everything."
 - Who starts: she walks in, then waits.
 - Their no: "I'm your mother" (parked) · Her final no: "You're my mom. That's all you get to be. (ends
   her path)" — closes her steps; every catch after is a strict-mom punishment.
@@ -163,7 +164,7 @@ Arc: Hale B · The Photo on His Desk in proposals/ARC_IDEAS.md
   his path)", offered only at his last step (the talk), so Laura C 5 and Zoe A 5 always have him —
   closes his steps, the Saturday dates and the door.
 - Ends as: the door — the guy the house knows, or her Saturday cover.
-- After: Saturday dates through the dating system; Laura at the Sunday table: "Is Jake coming
+- After: Jake's Saturday dates, booked on his phone thread (dating is not a system, LO 2026-10-07); Laura at the Sunday table: "Is Jake coming
   Saturday?"; on campus she's "Jake's girl".
 
 Arc: Jake B · The Door in proposals/ARC_IDEAS.md

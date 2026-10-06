@@ -41,7 +41,7 @@ The running situations, the twist, the threads and the phases are on `DIRECTION.
   invited by Laura or Mark, who don't know what he is to Ella, and the whole family sits at the
   table with him. **Next:** to be named.
 - **The mystery:** none declared.
-- **The rival:** none declared.
+- **The rival:** the rival girl (`npc_rival`, 21), a classmate who can report her to the dean (`SYSTEMS.md` §1, LO 2026-10-07).
 
 ## 3. The people who carry it
 
