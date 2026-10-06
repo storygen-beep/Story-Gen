@@ -1,0 +1,326 @@
+{
+  "slug": "first_term",
+  "phase": "idea",
+  "protagonist": "Ella",
+  "want": {
+    "fantasy_shape": "taboo_at_home",
+    "model_to_beat": {
+      "game": "In Her Own Hands",
+      "better": "the house reacts: Mark, Laura and Ryan notice, talk, and treat her differently because of her life outside"
+    },
+    "promise": {
+      "goal": "pay her own way: earn enough of her own money that Sunday rent is paid her way, not Mark's",
+      "goals": [
+        {
+          "goal": "pay her own way: earn enough of her own money that Sunday rent is paid her way, not Mark's",
+          "ends_when": "rent never stops; it ends the day Ella, not Mark, sets how it is paid: the money route (she pays in full from her own money for several Sundays in a row, whether or not Mark's path is closed; how many is set on the board) or the body route (Mark A up to step 9, the scene where she takes his chair)",
+          "ends_flag": "pays_her_own_way",
+          "next": "her name on campus"
+        },
+        {
+          "goal": "her name on campus",
+          "ends_when": "her campus_talk level opens the party everyone goes to; Ella hosts it, and that party scene sets the flag",
+          "ends_flag": "hosts_the_party",
+          "next": "beyond campus"
+        },
+        {
+          "goal": "beyond campus: her name spreads into the town and new people arrive",
+          "ends_when": "Sunday dinner: a man she met in town, a café regular or a neighbour (18+, written later), is invited by Laura or Mark, who don't know what he is to Ella, and the family sits at the table with him",
+          "ends_flag": "town_at_the_table",
+          "next": "to be named"
+        }
+      ]
+    },
+    "companion": "npc_zoe",
+    "pressure": "npc_mark",
+    "player": {
+      "who": "female",
+      "definition": "written",
+      "start_choice": {
+        "asked_at": "opening (canvas to be named)",
+        "flags": [
+          "start_wants_grades",
+          "start_wants_fun",
+          "start_wants_freedom"
+        ]
+      },
+      "customization": [
+        {
+          "id": "name",
+          "type": "text",
+          "default": "Ella",
+          "token": "@player"
+        },
+        {
+          "id": "nickname",
+          "type": "text",
+          "label": "What Ryan calls you",
+          "default": "El",
+          "token": "@player.nickname"
+        }
+      ]
+    },
+    "who_she_is": "Ella, 18, first day of college, still living at home in a rented house with her mom, step-father and step-brother; no job, no money of her own, no lock on her door",
+    "obligation": "her cut of the house rent: $75 every Sunday, counted out to Mark on the kitchen table; the house is rented from Mr. Vance next door for $1,200 a month",
+    "hold_kind": "bill",
+    "hold_collector": "npc_mark",
+    "appetite": "to be wanted by the people she shouldn't want",
+    "ascent": "from flirting for tips and near-misses at home to Ryan in her room with her mom downstairs, Laura closer than she should be, rent paid her own way, regulars paying for more, the professor's office and Vance's porch",
+    "charge": "taboo + transformation",
+    "cast": [
+      {
+        "id": "npc_ryan",
+        "age": 22,
+        "keeps": "want + warmth"
+      },
+      {
+        "id": "npc_mark",
+        "age": 46,
+        "keeps": "want + power"
+      },
+      {
+        "id": "npc_laura",
+        "age": 41,
+        "keeps": "want + warmth"
+      },
+      {
+        "id": "npc_zoe",
+        "age": 19,
+        "keeps": "step counter + memory flags"
+      },
+      {
+        "id": "npc_tom",
+        "age": 31,
+        "keeps": "want + power"
+      },
+      {
+        "id": "npc_hale",
+        "age": 39,
+        "keeps": "step counter + memory flags"
+      },
+      {
+        "id": "npc_vance",
+        "age": 54,
+        "keeps": "want + power"
+      },
+      {
+        "id": "npc_jake",
+        "age": 20,
+        "keeps": "step counter + memory flags"
+      },
+      {
+        "id": "npc_nadia",
+        "age": 20,
+        "keeps": "step counter + memory flags"
+      },
+      {
+        "id": "npc_kayla",
+        "age": 21,
+        "keeps": "none — inside Ryan's scenes"
+      },
+      {
+        "id": "npc_gary",
+        "age": 52,
+        "keeps": "none — inside Tom's scenes"
+      },
+      {
+        "id": "npc_claire",
+        "age": 38,
+        "keeps": "none — inside Hale's scenes"
+      }
+    ],
+    "why_this_person": {
+      "npc_ryan": "the one person at home on her side, and he wants her",
+      "npc_mark": "his approval, and to be off the hook for the rent",
+      "npc_laura": "to stay her good girl, and to be close to her",
+      "npc_zoe": "someone to follow into fun",
+      "npc_tom": "shifts and good tips",
+      "npc_hale": "a passing grade",
+      "npc_vance": "for the rent to come in, every month",
+      "npc_jake": "a normal boyfriend",
+      "npc_nadia": "the classmate who knows Hale's history and saves her a seat"
+    },
+    "places": [
+      {
+        "id": "home_hall",
+        "name": "Hall"
+      },
+      {
+        "id": "home_kitchen",
+        "name": "Kitchen"
+      },
+      {
+        "id": "home_living_room",
+        "name": "Living Room"
+      },
+      {
+        "id": "home_master_bedroom",
+        "name": "Master Bedroom"
+      },
+      {
+        "id": "home_ella_room",
+        "name": "Your Room"
+      },
+      {
+        "id": "home_ryan_room",
+        "name": "Ryan's Room"
+      },
+      {
+        "id": "home_bathroom",
+        "name": "Bathroom"
+      },
+      {
+        "id": "street",
+        "name": "Your Street"
+      },
+      {
+        "id": "vance_house",
+        "name": "Vance's House"
+      },
+      {
+        "id": "corner_shop",
+        "name": "Corner Shop"
+      },
+      {
+        "id": "park",
+        "name": "Park"
+      },
+      {
+        "id": "campus",
+        "name": "Campus"
+      },
+      {
+        "id": "lecture_hall",
+        "name": "Lecture Hall"
+      },
+      {
+        "id": "library",
+        "name": "Library"
+      },
+      {
+        "id": "quad",
+        "name": "Quad"
+      },
+      {
+        "id": "cafe",
+        "name": "Café"
+      },
+      {
+        "id": "zoe_apartment",
+        "name": "Zoe's Apartment"
+      },
+      {
+        "id": "home_garage",
+        "name": "Garage"
+      },
+      {
+        "id": "hale_office",
+        "name": "Dr. Hale's Office"
+      },
+      {
+        "id": "zoe_bedroom",
+        "name": "Zoe's Bedroom"
+      },
+      {
+        "id": "party_house",
+        "name": "The Party House"
+      },
+      {
+        "id": "home_front_door",
+        "name": "Front Door"
+      }
+    ],
+    "threads": [
+      {
+        "id": "college",
+        "name": "College",
+        "person": "npc_hale",
+        "place": "campus",
+        "system": "college",
+        "link": "her grades go home to Laura"
+      },
+      {
+        "id": "job",
+        "name": "The café",
+        "person": "npc_tom",
+        "place": "cafe",
+        "system": "job",
+        "link": "it pays her cut of the rent"
+      },
+      {
+        "id": "friends",
+        "name": "Friends and parties",
+        "person": "npc_zoe",
+        "place": "zoe_apartment",
+        "system": "parties",
+        "link": "what she brings home late"
+      },
+      {
+        "id": "dating",
+        "name": "Dating",
+        "person": "npc_jake",
+        "place": "campus",
+        "system": "dating",
+        "link": "Ryan sees"
+      },
+      {
+        "id": "neighbourhood",
+        "name": "The neighbourhood",
+        "person": "npc_vance",
+        "place": "vance_house",
+        "system": "money pressure",
+        "link": "her $75 is part of what Mark owes him"
+      }
+    ],
+    "moment_kinds": [
+      "being_seen",
+      "taboo_at_home",
+      "consequence"
+    ]
+  },
+  "release_page": {
+    "her_moment": {
+      "person": "npc_ryan",
+      "step_n": 1,
+      "pays": "nothing — step 1",
+      "fantasy": "the one person in the house on her side is the one she shouldn't want, and on her first day of college she learns he looks",
+      "temptation": "first morning, one shared bathroom; she steps out in a towel, Ryan waiting in the hall: 'First day of college, huh. Look at you.'",
+      "answers": [
+        "Knock next time (parked)",
+        "push past",
+        "stop and talk",
+        "'Seen enough?' and let him look",
+        "'Don't ever look at me like that.' (ends his path)"
+      ],
+      "voice": {
+        "low": "Ryan — god — I'm in a towel, turn around.",
+        "high": "You can look. You were going to anyway."
+      },
+      "noticed": "Laura calls up the stairs, looks at both at breakfast, rules Ryan showers first",
+      "sticks": "ryan_hall_seen + ryan_hall_tease|talked|knock; Ryan want/warmth",
+      "remember": "You can look. You were going to anyway.",
+      "door": "Ryan's ladder and Laura's watching",
+      "opens": "step 2: Ryan's door, after the first Sunday"
+    }
+  },
+  "spine": {
+    "pages": [
+      {
+        "id": "SP1",
+        "status": "READY",
+        "drafted_at": "2026-10-03",
+        "updated_at": "2026-10-06",
+        "signed_by": "LO",
+        "signed_at": "2026-10-06"
+      },
+      {
+        "id": "SP2",
+        "status": "READY",
+        "drafted_at": "2026-10-04",
+        "updated_at": "2026-10-06",
+        "signed_by": "LO",
+        "signed_at": "2026-10-06"
+      }
+    ]
+  }
+}

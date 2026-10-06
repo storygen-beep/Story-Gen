@@ -1,0 +1,438 @@
+# Their lives — First Term
+
+> A game-only page (layer 3), decided by LO in chat on 2026-10-05. The skill has no page for this.
+> It says each person's ordinary week: where they are, by day and part of the day, and what changes it.
+> Steps pick their windows from here instead of inventing them. No steps, no exact hours, no money
+> numbers: lecture and café hours come with their systems, and the board turns each row into hours.
+> Rules followed: `the-sheets.md` S5 · `the-clock.md` C2, C5 · `the-surfaces.md:83`, `:160` ·
+> `the-board.md:124-128`, `:152-170` · `the-map.md` R2, R6c · `the-first-hour.md:618-622`.
+> Everything nobody had decided before this page is marked **(new)** and listed again at the end.
+
+**How to read it.**
+- The day has four parts: morning, afternoon, evening, night.
+- A **row** is one person at one place in one window. Every row is a hub the game must write
+  (`the-surfaces.md:83`).
+- A week changes only through something the game records: a flag, a phase or a step. It never
+  changes by itself.
+- **release 1** on a person marks a candidate for release 1, by when Ella meets them. Release 1's
+  scope: page 7 decides.
+
+---
+
+## 1. Ella's fixed points
+
+These are not her choices; everything else in her day is.
+
+- **Weekday mornings:** the bathroom after Ryan, then lectures. Lecture hours come with the college
+  system.
+- **Sunday morning:** rent at the kitchen table.
+
+## 2. The family
+
+### Laura, 41 — her mom · met day 1 · **release 1**
+
+- **Sleeps:** the master bedroom, shared with Mark (a couple, declared in `board.map.shared_homes`).
+- **Most hours at:** the master bedroom.
+
+**Her week:** she works the front desk at a dental clinic **(new)**. A day job keeps her home every
+evening and every night, which is what her watching needs.
+
+- **Weekday mornings:** breakfast in the kitchen, then out to work.
+- **Weekday afternoons:** at work, off screen.
+- **Evenings:** home in the kitchen, except **Wednesday, when the clinic keeps her late (new)**.
+  She is back by night.
+- **Weekend days:** out, off screen. Saturday is errands and **Sunday morning is the week's
+  shopping (new)**.
+- **Saturday early evening:** dressing in the master bedroom, then **out with Mark (new)** until night.
+- **Late Saturday night:** back home, waiting up in the dark living room **(new; fixed 10-06, lead's
+  default)**. Mark goes up to bed. This is the window for Laura C 5 / Jake B 4; it ends at midnight.
+- **Every night:** the master bedroom.
+
+**Rows (5):**
+1. kitchen · weekday early mornings
+2. kitchen · evenings on Monday, Tuesday, Thursday, Friday and Sunday, running into late evening
+3. master bedroom · every night
+4. master bedroom · Saturday early evening
+5. living room · late Saturday night, up to midnight, waiting up (fixed 10-06, lead's default)
+
+**What changes her week:**
+- her own ask (Laura C step 6) takes her to Zoe's party one night. The step starts at home and
+  they leave together, so it needs no row.
+- **a weekend away at her sister's (new)**, a recorded event possible from phase 3. Her rows carry
+  a `when` that skips them while the flag is set. The sister is never on screen.
+- **a night both she and Mark are away (new)**, a recorded event possible from phase 4. Her rows and
+  Mark's carry a `when` that skips them while its flag is set. It is the empty house Ella hosts the
+  party in (Zoe A 6).
+
+### Mark, 46 — step-father · met day 1 · **release 1**
+
+- **Sleeps:** the master bedroom, shared with Laura (a couple, declared in `board.map.shared_homes`).
+- **Most hours at:** the master bedroom.
+
+**His week:** he works days at a warehouse **(new)**.
+
+- **Weekday mornings and afternoons:** at work, off screen.
+- **Evenings:** in the garage **(new)**, except **Wednesday, when he cooks in the kitchen (new)**
+  because Laura is late.
+- **Late at night, every night except Saturday:** downstairs in the living room **(new)** after Laura
+  is asleep. On Saturday he comes home with Laura and goes to bed (fixed 10-06, lead's default).
+- **Saturday:** the garage by day, out with Laura in the evening.
+- **Sunday:** the kitchen all day: rent in the morning, the family table in the evening.
+- **Night:** the master bedroom.
+
+Where he sleeps and where he spends most hours are both the master bedroom he shares with Laura,
+because his night row is his longest. The gates count most hours for heat, and a home is a
+bedroom (`the-map.md` R2, gate 12). LO accepted this, 2026-10-05.
+
+**Rows (7):**
+1. master bedroom · every night
+2. living room · late night up to midnight, Sunday to Friday (fixed 10-06, lead's default)
+3. living room · after midnight, Monday to Saturday: the rest of the same nights (fixed 10-06, lead's
+   default; split because the row no longer covers every weekday, see §5)
+4. garage · evenings on Monday, Tuesday, Thursday and Friday
+5. kitchen · Wednesday evening
+6. garage · Saturday daytime
+7. kitchen · all of Sunday
+
+**What changes his week:** the debt flags (Vance at the door), the twist after goal 1
+(`DIRECTION.md` §2), and **the night he and Laura are both away (new)**, from phase 4 (see Laura's
+block). During Laura's weekend away at her sister's he stays home.
+
+### Ryan, 22 — step-brother · met day 1 · **release 1**
+
+- **Sleeps:** his room.
+- **Most hours at:** his room.
+
+**His week:** he works weekdays at a building-supply yard **(new)**. His wages are how he covers
+her short Sundays.
+
+- **Weekday mornings:** he showers first (Laura's rule from day 1), then goes to work.
+- **Weekday afternoons:** at work, off screen.
+- **Evenings:** his room, except:
+  - **Wednesday:** his basketball league (new);
+  - **Saturday:** at Kayla's (new), back late at night.
+- **Friday evening and night:** Kayla, 21, stays over. She sneaks in past Laura and Mark, who don't
+  know about her **(new, LO 2026-10-06; Ryan A step 3)**.
+- **Weekend days:** his room.
+- **Every night:** his room.
+
+**Rows (4, plus one gated):**
+1. bathroom · weekday mornings
+2. his room · evenings on Monday, Tuesday, Thursday, Friday and Sunday
+3. his room · weekend daytime
+4. his room · every night
+5. *(gated, later than release 1)* his room · Saturday evening, `when` he has cancelled Kayla for
+   her (Ryan A step 11). Ryan A step 12 needs him home that evening.
+
+**What changes his week:** Ella's ask in Ryan A step 11 keeps him home on a Saturday evening.
+
+**The party night (LO, 2026-10-06):** Ryan is home on the night Mark and Laura are both away, when
+Ella hosts the party (Zoe A 6). His usual rows hold that night. If it falls on a Saturday, he skips
+Kayla's.
+
+**Kayla** stays inside Ryan's scenes and is not her own person yet (no row, no hub).
+
+## 3. Outside the house
+
+### Tom, 31 — café manager · met when she gets the job · **release 1**
+
+- **Sleeps:** offscreen.
+- **Most hours at:** the café.
+
+- He is at the café whenever it is open, and he closes. He is **off on Sundays (new)**.
+- The café's busy evening is **Friday (new)**, the close he asks her to stay for (Tom B step 8).
+  (Busy Tuesday cut 10-06.)
+- The café's hours come with its system card.
+
+**Rows (1):** café · Monday to Saturday, opening hours.
+
+**What changes his week:** her final no ("No more late shifts with you") puts her on mornings only.
+
+### Gary, 52 — café regular · met at Tom B step 4 · **release 1**
+
+- **Sleeps:** offscreen.
+- **Most hours at:** the café.
+
+- **Booth four (new):** most weekday afternoons, and Friday close.
+
+**Rows (2):**
+1. café, booth four · weekday afternoons
+2. café · Friday close (split at midnight if the café's system closes later)
+
+### Zoe, 19 — her college friend · met on campus in week 1 · **release 1**
+
+- **Sleeps:** her bedroom at her apartment **(new, LO 2026-10-06)**: the apartment gets a bedroom off
+  the main room, so the parties have a door to leave open.
+- **Most hours at:** her apartment.
+
+- **Weekday mornings:** lectures, off screen.
+- **Weekday afternoons:** the quad.
+- **Evenings:** her apartment.
+- **Friday night:** **the party is at her apartment (new)** and runs past midnight. Parties are
+  Fridays (Saturday party cut 10-06).
+- **Sunday:** her apartment (she sleeps in her bedroom).
+
+**Rows (3):**
+1. quad · weekday afternoons
+2. her apartment · evenings, Monday to Saturday
+3. her apartment · after midnight on Saturday (the end of Friday's party)
+
+**What changes her week:** from Zoe A step 4, Ella sets the dares.
+
+**Zoe A 5 (and Jake B 5)** happens in Zoe's bedroom on a Friday party night, before Jake leaves at
+midnight, with the door open onto the party **(new, LO 2026-10-06)**.
+
+**The party house (new, LO 2026-10-06):** an off-campus house with a hot tub, where Zoe's friends
+party. It is a new place, used for Zoe A 3 (topless in the hot tub, Zoe's friends only). It is a
+one-time step there, so nobody has a weekly row at the party house.
+
+### Dr. Hale, 39 — professor · met at her first lecture, day 1 · **release 1**
+
+- **Sleeps:** offscreen.
+- **Most hours at:** the lecture hall (since the afternoon office row was cut, 10-06).
+
+- **Lecture days:** the lecture hall. The days and hours come with the college system.
+- **Thursday evening:** his office (from the idea page). His wife Claire, 38, picks him up at the
+  end of it.
+- **Weekends:** off screen.
+
+**Rows (2):**
+1. lecture hall · his lecture days
+2. his office · Thursday evening
+
+(His weekday-afternoon office row was cut 10-06: it carried no step.)
+
+**Claire** stays inside Hale's Thursday scenes and is not her own person yet.
+
+### Nadia, 20 — second-year student · met at the first lecture, day 1 · **release 1**
+
+- **Sleeps:** offscreen.
+- **Most hours at:** the library.
+
+- **Lecture days:** beside Ella in Hale's lectures.
+- **Weekday afternoons:** the library **(new)**.
+- **Evenings and weekends:** off screen.
+
+**Rows (2):**
+1. lecture hall · Hale's lecture days
+2. library · weekday afternoons
+
+Her most-hours place may move to the lecture hall once the college system sets lecture hours.
+
+### Mr. Vance, 54 — owns the house, lives next door · met on the first evening walk past his porch · **release 1**
+
+- **Sleeps:** offscreen. His house is one place in the game, with no bedroom in it.
+- **Most hours at:** his house (the porch).
+
+- He owns this house and **a few others on the street (new)**.
+- **Daytime:** out with his houses, off screen.
+- **Evenings:** on his porch **(new)**, every day. That is where Ella passes him walking home.
+- **Night:** home, off screen.
+
+**Rows (1):** his porch · every evening.
+
+**What changes his week:**
+- a short Sunday sets a flag, and **he knocks the next evening (new)**;
+- the twist (she helps) moves him to dealing with Ella herself.
+
+His porch look is in release 1 (LO, 2026-10-06). The rest of the neighbourhood thread still mostly
+waits for later (`DIRECTION.md` §4).
+
+### Jake, 20 — campus guy · met at Zoe's first party · **release 1**
+
+- **Sleeps:** offscreen.
+- **Most hours at:** the quad.
+
+His arc is Jake B (`proposals/ARC_IDEAS.md`).
+
+- **Weekday mornings:** the quad **(new)**.
+- **Weekday afternoons:** team practice **(new)**, off screen.
+- **Friday evening:** Zoe's party, leaving by midnight.
+- **Saturday evening:** dates **(new)**, set up through the dating system. He brings her to the door
+  at night, and Laura is home by then.
+
+**Rows (2):**
+1. quad · weekday mornings
+2. Zoe's apartment · Friday evening
+
+### The man from town
+
+There is no schedule until goal 3 is written.
+
+## 4. The house view
+
+**Ella alone with someone:**
+- **with Mark:** Wednesday evening (Laura is late, Ryan is at his league), and late at night
+  downstairs, every night except Saturday.
+- **with Ryan:**
+  - Saturday daytime, with Mark in the garage;
+  - Saturday evening once he cancels Kayla;
+  - late at night.
+- **with Laura:** Saturday early evening while she dresses, and late-night catches on the stairs.
+
+**The whole house:**
+- **Empty except Ella:** weekday afternoons, if she comes home, and Saturday evening.
+- **Mark and Laura both out:** weekday daytimes, and Saturday evening until night.
+- **Both home (the risk of being walked in on):** evenings on Monday, Tuesday, Thursday and Friday,
+  every night, and Sunday.
+- **Sunday:** rent in the morning with Mark at the table, Ryan in the doorway and Laura out
+  shopping. Dinner in the evening with all four (goal 3's table).
+
+**Shared rooms: who is inside** (`the-map.md` R6c). This is a row inside the room, not a door.
+- **Bathroom:** Ryan on weekday mornings. Kayla on Saturday mornings is prose inside Ryan's
+  Friday-night/Saturday scene, not a row.
+- **Kitchen:** Laura at breakfast and most evenings; Mark on Wednesday evening and all of Sunday.
+- **Living room:** Mark late at night, except Saturday; Laura waiting up late on Saturday night.
+- **Hall and stairs:** Laura's catches. These fire when Ella comes home late, and also when she
+  leaves Ryan's room late (fixed 10-06, lead's default: Ryan A 13's "Laura downstairs"), not from
+  Laura's rows.
+
+**Their rooms while they are out** (content: going through their things):
+- **Ryan's room:** weekday daytimes, Wednesday evening, Saturday evening.
+- **Master bedroom:** weekday daytimes, weekend daytime, Saturday evening. Laura's wardrobe and
+  lingerie are here.
+- **Garage:** weekday daytimes, Saturday evening, and Sunday.
+- **The kitchen drawer** (Vance's letter): any night.
+
+**Two places at once:** none in the cast. Ella's Friday evening (the café close, Zoe's party, or
+Kayla through the wall) and Saturday evening (a date or the empty house) are her choices, not
+clashes.
+
+## 5. Past midnight
+
+`the-board.md:154`: an overnight row works only on a row that covers every weekday. A row for one
+day loses the person at midnight, so it is split into two rows.
+
+- **Ryan's nights:** one row, every day. It crosses midnight safely. His late Saturday return lands
+  in this same row.
+- **Mark's late nights in the living room:** no longer every day (not Saturday), so the row is split
+  in two: late night up to midnight, Sunday to Friday, and after midnight, Monday to Saturday (the
+  rest of the same nights). Mark A step 5, "living room, midnight", sits in them (fixed 10-06).
+- **Laura waiting up on Saturday:** one Saturday row that ends at midnight, so it never wraps.
+- **Mark's and Laura's nights:** one row each, every day. Laura's weekend away is a `when` on her
+  rows, not a change of days.
+- **Friday with Kayla:** she has no row, so the problem moves into Ryan's Friday-night scene. A
+  scene condition can read the weekday (`engine.md` §52), and after midnight the weekday is
+  Saturday. Ryan's Friday-night content is written twice: a "Friday" branch up to midnight and a
+  "Saturday, early hours" branch after. If Kayla ever becomes her own person, her rows split the
+  same way: Friday evening to midnight, then Saturday after midnight.
+- **Saturday out:** Mark and Laura have no row while they are out. They come back into their
+  every-day night rows. Ryan's Saturday at Kayla's works the same way.
+- **Zoe's Friday party:** the evening row ends at midnight. The after-midnight row covers Saturday
+  from midnight to the party's end. That is the second entry `SP1_time.md` asks for.
+- **Jake** leaves Zoe's party by midnight, so he needs no second row.
+- **Gary's Friday close:** split the same way if the café system sets a close after midnight.
+
+## 6. Who is hidden until met
+
+- **Known from day 1:** Laura, Mark and Ryan.
+- **Hidden until the meeting:** everyone else. Each of their rows carries a `when` on their met
+  flag. The engine leaves a person with no live row off the Schedules page
+  (`v2.py:4429-4433`; comment at `:22364-22366`). `the-first-hour.md:831`'s older text, which
+  says the page shows everyone regardless of gates, no longer matches the engine.
+
+**When each one is met:**
+- **Hale and Nadia:** the first lecture, day 1.
+- **Vance:** the first evening walk past his porch.
+- **Zoe:** on campus in week 1.
+- **Tom:** when she gets the café job.
+- **Jake:** Zoe's first party.
+- **Gary:** Tom B step 4.
+
+**Each first meeting fires in a window where the person really is** (`the-first-hour.md:618-622`):
+- **Ryan A 1:** bathroom, weekday morning.
+- **Laura:** day 1 breakfast, kitchen. Laura C 1 (the dress, day 2) starts from her Tuesday
+  kitchen evening and moves upstairs.
+- **Mark A 1:** kitchen, Sunday.
+- **Tom B 1:** the café.
+- **Zoe:** the quad. Zoe A 1 is at her apartment on Friday.
+- **Hale B 1 and Nadia:** the lecture hall.
+- **Vance:** his porch, in the evening.
+- **Jake:** Zoe's apartment, Friday.
+- **Gary:** booth four.
+- **Claire (Hale B 4):** inside Hale's Thursday evening.
+- **Kayla (Ryan A 6):** inside Ryan's Saturday morning.
+
+## 7. What the picked arcs need from the week
+
+The seven picked arcs find their windows here, except:
+
+1. **Mark A 13 (Laura's weekend at her sister's):** needs Laura's weekend away, the recorded event above.
+2. **Zoe A 6 (Ella hosts the party): at home (LO, 2026-10-06).** The house has to be empty
+   overnight, with both Mark and Laura away. Laura's weekend away is not enough, because Mark stays
+   home (Mark A 13 needs him there). So the party uses the second recorded event: **a night both
+   Mark and Laura are away (new)**, possible from phase 4 (see Laura's block). Ryan is home that
+   night (LO, 2026-10-06). Zoe's weekly parties stay at her apartment.
+3. **Mark A 8–9:** Laura's late evening is Wednesday, not Thursday. Thursday evening is Hale's.
+   The steps say Wednesday (fixed 10-06).
+4. **Ryan A 11:** "at Vance's Saturday" becomes "out Saturday". Step 12 reads the gated Saturday
+   row in Ryan's block.
+
+Ryan A 9 is the Kayla talk (fixed 10-06).
+
+## 8. Rows: the full week and release 1
+
+**Full week: 30 rows** (10-06: Hale's afternoon office row cut; Laura's Saturday waiting-up row
+added; Mark's late row split in two).
+- **The household (16):** Laura 5, Mark 7, Ryan 4.
+- **Outside (13):** Tom 1, Gary 2, Zoe 3, Hale 2, Nadia 2, Jake 2, Vance 1.
+- **Gated (1):** Ryan's gated Saturday row.
+
+**Release 1:** page 7 decides.
+
+**Places this week uses:** the garage, Hale's office, Zoe's bedroom (new, for Zoe A 5), Zoe's party
+house (new, for Zoe A 3's hot tub) and the front door/porch. Ella's own party is at home, so it
+doesn't use the party house. All are in the ledger's `want.places` (10-06).
+
+## 9. Borrowed facts about people
+
+The one list is `DIRECTION.md` §6 (10-06).
+
+## 10. Everything new on this page
+
+Nobody had decided these before this page. LO approved the week plan on 2026-10-05.
+
+**Laura**
+- the clinic front-desk job
+- late on Wednesday evenings
+- out on weekend days: errands, and Sunday-morning shopping
+- out with Mark on Saturday evenings
+- her sister, and the weekend away
+- a night she and Mark are both away, from phase 4 (Ella hosts the party at home; Ryan is home)
+- waiting up in the dark living room late on Saturday night (lead's default, 10-06)
+
+**Mark**
+- the warehouse job
+- evenings in the garage
+- cooking on Wednesday evenings
+- late nights in the living room, every night except Saturday
+- a night he and Laura are both away, from phase 4
+
+**Ryan**
+- the supply-yard job
+- the Wednesday basketball league
+- Saturday evenings at Kayla's
+- Kayla sneaks in on Fridays; Laura and Mark don't know about her
+
+**Outside the house**
+- **Tom:** off on Sundays; the café's busy evening is Friday.
+- **Gary:** booth four on weekday afternoons and at Friday close.
+- **Zoe:** the Friday party at her apartment; the quad in the afternoons; the party house with
+  the hot tub (Zoe A 3); a bedroom at her apartment, where she sleeps and where Zoe A 5 happens.
+- **Nadia:** the library in the afternoons.
+- **Vance:**
+  - owns a few houses on the street;
+  - on his porch every evening;
+  - knocks the evening after a short Sunday.
+- **Jake:** the quad in the mornings, team practice, Saturday dates.
+
+**From the heat pass (2026-10-06)**
+- **Zoe's apartment:** a balcony off the main room (Zoe A 2, Laura C 15).
+- **Claire:** comes early every Thursday after Hale B 6 (a rule).
+- **Ryan:** Fridays stay Kayla's. Ryan A 14 needs a Friday Kayla isn't over: Ella asks him to skip her
+  (a flag, like Ryan A 11's "Cancel Kayla"). That flag switches off the Kayla prose in his Friday-night
+  scene and switches on a gated row, Zoe's apartment · that Friday evening, `when` the flag is set; the
+  overnight tick clears it, so the next Friday is Kayla's again (LO, 2026-10-06).
+- **Laura:** after Laura C 15, she comes to Zoe's Fridays (a recorded change; a gated Friday row).
+- **Vance:** after Mark A 14, he watches Ella pass from his porch every evening (his existing row).
+- **Tom:** after Tom B 13, "after hours" runs every Friday after close (the café's Friday row).
