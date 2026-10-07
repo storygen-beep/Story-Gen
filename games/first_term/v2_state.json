@@ -1,6 +1,6 @@
 {
   "slug": "first_term",
-  "phase": "idea",
+  "phase": "spine",
   "protagonist": "Ella",
   "want": {
     "fantasy_shape": "taboo_at_home",
@@ -382,7 +382,57 @@
       "remember": "You can look. You were going to anyway.",
       "door": "Ryan's ladder and Laura's watching",
       "opens": "step 3: his phone on the sink (Ryan A step 2 was cut 10-06; IDEA.md:105)"
-    }
+    },
+    "version": "0.1",
+    "steps": {
+      "npc_ryan": 9,
+      "npc_laura": 8,
+      "npc_mark": 9,
+      "npc_zoe": 4,
+      "npc_hale": 5,
+      "npc_jake": 4,
+      "npc_tom": 7
+    },
+    "places": [
+      "home_hall",
+      "home_kitchen",
+      "home_living_room",
+      "home_master_bedroom",
+      "home_ella_room",
+      "home_ryan_room",
+      "home_bathroom",
+      "street",
+      "vance_house",
+      "park",
+      "campus",
+      "lecture_hall",
+      "library",
+      "quad",
+      "cafe",
+      "zoe_apartment",
+      "home_garage",
+      "hale_office",
+      "zoe_bedroom",
+      "party_house",
+      "home_front_door",
+      "canteen",
+      "college_womens_toilet",
+      "faculty_floor",
+      "art_office",
+      "business_office",
+      "ta_office",
+      "dean_office",
+      "clothes_shop"
+    ],
+    "weeks": 8,
+    "promise_alive": "the Sunday table: each count says how many Sundays in a row she has paid her own way (goal 1; Mark A 1, 3, 7, 9); Zoe A 4 hands her the dares, which feeds campus_talk (goal 2)",
+    "replay_ready": "yes",
+    "block": [
+      "the fixed --ship BLOCK list (gates.py), no waivers"
+    ],
+    "report": [
+      "the fixed --ship REPORT list (gates.py), nothing added"
+    ]
   },
   "spine": {
     "pages": [
@@ -401,6 +451,41 @@
         "updated_at": "2026-10-07",
         "signed_by": "LO",
         "signed_at": "2026-10-07"
+      },
+      {
+        "id": "SP3",
+        "status": "READY",
+        "drafted_at": "2026-10-07",
+        "signed_by": "LO",
+        "signed_at": "2026-10-07"
+      },
+      {
+        "id": "SP4",
+        "status": "READY",
+        "drafted_at": "2026-10-07",
+        "signed_by": "LO",
+        "signed_at": "2026-10-07"
+      },
+      {
+        "id": "SP5",
+        "status": "READY",
+        "drafted_at": "2026-10-07",
+        "signed_by": "LO",
+        "signed_at": "2026-10-07"
+      },
+      {
+        "id": "SP6",
+        "status": "READY",
+        "drafted_at": "2026-10-07",
+        "signed_by": "LO",
+        "signed_at": "2026-10-07"
+      },
+      {
+        "id": "SP7",
+        "status": "READY",
+        "drafted_at": "2026-10-07",
+        "signed_by": "LO",
+        "signed_at": "2026-10-07"
       }
     ]
   },
@@ -412,6 +497,47 @@
         "status": "scouted",
         "source": "games/first_term/scout/party.md"
       }
-    ]
+    ],
+    "cast": {
+      "width": 21,
+      "adding_rule": "a new person brings a thread of her life (or a part in one), a ladder or `none — <inside whose scenes>`, why she wants them, and a written age of 18 or older; then a want.cast row, LO's yes and an SP5 re-sign"
+    },
+    "media": {
+      "platform": "the browser build on the game portal, desktop first, every screen checked at phone width before it ships (LO, 2026-10-07)",
+      "clips": "every explicit beat carries its own clip (register.md S1); a repeatable surface uses a pool_dir; one asset, one block; a step's first beat carries one, talk and info steps none"
+    },
+    "pressure": {
+      "what_repeats": "rent, every Sunday, counted at the kitchen table",
+      "who_collects": "npc_mark",
+      "cost_of_a_miss": "carried to next week (rent_carried); Vance knocks the next evening; no game over",
+      "stages": [
+        {
+          "amount": 75,
+          "after_total_paid": 0
+        },
+        {
+          "amount": 90,
+          "after_total_paid": 300
+        },
+        {
+          "amount": 100,
+          "after_total_paid": 900
+        }
+      ]
+    },
+    "economy": {
+      "currency": "money",
+      "symbol": "$",
+      "obligation": "rent — Sunday, to Mark at the kitchen table, Vance behind him",
+      "obligation_amount": 75,
+      "week_income": 232,
+      "obligation_moves": "Mark names Vance's raise at the table: $90 after $300 paid, $100 after $900, then flat",
+      "obligation_every_weeks": 1,
+      "sinks": [
+        "rent",
+        "canteen food",
+        "the clothes shop"
+      ]
+    }
   }
 }

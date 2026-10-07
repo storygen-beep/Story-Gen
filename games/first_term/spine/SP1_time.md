@@ -1,6 +1,6 @@
 # SP1 · Time — First Term
 
-> [READY] · drafted 2026-10-03 · updated 2026-10-07 · signed by LO: LO, 2026-10-07
+> [READY] · drafted 2026-10-03 · updated 2026-10-07 (the drinks boost line) · signed by LO: LO, 2026-10-07
 > A decision record, ≤ 400 words. The rules: `references/the-spine.md` SP1 · `the-clock.md` · `engine.md` §28.
 
 | decision | answer |
@@ -18,7 +18,7 @@
 |---|---|---|
 | `ryan_hall_today` | cleared | the morning bathroom meeting can happen once a day |
 | `cafe_shift_1_today`, `cafe_shift_2_today`, `cafe_shift_3_today` | cleared | up to 3 café shifts a day (LO, 2026-10-03). The café row's choice sets the first one not yet set, and is gated on that flag being false; with all three set, the row shows "no more shifts today". Flags, not a counter (`engine.md` §28: "Use a flag; flags are not meters"). |
-| the drinks boost | not on the tick | a choice modifier that runs out a few hours after the drink (`v2.py:6810-6820`), so it never vanishes mid-party; SP2 §1's "clears overnight" (`SP2_ladders.md:29`) means it is gone by morning (LO, 2026-10-07) |
+| the drinks boost (`drinks_boost`) | not on the tick | a timed modifier that runs out 3 hours after the last drink (`v2.py:6810-6820`), so it never vanishes mid-party. It lifts her choices only; steps ignore it: a step's gate adds "`drinks_boost` is not active" (the modifier condition, `v2.py:4993-4998`; LO, 2026-10-07). SP2 §1's "clears overnight" (`SP2_ladders.md:29`) means it is gone by morning (LO, 2026-10-07) |
 | `hygiene` | falls a little | `[player.trait_decay]`, every night; with `hygiene_off` (the start choice) nothing reads it (`engine.md` §30.1; LO, 2026-10-07) |
 | `energy` | not on the tick | refilled by sleeping in her bed, a scene; listed so nobody adds it to the tick (LO, 2026-10-07) |
 | `laura_rule_ryan_first` | kept | it is a house rule once Laura makes it |

@@ -1,6 +1,6 @@
 # The systems — First Term (layer 4: systems as slots)
 
-> [READY] · layer 4 · drafted 2026-10-06 · updated 2026-10-07 (party scout and party rules) · signed by LO: LO, 2026-10-07 (the cast ages in `want.cast` stay proposed)
+> [READY] · layer 4 · drafted 2026-10-06 · updated 2026-10-07 (party scout and party rules; key names, ages confirmed, two stale lines out; classmates are extras) · signed by LO: LO, 2026-10-07
 > A game-only page beside `DIRECTION.md` (layer 2) and `LIVES.md` (layer 3). Moved here from
 > `proposals/SYSTEMS_SLOTS.md` on 2026-10-07 (snapshot `first_term_snapshots/20261007_layer4_close_before/`).
 > v1 drafted 2026-10-06 (snapshot:
@@ -51,7 +51,7 @@
   - Business (the strict man, about 50);
   - Biology (a TA, a woman, about 28).
 
-  The three new lecturers stay **light** this release (LO, chat). Ages are proposed; all are 18+.
+  The three new lecturers stay **light** this release (LO, chat). Ages LO confirmed 2026-10-07; all are 18+.
 - **The timetable** (LO, chat, option B): three classes a weekday, two in the morning and one in the
   afternoon; Psychology meets four times a week (Hale) and the other three subjects three times each;
   Friday has Psychology only.
@@ -178,8 +178,8 @@
 - `SP2_ladders.md:28` says release 1 writes stages 1–3. Under-the-desk in class and the public flash
   are Hungry, so they wait for a later release unless page 7 says otherwise. A flash for a group is
   Hungry · Watched (kept (LO, 2026-10-07); `SP2_ladders.md:41-43`).
-- `IDEA.md:44` says "the rival: none declared". The rival girl changes that, which is LO's change to the
-  idea page.
+- The rival girl is on the idea page now (`IDEA.md:44`), so nothing is left to change
+  there (LO, 2026-10-07).
 
 ## 2. The café job
 
@@ -245,8 +245,8 @@
   - Rows: Zoe's (`LIVES.md:181-182`), Jake's (`:300`) and the gated Friday rows (`:484-489`).
   - **The curfew and low energy refuse a party** (LO, chat). Zoe's party also wants something short to
     wear (block 7).
-- **Keys:** `party_went`, Friday and `hours_since_flag` (`SP1_time.md:38-41`). The drinks boost, the
-  skip-Kayla flag and the Laura-at-Fridays flag have no keys yet.
+- **Keys:** `party_went`, Friday and `hours_since_flag` (`SP1_time.md:38-41`). The drinks boost
+  (`drinks_boost`, `drinks_tonight`), `ryan_skips_kayla` and `laura_at_fridays`: named below (LO, 2026-10-07).
 - **Day 1:** no. It starts on the first Friday (`DIRECTION.md:118`).
 - **Leads to:** Zoe, Jake, Laura, Ryan.
 - **Inside a party (LO, 2026-10-07, from the scout card):**
@@ -424,7 +424,7 @@
 
 ## New people and places this adds (on `LIVES.md:233-259` and in the ledger since 10-07)
 
-**People (all 18+; ages proposed):**
+**People (all 18+; ages LO confirmed 2026-10-07):**
 
 | who | age | role | weight |
 |---|---|---|---|
@@ -432,10 +432,10 @@
 | the Business lecturer, "the strict man" | ~50 | Business; can't be bought: an honest retake | light |
 | the Biology TA | ~28 | Biology; a woman, shy; Ella leads and seduces her (F/F), no grade trade | light |
 | the dean | ~55 | probation and complaints; his route, from Curious | light |
-| the boner guy | ~21 | Psychology, Business; the under-the-desk ask | light |
-| the rival girl | ~21 | Psychology, Business; reports her; the game's first rival | light |
-| the study guy | ~21 | Business, Biology; tutor; raises `intelligence` | light |
-| the cocky guy (Jake's teammate) | ~21 | Figure drawing, Biology; dares and prices | light |
+| the boner guy | ~21 | Psychology, Business; the under-the-desk ask | extra; inside class scenes, no row (`LIVES.md:257`) |
+| the rival girl | ~21 | Psychology, Business; reports her; the game's first rival | extra; inside class scenes, no row (`LIVES.md:257`) |
+| the study guy | ~21 | Business, Biology; tutor; raises `intelligence` | extra; inside class scenes, no row (`LIVES.md:257`) |
+| the cocky guy (Jake's teammate) | ~21 | Figure drawing, Biology; dares and prices | extra; inside class scenes, no row (`LIVES.md:257`) |
 | the figure-drawing model | ~25 | the class's model; a woman (LO, chat 10-07) | extra; lives inside the class, no row |
 
 **Seating** (LO, chat):
@@ -454,7 +454,7 @@
 `LIVES.md` §8 lists them (10-07). The ledger has them (`v2_state.json` `want.places`, `:188-313`).
 The faculty floor is one place, and each office is its own place (one room, one job, by analogy with `the-map.md` R2's rule for a home):
 `faculty_floor`, `art_office`, `business_office`, `ta_office`, `dean_office`, and Hale's `hale_office`.
-The cast ids, ages and keeps are in `want.cast`; the ages are proposed.
+The cast ids, ages and keeps are in `want.cast`; LO confirmed the ages on 2026-10-07.
 
 ## Keys at a glance
 
@@ -478,40 +478,40 @@ tick runs at `:6947-6967`; `engine.md` §28.1). The cheat page's "Skip to mornin
 | `money` | trait | café, paid rungs, the photo app, Ryan | rent, canteen, shop | kept | ok |
 | `rent_carried` | engine flag | the engine | Mark's Sundays, the knock, the letter | Vance's knock clears it | ok |
 | `paid_full_streak` | trait, counter | the Sunday table scene | goal 1 | kept | ok |
-| `ryan_covered` | flag | Ryan's cover (no scene yet) | the Sunday table scene | the scene clears it | ok |
+| `ryan_covered` | flag | a choice at Ryan's door, shown on a short Saturday or Sunday morning | the Sunday table scene | the scene clears it | ok |
 | `pays_her_own_way` · `helped_with_debt` · `hosts_the_party` | flags | goals, the twist | their readers | kept | ok |
 | `cafe_job` · `uniform_sexy` · `uniform_slutty` | flags | the café | shifts, uniform items | kept | ok |
 | `cafe_shift_1/2/3_today` | flags | the café row | the café row | cleared (`SP1:20`) | ok if the café shuts by midnight |
 | `party_went` | flag | arriving Friday | the party after midnight | never cleared | ok |
-| the drinks boost (no key) | — | party drinks | her choices | a choice modifier, not on the tick (`SP1_time.md:21`) | ok; it expires by the hour (`v2.py:6810-6820`) |
-| skip-Kayla (no key) | flag | Ryan A 14's ask | Ryan's Friday scene and row | never cleared by the tick (`SP1_time.md:28-31`; `LIVES.md:484-488`) | ok |
-| cancel-Kayla Saturday (no key) | flag | Ryan A 11 | Ryan's gated row (`LIVES.md:125-126`), Ryan A 12 | never cleared by the tick (`SP1_time.md:28-31`) | ok |
-| both away · weekend away (no keys) | flags | events (`LIVES.md:62-66`) | rows, Zoe A 6, Mark A 13–14 | never cleared by the tick (`SP1_time.md:28-31`) | ok |
-| Laura-at-Fridays (no key) | flag | Laura C 15 | her gated Friday row | kept | ok |
+| `drinks_boost` (timed modifier) · `drinks_tonight` (counter) | modifier · trait | each party drink | her choices only; steps ignore it (LO, 2026-10-07) | the modifier runs out 3 hours after the last drink (`v2.py:6810-6820`); `drinks_tonight` goes to 0 on arriving at the party | ok |
+| `ryan_skips_kayla` | flag | Ryan A 14's ask | Ryan's Friday scene and row | never cleared by the tick (`SP1_time.md:28-31`; `LIVES.md:484-488`) | ok |
+| `ryan_cancelled_kayla` | flag | Ryan A 11 | Ryan's gated row (`LIVES.md:125-126`), Ryan A 12 | never cleared by the tick (`SP1_time.md:28-31`) | ok |
+| `parents_away_night` · `laura_weekend_away` | flags | events (`LIVES.md:62-66`) | rows, Zoe A 6, Mark A 13–14 | never cleared by the tick (`SP1_time.md:28-31`) | ok |
+| `laura_at_fridays` | flag | Laura C 15 | her gated Friday row | kept | ok |
 | `campus_talk` | trait, no decay | parties, canteen, class, feed | goal 2, approaches, feed posts | kept | ok |
 | `laura_suspicion` | trait, no decay | home late, lies, grades, letters, missed calls | Ryan A 13 | kept | ok (thin) |
 | `followers` | trait | the feed | campus talk, offers | kept | ok if something reads it |
 | `jake_date_booked` · `jake_dates_off` | flags | Jake's thread, his no | the door steps | the scene clears it | ok |
 
-## Steps that need a key nobody named yet
+## Keys named (LO, 2026-10-07)
 
-1. "Out late," for Laura C 2, Zoe A 3's homecoming and the hall catches (`LIVES.md:331-333`).
-2. The weekend-away and both-away flags (`LIVES.md:62-66`).
-3. Ryan A 11 and 14, and Laura C 15's gated rows (`LIVES.md:125-126`, `:484-489`).
-4. The drinks boost: a choice modifier now (`SP1_time.md:21`), but it still has no key name.
-5. The twist's offer scene before Mark A 15 (`DIRECTION.md:30-31`).
-6. Ryan's cover has no scene to set `ryan_covered` (`SP2_ladders.md:66`).
+1. Out late: `came_home_late`, set at the front door at night; read by hours since set, never cleared by the tick (`LIVES.md:331-333`).
+2. Weekend away: `laura_weekend_away`; both away: `parents_away_night`. Each set by its event scene, from phase 3 and phase 4 (`LIVES.md:62-66`).
+3. `ryan_cancelled_kayla` (Ryan A 11's reply), `ryan_skips_kayla` (her ask at his door that week), `laura_at_fridays` (Laura C 15) (`LIVES.md:125-126`, `:484-489`).
+4. Parties: `drinks_boost` and `drinks_tonight` (each drink); `heavy_night` (the third drink; her Saturday-morning bed scene takes the 30 energy and clears it); `party_cool_<npc>` (her refusal; read by hours since set).
+5. The twist's offer: `debt_offer_seen`, set by the offer scene after `pays_her_own_way`; her answer stays parked (`DIRECTION.md:30-31`).
+6. Ryan's cover sets `ryan_covered`: a choice at his door on a short Saturday or Sunday morning (`SP2_ladders.md:66`).
 
 ## Decided in chat: kept (LO, 2026-10-07)
 
 1. **The figure-drawing model is a woman.**
-2. **The rent starts after the scene where Mark tells her she pays rent now** (`start_after_flag` on that
+2. **The rent starts after the scene where Mark tells her she pays rent now** (`start_after_flag = "rent_starts"` on that
    scene, `SP1_time.md:12`; `engine.md:1227`). Her first Sunday can still come up short (Mark A 1). Knock-on: Mark A 1's "not
    expecting a count" (`ARC_IDEAS.md:184`) becomes "she knows, and she's still short".
 3. **Parties: scout a card** with `v2-scout` from the pass-list games. Scouted 2026-10-07 (`scout/party.md`);
    LO's party rules are in §4.
 4. **Dating is not a system.** It is Jake's repeat Saturday date on his thread. Changed 10-07:
-   `SP2_ladders.md:167` (SP2 signed 10-07) and `LIVES.md`. Still saying "dating" as a system:
+   `SP2_ladders.md:167` (SP2 signed 10-07), `LIVES.md`, and since then also
    `WANT.md:92` and `v2_state.json:344`.
 5. **Sex for pay is a rung, not its own system.** LO: the card's model is a brothel-style stroll where the
    paid act *is* the shift; here the shift is waitressing (or the rent table), and the paid moments ride
@@ -532,8 +532,8 @@ tick runs at `:6947-6967`; `engine.md` §28.1). The cheat page's "Skip to mornin
 
 - Page 7: release-1 width, which systems are live on day 1, the Hungry class moments (decided item 10),
   SP4's numbers (item 12).
-- The steps that need a key nobody named yet (the list above).
-- The cast ages in `want.cast` are proposed until LO says.
+- The keys: named (list above, LO 2026-10-07); their scenes are written at the board.
+- The cast ages in `want.cast`: LO confirmed all 21 on 2026-10-07 (`SP5_cast.md`).
 
 ## What layer 4 hands on
 
