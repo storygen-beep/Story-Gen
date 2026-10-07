@@ -52,7 +52,7 @@
 | `party_chat` | who is here and what they say | no | who came tonight · rotates | once an hour (guess) |
 | `party_drink_offer` | someone hands her a drink | no | `drinks_tonight` under 3 | three a night (guess) |
 | `party_dare` | Zoe's dare, people watching | yes at Curious: the bra off | her stage · the boost | two a night (guess) |
-| `party_hookup` | a hookup with someone she knows | yes | Corruption gte 40 | once a night |
+| `party_hookup` | the cocky guy, oral or sex (LO, 2026-10-08) | yes | Corruption gte 40 | once a night |
 
 ## Lewd ladder (`lewd_ladder[]`)
 

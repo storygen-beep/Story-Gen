@@ -17,7 +17,8 @@
 
 | place | days | from | to | why he is there |
 |---|---|---|---|---|
-| none | — | — | — | inside the class scenes: Figure drawing and Biology |
+| `zoe_apartment` | Fri | 23:00 | 00:00 | Zoe's Friday party, once met (the party hookup) · only when `cocky_guy_met` |
+| `zoe_apartment` | Sat | 00:00 | 02:00 | Zoe's Friday party, once met (the party hookup) · only when `cocky_guy_met` |
 
 ## Ladder — one guidance card per step (S10)
 

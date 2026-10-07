@@ -4988,7 +4988,29 @@
         "id": "npc_cocky_guy",
         "name": "the cocky guy",
         "role": "Jake's teammate",
-        "schedule_rows": 0
+        "schedule_rows": 0,
+        "schedule": [
+          {
+            "where": "zoe_apartment",
+            "weekdays": [
+              "Fri"
+            ],
+            "from": "23:00",
+            "to": "00:00",
+            "when": "cocky_guy_met",
+            "note": "Zoe's party, for the party hookup (LO, 2026-10-08)"
+          },
+          {
+            "where": "zoe_apartment",
+            "weekdays": [
+              "Sat"
+            ],
+            "from": "00:00",
+            "to": "02:00",
+            "when": "cocky_guy_met",
+            "note": "the same party after midnight (LO, 2026-10-08)"
+          }
+        ]
       },
       {
         "id": "npc_figure_model",

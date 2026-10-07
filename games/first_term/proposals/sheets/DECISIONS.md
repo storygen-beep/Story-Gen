@@ -11,7 +11,6 @@
 | 36 | Ledger change 3: name `laura_suspicion`'s 0.1 readers. | LO: when he signs Laura's sheet. | Waiting on that sign-off. |
 | 37 | WANT.md still says the park is on her walk to campus. | LO: fix it at the next WANT.md re-sign. | SYSTEMS §14 says it isn't. |
 | 39 | SYSTEMS.md:498 says `came_home_late` is set at the front door. | LO: fix it at the next SYSTEMS re-sign. | Question 35 moved it to the street's way home. |
-| 40 | `party_hookup`: who is it with, and how far does it go? | LO holds it: a heat call not made yet. | It is the party's Bold repeat; no scene sheet until then. |
 
 ## Answered (LO, 2026-10-08)
 
@@ -56,6 +55,8 @@
 | 38 | Drop `laura_suspicion` from the money card's feeds | Yes. |
 | — | Tom B 4's `ten` screen, last sentence | Kept: on the body. |
 | 41 | Crude words for strangers, extras, her alone | Taken: tits, nipples, ass, cock, wet, clit · no cunt, fuck, cum, pussy. |
+| 40 | `party_hookup` (heat call A) | The cocky guy, oral or sex at Bold, named and with a face. Not Jake. |
+| 42 | The cocky guy's rows at Zoe's | Yes: Fri 23:00–00:00, Sat 00:00–02:00, once `cocky_guy_met` is set. |
 | — | A second voice for touching herself | No: stages 2–3 share "warming up"; the bold voice starts at stage 4. |
 
 **Question 6 keeps SP2 as signed.** Only Zoe sees her, which is Bold: naked by choice for someone she knows.
@@ -172,6 +173,12 @@ edit when you next re-sign it.
 | # | change |
 |---|---|
 | 25 | `money_pressure.feeds`: `laura_suspicion` dropped |
+
+**Written 2026-10-08, heat call A** (backup: `first_term_snapshots/20261008_cocky_guy_rows_before/`):
+
+| # | change |
+|---|---|
+| 26 | `npc_cocky_guy`: rows at Zoe's, Fri 23:00–00:00 and Sat 00:00–02:00, `when` `cocky_guy_met` |
 
 **Not a ledger change:** the ledger keeps no "entered from" per place. The sheets take it from the map's
 shape line, and the build writes it as `entry_from`.

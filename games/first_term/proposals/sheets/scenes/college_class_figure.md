@@ -17,7 +17,7 @@
 
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
 |---|---|---|---|---|
-| `pose` | the model drops her robe and poses; she draws her | yes | the class rows: Focus · Chat · Doze · Skip | as the college sheet |
+| `pose` | the model drops her robe and poses; she draws her | yes | the class rows: Focus · Chat · Doze · Skip | as the college sheet · first class: `cocky_guy_met` set |
 | locked | posing nude for the class herself | — | "Pose for the class." Needs Hungry | — |
 
 ## The explicit screens, written
@@ -35,3 +35,4 @@ No history words on any screen: each one repeats.
 | the class draws a nude model; a woman | LO, chat 2026-10-07 (SYSTEMS, decided item 1) |
 | her own posing waits | SYSTEMS §1 · SP7 call 1 |
 | the prose | `v2-prose`, measured by `gates.py --beat`, 2026-10-08 |
+| she meets the cocky guy at her first Figure drawing | LIVES §6 (met at their first class) · ledger change 26 |

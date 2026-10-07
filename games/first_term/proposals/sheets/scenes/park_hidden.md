@@ -12,6 +12,7 @@
 | what she wears here (test 8) | not named |
 | BRAKE (S9) | once a day, on the trigger |
 | raises | corruption add +1 (the repeat raise) |
+| no clit in the prose | Zoe's middle column has tits, nipples, wet; clit is her late column |
 | the crude-word ceiling | Zoe's middle column: tits, nipples, wet · early: tits, ass (LO, 2026-10-08) |
 
 ## Branch map — one row per screen (S1)
@@ -19,21 +20,22 @@
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
 |---|---|---|---|---|
 | `pull` | Zoe pulls her off the path after the run | no | "Follow her." → `hidden` · "Not here, Zo." → the park | none |
-| `hidden` | against a tree; Zoe's hands up under; footsteps pass | yes (6 words) | "Back to the path." → the park | corruption add +1 |
+| `hidden` | against a tree; Zoe's hand makes her come; footsteps pass | yes (5 words) | "Back to the path." → the park | corruption add +1 |
 
 No history words: the screen repeats.
 
 ## The screen, written
 
-**`hidden`** · 110 words · explicit words 6 (ass, kiss, moan, nipple, tits) · median sentence 10 · act rungs: touch, hands · Zoe's middle column: tits, nipples, wet · early: tits, ass (LO, 2026-10-08)
+**`hidden`** · 122 words · explicit words 5 (ass, kiss, moan, nipple, orgasm) · median sentence 11 · act rungs: touch, hands, finish · Zoe's middle column
 
-> Zoe grabs your wrist and pulls you off the path into a hollow behind the rhododendrons. You're both sweaty and breathing hard. She pushes you against a tree and kisses you like she's starving. "Shh, babe," she whispers into your lips. Her hands slide up under, cool on your hot skin, to close on your tits. Her thumbs rub your nipples until they ache. You grab her ass and pull her in. Her thigh pushes between yours. Footsteps thud past on the path, a few metres away. You both freeze, but her hands never leave your tits. She squeezes, so you grind on her thigh and moan into her mouth.
+> Zoe drags you off the path into the hollow behind the rhododendrons. Joggers pound past a few metres away. She shoves you against a tree and kisses you hard, both of you still panting from the run. "Quiet, babe," she breathes. Her hand slides down inside, flat on your skin, and finds you wet. Her fingers start slow. You grab her ass and pull her in. Her thumb finds your nipple and rubs. Footsteps crunch past, close enough to touch, but Zoe doesn't stop. Her fingers go fast, deep, until your hips buck into her hand. Your orgasm hits and your knees give out. Zoe pins you to the bark with her whole body, her mouth on yours to swallow every moan.
 
 ## Why — the source of each key choice
 
 | key choice | source |
 |---|---|
 | hidden, with someone she knows, at stage 3 | LO, 2026-10-08 (SYSTEMS §14, the park sheet) |
+| Zoe's hand makes her come; no oral (Zoe A 6) | LO, 2026-10-08 (heat call A) |
 | Zoe in the park on weekend mornings | LO, 2026-10-08 (question 7) |
 | after Zoe A 3 | guess: their first kiss comes first |
 | the prose | `v2-prose`, measured by `gates.py --beat`, 2026-10-08 |
