@@ -10,7 +10,8 @@
 |---|---|---|---|
 | 36 | Ledger change 3: name `laura_suspicion`'s 0.1 readers. | LO: when he signs Laura's sheet. | Waiting on that sign-off. |
 | 37 | WANT.md still says the park is on her walk to campus. | LO: fix it at the next WANT.md re-sign. | SYSTEMS §14 says it isn't. |
-| 39 | SYSTEMS.md:498 says `came_home_late` is set at the front door. | Fix it at the next SYSTEMS re-sign: the street's way home. | Question 35's answer moved it. |
+| 39 | SYSTEMS.md:498 says `came_home_late` is set at the front door. | LO: fix it at the next SYSTEMS re-sign. | Question 35 moved it to the street's way home. |
+| 40 | `party_hookup`: who is it with, and how far does it go? | LO holds it: a heat call not made yet. | It is the party's Bold repeat; no scene sheet until then. |
 
 ## Answered (LO, 2026-10-08)
 
@@ -54,6 +55,8 @@
 | 35 | The front door as the way in | B: keep the tree. Only the street's way home, at 22:00 or later, sets `came_home_late`. |
 | 38 | Drop `laura_suspicion` from the money card's feeds | Yes. |
 | — | Tom B 4's `ten` screen, last sentence | Kept: on the body. |
+| 41 | Crude words for strangers, extras, her alone | Taken: tits, nipples, ass, cock, wet, clit · no cunt, fuck, cum, pussy. |
+| — | A second voice for touching herself | No: stages 2–3 share "warming up"; the bold voice starts at stage 4. |
 
 **Question 6 keeps SP2 as signed.** Only Zoe sees her, which is Bold: naked by choice for someone she knows.
 The step's hint and who-notices line in the ledger still name the friends (ledger change 11).
