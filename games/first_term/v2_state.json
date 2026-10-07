@@ -403,5 +403,15 @@
         "signed_at": "2026-10-07"
       }
     ]
+  },
+  "board": {
+    "coverage": [
+      {
+        "topic": "party",
+        "kind": "system",
+        "status": "scouted",
+        "source": "games/first_term/scout/party.md"
+      }
+    ]
   }
 }

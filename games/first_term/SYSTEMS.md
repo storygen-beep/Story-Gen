@@ -1,6 +1,6 @@
 # The systems — First Term (layer 4: systems as slots)
 
-> [READY] · layer 4 · drafted 2026-10-06 · updated 2026-10-07 · signed by LO: LO, 2026-10-07 (the cast ages in `want.cast` stay proposed)
+> [READY] · layer 4 · drafted 2026-10-06 · updated 2026-10-07 (party scout and party rules) · signed by LO: LO, 2026-10-07 (the cast ages in `want.cast` stay proposed)
 > A game-only page beside `DIRECTION.md` (layer 2) and `LIVES.md` (layer 3). Moved here from
 > `proposals/SYSTEMS_SLOTS.md` on 2026-10-07 (snapshot `first_term_snapshots/20261007_layer4_close_before/`).
 > v1 drafted 2026-10-06 (snapshot:
@@ -236,8 +236,9 @@
 
 ## 4. Parties (Friday at Zoe's)
 
-- **Card:** none (gap). It passes SY1's seven questions (`the-systems.md:65-73`). **Thread:** `WANT.md:91`;
-  `DIRECTION.md:67-71`.
+- **Card:** scouted, near: `scout/party.md` (2026-10-07). The model is CoT's Friday quad party, with
+  IHOH and Shady Deals as contrasts; neither `greek_life.md` nor `reputation.md` covers it. It passes SY1's
+  seven questions (`the-systems.md:65-73`). **Thread:** `WANT.md:91`; `DIRECTION.md:67-71`.
 - **Gates content? Yes.**
   - Steps: Zoe A 1, 2 and 5; Jake B 1 and 5; Laura C 7 and 15; Ryan A 14 (`ARC_IDEAS.md:264`, `:265`,
     `:268`, `:322`, `:326`, `:152`, `:160`, `:122`).
@@ -248,7 +249,25 @@
   skip-Kayla flag and the Laura-at-Fridays flag have no keys yet.
 - **Day 1:** no. It starts on the first Friday (`DIRECTION.md:118`).
 - **Leads to:** Zoe, Jake, Laura, Ryan.
-- **Left for its card:** the dares, the drinks, who is there.
+- **Inside a party (LO, 2026-10-07, from the scout card):**
+  - **Dares:** Zoe sets them, and they come with people watching. After a no, someone else pushes once,
+    but her no still holds and costs nothing (`SP2_ladders.md:131`). The card's model lets the push beat
+    her no (`scout/party.md`, dares row); we don't.
+  - **Drinks:** people hand them to her. She can say no, and the no always works. A drink is the drinks
+    boost: it opens a bolder choice one stage early and wears off by the hour (`SP1_time.md:21`). The
+    model's offers are in `scout/party.md`, drinks row.
+  - **Who is there:** Zoe always, and Jake from the night Ella meets him (Jake B 1) until he leaves at
+    midnight (`LIVES.md:187-188`, `:368`). Classmates turn up by chance each Friday. Anyone she turned
+    down stays cool with her for the rest of that night.
+  - **Hours:** the party runs to about 2 a.m. (`SP1_time.md:10`), and the riskier choices open after 11 p.m.
+  - **Money:** none. Drinks and food at Zoe's are free.
+- **After a party (LO, 2026-10-07; none of the 12 games shows these, `scout/party.md` gaps):**
+  - **The way home:** coming in late can set off Laura's catch (`ARC_IDEAS.md:147`). It needs the "out
+    late" key (below, "Steps that need a key", 1).
+  - **The next morning:** a heavy night starts Saturday with less energy (block 5). How many drinks
+    count as heavy is SP4's number.
+- **Hosting:** Ella hosts once, in Zoe A 6, on the night both parents are away (`LIVES.md:130-131`).
+  Hosting as a weekly thing is parked for a later release.
 
 ## 5. Energy (LO, chat)
 
@@ -489,7 +508,8 @@ tick runs at `:6947-6967`; `engine.md` §28.1). The cheat page's "Skip to mornin
 2. **The rent starts after the scene where Mark tells her she pays rent now** (`start_after_flag` on that
    scene, `SP1_time.md:12`; `engine.md:1227`). Her first Sunday can still come up short (Mark A 1). Knock-on: Mark A 1's "not
    expecting a count" (`ARC_IDEAS.md:184`) becomes "she knows, and she's still short".
-3. **Parties: scout a card** with `v2-scout` from the pass-list games, when LO says go.
+3. **Parties: scout a card** with `v2-scout` from the pass-list games. Scouted 2026-10-07 (`scout/party.md`);
+   LO's party rules are in §4.
 4. **Dating is not a system.** It is Jake's repeat Saturday date on his thread. Changed 10-07:
    `SP2_ladders.md:167` (SP2 signed 10-07) and `LIVES.md`. Still saying "dating" as a system:
    `WANT.md:92` and `v2_state.json:344`.
@@ -510,7 +530,6 @@ tick runs at `:6947-6967`; `engine.md` §28.1). The cheat page's "Skip to mornin
 
 ## Still open
 
-- Running the party scout: waiting for LO's go.
 - Page 7: release-1 width, which systems are live on day 1, the Hungry class moments (decided item 10),
   SP4's numbers (item 12).
 - The steps that need a key nobody named yet (the list above).
@@ -521,7 +540,7 @@ tick runs at `:6947-6967`; `engine.md` §28.1). The cheat page's "Skip to mornin
 **To the board phase** (`the-systems.md` "What the board phase records", :396-421; `state.md` board
 schema, :110-186):
 - **One card per system** (`templates/sheets/system.md`): college (§1), the café (§2), money and rent
-  (§3), parties (§4, after the scout), wardrobe (§7), energy (§5) and hygiene (§6), the last two also in
+  (§3), parties (§4; card `scout/party.md`), wardrobe (§7), energy (§5) and hygiene (§6), the last two also in
   `board.needs[]` (`the-meters.md` M8).
 - **Meters** (`board.meters[]`): `campus_talk` (§9), `laura_suspicion` (§10), `followers` (§11),
   Corruption and Exhibitionism (§8; `SP2_ladders.md:12-44`).
