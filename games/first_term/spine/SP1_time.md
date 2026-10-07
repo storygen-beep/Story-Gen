@@ -1,6 +1,6 @@
 # SP1 · Time — First Term
 
-> [READY] · drafted 2026-10-03 · updated 2026-10-07 (the drinks boost line) · signed by LO: LO, 2026-10-07
+> [READY] · drafted 2026-10-03 · updated 2026-10-08 (the clock in hours) · signed by LO: LO, 2026-10-08
 > A decision record, ≤ 400 words. The rules: `references/the-spine.md` SP1 · `the-clock.md` · `engine.md` §28.
 
 | decision | answer |
@@ -8,7 +8,7 @@
 | starting day and hour | Monday, 07:00 — her first morning of college (`[time] starting_hour`; the only hour the prose may name, `the-clock.md` C1) |
 | a day in play is about | 15–20 minutes of play |
 | canvases that run past midnight | parties at Zoe's apartment (to about 02:00) · Ryan's room, late at night. A window past midnight needs a second schedule entry on the next weekday. |
-| schedules | lectures and café shifts each keep their own hours and may overlap; the player picks what to do. Three classes a weekday, two in the morning and one in the afternoon, Friday one (`SYSTEMS.md` §1, LO 2026-10-07). No hours are set here: the café's come with its system card, the lectures' with the college card. |
+| schedules | lectures and café shifts each keep their own hours and may overlap; the player picks what to do. Three classes a weekday, two in the morning and one in the afternoon, Friday one (`SYSTEMS.md` §1, LO 2026-10-07). **The clock** (LO, 2026-10-08): night 22:00–07:00 · early morning 06:30–08:00 · classes 08:30–10:00, 10:15–11:45 and 13:00–14:30, lunch 11:45–13:00 · afternoon 14:30–18:00 · evening 18:00–22:00 · late night 22:00–00:00 · the café Monday to Saturday 08:00–22:00 (Tom closes to 23:00) · the park 07:00–22:00 · the party Friday 19:00 to Saturday 02:00. |
 | the rent | taken by the engine at 00:00 on Sunday (`[settings.rent]`, `engine.md` §26); Mark's kitchen-table scene sits beside the payment, never on it. It starts after the scene where Mark tells her she pays rent now (`start_after_flag`, LO 2026-10-07). |
 | how the prose treats time | `the-clock.md` C2 and C5: a beat never reads the clock. A rule of the world may name an hour (C2's exemptions, e.g. "Claire picks him up at 7:30"). A blocked row shows its hours on its `cooldown_message`. |
 
@@ -31,7 +31,7 @@ both parents are away and Laura's weekend away are read by hours since they were
 or cleared by a scene.
 
 **Not decided here:**
-- lecture hours — the college card;
+- the hours: now the clock on the schedules row (LO, 2026-10-08);
 - her needs: energy and hygiene, no hunger (`SYSTEMS.md` §5–6, LO 2026-10-07);
 - Ella's meters: decided on SP2 §1 (Corruption and Exhibitionism).
 

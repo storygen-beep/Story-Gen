@@ -1,6 +1,6 @@
 # Their lives — First Term
 
-> A game-only page (layer 3), decided by LO in chat on 2026-10-05. The skill has no page for this.
+> [READY] · updated 2026-10-08 (Laura's stairs row, Jake's door row, Vance sleeps at his house) · signed by LO: LO, 2026-10-08 · A game-only page (layer 3), decided by LO in chat on 2026-10-05. The skill has no page for this.
 > It says each person's ordinary week: where they are, by day and part of the day, and what changes it.
 > Steps pick their windows from here instead of inventing them. No steps, no exact hours, no money
 > numbers: lecture and café hours come with their systems, and the board turns each row into hours.
@@ -49,7 +49,7 @@ evening and every night, which is what her watching needs.
   default)**. Mark goes up to bed. This is the window for Laura C 5 / Jake B 4; it ends at midnight.
 - **Every night:** the master bedroom.
 
-**Rows (5):**
+**Rows (5, plus one gated: the hall stairs, late at night, `when` `came_home_late` is set; LO 2026-10-08):**
 1. kitchen · weekday early mornings
 2. kitchen · evenings on Monday, Tuesday, Thursday, Friday and Sunday, running into late evening
 3. master bedroom · every night
@@ -260,7 +260,7 @@ scene, like Claire and Kayla. Their seats are on `SYSTEMS.md`.
 
 ### Mr. Vance, 54 — owns the house, lives next door · met on the first evening walk past his porch · **release 1**
 
-- **Sleeps:** offscreen. His house is one place in the game, with no bedroom in it.
+- **Sleeps:** at his house next door (`board.map.homes`, LO 2026-10-08). It is one place in the game, with no bedroom in it.
 - **Most hours at:** his house (the porch).
 
 - He owns this house and **a few others on the street (new)**.
@@ -295,7 +295,7 @@ His arc is Jake B (`proposals/ARC_IDEAS.md`).
   not a system, `SYSTEMS.md`, LO 2026-10-07). He brings her to the door at night, and
   Laura is home by then.
 
-**Rows (3):**
+**Rows (3, plus one gated: the front door · Saturday night, `when` a date is booked, `jake_date_booked`; LO 2026-10-08):**
 1. quad · Monday, Wednesday and Friday mornings (10-07)
 2. Zoe's apartment · Friday evening
 3. canteen · weekday lunch (new, 10-07)
@@ -328,9 +328,9 @@ There is no schedule until goal 3 is written.
   Friday-night/Saturday scene, not a row.
 - **Kitchen:** Laura at breakfast and most evenings; Mark on Wednesday evening and all of Sunday.
 - **Living room:** Mark late at night, except Saturday; Laura waiting up late on Saturday night.
-- **Hall and stairs:** Laura's catches. These fire when Ella comes home late, and also when she
-  leaves Ryan's room late (fixed 10-06, lead's default: Ryan A 13's "Laura downstairs"), not from
-  Laura's rows.
+- **Hall and stairs:** Laura's catches, from her stairs row gated on `came_home_late` (LO, 2026-10-08): it fires when Ella
+  comes home late. Leaving Ryan's room late (fixed 10-06, lead's default: Ryan A 13's "Laura downstairs") is a
+  later catch on the same stairs.
 
 **Their rooms while they are out** (content: going through their things):
 - **Ryan's room:** weekday daytimes, Wednesday evening, Saturday evening.
@@ -420,12 +420,12 @@ Ryan A 9 is the Kayla talk (fixed 10-06).
 
 ## 8. Rows: the full week and release 1
 
-**Full week: 45 rows** (10-07: the college timetable; was 30 on 10-06, after Hale's afternoon office
+**Full week: 47 rows** (10-08: two gated rows added; 10-07: the college timetable; was 30 on 10-06, after Hale's afternoon office
 row was cut, Laura's Saturday waiting-up row added and Mark's late row split in two).
 - **The household (16):** Laura 5, Mark 7, Ryan 4.
 - **Outside (18):** Tom 1, Gary 2, Zoe 4, Hale 3, Nadia 4, Jake 3, Vance 1.
 - **College staff (10):** the art lecturer 3, the Business lecturer 3, the Biology TA 3, the dean 1.
-- **Gated (1):** Ryan's gated Saturday row. (The gated Friday rows on §10 are not counted yet.)
+- **Gated (3):** Ryan's Saturday row, Laura's stairs row and Jake's door row (10-08). (The gated Friday rows on §10 are not counted yet.)
 
 **Release 1:** page 7 decides.
 

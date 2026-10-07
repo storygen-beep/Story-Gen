@@ -1,6 +1,6 @@
 # SP2 · The ladders — First Term
 
-> [READY] · drafted 2026-10-04 · updated 2026-10-07 (thinned: rules only) · signed by LO: LO, 2026-10-07
+> [READY] · drafted 2026-10-04 · updated 2026-10-08 (where each stage starts) · signed by LO: LO, 2026-10-08
 > A scaffold: what every later step stands on, so later releases add steps without breaking shipped
 > scenes, numbers or saves. No steps here — they live in `proposals/ARC_IDEAS.md` now and on each
 > person's sheet later. Rules: `the-arc.md` A1–A5b, A13–A14 · `the-meters.md` W1, W1b.
@@ -19,7 +19,7 @@
 | 4 | Hungry | Watched | bold |
 | 5 | Shameless | On Display | bold |
 
-- Both meters run 0–100. A stage once reached is kept.
+- Both meters run 0–100, and the stages start at 0, 20, 40, 60 and 80 (LO, 2026-10-08). A stage once reached is kept.
 - **A stage adds choices** to scenes she already visits. The scene is written once; each stage adds a
   button and a short reaction, and a locked choice names what it needs. Ryan sees her in the towel —
   Good Girl: "Run to your room" · Curious adds "Walk past slowly" · Bold adds "Let him look".

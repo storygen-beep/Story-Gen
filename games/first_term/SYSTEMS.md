@@ -1,6 +1,6 @@
 # The systems — First Term (layer 4: systems as slots)
 
-> [READY] · layer 4 · drafted 2026-10-06 · updated 2026-10-07 (party scout and party rules; key names, ages confirmed, two stale lines out; classmates are extras) · signed by LO: LO, 2026-10-07
+> [READY] · layer 4 · drafted 2026-10-06 · updated 2026-10-08 (§14, the park, at the end; the parties card, the page 7 line, needs not cards) · signed by LO: LO, 2026-10-08
 > A game-only page beside `DIRECTION.md` (layer 2) and `LIVES.md` (layer 3). Moved here from
 > `proposals/SYSTEMS_SLOTS.md` on 2026-10-07 (snapshot `first_term_snapshots/20261007_layer4_close_before/`).
 > v1 drafted 2026-10-06 (snapshot:
@@ -26,7 +26,7 @@
 | 1 | college | system | yes: classes, exams, offices, the dean, the curfew | `intelligence`, four `grade_*`, exam flags, `office_business_<term>_used`, `on_probation`, `complaints`, `curfew` |
 | 2 | the café job | system | yes: every Tom B step, the uniform tiers | `cafe_job`, `cafe_shift_1/2/3_today`, `uniform_sexy`, `uniform_slutty` |
 | 3 | money and rent | system | yes: Sunday steps, goal 1, the twist, food and clothes | `money`, engine rent + `rent_carried`, `paid_full_streak` |
-| 4 | parties | system (no card) | yes: Friday steps in four arcs | `party_went` + weekday + `hours_since_flag` |
+| 4 | parties | system (card: `parties`) | yes: Friday steps in four arcs | `party_went` + weekday + `hours_since_flag` |
 | 5 | energy | a need | **yes, a real lock** (LO, chat) | `energy` |
 | 6 | hygiene | a need, with an off switch | colour only, never a story lock | `hygiene`, `hygiene_off` |
 | 7 | wardrobe | system | yes: leaving a room, dress codes, the risky buttons | clothing states (`worn_exposure`, `clothing_slot`), key items |
@@ -530,8 +530,8 @@ tick runs at `:6947-6967`; `engine.md` §28.1). The cheat page's "Skip to mornin
 
 ## Still open
 
-- Page 7: release-1 width, which systems are live on day 1, the Hungry class moments (decided item 10),
-  SP4's numbers (item 12).
+- Page 7: answered on SP4 and SP7 (LO, 2026-10-07): release-1 width, the day-1 systems, no Hungry class
+  moments (decided item 10), SP4's numbers (item 12).
 - The keys: named (list above, LO 2026-10-07); their scenes are written at the board.
 - The cast ages in `want.cast`: LO confirmed all 21 on 2026-10-07 (`SP5_cast.md`).
 
@@ -540,11 +540,40 @@ tick runs at `:6947-6967`; `engine.md` §28.1). The cheat page's "Skip to mornin
 **To the board phase** (`the-systems.md` "What the board phase records", :396-421; `state.md` board
 schema, :110-186):
 - **One card per system** (`templates/sheets/system.md`): college (§1), the café (§2), money and rent
-  (§3), parties (§4; card `scout/party.md`), wardrobe (§7), energy (§5) and hygiene (§6), the last two also in
-  `board.needs[]` (`the-meters.md` M8).
+  (§3), parties (§4; card `scout/party.md`), wardrobe (§7) and the park (§14). Energy (§5) and hygiene (§6) are needs only, in
+  `board.needs[]` (`the-meters.md` M8), not cards: a card needs a ladder (LO, 2026-10-08).
 - **Meters** (`board.meters[]`): `campus_talk` (§9), `laura_suspicion` (§10), `followers` (§11),
   Corruption and Exhibitionism (§8; `SP2_ladders.md:12-44`).
 - **Infrastructure** (`board.infrastructure[]`): the phone, a channel (§11).
 - The keys and their overnight rules: "Keys at a glance" above.
 
 **To page 7:** release-1 width; which systems are live on day 1; the Hungry class moments; SP4's numbers.
+
+## 14. The park (LO, 2026-10-08)
+
+Added at the end of the page so the cites into the lines above don't move.
+
+- **Its own place, not a walk to campus.** She can walk, rest and run there. It is an exhibition spot that grows by
+  stage, up to groping and public sex in later releases (LO, 2026-10-08).
+- **Card:** a small system card, `park` (`board.systems`). It passes the seven questions (`the-systems.md:65-73`), and
+  it feeds Exhibitionism, which is already read everywhere, so it passes the brake (`the-systems.md:181-185`).
+- **By stage** (the heat table, `SP2_ladders.md:34-44`):
+
+  | stage | in the park |
+  |---|---|
+  | Good Girl · Covered | walk, rest, run; accidents: the wind and her skirt, a jogger turns to look |
+  | Curious · Daring | she watches a couple in the bushes; a selfie on the path for her feed; a flash for someone she knows (Zoe's dare) |
+  | Bold · Showing | naked or touching with someone she knows, somewhere hidden |
+  | Hungry · Watched (later) | strangers see her on purpose; groping in a crowd |
+  | Shameless · On Display (later) | public sex |
+
+  Release 1 ships the first three rows; the locked buttons for the last two show in the park and name what they need.
+- **Running is about clothes, not fitness.** No new meter (`the-systems.md:181-185`). Normal: leggings and a top.
+  Daring: a sports bra only, or no bra under a thin top. Later: shorts that show everything. What she wears changes
+  who looks and what happens. Running costs energy; resting on a bench gives a little back.
+- **A no always works.** Groping (later) has a labelled no on the same screen, and the no holds (`SP2_ladders.md:59`).
+- **The top step has a face.** Public sex is with someone she knows or brings (Ryan, Jake, Zoe), or later a park
+  regular who may become goal 3's man from town. A regular is a new person: a written age, LO's yes and an SP5 re-sign.
+- **Hours:** 07:00–22:00 (`SP1_time.md:11`). The dark park after 22:00 is for a later release.
+- **Keys:** her two meters, `followers` (the selfie), `energy`, the clothing states; key item `sports_bra`.
+- **Leads to:** in release 1, the watching scene; later, the regular.

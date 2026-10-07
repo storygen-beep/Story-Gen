@@ -1,6 +1,6 @@
 # SP3 · Dependencies — First Term
 
-> [READY] · drafted 2026-10-07 · signed by LO: LO, 2026-10-07
+> [READY] · drafted 2026-10-07 · updated 2026-10-08 · signed by LO: LO, 2026-10-08
 > A decision record, ≤ 400 words. The rules: `references/the-spine.md` SP3.
 > Steps: `proposals/ARC_IDEAS.md`. A step's own step before isn't listed (`SP2_ladders.md:48`). A
 > **needs** cell is a window unless it names a step, a place or a key.
@@ -14,7 +14,7 @@
 | Laura C 1 | Tuesday evening, day 2 | `LIVES.md:391-392` |
 | Laura C 2 | late night, the hall · the "out late" key | `SYSTEMS.md:498` |
 | Laura C 4 | Ryan A 5 | `ARC_IDEAS.md:149` |
-| Laura C 5 (= Jake B 4) | Jake B 3 · Saturday late night, to midnight | `ARC_IDEAS.md:150`; `LIVES.md:57` |
+| Laura C 5 (= Jake B 4) | Jake B 3 · Saturday late night, to midnight · as Jake B 4 it also needs Laura C 4: one shared canvas reads both counters (LO, 2026-10-08) | `ARC_IDEAS.md:150`; `LIVES.md:57` |
 | Laura C 6 | Saturday early evening | `LIVES.md:56` |
 | Laura C 7 | Zoe A 1 · the Friday party | `ARC_IDEAS.md:854`; `LIVES.md:181-182` |
 | Mark A 1, 3, 7 | Sunday morning · the rent has started | `LIVES.md:29`; `SYSTEMS.md:508-509` |
