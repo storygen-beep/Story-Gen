@@ -1,0 +1,32 @@
+# [REVIEW] Scene — laura_05_jake_at_the_door
+
+> A draft for LO to place. Written 2026-10-08.
+
+| row | answer |
+|---|---|
+| person · step | `npc_laura` · 5 (Laura C 5) = `npc_jake` · 4 (Jake B 4): one canvas |
+| where · when | the front door, seen from the dark living room · Saturday 22:30–00:00 |
+| gate | stage 3 on both meters, her Want 40, Jake B 3, a date |
+| want (test 1) | Laura: "Is Jake bringing you home?" · Jake: "Is your mom up?" |
+| next step (test 2) | she uses Jake's goodnight on the one watching from the dark |
+| hook (test 3) | "Was he any good?" — "Better in your dress." |
+| what she wears here (test 8) | Laura's dress: only in a group on `laura_blue_dress` worn |
+| explicit? | no: under 3 list words (his hands on her ass) |
+
+## Branch map — one row per screen (S1)
+
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+|---|---|---|---|---|
+| `porch` | Jake walks her to the door: "Everyone was looking at you tonight." | no | "Kiss me." → `kiss` · "Goodnight, Jake." → in (parked) | none |
+| `kiss` | his hands on her ass, pulling her in; Laura on the dark couch | no | "Higher. Don't stop." → `couch` | `jake_date_booked` set false |
+| `couch` | inside: Laura's hand at her own throat: "Was he any good?" | no | "Better in your dress." → the hall | Laura's Want add +10 · `laura_step` set 5 · `jake_step` set 4 |
+
+Both counters read this canvas, and it sets both (LO, 2026-10-08). Jake never learns Laura was watching.
+
+## Why — the source of each key choice
+
+| key choice | source |
+|---|---|
+| the shared step | LO, 2026-10-06 (DIRECTION §6) · SP3 (LO, 2026-10-08) |
+| the scene and its lines | the arc ideas, Laura C 5 and Jake B 4 |
+| the dress in a group | the truth rule |

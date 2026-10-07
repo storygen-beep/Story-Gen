@@ -1,6 +1,6 @@
 # SP5 · The cast — First Term
 
-> [READY] · drafted 2026-10-07 · signed by LO: LO, 2026-10-07
+> [READY] · drafted 2026-10-07 · updated 2026-10-08 (Tom to step 6) · signed by LO: LO, 2026-10-08
 > A decision record, ≤ 400 words. The rules: `references/the-spine.md` SP5 · `the-want.md` §6.
 
 | decision | answer |
@@ -15,7 +15,7 @@
 | Ryan | 22 | arc |
 | Laura | 41 | arc |
 | Mark | 46 | arc |
-| Tom | 31 | arc, to step 7 (SP7) |
+| Tom | 31 | arc, to step 6 (SP7) |
 | Zoe | 19 | arc |
 | Dr. Hale | 39 | arc |
 | Jake | 20 | arc |
