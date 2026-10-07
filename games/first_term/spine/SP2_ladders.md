@@ -1,6 +1,6 @@
 # SP2 · The ladders — First Term
 
-> [READY] · drafted 2026-10-04 · updated 2026-10-07 · signed by LO: LO, 2026-10-07
+> [READY] · drafted 2026-10-04 · updated 2026-10-07 (thinned: rules only) · signed by LO: LO, 2026-10-07
 > A scaffold: what every later step stands on, so later releases add steps without breaking shipped
 > scenes, numbers or saves. No steps here — they live in `proposals/ARC_IDEAS.md` now and on each
 > person's sheet later. Rules: `the-arc.md` A1–A5b, A13–A14 · `the-meters.md` W1, W1b.
@@ -64,7 +64,7 @@
 - **Ryan** — want + warmth · central
 - Direction: hers — he already wants her; the question is how far she goes.
 - Raised by: what she shows at home, teasing (Want) · talking, keeping his secret, covering for him,
-  letting him cover a short Sunday (Warmth; an everyday act since Ryan A 2 was cut, 10-06) · Lowered
+  letting him cover a short Sunday (Warmth; an everyday act, not a step) · Lowered
   by: mocking him, choosing Jake, threatening to tell Mom (Warmth).
 - As it rises: looks away fast → holds the look → opens to her two knocks at night. Warmth colours how
   he treats her: protective, covers for her with Laura, jealous of Jake.
@@ -74,10 +74,8 @@
   secret's safe. You're my brother, that's all. (ends his path)" — either closes his steps; he's only
   a brother, and cold. (fixed 10-06, lead's default)
 - Ends as: his room at night — two knocks, any night.
-- After: Kayla (21) keeps her Fridays and Ella knocks anyway: two knocks, any night but Friday, and on
-  Fridays she listens through the wall. Laura has seen which door Ella comes out of and hasn't said
-  anything yet; if Laura C 11 has happened, Laura knows (fixed 10-06, lead's default). Parked: Kayla
-  finds out.
+- After: the knocks go on around his girlfriend's nights (`LIVES.md:115`), and Laura's knowing grows;
+  the beats are Ryan A's After (`proposals/ARC_IDEAS.md:124`).
 
 Arc: Ryan A · Two Knocks in proposals/ARC_IDEAS.md
 
@@ -91,9 +89,9 @@ Arc: Ryan A · Two Knocks in proposals/ARC_IDEAS.md
 - Who starts: she walks in, then waits.
 - Their no: "I'm your mother" (parked) · Her final no: "You're my mom. That's all you get to be. (ends
   her path)" — closes her steps; every catch after is a strict-mom punishment.
-- Ends as: nights while Mark sleeps — "Every night he's asleep, you leave that door open."
-- After: she still waits on the stairs, and "tell me everything" becomes foreplay; Ryan becomes a second
-  catcher.
+- Ends as: nights while Mark sleeps, her door left open (`proposals/ARC_IDEAS.md:158`).
+- After: her catches keep coming, and her questions become foreplay; the beats are Laura C's After
+  (`proposals/ARC_IDEAS.md:162`).
 
 Arc: Laura C · The Catch in proposals/ARC_IDEAS.md
 
@@ -106,10 +104,10 @@ Arc: Laura C · The Catch in proposals/ARC_IDEAS.md
 - Who starts: he names the act; every version where he does has a labelled, parked no.
 - Their no: "Not with your mother home" (parked) · Her final no: "I tell Mom (ends his path)" — closes
   his steps; rent is strict forever.
-- Ends as: Sunday rent paid her way, his version or hers.
-- After: Sundays play in two versions, his terms or hers. Hers is goal 1's body route: she takes his
-  chair at step 9. Paying in full from her own money is the separate money route. Vance saw; Laura's
-  suspicion carries on.
+- Ends as: rent paid her way, his version or hers (rent day: `LIVES.md:29`, `SP1_time.md:12`).
+- After: the rent table plays in two versions, his terms or hers; hers is goal 1's body route, and paying
+  in full is the separate money route (`IDEA.md:29-34`). The beats are Mark A's After
+  (`proposals/ARC_IDEAS.md:200`).
 
 Arc: Mark A · The Table in proposals/ARC_IDEAS.md
 
@@ -121,8 +119,9 @@ Arc: Mark A · The Table in proposals/ARC_IDEAS.md
 - Who starts: he names it, until she names her price.
 - Their no: morning shifts, fewer tips (parked) · Her final no: "No more late shifts with you. (ends his
   path)" — closes his steps; she works mornings.
-- Ends as: after closing — sometimes Gary (52) pays for a seat in booth four.
-- After: her prices go on the chalkboard in code; Mark asks "Where's a waitress get twenties?"
+- Ends as: after closing, sometimes with a regular paying to watch (`proposals/ARC_IDEAS.md:237`).
+- After: her prices stay hers, and the money comes home where Mark notices; the beats are Tom B's After
+  (`proposals/ARC_IDEAS.md:240`).
 
 Arc: Tom B · Her Price in proposals/ARC_IDEAS.md
 
@@ -130,42 +129,49 @@ Arc: Tom B · Her Price in proposals/ARC_IDEAS.md
 - Direction: hers — Zoe pulls her out because she wants Ella, and dares her instead of asking; Ella
   decides how far.
 - Raised by: dares taken · Lowered by: nothing; a refused dare costs nothing.
-- As it rises: Zoe sets the dares → "You didn't need me last night. You were the dare." → Ella sets them.
+- As it rises: Zoe sets the dares → Zoe admits she dared instead of asking (`proposals/ARC_IDEAS.md:267`)
+  → Ella sets them.
 - Who starts: Zoe, until Ella is Bold.
 - Their no: "Not that one, babe" when Ella leads (parked) · Her final no: none; every dare has "Not
   tonight, Zo" (parked).
 - Ends as: party nights, Ella's call.
-- After: a Friday text, "Your call"; what she brings home feeds Ryan and Laura.
+- After: Zoe hands her the call on party nights, and what she brings home feeds Ryan and Laura; the beats
+  are Zoe A's After (`proposals/ARC_IDEAS.md:271`).
 
 Arc: Zoe A · The Party Guide in proposals/ARC_IDEAS.md
 
 - **Hale** — steps · side
 - Direction: hers — he watches; she decides how close to sit.
-- Raised by: staying after class, what she learns about him (Nadia's story, his wife's 7:30 pickup) ·
+- Raised by: staying after class, what she learns about him (his history with Nadia, his wife's pickup;
+  `proposals/ARC_IDEAS.md:289`, `:293`) ·
   Lowered by: nothing; a no is parked.
-- As it rises: hard behind the lectern → her flash and "Thursday, after six" → the photo face-down →
-  Claire (38) knocks → Ella sets the hour → Claire in the corridor.
+- As it rises: he looks and doesn't hide it → he names an hour → he hides his marriage → his wife nearly
+  catches them → Ella sets the hour → his wife's nearness becomes the risk she wants
+  (`proposals/ARC_IDEAS.md:293-298`).
 - Who starts: she does: an accident first, then her flash; he names the first hour, she sets the rest.
 - Their no: "Not here. Office hours." then "This has to stop" (parked) · Her final no: "Transfer section
   (ends his path)", or from step 4 "Tell Claire… (ends his path)" — closes his steps; her grade drops to
   what she earns.
-- Ends as: his office, Thursdays at seven — the hour Ella sets, done before Claire picks him up at 7:30.
-- After: Claire comes early some Thursdays; her course grades go home to Laura; Nadia: "So it's you now."
+- Ends as: his office, at the hour Ella sets, before his wife comes for him (times: `LIVES.md:201`,
+  `proposals/ARC_IDEAS.md:289`).
+- After: his wife knows and comes anyway, her grades go home, and campus starts to talk; the beats are
+  Hale B's After (`proposals/ARC_IDEAS.md:300`).
 
 Arc: Hale B · The Photo on His Desk in proposals/ARC_IDEAS.md
 
 - **Jake** — steps · side
 - Direction: hers — he wants a girlfriend he can show off; Ella decides who the show is for.
 - Raised by: dates taken, being shown off (steps) · Lowered by: nothing; a no is parked.
-- As it rises: picks her out at Zoe's → kisses her on show on the quad → named to the house at the door
-  → the open door at Zoe's party.
+- As it rises: picks her out → shows her off in public → is named to the house → wants her seen
+  (`proposals/ARC_IDEAS.md:322-326`).
 - Who starts: she does: she walks over at Zoe's.
 - Their no: "I'm not your alibi, @player." (parked) · Her final no: "Don't come to the door again. (ends
-  his path)", offered only at his last step (the talk), so Laura C 5 and Zoe A 5 always have him —
-  closes his steps, the Saturday dates and the door.
-- Ends as: the door — the guy the house knows, or her Saturday cover.
-- After: Jake's Saturday dates, booked on his phone thread (dating is not a system, LO 2026-10-07); Laura at the Sunday table: "Is Jake coming
-  Saturday?"; on campus she's "Jake's girl".
+  his path)", offered only at his last step (the talk), so the steps other arcs share with him always
+  have him (`proposals/ARC_IDEAS.md:325-326`) — closes his steps, the dates and the door.
+- Ends as: the door — the guy the house knows, or her cover.
+- After: the dates repeat, booked on his phone thread (dating is not a system, LO 2026-10-07; days:
+  `LIVES.md:294`), and the house and campus treat him as hers; the beats are Jake B's After
+  (`proposals/ARC_IDEAS.md:329`).
 
 Arc: Jake B · The Door in proposals/ARC_IDEAS.md
 
