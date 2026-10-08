@@ -1,0 +1,456 @@
+# =============================================================================
+# First Term — 8 · the phone (a channel, not a system: the-phone.md)
+#
+# One thread per person she is involved with (each person sheet's "Phone thread"
+# row): Ryan, Laura, Mark, Tom, Zoe, Dr. Hale (his college email), Jake. Every text
+# is caused by a flag a scene sets, with a delay and an hour window (P4). The calls
+# (Laura's curfew call, the dean's office) arrive with their scenes in pieces 3-4.
+# =============================================================================
+
+[phone]
+enabled = true
+
+[[phone.apps]]
+id    = "messages"
+type  = "chat"
+label = "Messages"
+
+[[phone.apps]]
+id    = "feed"
+type  = "social_feed"
+label = "Feed"
+post_actions = [
+  { label = "Post a selfie", followers_min = 1, followers_max = 3, counter_trait = "followers", daily_cap = 1 },
+  { label = "Post one in a towel", followers_min = 3, followers_max = 6, counter_trait = "followers", daily_cap = 1, corruption_min = 20, gate_trait = "exhibitionism" },
+  { label = "Post one in your underwear", followers_min = 6, followers_max = 12, counter_trait = "followers", daily_cap = 1, corruption_min = 40, gate_trait = "exhibitionism" },
+]
+
+# ── the feed looks back at her (P6): posts that read followers and campus_talk ──
+[[phone.posts]]
+id          = "feed_party_tag"
+app         = "feed"
+poster_name = "@campus_nights"
+caption     = "friday at zoe's. who's the new girl 👀"
+likes       = 212
+image       = "phone/feed_party_tag.jpg"
+search_queries = ["college house party crowd phone photo"]
+[phone.posts.trigger]
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 10 } ] }
+
+[[phone.posts]]
+id          = "feed_followers_dm"
+app         = "feed"
+poster_name = "@quad_watch"
+caption     = "mirror pic of the week. you know who you are 🔥"
+likes       = 340
+image       = "phone/feed_followers_dm.jpg"
+search_queries = ["girl mirror selfie bedroom phone"]
+[phone.posts.trigger]
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "followers", operator = "gte", value = 20 } ] }
+
+# ── Ryan: caused by knows_about_kayla (his step 2) ──
+[[phone.conversations]]
+id     = "ryan_kayla"
+app    = "messages"
+npc    = "npc_ryan"
+notify = "📱 Ryan"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "knows_about_kayla", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "knows_about_kayla", operator = "gte", value = 1 },
+  { type = "time_of_day", start_time = "21:00", end_time = "23:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "about this morning"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "mom doesn't know about her"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "your secret's safe", effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 3 } ] },
+  { text = "what's it worth", effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 2 } ] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+round = 2
+content = "come knock if you're up"
+
+# ── Ryan's repeat invite, after his step 8 (the door this release ends on) ──
+[[phone.conversations]]
+id     = "ryan_two_knocks_text"
+app    = "messages"
+npc    = "npc_ryan"
+notify = "📱 Ryan"
+repeat_after_days = 2
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "ryan_08_done", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "ryan_08_done", operator = "gte", value = 1 },
+  { type = "weekday", weekdays = [0, 1, 2, 3, 5, 6] },
+  { type = "time_of_day", start_time = "22:00", end_time = "00:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you still up?"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "two knocks. door's open."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "coming", effects = [ { targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 1 } ] },
+  { text = "not tonight" },
+]
+
+# ── Laura: caused by laura_01_done (the blue dress) ──
+[[phone.conversations]]
+id     = "laura_dinner"
+app    = "messages"
+npc    = "npc_laura"
+notify = "📱 Mom"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "laura_01_done", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "laura_01_done", operator = "gte", value = 1 },
+  { type = "time_of_day", start_time = "17:00", end_time = "20:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "home for dinner sweetheart?"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "wear the blue dress 💙"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "on my way", effects = [ { targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 2 } ] },
+  { text = "eating out tonight", effects = [ { targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = -1 } ] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+round = 2
+content = "kitchen. six. don't be late"
+
+# ── Mark: caused by rent_starts (breakfast, day 1). Five days on, Saturday, every week ──
+[[phone.conversations]]
+id     = "mark_rent"
+app    = "messages"
+npc    = "npc_mark"
+notify = "📱 Mark"
+repeat_after_days = 6
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "rent_starts", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "rent_starts", operator = "gte", value = 5 },
+  { type = "weekday", weekdays = [5] },
+  { type = "time_of_day", start_time = "18:00", end_time = "21:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "rent is due tomorrow."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "kitchen table. all of it."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "i'll have it", effects = [ { targetType = "npc", npcId = "npc_mark", trait = "power", op = "add", value = -1 } ] },
+  { text = "might be short", effects = [ { targetType = "npc", npcId = "npc_mark", trait = "power", op = "add", value = 2 }, { targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1 } ] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+round = 2
+content = "sunday morning. count it slow."
+
+# ── Tom: caused by cafe_job ──
+[[phone.conversations]]
+id     = "tom_shift"
+app    = "messages"
+npc    = "npc_tom"
+notify = "📱 Tom"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "cafe_job", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "cafe_job", operator = "gte", value = 1 },
+  { type = "weekday", weekdays = [0, 1, 2, 3, 4, 5] },
+  { type = "time_of_day", start_time = "10:00", end_time = "14:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "shift today? 2:30"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "regulars tip the pretty ones"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "i'll be there", effects = [ { targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = 1 } ] },
+  { text = "can't today" },
+]
+
+# ── Tom's repeat, after his step 6: Friday, stay after close ──
+[[phone.conversations]]
+id     = "tom_close"
+app    = "messages"
+npc    = "npc_tom"
+notify = "📱 Tom"
+repeat_after_days = 6
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tom_06_done", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "tom_06_done", operator = "gte", value = 1 },
+  { type = "weekday", weekdays = [4] },
+  { type = "time_of_day", start_time = "12:00", end_time = "18:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "stay after close"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "i'll do the blinds"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "maybe", effects = [ { targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = 1 } ] },
+  { text = "not this week" },
+]
+
+# ── Zoe: caused by zoe_met. The party (Thursday) and the run (Friday), weekly ──
+[[phone.conversations]]
+id     = "zoe_party"
+app    = "messages"
+npc    = "npc_zoe"
+notify = "📱 Zoe"
+repeat_after_days = 6
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "zoe_met", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "zoe_met", operator = "gte", value = 1 },
+  { type = "weekday", weekdays = [3] },
+  { type = "time_of_day", start_time = "18:00", end_time = "22:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "party friday. mine."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "wear something short babe"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "i'm in" },
+  { text = "might not make it" },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+round = 2
+content = "or borrow mine 😈"
+
+[[phone.conversations]]
+id     = "zoe_run"
+app    = "messages"
+npc    = "npc_zoe"
+notify = "📱 Zoe"
+repeat_after_days = 6
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "zoe_met", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "zoe_met", operator = "gte", value = 2 },
+  { type = "weekday", weekdays = [4] },
+  { type = "time_of_day", start_time = "18:00", end_time = "22:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "run with me tomorrow?"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "meet me at the park gates"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "see you there" },
+  { text = "sleeping in" },
+]
+
+# ── Dr. Hale (his college email): caused by hale_02_done ──
+[[phone.conversations]]
+id     = "hale_office_hours"
+app    = "messages"
+npc    = "npc_hale"
+notify = "📧 College email: Dr. Hale"
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "hale_02_done", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "hale_02_done", operator = "gte", value = 1 },
+  { type = "weekday", weekdays = [0, 1, 2, 3, 4] },
+  { type = "time_of_day", start_time = "09:00", end_time = "17:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Re: your paper."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Office hours Thursday, after six."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "I'll be there." },
+  { text = "Can we do it in class?" },
+]
+
+# ── Hale's repeat, after his step 5: Wednesday, "Thursday. Seven." ──
+[[phone.conversations]]
+id     = "hale_thursday"
+app    = "messages"
+npc    = "npc_hale"
+notify = "📧 College email: Dr. Hale"
+repeat_after_days = 6
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "hale_05_done", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "hale_05_done", operator = "gte", value = 1 },
+  { type = "weekday", weekdays = [2] },
+  { type = "time_of_day", start_time = "09:00", end_time = "17:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "Thursday, my office. Seven."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "Seven." },
+  { text = "Not this week." },
+]
+
+# ── Jake: caused by jake_number (Zoe's first party). The date is booked here. ──
+[[phone.conversations]]
+id     = "jake_date"
+app    = "messages"
+npc    = "npc_jake"
+notify = "📱 Jake"
+repeat_after_days = 6
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "jake_number", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "jake_number", operator = "gte", value = 1 },
+  { type = "flag", subject = "player", flag_key = "jake_date_booked", operator = "is_false" },
+  { type = "weekday", weekdays = [0, 1, 2, 3, 4] },
+  { type = "time_of_day", start_time = "18:00", end_time = "22:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you free saturday night?"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "i'll pick you up"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "saturday. pick me up", flagEffects = [ { targetType = "player", flag = "jake_date_booked", op = "set" } ] },
+  { text = "not this week" },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+round = 2
+content = "front door. eight. wear something"
+
+# ── calls (the person sheets: Laura's curfew call; the dean's office arrives with college) ──
+[[phone.apps]]
+id    = "calls"
+type  = "calls"
+label = "Calls"
+
+[[phone.calls]]
+id           = "laura_curfew_call"
+app          = "calls"
+caller       = "npc_laura"
+accept       = "laura_curfew_call"
+ring_minutes = 30
+notify       = "📞 Mom is calling"
+[phone.calls.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "curfew", operator = "is_true" },
+  { type = "hours_since_flag", subject = "player", flag_key = "curfew", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "curfew_days", operator = "gt", value = 0 },
+  { type = "flag", subject = "player", flag_key = "came_home_late", operator = "is_false" },
+  { type = "time_of_day", start_time = "23:00", end_time = "01:00" },
+] }
+[phone.calls.on_missed]
+effects = [ { targetType = "player", trait = "laura_suspicion", op = "add", value = 2 } ]
+
+# ── the dean's office calls her in (npc_dean sheet: a call caused by her first trouble) ──
+[[phone.calls]]
+id           = "dean_call_complaints"
+app          = "calls"
+caller       = "npc_dean"
+accept       = "dean_warning"
+ring_minutes = 60
+notify       = "📞 The dean's office is calling"
+[phone.calls.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "dress_warned", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "dress_warned", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "complaints", operator = "gte", value = 2 },
+  { type = "flag", subject = "player", flag_key = "dean_met", operator = "is_false" },
+  { type = "weekday", weekdays = [0, 1, 2, 3, 4] },
+  { type = "time_of_day", start_time = "09:00", end_time = "17:00" },
+] }
+[phone.calls.on_missed]
+effects = [ { targetType = "player", trait = "complaints", op = "add", value = 1, clamp = false } ]
+
+[[phone.calls]]
+id           = "dean_call_grades"
+app          = "calls"
+caller       = "npc_dean"
+accept       = "dean_warning"
+ring_minutes = 60
+notify       = "📞 The dean's office is calling"
+[phone.calls.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "failing_noticed", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "failing_noticed", operator = "gte", value = 7 },
+  { type = "flag", subject = "player", flag_key = "dean_met", operator = "is_false" },
+  { type = "weekday", weekdays = [0, 1, 2, 3, 4] },
+  { type = "time_of_day", start_time = "09:00", end_time = "17:00" },
+] }
+[phone.calls.on_missed]
+effects = [ { targetType = "player", trait = "laura_suspicion", op = "add", value = 2 } ]

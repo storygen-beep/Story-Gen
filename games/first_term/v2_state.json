@@ -1,6 +1,6 @@
 {
   "slug": "first_term",
-  "phase": "board",
+  "phase": "sheets",
   "narration_person": "second",
   "protagonist": "Ella",
   "want": {
@@ -38,11 +38,11 @@
       "who": "female",
       "definition": "written",
       "start_choice": {
-        "asked_at": "opening (canvas to be named)",
+        "asked_at": "ryan_01_hall_first_morning, node breakfast (OPENING.md screen 7)",
         "flags": [
-          "start_wants_grades",
-          "start_wants_fun",
-          "start_wants_freedom"
+          "college_for_grades",
+          "college_for_fun",
+          "college_for_freedom"
         ]
       },
       "customization": [
@@ -1362,7 +1362,7 @@
         "labels": [
           "zone:home"
         ],
-        "read_by": "Ryan A 13 (one reader; more on Laura's sheet, SYSTEMS decided item 6)"
+        "read_by": "0.1: Laura's catch on the stairs (low: \"Where were you?\"; high: she checks the dress, the smell) and the curfew (set at suspicion 50 or more, or low Warmth); later: Ryan A 13 (sheets/people/npc_laura.md; LO, 2026-10-08)"
       },
       {
         "id": "followers",
