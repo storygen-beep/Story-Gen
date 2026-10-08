@@ -15,6 +15,19 @@
 //                        NOT whatever is currently half-built in the working tree.
 window.GAMES = [
   {
+    // Listed 2026-10-08. Built overnight with author-game-v2 from the signed sheets
+    // (games/first_term/iterations/001/MORNING_REPORT.md). 29 places, 21 people, 158 canvases,
+    // 77 cards, 7 ladders / 44 steps (all reached in the build), ~29,000 words, 57/71 gates
+    // (the reds are written down with reasons in iterations/001/BUILD_LOG.md). DEV + DEBUG build
+    // on LO's call: the jump list, stat controls and missing-media placeholders are live. No media
+    // harvested. No `version`: nothing has shipped.
+    slug: "first_term",
+    title: "First Term",
+    badge: "v2",
+    dev: true,
+    summary: `You're eighteen and starting college, living at home with your mom Laura, your stepdad Mark and your stepbrother Ryan. The bathroom is shared and Ryan doesn't knock. Mark is behind on the rent to the man next door, and every Sunday at the kitchen table he wants your share. There's a café job with a manager who likes the tight uniform, a friend who throws the parties and dares you at all of them, a psychology lecturer who keeps you after class on Thursdays, and a guy on the team who wants to take you out on Saturday. Everyone wants something, and the first term is when you find out what you'll give.`,
+  },
+  {
     // Listed 2026-10-01. Authored with author-game-v2 as the first game on the fixed skill
     // (games/billable_hours/SKILL_TEST_FINDINGS.md, 9 findings). 9 locations, 37 canvases,
     // 6 characters, 7 ladder steps (4 people), ~5,800 words, 56/58 gates (the 2 reds:

@@ -1,0 +1,474 @@
+# =============================================================================
+# First Term — 0 · project, settings, the clock, the sidebar, rent and clothes
+#
+# Built 2026-10-08 from the signed sheets (sheets/systems/*.md, OPENING.md,
+# DECISIONS.md) and the ledger (v2_state.json). Where the build differs from a
+# sheet, the line is in iterations/001/BUILD_VS_SHEET.md.
+# =============================================================================
+schema_version = "1.0"
+
+[project]
+id              = "first_term"
+title           = "First Term"
+description     = "You're 18, in your first term of college and still living at home. From Sunday you pay your step-father rent. Your step-brother looks, your mom watches, the café pays in tips, and every Friday Zoe has a dare for you."
+starting_canvas = "ryan_01_hall_first_morning"
+quests_engine   = "v2"
+version         = "0.1"
+release_date    = "2026-10-09"
+
+[time]
+starting_hour = 7          # SP1: Monday, 07:00 — her first morning of college
+starting_day  = "Monday"
+starting_week = 1
+
+[settings]
+narration_person           = "second"      # IMMUTABLE once a release ships (ledger, DECISIONS 31)
+clothing_enabled           = true
+wardrobe_location          = ["home_ella_room", "cafe", "college_womens_toilet", "zoe_bedroom"]
+wardrobe_anywhere          = false         # the dress rules are real: change in a room that has her clothes
+wardrobe_change_on_refusal = true
+saved_outfits              = true
+shop_location              = "clothes_shop"
+
+# ── the rent (money_pressure sheet · SP4 · engine.md §26) ──
+# The engine takes it on her first move after Sunday 00:00. Mark's Sunday-morning
+# table (mark_sunday_table, Mark's steps 1, 3, 7) sits beside the payment, never on it.
+[settings.rent]
+enabled          = true
+due_day          = "Sunday"
+collector_npc    = "npc_mark"
+start_after_flag = "rent_starts"
+stages      = [ { amount = 75, after_total_paid = 0 }, { amount = 90, after_total_paid = 300 }, { amount = 100, after_total_paid = 900 } ]
+stage_lines = [ "", "Vance put it up. Ninety from now on. Don't look at me, it's his house.", "A hundred. Vance again. He says that's the last of it." ]
+on_short         = "carry"
+currency_symbol  = "$"
+
+[settings.rent.text]
+title         = "Sunday. The rent."
+scene         = "Mark is at the kitchen table with an envelope in front of him and a coffee going cold beside it. Vance's name is on the envelope, in Mark's writing. He doesn't look up when you come in."
+greeting      = "Rent. On the table."
+paid_scene    = "You count it out onto the table, bill by bill. He counts it again, slower, licking his thumb."
+paid_response = "That's the week."
+paid_closing  = "He folds the money into the envelope and pushes your chair back in with his foot."
+cant_pay      = "You don't have it. He looks at the empty table, then at you, for a long time. \"Then it's owed. Vance doesn't wait, so I don't.\""
+partial_pay   = "\"That's short.\" He counts it anyway, and writes what's left on the back of the envelope. \"Next week. On top.\""
+
+# ── the overnight list (SP1) — every per-day cap is a *_today flag cleared here ──
+[engine.daily_tick]
+flagEffects = [
+  { targetType = "player", flag = "cafe_shift_1_today", op = "unset" },
+  { targetType = "player", flag = "cafe_shift_2_today", op = "unset" },
+  { targetType = "player", flag = "cafe_shift_3_today", op = "unset" },
+  { targetType = "player", flag = "ryan_hall_today", op = "unset" },
+  { targetType = "player", flag = "slept_today", op = "unset" },
+  { targetType = "player", flag = "shower_today", op = "unset" },
+  { targetType = "player", flag = "wash_today", op = "unset" },
+  { targetType = "player", flag = "selfie_today", op = "unset" },
+  { targetType = "player", flag = "touch_bed_today", op = "unset" },
+  { targetType = "player", flag = "touch_shower_today", op = "unset" },
+  { targetType = "player", flag = "touch_toilet_today", op = "unset" },
+  { targetType = "player", flag = "eat_today", op = "unset" },
+  { targetType = "player", flag = "canteen_table_today", op = "unset" },
+  { targetType = "player", flag = "study_1_today", op = "unset" },
+  { targetType = "player", flag = "study_2_today", op = "unset" },
+  { targetType = "player", flag = "park_walk_today", op = "unset" },
+  { targetType = "player", flag = "park_run_today", op = "unset" },
+  { targetType = "player", flag = "park_rest_today", op = "unset" },
+  { targetType = "player", flag = "park_selfie_today", op = "unset" },
+  { targetType = "player", flag = "stairs_event_today", op = "unset" },
+  { targetType = "player", flag = "couch_today", op = "unset" },
+  { targetType = "player", flag = "vance_walk_today", op = "unset" },
+  { targetType = "player", flag = "ryan_things_today", op = "unset" },
+  { targetType = "player", flag = "mark_things_today", op = "unset" },
+  { targetType = "player", flag = "laura_wardrobe_today", op = "unset" },
+  { targetType = "player", flag = "hot_tub_today", op = "unset" },
+  { targetType = "player", flag = "dress_code_today", op = "unset" },
+  { targetType = "player", flag = "desk_guy_today", op = "unset" },
+  { targetType = "player", flag = "ryan_talk_today", op = "unset" },
+  { targetType = "player", flag = "laura_talk_today", op = "unset" },
+  { targetType = "player", flag = "ryan_cover_today", op = "unset" },
+  { targetType = "player", flag = "laura_caught_today", op = "unset" },
+  { targetType = "player", flag = "sunday_counted_today", op = "unset" },
+  { targetType = "player", flag = "toilet_bra_today", op = "unset" },
+  { targetType = "player", flag = "park_flash_today", op = "unset" },
+  { targetType = "player", flag = "hookup_today", op = "unset" },
+]
+traitEffects = [
+  { targetType = "player", trait = "curfew_days", op = "add", value = -1, clamp = true },
+]
+
+# ── her face (SP6 · engine.md §34b). The look is not chosen yet (DECISIONS 1):
+#    these are slots for the media pass, nothing more. ──
+[player_portrait]
+enabled         = true
+default_image   = "portraits/her_default.jpg"
+underwear_image = "portraits/her_underwear.jpg"
+naked_image     = "portraits/her_naked.jpg"
+
+[[player_portrait.outfits]]
+image = "portraits/her_towel.jpg"
+when  = { worn_type = "towel" }
+
+[[player_portrait.outfits]]
+image = "portraits/her_cafe.jpg"
+when  = { worn_type = "cafe_uniform" }
+
+[[player_portrait.outfits]]
+image = "portraits/her_blue_dress.jpg"
+when  = { worn_type = "laura_dress" }
+
+[[player_portrait.outfits]]
+image = "portraits/her_party_dress.jpg"
+when  = { worn_type = "party_dress" }
+
+# ── the sidebar: her two stages, money, energy, hygiene, and what's next ──
+[[sidebar_items]]
+type       = "trait_words"
+trait      = "corruption"
+label      = "Corruption"
+show_value = true
+bands = [
+  { min = 0,  max = 19,  text = "Good Girl" },
+  { min = 20, max = 39,  text = "Curious" },
+  { min = 40, max = 59,  text = "Bold" },
+  { min = 60, max = 79,  text = "Hungry" },
+  { min = 80, max = 100, text = "Shameless" },
+]
+
+[[sidebar_items]]
+type       = "trait_words"
+trait      = "exhibitionism"
+label      = "Exhibitionism"
+show_value = true
+bands = [
+  { min = 0,  max = 19,  text = "Covered" },
+  { min = 20, max = 39,  text = "Daring" },
+  { min = 40, max = 59,  text = "Showing" },
+  { min = 60, max = 79,  text = "Watched" },
+  { min = 80, max = 100, text = "On Display" },
+]
+
+[[sidebar_items]]
+type  = "trait_bar"
+trait = "energy"
+label = "Energy"
+min   = 0
+max   = 100
+
+[[sidebar_items]]
+type  = "trait_bar"
+trait = "hygiene"
+label = "Hygiene"
+min   = 0
+max   = 100
+show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "hygiene_off", operator = "is_false" },
+] }
+
+[[sidebar_items]]
+type = "quest_next"
+max  = 3
+
+# ── one name per trait (engine.md §30). Banded and barred traits stay out of the dump. ──
+[[traits.labels]]
+key     = "corruption"
+label   = "Corruption"
+in_dump = false
+
+[[traits.labels]]
+key     = "exhibitionism"
+label   = "Exhibitionism"
+in_dump = false
+
+[[traits.labels]]
+key   = "money"
+label = "Money"
+
+[[traits.labels]]
+key     = "energy"
+label   = "Energy"
+in_dump = false
+
+[[traits.labels]]
+key     = "hygiene"
+label   = "Hygiene"
+in_dump = false
+
+[[traits.labels]]
+key   = "campus_talk"
+label = "Campus talk"
+
+[[traits.labels]]
+key   = "laura_suspicion"
+label = "Mom's suspicion"
+
+[[traits.labels]]
+key   = "followers"
+label = "Followers"
+
+[[traits.labels]]
+key   = "intelligence"
+label = "Intelligence"
+
+[[traits.labels]]
+key   = "grade_psych"
+label = "Psychology grade"
+
+[[traits.labels]]
+key   = "grade_art"
+label = "Figure drawing grade"
+
+[[traits.labels]]
+key   = "grade_business"
+label = "Business grade"
+
+[[traits.labels]]
+key   = "grade_bio"
+label = "Biology grade"
+
+[[traits.labels]]
+key   = "complaints"
+label = "Complaints"
+
+[[traits.labels]]
+key    = "paid_full_streak"
+label  = "Sundays paid in a row"
+
+[[traits.labels]]
+key    = "curfew_days"
+label  = "Curfew, days left"
+hidden = true
+
+[[traits.labels]]
+key    = "drinks_tonight"
+label  = "Drinks tonight"
+hidden = true
+
+[[traits.labels]]
+key   = "want"
+label = "Want"
+
+[[traits.labels]]
+key   = "warmth"
+label = "Warmth"
+
+[[traits.labels]]
+key   = "power"
+label = "Power"
+
+[[traits.labels]]
+key    = "ryan_step"
+label  = "Ryan's step"
+hidden = true
+
+[[traits.labels]]
+key    = "laura_step"
+label  = "Laura's step"
+hidden = true
+
+[[traits.labels]]
+key    = "mark_step"
+label  = "Mark's step"
+hidden = true
+
+[[traits.labels]]
+key    = "tom_step"
+label  = "Tom's step"
+hidden = true
+
+[[traits.labels]]
+key    = "zoe_step"
+label  = "Zoe's step"
+hidden = true
+
+[[traits.labels]]
+key    = "hale_step"
+label  = "Hale's step"
+hidden = true
+
+[[traits.labels]]
+key    = "jake_step"
+label  = "Jake's step"
+hidden = true
+
+# ── the cast page (engine.md §34) — lists only the people she has met ──
+[ui.cast_page]
+title       = "The People"
+intro       = "Who's who in your first term."
+show_traits = ["want"]
+trait_bands = { want = [ { max = 19, text = "Hides it" }, { min = 20, max = 49, text = "Looks" }, { min = 50, max = 79, text = "Wants you" }, { min = 80, text = "Can't stop" } ], warmth = [ { max = 29, text = "Cold" }, { min = 30, max = 69, text = "Warm" }, { min = 70, text = "On your side" } ], power = [ { max = 39, text = "You set the terms" }, { min = 40, max = 59, text = "Even" }, { min = 60, text = "His terms" } ] }
+
+# ── shortcuts (the-systems.md SY7): free, no codes ──
+[ui.cheat_page]
+title = "Shortcuts"
+intro = "Free buttons that save you time."
+
+[[ui.cheat_page.grants]]
+id    = "money"
+label = "Money (+$50)"
+trait = "money"
+value = 50
+clamp = false
+free  = true
+
+[[ui.cheat_page.grants]]
+id    = "energy"
+label = "Full energy"
+trait = "energy"
+op    = "set"
+value = 100
+free  = true
+
+[[ui.cheat_page.grants]]
+id    = "skip_day"
+label = "Skip to morning"
+kind  = "next_day"
+wake  = "07:00"
+free  = true
+
+# ── her clothes (wardrobe sheet: seven states, five key items). A state is read off
+#    what she wears: worn_exposure, a clothing_slot, or a garment's `type`. ──
+[[clothing]]
+id = "plain_bra"
+name = "Plain bra"
+slot = "bra"
+initial = true
+type = "bra"
+
+[[clothing]]
+id = "plain_panties"
+name = "Cotton panties"
+slot = "underwear"
+initial = true
+type = "panties"
+
+[[clothing]]
+id = "tshirt"
+name = "T-shirt"
+slot = "top"
+initial = true
+type = "tshirt"
+
+[[clothing]]
+id = "jeans"
+name = "Jeans"
+slot = "bottom"
+initial = true
+type = "jeans"
+
+[[clothing]]
+id = "sneakers"
+name = "Sneakers"
+slot = "shoes"
+initial = true
+type = "sneakers"
+
+[[clothing]]
+id = "leggings"
+name = "Leggings"
+slot = "bottom"
+initial = true
+type = "leggings"
+
+[[clothing]]
+id = "sleep_shorts"
+name = "Sleep shorts"
+slot = "bottom"
+initial = true
+type = "shorts"
+beauty = 1
+
+[[clothing]]
+id = "sleep_shirt"
+name = "Sleep shirt"
+slot = "dress"
+initial = true
+type = "sleep_shirt"
+exposure = 1
+
+[[clothing]]
+id = "towel"
+name = "Towel"
+slot = "dress"
+initial = true
+type = "towel"
+exposure = 1
+
+[[clothing]]
+id = "short_skirt"
+name = "Short skirt"
+slot = "bottom"
+price = 30
+type = "short_skirt"
+beauty = 2
+corruption = 1
+
+[[clothing]]
+id = "thin_top"
+name = "Sheer blouse"
+slot = "top"
+price = 20
+type = "thin_top"
+beauty = 1
+
+[[clothing]]
+id = "sports_bra"
+name = "Sports bra"
+slot = "bra"
+price = 25
+type = "sports_bra"
+beauty = 1
+
+[[clothing]]
+id = "cafe_uniform_normal"
+name = "Café uniform"
+slot = "dress"
+type = "cafe_uniform"
+beauty = 1
+
+[[clothing]]
+id = "cafe_uniform_sexy"
+name = "Tight café uniform"
+slot = "dress"
+type = "cafe_uniform"
+beauty = 2
+corruption = 1
+
+[[clothing]]
+id = "laura_blue_dress"
+name = "Laura's blue dress"
+slot = "dress"
+type = "laura_dress"
+beauty = 3
+corruption = 1
+
+[[clothing]]
+id = "zoe_party_dress"
+name = "Zoe's party dress"
+slot = "dress"
+type = "party_dress"
+beauty = 3
+corruption = 2
+
+# ── the story card (Story Goals): the opening's card, then goal 1 (OPENING.md screen 9) ──
+[[quest_cards]]
+group    = "story_goals"
+priority = 20
+text     = "Week one. Class, a job, and seventy-five for Mark by Sunday."
+tip      = "Psychology is Monday morning in the lecture hall. The café on your street is hiring. The rent is taken on Sunday."
+when     = [ { flag = "opening_done", op = "is_true" }, { days_since_flag = "opening_done", op = "lt", value = 7 } ]
+goals    = [
+  { type = "trait", subject = "player", trait = "hale_step", op = "gte", value = 1, label = "Go to your first class: Psychology, Monday morning, the lecture hall" },
+  { flag = "cafe_job", op = "is_true", label = "Ask for a job at the café" },
+  { type = "trait", subject = "player", trait = "money", op = "gte", value = 75, label = "Have $75 by Sunday" },
+]
+
+[[quest_cards]]
+group    = "story_goals"
+priority = 10
+text     = "Pay your own way: the rent paid your way, not Mark's."
+tip      = "Mark counts the rent at the kitchen table on Sunday mornings. Four Sundays in a row paid in full from your own money ends it — so does taking his chair."
+when     = [ { flag = "opening_done", op = "is_true" }, { flag = "pays_her_own_way", op = "is_false" } ]
+goals    = [
+  { type = "trait", subject = "player", trait = "paid_full_streak", op = "gte", value = 4, label = "Pay the rent in full from your own money, four Sundays in a row" },
+]

@@ -1,0 +1,5544 @@
+{
+  "slug": "first_term",
+  "phase": "sheets",
+  "narration_person": "second",
+  "protagonist": "Ella",
+  "want": {
+    "fantasy_shape": "taboo_at_home",
+    "model_to_beat": {
+      "game": "In Her Own Hands",
+      "better": "the house reacts: Mark, Laura and Ryan notice, talk, and treat her differently because of her life outside"
+    },
+    "promise": {
+      "goal": "pay her own way: earn enough of her own money that Sunday rent is paid her way, not Mark's",
+      "goals": [
+        {
+          "goal": "pay her own way: earn enough of her own money that Sunday rent is paid her way, not Mark's",
+          "ends_when": "rent never stops; it ends the day Ella, not Mark, sets how it is paid: the money route (she pays in full from her own money for several Sundays in a row, whether or not Mark's path is closed; how many is set on the board) or the body route (Mark A up to step 9, the scene where she takes his chair)",
+          "ends_flag": "pays_her_own_way",
+          "next": "her name on campus"
+        },
+        {
+          "goal": "her name on campus",
+          "ends_when": "her campus_talk level opens the party everyone goes to; Ella hosts it, and that party scene sets the flag",
+          "ends_flag": "hosts_the_party",
+          "next": "beyond campus"
+        },
+        {
+          "goal": "beyond campus: her name spreads into the town and new people arrive",
+          "ends_when": "Sunday dinner: a man she met in town, a café regular or a neighbour (18+, written later), is invited by Laura or Mark, who don't know what he is to Ella, and the family sits at the table with him",
+          "ends_flag": "town_at_the_table",
+          "next": "to be named"
+        }
+      ]
+    },
+    "companion": "npc_zoe",
+    "pressure": "npc_mark",
+    "player": {
+      "who": "female",
+      "definition": "written",
+      "start_choice": {
+        "asked_at": "ryan_01_hall_first_morning, node breakfast (OPENING.md screen 7)",
+        "flags": [
+          "college_for_grades",
+          "college_for_fun",
+          "college_for_freedom"
+        ]
+      },
+      "customization": [
+        {
+          "id": "name",
+          "type": "text",
+          "default": "Ella",
+          "token": "@player"
+        },
+        {
+          "id": "nickname",
+          "type": "text",
+          "label": "What Ryan calls you",
+          "default": "El",
+          "token": "@player.nickname"
+        }
+      ]
+    },
+    "who_she_is": "Ella, 18, first day of college, still living at home in a rented house with her mom, step-father and step-brother; no job, no money of her own, no lock on her door",
+    "obligation": "her cut of the house rent: $75 every Sunday, counted out to Mark on the kitchen table; the house is rented from Mr. Vance next door for $1,200 a month",
+    "hold_kind": "bill",
+    "hold_collector": "npc_mark",
+    "appetite": "to be wanted by the people she shouldn't want",
+    "ascent": "from flirting for tips and near-misses at home to Ryan in her room with her mom downstairs, Laura closer than she should be, rent paid her own way, regulars paying for more, the professor's office and Vance's porch",
+    "charge": "taboo + transformation",
+    "cast": [
+      {
+        "id": "npc_ryan",
+        "age": 22,
+        "keeps": "want + warmth"
+      },
+      {
+        "id": "npc_mark",
+        "age": 46,
+        "keeps": "want + power"
+      },
+      {
+        "id": "npc_laura",
+        "age": 41,
+        "keeps": "want + warmth"
+      },
+      {
+        "id": "npc_zoe",
+        "age": 19,
+        "keeps": "step counter + memory flags"
+      },
+      {
+        "id": "npc_tom",
+        "age": 31,
+        "keeps": "want + power"
+      },
+      {
+        "id": "npc_hale",
+        "age": 39,
+        "keeps": "step counter + memory flags"
+      },
+      {
+        "id": "npc_vance",
+        "age": 54,
+        "keeps": "want + power"
+      },
+      {
+        "id": "npc_jake",
+        "age": 20,
+        "keeps": "step counter + memory flags"
+      },
+      {
+        "id": "npc_nadia",
+        "age": 20,
+        "keeps": "step counter + memory flags"
+      },
+      {
+        "id": "npc_kayla",
+        "age": 21,
+        "keeps": "none — inside Ryan's scenes"
+      },
+      {
+        "id": "npc_gary",
+        "age": 52,
+        "keeps": "none — inside Tom's scenes"
+      },
+      {
+        "id": "npc_claire",
+        "age": 38,
+        "keeps": "none — inside Hale's scenes"
+      },
+      {
+        "id": "npc_art_lecturer",
+        "age": 45,
+        "keeps": "step counter + memory flags"
+      },
+      {
+        "id": "npc_business_lecturer",
+        "age": 50,
+        "keeps": "none — he can't be bought: an honest retake, no route"
+      },
+      {
+        "id": "npc_bio_ta",
+        "age": 28,
+        "keeps": "step counter + memory flags"
+      },
+      {
+        "id": "npc_dean",
+        "age": 55,
+        "keeps": "step counter + memory flags"
+      },
+      {
+        "id": "npc_desk_guy",
+        "age": 21,
+        "keeps": "none — inside the class scenes (a pool event)"
+      },
+      {
+        "id": "npc_rival",
+        "age": 21,
+        "keeps": "none — inside the class and canteen scenes"
+      },
+      {
+        "id": "npc_study_guy",
+        "age": 21,
+        "keeps": "none — inside the class scenes"
+      },
+      {
+        "id": "npc_cocky_guy",
+        "age": 21,
+        "keeps": "none — inside the class scenes"
+      },
+      {
+        "id": "npc_figure_model",
+        "age": 25,
+        "keeps": "none — inside the Figure drawing class"
+      }
+    ],
+    "why_this_person": {
+      "npc_ryan": "the one person at home on her side, and he wants her",
+      "npc_mark": "his approval, and to be off the hook for the rent",
+      "npc_laura": "to stay her good girl, and to be close to her",
+      "npc_zoe": "someone to follow into fun",
+      "npc_tom": "shifts and good tips",
+      "npc_hale": "a passing grade",
+      "npc_vance": "for the rent to come in, every month",
+      "npc_jake": "a normal boyfriend",
+      "npc_nadia": "the classmate who knows Hale's history and saves her a seat"
+    },
+    "places": [
+      {
+        "id": "home_hall",
+        "name": "Hall"
+      },
+      {
+        "id": "home_kitchen",
+        "name": "Kitchen"
+      },
+      {
+        "id": "home_living_room",
+        "name": "Living Room"
+      },
+      {
+        "id": "home_master_bedroom",
+        "name": "Master Bedroom"
+      },
+      {
+        "id": "home_ella_room",
+        "name": "Your Room"
+      },
+      {
+        "id": "home_ryan_room",
+        "name": "Ryan's Room"
+      },
+      {
+        "id": "home_bathroom",
+        "name": "Bathroom"
+      },
+      {
+        "id": "street",
+        "name": "Your Street"
+      },
+      {
+        "id": "vance_house",
+        "name": "Vance's House"
+      },
+      {
+        "id": "corner_shop",
+        "name": "Corner Shop"
+      },
+      {
+        "id": "park",
+        "name": "Park"
+      },
+      {
+        "id": "campus",
+        "name": "Campus"
+      },
+      {
+        "id": "lecture_hall",
+        "name": "Lecture Hall"
+      },
+      {
+        "id": "library",
+        "name": "Library"
+      },
+      {
+        "id": "quad",
+        "name": "Quad"
+      },
+      {
+        "id": "cafe",
+        "name": "Café"
+      },
+      {
+        "id": "zoe_apartment",
+        "name": "Zoe's Apartment"
+      },
+      {
+        "id": "home_garage",
+        "name": "Garage"
+      },
+      {
+        "id": "hale_office",
+        "name": "Dr. Hale's Office"
+      },
+      {
+        "id": "zoe_bedroom",
+        "name": "Zoe's Bedroom"
+      },
+      {
+        "id": "party_house",
+        "name": "The Party House"
+      },
+      {
+        "id": "home_front_door",
+        "name": "Front Door"
+      },
+      {
+        "id": "canteen",
+        "name": "Canteen"
+      },
+      {
+        "id": "college_womens_toilet",
+        "name": "Women's Toilet"
+      },
+      {
+        "id": "college_mens_toilet",
+        "name": "Men's Toilet"
+      },
+      {
+        "id": "faculty_floor",
+        "name": "Faculty Floor"
+      },
+      {
+        "id": "art_office",
+        "name": "Art Lecturer's Office"
+      },
+      {
+        "id": "business_office",
+        "name": "Business Lecturer's Office"
+      },
+      {
+        "id": "ta_office",
+        "name": "TA's Office"
+      },
+      {
+        "id": "dean_office",
+        "name": "Dean's Office"
+      },
+      {
+        "id": "clothes_shop",
+        "name": "Clothes Shop"
+      }
+    ],
+    "threads": [
+      {
+        "id": "college",
+        "name": "College",
+        "person": "npc_hale",
+        "place": "campus",
+        "system": "college",
+        "link": "her grades go home to Laura"
+      },
+      {
+        "id": "job",
+        "name": "The café",
+        "person": "npc_tom",
+        "place": "cafe",
+        "system": "job",
+        "link": "it pays her cut of the rent"
+      },
+      {
+        "id": "friends",
+        "name": "Friends and parties",
+        "person": "npc_zoe",
+        "place": "zoe_apartment",
+        "system": "parties",
+        "link": "what she brings home late"
+      },
+      {
+        "id": "dating",
+        "name": "Dating",
+        "person": "npc_jake",
+        "place": "campus",
+        "system": "none — Jake's Saturday dates, booked on his phone thread",
+        "link": "Ryan sees"
+      },
+      {
+        "id": "neighbourhood",
+        "name": "The neighbourhood",
+        "person": "npc_vance",
+        "place": "vance_house",
+        "system": "money_pressure",
+        "link": "her $75 is part of what Mark owes him"
+      }
+    ],
+    "moment_kinds": [
+      "being_seen",
+      "taboo_at_home",
+      "consequence"
+    ]
+  },
+  "release_page": {
+    "her_moment": {
+      "person": "npc_ryan",
+      "step_n": 1,
+      "pays": "nothing — step 1",
+      "fantasy": "the one person in the house on her side is the one she shouldn't want, and on her first day of college she learns he looks",
+      "temptation": "first morning, one shared bathroom; she steps out in a towel, Ryan waiting in the hall: 'First day of college, huh. Look at you.'",
+      "answers": [
+        "Knock next time (parked)",
+        "push past",
+        "stop and talk",
+        "'Seen enough?' and let him look",
+        "'Don't ever look at me like that.' (ends his path)"
+      ],
+      "voice": {
+        "low": "Ryan — god — I'm in a towel, turn around.",
+        "high": "You can look. You were going to anyway."
+      },
+      "noticed": "Laura calls up the stairs, looks at both at breakfast, rules Ryan showers first",
+      "sticks": "ryan_hall_seen + ryan_hall_tease|talked|knock; Ryan want/warmth",
+      "remember": "You can look. You were going to anyway.",
+      "door": "Ryan's ladder and Laura's watching",
+      "opens": "step 3: his phone on the sink (Ryan A step 2 was cut 10-06; IDEA.md:105)"
+    },
+    "version": "0.1",
+    "steps": {
+      "npc_ryan": 8,
+      "npc_laura": 8,
+      "npc_mark": 9,
+      "npc_zoe": 4,
+      "npc_hale": 5,
+      "npc_jake": 4,
+      "npc_tom": 6
+    },
+    "places": [
+      "home_hall",
+      "home_kitchen",
+      "home_living_room",
+      "home_master_bedroom",
+      "home_ella_room",
+      "home_ryan_room",
+      "home_bathroom",
+      "street",
+      "vance_house",
+      "park",
+      "campus",
+      "lecture_hall",
+      "library",
+      "quad",
+      "cafe",
+      "zoe_apartment",
+      "home_garage",
+      "hale_office",
+      "zoe_bedroom",
+      "party_house",
+      "home_front_door",
+      "canteen",
+      "college_womens_toilet",
+      "faculty_floor",
+      "art_office",
+      "business_office",
+      "ta_office",
+      "dean_office",
+      "clothes_shop"
+    ],
+    "weeks": 8,
+    "promise_alive": "the Sunday table: each count says how many Sundays in a row she has paid her own way (goal 1; Mark A 1, 3, 7, 9); Zoe A 4 hands her the dares, which feeds campus_talk (goal 2)",
+    "replay_ready": "yes",
+    "block": [
+      "the fixed --ship BLOCK list (gates.py), no waivers"
+    ],
+    "report": [
+      "the fixed --ship REPORT list (gates.py), nothing added"
+    ],
+    "people": [
+      "npc_ryan",
+      "npc_laura",
+      "npc_mark",
+      "npc_tom",
+      "npc_zoe",
+      "npc_hale",
+      "npc_jake"
+    ],
+    "door": {
+      "canvas": "ryan_08_two_knocks",
+      "choice": "Two knocks",
+      "locked_next": "the next step's button (Ryan A 10), shown locked and naming Hungry (SP7:11)"
+    }
+  },
+  "spine": {
+    "pages": [
+      {
+        "id": "SP1",
+        "status": "READY",
+        "drafted_at": "2026-10-03",
+        "updated_at": "2026-10-08",
+        "signed_by": "LO",
+        "signed_at": "2026-10-08"
+      },
+      {
+        "id": "SP2",
+        "status": "READY",
+        "drafted_at": "2026-10-04",
+        "updated_at": "2026-10-08",
+        "signed_by": "LO",
+        "signed_at": "2026-10-08"
+      },
+      {
+        "id": "SP3",
+        "status": "READY",
+        "drafted_at": "2026-10-07",
+        "updated_at": "2026-10-08",
+        "signed_by": "LO",
+        "signed_at": "2026-10-08"
+      },
+      {
+        "id": "SP4",
+        "status": "READY",
+        "drafted_at": "2026-10-07",
+        "signed_by": "LO",
+        "signed_at": "2026-10-07"
+      },
+      {
+        "id": "SP5",
+        "status": "READY",
+        "drafted_at": "2026-10-07",
+        "updated_at": "2026-10-08",
+        "signed_by": "LO",
+        "signed_at": "2026-10-08"
+      },
+      {
+        "id": "SP6",
+        "status": "READY",
+        "drafted_at": "2026-10-07",
+        "signed_by": "LO",
+        "signed_at": "2026-10-07"
+      },
+      {
+        "id": "SP7",
+        "status": "READY",
+        "drafted_at": "2026-10-07",
+        "updated_at": "2026-10-08",
+        "signed_by": "LO",
+        "signed_at": "2026-10-08"
+      }
+    ]
+  },
+  "board": {
+    "coverage": [
+      {
+        "topic": "college",
+        "kind": "system",
+        "status": "covered",
+        "source": "templates/cards/college.md"
+      },
+      {
+        "topic": "job",
+        "kind": "system",
+        "status": "covered",
+        "source": "templates/cards/job.md"
+      },
+      {
+        "topic": "money_pressure",
+        "kind": "system",
+        "status": "covered",
+        "source": "templates/cards/money_pressure.md"
+      },
+      {
+        "topic": "parties",
+        "kind": "system",
+        "status": "scouted",
+        "source": "games/first_term/scout/party.md"
+      },
+      {
+        "topic": "wardrobe",
+        "kind": "system",
+        "status": "covered",
+        "source": "templates/cards/wardrobe.md"
+      },
+      {
+        "topic": "energy",
+        "kind": "mechanic",
+        "status": "covered",
+        "source": "templates/cards/needs.md"
+      },
+      {
+        "topic": "hygiene",
+        "kind": "mechanic",
+        "status": "covered",
+        "source": "templates/cards/needs.md"
+      },
+      {
+        "topic": "campus talk (reputation)",
+        "kind": "mechanic",
+        "status": "covered",
+        "source": "templates/cards/reputation.md"
+      },
+      {
+        "topic": "the phone",
+        "kind": "mechanic",
+        "status": "covered",
+        "source": "templates/cards/phone.md"
+      },
+      {
+        "topic": "sex for pay",
+        "kind": "mechanic",
+        "status": "covered",
+        "source": "templates/cards/sex_for_pay.md"
+      },
+      {
+        "topic": "the step ladders",
+        "kind": "mechanic",
+        "status": "covered",
+        "source": "references/the-arc.md A1"
+      },
+      {
+        "topic": "grades and exams",
+        "kind": "mechanic",
+        "status": "covered",
+        "source": "templates/cards/college.md"
+      },
+      {
+        "topic": "the curfew",
+        "kind": "mechanic",
+        "status": "lo",
+        "source": "LO, chat 2026-10-06 (SYSTEMS.md §1): low Warmth means a curfew, a real lock; it ends after a week and starts again if the grade is still failing",
+        "note": "the scout found no curfew in the 12 pass-list games"
+      },
+      {
+        "topic": "laura_suspicion",
+        "kind": "mechanic",
+        "status": "lo",
+        "source": "LO, 2026-10-07 (SYSTEMS.md decided item 6): laura_suspicion stays; its readers go on Laura's sheet"
+      },
+      {
+        "topic": "the drinks boost",
+        "kind": "mechanic",
+        "status": "lo",
+        "source": "LO, 2026-10-07 (SP4): 3 hours from the last drink, one stage up on both meters, choices only; steps ignore it"
+      },
+      {
+        "topic": "the way home and the heavy night",
+        "kind": "mechanic",
+        "status": "lo",
+        "source": "LO, 2026-10-07 (SYSTEMS.md §4, After a party; SP4: 3 drinks, 30 energy)",
+        "note": "scout gap: no pass-list game shows these"
+      },
+      {
+        "topic": "the dean and probation",
+        "kind": "mechanic",
+        "status": "lo",
+        "source": "LO, chat 2026-10-06 (SYSTEMS.md §1): the dean handles both grades and complaints"
+      },
+      {
+        "topic": "home",
+        "kind": "place",
+        "status": "covered",
+        "source": "references/the-map.md R2"
+      },
+      {
+        "topic": "campus",
+        "kind": "place",
+        "status": "covered",
+        "source": "templates/cards/college.md"
+      },
+      {
+        "topic": "the faculty floor and offices",
+        "kind": "place",
+        "status": "lo",
+        "source": "LO, chat 2026-10-07 (SYSTEMS.md §1): each office has its own route, one per person"
+      },
+      {
+        "topic": "the café",
+        "kind": "place",
+        "status": "covered",
+        "source": "templates/cards/job.md"
+      },
+      {
+        "topic": "the clothes shop",
+        "kind": "place",
+        "status": "covered",
+        "source": "templates/cards/wardrobe.md"
+      },
+      {
+        "topic": "the canteen",
+        "kind": "place",
+        "status": "lo",
+        "source": "LO, chat 2026-10-07 (SYSTEMS.md:221, :345): canteen food costs money; talk spreads there"
+      },
+      {
+        "topic": "Zoe's apartment",
+        "kind": "place",
+        "status": "lo",
+        "source": "LO, 2026-10-06 (LIVES.md:175-176): the party is at her apartment",
+        "note": "scout gap: no friend hosting weekly in the 12 games"
+      },
+      {
+        "topic": "the party house",
+        "kind": "place",
+        "status": "lo",
+        "source": "LO, 2026-10-06 (LIVES.md:190-192)"
+      },
+      {
+        "topic": "Vance's porch",
+        "kind": "place",
+        "status": "lo",
+        "source": "LO, 2026-10-06 (LIVES.md:277): his porch look is in release 1"
+      },
+      {
+        "topic": "the park",
+        "kind": "place",
+        "status": "lo",
+        "source": "LO, 2026-10-08: \"simply a park, she can walk, rest, excercise, this can be a spot for exhibitionism, gropping, walking into public sex\" (SYSTEMS.md §14)"
+      },
+      {
+        "topic": "the Friday party",
+        "kind": "scene",
+        "status": "scouted",
+        "source": "games/first_term/scout/party.md"
+      },
+      {
+        "topic": "a class visit",
+        "kind": "scene",
+        "status": "covered",
+        "source": "templates/cards/college.md"
+      },
+      {
+        "topic": "a café shift",
+        "kind": "scene",
+        "status": "covered",
+        "source": "templates/cards/job.md"
+      },
+      {
+        "topic": "the Sunday rent table",
+        "kind": "scene",
+        "status": "covered",
+        "source": "templates/cards/money_pressure.md"
+      },
+      {
+        "topic": "Jake's Saturday date and the door",
+        "kind": "scene",
+        "status": "lo",
+        "source": "LO, 2026-10-07 (SYSTEMS.md decided item 4): dating is not a system; Jake's repeat Saturday date on his phone thread"
+      },
+      {
+        "topic": "the home steps (step-family heat)",
+        "kind": "scene",
+        "status": "lo",
+        "source": "LO picked the home arcs 2026-10-04 (ARC_IDEAS.md:16-26); no pass-list game models step-family heat (ARC_IDEAS.md:72-75)"
+      },
+      {
+        "topic": "Vance's knock after a short Sunday",
+        "kind": "scene",
+        "status": "lo",
+        "source": "LO approved the week plan 2026-10-05 (LIVES.md:274)"
+      },
+      {
+        "topic": "figure-drawing posing",
+        "kind": "scene",
+        "status": "lo",
+        "source": "LO, chat 2026-10-06 (SYSTEMS.md §1): posing is the college exhibition ladder"
+      },
+      {
+        "topic": "the twist's offer",
+        "kind": "scene",
+        "status": "lo",
+        "source": "LO, 2026-10-07 (SP7 call 3): the offer scene ships, her answer stays parked"
+      },
+      {
+        "topic": "park",
+        "kind": "system",
+        "status": "lo",
+        "source": "LO, 2026-10-08: \"simply a park, she can walk, rest, excercise, this can be a spot for exhibitionism, gropping, walking into public sex\" (SYSTEMS.md §14)",
+        "note": "the field's park as an exhibition spot: the-systems.md:258 (Course of Temptation)"
+      }
+    ],
+    "cast": {
+      "width": 21,
+      "adding_rule": "a new person brings a thread of her life (or a part in one), a ladder or `none — <inside whose scenes>`, why she wants them, and a written age of 18 or older; then a want.cast row, LO's yes and an SP5 re-sign"
+    },
+    "media": {
+      "platform": "the browser build on the game portal, desktop first, every screen checked at phone width before it ships (LO, 2026-10-07)",
+      "clips": "every explicit beat carries its own clip (register.md S1); a repeatable surface uses a pool_dir; one asset, one block; a step's first beat carries one, talk and info steps none"
+    },
+    "pressure": {
+      "what_repeats": "rent, every Sunday, counted at the kitchen table",
+      "who_collects": "npc_mark",
+      "cost_of_a_miss": "carried to next week (rent_carried); Vance knocks the next evening; no game over",
+      "stages": [
+        {
+          "amount": 75,
+          "after_total_paid": 0
+        },
+        {
+          "amount": 90,
+          "after_total_paid": 300
+        },
+        {
+          "amount": 100,
+          "after_total_paid": 900
+        }
+      ]
+    },
+    "economy": {
+      "currency": "money",
+      "symbol": "$",
+      "obligation": "rent — Sunday, to Mark at the kitchen table, Vance behind him",
+      "obligation_amount": 75,
+      "week_income": 232,
+      "obligation_moves": "Mark names Vance's raise at the table: $90 after $300 paid, $100 after $900, then flat",
+      "obligation_every_weeks": 1,
+      "sinks": [
+        "rent",
+        "canteen food",
+        "the clothes shop"
+      ]
+    },
+    "systems": [
+      {
+        "id": "college",
+        "name": "College",
+        "place": "lecture_hall",
+        "hours": "Mon-Fri, three classes: 08:30-10:00, 10:15-11:45, 13:00-14:30 (Friday: the first only); offices 14:30-18:00; Hale's office Thu 17:00-19:30",
+        "cost": "a class slot (90 min) · energy (Focus spends it, Doze gives a little back)",
+        "one_ladder": false,
+        "pay_ladder": [
+          {
+            "rung": 1,
+            "gate": "a subject's grade trait in its failing band",
+            "pay": "failing: Laura reads it; low Warmth means a curfew; a week on, probation with the dean"
+          },
+          {
+            "rung": 2,
+            "gate": "the grade in its fine band",
+            "pay": "fine: the curfew lifts; the office talk hub reads it"
+          },
+          {
+            "rung": 3,
+            "gate": "the grade in its top band",
+            "pay": "top: the grade goes home as good news (Hale B 5's line)"
+          }
+        ],
+        "lewd_ladder": [
+          {
+            "rung": 1,
+            "gate": "Good Girl · Covered",
+            "acts": [
+              "an accident in class (the dropped pen)",
+              "the dress-code warning"
+            ]
+          },
+          {
+            "rung": 2,
+            "gate": "Curious · Daring (corruption gte 20 or exhibitionism gte 20)",
+            "acts": [
+              "a flash for one known person (Hale B 2; the cocky guy's answers)",
+              "an F/F tease (the art lecturer, the Biology TA) — 0.2 (SP5)",
+              "flirting so the study guy turns his paper",
+              "the guy beside her, hard, asks for help: she watches"
+            ]
+          },
+          {
+            "rung": 3,
+            "gate": "Bold · Showing (gte 40)",
+            "acts": [
+              "a touch in Hale's office (Hale B 3-4)",
+              "naked for the art lecturer alone — 0.2 (SP5)",
+              "private sex with the Biology TA in her office — 0.2 (SP5)",
+              "hands or mouth in the dean's office, no letter home — 0.2 (SP5)",
+              "her hand under the desk for the guy beside her, where nobody can see"
+            ]
+          },
+          {
+            "rung": 4,
+            "gate": "Hungry · Watched (gte 60) — not in release 1 (SP7 call 1)",
+            "acts": [
+              "under the desk with the class there",
+              "posing naked for the figure-drawing class",
+              "the dean's door left unlocked"
+            ]
+          }
+        ],
+        "people": [
+          "npc_hale",
+          "npc_nadia",
+          "npc_art_lecturer",
+          "npc_business_lecturer",
+          "npc_bio_ta",
+          "npc_dean",
+          "npc_zoe",
+          "npc_jake",
+          "npc_desk_guy",
+          "npc_rival",
+          "npc_study_guy",
+          "npc_cocky_guy",
+          "npc_figure_model"
+        ],
+        "pool": [
+          "college_class_psych",
+          "college_class_business",
+          "college_class_bio",
+          "college_class_figure",
+          "college_event_desk_guy",
+          "college_event_dress_code",
+          "college_exam",
+          "college_office_talk"
+        ],
+        "daily": true,
+        "memory": "history and rank: four grade traits, intelligence (only up), exam flags, complaints, on_probation, letter_home, curfew",
+        "growth": "climbs",
+        "feeds": [
+          "grade_psych",
+          "grade_art",
+          "grade_business",
+          "grade_bio",
+          "intelligence",
+          "complaints",
+          "campus_talk",
+          "laura_suspicion"
+        ],
+        "reads": [
+          "energy",
+          "wardrobe",
+          "corruption",
+          "exhibitionism",
+          "intelligence"
+        ],
+        "hook_link": "debt of trust: her grades go home to Laura (want.threads college); failing brings the curfew and gives Mark leverage at the table",
+        "leads_to": [
+          "npc_hale",
+          "npc_nadia",
+          "npc_art_lecturer",
+          "npc_bio_ta",
+          "npc_dean"
+        ],
+        "day_1": "yes: Monday's first class is day 1 (SYSTEMS.md:165)"
+      },
+      {
+        "id": "job",
+        "name": "The café job",
+        "place": "cafe",
+        "hours": "Mon-Sat 08:00-22:00, up to 3 shifts a day; Friday close; Tom off on Sunday",
+        "cost": "a shift (one slot) · energy",
+        "one_ladder": true,
+        "pay_ladder": [
+          {
+            "rung": 1,
+            "gate": "cafe_job",
+            "pay": "$8 + $4 tips a shift (normal uniform)"
+          },
+          {
+            "rung": 2,
+            "gate": "uniform_sexy (Tom B 2) · exhibitionism gte 20",
+            "pay": "$8 + $8 tips a shift"
+          },
+          {
+            "rung": 3,
+            "gate": "Friday close",
+            "pay": "tips doubled"
+          },
+          {
+            "rung": 4,
+            "gate": "uniform_slutty — after release 1",
+            "pay": "named with that release"
+          }
+        ],
+        "lewd_ladder": [
+          {
+            "rung": 1,
+            "gate": "Good Girl · Covered",
+            "acts": [
+              "Tom reties her apron",
+              "the regulars look"
+            ]
+          },
+          {
+            "rung": 2,
+            "gate": "Curious · Daring",
+            "acts": [
+              "the sexy uniform, top button open",
+              "leaning to pour for Gary"
+            ]
+          },
+          {
+            "rung": 3,
+            "gate": "Bold · Showing",
+            "acts": [
+              "Gary's ten minutes: $20, half to Tom (Tom B 4)",
+              "a kiss after close (Tom B 6)",
+              "the kiss after close again, Friday close only (Tom B 6 repeats; LO, 2026-10-08)"
+            ]
+          },
+          {
+            "rung": 4,
+            "gate": "later — Tom B 7 waits (LO, 2026-10-08); Tom B 8-9 wait for his rewrite (SP7 call 2)",
+            "acts": [
+              "her price named to the full room, $20 (Tom B 7)",
+              "behind the counter at Friday close",
+              "after hours"
+            ]
+          }
+        ],
+        "people": [
+          "npc_tom",
+          "npc_gary"
+        ],
+        "pool": [
+          "cafe_shift",
+          "cafe_shift_events"
+        ],
+        "daily": true,
+        "memory": "owned and history: cafe_job, uniform_sexy, uniform_slutty, cafe_shift_1/2/3_today, Tom's step and Want/Power",
+        "growth": "climbs",
+        "sink": "rent (Sunday, to Mark) · canteen food · the clothes shop",
+        "deadline": "Sunday 00:00 (the rent)",
+        "feeds": [
+          "money"
+        ],
+        "reads": [
+          "energy",
+          "exhibitionism",
+          "corruption",
+          "curfew"
+        ],
+        "hook_link": "debt: it pays her cut of the rent (want.threads job)",
+        "leads_to": [
+          "npc_tom",
+          "npc_gary"
+        ],
+        "day_1": "yes: the job ask is open from day 1 (SYSTEMS.md:205)"
+      },
+      {
+        "id": "money_pressure",
+        "name": "Money and rent",
+        "place": "home_kitchen",
+        "hours": "the engine takes it Sunday 00:00 (SP1:12); Mark's table is Sunday morning",
+        "cost": "$75 a week; $90 after $300 paid, $100 after $900, then flat (SP4)",
+        "one_ladder": true,
+        "pay_ladder": [
+          {
+            "rung": 1,
+            "gate": "rent_starts; total paid under $300",
+            "pay": "owes $75"
+          },
+          {
+            "rung": 2,
+            "gate": "total paid $300",
+            "pay": "owes $90 (Mark names it at the table as Vance's)"
+          },
+          {
+            "rung": 3,
+            "gate": "total paid $900",
+            "pay": "owes $100, then flat"
+          },
+          {
+            "rung": 4,
+            "gate": "Bold: Mark's prices, paid to her before the rent is taken",
+            "pay": "up to $20 (SP4)"
+          }
+        ],
+        "lewd_ladder": [
+          {
+            "rung": 1,
+            "gate": "Good Girl · Covered",
+            "acts": [
+              "counted in her sleep shirt (Mark A 1)",
+              "his eyes on the hem"
+            ]
+          },
+          {
+            "rung": 2,
+            "gate": "Curious · Daring",
+            "acts": [
+              "shorts to the table (Mark A 3)",
+              "his dress rule at the table"
+            ]
+          },
+          {
+            "rung": 3,
+            "gate": "Bold · Showing",
+            "acts": [
+              "a bill off an inch (Mark A 5)",
+              "twenty, and he can look (Mark A 7)",
+              "his chair (Mark A 9)"
+            ]
+          }
+        ],
+        "people": [
+          "npc_mark",
+          "npc_vance",
+          "npc_ryan"
+        ],
+        "pool": [
+          "mark_sunday_table",
+          "vance_knock",
+          "ryan_cover"
+        ],
+        "daily": false,
+        "memory": "history: rent_carried (engine), paid_full_streak, ryan_covered, total paid (the engine's stages), pays_her_own_way, debt_offer_seen",
+        "growth": "climbs",
+        "sink": "rent: to Mark at the kitchen table, Vance behind him",
+        "deadline": "Sunday 00:00",
+        "feeds": [
+          "paid_full_streak"
+        ],
+        "reads": [
+          "money"
+        ],
+        "hook_link": "debt: her $75 is part of what Mark owes Vance (want.threads neighbourhood)",
+        "leads_to": [
+          "npc_mark",
+          "npc_vance"
+        ],
+        "day_1": "from Mark's rent scene (start_after_flag rent_starts, SYSTEMS.md:508)"
+      },
+      {
+        "id": "parties",
+        "name": "Parties (Friday at Zoe's)",
+        "place": "zoe_apartment",
+        "hours": "Friday 19:00 to Saturday 02:00; the riskier choices after 23:00 (SYSTEMS.md:262)",
+        "cost": "the Friday evening · energy; drinks and food are free (SYSTEMS.md:263)",
+        "one_ladder": true,
+        "lewd_ladder": [
+          {
+            "rung": 1,
+            "gate": "Good Girl · Covered",
+            "acts": [
+              "Zoe's dress, borrowed",
+              "a dare she can refuse: 'Not tonight, Zo'"
+            ]
+          },
+          {
+            "rung": 2,
+            "gate": "Curious · Daring",
+            "acts": [
+              "a kiss on a dare (Jake or Zoe)",
+              "bra off through the sleeve (Zoe A 2)"
+            ]
+          },
+          {
+            "rung": 3,
+            "gate": "Bold · Showing",
+            "acts": [
+              "topless with Zoe's friends (Zoe A 3)",
+              "a hookup with someone she knows"
+            ]
+          },
+          {
+            "rung": 4,
+            "gate": "Hungry · Watched — later",
+            "acts": [
+              "Zoe's bedroom, door open (Zoe A 5)",
+              "strangers watching"
+            ]
+          }
+        ],
+        "people": [
+          "npc_zoe",
+          "npc_jake",
+          "npc_desk_guy",
+          "npc_rival",
+          "npc_study_guy",
+          "npc_cocky_guy",
+          "npc_figure_model"
+        ],
+        "pool": [
+          "party_chat",
+          "party_drink_offer",
+          "party_dare",
+          "party_hookup"
+        ],
+        "daily": false,
+        "memory": "the night (reset on arrival): drinks_tonight, drinks_boost, party_cool_<npc>; kept: party_went, heavy_night",
+        "growth": "climbs",
+        "feeds": [
+          "campus_talk",
+          "corruption",
+          "exhibitionism",
+          "laura_suspicion"
+        ],
+        "reads": [
+          "energy",
+          "curfew",
+          "wardrobe"
+        ],
+        "hook_link": "invite: what she brings home late (want.threads friends) — Laura's catch at the stairs, Ryan at 3 a.m.",
+        "leads_to": [
+          "npc_zoe",
+          "npc_jake",
+          "npc_laura",
+          "npc_ryan"
+        ],
+        "day_1": "no: it starts on the first Friday (SYSTEMS.md:250)"
+      },
+      {
+        "id": "wardrobe",
+        "name": "The wardrobe",
+        "place": "home_ella_room",
+        "hours": "always; the clothes shop Mon-Sat 10:00-18:00",
+        "cost": "1-2 clicks to change; clothes at the shop cost money, the price shown first",
+        "one_ladder": true,
+        "lewd_ladder": [
+          {
+            "rung": 1,
+            "gate": "Good Girl · Covered",
+            "acts": [
+              "covered",
+              "a towel in the hall (Ryan A 1)"
+            ]
+          },
+          {
+            "rung": 2,
+            "gate": "Daring",
+            "acts": [
+              "a short skirt",
+              "no bra"
+            ]
+          },
+          {
+            "rung": 3,
+            "gate": "Showing",
+            "acts": [
+              "no panties",
+              "underwear only at home"
+            ]
+          },
+          {
+            "rung": 4,
+            "gate": "Watched — later",
+            "acts": [
+              "naked by choice outside her room",
+              "the slutty uniform"
+            ]
+          }
+        ],
+        "people": [
+          "npc_ryan",
+          "npc_mark",
+          "npc_laura",
+          "npc_zoe"
+        ],
+        "pool": [
+          "wardrobe_event_stairs",
+          "wardrobe_event_dress_code"
+        ],
+        "daily": true,
+        "memory": "owned: the clothes she has, the three uniforms, Laura's and Zoe's dresses",
+        "growth": "climbs",
+        "sink": "the clothes shop",
+        "deadline": "none — no due day",
+        "feeds": [
+          "exhibitionism",
+          "complaints"
+        ],
+        "reads": [
+          "exhibitionism",
+          "corruption"
+        ],
+        "hook_link": "home lines per state: Ryan, Mark and Laura each react, by their numbers (SYSTEMS.md:313)",
+        "leads_to": [
+          "npc_ryan",
+          "npc_laura"
+        ],
+        "day_1": "yes"
+      },
+      {
+        "id": "park",
+        "name": "The park",
+        "place": "park",
+        "hours": "every day 07:00-22:00 (SP1:11); the dark park after 22:00 is later",
+        "cost": "time · energy (running spends it; a bench gives a little back)",
+        "one_ladder": true,
+        "lewd_ladder": [
+          {
+            "rung": 1,
+            "gate": "Good Girl · Covered",
+            "acts": [
+              "walk, rest, run",
+              "the wind and her skirt",
+              "a jogger turns to look"
+            ]
+          },
+          {
+            "rung": 2,
+            "gate": "Curious · Daring",
+            "acts": [
+              "she watches a couple in the bushes",
+              "a selfie on the path for her feed",
+              "a flash for someone she knows (Zoe's dare)",
+              "running in a sports bra, or no bra under a thin top"
+            ]
+          },
+          {
+            "rung": 3,
+            "gate": "Bold · Showing",
+            "acts": [
+              "naked with someone she knows, somewhere hidden",
+              "touching with someone she knows, somewhere hidden"
+            ]
+          },
+          {
+            "rung": 4,
+            "gate": "Hungry · Watched — later",
+            "acts": [
+              "strangers see her on purpose",
+              "groping in a crowd, with a no that holds"
+            ]
+          },
+          {
+            "rung": 5,
+            "gate": "Shameless · On Display — later",
+            "acts": [
+              "public sex with someone she knows or brings",
+              "later: the park regular"
+            ]
+          }
+        ],
+        "people": [
+          "npc_zoe"
+        ],
+        "pool": [
+          "park_walk",
+          "park_run",
+          "park_watch_the_couple",
+          "park_selfie",
+          "park_hidden"
+        ],
+        "daily": true,
+        "memory": "history: what she has done there (flags per first), her clothing state while she runs",
+        "growth": "climbs",
+        "feeds": [
+          "exhibitionism",
+          "followers",
+          "energy"
+        ],
+        "reads": [
+          "wardrobe",
+          "corruption",
+          "exhibitionism"
+        ],
+        "hook_link": "what she does in public: release 1 keeps it to people she knows; later a park regular may become goal 3's man from town",
+        "leads_to": [
+          "park_watch_the_couple",
+          "npc_zoe"
+        ],
+        "day_1": "yes: walk, rest and run at stage 1",
+        "people_later": "Ryan and Jake joining her in the park wait for a later release (LO, 2026-10-08)"
+      }
+    ],
+    "meters": [
+      {
+        "id": "corruption",
+        "kind": "sourced",
+        "key": "corruption",
+        "fed_at": [
+          "lecture_hall",
+          "zoe_apartment",
+          "cafe"
+        ],
+        "labels": [
+          "public"
+        ],
+        "read_by": "every stage choice (SP2 §1): her five stages at 20/40/60/80, her voice tier, each step's gate"
+      },
+      {
+        "id": "exhibitionism",
+        "kind": "sourced",
+        "key": "exhibitionism",
+        "fed_at": [
+          "home_ella_room",
+          "lecture_hall",
+          "zoe_apartment",
+          "park"
+        ],
+        "labels": [
+          "she_can_undress",
+          "public"
+        ],
+        "read_by": "every stage choice; leaving a room in a revealing state; the uniform tiers; the selfie ladder"
+      },
+      {
+        "id": "campus_talk",
+        "kind": "sourced",
+        "key": "campus_talk",
+        "fed_at": [
+          "canteen"
+        ],
+        "labels": [
+          "zone:campus"
+        ],
+        "read_by": "goal 2 (its level opens Zoe A 6); who approaches her; feed posts about her"
+      },
+      {
+        "id": "laura_suspicion",
+        "kind": "sourced",
+        "key": "laura_suspicion",
+        "fed_at": [
+          "home_hall"
+        ],
+        "labels": [
+          "zone:home"
+        ],
+        "read_by": "0.1: Laura's catch on the stairs (low: \"Where were you?\"; high: she checks the dress, the smell) and the curfew (set at suspicion 50 or more, or low Warmth); later: Ryan A 13 (sheets/people/npc_laura.md; LO, 2026-10-08)"
+      },
+      {
+        "id": "followers",
+        "kind": "sourced",
+        "key": "followers",
+        "fed_at": [
+          "home_ella_room",
+          "park"
+        ],
+        "labels": [
+          "has_mirror"
+        ],
+        "read_by": "campus talk, new messages, offers (SYSTEMS.md:383)"
+      },
+      {
+        "id": "intelligence",
+        "kind": "sourced",
+        "key": "intelligence",
+        "fed_at": [
+          "library",
+          "lecture_hall"
+        ],
+        "labels": [
+          "she_can_study"
+        ],
+        "read_by": "every exam result"
+      },
+      {
+        "id": "grade_psych",
+        "kind": "sourced",
+        "key": "grade_psych",
+        "fed_at": [
+          "lecture_hall"
+        ],
+        "labels": [
+          "she_can_study"
+        ],
+        "read_by": "Laura, Hale, Mark, the dean; failing / fine / top"
+      },
+      {
+        "id": "grade_art",
+        "kind": "sourced",
+        "key": "grade_art",
+        "fed_at": [
+          "lecture_hall"
+        ],
+        "labels": [
+          "she_can_study"
+        ],
+        "read_by": "Laura, the art lecturer, Mark, the dean"
+      },
+      {
+        "id": "grade_business",
+        "kind": "sourced",
+        "key": "grade_business",
+        "fed_at": [
+          "lecture_hall"
+        ],
+        "labels": [
+          "she_can_study"
+        ],
+        "read_by": "Laura, the Business lecturer's retake, Mark, the dean"
+      },
+      {
+        "id": "grade_bio",
+        "kind": "sourced",
+        "key": "grade_bio",
+        "fed_at": [
+          "lecture_hall"
+        ],
+        "labels": [
+          "she_can_study"
+        ],
+        "read_by": "Laura, the Biology TA, Mark, the dean"
+      },
+      {
+        "id": "complaints",
+        "kind": "sourced",
+        "key": "complaints",
+        "fed_at": [
+          "lecture_hall"
+        ],
+        "labels": [
+          "zone:campus"
+        ],
+        "read_by": "the dean: the warning, then the letter home"
+      },
+      {
+        "id": "paid_full_streak",
+        "kind": "sourced",
+        "key": "paid_full_streak",
+        "fed_at": [
+          "home_kitchen"
+        ],
+        "labels": [
+          "zone:home"
+        ],
+        "read_by": "goal 1's money route: 4 Sundays in a row (SP4)"
+      },
+      {
+        "id": "drinks_tonight",
+        "kind": "sourced",
+        "key": "drinks_tonight",
+        "fed_at": [
+          "zoe_apartment"
+        ],
+        "labels": [
+          "zone:town"
+        ],
+        "read_by": "the heavy night at 3 drinks (heavy_night; 30 energy on Saturday)"
+      },
+      {
+        "id": "money",
+        "kind": "ambient",
+        "key": "money",
+        "fed_at": [
+          "cafe"
+        ],
+        "labels": [
+          "sells_food"
+        ],
+        "read_by": "the rent, canteen food, the clothes shop"
+      }
+    ],
+    "infrastructure": [
+      {
+        "name": "the clock: days, hours, the Sunday rent tick and the overnight list (SP1)",
+        "kind": "clock"
+      },
+      {
+        "name": "the phone: chats, calls, the calendar and the social feed (SYSTEMS.md §11)",
+        "kind": "channel"
+      },
+      {
+        "name": "the sidebar: her two stages, money, energy and hygiene",
+        "kind": "view"
+      },
+      {
+        "name": "the guidance cards: one per ladder step, saying where and when",
+        "kind": "view"
+      },
+      {
+        "name": "the cheat page (the-systems.md SY7)",
+        "kind": "view"
+      }
+    ],
+    "who_climbs": "both",
+    "ascent_tiers": [
+      "corruption",
+      "exhibitionism"
+    ],
+    "ceilings": {
+      "corruption": 100,
+      "exhibitionism": 100
+    },
+    "player_start": {
+      "corruption": 0,
+      "exhibitionism": 0,
+      "money": 0,
+      "ryan_step": 0,
+      "laura_step": 0,
+      "mark_step": 0,
+      "tom_step": 0,
+      "zoe_step": 0,
+      "hale_step": 0,
+      "jake_step": 0
+    },
+    "repeat_raises": {
+      "corruption": 1,
+      "exhibitionism": 1
+    },
+    "needs": [
+      {
+        "key": "energy",
+        "falls": "spent, not decayed: classes, shifts, running in the park, parties and sex scenes take it through costs; not on the overnight tick (SP1:23); a heavy night starts Saturday 30 lower (SP4)",
+        "fills": "home_ella_room · sleep in her bed (a scene) · overnight; canteen · food · 30 min (some); lecture_hall · Doze (a little); park · rest on a bench (a little); party_house · soak in the hot tub (a little)",
+        "costs": "sleep: nothing; canteen food: money",
+        "shuts": "low energy: no café shift, no Focus in class (Doze only), no party — each refusal says why; at zero she falls asleep and wakes next morning"
+      },
+      {
+        "key": "hygiene",
+        "falls": "a little every night ([player.trait_decay]); faster after work, parties and sex",
+        "fills": "home_bathroom · a shower, which can roll an event (Ryan, Kayla, Mark) · 20 min; college_womens_toilet · a quick wash (a little)",
+        "costs": "nothing",
+        "shuts": "no story lock (LO, chat 2026-10-06): read by conditions that colour — it slows Warmth and draws lines from Laura or a lecturer; with hygiene_off nothing reads it"
+      }
+    ],
+    "wardrobe": {
+      "states": [
+        {
+          "id": "covered",
+          "condition": {
+            "type": "worn_exposure",
+            "operator": "eq",
+            "value": 0
+          }
+        },
+        {
+          "id": "short_skirt",
+          "condition": {
+            "type": "worn_type",
+            "operator": "eq",
+            "value": "short_skirt"
+          }
+        },
+        {
+          "id": "no_bra",
+          "condition": {
+            "type": "clothing_slot",
+            "slot": "bra",
+            "operator": "unequipped"
+          }
+        },
+        {
+          "id": "no_panties",
+          "condition": {
+            "type": "clothing_slot",
+            "slot": "underwear",
+            "operator": "unequipped"
+          }
+        },
+        {
+          "id": "underwear_only",
+          "condition": {
+            "type": "worn_exposure",
+            "operator": "eq",
+            "value": 1
+          }
+        },
+        {
+          "id": "towel",
+          "condition": {
+            "type": "worn_type",
+            "operator": "eq",
+            "value": "towel"
+          }
+        },
+        {
+          "id": "naked",
+          "condition": {
+            "type": "worn_exposure",
+            "operator": "gte",
+            "value": 2
+          }
+        }
+      ],
+      "key_items": [
+        "cafe_uniform_normal",
+        "cafe_uniform_sexy",
+        "laura_blue_dress",
+        "zoe_party_dress",
+        "sports_bra"
+      ]
+    },
+    "map": {
+      "archetype": "nested_zones",
+      "shape": "Your street is the ground. Off it: the house (its hall, and off the hall the front door, kitchen, living room, garage, bathroom and the three bedrooms), Vance's house next door, the park, the café, the clothes shop, Zoe's apartment (her bedroom off it), the party house, and the campus (the quad, lecture hall, library, canteen, toilets and the faculty floor with five offices).",
+      "home_base": "home_ella_room",
+      "exterior": "street",
+      "roots": [
+        "street"
+      ],
+      "homes": {
+        "npc_ryan": "home_ryan_room",
+        "npc_laura": "home_master_bedroom",
+        "npc_mark": "home_master_bedroom",
+        "npc_tom": "offscreen",
+        "npc_zoe": "zoe_bedroom",
+        "npc_hale": "offscreen",
+        "npc_jake": "offscreen",
+        "npc_vance": "vance_house",
+        "npc_nadia": "offscreen",
+        "npc_gary": "offscreen",
+        "npc_art_lecturer": "offscreen",
+        "npc_business_lecturer": "offscreen",
+        "npc_bio_ta": "offscreen",
+        "npc_dean": "offscreen",
+        "npc_kayla": "offscreen",
+        "npc_claire": "offscreen",
+        "npc_desk_guy": "offscreen",
+        "npc_rival": "offscreen",
+        "npc_study_guy": "offscreen",
+        "npc_cocky_guy": "offscreen",
+        "npc_figure_model": "offscreen"
+      },
+      "shared_homes": [
+        [
+          "npc_laura",
+          "npc_mark"
+        ]
+      ],
+      "scale": "a district: one street, a town strip and a campus",
+      "alive": "living world"
+    },
+    "locations": [
+      {
+        "id": "home_kitchen",
+        "name": "Kitchen",
+        "kind": "destination",
+        "job": "the rent table: Sunday's count, Laura's breakfast and wine, Mark's Wednesday",
+        "anchor": true,
+        "fill": 28000,
+        "labels": [
+          "zone:home",
+          "private"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "money_pressure"
+          ],
+          "people": [
+            "npc_laura",
+            "npc_mark"
+          ]
+        },
+        "in_release": true,
+        "alone": "look through the drawer: the letters, Vance's after a short week"
+      },
+      {
+        "id": "home_hall",
+        "name": "Hall",
+        "kind": "thoroughfare",
+        "job": "the house's hub; Laura's catches on the dark stairs",
+        "anchor": false,
+        "fill": 2000,
+        "labels": [
+          "zone:home"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_laura"
+          ]
+        },
+        "in_release": true
+      },
+      {
+        "id": "home_front_door",
+        "name": "Front Door",
+        "kind": "destination",
+        "job": "the doorstep: Jake's goodnights, seen from the dark living room",
+        "anchor": false,
+        "fill": 3000,
+        "labels": [
+          "zone:home",
+          "outdoors"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_jake"
+          ]
+        },
+        "alone": "sit on the step and watch the street (guess)",
+        "in_release": true
+      },
+      {
+        "id": "home_living_room",
+        "name": "Living Room",
+        "kind": "destination",
+        "job": "Mark's late nights; Laura waiting up on Saturday",
+        "anchor": false,
+        "fill": 5000,
+        "labels": [
+          "zone:home",
+          "private"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_mark",
+            "npc_laura"
+          ]
+        },
+        "in_release": true,
+        "alone": "lie on the couch in what she's wearing; whoever walks through reacts"
+      },
+      {
+        "id": "home_master_bedroom",
+        "name": "Master Bedroom",
+        "kind": "destination",
+        "job": "Laura's dresses and mirror; their bed",
+        "anchor": false,
+        "fill": 4000,
+        "labels": [
+          "zone:home",
+          "private",
+          "has_mirror"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "wardrobe"
+          ],
+          "people": [
+            "npc_laura",
+            "npc_mark"
+          ]
+        },
+        "alone": "go through Laura's wardrobe while they're out (LIVES.md:337-338)",
+        "in_release": true,
+        "door": {
+          "answers": "npc_laura, npc_mark",
+          "options": [
+            "Knock",
+            "Go in (when both are out)"
+          ]
+        }
+      },
+      {
+        "id": "home_ella_room",
+        "name": "Your Room",
+        "kind": "destination",
+        "job": "her bed, her clothes, her phone; where she sleeps",
+        "anchor": false,
+        "fill": 5000,
+        "labels": [
+          "zone:home",
+          "private",
+          "home_base",
+          "has_bed",
+          "has_mirror",
+          "she_can_undress"
+        ],
+        "serves": {
+          "needs": [
+            "energy"
+          ],
+          "work": [
+            "wardrobe"
+          ],
+          "people": []
+        },
+        "in_release": true,
+        "alone": "sleep, change, check her feed, a selfie at the mirror"
+      },
+      {
+        "id": "home_ryan_room",
+        "name": "Ryan's Room",
+        "kind": "destination",
+        "job": "two knocks",
+        "anchor": false,
+        "fill": 8000,
+        "labels": [
+          "zone:home",
+          "private",
+          "has_bed"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_ryan"
+          ]
+        },
+        "alone": "go through his things while he's out (LIVES.md:336)",
+        "in_release": true,
+        "door": {
+          "answers": "npc_ryan",
+          "options": [
+            "Knock",
+            "Two knocks (from his step 3)",
+            "Go in (when he's out)"
+          ]
+        }
+      },
+      {
+        "id": "home_bathroom",
+        "name": "Bathroom",
+        "kind": "destination",
+        "job": "the one shared bathroom",
+        "anchor": false,
+        "fill": 5000,
+        "labels": [
+          "zone:home",
+          "private",
+          "has_shower",
+          "she_can_undress"
+        ],
+        "serves": {
+          "needs": [
+            "hygiene"
+          ],
+          "work": [],
+          "people": [
+            "npc_ryan"
+          ]
+        },
+        "in_release": true,
+        "alone": "shower (hygiene); someone may walk in"
+      },
+      {
+        "id": "home_garage",
+        "name": "Garage",
+        "kind": "destination",
+        "job": "Mark's evenings and his terms",
+        "anchor": false,
+        "fill": 1500,
+        "labels": [
+          "zone:home",
+          "private"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_mark"
+          ]
+        },
+        "alone": "go through Mark's things while he's out (LIVES.md:339)",
+        "in_release": true
+      },
+      {
+        "id": "street",
+        "name": "Your Street",
+        "kind": "thoroughfare",
+        "job": "the ground; the walk home past Vance's porch",
+        "anchor": false,
+        "fill": 1500,
+        "labels": [
+          "zone:street",
+          "outdoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        },
+        "in_release": true
+      },
+      {
+        "id": "vance_house",
+        "name": "Vance's House",
+        "kind": "destination",
+        "job": "Vance's porch: the evening look, the knock after a short Sunday",
+        "anchor": false,
+        "fill": 1500,
+        "labels": [
+          "zone:street",
+          "outdoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_vance"
+          ]
+        },
+        "in_release": true,
+        "hours": "Mon-Sun 18:00-22:00",
+        "closed_text": "Vance's porch is empty. The curtains are shut.",
+        "alone": "walk past slowly; he reads what she wears"
+      },
+      {
+        "id": "park",
+        "name": "Park",
+        "kind": "destination",
+        "job": "its own place: walk, rest, run; an exhibition spot that grows by stage (LO, 2026-10-08)",
+        "anchor": false,
+        "fill": 3000,
+        "labels": [
+          "zone:street",
+          "outdoors",
+          "public",
+          "she_can_undress"
+        ],
+        "serves": {
+          "needs": [
+            "energy"
+          ],
+          "work": [
+            "park"
+          ],
+          "people": [
+            "npc_zoe"
+          ]
+        },
+        "in_release": true,
+        "hours": "07:00-22:00",
+        "closed_text": "The park gates are locked for the night.",
+        "alone": "walk, run, rest on a bench, a selfie"
+      },
+      {
+        "id": "campus",
+        "name": "Campus",
+        "kind": "thoroughfare",
+        "job": "the college grounds",
+        "anchor": false,
+        "fill": 500,
+        "labels": [
+          "zone:campus",
+          "outdoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        },
+        "in_release": true,
+        "hours": "Mon-Sun 07:00-22:00",
+        "closed_text": "The college gates are shut."
+      },
+      {
+        "id": "quad",
+        "name": "Quad",
+        "kind": "destination",
+        "job": "Zoe's afternoons, Jake's mornings",
+        "anchor": false,
+        "fill": 2500,
+        "labels": [
+          "zone:campus",
+          "outdoors",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_zoe",
+            "npc_jake"
+          ]
+        },
+        "in_release": true,
+        "hours": "Mon-Sun 07:00-22:00",
+        "closed_text": "The quad is dark and empty.",
+        "alone": "sit on the grass and hear what campus says (reads campus_talk)"
+      },
+      {
+        "id": "lecture_hall",
+        "name": "Lecture Hall",
+        "kind": "destination",
+        "job": "the four classes",
+        "anchor": false,
+        "fill": 8000,
+        "labels": [
+          "zone:campus",
+          "public",
+          "she_can_study"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "college"
+          ],
+          "people": [
+            "npc_hale",
+            "npc_nadia",
+            "npc_art_lecturer",
+            "npc_business_lecturer",
+            "npc_bio_ta"
+          ]
+        },
+        "in_release": true,
+        "hours": "Mon-Thu 08:30-14:30; Fri 08:30-10:00",
+        "closed_text": "No class now. The timetable is on the door.",
+        "alone": "attend the class on the timetable"
+      },
+      {
+        "id": "library",
+        "name": "Library",
+        "kind": "destination",
+        "job": "study: intelligence; Nadia's afternoons",
+        "anchor": false,
+        "fill": 1500,
+        "labels": [
+          "zone:campus",
+          "public",
+          "she_can_study"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "college"
+          ],
+          "people": [
+            "npc_nadia"
+          ]
+        },
+        "in_release": true,
+        "hours": "Mon-Fri 08:00-20:00",
+        "closed_text": "The library is closed.",
+        "alone": "study (intelligence)"
+      },
+      {
+        "id": "canteen",
+        "name": "Canteen",
+        "kind": "destination",
+        "job": "lunch, and where campus talk spreads",
+        "anchor": false,
+        "fill": 2500,
+        "labels": [
+          "zone:campus",
+          "public",
+          "sells_food"
+        ],
+        "serves": {
+          "needs": [
+            "energy"
+          ],
+          "work": [
+            "college"
+          ],
+          "people": [
+            "npc_zoe",
+            "npc_nadia",
+            "npc_jake"
+          ]
+        },
+        "in_release": true,
+        "hours": "Mon-Fri 08:00-18:00",
+        "closed_text": "The canteen is shut.",
+        "alone": "eat (energy, money); listen to what they say (reads campus_talk)"
+      },
+      {
+        "id": "college_womens_toilet",
+        "name": "Women's Toilet",
+        "kind": "destination",
+        "job": "a quick wash; a mirror between classes",
+        "anchor": false,
+        "fill": 1000,
+        "labels": [
+          "zone:campus",
+          "public",
+          "she_can_undress"
+        ],
+        "serves": {
+          "needs": [
+            "hygiene"
+          ],
+          "work": [],
+          "people": []
+        },
+        "in_release": true,
+        "hours": "Mon-Sun 07:00-22:00",
+        "closed_text": "The college gates are shut.",
+        "alone": "a quick wash; the mirror; take her bra off before class"
+      },
+      {
+        "id": "faculty_floor",
+        "name": "Faculty Floor",
+        "kind": "thoroughfare",
+        "job": "the corridor of offices",
+        "anchor": false,
+        "fill": 500,
+        "labels": [
+          "zone:campus"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        },
+        "in_release": true,
+        "hours": "Mon-Fri 08:00-19:30",
+        "closed_text": "The faculty floor is locked."
+      },
+      {
+        "id": "hale_office",
+        "name": "Dr. Hale's Office",
+        "kind": "destination",
+        "job": "Thursday evenings",
+        "anchor": false,
+        "fill": 4000,
+        "labels": [
+          "zone:campus",
+          "private"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "college"
+          ],
+          "people": [
+            "npc_hale"
+          ]
+        },
+        "in_release": true,
+        "hours": "Thu 17:00-19:30",
+        "closed_text": "The office is locked. Office hours are on the door.",
+        "alone": "read her grade, posted on the door"
+      },
+      {
+        "id": "art_office",
+        "name": "Art Lecturer's Office",
+        "kind": "destination",
+        "job": "the art lecturer's office: talk, then posing",
+        "anchor": false,
+        "fill": 1000,
+        "labels": [
+          "zone:campus",
+          "private"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "college"
+          ],
+          "people": [
+            "npc_art_lecturer"
+          ]
+        },
+        "in_release": true,
+        "hours": "Mon,Tue,Thu,Fri 14:30-18:00",
+        "closed_text": "The office is locked. Office hours are on the door.",
+        "alone": "read her grade, posted on the door"
+      },
+      {
+        "id": "business_office",
+        "name": "Business Lecturer's Office",
+        "kind": "destination",
+        "job": "the honest retake",
+        "anchor": false,
+        "fill": 500,
+        "labels": [
+          "zone:campus",
+          "private"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "college"
+          ],
+          "people": [
+            "npc_business_lecturer"
+          ]
+        },
+        "in_release": true,
+        "hours": "Mon,Wed,Thu,Fri 14:30-18:00",
+        "closed_text": "The office is locked. Office hours are on the door.",
+        "alone": "read her grade, posted on the door"
+      },
+      {
+        "id": "ta_office",
+        "name": "TA's Office",
+        "kind": "destination",
+        "job": "the Biology TA's office",
+        "anchor": false,
+        "fill": 1000,
+        "labels": [
+          "zone:campus",
+          "private"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "college"
+          ],
+          "people": [
+            "npc_bio_ta"
+          ]
+        },
+        "in_release": true,
+        "hours": "Tue,Wed,Thu,Fri 14:30-18:00",
+        "closed_text": "The office is locked. Office hours are on the door.",
+        "alone": "read her grade, posted on the door"
+      },
+      {
+        "id": "dean_office",
+        "name": "Dean's Office",
+        "kind": "destination",
+        "job": "probation and complaints",
+        "anchor": false,
+        "fill": 1000,
+        "labels": [
+          "zone:campus",
+          "private"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "college"
+          ],
+          "people": [
+            "npc_dean"
+          ]
+        },
+        "in_release": true,
+        "hours": "Mon-Fri 09:00-17:00",
+        "closed_text": "The office is locked. Office hours are on the door.",
+        "alone": "read the notice on the door",
+        "hidden_until": "dean_summons"
+      },
+      {
+        "id": "cafe",
+        "name": "Café",
+        "kind": "destination",
+        "job": "shifts, tips and Tom's prices",
+        "anchor": false,
+        "fill": 9000,
+        "labels": [
+          "zone:town",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "job"
+          ],
+          "people": [
+            "npc_tom",
+            "npc_gary"
+          ]
+        },
+        "in_release": true,
+        "hours": "Mon-Sat 08:00-22:00",
+        "closed_text": "Closed. Back Monday.",
+        "alone": "work a shift"
+      },
+      {
+        "id": "clothes_shop",
+        "name": "Clothes Shop",
+        "kind": "destination",
+        "job": "buy clothes; the shop says where each one counts",
+        "anchor": false,
+        "fill": 1000,
+        "labels": [
+          "zone:town",
+          "public",
+          "she_can_undress"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "wardrobe"
+          ],
+          "people": []
+        },
+        "in_release": true,
+        "hours": "Mon-Sat 10:00-18:00",
+        "closed_text": "Closed.",
+        "alone": "browse, try on in the changing room, buy"
+      },
+      {
+        "id": "zoe_apartment",
+        "name": "Zoe's Apartment",
+        "kind": "destination",
+        "job": "Friday parties; Zoe's evenings",
+        "anchor": false,
+        "fill": 6000,
+        "labels": [
+          "zone:town",
+          "private"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "parties"
+          ],
+          "people": [
+            "npc_zoe",
+            "npc_jake"
+          ]
+        },
+        "in_release": true,
+        "hours": "Mon-Sat 18:00-00:00; Sat 00:00-02:00",
+        "closed_text": "Zoe's out. Nobody answers.",
+        "alone": "borrow a dress (in her bedroom)",
+        "hidden_until": "zoe_met"
+      },
+      {
+        "id": "zoe_bedroom",
+        "name": "Zoe's Bedroom",
+        "kind": "destination",
+        "job": "Zoe's bed; the door left open at a party",
+        "anchor": false,
+        "fill": 1000,
+        "labels": [
+          "zone:town",
+          "private",
+          "has_bed"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": [
+            "npc_zoe"
+          ]
+        },
+        "in_release": true,
+        "hours": "Mon-Sat 18:00-00:00; Sat 00:00-02:00",
+        "closed_text": "Zoe's out. Nobody answers.",
+        "alone": "borrow Zoe's dress",
+        "hidden_until": "zoe_met"
+      },
+      {
+        "id": "party_house",
+        "name": "The Party House",
+        "kind": "destination",
+        "job": "the hot tub, Zoe's friends only",
+        "anchor": false,
+        "fill": 2000,
+        "labels": [
+          "zone:town",
+          "private",
+          "outdoors"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        },
+        "in_release": true,
+        "hours": "Sat 20:00-00:00; Sun 00:00-03:00",
+        "closed_text": "Dark. Nobody's home.",
+        "alone": "soak in the hot tub",
+        "hidden_until": "party_house_invite"
+      },
+      {
+        "id": "corner_shop",
+        "name": "Corner Shop",
+        "kind": "destination",
+        "job": "not in 0.1 (SP7:10)",
+        "anchor": false,
+        "fill": 0,
+        "labels": [
+          "zone:street",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        },
+        "in_release": false
+      },
+      {
+        "id": "college_mens_toilet",
+        "name": "Men's Toilet",
+        "kind": "destination",
+        "job": "not in 0.1 (SP7:10)",
+        "anchor": false,
+        "fill": 0,
+        "labels": [
+          "zone:campus",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        },
+        "in_release": false
+      }
+    ],
+    "characters": [
+      {
+        "id": "npc_ryan",
+        "name": "Ryan",
+        "role": "step-brother",
+        "address": "@player.nickname",
+        "meters": {
+          "want": {
+            "type": "opens his next step",
+            "min": 0,
+            "max": 100,
+            "start": 20
+          },
+          "warmth": {
+            "type": "colours how he treats her: protective, covers for her with Laura, jealous of Jake (SP2:69-70)",
+            "min": 0,
+            "max": 100,
+            "start": 50
+          }
+        },
+        "schedule": [
+          {
+            "where": "home_bathroom",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri"
+            ],
+            "from": "06:45",
+            "to": "07:30"
+          },
+          {
+            "where": "home_ryan_room",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Thu",
+              "Fri",
+              "Sun"
+            ],
+            "from": "18:00",
+            "to": "22:00"
+          },
+          {
+            "where": "home_ryan_room",
+            "weekdays": [
+              "Sat",
+              "Sun"
+            ],
+            "from": "07:30",
+            "to": "18:00"
+          },
+          {
+            "where": "home_ryan_room",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri",
+              "Sat",
+              "Sun"
+            ],
+            "from": "22:00",
+            "to": "06:45"
+          },
+          {
+            "where": "home_ryan_room",
+            "weekdays": [
+              "Sat"
+            ],
+            "from": "18:00",
+            "to": "22:00",
+            "when": "ryan_cancelled_kayla",
+            "release": "later (Ryan A 12)"
+          }
+        ],
+        "occupancy_rows": [
+          {
+            "location": "home_bathroom",
+            "start_time": "06:45",
+            "reason": "he showers first on weekday mornings (Laura's rule from day 1); the bathroom is busy"
+          }
+        ],
+        "ladder": {
+          "counter": "ryan_step",
+          "steps": [
+            {
+              "n": 1,
+              "arc_step": "Ryan A 1",
+              "canvas": "ryan_01_hall_first_morning",
+              "where": "home_hall",
+              "fires_from": "opening",
+              "gate": [],
+              "hint": "Your first morning: out of the bathroom into the hall — Ryan is waiting his turn.",
+              "her_line_low": "Ryan — god — I'm in a towel. Turn around.",
+              "her_line_high": "You can look. You were going to anyway.",
+              "who_notices": "Laura, calling up the stairs; at breakfast she rules Ryan showers first",
+              "refusal": "parked",
+              "raises": {
+                "want": 10
+              }
+            },
+            {
+              "n": 2,
+              "arc_step": "Ryan A 3",
+              "canvas": "ryan_02_phone_on_the_sink",
+              "where": "home_bathroom",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri"
+                ],
+                "from": "07:00",
+                "to": "07:30"
+              },
+              "gate": [
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 10,
+                  "npc": "npc_ryan"
+                }
+              ],
+              "hint": "A weekday morning in the bathroom: Ryan's phone buzzes on the sink.",
+              "her_line_high": "Sneaking her in past Mom, huh?",
+              "who_notices": "only she knows about Kayla; the house doesn't",
+              "refusal": "parked",
+              "raises": {
+                "want": 10
+              }
+            },
+            {
+              "n": 3,
+              "arc_step": "Ryan A 4",
+              "canvas": "ryan_03_shirt_off",
+              "where": "home_ryan_room",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Thu",
+                  "Sun"
+                ],
+                "from": "18:00",
+                "to": "22:00"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 20,
+                  "npc": "npc_ryan"
+                }
+              ],
+              "hint": "Ryan's room, an evening he's home (not Wednesday or Friday): knock.",
+              "her_line_high": "You saw me. Shirt off.",
+              "who_notices": "Ryan; she holds his secret",
+              "refusal": "parked",
+              "raises": {
+                "want": 10,
+                "corruption": 1
+              }
+            },
+            {
+              "n": 4,
+              "arc_step": "Ryan A 5",
+              "canvas": "ryan_04_feet_in_his_lap",
+              "where": "home_ryan_room",
+              "when": {
+                "days": [
+                  "Sun",
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu"
+                ],
+                "from": "22:00",
+                "to": "00:00"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 30,
+                  "npc": "npc_ryan"
+                }
+              ],
+              "hint": "Ryan's room, late at night (not Friday): two knocks.",
+              "her_line_high": "Liar.",
+              "who_notices": "Kayla on the phone, hearing him lie",
+              "refusal": "parked",
+              "raises": {
+                "want": 10
+              }
+            },
+            {
+              "n": 5,
+              "arc_step": "Ryan A 6",
+              "canvas": "ryan_05_thin_walls",
+              "where": "home_ella_room",
+              "when": {
+                "days": [
+                  "Fri"
+                ],
+                "from": "22:00",
+                "to": "00:00"
+              },
+              "seen_from": "home_ryan_room",
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 40,
+                  "npc": "npc_ryan"
+                }
+              ],
+              "hint": "Friday night in your bed: Kayla is over, and the wall is thin.",
+              "her_line_high": "I am. Thin walls.",
+              "who_notices": "Ryan hears her through the wall; Kayla meets her in the hall on Saturday",
+              "refusal": "parked",
+              "raises": {
+                "want": 10,
+                "corruption": 1
+              }
+            },
+            {
+              "n": 6,
+              "arc_step": "Ryan A 7",
+              "canvas": "ryan_06_after_the_shower",
+              "where": "home_bathroom",
+              "when": {
+                "days": [
+                  "Sat"
+                ],
+                "from": "08:00",
+                "to": "10:00"
+              },
+              "seen_from": "home_ryan_room",
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 50,
+                  "npc": "npc_ryan"
+                }
+              ],
+              "hint": "Saturday morning, the shower: Kayla is still in the house.",
+              "her_line_high": "Good. Now you've seen it too.",
+              "who_notices": "Ryan; Kayla calling from the hall",
+              "refusal": "parked",
+              "raises": {
+                "want": 10,
+                "exhibitionism": 3
+              }
+            },
+            {
+              "n": 7,
+              "arc_step": "Ryan A 8",
+              "canvas": "ryan_07_first_kiss",
+              "where": "home_ryan_room",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Thu",
+                  "Sun"
+                ],
+                "from": "18:00",
+                "to": "22:00"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 60,
+                  "npc": "npc_ryan"
+                }
+              ],
+              "hint": "Ryan's room, an evening he's home: two knocks.",
+              "her_line_high": "Ignore it.",
+              "who_notices": "Kayla's text lighting up his phone",
+              "refusal": "parked",
+              "raises": {
+                "want": 10,
+                "corruption": 3
+              }
+            },
+            {
+              "n": 8,
+              "arc_step": "Ryan A 9",
+              "canvas": "ryan_08_two_knocks",
+              "where": "home_ryan_room",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Thu",
+                  "Sun"
+                ],
+                "from": "18:00",
+                "to": "22:00"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 70,
+                  "npc": "npc_ryan"
+                }
+              ],
+              "hint": "Ryan's room, an evening after the kiss: two knocks, and ask what you get.",
+              "her_line_high": "Kayla gets Fridays. What do I get?",
+              "who_notices": "only she knows what they are now",
+              "refusal": "parked",
+              "raises": {
+                "want": 10
+              }
+            }
+          ]
+        },
+        "schedule_rows": 5
+      },
+      {
+        "id": "npc_laura",
+        "name": "Laura",
+        "role": "mom",
+        "address": "sweetheart",
+        "meters": {
+          "want": {
+            "type": "opens her next step",
+            "min": 0,
+            "max": 100,
+            "start": 0
+          },
+          "warmth": {
+            "type": "colours each catch: low means a curfew, high means 'tell me everything' (SP2:88)",
+            "min": 0,
+            "max": 100,
+            "start": 50
+          }
+        },
+        "schedule": [
+          {
+            "where": "home_hall",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri",
+              "Sat",
+              "Sun"
+            ],
+            "from": "23:00",
+            "to": "02:00",
+            "when": "came_home_late",
+            "note": "the catch: on the dark stairs when she comes home late (LIVES.md:331-333); a board row so the step has her there"
+          },
+          {
+            "where": "home_kitchen",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri"
+            ],
+            "from": "06:30",
+            "to": "08:00"
+          },
+          {
+            "where": "home_kitchen",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Thu",
+              "Fri",
+              "Sun"
+            ],
+            "from": "18:00",
+            "to": "22:00"
+          },
+          {
+            "where": "home_master_bedroom",
+            "weekdays": [
+              "Sun",
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri"
+            ],
+            "from": "22:00",
+            "to": "06:30"
+          },
+          {
+            "where": "home_master_bedroom",
+            "weekdays": [
+              "Sat"
+            ],
+            "from": "00:00",
+            "to": "07:00",
+            "note": "Friday night after midnight (LO, 2026-10-08)"
+          },
+          {
+            "where": "home_master_bedroom",
+            "weekdays": [
+              "Sun"
+            ],
+            "from": "00:00",
+            "to": "07:00"
+          },
+          {
+            "where": "home_master_bedroom",
+            "weekdays": [
+              "Sat"
+            ],
+            "from": "17:00",
+            "to": "18:30"
+          },
+          {
+            "where": "home_living_room",
+            "weekdays": [
+              "Sat"
+            ],
+            "from": "22:00",
+            "to": "00:00"
+          }
+        ],
+        "occupancy_rows": [
+          {
+            "location": "home_master_bedroom",
+            "start_time": "22:00",
+            "reason": "asleep beside Mark; the house at night"
+          }
+        ],
+        "ladder": {
+          "counter": "laura_step",
+          "steps": [
+            {
+              "n": 1,
+              "canvas": "laura_01_blue_dress",
+              "where": "home_master_bedroom",
+              "when": {
+                "days": [
+                  "Tue"
+                ],
+                "from": "18:00",
+                "to": "22:00"
+              },
+              "seen_from": "home_kitchen",
+              "gate": [],
+              "hint": "Tuesday evening: Laura is in the kitchen, and she has a dress for you upstairs.",
+              "her_line_high": "Is that bad?",
+              "who_notices": "Laura, behind her in the mirror",
+              "refusal": "parked",
+              "raises": {
+                "want": 10,
+                "exhibitionism": 3
+              }
+            },
+            {
+              "n": 2,
+              "canvas": "laura_02_home_late",
+              "where": "home_hall",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri",
+                  "Sat",
+                  "Sun"
+                ],
+                "from": "23:00",
+                "to": "01:00"
+              },
+              "gate": [
+                {
+                  "flag": "came_home_late",
+                  "op": "is_true"
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 10,
+                  "npc": "npc_laura"
+                }
+              ],
+              "hint": "Come home late: Laura waits on the dark stairs.",
+              "her_line_high": "Everyone.",
+              "who_notices": "Laura catches her",
+              "refusal": "parked",
+              "raises": {
+                "want": 10
+              }
+            },
+            {
+              "n": 3,
+              "canvas": "laura_03_wine_in_the_kitchen",
+              "where": "home_kitchen",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Thu",
+                  "Fri",
+                  "Sun"
+                ],
+                "from": "20:00",
+                "to": "22:00"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 20,
+                  "npc": "npc_laura"
+                }
+              ],
+              "hint": "Late evening in the kitchen: Laura has a glass of wine.",
+              "her_line_high": "Like what?",
+              "who_notices": "only her: Laura's past",
+              "refusal": "parked",
+              "raises": {
+                "want": 10
+              }
+            },
+            {
+              "n": 4,
+              "canvas": "laura_04_ryans_door",
+              "where": "home_ryan_room",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Thu",
+                  "Sun"
+                ],
+                "from": "20:00",
+                "to": "22:00"
+              },
+              "seen_from": "home_kitchen",
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 30,
+                  "npc": "npc_laura"
+                },
+                {
+                  "trait": "ryan_step",
+                  "op": "gte",
+                  "value": 4
+                }
+              ],
+              "hint": "An evening in Ryan's room, your feet in his lap: Laura opens the door.",
+              "her_line_high": "Then don't tell him.",
+              "who_notices": "Laura sees her with Ryan",
+              "refusal": "parked",
+              "raises": {
+                "want": 10
+              }
+            },
+            {
+              "n": 5,
+              "canvas": "laura_05_jake_at_the_door",
+              "where": "home_front_door",
+              "when": {
+                "days": [
+                  "Sat"
+                ],
+                "from": "22:30",
+                "to": "00:00"
+              },
+              "seen_from": "home_living_room",
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 40,
+                  "npc": "npc_laura"
+                },
+                {
+                  "trait": "jake_step",
+                  "op": "eq",
+                  "value": 3
+                },
+                {
+                  "flag": "jake_date_booked",
+                  "op": "is_true"
+                }
+              ],
+              "hint": "Saturday night, a date with Jake ends at the front door: Laura is waiting up in the dark.",
+              "her_line_high": "Better in your dress.",
+              "who_notices": "Laura watches from the dark couch; Jake doesn't know",
+              "refusal": "parked",
+              "raises": {
+                "want": 10
+              }
+            },
+            {
+              "n": 6,
+              "canvas": "laura_06_take_me_with_you",
+              "where": "home_master_bedroom",
+              "when": {
+                "days": [
+                  "Sat"
+                ],
+                "from": "17:00",
+                "to": "18:30"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 50,
+                  "npc": "npc_laura"
+                }
+              ],
+              "hint": "Saturday early evening: Laura is dressing to go out. Zip her up.",
+              "her_line_high": "Wear something short.",
+              "who_notices": "nobody — only the two of them",
+              "refusal": "parked",
+              "raises": {
+                "want": 10
+              }
+            },
+            {
+              "n": 7,
+              "canvas": "laura_07_dark_stairs",
+              "where": "home_kitchen",
+              "when": {
+                "days": [
+                  "Fri"
+                ],
+                "from": "18:00",
+                "to": "21:00"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 60,
+                  "npc": "npc_laura"
+                },
+                {
+                  "trait": "zoe_step",
+                  "op": "gte",
+                  "value": 1
+                }
+              ],
+              "hint": "Friday evening: Laura wants to come to Zoe's party. Leave together from the kitchen.",
+              "her_line_high": "Don't stop for him.",
+              "who_notices": "Ryan at his door",
+              "refusal": "parked",
+              "raises": {
+                "want": 10,
+                "corruption": 3
+              }
+            },
+            {
+              "n": 8,
+              "canvas": "laura_08_it_wasnt_the_wine",
+              "where": "home_kitchen",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri"
+                ],
+                "from": "06:30",
+                "to": "08:00"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 70,
+                  "npc": "npc_laura"
+                }
+              ],
+              "hint": "The next breakfast: Laura is in the kitchen.",
+              "her_line_high": "It wasn't the wine.",
+              "who_notices": "nobody — her no is the locked door",
+              "refusal": "parked",
+              "raises": {
+                "want": 10
+              }
+            }
+          ]
+        },
+        "schedule_rows": 7
+      },
+      {
+        "id": "npc_mark",
+        "name": "Mark",
+        "role": "step-father",
+        "meters": {
+          "want": {
+            "type": "opens his next step",
+            "min": 0,
+            "max": 100,
+            "start": 0
+          },
+          "power": {
+            "type": "colours each step: his terms or hers; gates no step (SP2:103)",
+            "min": 0,
+            "max": 100,
+            "start": 50
+          }
+        },
+        "schedule": [
+          {
+            "where": "home_living_room",
+            "weekdays": [
+              "Sun",
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri"
+            ],
+            "from": "22:00",
+            "to": "00:00"
+          },
+          {
+            "where": "home_living_room",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri",
+              "Sat"
+            ],
+            "from": "00:00",
+            "to": "02:00"
+          },
+          {
+            "where": "home_master_bedroom",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri",
+              "Sat",
+              "Sun"
+            ],
+            "from": "02:00",
+            "to": "07:00"
+          },
+          {
+            "where": "home_master_bedroom",
+            "weekdays": [
+              "Sat"
+            ],
+            "from": "22:00",
+            "to": "00:00"
+          },
+          {
+            "where": "home_master_bedroom",
+            "weekdays": [
+              "Sun"
+            ],
+            "from": "00:00",
+            "to": "02:00"
+          },
+          {
+            "where": "home_garage",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Thu",
+              "Fri"
+            ],
+            "from": "18:00",
+            "to": "22:00"
+          },
+          {
+            "where": "home_kitchen",
+            "weekdays": [
+              "Wed"
+            ],
+            "from": "18:00",
+            "to": "22:00"
+          },
+          {
+            "where": "home_garage",
+            "weekdays": [
+              "Sat"
+            ],
+            "from": "09:00",
+            "to": "17:00"
+          },
+          {
+            "where": "home_kitchen",
+            "weekdays": [
+              "Sun"
+            ],
+            "from": "08:00",
+            "to": "22:00"
+          }
+        ],
+        "occupancy_rows": [
+          {
+            "location": "home_master_bedroom",
+            "start_time": "02:00",
+            "reason": "asleep beside Laura"
+          }
+        ],
+        "ladder": {
+          "counter": "mark_step",
+          "steps": [
+            {
+              "n": 1,
+              "canvas": "mark_01_count_it_slowly",
+              "where": "home_kitchen",
+              "when": {
+                "days": [
+                  "Sun"
+                ],
+                "from": "08:00",
+                "to": "12:00"
+              },
+              "gate": [
+                {
+                  "flag": "rent_starts",
+                  "op": "is_true"
+                }
+              ],
+              "hint": "Sunday morning, the kitchen: Mark counts the rent.",
+              "her_line_low": "Can you just — count it?",
+              "who_notices": "Mark; Ryan in the doorway",
+              "refusal": "parked",
+              "raises": {
+                "want": 10
+              }
+            },
+            {
+              "n": 2,
+              "canvas": "mark_02_late_notice",
+              "where": "home_kitchen",
+              "when": {
+                "days": [
+                  "Sun",
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri"
+                ],
+                "from": "22:00",
+                "to": "00:00"
+              },
+              "seen_from": "home_living_room",
+              "gate": [
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 10,
+                  "npc": "npc_mark"
+                }
+              ],
+              "hint": "Late at night, the kitchen drawer: Mark is on the phone next door.",
+              "her_line_high": "How late are we?",
+              "who_notices": "only her: his debt to Vance",
+              "refusal": "parked",
+              "raises": {
+                "want": 10
+              }
+            },
+            {
+              "n": 3,
+              "canvas": "mark_03_shorts",
+              "where": "home_kitchen",
+              "when": {
+                "days": [
+                  "Sun"
+                ],
+                "from": "08:00",
+                "to": "12:00"
+              },
+              "gate": [
+                {
+                  "flag": "rent_starts",
+                  "op": "is_true"
+                },
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 20,
+                  "npc": "npc_mark"
+                }
+              ],
+              "hint": "Sunday morning at the table: Mark wants shorts this time.",
+              "her_line_high": "Saved you asking.",
+              "who_notices": "Mark",
+              "refusal": "parked",
+              "raises": {
+                "want": 10,
+                "exhibitionism": 3
+              }
+            },
+            {
+              "n": 4,
+              "canvas": "mark_04_after_shes_asleep",
+              "where": "home_living_room",
+              "when": {
+                "days": [
+                  "Sun",
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri"
+                ],
+                "from": "22:00",
+                "to": "00:00"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 30,
+                  "npc": "npc_mark"
+                }
+              ],
+              "hint": "Late at night in the living room, Laura asleep upstairs: Mark is still up.",
+              "her_line_high": "What's the difference worth, Mark?",
+              "who_notices": "Laura, asleep upstairs",
+              "refusal": "parked",
+              "raises": {
+                "want": 10
+              }
+            },
+            {
+              "n": 5,
+              "canvas": "mark_05_a_bill_an_inch",
+              "where": "home_living_room",
+              "when": {
+                "days": [
+                  "Sun",
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri"
+                ],
+                "from": "23:00",
+                "to": "01:00"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 40,
+                  "npc": "npc_mark"
+                }
+              ],
+              "hint": "Midnight in the living room: Mark pays by the inch.",
+              "her_line_high": "Keep going.",
+              "who_notices": "Laura, asleep upstairs",
+              "refusal": "parked",
+              "raises": {
+                "want": 10,
+                "corruption": 3
+              }
+            },
+            {
+              "n": 6,
+              "canvas": "mark_06_our_arrangement",
+              "where": "home_garage",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Thu",
+                  "Fri"
+                ],
+                "from": "18:00",
+                "to": "22:00"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 50,
+                  "npc": "npc_mark"
+                }
+              ],
+              "hint": "An evening in the garage: Mark wants to talk terms.",
+              "her_line_high": "Vance's letter is in the drawer. So we each keep one.",
+              "who_notices": "nobody — each holds the other's secret",
+              "refusal": "parked",
+              "raises": {
+                "want": 10
+              }
+            },
+            {
+              "n": 7,
+              "canvas": "mark_07_twenty_and_you_can_look",
+              "where": "home_kitchen",
+              "when": {
+                "days": [
+                  "Sun"
+                ],
+                "from": "08:00",
+                "to": "12:00"
+              },
+              "gate": [
+                {
+                  "flag": "rent_starts",
+                  "op": "is_true"
+                },
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 60,
+                  "npc": "npc_mark"
+                }
+              ],
+              "hint": "Sunday morning at the table: name a price.",
+              "her_line_high": "Twenty, and you can look.",
+              "who_notices": "Mark",
+              "refusal": "parked",
+              "raises": {
+                "want": 10,
+                "exhibitionism": 3
+              }
+            },
+            {
+              "n": 8,
+              "canvas": "mark_08_the_red_circle",
+              "where": "home_kitchen",
+              "when": {
+                "days": [
+                  "Sun"
+                ],
+                "from": "12:00",
+                "to": "18:00"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 70,
+                  "npc": "npc_mark"
+                }
+              ],
+              "hint": "Sunday afternoon: the fridge calendar, and Laura's late Wednesday.",
+              "her_line_high": "You'll see.",
+              "who_notices": "Mark sees her circle it",
+              "refusal": "parked",
+              "raises": {
+                "want": 10
+              }
+            },
+            {
+              "n": 9,
+              "canvas": "mark_09_his_chair",
+              "where": "home_kitchen",
+              "when": {
+                "days": [
+                  "Wed"
+                ],
+                "from": "18:00",
+                "to": "22:00"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 80,
+                  "npc": "npc_mark"
+                }
+              ],
+              "hint": "Wednesday evening, Laura late and Ryan at his league: take Mark's chair.",
+              "her_line_high": "Count it slowly, Mark.",
+              "who_notices": "Mark",
+              "refusal": "parked",
+              "raises": {
+                "want": 10
+              }
+            }
+          ]
+        },
+        "schedule_rows": 9
+      },
+      {
+        "id": "npc_tom",
+        "name": "Tom",
+        "role": "café manager",
+        "meters": {
+          "want": {
+            "type": "opens his next step",
+            "min": 0,
+            "max": 100,
+            "start": 0
+          },
+          "power": {
+            "type": "who sets the price at the café: his terms or hers",
+            "min": 0,
+            "max": 100,
+            "start": 50
+          }
+        },
+        "schedule": [
+          {
+            "where": "cafe",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri",
+              "Sat"
+            ],
+            "from": "08:00",
+            "to": "23:00",
+            "note": "open 08:00-22:00, then he closes"
+          }
+        ],
+        "ladder": {
+          "counter": "tom_step",
+          "steps": [
+            {
+              "n": 1,
+              "canvas": "tom_01_the_apron",
+              "where": "cafe",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri",
+                  "Sat"
+                ],
+                "from": "14:30",
+                "to": "22:00"
+              },
+              "gate": [
+                {
+                  "flag": "cafe_job",
+                  "op": "is_true"
+                }
+              ],
+              "hint": "Take a shift at the café: Tom is behind the counter.",
+              "her_line_high": "Then I'll be pretty.",
+              "who_notices": "Tom; the regulars at the counter",
+              "refusal": "parked",
+              "raises": {
+                "want": 10
+              }
+            },
+            {
+              "n": 2,
+              "canvas": "tom_02_uniform_rule",
+              "where": "cafe",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri",
+                  "Sat"
+                ],
+                "from": "14:30",
+                "to": "22:00"
+              },
+              "gate": [
+                {
+                  "flag": "cafe_job",
+                  "op": "is_true"
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 10,
+                  "npc": "npc_tom"
+                }
+              ],
+              "hint": "A café shift: Tom has a new uniform rule.",
+              "her_line_high": "Is this the uniform, or your idea?",
+              "who_notices": "Gary in booth four, and the room",
+              "refusal": "parked",
+              "raises": {
+                "want": 10,
+                "exhibitionism": 3
+              }
+            },
+            {
+              "n": 3,
+              "canvas": "tom_03_the_tip_jar",
+              "where": "cafe",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri",
+                  "Sat"
+                ],
+                "from": "14:30",
+                "to": "22:00"
+              },
+              "gate": [
+                {
+                  "flag": "cafe_job",
+                  "op": "is_true"
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 20,
+                  "npc": "npc_tom"
+                }
+              ],
+              "hint": "A café shift, the back room: watch the tip jar.",
+              "her_line_high": "Busy night?",
+              "who_notices": "only her: he steals from the jar",
+              "refusal": "parked",
+              "raises": {
+                "want": 10
+              }
+            },
+            {
+              "n": 4,
+              "canvas": "tom_04_booth_four",
+              "where": "cafe",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri"
+                ],
+                "from": "14:30",
+                "to": "18:00"
+              },
+              "gate": [
+                {
+                  "flag": "cafe_job",
+                  "op": "is_true"
+                },
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 30,
+                  "npc": "npc_tom"
+                }
+              ],
+              "hint": "A weekday afternoon shift: Gary is in booth four.",
+              "her_line_high": "Ten minutes. Hands where I can see them.",
+              "who_notices": "Gary; Tom at the counter",
+              "refusal": "parked",
+              "raises": {
+                "want": 10,
+                "corruption": 3
+              }
+            },
+            {
+              "n": 5,
+              "canvas": "tom_05_half_is_mine",
+              "where": "cafe",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri",
+                  "Sat"
+                ],
+                "from": "14:30",
+                "to": "22:00"
+              },
+              "gate": [
+                {
+                  "flag": "cafe_job",
+                  "op": "is_true"
+                },
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 40,
+                  "npc": "npc_tom"
+                }
+              ],
+              "hint": "After a shift, the back room: Tom wants his half.",
+              "her_line_high": "Half's yours till I name the price.",
+              "who_notices": "nobody — the two of them",
+              "refusal": "parked",
+              "raises": {
+                "want": 10
+              }
+            },
+            {
+              "n": 6,
+              "canvas": "tom_06_after_close_kiss",
+              "where": "cafe",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri",
+                  "Sat"
+                ],
+                "from": "22:00",
+                "to": "23:00"
+              },
+              "gate": [
+                {
+                  "flag": "cafe_job",
+                  "op": "is_true"
+                },
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 50,
+                  "npc": "npc_tom"
+                }
+              ],
+              "hint": "Stay after close: Tom pulls the blinds.",
+              "her_line_high": "We're closed.",
+              "who_notices": "a late regular at the glass",
+              "refusal": "parked",
+              "raises": {
+                "want": 10,
+                "corruption": 3
+              }
+            }
+          ]
+        },
+        "schedule_rows": 1
+      },
+      {
+        "id": "npc_zoe",
+        "name": "Zoe",
+        "role": "her friend",
+        "address": "babe",
+        "schedule": [
+          {
+            "where": "quad",
+            "weekdays": [
+              "Tue",
+              "Thu",
+              "Fri"
+            ],
+            "from": "14:30",
+            "to": "18:00"
+          },
+          {
+            "where": "zoe_apartment",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri",
+              "Sat"
+            ],
+            "from": "18:00",
+            "to": "00:00"
+          },
+          {
+            "where": "zoe_apartment",
+            "weekdays": [
+              "Sat"
+            ],
+            "from": "00:00",
+            "to": "02:00"
+          },
+          {
+            "where": "canteen",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri"
+            ],
+            "from": "11:45",
+            "to": "13:00"
+          },
+          {
+            "where": "park",
+            "weekdays": [
+              "Sat",
+              "Sun"
+            ],
+            "from": "08:00",
+            "to": "10:00",
+            "note": "her weekend run (LO, 2026-10-08; the hours are a guess)"
+          }
+        ],
+        "ladder": {
+          "counter": "zoe_step",
+          "steps": [
+            {
+              "n": 1,
+              "canvas": "zoe_01_first_party",
+              "where": "zoe_apartment",
+              "when": {
+                "days": [
+                  "Fri"
+                ],
+                "from": "19:00",
+                "to": "23:00"
+              },
+              "gate": [
+                {
+                  "trait": "jake_step",
+                  "op": "eq",
+                  "value": 0
+                }
+              ],
+              "hint": "Friday evening: Zoe's party at her apartment, and she has a dress for you.",
+              "her_line_low": "Zoe! Eyes up here.",
+              "who_notices": "Zoe, then the party",
+              "refusal": "parked",
+              "raises": {
+                "exhibitionism": 3
+              }
+            },
+            {
+              "n": 2,
+              "canvas": "zoe_02_bra_through_the_sleeve",
+              "where": "zoe_apartment",
+              "when": {
+                "days": [
+                  "Fri"
+                ],
+                "from": "21:00",
+                "to": "00:00"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                }
+              ],
+              "hint": "A Friday party at Zoe's, out on the balcony: Zoe has a dare.",
+              "her_line_high": "Give it back.",
+              "who_notices": "the room behind the glass",
+              "refusal": "parked",
+              "raises": {
+                "exhibitionism": 3
+              }
+            },
+            {
+              "n": 3,
+              "canvas": "zoe_03_hot_tub",
+              "where": "party_house",
+              "when": {
+                "days": [
+                  "Sat"
+                ],
+                "from": "20:00",
+                "to": "00:00"
+              },
+              "seen_from": "zoe_apartment",
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                }
+              ],
+              "hint": "Saturday night: the hot tub at the party house. Zoe's friends head inside first.",
+              "her_line_high": "You could've asked.",
+              "who_notices": "Zoe alone, her friends gone inside (LO, 2026-10-08); Ryan when she comes home at 3 a.m.",
+              "refusal": "parked",
+              "raises": {
+                "exhibitionism": 3,
+                "corruption": 3
+              }
+            },
+            {
+              "n": 4,
+              "canvas": "zoe_04_i_pick_the_dares",
+              "where": "zoe_apartment",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri",
+                  "Sat"
+                ],
+                "from": "18:00",
+                "to": "22:00"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                }
+              ],
+              "hint": "An evening at Zoe's, on her couch, after the hot tub.",
+              "her_line_high": "From now on, I pick the dares.",
+              "who_notices": "nobody — the two of them",
+              "refusal": "parked"
+            }
+          ]
+        },
+        "schedule_rows": 4
+      },
+      {
+        "id": "npc_hale",
+        "name": "Dr. Hale",
+        "role": "professor",
+        "schedule": [
+          {
+            "where": "lecture_hall",
+            "weekdays": [
+              "Mon",
+              "Wed",
+              "Fri"
+            ],
+            "from": "08:30",
+            "to": "10:00"
+          },
+          {
+            "where": "lecture_hall",
+            "weekdays": [
+              "Thu"
+            ],
+            "from": "13:00",
+            "to": "14:30"
+          },
+          {
+            "where": "hale_office",
+            "weekdays": [
+              "Thu"
+            ],
+            "from": "17:00",
+            "to": "19:30"
+          }
+        ],
+        "ladder": {
+          "counter": "hale_step",
+          "steps": [
+            {
+              "n": 1,
+              "canvas": "hale_01_first_lecture",
+              "where": "lecture_hall",
+              "when": {
+                "days": [
+                  "Mon"
+                ],
+                "from": "08:30",
+                "to": "10:00"
+              },
+              "gate": [],
+              "hint": "Monday, first class: Psychology with Dr. Hale.",
+              "her_line_low": "Did he just—?",
+              "who_notices": "Nadia, beside her",
+              "refusal": "parked"
+            },
+            {
+              "n": 2,
+              "canvas": "hale_02_lost_his_place",
+              "where": "lecture_hall",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Wed",
+                  "Fri"
+                ],
+                "from": "08:30",
+                "to": "10:00"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                }
+              ],
+              "hint": "The next Psychology class, front row.",
+              "her_line_high": "You lost your place, Dr. Hale.",
+              "who_notices": "the class; Nadia",
+              "refusal": "parked",
+              "raises": {
+                "exhibitionism": 3
+              }
+            },
+            {
+              "n": 3,
+              "canvas": "hale_03_photo_face_down",
+              "where": "hale_office",
+              "when": {
+                "days": [
+                  "Thu"
+                ],
+                "from": "18:00",
+                "to": "19:30"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                }
+              ],
+              "hint": "Thursday evening: Dr. Hale's office on the faculty floor.",
+              "her_line_high": "Is that a no on my paper, or a yes?",
+              "who_notices": "the photo on his desk; Laura sees the grade",
+              "refusal": "parked"
+            },
+            {
+              "n": 4,
+              "canvas": "hale_04_claire_knocks",
+              "where": "hale_office",
+              "when": {
+                "days": [
+                  "Thu"
+                ],
+                "from": "18:30",
+                "to": "19:30"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                }
+              ],
+              "hint": "Thursday evening in his office, close to half past seven.",
+              "her_line_high": "Your husband's a great teacher.",
+              "who_notices": "Claire at the door",
+              "refusal": "parked",
+              "raises": {
+                "exhibitionism": 3
+              }
+            },
+            {
+              "n": 5,
+              "canvas": "hale_05_seven_twenty",
+              "where": "lecture_hall",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Wed",
+                  "Fri"
+                ],
+                "from": "08:30",
+                "to": "10:00"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                }
+              ],
+              "hint": "After a Psychology class: stay behind.",
+              "her_line_high": "You'll be done by seven-twenty.",
+              "who_notices": "nobody — then Laura reads the midterm at dinner",
+              "refusal": "parked"
+            }
+          ]
+        },
+        "schedule_rows": 3
+      },
+      {
+        "id": "npc_jake",
+        "name": "Jake",
+        "role": "campus guy",
+        "schedule": [
+          {
+            "where": "quad",
+            "weekdays": [
+              "Mon",
+              "Wed",
+              "Fri"
+            ],
+            "from": "08:30",
+            "to": "11:45"
+          },
+          {
+            "where": "zoe_apartment",
+            "weekdays": [
+              "Fri"
+            ],
+            "from": "19:00",
+            "to": "00:00"
+          },
+          {
+            "where": "canteen",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri"
+            ],
+            "from": "11:45",
+            "to": "13:00"
+          },
+          {
+            "where": "home_front_door",
+            "weekdays": [
+              "Sat"
+            ],
+            "from": "22:00",
+            "to": "00:00",
+            "when": "jake_date_booked",
+            "note": "brings her to the door after the date (LIVES.md:294-296); a board row"
+          }
+        ],
+        "ladder": {
+          "counter": "jake_step",
+          "steps": [
+            {
+              "n": 1,
+              "canvas": "zoe_01_first_party",
+              "where": "zoe_apartment",
+              "when": {
+                "days": [
+                  "Fri"
+                ],
+                "from": "19:00",
+                "to": "23:00"
+              },
+              "gate": [
+                {
+                  "trait": "zoe_step",
+                  "op": "eq",
+                  "value": 0
+                }
+              ],
+              "hint": "Friday evening at Zoe's party: a guy across the room won't stop looking.",
+              "her_line_high": "You've been staring since I came in.",
+              "who_notices": "his teammates; Zoe",
+              "refusal": "parked"
+            },
+            {
+              "n": 2,
+              "canvas": "jake_02_kiss_on_the_quad",
+              "where": "quad",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Wed",
+                  "Fri"
+                ],
+                "from": "10:15",
+                "to": "11:45"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                }
+              ],
+              "hint": "A Monday, Wednesday or Friday morning on the quad: Jake and his team.",
+              "her_line_high": "Saturday. Pick me up at the door.",
+              "who_notices": "his teammates; Ryan the next morning",
+              "refusal": "parked",
+              "raises": {
+                "exhibitionism": 3
+              }
+            },
+            {
+              "n": 3,
+              "canvas": "jake_03_my_boyfriend",
+              "where": "home_front_door",
+              "when": {
+                "days": [
+                  "Sat"
+                ],
+                "from": "23:00",
+                "to": "00:00"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "flag": "jake_date_booked",
+                  "op": "is_true"
+                }
+              ],
+              "hint": "Saturday night: Jake brings you to the front door, and Ryan is due home from Kayla's.",
+              "her_line_high": "Ryan, this is Jake. My boyfriend.",
+              "who_notices": "Ryan, walking in",
+              "refusal": "parked"
+            },
+            {
+              "n": 4,
+              "canvas": "laura_05_jake_at_the_door",
+              "where": "home_front_door",
+              "when": {
+                "days": [
+                  "Sat"
+                ],
+                "from": "22:30",
+                "to": "00:00"
+              },
+              "seen_from": "home_living_room",
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "trait": "exhibitionism",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "trait": "want",
+                  "op": "gte",
+                  "value": 40,
+                  "npc": "npc_laura"
+                },
+                {
+                  "trait": "laura_step",
+                  "op": "eq",
+                  "value": 4
+                },
+                {
+                  "flag": "jake_date_booked",
+                  "op": "is_true"
+                }
+              ],
+              "hint": "Saturday night, after your date: kiss Jake goodnight at the front door, in Laura's dress.",
+              "her_line_high": "Higher. Don't stop.",
+              "who_notices": "Laura, from the dark living room (Jake doesn't know)",
+              "refusal": "parked"
+            }
+          ]
+        },
+        "schedule_rows": 4
+      },
+      {
+        "id": "npc_vance",
+        "name": "Mr. Vance",
+        "role": "landlord",
+        "meters": {
+          "want": {
+            "type": "opens his next step",
+            "min": 0,
+            "max": 100,
+            "start": 0,
+            "read_by": "his porch line changes at Want 30 and 60 (LO, 2026-10-08)",
+            "raised_by": "she walks past his porch in Daring clothes: add +2"
+          },
+          "power": {
+            "type": "who deals with whom over the house's debt",
+            "min": 0,
+            "max": 100,
+            "start": 50,
+            "read_by": "at Power 60 his knock after a short Sunday asks for her, not Mark (LO, 2026-10-08)",
+            "raised_by": "each carried Sunday: add +10"
+          }
+        },
+        "schedule": [
+          {
+            "where": "vance_house",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri",
+              "Sat",
+              "Sun"
+            ],
+            "from": "18:00",
+            "to": "22:00"
+          }
+        ],
+        "schedule_rows": 1
+      },
+      {
+        "id": "npc_nadia",
+        "name": "Nadia",
+        "role": "classmate",
+        "schedule": [
+          {
+            "where": "lecture_hall",
+            "weekdays": [
+              "Mon",
+              "Wed",
+              "Fri"
+            ],
+            "from": "08:30",
+            "to": "10:00"
+          },
+          {
+            "where": "lecture_hall",
+            "weekdays": [
+              "Thu"
+            ],
+            "from": "13:00",
+            "to": "14:30"
+          },
+          {
+            "where": "library",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Fri"
+            ],
+            "from": "14:30",
+            "to": "18:00"
+          },
+          {
+            "where": "canteen",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri"
+            ],
+            "from": "11:45",
+            "to": "13:00"
+          }
+        ],
+        "schedule_rows": 4
+      },
+      {
+        "id": "npc_gary",
+        "name": "Gary",
+        "role": "café regular",
+        "schedule": [
+          {
+            "where": "cafe",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri"
+            ],
+            "from": "14:30",
+            "to": "18:00"
+          },
+          {
+            "where": "cafe",
+            "weekdays": [
+              "Fri"
+            ],
+            "from": "20:00",
+            "to": "22:00"
+          }
+        ],
+        "schedule_rows": 2
+      },
+      {
+        "id": "npc_art_lecturer",
+        "name": "the art lecturer",
+        "role": "Figure drawing",
+        "schedule": [
+          {
+            "where": "lecture_hall",
+            "weekdays": [
+              "Tue",
+              "Thu"
+            ],
+            "from": "08:30",
+            "to": "10:00"
+          },
+          {
+            "where": "lecture_hall",
+            "weekdays": [
+              "Wed"
+            ],
+            "from": "13:00",
+            "to": "14:30"
+          },
+          {
+            "where": "art_office",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Thu",
+              "Fri"
+            ],
+            "from": "14:30",
+            "to": "18:00"
+          }
+        ],
+        "schedule_rows": 3
+      },
+      {
+        "id": "npc_business_lecturer",
+        "name": "the Business lecturer",
+        "role": "Business",
+        "schedule": [
+          {
+            "where": "lecture_hall",
+            "weekdays": [
+              "Mon",
+              "Wed"
+            ],
+            "from": "10:15",
+            "to": "11:45"
+          },
+          {
+            "where": "lecture_hall",
+            "weekdays": [
+              "Tue"
+            ],
+            "from": "13:00",
+            "to": "14:30"
+          },
+          {
+            "where": "business_office",
+            "weekdays": [
+              "Mon",
+              "Wed",
+              "Thu",
+              "Fri"
+            ],
+            "from": "14:30",
+            "to": "18:00"
+          }
+        ],
+        "schedule_rows": 3
+      },
+      {
+        "id": "npc_bio_ta",
+        "name": "the Biology TA",
+        "role": "Biology",
+        "schedule": [
+          {
+            "where": "lecture_hall",
+            "weekdays": [
+              "Tue",
+              "Thu"
+            ],
+            "from": "10:15",
+            "to": "11:45"
+          },
+          {
+            "where": "lecture_hall",
+            "weekdays": [
+              "Mon"
+            ],
+            "from": "13:00",
+            "to": "14:30"
+          },
+          {
+            "where": "ta_office",
+            "weekdays": [
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri"
+            ],
+            "from": "14:30",
+            "to": "18:00"
+          }
+        ],
+        "schedule_rows": 3
+      },
+      {
+        "id": "npc_dean",
+        "name": "the dean",
+        "role": "dean",
+        "schedule": [
+          {
+            "where": "dean_office",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri"
+            ],
+            "from": "09:00",
+            "to": "17:00"
+          }
+        ],
+        "schedule_rows": 1
+      },
+      {
+        "id": "npc_kayla",
+        "name": "Kayla",
+        "role": "Ryan's girlfriend",
+        "schedule_rows": 0
+      },
+      {
+        "id": "npc_claire",
+        "name": "Claire",
+        "role": "Hale's wife",
+        "schedule_rows": 0
+      },
+      {
+        "id": "npc_desk_guy",
+        "name": "the guy beside her",
+        "role": "classmate",
+        "schedule_rows": 0
+      },
+      {
+        "id": "npc_rival",
+        "name": "the rival girl",
+        "role": "classmate",
+        "schedule_rows": 0
+      },
+      {
+        "id": "npc_study_guy",
+        "name": "the study guy",
+        "role": "classmate",
+        "schedule_rows": 0
+      },
+      {
+        "id": "npc_cocky_guy",
+        "name": "the cocky guy",
+        "role": "Jake's teammate",
+        "schedule_rows": 0,
+        "schedule": [
+          {
+            "where": "zoe_apartment",
+            "weekdays": [
+              "Fri"
+            ],
+            "from": "23:00",
+            "to": "00:00",
+            "when": "cocky_guy_met",
+            "note": "Zoe's party, for the party hookup (LO, 2026-10-08)"
+          },
+          {
+            "where": "zoe_apartment",
+            "weekdays": [
+              "Sat"
+            ],
+            "from": "00:00",
+            "to": "02:00",
+            "when": "cocky_guy_met",
+            "note": "the same party after midnight (LO, 2026-10-08)"
+          }
+        ]
+      },
+      {
+        "id": "npc_figure_model",
+        "name": "the figure-drawing model",
+        "role": "the class's model",
+        "schedule_rows": 0
+      }
+    ],
+    "resetting_flags": [
+      "heavy_night",
+      "ryan_covered",
+      "letter_home",
+      "on_probation",
+      "jake_date_booked",
+      "rent_carried"
+    ]
+  },
+  "dependencies": [
+    {
+      "from": {
+        "npc": "npc_ryan",
+        "step": 1
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Mon"
+          ],
+          "from": "07:00",
+          "to": "08:00",
+          "note": "first morning, bathroom (LIVES.md:390)"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_ryan",
+        "step": 5
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Fri"
+          ],
+          "from": "22:00",
+          "to": "00:00",
+          "note": "Kayla over (ARC_IDEAS.md:114)"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_ryan",
+        "step": 6
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Sat"
+          ],
+          "from": "08:00",
+          "to": "10:00",
+          "note": "Kayla over (ARC_IDEAS.md:115)"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_laura",
+        "step": 1
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Tue"
+          ],
+          "from": "18:00",
+          "to": "22:00",
+          "note": "day 2 (LIVES.md:391-392)"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_laura",
+        "step": 2
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri",
+            "Sat",
+            "Sun"
+          ],
+          "from": "23:00",
+          "to": "01:00",
+          "place": "home_hall",
+          "key": "came_home_late"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_laura",
+        "step": 4
+      },
+      "needs": {
+        "npc": "npc_ryan",
+        "step": 4
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_laura",
+        "step": 5
+      },
+      "needs": {
+        "npc": "npc_jake",
+        "step": 3
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_laura",
+        "step": 5
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Sat"
+          ],
+          "from": "22:30",
+          "to": "00:00",
+          "note": "to midnight (LIVES.md:57)"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_jake",
+        "step": 4
+      },
+      "needs": {
+        "npc": "npc_laura",
+        "step": 4,
+        "note": "new: the shared canvas reads both counters (board, 2026-10-08)"
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_laura",
+        "step": 6
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Sat"
+          ],
+          "from": "17:00",
+          "to": "18:30"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_laura",
+        "step": 7
+      },
+      "needs": {
+        "npc": "npc_zoe",
+        "step": 1
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_laura",
+        "step": 7
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Fri"
+          ],
+          "from": "18:00",
+          "to": "21:00",
+          "note": "the Friday party (LIVES.md:181-182)"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_mark",
+        "step": 1
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Sun"
+          ],
+          "from": "08:00",
+          "to": "12:00",
+          "key": "rent_starts"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_mark",
+        "step": 3
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Sun"
+          ],
+          "from": "08:00",
+          "to": "12:00",
+          "key": "rent_starts"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_mark",
+        "step": 7
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Sun"
+          ],
+          "from": "08:00",
+          "to": "12:00",
+          "key": "rent_starts"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_mark",
+        "step": 4
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Sun",
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri"
+          ],
+          "from": "22:00",
+          "to": "00:00"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_mark",
+        "step": 5
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Sun",
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri"
+          ],
+          "from": "23:00",
+          "to": "01:00"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_mark",
+        "step": 9
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Wed"
+          ],
+          "from": "18:00",
+          "to": "22:00"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_tom",
+        "step": 1
+      },
+      "needs": {
+        "place": "cafe",
+        "key": "cafe_job"
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_tom",
+        "step": 2
+      },
+      "needs": {
+        "place": "cafe",
+        "key": "cafe_job"
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_tom",
+        "step": 3
+      },
+      "needs": {
+        "place": "cafe",
+        "key": "cafe_job"
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_tom",
+        "step": 4
+      },
+      "needs": {
+        "place": "cafe",
+        "key": "cafe_job"
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_tom",
+        "step": 5
+      },
+      "needs": {
+        "place": "cafe",
+        "key": "cafe_job"
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_tom",
+        "step": 6
+      },
+      "needs": {
+        "place": "cafe",
+        "key": "cafe_job"
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_tom",
+        "step": 4
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri"
+          ],
+          "from": "14:30",
+          "to": "18:00",
+          "note": "Gary in booth four (LIVES.md:160)"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_zoe",
+        "step": 1
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Fri"
+          ],
+          "from": "19:00",
+          "to": "23:00",
+          "note": "the first Friday party"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_jake",
+        "step": 1
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Fri"
+          ],
+          "from": "19:00",
+          "to": "23:00",
+          "note": "= Zoe A 1"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_zoe",
+        "step": 2
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Fri"
+          ],
+          "from": "21:00",
+          "to": "00:00"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_zoe",
+        "step": 3
+      },
+      "needs": {
+        "place": "party_house"
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_zoe",
+        "step": 3
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Sat"
+          ],
+          "from": "20:00",
+          "to": "00:00"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_jake",
+        "step": 2
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Mon",
+            "Wed",
+            "Fri"
+          ],
+          "from": "10:15",
+          "to": "11:45",
+          "place": "quad"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_jake",
+        "step": 3
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Sat"
+          ],
+          "from": "23:00",
+          "to": "00:00",
+          "note": "Ryan back from Kayla's"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_hale",
+        "step": 1
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Mon"
+          ],
+          "from": "08:30",
+          "to": "10:00",
+          "note": "day 1"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_hale",
+        "step": 3
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Thu"
+          ],
+          "from": "18:00",
+          "to": "19:30",
+          "place": "hale_office"
+        }
+      }
+    },
+    {
+      "from": {
+        "npc": "npc_hale",
+        "step": 4
+      },
+      "needs": {
+        "window": {
+          "days": [
+            "Thu"
+          ],
+          "from": "18:30",
+          "to": "19:30",
+          "place": "hale_office"
+        }
+      }
+    }
+  ]
+}

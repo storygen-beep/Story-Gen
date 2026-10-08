@@ -1,0 +1,1736 @@
+# =============================================================================
+# First Term — 3 · what she does alone in each room (the place sheets' "Rows")
+#
+# Piece 1 of the 0.1 build: the needs (sleep, shower, food, a wash, a soak), the
+# rows that read a meter or her clothes (mirrors, the feed, the drawer, grades on
+# the doors), the porch, and the way home late. The system pools (shifts, classes,
+# the party, the park's pool, touching herself) are piece 4.
+# Every row is a located, repeatable canvas; a once-a-day row carries
+# max_triggers_per_day on its trigger (engine.md §28: a located canvas needs no flag).
+# =============================================================================
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# HER ROOM — sleep, the feed, a selfie (home_ella_room sheet)
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "room_sleep"
+name = "Go to bed"
+description = "Her bed: energy back to full, the clock to the next morning (between 06:30 and 07:30; the engine moves only by minutes, engine.md §32.1)."
+
+[canvases.trigger]
+location      = "home_ella_room"
+is_repeatable = true
+priority      = 5
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time   = "06:00"
+
+[canvases.trigger.metadata]
+show_when_blocked = true
+cooldown_message  = "Too early for bed. Take a nap instead."
+
+[[canvases.nodes]]
+id   = "bed"
+name = "Your bed"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "You kick your clothes off onto the floor and get under the covers. The sheets are cold for a second, but only a second. Through the wall Ryan's music thumps low. You're out before the song ends." },
+  { type = "paragraph", content = "You lie on your back in the dark with your phone on your chest until the screen goes black on its own. The house ticks around you. You meant to think about tomorrow, but your body is heavy and done, so you let it sink." },
+  { type = "paragraph", content = "You curl onto your side with the duvet up to your ear. Somebody walks the landing, slow, and stops near your door. You wait for the knock, but it doesn't come. You don't hear them go. You're already asleep." },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "energy", operator = "lt", value = 30 } ] }, blocks = [ { type = "paragraph", content = "Your legs ache. Your eyes sting. You were running on nothing, and you know it now that you've stopped." } ] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sleep till morning."
+targetType = "node"
+nodeId     = "wake"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "time_of_day", start_time = "19:00", end_time = "20:00" } ] }
+time_progression_minutes = 690
+effects = [ { targetType = "player", trait = "energy", op = "set", value = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sleep till morning."
+targetType = "node"
+nodeId     = "wake"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "time_of_day", start_time = "20:00", end_time = "21:00" } ] }
+time_progression_minutes = 630
+effects = [ { targetType = "player", trait = "energy", op = "set", value = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sleep till morning."
+targetType = "node"
+nodeId     = "wake"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "time_of_day", start_time = "21:00", end_time = "22:00" } ] }
+time_progression_minutes = 570
+effects = [ { targetType = "player", trait = "energy", op = "set", value = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sleep till morning."
+targetType = "node"
+nodeId     = "wake"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "time_of_day", start_time = "22:00", end_time = "23:00" } ] }
+time_progression_minutes = 510
+effects = [ { targetType = "player", trait = "energy", op = "set", value = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sleep till morning."
+targetType = "node"
+nodeId     = "wake"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "time_of_day", start_time = "23:00", end_time = "00:00" } ] }
+time_progression_minutes = 450
+effects = [ { targetType = "player", trait = "energy", op = "set", value = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sleep till morning."
+targetType = "node"
+nodeId     = "wake"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "time_of_day", start_time = "00:00", end_time = "01:00" } ] }
+time_progression_minutes = 390
+effects = [ { targetType = "player", trait = "energy", op = "set", value = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sleep till morning."
+targetType = "node"
+nodeId     = "wake"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "time_of_day", start_time = "01:00", end_time = "02:00" } ] }
+time_progression_minutes = 330
+effects = [ { targetType = "player", trait = "energy", op = "set", value = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sleep till morning."
+targetType = "node"
+nodeId     = "wake"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "time_of_day", start_time = "02:00", end_time = "03:00" } ] }
+time_progression_minutes = 270
+effects = [ { targetType = "player", trait = "energy", op = "set", value = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sleep till morning."
+targetType = "node"
+nodeId     = "wake"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "time_of_day", start_time = "03:00", end_time = "04:00" } ] }
+time_progression_minutes = 210
+effects = [ { targetType = "player", trait = "energy", op = "set", value = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sleep till morning."
+targetType = "node"
+nodeId     = "wake"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "time_of_day", start_time = "04:00", end_time = "05:00" } ] }
+time_progression_minutes = 150
+effects = [ { targetType = "player", trait = "energy", op = "set", value = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sleep till morning."
+targetType = "node"
+nodeId     = "wake"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "time_of_day", start_time = "05:00", end_time = "06:00" } ] }
+time_progression_minutes = 90
+effects = [ { targetType = "player", trait = "energy", op = "set", value = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Not yet. Get up."
+targetType = "location"
+locationId = "home_ella_room"
+
+[[canvases.nodes]]
+id   = "wake"
+name = "Morning"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "heavy_night", operator = "is_true" } ] }, blocks = [ { type = "paragraph", content = "You wake with your head pounding and your mouth like sand. Three drinks. The light through the curtains is an insult. You lie there a long time before you can face the idea of standing up." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "heavy_night", operator = "is_false" } ] }, blocks = [ { type = "paragraph", content = "Morning. You stretch until your toes crack and lie there a minute, warm, listening to the house wake up around you." } ] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get up."
+targetType = "location"
+locationId = "home_ella_room"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "heavy_night", operator = "is_false" } ] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get up, slowly. (−30 energy: a heavy night)"
+targetType = "location"
+locationId = "home_ella_room"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "heavy_night", operator = "is_true" } ] }
+effects    = [ { targetType = "player", trait = "energy", op = "add", value = -30 } ]
+flagEffects = [ { targetType = "player", flag = "heavy_night", op = "unset" } ]
+
+
+[[canvases]]
+id   = "room_nap"
+name = "Take a nap"
+description = "A daytime nap: two hours, some energy back. Once a day."
+
+[canvases.trigger]
+location      = "home_ella_room"
+is_repeatable = true
+priority      = 4
+is_active     = true
+max_triggers_per_day = 1
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "07:00"
+end_time   = "19:00"
+
+[[canvases.nodes]]
+id   = "nap"
+name = "A nap"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "You lie down on top of the covers, still dressed, one arm over your eyes. The light through the curtains goes orange behind your eyelids, and then it's gone." },
+  { type = "paragraph", content = "You kick your shoes off and fall face-first into the pillow. Downstairs the radio's on. You don't hear the end of the song." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sleep two hours."
+targetType = "location"
+locationId = "home_ella_room"
+time_progression_minutes = 120
+effects = [ { targetType = "player", trait = "energy", op = "add", value = 30, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get up again."
+targetType = "location"
+locationId = "home_ella_room"
+
+
+[[canvases]]
+id   = "room_feed"
+name = "Check your feed"
+description = "Her feed reads `followers` (the place sheet: the feed reads followers; DECISIONS 17)."
+
+[canvases.trigger]
+location      = "home_ella_room"
+is_repeatable = true
+priority      = 3
+is_active     = true
+
+[[canvases.nodes]]
+id   = "feed"
+name = "Your feed"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You lie back on the bed and scroll. Campus parties, somebody's dog, a girl from your Biology class in a bikini with four hundred likes."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "followers", operator = "lt", value = 10 } ] }, blocks = [ { type = "paragraph", content = "Your own page is three photos of a beach and a cat. Eleven likes on the best one, and most of those are family. Nobody at college knows you're on here." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "followers", operator = "gte", value = 10 }, { type = "trait", subject = "player", trait_key = "followers", operator = "lt", value = 30 } ] }, blocks = [ { type = "paragraph", content = "Your mirror selfies are getting likes from people you only half know. A guy from the quad. Two girls from Business. Someone you've never met wrote \"ok wow\" under the last one, and you look at it for longer than you'd admit." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "followers", operator = "gte", value = 30 } ] }, blocks = [ { type = "paragraph", content = "Your notifications won't stop. New followers every time you look, guys from campus you've never spoken to, messages you don't open. Someone has reposted your last photo with fire emojis. People know your face now, and they've seen more than your face." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 15 } ] }, blocks = [ { type = "paragraph", content = "Under a photo of last Friday's party, somebody has tagged you. The comments under it are about you, and none of them are about your face." } ] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Put the phone down."
+targetType = "location"
+locationId = "home_ella_room"
+time_progression_minutes = 15
+
+
+[[canvases]]
+id   = "room_selfie"
+name = "Take a selfie at the mirror"
+description = "Her room's selfie: followers +2, exhibitionism +1, once a day. What she wears is what the photo shows."
+
+[canvases.trigger]
+location      = "home_ella_room"
+is_repeatable = true
+priority      = 3
+is_active     = true
+max_triggers_per_day = 1
+
+[[canvases.nodes]]
+id   = "mirror"
+name = "The mirror"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You stand in front of the mirror with your phone up, one hip out, and find the angle that makes your waist look like that."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_exposure", operator = "eq", value = 0 } ] }, blocks = [ { type = "paragraph", content = "Fully dressed. It's a cute photo, and a safe one. You post it, and the first like comes in before you've put the phone down." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_type", operator = "eq", value = "towel" } ] }, blocks = [ { type = "paragraph", content = "Just the towel, tucked tight above your tits, your shoulders still wet. You hold the towel with one hand and the phone with the other and your heart thumps when you hit post. The likes come fast. Faster than for anything you've ever posted dressed." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_exposure", operator = "eq", value = 1 }, { type = "worn_type", operator = "neq", value = "towel" } ] }, blocks = [ { type = "paragraph", content = "Your underwear, nothing over it. You turn so the mirror gets your ass, then look back at the phone over your shoulder. Posting it feels like stepping off something high. The comments start right away, but you read every one, face hot." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_exposure", operator = "gte", value = 2 } ] }, blocks = [ { type = "paragraph", content = "You're naked. You take it anyway, for you: your arm across your tits, your knees together. You look at it a long time. Then you crop it at the collarbone and post that, but your skin hums like the rest of it went out too." } ] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Post it."
+targetType = "location"
+locationId = "home_ella_room"
+time_progression_minutes = 10
+effects = [ { targetType = "player", trait = "followers", op = "add", value = 2, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Delete it."
+targetType = "location"
+locationId = "home_ella_room"
+time_progression_minutes = 5
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THE BATHROOM — the shower (home_bathroom sheet; hygiene is colour only)
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "bathroom_shower"
+name = "Take a shower"
+description = "Hygiene +50, 20 minutes, once a day. Who knocks reads who is home. Not while Ryan has the room."
+
+[canvases.trigger]
+location      = "home_bathroom"
+is_repeatable = true
+priority      = 5
+is_active     = true
+max_triggers_per_day = 1
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type        = "npc_at_location"
+location_id = "home_bathroom"
+npc_id      = "npc_ryan"
+operator    = "is_absent"
+
+[[canvases.nodes]]
+id   = "shower"
+name = "The shower"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You lock the door, but the lock sticks halfway like always. You strip and step under the water while it's still cold. You gasp. Then it runs hot down your back and over your tits, so you stand there with your eyes shut and your hands flat on the tiles."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" } ] }, blocks = [ { type = "paragraph", content = "Ryan's door opens across the hall. His steps stop outside the bathroom. The handle turns, catches on the lock, and lets go. \"Sorry,\" he says through the door, and doesn't move away from it for a long second." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" } ] }, blocks = [ { type = "paragraph", content = "Downstairs, Mark shouts something about the hot water bill. The pipes knock, but you turn it up hotter." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_laura", operator = "is_present" } ] }, blocks = [ { type = "paragraph", content = "Laura's voice floats up the stairs. \"Leave some hot water, sweetheart!\"" } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "You soap yourself slowly, all of you, because the door's locked. Nobody can see, but you take your time like someone could. The steam fogs the glass until the room is white." },
+  { type = "paragraph", content = "You tip your head back and let the water fill your mouth. It runs off your chin, down between your tits. You should be quick, but you stay until your fingertips wrinkle." },
+  { type = "paragraph", content = "You wash your hair twice because it feels good. The water drums on your shoulders. For ten minutes the house can't get at you." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Wrap up in a towel."
+targetType = "location"
+locationId = "home_bathroom"
+time_progression_minutes = 20
+effects = [ { targetType = "player", trait = "hygiene", op = "add", value = 50 } ]
+wardrobeEffects = [ { action = "equip", item_id = "towel" } ]
+
+
+[[canvases]]
+id   = "bathroom_mirror"
+name = "Look in the mirror"
+description = "The bathroom mirror reads her state (towel, underwear, naked, dressed)."
+
+[canvases.trigger]
+location      = "home_bathroom"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "mirror"
+name = "The mirror"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_type", operator = "eq", value = "towel" } ] }, blocks = [ { type = "paragraph", content = "Wet hair, pink skin, the towel tucked over your tits, stopping at the top of your thighs. One tug and it's on the floor. You look at the girl in the mirror. She looks right back." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_exposure", operator = "gte", value = 2 } ] }, blocks = [ { type = "paragraph", content = "Naked. You turn sideways, then the other way. You cup your tits and let them go. The mirror is small, so you stand on your toes to see the rest of you." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_exposure", operator = "eq", value = 1 }, { type = "worn_type", operator = "neq", value = "towel" } ] }, blocks = [ { type = "paragraph", content = "Bra and panties, and the door doesn't lock properly. You look at yourself the way someone walking in would." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_exposure", operator = "eq", value = 0 } ] }, blocks = [ { type = "paragraph", content = "Dressed. You fix your hair, check your teeth, smooth yourself down. You look like a girl who goes to college." } ] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Done."
+targetType = "location"
+locationId = "home_bathroom"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THE HALL — the mirror by the coats, and the way in late (home_hall sheet;
+# DECISIONS 35: only the street's way home, at 22:00 or later, sets came_home_late)
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "hall_mirror"
+name = "Check your clothes in the hall mirror"
+description = "One line by what she wears. Writes nothing."
+
+[canvases.trigger]
+location      = "home_hall"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "mirror"
+name = "The hall mirror"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_type", operator = "eq", value = "short_skirt" } ] }, blocks = [ { type = "paragraph", content = "The skirt is short enough that the stairs are a problem. Anyone at the bottom looking up gets everything. You tug it down. It doesn't help." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_slot", slot = "bra", operator = "unequipped" }, { type = "worn_exposure", operator = "eq", value = 0 } ] }, blocks = [ { type = "paragraph", content = "No bra. Your nipples show, plain as anything in the hall light. Everyone in this house is going to notice, and you know it." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_type", operator = "eq", value = "towel" } ] }, blocks = [ { type = "paragraph", content = "A towel, in the hall, where anyone can come out of any door. Your heart beats in your throat." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_exposure", operator = "gte", value = 1 }, { type = "worn_type", operator = "neq", value = "towel" } ] }, blocks = [ { type = "paragraph", content = "You're standing in the hall in next to nothing. Every door off it could open." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_exposure", operator = "eq", value = 0 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "neq", value = "short_skirt" } ] }, blocks = [ { type = "paragraph", content = "Covered, neat, nothing anyone could say a word about. You look like Laura's good girl." } ] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go on."
+targetType = "location"
+locationId = "home_hall"
+
+
+[[canvases]]
+id   = "hall_home_late"
+name = "Let yourself in"
+description = "The street's way home after 22:00 (the hall's door). Sets came_home_late, which puts Laura on the stairs (her row and her catch). substitution_only: only the door option reaches it, never a row in the hall."
+
+[canvases.trigger]
+location          = "home_hall"
+is_repeatable     = true
+priority          = 1
+is_active         = true
+substitution_only = true
+
+[[canvases.nodes]]
+id   = "dark_house"
+name = "The dark house"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "The house is dark. You ease the key in and turn it slowly, but the lock still clacks like a gunshot. You stand in the hall with your shoes in your hand, heart going, waiting to hear a door." },
+  { type = "paragraph", content = "Every window on the street is black but one, and it's yours. Somebody left the porch light off. You let yourself in by feel and stand in the hall breathing, smelling the night on your own clothes." },
+  { type = "paragraph", content = "The hall clock ticks. The stairs are a black slope up into nothing. You've done this a hundred times in daylight, and tonight every board knows your name." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Creep in."
+targetType  = "location"
+locationId  = "home_hall"
+flagEffects = [ { targetType = "player", flag = "came_home_late", op = "set" } ]
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THE KITCHEN — the drawer (home_kitchen sheet: letters, Vance's after a short week)
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "kitchen_drawer"
+name = "Look through the drawer"
+description = "Reads rent_carried and the letter home. Writes nothing."
+
+[canvases.trigger]
+location      = "home_kitchen"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "drawer"
+name = "The drawer"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The drawer by the fridge sticks, and you have to lift it to open it. Takeaway menus, dead batteries, a roll of tape, and under all of it the letters nobody wants to open."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "rent_carried", operator = "is_true" } ] }, blocks = [ { type = "paragraph", content = "On top, a new one. Vance's handwriting on the envelope, already torn open. Inside, one line: OUTSTANDING, and a figure, underlined twice. Your short week is in that number. Mark has stuffed it under the menus like that makes it smaller." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "rent_carried", operator = "is_false" } ] }, blocks = [ { type = "paragraph", content = "Three envelopes from Vance, all opened, all folded back the way they came. The top one says FINAL in red. Mark owes him more than the rent, a lot more, and he's never once said so out loud." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "letter_home", operator = "is_true" } ] }, blocks = [ { type = "paragraph", content = "And one from the college, with your name on it, opened. Laura's read it. The dean's signature is at the bottom." } ] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Shut the drawer."
+targetType = "location"
+locationId = "home_kitchen"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THE LIVING ROOM — lie on the couch (home_living_room sheet)
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "living_couch"
+name = "Lie on the couch"
+description = "Whoever walks through reacts to what she wears. Exhibitionism +1 if Daring and someone passes, once a day."
+
+[canvases.trigger]
+location      = "home_living_room"
+is_repeatable = true
+priority      = 3
+is_active     = true
+max_triggers_per_day = 1
+
+[[canvases.nodes]]
+id   = "couch"
+name = "The couch"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You stretch out on the couch with the remote, one knee up, and flick through channels you don't watch."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_exposure", operator = "gte", value = 1 }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" } ] }, blocks = [ { type = "paragraph", content = "Mark comes through from the kitchen with a beer and stops behind the couch. You're in your underwear. He doesn't say cover up. He stands there drinking, looking down the length of you, and then he goes, slowly." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_exposure", operator = "gte", value = 1 }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" } ] }, blocks = [ { type = "paragraph", content = "Ryan comes down for a drink and sees you and stops on the last stair. \"Jesus, @player.nickname.\" He goes to the kitchen without looking again. He takes a long time getting that drink." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_type", operator = "eq", value = "short_skirt" } ] }, blocks = [ { type = "paragraph", content = "With your knee up, the skirt is nowhere. Anybody coming in from the hall would see straight up it." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_exposure", operator = "eq", value = 0 } ] }, blocks = [ { type = "paragraph", content = "The house goes on around you. Doors, the kettle, somebody on the stairs. Nobody looks twice at a girl on a couch in her clothes." } ] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay a while."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 45
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "worn_exposure", operator = "gte", value = 1 } ] }
+effects = [ { targetType = "player", trait = "exhibitionism", op = "add", value = 1 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get up."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 30
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THE MASTER BEDROOM — Laura's wardrobe, and the room at night
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "master_wardrobe"
+name = "Go through Laura's wardrobe"
+description = "When both are out. Try on her things in her mirror; reads laura_blue_dress. Once a day."
+
+[canvases.trigger]
+location      = "home_master_bedroom"
+is_repeatable = true
+priority      = 3
+is_active     = true
+max_triggers_per_day = 1
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type        = "npc_at_location"
+location_id = "home_master_bedroom"
+operator    = "is_absent"
+
+[[canvases.nodes]]
+id   = "wardrobe"
+name = "Laura's wardrobe"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Her wardrobe smells like her perfume. Work blouses, a winter coat, and at the back, in dry-cleaner plastic, dresses she hasn't worn since before Mark. Short ones. Tight ones. A red one with no back at all."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_item", item_id = "laura_blue_dress", operator = "owned" } ] }, blocks = [ { type = "paragraph", content = "There's the gap on the rail where the blue one hung. It's in your room now. She gave it to you like it was nothing, and there's a whole rail of nothing back here." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "You hold the red one against yourself in her long mirror. It would barely cover your ass. Laura wore this once, somewhere, for someone, and you stand there trying to picture her face when she did." },
+  { type = "paragraph", content = "In the drawer under the dresses: stockings, still in the packet, and a black lace bra that is not a mom's bra. You hold it up to your chest in her mirror and your nipples go hard." },
+  { type = "paragraph", content = "A photo, tucked in the frame of her mirror: Laura at twenty-something on someone's shoulders at a concert, her top off, laughing. You put it back exactly where it was." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Put it all back."
+targetType = "location"
+locationId = "home_master_bedroom"
+time_progression_minutes = 20
+
+
+[[canvases]]
+id   = "master_asleep"
+name = "They're asleep"
+description = "One line at night, when they're in bed; then back to the hall."
+
+[canvases.trigger]
+location      = "home_master_bedroom"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type        = "npc_at_location"
+location_id = "home_master_bedroom"
+operator    = "is_present"
+[[canvases.trigger.conditions.items]]
+type       = "time_of_day"
+start_time = "22:00"
+end_time   = "07:00"
+
+[[canvases.nodes]]
+id   = "asleep"
+name = "Their room at night"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The room is dark and warm. It smells of sleep. Mark snores on his back. Laura lies curled toward the wall, one bare shoulder out of the covers. You stand in the doorway long enough to hear them both breathe, then back out."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Back out."
+targetType = "location"
+locationId = "home_hall"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THE GARAGE — Mark's things, while he's out (home_garage sheet)
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "garage_things"
+name = "Go through Mark's things"
+description = "When Mark is out. The debt papers: reads rent_carried. Once a day."
+
+[canvases.trigger]
+location      = "home_garage"
+is_repeatable = true
+priority      = 3
+is_active     = true
+max_triggers_per_day = 1
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type        = "npc_at_location"
+location_id = "home_garage"
+npc_id      = "npc_mark"
+operator    = "is_absent"
+
+[[canvases.nodes]]
+id   = "bench"
+name = "Mark's bench"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "His workbench, his radio, a fridge of beer that hums. The filing box under the bench has a padlock, and the key is on a nail above it, which tells you exactly how much Mark thinks of everybody in this house."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "rent_carried", operator = "is_true" } ] }, blocks = [ { type = "paragraph", content = "On top of the folders, a new page in Mark's square capitals: what's owed to Vance, crossed out and written again, bigger. Your short week is in there. He's added it in red." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "rent_carried", operator = "is_false" } ] }, blocks = [ { type = "paragraph", content = "Folders of bank letters. A loan agreement with Vance's signature on every page, the house on the first one. Mark's been paying it off for years and the number at the bottom has barely moved." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Under the folders, a magazine. Girls your age on the cover, or near it, bent over. You put it back where it was, square to the edge, the way he'd notice."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Lock it up again."
+targetType = "location"
+locationId = "home_garage"
+time_progression_minutes = 15
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# THE FRONT DOOR — sit on the step (home_front_door sheet)
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "front_step"
+name = "Sit on the step"
+description = "Watch the street. Who passes reads what she wears. Writes nothing."
+
+[canvases.trigger]
+location      = "home_front_door"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "step"
+name = "The front step"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "You sit on the front step with your knees up and watch the street. A car goes by slow. A guy walking his dog looks over, and keeps looking." },
+  { type = "paragraph", content = "The step is cold through your clothes. Two doors down a man is washing his car, and he stops washing it when you sit down." },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_type", operator = "eq", value = "short_skirt" } ] }, blocks = [ { type = "paragraph", content = "With your knees up in this skirt, the whole street can see up it. You could put your knees down. You don't, for a while." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "clothing_slot", slot = "underwear", operator = "unequipped" } ] }, blocks = [ { type = "paragraph", content = "There's nothing under the skirt. The air on the step is cool between your legs, and you keep your knees exactly where they are, because one inch is the whole street's business." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_present" } ] }, blocks = [ { type = "paragraph", content = "Next door, Vance lowers his paper on the porch and watches you over the top of it. He doesn't wave." } ] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go back in."
+targetType = "location"
+locationId = "home_front_door"
+time_progression_minutes = 20
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# VANCE — met on the first evening walk past his porch; then his porch every
+# evening (vance_house sheet · npc_vance: Want +2 for Daring clothes; his line
+# changes at Want 30 and 60). His knock after a short Sunday is with the rent.
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "vance_meeting"
+name = "Next door"
+description = "Meets Vance: the first evening she passes his porch. Sets vance_met."
+
+[canvases.trigger]
+location      = "street"
+requires_npc  = "npc_vance"
+is_repeatable = false
+priority      = 10
+is_active     = true
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "22:00"
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type      = "flag"
+subject   = "player"
+flag_key  = "opening_done"
+operator  = "is_true"
+[[canvases.trigger.conditions.items]]
+type      = "flag"
+subject   = "player"
+flag_key  = "vance_met"
+operator  = "is_false"
+
+[[canvases.nodes]]
+id   = "porch"
+name = "The porch next door"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Next door, on his porch, the man who owns your house: Mr. Vance. Mid-fifties, a cardigan, slippers, a newspaper folded on his knee that he isn't reading. He watches you come down the path the way he watches everything on this street, like it's his. Most of it is."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "You'll be Mark's girl. The student. He tells me you're paying your way now."
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_vance"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "His eyes go down you and come back up without hurrying. He's not hiding it. He doesn't think he has to."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Good. Somebody in that house should. You tell your stepfather I said good evening."
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_vance"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text        = "\"Good evening, Mr. Vance.\""
+targetType  = "location"
+locationId  = "street"
+flagEffects = [ { targetType = "player", flag = "vance_met", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text        = "Walk on without a word."
+targetType  = "location"
+locationId  = "street"
+flagEffects = [ { targetType = "player", flag = "vance_met", op = "set" } ]
+effects     = [ { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2 } ]
+
+
+[[canvases]]
+id   = "hub_vance_porch"
+name = "Mr. Vance, on his porch"
+description = "Vance's hub: his line reads his Want (30, 60) and what she wears."
+
+[canvases.trigger]
+location      = "vance_house"
+npc           = "npc_vance"
+requires_npc  = "npc_vance"
+is_repeatable = true
+priority      = 6
+is_active     = true
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type      = "flag"
+subject   = "player"
+flag_key  = "vance_met"
+operator  = "is_true"
+
+[[canvases.nodes]]
+id   = "porch"
+name = "His porch"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "lt", value = 30 } ] }, blocks = [
+  { type = "paragraph", content = "Vance looks up from the paper he isn't reading and nods. That's all. His eyes stay on you while you stand at the bottom of his steps." },
+  { type = "dialog", content = "Evening. Tell Mark the first of the month comes round quicker than he thinks.", props = { speaker = "npc", npcId = "npc_vance" } },
+] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "gte", value = 30 }, { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "lt", value = 60 } ] }, blocks = [
+  { type = "paragraph", content = "Vance folds the paper and puts it down. He's started doing that when it's you. He looks at your legs like he's doing sums." },
+  { type = "dialog", content = "Mark's girl is growing up. You come and sit out here one evening, keep an old man company. I'll knock a little off his number.", props = { speaker = "npc", npcId = "npc_vance" } },
+] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "gte", value = 60 } ] }, blocks = [
+  { type = "paragraph", content = "Vance is standing before you reach his gate. He leans on the porch rail and lets you see him look, all of you, slow, the way you'd look at a car you meant to buy." },
+  { type = "dialog", content = "You know what your stepfather owes me, Miss? He'd sell me the house back for less. He'd sell me a lot of things.", props = { speaker = "npc", npcId = "npc_vance" } },
+] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_type", operator = "eq", value = "short_skirt" } ] }, blocks = [ { type = "dialog", content = "That's a skirt and a half. Does your mother know you go out like that?", props = { speaker = "npc", npcId = "npc_vance" } } ] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "\"Goodnight, Mr. Vance.\""
+targetType = "location"
+locationId = "vance_house"
+time_progression_minutes = 10
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit on his steps a while."
+targetType = "node"
+nodeId     = "steps"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "gte", value = 30 } ] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "\"What's owed, Mr. Vance?\""
+targetType = "node"
+nodeId     = "owed"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "power", operator = "gte", value = 60 } ] }
+
+[[canvases.nodes]]
+id   = "steps"
+name = "His steps"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You sit on the top step of his porch with your knees together. He doesn't move his chair closer, but he doesn't need to. He talks about the street, who's behind on what, whose husband comes home late, and the whole time his eyes are on your legs."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "You're good company, Miss. Better than your stepfather. Come and sit any evening you like."
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_vance"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "\"Goodnight, Mr. Vance.\""
+targetType = "location"
+locationId = "vance_house"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "owed"
+name = "What's owed"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "More than Mark will ever tell you. Less than you're worth, Miss. That's the interesting part."
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_vance"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He folds his paper and smiles at you, slow. He doesn't name a number. He wants you to come back and ask him again."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Walk home."
+targetType = "location"
+locationId = "street"
+time_progression_minutes = 5
+
+
+[[canvases]]
+id   = "vance_walk_past"
+name = "Walk past slowly"
+description = "Vance reads what she wears. Daring clothes: his Want +2. Once a day."
+
+[canvases.trigger]
+location      = "vance_house"
+requires_npc  = "npc_vance"
+is_repeatable = true
+priority      = 4
+is_active     = true
+max_triggers_per_day = 1
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type      = "flag"
+subject   = "player"
+flag_key  = "vance_met"
+operator  = "is_true"
+
+[[canvases.nodes]]
+id   = "walk"
+name = "Past his porch"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "OR", items = [ { type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "clothing_slot", slot = "bra", operator = "unequipped" } ] }, blocks = [ { type = "paragraph", content = "You take the long way past his gate, slow. You feel his eyes land on you and stay. The paper lowers. He wets his lips. You don't look back, but you feel him watch you all the way to the corner." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_type", operator = "neq", value = "short_skirt" }, { type = "clothing_slot", slot = "bra", operator = "equipped" } ] }, blocks = [ { type = "paragraph", content = "You walk past his porch. A nod from the rocking chair. Nothing else. You're dressed like anybody's daughter, and to him you're scenery." } ] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep walking, hips loose."
+targetType = "location"
+locationId = "street"
+conditions = { version = "1.0", logic = "OR", items = [ { type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "clothing_slot", slot = "bra", operator = "unequipped" } ] }
+effects    = [ { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep walking."
+targetType = "location"
+locationId = "street"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CAMPUS — the quad, the canteen, the library, the toilets, the offices' doors
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "quad_grass"
+name = "Sit on the grass"
+description = "What she overhears reads campus_talk. Writes nothing."
+
+[canvases.trigger]
+location      = "quad"
+is_repeatable = true
+priority      = 3
+is_active     = true
+
+[[canvases.nodes]]
+id   = "grass"
+name = "The grass"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You sit down on the grass with your bag under your head. All round you, campus talks: who hooked up, who's failing, whose party, which professor."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 10 } ] }, blocks = [ { type = "paragraph", content = "None of it is about you. Nobody here knows your name yet. A frisbee lands near your foot and a guy jogs over for it, says sorry, and doesn't look back." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 10 }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 25 } ] }, blocks = [ { type = "paragraph", content = "Two girls on the next blanket go quiet when you sit down. Then one says something, so the other laughs. You catch your name in it, then \"Zoe's\", then \"Friday\". They don't stop looking at you." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 25 } ] }, blocks = [ { type = "paragraph", content = "A group of guys from the team look over. One of them says your name out loud to the others, then something else, low. They all laugh. A girl you've never met walks past and says \"Hey, @player,\" like she knows you. Everyone seems to." } ] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get up."
+targetType = "location"
+locationId = "quad"
+time_progression_minutes = 30
+
+
+[[canvases]]
+id   = "canteen_eat"
+name = "Eat ($5)"
+description = "Canteen food: energy +20 for $5, once a day (the canteen sheet; the price on the label)."
+
+[canvases.trigger]
+location      = "canteen"
+is_repeatable = true
+priority      = 4
+is_active     = true
+max_triggers_per_day = 1
+
+[[canvases.nodes]]
+id   = "tray"
+name = "A tray"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Pasta that's been under the lamp since breakfast, a bread roll and a cold can of something sweet. You eat it all, fast, standing up by the windows, and feel your legs come back." },
+  { type = "paragraph", content = "You get a burger and fries and eat with your fingers at the end of a long table. Around you, three hundred people talk at once. It's greasy and too salty, but it puts your legs back under you." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Eat ($5)."
+targetType = "location"
+locationId = "canteen"
+time_progression_minutes = 30
+costs      = [ { trait = "money", value = 5 } ]
+effects    = [ { targetType = "player", trait = "energy", op = "add", value = 20, cap = 100 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Not hungry."
+targetType = "location"
+locationId = "canteen"
+
+
+[[canvases]]
+id   = "canteen_listen"
+name = "Listen to what they say"
+description = "Reads campus_talk. Writes nothing."
+
+[canvases.trigger]
+location      = "canteen"
+is_repeatable = true
+priority      = 3
+is_active     = true
+
+[[canvases.nodes]]
+id   = "listen"
+name = "The canteen"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You sit with your back to the wall and listen. The canteen is where campus says things out loud."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 10 } ] }, blocks = [ { type = "paragraph", content = "The table behind you is talking about Dr. Hale. \"He watches the front row like a hawk.\" \"He watches the front row's legs.\" They laugh. You pull your bag onto your lap." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 10 }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 25 } ] }, blocks = [ { type = "paragraph", content = "\"The new girl. Zoe's friend.\" \"With the legs?\" \"She was at Zoe's on Friday. I heard she did the dare.\" Nobody says which dare. Nobody has to." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 25 } ] }, blocks = [ { type = "paragraph", content = "Your name comes up three tables over, then at the next one. A guy with a tray stops right beside you and grins. \"So it's true, then.\" He walks off before you can ask what is." } ] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave them to it."
+targetType = "location"
+locationId = "canteen"
+time_progression_minutes = 20
+
+
+[[canvases]]
+id   = "canteen_table"
+name = "Sit with the table"
+description = "Lunch with whoever is there: campus_talk +1, once a day (the canteen sheet). The rival may start trouble."
+
+[canvases.trigger]
+location      = "canteen"
+is_repeatable = true
+priority      = 3
+is_active     = true
+max_triggers_per_day = 1
+
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4]
+start_time = "11:45"
+end_time   = "13:00"
+
+[[canvases.nodes]]
+id   = "table"
+name = "The table"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You put your bag down at the long table by the windows, where the loud ones sit."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "zoe_met", operator = "is_true" } ] }, blocks = [
+  { type = "paragraph", content = "Zoe shoves a chair out for you with her foot and steals a fry off your tray before you've sat down." },
+  { type = "dialog", content = "Babe. Sit. Tell them what you told me.", props = { speaker = "npc", npcId = "npc_zoe" } },
+] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "nadia_met", operator = "is_true" } ] }, blocks = [ { type = "dialog", content = "Hale asked about you after class. Just so you know.", props = { speaker = "npc", npcId = "npc_nadia" } } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "rival_met", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 10 } ] }, blocks = [
+  { type = "paragraph", content = "At the end of the table the girl from your Psychology class looks you over, top to bottom, and says to the girl beside her, loud enough:" },
+  { type = "dialog", content = "Some of us came here to study.", props = { speaker = "npc", npcId = "npc_rival" } },
+] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "The talk goes round: the party, the team, who cried in the toilets after Business. Somebody asks you where you live and you say with your parents, and three people make the same face." },
+  { type = "paragraph", content = "Somebody's planning Friday. Somebody else knows a guy with a hot tub. By the end of lunch four new people know your name and two of them have your number." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay for lunch."
+targetType = "location"
+locationId = "canteen"
+time_progression_minutes = 45
+effects    = [ { targetType = "player", trait = "campus_talk", op = "add", value = 1 } ]
+
+
+[[canvases]]
+id   = "library_study"
+name = "Study"
+description = "Energy −10 (a cost), intelligence +1. Twice a day (the library sheet)."
+
+[canvases.trigger]
+location      = "library"
+is_repeatable = true
+priority      = 4
+is_active     = true
+max_triggers_per_day = 2
+
+[[canvases.nodes]]
+id   = "desk"
+name = "A desk"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "You take a desk under a green lamp and open the Psychology reader and make yourself read it twice. Somewhere around the third page it starts to stick." },
+  { type = "paragraph", content = "You copy your Biology notes out again in neat writing, the diagrams too, until your wrist aches and the stuff that looked like noise has a shape." },
+  { type = "paragraph", content = "Business case studies. You read them with a highlighter in your teeth. By the end you could argue either side, and you'd win." },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "npc_at_location", location_id = "library", npc_id = "npc_nadia", operator = "is_present" } ] }, blocks = [ { type = "paragraph", content = "Nadia is two tables over with her headphones in. She lifts her pen at you and goes back to her book." } ] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Study an hour."
+targetType = "location"
+locationId = "library"
+time_progression_minutes = 60
+costs      = [ { trait = "energy", value = 10 } ]
+effects    = [ { targetType = "player", trait = "intelligence", op = "add", value = 1 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Close the book."
+targetType = "location"
+locationId = "library"
+
+
+[[canvases]]
+id   = "toilet_wash"
+name = "A quick wash"
+description = "Hygiene +15, once a day (the women's toilet sheet)."
+
+[canvases.trigger]
+location      = "college_womens_toilet"
+is_repeatable = true
+priority      = 4
+is_active     = true
+max_triggers_per_day = 1
+
+[[canvases.nodes]]
+id   = "sink"
+name = "The sink"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You run the cold tap over your face and the back of your neck, then lock yourself in a stall with wet paper towels for the rest of you. Somebody comes in, pees, washes their hands and goes. She never knows you're bare-assed two feet away."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Done."
+targetType = "location"
+locationId = "college_womens_toilet"
+time_progression_minutes = 10
+effects    = [ { targetType = "player", trait = "hygiene", op = "add", value = 15 } ]
+
+
+[[canvases]]
+id   = "toilet_mirror"
+name = "Look in the mirror"
+description = "The long mirror reads her state; at Daring she can take her bra off before class."
+
+[canvases.trigger]
+location      = "college_womens_toilet"
+is_repeatable = true
+priority      = 3
+is_active     = true
+
+[[canvases.nodes]]
+id   = "mirror"
+name = "The long mirror"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The long mirror over the sinks is lit like a shop window. You look at yourself the way a guy across the lecture hall would."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_slot", slot = "bra", operator = "unequipped" } ] }, blocks = [ { type = "paragraph", content = "No bra. Your nipples are hard from the cold in here and they show, two points anyone can see from across a room. You could fold your arms all day. You won't." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_slot", slot = "bra", operator = "equipped" } ] }, blocks = [ { type = "paragraph", content = "Your bra shows a line. You think about the stall behind you, and the lock on it, and what you'd look like walking into class without it." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_type", operator = "eq", value = "short_skirt" } ] }, blocks = [ { type = "paragraph", content = "The skirt. You bend to the sink and watch in the mirror how far it rides up. Far." } ] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take your bra off in a stall."
+targetType = "location"
+locationId = "college_womens_toilet"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_item", item_id = "plain_bra", operator = "equipped" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "toilet_bra_today", operator = "is_false" } ] }
+show_when_locked = true
+locked_text = "Take your bra off before class (needs Daring)"
+wardrobeEffects = [ { action = "unequip", item_id = "plain_bra" } ]
+flagEffects = [ { targetType = "player", flag = "toilet_bra_today", op = "set" } ]
+effects = [ { targetType = "player", trait = "exhibitionism", op = "add", value = 1 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the sports bra off in a stall."
+targetType = "location"
+locationId = "college_womens_toilet"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_item", item_id = "sports_bra", operator = "equipped" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "toilet_bra_today", operator = "is_false" } ] }
+wardrobeEffects = [ { action = "unequip", item_id = "sports_bra" } ]
+flagEffects = [ { targetType = "player", flag = "toilet_bra_today", op = "set" } ]
+effects = [ { targetType = "player", trait = "exhibitionism", op = "add", value = 1 } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "location"
+locationId = "college_womens_toilet"
+
+
+# ── the offices: her grade, posted on each door (DECISIONS 14) ──
+
+[[canvases]]
+id   = "door_grade_psych"
+name = "Read your grade on the door"
+description = "Reads grade_psych. Writes nothing."
+
+[canvases.trigger]
+location      = "hale_office"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "door"
+name = "Psychology grades"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "A printed list taped to Dr. Hale's door, student numbers and grades. You find yours with your finger."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "grade_psych", operator = "lt", value = 40 } ] }, blocks = [ { type = "paragraph", content = "Failing. In red pen, with a circle round it. Laura is going to see this." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "grade_psych", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "grade_psych", operator = "lt", value = 70 } ] }, blocks = [ { type = "paragraph", content = "A pass. Middle of the list. Nobody would look twice." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "grade_psych", operator = "gte", value = 70 } ] }, blocks = [ { type = "paragraph", content = "Near the top. A small tick beside it in his pen, like he wanted you to see he'd noticed." } ] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Step back."
+targetType = "location"
+locationId = "hale_office"
+
+
+[[canvases]]
+id   = "door_grade_art"
+name = "Read your grade on the door"
+description = "Reads grade_art. Writes nothing."
+
+[canvases.trigger]
+location      = "art_office"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "door"
+name = "Figure drawing grades"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The art lecturer has pinned the grades to her door with a drawing pin through a charcoal nude. Your number is near the bottom of the sheet."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "grade_art", operator = "lt", value = 40 } ] }, blocks = [ { type = "paragraph", content = "Failing. Underneath, in pencil: \"Look at the body. Really look.\"" } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "grade_art", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "grade_art", operator = "lt", value = 70 } ] }, blocks = [ { type = "paragraph", content = "A pass. \"Better proportions\" written beside it." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "grade_art", operator = "gte", value = 70 } ] }, blocks = [ { type = "paragraph", content = "A top mark, with a star, but also \"come and see me\" in the margin." } ] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Step back."
+targetType = "location"
+locationId = "art_office"
+
+
+[[canvases]]
+id   = "door_grade_business"
+name = "Read your grade on the door"
+description = "Reads grade_business. Writes nothing."
+
+[canvases.trigger]
+location      = "business_office"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "door"
+name = "Business grades"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "A typed list in a plastic sleeve, squared to the edge of the door. No comments. No ticks."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "grade_business", operator = "lt", value = 40 } ] }, blocks = [ { type = "paragraph", content = "Failing. Below the list: \"Retakes by appointment. Honest work only.\"" } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "grade_business", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "grade_business", operator = "lt", value = 70 } ] }, blocks = [ { type = "paragraph", content = "A pass. Exactly what you earned, which is the only thing he hands out." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "grade_business", operator = "gte", value = 70 } ] }, blocks = [ { type = "paragraph", content = "Top of the list. From him, that's practically a medal." } ] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Step back."
+targetType = "location"
+locationId = "business_office"
+
+
+[[canvases]]
+id   = "door_grade_bio"
+name = "Read your grade on the door"
+description = "Reads grade_bio. Writes nothing."
+
+[canvases.trigger]
+location      = "ta_office"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "door"
+name = "Biology grades"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The TA has written the Biology grades out by hand on lined paper and stuck them up with tape that's already peeling."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "grade_bio", operator = "lt", value = 40 } ] }, blocks = [ { type = "paragraph", content = "Failing. She's drawn a tiny sad face beside it, and then crossed the face out." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "grade_bio", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "grade_bio", operator = "lt", value = 70 } ] }, blocks = [ { type = "paragraph", content = "A pass, in her round handwriting." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "grade_bio", operator = "gte", value = 70 } ] }, blocks = [ { type = "paragraph", content = "Near the top, and underlined, twice." } ] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Step back."
+targetType = "location"
+locationId = "ta_office"
+
+
+[[canvases]]
+id   = "door_dean_notice"
+name = "Read the notice on the door"
+description = "The dean's notice: reads on_probation and complaints. Writes nothing."
+
+[canvases.trigger]
+location      = "dean_office"
+is_repeatable = true
+priority      = 2
+is_active     = true
+
+[[canvases.nodes]]
+id   = "door"
+name = "The notice"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "A typed notice in a frame: STUDENTS CALLED TO THE DEAN WILL WAIT OUTSIDE UNTIL SENT FOR. Under it, a list of names."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "on_probation", operator = "is_true" } ] }, blocks = [ { type = "paragraph", content = "Yours is on it. PROBATION, in capitals, beside your student number." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "on_probation", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "complaints", operator = "gte", value = 1 } ] }, blocks = [ { type = "paragraph", content = "Yours is on it, with COMPLAINT written beside it. Somebody has been talking about what you wear to class." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "on_probation", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "complaints", operator = "lt", value = 1 } ] }, blocks = [ { type = "paragraph", content = "Your name isn't on it. Not yet." } ] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Step back."
+targetType = "location"
+locationId = "dean_office"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# TOWN — the shop's changing room, Zoe's wardrobe, the hot tub
+# ─────────────────────────────────────────────────────────────────────────────
+
+[[canvases]]
+id   = "shop_try_on"
+name = "Try things on"
+description = "The changing room: the mirror, and where each thing counts (the shop shows only names and prices, engine.md §17)."
+
+[canvases.trigger]
+location      = "clothes_shop"
+is_repeatable = true
+priority      = 3
+is_active     = true
+
+[[canvases.nodes]]
+id   = "changing_room"
+name = "The changing room"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The changing room is a curtain that doesn't reach the wall on one side. You pull it as far as it goes and strip to your underwear in the gap, and try on what you picked."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The short skirt ($30): you turn round to look over your shoulder. The hem stops just under your ass. Wear it out of the house and people look. Wear it to the Sunday table and Mark does more than look. But you'd need to be Daring to walk out the door in it."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The sheer blouse ($20): white, soft, and you can see a bra through it, or without one, everything. It's a top for the park on a hot day, or for a lecturer who loses his place."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The sports bra ($25): tight, black, made for running. In the park, at Daring, you could run in just this with leggings. Everybody on the path would get a show."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "That one's popular. With the guys, I mean."
+[canvases.nodes.blocks.props]
+speaker = "unknown"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get dressed again."
+targetType = "location"
+locationId = "clothes_shop"
+time_progression_minutes = 20
+
+
+[[canvases]]
+id   = "zoe_borrow_dress"
+name = "Borrow Zoe's dress"
+description = "In her bedroom while she's home: zoe_party_dress to the wardrobe if she hasn't got it; Zoe watches her change."
+
+[canvases.trigger]
+location      = "zoe_bedroom"
+requires_npc  = "npc_zoe"
+is_repeatable = true
+priority      = 3
+is_active     = true
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic   = "AND"
+[[canvases.trigger.conditions.items]]
+type        = "npc_at_location"
+location_id = "zoe_apartment"
+npc_id      = "npc_zoe"
+operator    = "is_present"
+
+[[canvases.nodes]]
+id   = "wardrobe"
+name = "Zoe's wardrobe"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Zoe lies on her bed on her stomach with her chin in her hands while you go through her clothes. Half of them still have the tags on."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_item", item_id = "zoe_party_dress", operator = "not_owned" } ] }, blocks = [
+  { type = "paragraph", content = "She points with her foot at a black dress on the back of the door, short and tight, with straps like string." },
+  { type = "dialog", content = "That one. Put it on. No, here. I want to see.", props = { speaker = "npc", npcId = "npc_zoe" } },
+  { type = "paragraph", content = "You change in front of her. She doesn't look away once. When you've got it on she whistles, low, and says keep it." },
+] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_item", item_id = "zoe_party_dress", operator = "owned" } ] }, blocks = [
+  { type = "dialog", content = "You've got my dress. You've got the best one. What else do you want, my underwear?", props = { speaker = "npc", npcId = "npc_zoe" } },
+  { type = "paragraph", content = "She laughs. Then she doesn't, and she watches you hold a top up against yourself in her mirror, and she bites her lip." },
+] } ]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Take the dress."
+targetType = "location"
+locationId = "zoe_bedroom"
+time_progression_minutes = 15
+conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_item", item_id = "zoe_party_dress", operator = "not_owned" } ] }
+wardrobeEffects = [ { action = "add", item_id = "zoe_party_dress" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Hang it all back up."
+targetType = "location"
+locationId = "zoe_bedroom"
+time_progression_minutes = 15
+
+
+[[canvases]]
+id   = "party_house_soak"
+name = "Soak in the hot tub"
+description = "Energy +5, once a night (the party house sheet)."
+
+[canvases.trigger]
+location      = "party_house"
+is_repeatable = true
+priority      = 3
+is_active     = true
+max_triggers_per_day = 1
+
+[[canvases.nodes]]
+id   = "tub"
+name = "The hot tub"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You strip on the cold deck and get in fast. The water is almost too hot, but you sink anyway until it's over your tits, then at your chin. The music from the house is far away. The steam goes straight up into the stars."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Two of Zoe's friends are on the other side, kissing like you aren't there. You try not to watch, but under the water his hand is somewhere you can guess." },
+  { type = "paragraph", content = "A guy you don't know gets in, says hi, and spends the next ten minutes trying not to look at your chest through the water. He fails, but you let him." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get out, dripping."
+targetType = "location"
+locationId = "party_house"
+time_progression_minutes = 30
+effects    = [ { targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 } ]
