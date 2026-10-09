@@ -3906,6 +3906,23 @@ Config.saves.version = {saves_version};
 setup.buildVersion = {build_version_json};
 setup.buildSchema = {saves_version};
 
+// Clock format — a player preference, not game state. SugarCube keeps `settings` in
+// browser storage outside every save, so it holds across loads and releases and the
+// save schema never sees it. Registering any Setting makes SugarCube show its own
+// Settings button in the Saves/Restart menu. Every on-screen time goes through
+// setup.formatTime, which reads this; onChange re-renders so the sidebar, the page
+// and the schedule switch the moment the box is ticked.
+Setting.addToggle("clock24", {{
+    label: "24-hour clock",
+    desc: "Show times as 21:30 instead of 9:30 PM.",
+    default: false,
+    onChange: function () {{
+        // State.length is 0 until the first passage has played; re-rendering before
+        // then would start the story from the settings dialog.
+        if (typeof State !== 'undefined' && State.length > 0) {{ Engine.show(); }}
+    }}
+}});
+
 // Load hook. SugarCube 2.30 calls this with the save object BEFORE
 // State.unmarshalForSave, so State.variables here is still the PRE-load state —
 // never write to it from this function. `save.version` is the schema stamp of the
@@ -4680,12 +4697,41 @@ setup.isCurrentTimeSlot = function(startTime, endTime) {{
     return currentTotal >= startTotal && currentTotal < endTotal;
 }};
 
-// Format hour:minute to readable time (e.g., "10:30 AM")
-setup.formatTime = function(hour, minute) {{
+// Format hour:minute for the screen — the ONE place a time is written. "10:30 AM" by
+// default, "22:30" when the player ticks the 24-hour clock (settings.clock24, the
+// Setting registered beside Config.saves). `compact` drops ":00" in 12-hour mode
+// ("8 AM"), the form schedule sentences have always used; 24-hour keeps the minutes.
+setup.formatTime = function(hour, minute, compact) {{
+    hour = Number(hour) || 0;
+    minute = Number(minute) || 0;
+    var displayMinute = minute < 10 ? '0' + minute : String(minute);
+    if (typeof settings !== 'undefined' && settings.clock24) {{
+        return (hour < 10 ? '0' + hour : String(hour)) + ':' + displayMinute;
+    }}
     var period = hour >= 12 ? 'PM' : 'AM';
     var displayHour = hour % 12 || 12;
-    var displayMinute = minute < 10 ? '0' + minute : minute;
+    if (compact && minute === 0) return displayHour + ' ' + period;
     return displayHour + ':' + displayMinute + ' ' + period;
+}};
+
+// "22:00" (the HH:MM the build writes into schedule data) through formatTime.
+setup.formatHHMM = function(hhmm, compact) {{
+    if (hhmm === null || hhmm === undefined || hhmm === '') return '';
+    var parts = String(hhmm).split(':');
+    var h = parseInt(parts[0], 10);
+    if (isNaN(h)) return String(hhmm);
+    return setup.formatTime(h, parseInt(parts[1], 10) || 0, compact);
+}};
+
+// Schedule sentences are written at build time with each time as a ⟦t:HH:MM⟧ marker,
+// so the clock format is chosen when the sentence is SHOWN, not when the game was
+// built. Every surface that prints a help-data `schedule` string passes it through
+// here; a missed one shows the raw marker, which is loud on purpose.
+setup.clockText = function(text) {{
+    if (typeof text !== 'string') return text;
+    return text.replace(/⟦t:(\\d{{1,2}}:\\d{{2}})⟧/g, function(_m, hhmm) {{
+        return setup.formatHHMM(hhmm, true);
+    }});
 }};
 
 // ===== Why a gate is shut, in words =====
@@ -7020,12 +7066,10 @@ window.advanceDay = function() {{
 }};
 
 window.updateTimeDisplay = function() {{
-    // Format time for 12-hour display
+    // setup.formatTime honours the player's 12/24-hour setting
     const hour = State.variables.game_state.time_state.current_hour;
     const minute = State.variables.game_state.time_state.current_minute;
-    const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
-    const ampm = hour < 12 ? 'AM' : 'PM';
-    const formattedTime = displayHour + ':' + (minute < 10 ? '0' : '') + minute + ' ' + ampm;
+    const formattedTime = setup.formatTime(hour, minute);
 
     // Update time display
     const timeElement = document.getElementById('time-display');
@@ -8446,7 +8490,7 @@ setup._formatCanvasSchedule = function(canvas) {{
     else if (days.length === 5 && days.indexOf("Sat") === -1 && days.indexOf("Sun") === -1) dayStr = "Mon–Fri";
     else if (days.length === 2 && days.indexOf("Sat") !== -1 && days.indexOf("Sun") !== -1) dayStr = "weekends";
     else dayStr = days.join("/");
-    var timeStr = (s.startTime && s.endTime) ? (s.startTime + "–" + s.endTime) : "";
+    var timeStr = (s.startTime && s.endTime) ? (setup.formatHHMM(s.startTime) + "–" + setup.formatHHMM(s.endTime)) : "";
     if (dayStr && timeStr) return dayStr + " " + timeStr;
     return dayStr || timeStr;
 }};
@@ -9182,7 +9226,7 @@ setup.formatFlagHint = function(hint, currentNpcName) {{
     }}
 
     if (hint.location && hint.schedule) {{
-        return "Visit " + hint.location + " " + hint.schedule;
+        return "Visit " + hint.location + " " + setup.clockText(hint.schedule);
     }} else if (hint.location) {{
         return "Visit " + hint.location;
     }}
@@ -9331,8 +9375,8 @@ setup.formatCanvasConditions = function(conditions) {{
             var todStart = item.start_time || "00:00";
             var todEnd = item.end_time || "";
             parts.push(todEnd
-                ? ("Only between " + todStart + " and " + todEnd)
-                : ("Only at " + todStart));
+                ? ("Only between " + setup.formatHHMM(todStart) + " and " + setup.formatHHMM(todEnd))
+                : ("Only at " + setup.formatHHMM(todStart)));
         }}
         else if (item.type === "worn_exposure") {{
             var weOp = item.operator || "gte";
@@ -9390,7 +9434,7 @@ setup.formatCanvasConditions = function(conditions) {{
 setup.formatActivityHint = function(activity) {{
     var text = "";
     if (activity.location && activity.schedule) {{
-        text = "Visit " + activity.location + " " + activity.schedule;
+        text = "Visit " + activity.location + " " + setup.clockText(activity.schedule);
     }} else if (activity.location) {{
         text = "Visit " + activity.location;
     }} else {{
@@ -9597,7 +9641,7 @@ setup.showTraitActivitiesModal = function(npcId, traitKey, requiredValue) {{
             html += '<span class="activity-name">' + ra.name + '</span>';
             html += '<span class="activity-bonus">+' + ra.bonus + ' ' + traitDisplay + '</span>';
             html += '<div class="activity-hint">→ ' + (ra.is_random ? 'Random event at ' : 'Visit ') + ra.location;
-            if (ra.schedule) html += ' ' + ra.schedule;
+            if (ra.schedule) html += ' ' + setup.clockText(ra.schedule);
             html += '</div>';
             html += '</li>';
         }}
@@ -13673,7 +13717,10 @@ setup.castTraitRows = function (slug, npc) {
             return None
 
         def format_time(time_obj):
-            """Convert time object to '8:30 AM' format; omit minutes when zero."""
+            """Convert a time to a '⟦t:HH:MM⟧' marker. The player picks 12- or 24-hour
+            in the game's Settings, so the build cannot choose the format: the page's
+            setup.clockText swaps each marker for setup.formatTime when the sentence is
+            shown ('8 AM' / '08:00')."""
             try:
                 # Handle both time objects and string formats
                 if hasattr(time_obj, 'hour'):
@@ -13684,18 +13731,7 @@ setup.castTraitRows = function (slug, npc) {
                     hour = int(parts[0])
                     minute = int(parts[1]) if len(parts) > 1 else 0
 
-                if hour == 0:
-                    display_hour, ampm = 12, "AM"
-                elif hour < 12:
-                    display_hour, ampm = hour, "AM"
-                elif hour == 12:
-                    display_hour, ampm = 12, "PM"
-                else:
-                    display_hour, ampm = hour - 12, "PM"
-
-                if minute == 0:
-                    return f"{display_hour} {ampm}"
-                return f"{display_hour}:{minute:02d} {ampm}"
+                return f"⟦t:{hour:02d}:{minute:02d}⟧"
             except (ValueError, IndexError, AttributeError) as e:
                 logger.debug("Time format parse error for '%s': %s", time_obj, e)
                 return str(time_obj)
@@ -19324,12 +19360,7 @@ if (clothingMsg) {
         time_widgets_start = """:: TimeWidgets [widget nobr]
 <!-- Time Display Widgets -->
 <<widget "timeFormatted">>
-<<set _hour to $game_state.time_state.current_hour>>
-<<set _minute to $game_state.time_state.current_minute>>
-<<set _displayHour to (_hour is 0 ? 12 : (_hour > 12 ? _hour - 12 : _hour))>>
-<<set _ampm to (_hour < 12 ? "AM" : "PM")>>
-<<set _minuteStr to (_minute < 10 ? "0" + _minute : _minute)>>
-<<print _displayHour + ":" + _minuteStr + " " + _ampm>>
+<<print setup.formatTime($game_state.time_state.current_hour, $game_state.time_state.current_minute)>>
 <</widget>>
 
 <!-- Render a quest card: narrative line + (Pattern 2) auto-rendered 🎯 goal
@@ -22408,7 +22439,7 @@ if (clothingMsg) {
      never matched anything. Found 2026-08-11 while adding `.locked-slot`; the attribute directive is the
      same one the choice renderer already uses for `unlocked-choice`. -->
 <tr @class="_rowClass">
-<td><<if _isCurrent>>▶ <</if>><<print _sch.start_time>>-<<print _sch.end_time || "?">></td>
+<td><<if _isCurrent>>▶ <</if>><<print setup.formatHHMM(_sch.start_time)>>-<<print _sch.end_time ? setup.formatHHMM(_sch.end_time) : "?">></td>
 <td><<print _schLocName>></td>
 <td><<if _schOpen>><<print _sch.activity>><<else>><span class="locked-slot-reason"><<print setup.navDestBlockedReason(_schSlug)>></span><</if>></td>
 <td><<print setup.renderWeekdayBadges(_sch.weekdays, _todayIndex)>></td>
@@ -22431,7 +22462,7 @@ if (clothingMsg) {
 <<set _rowClass to _act.isCurrent ? "current-slot" : "">>
 <!-- @class for the same reason as the NPC table above — the literal-attribute bug applied here too. -->
 <tr @class="_rowClass">
-<td><<if _act.isCurrent>>▶ <</if>><<print _act.startTime>>-<<print _act.endTime || "?">></td>
+<td><<if _act.isCurrent>>▶ <</if>><<print setup.formatHHMM(_act.startTime)>>-<<print _act.endTime ? setup.formatHHMM(_act.endTime) : "?">></td>
 <td><<print _act.locationName>></td>
 <td><<print _act.name>></td>
 <td><<print setup.renderWeekdayBadges(_act.weekdays, _todayIndex)>></td>

@@ -5,6 +5,10 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-09 — the clock is 12- or 24-hour now (engine change, Vesper 0.2.3.1)
+
+**What.** `references/the-clock.md` §on the visible clock said the sidebar renders "a live 12-hour reading". The engine now registers a SugarCube Setting (`clock24`), and every engine-printed time — sidebar, Schedule page, schedule hints, time-of-day gate text — goes through `setup.formatTime`, so the line now says 12-hour by default, 24-hour if the player ticks it. **Why.** A player asked for a 24-hour clock on F95 and LO shipped it in Vesper 0.2.3.1; the old sentence became false. Nothing for authors to do: prose times ("2 am", "eleven") are not converted and should not be. **Verified.** Vesper release smoke in both modes (sidebar 9:30 PM / 21:30, "between 8 AM - 8 PM" / "between 08:00 - 20:00").
+
 ## 2026-10-09 — B74 decided: who checks a parked no (skill pass follow-up)
 
 **Why.** LO's call on B74, left open by the 2026-10-08 pass: the gate keeps the scoreboard's rule

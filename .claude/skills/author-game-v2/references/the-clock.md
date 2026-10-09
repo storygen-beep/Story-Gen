@@ -51,8 +51,9 @@ emits the same). So a player walking a four-node opening has already drifted 9 m
 their first real choice.
 
 The clock is not hidden — `<<timeDisplay>>` sits at the top of `StoryCaption` in every build
-(`v2.py:18883`, `:18900`), rendering a live 12-hour reading through `<<timeFormatted>>`
-(`v2.py:19326`) — and it carries **wait buttons**: `>` is 10 minutes, `>>` is an hour, `>>>>>` is a
+(`v2.py:18883`, `:18900`), rendering a live reading through `<<timeFormatted>>`
+(`v2.py:19326`) — 12-hour by default, 24-hour if the player ticks it in Settings (`setup.formatTime`
+is the one formatter every engine-printed time goes through) — and it carries **wait buttons**: `>` is 10 minutes, `>>` is an hour, `>>>>>` is a
 day (`v2.py:19398-19420`, `waitTime` at `v2.py:6836`). The player can always see the time and can
 always move it. That is exactly why the prose must not compete with it.
 
