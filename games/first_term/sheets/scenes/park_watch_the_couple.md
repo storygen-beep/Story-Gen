@@ -1,6 +1,6 @@
 # [READY] Scene — park_watch_the_couple
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. The first explicit scene (LO, 2026-10-08): strangers, an accident at stage 1. A walk event in the park.
 
@@ -50,3 +50,4 @@ No history words on any screen: each one repeats.
 | an accident at Good Girl, watching at Curious | SP2 §1 |
 | touching herself while she watches, at Curious | SP2 §1 |
 | the prose | `v2-prose`, measured by `gates.py --beat`, 2026-10-08 |
+| the discovery ("he looks up, straight at you") plays once and sets `saw_the_couple`; after it, a short repeat: a different couple, or the same one not seeing her | LO's play note (arrival text never on a button that can be clicked again) · sweep A6-10 |

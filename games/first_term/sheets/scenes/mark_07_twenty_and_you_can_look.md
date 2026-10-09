@@ -1,6 +1,6 @@
 # [READY] Scene — mark_07_twenty_and_you_can_look
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. The explicit screen is written by `v2-prose` and measured.
 
@@ -30,7 +30,7 @@
 
 **`look`** · 128 words · explicit words 5 (cock, nipple, tits) · median sentence 10 · no touching · Mark's middle column: tits, cock · early: legs, ass · no cunt, fuck, cum
 
-> The rent sits counted on the kitchen table. You lay one more twenty on top of it yourself. "Twenty, and you can look." Mark slides his own twenty across the wood first. "Go on then, kid." You bare your tits for him under the kitchen light, and nothing sits between them and his eyes. The cold hits them. Your nipples go hard, tight and pointed straight at him. His breath goes short. His hand lies flat on the table, pressing white. His cock is hard under his jeans, a thick ridge straining the denim. You arch your back so your tits lift for him. He looks as long as the twenty buys, and you let him, your nipples aching in the cold while his eyes stay on them.
+> The rent sits counted on the kitchen table. You lay one more twenty on top of it yourself. "Twenty, and you can look." Mark slides his own twenty across the wood first. "Go on then, @player." You bare your tits for him under the kitchen light, and nothing sits between them and his eyes. The cold hits them. Your nipples go hard, tight and pointed straight at him. His breath goes short. His hand lies flat on the table, pressing white. His cock is hard under his jeans, a thick ridge straining the denim. You arch your back so your tits lift for him. He looks as long as the twenty buys, and you let him, your nipples aching in the cold while his eyes stay on them.
 
 *The last sentence:* her nipples and his eyes on them. On the body; not a pivot.
 
@@ -42,3 +42,4 @@
 | naked by choice for someone she knows | SP2 §1, Bold · Showing |
 | the prose | `v2-prose`, measured by `gates.py --beat`, 2026-10-08 |
 | it repeats at the Sunday table, from Bold | LO, 2026-10-08 (question 33) |
+| no "kid": @player, or @player.nickname when he's soft | LO, 2026-10-08 (question 71) |

@@ -1,6 +1,6 @@
 # [READY] Scene — zoe_00_quad_meeting
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 (fix 1). Zoe's meeting: nothing set `zoe_met` before, so her
 > apartment, the parties, Zoe A 1 and Jake B 1 could never open.
@@ -22,7 +22,7 @@
 
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
 |---|---|---|---|---|
-| `wave` | the girl from Biology waves from the grass: "Hey. You. Sit." | no | "Sit with her." → `zoe` · "Can't, I've got a shift." → `later` | none |
+| `wave` | the girl from Biology waves from the grass: "Hey. You. Sit." | no | "Sit with her." → `zoe` · "Can't, I've got a shift." (only with `cafe_job`) or "Can't, I've got class." → `later` | none |
 | `zoe` | "Zoe." She talks fast, looks at @player too long, laughs | no | "Party?" → `friday` | `zoe_met` set |
 | `friday` | "Friday. My place. Wear something short." She takes her phone, types her number | no | "Friday." → the quad | `zoe_number` set |
 | `later` | "Fine, run. Friday, my place!" She shouts the address after her | no | → campus | `zoe_met` set · `zoe_number` set |
@@ -45,3 +45,4 @@ Both answers meet her: the meeting refuses nothing (the first hour's rule), and 
 | the meeting fires in her window | `the-first-hour.md` F5 (a meeting fires where they are) |
 | her seat in Biology | LO, chat 2026-10-07 (SYSTEMS, seating) |
 | the nudges, the lines, `zoe_number` | guess |
+| fix from the false-line sweep | sweep A4-43 (2026-10-08) |

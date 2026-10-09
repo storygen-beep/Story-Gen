@@ -1,6 +1,6 @@
 # [READY] Scene — tom_04_booth_four
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-09).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. **Tom's voice sample, in full:** every screen written by
 > `v2-prose` from a spec, measured with `gates.py --beat`, pasted here. LO picked this step. It is the first
@@ -15,7 +15,7 @@
 | next step (test 2) | she is paid for her company: Gary's hand on her thigh |
 | hook (test 3) | Tom's open palm: whose price is it? (step 5) |
 | what she wears here (test 8) | her café uniform: the café's dress rule backs it |
-| the price on the button | "$20 — Tom takes half" · money add +10 |
+| the price | said by Tom in the scene: "Twenty for ten minutes. Half's mine." · on the guidance card · the toast after the click: money add +10 |
 | her climb (paid) | introduced: step 2 (Gary) · first time: here · then the repeat |
 | the crude-word ceiling | Tom's middle column: tits, cock · early: ass, tits (LO, 2026-10-08) |
 
@@ -23,7 +23,7 @@
 
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
 |---|---|---|---|---|
-| `counter` | Tom sells her time: twenty, half his | no | "Sit with him. ($20 — Tom takes half)" → `booth` · "Not today." → `no` | none |
+| `counter` | Tom sells her time: twenty, half his | no | "Sit with him." → `booth` · "Not today." → `no` | none |
 | `booth` | beside Gary; her rule: "Hands where I can see them." | no | "Ten minutes." → `ten` | none |
 | `ten` | his hand on her thigh, his eyes on her tits | yes (3 words) | "Time." → `after` | corruption add +3 · Tom's Want add +10 |
 | `after` | the twenty; Tom's palm; she gives him ten | no | "Back to work." → the shift | money add +10 · `tom_step` set 4 · `gary_ten_minutes_open` set |
@@ -69,3 +69,4 @@ the body, not a meaning: the same reading you kept for Mark A 5. Your call.
 | this step as the voice sample | LO, 2026-10-08 |
 | the prose | `v2-prose`, measured by `gates.py --beat`, 2026-10-08 |
 | "That's enough" pays half | guess |
+| pay she earns is never on the button: the scene says it, the card keeps it, the toast shows it | LO, D11 (2026-10-09) |

@@ -1,6 +1,6 @@
 # [READY] Scene — college_exam
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. The midterm (`college_exam`): one choice inside the exam.
 
@@ -28,7 +28,7 @@
 
 **`flash`** · 115 words · explicit words 5 (breast, nipple, tits) · median sentence 9 · stage 2
 
-> "Show me and I'll tilt my paper." He breathes it without looking up. The proctor sits at the front, reading. Every head in the row is bent over a page. You check the room once. Then you pull everything up under the desk line, where only he can see. Your tits are bare in the cold hall air. Your nipples go hard at once, tight and aching. His pen stops mid-word. His eyes drop to your tits and stay there. One second. Two. Three. You yank everything down and cover your breasts. He slides his paper to the edge of his desk. Your nipples are still hard, and his stare is still on your chest.
+> The proctor sits at the front, reading. Every head in the row is bent over a page. You check the room once. Then you pull everything up under the desk line, where only he can see. Your tits are bare in the cold hall air. Your nipples go hard at once, tight and aching. His pen stops mid-word. His eyes drop to your tits and stay there. One second. Two. Three. You yank everything down and cover your breasts. He slides his paper to the edge of his desk. Your nipples are still hard, and his stare is still on your chest.
 
 No history words on any screen: each one repeats.
 
@@ -40,3 +40,4 @@ No history words on any screen: each one repeats.
 | a flash for one person she knows at Curious | SP2 §1 |
 | the prose | `v2-prose`, measured by `gates.py --beat`, 2026-10-08 |
 | +5 for copying | guess |
+| fix from the false-line sweep | sweep A5-23 (2026-10-08) |

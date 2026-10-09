@@ -1,6 +1,6 @@
 # Their lives — First Term
 
-> [READY] · updated 2026-10-08 (Laura's stairs row, Jake's door row, Vance sleeps at his house) · signed by LO: LO, 2026-10-08 · A game-only page (layer 3), decided by LO in chat on 2026-10-05. The skill has no page for this.
+> [READY] · Changed 2026-10-09, signed by LO: LO, 2026-10-09: the everyday pass's rows, in §11 (copied from the ledger; no line above §11 moved) · updated 2026-10-08 (Laura's stairs row, Jake's door row, Vance sleeps at his house) · last signed by LO: LO, 2026-10-08 · A game-only page (layer 3), decided by LO in chat on 2026-10-05. The skill has no page for this.
 > It says each person's ordinary week: where they are, by day and part of the day, and what changes it.
 > Steps pick their windows from here instead of inventing them. No steps, no exact hours, no money
 > numbers: lecture and café hours come with their systems, and the board turns each row into hours.
@@ -73,8 +73,8 @@ evening and every night, which is what her watching needs.
 **His week:** he works days at a warehouse **(new)**.
 
 - **Weekday mornings and afternoons:** at work, off screen.
-- **Evenings:** in the garage **(new)**, except **Wednesday, when he cooks in the kitchen (new)**
-  because Laura is late.
+- **Evenings:** dinner in the kitchen 18:00–19:00 (§11), then the garage **(new)**; except **Wednesday,
+  when he cooks in the kitchen (new)** because Laura is late.
 - **Late at night, every night except Saturday:** downstairs in the living room **(new)** after Laura
   is asleep. On Saturday he comes home with Laura and goes to bed (fixed 10-06, lead's default).
 - **Saturday:** the garage by day, out with Laura in the evening.
@@ -85,7 +85,7 @@ Where he sleeps and where he spends most hours are both the master bedroom he sh
 because his night row is his longest. The gates count most hours for heat, and a home is a
 bedroom (`the-map.md` R2, gate 12). LO accepted this, 2026-10-05.
 
-**Rows (7):**
+**Rows (7; the dinner row and the split garage row are in §11):**
 1. master bedroom · every night
 2. living room · late night up to midnight, Sunday to Friday (fixed 10-06, lead's default)
 3. living room · after midnight, Monday to Saturday: the rest of the same nights (fixed 10-06, lead's
@@ -109,15 +109,15 @@ her short Sundays.
 
 - **Weekday mornings:** he showers first (Laura's rule from day 1), then goes to work.
 - **Weekday afternoons:** at work, off screen.
-- **Evenings:** his room, except:
+- **Evenings:** his room, after dinner in the kitchen (§11), except:
   - **Wednesday:** his basketball league (new);
   - **Saturday:** at Kayla's (new), back late at night.
 - **Friday evening and night:** Kayla, 21, stays over. She sneaks in past Laura and Mark, who don't
   know about her **(new, LO 2026-10-06; Ryan A step 3)**.
-- **Weekend days:** his room.
+- **Weekend days:** his room until 14:00, then TV in the living room (§11).
 - **Every night:** his room.
 
-**Rows (4, plus one gated):**
+**Rows (4, plus one gated; the dinner, Friday and weekend splits are in §11):**
 1. bathroom · weekday mornings
 2. his room · evenings on Monday, Tuesday, Thursday, Friday and Sunday
 3. his room · weekend daytime
@@ -166,17 +166,17 @@ Kayla's.
   the main room, so the parties have a door to leave open.
 - **Most hours at:** her apartment.
 
-- **Weekday classes:** Biology and Figure drawing, inside the class scenes, no row
+- **Weekday classes:** Biology and Figure drawing, as rows once met (§11)
   (`SYSTEMS.md` §1; LO, 2026-10-07).
 - **Weekday lunch:** the canteen **(new, 10-07)**.
 - **Tuesday, Thursday and Friday afternoons:** the quad (Monday and Wednesday afternoons are her
   classes; 10-07).
-- **Evenings:** her apartment.
+- **Evenings:** her apartment; her bedroom from 22:00 Mon–Thu, the party house Sat (§11).
 - **Friday night:** **the party is at her apartment (new)** and runs past midnight. Parties are
   Fridays (Saturday party cut 10-06).
 - **Sunday:** her apartment (she sleeps in her bedroom).
 
-**Rows (4):**
+**Rows (4; her split and added rows are in §11):**
 1. quad · Tuesday, Thursday and Friday afternoons (10-07)
 2. her apartment · evenings, Monday to Saturday
 3. her apartment · after midnight on Saturday (the end of Friday's party)
@@ -189,7 +189,7 @@ midnight, with the door open onto the party **(new, LO 2026-10-06)**.
 
 **The party house (new, LO 2026-10-06):** an off-campus house with a hot tub, where Zoe's friends
 party. It is a new place, used for Zoe A 3 (topless in the hot tub, Zoe's friends only). It is a
-one-time step there, so nobody has a weekly row at the party house.
+one-time step there; Zoe's Saturday row there is in §11 (sweep A4-08).
 
 ### Dr. Hale, 39 — professor · met at her first lecture, day 1 · **release 1**
 
@@ -268,7 +268,7 @@ scene, like Claire and Kayla. Their seats are on `SYSTEMS.md`.
 - **Evenings:** on his porch **(new)**, every day. That is where Ella passes him walking home.
 - **Night:** home, off screen.
 
-**Rows (1):** his porch · every evening.
+**Rows (1, plus one gated in §11):** his porch · every evening.
 
 **What changes his week:**
 - a short Sunday sets a flag, and **he knocks the next evening (new)**;
@@ -284,7 +284,7 @@ waits for later (`DIRECTION.md` §4).
 
 His arc is Jake B (`proposals/ARC_IDEAS.md`).
 
-- **Figure drawing:** in her class, inside the class scenes, no row (10-07).
+- **Figure drawing:** in her class, as rows once she has his number (§11).
 - **Monday, Wednesday and Friday mornings:** the quad **(new)**. Ella is free there on Friday's second
   morning slot (10-07).
 - **Weekday lunch:** the canteen **(new, 10-07)**.
@@ -295,7 +295,7 @@ His arc is Jake B (`proposals/ARC_IDEAS.md`).
   not a system, `SYSTEMS.md`, LO 2026-10-07). He brings her to the door at night, and
   Laura is home by then.
 
-**Rows (3, plus one gated: the front door · Saturday night, `when` a date is booked, `jake_date_booked`; LO 2026-10-08):**
+**Rows (3, plus gated rows in §11: the pickup, the door, the gym, two classes):**
 1. quad · Monday, Wednesday and Friday mornings (10-07)
 2. Zoe's apartment · Friday evening
 3. canteen · weekday lunch (new, 10-07)
@@ -326,8 +326,8 @@ There is no schedule until goal 3 is written.
 **Shared rooms: who is inside** (`the-map.md` R6c). This is a row inside the room, not a door.
 - **Bathroom:** Ryan on weekday mornings. Kayla on Saturday mornings is prose inside Ryan's
   Friday-night/Saturday scene, not a row.
-- **Kitchen:** Laura at breakfast and most evenings; Mark on Wednesday evening and all of Sunday.
-- **Living room:** Mark late at night, except Saturday; Laura waiting up late on Saturday night.
+- **Kitchen:** Laura at breakfast and most evenings; the dinner hour (§11); Mark Wednesday evening, Sunday.
+- **Living room:** Ryan weekend afternoons (§11); Mark late at night, except Saturday; Laura up late Sat.
 - **Hall and stairs:** Laura's catches, from her stairs row gated on `came_home_late` (LO, 2026-10-08): it fires when Ella
   comes home late. Leaving Ryan's room late (fixed 10-06, lead's default: Ryan A 13's "Laura downstairs") is a
   later catch on the same stairs.
@@ -420,7 +420,7 @@ Ryan A 9 is the Kayla talk (fixed 10-06).
 
 ## 8. Rows: the full week and release 1
 
-**Full week: 47 rows** (10-08: two gated rows added; 10-07: the college timetable; was 30 on 10-06, after Hale's afternoon office
+**Full week: 63 rows with §11** (10-08: two gated rows added; 10-07: the college timetable; was 30 on 10-06, after Hale's afternoon office
 row was cut, Laura's Saturday waiting-up row added and Mark's late row split in two).
 - **The household (16):** Laura 5, Mark 7, Ryan 4.
 - **Outside (18):** Tom 1, Gary 2, Zoe 4, Hale 3, Nadia 4, Jake 3, Vance 1.
@@ -496,3 +496,50 @@ Nobody had decided these before this page. LO approved the week plan on 2026-10-
 - Zoe, Nadia and Jake at the canteen at weekday lunch; Jake in Figure drawing, Zoe in Biology and
   Figure drawing; Jake's practice off Wednesday.
 - Places: the canteen, the college toilets, the faculty floor, the clothes shop.
+
+## 11. Rows added by the everyday pass (2026-10-09, copied from the ledger)
+
+These rows came from LO's everyday picks and the sweep fixes (DECISIONS.md, questions 48–74). They are written
+here at the end so that no line above moves; other pages cite this page by line. Row order is the ledger's: the
+engine takes the first matching row.
+
+**Laura:** her stairs row now reads `came_home_late` set in the last 4 hours, and her bed clears it (Q69).
+
+**Mark (8 rows now):** row 4 above, the garage on Monday, Tuesday, Thursday and Friday evenings, becomes two:
+- kitchen · dinner, 18:00–19:00, Monday, Tuesday, Thursday and Friday (Q54)
+- garage · 19:00–22:00, the same days (Q54)
+
+**Ryan (7 rows now, plus one gated):** row 2 above, his room on weekday and Sunday evenings, and row 3, weekend
+daytime, become:
+- kitchen · dinner, 18:00–19:00, Monday, Tuesday, Thursday and Sunday (Q54)
+- his room · 19:00–22:00, the same days (Q54)
+- his room · Friday 18:00–22:00 (Kayla stays every Friday night and leaves Saturday by 10:00, Q70)
+- his room · weekend mornings, 07:30–14:00 (Q55)
+- living room · weekend afternoons, 14:00–18:00, TV and a film (Q55)
+
+**Zoe (11 rows now, three gated):** row 2 above, her apartment Monday to Saturday evenings, becomes:
+- party house · Saturday 20:00–00:00, above her living-room row (Zoe A 3; sweep A4-08)
+- her living room · Monday to Thursday, 18:00–22:00 (Q48)
+- her living room · Friday and Saturday, 18:00–00:00
+- her bedroom · Monday to Thursday, 22:00–00:00 (Q48, narrowed by Q52)
+- park · weekend mornings, her run (LO, 2026-10-08)
+- *(gated, `zoe_met`)* lecture hall · Tuesday and Thursday mornings (figure drawing, then Biology) (Q74)
+- *(gated, `zoe_met`)* lecture hall · Monday afternoon (Biology) (Q74)
+- *(gated, `zoe_met`)* lecture hall · Wednesday afternoon (figure drawing) (Q74)
+
+**Jake (3 rows, plus five gated):** his front-door row above is replaced by two, and three more are added:
+- *(gated, `jake_date_booked`)* the front door · Saturday 19:00–21:00, the pickup; "Go with him" sets
+  `jake_date_went`, and the booking lapses at 21:00 (Q73)
+- *(gated, `jake_date_went`)* the front door · Saturday 22:00–00:00, bringing her home (Q73)
+- *(gated, `jake_number`)* campus gym · Tuesday and Thursday 15:00–17:00, team training on screen (Q64)
+- *(gated, `jake_number`)* lecture hall · Tuesday and Thursday mornings, figure drawing (Q74)
+- *(gated, `jake_number`)* lecture hall · Wednesday afternoon, figure drawing (Q74)
+
+**Vance (1 row, plus one gated):** *(gated, `rent_carried`)* the front door · Monday 18:00–19:00, the knock after a
+short Sunday, above his porch row (sweep A3-09).
+
+**Count:** household 20 (Laura 5, Mark 8, Ryan 7) · outside 22 (Tom 1, Gary 2, Zoe 8, Hale 3, Nadia 4, Jake 3,
+Vance 1) · college staff 10 · gated 11 (Ryan's Saturday, Laura's stairs, Jake 5, Zoe 3, Vance 1) = 63.
+
+**The house view, changed:** the kitchen has the dinner hour with Ryan and Mark; the living room has Ryan on
+weekend afternoons; Ryan's room is empty at the dinner hour and on weekend afternoons.

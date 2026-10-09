@@ -1,8 +1,8 @@
 # [READY] Coverage — First Term
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
-> Placed in sheets/ 2026-10-08. Written 2026-10-08 from the ledger's `board.coverage`, 37 rows, unchanged.
+> Placed in sheets/ 2026-10-08. Written 2026-10-08 from the ledger's `board.coverage`: 38 rows (37, plus `home_life`, 2026-10-08). Five more wait for LO's yes (L28, below).
 > Every topic the game needs, and what the skill really knows about it.
 > **covered**: a skill rule or card exists · **scouted**: a scout card exists · **lo**: you decided it.
 
@@ -18,6 +18,7 @@
 | parties | system | scouted | `scout/party.md` | Friday at Zoe's |
 | wardrobe | system | covered | card: wardrobe | |
 | park | system | lo | LO, 2026-10-08: "simply a park … exhibitionism, gropping, walking into public sex" | the field's park as an exhibition spot |
+| home_life | system | lo | LO, 2026-10-08: the everyday picks (round 11) | breakfast, dinner, cooking, dishes, coffee, TV, a film, laundry, tidying, the garden, random events, the grocery run |
 
 ### Mechanics
 
@@ -65,6 +66,28 @@
 | figure-drawing posing | scene | lo | LO, 2026-10-06: posing is college's exhibition ladder | 0.1 shows the class; posing waits |
 | the twist's offer | scene | lo | LO, 2026-10-07: the offer ships; her answer stays parked | |
 
+### Waiting for LO's yes (ledger change L28)
+
+| topic | kind | status | source | note |
+|---|---|---|---|---|
+| areas and travel time | mechanic | lo | LO, 2026-10-08 (questions 43–46, 65) | Home 10, Campus 15, Town 15 by bus, the park 10 |
+| random events in town | mechanic | covered | card: random encounters | the street, 1 in 4 |
+| the gym | place | lo | LO, 2026-10-08 (question 64) | Jake Tue and Thu |
+| the garden | place | lo | LO, 2026-10-08 (question 49) | the lounger and the washing line |
+| the grocery run | scene | lo | LO, 2026-10-08 (questions 50, 67) | the corner shop, for Laura |
+
+## Word budget (this release's places)
+
+| | words |
+|---|---|
+| all 37 places in 0.1 (four of them buildings or areas, 0 words) | 119,300 (was 110,500) |
+| the kitchen, the anchor | 30,000: 25.1% |
+| room left before the kitchen drops under 25% | about 700 words outside the kitchen |
+
+**What grew:** the quad +500 (from the campus page), Zoe's kitchen and bathroom +500 each, the garden
++1,500, the corner shop +1,000, the gym +1,500, the living room +1,000, the garage +500, her room +300,
+the kitchen +2,000 · the campus page −500.
+
 ## Unknowns, for LO
 
 None. Every topic is covered, scouted or yours.
@@ -87,3 +110,5 @@ is on the list:
 | the park as a system and a place | LO, 2026-10-08 (SYSTEMS §14) |
 | each card source | `templates/cards/<card>.md` |
 | the party card | `games/first_term/scout/party.md` (scouted 2026-10-07) |
+| `home_life` and the five new topics | LO, 2026-10-08 (the everyday picks) |
+| the word budget | the ledger's `fill` on each place in `release_page.places` |

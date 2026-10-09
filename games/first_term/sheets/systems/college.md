@@ -1,6 +1,6 @@
 # [READY] System — college
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 from SYSTEMS §1 and the ledger's `college` card.
 > Every number marked "guess" is new here and waits for your yes.
@@ -135,3 +135,4 @@ The house at night stays open under the curfew. The door out says why it is shut
 | grade bands 40 / 70, start 50 | guess |
 | energy and grade moves per row | guess |
 | the energy lock at 20 | guess |
+| Zoe sits in Biology and figure drawing, and Jake in figure drawing: they get class rows (ledger change L27) | sweep A5-11 |

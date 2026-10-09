@@ -1,6 +1,6 @@
 # [READY] Place — Quad
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the system sheets. Id `quad`.
 
@@ -12,7 +12,7 @@
 | hours | every day 07:00–22:00 |
 | closed text | "The quad is dark and empty." |
 | hidden until | no |
-| fill — word budget (S3) | 2,500 words (ledger, unchanged) |
+| fill — word budget (S3) | 3,000 words: 2,500 plus the 500 that were the campus page's (question 43) |
 | door | no |
 | dress code or wanted state | none |
 
@@ -46,3 +46,4 @@
 | Jake's mornings, Zoe's afternoons | LIVES §3 |
 | Zoe's leak on the quad | ARC_IDEAS, Zoe A step 0 |
 | the grass row reads campus talk | LO, 2026-10-08 |
+| the campus page's 500 words land here | LO, 2026-10-08 (question 43) |

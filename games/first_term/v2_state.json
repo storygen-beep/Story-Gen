@@ -423,7 +423,15 @@
       "business_office",
       "ta_office",
       "dean_office",
-      "clothes_shop"
+      "clothes_shop",
+      "home",
+      "town",
+      "zoe_flat",
+      "zoe_kitchen",
+      "zoe_bathroom",
+      "home_garden",
+      "corner_shop",
+      "campus_gym"
     ],
     "weeks": 8,
     "promise_alive": "the Sunday table: each count says how many Sundays in a row she has paid her own way (goal 1; Mark A 1, 3, 7, 9); Zoe A 4 hands her the dares, which feeds campus_talk (goal 2)",
@@ -734,6 +742,44 @@
         "status": "lo",
         "source": "LO, 2026-10-08: \"simply a park, she can walk, rest, excercise, this can be a spot for exhibitionism, gropping, walking into public sex\" (SYSTEMS.md §14)",
         "note": "the field's park as an exhibition spot: the-systems.md:258 (Course of Temptation)"
+      },
+      {
+        "topic": "home_life",
+        "kind": "system",
+        "status": "lo",
+        "source": "LO, 2026-10-08: the 17 everyday picks, 10 of them at home (round11/REPORT.md)",
+        "note": "life at home: the everyday items"
+      },
+      {
+        "topic": "travel",
+        "kind": "mechanic",
+        "status": "lo",
+        "source": "LO, 2026-10-08 (questions 43-46, 65): areas and travel time"
+      },
+      {
+        "topic": "town_events",
+        "kind": "mechanic",
+        "status": "covered",
+        "source": "templates/cards/random_encounters.md",
+        "note": "the street, 1 in 4"
+      },
+      {
+        "topic": "the gym",
+        "kind": "place",
+        "status": "lo",
+        "source": "LO, 2026-10-08 (question 64)"
+      },
+      {
+        "topic": "the garden",
+        "kind": "place",
+        "status": "lo",
+        "source": "LO, 2026-10-08 (question 49)"
+      },
+      {
+        "topic": "the grocery run",
+        "kind": "scene",
+        "status": "lo",
+        "source": "LO, 2026-10-08 (questions 50, 67)"
       }
     ],
     "cast": {
@@ -1247,7 +1293,6 @@
             "gate": "Curious · Daring",
             "acts": [
               "she watches a couple in the bushes",
-              "a selfie on the path for her feed",
               "a flash for someone she knows (Zoe's dare)",
               "running in a sports bra, or no bra under a thin top"
             ]
@@ -1284,7 +1329,6 @@
           "park_walk",
           "park_run",
           "park_watch_the_couple",
-          "park_selfie",
           "park_hidden"
         ],
         "daily": true,
@@ -1292,7 +1336,6 @@
         "growth": "climbs",
         "feeds": [
           "exhibitionism",
-          "followers",
           "energy"
         ],
         "reads": [
@@ -1307,6 +1350,85 @@
         ],
         "day_1": "yes: walk, rest and run at stage 1",
         "people_later": "Ryan and Jake joining her in the park wait for a later release (LO, 2026-10-08)"
+      },
+      {
+        "id": "home_life",
+        "name": "Life at home",
+        "place": "home_kitchen",
+        "hours": "each item its own: breakfast 06:30-10:00, dinner 18:00-20:00, cooking 18:00-19:00, dishes 19:00-21:00, TV 07:00-02:00, the garden 07:00-21:00",
+        "cost": "time on every item · energy -5 on the chores · no money",
+        "one_ladder": true,
+        "lewd_ladder": [
+          {
+            "rung": 1,
+            "gate": "Good Girl · Covered",
+            "acts": [
+              "breakfast, dinner, coffee, TV, a film, laundry, dishes, tidying, the garden: plain alone; with a person, a talk and +1"
+            ]
+          },
+          {
+            "rung": 2,
+            "gate": "Curious · Daring, and the person's step (Laura C 1, Ryan A 4, Mark A 3)",
+            "acts": [
+              "a tease with the person there: Laura fixes her hair, her feet in Ryan's lap, she bends at the dishwasher for Mark",
+              "the garden in her bra, seen"
+            ]
+          },
+          {
+            "rung": 3,
+            "gate": "Bold · Showing, and the person's step (Laura C 7, Ryan A 8, Mark A 7)",
+            "acts": [
+              "Laura's hands on her hips at the stove",
+              "Ryan's hands under the blanket, or with the sun lotion",
+              "Mark's paid look, $20, one a day",
+              "topless on her front in the garden"
+            ]
+          },
+          {
+            "rung": 4,
+            "gate": "Hungry · Watched — later",
+            "acts": [
+              "the taboo act at home"
+            ]
+          }
+        ],
+        "people": [
+          "npc_laura",
+          "npc_mark",
+          "npc_ryan"
+        ],
+        "pool": [
+          "home_event"
+        ],
+        "daily": true,
+        "memory": "each item's done flag, read by hours since it was set (12 h); room_tidy for the week",
+        "growth": "climbs",
+        "feeds": [
+          "laura_warmth",
+          "ryan_warmth",
+          "ryan_want",
+          "mark_want",
+          "exhibitionism",
+          "corruption",
+          "energy",
+          "room_tidy"
+        ],
+        "reads": [
+          "who is home (their rows)",
+          "corruption",
+          "exhibitionism",
+          "each person's step",
+          "wardrobe"
+        ],
+        "hook_link": "the house is where the people live: every small raise here feeds their next step",
+        "leads_to": [
+          "npc_laura",
+          "npc_ryan",
+          "npc_mark"
+        ],
+        "day_1": "yes: breakfast with Laura is the opening's; every item from day 2",
+        "brake": "each item once a day per person, by hours since its flag (12 h); one random event a day, 1 in 4 on entering",
+        "source": "LO, 2026-10-08 (the everyday picks; questions 53-61)"
       }
     ],
     "meters": [
@@ -1369,13 +1491,13 @@
         "kind": "sourced",
         "key": "followers",
         "fed_at": [
-          "home_ella_room",
-          "park"
+          "home_ella_room"
         ],
         "labels": [
           "has_mirror"
         ],
-        "read_by": "campus talk, new messages, offers (SYSTEMS.md:383)"
+        "read_by": "campus talk, new messages, offers (SYSTEMS.md:383)",
+        "note": "posted from the phone (three rungs gated on exhibitionism 0/20/40); the room is where the gates look (LO, 2026-10-08, Q66)"
       },
       {
         "id": "intelligence",
@@ -1485,6 +1607,18 @@
           "sells_food"
         ],
         "read_by": "the rent, canteen food, the clothes shop"
+      },
+      {
+        "id": "room_tidy",
+        "kind": "sourced",
+        "key": "room_tidy",
+        "fed_at": [
+          "home_ella_room"
+        ],
+        "labels": [
+          "private"
+        ],
+        "read_by": "Laura at Sunday dinner: Warmth +2 if tidy, -1 if not; she sets it false (LO, 2026-10-08, Q56)"
       }
     ],
     "infrastructure": [
@@ -1619,7 +1753,7 @@
     },
     "map": {
       "archetype": "nested_zones",
-      "shape": "Your street is the ground. Off it: the house (its hall, and off the hall the front door, kitchen, living room, garage, bathroom and the three bedrooms), Vance's house next door, the park, the café, the clothes shop, Zoe's apartment (her bedroom off it), the party house, and the campus (the quad, lecture hall, library, canteen, toilets and the faculty floor with five offices).",
+      "shape": "Your street is the ground. Off it: Home (a building that opens in the hall; off the hall the front door, kitchen, living room, garage, bathroom, garden and the three bedrooms), Vance's house next door, the park and the corner shop; Campus, an area 15 minutes' walk away (the quad, lecture hall, library, canteen, toilets and the faculty floor with five offices); and Town, 15 minutes on the bus (the café, the clothes shop, Zoe's flat with her living room, kitchen, bathroom and bedroom, and the party house). Walking home is 10 minutes.",
       "home_base": "home_ella_room",
       "exterior": "street",
       "roots": [
@@ -1655,7 +1789,19 @@
         ]
       ],
       "scale": "a district: one street, a town strip and a campus",
-      "alive": "living world"
+      "alive": "living world",
+      "areas": {
+        "home": {
+          "crossing_time": 10
+        },
+        "campus": {
+          "crossing_time": 15
+        },
+        "town": {
+          "crossing_time": 15,
+          "how": "bus, no fare"
+        }
+      }
     },
     "locations": [
       {
@@ -1664,7 +1810,7 @@
         "kind": "destination",
         "job": "the rent table: Sunday's count, Laura's breakfast and wine, Mark's Wednesday",
         "anchor": true,
-        "fill": 28000,
+        "fill": 30000,
         "labels": [
           "zone:home",
           "private"
@@ -1728,7 +1874,7 @@
         "kind": "destination",
         "job": "Mark's late nights; Laura waiting up on Saturday",
         "anchor": false,
-        "fill": 5000,
+        "fill": 6000,
         "labels": [
           "zone:home",
           "private"
@@ -1771,9 +1917,11 @@
         "door": {
           "answers": "npc_laura, npc_mark",
           "options": [
-            "Knock",
+            "Knock (when someone inside is awake)",
+            "Ease the door open (when everyone inside is asleep: one screen naming who, then back)",
             "Go in (when both are out)"
-          ]
+          ],
+          "source": "LO, 2026-10-08 (Q58)"
         }
       },
       {
@@ -1782,7 +1930,7 @@
         "kind": "destination",
         "job": "her bed, her clothes, her phone; where she sleeps",
         "anchor": false,
-        "fill": 5000,
+        "fill": 5300,
         "labels": [
           "zone:home",
           "private",
@@ -1864,7 +2012,7 @@
         "kind": "destination",
         "job": "Mark's evenings and his terms",
         "anchor": false,
-        "fill": 1500,
+        "fill": 2000,
         "labels": [
           "zone:home",
           "private"
@@ -1896,7 +2044,8 @@
           "work": [],
           "people": []
         },
-        "in_release": true
+        "in_release": true,
+        "description_note": "Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. (LO, 2026-10-08, Q65: the engine prints no area minutes on its buttons)"
       },
       {
         "id": "vance_house",
@@ -1949,15 +2098,18 @@
         "in_release": true,
         "hours": "07:00-22:00",
         "closed_text": "The park gates are locked for the night.",
-        "alone": "walk, run, rest on a bench, a selfie"
+        "alone": "walk, run, rest on a bench, a selfie",
+        "costs": {
+          "time": 10
+        }
       },
       {
         "id": "campus",
         "name": "Campus",
         "kind": "thoroughfare",
-        "job": "the college grounds",
+        "job": "the college area: a 15-minute walk in; its rooms keep their own hours",
         "anchor": false,
-        "fill": 500,
+        "fill": 0,
         "labels": [
           "zone:campus",
           "outdoors",
@@ -1969,8 +2121,21 @@
           "people": []
         },
         "in_release": true,
-        "hours": "Mon-Sun 07:00-22:00",
-        "closed_text": "The college gates are shut."
+        "is_container": true,
+        "crossing_costs": {
+          "time": 15
+        },
+        "contains": [
+          "quad",
+          "lecture_hall",
+          "library",
+          "canteen",
+          "college_womens_toilet",
+          "college_mens_toilet",
+          "faculty_floor",
+          "campus_gym"
+        ],
+        "source": "LO, 2026-10-08 (everyday update, batch 1)"
       },
       {
         "id": "quad",
@@ -1978,7 +2143,7 @@
         "kind": "destination",
         "job": "Zoe's afternoons, Jake's mornings",
         "anchor": false,
-        "fill": 2500,
+        "fill": 3000,
         "labels": [
           "zone:campus",
           "outdoors",
@@ -2275,7 +2440,7 @@
         },
         "in_release": true,
         "hours": "Mon-Sat 08:00-22:00",
-        "closed_text": "Closed. Back Monday.",
+        "closed_text": "The café's shut.",
         "alone": "work a shift"
       },
       {
@@ -2304,9 +2469,9 @@
       },
       {
         "id": "zoe_apartment",
-        "name": "Zoe's Apartment",
+        "name": "Zoe's Living Room",
         "kind": "destination",
-        "job": "Friday parties; Zoe's evenings",
+        "job": "Friday parties on the couch and the floor; Zoe's evenings",
         "anchor": false,
         "fill": 6000,
         "labels": [
@@ -2381,9 +2546,9 @@
         "id": "corner_shop",
         "name": "Corner Shop",
         "kind": "destination",
-        "job": "not in 0.1 (SP7:10)",
+        "job": "the grocery run for Laura only: plain, no heat in 0.1",
         "anchor": false,
-        "fill": 0,
+        "fill": 1000,
         "labels": [
           "zone:street",
           "public"
@@ -2393,7 +2558,11 @@
           "work": [],
           "people": []
         },
-        "in_release": false
+        "in_release": true,
+        "hours": "Mon-Sun 07:00-22:00",
+        "closed_text": "The shutter's down.",
+        "alone": "buy the groceries on Laura's list",
+        "source": "LO, 2026-10-08 (everyday update, batch 1)"
       },
       {
         "id": "college_mens_toilet",
@@ -2412,6 +2581,204 @@
           "people": []
         },
         "in_release": false
+      },
+      {
+        "id": "home",
+        "name": "Home",
+        "kind": "thoroughfare",
+        "is_container": true,
+        "default_entry": "home_hall",
+        "entry_from": "street",
+        "crossing_costs": {
+          "time": 10
+        },
+        "contains": [
+          "home_hall",
+          "home_kitchen",
+          "home_living_room",
+          "home_front_door",
+          "home_garage",
+          "home_bathroom",
+          "home_ella_room",
+          "home_ryan_room",
+          "home_master_bedroom",
+          "home_garden"
+        ],
+        "job": "the house as a building: the street shows Home, it opens in the hall",
+        "anchor": false,
+        "fill": 0,
+        "labels": [
+          "zone:home"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        },
+        "in_release": true,
+        "source": "LO, 2026-10-08 (everyday update, batch 1)"
+      },
+      {
+        "id": "town",
+        "name": "Town",
+        "kind": "thoroughfare",
+        "is_container": true,
+        "entry_from": "street",
+        "crossing_costs": {
+          "time": 15
+        },
+        "contains": [
+          "cafe",
+          "clothes_shop",
+          "zoe_flat",
+          "party_house"
+        ],
+        "job": "the bus into town (15 minutes, no fare: her student pass)",
+        "anchor": false,
+        "fill": 0,
+        "labels": [
+          "zone:town"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        },
+        "in_release": true,
+        "source": "LO, 2026-10-08 (everyday update, batch 1)"
+      },
+      {
+        "id": "zoe_flat",
+        "name": "Zoe's Flat",
+        "kind": "thoroughfare",
+        "is_container": true,
+        "default_entry": "zoe_apartment",
+        "entry_from": "town",
+        "hidden_until": "zoe_met",
+        "contains": [
+          "zoe_apartment",
+          "zoe_kitchen",
+          "zoe_bathroom",
+          "zoe_bedroom"
+        ],
+        "job": "Zoe's flat as a building: it opens in her living room",
+        "anchor": false,
+        "fill": 0,
+        "labels": [
+          "zone:town",
+          "private"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        },
+        "in_release": true,
+        "source": "LO, 2026-10-08 (everyday update, batch 1)"
+      },
+      {
+        "kind": "destination",
+        "anchor": false,
+        "labels": [
+          "zone:town",
+          "private"
+        ],
+        "in_release": true,
+        "hours": "Mon-Sat 18:00-00:00; Sat 00:00-02:00",
+        "closed_text": "Zoe's out. Nobody answers.",
+        "hidden_until": "zoe_met",
+        "source": "LO, 2026-10-08 (everyday update, batch 1)",
+        "id": "zoe_kitchen",
+        "name": "Zoe's Kitchen",
+        "fill": 500,
+        "job": "the drinks on party night; the fridge on other evenings",
+        "serves": {
+          "needs": [],
+          "work": [
+            "parties"
+          ],
+          "people": []
+        },
+        "alone": "get a drink (on party night: the drink offer)"
+      },
+      {
+        "kind": "destination",
+        "anchor": false,
+        "labels": [
+          "zone:town",
+          "private"
+        ],
+        "in_release": true,
+        "hours": "Mon-Sat 18:00-00:00; Sat 00:00-02:00",
+        "closed_text": "Zoe's out. Nobody answers.",
+        "hidden_until": "zoe_met",
+        "source": "LO, 2026-10-08 (everyday update, batch 1)",
+        "id": "zoe_bathroom",
+        "name": "Zoe's Bathroom",
+        "fill": 500,
+        "job": "the party queue; fix her face",
+        "serves": {
+          "needs": [
+            "hygiene"
+          ],
+          "work": [
+            "parties"
+          ],
+          "people": []
+        },
+        "alone": "fix your face in the mirror"
+      },
+      {
+        "id": "home_garden",
+        "name": "Garden",
+        "kind": "destination",
+        "entry_from": "home_hall",
+        "job": "the back garden: a lounger in the sun, the washing line",
+        "anchor": false,
+        "fill": 1500,
+        "labels": [
+          "zone:home",
+          "outdoors",
+          "private",
+          "she_can_undress"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        },
+        "in_release": true,
+        "hours": "Mon-Sun 07:00-21:00",
+        "closed_text": "It's dark out.",
+        "alone": "lie in the sun on the lounger",
+        "source": "LO, 2026-10-08 (everyday update, batch 1)"
+      },
+      {
+        "id": "campus_gym",
+        "name": "Gym",
+        "kind": "destination",
+        "entry_from": "campus",
+        "job": "work out; Jake's team trains Tue and Thu afternoons",
+        "anchor": false,
+        "fill": 1500,
+        "labels": [
+          "zone:campus",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [
+            "wardrobe"
+          ],
+          "people": [
+            "npc_jake"
+          ]
+        },
+        "in_release": true,
+        "hours": "Mon-Fri 07:00-21:00; Sat-Sun 09:00-17:00",
+        "closed_text": "The gym's locked.",
+        "alone": "work out",
+        "source": "LO, 2026-10-08 (everyday update, batch 3)"
       }
     ],
     "characters": [
@@ -2436,6 +2803,18 @@
         },
         "schedule": [
           {
+            "where": "home_kitchen",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Thu",
+              "Sun"
+            ],
+            "from": "18:00",
+            "to": "19:00",
+            "note": "dinner (LO, 2026-10-08, Q54)"
+          },
+          {
             "where": "home_bathroom",
             "weekdays": [
               "Mon",
@@ -2450,23 +2829,11 @@
           {
             "where": "home_ryan_room",
             "weekdays": [
-              "Mon",
-              "Tue",
-              "Thu",
-              "Fri",
-              "Sun"
-            ],
-            "from": "18:00",
-            "to": "22:00"
-          },
-          {
-            "where": "home_ryan_room",
-            "weekdays": [
               "Sat",
               "Sun"
             ],
             "from": "07:30",
-            "to": "18:00"
+            "to": "14:00"
           },
           {
             "where": "home_ryan_room",
@@ -2491,6 +2858,36 @@
             "to": "22:00",
             "when": "ryan_cancelled_kayla",
             "release": "later (Ryan A 12)"
+          },
+          {
+            "where": "home_ryan_room",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Thu",
+              "Sun"
+            ],
+            "from": "19:00",
+            "to": "22:00"
+          },
+          {
+            "where": "home_ryan_room",
+            "weekdays": [
+              "Fri"
+            ],
+            "from": "18:00",
+            "to": "22:00",
+            "note": "Kayla's night"
+          },
+          {
+            "where": "home_living_room",
+            "weekdays": [
+              "Sat",
+              "Sun"
+            ],
+            "from": "14:00",
+            "to": "18:00",
+            "note": "TV and a film (LO, 2026-10-08, Q55)"
           }
         ],
         "occupancy_rows": [
@@ -2573,7 +2970,7 @@
                   "Thu",
                   "Sun"
                 ],
-                "from": "18:00",
+                "from": "19:00",
                 "to": "22:00"
               },
               "gate": [
@@ -2757,7 +3154,7 @@
                   "Thu",
                   "Sun"
                 ],
-                "from": "18:00",
+                "from": "19:00",
                 "to": "22:00"
               },
               "gate": [
@@ -2799,7 +3196,7 @@
                   "Thu",
                   "Sun"
                 ],
-                "from": "18:00",
+                "from": "19:00",
                 "to": "22:00"
               },
               "gate": [
@@ -2865,8 +3262,21 @@
             ],
             "from": "23:00",
             "to": "02:00",
-            "when": "came_home_late",
-            "note": "the catch: on the dark stairs when she comes home late (LIVES.md:331-333); a board row so the step has her there"
+            "when": {
+              "version": "1.0",
+              "logic": "AND",
+              "items": [
+                {
+                  "type": "hours_since_flag",
+                  "subject": "player",
+                  "flag_key": "came_home_late",
+                  "operator": "lt",
+                  "value": 4
+                }
+              ]
+            },
+            "note": "the catch: on the dark stairs when she comes home late (LIVES.md:331-333); a board row so the step has her there",
+            "when_note": "came_home_late set in the last 4 hours (Q69); her bed clears it"
           },
           {
             "where": "home_kitchen",
@@ -3027,8 +3437,7 @@
                   "Mon",
                   "Tue",
                   "Thu",
-                  "Fri",
-                  "Sun"
+                  "Fri"
                 ],
                 "from": "20:00",
                 "to": "22:00"
@@ -3155,7 +3564,7 @@
                   "value": 3
                 },
                 {
-                  "flag": "jake_date_booked",
+                  "flag": "jake_date_went",
                   "op": "is_true"
                 }
               ],
@@ -3327,6 +3736,29 @@
         },
         "schedule": [
           {
+            "where": "home_kitchen",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Thu",
+              "Fri"
+            ],
+            "from": "18:00",
+            "to": "19:00",
+            "note": "dinner (LO, 2026-10-08, Q54)"
+          },
+          {
+            "where": "home_garage",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Thu",
+              "Fri"
+            ],
+            "from": "19:00",
+            "to": "22:00"
+          },
+          {
             "where": "home_living_room",
             "weekdays": [
               "Sun",
@@ -3381,17 +3813,6 @@
             ],
             "from": "00:00",
             "to": "02:00"
-          },
-          {
-            "where": "home_garage",
-            "weekdays": [
-              "Mon",
-              "Tue",
-              "Thu",
-              "Fri"
-            ],
-            "from": "18:00",
-            "to": "22:00"
           },
           {
             "where": "home_kitchen",
@@ -3594,7 +4015,7 @@
                   "Fri"
                 ],
                 "from": "23:00",
-                "to": "01:00"
+                "to": "00:00"
               },
               "gate": [
                 {
@@ -3626,7 +4047,20 @@
               "raises": {
                 "want": 10,
                 "corruption": 3
-              }
+              },
+              "when_also": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri",
+                  "Sat"
+                ],
+                "from": "00:00",
+                "to": "01:00"
+              },
+              "gate_note": "needs bare legs: shorts, a skirt, the sleep shirt or nothing below (Q72)"
             },
             {
               "n": 6,
@@ -3639,7 +4073,7 @@
                   "Thu",
                   "Fri"
                 ],
-                "from": "18:00",
+                "from": "19:00",
                 "to": "22:00"
               },
               "gate": [
@@ -4066,12 +4500,7 @@
               "where": "cafe",
               "when": {
                 "days": [
-                  "Mon",
-                  "Tue",
-                  "Wed",
-                  "Thu",
-                  "Fri",
-                  "Sat"
+                  "Fri"
                 ],
                 "from": "22:00",
                 "to": "23:00"
@@ -4123,6 +4552,58 @@
         "address": "babe",
         "schedule": [
           {
+            "where": "party_house",
+            "weekdays": [
+              "Sat"
+            ],
+            "from": "20:00",
+            "to": "00:00",
+            "note": "the party house, Zoe A 3 (LO, 2026-10-08; sweep A4-08); above her living-room row"
+          },
+          {
+            "where": "zoe_apartment",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu"
+            ],
+            "from": "18:00",
+            "to": "22:00",
+            "note": "home evenings (LO, 2026-10-08, Q48)"
+          },
+          {
+            "where": "zoe_apartment",
+            "weekdays": [
+              "Fri",
+              "Sat"
+            ],
+            "from": "18:00",
+            "to": "00:00",
+            "note": "Friday party night; Saturday evening, as signed (Zoe A 3, A 4)"
+          },
+          {
+            "where": "zoe_apartment",
+            "weekdays": [
+              "Sat"
+            ],
+            "from": "00:00",
+            "to": "02:00",
+            "note": "the Friday party after midnight"
+          },
+          {
+            "where": "zoe_bedroom",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu"
+            ],
+            "from": "22:00",
+            "to": "00:00",
+            "note": "going to bed; she lends the dress (Q48, narrowed: question 52)"
+          },
+          {
             "where": "quad",
             "weekdays": [
               "Tue",
@@ -4131,27 +4612,6 @@
             ],
             "from": "14:30",
             "to": "18:00"
-          },
-          {
-            "where": "zoe_apartment",
-            "weekdays": [
-              "Mon",
-              "Tue",
-              "Wed",
-              "Thu",
-              "Fri",
-              "Sat"
-            ],
-            "from": "18:00",
-            "to": "00:00"
-          },
-          {
-            "where": "zoe_apartment",
-            "weekdays": [
-              "Sat"
-            ],
-            "from": "00:00",
-            "to": "02:00"
           },
           {
             "where": "canteen",
@@ -4174,6 +4634,37 @@
             "from": "08:00",
             "to": "10:00",
             "note": "her weekend run (LO, 2026-10-08; the hours are a guess)"
+          },
+          {
+            "where": "lecture_hall",
+            "weekdays": [
+              "Tue",
+              "Thu"
+            ],
+            "from": "08:30",
+            "to": "11:45",
+            "when": "zoe_met",
+            "note": "figure drawing, then Biology (sweep A5-11)"
+          },
+          {
+            "where": "lecture_hall",
+            "weekdays": [
+              "Mon"
+            ],
+            "from": "13:00",
+            "to": "14:30",
+            "when": "zoe_met",
+            "note": "Biology"
+          },
+          {
+            "where": "lecture_hall",
+            "weekdays": [
+              "Wed"
+            ],
+            "from": "13:00",
+            "to": "14:30",
+            "when": "zoe_met",
+            "note": "figure drawing"
           }
         ],
         "ladder": {
@@ -4288,9 +4779,7 @@
                   "Mon",
                   "Tue",
                   "Wed",
-                  "Thu",
-                  "Fri",
-                  "Sat"
+                  "Thu"
                 ],
                 "from": "18:00",
                 "to": "22:00"
@@ -4310,7 +4799,14 @@
               "hint": "An evening at Zoe's, on her couch, after the hot tub.",
               "her_line_high": "From now on, I pick the dares.",
               "who_notices": "nobody — the two of them",
-              "refusal": "parked"
+              "refusal": "parked",
+              "when_also": {
+                "days": [
+                  "Sat"
+                ],
+                "from": "18:00",
+                "to": "20:00"
+              }
             }
           ]
         },
@@ -4549,10 +5045,52 @@
             "weekdays": [
               "Sat"
             ],
+            "from": "19:00",
+            "to": "21:00",
+            "when": "jake_date_booked",
+            "note": "picks her up; 'Go with him' sets jake_date_went (Q73)"
+          },
+          {
+            "where": "home_front_door",
+            "weekdays": [
+              "Sat"
+            ],
             "from": "22:00",
             "to": "00:00",
-            "when": "jake_date_booked",
-            "note": "brings her to the door after the date (LIVES.md:294-296); a board row"
+            "when": "jake_date_went",
+            "note": "brings her home after the date she went on tonight (Q73)"
+          },
+          {
+            "where": "campus_gym",
+            "weekdays": [
+              "Tue",
+              "Thu"
+            ],
+            "from": "15:00",
+            "to": "17:00",
+            "when": "jake_number",
+            "note": "team training, once she has met him (LO, 2026-10-08, Q64)"
+          },
+          {
+            "where": "lecture_hall",
+            "weekdays": [
+              "Tue",
+              "Thu"
+            ],
+            "from": "08:30",
+            "to": "10:00",
+            "when": "jake_number",
+            "note": "figure drawing"
+          },
+          {
+            "where": "lecture_hall",
+            "weekdays": [
+              "Wed"
+            ],
+            "from": "13:00",
+            "to": "14:30",
+            "when": "jake_number",
+            "note": "figure drawing"
           }
         ],
         "ladder": {
@@ -4647,7 +5185,7 @@
                   "operator": "is_inactive"
                 },
                 {
-                  "flag": "jake_date_booked",
+                  "flag": "jake_date_went",
                   "op": "is_true"
                 }
               ],
@@ -4696,7 +5234,7 @@
                   "value": 4
                 },
                 {
-                  "flag": "jake_date_booked",
+                  "flag": "jake_date_went",
                   "op": "is_true"
                 }
               ],
@@ -4732,6 +5270,16 @@
           }
         },
         "schedule": [
+          {
+            "where": "home_front_door",
+            "weekdays": [
+              "Mon"
+            ],
+            "from": "18:00",
+            "to": "19:00",
+            "when": "rent_carried",
+            "note": "the knock after a short Sunday, above his porch row (sweep A3-09)"
+          },
           {
             "where": "vance_house",
             "weekdays": [
@@ -5025,7 +5573,11 @@
       "letter_home",
       "on_probation",
       "jake_date_booked",
-      "rent_carried"
+      "rent_carried",
+      "late_party",
+      "late_shift",
+      "late_date",
+      "came_home_late"
     ]
   },
   "dependencies": [

@@ -1,6 +1,6 @@
 # [READY] Place — Vance's House
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the system sheets. Id `vance_house`.
 
@@ -42,3 +42,4 @@
 | his porch look is in release 1 | LO, 2026-10-06 |
 | Vance sleeps here | LO, 2026-10-08 |
 | open only in his porch hours | LO took the guess, 2026-10-08 |
+| fix from the false-line sweep | sweep A1-13: his description never says Mark owes him before `knows_mark_debt` (2026-10-08) |

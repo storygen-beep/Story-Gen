@@ -1,16 +1,16 @@
 # [READY] Place — Café
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the system sheets. Id `cafe`.
 
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | street |
+| ENTERED FROM (S2) | town (the bus, 15 minutes, on the way in) |
 | labels — what kind of place | `zone:town`, `public` |
 | hours | Mon–Sat 08:00–22:00 |
-| closed text | "Closed. Back Monday." on Sunday · after 22:00, only by staying for Tom |
+| closed text | "The café's shut." (every day; the engine adds when it opens) · after 22:00, only by staying for Tom |
 | hidden until | no |
 | fill — word budget (S3) | 9,000 words (ledger, unchanged) |
 | door | no: a shop |
@@ -49,3 +49,5 @@
 | the uniform | LO, chat (SYSTEMS §2) |
 | the Friday kiss repeats | LO, 2026-10-08 |
 | the job ask | SYSTEMS §2 (day 1) |
+| inside Town | LO, 2026-10-08 (questions 43–45) |
+| fix from the false-line sweep | sweep A1-20 (2026-10-08) |

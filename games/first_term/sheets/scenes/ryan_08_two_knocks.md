@@ -1,6 +1,6 @@
 # [READY] Scene — ryan_08_two_knocks
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. The door this release ends on.
 
@@ -20,7 +20,7 @@
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
 |---|---|---|---|---|
 | `ask` | after the kiss: "Kayla gets Fridays. What do I get?" | no | → `terms` | none |
-| `terms` | Ryan: "Two knocks. Any night that isn't Friday." · if Jake: "And Jake?" | no | three answers, the final no → below | none |
+| `terms` | Ryan: "Two knocks. Any night that isn't Friday." · only after Jake has been to the door (Jake B 3, `jake_step` 3 or more): "And Jake?" | no | three answers, the final no → below | none |
 | `keep` | "Keep Kayla. I like being the secret." | no | "Two knocks." → the hall | `ryan_terms_keep_kayla` set · `ryan_step` set 8 |
 | `end` | "End it with her." | no | "Two knocks." → the hall | `ryan_terms_end_kayla` set · `ryan_step` set 8 |
 | `mom` | "Mom finds out when I want." | no | "Two knocks." → the hall | `ryan_terms_mine` set · `ryan_step` set 8 |
@@ -49,3 +49,4 @@ locked: *"Needs Hungry."*
 | the door canvas and choice | LO, 2026-10-07 (SP7) |
 | the repeat stays a kiss in 0.1 | LO, 2026-10-08 (question 29) |
 | the term flag names, `ryan_two_knocks` | guess |
+| fix from the false-line sweep | sweep A2-12 (2026-10-08) |

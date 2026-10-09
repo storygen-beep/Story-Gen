@@ -1,6 +1,6 @@
 # [READY] Scene — cafe_gary_ten_minutes
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-09).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. The repeat Tom B 4 turns into: one entry of the shift-event pool
 > (`cafe_shift_events`). An explicit pool scene, so its beats are written out here.
@@ -10,7 +10,7 @@
 | system · pool | the café job · `cafe_shift_events` |
 | where · when | booth four, a weekday shift 14:30–18:00, when Gary is in |
 | gate | `gary_ten_minutes_open` (Tom B 4) · Corruption 40 · Gary present |
-| the price on the button | "$20 — Tom takes half" · money add +10 |
+| the price | said by Tom: "Gary's in. Twenty for ten minutes. Half's mine." · the toast after the click: money add +10 |
 | two voices | reluctant: Corruption 40–49 (guess) · eager: 50 or more |
 | what she wears here (test 8) | her café uniform: the café's dress rule |
 | BRAKE (S9) | once a shift, on the trigger |
@@ -21,7 +21,7 @@
 
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
 |---|---|---|---|---|
-| `ask` | Tom at the counter: "Gary's in." One line | no | "Sit with him. ($20 — Tom takes half)" → `ten` · "No." → the shift | none |
+| `ask` | Tom at the counter: "Gary's in. Twenty for ten minutes. Half's mine." | no | "Sit with him." → `ten` · "No." → the shift | none |
 | `ten` | reluctant or eager, by her Corruption | yes | "Time." → the shift · "That's enough, Gary." → the shift | money add +10 (or +5 if stopped) · corruption add +1 |
 
 No history words on either voice: the screen repeats (`register.md`, the truth rule).
@@ -46,3 +46,4 @@ Both last sentences stay on the body; `--beat` flags neither.
 | Gary's ten minutes as a shift event | the job sheet (LO, 2026-10-08) |
 | the prose | `v2-prose`, measured by `gates.py --beat`, 2026-10-08 |
 | the voice edge at 50, the half pay on a stop | guess |
+| pay she earns is never on the button: the scene says it, the card keeps it, the toast shows it | LO, D11 (2026-10-09) |

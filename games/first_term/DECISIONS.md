@@ -1,6 +1,6 @@
 # [READY] Decisions — First Term
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-09).
 
 > Placed at the game's root 2026-10-08. Written 2026-10-08, phase board.
 > This sheet and the ledger say the same thing. Where they differ, it is listed below, and nothing
@@ -8,12 +8,96 @@
 
 ## Open questions for LO — first
 
-| # | question | recommendation | why it matters |
-|---|---|---|---|
-| 37 | WANT.md still says the park is on her walk to campus. | LO: fix it at the next WANT.md re-sign. | SYSTEMS §14 says it isn't. |
-| 39 | SYSTEMS.md:498 says `came_home_late` is set at the front door. | LO: fix it at the next SYSTEMS re-sign. | Question 35 moved it to the street's way home. |
+None open. 37 and 39 were answered 2026-10-09 (below).
+
+## Answered (LO, 2026-10-09)
+
+| # | question | LO's answer |
+|---|---|---|
+| — | D11 and `mark_07_twenty_and_you_can_look.md`: is "Twenty, and you can look." a pay tag? | No. Kept as signed (question 33). It is her spoken offer, not a pay tag; D11 covers bracketed amounts like "($20)" on a button, not a line she says. |
+| 37 | WANT.md still says the park is on her walk to campus. | Fixed now: `WANT.md:22-23` names the park as its own place, not her way to campus (SYSTEMS §14). |
+| 39 | SYSTEMS.md:498 says `came_home_late` is set at the front door. | Fixed now: `SYSTEMS.md:498` says each outing sets its own late flag, the street's way home at 22:00 or later sets `came_home_late`, each is read for 4 hours, and her bed clears them (questions 35, 69). |
 
 ## Answered (LO, 2026-10-08)
+
+### Batch 4 · the sweep's sheet rows and LO's other notes (everyday update)
+
+Every sheet-origin sweep row is fixed on its sheet or answered here; the table is
+`ROOT/first_term_sweep_20261008/SHEET_FIXES.md`.
+
+| # | question | LO's answer |
+|---|---|---|
+| 69 | Why she's late | A flag per outing (`late_party`, `late_shift`, `late_date`), each read for 4 hours; her bed clears them and `came_home_late`; Laura's stairs row reads 4 hours. |
+| 70 | Kayla on Saturday mornings | She stays every Friday night and leaves Saturday by 10:00. |
+| 71 | "kid" | Dropped everywhere: Mark says @player, or @player.nickname when he's soft. |
+| 72 | Mark A 5 and bare legs | The step needs bare legs; in jeans it waits. |
+| 73 | Jake's pickup | A Saturday 19:00–21:00 pickup at the front door; "Go with him" sets `jake_date_went`; the door scenes read it; the booking lapses at 21:00. |
+| 74 | Class rows | Zoe in Biology and figure drawing, Jake in figure drawing, each only once met. |
+
+**LO's play notes, written as rules on the sheets** (LO, 2026-10-08):
+
+| rule | where it is written |
+|---|---|
+| the feed and the selfie live on the phone only | the wardrobe card, "On the phone" |
+| a person in the master bedroom has a face; lines name only who is there; no knock on a sleeping room | the master bedroom |
+| each outing sets its own late flag; cleared every night | the street, "Why she's late" (question 69) |
+| a garment reaction is a line in the person's hub | the wardrobe card |
+| a chat follow-up waits for her reply, one answer per reply | the seven threads |
+| a card's goals are the step's real requirements, never the counter | the seven ladder sheets, "Card goals" |
+| a line about a past event shows only behind the flag that makes it true | Nadia's sheet; every scene fix in SHEET_FIXES |
+| Home is a building; Zoe's flat is laid out like a flat | `home.md`, `zoe_flat.md` |
+| arrival text never sits on a button that can be clicked again | the park couple (sweep A6-10) |
+
+### Batch 3 · the rest of the picks and the phone (everyday update)
+
+| # | question | LO's answer |
+|---|---|---|
+| 62 | The wait button | The engine's three steps (10 minutes, 1 hour, 1 day) for 0.1. Engine notes for later: the room isn't redrawn after a wait; the day button skips sleep. |
+| 63 | Laura's curfew call | Friday 21:00–22:00, Laura awake; it never says where @player is. |
+| 64 | The gym | "Gym" (`campus_gym`) in Campus, 1,500 words; Jake Tue, Thu 15:00–17:00 once met. |
+| 65 | Area minutes | Said once in the street's description. |
+| 66 | Feed and selfie on the phone | Yes. LO's fix: the selfie rungs gate on Exhibitionism (Covered 0, Daring 20, Showing 40), each label naming the act; the engine can't read clothes or place for a post. |
+| 67 | Grocery money | $20 in, $20 out; Warmth +2 delivered; `laura_suspicion` +2 after 24 hours. |
+| 68 | The batch 3 guesses | Taken. |
+
+### Batch 2 · the home items (everyday update)
+
+Written on `sheets/systems/home_life.md` (new), the home places and Laura's, Mark's and Ryan's sheets.
+
+| # | question | LO's answer |
+|---|---|---|
+| 52 | Zoe's bedroom rows broke Zoe A 3 and A 4 | Keep the steps: her bedroom is Mon–Thu 22:00–00:00 only. |
+| 53 | A seventh system card, `home_life` | Yes. |
+| 54 | A dinner hour | Yes: Ryan Mon, Tue, Thu, Sun and Mark Mon, Tue, Thu, Fri in the kitchen 18:00–19:00; Ryan A 4, A 8, A 9 and Mark A 6 move to 19:00–22:00. LIVES needs LO's re-sign. |
+| 55 | Ryan's TV afternoons | Yes: the living room Sat, Sun 14:00–18:00; his room 07:30–14:00. |
+| 56 | Money for a tidy room | No: Warmth +2 at Sunday dinner, −1 if messy. |
+| 57 | Swimwear for the garden | No new garment. |
+| 58 | The master bedroom at night | No knock while all inside sleep; "Ease the door open", one screen, then back. |
+| 59 | Random events at home | 1 in 4 on entering, one a day, "nothing happens" written. |
+| 60 | Brakes | By hours since a flag (12 hours); SP1 unchanged. |
+| 61 | The guesses | Taken. Mark's paid looks: one a day, $20. |
+| — | Zoe at the party house (sweep A4-08) | LO: a Sat 20:00–00:00 `party_house` row above her living-room row. |
+
+### Batch 1 · the map (everyday update)
+
+Already decided by LO's play notes: the street shows **"Home"**, a building that opens in the hall; the
+areas are **Home, Campus and Town**, with the street as the ground; Zoe's flat is laid out like a flat
+and still hosts the Friday party.
+
+| # | question | LO's answer |
+|---|---|---|
+| 43 | Which place sits in which area | As recommended. Home: the house and the garden. Campus: `campus` becomes the area; its 500 words move to the quad. Town (new): café, clothes shop, Zoe's flat, party house. On the street: Vance's house, the park, the corner shop. |
+| 44 | Travel minutes | As recommended: into Campus 15, Town 15, Home 10. The park's 10 minutes is the park's **own** cost, not an area toll (LO: the park is not an area). Vance's and the corner shop 0. |
+| 45 | The bus | The ride into town is the bus: 15 minutes, no fare (her student pass). Campus is a walk. |
+| 46 | Energy for walking | No: time only. |
+| 47 | Zoe's flat | "Zoe's Flat", hidden until `zoe_met`, opens in Zoe's Living Room (`zoe_apartment`, id kept). Off it: Zoe's Kitchen, Zoe's Bathroom (both new), Zoe's Bedroom. |
+| 48 | Zoe's hours by room | As recommended; then narrowed by question 52 to keep two signed steps. |
+| 49 | Pool or garden | A garden, "Garden", off the hall by the back door. Open 07:00–21:00, "It's dark out." 1,500 words. |
+| 50 | The corner shop | Open in 0.1 for the grocery run only: plain, no heat. 07:00–22:00. 1,000 words. |
+| 51 | New words outside the kitchen | Taken. The kitchen grows about 670 words in batch 2; COVERAGE settles it in batch 4. |
+
+### Earlier
+
 
 | # | question | LO's answer |
 |---|---|---|
@@ -97,12 +181,12 @@ accident, allowed at Good Girl. Curious adds "Stay and watch". Day one reaches i
 | obligation moves | $90 after $300 paid · $100 after $900 · then flat |
 | `board.economy.sinks` | rent · canteen food · the clothes shop |
 | `board.needs` | `energy`: spent, a real lock · `hygiene`: colour only, with an off switch |
-| the anchor | `home_kitchen`: 28,000 of 110,500 words, 25.3%. It reaches 25%, barely. |
-| places | 31 declared; 29 in 0.1 (no corner shop, no men's toilet) |
+| the anchor | `home_kitchen`: 30,000 of 119,300 words, 25.1%. It reaches 25%, barely. |
+| places | 38 declared (four are buildings or areas); 37 in 0.1 (no men's toilet) |
 | people | 21; 7 with ladders, 44 steps |
 | `release_page.door` | `ryan_08_two_knocks` · "Two knocks" · step 9 locked, naming Hungry |
 
-**The anchor is tight.** Other rooms can grow by about 1,500 words in total before the kitchen drops under
+**The anchor is tight.** Other rooms can grow by about 700 words in total before the kitchen drops under
 25%. Past that, every 1,000 words elsewhere needs about 330 more in the kitchen.
 
 ## Where the sheets and the ledger differ
@@ -182,6 +266,63 @@ edit when you next re-sign it.
 |---|---|
 | 26 | `npc_cocky_guy`: rows at Zoe's, Fri 23:00–00:00 and Sat 00:00–02:00, `when` `cocky_guy_met` |
 
+**Written 2026-10-08 with LO's yes, everyday batch 1** (a snapshot before each: `first_term_snapshots/20261008_everyday_L1_before/` … `_L9_before/`, and `_L5b_before/`):
+
+| # | change |
+|---|---|
+| L1 | `home` added: a building over the house rooms, from the street, opening in the hall; `crossing_costs` time 10 |
+| L2 | `campus` is an area: `is_container`, `crossing_costs` time 15; its hours, closed text and 500 words gone; the quad 2,500 → 3,000 |
+| L3 | `town` added: an area off the street over the café, clothes shop, Zoe's flat and the party house; `crossing_costs` time 15 (the bus) |
+| L4 | `zoe_flat` added (hidden until `zoe_met`, opens in `zoe_apartment`); `zoe_kitchen` and `zoe_bathroom` added, 500 words each; `zoe_apartment` named "Zoe's Living Room" |
+| L5 | Zoe's flat rows split by room; then narrowed (question 52): living room Mon–Thu 18:00–22:00, Fri–Sat 18:00–00:00, Sat 00:00–02:00; bedroom Mon–Thu 22:00–00:00 |
+| L6 | `home_garden` added, off the hall, 07:00–21:00, 1,500 words |
+| L7 | `corner_shop` in 0.1: 07:00–22:00, 1,000 words, the grocery run only |
+| L8 | the park: `costs` time 10, its own (not an area) |
+| L9 | `board.map.shape` rewritten; `board.map.areas` added; the release's place list takes the seven new places |
+
+shape.py after: 22 pass, 0 fail.
+
+**Written 2026-10-08 with LO's yes, everyday batch 2** (a snapshot before each: `first_term_snapshots/20261008_everyday_L10_before/` … `_L16_before/`, and `_L10b_before/`):
+
+| # | change |
+|---|---|
+| L10 | `board.systems` adds `home_life`; `board.coverage` adds topic `home_life` (fixed once: the topic must be the card's id) |
+| L11 | fills: kitchen 30,000 · living room 6,000 · garage 2,000 · her room 5,300 |
+| L12 | `board.meters` adds `room_tidy` |
+| L13 | dinner rows 18:00–19:00 for Ryan (Mon, Tue, Thu, Sun) and Mark (Mon, Tue, Thu, Fri); his room 19:00–22:00 (Friday 18:00–22:00 kept), the garage 19:00–22:00; Ryan steps 3, 7, 8 and Mark step 6 from 19:00 |
+| L14 | Ryan: living room Sat, Sun 14:00–18:00; his weekend room row ends 14:00 |
+| L15 | the master bedroom door: Knock while someone is awake · Ease the door open while all sleep · Go in when both are out |
+| L16 | Zoe: `party_house` Sat 20:00–00:00, first in her list (sweep A4-08) |
+
+shape.py after: 22 pass, 0 fail.
+
+**Written 2026-10-08 with LO's yes, everyday batch 3** (a snapshot before each: `first_term_snapshots/20261008_everyday_L17_before/` … `_L19_before/`):
+
+| # | change |
+|---|---|
+| L17 | park card: `park_selfie` out of the pool, `followers` out of its feeds, the selfie act out of its ladder; `followers` fed at her room only |
+| L18 | `campus_gym` added inside Campus (1,500 words, in the release); Jake's gym rows Tue, Thu 15:00–17:00, `when` `jake_number` |
+| L19 | `street` carries a description note with the minutes |
+
+shape.py after: 22 pass, 0 fail.
+
+**Written 2026-10-08 with LO's yes, everyday batch 4** (a snapshot before each: `first_term_snapshots/20261008_everyday_L20_before/` … `_L29_before/`, and `_L28b_before/`):
+
+| # | change |
+|---|---|
+| L20 | Laura's stairs row: `when` = `came_home_late` set under 4 hours ago; `late_party`, `late_shift`, `late_date`, `came_home_late` in `resetting_flags` |
+| L21 | the café's `closed_text`: "The café's shut." |
+| L22 | Laura C 3: Mon, Tue, Thu, Fri |
+| L23 | Vance: front door, Mon 18:00–19:00, `when` `rent_carried`, first in his list |
+| L24 | Tom B 6: Friday 22:00–23:00 |
+| L25 | Jake: pickup row Sat 19:00–21:00 (`jake_date_booked`); goodnight row `jake_date_went`; Jake B 3, B 4 and Laura C 5 gate on `jake_date_went` |
+| L26 | Zoe A 4: Mon–Thu 18:00–22:00, and Sat 18:00–20:00 (`when_also`) |
+| L27 | Zoe: lecture hall Tue, Thu 08:30–11:45 · Mon, Wed 13:00–14:30, `when` `zoe_met`; Jake: lecture hall Tue, Thu 08:30–10:00 · Wed 13:00–14:30, `when` `jake_number` |
+| L28 | `board.coverage` adds travel, town_events, the gym, the garden, the grocery run (43 topics; the town events source fixed once to its card file) |
+| L29 | Mark A 5: Sun–Fri 23:00–00:00 and Mon–Sat 00:00–01:00; its bare-legs gate noted |
+
+shape.py after: 22 pass, 0 fail.
+
 **Not a ledger change:** the ledger keeps no "entered from" per place. The sheets take it from the map's
 shape line, and the build writes it as `entry_from`.
 
@@ -193,7 +334,7 @@ Nothing on these sheets is deferred. These rows hold up a gate:
 |---|---|---|
 | the map: street is the only root | this one | the map is a place · world reachable |
 | homes for every resident | this one | residents have homes |
-| the kitchen at 25.3% | this one | location fill |
+| the kitchen at 25.1% | this one | location fill |
 | energy locks a shift, Focus and the party | this one, college, job, parties | a need shuts a door |
 | a bed, every day | this one | a need can be met every day |
 | rent $75, Sunday, carried when short | money and rent | the obligation is charged · money gates something |

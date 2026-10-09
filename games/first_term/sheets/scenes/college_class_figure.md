@@ -1,6 +1,6 @@
 # [READY] Scene — college_class_figure
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. The figure-drawing class canvas (`college_class_figure`): the class draws a nude model (a woman, 25).
 
@@ -9,7 +9,7 @@
 | system · pool | college · `college_class_figure` |
 | where · when | the lecture hall · Tue, Thu 08:30 · Wed 13:00 |
 | gate | none: every figure-drawing class |
-| who | the model, the art lecturer, Zoe, Jake, the cocky guy |
+| who | the model, the art lecturer, Zoe, Jake, the cocky guy · Zoe's sentence ("Zoe kicks your ankle") shows only after `zoe_met`; before it she is "the girl at the next easel" |
 | what she wears here (test 8) | not named; no dress code for her |
 | BRAKE (S9) | once per class window |
 | raises | none: it is a class (her grade moves by her row choice) |
@@ -38,3 +38,4 @@ No history words on any screen: each one repeats.
 | her own posing waits | SYSTEMS §1 · SP7 call 1 |
 | the prose | `v2-prose`, measured by `gates.py --beat`, 2026-10-08 |
 | she meets the cocky guy at her first Figure drawing | LIVES §6 (met at their first class) · ledger change 26 |
+| fix from the false-line sweep | sweep A5-13 (2026-10-08) |

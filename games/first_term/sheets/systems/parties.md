@@ -1,6 +1,6 @@
 # [READY] System — parties
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 from SYSTEMS §4, SP4, the party scout card and the ledger's `parties` card.
 > Every number marked "guess" is new here and waits for your yes.
@@ -42,7 +42,7 @@
 | take a dare | Exhibitionism add +1 · `campus_talk` add +1 | yes, always: her body |
 | refuse a dare | `party_cool_<npc>` set true · costs nothing else | yes: one more push, and her no holds |
 | refuse a drink | nothing moves; the no always works | yes, one line |
-| leave | to the street; the way home after 22:00 sets `came_home_late` | yes |
+| leave | to the street; after 22:00 sets `late_party` · the way home sets `came_home_late` | yes |
 
 **The next morning.** After a heavy night, her Saturday bed scene takes energy add −30 and sets
 `heavy_night` false.
@@ -101,3 +101,4 @@ is off.
 | arriving costs 15 energy; the caps per night | guess |
 | `party_hookup` | LO, 2026-10-08 |
 | Zoe A 3: her friends leave the hot tub first | LO, 2026-10-08 |
+| `late_party` | LO's play note, 2026-10-08 |

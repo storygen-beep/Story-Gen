@@ -1,6 +1,6 @@
 # [READY] Scene — jake_03_my_boyfriend
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. **Jake's voice sample, in full:** every screen written by
 > `v2-prose` from a spec, measured with `gates.py --beat`, pasted here. LO picked this step.
@@ -9,7 +9,7 @@
 |---|---|
 | person · step | `npc_jake` · 3 (Jake B 3) |
 | where · when | the front door · Saturday 23:00–00:00, after a booked date |
-| gate | Corruption 20 · Exhibitionism 20 · `jake_date_booked` · the boost off |
+| gate | Corruption 20 · Exhibitionism 20 · `jake_date_went` (set when she left with him tonight, read for 6 hours) · the boost off |
 | want (test 1) | "Saturday. Pick me up at the door." (B 2); "Is anyone up?" |
 | next step (test 2) | she names him to the house: Ryan |
 | hook (test 3) | Ryan's light goes out; "Next Saturday?" (his thread) |
@@ -69,3 +69,4 @@ door from inside. Screens 1–3 re-measured.
 | this step as the voice sample | LO, 2026-10-08 |
 | the prose | `v2-prose`, measured by `gates.py --beat`, 2026-10-08 |
 | the Warmth −10 and Want +5 | guess |
+| fix from the false-line sweep | sweep A4-03 (2026-10-08) |

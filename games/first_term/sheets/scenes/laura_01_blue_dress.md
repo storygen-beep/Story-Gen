@@ -1,13 +1,13 @@
 # [READY] Scene — laura_01_blue_dress
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08.
 
 | row | answer |
 |---|---|
 | person · step | `npc_laura` · 1 (Laura C 1) |
-| where · when | the kitchen, then the master bedroom · Tuesday 18:00–22:00, day 2 |
+| where · when | the kitchen, then the master bedroom · Tuesday 18:00–22:00, day 2 or later · it starts only from "Follow her upstairs." in Laura's kitchen hub (that choice sets `laura_dress_invite`), never by walking into the bedroom |
 | gate | none: step 1, day 2 |
 | want (test 1) | none before it: step 1, and it says so |
 | next step (test 2) | she dresses her daughter, and lingers |
@@ -34,3 +34,4 @@ Who notices: Laura, behind her in the mirror.
 | the scene and its lines | the arc ideas, Laura C 1 (heat 10-06) |
 | day 2, shy choices only | SP2 §6 (kept) |
 | the dress is equipped by the scene | the truth rule · guess for the mechanism |
+| fix from the false-line sweep | sweep A2-09 (2026-10-08) |

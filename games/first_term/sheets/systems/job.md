@@ -1,6 +1,6 @@
 # [READY] System — job
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 from SYSTEMS §2, SP4 and the ledger's `job` card.
 > Every number marked "guess" is new here and waits for your yes.
@@ -102,3 +102,4 @@ A top week in the sexy uniform pays $232.
 | a shift is 3 hours, costs 20 energy | guess |
 | Tom B 2 counts as Gary's introduction | guess · `the-arc.md` A15 |
 | Gary's ten minutes is explicit as a repeat | guess |
+| leaving after Tom's close sets `late_shift` | LO's play note, 2026-10-08 |

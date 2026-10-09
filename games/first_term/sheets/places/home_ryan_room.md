@@ -1,6 +1,6 @@
 # [READY] Place — Ryan's Room
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the system sheets. Id `home_ryan_room`.
 
@@ -20,8 +20,8 @@
 
 | auto-fires | who is here, and when | things to do alone | ways out |
 |---|---|---|---|
-| none | Ryan: Mon, Tue, Thu, Fri, Sun 18:00–22:00 | go through his things while he's out | the hall |
-|  | Ryan: weekends 07:30–18:00 · every night 22:00–07:00 |  |  |
+| none | Ryan: Mon, Tue, Thu, Sun 19:00–22:00 · Fri 18:00–22:00 | go through his things while he's out | the hall |
+|  | Ryan: weekends 07:30–14:00 · every night 22:00–06:45 |  |  |
 
 ## Rows (`serves`)
 
@@ -46,3 +46,5 @@
 | two knocks | LO, 2026-10-07 (SP7) |
 | his things while he's out | LIVES §4 |
 | a door on his room | LO, 2026-10-08 |
+| the dinner hour, 18:00–19:00 | LO, 2026-10-08 (question 54) |
+| his weekend afternoons in the living room | LO, 2026-10-08 (question 55) |

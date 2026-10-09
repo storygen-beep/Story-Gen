@@ -1,6 +1,6 @@
 # [READY] Scene — touch_shower
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. Touching herself in the shared bathroom: a repeatable row (LO, 2026-10-08, question 13).
 
@@ -35,3 +35,4 @@ No history words on any screen: each one repeats.
 | touching herself in the shower, from Curious | LO, 2026-10-08 (question 13) |
 | the prose | `v2-prose`, measured by `gates.py --beat`, 2026-10-08 |
 | one voice for stages 2–3 | LO, 2026-10-08: SP2 gives both "warming up" |
+| "Footsteps cross the hall" only while someone is home and awake (by their rows); otherwise the house is quiet | sweep A6-29 |

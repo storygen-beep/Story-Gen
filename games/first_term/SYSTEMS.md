@@ -1,6 +1,6 @@
-# The systems — First Term (layer 4: systems as slots)
+# [READY] The systems — First Term (layer 4: systems as slots)
 
-> [READY] · layer 4 · drafted 2026-10-06 · updated 2026-10-08 (§14, the park, at the end; the parties card, the page 7 line, needs not cards) · signed by LO: LO, 2026-10-08
+> [READY] · layer 4 · drafted 2026-10-06 · updated 2026-10-08 (§14, the park, at the end; the parties card, the page 7 line, needs not cards) · updated 2026-10-09 (the late keys, key 1 below). Changed 2026-10-09, signed by LO: LO, 2026-10-09.
 > A game-only page beside `DIRECTION.md` (layer 2) and `LIVES.md` (layer 3). Moved here from
 > `proposals/SYSTEMS_SLOTS.md` on 2026-10-07 (snapshot `first_term_snapshots/20261007_layer4_close_before/`).
 > v1 drafted 2026-10-06 (snapshot:
@@ -495,7 +495,7 @@ tick runs at `:6947-6967`; `engine.md` §28.1). The cheat page's "Skip to mornin
 
 ## Keys named (LO, 2026-10-07)
 
-1. Out late: `came_home_late`, set at the front door at night; read by hours since set, never cleared by the tick (`LIVES.md:331-333`).
+1. Out late: each outing sets its own flag when she leaves it (`late_party` leaving Zoe's flat or the party house after 22:00, `late_shift` leaving the café after Tom's close, `late_date` at Jake's goodnight), and the street's way home at 22:00 or later sets `came_home_late` (question 35); each is read for 4 hours after it is set, and her bed sets them all false (question 69; `sheets/places/street.md`, "Why she's late").
 2. Weekend away: `laura_weekend_away`; both away: `parents_away_night`. Each set by its event scene, from phase 3 and phase 4 (`LIVES.md:62-66`).
 3. `ryan_cancelled_kayla` (Ryan A 11's reply), `ryan_skips_kayla` (her ask at his door that week), `laura_at_fridays` (Laura C 15) (`LIVES.md:125-126`, `:484-489`).
 4. Parties: `drinks_boost` and `drinks_tonight` (each drink); `heavy_night` (the third drink; her Saturday-morning bed scene takes the 30 energy and clears it); `party_cool_<npc>` (her refusal; read by hours since set).

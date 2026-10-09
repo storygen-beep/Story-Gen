@@ -1,6 +1,6 @@
 # [READY] Scene — park_hidden
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. An explicit pool scene of the park (`park_hidden`): Zoe, after
 > their run, somewhere nobody sees.
@@ -41,3 +41,4 @@ No history words: the screen repeats.
 | Zoe in the park on weekend mornings | LO, 2026-10-08 (question 7) |
 | after Zoe A 3 | guess: their first kiss comes first |
 | the prose | `v2-prose`, measured by `gates.py --beat`, 2026-10-08 |
+| "still panting from the run" only after `ran_with_zoe` (set by running with Zoe, read for 2 hours); otherwise she walked in, and the line says so | sweep A6-09 |

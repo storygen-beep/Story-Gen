@@ -1,13 +1,13 @@
 # [READY] Scene — mark_04_after_shes_asleep
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. Every Mark step is written twice, by his Power: his terms (M) or hers (E).
 
 | row | answer |
 |---|---|
 | person · step | `npc_mark` · 4 (Mark A 4) |
-| where · when | the living room · Sun–Fri 22:00–00:00, Laura asleep |
+| where · when | the living room · Sun–Fri 22:00–00:00 · Laura has gone up (her bed row from 22:00) · not on a night she came home late (`came_home_late` in the last 4 hours: Laura is on the stairs) |
 | gate | Corruption 40 · Exhibitionism 20 · his Want 30 |
 | want (test 1) | he stays up after Laura sleeps, the TV low |
 | next step (test 2) | the ask: a price is named for the first time |
@@ -32,3 +32,4 @@ This is the introduction of his paid route (her climb): the price is raised befo
 |---|---|
 | the scene, both versions | the arc ideas, Mark A 4 (fixed 10-06: at Bold) |
 | the ask as the introduction | `the-arc.md` A15 |
+| fix from the false-line sweep | sweep A3-04: no "an hour ago"; the lines say "Laura's gone up" (2026-10-08) |

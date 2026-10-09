@@ -1,13 +1,13 @@
 # [READY] Place — Clothes Shop
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the system sheets. Id `clothes_shop`.
 
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | street |
+| ENTERED FROM (S2) | town (the bus, 15 minutes, on the way in) |
 | labels — what kind of place | `zone:town`, `public`, `she_can_undress` |
 | hours | Mon–Sat 10:00–18:00 |
 | closed text | "Closed." |
@@ -45,3 +45,4 @@
 | the shop says where each item counts | LO, chat (SYSTEMS §7) |
 | hours | LO took the guess, 2026-10-08 |
 | prices | guess |
+| inside Town | LO, 2026-10-08 (questions 43–45) |

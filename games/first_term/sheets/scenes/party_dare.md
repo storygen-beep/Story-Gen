@@ -1,6 +1,6 @@
 # [READY] Scene — party_dare
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. An explicit pool scene of the party system (`party_dare`), so its beat
 > is written out here. This is its stage-3 screen; the stage-2 dare is Zoe A 2's bra through the sleeve.
@@ -40,3 +40,4 @@ No history words: the screen repeats.
 | a flash for people she knows at stage 3 | SP2 §1 (Bold · Showing) |
 | two dares a night | the party sheet (guess) |
 | the prose | `v2-prose`, measured by `gates.py --beat`, 2026-10-08 |
+| Zoe's "Flash them, babe. Three seconds" is said once, on the screen before the flash | sweep A6-34 |

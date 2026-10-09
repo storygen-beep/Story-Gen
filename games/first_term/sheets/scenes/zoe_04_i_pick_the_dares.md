@@ -1,13 +1,13 @@
 # [READY] Scene — zoe_04_i_pick_the_dares
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08.
 
 | row | answer |
 |---|---|
 | person · step | `npc_zoe` · 4 (Zoe A 4) · her last step in 0.1 |
-| where · when | Zoe's couch · Mon–Sat 18:00–22:00, after the hot tub |
+| where · when | Zoe's couch · Mon–Thu 18:00–22:00 and Sat 18:00–20:00 (not Friday: the party; not Saturday from 20:00: Zoe is at the party house) |
 | gate | Corruption 40 · the boost off |
 | want (test 1) | "Took you long enough." (A 3); she still won't ask |
 | next step (test 2) | Zoe admits she dared instead of asking; @player takes the dares |
@@ -41,3 +41,4 @@ No "last night" in the lines: this step can come any evening after the hot tub (
 | the scene and its lines | the arc ideas, Zoe A 4 (heat 10-06) |
 | "Not that one, babe." parked | SP2 (Zoe's no) |
 | "Dare Zoe" in the pool | guess |
+| fix from the false-line sweep | sweep A4-09 (2026-10-08) |
