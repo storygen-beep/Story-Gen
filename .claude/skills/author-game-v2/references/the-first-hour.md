@@ -712,6 +712,8 @@ the escalation replaces it whenever its conditions hold.
 
 ### So a second surface for the same person in the same room is a NODE INSIDE THE FIRST.
 
+His one line on her skirt is such a node, never its own button.
+
 Written as its own canvas, a talk screen cannot take `npc` without the hub swallowing it (the
 selector keeps one canvas per character, `v2.py:5804-5807`), so it lands in the solo lane — the one
 that holds Sleep and Shower and attaches no name to anything — with its button text as its only
@@ -827,8 +829,8 @@ strangers. So this rule is a choice backed by field evidence, not a universal la
 
 ⚠️ **Sequence the cast in waves.** Not everyone is reachable on day one. Stage the entrances so each
 arrival is a punctuation mark. For a character who arrives mid-game, **withhold their schedule until
-the meeting fires** — `getNpcsWithSchedules` (`v2.py:4395`) surfaces every declared NPC on the
-Schedule page from day one regardless of any gate, so a schedule given early spoils the entrance.
+the meeting fires**: gate each row with `when` on their `*_met` flag. A row whose `when` fails is left
+off the Schedule page (`v2.py:4548-4550`).
 
 ### The same flag belongs on that character's quest cards
 

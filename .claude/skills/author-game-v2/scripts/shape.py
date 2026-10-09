@@ -37,6 +37,25 @@ SP_IDS = [f"SP{i}" for i in range(1, 8)]
 STRICT_PHASES = {"spine", "board", "sheets", "release"}
 
 
+
+def _first_match_loses(rows, days, frm, to, places):
+    """The first slot ("Fri 23:05") of a step's window where the person's FIRST matching row is
+    not one of `places`, reading the ledger's rows the way the engine reads the TOML's."""
+    toml_rows = []
+    for r in rows:
+        if not isinstance(r, dict):
+            continue
+        wd = r.get("weekdays")
+        toml_rows.append({"location": r.get("where"), "start_time": r.get("from", "00:00"),
+                          "end_time": r.get("to", "23:59"), "when": r.get("when"),
+                          "weekdays": [gates._ladder_day(d) for d in wd] if wd else list(range(7))})
+    table = gates._tr_where({"npcs": [{"id": "p", "schedules": toml_rows}]}).get("p", {})
+    win = gates._tr_rows_slots([{"weekdays": days, "start_time": frm, "end_time": to}])
+    for slot in sorted(win):
+        if not (gates._tr_places(table, slot) & places):
+            return gates._tr_slot_name(slot)
+    return None
+
 def _ladders(state):
     """{npc_id: ladder} for every declared ladder with at least one step."""
     board = (state or {}).get("board") or {}
@@ -402,6 +421,35 @@ def check(state, strict=False, slug=None, root=None):
             seen = f" or {s['seen_from']}" if s.get("seen_from") else ""
             bad.append(f"{n} step {s.get('n')}: {n}'s schedule does not cover {s.get('where')}{seen} "
                        f"{w['from']}-{w['to']} on {', '.join(gates._PR_DAYS[d] for d in missing)}")
+            continue
+        # B50: the engine takes the FIRST row that matches (v2.py:4289-4318), so a row above the
+        # step's row can take the person elsewhere though the union covers the window. Rows read
+        # in order through gates.py's `_tr_where`; a row with `when` counts both ways.
+        lost = _first_match_loses(scheds[n], days, w["from"], w["to"], {s.get("where"), s.get("seen_from")})
+        if lost:
+            bad.append(f"{n} step {s.get('n')}: an earlier row wins at {lost} — {n} is "
+                       f"not at {s.get('where')} then (rows are read first match first: put the "
+                       f"gated or narrower row above the one it overrides)")
+    # B51: an overnight row (to < from) on some weekdays loses its person after midnight, because the
+    # day then reads as the next weekday; it needs a next-day row from 00:00, or every weekday.
+    for n, rws in scheds.items():
+        if n in unreadable:
+            continue
+        for i, r in enumerate(rws):
+            wd = r.get("weekdays")
+            if not wd or str(r.get("to", "")) >= str(r.get("from", "")) or str(r.get("to")) == "00:00":
+                continue
+            days_r = {gates._ladder_day(d) for d in wd}
+            nxt = {(d + 1) % 7 for d in days_r}
+            partner = set()
+            for q in rws:
+                if isinstance(q, dict) and q.get("where") == r.get("where") and str(q.get("from")) == "00:00":
+                    partner |= ({gates._ladder_day(d) for d in q.get("weekdays")} if q.get("weekdays") else set(range(7)))
+            short = sorted(nxt - days_r - partner)
+            if short:
+                bad.append(f"{n} schedule[{i}] {r.get('where')} {r.get('from')}-{r.get('to')}: after midnight "
+                           f"on {', '.join(gates._PR_DAYS[d] for d in short)} nobody is there (the day has "
+                           f"turned) — add a 00:00-{r.get('to')} row for those days")
     if not judged and not sched_bad:
         row("the person is there at the step's hour", None,
             "n/a — no step belongs to a person with board.characters[].schedule")

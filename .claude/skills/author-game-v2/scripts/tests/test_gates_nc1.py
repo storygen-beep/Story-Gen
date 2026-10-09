@@ -1,6 +1,6 @@
 """NC1 (PRD v2 phase 4 · D12, 2026-09-30): the reader passed — a `--ship` BLOCK row.
 
-Every touched canvas with a named person or an explicit beat needs a `release_page.reader`
+Every touched canvas (B81, 2026-10-08: faceless and solo ones too) needs a `release_page.reader`
 entry; a FAIL blocks unless `release_page.reader_waivers` holds {canvas_id, test, why}.
 N/A is not a failure. Grandfathered games WARN (LO B).
 
@@ -49,19 +49,21 @@ def page(reader=None, waivers=None):
 # ── pass ──────────────────────────────────────────────────────────────────────
 
 def test_pass_and_na_verdicts_pass():
-    ok, head, _ = reader_row(page({"hub_a": {"want": "PASS", "the body": "N/A"}}))
-    assert ok is True and head.startswith("1/1 touched canvases read"), head
+    ok, head, _ = reader_row(page({"hub_a": {"want": "PASS", "the body": "N/A"},
+                                   "chores": {"a solo button is a real act": "PASS"}}))
+    assert ok is True and head.startswith("2/2 touched canvases read"), head
 
 
 def test_a_waived_fail_passes():
-    ok, head, _ = reader_row(page({"hub_a": {"want": "FAIL"}},
+    ok, head, _ = reader_row(page({"hub_a": {"want": "FAIL"}, "chores": {"want": "N/A"}},
                                   [{"canvas_id": "hub_a", "test": "want", "why": "LO: fine"}]))
     assert ok is True and "1 waived" in head
 
 
-def test_a_canvas_without_a_person_or_heat_needs_no_entry():
+def test_a_solo_canvas_needs_an_entry_too():
+    # B81: the faceless bed and couch buttons are where most of first_term's false lines sat.
     _ok, _h, detail = reader_row(page({}))
-    assert not any(d.startswith("chores") for d in detail)
+    assert any(d.startswith("chores: not read (a surface)") for d in detail)
 
 
 # ── fail ──────────────────────────────────────────────────────────────────────
@@ -95,8 +97,10 @@ def test_touched_is_a_diff_against_the_release_commit(tmp_path):
                                                             "content": "B waits."}]}]})
     toml_dir = tmp_path / "games" / "fx" / "toml_phases"
     toml_dir.mkdir(parents=True)
-    # The shipped build had hub_a exactly as now, and hub_b with other text.
+    # The shipped build had hub_a and chores exactly as now, and hub_b with other text.
     (toml_dir / "7_final_game.toml").write_text(
+        '[[canvases]]\nid = "chores"\n[canvases.trigger]\nlocation = "room"\n'
+        '[[canvases.nodes]]\nid = "n"\nblocks = [{type = "paragraph", content = "Dishes."}]\n'
         '[[canvases]]\nid = "hub_a"\n[canvases.trigger]\nlocation = "room"\nnpc = "npc_a"\n'
         '[[canvases.nodes]]\nid = "n"\nblocks = [{type = "paragraph", content = "A waits."}]\n'
         '[[canvases]]\nid = "hub_b"\n[canvases.trigger]\nlocation = "room"\nnpc = "npc_a"\n'
@@ -132,7 +136,8 @@ def ship(tmp_path, monkeypatch, slug, reader):
 
 def test_the_green_fixture_ships_with_its_reader_saved(tmp_path, monkeypatch):
     ok, _h = ship(tmp_path, monkeypatch, "brand_new",
-                  {"meet_a": {"want": "PASS"}, "a_hub": {"want": "N/A"}})
+                  {"meet_a": {"want": "PASS"}, "a_hub": {"want": "N/A"},
+                   "opening": {"want": "N/A"}, "office": {"want": "N/A"}})
     assert ok is True
 
 

@@ -275,7 +275,7 @@ how many fails are [off].
 | **she can say no** | at least one choice in the whole game DECLINES an offer — the field puts a real refusal on one click in fifty, and 79% of them lead somewhere the yes does not | `the-surfaces.md` R5b |
 | **what money buys opens a door** | a thing bought with the currency that survives the night is READ somewhere — money that buys meter points buys nothing | `the-economy.md` R1b |
 | a place is not a catalogue | the backstop on room size — **not** the target | `the-surfaces.md` R2 |
-| **a need shuts a door** | every declared need is read by a condition — a restore that gates nothing is a chore | `the-meters.md` M8–M10 |
+| **a need shuts a door** | every declared need is read by a condition — a restore that gates nothing buys nothing | `the-meters.md` M8–M10 |
 | a need can be met every day | each declared need has something that raises it live on every weekday — its trigger's days, narrowed by the place's `hours` | `the-meters.md` M8–M10 |
 | **the walk-in floor** | a room where she works alone with someone scheduled carries a walk-in | `the-surfaces.md` R3 |
 | **an explicit beat carries a clip** | the picture is on the beat the player is reading, not on the one above it | `register.md` S1 · `engine.md` §8 |
@@ -312,6 +312,21 @@ how many fails are [off].
 | no unknown topic | every `board.coverage[]` topic has a status but `unknown`; no list is red; a warning, `--ship` names each | `templates/sheets/coverage.md` |
 | a goal's end is built | each goal that can end, except the last, names an `ends_flag` some effect sets; a warning | `the-want.md` §0 |
 | adult wording | no banned school word anywhere a player reads; a warning, never a block | `the-voice.md` "Adult wording" |
+| a named person is where the line says | a line placing a person (name, role or kin word; a sound, a seat, asleep) holds at every five minutes it can show, by their rows, first match, `when` rows both ways; an any-NPC check backs no name; a `--ship` block | `register.md` "The truth rule" |
+| nobody is woken | no knock while someone inside is asleep; a one-time scene's person is in the building and awake at every minute it can fire; a `--ship` block | `the-map.md` R6b · `engine.md` §31 |
+| every person here has a face | each place a person's rows put them has a face there, not only a heat-gated one; a `requires_npc` no row matches is red; occupancy rows excepted; a `--ship` block | `the-first-hour.md` F5b |
+| a past line has its event | a past claim (last night, I heard, told me) reads the flag or step of that event; a met flag or a many-source meter is no proof; a warning | `register.md` "The truth rule" |
+| no one is named before they're met | narration placing a person waits for their `*_met`; every `*_met` read is set; a `--ship` block | `the-first-hour.md` F7 |
+| a latch flag is cleared | a flag driving a row's `when`, an engine-set flag, or a catch's own flag is in the daily tick or read by hours since; a `--ship` block | `state.md` · `engine.md` §28 |
+| a repeat doesn't say it's the first time | no arrival or first-time line on a repeatable's first screen without a flag; a warning | `register.md` "The truth rule" |
+| a button does something | no exit from a hub in the person's own room, or "go back in" button, that lands where it is with nothing changed; no "get dressed" that moves no garment; a `--ship` block | `the-surfaces.md` R7 |
+| a clock bucket has a catch-all | a screen whose every exit is on a clock bucket covers every minute it can be reached, its own minutes counted; a `--ship` block | `the-clock.md` C2 |
+| her clothes are named exactly | underwear or naked lines check a slot, type or item, not `worn_exposure`; "you strip" moves a garment; a warning | `engine.md` §17 |
+| one garment per slot | one `initial` and one `equip` per slot (the last wins and equip grants); a warning | `engine.md` §17 |
+| a card shows the real gates | no goal on a step counter; each meter or other person the step reads is on its card; a `--ship` block | `the-voice.md` R3 |
+| a phone line is true | a follow-up waits on `after_round`; a call never says where she is or moves her; no text or call from someone asleep; a `--ship` block | `the-phone.md` |
+| one pool, one place · the phone owns posting | no pool or long paragraph pasted into two canvases; no room button posts when the phone does; warnings | `the-phone.md` · `register.md` L3 |
+| a day word fits its window | "this morning", "it's Friday" never show outside their hours or day; a warning | `the-clock.md` C2 |
 | **the price is in one currency** | every notation on a button, plus the engine's own `currency_symbol`, resolves to ONE currency | `the-economy.md` R7 · `engine.md` §33 |
 | sentence length | the prose has not drifted dense | `register.md` |
 | prose has room | the first floor under the writing: `but` ≥ 2.88 per 1,000 words (field p10) and `and` ≤ 41.1 (field max) — compressed prose drops its joints | `register.md` — "Joints" |
@@ -466,7 +481,7 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   step, the counter never is) · LO signed the playtest (`release_page.signed_by_lo`) · the build
   exists and is a release build (`--release`) · the last release's saves load (`--saves`) · the
   declared door works · the pressure can be paid or is signposted · no empty rooms (+ exit-only) · the build
-  matches the release page · the reader passed (each touched canvas with a named person or an explicit beat has verdicts; a FAIL needs a waiver — `the-release.md` 6b) · every system has a card · every system leads to a person or a sex scene · every clothing state is read three times · her clothes are backed · every chat is caused by a scene. **Everything else is REPORTED** for LO to judge when he plays —
+  matches the release page · the reader passed (each touched canvas has verdicts; a FAIL needs a waiver — `the-release.md` 6b) · every system has a card · every system leads to a person or a sex scene · every clothing state is read three times · her clothes are backed · every chat is caused by a scene · the nine truth gates marked *a `--ship` block* above. **Everything else is REPORTED** for LO to judge when he plays —
   dialogue share, every hub met first, clips on explicit beats, the explicit floor, location fill,
   the walk-in floor, traversal heat, explicit pools by place, sentence length, a card per ladder step that says where and
   when, lines naming a future week or day, world size, systems and connections, topics on thin ground (placeholder and scouted, by name), choices whose sheet source is "guess", and every other gate. `gates.py <slug>` still
@@ -628,6 +643,10 @@ python3 manage.py package_from_toml \
 used to carry exits 2 and builds nothing.
 
 Never hand-edit `7_final_game.toml` — it is generated by the merge.
+
+**A build stops after each piece for LO to play** (one person's steps, a place, a system), never
+overnight without a stop: LO's first ten minutes of first_term 0.1 found more than every gate. A piece
+made by a template script passes the truth gates before LO plays it.
 
 ## Status
 

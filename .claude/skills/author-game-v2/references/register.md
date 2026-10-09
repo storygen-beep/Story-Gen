@@ -96,10 +96,12 @@ one was out of character, and one printed a stat that does not exist.
 **The five rules.**
 
 1. **Every fact line is checked** against the sheets and the built schedules: who is there, what
-   they are wearing, what time it is, what day.
+   they are wearing, what time it is, what day — at every minute it can show (gates *a named person
+   is where the line says*, *nobody is woken*).
 2. **A line about the past shows only behind the flag or counter that records it** — a `group`
    whose `conditions` read it. *"You're late again"* is legal inside `late_count gte 1` and a lie
-   outside it.
+   outside it. A meter many scenes raise records no one event; where she WAS needs a flag each outing
+   sets (party, shift, date), and a booking is not the date.
 3. **A big moment is a one-time step, not a repeatable.** A repeatable plays every visit, so it
    cannot carry a revelation. L3.
 4. **A consequence printed on a button is a real flag or stat**, or it is added to the design first.
@@ -369,7 +371,8 @@ scene sheet (`the-sheets.md` S1); `v2-reader` judges all nine (`agents.md`, The 
 
 **Write the same event once per band of her meter, and let each band be her voice at that level.**
 The low band keeps the pushback; the high band has lost it (`the-meters.md` W1b). Build it as a
-`group` chain on her meter with mutually exclusive bands (`engine.md` §35).
+`group` chain on her meter with mutually exclusive bands (`engine.md` §35). Adjacent groups ARE one
+chain: an unrelated line between them goes in a one-item `block_pool`.
 
 > ⚠️ **EVIDENCE — NOT A TEMPLATE.** `shady-deals`' kiss, three tiers on `$p_depravity`
 > (<15 / 15–34 / 35+): *"You lean in cautiously, pressing your lips to his with a soft

@@ -36,21 +36,17 @@ games, 84,009 of them, sorted by what the button does. (25 games and 64,594 labe
 common are *"examine the cash register"* (16, one quest), *"look around"* (9), *"examine the sleeping
 area"* (8). Scattered adventure-game objects, never a per-room browse list.
 
-Four kitchens read in full, because the kitchen is the room this skill got wrong:
+Four kitchens in the pass games (round 11), because the kitchen is the room this skill got wrong:
 
-- **Apocalyptic World** — `Approach <her>` (only if a woman is assigned to cook here, 08:00–22:00) ·
-  `Eat` (needs food in the pack **and** 30 free minutes; sets hunger 100, drops 1 food) ·
-  `Talk with Blair` (only if Blair is here) · `Back`. Behind it, five random events gated on time,
-  weather and who is around.
-- **Become Someone** (3,277 passages) — `Have Breakfast` (06:00–11:59, once a day) · `Eat with your
-  family` (evening, once a day) · `Wash the dishes` (once a day) · a portrait row of whoever is in
-  the kitchen. When all three are spent: *"You don't feel hungry right now."*
-- **Corpo Life** — the whole kitchen is one `if/elseif` on (who you are partnered with × time of
-  day), and each branch offers two or three links: breakfast, an act with that partner, and back.
-- **Degrees of Lewdity** — its farm kitchen is **341 bytes**: a line saying what is in stock,
-  `<<kitchenDisplay>>` (a 40 KB cooking system shared by every kitchen in the game), `Leave`.
+- **untangled-mind** — by the hour: the landlady cooks (*Help her*), everyone eats once a day, the
+  roommates clean up (`untangled-mind.txt:681-696`); from story stage 2, *Tease them* adds +1 to all four.
+- **in-their-own-hands** — coffee at 09:00, lunch at 12, she cooks at 17 (*Give her a hand*, +2), dinner
+  at 18; every click feeds the daily *together* count (`:1370`, `:1543-1570`).
+- **amore** — the family lunches together daily; a chat button on each person, +15 with Mom
+  (`amore.txt:14678`).
+- **corrupted-city** — the roommate cooks breakfast at 07:00; *Talk* is one flat line (`:992`, `:1129`).
 
-**Not one of them browses an object.** A kitchen in the field is a **hunger station**, a **person
+Four FAIL-list kitchens read the same way (numbers only). **Not one browses an object.** A kitchen in the field is a **hunger station**, a **person
 magnet**, and an **event stage**.
 
 ### A bedroom, read correctly
@@ -153,8 +149,8 @@ here.* Those three answers are the menu. A candidate that is none of the three i
 inside one of them, or it belongs on a different surface entirely.
 
 - **A need on this list is a real need**, declared in `board.needs[]` and holding a door shut when it
-  goes unmet (`the-meters.md` M8/M9). A restore that gates nothing is a chore, and a chore is not a
-  reason to build a screen.
+  goes unmet (`the-meters.md` M8/M9). A restore that gates nothing is not a reason to build a
+  screen.
 - **A system is what she does here again and again.** A job is a system with a card
   (`the-systems.md` SY8) — one row per system, not one per till-shaped noun.
 - **A person is a hub**, one per schedule row, and it is judged by the object test above.
@@ -296,11 +292,8 @@ down, which is the objects mistake in a new coat.
 pool** — beats the length of the model beats in `register.md`, not a scene. The temptation is to write a
 full encounter every time because that feels like more care; it is how this rule dies.
 
-> ⚠️ **Do NOT try to build DoL's engine.** Its 683 KB of shared machinery — 229 KB of prose bank,
-> organised **by body part** (hand / mouth / vagina / anus / penis / feet) rather than by scene —
-> exists *because* it is a 51 MB text game with no video. **Our variation engine is the media pool.**
-> Measured on Destroyer: its chore repeatables ship **100% identical text** and the entire variation
-> budget goes to re-rolled clip pools. Copy the structure, not the word count.
+> ⚠️ **Our variation engine is the media pool**, not a prose bank by body part (a 51 MB text game's
+> answer to having no video). Copy the structure, not the word count.
 
 **The floor is ONE branch. The rule is many.** `the walk-in floor` is an existence gate — one
 substitution rule in a room and the room is covered — and that is deliberate: which pairs get built
@@ -997,7 +990,7 @@ things, because nobody can write nineteen substantial scenes at a front desk.
 
 **The needs layer buys something the object layer never could: a reason to be in the room.** A player
 walks into a kitchen because they are hungry, not because there is a drying rack in it. And a need that
-shuts a door — *filthy means she cannot leave the house* — turns a chore into a plan.
+shuts a door — *filthy means she cannot leave the house* — turns upkeep into a plan.
 
 
 ---

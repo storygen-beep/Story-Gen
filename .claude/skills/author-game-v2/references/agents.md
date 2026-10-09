@@ -119,8 +119,8 @@ catches failure modes that redundancy cannot.
 ## The Reader — the scenes, read as scenes
 
 The agent is `.claude/agents/v2-reader.md`. Every release, after the build and before `--ship`, it reads
-each **touched** canvas (`the-release.md` 6b) with a named person, and every explicit beat, against the
-nine tests in `register.md` "What a scene contains". It returns a table — scene · test · PASS/FAIL/N/A ·
+every **touched** canvas (`the-release.md` 6b), faceless ones too, against the nine tests in `register.md`
+"What a scene contains" and two truth tests, with `scripts/who_is_where.py` beside it. It returns a table — scene · test · PASS/FAIL/N/A ·
 the line judged · why — and the same verdicts as JSON, which the session saves in
 `release_page.reader`. **It fixes nothing and scores nothing; its verdicts gate** *(LO decided, D12;
 `--ship` row *the reader passed*)*, with LO's waivers beside them. On test 1 it names the earlier canvases it checked

@@ -241,6 +241,18 @@ def passage(page):
     return page.evaluate("() => SugarCube.State.passage")
 
 
+def passage_name(page, canvas, node):
+    """The passage a canvas node is emitted as: `Canvas_<id>_Node_<node>`, or for the game's
+    starting canvas `StartingCanvas_<id>_Node_<node>` (B68; gates.py `_CANVAS_NAME` already
+    reads both)."""
+    plain = f"Canvas_{canvas}_Node_{node}"
+    start = f"StartingCanvas_{canvas}_Node_{node}"
+    has = page.evaluate("(n) => !!(window.SugarCube && SugarCube.Story.has(n))", plain)
+    if has:
+        return plain
+    return start if page.evaluate("(n) => !!(window.SugarCube && SugarCube.Story.has(n))", start) else plain
+
+
 def play(page, canvas, node="base", settle=250, tries=12):
     """Jump to a canvas node, and land on the one you ASKED for.
 
@@ -259,7 +271,7 @@ def play(page, canvas, node="base", settle=250, tries=12):
     when you are measuring substitution itself, though `sample_dispatch` is the
     better instrument for that.
     """
-    want = f"Canvas_{canvas}_Node_{node}"
+    want = passage_name(page, canvas, node)
     got = None
     for _ in range(max(1, tries)):
         out = page.evaluate(
@@ -578,7 +590,7 @@ def reach_step(page, game, ladder, upto, budget=40, settle=200):
             res["offered"] = True
             entry = ((canvases.get(cid) or {}).get("nodes") or [{}])[0].get("id", "base")
             start_blob = _save_vars(page)
-            prefix_in = f"Canvas_{cid}_Node_"
+            prefix_in = passage_name(page, cid, entry).rsplit("_Node_", 1)[0] + "_Node_"   # B68
             if play(page, cid, entry, settle=settle) is True and traits(page).get(counter, 0) == n:
                 res.update(reached=True)          # the step's entry screen itself moved it
                 continue
