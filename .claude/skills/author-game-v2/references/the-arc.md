@@ -120,6 +120,7 @@ one's explicit beat comes from outside the arc: a stranger or a one-off (A15).
   a pushy man says so, a nice man drops it.
 - **A final no exists only on a button that says so** — "(ends his path)" — and sets `final = true`.
   It closes his story, never the person: he stays in the world.
+- **Who checks what:** the gate *a no has content* takes `retry_after_days` as enough; whether a parked no reaches a reply screen is the reader's test, since a word list can't tell "Never mind." from a refusal.
 - **Where a game gives him feelings** (`the-meters.md` W1), a no may cost Warmth, never Want (R5).
 
 > ⚠️ **EVIDENCE — NOT A TEMPLATE.** In-scene lines from the passing games:
@@ -199,7 +200,7 @@ That is `the-economy.md` R1b — what money buys has to stay bought and be read 
 the arc side rather than the ledger side. A shop that sells an arc's prerequisite is doing more
 work than a shop that sells a meter point.
 
-⚠️ **A skill ladder that feeds nothing is a chore.** A practised skill is only worth the time
+⚠️ **A skill ladder that feeds nothing is wasted time.** A practised skill is only worth the time
 because other arcs read the number. Build the reader first.
 
 ### A4c · The field's meters are READ far more often than they are WRITTEN — and the gate cannot see the difference

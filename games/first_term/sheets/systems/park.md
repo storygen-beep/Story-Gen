@@ -1,6 +1,6 @@
 # [READY] System — park
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 from SYSTEMS §14 and the ledger's `park` card.
 > Every number marked "guess" is new here and waits for your yes.
@@ -12,11 +12,11 @@
 | cost | time · running costs energy · a bench gives a little back |
 | one ladder or two | one |
 | people | Zoe, running Saturday and Sunday 08:00–10:00 · Ryan and Jake later |
-| pool | `park_walk`, `park_run`, `park_watch_the_couple`, `park_selfie`, `park_hidden` · `daily = true` |
+| pool | `park_walk`, `park_run`, `park_watch_the_couple`, `park_hidden` · `daily = true` |
 | memory | each first she has had there · what she wore on the run |
 | growth | climbs |
 | sink and deadline | none: the park costs no money |
-| feeds | Exhibitionism, `followers`, energy |
+| feeds | Exhibitionism, energy |
 | reads | what she wears, Corruption, Exhibitionism |
 | what drives it (S8) | her clothing state and her two stages · walk events rotate, seen ones weighted down |
 | link into the hook | what she does in public; later, a regular may be goal 3's man from town |
@@ -33,7 +33,6 @@
 | Walk | one event from the walk pool | yes: who she passes, what they see |
 | Run | energy add −10 (guess) · Exhibitionism add +1 if Daring clothes (guess) | yes: who looks, by what she wears |
 | Rest on a bench | energy add +5 (guess) | yes, short: her body, never a toast |
-| Take a selfie | `followers` add +2 (guess) · Exhibitionism add +1 | yes: her body, the phone |
 | the next locked act | shown with what it needs | yes, one line |
 
 ## Running is about clothes, not fitness
@@ -52,7 +51,7 @@ There is no fitness meter. What she wears changes who looks and what happens.
 |---|---|---|
 | 1 · Good Girl · Covered | none | walk, rest, run · the wind and her skirt · a jogger turns to look |
 | 1, the first explicit scene | none | she walks into the couple in the bushes, and runs |
-| 2 · Curious · Daring | Corruption or Exhibitionism gte 20 | she watches the couple · a selfie on the path |
+| 2 · Curious · Daring | Corruption or Exhibitionism gte 20 | she watches the couple |
 | 2, continued | Exhibitionism gte 20 | a flash for Zoe on her run (Zoe's dare) · running in the sports bra |
 | 3 · Bold · Showing | Corruption gte 40 | naked or touching with Zoe, somewhere hidden |
 | 4 · Hungry · Watched | locked in 0.1; the button says "Needs Hungry" | strangers see her on purpose · groping in a crowd |
@@ -71,7 +70,6 @@ new person: a written age, your yes and an SP5 re-sign.
 | `park_walk` | who she passes on the path | no | her clothes · rotates | once a day |
 | `park_run` | a run; who looks | no | her clothes | once a day, energy on the trigger |
 | `park_watch_the_couple` | a couple in the bushes: she walks into them; later, she watches | yes | her stage | once a day |
-| `park_selfie` | a photo on the path for her feed | no in 0.1 (guess) | Exhibitionism | once a day |
 | `park_hidden` | Zoe, somewhere hidden, after their run | yes | Corruption gte 40 · Zoe is there | once a day |
 
 `park_watch_the_couple` is the early first explicit beat (LO, 2026-10-08): strangers, an accident at stage 1.
@@ -108,3 +106,4 @@ new person: a written age, your yes and an SP5 re-sign.
 | `park_hidden` | LO, 2026-10-08 |
 | Zoe in the park, weekend mornings | LO, 2026-10-08 · the hours are a guess |
 | the park couple as the first explicit beat | LO, 2026-10-08 |
+| the feed and the selfie live on the phone only | LO's play note, 2026-10-08 (sweep A1-34, K6) |

@@ -1,0 +1,27 @@
+27 · hub_mark_kitchen · hl_dinner_tease
+sheet: sheets/people/npc_mark.md:105
+signed line: tease (Curious): He watches @player eat. "Slower."
+
+facts (truth rule, checked against the built 7_final_game.toml and the sheets):
+- Choice in: "Eat slowly for him." corruption gte 20, mark_step gte 3, ate_dinner is_false. Mark Want +1.
+- Who: Mark. Laura is there on Mon, Tue, Thu, Fri, not on Wednesday (he cooks); she lives in a group.
+- Clothes: none named. Mark's early words: legs, ass.
+
+=== SCREEN (blank line = new beat; a line in quotes is a dialog block; *italics* is a thought_bubble) ===
+
+You eat slow, the way he's watching you eat. Fork to your mouth, lips closed around it, the fork sliding back out clean. Mark stops cutting his meat.
+"Slower."
+So you go slower. Sauce runs down your thumb, and you lick it off while he watches your mouth. He puts his knife down and doesn't pick it up again.
+
+*He's telling you how to eat. And you're doing it.*
+
+=== VARIANTS (each a group on the gate shown) ===
+
+[variant 1 · group: npc_at_location npc_laura is_present · added after beat 1]
+Your mom talks about her day. Mark nods at her and keeps his eyes on your mouth.
+
+=== MEASURED · gates.py --beat (the screen; each variant on its own) ===
+  beat 1: 59 words · explicit 1 (lick) · median sentence 11 · dashes 0 · act rungs: oral · body words by sentence: 0 0 0 0 1 0
+  beat 2: 10 words · explicit 0 · median sentence 6 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0
+  all: words 69 · explicit 1 · median sentence 9 · 0/2 register as explicit
+  variant 1: 17 words · explicit 0 · median sentence 11 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0

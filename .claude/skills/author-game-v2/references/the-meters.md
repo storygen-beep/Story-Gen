@@ -141,11 +141,10 @@ repeatable carries the slope as two voices per act (`the-arc.md` A15, thin).
 
 ### W1b-i · The unit is +1, and the raise goes through a named widget
 
-One game (`zaras-school-life`, numbers only) raises a character's meter 107 times and every raise is
-`+1`, through one named widget per character, called from the ordinary loop — chores, the same room,
-time in his space — and each call checks three things: what she is wearing, that he is there, and a
-die. One number, one widget, +1s, three checks. `+1` is also the median raise in five of eleven
-field games.
+In the pass games the household talk loop pays `+1` a click in 7 of 9 (IHOH chat +1 friendship,
+`in-her-own-hands.txt:5721`; UM tease +1, `untangled-mind.txt:1698`), one button on the person at their
+spot, reading what she wears in AM and IHOH. One FAIL game (numbers only) raises a meter 107 times, every
+raise `+1`. `+1` is the median raise in five of eleven field games.
 
 ## W2 · A throttle's job, stated positively
 
@@ -795,7 +794,7 @@ clicks to the top band  ·  in-game minutes to the top band
 - **Spacing** is free and always on, but never counts as the brake.
 - **A hard throttle** is lever 2 sized to a real window, or lever 3, or lever 4. Prefer **two**.
 - **The rung pays** — brake-only is grind. If a rung costs energy and time and gives back nothing
-  the player wanted, you have built a chore. The payoff is content, not a number: a new line, a
+  the player wanted, you have built grind. The payoff is content, not a number: a new line, a
   clip they have not seen, a door that opens.
 
 ### M5 · How to throttle a TRIGGERLESS rung
@@ -930,15 +929,10 @@ household's. What is fixed is the *form*.
 rolls an event (`engine.md` §30.1). A need behind a content toggle has an off switch, a start choice
 (`the-surfaces.md` R5b.4); with it off, nothing reads it.
 
-The field, on the fourth field:
+In the field (three FAIL-list games, numbers only) the fourth field is a stock or a window: no food,
+no meal; breakfast once a day in its hours; no ingredients, no recipe.
 
-| game | need | what it shuts |
-|---|---|---|
-| Apocalyptic World | hunger | `Eat` needs food **in the pack** — no food, no meal |
-| Become Someone | hunger | breakfast / dinner / dishes are **once each per day**, in their own windows |
-| Degrees of Lewdity | ingredients | a recipe you lack the stock for **cannot be cooked** |
-
-### M9 · A need that shuts nothing is a chore
+### M9 · A need that shuts nothing buys nothing
 
 **Gate 29.** Every key in `board.needs[]` must be read by at least one condition somewhere in the
 game. Deterministic, no threshold to invent: either something gates on it or nothing does.

@@ -1,6 +1,6 @@
 # [READY] Scene — touch_bed
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. Touching herself in her room: a repeatable row (LO, 2026-10-08, question 13).
 
@@ -35,3 +35,4 @@ No history words on any screen: each one repeats.
 | touching herself in her bed, from Curious | LO, 2026-10-08 (question 13) |
 | the prose | `v2-prose`, measured by `gates.py --beat`, 2026-10-08 |
 | one voice for stages 2–3 | LO, 2026-10-08: SP2 gives both "warming up" |
+| "someone's TV mutters downstairs" only while Mark is in the living room (his rows, 22:00–02:00); in an empty house the line is the quiet | sweep A6-28 |

@@ -1,0 +1,22 @@
+33 · hale_thursdays · hand
+sheet: sheets/scenes/hale_05_seven_twenty.md:31
+signed line: Thursdays at seven: her hour, his hands on her (at Bold, above her waist, as in B 4), the photo face-down, Claire due at 7:30.
+
+facts (truth rule, checked against the built 7_final_game.toml and the sheets):
+- Choice in: "Sit on the desk." from door. Repeatable, Thu 18:30 to 19:05, hale_step eq 5, corruption gte 40. Exits: "Make him watch the clock." and "Button up." to leave.
+- Who: Dr. Hale, door locked (door node). Claire's pickup at half past seven is a rule of the world (step 4's sheet).
+- Clothes: none named; she bares herself inside the act.
+- Repeatable: no "last time", no "again" history. Hands above her waist only; his mouth stays at her neck.
+- Hale's middle words: tits, nipples, cock.
+
+=== SCREEN (blank line = new beat; a line in quotes is a dialog block; *italics* is a thought_bubble) ===
+
+You sit on the edge of his desk and bare your tits for him. Dr. Hale stands between your knees, and both his hands come up at once. He cups your tits and squeezes, hard, his thumbs dragging across your nipples. You arch into him. His mouth is at your neck, his breath ragged and hot. He kneads one tit and pinches the nipple between his finger and thumb until you moan. His cock is hard against the inside of your knee through his trousers. You hold his wrists and keep his hands right where they are, on your tits.
+
+"God, @player," he says into your neck. "Claire's here at half past."
+*His wife is on her way. His hands are still on you. The clock ticks over his shoulder, and neither of you looks at it.*
+
+=== MEASURED · gates.py --beat (the screen; each variant on its own) ===
+  beat 1: 100 words · explicit 8 (cock, moan, nipple, tit, tits) · median sentence 13 · dashes 0 · act rungs: hands · body words by sentence: 1 0 0 2 0 0 3 1 1
+  beat 2: 37 words · explicit 0 · median sentence 11 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0 0 0
+  all: words 137 · explicit 8 · median sentence 13 · 1/2 register as explicit

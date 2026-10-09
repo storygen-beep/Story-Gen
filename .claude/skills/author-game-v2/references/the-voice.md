@@ -130,9 +130,10 @@ duration half is a lint rather than a gate.
 
 **A person's cards come from their ladder, one per step, and each says where and when.** The
 field's best guidance is one line per character step naming the place and the time; a card keyed to
-a meter band tells the player a number, not a place (Round 3 §2.5; being lost is the top complaint,
-15.5% of Round 1 comments). Each declared ladder step (`board.characters[].ladder`) names its place
-and window, so `scripts/guidance_from_ladder.py <slug>` writes the cards; the author writes the lines.
+a meter band tells the player a number, not a place (Round 3 §2.5). Each declared ladder step
+(`board.characters[].ladder`) names its place and window, so `scripts/guidance_from_ladder.py <slug>`
+writes the cards, their goals the step's own gate and never its counter ("1 / 2" says nothing — gate
+*a card shows the real gates*); the author writes the lines.
 The tip may be in her voice (*"I wonder what he's into…"*, In Her Own Hands) if the place and time
 stay in it. `--ship` reports any step without such a card.
 

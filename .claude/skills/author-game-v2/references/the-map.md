@@ -237,9 +237,11 @@ spend the words on the far side of the door.
 ### R6b · The door always renders. What is conditional is whether the door EXISTS
 
 **Do not build a rule that skips the threshold when it has nothing to say.** It is the first thing
-anyone designs and the field does not do it: `become-someone` ships **54 door screens — 50 gating on
-occupancy, 46 on occupancy AND time of day, median 14 words, 53 of 54 carrying a way back** — and
-not one of them is skipped.
+anyone designs and the field does not do it: one FAIL-list game (numbers only) ships **54 door screens —
+50 gating on occupancy, 46 on occupancy AND time of day, 53 carrying a way back** — none skipped.
+
+**A knock respects who sleeps there.** A knock that can show while the person inside is asleep by their
+row wakes them: write it as that scene, or gate it to their waking hours (gate *nobody is woken*).
 
 What the field makes conditional is the **door's existence**. The reference game (numbers only) puts
 one character's flat on the street only once that character's stage reaches 3; from then on the
@@ -337,7 +339,8 @@ rather than against a guess.
 *(LO decided, D10.)*
 
 - **Area → building → room.** Time is charged on crossing into another area (`crossing_costs`), not on
-  every room inside it.
+  every room inside it. A home or a flat is a building: one `is_container` place holding rooms that fit
+  its kind (a flat: living room, kitchen, bathroom, bedroom), so the street lists *Home*, not *Hall*.
 - **No fast travel**, for now.
 - **Places she has not found are hidden** (`hidden_until`); **closed places show why**
   (*"Closed. Opens at 10:00 PM."*, `hours`; the clock prints 12-hour, `v2.py:4684`).

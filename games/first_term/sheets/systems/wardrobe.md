@@ -1,6 +1,6 @@
 # [READY] System — wardrobe
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 from SYSTEMS §7 and the ledger's `wardrobe` card.
 > Every number marked "guess" is new here and waits for your yes.
@@ -98,6 +98,28 @@ Both events add Exhibitionism +1 the first time each day she is in that state (g
 | the shop's items are read somewhere | what money buys opens a door |
 | the wardrobe changes lines | the wardrobe is read |
 
+## On the phone: the selfie and the feed (LO's play note, 2026-10-08)
+
+The selfie and the feed live on the phone only; no room has a row that copies them.
+
+| row | where | cost and effect, with op (S4) | BRAKE (S9) |
+|---|---|---|---|
+| "Post a selfie" | the phone, anywhere | Covered: `gate_trait` exhibitionism, min 0 · `followers` add +3 to +8 | once a day (the engine's daily cap) |
+| "Post one in your bra" | the phone, anywhere | Daring: exhibitionism 20 or more · `followers` add +10 to +25 | once a day |
+| "Post one topless" | the phone, anywhere | Showing: exhibitionism 40 or more · `followers` add +40 to +90 | once a day |
+
+The engine gates a post only on one meter, not on what she wears or where she is, so each label names
+the act, and a locked rung shows as "🔒 Post one in your bra" until she reaches the stage. A post moves
+only `followers`.
+| the feed | the phone | reads `followers` and, behind the flag that makes each true, posts about her (a party post only after `party_went`) | none needed: it writes nothing |
+
+## A garment reaction is a line in a hub (LO's play note, 2026-10-08)
+
+A person's line about what she wears ("his line: short skirt") is a line inside that person's existing
+hub, read by her clothes, never its own button. It is true where it shows: a line that names another
+person, a place or a time shows only in the hub where that holds (Laura's towel line differs between
+the kitchen and the stairs; Jake's "tonight" line only at the door after a date).
+
 ## Why — the source of each key choice
 
 | key choice | source |
@@ -110,3 +132,5 @@ Both events add Exhibitionism +1 the first time each day she is in that state (g
 | which stage each state needs | guess, from SP2's heat table |
 | shop hours, the bra's price | guess |
 | the refusal line | guess |
+| the feed and the selfie live on the phone only | LO's play note, 2026-10-08 (sweep A1-34, K6) |
+| the selfie rungs gate on Exhibitionism, labels name the act | LO, 2026-10-08 (the engine reads only one meter for a post) |

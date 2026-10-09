@@ -1,6 +1,6 @@
 # [READY] Scene — ryan_06_after_the_shower
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. The explicit screen is written by `v2-prose` and measured.
 
@@ -43,3 +43,4 @@
 | no touching on this screen | SP2: showing at stage 3; his hands wait for step 7 |
 | the prose | `v2-prose`, measured by `gates.py --beat`, 2026-10-08 |
 | the parked towel no | guess |
+| Kayla in the house on Saturday morning | LIVES (she stays Friday night) · LO, 2026-10-08 (question 70): she leaves Saturday by 10:00, so the step is true any Saturday 08:00–10:00 · sweep A2-10 |

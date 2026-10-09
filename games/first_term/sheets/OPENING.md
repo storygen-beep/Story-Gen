@@ -1,6 +1,6 @@
 # [READY] Opening — First Term
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 from SP1, SP7, IDEA §3–4 and the place and person sheets.
 > A screen walk: one row per screen, in order, with the button quoted. The lines in quotes are labels and
@@ -73,8 +73,9 @@ The breakfast scene sets `rent_starts`. The rent is armed here and charged only 
 | Ask for a job at the café | `cafe_job` set |
 | Have $75 by Sunday | `money` 75 or more |
 
-**Screen 9, the plain lines** (the game's own voice, not a scene): *You need $75 by Sunday. The café near
-campus is hiring. Classes are three a day; skipping one costs your grade. People are in different places at
+**Screen 9, the plain lines** (the game's own voice, not a scene): *You need $75 by Sunday. The café in
+town is hiring: fifteen minutes on the bus. Campus is fifteen minutes on foot. Classes are three a day;
+skipping one costs your grade. The buttons under the clock let you wait. People are in different places at
 different hours. What you wear changes how they look at you. Hygiene is on: shower to keep it up.*
 
 **Screen 9, the hook:** class at 08:30, the café is hiring, Mark's $75, and Ryan's door shut behind her.
@@ -103,7 +104,9 @@ scene, not a row (LO, 2026-10-08).
 | energy, hygiene | the shower; the plain line; the hygiene choice | energy, hygiene |
 | her two meters | — | her two stages, at the bottom |
 | parties | not in the opening: Zoe tells her on campus in week 1 | — |
-| the park | not in the opening: its own place, open all day | — |
+| the park | not in the opening: its own place, open all day, 10 minutes' walk | — |
+| life at home | breakfast with Laura on screen 7 is its first beat; it sets `ate_breakfast`, so the kitchen doesn't offer breakfast again that morning | — |
+| the map and the clock | the plain lines name the walk and the wait button | the wait buttons under the clock |
 | the phone | Mark's rent text, caused by `rent_starts`, arrives Saturday | — |
 
 ## The early first explicit beat
@@ -145,3 +148,4 @@ Hale's office line each read which answer she gave.
 | the clock after each screen | guess |
 | the start-choice readers | LO, 2026-10-08 (flag names a guess) |
 | the park couple, not in the funnel | LO, 2026-10-08 · `the-arc.md` A15 |
+| the walk and the wait in the plain lines; breakfast sets `ate_breakfast` | LO, 2026-10-08 (picks 1, 2, 6) |

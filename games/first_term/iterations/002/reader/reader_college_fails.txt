@@ -1,0 +1,44 @@
+## hook
+- hub_zoe_class — "Notes are for people with no friends. I'll copy yours." — only the zoe_step 2 band and the no-bra band point ahead; at steps 0, 1 and 3+ nothing names what comes next
+- hub_hale_office — "Dr. Hale looks up from a pile of papers." — the 'for now' is gone; only the step-2 clock line points ahead, at steps 1, 3, 4 and 5 nothing does
+- hub_jake_class — "Draw me after. I'll hold still, I swear." — no line names a next scene; no date, no step
+- hub_jake_gym — "You're going to get me thrown off the team." — no line names what comes next
+## who notices
+- college_event_desk_guy — "He comes over your knuckles, under the desk where nobody sees." — the look and the no have a girl two seats down; the hand path has nobody, and the ledger declares nothing
+## the written no
+- hale_02_lost_his_place — "Fix your skirt." — the only refusal needs a short skirt; in jeans, leggings or a dress every button is a flash
+- hale_thursdays — ""Not tonight." / "Then why did you come?"" — the no is written but moves nothing: no flag, no effect, no park
+- hub_jake_gym — "Go." — his offer gets a bare exit: nothing written, nothing moves
+- hub_art_office — "Go." — she is asked to stand in the light and sit for her; the only answer is a bare exit
+- hub_business_office — "Go." — the retake offer's no is a bare exit, nothing written
+## the numbers and the clothes agree
+- hale_04_claire_knocks — "Your hand goes to your own top button." — renders in every top; a T-shirt or a dress has no button, and "Button up." is offered to all
+- hale_thursdays — "Button up." — offered in any top, a T-shirt included; and on that path 5+5 minutes pass before "When the twenty minutes are gone"
+- college_class_figure — "Pose for the class. (Needs Watched) / It comes later, when you're Hungry." — the button names Watched (exhibitionism 60), the screen it opens names Hungry
+## true on every visit it can render on
+- canteen_eat — "You eat it all, fast, standing up by the windows" — the pool says she has eaten before she chooses; on the visit she clicks "Not hungry." the line is false
+- hub_zoe_class — "Whisper with her till it starts." — Zoe's row holds the hall Mon 13:00-14:30 and Tue/Thu 08:30-11:45; at Mon 14:20 or Tue 11:30 the class started long ago
+- hale_01_first_lecture — "a man in his late thirties is setting up his slides" — the trigger runs Mon 08:30-10:00; at 09:59 he is setting up and the pen falls "Twenty minutes in" after the class has ended
+- hale_02_lost_his_place — "today you sit in it on purpose, right in front of the lectern" — fires to Mon/Wed/Fri 09:59; the class ends 10:00, yet he stops mid-sentence after 09:59 and "After class" follows an hour later
+- hale_04_claire_knocks — ""You ready, love?"" — the trigger opens 18:30, so the knock lands at 18:40; Nadia fixes the pickup at half past seven and the ledger says close to it
+- hale_05_seven_twenty — "When the room empties you stay in the front row" — fires from Mon/Wed/Fri 08:30, the minute his class starts; the room has not emptied
+- hale_thursdays — "You walk out past the car park, where his wife's car will be soon." — fired at 19:19 the leave screen lands at 19:39, after the 19:30 pickup Nadia names
+- hub_jake_class — "Talk till the lecturer starts." — his rows hold the hall Tue/Thu 08:30-10:00; at 09:55 the class is nearly over. Also "Everyone was looking at you tonight." plays at 08:30 in Laura's dress
+- hub_jake_gym — "Everyone was looking at you tonight." — the gym row is Tue/Thu 15:00-17:00; 'tonight' is false at every minute it shows
+- college_class_psych — "He finds you in the front row before he starts." — fires to Mon/Wed/Fri 09:59 (class 08:30-10:00); the class has a minute left and every button spends 90 minutes of it
+- college_class_business — "The lecturer is a grey man in a grey suit who calls the register" — fires to Mon/Wed 11:44 (class 10:15-11:45); the class has a minute left and every button spends 90 minutes of it
+- college_class_bio — "Focus. (90 minutes, 10 energy)" — fires to Tue/Thu 11:44 (class 10:15-11:45); the class has a minute left and every button spends 90 minutes of it
+- college_class_figure — "The model drops her robe on the platform" — fires to Tue/Thu 09:59 (class 08:30-10:00); the class has a minute left and every button spends 90 minutes of it
+- meet_business — "I don't do extensions. I don't do excuses. ... Sit down." — the class-opening speech fires to Mon/Wed 11:44 (class ends 11:45)
+- meet_bio — "Hi. I'm— I'll be taking you this term." — the class-opening speech fires to Tue/Thu 11:44 (class ends 11:45)
+- meet_figure — "You'll draw what's there, not what you think is there" — the class-opening speech fires to Tue/Thu 09:59 (class ends 10:00)
+- college_event_desk_guy — "He keeps glancing at your hands for the rest of the class." — fires to 09:59 / 11:44 with a minute of class left, then spends 90 minutes 'back to the class'
+- college_event_dress_code — "Before the class starts, the lecturer calls you down to the front" — fires through every class window; at 09:59 the class is ending, not starting
+- college_exam_psych — "the clock on the wall starts" — the 90-minute midterm starts at Mon/Wed/Fri 09:59, a minute before its slot ends
+- college_exam_business — "the clock on the wall starts" — the 90-minute midterm starts at Mon/Wed 11:44, a minute before its slot ends
+- college_exam_bio — "the clock on the wall starts" — the 90-minute midterm starts at Tue/Thu 11:44, a minute before its slot ends
+- college_exam_art — "the clock on the wall starts" — the 90-minute midterm starts at Tue/Thu 09:59, a minute before its slot ends
+- hub_hale_class — "Dr. Hale is laying out his notes on the lectern before the class starts" — renders whenever the lecturer's row holds the hall, to the class's last minute
+- hub_art_class — "The art lecturer is setting out charcoal at the easels before the class starts" — renders whenever the lecturer's row holds the hall, to the class's last minute
+- hub_business_class — "The Business lecturer is writing today's headings on the board ... before the class starts" — renders whenever the lecturer's row holds the hall, to the class's last minute
+- hub_ta_class — "The TA is setting out handouts before the class starts." — renders whenever the lecturer's row holds the hall, to the class's last minute

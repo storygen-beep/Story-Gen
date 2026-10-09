@@ -516,7 +516,7 @@ rows in `CONDITION_SCHEMA` (`template_import.py:1670-1677`).
 | `slot` | one of 7 fixed slots: `bra`, `underwear`, `top`, `bottom`, `dress`, `legwear`, `shoes` (`template_import.py:271`) |
 | `exposure` | 0 covers, 1 shows underwear-level skin, 2 leaves the region bare while worn (a mesh top) |
 | `type` | **one** tag per item, read by `worn_type` (no tag list: a garment cannot be both "skirt" and "wet") |
-| `initial`, `price` | in the wardrobe at the start, or bought |
+| `initial`, `price` | owned **and worn** at the start, the last `initial` in a slot winning (`v2.py:1192-1204`); or bought |
 | `conditions` | refuse equipping it (`setup.equipItem`, `v2.py:1715-1716`): the daring price to put it on |
 | `beauty`, `corruption` | folded as a MAX, not a sum: one loaded garment sets the number on its own |
 
@@ -533,7 +533,7 @@ wardrobeEffects = [
 
 Exact path: `canvases[].nodes[].exit_block.config.wardrobeEffects` (a choice takes the same key). Fields
 are **`action`** and **`item_id`** — not `op` / `itemId`. `action` is `add` (into the wardrobe), `equip`
-(added and put on), `unequip` (taken off, kept: `setup.unequipItem`, `v2.py:1738`) or `remove` (taken off
+(added and put on — it grants what she does not own, and two in a slot leave the last, `v2.py:16622-16624`), `unequip` (taken off, kept: `setup.unequipItem`, `v2.py:1738`) or `remove` (taken off
 and gone: `setup.removeFromWardrobe`, `v2.py:1751`); one helper serves every emitter
 (`_wardrobe_effect_js`, `v2.py:16613`). An unknown action, or an `item_id` that is missing or not in
 `[[clothing]]`, is a build error (`template_import.py:6247`).
@@ -687,7 +687,8 @@ that closed set (R2), and **8 is a backstop, not a size** (gate 20 — never tre
 
 `generators/v2.py:5244-5258` (the runtime branch) and `:9298` (the human-readable dispatcher).
 `operator` is `is_present` | `is_absent`; `location_id` accepts a slug or a UUID. **`npc_id` is
-optional — omit it and the test becomes "is this room occupied by anybody".**
+optional — omit it and the test becomes "is this room occupied by anybody"**, which backs no line naming
+one person. ⚠️ No condition reads where the PLAYER is: a phone text or call cannot check it (`the-phone.md`).
 
 Verified live in a built game, not just read: a choice carrying
 `npc_at_location(the_front_room, npc_mark, is_present)` rendered at 23:10, when Mark's
@@ -1120,7 +1121,8 @@ Read and cite before using; delete from this list once promoted above.
 
 *(`_render_group_chain` collects consecutive `group` blocks into one variant chain at
 `v2.py:17138-17144`, and first match wins; lint
-**adjacent groups** lists the dead ones.)*
+**adjacent groups** lists the dead ones. A standalone line goes in a one-item `block_pool`, which
+renders directly and breaks the chain, `v2.py:17150-17155`.)*
 
 ---
 
@@ -1241,7 +1243,8 @@ never arms, so the flag belongs on the canvas that first gives her a way to earn
   never prints, and the importer warns when `stage_lines[0]` has words (`template_import.py:6829`);
   put those words in the rent's own text.
 - Carry sets the flag `rent_carried` and ignores `grace_periods` and `eviction_mode`. **No game over
-  over rent** *(LO decided, D8d)*.
+  over rent** *(LO decided, D8d)*. ⚠️ Nothing in the engine clears it (`v2.py:14418-14427`): the game
+  clears it on a full week, or it says "short" for the rest of the save (gate *a latch flag is cleared*).
 - **The old route**, without `on_short`: a fixed `amount`, a short week spends `grace_periods`, then
   the eviction branch — `eviction_mode = "flag_set"` sets `eviction_flag`; the default `"game_end"`
   ends the game.
@@ -2736,6 +2739,9 @@ The guard sits **above** both `showWhenBlocked` branches on purpose. *"He is not
 cooldown, and `cooldownMessage` defaults to `"Available again later"` — surfacing that would be a
 lie. Hide the row; do not explain it.
 
+⚠️ **The match is the exact place** (`v2.py:5889-5896`): a canvas in a child room (her bedroom off the
+flat) never matches a person whose row says the flat, and never shows (gate *every person here has a face*).
+
 > **Why it was worth an engine change rather than a rule.** The field was inert on this lane, so
 > writing it and omitting it played identically, and the lint that hunts this defect
 > (`bound to a person, no face`) keys on the field, so it cannot see a canvas that left it out. A field
@@ -2751,6 +2757,9 @@ both inline blocked loops, and random encounters. Plus one guard in `_isCanvasAv
 Before this, `is_active` was a real column on `CanvasTrigger` (`apps/stories/models.py:353`),
 written identically by both build paths (`template_import.py:9183`, `game_graph.py:336`), and read
 by **nothing** in the generator.
+
+A canvas only a door option or a call reaches takes `substitution_only = true` with `is_active = true`:
+no selector surfaces it (`v2.py:5764`, `:5795`, `:5827`), and the gates still see what it sets.
 
 > **What that meant.** An author switches off the canvas that sets a door's key flag so the door
 > stays locked for the release. With `is_active` ignored, the canvas auto-fired on entry, set the

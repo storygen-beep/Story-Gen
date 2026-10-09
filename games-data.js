@@ -15,12 +15,11 @@
 //                        NOT whatever is currently half-built in the working tree.
 window.GAMES = [
   {
-    // Listed 2026-10-08. Built overnight with author-game-v2 from the signed sheets
-    // (games/first_term/iterations/001/MORNING_REPORT.md). 29 places, 21 people, 158 canvases,
-    // 77 cards, 7 ladders / 44 steps (all reached in the build), ~29,000 words, 57/71 gates
-    // (the reds are written down with reasons in iterations/001/BUILD_LOG.md). DEV + DEBUG build
-    // on LO's call: the jump list, stat controls and missing-media placeholders are live. No media
-    // harvested. No `version`: nothing has shipped.
+    // Listed 2026-10-08; rebuilt 2026-10-10 as iteration 002, the everyday pass (areas and walk
+    // times, home life, college, town, the phone; games/first_term/iterations/002/REPORT.md).
+    // 60/88 gates, shape 22/0, --ship NO (8 BLOCK rows, reasons in REPORT.md); 18 of Laura's
+    // screens are still PLACEHOLDER. DEV + DEBUG build on LO's call: the jump list, stat controls
+    // and missing-media placeholders are live. No media harvested. No `version`: nothing has shipped.
     slug: "first_term",
     title: "First Term",
     badge: "v2",

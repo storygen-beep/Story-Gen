@@ -36,8 +36,27 @@ def test_one_card_per_step_plus_a_terminal_card():
         assert c["when"] == [{"type": "trait", "subject": "player", "trait": "jo_stage",
                               "op": "eq", "value": n - 1}]
         assert c["tip"] == "Shed, every day 18:00–22:00"
-        assert c["goals"][0]["value"] == n
+        # B84/B110 (2026-10-08): the goals are the step's real gate, never the counter,
+        # which renders "— n-1 / n".
+        assert all(g.get("trait") != "jo_stage" for g in c["goals"])
     assert cards[3]["terminal"] is True and cards[3]["when"][0]["op"] == "gte"
+
+
+def test_goals_are_the_steps_gate_and_other_counters_go_in_the_tip():
+    st = state()
+    lad = next(ch["ladder"] for ch in st["board"]["characters"] if ch.get("ladder"))
+    lad["steps"][1]["gate"] = [{"trait": "corruption", "op": "gte", "value": 20},
+                               {"trait": "want", "op": "gte", "value": 30, "npc": "npc_jo"},
+                               {"flag": "kissed_jo"},
+                               {"trait": "kim_step", "op": "gte", "value": 2},
+                               {"type": "modifier", "modifier_key": "drunk", "operator": "is_inactive"}]
+    st["board"]["characters"].append({"id": "npc_kim", "ladder": {"counter": "kim_step", "steps": []}})
+    card = tomllib.loads(gfl.generate(game(), st))["quest_cards"][1]
+    keys = [g.get("trait") or g.get("flag") for g in card["goals"]]
+    assert keys == ["corruption", "want", "kissed_jo"]
+    assert card["goals"][1]["subject"] == "npc" and card["goals"][1]["npc_id"] == "npc_jo"
+    assert "step 2" in card["tip"] and "drunk" in card["tip"]
+    assert all(g.get("label") for g in card["goals"])
 
 
 def test_days_are_phrased_for_a_player():

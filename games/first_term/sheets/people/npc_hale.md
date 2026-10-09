@@ -1,6 +1,6 @@
 # [READY] Person — Dr. Hale
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the place sheets. Id `npc_hale`.
 
@@ -43,10 +43,17 @@ A ceiling, never a floor. LO took these, 2026-10-08.
 | 1 (Hale B 1) | `hale_01_first_lecture` | `lecture_hall` | Mon 08:30–10:00 | none | the counter only | "Look away." (parked) | Monday, first class: Psychology with Dr. Hale. |
 | 2 (Hale B 2) | `hale_02_lost_his_place` | `lecture_hall` | Mon, Wed, Fri 08:30–10:00 | Corruption 20 · Exhib. 20 | exhibitionism add +3 | "Fix your skirt." (parked) · his: "Not here. Office hours." | The next Psychology class, front row. |
 | 3 (Hale B 3) | `hale_03_photo_face_down` | `hale_office` | Thu 18:00–19:30 | Corruption 20 · Exhib. 20 | the counter only | "Just the paper." (parked) | Thursday evening: Dr. Hale's office on the faculty floor. |
-| 4 (Hale B 4) | `hale_04_claire_knocks` | `hale_office` | Thu 18:30–19:30 | Corruption 40 · Exhib. 40 | exhibitionism add +3 | "Button up." (parked) | Thursday evening in his office, close to half past seven. |
+| 4 (Hale B 4) | `hale_04_claire_knocks` | `hale_office` | Thu 18:30–19:30 | Corruption 40 · Exhib. 40 | exhibitionism add +3 | "Button up." (parked) | Thursday evening in his office, before his wife comes for him. |
 | 5 (Hale B 5) | `hale_05_seven_twenty` | `lecture_hall` | Mon, Wed, Fri 08:30–10:00 | Corruption 40 | the counter only | "See you in class." (parked) · his: "This has to stop." | After a Psychology class: stay behind. |
 
 Every step's gate also says the drinks boost is off. Stage numbers: 20 is Curious or Daring, 40 Bold or Showing.
+
+## Card goals (LO's play note, 2026-10-08)
+
+Each guidance card's goals are the step's real requirements: the meters, flags, place and hour in its
+row above. Never the step counter (no "1 / 2"). A requirement on another person's ladder is named as
+the event, e.g. "after Ryan's feet-in-his-lap night".
+
 
 ### Leak and promise (S5)
 
@@ -72,6 +79,16 @@ Every step's gate also says the drinks boost is off. Stage numbers: 20 is Curiou
 
 **Step 2 and the wardrobe (LO, 2026-10-08):** no panties at Daring, for this step only. It is a flash for one person she knows. Inside the step she chooses it; the wardrobe's rule for leaving a room stays at Showing.
 
+### Messages, per reply (LO's note, 2026-10-08)
+
+Each follow-up waits for her reply (`after_round`), one answer per reply (`after_choice`). A college
+email, so whole sentences. Lines are samples (guess).
+
+| round | Hale | her reply | after that reply |
+|---|---|---|---|
+| 1 | "Office hours are Thursday, after six. Bring the essay." | "I'll be there." | "Good. — H." |
+| | | "I can't this Thursday." | "Then next Thursday. — H." |
+
 ## Rows a gate needs
 
 | row | gate |
@@ -87,3 +104,6 @@ Every step's gate also says the drinks boost is off. Stage numbers: 20 is Curiou
 | Thursday office on the faculty floor | LO, chat 2026-10-07 |
 | an email thread for a professor | guess |
 | his lines | guess |
+| messages per reply | LO's play note, 2026-10-08 (chats wait for her reply) · lines guess |
+| fix from the false-line sweep | sweep A4-19 (2026-10-08) |
+| card goals are the step's real requirements | LO's play note, 2026-10-08 · sweep K8 and its 38 more cards |

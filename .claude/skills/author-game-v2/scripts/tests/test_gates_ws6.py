@@ -79,8 +79,9 @@ def green_state():
             "release_page": {"version": "0.1", "people": ["npc_a"],
                              "door": {"canvas": "office", "choice": "Take the closing shift"},
                              "signed_by_lo": True, "signed_at": "2026-09-26",
-                             # NC1: the reader has read both canvases with a person on them.
-                             "reader": {"meet_a": {"want": "PASS"}, "a_hub": {"want": "PASS"}}}}
+                             # NC1 + B81 (2026-10-08): the reader has read every canvas.
+                             "reader": {"meet_a": {"want": "PASS"}, "a_hub": {"want": "PASS"},
+                                        "opening": {"want": "N/A"}, "office": {"want": "N/A"}}}}
 
 
 def rows(tmp_path, monkeypatch, game=None, state=None, release_rc=0, saves_rc=2,

@@ -1,6 +1,6 @@
 # [READY] Person — Nadia
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the place sheets. Id `npc_nadia`.
 
@@ -39,3 +39,4 @@ None in 0.1. Not someone she is involved with in 0.1.
 |---|---|
 | Nadia kept | LO, 2026-10-02 |
 | her rows | LIVES §3 |
+| "He'll lose his place again." only after Hale B 2 (`hale_step` 2 or more); every line about a past event shows only behind the flag that records it | LO's play note (2026-10-08) · sweep A4-16, K7 |

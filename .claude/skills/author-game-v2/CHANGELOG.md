@@ -9,6 +9,161 @@ same turn: what changed, why, and how it was verified.
 
 **What.** `references/the-clock.md` §on the visible clock said the sidebar renders "a live 12-hour reading". The engine now registers a SugarCube Setting (`clock24`), and every engine-printed time — sidebar, Schedule page, schedule hints, time-of-day gate text — goes through `setup.formatTime`, so the line now says 12-hour by default, 24-hour if the player ticks it. **Why.** A player asked for a 24-hour clock on F95 and LO shipped it in Vesper 0.2.3.1; the old sentence became false. Nothing for authors to do: prose times ("2 am", "eleven") are not converted and should not be. **Verified.** Vesper release smoke in both modes (sidebar 9:30 PM / 21:30, "between 8 AM - 8 PM" / "between 08:00 - 20:00").
 
+## 2026-10-09 — B74 decided: who checks a parked no (skill pass follow-up)
+
+**Why.** LO's call on B74, left open by the 2026-10-08 pass: the gate keeps the scoreboard's rule
+(`retry_after_days` is enough), and the reply-screen rule stays a reader test, because a word list can't tell
+"Never mind." from a refusal (the stricter gate made 40 first_term "way out" exits red). On K3 LO ruled the gate
+is right to follow the ledger; first_term's stale sleep `occupancy_rows` go in its rebuild, so no gate change.
+
+**What.** `references/the-arc.md` A3: one new bullet, "Who checks what", saying the gate *a no has content* takes
+`retry_after_days` as enough and the reply screen is the reader's test. No code changed.
+
+**Checked.** `gates.py --selfcheck` green (index current); `cite_check.py` 0 wrong in SKILL.md + references/
+(history 33, baseline); SKILL.md + references/ word total 148,334 → 148,371 (+37, under the 149,283 cap).
+
+---
+
+## 2026-10-08 — Doctrine: the household loop, the phone's truth, engine facts (skill pass, groups D and E)
+
+**Why.** Round 11 (`~/Documents/Great_Games_Study_20260926/round11/REPORT.md` §3-4) found the skill steering away
+from everyday home life: "chore" as the word for a defect, and every kitchen example from a FAIL-list game. The
+first_term sweep found engine behaviour the skill never wrote down. B numbers per `SKILL_CHANGES_FROM_FIRST_TERM.md`.
+
+**What.**
+- D1 (B83, B87, B88, B90-B94) `references/the-board.md` §4: the household loop (talk loop 9/12, shared bathroom 6,
+  family table 4+2, wait button 8, a morning after day 1 6, a nightly change 3), alone is plain and with a person it
+  pays; pass-game cites only. "Chore" as the defect word replaced in `SKILL.md` (gate *a need shuts a door* row),
+  `the-board.md`, `the-meters.md` M9 heading and :798, `the-surfaces.md` (3), `the-arc.md` A4b, `the-systems.md`
+  (its quote of A4b), `state.md` (2), `the-phone.md`, and the printed text of gate 29 (`gates.py:8711`, one line).
+- D2 (B89) `the-surfaces.md` "Four kitchens": untangled-mind, in-their-own-hands, amore, corrupted-city with cites
+  (round11 `per_game/`); the four FAIL-list kitchens become one "numbers only" line. `the-meters.md` W1b-i: the
+  household +1 from IHOH and UM; the FAIL game is numbers only. M9's three-FAIL-game table is one numbers-only line.
+- D3 (B85, B106, B77, B66) `the-phone.md`: `after_round` / `after_choice` with an example (the choice index
+  is 0-based: the reply button carries its loop index, `v2.py:3113`, stored at `:2849`); "a phone line is true when it shows"; the phone owns posting.
+- D4 (B78, B86) `the-map.md`: R6b a knock respects who sleeps there (and its FAIL-game evidence is numbers only);
+  Navigation: a home or flat is one `is_container` building with rooms of its kind.
+- D5 (B96, B97, B109, B21, B69, B71, and the new gap that no condition reads where the player is) `engine.md`:
+  `initial` is worn, last per slot (`v2.py:1192-1204`); `equip` grants and the last per slot wins
+  (`v2.py:16622-16624`); `rent_carried` is never cleared by the engine (`v2.py:14418-14427`); §20 the any-NPC form
+  backs no named line, and there is no player-location condition; §46.1 the exact-place match (`v2.py:5889-5896`)
+  kills a child-room canvas; §46.2 `substitution_only` + `is_active` for a door- or call-only canvas
+  (`v2.py:5764`, `:5795`, `:5827`); a standalone line in a one-item `block_pool` breaks a group chain
+  (`v2.py:17150-17155`), also one line in `register.md` "One event, several levels" (E2). Every fact re-read at
+  its line this session.
+- D6 (B82, B105) `register.md` truth rules 1-2: every minute it can show (naming the gates); a meter many scenes
+  raise records no one event; where she was needs a flag per outing; a booking is not the date.
+- D7 (B80) `the-first-hour.md` F5b: a garment reaction is a node in the person's hub. E9 (B2a): "withhold until met"
+  = gate each row with `when` on `*_met` (`v2.py:4548-4550`), replacing the stale `getNpcsWithSchedules` claim.
+- D8 (lead lesson 2026-10-08) `SKILL.md` Build: a build stops after each piece for LO to play; template-made pieces
+  pass the truth gates first.
+- B30 `state.md:432`: a `modifier` item may stand in a step's `gate`.
+- E6 (B50, B51) `scripts/shape.py` *the person is there at the step's hour*: rows read first match first through
+  `gates._tr_where` (a new red: "an earlier row wins at …"), and an overnight row on some weekdays with no 00:00 half
+  is red; `state.md:430` says so. Test `scripts/tests/test_shape_row_order.py`.
+- Words: SKILL.md + references/ went from 147,864 to 148,334 across groups C-E (+470; D1 +26, D3 +153, D4 +63, D5
+  +186, D6-D8 +112, cuts −98, the rest small). The whole pass: 147,306 → 148,334 (+1,028), under the 149,283 cap.
+
+**Verified.** `gates.py --selfcheck` green; `cite_check.py` 0 wrong in SKILL.md + references/ (history 33, as
+before the pass); pytest `scripts/tests/` 743 passed. `test_shape.py`'s green fixture had one person in two places
+at once (bar and flat, Mon/Wed 18:00) — the defect B50 now catches — so its flat row and step moved to Tue/Thu, and
+its "place is declared" case puts its roof row first. Every v2.py / template_import.py line above read this session. `shape.py first_term` 22 pass (first_term's rows were
+already reordered in sheets batch 3, so the new checks find nothing there).
+
+## 2026-10-08 — The reader reads every canvas, and tests truth (skill pass, group C)
+
+**Why.** B81: v2-reader read only canvases with a named person or an explicit beat, one at a time, with no table
+of who is where, so a line true on its sheet and false at 00:30 on Sunday could not be seen; the faceless bed and
+couch buttons where many of the sweep's 230 lines sat were never opened.
+
+**What.**
+- `.claude/agents/v2-reader.md` (outside the skill folder; LO's yes for this one file, 2026-10-08): it reads every
+  touched canvas; it reads `register.md` "The truth rule", the truth gates' red lines and the presence table first;
+  two new tests — **10 true on every visit it can render on** (each line at the first and last minute it can show,
+  and on a second visit) and **11 a solo button is a real act**.
+- `scripts/who_is_where.py` (new): the presence table the truth gates use (`gates.py` `_tr_where`), by person, day
+  and hour, `when` rows shown both ways and asleep rows marked.
+- `scripts/gates.py` `_reader_must_read` (`:12143`, `:12153-12154`, swapped line for line): every canvas a player can
+  see is due, so the `--ship` row *the reader passed* asks for verdicts on all of them.
+- `SKILL.md` (`--ship` list) and `references/agents.md` (The Reader): "each touched canvas", the two truth tests,
+  the presence table. Net −9 words.
+
+**Verified.** `who_is_where.py first_term --person npc_laura` matches the sweep's presence table (the stairs row
+when `came_home_late`, nowhere Sat 07-17). pytest, selfcheck, cite_check below.
+
+## 2026-10-08 — Cards from the real gates; playtest enters the opening (skill pass, group B)
+
+**Why.** B84/B110: `guidance_from_ladder.py` made every card's goal the step counter, which renders "— 1 / 2" and
+hid the meters, the person's number and the other person's step the step really reads (39 first_term cards). B52:
+it stopped with "not found" before a build existed. B68: `playtest.py` built only `Canvas_<id>_Node_<node>`, so the
+starting canvas (`StartingCanvas_…`) could not be entered and an opening step past the first screen never reached.
+
+**What.**
+- `scripts/guidance_from_ladder.py`: goals are the step's `gate` (state.md:432) — a player meter with its number and
+  its `[[traits.labels]]` name, a person's own number (`subject = "npc"`, `npc_id`), a flag with a label to write;
+  never the counter. Another person's step and a modifier go in the `tip` (a goal cannot hold either: card goals are
+  flag, trait, days/hours since and weekday only, `template_import.py:1290-1316`). With every goal met, or none,
+  the card prints Ready with the place and the hours from `ready_canvas` (`v2.py:18008-18011`). With no TOML yet it
+  reads the ledger alone. A place-only tip no longer ends in a comma.
+- `scripts/playtest.py`: `passage_name()` picks `StartingCanvas_` when that passage exists; `play` and `reach_step`'s
+  alive check use it.
+- `references/the-voice.md` R2: the generated cards' goals are the step's gate, never its counter (+12 words, paid
+  by cutting a statistic aside in the same paragraph; net +12).
+- Tests: `test_guidance_from_ladder.py` (the counter-goal assertion replaced; a new real-gate case);
+  `test_playtest_starting_canvas.py` (new, a fake page).
+
+**Verified.** first_term's ledger through the generator, in memory: 51 cards, gate *a card shows the real gates*
+51/51. pytest and selfcheck below.
+
+## 2026-10-08 — The truth gates (skill pass from the first_term sweep, group A)
+
+**Why.** first_term 0.1 passed gates, shape, playtest and the reader, and a read-only sweep then found 230 lines that
+were false at some hour they could show (`~/Documents/Great_Games_Study_20260926/first_term_sweep_20261008/SWEEP.md`).
+No check compared a line with who is where, the minutes a screen can be read in, or which flag records what. Plan and
+LO's yes: `~/Documents/Great_Games_Study_20260926/skill_pass_20261008/PLAN.md` (LO 2026-10-08: nine BLOCK, seven WARN).
+
+**What.**
+- `scripts/gates.py`, one new block just above `main()` (citation-safe: the only line inside the old body is the
+  blank line after `_phase4_gates`' last gate, swapped one for one for the call `_truth_gates(...)`).
+  - Shared table `_tr_where`: per person, per weekday and five minutes, the places they can be; first matching
+    row wins and the weekday is today's (`v2.py:4289-4318`, `:4661-4682`); a `when` row counts both ways
+    (`v2.py:4278`), except a `when` that only waits for `<x>_met`. Place hours carry over midnight as
+    `setup.locOpenNow` does (`v2.py:11447-11461`). `_tr_node_times` walks a canvas node by node through each
+    choice's minutes and time items, so a line deep in a scene is judged at the hour it is read.
+  - Sixteen gates. BLOCK on `--ship` (dated `TRUTH_SINCE` 2026-10-08 in `SHIP_SINCE`): *a named person is where
+    the line says* (B101, B79), *nobody is woken* (B102, B78), *every person here has a face* (B116, B109),
+    *no one is named before they're met* (B103, B59), *a latch flag is cleared* (B98, B21), *a button does
+    something* (B100), *a clock bucket has a catch-all* (B99), *a card shows the real gates* (B110, B84),
+    *a phone line is true* (B106, B85, B66). Ordinary gates (reported): *a past line has its event* (B104),
+    *a repeat doesn't say it's the first time* (B111), *her clothes are named exactly* (B107, B108), *one
+    garment per slot* (B96, B97), *one pool, one place* (B115), *the phone owns posting* (B77), *a day word
+    fits its window* (the-clock.md C2).
+  - *a button does something* fails a hub's no-effect exit back to its own place only in the person's OWN room (a
+    place only their rows use): in a shared room the room view with the portrait on it is right (`engine.md` §28,
+    "Returning to the location does not re-fire the hub"). `return`, `trigger` and untyped exits land on the
+    canvas's home, so they are read as that place (found by `test_gates_return_target` / `_trigger_target`).
+  - The dead-screen gate's advice, swapped line for line (`gates.py:8442-8443` comment, `:8484-8485` printed):
+    "this room if shared, its parent if his", not "the hub's own location" (B100).
+- Group E rows in `gates.py`, each a one-line swap: B67 `_ladder_earnable` (`:4705`) reads a `modifier`
+  `is_inactive` item as earnable — no modifier is active at the start (`v2.py:4993-4997`, `:5560`); first_term's
+  *ladders move forward* problems 35 → 17. B72 `_garment_vocab` (`:13265-13266`) ends a garment name at a comma as
+  well as at "of". B76 *standing surface* (`:7241`) skips a person whose `want.cast[].keeps` is "none — inside …"
+  (helper `_lives_inside` above `main()`); first_term's standing surface now passes. B74 (one rule for a parked
+  no) was tried and reverted: on first_term it reds 40 "way out" exits that are not refusals, so the rule needs
+  LO's call (REPORT.md).
+- `SKILL.md` scoreboard: 15 rows (one row carries two gates) after *adult wording*; the `--ship` BLOCK list names
+  "the nine truth gates". +542 words.
+- `scripts/tests/test_gates_truth.py`: a pass and a fail fixture for each gate, the BLOCK registration, and the
+  legacy (grandfathered) re-run.
+
+**Verified.** `gates.py --selfcheck`: 89/89 gates documented, 89/89 rows still checked. pytest `scripts/tests/`:
+737 passed (was 712; the two return/trigger-exit equivalence tests caught G8 reading only `location` exits, fixed).
+`cite_check.py`: SKILL.md + references/ 0 wrong (baseline 0). `gates.py first_term`: 56/87 (the 16 new gates all red;
+56/71 before, the old gates unchanged; first_term's ledger changed under us at 23:21, from 57). Recall against the
+sweep's 226 findings (new + KNOWN), by `skill_pass_20261008/recall.py`: 104 caught (46%); per letter P 16/29, S 1/3,
+F 3/3, H 16/43, O 6/13, A 3/6, B 15/29, W 8/13, T 4/18, D 7/7, C 3/5, Q 19/21, N 3/27, R 0/9. vesper (no
+v2_state, never `--ship`ped) also goes red on several: numbers only, nothing changed there.
+
 ## 2026-10-02 — The reason trail and the rejection review (Coverage and the Scout PRD, CV7)
 
 **Why.** When LO rejects something built and asks why, nothing recorded why the choice was made, so the answer was

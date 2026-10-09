@@ -1,0 +1,65 @@
+# ── calls (the person sheets: Laura's curfew call; the dean's office arrives with college) ──
+[[phone.apps]]
+id    = "calls"
+type  = "calls"
+label = "Calls"
+
+[[phone.calls]]
+id           = "laura_curfew_call"
+app          = "calls"
+caller       = "npc_laura"
+accept       = "laura_curfew_call"
+ring_minutes = 30
+notify       = "📞 Mom is calling"
+[phone.calls.trigger]
+# npc_laura.md:130-137 (iteration 002, part 3): Friday 21:00-22:00, Laura awake in the kitchen.
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "curfew", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "curfew_days", operator = "gt", value = 0 },
+  { type = "weekday", weekdays = [4] },
+  { type = "time_of_day", start_time = "21:00", end_time = "22:00" },
+  { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_laura", operator = "is_present" },
+  { type = "hours_since_flag", subject = "player", flag_key = "curfew", operator = "gte", value = 1 },
+  { type = "flag", subject = "player", flag_key = "laura_call_today", operator = "is_false" },
+] }
+[phone.calls.on_missed]
+effects = [ { targetType = "player", trait = "laura_suspicion", op = "add", value = 2 } ]
+flagEffects = [ { targetType = "player", flag = "laura_call_today", op = "set" } ]
+
+# ── the dean's office calls her in (npc_dean sheet: a call caused by her first trouble) ──
+[[phone.calls]]
+id           = "dean_call_complaints"
+app          = "calls"
+caller       = "npc_dean"
+accept       = "dean_warning"
+ring_minutes = 60
+notify       = "📞 The dean's office is calling"
+[phone.calls.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "dress_warned", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "dress_warned", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "complaints", operator = "gte", value = 2 },
+  { type = "flag", subject = "player", flag_key = "dean_met", operator = "is_false" },
+  { type = "weekday", weekdays = [0, 1, 2, 3, 4] },
+  { type = "time_of_day", start_time = "09:00", end_time = "17:00" },
+] }
+[phone.calls.on_missed]
+effects = [ { targetType = "player", trait = "complaints", op = "add", value = 1, clamp = false } ]
+
+[[phone.calls]]
+id           = "dean_call_grades"
+app          = "calls"
+caller       = "npc_dean"
+accept       = "dean_warning"
+ring_minutes = 60
+notify       = "📞 The dean's office is calling"
+[phone.calls.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "failing_noticed", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "failing_noticed", operator = "gte", value = 7 },
+  { type = "flag", subject = "player", flag_key = "dean_met", operator = "is_false" },
+  { type = "weekday", weekdays = [0, 1, 2, 3, 4] },
+  { type = "time_of_day", start_time = "09:00", end_time = "17:00" },
+] }
+[phone.calls.on_missed]
+effects = [ { targetType = "player", trait = "laura_suspicion", op = "add", value = 2 } ]

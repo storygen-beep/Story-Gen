@@ -4702,7 +4702,7 @@ def _ladder_earnable(item, step_canvas_id, counter, n, game, ctx, opening_ids=fr
             return None
         return (f"{'npc ' + npc + ' ' if npc else ''}{key} {op} {val}: it starts at {start}, "
                 f"and every scene open before step {n} together moves it only to {reach}")
-    return f"a gate this check cannot read: {item}"
+    return None if item.get("type") == "modifier" and (item.get("operator") or item.get("op")) == "is_inactive" else f"a gate this check cannot read: {item}"  # B67: no modifier is active at the start (v2.py:4993-4997, :5560)
 
 
 def ladder_problems(game, state, notes=None):
@@ -7238,7 +7238,7 @@ def run_gates(model, game, state=None):
             bad.append(f"DAY-CAPPED {f['id']} @{f['location']}: max_triggers_per_day on the "
                        f"trigger deletes the person after one click — cap the choice instead "
                        f"(engine.md §28)")
-        unsched = [n.get("id") for n in npcs if not (n.get("schedules") or [])]
+        unsched = [n.get("id") for n in npcs if not (n.get("schedules") or []) and not _lives_inside(state, n.get("id"))]  # B76
         for nid in unsched:
             bad.append(f"{nid}: no schedule rows — she stands nowhere")
         n_rows = len(pres["rows"])
@@ -8439,8 +8439,8 @@ def run_gates(model, game, state=None):
     # keeps it from flagging exhaustive routing.
     #
     # The fix is one choice:
-    # `{ text = "Leave him to it.", targetType = "location", locationId = <the hub's
-    # own location> }` — no conditions, no costs, last in the list.
+    # `{ text = "Leave him to it.", targetType = "location", locationId = <where she goes:
+    # this room if shared, its parent if his> }` — no conditions or costs, last in the list.
     # ─────────────────────────────────────────────────────────────────────────
     def _door(ch):
         """The engine's own test: free of BOTH gates (v2.py:12827-12836)."""
@@ -8482,7 +8482,7 @@ def run_gates(model, game, state=None):
             door_det.append(f"… and {len(shut_nodes) - 20} more")
         door_det.append('add one choice with neither `conditions` nor `costs`: '
                         '{ text = "Leave him to it.", targetType = "location", '
-                        'locationId = <the node\'s own location> }')
+                        'locationId = <this room if shared, its parent if it is his> }')
     gate("a spent day still has a door",
          None if not tick_cleared else not shut_nodes,
          (f"{len(shut_nodes)} screen(s) empty once the day is spent"
@@ -8708,7 +8708,7 @@ def run_gates(model, game, state=None):
              [f"`{n.get('key')}` is declared a need"
               + (f" that \"{n.get('shuts')}\"" if n.get("shuts") else "")
               + " — but NO condition anywhere in the game reads it. A restore that gates "
-                "nothing is a chore, not a need (the-meters.md M9)"
+                "nothing is not a need (the-meters.md M9)"
               for n in dead])
 
     # G29b — a need can be met every day (PRD v2 CK8c · H12, 2026-09-30). G29 asks whether
@@ -12140,7 +12140,7 @@ def _touched_canvases(root, slug, game, state):
 
 
 def _reader_must_read(model, game):
-    """{canvas id: why} for canvases with a named person or an explicit beat."""
+    """{canvas id: why} for every canvas a player can see (B81: faceless and solo ones too)."""
     out = {}
     beats = {c["id"]: c["beats"] for c in model}
     for c in game.get("canvases") or []:
@@ -12152,8 +12152,8 @@ def _reader_must_read(model, game):
             for n in (c.get("nodes") or []) for b in _flat_blocks(n.get("blocks")))
         if named:
             out[c.get("id")] = "a named person"
-        elif any(b.explicit >= 3 for b in beats.get(c.get("id")) or []):
-            out[c.get("id")] = "an explicit beat"
+        else:
+            out[c.get("id")] = "an explicit beat" if any(b.explicit >= 3 for b in beats.get(c.get("id")) or []) else "a surface"
     return out
 
 
@@ -12749,7 +12749,7 @@ def _phase4_gates(gate, _N, model, game, state):
     gate("sex for pay names the amount", *_paid_choice_names_amount(model, game, state))
     gate("no unknown topic", *_no_unknown_topic(state))
     gate("a skill rejection names a notebook entry", *_skill_rejections_logged(state))
-
+    _truth_gates(gate, _N, model, game, state)       # skill pass 2026-10-08: above main()
 
 # ── the-systems.md S2a: meters vs system cards ─────────────────────────────
 # A system card (board.systems[]) carries any of these; a meter row never does.
@@ -13262,8 +13262,8 @@ def _garment_vocab(game):
     for c in game.get("clothing") or []:
         if not (isinstance(c, dict) and c.get("id") and c.get("name")):
             continue
-        # "A dress of your own": the garment is the word before "of", not the last word.
-        ws = re.findall(r"[a-z]+", re.split(r"\s+of\s+", str(c["name"]).lower())[0])
+        # "A dress of your own", "Café uniform, top button open" (B72): the garment ends before "of" or a comma.
+        ws = re.findall(r"[a-z]+", re.split(r"\s+of\s+|,", str(c["name"]).lower())[0])
         if not ws:
             continue
         words[c["id"]] = set(ws)
@@ -13767,6 +13767,1436 @@ def _guess_row(root, slug):
             else f"no sheet marks a choice \"guess\" ({len(files)} sheet file(s) read)")
     return ("choices marked guess", None, head, hits[:12] + ([f"… and {len(hits) - 12} more"]
                                                             if len(hits) > 12 else []))
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# The truth gates (skill pass 2026-10-08, SKILL_CHANGES B98–B116).
+#
+# first_term 0.1 passed every gate and the reader, and a read-only sweep then found 230 lines
+# that were false at some hour they could show. Nothing here knew who is where, at what time a
+# line can render, or which flag records what. These gates share one table for that:
+#
+#   _tr_where(game)      for each person, for each weekday and five minutes, the set of
+#                        (place, activity) they CAN be at. First matching row wins
+#                        (`setup.getNpcLocation`, v2.py:4289-4318); the weekday is TODAY's
+#                        even inside an overnight row (v2.py:4307-4310, `isCurrentTimeSlot`
+#                        v2.py:4661-4682). A row with `when` may be live or not
+#                        (`_scheduleRowLive`, v2.py:4278), so it adds its place AND lets the
+#                        walk go on. Falling off the end is "nowhere" (None).
+#   _tr_texts(...)       the slots a line can render in: the canvas's place hours
+#                        (`setup.locOpenNow`, v2.py:11447-11461, which does carry over
+#                        midnight), its trigger windows and time items, the person its face
+#                        is bound to being there, and every enclosing group's time, weekday
+#                        and person items, walked node by node through the choices' own
+#                        minutes and time items (`_tr_node_times`). Trait and flag items are
+#                        not read, so a window is an UPPER bound: a line false in it may
+#                        still be hidden by a flag.
+#
+# Text detection is a word list (HEURISTIC, and each gate says so). The backing check is exact
+# against the table. Every red line names the first slot where the line is false.
+# ─────────────────────────────────────────────────────────────────────────────
+_TR_DAYS = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+_TR_STEP = 5
+_TR_SLOTS = tuple((d, m) for d in range(7) for m in range(0, 1440, _TR_STEP))
+_TR_ALL = frozenset(_TR_SLOTS)
+_TR_SLEEP = re.compile(r"\b(?:asleep|sleep(?:s|ing)?|in bed|snor\w*)\b", re.I)
+
+
+def _tr_min(s):
+    try:
+        h, m = str(s).split(":")[:2]
+        return int(h) * 60 + int(m)
+    except (ValueError, AttributeError):
+        return None
+
+
+def _tr_slot_name(slot):
+    d, m = slot
+    return f"{_TR_DAYS[d]} {m // 60:02d}:{m % 60:02d}"
+
+
+def _tr_in_window(m, start, end):
+    """`setup.isCurrentTimeSlot`: end exclusive, a window whose end is before its start wraps."""
+    s, e = _tr_min(start), _tr_min(end) if end else None
+    if s is None:
+        return False
+    e = s + 60 if e is None else e
+    return (m >= s or m < e) if e < s else (s <= m < e)
+
+
+def _tr_days(v):
+    return set(v) if isinstance(v, (list, tuple)) and v else set(range(7))
+
+
+def _tr_rows_slots(rows):
+    """Slots covered by schedule-shaped rows ({weekdays, start_time, end_time}), today's day."""
+    out = set()
+    for r in rows or []:
+        if not isinstance(r, dict):
+            continue
+        days = _tr_days(r.get("weekdays"))
+        out |= {(d, m) for d, m in _TR_SLOTS
+                if d in days and _tr_in_window(m, r.get("start_time"), r.get("end_time"))}
+    return out
+
+
+def _tr_met_only(when):
+    """A `when` that only withholds the row until the person is met (`<x>_met is_true`, the
+    the-first-hour.md withholding) is read as an ordinary row: before the meeting, saying
+    their name at all is the gate `no one is named before they're met`."""
+    items = when.get("items") if isinstance(when, dict) else when
+    return bool(items) and all(isinstance(i, dict) and str(i.get("flag_key", "")).endswith("_met")
+                               and i.get("operator") == "is_true" for i in items)
+
+
+_TR_WHERE_CACHE = {}
+
+
+def _tr_where(game):
+    """{npc_id: {slot: frozenset((place|None, activity))}} — see the block comment above.
+    Cached per game object for one run: every truth gate reads the same table."""
+    key = (id(game), json.dumps([(n.get("id"), n.get("schedules")) for n in game.get("npcs") or []],
+                                sort_keys=True, default=str))
+    if key in _TR_WHERE_CACHE:
+        return _TR_WHERE_CACHE[key]
+    out = {}
+    for n in game.get("npcs") or []:
+        rows = [r for r in n.get("schedules") or [] if isinstance(r, dict)]
+        if not rows or not n.get("id"):
+            continue
+        cover = [(_tr_rows_slots([r]), (r.get("location"), r.get("activity") or ""),
+                  bool(r.get("when")) and not _tr_met_only(r["when"])) for r in rows]
+        table = {}
+        for slot in _TR_SLOTS:
+            can = set()
+            for slots, val, gated in cover:
+                if slot in slots:
+                    can.add(val)
+                    if not gated:
+                        break
+            else:
+                can.add((None, ""))
+            table[slot] = frozenset(can)
+        out[n["id"]] = table
+    _TR_WHERE_CACHE.clear()
+    _TR_WHERE_CACHE[key] = out
+    return out
+
+
+def _tr_places(table, slot):
+    return {p for p, _ in table.get(slot, ())}
+
+
+def _tr_open_slots(game, lid):
+    """`setup.locOpenNow` (v2.py:11447-11461): no hours = always open; a window that closes
+    before it opens runs into the next day."""
+    loc = next((l for l in game.get("locations") or [] if l.get("id") == lid), None)
+    hours = (loc or {}).get("hours") or []
+    if not hours:
+        return set(_TR_ALL)
+    out = set()
+    for w in hours:
+        if not isinstance(w, dict):
+            continue
+        days, o, c = _tr_days(w.get("weekdays")), _tr_min(w.get("open")), _tr_min(w.get("close"))
+        if o is None or c is None:
+            continue
+        for d, m in _TR_SLOTS:
+            if o < c:
+                if d in days and o <= m < c:
+                    out.add((d, m))
+            elif (d in days and m >= o) or ((d + 6) % 7 in days and m < c):
+                out.add((d, m))
+    return out
+
+
+def _tr_and_items(holder):
+    """A conditions table's items when they all must hold (AND, or a single item)."""
+    conds = (holder or {}).get("conditions")
+    if not isinstance(conds, dict):
+        return []
+    items = [i for i in conds.get("items") or [] if isinstance(i, dict)]
+    if len(items) > 1 and str(conds.get("logic") or "AND").upper() != "AND":
+        return []
+    return items
+
+
+def _tr_narrow(slots, items, where, pinned):
+    """Narrow `slots` by the time, weekday and named-person items in `items`. A person an
+    `is_present` item names is pinned to that place; `is_absent` pins them away from it.
+    An `npc_at_location` with no `npc_id` is "anyone there" (v2.py:5244-5256) and pins no one."""
+    for it in items:
+        t = it.get("type")
+        if t == "time_of_day":
+            slots = {s for s in slots if _tr_in_window(s[1], it.get("start_time"), it.get("end_time"))}
+        elif t == "weekday":
+            days = _tr_days(it.get("weekdays"))
+            slots = {s for s in slots if s[0] in days}
+        elif t == "npc_at_location" and it.get("npc_id") not in where:
+            pinned["*any*"] = (it.get("operator"), it.get("location_id"))
+        elif t == "npc_at_location":
+            table, lid = where[it["npc_id"]], it.get("location_id")
+            if it.get("operator") == "is_absent":
+                slots = {s for s in slots if _tr_places(table, s) - {lid}}
+                pinned[it["npc_id"]] = ("not", lid)
+            else:
+                slots = {s for s in slots if lid in _tr_places(table, s)}
+                pinned[it["npc_id"]] = ("at", lid)
+    return slots
+
+
+_TR_OPEN_CACHE = {}
+
+
+def _tr_opening(game):
+    """The opening's canvases (`_opening_canvas_ids`), only when the game names a starting
+    canvas: the opening stages its own people at a fixed hour, so the rows don't judge it."""
+    if not (game.get("project") or {}).get("starting_canvas"):
+        return set()
+    key = (id(game), json.dumps(game.get("project"), sort_keys=True, default=str), len(game.get("canvases") or []))
+    if key not in _TR_OPEN_CACHE:
+        _TR_OPEN_CACHE.clear()
+        _TR_OPEN_CACHE[key] = _opening_canvas_ids(game)
+    return _TR_OPEN_CACHE[key]
+
+
+def _tr_opening_slots(game, c):
+    """The opening plays once, from the game's start (`[time]` starting_day / starting_hour)
+    through the minutes its own choices spend."""
+    t = game.get("time") or {}
+    day = _LOC_DAY_NAMES.index(t.get("starting_day", "Monday")) if t.get("starting_day") in _LOC_DAY_NAMES else 0
+    start = int(t.get("starting_hour") or 0) * 60
+    spent = sum(int(ch.get("time_progression_minutes") or 0)
+                for n in c.get("nodes") or []
+                for ch in ((n.get("exit_block") or {}).get("choices") or []) if isinstance(ch, dict))
+    out = set()
+    for k in range(0, spent + _TR_STEP, _TR_STEP):
+        tot = day * 1440 + start + k
+        out.add(((tot // 1440) % 7, (tot % 1440) // _TR_STEP * _TR_STEP))
+    return out
+
+
+_LOC_DAY_NAMES = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+
+
+def _tr_call_canvases(game):
+    """Canvases a phone call opens (`[[phone.calls]] accept`): the caller is on the line, not
+    in the room, so speaking there places nobody."""
+    return {c.get("accept") for c in ((game.get("phone") or {}).get("calls") or [])
+            if isinstance(c, dict) and c.get("accept")}
+
+
+def _tr_parents(game):
+    """canvas id -> a canvas that links into it (a triggerless node reached by a choice)."""
+    par = {}
+    for c in game.get("canvases") or []:
+        for n in c.get("nodes") or []:
+            eb = n.get("exit_block") or {}
+            for ch in list(eb.get("choices") or []) + list((eb.get("config") or {}).get("choices") or []):
+                tgt = (ch or {}).get("nodeId") or ""
+                if "." in tgt and tgt.split(".", 1)[0] != c.get("id"):
+                    par.setdefault(tgt.split(".", 1)[0], c.get("id"))
+    return par
+
+
+def _tr_canvas_window(game, where, c, by_id, parents, seen=None):
+    """(place, slots, pinned) a canvas renders in: its trigger, or the canvas that links to it."""
+    seen = seen or set()
+    trig = c.get("trigger") or {}
+    if not trig.get("location") and parents.get(c.get("id")) in by_id and c.get("id") not in seen:
+        seen.add(c.get("id"))
+        return _tr_canvas_window(game, where, by_id[parents[c["id"]]], by_id, parents, seen)
+    lid = trig.get("location")
+    slots = _tr_open_slots(game, lid) if lid else set(_TR_ALL)
+    if c.get("id") in _tr_opening(game):
+        slots = _tr_opening_slots(game, c)
+    if trig.get("schedules"):
+        slots &= _tr_rows_slots(trig["schedules"])
+    pinned = {}
+    slots = _tr_narrow(slots, _tr_and_items(trig), where, pinned)
+    for key in ("npc", "requires_npc"):
+        p = trig.get(key)
+        if p in where and lid:
+            slots = {s for s in slots if lid in _tr_places(where[p], s)}
+            pinned[p] = ("at", lid)
+    return lid, slots, pinned
+
+
+def _tr_shift(slots, minutes):
+    k = int(minutes or 0) // _TR_STEP * _TR_STEP
+    if not k:
+        return set(slots)
+    out = set()
+    for d, m in slots:
+        t = (d * 1440 + m + k) % 10080
+        out.add((t // 1440, t % 1440))
+    return out
+
+
+def _tr_choice_items(ch):
+    return [i for i in _tr_and_items(ch) if i.get("type") in ("time_of_day", "weekday")]
+
+
+def _tr_node_times(c, entry):
+    """({node id: slots it can be read in}, [(node id, first stranded slot)]).
+
+    The first node is read in `entry`. A `node` choice passes on the slots its own time and
+    weekday items allow, moved on by its `time_progression_minutes`. A node whose every
+    choice carries a time item strands the player at any slot none of them allows: the
+    screen renders with no way on (`a clock bucket has a catch-all`, B99)."""
+    nodes = [n for n in c.get("nodes") or [] if isinstance(n, dict) and n.get("id")]
+    if not nodes:
+        return {}, []
+    times = {n["id"]: set() for n in nodes}
+    times[nodes[0]["id"]] = set(entry)
+    by_id = {n["id"]: n for n in nodes}
+    todo = [nodes[0]["id"]]
+    rounds = 0
+    while todo and rounds < 2000:
+        rounds += 1
+        nid = todo.pop()
+        here = times[nid]
+        for ch in ((by_id[nid].get("exit_block") or {}).get("choices") or []):
+            if not isinstance(ch, dict) or ch.get("targetType") != "node":
+                continue
+            tgt = str(ch.get("nodeId") or "").split(".")[-1]
+            if tgt not in times:
+                continue
+            ok = _tr_narrow(here, _tr_choice_items(ch), {}, {})
+            new = _tr_shift(ok, ch.get("time_progression_minutes")) - times[tgt]
+            if new:
+                times[tgt] |= new
+                todo.append(tgt)
+    stranded = []
+    for n in nodes:
+        chs = [ch for ch in ((n.get("exit_block") or {}).get("choices") or []) if isinstance(ch, dict)]
+        if not chs or not times[n["id"]] or any(not _tr_choice_items(ch) for ch in chs):
+            continue
+        left = set(times[n["id"]])
+        for ch in chs:
+            left -= _tr_narrow(left, _tr_choice_items(ch), {}, {})
+        if left:
+            stranded.append((n["id"], min(left)))
+    return times, stranded
+
+
+def _tr_texts(game, where):
+    """Every player-facing text unit with its render window:
+    (canvas, node, kind, text, speaker, place, slots, pinned, is_repeatable, entry slots).
+    A pool item, a group's children and a cascade beat each carry their own window."""
+    by_id = {c.get("id"): c for c in game.get("canvases") or [] if c.get("id")}
+    parents = _tr_parents(game)
+    out = []
+
+    entry = frozenset()
+
+    def walk(cid, nid, blocks, lid, slots, pinned, rep):
+        for b in blocks or []:
+            if not isinstance(b, dict):
+                continue
+            props = b.get("props") or {}
+            s2, p2 = slots, pinned
+            if b.get("type") == "group" or b.get("conditions") or props.get("conditions"):
+                p2 = dict(pinned)
+                s2 = _tr_narrow(slots, _tr_and_items(b) + _tr_and_items(props), where, p2)
+            if b.get("content") and b.get("type") not in MEDIA_BLOCKS:
+                spk = props.get("npcId") if props.get("speaker") == "npc" else None
+                out.append((cid, nid, b.get("type"), str(b["content"]), spk, lid, s2, p2, rep, entry))
+            walk(cid, nid, b.get("blocks") or props.get("blocks"), lid, s2, p2, rep)
+            for beat in props.get("beats") or []:
+                walk(cid, nid, beat.get("blocks"), lid, s2, p2, rep)
+
+    for c in by_id.values():
+        if _is_dev(c):
+            continue
+        lid, slots, pinned = _tr_canvas_window(game, where, c, by_id, parents)
+        trig = c.get("trigger") or {}
+        rep = _rep_of(trig) if trig else _rep_of((by_id.get(parents.get(c["id"])) or {}).get("trigger"))
+        times, _ = _tr_node_times(c, slots)
+        entry = frozenset(slots)
+        for n in c.get("nodes") or []:
+            walk(c["id"], n.get("id"), n.get("blocks"), lid, times.get(n.get("id"), set()), pinned, rep)
+    return out
+
+
+_TR_KIN = (("mom", r"mom|mum|your mother|your mom|your mum|mother"),
+           ("mother", r"mom|mum|your mother|your mom|your mum"),
+           ("step-father", r"your stepfather|your step-father|stepdad|your stepdad"),
+           ("stepfather", r"your stepfather|stepdad|your stepdad"),
+           ("father", r"dad|your father|your dad"),
+           ("step-brother", r"your step-brother|your stepbrother|your brother"),
+           ("brother", r"your brother"),
+           ("sister", r"your sister"))
+
+
+def _tr_aliases(game):
+    """{npc_id: compiled regex} for the words that name a person on screen: the name (and its
+    last word for "Dr. Hale"), a "The ..." name as a phrase, and a kin word for a family role."""
+    out = {}
+    for n in game.get("npcs") or []:
+        name = str(n.get("name") or "").strip()
+        if not name or not n.get("id"):
+            continue
+        alts = []
+        if name.lower().startswith("the "):
+            alts.append(re.escape(name[4:]).replace(r"\ ", r"[\s-]+"))
+            pat = r"\bthe\s+(?:%s)\b" % "|".join(alts)
+            out[n["id"]] = re.compile(pat, re.I)
+            continue
+        words = re.sub(r"^(?:dr|mr|mrs|ms|miss|prof)\.?\s+", "", name, flags=re.I).split()
+        alts += [re.escape(w) for w in {name, words[0] if words else name, words[-1] if words else name}
+                 if len(w) >= 3]
+        rx = r"\b(?:%s)\b" % "|".join(sorted(set(alts), key=len, reverse=True))
+        role = str(n.get("role") or "").lower()
+        kin = next((k for key, k in _TR_KIN if key == role or role.endswith(" " + key)), None)
+        if kin:
+            rx = r"(?:%s|\b(?:%s)\b)" % (rx, kin)
+        out[n["id"]] = re.compile(rx, re.I if kin else 0)
+    return out
+
+
+# A line puts a person somewhere when it gives them a place, a sound or an act in the present.
+_TR_PRESENCE = re.compile(
+    r"(?:'s|\bis|\bare)\s+(?:home|out|in\b|at\b|up\b|asleep|awake|upstairs|downstairs|on the|still|"
+    r"there|here|gone|away|back|already)|"
+    r"\b(?:sits?|sitting|stands?|standing|lies|lying|leans?|leaning|waits?|waiting|sleeps?|sleeping|"
+    r"asleep|snor\w*|upstairs|downstairs|doorway|through the wall|music|the tv|voice|footsteps|"
+    r"calls? (?:from|up|down|out)|shouts?|yells?|comes in|walks in|looks up|glances|watches|watching|"
+    r"laughs|smiles|grins|nods|hands you|pours|cooks|knocks)\b", re.I)
+
+
+_TR_GAP_WORDS = r"(?:been|still|just|already|now|probably|always|finally)"
+
+
+def _tr_placed(rx, sent):
+    """Does the sentence place this person? The presence word comes right after the name, or
+    after one adverb ("Laura's asleep", "Laura's been asleep", "Ryan's music", "Mark snores"),
+    so "the dean's signature is at the bottom" and "Zoe's friends are on the couch" place
+    nobody."""
+    for m in rx.finditer(sent):
+        tail = sent[m.end():]
+        head = re.match(r"(?:\s*'s\b)?(?:\s+%s\b)?\s*" % _TR_GAP_WORDS, tail)
+        start = head.end() if head else 0
+        if _TR_PRESENCE.match(tail, start) or _TR_PRESENCE.match(tail, head.start() if head else 0):
+            return True
+    return False
+
+
+def _tr_building(game, lid):
+    """The places that make one building with `lid`: walk `entry_from` up to the place that
+    hangs off an outdoor root (a place with no `entry_from`), and take everything under it.
+    A home is its hall and every room off it; a place off the street is its own building."""
+    locs = {l.get("id"): l for l in game.get("locations") or [] if l.get("id")}
+
+    def top(x):
+        seen = set()
+        while x in locs and locs[x].get("entry_from") and x not in seen:
+            seen.add(x)
+            up = locs[x]["entry_from"]
+            if up in locs and not locs[up].get("entry_from"):
+                return x
+            x = up
+        return x
+    t = top(lid)
+    return {x for x in locs if top(x) == t} if lid in locs else {lid}
+
+
+_TR_AWAY = re.compile(r"(?:'s|\bis|\bare)\s+(?:out|gone|away)\b|\b(?:out shopping|at work|not home|"
+                      r"not in|isn't (?:home|in|here)|isn't back)\b", re.I)
+# A line that puts SOMEBODY in the building, or says nobody is in it.
+_TR_SOMEONE = re.compile(r"\b(?:some(?:one|body)(?:'s)?\s+(?:\w+\s+){0,2}(?:mutters|walks|crosses|"
+                         r"moves|passes|thumps|laughs|calls|coughs|is up|on the stairs|downstairs|"
+                         r"upstairs)|footsteps|a door (?:opens|closes|shuts)|the tv mutters)\b", re.I)
+_TR_NOBODY = re.compile(r"\b(?:(?:nobody|no one)(?:'s| is) (?:home|in|up|around|here)\b|"
+                        r"(?:nobody|no one) (?:home|around)\b|the house is (?:dark|empty|quiet|asleep)|"
+                        r"house is empty|empty house)\b", re.I)
+
+
+def _tr_state(table, slots):
+    """{slot: frozenset of places} for a person over a window."""
+    return {s: frozenset(_tr_places(table, s)) for s in slots}
+
+
+def _tr_unbacked(table, slots, pinned_entry, sleep_claim, building=None, away=False):
+    """(False, why) when the person's whereabouts over `slots` are not one fixed thing.
+    A pinned person (the face's own, or a group that names them) is backed by the engine."""
+    if pinned_entry:
+        if sleep_claim and pinned_entry[0] == "at":
+            awake = [s for s in sorted(slots)
+                     if not any(_TR_SLEEP.search(a or "") for p, a in table.get(s, ())
+                                if p == pinned_entry[1])]
+            if awake:
+                return False, f"{_tr_slot_name(awake[0])}: not asleep there"
+        return True, ""
+    states = _tr_state(table, slots)
+    vals = set(states.values())
+    if len(vals) > 1 or any(len(v) > 1 for v in vals):
+        first = sorted(slots)[0]
+        base = states[first]
+        diff = next((s for s in sorted(slots) if states[s] != base or len(states[s]) > 1), first)
+        def say(v):
+            return " or ".join(sorted(p or "nowhere" for p in v))
+        return False, (f"{_tr_slot_name(first)}: {say(base)} · {_tr_slot_name(diff)}: "
+                       f"{say(states[diff])}")
+    (place,) = next(iter(vals)) if vals else (None,)
+    if building is not None:
+        here = place in building
+        if away and here:
+            return False, f"{_tr_slot_name(min(slots))}: at {place}, not out"
+        if not away and not here:
+            return False, f"{_tr_slot_name(min(slots))}: {place or 'nowhere'}, not here"
+    if sleep_claim:
+        awake = [s for s in sorted(slots)
+                 if not any(_TR_SLEEP.search(a or "") for _, a in table.get(s, ()))]
+        if awake:
+            return False, f"{_tr_slot_name(awake[0])}: awake"
+    return True, ""
+
+
+def _tr_anyone_unbacked(game, where, lid, slots, items_any, want_someone):
+    """A "somebody's in the house" / "nobody's home" line against the building's occupancy.
+    Backed by any `npc_at_location` item on the line or its trigger (named or any-NPC; the
+    author asked who is there), or by an occupancy that holds at every slot of the window."""
+    if items_any:
+        return True, ""
+    bld = _tr_building(game, lid)
+    def busy(s):
+        return {pid for pid, t in where.items() if _tr_places(t, s) & bld - {None}}
+    bad = next((s for s in sorted(slots) if bool(busy(s)) != want_someone), None)
+    if bad is None:
+        return True, ""
+    return False, f"{_tr_slot_name(bad)}: {'nobody' if want_someone else ', '.join(sorted(busy(bad)))} in the building"
+
+
+def _named_person_present(game):
+    """(ok, headline, detail) for the gate `a named person is where the line says`."""
+    where = _tr_where(game)
+    if not where:
+        return None, "no person has schedule rows", []
+    names = {n["id"]: n.get("name") for n in game.get("npcs") or [] if n.get("id")}
+    aliases = _tr_aliases(game)
+    calls = _tr_call_canvases(game)
+    rows, n = [], 0
+    staged = _tr_opening(game)
+    for cid, nid, kind, text, spk, lid, slots, pinned, rep, entry in _tr_texts(game, where):
+        if not slots or cid in staged:
+            continue
+        claims = []
+        # A speaker is judged where the scene STARTS, and only on a repeatable surface: people
+        # don't walk out mid-scene, and a one-time scene's person is `nobody is woken`'s job.
+        # A visitor with no row here is red too: the schedule page says they are elsewhere.
+        # The fix is a row (gated with `when` if the visit is), not silence.
+        if spk in where and cid not in calls and rep and lid and pinned.get(spk) is None:
+            gone = [s for s in sorted(entry) if lid not in _tr_places(where[spk], s)]
+            if gone:
+                n += 1
+                rows.append(f"{cid} · {nid}: {names.get(spk, spk)} speaks — {_tr_slot_name(gone[0])}: "
+                            f"not at {lid} — \"{text.strip()[:110]}\"")
+        bld = _tr_building(game, lid) if lid else None
+        for sent in _beat_sentences(text):
+            for pid, rx in aliases.items():
+                if pid in where and pid != spk and _tr_placed(rx, sent):
+                    claims.append((pid, sent, bool(_TR_SLEEP.search(sent))))
+            if lid and spk is None:
+                for rx, want in ((_TR_SOMEONE, True), (_TR_NOBODY, False)):
+                    if rx.search(sent):
+                        n += 1
+                        ok, why = _tr_anyone_unbacked(game, where, lid, slots, pinned, want)
+                        if not ok:
+                            rows.append(f"{cid} · {nid}: {'somebody' if want else 'nobody'} — {why} — "
+                                        f"\"{sent.strip()[:110]}\"")
+        for pid, sent, sleep in claims:
+            n += 1
+            ok, why = _tr_unbacked(where[pid], slots, pinned.get(pid), sleep, bld,
+                                   bool(_TR_AWAY.search(sent)))
+            if not ok:
+                rows.append(f"{cid} · {nid}: {names.get(pid, pid)} — {why} — \"{sent.strip()[:110]}\"")
+        # (speakers were counted above)
+    rows = sorted(set(rows))
+    if not n:
+        return None, "no line places a scheduled person", []
+    return not rows, (f"{len(rows)} line(s) place a person where their rows don't hold them at "
+                      f"every hour the line shows" if rows else
+                      f"{n}/{n} lines that place a person agree with that person's rows"), rows
+
+
+# ── shared readers for the gates below ────────────────────────────────────────
+def _tr_choices(node):
+    """Every choice on a node: the exit block's own and its config's."""
+    eb = (node or {}).get("exit_block") or {}
+    return [ch for ch in list(eb.get("choices") or []) + list((eb.get("config") or {}).get("choices") or [])
+            if isinstance(ch, dict)]
+
+
+def _tr_flag_ops(game):
+    """({flag: [canvas ids that set it]}, {flag: [canvas ids that clear it]}, daily-tick clears)."""
+    sets, clears = collections.defaultdict(list), collections.defaultdict(list)
+    for c in game.get("canvases") or []:
+        for n in c.get("nodes") or []:
+            holders = _tr_choices(n) + [((n.get("exit_block") or {}).get("config") or {})]
+            for h in holders:
+                for fe in h.get("flagEffects") or []:
+                    if not isinstance(fe, dict) or not fe.get("flag"):
+                        continue
+                    off = fe.get("op") in ("unset", "clear", "remove") or fe.get("value") is False
+                    (clears if off else sets)[fe["flag"]].append(c.get("id"))
+    for conv in ((game.get("phone") or {}).get("conversations") or []):
+        for blk in conv.get("blocks") or []:
+            for ch in (blk or {}).get("choices") or []:
+                for fe in (ch or {}).get("flagEffects") or []:
+                    if isinstance(fe, dict) and fe.get("flag"):
+                        off = fe.get("op") in ("unset", "clear", "remove") or fe.get("value") is False
+                        (clears if off else sets)[fe["flag"]].append(conv.get("id"))
+    tick = {fe.get("flag") for fe in (((game.get("engine") or {}).get("daily_tick") or {}).get("flagEffects") or [])
+            if isinstance(fe, dict)}
+    return sets, clears, tick
+
+
+def _tr_trait_setters(game):
+    """{trait: canvas ids whose effects move it upward}."""
+    out = collections.defaultdict(set)
+    for c in game.get("canvases") or []:
+        for n in c.get("nodes") or []:
+            for h in _tr_choices(n) + [((n.get("exit_block") or {}).get("config") or {})]:
+                for ef in h.get("effects") or []:
+                    if isinstance(ef, dict) and (ef.get("trait") or ef.get("trait_key")) \
+                            and _effect_value_sign(ef.get("value")) > 0:
+                        out[ef.get("trait") or ef.get("trait_key")].add(c.get("id"))
+    return out
+
+
+def _tr_units(game):
+    """(canvas, node id, text, items on the way: trigger + enclosing groups) for every text block."""
+    out = []
+
+    def walk(c, nid, blocks, items):
+        for b in blocks or []:
+            if not isinstance(b, dict):
+                continue
+            props = b.get("props") or {}
+            here = items + list(_conditions_of(b)) + list(_conditions_of(props))
+            if b.get("content") and b.get("type") not in MEDIA_BLOCKS:
+                out.append((c, nid, str(b["content"]), here, b))
+            walk(c, nid, b.get("blocks") or props.get("blocks"), here)
+            for beat in props.get("beats") or []:
+                walk(c, nid, beat.get("blocks"), here)
+
+    parents = _tr_parents(game)
+    by_id = {c.get("id"): c for c in game.get("canvases") or [] if c.get("id")}
+    for c in by_id.values():
+        if _is_dev(c):
+            continue
+        items, cur, seen = [], c, set()
+        while cur and cur.get("id") not in seen:      # a linked node inherits its parent's gate
+            seen.add(cur.get("id"))
+            items += list(_conditions_of(cur.get("trigger") or {}))
+            cur = by_id.get(parents.get(cur.get("id")))
+        for n in c.get("nodes") or []:
+            walk(c, n.get("id"), n.get("blocks"), items)
+    return out
+
+
+# ── nobody is woken (B102, B78; sweep S) ──────────────────────────────────────
+_TR_KNOCK = re.compile(r"\b(?:knock|knocks|wake (?:him|her|them)|tap on)\b", re.I)
+
+
+def _tr_asleep(table, lid, s):
+    return any(p == lid and _TR_SLEEP.search(a or "") for p, a in table.get(s, ()))
+
+
+def _nobody_is_woken(game):
+    """(ok, headline, detail) for the gate `nobody is woken`.
+
+    1. A door option that knocks or goes in, live while someone whose row says asleep is
+       inside, is red unless its own items name that person.
+    2. A ONE-TIME canvas whose person (its face, `requires_npc`, or a speaker on its first
+       screen) is not in the canvas's building at some slot it can fire in, or is asleep then
+       while the scene has them awake, is red. The engine runs no presence check on that path
+       (`selectAutoFireCanvasForLocation`, v2.py:5755-5774), so the window is all there is.
+    3. A repeatable surface where a person speaks while their row says asleep is red."""
+    where = _tr_where(game)
+    if not where:
+        return None, "no person has schedule rows", []
+    names = {n["id"]: n.get("name") for n in game.get("npcs") or [] if n.get("id")}
+    rows, n = [], 0
+    for loc in game.get("locations") or []:
+        for opt in ((loc.get("door") or {}).get("options") or []):
+            if not isinstance(opt, dict) or not _TR_KNOCK.search(str(opt.get("text") or "")):
+                continue
+            pinned = {}
+            slots = _tr_narrow(set(_TR_ALL), _tr_and_items(opt), where, pinned)
+            for pid, table in where.items():
+                if pid in pinned:
+                    continue
+                bad = next((s for s in sorted(slots) if _tr_asleep(table, loc["id"], s)), None)
+                n += 1
+                if bad:
+                    rows.append(f"door {loc['id']} · \"{opt.get('text')}\": {names.get(pid, pid)} is asleep "
+                                f"inside at {_tr_slot_name(bad)}")
+    by_id = {c.get("id"): c for c in game.get("canvases") or [] if c.get("id")}
+    parents, staged, calls = _tr_parents(game), _tr_opening(game), _tr_call_canvases(game)
+    for c in by_id.values():
+        if _is_dev(c) or c.get("id") in staged or c.get("id") in calls:
+            continue
+        trig = c.get("trigger") or {}
+        if not trig.get("location") or trig.get("substitution_only"):
+            continue
+        lid, slots, pinned = _tr_canvas_window(game, where, c, by_id, parents)
+        if not slots:
+            continue
+        text = " ".join(str(b.get("content")) for nd in c.get("nodes") or []
+                        for b in _flat_blocks(nd.get("blocks")) if b.get("content"))
+        sleepy = bool(_TR_SLEEP.search(text))
+        # The scene's first screen says who is there when it fires; later screens may move.
+        speakers = {(b.get("props") or {}).get("npcId") for nd in (c.get("nodes") or [])[:1]
+                    for b in _flat_blocks(nd.get("blocks"))
+                    if (b.get("props") or {}).get("speaker") == "npc"}
+        people = ({trig.get("npc"), trig.get("requires_npc")} | speakers) & set(where)
+        if _rep_of(trig):
+            for pid in speakers & set(where):
+                n += 1
+                bad = next((s for s in sorted(slots) if _tr_asleep(where[pid], lid, s)), None)
+                if bad and not sleepy:
+                    rows.append(f"{c['id']}: {names.get(pid, pid)} speaks while asleep at {_tr_slot_name(bad)}")
+            continue
+        bld = _tr_building(game, lid)
+        for pid in sorted(people):
+            n += 1
+            table = where[pid]
+            # They may walk in from the next room (the same building); never from nowhere.
+            gone = next((s for s in sorted(slots) if not _tr_places(table, s) & (bld - {None})), None)
+            if gone is not None:
+                rows.append(f"{c['id']} (one-time): {names.get(pid, pid)} is not in the building at "
+                            f"{_tr_slot_name(gone)}, and nothing on this path checks")
+                continue
+            bad = next((s for s in sorted(slots) if table.get(s) and
+                        all(_TR_SLEEP.search(a or "") for _, a in table.get(s, ()))), None)
+            if bad and not sleepy:
+                rows.append(f"{c['id']} (one-time): {names.get(pid, pid)} is asleep at {_tr_slot_name(bad)}")
+    if not n:
+        return None, "no knock, one-time scene or speaker to judge", []
+    return not rows, (f"{len(rows)} knock(s) or scene(s) reach a person who is asleep or not there"
+                      if rows else f"{n}/{n} knocks and scenes find their person awake and there"), rows
+
+
+# ── every person here has a face (B116, B109; sweep F) ────────────────────────
+def _tr_base_face(c):
+    """A face that is not heat-gated: its trigger needs no player meter above zero and no other
+    person away. A heat canvas is a face, but never a person's only one."""
+    for it in _conditions_of(c.get("trigger") or {}):
+        if it.get("type") == "npc_at_location" and it.get("operator") == "is_absent":
+            return False
+        kind, key, op, val = _cond_parts(it)
+        if kind == "trait" and (it.get("subject") or "player") == "player" and op in ("gte", "gt") \
+                and isinstance(val, (int, float)) and val > 0 and not str(key).endswith("_step"):
+            return False
+    return True
+
+
+def _every_person_has_a_face(game, state=None):
+    """(ok, headline, detail) for the gate `every person here has a face`."""
+    where = _tr_where(game)
+    if not where:
+        return None, "no person has schedule rows", []
+    names = {n["id"]: n.get("name") for n in game.get("npcs") or [] if n.get("id")}
+    # `board.characters[].occupancy_rows` (state.md): a row whose job is a body in the room,
+    # keyed by place AND start time. Its slots need no face; the person's other rows do.
+    exempt = set()
+    rows_of = {n.get("id"): n.get("schedules") or [] for n in game.get("npcs") or []}
+    for ch in ((state or {}).get("board") or {}).get("characters") or []:
+        for r in ch.get("occupancy_rows") or []:
+            for row in rows_of.get(ch.get("id"), []):
+                if isinstance(row, dict) and row.get("location") == (r or {}).get("location") \
+                        and row.get("start_time") == (r or {}).get("start_time"):
+                    exempt |= {(ch.get("id"), row.get("location"), s) for s in _tr_rows_slots([row])}
+    by_id = {c.get("id"): c for c in game.get("canvases") or [] if c.get("id")}
+    parents = _tr_parents(game)
+    faces = collections.defaultdict(set)          # (person, place) -> slots a base face covers
+    heat = collections.defaultdict(set)
+    rows = []
+    for c in by_id.values():
+        trig = c.get("trigger") or {}
+        if _is_dev(c) or not _rep_of(trig) or trig.get("is_active") is False or trig.get("substitution_only"):
+            continue
+        if trig.get("npc") in where and trig.get("location"):
+            _, slots, _ = _tr_canvas_window(game, where, c, by_id, parents)
+            (faces if _tr_base_face(c) else heat)[(trig["npc"], trig["location"])] |= slots
+        rq = trig.get("requires_npc")
+        if rq in where and trig.get("location") and not any(
+                trig["location"] in _tr_places(where[rq], s) for s in _TR_SLOTS):
+            rows.append(f"{c['id']}: requires {names.get(rq, rq)} at {trig['location']}, where no row "
+                        f"ever puts them — the canvas never shows (a child room never matches the "
+                        f"person's row, engine.md §46.1)")
+    n = 0
+    for pid, table in where.items():
+        gaps = collections.defaultdict(list)
+        for s in _TR_SLOTS:
+            for p in _tr_places(table, s):
+                if p and (pid, p, s) not in exempt and s not in faces[(pid, p)]:
+                    gaps[p].append(s)
+        for p in sorted({p for s in _TR_SLOTS for p in _tr_places(table, s) if p}):
+            n += 1
+            if gaps.get(p):
+                miss = gaps[p]
+                only = " — only a heat-gated face there" if any(s in heat[(pid, p)] for s in miss) else ""
+                rows.append(f"{names.get(pid, pid)} @ {p}: no face at {len(miss) * _TR_STEP // 60}h "
+                            f"of their week, first {_tr_slot_name(miss[0])}{only}")
+    if not n:
+        return None, "no scheduled person", []
+    return not rows, (f"{len(rows)} person/place pair(s) where the rows put someone and no face shows"
+                      if rows else f"{n}/{n} places each person stands have a face there"), rows
+
+
+# ── a past line has its event (B104, B95; sweep H) ────────────────────────────
+_TR_PAST = re.compile(
+    r"\b(?:last (?:night|week|time|weekend|monday|tuesday|wednesday|thursday|friday|saturday|sunday)|"
+    r"yesterday|the other (?:day|night)|(?:said|did) (?:so )?on (?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)|"
+    r"(?:friday|saturday) at \w+'s|owes him|(?:was|were|went|did) \w+ (?:on|last) (?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)|"
+    r"i heard|you heard|asked about you|told me|you told|she told|he told|you said|"
+    r"did the dare|was at|were at|remember (?:when|the)|that night|ago\b|since the|after what|"
+    r"what you did|what happened)", re.I)
+
+
+def _tr_backs_event(it, multi):
+    """Does this condition item read something that records ONE past event?"""
+    kind, key, op, val = _cond_parts(it)
+    if it.get("type") in ("days_since_flag", "hours_since_flag"):
+        return True
+    if kind == "flag" and op == "is_true" and not str(key).endswith("_met"):
+        return True
+    if kind == "trait" and op in ("gte", "gt", "eq") and isinstance(val, (int, float)) and val > 0:
+        return str(key).endswith("_step") or key not in multi
+    return False
+
+
+def _past_line_has_event(game):
+    """(ok, headline, detail) for the gate `a past line has its event`."""
+    setters = _tr_trait_setters(game)
+    multi = {k for k, v in setters.items() if len(v) >= 2}
+    staged = _tr_opening(game)
+    rows, n = [], 0
+    units = [(c.get("id"), nid, text, items) for c, nid, text, items, b in _tr_units(game)
+             if c.get("id") not in staged]
+    # A quest card's text and a feed post's caption claim a past the same way a scene does.
+    for i, card in enumerate(game.get("quest_cards") or []):
+        if isinstance(card, dict):
+            txt = " ".join(str(card.get(k) or "") for k in ("text", "tip"))
+            units.append((f"card {i + 1} ({card.get('npc_id') or 'story'})", "card", txt,
+                          [w for w in card.get("when") or [] if isinstance(w, dict)]))
+    for post in ((game.get("phone") or {}).get("posts") or []):
+        if isinstance(post, dict):
+            units.append((f"post {post.get('id')}", "caption", str(post.get("caption") or ""),
+                          list(_conditions_of(post.get("trigger") or {}))))
+    for cid, nid, text, items in units:
+        for sent in _beat_sentences(text):
+            m = _TR_PAST.search(sent)
+            if not m:
+                continue
+            n += 1
+            if not any(_tr_backs_event(it, multi) for it in items):
+                gate = [it for it in items if _cond_parts(it)[0]]
+                why = ("no condition" if not gate else
+                       "only " + ", ".join(sorted({str(_cond_parts(it)[1]) for it in gate})) +
+                       " (a met flag, or a meter many scenes raise, records no one event)")
+                rows.append(f"{cid} · {nid} [{m.group(0)}]: {why} — \"{sent.strip()[:110]}\"")
+    if not n:
+        return None, "no line claims a past", []
+    return not rows, (f"{len(rows)} line(s) claim a past no flag records" if rows else
+                      f"{n}/{n} past lines read the flag of their event"), rows
+
+
+# ── no one is named before they're met (B103, B59; sweep H/P) ─────────────────
+# The name, then a verb in the present: "Zoe kicks your ankle", "Nadia leans over".
+_TR_ACTS = re.compile(r"^\s+(?:\w+ly\s+)?(?!is\b|was\b|has\b|says\b)[a-z]+s\b")
+
+
+def _named_before_met_gate(game):
+    """(ok, headline, detail) for the gate `no one is named before they're met`."""
+    sets, clears, tick = _tr_flag_ops(game)
+    read = set()
+    for it in _pr_collect(game, lambda d: d.get("flag_key") if isinstance(d.get("flag_key"), str) else None, set()):
+        read.add(it)
+    rows, n = [], 0
+    for f in sorted(read):
+        if f.endswith("_met") and f not in sets:
+            rows.append(f"`{f}` is read and no canvas or reply sets it — everything behind it is dead")
+    people = {}
+    for p in game.get("npcs") or []:
+        short = str(p.get("id", "")).replace("npc_", "", 1)
+        if f"{short}_met" in sets or f"{short}_met" in read:
+            name = str(p.get("name") or "")
+            words = re.sub(r"^(?:dr|mr|mrs|ms|miss|prof|the)\.?\s+", "", name, flags=re.I)
+            if len(words) >= 3:
+                rx = re.compile(r"\b%s\b" % re.escape(words), 0 if not name.lower().startswith("the ") else re.I)
+                people[p["id"]] = (short, rx, name)
+    meeters = collections.defaultdict(set)
+    for f, cids in sets.items():
+        meeters[f].update(cids)
+    staged = _tr_opening(game)
+    by_id = {c.get("id"): c for c in game.get("canvases") or [] if c.get("id")}
+
+    def after_meeting(short):
+        """Flags every setter of which meets the person or is itself gated on meeting them."""
+        out = set()
+        for f, cids in sets.items():
+            ok = bool(cids)
+            for cid in set(cids):
+                cv = by_id.get(cid) or {}
+                if cid in meeters.get(f"{short}_met", ()):
+                    continue
+                if not any(str(_cond_parts(it)[1] or "").startswith(short + "_")
+                           for it in _conditions_of(cv.get("trigger") or {})):
+                    ok = False
+                    break
+            if ok:
+                out.add(f)
+        return out
+    implied = {pid: after_meeting(short) for pid, (short, rx, name) in people.items()}
+    for c, nid, text, items, b in _tr_units(game):
+        trig = c.get("trigger") or {}
+        for pid, (short, rx, name) in people.items():
+            if not rx.search(text):
+                continue
+            n += 1
+            if c.get("id") in meeters.get(f"{short}_met", ()) or pid in (trig.get("npc"), trig.get("requires_npc")):
+                continue
+            placed = [x for x in _beat_sentences(text) if rx.search(x) and (
+                _tr_placed(rx, x) or _TR_ACTS.search(x[rx.search(x).end():rx.search(x).end() + 30]))]
+            if b.get("type") not in ("paragraph", "note") or not placed:
+                continue          # others may speak of someone she hasn't met; narration may not place them
+            ok = any(str(_cond_parts(it)[1] or it.get("flag_key") or "").startswith(short + "_")
+                     or it.get("npc_id") == pid
+                     or (_cond_parts(it)[0] == "flag" and _cond_parts(it)[1] in implied[pid]) for it in items)
+            if not ok:
+                where = "the opening" if c.get("id") in staged else c["id"]
+                rows.append(f"{where} · {nid}: names {name} with nothing on the way reading "
+                            f"`{short}_met` — \"{placed[0].strip()[:110]}\"")
+    if not n and not rows:
+        return None, "no person with a met flag is named", []
+    return not rows, (f"{len(rows)} line(s) name someone the player may not have met"
+                      if rows else f"{n}/{n} names wait for their meeting"), rows
+
+
+# ── a latch flag is cleared (B98, B21; sweep O) ──────────────────────────────
+_TR_ENGINE_FLAGS = {"rent_carried": "v2.py:14426-14427 sets it on a short week and nothing in the engine clears it"}
+
+
+def _latch_flag_cleared(game):
+    """(ok, headline, detail) for the gate `a latch flag is cleared`.
+
+    A flag that drives a schedule row's `when`, an engine-set flag, or a flag a repeatable
+    canvas both reads and clears (a catch: it fires again until the player clicks it) is a
+    LATCH. It must be in `[engine.daily_tick]`, or be read through `hours_since_flag` /
+    `days_since_flag`, or it stays set for the whole save once its one optional clearer is
+    skipped."""
+    sets, clears, tick = _tr_flag_ops(game)
+    timed = set(_pr_collect(game, lambda d: d.get("flag_key") if d.get("type") in
+                            ("hours_since_flag", "days_since_flag") else None, set()))
+    latches = {}
+    for p in game.get("npcs") or []:
+        for r in p.get("schedules") or []:
+            if isinstance(r, dict) and r.get("when") and not _tr_met_only(r["when"]):
+                for it in _tr_and_items({"conditions": r["when"]}) if isinstance(r["when"], dict) else []:
+                    if it.get("flag_key") and it.get("operator") == "is_true":
+                        latches.setdefault(it["flag_key"], f"drives {p.get('id')}'s row at {r.get('location')}")
+    for f, why in _TR_ENGINE_FLAGS.items():
+        if any(f in json.dumps(c) for c in game.get("canvases") or []):
+            latches.setdefault(f, why)
+    for c in game.get("canvases") or []:
+        trig = c.get("trigger") or {}
+        if not _rep_of(trig):
+            continue
+        for it in _conditions_of(trig):
+            f = it.get("flag_key")
+            if f and it.get("operator") == "is_true" and c.get("id") in clears.get(f, ()):
+                latches.setdefault(f, f"read and cleared by the repeatable {c['id']}")
+    rows = []
+    for f, why in sorted(latches.items()):
+        if f in tick or f in timed or f.endswith("_met"):
+            continue
+        cl = sorted(set(clears.get(f, ())))
+        rows.append(f"`{f}` {why}; cleared only by {', '.join(cl) if cl else 'nothing'} — "
+                    f"clear it in [engine.daily_tick], or read it with hours_since_flag")
+    if not latches:
+        return None, "no latch flag", []
+    return not rows, (f"{len(rows)} latch flag(s) can stay set for the whole save" if rows else
+                      f"{len(latches)}/{len(latches)} latch flags clear daily or are timed"), rows
+
+
+# ── a repeat doesn't say it's the first time (B111; sweep A) ─────────────────
+_TR_ARRIVAL = re.compile(
+    r"\b(?:for the first time|first time you|your first (?:day|morning|night|week|shift|class)|"
+    r"you've never been|you have never been|never been (?:here|in)|you arrive|you come in|you walk in|"
+    r"as you come in|when you come in|welcome to|finds you in the crowd|watching the door for you|"
+    r"before you've sat down|waves you over|you came\b|you made it)", re.I)
+
+
+def _repeat_not_first(game):
+    """(ok, headline, detail) for the gate `a repeat doesn't say it's the first time`.
+    The first screen of a repeatable surface (and its pools) is re-read on every visit; an
+    arrival or first-time line there is false from the second visit, unless a group gated on a
+    flag (or a days/hours-since item) holds it."""
+    rows, n = [], 0
+    for c, nid, text, items, b in _tr_units(game):
+        trig = c.get("trigger") or {}
+        first = (c.get("nodes") or [{}])[0].get("id")
+        if not trig or not _rep_of(trig) or nid != first:
+            continue
+        for sent in _beat_sentences(text):
+            m = _TR_ARRIVAL.search(sent)
+            if not m:
+                continue
+            n += 1
+            own = [it for it in items if it not in list(_conditions_of(trig))]
+            if not any(_cond_parts(it)[0] == "flag" or it.get("type") in ("days_since_flag", "hours_since_flag")
+                       for it in own):
+                rows.append(f"{c['id']} · {nid} [{m.group(0)}]: \"{sent.strip()[:110]}\"")
+    if not n:
+        return None, "no arrival line on a repeatable", []
+    return not rows, (f"{len(rows)} arrival line(s) replay on every visit" if rows else
+                      f"{n}/{n} arrival lines are gated"), rows
+
+
+# ── a button does something (B100, B91; sweep B) ─────────────────────────────
+_TR_DRESS = re.compile(r"\b(?:get dressed|change (?:into|out|clothes)|put (?:it|them|clothes|something) on|"
+                       r"put on|take (?:it|them|your \w+) off|take off|strip|undress|pull (?:it|them) off)\b", re.I)
+
+
+# Words that promise ANOTHER place. "Done." or "Head back" out of an activity lands on the room
+# view, which is right; "Go back in." from the doorstep that lands on the doorstep is not.
+_TR_MOVE = re.compile(r"\b(?:back in|go in|inside|go home|walk home|head home|upstairs|downstairs|"
+                      r"go to (?:your|the|bed)|goodnight)\b", re.I)
+
+
+def _button_does_something(game):
+    """(ok, headline, detail) for the gate `a button does something`.
+    1. A choice out of a person's hub in THEIR OWN room (a place only their rows use), or one
+       that promises another place ("Go back in.", "Go home"), that lands on the place it is
+       already in with no effect and no time. Leaving his room leaves it; landing back in it puts
+       her beside the portrait she just left. In a shared room (the kitchen) the room view with the
+       portrait on it is right (engine.md §28, "Returning to the location does not re-fire the
+       hub"), and so is an activity's "Done." Repeatable surfaces only.
+    2. A choice that says she dresses or undresses and moves no garment."""
+    by_id = {c.get("id"): c for c in game.get("canvases") or [] if c.get("id")}
+    model, _ = build(game)
+    loc_of = {m["id"]: m["loc"] for m in model}
+    rows, n = [], 0
+    calls = _tr_call_canvases(game)
+    owners = collections.defaultdict(set)         # place -> everyone whose rows ever use it
+    for p in game.get("npcs") or []:
+        for r in p.get("schedules") or []:
+            if isinstance(r, dict):
+                owners[r.get("location")].add(p.get("id"))
+    for c in by_id.values():
+        if _is_dev(c) or c["id"] in calls:
+            continue
+        lid = loc_of.get(c["id"])
+        rep_c = next((m["rep"] for m in model if m["id"] == c["id"]), True)
+        nodes = {nd.get("id"): nd for nd in c.get("nodes") or []}
+        for nd in c.get("nodes") or []:
+            for ch in _tr_choices(nd):
+                n += 1
+                text = str(ch.get("text") or "")
+                acts = any(ch.get(k) for k in ("effects", "flagEffects", "wardrobeEffects", "costs",
+                                               "trait_effects"))
+                face = (c.get("trigger") or {}).get("npc") and owners.get(lid) == {(c.get("trigger") or {}).get("npc")}
+                # `return`, `trigger` and an untyped choice go to the canvas's home (engine.md §13;
+                # untyped is the importer's `trigger`), which for a room's surface is that room.
+                tt = ch.get("targetType")
+                dest = ch.get("locationId") if tt == "location" else (lid if tt in (None, "return", "trigger") else None)
+                if rep_c and dest == lid and not acts \
+                        and int(ch.get("time_progression_minutes") or 0) <= 5 \
+                        and (face or _TR_MOVE.search(text)):
+                    rows.append(f"{c['id']} · {nd.get('id')} \"{text}\": leaves to {lid}, the place it is "
+                                f"already in, and changes nothing — the same screen comes back")
+                if _TR_DRESS.search(text) and not ch.get("wardrobeEffects"):
+                    tgt = nodes.get(str(ch.get("nodeId") or "").split(".")[-1])
+                    if not (tgt and any(x.get("wardrobeEffects") for x in _tr_choices(tgt))):
+                        rows.append(f"{c['id']} · {nd.get('id')} \"{text}\": says she changes and moves "
+                                    f"no garment")
+    return not rows, (f"{len(rows)} button(s) do nothing they say" if rows else
+                      f"{n}/{n} buttons do what they say"), rows
+
+
+# ── a clock bucket has a catch-all (B99; sweep B) ────────────────────────────
+def _clock_bucket_catch_all(game):
+    """(ok, headline, detail) for the gate `a clock bucket has a catch-all`."""
+    where = _tr_where(game)
+    by_id = {c.get("id"): c for c in game.get("canvases") or [] if c.get("id")}
+    parents = _tr_parents(game)
+    rows, n = [], 0
+    for c in by_id.values():
+        if _is_dev(c):
+            continue
+        _, slots, _ = _tr_canvas_window(game, where, c, by_id, parents)
+        times, stranded = _tr_node_times(c, slots)
+        n += sum(1 for nd in c.get("nodes") or [] if any(_tr_choice_items(ch) for ch in _tr_choices(nd)))
+        for nid, slot in stranded:
+            rows.append(f"{c['id']} · {nid}: every exit is on a clock bucket, and the player can stand "
+                        f"here at {_tr_slot_name(slot)}, which none of them covers — add one exit with "
+                        f"no time item, last")
+    if not n:
+        return None, "no screen exits on a clock bucket", []
+    return not rows, (f"{len(rows)} screen(s) can strand the player between clock buckets" if rows
+                      else f"{n}/{n} screens with clock buckets leave a way on at every minute"), rows
+
+
+# ── her clothes are named exactly + one garment per slot (B107, B108, B96, B97; sweep W) ─
+_TR_UNDER = re.compile(r"\b(?:underwear|bra|panties|knickers|thong|naked|nude|topless|bare tits|"
+                       r"nothing (?:on|under))\b", re.I)
+_TR_STRIP = re.compile(r"\byou (?:strip|undress|peel (?:it|them|everything) off|pull your \w+ off|"
+                       r"take your \w+ off|kick your clothes off|step out of your)\b", re.I)
+_TR_EXACT = ("clothing_slot", "worn_type", "clothing_item", "wardrobe", "wardrobe_removed")
+
+
+def _clothes_named_exactly(game):
+    """(ok, headline, detail) for the gate `her clothes are named exactly`.
+    `worn_exposure` 1 or 2 is a level, not a garment: 1 is the towel, the sleep shirt and
+    underwear alike, and 2 is either half bare (the larger of the two halves). A line naming
+    her underwear or saying she is naked needs a slot, type or item check. A "you strip" line
+    needs a wardrobe effect on the screen it is on or the choice into it."""
+    if not game.get("clothing"):
+        return None, "no [[clothing]] catalog", []
+    rows, n = [], 0
+    into = collections.defaultdict(list)
+    for c in game.get("canvases") or []:
+        for nd in c.get("nodes") or []:
+            for ch in _tr_choices(nd):
+                tgt = str(ch.get("nodeId") or "").split(".")[-1]
+                if tgt:
+                    into[(c.get("id"), tgt)].append(ch)
+    for c, nid, text, items, b in _tr_units(game):
+        if (b.get("props") or {}).get("speaker") == "npc":
+            continue
+        types = {it.get("type") for it in items}
+        for sent in _beat_sentences(text):
+            if _TR_UNDER.search(sent) and types & ({"worn_exposure"} | set(_TR_EXACT)):
+                n += 1
+            if _TR_UNDER.search(sent) and "worn_exposure" in types and not types & set(_TR_EXACT):
+                rows.append(f"{c['id']} · {nid}: names her clothes on worn_exposure alone — "
+                            f"\"{sent.strip()[:110]}\"")
+            if _TR_STRIP.search(sent):
+                n += 1
+                nd = next((x for x in c.get("nodes") or [] if x.get("id") == nid), {})
+                wfx = any(ch.get("wardrobeEffects") for ch in _tr_choices(nd) + into[(c.get("id"), nid)])
+                if not wfx:
+                    rows.append(f"{c['id']} · {nid}: she strips and no garment comes off — "
+                                f"\"{sent.strip()[:110]}\"")
+    if not n:
+        return None, "no line names her underwear or a strip", []
+    return not rows, (f"{len(rows)} line(s) say more about her clothes than the check behind them"
+                      if rows else f"{n}/{n} clothing lines are exact"), rows
+
+
+def _one_garment_per_slot(game):
+    """(ok, headline, detail) for the gate `one garment per slot`. The engine wears every
+    `initial` garment at the start, and two in one slot leave her in the LAST one
+    (v2.py:1192-1204); an `equip` also grants the garment (v2.py:16622), so two equips in one
+    slot on one choice leave her in the last, owned or not."""
+    cat = {c.get("id"): c for c in game.get("clothing") or [] if isinstance(c, dict)}
+    if not cat:
+        return None, "no [[clothing]] catalog", []
+    rows = []
+    init = collections.defaultdict(list)
+    for cid, it in cat.items():
+        if it.get("initial"):
+            init[it.get("slot")].append(cid)
+    for slot, ids in sorted(init.items()):
+        if len(ids) > 1:
+            rows.append(f"initial: {', '.join(ids)} all in `{slot}` — she starts wearing {ids[-1]}")
+    n = 0
+    for c in game.get("canvases") or []:
+        for nd in c.get("nodes") or []:
+            for h in _tr_choices(nd) + [((nd.get("exit_block") or {}).get("config") or {})]:
+                eq = [w.get("item_id") for w in h.get("wardrobeEffects") or []
+                      if isinstance(w, dict) and w.get("action") == "equip"]
+                if eq:
+                    n += 1
+                by = collections.defaultdict(list)
+                for i in eq:
+                    by[(cat.get(i) or {}).get("slot")].append(i)
+                for slot, ids in by.items():
+                    if slot and len(ids) > 1:
+                        rows.append(f"{c['id']} · {nd.get('id')} \"{h.get('text', 'exit')}\": equips "
+                                    f"{', '.join(ids)} in `{slot}` — she ends in {ids[-1]} and owns all")
+    return not rows, (f"{len(rows)} place(s) put two garments in one slot" if rows else
+                      f"{len(init) + n} starts and equips put one garment in each slot"), rows
+
+
+# ── a card shows the real gates (B110, B84; sweep Q) ─────────────────────────
+def _card_shows_real_gates(game, state=None):
+    """(ok, headline, detail) for the gate `a card shows the real gates`.
+    A goal on a step counter renders "label — n / n+1" (v2.py:18103-18108): it tells the player
+    nothing. Every item of the step's trigger must reach the card instead: a meter as a goal on
+    that meter, another person's step or trait in words naming that person."""
+    cards = [c for c in game.get("quest_cards") or [] if isinstance(c, dict)]
+    if not cards:
+        return None, "no quest cards", []
+    by_id = {c.get("id"): c for c in game.get("canvases") or [] if c.get("id")}
+    names = {n["id"]: str(n.get("name") or "") for n in game.get("npcs") or [] if n.get("id")}
+    counters = {str((ch.get("ladder") or {}).get("counter")) for ch in
+                (((state or {}).get("board") or {}).get("characters") or []) if isinstance(ch.get("ladder"), dict)}
+    rows = []
+    for i, card in enumerate(cards):
+        tag = f"card {i + 1} ({card.get('npc_id') or card.get('id') or 'story'})"
+        goals = [g for g in card.get("goals") or [] if isinstance(g, dict)]
+        for g in goals:
+            key = g.get("trait") or g.get("trait_key")
+            if key and (str(key).endswith("_step") or key in counters):
+                rows.append(f"{tag}: goal on the step counter `{key}` renders \"— n / n+1\": "
+                            f"\"{str(g.get('label'))[:70]}\"")
+        words = " ".join(str(card.get(k) or "") for k in ("text", "tip")) + " " + \
+                " ".join(str(g.get("label") or "") for g in goals)
+        goal_keys = {g.get("trait") or g.get("trait_key") or g.get("flag") for g in goals}
+        ready = by_id.get(card.get("ready_canvas"))
+        for it in _conditions_of((ready or {}).get("trigger") or {}):
+            kind, key, op, val = _cond_parts(it)
+            if kind != "trait" or op not in ("gte", "gt") or (it.get("subject") or "player") != "player" \
+                    and not it.get("npc_id"):
+                continue
+            own = str(key).endswith("_step") and card.get("npc_id") and \
+                str(key).startswith(str(card["npc_id"]).replace("npc_", "", 1))
+            if own or key in goal_keys:
+                continue
+            who = it.get("npc_id") or (next((p for p in names if str(key).startswith(p.replace("npc_", "", 1) + "_")), None))
+            if who and names.get(who) and re.search(r"\b%s\b" % re.escape(names[who].split()[-1]), words):
+                continue
+            rows.append(f"{tag}: the step ({card.get('ready_canvas')}) needs `{key} {op} {val}`, "
+                        f"and the card never says so")
+    return not rows, (f"{len(rows)} card line(s) hide or miscount what the step needs" if rows else
+                      f"{len(cards)}/{len(cards)} cards show their step's gates"), rows
+
+
+# ── a phone line is true (B106, B85, B66; sweep C) ───────────────────────────
+_TR_WHERE_SHE_IS = re.compile(r"\b(?:i'm (?:home|in my room|in bed|upstairs|at zoe's|at work)|"
+                              r"you're (?:home|in your room|out)|where are you)\b", re.I)
+
+
+def _phone_line_true(game):
+    """(ok, headline, detail) for the gate `a phone line is true`.
+    1. A message after her reply waits for it only with `after_round` / `after_choice`
+       (template_import.py:363-365, v2.py:3064-3070); `round` on a message does nothing, so the
+       follow-up shows before she answers and answers both replies at once.
+    2. No condition reads where the player is (there is no such item type), so a call's screen
+       must not say where she is, nor move her somewhere.
+    3. A caller or sender whose row says asleep at any minute of the window is red."""
+    ph = game.get("phone") or {}
+    convs = [c for c in ph.get("conversations") or [] if isinstance(c, dict)]
+    calls = [c for c in ph.get("calls") or [] if isinstance(c, dict)]
+    if not convs and not calls:
+        return None, "no phone chats or calls", []
+    where = _tr_where(game)
+    names = {n["id"]: n.get("name") for n in game.get("npcs") or [] if n.get("id")}
+    rows = []
+    for cv in convs:
+        seen_reply = False
+        for blk in cv.get("blocks") or []:
+            if not isinstance(blk, dict):
+                continue
+            if blk.get("type") == "reply":
+                seen_reply = True
+            elif blk.get("type") == "message" and blk.get("sender") == "npc" and seen_reply \
+                    and blk.get("after_round") is None and blk.get("after_choice") is None:
+                rows.append(f"chat {cv.get('id')}: \"{str(blk.get('content'))[:60]}\" follows a reply with no "
+                            f"after_round — it shows before she answers"
+                            + (" (`round` on a message is ignored)" if "round" in blk else ""))
+    by_id = {c.get("id"): c for c in game.get("canvases") or [] if c.get("id")}
+    for cl in calls:
+        who = cl.get("caller")
+        slots = _tr_narrow(set(_TR_ALL), _tr_and_items(cl.get("trigger") or {}), where, {})
+        if who in where:
+            bad = next((s for s in sorted(slots) if any(_TR_SLEEP.search(a or "") for _, a in where[who].get(s, ()))), None)
+            if bad:
+                rows.append(f"call {cl.get('id')}: {names.get(who, who)} is asleep at {_tr_slot_name(bad)}")
+        acc = by_id.get(cl.get("accept"))
+        if acc:
+            text = " ".join(str(b.get("content")) for nd in acc.get("nodes") or []
+                            for b in _flat_blocks(nd.get("blocks")) if b.get("content"))
+            m = _TR_WHERE_SHE_IS.search(text)
+            if m:
+                rows.append(f"call {cl.get('id')}: the call says where she is (\"{m.group(0)}\") and nothing can "
+                            f"check it")
+            for nd in acc.get("nodes") or []:
+                for ch in _tr_choices(nd):
+                    if ch.get("targetType") == "location":
+                        rows.append(f"call {cl.get('id')} · {nd.get('id')} \"{ch.get('text')}\": answering moves "
+                                    f"her to {ch.get('locationId')} from wherever she is")
+                        break
+    for cv in convs:
+        who = cv.get("npc")
+        items = _tr_and_items(cv.get("trigger") or {})
+        if who in where and any(it.get("type") == "time_of_day" for it in items):
+            slots = _tr_narrow(set(_TR_ALL), items, where, {})
+            bad = next((s for s in sorted(slots) if any(_TR_SLEEP.search(a or "") for _, a in where[who].get(s, ()))), None)
+            if bad:
+                rows.append(f"chat {cv.get('id')}: {names.get(who, who)} texts while asleep at {_tr_slot_name(bad)}")
+    return not rows, (f"{len(rows)} phone line(s) can't be true when they show" if rows else
+                      f"{len(convs) + len(calls)} chats and calls hold"), rows
+
+
+# ── one pool, one place + the phone owns posting (B115, B77; sweep D) ─────────
+def _one_pool_one_place(game):
+    """(ok, headline, detail) for the gate `one pool, one place`. A pool (or a paragraph of 15
+    words or more) pasted into two canvases is one surface wearing two faces: the second copy
+    is either false where it is or a repeat the player reads twice."""
+    seen = collections.defaultdict(set)
+    for c in game.get("canvases") or []:
+        if _is_dev(c):
+            continue
+        for nd in c.get("nodes") or []:
+            for b in _flat_blocks(nd.get("blocks")):
+                if b.get("type") == "block_pool":
+                    kids = b.get("blocks") or (b.get("props") or {}).get("blocks") or []
+                    sig = tuple(sorted(" ".join(str(x.get("content")) for x in _flat_blocks([k]) if x.get("content"))
+                                       for k in kids))
+                    if sig and any(sig):
+                        seen[("pool", sig)].add(c["id"])
+                elif b.get("type") in PROSE_BLOCKS and len(str(b.get("content") or "").split()) >= 15:
+                    seen[("para", str(b["content"]).strip())].add(c["id"])
+    rows = []
+    for (kind, sig), cids in sorted(seen.items(), key=lambda kv: sorted(kv[1])):
+        if len(cids) > 1:
+            first = (sig[0] if kind == "pool" else sig)[:80]
+            rows.append(f"{'pool' if kind == 'pool' else 'paragraph'} in {', '.join(sorted(cids))}: \"{first}\"")
+    return not rows, (f"{len(rows)} pool(s) or paragraph(s) pasted into more than one canvas" if rows
+                      else "every pool and long paragraph lives in one canvas"), rows
+
+
+_TR_POST = re.compile(r"\b(?:post (?:it|a|one|the)|selfie|upload)\b", re.I)
+
+
+def _phone_owns_posting(game):
+    """(ok, headline, detail) for the gate `the phone owns posting`. With a phone feed that can
+    post (`post_actions`), a room button that posts or takes a selfie is the same act twice."""
+    apps = [a for a in ((game.get("phone") or {}).get("apps") or []) if isinstance(a, dict)]
+    feed = [a for a in apps if a.get("type") == "social_feed" and a.get("post_actions")]
+    if not feed:
+        return None, "no phone feed that posts", []
+    counters = {p.get("counter_trait") for a in feed for p in a.get("post_actions") or [] if isinstance(p, dict)}
+    rows = []
+    for c in game.get("canvases") or []:
+        if _is_dev(c):
+            continue
+        hit = None
+        for nd in c.get("nodes") or []:
+            for ch in _tr_choices(nd):
+                if _TR_POST.search(str(ch.get("text") or "")) or any(
+                        (e.get("trait") or e.get("trait_key")) in counters for e in ch.get("effects") or []
+                        if isinstance(e, dict)):
+                    hit = hit or f"{c['id']} · {nd.get('id')} \"{ch.get('text')}\""
+        if hit:
+            rows.append(f"{hit}: posts from a room while the phone's Feed posts — keep it on the phone")
+    return not rows, (f"{len(rows)} room surface(s) copy the phone's posting" if rows else
+                      "posting lives on the phone only"), rows
+
+
+# ── a day word fits its window (the-clock.md C2; sweep T) ────────────────────
+# "Tonight" said at noon means the night ahead, and "goodnight" is a parting, so neither is judged.
+_TR_PARTS = {"this evening": (1020, 1380), "this morning": (300, 720),
+             "this afternoon": (720, 1080), "morning.": (300, 720), "good morning": (300, 720)}
+_TR_DAY_RX = re.compile(r"\b(?:it's|today's|today is|on a|this|every) (monday|tuesday|wednesday|thursday|friday|"
+                        r"saturday|sunday)\b|\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday) "
+                        r"(?:morning|night|evening|afternoon) again\b", re.I)
+
+
+def _day_word_fits(game):
+    """(ok, headline, detail) for the gate `a day word fits its window`. "Tonight", "this
+    morning", "it's Friday" are true only at some slots; a line carrying one must not render
+    outside them."""
+    where = _tr_where(game)
+    rows, n = [], 0
+    days = {d.lower(): i for i, d in enumerate(_LOC_DAY_NAMES)}
+    for cid, nid, kind, text, spk, lid, slots, pinned, rep, entry in _tr_texts(game, where):
+        if not slots:
+            continue
+        low = text.lower()
+        for word, (a, b) in _TR_PARTS.items():
+            if re.search(r"(?<![\w])%s" % re.escape(word), low):
+                n += 1
+                bad = next((s for s in sorted(slots) if not _tr_in_window(s[1], f"{a // 60:02d}:{a % 60:02d}",
+                                                                           f"{b // 60:02d}:{b % 60:02d}")), None)
+                if bad:
+                    rows.append(f"{cid} · {nid} \"{word.strip('.')}\": shows at {_tr_slot_name(bad)}")
+        for m in _TR_DAY_RX.finditer(text):
+            n += 1
+            d = days[(m.group(1) or m.group(2)).lower()]
+            bad = next((s for s in sorted(slots) if s[0] != d), None)
+            if bad:
+                rows.append(f"{cid} · {nid} \"{m.group(0)}\": shows on {_TR_DAYS[bad[0]]}")
+    if not n:
+        return None, "no day or day-part word", []
+    rows = sorted(set(rows))
+    return not rows, (f"{len(rows)} line(s) name a day or time they can show outside" if rows else
+                      f"{n}/{n} day words fit their window"), rows
+
+
+def _lives_inside(state, npc_id):
+    """B76: `want.cast[].keeps` = "none — inside <whose> scenes" declares a person with no
+    rows of their own (they appear inside someone else's scenes), so `standing surface` does
+    not ask where they stand."""
+    for c in ((state or {}).get("want") or {}).get("cast") or []:
+        if isinstance(c, dict) and c.get("id") == npc_id:
+            return bool(re.match(r"none\s*[—-]+\s*inside\b", str(c.get("keeps") or ""), re.I))
+    return False
+
+
+# ── registration: the truth gates run from `_phase4_gates` (one call line, citation-safe) ──
+TRUTH_SINCE = "2026-10-08"
+_TRUTH_GATES = (
+    # (gate name, function, its arguments, rule id for SHIP_SINCE or None when it only reports)
+    ("a named person is where the line says", _named_person_present, "g", "named_present"),
+    ("nobody is woken", _nobody_is_woken, "g", "nobody_woken"),
+    ("every person here has a face", _every_person_has_a_face, "gs", "every_face"),
+    ("a past line has its event", _past_line_has_event, "g", None),
+    ("no one is named before they're met", _named_before_met_gate, "g", "named_before_met"),
+    ("a latch flag is cleared", _latch_flag_cleared, "g", "latch_cleared"),
+    ("a repeat doesn't say it's the first time", _repeat_not_first, "g", None),
+    ("a button does something", _button_does_something, "g", "button_does"),
+    ("a clock bucket has a catch-all", _clock_bucket_catch_all, "g", "clock_catch_all"),
+    ("her clothes are named exactly", _clothes_named_exactly, "g", None),
+    ("one garment per slot", _one_garment_per_slot, "g", None),
+    ("a card shows the real gates", _card_shows_real_gates, "gs", "card_real_gates"),
+    ("a phone line is true", _phone_line_true, "g", "phone_true"),
+    ("one pool, one place", _one_pool_one_place, "g", None),
+    ("the phone owns posting", _phone_owns_posting, "g", None),
+    ("a day word fits its window", _day_word_fits, "g", None),
+)
+# LO 2026-10-08: these nine BLOCK `--ship`; the other seven are ordinary gates (reported).
+for _name, _fn, _args, _rule in _TRUTH_GATES:
+    if _rule:
+        SHIP_BLOCK_GATES[_name] = _name
+        SHIP_SINCE[_rule] = (TRUTH_SINCE, _name)
+SHIP_NA_PASSES |= {name for name, _f, _a, rule in _TRUTH_GATES if rule}
+
+
+def _truth_run(name, game, state):
+    """(ok, headline, detail) for one truth gate. Under `_legacy(rule)` (a grandfathered
+    game's old-rule re-run) a BLOCK gate reports "not checked before", so its row WARNS
+    instead of blocking."""
+    _n, fn, args, rule = next(t for t in _TRUTH_GATES if t[0] == name)
+    if rule and _legacy(rule):
+        return True, f"not checked before {TRUTH_SINCE}", []
+    return fn(game, state) if args == "gs" else fn(game)
+
+
+def _truth_gates(gate, _N, model, game, state):
+    """The truth gates, each called by its literal name so `--selfcheck` can see it."""
+    gate("a named person is where the line says", *_truth_run("a named person is where the line says", game, state))
+    gate("nobody is woken", *_truth_run("nobody is woken", game, state))
+    gate("every person here has a face", *_truth_run("every person here has a face", game, state))
+    gate("a past line has its event", *_truth_run("a past line has its event", game, state))
+    gate("no one is named before they're met", *_truth_run("no one is named before they're met", game, state))
+    gate("a latch flag is cleared", *_truth_run("a latch flag is cleared", game, state))
+    gate("a repeat doesn't say it's the first time", *_truth_run("a repeat doesn't say it's the first time", game, state))
+    gate("a button does something", *_truth_run("a button does something", game, state))
+    gate("a clock bucket has a catch-all", *_truth_run("a clock bucket has a catch-all", game, state))
+    gate("her clothes are named exactly", *_truth_run("her clothes are named exactly", game, state))
+    gate("one garment per slot", *_truth_run("one garment per slot", game, state))
+    gate("a card shows the real gates", *_truth_run("a card shows the real gates", game, state))
+    gate("a phone line is true", *_truth_run("a phone line is true", game, state))
+    gate("one pool, one place", *_truth_run("one pool, one place", game, state))
+    gate("the phone owns posting", *_truth_run("the phone owns posting", game, state))
+    gate("a day word fits its window", *_truth_run("a day word fits its window", game, state))
 
 
 def main():

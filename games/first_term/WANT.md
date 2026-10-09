@@ -1,6 +1,6 @@
-# The Want — First Term
+# [READY] The Want — First Term
 
-> One page, five parts. Doctrine: `references/the-want.md`.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-09). One page, five parts. Doctrine: `references/the-want.md`.
 > **Re-read this before every release.** Bump `want.last_read_at_release` in `v2_state.json`.
 > Premise picked by LO 2026-10-02: **taboo at home** — the house is the centre; college, the job and
 > the neighbourhood feed it, because what happens outside comes home with her.
@@ -19,8 +19,8 @@ never had a job, her own money or a lock on her door.
 
 - Home: the hall, the kitchen, the living room, the master bedroom (Laura and Mark's), her bedroom,
   Ryan's room, the shared bathroom.
-- The neighbourhood: her street, Mr. Vance's house next door, the corner shop, the park she walks
-  through to campus.
+- The neighbourhood: her street, Mr. Vance's house next door, the corner shop, the park (its own
+  place to walk, rest and run, not her way to campus; `SYSTEMS.md` §14).
 - Campus: the lecture hall, the library, the quad.
 - The café near campus, and Zoe's apartment.
 

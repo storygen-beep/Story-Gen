@@ -1,0 +1,32 @@
+25 · hub_mark_kitchen · hl_breakfast_tease
+sheet: sheets/people/npc_mark.md:104
+signed line: tease (Curious): In the sleep shirt: "Your mother lets you sit like that?" His eyes stay on @player's legs.
+
+facts (truth rule, checked against the built 7_final_game.toml and the sheets):
+- Choice in: "Let him look." corruption gte 20, mark_step gte 3, ate_breakfast is_false. Mark Want +1.
+- Who: Mark, Sunday breakfast (Sun 08:00 to 11:00). Laura is not placed in the room.
+- Clothes: the signed line belongs to the sleep shirt, so it lives in a worn_type group; the base has its own line. The base does not claim the rent was paid.
+- Mark's early words: legs, ass.
+
+=== SCREEN (blank line = new beat; a line in quotes is a dialog block; *italics* is a thought_bubble) ===
+
+You pull your knees up onto the chair, heels on the seat, coffee in both hands. Mark lowers the paper. His eyes go down your legs to your ankles. They come back up, slow, and stay there.
+"Sit properly, @player."
+"This is properly."
+He grunts. He turns a page, but he's still looking at your legs.
+
+*He's not reading a word of that paper. Let him look.*
+
+=== VARIANTS (each a group on the gate shown) ===
+
+[variant 1 · group: worn_type eq sleep_shirt · replaces the spoken lines of beat 1]
+Your sleep shirt slides down your thighs to your hips.
+"Your mother lets you sit like that?"
+"Like what?"
+"Like that."
+
+=== MEASURED · gates.py --beat (the screen; each variant on its own) ===
+  beat 1: 56 words · explicit 0 · median sentence 9 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0 0 0 0 0
+  beat 2: 11 words · explicit 0 · median sentence 8 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0
+  all: words 67 · explicit 0 · median sentence 8 · 0/2 register as explicit
+  variant 1: 21 words · explicit 0 · median sentence 11 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0

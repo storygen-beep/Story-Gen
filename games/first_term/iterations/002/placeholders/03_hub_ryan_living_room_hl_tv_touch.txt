@@ -1,0 +1,23 @@
+03 · hub_ryan_living_room · hl_tv_touch
+sheet: sheets/people/npc_ryan.md:105
+signed line: touch (Bold): Under the blanket his hand slides up @player's thigh, and he gets hard against @player's hip.
+
+facts (truth rule, checked against the built 7_final_game.toml and the sheets):
+- Choice in: "Share the blanket." corruption gte 40 (Bold), ryan_step gte 7 (Ryan A 8), watched_tv is_false. Ryan Want +1, corruption +1.
+- Who: Ryan. Nobody else is named: Laura may or may not be home.
+- Clothes: none named. Ryan's middle words: cock, wet (SP2 §6). Stays above the touch rung; sex waits for Hungry.
+- Beat 1 stays on the body to its last sentence; the thought is its own beat.
+
+=== SCREEN (blank line = new beat; a line in quotes is a dialog block; *italics* is a thought_bubble) ===
+
+You pull the blanket off the back of the couch and over both of you. The TV keeps playing. Ryan stops watching it. Under the blanket his hand lands on your knee, and then it slides up your thigh, slow, his fingers spread wide. You shift closer. His cock gets hard against your hip, thick through his sweats, and he doesn't pull back. His fingers stop high on the inside of your thigh, an inch from where you're wet. Every time you breathe, his cock throbs against your hip.
+"If anyone walks in," he whispers.
+"Then keep your hand still."
+He doesn't. Your thighs open, and his fingers press higher, right up against where you're wet, and his cock jerks against your hip.
+
+*Your step-brother's hand is between your thighs under a blanket in the living room. You want it higher, and he knows it.*
+
+=== MEASURED · gates.py --beat (the screen; each variant on its own) ===
+  beat 1: 123 words · explicit 3 (cock) · median sentence 10 · dashes 0 · act rungs: hands · body words by sentence: 0 0 0 0 0 1 0 1 0 0 1
+  beat 2: 22 words · explicit 0 · median sentence 14 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0
+  all: words 145 · explicit 3 · median sentence 10 · 1/2 register as explicit

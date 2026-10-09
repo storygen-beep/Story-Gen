@@ -1,0 +1,36 @@
+22 · hub_mark_living_room · hl_beer_touch
+sheet: sheets/people/npc_mark.md:108
+signed line: the paid look (Bold): "Twenty. The shirt." He watches the TV light on @player's bare tits.
+
+facts (truth rule, checked against the built 7_final_game.toml and the sheets):
+- Choice in: "Let him pay to look." corruption gte 40, mark_step gte 7 (Mark A 7), mark_paid_look is_false, had_drink_home is_false. money +20, Mark Want +1, exhibitionism +1.
+- Who: Mark. Laura is not named (she may be asleep or out).
+- Clothes: the base strips to the waist without a garment name; the sleep-shirt line lives in a worn_type group. Undressing is backed by the act.
+- Mark's middle words: tits, cock.
+- "Twenty" matches the +20 on the choice.
+
+=== SCREEN (blank line = new beat; a line in quotes is a dialog block; *italics* is a thought_bubble) ===
+
+Mark folds a twenty and drops it on the cushion between you.
+"Twenty. Off."
+
+You strip to the waist and drop everything on the floor. Your tits are bare in the blue light off the TV, and your nipples tighten in the cold room. Mark looks, and he takes his time. His eyes go from one tit to the other, down your stomach and back up. His beer sits forgotten on his knee. His cock is hard in his jeans, and he doesn't hide it. You sit back with your arms on the cushions and let him stare at your tits until the game goes to an ad.
+
+*Twenty dollars to look at you. You fold it into your fist. You don't cover up.*
+"Same price tomorrow." He turns the sound back up.
+
+=== VARIANTS (each a group on the gate shown) ===
+
+[variant 1 · group: worn_type eq sleep_shirt · replaces the first sentence of beat 2]
+You pull your sleep shirt off over your head and drop it on the floor.
+
+[variant 2 · group: worn_type eq sleep_shirt · replaces beat 1's spoken line]
+"Twenty. The shirt."
+
+=== MEASURED · gates.py --beat (the screen; each variant on its own) ===
+  beat 1: 14 words · explicit 0 · median sentence 12 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0 0
+  beat 2: 94 words · explicit 5 (cock, nipple, tit, tits) · median sentence 12 · dashes 0 · act rungs: strip · body words by sentence: 0 2 0 1 0 1 1
+  beat 3: 25 words · explicit 0 · median sentence 6 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0 0
+  all: words 133 · explicit 5 · median sentence 12 · 1/3 register as explicit
+  variant 1: 15 words · explicit 0 · median sentence 15 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0
+  variant 2: 3 words · explicit 0 · median sentence 2 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0

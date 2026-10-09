@@ -1,6 +1,6 @@
 # [READY] Scene — mark_09_his_chair
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. Every Mark step is written twice, by his Power: his terms (M) or hers (E).
 
@@ -20,9 +20,9 @@
 
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
 |---|---|---|---|---|
-| `chair` | she sits in his chair, legs crossed, the money in front of her | no | → `m` or `e` | none |
+| `chair` | she sits in his chair, legs crossed, Sunday's rent counted out of her purse in front of her, then back in it | no | → `m` or `e` | none: no money moves on a Wednesday |
 | `m` | M: "My chair." | no | "Count it slowly, Mark." → `count` · "No. I count." → parked | none |
-| `e` | E: he stands; she pushes the money across: "Count it slowly, Mark." | no | → `count` | none |
+| `e` | E: he stands; she fans Sunday's money on the table, then takes it back: "Sunday. Count it slowly, Mark." | no | → `count` | none |
 | `count` | he counts standing, hard under his jeans | no | "Good." → the hall | Mark's Want add +10 · `mark_step` set 9 · `pays_her_own_way` set |
 
 **Goal 1 ends here** (the body route): `pays_her_own_way`. The twist's offer scene follows; her answer stays parked.
@@ -44,3 +44,4 @@
 | the scene; goal 1's body route | the arc ideas, Mark A 9 · IDEA §2 |
 | the twist offer after | LO, 2026-10-07 (SP7 call 3) |
 | the table as the repeat | SP2 (After) |
+| fix from the false-line sweep | sweep A3-34 (2026-10-08) |

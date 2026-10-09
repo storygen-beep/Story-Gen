@@ -1,6 +1,6 @@
 # [READY] Scene — laura_07_dark_stairs
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. **Laura's voice sample, in full:** every screen written by
 > `v2-prose` from a spec, measured with `gates.py --beat`, pasted here. LO picked this step.
@@ -12,7 +12,7 @@
 | gate | Corruption 40 · Exhibitionism 40 · her Want 60 · Zoe A 1 |
 | want (test 1) | "Take me with you one night." (step 6); tonight she dressed for her |
 | next step (test 2) | the first kiss, and Ryan sees it |
-| hook (test 3) | the next breakfast: she'll have to look at her (step 8) |
+| hook (test 3) | Monday's breakfast: she'll have to look at her (step 8) |
 | what she wears here (test 8) | not named; Laura's short dress is Laura's |
 | her voice | stage 3, confident with her mother |
 | the crude-word ceiling | Laura's middle column: tits, nipples · no pussy · Ryan's middle column for his line |
@@ -55,7 +55,7 @@ One line changed after `v2-prose`: "At one in the morning" became "When the part
 
 **`after`** · 91 words · explicit words 1 (kiss) · median sentence 9 · the meaning beat
 
-> Laura pulls back on the stairs. Her lipstick is smeared, and she is breathing hard. She looks at Ryan in his doorway, then at you. She says nothing. She goes up past him to her bedroom, and her door clicks shut beside Mark's snoring. "@player.nickname," Ryan says, low. "What was that?" You don't answer him either. *You kissed your mother. You want her to do it again.* In the morning she'll be in the kitchen at breakfast. But a kitchen has nowhere to hide, and she'll have to look at you.
+> Laura pulls back on the stairs. Her lipstick is smeared, and she is breathing hard. She looks at Ryan in his doorway, then at you. She says nothing. She goes up past him to her bedroom, and her door clicks shut. "@player.nickname," Ryan says, low. "What was that?" You don't answer him either. *You kissed your mother. You want her to do it again.* In the morning she'll be in the kitchen at breakfast. But a kitchen has nowhere to hide, and she'll have to look at you.
 
 ## Truth checks
 
@@ -63,7 +63,7 @@ One line changed after `v2-prose`: "At one in the morning" became "When the part
 |---|---|
 | "You told me short" | `laura_asked_to_come`, set by step 6; the counter needs it |
 | "Mark's radio … in the garage" | Mark's Friday garage row, 18:00–22:00 |
-| "Mark's snoring" | the party screen moves the clock past 02:00; he is in bed from 02:00 |
+| her door clicks shut (no Mark line) | the clock can land before 02:00, when Mark is still downstairs |
 | "nobody here knows … your mom", Zoe there | the Friday party; Zoe A 1 is in the gate |
 | no garment of hers is named | nothing needs backing |
 
@@ -75,5 +75,6 @@ One line changed after `v2-prose`: "At one in the morning" became "When the part
 | this step as the voice sample | LO, 2026-10-08 |
 | the prose | `v2-prose`, measured by `gates.py --beat`, 2026-10-08 |
 | the middle column at stage 3 | LO, 2026-10-08 (question 28) |
-| the clock to 02:15 | guess, to keep "Mark's snoring" true |
+| no line names Mark | sweep A2-21 |
 | retry in 7 days | guess |
+| fix from the false-line sweep | sweep A2-21, A2-22 (2026-10-08) |

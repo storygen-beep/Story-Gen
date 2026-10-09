@@ -1,13 +1,13 @@
-# [READY] Place — Zoe's Apartment
+# [READY] Place — Zoe's Living Room
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the system sheets. Id `zoe_apartment`.
 
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | street |
+| ENTERED FROM (S2) | Zoe's Flat opens here (`zoe_flat`, inside Town); the id `zoe_apartment` is kept |
 | labels — what kind of place | `zone:town`, `private` |
 | hours | Mon–Sat 18:00–00:00 · Saturday 00:00–02:00 (Zoe's hours) |
 | closed text | "Zoe's out. Nobody answers." |
@@ -20,7 +20,7 @@
 
 | auto-fires | who is here, and when | things to do alone | ways out |
 |---|---|---|---|
-| Friday 19:00: the party (Zoe A 1 the first time) | Zoe: Mon–Sat 18:00–00:00 · Saturday 00:00–02:00 | borrow a dress (in her bedroom) | the street, Zoe's bedroom |
+| Friday 19:00: the party (Zoe A 1 the first time) | Zoe: Mon–Thu 18:00–22:00 · Fri–Sat 18:00–00:00 · Saturday 00:00–02:00 | sit on her couch | Zoe's kitchen, bathroom, bedroom · "Exit Zoe's Flat" to Town |
 |  | Jake: Friday 19:00–00:00 |  |  |
 
 ## Rows (`serves`)
@@ -46,3 +46,5 @@
 | the party at her apartment | LO, 2026-10-06 |
 | open only with Zoe home | LO took the guess, 2026-10-08 |
 | the party dress rule | LO, chat (SYSTEMS §4, §7) |
+| the room is Zoe's Living Room, in Zoe's Flat | LO, 2026-10-08 (question 47) |
+| Zoe's rows here | LO, 2026-10-08 (question 48, narrowed by 52) |

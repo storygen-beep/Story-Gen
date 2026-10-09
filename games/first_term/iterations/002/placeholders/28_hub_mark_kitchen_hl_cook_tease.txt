@@ -1,0 +1,23 @@
+28 · hub_mark_kitchen · hl_cook_tease
+sheet: sheets/people/npc_mark.md:106
+signed line: tease (Curious): @player reaches past him for the pan; he doesn't move, and @player's ass presses his hip.
+
+facts (truth rule, checked against the built 7_final_game.toml and the sheets):
+- Choice in: "Reach past him for the pan." corruption gte 20, mark_step gte 3, helped_cook is_false. Mark Want +1.
+- Who: Mark, Wednesday, he cooks (Wed 18:00 to 19:00).
+- Clothes: none named. Mark's early words: legs, ass.
+
+=== SCREEN (blank line = new beat; a line in quotes is a dialog block; *italics* is a thought_bubble) ===
+
+You reach past Mark for the pan on the back burner. He doesn't step aside. He doesn't move at all. So you lean in, and your ass presses against his hip, firm, and stays there while you take your time with the handle. He stops stirring. His breathing goes slow and heavy over your shoulder.
+"Careful, @player. It's hot."
+"I know."
+You step back with the pan. He still hasn't moved.
+
+*He made you touch him. Now he can say he didn't touch you.*
+"Salt." He holds his hand out without looking at you.
+
+=== MEASURED · gates.py --beat (the screen; each variant on its own) ===
+  beat 1: 71 words · explicit 1 (ass) · median sentence 5 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0 0 1 0 0 0 0 0
+  beat 2: 23 words · explicit 0 · median sentence 18 · dashes 0 · act rungs: touch · body words by sentence: 0 0
+  all: words 94 · explicit 1 · median sentence 5 · 0/2 register as explicit

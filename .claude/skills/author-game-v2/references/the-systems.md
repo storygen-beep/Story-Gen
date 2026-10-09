@@ -116,7 +116,7 @@ rows that feeds nothing.
 
 **Write the reader first.** A source with no readers is `the-meters.md` W3's dead meter wearing a
 new hat, and the arc file already says it in its own words — *"a skill ladder that feeds nothing is
-a chore"* (`the-arc.md` A4b). Build what checks the number, then build the place that raises it.
+wasted time"* (`the-arc.md` A4b). Build what checks the number, then build the place that raises it.
 
 ---
 

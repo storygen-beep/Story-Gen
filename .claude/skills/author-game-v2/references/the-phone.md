@@ -163,6 +163,23 @@ choices = [
 ]
 ```
 
+His answer waits for hers only through `after_round`, and answers one reply through `after_choice`
+(0 = the first choice). `round` on a message does nothing: it shows before she answers and answers
+every reply at once (`template_import.py:363-365`, `v2.py:3064-3070`). One follow-up per reply:
+
+```toml
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0          # answers "come over" only
+content = "door's open"
+```
+
+**A phone line is true when it shows.** No condition reads where she is, so a text or a call never says
+where she is and its screen never moves her; the sender is awake in its window (`scripts/who_is_where.py`);
+its time words hold after the delay. Gate *a phone line is true*.
+
 ⚠️ **A reply choice is not a beat and not a stage direction.** `"Tell him you'll think about it"`
 is wrong twice: it is an instruction rather than a message, and nobody types eight words to say no.
 
@@ -289,7 +306,9 @@ price that drops. If nothing reads it, do not count it.
 `gate_trait` when set (`engine.md` §51), and nothing else (`v2.py:3318`). A place rule ("only at home") is not
 expressible, and neither is checking what she is actually wearing — even though `worn_exposure`
 exists (`v2.py:5126`) and is exactly the predicate for it. Until then, the rung labels carry the
-whole meaning, so write them as acts (`the-voice.md` R6).
+whole meaning, so write them as acts (`the-voice.md` R6). **The phone owns posting:** no room button
+posts or takes a selfie beside the Feed (gate *the phone owns posting*); a rule the feed cannot hold is a
+gap to log, not a room copy.
 
 **The feed can also look back at her.** `course-of-temptation` generates its feed posts from her
 reputation meters rather than authoring one per story beat — students post about her if she is
@@ -448,7 +467,7 @@ the adults-only rule).
 
 **Upkeep is not pressure.** P5's costs are pressure because they trade the phone against something
 else she could be doing with that minute. A battery is a second clock that governs only the phone,
-and it buys nothing — it reads as a chore, and the field's own players say so.
+and it buys nothing — it reads as busywork, and the field's own players say so.
 
 ⚠️ **This is the one place where corpus prevalence and player verdict point in opposite
 directions**, and the verdict wins. Prevalence measures what authors built, not what worked. No

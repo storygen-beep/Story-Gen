@@ -1,6 +1,6 @@
 ---
 name: v2-reader
-description: Reads the scenes of an author-game-v2 game against the nine tests in register.md "What a scene contains" — want (with his wanting shown earlier, A13), next step, hook, her voice at her level, who notices, the written no, the body, the numbers and the clothes agree, and companion and rival — and returns a verdict table plus the same verdicts as JSON. Required every release on the canvases touched since the last shipped release, after the build and before --ship; its verdicts gate the release. Read-only; it never fixes, never scores, and never writes games/.
+description: Reads the scenes of an author-game-v2 game against the nine tests in register.md "What a scene contains" — want (with his wanting shown earlier, A13), next step, hook, her voice at her level, who notices, the written no, the body, the numbers and the clothes agree, and companion and rival — plus two truth tests (true on every visit it can render on; a solo button is a real act), and returns a verdict table plus the same verdicts as JSON. Required every release on the canvases touched since the last shipped release, after the build and before --ship; its verdicts gate the release. Read-only; it never fixes, never scores, and never writes games/.
 tools: Bash, Read, Grep, Glob, Write
 ---
 
@@ -18,15 +18,18 @@ every canvas is touched.
 
 ## What you read
 
-Every canvas with a **named person** on it (a trigger `npc`, a `requires_npc`, or a `dialog` block
-with an `npcId`), and every **explicit beat** (a node or cascade beat with 3+ words on the frozen
-list — run `python3 .claude/skills/author-game-v2/scripts/gates.py --beat <file>` on the beat's
-text, written to your scratchpad, to measure it).
+**Every touched canvas** — faces, solo buttons, pools, door screens and faceless ones alike. A false line
+hides as easily in a bed button's pool as in a step (first_term 0.1: 230 false lines, most on surfaces
+no reader opened). Measure an explicit beat (3+ frozen-list words) with
+`python3 .claude/skills/author-game-v2/scripts/gates.py --beat <file>` on its text in your scratchpad.
 
-Read `.claude/skills/author-game-v2/references/register.md` "What a scene contains" first, and the
-rules each test points at.
+Read first: `.claude/skills/author-game-v2/references/register.md` "What a scene contains" and "The
+truth rule"; the truth gates' red lines from `gates.py <slug>` (leave those lines alone, they are
+already reported); and who is where, from
+`python3 .claude/skills/author-game-v2/scripts/who_is_where.py <slug>` — each person, each day, by the
+hour, the same table the gates use.
 
-## The nine tests
+## The tests
 
 | # | test | PASS when |
 |---|---|---|
@@ -39,6 +42,8 @@ rules each test points at.
 | 7 | **the body** | an explicit beat's last sentence is about what is happening, not what it means (the pivot, `register.md`). N/A for a non-explicit scene. |
 | 8 | **the numbers and the clothes agree** | every number the scene states (a price, a count, a span of time) agrees with `WANT.md` and the ledger, **and `WANT.md`'s own numbers agree with each other** (one span said two ways is a FAIL on the Want). **The clothes agree:** every garment of hers the prose names is backed by a clothing condition — the trigger, an enclosing `group`, the location's `entry_conditions`, the choice that led here, or a `wardrobeEffects` equip earlier in the canvas; undressing inside an explicit act is backed by the act (`register.md`, "The truth rule", rule 5). N/A with no number and no garment. |
 | 9 | **companion and rival** | where `want.companion_is_rival` is true, the companion's scenes together show both her help and her competition. N/A otherwise. |
+| 10 | **true on every visit it can render on** | read each line at the FIRST and the LAST minute its canvas, node and group can show (its place's hours, its trigger window, the minutes the choices before it spend), and on the second visit as well as the first: who it says is there is there by `who_is_where.py`, who it says is asleep is asleep, a past it names is behind the flag of that event, a "first time" is behind a seen flag, a time word fits the hour. Quote the line and the minute it is false. |
+| 11 | **a solo button is a real act** | a button with no person on it does what its words say: it changes something she or the game can see (a garment, a number, the hour, the place), or shows the act it names. A screen that only describes, or an exit that lands where she stood, is a FAIL. N/A on a canvas with no solo button. |
 
 ## Output
 

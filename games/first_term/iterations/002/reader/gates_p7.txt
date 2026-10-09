@@ -1,0 +1,835 @@
+
+  author-game-v2 gates — 7_final_game.toml
+  games/first_term/toml_phases/7_final_game.toml
+  ────────────────────────────────────────────────────────────────────────
+  [FAIL]  location fill                    38 locations · 32,384 words vs 119,300 declared · 1/37 on their own budget · anchor home_kitchen 17% · 604 pools, 30,845 words per pass (n = 38)
+          · 6 declared locations with nothing placed: campus, college_mens_toilet, faculty_floor, home, town, zoe_flat
+          · art_office: declared 1,000 words, delivered 114 (-89%)
+          · business_office: declared 500 words, delivered 123 (-75%)
+          · cafe: declared 9,000 words, delivered 2,554 (-72%)
+          · campus: no fill declared in board.locations — nothing to check against
+          · campus_gym: declared 1,500 words, delivered 288 (-81%)
+          · canteen: declared 2,500 words, delivered 625 (-75%)
+          · clothes_shop: declared 1,000 words, delivered 160 (-84%)
+          · college_womens_toilet: declared 1,000 words, delivered 258 (-74%)
+          · corner_shop: declared 1,000 words, delivered 35 (-96%)
+          · dean_office: declared 1,000 words, delivered 199 (-80%)
+          · faculty_floor: declared 500 words, delivered 0 (-100%)
+          · … and 26 more
+  [FAIL]  explicit floor                   5.9% of 303 REPEATABLE beats carry 3+ explicit words (floor 7.5%) · 6.7% of all 507 beats [reported, not judged]
+  [PASS]  explicit in repeatable           52.9% of 34 explicit beats are re-enterable (floor 40.0%)
+          · once-only explicit at home_kitchen: 3
+          · once-only explicit at home_living_room: 3
+          · once-only explicit at home_ella_room: 2
+          · once-only explicit at cafe: 2
+          · once-only explicit at home_bathroom: 1
+          · once-only explicit at home_ryan_room: 1
+  [PASS]  repeatable explicit media cycles 16 pooled, 0 fixed single-clip in repeatable content (n = 16)
+  [PASS]  an explicit beat carries a clip  30/34 explicit beats carry a clip of their own (88%, floor 50%) · field 91% of explicit screens, 58% of in-passage reveals
+          · ryan_two_knocks: 1 explicit beat with no clip
+          · tom_06_after_close_kiss: 1 explicit beat with no clip
+          · jake_saturday_date: 1 explicit beat with no clip
+          · bathroom_mirror: 1 explicit beat with no clip
+  [FAIL]  somebody speaks                  6.2:1 narration to dialogue — 4,515 spoken of 32,380 words (ceiling 5:1) · field median 2.93:1, 10 of 27 games at or under 2:1
+          · ryan_05_thin_walls: 558 words, no dialog block anywhere
+          · park_watch_the_couple: 473 words, no dialog block anywhere
+          · garden_sun: 254 words, no dialog block anywhere
+          · bathroom_shower: 205 words, no dialog block anywhere
+          · master_wardrobe: 174 words, no dialog block anywhere
+          · quad_grass: 171 words, no dialog block anywhere
+          · room_sleep: 166 words, no dialog block anywhere
+          · college_exam_business: 159 words, no dialog block anywhere
+          · … and 27 more silent canvases
+          · the talk screen is the genre's second largest content kind — 15,774 of 54,630 field screens, 55 words, two-thirds spoken, one picture
+          · prefer a line of speech to a sentence describing a line of speech; if a person is in the room, they talk (register.md)
+  [FAIL]  traversal heat                   13/31 destinations (42%) hold a sex scene — a beat with 3+ explicit words or _t4/_t5 media (floor 60%, about 60% is the target)
+          · cold: art_office, business_office, campus_gym, canteen, clothes_shop, college_mens_toilet, corner_shop, dean_office, home_garage, home_garden, home_master_bedroom, library, quad, ta_office, vance_house, zoe_bathroom, zoe_bedroom, zoe_kitchen
+  [FAIL]  explicit pools by place          9/38 locations (24%) carry a cycling explicit pool on a repeatable (floor 60%)
+          · art_office, business_office, campus, campus_gym, canteen, clothes_shop, college_mens_toilet, corner_shop, dean_office, faculty_floor, home, home_front_door, home_garage, home_garden, home_hall, home_living_room, home_master_bedroom, home_ryan_room, library, party_house, quad, street, ta_office, town, vance_house, zoe_bathroom, zoe_bedroom, zoe_flat, zoe_kitchen
+  [FAIL]  a destination is never open and exit-only 30/31 destinations offer something she can do alone in every open hour, or are closed then
+          · college_mens_toilet: open with nothing to do (105 h) — Mon 07-22 · Tue 07-22 · Wed 07-22 · Thu 07-22 · Fri 07-22 · Sat 07-22 · Sun 07-22
+          · give the place a repeatable she can do alone at those hours, close it then (`hours` + `closed_text`), or mark it `kind = "thoroughfare"` — the-board.md §1
+          · not judged at lecture_hall: college_event_dress_code (clothing_slot), college_exam_psych (days_since_flag), college_exam_business (days_since_flag), college_exam_bio (days_since_flag) — a condition shape this check can't read, counted as not live
+          · not judged at zoe_apartment: party_chat (hours_since_flag), party_drink_offer (hours_since_flag), party_dare (hours_since_flag), party_hookup (hours_since_flag) — a condition shape this check can't read, counted as not live
+  [PASS]  her climb                        2 paid repeatable(s) · 0 problem(s) on the climb (introduced → a step → first time → the repeatable) (n = 2)
+  [PASS]  a no has content                 79/79 exits that leave a consume_on step unused (or end it for good) have content, on 42 step(s)
+  [FAIL]  the men's numbers are read       10 of the men's traits shown · 1 problem(s) across 10 kept trait(s) (n = 10)
+          · npc_tom: `power` is shown and no step gate reads it — a shown number opens something and gets a reaction (W1 rule 1)
+  [PASS]  one name per trait               27/27 changed traits carry a label · 4 sidebar item(s) checked (n = 31)
+  [PASS]  adult wording                    no banned school word anywhere a player reads
+  [FAIL]  a goal's end is built            1/2 goal ends are built (the last goal is exempt)
+          · "her name on campus": nothing in the TOML sets `hosts_the_party` — the goal can never end
+  [FAIL]  a step is seen from the next room 7/8 seen_from rooms share the step's parent
+          · npc_zoe step 3: seen_from `zoe_apartment` hangs off `None`, `party_house` off `town` — not the room next door
+  [FAIL]  every system has a card          6/7 system cards filled
+          · home_life: missing sink (the card involves money), deadline (the card involves money)
+  [PASS]  every system leads to a person or a sex scene 7/7 systems lead to a person or a sex scene
+  [PASS]  every clothing state is read three times 12/12 declared states and key items read 3+ times
+  [PASS]  her clothes are backed           every line naming her clothes has a check behind it
+  [PASS]  every chat is caused by a scene  14/14 chats and calls are caused by a scene
+  [FAIL]  a chat is short and timed        4 problem(s) across 14 chats and calls
+          · chat `laura_dinner`: a 8-word bubble (3–7)
+          · chat `mark_rent`: a 1-word bubble (3–7)
+          · chat `tom_shift`: a 8-word bubble (3–7)
+          · chat `hale_office_hours`: a 9-word bubble (3–7)
+  [FAIL]  a system meets its floors        7 card(s), 7 below a floor (directions from four games, round 9b)
+          · college: a daily pool of 6 built canvas(es), floor 20
+          · job: a daily pool of 1 built canvas(es), floor 20
+          · money_pressure: 3 lewd rung(s), floor 4
+          · wardrobe: a daily pool of 1 built canvas(es), floor 20
+          · park: a daily pool of 4 built canvas(es), floor 20
+          · home_life: a daily pool of 0 built canvas(es), floor 20
+          · home_life: rung(s) with fewer than 2 acts — Good Girl · Covered, Hungry · Watched — later
+  [FAIL]  sex for pay names the amount     0/9 paid choices name the amount
+          · mark_05_a_bill_an_inch/stop: "Take the money." pays `money` and names no amount
+          · mark_05_a_bill_an_inch/half: "Take it and go to bed." pays `money` and names no amount
+          · mark_07_twenty_and_you_can_look/look: ""Time's up."" pays `money` and names no amount
+          · mark_sunday_table/look_his: ""Time's up."" pays `money` and names no amount
+          · mark_sunday_table/look_hers: ""Time's up."" pays `money` and names no amount
+          · tom_04_booth_four/ten: ""That's enough, Gary."" pays `money` and names no amount
+          · tom_04_booth_four/after: ""Back to work."" pays `money` and names no amount
+          · cafe_gary_ten_minutes/ten: ""Time."" pays `money` and names no amount
+          · cafe_gary_ten_minutes/ten: ""That's enough, Gary."" pays `money` and names no amount
+  [PASS]  no unknown topic                 43 topic(s), none unknown
+  [n/a ]  a skill rejection names a notebook entry no rejection recorded on the release page
+  [FAIL]  a named person is where the line says 12 line(s) place a person where their rows don't hold them at every hour the line shows
+          · jake_03_my_boyfriend · ryan: Ryan — Sat 23:00: home_ryan_room, not here — "Ryan stands in the doorway and stops dead."
+          · laura_01_blue_dress · mirror: Laura — Tue 18:10: home_kitchen · Tue 22:00: home_master_bedroom — "Laura stands behind you and smooths the fabric down over your hips with both hands, slowly, and keeps her hand"
+          · mark_05_a_bill_an_inch · start: Mark — Mon 00:00: not asleep there — "The house is asleep, but Mark is still on the couch, pretending to watch a TV he turned down low."
+          · mark_08_the_red_circle · calendar: Ryan — Sun 12:00: home_ryan_room · Sun 14:00: home_living_room — "Ryan's in green: league, Wednesday."
+          · party_hookup · out: Zoe — Sat 00:15: zoe_apartment · Sat 02:00: nowhere — "Zoe's in the hall with a drink in each hand."
+          · ryan_05_thin_walls · hall: Laura — Sat 06:00: home_master_bedroom, not here — "She's sneaking for the bathroom before Mom is up."
+          · ryan_05_thin_walls · hall: Ryan — Sat 06:00: home_ryan_room · Sat 06:45: nowhere — "I'm not going anywhere." Behind her, Ryan stands frozen in his doorway, red to the ears, and he can't look at "
+          · ryan_05_thin_walls · listen: Ryan — Fri 22:05: home_ryan_room, not here — "That's your brother's voice."
+          · ryan_05_thin_walls · wall: Ryan — Fri 22:00: home_ryan_room, not here — "Then Ryan's voice, low: "Quiet."
+          · tom_04_booth_four · counter: Gary — Mon 14:35: cafe · Mon 18:00: nowhere — "Gary is already watching you, a folded twenty on his saucer."
+          · touch_bed · touch: somebody — Mon 00:00: nobody in the building — "Your door is shut, but someone's TV mutters downstairs."
+          · zoe_03_hot_tub · asked: Zoe — Sat 20:25: party_house · Sun 00:00: nowhere — "Across the bubbles, Zoe is still looking at you."
+  [FAIL]  nobody is woken                  2 knock(s) or scene(s) reach a person who is asleep or not there
+          · laura_01_blue_dress (one-time): Laura is not in the building at Tue 18:00, and nothing on this path checks
+          · laura_04_ryans_door (one-time): Laura is not in the building at Mon 20:00, and nothing on this path checks
+  [PASS]  every person here has a face     42/42 places each person stands have a face there
+  [PASS]  a past line has its event        40/40 past lines read the flag of their event
+  [PASS]  no one is named before they're met 239/239 names wait for their meeting
+  [PASS]  a latch flag is cleared          4/4 latch flags clear daily or are timed
+  [PASS]  a repeat doesn't say it's the first time 1/1 arrival lines are gated
+  [PASS]  a button does something          900/900 buttons do what they say
+  [PASS]  a clock bucket has a catch-all   34/34 screens with clock buckets leave a way on at every minute
+  [FAIL]  her clothes are named exactly    1 line(s) say more about her clothes than the check behind them
+          · party_house_soak · tub: she strips and no garment comes off — "You strip on the cold deck and get in fast."
+  [FAIL]  one garment per slot             14 place(s) put two garments in one slot
+          · initial: jeans, leggings, sleep_shorts all in `bottom` — she starts wearing sleep_shorts
+          · initial: sleep_shirt, towel all in `dress` — she starts wearing towel
+          · tom_01_the_apron · back "Clock in.": equips cafe_uniform_normal, cafe_uniform_sexy in `dress` — she ends in cafe_uniform_sexy and owns all
+          · tom_02_uniform_rule · back "Clock in.": equips cafe_uniform_normal, cafe_uniform_sexy in `dress` — she ends in cafe_uniform_sexy and owns all
+          · tom_03_the_tip_jar · back "Clock in.": equips cafe_uniform_normal, cafe_uniform_sexy in `dress` — she ends in cafe_uniform_sexy and owns all
+          · tom_04_booth_four · back "Clock in.": equips cafe_uniform_normal, cafe_uniform_sexy in `dress` — she ends in cafe_uniform_sexy and owns all
+          · tom_05_half_is_mine · back "Clock in.": equips cafe_uniform_normal, cafe_uniform_sexy in `dress` — she ends in cafe_uniform_sexy and owns all
+          · tom_06_after_close_kiss · back "Clock in.": equips cafe_uniform_normal, cafe_uniform_sexy in `dress` — she ends in cafe_uniform_sexy and owns all
+          · cafe_shift · counter "Work a shift (3 hours, 20 energy).": equips cafe_uniform_normal, cafe_uniform_sexy in `dress` — she ends in cafe_uniform_sexy and owns all
+          · cafe_shift · counter "Work a shift (3 hours, 20 energy).": equips cafe_uniform_normal, cafe_uniform_sexy in `dress` — she ends in cafe_uniform_sexy and owns all
+          · cafe_shift · counter "Work a shift (3 hours, 20 energy).": equips cafe_uniform_normal, cafe_uniform_sexy in `dress` — she ends in cafe_uniform_sexy and owns all
+          · cafe_shift · counter "Work a shift (3 hours, 20 energy).": equips cafe_uniform_normal, cafe_uniform_sexy in `dress` — she ends in cafe_uniform_sexy and owns all
+          · … and 2 more
+  [PASS]  a card shows the real gates      75/75 cards show their step's gates
+  [PASS]  a phone line is true             14 chats and calls hold
+  [FAIL]  one pool, one place              56 pool(s) or paragraph(s) pasted into more than one canvas
+          · pool in cafe_shift, hub_tom_cafe: "Booth four's going to tip big today."
+          · paragraph in college_class_bio, college_class_business, college_class_figure, college_class_psych, hub_laura_kitchen, hub_mark_kitchen, hub_mark_living_room, hub_ryan_living_room, master_asleep: "That's further than you go in this release of First Term. It comes later, when y"
+          · pool in college_class_psych, hub_hale_office: "He loses the sentence, and starts it again."
+          · pool in college_exam_art, college_exam_bio, college_exam_business, college_exam_psych: "You know some of this. Not enough of it."
+          · pool in college_exam_art, college_exam_bio, college_exam_business, college_exam_psych: "You studied. You actually know this."
+          · paragraph in college_exam_art, college_exam_bio, college_exam_business, college_exam_psych: "Pens down. The proctor collects the papers row by row. The results go up on the "
+          · pool in college_exam_art, college_exam_bio, college_exam_business, college_exam_psych: "It went badly. Laura is going to see this on the portal."
+          · pool in college_exam_art, college_exam_bio, college_exam_business, college_exam_psych: "It went fine. A pass, probably. Nobody will say anything."
+          · pool in college_exam_art, college_exam_bio, college_exam_business, college_exam_psych: "It went well. For once the portal is going to make Laura smile."
+          · pool in hub_jake_canteen, hub_jake_class, hub_jake_gym, hub_jake_party, hub_jake_quad: "Guys. Look at her. He says it to whoever's nearest."
+          · pool in hub_jake_canteen, hub_jake_class, hub_jake_gym, hub_jake_party, hub_jake_quad: "He puts his hand low on your back the second you're close enough."
+          · pool in hub_jake_canteen, hub_jake_class, hub_jake_gym, hub_jake_party, hub_jake_quad: "He keeps his hand on your back like he's already decided something about you."
+          · … and 44 more
+  [FAIL]  the phone owns posting           1 room surface(s) copy the phone's posting
+          · park_selfie · photo "Post it.": posts from a room while the phone's Feed posts — keep it on the phone
+  [FAIL]  a day word fits its window       1 line(s) name a day or time they can show outside
+          · ryan_05_thin_walls · after "morning": shows at Fri 22:20
+  [PASS]  standing surface                 69/69 schedule rows have something in the room on every weekday · 0 stranded · 0 day-capped portraits
+  [PASS]  milestones open something        54 of 54 milestones open standing content
+  [FAIL]  ladders move forward             44 declared steps across 7 ladder(s), 24 problem(s) · npc_ryan step 8 (ryan_08_two_knocks): the door — opens next release (n = 44)
+          · npc_ryan step 4 (ryan_04_feet_in_his_lap): the canvas also needs condition {"location_id": "home_living_room", "npc_id": "npc_mark", "operator": "is_present", "type": "npc_at_location"}, which the ladder does not declare
+          · npc_ryan step 4 (ryan_04_feet_in_his_lap): the canvas also needs condition {"location_id": "home_master_bedroom", "npc_id": "npc_laura", "operator": "is_present", "type": "npc_at_location"}, which the ladder does not declare
+          · npc_laura step 1 (laura_01_blue_dress): the canvas also needs flag laura_dress_invite is_true, which the ladder does not declare
+          · npc_laura step 1 (laura_01_blue_dress): the canvas also needs flag laura_dress_invite lt, which the ladder does not declare
+          · npc_laura step 2 (laura_02_home_late): the canvas also needs flag came_home_late lt, which the ladder does not declare
+          · npc_laura step 2 (laura_02_home_late): the ladder declares flag came_home_late is_true, which the canvas does not check
+          · npc_laura step 5 (laura_05_jake_at_the_door): the canvas also needs flag jake_date_went lt, which the ladder does not declare
+          · npc_laura step 5 (laura_05_jake_at_the_door): the canvas also needs condition {"location_id": "home_living_room", "npc_id": "npc_laura", "operator": "is_present", "type": "npc_at_location"}, which the ladder does not declare
+          · npc_laura step 5 (laura_05_jake_at_the_door): the ladder declares flag jake_date_went is_true, which the canvas does not check
+          · npc_mark step 4 (mark_04_after_shes_asleep): the canvas also needs flag came_home_late is_false, which the ladder does not declare
+          · npc_mark step 4 (mark_04_after_shes_asleep): the canvas also needs condition {"location_id": "home_master_bedroom", "npc_id": "npc_laura", "operator": "is_present", "type": "npc_at_location"}, which the ladder does not declare
+          · npc_mark step 5 (mark_05_a_bill_an_inch): declared 23:00-00:00, the canvas's hours are 00:00-01:00
+          · … and 12 more
+  [FAIL]  meter ceiling                    2 visible meters rise past their content (n = 18)
+          · corruption: bands promise something at 80, but the highest authored gate is 60
+          · exhibitionism: bands promise something at 80, but the highest authored gate is 60
+  [PASS]  ends on an opening               declared door (release_page.door): ryan_08_two_knocks · "Two knocks" · 21 choices render visible-but-locked · 336/906 choices carry any gate at all (62% open on turn one)
+  [PASS]  the door can be seen again       ryan_08_two_knocks: consume_on = "exit" and the door choice does not consume it
+  [FAIL]  ascent tiers expand the world    [declared] corruption (110+/1-), exhibitionism (50+/0-)
+          · energy is a player meter that closes more than it opens (4+/7-) and is NOT declared as an ascent tier — a descent wearing an ascent's clothes is invisible to the declaration
+          · grade_art is a player meter that closes more than it opens (8+/9-) and is NOT declared as an ascent tier — a descent wearing an ascent's clothes is invisible to the declaration
+          · grade_bio is a player meter that closes more than it opens (8+/10-) and is NOT declared as an ascent tier — a descent wearing an ascent's clothes is invisible to the declaration
+          · grade_business is a player meter that closes more than it opens (8+/11-) and is NOT declared as an ascent tier — a descent wearing an ascent's clothes is invisible to the declaration
+          · grade_psych is a player meter that closes more than it opens (11+/12-) and is NOT declared as an ascent tier — a descent wearing an ascent's clothes is invisible to the declaration
+          · hygiene is a player meter that closes more than it opens (0+/3-) and is NOT declared as an ascent tier — a descent wearing an ascent's clothes is invisible to the declaration
+          · intelligence is a player meter that closes more than it opens (8+/8-) and is NOT declared as an ascent tier — a descent wearing an ascent's clothes is invisible to the declaration
+          · money is a player meter that closes more than it opens (0+/1-) and is NOT declared as an ascent tier — a descent wearing an ascent's clothes is invisible to the declaration
+          · also ranked: want (28+/0-)
+          · also ranked: power (13+/7-)
+          · also ranked: laura_step (18+/0-)
+          · also ranked: mark_step (15+/0-)
+  [FAIL]  world reachable                  10/38 locations reachable on foot from home_hall
+          · art_office is not reachable and is not marked offscreen/sealed
+          · business_office is not reachable and is not marked offscreen/sealed
+          · cafe is not reachable and is not marked offscreen/sealed
+          · campus is not reachable and is not marked offscreen/sealed
+          · campus_gym is not reachable and is not marked offscreen/sealed
+          · canteen is not reachable and is not marked offscreen/sealed
+          · clothes_shop is not reachable and is not marked offscreen/sealed
+          · college_mens_toilet is not reachable and is not marked offscreen/sealed
+          · college_womens_toilet is not reachable and is not marked offscreen/sealed
+          · corner_shop is not reachable and is not marked offscreen/sealed
+          · dean_office is not reachable and is not marked offscreen/sealed
+          · faculty_floor is not reachable and is not marked offscreen/sealed
+          · … and 16 more
+  [PASS]  every authored node is reachable 507/507 authored nodes can be opened
+  [PASS]  residents have homes             21/21 characters have a home that exists and is a room of their own
+  [PASS]  guidance exists                  75 quest cards for 2 ascent tiers and 21 characters in the game (n = 23)
+  [PASS]  a goal says what it wants        114/114 goal bullets render words rather than a raw key
+  [PASS]  no chain ends in silence         21/21 character ladders keep a card after the last rung
+  [PASS]  money gates something            [declared] 4 canvases gate on `money` (conditions or an affordability cost)
+  [FAIL]  sinks >= sources                 5 sinks : 12 sources (field median 2.2 : 1) · 1 at cafe
+          · more ways to earn `money` than to spend it — the meter it feeds never has to rise
+          · sources: cafe_gary_ten_minutes, cafe_shift, garden_sun, hub_laura_kitchen, hub_mark_garage, hub_mark_kitchen, hub_mark_living_room, hub_ryan_room
+  [PASS]  no free uncapped income          every income surface has a brake on every route in
+  [PASS]  a price is on its label          0 of 3 choices spend `money` without naming the amount · 34 non-currency costs not judged
+  [PASS]  the price is in one currency     one currency (`dollar`) across 7 places · declared `$`
+  [FAIL]  a place is not a catalogue       1 screens over 8 · rooms median 1 · 0/77 at the cap · character hubs median 2 (1/91 at the cap)
+          · room_sleep @home_ella_room: 12 decisions on one screen (+1 exits, not counted)
+          · field, measured by PLAYING five games: a location screen carries 1-6 things to actually do (median 3). Big screens in real games are wardrobes, rosters and character builders — or they are mostly exits, which are not counted here
+  [PASS]  the obligation is charged        [declared] 75 money · charged by [settings.rent] 75 every Sunday · week income ~1139 (max 1139, declared 232)
+          · income: hub_ryan_room: +25 (max 25) × 7 (1/day × 7 days)
+          · income: hub_laura_kitchen: +20 (max 20) × 7 (1/day × 7 days)
+          · income: mark_05_a_bill_an_inch: +20 (max 20) × 1 (once)
+          · income: mark_07_twenty_and_you_can_look: +20 (max 20) × 1 (once)
+          · income: mark_sunday_table: +20 (max 20) × 1 (1/day × 1 days)
+          · income: hub_mark_living_room: +20 (max 20) × 7 (1/day × 7 days)
+          · income: hub_mark_garage: +20 (max 20) × 7 (1/day × 7 days)
+          · income: hub_mark_kitchen: +20 (max 20) × 7 (1/day × 7 days)
+  [PASS]  effects use a live op            every effect op is one the engine runs
+  [PASS]  a day-cap closes                 60 day-cap flag(s) cleared in [engine.daily_tick], all of them set somewhere
+  [PASS]  a spent day still has a door     every screen keeps one choice free of both conditions and costs
+  [PASS]  the climb is paid for            all 9 gated meters carry a brake on every route in (n = 9)
+          · `want` gates at 80 · no free route to it · cheapest rung vance_walk_past +2 / 0 min
+          · `corruption` gates at 60 · no free route to it · cheapest rung park_watch_the_couple +3 / 15 min
+          · `exhibitionism` gates at 60 · no free route to it · cheapest rung wardrobe_event_stairs +1 / 2 min
+          · `power` gates at 60 · no free route to it · cheapest rung vance_knock +20 / 5 min
+  [PASS]  a banded meter is shown once     2 of 2 banded sidebar meters show their number once, in the item
+  [PASS]  the map is a place               [nested_zones] the exterior is the ground everything else sits on
+  [PASS]  a need shuts a door              2/2 declared needs are read by a condition somewhere in the game
+  [PASS]  a need can be met every day      2/2 declared needs can be filled on every weekday
+  [FAIL]  the walk-in floor                0/24 rooms where she works alone with someone scheduled carry a walk-in
+          · art_office: 1 solo activity and 1 scheduled character (npc_art_lecturer) — nobody ever walks in
+          · business_office: 1 solo activity and 1 scheduled character (npc_business_lecturer) — nobody ever walks in
+          · cafe: 1 solo activity and 2 scheduled characters (npc_gary, npc_tom) — nobody ever walks in
+          · campus_gym: 1 solo activity and 1 scheduled character (npc_jake) — nobody ever walks in
+          · canteen: 2 solo activities and 3 scheduled characters (npc_jake, npc_nadia, npc_zoe) — nobody ever walks in
+          · dean_office: 1 solo activity and 1 scheduled character (npc_dean) — nobody ever walks in
+          · hale_office: 1 solo activity and 1 scheduled character (npc_hale) — nobody ever walks in
+          · home_bathroom: 3 solo activities and 1 scheduled character (npc_ryan) — nobody ever walks in
+          · … and 16 more rooms
+          · the-surfaces.md R3 — ONE canvas, substitution_only = true, [group] bands on the axis the odds ride. DoL's are 458-473 bytes. Not a scene.
+          · ⚠️ the target MUST declare a `location` — getCanvasById indexes only location-bound canvases (v2.py:3177), so a triggerless rung silently never fires
+          · one per ROOM, not one per pair — filling the cross-product is the wall of buttons one layer down
+  [PASS]  a meter is read                  24/24 raised player meters are read by a condition, a cost or a quest goal
+  [PASS]  the wardrobe is read             16 garment(s) · 533 read(s) · clothing_slot x164 · worn_type x151 · clothing_rules x104 · clothing_item x81
+  [PASS]  a declared garment can be got    16/16 declared garment(s) have a route into the wardrobe · shop @clothes_shop
+  [PASS]  a locked door says why           21 shown-locked · 21 say why once (n = 21)
+  [PASS]  the climb is where you said it is declared `both` — 229 gate site(s) on declared tiers, 109 on per-character meters — 32% of the climb sits on the cast (wants at least 25% on each side)
+  [PASS]  the start choice is read         3 start-choice flag(s) — college_for_grades read 5x · college_for_fun read 6x · college_for_freedom read 4x  (count reported, not judged — see the header)
+  [PASS]  what money buys opens a door     groceries_bought (20) opens 5  (the purchase's own `is_false` gate is not a door)  (doors reported, not judged — see the header)
+  [PASS]  she can say no                   52 refusal(s) in 906 choices = 5.7%  (rate reported, not judged — see the header) · field 2.09% of labels
+          · e.g. "Don't ever look at me like that. (ends his path)"
+          · e.g. '"Don\'t stop."'
+          · e.g. 'Not now.'
+  [PASS]  what she picks is read           2 field(s) — name 55x · nickname 21x  (counts reported, not judged — see the header) · field median 4 reads per field
+  [PASS]  speakers are named               687/687 dialog and thought_bubble blocks name their speaker
+  [PASS]  sentence length                  median sentence 7 words across 3,678 sentences (ceiling 14, margin +7) · field median 10, p25 8.25 — the floor is printed, not judged (prose has room)
+  [PASS]  prose has room                   `but` 3.01/1k (floor 2.88, field p10) · `and` 33.8/1k (field max 41.11) · over 33,842 words
+  [PASS]  prose texture                    53 dashes in 32,495 prose words = 16.3/10k (ceiling 35) · field p50 0.99, p90 17.5, max 35.4
+          · where they live — narration 16.6/10k over 27,056 words · speech 14.7/10k over 5,439 words. A dash in speech is how English writes an interruption and is usually correct; the narration figure is the one register.md's "Dashes stay rare" is about. Verdict above counts both, because the field cannot be split (see DASH_CEILING).
+          · reported, not gated, NO field figure — joints/sentence 0.57 · "you" 7.1% of words · pronoun:name 3.34
+          · ⚠️ these three compare a game with its own earlier builds and with nothing else. The corpus exists only as built HTML, whose UI strings and list blocks move all three. The dash rate above is quoted against the field because it is the one that survives the change of basis.
+  [PASS]  the opening opens a door         1 handover(s) · at least one lands on something open
+          · hands over 07:50 at home_kitchen: 7 open — hub_ryan_kitchen, laura_08_it_wasnt_the_wine, hub_laura_kitchen, hub_mark_kitchen
+  [PASS]  every hub is met first           15/15 characters are introduced before their hub opens
+  [PASS]  a meeting fires where they are   40/40 one-shot canvases naming a character can only fire in that character's own hours
+  [PASS]  no canvas key is discarded       every canvas key is one the importer reads
+  [PASS]  the label keeps its time         0 label(s) name a clock time · 10 stated duration(s) all match the spend
+  ────────────────────────────────────────────────────────────────────────
+  61/88 gates pass  ·  27 fail  ·  0 parked, not judged  ·  0 too few to judge  ·  1 n/a (nothing authored)
+  ────────────────────────────────────────────────────────────────────────
+  lint · dialogue attribution — 38 to eyeball
+          · ryan_01_hall_first_morning#run speaks as npc_laura: @player, you'll be late on your first day!…
+          · ryan_01_hall_first_morning#breakfast speaks as npc_mark: Sunday. Kitchen table. All of it.…
+          · canteen_table#table speaks as npc_zoe: Babe. Sit. Tell them about your mom's rules. They won't beli…
+          · canteen_table#table speaks as npc_nadia: Hale asked about you after class. Just so you know.…
+          · canteen_table#table speaks as npc_rival: Some of us came here to study.…
+          · ryan_06_after_the_shower#kayla speaks as npc_kayla: Ryan? Babe? Are you up?…
+          · tom_04_booth_four#after speaks as npc_gary: Thursday, sweetheart. Same booth.…
+          · cafe_gary_ten_minutes#ask speaks as npc_tom: Gary's in. Twenty for ten minutes. Half's mine.…
+          · zoe_01_first_party#jake speaks as npc_jake: Wasn't planning to stop. I'm Jake.…
+          · hale_01_first_lecture#front_row speaks as npc_nadia: Saved you the front. Nobody sits here for him. You'll see wh…
+          · hale_03_photo_face_down#portal speaks as npc_laura: Failing, @player? We're paying for this course. What are you…
+          · hale_05_seven_twenty#hour speaks as npc_laura: See what she does when she tries.…
+          · … and 26 more
+          (a canvas that neither binds nor names the speaker — check the name that will render)
+  ────────────────────────────────────────────────────────────────────────
+  lint · which refusals are shown at all — 21 shown-locked · 21 in-scene · 10 gated on a bar the scene itself moves
+          · college_class_bio: "Focus. (90 minutes, 10 energy)" — gated on player.energy, which this canvas's own effects raise
+          · college_class_business: "Focus. (90 minutes, 10 energy)" — gated on player.energy, which this canvas's own effects raise
+          · college_class_figure: "Focus. (90 minutes, 10 energy)" — gated on player.energy, which this canvas's own effects raise
+          · college_class_figure: "Pose for the class. (Needs Watched)" — gated on player.exhibitionism, which this canvas's own effects raise
+          · college_class_psych: "Focus. (90 minutes, 10 energy)" — gated on player.energy, which this canvas's own effects raise
+          · hub_laura_kitchen: "Further. (Needs Hungry)" — gated on player.corruption, which this canvas's own effects raise
+          · hub_ryan_living_room: "Further. (Needs Hungry)" — gated on player.corruption, which this canvas's own effects raise
+          · jake_saturday_date: "Take him round the side of the house." — gated on player.corruption, which this canvas's own effects raise
+          · ryan_05_thin_walls: "Knock back twice." — gated on player.corruption, which this canvas's own effects raise
+          · ryan_two_knocks: "Take it further." — gated on player.corruption, which this canvas's own effects raise
+          · college_class_bio: "Let the whole lab see. (Needs Hungry)" — in-scene, gated on player.corruption
+          · college_class_business: "Make the whole row look. (Needs Hungry)" — in-scene, gated on player.corruption
+          · college_class_psych: "Under the desk, with the class there. (Needs H" — in-scene, gated on player.corruption
+          · hub_mark_kitchen: "Further. (Needs Hungry)" — in-scene, gated on player.corruption
+          · … and 7 more
+          (engine.md §15 says what a shown row must SAY and nothing about how many to show. The field's default is silence — 71% of 16,167 refusals render
+           nothing, per-game median 79% silent across a 22-100% range, which the study calls "a house decision, not a genre norm". A LIST, never a score.
+           A row gated on a bar THIS SCENE moves is the machinery narrating its own progress bar; a row gated on something the player goes elsewhere and
+           fixes is a real handle and worth speaking. Length: a refusal is a 9-word UI label; a DOOR is in-fiction)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the badge arrives before the content — 4 finding(s) across 10 terminal card(s) — a ✓ at or before the last content, or a goal nothing reads
+          · [badge] laura: terminal gated on laura_step while the content reads want, warmth — a different meter, so the ✓ can arrive at zero
+          · [badge] mark: terminal gated on mark_step while the content reads power, want — a different meter, so the ✓ can arrive at zero
+          · [badge] ryan: terminal gated on ryan_step while the content reads want, warmth — a different meter, so the ✓ can arrive at zero
+          · [badge] tom: terminal gated on tom_step while the content reads power, want — a different meter, so the ✓ can arrive at zero
+          (engine.md §23 — Frame 1 fires on `terminal === true` ALONE, ahead of ready and goals, and nothing checks achievement. A LIST, never a score:
+           "content" here is a canvas condition reading the same (character, trait), which is a proxy. The fix a [badge] row points at is not a bigger
+           number — a meter is the wrong thing to gate a badge on. Put the ✓ on a FLAG the content sets on its way out, so it means "you played this")
+  ────────────────────────────────────────────────────────────────────────
+  lint · the ambient puts him in the room — 0/3 ambients where somebody speaks carry no presence gate
+          (the OTHER half of G38, on the path that actually reads the field — checkRandomEncounters, v2.py:5245. A LIST, never a score: an ambient may
+           legitimately place someone off-schedule, and the prose is where that is said. Two different fixes — `gate it` is one line of requires_npc;
+           `or narrate` means no row exists here, so a gate would strand the canvas and the arrival belongs in the prose instead)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the act between the click and the number — 253 choice(s) change her and show nothing — 5,287m (88.1h) of game time · 177 on a single-screen canvas, 76 closing a written chain
+          · cafe_shift.shift "Clock out." — 180m, +12 money (closes a written chain)
+          · cafe_shift.shift "Clock out." — 180m, +12 money (closes a written chain)
+          · cafe_shift.shift "Clock out." — 180m, +16 money (closes a written chain)
+          · cafe_shift.shift "Clock out." — 180m, +16 money (closes a written chain)
+          · cafe_shift.shift "Clock out." — 180m, +16 money (closes a written chain)
+          · cafe_shift.shift "Clock out." — 180m, +24 money (closes a written chain)
+          · ryan_05_thin_walls.hall "Wait your turn, then take the shower." — 120m, +100 energy kayla_met (closes a written chain)
+          · hub_ryan_living_room.hl_film "Done." — 120m, +5 energy +1 warmth movie_night
+          · hub_laura_living_room.hl_film "Done." — 120m, +5 energy +2 warmth movie_night
+          · hub_mark_living_room.hl_film "Done." — 120m, +5 energy +1 want movie_night
+          · room_nap.nap "Sleep two hours." — 120m, +30 energy
+          · living_film.film "Watch it." — 120m, +5 energy movie_night
+          · college_event_desk_guy.hand "Wipe your hand." — 90m, +1 corruption
+          · college_event_desk_guy.no "Back to the class." — 90m, desk_guy_refused (closes a written chain)
+          · library_study.desk "Study an hour." — 60m, +1 intelligence
+          · ryan_two_knocks.bed "Kiss him until you can't breathe." — 60m, +1 corruption +1 warmth
+          · … and 237 more
+          (the-surfaces.md R9 — a LIST, never a score. A location exit that fires nothing is R7's door and is fine. One that fires effects is
+           an ACT that happens to end in a room, and the engine shows it as a 2-second numeric toast: the approach is written, the outcome is a
+           number, and the act between them was never authored. A WORK rung may resolve to a toast — nobody needs a paragraph about stacking
+           shelves. A rung aimed at a PERSON, or at her own body, may not. The repair is one follow-up node, and several gated choices can
+           share it — route them into one banded follow-up node. ⚠️ Field range is 0-68%, so there is no threshold
+           to set here that would not fail a game for obeying the doctrine — which is why this cannot fail anything)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the guidance page says nothing — 7/75 cards render flavour text and no requirement
+          · npc_claire: ALL 1 cards render no requirement — their section of the page never says what to do
+          · npc_cocky_guy: ALL 1 cards render no requirement — their section of the page never says what to do
+          · npc_desk_guy: ALL 1 cards render no requirement — their section of the page never says what to do
+          · npc_figure_model: ALL 1 cards render no requirement — their section of the page never says what to do
+          · npc_kayla: ALL 1 cards render no requirement — their section of the page never says what to do
+          · npc_rival: ALL 1 cards render no requirement — their section of the page never says what to do
+          · npc_study_guy: ALL 1 cards render no requirement — their section of the page never says what to do
+          · npc_kayla: mute card — "Ryan's girlfriend. Fridays, and Saturday mornings in his shi…"
+          · npc_claire: mute card — "Dr. Hale's wife. She picks him up from his office on Thursda…"
+          · npc_desk_guy: mute card — "Sits beside you in Psychology and Business. Always needs hel…"
+          · npc_rival: mute card — "Would love to see you in trouble with the dean.…"
+          · npc_study_guy: mute card — "Has the answers. Wants your attention.…"
+          · … and 2 more
+          (the-voice.md R3 — a LIST, never a score. A card with no `goals`, no `ready_canvas` and not `terminal` renders its flavour text
+           and then nothing at all (v2.py:15974-15976), because evaluateGoals reports allMet vacuously for an empty list. The engine's
+           own comment calls that shape intentional for transitional cards between capstones, so ONE mute card is fine and cannot be failed.
+           The row worth reading is a character ALL of whose cards are mute: their section of the page never says what to do. That is the
+           corpus's most-punished defect — in-her-own-hands ships 136 passages for one character behind hints reading "complete another
+           task", and its players quote it back. Trait goals already print the number themselves — label — current / target)
+  ────────────────────────────────────────────────────────────────────────
+  lint · a door opens onto something — 2 door(s) on 38 locations · 6 option(s) · 1 to eyeball
+          · home_master_bedroom is scheduled for 2 characters (npc_laura, npc_mark) — a shared room takes occupancy-gated ROWS, not a door (R6c)
+          (the-map.md R6-R6c — a LIST, never a score, and it cannot fail anything. A door is the threshold screen the player lands on INSTEAD of
+           the room. It belongs to a PERSON'S HOME and it is rare: DoL carries six named doors in a 15,626-passage game. Presence is not
+           the test. The field never SKIPS a threshold either (become-someone: 54 door screens,
+           50 gating on occupancy, none skipped); what it makes conditional is whether the door exists at all. ⚠️ Declaring another door
+           makes this output worse, not better, which is the only reason it is checked. Silent on a game that declares none, by design)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the labels and the systems agree — 15 meters declared (14 sourced) · 14 distinct labels over 38 rooms · 23 to eyeball
+          · campus: label `outdoors` is claimed by no declared meter
+          · corner_shop: label `zone:street` is claimed by no declared meter
+          · home_bathroom: label `has_shower` is claimed by no declared meter
+          · home_ella_room: label `has_bed` is claimed by no declared meter
+          · home_ella_room: label `home_base` is claimed by no declared meter
+          · home_front_door: label `outdoors` is claimed by no declared meter
+          · home_garden: label `outdoors` is claimed by no declared meter
+          · home_ryan_room: label `has_bed` is claimed by no declared meter
+          · park: label `outdoors` is claimed by no declared meter
+          · park: label `zone:street` is claimed by no declared meter
+          · party_house: label `outdoors` is claimed by no declared meter
+          · quad: label `outdoors` is claimed by no declared meter
+          · street: label `outdoors` is claimed by no declared meter
+          · street: label `zone:street` is claimed by no declared meter
+          · vance_house: label `outdoors` is claimed by no declared meter
+          · vance_house: label `zone:street` is claimed by no declared meter
+          · … and 7 more
+          (the-systems.md SY1-SY3 — a LIST, never a score, and it cannot fail anything. `serves` is what happens in a room; `labels` is what KIND of place
+           it is. An AMBIENT meter is fed by nearly every room and so makes no room special; a SOURCED one is fed in one or two places and read all over —
+           measured in family-ties, piercings 2 rooms → 117 read sites, clothes 1 → 53. A game of only ambient meters ships a duty list.
+           ⚠️ Declaring MORE labels makes this output worse, not better — that direction is the only reason it is checked at all)
+  ────────────────────────────────────────────────────────────────────────
+  lint · room-list labels — 3/66 (4%) room-list buttons are bare noun phrases · median 4 words, 15% at 6+ (field: 3 words, 21% at 6+)
+          · college_womens_toilet: "A quick wash" names no verb — a player cannot tell what clicking does
+          · lecture_hall: "The guy beside you" names no verb — a player cannot tell what clicking does
+          · lecture_hall: "A word about what you're wearing" names no verb — a player cannot tell what clicking does
+          (the-voice.md R1 — a NUMBER, not a bar; any threshold would be invented. The register lives in the paragraph the click produces, never in the button)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the browse share — 20/66 (30%) room canvases change nothing but the clock
+          · quad: "Sit on the grass" — no effect, no flag, no cost
+          · canteen: "Listen to what they say" — no effect, no flag, no cost
+          · hale_office: "Read your grade on the door" — no effect, no flag, no cost
+          · art_office: "Read your grade on the door" — no effect, no flag, no cost
+          · business_office: "Read your grade on the door" — no effect, no flag, no cost
+          · ta_office: "Read your grade on the door" — no effect, no flag, no cost
+          · dean_office: "Read the notice on the door" — no effect, no flag, no cost
+          · clothes_shop: "Try things on" — no effect, no flag, no cost
+          (a room's list is needs + systems + people, the-surfaces.md R2. KNOWN NOISY: a travel bridge legitimately changes nothing, so read WHICH canvases are named, not the percentage alone)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the ladder — 27 explicit canvases · 0% OPEN at vaginal-or-above · 70% never reach oral · field screens open at vaginal-or-above 43% of the time (4 games, 1,045 explicit passages)
+          · ryan_06_after_the_shower @home_bathroom: never gets past strip — 2 rung(s) total
+          · ryan_07_first_kiss @home_ryan_room: never gets past touch — 2 rung(s) total
+          · ryan_two_knocks @home_ryan_room: never gets past touch — 1 rung(s) total
+          · laura_05_jake_at_the_door @home_front_door: never gets past touch — 1 rung(s) total
+          · mark_05_a_bill_an_inch @home_living_room: never gets past hands — 2 rung(s) total
+          (register.md — a field scene is ONE rung and the ladder is climbed across 3-4 chained screens. Opening at the top means there are no stairs to it; stopping below oral means the climb never arrives)
+  ────────────────────────────────────────────────────────────────────────
+  lint · talk screens — 30/193 canvases (15%) are talk screens — 40%+ spoken, no explicit load · field 29% of all screens
+          · hub_ryan_bathroom @home_bathroom
+          · laura_curfew_call @home_ella_room
+          · hub_gary_booth @cafe
+          · zoe_04_i_pick_the_dares @zoe_apartment
+          · hub_zoe_quad @quad
+          · hub_zoe_canteen @canteen
+          · hub_zoe_class @lecture_hall
+          · hub_zoe_party_house @party_house
+          (register.md — if a person is in the room, they speak. The `dialog` block already exists; this counts whether it was used)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the act menu — 0 act-menu loop(s) and 14 one-shot cascade(s) across 14 repeatable explicit surfaces
+          · ryan_two_knocks @home_ryan_room: repeatable, explicit, no act menu — one pass and it is spent
+          · mark_sunday_table @home_kitchen: repeatable, explicit, no act menu — one pass and it is spent
+          · cafe_gary_ten_minutes @cafe: repeatable, explicit, no act menu — one pass and it is spent
+          · jake_saturday_date @home_front_door: repeatable, explicit, no act menu — one pass and it is spent
+          · college_class_figure @lecture_hall: repeatable, explicit, no act menu — one pass and it is spent
+          · college_event_desk_guy @lecture_hall: repeatable, explicit, no act menu — one pass and it is spent
+          · party_dare @zoe_apartment: repeatable, explicit, no act menu — one pass and it is spent
+          · party_hookup @zoe_apartment: repeatable, explicit, no act menu — one pass and it is spent
+          (the-surfaces.md — a COUNT, never a target. One good loop beats four thin ones; a repeatable explicit surface with no act menu is a one-time scene the player is asked to re-read)
+  lint · she permits or she acts — 32/906 choices open with `let` (3.5%)
+          · 'Let him look.'
+          · 'Let her stop.'
+          · 'Let her look.'
+          · 'Let her hands stay.'
+          (reported, never judged. The field puts the act on the button — `fuck` 1,349, `cum` 1,073, `blowjob` 492 across 113,134 labels, against `let` at 0.69%. A permission is the right button in a scene about being used; a game where it is the ONLY button has moved the act into the prose and left the player granting consent to a paragraph. the-voice.md R6 has the worked rewrites)
+  lint · the act nodes — 
+          (register.md — the beat the player is IN while it is happening. `explicit floor` is a game-wide share and a game can clear it with every act node warm. 3 is the count `explicit floor` needs to call a beat explicit at all, not a new threshold)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the meter ladder — 2 declared tiers · median 4 rungs · lowest rung 20 · field 8-17 rungs, lowest at 5
+          · corruption: 4 rung(s) [20, 40, 50, 60]
+          · exhibitionism: 3 rung(s) [20, 40, 60]
+          · 2 of 2 tiers change nothing below 20 — that is the opening of the game with no feedback in it
+          (the-meters.md W4 — a NUMBER, never a bar. 15/35/55/75 is the DoL seed's spacing, one game's, not a ladder to copy. The field runs 8-17 rungs, lowest at 5)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the cast's meters — 21 characters · 3 distinct meter shape(s) · 109 per-character gate sites · 16 character(s) gate nothing
+          · npc_ryan: want, warmth — 13 gate site(s)
+          · npc_laura: want, warmth — 22 gate site(s)
+          · npc_mark: power, want — 51 gate site(s)
+          · npc_tom: power, want — 13 gate site(s)
+          · npc_zoe: no meters — 0 gate site(s)
+          · npc_hale: no meters — 0 gate site(s)
+          · npc_jake: no meters — 0 gate site(s)
+          · npc_vance: power, want — 10 gate site(s)
+          (the-meters.md W1/W6 — a roster of identical `relation = 0` is a fine answer for a ladder game and the whole engine missing from a roster one. Read it next to board.who_climbs)
+  ────────────────────────────────────────────────────────────────────────
+  lint · screen shape — median 2 ROWS render on a screen at turn one (max 29) · 347/582 location choices open · 8/38 locations render identically on every visit · 5/38 carry a random event (R6 mechanism 4, the one games drop)
+          · [rows] hub_laura_kitchen @home_kitchen: 29 rows RENDER on turn one (28 clickable, 1 greyed) out of 66 authored
+          · [wide open] hub_laura_kitchen @home_kitchen: 28 of 66 choices open with no condition
+          · [rows] hub_mark_living_room @home_living_room: 8 rows RENDER on turn one (7 clickable, 1 greyed) out of 16 authored
+          · [rows] hub_mark_kitchen @home_kitchen: 13 rows RENDER on turn one (12 clickable, 1 greyed) out of 27 authored
+          · [wide open] hub_mark_kitchen @home_kitchen: 12 of 27 choices open with no condition
+          · [rows] college_class_psych @lecture_hall: 10 rows RENDER on turn one (8 clickable, 2 greyed) out of 12 authored
+          · [wide open] college_class_psych @lecture_hall: 8 of 12 choices open with no condition
+          · [rows] college_class_business @lecture_hall: 10 rows RENDER on turn one (8 clickable, 2 greyed) out of 12 authored
+          · [wide open] college_class_business @lecture_hall: 8 of 12 choices open with no condition
+          · [rows] college_class_bio @lecture_hall: 10 rows RENDER on turn one (8 clickable, 2 greyed) out of 12 authored
+          · … and 13 more
+          (the-surfaces.md R5/R6 — thresholds not yet establishable; judge these, do not score them)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the words the player has to already own — 81 word(s) the 27-game field does not use, 164 use(s) across 30,126 words · plus 0 ambiguous and 4 false-friend term(s) · read the list, do not read the number
+          · easel ×14
+          · lectern ×11
+          · proctor ×9
+          · chilli ×5
+          · midterm ×5
+          · teammate ×5
+          · paperback ×4
+          · probation ×4
+          · stepfather ×4
+          · capitals ×3
+          · cardigan ×3
+          · frisbee ×3
+          · jogger ×3
+          · kettle ×3
+          · lecturers ×3
+          · retake ×3
+          · retakes ×3
+          · reties ×3
+          · tweed ×3
+          · blouses ×2
+          · … and 61 more word(s), 71 use(s), not printed — re-run with --json for the full list
+          · [false friend] tea ×5 — the evening meal here, a hot drink to most readers
+          · [false friend] vest ×1 — an undershirt here, a waistcoat to most readers
+          · [false friend] float ×1 — the till's starting cash here, something buoyant to most readers
+          · [false friend] pitch ×1 — the rent on a trading spot here, a sound or a throw to most readers
+          (register.md — a LIST, never a score. Measured against the 25-game field's own vocabulary (scripts/genre_words.txt, words used by 4+ games).
+           The field runs locale-locked nouns at 0.8 per 10k words. Invented words are safe — the fiction builds them; real regional
+           objects are the trap, because they look defined and are not. Gloss it in the sentence that first uses it, or use the plain word.
+           [ambiguous] and [false friend] rows come from a CURATED list, not the corpus — a false friend is by definition a common word, so genre_words.txt
+           is structurally blind to them. Expect false positives and read them: a `torch` that is a cutting torch is correct everywhere)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the sentence explains itself — 3 gloss(es), 0.11 per 1,000 words
+          · college_class_psych: …Somewhere in the second half it clicks, and you feel smart, which is new.
+          · door_grade_business: …Exactly what you earned, which is the only thing he hands out.
+          · ryan_01_hall_first_morning: …Laura looked at her plate and said nothing, which is how you knew it was real.
+          (register.md 'The load rules' L1 — a LIST, never a score. A fact followed by an explanation of the fact, welded into one sentence.
+           Field over 27 games: p50 0.06, p90 0.19, MAX 0.24 (destroyer).
+           Delete the clause or make it its own sentence; deletion is the default, because the fact was
+           usually already doing the work. A dash or a bracket is NOT the fix — the joint survives the swap)
+  ────────────────────────────────────────────────────────────────────────
+  lint · what did not happen — 17.6% of 2726 sentences carry a negation
+          · laura_08_it_wasnt_the_wine: 57% (8/14) — Laura is at the counter with her back to you, making coffee she doesn't need, in her work blouse wit
+          · vance_meeting: 50% (4/8) — Mid-fifties, a cardigan, slippers, a newspaper folded on his knee that he isn't reading.
+          · debt_offer: 45% (5/11) — He doesn't hide them when you come in.
+          · hub_laura_living_room: 44% (4/9) — Laura is on the couch with her knees pulled up under her robe and a glass of wine she isn't drinking
+          · hub_mark_garage: 41% (7/17) — Mark's at his bench with the radio on, doing something to an engine part that doesn't need doing.
+          · jake_saturday_date: 38% (5/13) — Jake walks you up to the porch and stops under the light, and doesn't let go of your hand.
+          · party_house_soak: 38% (3/8) — Two of Zoe's friends are on the other side, kissing like you aren't there.
+          · hale_thursdays: 38% (3/8) — He locks the door behind you without a word and looks at the clock, and then at you, and the clock d
+          · … and 18 more canvases over the field max
+          (register.md L2, RETIRED 2026-09-24 for the loud voice. Printed for reference only: a FIGURE and a LIST, never a score, and not a rule. Field, NARRATION ONLY, 25 games: p50 12.06%,
+           p90 16.38%, MAX 25.76% (become-taxi-driver). Behind almost every negation is
+           a positive fact that is shorter AND more specific — 'it takes you ninety' beats 'you have never once done it in forty-five'.
+           Canvases listed are those over the field max with 8+ sentences. Baseline re-measured 2026-09-01: the old figures were taken
+           with a regex blind to every contraction and against an ALL-TEXT field while this reads narration only — see NEGATION_RE)
+  ────────────────────────────────────────────────────────────────────────
+  lint · history on a repeatable screen — 11 of 1427 sentences (0.8%)
+          · canteen_eat [since]: Pasta that's been under the lamp since breakfast, a bread roll and a cold can of something sweet.
+          · door_dean_notice [has been]: Somebody has been talking about what you wear to class.
+          · garden_sun [any more]: He isn't pretending to look at his screen any more.
+          · hale_thursdays [any more]: He locks the door behind you without a word and looks at the clock, and then at you, and the clock doesn't mat
+          · hub_mark_garage [since]: He hasn't been able to since the couch.
+          · hub_mark_garage [any more]: He doesn't give you orders any more.
+          · hub_mark_kitchen [any more]: He doesn't give you orders any more.
+          · hub_mark_living_room [used to]: He stays up later than he used to.
+          · hub_mark_living_room [any more]: He doesn't give you orders any more.
+          · hub_tom_cafe [used to]: He used to tell you.
+          · … and 1 more
+          (register.md 'The load rules' L3 — a LIST, never a score. REPEATABLE canvases only: the same sentence on a one-time canvas is
+           where the doctrine says to PUT it. Field over 27 games: p50 1.64%, p90 3.94%, MAX 5.41% (free-cities).
+           The marker set is temporal (used to / ago / since / has been / N days-weeks-months-years) and it OVER-COUNTS a
+           sentence that merely mentions a duration — read the lines, not the number. Clock time is a different rule and belongs to
+           the-clock.md C2; this one is elapsed time)
+  ────────────────────────────────────────────────────────────────────────
+  lint · a repeatable claims a past — 0 ungated sentence(s) on repeatable canvases claim a past (of 2149 sentences)
+          (register.md 'The truth rule' rule 2 and L3 — a LIST, never a score. Legal inside a group gated on the flag that records the past;
+           any conditioned group is skipped, so this under-reports. Speech counts too: a character can lie about a past the player never had)
+  ────────────────────────────────────────────────────────────────────────
+  lint · a printed stat is real — 0 printed stat label(s) on screen
+          (the-meters.md 'What the player is shown' — numbers are shown and named; a +X for a stat that does not exist
+           is the defect. A LIST, never a score)
+  ────────────────────────────────────────────────────────────────────────
+  lint · a one-time step speaks — 0 of 50 one-time canvases bound to a person have nobody speaking
+          (register.md 'The voice — say it loud' rule 5 and L3 — the one-time step carries the conversation. A LIST, never a score)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the arc ladder — longest chain 10 step(s) (npc_mark) · field median of the longest ~15
+          · npc_ryan: 9 one-time step(s) · longest gated chain 9 (ryan_01_hall_first_morning → laura_04_ryans_door) · declared ladder 8 step(s)
+          · npc_laura: 8 one-time step(s) · longest gated chain 8 (laura_01_blue_dress → laura_08_it_wasnt_the_wine) · declared ladder 8 step(s)
+          · npc_mark: 10 one-time step(s) · longest gated chain 10 (mark_01_count_it_slowly → debt_offer) · declared ladder 9 step(s)
+          · npc_tom: 7 one-time step(s) · longest gated chain 7 (cafe_job_ask → tom_06_after_close_kiss) · declared ladder 6 step(s)
+          · npc_zoe: 5 one-time step(s) · longest gated chain 4 (zoe_01_first_party → zoe_04_i_pick_the_dares) · declared ladder 4 step(s)
+          · npc_hale: 5 one-time step(s) · longest gated chain 5 (hale_01_first_lecture → hale_05_seven_twenty) · declared ladder 5 step(s)
+          · npc_jake: 3 one-time step(s) · longest gated chain 3 (laura_05_jake_at_the_door → jake_03_my_boyfriend) · declared ladder 4 step(s)
+          · npc_vance: 1 one-time step(s) · longest gated chain 1
+          · npc_dean: 1 one-time step(s) · longest gated chain 1
+          · npc_claire: 1 one-time step(s) · longest gated chain 1
+          (the-arc.md A1 — one or two long chains for the central people. A LIST, never a score)
+  ────────────────────────────────────────────────────────────────────────
+  lint · a scene ends on nothing — 0 of 50 one-time scenes with a person offer no choice at all
+          (register.md 'What a scene contains', test 3 — the hook. A LIST for v2-reader, never a score: a last line that points forward is fine)
+  ────────────────────────────────────────────────────────────────────────
+  lint · a person who never speaks — 2 of 57 repeatable scenes bound to a person where that person never speaks
+          · vance_walk_past: npc_vance never speaks
+          · hub_mark_bedroom: npc_mark never speaks
+          (register.md 'What a scene contains', test 1 — the want. A LIST, never a score)
+  ────────────────────────────────────────────────────────────────────────
+  lint · thoughts outweigh speech — 8 of 121 canvases with a person and any speech or thought think more than they say
+          · ryan_06_after_the_shower: 9 thought words against 5 spoken
+          · mark_08_the_red_circle: 9 thought words against 5 spoken
+          · mark_09_his_chair: 28 thought words against 16 spoken
+          · tom_01_the_apron: 23 thought words against 18 spoken
+          · tom_03_the_tip_jar: 8 thought words against 7 spoken
+          · hale_02_lost_his_place: 13 thought words against 9 spoken
+          · college_exam_art: 50 thought words against 7 spoken
+          · party_arrive: 24 thought words against 14 spoken
+          (register.md rule 3 and S3 — her thoughts go beside the dialogue, never instead of it. A LIST, never a score)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the opening arms a card with goals — the opening arms a card with goals — 4 of 6 visible card(s) carry goals
+          · Pay your own way: the rent paid your way: goals 1
+          · Laura has a dress for you upstairs. She : NO goals
+          · Sunday. Mark counts the rent at the kitc: goals 1
+          · Monday, first class: Psychology with Dr.: NO goals
+          · Good Girl. Curious opens at 20: watching: goals 1
+          · Covered. Daring opens at 20: no bra, a s: goals 1
+          (the-first-hour.md F1b step 5 — the first objective is a quest card with goal steps. A LIST, never a score)
+  ────────────────────────────────────────────────────────────────────────
+  lint · named before met — 1 character(s) named before any meeting — read the list, do not read the number
+          · [person] Kayla is named in a quest card and has no meeting anywhere
+          (the-first-hour.md F7 — a LIST, never a score. The game does not use a name until it has earned it: before the player has met somebody, say
+           what they ARE and where; after, say the name. A character named in passing is fine — read the rows and make the call. degrees-of-lewdity swaps
+           the description for the name on the meeting flag in 64 places)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the label under the name — 21/21 characters carry a label under the name
+          · npc_art_lecturer: "Figure drawing"
+          · npc_bio_ta: "Biology TA"
+          · npc_business_lecturer: "Business"
+          · npc_claire: "Hale's wife"
+          · npc_cocky_guy: "Jake's teammate"
+          · npc_dean: "dean"
+          · npc_desk_guy: "the next desk"
+          · npc_figure_model: "life model"
+          · npc_gary: "café regular"
+          · npc_hale: "professor"
+          · npc_jake: "campus guy"
+          · npc_kayla: "Ryan's girlfriend"
+          · … and 9 more
+          (the-first-hour.md F10 — a LIST, never a score. `npcs[].role` is the 1-3 word label the engine prints under the name in EVERY dialogue box; `relationship` is the cast page's sentence and does NOT render there. Absent is legal and renders no line. READ THE LABELS: each must answer WHO THIS PERSON IS. `professor` and `mother` pass; `the nine-thirty` names an hour and `pays the rent` names a fact)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the role stays attached — 18 character(s) · median 38 anchor(s) per 10k words in their own surfaces · anchors taken from each character's own `relationship` line, not from a kin list — read the thinnest row, there is no bar
+          · Zoe: 4,041 words across 20 canvases of his own, says who he is 0x (0 per 10k) — never
+          · Mr. Vance: 659 words across 5 canvases of his own, says who he is 0x (0 per 10k) — never
+          · Gary: 872 words across 3 canvases of his own, says who he is 0x (0 per 10k) — never
+          · Tom: 2,404 words across 11 canvases of his own, says who he is 1x (4 per 10k) — managerx1
+          · Laura: 5,827 words across 22 canvases of his own, says who he is 7x (12 per 10k) — momx7
+          · Mark: 5,715 words across 19 canvases of his own, says who he is 10x (17 per 10k) — stepx7, fatherx3
+          · Ryan: 5,642 words across 19 canvases of his own, says who he is 19x (34 per 10k) — stepx10, brotherx9
+          · Dr. Hale: 2,611 words across 10 canvases of his own, says who he is 9x (34 per 10k) — psychologyx7, professorx2
+          · Jake: 2,452 words across 11 canvases of his own, says who he is 9x (37 per 10k) — fromx5, guyx3, campusx1
+          · Kayla: 264 words across 1 canvases of his own, says who he is 1x (38 per 10k) — ryan'sx1
+          · The Biology TA: 670 words across 5 canvases of his own, says who he is 3x (45 per 10k) — biologyx3
+          · The cocky guy: 821 words across 4 canvases of his own, says who he is 8x (97 per 10k) — jake'sx4, teammatex4
+          (the-first-hour.md F10 — a LIST, never a score. F7 puts the role on screen at the meeting; this asks whether it is still there on the fortieth
+           visit. Anchors come from each character's OWN relationship line, not from a kin list — a fixed kin list fires wrongly on any cast that
+           is not family. Do not swap the NAME out for the relation: destroyer is the only game of 26 that does, and it
+           has one of each relation. Both, at the point of use)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the place says what it is — 32 location(s) · median description 41 words · field room prose per visit, median 82 — read whether each one NAMES what the place is, not how long it is
+          · Kitchen: 5,460 words happen here, described in 60 · has a first visit too
+          · Lecture Hall: 3,905 words happen here, described in 55 · has a first visit too
+          · Café: 2,554 words happen here, described in 52 · has a first visit too
+          · Zoe's Living Room: 2,149 words happen here, described in 39 · has a first visit too
+          · Hall: 2,061 words happen here, described in 53 · has a first visit too
+          · Ryan's Room: 1,883 words happen here, described in 36 · has a first visit too
+          · Living Room: 1,821 words happen here, described in 58 · has a first visit too
+          · Front Door: 1,596 words happen here, described in 52 · has a first visit too
+          · Dr. Hale's Office: 1,386 words happen here, described in 41 · has a first visit too
+          · Park: 1,133 words happen here, described in 50
+          · Your Room: 1,048 words happen here, described in 57 · has a first visit too
+          · Bathroom: 1,020 words happen here, described in 46 · has a first visit too
+          · Master Bedroom: 923 words happen here, described in 50 · has a first visit too
+          · Quad: 784 words happen here, described in 48 · has a first visit too
+          · … and 18 more
+          (the-first-hour.md F9 — a LIST, never a score. The description is the only surface a player sees on EVERY visit, so it is where a place says
+           what it is. Read whether each one names the FUNCTION.
+           This replaced a gate requiring a first-visit canvas: that device is 1 of 26 games (DoL 258 branches; 18 games have none))
+  ────────────────────────────────────────────────────────────────────────
+  lint · the clock in the prose — 3.1 clock references per 10k words — 4x the field median (field median 0.8, p75 1.8) · read the lines, not the number: a rule is correct, a reading is not
+          · hub_hale_office: "…He looks at the clock. It's after six.…"  (no window — fires at any hour)
+          · laura_curfew_call: "…It's nine. You know the rule. Home by eleven.…"  (no window — fires at any hour)
+          · ryan_01_hall_first_morning: "…Class at half past eight. A café on your street with…"  (no window — fires at any hour)
+          · ryan_01_hall_first_morning: "…Your alarm goes at seven and you're already awake, staring at…"  (no window — fires at any hour)
+          · debt_offer: "…and squares the edges against the table, one by one, and doesn't look at you.…"  (window 08:00–22:00, 840 min)
+          · hale_01_first_lecture: "…His wife picks him up Thursdays. Half past seven, in the car park, every week.…"  (window 08:30–10:00, 90 min)
+          · hale_02_lost_his_place: "…Thursday. After six.…"  (window 08:30–10:00, 90 min)
+          · hale_05_seven_twenty: "…Thursdays at seven. Your office. You'll be done by seven…"  (window 08:30–10:00, 90 min)
+          · tom_06_after_close_kiss: "…flips the sign and pulls the blinds down one by one, slowly, and the café goes dim and priv…"  (window 22:00–23:00, 60 min)
+          · hale_thursdays: "…/scenes/hale_05_seven_twenty.md:31 (Thursdays at seven: his hands above her waist (Bold), it…"  (window 18:30–19:20, 50 min)
+          (the-clock.md C2 — a LIST, never a score. Read each line at the LAST minute of the window beside it: a RULE is still true there and is correct
+           work ("Nobody comes in before eleven on a Monday"); a READING is not ("Doors open at nine", true for 1 minute of 300). The turn is
+           grammatical — the reading becomes a rule and the fact survives: "The doors open at nine")
+  ────────────────────────────────────────────────────────────────────────
+  lint · the time cost is not on the button — 104 of 104 clicks that move the clock an hour or more say nothing about it on the button
+          · cafe_shift: "Clock out." spends 3h00m, label does not say so
+          · cafe_shift: "Clock out." spends 3h00m, label does not say so
+          · cafe_shift: "Clock out." spends 3h00m, label does not say so
+          · cafe_shift: "Clock out." spends 3h00m, label does not say so
+          · cafe_shift: "Clock out." spends 3h00m, label does not say so
+          · cafe_shift: "Clock out." spends 3h00m, label does not say so
+          · college_class_bio: "Pack up, slowly." spends 1h30m, label does not say so
+          · college_class_bio: "Pack up." spends 1h30m, label does not say so
+          · college_class_bio: "Pack up." spends 1h30m, label does not say so
+          · college_class_bio: "Wake up." spends 1h30m, label does not say so
+          · … and 30 more
+          (the-clock.md C4 — a LIST, never a score. The engine tags TRAVEL time for you on a nav card (v2.py:4724, "20m") and tags ACTIVITY time nowhere
+           (v2.py:12733), so the sidebar clock jumps unexplained. Recommended, not required: 4,219 of the corpus's 4,260 duration tags are one game's)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the currency in the prose — 1 money references · 100% in `dollar` (field median 92%) · 0% of the 2 money words carry an exact amount (field 20%)
+          (the-economy.md R7 — a LIST, never a score. The lines listed are the ones NOT in the game's main currency. Field: one notation carries a median 92% of a game's money references, and a money word carries an exact amount 20% of the time)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the price is spelled out — 5 priced labels · symbol 100% · spelled out 0% · code 0% (field 94% / 5% / 1%)
+          (the-economy.md R7 part 3 — a LIST. 94% of the field's 654 priced labels use a symbol, 5% spell the unit out, 0.8% use a currency code. An invented unit used consistently — "10 coin", "1000 caps" — is the field's own pattern and is not a defect)
+  ────────────────────────────────────────────────────────────────────────
+  lint · money gates content, or only prices it — `money` is read by 1 condition(s) across 1 canvas(es) and priced by 3 choice(s) across 3 canvas(es)
+          · hub_ryan_room: 1 condition(s) read `money`
+          (the-economy.md R1 — a LIST, never a score. A CONDITION on the currency means content exists that money opens; a `costs` block means a thing can be bought. Gate 16 passes on either, deliberately — but the field runs a median 67.3 money conditions per 1,000 passages and every sandbox has some)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the obligation against the week — obligation 75 against a declared week of 232 — 32% of the week
+          · the obligation MOVES (R3b): Mark names Vance's raise at the table: $90 after $300 paid, $100 after $900, then flat
+          · the ratio above is the BASELINE week by construction — a moving obligation is priced against the week it starts in, not the week it ends in
+          (the-economy.md R3 — a FIGURE, never a score: any threshold would fail a game for obeying the doctrine. Declare board.economy.week_income; an undeclared week is not a pass)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the collector is also the target — collector Mark (want.hold_collector) holds 1 of 9 attributed, rank 3 of 8 · 14 explicit repeatable surface(s), 9 attributed to a character · Zoe 2, Ryan 1, Mark 1, Gary 1
+          · field reference: the collector's share of a game's explicit passages runs 0.4–3.8% and he is NEVER the top figure — degrees-of-lewdity's collector 6 of 415 (1.4%) against another character's 61 (14.7%), who charges her nothing
+          (the-want.md §4a — a RANK, never a score. The field's collector is never the top explicit figure, but DoL makes its collector both deliberately, so a threshold here would fail a game for a legitimate design)
+  ────────────────────────────────────────────────────────────────────────
+  lint · what a paid repeatable leaves behind — 92 of 142 paid repeatable choices deposit something (65%)
+          · quad_grass: "Get up." costs 30m and leaves nothing behind
+          · hub_ryan_kitchen: "Done." costs 30m and leaves nothing behind
+          · hub_ryan_living_room: "Done." costs 60m and leaves nothing behind
+          · hub_ryan_living_room: "Done." costs 60m and leaves nothing behind
+          · hub_laura_kitchen: "Done." costs 30m and leaves nothing behind
+          · hub_laura_kitchen: "Done." costs 30m and leaves nothing behind
+          · hub_laura_kitchen: "Done." costs 30m and leaves nothing behind
+          · hub_laura_kitchen: "Done." costs 30m and leaves nothing behind
+          · hub_laura_kitchen: "Done." costs 30m and leaves nothing behind
+          · hub_laura_kitchen: "Done." costs 30m and leaves nothing behind
+          · … and 4 more
+          (the-economy.md R1c — a RATE, never a score. A pure sink is not a defect; a game made only of pure sinks is. No threshold has been measured, so none is set)
+  ────────────────────────────────────────────────────────────────────────
+  lint · repeatables without a step — first release: 125 repeatables, 44 declared steps — nothing to compare
+          (PRD WS4 — a LIST, never a score. More to do at the same step is fine; a release that only adds repeatables has moved nobody on)
+  ────────────────────────────────────────────────────────────────────────
+  lint · a flag that never resets — 2 of 53 resetting flag(s) are set and never unset — not in any effect, not in [engine.daily_tick]
+          · letter_home
+          · on_probation
+          (a LIST, never a score. The name promises a reset the game never runs: once set, it holds for the whole save. Clear it in [engine.daily_tick], or rename it if it really is once-per-save — engine.md §28)
+  ────────────────────────────────────────────────────────────────────────
+  lint · a cheat page exists — 3 free row(s), 0 behind a code · 2 of 4 basics free
+          · no free 'the next step now' row
+          · no free 'ask again' row
+          (a LIST, never a score. Cut a basic on purpose if the game cannot use it; a time-saver behind a code is the one thing SY7 says to give away — engine.md §48)
+  ────────────────────────────────────────────────────────────────────────
+  lint · world size — hook share 56% of 32,384 words (16 hook people, hub `home_hall`) · threads 5 declared, 5 built · 20 speaking NPCs · 31 links · 4 zones
+          · links: vance_meeting, hub_vance_porch, vance_walk_past, vance_knock, cafe_job_ask, tom_01_the_apron, tom_02_uniform_rule, tom_03_the_tip_jar, tom_05_half_is_mine, tom_06_after_close_kiss …
+          (a SIZE, never a score — the-want.md, "Her life — the threads")
+  ────────────────────────────────────────────────────────────────────────
+  lint · systems and connections — 7 system(s) · 5 infrastructure (channel, clock, view) · 15 meter(s)
+          · college: feeds 8 (grade_psych, grade_art, grade_business, grade_bio, intelligence, complaints, campus_talk, laura_suspicion) · reads 5 (energy, wardrobe, corruption, exhibitionism, intelligence) · leads to 5
+          · job: feeds 1 (money) · reads 4 (energy, exhibitionism, corruption, curfew) · leads to 2
+          · money_pressure: feeds 1 (paid_full_streak) · reads 1 (money) · leads to 2
+          · parties: feeds 4 (campus_talk, corruption, exhibitionism, laura_suspicion) · reads 3 (energy, curfew, wardrobe) · leads to 4
+          · wardrobe: feeds 2 (exhibitionism, complaints) · reads 2 (exhibitionism, corruption) · leads to 2
+          · park: feeds 2 (exhibitionism, energy) · reads 3 (wardrobe, corruption, exhibitionism) · leads to 2
+          · home_life: feeds 8 (laura_warmth, ryan_warmth, ryan_want, mark_want, exhibitionism, corruption, energy, room_tidy) · reads 5 (who is home (their rows), corruption, exhibitionism, each person's step, wardrobe) · leads to 3
+  ────────────────────────────────────────────────────────────────────────
+  lint · toggles declared — n/a — none declared in want.toggles (the-surfaces.md R5b.4)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the joints — coordination ratio 3.17 (field p25 1.81 · median 2.08 · max 3.89) · 4 `, which is` gloss(es)
+          · college_exam_bio: median sentence 4
+          · college_exam_psych: median sentence 4
+          · college_exam_business: median sentence 5
+          · door_grade_business: median sentence 5
+          · party_arrive: median sentence 5
+          (a LIST, never a score. `prose has room` judges `but` and `and`; the ratio and the glosses are for reading — register.md, "Joints" and L1)
+  ────────────────────────────────────────────────────────────────────────
+  lint · adjacent groups — 0 dead group(s) in 551 group chain(s)
+  ────────────────────────────────────────────────────────────────────────
+  lint · a pronoun with nobody to point at — 14 screen(s) or place(s)
+          · vance_meeting/porch: "his" — Next door, on his porch, the man who owns your house: Mr. Vance. Mid-fifties, a cardi…
+          · college_class_figure/class: "her" — The model drops her robe on the platform and steps up naked under the lamp. She sits …
+          · corner_shop.description: "his" — The corner shop: three narrow aisles, a fridge that hums, a clerk behind the till who…
+          · corner_shop_list/till: "his" — Bread, milk, eggs, the wine Laura likes, the washing powder she always forgets. The c…
+          · door_grade_business/door: "he" — A typed list in a plastic sleeve, squared to the edge of the door. No comments. No ti…
+          · garage_things/bench: "His" — His workbench, his radio, a fridge of beer that hums. The filing box under the bench …
+          · hale_thursdays/door: "He's" — He's waiting with the door unlocked and the photo already face-down. He locks the doo…
+          · master_wardrobe/wardrobe: "Her" — Her wardrobe smells like her perfume. Work blouses, a winter coat, and at the back, i…
+          · park_watch_the_couple/watch: "he's" — Behind you on the path a jogger thuds past. You hold your breath until he's gone.
+          · ryan_things/things: "His" — His room smells like him: deodorant, the yard, something warm. His bed isn't made. Yo…
+          (a LIST, never a score. Put the person on screen before the pronoun: a role, a name, or a token — register.md, "A pronoun needs someone")
+  ────────────────────────────────────────────────────────────────────────
+  lint · a past event the player was never given — 1 line(s)
+          · college_class_business/chat: "about Friday" — somebody is expected to know what happened that day (inside a block_pool)
+          (a LIST, never a score. Gate the line on the flag that records it, or cut it — register.md, "The truth rule")
+  ────────────────────────────────────────────────────────────────────────
+  lint · short lines with no verb — 356 of 2,725 sentences (13.1%; field p25 11.36 · median 15.16 · p75 27.61)
+          · ryan_01_hall_first_morning/wake: Monday.
+          · ryan_01_hall_first_morning/wake: Your first day of college.
+          · ryan_01_hall_first_morning/wake: College.
+          · ryan_01_hall_first_morning/wake: New people.
+          · ryan_01_hall_first_morning/problem: Seventy-five a week.
+          · ryan_01_hall_first_morning/problem: With what?
+          · ryan_01_hall_first_morning/shower: Then the handle rattles.
+          · ryan_01_hall_first_morning/shower: Ryan.
+          (a LIST, never a score, and approximate: a curated verb list, no tagger. A fragment is a choice, not a defect — read them)
+  ────────────────────────────────────────────────────────────────────────
+  lint · how much explicit content is in here — 49 explicit screen(s) over 122,099 words — 0.40 per 1,000 (field median 1.24, p25 0.95; canvas-only basis 0.35 from 29)
+          · below the field's p25 (0.95) on BOTH bases (0.40 matched, 0.35 generous) — the gap is not an artefact of UI chrome in the denominator
+          · field median is 457 explicit screens in absolute terms; this game has 49
+          (a NUMBER, never a score. Every other heat check here is a share with a hand-picked denominator, so a game can pass every one of them nearly empty. Reads the BUILT html on the field's own word list; a rate over word count is the only figure comparable across the two bases)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the prose names places the map does not have — 5 to eyeball
+          · "stairs" ×26: the stairs thump and ryan comes in with his hair wet, in a fresh t-shi…
+          · "porch" ×19: next door, on his porch, the man who owns your house: mr.…
+          · "yard" ×6: twenty-two, mark's son, broad from lifting at the yard.…
+          · "corridor" ×6: the corridor outside is empty.…
+          · "landing" ×5: you've got your shoes in your hand and you're halfway to the stairs wh…
+          (either the location is missing, or the sentence is wrong)
+  ────────────────────────────────────────────────────────────────────────
+  lint · bound to a person, no face — 12 repeatable canvas(es) name a character and render no portrait
+          · cafe_gary_ten_minutes @cafe: names npc_gary, renders as a link not a face — windowed by trigger.schedules
+          · hale_thursdays @hale_office: names npc_hale, renders as a link not a face — windowed by trigger.schedules
+          · laura_reads_grade_art @home_kitchen: names npc_laura, renders as a link not a face — windowed by trigger.schedules
+          · laura_reads_grade_bio @home_kitchen: names npc_laura, renders as a link not a face — windowed by trigger.schedules
+          · laura_reads_grade_business @home_kitchen: names npc_laura, renders as a link not a face — windowed by trigger.schedules
+          · laura_reads_grade_psych @home_kitchen: names npc_laura, renders as a link not a face — windowed by trigger.schedules
+          · mark_sunday_table @home_kitchen: names npc_mark, renders as a link not a face — windowed by trigger.schedules
+          · park_hidden @park: names npc_zoe, renders as a link not a face — windowed by trigger.schedules
+          · party_dare @zoe_apartment: names npc_zoe, renders as a link not a face — windowed by trigger.schedules
+          · ryan_two_knocks @home_ryan_room: names npc_ryan, renders as a link not a face — windowed by trigger.schedules
+          · … and 2 more
+          (the-first-hour.md F5b — a LIST, never a score. `trigger.npc` renders the portrait AND gates the surface on that character's own [[npcs.schedules]]. `requires_npc` draws no face, but since 2026-09-03 it DOES gate the solo lane (setup._npcPresentForCanvas) as well as random ambients and substitution targets, so a row carrying it is at least hidden while that person is elsewhere — it is the FACE that is still missing. An activity that happens in a place while somebody is around is a legitimate shape. A surface ON that person wants the face, and when the face is already taken by a higher-priority canvas the surface is a NODE INSIDE that canvas, not a second one beside it — a node has no priority to lose (F5b). Walk-ins and windowed scenes are legitimate hits, which is why this cannot fail anything)
+

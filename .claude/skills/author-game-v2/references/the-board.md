@@ -354,9 +354,17 @@ then reads as false in the locked-reason line and in every hint. Treat the six a
 
 ## 4. The daily loop — `board.needs[]`
 
-An ordinary day when no story is happening: sleep, eat, wash, earn, spend. This exists in every game
-of this shape regardless of who is in the cast, and it is what the TRIGGERED layer hangs off —
-*"during the weekends"*, *"when exposed"*, *"at high stress"* are all readings of an ordinary day.
+An ordinary day when no story is happening: sleep, eat, wash, earn, spend — and the people she lives
+with. It is what the TRIGGERED layer hangs off (*"during the weekends"*, *"when exposed"*).
+
+**The household loop** (round 11, the 12 pass games). Where she shares a home, the ordinary day is
+mostly them: a talk button on each housemate at their spot, +1 a click (9/12, +1 in 7); a shared
+bathroom on someone's set shower time (6); meals and the family table at a set hour, the people there
+(4, +2 partial); a wait button (8, `engine.md:1614`); a morning after day 1 with a person in it (6); in
+3, a nightly change from what she did that day (`in-their-own-hands.txt:1543-1570`, a daily *together*
+count). **Alone the click is plain; with a person it pays:** solo TV in IHOH has no words on 5 of 6
+channels, TV with the roommates pays +2 and then sex. Housework counts when a person is in it — help
+her cook, +2 (`in-their-own-hands.txt:1370`).
 
 **It is a declaration, not a note to self.** Authors build toward what is measured: a need with no
 field shipped a game whose anchor room is a kitchen with no food and no bed.
@@ -374,7 +382,7 @@ Declare each need with the four fields from `the-meters.md` M8:
 ```
 
 - **Needs are per game, not a fixed list.** A truck stop's body is not a household's.
-- **`shuts` is the load-bearing field.** A need that shuts nothing is a chore (M9, gate 29).
+- **`shuts` is the load-bearing field.** A need that shuts nothing buys nothing (M9, gate 29).
 - Each need must appear on some room's list (`the-surfaces.md` R2) — a need with nowhere to fill it
   is a countdown to a wall.
 

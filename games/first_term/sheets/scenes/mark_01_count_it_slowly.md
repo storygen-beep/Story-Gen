@@ -1,6 +1,6 @@
 # [READY] Scene — mark_01_count_it_slowly
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. Every Mark step is written twice, by his Power: his terms (M) or hers (E).
 
@@ -9,7 +9,7 @@
 | person · step | `npc_mark` · 1 (Mark A 1) |
 | where · when | the kitchen table · her first Sunday, 08:00–12:00 |
 | gate | `rent_starts` (set at breakfast, day 1) |
-| want (test 1) | none before: step 1. His eyes go to her bare legs and stay |
+| want (test 1) | none before: step 1. His eyes go to her legs ("bare" only when they are: shorts, a skirt, the sleep shirt) and stay |
 | next step (test 2) | the count itself: he counts slower when she's short |
 | hook (test 3) | "The thirty-five waits a week." Next time: "Not the shirt." |
 | what she wears here (test 8) | her sleep shirt: only in a group on her worn state (guess) |
@@ -25,7 +25,7 @@
 | `short` | "I am counting." The short goes on the tab | no | "Fine." → the hall | Mark's Want add +10 · `mark_step` set 1 |
 | `dressed` | "Suit yourself." He counts when she's back; the short waits a week | no | → the hall | the step counts; no Want |
 
-Who notices: Ryan, in the doorway. A full count (she isn't short) plays the same scene in her version: "Count it slowly."
+Who notices: nobody. Ryan's in his room till 14:00 on Sunday; his door is shut overhead. A full count (she isn't short) plays the same scene in her version: "Count it slowly."
 
 ## Why — the source of each key choice
 
@@ -34,3 +34,4 @@ Who notices: Ryan, in the doorway. A full count (she isn't short) plays the same
 | the scene and its lines | the arc ideas, Mark A 1 (heat 10-06) |
 | "she knows, and she's still short" | LO, 2026-10-07 (SYSTEMS, decided item 2) |
 | the Power edge at 50 | guess |
+| fix from the false-line sweep | sweep A3-06, A3-20 (2026-10-08) |
