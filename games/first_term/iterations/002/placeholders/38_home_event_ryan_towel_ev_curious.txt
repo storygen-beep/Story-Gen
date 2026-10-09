@@ -1,0 +1,22 @@
+38 · home_event_ryan_towel · ev_curious
+sheet: sheets/places/home_hall.md:44
+signed line: Curious: "Walk past slowly" (Ryan out of the shower, in a towel).
+
+facts (truth rule, checked against the built 7_final_game.toml and the sheets):
+- Choice in: "Walk past slowly." corruption gte 20. Ryan Want +1. Random event, hall, Mon to Fri 06:45 to 07:30, Ryan present.
+- Who: Ryan out of the bathroom in a towel (his garment, not hers).
+- Clothes: hers not named. Ryan's early words: ass, tits. "Door's free" is his signed towel line (npc_ryan.md).
+
+=== SCREEN (blank line = new beat; a line in quotes is a dialog block; *italics* is a thought_bubble) ===
+
+Ryan steps out of the bathroom in a towel, steam rolling out behind him. He stops dead. The hall is narrow. You walk past him slowly anyway, so close that your tits brush his bare chest. He sucks in a breath. His hand goes tight on the knot of his towel.
+"Door's free, @player.nickname."
+"I can see that."
+You keep walking, and you feel his eyes on your ass all the way to the bathroom door.
+
+*He hasn't moved. You can hear him not moving.*
+
+=== MEASURED · gates.py --beat (the screen; each variant on its own) ===
+  beat 1: 76 words · explicit 3 (ass, suck, tits) · median sentence 10 · dashes 0 · act rungs: oral · body words by sentence: 0 0 0 1 1 0 1
+  beat 2: 9 words · explicit 0 · median sentence 6 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0
+  all: words 85 · explicit 3 · median sentence 6 · 1/2 register as explicit

@@ -10,6 +10,18 @@
 
 None open. 37 and 39 were answered 2026-10-09 (below).
 
+## Answered (LO, 2026-10-09, during the iteration 002 build)
+
+Asked while building parts 1 and 2 (`iterations/002/BUILD_LOG.md`). The street sheet, `college_mens_toilet.md`,
+Laura's stairs row in the ledger (L20), the ledger's `in_release` for the men's toilet, and Q60 / SP1's
+overnight list (77) still say the old thing and wait for LO's re-sign; nothing on them was changed.
+
+| # | question | LO's answer |
+|---|---|---|
+| 75 | With Home a building, the street's "Home" opens the hall directly and the hall's late door never shows, so the street can't set `came_home_late` on its way home (Q35). | Outing flags only: the street sets no `came_home_late`; Laura's catch reads only `late_party`, `late_shift` and `late_date`, each for 4 hours. A late walk or park visit is never caught. |
+| 76 | The brief lists `college_mens_toilet`; its sheet and the ledger say "not in 0.1". | Build it, empty: in Campus with hours and a closed line and nothing to do. |
+| 77 | Q60 brakes each home item by 12 hours since its flag; the gates count only a flag cleared at midnight, and the engine can't write "unset or 12 hours ago" without two copies of every button. | Once a day, at midnight: each home item's flag is cleared in `[engine.daily_tick]` (16 flags added to the overnight list; changes Q60 and SP1). |
+
 ## Answered (LO, 2026-10-09)
 
 | # | question | LO's answer |

@@ -1,0 +1,160 @@
+
+  author-game-v2 ship check — first_term
+  ────────────────────────────────────────────────────────────────────────
+  BLOCK — broken, unfinishable or untrue. Any red row stops the publish.
+  [PASS]  no raw token on screen                     every @token sits where the engine resolves it
+  [PASS]  no past claim on a repeatable              0 ungated sentence(s) on repeatable canvases claim a past (of 2184 sentences)
+  [PASS]  a printed stat is real                     0 printed stat label(s) on screen
+  [PASS]  a one-time step with a person speaks       0 of 50 one-time canvases bound to a person have nobody speaking
+  [PASS]  the opening's card has goals               the opening arms a card with goals — 4 of 6 visible card(s) carry goals
+          · Pay your own way: the rent paid your way: goals 1
+          · Laura has a dress for you upstairs. She : NO goals
+          · Sunday. Mark counts the rent at the kitc: goals 1
+          · Monday, first class: Psychology with Dr.: NO goals
+          · Good Girl. Curious opens at 20: watching: goals 1
+          · Covered. Daring opens at 20: no bra, a s: goals 1
+  [FAIL]  each step fires when unlocked, and each unlock is earnable 27 static problem(s) in 44 steps — not played yet
+          · npc_ryan step 4 (ryan_04_feet_in_his_lap): the canvas also needs condition {"location_id": "home_living_room", "npc_id": "npc_mark", "operator": "is_present", "type": "npc_at_location"}, which the ladder does not declare
+          · npc_ryan step 4 (ryan_04_feet_in_his_lap): the canvas also needs condition {"location_id": "home_master_bedroom", "npc_id": "npc_laura", "operator": "is_present", "type": "npc_at_location"}, which the ladder does not declare
+          · npc_laura step 1 (laura_01_blue_dress): the canvas also needs flag laura_dress_invite is_true, which the ladder does not declare
+          · npc_laura step 1 (laura_01_blue_dress): the canvas also needs flag laura_dress_invite lt, which the ladder does not declare
+          · npc_laura step 2 (laura_02_home_late): the canvas also needs flag came_home_late lt, which the ladder does not declare
+          · npc_laura step 2 (laura_02_home_late): the ladder declares flag came_home_late is_true, which the canvas does not check
+          · npc_laura step 5 (laura_05_jake_at_the_door): the canvas also needs flag jake_date_went lt, which the ladder does not declare
+          · npc_laura step 5 (laura_05_jake_at_the_door): the canvas also needs condition {"location_id": "home_living_room", "npc_id": "npc_laura", "operator": "is_present", "type": "npc_at_location"}, which the ladder does not declare
+          · npc_laura step 5 (laura_05_jake_at_the_door): the ladder declares flag jake_date_went is_true, which the canvas does not check
+          · npc_mark step 4 (mark_04_after_shes_asleep): the canvas also needs flag came_home_late is_false, which the ladder does not declare
+  [FAIL]  LO signed the playtest                     release_page.signed_by_lo / signed_at not set — LO plays every person on the release page from a new game to the door, then signs
+  [FAIL]  the build exists and is a release build    gates.py --release first_term fails
+          · [FAIL]  built without --dev              dev_mode_enabled is TRUE — the [DEV MODE] banner, the sidebar jump list and every dev-shortcut canvas are live for the player
+          · [FAIL]  no missing media                 82 media files were missing when this was built
+          · [FAIL]  filed as published               `dev: true` still set — the portal files this under test builds, and that line is what moves it into the main grid
+          · [FAIL]  the version says what shipped    no `version` on the portal entry — nothing can say what is live at games/first_term/output/
+  [n/a ]  last release's saves still load            no archived release to compare against — a first release has no saves to break
+  [PASS]  the declared door works                    ends on an opening: declared door (release_page.door): ryan_08_two_knocks · "Two knocks" · 21 choices render visible-but-locked · 338/913 choices carry any gate at all (62% open on turn one)
+  [PASS]  the pressure can be paid or is signposted  the obligation is charged: [declared] 75 money · charged by [settings.rent] 75 every Sunday · week income ~1139 (max 1139, declared 232)
+          · income: hub_ryan_room: +25 (max 25) × 7 (1/day × 7 days)
+          · income: hub_laura_kitchen: +20 (max 20) × 7 (1/day × 7 days)
+          · income: mark_05_a_bill_an_inch: +20 (max 20) × 1 (once)
+          · income: mark_07_twenty_and_you_can_look: +20 (max 20) × 1 (once)
+          · income: mark_sunday_table: +20 (max 20) × 1 (1/day × 1 days)
+          · income: hub_mark_living_room: +20 (max 20) × 7 (1/day × 7 days)
+          · income: hub_mark_garage: +20 (max 20) × 7 (1/day × 7 days)
+          · income: hub_mark_kitchen: +20 (max 20) × 7 (1/day × 7 days)
+  [FAIL]  no empty rooms                             standing surface: 69/69 schedule rows have something in the room on every weekday · 0 stranded · 0 day-capped portraits · a destination is never open and exit-only: 30/31 destinations offer something she can do alone in every open hour, or are closed then
+          · college_mens_toilet: open with nothing to do (105 h) — Mon 07-22 · Tue 07-22 · Wed 07-22 · Thu 07-22 · Fri 07-22 · Sat 07-22 · Sun 07-22
+          · give the place a repeatable she can do alone at those hours, close it then (`hours` + `closed_text`), or mark it `kind = "thoroughfare"` — the-board.md §1
+          · not judged at lecture_hall: college_event_dress_code (clothing_slot), college_exam_psych (days_since_flag), college_exam_business (days_since_flag), college_exam_bio (days_since_flag) — a condition shape this check can't read, counted as not live
+          · not judged at zoe_apartment: party_chat (hours_since_flag), party_drink_offer (hours_since_flag), party_dare (hours_since_flag), party_hookup (hours_since_flag) — a condition shape this check can't read, counted as not live
+  [FAIL]  every system has a card                    6/7 system cards filled
+          · home_life: missing sink (the card involves money), deadline (the card involves money)
+  [PASS]  every system leads to a person or a sex scene 7/7 systems lead to a person or a sex scene
+  [PASS]  every clothing state is read three times   12/12 declared states and key items read 3+ times
+  [PASS]  her clothes are backed                     every line naming her clothes has a check behind it
+  [PASS]  every chat is caused by a scene            14/14 chats and calls are caused by a scene
+  [FAIL]  a named person is where the line says      12 line(s) place a person where their rows don't hold them at every hour the line shows
+          · jake_03_my_boyfriend · ryan: Ryan — Sat 23:00: home_ryan_room, not here — "Ryan stands in the doorway and stops dead."
+          · laura_01_blue_dress · mirror: Laura — Tue 18:10: home_kitchen · Tue 22:00: home_master_bedroom — "Laura stands behind you and smooths the fabric down over your hips with both hands, slowly, and keeps her hand"
+          · mark_05_a_bill_an_inch · start: Mark — Mon 00:00: not asleep there — "The house is asleep, but Mark is still on the couch, pretending to watch a TV he turned down low."
+          · mark_08_the_red_circle · calendar: Ryan — Sun 12:00: home_ryan_room · Sun 14:00: home_living_room — "Ryan's in green: league, Wednesday."
+          · party_hookup · out: Zoe — Sat 00:15: zoe_apartment · Sat 02:00: nowhere — "Zoe's in the hall with a drink in each hand."
+          · ryan_05_thin_walls · hall: Laura — Sat 06:00: home_master_bedroom, not here — "She's sneaking for the bathroom before Mom is up."
+          · ryan_05_thin_walls · hall: Ryan — Sat 06:00: home_ryan_room · Sat 06:45: nowhere — "I'm not going anywhere." Behind her, Ryan stands frozen in his doorway, red to the ears, and he can't look at "
+          · ryan_05_thin_walls · listen: Ryan — Fri 22:05: home_ryan_room, not here — "That's your brother's voice."
+          · ryan_05_thin_walls · wall: Ryan — Fri 22:00: home_ryan_room, not here — "Then Ryan's voice, low: "Quiet."
+          · tom_04_booth_four · counter: Gary — Mon 14:35: cafe · Mon 18:00: nowhere — "Gary is already watching you, a folded twenty on his saucer."
+  [FAIL]  nobody is woken                            2 knock(s) or scene(s) reach a person who is asleep or not there
+          · laura_01_blue_dress (one-time): Laura is not in the building at Tue 18:00, and nothing on this path checks
+          · laura_04_ryans_door (one-time): Laura is not in the building at Mon 20:00, and nothing on this path checks
+  [PASS]  every person here has a face               42/42 places each person stands have a face there
+  [PASS]  no one is named before they're met         241/241 names wait for their meeting
+  [PASS]  a latch flag is cleared                    4/4 latch flags clear daily or are timed
+  [PASS]  a button does something                    907/907 buttons do what they say
+  [PASS]  a clock bucket has a catch-all             35/35 screens with clock buckets leave a way on at every minute
+  [PASS]  a card shows the real gates                75/75 cards show their step's gates
+  [PASS]  a phone line is true                       14 chats and calls hold
+  [PASS]  the build matches the release page         7 people on the page, door ryan_08_two_knocks
+  [FAIL]  the reader passed                          193/193 touched canvases read · 25 FAIL without a waiver · 47 waived (no shipped release — every canvas is touched)
+          · ryan_01_hall_first_morning: FAIL on "true on every visit it can render on" with no waiver
+          · vance_meeting: FAIL on "true on every visit it can render on" with no waiver
+          · laura_05_jake_at_the_door: FAIL on "true on every visit it can render on" with no waiver
+          · laura_07_dark_stairs: FAIL on "true on every visit it can render on" with no waiver
+          · laura_08_it_wasnt_the_wine: FAIL on "true on every visit it can render on" with no waiver
+          · laura_catch: FAIL on "true on every visit it can render on" with no waiver
+          · hub_laura_kitchen: FAIL on "the numbers and the clothes agree" with no waiver
+          · hub_laura_kitchen: FAIL on "true on every visit it can render on" with no waiver
+          · laura_curfew_call: FAIL on "the numbers and the clothes agree" with no waiver
+          · mark_03_shorts: FAIL on "true on every visit it can render on" with no waiver
+          · a waiver is {canvas_id, test, why} in release_page.reader_waivers — LO's call, the-release.md 6b
+  ────────────────────────────────────────────────────────────────────────
+  REPORT — for LO to judge when he plays. Never blocks.
+  [ok  ]  prose has room                             `but` 2.95/1k (floor 2.88, field p10) · `and` 33.9/1k (field max 41.11) · over 34,268 words
+  [red ]  somebody speaks                            6.3:1 narration to dialogue — 4,522 spoken of 32,806 words (ceiling 5:1) · field median 2.93:1, 10 of 27 games at or under 2:1
+  [ok  ]  every hub is met first                     15/15 characters are introduced before their hub opens
+  [ok  ]  an explicit beat carries a clip            30/35 explicit beats carry a clip of their own (86%, floor 50%) · field 91% of explicit screens, 58% of in-passage reveals
+  [red ]  explicit floor                             6.2% of 306 REPEATABLE beats carry 3+ explicit words (floor 7.5%) · 6.8% of all 513 beats [reported, not judged] · field: per paragraph the median game is 4.4% and 8 of 26 meet 7.5%; per passage the median is 28–33% and DoL, the source of 7.5%, is lowest
+  [red ]  location fill                              38 locations · 32,810 words vs 119,300 declared · 1/37 on their own budget · anchor home_kitchen 17% · 641 pools, 31,280 words per pass (n = 38)
+  [red ]  the walk-in floor                          0/24 rooms where she works alone with someone scheduled carry a walk-in
+  [red ]  traversal heat                             13/31 destinations (42%) hold a sex scene — a beat with 3+ explicit words or _t4/_t5 media (floor 60%, about 60% is the target)
+  [red ]  explicit pools by place                    9/38 locations (24%) carry a cycling explicit pool on a repeatable (floor 60%)
+  [ok  ]  sentence length                            median sentence 7 words across 3,721 sentences (ceiling 14, margin +7) · field median 10, p25 8.25 — the floor is printed, not judged (prose has room)
+  [red ]  a hint line with place and time per step   23/44 steps have a card that says where and when
+          · npc_ryan step 1 (ryan_01_hall_first_morning): no card is shown while it is the next step — generate one with guidance_from_ladder.py
+          · npc_ryan step 3 (ryan_03_shirt_off): its card does not name the place (`home_ryan_room`, 19:00–22:00)
+          · npc_ryan step 4 (ryan_04_feet_in_his_lap): its card does not name the place (`home_ryan_room`, 22:00–00:00)
+          · npc_ryan step 5 (ryan_05_thin_walls): its card does not name the place (`home_ella_room`, 22:00–00:00)
+          · npc_ryan step 6 (ryan_06_after_the_shower): its card does not name the place (`home_bathroom`, 08:00–10:00)
+          · npc_ryan step 7 (ryan_07_first_kiss): its card does not name the place (`home_ryan_room`, 19:00–22:00)
+          · npc_ryan step 8 (ryan_08_two_knocks): its card does not name the place (`home_ryan_room`, 19:00–22:00)
+          · npc_laura step 1 (laura_01_blue_dress): its card does not name the place (`home_master_bedroom`, 18:00–22:00)
+          · npc_laura step 2 (laura_02_home_late): its card does not name the place (`home_hall`, 23:00–01:00)
+          · npc_laura step 6 (laura_06_take_me_with_you): its card does not name the place (`home_master_bedroom`, 17:00–18:30)
+  [ok  ]  the spine holds together                   22/22 spine checks pass (scripts/shape.py)
+  [ok  ]  a dated line names a built event           no line names a future week or day
+  [n/a ]  world size                                 hook share 56% of 32,810 words (16 hook people, hub `home_hall`) · threads 5 declared, 5 built · 20 speaking NPCs · 31 links · 4 zones — a size, never a score
+          · links: vance_meeting, hub_vance_porch, vance_walk_past, vance_knock, cafe_job_ask, tom_01_the_apron, tom_02_uniform_rule, tom_03_the_tip_jar, tom_05_half_is_mine, tom_06_after_close_kiss …
+  [n/a ]  systems and connections                    7 system(s) · 5 infrastructure (channel, clock, view) · 15 meter(s) — a count, never a score
+          · college: feeds 8 (grade_psych, grade_art, grade_business, grade_bio, intelligence, complaints, campus_talk, laura_suspicion) · reads 5 (energy, wardrobe, corruption, exhibitionism, intelligence) · leads to 5
+          · job: feeds 1 (money) · reads 4 (energy, exhibitionism, corruption, curfew) · leads to 2
+          · money_pressure: feeds 1 (paid_full_streak) · reads 1 (money) · leads to 2
+          · parties: feeds 4 (campus_talk, corruption, exhibitionism, laura_suspicion) · reads 3 (energy, curfew, wardrobe) · leads to 4
+          · wardrobe: feeds 2 (exhibitionism, complaints) · reads 2 (exhibitionism, corruption) · leads to 2
+          · park: feeds 2 (exhibitionism, energy) · reads 3 (wardrobe, corruption, exhibitionism) · leads to 2
+          · home_life: feeds 8 (laura_warmth, ryan_warmth, ryan_want, mark_want, exhibitionism, corruption, energy, room_tidy) · reads 5 (who is home (their rows), corruption, exhibitionism, each person's step, wardrobe) · leads to 3
+  [n/a ]  topics on thin ground                      0 placeholder · 2 scouted of 43 topic(s) — a count, never a score
+          · scouted: parties, the Friday party
+  [n/a ]  choices marked guess                       76 key choice(s) rest on a guess — a count, never a score
+          · sheets/OPENING.md: the clock after each screen
+          · sheets/people/npc_hale.md: an email thread for a professor
+          · sheets/people/npc_hale.md: his lines
+          · sheets/people/npc_jake.md: the thread's timing
+          · sheets/people/npc_laura.md: her lines per clothing state
+          · sheets/people/npc_mark.md: what he calls her, his lines
+          · sheets/people/npc_mark.md: the rent text
+          · sheets/people/npc_ryan.md: his lines per clothing state
+          · sheets/people/npc_ryan.md: the thread's timing
+          · sheets/people/npc_tom.md: his lines, the thread
+          · sheets/people/npc_vance.md: the raise sizes
+          · sheets/people/npc_zoe.md: the threads
+          · … and 64 more
+  [red ]  every other gate                           43/60 pass
+          · FAIL the men's numbers are read
+          · FAIL a goal's end is built
+          · FAIL a step is seen from the next room
+          · FAIL a chat is short and timed
+          · FAIL a system meets its floors
+          · FAIL sex for pay names the amount
+          · FAIL her clothes are named exactly
+          · FAIL one garment per slot
+          · FAIL one pool, one place
+          · FAIL the phone owns posting
+          · FAIL a day word fits its window
+          · FAIL ladders move forward
+          · FAIL meter ceiling
+          · FAIL ascent tiers expand the world
+          · FAIL world reachable
+          · FAIL sinks >= sources
+          · FAIL a place is not a catalogue
+  ────────────────────────────────────────────────────────────────────────
+  SHIP: NO — 8 BLOCK row(s) red
+

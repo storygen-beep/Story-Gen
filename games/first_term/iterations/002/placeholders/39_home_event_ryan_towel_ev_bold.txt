@@ -1,0 +1,23 @@
+39 · home_event_ryan_towel · ev_bold
+sheet: sheets/places/home_hall.md:44
+signed line: Bold: "Let him look" (after Ryan A 4).
+
+facts (truth rule, checked against the built 7_final_game.toml and the sheets):
+- Choice in: "Let him look." corruption gte 40, ryan_step gte 3. Ryan Want +1.
+- Who: Ryan in his towel.
+- Clothes: hers not named. Ryan's early words: ass, tits; he is hard under the towel, which stays a look.
+- "Jesus, @player.nickname." is his signed line (npc_ryan.md).
+
+=== SCREEN (blank line = new beat; a line in quotes is a dialog block; *italics* is a thought_bubble) ===
+
+You stop in the hall and don't move out of his way. Ryan's eyes drop. They go to your tits and stay there, then down your stomach, over your hips. You turn, slow, so he gets your ass too. The front of his towel is tenting. He's hard under it, and he doesn't cover it up.
+"Jesus, @player.nickname."
+"Look all you want."
+He does. Water drips off his hair onto the carpet, and he keeps looking at your tits.
+
+*He wants that towel on the floor. You want to watch him drop it.*
+
+=== MEASURED · gates.py --beat (the screen; each variant on its own) ===
+  beat 1: 79 words · explicit 3 (ass, tits) · median sentence 10 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0 1 1 0 0 0 1
+  beat 2: 14 words · explicit 0 · median sentence 7 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0
+  all: words 93 · explicit 3 · median sentence 9 · 1/2 register as explicit

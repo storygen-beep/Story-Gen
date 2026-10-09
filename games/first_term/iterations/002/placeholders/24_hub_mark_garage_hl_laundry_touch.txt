@@ -1,0 +1,26 @@
+24 · hub_mark_garage · hl_laundry_touch
+sheet: sheets/people/npc_mark.md:109
+signed line: the paid look (Bold): "Leave those. I'll fold them." A bill under the basket.
+
+facts (truth rule, checked against the built 7_final_game.toml and the sheets):
+- Choice in: "Let him fold them." corruption gte 40, mark_step gte 7, mark_paid_look is_false, did_laundry is_false. money +20, Mark Want +1, exhibitionism +1.
+- Who: Mark, in the garage.
+- Clothes: the panties are laundry, never "your panties". Nothing she wears is named.
+- Mark's middle words: tits, cock. The look he pays for here is her watching him handle them; the act stays a look.
+- "a twenty" matches the +20.
+
+=== SCREEN (blank line = new beat; a line in quotes is a dialog block; *italics* is a thought_bubble) ===
+
+"Leave those," Mark says. "I'll fold them."
+He slides a twenty under the basket. He doesn't look at you while he does it.
+
+He takes the panties out of the basket and folds them, slow, in his big hands. He smooths the cotton flat with his thumb, right down the middle where they sit between your legs. He folds them once, then again. His cock is hard in his jeans, and he stands so you can see it. His eyes come up from the panties to your tits and stay there. He keeps the folded panties in his fist while he looks at your tits.
+
+*He's paying you to watch him do that. You take the twenty, and you watch.*
+"Go on, @player. I'll finish the rest."
+
+=== MEASURED · gates.py --beat (the screen; each variant on its own) ===
+  beat 1: 23 words · explicit 0 · median sentence 9 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0 0
+  beat 2: 82 words · explicit 3 (cock, tits) · median sentence 15 · dashes 0 · act rungs: strip · body words by sentence: 0 0 0 1 1 1
+  beat 3: 22 words · explicit 0 · median sentence 8 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0 0
+  all: words 127 · explicit 3 · median sentence 10 · 1/3 register as explicit

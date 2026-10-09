@@ -1,0 +1,31 @@
+37 · garden_sun · sun_mark_paid
+sheet: sheets/people/npc_mark.md:110
+signed line: the paid look (Bold): "Twenty to untie it." The bill on the grass. @player lies on the lounger untied, and he looks at the side of @player's tit, pressed flat.
+
+facts (truth rule, checked against the built 7_final_game.toml and the sheets):
+- Choice in: "Let him pay to look." corruption gte 40, mark_step gte 7, sunned is_false, mark_paid_look is_false. money +20, Mark Want +1, exhibitionism +1.
+- Who: Mark, out of the garage door.
+- Clothes: the choice has no clothing condition; the base strips to the waist with no garment name, the bra line is a group. Undressing is backed by the act.
+- Mark's middle words: tits, cock.
+
+=== SCREEN (blank line = new beat; a line in quotes is a dialog block; *italics* is a thought_bubble) ===
+
+Mark walks out onto the grass and drops a twenty by your hand.
+"Twenty to untie it."
+
+You roll onto your front and strip to the waist. You drop everything on the grass. You lie flat with nothing on your back. The side of your tit is pressed flat against the cushion, soft and spilling out. Mark stands over you with his beer. He looks at the curve of your tit, at your nipple, almost showing every time you breathe. His cock is a hard line in his jeans. You lift up an inch off the cushion so he can see more of your tit, and you hear him swallow.
+
+*He paid twenty to stare at you in the sun. You lie still and let him.*
+"Don't burn." He goes back into the garage.
+
+=== VARIANTS (each a group on the gate shown) ===
+
+[variant 1 · group: clothing_slot bra equipped AND clothing_slot top unequipped AND clothing_slot dress unequipped · replaces the first sentence of beat 2]
+You roll onto your front, reach back and unhook your bra. The straps fall loose to either side.
+
+=== MEASURED · gates.py --beat (the screen; each variant on its own) ===
+  beat 1: 17 words · explicit 0 · median sentence 13 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0
+  beat 2: 93 words · explicit 5 (cock, nipple, tit) · median sentence 10 · dashes 0 · act rungs: strip · body words by sentence: 0 0 0 1 0 2 1 1
+  beat 3: 24 words · explicit 0 · median sentence 14 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0
+  all: words 134 · explicit 5 · median sentence 10 · 1/3 register as explicit
+  variant 1: 18 words · explicit 0 · median sentence 11 · dashes 0 · act rungs: strip · body words by sentence: 0 0

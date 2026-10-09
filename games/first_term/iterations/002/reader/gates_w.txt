@@ -1,0 +1,150 @@
+          · debt_offer: "…and squares the edges against the table, one by one, and doesn't look at you.…"  (window 08:00–22:00, 840 min)
+          · hale_01_first_lecture: "…His wife picks him up Thursdays. Half past seven, in the car park, every week.…"  (window 08:30–10:00, 90 min)
+          · hale_02_lost_his_place: "…Thursday. After six.…"  (window 08:30–10:00, 90 min)
+          · hale_05_seven_twenty: "…Thursdays at seven. Your office. You'll be done by seven…"  (window 08:30–10:00, 90 min)
+          · tom_06_after_close_kiss: "…flips the sign and pulls the blinds down one by one, slowly, and the café goes dim and priv…"  (window 22:00–23:00, 60 min)
+          (the-clock.md C2 — a LIST, never a score. Read each line at the LAST minute of the window beside it: a RULE is still true there and is correct
+           work ("Nobody comes in before eleven on a Monday"); a READING is not ("Doors open at nine", true for 1 minute of 300). The turn is
+           grammatical — the reading becomes a rule and the fact survives: "The doors open at nine")
+  ────────────────────────────────────────────────────────────────────────
+  lint · the time cost is not on the button — 104 of 104 clicks that move the clock an hour or more say nothing about it on the button
+          · cafe_shift: "Clock out." spends 3h00m, label does not say so
+          · cafe_shift: "Clock out." spends 3h00m, label does not say so
+          · cafe_shift: "Clock out." spends 3h00m, label does not say so
+          · cafe_shift: "Clock out." spends 3h00m, label does not say so
+          · cafe_shift: "Clock out." spends 3h00m, label does not say so
+          · cafe_shift: "Clock out." spends 3h00m, label does not say so
+          · college_class_bio: "Pack up, slowly." spends 1h30m, label does not say so
+          · college_class_bio: "Pack up." spends 1h30m, label does not say so
+          · college_class_bio: "Pack up." spends 1h30m, label does not say so
+          · college_class_bio: "Wake up." spends 1h30m, label does not say so
+          · … and 30 more
+          (the-clock.md C4 — a LIST, never a score. The engine tags TRAVEL time for you on a nav card (v2.py:4724, "20m") and tags ACTIVITY time nowhere
+           (v2.py:12733), so the sidebar clock jumps unexplained. Recommended, not required: 4,219 of the corpus's 4,260 duration tags are one game's)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the currency in the prose — 5 money references · 100% in `dollar` (field median 92%) · 67% of the 6 money words carry an exact amount (field 20%)
+          (the-economy.md R7 — a LIST, never a score. The lines listed are the ones NOT in the game's main currency. Field: one notation carries a median 92% of a game's money references, and a money word carries an exact amount 20% of the time)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the price is spelled out — 5 priced labels · symbol 100% · spelled out 0% · code 0% (field 94% / 5% / 1%)
+          (the-economy.md R7 part 3 — a LIST. 94% of the field's 654 priced labels use a symbol, 5% spell the unit out, 0.8% use a currency code. An invented unit used consistently — "10 coin", "1000 caps" — is the field's own pattern and is not a defect)
+  ────────────────────────────────────────────────────────────────────────
+  lint · money gates content, or only prices it — `money` is read by 1 condition(s) across 1 canvas(es) and priced by 3 choice(s) across 3 canvas(es)
+          · hub_ryan_room: 1 condition(s) read `money`
+          (the-economy.md R1 — a LIST, never a score. A CONDITION on the currency means content exists that money opens; a `costs` block means a thing can be bought. Gate 16 passes on either, deliberately — but the field runs a median 67.3 money conditions per 1,000 passages and every sandbox has some)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the obligation against the week — obligation 75 against a declared week of 232 — 32% of the week
+          · the obligation MOVES (R3b): Mark names Vance's raise at the table: $90 after $300 paid, $100 after $900, then flat
+          · the ratio above is the BASELINE week by construction — a moving obligation is priced against the week it starts in, not the week it ends in
+          (the-economy.md R3 — a FIGURE, never a score: any threshold would fail a game for obeying the doctrine. Declare board.economy.week_income; an undeclared week is not a pass)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the collector is also the target — collector Mark (want.hold_collector) holds 4 of 16 attributed, rank 2 of 9 · 22 explicit repeatable surface(s), 16 attributed to a character · Ryan 4, Mark 4, Zoe 2, Gary 1
+          · field reference: the collector's share of a game's explicit passages runs 0.4–3.8% and he is NEVER the top figure — degrees-of-lewdity's collector 6 of 415 (1.4%) against another character's 61 (14.7%), who charges her nothing
+          (the-want.md §4a — a RANK, never a score. The field's collector is never the top explicit figure, but DoL makes its collector both deliberately, so a threshold here would fail a game for a legitimate design)
+  ────────────────────────────────────────────────────────────────────────
+  lint · what a paid repeatable leaves behind — 93 of 142 paid repeatable choices deposit something (65%)
+          · quad_grass: "Get up." costs 30m and leaves nothing behind
+          · hub_ryan_kitchen: "Done." costs 30m and leaves nothing behind
+          · hub_ryan_living_room: "Done." costs 60m and leaves nothing behind
+          · hub_ryan_living_room: "Done." costs 60m and leaves nothing behind
+          · hub_laura_kitchen: "Done." costs 30m and leaves nothing behind
+          · hub_laura_kitchen: "Done." costs 30m and leaves nothing behind
+          · hub_laura_kitchen: "Done." costs 30m and leaves nothing behind
+          · hub_laura_kitchen: "Done." costs 30m and leaves nothing behind
+          · hub_laura_kitchen: "Done." costs 30m and leaves nothing behind
+          · hub_laura_kitchen: "Done." costs 30m and leaves nothing behind
+          · … and 4 more
+          (the-economy.md R1c — a RATE, never a score. A pure sink is not a defect; a game made only of pure sinks is. No threshold has been measured, so none is set)
+  ────────────────────────────────────────────────────────────────────────
+  lint · repeatables without a step — first release: 125 repeatables, 44 declared steps — nothing to compare
+          (PRD WS4 — a LIST, never a score. More to do at the same step is fine; a release that only adds repeatables has moved nobody on)
+  ────────────────────────────────────────────────────────────────────────
+  lint · a flag that never resets — 2 of 53 resetting flag(s) are set and never unset — not in any effect, not in [engine.daily_tick]
+          · letter_home
+          · on_probation
+          (a LIST, never a score. The name promises a reset the game never runs: once set, it holds for the whole save. Clear it in [engine.daily_tick], or rename it if it really is once-per-save — engine.md §28)
+  ────────────────────────────────────────────────────────────────────────
+  lint · a cheat page exists — 3 free row(s), 0 behind a code · 2 of 4 basics free
+          · no free 'the next step now' row
+          · no free 'ask again' row
+          (a LIST, never a score. Cut a basic on purpose if the game cannot use it; a time-saver behind a code is the one thing SY7 says to give away — engine.md §48)
+  ────────────────────────────────────────────────────────────────────────
+  lint · world size — hook share 60% of 36,410 words (16 hook people, hub `home_hall`) · threads 5 declared, 5 built · 20 speaking NPCs · 31 links · 4 zones
+          · links: vance_meeting, hub_vance_porch, vance_walk_past, vance_knock, cafe_job_ask, tom_01_the_apron, tom_02_uniform_rule, tom_03_the_tip_jar, tom_05_half_is_mine, tom_06_after_close_kiss …
+          (a SIZE, never a score — the-want.md, "Her life — the threads")
+  ────────────────────────────────────────────────────────────────────────
+  lint · systems and connections — 7 system(s) · 5 infrastructure (channel, clock, view) · 15 meter(s)
+          · college: feeds 8 (grade_psych, grade_art, grade_business, grade_bio, intelligence, complaints, campus_talk, laura_suspicion) · reads 5 (energy, wardrobe, corruption, exhibitionism, intelligence) · leads to 5
+          · job: feeds 1 (money) · reads 4 (energy, exhibitionism, corruption, curfew) · leads to 2
+          · money_pressure: feeds 1 (paid_full_streak) · reads 1 (money) · leads to 2
+          · parties: feeds 4 (campus_talk, corruption, exhibitionism, laura_suspicion) · reads 3 (energy, curfew, wardrobe) · leads to 4
+          · wardrobe: feeds 2 (exhibitionism, complaints) · reads 2 (exhibitionism, corruption) · leads to 2
+          · park: feeds 2 (exhibitionism, energy) · reads 3 (wardrobe, corruption, exhibitionism) · leads to 2
+          · home_life: feeds 8 (laura_warmth, ryan_warmth, ryan_want, mark_want, exhibitionism, corruption, energy, room_tidy) · reads 5 (who is home (their rows), corruption, exhibitionism, each person's step, wardrobe) · leads to 3
+  ────────────────────────────────────────────────────────────────────────
+  lint · toggles declared — n/a — none declared in want.toggles (the-surfaces.md R5b.4)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the joints — coordination ratio 3.20 (field p25 1.81 · median 2.08 · max 3.89) · 4 `, which is` gloss(es)
+          · college_exam_bio: median sentence 4
+          · college_exam_psych: median sentence 4
+          · college_exam_business: median sentence 5
+          · door_grade_business: median sentence 5
+          · party_arrive: median sentence 5
+          (a LIST, never a score. `prose has room` judges `but` and `and`; the ratio and the glosses are for reading — register.md, "Joints" and L1)
+  ────────────────────────────────────────────────────────────────────────
+  lint · adjacent groups — 0 dead group(s) in 620 group chain(s)
+  ────────────────────────────────────────────────────────────────────────
+  lint · a pronoun with nobody to point at — 14 screen(s) or place(s)
+          · vance_meeting/porch: "his" — Next door, on his porch, the man who owns your house: Mr. Vance. Mid-fifties, a cardi…
+          · college_class_figure/class: "her" — The model drops her robe on the platform and steps up naked under the lamp. She sits …
+          · corner_shop.description: "his" — The corner shop: three narrow aisles, a fridge that hums, a clerk behind the till who…
+          · corner_shop_list/till: "his" — Bread, milk, eggs, the wine Laura likes, the washing powder she always forgets. The c…
+          · door_grade_business/door: "he" — A typed list in a plastic sleeve, squared to the edge of the door. No comments. No ti…
+          · garage_things/bench: "His" — His workbench, his radio, a fridge of beer that hums. The filing box under the bench …
+          · hale_thursdays/door: "He's" — He's waiting with the door unlocked and the photo already face-down. He locks the doo…
+          · master_wardrobe/wardrobe: "Her" — Her wardrobe smells like her perfume. Work blouses, a winter coat, and at the back, i…
+          · park_watch_the_couple/watch: "he's" — Behind you on the path a jogger thuds past. You hold your breath until he's gone.
+          · ryan_things/things: "His" — His room smells like him: deodorant, the yard, something warm. His bed isn't made. Yo…
+          (a LIST, never a score. Put the person on screen before the pronoun: a role, a name, or a token — register.md, "A pronoun needs someone")
+  ────────────────────────────────────────────────────────────────────────
+  lint · a past event the player was never given — 1 line(s)
+          · college_class_business/chat: "about Friday" — somebody is expected to know what happened that day (inside a block_pool)
+          (a LIST, never a score. Gate the line on the flag that records it, or cut it — register.md, "The truth rule")
+  ────────────────────────────────────────────────────────────────────────
+  lint · short lines with no verb — 397 of 3,130 sentences (12.7%; field p25 11.36 · median 15.16 · p75 27.61)
+          · ryan_01_hall_first_morning/wake: Monday.
+          · ryan_01_hall_first_morning/wake: Your first day of college.
+          · ryan_01_hall_first_morning/wake: College.
+          · ryan_01_hall_first_morning/wake: New people.
+          · ryan_01_hall_first_morning/problem: Seventy-five a week.
+          · ryan_01_hall_first_morning/problem: With what?
+          · ryan_01_hall_first_morning/shower: Then the handle rattles.
+          · ryan_01_hall_first_morning/shower: Ryan.
+          (a LIST, never a score, and approximate: a curated verb list, no tagger. A fragment is a choice, not a defect — read them)
+  ────────────────────────────────────────────────────────────────────────
+  lint · how much explicit content is in here — 64 explicit screen(s) over 127,995 words — 0.50 per 1,000 (field median 1.24, p25 0.95; canvas-only basis 0.46 from 40)
+          · below the field's p25 (0.95) on BOTH bases (0.50 matched, 0.46 generous) — the gap is not an artefact of UI chrome in the denominator
+          · field median is 457 explicit screens in absolute terms; this game has 64
+          (a NUMBER, never a score. Every other heat check here is a share with a hand-picked denominator, so a game can pass every one of them nearly empty. Reads the BUILT html on the field's own word list; a rate over word count is the only figure comparable across the two bases)
+  ────────────────────────────────────────────────────────────────────────
+  lint · the prose names places the map does not have — 5 to eyeball
+          · "stairs" ×27: the stairs thump and ryan comes in with his hair wet, in a fresh t-shi…
+          · "porch" ×19: next door, on his porch, the man who owns your house: mr.…
+          · "yard" ×6: twenty-two, mark's son, broad from lifting at the yard.…
+          · "corridor" ×6: the corridor outside is empty.…
+          · "landing" ×5: you've got your shoes in your hand and you're halfway to the stairs wh…
+          (either the location is missing, or the sentence is wrong)
+  ────────────────────────────────────────────────────────────────────────
+  lint · bound to a person, no face — 12 repeatable canvas(es) name a character and render no portrait
+          · cafe_gary_ten_minutes @cafe: names npc_gary, renders as a link not a face — windowed by trigger.schedules
+          · hale_thursdays @hale_office: names npc_hale, renders as a link not a face — windowed by trigger.schedules
+          · laura_reads_grade_art @home_kitchen: names npc_laura, renders as a link not a face — windowed by trigger.schedules
+          · laura_reads_grade_bio @home_kitchen: names npc_laura, renders as a link not a face — windowed by trigger.schedules
+          · laura_reads_grade_business @home_kitchen: names npc_laura, renders as a link not a face — windowed by trigger.schedules
+          · laura_reads_grade_psych @home_kitchen: names npc_laura, renders as a link not a face — windowed by trigger.schedules
+          · mark_sunday_table @home_kitchen: names npc_mark, renders as a link not a face — windowed by trigger.schedules
+          · park_hidden @park: names npc_zoe, renders as a link not a face — windowed by trigger.schedules
+          · party_dare @zoe_apartment: names npc_zoe, renders as a link not a face — windowed by trigger.schedules
+          · ryan_two_knocks @home_ryan_room: names npc_ryan, renders as a link not a face — windowed by trigger.schedules
+          · … and 2 more
+          (the-first-hour.md F5b — a LIST, never a score. `trigger.npc` renders the portrait AND gates the surface on that character's own [[npcs.schedules]]. `requires_npc` draws no face, but since 2026-09-03 it DOES gate the solo lane (setup._npcPresentForCanvas) as well as random ambients and substitution targets, so a row carrying it is at least hidden while that person is elsewhere — it is the FACE that is still missing. An activity that happens in a place while somebody is around is a legitimate shape. A surface ON that person wants the face, and when the face is already taken by a higher-priority canvas the surface is a NODE INSIDE that canvas, not a second one beside it — a node has no priority to lose (F5b). Walk-ins and windowed scenes are legitimate hits, which is why this cannot fail anything)
+

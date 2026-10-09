@@ -1,0 +1,22 @@
+02 · hub_ryan_living_room · hl_tv_tease
+sheet: sheets/people/npc_ryan.md:105
+signed line: tease (Curious): @player's feet in his lap; his hand closes on an ankle.
+
+facts (truth rule, checked against the built 7_final_game.toml and the sheets):
+- Choice in: "Put your feet in his lap." from hl_tv (his game). corruption gte 20, ryan_step gte 3, watched_tv is_false. Ryan Want +1.
+- Who: Ryan, on the couch with a controller (couch node).
+- Clothes: none named. Early words: ass, tits.
+
+=== SCREEN (blank line = new beat; a line in quotes is a dialog block; *italics* is a thought_bubble) ===
+
+You swing your legs up and drop your feet in Ryan's lap. He goes still with the controller in his hands. On the screen his man dies, and he doesn't notice. Then his hand closes around your ankle and holds it there. His thumb moves on the bone, slow.
+"You're distracting me, @player.nickname."
+"Good."
+He doesn't let go. His eyes go up your legs to your ass on the cushion, and they stay there until the round restarts.
+
+*He wants this. He's just too scared to say it out loud. He picks the controller back up one-handed, and the other hand stays on you.*
+
+=== MEASURED · gates.py --beat (the screen; each variant on its own) ===
+  beat 1: 78 words · explicit 1 (ass) · median sentence 10 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0 0 0 0 0 1
+  beat 2: 26 words · explicit 0 · median sentence 9 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0 0
+  all: words 104 · explicit 1 · median sentence 10 · 0/2 register as explicit

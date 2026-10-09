@@ -1,0 +1,16 @@
+32 · hale_04_claire_knocks · hand
+sheet: sheets/scenes/hale_04_claire_knocks.md:72
+signed line: the top without buttons (sweep A4-22), written on the sheet as far as his stare; the build's hand beat continues to his hand, so this screen is the sheet's variant grown by the hand beat's second half.
+
+facts (truth rule, checked against the built 7_final_game.toml and the sheets):
+- Group: clothing_item thin_top unequipped ("Pull your top up."). One-time step, Hale B 4. Exit "Let him." to knock.
+- Who: Dr. Hale; Claire knocks on the next screen.
+- Clothes: "your top" is not a catalog garment; "nothing under it" is the sheet's own line, signed.
+- Hale's middle words: tits, nipples, cock. Sentences 1 to 6 are the sheet's, verbatim; the rest is the thin_top hand beat with "slides inside" turned into "comes up", because her top is already pulled up.
+
+=== SCREEN (blank line = new beat; a line in quotes is a dialog block; *italics* is a thought_bubble) ===
+
+You sit on the corner of his desk and pull your top up over your tits, slowly, and hold it there. There is nothing under it. Your tits are bare to him, your nipples already tight. Dr. Hale stares. He wants to touch you, but he can't stop looking first. "@player," he says, and his voice cracks, and his eyes stay on your bare tits. Then his hand comes up, and his palm closes over your tit. It covers you completely, warm and heavy. His thumb finds your nipple and rolls it, slow, then harder. You arch into his hand. His breath goes ragged against your neck. His cock is hard, pressing against the edge of the desk an inch from your hip. Your nipple is stiff under his thumb, so he rolls it again until you gasp.
+
+=== MEASURED · gates.py --beat (the screen; each variant on its own) ===
+  beat 1: 138 words · explicit 8 (cock, nipple, tit, tits) · median sentence 11 · dashes 0 · act rungs: touch · body words by sentence: 1 0 2 0 0 0 1 1 0 1 0 0 1 1

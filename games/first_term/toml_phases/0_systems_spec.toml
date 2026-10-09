@@ -56,6 +56,23 @@ partial_pay   = "\"That's short.\" He counts it anyway, and writes what's left o
 # ── the overnight list (SP1) — every per-day cap is a *_today flag cleared here ──
 [engine.daily_tick]
 flagEffects = [
+  # home_life brakes: once a day, cleared at midnight (LO, 2026-10-09, DECISIONS 77; iteration 002, home_items.DAILY)
+  { targetType = "player", flag = "ate_breakfast", op = "unset" },
+  { targetType = "player", flag = "had_coffee", op = "unset" },
+  { targetType = "player", flag = "ate_dinner", op = "unset" },
+  { targetType = "player", flag = "helped_cook", op = "unset" },
+  { targetType = "player", flag = "did_dishes", op = "unset" },
+  { targetType = "player", flag = "had_drink_home", op = "unset" },
+  { targetType = "player", flag = "watched_tv", op = "unset" },
+  { targetType = "player", flag = "movie_night", op = "unset" },
+  { targetType = "player", flag = "did_laundry", op = "unset" },
+  { targetType = "player", flag = "sunned", op = "unset" },
+  { targetType = "player", flag = "studied_home", op = "unset" },
+  { targetType = "player", flag = "made_up_today", op = "unset" },
+  { targetType = "player", flag = "hung_washing", op = "unset" },
+  { targetType = "player", flag = "home_event", op = "unset" },
+  { targetType = "player", flag = "couch_seen", op = "unset" },
+  { targetType = "player", flag = "mark_paid_look", op = "unset" },
   { targetType = "player", flag = "cafe_shift_1_today", op = "unset" },
   { targetType = "player", flag = "cafe_shift_2_today", op = "unset" },
   { targetType = "player", flag = "cafe_shift_3_today", op = "unset" },
@@ -88,6 +105,14 @@ flagEffects = [
   { targetType = "player", flag = "laura_talk_today", op = "unset" },
   { targetType = "player", flag = "ryan_cover_today", op = "unset" },
   { targetType = "player", flag = "laura_caught_today", op = "unset" },
+  { targetType = "player", flag = "laura_call_today", op = "unset" },
+  { targetType = "player", flag = "worked_out", op = "unset" },
+  { targetType = "player", flag = "jake_gym_today", op = "unset" },
+  { targetType = "player", flag = "town_event", op = "unset" },  # a random town event, once a day (iteration 002, part 5)
+  { targetType = "player", flag = "zoe_face_today", op = "unset" },  # Zoe's bathroom mirror, once a night
+  { targetType = "player", flag = "grocery_asked_today", op = "unset" },  # Laura's list, asked once a day
+  { targetType = "player", flag = "grocery_done_today", op = "unset" },  # given or owned up, once a day
+  { targetType = "player", flag = "jake_date_went", op = "unset" },  # the night he took her out ends at midnight (Q73)  # Jake at the gym, once a day (iteration 002, part 4)  # the gym, once a day (iteration 002, part 4)  # her curfew call, once a day (iteration 002, part 3)
   { targetType = "player", flag = "sunday_counted_today", op = "unset" },
   { targetType = "player", flag = "toilet_bra_today", op = "unset" },
   { targetType = "player", flag = "park_flash_today", op = "unset" },
@@ -455,10 +480,10 @@ corruption = 2
 group    = "story_goals"
 priority = 20
 text     = "Week one. Class, a job, and seventy-five for Mark by Sunday."
-tip      = "Psychology is Monday morning in the lecture hall. The café on your street is hiring. The rent is taken on Sunday."
+tip      = "Psychology is Monday morning in the lecture hall. The café in town is hiring. The rent is taken on Sunday."
 when     = [ { flag = "opening_done", op = "is_true" }, { days_since_flag = "opening_done", op = "lt", value = 7 } ]
 goals    = [
-  { type = "trait", subject = "player", trait = "hale_step", op = "gte", value = 1, label = "Go to your first class: Psychology, Monday morning, the lecture hall" },
+  { flag = "hale_met", op = "is_true", label = "Go to your first class: Psychology, Monday morning, in the lecture hall" },
   { flag = "cafe_job", op = "is_true", label = "Ask for a job at the café" },
   { type = "trait", subject = "player", trait = "money", op = "gte", value = 75, label = "Have $75 by Sunday" },
 ]

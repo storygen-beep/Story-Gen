@@ -1,0 +1,67 @@
+{
+ "laura_catch": {
+  "want": "PASS",
+  "next step": "PASS",
+  "hook": "PASS",
+  "her voice at her level": "PASS",
+  "who notices": "PASS",
+  "the written no": "PASS",
+  "the body": "N/A",
+  "the numbers and the clothes agree": "PASS",
+  "companion and rival": "N/A",
+  "true on every visit it can render on": "PASS",
+  "a solo button is a real act": "N/A"
+ },
+ "hub_laura_kitchen": {
+  "want": "PASS",
+  "next step": "PASS",
+  "hook": "PASS",
+  "her voice at her level": "N/A",
+  "who notices": "PASS",
+  "the written no": "FAIL",
+  "the body": "N/A",
+  "the numbers and the clothes agree": "PASS",
+  "companion and rival": "N/A",
+  "true on every visit it can render on": "PASS",
+  "a solo button is a real act": "N/A"
+ },
+ "hub_tom_cafe": {
+  "want": "PASS",
+  "next step": "PASS",
+  "hook": "PASS",
+  "her voice at her level": "N/A",
+  "who notices": "PASS",
+  "the written no": "N/A",
+  "the body": "N/A",
+  "the numbers and the clothes agree": "PASS",
+  "companion and rival": "N/A",
+  "true on every visit it can render on": "FAIL",
+  "a solo button is a real act": "N/A"
+ },
+ "hub_gary_booth": {
+  "want": "PASS",
+  "next step": "PASS",
+  "hook": "PASS",
+  "her voice at her level": "N/A",
+  "who notices": "PASS",
+  "the written no": "N/A",
+  "the body": "N/A",
+  "the numbers and the clothes agree": "PASS",
+  "companion and rival": "N/A",
+  "true on every visit it can render on": "PASS",
+  "a solo button is a real act": "N/A"
+ },
+ "hub_zoe_apartment": {
+  "want": "PASS",
+  "next step": "PASS",
+  "hook": "PASS",
+  "her voice at her level": "N/A",
+  "who notices": "PASS",
+  "the written no": "FAIL",
+  "the body": "N/A",
+  "the numbers and the clothes agree": "PASS",
+  "companion and rival": "N/A",
+  "true on every visit it can render on": "PASS",
+  "a solo button is a real act": "N/A"
+ }
+}

@@ -1,0 +1,28 @@
+35 · garden_sun · sun_ryan_touch
+sheet: sheets/people/npc_ryan.md:104
+signed line: touch (Bold): @player calls him down with the sun lotion. His hands on @player's back, under the strap, down to the waistband.
+
+facts (truth rule, checked against the built 7_final_game.toml and the sheets):
+- Choice in: "Call him down with the sun lotion." corruption gte 40, ryan_step gte 7 (Ryan A 8), sunned is_false. Ryan Want +1, corruption +1.
+- Who: Ryan, down from his room. Nobody else is placed in the garden.
+- Clothes: the choice has no clothing condition, so the base says "the strap" with no garment name; the bra strap is a group.
+- Ryan's middle words: cock, wet. Hands on her back and the sides of her tits; it stops at her waistband. Sex waits for Hungry.
+
+=== SCREEN (blank line = new beat; a line in quotes is a dialog block; *italics* is a thought_bubble) ===
+
+You hold the sun lotion up at his window and shake it. A minute later Ryan's on the grass. You lie on your front, and he kneels by the lounger and squeezes lotion into his palm. His hands land on your shoulders, warm and slick. They work down your back, slow, his thumbs either side of your spine. His fingers slide under the strap and stay under it. His thumbs brush the sides of your tits, pressed flat on the cushion. Then his hands go down to the small of your back, down to your waistband, and stop at the top of your ass. His cock is hard in his shorts, an inch from your arm. You're wet, so you push back into his hands, and your ass lifts against his palms.
+
+"Somebody's going to look out a window," he says, low.
+"Let them."
+*Your step-brother's hands are on you in broad daylight. You want them lower.*
+
+=== VARIANTS (each a group on the gate shown) ===
+
+[variant 1 · group: clothing_slot bra equipped · replaces "His fingers slide under the strap and stay under it."]
+His fingers slide under your bra strap and stay under it.
+
+=== MEASURED · gates.py --beat (the screen; each variant on its own) ===
+  beat 1: 132 words · explicit 4 (ass, cock, tits) · median sentence 13 · dashes 0 · act rungs: hands · body words by sentence: 0 0 0 0 0 0 1 1 1 1
+  beat 2: 25 words · explicit 0 · median sentence 10 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0 0
+  all: words 157 · explicit 4 · median sentence 12 · 1/2 register as explicit
+  variant 1: 11 words · explicit 0 · median sentence 11 · dashes 0 · act rungs: strip, hands · body words by sentence: 0

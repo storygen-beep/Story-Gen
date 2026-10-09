@@ -1,0 +1,29 @@
+21 · hub_mark_living_room · hl_beer_tease
+sheet: sheets/people/npc_mark.md:108
+signed line: tease (Curious): He hands @player a beer. @player curls up on the couch in the sleep shirt; he counts the inches of leg.
+
+facts (truth rule, checked against the built 7_final_game.toml and the sheets):
+- Choice in: "Curl up on the couch." corruption gte 20, mark_step gte 3, had_drink_home is_false. Mark Want +1.
+- Who: Mark, late (Sun to Fri 22:00 to 00:00, Mon to Sat 00:00 to 02:00). hl_beer already hands her the can.
+- Clothes: the sleep shirt is not on the choice, so it lives in a worn_type group. Mark's early words: legs, ass.
+- Mark calls her @player.
+
+=== SCREEN (blank line = new beat; a line in quotes is a dialog block; *italics* is a thought_bubble) ===
+
+You curl up on the other end of the couch with the can cold in your hand. You tuck your legs under you, then stretch them out toward him, slow. Mark stops watching the game. His eyes go from your ankle to your knee to the top of your thigh, an inch at a time, and he doesn't hurry.
+"Sit still, @player."
+"I am sitting still."
+"Then keep sitting like that."
+
+*He's counting every inch of your legs. Let him count.*
+
+=== VARIANTS (each a group on the gate shown) ===
+
+[variant 1 · group: worn_type eq sleep_shirt · added after the first sentence of beat 1]
+Your sleep shirt rides up to the tops of your thighs when you stretch. He watches the hem, not the TV.
+
+=== MEASURED · gates.py --beat (the screen; each variant on its own) ===
+  beat 1: 71 words · explicit 0 · median sentence 13 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0 0 0 0
+  beat 2: 10 words · explicit 0 · median sentence 7 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0
+  all: words 81 · explicit 0 · median sentence 12 · 0/2 register as explicit
+  variant 1: 21 words · explicit 0 · median sentence 14 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0
