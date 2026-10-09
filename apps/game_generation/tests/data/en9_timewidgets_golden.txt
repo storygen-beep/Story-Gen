@@ -1,12 +1,7 @@
 :: TimeWidgets [widget nobr]
 <!-- Time Display Widgets -->
 <<widget "timeFormatted">>
-<<set _hour to $game_state.time_state.current_hour>>
-<<set _minute to $game_state.time_state.current_minute>>
-<<set _displayHour to (_hour is 0 ? 12 : (_hour > 12 ? _hour - 12 : _hour))>>
-<<set _ampm to (_hour < 12 ? "AM" : "PM")>>
-<<set _minuteStr to (_minute < 10 ? "0" + _minute : _minute)>>
-<<print _displayHour + ":" + _minuteStr + " " + _ampm>>
+<<print setup.formatTime($game_state.time_state.current_hour, $game_state.time_state.current_minute)>>
 <</widget>>
 
 <!-- Render a quest card: narrative line + (Pattern 2) auto-rendered 🎯 goal
