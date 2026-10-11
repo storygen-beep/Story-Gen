@@ -11132,21 +11132,11 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 <</if>>
 <</nobr>>
 """
-                    # Add destinations (all connected locations)
-                    connected_locations = self._locations_entered_from(location)
-                    for connected_loc in connected_locations:
-                        connected_name = connected_loc.name.replace(' ', '_')
-                        # Handle destination containers with default_entry appropriately
-                        if getattr(connected_loc, 'is_container', False) and getattr(connected_loc, 'default_entry_location', None):
-                            # If destination is container with default_entry, go to default_entry directly
-                            default_entry_name = connected_loc.default_entry_location.name.replace(' ', '_')
-                            child_link = f"[[{connected_loc.name}->{self._location_passage_for_name(default_entry_name)}]]<br>"
-                        else:
-                            # Regular location or container without default_entry
-                            child_link = f"[[{connected_loc.name}->{self._location_passage_for_name(connected_name)}]]<br>"
-                        if self._is_hidden_place(connected_loc):  # EN4
-                            child_link = f'<<if setup.locFound("{self._location_nav_slug(connected_loc)}")>>{child_link}<</if>>'
-                        content += child_link + "\n"
+                    # The rooms inside, drawn with the same card (or text-mode line) as any
+                    # other page's destinations, so they keep their picture, the people
+                    # there, NEW, cost and the locked / closed reason. They were bare
+                    # [[links]] that showed none of it.
+                    content += self._render_container_children(location)
 
                     # Add normal hierarchical navigation for containers without default_entry
                     content += """<div class="location-navigation">
@@ -11338,6 +11328,34 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 </div>
 
 """
+
+    def _render_container_children(self, container) -> str:
+        """The destination list on a container page that has no default entry.
+
+        Lists the places entered from the container, in its navigation_order (the rest
+        after, in the old order), as nav cards when any of them has an image and as
+        text-mode lines otherwise — the same two modes _generate_hierarchical_navigation
+        uses. A place that the hierarchical nav already lists below (entered from here
+        but not a child) is left to it, so nothing shows twice. Offscreen "away" labels
+        are never destinations.
+        """
+        video_path = getattr(self, 'video_path', '') or './media'
+        listed_below = {str(d.id) for d in self._ordered_navigation(container)}
+        children = [
+            d for d in self._locations_entered_from(container)
+            if str(d.id) not in listed_below
+            and not (getattr(d, 'properties', None) or {}).get('offscreen')
+        ]
+        if not children:
+            return ""
+        order = [str(oid) for oid in (container.navigation_order or [])]
+        rank = {oid: i for i, oid in enumerate(order)}
+        children.sort(key=lambda d: rank.get(str(d.id), len(order)))  # stable: the rest keep their order
+
+        if any(str(d.id) in self.location_image_defined for d in children):
+            cards = ''.join(self._render_location_nav_card(d, video_path) for d in children)
+            return f'<<nobr>><div class="location-nav-grid">{cards}</div><</nobr>>\n'
+        return ''.join(self._nav_link_line(d, video_path) for d in children)
 
     def _is_hidden_place(self, loc) -> bool:
         return bool((getattr(loc, 'properties', None) or {}).get('hidden_until'))
