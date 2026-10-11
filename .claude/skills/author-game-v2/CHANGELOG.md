@@ -5,6 +5,23 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-11 — a container with no default entry shows nav cards (engine change, first_term)
+
+**What.** `generators/v2.py`: the page of an `is_container` place with no `default_entry` listed the places
+inside it as bare `[[links]]`: no picture, no people, no NEW, no cost, and no locked or closed reason. A new
+`_render_container_children` draws them with the same `_render_location_nav_card` (or `_nav_link_line` in text
+mode) every other page uses, in the container's `navigation_order`. Hidden places stay wrapped in `locFound`,
+and the exits are unchanged. `references/engine.md` (the `is_container` + `default_entry` paragraph) now says
+what that page shows. **Why.** LO asked why first_term's Campus and Town showed links where every other page
+showed places. Only those two containers lack a `default_entry`; vesper and media_lab have none, so they build
+as before. **Verified.**
+- first_term built to a scratch folder with the old engine and with the new one: only `Location_campus` and
+  `Location_town` changed, once the scratch folder name written into the debug search links is set aside.
+- Headless Chromium at 07:00 Monday showed 8 Campus cards (Lecture Hall, Library, Canteen and Faculty Floor
+  greyed with "Closed. Opens at …") and 2 Town cards (Zoe's Flat and the Party House stay hidden until found).
+- The Quad card navigates, and there were no page errors.
+- `cite_check.py` drift is unchanged (84 drifted, 52 in SKILL.md + references/, the same with either engine).
+
 ## 2026-10-09 — the clock is 12- or 24-hour now (engine change, Vesper 0.2.3.1)
 
 **What.** `references/the-clock.md` §on the visible clock said the sidebar renders "a live 12-hour reading". The engine now registers a SugarCube Setting (`clock24`), and every engine-printed time — sidebar, Schedule page, schedule hints, time-of-day gate text — goes through `setup.formatTime`, so the line now says 12-hour by default, 24-hour if the player ticks it. **Why.** A player asked for a 24-hour clock on F95 and LO shipped it in Vesper 0.2.3.1; the old sentence became false. Nothing for authors to do: prose times ("2 am", "eleven") are not converted and should not be. **Verified.** Vesper release smoke in both modes (sidebar 9:30 PM / 21:30, "between 8 AM - 8 PM" / "between 08:00 - 20:00").

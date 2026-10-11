@@ -888,7 +888,11 @@ inventing a room for them. `template_import.py:191`.
 
 **`is_container` + `default_entry`** — a pure navigation wrapper that holds no content.
 `template_import.py:190`, `:5184`. A container **swallows** any canvas attached to it; attach to a
-non-container hub instead.
+non-container hub instead. With `default_entry`, going to the container lands her in that room. Without
+it, the container's page is its name, "Choose where to go in <name>:" and the places entered from it,
+in its `navigation_order`, drawn as the same nav cards as any other page (picture, who is there, NEW,
+cost, the locked or closed reason; text lines when none of them has an image), then its exits. It has
+no description, portraits or activities (`_render_container_children` in `v2.py`).
 
 ⚠️ **The lock above is the INERT kind** — a greyed, unclickable card. For a door she can stand at
 and knock on, see **§44**; it is a different field and a different fiction.
