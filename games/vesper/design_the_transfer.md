@@ -716,3 +716,9 @@ study card's tip now names the next step.
   suites pass.
 - **gates.py:** 38 FAIL lines, the same as before; no new failing gate.
 - **New media:** `portraits/wren_as_vega.jpg` and `locations/chairmans_floor.jpg`, on top of the 25 already listed.
+
+## Quests page pass (beat_0249, LO 2026-10-13: "fix both, vesper only")
+- While she is in Vega, every character card hides (all 54 gated `in_vega is_false`): their tips name Wren's places,
+  which are closed to Vega. In Vega the page shows only the story card for the current step.
+- Finished arcs (a terminal live card) sit under one collapsed **Finished (N)** heading after the live sections. This
+  is an opt-in engine setting, `[project] quests_finished_collapsed = true`; only Vesper sets it.

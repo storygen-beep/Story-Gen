@@ -244,7 +244,8 @@ def main():
         scene("cap_sabin_notices", "Out onto the plaza.", ("You never look at anybody.", "I'll make a note."))
         ok(flag("rise_searched") and psg() == "Location_spire_plaza", "Sabin's look, then out on the plaza")
         qt = play("QuestsPage")
-        ok("Chairman's vault in Vance Tower" in qt and "He made a note." in qt, "card Q, and Sabin's new card")
+        ok("Chairman's vault in Vance Tower" in qt, "card Q while in Vega")
+        ok("Bastien" not in qt and "Renner" not in qt and "Finished (" not in qt, "in Vega the Quests page shows only the story card (no Wren-body tips)")
         play("Location_spire_plaza")
         click("Take the car")
         click("Down to the gate.")
@@ -292,7 +293,12 @@ def main():
         qt = play("QuestsPage")
         ok("That is where this build ends" in qt and "Chapter complete" in qt and "army of empty bodies" in qt, "end card O")
         ok("&amp;#x27;" not in qt and "&#x27;" not in qt, "no escaped apostrophes")
-        ok("All but one." in qt, "Bastien's card 27 (Dace)")
+        qall = pg.evaluate("document.querySelector('#passages').textContent")   # includes the collapsed section
+        ok("All but one." in qall, "Bastien's card 27 (Dace)")
+        ok("Finished (" in qt and pg.evaluate("document.querySelector('details.quests-finished') && !document.querySelector('details.quests-finished').open"),
+           "the finished arcs sit under one collapsed Finished heading")
+        ok(qt.find("Chapter complete") < qt.find("Finished ("), "the story card comes before the Finished heading")
+        ok("He made a note." in qall and "She chose him." in qall, "Sabin's and Cain's cards are on the page (under Finished)")
 
         # ── what stands after
         at(14)

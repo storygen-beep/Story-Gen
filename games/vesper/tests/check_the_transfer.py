@@ -674,6 +674,12 @@ def main():
             if may_pass(tr.get("conditions")):
                 fails.append(f"0248: {c['id']} @{k} can render while Wren is in Vega and is not written for her (gate it in_vega is_false, or band it)")
 
+    # ── beat_0249 — the Quests page: character cards hide in Vega; finished arcs under "Finished" (LO 2026-10-13) ──
+    npc_cards = [c for c in cards if c.get("npc_id")]
+    ungated = [(c.get("npc_id"), c.get("priority")) for c in npc_cards if {"flag": "in_vega", "op": "is_false"} not in c.get("when", [])]
+    check(not ungated, f"0249: every character card hides while she is in Vega (their tips name Wren's places); ungated: {ungated}")
+    check((t.get("project") or {}).get("quests_finished_collapsed") is True, "0249: Vesper opts into the collapsed Finished section")
+
     if fails:
         print("THE TRANSFER GUARD: FAILED")
         for f in fails:

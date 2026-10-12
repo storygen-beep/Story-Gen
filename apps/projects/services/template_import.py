@@ -48,6 +48,9 @@ class TemplateProject:
     # [[story_arc.hints.templates]] engine. "v2" → new [[quests.cards]]
     # engine. Per-game opt-in; other games stay on v1 untouched.
     quests_engine: str = "v1"
+    # Quests V2 opt-in: draw NPCs whose live card is terminal under one collapsed "Finished"
+    # heading after the live sections. Default off; other games render exactly as before.
+    quests_finished_collapsed: bool = False
     # Optional sidebar-footer metadata; default "" so games without these keys
     # render no footer. Purely additive.
     version: str = ""
@@ -2237,6 +2240,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         title=_require_str(p, "title"),
         description=_require_str(p, "description"),
         quests_engine=_require_str(p, "quests_engine", "v1"),
+        quests_finished_collapsed=_require_bool(p, "quests_finished_collapsed", False),
         version=_require_str(p, "version", ""),
         release_date=_require_str(p, "release_date", ""),
         support_url=_require_str(p, "support_url", ""),
@@ -8416,6 +8420,7 @@ def _assemble_project_metadata(project, template):
     # PRD 48 — surface the Quests engine version onto project metadata so the
     # generator can dispatch (V1 default vs V2 opt-in) at emission time.
     project.metadata["quests_engine"] = template.project.quests_engine
+    project.metadata["quests_finished_collapsed"] = template.project.quests_finished_collapsed
     # Narrative person — the generator reads this to label the player's own dialog
     # and thought-bubble blocks ("You:" / "Me:" / the character's name).
     project.metadata["narration_person"] = template.narration_person

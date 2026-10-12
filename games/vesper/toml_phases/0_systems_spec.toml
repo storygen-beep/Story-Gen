@@ -16,6 +16,7 @@ id          = "vesper"
 title       = "Vesper"
 description = "An owned half-human weapon who feels nothing but the sex she's used for. Inside Vance Dynamics she's the company's slave; outside, under a false face, she slips into powerful men's lives and drains them while they think they're using her — sent to hunt a rogue called Cain."
 quests_engine   = "v2"
+quests_finished_collapsed = true   # 0.2.4: finished men under one collapsed "Finished" heading (LO, 2026-10-13)
 starting_canvas = "canvas_opening_office"   # the cold open (Beat 1 — the office)
 version         = "0.2.3.1"         # sidebar footer — bump in the same commit as the games-data.js portal entry
 release_date    = "2026-10-09"     # sidebar footer — date this build ships

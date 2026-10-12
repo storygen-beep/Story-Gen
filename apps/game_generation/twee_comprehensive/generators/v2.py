@@ -17859,6 +17859,11 @@ setup.carryRent = function (due, paid) {
         `setup._locNameFromUuid`, `setup.npcSlugForId`, `setup.npc_slug_map`,
         `setup.help_data.locationCanvases`.
         """
+        collapsed = "true" if (self.project.metadata or {}).get("quests_finished_collapsed") else "false"
+        return self._quests_v2_overlay_text().replace("%%QUESTS_FINISHED_COLLAPSED%%", collapsed)
+
+    def _quests_v2_overlay_text(self) -> str:
+        """The overlay's literal text; %%QUESTS_FINISHED_COLLAPSED%% is filled by _quests_v2_overlay."""
         return """:: QuestsV2Script [script]
 // PRD 48 — Quests Engine V2. Single-path renderer driven by author-on-template
 // goals arrays. Reads from setup.quests_cards (serialized at build time).
@@ -18229,6 +18234,8 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
     margin-bottom: 4px;
 }
 .quests-goal-header.quests-ready,
+.quests-finished { margin-top: 1.2em; opacity: 0.85; }
+.quests-finished > summary { cursor: pointer; font-weight: bold; padding: 0.4em 0; }
 .quests-goal-header.quests-terminal {
     color: var(--theme-success, #28a745);
 }
@@ -18299,18 +18306,39 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
   <</if>>
 <</for>>
 
+/* quests_finished_collapsed (opt-in, [project] key, default off): when on, an NPC whose live card is
+   TERMINAL ("Arc complete" or its terminal_text) is drawn under one collapsed "Finished" heading after the
+   live sections, so finished arcs never sit between the player and what is live. Vesper 0.2.4: seven
+   finished men under the story card read as if the player had just completed something. */
 <<set _rendered = 0>>
+<<set _doneCards = []>>
 <<for _slug range _npcSlugs>>
   <<set _card = setup.pickQuestsCard(_slug)>>
   <<if _card>>
     <<set _nid = _slugMap[_slug] || _slug>>
     <<set _rendered = _rendered + 1>>
+    <<if %%QUESTS_FINISHED_COLLAPSED%% && _card.terminal === true>>
+      <<run _doneCards.push(_slug)>>
+    <<else>>
     <div class="quests-section">
       <h3><<print ($npcs[_nid] && $npcs[_nid].name) || ($npcs[_slug] && $npcs[_slug].name) || _slug.replace("npc_", "")>></h3>
       <<renderQuestsCard _card>>
     </div>
+    <</if>>
   <</if>>
 <</for>>
+<<if _doneCards.length > 0>>
+  <details class="quests-finished"><summary>Finished (<<print _doneCards.length>>)</summary>
+  <<for _slug range _doneCards>>
+    <<set _card = setup.pickQuestsCard(_slug)>>
+    <<set _nid = _slugMap[_slug] || _slug>>
+    <div class="quests-section">
+      <h3><<print ($npcs[_nid] && $npcs[_nid].name) || ($npcs[_slug] && $npcs[_slug].name) || _slug.replace("npc_", "")>></h3>
+      <<renderQuestsCard _card>>
+    </div>
+  <</for>>
+  </details>
+<</if>>
 
 /* "did we draw a card", not "does help_data list anybody" — the old test could leave a bare
    Story-Goals heading with nothing under it. */
