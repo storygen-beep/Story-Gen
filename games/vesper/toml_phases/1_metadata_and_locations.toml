@@ -371,6 +371,9 @@ undertow_build    = 0
 #   • vega_records 0-9 — sessions spent reading what Vega recorded, +1 per read at the Site (activity_read_vega).
 #     3 = the weapons, 6 = the Rise, 9 = Vance Tower. The last night needs 9. Never decays.
 vega_records      = 0
+# 0.2.4 (beat_0240) — PLAYER PLAYS VEGA: vega_cell 0-100, Vega's power while Wren wears her. Set 100 at the
+# transfer, spent by her actions (choice costs), refilled at the Site. Travel never costs it (she cannot be stranded).
+vega_cell         = 0
 
 # ─── Daily decay (engine-applied at every day rollover) ───────────────────────
 # advanceDay subtracts each value from its trait and floors at 0 (v2.py:5532-5544); parsed at
@@ -1243,7 +1246,30 @@ name             = "The Atrium"
 description      = "The Tower's inner lobby. Polished stone, a security desk that knows her face, elevators that only stop where her clearance says they can. The threshold between the cage and the street."
 image            = "locations/atrium.jpg"
 entry_from       = "spire_plaza"
-navigation_order = ["penthouse", "wren_floor"]
+navigation_order = ["penthouse", "wren_floor", "chairmans_floor"]
+
+# ── chairmans_floor — beat_0241 (0.2.4, the player plays Vega). The floor with no number on the panel. ───────
+# The one lift Vega rode only once (vega_records 9), up to the Chairman's floor and the door she was never cleared
+# for. cap_the_vault auto-fires on arrival. Open ONLY to Vega, after the plan, until the memory is taken.
+# ⚠️ ONE STATIC MESSAGE, TRUE IN EVERY FAILURE STATE: Wren in her own body ("not in this body"), Vega before the
+# plan ("not yet"), and after the vault (she is never back up here in Vega). The Chairman is never on screen.
+[[locations]]
+id               = "chairmans_floor"
+name             = "The Chairman's Floor"
+description      = "A floor with no number on the panel. A quiet corridor, one door at the end of it, and two men in front of the door."
+image            = "locations/chairmans_floor.jpg"
+image_search_queries = ["luxury corporate corridor two guards door night", "dark executive hallway security guards"]
+entry_from       = "atrium"
+auto_exit        = false
+entry_conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega",       operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "tower_planned", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "memory_taken",  operator = "is_false" },
+  # NIGHT ONLY: the plan says at night the tower is half asleep, and Lyra and Nova's scene opens "in the middle of
+  # the night". time_of_day's end is exclusive and wraps (v2.py:4134): 22:00 -> 04:00.
+  { type = "time_of_day", start_time = "22:00", end_time = "04:00" },
+] }
+blocked_message = "The lift that goes there has no button for it. It stops on that floor for the units and the men who own them, and for nobody else. Even Vega only ever went up at night."
 
 [[locations]]
 id          = "penthouse"
@@ -1450,6 +1476,16 @@ description      = "Down past the gate the city turns inside out. Wet brick, red
 image            = "locations/underworld_strip.jpg"
 image_search_queries = ["underground night market red light crowd", "cyberpunk black market alley neon"]
 navigation_order = ["underworld_bar", "underworld_brothel", "underworld_pit", "underworld_market", "kess_berth", "crew_den", "the_site"]
+# ⚠️ ADDED beat_0241 (0.2.4, the player plays Vega). THE ONE LOCK THAT KEEPS VEGA'S BODY OFF WREN'S MAP.
+# Every place written for Wren's body down here hangs off this strip, so locking the strip (rather than six
+# children with their own older locks and messages) closes all of them at once. Vega moves between the Site and
+# the gate by her own cards (activity_vega_site "Out to the gate", the gate's "Down to the Site"), which are
+# teleports and ignore this lock (destinationType specific). The Site's Leave link points here and greys with this
+# message. Only in_vega can fail this lock, so the message is true every time it shows. version 1.0 or it fails OPEN.
+entry_conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },
+] }
+blocked_message = "Not in this body. Every stall on that strip watched Vega hunt her through it, and nobody down there would wait to find out who is inside her now."
 
 [[locations]]
 id          = "underworld_brothel"
@@ -1805,9 +1841,14 @@ image_search_queries = ["open plan office floor unfinished ceiling cable trays r
 # inside the lift: the face goes on at the cot, before she leaves, and a lobby is not where it gets fixed.
 entry_from  = "spire_plaza"
 auto_exit   = false
+# ⚠️ CHANGED beat_0241 (0.2.4): face_worn -> rise_door. Conditions cannot nest (triggerConditionsSatisfied,
+# v2.py:4934, one AND/OR list), so "rise_named AND (face_worn OR in_vega)" is one helper flag: rise_door is set when
+# the face goes on (activity_the_face) and at the transfer, unset when the face comes off and at the homecoming.
+# Old saves with the face already on are healed once by heal_rise_door at spire_plaza. In Vega rise_door is set, so
+# the message below (about the face) is only ever read in her own body, where it is true.
 entry_conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "rise_named", operator = "is_true" },
-  { type = "flag", subject = "player", flag_key = "face_worn",  operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "rise_door",  operator = "is_true" },
 ] }
 blocked_message = "A hoarding, a lift lobby, and a desk with a man on it who checks faces. She has no business in there that she could say out loud, and she is standing in the one the company has on every camera on this plaza. That face goes on at her own cot before she leaves. It has never once gone on in a lobby."
 

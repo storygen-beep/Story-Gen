@@ -137,6 +137,12 @@ underwear_image  = "portraits/wren_underwear.jpg"
 # THE FOUR FACES — dock-work cover -> the dock face; analyst cover -> the analyst face; the bought
 # Reach identity -> a face that is not hers at all; otherwise she falls through to default_image (the
 # company-grays asset-self face). Keyed on the dominant dress type.
+# 0.2.4 (beat_0240) — IN VEGA'S BODY. FIRST, because the resolver stops at the first match: while in_vega the
+# sidebar shows Vega's face, whatever Wren was wearing when she lay down. New slot, portraits/wren_as_vega.jpg.
+[[player_portrait.outfits]]
+image = "portraits/wren_as_vega.jpg"
+when  = { flag = "in_vega" }
+
 [[player_portrait.outfits]]
 image = "portraits/wren_cover.jpg"
 when  = { worn_type = "cover" }
@@ -222,9 +228,28 @@ when  = { flag = "face_worn" }
 # ─── Sidebar items — the live HUD (Charge ONLY) ───────────────────────────────
 # Credits is tracked internally (the depot economy uses `money`) but NOT surfaced in the
 # sidebar — LO's call. To re-show it, add back a `money` trait_status_text block here.
+# 0.2.4 (beat_0240) — VEGA'S CELL, the one body meter that shows while Wren wears Vega (in_vega). Every Wren row
+# below carries in_vega is_false, so exactly one body's meters are on screen at a time. Bands start at 0 so the row
+# stays visible at an empty cell while she is in Vega; show_when takes it away when she is home.
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "vega_cell"
+show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_true" },
+] }
+bands = [
+  { min = 0,  max = 24,  text = "Vega's cell: almost dry", icon = "🪫" },
+  { min = 25, max = 49,  text = "Vega's cell: low",        icon = "🔅" },
+  { min = 50, max = 74,  text = "Vega's cell: half",       icon = "🔆" },
+  { min = 75,            text = "Vega's cell: full",       icon = "🔋" },
+]
+
 [[sidebar_items]]
 type  = "trait_status_text"
 trait = "energy"
+show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: Wren's body only
+] }
 bands = [
   { min = 0,  max = 24,  text = "Charge: Critical", icon = "🪫" },
   { min = 25, max = 49,  text = "Charge: Low",      icon = "🔅" },
@@ -237,6 +262,9 @@ bands = [
 [[sidebar_items]]
 type  = "trait_status_text"
 trait = "hygiene"
+show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: Wren's body only
+] }
 bands = [
   { min = 0,  max = 39,  text = "Condition: Filthy", icon = "🩸" },
   { min = 40, max = 74,  text = "Condition: Used",   icon = "💧" },
@@ -263,6 +291,9 @@ bands = [
 [[sidebar_items]]
 type  = "trait_status_text"
 trait = "core_strain"
+show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: Wren's body only
+] }
 bands = [
   { min = 1,  max = 23, text = "Core: Strained", icon = "○" },
   { min = 24, max = 47, text = "Core: Damaged",  icon = "◔" },
@@ -282,6 +313,9 @@ bands = [
 [[sidebar_items]]
 type  = "trait_status_text"
 trait = "vega_damage"
+show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: Wren's body only
+] }
 bands = [
   { min = 1,  max = 29, text = "Body: Fine",       icon = "▫" },
   { min = 30, max = 59, text = "Body: Hurt",       icon = "▪" },
@@ -330,6 +364,9 @@ bands = [
 [[sidebar_items]]
 type  = "trait_status_text"
 trait = "equipped_weapon"
+show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: Wren's body only
+] }
 bands = [
   { min = 0, max = 0, text = "Unarmed", icon = "✕" },
 ]
@@ -339,6 +376,7 @@ bands = [
 type  = "trait_status_text"
 trait = "drain_charge"
 show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: Wren's body only
   { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 },
 ] }
 bands = [
@@ -357,6 +395,7 @@ bands = [
 type  = "trait_status_text"
 trait = "arousal_charge"
 show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: Wren's body only
   { type = "trait", subject = "player", trait_key = "equipped_weapon",      operator = "eq",  value = 2 },
   { type = "flag",  subject = "player", flag_key  = "arousal_weapon_ready", operator = "is_true"        },
   { type = "trait", subject = "player", trait_key = "emitter_broken",       operator = "lt",  value = 1 },
@@ -376,6 +415,7 @@ bands = [
 type  = "trait_status_text"
 trait = "arousal_charge"
 show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: Wren's body only
   { type = "trait", subject = "player", trait_key = "equipped_weapon",      operator = "eq",  value = 2 },
   { type = "flag",  subject = "player", flag_key  = "arousal_weapon_ready", operator = "is_true"        },
   { type = "trait", subject = "player", trait_key = "emitter_broken",       operator = "gte", value = 1 },
@@ -739,6 +779,10 @@ hidden = true
 [[traits.labels]]
 key    = "vega_records"
 label  = "Vega's records read"
+hidden = true
+[[traits.labels]]
+key    = "vega_cell"
+label  = "Vega's cell"
 hidden = true
 
 # ══════════════════════════════════════════════════════════════════

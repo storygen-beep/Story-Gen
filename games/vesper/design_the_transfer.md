@@ -644,3 +644,75 @@ guarded before the next one. Nothing is committed; the release build has not bee
 3. The release: version bump, new cheat words, guide chapters for 0.2.4, the build without `--dev` and `--debug`,
    the snapshot, then uploads and posts.
 4. The flip-able calls listed in the blueprint, which all stand as built.
+
+---
+
+# AMENDMENT — THE PLAYER PLAYS VEGA (LO, 2026-10-13), beats 0240–0248
+
+LO, after playing the dev build: *"Wren takes controls as vega, player plays vega, goes to do things, and all."*
+The blueprint's change 2 ("the trips are scenes, not map visits") is **reversed**. I wrote change 2 as a technical
+shortcut and never said plainly that it meant the player never controls Vega. That was my mistake. The plan LO
+approved: `~/.claude/plans/snoopy-napping-swing.md`.
+
+## What the player does now
+1. **The transfer** (`cap_the_transfer`, kept) drops into free play. She is Vega at the Site, with a full cell.
+2. **She walks** to the Site, then "Out to the gate" (Vega's own card goes round the strip), then the car up to Spire
+   Plaza, then the Rise.
+3. **The Rise, by her own clicks:**
+   - **Sabin's lab** (`activity_vega_lab`) opens only while he is downstairs on the floor, 08:00–11:00 by his
+     rows. Otherwise it shows locked with the reason. Inside is the slip that points to the Chairman's vault in Vance
+     Tower.
+   - **The top floors** (`activity_vega_top_floors`, 10 of the cell): the line of empty bodies.
+   - **Sabin's look** (`cap_sabin_notices`) fires on the floor once both are done while he is there: "I'll make a
+     note."
+4. **Home: the plan** (`cap_tower_plan`) fires at the Site when Kess and Cain are both there (22:00–midnight). It
+   sets no clock hour; she is to go "straight to the Waterfront".
+5. **The Tower, by her own clicks:** Spire Plaza, the Atrium, then **the Chairman's floor** (`chairmans_floor`, new):
+   Vega only, after the plan, at night, 22:00–04:00. The vault (`cap_the_vault`) fires there.
+   - The blade costs 30 of the cell and shows locked when she can't afford it.
+   - "Wait for the change" is the other choice.
+   - "Go back down" leaves.
+6. **The run out:** arriving on Spire Plaza with the memory fires Lyra and Nova there, then Dace there. Then home,
+   the memory and Cain, as built.
+
+## How the body is kept true
+- **`in_vega` is the one switch,** set at the transfer and cleared at the homecoming (the precedent is `face_worn`).
+- **Places:**
+  - The strip is locked to Vega, which closes every Wren place down there at once.
+  - Vega's cards go round it: Site to gate, and gate to Site.
+  - The gate's and the plaza's Wren cards (toll, car, Reach) are closed, and Vega has her own.
+- **Cards:**
+  - Every Wren card at a place Vega can reach is gated `in_vega is_false`: Cain's, Kess's, the cradles, the Rise's
+    kit reactions, and Sabin's hub.
+  - The transfer takes the bought face off, so the face cards at the Rise stay shut.
+- **The Rise's door reads `rise_door`.** Conditions can't nest, so the face card sets it with the face, and so does
+  the transfer. Old saves with the face already on are healed once on the plaza (`heal_rise_door`).
+- **Sidebar and portrait:**
+  - "Vega's cell" shows only in Vega, and every Wren meter hides.
+  - The portrait's first rule is `in_vega` (`portraits/wren_as_vega.jpg`).
+- **Engine fix (v2.py):** a locked place with no parent sent "Go back" to Start. The live test hit it in Vega:
+  Leave The Site led to the locked strip, and Go back went to the title. It now goes back to the passage she came
+  from, and to Start only if there is none.
+
+## Quests
+New story cards, one live at a time:
+- **N:** lie down.
+- **P:** the Rise, with goals the slip, the top floors and Sabin.
+- **Q:** home to plan.
+- **R:** the Tower.
+
+Also new: Sabin's card after the Rise ("He made a note."), Cain's section after the end ("She chose him."), and the
+study card's tip now names the next step.
+
+## Dev jump
+"▶ 0.2.4: in Vega (just transferred)", next to "▶ 0.2.4: start (the end of 0.2.3)".
+
+## Measured
+- **Guards:** all four pass. `check_the_transfer.py` gained the Vega checks and **the leak walk**: it walks the map
+  as Vega and fails on any reachable Wren place or card. It was negative-tested by unlocking the strip, which made 21
+  Wren places reachable.
+  - It caught a defect of my own helper that had commented out the original conditions on nine cards; repaired.
+- **Live:** `live_the_transfer.py` plays Vega by nav links and card clicks, end to end, and passes. All five older live
+  suites pass.
+- **gates.py:** 38 FAIL lines, the same as before; no new failing gate.
+- **New media:** `portraits/wren_as_vega.jpg` and `locations/chairmans_floor.jpg`, on top of the 25 already listed.
