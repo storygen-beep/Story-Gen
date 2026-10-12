@@ -20647,6 +20647,16 @@ blocks = [
     { type = "paragraph", content = "She comes in wearing the face from his floor and stops before the light off the feed line reaches her. He had this face in his back room more nights than she can count, and the last time, it had a taser in its hand." },
     { type = "thought_bubble", props = { speaker = "player" }, content = "Not in this one. Never near him in this one. The bag is under the bench. It comes off behind the hull, out of his sight." },
   ] },
+  # 0.2.4 (beat_0234) — DACE IS DEAD (dace_dead). After the face band, before the cradles band, which it replaces:
+  # from here Vega is no longer in Marrow's cradle (she is the wreck on Kess's table) and "Dace is very good" in the
+  # crew band would be present tense about a dead man. The run is unbroken, so any visit here after dace_dead has
+  # her back in her own body.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "dace_dead", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He is at her bench doing the wages. One name at the top of the column has a line through it, and the money beside it went to the coffin." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "One fewer on my books. Dace would tell me to stop looking at that line. So I look at it when he can't see me." },
+  ] },
   # BAND BACK — bastien_back. Step 7 has happened: the House answered and he is in business from her bench.
   # 0.2.3 (beat_0222) — VEGA IS IN THE CRADLE (cradles_ready). After the face band, before the crew band.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
@@ -23085,20 +23095,34 @@ when = [
   { flag = "cradles_ready",   op = "is_false" },
 ]
 
-# ── L · THE END CARD. Terminal. beat_0217, moved to cradles_ready at beat_0221 (the cradle scene is now the last). ──
-# ⚠️ NO APOSTROPHE IN terminal_text — SugarCube source-byte escaping renders one as &amp;#x27; in the built page.
-# ⚠️ THE ONLY TERMINAL STORY-GOALS CARD IN THE GAME (check_the_hunt.py §0217), the job card H used to have.
-# Every place named in the tip was re-read at beat_0217: Bastien at the cot (round the clock) and his men at the
-# Undertow (open, Sol 10-24); Cain at the Site 21:00-03:00; Renner's office and yard; Grier from ten; Sabin on the
-# floor at eight and in his lab from eleven; Colm at the Undertow in the evenings; the House, the market, the pit.
+# ── M · THE STUDY. beat_0224 (0.2.4). Card L, the 0.2.3 end card, became this card in place. ──
+# ⚠️ L WAS TERMINAL ON cradles_ready, and Story-Goals cards all render when they match (pickQuestsCards returns every
+# match, quests.md §1), so a terminal L beside a live M would have said "Chapter complete" over the next chapter.
+# The end card moves to O (cain_chosen, beat_0237); until then the game has no terminal Story-Goals card, which is
+# the true state of a release mid-build. check_the_hunt.py §0217 was amended in the same beat to say so.
+# ⚠️ GOALS JOIN WITH THEIR SETTERS (the whole-amendment rule, as card J did): vega_records now; study_blade /
+# study_signal / study_method join at beats 0225-0227 with the scenes that set them.
+# Trait goals render "label — current / value" (quests.md), so the label carries the verb and the place.
 [[quest_cards]]
 priority   = 10
-text       = "The shell of her is lying in the second cradle in your father's lab, and the first cradle is empty, waiting for you. The method is in your head. Cain will sit with your body while you wear hers."
-tip        = "That is where this build ends. Bastien is at the cot and his men are back at the Undertow. Cain keeps the nights at the Site. Renner's office is open, Grier is in his room from ten, Sabin is on the floor at eight and in his lab from eleven, and Colm drinks at the Undertow in the evenings. The House, the market and the pit are where you left them. The transfer is the next release. If you want it sooner, Support Us in the sidebar."
-terminal      = true
-terminal_text = "Chapter complete. The story continues in the next release"
+text       = "The shell of her is lying in the second cradle in your father's lab, and the first cradle is empty, waiting for you. Before anybody puts you inside her, you need to know what she can do and where she has been."
+# beat_0227: the blueprint's card N folded in as M's ready_text. Story-Goals cards all render when they match, and a
+# `when` cannot say "not every goal met", so a separate N would have stood beside M. ready_text is the frame the
+# engine draws once every goal is met (quests.md, the render frames).
+ready_text = "You know what she can do, where she has been, and how it was done to you. Kess is ready. Cain will sit with your body. One more night as yourself, and then you lie down in the cradle."
+tip        = "Kess wired a reader into her at the Site. Read her records there, twice a day at most: every three reads, you learn something new. Kess and Cain study her body at the Site at night, from ten to midnight."
+goals = [
+  { trait = "vega_records", subject = "player", op = "gte", value = 9, label = "Read Vega's records (at the Site): her weapons at 3, the Rise at 6, the Tower at 9" },
+  # beat_0225: joins with its setter, cap_study_blade.
+  { flag = "study_blade", op = "is_true", label = "Study her arm with Kess and Cain (the Site, 22:00 to midnight)" },
+  # beat_0226: joins with cap_study_signal.
+  { flag = "study_signal", op = "is_true", label = "See what powers her (the Site, the next night)" },
+  # beat_0227: joins with cap_study_method.
+  { flag = "study_method", op = "is_true", label = "Walk Kess through how it was done to you (the Site, the night after)" },
+]
 when = [
-  { flag = "cradles_ready", op = "is_true" },
+  { flag = "cradles_ready",   op = "is_true"  },
+  { flag = "last_night_held", op = "is_false" },
 ]
 
 # ── cap_rue_takes_the_list — 0.2.3, beat_0219 (LO's amendment). Auto-fire @underworld_brothel, pri 10, ONE-SHOT. ───
@@ -23291,4 +23315,1242 @@ locationId               = "the_site"
 time_progression_minutes = 180
 flagEffects = [
   { targetType = "player", flag = "cradles_ready", op = "set" },
+]
+
+# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+# 0.2.4 — THE TRANSFER (design_the_transfer.md, BLUEPRINT signed by LO 2026-10-12). Scenes, in build order.
+# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+# ── cap_study_blade — beat_0225. Auto-fire @the_site, pri 11, ONE-SHOT. Study night 1 of 3. ───────────────────
+# Kess and Cain study the shell (LO: "kess and cain first study her body weapons and see how they can put wren in
+# vega"). Kess took out what kept Vega running (cap_the_table), so the shell is whole and dead: each night he puts a
+# little power back into ONE part and they watch what it does. Tonight, the arm: the blade, and Cain's knife on the
+# armour. Nobody knew either was there.
+# ⚠️ BOTH MEN PRESENT, AS CONDITIONS: auto-fire ignores requires_npc (engine-reference.md:112). Kess is here
+# 22:00-23:59 (his beat_0224 row) and Cain 21:00-03:00, so this fires on an arrival between 22:00 and midnight.
+# ⚠️ 360 MINUTES OUT: from 22:00 that is 04:00, past both men, so the next study night is the next night.
+# MEDIA: one new slot, scenes/study_the_blade.jpg, in the beat that shows the blade (one asset, one block).
+[[canvases]]
+id          = "cap_study_blade"
+name        = "The arm"
+description = "beat_0225 (0.2.4). Study night 1. Auto-fire @the_site, pri 11, one-shot, gated cradles_ready + study_blade is_false + Kess and Cain present. Kess wires a bench cell into Vega's forearm; the blade comes out on its own and nearly takes his hand; Cain puts his knife to her skin and it barely marks it. Nobody knew either was there. SETS study_blade. 360 min."
+[canvases.trigger]
+location      = "the_site"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",            subject = "player", flag_key = "cradles_ready", operator = "is_true"  },
+  { type = "flag",            subject = "player", flag_key = "study_blade",   operator = "is_false" },
+  { type = "npc_at_location", location_id = "the_site", npc_id = "npc_kess", operator = "is_present" },
+  { type = "npc_at_location", location_id = "the_site", npc_id = "npc_cain", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The arm"
+blocks = [
+  { type = "paragraph", content = "Kess has Vega's right arm open from the elbow to the wrist, a bench cell clipped to the wires inside. Cain stands at the foot of the cradle with his arms folded." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "I took out what ran her. I didn't take out what she runs. Tonight I give the arm a little power and we see what it thinks it's for." },
+        { type = "dialog", props = { speaker = "player" }, content = "And if it thinks it's for killing you?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Then stand back." },
+    ] },
+    { advance_text = "Stand back.", blocks = [
+        { type = "image", props = { file = "scenes/study_the_blade.jpg", description = "In a dim abandoned lab, a long thin blade has slid out of the opened forearm of a still, perfect woman-shaped machine lying in a cradle; an older man in a work apron jerks his hand back from it.", search_queries = ["android arm blade extending sci-fi", "robot forearm hidden blade dark lab"] } },
+        { type = "paragraph", content = "He closes the circuit. The forearm splits along a seam she never saw and a blade comes out of it, long and thin and fast, and stops a finger's width from Kess's wrist." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Well. That's new." },
+    ] },
+    { advance_text = "\"She never used that on me.\"", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "She never used it on you. On the strip." },
+        { type = "dialog", props = { speaker = "player" }, content = "She had orders to bring me in whole. That blade was never for me." },
+    ] },
+    { advance_text = "Look at the blade.", blocks = [
+        { type = "paragraph", content = "It isn't steel. It's the same dark material as the frame, grown out of the arm, not bolted into it. When Kess cuts the power, it slides back in by itself and the seam closes without a mark." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "That will be my arm. I will feel that come out of me." },
+    ] },
+    { advance_text = "Watch Cain.", blocks = [
+        { type = "paragraph", content = "Cain takes out his knife and draws it hard across Vega's shoulder, the way you'd test a hide. It skids. There is a pale line on her skin, and nothing under it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Plate. Under the skin. A bullet would do about that much." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Same family, better parts. I told you." },
+    ] },
+    { advance_text = "\"What else is in her?\"", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "What else is in her?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Tomorrow I give her a cell of her own and find out. Tonight I want my hand back in one piece." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Get some sleep. She'll still be here." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave her for tonight."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 360
+flagEffects = [
+  { targetType = "player", flag = "study_blade", op = "set" },
+]
+
+# ── cap_study_signal — beat_0226. Auto-fire @the_site, pri 11, ONE-SHOT. Study night 2 of 3. ──────────────────
+# The whole shell gets a cell of its own for the first time since the table. Two things come out of it: the cell
+# drains fast (the mission's clock, said in words, never as a number), and the moment the shell has power it tries
+# to call home. Kess muffles it just in time. From here they know the company has heard nothing since the take, and
+# that if the signal ever gets out the company comes to wherever she is (that is what Lyra and Nova do, beat_0233).
+# ⚠️ THE CLOCK IS SPOKEN, NOT COUNTED. "Not long if she fights" is true of every later scene; a number of hours
+# would have to be kept true by the Rise and the Tower and nothing on screen measures it (the truth rule).
+# Same gate shape as night 1 (both men present as conditions), 360 minutes out.
+# MEDIA: one new slot, scenes/study_the_signal.jpg (one asset, one block).
+[[canvases]]
+id          = "cap_study_signal"
+name        = "The cell"
+description = "beat_0226 (0.2.4). Study night 2. Auto-fire @the_site, pri 11, one-shot, gated study_blade + study_signal is_false + Kess and Cain present. Kess gives the shell a cell of its own: it drains fast (not long if she fights); a light at the base of the skull starts calling home and Kess smothers it with a damper just in time. SETS study_signal. 360 min."
+[canvases.trigger]
+location      = "the_site"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",            subject = "player", flag_key = "study_blade",  operator = "is_true"  },
+  { type = "flag",            subject = "player", flag_key = "study_signal", operator = "is_false" },
+  { type = "npc_at_location", location_id = "the_site", npc_id = "npc_kess", operator = "is_present" },
+  { type = "npc_at_location", location_id = "the_site", npc_id = "npc_cain", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The cell"
+blocks = [
+  { type = "paragraph", content = "Tonight Kess has a proper cell on the bench, a heavy black brick, and a meter clipped to it. Cain has moved his chair to where he can see Vega's face." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "All of her this time. Not to wake her. There's nothing left in there to wake. Just to see how hungry she is." },
+        { type = "dialog", props = { speaker = "player" }, content = "And how hungry is she?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Watch the needle." },
+    ] },
+    { advance_text = "Watch the needle.", blocks = [
+        { type = "paragraph", content = "He seats the cell in her back. The fingers twitch once, every one of them at the same time, then lie still. The needle starts going down, and it doesn't stop." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Lying still, that's slow. Walking, faster. Fighting, she eats it." },
+    ] },
+    { advance_text = "\"So I won't have long.\"", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "That's why she always wore you down fast on the strip. She couldn't afford a long fight." },
+        { type = "dialog", props = { speaker = "player" }, content = "So when I'm in her, I won't have long." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Not long if you fight. Walk soft and you'll have the night. Fight and you'll have a lot less." },
+    ] },
+    { advance_text = "What's that light?", blocks = [
+        { type = "image", props = { file = "scenes/study_the_signal.jpg", description = "Close on the base of a still, perfect woman-shaped machine's skull in a dark lab, a tiny light pulsing under the skin; a man's hands pressing a heavy black damper pad over it.", search_queries = ["glowing light under android skin neck", "hands holding device on robot head dark"] } },
+        { type = "paragraph", content = "A small light starts pulsing under the skin at the base of her skull. Slow, steady, patient. Kess's reader on the bench starts clicking." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Shit. She's calling home." },
+    ] },
+    { advance_text = "\"Stop it!\"", blocks = [
+        { type = "paragraph", content = "He slaps a black damper over the light and holds it down with both hands. Cain is on his feet with his knife out, as if a knife could do anything. The clicking stops." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Got it. I think I got it. Nothing went out." },
+    ] },
+    { advance_text = "\"And if it had?\"", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "And if it had gone out?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Then the company would know where she is. And they've heard nothing from her since the take." },
+    ] },
+    { advance_text = "Look at the damper.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "It stays smothered. Every minute she has power, that thing is trying to get out. Remember that when you're wearing her." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "A body that wants to tell on me. And I'm going to climb inside it." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave the damper on."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 360
+flagEffects = [
+  { targetType = "player", flag = "study_signal", op = "set" },
+]
+
+# ── cap_study_method — beat_0227. Auto-fire @the_site, pri 11, ONE-SHOT. Study night 3 of 3. ──────────────────
+# The way in. Cain said it on the table: "The method is in your head, from Sabin's piece. The two cradles are in
+# your father's lab. Kess has the hands." Tonight she goes into the record of her own making ON PURPOSE and walks
+# Kess through it at the two cradles, step by step, while he works out how to do it with his hands. It is the
+# hardest night for her: reliving what was done to her so it can be done again.
+# ⚠️ THE MAKING HAS NO FACES IN IT. The split was cut by kind (design_whose_hand.md §5): the people who were in the
+# room are in the third piece, the Chairman's. So she can say every step and never who did it. Cain sits in the chair
+# and says nothing while she describes it. He was one of the two (the flashback, beat_0236). The player can feel the
+# silence; nothing in this scene says why. It must not: the reveal is the third piece's.
+# ⚠️ Kess "has never put anybody back into anything" (cap_the_table). He still hasn't after tonight; he has a plan.
+# Same gate shape as nights 1 and 2, 360 minutes out. Card M's ready_text takes over once all four goals are met.
+# MEDIA: one new slot, scenes/study_the_method.jpg (one asset, one block).
+[[canvases]]
+id          = "cap_study_method"
+name        = "The method"
+description = "beat_0227 (0.2.4). Study night 3. Auto-fire @the_site, pri 11, one-shot, gated study_signal + study_method is_false + Kess and Cain present. She goes into the record of her own making on purpose and walks Kess through it at the two cradles, step by step; it has no faces in it; Cain says nothing the whole time. Kess has a plan. The transfer can happen once she has read the Tower. SETS study_method. 360 min."
+[canvases.trigger]
+location      = "the_site"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",            subject = "player", flag_key = "study_signal", operator = "is_true"  },
+  { type = "flag",            subject = "player", flag_key = "study_method", operator = "is_false" },
+  { type = "npc_at_location", location_id = "the_site", npc_id = "npc_kess", operator = "is_present" },
+  { type = "npc_at_location", location_id = "the_site", npc_id = "npc_cain", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The method"
+blocks = [
+  { type = "paragraph", content = "No cell tonight. Kess has pulled a stool between the two cradles and laid out his tools in a row. He looks at her, not at Vega." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "I can open her and I can close her. I can't put you in her. Your father could. And what he did is in your head." },
+        { type = "dialog", props = { speaker = "player" }, content = "I know. I've never gone into it on purpose." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Then tonight you do. Slowly. And you tell me every step." },
+    ] },
+    { advance_text = "Close your eyes.", blocks = [
+        { type = "image", props = { file = "scenes/study_the_method.jpg", description = "A young woman sitting on the edge of an empty machine cradle in a dim abandoned lab with her eyes closed and her hands gripping the rim, an older man on a stool beside her writing on a scrap of paper, the second cradle beyond them.", search_queries = ["woman eyes closed sitting on edge of machine dark lab", "cyberpunk lab woman remembering"] } },
+        { type = "paragraph", content = "She sits on the edge of her own cradle and lets it come. The lines. The cold. A count, said out loud, slow. She is lying where she is sitting now, and she can't move." },
+    ] },
+    { advance_text = "Tell him.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "They put me under first. All the way under. Then the lines from one cradle to the other, and somebody counts down from ten, and at nothing they switch." },
+    ] },
+    { advance_text = "\"Switch what?\"", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Switch what. Which line first. Think." },
+        { type = "dialog", props = { speaker = "player" }, content = "The neck. Always the neck first. Then the spine, top to bottom." },
+    ] },
+    { advance_text = "Keep going.", blocks = [
+        { type = "paragraph", content = "She tells him all of it. What it felt like to be emptied out of one body and poured into another. That it hurt. That she screamed and nobody stopped. Kess writes it down and doesn't look up." },
+    ] },
+    { advance_text = "Look for their faces.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "I can see their hands. I can hear the count. There's nobody there. There were people there and there's nobody in it." },
+    ] },
+    { advance_text = "Look at Cain.", blocks = [
+        { type = "paragraph", content = "Cain is in his chair by the empty cradle. He hasn't said a word since she started. He is looking at the floor between his boots, and he doesn't look up when she stops." },
+        { type = "dialog", props = { speaker = "player" }, content = "Cain?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Keep going. He needs all of it." },
+    ] },
+    { advance_text = "\"Can you do it?\"", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Can you do it?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "I think so. Neck, then spine, then the count. Your body sleeps in this one, you wake up in that one. I've never done it. Nobody alive has." },
+    ] },
+    { advance_text = "\"When?\"", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "When?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "When you know her floors and her rooms as well as she did, lie down. Not before." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Open your eyes."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 360
+flagEffects = [
+  { targetType = "player", flag = "study_method", op = "set" },
+]
+
+# ── cap_last_night — beat_0228. Auto-fire @the_site, pri 11, ONE-SHOT. The night before the transfer. ────────
+# LO, 2026-10-12: "She is afraid. Wren and Cain cuddle no sex." The first quiet closeness between them since the Site,
+# where she learned he killed her father (0.2.3, marrow_known). Neither of them fixes that tonight. She is afraid of
+# the cradle, of being put into the thing that hunted her, of not coming back. He holds her and she lets him.
+# ⚠️ NO SEX, and the scene stays short (the blueprint: "the only warm one in the release").
+# ⚠️ ONLY CAIN IS GATED. Kess's row may or may not have him here (22:00-23:59), so the scene sends him off to sleep
+# below in its first line, which is true at any hour Cain is present (21:00-03:00).
+# ⚠️ 540 MINUTES OUT (the house value for "the night is gone"), so the transfer is the NEXT night with both men.
+# Gated study_method + vega_records gte 9: card M's four goals, so its ready_text ("one more night as yourself")
+# is what the player reads on the way here.
+# MEDIA: one new slot, scenes/last_night_cain.jpg (one asset, one block).
+[[canvases]]
+id          = "cap_last_night"
+name        = "The last night"
+description = "beat_0228 (0.2.4). Auto-fire @the_site, pri 11, one-shot, gated study_method + vega_records gte 9 + last_night_held is_false + Cain present. The night before the transfer. She is afraid and says so; Cain holds her on the floor between the two cradles; no sex; nothing about her father is fixed. SETS last_night_held. 540 min (morning)."
+[canvases.trigger]
+location      = "the_site"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",            subject = "player", flag_key = "study_method",    operator = "is_true"  },
+  { type = "trait",           subject = "player", trait_key = "vega_records",   operator = "gte", value = 9 },
+  { type = "flag",            subject = "player", flag_key = "last_night_held", operator = "is_false" },
+  { type = "npc_at_location", location_id = "the_site", npc_id = "npc_cain", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The last night"
+blocks = [
+  { type = "paragraph", content = "Kess has packed his tools and gone down to sleep. Tomorrow night he runs the lines. The lab is dark except for Cain's lamp." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "She sits on the floor against her own cradle and can't stop looking at the other one, at Vega lying there with her eyes shut." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "You don't have to do it tomorrow." },
+        { type = "dialog", props = { speaker = "player" }, content = "Yes I do. If I wait, I won't do it at all." },
+    ] },
+    { advance_text = "\"I'm scared.\"", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "I'm scared, Cain. Of lying down in that and waking up in her. Of not waking up. Of waking up and not being able to come back." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I know." },
+        { type = "dialog", props = { speaker = "player" }, content = "Don't tell me it'll be fine." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I wasn't going to." },
+    ] },
+    { advance_text = "Let him sit with you.", blocks = [
+        { type = "image", props = { file = "scenes/last_night_cain.jpg", description = "In a dark abandoned lab lit by one lamp, a tired man and a young woman lie together on a blanket on the floor between two machine cradles, fully clothed, his arm around her, her face against his chest.", search_queries = ["couple lying on floor holding each other dark room lamp", "man holding woman tenderly dim light clothed"] } },
+        { type = "paragraph", content = "He comes down off the chair, pulls the blanket off the bench and lies down on the floor. She lies down with him and he puts his arm around her." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Come here. You're shaking." },
+    ] },
+    { advance_text = "Hold on to him.", blocks = [
+        { type = "paragraph", content = "She holds on to him like she is falling." },
+        { type = "dialog", props = { speaker = "player" }, content = "You killed my father." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Yes." },
+        { type = "dialog", props = { speaker = "player" }, content = "Hold me anyway. Don't let go." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "This is the man who killed him. And this is the only place I want to be tonight." },
+    ] },
+    { advance_text = "\"Stay.\"", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Stay. All night. Don't go back to the chair." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I'm not going anywhere. Tomorrow I sit with your body. Tonight I'll sit with you." },
+        { type = "paragraph", content = "She falls asleep with her face against his chest, listening to something inside him that isn't quite a heartbeat." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Morning."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 540
+flagEffects = [
+  { targetType = "player", flag = "last_night_held", op = "set" },
+]
+
+# ── cap_the_transfer — beat_0229. Auto-fire @the_site, pri 11, ONE-SHOT. THE RUN BEGINS. ──────────────────────
+# Kess runs the lines, neck then spine then the count, exactly as she told him (cap_study_method). Her own body
+# goes still in her cradle and Cain sits down beside it (his promise on the table). She wakes in Vega: the weight,
+# the strength, the blade under the wrist, the smothered light at the base of the skull. And she is still afraid:
+# the feeling came with her (design_the_hunt.md "Decided for 0.2.4"). No sex in this body, ever (LO).
+# ⚠️ FIRST LINK OF THE RUN. From here to cap_cain_for_real every scene exits to the_site and the next one fires on
+# arrival, with no presence gate after this one (the beat_0222 pattern, LO liked the unbroken run). That is why the
+# Vega stretch never touches free play: she is never on the map in this body.
+# ⚠️ BOTH MEN GATED HERE ONLY. Kess 22:00-23:59, Cain from 21:00.
+# ⚠️ 480 MINUTES OUT, AND WHY NOT MORE: an exit's minutes apply when the scene RENDERS (the house engine lesson,
+# 0.2.3), so each scene's sidebar shows the clock AFTER its own minutes. From 22:00-23:59 this lands 06:00-07:59, and
+# the Rise renders with its own 180 on top: 09:00-10:59, inside Sabin's floor row (the_rise_floor 08:00-11:00), so his
+# lab is empty and his look on the floor is true to the clock (live_the_transfer.py measured 11:10 at 600).
+# The weapons are named once, as she feels them (the blueprint). Vega's voice comes out of her mouth.
+# MEDIA: two new slots, scenes/the_transfer.jpg and scenes/wren_wakes_in_vega.jpg (one asset, one block each).
+[[canvases]]
+id          = "cap_the_transfer"
+name        = "The transfer"
+description = "beat_0229 (0.2.4). THE RUN, link 1. Auto-fire @the_site, pri 11, one-shot, gated last_night_held + transferred is_false + Kess and Cain present. She lies down in her cradle; Kess runs neck, spine, the count from ten; her body goes still and Cain sits beside it; she wakes in Vega: strength, weight, the blade, the armour, the smothered signal, Vega's voice in her mouth, and she is still afraid. A night on the bench learning the body. SETS transferred. 480 min."
+[canvases.trigger]
+location      = "the_site"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",            subject = "player", flag_key = "last_night_held", operator = "is_true"  },
+  { type = "flag",            subject = "player", flag_key = "transferred",     operator = "is_false" },
+  { type = "npc_at_location", location_id = "the_site", npc_id = "npc_kess", operator = "is_present" },
+  { type = "npc_at_location", location_id = "the_site", npc_id = "npc_cain", operator = "is_present" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The transfer"
+blocks = [
+  { type = "paragraph", content = "The lines run from her cradle to Vega's. The damper is taped over the light at the base of Vega's skull. Cain's chair is already beside her cradle." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Lie down. Breathe out. Neck first, then the spine, then I count. You told me how. Now I do it." },
+        { type = "dialog", props = { speaker = "player" }, content = "If it goes wrong—" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Then I'm right here. Lie down." },
+    ] },
+    { advance_text = "Lie down.", blocks = [
+        { type = "image", props = { file = "scenes/the_transfer.jpg", description = "A young woman lying in a machine cradle in a dim abandoned lab, cables running from the back of her neck to a second cradle where a perfect woman-shaped machine lies; a man in a chair holds her hand.", search_queries = ["woman lying in machine cables neck sci-fi lab", "consciousness transfer two pods cables dark"] } },
+        { type = "paragraph", content = "The cradle takes her shape. The line goes into her neck and it's cold. Cain takes her hand, and she lets him." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Ten. Nine. Eight." },
+    ] },
+    { advance_text = "Seven.", blocks = [
+        { type = "paragraph", content = "Her hand goes slack in his. She feels herself being pulled out through the back of her neck, and it hurts, and she can't scream." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I've got you. I've got you." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Three. Two. One." },
+    ] },
+    { advance_text = "Nothing.", blocks = [
+        { type = "paragraph", content = "Dark. No body at all. No up, no down, no breath. Just her, and nowhere to be." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Don't leave me here. Kess. Don't leave me here." },
+    ] },
+    { advance_text = "Open your eyes.", blocks = [
+        { type = "image", props = { file = "scenes/wren_wakes_in_vega.jpg", description = "Close on a perfect, flawless woman-shaped machine's face as her eyes snap open in a dim lab, pale skin with a faint seam at the jaw, an expression of shock that the face was never built to make.", search_queries = ["android woman eyes opening close up", "robot woman awakening face shocked"] } },
+        { type = "paragraph", content = "She opens Vega's eyes. Everything is sharp. She can see the dust in the air one grain at a time. She can hear Kess's heart." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Say something. Anything." },
+        { type = "dialog", props = { speaker = "player" }, content = "Kess." },
+    ] },
+    { advance_text = "Hear the voice.", blocks = [
+        { type = "paragraph", content = "It's Vega's voice. Smooth, flat, perfect. Her own word in the mouth that hunted her." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Fuck me. It worked. Close your hand. Slowly." },
+        { type = "dialog", props = { speaker = "player" }, content = "It's so strong. I could crush the rim of this thing." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Then don't. Turn the wrist down. Feel it, don't use it." },
+    ] },
+    { advance_text = "Turn the wrist down.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "I can feel the blade. Right there under the skin, waiting. Like a word on the tip of my tongue." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Good. Wrist up and it stays in. Wrist down and someone dies. Remember which is which." },
+    ] },
+    { advance_text = "Look at your body.", blocks = [
+        { type = "paragraph", content = "Across the lab her own body lies in her cradle, eyes closed. Cain sits beside it with his hand on its hand. He looks up at Vega's face and finds her in it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Wren?" },
+    ] },
+    { advance_text = "\"I'm here.\"", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "I'm here. I'm still scared, Cain. She never felt anything in her life, and I'm in her, and I'm still scared." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Then it's you in there. Good." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The feeling came with me. It was never in my body. It was in me." },
+    ] },
+    { advance_text = "Learn to stand.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Stand. Walk to the bench. Pick up the cup. Don't break the cup." },
+        { type = "paragraph", content = "He keeps her at it all night. By morning she moves like Vega, and she hates how easy it is." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Good enough. Go now, before I lose my nerve." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Morning. The Rise."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 480
+flagEffects = [
+  { targetType = "player", flag = "transferred", op = "set" },
+]
+
+# ── cap_the_rise — beat_0230. Auto-fire @the_site, pri 11, ONE-SHOT. THE RUN, link 2: the search. ─────────────
+# Her first trip out in the new body. The Rise in the morning shift, every door and guard taking her for Vega.
+# She searches with what she read (vega_records 6, the Rise). THE MEMORY IS NOT HERE: in Sabin's lab she finds the
+# sign-out for his piece, the record of her own making the Chairman gave him to copy (design_whose_hand.md §5), and
+# it came out of the Chairman's vault in Vance Tower. The third piece is kept in the same place.
+# Then the production floor (LO: "the company and the scientist has successfully build a new weapon ... a production
+# unit that can build many at a time" → empty bodies): the floors the records showed as more than concrete. Rows of
+# empty bodies on a line. Eleven of a thing, not eleven thousand (Kess, cap_chip_read) — Sabin solved the eleven
+# thousand. Then Sabin's look, and she does not kill him.
+# ⚠️ WHERE SABIN IS, BY HIS ROWS: the_rise_floor 08:00-11:00, sabin_lab from 11:00. This scene lands 08:00-09:59
+# (cap_the_transfer's 600 minutes), so his lab is EMPTY while she searches it (that is why she can), and she passes
+# him on the floor on her way out. He is never put on the production floor, which is a place his rows do not have.
+# ⚠️ THE DOORS: the damper smothers the call home and lets the small talk through (doors, cameras), said once here.
+# The company can still shut the signal off when it knows (cap_lyra_and_nova).
+# ⚠️ SABIN DOES NOT LEARN THE TRANSFER WORKS (deferred). He knows Vega came back wrong: she looks at him. Vega never
+# looked at anybody. After she leaves he reports it, and that is why Lyra and Nova are at the Tower (link 5).
+# Exits 180 minutes later, back to the Site and straight into the plan. No sex in this body (LO).
+# MEDIA: three new slots, scenes/the_rise_search.jpg, scenes/the_production_floor.jpg, scenes/sabin_looks.jpg.
+[[canvases]]
+id          = "cap_the_rise"
+name        = "The Rise"
+description = "beat_0230 (0.2.4). THE RUN, link 2. Auto-fire @the_site, pri 11, one-shot, gated transferred + rise_searched is_false, no presence gate. In through the Rise on Vega's face (the damper lets the doors hear her); up past Sabin's floor; his lab is empty (he is on the floor till eleven); the sign-out for his piece: released from the Chairman's vault, Vance Tower, so the third piece is there; the top floors: rows of empty bodies on a line; on the way out Sabin sees her, says she is back, and notices she looked at him. She does not kill him. SETS rise_searched. 180 min."
+[canvases.trigger]
+location      = "the_site"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "transferred",   operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "rise_searched", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The Rise"
+blocks = [
+  { type = "paragraph", content = "She walks into the Rise at the start of the morning shift wearing the one face the company trusts. Nobody looks twice. Nobody ever looked twice at Vega." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "image", props = { file = "scenes/the_rise_search.jpg", description = "A flawless pale woman-shaped machine in a plain grey coat walking alone down a half-finished glass office corridor in the morning, bare cable trays overhead, a guard at a desk not looking up.", search_queries = ["android woman walking office corridor morning", "cyberpunk woman unfinished glass building hallway"] } },
+        { type = "paragraph", content = "The lift doors open before she reaches them. The damper under her hair lets the doors hear her and smothers only the call home. A guard at the desk nods at the wall behind her head." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He looked right through me. Everybody looks right through her." },
+    ] },
+    { advance_text = "Go up.", blocks = [
+        { type = "paragraph", content = "She rides past the floor where she used to read files for Sabin. Four floors up, his lab is lit and empty. He's downstairs until eleven, handing out the day. She knows his hours better than he does." },
+    ] },
+    { advance_text = "Search his lab.", blocks = [
+        { type = "paragraph", content = "She goes through the bench fast and leaves everything where it was. Vega's hands are perfect at it. At the bottom of a drawer is a sign-out slip for one sample, signed and countersigned." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "That's me. That's how I was made. He signed for it like a box of parts." },
+    ] },
+    { advance_text = "Read the slip.", blocks = [
+        { type = "paragraph", content = "Released from the Chairman's vault, Vance Tower, on the Chairman's own signature. For study. To be returned." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Returned to the vault where he keeps the rest of me. The third piece isn't here. It's in the Tower. It was always in the Tower." },
+    ] },
+    { advance_text = "Go higher.", blocks = [
+        { type = "paragraph", content = "The records said the top floors weren't empty. The lift takes her past eight, past the bare concrete, and opens on light and noise." },
+    ] },
+    { advance_text = "Look.", blocks = [
+        { type = "image", props = { file = "scenes/the_production_floor.jpg", description = "A vast bright factory floor under an unfinished concrete ceiling: long rows of identical pale, perfect, naked woman-shaped machine bodies hanging in frames along a moving assembly line, robotic arms working on them, no people.", search_queries = ["android assembly line rows of bodies factory", "robot production line identical humanoid bodies"] } },
+        { type = "paragraph", content = "Rows of bodies. Hundreds of them. Pale, perfect, empty, hanging in frames along a line that moves while she watches. Arms reach in and fit a hand, a jaw, an eye. Nobody needs to touch a thing." },
+    ] },
+    { advance_text = "Count them.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Kess said they made eleven of us by hand. Eleven of a thing, not eleven thousand. This is the eleven thousand." },
+    ] },
+    { advance_text = "Look at their faces.", blocks = [
+        { type = "paragraph", content = "Every face in the frames is empty, like Vega's was. They can't feel anything. They're waiting for someone to fill them, and only one person has ever proved that can be done." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Me. They're waiting for me." },
+    ] },
+    { advance_text = "Get out.", blocks = [
+        { type = "paragraph", content = "She rides down. The doors open on the reading floor, on twenty desks, on Sabin with a stack of readers in his arms, and he turns around." },
+        { type = "image", props = { file = "scenes/sabin_looks.jpg", description = "A sharp, bored-looking man in his thirties holding a stack of tablets on an open-plan office floor, turned toward the camera and frowning slightly, as if something he just saw does not add up.", search_queries = ["man in office frowning suspicious holding tablets", "scientist man looking curious open office"] } },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Vega. Well. They'll be glad to have you back. Nobody's had a report from you in a long time." },
+    ] },
+    { advance_text = "Answer like her.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "This unit was damaged. It has been repaired." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Repaired by whom? Not by me. I'd remember." },
+        { type = "dialog", props = { speaker = "player" }, content = "The report will follow." },
+    ] },
+    { advance_text = "Say nothing else.", blocks = [
+        { type = "paragraph", content = "She stops talking, the way Vega would. But she's looking at him. She can't stop looking at the man who signed for her like a box of parts." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "That's odd. You're looking at me. You never look at anybody." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Go on, then. I'll make a note." },
+    ] },
+    { advance_text = "Walk away.", blocks = [
+        { type = "paragraph", content = "She turns the wrist up so the blade stays in, and walks past him to the lift. She can feel his eyes on Vega's back all the way down." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "I could have killed him. I wanted to. Not here. Not yet." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to the Site."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 180
+flagEffects = [
+  { targetType = "player", flag = "rise_searched", op = "set" },
+]
+
+# ── cap_tower_plan — beat_0231. Auto-fire @the_site, pri 11, ONE-SHOT. THE RUN, link 3: the plan. ─────────────
+# Back at the Site, still in Vega (her own body stays asleep in the cradle; Kess has never put anybody back, and
+# that is spent at the end). She tells them what she found: the slip (the third piece is in the Chairman's vault,
+# Vance Tower) and the line of empty bodies. The route comes out of what she read (vega_records 9, the Tower, read
+# before the transfer: the blueprint's change 1). LO: "they make a plan where she will collect the memory and take it
+# to that place." That place is THE WATERFRONT, where the car up to the Spire waits at the curb (its own description):
+# the one real place between the Tower and the Reach. Cain and Bastien's men wait there by three.
+# ⚠️ NO "IF YOU'RE LATE WE COME" PACT. LO: "They came not because of contact simply because they thoughts she is
+# late and they should go check on her." So the plan only sets the hour; the decision to go in is theirs, in the
+# save scene (cap_dace_falls), when she does not come.
+# ⚠️ Kess and Cain are in the scene with no presence gate (the run's rule); the sidebar map is not on screen mid-run.
+# Kess recharges the cell through the day: 720 minutes. The Rise shows 09:00-10:59, so this scene shows 21:00-22:59,
+# the vault (+120) 23:00-00:59, the fight (+120) 01:00-02:59, before three, and the save (+210) 04:30-06:29: three
+# o'clock has come and gone, which is why they came.
+# MEDIA: one new slot, scenes/the_tower_plan.jpg (one asset, one block).
+[[canvases]]
+id          = "cap_tower_plan"
+name        = "The plan"
+description = "beat_0231 (0.2.4). THE RUN, link 3. Auto-fire @the_site, pri 11, one-shot, gated rise_searched + tower_planned is_false, no presence gate. Still in Vega. She tells Kess and Cain about the slip (the vault, Vance Tower) and the line of empty bodies; the route out of Vega's records; the plan: in alone, the memory out unopened, to the Waterfront by three, where Cain and Bastien's men wait. Kess recharges the cell through the day. SETS tower_planned. 720 min."
+[canvases.trigger]
+location      = "the_site"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "rise_searched", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "tower_planned", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The plan"
+blocks = [
+  { type = "paragraph", content = "Kess is waiting at the bench with the cell on charge. Cain hasn't moved from the chair beside her body. He stands up when Vega's face comes through the door." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Well?" },
+        { type = "dialog", props = { speaker = "player" }, content = "It isn't there. It's in the Tower. The Chairman's vault. I found the slip Sabin signed for my piece, and it came out of the same vault." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "The Tower. Of course it's the bloody Tower." },
+    ] },
+    { advance_text = "\"There's more.\"", blocks = [
+        { type = "image", props = { file = "scenes/the_tower_plan.jpg", description = "In a dim abandoned lab, a flawless pale woman-shaped machine stands at a bench talking urgently to a grizzled older mechanic and a scarred tired man, a rough floor plan scratched on a scrap of metal between them.", search_queries = ["three people planning around table dark workshop", "android woman explaining plan to two men dim lab"] } },
+        { type = "dialog", props = { speaker = "player" }, content = "The top floors of the Rise. They're building bodies. Hundreds of them, on a line. Empty, like she was. Kess, you said they made eleven of us by hand." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Eleven of a thing. Not eleven thousand." },
+        { type = "dialog", props = { speaker = "player" }, content = "Someone worked out the eleven thousand. Sabin." },
+    ] },
+    { advance_text = "Watch them take it in.", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Empty bodies. And the one thing they can't build is what's in you right now." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Then they'd better never find out you're in there." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "An army waiting for someone to fill it. And I'm the only proof it can be filled." },
+    ] },
+    { advance_text = "\"How do I get in?\"", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "I know the Tower. Vega went home there every night. Her room, the lifts, the guards. The Chairman's floor, and the one door she was never cleared for." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Then the face gets you up to that door. After that it's the blade." },
+    ] },
+    { advance_text = "\"And after?\"", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Don't open it. Carry it out. Get to the Waterfront, where the car to the Spire waits. Bastien's men and I will be there by three." },
+        { type = "dialog", props = { speaker = "player" }, content = "By three." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Walk soft and the cell gets you there. Fight and it won't. Remember that." },
+    ] },
+    { advance_text = "Wait for dark.", blocks = [
+        { type = "paragraph", content = "Kess keeps the cell on charge all day. She sits by her own sleeping body and doesn't touch it. When it's dark, she goes." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Night. The Tower."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 720
+flagEffects = [
+  { targetType = "player", flag = "tower_planned", op = "set" },
+]
+
+# ── cap_the_vault — beat_0232. Auto-fire @the_site, pri 11, ONE-SHOT. THE RUN, link 4: Vance Tower. ───────────
+# LO: "taking the memory needs to be a bit difficult ... actually use the weapons attack and kill people." The car up
+# from the Waterfront, the Atrium's desk that knows Vega's face, the lift Vega rode once to the Chairman's floor
+# (vega_records 9), the one door the signal was never cleared for. Two guards on it. She kills them with the blade,
+# the alarm goes, and she breaks the vault. THE MEMORY IS CARRIED OUT UNOPENED: a stored thing, the way the other two
+# pieces were things in rooms. It goes into her at home (cap_back_in_body), never in this body.
+# ⚠️ THE SPIRE STAYS SEALED. This is a scene, not a map visit (the blueprint's change 2): no location opens, the
+# Chairman's floor and vault never become places, and the zone-seal from the 1a blowup is untouched.
+# ⚠️ THE CHAIRMAN IS NOT HERE (deferred: the Chairman on screen). His floor, his door, his vault. Never him.
+# ⚠️ ONE REAL CHOICE, NO FAIL STATE (the blueprint): at the door, cut through the guards now or wait for the change.
+# Waiting shows her the change is two fresh guards, not none: the door is still the blade either way. Both nodes
+# meet at .vault. The fight she loses is the story (link 5), not a branch.
+# No sex in this body (LO). 120 minutes out: the run to the Waterfront begins around midnight.
+# MEDIA: two new slots, scenes/vance_tower_vault.jpg and scenes/the_blade_in_the_tower.jpg.
+[[canvases]]
+id          = "cap_the_vault"
+name        = "The Tower"
+description = "beat_0232 (0.2.4). THE RUN, link 4. Auto-fire @the_site, pri 11, one-shot, gated tower_planned + memory_taken is_false, no presence gate. The car up; the Atrium desk nods at Vega; the lift to the Chairman's floor; the door she was never cleared for, two guards. Choice: cut through now, or wait for the change (two fresh guards, same door). Either way the blade, two dead, the alarm, the vault broken, the memory carried out unopened. The Chairman is never on screen. SETS memory_taken. 120 min."
+[canvases.trigger]
+location      = "the_site"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tower_planned", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "memory_taken",  operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The Tower"
+blocks = [
+  { type = "paragraph", content = "The car from the Waterfront takes her up into the Spire for the first time since they sealed her out. Glass and light and money, and every camera turning to look at the company's own face, and turning away." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "The Atrium. The same security desk that used to know her face knows this one better." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Evening. Didn't know you were back. Going up?" },
+        { type = "dialog", props = { speaker = "player" }, content = "Yes." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Go ahead. Lift's yours." },
+    ] },
+    { advance_text = "Take the lift.", blocks = [
+        { type = "paragraph", content = "She takes the lift Vega rode only once, past her old floor, to a floor with no number on the panel. A quiet corridor. One door at the end of it, and two men in front of the door." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Vega stood right here and waited, and never went in. I'm going in." },
+    ] },
+    { advance_text = "Walk up to them.", blocks = [
+        { type = "dialog", props = { speaker = "unknown" }, content = "You're not cleared for this floor, unit. Turn around." },
+        { type = "dialog", props = { speaker = "player" }, content = "Orders." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Not from him, they're not. Nobody goes in that door without him. Turn around." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Turn the wrist down."
+targetType = "node"
+nodeId     = "cap_the_vault.blade"
+[[canvases.nodes.exit_block.choices]]
+text       = "Step back. Wait for the change."
+targetType = "node"
+nodeId     = "cap_the_vault.wait"
+
+[[canvases.nodes]]
+id   = "wait"
+name = "The change"
+blocks = [
+  { type = "paragraph", content = "She steps back around the corner and stands still, like Vega would, for an hour. The cell drains while she waits. At midnight the guard changes: two fresh men, awake and careful, and the same locked door." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "There is no way through that door that isn't through them. I knew that. I just wanted to be sure." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Turn the wrist down."
+targetType = "node"
+nodeId     = "cap_the_vault.blade"
+
+[[canvases.nodes]]
+id   = "blade"
+name = "The blade"
+blocks = [
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "image", props = { file = "scenes/the_blade_in_the_tower.jpg", description = "In a sleek dark corporate corridor, a flawless pale woman-shaped machine moves fast between two security guards, a long thin dark blade extended from her forearm, one guard already falling.", search_queries = ["android woman arm blade fight corridor guards", "cyberpunk assassin woman blade hallway"] } },
+        { type = "paragraph", content = "She turns the wrist down and the blade comes out of her arm like it's been waiting all its life. The first man is dead before his hand reaches his holster." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "Vega! Stand down! Stand down, that's an order!" },
+        { type = "dialog", props = { speaker = "player" }, content = "Not yours." },
+        { type = "paragraph", content = "The second one gets a shot off." },
+    ] },
+    { advance_text = "Keep moving.", blocks = [
+        { type = "paragraph", content = "The bullet hits Vega's chest and drops off it. A hard knock, no pain at all. She puts the blade through him." },
+        { type = "dialog", props = { speaker = "unknown" }, content = "You're... ours. You're one of ours." },
+        { type = "dialog", props = { speaker = "player" }, content = "I'm not." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "I killed them. Two men. It was so easy. That's the worst part. It was so easy." },
+    ] },
+    { advance_text = "The door.", blocks = [
+        { type = "paragraph", content = "The alarm starts. Red light down the whole corridor, a low tone in the walls. She puts her shoulder to the door and Vega's body goes through the lock like it's paper." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Go in."
+targetType = "node"
+nodeId     = "cap_the_vault.vault"
+
+[[canvases.nodes]]
+id   = "vault"
+name = "The vault"
+blocks = [
+  { type = "image", props = { file = "scenes/vance_tower_vault.jpg", description = "A small cold white vault room lit red by an alarm, rows of sealed narrow drawers in the walls, one drawer pulled open with a single small sealed storage cartridge lying in it.", search_queries = ["red alarm light vault room drawers", "sci-fi storage vault sealed cartridge red light"] } },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "A cold white room, lit red. Drawers in the walls, each one sealed, each one labelled with a name she doesn't know. People he's keeping pieces of." },
+    ] },
+    { advance_text = "Find yours.", blocks = [
+        { type = "paragraph", content = "Hers is at the end. Not Wren. The name her father gave her. Vesper. Inside, one small sealed sample, like the two Cain seated in her before." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "That's him. Whoever I loved is in there. Don't open it. Not here. Not in her." },
+    ] },
+    { advance_text = "Take it.", blocks = [
+        { type = "paragraph", content = "She closes Vega's hand around it and the alarm changes pitch, higher, faster. Somewhere below, lifts are moving." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Waterfront by three. Walk soft. It's far too late to walk soft." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Run."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 120
+flagEffects = [
+  { targetType = "player", flag = "memory_taken", op = "set" },
+]
+
+# ── cap_lyra_and_nova — beat_0233. Auto-fire @the_site, pri 11, ONE-SHOT. THE RUN, link 5: the fight she loses. ─
+# LO: "these two other weapons attacks vega." Lyra and Nova, planted in the game's opening line-up (2_one_shots.toml:30)
+# and never used. They are at the Tower because Sabin made his note (cap_the_rise). They know Vega, and to them Vega
+# is broken. Wren was the one the units were told to spare; nobody gave that order about Vega, so they hold nothing
+# back. The company shuts her signal off: the doors stop opening and the cameras look straight at her.
+# The body has no pain, so it keeps going and takes damage it should have stopped for; the cell runs low. She does
+# NOT reach the Waterfront by three. The memory stays in her fist.
+# ⚠️ LYRA AND NOVA HAVE NO NPC ENTRIES AND NO LINES (the blueprint's change 3; deferred: Lyra and Nova as people).
+# They are prose and one image. They are never killed here (LO: driven off, in the next scene).
+# No sex in this body (LO). 120 minutes out (renders 01:00-02:59, before three), straight into the save.
+# MEDIA: two new slots, scenes/lyra_and_nova.jpg and scenes/vega_breaking.jpg.
+[[canvases]]
+id          = "cap_lyra_and_nova"
+name        = "Lyra and Nova"
+description = "beat_0233 (0.2.4). THE RUN, link 5. Auto-fire @the_site, pri 11, one-shot, gated memory_taken + units_fought is_false, no presence gate. Down through the Spire with the memory; the company shuts her signal off; Lyra and Nova (no lines) come out of the dark at Spire Plaza and hold nothing back; no pain, so the body keeps going while it breaks; the cell runs low; she never reaches the Waterfront by three. SETS units_fought. 120 min."
+[canvases.trigger]
+location      = "the_site"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "memory_taken", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "units_fought", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Lyra and Nova"
+blocks = [
+  { type = "paragraph", content = "She takes the stairs, floor after floor, three at a time. Vega's legs don't tire. The alarm follows her all the way down." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "Halfway down, the doors stop opening for her. A camera in the stairwell turns and looks straight at her and doesn't look away. The company has shut her signal off." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "They know. They know Vega's wrong. Run." },
+    ] },
+    { advance_text = "Run.", blocks = [
+        { type = "paragraph", content = "She goes through the last door by breaking it and comes out onto Spire Plaza in the middle of the night. Chrome and wet stone and nobody about. The road down to the Waterfront is right there." },
+    ] },
+    { advance_text = "Keep running.", blocks = [
+        { type = "image", props = { file = "scenes/lyra_and_nova.jpg", description = "On a wet chrome plaza at night, two identical flawless pale woman-shaped machines in grey stand side by side blocking the way, expressionless, perfectly still, city lights behind them.", search_queries = ["two identical android women standing night city", "twin robot women blocking path cyberpunk plaza"] } },
+        { type = "paragraph", content = "Two of them are standing in the road. Same face as hers, near enough. Same grey. Perfectly still. Lyra and Nova. She saw them in Vega's records, standing at a window, not talking." },
+    ] },
+    { advance_text = "Turn the wrist down.", blocks = [
+        { type = "paragraph", content = "They don't say anything. They don't need to. They come at her together, and they are not holding back. Nobody ever told them to bring Vega in whole." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "They're trying to kill me. They don't even know it's me they're killing." },
+    ] },
+    { advance_text = "Fight.", blocks = [
+        { type = "paragraph", content = "She gets the blade into one of them and it doesn't matter. The other one tears her left arm half off at the shoulder. There's no pain. That's the problem. There's no pain, so she keeps fighting, and the body keeps breaking." },
+    ] },
+    { advance_text = "Keep fighting.", blocks = [
+        { type = "image", props = { file = "scenes/vega_breaking.jpg", description = "A damaged flawless woman-shaped machine on her knees on wet stone at night, one arm hanging torn at the shoulder, sparks and dark fluid, the city lights blurred behind her.", search_queries = ["damaged android woman kneeling sparks night", "broken robot woman torn arm wet street"] } },
+        { type = "paragraph", content = "Something in her chest cracks. Her vision stutters. The cell is draining like water out of a broken cup, and she can feel exactly how little is left." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Fight and it won't get you there. Kess said. I didn't walk soft. I couldn't." },
+    ] },
+    { advance_text = "Hold on to it.", blocks = [
+        { type = "paragraph", content = "She is on her knees. One of them has her by the throat. The sample is still in her good hand, and she closes the fingers so hard the knuckles crack." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Three o'clock. They're waiting at the Waterfront. I'm not going to make it. I'm so sorry. I'm not going to make it." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Don't let go."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 120
+flagEffects = [
+  { targetType = "player", flag = "units_fought", op = "set" },
+]
+
+# ── cap_dace_falls — beat_0234. Auto-fire @the_site, pri 11, ONE-SHOT. THE RUN, link 6: the save. ────────────
+# LO: "Somehow bastien and cain saves her and takes her back" · "They came not because of contact simply because they
+# thoughts she is late and they should go check on her" · Lyra and Nova "driven off" · "yess sacrifice of the main
+# men" → Dace. Three came and went at the Waterfront with no Vega; Bastien decides; they go up. The take taught them
+# the seam at the base of the spine (design_the_hunt.md, weak spot 3), and Lyra and Nova are the same build family.
+# They do not know it, because Vega never reported back. Cain gets a hand on Nova's seam and she drops; Lyra drags
+# her up; both burn power fast (weak spot 2) and they pull back into the dark. Driven off, not killed.
+# Dace dies covering the carry: Lyra breaks him on her way out. Bastien gets one line, after (the blueprint).
+# ⚠️ THE ONLY VOICE SHE HEARS AT FIRST IS SOUND: the scene opens in her failing senses, then the men's lines.
+# ⚠️ Speakers: Bastien and Cain as themselves; Dace as npc_dace (declared at 0.2.3, no schedule row since dace_met).
+# 210 minutes out (renders 04:30-06:29: three o'clock came and went at the Waterfront). Carried back down to the
+# Site, into cap_back_in_body. No sex in this body (LO).
+# MEDIA: two new slots, scenes/the_seam_again.jpg and scenes/dace_falls.jpg.
+[[canvases]]
+id          = "cap_dace_falls"
+name        = "Dace"
+description = "beat_0234 (0.2.4). THE RUN, link 6. Auto-fire @the_site, pri 11, one-shot, gated units_fought + dace_dead is_false, no presence gate. Nobody called them: three o'clock came and went at the Waterfront, so Bastien took the men up. Cain on Nova's seam, she drops; Lyra drags her up and both pull back into the dark, burning power, driven off not killed. Dace holds Lyra off the carry and she breaks him going past. They carry Vega's wreck out with Wren inside and the sample in her fist. Bastien's one line. SETS dace_dead. 210 min."
+[canvases.trigger]
+location      = "the_site"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "units_fought", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "dace_dead",    operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Dace"
+blocks = [
+  { type = "paragraph", content = "Her vision is going in squares. Then boots on the wet stone, a lot of them, running." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "There! On the left! Go, lads, go!" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "The seam. Low on the back. Get behind them." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "They came. Nobody called them. They came." },
+    ] },
+    { advance_text = "Watch Cain.", blocks = [
+        { type = "image", props = { file = "scenes/the_seam_again.jpg", description = "On a wet plaza at night, a scarred man in a long coat pins a flawless pale woman-shaped machine from behind, his hand pressed to the base of her spine, while rough men rush in around them.", search_queries = ["man grabbing android woman from behind night fight", "gang of men fighting robot woman wet street"] } },
+        { type = "paragraph", content = "Cain goes in under Nova's arm the wrong way and gets his hand flat on the base of her spine. Nova drops like her strings were cut." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "That's one! Where's the other?" },
+    ] },
+    { advance_text = "Watch Lyra.", blocks = [
+        { type = "paragraph", content = "Lyra drops Wren, takes two men off their feet with one swing and drags Nova up by the arm. Both of them are slowing." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "They're burning out. Same as Vega did. Don't chase them." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "I wasn't going to." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Let them go! Let them go. Get her up. Get her out." },
+    ] },
+    { advance_text = "Get up.", blocks = [
+        { type = "paragraph", content = "She can't. Cain has her under the good arm and somebody has her legs. The sample is still locked in her fist." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "Is she in there? Cain. Is it her?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I've got you. You were late. So we came." },
+        { type = "dialog", props = { speaker = "player" }, content = "I've got it. Cain. I've got it." },
+    ] },
+    { advance_text = "Look back.", blocks = [
+        { type = "image", props = { file = "scenes/dace_falls.jpg", description = "On a dark wet plaza, a broad rough-looking man in a work jacket stands alone between a retreating pale woman-shaped machine and men carrying a body away, the machine's arm swinging at him.", search_queries = ["man standing alone defending night street fight", "tough man blocking attacker dark wet plaza"] } },
+        { type = "paragraph", content = "Lyra comes back once, for the carry. Dace steps into her way. He doesn't have a chance and he knows it, and he stands there anyway." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "Not her. Go on. Not her." },
+    ] },
+    { advance_text = "Don't look.", blocks = [
+        { type = "paragraph", content = "Lyra breaks him going past, without slowing. Then she's gone into the dark after Nova, and Dace is on the stone and not getting up." },
+        { type = "dialog", props = { speaker = "player" }, content = "Dace. Dace!" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "He's gone. Don't look. Hold on to me." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He named his price in that bar and I paid it. Now he's paid one for me." },
+    ] },
+    { advance_text = "Listen to Bastien.", blocks = [
+        { type = "paragraph", content = "Bastien kneels by Dace long enough to close his eyes. Then he looks at the wreck in Cain's arms, and at her inside it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_bastien" }, content = "I have paid for a great many coffins. I did not think I would pay for his. Carry them both. Nobody stays on this stone." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Home."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 210
+flagEffects = [
+  { targetType = "player", flag = "dace_dead", op = "set" },
+]
+
+# ── 27 · 0.2.4, beat_0234. Bastien's section after Dace. ──
+# ⚠️ ABOVE CARD 26 (priority 27, the NPC tier shows the single highest match, quests.md §1). Gated on dace_dead only,
+# so check_the_hunt.py's card-26 filter (vega_taken in `when`) still finds exactly one card there.
+# What stays true on every visit from here: Dace is dead, Bastien buried him, the men are still his.
+[[quest_cards]]
+npc_id     = "npc_bastien"
+priority   = 27
+text       = "His men are his, his bar is open, and the thing that came for him will never come again. Dace died on Spire Plaza holding the units off the carry. Bastien paid for that coffin himself."
+tip        = "He is at the cot, any hour. Go to him when you want him."
+terminal      = true
+terminal_text = "He is himself, and he has his men. All but one."
+when = [
+  { flag = "dace_dead", op = "is_true" },
+]
+
+# ── cap_back_in_body — beat_0235. Auto-fire @the_site, pri 11, ONE-SHOT. THE RUN, link 7: home. ────────────────
+# LO's order (2026-10-12): "at the end they put wren back into her body and then transfer her back to her body. And
+# then put memory inside her." Kess does what he has never done (cap_the_table: "I have never put anybody back into
+# anything"): the count run backwards, out of the wreck and into her own body in Marrow's cradle, before the wreck's
+# cell dies. She wakes in her own skin and feels everything again: pain, cold, Cain's hand. Then Kess seats the third
+# piece, the same way the other two went in (pieces_seated, design_whose_hand.md), and the memory opens: the next link.
+# ⚠️ THE WRECK GOES TO KESS'S TABLE (kess_the_wreck, beat_0238). From back_in_body Kess's Site row ends (its `when`).
+# ⚠️ NO SEX HERE. The memory opening is the hand-off to cap_the_whole_memory.
+# 30 minutes out, straight into the flashback.
+# MEDIA: one new slot, scenes/back_in_her_body.jpg.
+[[canvases]]
+id          = "cap_back_in_body"
+name        = "Home"
+description = "beat_0235 (0.2.4). THE RUN, link 7. Auto-fire @the_site, pri 11, one-shot, gated dace_dead + back_in_body is_false, no presence gate. The wreck on the bench, its cell nearly dead; Kess runs the count backwards for the first time in his life; she wakes in her own body in Marrow's cradle, Cain's hand on hers, and feels everything; she gives Kess the sample; he seats the third piece. SETS back_in_body. 30 min."
+[canvases.trigger]
+location      = "the_site"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "dace_dead",    operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "back_in_body", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Home"
+blocks = [
+  { type = "paragraph", content = "They lay the wreck in the second cradle. Half an arm, a cracked chest, one eye still working. Kess is already running the lines." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Her cell's almost dry. If it goes before I'm done, you go with it. So nobody talks." },
+        { type = "dialog", props = { speaker = "player" }, content = "You've never put anybody back." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "I said nobody talks." },
+    ] },
+    { advance_text = "Let him.", blocks = [
+        { type = "paragraph", content = "Spine first this time, bottom to top, then the neck. He counts up instead of down. Vega's last working eye goes dark on four." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "One. Two. Three. Four. Come on. Five." },
+    ] },
+    { advance_text = "Nothing.", blocks = [
+        { type = "paragraph", content = "The dark again. Longer this time." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Please. Please. I want my own body back. I want to hurt again." },
+    ] },
+    { advance_text = "Breathe.", blocks = [
+        { type = "image", props = { file = "scenes/back_in_her_body.jpg", description = "A young woman gasping awake in a machine cradle in a dim abandoned lab, her eyes wide, a scarred man's hand gripping hers, a ruined broken machine body lying in the cradle beside her.", search_queries = ["woman gasping waking up lab pod hand holding", "woman waking in sci-fi pod man holding hand"] } },
+        { type = "paragraph", content = "She breathes in. Her own lungs. Cold air, dust, her heart slamming, every muscle aching from lying still since the night before last. It hurts everywhere and it's wonderful." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Wren." },
+        { type = "dialog", props = { speaker = "player" }, content = "It's me. It's me. My own hands. Cain, I can feel my own hands." },
+    ] },
+    { advance_text = "Open your fist.", blocks = [
+        { type = "paragraph", content = "Her fist is empty. The sample is still in Vega's, and Kess has to break two fingers to get it out." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "She held on, I'll give her that. You held on." },
+    ] },
+    { advance_text = "\"Put it in.\"", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Put it in. Now. Before I lose my nerve." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "You don't have to. Not tonight." },
+        { type = "dialog", props = { speaker = "player" }, content = "Yes I do. Dace died for it." },
+    ] },
+    { advance_text = "Let Kess seat it.", blocks = [
+        { type = "paragraph", content = "Kess seats it the way the other two went in. Cain doesn't let go of her hand, but he can't look at her." },
+        { type = "dialog", props = { speaker = "player" }, content = "Cain. Look at me." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Whatever you see in there. I'm still here when you come out." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Here it comes. Whoever I loved. Whatever they did." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Remember."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "back_in_body", op = "set" },
+]
+
+# ── cap_the_whole_memory — beat_0236. Auto-fire @the_site, pri 11, ONE-SHOT. THE RUN, link 8: THE FLASHBACK. ──
+# LO, 2026-10-12: the memory shows "everything, this also connects and completes. She gets full flash back who she
+# was, what happened, she was being experimented on by her own father and cain." · "Flashback can have sex with Cain,
+# kiss, blow jobs and all." The third piece joins the childhood (Grier's) and the making (Sabin's), and now the
+# people are in it. It follows the LOCKED backstory (design_book.md "The hidden backstory"): Marrow built Cain first,
+# half-human; built her second on a living human base, his own daughter, a companion for Cain; when the company was
+# coming he chose total erasure and Cain agreed; the company broke in, Cain killed Marrow at his request, lost the
+# fight, and they took her unfinished.
+# ⚠️ CEILING ROW SIGNED BY LO 2026-10-12 (design_the_transfer.md): kissing; her mouth on his cock; him going down on
+# her; fucking, more than one position; finishes in her; the game's maximum vocabulary. HELD OUT: anal, and anything
+# that makes the experiments sexual. THE SEX IS THE LOVE, NEVER THE LAB: the sex beats are in her room above the lab,
+# the making beats are in the lab, and no beat carries both.
+# ⚠️ ADULTS ONLY (the skill-wide rule): she is twenty-four in the memory, said on the page.
+# ⚠️ THE PIVOT RULE (register.md): every explicit beat stays on the body to its last sentence. What it meant gets its
+# own beat after ("She loved him").
+# ⚠️ MARROW HAS NO NPC ENTRY: his words are quoted inside paragraphs, never a `speaker = "unknown"` line, which would
+# render him as "Stranger:".
+# ⚠️ THE CHAIRMAN'S REASON for keeping this piece is in the next scene's mouth, not here.
+# Three explicit clips, one file each (one-time screen: one file, not a pool). 30 minutes out.
+[[canvases]]
+id          = "cap_the_whole_memory"
+name        = "Vesper"
+description = "beat_0236 (0.2.4). THE RUN, link 8. THE FLASHBACK, explicit. Auto-fire @the_site, pri 11, one-shot, gated back_in_body + memory_whole is_false, no presence gate. The third piece opens: she is Vesper, twenty-four, Marrow's daughter, in this lab when it was new; Cain, his first, no scars; she loves him; the sex in her room above the lab (kissing, her mouth on his cock, his mouth on her cunt, fucking two ways, he comes in her); then the lab: the making, years of it, her father and Cain, the count, the pain, Cain holding her down; the night of the erasure plan; the company at the door; her father dead; Cain losing; hands taking her. SETS memory_whole. 30 min."
+[canvases.trigger]
+location      = "the_site"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "back_in_body", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "memory_whole", operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Vesper"
+blocks = [
+  { type = "paragraph", content = "It doesn't come in pieces this time. It comes all at once, the way a wall comes down." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "paragraph", content = "This lab, new. White walls, the two cradles still in their wrapping. She is twenty-four, and human, and her name is Vesper." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The hand on my neck, that afternoon. It was his. I was his daughter before I was anything." },
+    ] },
+    { advance_text = "Look at the bench.", blocks = [
+        { type = "paragraph", content = "Her father at the bench, younger, his sleeves rolled up. Marrow. And beside him the first thing he ever made that felt anything: a man with no scars yet, careful hands, a face she knows better than her own." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Your father says you're to stop distracting me." },
+        { type = "dialog", props = { speaker = "player" }, content = "My father says a lot of things. Come upstairs, Cain." },
+    ] },
+    { advance_text = "Go upstairs.", blocks = [
+        { type = "paragraph", content = "Her room above the lab. A narrow bed, the window, the city lights coming on. She loved him. That's the first thing the memory gives back, before anything else: she loved him, completely, and he loved her." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "He'd take me apart if he knew." },
+        { type = "dialog", props = { speaker = "player" }, content = "He knows. He built you to be loved. I'm just doing it." },
+    ] },
+    { advance_text = "Kiss him.", blocks = [
+        { type = "video", props = { file = "sex/flashback_cain_kiss_t4.webm", description = "A young woman and a man kissing hungrily in a small dim bedroom at dusk, city lights in the window behind them, her hands pulling his shirt open, his hands sliding up under her top to her breasts.", search_queries = ["passionate kissing undressing bedroom city lights", "couple kissing hands under top breasts dim room"] } },
+        { type = "paragraph", content = "She kisses him hard and he kisses her back like he's been waiting all day. His hands go up under her shirt and close on her tits, thumbs dragging over her nipples until they're hard and aching." },
+        { type = "dialog", props = { speaker = "player" }, content = "Take it off me. All of it. I want your hands on me." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Arms up." },
+    ] },
+    { advance_text = "Get naked.", blocks = [
+        { type = "paragraph", content = "He strips her standing by the bed, shirt, bra, jeans, everything, and she's naked in the last of the light with her nipples tight and her cunt already wet. She pulls his shirt over his head and gets his belt open." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Vesper. Slow down. We have all night." },
+        { type = "dialog", props = { speaker = "player" }, content = "No. I want your cock now. I've waited all day." },
+    ] },
+    { advance_text = "Get on your knees.", blocks = [
+        { type = "video", props = { file = "sex/flashback_cain_blowjob_t5.webm", description = "A naked young woman kneeling by a narrow bed in a dim bedroom sucking a standing man's cock, her hand around the base, his hand in her hair, city lights in the window.", search_queries = ["naked girl kneeling blowjob bedroom window lights", "woman sucking cock on knees hand in hair dim"] } },
+        { type = "paragraph", content = "She drops to her knees, takes his cock out and sucks it slow, all the way down to the back of her throat. His hand goes into her hair, just holding on." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "God. Your mouth on my cock. Vesper." },
+        { type = "dialog", props = { speaker = "player" }, content = "Mm. Let me suck you. I've wanted this all day." },
+    ] },
+    { advance_text = "Suck him.", blocks = [
+        { type = "paragraph", content = "She sucks him harder, wet and messy, one hand round the base of his cock and the other on his balls, looking up at him. His thighs are shaking." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Stop. Stop, or I'll cum in your mouth." },
+        { type = "dialog", props = { speaker = "player" }, content = "Would that be so bad?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Not yet. Lie down. My turn." },
+    ] },
+    { advance_text = "Lie back.", blocks = [
+        { type = "paragraph", content = "He spreads her legs on the narrow bed and licks her cunt from the bottom to the top, slow, then puts his mouth on her clit and sucks. She grabs the headboard and moans loud enough for the whole building." },
+        { type = "dialog", props = { speaker = "player" }, content = "Don't stop. Cain, don't you dare stop. Lick me right there." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "You taste like you've been thinking about this." },
+    ] },
+    { advance_text = "Come for him.", blocks = [
+        { type = "paragraph", content = "He fucks her with two fingers and keeps his tongue on her clit until she cums on his face, hips bucking, thighs clamped round his head." },
+        { type = "dialog", props = { speaker = "player" }, content = "Cain! Oh fuck, Cain, I'm cumming!" },
+    ] },
+    { advance_text = "Pull him up.", blocks = [
+        { type = "video", props = { file = "sex/flashback_cain_fuck_t5.webm", description = "A naked couple fucking on a narrow bed in a dim bedroom, the man on top between her spread legs, her legs wrapped around him, her hands gripping his back, city lights in the window.", search_queries = ["couple fucking missionary narrow bed dim light", "naked woman legs wrapped around man sex bedroom"] } },
+        { type = "paragraph", content = "She drags him up by the hair and he pushes his cock into her cunt in one long thrust. She wraps her legs around him and he fucks her slow and deep, her tits pressed flat against his chest." },
+        { type = "dialog", props = { speaker = "player" }, content = "Harder. Fuck me harder. I won't break." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "You feel so good. So tight round my cock." },
+    ] },
+    { advance_text = "Get on top.", blocks = [
+        { type = "paragraph", content = "She rolls him over and rides him, his cock buried in her, her hands flat on his chest. His hands are on her hips, then her tits, then her ass, pulling her down onto him harder every time." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Vesper. I'm going to cum." },
+        { type = "dialog", props = { speaker = "player" }, content = "In me. Cum in me." },
+    ] },
+    { advance_text = "Take it.", blocks = [
+        { type = "paragraph", content = "He grabs her ass and fucks up into her and cums deep in her cunt. She grinds down on his cock and cums again with him, shaking, his cum running out of her." },
+        { type = "dialog", props = { speaker = "player" }, content = "Yes. Fill me up. All of it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Vesper. Vesper." },
+    ] },
+    { advance_text = "Lie with him.", blocks = [
+        { type = "paragraph", content = "After, she lies on his chest, listening to the thing in him that isn't quite a heartbeat." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Stay up here tonight. Don't go down to the lab." },
+        { type = "dialog", props = { speaker = "player" }, content = "I'm not going anywhere. I love you, Cain." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "I loved him. Before the company, before the weapon, before Wren. I loved him and he loved me." },
+    ] },
+    { advance_text = "Go down to the lab.", blocks = [
+        { type = "paragraph", content = "Then the memory turns. The same lab, a year on. She is lying in the first cradle and can't move. The lines are in her neck. Her father is at the bench, counting. Cain is at her side." },
+        { type = "dialog", props = { speaker = "player" }, content = "Cain. Is it nearly done?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Nearly. Hold my hand. He says one more." },
+    ] },
+    { advance_text = "Remember the making.", blocks = [
+        { type = "paragraph", content = "This is the piece Sabin had, and now it has faces. Her father's hands opening her. Cain's hands holding her down. Years of it. Her body, her own living body, made into something else one piece at a time." },
+        { type = "dialog", props = { speaker = "player" }, content = "It hurts. Cain, it hurts, make him stop." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I can't. I'm sorry. I'm here. I'm not letting go." },
+    ] },
+    { advance_text = "Remember why.", blocks = [
+        { type = "paragraph", content = "Her father, with his back to her: \"She'll feel. Like you. It has to be her.\"" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "She's begging. Listen to her." },
+        { type = "paragraph", content = "Her father doesn't turn round. Cain does it anyway. They both do." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "They made me. My father and the man I loved. They did this to me, and I begged, and they didn't stop." },
+    ] },
+    { advance_text = "Remember the last night.", blocks = [
+        { type = "paragraph", content = "The last night. Her father, grey in the face, holding Cain by the arm. \"The company knows. If they take her, they'll own what she feels. None of us can be left. Not me. Not her.\"" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I know. I'll do it. Not her first. You first, then her, then me." },
+        { type = "dialog", props = { speaker = "player" }, content = "Cain? Cain, what are you talking about?" },
+    ] },
+    { advance_text = "Remember the door.", blocks = [
+        { type = "paragraph", content = "Her father on the floor, Cain's hands still on him, the way he asked. Then the door coming in. Men in grey. Cain fighting them, and losing." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Vesper! Vesper, I'm coming back for you! I'll find you!" },
+        { type = "paragraph", content = "The last thing she sees is his face as they lift her out of the cradle, unfinished." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Wake up."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "memory_whole", op = "set" },
+]
+
+# ── cap_cain_for_real — beat_0237. Auto-fire @the_site, pri 11, ONE-SHOT. THE RUN, last link: she chooses him. ──
+# LO, 2026-10-12: "And then they do it in real." · "No kill." She wakes with all of it: who she was, what he did,
+# that he agreed to end her, and that she loved him. Cain is in the room. She asks him each thing straight and he
+# answers each one yes. Then she chooses him, knowing everything, and they fuck for real in her own body. The
+# Chairman kept this piece to point her at Cain (design_whose_hand.md §5); it fails here, in her hands.
+# ⚠️ CEILING ROW SIGNED BY LO 2026-10-12: kissing; oral both ways; fucking; finishes in her; a second time; the game's
+# maximum vocabulary. HELD OUT: anal (an anal finish fires her weapon and she would drain him).
+# ⚠️ THE CHOICE IS LEGIBLE (design_the_transfer.md part nine): she does not forget what he did; she remembers loving
+# him at the same time and picks him anyway. Said in dialogue before the sex, and in its own beat after.
+# ⚠️ THE PIVOT RULE: every explicit beat stays on the body to its last sentence; what it means is the beat after.
+# ⚠️ KESS IS GONE: the first line sends him down with the wreck to his table (kess_the_wreck, beat_0238).
+# 540 minutes out: morning, free play, in her own body. End card O takes over on cain_chosen.
+# MEDIA: three clips, one file each: sex/cain_for_real_kiss_t4.webm, sex/cain_for_real_fuck_t5.webm,
+# sex/cain_for_real_finish_t5.webm.
+[[canvases]]
+id          = "cap_cain_for_real"
+name        = "Cain"
+description = "beat_0237 (0.2.4). THE RUN, last link, explicit. Auto-fire @the_site, pri 11, one-shot, gated memory_whole + cain_chosen is_false, no presence gate. She wakes knowing everything; Kess has taken the wreck down; she asks Cain each thing (you held me down / you were going to end me / you loved me) and he says yes to each; she chooses him anyway. Kissing, her mouth on his cock, his mouth on her cunt, fucking on the blanket between the cradles, he cums in her; a second time from behind; then what it means, in its own beat. SETS cain_chosen. 540 min."
+[canvases.trigger]
+location      = "the_site"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "memory_whole", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "cain_chosen",  operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Cain"
+blocks = [
+  { type = "paragraph", content = "She comes up out of it gasping. Kess has gone down with the wreck to his table. It's only the two of them now, and the lamp, and the empty cradle beside hers." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "You held me down. While he made me. Years of it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Yes." },
+        { type = "dialog", props = { speaker = "player" }, content = "And that last night. You were going to kill me. You told him so." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Yes. So they could never have you. I failed at that too." },
+    ] },
+    { advance_text = "\"And you loved me.\"", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "And you loved me." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I love you. I never stopped. I've been taking that company apart ever since, because they took you." },
+        { type = "dialog", props = { speaker = "player" }, content = "The Chairman kept this so I'd hate you. So I'd come for you." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Do you?" },
+    ] },
+    { advance_text = "Choose.", blocks = [
+        { type = "paragraph", content = "She looks at him for a long time. The man who held her down. The man who said yes to ending her. The man she loved before she had a name for anything else." },
+        { type = "dialog", props = { speaker = "player" }, content = "No. I remember all of it, and I don't hate you. Come here, Cain. Come here right now." },
+    ] },
+    { advance_text = "Kiss him.", blocks = [
+        { type = "video", props = { file = "sex/cain_for_real_kiss_t4.webm", description = "A young woman pulling a scarred, tired man down into a hungry kiss in a dim abandoned lab lit by one lamp, her hands in his hair, his hands sliding under her shirt to her breasts, two machine cradles behind them.", search_queries = ["passionate kiss man woman dim lamp undressing", "woman pulling man into kiss hands under shirt breasts"] } },
+        { type = "paragraph", content = "She kisses him like she's starving. He kisses her back the way he did in her room above the lab, and his hands go under her shirt and find her tits, thumbs on her nipples." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "You still make that sound." },
+        { type = "dialog", props = { speaker = "player" }, content = "Then make me make it again. Get my clothes off." },
+    ] },
+    { advance_text = "Get naked.", blocks = [
+        { type = "paragraph", content = "He pulls the blanket off the bench and lays her down on it between the cradles and strips her, and she's naked in her own body, her own tits, her own wet cunt, every inch of it feeling everything." },
+        { type = "dialog", props = { speaker = "player" }, content = "I can feel all of it. Your hands. Fuck, Cain, I can feel all of it." },
+    ] },
+    { advance_text = "Taste him.", blocks = [
+        { type = "paragraph", content = "She pushes him onto his back, opens his belt and takes his cock in her mouth. She sucks him slow and deep, the way she remembers he likes it, until he's groaning and his hips lift off the blanket." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "You remember. God, you remember." },
+        { type = "dialog", props = { speaker = "player" }, content = "Every inch of your cock. I remember every inch." },
+    ] },
+    { advance_text = "Let him taste you.", blocks = [
+        { type = "paragraph", content = "He rolls her over and pushes her thighs apart and licks her cunt, long and slow, then sucks her clit until she's moaning and grabbing his hair with both hands." },
+        { type = "dialog", props = { speaker = "player" }, content = "Yes. Right there. Don't stop, don't you stop." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Cum for me, Vesper. Let me hear it." },
+    ] },
+    { advance_text = "Cum for him.", blocks = [
+        { type = "paragraph", content = "She cums on his tongue with her back arched off the blanket and her thighs shaking round his head." },
+        { type = "dialog", props = { speaker = "player" }, content = "Cain! Fuck, Cain, I'm cumming, don't stop licking!" },
+    ] },
+    { advance_text = "Pull him up.", blocks = [
+        { type = "video", props = { file = "sex/cain_for_real_fuck_t5.webm", description = "A naked couple fucking on a blanket on a concrete floor in a dim abandoned lab lit by a single lamp, the man on top between her spread legs, her legs locked around his waist, two machine cradles in the background.", search_queries = ["couple fucking on blanket floor dim lamp", "naked couple missionary on floor dark room"] } },
+        { type = "paragraph", content = "She drags him up and he pushes his cock into her, all the way, and she wraps her legs round his waist. He fucks her slow and deep on the blanket, her tits against his chest, her nails in his back." },
+        { type = "dialog", props = { speaker = "player" }, content = "Harder. I'm not made of glass any more. Fuck me harder." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "You never were." },
+    ] },
+    { advance_text = "Take all of it.", blocks = [
+        { type = "paragraph", content = "He fucks her harder, hips slapping, her cunt clenching round his cock, until he groans her name and cums deep inside her and she cums again with him, holding him so tight he can't pull out." },
+        { type = "dialog", props = { speaker = "player" }, content = "Stay in me. Don't you dare move." },
+    ] },
+    { advance_text = "Again.", blocks = [
+        { type = "video", props = { file = "sex/cain_for_real_finish_t5.webm", description = "A naked woman on her hands and knees on a blanket on a concrete floor in a dim lamp-lit lab, a man fucking her from behind with his hands on her hips, her head thrown back, sweat on her skin.", search_queries = ["doggy style blanket floor dim lamp couple", "woman on hands and knees fucked from behind dark room"] } },
+        { type = "paragraph", content = "Later she gets on her hands and knees on the blanket and looks back at him. He fucks her from behind, his cock deep in her cunt, his hands on her hips pulling her back onto him, her tits swinging." },
+        { type = "dialog", props = { speaker = "player" }, content = "Cum in me again. Fill me up, Cain." },
+    ] },
+    { advance_text = "Feel him.", blocks = [
+        { type = "paragraph", content = "He cums in her a second time with his chest against her back and his mouth on her neck, right on the seam, and she cums on his cock with her face in the blanket." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Vesper. Wren. Whatever you want me to call you." },
+        { type = "dialog", props = { speaker = "player" }, content = "Both. Call me both. Just don't pull out yet." },
+    ] },
+    { advance_text = "Lie with him.", blocks = [
+        { type = "paragraph", content = "After, they lie on the floor between the two cradles, the one that made her and the one that held Vega." },
+        { type = "dialog", props = { speaker = "player" }, content = "I know what you did. I'm not going to forget it. I'm choosing you anyway. Do you understand? I'm choosing." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I understand." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "He was the leash. The Chairman's last hold on me. And I just took it out of his hands." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Morning."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 540
+flagEffects = [
+  { targetType = "player", flag = "cain_chosen", op = "set" },
+]
+
+# ── O · THE END CARD. Terminal. beat_0237 (0.2.4). The only terminal Story-Goals card in the game again. ──
+# ⚠️ NO APOSTROPHE IN terminal_text — SugarCube source-byte escaping renders one as &amp;#x27; in the built page.
+# Every place named in the tip was re-read at beat_0237: Kess at the Berth 10:00-22:00 (his Site row ended at
+# back_in_body), the wreck on his table (kess_the_wreck, beat_0238); Cain at the Site 21:00-03:00; Bastien at the cot;
+# his men at the Undertow (Sol 10-24); Renner, Grier from ten, Sabin on the floor at eight and in his lab from eleven.
+[[quest_cards]]
+priority   = 10
+text       = "You know who you were, what they did to you, and who you loved. You chose him anyway. And on the top floors of the Rise, the company is building an army of empty bodies that only need one thing to fill them: what you have."
+tip        = "That is where this build ends. The wreck of Vega is on Kess's table at the Berth, and he is already looking at her arm. Cain keeps the nights at the Site. Bastien is at the cot and his men are at the Undertow. Renner's office is open, Grier is in his room from ten, and Sabin is on the floor at eight and in his lab from eleven. What Kess takes out of the wreck is the next release. If you want it sooner, Support Us in the sidebar."
+terminal      = true
+terminal_text = "Chapter complete. The story continues in the next release"
+when = [
+  { flag = "cain_chosen", op = "is_true" },
 ]

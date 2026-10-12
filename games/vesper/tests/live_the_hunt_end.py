@@ -40,7 +40,8 @@ with sync_playwright() as p:
     for line in ("Mind her head","like a coat on a hook","I said I would sit with it","Two cradles. Now she knows why."): ok(line in t, f"renders: {line}")
     pg.click("#passages a:has-text('Not tonight.')"); pg.wait_for_timeout(400)
     ok(flag(pg,'cradles_ready'), "cradles_ready")
-    qt=play(pg,'QuestsPage'); ok('That is where this build ends' in qt and 'Chapter complete' in qt and 'lying in the second cradle' in qt, "end card L")
+    # AMENDED beat_0239 (0.2.4): card L became card M (the study) in place, same opening line; the end card is O.
+    qt=play(pg,'QuestsPage'); ok('lying in the second cradle' in qt and "Read Vega's records" in qt and 'Chapter complete' not in qt, "card M (was end card L)")
     ok('&amp;#x27;' not in qt and '&#x27;' not in qt, "no escaped apostrophes")
     # the shell stays visible
     at(pg,14); t=play(pg,'Location_the_site'); ok('The cradles' in t, "day: 'The cradles' card on the Site")

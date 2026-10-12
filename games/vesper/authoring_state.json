@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 243,
+  "book_revision": 260,
   "register": {
     "person": "third"
   },
@@ -3141,6 +3141,189 @@
         "amb_bastien_cot"
       ],
       "notes": "Built 2026-10-05. LO, playing it: 'wren directly goes to berth/cot, and vega is no where... player can still see the vega lying there.' cap_the_table lost its Kess-hours gate (he waits up: 'Kess has waited up for them') and exits straight to the_site; cap_the_cradles lost its Cain-hours gate (he came with them) and fires on arrival — take, table, cradles, end card with no gap. New standing card site_the_cradles @the_site (cradles_ready): Vega's shell in the second cradle, her empty one beside it, Cain in the chair at night / his coat on it by day; new image scenes/the_shell_in_the_cradle.jpg. Bastien's cot card gains a cradles_ready band ('She is in Marrow's cradle, then. Good.'). Permanent live tests added: tests/live_the_hunt.py (the whole chapter, 33 checks) and tests/live_the_hunt_end.py (the ending + the standing view) — the scratch probes were lost when the scratchpad was cleared between sessions."
+    },
+    {
+      "id": "beat_0223",
+      "status": "validated",
+      "target_phase": "design_book.md",
+      "title": "0.2.4 — design book: kill-or-love becomes love (LO 'No kill.')",
+      "introduces": [],
+      "canvases": [],
+      "notes": "design_book.md: every kill-or-love line (88, 97, 116, 154, 321, 354, 443) struck through and rewritten as love, citing LO 'No kill.' and design_the_transfer.md; a grep for an unstruck 'kill-or-love' returns nothing. Document only, no TOML."
+    },
+    {
+      "id": "beat_0224",
+      "status": "validated",
+      "target_phase": "3_activities.toml",
+      "title": "0.2.4 — the numbers, Kess's Site row, activity_read_vega, quest card M",
+      "introduces": [],
+      "canvases": [
+        "activity_read_vega"
+      ],
+      "notes": "vega_records declared (0-9, hidden, label); Kess's second schedule row the_site 22:00-23:59 gated cradles_ready + back_in_body is_false (v1.0), directly under his berth row; activity_read_vega (Wren-solo @the_site, max 2/day, 15 Charge, +1 cap 9, 60 min, unlock screens at eq 3/6/9, scenes/vega_records.jpg); card L converted in place to card M (non-terminal, records goal, closes at last_night_held). check_the_hunt.py amended twice for intended changes (Kess's rows; L no longer terminal, at most one terminal card). New tests/check_the_transfer.py §0224, negative-tested (cap 3 caught). Merge OK, package --dev to output_dev green (flag chains valid), hunt/count/bunker guards OK, cascade guard OK, render guard's one hit pre-existing (react_renner_threat)."
+    },
+    {
+      "id": "beat_0225",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 — cap_study_blade",
+      "introduces": [],
+      "canvases": [
+        "cap_study_blade"
+      ],
+      "notes": "cap_study_blade (study night 1): auto-fire @the_site pri 11 one-shot, cradles_ready + study_blade is_false + Kess and Cain present (npc_at_location); the blade out of the forearm, Cain's knife on the armour; sets study_blade, 360 min; scenes/study_the_blade.jpg. Card M gains the study_blade goal + the 22:00-midnight tip. Narration:dialogue 1.26:1, 6 beats, max 51 words. Guard §0225 (study_night_checks helper). Build green, all guards OK."
+    },
+    {
+      "id": "beat_0226",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 — cap_study_signal",
+      "introduces": [],
+      "canvases": [
+        "cap_study_signal"
+      ],
+      "notes": "cap_study_signal (study night 2): same gate shape as night 1 on study_blade; the cell drains fast ('not long if you fight', spoken, never a number), the signal calls home and Kess smothers it with a damper; sets study_signal, 360 min; scenes/study_the_signal.jpg. Card M gains the study_signal goal. Narration:dialogue 0.94:1, 7 beats. Guard §0226. Build green, all guards OK."
+    },
+    {
+      "id": "beat_0227",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 — cap_study_method + quest card N",
+      "introduces": [],
+      "canvases": [
+        "cap_study_method"
+      ],
+      "notes": "cap_study_method (study night 3): gate shape as nights 1-2 on study_signal; she walks Kess through her own making at the two cradles (neck, spine, the count); the making has no faces; Cain silent in the chair (the flashback's plant, nothing said); Kess has a plan, 'not before' she knows the floors; sets study_method, 360 min; scenes/study_the_method.jpg. Card M gains the study_method goal and a ready_text (the blueprint's card N folded in: Story-Goals cards all render on match, and a when cannot say 'not every goal met'). Guard §0227 incl. a no-giveaway check. Build green, all guards OK."
+    },
+    {
+      "id": "beat_0228",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 — cap_last_night",
+      "introduces": [],
+      "canvases": [
+        "cap_last_night"
+      ],
+      "notes": "cap_last_night: auto-fire @the_site pri 11 one-shot, study_method + vega_records gte 9 + last_night_held is_false + Cain present (Kess not gated; the first line sends him to sleep, true at any hour Cain is there). She says she is afraid; Cain holds her on the floor between the cradles; 'You killed my father.' 'Yes.' 'Hold me anyway.' No sex (guard checks the words). Sets last_night_held, 540 min; scenes/last_night_cain.jpg. Narration:dialogue 1.29:1 after a rebalance from 2.01. Guard §0228. Build green."
+    },
+    {
+      "id": "beat_0229",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 — cap_the_transfer + card L un-terminaled",
+      "introduces": [],
+      "canvases": [
+        "cap_the_transfer"
+      ],
+      "notes": "cap_the_transfer (the run, link 1): auto-fire @the_site pri 11 one-shot, last_night_held + transferred is_false + Kess and Cain present. Neck, spine, the count; the dark; she wakes in Vega: sharp senses, Vega's voice, the strength, the blade (wrist down), Cain finds her in the face; 'I'm still scared' (the feeling came with her); a night on the bench. Sets transferred, 600 min (lands 08:00-09:59, inside Sabin's floor row, for the Rise). Two images. Narration:dialogue 1.29:1 after a rebalance from 3.90. Guard §0229 (run_link_checks helper: later links must carry NO presence gate). Card L un-terminaled already at beat_0224. Build green."
+    },
+    {
+      "id": "beat_0230",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 — cap_the_rise",
+      "introduces": [],
+      "canvases": [
+        "cap_the_rise"
+      ],
+      "notes": "cap_the_rise (the run, link 2): no presence gate; in on Vega's face (the damper lets doors hear her, smothers only the call home); Sabin's lab empty because his row has him on the floor till eleven (scene lands 08:00-09:59); the sign-out slip: released from the Chairman's vault, Vance Tower; the top floors: the production line of empty bodies (eleven of a thing, not eleven thousand); on the way out Sabin on the reading floor: 'You never look at anybody... I'll make a note.' She does not kill him; he does not learn the transfer works. Sets rise_searched, 180 min. Three images. Narration:dialogue 7.39:1: mostly solo (allowed: nobody to speak), the Sabin stretch is dialogue. Guard §0230. Build green."
+    },
+    {
+      "id": "beat_0231",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 — cap_tower_plan",
+      "introduces": [],
+      "canvases": [
+        "cap_tower_plan"
+      ],
+      "notes": "cap_tower_plan (the run, link 3): no presence gate; still in Vega; she tells Kess and Cain the slip (Chairman's vault, Vance Tower) and the line of empty bodies (Kess: eleven of a thing, not eleven thousand; Sabin solved it); the route from Vega's records; Cain: carry it out unopened, to the Waterfront (where the car to the Spire waits) by three, Bastien's men and him there. No rescue pact (LO: they come because she is late). Kess charges the cell all day; 600 min lands the Tower at night. scenes/the_tower_plan.jpg. Narration:dialogue 0.38:1. Guard §0231 incl. a no-pact check. Build green."
+    },
+    {
+      "id": "beat_0232",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 — cap_the_vault",
+      "introduces": [],
+      "canvases": [
+        "cap_the_vault"
+      ],
+      "notes": "cap_the_vault (the run, link 4): no presence gate; the car up from the Waterfront, the Atrium desk, the lift to a floor with no number (the Chairman's floor is never placed above the penthouse, which is the Tower's top floor), two guards; real choice at the door (blade now / wait for the change, which is two fresh guards) both meeting at .blade; two dead, the alarm, the vault: drawers of names, hers says Vesper, one sealed sample like the two Cain seated; carried out unopened. Chairman never on screen; Spire stays sealed (a scene, not a map visit). Sets memory_taken, 120 min. Two images. Mostly solo action with guard lines (unknown speakers). Guard §0232. Build green."
+    },
+    {
+      "id": "beat_0233",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 — cap_lyra_and_nova",
+      "introduces": [],
+      "canvases": [
+        "cap_lyra_and_nova"
+      ],
+      "notes": "cap_lyra_and_nova (the run, link 5): no presence gate; down the stairs, the company shuts her signal off (doors stop, cameras stare); Spire Plaza at night; Lyra and Nova (no NPC entries, no lines, never killed) hold nothing back; she gets the blade into one, loses the left arm half off; no pain so the body keeps breaking; the cell drains; on her knees, throat held, the sample in her good fist; she will not make the Waterfront by three. Sets units_fought, 60 min. Two images. Silent scene (nobody speaks: allowed). Guard §0233. Build green."
+    },
+    {
+      "id": "beat_0234",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 — cap_dace_falls + the Dace truth sweep",
+      "introduces": [],
+      "canvases": [
+        "cap_dace_falls"
+      ],
+      "notes": "cap_dace_falls (the run, link 6): no presence gate; nobody called them, she was late; Cain on Nova's seam, Nova drops; Lyra drags her up, both burning out, driven off not killed ('Let them go'); Dace steps into Lyra's way ('Not her') and she breaks him; Bastien closes his eyes: 'I have paid for a great many coffins. I did not think I would pay for his.' Sets dace_dead, 120 min. Two images. Narration:dialogue 1.78:1 (action scene, was 3.51). Truth sweep: amb_bastien_cot gets a dace_dead band between the face band and the cradles band ('One fewer on my books'), which also retires the cradles band's 'She is in Marrow's cradle'; Bastien card 27 (priority 27, terminal, dace_dead) above card 26. Guard §0234. Build green, all guards OK."
+    },
+    {
+      "id": "beat_0235",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 — cap_back_in_body",
+      "introduces": [],
+      "canvases": [
+        "cap_back_in_body"
+      ],
+      "notes": "cap_back_in_body (the run, link 7): no presence gate; the wreck in the second cradle, its cell almost dry; Kess counts up, spine then neck, the first time he has put anybody back; she wakes in her own body (aching since the night before last), 'I can feel my own hands'; Kess breaks two of the wreck's fingers for the sample; 'Dace died for it'; Kess seats the third piece, Cain cannot look at her ('I'm still here when you come out'). LO's order held (body first, then the memory; the guard checks the order). Sets back_in_body (ends Kess's Site row), 30 min. scenes/back_in_her_body.jpg. Narration:dialogue measured after a rebalance (was 2.24). Note: beat_0234's log said 1.78:1; the final measure was 1.69:1. Guard §0235. Build green."
+    },
+    {
+      "id": "beat_0236",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 — cap_the_whole_memory (explicit, Cain ceiling signed)",
+      "introduces": [],
+      "canvases": [
+        "cap_the_whole_memory"
+      ],
+      "notes": "cap_the_whole_memory (the run, link 8, THE FLASHBACK, explicit, Cain ceiling signed): no presence gate; she is Vesper, twenty-four (adult on the page), Marrow's daughter, in the lab when it was new; Cain, his first; she loves him; in her room above the lab: kissing, his hands on her tits, naked, her mouth on his cock, his mouth on her cunt, she cums, fucking missionary then on top, he cums in her; 'I love you, Cain'; then the lab a year on: the making with faces (her father opening her, Cain holding her down, 'It has to be her', she begs); the erasure plan ('You first, then her, then me'); her father dead under Cain's hands as asked; the company at the door; Cain losing ('I'll find you'); taken unfinished. Sex and lab never share a beat (guard). Three clips, one file each. Marrow quoted in narration (no Stranger line). Narration:dialogue 2.77:1 (capstone with interior; was 7.95). Guard §0236 incl. frozen-word floor per clip beat (caught a 2-word beat, fixed). gates.py: no new failing gate; new entries in old FAILs reviewed: Kess is a DEAD presence at the Site 22:00-23:59 (no card of his) -> his Site card lands at beat_0238; the cradles_ready latch is ended by the row's back_in_body clause (gate sees only the first flag)."
+    },
+    {
+      "id": "beat_0237",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 — cap_cain_for_real + end card O",
+      "introduces": [],
+      "canvases": [
+        "cap_cain_for_real"
+      ],
+      "notes": "cap_cain_for_real (the run, last link, explicit, Cain ceiling signed): no presence gate; Kess has taken the wreck down; she asks each thing (held me down / going to kill me / you loved me) and Cain says yes to each; the Chairman kept it so she'd hate him; 'I don't hate you'; kissing, naked on the blanket between the cradles, her mouth on his cock, his mouth on her cunt, she cums, missionary, he cums in her, a second time from behind (vaginal), cum again; the meaning in its own beat ('I'm choosing you anyway'; the Chairman's leash taken out of his hands). No anal. Three clips, one file each. No year count (Grier's nine vs Bastien's eleven). Sets cain_chosen, 540 min. End card O (terminal, cain_chosen, tip re-read place by place). Narration:dialogue 1.82:1. Guard §0237: exactly one terminal story card again. Build green."
+    },
+    {
+      "id": "beat_0238",
+      "status": "validated",
+      "target_phase": "3_activities.toml",
+      "title": "0.2.4 — what stands after: site_the_cradles bands, kess_the_wreck, Cain/Kess truth sweep",
+      "introduces": [],
+      "canvases": [
+        "kess_the_wreck"
+      ],
+      "notes": "What stands after the run. site_the_cradles rebuilt as two chains split by one ungrouped line (shell until back_in_body, then the empty cradle; Cain waiting through the study, then her lover from cain_chosen); the shell image shows only while the shell is there; its 0.2.3 'stays true all the way to 0.2.4' comment retired. activity_cain_trains: a cain_chosen band leads the chain. NEW activity_kess_site (Kess's portrait hub at the Site for his 22:00-23:59 row, banded on the study state; fixes gates.py's DEAD-presence finding). NEW kess_the_wreck (Wren-solo @kess_berth from back_in_body; Kess learning the blade arm; plant for 0.2.5; promises no date; scenes/the_wreck_on_the_table.jpg). check_the_hunt.py §0216 amended (cain_chosen band now leads; the after-the-take band is first below it); the hunt guard's per-screen ratio caught the cradle card at 3.40/4.07 and it was tightened until it passed. Guard §0238. Build green, all guards OK."
+    },
+    {
+      "id": "beat_0239",
+      "status": "validated",
+      "target_phase": "tests",
+      "title": "0.2.4 — tests/check_the_transfer.py + tests/live_the_transfer.py",
+      "introduces": [],
+      "canvases": [],
+      "notes": "tests/live_the_transfer.py: the whole chapter in a real browser (0.2.3 take -> end card O -> what stands after), incl. the twice-a-day cap on the Site's card list and the vault's wait branch; it caught the Rise rendering at 11:10 (exit minutes apply on render), fixed by retuning transfer 480 / plan 720 / fight 120 / save 210 (Rise 09:10, fight 01:19, save 04:49, measured). check_the_transfer.py complete §0224-§0238. live_the_hunt / live_the_hunt_end amended (card M after the cradles). All guards and all seven live suites OK. Leak check clean. BUILT section written into design_the_transfer.md. 0.2.4 is BUILT, uncommitted; media harvest (25 slots) and release are LO's."
     }
   ],
   "structure_registry": {
@@ -4062,7 +4245,8 @@
     ]
   },
   "next_up": [
-    "0.2.3 — HER FATHER'S HOUSE and THE HUNT is BUILT (beats 0206-0218, rev 240), uncommitted. LO's, in order: (1) review + commit; (2) the media harvest — 25 slots (design_the_hunt.md 'BUILT · Media'); (3) sign the crew-night ceiling row; (4) the paid guide needs 0.2.3 chapters and the fighting 85 gate; (5) version bump + publish build (drop --dev/--debug) at release; (6) flip-able calls listed in design_the_hunt.md.",
+    "0.2.4 — THE TRANSFER is BUILT 2026-10-12 (beats 0223-0239, rev 244-260), uncommitted. LO's, in order: (1) review + commit; (2) the media harvest, 25 slots (design_the_transfer.md 'BUILT · Media'); (3) release: version bump, codes rotation, guide chapters, build without --dev/--debug, snapshot, uploads/posts; (4) the blueprint's flip-able calls, all standing as built.",
+    "RELEASED — 0.2.3 HER FATHER'S HOUSE and THE HUNT shipped 2026-10-05 and 0.2.3.1 (the clock setting) 2026-10-09, both committed. Still LO's from that list: the media harvest, the crew-night ceiling row, and the flip-able calls in design_the_hunt.md. 0.2.3 — HER FATHER'S HOUSE and THE HUNT is BUILT (beats 0206-0218, rev 240), uncommitted. LO's, in order: (1) review + commit; (2) the media harvest — 25 slots (design_the_hunt.md 'BUILT · Media'); (3) sign the crew-night ceiling row; (4) the paid guide needs 0.2.3 chapters and the fighting 85 gate; (5) version bump + publish build (drop --dev/--debug) at release; (6) flip-able calls listed in design_the_hunt.md.",
     "RESOLVED 2026-10-02 — MARKET CAP. underworld_market_shop's two buys are one-time now (flags market_weapon_bought / market_gear_bought, each choice gated is_false). design_cheat_page.md §11.1 marked resolved.",
     "THE RINGS, two calls flagged to LO and not yet answered (design_the_rings.md 'Decisions'): (1) the door man is emitter-or-grind — the clean pass needs a silent run AND an unspent budget, so in practice the rescue is gated behind the emitter's 10-coin-and-a-day reload or fighting 70; (2) the slab's round runs 20:00-23:59, night rather than day. Both are one-line flips.",
     "THE WAY DOWN media harvest — 8 slots authored and empty: portraits/loder.jpg, scenes/the_plant_room.jpg, and sex/bunker_g1_crate_t5 / g2_water_t5 / g3_table_t5 / g4_bench_t5 / g5_desk_t5 / bunker_door_t5 (pool = 4 each). Every block already carries description + search_queries. Needs the find-media pipeline; nothing else in the release is outstanding.",
@@ -4072,7 +4256,7 @@
     "⚠️ OPEN ITEM 5, STILL LO's CALL — cap_grier_met, cap_grier_gives and cap_sabin_hires auto-fire with their NPC absent. One npc_at_location … is_present clause each; the fix is proved on cap_sabin_consults. It re-opens three validated beats.",
     "⚠️ STILL OPEN — the template_import.py:5375 engine bug (warnings.append where warnings is the stdlib module)."
   ],
-  "_active_beat": "0.2.3 HER FATHER'S HOUSE and THE HUNT — BUILT 2026-10-04 (rev 240), beats 0206-0218, all validated. Uncommitted, awaiting LO. Media harvest (21 slots) held for LO.",
+  "_active_beat": "0.2.4 THE TRANSFER — BUILT 2026-10-12 (beats 0223-0239, rev 260), all validated. Uncommitted, awaiting LO. Media harvest (25 slots) held for LO.",
   "decisions_log": [
     {
       "turn": 1,
@@ -5235,6 +5419,23 @@
     "2026-10-05 — Quests-page audit (LO: 'see if the quests page has been updated properly'), fixed on LO's go. Live dump of the page at 20 points through the chapter found: (1) Bastien's terminal card 26 said Vega 'is lying in his room', false from the table on since beat_0222 — now 'will never come down it again'; (2) card J lost its whole goal list once the four goals were met (engine hides goals when all met, no ready_text) and never listed vega_plan, which activity_draw_her_out requires — added the vega_plan goal, a ready_text, and a tip line pointing at the draw; (3) the damage goal read '35 / 30' like progress — label now 'Damage under 30 (Kess, at the Berth)'; (4) Story Goals went blank for the whole Site scene (marrow_known set on cap_the_site's render, card K waits for the strip) — card I now closes on site_ambushed with a reveal-free ready_text; (5) card 24 'after Sol shuts' now 'after ten, when Sol has gone home', matching the tip and the scene's 22:00 gate. check_the_hunt §0207 updated. Verified: build green, guards OK, live_the_hunt / live_the_hunt_end / live_the_count OK, page re-dumped at every step, 0 JS errors.",
     "2026-10-05 — RELEASE 0.2.3 (LO: 'release it ... without dev and debug flags, take the release snapshot'). Version 0.2.2 -> 0.2.3 and release_date 2026-10-05 in [project], the games-data.js portal entry, and the untracked codes file (words rotated per its own ROTATION rule; old set backed up to codes.toml.bak-v0.2.2, untracked). Merged with --no-dev (the release setting), packaged without --dev/--debug. Measured on the output: 0 dev_jump, 0 dev_mode_enabled, 0 debug media descriptions, 0 literal '0.2.2', footer reads v0.2.3 · 2026-10-05, no cheat word in plaintext. Release smoke in a browser: boots to Start, 0 dev passages, all six new codes accepted by setup.cheatTry, all six 0.2.2 words rejected, 0 JS errors. Snapshot: releases/v0.2.3.html. Not done (LO's): the paid guide PDF for 0.2.3 (build_guide), dist/ zip and post, portal summary text.",
     "2026-10-05 — Paid guide for 0.2.3 (LO: 'make sure to update the guide properly'). guide.md (untracked) brought to 0.2.3: version/date/example code; Act 10 Her Father's House and Act 11 Vega written in the Act 8/9 shape (rung table, losing, damage and Kess, Cain's nights, Bastien's men, the five-condition last fight, 'she can find you first', after); stale lines fixed (Fighting 'nothing reads it above 40', infiltration gear 'over and over', Fighting cap 70, Act 9 'where the build stops', Undertow epilogue); Body meter row; counts re-read from the release merge: 35 locations, 20 people, 261 scenes, 124 quest entries, 540 choices (0.2.2's 259/528 had counted 15 dev canvases). check_guide_numbers: 41 claims, ALL VERIFIED; hours checked against schedules and scene gates by hand. PDF vesper_guide_v0.2.3.pdf, 36 pages, new codes on the codes page, no 0.2.2 string. Patreon 2_guide.txt / 3_discord.txt updated to the real page count and act names.",
-    "2026-10-09 — RELEASE 0.2.3.1: the clock setting (LO: 'add a small update. Settings tab ... date change format, 24 hr or Am / pm', then 'build it as 0.2.3.1'; asked for on F95 by Skyllah). ENGINE (v2.py, all games): Setting.addToggle('clock24') beside Config.saves, so SugarCube shows its own Settings button in the Saves/Restart menu; stored per browser, outside every save, so the save schema is untouched. setup.formatTime is now the one place a time is written (12-hour default unchanged, 24-hour 'HH:MM', a compact flag for the '8 AM' form), plus setup.formatHHMM and setup.clockText. Routed through it: the sidebar clock (updateTimeDisplay and the timeFormatted widget, golden en9_timewidgets_golden.txt updated), the Schedule page's two tables (which printed raw '22:00-06:00' beside a sidebar reading '10:30 PM'), the canvas schedule line, the time-of-day gate text, and the three hint surfaces that print a help_data schedule string. _format_schedule_human_readable now writes each time as a ⟦t:HH:MM⟧ marker that the page formats on display; a missed consumer shows the raw marker, and the smoke test greps every sidebar page for it. Story prose ('2 am', 'eleven') is untouched by design. onChange re-renders only once State.length > 0 (the first try gated on Engine.state, which is 'idle' between passages, and did nothing; the smoke caught it). RELEASE: version and release_date in [project], the games-data.js entry and the untracked codes file (rotated; 0.2.3 set backed up to codes.toml.bak-v0.2.3); release merge --no-dev, package without --dev/--debug, snapshot releases/v0.2.3.1.html. Guide: version, date, example code, a 'New in 0.2.3.1 — the clock' paragraph; PDF vesper_guide_v0.2.3.1.pdf, 36 pages, all six new codes and none of the old; check_guide_numbers ALL VERIFIED. VERIFIED: test_sidebar_value 7/7; the three guards and live_the_hunt / live_the_hunt_end / live_the_count OK on a dev build; release smoke OK (12-hour output identical to 0.2.3, 'between 8 AM - 8 PM'; ticking the box in the real dialog flips the sidebar to 21:30 with no click and the schedule sentence to 'between 08:00 - 20:00'; it survives a reload and a save load; no raw marker on Schedule/Quests/Stats/Tips in either mode; 6/6 new codes accepted, 0/6 old; footer v0.2.3.1; 0 JS errors)."
+    "2026-10-09 — RELEASE 0.2.3.1: the clock setting (LO: 'add a small update. Settings tab ... date change format, 24 hr or Am / pm', then 'build it as 0.2.3.1'; asked for on F95 by Skyllah). ENGINE (v2.py, all games): Setting.addToggle('clock24') beside Config.saves, so SugarCube shows its own Settings button in the Saves/Restart menu; stored per browser, outside every save, so the save schema is untouched. setup.formatTime is now the one place a time is written (12-hour default unchanged, 24-hour 'HH:MM', a compact flag for the '8 AM' form), plus setup.formatHHMM and setup.clockText. Routed through it: the sidebar clock (updateTimeDisplay and the timeFormatted widget, golden en9_timewidgets_golden.txt updated), the Schedule page's two tables (which printed raw '22:00-06:00' beside a sidebar reading '10:30 PM'), the canvas schedule line, the time-of-day gate text, and the three hint surfaces that print a help_data schedule string. _format_schedule_human_readable now writes each time as a ⟦t:HH:MM⟧ marker that the page formats on display; a missed consumer shows the raw marker, and the smoke test greps every sidebar page for it. Story prose ('2 am', 'eleven') is untouched by design. onChange re-renders only once State.length > 0 (the first try gated on Engine.state, which is 'idle' between passages, and did nothing; the smoke caught it). RELEASE: version and release_date in [project], the games-data.js entry and the untracked codes file (rotated; 0.2.3 set backed up to codes.toml.bak-v0.2.3); release merge --no-dev, package without --dev/--debug, snapshot releases/v0.2.3.1.html. Guide: version, date, example code, a 'New in 0.2.3.1 — the clock' paragraph; PDF vesper_guide_v0.2.3.1.pdf, 36 pages, all six new codes and none of the old; check_guide_numbers ALL VERIFIED. VERIFIED: test_sidebar_value 7/7; the three guards and live_the_hunt / live_the_hunt_end / live_the_count OK on a dev build; release smoke OK (12-hour output identical to 0.2.3, 'between 8 AM - 8 PM'; ticking the box in the real dialog flips the sidebar to 21:30 with no click and the schedule sentence to 'between 08:00 - 20:00'; it survives a reload and a save load; no raw marker on Schedule/Quests/Stats/Tips in either mode; 6/6 new codes accepted, 0/6 old; footer v0.2.3.1; 0 JS errors).",
+    "2026-10-12 — beat_0223 VALIDATED (0.2.4 THE TRANSFER, rev 244). design_book.md: every kill-or-love line (88, 97, 116, 154, 321, 354, 443) struck through and rewritten as love, citing LO 'No kill.' and design_the_transfer.md; a grep for an unstruck 'kill-or-love' returns nothing. Document only, no TOML.",
+    "2026-10-12 — beat_0224 VALIDATED (0.2.4 THE TRANSFER, rev 245). vega_records declared (0-9, hidden, label); Kess's second schedule row the_site 22:00-23:59 gated cradles_ready + back_in_body is_false (v1.0), directly under his berth row; activity_read_vega (Wren-solo @the_site, max 2/day, 15 Charge, +1 cap 9, 60 min, unlock screens at eq 3/6/9, scenes/vega_records.jpg); card L converted in place to card M (non-terminal, records goal, closes at last_night_held). check_the_hunt.py amended twice for intended changes (Kess's rows; L no longer terminal, at most one terminal card). New tests/check_the_transfer.py §0224, negative-tested (cap 3 caught). Merge OK, package --dev to output_dev green (flag chains valid), hunt/count/bunker guards OK, cascade guard OK, render guard's one hit pre-existing (react_renner_threat).",
+    "2026-10-12 — beat_0225 VALIDATED (0.2.4 THE TRANSFER, rev 246). cap_study_blade (study night 1): auto-fire @the_site pri 11 one-shot, cradles_ready + study_blade is_false + Kess and Cain present (npc_at_location); the blade out of the forearm, Cain's knife on the armour; sets study_blade, 360 min; scenes/study_the_blade.jpg. Card M gains the study_blade goal + the 22:00-midnight tip. Narration:dialogue 1.26:1, 6 beats, max 51 words. Guard §0225 (study_night_checks helper). Build green, all guards OK.",
+    "2026-10-12 — beat_0226 VALIDATED (0.2.4 THE TRANSFER, rev 247). cap_study_signal (study night 2): same gate shape as night 1 on study_blade; the cell drains fast ('not long if you fight', spoken, never a number), the signal calls home and Kess smothers it with a damper; sets study_signal, 360 min; scenes/study_the_signal.jpg. Card M gains the study_signal goal. Narration:dialogue 0.94:1, 7 beats. Guard §0226. Build green, all guards OK.",
+    "2026-10-12 — beat_0227 VALIDATED (0.2.4 THE TRANSFER, rev 248). cap_study_method (study night 3): gate shape as nights 1-2 on study_signal; she walks Kess through her own making at the two cradles (neck, spine, the count); the making has no faces; Cain silent in the chair (the flashback's plant, nothing said); Kess has a plan, 'not before' she knows the floors; sets study_method, 360 min; scenes/study_the_method.jpg. Card M gains the study_method goal and a ready_text (the blueprint's card N folded in: Story-Goals cards all render on match, and a when cannot say 'not every goal met'). Guard §0227 incl. a no-giveaway check. Build green, all guards OK.",
+    "2026-10-12 — beat_0228 VALIDATED (0.2.4 THE TRANSFER, rev 249). cap_last_night: auto-fire @the_site pri 11 one-shot, study_method + vega_records gte 9 + last_night_held is_false + Cain present (Kess not gated; the first line sends him to sleep, true at any hour Cain is there). She says she is afraid; Cain holds her on the floor between the cradles; 'You killed my father.' 'Yes.' 'Hold me anyway.' No sex (guard checks the words). Sets last_night_held, 540 min; scenes/last_night_cain.jpg. Narration:dialogue 1.29:1 after a rebalance from 2.01. Guard §0228. Build green.",
+    "2026-10-12 — beat_0229 VALIDATED (0.2.4 THE TRANSFER, rev 250). cap_the_transfer (the run, link 1): auto-fire @the_site pri 11 one-shot, last_night_held + transferred is_false + Kess and Cain present. Neck, spine, the count; the dark; she wakes in Vega: sharp senses, Vega's voice, the strength, the blade (wrist down), Cain finds her in the face; 'I'm still scared' (the feeling came with her); a night on the bench. Sets transferred, 600 min (lands 08:00-09:59, inside Sabin's floor row, for the Rise). Two images. Narration:dialogue 1.29:1 after a rebalance from 3.90. Guard §0229 (run_link_checks helper: later links must carry NO presence gate). Card L un-terminaled already at beat_0224. Build green.",
+    "2026-10-12 — beat_0230 VALIDATED (0.2.4 THE TRANSFER, rev 251). cap_the_rise (the run, link 2): no presence gate; in on Vega's face (the damper lets doors hear her, smothers only the call home); Sabin's lab empty because his row has him on the floor till eleven (scene lands 08:00-09:59); the sign-out slip: released from the Chairman's vault, Vance Tower; the top floors: the production line of empty bodies (eleven of a thing, not eleven thousand); on the way out Sabin on the reading floor: 'You never look at anybody... I'll make a note.' She does not kill him; he does not learn the transfer works. Sets rise_searched, 180 min. Three images. Narration:dialogue 7.39:1: mostly solo (allowed: nobody to speak), the Sabin stretch is dialogue. Guard §0230. Build green.",
+    "2026-10-12 — beat_0231 VALIDATED (0.2.4 THE TRANSFER, rev 252). cap_tower_plan (the run, link 3): no presence gate; still in Vega; she tells Kess and Cain the slip (Chairman's vault, Vance Tower) and the line of empty bodies (Kess: eleven of a thing, not eleven thousand; Sabin solved it); the route from Vega's records; Cain: carry it out unopened, to the Waterfront (where the car to the Spire waits) by three, Bastien's men and him there. No rescue pact (LO: they come because she is late). Kess charges the cell all day; 600 min lands the Tower at night. scenes/the_tower_plan.jpg. Narration:dialogue 0.38:1. Guard §0231 incl. a no-pact check. Build green.",
+    "2026-10-12 — beat_0232 VALIDATED (0.2.4 THE TRANSFER, rev 253). cap_the_vault (the run, link 4): no presence gate; the car up from the Waterfront, the Atrium desk, the lift to a floor with no number (the Chairman's floor is never placed above the penthouse, which is the Tower's top floor), two guards; real choice at the door (blade now / wait for the change, which is two fresh guards) both meeting at .blade; two dead, the alarm, the vault: drawers of names, hers says Vesper, one sealed sample like the two Cain seated; carried out unopened. Chairman never on screen; Spire stays sealed (a scene, not a map visit). Sets memory_taken, 120 min. Two images. Mostly solo action with guard lines (unknown speakers). Guard §0232. Build green.",
+    "2026-10-12 — beat_0233 VALIDATED (0.2.4 THE TRANSFER, rev 254). cap_lyra_and_nova (the run, link 5): no presence gate; down the stairs, the company shuts her signal off (doors stop, cameras stare); Spire Plaza at night; Lyra and Nova (no NPC entries, no lines, never killed) hold nothing back; she gets the blade into one, loses the left arm half off; no pain so the body keeps breaking; the cell drains; on her knees, throat held, the sample in her good fist; she will not make the Waterfront by three. Sets units_fought, 60 min. Two images. Silent scene (nobody speaks: allowed). Guard §0233. Build green.",
+    "2026-10-12 — beat_0234 VALIDATED (0.2.4 THE TRANSFER, rev 255). cap_dace_falls (the run, link 6): no presence gate; nobody called them, she was late; Cain on Nova's seam, Nova drops; Lyra drags her up, both burning out, driven off not killed ('Let them go'); Dace steps into Lyra's way ('Not her') and she breaks him; Bastien closes his eyes: 'I have paid for a great many coffins. I did not think I would pay for his.' Sets dace_dead, 120 min. Two images. Narration:dialogue 1.78:1 (action scene, was 3.51). Truth sweep: amb_bastien_cot gets a dace_dead band between the face band and the cradles band ('One fewer on my books'), which also retires the cradles band's 'She is in Marrow's cradle'; Bastien card 27 (priority 27, terminal, dace_dead) above card 26. Guard §0234. Build green, all guards OK.",
+    "2026-10-12 — beat_0235 VALIDATED (0.2.4 THE TRANSFER, rev 256). cap_back_in_body (the run, link 7): no presence gate; the wreck in the second cradle, its cell almost dry; Kess counts up, spine then neck, the first time he has put anybody back; she wakes in her own body (aching since the night before last), 'I can feel my own hands'; Kess breaks two of the wreck's fingers for the sample; 'Dace died for it'; Kess seats the third piece, Cain cannot look at her ('I'm still here when you come out'). LO's order held (body first, then the memory; the guard checks the order). Sets back_in_body (ends Kess's Site row), 30 min. scenes/back_in_her_body.jpg. Narration:dialogue measured after a rebalance (was 2.24). Note: beat_0234's log said 1.78:1; the final measure was 1.69:1. Guard §0235. Build green.",
+    "2026-10-12 — beat_0236 VALIDATED (0.2.4 THE TRANSFER, rev 257). cap_the_whole_memory (the run, link 8, THE FLASHBACK, explicit, Cain ceiling signed): no presence gate; she is Vesper, twenty-four (adult on the page), Marrow's daughter, in the lab when it was new; Cain, his first; she loves him; in her room above the lab: kissing, his hands on her tits, naked, her mouth on his cock, his mouth on her cunt, she cums, fucking missionary then on top, he cums in her; 'I love you, Cain'; then the lab a year on: the making with faces (her father opening her, Cain holding her down, 'It has to be her', she begs); the erasure plan ('You first, then her, then me'); her father dead under Cain's hands as asked; the company at the door; Cain losing ('I'll find you'); taken unfinished. Sex and lab never share a beat (guard). Three clips, one file each. Marrow quoted in narration (no Stranger line). Narration:dialogue 2.77:1 (capstone with interior; was 7.95). Guard §0236 incl. frozen-word floor per clip beat (caught a 2-word beat, fixed). gates.py: no new failing gate; new entries in old FAILs reviewed: Kess is a DEAD presence at the Site 22:00-23:59 (no card of his) -> his Site card lands at beat_0238; the cradles_ready latch is ended by the row's back_in_body clause (gate sees only the first flag).",
+    "2026-10-12 — beat_0237 VALIDATED (0.2.4 THE TRANSFER, rev 258). cap_cain_for_real (the run, last link, explicit, Cain ceiling signed): no presence gate; Kess has taken the wreck down; she asks each thing (held me down / going to kill me / you loved me) and Cain says yes to each; the Chairman kept it so she'd hate him; 'I don't hate you'; kissing, naked on the blanket between the cradles, her mouth on his cock, his mouth on her cunt, she cums, missionary, he cums in her, a second time from behind (vaginal), cum again; the meaning in its own beat ('I'm choosing you anyway'; the Chairman's leash taken out of his hands). No anal. Three clips, one file each. No year count (Grier's nine vs Bastien's eleven). Sets cain_chosen, 540 min. End card O (terminal, cain_chosen, tip re-read place by place). Narration:dialogue 1.82:1. Guard §0237: exactly one terminal story card again. Build green.",
+    "2026-10-12 — beat_0238 VALIDATED (0.2.4 THE TRANSFER, rev 259). What stands after the run. site_the_cradles rebuilt as two chains split by one ungrouped line (shell until back_in_body, then the empty cradle; Cain waiting through the study, then her lover from cain_chosen); the shell image shows only while the shell is there; its 0.2.3 'stays true all the way to 0.2.4' comment retired. activity_cain_trains: a cain_chosen band leads the chain. NEW activity_kess_site (Kess's portrait hub at the Site for his 22:00-23:59 row, banded on the study state; fixes gates.py's DEAD-presence finding). NEW kess_the_wreck (Wren-solo @kess_berth from back_in_body; Kess learning the blade arm; plant for 0.2.5; promises no date; scenes/the_wreck_on_the_table.jpg). check_the_hunt.py §0216 amended (cain_chosen band now leads; the after-the-take band is first below it); the hunt guard's per-screen ratio caught the cradle card at 3.40/4.07 and it was tightened until it passed. Guard §0238. Build green, all guards OK.",
+    "2026-10-12 — beat_0239 VALIDATED (0.2.4 THE TRANSFER, rev 260). tests/live_the_transfer.py: the whole chapter in a real browser (0.2.3 take -> end card O -> what stands after), incl. the twice-a-day cap on the Site's card list and the vault's wait branch; it caught the Rise rendering at 11:10 (exit minutes apply on render), fixed by retuning transfer 480 / plan 720 / fight 120 / save 210 (Rise 09:10, fight 01:19, save 04:49, measured). check_the_transfer.py complete §0224-§0238. live_the_hunt / live_the_hunt_end amended (card M after the cradles). All guards and all seven live suites OK. Leak check clean. BUILT section written into design_the_transfer.md. 0.2.4 is BUILT, uncommitted; media harvest (25 slots) and release are LO's."
   ]
 }

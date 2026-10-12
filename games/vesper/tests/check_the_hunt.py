@@ -71,7 +71,8 @@ def main():
     expected_rows = {
         "npc_grier": {"grier_room"},
         "npc_sabin": {"the_rise_floor", "sabin_lab"},
-        "npc_kess": {"kess_berth"},
+        # beat_0224 (0.2.4): Kess gains the_site 22:00-23:59 for the study and the transfer, on purpose.
+        "npc_kess": {"kess_berth", "the_site"},
         "npc_bastien": {"bastien_backroom", "the_cot"},
         "npc_sol": {"underworld_bar"},
     }
@@ -402,7 +403,10 @@ def main():
         check(bands == [(("gte", 85),), (("gte", 70), ("lt", 85)), (("lt", 70),)],
               f"0211: base needs three fighting bands 85+ / 70-84 / under 70, got {bands}")
         fg = [b for b in nodes_.get("base", {}).get("blocks", []) if b.get("type") == "group"]
-        check(fg and has_flag(((fg[0].get("props") or {}).get("conditions") or {}).get("items") or [], "vega_taken", "is_true"),
+        # AMENDED beat_0238 (0.2.4): a cain_chosen band now leads the chain (newest state first); the after-the-take
+        # band is the first band below it, still ahead of the fighting bands.
+        lead = [g for g in fg if not has_flag(((g.get("props") or {}).get("conditions") or {}).get("items") or [], "cain_chosen", "is_true")]
+        check(lead and has_flag(((lead[0].get("props") or {}).get("conditions") or {}).get("items") or [], "vega_taken", "is_true"),
               "0216: Cain's base opens with the after-the-take band (vega_taken), ahead of the fighting bands")
         ch = (nodes_.get("base", {}).get("exit_block") or {}).get("choices") or []
         trains = [c for c in ch if c.get("text") == "Train with him."]
@@ -839,14 +843,20 @@ def main():
     ck = [c for c in cards if not c.get("npc_id") and {"flag": "vega_taken", "op": "is_true"} in c.get("when", [])
           and {"flag": "vega_dismantled", "op": "is_false"} in c.get("when", [])]
     check(len(ck) == 1, "0217: one story card K (vega_taken + vega_dismantled is_false)")
-    cl = [c for c in cards if not c.get("npc_id") and c.get("terminal") and {"flag": "cradles_ready", "op": "is_true"} in c.get("when", [])]
-    check(len(cl) == 1, "0221: one story end card L, now on cradles_ready (the shell in the cradle is the last scene)")
+    # ⚠️ AMENDED beat_0224 (0.2.4, THE TRANSFER): card L stopped being the end. It became card M (the study) in place,
+    # still on cradles_ready, and the end card moves to O on cain_chosen (beat_0237). What 0.2.3 asserted here is
+    # now asserted the way 0.2.4 leaves it: the cradles_ready story card is live and NOT terminal, no card says
+    # "That is where this build ends" while more is coming, and there is AT MOST one terminal Story-Goals card
+    # (zero mid-build, exactly one once O lands; check_the_transfer.py §0237 asserts the one).
+    cl = [c for c in cards if not c.get("npc_id") and {"flag": "cradles_ready", "op": "is_true"} in c.get("when", [])]
+    check(len(cl) == 1, "0221/0224: one story card on cradles_ready (L, now M, the study)")
     if cl:
-        check(cl[0].get("terminal") is True and cl[0].get("terminal_text"), "0217: card L is terminal, with terminal_text")
-        check("'" not in (cl[0].get("terminal_text") or ""), "0217: no apostrophe in terminal_text (SugarCube source-byte escaping)")
-        check("That is where this build ends" in (cl[0].get("tip") or ""), "0217: the end card says where the build ends")
+        check(not cl[0].get("terminal"), "0224: the cradles_ready card is no longer terminal (0.2.4 continues past it)")
+        check("That is where this build ends" not in (cl[0].get("tip") or ""), "0224: the study card does not say the build ends")
     terms = [c for c in cards if not c.get("npc_id") and c.get("terminal")]
-    check(len(terms) == 1, f"0217: exactly one terminal Story-Goals card in the game, found {len(terms)}")
+    check(len(terms) <= 1, f"0217/0224: at most one terminal Story-Goals card in the game, found {len(terms)}")
+    for c in terms:
+        check("'" not in (c.get("terminal_text") or ""), "0217: no apostrophe in terminal_text (SugarCube source-byte escaping)")
     b26 = [c for c in cards if c.get("npc_id") == "npc_bastien" and {"flag": "vega_taken", "op": "is_true"} in c.get("when", [])]
     check(len(b26) == 1 and b26[0].get("terminal") is True, "0217: Bastien's section ends on a terminal card at vega_taken")
     if j:

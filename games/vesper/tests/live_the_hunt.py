@@ -207,7 +207,8 @@ def main():
         pg.evaluate("SugarCube.Engine.play('QuestsPage')")
         pg.wait_for_timeout(300)
         qt = pg.inner_text("#passages")
-        ok("That is where this build ends" in qt and "Chapter complete" in qt, "the end card")
+        # AMENDED beat_0239 (0.2.4): card L became card M (the study) in place; the end card is O, after the transfer.
+        ok("Read Vega's records" in qt and "Chapter complete" not in qt, "after the cradles: card M (the study), not an end card")
         print(f"  coin left {tr('coin')} | day {pg.evaluate(TS + '.day')}")
         b.close()
     ok(not errs, f"js errors {errs[:3]}")
