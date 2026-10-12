@@ -735,6 +735,11 @@ hidden = true
 [[traits.labels]]
 key    = "undertow_build"
 hidden = true
+# 0.2.4 (beat_0224) — vega_records, hidden from the dump; quest card M names the count and the next unlock.
+[[traits.labels]]
+key    = "vega_records"
+label  = "Vega's records read"
+hidden = true
 
 # ══════════════════════════════════════════════════════════════════
 # THE LEDGER — the player cheat page ([ui.cheat_page])

@@ -367,6 +367,10 @@ bottle_held       = 0
 vega_damage       = 0
 vega_habits       = 0
 undertow_build    = 0
+# 0.2.4 (beat_0224) — THE TRANSFER's one counter (design_the_transfer.md "BLUEPRINT · The numbers").
+#   • vega_records 0-9 — sessions spent reading what Vega recorded, +1 per read at the Site (activity_read_vega).
+#     3 = the weapons, 6 = the Rise, 9 = Vance Tower. The last night needs 9. Never decays.
+vega_records      = 0
 
 # ─── Daily decay (engine-applied at every day rollover) ───────────────────────
 # advanceDay subtracts each value from its trait and floors at 0 (v2.py:5532-5544); parsed at
@@ -632,6 +636,23 @@ weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "10:00"
 end_time   = "22:00"
 activity   = "cutting a hull down"
+
+# ⚠️ ADDED beat_0224 (0.2.4, THE TRANSFER). Kess's second row: the Site at night while the study and the transfer are
+# live, so cap_study_* and cap_the_transfer are true about who is in the room (they gate on npc_at_location).
+# 22:00 is where his berth row ends (end exclusive, v2.py isCurrentTimeSlot), so he is never in two places, and the
+# row stops at 23:59 so it never crosses midnight. Gated with a v1.0 `when` (without the version it fails OPEN):
+# from the cradles until he has put her back in her own body.
+# ⚠️ MUST STAY DIRECTLY UNDER THE BERTH ROW: anything spliced between npc_kess and here re-parents it.
+[[npcs.schedules]]
+location   = "the_site"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "23:59"
+activity   = "at the second cradle with his tools out"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "cradles_ready", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "back_in_body",  operator = "is_false" },
+] }
 
 # ── Calloway — the mark: Vance Securities rogue-hunter (belief-lever seduce-in; The Archive 1a) ──
 # NEW (beat_0056; v2 copies-not-theft — NO bug/gadget). The disbelieved company hunter; she works his case + seduces

@@ -85,7 +85,8 @@ owns, waking up.* Wren is one of several assets, and the irreplaceable **origina
   becomes the user), and a **cold taboo** (a hollow slave who feels only the sex, with a hidden weapon in it).
 - **Two-act shape** ✓ — Act 1: surrendered tool; infiltrate and drain men to hunt the "evil" rogue; the
   first crack (Phase 1). Act 2: dig in secret; climb Vance; recover herself; reach the Chairman and the
-  truth — turn the weapon on her owners, face the rogue. Kill-or-love.
+  truth — turn the weapon on her owners, face the rogue. ~~Kill-or-love.~~ **Love** (LO 2026-10-12: "No kill."
+  She chooses Cain in 0.2.4, knowing everything; she is never turned against him.)
 
 **Desire span (declared) — an ARC from submission to agency.**
 - **Targets:** **mostly men** — the powerful men she's sent to infiltrate.
@@ -94,7 +95,8 @@ owns, waking up.* Wren is one of several assets, and the irreplaceable **origina
 - **The arc:** used → user. The **dominance, the break-and-own conquest** is **earned late**, as she
   awakens — never the Phase-1 register.
 - **Feeling:** she feels only the sex. Emotional warmth (caring/love) stays reserved for **Cain at the very
-  end** — kill-or-love.
+  end** — ~~kill-or-love~~ **love** (LO 2026-10-12: "No kill." Brought forward to 0.2.4, THE TRANSFER: the full
+  memory, then she chooses him; `design_the_transfer.md`).
 
 **The hidden backstory (iceberg — LOCKED; never dumped, only reconstructed):**
 1. **Dr. Elias Marrow** cracked synthetic consciousness — **human-derived** (built on a living human base;
@@ -113,7 +115,7 @@ through technology, already part-machine. He wants Marrow's human-derived soul t
 fusion:** true immortality *and* a self that still feels. **The half-human secret is what he's killing to
 get.** She's the **working prototype** (they chained her feeling to use her now, harvest the soul later).
 **Inverse mirror:** she's a half-human reaching back toward herself; he's a human shedding humanity for
-permanence. The **Act-2 conquest target** (she may end *owning* Vance), kept distinct from Cain's kill-or-love
+permanence. The **Act-2 conquest target** (she may end *owning* Vance), kept distinct from Cain's ~~kill-or-love~~ love (no kill, LO 2026-10-12)
 fork. Remote and mythic — she doesn't reach him until late.
 
 **The reveal architecture (LOCKED):**
@@ -151,7 +153,7 @@ Naming set: **grounded near-future noir.**
   "attacks" are sabotage / theft / freeing-the-hurt against Vance's *evil* operations, spun by the company as
   a vicious rogue. Marrow's first creation, half-human, the one who feels; killed Marrow at Marrow's request;
   was meant to be her partner *and* her destroyer. **Left the chip for her** (he's reaching out, not running).
-  Her mirror and intended. The **kill-or-love** fork.
+  Her mirror and intended. ~~The **kill-or-love** fork.~~ **Love, no fork** (LO 2026-10-12: "No kill.").
 - **The Chairman — Aldous Vance** — the villain (above). Apex / Act-2 target.
 - **Vance Dynamics** — the company (robotics/AI megacorp; its real trade is owning the powerful through
   secrets — see World setup).
@@ -318,7 +320,7 @@ the reveal (kill → maybe love). Every mission quietly shows the opposite of th
 **Scope (LO):** building **Phase 1 only** for now — up to the chip / the fracture. Phase 1 ends on a
 **cliffhanger** (the fracture into Act 2), *not* a frontier-plateau — correct for a slice toward the whole.
 
-**PARKED (known open questions, not skipped — Act-2 design):** **pacing/frontier** (the kill-or-love peak +
+**PARKED (known open questions, not skipped — Act-2 design):** **pacing/frontier** (the ~~kill-or-love~~ love peak (no kill, LO 2026-10-12) +
 the livable post-game plateau + the endless-sandbox signpost). Phase-1 pacing is already carried by the web
 (the mission loop + escalating dread → the fracture).
 
@@ -351,7 +353,7 @@ See the reconcile note under the Casting table.)*
 | **Renner** | core target (Mission 1, the way in) | The **equipment supplier** whose gear built the facility Cain burned — now a cold, mean wreck clawing at his gutted business; he hires you as cheap hands, ignores you, then can't hold his discipline as you tease your way up. | the underling who seduces the cold boss | core | **infiltration — relation (earn access) + corruption (break him)**; cold-boss-cracks, NO emotional arc | **entry node** — draining him (anal) opens Bastien + Calloway and lands the first crack in "evil rogue" |
 | **Bastien** *(expanded, The Leash)* | core target (Mission 2) · the underworld's quiet owner | Owns the bar **and** The House both, down in the Reach, and runs everything through a web of connections — never in front. By the time the trail reaches him he already knows she's Mercer's and what she's been doing. Not a mark she seduces: the man who catches her. **(1b)** Still behind his own bar, unchanged, and pleased she came back on her own feet. | **capture-and-flip** (her cover is dead from the jump) | core | **capture-first, NOT infiltration** — no relation/corruption seduce-in climb; he's *revealed* at the kidnap that caps the Underworld Hunt, his flip + drain are the **next chunk**. **(The Leash, rev 112 — the flip lands.)** His lever is **curiosity, not desire** (the cell was a lab and he took numbers), so a seduction ladder bounces off him; what he has never permitted is being **read himself**. He **strips her at the door** every visit — he took her drain in the cell and knows where she carries it — so the arc is **smuggling, and her body is the bag**: two things to get past him now, the drain *and* the controller. Ceiling stays **cell-scoped** (the Undertow is not the cell). | **the wall the hunt hits** — the underworld trail dead-ends on *him grabbing her*; secretly Cain's ally (a **saved reveal**, kept off the kidnap — the second crack in "Cain is evil") · **(1b) the name on the set** — he is on the list her governor was built around, which is *why* she goes back down; his drain answers **why he was buying her build file: for Cain** |
 | **Calloway** *(re-cast, The Archive)* | core target (Mission 3 · the file room) | The disbelieved company rogue-hunter — humiliated, sidelined, his un-indexed file room being audited shut; everyone treats him as a crank. She's the first to take his hunt seriously (works his case). His secret isn't a kink — he's **starving to be believed**. | seduce-in on the **belief-lever** (surrender = being believed / allowed to stop hunting — **NOT** domme) | core | **infiltration — his relation (belief/access) + his corruption (surrender)**, the Renner double-lock; anal finish = the drain; ends her **nemesis** | **the file node** — the un-indexed archive; his drain = her power + keeps him blind + reveals WHERE her file is (v2); his **report is the 1b fuse** to the Chairman (Aldous Vance) |
-| **Cain** | the hunt's object · the reserved end (kill-or-love) · truth-bearer | The "vicious rogue" you're sent to kill — actually the one who loved you, at war with the company that owns you, leaving you a trail home. | the one reserved warmth (mostly deferred) | core to the STORY, **light on-screen in Phase 1** | **mystery/reveal spine** (chip fragments + inverting briefings; no lock) | **convergence** — the three target-nodes feed leads that point at him → the site → the chip → the fracture |
+| **Cain** | the hunt's object · the reserved end (~~kill-or-love~~ **love — no kill**, LO 2026-10-12; chosen in 0.2.4) · truth-bearer | The "vicious rogue" you're sent to kill — actually the one who loved you, at war with the company that owns you, leaving you a trail home. | the one reserved warmth (mostly deferred) | core to the STORY, **light on-screen in Phase 1** | **mystery/reveal spine** (chip fragments + inverting briefings; no lock) | **convergence** — the three target-nodes feed leads that point at him → the site → the chip → the fracture |
 | **Dr. Pell** *(placeholder)* | seeded Act-2 origin/upgrade thread | The company roboticist who keeps you running — the one man who could read your build and realize what you are. | (not a desire target in P1) | light / seeded | **thread NPC** (flag) + upgrade vendor | **upgrade sink** (capability items) + an **(open)** glitch-flag — *does he notice in P1 at all? nobody vs one faint seed, decided at Pell's design* |
 | **Vega · Lyra · Nova** (the units) | mirror / dread — the company's ideal tool (no self) | The company's own three operatives — complete machines, sleeker and stronger and *empty*; better hardware than you, no human base, no real feeling. The proof of what the company wishes you were. | (dread mirror, no desire) | light / seeded — **opening mention only** | **ambient dread** (named, no arc) | none in P1 (Act-2) |
 | **Sol** | ambient anchor · **the informant** (leads-color made concrete) | The Long Hour's bartender who's seen everything and asks nothing — the one face in the city who treats you like a regular. Bring him a dead man's name and he knows who ran it, and where the survivor still turns up. | light warmth, no conquest | light island | **leads-color → the hunt's talk-hub** (no lock, no arc) | **the pointer** — turns Renner's two names into a lead on the fixer; opens the Underworld Hunt |
@@ -440,7 +442,7 @@ See the reconcile note under the Casting table.)*
 ### Cast locked (your calls)
 1. **Cain is physically offstage for all of Phase 1.** His presence escalates instead (the lie → wrong-notes
    → "he asked about you by name" → the chip he left *for you*); the chip at the fracture is the first real
-   contact. The kill-or-love face-to-face is saved whole for Act 2.
+   contact. The ~~kill-or-love~~ face-to-face is saved whole for Act 2. *(2026-10-12: it is love, no kill, and it lands in 0.2.4.)*
 2. **The units are complete machines (no human base, no real feeling), named individually — Vega, Lyra,
    Nova.** They're the company's own field operatives; **mentioned only at the opening** (peers who set up the
    Act-2 mirror), not recurring in Phase 1.

@@ -4822,6 +4822,15 @@ id   = "base"
 name = "Cain"
 blocks = [
   { type = "paragraph", content = "Cain is at the far end of the lab." },
+  # beat_0238 (0.2.4) — AFTER SHE CHOSE HIM (cain_chosen). First in the chain now: "now comes the hard part" is spent,
+  # and the man at the far end of the lab is her lover. No sex on this card (no loop was signed for 0.2.4).
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "cain_chosen", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "You came back. I keep expecting you not to." },
+    { type = "dialog", props = { speaker = "player" }, content = "I'm going to keep coming back. Get used to it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Then we train. Kess is going to put that blade in you, and you're going to need to know what to do with it." },
+  ] },
   # beat_0216 — AFTER THE TAKE. First in the chain, so it beats the 85 band, whose "somebody behind her" is spent.
   # Worded to stay true through the table (beat_0217) and after: the transfer is the next hard part either way.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
@@ -5250,7 +5259,8 @@ flagEffects = [
 # beside it, and Cain's chair — with him in it at night (his Site rows 21:00-03:00), his coat on it by day.
 # ⚠️ A SOLO CARD, NOT A SECOND CAIN CARD: activity_cain_trains is his portrait hub here (one repeatable per NPC per
 # window), so his presence is a GROUP condition on this card, never npc/requires_npc on its trigger.
-# ⚠️ IT STAYS TRUE ALL THE WAY TO 0.2.4: nothing is transferred, so every line is about waiting.
+# ⚠️ RETIRED at beat_0238 (0.2.4): "it stays true all the way to 0.2.4" was the 0.2.3 promise. The card now has
+# bands for after back_in_body (the shell gone to Kess's table) and after cain_chosen (Cain her lover).
 # MEDIA: one new slot, scenes/the_shell_in_the_cradle.jpg (one asset, one block — not the cradle scene's image).
 [[canvases]]
 id          = "site_the_cradles"
@@ -5269,9 +5279,24 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The cradles"
 blocks = [
-  { type = "image", props = { file = "scenes/the_shell_in_the_cradle.jpg", description = "A close view into a dusty machine cradle in a dim abandoned lab: a perfectly made, still, woman-shaped figure lying in it with closed eyes and folded hands, cables running from the cradle into the dark, the edge of a second, empty cradle beside it. Must show: the still figure in the cradle, the empty one at the edge. Avoid: gore, blood, bright light, open eyes.", search_queries = ["still android woman lying in pod closed eyes dim lab", "sci fi body in cradle cables dark abandoned laboratory"] } },
-  { type = "paragraph", content = "Vega lies in the second cradle the way Kess left her. The first cradle is empty, her own shape worn into it." },
+  # ── beat_0238 (0.2.4): TWO CHAINS, split by the ungrouped line between them. Adjacent groups merge into one
+  # if/elseif chain, so the separator is load-bearing. Chain 1 is what lies in the cradles (Vega until she goes to
+  # Kess's table at back_in_body); chain 2 is Cain (waiting, through the study; her lover, from cain_chosen).
+  # The run is unbroken, so back_in_body without cain_chosen never renders here.
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "back_in_body", operator = "is_false" },
+    ] } }, blocks = [
+  { type = "image", props = { file = "scenes/the_shell_in_the_cradle.jpg", description = "A close view into a dusty machine cradle in a dim abandoned lab: a perfectly made, still, woman-shaped figure lying in it with closed eyes and folded hands, cables running from the cradle into the dark, the edge of a second, empty cradle beside it. Must show: the still figure in the cradle, the empty one at the edge. Avoid: gore, blood, bright light, open eyes.", search_queries = ["still android woman lying in pod closed eyes dim lab", "sci fi body in cradle cables dark abandoned laboratory"] } },
+    { type = "paragraph", content = "Vega lies in the second cradle. The first is empty, her own shape worn into it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "back_in_body", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The second cradle is empty. Kess took what was left of Vega down to his table." },
+  ] },
+  { type = "paragraph", content = "Her father's lines still run between them." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",            subject = "player", flag_key = "back_in_body", operator = "is_false" },
       { type = "npc_at_location", location_id = "the_site", operator = "is_present", npc_id = "npc_cain" },
     ] } }, blocks = [
     { type = "paragraph", content = "Cain is in the chair by the empty cradle." },
@@ -5280,10 +5305,27 @@ blocks = [
     { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "When you are ready. Not before. Go and live a little first." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",            subject = "player", flag_key = "back_in_body", operator = "is_false" },
       { type = "npc_at_location", location_id = "the_site", operator = "is_absent", npc_id = "npc_cain" },
     ] } }, blocks = [
     { type = "paragraph", content = "Cain's chair is pulled up to the empty cradle with his coat over the back of it. He will be back when it is dark." },
     { type = "thought_bubble", props = { speaker = "player" }, content = "Not tonight. Soon." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",            subject = "player", flag_key = "cain_chosen", operator = "is_true" },
+      { type = "npc_at_location", location_id = "the_site", operator = "is_present", npc_id = "npc_cain" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Cain is on the blanket between the cradles." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Vesper. Or Wren tonight?" },
+    { type = "dialog", props = { speaker = "player" }, content = "Both. I told you. Both." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Then come here, both of you." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",            subject = "player", flag_key = "cain_chosen", operator = "is_true" },
+      { type = "npc_at_location", location_id = "the_site", operator = "is_absent", npc_id = "npc_cain" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The blanket is folded on his chair. He will be back when it is dark." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Tonight. He'll be back tonight. I'm allowed to want that now." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -5292,3 +5334,239 @@ type = "choices"
 text       = "Leave them."
 targetType = "location"
 locationId = "the_site"
+
+# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+# 0.2.4 — THE TRANSFER (design_the_transfer.md, BLUEPRINT signed by LO 2026-10-12)
+# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+# ── activity_read_vega — beat_0224. Wren-solo repeatable card @the_site, pri 3, twice a day. ─────────────────────
+# Her half of the study (LO: "add wren studying too with a bit of grind like 3 grind unlocks new things"). Vega never
+# forgot anything (design_the_hunt.md "Vega — what she is", power 3), so everything she saw is still in the shell.
+# Kess wires a reader to it; Wren sits on the cradle's edge and watches Vega's life from behind Vega's eyes.
+# Nine reads, an unlock every three: 3 = the weapons, 6 = the Rise, 9 = Vance Tower (the blueprint's change 1: Vega
+# lived in the Tower, so its floors are in her records whether or not anyone knows the memory is there yet).
+# ⚠️ A SOLO CARD, NO npc: Cain's card at the Site is activity_cain_trains, and Kess has no card here.
+# ⚠️ max_triggers_per_day = 2 counts OPENING the card, not reading (canTriggerCanvas counts fires). The choice is
+# the only thing on it, so an opened card is a read in practice. A sitting that crosses midnight can re-arm it
+# (the straddle trap) — at worst one extra read, accepted.
+# ⚠️ The read's result bands are on the NEW value: choice effects apply before the target node renders. eq 3 / 6 / 9
+# are the unlock screens, the ranges between them are the reads that build toward the next one.
+# Effects: costs 15 Charge (gates + deducts, greys the choice when she is too low), vega_records +1 capped at 9,
+# 60 minutes on the way out. Closes at the transfer (she is inside the thing she was reading).
+# MEDIA: one new slot, scenes/vega_records.jpg, on the base node (one asset, one block).
+[[canvases]]
+id          = "activity_read_vega"
+name        = "Vega's records"
+description = "beat_0224 (0.2.4). Wren-solo card @the_site, repeatable, max 2 a day, gated cradles_ready + transferred is_false. She reads what Vega recorded through a reader Kess wired to the shell. Choice 'Read her records.' (lt 9): costs 15 Charge, vega_records +1 (cap 9), 60 min. Result bands on the new value: 1-2 her own losses seen from Vega's side, 3 THE WEAPONS (blade + armour), 4-5, 6 THE RISE (the floors above Sabin's), 7-8, 9 VANCE TOWER (the units' quarters, Lyra and Nova, the lift to the Chairman's floor)."
+[canvases.trigger]
+location             = "the_site"
+is_repeatable        = true
+priority             = 3
+is_active            = true
+max_triggers_per_day = 2
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "cradles_ready", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "transferred",   operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Vega's records"
+blocks = [
+  { type = "image", props = { file = "scenes/vega_records.jpg", description = "A small battered handheld reader with a glowing screen, a thin cable running from it into the open back of a still, perfect woman-shaped machine lying in a dusty cradle in a dim abandoned lab.", search_queries = ["cable plugged into android back sci-fi lab", "handheld screen wired to robot body dark"] } },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_records", operator = "lt", value = 9 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Kess left a reader wired into the back of Vega's neck. Everything Vega ever saw is still in there, filed by the day, and none of it was ever erased. She never forgot anything." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Every fight. Every street. Every face she ever came for. All of it, from behind her eyes." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_records", operator = "gte", value = 9 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She has read all of it. The weapons, the Rise, the Tower. She could walk Vega's routes with her eyes shut, and in a few nights she will have to." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Read her records."
+targetType = "node"
+nodeId     = "activity_read_vega.read"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "vega_records", operator = "lt", value = 9 },
+] }
+costs   = [{ trait = "energy", value = 15 }]
+effects = [{ targetType = "player", trait = "vega_records", op = "add", value = 1, clamp = true, cap = 9 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "location"
+locationId = "the_site"
+
+[[canvases.nodes]]
+id   = "read"
+name = "Behind her eyes"
+blocks = [
+  # 1-2 — her own losses, from the other side.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_records", operator = "lt", value = 3 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The reader finds the Underground first. A woman on the strip, running, bleeding from the mouth, looking back. It takes her a full second to see that the woman is her." },
+    { type = "paragraph", content = "Vega watched her lose every time and felt nothing. Wren watches it now and feels all of it: the fear on her own face, how small she looked, how close Vega always was." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Not yet. There is nothing here I can use yet. Keep going." },
+  ] },
+  # 3 — THE WEAPONS.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_records", operator = "eq", value = 3 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "A fight in a corridor she doesn't know. Vega's forearm opens along a seam and a blade slides out of it, long and thin, and the man in front of her is dead before he finishes raising his gun." },
+    { type = "paragraph", content = "Wren runs it back. Twice. The blade comes when the wrist turns down. A bullet hits Vega's shoulder and drops off it like a stone off a wall. That is the armour, under the skin." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "That is how she moves. Now I know how I'll move in her." },
+  ] },
+  # 4-5 — building toward the Rise.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_records", operator = "gt", value = 3 },
+      { type = "trait", subject = "player", trait_key = "vega_records", operator = "lt", value = 6 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Days of Vega walking corridors with nobody stopping her. Doors opening before she reaches them. Guards looking straight through her, because the company's own face is never a problem." },
+    { type = "paragraph", content = "Some of the corridors are the Rise. Wren knows the lower floors. Vega went higher." },
+  ] },
+  # 6 — THE RISE.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_records", operator = "eq", value = 6 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The Rise, all of it. The floors above Sabin's that Wren never reached: which lift goes where, which doors take the company's signal, where the guards stand and when they change." },
+    { type = "paragraph", content = "The top floors aren't bare concrete in Vega's records. Something is up there. Vega only ever walked past the doors." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Half that building was never empty. I worked right under it." },
+  ] },
+  # 7-8 — building toward the Tower.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_records", operator = "gt", value = 6 },
+      { type = "trait", subject = "player", trait_key = "vega_records", operator = "lt", value = 9 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Nights in a white room with no bed in it. Vega standing still for hours, facing a wall. That is where she went when nobody needed her." },
+    { type = "paragraph", content = "The room is in Vance Tower. The building Wren was sealed out of. Vega went home to it every night." },
+  ] },
+  # 9 — VANCE TOWER.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_records", operator = "eq", value = 9 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The Tower, floor by floor, the way Vega knew it. The units' quarters. Two more of them standing at the window, not talking, not moving. Lyra and Nova." },
+    { type = "paragraph", content = "And one lift Vega rode only once, up to the Chairman's floor, where she waited outside a door she was never cleared to open." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "I know her whole life now. She never had one. I'm going to wear it anyway." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Unplug the reader."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 60
+
+# ── activity_kess_site — beat_0238. Kess's PORTRAIT CARD @the_site while his Site row is live (22:00-23:59). ────────
+# ⚠️ WHY IT EXISTS: gates.py "every person here has a face" found Kess DEAD at the Site: his beat_0224 row put him on
+# the map there every night with no card of his, so a player who arrived when no study night was due saw his badge
+# and could not speak to him. One repeatable per NPC per place and window, and he has none here, so this is it.
+# The study nights and the transfer are pri 11 auto-fires and take every arrival they are due on; this card is what
+# the player sees on the nights between (records still to read, or the transfer waiting on the last night).
+# Bands on the study state, newest first (one if/elseif chain). Closes with his row (back_in_body).
+[[canvases]]
+id          = "activity_kess_site"
+name        = "Kess"
+description = "beat_0238 (0.2.4). Kess's portrait card @the_site, repeatable, pri 3, npc + requires_npc = npc_kess (his Site row 22:00-23:59 while cradles_ready and back_in_body is_false). Bands: everything ready (waiting on the last night) / the method done, records still to read / the signal done / the blade done / before the first night. Choice: leave him to it."
+[canvases.trigger]
+location      = "the_site"
+npc           = "npc_kess"
+requires_npc  = "npc_kess"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "cradles_ready", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "back_in_body",  operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Kess"
+blocks = [
+  { type = "paragraph", content = "Kess is at the second cradle with his tools laid out in a row." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",  subject = "player", flag_key = "study_method",  operator = "is_true" },
+      { type = "trait", subject = "player", trait_key = "vega_records", operator = "gte", value = 9 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "I'm ready when you are. You're not, yet. Have your night first. Then lie down." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "study_method", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "I know how now. You don't know her yet. Read her. Her floors, her rooms. I'm not putting you in a body that doesn't know where it is." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "study_signal", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "The damper's holding. Next is the hard part, and it's yours, not mine. How it was done to you." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "study_blade", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Still got both hands. Next time I give her a whole cell and we see what she eats." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "study_blade", operator = "is_false" },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Before anybody goes into her, I want to know what's in her. Tonight, the arm." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave him to it."
+targetType = "location"
+locationId = "the_site"
+
+# ── kess_the_wreck — beat_0238. Wren-solo repeatable card @kess_berth, from back_in_body. ────────────────────────
+# What stands after the run: the wreck of Vega on Kess's table, and Kess already looking at her arm. It is the plant
+# for 0.2.5 (design_the_transfer.md "Decided for 0.2.5": the arm blade and the perfect memory go into Wren). Solo,
+# because hub_kess_berth is his card here; his presence is a GROUP condition, never npc/requires_npc on the trigger.
+# Says only what is true now: the wreck is here, he is studying the arm. It promises nothing about when.
+# MEDIA: one new slot, scenes/the_wreck_on_the_table.jpg (one asset, one block).
+[[canvases]]
+id          = "kess_the_wreck"
+name        = "The wreck"
+description = "beat_0238 (0.2.4). Wren-solo card @kess_berth, repeatable, pri 3, gated back_in_body. The wreck of Vega on Kess's table: half an arm, a cracked chest, the blade arm laid open; Kess at it while he is here (10:00-22:00), his notes on it when he is not. The plant for 0.2.5."
+[canvases.trigger]
+location      = "kess_berth"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "back_in_body", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The wreck"
+blocks = [
+  { type = "image", props = { file = "scenes/the_wreck_on_the_table.jpg", description = "A ruined woman-shaped machine lying on a cluttered workshop table under a work-lamp: one arm torn off at the shoulder, the chest cracked, the other forearm laid open to show a long thin dark blade folded inside, tools around it.", search_queries = ["broken android on workbench lamp tools", "damaged robot woman on table opened arm"] } },
+  { type = "paragraph", content = "What is left of Vega lies on Kess's table. Half an arm, a cracked chest, one dead eye. The other arm is laid open from the elbow down, the blade folded inside it." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "npc_at_location", location_id = "kess_berth", operator = "is_present", npc_id = "npc_kess" },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Don't touch. I'm learning her. That blade grows out of the frame. Yours is the same family." },
+    { type = "dialog", props = { speaker = "player" }, content = "You want to put it in me." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "I want to know if I can. Then we'll talk about want." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "npc_at_location", location_id = "kess_berth", operator = "is_absent", npc_id = "npc_kess" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Kess's notes are pinned beside it, half of them about the arm. One page just says HER, in his square hand, with an arrow." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Her arm. My arm. He's already deciding." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave her."
+targetType = "location"
+locationId = "kess_berth"
