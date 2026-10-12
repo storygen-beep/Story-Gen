@@ -497,6 +497,29 @@ def main():
         for bad in ("next release", "0.2.5", "tomorrow"):
             check(bad not in text_of(kw).lower(), f"0238: the wreck card promises no date ('{bad}')")
 
+    # ── beat_0239 — dev_jump_transfer_start (LO: "click on the end of 0.2.3 and start this new release") ──
+    dj = canvases.get("dev_jump_transfer_start")
+    check(dj is not None, "0239: dev_jump_transfer_start is missing")
+    if dj:
+        check(has_flag(cond_items((dj.get("trigger") or {}).get("conditions")), "dev_mode_enabled", "is_true"), "0239: the jump is dev-only")
+        ch = ((dj.get("nodes") or [{}])[0].get("exit_block") or {}).get("choices") or [{}]
+        check(ch[0].get("locationId") == "the_site", "0239: the jump lands at the Site")
+        fl = {f.get("flag"): f.get("op") for f in ch[0].get("flagEffects", [])}
+        for f in ("vega_taken", "vega_dismantled", "vega_plan", "crew_back", "cradles_ready"):
+            check(fl.get(f) == "set", f"0239: the jump SETS {f} (the end of 0.2.3)")
+        for f in ("study_blade", "study_signal", "study_method", "last_night_held", "transferred", "rise_searched",
+                  "tower_planned", "memory_taken", "units_fought", "dace_dead", "back_in_body", "memory_whole", "cain_chosen"):
+            check(fl.get(f) == "unset", f"0239: the jump UNSETS {f}")
+        eff = {e.get("trait"): e.get("value") for e in ch[0].get("effects", [])}
+        check(eff.get("vega_records") == 0 and eff.get("vega_damage") == 0, "0239: records 0, damage 0")
+    # Every older 0.2.3 jump clears the 0.2.4 state too, so a jump taken after playing 0.2.4 lands before it.
+    for jid in ("dev_jump_hunt_start", "dev_jump_hunt_on", "dev_jump_hunt_crew", "dev_jump_hunt_take", "dev_jump_hunt_table"):
+        j = canvases.get(jid)
+        if j:
+            ch = ((j.get("nodes") or [{}])[0].get("exit_block") or {}).get("choices") or [{}]
+            fl = {f.get("flag"): f.get("op") for f in ch[0].get("flagEffects", [])}
+            check(fl.get("transferred") == "unset" and fl.get("cain_chosen") == "unset", f"0239: {jid} clears the 0.2.4 flags")
+
     if fails:
         print("THE TRANSFER GUARD: FAILED")
         for f in fails:
