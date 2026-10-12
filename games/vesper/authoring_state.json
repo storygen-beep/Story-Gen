@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 261,
+  "book_revision": 262,
   "register": {
     "person": "third"
   },
@@ -3405,6 +3405,15 @@
       "introduces": [],
       "canvases": [],
       "notes": "guards (Vega map + leak walk, negative-tested), live test played by nav, engine fix: a locked root's Go back returns to the previous passage, not Start"
+    },
+    {
+      "id": "beat_0249",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 — Quests page: character cards hide in Vega; finished arcs under a collapsed Finished heading (Vesper only)",
+      "introduces": [],
+      "canvases": [],
+      "notes": "All 54 character quest cards gated in_vega is_false (their tips name Wren's places, closed in Vega). Engine opt-in [project] quests_finished_collapsed (template_import + v2 QuestsPage): NPCs whose live card is terminal render under one <details> 'Finished (N)' after the live sections; default off, only Vesper sets it. Guard §0249, live checks (in Vega only the story card; at the end Finished collapsed after the story card). live_the_count amended (terminal card now under Finished: textContent). All guards, all live suites, game_generation suite pass; apps/projects has 6 failures that also fail without these changes."
     }
   ],
   "structure_registry": {
@@ -5519,6 +5528,7 @@
     "2026-10-12 — beat_0238 VALIDATED (0.2.4 THE TRANSFER, rev 259). What stands after the run. site_the_cradles rebuilt as two chains split by one ungrouped line (shell until back_in_body, then the empty cradle; Cain waiting through the study, then her lover from cain_chosen); the shell image shows only while the shell is there; its 0.2.3 'stays true all the way to 0.2.4' comment retired. activity_cain_trains: a cain_chosen band leads the chain. NEW activity_kess_site (Kess's portrait hub at the Site for his 22:00-23:59 row, banded on the study state; fixes gates.py's DEAD-presence finding). NEW kess_the_wreck (Wren-solo @kess_berth from back_in_body; Kess learning the blade arm; plant for 0.2.5; promises no date; scenes/the_wreck_on_the_table.jpg). check_the_hunt.py §0216 amended (cain_chosen band now leads; the after-the-take band is first below it); the hunt guard's per-screen ratio caught the cradle card at 3.40/4.07 and it was tightened until it passed. Guard §0238. Build green, all guards OK.",
     "2026-10-12 — beat_0239 VALIDATED (0.2.4 THE TRANSFER, rev 260). tests/live_the_transfer.py: the whole chapter in a real browser (0.2.3 take -> end card O -> what stands after), incl. the twice-a-day cap on the Site's card list and the vault's wait branch; it caught the Rise rendering at 11:10 (exit minutes apply on render), fixed by retuning transfer 480 / plan 720 / fight 120 / save 210 (Rise 09:10, fight 01:19, save 04:49, measured). check_the_transfer.py complete §0224-§0238. live_the_hunt / live_the_hunt_end amended (card M after the cradles). All guards and all seven live suites OK. Leak check clean. BUILT section written into design_the_transfer.md. 0.2.4 is BUILT, uncommitted; media harvest (25 slots) and release are LO's.",
     "2026-10-12 — beat_0239 VALIDATED (0.2.4 THE TRANSFER, rev 260). ADDED after the push (LO: 'i want to click on the end of 0.2.3 and start this new release'): dev_jump_transfer_start in 6_dev_shortcuts.toml, '0.2.4: start (the end of 0.2.3)', a copy of dev_jump_hunt_table moved past the table and cradles (every 0.2.3 flag through cradles_ready set, damage 0, vega_records 0, every 0.2.4 flag unset), landing at the Site. The five older 0.2.3 jumps now also unset the 0.2.4 flags and zero vega_records. Guard §0239 and a live check from a fresh browser context: lands at the Site, reading card shown, study night 1 fires at 22:05, card M live. Known limit, as for every dev jump: one-time scenes remember having fired, so a save that already played 0.2.4 will not replay them; use a new game.",
-    "2026-10-13 — 0.2.4 THE PLAYER PLAYS VEGA (rev 261), beats 0240-0248 validated. LO: 'Wren takes controls as vega, player plays vega, goes to do things'. Blueprint change 2 reversed (my mistake: it hid that the player never controlled Vega). Plan approved in plan mode. Built: in_vega switch, Vega's cell, the strip locked to Vega with her own cards around it, the Rise and the Tower walked by the player (Sabin's hours, night on the Chairman's floor, cell costs), plan/vault/fight/save re-hosted where they happen, quest cards per step + Sabin/Cain fixes, a second dev jump. Engine fix in v2.py: a locked root's Go back returns to the previous passage. Guards incl. the leak walk (negative-tested), live test by nav clicks, all older suites, gates.py unchanged at 38 FAILs."
+    "2026-10-13 — 0.2.4 THE PLAYER PLAYS VEGA (rev 261), beats 0240-0248 validated. LO: 'Wren takes controls as vega, player plays vega, goes to do things'. Blueprint change 2 reversed (my mistake: it hid that the player never controlled Vega). Plan approved in plan mode. Built: in_vega switch, Vega's cell, the strip locked to Vega with her own cards around it, the Rise and the Tower walked by the player (Sabin's hours, night on the Chairman's floor, cell costs), plan/vault/fight/save re-hosted where they happen, quest cards per step + Sabin/Cain fixes, a second dev jump. Engine fix in v2.py: a locked root's Go back returns to the previous passage. Guards incl. the leak walk (negative-tested), live test by nav clicks, all older suites, gates.py unchanged at 38 FAILs.",
+    "2026-10-13 — beat_0249 validated (rev 262). LO: 'fix both, vesper only, then push'. Character cards hidden while in Vega; finished arcs collapsed under 'Finished' (opt-in engine flag, Vesper only)."
   ]
 }

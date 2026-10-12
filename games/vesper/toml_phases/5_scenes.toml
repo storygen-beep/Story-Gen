@@ -1677,6 +1677,7 @@ npc_id     = "npc_renner"
 text       = "Beneath his notice. Earn the cold boss's trust from the bottom. Good hands get noticed."
 tip        = "Coveralls on. Work the depot haul to push his relation. At 21 he waves you into the back office. That is where the seduction opens."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "renner_hired",       op = "is_true"  },
   { flag = "renner_office_open", op = "is_false" },
 ]
@@ -1698,6 +1699,7 @@ npc_id     = "npc_renner"
 text       = "Get his eyes on you. He keeps his eyes on the manifest. Make him look up. Tease him across the desk."
 tip        = "In cover, in his office: run the tease rung. Every rung pushes his corruption toward breaking."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "renner_office_open", op = "is_true"  },
   { flag = "renner_drained",     op = "is_false" },
   { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "lt", value = 10 },
@@ -1713,6 +1715,7 @@ npc_id     = "npc_renner"
 text       = "He looked. Now make it worse. Flash him while you work. Let him see the coveralls are all she has on."
 tip        = "The flash rung's open now. Keep pushing his corruption."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "renner_office_open", op = "is_true"  },
   { flag = "renner_drained",     op = "is_false" },
   { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 10 },
@@ -1729,6 +1732,7 @@ npc_id     = "npc_renner"
 text       = "He's watching for it now. Get your hands on him. A grip, a stroke. Make him feel it before he can decide to stop you."
 tip        = "The grope rung's open. Every rung climbs his corruption toward the break."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "renner_office_open", op = "is_true"  },
   { flag = "renner_drained",     op = "is_false" },
   { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 20 },
@@ -1745,6 +1749,7 @@ npc_id     = "npc_renner"
 text       = "He broke enough to take your mouth. He is part way yours. Keep at him until he will do anything."
 tip        = "Keep running the rungs. At his limit he'll pull you into the office and fuck you."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "renner_office_open", op = "is_true"  },
   { flag = "renner_drained",     op = "is_false" },
   { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 30 },
@@ -1761,6 +1766,7 @@ npc_id     = "npc_renner"
 text       = "He'll fuck you in the office now. Break him the rest of the way. Then finish him in the ass and take the drain."
 tip        = "Take him in the office (repeatable). At corruption 50, in cover, the anal pose opens. Finish there with the drain worn and charged and the weapon fires."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "renner_office_open", op = "is_true"  },
   { flag = "renner_drained",     op = "is_false" },
   { trait = "corruption", subject = "npc", npc_id = "npc_renner", op = "gte", value = 40 },
@@ -1781,6 +1787,7 @@ npc_id     = "npc_renner"
 text       = "He is broken all the way down. Now bed him and take the drain."
 tip        = "Take him in the office, in cover, carrying the drain. Finish in his ass and the weapon fires."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "renner_office_open", op = "is_true"  },
   { flag = "renner_drained",     op = "is_false" },
   { flag = "renner_fucked_once", op = "is_false" },
@@ -1799,6 +1806,7 @@ npc_id     = "npc_renner"
 text       = "He's broken and ready. Take him in the office and finish in his ass. The drain fires and he gives up everything."
 tip        = "You're carrying the drain weapon. Get him to the desk, in cover."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "renner_office_open", op = "is_true"  },
   { flag = "renner_drained",     op = "is_false" },
   { flag = "renner_fucked_once", op = "is_true"  },
@@ -1811,6 +1819,7 @@ npc_id     = "npc_renner"
 text       = "He is broken and ready to drain. You are carrying the emitter instead."
 tip        = "Switch back to the drain weapon at your bench in your room, then take him in the office and finish in his ass."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "renner_office_open", op = "is_true"  },
   { flag = "renner_drained",     op = "is_false" },
   { flag = "renner_fucked_once", op = "is_true"  },
@@ -1843,6 +1852,7 @@ tip        = "Renner's finished as a lead; the office isn't. Cover on, the depot
 # is the only true label. Exactly one card in the game may promise the future, and that is card M.
 terminal   = true
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "renner_drained", op = "is_true" },
 ]
 
@@ -11431,6 +11441,7 @@ npc_id     = "npc_calloway"
 text       = "The disbelieved hunter. He is starving to be believed. That is the door, and his body is beside the point. Take his hunt seriously until he lets you all the way in."
 tip        = "In the file room: talk to him and work the case. Both push his trust. At enough of it he brings you all the way into his hunt, and you're in."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "calloway_met",      op = "is_true"  },
   { flag = "calloway_believes", op = "is_false" },
 ]
@@ -11443,6 +11454,7 @@ npc_id     = "npc_calloway"
 text       = "He trusts you now. Get under the guard. A hand, your mouth. Keep at it until the disbelieved man's terror surfaces and he tries to bolt. Talk him back down."
 tip        = "Run the rungs. Get close to him, take him in your mouth. Each pushes his corruption. At the catch, re-anchor his belief; the suspicion stops winning."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "calloway_believes",       op = "is_true"  },
   { flag = "calloway_flinch_resolved", op = "is_false" },
 ]
@@ -11455,6 +11467,7 @@ npc_id     = "npc_calloway"
 text       = "The catch is past. Take him all the way. It is the one place your power still works, on a man other than the one who owns you."
 tip        = "The loop's open: Take him, all the way. The anal finish is the drain, and the drain is how you get him to give up where your file is kept."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "calloway_flinch_resolved", op = "is_true"  },
   { flag = "calloway_fucked_once",     op = "is_false" },
 ]
@@ -11467,6 +11480,7 @@ npc_id     = "npc_calloway"
 text       = "He is yours. The last true believer in a dying division, and he will never know the woman he trusts handed you the way to your own file. Keep him blind, keep him close, and open the drain whenever it's hungry."
 tip        = "The loop is open. Take him whenever you want. The first drain already gave you the where, the deep vault in docs. Every one after is pure power: your warm tap, and your hold on him while you work everyone else."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "calloway_fucked_once", op = "is_true" },
 ]
 
@@ -11491,6 +11505,7 @@ tip        = "Calloway's closed out. The plaza is walkable again in a bought fac
 # instruction. Default label, no terminal_text — his arc is finished and nothing about him is coming back.
 terminal   = true
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "archive_1a_done", op = "is_true" },
 ]
 
@@ -11504,6 +11519,7 @@ npc_id     = "npc_colm"
 text       = "The careful courier. He carries the leak down to the buyer, and he is the one man who has seen the inside contact's face. He resists a rush and he resists a price. He has to be earned, an evening at a time."
 tip        = "At the Undertow, buy Colm a drink and pass the time with him. Both wear the careful down, and he is in from seven. It takes a few evenings on him; when he trusts you enough, you can get your hands on him."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag  = "colm_found", op = "is_true" },
   { trait = "relation", subject = "npc", npc_id = "npc_colm", op = "lt", value = 12 },
 ]
@@ -11516,6 +11532,7 @@ npc_id     = "npc_colm"
 text       = "The careful man leans into your hand now. Get past the last of the guard. Kiss him in the middle of his own bar, and keep at him until he will follow you anywhere."
 tip        = "In Colm's hub: Kiss him. He stiffens at first, then warms, then holds still. Keep buying his trust up (drink, talk, kiss) and the back room opens."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { trait = "relation", subject = "npc", npc_id = "npc_colm", op = "gte", value = 12 },
   { trait = "relation", subject = "npc", npc_id = "npc_colm", op = "lt",  value = 24 },
 ]
@@ -11528,6 +11545,7 @@ npc_id     = "npc_colm"
 text       = "He'll follow you anywhere now. Take him in the back. The drain is the point, and his drained memory of the hand-offs holds the one thing you came for: the inside man's face."
 tip        = "In Colm's hub: Take him in the back, then work him until he's ready. The drain opens one way only. Let him finish in your ass. Any other finish buys you the night and nothing else."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { trait = "relation",         subject = "npc", npc_id = "npc_colm", op = "gte", value = 24 },
   { trait = "colm_drains_done", subject = "player", op = "lt",  value = 1 },
 ]
@@ -11540,6 +11558,7 @@ npc_id     = "npc_colm"
 text       = "You have the rogue's face, and a courier who'll never know he gave it to you. Colm is a warm tap now. Come back and open the drain whenever it is hungry. Your business is with Vane."
 tip        = "Colm is done as a lead. The back room is yours whenever you want it, pure power now. Take what you learned to Vane at Vance Securities."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { trait = "colm_drains_done", subject = "player", op = "gte", value = 1 },
 ]
 
@@ -11560,6 +11579,7 @@ tip        = "Colm's business is finished; Colm isn't. He's in from seven at the
 # whole point of pairing the badge with a frontier-seed tip (quests.md §7) instead of retiring the card.
 terminal   = true
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "archive_1a_done", op = "is_true" },
 ]
 
@@ -11581,6 +11601,7 @@ npc_id     = "npc_mercer"
 text       = "Two years he sent you out and never once looked at what he was sending, and now he is the one down here. A coat cut for better weather, Spire paper moving out of a stall, a room behind it with one chair worth sitting in. He pours. He talks. He has never in two years had to hear you refuse him and has no idea it is a thing that could happen. He is right, and that is the part that costs."
 tip        = "Nights only, down the market end of the strip. The stall first, then the door behind it. Drink what he pours and let him host. It is free and he loosens a little further every time. What Kess wants off him is not something he could tell you. It has to come off the hand."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "mercer_found",    op = "is_true"  },
   { flag = "parts_loop_open", op = "is_false" },
 ]
@@ -11603,6 +11624,7 @@ tip        = "One part, one evening, one try. Tell Kess what the last one did, b
 # made card I permanently unreachable — the loop's Story-Goal would simply never have existed. leash_answered
 # is set at mercer_drain_canvas.d1 and means what this card is actually waiting for: the talkback beat a LIVE key.
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "parts_loop_open", op = "is_true"   },
   { flag = "leash_answered",  op = "is_false"  },
 ]
@@ -11622,6 +11644,7 @@ tip        = "Mercer is drained and empty. The room behind the stall is open eve
 # A player seeing ✓ on Mercer and a live Story Goal is being told the truth about both.
 terminal   = true
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "leash_answered", op = "is_true" },
 ]
 
@@ -11659,6 +11682,7 @@ goals = [
   { trait = "relation", subject = "npc", npc_id = "npc_bastien", op = "gte", value = 18, label = "Be somebody he decides about" },
 ]
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "bastien_seen", op = "is_true" },
   { trait = "bar_rung", subject = "player", op = "lt", value = 4 },
 ]
@@ -11675,6 +11699,7 @@ goals = [
   { trait = "bastien_drains_done", subject = "player", op = "gte", value = 1, label = "Take him to the drain" },
 ]
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { trait = "bar_rung", subject = "player", op = "gte", value = 4 },
   { trait = "bastien_drains_done", subject = "player", op = "lt", value = 1 },
 ]
@@ -11690,6 +11715,7 @@ tip        = "His door is open whenever he is behind it. Take what you want in t
 # is npc_bastien's schedule row, reached through requires_npc), so no 🕒 renders. Verified live.
 ready_canvas = "hub_bastien"
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { trait = "bastien_drains_done", subject = "player", op = "gte", value = 1 },
   { flag = "raid_done", op = "is_false" },
 ]
@@ -11710,6 +11736,7 @@ text       = "You put him on the floor of his own back room with thirty coin of 
 tip        = "There is nothing left to work here. The Undertow does not open in the evenings now and what is in the back room is ash."
 terminal   = true
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "raid_done",           op = "is_true"  },
   { flag = "bastien_alive_known", op = "is_false" },
   { flag = "bastien_at_cot",      op = "is_false" },
@@ -11731,6 +11758,7 @@ npc_id     = "npc_bastien"
 text       = "The man who kept you in a room spent four months in one himself, under the waterfront, below the part of that building that burned. Nobody asked him a question after the second month. He was never down there for what he knows. He was down there in case somebody came for him, and the somebody they had in mind is Cain."
 tip        = "There is nothing of his to work. No floor, no back room, no door he decides about. The story card carries the next step."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "bastien_alive_known", op = "is_true"  },
   { flag = "bastien_at_cot",      op = "is_false" },
 ]
@@ -11746,6 +11774,7 @@ npc_id     = "npc_bastien"
 text       = "He is on your bunk because there is nowhere else in the city he can be. He will not drink, he will not turn over, and he does not know who you are. The man who kept you in a room is four feet from where you sleep and cannot stand up."
 tip        = "He is at the cot every hour of the day. There is nothing to do for him yet but leave the water where he can reach it."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "bastien_at_cot", op = "is_true"  },
   { flag = "bastien_drank",  op = "is_false" },
 ]
@@ -11756,6 +11785,7 @@ npc_id     = "npc_bastien"
 text       = "He is coming back by inches, and every inch of it is yours. Water first. Then the rag and the basin. Then something to stand up in. He is keeping a count on the bunk frame and he has not told you what it counts."
 tip        = "One step a day, at the cot, out of the bought face. The story card names the next one."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "bastien_drank",  op = "is_true"  },
   { flag = "bastien_bedded", op = "is_false" },
 ]
@@ -11766,6 +11796,7 @@ npc_id     = "npc_bastien"
 text       = "He cannot hold your weight, so you do all of it, and he lets you. He watches you the way he used to watch a readout. The scratches on the frame are the days since Cain put him down here and went away, and they are still going up."
 tip        = "Go to him at the cot once a day, out of the bought face. Only the first visit of a day counts."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "bastien_bedded",  op = "is_true"  },
   { flag = "bastien_himself", op = "is_false" },
 ]
@@ -11776,6 +11807,7 @@ npc_id     = "npc_bastien"
 text       = "He has stopped counting days and started counting money. He sits at your bench in the brace and works, and the underworld he never stood in front of is answering him again from a ship-breaker's yard."
 tip        = "Take his note to Rue at the House, eight in the morning until three the next morning. Bring the envelope back to your cot."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "bastien_himself", op = "is_true"  },
   { flag = "bastien_back",    op = "is_false" },
 ]
@@ -11789,6 +11821,7 @@ terminal      = true
 terminal_text = "He is himself. The nights stay open."
 # 0.2.3 (beat_0212): true until Vega comes down the strip; his section goes on from there (cards 20-21).
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "bastien_back",  op = "is_true"  },
   { flag = "site_ambushed", op = "is_false" },
 ]
@@ -11803,6 +11836,7 @@ goals = [
   { flag = "crew_asked", op = "is_true", label = "Tell Bastien about Vega" },
 ]
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "site_ambushed", op = "is_true"  },
   { flag = "crew_asked",    op = "is_false" },
 ]
@@ -11817,6 +11851,7 @@ goals = [
   { trait = "undertow_build", subject = "player", op = "gte", value = 3, label = "Rebuild the Undertow" },
 ]
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "crew_asked",    op = "is_true"  },
   { flag = "undertow_open", op = "is_false" },
 ]
@@ -11831,6 +11866,7 @@ goals = [
   { flag = "crew_list_held", op = "is_true", label = "Tell Bastien the bar is open" },
 ]
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "undertow_open",  op = "is_true"  },
   { flag = "crew_list_held", op = "is_false" },
 ]
@@ -11845,6 +11881,7 @@ goals = [
   { flag = "crew_called", op = "is_true", label = "Take his list to Rue" },
 ]
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "crew_list_held", op = "is_true"  },
   { flag = "crew_called",    op = "is_false" },
 ]
@@ -11861,6 +11898,7 @@ goals = [
   { flag = "crew_refused", op = "is_true", label = "Make his offer to his old men" },
 ]
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "crew_called",  op = "is_true"  },
   { flag = "crew_refused", op = "is_false" },
 ]
@@ -11875,6 +11913,7 @@ goals = [
   { flag = "dace_met", op = "is_true", label = "Talk to Dace" },
 ]
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "crew_refused", op = "is_true"  },
   { flag = "dace_met",     op = "is_false" },
 ]
@@ -11890,6 +11929,7 @@ goals = [
   { flag = "crew_back", op = "is_true", label = "Pay Dace's price" },
 ]
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "dace_met",  op = "is_true"  },
   { flag = "crew_back", op = "is_false" },
 ]
@@ -11904,6 +11944,7 @@ goals = [
   { flag = "vega_plan", op = "is_true", label = "Make the plan with Bastien and Cain" },
 ]
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "crew_back", op = "is_true"  },
   { flag = "vega_plan", op = "is_false" },
 ]
@@ -11918,6 +11959,7 @@ goals = [
   { flag = "vega_taken", op = "is_true", label = "Draw Vega out (the Underground)" },
 ]
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "vega_plan",  op = "is_true"  },
   { flag = "vega_taken", op = "is_false" },
 ]
@@ -11934,6 +11976,7 @@ tip        = "He is at the cot, any hour, and he has his habits back. Go to him 
 terminal      = true
 terminal_text = "He is himself, and he has his men."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "vega_taken", op = "is_true" },
 ]
 # ══════════════════════════════════════════════════════════════════════════════════════════════════════════
@@ -14634,6 +14677,7 @@ npc_id     = "npc_grier"
 text       = "The old machinist has a piece of your childhood in a drawer and no idea it is there. He threw you out the first time you asked him a straight question. There is no question that works on this man. What works is turning up until you are a thing he is used to."
 tip        = "His room is off the lane in the Reach and he is in it from ten in the morning. Sit with him, or take a bottle down from the Anchor and drink with him. The bottle is faster and it costs twenty a time."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag  = "grier_met", op = "is_true" },
   { trait = "relation", subject = "npc", npc_id = "npc_grier", op = "lt", value = 10 },
 ]
@@ -14647,6 +14691,7 @@ npc_id     = "npc_grier"
 text       = "He has stopped watching the door when it opens. He gives instructions now and he expects them followed, and he has still not been decent about one minute of it. That is the deal and it was never going to be a different one."
 tip        = "Keep taking a bottle down and keep climbing. Open the blouse when you pour and he pays the most for it. The last rung on his portrait is the one that opens the drawer."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { trait = "relation", subject = "npc", npc_id = "npc_grier", op = "gte", value = 10 },
   { trait = "relation", subject = "npc", npc_id = "npc_grier", op = "lt",  value = 14 },
 ]
@@ -14660,6 +14705,7 @@ npc_id     = "npc_grier"
 text       = "He lets you into the room now and he is sour about every minute of it, and that is the deal you made. What you came down the lane for is six feet from his chair, in a drawer full of fuses, and to him it is a dud part he gave up on in the second year. There is one way to get at what a man carries, and you have used it on better men than him."
 tip        = "Take him whenever he is in. Let him have the rest of it, work him up, and take the finish in your ass. That is the only one that drains. Carry the drain itself, charged, before you walk down there. The emitter is the wrong tool for this. The sidebar says which one is on you and whether it is loaded, and if it is spent, a night on the feed line at the cot is ten coin and fills it. The swap bench is at the berth on the way in."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { trait = "relation", subject = "npc", npc_id = "npc_grier", op = "gte", value = 14 },
   { trait = "grier_drains_done", subject = "player", op = "lt", value = 1 },
 ]
@@ -14674,6 +14720,7 @@ text       = "He got there, and it cost him the one thing he had been carrying f
 tip        = "Grier is finished as a lead and Grier is not finished. His room is open from ten every morning and every rung is still on his portrait, pure power now. He is the only man in the Reach who can tell what you are by looking."
 terminal   = true
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { trait = "grier_drains_done", subject = "player", op = "gte", value = 1 },
 ]
 
@@ -14693,6 +14740,7 @@ npc_id     = "npc_sabin"
 text       = "Four months into eleven years of a dead man's filing, and he hired you off a bought card he never turned over. He is not cruel and he is not cold. He is the only person in this city who has asked what you think and then stopped talking to hear it."
 tip        = "Take shifts on the floor at THE RISE, in the kit and in the face every time. He is down there mornings, eight until eleven, and up in his lab from eleven until ten at night."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag  = "sabin_met", op = "is_true" },
   { trait = "relation", subject = "npc", npc_id = "npc_sabin", op = "lt", value = 10 },
 ]
@@ -14706,6 +14754,7 @@ npc_id     = "npc_sabin"
 text       = "He moved you off the floor and up to the lab and it cost him nothing at all to do it. He is glad of the company. He has no idea this is a thing about him, and he can go on having no idea, because the room he works in is the room you came for."
 tip        = "Keep going up to the lab at THE RISE. Reach across the bench for what he asks for, take the page round to his side with the blouse open, and kiss him once he is comfortable enough. What you want is not in the filing, it is on the shelf the filing came off."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { trait = "relation", subject = "npc", npc_id = "npc_sabin", op = "gte", value = 10 },
   { trait = "relation", subject = "npc", npc_id = "npc_sabin", op = "lt",  value = 18 },
 ]
@@ -14719,6 +14768,7 @@ npc_id     = "npc_sabin"
 text       = "Over the bench, four floors up, with his hand across your mouth because that level has nothing on it to stop a sound getting out. He apologised to the stacks he knocked down. He knows where every last piece of that archive is kept and he has never once had to think about it."
 tip        = "Clear the bench whenever he is up there. Work him up and take it in your ass. No other finish drains him. Carry the drain itself, charged, before you go up: the emitter takes nothing out of him. The sidebar says which one is on you and whether it is loaded, and if it is spent, a night on the feed line at the cot is ten coin and fills it. The swap bench is at the berth on the way in. What comes out of him is a floor, a rack and an eleven-character reference."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { trait = "relation", subject = "npc", npc_id = "npc_sabin", op = "gte", value = 18 },
   { trait = "sabin_drains_done", subject = "player", op = "lt", value = 1 },
 ]
@@ -14733,6 +14783,7 @@ text       = "He signed a thing out eleven times over four months and never once
 tip        = "Sabin is finished as a lead and Sabin is not finished. He is on the floor at eight and in his lab from eleven, the reading still pays fifteen a shift, and both are open to you in the kit and the face."
 terminal   = true
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { trait = "sabin_drains_done", subject = "player", op = "gte", value = 1 },
 ]
 
@@ -24324,6 +24375,7 @@ tip        = "He is at the cot, any hour. Go to him when you want him."
 terminal      = true
 terminal_text = "He is himself, and he has his men. All but one."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "dace_dead", op = "is_true" },
 ]
 
@@ -24753,6 +24805,7 @@ tip        = "He is on the floor at eight and in his lab from eleven."
 terminal      = true
 terminal_text = "He made a note."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "rise_searched", op = "is_true" },
 ]
 
@@ -24765,5 +24818,6 @@ tip        = "He keeps the nights at the Site, from nine."
 terminal      = true
 terminal_text = "She chose him."
 when = [
+  { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "cain_chosen", op = "is_true" },
 ]

@@ -453,6 +453,9 @@ def main():
         page.evaluate("""() => { const f = SugarCube.State.variables.flags;
             f.bastien_himself = true; f.house_answered = true; f.bastien_back = true; }""")
         q = quests()
+        # 0.2.4: a TERMINAL card now sits under the collapsed "Finished" heading (quests_finished_collapsed), whose
+        # text is in the page but not visible, so read textContent for this one line.
+        q = page.evaluate("document.querySelector('#passages').textContent")
         check("He is himself. The nights stay open." in q,
               "his section closes on his own words, not a bare 'Arc complete'")
 
