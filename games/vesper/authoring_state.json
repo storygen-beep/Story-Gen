@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 260,
+  "book_revision": 261,
   "register": {
     "person": "third"
   },
@@ -3324,6 +3324,87 @@
       "introduces": [],
       "canvases": [],
       "notes": "ADDED after the push (LO: 'i want to click on the end of 0.2.3 and start this new release'): dev_jump_transfer_start in 6_dev_shortcuts.toml, '0.2.4: start (the end of 0.2.3)', a copy of dev_jump_hunt_table moved past the table and cradles (every 0.2.3 flag through cradles_ready set, damage 0, vega_records 0, every 0.2.4 flag unset), landing at the Site. The five older 0.2.3 jumps now also unset the 0.2.4 flags and zero vega_records. Guard §0239 and a live check from a fresh browser context: lands at the Site, reading card shown, study night 1 fires at 22:05, card M live. Known limit, as for every dev jump: one-time scenes remember having fired, so a save that already played 0.2.4 will not replay them; use a new game."
+    },
+    {
+      "id": "beat_0240",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 player plays Vega — in_vega + vega_cell + sidebar per body + portrait rule; the transfer drops into free play (face off, rise_door)",
+      "introduces": [],
+      "canvases": [],
+      "notes": "in_vega + vega_cell + sidebar per body + portrait rule; the transfer drops into free play (face off, rise_door)"
+    },
+    {
+      "id": "beat_0241",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 player plays Vega — doors: strip locked to Vega; chairmans_floor (Vega, after the plan, night); the Rise reads rise_door; face card mirrors rise_door; heal_rise_door",
+      "introduces": [],
+      "canvases": [],
+      "notes": "doors: strip locked to Vega; chairmans_floor (Vega, after the plan, night); the Rise reads rise_door; face card mirrors rise_door; heal_rise_door"
+    },
+    {
+      "id": "beat_0242",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 player plays Vega — Vega's own cards: activity_vega_site (charge, out to the gate), activity_vega_gate, activity_vega_car; Wren cards at reachable places gated in_vega is_false (helper defect fixed: nine conditions restored)",
+      "introduces": [],
+      "canvases": [],
+      "notes": "Vega's own cards: activity_vega_site (charge, out to the gate), activity_vega_gate, activity_vega_car; Wren cards at reachable places gated in_vega is_false (helper defect fixed: nine conditions restored)"
+    },
+    {
+      "id": "beat_0243",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 player plays Vega — the Rise as player cards: activity_vega_lab (Sabin's hours), activity_vega_top_floors (10 cell), cap_sabin_notices; cap_the_rise removed",
+      "introduces": [],
+      "canvases": [],
+      "notes": "the Rise as player cards: activity_vega_lab (Sabin's hours), activity_vega_top_floors (10 cell), cap_sabin_notices; cap_the_rise removed"
+    },
+    {
+      "id": "beat_0244",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 player plays Vega — cap_tower_plan re-hosted (Site, both men, no clock hour, cell topped up, 60 min)",
+      "introduces": [],
+      "canvases": [],
+      "notes": "cap_tower_plan re-hosted (Site, both men, no clock hour, cell topped up, 60 min)"
+    },
+    {
+      "id": "beat_0245",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 player plays Vega — cap_the_vault on chairmans_floor: opening rewritten, blade costs 30 cell, go back down",
+      "introduces": [],
+      "canvases": [],
+      "notes": "cap_the_vault on chairmans_floor: opening rewritten, blade costs 30 cell, go back down"
+    },
+    {
+      "id": "beat_0246",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 player plays Vega — Lyra and Nova + Dace on Spire Plaza; 'by three' lines removed; homecoming clears in_vega + rise_door",
+      "introduces": [],
+      "canvases": [],
+      "notes": "Lyra and Nova + Dace on Spire Plaza; 'by three' lines removed; homecoming clears in_vega + rise_door"
+    },
+    {
+      "id": "beat_0247",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 player plays Vega — quest cards N/P/Q/R, Sabin after the Rise, Cain section, study tip; dev jump 0.2.4: in Vega; older jumps clear Vega state",
+      "introduces": [],
+      "canvases": [],
+      "notes": "quest cards N/P/Q/R, Sabin after the Rise, Cain section, study tip; dev jump 0.2.4: in Vega; older jumps clear Vega state"
+    },
+    {
+      "id": "beat_0248",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 player plays Vega — guards (Vega map + leak walk, negative-tested), live test played by nav, engine fix: a locked root's Go back returns to the previous passage, not Start",
+      "introduces": [],
+      "canvases": [],
+      "notes": "guards (Vega map + leak walk, negative-tested), live test played by nav, engine fix: a locked root's Go back returns to the previous passage, not Start"
     }
   ],
   "structure_registry": {
@@ -4245,7 +4326,7 @@
     ]
   },
   "next_up": [
-    "0.2.4 — THE TRANSFER is BUILT 2026-10-12 (beats 0223-0239, rev 244-260), uncommitted. LO's, in order: (1) review + commit; (2) the media harvest, 25 slots (design_the_transfer.md 'BUILT · Media'); (3) release: version bump, codes rotation, guide chapters, build without --dev/--debug, snapshot, uploads/posts; (4) the blueprint's flip-able calls, all standing as built.",
+    "0.2.4 — THE TRANSFER, now with the player playing Vega (beats 0240-0248, 2026-10-13). LO's: the media harvest (27 slots: 25 + wren_as_vega portrait + chairmans_floor), then the release (version, codes, guide, no-dev build).",
     "RELEASED — 0.2.3 HER FATHER'S HOUSE and THE HUNT shipped 2026-10-05 and 0.2.3.1 (the clock setting) 2026-10-09, both committed. Still LO's from that list: the media harvest, the crew-night ceiling row, and the flip-able calls in design_the_hunt.md. 0.2.3 — HER FATHER'S HOUSE and THE HUNT is BUILT (beats 0206-0218, rev 240), uncommitted. LO's, in order: (1) review + commit; (2) the media harvest — 25 slots (design_the_hunt.md 'BUILT · Media'); (3) sign the crew-night ceiling row; (4) the paid guide needs 0.2.3 chapters and the fighting 85 gate; (5) version bump + publish build (drop --dev/--debug) at release; (6) flip-able calls listed in design_the_hunt.md.",
     "RESOLVED 2026-10-02 — MARKET CAP. underworld_market_shop's two buys are one-time now (flags market_weapon_bought / market_gear_bought, each choice gated is_false). design_cheat_page.md §11.1 marked resolved.",
     "THE RINGS, two calls flagged to LO and not yet answered (design_the_rings.md 'Decisions'): (1) the door man is emitter-or-grind — the clean pass needs a silent run AND an unspent budget, so in practice the rescue is gated behind the emitter's 10-coin-and-a-day reload or fighting 70; (2) the slab's round runs 20:00-23:59, night rather than day. Both are one-line flips.",
@@ -4256,7 +4337,7 @@
     "⚠️ OPEN ITEM 5, STILL LO's CALL — cap_grier_met, cap_grier_gives and cap_sabin_hires auto-fire with their NPC absent. One npc_at_location … is_present clause each; the fix is proved on cap_sabin_consults. It re-opens three validated beats.",
     "⚠️ STILL OPEN — the template_import.py:5375 engine bug (warnings.append where warnings is the stdlib module)."
   ],
-  "_active_beat": "0.2.4 THE TRANSFER — last validated: beat_0239. Building beat by beat from design_the_transfer.md BLUEPRINT.",
+  "_active_beat": "0.2.4 — player plays Vega built and validated (beats 0240-0248, rev 261).",
   "decisions_log": [
     {
       "turn": 1,
@@ -5437,6 +5518,7 @@
     "2026-10-12 — beat_0237 VALIDATED (0.2.4 THE TRANSFER, rev 258). cap_cain_for_real (the run, last link, explicit, Cain ceiling signed): no presence gate; Kess has taken the wreck down; she asks each thing (held me down / going to kill me / you loved me) and Cain says yes to each; the Chairman kept it so she'd hate him; 'I don't hate you'; kissing, naked on the blanket between the cradles, her mouth on his cock, his mouth on her cunt, she cums, missionary, he cums in her, a second time from behind (vaginal), cum again; the meaning in its own beat ('I'm choosing you anyway'; the Chairman's leash taken out of his hands). No anal. Three clips, one file each. No year count (Grier's nine vs Bastien's eleven). Sets cain_chosen, 540 min. End card O (terminal, cain_chosen, tip re-read place by place). Narration:dialogue 1.82:1. Guard §0237: exactly one terminal story card again. Build green.",
     "2026-10-12 — beat_0238 VALIDATED (0.2.4 THE TRANSFER, rev 259). What stands after the run. site_the_cradles rebuilt as two chains split by one ungrouped line (shell until back_in_body, then the empty cradle; Cain waiting through the study, then her lover from cain_chosen); the shell image shows only while the shell is there; its 0.2.3 'stays true all the way to 0.2.4' comment retired. activity_cain_trains: a cain_chosen band leads the chain. NEW activity_kess_site (Kess's portrait hub at the Site for his 22:00-23:59 row, banded on the study state; fixes gates.py's DEAD-presence finding). NEW kess_the_wreck (Wren-solo @kess_berth from back_in_body; Kess learning the blade arm; plant for 0.2.5; promises no date; scenes/the_wreck_on_the_table.jpg). check_the_hunt.py §0216 amended (cain_chosen band now leads; the after-the-take band is first below it); the hunt guard's per-screen ratio caught the cradle card at 3.40/4.07 and it was tightened until it passed. Guard §0238. Build green, all guards OK.",
     "2026-10-12 — beat_0239 VALIDATED (0.2.4 THE TRANSFER, rev 260). tests/live_the_transfer.py: the whole chapter in a real browser (0.2.3 take -> end card O -> what stands after), incl. the twice-a-day cap on the Site's card list and the vault's wait branch; it caught the Rise rendering at 11:10 (exit minutes apply on render), fixed by retuning transfer 480 / plan 720 / fight 120 / save 210 (Rise 09:10, fight 01:19, save 04:49, measured). check_the_transfer.py complete §0224-§0238. live_the_hunt / live_the_hunt_end amended (card M after the cradles). All guards and all seven live suites OK. Leak check clean. BUILT section written into design_the_transfer.md. 0.2.4 is BUILT, uncommitted; media harvest (25 slots) and release are LO's.",
-    "2026-10-12 — beat_0239 VALIDATED (0.2.4 THE TRANSFER, rev 260). ADDED after the push (LO: 'i want to click on the end of 0.2.3 and start this new release'): dev_jump_transfer_start in 6_dev_shortcuts.toml, '0.2.4: start (the end of 0.2.3)', a copy of dev_jump_hunt_table moved past the table and cradles (every 0.2.3 flag through cradles_ready set, damage 0, vega_records 0, every 0.2.4 flag unset), landing at the Site. The five older 0.2.3 jumps now also unset the 0.2.4 flags and zero vega_records. Guard §0239 and a live check from a fresh browser context: lands at the Site, reading card shown, study night 1 fires at 22:05, card M live. Known limit, as for every dev jump: one-time scenes remember having fired, so a save that already played 0.2.4 will not replay them; use a new game."
+    "2026-10-12 — beat_0239 VALIDATED (0.2.4 THE TRANSFER, rev 260). ADDED after the push (LO: 'i want to click on the end of 0.2.3 and start this new release'): dev_jump_transfer_start in 6_dev_shortcuts.toml, '0.2.4: start (the end of 0.2.3)', a copy of dev_jump_hunt_table moved past the table and cradles (every 0.2.3 flag through cradles_ready set, damage 0, vega_records 0, every 0.2.4 flag unset), landing at the Site. The five older 0.2.3 jumps now also unset the 0.2.4 flags and zero vega_records. Guard §0239 and a live check from a fresh browser context: lands at the Site, reading card shown, study night 1 fires at 22:05, card M live. Known limit, as for every dev jump: one-time scenes remember having fired, so a save that already played 0.2.4 will not replay them; use a new game.",
+    "2026-10-13 — 0.2.4 THE PLAYER PLAYS VEGA (rev 261), beats 0240-0248 validated. LO: 'Wren takes controls as vega, player plays vega, goes to do things'. Blueprint change 2 reversed (my mistake: it hid that the player never controlled Vega). Plan approved in plan mode. Built: in_vega switch, Vega's cell, the strip locked to Vega with her own cards around it, the Rise and the Tower walked by the player (Sabin's hours, night on the Chairman's floor, cell costs), plan/vault/fight/save re-hosted where they happen, quest cards per step + Sabin/Cain fixes, a second dev jump. Engine fix in v2.py: a locked root's Go back returns to the previous passage. Guards incl. the leak walk (negative-tested), live test by nav clicks, all older suites, gates.py unchanged at 38 FAILs."
   ]
 }

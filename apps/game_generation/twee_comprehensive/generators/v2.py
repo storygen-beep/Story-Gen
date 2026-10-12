@@ -11198,7 +11198,13 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 """
                     navigation_options = self._generate_hierarchical_navigation(location)
                     content += navigation_options
-                    go_back_target = self._location_passage_for_name(parent_name) if parent_name else "Start"
+                    # A locked ROOT (no parent) used to send "Go back" to Start, which threw a player out of the game
+                    # when a nav link led to it (Vesper 0.2.4: Leave The Site -> the strip, locked to Vega's body). With
+                    # no parent to go back to, go back to the passage she came from; Start only if there is none.
+                    if parent_name:
+                        go_back_link = f"[[Go back->{self._location_passage_for_name(parent_name)}]]"
+                    else:
+                        go_back_link = '<<link "Go back">><<goto `previous() || "Start"`>><</link>>'
                     if blocked_message:
                         resolved_blocked = self._resolve_at_references(blocked_message)
                         blocked_html = f'<p class="entry-blocked-narrative">{resolved_blocked}</p>'
@@ -11231,7 +11237,7 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
 <<else>>
 <h2>{location.name}</h2>
 {blocked_html}
-[[Go back->{go_back_target}]]
+{go_back_link}
 <</if>>
 
 """

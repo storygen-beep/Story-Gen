@@ -101,7 +101,8 @@ def study_night_checks(canvases, cards, cid, tag, prev_flag, sets, image, must_s
           f"{tag}: card M lists {sets} as a goal")
 
 
-def run_link_checks(canvases, cid, tag, prev_flag, sets, minutes, images, must_say, presence=False):
+def run_link_checks(canvases, cid, tag, prev_flag, sets, minutes, images, must_say, presence=False,
+                    where="the_site", exit_to="the_site", needs=()):
     """A link of THE RUN: one-shot auto-fire at the Site, pri 11, gated prev_flag + its own flag is_false, exits to
     the_site with the stated minutes, sets its flag, carries exactly its images. Presence gates only on link 1."""
     c = canvases.get(cid)
@@ -109,20 +110,24 @@ def run_link_checks(canvases, cid, tag, prev_flag, sets, minutes, images, must_s
     if not c:
         return None
     tr = c.get("trigger") or {}
-    check(tr.get("location") == "the_site" and tr.get("is_repeatable") is False and tr.get("priority") == 11,
-          f"{tag}: {cid} is a one-shot auto-fire at the_site, pri 11")
+    check(tr.get("location") == where and tr.get("is_repeatable") is False and tr.get("priority") == 11,
+          f"{tag}: {cid} is a one-shot auto-fire at {where}, pri 11 (got {tr.get('location')})")
     its = cond_items(tr.get("conditions"))
     check((tr.get("conditions") or {}).get("version") == "1.0", f"{tag}: {cid} conditions need version 1.0")
     check(has_flag(its, prev_flag, "is_true") and has_flag(its, sets, "is_false"), f"{tag}: gated {prev_flag} + {sets} is_false")
+    for f in needs:
+        check(has_flag(its, f, "is_true"), f"{tag}: {cid} also needs {f}")
     pres = [i for i in its if i.get("type") == "npc_at_location"]
-    if presence:
+    if presence is None:
+        pass            # the caller checks its own presence gate (e.g. Sabin's look)
+    elif presence:
         for who in ("npc_kess", "npc_cain"):
             check(any(i.get("npc_id") == who and i.get("operator") == "is_present" for i in pres), f"{tag}: {cid} needs {who} present")
     else:
         check(not pres, f"{tag}: {cid} is a later link of the run and must carry NO presence gate (the beat_0222 pattern)")
     cfg = (((c.get("nodes") or [{}])[-1].get("exit_block")) or {}).get("config") or {}
-    check(cfg.get("locationId") == "the_site" and cfg.get("time_progression_minutes") == minutes,
-          f"{tag}: exits to the_site after {minutes} min, got {cfg.get('locationId')} / {cfg.get('time_progression_minutes')}")
+    check(cfg.get("locationId") == exit_to and cfg.get("time_progression_minutes") == minutes,
+          f"{tag}: exits to {exit_to} after {minutes} min, got {cfg.get('locationId')} / {cfg.get('time_progression_minutes')}")
     check({"targetType": "player", "flag": sets, "op": "set"} in (cfg.get("flagEffects") or []), f"{tag}: sets {sets}")
     imgs = sorted((b.get("props") or {}).get("file") for b in all_blocks(c.get("nodes")) if b.get("type") in ("image", "video"))
     check(imgs == sorted(images), f"{tag}: media should be {sorted(images)}, found {imgs}")
@@ -169,6 +174,87 @@ def explicit_scene_checks(canvas, tag, clips, min_explicit_beats):
     alltxt = text_of(canvas).lower()
     check(not re.search(r"\banal\b|\bin her ass\b|\bher ass open", alltxt), f"{tag}: anal is held out by the signed ceiling")
     return beats
+
+
+# ── THE VEGA MAP — what is true in every save while Wren wears Vega (beat_0248). ──────────────────────────────
+# Flags known true / false once the transfer has happened. Anything not listed is UNKNOWN and treated as possibly
+# true, so the walk below over-approximates what Vega can reach and what can render there: it can only fail loud.
+VEGA_TRUE = {"in_vega", "rise_door", "transferred", "cradles_ready", "vega_dismantled", "vega_taken", "vega_plan",
+             "crew_back", "study_blade", "study_signal", "study_method", "last_night_held", "marrow_known", "site_offered",
+             "the_site_open", "archive_1a_done", "rise_named", "salvage_entered", "salvage_relaunched", "sabin_met",
+             "sabin_consulted", "seam_known", "opening_done", "wall_understood", "face_bought"}
+VEGA_FALSE = {"face_worn", "back_in_body", "memory_whole", "cain_chosen", "dev_mode_enabled"}
+VEGA_TRAITS = {"vega_records": 9}
+# Surfaces that are written for Vega without an in_vega gate (their own flags only exist in Vega), or that are
+# body-neutral. Each one is read by a human; adding to this list is a claim that the prose is true for Vega.
+VEGA_OK = {"activity_leave_the_rise": "the lift and the desk, no body named",
+           "activity_leave_the_lab": "the way out of the lab, no body named",
+           "cap_lyra_and_nova": "memory_taken only ever sets in Vega",
+           "cap_dace_falls": "units_fought only ever sets in Vega",
+           "cap_back_in_body": "the homecoming, written for leaving Vega"}
+
+
+def may_pass(conditions):
+    """Can these v1.0 conditions be true while Wren is in Vega? False only when a KNOWN state contradicts them."""
+    if not conditions or conditions.get("version") != "1.0":
+        return True
+    items = conditions.get("items", [])
+    def one(i):
+        if i.get("type") == "flag":
+            k, op = i.get("flag_key"), i.get("operator")
+            if k in VEGA_TRUE:
+                return op == "is_true"
+            if k in VEGA_FALSE:
+                return op == "is_false"
+            return True
+        if i.get("type") == "trait" and i.get("trait_key") in VEGA_TRAITS:
+            v, op, x = VEGA_TRAITS[i["trait_key"]], i.get("operator"), i.get("value")
+            return {"gte": v >= x, "gt": v > x, "lt": v < x, "lte": v <= x, "eq": v == x, "ne": v != x}.get(op, True)
+        return True
+    res = [one(i) for i in items]
+    return any(res) if conditions.get("logic") == "OR" else all(res)
+
+
+def vega_gated(trigger):
+    return any(i.get("type") == "flag" and i.get("flag_key") == "in_vega" for i in cond_items(trigger.get("conditions")))
+
+
+def vega_reach(t):
+    """Locations Vega can stand in: nav (parent <-> child, navigation_order) through locks that may pass, plus every
+    teleport (choice locationId, exit config locationId) on a card that may render at a reached place."""
+    locs = {l["id"]: l for l in t.get("locations", [])}
+    nbr = {k: set() for k in locs}
+    for k, l in locs.items():
+        par = l.get("entry_from") or l.get("parent")
+        if par in locs:
+            nbr[k].add(par); nbr[par].add(k)
+        for c in l.get("navigation_order", []) or []:
+            if c in locs:
+                nbr[k].add(c)
+    by_loc = {}
+    for c in t.get("canvases", []):
+        tr = c.get("trigger") or {}
+        by_loc.setdefault(tr.get("location"), []).append(c)
+    seen, todo = set(), ["the_site"]
+    while todo:
+        k = todo.pop()
+        if k in seen:
+            continue
+        seen.add(k)
+        for n in nbr.get(k, ()):
+            if n not in seen and may_pass(locs[n].get("entry_conditions")):
+                todo.append(n)
+        for c in by_loc.get(k, []):
+            if c["id"].startswith("dev_jump") or not may_pass((c.get("trigger") or {}).get("conditions")):
+                continue
+            for nd in c.get("nodes", []):
+                eb = nd.get("exit_block") or {}
+                tgts = [ch.get("locationId") for ch in eb.get("choices", []) if may_pass(ch.get("conditions"))]
+                tgts.append((eb.get("config") or {}).get("locationId"))
+                for x in tgts:
+                    if x in locs and x not in seen:
+                        todo.append(x)
+    return seen, by_loc
 
 
 def main():
@@ -312,65 +398,82 @@ def main():
     # The read card and the cradles card close or stay out of the way once she is in Vega: the read card is gated
     # transferred is_false (checked at §0224); the run's links outrank the solo cards (pri 11 over 3).
 
-    # ── beat_0230 — cap_the_rise (the run, link 2) ──────────────────────────────────────────────────────
-    rs = run_link_checks(canvases, "cap_the_rise", "0230", "transferred", "rise_searched", 180,
-                         ["scenes/the_rise_search.jpg", "scenes/the_production_floor.jpg", "scenes/sabin_looks.jpg"],
-                         ["Vance Tower", "eleven thousand", "empty", "never look at anybody"])
-    if rs:
-        txt = text_of(rs)
-        check("until eleven" in txt, "0230: the scene says why his lab is empty (he is on the floor until eleven, his row)")
-        spk = {(b.get("props") or {}).get("npcId") for b in all_blocks(rs.get("nodes")) if b.get("type") == "dialog"}
-        check("npc_sabin" in spk, "0230: Sabin speaks as npc_sabin")
+    # ── beat_0240-0246 — THE PLAYER PLAYS VEGA (LO 2026-10-13). The Rise as player cards, the rest re-hosted. ──
+    # The transfer drops into free play as Vega.
+    if tf:
+        cfg = (((tf.get("nodes") or [{}])[-1].get("exit_block")) or {}).get("config") or {}
+        fl = {f.get("flag"): f.get("op") for f in cfg.get("flagEffects", [])}
+        check(fl.get("in_vega") == "set" and fl.get("rise_door") == "set" and fl.get("face_worn") == "unset",
+              "0240: the transfer sets in_vega + rise_door and takes the bought face off")
+        eff = {e.get("trait"): (e.get("op"), e.get("value")) for e in cfg.get("effects", [])}
+        check(eff.get("vega_cell") == ("set", 100), "0240: the transfer fills Vega's cell")
+    lab = canvases.get("activity_vega_lab")
+    check(lab is not None, "0243: activity_vega_lab is missing")
+    if lab:
+        tr = lab.get("trigger") or {}
+        its = cond_items(tr.get("conditions"))
+        check(tr.get("location") == "the_rise_floor" and tr.get("is_repeatable") is True, "0243: the lab card is a repeatable card on the Rise floor")
+        check(has_flag(its, "in_vega", "is_true") and has_flag(its, "rise_slip", "is_false"), "0243: lab card gated in_vega + rise_slip is_false")
+        up = [c for c in ((node(lab, "base") or {}).get("exit_block") or {}).get("choices", []) if c.get("nodeId") == "activity_vega_lab.lab"]
+        check(up and up[0].get("show_when_locked") and any(i.get("type") == "npc_at_location" and i.get("npc_id") == "npc_sabin"
+              and i.get("location_id") == "the_rise_floor" and i.get("operator") == "is_present" for i in cond_items(up[0].get("conditions"))),
+              "0243: up to the lab only while Sabin is downstairs on the floor, shown locked otherwise")
+        ln = node(lab, "lab") or {}
+        cfg = (ln.get("exit_block") or {}).get("config") or {}
+        check({"targetType": "player", "flag": "rise_slip", "op": "set"} in (cfg.get("flagEffects") or []), "0243: the lab sets rise_slip")
+        check("until eleven" in text_of(lab) and "Vance Tower" in text_of(lab), "0243: the lab says why it is empty and where the slip points")
+    top = canvases.get("activity_vega_top_floors")
+    check(top is not None, "0243: activity_vega_top_floors is missing")
+    if top:
+        ch = [c for c in ((node(top, "base") or {}).get("exit_block") or {}).get("choices", []) if c.get("nodeId") == "activity_vega_top_floors.top"]
+        check(ch and {"trait": "vega_cell", "value": 10} in (ch[0].get("costs") or []), "0243: the top floors cost 10 of Vega's cell")
+        cfg = ((node(top, "top") or {}).get("exit_block") or {}).get("config") or {}
+        check({"targetType": "player", "flag": "rise_line_seen", "op": "set"} in (cfg.get("flagEffects") or []), "0243: the top floors set rise_line_seen")
+        check("eleven thousand" in text_of(top), "0243: the line is Sabin's eleven thousand")
+    sn = run_link_checks(canvases, "cap_sabin_notices", "0243", "rise_line_seen", "rise_searched", 10,
+                         ["scenes/sabin_looks.jpg"], ["never look at anybody", "make a note"],
+                         where="the_rise_floor", exit_to="spire_plaza", needs=("in_vega", "rise_slip"), presence=None)
+    if sn:
+        its = cond_items((sn.get("trigger") or {}).get("conditions"))
+        check(any(i.get("type") == "npc_at_location" and i.get("npc_id") == "npc_sabin" and i.get("operator") == "is_present" for i in its),
+              "0243: Sabin's look needs him present on the floor")
         for bad in ("transfer works", "it's wren", "you're wren"):
-            check(bad not in txt.lower(), f"0230: Sabin must not learn the transfer works ('{bad}')")
-
-    # ── beat_0231 — cap_tower_plan (the run, link 3) ────────────────────────────────────────────────────
-    tp = run_link_checks(canvases, "cap_tower_plan", "0231", "rise_searched", "tower_planned", 720,
-                         ["scenes/the_tower_plan.jpg"], ["Waterfront", "by three", "vault", "eleven thousand"])
+            check(bad not in text_of(sn).lower(), f"0243: Sabin must not learn the transfer works ('{bad}')")
+    check("cap_the_rise" not in canvases, "0243: the old auto-fire cap_the_rise is gone (the Rise is played, not watched)")
+    tp = run_link_checks(canvases, "cap_tower_plan", "0244", "rise_searched", "tower_planned", 60,
+                         ["scenes/the_tower_plan.jpg"], ["Waterfront", "vault", "eleven thousand"], presence=True, needs=("in_vega",))
     if tp:
         txt = text_of(tp).lower()
-        # LO: they come because she is late, not because of a pact or a call.
-        for bad in ("if you're late", "if you are late", "call us", "we'll come in", "signal us"):
-            check(bad not in txt, f"0231: the plan must not pre-arrange the rescue ('{bad}')")
-
-    # ── beat_0232 — cap_the_vault (the run, link 4) ─────────────────────────────────────────────────────
-    vt = run_link_checks(canvases, "cap_the_vault", "0232", "tower_planned", "memory_taken", 120,
+        for bad in ("if you're late", "if you are late", "call us", "we'll come in", "signal us", "by three"):
+            check(bad not in txt, f"0244: the plan sets no hour and no rescue pact ('{bad}')")
+    vt = run_link_checks(canvases, "cap_the_vault", "0245", "tower_planned", "memory_taken", 30,
                          ["scenes/the_blade_in_the_tower.jpg", "scenes/vance_tower_vault.jpg"],
-                         ["Atrium", "alarm", "blade", "Don't open it"])
+                         ["no number on the panel", "alarm", "blade", "Don't open it"], where="chairmans_floor", exit_to="spire_plaza", needs=("in_vega",))
     if vt:
-        ids = [n.get("id") for n in vt.get("nodes", [])]
-        check(ids == ["base", "wait", "blade", "vault"], f"0232: nodes base/wait/blade/vault, found {ids}")
-        base_ch = [c.get("nodeId") for c in ((node(vt, "base") or {}).get("exit_block") or {}).get("choices", [])]
-        check(sorted(base_ch) == ["cap_the_vault.blade", "cap_the_vault.wait"], f"0232: the door is a real choice (blade / wait), found {base_ch}")
-        wait_ch = [c.get("nodeId") for c in ((node(vt, "wait") or {}).get("exit_block") or {}).get("choices", [])]
-        check(wait_ch == ["cap_the_vault.blade"], "0232: waiting still ends at the blade (no fail state, no way around)")
+        base_ch = [c.get("nodeId") or c.get("locationId") for c in ((node(vt, "base") or {}).get("exit_block") or {}).get("choices", [])]
+        check(sorted(base_ch) == ["atrium", "cap_the_vault.blade", "cap_the_vault.wait"], f"0245: the door: blade / wait / go back down, found {base_ch}")
+        wait_ch = [c.get("nodeId") or c.get("locationId") for c in ((node(vt, "wait") or {}).get("exit_block") or {}).get("choices", [])]
+        check(sorted(wait_ch) == ["atrium", "cap_the_vault.blade"], f"0245: waiting ends at the blade or back down, found {wait_ch}")
+        for nid in ("base", "wait"):
+            bl = [c for c in ((node(vt, nid) or {}).get("exit_block") or {}).get("choices", []) if c.get("nodeId") == "cap_the_vault.blade"]
+            check(bl and {"trait": "vega_cell", "value": 30} in (bl[0].get("costs") or []) and bl[0].get("show_when_locked"),
+                  f"0245: the blade at .{nid} costs 30 of the cell and shows locked when she can't afford it")
         txt = text_of(vt)
-        spk = {(b.get("props") or {}).get("npcId") for b in all_blocks(vt.get("nodes")) if b.get("type") == "dialog"}
-        check("npc_chairman" not in spk and "the chairman says" not in txt.lower(), "0232: the Chairman is never on screen")
-        check("Past Mercer" not in txt, "0232: the penthouse is the Tower's top floor; the Chairman's floor is never placed above it")
-
-    # ── beat_0233 — cap_lyra_and_nova (the run, link 5) ─────────────────────────────────────────────────
-    ln5 = run_link_checks(canvases, "cap_lyra_and_nova", "0233", "memory_taken", "units_fought", 120,
+        check("npc_chairman" not in txt and "the chairman says" not in txt.lower(), "0245: the Chairman is never on screen")
+        check("At midnight" not in txt and "by three" not in txt, "0245: no clock hour the player's own timing can make false")
+    ln5 = run_link_checks(canvases, "cap_lyra_and_nova", "0246", "memory_taken", "units_fought", 120,
                           ["scenes/lyra_and_nova.jpg", "scenes/vega_breaking.jpg"],
-                          ["Lyra and Nova", "signal off", "no pain", "Waterfront"])
+                          ["Lyra and Nova", "signal off", "no pain", "Waterfront"], where="spire_plaza", exit_to="spire_plaza")
     if ln5:
-        check(not any(n in npcs for n in ("npc_lyra", "npc_nova")), "0233: Lyra and Nova have no NPC entries (the blueprint's change 3)")
-        spk = [(b.get("props") or {}) for b in all_blocks(ln5.get("nodes")) if b.get("type") == "dialog"]
-        check(not spk, "0233: Lyra and Nova do not speak (and nobody else is there to)")
-        txt = text_of(ln5).lower()
-        for bad in ("lyra dies", "nova dies", "kills lyra", "kills nova"):
-            check(bad not in txt, f"0233: Lyra and Nova are never killed ('{bad}')")
-
-    # ── beat_0234 — cap_dace_falls (the run, link 6) + the Dace truth sweep ─────────────────────────────
-    df = run_link_checks(canvases, "cap_dace_falls", "0234", "units_fought", "dace_dead", 210,
+        check(not any(n in npcs for n in ("npc_lyra", "npc_nova")), "0246: Lyra and Nova have no NPC entries")
+        check(not [b for b in all_blocks(ln5.get("nodes")) if b.get("type") == "dialog"], "0246: Lyra and Nova do not speak")
+        check("three o'clock" not in text_of(ln5).lower(), "0246: no clock hour in the fight")
+    df = run_link_checks(canvases, "cap_dace_falls", "0246", "units_fought", "dace_dead", 210,
                          ["scenes/the_seam_again.jpg", "scenes/dace_falls.jpg"],
-                         ["seam", "Nobody called them", "Let them go", "coffins"])
+                         ["seam", "Nobody called them", "Let them go", "coffins"], where="spire_plaza", exit_to="the_site")
     if df:
         spk = {(b.get("props") or {}).get("npcId") for b in all_blocks(df.get("nodes")) if b.get("type") == "dialog"}
-        check({"npc_dace", "npc_cain", "npc_bastien"} <= spk, f"0234: Dace, Cain and Bastien all speak, found {spk}")
-        txt = text_of(df).lower()
-        for bad in ("lyra dies", "nova dies", "kills lyra", "kills nova", "she called", "the call came"):
-            check(bad not in txt, f"0234: driven off not killed, and nobody was called ('{bad}')")
+        check({"npc_dace", "npc_cain", "npc_bastien"} <= spk, f"0246: Dace, Cain and Bastien all speak, found {spk}")
     # Truth sweep: the cot hub's band chain gets a dace_dead band AFTER the face band and BEFORE the cradles band
     # (first match wins), and no Bastien line after dace_dead speaks of Dace in the present tense.
     cot = canvases.get("amb_bastien_cot")
@@ -519,6 +622,57 @@ def main():
             ch = ((j.get("nodes") or [{}])[0].get("exit_block") or {}).get("choices") or [{}]
             fl = {f.get("flag"): f.get("op") for f in ch[0].get("flagEffects", [])}
             check(fl.get("transferred") == "unset" and fl.get("cain_chosen") == "unset", f"0239: {jid} clears the 0.2.4 flags")
+
+    # ── beat_0248 — THE VEGA MAP: doors, meters, portrait, Vega's cards, and the leak walk ───────────────────
+    locs = {l["id"]: l for l in t.get("locations", [])}
+    st = locs.get("underworld_strip") or {}
+    check(has_flag(cond_items(st.get("entry_conditions")), "in_vega", "is_false") and (st.get("entry_conditions") or {}).get("version") == "1.0",
+          "0241: the strip is locked to Vega (the one lock over every Wren place down there)")
+    cf = locs.get("chairmans_floor") or {}
+    ci = cond_items(cf.get("entry_conditions"))
+    check(cf.get("entry_from") == "atrium" and "chairmans_floor" in (locs.get("atrium") or {}).get("navigation_order", []),
+          "0241: the Chairman's floor hangs off the Atrium")
+    check(has_flag(ci, "in_vega", "is_true") and has_flag(ci, "tower_planned", "is_true") and has_flag(ci, "memory_taken", "is_false")
+          and any(i.get("type") == "time_of_day" for i in ci), "0241: the Chairman's floor: Vega, after the plan, before the memory, at night")
+    rd = cond_items((locs.get("the_rise_floor") or {}).get("entry_conditions"))
+    check(has_flag(rd, "rise_named", "is_true") and has_flag(rd, "rise_door", "is_true") and not has_flag(rd, "face_worn", "is_true"),
+          "0241: the Rise's door reads rise_door (face or Vega)")
+    face = canvases.get("activity_the_face") or {}
+    fch = ((node(face, "base") or {}).get("exit_block") or {}).get("choices", [])
+    ops = {(f.get("flag"), f.get("op")) for c in fch for f in c.get("flagEffects", [])}
+    check(("rise_door", "set") in ops and ("rise_door", "unset") in ops, "0241: the face card sets and clears rise_door with the face")
+    check("heal_rise_door" in canvases, "0241: old saves with the face on are healed once (heal_rise_door)")
+    rows = t.get("sidebar_items", [])
+    cell = [r for r in rows if r.get("trait") == "vega_cell"]
+    check(len(cell) == 1 and has_flag(cond_items(cell[0].get("show_when")), "in_vega", "is_true"), "0240: one Vega's cell row, shown only in Vega")
+    for r in rows:
+        if r.get("trait") != "vega_cell":
+            check(has_flag(cond_items(r.get("show_when")), "in_vega", "is_false"), f"0240: Wren's {r.get('trait')} row hides while she is in Vega")
+    outs = ((t.get("player_portrait") or {}).get("outfits") or [{}])
+    check(outs[0].get("when") == {"flag": "in_vega"}, "0240: the in_vega portrait rule is FIRST (first match wins)")
+    check(core.get("vega_cell") == 0 and labels.get("vega_cell", {}).get("hidden") is True, "0240: vega_cell declared at 0 and hidden")
+    for cid, loc in (("activity_vega_site", "the_site"), ("activity_vega_gate", "underworld_gate"), ("activity_vega_car", "spire_plaza")):
+        c = canvases.get(cid) or {}
+        tr = c.get("trigger") or {}
+        check(tr.get("location") == loc and has_flag(cond_items(tr.get("conditions")), "in_vega", "is_true"), f"0242: {cid} is Vega's card at {loc}")
+    bb2 = canvases.get("cap_back_in_body") or {}
+    cfg = (((bb2.get("nodes") or [{}])[-1].get("exit_block")) or {}).get("config") or {}
+    fl = {f.get("flag"): f.get("op") for f in cfg.get("flagEffects", [])}
+    check(fl.get("in_vega") == "unset" and fl.get("rise_door") == "unset", "0246: the homecoming takes her out of Vega (in_vega, rise_door unset)")
+    # THE LEAK WALK. Every place Vega can reach, and every card that may render there, must be Vega's (in_vega gate),
+    # closed to Vega, impossible under the known Vega state, or on the read-by-a-human list above.
+    reach, by_loc = vega_reach(t)
+    # sabin_lab is NOT in this set: Vega's lab is a node of activity_vega_lab, and she never stands in the location.
+    want = {"the_site", "underworld_gate", "spire_plaza", "atrium", "the_rise_floor", "chairmans_floor"}
+    check(want <= reach, f"0248: Vega must be able to reach {sorted(want - reach)}")
+    check(not (reach - want), f"0248: Vega can reach places written for Wren: {sorted(reach - want)}")
+    for k in reach:
+        for c in by_loc.get(k, []):
+            tr = c.get("trigger") or {}
+            if c["id"].startswith("dev_jump") or c["id"] in VEGA_OK or vega_gated(tr):
+                continue
+            if may_pass(tr.get("conditions")):
+                fails.append(f"0248: {c['id']} @{k} can render while Wren is in Vega and is not written for her (gate it in_vega is_false, or band it)")
 
     if fails:
         print("THE TRANSFER GUARD: FAILED")

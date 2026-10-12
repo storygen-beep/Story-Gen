@@ -145,6 +145,12 @@ underwear_image  = "portraits/wren_underwear.jpg"
 # THE FOUR FACES — dock-work cover -> the dock face; analyst cover -> the analyst face; the bought
 # Reach identity -> a face that is not hers at all; otherwise she falls through to default_image (the
 # company-grays asset-self face). Keyed on the dominant dress type.
+# 0.2.4 (beat_0240) — IN VEGA'S BODY. FIRST, because the resolver stops at the first match: while in_vega the
+# sidebar shows Vega's face, whatever Wren was wearing when she lay down. New slot, portraits/wren_as_vega.jpg.
+[[player_portrait.outfits]]
+image = "portraits/wren_as_vega.jpg"
+when  = { flag = "in_vega" }
+
 [[player_portrait.outfits]]
 image = "portraits/wren_cover.jpg"
 when  = { worn_type = "cover" }
@@ -230,9 +236,28 @@ when  = { flag = "face_worn" }
 # ─── Sidebar items — the live HUD (Charge ONLY) ───────────────────────────────
 # Credits is tracked internally (the depot economy uses `money`) but NOT surfaced in the
 # sidebar — LO's call. To re-show it, add back a `money` trait_status_text block here.
+# 0.2.4 (beat_0240) — VEGA'S CELL, the one body meter that shows while Wren wears Vega (in_vega). Every Wren row
+# below carries in_vega is_false, so exactly one body's meters are on screen at a time. Bands start at 0 so the row
+# stays visible at an empty cell while she is in Vega; show_when takes it away when she is home.
+[[sidebar_items]]
+type  = "trait_status_text"
+trait = "vega_cell"
+show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_true" },
+] }
+bands = [
+  { min = 0,  max = 24,  text = "Vega's cell: almost dry", icon = "🪫" },
+  { min = 25, max = 49,  text = "Vega's cell: low",        icon = "🔅" },
+  { min = 50, max = 74,  text = "Vega's cell: half",       icon = "🔆" },
+  { min = 75,            text = "Vega's cell: full",       icon = "🔋" },
+]
+
 [[sidebar_items]]
 type  = "trait_status_text"
 trait = "energy"
+show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: Wren's body only
+] }
 bands = [
   { min = 0,  max = 24,  text = "Charge: Critical", icon = "🪫" },
   { min = 25, max = 49,  text = "Charge: Low",      icon = "🔅" },
@@ -245,6 +270,9 @@ bands = [
 [[sidebar_items]]
 type  = "trait_status_text"
 trait = "hygiene"
+show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: Wren's body only
+] }
 bands = [
   { min = 0,  max = 39,  text = "Condition: Filthy", icon = "🩸" },
   { min = 40, max = 74,  text = "Condition: Used",   icon = "💧" },
@@ -271,6 +299,9 @@ bands = [
 [[sidebar_items]]
 type  = "trait_status_text"
 trait = "core_strain"
+show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: Wren's body only
+] }
 bands = [
   { min = 1,  max = 23, text = "Core: Strained", icon = "○" },
   { min = 24, max = 47, text = "Core: Damaged",  icon = "◔" },
@@ -290,6 +321,9 @@ bands = [
 [[sidebar_items]]
 type  = "trait_status_text"
 trait = "vega_damage"
+show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: Wren's body only
+] }
 bands = [
   { min = 1,  max = 29, text = "Body: Fine",       icon = "▫" },
   { min = 30, max = 59, text = "Body: Hurt",       icon = "▪" },
@@ -338,6 +372,9 @@ bands = [
 [[sidebar_items]]
 type  = "trait_status_text"
 trait = "equipped_weapon"
+show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: Wren's body only
+] }
 bands = [
   { min = 0, max = 0, text = "Unarmed", icon = "✕" },
 ]
@@ -347,6 +384,7 @@ bands = [
 type  = "trait_status_text"
 trait = "drain_charge"
 show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: Wren's body only
   { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 },
 ] }
 bands = [
@@ -365,6 +403,7 @@ bands = [
 type  = "trait_status_text"
 trait = "arousal_charge"
 show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: Wren's body only
   { type = "trait", subject = "player", trait_key = "equipped_weapon",      operator = "eq",  value = 2 },
   { type = "flag",  subject = "player", flag_key  = "arousal_weapon_ready", operator = "is_true"        },
   { type = "trait", subject = "player", trait_key = "emitter_broken",       operator = "lt",  value = 1 },
@@ -384,6 +423,7 @@ bands = [
 type  = "trait_status_text"
 trait = "arousal_charge"
 show_when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: Wren's body only
   { type = "trait", subject = "player", trait_key = "equipped_weapon",      operator = "eq",  value = 2 },
   { type = "flag",  subject = "player", flag_key  = "arousal_weapon_ready", operator = "is_true"        },
   { type = "trait", subject = "player", trait_key = "emitter_broken",       operator = "gte", value = 1 },
@@ -747,6 +787,10 @@ hidden = true
 [[traits.labels]]
 key    = "vega_records"
 label  = "Vega's records read"
+hidden = true
+[[traits.labels]]
+key    = "vega_cell"
+label  = "Vega's cell"
 hidden = true
 
 # ══════════════════════════════════════════════════════════════════
@@ -1289,6 +1333,9 @@ undertow_build    = 0
 #   • vega_records 0-9 — sessions spent reading what Vega recorded, +1 per read at the Site (activity_read_vega).
 #     3 = the weapons, 6 = the Rise, 9 = Vance Tower. The last night needs 9. Never decays.
 vega_records      = 0
+# 0.2.4 (beat_0240) — PLAYER PLAYS VEGA: vega_cell 0-100, Vega's power while Wren wears her. Set 100 at the
+# transfer, spent by her actions (choice costs), refilled at the Site. Travel never costs it (she cannot be stranded).
+vega_cell         = 0
 
 # ─── Daily decay (engine-applied at every day rollover) ───────────────────────
 # advanceDay subtracts each value from its trait and floors at 0 (v2.py:5532-5544); parsed at
@@ -2161,7 +2208,30 @@ name             = "The Atrium"
 description      = "The Tower's inner lobby. Polished stone, a security desk that knows her face, elevators that only stop where her clearance says they can. The threshold between the cage and the street."
 image            = "locations/atrium.jpg"
 entry_from       = "spire_plaza"
-navigation_order = ["penthouse", "wren_floor"]
+navigation_order = ["penthouse", "wren_floor", "chairmans_floor"]
+
+# ── chairmans_floor — beat_0241 (0.2.4, the player plays Vega). The floor with no number on the panel. ───────
+# The one lift Vega rode only once (vega_records 9), up to the Chairman's floor and the door she was never cleared
+# for. cap_the_vault auto-fires on arrival. Open ONLY to Vega, after the plan, until the memory is taken.
+# ⚠️ ONE STATIC MESSAGE, TRUE IN EVERY FAILURE STATE: Wren in her own body ("not in this body"), Vega before the
+# plan ("not yet"), and after the vault (she is never back up here in Vega). The Chairman is never on screen.
+[[locations]]
+id               = "chairmans_floor"
+name             = "The Chairman's Floor"
+description      = "A floor with no number on the panel. A quiet corridor, one door at the end of it, and two men in front of the door."
+image            = "locations/chairmans_floor.jpg"
+image_search_queries = ["luxury corporate corridor two guards door night", "dark executive hallway security guards"]
+entry_from       = "atrium"
+auto_exit        = false
+entry_conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega",       operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "tower_planned", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "memory_taken",  operator = "is_false" },
+  # NIGHT ONLY: the plan says at night the tower is half asleep, and Lyra and Nova's scene opens "in the middle of
+  # the night". time_of_day's end is exclusive and wraps (v2.py:4134): 22:00 -> 04:00.
+  { type = "time_of_day", start_time = "22:00", end_time = "04:00" },
+] }
+blocked_message = "The lift that goes there has no button for it. It stops on that floor for the units and the men who own them, and for nobody else. Even Vega only ever went up at night."
 
 [[locations]]
 id          = "penthouse"
@@ -2368,6 +2438,16 @@ description      = "Down past the gate the city turns inside out. Wet brick, red
 image            = "locations/underworld_strip.jpg"
 image_search_queries = ["underground night market red light crowd", "cyberpunk black market alley neon"]
 navigation_order = ["underworld_bar", "underworld_brothel", "underworld_pit", "underworld_market", "kess_berth", "crew_den", "the_site"]
+# ⚠️ ADDED beat_0241 (0.2.4, the player plays Vega). THE ONE LOCK THAT KEEPS VEGA'S BODY OFF WREN'S MAP.
+# Every place written for Wren's body down here hangs off this strip, so locking the strip (rather than six
+# children with their own older locks and messages) closes all of them at once. Vega moves between the Site and
+# the gate by her own cards (activity_vega_site "Out to the gate", the gate's "Down to the Site"), which are
+# teleports and ignore this lock (destinationType specific). The Site's Leave link points here and greys with this
+# message. Only in_vega can fail this lock, so the message is true every time it shows. version 1.0 or it fails OPEN.
+entry_conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },
+] }
+blocked_message = "Not in this body. Every stall on that strip watched Vega hunt her through it, and nobody down there would wait to find out who is inside her now."
 
 [[locations]]
 id          = "underworld_brothel"
@@ -2723,9 +2803,14 @@ image_search_queries = ["open plan office floor unfinished ceiling cable trays r
 # inside the lift: the face goes on at the cot, before she leaves, and a lobby is not where it gets fixed.
 entry_from  = "spire_plaza"
 auto_exit   = false
+# ⚠️ CHANGED beat_0241 (0.2.4): face_worn -> rise_door. Conditions cannot nest (triggerConditionsSatisfied,
+# v2.py:4934, one AND/OR list), so "rise_named AND (face_worn OR in_vega)" is one helper flag: rise_door is set when
+# the face goes on (activity_the_face) and at the transfer, unset when the face comes off and at the homecoming.
+# Old saves with the face already on are healed once by heal_rise_door at spire_plaza. In Vega rise_door is set, so
+# the message below (about the face) is only ever read in her own body, where it is true.
 entry_conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "rise_named", operator = "is_true" },
-  { type = "flag", subject = "player", flag_key = "face_worn",  operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "rise_door",  operator = "is_true" },
 ] }
 blocked_message = "A hoarding, a lift lobby, and a desk with a man on it who checks faces. She has no business in there that she could say out loud, and she is standing in the one the company has on every camera on this plaza. That face goes on at her own cot before she leaves. It has never once gone on in a lobby."
 
@@ -3256,6 +3341,9 @@ location      = "spire_plaza"
 is_repeatable = true
 priority      = 2
 is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: not while Wren wears Vega
+] }
 
 [[canvases.nodes]]
 id   = "base"
@@ -3480,6 +3568,9 @@ location      = "underworld_gate"
 is_repeatable = true
 priority      = 2
 is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: not while Wren wears Vega
+] }
 
 [[canvases.nodes]]
 id   = "base"
@@ -4654,6 +4745,10 @@ location      = "underworld_gate"
 is_repeatable = true
 priority      = 5
 is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: not while Wren wears Vega
+] }
+
 [[canvases.nodes]]
 id   = "base"
 name = "The man at the door"
@@ -6477,6 +6572,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 ] }
 flagEffects = [
   { targetType = "player", flag = "face_worn", op = "set" },
+  { targetType = "player", flag = "rise_door", op = "set" },   # 0.2.4: the Rise's door reads rise_door (no nested conditions)
 ]
 [[canvases.nodes.exit_block.choices]]
 text       = "Take it off."
@@ -6487,6 +6583,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 ] }
 flagEffects = [
   { targetType = "player", flag = "face_worn", op = "unset" },
+  { targetType = "player", flag = "rise_door", op = "unset" },
 ]
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave it."
@@ -8054,6 +8151,7 @@ is_repeatable = true
 priority      = 3
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: not while Wren wears Vega
   { type = "flag", subject = "player", flag_key = "the_site_open", operator = "is_true" },
   { type = "flag", subject = "player", flag_key = "marrow_known",  operator = "is_true" },
 ] }
@@ -8513,6 +8611,7 @@ is_repeatable = true
 priority      = 3
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: not while Wren wears Vega
   { type = "flag", subject = "player", flag_key = "cradles_ready", operator = "is_true" },
 ] }
 
@@ -8723,6 +8822,7 @@ is_repeatable = true
 priority      = 3
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: not while Wren wears Vega
   { type = "flag", subject = "player", flag_key = "cradles_ready", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "back_in_body",  operator = "is_false" },
 ] }
@@ -8811,6 +8911,229 @@ type = "choices"
 text       = "Leave her."
 targetType = "location"
 locationId = "kess_berth"
+
+# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+# 0.2.4 — THE PLAYER PLAYS VEGA (LO, 2026-10-13: "Wren takes controls as vega, player plays vega, goes to do
+# things"). Plan: ~/.claude/plans/snoopy-napping-swing.md; amendment in design_the_transfer.md. Every card below is
+# gated in_vega is_true; every Wren card at a place Vega can reach is gated in_vega is_false.
+# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+# ── heal_rise_door — beat_0241. One-time catch-up @spire_plaza for saves that had the face ON before 0.2.4. ────
+# The Rise's door now reads rise_door, which the face card sets from 0.2.4 on. A save that put the face on under
+# 0.2.3.1 has face_worn but no rise_door, and would find the door shut with the face on. This fires once on the
+# plaza for exactly that save, says one true line, and sets the flag. Nobody else ever sees it.
+[[canvases]]
+id          = "heal_rise_door"
+name        = "The face"
+description = "beat_0241 (0.2.4). One-shot catch-up @spire_plaza, pri 12, gated face_worn is_true + rise_door is_false + in_vega is_false. One line; SETS rise_door so a save from before 0.2.4 with the face already on can still get into the Rise."
+[canvases.trigger]
+location      = "spire_plaza"
+is_repeatable = false
+priority      = 12
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "face_worn", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "rise_door", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "in_vega",   operator = "is_false" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "The face"
+blocks = [
+  { type = "paragraph", content = "She checks the bought face in the car window before she crosses the plaza. It holds. Nobody here has ever seen the one underneath." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Cross the plaza."
+[canvases.nodes.exit_block.config]
+destinationType = "specific"
+locationId      = "spire_plaza"
+flagEffects = [
+  { targetType = "player", flag = "rise_door", op = "set" },
+]
+
+# ── activity_vega_site — beat_0242. Vega's card @the_site while Wren wears her. Pri 3, repeatable. ─────────────
+# Her own body asleep in Marrow's cradle; Cain in the chair beside it at night (his rows 21:00-03:00), his coat on
+# it by day. Two things to do here: charge the cell (Kess left the bench charger wired) and go out to the gate. The
+# strip is locked to Vega (the one lock), so "Out to the gate" is her way out: a teleport past the strip.
+[[canvases]]
+id          = "activity_vega_site"
+name        = "Your body"
+description = "beat_0242 (0.2.4). Vega's card @the_site, repeatable, pri 3, gated in_vega. Her own body asleep in her cradle; Cain beside it at night (group on presence), his coat by day. Choices: charge the cell (vega_cell lt 100) -> 120 min, vega_cell 100; out to the gate -> underworld_gate, 30 min (past the strip, which is locked to Vega)."
+[canvases.trigger]
+location      = "the_site"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_true" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Your body"
+blocks = [
+  { type = "paragraph", content = "Her own body lies in her cradle with its eyes shut, breathing slow. From in here, through Vega's eyes, it looks small." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "npc_at_location", location_id = "the_site", operator = "is_present", npc_id = "npc_cain" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Cain is in the chair beside it with his hand on its hand." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "It's fine. I've got it. Go and do what you went in there to do." },
+    { type = "dialog", props = { speaker = "player" }, content = "It's strange, seeing you hold my hand from over here." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "npc_at_location", location_id = "the_site", operator = "is_absent", npc_id = "npc_cain" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Cain's coat is over the chair beside it. He'll be back when it's dark." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Charge the cell at Kess's bench."
+targetType = "node"
+nodeId     = "activity_vega_site.charge"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "vega_cell", operator = "lt", value = 100 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Out to the gate."
+targetType = "node"
+nodeId     = "activity_vega_site.out"
+[[canvases.nodes.exit_block.choices]]
+text       = "Stay a while."
+targetType = "location"
+locationId = "the_site"
+
+[[canvases.nodes]]
+id   = "charge"
+name = "The charger"
+blocks = [
+  { type = "paragraph", content = "She sits on the bench and plugs the charger Kess left into the port in Vega's back. The warmth crawls up the spine. Two hours, and the cell is full." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Unplug."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 120
+effects = [
+  { targetType = "player", trait = "vega_cell", op = "set", value = 100 },
+]
+
+[[canvases.nodes]]
+id   = "out"
+name = "Out"
+blocks = [
+  { type = "paragraph", content = "She doesn't go up the strip. Vega knows the old service way round it, the one she used to hunt from, and it comes out at the freight door under the docks." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out at the gate."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_gate"
+time_progression_minutes = 30
+
+# ── activity_vega_gate — beat_0242. Vega's card @underworld_gate. Pri 5, repeatable. ───────────────────────────
+# The man at the door takes one look at the company's own face and steps back. Up to the Spire, or back to the Site
+# by the service way. No Reach: the Waterfront's places are all written for Wren's body (the plan's doors).
+[[canvases]]
+id          = "activity_vega_gate"
+name        = "The man at the door"
+description = "beat_0242 (0.2.4). Vega's card @underworld_gate, repeatable, pri 5, gated in_vega. The doorman steps back from the company's face. Choices: ride up to the Spire -> spire_plaza 30 min; back to the Site by the service way -> the_site 30 min."
+[canvases.trigger]
+location      = "underworld_gate"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_true" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "The man at the door"
+blocks = [
+  { type = "paragraph", content = "The man at the freight door looks up, sees the company's face, and goes flat against the wall. He doesn't ask for coin. He doesn't breathe until she's past." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "He'd have taken my coin and laughed at me. Now he can't look at me." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Ride up to the Spire."
+targetType = "node"
+nodeId     = "activity_vega_gate.up"
+[[canvases.nodes.exit_block.choices]]
+text       = "Back to the Site."
+targetType = "node"
+nodeId     = "activity_vega_gate.home"
+
+[[canvases.nodes]]
+id   = "up"
+name = "Up"
+blocks = [
+  { type = "paragraph", content = "The company car comes down for the company's face without a word. Out of the dark, past the docks, up until the glass takes the sky again." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out on the plaza."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "spire_plaza"
+time_progression_minutes = 30
+
+[[canvases.nodes]]
+id   = "home"
+name = "Home"
+blocks = [
+  { type = "paragraph", content = "Round the strip by Vega's service way, in the dark, to Marrow's lab and the body waiting in the cradle." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to the Site."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 30
+
+# ── activity_vega_car — beat_0242. Vega's car @spire_plaza. Pri 2, repeatable. ─────────────────────────────────
+[[canvases]]
+id          = "activity_vega_car"
+name        = "Take the car"
+description = "beat_0242 (0.2.4). Vega's car @spire_plaza, repeatable, pri 2, gated in_vega. Down to the gate only (from there, the Site by the service way). No Reach in Vega's body."
+[canvases.trigger]
+location      = "spire_plaza"
+is_repeatable = true
+priority      = 2
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_true" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Take the car"
+blocks = [
+  { type = "paragraph", content = "A company car pulls in before she lifts a hand. The driver keeps his eyes on the road." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Down to the gate."
+targetType = "node"
+nodeId     = "activity_vega_car.down"
+[[canvases.nodes]]
+id   = "down"
+name = "Down"
+blocks = [
+  { type = "paragraph", content = "Down past the docks to the freight door under everything. The driver doesn't say a word the whole way." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out at the gate."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_gate"
+time_progression_minutes = 30
 
 # ══════════════════════════════════════════════════════════════════
 # Phase: 5_scenes.toml
@@ -25509,6 +25832,7 @@ is_repeatable = true
 priority      = 9
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: not while Wren wears Vega
   { type = "flag", subject = "player", flag_key = "papers_bought", operator = "is_false" },
   { type = "clothing_item", item_id = "cover_research", operator = "unequipped" },
 ] }
@@ -25551,6 +25875,7 @@ is_repeatable = true
 priority      = 9
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: not while Wren wears Vega
   { type = "flag", subject = "player", flag_key = "papers_bought", operator = "is_true" },
   { type = "clothing_item", item_id = "cover_research", operator = "unequipped" },
 ] }
@@ -25763,6 +26088,7 @@ is_repeatable = true
 priority      = 4
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: not while Wren wears Vega
   { type = "flag", subject = "player", flag_key = "sabin_consulted", operator = "is_true" },
 ] }
 
@@ -31928,7 +32254,7 @@ text       = "The shell of her is lying in the second cradle in your father's la
 # `when` cannot say "not every goal met", so a separate N would have stood beside M. ready_text is the frame the
 # engine draws once every goal is met (quests.md, the render frames).
 ready_text = "You know what she can do, where she has been, and how it was done to you. Kess is ready. Cain will sit with your body. One more night as yourself, and then you lie down in the cradle."
-tip        = "Kess wired a reader into her at the Site. Read her records there, twice a day at most: every three reads, you learn something new. Kess and Cain study her body at the Site at night, from ten to midnight."
+tip        = "Kess wired a reader into her at the Site. Read her records there, twice a day at most: every three reads, you learn something new. Kess and Cain study her body at the Site at night, from ten to midnight. When all four are done, go to the Site at night: Cain is there from nine."
 goals = [
   { trait = "vega_records", subject = "player", op = "gte", value = 9, label = "Read Vega's records (at the Site): her weapons at 3, the Rise at 6, the Tower at 9" },
   # beat_0225: joins with its setter, cap_study_blade.
@@ -32532,59 +32858,78 @@ blocks = [
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Morning. The Rise."
+text = "Go."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "the_site"
 time_progression_minutes = 480
+# 0.2.4 (beat_0240, the player plays Vega): the run stops here. She is Vega on the map: in_vega opens her cards
+# and closes Wren's; rise_door lets her through the Rise's door; the bought face comes off (it was Wren's face, and
+# every face_worn card at the Rise would otherwise open for Vega); the cell starts full.
+effects = [
+  { targetType = "player", trait = "vega_cell", op = "set", value = 100 },
+]
 flagEffects = [
   { targetType = "player", flag = "transferred", op = "set" },
+  { targetType = "player", flag = "in_vega",     op = "set" },
+  { targetType = "player", flag = "rise_door",   op = "set" },
+  { targetType = "player", flag = "face_worn",   op = "unset" },
 ]
 
-# ── cap_the_rise — beat_0230. Auto-fire @the_site, pri 11, ONE-SHOT. THE RUN, link 2: the search. ─────────────
-# Her first trip out in the new body. The Rise in the morning shift, every door and guard taking her for Vega.
-# She searches with what she read (vega_records 6, the Rise). THE MEMORY IS NOT HERE: in Sabin's lab she finds the
-# sign-out for his piece, the record of her own making the Chairman gave him to copy (design_whose_hand.md §5), and
-# it came out of the Chairman's vault in Vance Tower. The third piece is kept in the same place.
-# Then the production floor (LO: "the company and the scientist has successfully build a new weapon ... a production
-# unit that can build many at a time" → empty bodies): the floors the records showed as more than concrete. Rows of
-# empty bodies on a line. Eleven of a thing, not eleven thousand (Kess, cap_chip_read) — Sabin solved the eleven
-# thousand. Then Sabin's look, and she does not kill him.
-# ⚠️ WHERE SABIN IS, BY HIS ROWS: the_rise_floor 08:00-11:00, sabin_lab from 11:00. This scene lands 08:00-09:59
-# (cap_the_transfer's 600 minutes), so his lab is EMPTY while she searches it (that is why she can), and she passes
-# him on the floor on her way out. He is never put on the production floor, which is a place his rows do not have.
-# ⚠️ THE DOORS: the damper smothers the call home and lets the small talk through (doors, cameras), said once here.
-# The company can still shut the signal off when it knows (cap_lyra_and_nova).
-# ⚠️ SABIN DOES NOT LEARN THE TRANSFER WORKS (deferred). He knows Vega came back wrong: she looks at him. Vega never
-# looked at anybody. After she leaves he reports it, and that is why Lyra and Nova are at the Tower (link 5).
-# Exits 180 minutes later, back to the Site and straight into the plan. No sex in this body (LO).
-# MEDIA: three new slots, scenes/the_rise_search.jpg, scenes/the_production_floor.jpg, scenes/sabin_looks.jpg.
+# ── 0.2.4, THE PLAYER PLAYS VEGA — THE RISE as three surfaces (beat_0243). Was cap_the_rise (beat_0230), one
+# auto-fire link of the run; LO 2026-10-13: "player plays vega, goes to do things". The prose is cap_the_rise's,
+# moved, not rewritten: the lab search, the top floors, and Sabin's look.
+# ⚠️ THE LAB OPENS ONLY WHILE SABIN IS DOWNSTAIRS. His rows: the_rise_floor 08:00-11:00, sabin_lab from 11:00.
+# The choice up is gated on him being present on the floor, so "his lab is lit and empty. He's downstairs until
+# eleven" is true every time it renders. Outside those hours the choice shows locked with the reason.
+# ⚠️ SABIN'S LOOK needs him present on the floor too, so it fires on the first arrival on the floor between 08:00
+# and 11:00 after both the slip and the top floors are done. Card P's tip names his hours.
+# ⚠️ No sex in this body (LO). Sabin does not learn the transfer works (deferred).
+
+# ── activity_vega_lab — Vega's card @the_rise_floor: up to Sabin's lab and the slip. ──
 [[canvases]]
-id          = "cap_the_rise"
-name        = "The Rise"
-description = "beat_0230 (0.2.4). THE RUN, link 2. Auto-fire @the_site, pri 11, one-shot, gated transferred + rise_searched is_false, no presence gate. In through the Rise on Vega's face (the damper lets the doors hear her); up past Sabin's floor; his lab is empty (he is on the floor till eleven); the sign-out for his piece: released from the Chairman's vault, Vance Tower, so the third piece is there; the top floors: rows of empty bodies on a line; on the way out Sabin sees her, says she is back, and notices she looked at him. She does not kill him. SETS rise_searched. 180 min."
+id          = "activity_vega_lab"
+name        = "Sabin's lab"
+description = "beat_0243 (0.2.4). Vega's card @the_rise_floor, repeatable, pri 6, gated in_vega + rise_slip is_false. Base: in on Vega's face. Choice up to his lab, gated Sabin present on the floor (08:00-11:00, his row), locked otherwise with the reason. The lab: the sign-out slip, released from the Chairman's vault in Vance Tower. SETS rise_slip. 30 min."
 [canvases.trigger]
-location      = "the_site"
-is_repeatable = false
-priority      = 11
+location      = "the_rise_floor"
+is_repeatable = true
+priority      = 6
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "transferred",   operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "rise_searched", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "in_vega",   operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "rise_slip", operator = "is_false" },
 ] }
-
 [[canvases.nodes]]
 id   = "base"
-name = "The Rise"
+name = "Sabin's lab"
 blocks = [
-  { type = "paragraph", content = "She walks into the Rise at the start of the morning shift wearing the one face the company trusts. Nobody looks twice. Nobody ever looked twice at Vega." },
+    { type = "image", props = { file = "scenes/the_rise_search.jpg", description = "A flawless pale woman-shaped machine in a plain grey coat walking alone down a half-finished glass office corridor in the morning, bare cable trays overhead, a guard at a desk not looking up.", search_queries = ["android woman walking office corridor morning", "cyberpunk woman unfinished glass building hallway"] } },
+    { type = "paragraph", content = "The lift doors open before she reaches them. The damper under her hair lets the doors hear her and smothers only the call home. A guard at the desk nods at the wall behind her head." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "He looked right through me. Everybody looks right through her." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text             = "Up to his lab."
+targetType       = "node"
+nodeId           = "activity_vega_lab.lab"
+show_when_locked = true
+locked_text      = "His lab light is on and he's in it. Come back in the morning, while he's down here on the floor, between eight and eleven."
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "npc_at_location", location_id = "the_rise_floor", operator = "is_present", npc_id = "npc_sabin" },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Not now."
+targetType = "location"
+locationId = "the_rise_floor"
+
+[[canvases.nodes]]
+id   = "lab"
+name = "His lab"
+blocks = [
   { type = "cascade", props = { beats = [
     { blocks = [
-        { type = "image", props = { file = "scenes/the_rise_search.jpg", description = "A flawless pale woman-shaped machine in a plain grey coat walking alone down a half-finished glass office corridor in the morning, bare cable trays overhead, a guard at a desk not looking up.", search_queries = ["android woman walking office corridor morning", "cyberpunk woman unfinished glass building hallway"] } },
-        { type = "paragraph", content = "The lift doors open before she reaches them. The damper under her hair lets the doors hear her and smothers only the call home. A guard at the desk nods at the wall behind her head." },
-        { type = "thought_bubble", props = { speaker = "player" }, content = "He looked right through me. Everybody looks right through her." },
-    ] },
-    { advance_text = "Go up.", blocks = [
         { type = "paragraph", content = "She rides past the floor where she used to read files for Sabin. Four floors up, his lab is lit and empty. He's downstairs until eleven, handing out the day. She knows his hours better than he does." },
     ] },
     { advance_text = "Search his lab.", blocks = [
@@ -32595,10 +32940,59 @@ blocks = [
         { type = "paragraph", content = "Released from the Chairman's vault, Vance Tower, on the Chairman's own signature. For study. To be returned." },
         { type = "thought_bubble", props = { speaker = "player" }, content = "Returned to the vault where he keeps the rest of me. The third piece isn't here. It's in the Tower. It was always in the Tower." },
     ] },
-    { advance_text = "Go higher.", blocks = [
-        { type = "paragraph", content = "The records said the top floors weren't empty. The lift takes her past eight, past the bare concrete, and opens on light and noise." },
-    ] },
-    { advance_text = "Look.", blocks = [
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back down to the floor."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_rise_floor"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "rise_slip", op = "set" },
+]
+
+# ── activity_vega_top_floors — Vega's card @the_rise_floor: the production floor. ──
+[[canvases]]
+id          = "activity_vega_top_floors"
+name        = "The top floors"
+description = "beat_0243 (0.2.4). Vega's card @the_rise_floor, repeatable, pri 6, gated in_vega + rise_line_seen is_false. Choice 'Ride to the top.' costs 10 of Vega's cell: the production floor, rows of empty bodies on a line, eleven of a thing not eleven thousand. SETS rise_line_seen. 30 min."
+[canvases.trigger]
+location      = "the_rise_floor"
+is_repeatable = true
+priority      = 6
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega",        operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "rise_line_seen", operator = "is_false" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "The top floors"
+blocks = [
+    { type = "paragraph", content = "The records said the top floors weren't empty. The lift takes her past eight, past the bare concrete, and opens on light and noise." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text             = "Ride to the top."
+targetType       = "node"
+nodeId           = "activity_vega_top_floors.top"
+show_when_locked = true
+locked_text      = "The cell's too low. The service lift up there wants power she doesn't have. Charge it at the Site first."
+costs            = [{ trait = "vega_cell", value = 10 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Not now."
+targetType = "location"
+locationId = "the_rise_floor"
+
+[[canvases.nodes]]
+id   = "top"
+name = "The line"
+blocks = [
+  { type = "cascade", props = { beats = [
+    { blocks = [
         { type = "image", props = { file = "scenes/the_production_floor.jpg", description = "A vast bright factory floor under an unfinished concrete ceiling: long rows of identical pale, perfect, naked woman-shaped machine bodies hanging in frames along a moving assembly line, robotic arms working on them, no people.", search_queries = ["android assembly line rows of bodies factory", "robot production line identical humanoid bodies"] } },
         { type = "paragraph", content = "Rows of bodies. Hundreds of them. Pale, perfect, empty, hanging in frames along a line that moves while she watches. Arms reach in and fit a hand, a jaw, an eye. Nobody needs to touch a thing." },
     ] },
@@ -32609,7 +33003,44 @@ blocks = [
         { type = "paragraph", content = "Every face in the frames is empty, like Vega's was. They can't feel anything. They're waiting for someone to fill them, and only one person has ever proved that can be done." },
         { type = "thought_bubble", props = { speaker = "player" }, content = "Me. They're waiting for me." },
     ] },
-    { advance_text = "Get out.", blocks = [
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back down."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_rise_floor"
+time_progression_minutes = 30
+flagEffects = [
+  { targetType = "player", flag = "rise_line_seen", op = "set" },
+]
+
+# ── cap_sabin_notices — auto-fire @the_rise_floor, pri 11, ONE-SHOT. Sabin's look. ──
+# Fires on an arrival on the floor with both the slip and the line done and Sabin present (08:00-11:00). He makes
+# his note; that is why Lyra and Nova are waiting at the Tower. She walks out to the plaza. SETS rise_searched.
+[[canvases]]
+id          = "cap_sabin_notices"
+name        = "Sabin"
+description = "beat_0243 (0.2.4). Auto-fire @the_rise_floor, pri 11, one-shot, gated in_vega + rise_slip + rise_line_seen + rise_searched is_false + Sabin present on the floor. 'Vega. Well.' / 'This unit was damaged.' / 'You never look at anybody... I'll make a note.' She does not kill him. Exits to spire_plaza, 10 min. SETS rise_searched."
+[canvases.trigger]
+location      = "the_rise_floor"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",            subject = "player", flag_key = "in_vega",        operator = "is_true"  },
+  { type = "flag",            subject = "player", flag_key = "rise_slip",      operator = "is_true"  },
+  { type = "flag",            subject = "player", flag_key = "rise_line_seen", operator = "is_true"  },
+  { type = "flag",            subject = "player", flag_key = "rise_searched",  operator = "is_false" },
+  { type = "npc_at_location", location_id = "the_rise_floor", operator = "is_present", npc_id = "npc_sabin" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Sabin"
+blocks = [
+  { type = "cascade", props = { beats = [
+    { blocks = [
         { type = "paragraph", content = "She rides down. The doors open on the reading floor, on twenty desks, on Sabin with a stack of readers in his arms, and he turns around." },
         { type = "image", props = { file = "scenes/sabin_looks.jpg", description = "A sharp, bored-looking man in his thirties holding a stack of tablets on an open-plan office floor, turned toward the camera and frowning slightly, as if something he just saw does not add up.", search_queries = ["man in office frowning suspicious holding tablets", "scientist man looking curious open office"] } },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Vega. Well. They'll be glad to have you back. Nobody's had a report from you in a long time." },
@@ -32632,11 +33063,11 @@ blocks = [
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Back to the Site."
+text = "Out onto the plaza."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "the_site"
-time_progression_minutes = 180
+locationId               = "spire_plaza"
+time_progression_minutes = 10
 flagEffects = [
   { targetType = "player", flag = "rise_searched", op = "set" },
 ]
@@ -32666,8 +33097,11 @@ is_repeatable = false
 priority      = 11
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "rise_searched", operator = "is_true"  },
-  { type = "flag", subject = "player", flag_key = "tower_planned", operator = "is_false" },
+  { type = "flag",            subject = "player", flag_key = "in_vega",       operator = "is_true"  },
+  { type = "flag",            subject = "player", flag_key = "rise_searched", operator = "is_true"  },
+  { type = "flag",            subject = "player", flag_key = "tower_planned", operator = "is_false" },
+  { type = "npc_at_location", location_id = "the_site", npc_id = "npc_kess", operator = "is_present" },
+  { type = "npc_at_location", location_id = "the_site", npc_id = "npc_cain", operator = "is_present" },
 ] }
 
 [[canvases.nodes]]
@@ -32697,22 +33131,26 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Then the face gets you up to that door. After that it's the blade." },
     ] },
     { advance_text = "\"And after?\"", blocks = [
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Don't open it. Carry it out. Get to the Waterfront, where the car to the Spire waits. Bastien's men and I will be there by three." },
-        { type = "dialog", props = { speaker = "player" }, content = "By three." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Don't open it. Carry it out. Get to the Waterfront, where the car to the Spire waits. Bastien's men and I will be waiting there." },
+        { type = "dialog", props = { speaker = "player" }, content = "The Waterfront." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Walk soft and the cell gets you there. Fight and it won't. Remember that." },
     ] },
-    { advance_text = "Wait for dark.", blocks = [
-        { type = "paragraph", content = "Kess keeps the cell on charge all day. She sits by her own sleeping body and doesn't touch it. When it's dark, she goes." },
+    { advance_text = "Plug in.", blocks = [
+        { type = "paragraph", content = "Kess tops the cell up from the bench while they talk. The needle climbs all the way." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Full. Go when you're ready. At night that tower's half asleep." },
     ] },
   ] } },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Night. The Tower."
+text = "Go."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "the_site"
-time_progression_minutes = 720
+time_progression_minutes = 60
+effects = [
+  { targetType = "player", trait = "vega_cell", op = "set", value = 100 },
+]
 flagEffects = [
   { targetType = "player", flag = "tower_planned", op = "set" },
 ]
@@ -32736,11 +33174,12 @@ id          = "cap_the_vault"
 name        = "The Tower"
 description = "beat_0232 (0.2.4). THE RUN, link 4. Auto-fire @the_site, pri 11, one-shot, gated tower_planned + memory_taken is_false, no presence gate. The car up; the Atrium desk nods at Vega; the lift to the Chairman's floor; the door she was never cleared for, two guards. Choice: cut through now, or wait for the change (two fresh guards, same door). Either way the blade, two dead, the alarm, the vault broken, the memory carried out unopened. The Chairman is never on screen. SETS memory_taken. 120 min."
 [canvases.trigger]
-location      = "the_site"
+location      = "chairmans_floor"
 is_repeatable = false
 priority      = 11
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega",       operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "tower_planned", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "memory_taken",  operator = "is_false" },
 ] }
@@ -32749,16 +33188,9 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The Tower"
 blocks = [
-  { type = "paragraph", content = "The car from the Waterfront takes her up into the Spire for the first time since they sealed her out. Glass and light and money, and every camera turning to look at the company's own face, and turning away." },
+  { type = "paragraph", content = "She takes the lift Vega rode only once, past her old floor, to a floor with no number on the panel. A quiet corridor. One door at the end of it, and two men in front of the door." },
   { type = "cascade", props = { beats = [
     { blocks = [
-        { type = "paragraph", content = "The Atrium. The same security desk that used to know her face knows this one better." },
-        { type = "dialog", props = { speaker = "unknown" }, content = "Evening. Didn't know you were back. Going up?" },
-        { type = "dialog", props = { speaker = "player" }, content = "Yes." },
-        { type = "dialog", props = { speaker = "unknown" }, content = "Go ahead. Lift's yours." },
-    ] },
-    { advance_text = "Take the lift.", blocks = [
-        { type = "paragraph", content = "She takes the lift Vega rode only once, past her old floor, to a floor with no number on the panel. A quiet corridor. One door at the end of it, and two men in front of the door." },
         { type = "thought_bubble", props = { speaker = "player" }, content = "Vega stood right here and waited, and never went in. I'm going in." },
     ] },
     { advance_text = "Walk up to them.", blocks = [
@@ -32771,27 +33203,41 @@ blocks = [
 [canvases.nodes.exit_block]
 type = "choices"
 [[canvases.nodes.exit_block.choices]]
-text       = "Turn the wrist down."
-targetType = "node"
-nodeId     = "cap_the_vault.blade"
+text             = "Turn the wrist down."
+targetType       = "node"
+nodeId           = "cap_the_vault.blade"
+show_when_locked = true
+locked_text      = "Not with the cell this low. Two of them, and she would stop halfway through. Charge it at the Site first."
+costs            = [{ trait = "vega_cell", value = 30 }]
 [[canvases.nodes.exit_block.choices]]
 text       = "Step back. Wait for the change."
 targetType = "node"
 nodeId     = "cap_the_vault.wait"
+[[canvases.nodes.exit_block.choices]]
+text       = "Go back down."
+targetType = "location"
+locationId = "atrium"
 
 [[canvases.nodes]]
 id   = "wait"
 name = "The change"
 blocks = [
-  { type = "paragraph", content = "She steps back around the corner and stands still, like Vega would, for an hour. The cell drains while she waits. At midnight the guard changes: two fresh men, awake and careful, and the same locked door." },
+  { type = "paragraph", content = "She steps back around the corner and stands still, like Vega would, for an hour. The cell drains while she waits. Then the guard changes: two fresh men, awake and careful, and the same locked door." },
   { type = "thought_bubble", props = { speaker = "player" }, content = "There is no way through that door that isn't through them. I knew that. I just wanted to be sure." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
 [[canvases.nodes.exit_block.choices]]
-text       = "Turn the wrist down."
-targetType = "node"
-nodeId     = "cap_the_vault.blade"
+text             = "Turn the wrist down."
+targetType       = "node"
+nodeId           = "cap_the_vault.blade"
+show_when_locked = true
+locked_text      = "Not with the cell this low. Two of them, and she would stop halfway through. Charge it at the Site first."
+costs            = [{ trait = "vega_cell", value = 30 }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Go back down."
+targetType = "location"
+locationId = "atrium"
 
 [[canvases.nodes]]
 id   = "blade"
@@ -32838,7 +33284,7 @@ blocks = [
     ] },
     { advance_text = "Take it.", blocks = [
         { type = "paragraph", content = "She closes Vega's hand around it and the alarm changes pitch, higher, faster. Somewhere below, lifts are moving." },
-        { type = "thought_bubble", props = { speaker = "player" }, content = "Waterfront by three. Walk soft. It's far too late to walk soft." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The Waterfront. Walk soft. It's far too late to walk soft." },
     ] },
   ] } },
 ]
@@ -32847,8 +33293,8 @@ type = "location"
 text = "Run."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "the_site"
-time_progression_minutes = 120
+locationId               = "spire_plaza"
+time_progression_minutes = 30
 flagEffects = [
   { targetType = "player", flag = "memory_taken", op = "set" },
 ]
@@ -32869,7 +33315,7 @@ id          = "cap_lyra_and_nova"
 name        = "Lyra and Nova"
 description = "beat_0233 (0.2.4). THE RUN, link 5. Auto-fire @the_site, pri 11, one-shot, gated memory_taken + units_fought is_false, no presence gate. Down through the Spire with the memory; the company shuts her signal off; Lyra and Nova (no lines) come out of the dark at Spire Plaza and hold nothing back; no pain, so the body keeps going while it breaks; the cell runs low; she never reaches the Waterfront by three. SETS units_fought. 120 min."
 [canvases.trigger]
-location      = "the_site"
+location      = "spire_plaza"
 is_repeatable = false
 priority      = 11
 is_active     = true
@@ -32909,7 +33355,7 @@ blocks = [
     ] },
     { advance_text = "Hold on to it.", blocks = [
         { type = "paragraph", content = "She is on her knees. One of them has her by the throat. The sample is still in her good hand, and she closes the fingers so hard the knuckles crack." },
-        { type = "thought_bubble", props = { speaker = "player" }, content = "Three o'clock. They're waiting at the Waterfront. I'm not going to make it. I'm so sorry. I'm not going to make it." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "They're waiting at the Waterfront. I'm not going to make it. I'm so sorry. I'm not going to make it." },
     ] },
   ] } },
 ]
@@ -32918,7 +33364,7 @@ type = "location"
 text = "Don't let go."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
-locationId               = "the_site"
+locationId               = "spire_plaza"
 time_progression_minutes = 120
 flagEffects = [
   { targetType = "player", flag = "units_fought", op = "set" },
@@ -32940,9 +33386,9 @@ flagEffects = [
 [[canvases]]
 id          = "cap_dace_falls"
 name        = "Dace"
-description = "beat_0234 (0.2.4). THE RUN, link 6. Auto-fire @the_site, pri 11, one-shot, gated units_fought + dace_dead is_false, no presence gate. Nobody called them: three o'clock came and went at the Waterfront, so Bastien took the men up. Cain on Nova's seam, she drops; Lyra drags her up and both pull back into the dark, burning power, driven off not killed. Dace holds Lyra off the carry and she breaks him going past. They carry Vega's wreck out with Wren inside and the sample in her fist. Bastien's one line. SETS dace_dead. 210 min."
+description = "beat_0234 (0.2.4). THE RUN, link 6. Auto-fire @the_site, pri 11, one-shot, gated units_fought + dace_dead is_false, no presence gate. Nobody called them: she never came down to the Waterfront, so Bastien took the men up. Cain on Nova's seam, she drops; Lyra drags her up and both pull back into the dark, burning power, driven off not killed. Dace holds Lyra off the carry and she breaks him going past. They carry Vega's wreck out with Wren inside and the sample in her fist. Bastien's one line. SETS dace_dead. 210 min."
 [canvases.trigger]
-location      = "the_site"
+location      = "spire_plaza"
 is_repeatable = false
 priority      = 11
 is_active     = true
@@ -33097,6 +33543,8 @@ locationId               = "the_site"
 time_progression_minutes = 30
 flagEffects = [
   { targetType = "player", flag = "back_in_body", op = "set" },
+  { targetType = "player", flag = "in_vega",      op = "unset" },   # 0.2.4: Wren's body again, Wren's map again
+  { targetType = "player", flag = "rise_door",    op = "unset" },
 ]
 
 # ── cap_the_whole_memory — beat_0236. Auto-fire @the_site, pri 11, ONE-SHOT. THE RUN, link 8: THE FLASHBACK. ──
@@ -33369,6 +33817,94 @@ text       = "You know who you were, what they did to you, and who you loved. Yo
 tip        = "That is where this build ends. The wreck of Vega is on Kess's table at the Berth, and he is already looking at her arm. Cain keeps the nights at the Site. Bastien is at the cot and his men are at the Undertow. Renner's office is open, Grier is in his room from ten, and Sabin is on the floor at eight and in his lab from eleven. What Kess takes out of the wreck is the next release. If you want it sooner, Support Us in the sidebar."
 terminal      = true
 terminal_text = "Chapter complete. The story continues in the next release"
+when = [
+  { flag = "cain_chosen", op = "is_true" },
+]
+
+# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+# 0.2.4 — QUEST CARDS FOR THE PLAYER PLAYING VEGA (beat_0247). One Story-Goals card per step, each exclusive by its
+# flags, so exactly one is live. Plus Sabin after the Rise and a Cain section after the end (the Quests audit).
+# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+# ── N · the night of the transfer. After the last night, before she lies down. ──
+[[quest_cards]]
+priority   = 10
+text       = "One more night is behind you. Kess has the lines ready and Cain will sit with your body. Lie down in the cradle."
+tip        = "The Site, when Kess and Cain are both there: 22:00 to midnight."
+goals = [
+  { flag = "transferred", op = "is_true", label = "Lie down in the cradle (the Site, 22:00 to midnight)" },
+]
+when = [
+  { flag = "last_night_held", op = "is_true"  },
+  { flag = "transferred",     op = "is_false" },
+]
+
+# ── P · in Vega: the Rise. ──
+# ⚠️ Every place named here was re-read at beat_0247: the Site's "Out to the gate" (activity_vega_site), the gate's
+# car up (activity_vega_gate), the Rise's door (rise_door), Sabin's rows (floor 08:00-11:00, lab from 11:00).
+[[quest_cards]]
+priority   = 10
+text       = "You are in her. The company's own face opens the company's doors. Find out where they keep the rest of you."
+tip        = "From the Site: Out to the gate, the car up to Spire Plaza, then the Rise. Sabin's lab is empty only while he is down on the floor, 08:00 to 11:00. The top floors take some of Vega's cell; charge it at the Site."
+goals = [
+  { flag = "rise_slip",      op = "is_true", label = "Search Sabin's lab (the Rise, while he is on the floor, 08:00 to 11:00)" },
+  { flag = "rise_line_seen", op = "is_true", label = "See what is on the top floors (the Rise)" },
+  { flag = "rise_searched",  op = "is_true", label = "Get past Sabin on the floor (08:00 to 11:00)" },
+]
+when = [
+  { flag = "in_vega",       op = "is_true"  },
+  { flag = "rise_searched", op = "is_false" },
+]
+
+# ── Q · in Vega: home with what she found. ──
+[[quest_cards]]
+priority   = 10
+text       = "The rest of you is in the Chairman's vault in Vance Tower. And on top of the Rise they are building bodies by the hundred. Go home and tell them."
+tip        = "The Site, when Kess and Cain are both there: 22:00 to midnight."
+goals = [
+  { flag = "tower_planned", op = "is_true", label = "Make the plan with Kess and Cain (the Site, 22:00 to midnight)" },
+]
+when = [
+  { flag = "in_vega",       op = "is_true"  },
+  { flag = "rise_searched", op = "is_true"  },
+  { flag = "tower_planned", op = "is_false" },
+]
+
+# ── R · in Vega: the Tower. ──
+[[quest_cards]]
+priority   = 10
+text       = "Into the Tower. The Chairman's floor, the door Vega was never cleared for, and the memory behind it. Carry it out unopened and go straight to the Waterfront."
+tip        = "Spire Plaza, the Atrium, then the Chairman's floor, at night: 22:00 to 04:00. The blade takes Vega's cell; charge it at the Site first."
+goals = [
+  { flag = "memory_taken", op = "is_true", label = "Take the memory (the Chairman's floor, at night)" },
+]
+when = [
+  { flag = "in_vega",       op = "is_true"  },
+  { flag = "tower_planned", op = "is_true"  },
+  { flag = "memory_taken",  op = "is_false" },
+]
+
+# ── Sabin, after the Rise (the Quests audit: his old card said he never wondered and still clears the bench). ──
+# Priority 12 over his four 11s; the NPC tier shows the single highest match (quests.md §1).
+[[quest_cards]]
+npc_id     = "npc_sabin"
+priority   = 12
+text       = "He built the line. Rows of empty bodies on the top floors of the Rise, eleven thousand of a thing that used to be made by hand. And he saw Vega look at him, and made a note."
+tip        = "He is on the floor at eight and in his lab from eleven."
+terminal      = true
+terminal_text = "He made a note."
+when = [
+  { flag = "rise_searched", op = "is_true" },
+]
+
+# ── Cain, after she chose him (the Quests audit: he had no section at all). ──
+[[quest_cards]]
+npc_id     = "npc_cain"
+priority   = 10
+text       = "He held you down while you were made, and he said yes to ending you rather than let them have you. You remember all of it. You chose him anyway."
+tip        = "He keeps the nights at the Site, from nine."
+terminal      = true
+terminal_text = "She chose him."
 when = [
   { flag = "cain_chosen", op = "is_true" },
 ]
@@ -34206,6 +34742,7 @@ flagEffects = [
   { targetType = "player", flag = "wall_understood",         op = "set" },
   { targetType = "player", flag = "face_bought",             op = "set" },
   { targetType = "player", flag = "face_worn",               op = "set" },
+  { targetType = "player", flag = "rise_door",               op = "set" },   # 0.2.4: mirrors face_worn (the Rise door)
   { targetType = "player", flag = "stranger_seen",           op = "set" },
   { targetType = "player", flag = "bar_hired",               op = "set" },
   { targetType = "player", flag = "bastien_seen",            op = "set" },
@@ -34397,6 +34934,7 @@ flagEffects = [
   { targetType = "player", flag = "wall_understood",         op = "set" },
   { targetType = "player", flag = "face_bought",             op = "set" },
   { targetType = "player", flag = "face_worn",               op = "set" },
+  { targetType = "player", flag = "rise_door",               op = "set" },   # 0.2.4: mirrors face_worn (the Rise door)
   { targetType = "player", flag = "stranger_seen",           op = "set" },
   { targetType = "player", flag = "bar_hired",               op = "set" },
   { targetType = "player", flag = "bastien_seen",            op = "set" },
@@ -34612,6 +35150,7 @@ flagEffects = [
   { targetType = "player", flag = "wall_understood",         op = "set" },
   { targetType = "player", flag = "face_bought",             op = "set" },
   { targetType = "player", flag = "face_worn",               op = "set" },
+  { targetType = "player", flag = "rise_door",               op = "set" },   # 0.2.4: mirrors face_worn (the Rise door)
   { targetType = "player", flag = "stranger_seen",           op = "set" },
   { targetType = "player", flag = "bar_hired",               op = "set" },
   { targetType = "player", flag = "bastien_seen",            op = "set" },
@@ -34856,6 +35395,7 @@ flagEffects = [
   { targetType = "player", flag = "wall_understood",         op = "set" },
   { targetType = "player", flag = "face_bought",             op = "set" },
   { targetType = "player", flag = "face_worn",               op = "set" },
+  { targetType = "player", flag = "rise_door",               op = "set" },   # 0.2.4: mirrors face_worn (the Rise door)
   { targetType = "player", flag = "stranger_seen",           op = "set" },
   { targetType = "player", flag = "bar_hired",               op = "set" },
   { targetType = "player", flag = "bastien_seen",            op = "set" },
@@ -35098,6 +35638,7 @@ flagEffects = [
   { targetType = "player", flag = "face_bought",             op = "set" },
   # ⚠️ OFF, flipped in place (beat_0200): THE COUNT is played as herself, and every scene of his waits for it.
   { targetType = "player", flag = "face_worn",               op = "unset" },
+  { targetType = "player", flag = "rise_door",               op = "unset" },   # 0.2.4: mirrors face_worn (the Rise door)
   { targetType = "player", flag = "stranger_seen",           op = "set" },
   { targetType = "player", flag = "bar_hired",               op = "set" },
   { targetType = "player", flag = "bastien_seen",            op = "set" },
@@ -35350,6 +35891,7 @@ flagEffects = [
   { targetType = "player", flag = "face_bought",             op = "set" },
   # ⚠️ OFF, flipped in place (beat_0200): THE COUNT is played as herself, and every scene of his waits for it.
   { targetType = "player", flag = "face_worn",               op = "unset" },
+  { targetType = "player", flag = "rise_door",               op = "unset" },   # 0.2.4: mirrors face_worn (the Rise door)
   { targetType = "player", flag = "stranger_seen",           op = "set" },
   { targetType = "player", flag = "bar_hired",               op = "set" },
   { targetType = "player", flag = "bastien_seen",            op = "set" },
@@ -35544,6 +36086,7 @@ effects = [
   { targetType = "player", trait = "vega_damage",         op = "set", value = 0 },
   { targetType = "player", trait = "vega_habits",         op = "set", value = 0 },
   { targetType = "player", trait = "vega_records",        op = "set", value = 0 },   # 0.2.4: no records read yet
+  { targetType = "player", trait = "vega_cell",           op = "set", value = 0 },
   { targetType = "player", trait = "undertow_build",      op = "set", value = 0 },
 ]
 flagEffects = [
@@ -35604,6 +36147,7 @@ flagEffects = [
   { targetType = "player", flag = "face_bought",             op = "set" },
   # ⚠️ OFF, flipped in place (beat_0200): THE COUNT is played as herself, and every scene of his waits for it.
   { targetType = "player", flag = "face_worn",               op = "unset" },
+  { targetType = "player", flag = "rise_door",               op = "unset" },   # 0.2.4: mirrors face_worn (the Rise door)
   { targetType = "player", flag = "stranger_seen",           op = "set" },
   { targetType = "player", flag = "bar_hired",               op = "set" },
   { targetType = "player", flag = "bastien_seen",            op = "set" },
@@ -35713,6 +36257,9 @@ flagEffects = [
   { targetType = "player", flag = "back_in_body",        op = "unset" },
   { targetType = "player", flag = "memory_whole",        op = "unset" },
   { targetType = "player", flag = "cain_chosen",         op = "unset" },
+  { targetType = "player", flag = "rise_slip",           op = "unset" },   # 0.2.4 Vega: the Rise
+  { targetType = "player", flag = "rise_line_seen",      op = "unset" },
+  { targetType = "player", flag = "in_vega",             op = "unset" },   # 0.2.4: in her own body
 ]
 
 # ═══ beat_0216, 0.2.3 — DEV JUMP 2. Ready for the take. ═══════════════════════════════════════════════════════════
@@ -35826,6 +36373,7 @@ effects = [
   { targetType = "player", trait = "vega_damage",         op = "set", value = 0 },
   { targetType = "player", trait = "vega_habits",         op = "set", value = 4 },
   { targetType = "player", trait = "vega_records",        op = "set", value = 0 },   # 0.2.4: no records read yet
+  { targetType = "player", trait = "vega_cell",           op = "set", value = 0 },
   { targetType = "player", trait = "undertow_build",      op = "set", value = 3 },
 ]
 flagEffects = [
@@ -35886,6 +36434,7 @@ flagEffects = [
   { targetType = "player", flag = "face_bought",             op = "set" },
   # ⚠️ OFF, flipped in place (beat_0200): THE COUNT is played as herself, and every scene of his waits for it.
   { targetType = "player", flag = "face_worn",               op = "unset" },
+  { targetType = "player", flag = "rise_door",               op = "unset" },   # 0.2.4: mirrors face_worn (the Rise door)
   { targetType = "player", flag = "stranger_seen",           op = "set" },
   { targetType = "player", flag = "bar_hired",               op = "set" },
   { targetType = "player", flag = "bastien_seen",            op = "set" },
@@ -35995,6 +36544,9 @@ flagEffects = [
   { targetType = "player", flag = "back_in_body",        op = "unset" },
   { targetType = "player", flag = "memory_whole",        op = "unset" },
   { targetType = "player", flag = "cain_chosen",         op = "unset" },
+  { targetType = "player", flag = "rise_slip",           op = "unset" },   # 0.2.4 Vega: the Rise
+  { targetType = "player", flag = "rise_line_seen",      op = "unset" },
+  { targetType = "player", flag = "in_vega",             op = "unset" },   # 0.2.4: in her own body
 ]
 
 # ═══ 0.2.3 — DEV JUMP 3. The hunt is on: part one done, after Kess's seam. ═══ (copied from dev_jump_hunt_take)
@@ -36105,6 +36657,7 @@ effects = [
   { targetType = "player", trait = "vega_damage",         op = "set", value = 35 },
   { targetType = "player", trait = "vega_habits",         op = "set", value = 0 },
   { targetType = "player", trait = "vega_records",        op = "set", value = 0 },   # 0.2.4: no records read yet
+  { targetType = "player", trait = "vega_cell",           op = "set", value = 0 },
   { targetType = "player", trait = "undertow_build",      op = "set", value = 0 },
 ]
 flagEffects = [
@@ -36165,6 +36718,7 @@ flagEffects = [
   { targetType = "player", flag = "face_bought",             op = "set" },
   # ⚠️ OFF, flipped in place (beat_0200): THE COUNT is played as herself, and every scene of his waits for it.
   { targetType = "player", flag = "face_worn",               op = "unset" },
+  { targetType = "player", flag = "rise_door",               op = "unset" },   # 0.2.4: mirrors face_worn (the Rise door)
   { targetType = "player", flag = "stranger_seen",           op = "set" },
   { targetType = "player", flag = "bar_hired",               op = "set" },
   { targetType = "player", flag = "bastien_seen",            op = "set" },
@@ -36274,6 +36828,9 @@ flagEffects = [
   { targetType = "player", flag = "back_in_body",        op = "unset" },
   { targetType = "player", flag = "memory_whole",        op = "unset" },
   { targetType = "player", flag = "cain_chosen",         op = "unset" },
+  { targetType = "player", flag = "rise_slip",           op = "unset" },   # 0.2.4 Vega: the Rise
+  { targetType = "player", flag = "rise_line_seen",      op = "unset" },
+  { targetType = "player", flag = "in_vega",             op = "unset" },   # 0.2.4: in her own body
 ]
 
 # ═══ 0.2.3 — DEV JUMP 4. The crew night is tomorrow (dace_met set today by this click). ═══
@@ -36384,6 +36941,7 @@ effects = [
   { targetType = "player", trait = "vega_damage",         op = "set", value = 0 },
   { targetType = "player", trait = "vega_habits",         op = "set", value = 4 },
   { targetType = "player", trait = "vega_records",        op = "set", value = 0 },   # 0.2.4: no records read yet
+  { targetType = "player", trait = "vega_cell",           op = "set", value = 0 },
   { targetType = "player", trait = "undertow_build",      op = "set", value = 3 },
 ]
 flagEffects = [
@@ -36444,6 +37002,7 @@ flagEffects = [
   { targetType = "player", flag = "face_bought",             op = "set" },
   # ⚠️ OFF, flipped in place (beat_0200): THE COUNT is played as herself, and every scene of his waits for it.
   { targetType = "player", flag = "face_worn",               op = "unset" },
+  { targetType = "player", flag = "rise_door",               op = "unset" },   # 0.2.4: mirrors face_worn (the Rise door)
   { targetType = "player", flag = "stranger_seen",           op = "set" },
   { targetType = "player", flag = "bar_hired",               op = "set" },
   { targetType = "player", flag = "bastien_seen",            op = "set" },
@@ -36553,6 +37112,9 @@ flagEffects = [
   { targetType = "player", flag = "back_in_body",        op = "unset" },
   { targetType = "player", flag = "memory_whole",        op = "unset" },
   { targetType = "player", flag = "cain_chosen",         op = "unset" },
+  { targetType = "player", flag = "rise_slip",           op = "unset" },   # 0.2.4 Vega: the Rise
+  { targetType = "player", flag = "rise_line_seen",      op = "unset" },
+  { targetType = "player", flag = "in_vega",             op = "unset" },   # 0.2.4: in her own body
 ]
 
 # ═══ 0.2.3 — DEV JUMP 5. Vega on the table (the take done). ═══
@@ -36663,6 +37225,7 @@ effects = [
   { targetType = "player", trait = "vega_damage",         op = "set", value = 25 },
   { targetType = "player", trait = "vega_habits",         op = "set", value = 4 },
   { targetType = "player", trait = "vega_records",        op = "set", value = 0 },   # 0.2.4: no records read yet
+  { targetType = "player", trait = "vega_cell",           op = "set", value = 0 },
   { targetType = "player", trait = "undertow_build",      op = "set", value = 3 },
 ]
 flagEffects = [
@@ -36723,6 +37286,7 @@ flagEffects = [
   { targetType = "player", flag = "face_bought",             op = "set" },
   # ⚠️ OFF, flipped in place (beat_0200): THE COUNT is played as herself, and every scene of his waits for it.
   { targetType = "player", flag = "face_worn",               op = "unset" },
+  { targetType = "player", flag = "rise_door",               op = "unset" },   # 0.2.4: mirrors face_worn (the Rise door)
   { targetType = "player", flag = "stranger_seen",           op = "set" },
   { targetType = "player", flag = "bar_hired",               op = "set" },
   { targetType = "player", flag = "bastien_seen",            op = "set" },
@@ -36832,6 +37396,9 @@ flagEffects = [
   { targetType = "player", flag = "back_in_body",        op = "unset" },
   { targetType = "player", flag = "memory_whole",        op = "unset" },
   { targetType = "player", flag = "cain_chosen",         op = "unset" },
+  { targetType = "player", flag = "rise_slip",           op = "unset" },   # 0.2.4 Vega: the Rise
+  { targetType = "player", flag = "rise_line_seen",      op = "unset" },
+  { targetType = "player", flag = "in_vega",             op = "unset" },   # 0.2.4: in her own body
 ]
 
 # ═══ 0.2.4 — DEV JUMP 1. The end of 0.2.3 = the start of THE TRANSFER (LO, 2026-10-12: "i want to click on the
@@ -36946,6 +37513,7 @@ effects = [
   { targetType = "player", trait = "vega_damage",         op = "set", value = 0 },
   { targetType = "player", trait = "vega_habits",         op = "set", value = 4 },
   { targetType = "player", trait = "vega_records",        op = "set", value = 0 },   # 0.2.4: no records read yet
+  { targetType = "player", trait = "vega_cell",           op = "set", value = 0 },
   { targetType = "player", trait = "undertow_build",      op = "set", value = 3 },
 ]
 flagEffects = [
@@ -37006,6 +37574,7 @@ flagEffects = [
   { targetType = "player", flag = "face_bought",             op = "set" },
   # ⚠️ OFF, flipped in place (beat_0200): THE COUNT is played as herself, and every scene of his waits for it.
   { targetType = "player", flag = "face_worn",               op = "unset" },
+  { targetType = "player", flag = "rise_door",               op = "unset" },   # 0.2.4: mirrors face_worn (the Rise door)
   { targetType = "player", flag = "stranger_seen",           op = "set" },
   { targetType = "player", flag = "bar_hired",               op = "set" },
   { targetType = "player", flag = "bastien_seen",            op = "set" },
@@ -37115,5 +37684,295 @@ flagEffects = [
   { targetType = "player", flag = "back_in_body",        op = "unset" },
   { targetType = "player", flag = "memory_whole",        op = "unset" },
   { targetType = "player", flag = "cain_chosen",         op = "unset" },
+  { targetType = "player", flag = "rise_slip",           op = "unset" },   # 0.2.4 Vega: the Rise
+  { targetType = "player", flag = "rise_line_seen",      op = "unset" },
+  { targetType = "player", flag = "in_vega",             op = "unset" },   # 0.2.4: in her own body
+]
+
+# ═══ 0.2.4 — DEV JUMP 2. In Vega, just transferred (LO, 2026-10-13: "player plays vega"). DEV JUMP 1 moved on past
+# the study, the last night and the transfer: every study flag SET, records 9, last_night_held + transferred SET,
+# in_vega + rise_door SET, the bought face OFF, Vega's cell full. Lands at the Site in Vega's body: her card there
+# goes out to the gate, and card P names the Rise. ═══
+[[canvases]]
+id          = "dev_jump_in_vega"
+name        = "\u25b6 0.2.4: in Vega (just transferred)"
+description = "DEV JUMP (0.2.4). In Vega: the study done, last_night_held + transferred + in_vega + rise_door SET, face off, records 9, cell 100, every later 0.2.4 flag UNSET. Lands at the Site in Vega's body."
+[canvases.trigger]
+location      = "the_waterfront"
+is_repeatable = true
+is_active     = true
+conditions = { version = "1.0", items = [
+  { type = "flag", subject = "player", flag_key = "dev_mode_enabled", operator = "is_true" },
+] }
+[[canvases.nodes]]
+id   = "seed"
+name = "0.2.4: in Vega (dev)"
+blocks = [
+  { type = "paragraph", content = "Dev jump: 0.2.4, Wren is in Vega's body. Her own body sleeps in the cradle. Go out to the gate and up to the Rise." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "To the Site."
+targetType = "location"
+locationId = "the_site"
+# ⚠️ THE WARDROBE — ADDED rev 224, AND ITS ABSENCE WAS THE SECOND SEED BUG. A dev jump runs from a fresh
+# StoryInit, so canvas_opening_morning's `add cover_dockhand` never happens and she owned only the four
+# initial garments. LO: "I dont see the Dock cover at all in the change cloths menu." Worse than a missing
+# rack item: hub_depot_floor substitutes the no-cover squint without it, so the drain was unreachable.
+# These five are every garment any canvas in play grants (none is ever removed), which is exactly what a
+# real end-of-0.2.1 player owns. check_bunker_route.py §9 derives that set from the game and fails if a
+# jump falls behind it. Worn: cover_research, as dev_jump_whose_hand_end dresses her — so reaching Renner
+# still means changing at the cot rack, which is the beat this release actually asks the player to do.
+wardrobeEffects = [
+  { action = "add",   item_id = "cover_dockhand" },
+  { action = "add",   item_id = "cover_analyst"  },
+  { action = "add",   item_id = "cover_stranger" },
+  { action = "add",   item_id = "dress_undertow" },
+  { action = "add",   item_id = "cover_research" },
+  { action = "equip", item_id = "cover_research" },
+]
+effects = [
+
+  # ── the body, and the drain she has spent twice this release ──
+  { targetType = "player", trait = "equipped_weapon",     op = "set", value = 1 },
+  { targetType = "player", trait = "drain_charge",        op = "set", value = 1 },
+  { targetType = "player", trait = "arousal_charge",      op = "set", value = 3 },
+  { targetType = "player", trait = "emitter_broken",      op = "set", value = 0 },
+  { targetType = "player", trait = "core_strain",         op = "set", value = 0 },
+  { targetType = "player", trait = "core_sealed",         op = "set", value = 1 },
+  { targetType = "player", trait = "repair_session",      op = "set", value = 12 },
+  # ── everything of both prior acts ──
+  { targetType = "player", trait = "names_known",         op = "set", value = 1 },
+  { targetType = "player", trait = "case_progress",       op = "set", value = 6 },
+  { targetType = "player", trait = "colm_drains_done",    op = "set", value = 1 },
+  { targetType = "player", trait = "yard_depth",          op = "set", value = 4 },   # 0.2.2 went four deep (yard_find_4)
+  { targetType = "player", trait = "stealth",             op = "set", value = 30 },
+  { targetType = "player", trait = "fighting",            op = "set", value = 85 },
+  { targetType = "player", trait = "mercer_leash_state",  op = "set", value = 2 },
+  { targetType = "player", trait = "mercer_attempts",     op = "set", value = 3 },
+  { targetType = "player", trait = "mercer_drains_done",  op = "set", value = 1 },
+  { targetType = "player", trait = "part_installed",      op = "set", value = 1 },
+  { targetType = "player", trait = "part_held",           op = "set", value = 0 },
+  { targetType = "player", trait = "part_spec",           op = "set", value = 3 },
+  { targetType = "player", trait = "spec_pending",        op = "set", value = 0 },
+  { targetType = "player", trait = "bar_rung",            op = "set", value = 4 },
+  { targetType = "player", trait = "taser_held",          op = "set", value = 1 },
+  { targetType = "player", trait = "taser_through",       op = "set", value = 1 },
+  { targetType = "player", trait = "bastien_drains_done", op = "set", value = 2 },
+  { targetType = "player", trait = "ruin_depth",          op = "set", value = 0 },
+  { targetType = "player", trait = "wall_refusals",       op = "set", value = 0 },
+  # ── WHOSE HAND, through beat 13 ──
+  { targetType = "player", trait = "pieces_seated",       op = "set", value = 2 },
+  { targetType = "player", trait = "grier_drains_done",   op = "set", value = 1 },
+  { targetType = "player", trait = "sabin_drains_done",   op = "set", value = 1 },
+  { targetType = "player", trait = "sabin_suspects",      op = "set", value = 4 },
+  # ── the purse: the floor pays 15 a shift and she has worked a few ──
+  { targetType = "player", trait = "coin",                op = "set", value = 80 },   # 120 less the brace
+  { targetType = "player", trait = "energy",              op = "set", value = 100 },
+  { targetType = "player", trait = "feed_line_days",      op = "set", value = 3 },
+  # ── relations: both ladders topped out, which is what keeps both loops on the page ──
+  { targetType = "npc", npcId = "npc_grier",  trait = "relation", op = "set", value = 26 },
+  { targetType = "npc", npcId = "npc_sabin",  trait = "relation", op = "set", value = 24 },
+  { targetType = "npc", npcId = "npc_mercer", trait = "relation", op = "set", value = 15 },
+  { targetType = "npc", npcId = "npc_kess",   trait = "relation", op = "set", value = 20 },
+  # ── ACT 1, CARRIED (rev 224). The seed was built for 0.2.1, which never returns to Renner or the yard; 0.2.2
+  # returns to both. Every value is what a real player has after Mission 1 and the yard's three finds:
+  #   drains_done 1   the first drain (loop_renner_finisher adds 1). At 0 the drain replays Act 1's .intro.
+  #   weapon_repair 3 activity_repair_weapon's third session, which is what sets arousal_weapon_ready.
+  #   npc_renner corruption 60 / relation 24 — past the office (relation 21) and the ass finish (corruption 50),
+  #   the same 60 the shipped dev_jump_renner_drain uses.
+  { targetType = "player", trait = "drains_done",   op = "set", value = 2 },   # 0.2.2 drained Renner for the route
+  { targetType = "player", trait = "weapon_repair", op = "set", value = 3 },
+  { targetType = "npc", npcId = "npc_renner", trait = "corruption", op = "set", value = 60 },
+  { targetType = "npc", npcId = "npc_renner", trait = "relation",   op = "set", value = 24 },
+  # ── THE WAY DOWN — done, and the run's per-run state back at rest ──
+  { targetType = "player", trait = "bunker_stealth_used", op = "set", value = 0 },
+  { targetType = "player", trait = "bunker_noise",        op = "set", value = 0 },
+  # ── THE COUNT — done: he stopped counting at 3 ──
+  { targetType = "player", trait = "bastien_mend",        op = "set", value = 3 },
+  { targetType = "player", trait = "bunker_runs",         op = "set", value = 0 },
+  { targetType = "player", trait = "equipped_weapon",     op = "set", value = 1 },
+  { targetType = "player", trait = "drain_charge",        op = "set", value = 1 },
+  { targetType = "player", trait = "arousal_charge",      op = "set", value = 3 },
+  { targetType = "player", trait = "coin",                op = "set", value = 80 },   # 120 less the brace
+  # ── 0.2.3 — at rest. Set explicitly so a jump taken twice in one save still lands at the start. ──
+  { targetType = "player", trait = "vega_damage",         op = "set", value = 0 },
+  { targetType = "player", trait = "vega_habits",         op = "set", value = 4 },
+  { targetType = "player", trait = "vega_records",        op = "set", value = 9 },   # 0.2.4: the study is done
+  { targetType = "player", trait = "vega_cell",           op = "set", value = 100 },  # 0.2.4: Vega's cell, full
+  { targetType = "player", trait = "undertow_build",      op = "set", value = 3 },
+]
+flagEffects = [
+
+  # ── both prior acts, entire ──
+  { targetType = "player", flag = "opening_done",            op = "set" },
+  { targetType = "player", flag = "renner_drained",          op = "set" },
+  { targetType = "player", flag = "renner_leads_extracted",  op = "set" },
+  { targetType = "player", flag = "hunt_lead",               op = "set" },
+  { targetType = "player", flag = "crew_known",              op = "set" },
+  { targetType = "player", flag = "bastien_found",           op = "set" },
+  { targetType = "player", flag = "bastien_revealed",        op = "set" },
+  { targetType = "player", flag = "captivity_entered",       op = "set" },
+  { targetType = "player", flag = "captivity_broken",        op = "set" },
+  { targetType = "player", flag = "captivity_done",          op = "set" },
+  { targetType = "player", flag = "glitch_i_seen",           op = "set" },
+  { targetType = "player", flag = "glitch_ii_seen",          op = "set" },
+  { targetType = "player", flag = "glitch_iii_seen",         op = "set" },
+  { targetType = "player", flag = "rue_introduced",          op = "set" },
+  { targetType = "player", flag = "brothel_hired",           op = "set" },
+  { targetType = "player", flag = "salvage_entered",         op = "set" },
+  { targetType = "player", flag = "kess_met",                op = "set" },
+  { targetType = "player", flag = "salvage_done",            op = "set" },
+  { targetType = "player", flag = "salvage_relaunched",      op = "set" },
+  { targetType = "player", flag = "mission_3_active",        op = "set" },
+  { targetType = "player", flag = "mercer_hub_open",         op = "set" },
+  { targetType = "player", flag = "calloway_met",            op = "set" },
+  { targetType = "player", flag = "calloway_believes",       op = "set" },
+  { targetType = "player", flag = "case_insider_seen",       op = "set" },
+  { targetType = "player", flag = "case_curated_seen",       op = "set" },
+  { targetType = "player", flag = "pipe_known",              op = "set" },
+  { targetType = "player", flag = "colm_found",              op = "set" },
+  { targetType = "player", flag = "colm_met",                op = "set" },
+  { targetType = "player", flag = "access_problem_seen",     op = "set" },
+  { targetType = "player", flag = "docs_retrieved",          op = "set" },
+  { targetType = "player", flag = "archive_1a_done",         op = "set" },
+  { targetType = "player", flag = "controller_held",         op = "set" },
+  { targetType = "player", flag = "berth_home",              op = "set" },
+  { targetType = "player", flag = "file_shape_known",        op = "set" },
+  { targetType = "player", flag = "print_needed",            op = "set" },
+  { targetType = "player", flag = "mercer_found",            op = "set" },
+  { targetType = "player", flag = "mercer_hospitality_open", op = "set" },
+  { targetType = "player", flag = "owner_print_taken",       op = "set" },
+  # ⚠️ controller_off + leash_answered — see the note on dev_jump_0_1_9_start. Any jump that seeds leash_cut
+  # must carry both, or the seeded state contradicts itself and three separate surfaces read it wrong.
+  { targetType = "player", flag = "controller_off",          op = "set" },
+  { targetType = "player", flag = "owner_drained",           op = "set" },
+  { targetType = "player", flag = "parts_loop_open",         op = "set" },
+  { targetType = "player", flag = "leash_answered",          op = "set" },
+  { targetType = "player", flag = "leash_cut",               op = "set" },
+  { targetType = "player", flag = "file_read",               op = "set" },
+  { targetType = "player", flag = "chip_read",               op = "set" },
+  { targetType = "player", flag = "wall_sol_asked",          op = "set" },
+  { targetType = "player", flag = "wall_colm_asked",         op = "set" },
+  { targetType = "player", flag = "wall_rue_asked",          op = "set" },
+  { targetType = "player", flag = "wall_market_asked",       op = "set" },
+  { targetType = "player", flag = "wall_understood",         op = "set" },
+  { targetType = "player", flag = "face_bought",             op = "set" },
+  # ⚠️ OFF, flipped in place (beat_0200): THE COUNT is played as herself, and every scene of his waits for it.
+  { targetType = "player", flag = "face_worn",               op = "unset" },
+  { targetType = "player", flag = "rise_door",               op = "set" },   # 0.2.4: mirrors face_worn (the Rise door)
+  { targetType = "player", flag = "stranger_seen",           op = "set" },
+  { targetType = "player", flag = "bar_hired",               op = "set" },
+  { targetType = "player", flag = "bastien_seen",            op = "set" },
+  { targetType = "player", flag = "raid_done",               op = "set" },
+  { targetType = "player", flag = "cain_named",              op = "set" },
+  { targetType = "player", flag = "lab_seen",                op = "set" },
+  # ⚠️ plan_made — same reason as the start jump above, and it bit here first: without it cap_the_wait
+  # auto-fires on arrival at the cot and the on-ramp this jump exists to reach is behind nine clicks of a
+  # scene from two releases ago. Found live at beat_0140.
+  { targetType = "player", flag = "plan_made",               op = "set" },
+  # ── WHOSE HAND, beats 2 through 13 ──
+  { targetType = "player", flag = "cain_named_grier",        op = "set" },
+  { targetType = "player", flag = "taken_to_lab",            op = "set" },
+  { targetType = "player", flag = "grier_met",               op = "set" },
+  { targetType = "player", flag = "grier_opened_up",         op = "set" },
+  { targetType = "player", flag = "piece_one_held",          op = "set" },
+  { targetType = "player", flag = "rise_named",              op = "set" },
+  { targetType = "player", flag = "papers_bought",           op = "set" },
+  { targetType = "player", flag = "sabin_met",               op = "set" },
+  { targetType = "player", flag = "archive_worked",          op = "set" },
+  { targetType = "player", flag = "sabin_consulted",         op = "set" },
+  { targetType = "player", flag = "sabin_opened_up",         op = "set" },
+  { targetType = "player", flag = "decoy_made",              op = "set" },
+  { targetType = "player", flag = "piece_two_held",          op = "set" },
+  { targetType = "player", flag = "store_carried_seen",      op = "set" },
+  { targetType = "player", flag = "price_named",             op = "set" },
+  # ── and stopped one beat short: the capstone is the thing under test ──
+  { targetType = "player", flag = "capstone_failed",         op = "set" },
+  { targetType = "player", flag = "vesper_named",            op = "set" },
+  { targetType = "player", flag = "cain_absent_confirmed",   op = "set" },
+  { targetType = "player", flag = "third_located",           op = "set" },
+  { targetType = "player", flag = "two_men_done",            op = "set" },
+  # ── the end of 0.2.1: cain_came_along is set by activity_ask_him_to_come and was absent from the copied seed ──
+  { targetType = "player", flag = "cain_came_along",         op = "set" },
+  # ── ACT 1, CARRIED (rev 224) — every flag set by its own canvas on the real path: canvas_opening_morning,
+  # cap_renner_hired, work_depot_haul, cap_renner_noticed, the flash rung, cap_renner_blowjob,
+  # ma_renner_blowjob, the loop entry, the anal choice, yard_find_1/2/3, activity_repair_weapon. Without
+  # them the yard replays its Act-1 finds and cap_renner_hired re-fires at the Anchor.
+  { targetType = "player", flag = "mission_1_active", op = "set" },
+  { targetType = "player", flag = "renner_hired", op = "set" },
+  { targetType = "player", flag = "worked_renner_once", op = "set" },
+  { targetType = "player", flag = "renner_office_open", op = "set" },
+  { targetType = "player", flag = "renner_flirts_back", op = "set" },
+  { targetType = "player", flag = "renner_oral_once", op = "set" },
+  { targetType = "player", flag = "ma_blowjob_seen", op = "set" },
+  { targetType = "player", flag = "renner_fucked_once", op = "set" },
+  { targetType = "player", flag = "renner_anal_once", op = "set" },
+  { targetType = "player", flag = "yard_clue_seen", op = "set" },
+  { targetType = "player", flag = "has_arousal_weapon", op = "set" },
+  { targetType = "player", flag = "found_dead_men", op = "set" },
+  { targetType = "player", flag = "arousal_weapon_ready", op = "set" },
+  # facility_match_seen — inv_facility_match ("That's mine") is OPTIONAL in real play: nothing reads the flag
+  # but its own trigger. A player who never went to the Facility before 0.2.2 gets it once on the first rescue
+  # trip, which is correct. The jump marks it seen so a tester lands on the descent card, not an Act-1 beat.
+  { targetType = "player", flag = "facility_match_seen", op = "set" },
+  # ── THE WAY DOWN — done. Exactly the eight flags its mandatory path sets (read out of the 0.2.2 canvases'
+  # own flagEffects at beat_0194). bunker_seen is NOT here: it is set only on a loud run, and a silent run is a
+  # finished run too. bastien_at_cot is set by THIS click, so its set_day is today and step 1 waits a day.
+  { targetType = "player", flag = "bastien_alive_known", op = "set" },
+  { targetType = "player", flag = "rescue_agreed",       op = "set" },
+  { targetType = "player", flag = "route_learned",       op = "set" },
+  { targetType = "player", flag = "yard_part_found",     op = "set" },
+  { targetType = "player", flag = "link_built",          op = "set" },
+  { targetType = "player", flag = "bastien_found_alive", op = "set" },
+  { targetType = "player", flag = "bastien_rescued",     op = "set" },
+  { targetType = "player", flag = "bastien_at_cot",      op = "set" },
+  # ── THE COUNT — entire. Every flag its mandatory path sets (design_the_count.md steps 1-7). ──
+  { targetType = "player", flag = "bastien_drank",       op = "set"   },
+  { targetType = "player", flag = "bastien_washed",      op = "set"   },
+  { targetType = "player", flag = "brace_built",         op = "set"   },
+  { targetType = "player", flag = "bastien_stood",       op = "set"   },
+  { targetType = "player", flag = "bastien_bedded",      op = "set"   },
+  { targetType = "player", flag = "bastien_slept",       op = "set"   },
+  { targetType = "player", flag = "bastien_himself",     op = "set"   },
+  { targetType = "player", flag = "bastien_note",        op = "set"   },
+  { targetType = "player", flag = "house_answered",      op = "set"   },
+  { targetType = "player", flag = "bastien_back",        op = "set"   },
+  # ── 0.2.3 flags, UNSET so a jump taken mid-chunk lands at the start (beat_0207 onward) ──
+  { targetType = "player", flag = "site_offered",        op = "set"   },
+  { targetType = "player", flag = "the_site_open",       op = "set"   },
+  { targetType = "player", flag = "marrow_known",        op = "set"   },
+  { targetType = "player", flag = "site_ambushed",       op = "set"   },
+  { targetType = "player", flag = "seam_known",          op = "set"   },
+  { targetType = "player", flag = "cain_rule_heard",     op = "set"   },
+  { targetType = "player", flag = "crew_asked",          op = "set"   },
+  { targetType = "player", flag = "undertow_open",       op = "set"   },
+  { targetType = "player", flag = "crew_refused",        op = "set"   },
+  { targetType = "player", flag = "dace_met",            op = "set"   },
+  { targetType = "player", flag = "crew_back",           op = "set"   },
+  { targetType = "player", flag = "vega_taken",          op = "set"   },
+  { targetType = "player", flag = "vega_dismantled",     op = "set"   },
+  { targetType = "player", flag = "crew_list_held",      op = "set"   },
+  { targetType = "player", flag = "crew_called",         op = "set"   },
+  { targetType = "player", flag = "vega_plan",           op = "set"  },
+  { targetType = "player", flag = "cradles_ready",       op = "set"   },
+  # ── 0.2.4 flags, UNSET (beat_0239+): a 0.2.3 jump taken after playing 0.2.4 lands before any of it ──
+  { targetType = "player", flag = "study_blade",         op = "set"   },
+  { targetType = "player", flag = "study_signal",        op = "set"   },
+  { targetType = "player", flag = "study_method",        op = "set"   },
+  { targetType = "player", flag = "last_night_held",     op = "set"   },
+  { targetType = "player", flag = "transferred",         op = "set"   },
+  { targetType = "player", flag = "rise_searched",       op = "unset" },
+  { targetType = "player", flag = "tower_planned",       op = "unset" },
+  { targetType = "player", flag = "memory_taken",        op = "unset" },
+  { targetType = "player", flag = "units_fought",        op = "unset" },
+  { targetType = "player", flag = "dace_dead",           op = "unset" },
+  { targetType = "player", flag = "back_in_body",        op = "unset" },
+  { targetType = "player", flag = "memory_whole",        op = "unset" },
+  { targetType = "player", flag = "cain_chosen",         op = "unset" },
+  { targetType = "player", flag = "rise_slip",           op = "unset" },   # 0.2.4 Vega: the Rise
+  { targetType = "player", flag = "rise_line_seen",      op = "unset" },
+  { targetType = "player", flag = "in_vega",             op = "set"   },   # 0.2.4: Wren is in Vega's body
 ]
 
