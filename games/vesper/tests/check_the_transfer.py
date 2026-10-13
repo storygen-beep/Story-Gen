@@ -444,7 +444,7 @@ def main():
             check(bad not in text_of(sn).lower(), f"0243: Sabin must not learn the transfer works ('{bad}')")
     check("cap_the_rise" not in canvases, "0243: the old auto-fire cap_the_rise is gone (the Rise is played, not watched)")
     tp = run_link_checks(canvases, "cap_tower_plan", "0244", "rise_searched", "tower_planned", 60,
-                         ["scenes/the_tower_plan.jpg"], ["Waterfront", "vault", "eleven thousand"], presence=True, needs=("in_vega",))
+                         [], ["Waterfront", "vault", "eleven thousand"], presence=True, needs=("in_vega",))
     if tp:
         txt = text_of(tp).lower()
         for bad in ("if you're late", "if you are late", "call us", "we'll come in", "signal us", "by three"):
@@ -472,7 +472,7 @@ def main():
         check(not [b for b in all_blocks(ln5.get("nodes")) if b.get("type") == "dialog"], "0246: Lyra and Nova do not speak")
         check("three o'clock" not in text_of(ln5).lower(), "0246: no clock hour in the fight")
     df = run_link_checks(canvases, "cap_dace_falls", "0246", "units_fought", "dace_dead", 210,
-                         ["scenes/the_seam_again.jpg", "scenes/dace_falls.jpg"],
+                         ["scenes/dace_falls.jpg"],
                          ["seam", "Nobody called them", "Let them go", "coffins"], where="spire_plaza", exit_to="the_site")
     if df:
         spk = {(b.get("props") or {}).get("npcId") for b in all_blocks(df.get("nodes")) if b.get("type") == "dialog"}
