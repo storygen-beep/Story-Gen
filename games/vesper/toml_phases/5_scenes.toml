@@ -23996,7 +23996,7 @@ flagEffects = [
 # Kess recharges the cell through the day: 720 minutes. The Rise shows 09:00-10:59, so this scene shows 21:00-22:59,
 # the vault (+120) 23:00-00:59, the fight (+120) 01:00-02:59, before three, and the save (+210) 04:30-06:29: three
 # o'clock has come and gone, which is why they came.
-# MEDIA: one new slot, scenes/the_tower_plan.jpg (one asset, one block).
+# MEDIA: none (LO 2026-10-14: the_tower_plan.jpg cut, no image needed).
 [[canvases]]
 id          = "cap_tower_plan"
 name        = "The plan"
@@ -24026,7 +24026,6 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "The Tower. Of course it's the bloody Tower." },
     ] },
     { advance_text = "\"There's more.\"", blocks = [
-        { type = "image", props = { file = "scenes/the_tower_plan.jpg", description = "In a dim abandoned lab, a flawless pale woman-shaped machine stands at a bench talking urgently to a grizzled older mechanic and a scarred tired man, a rough floor plan scratched on a scrap of metal between them.", search_queries = ["three people planning around table dark workshop", "android woman explaining plan to two men dim lab"] } },
         { type = "dialog", props = { speaker = "player" }, content = "The top floors of the Rise. They're building bodies. Hundreds of them, on a line. Empty, like she was. Kess, you said they made eleven of us by hand." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Eleven of a thing. Not eleven thousand." },
         { type = "dialog", props = { speaker = "player" }, content = "Someone worked out the eleven thousand. Sabin." },
@@ -24292,7 +24291,7 @@ flagEffects = [
 # ⚠️ Speakers: Bastien and Cain as themselves; Dace as npc_dace (declared at 0.2.3, no schedule row since dace_met).
 # 210 minutes out (renders 04:30-06:29: three o'clock came and went at the Waterfront). Carried back down to the
 # Site, into cap_back_in_body. No sex in this body (LO).
-# MEDIA: two new slots, scenes/the_seam_again.jpg and scenes/dace_falls.jpg.
+# MEDIA: one new slot, scenes/dace_falls.jpg (LO 2026-10-14: the_seam_again.jpg cut, no image needed).
 [[canvases]]
 id          = "cap_dace_falls"
 name        = "Dace"
@@ -24319,7 +24318,6 @@ blocks = [
         { type = "thought_bubble", props = { speaker = "player" }, content = "They came. Nobody called them. They came." },
     ] },
     { advance_text = "Watch Cain.", blocks = [
-        { type = "image", props = { file = "scenes/the_seam_again.jpg", description = "On a wet plaza at night, a scarred man in a long coat pins a flawless pale woman-shaped machine from behind, his hand pressed to the base of her spine, while rough men rush in around them.", search_queries = ["man grabbing android woman from behind night fight", "gang of men fighting robot woman wet street"] } },
         { type = "paragraph", content = "Cain goes in under Nova's arm the wrong way and gets his hand flat on the base of her spine. Nova drops like her strings were cut." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_dace" }, content = "That's one! Where's the other?" },
     ] },
