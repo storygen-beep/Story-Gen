@@ -198,6 +198,10 @@ class TemplateLocation:
     navigation_order: List[str] = field(default_factory=list)
     entry_conditions: Dict[str, Any] = field(default_factory=dict)
     blocked_message: str = ""
+    # Per-state refusals: [{conditions = {version = "1.0", ...}, text = "..."}]. First match wins, and
+    # blocked_message is the fallback, so a door locked for two different reasons says the true one
+    # (Vesper 0.2.4: the strip's rooms are shut to Vega's body, and some were already shut for their own reason).
+    blocked_messages: List[Dict[str, Any]] = field(default_factory=list)
     # EN3 — opening hours. Each window is {weekdays, open, close} ("HH:MM"; weekdays 0=Monday,
     # empty = every day). close <= open runs overnight into the next day; close may be
     # "24:00". Empty = always open, exactly as before. closed_text is what the room says
@@ -1514,6 +1518,24 @@ def _require_dict(obj: Dict[str, Any], key: str) -> Dict[str, Any]:
     return val if isinstance(val, dict) else {}
 
 
+def _parse_blocked_messages(loc: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """A location's per-state refusals. Each entry needs a v1.0 conditions table (an
+    unversioned one fails OPEN in the engine and would always match) and a text."""
+    out = []
+    for i, entry in enumerate(_require_list(loc, "blocked_messages")):
+        where = f"location '{loc.get('id')}' blocked_messages[{i}]"
+        if not isinstance(entry, dict):
+            raise TypeError(f"{where} must be a table")
+        cond = entry.get("conditions")
+        if not isinstance(cond, dict) or str(cond.get("version", "")) != "1.0" or not cond.get("items"):
+            raise ValueError(f"{where} needs conditions = {{ version = \"1.0\", items = [...] }}")
+        text = entry.get("text")
+        if not isinstance(text, str) or not text.strip():
+            raise ValueError(f"{where} needs a text")
+        out.append({"conditions": cond, "text": text})
+    return out
+
+
 def _require_list(obj: Dict[str, Any], key: str) -> List[Any]:
     val = obj.get(key, [])
     if val is not None and not isinstance(val, list):
@@ -2448,6 +2470,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 navigation_order=[str(x) for x in _require_list(l, "navigation_order")],
                 entry_conditions=_require_dict(l, "entry_conditions"),
                 blocked_message=_require_str(l, "blocked_message", ""),
+                blocked_messages=_parse_blocked_messages(l),
                 # Kept raw; validate() reports every malformed window.
                 hours=l.get("hours") or [],
                 closed_text=_require_str(l, "closed_text", ""),
@@ -9068,6 +9091,8 @@ def create_project_from_template(
             loc.properties["entry_conditions"] = l.entry_conditions
         if l.blocked_message:
             loc.properties["blocked_message"] = l.blocked_message
+        if l.blocked_messages:  # MIRRORED in game_graph.py's location loop
+            loc.properties["blocked_messages"] = l.blocked_messages
         if l.hours:  # EN3 — MIRRORED in game_graph.py's location loop
             loc.properties["hours"] = l.hours
         if l.closed_text:

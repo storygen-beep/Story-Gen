@@ -182,7 +182,10 @@ def explicit_scene_checks(canvas, tag, clips, min_explicit_beats):
 VEGA_TRUE = {"in_vega", "rise_door", "transferred", "cradles_ready", "vega_dismantled", "vega_taken", "vega_plan",
              "crew_back", "study_blade", "study_signal", "study_method", "last_night_held", "marrow_known", "site_offered",
              "the_site_open", "archive_1a_done", "rise_named", "salvage_entered", "salvage_relaunched", "sabin_met",
-             "sabin_consulted", "seam_known", "opening_done", "wall_understood", "face_bought"}
+             "sabin_consulted", "seam_known", "opening_done", "wall_understood", "face_bought",
+             # beat_0250: the strip is on Vega's map now. The 0.2.3 ambush on it (cap_the_ambush) sets site_ambushed, and
+             # the hunt that ends in cradles_ready comes after it, so every save that reaches the transfer has it.
+             "site_ambushed"}
 VEGA_FALSE = {"face_worn", "back_in_body", "memory_whole", "cain_chosen", "dev_mode_enabled"}
 VEGA_TRAITS = {"vega_records": 9}
 # Surfaces that are written for Vega without an in_vega gate (their own flags only exist in Vega), or that are
@@ -626,8 +629,18 @@ def main():
     # ── beat_0248 — THE VEGA MAP: doors, meters, portrait, Vega's cards, and the leak walk ───────────────────
     locs = {l["id"]: l for l in t.get("locations", [])}
     st = locs.get("underworld_strip") or {}
-    check(has_flag(cond_items(st.get("entry_conditions")), "in_vega", "is_false") and (st.get("entry_conditions") or {}).get("version") == "1.0",
-          "0241: the strip is locked to Vega (the one lock over every Wren place down there)")
+    # beat_0250 (LO: "No different route for vega"): the strip is OPEN to Vega and the lock is on its six Wren rooms,
+    # each with a Vega refusal in blocked_messages, so a room that already had its own lock still says the true reason.
+    check(not has_flag(cond_items(st.get("entry_conditions")), "in_vega", "is_false"), "0250: the strip is open to Vega (she walks Wren's route)")
+    vbm = [(st.get("description_variants") or [{}])[0].get("conditions")]
+    check(has_flag(cond_items(vbm[0]), "in_vega", "is_true"), "0250: the strip describes itself for Vega (description_variants)")
+    for rid in ("underworld_bar", "underworld_brothel", "underworld_pit", "underworld_market", "kess_berth", "crew_den"):
+        r = locs.get(rid) or {}
+        ec = r.get("entry_conditions") or {}
+        bms = r.get("blocked_messages") or []
+        check(has_flag(cond_items(ec), "in_vega", "is_false") and ec.get("version") == "1.0", f"0250: {rid} is shut to Vega's body")
+        check(bool(bms) and has_flag(cond_items(bms[0].get("conditions")), "in_vega", "is_true") and bms[0].get("text", "").startswith("Not in this body."),
+              f"0250: {rid} tells Vega why (blocked_messages)")
     cf = locs.get("chairmans_floor") or {}
     ci = cond_items(cf.get("entry_conditions"))
     check(cf.get("entry_from") == "atrium" and "chairmans_floor" in (locs.get("atrium") or {}).get("navigation_order", []),
@@ -651,10 +664,25 @@ def main():
     outs = ((t.get("player_portrait") or {}).get("outfits") or [{}])
     check(outs[0].get("when") == {"flag": "in_vega"}, "0240: the in_vega portrait rule is FIRST (first match wins)")
     check(core.get("vega_cell") == 0 and labels.get("vega_cell", {}).get("hidden") is True, "0240: vega_cell declared at 0 and hidden")
-    for cid, loc in (("activity_vega_site", "the_site"), ("activity_vega_gate", "underworld_gate"), ("activity_vega_car", "spire_plaza")):
+    for cid, loc in (("activity_vega_site", "the_site"), ("activity_vega_gate", "underworld_gate"), ("activity_vega_car", "spire_plaza"),
+                     ("activity_vega_gate_car", "underworld_gate"), ("activity_vega_strip_exit", "underworld_strip")):
         c = canvases.get(cid) or {}
         tr = c.get("trigger") or {}
         check(tr.get("location") == loc and has_flag(cond_items(tr.get("conditions")), "in_vega", "is_true"), f"0242: {cid} is Vega's card at {loc}")
+    # beat_0250: Vega's twins carry Wren's own labels, and Wren's cards are untouched (LO: no change to her route).
+    def labels_of(cid):
+        return [ch.get("text") for nd in (canvases.get(cid) or {}).get("nodes", []) for ch in ((nd.get("exit_block") or {}).get("choices") or [])] + \
+               [(nd.get("exit_block") or {}).get("text") for nd in (canvases.get(cid) or {}).get("nodes", [])]
+    check("Ride down to the Underworld." in labels_of("activity_vega_car") and "Ride down to the Underworld." in labels_of("activity_travel_to_reach"),
+          "0250: the plaza car's label is Wren's for Vega too")
+    check("Ride up to the Spire." in labels_of("activity_vega_gate_car") and "Ride up to the Spire." in labels_of("activity_travel_from_gate"),
+          "0250: the gate car's label is Wren's for Vega too")
+    check("Out to the gate." in labels_of("activity_vega_strip_exit") and "Out to the gate." in labels_of("underworld_strip_hub"),
+          "0250: Exit Underworld is the same for Vega")
+    check(not any(nd.get("id") == "out" for nd in (canvases.get("activity_vega_site") or {}).get("nodes", [])),
+          "0250: the Site's separate way out for Vega is gone")
+    for cid in ("activity_travel_to_reach", "activity_travel_from_gate", "underworld_gate_check", "underworld_strip_hub"):
+        check(has_flag(cond_items((canvases.get(cid) or {}).get("trigger", {}).get("conditions")), "in_vega", "is_false"), f"0250: Wren's {cid} stays hers")
     bb2 = canvases.get("cap_back_in_body") or {}
     cfg = (((bb2.get("nodes") or [{}])[-1].get("exit_block")) or {}).get("config") or {}
     fl = {f.get("flag"): f.get("op") for f in cfg.get("flagEffects", [])}
@@ -663,7 +691,7 @@ def main():
     # closed to Vega, impossible under the known Vega state, or on the read-by-a-human list above.
     reach, by_loc = vega_reach(t)
     # sabin_lab is NOT in this set: Vega's lab is a node of activity_vega_lab, and she never stands in the location.
-    want = {"the_site", "underworld_gate", "spire_plaza", "atrium", "the_rise_floor", "chairmans_floor"}
+    want = {"the_site", "underworld_strip", "underworld_gate", "spire_plaza", "atrium", "the_rise_floor", "chairmans_floor"}
     check(want <= reach, f"0248: Vega must be able to reach {sorted(want - reach)}")
     check(not (reach - want), f"0248: Vega can reach places written for Wren: {sorted(reach - want)}")
     for k in reach:
@@ -676,8 +704,33 @@ def main():
 
     # ── beat_0249 — the Quests page: character cards hide in Vega; finished arcs under "Finished" (LO 2026-10-13) ──
     npc_cards = [c for c in cards if c.get("npc_id")]
-    ungated = [(c.get("npc_id"), c.get("priority")) for c in npc_cards if {"flag": "in_vega", "op": "is_false"} not in c.get("when", [])]
-    check(not ungated, f"0249: every character card hides while she is in Vega (their tips name Wren's places); ungated: {ungated}")
+    # beat_0251: Kess and Cain each have ONE card written for Vega (in_vega is_true) that names only the Site.
+    vega_cards = [c for c in npc_cards if {"flag": "in_vega", "op": "is_true"} in c.get("when", [])]
+    check(sorted(c["npc_id"] for c in vega_cards) == ["npc_cain", "npc_kess"], f"0251: Kess and Cain each have one Vega card, got {[c['npc_id'] for c in vega_cards]}")
+    for c in vega_cards:
+        check("Berth" not in c.get("tip", "") and "Site" in c.get("tip", ""), f"0251: {c['npc_id']}'s Vega card names only the Site")
+    ungated = [(c.get("npc_id"), c.get("priority")) for c in npc_cards if c not in vega_cards and {"flag": "in_vega", "op": "is_false"} not in c.get("when", [])]
+    check(not ungated, f"0249: every other character card hides while she is in Vega (their tips name Wren's places); ungated: {ungated}")
+    # beat_0251: one live Kess card and one live Cain card in every state of the chapter (the NPC tier shows one).
+    def live(npc, st):
+        out = []
+        for c in npc_cards:
+            if c.get("npc_id") != npc:
+                continue
+            ok_ = all((st.get(w["flag"], False) is (w["op"] == "is_true")) for w in c.get("when", []) if "flag" in w)
+            if ok_:
+                out.append(c["text"][:30])
+        return out
+    STATES = {
+        "study": {"cradles_ready": True},
+        "after the last night": {"cradles_ready": True, "last_night_held": True},
+        "in Vega": {"cradles_ready": True, "last_night_held": True, "transferred": True, "in_vega": True},
+        "home": {"cradles_ready": True, "last_night_held": True, "transferred": True, "back_in_body": True},
+    }
+    for name, st_ in STATES.items():
+        for npc in ("npc_kess", "npc_cain"):
+            got = live(npc, st_)
+            check(len(got) == 1, f"0251: exactly one {npc} card in '{name}', got {got}")
     check((t.get("project") or {}).get("quests_finished_collapsed") is True, "0249: Vesper opts into the collapsed Finished section")
 
     if fails:

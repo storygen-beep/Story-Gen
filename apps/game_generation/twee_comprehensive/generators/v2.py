@@ -1054,6 +1054,9 @@ class TweeComprehensiveGeneratorV2:
                 "entry_conditions": loc_props.get("entry_conditions", {}),
                 "blocked_message": loc_props.get("blocked_message", ""),
             }
+            # Per-state refusals, first match wins; absent when unauthored so the payload is unchanged.
+            if loc_props.get("blocked_messages"):
+                locations_map[loc_slug]["blocked_messages"] = loc_props["blocked_messages"]
             # EN3 — opening hours, read by setup.locOpenNow. Absent, not empty, when
             # unauthored, so a game without hours has the payload it had before.
             if loc_props.get("hours"):
@@ -6144,6 +6147,11 @@ setup.navDestUnlocked = function(slug) {{
 // uses, so the nav card and the blocked passage can never disagree.
 setup.navDestBlockedReason = function(slug) {{
     var loc = (setup.locations || {{}})[String(slug)] || {{}};
+    // Per-state refusals first (first match wins), so a door shut for two reasons names the true one.
+    var bms = loc.blocked_messages || [];
+    for (var bi = 0; bi < bms.length; bi++) {{
+        if (setup.triggerConditionsSatisfied(bms[bi].conditions)) return bms[bi].text;
+    }}
     if (loc.blocked_message) return loc.blocked_message;
     if (typeof setup.formatCanvasConditions === 'function' && loc.entry_conditions) {{
         var f = setup.formatCanvasConditions(loc.entry_conditions);
@@ -11213,6 +11221,18 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                             '<p class="entry-blocked">You can\'t go here right now.</p>\n'
                             f'<p class="entry-requirements"><<print setup.formatCanvasConditions({entry_cond_json})>></p>'
                         )
+                    # Per-state refusals wrap the fallback in an if/elseif chain, first match wins; the
+                    # same order setup.navDestBlockedReason uses, so the nav card and the passage agree.
+                    blocked_messages = (location.properties or {}).get('blocked_messages') or []
+                    if blocked_messages:
+                        chain = ""
+                        for bi, bm in enumerate(blocked_messages):
+                            macro = "if" if bi == 0 else "elseif"
+                            chain += (
+                                f'<<{macro} setup.triggerConditionsSatisfied({json.dumps(bm["conditions"])})>>'
+                                f'<p class="entry-blocked-narrative">{self._resolve_at_references(bm["text"])}</p>\n'
+                            )
+                        blocked_html = f"{chain}<<else>>\n{blocked_html}\n<</if>>"
                     if self.clothing_enabled and self.wardrobe_change_on_refusal and has_entry_conditions:
                         # E7b — the unmet part is about her clothes: offer the wardrobe, and
                         # come back here (WardrobePage's Back re-renders this passage).

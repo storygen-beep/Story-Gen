@@ -24751,12 +24751,13 @@ when = [
 ]
 
 # ── P · in Vega: the Rise. ──
-# ⚠️ Every place named here was re-read at beat_0247: the Site's "Out to the gate" (activity_vega_site), the gate's
-# car up (activity_vega_gate), the Rise's door (rise_door), Sabin's rows (floor 08:00-11:00, lab from 11:00).
+# ⚠️ Every place named here was re-read at beat_0247 and again at beat_0250, when Vega's route became Wren's route:
+# Leave The Site to the strip, Exit Underworld (activity_vega_strip_exit), the man at the door (activity_vega_gate),
+# the gate's car up (activity_vega_gate_car), the Rise's door (rise_door), Sabin's rows (floor 08:00-11:00, lab 11:00).
 [[quest_cards]]
 priority   = 10
 text       = "You are in her. The company's own face opens the company's doors. Find out where they keep the rest of you."
-tip        = "From the Site: Out to the gate, the car up to Spire Plaza, then the Rise. Sabin's lab is empty only while he is down on the floor, 08:00 to 11:00. The top floors take some of Vega's cell; charge it at the Site."
+tip        = "The same way up as always: out through the strip to the gate, then the car up to Spire Plaza, then the Rise. Sabin's lab is empty only while he is down on the floor, 08:00 to 11:00. The top floors take some of Vega's cell; charge it at the Site."
 goals = [
   { flag = "rise_slip",      op = "is_true", label = "Search Sabin's lab (the Rise, while he is on the floor, 08:00 to 11:00)" },
   { flag = "rise_line_seen", op = "is_true", label = "See what is on the top floors (the Rise)" },
@@ -24820,4 +24821,90 @@ terminal_text = "She chose him."
 when = [
   { flag = "in_vega", op = "is_false" },   # 0.2.4: Wren-body cards hide while she is in Vega
   { flag = "cain_chosen", op = "is_true" },
+]
+
+# ══ beat_0251 — KESS AND CAIN THROUGH 0.2.4 (LO: from the study to the transfer the people section showed only
+# "Finished (7)", so it read as if everyone was done). Kess had no card in the game at all; Cain had only his end
+# card above. One live card per man in every state of the chapter, each set exclusive on its flags (the NPC tier
+# shows the single highest match). Places and hours re-read: Kess at the Berth 10:00-22:00 and at the Site
+# 22:00-23:59 (gated cradles_ready + back_in_body is_false); Cain at the Site from 21:00. The Berth is shut to Vega,
+# so Kess's Vega card names only the Site.
+
+# ── Kess · the study (in her own body, before the transfer).
+[[quest_cards]]
+npc_id     = "npc_kess"
+priority   = 10
+text       = "He built two cradles in your father's lab and wired a reader into her. He has never done this before and he won't pretend he has. Before he puts you in her, he needs to know everything she can do."
+tip        = "At his bench at the Berth from ten in the morning. At the Site from ten at night to midnight: the study nights are his."
+when = [
+  { flag = "in_vega",       op = "is_false" },
+  { flag = "cradles_ready", op = "is_true"  },
+  { flag = "transferred",   op = "is_false" },
+]
+
+# ── Kess · while she is in Vega.
+[[quest_cards]]
+npc_id     = "npc_kess"
+priority   = 10
+text       = "He put you in her and he'll get you out again. Until then, the cell is his worry. He left the charger wired on the bench at the Site."
+tip        = "At the Site from ten at night to midnight. Charge the cell there any time."
+when = [
+  { flag = "in_vega", op = "is_true" },
+]
+
+# ── Kess · back in her own body.
+[[quest_cards]]
+npc_id     = "npc_kess"
+priority   = 10
+text       = "He got you back into your own body. Now the wreck of Vega is on his table, and he's already looking at her arm."
+tip        = "At his bench at the Berth from ten in the morning to ten at night."
+when = [
+  { flag = "in_vega",      op = "is_false" },
+  { flag = "back_in_body", op = "is_true"  },
+]
+
+# ── Cain · the study, before the last night.
+[[quest_cards]]
+npc_id     = "npc_cain"
+priority   = 10
+text       = "He keeps the nights at the Site and he won't leave the cradles. He sits in on the study with Kess and says nothing about what it costs him to watch."
+tip        = "At the Site from nine at night."
+when = [
+  { flag = "in_vega",         op = "is_false" },
+  { flag = "cradles_ready",   op = "is_true"  },
+  { flag = "last_night_held", op = "is_false" },
+]
+
+# ── Cain · after the last night, before the transfer.
+[[quest_cards]]
+npc_id     = "npc_cain"
+priority   = 10
+text       = "He held you all night on the floor between the two cradles and didn't ask you for anything. Next time he sits in that chair, it will be beside your body, while you are in hers."
+tip        = "At the Site from nine. The transfer needs him and Kess both, ten at night to midnight."
+when = [
+  { flag = "in_vega",         op = "is_false" },
+  { flag = "last_night_held", op = "is_true"  },
+  { flag = "transferred",     op = "is_false" },
+]
+
+# ── Cain · while she is in Vega.
+[[quest_cards]]
+npc_id     = "npc_cain"
+priority   = 10
+text       = "He sits beside your body in the cradle and holds its hand. He won't leave it while you're out in hers."
+tip        = "At the Site from nine at night."
+when = [
+  { flag = "in_vega", op = "is_true" },
+]
+
+# ── Cain · back in her own body, before she chooses him.
+[[quest_cards]]
+npc_id     = "npc_cain"
+priority   = 10
+text       = "You're back in your own body, and he's still in the chair beside the cradle. He has been there the whole time."
+tip        = "At the Site from nine at night."
+when = [
+  { flag = "in_vega",      op = "is_false" },
+  { flag = "back_in_body", op = "is_true"  },
+  { flag = "cain_chosen",  op = "is_false" },
 ]

@@ -1431,8 +1431,14 @@ entry_from  = "underworld_strip"
 # will not check this. Verify live. version="1.0" or the lock fails OPEN.
 entry_conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "salvage_entered", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # beat_0250: shut to Vega's body (blocked_messages)
 ] }
 blocked_message = "A breaking-dock off the strip, chained and dark. Whoever strips ships down here doesn't take walk-ins."
+blocked_messages = [
+  { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_true" },
+    ] }, text = "Not in this body. The berth is Wren's bed and Kess's bench, and none of it was built for a body like this. Kess comes to the Site at night." },
+]
 
 # ── THE UNDERWORLD — the dark city the hunt points to (her second life) ────────────────────────
 # Always available (gated only opening_done). The gate is cleared EVERY visit (pay coin / fight / weapon —
@@ -1476,16 +1482,17 @@ description      = "Down past the gate the city turns inside out. Wet brick, red
 image            = "locations/underworld_strip.jpg"
 image_search_queries = ["underground night market red light crowd", "cyberpunk black market alley neon"]
 navigation_order = ["underworld_bar", "underworld_brothel", "underworld_pit", "underworld_market", "kess_berth", "crew_den", "the_site"]
-# ⚠️ ADDED beat_0241 (0.2.4, the player plays Vega). THE ONE LOCK THAT KEEPS VEGA'S BODY OFF WREN'S MAP.
-# Every place written for Wren's body down here hangs off this strip, so locking the strip (rather than six
-# children with their own older locks and messages) closes all of them at once. Vega moves between the Site and
-# the gate by her own cards (activity_vega_site "Out to the gate", the gate's "Down to the Site"), which are
-# teleports and ignore this lock (destinationType specific). The Site's Leave link points here and greys with this
-# message. Only in_vega can fail this lock, so the message is true every time it shows. version 1.0 or it fails OPEN.
-entry_conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },
-] }
-blocked_message = "Not in this body. Every stall on that strip watched Vega hunt her through it, and nobody down there would wait to find out who is inside her now."
+# ⚠️ beat_0250 (0.2.4, LO: "No different route for vega"). The strip is OPEN to Vega's body again: she walks the
+# route Wren walks (Site, the strip, Exit Underworld, the gate, the car), and her own twins of the strip's exit, the
+# gate's door and the cars carry her through it. The lock moved down a level onto the six rooms off the strip that
+# are written for Wren's body (the House, the Pit, the Market, the Undertow, Kess's berth, the crew den), each
+# with a blocked_messages entry for Vega so a room that already had its own lock still says the true reason.
+# (beat_0241 locked the strip itself; that made "Leave The Site" a dead end and Vega needed a separate route.)
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_true" },
+    ] }, text = "Wet brick and red light, and the strip goes quiet as she walks it. Every stall down here watched Vega hunt her through these lanes. Now Vega's face comes back up the strip and nobody meets its eyes, and nobody steps into its way." },
+]
 
 [[locations]]
 id          = "underworld_brothel"
@@ -1494,6 +1501,16 @@ description = "A working house off the strip. Rooms by the hour, a madam who cou
 image       = "locations/underworld_brothel.jpg"
 image_search_queries = ["brothel interior red light hallway", "old bordello parlor dim velvet"]
 entry_from  = "underworld_strip"
+# beat_0250 (0.2.4): shut to Vega's body; Wren's way in is unchanged. version 1.0 or it fails OPEN.
+entry_conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },
+] }
+blocked_messages = [
+  { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_true" },
+    ] }, text = "Not in this body. Nobody in the House would let Vega's face through the door, and Rue would not stop to ask who is wearing it." },
+]
+
 
 [[locations]]
 id          = "underworld_pit"
@@ -1502,6 +1519,16 @@ description = "A sunken ring under a warehouse, a crowd around it laying bets. T
 image       = "locations/underworld_pit.jpg"
 image_search_queries = ["underground fight pit crowd betting", "sunken fighting ring warehouse spectators"]
 entry_from  = "underworld_strip"
+# beat_0250 (0.2.4): shut to Vega's body; Wren's way in is unchanged. version 1.0 or it fails OPEN.
+entry_conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },
+] }
+blocked_messages = [
+  { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_true" },
+    ] }, text = "Not in this body. Nobody down here gets in a ring with the company's hunter." },
+]
+
 
 [[locations]]
 id          = "underworld_market"
@@ -1525,6 +1552,17 @@ navigation_order = ["mercer_room"]
 # (v2.py:19270-19281) — so no NPC portrait badge can appear on this card while it is shut.
 # An image is DECLARED because a location without one drops the whole nav grid to text mode (the docs_vault
 # note). The file itself is unharvested until the beat_0085 media pass; the engine silent-skips it.
+# beat_0250 (0.2.4): shut to Vega's body; Wren's way in is unchanged. version 1.0 or it fails OPEN.
+entry_conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },
+] }
+blocked_messages = [
+  { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_true" },
+    ] }, text = "Not in this body. The stalls pull their shutters down when Vega's face comes up the lane. Nobody sells to the company's hunter." },
+]
+
+
 [[locations]]
 id          = "mercer_room"
 name        = "The Lockup"
@@ -1579,6 +1617,17 @@ entry_from  = "underworld_strip"
 # ⚠️ DO NOT DROP raid_done TOO. activity_bar_change has NO raid_done clause of its own, so this lock is the
 # only thing keeping "change into the dress he sent down" out of a bar that burned with its owner dragged
 # through the wall — the rev-157 defect (a surface that survives the fire), one door further in.
+# beat_0250 (0.2.4): shut to Vega's body; Wren's way in is unchanged. version 1.0 or it fails OPEN.
+entry_conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },
+] }
+blocked_messages = [
+  { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_true" },
+    ] }, text = "Not in this body. The Undertow is full of men who know what Vega is, and not one of them would stay in his seat." },
+]
+
+
 [[locations]]
 id          = "underworld_bar_bathroom"
 name        = "The Bathroom"
@@ -1669,8 +1718,14 @@ image_search_queries = ["abandoned tenement room ransacked dim", "cleared-out de
 entry_from  = "underworld_strip"
 entry_conditions = { version = "1.0", items = [
   { type = "flag", subject = "player", flag_key = "crew_known", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # beat_0250: shut to Vega's body (blocked_messages)
 ] }
 blocked_message = "There's a crew that holed up down past the market — but she doesn't have the address yet. Marsh has it."
+blocked_messages = [
+  { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_true" },
+    ] }, text = "Not in this body. Those dead men's rooms are the one place down here she found on her own, and she won't walk Vega's body up that stair." },
+]
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # CAPTIVITY — the sealed room (beat_0036). Bastien's cell.

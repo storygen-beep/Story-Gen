@@ -1,7 +1,7 @@
 {
   "game_slug": "vesper",
   "schema_version": 2,
-  "book_revision": 262,
+  "book_revision": 263,
   "register": {
     "person": "third"
   },
@@ -3414,6 +3414,34 @@
       "introduces": [],
       "canvases": [],
       "notes": "All 54 character quest cards gated in_vega is_false (their tips name Wren's places, closed in Vega). Engine opt-in [project] quests_finished_collapsed (template_import + v2 QuestsPage): NPCs whose live card is terminal render under one <details> 'Finished (N)' after the live sections; default off, only Vesper sets it. Guard §0249, live checks (in Vega only the story card; at the end Finished collapsed after the story card). live_the_count amended (terminal card now under Finished: textContent). All guards, all live suites, game_generation suite pass; apps/projects has 6 failures that also fail without these changes."
+    },
+    {
+      "id": "beat_0250",
+      "status": "validated",
+      "target_phase": "1_metadata_and_locations.toml",
+      "title": "0.2.4 — one route for both bodies: Vega walks Wren's route (strip open, its six Wren rooms shut with per-state refusals)",
+      "introduces": [
+        "activity_vega_gate_car",
+        "activity_vega_strip_exit"
+      ],
+      "canvases": [
+        "activity_vega_site",
+        "activity_vega_gate",
+        "activity_vega_car",
+        "activity_vega_gate_car",
+        "activity_vega_strip_exit",
+        "underworld_strip_hub"
+      ],
+      "notes": "LO 2026-10-13: 'No different route for vega' and 'I dont want any changes to the route wren experiences'. The strip lock is gone and the strip has a Vega description_variant. in_vega is_false plus a Vega blocked_messages entry is on the bar, brothel, pit, market, kess_berth and crew_den. Engine: location blocked_messages = [{conditions, text}], first match before blocked_message (template_import, game_graph, v2 passage and navDestBlockedReason), with unversioned entries refused. Vega twins with Wren's labels at the strip, the gate (door and car) and the plaza (car). Removed: the Site's Out to the gate teleport and the gate's Back to the Site. Guard and live tests updated; the leak walk adds site_ambushed to the known-true set (cap_the_ambush on the strip, set before cradles_ready)."
+    },
+    {
+      "id": "beat_0251",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.4 — Kess and Cain quest cards through the chapter (study, in Vega, home)",
+      "introduces": [],
+      "canvases": [],
+      "notes": "Before this, the study-to-transfer stretch showed only 'Finished (7)' in the character section. Kess had no card at all; Cain had only his cain_chosen end card. Seven cards were added, exclusive by flags: Kess has study, Vega and home; Cain has study, after the last night, Vega, and home-before-chosen. Places and hours were re-read from the schedules. The Vega cards are in_vega is_true and name only the Site. The guard checks exactly one live card per man in each of four states; the live test checks the cards at the study, after the last night and in Vega."
     }
   ],
   "structure_registry": {
@@ -4346,7 +4374,7 @@
     "⚠️ OPEN ITEM 5, STILL LO's CALL — cap_grier_met, cap_grier_gives and cap_sabin_hires auto-fire with their NPC absent. One npc_at_location … is_present clause each; the fix is proved on cap_sabin_consults. It re-opens three validated beats.",
     "⚠️ STILL OPEN — the template_import.py:5375 engine bug (warnings.append where warnings is the stdlib module)."
   ],
-  "_active_beat": "0.2.4 — player plays Vega built and validated (beats 0240-0248, rev 261).",
+  "_active_beat": "0.2.4 — one route for both bodies + Kess/Cain cards built and validated (beats 0250-0251, rev 263).",
   "decisions_log": [
     {
       "turn": 1,
@@ -5529,6 +5557,7 @@
     "2026-10-12 — beat_0239 VALIDATED (0.2.4 THE TRANSFER, rev 260). tests/live_the_transfer.py: the whole chapter in a real browser (0.2.3 take -> end card O -> what stands after), incl. the twice-a-day cap on the Site's card list and the vault's wait branch; it caught the Rise rendering at 11:10 (exit minutes apply on render), fixed by retuning transfer 480 / plan 720 / fight 120 / save 210 (Rise 09:10, fight 01:19, save 04:49, measured). check_the_transfer.py complete §0224-§0238. live_the_hunt / live_the_hunt_end amended (card M after the cradles). All guards and all seven live suites OK. Leak check clean. BUILT section written into design_the_transfer.md. 0.2.4 is BUILT, uncommitted; media harvest (25 slots) and release are LO's.",
     "2026-10-12 — beat_0239 VALIDATED (0.2.4 THE TRANSFER, rev 260). ADDED after the push (LO: 'i want to click on the end of 0.2.3 and start this new release'): dev_jump_transfer_start in 6_dev_shortcuts.toml, '0.2.4: start (the end of 0.2.3)', a copy of dev_jump_hunt_table moved past the table and cradles (every 0.2.3 flag through cradles_ready set, damage 0, vega_records 0, every 0.2.4 flag unset), landing at the Site. The five older 0.2.3 jumps now also unset the 0.2.4 flags and zero vega_records. Guard §0239 and a live check from a fresh browser context: lands at the Site, reading card shown, study night 1 fires at 22:05, card M live. Known limit, as for every dev jump: one-time scenes remember having fired, so a save that already played 0.2.4 will not replay them; use a new game.",
     "2026-10-13 — 0.2.4 THE PLAYER PLAYS VEGA (rev 261), beats 0240-0248 validated. LO: 'Wren takes controls as vega, player plays vega, goes to do things'. Blueprint change 2 reversed (my mistake: it hid that the player never controlled Vega). Plan approved in plan mode. Built: in_vega switch, Vega's cell, the strip locked to Vega with her own cards around it, the Rise and the Tower walked by the player (Sabin's hours, night on the Chairman's floor, cell costs), plan/vault/fight/save re-hosted where they happen, quest cards per step + Sabin/Cain fixes, a second dev jump. Engine fix in v2.py: a locked root's Go back returns to the previous passage. Guards incl. the leak walk (negative-tested), live test by nav clicks, all older suites, gates.py unchanged at 38 FAILs.",
-    "2026-10-13 — beat_0249 validated (rev 262). LO: 'fix both, vesper only, then push'. Character cards hidden while in Vega; finished arcs collapsed under 'Finished' (opt-in engine flag, Vesper only)."
+    "2026-10-13 — beat_0249 validated (rev 262). LO: 'fix both, vesper only, then push'. Character cards hidden while in Vega; finished arcs collapsed under 'Finished' (opt-in engine flag, Vesper only).",
+    "2026-10-13 — beats 0250-0251 validated (rev 263). LO: 'No different route for vega' and 'no changes to the route wren experiences'. Vega walks Wren's route through Vega-gated twins of Wren's cards; the strip's six Wren rooms are shut to Vega with per-state refusals (new engine key blocked_messages). Kess and Cain have one live card each through the chapter."
   ]
 }
