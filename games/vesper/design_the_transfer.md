@@ -722,3 +722,48 @@ study card's tip now names the next step.
   which are closed to Vega. In Vega the page shows only the story card for the current step.
 - Finished arcs (a terminal live card) sit under one collapsed **Finished (N)** heading after the live sections. This
   is an opt-in engine setting, `[project] quests_finished_collapsed = true`; only Vesper sets it.
+
+## One route for both bodies (beat_0250, LO 2026-10-13: "No different route for vega", "I dont want any changes to the route wren experiences")
+- Vega now leaves and comes home the way Wren does: Leave The Site, up the strip, Exit Underworld, the gate, the car
+  up to Spire Plaza. Coming back is the car down, the man at the door, the strip, and the Site.
+- The strip is open to Vega's body again, and it describes itself for her (`description_variants`): the stalls go
+  quiet and nobody meets her eyes.
+- The lock moved down a level, onto the six rooms off the strip written for Wren's body: the House, the Pit, the
+  Market, the Undertow, Kess's berth and the crew's rooms. Each one says "Not in this body." with its own reason.
+- **Engine:** a location can carry `blocked_messages = [{conditions, text}]`, first match wins, with `blocked_message`
+  as the fallback. Kess's berth and the crew's rooms already had their own locks and lines; the new list lets each say
+  the true reason in each state. The nav card and the blocked passage read the same list in the same order. The
+  importer refuses an entry without a v1.0 conditions table, since an unversioned one fails open.
+- Wren's cards are untouched. Vega has twins with Wren's own names and labels: "Exit Underworld" on the strip, "The
+  man at the door" (Walk past him.) and "Take the car" (Ride up to the Spire.) at the gate, and "Take the car" (Ride
+  down to the Underworld.) on the plaza. They are twins because Wren's cars offer the Reach (shut to Vega), the plaza
+  car greys the Reach with a hygiene line that would lie to Vega, and Wren's strip exit spends energy and says nobody
+  was looking for her.
+- Removed: the Site's "Out to the gate" teleport, the gate's "Back to the Site", the plaza's "Down to the gate".
+  "Your body" at the Site is now only for charging the cell.
+- Story card P's tip names the normal route.
+
+## Kess and Cain on the Quests page (beat_0251)
+From the study to the transfer, the character section showed only "Finished (7)", so it read as if everyone was done.
+Kess had no card in the game at all, and Cain had only his end card. Now each man has exactly one live card in every
+state of the chapter:
+- **Kess:** the study (the Berth by day, the Site 22:00 to midnight); in Vega (the Site only, the charger); home (the
+  wreck on his table at the Berth).
+- **Cain:** the study (the Site from nine); after the last night; in Vega (beside her body); home, until she chooses
+  him, when his end card takes over.
+
+The Vega cards are the only character cards that show in Vega. Every other one still hides there.
+
+## Measured (beats 0250–0251)
+- **Guard:** `check_the_transfer.py` passes. It checks:
+  - the open strip and its six shut rooms with their Vega lines;
+  - that the twins carry Wren's labels and Wren's cards keep their gates;
+  - one live Kess and one live Cain card in each of four states;
+  - the leak walk, now over a map that includes the strip.
+  The walk found one card reaching Kess's berth by teleport: the 0.2.3 ambush on the strip. It cannot fire in Vega,
+  because `site_ambushed` is always set before the cradles, so that flag joined the known-true set.
+- **Live:** `live_the_transfer.py` plays Vega's whole run on Wren's route by clicks and passes. It checks:
+  - the strip's rooms are shut, each with its line;
+  - there is no toll at the door;
+  - the cards are on the Quests page at the study, after the last night, and in Vega.
+- **Tests:** the game_generation suite passes (755), including the new `test_location_blocked_messages.py`.

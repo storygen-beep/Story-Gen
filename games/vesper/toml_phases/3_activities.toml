@@ -1487,6 +1487,9 @@ location      = "underworld_strip"
 is_repeatable = true
 priority      = 3
 is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4 beat_0250: Vega has her twin below
+] }
 [[canvases.nodes]]
 id   = "base"
 name = "Exit Underworld"
@@ -1504,6 +1507,35 @@ time_progression_minutes = 30
 effects = [
   { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true },
 ]
+
+# ── activity_vega_strip_exit — beat_0250. Vega's twin of "Exit Underworld" @underworld_strip. ──────────────────
+# Same name, same exit, same 30 minutes. Wren's says "down here nobody was looking for her", which is false for the
+# company's hunter, and spends Wren's energy, which Vega's body doesn't run on.
+[[canvases]]
+id          = "activity_vega_strip_exit"
+name        = "Exit Underworld"
+description = "beat_0250 (0.2.4). Vega's twin of the strip's leave-route @underworld_strip, repeatable, pri 3, gated in_vega. Out to the gate, 30 min, no energy."
+[canvases.trigger]
+location      = "underworld_strip"
+is_repeatable = true
+priority      = 3
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_true" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Exit Underworld"
+blocks = [
+  { type = "paragraph", content = "She walks back up the strip in Vega's body. The stalls go quiet as she passes and the crowd opens in front of her without being asked. Down here, everybody is looking at her, and nobody will meet her eyes." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Out to the gate."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "underworld_gate"
+time_progression_minutes = 30
 
 # ── The House — sex work earns coin (her own money) ─────────────────────────────────────────────
 # GATED behind Rue (rev 59): the shift work only opens once the madam has taken her on (brothel_hired,
@@ -5628,12 +5660,12 @@ flagEffects = [
 
 # ── activity_vega_site — beat_0242. Vega's card @the_site while Wren wears her. Pri 3, repeatable. ─────────────
 # Her own body asleep in Marrow's cradle; Cain in the chair beside it at night (his rows 21:00-03:00), his coat on
-# it by day. Two things to do here: charge the cell (Kess left the bench charger wired) and go out to the gate. The
-# strip is locked to Vega (the one lock), so "Out to the gate" is her way out: a teleport past the strip.
+# it by day. Charging the cell is the one thing to do here (Kess left the bench charger wired). beat_0250: the "Out to
+# the gate" teleport is gone; she leaves the Site the way Wren does, by "Leave The Site" up the strip.
 [[canvases]]
 id          = "activity_vega_site"
 name        = "Your body"
-description = "beat_0242 (0.2.4). Vega's card @the_site, repeatable, pri 3, gated in_vega. Her own body asleep in her cradle; Cain beside it at night (group on presence), his coat by day. Choices: charge the cell (vega_cell lt 100) -> 120 min, vega_cell 100; out to the gate -> underworld_gate, 30 min (past the strip, which is locked to Vega)."
+description = "beat_0242 (0.2.4). Vega's card @the_site, repeatable, pri 3, gated in_vega. Her own body asleep in her cradle; Cain beside it at night (group on presence), his coat by day. Choices: charge the cell (vega_cell lt 100) -> 120 min, vega_cell 100; stay. beat_0250: no way out on this card; she leaves by the Site's own Leave link, as Wren does."
 [canvases.trigger]
 location      = "the_site"
 is_repeatable = true
@@ -5670,10 +5702,6 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "vega_cell", operator = "lt", value = 100 },
 ] }
 [[canvases.nodes.exit_block.choices]]
-text       = "Out to the gate."
-targetType = "node"
-nodeId     = "activity_vega_site.out"
-[[canvases.nodes.exit_block.choices]]
 text       = "Stay a while."
 targetType = "location"
 locationId = "the_site"
@@ -5695,27 +5723,15 @@ effects = [
   { targetType = "player", trait = "vega_cell", op = "set", value = 100 },
 ]
 
-[[canvases.nodes]]
-id   = "out"
-name = "Out"
-blocks = [
-  { type = "paragraph", content = "She doesn't go up the strip. Vega knows the old service way round it, the one she used to hunt from, and it comes out at the freight door under the docks." },
-]
-[canvases.nodes.exit_block]
-type = "location"
-text = "Out at the gate."
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "underworld_gate"
-time_progression_minutes = 30
-
-# ── activity_vega_gate — beat_0242. Vega's card @underworld_gate. Pri 5, repeatable. ───────────────────────────
-# The man at the door takes one look at the company's own face and steps back. Up to the Spire, or back to the Site
-# by the service way. No Reach: the Waterfront's places are all written for Wren's body (the plan's doors).
+# ── activity_vega_gate — beat_0242, RE-CUT beat_0250. Vega's twin of "The man at the door" @underworld_gate. ─────
+# The same card in the same place as Wren's (underworld_gate_check, which stays gated in_vega is_false and untouched,
+# LO: "I dont want any changes to the route wren experiences"). The doorman steps back from the company's face and
+# she walks past him down into the strip: no toll, no fight. No "Turn back" to the Reach; the Waterfront's places
+# are all written for Wren's body.
 [[canvases]]
 id          = "activity_vega_gate"
 name        = "The man at the door"
-description = "beat_0242 (0.2.4). Vega's card @underworld_gate, repeatable, pri 5, gated in_vega. The doorman steps back from the company's face. Choices: ride up to the Spire -> spire_plaza 30 min; back to the Site by the service way -> the_site 30 min."
+description = "beat_0242, re-cut beat_0250 (0.2.4). Vega's twin of the gate guard card @underworld_gate, repeatable, pri 5, gated in_vega. The doorman steps back from the company's face. One choice: walk past him -> underworld_strip (Wren's toll route lands in the same place)."
 [canvases.trigger]
 location      = "underworld_gate"
 is_repeatable = true
@@ -5734,47 +5750,57 @@ blocks = [
 [canvases.nodes.exit_block]
 type = "choices"
 [[canvases.nodes.exit_block.choices]]
+text       = "Walk past him."
+targetType = "location"
+locationId = "underworld_strip"
+
+# ── activity_vega_gate_car — beat_0250. Vega's twin of the gate's "Take the car" @underworld_gate. Pri 2. ────────
+# Wren's picker (activity_travel_from_gate) also offers the Reach, which is shut to Vega's body, and its seal bands
+# talk about the bought face, which Vega does not wear. So she has her own card with the same name and the same ride
+# up: "Ride up to the Spire.", then "Ride up to the Plaza."
+[[canvases]]
+id          = "activity_vega_gate_car"
+name        = "Take the car"
+description = "beat_0250 (0.2.4). Vega's twin of the gate's car @underworld_gate, repeatable, pri 2, gated in_vega. One choice, the same label as Wren's: Ride up to the Spire -> spire_plaza, 30 min. No Reach in Vega's body."
+[canvases.trigger]
+location      = "underworld_gate"
+is_repeatable = true
+priority      = 2
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_true" },
+] }
+[[canvases.nodes]]
+id   = "base"
+name = "Take the car"
+blocks = [
+  { type = "paragraph", content = "A company car comes down for the company's face without being called. The driver keeps his eyes on the road." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
 text       = "Ride up to the Spire."
 targetType = "node"
-nodeId     = "activity_vega_gate.up"
-[[canvases.nodes.exit_block.choices]]
-text       = "Back to the Site."
-targetType = "node"
-nodeId     = "activity_vega_gate.home"
-
+nodeId     = "activity_vega_gate_car.riding_up"
 [[canvases.nodes]]
-id   = "up"
-name = "Up"
+id   = "riding_up"
+name = "Ride up"
 blocks = [
-  { type = "paragraph", content = "The company car comes down for the company's face without a word. Out of the dark, past the docks, up until the glass takes the sky again." },
+  { type = "paragraph", content = "Out of the dark, past the docks, up until the glass takes the sky again. Across the plaza the second tower is still going up, eight floors lit and the rest open concrete." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
-text = "Out on the plaza."
+text = "Ride up to the Plaza."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "spire_plaza"
-time_progression_minutes = 30
-
-[[canvases.nodes]]
-id   = "home"
-name = "Home"
-blocks = [
-  { type = "paragraph", content = "Round the strip by Vega's service way, in the dark, to Marrow's lab and the body waiting in the cradle." },
-]
-[canvases.nodes.exit_block]
-type = "location"
-text = "Back to the Site."
-[canvases.nodes.exit_block.config]
-destinationType          = "specific"
-locationId               = "the_site"
 time_progression_minutes = 30
 
 # ── activity_vega_car — beat_0242. Vega's car @spire_plaza. Pri 2, repeatable. ─────────────────────────────────
 [[canvases]]
 id          = "activity_vega_car"
 name        = "Take the car"
-description = "beat_0242 (0.2.4). Vega's car @spire_plaza, repeatable, pri 2, gated in_vega. Down to the gate only (from there, the Site by the service way). No Reach in Vega's body."
+description = "beat_0242, re-cut beat_0250 (0.2.4). Vega's twin of the plaza's car @spire_plaza, repeatable, pri 2, gated in_vega. One choice, the same label as Wren's: Ride down to the Underworld -> underworld_gate, 30 min. No Reach in Vega's body (Wren's card shows the Reach greyed with a hygiene line, which would lie to Vega)."
 [canvases.trigger]
 location      = "spire_plaza"
 is_repeatable = true
@@ -5792,14 +5818,14 @@ blocks = [
 [canvases.nodes.exit_block]
 type = "choices"
 [[canvases.nodes.exit_block.choices]]
-text       = "Down to the gate."
+text       = "Ride down to the Underworld."
 targetType = "node"
 nodeId     = "activity_vega_car.down"
 [[canvases.nodes]]
 id   = "down"
 name = "Down"
 blocks = [
-  { type = "paragraph", content = "Down past the docks to the freight door under everything. The driver doesn't say a word the whole way." },
+  { type = "paragraph", content = "Down past the docks to the freight door under everything, where the city goes down instead of up. The driver doesn't say a word the whole way." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
