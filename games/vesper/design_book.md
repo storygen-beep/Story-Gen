@@ -3145,3 +3145,11 @@ men, back once the Undertow is rebuilt (their main man brings ten of them for on
 and take her the way they once took Wren. Neither works alone; Vega can kill a man. Vega ends on Kess's table, killed and taken apart, the body ready
 for the transfer (**0.2.4**, temporary, her feeling goes with her). The *Whose Hand* memory shipped with
 no face; the site fills it with her father's, and no older release changes. The third piece is still Cain.
+
+## THE FITTING (0.2.5) — pointer only
+
+Story agreed with LO 2026-10-26; full record in `games/vesper/design_the_fitting.md`. Kess fits Vega's strength,
+armour and arm blade into Wren (the blade at will); she keeps her pain, which is the part the company cannot build.
+Cain gets his repeatable loop at the Site. Lyra and Nova hunt her on the strip, always together, and she always
+runs: no last fight this release. It ends on her first Badly-hurt loss, with Cain telling her more are coming off
+the line. The perfect memory and the climax-fuel rule from 0.2.4's notes are dropped.

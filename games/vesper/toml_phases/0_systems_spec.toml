@@ -781,6 +781,20 @@ hidden = true
 key    = "vega_records"
 label  = "Vega's records read"
 hidden = true
+# 0.2.5 (beat_0252) — THE FITTING's counters, hidden from the dump. Quest card S counts parts_fitted.
+[[traits.labels]]
+key    = "parts_fitted"
+label  = "Parts fitted"
+hidden = true
+[[traits.labels]]
+key    = "cain_nights"
+hidden = true
+[[traits.labels]]
+key    = "cain_asked"
+hidden = true
+[[traits.labels]]
+key    = "cain_round"
+hidden = true
 [[traits.labels]]
 key    = "vega_cell"
 label  = "Vega's cell"

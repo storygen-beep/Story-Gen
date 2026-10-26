@@ -292,6 +292,9 @@ bodies that only need one thing to fill them, the thing only she has. The wreck 
 
 ## Decided for 0.2.5 (not built here, but this release must not contradict it)
 
+> ⚠️ **REPLACED 2026-10-26** by `design_the_fitting.md`. LO: the perfect memory is dropped, strength and armour
+> go in with the blade, and the blade comes out whenever she wants (no climax fuel). Kept below as the record.
+
 - **Two parts of the wreck go into Wren: the arm blade and the perfect memory** (never forgetting a fight).
   Strength and armour don't fit her half-human frame, which is why she stays herself. *Final pick is LO's at
   0.2.5; LO: "that will be decided in that features."*

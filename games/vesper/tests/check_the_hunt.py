@@ -287,9 +287,11 @@ def main():
 
     hub = canvases.get("hub_kess_berth") or {}
     rep = [c for c in exit_cfg(hub, 0).get("choices", []) if c.get("nodeId") == "kess_patch_up.base"]
-    check(len(rep) == 1, "0209: hub_kess_berth needs one choice into kess_patch_up.base")
-    if rep:
-        cond = rep[0].get("conditions") or {}
+    # ⚠️ AMENDED AT beat_0259 (0.2.5, intended): the repair has a twin, "Have him fix what they did.", exclusive with
+    # the original on units_first_loss (check_the_fitting.py §0259). Both must show only while she carries damage.
+    check(len(rep) == 2, "0209: hub_kess_berth needs the repair choice and its 0.2.5 twin into kess_patch_up.base")
+    for r in rep:
+        cond = r.get("conditions") or {}
         check(cond.get("version") == "1.0" and any(i.get("trait_key") == "vega_damage" and i.get("operator") == "gte"
                                                    for i in cond.get("items", [])),
               "0209: the repair choice shows only when vega_damage gte 1")
@@ -306,7 +308,8 @@ def main():
             check(effs_of(pay[0]).get(("vega_damage", "add")) == (-25, True), "0209: a repair is vega_damage add -25, clamp = true")
         # Every band of the repeat screen must exist, so every visit says something true about how hurt she is.
         grp = [b for b in pu["nodes"][0].get("blocks", []) if b.get("type") == "group"]
-        check(len(grp) == 3, f"0209: kess_patch_up's base wants three damage bands, has {len(grp)}")
+        # AMENDED AT beat_0259 (0.2.5, intended): three bands for Vega and three, first, for Lyra and Nova.
+        check(len(grp) == 6, f"0209: kess_patch_up's base wants six damage bands (Vega's three, Lyra and Nova's three), has {len(grp)}")
 
     j0 = [c for c in cards if {"flag": "site_ambushed", "op": "is_true"} in c.get("when", [])
           and {"flag": "seam_known", "op": "is_false"} in c.get("when", [])]

@@ -5705,6 +5705,16 @@ conditions = { version = "1.0", logic = "AND", items = [
 # ⚠️ 0.2.3 (beat_0209) — THE HUNT's repair. Into kess_patch_up, which carries the price and the damage bands.
 # Shown only once Kess has shown her the seam (the first repair is free, in cap_kess_seam) and only while she
 # carries damage, so it never sits on his card for a player who has not met Vega.
+# ⚠️ 0.2.5 (beat_0253) — THE FITTING. Into kess_fitting, which carries the three stages and their prices. Shown
+# from back_in_body until all three parts are in, then gone: there is nothing left in the wreck to fit.
+[[canvases.nodes.exit_block.choices]]
+text       = "Have him fit the next part."
+targetType = "node"
+nodeId     = "kess_fitting.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "back_in_body", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "lt", value = 3 },
+] }
 [[canvases.nodes.exit_block.choices]]
 text       = "Have him fix what she did."
 targetType = "node"
@@ -5712,6 +5722,17 @@ nodeId     = "kess_patch_up.base"
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag",  subject = "player", flag_key  = "seam_known",  operator = "is_true" },
   { type = "trait", subject = "player", trait_key = "vega_damage", operator = "gte", value = 1 },
+  { type = "flag",  subject = "player", flag_key  = "units_first_loss", operator = "is_false" },   # 0.2.5: "she" is Vega
+] }
+# ⚠️ 0.2.5 (beat_0259) — THE TWIN. Once Lyra and Nova have caught her, "she" is the wrong word, so this choice takes
+# over with "they". Same canvas, same price; the original is gated off rather than edited.
+[[canvases.nodes.exit_block.choices]]
+text       = "Have him fix what they did."
+targetType = "node"
+nodeId     = "kess_patch_up.base"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "units_first_loss", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "vega_damage",      operator = "gte", value = 1 },
 ] }
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave him to it."
@@ -24715,19 +24736,22 @@ flagEffects = [
   { targetType = "player", flag = "cain_chosen", op = "set" },
 ]
 
-# ── O · THE END CARD. Terminal. beat_0237 (0.2.4). The only terminal Story-Goals card in the game again. ──
-# ⚠️ NO APOSTROPHE IN terminal_text — SugarCube source-byte escaping renders one as &amp;#x27; in the built page.
-# Every place named in the tip was re-read at beat_0237: Kess at the Berth 10:00-22:00 (his Site row ended at
-# back_in_body), the wreck on his table (kess_the_wreck, beat_0238); Cain at the Site 21:00-03:00; Bastien at the cot;
-# his men at the Undertow (Sol 10-24); Renner, Grier from ten, Sabin on the floor at eight and in his lab from eleven.
+# ── S · THE FITTING. beat_0252 (0.2.5). Was O, 0.2.4's end card, CONVERTED IN PLACE (the 0.2.4 card-L lesson: a
+# terminal story card beside a live one says "Chapter complete" over the next chapter). Live from cain_chosen until
+# all three parts are in; card T (the hunt) takes over at parts_fitted 3, and end card U is the only terminal one.
+# ⚠️ NO APOSTROPHE IN terminal_text (SugarCube source-byte escaping) — none here; the new end card carries it.
+# Places re-read at beat_0252: Kess at the Berth 10:00-22:00 (his only row since back_in_body); hub_kess_berth's
+# "Have him fit the next part." (beat_0253) carries the three prices, 40 / 60 / 80 coin.
 [[quest_cards]]
 priority   = 10
-text       = "You know who you were, what they did to you, and who you loved. You chose him anyway. And on the top floors of the Rise, the company is building an army of empty bodies that only need one thing to fill them: what you have."
-tip        = "That is where this build ends. The wreck of Vega is on Kess's table at the Berth, and he is already looking at her arm. Cain keeps the nights at the Site. Bastien is at the cot and his men are at the Undertow. Renner's office is open, Grier is in his room from ten, and Sabin is on the floor at eight and in his lab from eleven. What Kess takes out of the wreck is the next release. If you want it sooner, Support Us in the sidebar."
-terminal      = true
-terminal_text = "Chapter complete. The story continues in the next release"
+text       = "You know who you were, and you chose Cain. The wreck of Vega is on Kess's table, and there are three things in it that can go into you: her strength, the armour under her skin, and the blade in her arm."
+tip        = "Kess at his bench at the Berth, ten in the morning to ten at night. Have him fit the next part: 40 coin, then 60, then 80. Cain keeps the nights at the Site."
+goals = [
+  { trait = "parts_fitted", subject = "player", op = "gte", value = 3, label = "Have Kess fit Vega's parts into you (at the Berth)" },
+]
 when = [
   { flag = "cain_chosen", op = "is_true" },
+  { trait = "parts_fitted", subject = "player", op = "lt", value = 3 },
 ]
 
 # ══════════════════════════════════════════════════════════════════════════════════════════════════════════════
@@ -24813,7 +24837,7 @@ when = [
 npc_id     = "npc_cain"
 priority   = 10
 text       = "He held you down while you were made, and he said yes to ending you rather than let them have you. You remember all of it. You chose him anyway."
-tip        = "He keeps the nights at the Site, from nine."
+tip        = "He keeps the nights at the Site, from nine. Lie down with him there: one new thing opens each night you do."
 terminal      = true
 terminal_text = "She chose him."
 when = [
@@ -24850,15 +24874,29 @@ when = [
   { flag = "in_vega", op = "is_true" },
 ]
 
-# ── Kess · back in her own body.
+# ── Kess · back in her own body, before the fitting is done. beat_0252 (0.2.5): gated parts_fitted lt 3, and the
+# text says what he is doing with the wreck now — taking out what can go into her.
 [[quest_cards]]
 npc_id     = "npc_kess"
 priority   = 10
-text       = "He got you back into your own body. Now the wreck of Vega is on his table, and he's already looking at her arm."
+text       = "He got you back into your own body. Now the wreck of Vega is on his table, and he's taking out what can go into you: her strength, her armour, her blade. One at a time, and you pay for his hours."
 tip        = "At his bench at the Berth from ten in the morning to ten at night."
 when = [
   { flag = "in_vega",      op = "is_false" },
   { flag = "back_in_body", op = "is_true"  },
+  { trait = "parts_fitted", subject = "player", op = "lt", value = 3 },
+]
+
+# ── Kess · after the fitting. beat_0252 (0.2.5). Exclusive with the card above on parts_fitted.
+[[quest_cards]]
+npc_id     = "npc_kess"
+priority   = 10
+text       = "Three of Vega's parts are in you now, and what is left of her is a shell on his table. He fixes what gets broken. He has never once said he is not going to."
+tip        = "At his bench at the Berth from ten in the morning to ten at night."
+when = [
+  { flag = "in_vega",      op = "is_false" },
+  { flag = "back_in_body", op = "is_true"  },
+  { trait = "parts_fitted", subject = "player", op = "gte", value = 3 },
 ]
 
 # ── Cain · the study, before the last night.
@@ -24905,4 +24943,684 @@ when = [
   { flag = "in_vega",      op = "is_false" },
   { flag = "back_in_body", op = "is_true"  },
   { flag = "cain_chosen",  op = "is_false" },
+]
+
+# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+# 0.2.5 — THE FITTING (design_the_fitting.md, story agreed and blueprint signed by LO 2026-10-26). Kess fits Vega's
+# strength, armour and arm blade into Wren (kess_fitting, 3_activities); she keeps her pain; Cain's loop at the Site;
+# Lyra and Nova hunt her on the strip, always together, and she always runs; the release ends on her first loss.
+# ══════════════════════════════════════════════════════════════════════════════════════════════════════════════
+
+# ── cap_the_knife — beat_0256. Auto-fire @the_site, pri 11, ONE-SHOT. Cain sees the armour, and the pain. ──────────
+# design_the_fitting.md "BLUEPRINT · Part one", change 1: the story had this at the fitting, but Cain is never at the
+# Berth (Kess there 10:00-22:00, Cain at the Site 21:00-03:00), so it fires at the Site the first night he is there
+# after the armour goes in. Kess has already said the pain line on his bench (kess_fitting.armour); here Cain sees it.
+# ⚠️ THE ECHO IS cap_study_blade's: he drew his knife across Vega's shoulder "the way you'd test a hide" and it
+# skidded. Same knife, same stroke, on her — and this time the skin it skids on flinches.
+# ⚠️ PRESENCE IS AN npc_at_location CONDITION (requires_npc does nothing on auto-fire). parts_fitted gte 2, not
+# eq 2: a player who has all three parts in before Cain's next night still gets it.
+# MEDIA: one slot, scenes/the_knife.jpg (one-time screen, one file).
+[[canvases]]
+id          = "cap_the_knife"
+name        = "Cain"
+description = "beat_0256 (0.2.5). Auto-fire @the_site, pri 11, one-shot, gated parts_fitted gte 2 + knife_tested is_false + Cain present. He tests the armour with his knife the way he tested Vega's shell on the first study night; it barely marks her, and she flinches. He sees what Kess saw. SETS knife_tested. 60 min."
+[canvases.trigger]
+location      = "the_site"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait",           subject = "player", trait_key = "parts_fitted", operator = "gte", value = 2 },
+  { type = "flag",            subject = "player", flag_key  = "knife_tested", operator = "is_false" },
+  { type = "flag",            subject = "player", flag_key  = "in_vega",      operator = "is_false" },
+  { type = "npc_at_location", location_id = "the_site", operator = "is_present", npc_id = "npc_cain" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Cain"
+blocks = [
+  { type = "paragraph", content = "Cain is in the chair at the far end of the lab. He looks up when she comes in and keeps looking, at the way she walks." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Kess put her skin on you." },
+        { type = "dialog", props = { speaker = "player" }, content = "Her strength too. He says I'm still mostly me." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Let me see." },
+    ] },
+    { advance_text = "Give him your arm.", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Do it properly. Like you did hers." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Hold still, then." },
+        { type = "paragraph", content = "She holds out her bare arm. He takes out the same knife and draws it hard across her shoulder, the way he drew it across Vega's, the way you'd test a hide." },
+        { type = "paragraph", content = "It skids. A pale line, nothing under it. And she flinches, hard, her breath going in through her teeth." },
+    ] },
+    { advance_text = "\"It's fine.\"", blocks = [
+        { type = "image", props = { file = "scenes/the_knife.jpg", description = "A scarred man in a dim abandoned lab holding a knife against a young woman's bare shoulder, the blade leaving only a faint pale line on her skin, her face tight with pain, his eyes on hers.", search_queries = ["man knife on woman shoulder dim lab tense", "knife blade against bare shoulder no blood close up"] } },
+        { type = "dialog", props = { speaker = "player" }, content = "It's fine. It didn't cut." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "It hurt." },
+        { type = "dialog", props = { speaker = "player" }, content = "It hurt like hell." },
+    ] },
+    { advance_text = "Watch his face.", blocks = [
+        { type = "paragraph", content = "He puts the knife away and puts his thumb on the line instead, very lightly. He's smiling. She has hardly ever seen him do it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Good. Vega never felt that. They can make her a thousand times. They can't make you once." },
+        { type = "dialog", props = { speaker = "player" }, content = "Kess said the same thing. Almost word for word." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Kess is right about most things. Don't tell him I said so." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The hurt is the part of me they can't build. Funny how good that sounds from him." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Stay with him."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 60
+flagEffects = [
+  { targetType = "player", flag = "knife_tested", op = "set" },
+]
+
+# ── loop_cain_site — CAIN'S NIGHTS. beats 0257-0258. TRIGGERLESS. ───────────────────────────────────────────────
+# design_the_fitting.md "BLUEPRINT · Part two"; ceiling row SIGNED by LO 2026-10-26: kissing; oral both ways; her on
+# top; him on top; a second round; he finishes in her or in her mouth; the game's maximum words; NO ANAL (an anal
+# finish fires her weapon and she would drain him).
+# ⚠️ THE loop_bastien_cot RIG. Reached only from activity_cain_trains' "Lie down with him." trio, which resets the
+# loop traits. Poses self-loop with loop_npc_pleasure +8..14; a finish opens at gte 50 into the triggerless
+# finisher. It has no trigger, so it never competes with his card for the one repeatable slot at the Site.
+# ⚠️ sex_stage only ever 0 (mouths) or 1 (fucking). Stage 2 and anal_active are never set; the finisher knows only
+# in her mouth (0) and inside her (1). The kit's comment calls 0 "facial"; here it is her mouth, per the row.
+# ⚠️ THE LADDER IS cain_nights, ONE STEP A CALENDAR DAY (the entry trio): 1 his mouth, her mouth, under him · 2 on
+# top of him · 3 "Again." on the finisher · 4 the ask, once. Each gate is a choice condition, hidden when locked.
+# ⚠️ HE ASKS FOR NOTHING. Every band has her reaching: he waits, she takes his hands and puts them on her. After the
+# ask (cain_asked 1) the intro's first band is her saying it out loud every time, because now she can.
+# ⚠️ WRITTEN FOR RE-READING: RTS-flat, on the body, 3+ explicit words a beat, the last sentence on the act.
+[[canvases]]
+id          = "loop_cain_site"
+name        = "Lie down with him"
+description = "beats 0257-0258 (0.2.5). Cain's sex loop @the_site, TRIGGERLESS, reached only from activity_cain_trains' 'Lie down with him.' trio (resets the loop traits; cain_nights +1 once a calendar day, cap 4). Intro, then his mouth on her (stage 0), her mouth on him (0), under him (1) and, from cain_nights 2, on top of him (1); poses self-loop with loop_npc_pleasure +8..14; finishes at gte 50 into loop_cain_site_finisher (in her mouth 0 / inside her 1). The ask: once, at cain_nights 4, sets cain_asked 1. NO ANAL."
+
+[[canvases.nodes]]
+id   = "intro"
+name = "Lie down with him"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/cain_loop_kiss_t4", pool = 4, description = "A man and a woman kissing slowly and deeply on a blanket on the floor of a dim abandoned lab, her pulling him down by his shirt, his hand on her bare waist. Must show: a deep kiss, lying down, her leading. Avoid: a bright bedroom, avoid: roughness.", search_queries = ["couple kissing on blanket on floor dim room gif", "woman pulls man down kissing lying on floor amateur gif", "slow deep kiss lying down couple homemade gif"] } },
+  # BAND ASKED — after the ask (beat_0258). She says it out loud now, every time. FIRST, so it wins the chain.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "cain_asked", operator = "gte", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She doesn't wait for him to make room. She pushes him down onto the blanket between the cradles, straddles him and kisses him hard, his cock already thick against her cunt through his trousers." },
+    { type = "dialog", props = { speaker = "player" }, content = "I want you to fuck me. I want it. Say you heard me." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I heard you. Every time." },
+  ] },
+  # BAND WAITING — the catch-all. He waits; she reaches.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "cain_chosen", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He lies back on the blanket and doesn't reach for her. She kisses him, takes his hands and puts them on her tits herself, and only then does he hold on, thumbs on her nipples, his cock hard against her thigh." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Whatever you want. I'm not taking anything off you again." },
+    { type = "dialog", props = { speaker = "player" }, content = "Then I'll take what I want. Kiss me." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+# ⚠️ THE ASK — once (beat_0258). cain_nights 4 and cain_asked still 0. The choice's effect sets cain_asked on click,
+# so the node is written for after, and the choice is gone the next time the intro paints.
+[[canvases.nodes.exit_block.choices]]
+text       = "Ask him for it."
+targetType = "node"
+nodeId     = "the_ask"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "cain_nights", operator = "gte", value = 4 },
+  { type = "trait", subject = "player", trait_key = "cain_asked",  operator = "lt",  value = 1 },
+] }
+effects = [ { targetType = "player", trait = "cain_asked", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him put his mouth on you."
+targetType = "node"
+nodeId     = "base_his_mouth"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 0, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him in your mouth."
+targetType = "node"
+nodeId     = "base_her_mouth"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 0, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him have you."
+targetType = "node"
+nodeId     = "base_under_cain"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Get on top of him."
+targetType = "node"
+nodeId     = "base_on_top"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "cain_nights", operator = "gte", value = 2 },
+] }
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+
+# ── the_ask — beat_0258. ONE TIME (cain_asked is 1 from the click that got here). The first time in the game she wants
+# sex as her own, out loud. The meaning gets its own beat AFTER the body (the pivot rule). One file, not a pool.
+[[canvases.nodes]]
+id   = "the_ask"
+name = "Ask him"
+blocks = [
+  { type = "paragraph", content = "She stops him with a hand flat on his chest before he can kiss her." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "Wait. I want to say it. Nobody ever let me say it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Then say it." },
+    ] },
+    { advance_text = "Say it.", blocks = [
+        { type = "video", props = { file = "sex/cain_asks_t5.webm", description = "A naked woman sitting astride a man on a blanket on the floor of a dim lab, holding his face in both hands and talking to him as she lowers herself onto his cock. Must show: her on top, her hands on his face, slow penetration. Avoid: anal, avoid: roughness, avoid: a bright bedroom.", search_queries = ["woman on top holding man face slowly sits on him amateur", "girl riding boyfriend hands on his face slow homemade", "woman lowers herself onto man on floor blanket gif"] } },
+        { type = "dialog", props = { speaker = "player" }, content = "I want your cock in me. Not because somebody sent me. Not to drain you. I want you to fuck me because I want to come on you." },
+        { type = "paragraph", content = "She sinks down onto him while she says it, slow, her cunt taking him an inch at a time, and holds his face so he has to watch her do it." },
+    ] },
+    { advance_text = "\"Again.\"", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Say it again." },
+        { type = "dialog", props = { speaker = "player" }, content = "I want you. Fuck me, Cain." },
+        { type = "paragraph", content = "He takes her hips and fucks up into her, hard, and she rides it, tits bouncing, moaning his name out loud in her father's lab." },
+    ] },
+    { advance_text = "Hold on to him.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Two years of men using me and I never once said what I wanted. It's the first thing I've ever asked for. It's the first thing that was mine." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Ride him."
+targetType = "node"
+nodeId     = "base_on_top"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him have you."
+targetType = "node"
+nodeId     = "base_under_cain"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+
+# Pose: his mouth on her (sex_stage 0). Self-looping. No finish here: from his mouth she goes on to him.
+[[canvases.nodes]]
+id   = "base_his_mouth"
+name = "His mouth"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/cain_loop_his_mouth_t5", pool = 4, description = "A man lying between a naked woman's spread thighs on a blanket on the floor, licking her pussy, her hand in his hair, her back arched. Must show: cunnilingus, her hand in his hair. Avoid: a bright bedroom, avoid: roughness.", search_queries = ["man licking pussy on blanket floor amateur gif", "cunnilingus her hand in his hair homemade gif", "guy eating her out on floor dim room gif"] } },
+  { type = "paragraph", content = "He goes down her body slowly and spreads her thighs with his hands, and then his mouth is on her cunt, licking her slow, his tongue flat and patient on her clit until her hips come up off the blanket." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Tell me if it's right." },
+  { type = "dialog", props = { speaker = "player" }, content = "Don't you dare stop." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Keep his mouth there."
+targetType = "node"
+nodeId     = "base_his_mouth"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him in your mouth."
+targetType = "node"
+nodeId     = "base_her_mouth"
+[[canvases.nodes.exit_block.choices]]
+text       = "Pull him up into you."
+targetType = "node"
+nodeId     = "base_under_cain"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Get on top of him."
+targetType = "node"
+nodeId     = "base_on_top"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "cain_nights", operator = "gte", value = 2 },
+] }
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+
+# Pose: her mouth on him (sex_stage 0). Self-looping; the mouth finish opens at 50.
+[[canvases.nodes]]
+id   = "base_her_mouth"
+name = "Your mouth"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/cain_loop_her_mouth_t5", pool = 4, description = "A naked woman kneeling between a man's legs on a blanket on the floor, sucking his cock slowly, looking up at him, his hand resting on her head. Must show: a blowjob, eye contact, his hand light on her head. Avoid: gagging, avoid: roughness, avoid: a bright bedroom.", search_queries = ["girl sucking cock looking up blanket floor amateur gif", "slow blowjob eye contact his hand on her head homemade gif", "woman kneeling sucking boyfriend dim room gif"] } },
+  { type = "paragraph", content = "She takes his cock in her hand and then in her mouth, slow, her tongue under the head of his cock, and sucks him with her eyes on his. His hand rests on her hair and never pushes." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "You used to do that. Before. Just like that." },
+  { type = "dialog", props = { speaker = "player" }, content = "I know. I remember it now. I remember all of you." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Suck him."
+targetType = "node"
+nodeId     = "base_her_mouth"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him put his mouth on you."
+targetType = "node"
+nodeId     = "base_his_mouth"
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him have you."
+targetType = "node"
+nodeId     = "base_under_cain"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Get on top of him."
+targetType = "node"
+nodeId     = "base_on_top"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "cain_nights", operator = "gte", value = 2 },
+] }
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him come in your mouth."
+targetType = "node"
+nodeId     = "loop_cain_site_finisher.climax"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false } ]
+
+# Pose: under him (sex_stage 1). Self-looping; the inside finish opens at 50.
+[[canvases.nodes]]
+id   = "base_under_cain"
+name = "Under him"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/cain_loop_under_him_t5", pool = 4, description = "A man on top of a naked woman on a blanket on the floor of a dim room, fucking her slow and deep in missionary, her legs wrapped around him, foreheads close. Must show: missionary, her legs around him, closeness. Avoid: anal, avoid: a bright bedroom.", search_queries = ["slow missionary sex legs wrapped around him amateur gif", "intimate missionary on floor blanket homemade gif", "couple making love missionary dim room gif"] } },
+  { type = "paragraph", content = "She pulls him down on top of her and guides his cock into her cunt. He fucks her slow and deep, his weight on his forearms, and she locks her legs round his back to keep him there." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Vesper." },
+  { type = "dialog", props = { speaker = "player" }, content = "Harder. I won't break." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Take it."
+targetType = "node"
+nodeId     = "base_under_cain"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him in your mouth."
+targetType = "node"
+nodeId     = "base_her_mouth"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 0, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Get on top of him."
+targetType = "node"
+nodeId     = "base_on_top"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "cain_nights", operator = "gte", value = 2 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish inside you."
+targetType = "node"
+nodeId     = "loop_cain_site_finisher.climax"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 1, clamp = false } ]
+
+# Pose: on top of him (sex_stage 1). Opens at cain_nights 2. Self-looping; the inside finish opens at 50.
+[[canvases.nodes]]
+id   = "base_on_top"
+name = "On top of him"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/cain_loop_on_top_t5", pool = 4, description = "A naked woman riding a man who lies on his back on a blanket on the floor, his hands on her hips, her hands on his chest, both looking at each other. Must show: cowgirl, her in control, eye contact. Avoid: anal, avoid: a bright bedroom.", search_queries = ["woman riding man on floor blanket eye contact amateur gif", "cowgirl her hands on his chest homemade gif", "girl on top riding slow dim room gif"] } },
+  { type = "paragraph", content = "She climbs on him and sinks down on his cock and rides him at her own pace, her hands on his chest, her tits in his hands. When he tries to thrust she pins his wrists to the blanket and keeps them there." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Is this how it's going to be?" },
+  { type = "dialog", props = { speaker = "player" }, content = "Then lie there and let me fuck you." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Ride him."
+targetType = "node"
+nodeId     = "base_on_top"
+effects = [ { targetType = "player", trait = "loop_npc_pleasure", op = "add", value = { type = "random", min = 8, max = 14 } } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him in your mouth."
+targetType = "node"
+nodeId     = "base_her_mouth"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 0, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him on top."
+targetType = "node"
+nodeId     = "base_under_cain"
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him finish inside you."
+targetType = "node"
+nodeId     = "loop_cain_site_finisher.climax"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "loop_npc_pleasure", operator = "gte", value = 50 },
+] }
+effects = [ { targetType = "player", trait = "sex_finisher_type", op = "set", value = 1, clamp = false } ]
+
+# Again — the second round (cain_nights 3, once a sitting on cain_round). Reached from the finisher's "Again.".
+[[canvases.nodes]]
+id   = "again"
+name = "Again"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/cain_loop_again_t5", pool = 4, description = "A naked woman lying against a man on a blanket on the floor, stroking his cock back to hard, kissing him, both still sweaty. Must show: a handjob, lying together, kissing. Avoid: a bright bedroom, avoid: anal.", search_queries = ["girl stroking his cock lying together after sex amateur gif", "woman handjob kissing lying on floor homemade gif", "couple lying together she strokes him gif"] } },
+  { type = "paragraph", content = "She doesn't let him get up. She wraps her hand round his cock, slick from her cunt, and strokes him hard again while she kisses him, until he's thick in her fist and groaning into her mouth." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "You'll kill me." },
+  { type = "dialog", props = { speaker = "player" }, content = "No. Never. Just once more." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Get on top of him."
+targetType = "node"
+nodeId     = "base_on_top"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him have you."
+targetType = "node"
+nodeId     = "base_under_cain"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 1, clamp = false } ]
+[[canvases.nodes.exit_block.choices]]
+text       = "Take him in your mouth."
+targetType = "node"
+nodeId     = "base_her_mouth"
+effects = [ { targetType = "player", trait = "sex_stage", op = "set", value = 0, clamp = false } ]
+
+# ── loop_cain_site_finisher — THE FINISH. beat_0257. TRIGGERLESS. ──────────────────────────────────────────────
+# ⚠️ TWO FINISHES ONLY — in her mouth (0) and inside her (1). No ass finish: there is no drain on Cain, ever.
+# ⚠️ THE loop_bastien_cot_finisher SHAPE: the two clip groups are the node's top-level chain; the banded prose is
+# its own chain inside a single-beat cascade (adjacent groups would merge into one chain), last in the node.
+# ⚠️ "Again." opens at cain_nights 3, once a sitting (cain_round lt 1). It resets pleasure and the finish, keeps
+# the sitting open, and sets cain_round 1. Every other exit resets everything and returns to the Site, 120 min.
+[[canvases]]
+id          = "loop_cain_site_finisher"
+name        = "The finish"
+description = "beat_0257 (0.2.5). Triggerless finisher for loop_cain_site. Two finishes on sex_finisher_type — in her mouth (0) and inside her (1); no ass finish. Prose banded on cain_asked x finish. 'Again.' at cain_nights gte 3 + cain_round lt 1 back to loop_cain_site.again (pleasure 0, cain_round 1). 'Lie with him.' resets the loop traits, 120 min, to the_site."
+
+[[canvases.nodes]]
+id   = "climax"
+name = "The finish"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/cain_loop_mouth_finish_t5", pool = 4, description = "A man coming in the mouth of a naked woman kneeling between his legs on a blanket on the floor, her hand on his thigh, his hand gentle in her hair. Must show: a cum-in-mouth finish, gentle. Avoid: a facial, avoid: roughness, avoid: a bright bedroom.", search_queries = ["cum in mouth gentle blowjob finish amateur gif", "girl swallows boyfriend finish kneeling homemade gif", "oral creampie slow blowjob ending gif"] } },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
+    ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/cain_loop_inside_t5", pool = 4, description = "A man coming inside a woman on a blanket on the floor of a dim room, holding her tight against him, her legs around him. Must show: a creampie finish, holding each other. Avoid: anal, avoid: a bright bedroom.", search_queries = ["creampie finish holding each other amateur gif", "he cums inside her intimate homemade gif", "couple finishing together inside her dim room gif"] } },
+  ] },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+      # BAND ASKED, in her mouth.
+      { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+          { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq",  value = 0 },
+          { type = "trait", subject = "player", trait_key = "cain_asked",        operator = "gte", value = 1 },
+        ] } }, blocks = [
+        { type = "paragraph", content = "She tells him to come in her mouth, out loud, and he does, his cock jerking on her tongue, and she swallows every drop of his cum with her eyes on his face." },
+        { type = "dialog", props = { speaker = "player" }, content = "Mine. I asked for that." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "You did. Ask me again tomorrow." },
+        { type = "dialog", props = { speaker = "player" }, content = "I'm going to ask you every night." },
+      ] },
+      # BAND ASKED, inside her.
+      { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+          { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq",  value = 1 },
+          { type = "trait", subject = "player", trait_key = "cain_asked",        operator = "gte", value = 1 },
+        ] } }, blocks = [
+        { type = "paragraph", content = "She tells him to come inside her, out loud, and grinds down on his cock until he does, deep in her cunt, and she comes with him, clenching round him, loud." },
+        { type = "dialog", props = { speaker = "player" }, content = "Mine. I asked for that." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Then it's yours. All of it. All of me." },
+        { type = "dialog", props = { speaker = "player" }, content = "Say that again when you can breathe." },
+      ] },
+      # BAND WAITING, in her mouth.
+      { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+          { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
+        ] } }, blocks = [
+        { type = "paragraph", content = "He tries to warn her and she keeps him in her mouth anyway. He comes on her tongue with a sound she has never heard him make, and she swallows his cum and licks him clean." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "You didn't have to." },
+        { type = "dialog", props = { speaker = "player" }, content = "I wanted to. I wanted to taste you." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Come here. Let me hold you." },
+      ] },
+      # BAND WAITING, inside her.
+      { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+          { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
+        ] } }, blocks = [
+        { type = "paragraph", content = "She holds him in her with her legs when he gets close, and he comes deep inside her cunt, his face in her neck, and her own orgasm hits a second later and makes her cry out." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Stay." },
+        { type = "dialog", props = { speaker = "player" }, content = "I'm not going anywhere. Not ever again." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Good. Then I'm not either." },
+      ] },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Again."
+targetType = "node"
+nodeId     = "loop_cain_site.again"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "cain_nights", operator = "gte", value = 3 },
+  { type = "trait", subject = "player", trait_key = "cain_round",  operator = "lt",  value = 1 },
+] }
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "cain_round",        op = "set", value = 1, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Lie with him."
+targetType = "location"
+locationId = "the_site"
+time_progression_minutes = 120
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "cain_round",        op = "set", value = 0, clamp = false },
+]
+
+# ── rand_units_street — THE HUNT, LYRA AND NOVA. beat_0259. Lane-2 random @underworld_strip. ──────────────────────
+# design_the_fitting.md "BLUEPRINT · Part three". LO 2026-10-26: "like in the previous releases vega was there to find
+# wren"; "she needs to run"; "wren cant beat other two together. No draw them or her option"; "she always fight them
+# together". The rand_vega_street shape (beat_0210), which is closed by vega_taken and so never fires beside this.
+# ⚠️ SHE ALWAYS LOSES, AND THERE IS NO PROGRESS COUNTER. No habits (LO: "not in this release"), no last fight, no
+# "Draw them out." card. The only choice is "Run.".
+# ⚠️ ALWAYS BOTH OF THEM. Never one alone, in any band.
+# ⚠️ THEY NEVER SPEAK and have no NPC entries (the 0.2.4 call: they fight, they don't talk). No speaker blocks for
+# them anywhere; npc_vega is never borrowed for their lines.
+# ⚠️ WHY THEY DO NOT FINISH HER: Wren is the one the units were told to spare (design_the_transfer.md part seven).
+# The prose shows it (they stop when she is down) and never explains it.
+# ⚠️ +60 A LOSS (LO, 2026-10-26), clamped. From Fine that is Badly hurt, so the FIRST loss always is, and the first
+# loss is the ending: its Run goes to the Site, where cap_more_coming fires on arrival (Cain carried her there). Every
+# later loss is the ordinary lost day home to the cot. The two Run choices are exact complements on units_first_loss.
+# ⚠️ THE OVERLAY IS SEPARATED FROM THE BAND CHAIN BY AN UNGROUPED LINE (adjacent groups merge into one chain).
+# ⚠️ NO npc / requires_npc. Random fires roll only on a real entry, never on a Back re-render. 35% once a day, before
+# and after the end card (LO: "Yes, same as before").
+# MEDIA: two slots, scenes/lyra_and_nova_strip.jpg (the first fight) and scenes/units_strip.jpg (every later one).
+[[canvases]]
+id          = "rand_units_street"
+name        = "Lyra and Nova"
+description = "beat_0259 (0.2.5). THE HUNT. Lane-2 random @underworld_strip, chance 0.35, once a day, repeatable, gated parts_fitted gte 3 + in_vega is_false. Lyra and Nova, always together and silent, step out of the crowd; she lasts longer than she ever did against Vega and still loses. Two bands on units_first_loss (the first fight / every later one) and a Badly-hurt overlay. 'Run.' -> the first time: under the docks, Cain finds her, to the_site (cap_more_coming fires there), SETS units_first_loss; every later time: the lost day home to the_cot. vega_damage +60 (clamped), 540 min."
+[canvases.trigger]
+location             = "underworld_strip"
+trigger_mode         = "random"
+chance               = 0.35
+max_triggers_per_day = 1
+is_repeatable        = true
+is_active            = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "gte", value = 3 },
+  { type = "flag",  subject = "player", flag_key  = "in_vega",      operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Lyra and Nova"
+blocks = [
+  { type = "paragraph", content = "The strip goes quiet from the far end in. People step into doorways. Two women are walking up the middle of it side by side, in step, the same height, the same calm face. Lyra and Nova." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "vega_damage", operator = "gte", value = 60 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "She is still hurt from the last time. They can see it. One of them looks straight at her bad side." },
+  ] },
+  { type = "paragraph", content = "Neither of them says a word." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "units_first_loss", operator = "is_false" },
+    ] } }, blocks = [
+    { type = "image", props = { file = "scenes/lyra_and_nova_strip.jpg", description = "Two identical tall calm women in dark close-fitting gear attacking one young woman at once on a narrow neon-lit underground market street, the young woman blocking with a long thin blade out of her forearm, stalls overturned. Must show: two against one, the arm blade. Avoid: gore.", search_queries = ["two women fighting one woman neon street", "woman with arm blade fights two attackers alley"] } },
+    { type = "paragraph", content = "They come at her together. She wants the blade out and it's out, and the first one's hand bounces off her armour, and she throws the second into a stall with Vega's strength. For a whole minute she is winning." },
+    { type = "paragraph", content = "Then they stop coming one at a time. A knee in her side, a fist in her face, a heel on her blade arm, all at once from both sides. The armour holds. She feels every single hit. They feel nothing." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Vega would have kept going until she broke. I can't. It hurts too much. It's the one thing they can't do to themselves." },
+    { type = "paragraph", content = "She's on the stones. They stand over her, side by side, and wait, the way Vega used to." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "units_first_loss", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "image", props = { file = "scenes/units_strip.jpg", description = "A young woman in a crouch on wet stones in a dim underground street, bleeding from the lip, a thin blade out of her forearm, two tall calm identical women closing on her from either side. Must show: two against one, closing in. Avoid: gore.", search_queries = ["two women closing in on one woman street night", "woman cornered by two fighters wet street blade"] } },
+    { type = "paragraph", content = "She knows the shape of it now and it doesn't help. Blade out, armour up, the strength in her back and legs. She holds them longer every time. Two minutes. Three." },
+    { type = "paragraph", content = "Then both of them at once, and she goes down hard, and it hurts like it always hurts. They stand over her and wait." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Run."
+targetType = "node"
+nodeId     = "rand_units_street.run_first"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "units_first_loss", operator = "is_false" },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Run."
+targetType = "node"
+nodeId     = "rand_units_street.run"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "units_first_loss", operator = "is_true" },
+] }
+
+# The first loss — the ending. She runs, goes down under the docks, and Cain finds her. To the Site, where
+# cap_more_coming fires on arrival with no presence gate, because he carried her in.
+[[canvases.nodes]]
+id   = "run_first"
+name = "Run"
+blocks = [
+  { type = "paragraph", content = "She rolls, gets her feet under her and runs: under a stall, through a gap, down a stair. They don't follow. They don't need to. She gets as far as the dark under the docks and her legs stop." },
+  { type = "paragraph", content = "She lies in the wet with every part of her screaming. Hours. Then a hand on her face, and a voice she knows." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "I've got you. Don't talk." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let him carry you."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 540
+effects = [
+  { targetType = "player", trait = "vega_damage", op = "add", value = 60, clamp = true },
+]
+flagEffects = [
+  { targetType = "player", flag = "units_first_loss", op = "set" },
+]
+
+# Every later loss — the lost day, home to the cot. The rand_vega_street escape, for two.
+[[canvases.nodes]]
+id   = "run"
+name = "Run"
+blocks = [
+  { type = "paragraph", content = "She gets one chance and takes it: under a stall, through a gap, down a stair, and she does not stop until the strip is a long way above her." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Not enough. Stronger than I've ever been, and two of them is still not enough." },
+  { type = "paragraph", content = "She lies up in the dark under the docks until it is safe, and the whole day goes. Then she goes home to the cot, every step of it hurting." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Home."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_cot"
+time_progression_minutes = 540
+effects = [
+  { targetType = "player", trait = "vega_damage", op = "add", value = 60, clamp = true },
+]
+
+# ── cap_more_coming — THE ENDING. beat_0260. Auto-fire @the_site, pri 11, ONE-SHOT. ────────────────────────────
+# design_the_fitting.md "BLUEPRINT · Part four". LO: the release ends "after a bad loss", the first one. She comes
+# round on the blanket between the cradles with Cain beside her; he tells her what Lyra and Nova are and that more are
+# coming off the line at the Rise.
+# ⚠️ NO PRESENCE GATE: rand_units_street.run_first puts him in the scene (he carried her in), the 0.2.4 chain pattern.
+# His line says why he was there: Bastien's men are in the stalls on the strip since crew_back (card J's ready_text),
+# and one of them ran to the Site to tell him.
+# ⚠️ WHAT HE KNOWS IS ONLY WHAT IS IN THE GAME: the units are the company's field machines (2_one_shots:152, the
+# opening line-up), the same build family as Vega (cap_dace_falls: the seam works on them too), and Wren saw the line
+# of empty bodies on the Rise's top floors (activity_vega_top_floors). Nothing about the Chairman on screen.
+# MEDIA: one slot, scenes/more_coming.jpg.
+[[canvases]]
+id          = "cap_more_coming"
+name        = "Cain"
+description = "beat_0260 (0.2.5). THE ENDING. Auto-fire @the_site, pri 11, one-shot, gated units_first_loss + more_coming is_false + in_vega is_false, no presence gate. She comes round on the blanket between the cradles, badly hurt, Cain beside her. He came looking because she was late. What Lyra and Nova are; that the line at the Rise is making more; that she is the one thing on it they cannot make. SETS more_coming. 60 min."
+[canvases.trigger]
+location      = "the_site"
+is_repeatable = false
+priority      = 11
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "units_first_loss", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "more_coming",      operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "in_vega",          operator = "is_false" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Cain"
+blocks = [
+  { type = "paragraph", content = "She comes round on the blanket between the two cradles. Everything hurts. Cain is sitting beside her with a wet cloth and blood to his elbows that isn't his." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "How did you find me?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Bastien's men saw them on the strip. One of them ran all the way out here to tell me. So I went looking." },
+        { type = "dialog", props = { speaker = "player" }, content = "Two of them. Lyra and Nova. I had the blade out, Cain. I had all of it. I was winning." },
+    ] },
+    { advance_text = "\"What are they?\"", blocks = [
+        { type = "image", props = { file = "scenes/more_coming.jpg", description = "A badly hurt young woman lying on a blanket on the floor of a dim abandoned lab between two empty machine cradles, a scarred man sitting beside her holding a cloth to her face, both looking toward the dark.", search_queries = ["injured woman lying on floor man tending her dim lab", "man caring for hurt woman blanket floor dark room"] } },
+        { type = "dialog", props = { speaker = "player" }, content = "They stood in a line with me in Mercer's office. Vega, Lyra, Nova, and me at the end." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "The same as Vega. The company's own. Whole machines, nothing inside." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Two of them together are more than you. That isn't the parts. It's arithmetic." },
+    ] },
+    { advance_text = "\"And the line.\"", blocks = [
+        { type = "dialog", props = { speaker = "player" }, content = "The top floors of the Rise. Rows of them. Empty. Being built." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "So there won't be two. There'll be twenty, and then two hundred. Every one of them as strong as you are now, and none of them able to feel it when they're hit." },
+        { type = "dialog", props = { speaker = "player" }, content = "Then what am I for?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "You're the one thing on that line they can't make. That's why they keep stopping when you're down." },
+    ] },
+    { advance_text = "Lie still.", blocks = [
+        { type = "paragraph", content = "He lies down beside her on the blanket, careful of every place that hurts, and puts his hand on hers." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Her strength, her skin, her blade, all of it in me. And it still wasn't enough. They're coming, and there's going to be more of them." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sleep."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "the_site"
+time_progression_minutes = 60
+flagEffects = [
+  { targetType = "player", flag = "more_coming", op = "set" },
+]
+
+# ── T · THEY HUNT YOU. beat_0259 (0.2.5). Live from the third part until the first loss. ──
+[[quest_cards]]
+priority   = 10
+text       = "Kess has put Vega's strength, her armour and her blade into you. The company knows Vega came back wrong, and it has sent the two units that wrecked Vega's body outside the Tower. Lyra and Nova are in the underworld, and they are looking for you."
+tip        = "They find you on the Underground. You cannot beat the two of them together. When they catch you, run."
+when = [
+  { trait = "parts_fitted", subject = "player", op = "gte", value = 3 },
+  { flag = "units_first_loss", op = "is_false" },
+]
+
+# ── U · THE END CARD. Terminal. beat_0260 (0.2.5). The only terminal Story-Goals card in the game. ──
+# ⚠️ NO APOSTROPHE IN terminal_text (SugarCube source-byte escaping). Places re-read at beat_0260: Kess at the Berth
+# 10:00-22:00; Cain at the Site 21:00-03:00 (his loop on his card); Bastien at the cot; his men at the Undertow.
+[[quest_cards]]
+priority   = 10
+text       = "You have Vega's strength, her skin and her blade, and you still feel every hit. Lyra and Nova are still hunting you, two together, and on the top floors of the Rise the company is building more of them. You are the one thing on that line they cannot make."
+tip        = "That is where this build ends. Lyra and Nova still find you on the Underground, and you still have to run; Kess fixes what they do, at the Berth, ten in the morning to ten at night. Cain keeps the nights at the Site. Bastien is at the cot and his men are at the Undertow. If you want the next part sooner, Support Us in the sidebar."
+terminal      = true
+terminal_text = "Chapter complete. The story continues in the next release"
+when = [
+  { flag = "more_coming", op = "is_true" },
 ]
