@@ -4781,6 +4781,25 @@ id   = "base"
 name = "Patched up"
 blocks = [
   { type = "paragraph", content = "He looks at the way she is standing before he looks at her face, and points his torch at the bench." },
+  # 0.2.5 (beat_0259) — LYRA AND NOVA. Once they have caught her (units_first_loss), the bands below that name Vega
+  # ("go at her from the front") are false, so three bands for the two of them go FIRST in the same chain.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",  subject = "player", flag_key  = "units_first_loss", operator = "is_true" },
+      { type = "trait", subject = "player", trait_key = "vega_damage", operator = "gte", value = 60 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Two of them did this. The armour's dented right through in three places. Anybody else would be in pieces in a bag." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",  subject = "player", flag_key  = "units_first_loss", operator = "is_true" },
+      { type = "trait", subject = "player", trait_key = "vega_damage", operator = "gte", value = 30 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Half done. You keep walking down that strip and they keep finding you." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",  subject = "player", flag_key  = "units_first_loss", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "A few dents. You could fight on it. Not two of them." },
+  ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "vega_damage", operator = "gte", value = 60 },
     ] } }, blocks = [
@@ -4817,7 +4836,17 @@ name = "Patched up"
 blocks = [
   { type = "paragraph", content = "An hour face down on the bench, his torch hissing. When she sits up, it hurts less." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Try to come back with fewer holes in you." },
-  { type = "dialog", props = { speaker = "player" }, content = "Tell her that." },
+  # 0.2.5 (beat_0259) — her answer names who did it: Vega before Lyra and Nova, the two of them after.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "units_first_loss", operator = "is_true" },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "player" }, content = "Tell them that." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "units_first_loss", operator = "is_false" },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "player" }, content = "Tell her that." },
+  ] },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -4826,6 +4855,203 @@ text = "Get up."
 destinationType          = "specific"
 locationId               = "kess_berth"
 time_progression_minutes = 60
+
+# ── kess_fitting — 0.2.5 THE FITTING. beats 0253-0255. Wren-solo @kess_berth, SUBSTITUTION_ONLY. ────────────────
+# design_the_fitting.md "BLUEPRINT · Part one". Reached only from hub_kess_berth's "Have him fit the next part."
+# (back_in_body + parts_fitted lt 3) — the kess_patch_up shape, so it is never a second Kess card and never shows on
+# its own. Kess is on the page in every node because the hub only renders inside his 10:00-22:00 row.
+# ⚠️ THREE STAGES, ONE PAY CHOICE EACH, gated on the EXACT parts_fitted value (eq by gte n + lt n+1), so the order is
+# strength → armour → blade and no save can skip one. A choice's effects fire on click, before the node paints
+# (engine-reference.md §3), so each result node is written for the post-increment state and reads nothing.
+# ⚠️ clamp = true + cap = 3 on the +1: choice effects default to no clamp (v2.py:15684).
+# ⚠️ THE PARTS ARE STORY ONLY THIS RELEASE (LO 2026-10-26). No gate in the game reads parts_fitted except the hunt,
+# the cards and these nodes. Nothing here moves fighting: no gate in the game asks for more than 85.
+# ⚠️ THE PAIN LINE IS KESS'S, IN THE ARMOUR NODE. The story had Cain see it at the fitting; Cain is never at the
+# Berth, so he sees it at the Site (cap_the_knife) and Kess says it first, here.
+# MEDIA: three slots, scenes/fitting_strength / fitting_armour / fitting_blade.jpg, one on each result node.
+[[canvases]]
+id          = "kess_fitting"
+name        = "The fitting"
+description = "beats 0253-0255 (0.2.5). Wren-solo @kess_berth, SUBSTITUTION_ONLY, repeatable, gated back_in_body + parts_fitted lt 3. Reached from hub_kess_berth's 'Have him fit the next part.' One Kess line per stage on base (pre-pay). Three pay choices, one per exact parts_fitted value: 40 coin strength, 60 armour, 80 the blade; each parts_fitted +1 (clamped, cap 3) and 240 minutes, back to kess_berth. The armour node carries Kess's pain line: she flinches, Vega never did."
+[canvases.trigger]
+location      = "kess_berth"
+is_repeatable = true
+priority      = 4
+is_active     = true
+substitution_only = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",  subject = "player", flag_key  = "back_in_body", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "lt", value = 3 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The fitting"
+blocks = [
+  { type = "paragraph", content = "Kess pulls the sheet off the wreck and looks from Vega to her and back, like a man pricing two halves of one job." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "lt", value = 1 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Strength first. It's in the back and the legs, not the arms. Four hours, and you're awake for it, because I need you to tell me when it pulls." },
+    { type = "dialog", props = { speaker = "player" }, content = "And then?" },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Then the skin. Then the blade, last, when I trust what's under it. Forty for today. My hours aren't free and neither is the solder." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "lt",  value = 2 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "The skin today. Her armour. It goes on in sheets, under yours, all of you, and you'll feel every one go in. Sixty." },
+    { type = "dialog", props = { speaker = "player" }, content = "You're telling me it hurts." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "I'm telling you I don't know. She never said." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "gte", value = 2 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "The blade. Last one. It grows out of the frame, so I'm opening your arm from the elbow down. Eighty, and you sit still." },
+    { type = "dialog", props = { speaker = "player" }, content = "You said it nearly took your hand." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Hers did. Yours is going to listen to you. That's the whole job." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Pay him. (40 coin.)"
+targetType = "node"
+nodeId     = "kess_fitting.strength"
+costs      = [{ trait = "coin", value = 40 }]
+effects    = [{ targetType = "player", trait = "parts_fitted", op = "add", value = 1, clamp = true, cap = 3 }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "lt", value = 1 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Pay him. (60 coin.)"
+targetType = "node"
+nodeId     = "kess_fitting.armour"
+costs      = [{ trait = "coin", value = 60 }]
+effects    = [{ targetType = "player", trait = "parts_fitted", op = "add", value = 1, clamp = true, cap = 3 }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "lt",  value = 2 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Pay him. (80 coin.)"
+targetType = "node"
+nodeId     = "kess_fitting.blade"
+costs      = [{ trait = "coin", value = 80 }]
+effects    = [{ targetType = "player", trait = "parts_fitted", op = "add", value = 1, clamp = true, cap = 3 }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "gte", value = 2 },
+  { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "lt",  value = 3 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Not now."
+targetType = "location"
+locationId = "kess_berth"
+
+# ── strength — beat_0253. parts_fitted is 1 now (the choice paid on click). ──
+[[canvases.nodes]]
+id   = "strength"
+name = "Strength"
+blocks = [
+  { type = "paragraph", content = "Face down on the bench with her shirt off, the way she has been on this bench twice before. Kess opens the seam along her spine with the same tool and the same grunt." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Her back's built like a crane. Yours is built like a woman's. I'm putting the crane in the woman. Tell me when it pulls." },
+        { type = "dialog", props = { speaker = "player" }, content = "It pulls." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Good. Means it's taking." },
+    ] },
+    { advance_text = "Hold still.", blocks = [
+        { type = "paragraph", content = "Bundles of grey cable come out of Vega's back and go into hers, one at a time, each one hot as it seats. Her legs jerk on their own. The bench creaks under her like it has never had to hold her before." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "Something heavy is settling into me. Not weight. Weight's the wrong word. It's like my bones just learned what they're for." },
+    ] },
+    { advance_text = "Sit up.", blocks = [
+        { type = "image", props = { file = "scenes/fitting_strength.jpg", description = "A lean young woman in a dim flooded ship-breaking workshop lifting a huge rusted engine block off the floor with both hands while a grizzled older mechanic in an apron steps back, eyebrows up, work-lamps behind them.", search_queries = ["woman lifting heavy engine block workshop", "strong woman lifts huge metal part mechanic watching"] } },
+        { type = "paragraph", content = "Four hours. Kess points his torch at the pump housing on the floor, the one he and two men moved with a winch. She bends, gets her fingers under it, and stands up with it." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Put that down slowly. It owes me money." },
+        { type = "dialog", props = { speaker = "player" }, content = "It's not even heavy. Kess. It's not even heavy." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Put it down."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "kess_berth"
+time_progression_minutes = 240
+
+# ── armour — beat_0254. parts_fitted is 2 now. Kess sees the pain, and says what it is. ──
+[[canvases.nodes]]
+id   = "armour"
+name = "Armour"
+blocks = [
+  { type = "paragraph", content = "The armour comes off Vega in thin grey sheets that bend like leather and ring like plate. Kess lays them out in rows on a cloth beside her, a whole body's worth." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Under your skin, over everything else. Ribs first. Breathe out." },
+        { type = "paragraph", content = "The first sheet slides in along her side and she screams through her teeth. Her hand finds the edge of the bench and the edge of the bench bends." },
+    ] },
+    { advance_text = "Keep going.", blocks = [
+        { type = "paragraph", content = "He stops. He actually stops, torch up, and looks at her face like it's a reading he doesn't trust." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "She never did that." },
+        { type = "dialog", props = { speaker = "player" }, content = "Did what?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Flinched. Not when Cain hit her. Not when I opened her up on this table. Not once." },
+    ] },
+    { advance_text = "\"So?\"", blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "So they can build all of this. The back, the skin, the blade. A line of it, you saw the line. What they can't build is the bit of you that just flinched." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "That's what the old man up there wants out of you. Not the parts. That." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "It hurts. It hurts so much. And he's telling me the hurting is the only thing I've got that they want." },
+    ] },
+    { advance_text = "\"Finish it.\"", blocks = [
+        { type = "image", props = { file = "scenes/fitting_armour.jpg", description = "A young woman lying on a workshop bench gripping its edge in pain, her bare back and side showing faint grey plating under the skin, an older mechanic with a lit torch bent over her, dim industrial light.", search_queries = ["woman on workbench in pain mechanic working on her back", "cyborg woman armor under skin surgery workshop"] } },
+        { type = "paragraph", content = "He finishes it. Every sheet, ribs, back, thighs, the backs of her arms. Four hours. When she sits up her skin looks like her skin and feels like a coat she can't take off." },
+        { type = "dialog", props = { speaker = "player" }, content = "Did you go slower because it hurt?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Yes. Don't tell anyone." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sit up."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "kess_berth"
+time_progression_minutes = 240
+
+# ── blade — beat_0255. parts_fitted is 3 now. It comes out when she wants it (LO): no charge, no switch. ──
+[[canvases.nodes]]
+id   = "blade"
+name = "The blade"
+blocks = [
+  { type = "paragraph", content = "Her forearm is open from the elbow to the wrist and clamped to the bench. Kess lifts the blade out of Vega's arm like it might wake up." },
+  { type = "cascade", props = { beats = [
+    { blocks = [
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Hers went off on its own the first night. Nearly had my hand. Yours I'm wiring to you, not to a signal. It goes when you say and nobody else." },
+        { type = "dialog", props = { speaker = "player" }, content = "Not when I'm charged? Not when I've had a man?" },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "When you say. That's the job." },
+    ] },
+    { advance_text = "Let him close it.", blocks = [
+        { type = "paragraph", content = "Four hours. He closes her arm and the seam fades to a line she can only find with her thumb. He unclamps her and steps all the way back to the far side of the bench." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Go on, then." },
+    ] },
+    { advance_text = "Want it out.", blocks = [
+        { type = "image", props = { file = "scenes/fitting_blade.jpg", description = "A young woman in a dim workshop holding her forearm up as a long thin dark blade slides out of it along the outside of the arm, her face fierce and amazed, an older mechanic standing well back.", search_queries = ["woman arm blade coming out of forearm", "cyborg woman forearm blade extending dark workshop"] } },
+        { type = "paragraph", content = "She wants it out, and it's out. Long and thin and dark, sliding along the outside of her arm with a sound like a breath. She wants it back, and it's gone. She does it again. And again, faster." },
+        { type = "dialog", props = { speaker = "player" }, content = "It's mine. Kess. It's actually mine." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Point it at the wall when you do that." },
+    ] },
+    { advance_text = "Put it away.", blocks = [
+        { type = "thought_bubble", props = { speaker = "player" }, content = "The drain makes a man do what I say. This makes him stop. Both of them mine. Nobody gave me either. I paid for this one." },
+    ] },
+  ] } },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get up."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "kess_berth"
+time_progression_minutes = 240
 
 # ── activity_cain_trains — 0.2.3 THE HUNT, the fight half. beat_0211. Lane-1 portrait hub @the_site. ───────────
 # LO, 2026-10-03: Cain trains her for the fight route (yes); design_the_hunt.md "How Wren learns to fight her" 2.
@@ -4867,6 +5093,16 @@ id   = "base"
 name = "Cain"
 blocks = [
   { type = "paragraph", content = "Cain is at the far end of the lab." },
+  # beat_0255 (0.2.5) — THE BLADE IS IN (parts_fitted 3). First in the chain, ahead of the cain_chosen band below,
+  # whose "Kess is going to put that blade in you" is spent the moment the third part goes in.
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag",  subject = "player", flag_key  = "cain_chosen",  operator = "is_true" },
+      { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "gte", value = 3 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Show me." },
+    { type = "paragraph", content = "She wants it out and it's out, along her forearm, a hand from his chest. He doesn't step back. He never steps back from her." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_cain" }, content = "Good. Now you learn to put it where you mean it, not where you're scared." },
+  ] },
   # beat_0238 (0.2.4) — AFTER SHE CHOSE HIM (cain_chosen). First in the chain now: "now comes the hard part" is spent,
   # and the man at the far end of the lab is her lover. No sex on this card (no loop was signed for 0.2.4).
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
@@ -4910,6 +5146,73 @@ blocks = [
 ]
 [canvases.nodes.exit_block]
 type = "choices"
+# ── 0.2.5 (beat_0257) — CAIN'S NIGHTS. "Lie down with him." THREE CHOICES, ONE LABEL, EXACTLY ONE EVER VISIBLE. ──
+# design_the_fitting.md "BLUEPRINT · Part two". The loop_bastien_cot entry discipline, copied: the loop is open any
+# night he is here; only the ladder is paced, one step a calendar day.
+#   1. the first night (cain_lay is_false): sets cain_lay, cain_nights +1.
+#   2. a later calendar day (days_since_flag cain_lay gte 1): re-sets cain_lay (set_day moves to today), +1.
+#   3. the same day again (lt 1): same loop, no step.
+# ⚠️ BOTH SETTERS ARE HERE, ON HIS LOCATED CARD, never in the triggerless loop, so every reader stays honest.
+# ⚠️ ALL THREE RESET THE LOOP TRAITS (+ cain_round, the "Again." marker), so a loop entered twice in a night starts
+# fresh. cain_nights caps at 4: 4 opens the ask, and nothing reads past it.
+[[canvases.nodes.exit_block.choices]]
+text       = "Lie down with him."
+targetType = "node"
+nodeId     = "loop_cain_site.intro"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "cain_chosen", operator = "is_true"  },
+  { type = "flag", subject = "player", flag_key = "cain_lay",    operator = "is_false" },
+] }
+flagEffects = [
+  { targetType = "player", flag = "cain_lay", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "cain_nights",       op = "add", value = 1, clamp = true, cap = 4 },
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "cain_round",        op = "set", value = 0, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Lie down with him."
+targetType = "node"
+nodeId     = "loop_cain_site.intro"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",            subject = "player", flag_key = "cain_chosen", operator = "is_true" },
+  { type = "flag",            subject = "player", flag_key = "cain_lay",    operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "cain_lay",    operator = "gte", value = 1 },
+] }
+flagEffects = [
+  { targetType = "player", flag = "cain_lay", op = "set" },
+]
+effects = [
+  { targetType = "player", trait = "cain_nights",       op = "add", value = 1, clamp = true, cap = 4 },
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "cain_round",        op = "set", value = 0, clamp = false },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Lie down with him."
+targetType = "node"
+nodeId     = "loop_cain_site.intro"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag",            subject = "player", flag_key = "cain_chosen", operator = "is_true" },
+  { type = "flag",            subject = "player", flag_key = "cain_lay",    operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "cain_lay",    operator = "lt", value = 1 },
+] }
+effects = [
+  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "cain_round",        op = "set", value = 0, clamp = false },
+]
 [[canvases.nodes.exit_block.choices]]
 text       = "Train with him."
 targetType = "node"
@@ -5573,15 +5876,20 @@ targetType = "location"
 locationId = "the_site"
 
 # ── kess_the_wreck — beat_0238. Wren-solo repeatable card @kess_berth, from back_in_body. ────────────────────────
-# What stands after the run: the wreck of Vega on Kess's table, and Kess already looking at her arm. It is the plant
-# for 0.2.5 (design_the_transfer.md "Decided for 0.2.5": the arm blade and the perfect memory go into Wren). Solo,
-# because hub_kess_berth is his card here; his presence is a GROUP condition, never npc/requires_npc on the trigger.
-# Says only what is true now: the wreck is here, he is studying the arm. It promises nothing about when.
-# MEDIA: one new slot, scenes/the_wreck_on_the_table.jpg (one asset, one block).
+# What stands after the run: the wreck of Vega on Kess's table. It was the plant for 0.2.5, and beat_0255 (0.2.5)
+# BANDS IT ON parts_fitted, because the fitting takes the wreck apart: what lies there and what Kess says about it
+# change with each part (design_the_fitting.md "Truth sweep"; the old header's "perfect memory" was dropped by LO
+# 2026-10-26 — the parts are strength, armour and the blade). Solo, because hub_kess_berth is his card here; his
+# presence is a GROUP condition, never npc/requires_npc on the trigger.
+# ⚠️ THREE CHAINS, EACH BROKEN FROM THE NEXT BY AN UNGROUPED LINE. Adjacent groups merge into one if/elseif chain
+# (v2.py, the hunt_marsh_sunday note), so the image, the description bands and the presence bands are separated by
+# flat lines that are true in every state.
+# ⚠️ THE IMAGE SHOWS THE BLADE STILL IN THE ARM, so it rides parts_fitted lt 3 only (one asset, one block).
+# MEDIA: scenes/the_wreck_on_the_table.jpg.
 [[canvases]]
 id          = "kess_the_wreck"
 name        = "The wreck"
-description = "beat_0238 (0.2.4). Wren-solo card @kess_berth, repeatable, pri 3, gated back_in_body. The wreck of Vega on Kess's table: half an arm, a cracked chest, the blade arm laid open; Kess at it while he is here (10:00-22:00), his notes on it when he is not. The plant for 0.2.5."
+description = "beat_0238 (0.2.4), banded beat_0255 (0.2.5). Wren-solo card @kess_berth, repeatable, pri 3, gated back_in_body. The wreck of Vega on Kess's table, in three states on parts_fitted (whole wreck / back and skin gone / stripped to a shell), and Kess at it while he is here (10:00-22:00), his notes on it when he is not."
 [canvases.trigger]
 location      = "kess_berth"
 is_repeatable = true
@@ -5595,20 +5903,58 @@ conditions = { version = "1.0", logic = "AND", items = [
 id   = "base"
 name = "The wreck"
 blocks = [
-  { type = "image", props = { file = "scenes/the_wreck_on_the_table.jpg", description = "A ruined woman-shaped machine lying on a cluttered workshop table under a work-lamp: one arm torn off at the shoulder, the chest cracked, the other forearm laid open to show a long thin dark blade folded inside, tools around it.", search_queries = ["broken android on workbench lamp tools", "damaged robot woman on table opened arm"] } },
-  { type = "paragraph", content = "What is left of Vega lies on Kess's table. Half an arm, a cracked chest, one dead eye. The other arm is laid open from the elbow down, the blade folded inside it." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "lt", value = 3 },
+    ] } }, blocks = [
+    { type = "image", props = { file = "scenes/the_wreck_on_the_table.jpg", description = "A ruined woman-shaped machine lying on a cluttered workshop table under a work-lamp: one arm torn off at the shoulder, the chest cracked, the other forearm laid open to show a long thin dark blade folded inside, tools around it.", search_queries = ["broken android on workbench lamp tools", "damaged robot woman on table opened arm"] } },
+  ] },
+  { type = "paragraph", content = "What is left of Vega lies on Kess's table." },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "lt", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Half an arm, a cracked chest, one dead eye. The other arm is laid open from the elbow down, the blade folded inside it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "lt",  value = 3 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Her back is open and empty where the cables came out. The blade is still folded in the one good arm." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "gte", value = 3 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "A shell now. Her back is empty, her skin is gone in sheets, and the arm is opened flat with nothing in it." },
+  ] },
+  { type = "paragraph", content = "The lamp over the table is never switched off." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "npc_at_location", location_id = "kess_berth", operator = "is_present", npc_id = "npc_kess" },
+      { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "lt", value = 3 },
     ] } }, blocks = [
     { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Don't touch. I'm learning her. That blade grows out of the frame. Yours is the same family." },
     { type = "dialog", props = { speaker = "player" }, content = "You want to put it in me." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "I want to know if I can. Then we'll talk about want." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "npc_at_location", location_id = "kess_berth", operator = "is_present", npc_id = "npc_kess" },
+      { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "gte", value = 3 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "Nothing left in her I can use. I keep her for the spares." },
+    { type = "dialog", props = { speaker = "player" }, content = "You keep her because you can't throw her out." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_kess" }, content = "That too." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "npc_at_location", location_id = "kess_berth", operator = "is_absent", npc_id = "npc_kess" },
+      { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "lt", value = 3 },
     ] } }, blocks = [
     { type = "paragraph", content = "Kess's notes are pinned beside it, half of them about the arm. One page just says HER, in his square hand, with an arrow." },
     { type = "thought_bubble", props = { speaker = "player" }, content = "Her arm. My arm. He's already deciding." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "npc_at_location", location_id = "kess_berth", operator = "is_absent", npc_id = "npc_kess" },
+      { type = "trait", subject = "player", trait_key = "parts_fitted", operator = "gte", value = 3 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Kess's notes are still pinned beside it. Every page has a line through it now except the one that says HER." },
+    { type = "thought_bubble", props = { speaker = "player" }, content = "Her strength. Her skin. Her blade. All in me now, and I still hurt like me." },
   ] },
 ]
 [canvases.nodes.exit_block]

@@ -555,13 +555,13 @@ def main():
         beats = cascade_beats(cf)
         last = beat_text(beats[-1][1]) if beats else ""
         check(len(EXPLICIT.findall(last)) < 3, "0237: the meaning beat comes after the body, not folded into it (the pivot rule)")
-    o = [c for c in cards if not c.get("npc_id") and c.get("terminal") and {"flag": "cain_chosen", "op": "is_true"} in c.get("when", [])]
-    check(len(o) == 1, "0237: one terminal end card O on cain_chosen")
+    # ⚠️ AMENDED AT beat_0252 (0.2.5, intended): end card O was converted in place into story card S (the fitting),
+    # the 0.2.4 card-L lesson. 0.2.5's end card U carries the terminal frame, and check_the_fitting.py guards it.
+    # What stays true here: at most one terminal Story-Goals card, and no apostrophe in any terminal_text.
     terms = [c for c in cards if not c.get("npc_id") and c.get("terminal")]
-    check(len(terms) == 1, f"0237: exactly one terminal Story-Goals card in the game, found {len(terms)}")
-    if o:
-        check("'" not in (o[0].get("terminal_text") or ""), "0237: no apostrophe in terminal_text")
-        check("That is where this build ends" in (o[0].get("tip") or ""), "0237: the end card says where the build ends")
+    check(len(terms) <= 1, f"0237: at most one terminal Story-Goals card in the game, found {len(terms)}")
+    for c in terms:
+        check("'" not in (c.get("terminal_text") or ""), "0237: no apostrophe in terminal_text")
 
     # ── beat_0238 — what stands after: site_the_cradles bands, Cain's band, Kess's Site card, the wreck ─────
     sc = canvases.get("site_the_cradles")
@@ -718,6 +718,13 @@ def main():
             if c.get("npc_id") != npc:
                 continue
             ok_ = all((st.get(w["flag"], False) is (w["op"] == "is_true")) for w in c.get("when", []) if "flag" in w)
+            # AMENDED AT beat_0252 (0.2.5, intended): Kess's home card splits on parts_fitted, so player trait
+            # entries are evaluated too (absent from the state = 0, the declared default).
+            for w in c.get("when", []):
+                if "trait" in w and w.get("subject") == "player":
+                    v = st.get(w["trait"], 0)
+                    ok_ = ok_ and {"lt": v < w["value"], "gte": v >= w["value"], "gt": v > w["value"],
+                                   "lte": v <= w["value"], "eq": v == w["value"]}[w["op"]]
             if ok_:
                 out.append(c["text"][:30])
         return out

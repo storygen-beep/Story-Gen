@@ -308,13 +308,15 @@ def main():
         scene("cap_cain_for_real", "Morning.", ("I don't hate you", "I'm choosing you anyway"))
         ok(flag("cain_chosen"), "cain_chosen")
         qt = play("QuestsPage")
-        ok("That is where this build ends" in qt and "Chapter complete" in qt and "army of empty bodies" in qt, "end card O")
+        # AMENDED AT beat_0252 (0.2.5, intended): end card O became story card S (the fitting) in place; 0.2.5's end card
+        # U is checked by live_the_fitting.py.
+        ok("three things in it that can go into you" in qt and "Chapter complete" not in qt, "after cain_chosen: card S (the fitting), was end card O")
         ok("&amp;#x27;" not in qt and "&#x27;" not in qt, "no escaped apostrophes")
         qall = pg.evaluate("document.querySelector('#passages').textContent")   # includes the collapsed section
         ok("All but one." in qall, "Bastien's card 27 (Dace)")
         ok("Finished (" in qt and pg.evaluate("document.querySelector('details.quests-finished') && !document.querySelector('details.quests-finished').open"),
            "the finished arcs sit under one collapsed Finished heading")
-        ok(qt.find("Chapter complete") < qt.find("Finished ("), "the story card comes before the Finished heading")
+        ok(qt.find("three things in it") < qt.find("Finished ("), "the story card comes before the Finished heading")
         ok("He made a note." in qall and "She chose him." in qall, "Sabin's and Cain's cards are on the page (under Finished)")
 
         # ── what stands after

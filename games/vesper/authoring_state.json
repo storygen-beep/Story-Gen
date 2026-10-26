@@ -3442,6 +3442,133 @@
       "introduces": [],
       "canvases": [],
       "notes": "Before this, the study-to-transfer stretch showed only 'Finished (7)' in the character section. Kess had no card at all; Cain had only his cain_chosen end card. Seven cards were added, exclusive by flags: Kess has study, Vega and home; Cain has study, after the last night, Vega, and home-before-chosen. Places and hours were re-read from the schedules. The Vega cards are in_vega is_true and name only the Site. The guard checks exactly one live card per man in each of four states; the live test checks the cards at the study, after the last night and in Vega."
+    },
+    {
+      "id": "beat_0252",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.5 — the numbers + card O converted to S (the fitting) + Kess's two home cards",
+      "introduces": [
+        "parts_fitted",
+        "cain_nights",
+        "cain_asked"
+      ],
+      "canvases": [],
+      "notes": "Three hidden counters in core_traits (backfill carries them into old saves). End card O converted IN PLACE to story card S (cain_chosen + parts_fitted lt 3, goal parts_fitted 3, the three prices), the 0.2.4 card-L lesson. Kess's home card split on parts_fitted (fitting / after). check_the_transfer.py §0237 and §0251 amended (intended)."
+    },
+    {
+      "id": "beat_0253",
+      "status": "validated",
+      "target_phase": "3_activities.toml",
+      "title": "0.2.5 — kess_fitting: hub choice + strength",
+      "introduces": [],
+      "canvases": [
+        "kess_fitting"
+      ],
+      "notes": "hub_kess_berth 'Have him fit the next part.' (back_in_body + parts_fitted lt 3) into kess_fitting, the kess_patch_up substitution-only shape. Three pay choices on the exact parts_fitted value (40/60/80, +1 clamp cap 3, 240 min). Strength: she lifts the pump housing."
+    },
+    {
+      "id": "beat_0254",
+      "status": "validated",
+      "target_phase": "3_activities.toml",
+      "title": "0.2.5 — kess_fitting: armour + Kess's pain line",
+      "introduces": [],
+      "canvases": [
+        "kess_fitting"
+      ],
+      "notes": "She flinches; Vega never did; Kess: they can build all of it and not the bit of you that flinched."
+    },
+    {
+      "id": "beat_0255",
+      "status": "validated",
+      "target_phase": "3_activities.toml",
+      "title": "0.2.5 — kess_fitting: the blade + truth sweep (wreck card, Cain's blade line)",
+      "introduces": [],
+      "canvases": [
+        "kess_fitting",
+        "kess_the_wreck",
+        "activity_cain_trains"
+      ],
+      "notes": "The blade comes out when she says (LO). kess_the_wreck banded on parts_fitted in three chains separated by flat lines, image only while the blade is still in the arm, header's 'perfect memory' corrected. Cain's card gains a first band at parts_fitted 3 ('Show me.')."
+    },
+    {
+      "id": "beat_0256",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.5 — cap_the_knife at the Site",
+      "introduces": [
+        "knife_tested"
+      ],
+      "canvases": [
+        "cap_the_knife"
+      ],
+      "notes": "Blueprint change 1: Cain is never at the Berth, so the knife test is a one-shot at the Site (parts_fitted gte 2 + Cain present). Echoes cap_study_blade's 'the way you'd test a hide'."
+    },
+    {
+      "id": "beat_0257",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.5 — Cain's loop: entry trio, loop_cain_site, finisher, nights 1-3",
+      "introduces": [
+        "cain_lay",
+        "cain_round"
+      ],
+      "canvases": [
+        "loop_cain_site",
+        "loop_cain_site_finisher",
+        "activity_cain_trains"
+      ],
+      "notes": "The loop_bastien_cot rig. Three same-label entries on his card (first / later calendar day / same day), the steppers set cain_lay and cain_nights +1 cap 4. No anal: stage 0/1, finisher 0 (her mouth) / 1 (inside). Night 2 opens on top, night 3 'Again.' once a sitting (cain_round). Two lines that assumed the parts were in were made true for every state."
+    },
+    {
+      "id": "beat_0258",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.5 — the ask (cain_nights 4) + Cain's card names the loop",
+      "introduces": [],
+      "canvases": [
+        "loop_cain_site"
+      ],
+      "notes": "'Ask him for it.' once, sets cain_asked; the intro's first band after it is her asking. The meaning beat comes after the body. Cain's end card tip names the loop."
+    },
+    {
+      "id": "beat_0259",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.5 — rand_units_street + card T + the repair twin and kess_patch_up sweep",
+      "introduces": [
+        "units_first_loss"
+      ],
+      "canvases": [
+        "rand_units_street",
+        "hub_kess_berth",
+        "kess_patch_up"
+      ],
+      "notes": "The rand_vega_street shape: strip, 0.35, once a day, parts_fitted gte 3. Always both, silent. +60 a loss (LO). First loss runs to the Site (Cain carries her), later losses the lost day home to the cot. 'Have him fix what they did.' twin; Kess's repair lines for the two of them first. check_the_hunt.py §0209 amended (intended)."
+    },
+    {
+      "id": "beat_0260",
+      "status": "validated",
+      "target_phase": "5_scenes.toml",
+      "title": "0.2.5 — cap_more_coming + end card U",
+      "introduces": [
+        "more_coming"
+      ],
+      "canvases": [
+        "cap_more_coming"
+      ],
+      "notes": "Auto-fire at the Site after the first loss, no presence gate. Bastien's men saw it and ran to tell Cain (grounded in the men in the stalls since crew_back). What Lyra and Nova are; twenty, then two hundred; the one thing on the line they cannot make. End card U the only terminal story card."
+    },
+    {
+      "id": "beat_0261",
+      "status": "validated",
+      "target_phase": "6_dev_shortcuts.toml",
+      "title": "0.2.5 — dev jump + check_the_fitting.py + live_the_fitting.py",
+      "introduces": [],
+      "canvases": [
+        "dev_jump_fitting_start"
+      ],
+      "notes": "'▶ 0.2.5: start (the end of 0.2.4)' at the Berth, coin 200. Both 0.2.4 jumps reset the 0.2.5 keys. Guard negative-tested three ways (anal stage, hunt chance, a stage price); live test plays the whole chapter and passes; all older guards and live suites pass."
     }
   ],
   "structure_registry": {
@@ -4231,6 +4358,26 @@
         "key": "cradles_ready",
         "set_by": "beat_0221 cap_the_cradles exit (@the_site)",
         "gates": "card K2 closes; end card L (terminal)"
+      },
+      {
+        "key": "knife_tested",
+        "set_by": "beat_0256 cap_the_knife exit (@the_site)",
+        "gates": "cap_the_knife's own is_false"
+      },
+      {
+        "key": "cain_lay",
+        "set_by": "beat_0257 activity_cain_trains 'Lie down with him.' first-night and later-day choices (@the_site)",
+        "gates": "the entry trio's days_since_flag pair"
+      },
+      {
+        "key": "units_first_loss",
+        "set_by": "beat_0259 rand_units_street.run_first exit (@underworld_strip)",
+        "gates": "cap_more_coming; card T closes; the repair twin; kess_patch_up's Lyra-and-Nova bands"
+      },
+      {
+        "key": "more_coming",
+        "set_by": "beat_0260 cap_more_coming exit (@the_site)",
+        "gates": "end card U (terminal)"
       }
     ],
     "_new_trait_note": "names_known (TRAIT, default 0, hidden) — set=1 on BOTH loop_renner_finisher drain choices (.intro first-drain + .again repeat); gates the whole hunt (Sol lead reads names_known>=1). A TRAIT not a flag because the drain setter is triggerless (flag-chain validator). Not in the flags[] list above; registered here + in beat_0030 introduces. Other unregistered trait counters (coin/drain_charge/arousal_charge/etc.) remain known-incomplete in this registry.  || CAPTIVITY (rev 63): core_strain (TRAIT, default 0, hidden from the traits dump, surfaced ONLY as a banded trait_status_text sidebar row). Bands start at min=1 so the row is INVISIBLE for the whole game before captivity (v2.py:15516 renders nothing when no band matches) and the TOP band carries NO max (unset max defaults to 1e9, v2.py:15508) so 'Core: Failing' persists forever at the frozen 96. +12 per use, clamp=true (clamp bounds 0-100 at BOTH ends, v2.py:5563-5567; OMITTING clamp passes false -> unbounded, v2.py:2123). 8 uses -> 96 -> the break. || cell_door (TRAIT, default 0, hidden, NEVER SET) = the sealed door's entry_conditions gate (gte 1). A TRAIT because a flag is_true gate demands a located setter or the flag-chain validator hard-fails. | THE ARCHIVE (rev 69): calloway_drains_done (hidden counter, 0→2; the Renner drains_done twin — a TRAIT bumped on the TRIGGERLESS drain canvas (calloway_drain_canvas #10, the sex-loop finisher), which is why it is validator-exempt (traits are); it selects the two drain payloads (0->surface: he's certain the section's safe; 1->depths: the big pull, days ago, her file in it) — there are NO located cap_calloway_drain1/2 capstones. Gated on the counter + corruption band, never arousal. The 1->2 advance needs only the counter (theft2_done was REMOVED 7-22; the big theft is off-screen, uncovered in the drain). DOWNSTREAM (W4 cap_deal_place, the 'find the buyer' Quest card) reads the durable trait calloway_drains_done>=2 directly — there is NO big_chunk_known flag (a flag set mid-loop would hard-fail the flag-chain validator; this is the actual Renner discipline).  || RECONCILE (registered late at the rev-112 fold sweep): colm_drains_done (TRAIT, default 0, hidden) — the Colm sub-arc's drain counter, shipped at rev 85 (beat_0066) and never registered here. Bumped on the triggerless back-room drain canvas; d0 = the drain that names Vane's face (SETS vane_confirmed), done = the repeatable pure-power warm tap. GATES cap_vane_blackmail (beat_0067) and the Story-Goal B2->C quest step. A TRAIT not a flag for the standing reason: the drain canvas is triggerless, and a flag is_true gate demands a located setter or the flag-chain validator hard-fails.  || THE LEASH (rev 112): mercer_attempts (TRAIT, default 0, hidden) — 0->4, the loop counter; bumped on each loop_mercer_attempt exit; READ by the exclusive banded [group] chain that picks which failure plays and by cap_first_fire (gte 3) and cap_bastien_walks_in. A TRAIT not a flag because the loop canvas is node-routed and a flag is_true gate demands a located setter or the flag-chain validator hard-fails. | part_gen (TRAIT, default 0, hidden) — 0->4, which prototype Kess has built; drives the install talk and the finding text. | part_installed (TRAIT, default 0, hidden) — 0/1, whether a live part is seated; SET by kess_install_part, BURNED back to 0 on every failed attempt (this is the pressure: no free retries, she must go earn). ⚠️ The part is deliberately a TRAIT and NOT a wardrobe/inventory item — setup.backfillStateDefaults (v2.py:14549) carries new flags and traits into old saves but has NO wardrobe branch, so an item added later than the beat that grants it never reaches an existing save (the cover_analyst post-mortem, save-safety.md:87-112). | mercer_drains_done (TRAIT, default 0, hidden) — bumped on the triggerless drain; d0 = THE first fire (power + the bad news that the key speaks for one name only), done = the repeatable warm tap. | bastien_drains_done (TRAIT, default 0, hidden) — same pattern; d0 payload = he was buying her file for Cain; GATES cap_extraction (gte 1). | controller_state (TRAIT, default 0, hidden) — 0 = idle, 1 = running; 'on' means the controller is RUNNING and the leash is SUPPRESSED. Mirrors the shipped equipped_weapon loadout shape. Surfaces ONLY on blocked targets — Renner/Calloway/Colm/Marsh/the brothel were never blocked and gain no new step. Retired entirely at leash_cut. | controller_charge (TRAIT, default 0, hidden, bounded) — the power the switch draws; reloaded at Kess's bench, which feeds the rent loop. ⚠️ verify at build: reload/idle semantics of a second loadout-shaped trait alongside equipped_weapon/drain_charge. | feed_line_days (TRAIT, default 0, hidden) — the feed-line upkeep countdown. RENAMED + RE-SHAPED at rev 114 (was `rent_paid_through`, planned as a paid-through day index — NOT AUTHORABLE: effect values are literals only, v2.py:13519-13578, and no condition type reads time_state.day, v2.py:3816+). Set to a literal 3 by activity_kess_cot's PAID tier (the 10-coin night — the paid night IS the upkeep; there is no separate rent canvas), decremented 1 per day rollover by [player.trait_decay] (template_import.py:1657-1666 -> v2.py:5532-5544, unconditional, floors at 0), READ by hub_kess_berth's two exclusive bands (gte 1 = Kess is working the key / lt 1 = he isn't) and, from beat_0070 on, by his work canvases. Crash rough sets nothing. ⚠️ It is the ONLY entry in [player.trait_decay] — anything spent by ACTIONS must never go there. | THE PARTS LOOP (beat_0075, rev 120) — THREE counters, all TRAITS not flags (the setters ride navigating choices and a triggerless exit, and the flag-chain validator hard-fails a flag required by a trigger whose only setter is triggerless; the shipped precedent is repair_armed/repair_session). All three declared in 1_metadata's [player.core_traits] with hidden=true labels in 0_systems_spec, which is what puts them in setup.stateDefaults and therefore into setup.backfillStateDefaults (v2.py:15332) for carried 0.1.7 saves. ⚠️ THE BACKFILL IS LOAD-BEARING: coerceNumber(undefined) returns null and EVERY lt/gte on a missing trait returns false (v2.py:3834-3849), so without it the loop would read both 'she has no part' AND 'she cannot buy one'. part_held (0/1) — bought and in her pocket; set by activity_buy_part's 25-coin choice, consumed by kess_install_part's exit, gates the install rung. part_installed (0/1) — seated and live; set by the install exit, burned back to 0 by every attempt (beat_0076+), and ANDed into the buy gate so she can never stockpile. mercer_attempts (0..4) — bands BOTH kess_install_part's build talk and loop_mercer_attempt itself, so the two can never disagree about which generation she is on. ⚠️ part_gen FROM THE PLAN SEED IS DROPPED: it counted the same thing mercer_attempts counts, they move in lockstep by construction, and two counters for one fact is a desync waiting to happen. ⚠️ NONE of the three decays — [player.trait_decay] still has exactly one entry, feed_line_days.  || THE LEASH (rev 124, beat_0079): mercer_drains_done (TRAIT, default 0, hidden from the <<playerTraits>> dump, no sidebar row) — the Mercer drain counter and the twin of calloway_drains_done / colm_drains_done. Bumped to 1 on cap_first_fire's EXIT BLOCK (an auto-fire she cannot decline, so render is the event) and again on every loop_mercer_warm_tap rung CLICK. A trait not a flag because the warm tap's setter is triggerless and the flag-chain validator hard-fails a flag whose only setter is triggerless. Declared in 0_systems_spec [[traits.labels]] and defaulted in 1_metadata [player.core_traits] so it joins the cross-release backfill. NOTE the asymmetry with mercer_attempts: the fourth part is NOT burned, so part_installed stays 1 from the first fire onward — that is what closes the parts economy and what cap_bastien_walks_in reads at beat_0080. || THE WAY DOWN (rev 222): bunker_stealth_used (per-run 0/1, the free back-out, zeroed on the way in) and bunker_runs (prose-only odometer). Deliberately NO position odometer — the node graph holds her place in the route and a counter beside it would be a second source of truth for the same fact, which is the bug activity_sift_the_ruin shipped once already.",
@@ -4347,7 +4494,12 @@
       "bunker_runs — beat_0173, hidden. Prose-only odometer of how many times she has been put back to the stair head. Gates NOTHING and must gate nothing.",
       "vega_damage — beat_0206, hidden from the dump, shown as the banded 'Body:' sidebar row (bands from 1, top band no max). 0-100, clamped: +60 ambush, +35 per street loss, -25 per Kess repair. The take wants lt 30.",
       "vega_habits — beat_0206, hidden. 0-4, +1 per street loss. The take needs 4.",
-      "undertow_build — beat_0206, hidden. 0-3, +1 per paid rebuild stage; stage 3 sets undertow_open."
+      "undertow_build — beat_0206, hidden. 0-3, +1 per paid rebuild stage; stage 3 sets undertow_open.",
+      "parts_fitted — beat_0252, hidden. 0-3, +1 per paid fitting (40/60/80): 1 strength, 2 armour, 3 the blade. The knife needs 2, the hunt 3.",
+      "cain_nights — beat_0252, hidden. 0-4, +1 once a calendar day from Cain's card; opens on top (2), 'Again.' (3), the ask (4).",
+      "cain_asked — beat_0252, hidden. 0/1, set inside the triggerless loop by the ask; a trait for the flag-chain reason.",
+      "cain_round — beat_0257, hidden. 0/1, the once-a-sitting second round; reset with the loop traits.",
+      "vega_damage — 0.2.5 reuse: +60 per loss to Lyra and Nova (rand_units_street), same Body row and repair."
     ],
     "dev_jumps": [
       "dev_jump_whose_hand — the 0.2.0 end-state, lands at the_cot, WHOSE HAND opens on arrival.",
@@ -4359,11 +4511,12 @@
       "dev_jump_hunt_take — beat_0216. '▶ 0.2.3: ready for the take'. Every 0.2.3 flag through crew_back set, vega_taken unset, fighting 85, vega_habits 4, vega_damage 0, undertow_build 3; lands at kess_berth (the strip rolls a street fight).",
       "dev_jump_hunt_on — 2026-10-04. '▶ 0.2.3: the hunt is on (after Kess)'. Part one done (site_offered..seam_known set), the rest unset, fighting 70, damage 35. Lands at the berth.",
       "dev_jump_hunt_crew — 2026-10-04. '▶ 0.2.3: the crew night is tomorrow'. Flags through dace_met set by the click (crew night fires the next night after ten), bar built, fighting 85, habits 4. Lands at the pit.",
-      "dev_jump_hunt_table — 2026-10-04. '▶ 0.2.3: Vega on the table'. Every flag through vega_taken set, damage 25. Lands at the berth; the table fires in Kess's hours."
+      "dev_jump_hunt_table — 2026-10-04. '▶ 0.2.3: Vega on the table'. Every flag through vega_taken set, damage 25. Lands at the berth; the table fires in Kess's hours.",
+      "dev_jump_fitting_start — 2026-10-26. '▶ 0.2.5: start (the end of 0.2.4)'. Every 0.2.4 flag through cain_chosen set, in_vega/rise_door unset, records 9, coin 200, every 0.2.5 key at its start. Lands at the Berth."
     ]
   },
   "next_up": [
-    "0.2.4 — THE TRANSFER, now with the player playing Vega (beats 0240-0248, 2026-10-13). LO's: the media harvest (27 slots: 25 + wren_as_vega portrait + chairmans_floor), then the release (version, codes, guide, no-dev build).",
+    "0.2.5 — THE FITTING, BUILT 2026-10-26 (beats 0252-0261, design_the_fitting.md 'BUILT'), uncommitted, dev build in output_dev. LO's, in order: (1) play + review, then commit; (2) the media harvest (7 images, 8 Cain loop pools of 4, 1 ask clip); (3) the release (version, codes, guide Act 13, no-dev build). Open small call: the ladder steps per calendar day, so lying down before and after midnight in one night steps it twice (Bastien's loop works the same).",
     "RELEASED — 0.2.3 HER FATHER'S HOUSE and THE HUNT shipped 2026-10-05 and 0.2.3.1 (the clock setting) 2026-10-09, both committed. Still LO's from that list: the media harvest, the crew-night ceiling row, and the flip-able calls in design_the_hunt.md. 0.2.3 — HER FATHER'S HOUSE and THE HUNT is BUILT (beats 0206-0218, rev 240), uncommitted. LO's, in order: (1) review + commit; (2) the media harvest — 25 slots (design_the_hunt.md 'BUILT · Media'); (3) sign the crew-night ceiling row; (4) the paid guide needs 0.2.3 chapters and the fighting 85 gate; (5) version bump + publish build (drop --dev/--debug) at release; (6) flip-able calls listed in design_the_hunt.md.",
     "RESOLVED 2026-10-02 — MARKET CAP. underworld_market_shop's two buys are one-time now (flags market_weapon_bought / market_gear_bought, each choice gated is_false). design_cheat_page.md §11.1 marked resolved.",
     "THE RINGS, two calls flagged to LO and not yet answered (design_the_rings.md 'Decisions'): (1) the door man is emitter-or-grind — the clean pass needs a silent run AND an unspent budget, so in practice the rescue is gated behind the emitter's 10-coin-and-a-day reload or fighting 70; (2) the slab's round runs 20:00-23:59, night rather than day. Both are one-line flips.",
@@ -4374,7 +4527,7 @@
     "⚠️ OPEN ITEM 5, STILL LO's CALL — cap_grier_met, cap_grier_gives and cap_sabin_hires auto-fire with their NPC absent. One npc_at_location … is_present clause each; the fix is proved on cap_sabin_consults. It re-opens three validated beats.",
     "⚠️ STILL OPEN — the template_import.py:5375 engine bug (warnings.append where warnings is the stdlib module)."
   ],
-  "_active_beat": "0.2.4 released (2026-10-14). Next: 0.2.5 — what Kess takes out of the wreck, and Cain's repeatable.",
+  "_active_beat": "0.2.5 THE FITTING — BUILT 2026-10-26, beats 0252-0261 validated, uncommitted. LO's: review + commit; media harvest; the release.",
   "decisions_log": [
     {
       "turn": 1,
@@ -5560,6 +5713,9 @@
     "2026-10-13 — beat_0249 validated (rev 262). LO: 'fix both, vesper only, then push'. Character cards hidden while in Vega; finished arcs collapsed under 'Finished' (opt-in engine flag, Vesper only).",
     "2026-10-13 — beats 0250-0251 validated (rev 263). LO: 'No different route for vega' and 'no changes to the route wren experiences'. Vega walks Wren's route through Vega-gated twins of Wren's cards; the strip's six Wren rooms are shut to Vega with per-state refusals (new engine key blocked_messages). Kess and Cain have one live card each through the chapter.",
     "2026-10-14 — Two media slots cut (LO: 'remove media block for these two images, we dont need media for it'). 5_scenes.toml: the image block for scenes/the_tower_plan.jpg (cap_tower_plan, beat_0231) and for scenes/the_seam_again.jpg (cap_dace_falls, beat_0234) removed, the MEDIA comments updated; dace_falls.jpg stays. tests/check_the_transfer.py §0244/§0246 media expectations amended to match (intended change). Their find-media v3 shelves (150 / 228 options) are left in media_options.json, unused. VERIFIED: merge OK, package --dev to output_dev green (flag chains valid; only error = portraits/wren_as_vega.jpg, the known hand-made slot), THE TRANSFER GUARD OK.",
-    "2026-10-14 — RELEASE 0.2.4 THE TRANSFER (LO: 'Are we ready to release it??', then 'do 1, 3 and 4, keep the lines as a tease', 'update the codes', 'commit, merge and push'). Cain's repeatable sex is deferred to a later release (LO); the two cradles lines that promise it ('Then come here, both of you.' / 'I'm allowed to want that now.') stay as a tease. Version 0.2.3.1 -> 0.2.4 and release_date 2026-10-14 in [project] and the games-data.js entry; the untracked codes file rotated (six new words checked against the built page, the TOML and every older set; 0.2.3.1 set backed up to codes.toml.bak-v0.2.3.1, untracked). Release merge --no-dev (285 canvases, not the 307 of the dev merge), package without --dev/--debug, snapshot releases/v0.2.4.html. Guide (untracked): version, date, Act 12 The Transfer (rung table; before the transfer; in her body; the Rise; the plan and the vault; the run; after), two lock-out entries (Vega's body closes Wren's places; the Rise and the Tower each have one window), What's In This Build re-read from the release merge: 36 locations, 20 people, 285 scenes, 139 quest entries, 559 choices; every label and hour checked against the TOML; check_guide_numbers 41 claims ALL VERIFIED. PDF vesper_guide_v0.2.4.pdf, 359 KB. Measured on the output: 0 dev_jump, 0 dev_mode_enabled, 0 literal '0.2.3.1'. Release smoke: cheatVersion 0.2.4, 6/6 new codes accepted, 0/6 old, footer v0.2.4, 0 JS errors. Not done (LO's): the PDF upload and the post."
+    "2026-10-14 — RELEASE 0.2.4 THE TRANSFER (LO: 'Are we ready to release it??', then 'do 1, 3 and 4, keep the lines as a tease', 'update the codes', 'commit, merge and push'). Cain's repeatable sex is deferred to a later release (LO); the two cradles lines that promise it ('Then come here, both of you.' / 'I'm allowed to want that now.') stay as a tease. Version 0.2.3.1 -> 0.2.4 and release_date 2026-10-14 in [project] and the games-data.js entry; the untracked codes file rotated (six new words checked against the built page, the TOML and every older set; 0.2.3.1 set backed up to codes.toml.bak-v0.2.3.1, untracked). Release merge --no-dev (285 canvases, not the 307 of the dev merge), package without --dev/--debug, snapshot releases/v0.2.4.html. Guide (untracked): version, date, Act 12 The Transfer (rung table; before the transfer; in her body; the Rise; the plan and the vault; the run; after), two lock-out entries (Vega's body closes Wren's places; the Rise and the Tower each have one window), What's In This Build re-read from the release merge: 36 locations, 20 people, 285 scenes, 139 quest entries, 559 choices; every label and hour checked against the TOML; check_guide_numbers 41 claims ALL VERIFIED. PDF vesper_guide_v0.2.4.pdf, 359 KB. Measured on the output: 0 dev_jump, 0 dev_mode_enabled, 0 literal '0.2.3.1'. Release smoke: cheatVersion 0.2.4, 6/6 new codes accepted, 0/6 old, footer v0.2.4, 0 JS errors. Not done (LO's): the PDF upload and the post.",
+    "2026-10-26 — 0.2.5 THE FITTING story agreed (LO 'Go ahead'), written to design_the_fitting.md. LO's calls: the blade comes out whenever she wants (no climax charge); the perfect memory is dropped ('doesnt hold much content'); strength and armour go in with the blade; she keeps her pain; Lyra and Nova hunt her always together on Vega's 0.2.3 pattern and she always runs; no habits, no last fight, no 'Draw them out' card; the company-men-in-the-Reach idea is out; the release ends on the first loss that leaves her Badly hurt (Body 60+). design_the_transfer.md 'Decided for 0.2.5' marked REPLACED. Nothing built.",
+    "2026-10-26 — 0.2.5 blueprint written (design_the_fitting.md). LO's answers: Lyra and Nova do vega_damage +60 a loss so the first fight is the ending; after the end card the hunt keeps going the same as before (chance 0.35, once a day); strength/armour/blade are story-only (nothing gates past fighting 85 and nothing reads vega_damage now); Cain's loop ceiling row signed as written (kissing, oral both ways, her on top, him on top, a second round, finishes in her or in her mouth; no anal). Blueprint changes: knife test moved to the Site (Cain is never at the Berth), the hunt waits for parts_fitted 3, the first loss carries her to the Site. Nothing built.",
+    "2026-10-26 — 0.2.5 THE FITTING BUILT, beats 0252-0261 (LO 'Signed, start building'). Merge OK, package --dev green, flag chains valid. check_the_fitting.py OK (negative-tested 3 ways); check_the_transfer / hunt (two sections amended, intended) / count / bunker OK; cascade guard OK; live_the_fitting OK end to end; live transfer/hunt/hunt_end/count/rings/cot all OK. gates.py: explicit floor 12.8% of repeatable beats, explicit in repeatable 57.7%, speaks 2.7:1; FAIL lines 38 -> 39, the new one 'a place is not a catalogue' counts hub_kess_berth's 10 choices statically (live: 2 visible after the fitting); 22 of 23 new 'named person' lines are Kess's lines in kess_fitting/kess_patch_up, reached only from his card (static false positive, same class as the shipped repair), the 23rd fixed. Narration:dialogue: fitting 1.24, knife 1.56, loop 2.56, finisher 1.96, ending 0.47, hunt silent by design."
   ]
 }
