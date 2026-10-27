@@ -28,8 +28,8 @@ description = "An owned half-human weapon who feels nothing but the sex she's us
 quests_engine   = "v2"
 quests_finished_collapsed = true   # 0.2.4: finished men under one collapsed "Finished" heading (LO, 2026-10-13)
 starting_canvas = "canvas_opening_office"   # the cold open (Beat 1 — the office)
-version         = "0.2.4"           # sidebar footer — bump in the same commit as the games-data.js portal entry
-release_date    = "2026-10-14"     # sidebar footer — date this build ships
+version         = "0.2.5"           # sidebar footer — bump in the same commit as the games-data.js portal entry
+release_date    = "2026-10-28"     # sidebar footer — date this build ships
 # The funding link baked into the build at THREE sites (sidebar button + both intro/age-gate links).
 # Same URL the engine falls back to when this is unset (v2.DEFAULT_SUPPORT_URL), so it is stated here
 # only to make the key visible and editable — the built output is byte-identical either way.
