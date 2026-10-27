@@ -190,11 +190,9 @@ if kf:
         check(cfg.get("locationId") == "kess_berth" and cfg.get("time_progression_minutes") == 240, f"0262: {nid} is 240 min, back to the Berth")
         check(n["blocks"][-1].get("type") == "cascade", f"0262: {nid}'s cascade is its last block")
     check(st["traits"] == {"parts_fitted": 3, "parts_out": 3, "parts_settled": 3}, f"0262: the walk ends with all three proven, got {st['traits']}")
-    for nid, media in (("strength_proof", "scenes/fitting_strength.jpg"), ("armour", "scenes/fitting_armour.jpg"), ("blade_proof", "scenes/fitting_blade.jpg")):
-        files = [d["props"].get("file") for d in walk(node(kf, nid) or {}, []) if d.get("type") == "image"]
-        check(files == [media], f"0262: {nid} carries exactly {media}")
-    all_files = [d["props"].get("file") for d in walk(kf, []) if d.get("type") == "image"]
-    check(len(all_files) == 3, f"0262: three images in the fitting, one asset one block, got {all_files}")
+    # LO 2026-10-27: the fitting's three images were cut; no visit carries media.
+    all_media = [d["props"].get("file") or d["props"].get("pool_dir") for d in walk(kf, []) if d.get("type") in ("image", "video")]
+    check(all_media == [], f"0262: the fitting carries no media, got {all_media}")
     arm = text_of(node(kf, "armour"))
     check("She never did that." in arm and "can't build" in arm, "0254: Kess says the pain line in the armour session")
     bl = text_of(node(kf, "blade"))
