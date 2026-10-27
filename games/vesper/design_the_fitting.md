@@ -245,7 +245,7 @@ after. These are re-read every night, so RTS-flat, never a capstone's density.
 
 | scene | kind | where | gate | sets | media |
 |---|---|---|---|---|---|
-| `rand_units_street` | Lane-2 random, `chance = 0.35`, `max_triggers_per_day = 1`, repeatable, no NPC gate | `underworld_strip` | `parts_fitted` gte 3 | one choice, **"Run."**. Two run nodes: **first loss** (`units_first_loss` is_false) runs under the docks and Cain finds her: exit to `the_site`, sets `units_first_loss`, `vega_damage` +60; **every later loss**: the lost day, 540 min, home to `the_cot`, `vega_damage` +60 | `scenes/lyra_and_nova_strip.jpg` (first), `scenes/units_strip.jpg` (later) |
+| `rand_units_street` | Lane-2 random, `chance = 0.35`, `max_triggers_per_day = 1`, repeatable, no NPC gate | `underworld_strip` | `parts_fitted` gte 3 | one choice, **"Run."**. Two run nodes: **first loss** (`units_first_loss` is_false) runs under the docks and Cain finds her: exit to `the_site`, sets `units_first_loss`, `vega_damage` +60; **every later loss**: the lost day, 540 min, home to `the_cot`, `vega_damage` +60 | none (LO 2026-10-27: both fight images cut) |
 
 What the fight shows, every time: she lasts longer than she ever did against Vega (the armour takes what would have
 broken her, the strength throws one off the other, the blade cuts), and it is still two against one. **She feels
@@ -314,8 +314,8 @@ Each beat: merge, validate, package `--dev`, its guard section, and `gates.py` (
 present; explicit beats on the body).
 
 ### Media (the harvest is LO's)
-- **4 images:** `scenes/the_knife`, `lyra_and_nova_strip`, `units_strip`, `more_coming` (all `.jpg`). The
-  three fitting images were cut on 2026-10-27 (LO).
+- **2 images:** `scenes/the_knife`, `more_coming` (both `.jpg`). The three fitting images and the two
+  fight images (`lyra_and_nova_strip`, `units_strip`) were cut on 2026-10-27 (LO).
 - **Cain's loop, repeatable, so pools** (one asset, one block; four clips each): `sex/cain_loop_kiss_t4`,
   `cain_loop_his_mouth_t5`, `cain_loop_her_mouth_t5`, `cain_loop_under_him_t5`, `cain_loop_on_top_t5`,
   `cain_loop_inside_t5`, `cain_loop_mouth_finish_t5`, `cain_loop_again_t5`; and one file for the one-time ask,
@@ -381,8 +381,8 @@ same way. It can be tightened (the stepping entries only before midnight, plus a
 is LO's call.
 
 ## Media — the harvest is LO's
-- **4 images:** `scenes/the_knife`, `lyra_and_nova_strip`, `units_strip`, `more_coming` (all `.jpg`). The
-  three fitting images were cut on 2026-10-27 (LO).
+- **2 images:** `scenes/the_knife`, `more_coming` (both `.jpg`). The three fitting images and the two
+  fight images (`lyra_and_nova_strip`, `units_strip`) were cut on 2026-10-27 (LO).
 - **8 pools of 4 clips** for Cain's loop: `sex/cain_loop_kiss_t4`, `cain_loop_his_mouth_t5`,
   `cain_loop_her_mouth_t5`, `cain_loop_under_him_t5`, `cain_loop_on_top_t5`, `cain_loop_again_t5`,
   `cain_loop_mouth_finish_t5`, `cain_loop_inside_t5`.
