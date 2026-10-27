@@ -3533,6 +3533,8 @@ wardrobeEffects = [
 effects = [
   # ── 0.2.5 keys reset (beat_0261), so this jump taken after playing 0.2.5 lands before any of it ──
   { targetType = "player", trait = "parts_fitted",        op = "set", value = 0 },
+  { targetType = "player", trait = "parts_out",           op = "set", value = 0 },
+  { targetType = "player", trait = "parts_settled",       op = "set", value = 0 },
   { targetType = "player", trait = "cain_nights",         op = "set", value = 0 },
   { targetType = "player", trait = "cain_asked",          op = "set", value = 0 },
 
@@ -3608,6 +3610,7 @@ effects = [
 flagEffects = [
   # ── 0.2.5 flags UNSET (beat_0261) ──
   { targetType = "player", flag = "knife_tested",        op = "unset" },
+  { targetType = "player", flag = "fitting_day",         op = "unset" },
   { targetType = "player", flag = "cain_lay",            op = "unset" },
   { targetType = "player", flag = "units_first_loss",    op = "unset" },
   { targetType = "player", flag = "more_coming",         op = "unset" },
@@ -3787,7 +3790,7 @@ flagEffects = [
 # past the whole of THE TRANSFER: every 0.2.4 flag SET through cain_chosen, in_vega and rise_door UNSET (her own body,
 # the bought face off), records 9, the cell 0, damage 0; every 0.2.5 key at its start (parts 0, Cain's nights 0, no
 # knife, no loss, no end). Coin 200, enough for the three fittings (180). Lands at the Berth: Kess's card carries
-# "Have him fit the next part." 10:00-22:00. ═══
+# "Get on his bench." 10:00-22:00. ═══
 [[canvases]]
 id          = "dev_jump_fitting_start"
 name        = "\u25b6 0.2.5: start (the end of 0.2.4)"
@@ -3898,6 +3901,8 @@ effects = [
   { targetType = "player", trait = "vega_cell",           op = "set", value = 0 },
   # ── 0.2.5 keys at their start ──
   { targetType = "player", trait = "parts_fitted",        op = "set", value = 0 },
+  { targetType = "player", trait = "parts_out",           op = "set", value = 0 },
+  { targetType = "player", trait = "parts_settled",       op = "set", value = 0 },
   { targetType = "player", trait = "cain_nights",         op = "set", value = 0 },
   { targetType = "player", trait = "cain_asked",          op = "set", value = 0 },
   { targetType = "player", trait = "cain_round",          op = "set", value = 0 },
@@ -4076,6 +4081,7 @@ flagEffects = [
   { targetType = "player", flag = "in_vega",             op = "unset" },   # 0.2.4: in her own body
   # ── 0.2.5 flags, UNSET: nothing of THE FITTING has happened ──
   { targetType = "player", flag = "knife_tested",        op = "unset" },
+  { targetType = "player", flag = "fitting_day",         op = "unset" },
   { targetType = "player", flag = "cain_lay",            op = "unset" },
   { targetType = "player", flag = "units_first_loss",    op = "unset" },
   { targetType = "player", flag = "more_coming",         op = "unset" },
@@ -4127,6 +4133,8 @@ wardrobeEffects = [
 effects = [
   # ── 0.2.5 keys reset (beat_0261), so this jump taken after playing 0.2.5 lands before any of it ──
   { targetType = "player", trait = "parts_fitted",        op = "set", value = 0 },
+  { targetType = "player", trait = "parts_out",           op = "set", value = 0 },
+  { targetType = "player", trait = "parts_settled",       op = "set", value = 0 },
   { targetType = "player", trait = "cain_nights",         op = "set", value = 0 },
   { targetType = "player", trait = "cain_asked",          op = "set", value = 0 },
 
@@ -4202,6 +4210,7 @@ effects = [
 flagEffects = [
   # ── 0.2.5 flags UNSET (beat_0261) ──
   { targetType = "player", flag = "knife_tested",        op = "unset" },
+  { targetType = "player", flag = "fitting_day",         op = "unset" },
   { targetType = "player", flag = "cain_lay",            op = "unset" },
   { targetType = "player", flag = "units_first_loss",    op = "unset" },
   { targetType = "player", flag = "more_coming",         op = "unset" },

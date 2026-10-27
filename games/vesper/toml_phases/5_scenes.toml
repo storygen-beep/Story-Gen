@@ -5708,7 +5708,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 # ⚠️ 0.2.5 (beat_0253) — THE FITTING. Into kess_fitting, which carries the three stages and their prices. Shown
 # from back_in_body until all three parts are in, then gone: there is nothing left in the wreck to fit.
 [[canvases.nodes.exit_block.choices]]
-text       = "Have him fit the next part."
+text       = "Get on his bench."
 targetType = "node"
 nodeId     = "kess_fitting.base"
 conditions = { version = "1.0", logic = "AND", items = [
@@ -24741,16 +24741,147 @@ flagEffects = [
 # all three parts are in; card T (the hunt) takes over at parts_fitted 3, and end card U is the only terminal one.
 # ⚠️ NO APOSTROPHE IN terminal_text (SugarCube source-byte escaping) — none here; the new end card carries it.
 # Places re-read at beat_0252: Kess at the Berth 10:00-22:00 (his only row since back_in_body); hub_kess_berth's
-# "Have him fit the next part." (beat_0253) carries the three prices, 40 / 60 / 80 coin.
+# "Get on his bench." (beat_0253) carries the three prices, 40 / 60 / 80 coin.
+# beat_0262 (LO 2026-10-27, three visits per part): S is now NINE exclusive cards, one per visit, on the three
+# odometers (the same gates kess_fitting uses), so the tip always names the next visit. Same text, same goal.
+
+# S · strength, fit.
 [[quest_cards]]
 priority   = 10
 text       = "You know who you were, and you chose Cain. The wreck of Vega is on Kess's table, and there are three things in it that can go into you: her strength, the armour under her skin, and the blade in her arm."
-tip        = "Kess at his bench at the Berth, ten in the morning to ten at night. Have him fit the next part: 40 coin, then 60, then 80. Cain keeps the nights at the Site."
+tip        = "Kess fits the strength next: 40 coin. At his bench at the Berth, ten in the morning to ten at night, one visit a day. Every part takes three visits: he fits it, settles it the next day, and tests it the day after. Cain keeps the nights at the Site."
 goals = [
   { trait = "parts_fitted", subject = "player", op = "gte", value = 3, label = "Have Kess fit Vega's parts into you (at the Berth)" },
 ]
 when = [
   { flag = "cain_chosen", op = "is_true" },
+  { trait = "parts_out", subject = "player", op = "lt", value = 1 },
+  { trait = "parts_fitted", subject = "player", op = "lt", value = 1 },
+]
+
+# S · strength, settle.
+[[quest_cards]]
+priority   = 10
+text       = "You know who you were, and you chose Cain. The wreck of Vega is on Kess's table, and there are three things in it that can go into you: her strength, the armour under her skin, and the blade in her arm."
+tip        = "The strength is in and fighting you. Go back so Kess can settle it. Free. At his bench at the Berth, ten in the morning to ten at night, one visit a day."
+goals = [
+  { trait = "parts_fitted", subject = "player", op = "gte", value = 3, label = "Have Kess fit Vega's parts into you (at the Berth)" },
+]
+when = [
+  { flag = "cain_chosen", op = "is_true" },
+  { trait = "parts_out", subject = "player", op = "gte", value = 1 },
+  { trait = "parts_out", subject = "player", op = "lt", value = 2 },
+  { trait = "parts_settled", subject = "player", op = "lt", value = 1 },
+]
+
+# S · strength, proof.
+[[quest_cards]]
+priority   = 10
+text       = "You know who you were, and you chose Cain. The wreck of Vega is on Kess's table, and there are three things in it that can go into you: her strength, the armour under her skin, and the blade in her arm."
+tip        = "The strength is settled. Go back so Kess can test it. Free. At his bench at the Berth, ten in the morning to ten at night, one visit a day."
+goals = [
+  { trait = "parts_fitted", subject = "player", op = "gte", value = 3, label = "Have Kess fit Vega's parts into you (at the Berth)" },
+]
+when = [
+  { flag = "cain_chosen", op = "is_true" },
+  { trait = "parts_settled", subject = "player", op = "gte", value = 1 },
+  { trait = "parts_settled", subject = "player", op = "lt", value = 2 },
+  { trait = "parts_fitted", subject = "player", op = "lt", value = 1 },
+]
+
+# S · armour, fit.
+[[quest_cards]]
+priority   = 10
+text       = "You know who you were, and you chose Cain. The wreck of Vega is on Kess's table, and there are three things in it that can go into you: her strength, the armour under her skin, and the blade in her arm."
+tip        = "Kess fits the armour next: 60 coin. At his bench at the Berth, ten in the morning to ten at night, one visit a day."
+goals = [
+  { trait = "parts_fitted", subject = "player", op = "gte", value = 3, label = "Have Kess fit Vega's parts into you (at the Berth)" },
+]
+when = [
+  { flag = "cain_chosen", op = "is_true" },
+  { trait = "parts_out", subject = "player", op = "gte", value = 1 },
+  { trait = "parts_out", subject = "player", op = "lt", value = 2 },
+  { trait = "parts_fitted", subject = "player", op = "gte", value = 1 },
+  { trait = "parts_fitted", subject = "player", op = "lt", value = 2 },
+]
+
+# S · armour, settle.
+[[quest_cards]]
+priority   = 10
+text       = "You know who you were, and you chose Cain. The wreck of Vega is on Kess's table, and there are three things in it that can go into you: her strength, the armour under her skin, and the blade in her arm."
+tip        = "The armour is in and fighting you. Go back so Kess can settle it. Free. At his bench at the Berth, ten in the morning to ten at night, one visit a day."
+goals = [
+  { trait = "parts_fitted", subject = "player", op = "gte", value = 3, label = "Have Kess fit Vega's parts into you (at the Berth)" },
+]
+when = [
+  { flag = "cain_chosen", op = "is_true" },
+  { trait = "parts_out", subject = "player", op = "gte", value = 2 },
+  { trait = "parts_out", subject = "player", op = "lt", value = 3 },
+  { trait = "parts_settled", subject = "player", op = "gte", value = 1 },
+  { trait = "parts_settled", subject = "player", op = "lt", value = 2 },
+]
+
+# S · armour, proof.
+[[quest_cards]]
+priority   = 10
+text       = "You know who you were, and you chose Cain. The wreck of Vega is on Kess's table, and there are three things in it that can go into you: her strength, the armour under her skin, and the blade in her arm."
+tip        = "The armour is settled. Go back so Kess can test it. Free. At his bench at the Berth, ten in the morning to ten at night, one visit a day."
+goals = [
+  { trait = "parts_fitted", subject = "player", op = "gte", value = 3, label = "Have Kess fit Vega's parts into you (at the Berth)" },
+]
+when = [
+  { flag = "cain_chosen", op = "is_true" },
+  { trait = "parts_settled", subject = "player", op = "gte", value = 2 },
+  { trait = "parts_settled", subject = "player", op = "lt", value = 3 },
+  { trait = "parts_fitted", subject = "player", op = "gte", value = 1 },
+  { trait = "parts_fitted", subject = "player", op = "lt", value = 2 },
+]
+
+# S · blade, fit.
+[[quest_cards]]
+priority   = 10
+text       = "You know who you were, and you chose Cain. The wreck of Vega is on Kess's table, and there are three things in it that can go into you: her strength, the armour under her skin, and the blade in her arm."
+tip        = "Kess fits the blade next: 80 coin. At his bench at the Berth, ten in the morning to ten at night, one visit a day."
+goals = [
+  { trait = "parts_fitted", subject = "player", op = "gte", value = 3, label = "Have Kess fit Vega's parts into you (at the Berth)" },
+]
+when = [
+  { flag = "cain_chosen", op = "is_true" },
+  { trait = "parts_out", subject = "player", op = "gte", value = 2 },
+  { trait = "parts_out", subject = "player", op = "lt", value = 3 },
+  { trait = "parts_fitted", subject = "player", op = "gte", value = 2 },
+  { trait = "parts_fitted", subject = "player", op = "lt", value = 3 },
+]
+
+# S · blade, settle.
+[[quest_cards]]
+priority   = 10
+text       = "You know who you were, and you chose Cain. The wreck of Vega is on Kess's table, and there are three things in it that can go into you: her strength, the armour under her skin, and the blade in her arm."
+tip        = "The blade is in and fighting you. Go back so Kess can settle it. Free. At his bench at the Berth, ten in the morning to ten at night, one visit a day."
+goals = [
+  { trait = "parts_fitted", subject = "player", op = "gte", value = 3, label = "Have Kess fit Vega's parts into you (at the Berth)" },
+]
+when = [
+  { flag = "cain_chosen", op = "is_true" },
+  { trait = "parts_out", subject = "player", op = "gte", value = 3 },
+  { trait = "parts_out", subject = "player", op = "lt", value = 4 },
+  { trait = "parts_settled", subject = "player", op = "gte", value = 2 },
+  { trait = "parts_settled", subject = "player", op = "lt", value = 3 },
+]
+
+# S · blade, proof.
+[[quest_cards]]
+priority   = 10
+text       = "You know who you were, and you chose Cain. The wreck of Vega is on Kess's table, and there are three things in it that can go into you: her strength, the armour under her skin, and the blade in her arm."
+tip        = "The blade is settled. Go back so Kess can test it. Free. At his bench at the Berth, ten in the morning to ten at night, one visit a day."
+goals = [
+  { trait = "parts_fitted", subject = "player", op = "gte", value = 3, label = "Have Kess fit Vega's parts into you (at the Berth)" },
+]
+when = [
+  { flag = "cain_chosen", op = "is_true" },
+  { trait = "parts_settled", subject = "player", op = "gte", value = 3 },
+  { trait = "parts_settled", subject = "player", op = "lt", value = 4 },
+  { trait = "parts_fitted", subject = "player", op = "gte", value = 2 },
   { trait = "parts_fitted", subject = "player", op = "lt", value = 3 },
 ]
 

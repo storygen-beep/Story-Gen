@@ -85,25 +85,50 @@ story = [c for c in cards if not c.get("npc_id")]
 core = (t.get("player") or {}).get("core_traits") or {}
 labels = {l["key"]: l for l in (t.get("traits") or {}).get("labels", [])}
 
-# ── 0252 — the numbers, card S (O converted in place), Kess's two home cards ──
-for k in ("parts_fitted", "cain_nights", "cain_asked", "cain_round"):
+# ── A tiny evaluator for the fitting's AND-only gates: trait gte/lt/eq, flag is_true/is_false, days_since_flag. ──
+# st = {"traits": {...}, "flags": {...}, "days": {flag: days since it was set}}. A days_since_flag on a flag with no
+# recorded day fails closed, as the engine does (v2.py days_since_flag).
+def met(i, st):
+    if "trait_key" in i or ("trait" in i and "flag" not in i):
+        k = i.get("trait_key") or i.get("trait")
+        v = st["traits"].get(k, 0); op = i.get("operator") or i.get("op"); x = i["value"]
+        return {"gte": v >= x, "gt": v > x, "lt": v < x, "lte": v <= x, "eq": v == x}[op]
+    if i.get("type") == "days_since_flag":
+        d = st["days"].get(i["flag_key"])
+        if d is None:
+            return False
+        return {"gte": d >= i["value"], "lt": d < i["value"]}[i["operator"]]
+    k = i.get("flag_key") or i.get("flag")
+    want = (i.get("operator") or i.get("op")) == "is_true"
+    return bool(st["flags"].get(k)) == want
+
+
+def live(conds, st):
+    return all(met(i, st) for i in conds)
+
+
+# ── 0252 — the numbers, card S (O converted in place, split into nine at beat_0262), Kess's two home cards ──
+for k in ("parts_fitted", "parts_out", "parts_settled", "cain_nights", "cain_asked", "cain_round"):
     check(core.get(k) == 0, f"0252: {k} declared in core_traits at 0")
     check((labels.get(k) or {}).get("hidden") is True, f"0252: {k} hidden from the dump")
-s_card = [c for c in story if {"trait": "parts_fitted", "subject": "player", "op": "lt", "value": 3} in c.get("when", [])]
-check(len(s_card) == 1, "0252: one story card S, live while parts_fitted lt 3")
-if s_card:
-    s = s_card[0]
+s_cards = [c for c in story if {"trait": "parts_fitted", "subject": "player", "op": "lt", "value": 3} in c.get("when", [])
+           or any(w.get("trait") in ("parts_out", "parts_settled") for w in c.get("when", []))]
+check(len(s_cards) == 9, f"0262: card S is nine cards, one per visit, got {len(s_cards)}")
+for s in s_cards:
     check(not s.get("terminal"), "0252: card S is not terminal (O was converted, not left standing)")
     check({"flag": "cain_chosen", "op": "is_true"} in s["when"], "0252: card S needs cain_chosen")
     check(any(g.get("trait") == "parts_fitted" and g.get("value") == 3 for g in s.get("goals", [])), "0252: card S counts parts_fitted to 3")
-    check("40" in s["tip"] and "60" in s["tip"] and "80" in s["tip"], "0252: card S names the three prices")
     check("next release" not in s["text"] + s["tip"], "0252: card S does not say the build ends")
 kess_home = [c for c in cards if c.get("npc_id") == "npc_kess" and {"flag": "back_in_body", "op": "is_true"} in c.get("when", [])]
 check(len(kess_home) == 2, f"0252: Kess has two home cards (before / after the fitting), got {len(kess_home)}")
 check(sorted(w["op"] for c in kess_home for w in c["when"] if w.get("trait") == "parts_fitted") == ["gte", "lt"],
       "0252: Kess's two home cards are exclusive on parts_fitted 3")
 
-# ── 0253-0255 — the fitting ──
+# ── 0253-0255, 0262 — the fitting: three visits per part, one a calendar day ──
+VISITS = [("strength", "fit", 40), ("strength_settle", "settle", None), ("strength_proof", "proof", None),
+          ("armour", "fit", 60), ("armour_settle", "settle", None), ("armour_proof", "proof", None),
+          ("blade", "fit", 80), ("blade_settle", "settle", None), ("blade_proof", "proof", None)]
+COUNTER = {"fit": "parts_out", "settle": "parts_settled", "proof": "parts_fitted"}
 kf = cv.get("kess_fitting")
 check(kf is not None, "0253: kess_fitting exists")
 if kf:
@@ -113,43 +138,70 @@ if kf:
     its = items(tr.get("conditions"))
     check(has(its, flag_key="back_in_body", operator="is_true") and has(its, trait_key="parts_fitted", operator="lt", value=3),
           "0253: gated back_in_body + parts_fitted lt 3")
-    pay = [c for c in choices(node(kf, "base")) if c.get("text", "").startswith("Pay him.")]
-    check(len(pay) == 3, "0253: three pay choices")
-    expect = {"kess_fitting.strength": (40, 0), "kess_fitting.armour": (60, 1), "kess_fitting.blade": (80, 2)}
-    for c in pay:
-        cost, lo = expect.get(c.get("nodeId"), (None, None))
-        check(cost is not None, f"0253: pay choice routes to a stage node ({c.get('nodeId')})")
-        if cost is None:
-            continue
-        check(c.get("costs") == [{"trait": "coin", "value": cost}], f"0253: {c['nodeId']} costs {cost} coin")
-        check(f"({cost} coin.)" in c["text"], f"0253: {c['nodeId']} label names {cost}")
-        e = c.get("effects") or []
-        check(e == [{"targetType": "player", "trait": "parts_fitted", "op": "add", "value": 1, "clamp": True, "cap": 3}],
-              f"0253: {c['nodeId']} adds 1 to parts_fitted, clamped, cap 3")
-        ci = items(c.get("conditions"))
-        if lo == 0:
-            check(ci == [{"type": "trait", "subject": "player", "trait_key": "parts_fitted", "operator": "lt", "value": 1}],
-                  f"0253: {c['nodeId']} only at parts_fitted 0")
-        else:
-            check(has(ci, trait_key="parts_fitted", operator="gte", value=lo) and has(ci, trait_key="parts_fitted", operator="lt", value=lo + 1),
-                  f"0253: {c['nodeId']} only at parts_fitted {lo} (no stage can be skipped)")
-    for nid, media in (("strength", "scenes/fitting_strength.jpg"), ("armour", "scenes/fitting_armour.jpg"), ("blade", "scenes/fitting_blade.jpg")):
+    base = node(kf, "base")
+    ch = choices(base)
+    step = [c for c in ch if c.get("targetType") == "node"]
+    check(len(step) == 9, f"0262: nine visit choices, got {len(step)}")
+    check(any(c.get("text") == "Not now." and c.get("targetType") == "location" for c in ch), "0253: 'Not now.' always there")
+    for c in step:
+        check({"targetType": "player", "flag": "fitting_day", "op": "set"} in (c.get("flagEffects") or []),
+              f"0262: {c.get('nodeId')} sets fitting_day")
+    # Walk the whole fitting the way a player would: one day per visit, and a same-day retry after each.
+    st = {"traits": {"parts_fitted": 0, "parts_out": 0, "parts_settled": 0}, "flags": {"cain_chosen": True}, "days": {}}
+    bands = [b for b in base["blocks"] if b.get("type") == "group"]
+    check(all(base["blocks"][i].get("type") == "group" for i in range(len(bands))),
+          "0262: the base bands are ONE chain (all groups, adjacent), so the same-day band wins")
+    for nid, kind, price in VISITS:
+        offered = [c for c in step if live(items(c.get("conditions")), st)]
+        check(len(offered) == 1 and offered[0].get("nodeId") == f"kess_fitting.{nid}",
+              f"0262: on the day of {nid}, exactly that visit is offered, got {[c.get('nodeId') for c in offered]}")
+        first_band = next((b for b in bands if live(items(b["props"]["conditions"]), st)), None)
+        check(first_band is not None and not has(items(first_band["props"]["conditions"]), type="days_since_flag"),
+              f"0262: the day of {nid} paints a stage band, not the same-day band")
+        if not offered:
+            break
+        c = offered[0]
+        want_cost = [{"trait": "coin", "value": price}] if price else None
+        check(c.get("costs") == want_cost, f"0262: {nid} costs {price or 'nothing'}")
+        if price:
+            check(c.get("text") == f"Pay him. ({price} coin.)", f"0262: {nid} label names {price}")
+        check(c.get("effects") == [{"targetType": "player", "trait": COUNTER[kind], "op": "add", "value": 1, "clamp": True, "cap": 3}],
+              f"0262: {nid} adds 1 to {COUNTER[kind]}, clamped, cap 3")
+        if nid != "strength":
+            check(has(items(c.get("conditions")), type="days_since_flag", flag_key="fitting_day", operator="gte", value=1),
+                  f"0262: {nid} waits a calendar day")
+        st["traits"][COUNTER[kind]] += 1
+        st["days"]["fitting_day"] = 0
+        st["flags"]["fitting_day"] = True
+        same = [x for x in step if live(items(x.get("conditions")), st)]
+        check(same == [], f"0262: after {nid}, nothing more the same day, got {[x.get('nodeId') for x in same]}")
+        fb = next((b for b in bands if live(items(b["props"]["conditions"]), st)), None)
+        check(fb is not None and has(items(fb["props"]["conditions"]), type="days_since_flag", operator="lt"),
+              f"0262: after {nid}, the same-day band paints")
+        live_s = [x for x in s_cards if live(x["when"], st)]
+        check(len(live_s) == (1 if st["traits"]["parts_fitted"] < 3 else 0),
+              f"0262: after {nid}, exactly one card S is live, got {len(live_s)}")
+        st["days"]["fitting_day"] = 1
         n = node(kf, nid)
-        check(n is not None, f"0253: node {nid}")
+        check(n is not None, f"0262: node {nid}")
         if not n:
             continue
         cfg = (n.get("exit_block") or {}).get("config") or {}
-        check(cfg.get("locationId") == "kess_berth" and cfg.get("time_progression_minutes") == 240, f"0253: {nid} is 240 min, back to the Berth")
-        files = [d["props"].get("file") for d in walk(n, []) if d.get("type") == "image"]
-        check(files == [media], f"0253: {nid} carries exactly {media}")
-        check(n["blocks"][-1].get("type") == "cascade", f"0253: {nid}'s cascade is its last block")
+        check(cfg.get("locationId") == "kess_berth" and cfg.get("time_progression_minutes") == 240, f"0262: {nid} is 240 min, back to the Berth")
+        check(n["blocks"][-1].get("type") == "cascade", f"0262: {nid}'s cascade is its last block")
+    check(st["traits"] == {"parts_fitted": 3, "parts_out": 3, "parts_settled": 3}, f"0262: the walk ends with all three proven, got {st['traits']}")
+    for nid, media in (("strength_proof", "scenes/fitting_strength.jpg"), ("armour", "scenes/fitting_armour.jpg"), ("blade_proof", "scenes/fitting_blade.jpg")):
+        files = [d["props"].get("file") for d in walk(node(kf, nid) or {}, []) if d.get("type") == "image"]
+        check(files == [media], f"0262: {nid} carries exactly {media}")
+    all_files = [d["props"].get("file") for d in walk(kf, []) if d.get("type") == "image"]
+    check(len(all_files) == 3, f"0262: three images in the fitting, one asset one block, got {all_files}")
     arm = text_of(node(kf, "armour"))
     check("She never did that." in arm and "can't build" in arm, "0254: Kess says the pain line in the armour session")
     bl = text_of(node(kf, "blade"))
     check("It goes when you say" in bl, "0255: the blade goes when she says (no charge, LO)")
 hub = cv["hub_kess_berth"]
-fit = [c for c in choices(node(hub, "base")) if c.get("text") == "Have him fit the next part."]
-check(len(fit) == 1 and fit[0].get("nodeId") == "kess_fitting.base", "0253: the hub carries 'Have him fit the next part.' into kess_fitting")
+fit = [c for c in choices(node(hub, "base")) if c.get("text") == "Get on his bench."]
+check(len(fit) == 1 and fit[0].get("nodeId") == "kess_fitting.base", "0253: the hub carries 'Get on his bench.' into kess_fitting")
 if fit:
     ci = items(fit[0].get("conditions"))
     check(has(ci, flag_key="back_in_body", operator="is_true") and has(ci, trait_key="parts_fitted", operator="lt", value=3),
@@ -158,8 +210,9 @@ if fit:
 wr = cv["kess_the_wreck"]
 wb = node(wr, "base")["blocks"]
 img_groups = [b for b in wb if b.get("type") == "group" and any(d.get("type") == "image" for d in walk(b, []))]
-check(len(img_groups) == 1 and has(items(img_groups[0]["props"]["conditions"]), trait_key="parts_fitted", operator="lt", value=3),
-      "0255: the wreck's image (blade still in the arm) only while parts_fitted lt 3")
+check(len(img_groups) == 1 and has(items(img_groups[0]["props"]["conditions"]), trait_key="parts_out", operator="lt", value=3),
+      "0255: the wreck's image (blade still in the arm) only while parts_out lt 3 (beat_0262: until the blade's fit)")
+check("parts_fitted" not in str(wb), "0262: the wreck reads parts_out (what has come out of Vega), never parts_fitted")
 check(not [b for b in wb if b.get("type") == "image"], "0255: no ungrouped image on the wreck card")
 # Every chain is separated from the next by an ungrouped line (adjacent groups merge).
 kinds = ["g" if b.get("type") == "group" else "x" for b in wb]
@@ -333,8 +386,14 @@ def live_story(st):
 base = {k: True for k in ("cain_chosen", "back_in_body", "memory_whole", "dace_dead", "transferred", "memory_taken",
                           "rise_searched", "tower_planned", "units_fought", "last_night_held", "cradles_ready",
                           "study_blade", "study_signal", "study_method", "vega_taken", "vega_dismantled", "seam_known")}
-for name, extra in (("fitting 0", {}), ("fitting 2", {"parts_fitted": 2}), ("hunted", {"parts_fitted": 3}),
-                    ("after the first loss", {"parts_fitted": 3, "units_first_loss": True, "more_coming": True})):
+ALL3 = {"parts_fitted": 3, "parts_out": 3, "parts_settled": 3}
+for name, extra in (("fitting 0", {}), ("strength in, unsettled", {"parts_out": 1}),
+                    ("strength settled, untested", {"parts_out": 1, "parts_settled": 1}),
+                    ("fitting 2", {"parts_fitted": 2, "parts_out": 2, "parts_settled": 2}),
+                    ("blade in, unsettled", {"parts_fitted": 2, "parts_out": 3, "parts_settled": 2}),
+                    ("blade settled, untested", {"parts_fitted": 2, "parts_out": 3, "parts_settled": 3}),
+                    ("hunted", ALL3),
+                    ("after the first loss", {**ALL3, "units_first_loss": True, "more_coming": True})):
     got = live_story({**base, **extra})
     check(len(got) == 1, f"0260: exactly one story card live in '{name}', got {got}")
 
@@ -346,10 +405,11 @@ if dj:
     fe = {e["flag"]: e["op"] for e in ch.get("flagEffects", [])}
     for f_ in ("cain_chosen", "memory_whole", "back_in_body", "dace_dead"):
         check(fe.get(f_) == "set", f"0261: the jump sets {f_}")
-    for f_ in ("in_vega", "knife_tested", "cain_lay", "units_first_loss", "more_coming"):
+    for f_ in ("in_vega", "knife_tested", "cain_lay", "units_first_loss", "more_coming", "fitting_day"):
         check(fe.get(f_) == "unset", f"0261: the jump unsets {f_}")
     te = {e["trait"]: e.get("value") for e in ch.get("effects", []) if e.get("op") == "set" and e.get("targetType") == "player"}
     check(te.get("parts_fitted") == 0 and te.get("coin", 0) >= 180, "0261: parts 0 and coin for all three fittings")
+    check(te.get("parts_out") == 0 and te.get("parts_settled") == 0, "0262: the jump zeroes parts_out and parts_settled")
     check(ch.get("locationId") == "kess_berth", "0261: lands at the Berth")
 for old in ("dev_jump_transfer_start", "dev_jump_in_vega"):
     ch = choices(node(cv[old], "seed"))[0]
