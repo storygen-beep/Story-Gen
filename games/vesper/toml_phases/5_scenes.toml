@@ -25022,7 +25022,7 @@ when = [
 [[quest_cards]]
 npc_id     = "npc_kess"
 priority   = 10
-text       = "Three of Vega's parts are in you now, and what is left of her is a shell on his table. He fixes what gets broken. He has never once said he is not going to."
+text       = "Three of Vega's parts are in you now. What is left of her is a shell on his table. When Lyra and Nova hurt you, he is the one who puts you back together."
 tip        = "At his bench at the Berth from ten in the morning to ten at night."
 when = [
   { flag = "in_vega",      op = "is_false" },

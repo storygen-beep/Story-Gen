@@ -212,7 +212,7 @@ and the rest), reset on the way in and on the way out.
 | scene | kind | where | gate | sets | media |
 |---|---|---|---|---|---|
 | `hub_kess_berth` + choice **"Have him fit the next part."** | three same-label choices, one per stage, each with its own coin cost | `kess_berth`, Kess there 10:00–22:00 | `back_in_body` + `parts_fitted` = 0 / 1 / 2 | routes into `kess_fitting` | — |
-| `kess_fitting` | substitution-only canvas (the `kess_patch_up` shape), three bands on the pre-increment `parts_fitted` | `kess_berth` | reached only from the hub | `parts_fitted` +1; 240 min. Band 1 strength (she lifts what two men could not); band 2 armour (she flinches under his tools; Vega never did; **Kess's line: the company can build all of this and cannot build the part of her that hurts**); band 3 the blade (it comes out when she wants it) | `scenes/fitting_strength.jpg`, `scenes/fitting_armour.jpg`, `scenes/fitting_blade.jpg` |
+| `kess_fitting` | substitution-only canvas (the `kess_patch_up` shape), three bands on the pre-increment `parts_fitted` | `kess_berth` | reached only from the hub | `parts_fitted` +1; 240 min. Band 1 strength (she lifts what two men could not); band 2 armour (she flinches under his tools; Vega never did; **Kess's line: the company can build all of this and cannot build the part of her that hurts**); band 3 the blade (it comes out when she wants it) | none (LO 2026-10-27: the three fitting images were cut) |
 | `cap_the_knife` | auto-fire one-shot, pri 11 | `the_site` | `parts_fitted` gte 2 + Cain present | `knife_tested`; Cain tries his knife on her skin the way he tried it on Vega's shell, it barely marks her, and she flinches | `scenes/the_knife.jpg` |
 
 ### Part two — CAIN'S NIGHTS
@@ -314,8 +314,8 @@ Each beat: merge, validate, package `--dev`, its guard section, and `gates.py` (
 present; explicit beats on the body).
 
 ### Media (the harvest is LO's)
-- **7 images:** `scenes/fitting_strength`, `fitting_armour`, `fitting_blade`, `the_knife`, `lyra_and_nova_strip`,
-  `units_strip`, `more_coming` (all `.jpg`).
+- **4 images:** `scenes/the_knife`, `lyra_and_nova_strip`, `units_strip`, `more_coming` (all `.jpg`). The
+  three fitting images were cut on 2026-10-27 (LO).
 - **Cain's loop, repeatable, so pools** (one asset, one block; four clips each): `sex/cain_loop_kiss_t4`,
   `cain_loop_his_mouth_t5`, `cain_loop_her_mouth_t5`, `cain_loop_under_him_t5`, `cain_loop_on_top_t5`,
   `cain_loop_inside_t5`, `cain_loop_mouth_finish_t5`, `cain_loop_again_t5`; and one file for the one-time ask,
@@ -381,8 +381,8 @@ same way. It can be tightened (the stepping entries only before midnight, plus a
 is LO's call.
 
 ## Media — the harvest is LO's
-- **7 images:** `scenes/fitting_strength`, `fitting_armour`, `fitting_blade`, `the_knife`, `lyra_and_nova_strip`,
-  `units_strip`, `more_coming` (all `.jpg`).
+- **4 images:** `scenes/the_knife`, `lyra_and_nova_strip`, `units_strip`, `more_coming` (all `.jpg`). The
+  three fitting images were cut on 2026-10-27 (LO).
 - **8 pools of 4 clips** for Cain's loop: `sex/cain_loop_kiss_t4`, `cain_loop_his_mouth_t5`,
   `cain_loop_her_mouth_t5`, `cain_loop_under_him_t5`, `cain_loop_on_top_t5`, `cain_loop_again_t5`,
   `cain_loop_mouth_finish_t5`, `cain_loop_inside_t5`.
@@ -427,3 +427,7 @@ fitting is nine visits and at least nine days.
   reads true on the settle and proof visits too.
 - Quest card S is now nine exclusive cards, one per visit, on the same three counters, so its tip always names the
   next visit (the part, fit / settle / test, and the price on a fit).
+- Kess's after-fitting quest card (parts_fitted gte 3) now reads in plainer words: "Three of Vega's parts are in you
+  now. What is left of her is a shell on his table. When Lyra and Nova hurt you, he is the one who puts you back
+  together." LO asked what the old card meant; the new line says it. True on render: Lyra and Nova are named to the
+  player in 0.2.4, and Kess's repair (`kess_patch_up`, vega_damage -25) stays open after the fitting.
