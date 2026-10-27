@@ -25561,7 +25561,7 @@ effects = [
 # ⚠️ THE OVERLAY IS SEPARATED FROM THE BAND CHAIN BY AN UNGROUPED LINE (adjacent groups merge into one chain).
 # ⚠️ NO npc / requires_npc. Random fires roll only on a real entry, never on a Back re-render. 35% once a day, before
 # and after the end card (LO: "Yes, same as before").
-# MEDIA: two slots, scenes/lyra_and_nova_strip.jpg (the first fight) and scenes/units_strip.jpg (every later one).
+# MEDIA: none (LO 2026-10-27: lyra_and_nova_strip.jpg and units_strip.jpg cut, no image needed).
 [[canvases]]
 id          = "rand_units_street"
 name        = "Lyra and Nova"
@@ -25592,7 +25592,6 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "units_first_loss", operator = "is_false" },
     ] } }, blocks = [
-    { type = "image", props = { file = "scenes/lyra_and_nova_strip.jpg", description = "Two identical tall calm women in dark close-fitting gear attacking one young woman at once on a narrow neon-lit underground market street, the young woman blocking with a long thin blade out of her forearm, stalls overturned. Must show: two against one, the arm blade. Avoid: gore.", search_queries = ["two women fighting one woman neon street", "woman with arm blade fights two attackers alley"] } },
     { type = "paragraph", content = "They come at her together. She wants the blade out and it's out, and the first one's hand bounces off her armour, and she throws the second into a stall with Vega's strength. For a whole minute she is winning." },
     { type = "paragraph", content = "Then they stop coming one at a time. A knee in her side, a fist in her face, a heel on her blade arm, all at once from both sides. The armour holds. She feels every single hit. They feel nothing." },
     { type = "thought_bubble", props = { speaker = "player" }, content = "Vega would have kept going until she broke. I can't. It hurts too much. It's the one thing they can't do to themselves." },
@@ -25601,7 +25600,6 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "units_first_loss", operator = "is_true" },
     ] } }, blocks = [
-    { type = "image", props = { file = "scenes/units_strip.jpg", description = "A young woman in a crouch on wet stones in a dim underground street, bleeding from the lip, a thin blade out of her forearm, two tall calm identical women closing on her from either side. Must show: two against one, closing in. Avoid: gore.", search_queries = ["two women closing in on one woman street night", "woman cornered by two fighters wet street blade"] } },
     { type = "paragraph", content = "She knows the shape of it now and it doesn't help. Blade out, armour up, the strength in her back and legs. She holds them longer every time. Two minutes. Three." },
     { type = "paragraph", content = "Then both of them at once, and she goes down hard, and it hurts like it always hurts. They stand over her and wait." },
   ] },
