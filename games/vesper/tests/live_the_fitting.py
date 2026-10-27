@@ -2,8 +2,8 @@
 """
 0.2.5 — THE FITTING — the whole chapter, live, end to end.
 
-dev_jump_fitting_start (the end of 0.2.4) -> the strip is safe before the parts -> Kess fits strength, then
-armour (the pain line) -> Cain's knife at the Site -> the blade -> Cain's loop over four nights (one new thing a
+dev_jump_fitting_start (the end of 0.2.4) -> the strip is safe before the parts -> Kess fits, settles and tests
+strength, then armour (the pain line; three visits a part, one a day) -> Cain's knife at the Site -> the blade -> Cain's loop over four nights (one new thing a
 night: his mouth / her mouth / under him, then on top, then "Again.", then the ask) -> card T -> Lyra and Nova on
 the strip by a real entry -> the first loss carries her to the Site -> the ending -> end card U -> a later loss is
 the lost day home to the cot -> Kess's repair says "they".
@@ -100,21 +100,27 @@ def main():
             pg.evaluate("Math.random = window.__rnd")
             return psg()
 
-        def fit(price, exit_text):
+        def visit(label, exit_text, price=None):
+            """One visit to Kess's bench. Checks exactly one visit is on offer, the price, and the four hours; then that
+            the same day sends her away with only 'Not now.' left."""
             at(12)
             play("Canvas_hub_kess_berth_Node_base")
-            ok("Have him fit the next part." in labels(), f"Kess's card offers the fitting (before the {price})")
-            click("Have him fit the next part.")
-            pays = [l for l in labels() if l.startswith("Pay him.")]
-            ok(pays == [f"Pay him. ({price} coin.)"], f"exactly one price on the bench: {price} (got {pays})")
+            ok("Get on his bench." in labels(), f"Kess's card offers the bench (before '{label}')")
+            click("Get on his bench.")
+            offered = [l for l in labels() if l != "Not now."]
+            ok(offered == [label], f"exactly one visit on the bench: '{label}' (got {offered})")
             c0, m0 = tr("coin"), mins()
-            click(f"Pay him. ({price} coin.)")
-            ok(walk(exit_text), f"the {price} session walks to '{exit_text}'")
+            click(label)
+            ok(walk(exit_text), f"'{label}' walks to '{exit_text}'")
             t = text()
             click(exit_text)
-            ok(tr("coin") == c0 - price, f"{price} coin paid ({c0} -> {tr('coin')})")
+            ok(tr("coin") == c0 - (price or 0), f"'{label}' costs {price or 0} coin ({c0} -> {tr('coin')})")
             # 240 on the exit, plus the engine's minute per cascade click.
-            ok(240 <= mins() - m0 <= 250, f"the session takes four hours ({mins() - m0} min)")
+            ok(240 <= mins() - m0 <= 250, f"the visit takes four hours ({mins() - m0} min)")
+            if tr("parts_fitted") < 3:
+                play("Canvas_hub_kess_berth_Node_base")
+                click("Get on his bench.")
+                ok(labels() == ["Not now."] and "Not today." in text(), f"same day after '{label}': Kess sends her away ({labels()})")
             return t
 
         pg.goto(URL)
@@ -134,14 +140,28 @@ def main():
         at(14)
         ok(strip_entry() != "Canvas_rand_units_street_Node_base", "no hunt on the strip before the three parts")
 
-        # ── strength, armour
-        t = fit(40, "Put it down.")
-        ok("It's not even heavy." in t, "strength: she lifts the pump housing")
-        ok(tr("parts_fitted") == 1, "parts_fitted 1")
+        # ── strength, armour: three visits each, one a day (LO 2026-10-27)
+        t = visit("Pay him. (40 coin.)", "Get dressed.", 40)
+        ok("Tomorrow it fights you." in t and tr("parts_fitted") == 0 and tr("parts_out") == 1, "strength fit: in, not working yet")
+        qt = play("QuestsPage")
+        ok("settle it" in qt, "card S names the settle next")
         t = play("Canvas_kess_the_wreck_Node_base")
-        ok("Her back is open and empty" in t and "the blade folded inside it" not in t, "the wreck shows the back gone")
-        t = fit(60, "Sit up.")
-        ok("She never did that." in t and "can't build is the bit of you that just flinched" in t, "armour: Kess sees the pain and says it")
+        ok("Her back is open and empty" in t and "the blade folded inside it" not in t, "the wreck shows the back gone from the fit on")
+        next_day(12)
+        t = visit("Let him settle it.", "Stand up straight.")
+        ok("That's better." in t and tr("parts_settled") == 1, "strength settled")
+        next_day(12)
+        t = visit("Lift it.", "Put it down.")
+        ok("It's not even heavy." in t, "strength proof: she lifts the pump housing")
+        ok(tr("parts_fitted") == 1, "parts_fitted 1")
+        next_day(12)
+        t = visit("Pay him. (60 coin.)", "Sit up.", 60)
+        ok("She never did that." in t and "can't build is the bit of you that just flinched" in t, "armour fit: Kess sees the pain and says it")
+        next_day(12)
+        visit("Let him file the edges.", "Put the shirt back on.")
+        next_day(12)
+        t = visit("Stand still for it.", "Take the bar off him.")
+        ok("It rings." in t, "armour proof: the bar rings off her")
         ok(tr("parts_fitted") == 2, "parts_fitted 2")
 
         # ── the knife, at the Site, the first night Cain is there
@@ -158,12 +178,18 @@ def main():
 
         # ── the blade
         next_day(12)
-        t = fit(80, "Get up.")
-        ok("It's actually mine." in t, "the blade: it's hers")
+        t = visit("Pay him. (80 coin.)", "Get up.", 80)
+        ok("It won't come." in t and tr("parts_fitted") == 2, "blade fit: in, and it will not come out yet")
+        next_day(12)
+        t = visit("Let him fix the arm.", "Hold your arm.")
+        ok("wedged" in t, "blade settle: it jams halfway")
+        next_day(12)
+        t = visit("Cut the chain.", "Get up.")
+        ok("It's actually mine." in t and "The cut is bright" in t, "blade proof: out at will, the chain cut")
         ok(tr("parts_fitted") == 3, "parts_fitted 3")
         play("Canvas_hub_kess_berth_Node_base")
         hub_labels = labels()
-        ok("Have him fit the next part." not in hub_labels, "nothing left to fit: the choice is gone")
+        ok("Get on his bench." not in hub_labels, "nothing left to fit: the choice is gone")
         ok(len(hub_labels) <= 8, f"Kess's card shows at most 8 things at once in play ({len(hub_labels)}: {hub_labels})")
         t = play("Canvas_kess_the_wreck_Node_base")
         ok("A shell now." in t and "I keep her for the spares." in t, "the wreck is a shell; Kess keeps it for spares")

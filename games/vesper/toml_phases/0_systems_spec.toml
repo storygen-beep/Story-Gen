@@ -787,6 +787,12 @@ key    = "parts_fitted"
 label  = "Parts fitted"
 hidden = true
 [[traits.labels]]
+key    = "parts_out"
+hidden = true
+[[traits.labels]]
+key    = "parts_settled"
+hidden = true
+[[traits.labels]]
 key    = "cain_nights"
 hidden = true
 [[traits.labels]]

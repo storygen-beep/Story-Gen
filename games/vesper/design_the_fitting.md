@@ -394,3 +394,36 @@ is LO's call.
 2. The media harvest above.
 3. The release: version bump, new codes, guide Act 13, the build without `--dev` and `--debug`, the snapshot,
    uploads and posts.
+
+## CHANGED 2026-10-27 — three visits per part
+LO, 2026-10-27: "one thing all there parts does fit in very fast. For each part should we add some grind like 3
+times for each part." Then: "I want three visits per part."
+
+The pitch he took: each part goes in over three visits to Kess, one fitting visit per calendar day, so the whole
+fitting is nine visits and at least nine days.
+
+| Visit | What happens | Costs | State after |
+|---|---|---|---|
+| **Fit** | She pays, Kess puts the part in. It is in, and it does not work yet. | 40 / 60 / 80 coin | `parts_out` +1 |
+| **Settle** | The next day her body pushes back. It hurts and will not answer her; he adjusts it. Her pain lives here. | free | `parts_settled` +1 |
+| **Proof** | The day after, he tests it and it works. The part counts as done. | free | `parts_fitted` +1 |
+
+- Strength: settle, her back locks and he re-seats a cable; proof, she lifts the pump housing.
+- Armour: settle, the sheets burn under her skin and he shaves an edge; proof, he hits her full force with a bar
+  and it rings off her. Kess's pain line ("She never did that.") stays on the armour fit.
+- Blade: settle, it jams half out and he re-wires it; proof, out and back at will, a clean cut.
+- **`parts_fitted` now counts parts PROVEN**, so card T, the hunt, Cain's "Show me." and the knife test (gte 2)
+  all wait for the proof. The knife test now comes after the armour has been proven.
+- **New keys:** two more odometers, `parts_out` (+1 on each fit; the wreck reads it) and `parts_settled` (+1 on
+  each settle), and the flag `fitting_day`, set on every fitting visit. The three counters together fix the exact
+  visit with AND-only gates (fit n: out n + settled n; settle n: out n+1 + settled n; proof n: settled n+1 +
+  fitted n). Every visit after the very first gates on `days_since_flag fitting_day gte 1`. On the same day Kess
+  sends her away and only "Not now." shows.
+- The three images move with their payoff beats onto the proof nodes. The settle nodes carry no media.
+- **Dev-only gap:** a portal save already part-way through the old fitting (`parts_fitted` 1 or 2, `fitting_day`
+  never set) finds the day-gated visits closed, because `days_since_flag` fails closed on an unset flag. 0.2.5 is
+  unreleased; the "0.2.5: start" dev jump resets it.
+- Kess's card choice into the fitting is renamed **"Get on his bench."** (was "Have him fit the next part."), so it
+  reads true on the settle and proof visits too.
+- Quest card S is now nine exclusive cards, one per visit, on the same three counters, so its tip always names the
+  next visit (the part, fit / settle / test, and the price on a fit).
