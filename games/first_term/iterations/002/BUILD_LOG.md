@@ -840,3 +840,34 @@ sheets' own, and none is a tease, touch or paid look.
     canvas reads as a paid act open from turn one, and (c) asks two voices of every such node. The
     same note the file already makes about anatomy ("THE RUNG IS AN ACT, NOT A BODY PART") applies to
     garments. Found in the writer fix pass, 2026-10-10.
+
+## 2026-10-29 · step 5: the Good Girl moments (DECISIONS 79–81)
+
+- **Scripts:**
+  - `pools.py`: the park's `run` stops before he looks up, and a new `linger` screen pays corruption +1, cap 19 (`CAP_GG`).
+  - `college.py`: the new `library_back_stacks`.
+  - `home.py`: the new `ryan_door_ajar` and `master_door_saturday_night`. Both are reached only by a door, are once a day, and carry the door's window as their trigger conditions. `master_asleep`'s "asleep" lines now skip Sun 00:00–01:00.
+  - `world_data.py`: Ryan's door gets "His door's open a crack." for Sun–Thu 22:00–00:00. Their door gets "The door's ajar." for Sun 00:00–01:00, and "Ease the door open" is split around that hour. Each brake is two options with one text, "never seen" or "seen 20/24+ hours ago", because `hours_since_flag` fails closed on an unset flag and conditions don't nest.
+  - `mark.py` and `laura.py`: the bedroom "asleep" lines skip Sun 00:00–01:00.
+  - `extras.py`: the 4 goal-card labels (DECISIONS 81).
+  - `people_data.py`: Mark's activity list.
+- **Ledger** `v2_state.json`: Mark's Sun 00:00–02:00 row is split, so 00:00–01:00 is "awake, with Laura" (DECISIONS 80). Corruption's `fed_at` gains park, library, `home_ryan_room` and `home_master_bedroom`.
+- **Built** with `--dev --debug`.
+- **Gates:** 60/89 before, 61/89 after.
+  - "every stage has a way up" is green: Good Girl has 4 sober acts, about 4 points a day, about 5 days.
+  - No other verdict changed.
+  - `--ship` is unchanged: NO, 8 BLOCK. Missing media went from 82 to 88; those are the 6 new clip slots, and no harvest was run.
+- **Live playtest** (headless Chromium, `output/index.html`): 22/22, no page errors. It covered each button showing at its hour, each look paying 0 and each stay +1, the cap at 19, the once-a-night and once-a-week brakes, Friday showing no crack, Sun 00:30 showing "ajar" and Sun 01:30 showing "ease", and `master_asleep` showing no "asleep" line at Sun 00:30.
+- **Snapshot:** `first_term_snapshots/20261029_step5_before/`.
+- **The reader** (`v2-reader`, the 4 canvases) found 11 FAILs. Fixed here:
+  - Laura's ledger row Sun 00:00–07:00 is split, so 00:00–01:00 reads "awake, with Mark"; it said "asleep" while the scene shows her awake.
+  - `ryan_door_ajar` and its door need `ryan_step gte 0`, so it doesn't play after his path closes cold (step −1). Checked live.
+  - The library scene opens until 19:45, so its exits land before the 20:00 close.
+  - DECISIONS 79 now says the park stranger does see her.
+- **Left for LO (design calls):**
+  - The hooks: the park, library and their door end with nothing pointing forward. Nothing in 0.1 reads the seen flags.
+  - Her Good Girl voice ("You should look away. You don't.") plays the same at every stage, because there's no stage gate.
+  - Mark's want for Laura is shown nowhere before the scene.
+  - The door says "Nobody comes" at Sun 00:00–01:00 when they're inside but the scene was seen within 24 hours, or Laura is on the stairs.
+  - The park's exits can land after 22:00. That is older than this step, apart from `linger`.
+- **After the fixes:** gates 61/89, ship unchanged, playtest 23/23.

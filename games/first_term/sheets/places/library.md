@@ -28,6 +28,9 @@
 |---|---|---|---|---|---|
 | study | work | college | energy add −10 · `intelligence` add +1 | twice a day, on the trigger | yes, short |
 | Nadia sits down | person | college · Hale's ladder | one line about Hale | once a day, her window | yes |
+| find a book in the back stacks | sex scene | the way up (DECISIONS 79) | `library_back_stacks`: the couple pays nothing · "Stay behind the shelf." corruption add +1, cap 19 | once a day | yes: explicit |
+
+> Changed 2026-10-29 (the back-stacks row, LO's pick of 2026-10-29); waits for LO's re-sign.
 
 ## Rows a gate needs
 

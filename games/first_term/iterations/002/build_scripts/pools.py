@@ -8,7 +8,7 @@ from tomlw import tod, wd
 Z, J, C = "npc_zoe", "npc_jake", "npc_cocky_guy"
 R, L, M = "npc_ryan", "npc_laura", "npc_mark"
 out = []
-CAP_CUR, CAP_BOLD = 39, 59
+CAP_GG, CAP_CUR, CAP_BOLD = 19, 39, 59   # CAP_GG: a Good Girl act stops paying at 19 (DECISIONS 78)
 CURIOUS, BOLD = trait("corruption", "gte", 20), trait("corruption", "gte", 40)
 NO_CURFEW = cond(NO_CURFEW_ITEM)
 AT_PARTY = {"type": "hours_since_flag", "subject": "player", "flag_key": "party_went", "operator": "lt", "value": 8}
@@ -199,7 +199,9 @@ out.append({
             G(cond({"type": "clothing_slot", "slot": "top", "operator": "equipped"}), P("The likes start before you're off the path.")),
         ], [go("Put the phone away.", loc="park", mins=5)])]})
 
-RUN_SEEN = ("A sound comes from behind the bushes, low and wet and steady. You step off the path to look, straight into them. A man and a woman, both naked from the waist down, and they don't see you. She is bent over a fallen log, palms flat on the bark. He holds her hips from behind. His cock slides out of her, slick, then drives back in. Her tits swing under her with every thrust. His hand comes down on her ass and stays there, squeezing hard. She moans, loud, mouth open. You stare a second too long, and your face goes hot. Then he looks up, straight at you, still buried in her. You run, heart slamming, legs shaking, her moan still going behind you.")
+# Step 4 (DECISIONS 79): `run` stops before he looks up; her choice to stay is `linger`, which pays.
+RUN_SEEN = ("A sound comes from behind the bushes, low and wet and steady. You step off the path to look, straight into them. A man and a woman, both naked from the waist down, and they don't see you. She is bent over a fallen log, palms flat on the bark. He holds her hips from behind. His cock slides out of her, slick, then drives back in. Her tits swing under her with every thrust. His hand comes down on her ass and stays there, squeezing hard. You stare a second too long, and your face goes hot. She moans, loud, mouth open, his cock still driving into her.")
+LINGER = ("You stay. You make yourself look. The man is naked from the waist down, and his cock is thick and shining wet. He pulls almost all the way out of her, then drives back in. The woman is bent over the log with her tits swinging under her. She moans every time he hits bottom. His hands grip her ass hard enough to leave marks. Your nipples go tight and ache. Heat pours down your belly, and you are wet, so wet it shocks you. Then the man looks up. He stares straight at you, still buried deep inside her. You run. Your legs shake under you. Your heart slams against your ribs. Your thighs slide together, slick, with every step.")
 WATCH = ("You crouch behind the rhododendron and part the leaves. A man has a woman bent against a tree, her palms flat on the bark. His cock slides out of her, slick and shining, then thrusts back in to the root. Every thrust makes a wet slap you can hear from here. He fills his hands with her tits and pinches her nipples hard. She moans loud, bites her lip, but can't hold the next one in. Her face is red, eyes shut, mouth hanging open. You stare at his cock. Your nipples go tight, and heat floods between your thighs. You press your hand flat on your stomach and keep it there. He drags her ass back onto his cock, faster, until her moans break into short, wet gasps.")
 TOUCH = ("Behind the rhododendron, you can see everything. The man has the woman pinned to the tree, a hand full of each of her tits. His cock drives into her, hard and steady, and she moans on every stroke. Your hand slides down your belly and inside. Your fingers find your clit, and you are already wet. You match him. Each time he thrusts, you rub, fast and tight. Her nipples stand stiff between his fingers while her ass slaps the bark. You bite your lip so no sound gets out. Neither of them looks toward the bush. He groans and buries his cock deep, and you come with him. Your knees buckle, and your free hand grips a branch while your fingers keep working your clit through it.")
 out.append({
@@ -216,9 +218,12 @@ out.append({
             go("Stay and watch.", node="watch", mins=5, cond_=cond(CURIOUS)),
             go("Walk the other way.", node="away", mins=2),
         ]),
-        node("run", "Run", [P(RUN_SEEN),
+        node("run", "Run", [P(RUN_SEEN)],
+            [go("Look a second longer.", node="linger", mins=3, flags=[fset("saw_the_couple")]),
+             go("Run.", loc="park", mins=15, flags=[fset("saw_the_couple")])]),
+        node("linger", "A second longer", [P(LINGER),
             VID("a couple having sex against a log in the bushes of a park, the man looks up", "couple fucking in park bushes caught", "outdoor sex in park man looks up", pool_dir="sex/park_couple_run_t5")],
-            [go("Keep walking.", loc="park", mins=15, flags=[fset("saw_the_couple")])]),
+            [go("Keep walking.", loc="park", mins=15, eff=[capped("corruption", 1, CAP_GG)], flags=[fset("saw_the_couple")])]),
         node("watch", "Watch", [P("Behind you on the path a jogger thuds past. You hold your breath until he's gone."), P(WATCH),
             VID("seen through leaves, a man fucking a woman bent against a tree in a park", "voyeur watching couple fuck in park", "hidden in bushes watching outdoor sex", pool_dir="sex/park_couple_watch_t5")],
             [go("Leave before they see.", loc="park", mins=10, eff=[capped("corruption", 1, CAP_CUR)], flags=[fset("saw_the_couple")]),

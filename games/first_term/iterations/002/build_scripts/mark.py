@@ -550,8 +550,12 @@ out.append(mark_hub("hub_mark_living_room", LR, "Mark, up late", "the living roo
       [P("He lets you pick. He falls asleep in the second half, and you watch the end with his snoring for a soundtrack.")],
       [energy(5), want(M)], 120), {}),
 ]))
+# Sun 00:00-01:00 Mark and Laura are awake (DECISIONS 80): the "asleep" line skips that hour, written
+# once per piece of the night because conditions do not nest.
+ASLEEP_HOURS = [(wd(0, 1, 2, 3, 4, 5), tod("22:00", "07:00")), (wd(6), tod("22:00", "00:00")), (wd(6), tod("01:00", "07:00"))]
 out.append(mark_hub("hub_mark_bedroom", "home_master_bedroom", "Mark, asleep", "their bed, at night", [
-    P("Mark is asleep on his back on his side of the bed, snoring, one arm flung out. Even asleep he takes up most of it."),
+    *[G(cond(*hrs), P("Mark is asleep on his back on his side of the bed, snoring, one arm flung out. Even asleep he takes up most of it."))
+      for hrs in ASLEEP_HOURS],
 ], awake=False, leave="Back out."))
 G_ = "home_garage"
 out.append(mark_hub("hub_mark_garage", G_, "Mark, in the garage", "the garage", [

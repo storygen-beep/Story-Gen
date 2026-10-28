@@ -4801,7 +4801,19 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "22:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. She doesn't stir." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4, 5] }, { type = "time_of_day", start_time = "22:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. She doesn't stir." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "22:00", end_time = "00:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. She doesn't stir." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "01:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. She doesn't stir." }] },
 ]
 
 [canvases.nodes.exit_block]
@@ -7358,8 +7370,22 @@ id   = "hub"
 name = "Mark, asleep"
 
 [[canvases.nodes.blocks]]
-type = "paragraph"
-content = "Mark is asleep on his back on his side of the bed, snoring, one arm flung out. Even asleep he takes up most of it."
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4, 5] }, { type = "time_of_day", start_time = "22:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Mark is asleep on his back on his side of the bed, snoring, one arm flung out. Even asleep he takes up most of it." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "22:00", end_time = "00:00" }] }, blocks = [{ type = "paragraph", content = "Mark is asleep on his back on his side of the bed, snoring, one arm flung out. Even asleep he takes up most of it." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "01:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Mark is asleep on his back on his side of the bed, snoring, one arm flung out. Even asleep he takes up most of it." }] },
+]
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -17079,6 +17105,76 @@ type = "choices"
 text = "Done."
 targetType = "location"
 locationId = "lecture_hall"
+
+[[canvases]]
+id   = "library_back_stacks"
+name = "Find a book in the back stacks"
+description = "Two seniors (22) in the back stacks: the look pays nothing; staying behind the shelf pays corruption +1, cap 19 (DECISIONS 78-79). Once a day."
+
+[canvases.trigger]
+location = "library"
+is_repeatable = true
+priority = 4
+is_active = true
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4]
+start_time = "08:00"
+end_time = "19:45"
+
+[[canvases.nodes]]
+id   = "stacks"
+name = "The back stacks"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The back aisles are dead quiet. You run a finger along the spines, hunting a call number. Then you hear it. A soft knock of books on wood, steady, over and over. A muffled sound under it. You turn the corner. Two seniors fill the dead end of the stacks. She is up on the edge of a low shelf, skirt shoved to her waist, legs locked round him. Her top is pushed up and her tits bounce with every thrust. His jeans hang open. You see his cock slide out of her, wet, and drive back in. His hand is clamped over her mouth. She moans into his palm anyway. Your face goes hot. You stop dead at the end of the aisle. Her nipples are hard. He thrusts again, and the books knock."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a couple having sex against a bookshelf at the end of a library aisle, his hand over her mouth", search_queries = ["couple fucking in library stacks", "quiet library sex against bookshelf"], pool_dir = "sex/library_stacks_seen_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Stay behind the shelf."
+targetType = "node"
+nodeId = "stay"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "saw_the_library_couple", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Take the book and go."
+targetType = "location"
+locationId = "library"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "saw_the_library_couple", op = "set" }]
+
+[[canvases.nodes]]
+id   = "stay"
+name = "Behind the shelf"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You step back behind the next shelf. Three books are missing at eye height. His cock slides out of her, wet and shining, then thrusts back in. Her tits bounce with every push. Her nipples are dark and hard. His hand stays clamped over her mouth. She moans into his palm anyway. Her heels dig into his ass and pull him deeper. That is a real cock, inside a real woman, four feet from you. You should look away. You don't. Your own nipples go tight. You are wet, and you press your thighs together hard. Your hands stay flat on the shelf. She shudders and comes against his palm, hips jerking. Two aisles over, a book trolley squeaks. You slip away with your book, nipples still tight, thighs clenched."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "seen through a gap in library books, a couple having sex against the shelves", search_queries = ["voyeur watching couple in library", "peeking through bookshelf at couple sex"], pool_dir = "sex/library_stacks_stay_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to your desk."
+targetType = "location"
+locationId = "library"
+time_progression_minutes = 10
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }]
+flagEffects = [{ targetType = "player", flag = "saw_the_library_couple", op = "set" }]
 # ── the pool and system scenes: parties, the park, touching herself, the stairs ──
 
 [[canvases]]
@@ -18049,7 +18145,32 @@ name = "Run"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "A sound comes from behind the bushes, low and wet and steady. You step off the path to look, straight into them. A man and a woman, both naked from the waist down, and they don't see you. She is bent over a fallen log, palms flat on the bark. He holds her hips from behind. His cock slides out of her, slick, then drives back in. Her tits swing under her with every thrust. His hand comes down on her ass and stays there, squeezing hard. She moans, loud, mouth open. You stare a second too long, and your face goes hot. Then he looks up, straight at you, still buried in her. You run, heart slamming, legs shaking, her moan still going behind you."
+content = "A sound comes from behind the bushes, low and wet and steady. You step off the path to look, straight into them. A man and a woman, both naked from the waist down, and they don't see you. She is bent over a fallen log, palms flat on the bark. He holds her hips from behind. His cock slides out of her, slick, then drives back in. Her tits swing under her with every thrust. His hand comes down on her ass and stays there, squeezing hard. You stare a second too long, and your face goes hot. She moans, loud, mouth open, his cock still driving into her."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Look a second longer."
+targetType = "node"
+nodeId = "linger"
+time_progression_minutes = 3
+flagEffects = [{ targetType = "player", flag = "saw_the_couple", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Run."
+targetType = "location"
+locationId = "park"
+time_progression_minutes = 15
+flagEffects = [{ targetType = "player", flag = "saw_the_couple", op = "set" }]
+
+[[canvases.nodes]]
+id   = "linger"
+name = "A second longer"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You stay. You make yourself look. The man is naked from the waist down, and his cock is thick and shining wet. He pulls almost all the way out of her, then drives back in. The woman is bent over the log with her tits swinging under her. She moans every time he hits bottom. His hands grip her ass hard enough to leave marks. Your nipples go tight and ache. Heat pours down your belly, and you are wet, so wet it shocks you. Then the man looks up. He stares straight at you, still buried deep inside her. You run. Your legs shake under you. Your heart slams against your ribs. Your thighs slide together, slick, with every step."
 
 [[canvases.nodes.blocks]]
 type = "video"
@@ -18063,6 +18184,7 @@ text = "Keep walking."
 targetType = "location"
 locationId = "park"
 time_progression_minutes = 15
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "saw_the_couple", op = "set" }]
 
 [[canvases.nodes]]
@@ -18711,7 +18833,7 @@ when = [
   { type = "trait", subject = "player", trait = "corruption", op = "lt", value = 20 },
 ]
 goals = [
-  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 20, label = "Reach Curious (Corruption 20): parties, the café, the park, touching yourself" },
+  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 20, label = "Reach Curious (Corruption 20): stay and look: the park couple, the library stacks, Ryan's door at night, their door on Saturday night" },
 ]
 
 [[quest_cards]]
@@ -18724,7 +18846,7 @@ when = [
   { type = "trait", subject = "player", trait = "corruption", op = "lt", value = 40 },
 ]
 goals = [
-  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Reach Bold (Corruption 40): Gary's booth, Zoe's hot tub, his hand under the desk" },
+  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Reach Bold (Corruption 40): your room, the bathroom, the women's toilet, the park" },
 ]
 
 [[quest_cards]]
@@ -18750,7 +18872,7 @@ when = [
   { type = "trait", subject = "player", trait = "exhibitionism", op = "lt", value = 20 },
 ]
 goals = [
-  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Reach Daring (Exhibitionism 20): selfies, the couch, the café uniform" },
+  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Reach Daring (Exhibitionism 20): the lecture hall, the park" },
 ]
 
 [[quest_cards]]
@@ -18763,7 +18885,7 @@ when = [
   { type = "trait", subject = "player", trait = "exhibitionism", op = "lt", value = 40 },
 ]
 goals = [
-  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Reach Showing (Exhibitionism 40): dares, the park run, the tables at home" },
+  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Reach Showing (Exhibitionism 40): the campus gym, the women's toilet, the garden, the hall, the living room, the lecture hall, the park" },
 ]
 
 [[quest_cards]]
@@ -19841,19 +19963,55 @@ content = "You ease the handle down and open the door a hand's width. The room i
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "time_of_day", start_time = "22:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. Mark's on his back beside her, snoring." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4, 5] }, { type = "time_of_day", start_time = "22:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. Mark's on his back beside her, snoring." }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "time_of_day", start_time = "22:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, one bare shoulder out of the covers. Mark's half of the bed is empty." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "22:00", end_time = "00:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. Mark's on his back beside her, snoring." }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_absent" }, { type = "time_of_day", start_time = "22:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Mark's asleep on his back, one arm flung across the bed. Laura's half is empty, the covers thrown back." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "01:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. Mark's on his back beside her, snoring." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4, 5] }, { type = "time_of_day", start_time = "22:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, one bare shoulder out of the covers. Mark's half of the bed is empty." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "22:00", end_time = "00:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, one bare shoulder out of the covers. Mark's half of the bed is empty." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "01:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, one bare shoulder out of the covers. Mark's half of the bed is empty." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_absent" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4, 5] }, { type = "time_of_day", start_time = "22:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Mark's asleep on his back, one arm flung across the bed. Laura's half is empty, the covers thrown back." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_absent" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "22:00", end_time = "00:00" }] }, blocks = [{ type = "paragraph", content = "Mark's asleep on his back, one arm flung across the bed. Laura's half is empty, the covers thrown back." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_absent" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "01:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Mark's asleep on his back, one arm flung across the bed. Laura's half is empty, the covers thrown back." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -19891,6 +20049,138 @@ type = "choices"
 text = "Back."
 targetType = "location"
 locationId = "home_hall"
+
+[[canvases]]
+id   = "ryan_door_ajar"
+name = "His door's open a crack"
+description = "Sun-Thu 22:00-00:00, Ryan in: his door open a crack, Ryan alone with her panties. Keep watching pays corruption +1, cap 19 (DECISIONS 79). Reached only by the door; once a night."
+
+[canvases.trigger]
+location = "home_ryan_room"
+is_repeatable = true
+priority = 1
+is_active = true
+substitution_only = true
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3] }, { type = "time_of_day", start_time = "22:00", end_time = "00:00" }, { type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 0 }] }
+
+[[canvases.nodes]]
+id   = "crack"
+name = "The crack in his door"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Ryan's door is open a crack, and his light is on. You mean to walk past, but you look in. Ryan is on his bed with his shorts shoved down. His cock is hard in his fist, and he is stroking it slowly. His other hand presses something to his face. It is a pair of panties from the laundry basket. They are yours. You know them. He breathes them in, and his hips lift off the bed. He has not seen you. Your face burns, but your body answers before you can stop it. Your nipples go tight and hard. Heat drops low in your belly, and you are wet. His fist slides up his cock and down again, slow, while your nipples ache."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "through a door left ajar, a young man on his bed stroking his cock, holding a pair of panties to his face", search_queries = ["guy jerking off with panties caught through door", "peeking at brother masturbating door ajar"], pool_dir = "sex/ryan_door_crack_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Keep watching."
+targetType = "node"
+nodeId = "watch"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "saw_ryan_alone", op = "set" }, { targetType = "player", flag = "ryan_door_seen", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Pull the door shut."
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 2
+flagEffects = [{ targetType = "player", flag = "saw_ryan_alone", op = "set" }, { targetType = "player", flag = "ryan_door_seen", op = "set" }]
+
+[[canvases.nodes]]
+id   = "watch"
+name = "Keep watching"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You stay. Your hand stays flat on the door frame. Ryan's fist moves faster on his cock. It is thick and red and wet at the tip. He lifts the panties to his face and breathes in. Then he groans under his breath. \"@player.nickname.\" Your name, in that voice. His hips jerk off the bed. He comes hard, in long white ropes across his own stomach. You watch every one. Your nipples go tight and ache. You are wet, all at once, and you never decided that. You grip the frame until your fingers hurt. You do not touch yourself. You want to. His chest heaves. His cock twitches in his hand. You back away from the door before he looks up, thighs pressed together, nipples still hard."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a young man on his bed coming over his stomach, seen through a door left ajar", search_queries = ["guy cumming jerking off seen through door", "voyeur watching man finish door crack"], pool_dir = "sex/ryan_door_watch_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to your room."
+targetType = "location"
+locationId = "home_ella_room"
+time_progression_minutes = 5
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }]
+flagEffects = [{ targetType = "player", flag = "saw_ryan_alone", op = "set" }, { targetType = "player", flag = "ryan_door_seen", op = "set" }]
+
+[[canvases]]
+id   = "master_door_saturday_night"
+name = "Their door's ajar"
+description = "Sun 00:00-01:00 (Saturday night), Laura and Mark both in and awake: through the gap, Mark takes Laura. Stay at the gap pays corruption +1, cap 19 (DECISIONS 79-80). Reached only by the door; once a week."
+
+[canvases.trigger]
+location = "home_master_bedroom"
+is_repeatable = true
+priority = 1
+is_active = true
+substitution_only = true
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "00:00", end_time = "01:00" }] }
+
+[[canvases.nodes]]
+id   = "gap"
+name = "Their door, ajar"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Their door is open a hand's width. The lamp is on. The bed creaks, hard and fast. Through the gap you see Laura on her knees on the bed. Her nightdress is shoved up to her waist. Her ass is bare in the lamplight. Mark kneels behind her, gripping her hips. He thrusts into her, short and rough, grunting with each one. You see his cock slide out and drive back in. Laura's tits swing under her with every thrust. She stares at the headboard. Her face is flat and bored. She is waiting for him to finish. Neither of them looks at the door. Your face burns. Heat pools low in your belly. You are wet, and your nipples press hard and tight."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "through a bedroom door left ajar, a middle-aged man taking a woman from behind on the bed, lamp on", search_queries = ["couple sex seen through bedroom door ajar", "peeking at parents bedroom door gap"], pool_dir = "sex/master_door_gap_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Stay at the gap."
+targetType = "node"
+nodeId = "stay"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "saw_mark_and_laura", op = "set" }, { targetType = "player", flag = "mark_laura_seen", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go back to bed."
+targetType = "location"
+locationId = "home_ella_room"
+time_progression_minutes = 2
+flagEffects = [{ targetType = "player", flag = "saw_mark_and_laura", op = "set" }, { targetType = "player", flag = "mark_laura_seen", op = "set" }]
+
+[[canvases.nodes]]
+id   = "stay"
+name = "At the gap"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Through the gap you see all of it. Mark has Laura on her knees, her nightdress shoved up over her ass. His cock thrusts into her fast and hard. He grunts with every push. Her tits swing under her. Her face is turned sideways on the pillow, eyes open, bored. He gives one last grunt and rolls off her. A minute later he is snoring. Laura lies on her back, awake, the nightdress still bunched at her waist. Her hand slides down under the sheet, between her own thighs. It starts to move. Your nipples are hard and aching. You are wet. You press your thighs together and stay right there. Then a floorboard creaks under your foot. You slip back to your room, wet, nipples still hard."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a woman lying awake in bed touching herself under the sheet while the man beside her sleeps", search_queries = ["wife masturbating next to sleeping husband", "woman touches herself after husband falls asleep"], pool_dir = "sex/master_door_stay_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to your room."
+targetType = "location"
+locationId = "home_ella_room"
+time_progression_minutes = 5
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }]
+flagEffects = [{ targetType = "player", flag = "saw_mark_and_laura", op = "set" }, { targetType = "player", flag = "mark_laura_seen", op = "set" }]
 
 [[canvases]]
 id   = "garage_things"

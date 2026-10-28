@@ -220,6 +220,30 @@ read *at all* — it fails only a meter that is read zero times. It finds **dead
 meters. It cannot see a **starved** one. `the-meters.md` W3 owns the gate; this is the note that
 the gate's silence is not a pass.
 
+### A4d · Every stage has a way up — and only her choice pays
+
+A4 says the scene at the bottom walks her up. That holds for **every** stage, the first one included,
+and it is the stage most easily left empty: stage 1 is where the accidents live, and an accident is
+something that happens *to* her.
+
+- **The event sets the scene; the button pays.** Walking into a couple, a brother in a towel, a robe
+  that slips: the event itself pays nothing. Each carries a button where she goes further than she had
+  to — a second look, staying a moment longer — and that button pays. The way out ("Run", "Close the
+  door") pays nothing and is always there.
+- **Each act pays only inside its own stage.** +1 for an everyday act, +3 for a big one-time step, and
+  the act's `cap` sits at the top of its stage (19, 39, 59 on a 20-point ladder), so repeating an easy
+  act cannot carry her past it. This is A4's "only while she is under it", stated for the stage.
+- **Every stage below the highest gate carries repeatable acts that pay, sober.** A temporary boost (a
+  drink's `trait_offsets`) can let her try the next stage early, and that act's raise is kept, but it is
+  not the way up: a stage whose only paying acts need the boost is a wall with a hidden door.
+- **The Quests page names only sources that pay at the stage it is shown in.**
+
+⚠️ **Measured, first_term, 2026-10-13.** All 36 Corruption raises needed Corruption 20 or 40. The
+signed park sheet paid "stage 1: none" for walking into the couple, and the home accidents raised only
+the man's number. The player stood at Corruption 0 on day 4 with the Quests page promising "parties,
+the café, the park, touching yourself", none of which paid at Good Girl. The gate **every stage has a
+way up** checks this per meter and per stage, and prints the daily points and days to the next stage.
+
 ---
 
 ## A5 · One incident, two ladders — and the routes read different meters

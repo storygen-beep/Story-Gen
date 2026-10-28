@@ -586,6 +586,9 @@ bd_choices, bd_nodes = item("hair", "Let her do your hair.", DRESSING, "made_up_
     done_exits=[go("Done.", loc="home_master_bedroom", mins=20, eff=[warm(L)], flags=[fset("made_up_today"), fset("made_up")])],
     tease={"label": "Watch her in the mirror.", "ref": f"{LS}:95", "gate": [CURIOUS, trait("laura_step", "gte", 1)],
            "eff": [warm(L)], "what": "Laura, her hair: tease (Curious, Laura C 1)"})
+# Sun 00:00-01:00 Mark and Laura are awake (DECISIONS 80): the "asleep" line skips that hour, written
+# once per piece of the night because conditions do not nest.
+ASLEEP_HOURS = [(wd(0, 1, 2, 3, 4, 5), tod("22:00", "07:00")), (wd(6), tod("22:00", "00:00")), (wd(6), tod("01:00", "07:00"))]
 out.append({
     "id": "hub_laura_bedroom", "name": "Laura",
     "description": "Laura in her room: dressing on Saturday evenings with the door open (her hair, home_life item 12), or asleep at night (her face; home_master_bedroom.md:36-45).",
@@ -600,8 +603,9 @@ out.append({
                    D(L, "Hand me those earrings, sweetheart."))),
             G(cond(*DRESSING, trait("laura_step", "gte", 6)), P("She leaves the zip undone and turns her back to you without asking. She knows you'll do it.")),
             G(cond(*DRESSING, trait("laura_step", "lt", 6)), P("She catches you watching her in the mirror, and holds it."), D(L, "One of these nights I'm coming out with you. Don't think I won't.")),
-            G(cond(tod("22:00", "07:00")),
-              P("Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. She doesn't stir.")),
+            *[G(cond(*hrs),
+                P("Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. She doesn't stir."))
+              for hrs in ASLEEP_HOURS],
         ], [*bd_choices,
             go("Help her choose.", node="choose", mins=20, cond_=cond(*DRESSING)),
             go("Back out.", loc="home_hall")]),

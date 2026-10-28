@@ -15197,6 +15197,322 @@ def _truth_gates(gate, _N, model, game, state):
     gate("one pool, one place", *_truth_run("one pool, one place", game, state))
     gate("the phone owns posting", *_truth_run("the phone owns posting", game, state))
     gate("a day word fits its window", *_truth_run("a day word fits its window", game, state))
+    ok, head, detail, n = _stage_way_up(game, state)
+    _N["every stage has a way up"] = n
+    gate("every stage has a way up", ok, head, detail)
+
+
+# ── the-arc.md A4d: every stage has a way up — and only her choice pays ─────────
+# first_term, 2026-10-13: all 36 Corruption raises needed Corruption 20 or 40, so the
+# player stood at 0 on day 4 with nothing to do that moved it. G26 ("the climb is paid
+# for") missed it twice over: it reads a canvas's requirement only off canvas-to-canvas
+# routes, so a canvas placed at a location reads as open at 0 however its own trigger and
+# choices are gated; and when nothing at all pays it prints "no free route", which reads
+# as a price, not a wall. This walks each raise's real requirement — trigger, the way in,
+# and every choice on the path from the screen she enters at to the exit that pays.
+
+_WAY_UP_TOP = 100          # the meter's ceiling when no band says otherwise
+
+
+def _stage_bounds(game, trait):
+    """[(floor, name)] for a player meter's stages, lowest first, or [].
+
+    Read from the sidebar item's `bands` first (what the player is shown), then the
+    `when` ranges of the quest cards on that trait, then the content's own gates.
+    """
+    for item in game.get("sidebar_items") or []:
+        if item.get("trait") == trait and item.get("bands"):
+            out = [(int(b.get("min", 0)), str(b.get("text") or b.get("label") or ""))
+                   for b in item["bands"] if isinstance(b.get("min", 0), (int, float))]
+            if out:
+                return sorted(set(out))
+    floors = set()
+    for card in game.get("quest_cards") or []:
+        for w in card.get("when") or []:
+            if (w.get("trait") or w.get("trait_key")) == trait and (w.get("op") or w.get("operator")) == "gte":
+                if isinstance(w.get("value"), (int, float)):
+                    floors.add(int(w["value"]))
+    if not floors:
+        floors = set(_meter_rungs(game).get(trait) or [])
+    if not floors:
+        return []
+    return [(f, "") for f in sorted(floors | {0})]
+
+
+# A need is (gte, below, sober, other): what reaching one exit asks of her.
+#   gte    {player trait: lowest value}       below  {player trait: must be under}
+#   sober  a drink's boost must be off        other  ((kind, key, op, value), …) — flags
+#          and her non-meter numbers (a step counter), checked against what is reachable.
+_WU_EMPTY = ({}, {}, False, ())
+
+
+def _wu_needs(holder, sober_keys):
+    gte, below, sober, other = {}, {}, False, []
+    for it in _conditions_of(holder):
+        t, op, v = it.get("type"), it.get("operator"), it.get("value")
+        if t == "modifier":
+            if op == "is_inactive" and it.get("modifier_key") in sober_keys:
+                sober = True
+        elif t == "trait" and (it.get("subject") or "player") == "player" and isinstance(v, (int, float)):
+            k = it.get("trait_key")
+            if op in ("gte", "gt"):
+                gte[k] = max(gte.get(k, 0.0), float(v) + (1 if op == "gt" else 0))
+            elif op in ("lt", "lte"):
+                below[k] = min(below.get(k, 1e9), float(v) + (1 if op == "lte" else 0))
+            else:
+                other.append(("trait", k, op, v))
+        elif t == "flag" and it.get("flag_key"):
+            other.append(("flag", it["flag_key"], op, None))
+    return gte, below, sober, tuple(other)
+
+
+def _wu_merge(a, b):
+    g = dict(a[0])
+    for k, v in b[0].items():
+        g[k] = max(g.get(k, 0.0), v)
+    lo = dict(a[1])
+    for k, v in b[1].items():
+        lo[k] = min(lo.get(k, 1e9), v)
+    return (g, lo, a[2] or b[2], a[3] + tuple(o for o in b[3] if o not in a[3]))
+
+
+def _wu_modifier_offsets(game):
+    """{modifier key: {trait: offset}} from every `modifier_effects` in the game."""
+    out = {}
+    for _path, node in _walk_paths(game):
+        for me in node.get("modifier_effects") or []:
+            if isinstance(me, dict) and me.get("key"):
+                offs = {k: float(v) for k, v in (me.get("trait_offsets") or {}).items()
+                        if isinstance(v, (int, float))}
+                if offs:
+                    out[me["key"]] = offs
+    return out
+
+
+def _wu_holders(game):
+    """Every exit that does something, with every way to reach it.
+
+    [dict(canvas, holder, needs=[need, …], repeatable, day_capped, place)]
+
+    The way in is the trigger's conditions at the canvas's first node (a trigger "goes to
+    canvas's first node", `engine.md`), plus every choice in another canvas that routes
+    to a node here. Inside the canvas each choice on the path adds its conditions, and the
+    exit's own conditions are added last.
+    """
+    sober_keys = set(_wu_modifier_offsets(game))
+    canvases = [c for c in (game.get("canvases") or []) if not _is_dev(c)]
+    by_id = {c.get("id"): c for c in canvases}
+    cleared = _tick_cleared(game)
+    entries = collections.defaultdict(list)          # canvas id -> [(node id, need)]
+    for c in canvases:
+        nodes = c.get("nodes") or []
+        if nodes:
+            entries[c.get("id")].append((nodes[0].get("id"), _wu_needs(c.get("trigger") or {}, sober_keys)))
+    for c in canvases:
+        for n in c.get("nodes") or []:
+            for ch in _node_choices(n):
+                tgt = str(ch.get("nodeId") or "")
+                if "." not in tgt:
+                    continue
+                cid, nid = tgt.split(".", 1)
+                if cid != c.get("id") and cid in by_id:
+                    entries[cid].append((nid, _wu_merge(
+                        _wu_needs(by_id[cid].get("trigger") or {}, sober_keys), _wu_needs(ch, sober_keys))))
+    out = []
+    for c in canvases:
+        cid, trig = c.get("id"), c.get("trigger") or {}
+        nodes = {n.get("id"): n for n in c.get("nodes") or []}
+        reach = collections.defaultdict(list)        # node id -> ways to reach it (first 12)
+        queue = []
+        for nid, need in entries.get(cid, []):
+            if nid in nodes and need not in reach[nid]:
+                reach[nid].append(need)
+                queue.append((nid, need))
+        while queue:
+            nid, need = queue.pop()
+            for ch in _node_choices(nodes[nid]):
+                tgt = str(ch.get("nodeId") or "")
+                if (ch.get("targetType") or "node") != "node" or not tgt:
+                    continue
+                tgt = tgt.split(".", 1)[1] if tgt.startswith(f"{cid}.") else tgt
+                if "." in tgt or tgt not in nodes:
+                    continue
+                nxt = _wu_merge(need, _wu_needs(ch, sober_keys))
+                if nxt not in reach[tgt] and len(reach[tgt]) < 12:
+                    reach[tgt].append(nxt)
+                    queue.append((tgt, nxt))
+        for nid, node in nodes.items():
+            eb = node.get("exit_block") or {}
+            for h in [eb.get("config") or {}] + _node_choices(node):
+                if not (h.get("effects") or h.get("flagEffects")):
+                    continue
+                own = _wu_needs(h, sober_keys)
+                needs = [_wu_merge(w, own) for w in reach.get(nid, [])]
+                capped = bool(trig.get("max_triggers_per_day")) or _holder_day_capped(h, cleared)
+                out.append(dict(canvas=cid, holder=h, needs=needs, repeatable=_rep_of(trig),
+                                day_capped=capped, place=trig.get("location") or "—"))
+    return out
+
+
+def _wu_meets(need, trait, floor, tiers, offsets, state):
+    """Is `need` met by a player at `floor` on `trait`, every other meter at 0, plus
+    `offsets` (a drink's boost), with `state` = (flags reachable, {number: values})?"""
+    gte, below, sober, other = need
+    if offsets and sober:
+        return False
+    for t in tiers:
+        at = (floor if t == trait else 0) + offsets.get(t, 0)
+        if gte.get(t, 0) > at or (t in below and below[t] <= at):
+            return False
+    if trait in below and below[trait] <= floor:
+        return False
+    flags, nums = state
+    for kind, key, op, val in other:
+        if kind == "flag":
+            if op in ("is_true", None) and key not in flags:
+                return False
+        elif kind == "trait" and key not in tiers:
+            vals = nums.get(key)
+            if vals is None or vals == "any" or not isinstance(val, (int, float)):
+                continue
+            if op == "eq" and val not in vals:
+                return False
+    for t, v in gte.items():
+        if t not in tiers:
+            vals = nums.get(t)
+            if vals not in (None, "any") and max(vals) < v:
+                return False
+    return True
+
+
+def _wu_reachable(game, holders, trait, floor, tiers, offsets):
+    """(flags, {number: set of values | "any"}) a player at this stage can ever reach.
+
+    A fixed point: an exit whose need is met sets its flags and numbers, which may open
+    more exits. A number something `add`s to is "any" (not tracked); a step counter that
+    is only ever `set` is tracked value by value, so `ryan_step = 8` is reachable only if
+    an exit she can reach at this stage sets it.
+    """
+    start = dict(((game.get("player") or {}).get("core_traits")) or {})
+    nums = {k: {float(v)} for k, v in start.items() if isinstance(v, (int, float))}
+    flags = set()
+    changed = True
+    while changed:
+        changed = False
+        for h in holders:
+            if not any(_wu_meets(n, trait, floor, tiers, offsets, (flags, nums)) for n in h["needs"]):
+                continue
+            for fe in h["holder"].get("flagEffects") or []:
+                if fe.get("op", "set") == "set" and fe.get("flag") and fe["flag"] not in flags:
+                    flags.add(fe["flag"])
+                    changed = True
+            for ef in h["holder"].get("effects") or []:
+                k = ef.get("trait") or ef.get("trait_key")
+                if not k or ef.get("targetType", "player") != "player" or k in tiers:
+                    continue
+                if ef.get("op") == "set" and isinstance(ef.get("value"), (int, float)):
+                    cur = nums.setdefault(k, set())
+                    if cur != "any" and float(ef["value"]) not in cur:
+                        cur.add(float(ef["value"]))
+                        changed = True
+                elif ef.get("op") == "add" and nums.get(k) != "any":
+                    nums[k] = "any"
+                    changed = True
+    return flags, nums
+
+
+def _her_raises(holders, trait):
+    """[(holder record, amount, cap)] for every positive `add` to `trait` on the player."""
+    out = []
+    for h in holders:
+        for ef in h["holder"].get("effects") or []:
+            if (ef.get("op") == "add" and ef.get("targetType", "player") == "player"
+                    and (ef.get("trait") or ef.get("trait_key")) == trait
+                    and _effect_value_sign(ef.get("value")) > 0):
+                val = ef.get("value")
+                amt = float(val) if isinstance(val, (int, float)) else float((val or {}).get("max", 1))
+                out.append((h, amt, ef.get("cap")))
+    return out
+
+
+def _stage_way_up(game, state):
+    """(ok, headline, detail, n) for `every stage has a way up` (the-arc.md A4d)."""
+    board = (state or {}).get("board") or {}
+    # Only the DECLARED climb. A banded sidebar item is not one: a battery or a damage
+    # meter has bands too, and judging those as stages to climb is a false alarm.
+    tiers = [t for t in (board.get("ascent_tiers") or []) if _stage_bounds(game, t)]
+    if not tiers:
+        return None, "no declared ascent tier with stages (board.ascent_tiers)", [], 0
+    holders = _wu_holders(game)
+    mods = _wu_modifier_offsets(game)
+    rungs = _meter_rungs(game)
+    walls, detail, checked, paying_places = [], [], 0, {}
+
+    def pays(h, cap, t, floor, offs, reach, tier_list):
+        if isinstance(cap, (int, float)) and cap <= floor:
+            return False
+        return any(_wu_meets(n, t, floor, tier_list, offs, reach) for n in h["needs"])
+
+    for t in tiers:
+        stages = _stage_bounds(game, t)
+        top_gate = max(rungs.get(t) or [0])
+        mine = _her_raises(holders, t)
+        for i, (floor, name) in enumerate(stages):
+            nxt = stages[i + 1][0] if i + 1 < len(stages) else _WAY_UP_TOP
+            if floor >= top_gate:
+                break                                   # nothing above this stage is gated yet
+            checked += 1
+            label = f"{t} · {name or 'stage'} ({floor}–{nxt - 1})"
+            reach = _wu_reachable(game, holders, t, floor, tiers, {})
+            rep, once = {}, set()
+            for h, amt, cap in mine:
+                if pays(h, cap, t, floor, {}, reach, tiers):
+                    if h["repeatable"]:
+                        rep[h["canvas"]] = max(rep.get(h["canvas"], 0), amt)
+                    else:
+                        once.add(f"{h['canvas']} +{amt:g}")
+            paying_places[(t, floor)] = sorted({h["place"] for h, _a, _c in mine
+                                                if h["canvas"] in rep})
+            tipsy = set()
+            for offs in mods.values():
+                r2 = _wu_reachable(game, holders, t, floor, tiers, offs)
+                tipsy |= {f"{h['canvas']} +{amt:g}" for h, amt, cap in mine
+                          if h["repeatable"] and h["canvas"] not in rep
+                          and pays(h, cap, t, floor, offs, r2, tiers)}
+            other = sorted({h["canvas"] for h, amt, cap in mine if h["canvas"] not in rep
+                            and f"{h['canvas']} +{amt:g}" not in once
+                            and pays(h, cap, t, floor, {}, _wu_reachable(game, holders, t, floor, [t], {}), [t])})
+            daily = sum(rep.values())
+            days = f"about {math.ceil((nxt - floor) / daily)} days" if daily else "never"
+            detail.append(f"{label}: {len(rep)} repeatable act(s) pay sober · {daily:g} a day · {days}"
+                          + (f" — {', '.join(f'{c} +{a:g}' for c, a in sorted(rep.items()))}" if rep else ""))
+            if once:
+                detail.append(f"    one-time here: {', '.join(sorted(once)[:8])}")
+            if tipsy:
+                detail.append(f"    only while a drink's boost is on: {', '.join(sorted(tipsy)[:8])}")
+            if other:
+                detail.append(f"    pay {t} here but need another meter first: {', '.join(other[:8])}")
+            if not rep:
+                walls.append(label)
+    # What the Quests page promises, beside what pays (a report: free text cannot be matched).
+    for card in game.get("quest_cards") or []:
+        for g in card.get("goals") or []:
+            t = g.get("trait") or g.get("trait_key")
+            if t not in tiers or ":" not in str(g.get("label") or "") or not isinstance(g.get("value"), (int, float)):
+                continue
+            floor = max([f for f, _n in _stage_bounds(game, t) if f < g["value"]] or [0])
+            places = paying_places.get((t, floor))
+            if places is not None:
+                detail.append(f"    the card says “{g['label']}” — what pays at {floor}: "
+                              f"{', '.join(places) if places else 'nothing'}")
+    if not checked:
+        return None, "no stage sits below a gate", detail, 0
+    detail.append("(the-arc.md A4d — only her choice pays, and every stage below the highest gate "
+                  "needs repeatable acts that pay sober. Give the stage a button where she goes "
+                  "further, +1 and capped at the stage's top; a drink's boost is not a way up)")
+    head = (f"{len(walls)} of {checked} stage(s) have no repeatable act that pays sober: " + "; ".join(walls)
+            if walls else f"all {checked} stage(s) below a gate have a repeatable act that pays sober")
+    return (not walls), head, detail, checked
 
 
 def main():
