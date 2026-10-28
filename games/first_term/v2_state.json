@@ -4186,6 +4186,10 @@
         "kind": "sourced",
         "key": "corruption",
         "fed_at": [
+          "park",
+          "library",
+          "home_ryan_room",
+          "home_master_bedroom",
           "lecture_hall",
           "zoe_apartment",
           "cafe"
@@ -6079,6 +6083,15 @@
               "Sun"
             ],
             "from": "00:00",
+            "to": "01:00",
+            "note": "awake: up from waiting up, with Mark (LO, 2026-10-29, DECISIONS 80)"
+          },
+          {
+            "where": "home_master_bedroom",
+            "weekdays": [
+              "Sun"
+            ],
+            "from": "01:00",
             "to": "07:00"
           },
           {
@@ -6555,6 +6568,15 @@
               "Sun"
             ],
             "from": "00:00",
+            "to": "01:00",
+            "note": "awake: Laura comes up from waiting up (LO, 2026-10-29, DECISIONS 80)"
+          },
+          {
+            "where": "home_master_bedroom",
+            "weekdays": [
+              "Sun"
+            ],
+            "from": "01:00",
             "to": "02:00"
           },
           {

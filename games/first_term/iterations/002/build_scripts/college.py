@@ -476,6 +476,27 @@ out.append({
         P("The first class is first thing. The afternoon class starts after lunch. Somebody has drawn a penis on Thursday, but nobody has rubbed it off."),
     ], [go("Done.", loc="lecture_hall")])]})
 
+# ═════════════ THE BACK STACKS (library_back_stacks.md, DECISIONS 79) ═════════════
+# A Good Girl way up: the couple is an event and pays nothing; "Stay behind the shelf." is her
+# choice and pays corruption +1, cap 19. Nobody sees her. Once a day; it opens until 19:45 so
+# its 15 minutes of exits land before the library closes at 20:00.
+STACKS_SEEN = ("The back aisles are dead quiet. You run a finger along the spines, hunting a call number. Then you hear it. A soft knock of books on wood, steady, over and over. A muffled sound under it. You turn the corner. Two seniors fill the dead end of the stacks. She is up on the edge of a low shelf, skirt shoved to her waist, legs locked round him. Her top is pushed up and her tits bounce with every thrust. His jeans hang open. You see his cock slide out of her, wet, and drive back in. His hand is clamped over her mouth. She moans into his palm anyway. Your face goes hot. You stop dead at the end of the aisle. Her nipples are hard. He thrusts again, and the books knock.")
+STACKS_STAY = ("You step back behind the next shelf. Three books are missing at eye height. His cock slides out of her, wet and shining, then thrusts back in. Her tits bounce with every push. Her nipples are dark and hard. His hand stays clamped over her mouth. She moans into his palm anyway. Her heels dig into his ass and pull him deeper. That is a real cock, inside a real woman, four feet from you. You should look away. You don't. Your own nipples go tight. You are wet, and you press your thighs together hard. Your hands stay flat on the shelf. She shudders and comes against his palm, hips jerking. Two aisles over, a book trolley squeaks. You slip away with your book, nipples still tight, thighs clenched.")
+out.append({
+    "id": "library_back_stacks", "name": "Find a book in the back stacks",
+    "description": "Two seniors (22) in the back stacks: the look pays nothing; staying behind the shelf pays corruption +1, cap 19 (DECISIONS 78-79). Once a day.",
+    "trigger": {"location": "library", "is_repeatable": True, "priority": 4, "is_active": True, "max_triggers_per_day": 1,
+                "schedules": sched(([0, 1, 2, 3, 4], "08:00", "19:45")), "conditions": cond(flag("opening_done"))},
+    "nodes": [
+        node("stacks", "The back stacks", [P(STACKS_SEEN),
+            VID("a couple having sex against a bookshelf at the end of a library aisle, his hand over her mouth", "couple fucking in library stacks", "quiet library sex against bookshelf", pool_dir="sex/library_stacks_seen_t5")],
+            [go("Stay behind the shelf.", node="stay", mins=5, flags=[fset("saw_the_library_couple")]),
+             go("Take the book and go.", loc="library", mins=5, flags=[fset("saw_the_library_couple")])]),
+        node("stay", "Behind the shelf", [P(STACKS_STAY),
+            VID("seen through a gap in library books, a couple having sex against the shelves", "voyeur watching couple in library", "peeking through bookshelf at couple sex", pool_dir="sex/library_stacks_stay_t5")],
+            [go("Back to your desk.", loc="library", mins=10, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_the_library_couple")])]),
+    ]})
+
 text = "# ── college (sheets/systems/college.md · scenes college_*.md) ──\n" + "".join(emit(c) for c in out)
 open(__import__("sys").argv[1], "w").write(text)
 print("college:", len(out), "canvases")

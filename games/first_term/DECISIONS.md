@@ -10,6 +10,35 @@
 
 None open. 37 and 39 were answered 2026-10-09 (below).
 
+## Answered (LO, 2026-10-13, after playing to day 4)
+
+LO played to Thursday of week one and stood at Corruption 0, Exhibitionism 3. Every one of the 36 Corruption
+raises in the build needs Corruption 20 or 40 already, so Good Girl had no way up except a drink, which no hint
+names.
+
+| # | question | LO's answer |
+|---|---|---|
+| 78 | What raises her meters at stage 1, and does an event she didn't choose (walking into the couple in the park, Ryan in a towel) raise them? | Only her choice pays. An event pays nothing; a button where she goes further pays: +1 for an everyday act, +3 for a big one-time step. Each act pays only until she is past its stage (a Good Girl act stops at 19, Curious at 39, Bold at 59). Every stage needs acts that pay, the first one included, so a stage-1 accident carries a button to linger. A drink is not a way up. |
+
+These signed pages say the old thing and wait for LO's re-sign; nothing on them was changed:
+`sheets/scenes/park_watch_the_couple.md:11,15` (stage 1 raises nothing), `sheets/places/home_hall.md:44-47`
+(the home accidents raise only his number), the ledger's `fed_at` for `corruption` (lecture hall, Zoe's, the café,
+none of which pays at Good Girl), and the two Quests-page goal labels at `toml_phases/7_final_game.toml:22360`
+and its Exhibitionism twin, which name sources that pay nothing at stage 1.
+
+## Answered (LO, 2026-10-29, step 4: the Good Girl moments)
+
+| # | question | LO's answer |
+|---|---|---|
+| 79 | Which moments carry Good Girl to Curious under row 78? | Four: a "Look a second longer." button on the park couple (`park_watch_the_couple`); a couple in the library's back stacks (`library_back_stacks`, new); Ryan's door open a crack, Ryan alone with her panties (`ryan_door_ajar`, new); Mark and Laura through their door on Saturday night (`master_door_saturday_night`, new). In each, the look pays nothing and her staying pays corruption +1, cap 19. No ladder number moves. Nobody sees her, except in the park, where the stranger looks up at her as the signed `run` always had (now on `linger`). About 18 points a week, so Good Girl takes 7–8 days. |
+| 80 | When are Mark and Laura awake together in their room? | Sun 00:00–01:00, the Saturday night after Laura comes up from waiting up (new). The door shows "The door's ajar." in that hour instead of "Ease the door open". |
+| 81 | What do the Quests goal cards say? | Only places that pay at that stage. Curious: the park couple, the library stacks, Ryan's door at night, their door on Saturday night. Bold: her room, the bathroom, the women's toilet, the park. Daring: the lecture hall, the park. Showing: the campus gym, the women's toilet, the garden, the hall, the living room, the lecture hall, the park. The labels live only in `toml_phases/5_scenes.toml`; they change there in step 5. |
+
+Rows 79–81 are drafts written 2026-10-29 from LO's picks in chat; they wait for LO's sign with the sheets they
+touch: the three new scene sheets, `park_watch_the_couple.md`, `places/library.md`, `places/home_ryan_room.md`,
+`places/home_master_bedroom.md`, `people/npc_mark.md` and `people/npc_laura.md`. Snapshot of the old pages:
+`~/Documents/Great_Games_Study_20260926/first_term_snapshots/20261029_good_girl_before/`.
+
 ## Answered (LO, 2026-10-09, during the iteration 002 build)
 
 Asked while building parts 1 and 2 (`iterations/002/BUILD_LOG.md`). The street sheet, `college_mens_toilet.md`,

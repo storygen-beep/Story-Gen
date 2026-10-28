@@ -5,6 +5,35 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-13 — every stage has a way up, and only her choice pays (A4d + a new gate)
+
+**What.**
+- `references/the-arc.md`: new **A4d**. The event sets the scene and the button pays. Every stage, the first
+  included, carries repeatable acts that pay sober, each capped at its stage's top. A drink's boost is not a way
+  up. The Quests page names only sources that pay at that stage.
+- `scripts/gates.py`: new gate **every stage has a way up**, all code above `main()` and registered at the end of
+  `_truth_gates`, so no cited line moved. It works per declared meter and per stage below the highest gate. Each
+  raise's requirement is read through the trigger, the way in from other canvases, and every choice on the path
+  to the exit that pays. Flags and step counters count only if an exit reachable at that stage sets them
+  (a fixed point). It prints the daily points and days to the next stage, the one-time steps, the drink-only acts,
+  the acts that need another meter first, and each Quests card's promise beside what actually pays.
+- `SKILL.md`: a scoreboard row.
+- `scripts/tests/test_gates_way_up.py`: 7 tests.
+
+**Why.** LO played first_term to day 4 and stood at Corruption 0. All 36 Corruption raises needed Corruption 20
+or 40, and the signed park sheet paid "stage 1: none". G26 (`the climb is paid for`) missed it on two counts:
+- it reads a requirement only off canvas-to-canvas routes, so the park read as open at 0;
+- when nothing pays, it prints "no free route", which reads as a price.
+
+LO chose option 2 (only her choice pays; DECISIONS 78). G26's blind spot is logged for a later skill pass, not
+changed here.
+
+**Verified.**
+- 7/7 new tests pass.
+- first_term: the new gate FAILs on exactly "corruption · Good Girl (0–19)". The drink-only list is the park scene
+  and the three touch scenes, which matches the hand audit of the 36 raises. The other five stages pass.
+- No other gate changed verdict (before/after runs compared).
+
 ## 2026-10-11 — a container with no default entry shows nav cards (engine change, first_term)
 
 **What.** `generators/v2.py`: the page of an `is_container` place with no `default_entry` listed the places

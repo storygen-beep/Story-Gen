@@ -288,22 +288,68 @@ out.append(solo("master_wardrobe", "Go through Laura's wardrobe",
         ], [go("Put it all back.", loc="home_hall", mins=20)]),
     ], conds=[nobody("home_master_bedroom")], prio=3, max_day=1))
 
+# Sun 00:00-01:00 Mark and Laura are awake (DECISIONS 80): no "asleep" line may show then. The engine's
+# conditions do not nest, so each "asleep" line is written once per piece of the night that skips it.
+ASLEEP_HOURS = [(wd(0, 1, 2, 3, 4, 5), tod("22:00", "07:00")), (wd(6), tod("22:00", "00:00")), (wd(6), tod("01:00", "07:00"))]
 out.append({"id": "master_asleep", "name": "Ease the door open",
     "description": "The door's 'Ease the door open' at night: one screen naming only who is asleep, then back to the hall (home_master_bedroom.md:47-54, Q58). Reached only by the door.",
     "trigger": {"location": "home_master_bedroom", "is_repeatable": True, "priority": 1, "is_active": True,
                 "substitution_only": True},
     "nodes": [node("dark", "Their room at night", [
         P("You ease the handle down and open the door a hand's width. The room is dark and warm, and it smells of sleep."),
-        G(cond(here(L, "home_master_bedroom"), here(M, "home_master_bedroom"), tod("22:00", "07:00")),
-          P("Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. Mark's on his back beside her, snoring.")),
-        G(cond(here(L, "home_master_bedroom"), here(M, "home_master_bedroom", False), tod("22:00", "07:00")),
-          P("Laura's asleep on her side, one bare shoulder out of the covers. Mark's half of the bed is empty.")),
-        G(cond(here(M, "home_master_bedroom"), here(L, "home_master_bedroom", False), tod("22:00", "07:00")),
-          P("Mark's asleep on his back, one arm flung across the bed. Laura's half is empty, the covers thrown back.")),
+        *[G(cond(here(L, "home_master_bedroom"), here(M, "home_master_bedroom"), *hrs),
+          P("Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. Mark's on his back beside her, snoring.")) for hrs in ASLEEP_HOURS],
+        *[G(cond(here(L, "home_master_bedroom"), here(M, "home_master_bedroom", False), *hrs),
+          P("Laura's asleep on her side, one bare shoulder out of the covers. Mark's half of the bed is empty.")) for hrs in ASLEEP_HOURS],
+        *[G(cond(here(M, "home_master_bedroom"), here(L, "home_master_bedroom", False), *hrs),
+          P("Mark's asleep on his back, one arm flung across the bed. Laura's half is empty, the covers thrown back.")) for hrs in ASLEEP_HOURS],
         P("You stand in the gap long enough to hear the breathing. Nobody stirs."),
     ], [go("Close the door.", loc="home_hall", mins=2),
         go("Go to the bed. (Needs Hungry)", node="hl_hungry", swl=True, cond_=cond(HUNGRY))]),
         hungry_node("home_hall")]})
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE WALK-INS (DECISIONS 79-80, ryan_door_ajar.md, master_door_saturday_night.md): two Good Girl
+# ways up, reached only by their doors (world_data.py). The look is an event and pays nothing;
+# staying is her choice and pays corruption +1, cap 19. Nobody sees her; no ladder number moves.
+# Each sets its seen flag on every exit; the door reads it as the brake.
+# ═════════════════════════════════════════════════════════════════════════════
+RYAN_CRACK = ("Ryan's door is open a crack, and his light is on. You mean to walk past, but you look in. Ryan is on his bed with his shorts shoved down. His cock is hard in his fist, and he is stroking it slowly. His other hand presses something to his face. It is a pair of panties from the laundry basket. They are yours. You know them. He breathes them in, and his hips lift off the bed. He has not seen you. Your face burns, but your body answers before you can stop it. Your nipples go tight and hard. Heat drops low in your belly, and you are wet. His fist slides up his cock and down again, slow, while your nipples ache.")
+RYAN_WATCH = ("You stay. Your hand stays flat on the door frame. Ryan's fist moves faster on his cock. It is thick and red and wet at the tip. He lifts the panties to his face and breathes in. Then he groans under his breath. \"@player.nickname.\" Your name, in that voice. His hips jerk off the bed. He comes hard, in long white ropes across his own stomach. You watch every one. Your nipples go tight and ache. You are wet, all at once, and you never decided that. You grip the frame until your fingers hurt. You do not touch yourself. You want to. His chest heaves. His cock twitches in his hand. You back away from the door before he looks up, thighs pressed together, nipples still hard.")
+out.append({"id": "ryan_door_ajar", "name": "His door's open a crack",
+    "description": "Sun-Thu 22:00-00:00, Ryan in: his door open a crack, Ryan alone with her panties. Keep watching pays corruption +1, cap 19 (DECISIONS 79). Reached only by the door; once a night.",
+    "trigger": {"location": "home_ryan_room", "is_repeatable": True, "priority": 1, "is_active": True,
+                "substitution_only": True, "max_triggers_per_day": 1,
+                # the door's own window, so a reader of the canvas sees when it can render
+                "conditions": cond(here(R, "home_ryan_room"), wd(6, 0, 1, 2, 3), tod("22:00", "00:00"), trait("ryan_step", "gte", 0))},
+    "nodes": [
+        node("crack", "The crack in his door", [P(RYAN_CRACK),
+            VID("through a door left ajar, a young man on his bed stroking his cock, holding a pair of panties to his face", "guy jerking off with panties caught through door", "peeking at brother masturbating door ajar", pool_dir="sex/ryan_door_crack_t5")],
+            [go("Keep watching.", node="watch", mins=5, flags=[fset("saw_ryan_alone"), fset("ryan_door_seen")]),
+             go("Pull the door shut.", loc="home_hall", mins=2, flags=[fset("saw_ryan_alone"), fset("ryan_door_seen")])]),
+        node("watch", "Keep watching", [P(RYAN_WATCH),
+            VID("a young man on his bed coming over his stomach, seen through a door left ajar", "guy cumming jerking off seen through door", "voyeur watching man finish door crack", pool_dir="sex/ryan_door_watch_t5")],
+            [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_ryan_alone"), fset("ryan_door_seen")])]),
+    ]})
+
+MASTER_GAP = ("Their door is open a hand's width. The lamp is on. The bed creaks, hard and fast. Through the gap you see Laura on her knees on the bed. Her nightdress is shoved up to her waist. Her ass is bare in the lamplight. Mark kneels behind her, gripping her hips. He thrusts into her, short and rough, grunting with each one. You see his cock slide out and drive back in. Laura's tits swing under her with every thrust. She stares at the headboard. Her face is flat and bored. She is waiting for him to finish. Neither of them looks at the door. Your face burns. Heat pools low in your belly. You are wet, and your nipples press hard and tight.")
+MASTER_STAY = ("Through the gap you see all of it. Mark has Laura on her knees, her nightdress shoved up over her ass. His cock thrusts into her fast and hard. He grunts with every push. Her tits swing under her. Her face is turned sideways on the pillow, eyes open, bored. He gives one last grunt and rolls off her. A minute later he is snoring. Laura lies on her back, awake, the nightdress still bunched at her waist. Her hand slides down under the sheet, between her own thighs. It starts to move. Your nipples are hard and aching. You are wet. You press your thighs together and stay right there. Then a floorboard creaks under your foot. You slip back to your room, wet, nipples still hard.")
+out.append({"id": "master_door_saturday_night", "name": "Their door's ajar",
+    "description": "Sun 00:00-01:00 (Saturday night), Laura and Mark both in and awake: through the gap, Mark takes Laura. Stay at the gap pays corruption +1, cap 19 (DECISIONS 79-80). Reached only by the door; once a week.",
+    "trigger": {"location": "home_master_bedroom", "is_repeatable": True, "priority": 1, "is_active": True,
+                "substitution_only": True, "max_triggers_per_day": 1,
+                # the door's own window, so a reader of the canvas sees when it can render
+                "conditions": cond(here(L, "home_master_bedroom"), here(M, "home_master_bedroom"), wd(6), tod("00:00", "01:00"))},
+    "nodes": [
+        node("gap", "Their door, ajar", [P(MASTER_GAP),
+            VID("through a bedroom door left ajar, a middle-aged man taking a woman from behind on the bed, lamp on", "couple sex seen through bedroom door ajar", "peeking at parents bedroom door gap", pool_dir="sex/master_door_gap_t5")],
+            [go("Stay at the gap.", node="stay", mins=5, flags=[fset("saw_mark_and_laura"), fset("mark_laura_seen")]),
+             go("Go back to bed.", loc="home_ella_room", mins=2, flags=[fset("saw_mark_and_laura"), fset("mark_laura_seen")])]),
+        node("stay", "At the gap", [P(MASTER_STAY),
+            VID("a woman lying awake in bed touching herself under the sheet while the man beside her sleeps", "wife masturbating next to sleeping husband", "woman touches herself after husband falls asleep", pool_dir="sex/master_door_stay_t5")],
+            [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_mark_and_laura"), fset("mark_laura_seen")])]),
+    ]})
 
 # ═════════════════════════════════════════════════════════════════════════════
 # THE GARAGE (home_garage.md): his things (A1-13, A1-21), the washer alone

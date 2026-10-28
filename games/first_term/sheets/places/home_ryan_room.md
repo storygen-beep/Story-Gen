@@ -30,6 +30,9 @@
 | Ryan | person | Ryan's ladder | Ryan's Want read: the look (colour) | once per window, on the trigger | yes |
 | his things | work | Ryan's ladder | first find sets a memory flag | once a day, when he's out | yes |
 | two knocks, at night | person | Ryan's ladder · the door | after his step 8 (Ryan A 9): the repeat | once a night | yes: the door this release ends on |
+| his door's open a crack | sex scene · the door | the way up (DECISIONS 79) | `ryan_door_ajar`, Sun–Thu 22:00–00:00 while he's in: the look pays nothing · "Keep watching." corruption add +1, cap 19 · no ladder number moves | once a night | yes: explicit |
+
+> Changed 2026-10-29 (the door option "His door's open a crack.", LO's pick of 2026-10-29); waits for LO's re-sign.
 
 ## Rows a gate needs
 

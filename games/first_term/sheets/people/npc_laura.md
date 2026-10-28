@@ -32,6 +32,9 @@
 | `home_master_bedroom` | Sat | 17:00 | 18:30 | sleeps; dresses Saturday |
 | `home_living_room` | Sat | 22:00 | 00:00 | waiting up, Saturday |
 
+**Sun 00:00–01:00 she is awake** (changed 2026-10-29, waits for LO's re-sign): up from waiting up, Mark takes
+her, and she lies awake after (`master_door_saturday_night`). Same row, same place; only the line changes.
+
 **Row order matters.** The engine takes the first matching row, so her stairs row is first. Saturday 00:00–07:00 covers Friday night. Her night row ends 06:30 (all LO, 2026-10-08).
 
 ## Ladder — one guidance card per step (S10)

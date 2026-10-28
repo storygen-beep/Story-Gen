@@ -256,6 +256,7 @@ how many fails are [off].
 | traversal heat | ~60% of destinations hold a sex scene (3+ explicit words or `_t4`/`_t5` media) | `the-board.md` §1 |
 | explicit pools by place | the old heat count: cycling explicit pools | `the-board.md` §1 |
 | her climb | a paid repeatable is introduced, then a step, then a first time; it is shut on a new save; each act node has two voices on a declared tier and a stop exit | `the-arc.md` A15 |
+| every stage has a way up | each stage of a declared meter, below its highest gate, has repeatable acts that pay sober, read through every choice on the path and only from flags and step counters that stage can reach; prints the daily points and days to the next stage, the drink-only acts, and the Quests card's promise beside what pays | `the-arc.md` A4d |
 | a no has content | a `consume_on` step's exits that leave it unused park, are a labelled final, or reach a reply that changes something | `the-arc.md` A3 |
 | the men's numbers are read | each trait a man keeps is shown on the cast page (hidden and counters aside) and read by a gate and a line | `the-meters.md` W1 |
 | one name per trait | every trait an effect moves has a `[[traits.labels]]` label, and a sidebar item's own `label` matches it | `engine.md` §30 |

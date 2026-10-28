@@ -27,7 +27,8 @@
 | `home_living_room` | Mon–Sat | 00:00 | 02:00 | late, after Laura sleeps |
 | `home_master_bedroom` | every day | 02:00 | 07:00 | sleeps |
 | `home_master_bedroom` | Sat | 22:00 | 00:00 | sleeps |
-| `home_master_bedroom` | Sun | 00:00 | 02:00 | sleeps |
+| `home_master_bedroom` | Sun | 00:00 | 01:00 | awake: Laura comes up, and he takes her (`master_door_saturday_night`, changed 2026-10-29, waits for LO's re-sign) |
+| `home_master_bedroom` | Sun | 01:00 | 02:00 | sleeps |
 | `home_kitchen` | Mon, Tue, Thu, Fri | 18:00 | 19:00 | dinner with the family |
 | `home_garage` | Mon, Tue, Thu, Fri | 19:00 | 22:00 | his evenings |
 | `home_kitchen` | Wed | 18:00 | 22:00 | Wednesday cooking · all Sunday |

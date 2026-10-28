@@ -38,7 +38,8 @@
 | window | who is here | the door offers | faces |
 |---|---|---|---|
 | Sun–Fri 22:00–00:00 · Mon–Sat 00:00–02:00 | Laura, asleep · Mark is downstairs | "Ease the door open" (question 58) | Laura, asleep |
-| Sun 00:00–02:00 (Saturday night) · every day 02:00–06:30 · Sat, Sun 06:30–07:00 | Laura and Mark, asleep | "Ease the door open" | Laura, asleep · Mark, asleep |
+| Sun 00:00–01:00 (Saturday night, changed 2026-10-29) | Laura and Mark, awake: Laura has come up from waiting up | "The door's ajar." → `master_door_saturday_night`: the look pays nothing · "Stay at the gap." corruption add +1, cap 19 · once a week | Laura · Mark |
+| Sun 01:00–02:00 · every day 02:00–06:30 · Sat, Sun 06:30–07:00 | Laura and Mark, asleep | "Ease the door open" | Laura, asleep · Mark, asleep |
 | Mon–Fri 06:30–07:00 | Mark, asleep · Laura is at breakfast | "Ease the door open" | Mark, asleep |
 | Sat 17:00–18:30 | Laura, dressing | "Knock" | Laura |
 | Sat 22:00–00:00 | Mark, asleep · Laura is waiting up downstairs | "Ease the door open" | Mark, asleep |
