@@ -24,11 +24,15 @@ def shift_choice(label, k, extra=()):
 
 # the evening shift is shut under the curfew (job sheet: "the evening shift says why")
 DAY = tod("08:00", "18:00")
-EVE = tod("18:00", "19:00")   # an evening shift starts by 19:00 and is done by the 22:00 close (A5-04)
+EVE = tod("18:00", "19:00")   # an evening shift starts by 19:00 and is done by 22:00, an hour before the 23:00 close (A5-04)
+# Tom's text (phone.py tom_shift, DECISIONS 87): "on my way after" books the day's first shift, which pays
+# $4 more and clears it (else his no-show text arrives).
+BOOKED_PAY = [{"targetType": "player", "trait": "money", "op": "add", "value": 4, "clamp": False}]
 choices = []
 for k in (1, 2, 3):
-    choices.append(shift_choice("Work a shift (3 hours, 20 energy).", k, [DAY]))
-    choices.append(shift_choice("Work a shift (3 hours, 20 energy).", k, [EVE, NO_CURFEW_ITEM]))
+    for extra in ([DAY], [EVE, NO_CURFEW_ITEM]):
+        c = shift_choice("Work a shift (3 hours, 20 energy).", k, extra)
+        choices += booked_split(c, "tom_shift_booked", eff=BOOKED_PAY) if k == 1 else [c]
 
 out.append({
     "id": "cafe_shift", "name": "Work a shift",
@@ -40,6 +44,7 @@ out.append({
     "nodes": [
         node("counter", "The counter", [
             D(TM, "Uniform's in the back, @player. Three hours. Smile."),
+            G(cond(flag("tom_shift_booked")), D(TM, "You came. Good. Four extra for showing up.")),
             G(cond(trait("energy", "lt", 20)), T("You'd drop a tray. Not today.")),
             G(CURFEW_ON, G(cond(EVE), P("Mom's curfew. No evening shifts this week. Tom shrugs like it's your problem, because it is."))),
         ], choices + [go("Not today.", loc="cafe", mins=1)]),

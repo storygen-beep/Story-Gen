@@ -93,7 +93,7 @@ out.append({
     "nodes": [
         node("knocks", "Two knocks", [
             P("Two knocks. He opens on the second one, like he was waiting by the door. A game on the TV, the sound low, and his bed pushed against the wall with room left on it."),
-            D(R, "Mom's asleep. Mark's downstairs. Get in before someone sees."),
+            D(R, "Mom's gone to bed. Mark's downstairs. Get in before someone sees."),
         ], [
             go("\"Feet up.\"", node="lap", mins=5),
             go("\"Just saying goodnight.\"", loc="home_hall", mins=2, retry=1),
@@ -302,6 +302,7 @@ out.append({
                 P("Two knocks. He opens it in a T-shirt and boxers and pulls you in by the waist. You fall onto the bed together, laughing, then not laughing, his mouth on your neck and his weight on you, the game still on with the sound off."),
                 P("Two knocks. He leaves the lamp on. He wants to see you. You lie on his bed with your head on his pillow and he kisses you slowly, holding himself up on his arms, looking at you between kisses like he can't believe you're in here."),
                 pid="ryan_two_knocks_open"),
+            G(cond(flag("ryan_knock_booked")), D(R, "You came. I wasn't sure you would.")),
             P("His hands go everywhere they're allowed. Over your clothes, down your sides, over your hips, up under your hair. He holds your waist like he's stopping himself. When he pulls you against him you can feel how hard he is, and he groans into your mouth and doesn't do anything about it."),
             G(cond(flag("ryan_terms_keep_kayla")), D(R, "She texted. I didn't answer. Come here.")),
             G(cond(flag("ryan_terms_end_kayla")), D(R, "I'm telling her this week. I swear. Don't stop.")),
@@ -502,8 +503,12 @@ text = ("# =====================================================================
         "# Steps 2-8 (Ryan A 3-9), his hubs, his things, the two-knocks repeat, his cards.\n"
         "# Step 1 is the opening (2_one_shots.toml). Explicit screens pasted as signed.\n"
         "# =============================================================================\n")
-# Iteration 002, part 7: "Mom's asleep. Mark's downstairs." holds only while they are (gate: a named person is where the line says)
+# Iteration 002, part 7: "Mom's gone to bed. Mark's downstairs." (was "asleep" until DECISIONS 83) holds only while they are (gate: a named person is where the line says)
 require_present(out, "ryan_04_feet_in_his_lap", here_at("npc_laura", "home_master_bedroom"), here_at("npc_mark", "home_living_room"))
+# Knocking clears her "coming" (phone.py ryan_two_knocks_text, DECISIONS 87).
+for _c in out:
+    if _c["id"] == "ryan_two_knocks":
+        clear_on_leave(_c, "ryan_knock_booked")
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards)
 open(__import__("sys").argv[1], "w").write(text)
 print("ryan:", len(out), "canvases,", len(cards), "cards")

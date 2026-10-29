@@ -1,6 +1,8 @@
 # [READY] Person — Ryan
 
-> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
+> **Changed 2026-10-29, re-signed by LO 2026-10-29** (DECISIONS 87–88): his two-knocks text: "coming" is a promise; a no-show costs his Warmth.
+
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08). Re-signed 2026-10-29 ("sign all", in chat).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the place sheets. Id `npc_ryan`.
 
@@ -90,6 +92,12 @@ Each follow-up waits for her reply (`after_round`), and a different answer follo
 | 1 | "about the phone thing" · "don't tell mom" | "your secret's safe" | "owe you one. two knocks?" · Warmth add +2 |
 | | | "what's it worth?" | "come find out. two knocks" · Want add +1 |
 | | | "who's kayla?" | "friday. you'll hear her" |
+
+**Bookings and no-shows (changed 2026-10-29, DECISIONS 87–88, re-signed by LO 2026-10-29).** A yes books it; showing up pays or plays its line and clears the booking; a yes with no show brings a short text that costs, whether she answers it or ignores it for a day. Ignoring the first text costs a little. Amounts are guesses for LO.
+
+| text | the yes books | showing up | ignored a day | the no-show text (when) | it costs |
+|---|---|---|---|---|---|
+| "you still up?" · "two knocks. door's open." (after step 8) | "coming": `ryan_knock_booked` | on his bed: "You came. I wasn't sure you would." | Warmth add −1 | "you said coming." · "door was open all night." (3 hours after the yes, 00:30–04:00) | Warmth add −2 |
 
 ## Everyday at home (system `home_life`, LO's picks, 2026-10-08)
 

@@ -139,3 +139,43 @@ def hungry_node(back):
     return node("hl_hungry", "Further", [
         P("That's further than you go in this release of First Term. It comes later, when you're Hungry."),
     ], [go("Back.", loc=back)])
+
+
+# The remote (DECISIONS 85-86, living_tv_channels.md), shared by home.py's TV alone and Mark's hub.
+CHANNELS = [  # (id, button, lines, clip description, queries, pool)
+    ("news", "Channel 1: the news.",
+     ["A reporter stands in the rain outside a courthouse. Then the weather: more rain.",
+      "The local news: a fire on the ring road, a lost dog, the council shouting about parking."],
+     "a local TV news broadcast, a reporter on location", ("local tv news reporter live", "tv news broadcast screen"), "tv/news_t0"),
+    ("cooking", "Channel 2: a cooking show.",
+     ["A chef with huge arms folds butter into pastry and won't stop talking about it.",
+      "Two women race to ice a cake before the clock runs out. One of them cries."],
+     "a TV cooking show, a chef at a studio counter", ("tv cooking show chef studio", "baking competition tv"), "tv/cooking_t0"),
+    ("sports", "Channel 3: sports.",
+     ["Football, a match nobody in this house cares about. Two-nil.",
+      "Highlights: a man runs a very long way while the commentator loses his mind."],
+     "a football match on TV, players on a green pitch", ("football match tv broadcast", "soccer highlights tv"), "tv/sports_t0"),
+    ("film", "Channel 4: an old film.",
+     ["An old black-and-white film. A woman in a fur coat slaps a man, then kisses him.",
+      "A cop film from the nineties. Everything explodes, twice."],
+     "an old black-and-white film on TV, a couple arguing", ("old black and white movie scene", "classic film tv"), "tv/film_t0"),
+]
+TV_GG, TV_CUR = trait("corruption", "lt", 20), trait("corruption", "gte", 20)
+
+
+def tv_pay(n, cap):
+    return [{"targetType": "player", "trait": "corruption", "op": "add", "value": n, "cap": cap}]
+
+
+def remote_choices(prefix, adult_node):
+    return [go(btn, node=f"{prefix}{cid}", mins=1) for cid, btn, *_ in CHANNELS] + \
+           [go("Channel 5: the adult channel.", node=adult_node, mins=1)]
+
+
+def watch_plain(back, extra_eff=()):
+    """The plain channels' old pay: energy +5 (and the hub's +1) once a day; after that the hour is free."""
+    e = [{"targetType": "player", "trait": "energy", "op": "add", "value": 5, "cap": 100}, *extra_eff]
+    return [go("Watch a while.", loc=back, mins=30, flags=[fset("watched_tv")], eff=e, cond_=cond(flag("watched_tv", False))),
+            go("Watch a while.", loc=back, mins=30, cond_=cond(flag("watched_tv")))]
+
+

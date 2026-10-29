@@ -1,5 +1,6 @@
 """Laura — steps 1-8 (Laura C 1-8; step 5 = Jake B 4), her hubs, the catch, the curfew call.
 Source: sheets/scenes/laura_0*.md, sheets/people/npc_laura.md. Explicit screens pasted as signed."""
+import json
 from canv import *
 from tomlw import tod, wd
 M = "npc_mark"
@@ -414,6 +415,30 @@ DINNER_DONE = [
        cond_=cond(wd(6), flag("room_tidy"), CURIOUS, flag("ate_dinner", False)),
        flags=[fset("ate_dinner"), funset("room_tidy")], eff=[energy(15), warm(L, 3)]),
 ]
+# Her text (phone.py laura_dinner, DECISIONS 87): "yes, starving" sets dinner_promised, so coming pays
+# warmth +1 more and clears it (else the no-show text arrives). "eating out tonight" sets said_eating_out,
+# read for 8 hours (the text comes 16:00-17:30, dinner ends 20:00); eating with her anyway is the lie
+# she sees, suspicion +1. Conditions don't nest, so "not said, or said long ago" is two copies.
+SAID_OUT = {"type": "hours_since_flag", "subject": "player", "flag_key": "said_eating_out", "operator": "lt", "value": 8}
+SAID_OUT_OLD = dict(SAID_OUT, operator="gte")
+
+
+def _with_items(c, items, eff=(), flags=()):
+    d = json.loads(json.dumps(c))
+    d["conditions"] = cond(*(d.get("conditions") or {}).get("items", []), *items)
+    d["effects"] = list(d.get("effects", [])) + list(eff)
+    d["flagEffects"] = list(d.get("flagEffects", [])) + list(flags)
+    return d
+
+
+_kept = []
+for _c in DINNER_DONE:
+    _yes, _no = booked_split(_c, "dinner_promised", eff=[warm(L)])
+    _kept += [_yes,
+              _with_items(_no, [flag("said_eating_out"), SAID_OUT], eff=[susp(1)], flags=[funset("said_eating_out")]),
+              _with_items(_no, [flag("said_eating_out", False)]),
+              _with_items(_no, [flag("said_eating_out"), SAID_OUT_OLD])]
+DINNER_DONE = _kept
 # The grocery run (home_life.md:100; LO Q67: $20 in, $20 out, Warmth +2 delivered, suspicion +2 after a day):
 # Laura asks at dinner; you give it to her at a later dinner; a day late, she asks where it is. Each goes
 # back to the dinner screen. One list at a time; asked once a day (`grocery_asked_today`, cleared at midnight).
@@ -453,7 +478,10 @@ hub_nodes += [
 hub_nodes.append(node("hl_tidy_tease", "Your room", [placeholder(f"{LS}:96", "Laura, Sunday dinner tidy check: tease (Curious)")],
                       [go("Done.", loc=K)]))
 add_item("dinner", "Sit down to dinner.", HER_EVE + [tod("18:00", "20:00")], "ate_dinner", K,
-         [D(L, "How's college?"), P("She actually waits for the answer."), *AT_TABLE,
+         [G(cond(flag("dinner_promised")), D(L, "You came. Sit, sit. It's still hot.")),
+          G(cond(flag("dinner_promised", False), flag("said_eating_out"), SAID_OUT),
+            D(L, "I thought you were eating out."), P("She puts a plate down anyway, and watches you eat it.")),
+          D(L, "How's college?"), P("She actually waits for the answer."), *AT_TABLE,
           G(cond(wd(6), flag("room_tidy")), D(L, "Your room looked nice."), P("She means it. She squeezes your hand on the table.")),
           G(cond(wd(6), flag("room_tidy", False)), D(L, "I looked in your room. Pigsty."), P("She doesn't squeeze anything.")),
           G(cond(flag("grocery_list"), flag("groceries_bought", False),
@@ -589,6 +617,8 @@ bd_choices, bd_nodes = item("hair", "Let her do your hair.", DRESSING, "made_up_
 # Sun 00:00-01:00 Mark and Laura are awake (DECISIONS 80): the "asleep" line skips that hour, written
 # once per piece of the night because conditions do not nest.
 ASLEEP_HOURS = [(wd(0, 1, 2, 3, 4, 5), tod("22:00", "07:00")), (wd(6), tod("22:00", "00:00")), (wd(6), tod("01:00", "07:00"))]
+# Laura is awake and alone Sun-Fri 22:00-23:00 (DECISIONS 82), so a line saying she is asleep skips that hour too.
+LAURA_ASLEEP_HOURS = [(wd(0, 1, 2, 3, 4), tod("23:00", "07:00")), (wd(5), tod("22:00", "07:00")), (wd(6), tod("23:00", "00:00")), (wd(6), tod("01:00", "07:00"))]
 out.append({
     "id": "hub_laura_bedroom", "name": "Laura",
     "description": "Laura in her room: dressing on Saturday evenings with the door open (her hair, home_life item 12), or asleep at night (her face; home_master_bedroom.md:36-45).",
@@ -605,7 +635,7 @@ out.append({
             G(cond(*DRESSING, trait("laura_step", "lt", 6)), P("She catches you watching her in the mirror, and holds it."), D(L, "One of these nights I'm coming out with you. Don't think I won't.")),
             *[G(cond(*hrs),
                 P("Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. She doesn't stir."))
-              for hrs in ASLEEP_HOURS],
+              for hrs in LAURA_ASLEEP_HOURS],
         ], [*bd_choices,
             go("Help her choose.", node="choose", mins=20, cond_=cond(*DRESSING)),
             go("Back out.", loc="home_hall")]),

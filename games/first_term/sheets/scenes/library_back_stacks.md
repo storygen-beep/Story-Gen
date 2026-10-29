@@ -1,6 +1,8 @@
-# [DRAFT] Scene — library_back_stacks
+# [READY] Scene — library_back_stacks
 
-> **[DRAFT] — waits for LO's sign.** Written 2026-10-29 from LO's pick in chat (DECISIONS 79). Prose by `v2-prose`, measured with `gates.py --beat`, pasted here.
+> Signed by LO: LO, 2026-10-29 ("sign all", in chat).
+
+> Written 2026-10-29 from LO's pick in chat (DECISIONS 79). Prose by `v2-prose`, measured with `gates.py --beat`, pasted here.
 
 | row | answer |
 |---|---|

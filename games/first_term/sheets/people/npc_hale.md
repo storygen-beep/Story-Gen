@@ -1,6 +1,8 @@
 # [READY] Person — Dr. Hale
 
-> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
+> **Changed 2026-10-29, re-signed by LO 2026-10-29** (DECISIONS 87–88): his emails book Thursday; a no-show costs her Psychology grade.
+
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08). Re-signed 2026-10-29 ("sign all", in chat).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the place sheets. Id `npc_hale`.
 
@@ -88,6 +90,13 @@ email, so whole sentences. Lines are samples (guess).
 |---|---|---|---|
 | 1 | "Office hours are Thursday, after six. Bring the essay." | "I'll be there." | "Good. — H." |
 | | | "I can't this Thursday." | "Then next Thursday. — H." |
+
+**Bookings and no-shows (changed 2026-10-29, DECISIONS 87–88, re-signed by LO 2026-10-29).** A yes books it; showing up pays or plays its line and clears the booking; a yes with no show brings a short text that costs, whether she answers it or ignores it for a day. Ignoring the first text costs a little. Amounts are guesses for LO.
+
+| text | the yes books | showing up | ignored a day | the no-show text (when) | it costs |
+|---|---|---|---|---|---|
+| "Office hours are Thursday, after six. Bring the essay." | "I'll be there.": `hale_office_booked` | his step 3 plays as before | nothing | "I waited until half past seven." (Friday 09:00–17:00, a day after the yes, step 3 not done) | `grade_psych` add −2 |
+| "Thursday, my office. Seven." (Wednesday, after step 5) | "Seven.": `hale_thursday_booked` | `hale_thursdays` plays as before | nothing | "The door was unlocked at seven." (Friday 09:00–17:00) | `grade_psych` add −1 |
 
 ## Rows a gate needs
 

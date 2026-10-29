@@ -1,6 +1,8 @@
 # [READY] Person — Zoe
 
-> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
+> **Changed 2026-10-29, re-signed by LO 2026-10-29** (DECISIONS 87–88): her run text books the run; a no-show sets `zoe_bailed`, read by her next park line. Her party text: "obviously" is a promise to come short.
+
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08). Re-signed 2026-10-29 ("sign all", in chat).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the place sheets. Id `npc_zoe`.
 
@@ -104,6 +106,13 @@ Each follow-up waits for her reply (`after_round`), and a different answer follo
 |---|---|---|---|
 | 1 | "run tmrw? 8. the park" | "i'm in" | "wear the sports bra 😏" · sets `zoe_run_booked` |
 | | | "too early" | "lazy. next week then" |
+
+**Bookings and no-shows (changed 2026-10-29, DECISIONS 87–88, re-signed by LO 2026-10-29).** A yes books it; showing up pays or plays its line and clears the booking; a yes with no show brings a short text that costs, whether she answers it or ignores it for a day. Ignoring the first text costs a little. Amounts are guesses for LO.
+
+| text | the yes books | showing up | ignored a day | the no-show text (when) | it costs |
+|---|---|---|---|---|---|
+| "run tmrw? 8. the park" | "i'm in": `zoe_run_booked` | at the park: "You actually came! Okay. I owe you a coffee." (Zoe has no number, so nothing more) | nothing | "you bailed on me 🙄" · "i ran alone like a loser" (16 hours after the yes, 10:00–20:00) | sets `zoe_bailed`: her next park line is "Oh, look who remembered mornings exist." |
+| "party tmrw. wear something short" | "obviously": `zoe_party_promised` (read for 30 hours) | at her door in something short: "Told you. Short. Good girl." · not short: "\"Obviously\", she said. That's not short, babe." | nothing | none | none |
 
 ## Rows a gate needs
 

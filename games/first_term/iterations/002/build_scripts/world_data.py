@@ -103,9 +103,15 @@ LOCATIONS = [
                  # skips that hour and "The door's ajar." opens master_door_saturday_night instead.
                  # The brake is two options with one text: never seen, or seen 24+ hours ago
                  # (hours_since_flag fails closed on an unset flag, and conditions do not nest).
+                 # DECISIONS 82 (2026-10-29): Sun-Fri 22:00-23:00 Laura is awake and alone, so "Ease the
+                 # door open" skips that hour too and "The door's ajar." opens laura_alone_in_bed.
                  dict(text="Ease the door open.",
                       conditions=cond({"type": "npc_at_location", "location_id": "home_master_bedroom", "operator": "is_present"},
-                                      wd(0, 1, 2, 3, 4, 5), tod("22:00", "07:00")),
+                                      wd(0, 1, 2, 3, 4), tod("23:00", "07:00")),
+                      goes_to={"type": "canvas", "canvas_id": "master_asleep"}),
+                 dict(text="Ease the door open.",
+                      conditions=cond({"type": "npc_at_location", "location_id": "home_master_bedroom", "operator": "is_present"},
+                                      wd(5), tod("22:00", "07:00")),
                       goes_to={"type": "canvas", "canvas_id": "master_asleep"}),
                  dict(text="Ease the door open.",
                       conditions=cond({"type": "npc_at_location", "location_id": "home_master_bedroom", "operator": "is_present"},
@@ -113,8 +119,25 @@ LOCATIONS = [
                       goes_to={"type": "canvas", "canvas_id": "master_asleep"}),
                  dict(text="Ease the door open.",
                       conditions=cond({"type": "npc_at_location", "location_id": "home_master_bedroom", "operator": "is_present"},
-                                      wd(6), tod("22:00", "00:00")),
+                                      wd(6), tod("23:00", "00:00")),
                       goes_to={"type": "canvas", "canvas_id": "master_asleep"}),
+                 # Laura's hour (DECISIONS 82, 84): once a night, the brake as two options with one text;
+                 # after she watched, a peek that pays nothing.
+                 dict(text="The door's ajar.",
+                      conditions=cond({"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_laura", "operator": "is_present"},
+                                      {"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_mark", "operator": "is_absent"},
+                                      wd(6, 0, 1, 2, 3, 4), tod("22:00", "23:00"), flag("laura_alone_seen", False)),
+                      goes_to={"type": "canvas", "canvas_id": "laura_alone_in_bed"}),
+                 dict(text="The door's ajar.",
+                      conditions=cond({"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_laura", "operator": "is_present"},
+                                      {"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_mark", "operator": "is_absent"},
+                                      wd(6, 0, 1, 2, 3, 4), tod("22:00", "23:00"), {"type": "hours_since_flag", "subject": "player", "flag_key": "laura_alone_seen", "operator": "gte", "value": 20}),
+                      goes_to={"type": "canvas", "canvas_id": "laura_alone_in_bed"}),
+                 dict(text="Peek through the gap.",
+                      conditions=cond({"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_laura", "operator": "is_present"},
+                                      {"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_mark", "operator": "is_absent"},
+                                      wd(6, 0, 1, 2, 3, 4), tod("22:00", "23:00"), {"type": "hours_since_flag", "subject": "player", "flag_key": "laura_alone_seen", "operator": "lt", "value": 20}),
+                      goes_to={"type": "canvas", "canvas_id": "laura_alone_peek"}),
                  dict(text="The door's ajar.",
                       conditions=cond({"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_laura", "operator": "is_present"},
                                       {"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_mark", "operator": "is_present"},
@@ -125,6 +148,20 @@ LOCATIONS = [
                                       {"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_mark", "operator": "is_present"},
                                       wd(6), tod("00:00", "01:00"), {"type": "hours_since_flag", "subject": "player", "flag_key": "mark_laura_seen", "operator": "gte", "value": 24}),
                       goes_to={"type": "canvas", "canvas_id": "master_door_saturday_night"}),
+                 # Reader item 4 (LO, 2026-10-29): in that hour, whenever someone is inside and "The door's
+                 # ajar." is off, the door offers a peek instead of "Nobody comes" (master_door_peek.md).
+                 # hours_since_flag lt 24 fails closed on an unset flag, which is right: never seen means the
+                 # main scene is still on offer.
+                 dict(text="Peek through the gap.",
+                      conditions=cond({"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_laura", "operator": "is_present"},
+                                      {"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_mark", "operator": "is_present"},
+                                      wd(6), tod("00:00", "01:00"), {"type": "hours_since_flag", "subject": "player", "flag_key": "mark_laura_seen", "operator": "lt", "value": 24}),
+                      goes_to={"type": "canvas", "canvas_id": "master_door_peek"}),
+                 dict(text="Peek through the gap.",
+                      conditions=cond({"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_mark", "operator": "is_present"},
+                                      {"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_laura", "operator": "is_absent"},
+                                      wd(6), tod("00:00", "01:00")),
+                      goes_to={"type": "canvas", "canvas_id": "master_door_peek"}),
                  dict(text="Go in.",
                       conditions=cond({"type": "npc_at_location", "location_id": "home_master_bedroom",
                                        "operator": "is_absent"}),

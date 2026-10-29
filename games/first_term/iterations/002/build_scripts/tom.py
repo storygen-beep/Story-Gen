@@ -226,7 +226,8 @@ out.append({
     "trigger": {"location": "cafe", "npc": TM, "requires_npc": TM, "is_repeatable": True, "priority": 5, "is_active": True,
                 "max_triggers_per_day": 1,
                 "schedules": [{"weekdays": [4], "start_time": "22:00", "end_time": "23:00"}],
-                "conditions": cond(trait("tom_step", "eq", 6))},
+                # only her "i'll stay" to his Friday text opens the night (phone.py tom_close, DECISIONS 87)
+                "conditions": cond(trait("tom_step", "eq", 6), flag("tom_close_booked"))},
     "nodes": [
         node("close", "After close", [
             POOL(
@@ -289,8 +290,10 @@ out.append({
 out.append({
     "id": "hub_tom_cafe", "name": "Tom",
     "description": "Tom's hub at the café. His Want and Power colour the lines; his lines read her uniform.",
+    # The counter is the open café, 08:00-22:00. The café stays open till 23:00 for his closing hour
+    # (LO, 2026-10-29), and that hour's face is after close; this hub would take it (priority 6 over 5).
     "trigger": {"location": "cafe", "npc": TM, "requires_npc": TM, "is_repeatable": True, "priority": 6,
-                "is_active": True, "conditions": cond(flag("tom_met"))},
+                "is_active": True, "conditions": cond(flag("tom_met"), tod("08:00", "22:00"))},
     "nodes": [
         node("counter", "The counter", [
             P("Tom's behind the counter with a cloth over his shoulder, keeping an eye on the room and an eye on you."),
@@ -352,6 +355,10 @@ for _c in out:
 
 # (Iteration 002, part 7: no presence check on Gary here. Tom B 4 is where she meets him, and his row
 # waits for gary_met, so a check made the step unreachable: found by reach_all.py.)
+# Showing up after close clears her "i'll stay" (phone.py tom_close, DECISIONS 87).
+for _c in out:
+    if _c["id"] == "tom_after_close":
+        clear_on_leave(_c, "tom_close_booked")
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards)
 open(__import__("sys").argv[1], "w").write(text)
 print("tom:", len(out), "canvases,", len(cards), "cards")

@@ -871,3 +871,58 @@ sheets' own, and none is a tease, touch or paid look.
   - The door says "Nobody comes" at Sun 00:00–01:00 when they're inside but the scene was seen within 24 hours, or Laura is on the stairs.
   - The park's exits can land after 22:00. That is older than this step, apart from `linger`.
 - **After the fixes:** gates 61/89, ship unchanged, playtest 23/23.
+
+## 2026-10-29: reader item 5, the park closes on time (LO's yes)
+
+- `pools.py`: `park_watch_the_couple`'s trigger now also needs `time_of_day` 07:00–21:30. The longest path is 21 minutes, so every exit lands before the park locks at 22:00. The park sheet's "where · when" row says the same (changed first, waits for LO's re-sign).
+- Snapshot before: `first_term_snapshots/20261029_fixes45_before/`.
+- Rebuilt with dev + debug. Gates 61/89, unchanged. The built TOML carries the new window.
+
+## 2026-10-29: reader item 4, a peek instead of "Nobody comes" (LO's "go")
+
+- New sheet `sheets/scenes/master_door_peek.md` (DRAFT, waits for LO's sign) and two rows in `places/home_master_bedroom.md`.
+- `world_data.py`: their door gets "Peek through the gap." for Sun 00:00–01:00 in two cases: both in and `mark_laura_seen` under 24 hours, or Mark in and Laura out (`came_home_late`, she is on the stairs).
+- `home.py`: new canvas `master_door_peek`, one screen, a line per case, pays nothing, "Close the door." to the hall.
+- Gate catch: "sitting up in bed" read as asleep (`_TR_SLEEP` matches "in bed"), so the line says "against the headboard". Noted on the sheet.
+- Rebuilt with dev + debug. Gates 61/89, unchanged; the named-person count is back to 20. Playtest: the peek and park-hour probe 14/14, the step 5 probe 23/23, 0 page errors.
+
+## 2026-10-29: Laura alone, Sun–Fri 22:00–23:00 (DECISIONS 82–84, LO's picks)
+
+- New sheet `sheets/scenes/laura_alone_in_bed.md` (DRAFT). Changed: `places/home_master_bedroom.md`, `people/npc_laura.md`, `people/npc_mark.md`, DECISIONS 82–84. Snapshot: `first_term_snapshots/20261029_laura_alone_before/`.
+- Ledger: Laura's bedroom row Sun–Fri 22:00–06:30 split at 23:00; 22:00–23:00 is "awake, alone". `ACTIVITIES` gains the row.
+- `home.py`: canvases `laura_alone_in_bed` (`crack` / `watch`, +1 cap 19, flags `saw_laura_alone` and `laura_alone_seen`) and `laura_alone_peek` (one screen, pays nothing). `LAURA_ASLEEP_HOURS` keeps every "Laura's asleep" line out of that hour (`home.py`, `laura.py`).
+- `world_data.py`: "Ease the door open" skips Sun–Fri 22:00–23:00; "The door's ajar." (brake: unset or 20+ hours) and "Peek through the gap." (under 20 hours) fill it.
+- Rewording (DECISIONS 83): Mark's living-room lines and step 4 say Laura has "gone up" or "gone to bed"; Ryan's step 4 "Mom's asleep." became "Mom's gone to bed." Curious goal card adds "Laura's door at night".
+- Rebuilt with dev + debug. Gates 61/89, unchanged; named-person flags 20, unchanged. "Every stage has a way up": Good Girl has 5 acts, about 4 days (was 4 acts, about 5). Playtest: Laura probe 18/18, step 5 probe 23/23, peek and park probe 14/14, 0 page errors. The 2 new clip slots (`sex/laura_alone_crack_t5`, `sex/laura_alone_watch_t5`) are empty; no media harvest.
+
+## 2026-10-29: the remote, 5 channels (DECISIONS 85–86, LO's picks)
+
+- New sheet `sheets/scenes/living_tv_channels.md` (DRAFT); `places/home_living_room.md` row; DECISIONS 85–86. Snapshot: `first_term_snapshots/20261029_tv_before/`.
+- `home_items.py`: `CHANNELS` and the remote helpers, shared. `home.py`: `living_tv` rebuilt (remote, 4 plain channels, `adult`, `touch`), no daily brake on the canvas; the plain channels keep energy +5 once a day. `mark.py`: the old "Watch TV with him." item replaced by the same remote inside `hub_mark_living_room` (`mremote`, `mch_*`, `madult`, `mleave`).
+- 12 new clip pools, all empty (no harvest).
+- Gates 60/89 (was 61): "the climb is paid for" went red, as LO was told: it reads `living_tv` as "0 → 60 free, no cap", but the effects carry caps 19/39, so the TV cannot raise her past 39 (the gate does not read `cap`, B145). "one pool, one place" 56 → 64: the four plain channels' lines are shared between alone and with Mark. Good Girl: 7 acts, about 3 days.
+- Playtest: TV probe 19/19, Laura 18/18, step 5 23/23, peek and park 14/14, 0 page errors.
+
+## 2026-10-29: closed Zoe's Living Room, "Go back" (engine fix, LO's option 1)
+
+- LO's report: Town, then Zoe's Flat before 18:00, then "Go back" went to the start of the game. Reproduced headless: "Go back" ran `previous()`, which was `Location_zoe_flat`, and that redirects straight back into the Living Room (a loop, or Start with no earlier page).
+- Cause, in the engine: a building's `default_entry` room has no `entry_from` by rule, so its closed screen fell to `previous() || "Start"`. Fix in `generators/v2.py` (the closed-screen "Go back"): that room now goes back to the building's own `entry_from`, the same place as the open room's "Exit <building>". Zoe's Living Room's "Go back" now goes to `Location_town`. No game files changed.
+- Test: `test_location_hours.py::test_a_closed_default_entry_room_goes_back_out_of_the_building`. Run with `test_refused_room` and `test_unaffordable_room`: 37 passed.
+- Rebuilt with dev + debug. Gates 60/89, unchanged. Playtest: the Zoe probe lands on `Location_town`; TV 19/19, Laura 18/18, step 5 23/23, peek and park 14/14, 0 page errors.
+
+## 2026-10-29: a text books something (DECISIONS 87–88, LO's "go")
+
+- LO's report: Laura's "home for dinner sweetheart?" changes nothing. Of the 10 texts, 2 were broken (Laura's dinner; Zoe's run set `zoe_run_booked`, which nothing read) and 6 changed nothing when she answered. Top games (round9a: CoT, IHOH): a text books a meeting; a no costs a little, ignoring costs more, a yes with no show costs most.
+- Engine read first: texts take `ignore_after_days` + `on_ignore` (`template_import.py`); a reply's `flagEffects` honours `unset`; setting a flag again restarts `hours_since_flag` (`v2.py` applyFlagEffect). Phone effects are unclamped by default (`applyPhoneEffectSet`), so every negative phone effect carries `clamp`.
+- `canv.py`: `clear_on_leave()` and `booked_split()`. `phone.py`: `thread(ignore=…)`, `noshow()`, the 8 bookings, 7 no-show threads, each with an hour window. Scenes: Laura's dinner (`DINNER_DONE` split by booking and the eating-out lie, read for 8 hours), Zoe's park run, the café's first shift (+$4), `tom_after_close` (needs `tom_close_booked`), Hale step 3 and `hale_thursdays`, `ryan_two_knocks`, the party door (`zoe_party_promised`, read for 30 hours). Tom's "maybe" became "i'll stay".
+- Sheets: a "Bookings and no-shows" table on the five person sheets, each waiting for LO's re-sign. Snapshot: `first_term_snapshots/20261029_texts_before/`.
+- Rebuilt with dev + debug. Gates 60/89, unchanged. Two reds along the way, fixed: the day-cap gate can't see a phone setter (the eating-out flag is now read for 8 hours, not cleared at midnight), and the phone truth gate caught Laura's no-show text at 23:00, when she's asleep (window now 20:00–23:00). "A chat is short and timed" fell from 15 problems to the 4 older ones.
+- Playtest: new probe `texts.js` 33/33, 0 page errors. Not played live: the party lines (they need a short outfit) and Tom's after close (see below). The older probes (tv, laura, probe, peek2, zoe) were lost when the scratchpad was cleared and were not rerun.
+- Found, not fixed: the café closes at 22:00 in the build (ledger "Mon-Sat 08:00-22:00"; `world_data.py` says 23:00, but the ledger wins), and the room passage shows the closed screen after 22:00 even to someone inside. Tom step 6 (`tom_06_after_close_kiss`, Mon–Sat 22:00–23:00) and `tom_after_close` (Fri 22:00–23:00) can't be reached. Waits for LO.
+
+## 2026-10-29: the café open till 23:00 (DECISIONS 89, LO), then "sign all"
+
+- Ledger: café hours `Mon-Sat 08:00-23:00` (the location and the job row), and Tom's 22:00–23:00 row note. `sheets/places/cafe.md` hours and closed-text rows. Snapshot: `first_term_snapshots/20261029_cafe_hours_before/`.
+- `tom.py`: `hub_tom_cafe` now runs 08:00–22:00. With no hours it took Tom's face in the closing hour (priority 6 over `tom_after_close`'s 5), so after close couldn't open even with the booking.
+- Rebuilt with dev + debug. Gates 60/89; the fail list and every number on it are the same as before the change. Playtest: `tom_late.js` 4/4 (step 6 plays Fri 22:15, café shut at 23:15, after close shut without his yes and open with it), `texts.js` 33/33, 0 page errors.
+- Signed by LO ("sign all"): DECISIONS 87–89, the five person sheets (Laura, Zoe, Tom, Hale, Ryan), and `places/cafe.md`.

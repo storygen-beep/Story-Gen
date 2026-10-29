@@ -250,15 +250,34 @@ out.append(solo("living_couch", "Lie on the couch",
             go("Get up.", loc="home_hall", mins=10)]),
     ], conds=LIVING_EMPTY, prio=3))
 
-out += brake_canvas(solo("living_tv", "Watch TV",
-    "TV alone: 60 min, energy +5 (home_life.md:69).",
-    "home_living_room", [node("tv", "TV", [
-        POOL(P("You flick through the channels and land on something with a lot of shouting. An hour goes by without asking, but you don't mind."),
-             P("A cooking show, then an old film, then you've lost track. The couch has a dent exactly your shape.")),
-    ], [go("Watch an hour.", loc="home_living_room", mins=60, flags=[fset("watched_tv")],
-           eff=[{"targetType": "player", "trait": "energy", "op": "add", "value": 5, "cap": 100}]),
-        go("Turn it off.", loc="home_hall")])],
-    sched=S(ALL, "07:00", "02:00"), conds=LIVING_EMPTY), "watched_tv")
+# The remote (DECISIONS 85-86, living_tv_channels.md): five channels, each with its own clip. The four
+# plain channels keep TV's old pay, energy +5 once a day; channel 5, the adult channel Mark pays for,
+# pays every time she watches (LO, 2026-10-29): time is its only limit.
+LIVING_TV_WATCH = ("Channel 5 fills the screen. A woman rides a man on a leather couch. Her tits bounce with every drop of her hips. His hands grip her ass and pull her down hard. The camera cuts low. His cock slides out of her, shiny and thick, and sinks back in to the root. She moans loud. The speakers carry it through the room. You jab the remote and the volume drops. On screen she rides him faster. He grunts and squeezes her ass. Your face goes hot. Your nipples pull tight and ache. You are wet. Your clit throbs, and you squeeze your thighs together hard.")
+LIVING_TV_TOUCH = ("The adult channel is on, the sound turned low. On the screen a man is taking her from behind on a couch like yours, his hands on her hips, his cock driving in deep. Her tits swing with every thrust. She moans through the speakers, low and steady. Your hand slides down your belly and inside your clothes. Your fingers find your clit, and you are already wet. You rub in time with him, hard when he drives in, slow when he pulls out. Your other hand squeezes your tit, your thumb on the nipple. One eye stays on the doorway to the hall. Anyone could walk in. You rub faster. He slams his cock into her, and you come on the couch, biting your lip. Your hips lift off the cushion while your fingers keep working your clit through it.")
+tv_nodes = [node("remote", "The remote", [
+        P("You drop onto the couch and pick up the remote. Five channels, and one of them is the one Mark pays for."),
+    ], remote_choices("ch_", "adult") + [go("Turn it off.", loc="home_hall")])]
+for cid, btn, lines, desc, qs, pool in CHANNELS:
+    tv_nodes.append(node(f"ch_{cid}", btn.split(": ", 1)[1].rstrip(".").capitalize(), [POOL(*[P(x) for x in lines]), VID(desc, *qs, pool_dir=pool)],
+        [*watch_plain("home_living_room"), go("Change the channel.", node="remote"), go("Turn it off.", loc="home_hall")]))
+tv_nodes += [
+    node("adult", "Channel 5", [P(LIVING_TV_WATCH),
+        VID("a couple having sex on a TV screen in a dark living room, the woman riding the man", "porn on tv screen living room", "woman riding man on tv adult channel", pool_dir="sex/tv_adult_alone_t5")],
+        [go("Keep watching.", loc="home_living_room", mins=30, eff=tv_pay(1, 19), cond_=cond(TV_GG)),
+         go("Keep watching.", loc="home_living_room", mins=30, eff=tv_pay(1, 39), cond_=cond(TV_CUR)),
+         go("Touch yourself.", node="touch", mins=5, cond_=cond(TV_CUR)),
+         go("Change the channel.", node="remote"), go("Turn it off.", loc="home_hall")]),
+    node("touch", "On the couch", [
+        G(cond(here(M, "home_kitchen")), P("In the kitchen a cupboard bangs. Mark is home.")),
+        G(cond(here(R, "home_ryan_room")), P("Upstairs, Ryan's music thumps through the ceiling.")),
+        P(LIVING_TV_TOUCH),
+        VID("a girl alone on a couch touching herself while porn plays on the TV", "girl masturbating on couch watching porn on tv", "woman fingering herself couch tv porn", pool_dir="sex/tv_adult_touch_t5")],
+        [go("Fix your clothes.", loc="home_living_room", mins=25, eff=tv_pay(2, 39))]),
+]
+out.append(solo("living_tv", "Watch TV",
+    "The remote alone (DECISIONS 85-86): five channels, each with a clip. The plain four: 30 min, energy +5 once a day. Channel 5: corruption +1 every watch, cap 19 at Good Girl, 39 at Curious; touch herself at Curious, +2, cap 39.",
+    "home_living_room", tv_nodes, sched=S(ALL, "07:00", "02:00"), conds=LIVING_EMPTY))
 
 out += brake_canvas(solo("living_film", "Put a film on",
     "A film alone: 120 min, energy +5 (home_life.md:70).",
@@ -291,6 +310,8 @@ out.append(solo("master_wardrobe", "Go through Laura's wardrobe",
 # Sun 00:00-01:00 Mark and Laura are awake (DECISIONS 80): no "asleep" line may show then. The engine's
 # conditions do not nest, so each "asleep" line is written once per piece of the night that skips it.
 ASLEEP_HOURS = [(wd(0, 1, 2, 3, 4, 5), tod("22:00", "07:00")), (wd(6), tod("22:00", "00:00")), (wd(6), tod("01:00", "07:00"))]
+# Laura is awake and alone Sun-Fri 22:00-23:00 (DECISIONS 82), so a line saying she is asleep skips that hour too.
+LAURA_ASLEEP_HOURS = [(wd(0, 1, 2, 3, 4), tod("23:00", "07:00")), (wd(5), tod("22:00", "07:00")), (wd(6), tod("23:00", "00:00")), (wd(6), tod("01:00", "07:00"))]
 out.append({"id": "master_asleep", "name": "Ease the door open",
     "description": "The door's 'Ease the door open' at night: one screen naming only who is asleep, then back to the hall (home_master_bedroom.md:47-54, Q58). Reached only by the door.",
     "trigger": {"location": "home_master_bedroom", "is_repeatable": True, "priority": 1, "is_active": True,
@@ -298,9 +319,9 @@ out.append({"id": "master_asleep", "name": "Ease the door open",
     "nodes": [node("dark", "Their room at night", [
         P("You ease the handle down and open the door a hand's width. The room is dark and warm, and it smells of sleep."),
         *[G(cond(here(L, "home_master_bedroom"), here(M, "home_master_bedroom"), *hrs),
-          P("Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. Mark's on his back beside her, snoring.")) for hrs in ASLEEP_HOURS],
+          P("Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. Mark's on his back beside her, snoring.")) for hrs in LAURA_ASLEEP_HOURS],
         *[G(cond(here(L, "home_master_bedroom"), here(M, "home_master_bedroom", False), *hrs),
-          P("Laura's asleep on her side, one bare shoulder out of the covers. Mark's half of the bed is empty.")) for hrs in ASLEEP_HOURS],
+          P("Laura's asleep on her side, one bare shoulder out of the covers. Mark's half of the bed is empty.")) for hrs in LAURA_ASLEEP_HOURS],
         *[G(cond(here(M, "home_master_bedroom"), here(L, "home_master_bedroom", False), *hrs),
           P("Mark's asleep on his back, one arm flung across the bed. Laura's half is empty, the covers thrown back.")) for hrs in ASLEEP_HOURS],
         P("You stand in the gap long enough to hear the breathing. Nobody stirs."),
@@ -350,6 +371,54 @@ out.append({"id": "master_door_saturday_night", "name": "Their door's ajar",
             VID("a woman lying awake in bed touching herself under the sheet while the man beside her sleeps", "wife masturbating next to sleeping husband", "woman touches herself after husband falls asleep", pool_dir="sex/master_door_stay_t5")],
             [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_mark_and_laura"), fset("mark_laura_seen")])]),
     ]})
+
+# Laura alone (DECISIONS 82, laura_alone_in_bed.md): Sun-Fri 22:00-23:00, Mark downstairs. The same walk-in
+# shape: the look pays nothing, "Keep watching." pays corruption +1, cap 19. Reached only by the door.
+LAURA_HOUR = [here(L, "home_master_bedroom"), here(M, "home_master_bedroom", False), wd(6, 0, 1, 2, 3, 4), tod("22:00", "23:00")]
+LAURA_CRACK = ("Laura's door is open a hand's width. The bedside lamp is on low. Downstairs the TV mutters. Laura is alone in bed, the covers kicked down. Her nightdress is pushed up to her waist. Her knees are up and apart, her ass bare on the sheet. Two fingers rub slow circles on her clit. She is wet, and it shines in the lamplight. Her other hand squeezes her tit through the nightdress. Her nipple stands hard against the cotton. Her tits rise and fall faster. Her eyes are shut, her lip caught in her teeth. A small moan escapes her. Her hips lift into her fingers. She hasn't seen you. Your face burns. Heat pools low in your belly. You are wet, and your nipples go tight.")
+LAURA_WATCH = ("You stay. Your hand stays flat on the door frame. Laura pushes two fingers inside herself. Her thumb rubs her clit, faster now. Her other hand squeezes her tit and pinches the nipple. Her hips lift off the mattress. She bites the back of her hand so Mark won't hear. Her fingers pump in and out, wet and loud in the quiet. Then she comes. Her whole body shakes. Her thighs clamp hard on her hand. A moan leaks out around her teeth. Your nipples go tight and ache. You are wet, all at once. You press your thighs together. You do not touch yourself. You want to. Laura goes still, breathing hard, two fingers still inside her. Her tits rise and fall. You back away from the door before she opens her eyes, thighs pressed tight, nipples still hard.")
+out.append({"id": "laura_alone_in_bed", "name": "Laura's door's ajar",
+    "description": "Sun-Fri 22:00-23:00, Laura awake and alone, Mark downstairs: through the gap she fingers herself. Keep watching pays corruption +1, cap 19 (DECISIONS 82). Reached only by the door; once a night.",
+    "trigger": {"location": "home_master_bedroom", "is_repeatable": True, "priority": 1, "is_active": True,
+                "substitution_only": True, "max_triggers_per_day": 1,
+                # the door's own window, so a reader of the canvas sees when it can render
+                "conditions": cond(*LAURA_HOUR)},
+    "nodes": [
+        node("crack", "Laura's door, ajar", [P(LAURA_CRACK),
+            VID("through a bedroom door left ajar, a woman alone in bed in a nightdress touching herself, lamp low", "woman masturbating in bed seen through door", "peeking at mom touching herself in bed door ajar", pool_dir="sex/laura_alone_crack_t5")],
+            [go("Keep watching.", node="watch", mins=5, flags=[fset("saw_laura_alone"), fset("laura_alone_seen")]),
+             go("Pull the door to.", loc="home_hall", mins=2, flags=[fset("saw_laura_alone"), fset("laura_alone_seen")])]),
+        node("watch", "Keep watching", [P(LAURA_WATCH),
+            VID("a woman alone in bed fingering herself to orgasm, biting her hand to stay quiet", "woman fingering herself orgasm quiet in bed", "milf masturbating to orgasm biting hand", pool_dir="sex/laura_alone_watch_t5")],
+            [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_laura_alone"), fset("laura_alone_seen")])]),
+    ]})
+
+# Laura's hour after she watched (DECISIONS 84): one screen, pays nothing.
+out.append({"id": "laura_alone_peek", "name": "Peek through the gap",
+    "description": "Sun-Fri 22:00-23:00, after she has watched Laura that night: one screen, pays nothing. Reached only by the door.",
+    "trigger": {"location": "home_master_bedroom", "is_repeatable": True, "priority": 1, "is_active": True,
+                "substitution_only": True, "conditions": cond(*LAURA_HOUR)},
+    "nodes": [node("peek", "Through the gap", [
+        P("You ease the door a finger's width wider. The lamp is off now."),
+        P("Laura lies on her side with the sheet pulled up to her shoulder, breathing slow. Her nightdress is still rucked up at her hip."),
+        P("Downstairs the TV mutters. You pull the door to without a sound."),
+    ], [go("Close the door.", loc="home_hall", mins=2)])]})
+
+# Reader item 4 (LO, 2026-10-29, master_door_peek.md): the hour's other face. One screen, pays nothing.
+out.append({"id": "master_door_peek", "name": "Peek through the gap",
+    "description": "Sun 00:00-01:00, someone inside and 'The door's ajar.' off: after she has watched, or Mark alone while Laura waits on the stairs. One screen, pays nothing. Reached only by the door.",
+    "trigger": {"location": "home_master_bedroom", "is_repeatable": True, "priority": 1, "is_active": True,
+                "substitution_only": True,
+                # the door's own window, so a reader of the canvas sees when it can render
+                "conditions": cond(here(M, "home_master_bedroom"), wd(6), tod("00:00", "01:00"))},
+    "nodes": [node("peek", "Through the gap", [
+        P("You ease the handle down and open the door a finger's width. The lamp is still on."),
+        G(cond(here(L, "home_master_bedroom"), here(M, "home_master_bedroom")),
+          P("It's over. Mark's on his back, snoring. Laura lies awake beside him, staring at the ceiling, her nightdress still bunched up at her waist.")),
+        G(cond(here(M, "home_master_bedroom"), here(L, "home_master_bedroom", False)),
+          P("Mark's sitting up against the headboard under the lamp, awake and alone, his phone lit in his hand. Laura's side of the bed is empty.")),
+        P("Nobody looks at the door. You pull it to without a sound."),
+    ], [go("Close the door.", loc="home_hall", mins=2)])]})
 
 # ═════════════════════════════════════════════════════════════════════════════
 # THE GARAGE (home_garage.md): his things (A1-13, A1-21), the washer alone

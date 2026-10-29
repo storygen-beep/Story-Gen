@@ -34,10 +34,37 @@ and its Exhibitionism twin, which name sources that pay nothing at stage 1.
 | 80 | When are Mark and Laura awake together in their room? | Sun 00:00–01:00, the Saturday night after Laura comes up from waiting up (new). The door shows "The door's ajar." in that hour instead of "Ease the door open". |
 | 81 | What do the Quests goal cards say? | Only places that pay at that stage. Curious: the park couple, the library stacks, Ryan's door at night, their door on Saturday night. Bold: her room, the bathroom, the women's toilet, the park. Daring: the lecture hall, the park. Showing: the campus gym, the women's toilet, the garden, the hall, the living room, the lecture hall, the park. The labels live only in `toml_phases/5_scenes.toml`; they change there in step 5. |
 
-Rows 79–81 are drafts written 2026-10-29 from LO's picks in chat; they wait for LO's sign with the sheets they
+Rows 79–81 are signed by LO, 2026-10-29 ("sign all"); written that day from LO's picks in chat, with the sheets they
 touch: the three new scene sheets, `park_watch_the_couple.md`, `places/library.md`, `places/home_ryan_room.md`,
 `places/home_master_bedroom.md`, `people/npc_mark.md` and `people/npc_laura.md`. Snapshot of the old pages:
 `~/Documents/Great_Games_Study_20260926/first_term_snapshots/20261029_good_girl_before/`.
+
+## Answered (LO, 2026-10-29, the phone: a text books something)
+
+| # | question | LO's answer |
+|---|---|---|
+| 87 | Laura's dinner text, and 7 more, change nothing when she answers. Patch or start over? | Patch ("go", after the top-games read: CoT and IHOH, round9a). Jake's pattern for each: the yes sets a `<x>_booked` flag; the scene or person reads it (showing up pays or plays its line and clears it); a yes with no show brings a short no-show text that costs, answered or ignored for a day. Ignoring the first text costs a little (warmth or Want −1). Only Tom's after close is gated by the booking; every other scene stays open, and step gates are untouched. |
+| 88 | The amounts | Guesses, on each person's sheet: Laura warmth +1 for coming, −2 and suspicion +2 for a no-show, suspicion +1 for the eating-out lie; Tom money +4 for a booked shift, Want −1 and −2; Hale `grade_psych` −2 and −1; Ryan warmth −2; Zoe has no number, so a no-show sets `zoe_bailed` and her next park line says so. |
+| 89 | The café closed at 22:00, so Tom step 6 and his after close (22:00–23:00) could never play | The café is open till 23:00 (LO, 2026-10-29). His counter hub runs 08:00–22:00, so the closing hour's face is his after-close scene. |
+
+Rows 87–89 are signed by LO, 2026-10-29 ("café open till 23:00, then sign all"). 87–88 were written that day from LO's "go" in chat, with the sheets they touch:
+`people/npc_laura.md`, `npc_zoe.md`, `npc_tom.md`, `npc_hale.md` and `npc_ryan.md`; 89 touches `places/cafe.md` and the ledger. Snapshots:
+`~/Documents/Great_Games_Study_20260926/first_term_snapshots/20261029_texts_before/`, `20261029_cafe_hours_before/`.
+
+## Answered (LO, 2026-10-29, after step 5: more often than Saturday)
+
+| # | question | LO's answer |
+|---|---|---|
+| 82 | Can the walk-in at their door come more often than Saturday night? | Not Mark and Laura together: once a week fits a cold marriage, and Mark's weeknights downstairs are his ladder. Instead, Laura alone (`laura_alone_in_bed`, new): Sun–Fri 22:00–23:00, Mark downstairs, her door ajar, Laura fingering herself. Same shape as row 79: the look pays nothing, "Keep watching." pays corruption +1, cap 19, once a night. Laura's bedroom row splits so 22:00–23:00 is "awake, alone". |
+| 83 | Mark's lines say Laura is asleep from 22:00. Which way? | Reword Mark: "asleep" becomes "gone up" or "upstairs", true either way (he thinks she's asleep; she isn't). His step 4 is named "After she's gone up". Ryan's step 4 line ("Mom's asleep.", no sheet carries it) became "Mom's gone to bed." by the same rule. The Curious goal card adds "Laura's door at night". |
+| 84 | The door when someone is inside but the scene is off | A "Peek through the gap." option that pays nothing (reader item 4): Sat night after she watched, or Mark alone while Laura waits on the stairs (`master_door_peek`); and Laura's hour after she watched (`laura_alone_peek`). |
+| 85 | The TV | A remote with 5 channels, each with its own clip: news, cooking, sports, an old film, and channel 5, the adult channel Mark pays for. Alone at any hour the room is empty; with Mark, inside his late hub, his reaction by his step. Ryan's and Laura's TV stay as they are. |
+| 86 | What the adult channel pays | Every time she watches, no daily brake: "Keep watching." 30 min, corruption +1, cap 19 at Good Girl, cap 39 at Curious; alone at Curious, "Touch yourself." +2, cap 39. Time is the only limit (LO chose 30 min over 60 or 90, knowing Good Girl can take one long day at home and "the climb is paid for" may go red). |
+
+Rows 85–86 are signed by LO, 2026-10-29 ("sign it"), with `scenes/living_tv_channels.md` and the living-room TV row.
+Rows 82–84 are signed by LO, 2026-10-29 ("sign all"); written that day from LO's picks in chat, with the sheets they
+touch: `scenes/laura_alone_in_bed.md` (new), `scenes/master_door_peek.md` (new), `places/home_master_bedroom.md`,
+`people/npc_laura.md` and `people/npc_mark.md`. Snapshots: `first_term_snapshots/20261029_laura_alone_before/`, `20261029_tv_before/`.
 
 ## Answered (LO, 2026-10-09, during the iteration 002 build)
 

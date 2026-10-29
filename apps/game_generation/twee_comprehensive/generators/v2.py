@@ -11175,6 +11175,15 @@ jQuery(document).on('click', '.trait-modal-close', function(e) {{
                     parent_name = None
                     if hasattr(location, 'entry_from') and location.entry_from:
                         parent_name = location.entry_from.name.replace(' ', '_')
+                    # A building's default_entry room has no entry_from by rule, so it fell to previous(): the
+                    # building's own passage, which redirects straight back in (first_term: Zoe's Living Room
+                    # closed before 18:00 looped, or dropped to Start). Go back out of the building instead,
+                    # the same place the open room's "Exit <building>" link goes.
+                    container_ec = getattr(location, 'parent_location', None)
+                    if (not parent_name and container_ec is not None and getattr(container_ec, 'is_container', False)
+                            and getattr(container_ec, 'default_entry_location', None) == location
+                            and container_ec.entry_from):
+                        parent_name = container_ec.entry_from.name.replace(' ', '_')
 
                     # Check if this location has the wardrobe
                     loc_slug_ec = (location.properties or {}).get("slug", "")

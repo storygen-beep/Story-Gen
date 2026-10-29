@@ -1,6 +1,6 @@
 # [READY] Place — Master Bedroom
 
-> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08). Re-signed 2026-10-29 ("sign all", in chat).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the system sheets. Id `home_master_bedroom`.
 
@@ -37,8 +37,11 @@
 
 | window | who is here | the door offers | faces |
 |---|---|---|---|
-| Sun–Fri 22:00–00:00 · Mon–Sat 00:00–02:00 | Laura, asleep · Mark is downstairs | "Ease the door open" (question 58) | Laura, asleep |
+| Sun–Fri 22:00–23:00 | Laura, awake and alone · Mark is downstairs | "The door's ajar." → `laura_alone_in_bed`: the look pays nothing · "Keep watching." corruption add +1, cap 19 · once a night · after she watched: "Peek through the gap." → `laura_alone_peek`, pays nothing (DECISIONS 82, 84, changed 2026-10-29, re-signed by LO 2026-10-29) | Laura |
+| Sun–Fri 23:00–00:00 · Mon–Sat 00:00–02:00 | Laura, asleep · Mark is downstairs | "Ease the door open" (question 58) | Laura, asleep |
 | Sun 00:00–01:00 (Saturday night, changed 2026-10-29) | Laura and Mark, awake: Laura has come up from waiting up | "The door's ajar." → `master_door_saturday_night`: the look pays nothing · "Stay at the gap." corruption add +1, cap 19 · once a week | Laura · Mark |
+| Sun 00:00–01:00, after she has watched (within 24 hours) | Laura and Mark, awake, done | "Peek through the gap." → `master_door_peek`: pays nothing (changed 2026-10-29, reader item 4, re-signed by LO 2026-10-29) | Laura · Mark |
+| Sun 00:00–01:00, `came_home_late` | Mark, awake · Laura is on the stairs | "Peek through the gap." → `master_door_peek`: pays nothing | Mark |
 | Sun 01:00–02:00 · every day 02:00–06:30 · Sat, Sun 06:30–07:00 | Laura and Mark, asleep | "Ease the door open" | Laura, asleep · Mark, asleep |
 | Mon–Fri 06:30–07:00 | Mark, asleep · Laura is at breakfast | "Ease the door open" | Mark, asleep |
 | Sat 17:00–18:30 | Laura, dressing | "Knock" | Laura |

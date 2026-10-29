@@ -1,6 +1,8 @@
 # [READY] Person — Mark
 
-> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
+> **Changed 2026-10-29, re-signed by LO 2026-10-29** (DECISIONS 83): Laura is awake and alone 22:00–23:00, so his lines say she has "gone up", not that she is asleep. Step 4 is named "After she's gone up".
+
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08). Re-signed 2026-10-29 ("sign all", in chat).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the place sheets. Id `npc_mark`.
 
@@ -23,11 +25,11 @@
 
 | place | days | from | to | why he is there |
 |---|---|---|---|---|
-| `home_living_room` | Mon, Tue, Wed, Thu, Fri, Sun | 22:00 | 00:00 | late, after Laura sleeps |
-| `home_living_room` | Mon–Sat | 00:00 | 02:00 | late, after Laura sleeps |
+| `home_living_room` | Mon, Tue, Wed, Thu, Fri, Sun | 22:00 | 00:00 | late, after Laura goes up |
+| `home_living_room` | Mon–Sat | 00:00 | 02:00 | late, after Laura goes up |
 | `home_master_bedroom` | every day | 02:00 | 07:00 | sleeps |
 | `home_master_bedroom` | Sat | 22:00 | 00:00 | sleeps |
-| `home_master_bedroom` | Sun | 00:00 | 01:00 | awake: Laura comes up, and he takes her (`master_door_saturday_night`, changed 2026-10-29, waits for LO's re-sign) |
+| `home_master_bedroom` | Sun | 00:00 | 01:00 | awake: Laura comes up, and he takes her (`master_door_saturday_night`, changed 2026-10-29, re-signed by LO 2026-10-29) |
 | `home_master_bedroom` | Sun | 01:00 | 02:00 | sleeps |
 | `home_kitchen` | Mon, Tue, Thu, Fri | 18:00 | 19:00 | dinner with the family |
 | `home_garage` | Mon, Tue, Thu, Fri | 19:00 | 22:00 | his evenings |
@@ -42,7 +44,7 @@
 | 1 (Mark A 1) | `mark_01_count_it_slowly` | `home_kitchen` | Sun 08:00–12:00 | `rent_starts` | want add +10 | "Let me get dressed first." (parked) | Sunday morning, the kitchen: Mark counts the rent. |
 | 2 (Mark A 2) | `mark_02_late_notice` | `home_kitchen` | Mon, Tue, Wed, Thu, Fri, Sun 22:00–00:00 | his Want 10 | want add +10 | "Shut the drawer." (parked) | Late at night, the kitchen drawer: Mark is on the phone next door. |
 | 3 (Mark A 3) | `mark_03_shorts` | `home_kitchen` | Sun 08:00–12:00 | `rent_starts` · Corruption 20 · Exhib. 20 · his Want 20 | want add +10 · exhibitionism add +3 | "I'm not changing for you." (parked) | Sunday morning at the table: Mark wants shorts this time. |
-| 4 (Mark A 4) | `mark_04_after_shes_asleep` | `home_living_room` | Mon, Tue, Wed, Thu, Fri, Sun 22:00–00:00 | Corruption 40 · Exhib. 20 · his Want 30 | want add +10 | "I'll pay it Sunday like everyone else." (parked) | Late at night in the living room, Laura asleep upstairs: Mark is still up. |
+| 4 (Mark A 4) | `mark_04_after_shes_asleep` | `home_living_room` | Mon, Tue, Wed, Thu, Fri, Sun 22:00–00:00 | Corruption 40 · Exhib. 20 · his Want 30 | want add +10 | "I'll pay it Sunday like everyone else." (parked) | Late at night in the living room, Laura gone up: Mark is still up. |
 | 5 (Mark A 5) | `mark_05_a_bill_an_inch` | `home_living_room` | Sun–Fri 23:00–00:00 · Mon–Sat 00:00–01:00 (not Sunday 00:00–01:00) | Corruption 40 · Exhib. 20 · his Want 40 | want add +10 · corruption add +3 | "Hands off, Mark." · E: "Not tonight." (parked) | Midnight in the living room: Mark pays by the inch, five an inch, up to twenty. |
 | 6 (Mark A 6) | `mark_06_our_arrangement` | `home_garage` | Mon, Tue, Thu, Fri 19:00–22:00 | Corruption 40 · his Want 50 | want add +10 | "There's no arrangement." (parked) | An evening in the garage: Mark wants to talk terms. |
 | 7 (Mark A 7) | `mark_07_twenty_and_you_can_look` | `home_kitchen` | Sun 08:00–12:00 | `rent_starts` · Corruption 40 · Exhib. 40 · his Want 60 | want add +10 · exhibitionism add +3 | "Just the rent." (parked) | Sunday morning at the table: name a price. |
@@ -65,7 +67,7 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 | 1 | none: step 1, and it says so | "I am counting." |
 | 2 | his eyes on her hem at every count | "Put it back." |
 | 3 | "Friday, Frank." He knows she heard | "Not the shirt this time." |
-| 4 | he stays up after Laura sleeps | "Come down after your mother's asleep." |
+| 4 | he stays up after Laura goes up | "Come down after your mother's gone to bed." |
 | 5 | a bill folded in his hand, waiting | "Keep going." He doesn't, not yet. |
 | 6 | he can't hold her look at dinner | "Our arrangement." |
 | 7 | he counts the twenties twice | "Twenty, and you can look." |
@@ -106,7 +108,7 @@ per item. Tease from Curious and Mark A 3; from Bold and Mark A 7, the look he p
 | dinner | kitchen · Mon, Tue, Thu, Fri 18:00–19:00 (with Laura) · Wed 18:00–20:00 (he cooks) | Burnt chops. "Your mother cooks. I fill plates." | He watches @player eat. "Slower." | — |
 | help him cook | kitchen · Wed 18:00–19:00 | "Hand me the salt. No, the other salt." | @player reaches past him for the pan; he doesn't move, and @player's ass presses his hip. | — |
 | dishes | kitchen · Wed and Sun 19:00–21:00 | He dries, slow. "You missed one." | @player bends to the dishwasher in a short skirt. He stops drying. | "Twenty and you stay bent." His bill on the counter; his eyes on @player's ass in the panties. |
-| late TV and a beer | living room · Sun–Fri 22:00–00:00 · Mon–Sat 00:00–02:00 | The game on low. "Laura's asleep. Keep it down." | He hands @player a beer. @player curls up on the couch in the sleep shirt; he counts the inches of leg. | "Twenty. The shirt." He watches the TV light on @player's bare tits. |
+| late TV and a beer | living room · Sun–Fri 22:00–00:00 · Mon–Sat 00:00–02:00 | The game on low. "Laura's upstairs. Keep it down." | He hands @player a beer. @player curls up on the couch in the sleep shirt; he counts the inches of leg. | "Twenty. The shirt." He watches the TV light on @player's bare tits. |
 | laundry | garage, at the washer · Mon, Tue, Thu, Fri 19:00–22:00 · Sat 09:00–17:00 | "Whites with whites, @player." | @player's panties in the basket on top. He picks them up, turns them over, puts them back. | "Leave those. I'll fold them." A bill under the basket. |
 | the garden | garden, from the garage door · Sat 09:00–17:00 | He comes out for a beer and squints at the sky. | @player on the lounger in shorts and a bra; he stands in the garage door and doesn't go back in. | "Twenty to untie it." The bill on the grass. @player lies on the lounger untied, and he looks at the side of @player's tit, pressed flat. |
 

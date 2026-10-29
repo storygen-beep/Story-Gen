@@ -1,6 +1,6 @@
 # [READY] Place — Ryan's Room
 
-> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08). Re-signed 2026-10-29 ("sign all", in chat).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the system sheets. Id `home_ryan_room`.
 
@@ -32,7 +32,7 @@
 | two knocks, at night | person | Ryan's ladder · the door | after his step 8 (Ryan A 9): the repeat | once a night | yes: the door this release ends on |
 | his door's open a crack | sex scene · the door | the way up (DECISIONS 79) | `ryan_door_ajar`, Sun–Thu 22:00–00:00 while he's in: the look pays nothing · "Keep watching." corruption add +1, cap 19 · no ladder number moves | once a night | yes: explicit |
 
-> Changed 2026-10-29 (the door option "His door's open a crack.", LO's pick of 2026-10-29); waits for LO's re-sign.
+> Changed 2026-10-29 (the door option "His door's open a crack.", LO's pick of 2026-10-29); re-signed by LO 2026-10-29.
 
 ## Rows a gate needs
 

@@ -162,14 +162,14 @@ out.append({
 _t4 = step_trigger(M, 4)
 _t4["conditions"]["items"] += [NOT_LATE, LAURA_IN_BED]
 out.append({
-    "id": "mark_04_after_shes_asleep", "name": "After she's asleep",
+    "id": "mark_04_after_shes_asleep", "name": "After she's gone up",
     "description": "Mark step 4 (Mark A 4), the living room late: the ask. The introduction of his paid route (her climb).",
     "trigger": _t4,
     "nodes": [
         node("start", "Late", [
             G(cond(HIS),
               P("Mark's on the couch with the TV low and a beer on his knee. Laura's gone up. He doesn't look round when you come in, but he turns the TV down further."),
-              D(M, "Come down after your mother's asleep. Some night. We'll talk about the rent.")),
+              D(M, "Come down after your mother's gone to bed. Some night. We'll talk about the rent.")),
             G(cond(HERS, *BARE_LEGS),
               P("Mark's on the couch with the TV low, the house dark round him. You sit on the arm of the couch beside him, close, your bare knee by his shoulder.")),
             G(cond(HERS, {"type": "clothing_item", "item_id": "jeans", "operator": "equipped"}),
@@ -183,7 +183,7 @@ out.append({
             go("Wait for his answer.", node="price", mins=5, cond_=cond(HERS), eff=[nadd(M, "power", -3)]),
         ]),
         node("price", "The difference", [
-            P("He looks at the ceiling, where Laura's asleep. Then he looks at your legs, for a long time, slowly, from your ankles up."),
+            P("He looks at the ceiling, where Laura's gone to bed. Then he looks at your legs, for a long time, slowly, from your ankles up."),
             D(M, "You know what you're asking me, @player."),
             P("He doesn't answer it. Not yet. But he's thinking about a price, and he's letting you watch him think about it."),
             T("He's going to name a number. You want to hear it."),
@@ -534,22 +534,49 @@ def mark_hub(cid, loc, name, setting, extra=(), awake=True, leaks=(), items=(), 
 LR = "home_living_room"
 out.append(mark_hub("hub_mark_living_room", LR, "Mark, up late", "the living room late", [
     P("Mark is on the couch with the TV low and a beer on his knee."),
-    G(cond(LAURA_IN_BED), P("Laura's asleep upstairs."), D(M, "Shut the door. Your mother's sleeping.")),
+    G(cond(LAURA_IN_BED), P("Laura's gone up."), D(M, "Shut the door. Your mother's upstairs.")),
     POOL(D(M, "Can't sleep, @player?"), D(M, "Sit if you're sitting. Don't hover."), pid="mark_late_lines"),
 ], leaks=LEAKS_LATE, items=[
     (("beer", "Have a beer with him.", [], "had_drink_home", LR,
-      [P("The game on low."), G(cond(LAURA_IN_BED), D(M, "Laura's asleep. Keep it down.")), P("He hands you a can without asking.")],
+      [P("The game on low."), G(cond(LAURA_IN_BED), D(M, "Laura's upstairs. Keep it down.")), P("He hands you a can without asking.")],
       None, 30),
      dict(done_exits=[go("Done.", loc=LR, mins=30, eff=[want(M)], flags=[fset("had_drink_home")], mods=DRINK)],
           tease=m_tease(108, "late TV and a beer", "Curl up on the couch."), touch=m_paid(108, "late TV and a beer"),
           hungry="Further. (Needs Hungry)")),
-    (("tv", "Watch TV with him.", [tod("22:00", "01:00")], "watched_tv", LR,
-      [P("You take the other end of the couch. He doesn't change the channel and he doesn't talk, and an hour goes by like that.")],
-      [energy(5), want(M)], 60), {}),
     (("film", "Put a film on with him.", [tod("22:00", "00:00")], "movie_night", LR,
       [P("He lets you pick. He falls asleep in the second half, and you watch the end with his snoring for a soundtrack.")],
       [energy(5), want(M)], 120), {}),
 ]))
+# Watch TV with him (DECISIONS 85-86): the same remote as alone (home.py), his line on each channel,
+# and on channel 5 his reaction by his step. "Leave it on." pays every time, like alone.
+MARK_TV_ADULT = ("Channel 5 fills the screen. A woman is on her knees in front of a man. She sucks his cock, slow and deep, her cheeks hollow. He pulls her up and bends her over the bed. He takes her from behind. Her tits swing with every thrust. She moans, loud and long. The room goes quiet under the sound. Mark stops with the beer halfway to his mouth. He does not reach for the remote. His fingers squeeze tight around the can. On screen the man grips her hips and drives in harder. Your face goes hot. You are wet, and your nipples pull hard and tight.")
+MARK_TV_LEAVE = ("You leave it on. You both watch. On screen the man drives into her from behind. He slaps her ass, hard, and she moans. Her tits swing under her with each thrust. Mark shifts on the couch. The can moves down to his lap. It does not hide the hard bulge of his cock in his jeans. His eyes go from the screen to you. Then back to the screen. Nobody says anything. The man grips her hips and pounds her harder. She moans louder with every thrust. You are wet. You squeeze your thighs together, tight. Your nipples go hard and tight.")
+MARK_CH = {"news": D(M, "Same as yesterday. Same as every day."), "cooking": D(M, "Your mother never cooks like that."),
+           "sports": D(M, "Watch this. Watch. Ah, for God's sake."), "film": D(M, "Seen it. He dies at the end.")}
+_hub = out[-1]
+assert _hub["id"] == "hub_mark_living_room"
+_hub["nodes"][0]["choices"].insert(-1, go("Watch TV with him.", node="mremote"))
+_hub["nodes"] += [node("mremote", "The remote", [
+        P("You take the other end of the couch, and he hands you the remote without looking."),
+    ], remote_choices("mch_", "madult") + [go("Leave him to it.", loc="home_hall")])]
+for cid, btn, lines, desc, qs, pool in CHANNELS:
+    _hub["nodes"].append(node(f"mch_{cid}", btn.split(": ", 1)[1].rstrip(".").capitalize(),
+        [POOL(*[P(x) for x in lines]), MARK_CH[cid], VID(desc, *qs, pool_dir=pool.replace("tv/", "tv/mark_"))],
+        [*watch_plain(LR, [want(M)]), go("Change the channel.", node="mremote"), go("Leave him to it.", loc="home_hall")]))
+_hub["nodes"] += [
+    node("madult", "Channel 5", [P(MARK_TV_ADULT),
+        G(cond(trait("mark_step", "lt", 4)), D(M, "Change it, @player."), P("He says it. He doesn't reach for the remote.")),
+        G(cond(trait("mark_step", "gte", 4)), P("He doesn't tell you to change it. He watches the screen, and then he watches you watching it.")),
+        VID("porn playing on a living room TV at night, a man and a woman, seen from the couch", "porn on tv late night couch", "watching porn on tv with someone", pool_dir="sex/tv_adult_mark_t5")],
+        [go("Leave it on.", node="mleave", mins=5),
+         go("Change the channel.", node="mremote"), go("Leave him to it.", loc="home_hall")]),
+    node("mleave", "Leave it on", [P(MARK_TV_LEAVE),
+        VID("a man on a couch at night watching porn on TV, a beer can in his lap", "man watching porn tv couch beer", "stepdad watching porn on tv", pool_dir="sex/tv_adult_mark_leave_t5")],
+        [go("Keep watching.", loc=LR, mins=25, eff=tv_pay(1, 19), cond_=cond(TV_GG)),
+         go("Keep watching.", loc=LR, mins=25, eff=tv_pay(1, 39), cond_=cond(TV_CUR)),
+         go("Change the channel.", node="mremote")]),
+]
+
 # Sun 00:00-01:00 Mark and Laura are awake (DECISIONS 80): the "asleep" line skips that hour, written
 # once per piece of the night because conditions do not nest.
 ASLEEP_HOURS = [(wd(0, 1, 2, 3, 4, 5), tod("22:00", "07:00")), (wd(6), tod("22:00", "00:00")), (wd(6), tod("01:00", "07:00"))]
@@ -603,7 +630,7 @@ cards = step_cards(M, {
     1: ("Sunday. Mark counts the rent at the kitchen table.", "Sunday morning: the kitchen, while Mark counts the rent"),
     2: ("His eyes were on your hem at the count. He's on the phone a lot, late.", "Late at night: the kitchen drawer, Mark next door"),
     3: ("\"Friday, Frank.\" He knows you heard. Sunday's coming.", "Sunday morning at the table (Curious, Daring)"),
-    4: ("He stays up after Laura's asleep.", "Late at night in the living room, Laura asleep (Bold)"),
+    4: ("He stays up after Laura's gone up.", "Late at night in the living room, Laura gone up (Bold)"),
     5: ("\"What's the difference worth?\" He's thought about it.", "Late at night in the living room, close to midnight (Bold)"),
     6: ("He can't look at you at dinner. He wants to talk terms.", "An evening in the garage, while Mark is out there (Bold)"),
     7: ("He counts the twenties twice now.", "Sunday morning at the table, Laura out (Bold, Showing)"),
