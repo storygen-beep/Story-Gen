@@ -148,6 +148,30 @@ def mark_late(canvas, key, split=True):
     return canvas
 
 
+# ── a booking a text makes (DECISIONS 87): the yes sets `<x>_booked`, the scene it booked reads it ──
+# Showing up clears it, so the no-show text (phone.py) only arrives when she never came.
+def clear_on_leave(canvas, *keys):
+    """Every choice that leaves the canvas unsets each booking key."""
+    for n in canvas["nodes"]:
+        for c in n["choices"]:
+            if c.get("targetType") != "node":
+                c["flagEffects"] = list(c.get("flagEffects", [])) + [funset(k) for k in keys]
+    return canvas
+
+
+def booked_split(choice, key, eff=(), flags=()):
+    """The choice written twice with the same text: the booked copy pays `eff` on top and clears
+    `key`; the other copy is the choice as it was. Conditions don't nest, so both are AND lists."""
+    assert (choice.get("conditions") or {}).get("logic", "AND") == "AND", choice["text"]
+    base = list((choice.get("conditions") or {}).get("items", []))
+    yes, no = json.loads(json.dumps(choice)), json.loads(json.dumps(choice))
+    yes["conditions"] = cond(*base, flag(key))
+    yes["effects"] = list(yes.get("effects", [])) + list(eff)
+    yes["flagEffects"] = list(yes.get("flagEffects", [])) + list(flags) + [funset(key)]
+    no["conditions"] = cond(*base, flag(key, False))
+    return [yes, no]
+
+
 def lift_line(blocks, quote, speaker):
     """Split the paragraph holding `"quote"` into before / a dialog block / after, word for word
     (iteration 002, part 7: a one-time step with a person speaks). Walks into groups and pools."""

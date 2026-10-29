@@ -1,6 +1,8 @@
 # [READY] Person — Laura
 
-> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
+> **Changed 2026-10-29, re-signed by LO 2026-10-29** (DECISIONS 87–88): her dinner text books dinner; a no-show costs warmth and suspicion; saying "eating out" and eating with her is a lie she sees.
+
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08). Re-signed 2026-10-29 ("sign all", in chat).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the place sheets. Id `npc_laura`.
 
@@ -26,13 +28,14 @@
 | `home_hall` | every day | 23:00 | 02:00 | the catch on the dark stairs · only when `came_home_late` was set in the last 4 hours (question 69) |
 | `home_kitchen` | Mon–Fri | 06:30 | 08:00 | breakfast; home evenings |
 | `home_kitchen` | Mon, Tue, Thu, Fri, Sun | 18:00 | 22:00 | breakfast; home evenings |
-| `home_master_bedroom` | Mon, Tue, Wed, Thu, Fri, Sun | 22:00 | 06:30 | sleeps; dresses Saturday |
+| `home_master_bedroom` | Mon, Tue, Wed, Thu, Fri, Sun | 22:00 | 23:00 | awake and alone, Mark downstairs: `laura_alone_in_bed` (DECISIONS 82, changed 2026-10-29, re-signed by LO 2026-10-29) |
+| `home_master_bedroom` | Mon, Tue, Wed, Thu, Fri, Sun | 23:00 | 06:30 | sleeps; dresses Saturday |
 | `home_master_bedroom` | Sat | 00:00 | 07:00 | sleeps; dresses Saturday |
 | `home_master_bedroom` | Sun | 00:00 | 07:00 | sleeps; dresses Saturday |
 | `home_master_bedroom` | Sat | 17:00 | 18:30 | sleeps; dresses Saturday |
 | `home_living_room` | Sat | 22:00 | 00:00 | waiting up, Saturday |
 
-**Sun 00:00–01:00 she is awake** (changed 2026-10-29, waits for LO's re-sign): up from waiting up, Mark takes
+**Sun 00:00–01:00 she is awake** (changed 2026-10-29, re-signed by LO 2026-10-29): up from waiting up, Mark takes
 her, and she lies awake after (`master_door_saturday_night`). Same row, same place; only the line changes.
 
 **Row order matters.** The engine takes the first matching row, so her stairs row is first. Saturday 00:00–07:00 covers Friday night. Her night row ends 06:30 (all LO, 2026-10-08).
@@ -138,6 +141,13 @@ awake. She never says where @player is; the engine can't see that.
 | "It's nine. You know the rule. Home by eleven." | "I know. Eleven." | "Good girl." |
 | | "I'm staying at Zoe's." | "We'll talk about this." · `laura_suspicion` add +2 |
 | | (lets it ring) | `laura_suspicion` add +2 |
+
+**Bookings and no-shows (changed 2026-10-29, DECISIONS 87–88, re-signed by LO 2026-10-29).** A yes books it; showing up pays or plays its line and clears the booking; a yes with no show brings a short text that costs, whether she answers it or ignores it for a day. Ignoring the first text costs a little. Amounts are guesses for LO.
+
+| text | the yes books | showing up | ignored a day | the no-show text (when) | it costs |
+|---|---|---|---|---|---|
+| "home for dinner sweetheart?" | "yes, starving": `dinner_promised` | at dinner: "You came. Sit, sit. It's still hot." · Warmth add +1 more (+2 in all) | Warmth add −1 | "i kept you a plate." · "you said six." (4 hours after the yes, 20:00–23:00, before she sleeps) | Warmth add −2 · `laura_suspicion` add +2 |
+| | "eating out tonight": `said_eating_out` (read for 8 hours) | eating with her anyway: "I thought you were eating out." · `laura_suspicion` add +1 | | none | |
 
 ## Rows a gate needs
 

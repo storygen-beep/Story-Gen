@@ -1,15 +1,15 @@
 # [READY] Scene — park_watch_the_couple
 
-> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08). Re-signed 2026-10-29 ("sign all", in chat).
 
-> **Changed 2026-10-29, waits for LO's re-sign** (DECISIONS 79): a `linger` screen at Good Girl; `run` now ends before he looks up. The old page is in the 20261029_good_girl_before snapshot.
+> **Changed 2026-10-29, re-signed by LO 2026-10-29** (DECISIONS 79): a `linger` screen at Good Girl; `run` now ends before he looks up. The old page is in the 20261029_good_girl_before snapshot. **Changed again 2026-10-29** (LO's yes to reader item 5): the walk starts only until 21:30.
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. The first explicit scene (LO, 2026-10-08): strangers, an accident at stage 1. A walk event in the park.
 
 | row | answer |
 |---|---|
 | system · pool | the park · `park_watch_the_couple` |
-| where · when | the park, on a walk · 07:00–22:00 |
+| where · when | the park, on a walk · starts 07:00–21:30, so every exit (at most 21 minutes) lands before the gates lock at 22:00 (LO, 2026-10-29, reader item 5) |
 | gate | stage 1: none, and `run` offers "Look a second longer." · stage 2 adds "Stay and watch." |
 | who | two strangers, adults, in the bushes; they never learn who she is |
 | what she wears here (test 8) | not named |

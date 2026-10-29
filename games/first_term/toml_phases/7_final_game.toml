@@ -559,6 +559,7 @@ flag_keys = [
   "desk_guy_today",
   "did_dishes",
   "did_laundry",
+  "dinner_promised",
   "dress_code_today",
   "dress_warned",
   "eat_today",
@@ -585,6 +586,8 @@ flag_keys = [
   "hale_05_done",
   "hale_hour_set",
   "hale_met",
+  "hale_office_booked",
+  "hale_thursday_booked",
   "heavy_night",
   "helped_cook",
   "home_event",
@@ -617,6 +620,7 @@ flag_keys = [
   "laura_07_done",
   "laura_08_done",
   "laura_08_it_wasnt_the_wine_closed",
+  "laura_alone_seen",
   "laura_asked_to_come",
   "laura_call_today",
   "laura_caught_today",
@@ -684,6 +688,7 @@ flag_keys = [
   "ryan_hall_talked",
   "ryan_hall_today",
   "ryan_heard_her",
+  "ryan_knock_booked",
   "ryan_knock_code",
   "ryan_knocked_back",
   "ryan_talk_today",
@@ -692,6 +697,8 @@ flag_keys = [
   "ryan_terms_mine",
   "ryan_things_found",
   "ryan_things_today",
+  "said_eating_out",
+  "saw_laura_alone",
   "saw_mark_and_laura",
   "saw_ryan_alone",
   "saw_the_couple",
@@ -714,7 +721,9 @@ flag_keys = [
   "tom_04_done",
   "tom_05_done",
   "tom_06_done",
+  "tom_close_booked",
   "tom_met",
+  "tom_shift_booked",
   "touch_bed_today",
   "touch_shower_today",
   "touch_toilet_today",
@@ -729,10 +738,12 @@ flag_keys = [
   "zoe_02_done",
   "zoe_03_done",
   "zoe_04_done",
+  "zoe_bailed",
   "zoe_face_today",
   "zoe_has_bra",
   "zoe_met",
   "zoe_number",
+  "zoe_party_promised",
   "zoe_run_booked",
 ]
 
@@ -874,7 +885,12 @@ goes_to = { type = "enter" }
 
 [[locations.door.options]]
 text = "Ease the door open."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4, 5] }, { type = "time_of_day", start_time = "22:00", end_time = "07:00" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "23:00", end_time = "07:00" }] }
+goes_to = { type = "canvas", canvas_id = "master_asleep" }
+
+[[locations.door.options]]
+text = "Ease the door open."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", operator = "is_present" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "22:00", end_time = "07:00" }] }
 goes_to = { type = "canvas", canvas_id = "master_asleep" }
 
 [[locations.door.options]]
@@ -884,8 +900,23 @@ goes_to = { type = "canvas", canvas_id = "master_asleep" }
 
 [[locations.door.options]]
 text = "Ease the door open."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "22:00", end_time = "00:00" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "23:00", end_time = "00:00" }] }
 goes_to = { type = "canvas", canvas_id = "master_asleep" }
+
+[[locations.door.options]]
+text = "The door's ajar."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "flag", subject = "player", flag_key = "laura_alone_seen", operator = "is_false" }] }
+goes_to = { type = "canvas", canvas_id = "laura_alone_in_bed" }
+
+[[locations.door.options]]
+text = "The door's ajar."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "gte", value = 20 }] }
+goes_to = { type = "canvas", canvas_id = "laura_alone_in_bed" }
+
+[[locations.door.options]]
+text = "Peek through the gap."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "lt", value = 20 }] }
+goes_to = { type = "canvas", canvas_id = "laura_alone_peek" }
 
 [[locations.door.options]]
 text = "The door's ajar."
@@ -896,6 +927,16 @@ goes_to = { type = "canvas", canvas_id = "master_door_saturday_night" }
 text = "The door's ajar."
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "00:00", end_time = "01:00" }, { type = "hours_since_flag", subject = "player", flag_key = "mark_laura_seen", operator = "gte", value = 24 }] }
 goes_to = { type = "canvas", canvas_id = "master_door_saturday_night" }
+
+[[locations.door.options]]
+text = "Peek through the gap."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "00:00", end_time = "01:00" }, { type = "hours_since_flag", subject = "player", flag_key = "mark_laura_seen", operator = "lt", value = 24 }] }
+goes_to = { type = "canvas", canvas_id = "master_door_peek" }
+
+[[locations.door.options]]
+text = "Peek through the gap."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_absent" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "00:00", end_time = "01:00" }] }
+goes_to = { type = "canvas", canvas_id = "master_door_peek" }
 
 [[locations.door.options]]
 text = "Go in."
@@ -1350,7 +1391,7 @@ image_search_queries = ["café"]
 parent      = "town"
 entry_from  = "town"
 navigation_order = []
-hours = [{ weekdays = [0, 1, 2, 3, 4, 5], open = "08:00", close = "22:00" }]
+hours = [{ weekdays = [0, 1, 2, 3, 4, 5], open = "08:00", close = "23:00" }]
 closed_text = "The café's shut."
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
@@ -1573,6 +1614,13 @@ activity   = "in the kitchen, evening"
 location   = "home_master_bedroom"
 weekdays   = [6, 0, 1, 2, 3, 4]
 start_time = "22:00"
+end_time   = "23:00"
+activity   = "awake, alone"
+
+[[npcs.schedules]]
+location   = "home_master_bedroom"
+weekdays   = [6, 0, 1, 2, 3, 4]
+start_time = "23:00"
 end_time   = "06:30"
 activity   = "asleep"
 
@@ -3999,7 +4047,7 @@ content = "Two knocks. He opens on the second one, like he was waiting by the do
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Mom's asleep. Mark's downstairs. Get in before someone sees."
+content = "Mom's gone to bed. Mark's downstairs. Get in before someone sees."
 props = { speaker = "npc", npcId = "npc_ryan" }
 
 [canvases.nodes.exit_block]
@@ -4846,6 +4894,12 @@ blocks = [
 props = { id = "ryan_two_knocks_open", memory = "seen" }
 
 [[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_knock_booked", operator = "is_true" }] }, blocks = [{ type = "dialog", content = "You came. I wasn't sure you would.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
+]
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "His hands go everywhere they're allowed. Over your clothes, down your sides, over your hips, up under your hair. He holds your waist like he's stopping himself. When he pulls you against him you can feel how hard he is, and he groans into your mouth and doesn't do anything about it."
 
@@ -4887,6 +4941,7 @@ targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 60
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 1, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Take it further."
@@ -4936,6 +4991,7 @@ text = "\"Promise.\""
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 2
+flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
 
 [[canvases.nodes]]
 id   = "further"
@@ -4957,6 +5013,7 @@ text = "Go back to your room."
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
 
 [[canvases]]
 id   = "hub_ryan_room"
@@ -7795,6 +7852,18 @@ id   = "hl_dinner"
 name = "Sit down to dinner"
 
 [[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_true" }] }, blocks = [{ type = "dialog", content = "You came. Sit, sit. It's still hot.", props = { speaker = "npc", npcId = "npc_laura" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "said_eating_out", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "said_eating_out", operator = "lt", value = 8 }] }, blocks = [{ type = "dialog", content = "I thought you were eating out.", props = { speaker = "npc", npcId = "npc_laura" } }, { type = "paragraph", content = "She puts a plate down anyway, and watches you eat it." }] },
+]
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "How's college?"
 props = { speaker = "npc", npcId = "npc_laura" }
@@ -7847,7 +7916,25 @@ text = "Done."
 targetType = "location"
 locationId = "home_kitchen"
 time_progression_minutes = 30
-conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 3, 4] }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 3, 4] }, { type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 15, cap = 100 }, { targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 1, cap = 100 }, { targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 1, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "ate_dinner", op = "set" }, { targetType = "player", flag = "dinner_promised", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 3, 4] }, { type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "said_eating_out", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "said_eating_out", operator = "lt", value = 8 }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 15, cap = 100 }, { targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 1, cap = 100 }, { targetType = "player", trait = "laura_suspicion", op = "add", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "ate_dinner", op = "set" }, { targetType = "player", flag = "said_eating_out", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 3, 4] }, { type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "said_eating_out", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "energy", op = "add", value = 15, cap = 100 }, { targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 1, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "ate_dinner", op = "set" }]
 
@@ -7856,7 +7943,34 @@ text = "Done."
 targetType = "location"
 locationId = "home_kitchen"
 time_progression_minutes = 30
-conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "flag", subject = "player", flag_key = "room_tidy", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 3, 4] }, { type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "said_eating_out", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "said_eating_out", operator = "gte", value = 8 }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 15, cap = 100 }, { targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 1, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "ate_dinner", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "flag", subject = "player", flag_key = "room_tidy", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 15, cap = 100 }, { targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 3, cap = 100 }, { targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 1, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "ate_dinner", op = "set" }, { targetType = "player", flag = "room_tidy", op = "unset" }, { targetType = "player", flag = "dinner_promised", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "flag", subject = "player", flag_key = "room_tidy", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "said_eating_out", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "said_eating_out", operator = "lt", value = 8 }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 15, cap = 100 }, { targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 3, cap = 100 }, { targetType = "player", trait = "laura_suspicion", op = "add", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "ate_dinner", op = "set" }, { targetType = "player", flag = "room_tidy", op = "unset" }, { targetType = "player", flag = "said_eating_out", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "flag", subject = "player", flag_key = "room_tidy", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "said_eating_out", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "energy", op = "add", value = 15, cap = 100 }, { targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 3, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "ate_dinner", op = "set" }, { targetType = "player", flag = "room_tidy", op = "unset" }]
 
@@ -7865,7 +7979,43 @@ text = "Done."
 targetType = "location"
 locationId = "home_kitchen"
 time_progression_minutes = 30
-conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "flag", subject = "player", flag_key = "room_tidy", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "flag", subject = "player", flag_key = "room_tidy", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "said_eating_out", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "said_eating_out", operator = "gte", value = 8 }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 15, cap = 100 }, { targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 3, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "ate_dinner", op = "set" }, { targetType = "player", flag = "room_tidy", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "flag", subject = "player", flag_key = "room_tidy", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 15, cap = 100 }, { targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 1, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "ate_dinner", op = "set" }, { targetType = "player", flag = "dinner_promised", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "flag", subject = "player", flag_key = "room_tidy", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "said_eating_out", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "said_eating_out", operator = "lt", value = 8 }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 15, cap = 100 }, { targetType = "player", trait = "laura_suspicion", op = "add", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "ate_dinner", op = "set" }, { targetType = "player", flag = "said_eating_out", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "flag", subject = "player", flag_key = "room_tidy", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "said_eating_out", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 15, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "ate_dinner", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "flag", subject = "player", flag_key = "room_tidy", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "said_eating_out", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "said_eating_out", operator = "gte", value = 8 }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "energy", op = "add", value = 15, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "ate_dinner", op = "set" }]
 
@@ -7874,7 +8024,34 @@ text = "Ask what she saw in your room."
 targetType = "node"
 nodeId = "hl_tidy_tease"
 time_progression_minutes = 30
-conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "flag", subject = "player", flag_key = "room_tidy", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "flag", subject = "player", flag_key = "room_tidy", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 15, cap = 100 }, { targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 3, cap = 100 }, { targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 1, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "ate_dinner", op = "set" }, { targetType = "player", flag = "room_tidy", op = "unset" }, { targetType = "player", flag = "dinner_promised", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Ask what she saw in your room."
+targetType = "node"
+nodeId = "hl_tidy_tease"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "flag", subject = "player", flag_key = "room_tidy", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "said_eating_out", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "said_eating_out", operator = "lt", value = 8 }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 15, cap = 100 }, { targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 3, cap = 100 }, { targetType = "player", trait = "laura_suspicion", op = "add", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "ate_dinner", op = "set" }, { targetType = "player", flag = "room_tidy", op = "unset" }, { targetType = "player", flag = "said_eating_out", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Ask what she saw in your room."
+targetType = "node"
+nodeId = "hl_tidy_tease"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "flag", subject = "player", flag_key = "room_tidy", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "said_eating_out", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 15, cap = 100 }, { targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 3, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "ate_dinner", op = "set" }, { targetType = "player", flag = "room_tidy", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Ask what she saw in your room."
+targetType = "node"
+nodeId = "hl_tidy_tease"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "flag", subject = "player", flag_key = "room_tidy", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "said_eating_out", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "said_eating_out", operator = "gte", value = 8 }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "energy", op = "add", value = 15, cap = 100 }, { targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 3, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "ate_dinner", op = "set" }, { targetType = "player", flag = "room_tidy", op = "unset" }]
 
@@ -8496,13 +8673,19 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4, 5] }, { type = "time_of_day", start_time = "22:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. She doesn't stir." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "23:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. She doesn't stir." }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "22:00", end_time = "00:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. She doesn't stir." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "22:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. She doesn't stir." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "23:00", end_time = "00:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. She doesn't stir." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -9371,7 +9554,7 @@ retry_after_days = 7
 
 [[canvases]]
 id   = "mark_04_after_shes_asleep"
-name = "After she's asleep"
+name = "After she's gone up"
 description = "Mark step 4 (Mark A 4), the living room late: the ask. The introduction of his paid route (her climb)."
 
 [canvases.trigger]
@@ -9397,7 +9580,7 @@ name = "Late"
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "power", operator = "gte", value = 50 }] }, blocks = [{ type = "paragraph", content = "Mark's on the couch with the TV low and a beer on his knee. Laura's gone up. He doesn't look round when you come in, but he turns the TV down further." }, { type = "dialog", content = "Come down after your mother's asleep. Some night. We'll talk about the rent.", props = { speaker = "npc", npcId = "npc_mark" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "power", operator = "gte", value = 50 }] }, blocks = [{ type = "paragraph", content = "Mark's on the couch with the TV low and a beer on his knee. Laura's gone up. He doesn't look round when you come in, but he turns the TV down further." }, { type = "dialog", content = "Come down after your mother's gone to bed. Some night. We'll talk about the rent.", props = { speaker = "npc", npcId = "npc_mark" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -9456,7 +9639,7 @@ name = "The difference"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "He looks at the ceiling, where Laura's asleep. Then he looks at your legs, for a long time, slowly, from your ankles up."
+content = "He looks at the ceiling, where Laura's gone to bed. Then he looks at your legs, for a long time, slowly, from your ankles up."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -10737,7 +10920,7 @@ content = "Mark is on the couch with the TV low and a beer on his knee."
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep upstairs." }, { type = "dialog", content = "Shut the door. Your mother's sleeping.", props = { speaker = "npc", npcId = "npc_mark" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "Laura's gone up." }, { type = "dialog", content = "Shut the door. Your mother's upstairs.", props = { speaker = "npc", npcId = "npc_mark" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -10830,16 +11013,15 @@ nodeId = "hl_beer"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "had_drink_home", operator = "is_false" }] }
 
 [[canvases.nodes.exit_block.choices]]
-text = "Watch TV with him."
-targetType = "node"
-nodeId = "hl_tv"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "22:00", end_time = "01:00" }, { type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_false" }] }
-
-[[canvases.nodes.exit_block.choices]]
 text = "Put a film on with him."
 targetType = "node"
 nodeId = "hl_film"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "22:00", end_time = "00:00" }, { type = "flag", subject = "player", flag_key = "movie_night", operator = "is_false" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Watch TV with him."
+targetType = "node"
+nodeId = "mremote"
 
 [[canvases.nodes.exit_block.choices]]
 text = "Leave him to it."
@@ -10857,7 +11039,7 @@ content = "The game on low."
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }] }, blocks = [{ type = "dialog", content = "Laura's asleep. Keep it down.", props = { speaker = "npc", npcId = "npc_mark" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }] }, blocks = [{ type = "dialog", content = "Laura's upstairs. Keep it down.", props = { speaker = "npc", npcId = "npc_mark" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -10981,31 +11163,6 @@ locationId = "home_living_room"
 time_progression_minutes = 30
 
 [[canvases.nodes]]
-id   = "hl_tv"
-name = "Watch TV with him"
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "You take the other end of the couch. He doesn't change the channel and he doesn't talk, and an hour goes by like that."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text = "Done."
-targetType = "location"
-locationId = "home_living_room"
-time_progression_minutes = 60
-effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }, { targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, cap = 100 }]
-flagEffects = [{ targetType = "player", flag = "watched_tv", op = "set" }]
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_false" }] }
-
-[[canvases.nodes.exit_block.choices]]
-text = "Not now."
-targetType = "location"
-locationId = "home_hall"
-
-[[canvases.nodes]]
 id   = "hl_film"
 name = "Put a film on with him"
 
@@ -11045,6 +11202,327 @@ type = "choices"
 text = "Back."
 targetType = "location"
 locationId = "home_living_room"
+
+[[canvases.nodes]]
+id   = "mremote"
+name = "The remote"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You take the other end of the couch, and he hands you the remote without looking."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Channel 1: the news."
+targetType = "node"
+nodeId = "mch_news"
+time_progression_minutes = 1
+
+[[canvases.nodes.exit_block.choices]]
+text = "Channel 2: a cooking show."
+targetType = "node"
+nodeId = "mch_cooking"
+time_progression_minutes = 1
+
+[[canvases.nodes.exit_block.choices]]
+text = "Channel 3: sports."
+targetType = "node"
+nodeId = "mch_sports"
+time_progression_minutes = 1
+
+[[canvases.nodes.exit_block.choices]]
+text = "Channel 4: an old film."
+targetType = "node"
+nodeId = "mch_film"
+time_progression_minutes = 1
+
+[[canvases.nodes.exit_block.choices]]
+text = "Channel 5: the adult channel."
+targetType = "node"
+nodeId = "madult"
+time_progression_minutes = 1
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave him to it."
+targetType = "location"
+locationId = "home_hall"
+
+[[canvases.nodes]]
+id   = "mch_news"
+name = "The news"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "A reporter stands in the rain outside a courthouse. Then the weather: more rain." },
+  { type = "paragraph", content = "The local news: a fire on the ring road, a lost dog, the council shouting about parking." },
+]
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Same as yesterday. Same as every day."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a local TV news broadcast, a reporter on location", search_queries = ["local tv news reporter live", "tv news broadcast screen"], pool_dir = "tv/mark_news_t0" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Watch a while."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }, { targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "watched_tv", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Watch a while."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_true" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Change the channel."
+targetType = "node"
+nodeId = "mremote"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave him to it."
+targetType = "location"
+locationId = "home_hall"
+
+[[canvases.nodes]]
+id   = "mch_cooking"
+name = "A cooking show"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "A chef with huge arms folds butter into pastry and won't stop talking about it." },
+  { type = "paragraph", content = "Two women race to ice a cake before the clock runs out. One of them cries." },
+]
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Your mother never cooks like that."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a TV cooking show, a chef at a studio counter", search_queries = ["tv cooking show chef studio", "baking competition tv"], pool_dir = "tv/mark_cooking_t0" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Watch a while."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }, { targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "watched_tv", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Watch a while."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_true" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Change the channel."
+targetType = "node"
+nodeId = "mremote"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave him to it."
+targetType = "location"
+locationId = "home_hall"
+
+[[canvases.nodes]]
+id   = "mch_sports"
+name = "Sports"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Football, a match nobody in this house cares about. Two-nil." },
+  { type = "paragraph", content = "Highlights: a man runs a very long way while the commentator loses his mind." },
+]
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Watch this. Watch. Ah, for God's sake."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a football match on TV, players on a green pitch", search_queries = ["football match tv broadcast", "soccer highlights tv"], pool_dir = "tv/mark_sports_t0" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Watch a while."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }, { targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "watched_tv", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Watch a while."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_true" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Change the channel."
+targetType = "node"
+nodeId = "mremote"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave him to it."
+targetType = "location"
+locationId = "home_hall"
+
+[[canvases.nodes]]
+id   = "mch_film"
+name = "An old film"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "An old black-and-white film. A woman in a fur coat slaps a man, then kisses him." },
+  { type = "paragraph", content = "A cop film from the nineties. Everything explodes, twice." },
+]
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Seen it. He dies at the end."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "an old black-and-white film on TV, a couple arguing", search_queries = ["old black and white movie scene", "classic film tv"], pool_dir = "tv/mark_film_t0" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Watch a while."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }, { targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "watched_tv", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Watch a while."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_true" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Change the channel."
+targetType = "node"
+nodeId = "mremote"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave him to it."
+targetType = "location"
+locationId = "home_hall"
+
+[[canvases.nodes]]
+id   = "madult"
+name = "Channel 5"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Channel 5 fills the screen. A woman is on her knees in front of a man. She sucks his cock, slow and deep, her cheeks hollow. He pulls her up and bends her over the bed. He takes her from behind. Her tits swing with every thrust. She moans, loud and long. The room goes quiet under the sound. Mark stops with the beer halfway to his mouth. He does not reach for the remote. His fingers squeeze tight around the can. On screen the man grips her hips and drives in harder. Your face goes hot. You are wet, and your nipples pull hard and tight."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "mark_step", operator = "lt", value = 4 }] }, blocks = [{ type = "dialog", content = "Change it, @player.", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "paragraph", content = "He says it. He doesn't reach for the remote." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "mark_step", operator = "gte", value = 4 }] }, blocks = [{ type = "paragraph", content = "He doesn't tell you to change it. He watches the screen, and then he watches you watching it." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "porn playing on a living room TV at night, a man and a woman, seen from the couch", search_queries = ["porn on tv late night couch", "watching porn on tv with someone"], pool_dir = "sex/tv_adult_mark_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave it on."
+targetType = "node"
+nodeId = "mleave"
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.choices]]
+text = "Change the channel."
+targetType = "node"
+nodeId = "mremote"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave him to it."
+targetType = "location"
+locationId = "home_hall"
+
+[[canvases.nodes]]
+id   = "mleave"
+name = "Leave it on"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You leave it on. You both watch. On screen the man drives into her from behind. He slaps her ass, hard, and she moans. Her tits swing under her with each thrust. Mark shifts on the couch. The can moves down to his lap. It does not hide the hard bulge of his cock in his jeans. His eyes go from the screen to you. Then back to the screen. Nobody says anything. The man grips her hips and pounds her harder. She moans louder with every thrust. You are wet. You squeeze your thighs together, tight. Your nipples go hard and tight."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a man on a couch at night watching porn on TV, a beer can in his lap", search_queries = ["man watching porn tv couch beer", "stepdad watching porn on tv"], pool_dir = "sex/tv_adult_mark_leave_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Keep watching."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 25
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Keep watching."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 25
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Change the channel."
+targetType = "node"
+nodeId = "mremote"
 
 [[canvases]]
 id   = "hub_mark_bedroom"
@@ -11964,8 +12442,8 @@ goals = [
 [[quest_cards]]
 npc_id = "npc_mark"
 priority = 10
-text = "He stays up after Laura's asleep."
-tip = "Late at night in the living room, Laura asleep; not while tipsy"
+text = "He stays up after Laura's gone up."
+tip = "Late at night in the living room, Laura gone up; not while tipsy"
 when = [
   { type = "trait", subject = "player", trait = "mark_step", op = "eq", value = 3 },
   { flag = "opening_done", op = "is_true" },
@@ -13015,7 +13493,7 @@ is_repeatable = true
 priority = 5
 is_active = true
 max_triggers_per_day = 1
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "tom_step", operator = "eq", value = 6 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "tom_step", operator = "eq", value = 6 }, { type = "flag", subject = "player", flag_key = "tom_close_booked", operator = "is_true" }] }
 
 [[canvases.trigger.schedules]]
 weekdays = [4]
@@ -13065,7 +13543,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 40
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = 2 }]
-flagEffects = [{ targetType = "player", flag = "late_shift", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "late_shift", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }, { targetType = "player", flag = "tom_close_booked", op = "unset" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "\"Night, Tom.\""
@@ -13099,7 +13577,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 5
 effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = 1 }]
-flagEffects = [{ targetType = "player", flag = "late_shift", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "late_shift", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }, { targetType = "player", flag = "tom_close_booked", op = "unset" }]
 
 [[canvases]]
 id   = "cafe_gary_ten_minutes"
@@ -13242,7 +13720,7 @@ requires_npc = "npc_tom"
 is_repeatable = true
 priority = 6
 is_active = true
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tom_met", operator = "is_true" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tom_met", operator = "is_true" }, { type = "time_of_day", start_time = "08:00", end_time = "22:00" }] }
 
 [[canvases.nodes]]
 id   = "counter"
@@ -15183,6 +15661,18 @@ blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "sports_bra", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }] }, blocks = [{ type = "dialog", content = "Just the sports bra? Babe. Half the park's going to fall in the pond.", props = { speaker = "npc", npcId = "npc_zoe" } }] },
 ]
 
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_run_booked", operator = "is_true" }] }, blocks = [{ type = "dialog", content = "You actually came! Okay. I owe you a coffee.", props = { speaker = "npc", npcId = "npc_zoe" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_run_booked", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "zoe_bailed", operator = "is_true" }] }, blocks = [{ type = "dialog", content = "Oh, look who remembered mornings exist.", props = { speaker = "npc", npcId = "npc_zoe" } }] },
+]
+
 [canvases.nodes.exit_block]
 type = "choices"
 
@@ -15192,7 +15682,18 @@ targetType = "location"
 locationId = "park"
 time_progression_minutes = 30
 costs = [{ trait = "energy", value = 10 }]
-flagEffects = [{ targetType = "player", flag = "ran_with_zoe", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "ran_with_zoe", op = "set" }, { targetType = "player", flag = "zoe_bailed", op = "unset" }, { targetType = "player", flag = "zoe_run_booked", op = "unset" }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_run_booked", operator = "is_true" }] }
+effects = []
+
+[[canvases.nodes.exit_block.choices]]
+text = "Run a lap with her."
+targetType = "location"
+locationId = "park"
+time_progression_minutes = 30
+costs = [{ trait = "energy", value = 10 }]
+flagEffects = [{ targetType = "player", flag = "ran_with_zoe", op = "set" }, { targetType = "player", flag = "zoe_bailed", op = "unset" }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_run_booked", operator = "is_false" }] }
 
 [[canvases.nodes.exit_block.choices]]
 text = "Go."
@@ -15822,7 +16323,7 @@ targetType = "location"
 locationId = "faculty_floor"
 time_progression_minutes = 5
 effects = [{ targetType = "player", trait = "hale_step", op = "set", value = 3 }]
-flagEffects = [{ targetType = "player", flag = "hale_03_done", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "hale_03_done", op = "set" }, { targetType = "player", flag = "hale_office_booked", op = "unset" }]
 consumes = true
 
 [[canvases.nodes]]
@@ -15852,6 +16353,7 @@ targetType = "location"
 locationId = "hale_office"
 time_progression_minutes = 3
 retry_after_days = 7
+flagEffects = [{ targetType = "player", flag = "hale_office_booked", op = "unset" }]
 
 [[canvases]]
 id   = "hale_04_claire_knocks"
@@ -16232,6 +16734,7 @@ text = "Go."
 targetType = "location"
 locationId = "faculty_floor"
 time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "unset" }]
 
 [[canvases.nodes]]
 id   = "no"
@@ -16254,6 +16757,7 @@ text = "Go."
 targetType = "location"
 locationId = "faculty_floor"
 time_progression_minutes = 3
+flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "unset" }]
 
 [[canvases]]
 id   = "hub_hale_office"
@@ -17773,6 +18277,12 @@ props = { speaker = "npc", npcId = "npc_tom" }
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tom_shift_booked", operator = "is_true" }] }, blocks = [{ type = "dialog", content = "You came. Good. Four extra for showing up.", props = { speaker = "npc", npcId = "npc_tom" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "energy", operator = "lt", value = 20 }] }, blocks = [{ type = "thought_bubble", content = "You'd drop a tray. Not today.", props = { speaker = "player" } }] },
 ]
 
@@ -17790,7 +18300,18 @@ text = "Work a shift (3 hours, 20 energy)."
 targetType = "node"
 nodeId = "shift"
 time_progression_minutes = 0
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_shift_1_today", operator = "is_false" }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_shift_1_today", operator = "is_false" }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "flag", subject = "player", flag_key = "tom_shift_booked", operator = "is_true" }] }
+costs = [{ trait = "energy", value = 20 }]
+flagEffects = [{ targetType = "player", flag = "cafe_shift_1_today", op = "set" }, { targetType = "player", flag = "tom_shift_booked", op = "unset" }]
+wardrobeEffects = [{ action = "equip", item_id = "cafe_uniform_normal" }, { action = "equip", item_id = "cafe_uniform_sexy" }]
+effects = [{ targetType = "player", trait = "money", op = "add", value = 4, clamp = false }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Work a shift (3 hours, 20 energy)."
+targetType = "node"
+nodeId = "shift"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_shift_1_today", operator = "is_false" }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "flag", subject = "player", flag_key = "tom_shift_booked", operator = "is_false" }] }
 costs = [{ trait = "energy", value = 20 }]
 flagEffects = [{ targetType = "player", flag = "cafe_shift_1_today", op = "set" }]
 wardrobeEffects = [{ action = "equip", item_id = "cafe_uniform_normal" }, { action = "equip", item_id = "cafe_uniform_sexy" }]
@@ -17800,7 +18321,18 @@ text = "Work a shift (3 hours, 20 energy)."
 targetType = "node"
 nodeId = "shift"
 time_progression_minutes = 0
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_shift_1_today", operator = "is_false" }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }, { type = "trait", subject = "player", trait_key = "curfew_days", operator = "eq", value = 0 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_shift_1_today", operator = "is_false" }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }, { type = "trait", subject = "player", trait_key = "curfew_days", operator = "eq", value = 0 }, { type = "flag", subject = "player", flag_key = "tom_shift_booked", operator = "is_true" }] }
+costs = [{ trait = "energy", value = 20 }]
+flagEffects = [{ targetType = "player", flag = "cafe_shift_1_today", op = "set" }, { targetType = "player", flag = "tom_shift_booked", op = "unset" }]
+wardrobeEffects = [{ action = "equip", item_id = "cafe_uniform_normal" }, { action = "equip", item_id = "cafe_uniform_sexy" }]
+effects = [{ targetType = "player", trait = "money", op = "add", value = 4, clamp = false }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Work a shift (3 hours, 20 energy)."
+targetType = "node"
+nodeId = "shift"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_shift_1_today", operator = "is_false" }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }, { type = "trait", subject = "player", trait_key = "curfew_days", operator = "eq", value = 0 }, { type = "flag", subject = "player", flag_key = "tom_shift_booked", operator = "is_false" }] }
 costs = [{ trait = "energy", value = 20 }]
 flagEffects = [{ targetType = "player", flag = "cafe_shift_1_today", op = "set" }]
 wardrobeEffects = [{ action = "equip", item_id = "cafe_uniform_normal" }, { action = "equip", item_id = "cafe_uniform_sexy" }]
@@ -20925,6 +21457,18 @@ blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_beauty", operator = "gte", value = 2 }] }, blocks = [{ type = "dialog", content = "Babe! Get in here. Now we're talking.", props = { speaker = "npc", npcId = "npc_zoe" } }] },
 ]
 
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_party_promised", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "zoe_party_promised", operator = "lt", value = 30 }, { type = "worn_beauty", operator = "gte", value = 2 }] }, blocks = [{ type = "dialog", content = "Told you. Short. Good girl.", props = { speaker = "npc", npcId = "npc_zoe" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_party_promised", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "zoe_party_promised", operator = "lt", value = 30 }, { type = "worn_beauty", operator = "lt", value = 2 }] }, blocks = [{ type = "dialog", content = "\"Obviously\", she said. That's not short, babe.", props = { speaker = "npc", npcId = "npc_zoe" } }] },
+]
+
 [canvases.nodes.exit_block]
 type = "choices"
 
@@ -20936,7 +21480,7 @@ time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_beauty", operator = "gte", value = 2 }, { type = "trait", subject = "player", trait_key = "curfew_days", operator = "eq", value = 0 }, { type = "time_of_day", start_time = "22:00", end_time = "06:00" }] }
 costs = [{ trait = "energy", value = 15 }]
 effects = [{ targetType = "player", trait = "drinks_tonight", op = "set", value = 0 }]
-flagEffects = [{ targetType = "player", flag = "party_went", op = "set" }, { targetType = "player", flag = "late_party", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "party_went", op = "set" }, { targetType = "player", flag = "zoe_party_promised", op = "unset" }, { targetType = "player", flag = "late_party", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Go in. (15 energy)"
@@ -20946,7 +21490,7 @@ time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_beauty", operator = "gte", value = 2 }, { type = "trait", subject = "player", trait_key = "curfew_days", operator = "eq", value = 0 }, { type = "time_of_day", start_time = "06:00", end_time = "22:00" }] }
 costs = [{ trait = "energy", value = 15 }]
 effects = [{ targetType = "player", trait = "drinks_tonight", op = "set", value = 0 }]
-flagEffects = [{ targetType = "player", flag = "party_went", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "party_went", op = "set" }, { targetType = "player", flag = "zoe_party_promised", op = "unset" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Borrow Zoe's dress first."
@@ -21795,7 +22339,7 @@ is_repeatable = true
 priority = 4
 is_active = true
 max_triggers_per_day = 1
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "time_of_day", start_time = "07:00", end_time = "21:30" }] }
 
 [[canvases.nodes]]
 id   = "sound"
@@ -22528,7 +23072,7 @@ when = [
   { type = "trait", subject = "player", trait = "corruption", op = "lt", value = 20 },
 ]
 goals = [
-  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 20, label = "Reach Curious (Corruption 20): stay and look: the park couple, the library stacks, Ryan's door at night, their door on Saturday night" },
+  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 20, label = "Reach Curious (Corruption 20): stay and look: the park couple, the library stacks, Ryan's door at night, Laura's door at night, their door on Saturday night" },
 ]
 
 [[quest_cards]]
@@ -23503,14 +24047,14 @@ time_progression_minutes = 10
 [[canvases]]
 id   = "living_tv"
 name = "Watch TV"
-description = "TV alone: 60 min, energy +5 (home_life.md:69)."
+description = "The remote alone (DECISIONS 85-86): five channels, each with a clip. The plain four: 30 min, energy +5 once a day. Channel 5: corruption +1 every watch, cap 19 at Good Girl, 39 at Curious; touch herself at Curious, +2, cap 39."
 
 [canvases.trigger]
 location = "home_living_room"
 is_repeatable = true
 priority = 3
 is_active = true
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_living_room", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_false" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_living_room", operator = "is_absent" }] }
 
 [[canvases.trigger.schedules]]
 weekdays = [0, 1, 2, 3, 4, 5, 6]
@@ -23518,31 +24062,308 @@ start_time = "07:00"
 end_time = "02:00"
 
 [[canvases.nodes]]
-id   = "tv"
-name = "TV"
+id   = "remote"
+name = "The remote"
 
 [[canvases.nodes.blocks]]
-type = "block_pool"
-blocks = [
-  { type = "paragraph", content = "You flick through the channels and land on something with a lot of shouting. An hour goes by without asking, but you don't mind." },
-  { type = "paragraph", content = "A cooking show, then an old film, then you've lost track. The couch has a dent exactly your shape." },
-]
+type = "paragraph"
+content = "You drop onto the couch and pick up the remote. Five channels, and one of them is the one Mark pays for."
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Watch an hour."
-targetType = "location"
-locationId = "home_living_room"
-time_progression_minutes = 60
-effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }]
-flagEffects = [{ targetType = "player", flag = "watched_tv", op = "set" }]
+text = "Channel 1: the news."
+targetType = "node"
+nodeId = "ch_news"
+time_progression_minutes = 1
+
+[[canvases.nodes.exit_block.choices]]
+text = "Channel 2: a cooking show."
+targetType = "node"
+nodeId = "ch_cooking"
+time_progression_minutes = 1
+
+[[canvases.nodes.exit_block.choices]]
+text = "Channel 3: sports."
+targetType = "node"
+nodeId = "ch_sports"
+time_progression_minutes = 1
+
+[[canvases.nodes.exit_block.choices]]
+text = "Channel 4: an old film."
+targetType = "node"
+nodeId = "ch_film"
+time_progression_minutes = 1
+
+[[canvases.nodes.exit_block.choices]]
+text = "Channel 5: the adult channel."
+targetType = "node"
+nodeId = "adult"
+time_progression_minutes = 1
 
 [[canvases.nodes.exit_block.choices]]
 text = "Turn it off."
 targetType = "location"
 locationId = "home_hall"
+
+[[canvases.nodes]]
+id   = "ch_news"
+name = "The news"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "A reporter stands in the rain outside a courthouse. Then the weather: more rain." },
+  { type = "paragraph", content = "The local news: a fire on the ring road, a lost dog, the council shouting about parking." },
+]
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a local TV news broadcast, a reporter on location", search_queries = ["local tv news reporter live", "tv news broadcast screen"], pool_dir = "tv/news_t0" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Watch a while."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "watched_tv", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Watch a while."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_true" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Change the channel."
+targetType = "node"
+nodeId = "remote"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Turn it off."
+targetType = "location"
+locationId = "home_hall"
+
+[[canvases.nodes]]
+id   = "ch_cooking"
+name = "A cooking show"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "A chef with huge arms folds butter into pastry and won't stop talking about it." },
+  { type = "paragraph", content = "Two women race to ice a cake before the clock runs out. One of them cries." },
+]
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a TV cooking show, a chef at a studio counter", search_queries = ["tv cooking show chef studio", "baking competition tv"], pool_dir = "tv/cooking_t0" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Watch a while."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "watched_tv", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Watch a while."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_true" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Change the channel."
+targetType = "node"
+nodeId = "remote"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Turn it off."
+targetType = "location"
+locationId = "home_hall"
+
+[[canvases.nodes]]
+id   = "ch_sports"
+name = "Sports"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Football, a match nobody in this house cares about. Two-nil." },
+  { type = "paragraph", content = "Highlights: a man runs a very long way while the commentator loses his mind." },
+]
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a football match on TV, players on a green pitch", search_queries = ["football match tv broadcast", "soccer highlights tv"], pool_dir = "tv/sports_t0" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Watch a while."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "watched_tv", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Watch a while."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_true" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Change the channel."
+targetType = "node"
+nodeId = "remote"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Turn it off."
+targetType = "location"
+locationId = "home_hall"
+
+[[canvases.nodes]]
+id   = "ch_film"
+name = "An old film"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "An old black-and-white film. A woman in a fur coat slaps a man, then kisses him." },
+  { type = "paragraph", content = "A cop film from the nineties. Everything explodes, twice." },
+]
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "an old black-and-white film on TV, a couple arguing", search_queries = ["old black and white movie scene", "classic film tv"], pool_dir = "tv/film_t0" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Watch a while."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "watched_tv", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Watch a while."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_true" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Change the channel."
+targetType = "node"
+nodeId = "remote"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Turn it off."
+targetType = "location"
+locationId = "home_hall"
+
+[[canvases.nodes]]
+id   = "adult"
+name = "Channel 5"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Channel 5 fills the screen. A woman rides a man on a leather couch. Her tits bounce with every drop of her hips. His hands grip her ass and pull her down hard. The camera cuts low. His cock slides out of her, shiny and thick, and sinks back in to the root. She moans loud. The speakers carry it through the room. You jab the remote and the volume drops. On screen she rides him faster. He grunts and squeezes her ass. Your face goes hot. Your nipples pull tight and ache. You are wet. Your clit throbs, and you squeeze your thighs together hard."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a couple having sex on a TV screen in a dark living room, the woman riding the man", search_queries = ["porn on tv screen living room", "woman riding man on tv adult channel"], pool_dir = "sex/tv_adult_alone_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Keep watching."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Keep watching."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Touch yourself."
+targetType = "node"
+nodeId = "touch"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Change the channel."
+targetType = "node"
+nodeId = "remote"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Turn it off."
+targetType = "location"
+locationId = "home_hall"
+
+[[canvases.nodes]]
+id   = "touch"
+name = "On the couch"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "In the kitchen a cupboard bangs. Mark is home." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "Upstairs, Ryan's music thumps through the ceiling." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The adult channel is on, the sound turned low. On the screen a man is taking her from behind on a couch like yours, his hands on her hips, his cock driving in deep. Her tits swing with every thrust. She moans through the speakers, low and steady. Your hand slides down your belly and inside your clothes. Your fingers find your clit, and you are already wet. You rub in time with him, hard when he drives in, slow when he pulls out. Your other hand squeezes your tit, your thumb on the nipple. One eye stays on the doorway to the hall. Anyone could walk in. You rub faster. He slams his cock into her, and you come on the couch, biting your lip. Your hips lift off the cushion while your fingers keep working your clit through it."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl alone on a couch touching herself while porn plays on the TV", search_queries = ["girl masturbating on couch watching porn on tv", "woman fingering herself couch tv porn"], pool_dir = "sex/tv_adult_touch_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Fix your clothes."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 25
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 2, cap = 39 }]
 
 [[canvases]]
 id   = "living_film"
@@ -23658,13 +24479,19 @@ content = "You ease the handle down and open the door a hand's width. The room i
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4, 5] }, { type = "time_of_day", start_time = "22:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. Mark's on his back beside her, snoring." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "23:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. Mark's on his back beside her, snoring." }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "22:00", end_time = "00:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. Mark's on his back beside her, snoring." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "22:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. Mark's on his back beside her, snoring." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "23:00", end_time = "00:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. Mark's on his back beside her, snoring." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -23676,13 +24503,19 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4, 5] }, { type = "time_of_day", start_time = "22:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, one bare shoulder out of the covers. Mark's half of the bed is empty." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "23:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, one bare shoulder out of the covers. Mark's half of the bed is empty." }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "22:00", end_time = "00:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, one bare shoulder out of the covers. Mark's half of the bed is empty." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "22:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, one bare shoulder out of the covers. Mark's half of the bed is empty." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "23:00", end_time = "00:00" }] }, blocks = [{ type = "paragraph", content = "Laura's asleep on her side, one bare shoulder out of the covers. Mark's half of the bed is empty." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -23876,6 +24709,156 @@ locationId = "home_ella_room"
 time_progression_minutes = 5
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "saw_mark_and_laura", op = "set" }, { targetType = "player", flag = "mark_laura_seen", op = "set" }]
+
+[[canvases]]
+id   = "laura_alone_in_bed"
+name = "Laura's door's ajar"
+description = "Sun-Fri 22:00-23:00, Laura awake and alone, Mark downstairs: through the gap she fingers herself. Keep watching pays corruption +1, cap 19 (DECISIONS 82). Reached only by the door; once a night."
+
+[canvases.trigger]
+location = "home_master_bedroom"
+is_repeatable = true
+priority = 1
+is_active = true
+substitution_only = true
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }] }
+
+[[canvases.nodes]]
+id   = "crack"
+name = "Laura's door, ajar"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Laura's door is open a hand's width. The bedside lamp is on low. Downstairs the TV mutters. Laura is alone in bed, the covers kicked down. Her nightdress is pushed up to her waist. Her knees are up and apart, her ass bare on the sheet. Two fingers rub slow circles on her clit. She is wet, and it shines in the lamplight. Her other hand squeezes her tit through the nightdress. Her nipple stands hard against the cotton. Her tits rise and fall faster. Her eyes are shut, her lip caught in her teeth. A small moan escapes her. Her hips lift into her fingers. She hasn't seen you. Your face burns. Heat pools low in your belly. You are wet, and your nipples go tight."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "through a bedroom door left ajar, a woman alone in bed in a nightdress touching herself, lamp low", search_queries = ["woman masturbating in bed seen through door", "peeking at mom touching herself in bed door ajar"], pool_dir = "sex/laura_alone_crack_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Keep watching."
+targetType = "node"
+nodeId = "watch"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "saw_laura_alone", op = "set" }, { targetType = "player", flag = "laura_alone_seen", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Pull the door to."
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 2
+flagEffects = [{ targetType = "player", flag = "saw_laura_alone", op = "set" }, { targetType = "player", flag = "laura_alone_seen", op = "set" }]
+
+[[canvases.nodes]]
+id   = "watch"
+name = "Keep watching"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You stay. Your hand stays flat on the door frame. Laura pushes two fingers inside herself. Her thumb rubs her clit, faster now. Her other hand squeezes her tit and pinches the nipple. Her hips lift off the mattress. She bites the back of her hand so Mark won't hear. Her fingers pump in and out, wet and loud in the quiet. Then she comes. Her whole body shakes. Her thighs clamp hard on her hand. A moan leaks out around her teeth. Your nipples go tight and ache. You are wet, all at once. You press your thighs together. You do not touch yourself. You want to. Laura goes still, breathing hard, two fingers still inside her. Her tits rise and fall. You back away from the door before she opens her eyes, thighs pressed tight, nipples still hard."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a woman alone in bed fingering herself to orgasm, biting her hand to stay quiet", search_queries = ["woman fingering herself orgasm quiet in bed", "milf masturbating to orgasm biting hand"], pool_dir = "sex/laura_alone_watch_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to your room."
+targetType = "location"
+locationId = "home_ella_room"
+time_progression_minutes = 5
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }]
+flagEffects = [{ targetType = "player", flag = "saw_laura_alone", op = "set" }, { targetType = "player", flag = "laura_alone_seen", op = "set" }]
+
+[[canvases]]
+id   = "laura_alone_peek"
+name = "Peek through the gap"
+description = "Sun-Fri 22:00-23:00, after she has watched Laura that night: one screen, pays nothing. Reached only by the door."
+
+[canvases.trigger]
+location = "home_master_bedroom"
+is_repeatable = true
+priority = 1
+is_active = true
+substitution_only = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }] }
+
+[[canvases.nodes]]
+id   = "peek"
+name = "Through the gap"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You ease the door a finger's width wider. The lamp is off now."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Laura lies on her side with the sheet pulled up to her shoulder, breathing slow. Her nightdress is still rucked up at her hip."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Downstairs the TV mutters. You pull the door to without a sound."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Close the door."
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 2
+
+[[canvases]]
+id   = "master_door_peek"
+name = "Peek through the gap"
+description = "Sun 00:00-01:00, someone inside and 'The door's ajar.' off: after she has watched, or Mark alone while Laura waits on the stairs. One screen, pays nothing. Reached only by the door."
+
+[canvases.trigger]
+location = "home_master_bedroom"
+is_repeatable = true
+priority = 1
+is_active = true
+substitution_only = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "00:00", end_time = "01:00" }] }
+
+[[canvases.nodes]]
+id   = "peek"
+name = "Through the gap"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You ease the handle down and open the door a finger's width. The lamp is still on."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "It's over. Mark's on his back, snoring. Laura lies awake beside him, staring at the ceiling, her nightdress still bunched up at her waist." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_absent" }] }, blocks = [{ type = "paragraph", content = "Mark's sitting up against the headboard under the lamp, awake and alone, his phone lit in his hand. Laura's side of the bed is empty." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Nobody looks at the door. You pull it to without a sound."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Close the door."
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 2
 
 [[canvases]]
 id   = "garage_things"
@@ -25677,6 +26660,8 @@ app    = "messages"
 npc    = "npc_ryan"
 notify = "📱 Ryan"
 repeat_after_days = 2
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = -1, clamp = true }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "ryan_08_done", operator = "is_true" },
@@ -25696,17 +26681,62 @@ content = "two knocks. door's open."
 type = "reply"
 round = 1
 choices = [
-  { text = "coming", effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 1 }] },
+  { text = "coming", effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 1 }], flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "set" }] },
   { text = "not tonight" },
 ]
 
-# ── Laura: caused by laura_01_done (the blue dress) ──
+# ── Ryan: she said coming and never knocked (DECISIONS 87) ──
+[[phone.conversations]]
+id     = "ryan_knock_noshow"
+app    = "messages"
+npc    = "npc_ryan"
+notify = "📱 Ryan"
+repeat_after_days = 1
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = -2, clamp = true }], flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }] }
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "ryan_knock_booked", operator = "is_true" },
+  { type = "hours_since_flag", subject = "player", flag_key = "ryan_knock_booked", operator = "gte", value = 3 },
+  { type = "time_of_day", start_time = "00:30", end_time = "04:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you said coming."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "door was open all night."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "fell asleep. sorry", effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = -2, clamp = true }], flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }] },
+  { text = "tomorrow. promise", effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = -2, clamp = true }], flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "sure. sleep tight then."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "we'll see about that."
+
+# ── Laura: caused by laura_01_done (the blue dress). The yes books dinner (laura.py DINNER_DONE). ──
 [[phone.conversations]]
 id     = "laura_dinner"
 app    = "messages"
 npc    = "npc_laura"
 notify = "📱 Mom"
 repeat_after_days = 7
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = -1, clamp = true }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "laura_01_done", operator = "is_true" },
@@ -25722,8 +26752,8 @@ content = "home for dinner sweetheart?"
 type = "reply"
 round = 1
 choices = [
-  { text = "yes, starving", effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 1 }] },
-  { text = "eating out tonight" },
+  { text = "yes, starving", effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 1 }], flagEffects = [{ targetType = "player", flag = "dinner_promised", op = "set" }] },
+  { text = "eating out tonight", flagEffects = [{ targetType = "player", flag = "said_eating_out", op = "set" }] },
   { text = "is mark cooking?" },
 ]
 [[phone.conversations.blocks]]
@@ -25744,6 +26774,49 @@ sender = "npc"
 after_round = 1
 after_choice = 2
 content = "god no. it's me"
+
+# ── Laura: she said yes to dinner and never sat down (DECISIONS 87) ──
+[[phone.conversations]]
+id     = "laura_dinner_noshow"
+app    = "messages"
+npc    = "npc_laura"
+notify = "📱 Mom"
+repeat_after_days = 1
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = -2, clamp = true }, { targetType = "player", trait = "laura_suspicion", op = "add", value = 2 }], flagEffects = [{ targetType = "player", flag = "dinner_promised", op = "unset" }] }
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_true" },
+  { type = "hours_since_flag", subject = "player", flag_key = "dinner_promised", operator = "gte", value = 4 },
+  { type = "time_of_day", start_time = "20:00", end_time = "23:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "i kept you a plate."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you said six."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "sorry. lost track of time", effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = -2, clamp = true }, { targetType = "player", trait = "laura_suspicion", op = "add", value = 2 }], flagEffects = [{ targetType = "player", flag = "dinner_promised", op = "unset" }] },
+  { text = "something came up", effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = -2, clamp = true }, { targetType = "player", trait = "laura_suspicion", op = "add", value = 2 }], flagEffects = [{ targetType = "player", flag = "dinner_promised", op = "unset" }] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "it's in the fridge."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "it always does."
 
 # ── Mark: caused by rent_starts (breakfast, day 1); Saturday, every week ──
 [[phone.conversations]]
@@ -25790,12 +26863,14 @@ after_round = 1
 after_choice = 2
 content = "you will be. kitchen. eight."
 
-# ── Tom: caused by cafe_job ──
+# ── Tom: caused by cafe_job. The yes books today's first shift (cafe.py). ──
 [[phone.conversations]]
 id     = "tom_shift"
 app    = "messages"
 npc    = "npc_tom"
 notify = "📱 Tom"
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = -1, clamp = true }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "cafe_job", operator = "is_true" },
@@ -25811,7 +26886,7 @@ content = "shift after class?"
 type = "reply"
 round = 1
 choices = [
-  { text = "on my way after" },
+  { text = "on my way after", flagEffects = [{ targetType = "player", flag = "tom_shift_booked", op = "set" }] },
   { text = "not today" },
   { text = "what's it pay", effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = 1 }] },
 ]
@@ -25834,13 +26909,58 @@ after_round = 1
 after_choice = 2
 content = "twelve and tips. more in a tighter top."
 
-# ── Tom's repeat, after his step 6: Friday, stay after close ──
+# ── Tom: she said on my way and never clocked in (DECISIONS 87) ──
+[[phone.conversations]]
+id     = "tom_shift_noshow"
+app    = "messages"
+npc    = "npc_tom"
+notify = "📱 Tom"
+repeat_after_days = 1
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = -1, clamp = true }], flagEffects = [{ targetType = "player", flag = "tom_shift_booked", op = "unset" }] }
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tom_shift_booked", operator = "is_true" },
+  { type = "hours_since_flag", subject = "player", flag_key = "tom_shift_booked", operator = "gte", value = 9 },
+  { type = "time_of_day", start_time = "19:00", end_time = "23:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "no show today? really?"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "i covered your tables."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "sorry, class ran late", effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = -1, clamp = true }], flagEffects = [{ targetType = "player", flag = "tom_shift_booked", op = "unset" }] },
+  { text = "something came up", effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = -1, clamp = true }], flagEffects = [{ targetType = "player", flag = "tom_shift_booked", op = "unset" }] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "tell it to the tip jar."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "don't make it a habit."
+
+# ── Tom's repeat, after his step 6: Friday, stay after close. Only a yes opens the night (tom.py). ──
 [[phone.conversations]]
 id     = "tom_close"
 app    = "messages"
 npc    = "npc_tom"
 notify = "📱 Tom"
 repeat_after_days = 6
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = -1, clamp = true }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "tom_06_done", operator = "is_true" },
@@ -25860,9 +26980,53 @@ content = "i'll do the blinds"
 type = "reply"
 round = 1
 choices = [
-  { text = "maybe", effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = 1 }] },
+  { text = "i'll stay", effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = 1 }], flagEffects = [{ targetType = "player", flag = "tom_close_booked", op = "set" }] },
   { text = "not this week" },
 ]
+
+# ── Tom: she said she'd stay after close and didn't (DECISIONS 87) ──
+[[phone.conversations]]
+id     = "tom_close_noshow"
+app    = "messages"
+npc    = "npc_tom"
+notify = "📱 Tom"
+repeat_after_days = 1
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = -2, clamp = true }], flagEffects = [{ targetType = "player", flag = "tom_close_booked", op = "unset" }] }
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tom_close_booked", operator = "is_true" },
+  { type = "hours_since_flag", subject = "player", flag_key = "tom_close_booked", operator = "gte", value = 12 },
+  { type = "weekday", weekdays = [5] },
+  { type = "time_of_day", start_time = "08:00", end_time = "20:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you said you'd stay."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "blinds stayed up."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "sorry. next friday", effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = -2, clamp = true }], flagEffects = [{ targetType = "player", flag = "tom_close_booked", op = "unset" }] },
+  { text = "couldn't get away", effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = -2, clamp = true }], flagEffects = [{ targetType = "player", flag = "tom_close_booked", op = "unset" }] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "maybe. we'll see."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "sure you couldn't."
 
 # ── Zoe: the party (Thursday; she's home till midnight, so 'tonight' holds) ──
 [[phone.conversations]]
@@ -25886,7 +27050,7 @@ content = "party tmrw. wear something short"
 type = "reply"
 round = 1
 choices = [
-  { text = "obviously" },
+  { text = "obviously", flagEffects = [{ targetType = "player", flag = "zoe_party_promised", op = "set" }] },
   { text = "what counts as short" },
   { text = "can't. my mom" },
 ]
@@ -25909,7 +27073,7 @@ after_round = 1
 after_choice = 2
 content = "sneak out. kidding. kinda"
 
-# ── Zoe: the run (Friday; her park row is weekend mornings 08:00-10:00) ──
+# ── Zoe: the run (Friday; her park row is weekend mornings 08:00-10:00). The yes books it (zoe.py). ──
 [[phone.conversations]]
 id     = "zoe_run"
 app    = "messages"
@@ -25947,7 +27111,50 @@ after_round = 1
 after_choice = 1
 content = "lazy. next week then"
 
-# ── Dr. Hale (his college email): caused by hale_02_done ──
+# ── Zoe: she said i'm in and never came to the park (DECISIONS 87) ──
+[[phone.conversations]]
+id     = "zoe_run_noshow"
+app    = "messages"
+npc    = "npc_zoe"
+notify = "📱 Zoe"
+repeat_after_days = 1
+ignore_after_days = 1
+on_ignore = { effects = [], flagEffects = [{ targetType = "player", flag = "zoe_bailed", op = "set" }, { targetType = "player", flag = "zoe_run_booked", op = "unset" }] }
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "zoe_run_booked", operator = "is_true" },
+  { type = "hours_since_flag", subject = "player", flag_key = "zoe_run_booked", operator = "gte", value = 16 },
+  { type = "time_of_day", start_time = "10:00", end_time = "20:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you bailed on me 🙄"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "i ran alone like a loser"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "sorry!! next week", effects = [], flagEffects = [{ targetType = "player", flag = "zoe_bailed", op = "set" }, { targetType = "player", flag = "zoe_run_booked", op = "unset" }] },
+  { text = "overslept", effects = [], flagEffects = [{ targetType = "player", flag = "zoe_bailed", op = "set" }, { targetType = "player", flag = "zoe_run_booked", op = "unset" }] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "you're buying coffee."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "obviously. lazy bones."
+
+# ── Dr. Hale (his college email): caused by hale_02_done. The yes books step 3 (hale.py). ──
 [[phone.conversations]]
 id     = "hale_office_hours"
 app    = "messages"
@@ -25968,7 +27175,7 @@ content = "Office hours are Thursday, after six. Bring the essay."
 type = "reply"
 round = 1
 choices = [
-  { text = "I'll be there." },
+  { text = "I'll be there.", flagEffects = [{ targetType = "player", flag = "hale_office_booked", op = "set" }] },
   { text = "I can't this Thursday." },
 ]
 [[phone.conversations.blocks]]
@@ -25984,7 +27191,48 @@ after_round = 1
 after_choice = 1
 content = "Then next Thursday. — H."
 
-# ── Hale's repeat, after his step 5: Wednesday, "Thursday. Seven." ──
+# ── Hale: she said she'd come to office hours and didn't (DECISIONS 87) ──
+[[phone.conversations]]
+id     = "hale_office_noshow"
+app    = "messages"
+npc    = "npc_hale"
+notify = "📧 College email: Dr. Hale"
+repeat_after_days = 1
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = -2, clamp = true }], flagEffects = [{ targetType = "player", flag = "hale_office_booked", op = "unset" }] }
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "hale_office_booked", operator = "is_true" },
+  { type = "hours_since_flag", subject = "player", flag_key = "hale_office_booked", operator = "gte", value = 24 },
+  { type = "weekday", weekdays = [4] },
+  { type = "time_of_day", start_time = "09:00", end_time = "17:00" },
+  { type = "trait", subject = "player", trait_key = "hale_step", operator = "eq", value = 2 },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I waited until half past seven."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "I'm sorry. Something came up.", effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = -2, clamp = true }], flagEffects = [{ targetType = "player", flag = "hale_office_booked", op = "unset" }] },
+  { text = "It won't happen again.", effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = -2, clamp = true }], flagEffects = [{ targetType = "player", flag = "hale_office_booked", op = "unset" }] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "Your essay grade reflects it. — H."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "See that it doesn't. — H."
+
+# ── Hale's repeat, after his step 5: Wednesday, "Thursday. Seven." The yes books it (hale.py). ──
 [[phone.conversations]]
 id     = "hale_thursday"
 app    = "messages"
@@ -26006,9 +27254,49 @@ content = "Thursday, my office. Seven."
 type = "reply"
 round = 1
 choices = [
-  { text = "Seven." },
+  { text = "Seven.", flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "set" }] },
   { text = "Not this week." },
 ]
+
+# ── Hale: she said seven and didn't come (DECISIONS 87) ──
+[[phone.conversations]]
+id     = "hale_thursday_noshow"
+app    = "messages"
+npc    = "npc_hale"
+notify = "📧 College email: Dr. Hale"
+repeat_after_days = 1
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = -1, clamp = true }], flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "unset" }] }
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "hale_thursday_booked", operator = "is_true" },
+  { type = "hours_since_flag", subject = "player", flag_key = "hale_thursday_booked", operator = "gte", value = 24 },
+  { type = "weekday", weekdays = [4] },
+  { type = "time_of_day", start_time = "09:00", end_time = "17:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "The door was unlocked at seven."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "I couldn't get away.", effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = -1, clamp = true }], flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "unset" }] },
+  { text = "Next week.", effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = -1, clamp = true }], flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "unset" }] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "Then don't say seven. — H."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "We will see. — H."
 
 # ── Jake: caused by jake_number (Zoe's first party). The date is booked here. ──
 [[phone.conversations]]

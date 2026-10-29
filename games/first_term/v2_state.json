@@ -3696,7 +3696,7 @@
         "id": "job",
         "name": "The café job",
         "place": "cafe",
-        "hours": "Mon-Sat 08:00-22:00, up to 3 shifts a day; Friday close; Tom off on Sunday",
+        "hours": "Mon-Sat 08:00-23:00 (the last shift ends by 22:00), up to 3 shifts a day; Friday close; Tom off on Sunday",
         "cost": "a shift (one slot) · energy",
         "one_ladder": true,
         "pay_ladder": [
@@ -5192,7 +5192,7 @@
           ]
         },
         "in_release": true,
-        "hours": "Mon-Sat 08:00-22:00",
+        "hours": "Mon-Sat 08:00-23:00",
         "closed_text": "The café's shut.",
         "alone": "work a shift"
       },
@@ -6066,6 +6066,20 @@
               "Fri"
             ],
             "from": "22:00",
+            "to": "23:00",
+            "note": "awake and alone, Mark downstairs: laura_alone_in_bed (LO, 2026-10-29, DECISIONS 82)"
+          },
+          {
+            "where": "home_master_bedroom",
+            "weekdays": [
+              "Sun",
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri"
+            ],
+            "from": "23:00",
             "to": "06:30"
           },
           {
@@ -7036,7 +7050,7 @@
             ],
             "from": "22:00",
             "to": "23:00",
-            "note": "closing, the room shut; only Friday's after-close has a scene (LO, 2026-10-09, option A)"
+            "note": "closing; the café stays open till 23:00 for his after-close scenes (LO, 2026-10-29)"
           }
         ],
         "ladder": {

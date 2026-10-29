@@ -360,8 +360,12 @@ out.append({
             D(Z, "Run with me. Or don't, and stand there looking cute."),
             G(cond({"type": "clothing_item", "item_id": "sports_bra", "operator": "equipped"}, {"type": "clothing_slot", "slot": "top", "operator": "unequipped"}),
               D(Z, "Just the sports bra? Babe. Half the park's going to fall in the pond.")),
+            # her run text (phone.py zoe_run, DECISIONS 87): the yes books it; a no-show sets zoe_bailed
+            G(cond(flag("zoe_run_booked")), D(Z, "You actually came! Okay. I owe you a coffee.")),
+            G(cond(flag("zoe_run_booked", False), flag("zoe_bailed")), D(Z, "Oh, look who remembered mornings exist.")),
         ], [
-            go("Run a lap with her.", loc="park", mins=30, costs=[{"trait": "energy", "value": 10}], flags=[fset("ran_with_zoe")]),
+            *booked_split(go("Run a lap with her.", loc="park", mins=30, costs=[{"trait": "energy", "value": 10}],
+                             flags=[fset("ran_with_zoe"), funset("zoe_bailed")]), "zoe_run_booked"),
             go("Go.", loc="street"),
         ]),
     ]})

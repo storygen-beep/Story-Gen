@@ -37,6 +37,7 @@
 | row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
 |---|---|---|---|---|---|
 | TV | work | home_life · energy | 60 min · energy add +5 · alone plain · with Mark (late), Laura (Sat 22:00–00:00) or Ryan (Sat, Sun 14:00–18:00): +1, inside their hub | `watched_tv`, 12 h | yes: what's on, who's on the couch |
+| TV: the remote (changed 2026-10-29, DECISIONS 85–86, signed by LO 2026-10-29) | work | the way up · home_life | alone (`living_tv`) and with Mark (his hub): 5 channels, each with its own clip. News, cooking, sports, old film: 30 min, energy add +5 once a day (`watched_tv`). Channel 5, the adult channel, any hour: "Keep watching." 30 min, corruption add +1, cap 19 at Good Girl, cap 39 at Curious · alone at Curious, "Touch yourself." corruption add +2, cap 39 · with Mark, his reaction by his step | none on the adult channel: it pays every time (LO, 2026-10-29); time is the limit | yes: `scenes/living_tv_channels.md` |
 | a film (movie night) | person | home_life | 120 min · energy add +5 · with Laura (Sat 22:00–00:00) +2 · with Mark late +1 · with Ryan Sat, Sun 14:00–18:00 +1 | `movie_night`, 12 h | yes |
 | a beer with Mark | person | home_life · Mark's ladder | 30 min · Mark's Want add +1 · `drinks_boost` on | `had_drink_home`, 12 h | yes |
 | a random event | work | home_life | Mark asleep on the couch with the TV on (00:00–02:00, his row) | one a day | yes |

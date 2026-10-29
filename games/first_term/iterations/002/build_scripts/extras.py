@@ -74,7 +74,7 @@ for npc, met, text in mute:
 # ── her two stages: what the next rung opens (the-voice.md R2; DECISIONS: stages at 20/40/60) ──
 for trait_k, bands in [
     ("corruption", [(0, 20, "Good Girl. Curious opens at 20: watching, touching yourself, a kiss, a dare.",
-                     "Reach Curious (Corruption 20): stay and look: the park couple, the library stacks, Ryan's door at night, their door on Saturday night"),
+                     "Reach Curious (Corruption 20): stay and look: the park couple, the library stacks, Ryan's door at night, Laura's door at night, their door on Saturday night"),
                     (20, 40, "Curious. Bold opens at 40: hands, mouths, a price for a look.",
                      "Reach Bold (Corruption 40): your room, the bathroom, the women's toilet, the park"),
                     (40, 60, "Bold. Hungry is the next release: strangers, a crowd, the taboo at home.",

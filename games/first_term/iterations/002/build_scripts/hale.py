@@ -318,6 +318,12 @@ for _c in out:
             if _n["id"] == "desk":
                 _n["blocks"] = lift_line(_n["blocks"], "You can't sit like that in here.", H)
                 _n["blocks"] = lift_line(_n["blocks"], "Like what?", "player")
+# Coming to his office clears the booking her email reply made (phone.py, DECISIONS 87).
+for _c in out:
+    if _c["id"] == "hale_03_photo_face_down":
+        clear_on_leave(_c, "hale_office_booked")
+    if _c["id"] == "hale_thursdays":
+        clear_on_leave(_c, "hale_thursday_booked")
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards)
 open(__import__("sys").argv[1], "w").write(text)
 print("hale:", len(out), "canvases,", len(cards), "cards")

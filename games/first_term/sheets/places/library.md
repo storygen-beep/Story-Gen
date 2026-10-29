@@ -1,6 +1,6 @@
 # [READY] Place — Library
 
-> Signed by LO: LO, 2026-10-08.
+> Signed by LO: LO, 2026-10-08. Re-signed 2026-10-29 ("sign all", in chat).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the system sheets. Id `library`.
 
@@ -30,7 +30,7 @@
 | Nadia sits down | person | college · Hale's ladder | one line about Hale | once a day, her window | yes |
 | find a book in the back stacks | sex scene | the way up (DECISIONS 79) | `library_back_stacks`: the couple pays nothing · "Stay behind the shelf." corruption add +1, cap 19 | once a day | yes: explicit |
 
-> Changed 2026-10-29 (the back-stacks row, LO's pick of 2026-10-29); waits for LO's re-sign.
+> Changed 2026-10-29 (the back-stacks row, LO's pick of 2026-10-29); re-signed by LO 2026-10-29.
 
 ## Rows a gate needs
 

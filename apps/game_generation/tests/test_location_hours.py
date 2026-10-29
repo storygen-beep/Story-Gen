@@ -350,3 +350,21 @@ def test_a_save_made_before_en3_in_a_shop_after_hours(html):
         g.click("Shop")
         assert g.passage() == "Location_loc_shop"
         assert g.errors == []
+
+
+# ── 5. a building's first room, closed ───────────────────────────────────────
+
+
+def test_a_closed_default_entry_room_goes_back_out_of_the_building():
+    """first_term, 2026-10-29: Zoe's Living Room is Zoe's Flat's default_entry, so by rule it has no
+    entry_from. Closed, its "Go back" ran previous(): the flat's passage, which redirects straight
+    back in (a loop, or Start). It goes where the open room's "Exit <building>" goes instead."""
+    raw = _raw()
+    _loc(raw, "loc_mall")["default_entry"] = "loc_mall_food"
+    food = _loc(raw, "loc_mall_food")
+    food.pop("entry_from")
+    food["hours"] = [{"weekdays": [], "open": "18:00", "close": "23:00"}]
+    room = _passages(_twee(raw))["Location_loc_mall_food"]
+    assert "[[Go back->Location_loc_shop]]" in room
+    assert "previous()" not in room
+    assert "[[Exit Mall->Location_loc_shop]]" in room

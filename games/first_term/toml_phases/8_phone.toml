@@ -110,6 +110,8 @@ app    = "messages"
 npc    = "npc_ryan"
 notify = "📱 Ryan"
 repeat_after_days = 2
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = -1, clamp = true }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "ryan_08_done", operator = "is_true" },
@@ -129,17 +131,62 @@ content = "two knocks. door's open."
 type = "reply"
 round = 1
 choices = [
-  { text = "coming", effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 1 }] },
+  { text = "coming", effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 1 }], flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "set" }] },
   { text = "not tonight" },
 ]
 
-# ── Laura: caused by laura_01_done (the blue dress) ──
+# ── Ryan: she said coming and never knocked (DECISIONS 87) ──
+[[phone.conversations]]
+id     = "ryan_knock_noshow"
+app    = "messages"
+npc    = "npc_ryan"
+notify = "📱 Ryan"
+repeat_after_days = 1
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = -2, clamp = true }], flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }] }
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "ryan_knock_booked", operator = "is_true" },
+  { type = "hours_since_flag", subject = "player", flag_key = "ryan_knock_booked", operator = "gte", value = 3 },
+  { type = "time_of_day", start_time = "00:30", end_time = "04:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you said coming."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "door was open all night."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "fell asleep. sorry", effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = -2, clamp = true }], flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }] },
+  { text = "tomorrow. promise", effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = -2, clamp = true }], flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "sure. sleep tight then."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "we'll see about that."
+
+# ── Laura: caused by laura_01_done (the blue dress). The yes books dinner (laura.py DINNER_DONE). ──
 [[phone.conversations]]
 id     = "laura_dinner"
 app    = "messages"
 npc    = "npc_laura"
 notify = "📱 Mom"
 repeat_after_days = 7
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = -1, clamp = true }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "laura_01_done", operator = "is_true" },
@@ -155,8 +202,8 @@ content = "home for dinner sweetheart?"
 type = "reply"
 round = 1
 choices = [
-  { text = "yes, starving", effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 1 }] },
-  { text = "eating out tonight" },
+  { text = "yes, starving", effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 1 }], flagEffects = [{ targetType = "player", flag = "dinner_promised", op = "set" }] },
+  { text = "eating out tonight", flagEffects = [{ targetType = "player", flag = "said_eating_out", op = "set" }] },
   { text = "is mark cooking?" },
 ]
 [[phone.conversations.blocks]]
@@ -177,6 +224,49 @@ sender = "npc"
 after_round = 1
 after_choice = 2
 content = "god no. it's me"
+
+# ── Laura: she said yes to dinner and never sat down (DECISIONS 87) ──
+[[phone.conversations]]
+id     = "laura_dinner_noshow"
+app    = "messages"
+npc    = "npc_laura"
+notify = "📱 Mom"
+repeat_after_days = 1
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = -2, clamp = true }, { targetType = "player", trait = "laura_suspicion", op = "add", value = 2 }], flagEffects = [{ targetType = "player", flag = "dinner_promised", op = "unset" }] }
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_true" },
+  { type = "hours_since_flag", subject = "player", flag_key = "dinner_promised", operator = "gte", value = 4 },
+  { type = "time_of_day", start_time = "20:00", end_time = "23:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "i kept you a plate."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you said six."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "sorry. lost track of time", effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = -2, clamp = true }, { targetType = "player", trait = "laura_suspicion", op = "add", value = 2 }], flagEffects = [{ targetType = "player", flag = "dinner_promised", op = "unset" }] },
+  { text = "something came up", effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = -2, clamp = true }, { targetType = "player", trait = "laura_suspicion", op = "add", value = 2 }], flagEffects = [{ targetType = "player", flag = "dinner_promised", op = "unset" }] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "it's in the fridge."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "it always does."
 
 # ── Mark: caused by rent_starts (breakfast, day 1); Saturday, every week ──
 [[phone.conversations]]
@@ -223,12 +313,14 @@ after_round = 1
 after_choice = 2
 content = "you will be. kitchen. eight."
 
-# ── Tom: caused by cafe_job ──
+# ── Tom: caused by cafe_job. The yes books today's first shift (cafe.py). ──
 [[phone.conversations]]
 id     = "tom_shift"
 app    = "messages"
 npc    = "npc_tom"
 notify = "📱 Tom"
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = -1, clamp = true }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "cafe_job", operator = "is_true" },
@@ -244,7 +336,7 @@ content = "shift after class?"
 type = "reply"
 round = 1
 choices = [
-  { text = "on my way after" },
+  { text = "on my way after", flagEffects = [{ targetType = "player", flag = "tom_shift_booked", op = "set" }] },
   { text = "not today" },
   { text = "what's it pay", effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = 1 }] },
 ]
@@ -267,13 +359,58 @@ after_round = 1
 after_choice = 2
 content = "twelve and tips. more in a tighter top."
 
-# ── Tom's repeat, after his step 6: Friday, stay after close ──
+# ── Tom: she said on my way and never clocked in (DECISIONS 87) ──
+[[phone.conversations]]
+id     = "tom_shift_noshow"
+app    = "messages"
+npc    = "npc_tom"
+notify = "📱 Tom"
+repeat_after_days = 1
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = -1, clamp = true }], flagEffects = [{ targetType = "player", flag = "tom_shift_booked", op = "unset" }] }
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tom_shift_booked", operator = "is_true" },
+  { type = "hours_since_flag", subject = "player", flag_key = "tom_shift_booked", operator = "gte", value = 9 },
+  { type = "time_of_day", start_time = "19:00", end_time = "23:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "no show today? really?"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "i covered your tables."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "sorry, class ran late", effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = -1, clamp = true }], flagEffects = [{ targetType = "player", flag = "tom_shift_booked", op = "unset" }] },
+  { text = "something came up", effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = -1, clamp = true }], flagEffects = [{ targetType = "player", flag = "tom_shift_booked", op = "unset" }] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "tell it to the tip jar."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "don't make it a habit."
+
+# ── Tom's repeat, after his step 6: Friday, stay after close. Only a yes opens the night (tom.py). ──
 [[phone.conversations]]
 id     = "tom_close"
 app    = "messages"
 npc    = "npc_tom"
 notify = "📱 Tom"
 repeat_after_days = 6
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = -1, clamp = true }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "tom_06_done", operator = "is_true" },
@@ -293,9 +430,53 @@ content = "i'll do the blinds"
 type = "reply"
 round = 1
 choices = [
-  { text = "maybe", effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = 1 }] },
+  { text = "i'll stay", effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = 1 }], flagEffects = [{ targetType = "player", flag = "tom_close_booked", op = "set" }] },
   { text = "not this week" },
 ]
+
+# ── Tom: she said she'd stay after close and didn't (DECISIONS 87) ──
+[[phone.conversations]]
+id     = "tom_close_noshow"
+app    = "messages"
+npc    = "npc_tom"
+notify = "📱 Tom"
+repeat_after_days = 1
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = -2, clamp = true }], flagEffects = [{ targetType = "player", flag = "tom_close_booked", op = "unset" }] }
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "tom_close_booked", operator = "is_true" },
+  { type = "hours_since_flag", subject = "player", flag_key = "tom_close_booked", operator = "gte", value = 12 },
+  { type = "weekday", weekdays = [5] },
+  { type = "time_of_day", start_time = "08:00", end_time = "20:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you said you'd stay."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "blinds stayed up."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "sorry. next friday", effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = -2, clamp = true }], flagEffects = [{ targetType = "player", flag = "tom_close_booked", op = "unset" }] },
+  { text = "couldn't get away", effects = [{ targetType = "npc", npcId = "npc_tom", trait = "want", op = "add", value = -2, clamp = true }], flagEffects = [{ targetType = "player", flag = "tom_close_booked", op = "unset" }] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "maybe. we'll see."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "sure you couldn't."
 
 # ── Zoe: the party (Thursday; she's home till midnight, so 'tonight' holds) ──
 [[phone.conversations]]
@@ -319,7 +500,7 @@ content = "party tmrw. wear something short"
 type = "reply"
 round = 1
 choices = [
-  { text = "obviously" },
+  { text = "obviously", flagEffects = [{ targetType = "player", flag = "zoe_party_promised", op = "set" }] },
   { text = "what counts as short" },
   { text = "can't. my mom" },
 ]
@@ -342,7 +523,7 @@ after_round = 1
 after_choice = 2
 content = "sneak out. kidding. kinda"
 
-# ── Zoe: the run (Friday; her park row is weekend mornings 08:00-10:00) ──
+# ── Zoe: the run (Friday; her park row is weekend mornings 08:00-10:00). The yes books it (zoe.py). ──
 [[phone.conversations]]
 id     = "zoe_run"
 app    = "messages"
@@ -380,7 +561,50 @@ after_round = 1
 after_choice = 1
 content = "lazy. next week then"
 
-# ── Dr. Hale (his college email): caused by hale_02_done ──
+# ── Zoe: she said i'm in and never came to the park (DECISIONS 87) ──
+[[phone.conversations]]
+id     = "zoe_run_noshow"
+app    = "messages"
+npc    = "npc_zoe"
+notify = "📱 Zoe"
+repeat_after_days = 1
+ignore_after_days = 1
+on_ignore = { effects = [], flagEffects = [{ targetType = "player", flag = "zoe_bailed", op = "set" }, { targetType = "player", flag = "zoe_run_booked", op = "unset" }] }
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "zoe_run_booked", operator = "is_true" },
+  { type = "hours_since_flag", subject = "player", flag_key = "zoe_run_booked", operator = "gte", value = 16 },
+  { type = "time_of_day", start_time = "10:00", end_time = "20:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you bailed on me 🙄"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "i ran alone like a loser"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "sorry!! next week", effects = [], flagEffects = [{ targetType = "player", flag = "zoe_bailed", op = "set" }, { targetType = "player", flag = "zoe_run_booked", op = "unset" }] },
+  { text = "overslept", effects = [], flagEffects = [{ targetType = "player", flag = "zoe_bailed", op = "set" }, { targetType = "player", flag = "zoe_run_booked", op = "unset" }] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "you're buying coffee."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "obviously. lazy bones."
+
+# ── Dr. Hale (his college email): caused by hale_02_done. The yes books step 3 (hale.py). ──
 [[phone.conversations]]
 id     = "hale_office_hours"
 app    = "messages"
@@ -401,7 +625,7 @@ content = "Office hours are Thursday, after six. Bring the essay."
 type = "reply"
 round = 1
 choices = [
-  { text = "I'll be there." },
+  { text = "I'll be there.", flagEffects = [{ targetType = "player", flag = "hale_office_booked", op = "set" }] },
   { text = "I can't this Thursday." },
 ]
 [[phone.conversations.blocks]]
@@ -417,7 +641,48 @@ after_round = 1
 after_choice = 1
 content = "Then next Thursday. — H."
 
-# ── Hale's repeat, after his step 5: Wednesday, "Thursday. Seven." ──
+# ── Hale: she said she'd come to office hours and didn't (DECISIONS 87) ──
+[[phone.conversations]]
+id     = "hale_office_noshow"
+app    = "messages"
+npc    = "npc_hale"
+notify = "📧 College email: Dr. Hale"
+repeat_after_days = 1
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = -2, clamp = true }], flagEffects = [{ targetType = "player", flag = "hale_office_booked", op = "unset" }] }
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "hale_office_booked", operator = "is_true" },
+  { type = "hours_since_flag", subject = "player", flag_key = "hale_office_booked", operator = "gte", value = 24 },
+  { type = "weekday", weekdays = [4] },
+  { type = "time_of_day", start_time = "09:00", end_time = "17:00" },
+  { type = "trait", subject = "player", trait_key = "hale_step", operator = "eq", value = 2 },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "I waited until half past seven."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "I'm sorry. Something came up.", effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = -2, clamp = true }], flagEffects = [{ targetType = "player", flag = "hale_office_booked", op = "unset" }] },
+  { text = "It won't happen again.", effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = -2, clamp = true }], flagEffects = [{ targetType = "player", flag = "hale_office_booked", op = "unset" }] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "Your essay grade reflects it. — H."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "See that it doesn't. — H."
+
+# ── Hale's repeat, after his step 5: Wednesday, "Thursday. Seven." The yes books it (hale.py). ──
 [[phone.conversations]]
 id     = "hale_thursday"
 app    = "messages"
@@ -439,9 +704,49 @@ content = "Thursday, my office. Seven."
 type = "reply"
 round = 1
 choices = [
-  { text = "Seven." },
+  { text = "Seven.", flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "set" }] },
   { text = "Not this week." },
 ]
+
+# ── Hale: she said seven and didn't come (DECISIONS 87) ──
+[[phone.conversations]]
+id     = "hale_thursday_noshow"
+app    = "messages"
+npc    = "npc_hale"
+notify = "📧 College email: Dr. Hale"
+repeat_after_days = 1
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = -1, clamp = true }], flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "unset" }] }
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "hale_thursday_booked", operator = "is_true" },
+  { type = "hours_since_flag", subject = "player", flag_key = "hale_thursday_booked", operator = "gte", value = 24 },
+  { type = "weekday", weekdays = [4] },
+  { type = "time_of_day", start_time = "09:00", end_time = "17:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "The door was unlocked at seven."
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "I couldn't get away.", effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = -1, clamp = true }], flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "unset" }] },
+  { text = "Next week.", effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = -1, clamp = true }], flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "unset" }] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "Then don't say seven. — H."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "We will see. — H."
 
 # ── Jake: caused by jake_number (Zoe's first party). The date is booked here. ──
 [[phone.conversations]]

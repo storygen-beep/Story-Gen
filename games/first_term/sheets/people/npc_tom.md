@@ -1,6 +1,8 @@
 # [READY] Person — Tom
 
-> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
+> **Changed 2026-10-29, re-signed by LO 2026-10-29** (DECISIONS 87–88): his shift text books the day's first shift; his Friday text is the only way into after close; a no-show costs his Want.
+
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08). Re-signed 2026-10-29 ("sign all", in chat).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the place sheets. Id `npc_tom`.
 
@@ -43,7 +45,7 @@ A ceiling, never a floor. LO took these, 2026-10-08.
 | 3 (Tom B 3) | `tom_03_the_tip_jar` | `cafe` | Mon–Sat 14:30–22:00 | `cafe_job` · Exhib. 20 · his Want 20 | want add +10 | walk past (parked) | A café shift, the back room: watch the tip jar. |
 | 4 (Tom B 4) | `tom_04_booth_four` | `cafe` | Mon–Fri 14:30–18:00 | `cafe_job` · Corruption 40 · Exhib. 20 · his Want 30 | want add +10 · corruption add +3 | "Not today, Tom." (parked: no booth four tips) | A weekday afternoon shift: Gary is in booth four. Twenty for ten minutes; Tom takes half. |
 | 5 (Tom B 5) | `tom_05_half_is_mine` | `cafe` | Mon–Sat 14:30–22:00 | `cafe_job` · Corruption 40 · Exhib. 20 · his Want 40 | want add +10 | "Fine." (parked) | After a shift, the back room: Tom wants his half. |
-| 6 (Tom B 6) | `tom_06_after_close_kiss` | `cafe` | Mon–Sat 22:00–23:00 | `cafe_job` · Corruption 40 · Exhib. 20 · his Want 50 | want add +10 · corruption add +3 | "Night, Tom." (parked) | Stay after close: Tom pulls the blinds. |
+| 6 (Tom B 6) | `tom_06_after_close_kiss` | `cafe` | Mon–Sat 22:00–23:00 (the café open till 23:00 since 2026-10-29, DECISIONS 89; his counter hub is 08:00–22:00) | `cafe_job` · Corruption 40 · Exhib. 20 · his Want 50 | want add +10 · corruption add +3 | "Night, Tom." (parked) | Stay after close: Tom pulls the blinds. |
 
 Every step's gate also says the drinks boost is off. Stage numbers: 20 is Curious or Daring, 40 Bold or Showing.
 
@@ -86,6 +88,13 @@ Each follow-up waits for her reply (`after_round`), and a different answer follo
 | 1 | "shift after class?" | "on my way after" | "apron's on the hook." |
 | | | "not today" | "your loss. tips were good." |
 | | | "what's it pay" | "twelve and tips. more in a tighter top." · his Want add +1 |
+
+**Bookings and no-shows (changed 2026-10-29, DECISIONS 87–88, re-signed by LO 2026-10-29).** A yes books it; showing up pays or plays its line and clears the booking; a yes with no show brings a short text that costs, whether she answers it or ignores it for a day. Ignoring the first text costs a little. Amounts are guesses for LO.
+
+| text | the yes books | showing up | ignored a day | the no-show text (when) | it costs |
+|---|---|---|---|---|---|
+| "shift after class?" | "on my way after": `tom_shift_booked` | the day's first shift: "You came. Good. Four extra for showing up." · money add +4 | his Want add −1 | "no show today? really?" · "i covered your tables." (9 hours after the yes, 19:00–23:00) | his Want add −1 |
+| "stay after close" · "i'll do the blinds" (Friday, after step 6) | "i'll stay" (was "maybe"): `tom_close_booked` | `tom_after_close` opens only when booked | his Want add −1 | "you said you'd stay." · "blinds stayed up." (Saturday 08:00–20:00) | his Want add −2 |
 
 ## Rows a gate needs
 

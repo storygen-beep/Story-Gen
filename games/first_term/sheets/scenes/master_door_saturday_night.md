@@ -1,6 +1,8 @@
-# [DRAFT] Scene — master_door_saturday_night
+# [READY] Scene — master_door_saturday_night
 
-> **[DRAFT] — waits for LO's sign.** Written 2026-10-29 from LO's pick in chat (DECISIONS 79). Prose by `v2-prose`, measured with `gates.py --beat`, pasted here.
+> Signed by LO: LO, 2026-10-29 ("sign all", in chat).
+
+> Written 2026-10-29 from LO's pick in chat (DECISIONS 79). Prose by `v2-prose`, measured with `gates.py --beat`, pasted here.
 
 | row | answer |
 |---|---|

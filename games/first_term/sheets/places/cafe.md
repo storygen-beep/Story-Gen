@@ -1,6 +1,6 @@
 # [READY] Place — Café
 
-> Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
+> Signed by LO: LO, 2026-10-09 (changed 2026-10-08). Re-signed 2026-10-29 ("sign all", in chat).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the system sheets. Id `cafe`.
 
@@ -9,8 +9,8 @@
 | kind | destination |
 | ENTERED FROM (S2) | town (the bus, 15 minutes, on the way in) |
 | labels — what kind of place | `zone:town`, `public` |
-| hours | Mon–Sat 08:00–22:00 |
-| closed text | "The café's shut." (every day; the engine adds when it opens) · after 22:00, only by staying for Tom |
+| hours | Mon–Sat 08:00–23:00 (changed 2026-10-29, LO: open till 23:00 so Tom's after-close scenes can play; re-signed by LO 2026-10-29) |
+| closed text | "The café's shut." (every day; the engine adds when it opens) · 22:00–23:00 the shifts are over and Tom is closing |
 | hidden until | no |
 | fill — word budget (S3) | 9,000 words (ledger, unchanged) |
 | door | no: a shop |

@@ -21,6 +21,8 @@ def capped(k, n, cap):
     return {"targetType": "player", "trait": k, "op": "add", "value": n, "cap": cap}
 
 # ═════════════ PARTIES ═════════════
+PROMISED_SHORT = [flag("zoe_party_promised"), {"type": "hours_since_flag", "subject": "player",
+                                              "flag_key": "zoe_party_promised", "operator": "lt", "value": 30}]
 out.append({
     "id": "party_arrive", "name": "Go in to Zoe's party",
     "description": "The Friday party at Zoe's (the parties sheet): the curfew, under 20 energy and something short each say why at the door. Arriving costs 15 energy; sets party_went and drinks_tonight 0.",
@@ -35,9 +37,13 @@ out.append({
         G(cond(trait("energy", "lt", 20)), T("You're asleep on your feet. The party runs late. You could go home and sleep and come back.")),
         G(cond(NOT_SHORT), D(Z, "Not in that. Borrow mine. Bedroom. Go.")),
         G(cond(SHORT), D(Z, "Babe! Get in here. Now we're talking.")),
+        # her "obviously" to Thursday's text (phone.py zoe_party, DECISIONS 87), read for the next 30 hours
+        G(cond(*PROMISED_SHORT, SHORT), D(Z, "Told you. Short. Good girl.")),
+        G(cond(*PROMISED_SHORT, NOT_SHORT), D(Z, "\"Obviously\", she said. That's not short, babe.")),
     ], [
         go("Go in. (15 energy)", loc="zoe_apartment", mins=10, costs=[{"trait": "energy", "value": 15}],
-           cond_=cond(SHORT, NO_CURFEW_ITEM), flags=[fset("party_went")], eff=[setv("drinks_tonight", 0)]),
+           cond_=cond(SHORT, NO_CURFEW_ITEM), flags=[fset("party_went"), funset("zoe_party_promised")],
+           eff=[setv("drinks_tonight", 0)]),
         go("Borrow Zoe's dress first.", loc="zoe_bedroom", mins=2),
         go("Go home.", loc="street", mins=2),
     ])]})
@@ -208,7 +214,8 @@ out.append({
     "id": "park_watch_the_couple", "name": "Walk the far path",
     "description": "The first explicit scene (LO, question 8): a couple in the bushes, strangers. Good Girl: she walks into them and runs. Curious: she watches, then touches herself. Once a day.",
     "trigger": {"location": "park", "is_repeatable": True, "priority": 4, "is_active": True, "max_triggers_per_day": 1,
-                "conditions": cond(flag("opening_done"))},
+                # starts by 21:30: the longest path is 21 minutes, so every exit lands before the 22:00 lock (reader item 5)
+                "conditions": cond(flag("opening_done"), tod("07:00", "21:30"))},
     "nodes": [
         node("sound", "The far path", [
             P("The far path behind the rhododendrons is empty and quiet. Then it isn't: a sound off to the left, through the leaves, low and rhythmic."),
