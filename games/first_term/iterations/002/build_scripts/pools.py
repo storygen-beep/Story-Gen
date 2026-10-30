@@ -152,7 +152,7 @@ DARING_RUN = cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipp
 
 out.append({
     "id": "park_walk", "name": "Walk the path",
-    "description": "A walk in the park: who she passes, what they see. Once a day. The next locked act is shown, naming Hungry.",
+    "description": "A walk in the park: who she passes, what they see. Once a day. The next locked act is shown, naming Corruption 60.",
     "trigger": {"location": "park", "is_repeatable": True, "priority": 4, "is_active": True, "max_triggers_per_day": 1},
     "nodes": [node("path", "The path", [
         POOL(P("You walk the loop round the pond. Ducks, dog walkers, a man on a bench with a newspaper. He's reading it, but he lowers it as you pass."),
@@ -160,7 +160,7 @@ out.append({
              P("Two guys playing frisbee stop playing frisbee while you walk past. One of them says something. The other one laughs."), pid="park_walk_lines"),
         G(cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}), P("The skirt is a problem in this wind. You let it be a problem.")),
         G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}), P("No bra, and the air is cool. Every man on the path finds a reason to look at your chest.")),
-    ], [go("Finish the loop.", loc="park", mins=30), go("Let strangers see. (Needs Hungry)", node="wall", swl=True, cond_=cond(trait("corruption", "gte", 60)))]),
+    ], [go("Finish the loop.", loc="park", mins=30), go("Let strangers see. (Needs Corruption 60)", node="wall", swl=True, cond_=cond(trait("corruption", "gte", 60)))]),
         node("wall", "Further", [P("That's further than you go in this release of First Term.")], [go("Back.", loc="park")])]})
 
 out.append({

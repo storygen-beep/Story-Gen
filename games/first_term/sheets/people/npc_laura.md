@@ -1,5 +1,7 @@
 # [READY] Person — Laura
 
+> **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
+
 > **Changed 2026-10-29, re-signed by LO 2026-10-29** (DECISIONS 87–88): her dinner text books dinner; a no-show costs warmth and suspicion; saying "eating out" and eating with her is a lie she sees.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08). Re-signed 2026-10-29 ("sign all", in chat).
@@ -85,7 +87,7 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 
 Each item is a choice inside Laura's hub in that room and window, never its own scene. Raise: Laura's
 Warmth add +1 (movie night +2), once a day per item. Tease from Curious and Laura C 1; touch from Bold
-and Laura C 7; her sex version waits for Hungry ("Needs Hungry"). Lines are samples (guess).
+and Laura C 7; her sex version waits for Hungry ("Needs Corruption 60"). Lines are samples (guess).
 
 | item | where · when | plain (Good Girl) | tease (Curious) | touch (Bold) |
 |---|---|---|---|---|

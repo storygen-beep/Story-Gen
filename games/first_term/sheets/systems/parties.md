@@ -1,5 +1,7 @@
 # [READY] System — parties
 
+> **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 from SYSTEMS §4, SP4, the party scout card and the ledger's `parties` card.
@@ -63,7 +65,7 @@
 | 1 · Good Girl · Covered | none | Zoe's dress, borrowed · a dare she can refuse: "Not tonight, Zo" |
 | 2 · Curious · Daring | Corruption and Exhibitionism gte 20 | a dare kiss, Jake or Zoe · bra off through the sleeve (Zoe A 2) |
 | 3 · Bold · Showing | Corruption gte 40 | topless with Zoe alone, friends gone in (Zoe A 3) · a hookup |
-| 4 · Hungry · Watched | later; the button says "Needs Hungry" | Zoe's bedroom, door open (Zoe A 5) · strangers watching |
+| 4 · Hungry · Watched | later; the button says "Needs Corruption 60" | Zoe's bedroom, door open (Zoe A 5) · strangers watching |
 
 **The drinks boost** opens one choice a stage early. Steps ignore it: every step's gate says the boost
 is off.

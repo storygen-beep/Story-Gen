@@ -138,6 +138,7 @@ flag_keys = [
   "mark_paid_look",
   "mark_paid_touch",
   "mark_things_today",
+  "mark_tv_paid",
   "midterm_done",
   "movie_night",
   "nadia_met",

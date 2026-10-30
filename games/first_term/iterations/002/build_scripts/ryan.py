@@ -241,7 +241,7 @@ def term_node(nid, name, blocks, flagname):
 
 out.append({
     "id": "ryan_08_two_knocks", "name": "Two knocks",
-    "description": "Ryan step 8 (Ryan A 9), the release's door: \"Two knocks\" shows locked, naming the stage it needs (Hungry, Corruption 60).",
+    "description": "Ryan step 8 (Ryan A 9), the release's door: \"Two knocks\" shows locked, naming the stage it needs (Corruption 60).",
     "trigger": step_trigger(R, 8, retry_days=1),
     "nodes": [
         node("ask", "What do I get", [
@@ -435,7 +435,7 @@ lc, ln = item("tv", "Play his game with him.", [], "watched_tv", LR,
            "eff": [energy(5), want(R)], "what": "Ryan, TV and a film: tease (Curious, Ryan A 4)"},
     touch={"label": "Share the blanket.", "ref": f"{RS}:105", "gate": [BOLD, trait("ryan_step", "gte", 7)],
            "eff": [energy(5), want(R), CORR1], "what": "Ryan, TV and a film: touch (Bold, Ryan A 8)"},
-    hungry="Further. (Needs Hungry)")
+    hungry="Further. (Needs Corruption 60)")
 fc, fn = item("film", "Watch a film with him.", [], "movie_night", LR,
     [P("He lets you pick and complains about it, but he watches the whole thing."), D(R, "Fine. That was good. Don't tell anyone.")],
     [energy(5), warm(R)], 120)

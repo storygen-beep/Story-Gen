@@ -1,5 +1,7 @@
 # [READY] System — college
 
+> **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 from SYSTEMS §1 and the ledger's `college` card.
@@ -82,7 +84,7 @@ Every grade starts at 50 (guess). The exam result reads `intelligence` plus that
 | 2 · Curious · Daring | Exhibitionism or Corruption gte 20 | a flash for Hale (Hale B 2) · she watches the guy beside her |
 | 2, continued | the exam only | flirting for the study guy's paper · a flash for the cocky guy's answers |
 | 3 · Bold · Showing | Corruption gte 40 | a touch in Hale's office (Hale B 3–4) · her hand under the desk, unseen |
-| 4 · Hungry · Watched | locked in 0.1; the button says "Needs Hungry" | under the desk with the class there · posing nude for the class |
+| 4 · Hungry · Watched | locked in 0.1; the button says "Needs Corruption 60" | under the desk with the class there · posing nude for the class |
 
 **Waiting for 0.2** (SP5): the art lecturer's posing, the Biology TA, and the dean's route.
 In 0.1 the three of them are talk hubs with one line on her grade and one on her clothes.

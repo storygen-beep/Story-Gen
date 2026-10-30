@@ -1,5 +1,7 @@
 # [READY] Place — Park
 
+> **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the system sheets. Id `park`.
@@ -30,7 +32,7 @@
 | run | work | park · wardrobe | energy add −10 · exhibitionism add +1 if Daring | once a day; energy on the trigger | yes |
 | rest on a bench | need | energy | energy add +5 | once a day, on the trigger | yes: her body |
 | Zoe, running | person | Zoe's ladder · park | her dare: a flash (Curious) · somewhere hidden (Bold) | once a day, her window | yes |
-| the next locked act | — | park | shown with what it needs: "Needs Hungry" | — | yes, one line |
+| the next locked act | — | park | shown with what it needs: "Needs Corruption 60" | — | yes, one line |
 
 ## Rows a gate needs
 

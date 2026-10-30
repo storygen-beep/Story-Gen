@@ -1,5 +1,7 @@
 # [READY] System — park
 
+> **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 from SYSTEMS §14 and the ledger's `park` card.
@@ -54,7 +56,7 @@ There is no fitness meter. What she wears changes who looks and what happens.
 | 2 · Curious · Daring | Corruption or Exhibitionism gte 20 | she watches the couple |
 | 2, continued | Exhibitionism gte 20 | a flash for Zoe on her run (Zoe's dare) · running in the sports bra |
 | 3 · Bold · Showing | Corruption gte 40 | naked or touching with Zoe, somewhere hidden |
-| 4 · Hungry · Watched | locked in 0.1; the button says "Needs Hungry" | strangers see her on purpose · groping in a crowd |
+| 4 · Hungry · Watched | locked in 0.1; the button says "Needs Corruption 60" | strangers see her on purpose · groping in a crowd |
 | 5 · Shameless · On Display | locked in 0.1; the button says "Needs Shameless" | public sex with someone she knows or brings |
 
 **A no always works.** Groping, when it comes, has a labelled no on the same screen, and the no holds.

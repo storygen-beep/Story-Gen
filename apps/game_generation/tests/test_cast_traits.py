@@ -138,7 +138,10 @@ def test_npc_show_traits_without_a_cast_page_is_warned():
 
 def test_a_cast_page_without_show_traits_is_emitted_as_before():
     """§0 rule 7. The golden is the CastPage passage the engine BEFORE EN7 (the EN5 tree,
-    snapshotted to scratch; it ignores these keys) generated for this fixture."""
+    snapshotted to scratch; it ignores these keys) generated for this fixture.
+    Regenerated 2026-10-30 when the page became a tap-to-open list with a Schedule button (first_term
+    DECISIONS 94, 95): a deliberate layout change. What this still guards is that a page
+    without show_traits carries none of EN7's pieces."""
     twee = _twee(_bare(_raw()))
     assert _passage(twee, "CastPage").strip() == read_data("en7_castpage_golden.txt")
     for piece in ("castTraitRows", "traitBand", "cast_show_traits", "cast-traits"):
@@ -177,9 +180,11 @@ def trust_labelled_html(tmp_path_factory):
 def _cards(g):
     g.js("() => { SugarCube.State.variables.flags.started = true; }")
     g.play("CastPage")
+    # The numbers sit inside a closed row (DECISIONS 94) and a closed row has no innerText,
+    # so each row is opened, as the player's tap would, before it is read.
     return g.js("""() => Object.fromEntries([...document.querySelectorAll('.cast-card')].map(c =>
-        [c.querySelector('.stats-name').innerText.trim(),
-         [...c.querySelectorAll('.cast-trait')].map(t => t.innerText.replace(/\\s+/g, ' ').trim())]))""")
+        { c.open = true; return [c.querySelector('.stats-name').innerText.trim(),
+         [...c.querySelectorAll('.cast-trait')].map(t => t.innerText.replace(/\\s+/g, ' ').trim())]; }))""")
 
 
 @needs_browser
@@ -236,6 +241,64 @@ def test_a_save_made_before_en7(html):
         assert g.load_save(read_data("en7_pre_change_save.txt")) is True
         assert g.passage() == "Canvas_step_plain_Node_only"
         g.play("CastPage")
-        cards = g.js("() => [...document.querySelectorAll('.cast-trait')].map(t => t.innerText.replace(/\\s+/g, ' ').trim())")
+        cards = g.js("() => [...document.querySelectorAll('.cast-card')].flatMap(c => { c.open = true;"
+                     " return [...c.querySelectorAll('.cast-trait')].map(t => t.innerText.replace(/\\s+/g, ' ').trim()); })")
         assert cards == ["Trust 10 · Wary", "Trust 70 · Yours", "Power 30"]
+        assert g.errors == []
+
+
+# ── 4. the tap-to-open list (first_term DECISIONS 94) ────────────────────────
+
+
+@needs_browser
+def test_each_person_is_one_closed_row_that_opens_on_a_tap(html):
+    with open_game(html) as g:
+        g.js("() => { SugarCube.State.variables.flags.started = true; }")
+        g.play("CastPage")
+        rows = g.js("() => [...document.querySelectorAll('details.cast-card')].map(d => d.open)")
+        assert rows == [False, False]
+        g.js("() => document.querySelectorAll('details.cast-card > summary')[0].click()")
+        g.js("() => document.querySelectorAll('details.cast-card > summary')[1].click()")
+        # `name` makes the rows one group: opening the second closes the first.
+        assert g.js("() => [...document.querySelectorAll('details.cast-card')].map(d => d.open)") == [False, True]
+        assert g.errors == []
+
+
+@needs_browser
+def test_somebody_about_right_now_is_listed_first(html):
+    with open_game(html) as g:
+        g.js("() => { SugarCube.State.variables.flags.started = true; }")
+        assert g.js("() => SugarCube.setup.castRoster().map(e => e.npc.name)") == ["Tobin", "Vic"]
+        # Put Vic somewhere and Tobin nowhere: Vic moves up, the file order is only a tiebreak.
+        g.js("""() => {
+            SugarCube.setup.getNpcLocation = s => s === 'vic' ? { location: Object.keys(SugarCube.setup.help_data.locationCanvases || {})[0] || 'x' } : null; }""")
+        assert g.js("() => SugarCube.setup.castRoster().map(e => e.npc.name)") == ["Vic", "Tobin"]
+
+
+@needs_browser
+def test_short_times_fit_one_phone_line(html):
+    with open_game(html) as g:
+        when = "(w) => SugarCube.setup.castWhen({ scheduleParams: [w] })"
+        assert g.js(when, {"weekdays": [0, 1, 2, 3, 4, 5], "startTime": "14:30", "endTime": "22:00"}) == "Mon–Sat 2:30–10 PM"
+        assert g.js(when, {"weekdays": [0, 2, 4], "startTime": "18:00", "endTime": "22:00"}) == "Mon, Wed, Fri 6–10 PM"
+        assert g.js(when, {"weekdays": [5, 6], "startTime": "10:00", "endTime": "13:00"}) == "Sat, Sun 10 AM–1 PM"
+        assert g.js(when, {"weekdays": [0, 1, 2, 3, 4, 5, 6], "startTime": "08:00", "endTime": "09:30"}) == "Every day 8–9:30 AM"
+        assert g.js(when, {"weekdays": [1]}) == "Tue"
+
+
+@needs_browser
+def test_a_schedule_is_one_day_and_keeps_a_hidden_place_hidden(html):
+    """The card's Schedule dialog (DECISIONS 95/96): one day at a time, short times, and a
+    place not yet found keeps its name hidden, as on the Schedules page."""
+    with open_game(html) as g:
+        rows = """(day) => { const d = document.createElement('div');
+            d.innerHTML = SugarCube.setup.castScheduleHtml(SugarCube.setup.resolveNpcId('tobin'), day);
+            return [...d.querySelectorAll('.cast-sched-row')].map(r => ['time', 'place', 'what']
+                .map(k => r.querySelector('.cast-sched-' + k)).filter(Boolean).map(x => x.textContent).join(' ')); }"""
+        assert g.js("() => SugarCube.setup.castHasSchedule('tobin')") is True
+        assert g.js(rows, 6) == ["10 AM–12 PM somewhere you haven't found yet Sorting boxes."]
+        assert g.js(rows, 0) == []
+        g.js("() => { SugarCube.State.variables.flags.found_attic = true; }")
+        assert g.js(rows, 6) == ["10 AM–12 PM Attic Sorting boxes."]
+        assert g.js("() => SugarCube.setup.castTimeRange('18:00', '22:00')") == "6–10 PM"
         assert g.errors == []

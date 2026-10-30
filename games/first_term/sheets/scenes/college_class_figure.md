@@ -1,5 +1,7 @@
 # [READY] Scene — college_class_figure
 
+> **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. The figure-drawing class canvas (`college_class_figure`): the class draws a nude model (a woman, 25).
@@ -20,7 +22,7 @@
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
 |---|---|---|---|---|
 | `pose` | the model drops her robe and poses; she draws her | yes | the class rows: Focus · Chat · Doze · Skip | as the college sheet · first class: `cocky_guy_met` set |
-| locked | posing nude for the class herself | — | "Pose for the class." Needs Hungry | — |
+| locked | posing nude for the class herself | — | "Pose for the class." Needs Corruption 60 | — |
 
 ## The explicit screens, written
 

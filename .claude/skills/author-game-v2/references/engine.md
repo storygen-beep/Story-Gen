@@ -1788,8 +1788,16 @@ card already exists elsewhere in the game and is read at runtime:
 | name | `$npcs[uuid].name` |
 | who they are to her | `$npcs[uuid].relationship` — the **existing** `[[npcs]] relationship` field |
 | what they are about | `setup.npc_tags[slug]` — the `[[npcs]] tags` field, below |
-| 📍 where, this minute | `setup.getNpcLocation` + `setup._locNameFromUuid` |
-| the next step | that character's own quest card — `renderQuestsGoalBlock` + its `tip` |
+| where, this minute | `setup.getNpcLocation` + `setup._locNameFromUuid` — the chip on the closed row, "Away" when off-schedule |
+| the next step | that character's own quest card — `setup.castNext` (the three frames of `renderQuestsGoalBlock`, as data) + its `tip` |
+
+**The layout (2026-10-30, first_term DECISIONS 94).** Phone first: one row per person, a native
+`<details>` the player taps open, one open at a time (`name="cast"`). The closed row is the face,
+the name, one line under it (*"Ready · Mon–Sat 2:30–10 PM"*, or the first goal still missing) and
+where they are. The open card adds the relationship, the numbers as short bars, a NEXT block, the
+tip and the tags. `setup.castRoster` sorts the rows: somebody about right now, then a ready scene,
+then the rest, file order within each group. Times are shortened for the row by `setup.castWhen`
+(runs of three days or more become a range); the Quests page keeps `_formatCanvasSchedule`.
 | his numbers (opt-in) | `show_traits` below — each row is the trait's name, his value, and a word |
 
 **His numbers.** The page shows none unless you name them — and under D1 every trait he keeps is
@@ -1832,13 +1840,35 @@ entry to carry one, so this cannot happen in a game that passes its own scoreboa
 
 ⚠️ **An off-schedule character is not a bug.** `getNpcLocation` returns null outside every declared
 window and the card says so in a dimmed line. At 05:15 on a farm whose crew starts at 06:00, four
-of five rows read *"Not about right now"* — correct, and the reason the away state gets its own
+of five rows read *"Away"* — correct, and the reason the away state gets its own
 muted style instead of an empty gap.
 
 The `castButton` widget is emitted **even when the block is absent** (as an empty widget), because
 `StoryCaption` calls it unconditionally and SugarCube throws on an undefined widget — the same rule
 `[ui.cheat_page]` records. And the button is wired into **both** `StoryCaption` branches: miss the
 non-dev one and the page ships dev-only, which no gate would catch.
+
+**A person's schedule opens from their card.** When `setup.getNpcAllSchedulesSorted` has rows for
+them, the open card carries a Schedule button. The dialog (`setup.castScheduleHtml`) shows one day at
+a time: seven day chips with today picked, a "Now:" line on today, then one row per stretch of the day
+(*"6–10 PM · Kitchen · in the kitchen, evening"*, the current one marked). It reads the same rows as
+the Schedules page, so a row whose `when` fails is gone, a locked place is muted with its reason, and
+a place not yet found keeps its name hidden. Back-to-back rows in the same place join into one, and a
+row that is only sleep is dimmed. The Schedules page keeps its weekly table (`<<npcScheduleSection>>`).
+
+### `[ui] sidebar_hide` and `[ui] phone_clock` — the sidebar, trimmed
+
+```toml
+[ui]
+sidebar_hide = ["stats", "schedules", "flags"]   # buttons left out; their pages are still built
+phone_clock  = true                              # a clock top-left while the sidebar is closed on a phone
+```
+
+`sidebar_hide` takes the names the player reads: `quests`, `people`, `tips`, `cheats`, `stats`,
+`schedules`, `flags` (Flags exists in dev builds only). An unknown name is a `validate()` error. Hide
+`schedules` only when the cast page is on, since its cards then carry each person's schedule.
+`phone_clock` shows the time and day (*"9:30 PM · Fri"*) at 768px wide or less while `#ui-bar` is
+stowed; a tap opens the sidebar. Without either key nothing new is emitted.
 
 ### `[[npcs]] tags` — the four-word line under the name
 
@@ -1854,11 +1884,13 @@ tags         = ["The rent book", "The garden", "Sunday", "Strong tea"]
 ```
 
 ```
-[face]  Hal
-        Your landlord, 52. His name is the one on the lease.
-        The rent book · The garden · Sunday · Strong tea
-        📍 The back garden
-        💡 …
+(face) Hal                         ● The back garden  ›
+       Ready · Sun 9 AM–12 PM
+  ── tapped open ──
+       Your landlord, 52. His name is the one on the lease.
+       NEXT  Ready · The back garden · Sun 9 AM–12 PM
+       …the tip…
+       The rent book · The garden · Sunday · Strong tea
 ```
 
 **Why four, and which four.** The field's best cast page is `friends-of-mine`'s **Characterpedia**

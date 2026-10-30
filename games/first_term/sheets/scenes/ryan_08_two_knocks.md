@@ -1,5 +1,7 @@
 # [READY] Scene — ryan_08_two_knocks
 
+> **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. The door this release ends on.
@@ -27,7 +29,7 @@
 | `final` | "Your secret's safe. You're my brother, that's all. (ends his path)" | no | → the hall | `ryan_08_two_knocks_closed` set |
 
 **The door:** the choice "Two knocks" stays on his room's door after this step. Step 9's button shows
-locked: *"Needs Hungry."*
+locked: *"Needs Corruption 60."*
 
 ## The repeat it turns into — `ryan_two_knocks` (one sheet row, not its own step)
 

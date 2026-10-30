@@ -454,7 +454,7 @@
     "door": {
       "canvas": "ryan_08_two_knocks",
       "choice": "Two knocks",
-      "locked_next": "the next step's button (Ryan A 10), shown locked and naming Hungry (SP7:11)"
+      "locked_next": "the next step's button (Ryan A 10), shown locked and naming Corruption 60 (SP7:11; DECISIONS 90)"
     },
     "reader": {
       "ryan_01_hall_first_morning": {

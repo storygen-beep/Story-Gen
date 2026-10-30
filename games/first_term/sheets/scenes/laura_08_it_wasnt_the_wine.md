@@ -1,5 +1,7 @@
 # [READY] Scene — laura_08_it_wasnt_the_wine
 
+> **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
+
 > Signed by LO: LO, 2026-10-08.
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08.
@@ -30,7 +32,7 @@
 | where · when | the dark stairs, 23:00–02:00, when she comes home late |
 | what happens | Laura waits up; her questions read her Warmth and suspicion |
 | by her Want | high: "Tell me everything." Her questions get closer |
-| explicit? | no in 0.1; her step 9 shows locked: "Needs Hungry" |
+| explicit? | no in 0.1; her step 9 shows locked: "Needs Corruption 60" |
 | BRAKE (S9) | once a night, on the trigger |
 
 ## Why — the source of each key choice

@@ -593,6 +593,12 @@ class GameTemplate:
     # wrapped in a check on its own unlock flag, which the player sets by entering
     # that row's code. The codes are never in this file (see parse_template).
     cheat_page: Optional["TemplateCheatPage"] = None
+    # [ui] sidebar_hide — sidebar buttons this game leaves out (SIDEBAR_BUTTONS names);
+    # their pages still exist. Kept raw; validate() checks the names. Empty = all shown.
+    sidebar_hide: Any = field(default_factory=list)
+    # [ui] phone_clock — a small clock in the top-left corner while the sidebar is
+    # closed on a narrow screen, so the time is readable without opening it.
+    phone_clock: bool = False
     # Doc 69 Item 3 — parse-time errors collected during normalize() for the
     # field-name mismatch validator. validate() prepends these to its own
     # error list. Populated only by normalize(); never mutated downstream.
@@ -3592,6 +3598,13 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                 trait_bands=castp_raw.get("trait_bands") or {},
             )
 
+    # Sidebar chrome: buttons left out, and the phone clock. Plain [ui] keys.
+    sidebar_hide_raw: Any = []
+    phone_clock = False
+    if isinstance(ui_raw, dict):
+        sidebar_hide_raw = ui_raw.get("sidebar_hide") or []
+        phone_clock = ui_raw.get("phone_clock") is True
+
     # Player cheat page. Authored under [ui.cheat_page] + [[ui.cheat_page.grants]].
     # NOTE the deliberate divergence from tips_page above: an authored-but-empty
     # block is NOT silently dropped here. It is constructed and left for validate()
@@ -3780,6 +3793,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         flag_labels=flag_labels,
         tips_page=tips_page_obj,
         cast_page=cast_page_obj,
+        sidebar_hide=sidebar_hide_raw,
+        phone_clock=phone_clock,
         # This kwarg is the silent-no-op step: parse the block, forget the kwarg,
         # and the feature vanishes with no error anywhere. Covered by a test.
         cheat_page=cheat_page_obj,
@@ -6785,6 +6800,7 @@ def validate(template: GameTemplate) -> List[str]:
 
     # EN7 — the men's numbers on the cast page.
     errors.extend(_validate_cast_traits(template))
+    errors.extend(_validate_sidebar_hide(template))
 
     # EN8 — decay toward a rest point; wait after contact.
     errors.extend(_validate_decay_rest(template))
@@ -7103,6 +7119,25 @@ def _validate_show_traits(value: Any, ctx: str, errors: List[str]) -> List[str]:
         errors.append(f"{ctx} must be a list of trait keys, got {value!r}")
         return []
     return list(value)
+
+
+# The sidebar buttons a game may leave out with [ui] sidebar_hide, by the name the
+# player reads. Each maps to one widget in StoryCaption (v2.py).
+SIDEBAR_BUTTONS = ("quests", "people", "tips", "cheats", "stats", "schedules", "flags")
+
+
+def _validate_sidebar_hide(template) -> List[str]:
+    """`[ui] sidebar_hide` names buttons to leave out. A misspelt name would hide nothing
+    and say nothing, so it is an error."""
+    raw = template.sidebar_hide
+    if not raw:
+        return []
+    if not isinstance(raw, list) or not all(isinstance(x, str) for x in raw):
+        return [f"[ui] sidebar_hide must be a list of names, got {raw!r}"]
+    return [
+        f"[ui] sidebar_hide: unknown button '{x}' (known: {', '.join(SIDEBAR_BUTTONS)})"
+        for x in raw if x not in SIDEBAR_BUTTONS
+    ]
 
 
 def _validate_cast_traits(template) -> List[str]:
@@ -8646,6 +8681,11 @@ def _assemble_project_metadata(project, template):
             project.metadata["cast_page"]["show_traits"] = list(template.cast_page.show_traits)
         if template.cast_page.trait_bands:
             project.metadata["cast_page"]["trait_bands"] = dict(template.cast_page.trait_bands)
+    # Sidebar chrome, only when set, so every other game's metadata is unchanged.
+    if template.sidebar_hide:
+        project.metadata["sidebar_hide"] = list(template.sidebar_hide)
+    if template.phone_clock:
+        project.metadata["phone_clock"] = True
     # Player cheat page. The FULL row data goes here — hints, values, caps and all.
     # Metadata never reaches the output file as a config object; each row is baked
     # into passage markup inside a check on its own unlock flag.

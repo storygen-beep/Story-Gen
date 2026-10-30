@@ -8,7 +8,7 @@
   block's text starts with PLACEHOLDER and names the sheet file:line; list_placeholders.py reads
   them back out of the built TOML for BUILD_LOG.md.
 - item(): one home_life item inside a person's hub: a hub choice into a node; the node's exits are
-  the plain finish, and by stage the tease, the touch, and "(Needs Hungry)" locked (home_life.md
+  the plain finish, and by stage the tease, the touch, and "(Needs Corruption 60)" locked (home_life.md
   "The rule for every item").
 """
 import copy
@@ -39,7 +39,7 @@ def since(key, op, hours=HOURS):
 # Every brake flag a home item sets; each one is unset in [engine.daily_tick] (0_systems_spec.toml).
 DAILY = ["ate_breakfast", "had_coffee", "ate_dinner", "helped_cook", "did_dishes", "had_drink_home",
          "watched_tv", "movie_night", "did_laundry", "sunned", "studied_home", "made_up_today",
-         "hung_washing", "home_event", "couch_seen", "mark_paid_look"]
+         "hung_washing", "home_event", "couch_seen", "mark_paid_look", "mark_tv_paid"]
 
 
 def _with(c, extra):
@@ -135,9 +135,9 @@ SEXY_ON = {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": 
 
 
 def hungry_node(back):
-    """The screen behind every "(Needs Hungry)" choice, as the college classes have it."""
+    """The screen behind every "(Needs Corruption 60)" choice, as the college classes have it."""
     return node("hl_hungry", "Further", [
-        P("That's further than you go in this release of First Term. It comes later, when you're Hungry."),
+        P("That's further than you go in this release of First Term. It comes later, when your Corruption reaches 60."),
     ], [go("Back.", loc=back)])
 
 

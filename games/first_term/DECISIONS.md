@@ -26,6 +26,82 @@ These signed pages say the old thing and wait for LO's re-sign; nothing on them 
 none of which pays at Good Girl), and the two Quests-page goal labels at `toml_phases/7_final_game.toml:22360`
 and its Exhibitionism twin, which name sources that pay nothing at stage 1.
 
+## Answered (LO, 2026-10-30, the schedule pop-up)
+
+| # | question | LO's answer |
+|---|---|---|
+| 96 | "In one table it shows everything. It becomes a lot confusing." Simplify it? | "Yes" to one day at a time: day chips with today picked, a "Now:" line, then one row per stretch of the day (short time, place, what they do under it), the current row marked, back-to-back rows in the same place joined, sleep-only rows dimmed. |
+
+Engine only (`setup.castScheduleHtml` in `v2.py`). The full Schedules page keeps its weekly table; first_term has no
+button to it since DECISIONS 95.
+
+## Answered (LO, 2026-10-30, the sidebar)
+
+| # | question | LO's answer |
+|---|---|---|
+| 95 | The sidebar | "Remove stats schedules flags button from left sidebar. Rename shortcuts with cheats." On a phone, "a small floating clock in the top left side when sidebar is closed". "Schedules for each npc can go into the peoples page, a button in each people section for schedule modal." |
+
+Built as `[ui] sidebar_hide = ["stats", "schedules", "flags"]` and `[ui] phone_clock = true` in `0_systems_spec.toml`,
+and `[ui.cheat_page] title = "Cheats"`. The Stats and Schedules pages still exist; only their buttons went. Each card on
+the People page carries a Schedule button when that person has schedule rows (Dr. Hale has none, so his has no button).
+The Schedules page's "Your Activities" table has no new home. Snapshot:
+`~/Documents/Great_Games_Study_20260926/first_term_snapshots/20261030_sidebar_before/`.
+
+## Answered (LO, 2026-10-30, the People screen on a phone)
+
+| # | question | LO's answer |
+|---|---|---|
+| 94 | Redesign the People screen, and make it phone friendly? | "Go ahead" with the tap-to-open list. One short row per person (face, name, one line under it, where they are now or "Away"); a tap opens the relationship, the meters as bars, NEXT, the tip and the tags; one open at a time; Back on top; somebody about right now first, then a ready scene, then the rest. |
+
+An engine change, not a game one: `v2.py` `_generate_cast_page`, `_cast_page_js` (`setup.castRoster`, `castNext`,
+`castWhen`) and `_cast_page_css`. Only first_term has a `[ui.cast_page]`. No TOML, key, save or gate changed. The old
+screen showed two unlabelled 📍 lines per card (where he is, then where his next scene is); the new one says "● Kitchen"
+on the row and "NEXT · Ready · Master Bedroom · Tue 6–10 PM" inside. Snapshot:
+`~/Documents/Great_Games_Study_20260926/first_term_snapshots/20261030_people_screen_before/`.
+
+## Answered (LO, 2026-10-30, the words for the people's meters)
+
+| # | question | LO's answer |
+|---|---|---|
+| 93 | Are "Want", "Warmth" and "Power" the words the market uses? | No; rename what the player sees ("go ahead"), keep the keys. The market words, from our studies: Course of Temptation like / love / lust, Project Reeducation lust, New Life Project love points, Zara's School Life corruption for family members. "Corruption" was turned down for `want`: one label covers all five people, the older men aren't being corrupted, and it would sit next to her own Corruption on the same cards. |
+
+| key (unchanged in code, saves and conditions) | the player now sees | who |
+|---|---|---|
+| `warmth` | Love | Laura, Ryan |
+| `want` | Lust | Mark, Tom, Vance, Laura, Ryan |
+| `power` | Dominance | Mark, Tom, Vance |
+
+The sheets keep the old names as design terms (56 sheets); read them through this table. Only the shown labels changed:
+`0_systems_spec.toml` `[[traits.labels]]` and `canv.py` `TRAIT_NAME` (the quest-card goals). Snapshot:
+`~/Documents/Great_Games_Study_20260926/first_term_snapshots/20261030_meter_words_before/`.
+
+## Answered (LO, 2026-10-30, channel 5 with Mark)
+
+| # | question | LO's answer |
+|---|---|---|
+| 92 | Channel 5 with Mark paid the same as alone (+1) and gave him nothing. Should it pay more, and move Mark too? | Yes ("yes go ahead"). "Keep watching." with him pays her Corruption +2, cap 19 at Good Girl and 39 at Curious (never 40: row 78, Bold comes from Bold acts), and his Want +2. He has no Corruption meter (he keeps Want + Power), so Want is the one that moves. Once a day (`mark_tv_paid`, cleared at midnight): row 91's five-a-day cap can't reach a choice inside his portrait hub. After that it plays and pays nothing. His late hub runs past midnight, so one night can pay twice, the same as every `*_today` brake. |
+
+Row 92 was written 2026-10-30 from LO's "yes go ahead" in chat. It touches `scenes/living_tv_channels.md` and `people/npc_mark.md`, each marked changed and waiting for LO's re-sign. Snapshot:
+`~/Documents/Great_Games_Study_20260926/first_term_snapshots/20261030_mark_tv_before/`.
+
+## Answered (LO, 2026-10-30, the TV alone)
+
+| # | question | LO's answer |
+|---|---|---|
+| 91 | Watching TV alone has no daily limit (row 86). Cap it? | Five sessions a day ("make it 5"). One session is one opening of the remote; changing channel doesn't count, and every paid choice ends the session, so channel 5 pays at most 5 times a day (touching herself at Curious counts inside its session). The plain channels count too. After the fifth, the row greys out: "Watch TV — Not now." That grey row also shows when the room is busy or it's past 02:00, so its text says only "Not now." The count resets at midnight; the hours stay 07:00–02:00. The TV with Mark is unchanged. This replaces row 86's "no daily brake". |
+
+Row 91 was written 2026-10-30 from LO's "Go ahead make it 5" in chat. It touches `scenes/living_tv_channels.md`, marked changed and waiting for LO's re-sign. Snapshot:
+`~/Documents/Great_Games_Study_20260926/first_term_snapshots/20261030_tv_cap_before/`.
+
+## Answered (LO, 2026-10-29, the locked buttons)
+
+| # | question | LO's answer |
+|---|---|---|
+| 90 | A locked button says "(Needs Hungry)". At Good Girl the player has never seen that word, and it reads like food. What should it say? | The number: "(Needs Corruption 60)", and "(Needs Exhibitionism 60)" for the one Watched button. The "Further" screen behind it says "It comes later, when your Corruption reaches 60." (or Exhibitionism). The sidebar keeps its stage words (Good Girl, Curious, Bold, Hungry) and its number. |
+
+Row 90 was written 2026-10-29 from LO's "Corruption 60, go" in chat. It touches 13 sheets, each marked changed and waiting for LO's re-sign. Snapshot:
+`~/Documents/Great_Games_Study_20260926/first_term_snapshots/20261029_locked_labels_before/`.
+
 ## Answered (LO, 2026-10-29, step 4: the Good Girl moments)
 
 | # | question | LO's answer |

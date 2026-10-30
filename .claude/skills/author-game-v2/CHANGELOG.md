@@ -5,6 +5,51 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-30 — the cast card's schedule is one day at a time
+
+**What.**
+- `references/engine.md` §34: the Schedule button's dialog is now a one-day timeline (`setup.castScheduleHtml`):
+  day chips, a now line, one row per stretch of the day, same rows and lock and hidden-place rules as the Schedules
+  page. It replaces the weekly table described in the entry below.
+
+**Why.** LO found the weekly table in one dialog confusing and asked for it simplified (first_term DECISIONS 96).
+
+**Verified.** `apps/game_generation/tests` 764 passed, including a new test that a place not yet found stays hidden
+in the dialog until its flag. first_term: gates 61/89, the same per gate; probe `sched_day.js` 12/12 at 390 and 1280
+wide, 0 page errors.
+
+## 2026-10-30 — the sidebar can be trimmed, a phone clock, schedules on the cast page
+
+**What.**
+- `references/engine.md` §34: the cast card's Schedule button (a dialog with the Schedules page's own section), and a
+  new subsection for `[ui] sidebar_hide` (the buttons a game leaves out) and `[ui] phone_clock`.
+
+**Why.** LO asked to remove Stats, Schedules and Flags from first_term's sidebar, put each person's schedule on the
+People page, and keep the time visible on a phone with the sidebar closed (first_term DECISIONS 95). The engine
+(`template_import.py` SIDEBAR_BUTTONS + `_validate_sidebar_hide`; `v2.py` StoryCaption, `<<npcScheduleSection>>`,
+`setup.castOpenSchedule`, `_phone_clock_js/_css`) changed, so the reference had to say so.
+
+**Verified.** New `tests/test_sidebar_chrome.py` 4 passed; `apps/game_generation/tests` 759 passed (the EN7 cast golden
+regenerated on purpose). The 6 failures in `apps/projects/tests.py` fail the same on the committed engine. first_term:
+gates 61/89, the same per gate; probe `sidebar.js` 12/12 with 0 page errors.
+
+## 2026-10-30 — the cast page is a tap-to-open list, phone first
+
+**What.**
+- `references/engine.md` §34: the line table now names where the chip and the next-step line come from
+  (`setup.castNext`), a new "The layout" paragraph describes the row and the open card, the sort
+  (`setup.castRoster`) and the short times (`setup.castWhen`), the off-schedule word is now "Away", and the
+  `[[npcs]] tags` sketch shows the closed row and the open card.
+
+**Why.** LO asked for a more mobile-friendly People screen (first_term DECISIONS 94). The engine
+(`v2.py` `_generate_cast_page`, `_cast_page_js`, `_cast_page_css`) changed, so the reference had to stay true.
+No authoring field changed.
+
+**Verified.** `pytest apps/game_generation/tests/test_cast_traits.py apps/game_generation/tests/test_hidden_places.py`
+46 passed (the EN7 golden regenerated on purpose; three new tests for the rows, the sort and the short times).
+first_term rebuilt: gates 61/89, the same per gate. A browser probe at 390 and 1280 wide passed 16/16 with 0 page
+errors: five closed rows on one phone screen, Back on top, one open at a time.
+
 ## 2026-10-13 — every stage has a way up, and only her choice pays (A4d + a new gate)
 
 **What.**
