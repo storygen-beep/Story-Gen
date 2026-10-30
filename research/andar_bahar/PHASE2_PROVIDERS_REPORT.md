@@ -620,3 +620,11 @@ choice is about trust, not edge, and the Phase 2 ranking stands: Evolution Super
 licences and published mathematics all check. Ultimate adds a software multiplier draw and
 a 20% fee for the same edge with far more variance. ElCasino is unverifiable. Side bets on
 every table are worse than the main bet, by 2 to 24 points.
+
+### Withdrawal page, first look (2026-10-30)
+
+INR withdrawal, "Recommended" tab: three methods. "Bank Transfer new" and "iCash.One" show a
+padlock, meaning not available to this account as it stands. The only open method is a
+generic "Withdrawal" with a 72-hour badge. No minimum amount, fee, or document list visible
+yet. Two of three recommended routes locked on a fresh account is the pattern behind the
+AskGamblers complaints in section 5: a win exists on screen, the route to a bank is gated.
