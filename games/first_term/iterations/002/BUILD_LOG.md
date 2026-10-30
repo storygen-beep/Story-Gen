@@ -966,3 +966,16 @@ sheets' own, and none is a tease, touch or paid look.
 
 - Engine: `setup.castScheduleHtml` / `castTimeRange` replace the weekly table in the People card's dialog. Same rows as the Schedules page (`getNpcAllSchedulesSorted`, lock reasons, hidden-place names, emitted only for a game with hidden places).
 - Rebuilt with `--dev --debug`. Gates 61/89, the same per gate. Probe `sched_day.js` 12/12 at 390 and 1280: Laura on Friday 19:00 shows three rows with "▶ 6–10 PM Kitchen" marked and "Now: Kitchen"; the Saturday chip redraws with no now line; no sideways scroll. `sidebar.js` 12/12, `cast_list.js` 16/16, `labels.js` 4/4, `mark_tv.js` 6/6, `tv_cap.js` 8/8, 0 page errors. Engine tests 764 passed.
+
+## 2026-10-30: the Quests page is short rows, phone first (DECISIONS 97, LO)
+
+- Engine: `[ui] quests_layout = "list"` swaps the V2 QuestsPage for a list built on `setup.questsStoryRows`, `setup.questsRoster` and `setup.questsNextWindow`. It reuses the cast page's `castNext` / `castWhen`. The default cards page is unchanged byte for byte.
+- `0_systems_spec.toml` `[ui]`: `quests_layout = "list"`. Merged; only that line moved in `7_final_game.toml`.
+- Rebuilt with `--dev --debug`. Gates 61/89, unchanged.
+- Probe `quests_list.js` 24/24 at 390 and 1280 wide, 0 page errors. On Monday 15:00:
+  - 3 story rows (0 / 4, 0 / 20, 0 / 20);
+  - Tom first with "Today 2:30–10 PM · Café" and Now;
+  - Mark last, ◯ "The rent has started";
+  - the whole page fits on one phone screen (last row ends at 814px of 844).
+- Other probes: `cast_list` 16/16, `sidebar` 12/12, `sched_day` 12/12, `labels` 4/4, `mark_tv` 6/6. `tv_cap` was 7/8 once ("next day: Watch TV is back"), then 8/8 on two re-runs, with no TV code touched.
+- Engine tests 770 passed (6 new in `test_quests_list.py`).

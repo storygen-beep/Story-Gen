@@ -599,6 +599,9 @@ class GameTemplate:
     # [ui] phone_clock — a small clock in the top-left corner while the sidebar is
     # closed on a narrow screen, so the time is readable without opening it.
     phone_clock: bool = False
+    # [ui] quests_layout — "cards" (default, one card per person in file order) or
+    # "list" (short tap-to-open rows, ready first). Kept raw; validate() checks it.
+    quests_layout: Any = "cards"
     # Doc 69 Item 3 — parse-time errors collected during normalize() for the
     # field-name mismatch validator. validate() prepends these to its own
     # error list. Populated only by normalize(); never mutated downstream.
@@ -3601,9 +3604,11 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     # Sidebar chrome: buttons left out, and the phone clock. Plain [ui] keys.
     sidebar_hide_raw: Any = []
     phone_clock = False
+    quests_layout_raw: Any = "cards"
     if isinstance(ui_raw, dict):
         sidebar_hide_raw = ui_raw.get("sidebar_hide") or []
         phone_clock = ui_raw.get("phone_clock") is True
+        quests_layout_raw = ui_raw.get("quests_layout", "cards")
 
     # Player cheat page. Authored under [ui.cheat_page] + [[ui.cheat_page.grants]].
     # NOTE the deliberate divergence from tips_page above: an authored-but-empty
@@ -3795,6 +3800,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         cast_page=cast_page_obj,
         sidebar_hide=sidebar_hide_raw,
         phone_clock=phone_clock,
+        quests_layout=quests_layout_raw,
         # This kwarg is the silent-no-op step: parse the block, forget the kwarg,
         # and the feature vanishes with no error anywhere. Covered by a test.
         cheat_page=cheat_page_obj,
@@ -6801,6 +6807,7 @@ def validate(template: GameTemplate) -> List[str]:
     # EN7 — the men's numbers on the cast page.
     errors.extend(_validate_cast_traits(template))
     errors.extend(_validate_sidebar_hide(template))
+    errors.extend(_validate_quests_layout(template))
 
     # EN8 — decay toward a rest point; wait after contact.
     errors.extend(_validate_decay_rest(template))
@@ -7138,6 +7145,20 @@ def _validate_sidebar_hide(template) -> List[str]:
         f"[ui] sidebar_hide: unknown button '{x}' (known: {', '.join(SIDEBAR_BUTTONS)})"
         for x in raw if x not in SIDEBAR_BUTTONS
     ]
+
+
+QUESTS_LAYOUTS = ("cards", "list")
+
+
+def _validate_quests_layout(template) -> List[str]:
+    """`[ui] quests_layout` picks how the V2 quests page is drawn. A misspelt value would
+    fall back to the cards and say nothing, and the list draws V2 cards only, so both are errors."""
+    raw = template.quests_layout
+    if raw not in QUESTS_LAYOUTS:
+        return [f"[ui] quests_layout must be one of {', '.join(QUESTS_LAYOUTS)}, got {raw!r}"]
+    if raw == "list" and template.project.quests_engine != "v2":
+        return ['[ui] quests_layout = "list" requires project.quests_engine = "v2"']
+    return []
 
 
 def _validate_cast_traits(template) -> List[str]:
@@ -8686,6 +8707,8 @@ def _assemble_project_metadata(project, template):
         project.metadata["sidebar_hide"] = list(template.sidebar_hide)
     if template.phone_clock:
         project.metadata["phone_clock"] = True
+    if template.quests_layout == "list":
+        project.metadata["quests_layout"] = "list"
     # Player cheat page. The FULL row data goes here — hints, values, caps and all.
     # Metadata never reaches the output file as a config object; each row is baked
     # into passage markup inside a check on its own unlock flag.
