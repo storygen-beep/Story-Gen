@@ -2,9 +2,9 @@
 Price the three live Andar Bahar tables observed on the user's 1xBet account
 (screenshots, 2026-10-30, domain 1-x-bet-india.com) against the exact model.
 
-Table A  "1x Andar Bahar" (1xLIVE-branded): Andar 1:1, Bahar 0.9:1,
-         cards-dealt 2.5/3.5/4.5/3.5/14/24/49/119 for 1-5/6-10/11-15/16-25/26-30/31-35/36-40/41-49.
-         Paytable identical to Ezugi's studio table. First card to Bahar implied by the 0.9:1.
+Table A  "1x Andar Bahar" (1xLIVE-branded dedicated table, Ezugi game-info panel): Andar 1:1,
+         Bahar 0.9:1, Bahar first, cards-dealt 2.5/3.5/4.5/3.5/14/24/49/119. Published RTP
+         Andar 96.99%, Bahar 97.86%, side bets 91.45% to 98.10%.
 Table B  "Ultimate Andar Bahar" (Ezugi, confirmed by lobby tile and game-info panel): Andar 1:1,
          Bahar 0.9:1, 20% fee on every bet, side bets 2/3/4/3/12/20/40/100, random 2x/3x/5x
          multipliers on 1-3 virtual cards. Published RTP: Andar 97.44%, Bahar 97.82%, sides 95.05-95.68%.
@@ -54,12 +54,26 @@ def first3_given_joker_rank(rank: int) -> F:
     return F(sf * 121 + straight * 9 + flush * 6, pairs)
 
 
-print("TABLE A  '1x Andar Bahar'  (Ezugi-pattern paytable; Bahar receives the first card)")
-print(line("Bahar (first card)", P_FIRST, F(9, 10)))
-print(line("Andar (second)", P_SECOND, F(1)))
-for (lo, hi), pay in zip([(1, 5), (6, 10), (11, 15), (16, 25), (26, 30), (31, 35), (36, 40), (41, 49)],
-                         [F(5, 2), F(7, 2), F(9, 2), F(7, 2), F(14), F(24), F(49), F(119)]):
-    print(line(f"cards {lo}-{hi}", bucket(lo, hi), pay))
+print("TABLE A  '1x Andar Bahar' (1xLIVE dedicated table; Ezugi game-info panel read 2026-10-30)")
+print("  Rules: one 52-card deck shuffled/changed before each round by the dealer; joker, then betting; Bahar first.")
+print("  Exact model versus Ezugi's published 'optimal return to player':")
+published_A = {"Bahar (first card)": F(9786, 10000), "Andar (second)": F(9699, 10000),
+               (1, 5): F(9486, 10000), (6, 10): F(9768, 10000), (11, 15): F(9296, 10000), (16, 25): F(9810, 10000),
+               (26, 30): F(9145, 10000), (31, 35): F(9248, 10000), (36, 40): F(9497, 10000), (41, 49): F(9520, 10000)}
+rows = [("Bahar (first card)", P_FIRST, F(9, 10)), ("Andar (second)", P_SECOND, F(1))]
+rows += [(f"cards {lo}-{hi}", bucket(lo, hi), pay) for (lo, hi), pay in
+         zip([(1, 5), (6, 10), (11, 15), (16, 25), (26, 30), (31, 35), (36, 40), (41, 49)],
+             [F(5, 2), F(7, 2), F(9, 2), F(7, 2), F(14), F(24), F(49), F(119)])]
+keys = ["Bahar (first card)", "Andar (second)", (1, 5), (6, 10), (11, 15), (16, 25), (26, 30), (31, 35), (36, 40), (41, 49)]
+worst = 0.0
+for (label, p, pay), key in zip(rows, keys):
+    model = p * (pay + 1)
+    pub = published_A[key]
+    diff = float(pub - model) * 100
+    worst = max(worst, abs(diff))
+    print(f"  {label:<20} model RTP {float(model):8.4%}   published {float(pub):6.2%}   difference {diff:+.3f} points")
+print(f"  Largest difference: {worst:.3f} points. The provider's own figures agree with a single-deck,")
+print("  three-match, alternate-deal model on every bet. The model is validated for Ezugi tables.")
 
 print("\nTABLE B  'Ultimate Andar Bahar' (Ezugi; game-info panel read 2026-10-30)")
 print("  Rules: one 52-card deck shuffled/changed by the dealer before each round; Bahar first;")

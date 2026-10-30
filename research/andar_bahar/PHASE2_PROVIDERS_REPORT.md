@@ -471,18 +471,44 @@ is what this is. Whatever licence protection exists attaches to the listed domai
 Three live tables were captured. All three are shared multi-player streams (other players'
 winnings scroll on screen), which rules out per-player outcome shaping at the table layer.
 
-### Table A: "1x Andar Bahar" (felt branded 1xLIVE)
+### Table A: "1x Andar Bahar" (1xLIVE dedicated table, Ezugi)
 
-- Overhead camera, dealer's hands only, shuffling machine visible at the right of the table.
-- Andar 1:1, **Bahar 0.9:1**. The 0.9:1 side is the first-card side, so on this table
-  **Bahar receives the first card and is the better bet** (2.15% edge versus 3.00%).
-- Cards-dealt side bet: 1–5 2.5:1, 6–10 3.5:1, 11–15 4.5:1, 16–25 3.5:1, 26–30 14:1,
-  31–35 24:1, 36–40 49:1, 41–49 119:1. Identical to Ezugi's studio paytable and to the
-  Wizard of Odds table. Priced at 1.9% to 8.5% house edge.
-- Result road of roughly 90 rounds shown, 42% Andar / 58% Bahar in the sample. Expected
-  Bahar share 51.5%; the deviation is 1.2 standard errors, nothing.
-- Provider not shown on screen. Paytable pattern and the 100-round road match Ezugi.
-  **Rules page and lobby tile still needed.**
+Game-info panel captured in full. Its structure (Objective, Game Rules, Payout table, Side
+Bets, Betting Instructions, Return To Player, Error Handling, Connection, Disconnection) is
+word-for-word the Ezugi template seen on Ultimate Andar Bahar, and the user reports the
+Ezugi name on launch. A 1xBet-branded dedicated Ezugi environment. PRIMARY for this table.
+
+- One 52-card deck "shuffled/changed before each round by the dealer". Joker revealed, then
+  betting. **Bahar receives the first card.** Studio dealer at a table, shuffling machine
+  visible; earlier shots were an overhead camera of the same table.
+- Andar 1:1, Bahar 0.9:1. Cards-dealt side bet 2.5 / 3.5 / 4.5 / 3.5 / 14 / 24 / 49 / 119 to 1.
+- Published "optimal return to player": Andar 96.99%, Bahar 97.86%, side bets 94.86%, 97.68%,
+  92.96%, 98.10%, 91.45%, 92.48%, 94.97%, 95.20%.
+
+**This is the validation of the model.** The exact model (one deck, three matching cards,
+alternate deal starting with the 0.9:1 side) reproduces every one of Ezugi's ten published
+figures to within 0.13 percentage points, and the two main bets to within 0.01:
+
+| bet | model RTP | Ezugi published | difference |
+|---|---|---|---|
+| Bahar 0.9:1 | 97.851% | 97.86% | +0.009 |
+| Andar 1:1 | 96.999% | 96.99% | −0.009 |
+| cards 1–5 | 94.874% | 94.86% | −0.014 |
+| cards 6–10 | 97.671% | 97.68% | +0.009 |
+| cards 11–15 | 92.965% | 92.96% | −0.005 |
+| cards 16–25 | 98.103% | 98.10% | −0.003 |
+| cards 26–30 | 91.477% | 91.45% | −0.027 |
+| cards 31–35 | 92.437% | 92.48% | +0.043 |
+| cards 36–40 | 94.838% | 94.97% | +0.132 |
+| cards 41–49 | 95.078% | 95.20% | +0.122 |
+
+The provider's own certified numbers and an independent first-principles calculation agree.
+That answers Task 5's question for Ezugi tables: the published rules, the published payouts
+and the mathematics are mutually consistent. What it does not prove is that the physical
+deal matches the rules; that is what observation (section 8) is for.
+
+- Result road shows about 90 rounds. Sample shares were 42/58 and 45/55 Andar/Bahar across
+  two captures. Expected Bahar share 51.5%. Within noise.
 
 ### Table B: "Ultimate Andar Bahar" (Ezugi, confirmed)
 
@@ -563,18 +589,34 @@ this table are the worst bets on the account.
   (Tables A and B presumably the same; their rules pages will say).
 - Free observation: all three stream whether or not you bet.
 
-### Also on the account
+### The full live lineup on the account
 
-- Live Casino search shows an Ezugi "Andar Bahar" tile (the standard table) beside Ultimate,
-  and a third live tile cut off at the edge.
-- Slots section shows two RNG Andar Bahar titles (one with a "G" logo, one with a hat logo,
-  probably Mascot Gaming). RNG table games, not investigated; out of scope unless chosen.
-- The 1xGames in-house "Andar Bahar Game" did not appear in the search results captured.
+Live Casino search for "Andar Bahar" shows, in order: ElCasino "Andar Bahar" (also listed
+under TV Games), 1xLIVE "1X Andar Bahar" (Ezugi dedicated), Ezugi "Ultimate Andar Bahar",
+Ezugi "Andar Bahar", SA Gaming "M Andar Bahar", Evolution "Super Andar Bahar" (501 players
+seated at capture), Ezugi "OTT Andar Bahar", Playtech "Andar Bahar", and at least one more
+tile cut off. Slots show two RNG Andar Bahar titles (a "G" logo and a hat logo). The 1xGames
+in-house title did not appear in the search.
+
+So the Phase 2 research set (Ezugi, Evolution, Pragmatic, Vivo) was right on two of four:
+Ezugi in four variants and Evolution Super Andar Bahar are on the account. Pragmatic Play
+and Vivo tables did not appear in the search. Playtech, SA Gaming and ElCasino did, and were
+not researched in depth. Of those three, Playtech is a listed, UKGC-licensed supplier with a
+long audit record; SA Gaming is an Asia-facing supplier with GLI certification claims;
+ElCasino has no public footprint at all.
 
 ### Still needed
 
-1. Table A's provider: the third live tile, and Table A's own rules or game-info page
-   (first-card rule, deck, shuffle, scanner, published RTP). If the 1xLIVE table is the
-   Ezugi "Andar Bahar" tile, its game-info panel will say so.
-2. The withdrawal and verification terms for this account.
-3. The footer "Fairness & RNG Testing Methods" page.
+1. The withdrawal and verification terms for this account.
+2. The footer "Fairness & RNG Testing Methods" page.
+3. If Playtech or SA Gaming is ever preferred over Ezugi or Evolution: their game-info
+   panels. Not needed otherwise.
+
+### Table choice, for when the time comes
+
+Every table prices the main bet at the same 2.15% to 2.18% on the first-card side. The
+choice is about trust, not edge, and the Phase 2 ranking stands: Evolution Super Andar Bahar
+(Andar first) and the Ezugi standard tables (Bahar first) are the two whose provider,
+licences and published mathematics all check. Ultimate adds a software multiplier draw and
+a 20% fee for the same edge with far more variance. ElCasino is unverifiable. Side bets on
+every table are worse than the main bet, by 2 to 24 points.
