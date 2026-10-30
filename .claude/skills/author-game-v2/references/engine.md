@@ -1025,6 +1025,29 @@ conditions and is wrong here.
 no separate "sidebar quest": edit a card and both surfaces move together, and a character with no
 card renders a blank next-row.
 
+### `[ui] quests_layout = "list"` — the page as short rows (first_term DECISIONS 97)
+
+```toml
+[ui]
+quests_layout = "list"   # default "cards"; needs quests_engine = "v2"
+```
+
+Same cards, same words; only the drawing changes. Top to bottom:
+- **← Back**, then *What's Next*.
+- **My story**: one row per story card (no `npc_id`). Closed, the row shows its text on one line and,
+  when a goal has a number, a thin bar with *"5 / 20"*.
+- **People**: one row per person, in the cards page's own roster, ready first and soonest first.
+  - Soonest is counted from the game clock by `setup.questsNextWindow`.
+  - The working people follow in file order.
+  - A closed row shows a dot (● ready, ◯ working), the name and one line: *"Today 2:30–10 PM · Café"*,
+    or the goal still missing.
+  - **Now** marks a ready scene whose window is open this minute.
+- **Finished (n)**: the terminal people, folded at the bottom.
+
+A tap opens a row to show the card's `text` (or `ready_text` once the goals are met), its next step and its
+`tip`. One row is open at a time. A bad value is a `validate()` error, and so is `"list"` on a V1 quests
+game. Without the key, the cards page is byte-identical.
+
 ### The next STEP in the rail — `[[sidebar_items]] type = "quest_next"`
 
 **A quest card has no `title` field** (`template_import.py:1321-1363`) — `text` is the narrative body,

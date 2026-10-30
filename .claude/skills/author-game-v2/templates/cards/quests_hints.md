@@ -40,3 +40,6 @@
 
 ## Our engine today (round 9b §6)
 - SUPPORTED: `TemplateQuest` (`template_import.py:937`) and a `quest` condition (`v2.py:5223`).
+- SUPPORTED (2026-10-30): `[ui] quests_layout = "list"` (`engine.md` §23) draws the page in the IHOH shape:
+  - one row per person plus "My story" (IHOH's "My Life");
+  - each row shows the current step only, as CoT does.

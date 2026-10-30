@@ -11719,48 +11719,9 @@ setup.decayToward = function (v, rest, d) {
         """EN7 — does the cast page show any numbers? Only then is anything below emitted."""
         return bool(self.cast_page and (self.cast_page.get("show_traits") or self.npc_show_traits_map))
 
-    def _cast_page_js(self) -> str:
-        """The cast page's roster, its next-step line, its short times and the schedule
-        dialog. Empty unless the game has a cast page. A place not yet found is named through
-        setup.locShownName only in a game that has hidden places, so every other game
-        carries none of that code.
-
-        Who is listed is still the quest cards' decision (see _generate_cast_page): the walk
-        below is the one the passage used to do in macros, moved here so the page can sort.
-        """
-        if not self.cast_page:
-            return ""
-        return """
-// The cast page roster, sorted so the person worth a tap is on top: somebody about right
-// now, then somebody whose scene is ready, then the rest. File order within each group.
-setup.castRoster = function () {
-    var cards = setup.quests_cards || [];
-    var hidden = setup.hiddenNpcs || {};
-    var slugMap = setup.npc_slug_map || {};
-    var npcs = State.variables.npcs || {};
-    var seen = {}, out = [];
-    for (var i = 0; i < cards.length; i++) {
-        var c = cards[i];
-        if (!c || !c.npc_id || seen[c.npc_id]) continue;
-        seen[c.npc_id] = true;
-        // hiddenNpcs is UUID-keyed; check both forms, exactly as QuestsPage does.
-        if (hidden[c.npc_id] || hidden[slugMap[c.npc_id]]) continue;
-        var slug = c.npc_id;
-        var card = setup.pickQuestsCard(slug);
-        if (!card) continue;
-        var npc = npcs[slugMap[slug] || slug] || npcs[slug];
-        if (!npc) continue;
-        var loc = setup.getNpcLocation(slug);
-        var locName = loc ? (setup._locNameFromUuid(loc.location) || "") : "";
-        var next = setup.castNext(card, setup.evaluateGoals(card));
-        out.push({ slug: slug, npc: npc, card: card, next: next, locName: locName,
-                   here: !!locName, rank: locName ? 0 : (next.kind === "ready" ? 1 : 2), order: out.length });
-    }
-    out.sort(function (a, b) { return (a.rank - b.rank) || (a.order - b.order); });
-    return out;
-};
-
-// One person's next step, in the same three frames as renderQuestsGoalBlock (done, ready,
+    # A quest card's next step as one short line, and the short times it uses. Shared by the
+    # cast page and the list quests page ([ui] quests_layout = "list"); emitted once.
+    _QUEST_LINE_JS = """// One person's next step, in the same three frames as renderQuestsGoalBlock (done, ready,
 // goals), as data: `line` is the one line under the name on the closed row.
 setup.castNext = function (card, goalState) {
     if (!card) return { kind: "none", line: "" };
@@ -11826,7 +11787,50 @@ setup.castTimeRange = function (start, end) {
     return a + "–" + b;
 };
 
-// One person's weekly schedule, opened from their card in a dialog. The rows and the
+"""
+
+    def _cast_page_js(self) -> str:
+        """The cast page's roster, its next-step line, its short times and the schedule
+        dialog. Empty unless the game has a cast page. A place not yet found is named through
+        setup.locShownName only in a game that has hidden places, so every other game
+        carries none of that code.
+
+        Who is listed is still the quest cards' decision (see _generate_cast_page): the walk
+        below is the one the passage used to do in macros, moved here so the page can sort.
+        """
+        if not self.cast_page:
+            return ""
+        return """
+// The cast page roster, sorted so the person worth a tap is on top: somebody about right
+// now, then somebody whose scene is ready, then the rest. File order within each group.
+setup.castRoster = function () {
+    var cards = setup.quests_cards || [];
+    var hidden = setup.hiddenNpcs || {};
+    var slugMap = setup.npc_slug_map || {};
+    var npcs = State.variables.npcs || {};
+    var seen = {}, out = [];
+    for (var i = 0; i < cards.length; i++) {
+        var c = cards[i];
+        if (!c || !c.npc_id || seen[c.npc_id]) continue;
+        seen[c.npc_id] = true;
+        // hiddenNpcs is UUID-keyed; check both forms, exactly as QuestsPage does.
+        if (hidden[c.npc_id] || hidden[slugMap[c.npc_id]]) continue;
+        var slug = c.npc_id;
+        var card = setup.pickQuestsCard(slug);
+        if (!card) continue;
+        var npc = npcs[slugMap[slug] || slug] || npcs[slug];
+        if (!npc) continue;
+        var loc = setup.getNpcLocation(slug);
+        var locName = loc ? (setup._locNameFromUuid(loc.location) || "") : "";
+        var next = setup.castNext(card, setup.evaluateGoals(card));
+        out.push({ slug: slug, npc: npc, card: card, next: next, locName: locName,
+                   here: !!locName, rank: locName ? 0 : (next.kind === "ready" ? 1 : 2), order: out.length });
+    }
+    out.sort(function (a, b) { return (a.rank - b.rank) || (a.order - b.order); });
+    return out;
+};
+
+""" + self._QUEST_LINE_JS + """// One person's weekly schedule, opened from their card in a dialog. The rows and the
 // NOW badge are the Schedules page's own (<<npcScheduleSection>>), so the two agree.
 setup.castHasSchedule = function (slug) {
     try { return setup.getNpcAllSchedulesSorted(setup.resolveNpcId(slug)).length > 0; }
@@ -18378,7 +18382,299 @@ setup.carryRent = function (due, paid) {
         `setup.help_data.locationCanvases`.
         """
         collapsed = "true" if (self.project.metadata or {}).get("quests_finished_collapsed") else "false"
-        return self._quests_v2_overlay_text().replace("%%QUESTS_FINISHED_COLLAPSED%%", collapsed)
+        text = self._quests_v2_overlay_text().replace("%%QUESTS_FINISHED_COLLAPSED%%", collapsed)
+        # Read from the metadata here, like the collapsed key above: callers build the
+        # overlay without running generate().
+        if (self.project.metadata or {}).get("quests_layout") == "list":
+            # The cards passage is the overlay's last; the list layout replaces it.
+            text = text[:text.index(":: QuestsPage\n")] + self._quests_list_passages()
+        return text
+
+    def _quests_list_passages(self) -> str:
+        """[ui] quests_layout = "list" (first_term DECISIONS 97): the QuestsPage as short
+        tap-to-open rows, phone first. Replaces only the cards passage; the V2 script, the
+        <<renderQuestsCard>> widget and its styles stay as they are.
+
+        Same cards, same words, moved: the story cards first ("My story"), then one row per
+        person, ready first and soonest first, then the people whose arc is finished, folded.
+        A closed row is one line (when and where, or the goal still missing); the open row
+        holds the card's text, its next step and its tip. The roster is the cards page's own
+        walk (setup.questsRoster), so who is listed does not change with the layout.
+        """
+        # The cast page already emits the next-step helpers; emit them once.
+        line_js = "" if (self.project.metadata or {}).get("cast_page") else self._QUEST_LINE_JS
+        return """:: QuestsListScript [script]
+(function () {
+""" + line_js + """
+var DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+function toMin(hhmm) {
+    var p = String(hhmm || "00:00").split(":");
+    return (parseInt(p[0], 10) || 0) * 60 + (parseInt(p[1], 10) || 0);
+}
+
+// The next window of a canvas's schedule from the current game time, within a week.
+// { mins: 0 when a window is open now, Infinity when there are no rows; row: that window }.
+setup.questsNextWindow = function (sched) {
+    if (!Array.isArray(sched) || sched.length === 0) return { mins: Infinity, row: null };
+    var ts = State.variables.game_state.time_state;
+    var today = DAYS.indexOf(ts.current_day);
+    var now = ts.current_hour * 60 + ts.current_minute;
+    var best = { mins: Infinity, row: null };
+    for (var i = 0; i < sched.length; i++) {
+        var s = sched[i];
+        // An open window counts as now; isScheduleActive is the engine's own test.
+        if (setup.isScheduleActive([s])) return { mins: 0, row: s };
+        var wd = (s.weekdays && s.weekdays.length) ? s.weekdays : [0, 1, 2, 3, 4, 5, 6];
+        var start = toMin(s.startTime);
+        for (var off = 0; off <= 7; off++) {
+            if (wd.indexOf((today + off) % 7) === -1) continue;
+            var m = off * 1440 + start - now;
+            if (m < 0) continue;
+            if (m < best.mins) best = { mins: m, row: s };
+            break;
+        }
+    }
+    return best;
+};
+
+// The story line a card shows: its ready_text once every goal is met, else its text.
+function flavorOf(card, goalState) {
+    return (goalState.allMet && card.ready_text) ? card.ready_text : (card.text || "");
+}
+
+// The people on the quests page, in three groups. Who is listed is the cards page's walk:
+// one entry per npc_id on a card, hidden people left out (hiddenNpcs is UUID-keyed, so
+// both forms are checked), and only somebody with a live card.
+setup.questsRoster = function () {
+    var cards = setup.quests_cards || [];
+    var hidden = setup.hiddenNpcs || {};
+    var slugMap = setup.npc_slug_map || {};
+    var npcs = State.variables.npcs || {};
+    var ts = State.variables.game_state.time_state;
+    var leftToday = 1440 - (ts.current_hour * 60 + ts.current_minute);
+    var seen = {}, ready = [], working = [], done = [], order = 0;
+    for (var i = 0; i < cards.length; i++) {
+        var c = cards[i];
+        if (!c || !c.npc_id || seen[c.npc_id]) continue;
+        seen[c.npc_id] = true;
+        if (hidden[c.npc_id] || hidden[slugMap[c.npc_id]]) continue;
+        var slug = c.npc_id;
+        var card = setup.pickQuestsCard(slug);
+        if (!card) continue;
+        var npc = npcs[slugMap[slug] || slug] || npcs[slug];
+        var goalState = setup.evaluateGoals(card);
+        var next = setup.castNext(card, goalState);
+        var e = { slug: slug, name: (npc && npc.name) || slug.replace("npc_", ""), card: card,
+                  next: next, flavor: flavorOf(card, goalState), line: next.line,
+                  ready: false, now: false, soon: Infinity, order: order++ };
+        if (card.terminal === true) { done.push(e); continue; }
+        if (next.kind === "ready") {
+            e.ready = true;
+            var found = setup.lookupCanvasBySlug(card.ready_canvas);
+            var w = setup.questsNextWindow(found && found.canvas && found.canvas.scheduleParams);
+            e.soon = w.mins;
+            e.now = w.mins === 0;
+            // "Today 2:30–10 PM" when the next window is today, else the week's short form.
+            var when = (w.row && w.mins < leftToday)
+                ? "Today " + (w.row.startTime && w.row.endTime ? setup.castTimeRange(w.row.startTime, w.row.endTime) : "")
+                : next.when;
+            when = (when || "").trim();
+            e.line = [when, next.place].filter(Boolean).join(" · ") || "Ready";
+            ready.push(e);
+        } else {
+            working.push(e);
+        }
+    }
+    ready.sort(function (a, b) { return (a.soon - b.soon) || (a.order - b.order); });
+    return { people: ready.concat(working), done: done };
+};
+
+// The story cards (no npc_id), each with its story line, its next step and the first goal
+// still open that has a number, for the bar on the closed row.
+setup.questsStoryRows = function () {
+    var cards = setup.pickQuestsCards("story_goals") || [];
+    var out = [];
+    for (var i = 0; i < cards.length; i++) {
+        var card = cards[i];
+        var goalState = setup.evaluateGoals(card);
+        var next = setup.castNext(card, goalState);
+        var bar = null;
+        for (var j = 0; j < goalState.items.length; j++) {
+            var it = goalState.items[j], g = it.goal || {};
+            if (it.met || typeof it.currentValue !== "number" || typeof g.value !== "number" || g.value <= 0) continue;
+            bar = { cur: it.currentValue, max: g.value,
+                    pct: Math.max(0, Math.min(100, Math.round(100 * it.currentValue / g.value))) };
+            break;
+        }
+        out.push({ card: card, next: next, flavor: flavorOf(card, goalState), bar: bar });
+    }
+    return out;
+};
+})();
+
+:: QuestsListWidgets [widget nobr]
+/* One open part of a row: the card's next step, then its tip. Shared by story and people rows. */
+<<widget "questsNext">>
+<<set _qn to $args[0]>>
+<<if _qn.kind is "ready">>
+  <div class="quests-next">Ready<<if _qn.place>> · <<print _qn.place>><</if>><<if _qn.when>> · <<print _qn.when>><</if>></div>
+<<elseif _qn.kind is "goals">>
+  <ul class="quests-goals"><<for _qg range _qn.items>><li @class="_qg.met ? 'quests-met' : ''"><<print _qg.mark>> <<print _qg.label>></li><</for>></ul>
+<<elseif _qn.kind is "done">>
+  <div class="quests-next">✓ <<print _qn.text>></div>
+<</if>>
+<</widget>>
+
+/* One person: a closed row (dot, name, one line, Now) that opens to the text, next step and tip. */
+<<widget "questsPersonRow">>
+<<set _qe to $args[0]>>
+<details name="quests" @class="'quests-row' + (_qe.ready ? ' is-ready' : '') + (_qe.card.terminal ? ' is-done' : '')">
+  <summary>
+    <span class="quests-dot"><<if _qe.card.terminal>>✓<<elseif _qe.ready>>●<<else>>◯<</if>></span>
+    <span class="quests-head">
+      <span class="quests-name"><<print _qe.name>></span>
+      <<if _qe.line>><span class="quests-line"><<print _qe.line>></span><</if>>
+    </span>
+    <<if _qe.now>><span class="quests-now">Now</span><</if>>
+  </summary>
+  <div class="quests-body">
+    <<if _qe.flavor>><div class="quests-text"><<print _qe.flavor>></div><</if>>
+    <<questsNext _qe.next>>
+    <<if _qe.card.tip>><div class="quests-tipline"><<print _qe.card.tip>></div><</if>>
+  </div>
+</details>
+<</widget>>
+
+:: QuestsListStyles [stylesheet]
+/* [ui] quests_layout = "list": phone first, one short row per story card and per person. */
+.quests-top { margin-bottom: 4px; }
+.quests-list { max-width: 720px; }
+.quests-list h3 {
+    margin: 12px 0 6px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--theme-text-muted, #8a8a8a);
+}
+.quests-row {
+    background: var(--theme-surface);
+    border: 1px solid var(--theme-border);
+    border-radius: 10px;
+    margin: 0 0 6px;
+}
+.quests-row > summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 52px;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+.quests-row > summary::-webkit-details-marker { display: none; }
+.quests-row > summary::after {
+    content: "›";
+    color: var(--theme-text-muted, #8a8a8a);
+    font-size: 20px;
+    transition: transform 0.15s ease;
+}
+.quests-row[open] > summary::after { transform: rotate(90deg); }
+.quests-row > summary:focus-visible { outline: 2px solid var(--theme-accent); outline-offset: -2px; border-radius: 10px; }
+.quests-dot { width: 1em; flex-shrink: 0; text-align: center; font-size: 16px; color: var(--theme-text-muted, #8a8a8a); }
+.quests-row.is-ready .quests-dot { color: var(--theme-accent); }
+.quests-head { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.quests-name { font-size: 16px; font-weight: 600; color: var(--theme-text-strong, var(--theme-text)); }
+/* The one line under the name, or a story card's text: never more than one line closed. */
+.quests-line, .quests-story {
+    color: var(--theme-text-muted, #8a8a8a);
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.quests-story { color: var(--theme-text); font-size: 15px; }
+.quests-row[open] .quests-story { display: none; }
+.quests-now {
+    flex-shrink: 0;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--theme-accent);
+    color: var(--theme-bg, #111);
+    font-size: 13px;
+    font-weight: 600;
+}
+.quests-progress { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--theme-text-muted, #8a8a8a); font-variant-numeric: tabular-nums; }
+.quests-bar { width: 56px; height: 6px; border-radius: 3px; background: var(--theme-border); overflow: hidden; }
+.quests-bar-fill { display: block; height: 100%; background: var(--theme-accent); }
+.quests-body { padding: 4px 14px 14px; font-size: 15px; line-height: 1.45; color: var(--theme-text); }
+.quests-text { margin: 0 0 10px; }
+.quests-next {
+    margin: 10px 0;
+    padding: 8px 10px;
+    border-left: 3px solid var(--theme-accent);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 0 6px 6px 0;
+}
+.quests-goals {
+    list-style: none;
+    margin: 10px 0;
+    padding: 8px 10px;
+    border-left: 3px solid var(--theme-border);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 0 6px 6px 0;
+}
+.quests-goals li.quests-met { opacity: 0.6; }
+.quests-tipline { margin: 8px 0 0; color: var(--theme-text-muted, #8a8a8a); font-size: 14px; }
+.quests-row.is-done { opacity: 0.75; }
+.quests-done-fold > summary { cursor: pointer; padding: 8px 2px; color: var(--theme-text-muted, #8a8a8a); font-size: 14px; }
+
+:: QuestsPage
+<<nobr>>
+<div class="quests-top"><<link "← Back">><<run setup.smartBack()>><</link>></div>
+<h2>What's Next</h2>
+/* [ui] quests_layout = "list" (DECISIONS 97). Same cards and words as the cards layout,
+   drawn as rows; `name` keeps one row open at a time. */
+<<set _story to setup.questsStoryRows()>>
+<<set _q to setup.questsRoster()>>
+<div class="quests-list">
+<<if _story.length > 0>>
+  <h3>My story</h3>
+  <<for _s range _story>>
+  <details name="quests" @class="'quests-row quests-story-row' + (_s.next.kind is 'ready' ? ' is-ready' : '') + (_s.card.terminal ? ' is-done' : '')">
+    <summary>
+      <span class="quests-head">
+        <span class="quests-story"><<print _s.flavor>></span>
+        <<if _s.bar>>
+          <span class="quests-progress"><span class="quests-bar"><span class="quests-bar-fill" @style="'width:' + _s.bar.pct + '%'"></span></span><<print _s.bar.cur>> / <<print _s.bar.max>></span>
+        <<elseif _s.next.line>>
+          <span class="quests-line"><<if _s.next.kind is "done">>✓ <<elseif _s.next.kind is "goals">>◯ <</if>><<print _s.next.line>></span>
+        <</if>>
+      </span>
+    </summary>
+    <div class="quests-body">
+      <<if _s.flavor>><div class="quests-text"><<print _s.flavor>></div><</if>>
+      <<questsNext _s.next>>
+      <<if _s.card.tip>><div class="quests-tipline"><<print _s.card.tip>></div><</if>>
+    </div>
+  </details>
+  <</for>>
+<</if>>
+<<if _q.people.length > 0>>
+  <h3>People</h3>
+  <<for _p range _q.people>><<questsPersonRow _p>><</for>>
+<</if>>
+<<if _q.done.length > 0>>
+  <details class="quests-done-fold"><summary>Finished (<<print _q.done.length>>)</summary>
+  <<for _p range _q.done>><<questsPersonRow _p>><</for>>
+  </details>
+<</if>>
+</div>
+<<if _story.length === 0 && _q.people.length === 0 && _q.done.length === 0>>
+  <div class="no-quests">No active quests.</div>
+<</if>>
+<</nobr>>
+"""
 
     def _quests_v2_overlay_text(self) -> str:
         """The overlay's literal text; %%QUESTS_FINISHED_COLLAPSED%% is filled by _quests_v2_overlay."""

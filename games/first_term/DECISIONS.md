@@ -30,6 +30,7 @@ and its Exhibitionism twin, which name sources that pay nothing at stage 1.
 
 | # | question | LO's answer |
 |---|---|---|
+| 97 | Redesign the Quests page without changing its content? Keep it per person, like the top games? | "Go ahead". `[ui] quests_layout = "list"`: Back on top, "My story" rows with a progress bar, then one row per person, ready first and soonest first, with "Today …" and a Now tag; a tap opens the card's text, next step and tip; finished people fold away. Same words, only moved. Vesper keeps the cards page. |
 | 96 | "In one table it shows everything. It becomes a lot confusing." Simplify it? | "Yes" to one day at a time: day chips with today picked, a "Now:" line, then one row per stretch of the day (short time, place, what they do under it), the current row marked, back-to-back rows in the same place joined, sleep-only rows dimmed. |
 
 Engine only (`setup.castScheduleHtml` in `v2.py`). The full Schedules page keeps its weekly table; first_term has no

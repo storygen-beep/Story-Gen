@@ -322,6 +322,8 @@ hidden = true
 [ui]
 sidebar_hide = ["stats", "schedules", "flags"]
 phone_clock  = true
+# DECISIONS 97 — the Quests page as short tap-to-open rows: My story, then people ready first.
+quests_layout = "list"
 
 # ── the cast page (engine.md §34) — lists only the people she has met ──
 [ui.cast_page]

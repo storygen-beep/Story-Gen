@@ -5,6 +5,25 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-30 — the quests page as short rows (`[ui] quests_layout = "list"`)
+
+**What.**
+- `references/engine.md` §23: new subsection on `[ui] quests_layout = "list"`. It covers:
+  - My story, People ready first and soonest first, and Finished folded;
+  - tap-to-open rows and the Now tag;
+  - the validate() errors;
+  - the default staying byte-identical.
+- `templates/cards/quests_hints.md`: "Our engine today" names the list layout as the IHOH per-person shape.
+
+**Why.** LO asked for a redesign of the Quests page with no content changes (first_term DECISIONS 97). Today's page
+was about 2,850px tall on a phone, nine identical cards in file order.
+
+**Verified.**
+- `apps/game_generation/tests`: 770 passed, including the new `test_quests_list.py` (6 tests).
+- `apps/projects/tests.py`: the same 6 failures as on HEAD before this work.
+- first_term: gates 61/89, unchanged.
+- Probe `quests_list.js`: 24/24 at 390 and 1280 wide, with the whole page on one phone screen and 0 page errors.
+
 ## 2026-10-30 — the cast card's schedule is one day at a time
 
 **What.**
