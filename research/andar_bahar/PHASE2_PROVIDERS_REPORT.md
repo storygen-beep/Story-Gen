@@ -484,17 +484,38 @@ winnings scroll on screen), which rules out per-player outcome shaping at the ta
 - Provider not shown on screen. Paytable pattern and the 100-round road match Ezugi.
   **Rules page and lobby tile still needed.**
 
-### Table B: "Ultimate Andar Bahar"
+### Table B: "Ultimate Andar Bahar" (Ezugi, confirmed)
 
-- Indian-themed gold studio, dealer at a table, shuffling machine visible. Ezugi's Ultimate
-  Andar Bahar by name and look.
-- Andar 1:1, **Bahar 0.9:1**: Bahar receives the first card, as on Table A.
-- Side-bet odds on screen already carried that round's multipliers (3x shown), so the base
-  table was not readable. Review sites say every bet on this table carries a 20% fee. If
-  true, a Bahar main bet returns 81.5% before multipliers. **Rules page needed** before this
-  table is priced.
+Lobby tile carries the Ezugi logo. Game-info panel captured in full. PRIMARY for this table.
 
-### Table C: "Andar Bahar" with 1st Andar / First 3 / 1st Bahar
+- One 52-card deck "shuffled/changed before each round by the dealer". Joker revealed, then
+  betting. **Bahar receives the first card.**
+- **A 20% fee is added to the player's total bet.** A ₹100 bet costs ₹120.
+- Andar 1:1, Bahar 0.9:1. Side bets 1–5 2:1, 6–10 3:1, 11–15 4:1, 16–25 3:1, 26–30 12:1,
+  31–35 20:1, 36–40 40:1, 41–49 100:1.
+- After bets close, one to three multiplier cards are drawn from a **virtual** 52-card pack
+  (joker excluded) and given 2x, 3x or 5x. A winning main bet whose pile contains a multiplier
+  card is multiplied. Side bets are "randomly awarded one multiplier".
+- Published "optimal return to player": Andar 97.44%, Bahar 97.82%, side bets 95.05% to 95.68%.
+
+Priced (`observed_1xbet_tables.py`): without multipliers the fee drives the main bet to
+81.5% return. Ezugi's published 97.82% therefore requires an average multiplier of about
+1.42x on a winning Bahar bet. That is consistent with the stated mechanics but cannot be
+derived independently, because the multiplier draw probabilities are not published. The
+multiplier draw is software (a virtual pack), so one component of this live table's return
+is an RNG whose certification was not found in Phase 2.
+
+Consequence: Ezugi's own figure puts the house edge at 2.18% (Bahar) and 2.56% (Andar),
+almost the same as the plain table, but with 16 points of the return carried by rare
+multiplier hits. Lumpy. A ₹500 bankroll paying 1.2 per unit wagered loses ordinary rounds
+faster and waits for multipliers to catch up.
+
+### Table C: "Andar Bahar" by ElCasino (1xBet "TV Games" section)
+
+Identified by the ElCasino watermark on its rules panel and the ElCasino tile with the same
+dealer and set under TV Games in the lobby. Not Pragmatic Play. ElCasino has no findable
+public footprint: no provider site, no press, no lab certificate, no licence listing turned
+up in a search. Treat its certification status as unknown.
 
 Fully documented from its own rules panel (sections 1 to 9 captured). PRIMARY for this table.
 
@@ -514,10 +535,7 @@ Fully documented from its own rules panel (sections 1 to 9 captured). PRIMARY fo
   flush 120:1, ace high or low, bet loses if only two cards are dealt), cards dealt 1–5 2:1,
   6–10 3:1, 11–15 4:1, 16–20 5:1, 21–25 8:1, 26–30 12:1, 31–35 20:1, 36–40 40:1,
   41–45 110:1, 46–49 800:1.
-- Provider: the rules text is 1xBet's own template ("the betting company"), and no provider
-  logo was captured. The 1st Andar / First 3 / 1st Bahar layout is the one review sites
-  attribute to Pragmatic Play Live, but the cards-dealt table is not the one they attribute
-  to it. **Unconfirmed. Lobby tile needed.**
+- Provider: ElCasino, as above. The rules text is 1xBet's template ("the betting company").
 
 ### Pricing of Table C from its own panel (`observed_1xbet_tables.py`)
 
@@ -545,10 +563,18 @@ this table are the worst bets on the account.
   (Tables A and B presumably the same; their rules pages will say).
 - Free observation: all three stream whether or not you bet.
 
+### Also on the account
+
+- Live Casino search shows an Ezugi "Andar Bahar" tile (the standard table) beside Ultimate,
+  and a third live tile cut off at the edge.
+- Slots section shows two RNG Andar Bahar titles (one with a "G" logo, one with a hat logo,
+  probably Mascot Gaming). RNG table games, not investigated; out of scope unless chosen.
+- The 1xGames in-house "Andar Bahar Game" did not appear in the search results captured.
+
 ### Still needed
 
-1. Lobby tiles with provider logos for Tables A and C.
-2. Table A's rules page (first-card rule, deck, shuffle, scanner).
-3. Table B's rules page (the fee, base side-bet table, multiplier mechanics).
-4. Whether the 1xGames RNG "Andar Bahar Game" tile exists on this account.
-5. The withdrawal and verification terms for this account.
+1. Table A's provider: the third live tile, and Table A's own rules or game-info page
+   (first-card rule, deck, shuffle, scanner, published RTP). If the 1xLIVE table is the
+   Ezugi "Andar Bahar" tile, its game-info panel will say so.
+2. The withdrawal and verification terms for this account.
+3. The footer "Fairness & RNG Testing Methods" page.
