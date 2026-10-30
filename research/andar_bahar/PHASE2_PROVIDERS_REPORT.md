@@ -458,3 +458,97 @@ Open the Andar Bahar section on 1xBet and capture, with the whole browser window
 7. The casino footer links: "Fairness & RNG Testing Methods" and the licence seal, opened.
 
 No bets. Screens only.
+
+---
+
+## 10. Task 4 result: the tables actually on the account (screenshots, 2026-10-30)
+
+Domain in use: `1-x-bet-india.com`. That domain is **not** among the 15 domains on the
+Curaçao licence certificate for Caecus N.V. (section 5). It is a mirror. The Enforcement
+Directorate's description of 1xBet operating in India "through multiple mirror websites"
+is what this is. Whatever licence protection exists attaches to the listed domains.
+
+Three live tables were captured. All three are shared multi-player streams (other players'
+winnings scroll on screen), which rules out per-player outcome shaping at the table layer.
+
+### Table A: "1x Andar Bahar" (felt branded 1xLIVE)
+
+- Overhead camera, dealer's hands only, shuffling machine visible at the right of the table.
+- Andar 1:1, **Bahar 0.9:1**. The 0.9:1 side is the first-card side, so on this table
+  **Bahar receives the first card and is the better bet** (2.15% edge versus 3.00%).
+- Cards-dealt side bet: 1–5 2.5:1, 6–10 3.5:1, 11–15 4.5:1, 16–25 3.5:1, 26–30 14:1,
+  31–35 24:1, 36–40 49:1, 41–49 119:1. Identical to Ezugi's studio paytable and to the
+  Wizard of Odds table. Priced at 1.9% to 8.5% house edge.
+- Result road of roughly 90 rounds shown, 42% Andar / 58% Bahar in the sample. Expected
+  Bahar share 51.5%; the deviation is 1.2 standard errors, nothing.
+- Provider not shown on screen. Paytable pattern and the 100-round road match Ezugi.
+  **Rules page and lobby tile still needed.**
+
+### Table B: "Ultimate Andar Bahar"
+
+- Indian-themed gold studio, dealer at a table, shuffling machine visible. Ezugi's Ultimate
+  Andar Bahar by name and look.
+- Andar 1:1, **Bahar 0.9:1**: Bahar receives the first card, as on Table A.
+- Side-bet odds on screen already carried that round's multipliers (3x shown), so the base
+  table was not readable. Review sites say every bet on this table carries a 20% fee. If
+  true, a Bahar main bet returns 81.5% before multipliers. **Rules page needed** before this
+  table is priced.
+
+### Table C: "Andar Bahar" with 1st Andar / First 3 / 1st Bahar
+
+Fully documented from its own rules panel (sections 1 to 9 captured). PRIMARY for this table.
+
+- One standard 52-card deck. Each card has a barcode read by a scanner in the table; the
+  software, not the dealer, determines value and suit (rule 6.1). A certified shuffling
+  machine shuffles; each game begins with the shuffled deck taken from the machine (3.1), and
+  after the result the cards go back into the machine (3.4). Decks are replaced several times
+  a day (6.2). Burn-card and cancellation rules exist (4.1 to 4.4).
+- **Andar receives the first card** (2.2, 3.3). Andar 0.9:1, Bahar 1:1. So on this table
+  **Andar is the better bet.** Opposite of Tables A and B. A player who assumes "Andar is
+  always the first side" will take the 3.00% side on two of the three tables.
+- Two betting rounds per game (1.6); the joker is revealed before betting begins (3.2), so
+  a bet can be placed knowing the joker.
+- Limits: main bets 20 to 500,000 INR; 1st Andar / 1st Bahar 20 to 100,000; First 3 20 to
+  50,000; cards-dealt 20 to 100,000 down to 20 to 2,500 for 46–49.
+- Side bets: 1st Andar 15:1, 1st Bahar 15.5:1, First 3 (flush 5:1, straight 8:1, straight
+  flush 120:1, ace high or low, bet loses if only two cards are dealt), cards dealt 1–5 2:1,
+  6–10 3:1, 11–15 4:1, 16–20 5:1, 21–25 8:1, 26–30 12:1, 31–35 20:1, 36–40 40:1,
+  41–45 110:1, 46–49 800:1.
+- Provider: the rules text is 1xBet's own template ("the betting company"), and no provider
+  logo was captured. The 1st Andar / First 3 / 1st Bahar layout is the one review sites
+  attribute to Pragmatic Play Live, but the cards-dealt table is not the one they attribute
+  to it. **Unconfirmed. Lobby tile needed.**
+
+### Pricing of Table C from its own panel (`observed_1xbet_tables.py`)
+
+| bet | house edge |
+|---|---|
+| Andar 0.9:1 | 2.15% |
+| Bahar 1:1 | 3.00% |
+| 1st Andar 15:1 | 5.88% |
+| 1st Bahar 15.5:1 | 6.82% |
+| First 3, bet before the joker | 14.64% |
+| First 3, bet after seeing a joker of 3 through Q | 10.12% |
+| First 3, bet after seeing a joker of A, 2 or K | 29.73% |
+| cards dealt, every bucket | 13.2% to 23.8% |
+
+The only in-game information advantage on any of the three tables is the second betting
+round on Table C, where the joker's rank changes the First 3 odds. It moves the bet from a
+14.6% house edge to a 10.1% house edge at best. No joker makes it positive. The side bets on
+this table are the worst bets on the account.
+
+### What the three tables share
+
+- Main bet: 2.15% house edge on the first-card side at 0.9:1, 3.00% on the other side at 1:1.
+  Exactly the Phase 1 model. Nothing provider-specific changes it.
+- Physical single deck, machine-shuffled every round, outcome read by barcode on Table C
+  (Tables A and B presumably the same; their rules pages will say).
+- Free observation: all three stream whether or not you bet.
+
+### Still needed
+
+1. Lobby tiles with provider logos for Tables A and C.
+2. Table A's rules page (first-card rule, deck, shuffle, scanner).
+3. Table B's rules page (the fee, base side-bet table, multiplier mechanics).
+4. Whether the 1xGames RNG "Andar Bahar Game" tile exists on this account.
+5. The withdrawal and verification terms for this account.
