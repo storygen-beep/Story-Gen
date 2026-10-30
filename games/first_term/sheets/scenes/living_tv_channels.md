@@ -1,5 +1,9 @@
 # [READY] Scene — living_tv_channels (the remote)
 
+> **Changed 2026-10-30, waiting for LO's re-sign** (DECISIONS 91): at most five TV sessions a day; after that the row greys out, "Watch TV — Not now."
+
+> **Changed 2026-10-30, waiting for LO's re-sign** (DECISIONS 92): channel 5 with Mark pays her Corruption +2 (cap 19 / 39) and his Want +2, once a day.
+
 > Signed by LO: LO, 2026-10-29 ("sign it", in chat).
 
 > Written 2026-10-29 from LO's picks in chat (DECISIONS 85–86): "5 channels. One porn", "it pays whenever she watches", "watch tv with mark, same kind of screen", "all channel to have media", any hour, 30 minutes. Explicit prose by `v2-prose`, measured with `gates.py --beat`.
@@ -11,8 +15,8 @@
 | gate | none to open · "Touch yourself." alone from Curious |
 | who | alone, or Mark, 46, her step-father; Mark or Ryan may be home (a line names who, read from their rows) |
 | what she wears here (test 8) | not named |
-| BRAKE (S9) | the plain four: energy +5 once a day (`watched_tv`) · channel 5: none, it pays every time (LO); 30 minutes a watch is the only limit |
-| raises | channel 5 "Keep watching." corruption add +1, cap 19 at Good Girl, cap 39 at Curious · alone "Touch yourself." corruption add +2, cap 39 · with Mark, the plain four also his Want add +1 once a day (the old TV item's pay) |
+| BRAKE (S9) | the plain four: energy +5 once a day (`watched_tv`) · channel 5 pays every time, up to five TV sessions a day (LO, DECISIONS 91); after the fifth the row greys out, "Watch TV — Not now." The count resets at midnight. |
+| raises | channel 5 "Keep watching." alone: corruption add +1, cap 19 at Good Girl, cap 39 at Curious · with Mark: corruption add +2, cap 19 / 39, and his Want add +2, once a day (`mark_tv_paid`, cleared at midnight; DECISIONS 92); after that it plays and pays nothing · alone "Touch yourself." corruption add +2, cap 39 · with Mark, the plain four also his Want add +1 once a day (the old TV item's pay) |
 | the crude-word ceiling | the park's, strangers on a screen: tits, nipples, ass, cock, wet, clit · no cunt, fuck, cum, pussy · with Mark no clit |
 | media | every channel has its own clip pool: `tv/news_t0`, `tv/cooking_t0`, `tv/sports_t0`, `tv/film_t0`, `sex/tv_adult_alone_t5`, `sex/tv_adult_touch_t5`; with Mark `tv/mark_news_t0`, `tv/mark_cooking_t0`, `tv/mark_sports_t0`, `tv/mark_film_t0`, `sex/tv_adult_mark_t5`, `sex/tv_adult_mark_leave_t5` (12 slots, empty until LO's harvest) |
 
@@ -32,7 +36,7 @@
 | `mremote` | he hands her the remote | no | Channels 1–5 · "Leave him to it." | none |
 | `mch_*` | what's on, and his line: news "Same as yesterday. Same as every day." · cooking "Your mother never cooks like that." · sports "Watch this. Watch. Ah, for God's sake." · film "Seen it. He dies at the end." | no | "Watch a while." · "Change the channel." · "Leave him to it." | energy +5 and his Want +1, once a day |
 | `madult` | channel 5; he stops, doesn't reach for the remote. Before his step 4: "Change it, @player." but he doesn't take it. From step 4: he watches her watching | yes | "Leave it on." · "Change the channel." · "Leave him to it." | none |
-| `mleave` | they both watch; the can on his lap doesn't hide his hard-on; his eyes on her | yes | "Keep watching." (25 min) · "Change the channel." | +1, cap 19 / 39 |
+| `mleave` | they both watch; the can on his lap doesn't hide his hard-on; his eyes on her | yes | "Keep watching." (25 min) · "Change the channel." | once a day: +2, cap 19 / 39, and his Want +2; after that nothing |
 
 **The no:** "Change the channel." and "Turn it off." pay nothing.
 
@@ -51,6 +55,6 @@
 | key choice | source |
 |---|---|
 | five channels, one porn, media on all | LO, 2026-10-29 |
-| pays every time, any hour, 30 minutes | LO, 2026-10-29 (DECISIONS 86), told it can carry Good Girl in one day and turn "the climb is paid for" red |
+| pays every time, any hour, 30 minutes; five sessions a day since 2026-10-30 (DECISIONS 91) | LO, 2026-10-29 (DECISIONS 86), told it can carry Good Girl in one day and turn "the climb is paid for" red |
 | with Mark, his reaction by his step | LO, 2026-10-29 · the step 4 split: guess |
 | channel lines, Mark's lines | guess |

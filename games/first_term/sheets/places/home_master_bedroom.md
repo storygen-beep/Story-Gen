@@ -1,5 +1,7 @@
 # [READY] Place — Master Bedroom
 
+> **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08). Re-signed 2026-10-29 ("sign all", in chat).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the system sheets. Id `home_master_bedroom`.
@@ -52,7 +54,7 @@
   instead of "Knock".
 - **Ease the door open:** one screen, the room in the dark. The line names who is asleep: "Laura's
   asleep on her side. Mark's half of the bed is empty." Then back to the hall. Nothing else in 0.1;
-  what she does at the bedside waits for Hungry ("Needs Hungry").
+  what she does at the bedside waits for Hungry ("Needs Corruption 60").
 - **When `came_home_late` is set,** Laura is on the stairs 23:00–02:00, not in bed (her first row wins). In
   those hours the room is empty, or Mark only after 02:00, and the lines say so.
 - **"They're asleep"** (the old row) names only who is asleep, by the table above.

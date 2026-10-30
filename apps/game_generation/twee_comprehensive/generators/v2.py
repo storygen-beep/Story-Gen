@@ -1308,6 +1308,11 @@ class TweeComprehensiveGeneratorV2:
         # not emitted. Authored under [ui.cast_page]. Carries chrome only: the
         # roster is built at runtime from $npcs and setup.quests_cards.
         self.cast_page = (self.project.metadata or {}).get("cast_page", {}) or {}
+        # [ui] sidebar_hide — sidebar buttons this game leaves out, by the name the player
+        # reads (template_import.SIDEBAR_BUTTONS). The pages themselves are still built.
+        self.sidebar_hide = set((self.project.metadata or {}).get("sidebar_hide") or [])
+        # [ui] phone_clock — the floating clock while the sidebar is closed on a phone.
+        self.phone_clock = bool((self.project.metadata or {}).get("phone_clock"))
         # Player cheat page — empty dict = page + sidebar button not emitted.
         # Authored under [ui.cheat_page]. One build ships everywhere; which rows are
         # live is decided at runtime by the codes the player has entered.
@@ -4050,7 +4055,7 @@ setup.tips_page = {json.dumps(self.tips_page or {})};
 setup.npc_arc_stages = {json.dumps(self.npc_arc_stages_map)};
 // G: per-NPC cast-card tag line, slug-keyed. Empty object = no NPC declares
 // `tags` and the cast card renders no tag row (existing TOMLs unaffected).
-setup.npc_tags = {json.dumps(self.npc_tags_map)};{self._cast_traits_js()}
+setup.npc_tags = {json.dumps(self.npc_tags_map)};{self._cast_page_js()}{self._cast_traits_js()}{self._phone_clock_js()}
 setup.phone_enabled = {"true" if self.phone_enabled else "false"};
 setup.phone_purchase_flag = {json.dumps(self.phone_purchase_flag)};
 setup.phone_data = {phone_data_json};
@@ -11714,6 +11719,252 @@ setup.decayToward = function (v, rest, d) {
         """EN7 — does the cast page show any numbers? Only then is anything below emitted."""
         return bool(self.cast_page and (self.cast_page.get("show_traits") or self.npc_show_traits_map))
 
+    def _cast_page_js(self) -> str:
+        """The cast page's roster, its next-step line, its short times and the schedule
+        dialog. Empty unless the game has a cast page. A place not yet found is named through
+        setup.locShownName only in a game that has hidden places, so every other game
+        carries none of that code.
+
+        Who is listed is still the quest cards' decision (see _generate_cast_page): the walk
+        below is the one the passage used to do in macros, moved here so the page can sort.
+        """
+        if not self.cast_page:
+            return ""
+        return """
+// The cast page roster, sorted so the person worth a tap is on top: somebody about right
+// now, then somebody whose scene is ready, then the rest. File order within each group.
+setup.castRoster = function () {
+    var cards = setup.quests_cards || [];
+    var hidden = setup.hiddenNpcs || {};
+    var slugMap = setup.npc_slug_map || {};
+    var npcs = State.variables.npcs || {};
+    var seen = {}, out = [];
+    for (var i = 0; i < cards.length; i++) {
+        var c = cards[i];
+        if (!c || !c.npc_id || seen[c.npc_id]) continue;
+        seen[c.npc_id] = true;
+        // hiddenNpcs is UUID-keyed; check both forms, exactly as QuestsPage does.
+        if (hidden[c.npc_id] || hidden[slugMap[c.npc_id]]) continue;
+        var slug = c.npc_id;
+        var card = setup.pickQuestsCard(slug);
+        if (!card) continue;
+        var npc = npcs[slugMap[slug] || slug] || npcs[slug];
+        if (!npc) continue;
+        var loc = setup.getNpcLocation(slug);
+        var locName = loc ? (setup._locNameFromUuid(loc.location) || "") : "";
+        var next = setup.castNext(card, setup.evaluateGoals(card));
+        out.push({ slug: slug, npc: npc, card: card, next: next, locName: locName,
+                   here: !!locName, rank: locName ? 0 : (next.kind === "ready" ? 1 : 2), order: out.length });
+    }
+    out.sort(function (a, b) { return (a.rank - b.rank) || (a.order - b.order); });
+    return out;
+};
+
+// One person's next step, in the same three frames as renderQuestsGoalBlock (done, ready,
+// goals), as data: `line` is the one line under the name on the closed row.
+setup.castNext = function (card, goalState) {
+    if (!card) return { kind: "none", line: "" };
+    if (card.terminal === true) {
+        var done = card.terminal_text || "Arc complete";
+        return { kind: "done", line: done, text: done };
+    }
+    if (goalState && goalState.allMet && card.ready_canvas) {
+        var found = setup.lookupCanvasBySlug(card.ready_canvas);
+        if (found) {
+            var place = setup._locNameFromUuid(found.locUuid) || "";
+            var when = setup.castWhen(found.canvas);
+            return { kind: "ready", place: place, when: when,
+                     line: "Ready" + (when ? " · " + when : (place ? " · " + place : "")) };
+        }
+    }
+    if (goalState && goalState.items.length > 0 && !goalState.allMet) {
+        var items = [], first = "";
+        for (var i = 0; i < goalState.items.length; i++) {
+            var it = goalState.items[i], g = it.goal || {};
+            var label = g.label || g.trait || g.days_since_flag || g.hours_since_flag || g.flag || "";
+            if ((g.trait || g.days_since_flag || g.hours_since_flag) && typeof it.currentValue === "number") {
+                label += " · " + it.currentValue + " / " + g.value;
+            }
+            items.push({ met: it.met, mark: it.met ? "✓" : "◯", label: label });
+            if (!it.met && !first) first = label;
+        }
+        return { kind: "goals", items: items, line: first };
+    }
+    return { kind: "none", line: card.tip || "" };
+};
+
+// A canvas's first window, short enough for one phone line: "Mon–Sat 2:30–10 PM".
+// Runs of three or more days become a range; the shared AM/PM is said once.
+setup.castWhen = function (canvas) {
+    var sched = canvas && canvas.scheduleParams;
+    if (!Array.isArray(sched) || sched.length === 0) return "";
+    var s = sched[0];
+    var names = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    var days = [];
+    (s.weekdays || []).forEach(function (d) { if (names[d] && days.indexOf(d) === -1) days.push(d); });
+    days.sort(function (a, b) { return a - b; });
+    var parts = [];
+    for (var i = 0; i < days.length; ) {
+        var j = i;
+        while (j + 1 < days.length && days[j + 1] === days[j] + 1) j++;
+        if (j - i >= 2) parts.push(names[days[i]] + "–" + names[days[j]]);
+        else for (var k = i; k <= j; k++) parts.push(names[days[k]]);
+        i = j + 1;
+    }
+    var dayStr = days.length === 7 ? "Every day" : parts.join(", ");
+    var timeStr = (s.startTime && s.endTime) ? setup.castTimeRange(s.startTime, s.endTime) : "";
+    return (dayStr && timeStr) ? dayStr + " " + timeStr : (dayStr || timeStr);
+};
+
+// "18:00", "22:00" to "6–10 PM": compact hours, the shared AM/PM said once.
+setup.castTimeRange = function (start, end) {
+    var a = setup.formatHHMM(start, true);
+    if (!end) return a;
+    var b = setup.formatHHMM(end, true);
+    var pa = a.slice(-3), pb = b.slice(-3);
+    if ((pa === " AM" || pa === " PM") && pa === pb) a = a.slice(0, -3);
+    return a + "–" + b;
+};
+
+// One person's weekly schedule, opened from their card in a dialog. The rows and the
+// NOW badge are the Schedules page's own (<<npcScheduleSection>>), so the two agree.
+setup.castHasSchedule = function (slug) {
+    try { return setup.getNpcAllSchedulesSorted(setup.resolveNpcId(slug)).length > 0; }
+    catch (e) { return false; }
+};
+setup.castOpenSchedule = function (slug) {
+    var id = setup.resolveNpcId(slug);
+    var npc = (State.variables.npcs || {})[id];
+    var today = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        .indexOf(State.variables.game_state.time_state.current_day);
+    Dialog.setup((npc ? npc.name + " · " : "") + "Schedule", "cast-schedule-dialog");
+    jQuery(Dialog.body()).empty().append(setup.castScheduleHtml(id, today < 0 ? 0 : today));
+    Dialog.open();
+};
+
+// One person's day as a short timeline: day chips (today picked), where they are now,
+// then one row per stretch of the day. The rows are the Schedules page's own
+// (getNpcAllSchedulesSorted, so a row whose `when` fails is gone); a locked place is
+// muted with its reason and a place not yet found keeps its name hidden. Back-to-back
+// rows in the same place join into one, and sleeping rows are dimmed.
+setup.castScheduleHtml = function (id, day) {
+    var esc = function (s) {
+        return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    };
+    var names = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    var today = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        .indexOf(State.variables.game_state.time_state.current_day);
+    var all = setup.getNpcAllSchedulesSorted(id);
+    var placeName = function (slug) {
+        var loc = (setup.locations || {})[slug];
+        var name = (loc && loc.name) || slug;
+        return """ + ("setup.locShownName(slug, name)" if self._has_hidden_places() else "name") + """;
+    };
+    var chips = "", rows = [];
+    for (var d = 0; d < 7; d++) {
+        var has = all.some(function (r) { return setup._weekdayMatches(r.weekdays, d); });
+        chips += '<button type="button" class="cast-day' + (has ? "" : " cast-day-empty") +
+            (d === today ? " cast-day-today" : "") + '" data-day="' + d + '" aria-pressed="' +
+            (d === day) + '">' + names[d] + "</button>";
+    }
+    var asleep = function (s) { return /\\basleep\\b/i.test(s || ""); };
+    all.forEach(function (r) {
+        if (!setup._weekdayMatches(r.weekdays, day)) return;
+        var open = setup.navDestUnlocked(r.location);
+        var last = rows[rows.length - 1];
+        if (last && open && last.open && last.slug === r.location && last.end === r.start_time) {
+            if (r.activity && last.what.indexOf(r.activity) === -1) last.what += (last.what ? ", then " : "") + r.activity;
+            last.end = r.end_time;
+            last.sleep = last.sleep && asleep(r.activity);
+            last.now = last.now || (day === today && setup.isCurrentTimeSlot(r.start_time, r.end_time));
+            return;
+        }
+        rows.push({ slug: r.location, open: open, start: r.start_time, end: r.end_time,
+                    what: open ? r.activity : setup.navDestBlockedReason(r.location),
+                    sleep: open && asleep(r.activity),
+                    now: open && day === today && setup.isCurrentTimeSlot(r.start_time, r.end_time) });
+    });
+    var nowLine = "";
+    if (day === today) {
+        var cur = setup.getNpcLocation(id);
+        var curSlug = cur ? (setup._getLocUuidToSlug()[cur.location] || cur.location) : "";
+        nowLine = (cur && setup.navDestUnlocked(curSlug))
+            ? '<div class="cast-sched-now"><span class="cast-sched-dot">●</span> Now: <b>' +
+              esc(setup._locNameFromUuid(cur.location) || placeName(curSlug)) + "</b>" +
+              (cur.activity ? " · " + esc(cur.activity) : "") + "</div>"
+            : '<div class="cast-sched-now cast-sched-away">Away right now</div>';
+    }
+    var list = rows.length ? rows.map(function (r) {
+        var cls = "cast-sched-row" + (r.now ? " is-now" : "") + (r.open ? "" : " cast-sched-locked") +
+            (r.sleep ? " cast-sched-sleep" : "");
+        return '<li class="' + cls + '"><span class="cast-sched-time">' + (r.now ? "▶ " : "") +
+            esc(setup.castTimeRange(r.start, r.end)) + '</span><span class="cast-sched-where">' +
+            '<span class="cast-sched-place">' + esc(placeName(r.slug)) + "</span>" +
+            (r.what ? '<span class="cast-sched-what">' + esc(r.what) + "</span>" : "") + "</span></li>";
+    }).join("") : '<li class="cast-sched-none">Not around this day.</li>';
+    return '<div class="cast-sched" data-npc="' + esc(id) + '"><div class="cast-sched-days">' + chips +
+        "</div>" + nowLine + '<ul class="cast-sched-list">' + list + "</ul></div>";
+};
+// A day chip redraws the dialog for that day.
+jQuery(document).on("click", ".cast-sched .cast-day", function () {
+    var box = jQuery(this).closest(".cast-sched");
+    box.replaceWith(setup.castScheduleHtml(box.attr("data-npc"), Number(this.getAttribute("data-day"))));
+});"""
+
+    def _phone_clock_js(self) -> str:
+        """[ui] phone_clock — a small clock pinned top-left while the sidebar is stowed on a
+        narrow screen; a tap opens the sidebar. Empty unless the game asks for it."""
+        if not self.phone_clock:
+            return ""
+        return """
+// [ui] phone_clock. One element on <body>, after #ui-bar, so CSS can show it only while
+// #ui-bar is stowed. Refreshed on every passage and once a second (the sidebar's wait
+// buttons move the clock without a new passage).
+setup.updatePhoneClock = function () {
+    var ts = State.variables.game_state && State.variables.game_state.time_state;
+    if (!ts) return;
+    var el = document.getElementById("phone-clock");
+    if (!el) {
+        el = document.createElement("button");
+        el.id = "phone-clock";
+        el.type = "button";
+        el.setAttribute("aria-label", "Open the sidebar");
+        el.addEventListener("click", function () { UIBar.unstow(); });
+        document.body.appendChild(el);
+    }
+    var text = setup.formatTime(ts.current_hour, ts.current_minute) + " · " + String(ts.current_day || "").slice(0, 3);
+    if (el.textContent !== text) el.textContent = text;
+};
+jQuery(document).on(":passagedisplay", function () { setup.updatePhoneClock(); });
+setInterval(function () { try { setup.updatePhoneClock(); } catch (e) {} }, 1000);"""
+
+    def _phone_clock_css(self) -> str:
+        """The phone clock's look; see _phone_clock_js. Empty unless the game asks for it."""
+        if not self.phone_clock:
+            return ""
+        return """
+/* [ui] phone_clock: shown only on a narrow screen while the sidebar is closed, beside the
+   sidebar's open button. */
+#phone-clock { display: none; }
+@media (max-width: 768px) {
+    #ui-bar.stowed ~ #phone-clock {
+        display: block;
+        position: fixed;
+        top: 6px;
+        left: 44px;
+        z-index: 100;
+        padding: 4px 10px;
+        border: 1px solid var(--theme-border);
+        border-radius: 8px;
+        background: var(--theme-surface);
+        color: var(--theme-text);
+        font: 600 14px/1.2 monospace;
+        cursor: pointer;
+    }
+}
+"""
+
     def _cast_traits_js(self) -> str:
         """EN7 — the cast card's trait data and the band lookup. Empty unless used."""
         if not self._cast_shows_traits():
@@ -11737,7 +11988,8 @@ setup.traitBand = function (key, value) {
     }
     return "";
 };
-// The rows for one card: [{label, value, band}], page traits first, then his own.
+// The rows for one card: [{label, value, band, pct}], page traits first, then his own;
+// pct is the value held to 0-100 for the bar.
 setup.castTraitRows = function (slug, npc) {
     var keys = (setup.cast_show_traits || []).concat((setup.npc_show_traits || {})[slug] || []);
     var traits = (npc && npc.core_traits) || {};
@@ -11747,7 +11999,8 @@ setup.castTraitRows = function (slug, npc) {
         var k = keys[i];
         if (seen[k] || hidden.indexOf(k) !== -1 || traits[k] === undefined) continue;
         seen[k] = true;
-        rows.push({ label: setup.traitLabel(k), value: traits[k], band: setup.traitBand(k, traits[k]) });
+        rows.push({ label: setup.traitLabel(k), value: traits[k], band: setup.traitBand(k, traits[k]),
+                    pct: Math.max(0, Math.min(100, Number(traits[k]) || 0)) });
     }
     return rows;
 };"""
@@ -11755,58 +12008,184 @@ setup.castTraitRows = function (slug, npc) {
     def _cast_page_css(self) -> str:
         """Cast-page styling, emitted ONLY for games that author a cast page.
 
-        Deliberately small: the card body reuses `.stats-card-with-portrait` /
-        `.stats-portrait` / `.stats-info` / `.stats-name` from the Stats page and
-        `.quests-goal` / `.quests-tip` from the Quests page, so a cast card reads
-        as the same object the player already knows from two other screens. Only
-        the two lines that exist nowhere else get rules of their own.
+        Phone first (first_term DECISIONS 94): one short row per person, the whole row a
+        tap target, the details inside a native <details>. Desktop gets the same list,
+        capped in width so a row never stretches across a wide screen.
         """
         if not self.cast_page:
             return ""
         return """
 /* Cast page. Who these people are to her, where they are, what moves them. */
+.cast-top { margin-bottom: 4px; }
 .cast-intro {
     margin-bottom: 12px;
     color: var(--theme-text-muted, #8a8a8a);
-    font-size: 13px;
+    font-size: 14px;
 }
-.cast-card .cast-relationship {
-    color: var(--theme-text, #c8c8c8);
-    font-size: 13px;
+.cast-list { max-width: 720px; }
+.cast-card {
+    background: var(--theme-surface);
+    border: 1px solid var(--theme-border);
+    border-radius: 10px;
+    margin: 0 0 8px;
+}
+.cast-card > summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 56px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+.cast-card > summary::-webkit-details-marker { display: none; }
+.cast-card > summary::after {
+    content: "›";
+    color: var(--theme-text-muted, #8a8a8a);
+    font-size: 20px;
+    transition: transform 0.15s ease;
+}
+.cast-card[open] > summary::after { transform: rotate(90deg); }
+.cast-card > summary:focus-visible { outline: 2px solid var(--theme-accent); outline-offset: -2px; border-radius: 10px; }
+.cast-face {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--theme-surface-alt, #1a1a1a);
+}
+.cast-face img, .cast-face svg { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cast-head { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.cast-card .stats-name {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+/* The line under the name: ready and when, or what is still missing. Two lines at
+   most, so a phone shows the whole time instead of cutting the hour off. */
+.cast-line {
+    color: var(--theme-text-muted, #8a8a8a);
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.cast-where {
+    flex-shrink: 0;
+    max-width: 40%;
+    font-size: 14px;
+    color: var(--theme-accent);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/* Off-schedule reads quieter than on: nobody about is not a broken page. */
+.cast-where.cast-away { color: var(--theme-text-muted, #8a8a8a); opacity: 0.7; }
+.cast-body {
+    padding: 4px 14px 14px;
+    font-size: 15px;
     line-height: 1.45;
-    margin: 2px 0 6px;
+    color: var(--theme-text);
 }
-/* G: the tag line. Reads quieter than `relationship` and at the same weight as
-   the location row — it is a label, not a sentence, and it must not compete with
-   the one sentence above it. */
-.cast-card .cast-tags {
-    color: var(--theme-text-muted, #8a8a8a);
+.cast-relationship { margin: 0 0 10px; }
+.cast-next {
+    margin: 10px 0;
+    padding: 8px 10px;
+    border-left: 3px solid var(--theme-accent);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 0 6px 6px 0;
+}
+.cast-next-label {
+    display: block;
     font-size: 12px;
-    margin: 0 0 6px;
-}
-.cast-card .cast-where {
+    font-weight: 600;
+    letter-spacing: 0.06em;
     color: var(--theme-text-muted, #8a8a8a);
-    font-size: 12px;
-    margin: 0 0 6px;
+    margin-bottom: 2px;
 }
-/* Off-schedule reads quieter than on — the page should not look broken when
-   somebody is simply not around at this hour. */
-.cast-card .cast-where.cast-away {
-    opacity: 0.6;
-    font-style: italic;
-}
-.cast-card .quests-goal,
-.cast-card .quests-tip {
-    margin-top: 6px;
-}
-""" + ("""/* EN7: his numbers — the trait's name, the number, and the word beside it. */
-.cast-card .cast-traits {
+.cast-goals { list-style: none; margin: 0; padding: 0; }
+.cast-goals li.cast-met { opacity: 0.6; }
+.cast-tip { margin: 8px 0 0; }
+.cast-actions { margin: 10px 0 0; }
+.cast-actions button { min-height: 40px; padding: 6px 14px; font-size: 14px; }
+/* The schedule dialog: day chips, the now line, then one row per stretch of the day. */
+.cast-sched-days { display: flex; gap: 4px; margin: 0 0 12px; }
+.cast-day {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 36px;
+    padding: 0;
+    border: 1px solid var(--theme-border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--theme-text);
     font-size: 13px;
-    margin: 0 0 6px;
+    cursor: pointer;
 }
-.cast-card .cast-trait-band {
+.cast-day.cast-day-today { font-weight: 700; }
+.cast-day.cast-day-empty { opacity: 0.4; }
+.cast-day[aria-pressed="true"] { background: var(--theme-accent); border-color: var(--theme-accent); color: var(--theme-bg, #111); opacity: 1; }
+.cast-sched-now { margin: 0 0 10px; font-size: 15px; }
+.cast-sched-dot { color: var(--theme-accent); }
+.cast-sched-away { color: var(--theme-text-muted, #8a8a8a); }
+.cast-sched-list { list-style: none; margin: 0; padding: 0; }
+.cast-sched-row {
+    display: grid;
+    grid-template-columns: 7.5em 1fr;
+    column-gap: 12px;
+    padding: 9px 8px;
+    border-top: 1px solid var(--theme-border);
+    font-size: 15px;
+}
+.cast-sched-row:first-child { border-top: 0; }
+.cast-sched-row.is-now { box-shadow: inset 3px 0 0 var(--theme-accent); background: rgba(255, 255, 255, 0.03); }
+.cast-sched-time { color: var(--theme-text-muted, #8a8a8a); font-variant-numeric: tabular-nums; }
+.cast-sched-row.is-now .cast-sched-time { color: var(--theme-accent); font-weight: 600; }
+.cast-sched-place { display: block; font-weight: 600; }
+.cast-sched-what { display: block; color: var(--theme-text-muted, #8a8a8a); font-size: 14px; }
+.cast-sched-sleep { opacity: 0.5; }
+.cast-sched-locked .cast-sched-what { font-style: italic; }
+.cast-sched-none { padding: 9px 8px; color: var(--theme-text-muted, #8a8a8a); }
+.cast-tags {
+    margin: 10px 0 0;
     color: var(--theme-text-muted, #8a8a8a);
+    font-size: 14px;
 }
+""" + ("""/* EN7: his numbers, each a name, a short bar, the number and the word. One grid so the
+   bars line up whatever the words are. */
+.cast-traits {
+    display: grid;
+    grid-template-columns: auto minmax(48px, 1fr) auto auto;
+    align-items: center;
+    column-gap: 8px;
+    row-gap: 6px;
+    margin: 0 0 4px;
+    font-size: 14px;
+}
+/* Each row takes the parent's columns (subgrid); a browser without subgrid uses the
+   fixed columns on the line above it. Not display: contents, which leaves the row with
+   no box and no innerText. */
+.cast-trait {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: 6em minmax(48px, 1fr) 2.5em auto;
+    grid-template-columns: subgrid;
+    align-items: center;
+    column-gap: 8px;
+}
+.cast-trait-name { font-weight: 600; }
+.cast-bar {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--theme-border);
+    overflow: hidden;
+}
+.cast-bar-fill { display: block; height: 100%; background: var(--theme-accent); }
+.cast-trait-value { text-align: right; font-variant-numeric: tabular-nums; }
+.cast-trait-band { color: var(--theme-text-muted, #8a8a8a); }
 """ if self._cast_shows_traits() else "")
 
     def _cheat_page_css(self) -> str:
@@ -11892,6 +12271,111 @@ setup.castTraitRows = function (slug, npc) {
     color: var(--theme-text-muted, #8a8a8a);
 }"""
 
+    def _schedule_page_css(self) -> str:
+        """The Schedules page's table styles. The page carries them in its own <style>; the
+        People page carries them too, for the schedule it opens in a dialog."""
+        return """.current-time {
+    color: var(--theme-text-strong);
+    font-size: 0.9em;
+    margin: 0 0 10px 0;
+}
+
+.now-badge {
+    background: var(--theme-success);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 0.75em;
+    font-weight: bold;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.current-activity {
+    color: var(--theme-text-muted);
+    font-style: italic;
+    margin-bottom: 8px;
+    font-size: 0.85em;
+}
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85em;
+    color: var(--theme-text);
+}
+
+.schedule-table th {
+    text-align: left;
+    padding: 4px 8px;
+    background: var(--theme-surface);
+    border-bottom: 2px solid var(--theme-border);
+    color: var(--theme-text-strong);
+    font-weight: 600;
+}
+
+.schedule-table td {
+    padding: 4px 8px;
+    border-bottom: 1px solid var(--theme-border);
+    color: var(--theme-text-strong);
+    vertical-align: middle;
+}
+
+.schedule-table tr.current-slot {
+    background: var(--theme-warning-bg);
+    font-weight: 500;
+}
+
+.schedule-table tr.current-slot td:first-child {
+    color: var(--theme-warning-text);
+}
+
+/* A schedule row whose location the player cannot currently enter. Muted rather than hidden: a row that
+   vanishes reads as "he has no schedule there", where a muted one reads as "that door is shut for now",
+   which is the truth and is what a returning player needs. Never carries the ▶ current marker. */
+.schedule-table tr.locked-slot {
+    opacity: 0.55;
+}
+
+.schedule-table tr.locked-slot .locked-slot-reason {
+    font-style: italic;
+    opacity: 0.85;
+}
+
+.solo-activities-section {
+    margin-top: 18px;
+}
+
+.weekday-badges {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 3px;
+}
+
+.weekday-badge {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-size: 0.72em;
+    font-weight: 600;
+    background: var(--theme-surface);
+    color: var(--theme-text-muted);
+    border: 1px solid var(--theme-border);
+}
+
+.weekday-badge.weekday-today {
+    background: var(--theme-primary);
+    color: white;
+    border-color: var(--theme-primary);
+}
+
+.weekday-badge.weekday-all {
+    background: var(--theme-surface-alt);
+    color: var(--theme-text);
+    border-style: dashed;
+}
+"""
+
     def _generate_cast_page(self) -> str:
         """Emit the cast page, plus its sidebar button widget.
 
@@ -11907,8 +12391,8 @@ setup.castTraitRows = function (slug, npc) {
           name             $npcs[uuid].name
           who they are     $npcs[uuid].relationship   ([[npcs]] relationship)
           where, right now setup.getNpcLocation + setup._locNameFromUuid
-          what to do next  the character's own quest card — tip + goal block,
-                           via setup.pickQuestsCard / renderQuestsGoalBlock
+          what to do next  the character's own quest card — tip + the same three
+                           frames as renderQuestsGoalBlock, as data (setup.castNext)
 
         WHO IS LISTED IS THE QUEST CARDS' DECISION. A character appears exactly
         when pickQuestsCard returns a card for them, which is the same call and the
@@ -11919,8 +12403,14 @@ setup.castTraitRows = function (slug, npc) {
         `guidance exists` gate already requires every [[npcs]] entry to carry one,
         so this cannot happen in a game that passes its own scoreboard.
 
-        Roster ORDER mirrors QuestsPage (walk setup.quests_cards, dedupe by npc_id,
-        keep file order) so the two pages read in the same sequence.
+        Roster ORDER: setup.castRoster walks setup.quests_cards like QuestsPage, then
+        sorts somebody about right now first, then a ready scene, then the rest, file
+        order within each group, so the row worth a tap is on top.
+
+        LAYOUT (first_term DECISIONS 94, phone first): one <details> per person. The
+        closed row is the face, the name, one line (ready and when, or what is still
+        missing) and where they are; the open card adds the relationship, the numbers,
+        the next step, the tip and the tags. Native tap-to-open, no script.
 
         The `castButton` widget is ALWAYS defined, empty when there is no cast
         page, because StoryCaption calls it unconditionally and SugarCube throws on
@@ -11952,77 +12442,76 @@ setup.castTraitRows = function (slug, npc) {
 
         intro_line = f'<div class="cast-intro">{html.escape(intro)}</div>\n' if intro else ""
         # EN7 — his numbers, only when the page shows any (else the card is as before).
+        # The bar is an empty element, so a row still reads "Lust 40 · Looks" as text.
         traits_block = (
-            '          <<set _traitRows to setup.castTraitRows(_slug, _npc)>>\n'
-            '          <<if _traitRows.length>><div class="cast-traits"><<for _tr range _traitRows>>'
+            '      <<set _traitRows to setup.castTraitRows(_slug, _npc)>>\n'
+            '      <<if _traitRows.length>><div class="cast-traits"><<for _tr range _traitRows>>'
             '<div class="cast-trait"><span class="cast-trait-name"><<print _tr.label>></span> '
+            '<span class="cast-bar"><span class="cast-bar-fill" @style="\'width:\' + _tr.pct + \'%\'"></span></span> '
             '<span class="cast-trait-value"><<print _tr.value>></span>'
-            '<<if _tr.band>> <span class="cast-trait-band">· <<print _tr.band>></span><</if>>'
+            '<span class="cast-trait-band"><<if _tr.band>> · <<print _tr.band>><</if>></span>'
             '</div><</for>></div><</if>>\n'
             if self._cast_shows_traits() else ""
         )
 
         page = f""":: CastPage
 <<nobr>>
+<div class="cast-top"><<link "← Back">><<run setup.smartBack()>><</link>></div>
 <h2>{title}</h2>
 {intro_line}
-/* Roster + reveal, both from the quest cards. See _generate_cast_page's docstring. */
-<<set _allCards to setup.quests_cards || []>>
-<<set _hidden to setup.hiddenNpcs || {{}}>>
-<<set _slugMap to setup.npc_slug_map || {{}}>>
-<<set _slugs to []>>
-<<for _c range _allCards>>
-  <<if _c && _c.npc_id && _slugs.indexOf(_c.npc_id) === -1>>
-    /* hiddenNpcs is UUID-keyed; check both forms so hidden_from_ui holds in
-       either build mode, exactly as QuestsPage does. */
-    <<if !_hidden[_c.npc_id] && !_hidden[_slugMap[_c.npc_id]]>>
-      <<run _slugs.push(_c.npc_id)>>
-    <</if>>
-  <</if>>
-<</for>>
-
-<<set _shown to 0>>
-<<for _slug range _slugs>>
-  <<set _card to setup.pickQuestsCard(_slug)>>
-  <<if _card>>
-    <<set _nid to _slugMap[_slug] || _slug>>
-    <<set _npc to State.variables.npcs ? (State.variables.npcs[_nid] || State.variables.npcs[_slug]) : null>>
-    <<if _npc>>
-      <<set _shown to _shown + 1>>
-      <<set _loc to setup.getNpcLocation(_slug)>>
-      <<set _locName to _loc ? (setup._locNameFromUuid(_loc.location) || "") : "">>
-      <<set _goalBlock to setup.renderQuestsGoalBlock(_card, setup.evaluateGoals(_card))>>
-      <div class="stats-card stats-card-with-portrait cast-card">
-        <div class="stats-portrait">
-          <<if _npc.portrait>>
-            <img @src="'{video_path}/' + _npc.portrait" @alt="_npc.name" onerror="this.style.display='none';this.parentElement.innerHTML='{escaped_svg}';">
-          <<else>>
-            {placeholder_svg}
-          <</if>>
+/* Roster + reveal, both from the quest cards, sorted (setup.castRoster). One row per
+   person; the row opens with a tap, and `name` keeps one open at a time. */
+<<set _roster to setup.castRoster()>>
+<div class="cast-list">
+<<for _e range _roster>>
+  <<set _npc to _e.npc>>
+  <<set _slug to _e.slug>>
+  <<set _next to _e.next>>
+  <details name="cast" class="cast-card">
+    <summary>
+      <span class="cast-face">
+        <<if _npc.portrait>>
+          <img @src="'{video_path}/' + _npc.portrait" @alt="_npc.name" onerror="this.style.display='none';this.parentElement.innerHTML='{escaped_svg}';">
+        <<else>>
+          {placeholder_svg}
+        <</if>>
+      </span>
+      <span class="cast-head">
+        <span class="stats-name"><<print _npc.name>></span>
+        <<if _next.line>><span class="cast-line"><<print _next.line>></span><</if>>
+      </span>
+      <<if _e.here>>
+        <span class="cast-where">● <<print _e.locName>></span>
+      <<else>>
+        <span class="cast-where cast-away">Away</span>
+      <</if>>
+    </summary>
+    <div class="cast-body">
+      <<if _npc.relationship>><div class="cast-relationship"><<print _npc.relationship>></div><</if>>
+{traits_block}      <<if _next.kind isnot "none">>
+        <div class="cast-next"><span class="cast-next-label">NEXT</span>
+        <<if _next.kind is "ready">>
+          Ready<<if _next.place>> · <<print _next.place>><</if>><<if _next.when>> · <<print _next.when>><</if>>
+        <<elseif _next.kind is "goals">>
+          <ul class="cast-goals"><<for _g range _next.items>><li @class="_g.met ? 'cast-met' : ''"><<print _g.mark>> <<print _g.label>></li><</for>></ul>
+        <<else>>
+          ✓ <<print _next.text>>
+        <</if>>
         </div>
-        <div class="stats-info">
-          <div class="stats-name"><<print _npc.name>></div>
-          <<if _npc.relationship>><div class="cast-relationship"><<print _npc.relationship>></div><</if>>
-          <<set _tags to setup.npc_tags[_slug]>>
-          <<if _tags && _tags.length>><div class="cast-tags"><<print _tags.join(" &middot; ")>></div><</if>>
-{traits_block}          <<if _locName>>
-            <div class="cast-where">📍 <<print _locName>></div>
-          <<else>>
-            <div class="cast-where cast-away">📍 Not about right now</div>
-          <</if>>
-          <<if _goalBlock>><<print _goalBlock>><</if>>
-          <<if _card.tip>><div class="quests-tip">💡 <<print _card.tip>></div><</if>>
-        </div>
-      </div>
-    <</if>>
-  <</if>>
+      <</if>>
+      <<if _e.card.tip>><div class="cast-tip"><<print _e.card.tip>></div><</if>>
+      <<if setup.castHasSchedule(_slug)>><div class="cast-actions"><<capture _slug>><<button "Schedule">><<run setup.castOpenSchedule(_slug)>><</button>><</capture>></div><</if>>
+      <<set _tags to setup.npc_tags[_slug]>>
+      <<if _tags && _tags.length>><div class="cast-tags"><<print _tags.join(" &middot; ")>></div><</if>>
+    </div>
+  </details>
 <</for>>
+</div>
 
-<<if _shown === 0>>
+<<if _roster.length === 0>>
   <div class="no-quests">You have not met anybody yet.</div>
 <</if>>
 <</nobr>>
-<<link "← Back">><<run setup.smartBack()>><</link>>
 """
         return widget + "\n" + page
 
@@ -18991,6 +19480,14 @@ $(document).on(':passagestart', function(ev) {
             f'\n<<widget "versionFooter">>\n<div class="sidebar-version">{_footer_inner}</div>\n<</widget>>\n'
             if _footer_inner else '\n<<widget "versionFooter">><</widget>>\n'
         )
+        # The page buttons, in sidebar order, minus any the game leaves out ([ui] sidebar_hide).
+        # Flags is a dev tool, so it is in the dev caption only.
+        _nav_buttons = [("quests", "<<journalButton>>"), ("people", "<<castButton>>"),
+                        ("tips", "<<tipsButton>>"), ("cheats", "<<cheatButton>>"),
+                        ("stats", "<<statsButton>>"), ("schedules", "<<scheduleButton>>")]
+        _nav_dev = "\n".join(w for k, w in _nav_buttons + [("flags", "<<flagsButton>>")]
+                             if k not in self.sidebar_hide)
+        _nav = "\n".join(w for k, w in _nav_buttons if k not in self.sidebar_hide)
         if self.dev_mode:
             story_caption = f""":: StoryCaption
 <<devIndicator>>
@@ -19000,13 +19497,7 @@ $(document).on(':passagestart', function(ev) {
 <<timeDisplay>>
 {portrait_line}<<sidebarItems>>{phone_btn_line}
 <<activeModifiers>>
-<<journalButton>>
-<<castButton>>
-<<tipsButton>>
-<<cheatButton>>
-<<statsButton>>
-<<scheduleButton>>
-<<flagsButton>>
+{_nav_dev}
 <<playerTraits>>
 <<npcTraits>>
 <<patreonButton>>
@@ -19017,12 +19508,7 @@ $(document).on(':passagestart', function(ev) {
 <<timeDisplay>>
 {portrait_line}<<sidebarItems>>{phone_btn_line}
 <<activeModifiers>>
-<<journalButton>>
-<<castButton>>
-<<tipsButton>>
-<<cheatButton>>
-<<statsButton>>
-<<scheduleButton>>
+{_nav}
 <<playerTraits>>
 <<patreonButton>>
 <<versionFooter>>"""
@@ -20243,7 +20729,7 @@ if (clothingMsg) {
     font-size: 11px;
     color: var(--theme-text-muted, #8a8a8a);
     text-align: center;
-}""" + self._cast_page_css() + self._cheat_page_css() + """
+}""" + self._cast_page_css() + self._phone_clock_css() + self._cheat_page_css() + """
 
 /* Reduce gap between StoryCaption and Save/Restart menu */
 #story-caption {
@@ -22458,36 +22944,14 @@ if (clothingMsg) {
 
 """ + stats_page + wardrobe_page + clothing_block_page + travel_block_page + shop_page + rent_page + """
 
-:: SchedulePage
-<!-- LOCK-AWARENESS (2026-08-11). The Schedules page is a GUIDANCE surface: it is the only screen that
-     publishes NPC hours, so the player uses it to decide where to walk. Schedule rows carry no conditions
-     by design — the resolver reads exactly five keys and drops the rest — so a row keeps pointing at a
-     location long after the story seals it, and getNpcLocation happily resolves "NOW" to a building the
-     player can no longer enter. Measured on vesper: after the Act-1a close it advertised Mercer as NOW at
-     his penthouse for 15 hours of every 24, and Calloway and Vane at Vance Securities, all three sealed by
-     the same flag. That is worse than saying nothing, because the player walks there.
-     The fix is on the PAGE, never on the rows: navDestUnlocked() is a pure entry_conditions check on the
-     location (no current-location dependency, no side effects), so it answers "can she get in right now"
-     for any slug. Locked rows are muted and show navDestBlockedReason() instead of the activity, and the
-     NOW badge and its activity line are suppressed entirely rather than naming a door that will not open.
-     AMENDED 2026-09-18 — rows CAN now carry conditions (`when`), and the two answer different questions, so
-     both stay. Lock-awareness asks "is the PLACE open"; `when` asks "is the PERSON there in this story".
-     The case lock-awareness cannot cover: vesper's cot is open in every save from 1b on, and Bastien is only
-     on its bunk after a rescue some of those saves never reached. A row whose `when` fails is dropped by
-     getNpcAllSchedulesSorted before it reaches this page (hidden, not muted), and an NPC with no live row is
-     left off the roster by getNpcsWithSchedules. -->
-<<nobr>>
+:: ScheduleWidgets [widget nobr]
+<!-- One person's schedule: the NOW badge and the weekly table. The Schedules page loops it over
+     everybody; the People page opens it for one person in a dialog (setup.castOpenSchedule). -->
+<<widget "npcScheduleSection">>
+<<set _npcId to $args[0]>>
+<<set _npcName to $args[1]>>
 <<set _currentDay to $game_state.time_state.current_day>>
 <<set _todayIndex to ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].indexOf(_currentDay)>>
-<h2>📅 Weekly Schedule</h2>
-<p class="current-time">Today is <<print _currentDay>> · <<print setup.formatTime($game_state.time_state.current_hour, $game_state.time_state.current_minute)>></p>
-<<set _npcsWithSchedules to setup.getNpcsWithSchedules()>>
-<<if _npcsWithSchedules.length === 0>>
-<p><em>No NPCs have schedules defined.</em></p>
-<<else>>
-<<for _npcInfo range _npcsWithSchedules>>
-<<set _npcId to _npcInfo.id>>
-<<set _npcName to _npcInfo.name>>
 <<set _currentLoc to setup.getNpcLocation(_npcId)>>
 <<set _allSchedules to setup.getNpcAllSchedulesSorted(_npcId)>>
 <div class="npc-section">
@@ -22530,6 +22994,39 @@ if (clothingMsg) {
 </table>
 <</if>>
 </div>
+<</widget>>
+
+:: SchedulePage
+<!-- LOCK-AWARENESS (2026-08-11). The Schedules page is a GUIDANCE surface: it is the only screen that
+     publishes NPC hours, so the player uses it to decide where to walk. Schedule rows carry no conditions
+     by design — the resolver reads exactly five keys and drops the rest — so a row keeps pointing at a
+     location long after the story seals it, and getNpcLocation happily resolves "NOW" to a building the
+     player can no longer enter. Measured on vesper: after the Act-1a close it advertised Mercer as NOW at
+     his penthouse for 15 hours of every 24, and Calloway and Vane at Vance Securities, all three sealed by
+     the same flag. That is worse than saying nothing, because the player walks there.
+     The fix is on the PAGE, never on the rows: navDestUnlocked() is a pure entry_conditions check on the
+     location (no current-location dependency, no side effects), so it answers "can she get in right now"
+     for any slug. Locked rows are muted and show navDestBlockedReason() instead of the activity, and the
+     NOW badge and its activity line are suppressed entirely rather than naming a door that will not open.
+     AMENDED 2026-09-18 — rows CAN now carry conditions (`when`), and the two answer different questions, so
+     both stay. Lock-awareness asks "is the PLACE open"; `when` asks "is the PERSON there in this story".
+     The case lock-awareness cannot cover: vesper's cot is open in every save from 1b on, and Bastien is only
+     on its bunk after a rescue some of those saves never reached. A row whose `when` fails is dropped by
+     getNpcAllSchedulesSorted before it reaches this page (hidden, not muted), and an NPC with no live row is
+     left off the roster by getNpcsWithSchedules. -->
+<<nobr>>
+<<set _currentDay to $game_state.time_state.current_day>>
+<<set _todayIndex to ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].indexOf(_currentDay)>>
+<h2>📅 Weekly Schedule</h2>
+<p class="current-time">Today is <<print _currentDay>> · <<print setup.formatTime($game_state.time_state.current_hour, $game_state.time_state.current_minute)>></p>
+<<set _npcsWithSchedules to setup.getNpcsWithSchedules()>>
+<<if _npcsWithSchedules.length === 0>>
+<p><em>No NPCs have schedules defined.</em></p>
+<<else>>
+<<for _npcInfo range _npcsWithSchedules>>
+<<set _npcId to _npcInfo.id>>
+<<set _npcName to _npcInfo.name>>
+<<npcScheduleSection _npcId _npcName>>
 <</for>>
 <</if>>
 <<set _soloActivities to setup.getSoloActivitiesAllSchedules()>>
@@ -22557,107 +23054,7 @@ if (clothingMsg) {
 <</nobr>>
 
 <style>
-.current-time {
-    color: var(--theme-text-strong);
-    font-size: 0.9em;
-    margin: 0 0 10px 0;
-}
-
-.now-badge {
-    background: var(--theme-success);
-    color: white;
-    padding: 3px 8px;
-    border-radius: 10px;
-    font-size: 0.75em;
-    font-weight: bold;
-    margin-left: 10px;
-    vertical-align: middle;
-}
-
-.current-activity {
-    color: var(--theme-text-muted);
-    font-style: italic;
-    margin-bottom: 8px;
-    font-size: 0.85em;
-}
-
-.schedule-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.85em;
-    color: var(--theme-text);
-}
-
-.schedule-table th {
-    text-align: left;
-    padding: 4px 8px;
-    background: var(--theme-surface);
-    border-bottom: 2px solid var(--theme-border);
-    color: var(--theme-text-strong);
-    font-weight: 600;
-}
-
-.schedule-table td {
-    padding: 4px 8px;
-    border-bottom: 1px solid var(--theme-border);
-    color: var(--theme-text-strong);
-    vertical-align: middle;
-}
-
-.schedule-table tr.current-slot {
-    background: var(--theme-warning-bg);
-    font-weight: 500;
-}
-
-.schedule-table tr.current-slot td:first-child {
-    color: var(--theme-warning-text);
-}
-
-/* A schedule row whose location the player cannot currently enter. Muted rather than hidden: a row that
-   vanishes reads as "he has no schedule there", where a muted one reads as "that door is shut for now",
-   which is the truth and is what a returning player needs. Never carries the ▶ current marker. */
-.schedule-table tr.locked-slot {
-    opacity: 0.55;
-}
-
-.schedule-table tr.locked-slot .locked-slot-reason {
-    font-style: italic;
-    opacity: 0.85;
-}
-
-.solo-activities-section {
-    margin-top: 18px;
-}
-
-.weekday-badges {
-    display: inline-flex;
-    flex-wrap: wrap;
-    gap: 3px;
-}
-
-.weekday-badge {
-    display: inline-block;
-    padding: 1px 6px;
-    border-radius: 8px;
-    font-size: 0.72em;
-    font-weight: 600;
-    background: var(--theme-surface);
-    color: var(--theme-text-muted);
-    border: 1px solid var(--theme-border);
-}
-
-.weekday-badge.weekday-today {
-    background: var(--theme-primary);
-    color: white;
-    border-color: var(--theme-primary);
-}
-
-.weekday-badge.weekday-all {
-    background: var(--theme-surface-alt);
-    color: var(--theme-text);
-    border-style: dashed;
-}
-</style>
+""" + self._schedule_page_css() + """</style>
 
 :: FlagsPage
 <<nobr>>

@@ -1,5 +1,7 @@
 # [READY] System — wardrobe
 
+> **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 from SYSTEMS §7 and the ledger's `wardrobe` card.
@@ -78,7 +80,7 @@ Both events add Exhibitionism +1 the first time each day she is in that state (g
 | 1 · Covered | none | covered · a towel in the hall (Ryan A 1) |
 | 2 · Daring | Exhibitionism gte 20 | a short skirt · no bra |
 | 3 · Showing | Exhibitionism gte 40 | no panties · underwear only at home |
-| 4 · Watched | later; the button says "Needs Watched" | naked by choice outside her room · the slutty uniform |
+| 4 · Watched | later; the button says "Needs Exhibitionism 60" | naked by choice outside her room · the slutty uniform |
 
 ## The meters it writes and reads (`board.meters[]`)
 

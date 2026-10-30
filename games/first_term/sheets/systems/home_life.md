@@ -1,5 +1,7 @@
 # [READY] System — home_life
 
+> **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > New 2026-10-08: LO's everyday picks 3, 4, 6, 9, 10, 11, 13, 14, 16 and 17 (LO, 2026-10-08), from
@@ -32,7 +34,7 @@
   Warmth add +1 (plain) or Want add +1 (a tease), Mark's Want add +1.
 - **From her stage, it can turn.** Curious or Daring: a tease. Bold or Showing: a touch, but never
   past what that person's own steps have reached. The sex versions wait for Hungry (SP2: "the taboo act
-  at home"), so in 0.1 each locked choice shows "Needs Hungry".
+  at home"), so in 0.1 each locked choice shows "Needs Corruption 60".
 - **One canvas per person per room and hour.** The engine shows one repeatable scene per person, place
   and window, so an item with a person in it is a **choice inside that person's hub there**, never a
   second scene. Alone, it is its own row.
@@ -80,7 +82,7 @@
 | 1 · Good Girl · Covered | none | talk; she reads what @player wears (her line per clothing state) | talk; he looks and looks away | talk; he counts her hem |
 | 2 · Curious · Daring | her stage 20 · and their step: Laura C 1 · Ryan A 4 · Mark A 3 | a tease: she fixes @player's hair, her hand stays; @player lets her look | a tease: her feet in his lap on the couch, his eyes on her ass | a tease: she bends to the dishwasher and lets him watch |
 | 3 · Bold · Showing | her stage 40 · and their step: Laura C 7 · Ryan A 8 · Mark A 7 | a touch: Laura's hands on her waist at the stove, then her hips | a touch: his hands under the blanket (his 0.1 repeat) | the look he pays for: "twenty and you can look" (his 0.1 price) |
-| 4 · Hungry · Watched | later: "Needs Hungry" | later | later | later |
+| 4 · Hungry · Watched | later: "Needs Corruption 60" | later | later | later |
 
 **Crude words** (SP2, a ceiling, never a floor): Laura early body, chest · middle tits, nipples.
 Ryan early ass, tits · middle cock, wet. Mark early legs, ass · middle tits, cock.

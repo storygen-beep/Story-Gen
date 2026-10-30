@@ -1,5 +1,7 @@
 # [READY] Scene — jake_saturday_date
 
+> **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. The repeat Jake's steps turn into: the Saturday date, booked on his
@@ -24,7 +26,7 @@
 | `watch` | who's watching: Laura from the dark couch (after C 5), or Ryan coming in | no | "Let them look." → in | corruption add +1 |
 
 **By her stage:** Curious, a long kiss on the porch rail · Bold, his hands under her skirt line only if she wears one (a
-group), her turning him so the dark room can see. Hungry is later and shows locked: *"Needs Hungry."*
+group), her turning him so the dark room can see. Hungry is later and shows locked: *"Needs Corruption 60."*
 
 **Who notices**, rotating by who is home: Laura on the dark couch (Saturday 22:00–00:00, her row), or Ryan home late.
 

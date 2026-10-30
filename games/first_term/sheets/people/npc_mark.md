@@ -1,5 +1,7 @@
 # [READY] Person — Mark
 
+> **Changed 2026-10-30, waiting for LO's re-sign** (DECISIONS 92): channel 5 with him (`living_tv_channels.md`, `mleave`) raises his Want +2 and her Corruption +2 (cap 19 / 39), once a day. He has no Corruption meter; Want is the one that moves.
+
 > **Changed 2026-10-29, re-signed by LO 2026-10-29** (DECISIONS 83): Laura is awake and alone 22:00–23:00, so his lines say she has "gone up", not that she is asleep. Step 4 is named "After she's gone up".
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08). Re-signed 2026-10-29 ("sign all", in chat).
@@ -12,7 +14,7 @@
 | role | step-father |
 | what she wants from him | his approval, and to be off the hook |
 | what he visibly wants, each visit | control, and her |
-| what he keeps | want + power |
+| what he keeps | want + power (channel 5 with her: Want +2, once a day, DECISIONS 92) |
 | where he sleeps | `home_master_bedroom` |
 | what he calls her | "@player"; "@player.nickname" when he's soft (LO, 2026-10-08, question 71: never "kid") |
 | met | day 1, the house |

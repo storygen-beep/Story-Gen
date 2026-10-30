@@ -401,7 +401,7 @@ add_item("breakfast", "Have breakfast with her.", WEEKDAY_AM, "ate_breakfast", K
           G(cond(flag("had_coffee", False)), D(L, "Tell me one thing about yesterday."))],
          None, 15, done_exits=[go("Eat.", loc=K, mins=15, flags=[fset("ate_breakfast")], eff=[energy(10), warm(L)])] + COFFEE_EXITS,
          tease=l_tease(86, "breakfast"), touch=l_touch(86, "breakfast"),
-         hungry="Further. (Needs Hungry)")
+         hungry="Further. (Needs Corruption 60)")
 # One dinner, every evening she cooks (Mon, Tue, Thu, Fri, Sun 18:00-20:00). Sunday dinner reads
 # room_tidy and clears it (npc_laura.md:96; home_ella_room.md:41): +2 tidy, -1 messy on top of dinner's +1.
 NOT_SUN = wd(0, 1, 3, 4)

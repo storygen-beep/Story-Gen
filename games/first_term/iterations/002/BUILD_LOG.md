@@ -926,3 +926,43 @@ sheets' own, and none is a tease, touch or paid look.
 - `tom.py`: `hub_tom_cafe` now runs 08:00–22:00. With no hours it took Tom's face in the closing hour (priority 6 over `tom_after_close`'s 5), so after close couldn't open even with the booking.
 - Rebuilt with dev + debug. Gates 60/89; the fail list and every number on it are the same as before the change. Playtest: `tom_late.js` 4/4 (step 6 plays Fri 22:15, café shut at 23:15, after close shut without his yes and open with it), `texts.js` 33/33, 0 page errors.
 - Signed by LO ("sign all"): DECISIONS 87–89, the five person sheets (Laura, Zoe, Tom, Hale, Ryan), and `places/cafe.md`.
+
+## 2026-10-29: locked buttons name the number (DECISIONS 90, LO)
+
+- LO's report: "(Needs Hungry)" is hard to read. At Good Girl the player has never seen the word, and it reads like food ("Not hungry." is a real choice at home).
+- Build scripts (`college.py`, `home.py`, `home_items.py`, `laura.py`, `mark.py`, `ryan.py`, `pools.py`): 9 buttons now say "(Needs Corruption 60)" and the figure-drawing button "(Needs Exhibitionism 60)"; the "Further" screens say "It comes later, when your Corruption reaches 60." (or Exhibitionism). The sidebar keeps its stage words. `canv.py` is untouched: its quest-card filter reads step labels, not these buttons.
+- 13 sheets quote the new words, each marked changed and waiting for LO's re-sign; the ledger's `locked_next` line too. `scenes/college_class_figure.md` still says the posing button needs Corruption (the build has said Exhibitionism since iteration 001, BUILD_VS_SHEET row 56); that difference is unchanged. Snapshot: `first_term_snapshots/20261029_locked_labels_before/`.
+- Rebuilt with dev + debug. The built page has 0 "Needs Hungry" left. Gates 60/89, unchanged.
+
+## 2026-10-30: the TV alone, five sessions a day (DECISIONS 91, LO)
+
+- `home.py` `living_tv`: `max_triggers_per_day = 5`, `show_when_blocked = true`, `cooldown_message = "Not now."`. The last two are trigger keys (`template_import.py:2548`); put under `metadata` they are silently dropped (the first build did that, and the probe caught it). The grey row also shows when the room is busy or it's past 02:00 (`v2.py` `renderSoloActivities`), so the text says only "Not now."
+- `sheets/scenes/living_tv_channels.md` brake row, waiting for LO's re-sign. Snapshot: `first_term_snapshots/20261030_tv_cap_before/`.
+- Rebuilt with dev + debug. Gates 60/89, the same fail list. Probe `tv_cap.js` 8/8, 0 page errors: five sessions each pay channel 5's +1, then "Watch TV — Not now." and no link, then the next day the row is back.
+
+## 2026-10-30: channel 5 with Mark pays more, once a day (DECISIONS 92, LO)
+
+- `mark.py` node `mleave`: "Keep watching." pays her Corruption +2 (cap 19 / 39) and Mark's Want +2 behind `mark_tv_paid`; a third copy with the flag set pays nothing. `mark_tv_paid` added to `home_items.DAILY` and to `[engine.daily_tick]` in the hand-written `0_systems_spec.toml`.
+- Sheets `scenes/living_tv_channels.md` and `people/npc_mark.md`, waiting for LO's re-sign. Snapshot: `first_term_snapshots/20261030_mark_tv_before/`.
+- Rebuilt with dev + debug. Gates 61/89 (was 60): "the climb is paid for" turned green. Channel 5 with Mark was the one unbraked route into a gated meter, and the brake closed it. Probes: `mark_tv.js` 6/6 (+2 and Want +2, then 0 the same day, the real midnight tick clears it, pays again, 38 lands at 39, 18 lands at 19), `tv_cap.js` 8/8, 0 page errors.
+
+## 2026-10-30: the people's meters get market words (DECISIONS 93, LO)
+
+- Shown labels only: `warmth` is Love, `want` is Lust, `power` is Dominance (`0_systems_spec.toml` `[[traits.labels]]`, `canv.py` `TRAIT_NAME`). Keys, saves, conditions and gates unchanged. Canvas descriptions, comments and the 56 sheets keep the old names as design terms; DECISIONS 93 maps them.
+- Rebuilt in full with dev + debug. 28 quest goals now read "…'s Lust N", 0 old labels left. Gates 61/89, the same pass/fail on every gate. Probes: `labels.js` 4/4 (traitLabel, the goals, the cast cards: Mark and Tom Lust + Dominance, Laura and Ryan Lust + Love), `mark_tv.js` 6/6, `tv_cap.js` 8/8, 0 page errors.
+
+## 2026-10-30: the People screen is a tap-to-open list, phone first (DECISIONS 94, LO)
+
+- Engine only (`v2.py`): one `<details>` row per person, sorted by `setup.castRoster` (about now, then ready, then the rest); the row line from `setup.castNext`, short times from `setup.castWhen`; meters as bars; Back on top. The EN7 golden was regenerated on purpose, two EN7 tests now open a row before reading it (a closed row has no text), `test_hidden_places` pins the new source line, and three tests were added. 46 passed. The skill's `engine.md` §34 and CHANGELOG were updated.
+- Rebuilt with `--dev --debug` (no TOML change). Gates 61/89, the same per gate. Probe `cast_list.js` 16/16 at 390 and 1280 wide: five closed rows on one phone screen, Laura (in the Kitchen) first, Tom's line "Ready · Mon–Sat 2:30–10 PM", one open at a time. `labels.js` 4/4, `mark_tv.js` 6/6, `tv_cap.js` 8/8, 0 page errors.
+
+## 2026-10-30: the sidebar, trimmed; Cheats; the phone clock; schedules on the People page (DECISIONS 95, LO)
+
+- `0_systems_spec.toml`: `[ui] sidebar_hide = ["stats", "schedules", "flags"]`, `phone_clock = true`; `[ui.cheat_page] title = "Cheats"`. Merged (only those lines changed in `7_final_game.toml`), rebuilt with `--dev --debug`.
+- Engine: the two `[ui]` keys (importer + validate + StoryCaption), the phone clock, `<<npcScheduleSection>>` shared by the Schedules page and the new per-person dialog. Found and fixed on the way: widget arguments are `$args` on SugarCube 2.30, not `_args`.
+- Gates 61/89, the same per gate. Probe `sidebar.js` 12/12, 0 page errors: no Stats/Schedules/Flags buttons, Cheats button and heading, Tom's schedule in a dialog, the clock at the top left on a 390-wide screen only while the sidebar is closed, follows the time, and opens the sidebar on a tap. Engine tests 759 passed plus 4 new.
+
+## 2026-10-30: the schedule pop-up shows one day (DECISIONS 96, LO)
+
+- Engine: `setup.castScheduleHtml` / `castTimeRange` replace the weekly table in the People card's dialog. Same rows as the Schedules page (`getNpcAllSchedulesSorted`, lock reasons, hidden-place names, emitted only for a game with hidden places).
+- Rebuilt with `--dev --debug`. Gates 61/89, the same per gate. Probe `sched_day.js` 12/12 at 390 and 1280: Laura on Friday 19:00 shows three rows with "▶ 6–10 PM Kitchen" marked and "Now: Kitchen"; the Saturday chip redraws with no now line; no sideways scroll. `sidebar.js` 12/12, `cast_list.js` 16/16, `labels.js` 4/4, `mark_tv.js` 6/6, `tv_cap.js` 8/8, 0 page errors. Engine tests 764 passed.

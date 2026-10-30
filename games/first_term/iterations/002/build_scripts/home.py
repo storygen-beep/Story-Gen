@@ -252,7 +252,7 @@ out.append(solo("living_couch", "Lie on the couch",
 
 # The remote (DECISIONS 85-86, living_tv_channels.md): five channels, each with its own clip. The four
 # plain channels keep TV's old pay, energy +5 once a day; channel 5, the adult channel Mark pays for,
-# pays every time she watches (LO, 2026-10-29): time is its only limit.
+# pays every time she watches (LO, 2026-10-29), up to five TV sessions a day (LO, 2026-10-30, DECISIONS 91).
 LIVING_TV_WATCH = ("Channel 5 fills the screen. A woman rides a man on a leather couch. Her tits bounce with every drop of her hips. His hands grip her ass and pull her down hard. The camera cuts low. His cock slides out of her, shiny and thick, and sinks back in to the root. She moans loud. The speakers carry it through the room. You jab the remote and the volume drops. On screen she rides him faster. He grunts and squeezes her ass. Your face goes hot. Your nipples pull tight and ache. You are wet. Your clit throbs, and you squeeze your thighs together hard.")
 LIVING_TV_TOUCH = ("The adult channel is on, the sound turned low. On the screen a man is taking her from behind on a couch like yours, his hands on her hips, his cock driving in deep. Her tits swing with every thrust. She moans through the speakers, low and steady. Your hand slides down your belly and inside your clothes. Your fingers find your clit, and you are already wet. You rub in time with him, hard when he drives in, slow when he pulls out. Your other hand squeezes your tit, your thumb on the nipple. One eye stays on the doorway to the hall. Anyone could walk in. You rub faster. He slams his cock into her, and you come on the couch, biting your lip. Your hips lift off the cushion while your fingers keep working your clit through it.")
 tv_nodes = [node("remote", "The remote", [
@@ -276,8 +276,12 @@ tv_nodes += [
         [go("Fix your clothes.", loc="home_living_room", mins=25, eff=tv_pay(2, 39))]),
 ]
 out.append(solo("living_tv", "Watch TV",
-    "The remote alone (DECISIONS 85-86): five channels, each with a clip. The plain four: 30 min, energy +5 once a day. Channel 5: corruption +1 every watch, cap 19 at Good Girl, 39 at Curious; touch herself at Curious, +2, cap 39.",
-    "home_living_room", tv_nodes, sched=S(ALL, "07:00", "02:00"), conds=LIVING_EMPTY))
+    "The remote alone (DECISIONS 85-86, 91): at most five sessions a day, then the row greys out. Five channels, each with a clip. The plain four: 30 min, energy +5 once a day. Channel 5: corruption +1 every watch, cap 19 at Good Girl, 39 at Curious; touch herself at Curious, +2, cap 39.",
+    "home_living_room", tv_nodes, sched=S(ALL, "07:00", "02:00"), conds=LIVING_EMPTY,
+    # Five sessions a day (LO, 2026-10-30, DECISIONS 91); the row greys out after. The grey row also shows
+    # when the room is busy or it's past 02:00 (v2.py renderSoloActivities), so its text must be true then too.
+    max_day=5))
+out[-1]["trigger"].update({"show_when_blocked": True, "cooldown_message": "Not now."})   # trigger keys, not metadata (template_import.py:2548)
 
 out += brake_canvas(solo("living_film", "Put a film on",
     "A film alone: 120 min, energy +5 (home_life.md:70).",
@@ -326,7 +330,7 @@ out.append({"id": "master_asleep", "name": "Ease the door open",
           P("Mark's asleep on his back, one arm flung across the bed. Laura's half is empty, the covers thrown back.")) for hrs in ASLEEP_HOURS],
         P("You stand in the gap long enough to hear the breathing. Nobody stirs."),
     ], [go("Close the door.", loc="home_hall", mins=2),
-        go("Go to the bed. (Needs Hungry)", node="hl_hungry", swl=True, cond_=cond(HUNGRY))]),
+        go("Go to the bed. (Needs Corruption 60)", node="hl_hungry", swl=True, cond_=cond(HUNGRY))]),
         hungry_node("home_hall")]})
 
 

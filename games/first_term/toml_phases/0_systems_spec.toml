@@ -73,6 +73,7 @@ flagEffects = [
   { targetType = "player", flag = "home_event", op = "unset" },
   { targetType = "player", flag = "couch_seen", op = "unset" },
   { targetType = "player", flag = "mark_paid_look", op = "unset" },
+  { targetType = "player", flag = "mark_tv_paid", op = "unset" },   # channel 5 with Mark pays once a day (DECISIONS 92)
   { targetType = "player", flag = "cafe_shift_1_today", op = "unset" },
   { targetType = "player", flag = "cafe_shift_2_today", op = "unset" },
   { targetType = "player", flag = "cafe_shift_3_today", op = "unset" },
@@ -271,15 +272,15 @@ hidden = true
 
 [[traits.labels]]
 key   = "want"
-label = "Want"
+label = "Lust"   # the market word (DECISIONS 93); the key stays
 
 [[traits.labels]]
 key   = "warmth"
-label = "Warmth"
+label = "Love"   # the market word (DECISIONS 93); the key stays
 
 [[traits.labels]]
 key   = "power"
-label = "Power"
+label = "Dominance"   # the market word (DECISIONS 93); the key stays
 
 [[traits.labels]]
 key    = "ryan_step"
@@ -316,6 +317,12 @@ key    = "jake_step"
 label  = "Jake's step"
 hidden = true
 
+# ── the sidebar (DECISIONS 95): no Stats, Schedules or Flags buttons (each person's schedule opens
+#    from their card on the People page); on a phone, a clock in the corner while the sidebar is closed ──
+[ui]
+sidebar_hide = ["stats", "schedules", "flags"]
+phone_clock  = true
+
 # ── the cast page (engine.md §34) — lists only the people she has met ──
 [ui.cast_page]
 title       = "The People"
@@ -323,9 +330,9 @@ intro       = "Who's who in your first term."
 show_traits = ["want"]
 trait_bands = { want = [ { max = 19, text = "Hides it" }, { min = 20, max = 49, text = "Looks" }, { min = 50, max = 79, text = "Wants you" }, { min = 80, text = "Can't stop" } ], warmth = [ { max = 29, text = "Cold" }, { min = 30, max = 69, text = "Warm" }, { min = 70, text = "On your side" } ], power = [ { max = 39, text = "You set the terms" }, { min = 40, max = 59, text = "Even" }, { min = 60, text = "His terms" } ] }
 
-# ── shortcuts (the-systems.md SY7): free, no codes ──
+# ── cheats (the-systems.md SY7): free, no codes. Called "Shortcuts" until DECISIONS 95 ──
 [ui.cheat_page]
-title = "Shortcuts"
+title = "Cheats"
 intro = "Free buttons that save you time."
 
 [[ui.cheat_page.grants]]

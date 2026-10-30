@@ -1,5 +1,7 @@
 # [READY] Person — Ryan
 
+> **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
+
 > **Changed 2026-10-29, re-signed by LO 2026-10-29** (DECISIONS 87–88): his two-knocks text: "coming" is a promise; a no-show costs his Warmth.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08). Re-signed 2026-10-29 ("sign all", in chat).
@@ -73,7 +75,7 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 
 **Final no:** on day one, "Don't ever look at me like that. (ends his path)"; later, "Your secret's safe. You're my brother, that's all. (ends his path)". Either closes his steps; he stays her brother, and cold.
 
-**What the last 0.1 step turns into:** two knocks at his door, any night but Friday. The door this release ends on; step 9 shows locked, naming Hungry.
+**What the last 0.1 step turns into:** two knocks at his door, any night but Friday. The door this release ends on; step 9 shows locked, naming Corruption 60.
 
 **After** (SP2, where the arc ends, past 0.1): the knocks go on around his girlfriend's nights, and Laura's knowing grows.
 

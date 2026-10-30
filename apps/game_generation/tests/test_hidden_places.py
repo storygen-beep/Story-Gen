@@ -243,7 +243,8 @@ def test_the_name_is_withheld_until_found(html):
         assert g.errors == []
 
 
-CAST_WHERE = '<<set _locName to _loc ? (setup._locNameFromUuid(_loc.location) || "") : "">>'
+# The cast page asks in setup.castRoster since it became a sorted list (first_term DECISIONS 94).
+CAST_WHERE = 'var locName = loc ? (setup._locNameFromUuid(loc.location) || "") : "";'
 PANEL_WHERE = ("<<set _npLocName to _npLoc ? (setup._locNameFromUuid(_npLoc.location) || "
                "_npLoc.location) : (_item.away_label || \"Away\")>>")
 

@@ -542,13 +542,14 @@ out.append(mark_hub("hub_mark_living_room", LR, "Mark, up late", "the living roo
       None, 30),
      dict(done_exits=[go("Done.", loc=LR, mins=30, eff=[want(M)], flags=[fset("had_drink_home")], mods=DRINK)],
           tease=m_tease(108, "late TV and a beer", "Curl up on the couch."), touch=m_paid(108, "late TV and a beer"),
-          hungry="Further. (Needs Hungry)")),
+          hungry="Further. (Needs Corruption 60)")),
     (("film", "Put a film on with him.", [tod("22:00", "00:00")], "movie_night", LR,
       [P("He lets you pick. He falls asleep in the second half, and you watch the end with his snoring for a soundtrack.")],
       [energy(5), want(M)], 120), {}),
 ]))
 # Watch TV with him (DECISIONS 85-86): the same remote as alone (home.py), his line on each channel,
-# and on channel 5 his reaction by his step. "Leave it on." pays every time, like alone.
+# and on channel 5 his reaction by his step. "Leave it on." pays more than alone, once a day (LO, 2026-10-30,
+# DECISIONS 92): her Corruption +2 (cap 19 / 39) and his Want +2; after that it plays and pays nothing.
 MARK_TV_ADULT = ("Channel 5 fills the screen. A woman is on her knees in front of a man. She sucks his cock, slow and deep, her cheeks hollow. He pulls her up and bends her over the bed. He takes her from behind. Her tits swing with every thrust. She moans, loud and long. The room goes quiet under the sound. Mark stops with the beer halfway to his mouth. He does not reach for the remote. His fingers squeeze tight around the can. On screen the man grips her hips and drives in harder. Your face goes hot. You are wet, and your nipples pull hard and tight.")
 MARK_TV_LEAVE = ("You leave it on. You both watch. On screen the man drives into her from behind. He slaps her ass, hard, and she moans. Her tits swing under her with each thrust. Mark shifts on the couch. The can moves down to his lap. It does not hide the hard bulge of his cock in his jeans. His eyes go from the screen to you. Then back to the screen. Nobody says anything. The man grips her hips and pounds her harder. She moans louder with every thrust. You are wet. You squeeze your thighs together, tight. Your nipples go hard and tight.")
 MARK_CH = {"news": D(M, "Same as yesterday. Same as every day."), "cooking": D(M, "Your mother never cooks like that."),
@@ -572,8 +573,11 @@ _hub["nodes"] += [
          go("Change the channel.", node="mremote"), go("Leave him to it.", loc="home_hall")]),
     node("mleave", "Leave it on", [P(MARK_TV_LEAVE),
         VID("a man on a couch at night watching porn on TV, a beer can in his lap", "man watching porn tv couch beer", "stepdad watching porn on tv", pool_dir="sex/tv_adult_mark_leave_t5")],
-        [go("Keep watching.", loc=LR, mins=25, eff=tv_pay(1, 19), cond_=cond(TV_GG)),
-         go("Keep watching.", loc=LR, mins=25, eff=tv_pay(1, 39), cond_=cond(TV_CUR)),
+        [go("Keep watching.", loc=LR, mins=25, eff=tv_pay(2, 19) + [want(M, 2)], flags=[fset("mark_tv_paid")],
+            cond_=cond(TV_GG, flag("mark_tv_paid", False))),
+         go("Keep watching.", loc=LR, mins=25, eff=tv_pay(2, 39) + [want(M, 2)], flags=[fset("mark_tv_paid")],
+            cond_=cond(TV_CUR, flag("mark_tv_paid", False))),
+         go("Keep watching.", loc=LR, mins=25, cond_=cond(flag("mark_tv_paid"))),
          go("Change the channel.", node="mremote")]),
 ]
 
@@ -607,7 +611,7 @@ out.append(mark_hub("hub_mark_kitchen", K, "Mark, in the kitchen", "the kitchen"
       [P("He slides the paper over."), G(cond(flag("rent_starts"), flag("sunday_counted_today", False)), D(M, "Eat, @player. Then the rent.")),
        G(cond(flag("sunday_counted_today")), D(M, "Eat, @player.")), G(cond(flag("rent_starts", False)), D(M, "Eat, @player."))],
       [energy(10), want(M)], 15),
-     dict(tease=m_tease(104, "Sunday breakfast"), touch=m_paid(104, "Sunday breakfast"), hungry="Further. (Needs Hungry)")),
+     dict(tease=m_tease(104, "Sunday breakfast"), touch=m_paid(104, "Sunday breakfast"), hungry="Further. (Needs Corruption 60)")),
     (("dinner", "Sit down to dinner.", [wd(0, 1, 2, 3, 4, 6), tod("18:00", "20:00")], "ate_dinner", K,
       [G(cond(wd(0, 1, 3, 4, 6)), P("Burnt chops."), D(M, "Your mother cooks. I fill plates.")),
        G(cond(wd(2)), P("Chilli, again."), D(M, "It's always chilli. Eat it.")),

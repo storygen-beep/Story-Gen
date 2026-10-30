@@ -857,7 +857,7 @@ consumes = true
 [[canvases]]
 id   = "ryan_08_two_knocks"
 name = "Two knocks"
-description = "Ryan step 8 (Ryan A 9), the release's door: \"Two knocks\" shows locked, naming the stage it needs (Hungry, Corruption 60)."
+description = "Ryan step 8 (Ryan A 9), the release's door: \"Two knocks\" shows locked, naming the stage it needs (Corruption 60)."
 
 [canvases.trigger]
 location = "home_ryan_room"
@@ -1725,7 +1725,7 @@ effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap
 flagEffects = [{ targetType = "player", flag = "watched_tv", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Further. (Needs Hungry)"
+text = "Further. (Needs Corruption 60)"
 targetType = "node"
 nodeId = "hl_hungry"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
@@ -1832,7 +1832,7 @@ name = "Further"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "That's further than you go in this release of First Term. It comes later, when you're Hungry."
+content = "That's further than you go in this release of First Term. It comes later, when your Corruption reaches 60."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -1952,7 +1952,7 @@ when = [
 ready_canvas = "ryan_02_phone_on_the_sink"
 goals = [
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Exhibitionism 20 (Daring)" },
-  { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 10, label = "Ryan's Want 10" },
+  { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 10, label = "Ryan's Lust 10" },
 ]
 
 [[quest_cards]]
@@ -1967,7 +1967,7 @@ ready_canvas = "ryan_03_shirt_off"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 20, label = "Corruption 20 (Curious)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Exhibitionism 20 (Daring)" },
-  { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 20, label = "Ryan's Want 20" },
+  { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 20, label = "Ryan's Lust 20" },
 ]
 
 [[quest_cards]]
@@ -1982,7 +1982,7 @@ ready_canvas = "ryan_04_feet_in_his_lap"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 20, label = "Corruption 20 (Curious)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Exhibitionism 20 (Daring)" },
-  { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 30, label = "Ryan's Want 30" },
+  { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 30, label = "Ryan's Lust 30" },
 ]
 
 [[quest_cards]]
@@ -1997,7 +1997,7 @@ ready_canvas = "ryan_05_thin_walls"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 20, label = "Corruption 20 (Curious)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Exhibitionism 40 (Showing)" },
-  { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 40, label = "Ryan's Want 40" },
+  { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 40, label = "Ryan's Lust 40" },
 ]
 
 [[quest_cards]]
@@ -2012,7 +2012,7 @@ ready_canvas = "ryan_06_after_the_shower"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Corruption 40 (Bold)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Exhibitionism 40 (Showing)" },
-  { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 50, label = "Ryan's Want 50" },
+  { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 50, label = "Ryan's Lust 50" },
 ]
 
 [[quest_cards]]
@@ -2026,7 +2026,7 @@ when = [
 ready_canvas = "ryan_07_first_kiss"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Corruption 40 (Bold)" },
-  { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 60, label = "Ryan's Want 60" },
+  { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 60, label = "Ryan's Lust 60" },
 ]
 
 [[quest_cards]]
@@ -2040,7 +2040,7 @@ when = [
 ready_canvas = "ryan_08_two_knocks"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Corruption 40 (Bold)" },
-  { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 70, label = "Ryan's Want 70" },
+  { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 70, label = "Ryan's Lust 70" },
 ]
 
 [[quest_cards]]
@@ -3910,7 +3910,7 @@ effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "ad
 flagEffects = [{ targetType = "player", flag = "ate_breakfast", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Further. (Needs Hungry)"
+text = "Further. (Needs Corruption 60)"
 targetType = "node"
 nodeId = "hl_hungry"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
@@ -4715,7 +4715,7 @@ name = "Further"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "That's further than you go in this release of First Term. It comes later, when you're Hungry."
+content = "That's further than you go in this release of First Term. It comes later, when your Corruption reaches 60."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -5148,7 +5148,7 @@ ready_canvas = "laura_02_home_late"
 goals = [
   { hours_since_flag = "came_home_late", op = "lt", value = 4, label = "Come home late, after ten at night (in the last four hours)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Exhibitionism 20 (Daring)" },
-  { type = "trait", subject = "npc", npc_id = "npc_laura", trait = "want", op = "gte", value = 10, label = "Laura's Want 10" },
+  { type = "trait", subject = "npc", npc_id = "npc_laura", trait = "want", op = "gte", value = 10, label = "Laura's Lust 10" },
 ]
 
 [[quest_cards]]
@@ -5164,7 +5164,7 @@ ready_canvas = "laura_03_wine_in_the_kitchen"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 20, label = "Corruption 20 (Curious)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Exhibitionism 20 (Daring)" },
-  { type = "trait", subject = "npc", npc_id = "npc_laura", trait = "want", op = "gte", value = 20, label = "Laura's Want 20" },
+  { type = "trait", subject = "npc", npc_id = "npc_laura", trait = "want", op = "gte", value = 20, label = "Laura's Lust 20" },
 ]
 
 [[quest_cards]]
@@ -5180,7 +5180,7 @@ ready_canvas = "laura_04_ryans_door"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 20, label = "Corruption 20 (Curious)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Exhibitionism 20 (Daring)" },
-  { type = "trait", subject = "npc", npc_id = "npc_laura", trait = "want", op = "gte", value = 30, label = "Laura's Want 30" },
+  { type = "trait", subject = "npc", npc_id = "npc_laura", trait = "want", op = "gte", value = 30, label = "Laura's Lust 30" },
 ]
 
 [[quest_cards]]
@@ -5196,7 +5196,7 @@ ready_canvas = "laura_05_jake_at_the_door"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Corruption 40 (Bold)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Exhibitionism 40 (Showing)" },
-  { type = "trait", subject = "npc", npc_id = "npc_laura", trait = "want", op = "gte", value = 40, label = "Laura's Want 40" },
+  { type = "trait", subject = "npc", npc_id = "npc_laura", trait = "want", op = "gte", value = 40, label = "Laura's Lust 40" },
   { flag = "jake_date_went", op = "is_true", label = "Go out with Jake on a Saturday" },
 ]
 
@@ -5213,7 +5213,7 @@ ready_canvas = "laura_06_take_me_with_you"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Corruption 40 (Bold)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Exhibitionism 40 (Showing)" },
-  { type = "trait", subject = "npc", npc_id = "npc_laura", trait = "want", op = "gte", value = 50, label = "Laura's Want 50" },
+  { type = "trait", subject = "npc", npc_id = "npc_laura", trait = "want", op = "gte", value = 50, label = "Laura's Lust 50" },
 ]
 
 [[quest_cards]]
@@ -5229,7 +5229,7 @@ ready_canvas = "laura_07_dark_stairs"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Corruption 40 (Bold)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Exhibitionism 40 (Showing)" },
-  { type = "trait", subject = "npc", npc_id = "npc_laura", trait = "want", op = "gte", value = 60, label = "Laura's Want 60" },
+  { type = "trait", subject = "npc", npc_id = "npc_laura", trait = "want", op = "gte", value = 60, label = "Laura's Lust 60" },
 ]
 
 [[quest_cards]]
@@ -5245,7 +5245,7 @@ ready_canvas = "laura_08_it_wasnt_the_wine"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Corruption 40 (Bold)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Exhibitionism 40 (Showing)" },
-  { type = "trait", subject = "npc", npc_id = "npc_laura", trait = "want", op = "gte", value = 70, label = "Laura's Want 70" },
+  { type = "trait", subject = "npc", npc_id = "npc_laura", trait = "want", op = "gte", value = 70, label = "Laura's Lust 70" },
 ]
 
 [[quest_cards]]
@@ -7343,7 +7343,7 @@ flagEffects = [{ targetType = "player", flag = "had_drink_home", op = "set" }, {
 wardrobeEffects = [{ action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Further. (Needs Hungry)"
+text = "Further. (Needs Corruption 60)"
 targetType = "node"
 nodeId = "hl_hungry"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
@@ -7450,7 +7450,7 @@ name = "Further"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "That's further than you go in this release of First Term. It comes later, when you're Hungry."
+content = "That's further than you go in this release of First Term. It comes later, when your Corruption reaches 60."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -7765,16 +7765,25 @@ text = "Keep watching."
 targetType = "location"
 locationId = "home_living_room"
 time_progression_minutes = 25
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }, { type = "flag", subject = "player", flag_key = "mark_tv_paid", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 2, cap = 19 }, { targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 2, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "mark_tv_paid", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Keep watching."
 targetType = "location"
 locationId = "home_living_room"
 time_progression_minutes = 25
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "mark_tv_paid", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 2, cap = 39 }, { targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 2, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "mark_tv_paid", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Keep watching."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 25
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "mark_tv_paid", operator = "is_true" }] }
 
 [[canvases.nodes.exit_block.choices]]
 text = "Change the channel."
@@ -8279,7 +8288,7 @@ effects = [{ targetType = "player", trait = "money", op = "add", value = 20, cla
 flagEffects = [{ targetType = "player", flag = "ate_breakfast", op = "set" }, { targetType = "player", flag = "mark_paid_look", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Further. (Needs Hungry)"
+text = "Further. (Needs Corruption 60)"
 targetType = "node"
 nodeId = "hl_hungry"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
@@ -8641,7 +8650,7 @@ name = "Further"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "That's further than you go in this release of First Term. It comes later, when you're Hungry."
+content = "That's further than you go in this release of First Term. It comes later, when your Corruption reaches 60."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -8676,7 +8685,7 @@ when = [
 ]
 ready_canvas = "mark_02_late_notice"
 goals = [
-  { type = "trait", subject = "npc", npc_id = "npc_mark", trait = "want", op = "gte", value = 10, label = "Mark's Want 10" },
+  { type = "trait", subject = "npc", npc_id = "npc_mark", trait = "want", op = "gte", value = 10, label = "Mark's Lust 10" },
 ]
 
 [[quest_cards]]
@@ -8693,7 +8702,7 @@ goals = [
   { flag = "rent_starts", op = "is_true", label = "The rent has started" },
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 20, label = "Corruption 20 (Curious)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Exhibitionism 20 (Daring)" },
-  { type = "trait", subject = "npc", npc_id = "npc_mark", trait = "want", op = "gte", value = 20, label = "Mark's Want 20" },
+  { type = "trait", subject = "npc", npc_id = "npc_mark", trait = "want", op = "gte", value = 20, label = "Mark's Lust 20" },
 ]
 
 [[quest_cards]]
@@ -8709,7 +8718,7 @@ ready_canvas = "mark_04_after_shes_asleep"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Corruption 40 (Bold)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Exhibitionism 20 (Daring)" },
-  { type = "trait", subject = "npc", npc_id = "npc_mark", trait = "want", op = "gte", value = 30, label = "Mark's Want 30" },
+  { type = "trait", subject = "npc", npc_id = "npc_mark", trait = "want", op = "gte", value = 30, label = "Mark's Lust 30" },
 ]
 
 [[quest_cards]]
@@ -8725,7 +8734,7 @@ ready_canvas = "mark_05_a_bill_an_inch"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Corruption 40 (Bold)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Exhibitionism 20 (Daring)" },
-  { type = "trait", subject = "npc", npc_id = "npc_mark", trait = "want", op = "gte", value = 40, label = "Mark's Want 40" },
+  { type = "trait", subject = "npc", npc_id = "npc_mark", trait = "want", op = "gte", value = 40, label = "Mark's Lust 40" },
 ]
 
 [[quest_cards]]
@@ -8740,7 +8749,7 @@ when = [
 ready_canvas = "mark_06_our_arrangement"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Corruption 40 (Bold)" },
-  { type = "trait", subject = "npc", npc_id = "npc_mark", trait = "want", op = "gte", value = 50, label = "Mark's Want 50" },
+  { type = "trait", subject = "npc", npc_id = "npc_mark", trait = "want", op = "gte", value = 50, label = "Mark's Lust 50" },
 ]
 
 [[quest_cards]]
@@ -8757,7 +8766,7 @@ goals = [
   { flag = "rent_starts", op = "is_true", label = "The rent has started" },
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Corruption 40 (Bold)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Exhibitionism 40 (Showing)" },
-  { type = "trait", subject = "npc", npc_id = "npc_mark", trait = "want", op = "gte", value = 60, label = "Mark's Want 60" },
+  { type = "trait", subject = "npc", npc_id = "npc_mark", trait = "want", op = "gte", value = 60, label = "Mark's Lust 60" },
 ]
 
 [[quest_cards]]
@@ -8772,7 +8781,7 @@ when = [
 ready_canvas = "mark_08_the_red_circle"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Corruption 40 (Bold)" },
-  { type = "trait", subject = "npc", npc_id = "npc_mark", trait = "want", op = "gte", value = 70, label = "Mark's Want 70" },
+  { type = "trait", subject = "npc", npc_id = "npc_mark", trait = "want", op = "gte", value = 70, label = "Mark's Lust 70" },
 ]
 
 [[quest_cards]]
@@ -8788,7 +8797,7 @@ ready_canvas = "mark_09_his_chair"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Corruption 40 (Bold)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Exhibitionism 40 (Showing)" },
-  { type = "trait", subject = "npc", npc_id = "npc_mark", trait = "want", op = "gte", value = 80, label = "Mark's Want 80" },
+  { type = "trait", subject = "npc", npc_id = "npc_mark", trait = "want", op = "gte", value = 80, label = "Mark's Lust 80" },
 ]
 
 [[quest_cards]]
@@ -10167,7 +10176,7 @@ ready_canvas = "tom_02_uniform_rule"
 goals = [
   { flag = "cafe_job", op = "is_true", label = "Cafe job" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Exhibitionism 20 (Daring)" },
-  { type = "trait", subject = "npc", npc_id = "npc_tom", trait = "want", op = "gte", value = 10, label = "Tom's Want 10" },
+  { type = "trait", subject = "npc", npc_id = "npc_tom", trait = "want", op = "gte", value = 10, label = "Tom's Lust 10" },
 ]
 
 [[quest_cards]]
@@ -10183,7 +10192,7 @@ ready_canvas = "tom_03_the_tip_jar"
 goals = [
   { flag = "cafe_job", op = "is_true", label = "Cafe job" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Exhibitionism 20 (Daring)" },
-  { type = "trait", subject = "npc", npc_id = "npc_tom", trait = "want", op = "gte", value = 20, label = "Tom's Want 20" },
+  { type = "trait", subject = "npc", npc_id = "npc_tom", trait = "want", op = "gte", value = 20, label = "Tom's Lust 20" },
 ]
 
 [[quest_cards]]
@@ -10200,7 +10209,7 @@ goals = [
   { flag = "cafe_job", op = "is_true", label = "Cafe job" },
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Corruption 40 (Bold)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Exhibitionism 20 (Daring)" },
-  { type = "trait", subject = "npc", npc_id = "npc_tom", trait = "want", op = "gte", value = 30, label = "Tom's Want 30" },
+  { type = "trait", subject = "npc", npc_id = "npc_tom", trait = "want", op = "gte", value = 30, label = "Tom's Lust 30" },
 ]
 
 [[quest_cards]]
@@ -10217,7 +10226,7 @@ goals = [
   { flag = "cafe_job", op = "is_true", label = "Cafe job" },
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Corruption 40 (Bold)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Exhibitionism 20 (Daring)" },
-  { type = "trait", subject = "npc", npc_id = "npc_tom", trait = "want", op = "gte", value = 40, label = "Tom's Want 40" },
+  { type = "trait", subject = "npc", npc_id = "npc_tom", trait = "want", op = "gte", value = 40, label = "Tom's Lust 40" },
 ]
 
 [[quest_cards]]
@@ -10234,7 +10243,7 @@ goals = [
   { flag = "cafe_job", op = "is_true", label = "Cafe job" },
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Corruption 40 (Bold)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Exhibitionism 20 (Daring)" },
-  { type = "trait", subject = "npc", npc_id = "npc_tom", trait = "want", op = "gte", value = 50, label = "Tom's Want 50" },
+  { type = "trait", subject = "npc", npc_id = "npc_tom", trait = "want", op = "gte", value = 50, label = "Tom's Lust 50" },
 ]
 
 [[quest_cards]]
@@ -14486,7 +14495,7 @@ ready_canvas = "laura_05_jake_at_the_door"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Corruption 40 (Bold)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Exhibitionism 40 (Showing)" },
-  { type = "trait", subject = "npc", npc_id = "npc_laura", trait = "want", op = "gte", value = 40, label = "Laura's Want 40" },
+  { type = "trait", subject = "npc", npc_id = "npc_laura", trait = "want", op = "gte", value = 40, label = "Laura's Lust 40" },
   { flag = "jake_date_went", op = "is_true", label = "Go out with Jake on a Saturday" },
 ]
 
@@ -14875,7 +14884,7 @@ effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value =
 flagEffects = [{ targetType = "player", flag = "hale_met", op = "set" }, { targetType = "player", flag = "nadia_met", op = "set" }, { targetType = "player", flag = "desk_guy_met", op = "set" }, { targetType = "player", flag = "rival_met", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Under the desk, with the class there. (Needs Hungry)"
+text = "Under the desk, with the class there. (Needs Corruption 60)"
 targetType = "node"
 nodeId = "hungry"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
@@ -14981,7 +14990,7 @@ name = "Further"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "That's further than you go in this release of First Term. It comes later, when you're Hungry."
+content = "That's further than you go in this release of First Term. It comes later, when your Corruption reaches 60."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -15106,7 +15115,7 @@ effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value =
 flagEffects = [{ targetType = "player", flag = "desk_guy_met", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Make the whole row look. (Needs Hungry)"
+text = "Make the whole row look. (Needs Corruption 60)"
 targetType = "node"
 nodeId = "hungry"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
@@ -15224,7 +15233,7 @@ name = "Further"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "That's further than you go in this release of First Term. It comes later, when you're Hungry."
+content = "That's further than you go in this release of First Term. It comes later, when your Corruption reaches 60."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -15339,7 +15348,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subjec
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Let the whole lab see. (Needs Hungry)"
+text = "Let the whole lab see. (Needs Corruption 60)"
 targetType = "node"
 nodeId = "hungry"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
@@ -15447,7 +15456,7 @@ name = "Further"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "That's further than you go in this release of First Term. It comes later, when you're Hungry."
+content = "That's further than you go in this release of First Term. It comes later, when your Corruption reaches 60."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -15570,7 +15579,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subjec
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Pose for the class. (Needs Watched)"
+text = "Pose for the class. (Needs Exhibitionism 60)"
 targetType = "node"
 nodeId = "watched"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
@@ -15671,7 +15680,7 @@ name = "Further"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "That's further than you go in this release of First Term. It comes later, when you're Watched."
+content = "That's further than you go in this release of First Term. It comes later, when your Exhibitionism reaches 60."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -18342,7 +18351,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", 
 [[canvases]]
 id   = "park_walk"
 name = "Walk the path"
-description = "A walk in the park: who she passes, what they see. Once a day. The next locked act is shown, naming Hungry."
+description = "A walk in the park: who she passes, what they see. Once a day. The next locked act is shown, naming Corruption 60."
 
 [canvases.trigger]
 location = "park"
@@ -18386,7 +18395,7 @@ locationId = "park"
 time_progression_minutes = 30
 
 [[canvases.nodes.exit_block.choices]]
-text = "Let strangers see. (Needs Hungry)"
+text = "Let strangers see. (Needs Corruption 60)"
 targetType = "node"
 nodeId = "wall"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
@@ -20304,13 +20313,16 @@ time_progression_minutes = 10
 [[canvases]]
 id   = "living_tv"
 name = "Watch TV"
-description = "The remote alone (DECISIONS 85-86): five channels, each with a clip. The plain four: 30 min, energy +5 once a day. Channel 5: corruption +1 every watch, cap 19 at Good Girl, 39 at Curious; touch herself at Curious, +2, cap 39."
+description = "The remote alone (DECISIONS 85-86, 91): at most five sessions a day, then the row greys out. Five channels, each with a clip. The plain four: 30 min, energy +5 once a day. Channel 5: corruption +1 every watch, cap 19 at Good Girl, 39 at Curious; touch herself at Curious, +2, cap 39."
 
 [canvases.trigger]
 location = "home_living_room"
 is_repeatable = true
 priority = 3
 is_active = true
+max_triggers_per_day = 5
+show_when_blocked = true
+cooldown_message = "Not now."
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_living_room", operator = "is_absent" }] }
 
 [[canvases.trigger.schedules]]
@@ -20813,7 +20825,7 @@ locationId = "home_hall"
 time_progression_minutes = 2
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go to the bed. (Needs Hungry)"
+text = "Go to the bed. (Needs Corruption 60)"
 targetType = "node"
 nodeId = "hl_hungry"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
@@ -20825,7 +20837,7 @@ name = "Further"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "That's further than you go in this release of First Term. It comes later, when you're Hungry."
+content = "That's further than you go in this release of First Term. It comes later, when your Corruption reaches 60."
 
 [canvases.nodes.exit_block]
 type = "choices"

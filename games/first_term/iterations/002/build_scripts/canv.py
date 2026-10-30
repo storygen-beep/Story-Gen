@@ -323,8 +323,8 @@ def emit_card(card):
 
 STAGE = {"corruption": {20: "Curious", 40: "Bold", 60: "Hungry"},
          "exhibitionism": {20: "Daring", 40: "Showing", 60: "Watched"}}
-TRAIT_NAME = {"corruption": "Corruption", "exhibitionism": "Exhibitionism", "want": "Want", "warmth": "Warmth",
-              "power": "Power", "laura_suspicion": "Mom's suspicion", "intelligence": "Intelligence"}
+TRAIT_NAME = {"corruption": "Corruption", "exhibitionism": "Exhibitionism", "want": "Lust", "warmth": "Love",
+              "power": "Dominance", "laura_suspicion": "Mom's suspicion", "intelligence": "Intelligence"}
 NPC_NAME = {"npc_ryan": "Ryan", "npc_laura": "Laura", "npc_mark": "Mark", "npc_tom": "Tom", "npc_zoe": "Zoe",
             "npc_hale": "Dr. Hale", "npc_jake": "Jake"}
 COUNTER_OWNER = {lad["counter"]: npc for npc, lad in LADDERS.items()}
