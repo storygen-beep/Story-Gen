@@ -139,3 +139,9 @@ parsed rounds match the screenshots.
   nothing, and the audit refuses anything under 300. Capture now reloads the page on that
   message or screen and stores no snapshots while it shows (test
   `test_capture_notices_inactivity_disconnect`). Run 3, 330 minutes, started 2026-10-31 evening.
+- Run 3 (19:14 to 00:43): 28 automatic reloads, each followed by a new game socket and more
+  rounds; 280 round ids seen. Parsing runs 2 and 3 together gives 260 complete rounds, every one
+  matching its `GAME_RESULT`; 30 left out (29 cut by a reload or the end, 1 joined mid-deal).
+  No logged round breaks a dealing rule (Bahar first, alternate, stop on the first rank match;
+  `audit.integrity_problems`). `audit.py` refuses the log: 260 is under the 300 minimum, so no
+  statistical result exists yet. Run 4, 90 minutes, started 2026-11-01 to pass 300.
