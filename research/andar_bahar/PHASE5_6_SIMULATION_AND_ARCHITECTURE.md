@@ -9,6 +9,11 @@ Numbers from `table_simulation.py` in this folder.
 
 Both have P(win) = 51.5006% on the 0.9:1 side. Minimum stake taken as ₹20, maximum ₹500,000.
 
+Update 2026-10-31: the chosen table, 1x Andar Bahar, has limits ₹100 to ₹200,000. Rerun with
+those limits (`simulate`, 200,000 sessions): bold play unchanged at 4.50% (exact 4.48%), because
+every bold-play stake from ₹500 is at least ₹100; martingale from a ₹100 base 3.13%. Bold play
+remains the ceiling.
+
 | strategy | P ≥ ₹1,000 | P ≥ ₹2,500 | P ≥ ₹5,000 | P = ₹10,000 | ruin | median rounds |
 |---|---|---|---|---|---|---|
 | bold play (exact) | 26.4% | 13.6% | 7.0% | **4.48%** | 95.5% | 2 |

@@ -42,9 +42,9 @@ All scripts: `python3 <file>` from this folder. Only dependency is numpy.
 
 | table | provider | first card | 0.9:1 side | notes |
 |---|---|---|---|---|
-| 1x Andar Bahar (1xLIVE) | Ezugi dedicated | Bahar | Bahar | Published RTP Bahar 97.86%, Andar 96.99%. Sides 2.5/3.5/4.5/3.5/14/24/49/119 |
+| 1x Andar Bahar (1xLIVE) | Ezugi dedicated | Bahar | Bahar | Published RTP Bahar 97.86%, Andar 96.99%. Sides 2.5/3.5/4.5/3.5/14/24/49/119. Limits ₹100–₹200,000. URL `casino-search?game=63587` |
 | Andar Bahar | Ezugi | Bahar | Bahar | Standard table, same paytable |
-| Ultimate Andar Bahar | Ezugi | Bahar | Bahar | 20% fee, virtual multiplier draw, RTP Bahar 97.82%, Andar 97.44% |
+| Ultimate Andar Bahar | Ezugi | Bahar | Bahar | 20% fee, virtual multiplier draw, RTP Bahar 97.82%, Andar 97.44%. Limits ₹100–₹200,000. URL `casino-search?game=67426` |
 | OTT Andar Bahar | Ezugi | not read | | extra betting rounds, not captured |
 | Super Andar Bahar | Evolution | Andar | Andar | 501 players seated; ten side bets with multipliers |
 | Andar Bahar | ElCasino (TV Games) | Andar | Andar | Barcode scanner, shuffling machine, two betting rounds, 1st Andar 15:1, 1st Bahar 15.5:1, First 3 120/8/5, cards dealt 2 to 800:1; provider has no public footprint |
@@ -53,7 +53,21 @@ All scripts: `python3 <file>` from this folder. Only dependency is numpy.
 
 ## Open items
 
-1. Laptop availability and OS for the Playwright capture tool.
-2. Table to observe (recommended: Ezugi standard / 1x Andar Bahar, or Evolution Super).
-3. Minimum stake on the chosen Ezugi table (the ₹20 in the simulation is ElCasino's minimum).
-4. Go-ahead to write `capture.py`, `audit.py`, `decide.py` per the Phase 6 design.
+1. Laptop and OS for the Playwright capture tool (this Mac, macOS 15, proposed; not yet confirmed).
+2. ~~Table to observe~~ Chosen 2026-10-31: **1x Andar Bahar**, `casino-search?game=63587`.
+3. ~~Minimum stake~~ ₹100 (on-screen limits line, 2026-10-31). The ceiling does not move: bold play
+   still reaches ₹10,000 with 4.48% (exact) / 4.50% (200,000-session simulation), because no
+   bold-play stake from ₹500 ever falls below ₹100.
+4. Go-ahead to install Playwright + Chromium in a venv and write `capture.py`, `audit.py`,
+   `decide.py`, `make_synthetic.py` per the Phase 6 design.
+
+## Page structure of the game (Claude in Chrome, read-only, 2026-10-31)
+
+- The game client is a cross-origin iframe served from `play.livetables.io` inside the 1xBet page,
+  on both game 63587 and game 67426. Scripts in the 1xBet page cannot read it, and the extension's
+  network log showed only 1xBet's own requests. Claude in Chrome therefore sees the game only as
+  screenshots; it is not a capture route. Playwright can attach to the iframe and its WebSocket
+  traffic; whether round data travels as WebSocket messages is still unverified.
+- Readable on screen: round id and countdown in the footer (e.g. `#17392604276`), result road of
+  about 90 rounds, last seven joker ranks, and the road's own Andar/Bahar percentage summary.
+- No control inside the game was clicked. Balance shown ₹0.00.

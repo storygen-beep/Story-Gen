@@ -628,3 +628,19 @@ padlock, meaning not available to this account as it stands. The only open metho
 generic "Withdrawal" with a 72-hour badge. No minimum amount, fee, or document list visible
 yet. Two of three recommended routes locked on a fresh account is the pattern behind the
 AskGamblers complaints in section 5: a win exists on screen, the route to a bank is gated.
+
+### Table limits and page structure (2026-10-31)
+
+Read from the game's own footer through Claude in Chrome, without interacting with the game:
+
+- "1x Andar Bahar" is game 63587 on the account. Footer: `1x Andar Bahar ₹ 100 - ₹ 200,000`.
+  Paytable on screen matches Table A above: Andar 1:1, Bahar 0.9:1, cards-dealt 2.5 / 3.5 / 4.5 /
+  3.5 / 14 / 24 / 49 / 119 to 1.
+- "Ultimate Andar Bahar" is game 67426. Footer: `Ultimate Andar Bahar ₹ 100 - ₹ 200,000`. Side bets
+  on screen 2 / 3 / 4 / 3 / 12 / 20 / 40 / 100 to 1, as in Table B.
+- Both games load in a cross-origin iframe from `play.livetables.io`. The outer 1xBet page cannot
+  read the game's state; observation has to attach to that frame (Phase 6, `capture.py`).
+- The road summary on game 67426 read 36% Andar / 64% Bahar at the moment of capture, and on game
+  63587 57% / 43%. These are the game's on-screen summaries of a single road of about 90 rounds,
+  not logged data, and no test is pre-registered on fewer than 300 logged rounds. They are recorded,
+  not interpreted.
