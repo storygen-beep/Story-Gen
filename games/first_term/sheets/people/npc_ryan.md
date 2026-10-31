@@ -116,6 +116,23 @@ kiss and his hands); sex waits for Hungry. Lines are samples (guess).
 | dinner | kitchen · Mon, Tue, Thu, Sun 18:00–19:00 | He eats like he's late for something. "Pass the bread, @player.nickname." | @player's foot finds his under the table; he stops chewing. | — at the table, with Laura there: the tease is as far as it goes |
 | random events | bathroom and hall · weekdays 06:45–07:30 | (see the hall's random events) | | |
 
+## The towel at home (DECISIONS 98, LO, 2026-10-31)
+
+In a towel she can't leave the house, so every Ryan hub at home reacts to it, every visit: his room, dinner,
+the couch, and the bathroom door. Built in `iterations/002/build_scripts/ryan.py` (`ryan_towel`, `RT_BATH`)
+on `home_items.towel_set`.
+
+| his Lust | his line (one of three, they take turns) | "Let it slip." (Exhibitionism 20) |
+|---|---|---|
+| under 40 | "Door's free" / looks at the ceiling: "Jesus. Put some clothes on." / red to the ears | turns away: "Jesus, put it back!" |
+| 40–69 | eyes down her bare legs and back up slow / "That towel's shrinking." / thinks about one tug | looks at her tits for three whole seconds, says nothing |
+| 70+ | "You're doing this on purpose." / one finger along the top of the towel: "One pull." / "Mom's going to kill us both." | "Leave it." His hand goes to his shorts. |
+
+- "Drop it." needs Exhibitionism 40, his Lust 70+ and his step 6 (he has seen her in the shower): she stands naked, turns, picks it up slowly.
+- Pays his Lust +2 and her Exhibitionism +1, once a day (`ryan_towel_today`, cleared at midnight). After that it plays and pays nothing.
+- At the bathroom door: no lines (he can't see her through it), only "Knock, and let the towel slip."
+- Laura in the same room breaks her towel rule: "What did I say about towels in this house?" Her Love −3, no pay.
+
 ## Rows a gate needs
 
 | row | gate |

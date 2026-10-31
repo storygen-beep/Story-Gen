@@ -151,6 +151,22 @@ awake. She never says where @player is; the engine can't see that.
 | "home for dinner sweetheart?" | "yes, starving": `dinner_promised` | at dinner: "You came. Sit, sit. It's still hot." · Warmth add +1 more (+2 in all) | Warmth add −1 | "i kept you a plate." · "you said six." (4 hours after the yes, 20:00–23:00, before she sleeps) | Warmth add −2 · `laura_suspicion` add +2 |
 | | "eating out tonight": `said_eating_out` (read for 8 hours) | eating with her anyway: "I thought you were eating out." · `laura_suspicion` add +1 | | none | |
 
+## The towel at home (DECISIONS 98, LO, 2026-10-31)
+
+Laura's kitchen, living room (waiting up) and bedroom (only while she dresses, Saturday 17:00–18:30) hubs
+react to the towel, every visit. Built in `iterations/002/build_scripts/laura.py` (`laura_towel`). The
+kitchen's built line is "Go and get dressed, sweetheart. You'll catch your death." (the row above says "Robe,
+sweetheart. Not at my table." — the sheet and the build already differed before this; LO's call which stays).
+
+| her Love | her line (one of three) | "Let her fix it." (no Exhibitionism gate) |
+|---|---|---|
+| under 40 | "You'll catch your death." / "Clothes, please. This is a family house." / counts who could walk in | tucks it in hard: "Now go and put some clothes on." |
+| 40–69 | tucks it tighter, like you're ten / "You're dripping on my floor." / a smile you can't read | smooths it flat with both hands: "You're getting so grown up." |
+| 70+ | "When did you get a body like that?" / "One of my old dresses would look right on you." / her hand on your bare shoulder | opens it to tuck it again, looks: "There. My good girl." |
+
+- Pays her Love +2 once a day (`laura_towel_today`).
+- Her rule: in Ryan's or Mark's hub, with her in the room, "Let it slip." is caught (her Love −3).
+
 ## Rows a gate needs
 
 | row | gate |

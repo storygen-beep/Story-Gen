@@ -74,6 +74,9 @@ flagEffects = [
   { targetType = "player", flag = "couch_seen", op = "unset" },
   { targetType = "player", flag = "mark_paid_look", op = "unset" },
   { targetType = "player", flag = "mark_tv_paid", op = "unset" },   # channel 5 with Mark pays once a day (DECISIONS 92)
+  { targetType = "player", flag = "ryan_towel_today", op = "unset" },   # the towel at home pays once a day per person (DECISIONS 98)
+  { targetType = "player", flag = "mark_towel_today", op = "unset" },
+  { targetType = "player", flag = "laura_towel_today", op = "unset" },
   { targetType = "player", flag = "cafe_shift_1_today", op = "unset" },
   { targetType = "player", flag = "cafe_shift_2_today", op = "unset" },
   { targetType = "player", flag = "cafe_shift_3_today", op = "unset" },

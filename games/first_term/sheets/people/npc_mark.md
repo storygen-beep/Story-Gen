@@ -117,6 +117,20 @@ per item. Tease from Curious and Mark A 3; from Bold and Mark A 7, the look he p
 **Where Mark is not:** weekday breakfasts (work); after dinner on Monday, Tuesday, Thursday and Friday he
 is in the garage.
 
+## The towel at home (DECISIONS 98, LO, 2026-10-31)
+
+Mark's living room (up late) and kitchen hubs react to the towel, every visit. Bedroom and garage: no
+(LO). Built in `iterations/002/build_scripts/mark.py` (`mark_towel`, `mark_hub(..., towel=True)`).
+
+| his Dominance | his line (one of three) | "Let it slip." (Exhibitionism 20) |
+|---|---|---|
+| under 40 | "Get dressed. This isn't a hotel." / "Put something on." / "Your mother lets you walk round like that?" | one look, then the wall: "Cover yourself. Now." |
+| 40–59 | eyes on her thighs, too long / "That's all you've got on." / wet feet to the knot | prices her tits; "Cover up before your mother sees," and watches her do it |
+| 60+ | "Stand there. Let me look at you." / "Don't you dare go and change." / "Come here." | "Did I say you could cover up?" He looks as long as he likes. |
+
+- "Drop it." needs Exhibitionism 40, his Dominance 60+ and his step 5: "Turn round." "Pick it up. Slowly."
+- Pays his Dominance +2 once a day (`mark_towel_today`). Laura in the room: caught, her Love −3, no pay.
+
 ## Rows a gate needs
 
 | row | gate |
