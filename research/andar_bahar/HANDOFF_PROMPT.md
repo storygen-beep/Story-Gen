@@ -27,15 +27,16 @@ Context you need and must not re-derive:
   scope; do not raise them beyond the facts already recorded.
 - Phases 1 to 5 are complete. The exact model reproduces Ezugi's own published RTP for its
   Andar Bahar table on all ten bets within 0.13 percentage points. The best achievable
-  probability of reaching ₹10,000 from ₹500 is 4.48%, by bold play on the 0.9:1 side
+  probability of reaching ₹10,000 from ₹500 is 4.48%, by bold play on the 0.9:1 side (corrected 2026-10-31: 4.79% on 1x Andar Bahar using the cards-dealt "16-25" bet; see PHASE5_6)
   (Bahar on the Ezugi tables, Andar on Evolution Super Andar Bahar). Every betting
   progression does worse. No observable information changes the next round's probability on
   any table on the account. Under the validated model, a decision-support layer's correct
   output is "skip" on every round; it is to be built so the answer is computed, not asserted.
 - Nine live Andar Bahar tables exist on the account (table in README.md). Ezugi and
   Evolution tables are the verifiable ones. Ezugi Ultimate carries a 20% fee and is worse
-  for the target (2.70%). ElCasino has no public footprint. Side bets everywhere are worse
-  than the main bet.
+  for the target (2.70%). ElCasino has no public footprint. Side bets are worse than the
+  main bet except on the Ezugi 1x table, where cards-dealt "16-25" (98.10%) and "6-10" (97.67%)
+  beat Bahar (97.85%); all bets have negative EV.
 - The user supplies screenshots from an iPhone. Nothing has been bet. No account access
   exists in this session.
 

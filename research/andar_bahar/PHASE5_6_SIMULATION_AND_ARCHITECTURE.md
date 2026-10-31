@@ -51,11 +51,13 @@ not the path. Rule out Ultimate.
 Every side bet on every table prices worse than the main bet (Phase 2 section 10). None
 belong in any plan.
 
+Correction 2026-10-31: on 1x Andar Bahar (Ezugi) two cards-dealt bets beat the main bet. "16-25" at 3.5:1 returns 98.10% (Ezugi's published figure, model 98.103%) against Bahar's 97.85%, and "6-10" returns 97.67%. The earlier statement that every side bet is worse holds for ElCasino (Table C), not for this table. All bets still have negative EV. See "Corrected ceiling" below.
+
 ### Phase 5 conclusion
 
 - Best table for the target: Ezugi standard or 1x Andar Bahar betting Bahar, or Evolution
   Super Andar Bahar betting Andar. Identical mathematics.
-- Best achievable probability: 4.48%, by betting the whole bankroll until it reaches ₹10,000
+- (Corrected below to 4.79% on 1x Andar Bahar.) Best achievable probability: 4.48%, by betting the whole bankroll until it reaches ₹10,000
   or ₹0. Expected number of rounds: about two.
 - Every progression system lowers that number and raises the ruin probability.
 - Minimum withdrawal on the account is ₹1,000, so no outcome under ₹1,000 is collectable.
@@ -137,3 +139,44 @@ Neither matters: the decision is settled before the joker is drawn.
   recording on the phone and offline frame reading, which is slower and less reliable.
 - The table to observe. Recommended: the Ezugi "Andar Bahar" or "1x Andar Bahar" table, or
   Evolution Super Andar Bahar. Both have a provider-published paytable the model reproduces.
+
+## Corrected ceiling: all bets on 1x Andar Bahar (2026-10-31)
+
+Phase 5 searched one bet. `tools/optimal_reach.py` searches every bet on the table each round as a
+Markov decision problem (value iteration, ₹10 grid, minimum stake ₹100, one bet per round).
+
+| allowed bets | P(₹500 reaches ₹10,000) |
+|---|---|
+| Andar only | 4.34% |
+| Bahar only | 4.46% (exact solver without grid: 4.48%) |
+| cards 6-10 only | 4.74% |
+| cards 16-25 only | 4.79% |
+| cards 41-49 only | 3.90% |
+| any bet, best each round | **4.79%** |
+
+The optimum at ₹500 is the whole bankroll on cards-dealt "16-25" (3.5:1, wins 21.80% of rounds,
+house edge 1.90%). A win leaves ₹2,250. Ruin probability stays near 95%. The gain over Bahar,
+0.33 points, comes from the smaller edge and from needing fewer wins at 3.5:1.
+
+Limits: combinations of several cards-dealt bets in one round were not searched; the ₹10 grid
+rounds winnings down. Neither can turn a negative-EV game positive, so `decide.py`'s per-round
+output is unchanged: SKIP.
+
+## Phase 7 steps 1 and 2: audit on synthetic data (2026-10-31)
+
+`tools/phase7_synthetic.py --reps 100`: share of 100 independent synthetic logs per cell on which
+the audit's overall result was FAIL.
+
+| case | 300 rounds | 1,000 | 3,000 | 10,000 |
+|---|---|---|---|---|
+| fair deal | 1% | 0% | 2% | 1% |
+| first side's win rate +3 points | 1% | 14% | 59% | 100% |
+| 5% of rounds dealt from the wrong side | 100% | 100% | 100% | 100% |
+
+- Fair data: false alarms at the 1% design rate (2/100 at 3,000 is within sampling noise of 1%).
+- Injected 3-point bias: caught in every replicate at 10,000 rounds, the size the plan states;
+  not reliably below about 3,000. A two-hour capture (a few hundred rounds) **cannot** detect a
+  bias of this size. Its purpose is to prove the capture is correct, not to test the game.
+- Dealing-order error: caught by the integrity family in every replicate at every size.
+
+Steps 1 and 2 pass. The tests in `tools/test_tools.py` repeat one replicate of each case.

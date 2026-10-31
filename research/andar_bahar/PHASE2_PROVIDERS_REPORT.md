@@ -621,6 +621,8 @@ licences and published mathematics all check. Ultimate adds a software multiplie
 a 20% fee for the same edge with far more variance. ElCasino is unverifiable. Side bets on
 every table are worse than the main bet, by 2 to 24 points.
 
+Correction 2026-10-31: on 1x Andar Bahar (Ezugi) two cards-dealt bets beat the main bet. "16-25" at 3.5:1 returns 98.10% (Ezugi's published figure, model 98.103%) against Bahar's 97.85%, and "6-10" returns 97.67%. The earlier statement that every side bet is worse holds for ElCasino (Table C), not for this table. All bets still have negative EV.
+
 ### Withdrawal page, first look (2026-10-30)
 
 INR withdrawal, "Recommended" tab: three methods. "Bank Transfer new" and "iCash.One" show a
