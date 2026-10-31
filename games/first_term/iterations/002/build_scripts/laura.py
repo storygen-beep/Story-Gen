@@ -512,6 +512,35 @@ add_item("study", "Study at the kitchen table.", HER_EVE + [tod("19:00", "22:00"
          tease={"label": "Let her keep her hand there.", "ref": f"{LS}:94", "gate": [CURIOUS, trait("laura_step", "gte", 1)],
                 "eff": [warm(L)], "what": "Laura, study at the table: tease (Curious, Laura C 1)"})
 hub_nodes.append(hungry_node(K))
+# ── the towel at home (LO, 2026-10-31, DECISIONS 98): her reaction by her Love, every visit (<40, 40-69,
+#    70+, her hub's own cut points); "Let her fix it." pays her Love +2 once a day. No Daring gate: it's a
+#    mother fussing, not a tease. In her room only while she's up and dressing. ──
+LAURA_TOWEL_FIX = [
+    [P("You stand still. She tugs the towel straight and tucks the end in hard over your tits."), D(L, "There. Now go and put some clothes on.")],
+    [P("She tucks the towel again over your tits, slower than she needs to, and smooths it flat with both hands."), D(L, "You're getting so grown up.")],
+    [P("She opens the towel to tuck it again. For a second your tits are bare between her hands, and she looks at them. Then she wraps it tight round you and smooths it down over your hips."), D(L, "There. My good girl.")],
+]
+
+
+def laura_towel(hub, back, first_low, when=()):
+    return towel_set(
+        hub, L, "warmth", 40, 70, "laura_towel_today", [warm(L, 2)], back, when=when,
+        lines=[
+            [first_low,
+             D(L, "Clothes, please. This is a family house."),
+             P("Laura looks at the towel and then at the door, like she's counting who could walk in.")],
+            [GC(cond(TOWEL_ON), P("Laura tuts and tucks the towel tighter over your tits, like you're ten."), D(L, "You'll catch your death.")),
+             D(L, "Dry your hair at least, sweetheart. You're dripping on my floor."),
+             P("She looks you up and down, wet legs to wet hair, and smiles in a way you can't read.")],
+            [GC(cond(TOWEL_ON), D(L, "Look at you. When did you get a body like that?"), P("She says it softly, and her eyes don't leave the towel.")),
+             D(L, "One of my old dresses would look right on you, you know."),
+             P("She pushes a wet strand of hair off your face and leaves her hand on your bare shoulder.")],
+        ],
+        slip=LAURA_TOWEL_FIX, slip_label="Let her fix it.", slip_gate=())
+
+
+DEATH = D(L, "Go and get dressed, sweetheart. You'll catch your death.")
+LT_KITCHEN = laura_towel("hub_laura_kitchen", K, DEATH)
 UNIFORM_LINES = [
     G(cond(NORMAL_ON), D(L, "Look at you. My working girl. Sit, I'll make you something.")),
     G(cond(SEXY_ON), P("Laura looks at the open top button for a long second."), D(L, "Is that the uniform, or Tom's idea?")),
@@ -551,7 +580,7 @@ out.append({
             G(cond(DRESS_ON), D(L, "It never fit me like that."), P("Her hand smooths the hip of it without thinking.")),
             G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}, {"type": "worn_exposure", "operator": "eq", "value": 0}),
               P("Her eyes stop on your chest. Then she pours the coffee.")),
-            G(cond({"type": "worn_type", "operator": "eq", "value": "towel"}), D(L, "Go and get dressed, sweetheart. You'll catch your death.")),
+            *LT_KITCHEN[0],
             *UNIFORM_LINES,
             G(cond(*MADE_UP), D(L, "You did your face. Who's that for?")),
             G(cond(trait("hygiene", "lt", 30), flag("hygiene_off", False)), D(L, "Sweetheart. Shower. Today.")),
@@ -559,6 +588,7 @@ out.append({
             G(cond(ntrait(L, "warmth", "gte", 70)), P("She touches your hair when she passes. She's on your side, whatever you've done.")),
         ], [
             *hub_choices,
+            *LT_KITCHEN[1],
             go("Talk to her.", node="talk", mins=20, cond_=cond(flag("laura_talk_today", False)),
                flags=[fset("laura_talk_today")],
                eff=[{"targetType": "npc", "npcId": L, "trait": "warmth", "op": "add", "value": 2, "cap": 100}]),
@@ -576,6 +606,7 @@ out.append({
               P("Halfway through she wrinkles her nose and steps back, and the easy goes out of it.")),
         ], [go("Go.", loc=K, mins=5)]),
         *hub_nodes,
+        *LT_KITCHEN[2],
     ]})
 
 # ── waiting up on Saturday nights, in the dark living room: a film or the TV with her ──
@@ -590,6 +621,7 @@ for args, kw in [
       [energy(5), warm(L)], 60), {}),
 ]:
     c, n = item(*args, **kw); lr_choices += c; lr_nodes += n
+LT_LIVING = laura_towel("hub_laura_living_room", "home_living_room", DEATH)
 out.append({
     "id": "hub_laura_living_room", "name": "Laura, waiting up",
     "description": "Laura waiting up in the dark living room on Saturday nights; she can see the front door. A film (+2 Warmth) or the TV with her (home_life).",
@@ -602,8 +634,9 @@ out.append({
                  D(L, "Come and sit with me. It's nice in the dark."),
                  D(L, "Who's bringing you home tonight?")),
             G(cond(trait("laura_step", "gte", 5)), D(L, "I saw you, you know. On the step. I didn't look away.")),
-        ], [*lr_choices, go("Leave her be.", loc="home_hall")]),
-        *lr_nodes,
+            *LT_LIVING[0],
+        ], [*lr_choices, *LT_LIVING[1], go("Leave her be.", loc="home_hall")]),
+        *lr_nodes, *LT_LIVING[2],
     ]})
 
 # ── their room: Laura dressing on Saturday evenings (her hair), or asleep at night ──
@@ -619,6 +652,7 @@ bd_choices, bd_nodes = item("hair", "Let her do your hair.", DRESSING, "made_up_
 ASLEEP_HOURS = [(wd(0, 1, 2, 3, 4, 5), tod("22:00", "07:00")), (wd(6), tod("22:00", "00:00")), (wd(6), tod("01:00", "07:00"))]
 # Laura is awake and alone Sun-Fri 22:00-23:00 (DECISIONS 82), so a line saying she is asleep skips that hour too.
 LAURA_ASLEEP_HOURS = [(wd(0, 1, 2, 3, 4), tod("23:00", "07:00")), (wd(5), tod("22:00", "07:00")), (wd(6), tod("23:00", "00:00")), (wd(6), tod("01:00", "07:00"))]
+LT_BED = laura_towel("hub_laura_bedroom", "home_master_bedroom", DEATH, when=DRESSING)
 out.append({
     "id": "hub_laura_bedroom", "name": "Laura",
     "description": "Laura in her room: dressing on Saturday evenings with the door open (her hair, home_life item 12), or asleep at night (her face; home_master_bedroom.md:36-45).",
@@ -636,14 +670,15 @@ out.append({
             *[G(cond(*hrs),
                 P("Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. She doesn't stir."))
               for hrs in LAURA_ASLEEP_HOURS],
-        ], [*bd_choices,
+            *LT_BED[0],
+        ], [*bd_choices, *LT_BED[1],
             go("Help her choose.", node="choose", mins=20, cond_=cond(*DRESSING)),
             go("Back out.", loc="home_hall")]),
         node("choose", "Black or green", [
             P("You make her try both. Then the black again. She turns side to side in the mirror while you tell her the truth: the green."),
             D(L, "The green it is. Don't tell Mark it was your idea."),
         ], [go("Leave her to finish.", loc="home_hall")]),
-        *bd_nodes,
+        *bd_nodes, *LT_BED[2],
     ]})
 
 # ── her curfew call (npc_laura.md:130-137): while the curfew is on, Friday 21:00-22:00, Laura

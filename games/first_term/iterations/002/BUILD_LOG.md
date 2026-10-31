@@ -979,3 +979,15 @@ sheets' own, and none is a tease, touch or paid look.
   - the whole page fits on one phone screen (last row ends at 814px of 844).
 - Other probes: `cast_list` 16/16, `sidebar` 12/12, `sched_day` 12/12, `labels` 4/4, `mark_tv` 6/6. `tv_cap` was 7/8 once ("next day: Watch TV is back"), then 8/8 on two re-runs, with no TV code touched.
 - Engine tests 770 passed (6 new in `test_quests_list.py`).
+
+## 2026-10-31: the towel at home (DECISIONS 98, LO)
+
+- `home_items.py`: `towel_set()` (three meter bands, one flat pool of lines per band, the towel-only choices, a paid copy and a same-day unpaid copy, Laura's catch) and `TOWEL_CAUGHT`; `ryan_towel_today`, `mark_towel_today`, `laura_towel_today` added to `DAILY` and to `[engine.daily_tick]` in the hand-written `0_systems_spec.toml`.
+- `ryan.py`: room, dinner, couch (Lust <40 / 40–69 / 70+; "Let it slip." Exhibitionism 20; "Drop it." Exhibitionism 40, Lust 70+, step 6; Lust +2 and Exhibitionism +1); the bathroom door gets only "Knock, and let the towel slip.". The single towel lines moved into the low band.
+- `mark.py`: `mark_hub(..., towel=True)` on the living room and kitchen only (Dominance <40 / 40–59 / 60+; "Drop it." at step 5; Dominance +2). `laura.py`: kitchen, waiting up, dressing only (Love <40 / 40–69 / 70+; "Let her fix it.", no Exhibitionism gate; Love +2).
+- Laura in the room when she lets it slip near Ryan or Mark: `towel_caught`, Laura's Love −3, no pay, the day's flag set.
+- Every exit out of a towel screen goes to the hall: a first build sent them back to the hub's own room, and "a button does something" failed on 9 buttons (the same screen comes back).
+- Media: 5 new pools (`sex/towel_ryan_slip_t4`, `towel_ryan_drop_t4`, `towel_ryan_door_slip_t4`, `towel_mark_slip_t4`, `towel_mark_drop_t4`), empty; the harvest is LO's.
+- Sheets `people/npc_ryan.md`, `npc_mark.md`, `npc_laura.md` get a towel section, waiting for LO's re-sign. Snapshot: `first_term_snapshots/20261031_towel_before/`.
+- Rebuilt with dev + debug. Gates 61/89, the same pass/fail on every gate. Explicit floor 12.8% to 17.0% of repeatable beats; 54/76 explicit beats carry a clip (71%, floor 50%). "Her climb" (already failing) went from 10 to 17 problems: the towel pay makes Ryan's room hub and others count as paid repeatables open on a new save.
+- Probe `towel.js` 22/22, 0 page errors: the band line follows the meter; Daring 19 / 20 and the Drop gates; pay once, unpaid the same day; `advanceDay()` clears the flag; dressed shows nothing; Laura at dinner catches it (Love −3); Mark Drop +2; Mark's garage untouched; Laura's fix without Daring, Love +2; her room only while she dresses; the bathroom knock.

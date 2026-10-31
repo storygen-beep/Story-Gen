@@ -39,7 +39,8 @@ def since(key, op, hours=HOURS):
 # Every brake flag a home item sets; each one is unset in [engine.daily_tick] (0_systems_spec.toml).
 DAILY = ["ate_breakfast", "had_coffee", "ate_dinner", "helped_cook", "did_dishes", "had_drink_home",
          "watched_tv", "movie_night", "did_laundry", "sunned", "studied_home", "made_up_today",
-         "hung_washing", "home_event", "couch_seen", "mark_paid_look", "mark_tv_paid"]
+         "hung_washing", "home_event", "couch_seen", "mark_paid_look", "mark_tv_paid",
+         "ryan_towel_today", "mark_towel_today", "laura_towel_today"]
 
 
 def _with(c, extra):
@@ -179,3 +180,68 @@ def watch_plain(back, extra_eff=()):
             go("Watch a while.", loc=back, mins=30, cond_=cond(flag("watched_tv")))]
 
 
+
+
+# The towel at home (LO, 2026-10-31, DECISIONS 98). In a towel she can't leave the house, so the towel
+# is a home thing: every home hub reacts to it, every visit, by that person's own meter in three bands
+# (the same cut points the hub's own ladder lines use). The towel-only choice pays once a day per
+# person (a *_today flag in DAILY); a second copy plays and pays nothing, the mark_tv_paid pattern.
+TOWEL_ON = {"type": "worn_type", "operator": "eq", "value": "towel"}
+# Laura in the same room when she lets it slip near Ryan or Mark: her rule, broken in front of her.
+TOWEL_CAUGHT = [
+    P("You loosen the tuck and the towel starts to slip off your tits, and then you see Laura watching you."),
+    D("npc_laura", "What did I say about towels in this house?"),
+    P("You pull it tight and go. Behind you she says nothing at all to him, and that's worse."),
+]
+
+
+def towel_set(hub, npc, meter, lo, hi, today, pay, back, lines=(), slip=None, slip_label="Let it slip.",
+              slip_gate=(DARING,), slip_lead=(), slip_media=None, drop=None, drop_gate=(), drop_media=None,
+              caught_by=None, caught=None, when=()):
+    """Returns (hub_blocks, hub_choices, nodes) for one hub.
+
+    lines / slip: three lists of blocks, one per band (meter < lo, lo..hi-1, >= hi).
+    drop: blocks for the top band only, behind drop_gate (Showing and a step).
+    caught_by: an NPC whose rule the slip breaks when she is in the same room (Laura, 2_one_shots
+      "not having the two of you in that hall in towels"): the slip goes to `towel_caught` instead,
+      her Love -3, no pay, and the day's flag still set."""
+    assert today in DAILY, today
+    bands = [[ntrait(npc, meter, "lt", lo)],
+             [ntrait(npc, meter, "gte", lo), ntrait(npc, meter, "lt", hi)],
+             [ntrait(npc, meter, "gte", hi)]]
+    base = [TOWEL_ON, *when]
+    # One flat pool per band, every entry a group on the same condition: a group inside a pool inside a
+    # group nests past the importer's depth 4 and gets flattened, and a pool of mixed types warns.
+    def _entry(b, c):
+        return GC(c, *(b["blocks"] if b.get("type") == "group" else [b]))
+    blocks = [POOL(*[_entry(b, cond(*base, *bands[i])) for b in ls], pid=f"{hub}_towel_{i}")
+              for i, ls in enumerate(lines)]
+    safe = [here(caught_by, back, False)] if caught_by else []
+    choices, nodes = [], []
+
+    def paid(label, nid, gate):
+        return [go(label, node=nid, mins=5, cond_=cond(*base, *gate, *safe, flag(today, False)),
+                   eff=list(pay), flags=[fset(today)]),
+                go(label, node=nid, mins=5, cond_=cond(*base, *gate, *safe, flag(today)))]
+
+    def back_out(label):
+        # Out to the hall, as every hub's own leave does: back to `back` is the same screen again
+        # (gates.py "a button does something").
+        return [go(label, loc="home_hall", mins=2)]
+
+    if slip:
+        choices += paid(slip_label, "towel_slip", slip_gate)
+        if caught_by:
+            choices.append(go(slip_label, node="towel_caught", mins=2, cond_=cond(*base, *slip_gate, here(caught_by, back)),
+                              eff=[npc_add(caught_by, "warmth", -3)], flags=[fset(today)]))
+        nodes.append(node("towel_slip", slip_label.rstrip("."),
+                          [*slip_lead, *[G(cond(*bands[i]), *bs) for i, bs in enumerate(slip)],
+                           *([slip_media] if slip_media else [])],
+                          back_out("Tuck it back in.")))
+    if drop:
+        choices += paid("Drop it.", "towel_drop", [*bands[2], *drop_gate])
+        nodes.append(node("towel_drop", "Drop it", [*drop, *([drop_media] if drop_media else [])],
+                          back_out("Wrap it back round you.")))
+    if caught_by:
+        nodes.append(node("towel_caught", "Caught", list(caught), [go("Go.", loc="home_hall", mins=2)]))
+    return blocks, choices, nodes

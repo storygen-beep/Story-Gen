@@ -515,8 +515,51 @@ LEAKS_KITCHEN = [
     G(cond(trait("mark_step", "eq", 7)), P("His chair is pulled out from the table for nobody.")),
     G(cond(trait("mark_step", "eq", 8)), P("He keeps looking at the fridge. At the red circle.")),
 ]
-def mark_hub(cid, loc, name, setting, extra=(), awake=True, leaks=(), items=(), leave="Leave him to it.", leave_to="home_hall"):
+# ── the towel at home (LO, 2026-10-31, DECISIONS 98): his reaction by his Dominance, every visit, in his
+#    hub's own bands (<40, 40-59, 60+); "Let it slip." (Daring) pays his Dominance +2 once a day; "Drop it."
+#    needs Showing, his top band and step 5. Living room and kitchen only (LO: bedroom and garage out). ──
+MARK_TOWEL_LEAD = [P("You loosen the tuck and let the towel slip. It drops to your waist before you catch it, and your tits are out in front of him, wet and bare, your nipples hard.")]
+MARK_TOWEL_SLIP = [
+    [P("Mark looks straight at your tits for one second, then at the wall."), D(M, "Cover yourself. Now."),
+     P("You pull the towel back up. He doesn't look at you again until you've gone.")],
+    [P("Mark doesn't look away. He looks at your tits like he's pricing them, slow, and the can stops halfway to his mouth."),
+     D(M, "Cover up before your mother sees."), P("He waits until you do. He watches you do it.")],
+    [P("Mark looks at your bare tits and leans back."), D(M, "Did I say you could cover up?"),
+     P("You hold the towel at your waist with your tits out. He looks for as long as he likes, and then he nods, and you're allowed.")],
+]
+MARK_TOWEL_DROP = [
+    P("You undo the knot and let the towel drop to the floor. You're naked in his house, still wet from the shower. Your tits are bare and your nipples are hard. Your cunt is bare. Mark looks at your tits, then down at your cunt, and he takes his time about it. His cock is hard in his jeans, and he doesn't hide it. He puts the beer down."),
+    D(M, "Turn round."),
+    P("You turn round. You show him your bare ass, wet from the shower, and you hold still while he looks at it."),
+    D(M, "Pick it up. Slowly."),
+    P("You bend and pick the towel up off the floor with your ass to him, slow, the way he said, and you feel his eyes on your cunt the whole way down."),
+]
+
+
+def mark_towel(cid, loc):
+    return towel_set(
+        cid, M, "power", 40, 60, "mark_towel_today", [npc_add(M, "power", 2)], loc,
+        lines=[
+            [D(M, "Get dressed. This isn't a hotel."),
+             GC(cond(TOWEL_ON), P("Mark looks at the towel, then at his beer."), D(M, "Put something on, @player.")),
+             D(M, "Your mother lets you walk round like that?")],
+            [P("Mark's eyes go down the towel to your thighs and stay there, too long for a step-father."),
+             GC(cond(TOWEL_ON), D(M, "That's all you've got on."), P("It isn't a question. He doesn't look away.")),
+             P("He looks at you over the rim of the can, slow, from your wet feet to the knot over your tits.")],
+            [GC(cond(TOWEL_ON), D(M, "Stand there. Let me look at you."), P("He doesn't tell you to get dressed. He tells you where to stand.")),
+             GC(cond(TOWEL_ON), D(M, "Don't you dare go and change."), P("His eyes stay on the knot over your tits.")),
+             GC(cond(TOWEL_ON), P("He looks at the towel like it belongs to him, and what's under it too."), D(M, "Come here."))],
+        ],
+        slip=MARK_TOWEL_SLIP, slip_lead=MARK_TOWEL_LEAD,
+        slip_media=VID("a young woman letting her bath towel slip off her breasts in front of an older man on a couch", "girl drops towel in front of older man", "towel slip flash stepdad", pool_dir="sex/towel_mark_slip_t4"),
+        drop=MARK_TOWEL_DROP, drop_gate=[SHOWING, trait("mark_step", "gte", 5)],
+        drop_media=VID("a young woman standing naked with her bath towel on the floor, an older man looking at her", "girl drops towel naked older man", "towel drop naked stepdad", pool_dir="sex/towel_mark_drop_t4"),
+        caught_by=L, caught=TOWEL_CAUGHT)
+
+
+def mark_hub(cid, loc, name, setting, extra=(), awake=True, leaks=(), items=(), leave="Leave him to it.", leave_to="home_hall", towel=False):
     choices, nodes = [], []
+    t_blocks, t_choices, t_nodes = mark_towel(cid, loc) if towel else ([], [], [])
     for args, kw in items:
         c, n = item(*args, **kw); choices += c; nodes += n
     if any(kw.get("hungry") for _, kw in items):
@@ -529,14 +572,15 @@ def mark_hub(cid, loc, name, setting, extra=(), awake=True, leaks=(), items=(), 
                 G(cond(ntrait(M, "power", "lt", 40)), P("He doesn't give you orders any more. He waits to hear what you want.")),
                 G(cond(ntrait(M, "power", "gte", 60)), P("He looks at you like you're one more thing in this house that's his.")),
                 G(cond(ntrait(M, "want", "gte", 50)), T("He wants you. He's stopped trying to hide it from you, only from her.")),
-            ] if awake else []), choices + [go(leave, loc=leave_to)])] + nodes}
+                *t_blocks,
+            ] if awake else []), choices + t_choices + [go(leave, loc=leave_to)])] + nodes + t_nodes}
 
 LR = "home_living_room"
 out.append(mark_hub("hub_mark_living_room", LR, "Mark, up late", "the living room late", [
     P("Mark is on the couch with the TV low and a beer on his knee."),
     G(cond(LAURA_IN_BED), P("Laura's gone up."), D(M, "Shut the door. Your mother's upstairs.")),
     POOL(D(M, "Can't sleep, @player?"), D(M, "Sit if you're sitting. Don't hover."), pid="mark_late_lines"),
-], leaks=LEAKS_LATE, items=[
+], leaks=LEAKS_LATE, towel=True, items=[
     (("beer", "Have a beer with him.", [], "had_drink_home", LR,
       [P("The game on low."), G(cond(LAURA_IN_BED), D(M, "Laura's upstairs. Keep it down.")), P("He hands you a can without asking.")],
       None, 30),
@@ -606,7 +650,7 @@ out.append(mark_hub("hub_mark_kitchen", K, "Mark, in the kitchen", "the kitchen"
     G(cond(wd(6), tod("08:00", "18:00")), P("Sunday. Mark's at the table with the paper and his coffee, in the chair at the head of it.")),
     G(cond(wd(6), tod("08:00", "12:00")), D(M, "Morning.")),
     G(cond(wd(0, 1, 3, 4), tod("18:00", "19:00")), P("Mark's at the table for dinner, sleeves rolled, already eating.")),
-], leaks=LEAKS_KITCHEN, items=[
+], leaks=LEAKS_KITCHEN, towel=True, items=[
     (("breakfast", "Sunday breakfast with him.", [wd(6), tod("08:00", "11:00")], "ate_breakfast", K,
       [P("He slides the paper over."), G(cond(flag("rent_starts"), flag("sunday_counted_today", False)), D(M, "Eat, @player. Then the rent.")),
        G(cond(flag("sunday_counted_today")), D(M, "Eat, @player.")), G(cond(flag("rent_starts", False)), D(M, "Eat, @player."))],
