@@ -8,6 +8,14 @@ how it was verified if relevant (grep / build / live-play).
 
 Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 
+## 2026-10-31
+- **`references/engine-reference.md` choice table — new row `hide_current_value`.** This is a new engine choice field
+  that drops "(you have N)" from a greyed number lock, so it reads `Force past him. (Fighting 15+)`. Why: F95 posts
+  #31/#33 on Vesper. A player with no coin saw only the toll at the Underworld door, because the Fighting route was
+  hidden. LO wanted that route shown greyed with the bare requirement only. Verified with
+  `test_trait_names.py` (16 passed, headless included) and the related engine suites (453 passed). The built Vesper
+  doorman reads `Force past him. (Fighting 15+)` at fighting 3 and is a live link at 15.
+
 ## 2026-10-02
 - **`references/media.md` §7 Gate 1 — the self-loop check names both `nodeId` forms.** A scan that matched
   only the bare id classed `hunt_marsh_sunday`'s act screens as once-per-session; they self-loop through the

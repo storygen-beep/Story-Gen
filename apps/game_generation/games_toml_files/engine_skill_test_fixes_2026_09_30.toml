@@ -350,6 +350,15 @@ locationId       = "loc_home"
 show_when_locked = true
 conditions       = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "corr", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "tobin", trait_key = "trust", operator = "gte", value = 5 } ] }
 
+# hide_current_value: the greyed line reads "(Corruption 20+)" without "(you have 5)".
+[[canvases.nodes.exit_block.choices]]
+text               = "Push past him."
+targetType         = "location"
+locationId         = "loc_home"
+show_when_locked   = true
+hide_current_value = true
+conditions         = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "corr", operator = "gte", value = 20 } ] }
+
 [[canvases.nodes.exit_block.choices]]
 text       = "Dance."
 targetType = "location"

@@ -30,6 +30,9 @@ release_date    = "2026-10-28"     # sidebar footer — date this build ships
 # it goes into every build made from this TOML, so it must be changed before cutting a build for a
 # different venue, or that venue ships the wrong tag.
 support_url     = "https://www.patreon.com/cw/nutgames844"
+# The Discord button beside it (sidebar + both intro links). A never-expiring invite to #general
+# (2026-10-31). The old one, discord.gg/MJXBxEqsa, expired and every build shipped it dead.
+community_url   = "https://discord.gg/KhKS4FRmsX"
 
 [time]
 starting_hour = 20        # the opening opens in the evening (Beat 1 — Mercer's office)

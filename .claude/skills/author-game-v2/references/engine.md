@@ -2154,6 +2154,12 @@ A choice whose `conditions` fail has **two** shapes, and the second one is the e
 | **A — the wall** | `show_when_locked = true` | greyed out, label = `locked_text` or the choice text (`v2.py:15669`) | nothing, or a threshold toast if `locked_text_threshold` is set (`v2.py:15730-15737`, §23); a number lock shows its need (§15) |
 | **B — the rejection** | `rejection_node` | **a live link**, label = `locked_text` or the choice text | goes to that node and applies `rejection_effects` |
 
+`hide_current_value = true` on a Mode A choice keeps the number lock's need but drops the player's
+current value: `Force past him. (Fighting 15+)` rather than `Force past him. (Fighting 15+ (you have 3))`.
+It applies to that choice only, and every other locked choice keeps "(you have N)". The flag travels from the
+importer's choice dataclass through `game_graph.py` to `v2.py` (choice tuple position 21), and
+`setup.requirementSuffix(conditions, true)` is the call it produces. First used on Vesper's gate doorman (2026-10-31).
+
 The generator names Mode B itself —
 `# Mode B: Clickable rejection — redirects to rejection node` (`v2.py:15671`), entered from the
 `if rejection_passage:` branch at `v2.py:15670` (`rejection_passage`

@@ -483,6 +483,8 @@ def build_game_graph(
                             ch_d["locked_text"] = ch.locked_text
                         if ch.locked_text_threshold:
                             ch_d["locked_text_threshold"] = ch.locked_text_threshold
+                        if ch.hide_current_value:
+                            ch_d["hide_current_value"] = True
                         # EN1 — the step decision (absent unless authored)
                         if ch.consumes:
                             ch_d["consumes"] = True

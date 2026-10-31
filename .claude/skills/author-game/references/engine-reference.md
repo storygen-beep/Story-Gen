@@ -278,6 +278,7 @@ used to point here as "the full table"; this is it.)
 | `show_when_locked` | `:1972` | bool `false` | render greyed when conditions fail |
 | `locked_text` | `:1973` | str | the greyed reason — **the engine appends the number itself**, see below |
 | `locked_text_threshold` | `:1974` | str | **makes the locked rung a clickable toast-button** — OMIT for a plain greyed span |
+| `hide_current_value` | `template_import.py` choice dataclass | bool `false` | the appended requirement drops the player's value: `Force past him. (Fighting 15+)` instead of `… (Fighting 15+ (you have 3))`. That one choice only (2026-10-31) |
 | `rejection_node` | `:1975` | str? | route here on locked-click (Mode B) |
 
 > **⚠️ DO NOT WRITE THE THRESHOLD INTO `locked_text` — the engine adds it (2026-09-18).**

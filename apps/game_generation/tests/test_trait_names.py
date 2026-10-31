@@ -97,6 +97,15 @@ def test_the_python_side_now_asks_for_an_npc_only_gates_suffix():
     assert "setup.requirementSuffix(" in npc_only
 
 
+def test_hide_current_value_travels_from_the_toml_to_the_suffix_call():
+    # TOML -> importer -> graph -> generator: only the flagged choice asks for the bare suffix.
+    board = _passage(_twee(), BOARD)
+    push = next(l for l in board.splitlines() if "Push past him." in l and "locked-choice" in l)
+    kiss = next(l for l in board.splitlines() if "Kiss him." in l and "locked-choice" in l)
+    assert "setup.requirementSuffix(" in push and ", true)>>" in push
+    assert ", true)>>" not in kiss  # every other locked choice keeps "(you have N)"
+
+
 # ── 2. behaviour, in the real engine ─────────────────────────────────────────
 
 
@@ -129,6 +138,7 @@ def test_the_locked_buttons_name_hers_and_his(html):
         g.play(BOARD)
         locked = _locked(g)
         assert "Kiss him. (Corruption 20+ (you have 5))" in locked
+        assert "Push past him. (Corruption 20+)" in locked  # hide_current_value
         assert "Ask him to stay. (Tobin's Trust 50+ (has 10))" in locked
         # the met half (his trust 10 >= 5) is not listed
         assert "Take him upstairs. (Corruption 20+ (you have 5))" in locked

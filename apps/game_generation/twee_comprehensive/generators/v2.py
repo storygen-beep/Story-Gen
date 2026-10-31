@@ -68,7 +68,7 @@ DEFAULT_SUPPORT_URL = "https://www.patreon.com/cw/nutgames844"
 DEFAULT_STUDIO_NAME = "NutGames"
 # Community link, shown beside every funding link (sidebar + both intro sites).
 # Authored as `[project] community_url`; same generator-side fallback rule as above.
-DEFAULT_COMMUNITY_URL = "https://discord.gg/MJXBxEqsa"
+DEFAULT_COMMUNITY_URL = "https://discord.gg/KhKS4FRmsX"
 
 
 def _is_stat_value(v) -> bool:
@@ -4779,7 +4779,8 @@ setup.traitSubjectLabel = function(item) {{
 // Generic over any trait, using the same operator vocabulary as
 // triggerConditionsSatisfied so the message can never disagree with the gate.
 // Returns "" if nothing fails (or only un-describable items fail).
-setup.describeUnmetConditions = function(conditions) {{
+// hideCurrent (a choice's hide_current_value) drops the "(you have N)" / "(has N)" part.
+setup.describeUnmetConditions = function(conditions, hideCurrent) {{
     if (!conditions || !conditions.items) return "";
     var sv = State.variables || {{}};
     var traits = (sv.player && sv.player.core_traits) || {{}};
@@ -4821,7 +4822,7 @@ setup.describeUnmetConditions = function(conditions) {{
             else if (op === 'eq') phrase = label + ' exactly ' + want;
             else if (op === 'ne') phrase = label + ' not ' + want;
             else phrase = label + ' ' + op + ' ' + want;
-            if (cur !== null) phrase += (who ? ' (has ' : ' (you have ') + cur + ')';
+            if (cur !== null && !hideCurrent) phrase += (who ? ' (has ' : ' (you have ') + cur + ')';
             parts.push(phrase);
         }} else if (it.type === 'flag') {{
             var fkey = String(it.flag_key || '');
@@ -4866,7 +4867,7 @@ setup.describeUnmetConditions = function(conditions) {{
 // no phrasing for (time_of_day, clothing, quest) contributes nothing, so a clock-gated
 // choice appends silence rather than half a sentence.
 setup.REQUIREMENT_OPS = ['gte', 'gt', 'lte', 'lt'];
-setup.describeUnmetTraits = function(conditions) {{
+setup.describeUnmetTraits = function(conditions, hideCurrent) {{
     if (!conditions || !conditions.items) return "";
     var items = [];
     for (var i = 0; i < conditions.items.length; i++) {{
@@ -4877,14 +4878,15 @@ setup.describeUnmetTraits = function(conditions) {{
         items.push(it);
     }}
     if (!items.length) return "";
-    return setup.describeUnmetConditions({{ version: "1.0", items: items }});
+    return setup.describeUnmetConditions({{ version: "1.0", items: items }}, hideCurrent);
 }};
 
 // The rendered suffix. Empty string when there is nothing a number can explain, so the
 // bracket never opens on its own. Mirrors the COST rung, which has always read
 // "Work a shift (Requires 15 Energy (you have 6))" - one house shape for both tiers.
-setup.requirementSuffix = function(conditions) {{
-    var why = setup.describeUnmetTraits(conditions);
+// hideCurrent: a choice authored with hide_current_value reads "(Fighting 15+)" alone.
+setup.requirementSuffix = function(conditions, hideCurrent) {{
+    var why = setup.describeUnmetTraits(conditions, hideCurrent);
     return why ? (' (' + why + ')') : '';
 }};
 
@@ -16030,7 +16032,9 @@ setup.carryRent = function (due, paid) {
                         # end of the link body, after the choice's time has passed, so a room
                         # that shuts in those minutes falls back to the home.
                         returns_to_place = choice_tuple[20] if len(choice_tuple) > 20 else False
-                        link_to = "" if returns_to_place else f' "{target_passage}"'
+                        # hide_current_value — the greyed suffix without "(you have N)".
+                        hide_current_value = choice_tuple[21] if len(choice_tuple) > 21 else False
+                        link_to ="" if returns_to_place else f' "{target_passage}"'
 
                         # ── Loop: get role for this choice ──
                         choice_role = loop_choice_roles.get(choice_idx, {})
@@ -16302,8 +16306,9 @@ setup.carryRent = function (due, paid) {
                                         and it.get('value') >= 2
                                         for it in (choice_conditions or {}).get('items', []) or []
                                     )
+                                    _hide_js = ', true' if hide_current_value else ''
                                     _req = (
-                                        f'<<= setup.requirementSuffix({conditions_js})>>'
+                                        f'<<= setup.requirementSuffix({conditions_js}{_hide_js})>>'
                                         if _wants_number else ''
                                     )
                                     # NOT in title=: a macro inside an attribute is
@@ -16742,6 +16747,7 @@ setup.carryRent = function (due, paid) {
                     show_when_locked = bool(choice.get('show_when_locked', False))
                     locked_text = choice.get('locked_text', '')
                     locked_text_threshold = choice.get('locked_text_threshold', '')
+                    hide_current_value = bool(choice.get('hide_current_value', False))
                     rejection_node_id = choice.get('rejection_node')
                     rejection_effects = choice.get('rejection_effects', []) or []
                     # Modifier effects
@@ -16827,6 +16833,7 @@ setup.carryRent = function (due, paid) {
                         choice_costs,            # per-choice costs — position 18
                         step_decision,           # EN1 step decision — position 19
                         target_type == 'return',  # E8c back to where she was — position 20
+                        hide_current_value,      # suffix without "(you have N)" — position 21
                     ))
 
                 return processed_choices

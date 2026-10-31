@@ -1090,6 +1090,9 @@ class TemplateChoice:
     # in-character. e.g., "I'd need to know him better — at least 15 trust."
     # Mirrors RTS <<NotifyCorruption N>> pattern (doc 13 §7.4 + doc 22 §11).
     locked_text_threshold: str = ""
+    # When True, the greyed requirement reads "(Fighting 15+)" without the player's
+    # current value — "(you have N)" is dropped on this one choice only.
+    hide_current_value: bool = False
     rejection_node: Optional[str] = None  # Node to redirect to on rejection (clickable even locked)
     rejection_effects: List[TemplateChoiceEffect] = field(default_factory=list)  # Effects on rejection
     # Temporary modifier system: apply short-lived trait offsets to condition checks
@@ -2835,6 +2838,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                             show_when_locked=bool(ch.get("show_when_locked", False)),
                             locked_text=_require_str(ch, "locked_text", ""),
                             locked_text_threshold=_require_str(ch, "locked_text_threshold", ""),
+                            hide_current_value=bool(ch.get("hide_current_value", False)),
                             rejection_node=_require_str(ch, "rejection_node", "") or None,
                             rejection_effects=rej_effs,
                             modifier_effects=mod_effs,
@@ -9435,6 +9439,8 @@ def create_project_from_template(
                             ch_d["locked_text"] = ch.locked_text
                         if ch.locked_text_threshold:
                             ch_d["locked_text_threshold"] = ch.locked_text_threshold
+                        if ch.hide_current_value:
+                            ch_d["hide_current_value"] = True
                         # EN1 — the step decision (absent unless authored)
                         if ch.consumes:
                             ch_d["consumes"] = True
@@ -9634,6 +9640,7 @@ def _serialize_exit_block(eb: "TemplateExitBlock") -> Dict[str, Any]:
                 **({"show_when_locked": True} if ch.show_when_locked else {}),
                 **({"locked_text": ch.locked_text} if ch.locked_text else {}),
                 **({"locked_text_threshold": ch.locked_text_threshold} if ch.locked_text_threshold else {}),
+                **({"hide_current_value": True} if ch.hide_current_value else {}),
                 **({"consumes": True} if ch.consumes else {}),  # EN1
                 **({"final": True} if ch.final else {}),  # EN1
                 **({"retry_after_days": ch.retry_after_days} if ch.retry_after_days is not None else {}),  # EN1
