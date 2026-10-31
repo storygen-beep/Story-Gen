@@ -149,3 +149,7 @@ parsed rounds match the screenshots.
   message and no DISCONNECTED screen, and the Mac did not sleep (`pmset` log: display off only at
   01:24). Cause not seen. 10 rounds parsed, 270 in total, still under 300. Capture now also
   reloads when no game message has arrived for 180 seconds. Run 5, 90 minutes, started next.
+- Run 5 (02:15 to 03:45) recorded nothing: 29 reloads, no game frame. Opening the page once
+  showed 1xBet's "Please log in!" box: the account had been logged out, most likely also the
+  cause of the run 4 stall. Capture now stops after 3 reloads in a row with no game message.
+  Total still 270 rounds; the next run needs a login by hand first.

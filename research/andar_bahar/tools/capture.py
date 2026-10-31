@@ -29,6 +29,10 @@ reload is lost; parse.py leaves it out because its joker was not seen.
 Silent stalls. On 2026-11-01 at 00:59 the game socket went quiet for good with no inactivity
 message and no DISCONNECTED screen (cause not seen). The table normally sends a message every
 few seconds, so a socket quiet for STALL_SECONDS is treated the same way: reload.
+The quiet spell turned out to be a logout: 1xBet ended the login session, and the page then
+showed "Please log in!" with no game frame. Reloading cannot fix that, and capture.py never
+logs in, so after MAX_EMPTY_RELOADS reloads in a row with no game message it stops and asks
+for a login by hand.
 
 The `rounds` table is filled by a parser written against the frames from the first
 capture, not by guessing their format in advance.
@@ -63,6 +67,7 @@ DISCONNECTED_TEXT = re.compile(r"^DISCONNECTED$|have been disconnected", re.MULT
 POLL_SECONDS = 0.5
 RELOAD_GAP_SECONDS = 60
 STALL_SECONDS = 180
+MAX_EMPTY_RELOADS = 3
 DATA_DIR = RESEARCH_DIR / "data"
 
 
@@ -202,6 +207,7 @@ def main() -> None:
               "table; recording starts as soon as the game frame appears. Ctrl+C here to stop.")
         last_report = time.time()
         last_reload, reloads = 0.0, 0
+        frames_at_reload, empty_reloads = 0, 0
         try:
             while deadline is None or time.time() < deadline:
                 rec.poll(page)
@@ -210,6 +216,12 @@ def main() -> None:
                     rec.disconnected = True
                     rec.last_frame_ts = time.time()   # one reload per quiet spell, not a loop
                 if rec.disconnected and time.time() - last_reload >= RELOAD_GAP_SECONDS:
+                    empty_reloads = empty_reloads + 1 if rec.frames == frames_at_reload else 0
+                    if empty_reloads >= MAX_EMPTY_RELOADS:
+                        print(f"{time.strftime('%H:%M:%S')}  {MAX_EMPTY_RELOADS} reloads with no game message: "
+                              "probably logged out. Stopping; log in by hand and start again.")
+                        break
+                    frames_at_reload = rec.frames
                     reloads += 1
                     print(f"{time.strftime('%H:%M:%S')}  disconnected for inactivity; reloading the page "
                           f"(reload {reloads})")
