@@ -26,6 +26,10 @@ Reconnect button. capture.py does not press that button. It reloads the table pa
 stores no snapshots while the disconnected screen is up. The round in progress at the
 reload is lost; parse.py leaves it out because its joker was not seen.
 
+Silent stalls. On 2026-11-01 at 00:59 the game socket went quiet for good with no inactivity
+message and no DISCONNECTED screen (cause not seen). The table normally sends a message every
+few seconds, so a socket quiet for STALL_SECONDS is treated the same way: reload.
+
 The `rounds` table is filled by a parser written against the frames from the first
 capture, not by guessing their format in advance.
 
@@ -58,6 +62,7 @@ ROUND_ID = re.compile(r"#(\d{8,})")
 DISCONNECTED_TEXT = re.compile(r"^DISCONNECTED$|have been disconnected", re.MULTILINE)
 POLL_SECONDS = 0.5
 RELOAD_GAP_SECONDS = 60
+STALL_SECONDS = 180
 DATA_DIR = RESEARCH_DIR / "data"
 
 
@@ -75,6 +80,7 @@ class Recorder:
         self.round_ids: list[str] = []
         self._last_text_hash = ""
         self.disconnected = False   # set by the inactivity message or screen; main reloads
+        self.last_frame_ts = time.time()
 
     # -- WebSocket ---------------------------------------------------------
 
@@ -95,6 +101,10 @@ class Recorder:
         self.conn.execute("INSERT INTO ws_frames (ts, url_host, direction, payload) VALUES (?,?,?,?)",
                           (time.time(), host, "recv", payload))
         self.frames += 1
+        self.last_frame_ts = time.time()
+
+    def stalled(self, now: float | None = None) -> bool:
+        return (now or time.time()) - self.last_frame_ts >= STALL_SECONDS
 
     # -- DOM fallback ------------------------------------------------------
 
@@ -195,6 +205,10 @@ def main() -> None:
         try:
             while deadline is None or time.time() < deadline:
                 rec.poll(page)
+                if rec.stalled() and not rec.disconnected:
+                    print(f"{time.strftime('%H:%M:%S')}  no game message for {STALL_SECONDS} s")
+                    rec.disconnected = True
+                    rec.last_frame_ts = time.time()   # one reload per quiet spell, not a loop
                 if rec.disconnected and time.time() - last_reload >= RELOAD_GAP_SECONDS:
                     reloads += 1
                     print(f"{time.strftime('%H:%M:%S')}  disconnected for inactivity; reloading the page "

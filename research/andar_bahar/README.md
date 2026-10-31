@@ -145,3 +145,7 @@ parsed rounds match the screenshots.
   No logged round breaks a dealing rule (Bahar first, alternate, stop on the first rank match;
   `audit.integrity_problems`). `audit.py` refuses the log: 260 is under the 300 minimum, so no
   statistical result exists yet. Run 4, 90 minutes, started 2026-11-01 to pass 300.
+- Run 4 (00:44 to 02:14) stalled at 00:59:45: the game socket went silent with no inactivity
+  message and no DISCONNECTED screen, and the Mac did not sleep (`pmset` log: display off only at
+  01:24). Cause not seen. 10 rounds parsed, 270 in total, still under 300. Capture now also
+  reloads when no game message has arrived for 180 seconds. Run 5, 90 minutes, started next.
