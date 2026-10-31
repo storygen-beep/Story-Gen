@@ -98,12 +98,15 @@ screenshots and synthetic runs.
 
 From this folder, in Terminal:
 
-    cd tools && ../.venv/bin/python capture.py --minutes 120
+    cd tools && ../.venv/bin/python capture.py --minutes 330
 
 1. A Chromium window opens on game 63587. The first time, log in to 1xBet by hand in that
    window (the script never sees the password; the login stays in `data/chromium_profile/`).
    Open 1x Andar Bahar there if the page did not load it. Keep it in that first tab.
 2. Leave it. Do not bet. The terminal prints frames, snapshots and round ids every 30 seconds.
+   Ezugi disconnects a player who has not bet after about ten minutes. The script then reloads
+   the page by itself (no click on Reconnect), at most once a minute; each reload loses the round
+   in progress.
 3. During the two hours, take about 20 iPhone screenshots of the table at the moment a round
    ends, with the round id in the footer visible. Those are checked against the log.
 4. Ctrl+C or the `--minutes` limit stops it. The log is `data/live.sqlite`, screenshots of the
@@ -129,3 +132,10 @@ parsed rounds match the screenshots.
   first matching rank: the published rules.
 - `GAME_RESULT` also carries the table's last 100 winners and jokers. Those are the casino's own
   summary, not observed data, and are not used by the audit.
+- Run 2 (16:45 to 18:46, two hours) recorded 10 rounds, then received
+  `DisconnectedForInactivity` at 16:56 (11:26 UTC) and nothing after it; the screen showed
+  DISCONNECTED. Parsed: 8 complete rounds, each matching its `GAME_RESULT`; 2 left out (one
+  joined mid-deal, one cut by the disconnect). Andar won 7 of the 8; at 8 rounds that says
+  nothing, and the audit refuses anything under 300. Capture now reloads the page on that
+  message or screen and stores no snapshots while it shows (test
+  `test_capture_notices_inactivity_disconnect`). Run 3, 330 minutes, started 2026-10-31 evening.

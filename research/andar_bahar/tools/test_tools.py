@@ -218,6 +218,31 @@ def test_capture_ignores_other_sockets_and_sent_frames(tmp_path):
     assert set(game.handlers) == {"framereceived"}
 
 
+def test_capture_notices_inactivity_disconnect(tmp_path):
+    from capture import Recorder
+
+    class FakeFrame:
+        url = "https://play.livetables.io/game"
+        def __init__(self, text):
+            self.text = text
+        def evaluate(self, _):
+            return self.text
+
+    class FakePage:
+        def __init__(self, text):
+            self.frames = [FakeFrame(text)]
+
+    rec = Recorder(tmp_path / "c.sqlite", tmp_path / "shots", "livetables")
+    rec._frame("engine.livetables.io", '{"MessageType":"DisconnectedForInactivity","roundId":1}')
+    assert rec.disconnected
+    rec.disconnected = False
+    rec.poll(FakePage("Statistics\nB\nA\nDISCONNECTED\n1:1\nANDAR"))
+    assert rec.disconnected and rec.snapshots == 0   # flagged, and the stale screen is not stored
+    rec.disconnected = False
+    rec.poll(FakePage("Statistics\nB\nA\n1:1\nANDAR"))
+    assert not rec.disconnected and rec.snapshots == 1
+
+
 # ---------------------------------------------------------------------------
 # parse.py: one real round from the 2026-10-31 capture (round 17400256227, identity fields removed)
 # ---------------------------------------------------------------------------

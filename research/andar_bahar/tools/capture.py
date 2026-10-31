@@ -19,6 +19,13 @@ What it records, into one SQLite file:
   data/shots/    one screenshot of the game frame per round id seen in the footer, for
                  checking logged rounds against the screen (Phase 7 step 3).
 
+Inactivity. Ezugi disconnects a player who has not bet for about ten minutes: the socket
+sends {"MessageType":"DisconnectedForInactivity"} and the frame shows DISCONNECTED with a
+Reconnect button. capture.py does not press that button. It reloads the table page instead
+(page.goto on the same URL, as typing the address again would), at most once a minute, and
+stores no snapshots while the disconnected screen is up. The round in progress at the
+reload is lost; parse.py leaves it out because its joker was not seen.
+
 The `rounds` table is filled by a parser written against the frames from the first
 capture, not by guessing their format in advance.
 
@@ -48,7 +55,9 @@ DEFAULT_WS_HOST = "engine.livetables.io"
 REDACT_KEYS = {"CurrentPlayerToken", "SessionId", "ClientIp", "ClientId", "Token", "token",
                "sessionId", "playerId", "PlayerId", "Nickname", "nickname", "UserName", "userName"}
 ROUND_ID = re.compile(r"#(\d{8,})")
+DISCONNECTED_TEXT = re.compile(r"^DISCONNECTED$|have been disconnected", re.MULTILINE)
 POLL_SECONDS = 0.5
+RELOAD_GAP_SECONDS = 60
 DATA_DIR = RESEARCH_DIR / "data"
 
 
@@ -65,6 +74,7 @@ class Recorder:
         self.snapshots = 0
         self.round_ids: list[str] = []
         self._last_text_hash = ""
+        self.disconnected = False   # set by the inactivity message or screen; main reloads
 
     # -- WebSocket ---------------------------------------------------------
 
@@ -80,6 +90,8 @@ class Recorder:
             payload = f"binary:{len(payload)} bytes"
         else:
             payload = redact(payload)
+            if '"DisconnectedForInactivity"' in payload:
+                self.disconnected = True
         self.conn.execute("INSERT INTO ws_frames (ts, url_host, direction, payload) VALUES (?,?,?,?)",
                           (time.time(), host, "recv", payload))
         self.frames += 1
@@ -100,6 +112,9 @@ class Recorder:
             text = frame.evaluate("() => document.body ? document.body.innerText : ''")
         except Exception:
             return  # frame navigating or detached; next poll retries
+        if DISCONNECTED_TEXT.search(text):
+            self.disconnected = True
+            return  # the stale table under the overlay is not worth storing
         digest = hashlib.sha1(text.encode()).hexdigest()
         if digest == self._last_text_hash:
             return
@@ -176,14 +191,27 @@ def main() -> None:
         print("Browser open. If you are not logged in, log in by hand in that window and open the "
               "table; recording starts as soon as the game frame appears. Ctrl+C here to stop.")
         last_report = time.time()
+        last_reload, reloads = 0.0, 0
         try:
             while deadline is None or time.time() < deadline:
                 rec.poll(page)
+                if rec.disconnected and time.time() - last_reload >= RELOAD_GAP_SECONDS:
+                    reloads += 1
+                    print(f"{time.strftime('%H:%M:%S')}  disconnected for inactivity; reloading the page "
+                          f"(reload {reloads})")
+                    rec.disconnected = False
+                    rec._last_text_hash = ""
+                    last_reload = time.time()
+                    try:
+                        page.goto(a.url)
+                    except Exception as exc:
+                        print(f"reload failed: {exc!r}; retrying in {RELOAD_GAP_SECONDS} s")
+                        rec.disconnected = True
                 rec.conn.commit()
                 if time.time() - last_report >= 30:
                     last = rec.round_ids[-1] if rec.round_ids else "none yet"
                     print(f"{time.strftime('%H:%M:%S')}  frames {rec.frames}  snapshots {rec.snapshots}  "
-                          f"rounds seen {len(rec.round_ids)} (last #{last})")
+                          f"rounds seen {len(rec.round_ids)} (last #{last})  reloads {reloads}")
                     last_report = time.time()
                 page.wait_for_timeout(POLL_SECONDS * 1000)
         except KeyboardInterrupt:
