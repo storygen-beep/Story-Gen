@@ -33,7 +33,8 @@ websockets; Chromium installed by `playwright install chromium`). From `tools/`:
 | `tools/make_synthetic.py` | Deals real shuffled decks by the rules; optional injected win-rate bias and dealing-order error |
 | `tools/phase7_synthetic.py` | Phase 7 steps 1–2: audit false-alarm and detection rates by sample size |
 | `tools/optimal_reach.py` | Highest P(₹500 to ₹10,000) choosing among all bets on the table each round |
-| `tools/test_tools.py` | 12 tests, including capture of a WebSocket and text inside a cross-origin iframe on a local test page |
+| `tools/parse.py` | Builds rounds from the game's `Card` messages in arrival order; writes a round only if it agrees with the table's own `GAME_RESULT`; leaves out rounds joined mid-deal |
+| `tools/test_tools.py` | 15 tests, including capture of a WebSocket and text inside a cross-origin iframe on a local test page, and parsing of a real captured round |
 
 `data/` is git-ignored: it holds the browser profile (with the casino login cookies), live logs,
 screenshots and synthetic runs.
@@ -47,7 +48,7 @@ screenshots and synthetic runs.
 | 3 Casino integrity | Done to the extent possible from outside. 1xBet: Curaçao licence to Caecus N.V.; user's domain is an unlisted mirror; long enforcement record; ED proceedings in India. Providers: Ezugi and Evolution verifiable; ElCasino not. Michigan orders document dealer manipulation at Evolution, caught by a regulator. |
 | 4 Mathematical model | Done and validated: reproduces all ten of Ezugi's published RTP figures within 0.13 points. |
 | 5 Simulation | Done. Corrected 2026-10-31: ceiling **4.79%** on 1x Andar Bahar, staking everything on cards-dealt "16-25" (3.5:1); bold play on Bahar 4.48%; every progression lower; Ultimate 2.70%. |
-| 6 Architecture | Built 2026-10-31 in `tools/`, 12 tests pass. Round parser waits on the first live capture's frames. |
+| 6 Architecture | Built 2026-10-31 in `tools/`, 15 tests pass. Round parser written against the first live frames. |
 | 7 Controlled testing | Steps 1–2 passed on synthetic data (results in PHASE5_6 doc). Steps 3–4, live capture and screenshot check, next. |
 | 8 Decision support | `decide.py` built; computes SKIP from the paytable (best bet "16-25", EV −1.90% per ₹1). Not run on live data until Phase 7 passes. |
 
@@ -110,3 +111,21 @@ From this folder, in Terminal:
 
 After that, the frames are read and the round parser written; nothing is audited before the
 parsed rounds match the screenshots.
+
+## What the game client receives (first live captures, 2026-10-31)
+
+- Two WebSockets open when the table loads. `engine.livetables.io` carries the game as JSON,
+  one message per event: `SHUFFLE`, `PLACE_YOUR_BETS`, `NO_MORE_BETS`, one `Card` per card
+  (`"CardHand":"Joker"|"Andar"|"Bahar"`, `"CardName":"6c"`) in dealing order, then
+  `GAME_RESULT` with `JokerCard`, `AndarCards`, `BaharCards`, `WinningHand`. Table id `628000`.
+  `*.ezvds.net` carries the video (`"stream":"ezugi_628000_hi"`), binary.
+- First run (16:28) stalled after 20 seconds: the video frames were stored as base64 and the
+  frames the browser sends carried the session token, session id and IP. Stopped; capture now
+  records only frames received from the game host, strips identity fields, and stores binary
+  frames as their length. The aborted file was scrubbed (no token, session id or IP remains)
+  and kept as `data/capture_run1_aborted.sqlite`.
+- Round 17400256227, as dealt: joker 6c; Bahar 9h, Andar 3c, Bahar As, Andar Kd, Bahar 3d,
+  Andar Ah, Bahar Th, Andar Qh, Bahar 6d; Bahar wins. Bahar first, alternate deal, stop on the
+  first matching rank: the published rules.
+- `GAME_RESULT` also carries the table's last 100 winners and jokers. Those are the casino's own
+  summary, not observed data, and are not used by the audit.

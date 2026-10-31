@@ -165,7 +165,8 @@ def test_capture_reads_cross_origin_iframe(tmp_path):
     from websockets.sync.server import serve
 
     def ws_handler(conn):
-        conn.send('{"joker":"9H","cards":["8D","3D"]}')
+        conn.send('{"joker":"9H","cards":["8D","3D"],"SessionId":"secret"}')
+        conn.send(b"\x00\x01video")
         try:
             conn.recv(timeout=5)
         except Exception:
@@ -174,7 +175,7 @@ def test_capture_reads_cross_origin_iframe(tmp_path):
     ws_server = serve(ws_handler, "127.0.0.1", ws_port)
     threading.Thread(target=ws_server.serve_forever, daemon=True).start()
 
-    rec = Recorder(tmp_path / "cap.sqlite", tmp_path / "shots", game_host="127.0.0.1")
+    rec = Recorder(tmp_path / "cap.sqlite", tmp_path / "shots", game_host="127.0.0.1", ws_host="127.0.0.1")
     with sync_playwright() as pw:
         browser = pw.chromium.launch()
         page = browser.new_page()
@@ -188,8 +189,77 @@ def test_capture_reads_cross_origin_iframe(tmp_path):
     ws_server.shutdown()
 
     frames = rec.conn.execute("SELECT url_host, direction, payload FROM ws_frames").fetchall()
+    # Identity fields are stripped and binary frames are reduced to their length.
     assert ("127.0.0.1", "recv", '{"joker":"9H","cards":["8D","3D"]}') in frames
+    assert ("127.0.0.1", "recv", "binary:7 bytes") in frames
+    assert not any("secret" in p for *_, p in frames)
     texts = [t for (t,) in rec.conn.execute("SELECT text FROM dom_snapshots")]
     assert any("#17392604276" in t for t in texts)
     assert rec.round_ids == ["17392604276"]
     assert (tmp_path / "shots" / "17392604276.png").exists()
+
+
+def test_capture_ignores_other_sockets_and_sent_frames(tmp_path):
+    from capture import Recorder
+
+    class FakeWS:
+        def __init__(self, url):
+            self.url, self.handlers = url, {}
+
+        def on(self, event, fn):
+            self.handlers[event] = fn
+
+    rec = Recorder(tmp_path / "c.sqlite", tmp_path / "shots", "livetables")
+    video = FakeWS("wss://muma-mdpz-e01.ezvds.net/x")
+    game = FakeWS("wss://engine.livetables.io/x")
+    rec.attach(video)
+    rec.attach(game)
+    assert video.handlers == {}
+    assert set(game.handlers) == {"framereceived"}
+
+
+# ---------------------------------------------------------------------------
+# parse.py: one real round from the 2026-10-31 capture (round 17400256227, identity fields removed)
+# ---------------------------------------------------------------------------
+
+REAL_ROUND = [
+    {"MessageType": "Card", "roundId": 17400256227, "CardHand": "Joker", "CardName": "6c"},
+    *[{"MessageType": "Card", "roundId": 17400256227, "CardHand": h, "CardName": c}
+      for h, c in [("Bahar", "9h"), ("Andar", "3c"), ("Bahar", "As"), ("Andar", "Kd"), ("Bahar", "3d"),
+                   ("Andar", "Ah"), ("Bahar", "Th"), ("Andar", "Qh"), ("Bahar", "6d")]],
+    {"MessageType": "GAME_RESULT", "roundId": 17400256227, "GameResults": {
+        "RoundId": 17400256227, "WinningHand": "Bahar", "AndarCards": ["3c", "Kd", "Ah", "Qh"],
+        "BaharCards": ["9h", "As", "3d", "Th", "6d"], "JokerCard": "6c"}},
+]
+
+
+def frames_db(tmp_path, messages):
+    import json
+    conn = open_db(tmp_path / "f.sqlite")
+    for i, m in enumerate(messages):
+        conn.execute("INSERT INTO ws_frames (ts, url_host, direction, payload) VALUES (?,?,?,?)",
+                     (1000.0 + i, "engine.livetables.io", "recv", json.dumps(m)))
+    return conn
+
+
+def test_parse_real_round(tmp_path):
+    import parse
+    rounds, problems = parse.parse(frames_db(tmp_path, REAL_ROUND))
+    assert problems == []
+    (r,) = rounds
+    assert (r.joker_rank, r.joker_suit, r.winner, r.n_cards, r.first_side) == (6, "C", "B", 9, "B")
+    assert r.cards[0] == ("B", 9, "H") and r.cards[-1] == ("B", 6, "D")
+    assert not audit.integrity_problems(r, "B")
+
+
+def test_parse_rejects_partial_and_mismatched_rounds(tmp_path):
+    import copy
+    import parse
+    joined_late = REAL_ROUND[3:]                       # missed the joker and two cards
+    mismatch = copy.deepcopy(REAL_ROUND)
+    mismatch[-1]["GameResults"]["BaharCards"][0] = "9d"
+    for i, msgs in enumerate((joined_late, mismatch, REAL_ROUND[:-1])):
+        case_dir = tmp_path / f"case{i}"
+        case_dir.mkdir()
+        rounds, problems = parse.parse(frames_db(case_dir, msgs))
+        assert rounds == [] and len(problems) == 1

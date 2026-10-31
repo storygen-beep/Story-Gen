@@ -7,9 +7,13 @@ sees credentials: the first time, you log in by hand in the browser window it op
 the login persists in a profile folder under data/.
 
 What it records, into one SQLite file:
-  ws_frames      every WebSocket frame the page and its frames send or receive, verbatim,
-                 with the host it came from. The game's round data is expected to travel
-                 here (unverified until the first capture; see README.md).
+  ws_frames      every text frame RECEIVED on the game's WebSocket (host containing
+                 --ws-host, default engine.livetables.io). First capture, 2026-10-31: this
+                 socket carries JSON per round ("MessageType", "roundId", ...).
+                 Not recorded: frames the browser sends (they carry the session token,
+                 session id and IP), and every other socket, including the video stream on
+                 *.ezvds.net, whose binary frames swamped the first run. Identity fields
+                 (see REDACT_KEYS) are removed from received JSON before it is stored.
   dom_snapshots  the visible text of the game frame whenever it changes (every 0.5 s poll),
                  the fallback when frames turn out not to carry round data.
   data/shots/    one screenshot of the game frame per round id seen in the footer, for
@@ -26,8 +30,8 @@ Usage:
 from __future__ import annotations
 
 import argparse
-import base64
 import hashlib
+import json
 import re
 import time
 from pathlib import Path
@@ -39,17 +43,24 @@ from common import RESEARCH_DIR, open_db
 
 DEFAULT_URL = "https://1-x-bet-india.com/en/casino-search?game=63587"
 DEFAULT_GAME_HOST = "livetables"   # the game iframe is served from play.livetables.io
+DEFAULT_WS_HOST = "engine.livetables.io"
+# Fields that identify the player or the session. The audit needs none of them.
+REDACT_KEYS = {"CurrentPlayerToken", "SessionId", "ClientIp", "ClientId", "Token", "token",
+               "sessionId", "playerId", "PlayerId", "Nickname", "nickname", "UserName", "userName"}
 ROUND_ID = re.compile(r"#(\d{8,})")
 POLL_SECONDS = 0.5
 DATA_DIR = RESEARCH_DIR / "data"
 
 
 class Recorder:
-    def __init__(self, db_path: Path, shots_dir: Path, game_host: str):
+    def __init__(self, db_path: Path, shots_dir: Path, game_host: str,
+                 ws_host: str = DEFAULT_WS_HOST):
         self.conn = open_db(db_path)
         self.shots_dir = shots_dir
         self.shots_dir.mkdir(parents=True, exist_ok=True)
         self.game_host = game_host
+        self.ws_host = ws_host
+        self._shot_error_reported = False
         self.frames = 0
         self.snapshots = 0
         self.round_ids: list[str] = []
@@ -59,15 +70,18 @@ class Recorder:
 
     def attach(self, ws: WebSocket) -> None:
         host = urlparse(ws.url).hostname or "?"
+        if self.ws_host not in host:
+            return  # video stream, chat, odds feeds: not round data
         print(f"websocket opened: {host}")
-        ws.on("framereceived", lambda payload: self._frame(host, "recv", payload))
-        ws.on("framesent", lambda payload: self._frame(host, "sent", payload))
+        ws.on("framereceived", lambda payload: self._frame(host, payload))
 
-    def _frame(self, host: str, direction: str, payload: str | bytes) -> None:
+    def _frame(self, host: str, payload: str | bytes) -> None:
         if isinstance(payload, bytes):
-            payload = "b64:" + base64.b64encode(payload).decode()
+            payload = f"binary:{len(payload)} bytes"
+        else:
+            payload = redact(payload)
         self.conn.execute("INSERT INTO ws_frames (ts, url_host, direction, payload) VALUES (?,?,?,?)",
-                          (time.time(), host, direction, payload))
+                          (time.time(), host, "recv", payload))
         self.frames += 1
 
     # -- DOM fallback ------------------------------------------------------
@@ -102,10 +116,34 @@ class Recorder:
     def _screenshot(self, page: Page, round_id: str) -> str | None:
         path = self.shots_dir / f"{round_id}.png"
         try:
-            page.locator(f'iframe[src*="{self.game_host}"]').first.screenshot(path=str(path), timeout=3000)
-            return str(path.relative_to(RESEARCH_DIR))
-        except Exception:
+            # A clip of the page, not an element screenshot: an element screenshot waits for
+            # the element to be "stable", which a frame playing video may never be.
+            box = page.locator(f'iframe[src*="{self.game_host}"]').first.bounding_box(timeout=3000)
+            if box is None:
+                raise RuntimeError("game frame has no box (hidden or scrolled away)")
+            page.screenshot(path=str(path), clip=box, timeout=10_000)
+            return str(path)
+        except Exception as exc:
+            if not self._shot_error_reported:
+                print(f"screenshot failed for #{round_id}: {exc!r} (further failures not printed)")
+                self._shot_error_reported = True
             return None
+
+
+def redact(payload: str) -> str:
+    """Drop identity fields from a JSON frame; non-JSON text is kept as it is."""
+    try:
+        data = json.loads(payload)
+    except ValueError:
+        return payload
+
+    def strip(x):
+        if isinstance(x, dict):
+            return {k: strip(v) for k, v in x.items() if k not in REDACT_KEYS}
+        if isinstance(x, list):
+            return [strip(v) for v in x]
+        return x
+    return json.dumps(strip(data), separators=(",", ":"))
 
 
 def main() -> None:
@@ -114,14 +152,15 @@ def main() -> None:
     ap.add_argument("--db", default=str(DATA_DIR / "live.sqlite"))
     ap.add_argument("--profile", default=str(DATA_DIR / "chromium_profile"),
                     help="persistent browser profile; your login is kept here, not in this code")
-    ap.add_argument("--game-host", default=DEFAULT_GAME_HOST)
+    ap.add_argument("--game-host", default=DEFAULT_GAME_HOST, help="host of the game iframe (DOM poll)")
+    ap.add_argument("--ws-host", default=DEFAULT_WS_HOST, help="only WebSockets to this host are recorded")
     ap.add_argument("--minutes", type=float, default=0, help="stop after this long (0 = until Ctrl+C)")
     ap.add_argument("--channel", default=None, help="'chrome' to use installed Google Chrome")
     a = ap.parse_args()
 
     db_path = Path(a.db)
     db_path.parent.mkdir(parents=True, exist_ok=True)
-    rec = Recorder(db_path, db_path.parent / "shots", a.game_host)
+    rec = Recorder(db_path, db_path.parent / "shots", a.game_host, a.ws_host)
     deadline = time.time() + a.minutes * 60 if a.minutes else None
 
     with sync_playwright() as pw:
