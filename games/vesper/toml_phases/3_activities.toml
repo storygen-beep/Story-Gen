@@ -1442,6 +1442,10 @@ text       = "Force past him."
 targetType = "location"
 locationId = "underworld_strip"
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "fighting", operator = "gte", value = 15 } ] }
+# Greyed when locked, reading "Force past him. (Fighting 15+)" — F95 #31/#33: a new player with no coin
+# saw only the toll and gave up. LO 2026-10-31: show the number, not "(you have N)".
+show_when_locked   = true
+hide_current_value = true
 [[canvases.nodes.exit_block.choices]]
 text       = "Put the weapon on him."
 targetType = "node"

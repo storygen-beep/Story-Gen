@@ -5,6 +5,20 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-10-31 — a greyed number lock without "(you have N)" (`hide_current_value`)
+
+**What.** `references/engine.md`, under the Mode A / Mode B table: one paragraph on the new choice field
+`hide_current_value = true`. With it, a greyed number lock reads `Force past him. (Fighting 15+)`, with no current
+value, for that choice only.
+
+**Why.** F95 thread 312420, posts #31/#33. A new player with 0 coin saw only "Pay the toll." at Vesper's
+Underworld door, because "Force past him." was hidden. LO asked for it greyed, showing only the requirement.
+
+**Verified.** `pytest apps/game_generation/tests/test_trait_names.py` (16 passed, headless included) plus every
+engine suite that uses locked choices or that fixture (453 passed, 13 skipped). In the Vesper dev and debug build at fighting 3,
+headless shows `Force past him. (Fighting 15+)`. At fighting 15 the choice is a live link to `Location_underworld_strip`.
+There were 0 JS errors.
+
 ## 2026-10-30 — the quests page as short rows (`[ui] quests_layout = "list"`)
 
 **What.**
