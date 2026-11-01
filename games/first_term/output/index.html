@@ -10721,7 +10721,7 @@ setup.questsStoryRows = function () {
     &lt;ul class=&quot;traits-list&quot;&gt;
       &lt;&lt;for _i to 0; _i lt _keys.length; _i++&gt;&gt;
         &lt;&lt;set _k to _keys[_i]&gt;&gt;
-        &lt;&lt;if setup.dumpSkipTraits &amp;&amp; setup.dumpSkipTraits.includes(_k)&gt;&gt;&lt;&lt;continue&gt;&gt;&lt;&lt;/if&gt;&gt;
+        &lt;&lt;if setup.hiddenTraits &amp;&amp; setup.hiddenTraits.includes(_k)&gt;&gt;&lt;&lt;continue&gt;&gt;&lt;&lt;/if&gt;&gt;
         &lt;li class=&quot;trait-item&quot;&gt;
           &lt;span class=&quot;trait-name&quot;&gt;&lt;&lt;print setup.traitLabel(_k)&gt;&gt;&lt;/span&gt;
           &lt;span class=&quot;trait-controls&quot;&gt;&lt;button class=&quot;dev-adj-btn dev-player-trait-btn&quot; @data-trait=&quot;_k&quot; data-delta=&quot;-1&quot;&gt;-&lt;/button&gt; &lt;span @id=&quot;&#39;sidebar-player-trait-&#39; + _k&quot; class=&quot;trait-value&quot;&gt;&lt;&lt;print $player.core_traits[_k]&gt;&gt;&lt;/span&gt; &lt;button class=&quot;dev-adj-btn dev-player-trait-btn&quot; @data-trait=&quot;_k&quot; data-delta=&quot;1&quot;&gt;+&lt;/button&gt;&lt;/span&gt;
@@ -10745,7 +10745,7 @@ setup.questsStoryRows = function () {
           &lt;&lt;set _npcKeys to Object.keys(_npc.core_traits).sort()&gt;&gt;
           &lt;&lt;for _j to 0; _j lt _npcKeys.length; _j++&gt;&gt;
             &lt;&lt;set _nk to _npcKeys[_j]&gt;&gt;
-            &lt;&lt;if setup.dumpSkipTraits &amp;&amp; setup.dumpSkipTraits.includes(_nk)&gt;&gt;&lt;&lt;continue&gt;&gt;&lt;&lt;/if&gt;&gt;
+            &lt;&lt;if setup.hiddenTraits &amp;&amp; setup.hiddenTraits.includes(_nk)&gt;&gt;&lt;&lt;continue&gt;&gt;&lt;&lt;/if&gt;&gt;
             &lt;li class=&quot;trait-item&quot;&gt;
               &lt;span class=&quot;trait-name&quot;&gt;&lt;&lt;print setup.traitLabel(_nk)&gt;&gt;&lt;/span&gt;
               &lt;span class=&quot;trait-controls&quot;&gt;&lt;button class=&quot;dev-adj-btn dev-npc-trait-btn&quot; @data-npc=&quot;_npcId&quot; @data-trait=&quot;_nk&quot; data-delta=&quot;-1&quot;&gt;-&lt;/button&gt; &lt;span @id=&quot;&#39;sidebar-npc-trait-&#39; + _npcId + &#39;-&#39; + _nk&quot; class=&quot;trait-value&quot;&gt;&lt;&lt;print _npc.core_traits[_nk]&gt;&gt;&lt;/span&gt; &lt;button class=&quot;dev-adj-btn dev-npc-trait-btn&quot; @data-npc=&quot;_npcId&quot; @data-trait=&quot;_nk&quot; data-delta=&quot;1&quot;&gt;+&lt;/button&gt;&lt;/span&gt;

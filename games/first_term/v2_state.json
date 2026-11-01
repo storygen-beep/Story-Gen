@@ -8238,7 +8238,10 @@
         "id": "a2-heat-ladder",
         "what": "every scene at its heat stage, release 1 to Hungry",
         "built_at": "2026-11-02 02:10",
-        "played": null
+        "played": {
+          "at": "2026-11-02 03:41",
+          "note": "skipped by LO: \"Add them to the traits. Rebuild commit and push\" (Corruption can't be changed in dev mode, so a2 can't be tested yet)"
+        }
       }
     ]
   }
