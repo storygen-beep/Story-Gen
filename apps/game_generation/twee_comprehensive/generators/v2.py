@@ -232,6 +232,10 @@ class TweeComprehensiveGeneratorV2:
         # Cast page + its sidebar button widget. Same reason as the cheat page for
         # living in its own section: the widget must be defined unconditionally.
         twee_sections.append(self._generate_cast_page())
+        # The dev screen (dev builds only; first_term 2026-11-02): every person's steps with
+        # "Set it up" / "Play it now", her stages, the clock and the places. The widget is always
+        # defined (the dev StoryCaption calls it), empty outside --dev.
+        twee_sections.append(self._generate_dev_page())
 
         # [ui] timetable_button — its widget, only in a game that asks for it (StoryCaption
         # calls it only then, so no other game carries an empty widget).
@@ -12534,6 +12538,264 @@ setup.castTraitRows = function (slug, npc) {
 }
 """
 
+    def _generate_dev_page(self) -> str:
+        """The dev screen: a full page, laid out like the People page, for testing a build.
+
+        Dev builds only (`--dev`). NOTHING IS AUTHORED: it reads what the build already
+        carries at runtime.
+
+          a person's steps  every one-time canvas bound to a person (`npcId`) whose trigger
+                            reads a player counter with `eq` (the step counter at n-1), from
+                            setup.help_data.locationCanvases. Sorted by n.
+          each step's gate  its own trigger conditions, each item checked with
+                            setup.triggerConditionsSatisfied (the engine's own evaluator),
+                            plus its schedule window and the place.
+          her stages        the sidebar's `trait_words` items and their bands.
+          the places        setup.passage_to_location.
+
+        Two buttons per step (LO, 2026-11-02, "1 both"):
+          Set it up    clears the step's fired record, makes each condition item true
+                       (counter = n-1, meters raised to the gate, flags set), moves the clock
+                       into the step's first window and sends her to its place, where the
+                       step fires the normal way. Clothing and presence items are not forced;
+                       the screen marks them for the tester.
+          Play it now  jumps into the step's first screen (Engine.play), skipping the trigger.
+        """
+        if not self.dev_mode:
+            return ':: DevPageWidgets [widget nobr]\n<<widget "devButton">><</widget>>\n'
+        widget = (
+            ':: DevPageWidgets [widget nobr]\n'
+            '<<widget "devButton">>\n'
+            '<div id="dev-btn-widget" style="margin:4px 0 8px;">'
+            '<<if passage() isnot "DevPage">><<link "&#128295; Dev screen" "DevPage">><</link>>'
+            '<<else>><span>&#128295; Dev screen</span><</if>></div>\n'
+            '<</widget>>\n'
+        )
+        page = (
+            ':: DevPage\n'
+            '<<nobr>>\n'
+            '<div class="cast-top"><<link "&#8592; Back">><<run setup.smartBack()>><</link>></div>\n'
+            '<h2>Dev</h2>\n'
+            '<div class="cast-intro">Testing only. Set a step up and walk into it, or jump straight in.</div>\n'
+            '<div id="dev-root">Loading…</div>\n'
+            '<</nobr>>\n'
+        )
+        script = r""":: DevPageScript [script]
+/* The dev screen (dev builds only). Renders into #dev-root on :passageend, so nothing on it
+   is wikified; every button is a .dev-act with data-*, caught by one delegated listener. */
+(function () {
+var DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+function esc(x) { return String(x == null ? "" : x).replace(/[&<>"]/g, function (c) { return {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]; }); }
+function sv() { return State.variables; }
+function npcObj(slug) { var m = setup.npc_slug_map || {}; var n = sv().npcs || {}; return n[m[slug]] || n[slug] || null; }
+function tlabel(k) { return setup.traitLabel ? setup.traitLabel(k) : k; }
+function locPassage(locId) {
+    var m = setup.passage_to_location || {};
+    for (var p in m) { if (String(m[p]) === String(locId) && p.indexOf("Location_") === 0) return p; }
+    return null;
+}
+function locName(locId) { try { return setup._locNameFromUuid(locId) || locId; } catch (e) { return locId; } }
+function itemOk(it) { try { return !!setup.triggerConditionsSatisfied({version: "1.0", logic: "AND", items: [it]}); } catch (e) { return false; } }
+var OPS = {gte: "≥", gt: ">", lte: "≤", lt: "<", eq: "=", ne: "≠"};
+function itemLabel(it) {
+    var t = it.type;
+    if (t === "trait") {
+        var isNpc = it.subject === "npc" || !!it.npc_id;
+        var o = isNpc ? npcObj(it.npc_id) : sv().player;
+        var cur = o && o.core_traits ? o.core_traits[it.trait_key] : undefined;
+        return (isNpc ? esc((o && o.name) || it.npc_id) + "'s " : "") + esc(tlabel(it.trait_key)) + " " + (OPS[it.operator] || it.operator) + " " + esc(it.value) + " (now " + esc(cur == null ? 0 : cur) + ")";
+    }
+    if (t === "flag") return "flag " + esc(it.flag_key) + (it.operator === "is_false" ? " not set" : " set");
+    if (t === "hours_since_flag") return esc(it.flag_key) + " within " + esc(it.value) + "h";
+    if (t === "npc_at_location") return esc(it.npc_id ? ((npcObj(it.npc_id) || {}).name || it.npc_id) : "nobody") + (it.operator === "is_absent" ? " not " : " ") + "at " + esc(locName(it.location_id));
+    if (t === "time_of_day") return "time " + esc(it.start_time) + "–" + esc(it.end_time || "");
+    if (t === "modifier") return esc(it.modifier_key) + " " + esc(it.operator);
+    if (t && t.indexOf("clothing") === 0) return "clothes: " + esc((it.slot || it.item_id || "") + " " + it.operator);
+    if (t === "worn_type" || t === "worn_exposure") return "wearing " + esc(it.operator + " " + it.value);
+    return esc(JSON.stringify(it).slice(0, 70));
+}
+function hm(s) { var p = String(s || "0:0").split(":"); return [Number(p[0]) || 0, Number(p[1]) || 0]; }
+function nowDayIdx() { var d = DAYS.indexOf(sv().game_state.time_state.current_day); return d < 0 ? 0 : d; }
+function inWindow(sp) {
+    if (!sp || !sp.length) return true;
+    var ts = sv().game_state.time_state, d = nowDayIdx(), m = ts.current_hour * 60 + ts.current_minute;
+    for (var i = 0; i < sp.length; i++) {
+        var w = sp[i], a = hm(w.startTime), b = hm(w.endTime || "24:00");
+        var am = a[0] * 60 + a[1], bm = b[0] * 60 + b[1];
+        var dayOk = !w.weekdays || !w.weekdays.length || w.weekdays.indexOf(d) !== -1;
+        var tOk = am <= bm ? (m >= am && m < bm) : (m >= am || m < bm);
+        if (dayOk && tOk) return true;
+    }
+    return false;
+}
+function schedText(sp) {
+    if (!sp || !sp.length) return "any time";
+    return sp.map(function (w) {
+        var days = (w.weekdays && w.weekdays.length && w.weekdays.length < 7) ? w.weekdays.map(function (x) { return DAYS[x].slice(0, 3); }).join(" ") : "every day";
+        return days + " " + (w.startTime || "") + "–" + (w.endTime || "");
+    }).join(" · ");
+}
+setup.devSteps = function () {
+    /* Two passes. 1: on one-time canvases bound to a person, count each player counter read with
+       `eq`; a person's step counter is the one read most (Mark's rent scenes read another).
+       2: every one-time canvas that reads a known step counter with `eq` is a step of that
+       person, bound or not (a step can sit in her room or the bathroom, away from him). */
+    var lc = (setup.help_data || {}).locationCanvases || {}, all = [];
+    Object.keys(lc).forEach(function (locId) { (lc[locId] || []).forEach(function (c) { if (!c.isRepeatable) all.push([locId, c]); }); });
+    function eqItems(c) {
+        return (((c.conditions || {}).items) || []).filter(function (it) {
+            return it.type === "trait" && (it.subject || "player") === "player" && !it.npc_id && it.operator === "eq" && typeof it.value === "number";
+        });
+    }
+    var tally = {};
+    all.forEach(function (x) {
+        var c = x[1]; if (!c.npcId) return;
+        eqItems(c).forEach(function (it) { var t = tally[c.npcId] = tally[c.npcId] || {}; t[it.trait_key] = (t[it.trait_key] || 0) + 1; });
+    });
+    var counterOf = {};
+    Object.keys(tally).forEach(function (npc) {
+        var best = null; Object.keys(tally[npc]).forEach(function (k) { if (best === null || tally[npc][k] > tally[npc][best] || (/_step$/.test(k) && !/_step$/.test(best))) best = k; });
+        if (best && !counterOf[best]) counterOf[best] = npc;
+    });
+    var out = {};
+    all.forEach(function (x) {
+        var locId = x[0], c = x[1];
+        eqItems(c).forEach(function (it) {
+            var npc = counterOf[it.trait_key]; if (!npc) return;
+            if (c.npcId && c.npcId !== npc && counterOf[it.trait_key] !== npc) return;
+            var e = out[npc] = out[npc] || {npc: npc, counter: it.trait_key, steps: []};
+            if (e.steps.some(function (s0) { return s0.id === c.id; })) return;
+            e.steps.push({id: c.id, n: it.value + 1, name: c.displayName || c.name, passage: c.passageName, locId: locId,
+                          sched: c.scheduleParams || [], conds: c.conditions, counter: it.trait_key});
+        });
+    });
+    return Object.keys(out).map(function (k) { out[k].steps.sort(function (a, b) { return a.n - b.n; }); return out[k]; });
+};
+function devSetTime(dayIdx, h, m) {
+    var t = sv().game_state.time_state, wk = t.current_week || 1;
+    t.current_day = DAYS[dayIdx]; t.current_hour = h; t.current_minute = m; t.day = (wk - 1) * 7 + dayIdx + 1;
+}
+function applyItem(it) {
+    var s = sv();
+    if (it.type === "trait") {
+        var isNpc = it.subject === "npc" || !!it.npc_id;
+        var o = isNpc ? npcObj(it.npc_id) : s.player;
+        if (!o) return;
+        o.core_traits = o.core_traits || {};
+        var k = it.trait_key, v = Number(it.value), cur = Number(o.core_traits[k] || 0);
+        if (it.operator === "gte") o.core_traits[k] = Math.max(cur, v);
+        else if (it.operator === "gt") o.core_traits[k] = Math.max(cur, v + 1);
+        else if (it.operator === "lte") o.core_traits[k] = Math.min(cur, v);
+        else if (it.operator === "lt") o.core_traits[k] = Math.min(cur, v - 1);
+        else if (it.operator === "eq") o.core_traits[k] = v;
+        else if (it.operator === "ne" && cur === v) o.core_traits[k] = v + 1;
+    } else if (it.type === "flag" && (it.subject || "player") === "player") {
+        applyFlagEffect("player", null, it.flag_key, it.operator === "is_false" ? "unset" : "set");
+    } else if (it.type === "hours_since_flag" && (it.operator === "lt" || it.operator === "lte")) {
+        applyFlagEffect("player", null, it.flag_key, "set");
+    }
+}
+function setUpStep(st) {
+    var gs = sv().game_state;
+    if (gs.trigger_history) delete gs.trigger_history[String(st.id)];
+    if (gs.canvas_state) delete gs.canvas_state[String(st.id)];
+    ((st.conds || {}).items || []).forEach(applyItem);
+    var w = (st.sched || [])[0], items = (st.conds || {}).items || [];
+    var tod = null; items.forEach(function (it) { if (!tod && it.type === "time_of_day") tod = it; });
+    var day = nowDayIdx(), start = null;
+    if (w) { if (w.weekdays && w.weekdays.length) day = w.weekdays[0]; start = hm(w.startTime); }
+    else if (tod) start = hm(tod.start_time);
+    if (start) { var mm = start[0] * 60 + start[1] + 5; devSetTime(day, Math.floor(mm / 60) % 24, mm % 60); }
+    var p = locPassage(st.locId);
+    if (p) Engine.play(p); else Engine.play("DevPage");
+}
+function npcRow(e, si) {
+    var o = npcObj(e.npc) || {}, ct = sv().player.core_traits || {}, cur = Number(ct[e.counter] || 0);
+    var last = e.steps.length ? e.steps[e.steps.length - 1].n : 0;
+    var traits = Object.keys(o.core_traits || {}).filter(function (k) { return !(setup.hiddenTraits || []).includes(k); });
+    var h = '<details name="dev" class="cast-card"><summary><span class="cast-head"><span class="stats-name">' + esc(o.name || e.npc) +
+            '</span><span class="cast-line">step ' + cur + " of " + last + (traits.length ? " · " + traits.map(function (k) { return esc(tlabel(k)) + " " + esc(o.core_traits[k]); }).join(" · ") : "") + "</span></span></summary>";
+    h += '<div class="cast-body">';
+    traits.forEach(function (k) {
+        h += '<div class="dev-line">' + esc(tlabel(k)) + " " + esc(o.core_traits[k]) +
+             ' <button class="dev-act" data-act="npc" data-npc="' + esc(e.npc) + '" data-k="' + esc(k) + '" data-d="-5">−5</button>' +
+             ' <button class="dev-act" data-act="npc" data-npc="' + esc(e.npc) + '" data-k="' + esc(k) + '" data-d="5">+5</button></div>';
+    });
+    h += '<div class="dev-line">Step counter <code>' + esc(e.counter) + '</code> ' + cur +
+         ' <button class="dev-act" data-act="ctr" data-k="' + esc(e.counter) + '" data-d="-1">−1</button>' +
+         ' <button class="dev-act" data-act="ctr" data-k="' + esc(e.counter) + '" data-d="1">+1</button></div>';
+    e.steps.forEach(function (st, j) {
+        var mark = cur >= st.n ? "✓" : (cur === st.n - 1 ? "▶" : "·");
+        h += '<div class="dev-step"><div><b>' + mark + " " + st.n + "</b> " + esc(st.name) + "</div>";
+        if (cur === st.n - 1 || cur < st.n) {
+            var items = ((st.conds || {}).items || []).filter(function (it) { return it !== null; });
+            h += '<div class="dev-needs">' + items.map(function (it) { return (itemOk(it) ? "✓ " : "✗ ") + itemLabel(it); }).join("<br>") +
+                 "<br>" + (inWindow(st.sched) ? "✓ " : "✗ ") + "when: " + esc(schedText(st.sched)) +
+                 "<br>where: " + esc(locName(st.locId)) + "</div>";
+        }
+        h += '<div><button class="dev-act" data-act="setup" data-si="' + si + '" data-j="' + j + '">Set it up</button>' +
+             ' <button class="dev-act" data-act="play" data-si="' + si + '" data-j="' + j + '">Play it now</button></div></div>';
+    });
+    return h + "</div></details>";
+}
+function herRow() {
+    var ct = sv().player.core_traits || {}, h = '<details name="dev" class="cast-card" open><summary><span class="cast-head"><span class="stats-name">Her</span></span></summary><div class="cast-body">';
+    (setup.sidebar_items || []).forEach(function (si) {
+        if (!si || !si.trait || !si.bands) return;
+        h += '<div class="dev-line">' + esc(si.label || tlabel(si.trait)) + " " + esc(ct[si.trait] || 0) + "<br>";
+        si.bands.forEach(function (b) { h += '<button class="dev-act" data-act="set" data-k="' + esc(si.trait) + '" data-v="' + esc(b.min || 0) + '">' + esc(b.text) + " " + esc(b.min || 0) + "</button> "; });
+        h += "</div>";
+    });
+    return h + "</div></details>";
+}
+function timeRow() {
+    var ts = sv().game_state.time_state, h = '<details name="dev" class="cast-card"><summary><span class="cast-head"><span class="stats-name">Time and place</span><span class="cast-line">' +
+        esc(ts.current_day) + " " + String(ts.current_hour).padStart(2, "0") + ":" + String(ts.current_minute).padStart(2, "0") + "</span></span></summary><div class='cast-body'><div class='dev-line'>";
+    DAYS.forEach(function (d, i) { h += '<button class="dev-act" data-act="day" data-v="' + i + '">' + d.slice(0, 3) + "</button> "; });
+    h += "</div><div class='dev-line'>";
+    [-60, -15, 15, 60].forEach(function (m) { h += '<button class="dev-act" data-act="mins" data-v="' + m + '">' + (m > 0 ? "+" : "") + m + " min</button> "; });
+    [7, 12, 18, 22].forEach(function (hh) { h += '<button class="dev-act" data-act="hour" data-v="' + hh + '">' + hh + ":00</button> "; });
+    h += "</div><div class='dev-line'>Go to:<br>";
+    var m = setup.passage_to_location || {}, seen = {};
+    Object.keys(m).filter(function (p) { return p.indexOf("Location_") === 0; }).sort().forEach(function (p) {
+        if (seen[m[p]]) return; seen[m[p]] = 1;
+        h += '<button class="dev-act" data-act="go" data-p="' + esc(p) + '">' + esc(locName(m[p])) + "</button> ";
+    });
+    return h + "</div></div></details>";
+}
+setup.devRender = function () {
+    var el = document.getElementById("dev-root");
+    if (!el) return;
+    var steps = setup.devSteps();
+    setup._devStepsCache = steps;
+    el.innerHTML = '<style>.dev-line{margin:6px 0}.dev-step{border-top:1px solid rgba(127,127,127,.3);padding:6px 0}.dev-needs{font-size:12px;opacity:.85;margin:4px 0 4px 14px}.dev-act{margin:2px;padding:4px 8px}</style>' +
+        '<div class="cast-list">' + herRow() + timeRow() + steps.map(npcRow).join("") + "</div>";
+};
+$(document).on(":passageend", function () { if (State.passage === "DevPage") setup.devRender(); });
+document.addEventListener("click", function (ev) {
+    var b = ev.target && ev.target.closest ? ev.target.closest(".dev-act") : null;
+    if (!b) return;
+    var a = b.dataset.act, s = sv(), ct = s.player.core_traits;
+    if (a === "setup" || a === "play") {
+        var st = ((setup._devStepsCache || [])[Number(b.dataset.si)] || {steps: []}).steps[Number(b.dataset.j)];
+        if (!st) return;
+        if (a === "setup") setUpStep(st); else Engine.play(st.passage);
+        return;
+    }
+    if (a === "go") { Engine.play(b.dataset.p); return; }
+    if (a === "npc") { var o = npcObj(b.dataset.npc); if (o) { o.core_traits[b.dataset.k] = Math.max(0, Number(o.core_traits[b.dataset.k] || 0) + Number(b.dataset.d)); } }
+    if (a === "ctr") ct[b.dataset.k] = Math.max(0, Number(ct[b.dataset.k] || 0) + Number(b.dataset.d));
+    if (a === "set") ct[b.dataset.k] = Number(b.dataset.v);
+    if (a === "day") { var t0 = s.game_state.time_state; devSetTime(Number(b.dataset.v), t0.current_hour, t0.current_minute); }
+    if (a === "hour") { devSetTime(nowDayIdx(), Number(b.dataset.v), 0); }
+    if (a === "mins") { var t = s.game_state.time_state, mm = Math.max(0, Math.min(1439, t.current_hour * 60 + t.current_minute + Number(b.dataset.v))); devSetTime(nowDayIdx(), Math.floor(mm / 60), mm % 60); }
+    if (setup.commitMoment) setup.commitMoment();
+    setup.devRender();
+});
+}());
+"""
+        return widget + page + script
+
     def _generate_cast_page(self) -> str:
         """Emit the cast page, plus its sidebar button widget.
 
@@ -19587,6 +19849,8 @@ setup.travelMoveSlug = function (psg) {
             info_pages_list += ', "CastPage"'
         if self.cheat_page:
             info_pages_list += ', "CheatPage"'
+        if self.dev_mode:
+            info_pages_list += ', "DevPage"'
         info_pages_list += ']'
 
         info_nav_script = """:: InfoPageNav [script]
@@ -19961,6 +20225,7 @@ $(document).on(':passagestart', function(ev) {
 <<devIndicator>>
 <<reviewButton>>
 <<devJumps>>
+<<devButton>>
 <<missingMediaButton>>
 <<timeDisplay>>
 {portrait_line}<<sidebarItems>>{phone_btn_line}

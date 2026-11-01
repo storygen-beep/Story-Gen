@@ -1179,3 +1179,19 @@ sheets' own, and none is a tease, touch or paid look.
 - Engine test `test_the_dev_list_skips_only_hidden_so_a_sidebar_meter_keeps_its_buttons`; engine suite 794 passed,
   17 skipped. Gates 61/89, as before. `probe_devtraits.py` 7/7 (− / + on all four, `ryan_step` still hidden, + raises
   Corruption, 0 page errors). Rebuilt `--dev --debug`. a2's play check: "skipped by LO" (recorded by `pieces.py`).
+
+## 2026-11-02: the dev screen (engine, dev builds only; LO: "1 both · 2 yes full page · 3 yes place")
+
+- New full page `DevPage`, opened by "🔧 Dev screen" in the dev sidebar, laid out like People (tap-to-open rows):
+  **Her** (a button per stage band of each banded sidebar meter), **Time and place** (day, hour, ±15/60 min, go to any
+  place), then **one row per person**: his meters ±5, the step counter ±1, and every step with ✓ / ▶ / ·, what it
+  needs (each condition checked by the engine's own evaluator, "now N"), its window and its place, and two buttons:
+  **Set it up** (clears its fired record, makes each condition true, moves the clock into its first window, sends
+  her to the place, where it fires the normal way) and **Play it now** (jumps into its first screen).
+- Nothing authored: steps are found at runtime from `setup.help_data.locationCanvases` (a person's counter is the
+  `eq` counter their one-time scenes read most; then every one-time scene reading it is a step, bound or not).
+  first_term: Mark 1–4, Laura 1–4, Ryan 2–8 (1 is the opening), Jake 1–4, Hale 1–4, Tom 1–3, Zoe 1–5.
+- Not forced by "Set it up": clothing and presence items (marked ✗ for the tester).
+- Engine tests 795 passed (two new). `probe_devpage.py` 10/10 (the button, Her, all seven people, Set it up fires
+  Ryan 4 from Corruption 0, Play it now opens the hot tub, the Hungry button, 22:00, 0 page errors). Gates 61/89;
+  probes a2, A–I and devtraits all pass. Rebuilt `--dev --debug`.
