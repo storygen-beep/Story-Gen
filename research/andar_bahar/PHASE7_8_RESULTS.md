@@ -30,10 +30,22 @@ the winner rate only 1% of the time at 300 rounds and 14% at 1,000. The deal-ord
 strong at any size. An anomaly in a later, larger log would still need to be ruled a capture
 error before it is read as anything about the table.
 
-Not done: Phase 7 step 3's comparison of logged rounds with the user's own iPhone screenshots.
-None were supplied. The parser's cross-check compares two messages from the same server, so it
-proves the capture is self-consistent, not that it matches the screen. The game-frame
-screenshots in `data/shots/` are available for that check.
+Phase 7 step 3, the screen check. The user supplied no iPhone screenshots, so the check used the
+game-frame screenshots capture.py saved in `data/shots/`. Each is taken as the next round opens,
+so it shows the previous round's cards still on the table, and a strip of the last seven jokers
+coloured by winner. Five screenshots were checked by eye: one chosen first (17431268642) and six
+drawn at random (seed 11), of which four were read.
+
+- Video, the part that does not come through the game socket: in every screenshot where the
+  cards were still down, the joker and the cards on each side match the logged round (for
+  example round 17431258490: joker 6c, Bahar 7h 5c 8s 6s, Andar Jd Th 5h 4c; round 17415610073:
+  joker 5d, Bahar Jh, Andar 5s).
+- Joker strips: 35 joker-and-winner entries were compared with the log. Every round present in
+  the log matches its rank, order and winner. Where the strip shows a joker the log lacks
+  (3 entries), it falls in a gap left by a round parse.py left out, so it is a missing round,
+  not a contradiction.
+
+No contradiction was found. A check by eye of five screenshots is a sample, not a proof.
 
 ## Phase 8: decide.py on the live log
 

@@ -155,4 +155,5 @@ parsed rounds match the screenshots.
   Total still 270 rounds; the next run needs a login by hand first.
 - Run 6 (2026-11-01, 11:21 to 13:01, after a login by hand): 58 round ids, 5 automatic reloads.
   Total 322 complete rounds. The audit passes on every family and decide.py says SKIP on every
-  round; results in `PHASE7_8_RESULTS.md`. The check against iPhone screenshots is still open.
+  round; results in `PHASE7_8_RESULTS.md`. Screen check done on the saved game-frame screenshots
+  (no iPhone screenshots were supplied): no contradiction.
