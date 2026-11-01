@@ -198,6 +198,7 @@ def test_a_short_pay_carries_then_a_full_pay_clears_it(html):
         assert g.sv("game_state.rent_state.owed") == 70
         assert g.sv("game_state.rent_state.total_paid") == 30
         assert g.sv("flags.rent_carried") is True
+        assert g.sv("player.core_traits.rent_short_weeks") == 1
 
         _rent_day(g, money=1000)
         text = _text(g)
@@ -209,6 +210,7 @@ def test_a_short_pay_carries_then_a_full_pay_clears_it(html):
         assert g.sv("game_state.rent_state.total_paid") == 200  # past 100: stage 1
         assert LINE_1 in _text(g)
         assert g.sv("flags.rent_carried") is True  # a record, never cleared
+        assert g.sv("player.core_traits.rent_short_weeks") == 1  # a full week adds nothing
 
         _rent_day(g, money=1000)
         assert "Owed from last week" not in _text(g)
@@ -217,8 +219,10 @@ def test_a_short_pay_carries_then_a_full_pay_clears_it(html):
 
 @needs_browser
 def test_three_empty_weeks_pile_up_and_never_end_the_game(html):
+    """Each short Sunday also counts (2026-11-01): rent_short_weeks is 1, 2, 3, so a
+    game can make the first, second and third short week cost different things."""
     with open_game(html) as g:
-        for owed in (100, 200, 300):
+        for weeks, owed in enumerate((100, 200, 300), start=1):
             _rent_day(g, money=0)
             assert "Pay the $" not in _text(g)  # nothing to pay with
             g.click("Tell them you can't pay")
@@ -226,6 +230,45 @@ def test_three_empty_weeks_pile_up_and_never_end_the_game(html):
             assert f"Carried to next week: ${owed}." in text
             assert g.sv("game_state.rent_state.owed") == owed
             assert g.sv("game_state.rent_state.is_due") is False
+            assert g.sv("player.core_traits.rent_short_weeks") == weeks
+        assert g.errors == []
+
+
+@needs_browser
+def test_a_late_fee_joins_the_due_and_a_full_pay_clears_it(html):
+    """A game may add a late fee (2026-11-01): the player trait `rent_late_fee` is part of
+    next week's due, said on its own line, and zeroed by a full payment."""
+    with open_game(html) as g:
+        g.js("() => { SugarCube.State.variables.player.core_traits.rent_late_fee = 15; }")
+        _rent_day(g, money=1000)
+        text = _text(g)
+        assert "Rent is $115." in text and "Late fee: $15." in text
+        g.click("Pay $115 rent")
+        assert g.passage() == "RentDay_Paid"
+        assert g.sv("player.core_traits.money") == 885
+        assert g.sv("player.core_traits.rent_late_fee") == 0
+        _rent_day(g, money=1000)
+        assert "Late fee" not in _text(g)  # the fixture's rent has risen a stage by now
+        assert g.errors == []
+
+
+@needs_browser
+def test_a_carried_week_folds_the_late_fee_into_owed(html):
+    with open_game(html) as g:
+        g.js("() => { SugarCube.State.variables.player.core_traits.rent_late_fee = 15; }")
+        _rent_day(g, money=0)
+        g.click("Tell them you can't pay")
+        assert "Carried to next week: $115." in _short(g)
+        assert g.sv("game_state.rent_state.owed") == 115
+        assert g.sv("player.core_traits.rent_late_fee") == 0
+        assert g.errors == []
+
+
+@needs_browser
+def test_without_a_late_fee_trait_the_due_is_unchanged(html):
+    with open_game(html) as g:
+        _rent_day(g, money=1000)
+        assert "Rent is $100." in _text(g) and "Late fee" not in _text(g)
         assert g.errors == []
 
 
@@ -239,6 +282,7 @@ def test_a_reload_of_the_short_screen_charges_nothing(html):
         assert g.sv("player.core_traits.money") == 0
         assert g.sv("game_state.rent_state.owed") == 70
         assert g.sv("game_state.rent_state.total_paid") == 30
+        assert g.sv("player.core_traits.rent_short_weeks") == 1  # counted once
         assert g.errors == []
 
 
@@ -259,4 +303,5 @@ def test_a_save_made_before_en2b_carries_instead_of_ending(html):
         g.click("Pay the $20 you have")
         assert "Carried to next week: $80." in _short(g)
         assert g.sv("flags.rent_carried") is True
+        assert g.sv("player.core_traits.rent_short_weeks") == 1  # an old save starts from 0
         assert g.errors == []

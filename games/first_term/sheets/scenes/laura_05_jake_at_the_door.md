@@ -1,4 +1,6 @@
-# [READY] Scene — laura_05_jake_at_the_door
+# [MOVED] Scene — laura_05_jake_at_the_door
+
+> **MOVED 2026-11-01** (DECISIONS 113): Merged into Jake's step 3, "My boyfriend" (`npc_jake.md`). Its porch window line and its couch screen are rebuilt into `jake_03_my_boyfriend.md`. Kept on disk as the record.
 
 > Signed by LO: LO, 2026-10-08.
 

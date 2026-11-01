@@ -1,5 +1,7 @@
 # [READY] Person — Tom
 
+> **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the release-1 ladder, from `proposals/TOM_R1_LADDER.md` (signed 2026-11-01). Changed: his lines, Ladder, the seven columns, Leak and promise, the phone loop, Cut and later, Rows a gate needs. Everything else as signed.
+
 > **Changed 2026-10-29, re-signed by LO 2026-10-29** (DECISIONS 87–88): his shift text books the day's first shift; his Friday text is the only way into after close; a no-show costs his Want.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08). Re-signed 2026-10-29 ("sign all", in chat).
@@ -11,14 +13,14 @@
 | age | 31 |
 | role | café manager |
 | what she wants from him | shifts and good tips |
-| what he visibly wants, each visit | her behind the counter, closing late |
+| what he visibly wants, each visit | her behind the counter, closing late · this release he is strict: he never sells her and never tells her to wear less (LO, 2026-10-31) |
 | what he keeps | want + power |
 | where he sleeps | offscreen |
 | what he calls her | "@player" on shift (guess) |
 | met | when she asks for the job |
-| his line: the normal uniform | He reties her apron from behind. "Regulars tip the pretty ones." |
-| his line: the sexy uniform | "Top button stays open. House rule." |
-| his line: no bra | "Booth four's going to tip big today." |
+| his line: the normal uniform | He reties her apron from behind. "Tables first. Phone in the back. Smile." (changed 2026-11-01: "Regulars tip the pretty ones" is cut) |
+| his line: the sexy uniform | "Top button stays open. House rule." · **LO confirms:** it is Tom telling her to show, against "he never tells her to wear less" (2026-10-31); it needs a strict line instead |
+| his line: no bra | "Booth four's going to tip big today." · **LO confirms:** booth four is cut; it needs a new line |
 
 ## Crude words, by stage (SP2: "on their sheets")
 
@@ -38,16 +40,18 @@ A ceiling, never a floor. LO took these, 2026-10-08.
 
 ## Ladder — one guidance card per step (S10)
 
+> **Changed 2026-11-01, re-signed by LO 2026-11-01:** three steps, one per first. His steps are paced by the café
+> (shifts worked, footfall, name), not his meter: a declared exception to taste rule 5. The heat this release is the
+> customers' (`sheets/systems/job.md`). His Want and Power still move and are stored for a later release.
+
 | n | canvas | where | when | gate | raises | the no | guidance card line |
 |---|---|---|---|---|---|---|---|
-| 1 (Tom B 1) | `tom_01_the_apron` | `cafe` | Mon–Sat 14:30–22:00 | `cafe_job` | want add +10 | "I can tie my own apron." (counts; his Power −5) | Take a shift at the café: Tom is behind the counter. |
-| 2 (Tom B 2) | `tom_02_uniform_rule` | `cafe` | Mon–Sat 14:30–22:00 | `cafe_job` · Exhib. 20 · his Want 10 | want add +10 · exhibitionism add +3 | "No." (parked: tips stay low) | A café shift: Tom has a new uniform rule. |
-| 3 (Tom B 3) | `tom_03_the_tip_jar` | `cafe` | Mon–Sat 14:30–22:00 | `cafe_job` · Exhib. 20 · his Want 20 | want add +10 | walk past (parked) | A café shift, the back room: watch the tip jar. |
-| 4 (Tom B 4) | `tom_04_booth_four` | `cafe` | Mon–Fri 14:30–18:00 | `cafe_job` · Corruption 40 · Exhib. 20 · his Want 30 | want add +10 · corruption add +3 | "Not today, Tom." (parked: no booth four tips) | A weekday afternoon shift: Gary is in booth four. Twenty for ten minutes; Tom takes half. |
-| 5 (Tom B 5) | `tom_05_half_is_mine` | `cafe` | Mon–Sat 14:30–22:00 | `cafe_job` · Corruption 40 · Exhib. 20 · his Want 40 | want add +10 | "Fine." (parked) | After a shift, the back room: Tom wants his half. |
-| 6 (Tom B 6) | `tom_06_after_close_kiss` | `cafe` | Mon–Sat 22:00–23:00 (the café open till 23:00 since 2026-10-29, DECISIONS 89; his counter hub is 08:00–22:00) | `cafe_job` · Corruption 40 · Exhib. 20 · his Want 50 | want add +10 · corruption add +3 | "Night, Tom." (parked) | Stay after close: Tom pulls the blinds. |
+| 1 | `tom_01_the_apron`, reworked: strict | `cafe` | Mon–Sat 14:30–22:00 | `cafe_job` | want add +10 | "I can tie my own apron." (counts; his Power −5) | Take a shift at the café: Tom is behind the counter. |
+| 2 | `tom_03_the_tip_jar` | `cafe` (the back room) | Mon–Sat 14:30–22:00 | step 1 · five shifts worked (was Exhib. 20 · his Want 20) | want add +5 · power add −5 · `knows_tip_jar` set | walk past (parked) | A café shift, the back room: watch the tip jar. |
+| 3 | `tom_03_not_by_the_window` (new, top step) | `cafe` (the back room) | Mon–Sat 14:30–22:00 | step 2 · `cafe_footfall` 15 · `cafe_name` −5 or lower | the window rule set | on the step sheet (LO confirms) | A café shift after a customer's hand: Tom wants a word in the back. |
+| — | locked | his card | — | — | — | — | "Tom, later. (Needs Corruption 60.)" |
 
-Every step's gate also says the drinks boost is off. Stage numbers: 20 is Curious or Daring, 40 Bold or Showing.
+Every step's gate also says the drinks boost is off.
 
 ## Card goals (LO's play note, 2026-10-08)
 
@@ -55,29 +59,46 @@ Each guidance card's goals are the step's real requirements: the meters, flags, 
 row above. Never the step counter (no "1 / 2"). A requirement on another person's ladder is named as
 the event, e.g. "after Ryan's feet-in-his-lap night".
 
+## Each step, by the seven columns (`sheets/TASTE_COLUMNS.md`)
+
+| n | the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
+|---|---|---|---|---|---|---|---|
+| 1 | her first tray: he catches her apron strings and reties them, properly, because she did it wrong. "Tables first. Phone in the back. Smile." His hands stay one second longer than tying takes | Tom | her first day | "Yes, boss." · or "I can tie my own apron." | the retie, and the second he doesn't let go | yes | the job's rules; her uniform is the normal one until she buys or picks another |
+| 2 | the back room: Tom folding twenties out of the tip jar into his apron. Her twenties | Tom's secret is hers | being caught seeing it | "Busy night?" | "Not a word." His ears go red | yes | `knows_tip_jar`; Tom owes her; his line at the counter changes |
+| 3 | he's watched a customer's hand on her, and her letting it stay. In the back: "Reputation's going. The tables are full." Then: "Not by the window." | Tom; the room behind the door | her job, his café's name | "Then where?" · "Yes, boss." · "It's my tips." | the line he draws, and that he doesn't stop it | yes | the window rule: level-3 café scenes move away from the window; his look at her changes; his card ends on the locked line |
+
+**Her voice (rule 7):** a low and a high line on each step sheet.
+
+**Step 1, cut from the built step:** "Like that. You want it to show your waist." and "Regulars tip the pretty
+ones." **Cut from his hire line** (`tom.py:41`): "Regulars tip the pretty ones, so you'll do fine." It becomes
+"Eight a shift, plus tips. Be on time." **Kept:** his hands one second too long.
 
 ### Leak and promise (S5)
 
 | n | the leak: his want, shown before | the promise: the line it ends on |
 |---|---|---|
-| 1 | none: step 1, and it says so | "Then I'll be pretty." |
-| 2 | his eyes on her apron strings | "Is this the uniform, or your idea?" |
-| 3 | he counts the jar when she's near | "Not a word." |
-| 4 | "Gary asks about you." | "Ten minutes. Hands where I can see them." |
-| 5 | he holds out his hand for the cash | "Half's yours till I name the price." |
-| 6 | "Stay late Friday?" | "We're closed." |
+| 1 | none: step 1, and it says so | "Tables first. Phone in the back. Smile." |
+| 2 | he counts the jar when she's near | "Not a word." |
+| 3 | his look follows the customer's hand | "Not by the window." |
 
 **Final no:** "No more late shifts with you. (ends his path)". She works mornings.
 
-**What the last 0.1 step turns into:** the kiss after close repeats, Friday close only (LO, 2026-10-08). Steps 7–9 wait for his rewrite.
+**Declared exceptions:** rule 2 (Tom's lust is a later release, LO; the payoff this release is the café's footfall,
+name and his line) and rule 5 (paced by shifts and the café counters). Rule 6 passes through the café's three levels.
 
-**After** (SP2, where the arc ends, past 0.1): her prices stay hers, and the money comes home where Mark notices.
+## Cut or later, and what the player loses
+
+- **Cut:** Tom B 2, the uniform rule (`tom_02_uniform_rule`), and Tom B 4, booth four (`tom_04_booth_four`; Gary's ten
+  minutes, Tom takes half). Sheets marked cut. Tom never pushes her clothes and never sells her. The sexy uniform
+  stays as her own choice.
+- **Later:** Tom B 5, "half is mine" (`tom_05_half_is_mine`) and Tom B 6, the kiss after close
+  (`tom_06_after_close_kiss`). Sheets marked later. Both come back when she corrupts him.
 
 ## Phone thread
 
 | thread | cause flag (a scene sets it) | delay | window | booking (place + time, reminder) | loop |
 |---|---|---|---|---|---|
-| `tom` | `cafe_job` | 1 day | 10:00–14:00 | "shift after class?" the café · reminder: quest card | after step 6: every 7 days, Friday 12:00–18:00, "Stay after close." |
+| `tom` | `cafe_job` | 1 day | 10:00–14:00 | "shift after class?" the café · reminder: quest card | after step 6: every 7 days, Friday 12:00–18:00, "Stay after close." · **later** (2026-11-01): step 6 is a later release, so this loop waits with it |
 
 ### Messages, per reply (LO's note, 2026-10-08)
 
@@ -100,9 +121,8 @@ Each follow-up waits for her reply (`after_round`), and a different answer follo
 
 | row | gate |
 |---|---|
-| Want read by every step gate | the men's numbers are read |
-| Power read: who names the price | the men's numbers are read |
-| Gary's $20 on the button | sex for pay names the amount |
+| shifts worked, `cafe_footfall`, `cafe_name` read by his step gates | a meter is read |
+| the window rule read by the café's level-3 scenes | a flag is read |
 
 ## Why — the source of each key choice
 
@@ -111,6 +131,7 @@ Each follow-up waits for her reply (`after_round`), and a different answer follo
 | to step 6; 7–9 later | LO, 2026-10-08 (SP7) |
 | the Friday repeat | LO, 2026-10-08 (question 2) |
 | steps, lines and nos | SP2 · the arc ideas (Tom B) |
+| the release-1 ladder, three steps, strict, the cuts and laters | `proposals/TOM_R1_LADDER.md`, signed by LO 2026-11-01 (DECISIONS 99–111) |
 | his lines, the thread | guess |
 | messages per reply | LO's play note, 2026-10-08 (chats wait for her reply) · lines guess |
 | no clock time in his text | sweep R-row ("2:30") |

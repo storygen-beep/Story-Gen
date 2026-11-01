@@ -1,4 +1,6 @@
-# [READY] Scene — jake_saturday_date
+# [REWORKED] Scene — jake_saturday_date
+
+> **REWORKED 2026-11-01** (DECISIONS 113): the canvas is rebuilt as Jake's hot repeatable, "The end of a date" (`jake_date_end.md`). Kept on disk as the record.
 
 > **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
 

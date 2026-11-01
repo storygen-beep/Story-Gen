@@ -72,6 +72,9 @@ and A14; and, given a thread, "Her life — the threads" in `references/the-want
   game's TOML and read that canvas's trigger. (Not at the idea phase: there is no TOML yet.)
 - **A "no" parks the step; a final no only on a button that says "(ends his path)"** (`the-arc.md` A3).
   **His move never fires on a dice roll alone** — the scene says why now.
+- **The pitch fills the step row** (`the-sheets.md` S14): the moment, who sees or knows, what she risks,
+  how she says yes, his move, does it finish, what changes after. A pitch with two empty columns is not
+  returned: pick again. One empty column says why it is empty on purpose.
 - **The clip is part of the pitch.** Say what it is, so it can be found.
 - **Adults only.** Never set anything in a school or with anyone under 18. An adult college is allowed:
   everyone 18+ and stated, university words only, never a word on the banned list (`the-voice.md`,
@@ -100,6 +103,11 @@ RELATIONSHIPS (or "step 1", with the leak that shows the want first).
    his that names what she did.
 7. **The moment to remember** — the kind, and the line a player would quote.
 8. **The door it opens, and the clip** — the goal, mystery or rival beat it moves, and the clip.
+
+**Step row (S14).** The three columns the eight lines do not already answer, one line each:
+**what she risks** · **does it finish** (on the body, or the ladder's one cut-off, named) ·
+**what changes after** (a thing the world keeps, not a flag nobody reads). Lines 2, 3, 4 and 5 above are
+his move, the no, her yes and who sees.
 
 **Leads to — what it opens.** The next step, named; the promise line this step ends on; and the
 guidance card line that lets the player find the next step.

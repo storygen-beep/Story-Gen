@@ -1,6 +1,6 @@
 # [REVIEW] Person — <name>
 
-> One page. Rules: `references/the-sheets.md` S5, S10 · `the-arc.md` A1–A15 · `the-meters.md` W1.
+> One page. Rules: `references/the-sheets.md` S5, S10, S14 · `the-arc.md` A1–A15 · `the-meters.md` W1.
 > Saved at `games/<slug>/sheets/people/<npc_id>.md`.
 
 | row | answer |
@@ -21,9 +21,25 @@
 
 ## Ladder — one guidance card per step (S10)
 
-| n | canvas | where | when | gate | raises | the no (parked · final) | guidance card line |
-|---|---|---|---|---|---|---|---|
-| 1 | <canvas> | <location_id> | <days, from–to> | <trait op value> | <trait: n> | <parked · final> | <place + time + what waits> |
+| n | canvas | where | when | gate | raises | the no (parked · final) | her line low · high | guidance card line |
+|---|---|---|---|---|---|---|---|---|
+| 1 | <canvas> | <location_id> | <days, from–to> | <trait op value> | <trait: n> | <parked · final> | <low line · high line> | <place + time + what waits> |
+| hot repeatable | <canvas, one per stage, written in full> | <location_id> | <days, from–to> | <trait op value> | <trait: n per visit> | — | <low · high> | <how the player finds it> |
+
+## Ladder rules (S14) — ticked before any step is written
+
+Two failing: the ladder is not built.
+
+| rule | pass · fail | the one line of evidence |
+|---|---|---|
+| 1 · every step adds a new witness, risk or kind of yes | <pass · fail> | <steps n→n+1> |
+| 2 · the top step is a payoff, finished on the body | <pass · fail> | <the top step> |
+| 3 · one cut-off per ladder | <pass · fail> | <which step> |
+| 4 · he moves at least every other step | <pass · fail> | <steps where he moves> |
+| 5 · his meter is the lock: two to four hot visits between steps | <pass · fail> | <step pays · next needs · per visit> |
+| 6 · one hot repeatable per stage, written in full | <pass · fail> | <canvas per stage> |
+| 7 · a low line and a high line per step | <pass · fail> | <column above> |
+| 8 · something still happens after the top step | <pass · fail> | <the loop> |
 
 ## Phone thread (`the-phone.md` P1–P12 · `templates/cards/phone.md`)
 

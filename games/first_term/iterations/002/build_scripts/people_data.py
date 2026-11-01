@@ -191,10 +191,10 @@ ACTIVITIES = {
                  "in his room for the night", "home in his room, evening", "in his room with Kayla",
                  "watching TV, a film on"],
     "npc_laura": ["waiting on the dark stairs", "making breakfast before work", "in the kitchen, evening",
-                  "awake, alone", "asleep", "asleep", "awake, with Mark", "asleep", "dressing to go out", "waiting up in the dark"],
+                  "awake, alone", "asleep", "asleep", "awake, with Mark", "asleep", "in the shower", "dressing to go out", "waiting up in the dark"],
     "npc_mark": ["at dinner", "in the garage, evening", "up late with the TV on", "up late with the TV on",
                  "asleep", "asleep", "awake, with Laura", "asleep", "cooking, Wednesday", "in the garage, Saturday",
-                 "the Sunday table"],
+                 "the Sunday table", "heading out to the bar"],
     "npc_tom": ["running the café", "closing up, the café shut"],
     "npc_zoe": ["at the party house", "at home", "at home, party night", "at home, the party after midnight",
                 "going to bed", "lying on the grass", "at lunch", "on her weekend run",
@@ -208,7 +208,7 @@ ACTIVITIES = {
     "npc_art_lecturer": ["teaching Figure drawing", "teaching Figure drawing", "office hours"],
     "npc_business_lecturer": ["teaching Business", "teaching Business", "office hours"],
     "npc_bio_ta": ["teaching Biology", "teaching Biology", "office hours"],
-    "npc_dean": ["in his office"],
+    "npc_dean": ["in his office, early", "in his office"],
     "npc_cocky_guy": ["at Zoe's party", "at Zoe's party"],
 }
 # The household is home from the first screen: no met gate (0.1 built them with none).

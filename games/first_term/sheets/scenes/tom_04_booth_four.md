@@ -1,4 +1,6 @@
-# [READY] Scene — tom_04_booth_four
+# [CUT] Scene — tom_04_booth_four
+
+> **CUT 2026-11-01** (DECISIONS 113): Tom stays strict: he never pushes her clothes and never sells her (`npc_tom.md`). Kept on disk as the record; not built in release 1.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-09).
 

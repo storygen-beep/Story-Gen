@@ -1,5 +1,7 @@
 # [READY] Scene — jake_02_kiss_on_the_quad
 
+> **Changed 2026-11-01, signed by LO 2026-11-01 ("Continue")** (DECISIONS 99–119): Jake's release-1 ladder (`sheets/people/npc_jake.md`, signed). Changed: the gate is Curious **or** Daring (`meters.md`; was both); her voice row. The screens stand as built.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08.
@@ -8,12 +10,15 @@
 |---|---|
 | person · step | `npc_jake` · 2 (Jake B 2) |
 | where · when | the quad · Mon, Wed, Fri 10:15–11:45, with his team |
-| gate | Corruption 20 · Exhibitionism 20 · the boost off |
+| gate | Corruption 20 **or** Exhibitionism 20 · `jake_step` eq 1 · the boost off |
 | want (test 1) | "Wasn't planning to stop." (B 1); his number in her phone |
 | next step (test 2) | a kiss in public, and he shows her off |
 | hook (test 3) | "Saturday. Pick me up at the door." |
 | what she wears here (test 8) | not named |
 | explicit? | no: a kiss |
+| who notices | the team |
+| what she risks | being shown off |
+| her_line_low · her_line_high (rule 7) | low: "He's normal. This is normal." · high: "You want Ryan to hear every second of it." (the person sheet's pair) | The built thought on `kiss` ("You want them to see too.") is the high side. |
 | crude words | Jake's early column: ass (stage 2) |
 
 ## Branch map — one row per screen (S1)

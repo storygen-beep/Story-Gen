@@ -1,4 +1,6 @@
-# [READY] Scene — laura_04_ryans_door
+# [MOVED] Scene — laura_04_ryans_door
+
+> **MOVED 2026-11-01** (DECISIONS 113): No longer Laura's step: it becomes "Laura opens the door" on Ryan's ladder (`npc_ryan.md`); it stops setting `laura_step`. Kept on disk as the record; not built in release 1.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

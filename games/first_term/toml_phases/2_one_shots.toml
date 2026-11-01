@@ -71,7 +71,8 @@ text       = "Skip the opening"
 targetType = "node"
 nodeId     = "card"
 time_progression_minutes = 45
-wardrobeEffects = [ { action = "add", item_id = "sleep_shirt" }, { action = "add", item_id = "towel" } ]
+# (2026-11-01) dressed as the full opening leaves her, since the card now walks her to campus (DECISIONS 121)
+wardrobeEffects = [ { action = "add", item_id = "sleep_shirt" }, { action = "add", item_id = "towel" }, { action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" } ]
 flagEffects = [
   { targetType = "player", flag = "rent_starts", op = "set" },
   { targetType = "player", flag = "laura_rule_ryan_first", op = "set" },
@@ -514,19 +515,26 @@ content = "How this week works"
 type    = "paragraph"
 content = "You need $75 by Sunday: the rent is taken then. The café on your street is hiring. Classes are three a day Monday to Thursday and one on Friday; skipping one costs your grade. People are in different places at different hours: the People and Schedules pages show where. What you wear changes how people look at you. Hygiene is on unless you turn it off now: shower to keep it up."
 
+# Release 1 (college.md, "The first college day"; DECISIONS 121): the opening hands her to college.
+# Laura's line, then "Go to campus." walks her to the dean's office (15 minutes; 5 more for the card).
+[[canvases.nodes.blocks]]
+type    = "dialog"
+content = "You'll be late on your first day."
+props   = { speaker = "npc", npcId = "npc_laura" }
+
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text        = "Keep hygiene on"
+text        = "Go to campus."
 targetType  = "location"
-locationId  = "home_kitchen"
-time_progression_minutes = 5
+locationId  = "dean_office"
+time_progression_minutes = 20
 flagEffects = [ { targetType = "player", flag = "opening_done", op = "set" } ]
 
 [[canvases.nodes.exit_block.choices]]
-text        = "Turn hygiene off"
+text        = "Go to campus. (Turn hygiene off)"
 targetType  = "location"
-locationId  = "home_kitchen"
-time_progression_minutes = 5
+locationId  = "dean_office"
+time_progression_minutes = 20
 flagEffects = [ { targetType = "player", flag = "opening_done", op = "set" }, { targetType = "player", flag = "hygiene_off", op = "set" } ]

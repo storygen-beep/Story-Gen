@@ -1,4 +1,6 @@
-# [READY] Scene — ryan_08_two_knocks
+# [CUT] Scene — ryan_08_two_knocks
+
+> **CUT 2026-11-01** (DECISIONS 113): Ryan's release-1 ladder (`npc_ryan.md`) replaces it. Kept on disk as the record; not built in release 1.
 
 > **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
 

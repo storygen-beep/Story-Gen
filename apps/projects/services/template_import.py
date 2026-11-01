@@ -602,6 +602,12 @@ class GameTemplate:
     # [ui] quests_layout — "cards" (default, one card per person in file order) or
     # "list" (short tap-to-open rows, ready first). Kept raw; validate() checks it.
     quests_layout: Any = "cards"
+    # [[ui.timetable]] — her classes, one row each: class, place, lecturer (optional NPC
+    # id), weekdays (0 = Monday), from, to ("HH:MM"). Drawn by setup.timetableHtml as a
+    # day-by-day table. Kept raw; validate() checks it. Empty = no timetable.
+    timetable: Any = field(default_factory=list)
+    # [ui] timetable_button — the Timetable button in the sidebar (needs a timetable).
+    timetable_button: bool = False
     # Doc 69 Item 3 — parse-time errors collected during normalize() for the
     # field-name mismatch validator. validate() prepends these to its own
     # error list. Populated only by normalize(); never mutated downstream.
@@ -3609,10 +3615,14 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     sidebar_hide_raw: Any = []
     phone_clock = False
     quests_layout_raw: Any = "cards"
+    timetable_raw: Any = []
+    timetable_button = False
     if isinstance(ui_raw, dict):
         sidebar_hide_raw = ui_raw.get("sidebar_hide") or []
         phone_clock = ui_raw.get("phone_clock") is True
         quests_layout_raw = ui_raw.get("quests_layout", "cards")
+        timetable_raw = ui_raw.get("timetable") or []
+        timetable_button = ui_raw.get("timetable_button") is True
 
     # Player cheat page. Authored under [ui.cheat_page] + [[ui.cheat_page.grants]].
     # NOTE the deliberate divergence from tips_page above: an authored-but-empty
@@ -3805,6 +3815,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         sidebar_hide=sidebar_hide_raw,
         phone_clock=phone_clock,
         quests_layout=quests_layout_raw,
+        timetable=timetable_raw,
+        timetable_button=timetable_button,
         # This kwarg is the silent-no-op step: parse the block, forget the kwarg,
         # and the feature vanishes with no error anywhere. Covered by a test.
         cheat_page=cheat_page_obj,
@@ -6812,6 +6824,7 @@ def validate(template: GameTemplate) -> List[str]:
     errors.extend(_validate_cast_traits(template))
     errors.extend(_validate_sidebar_hide(template))
     errors.extend(_validate_quests_layout(template))
+    errors.extend(_validate_timetable(template))
 
     # EN8 — decay toward a rest point; wait after contact.
     errors.extend(_validate_decay_rest(template))
@@ -7134,7 +7147,7 @@ def _validate_show_traits(value: Any, ctx: str, errors: List[str]) -> List[str]:
 
 # The sidebar buttons a game may leave out with [ui] sidebar_hide, by the name the
 # player reads. Each maps to one widget in StoryCaption (v2.py).
-SIDEBAR_BUTTONS = ("quests", "people", "tips", "cheats", "stats", "schedules", "flags")
+SIDEBAR_BUTTONS = ("quests", "people", "timetable", "tips", "cheats", "stats", "schedules", "flags")
 
 
 def _validate_sidebar_hide(template) -> List[str]:
@@ -7163,6 +7176,50 @@ def _validate_quests_layout(template) -> List[str]:
     if raw == "list" and template.project.quests_engine != "v2":
         return ['[ui] quests_layout = "list" requires project.quests_engine = "v2"']
     return []
+
+
+TIMETABLE_KEYS = ("class", "place", "lecturer", "weekdays", "from", "to")
+
+
+def _validate_timetable(template) -> List[str]:
+    """`[[ui.timetable]]` rows and `[ui] timetable_button`. Errors: a row the screen
+    could not draw would vanish from the table without a word, and a button with no
+    rows would open an empty dialog."""
+    raw = template.timetable
+    errs: List[str] = []
+    if not isinstance(raw, list):
+        return [f"[[ui.timetable]] must be a list of rows, got {type(raw).__name__}"]
+    if template.timetable_button and not raw:
+        errs.append("[ui] timetable_button = true needs at least one [[ui.timetable]] row")
+    loc_ids = {l.id for l in template.locations or []}
+    npc_ids = {n.id for n in template.npcs or []}
+    hhmm = r"([01]\d|2[0-3]):[0-5]\d"
+    for i, r in enumerate(raw):
+        ctx = f"[[ui.timetable]] row {i}"
+        if not isinstance(r, dict):
+            errs.append(f"{ctx}: must be a table")
+            continue
+        for k in r:
+            if k not in TIMETABLE_KEYS:
+                errs.append(f"{ctx}: unknown key '{k}' (allowed: {', '.join(TIMETABLE_KEYS)})")
+        if not isinstance(r.get("class"), str) or not r.get("class"):
+            errs.append(f"{ctx}: 'class' must be a non-empty string")
+        if r.get("place") not in loc_ids:
+            errs.append(f"{ctx}: 'place' {r.get('place')!r} is not a location id")
+        if r.get("lecturer") not in (None, "") and r.get("lecturer") not in npc_ids:
+            errs.append(f"{ctx}: 'lecturer' {r.get('lecturer')!r} is not an NPC id")
+        wd = r.get("weekdays")
+        if (not isinstance(wd, list) or not wd
+                or not all(isinstance(d, int) and not isinstance(d, bool) and 0 <= d <= 6 for d in wd)):
+            errs.append(f"{ctx}: 'weekdays' must be a non-empty list of 0-6 (0 = Monday)")
+        for k in ("from", "to"):
+            v = r.get(k)
+            if not isinstance(v, str) or not _re_for_stage_pattern.fullmatch(hhmm, v):
+                errs.append(f"{ctx}: '{k}' must be \"HH:MM\" (24-hour), got {v!r}")
+        if (isinstance(r.get("from"), str) and isinstance(r.get("to"), str)
+                and r["from"] >= r["to"]):
+            errs.append(f"{ctx}: 'from' must be before 'to' (a class does not cross midnight)")
+    return errs
 
 
 def _validate_cast_traits(template) -> List[str]:
@@ -7345,6 +7402,13 @@ def _is_seen_weight(v: Any) -> bool:
     return isinstance(v, (int, float)) and not isinstance(v, bool) and 0 < v <= 1
 
 
+def _is_pool_seen_weight(v: Any) -> bool:
+    """A block_pool may also take 0: a shuffle bag, no entry repeats until all have
+    shown, then a fresh round (`setup.pickRememberedPoolEntry`). A random canvas may
+    not: 0 would switch it off for ever after its first fire."""
+    return isinstance(v, (int, float)) and not isinstance(v, bool) and 0 <= v <= 1
+
+
 def _block_pools(node: Any):
     """Every `block_pool` block under a node's blocks, nested ones included."""
     if isinstance(node, dict):
@@ -7361,7 +7425,8 @@ def _validate_seen_memory(template: GameTemplate) -> List[str]:
     """E2 — pools and random canvases that remember what she has seen.
 
     Errors, for the EN1 reason: an unknown value or a key on the wrong canvas would
-    build clean and do nothing. `seen_weight` is a multiplier in (0, 1].
+    build clean and do nothing. `seen_weight` is a multiplier in (0, 1] on a random
+    canvas and in [0, 1] on a block_pool (0 = a shuffle bag).
     """
     errors: List[str] = []
     for ci, c in enumerate(template.canvases or []):
@@ -7387,9 +7452,9 @@ def _validate_seen_memory(template: GameTemplate) -> List[str]:
                     if memory != "seen":
                         errors.append(f"{where} node '{node.id}': block_pool seen_weight is "
                                       f"read only with memory = \"seen\"")
-                    elif not _is_seen_weight(props["seen_weight"]):
+                    elif not _is_pool_seen_weight(props["seen_weight"]):
                         errors.append(f"{where} node '{node.id}': block_pool seen_weight must "
-                                      f"be a number in (0, 1] (got {props['seen_weight']!r})")
+                                      f"be a number in [0, 1] (got {props['seen_weight']!r})")
     return errors
 
 
@@ -8713,6 +8778,14 @@ def _assemble_project_metadata(project, template):
         project.metadata["phone_clock"] = True
     if template.quests_layout == "list":
         project.metadata["quests_layout"] = "list"
+    if template.timetable:
+        project.metadata["timetable"] = [
+            {"class": r["class"], "place": r["place"], "lecturer": r.get("lecturer", ""),
+             "weekdays": list(r["weekdays"]), "from": r["from"], "to": r["to"]}
+            for r in template.timetable
+        ]
+    if template.timetable_button:
+        project.metadata["timetable_button"] = True
     # Player cheat page. The FULL row data goes here — hints, values, caps and all.
     # Metadata never reaches the output file as a config object; each row is baked
     # into passage markup inside a check on its own unlock flag.

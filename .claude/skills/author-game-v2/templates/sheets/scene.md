@@ -1,6 +1,6 @@
 # [REVIEW] Scene — <canvas id>
 
-> One page per rung. Rules: `references/the-sheets.md` S1, S4 · `register.md` "What a scene contains".
+> One page per rung. Rules: `references/the-sheets.md` S1, S4, S14 · `register.md` "What a scene contains".
 > Saved at `games/<slug>/sheets/scenes/<canvas_id>.md`. The beats are written by `v2-prose`, not here.
 
 | row | answer |
@@ -10,6 +10,14 @@
 | next step (test 2) | <what goes one step further> |
 | hook (test 3) | <what it points at next> |
 | what she wears here (test 8) | <state or item — and the condition behind it: trigger · group · `entry_conditions` · the choice in · an equip; or "not named"> |
+
+## The step row (S14) — filled before the step is written
+
+Two empty columns: the step is not written. One empty column: the Why table says why.
+
+| the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
+|---|---|---|---|---|---|---|
+| <what a player would name; what is new against the step before> | <who is there or finds out · "nobody", declared> | <caught · a secret · a person · a price> | <out loud; the button carries it> | <what he does, for his own reason> | <finished on the body · the ladder's one cut-off> | <a rule · schedule · label · price · standing line · the next step> |
 
 ## Branch map — one row per screen (S1)
 
@@ -24,4 +32,4 @@ allowed; hiding one is not (`references/the-release.md`, "When LO rejects someth
 
 | key choice | source |
 |---|---|
-| <what the scene shows · how far it goes · its exits> | <rule file + id · `scout/<topic>.md` · LO, <date> · guess> |
+| <what the scene shows · how far it goes · its exits · why a column of the step row is empty on purpose> | <rule file + id · `scout/<topic>.md` · LO, <date> · guess> |

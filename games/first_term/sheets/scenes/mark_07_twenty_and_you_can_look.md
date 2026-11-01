@@ -1,4 +1,6 @@
-# [READY] Scene — mark_07_twenty_and_you_can_look
+# [CUT] Scene — mark_07_twenty_and_you_can_look
+
+> **CUT 2026-11-01** (DECISIONS 113): Mark's paid route is cut: no sex and no money for her body (`npc_mark.md`). Kept on disk as the record; not built in release 1.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

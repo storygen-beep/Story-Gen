@@ -45,10 +45,23 @@ def GC(c, *blocks):
     return {"type": "group", "conditions": c, "blocks": list(blocks)}
 
 
-def POOL(*blocks, pid=None):
+def top_or_dress(text):
+    """A signed beat says "your top"; in a dress-slot item that's "your dress" (reader, 2026-11-01). Two flat groups."""
+    if "your top" not in text:
+        return [P(text)]
+    return [G(cond(*[{"type": "clothing_item", "item_id": d, "operator": "unequipped"} for d in DRESSES]), P(text))] + \
+           [G(cond({"type": "clothing_item", "item_id": d, "operator": "equipped"}), P(text.replace("your top", "your dress"))) for d in DRESSES]
+
+DRESSES = ("zoe_party_dress", "laura_blue_dress")   # the two dresses she goes out in
+
+
+def POOL(*blocks, pid=None, bag=False):
+    """bag=True: a shuffle bag, no entry repeats until all have shown (seen_weight = 0, DECISIONS 112)."""
     b = {"type": "block_pool", "blocks": list(blocks)}
     if pid:
         b["props"] = {"id": pid, "memory": "seen"}
+        if bag:
+            b["props"]["seen_weight"] = 0
     return b
 
 

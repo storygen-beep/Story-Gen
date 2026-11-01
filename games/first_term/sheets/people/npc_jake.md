@@ -1,5 +1,7 @@
 # [READY] Person — Jake
 
+> **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the release-1 ladder, from `proposals/JAKE_R1_LADDER.md` (signed 2026-11-01). Changed: Ladder, the seven columns, Leak and promise, step 4, the end of a date. Everything else as signed.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the place sheets. Id `npc_jake`.
@@ -41,14 +43,23 @@ A ceiling, never a floor. LO took these, 2026-10-08.
 
 ## Ladder — one guidance card per step (S10)
 
+> **Changed 2026-11-01, re-signed by LO 2026-11-01:** four steps, one per first. Paced by Saturday dates
+> (`jake_date_booked`, `jake_date_pickup`) and her meters (a step counter): a declared exception to taste rule 5.
+> Built Jake 3 and Jake 4 (= Laura 5) merge into one step.
+
 | n | canvas | where | when | gate | raises | the no | guidance card line |
 |---|---|---|---|---|---|---|---|
-| 1 (Jake B 1) | `zoe_01_first_party` | `zoe_apartment` | Fri 19:00–23:00 | zoe_step eq 0 | the counter only | "Not tonight." (parked) | Friday evening at Zoe's party: a guy across the room won't stop looking. |
-| 2 (Jake B 2) | `jake_02_kiss_on_the_quad` | `quad` | Mon, Wed, Fri 10:15–11:45 | Corruption 20 · Exhib. 20 | exhibitionism add +3 | "Not tonight." (parked) | A Monday, Wednesday or Friday morning on the quad: Jake and his team. |
-| 3 (Jake B 3) | `jake_03_my_boyfriend` | `home_front_door` | Sat 23:00–00:00 | Corruption 20 · Exhib. 20 · `jake_date_booked` | the counter only | "Not tonight." (parked) | Saturday night: Jake at the front door after your date; Ryan is home by then. |
-| 4 (Jake B 4) | `laura_05_jake_at_the_door` | `home_front_door` | Sat 22:30–00:00 | Corruption 40 · Exhib. 40 · Laura's Want 40 · laura_step eq 4 · `jake_date_booked` | the counter only | "Goodnight, Jake." (parked) | Saturday night, after your date: kiss Jake goodnight at the front door, in Laura's dress. |
+| 1 | `zoe_01_first_party` (= Zoe 1) | `zoe_apartment` | Fri 19:00–23:00 | zoe_step eq 0 | the counter only | "Not tonight." (parked) | Friday evening at Zoe's party: a guy across the room won't stop looking. |
+| 2 | `jake_02_kiss_on_the_quad` | `quad` | Mon, Wed, Fri 10:15–11:45 | Corruption 20 **or** Exhibitionism 20 (per the meters sheet; was and) | exhibitionism add +3 · the first date booked · Ryan's Warmth −5 (built) | "Not tonight." (parked) | A Monday, Wednesday or Friday morning on the quad: Jake and his team. |
+| 3 | `jake_03_my_boyfriend`, merged with `laura_05_jake_at_the_door` | `home_front_door` | Sat 22:30–00:00, after a date | Corruption 20 · Exhibitionism 20 · a date tonight (`jake_date_booked`) | the counter only · Ryan's Lust +5 (built) | "Goodnight, Jake." (parked) | Saturday night, after your date: Jake at the front door. The house is home. |
+| 4 | `jake_04_sneak_him_in` (new, top step) | `home_ella_room` | Sat 00:00–02:00, after a date | step 3 · Corruption 40 | `jake_first_time` set · Ryan's Lust +5 (if Ryan is past his step 5) | on the step sheet (LO confirms) | After a Saturday date, past midnight: sneak Jake up to your room. |
 
 Every step's gate also says the drinks boost is off. Stage numbers: 20 is Curious or Daring, 40 Bold or Showing.
+
+**Why 3 merges:** built Jake 3 (she names him to the house; Ryan opens the door) and built Jake 4 = Laura 5 (the
+goodnight kiss; Laura watching from the dark) are the same place, the same night, the same kiss. Now one step: she
+kisses him at the door, names him to the house, Ryan opens the door from inside, and Laura is in the dark living room
+watching.
 
 ## Card goals (LO's play note, 2026-10-08)
 
@@ -56,6 +67,17 @@ Each guidance card's goals are the step's real requirements: the meters, flags, 
 row above. Never the step counter (no "1 / 2"). A requirement on another person's ladder is named as
 the event, e.g. "after Ryan's feet-in-his-lap night".
 
+## Each step, by the seven columns (`sheets/TASTE_COLUMNS.md`)
+
+| n | the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
+|---|---|---|---|---|---|---|---|
+| 1 | across Zoe's party, a guy who won't stop looking picks her out | Zoe, the party | — | she lets him | he crosses the room | yes | `jake_met`, his number |
+| 2 | he kisses her in front of his team on the quad | the team | being shown off | she kisses back | "Guys. Look at her." | yes | the first date booked; Ryan's Warmth −5 (built) |
+| 3 | at her front door after the date: she kisses him and says it, "my boyfriend", loud enough for the house. Ryan opens the door from inside. Laura is in the dark living room | **Ryan, Laura** | the house knowing | "My boyfriend." | he kisses her with Ryan in the doorway | yes | Jake is her boyfriend; Laura: "Was he any good?"; Ryan's line changes |
+| 4 | past midnight she sneaks him up to her room. Her door won't lock if Mark has her key. They fuck on her bed, and her headboard hits the wall: Ryan's wall, the one she listened through at his step 5 | **Ryan, through the wall** | Laura and Mark across the landing; the door that won't lock | "Come up." | "Your room. Now." · he pins her wrists | **yes** | `jake_first_time`; Ryan's next-morning line; Monday on the quad, the team knows |
+
+**Her voice (rule 7):** low line, "He's normal. This is normal." · high line, "You want Ryan to hear every second of
+it." Both on each step sheet.
 
 ### Leak and promise (S5)
 
@@ -64,13 +86,38 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 | 1 | he watches her across the room, not Zoe | "Wasn't planning to stop." |
 | 2 | his hand low on her back on the quad | "Saturday. Pick me up at the door." |
 | 3 | "Your brother hates me." | "Ryan, this is Jake. My boyfriend." |
-| 4 | "Is your mom up?" | "Higher. Don't stop." |
+| 4 | "Is your mom up?" | "Your room. Now." |
 
-**Final no:** "Don't come to the door again. (ends his path)", offered only at his step 6, after 0.1. In 0.1 his nos are parked.
+**Final no:** "Don't come to the door again. (ends his path)", offered only after this release. In release 1 his nos
+are parked.
 
-**What the last 0.1 step turns into:** the Saturday dates repeat, booked on his thread, ending at the front door.
+**What the release ends on:** the end of a date, by stage, and the sneak-in repeat.
 
-**After** (SP2, where the arc ends, past 0.1): the dates repeat, booked on his phone thread, and the house and campus treat him as hers.
+## Step 4, "Sneak him in"
+
+- **Kayla's move, reversed:** Kayla sneaks in to Ryan on Fridays; Ella sneaks Jake in on a Saturday. The thin wall
+  pays off from her side.
+- **Ryan hears.** If his ladder is past step 5: through the wall, low, "…@player.nickname?" The next morning his line at
+  the bathroom door is about it. Ryan's Lust +5.
+- **The unlocked door** (`sheets/systems/money_pressure.md`: Mark has her key after a short Sunday): one line of risk,
+  a footstep on the landing, Jake's hand over her mouth. Not a cut-off: they don't stop.
+- **Crude words:** his columns (above): early "ass", middle "ass, tits, cock", late "cock, fuck, cum". **Proposed:** step 4
+  and its repeat use the late column. **LO confirms on the scene sheet.**
+
+## His hot repeatable: the end of a date (rule 6)
+
+- **After step 3, every booked Saturday.** One a week. It grows with her:
+  - Curious: making out in his car outside the house, Mark's TV light in the window;
+  - Bold: in the car, his hand down her jeans until she comes, or her hand on him (mixed if the street can see: both
+    meters);
+  - after step 4: she sneaks him in. One night in four, a near-catch: Laura's door opens, or Ryan knocks twice on the
+    wall.
+- Each pays both meters by the meters sheet's rules (seen: both; behind her door: Corruption).
+
+## Changed, and what the player loses
+
+- **Built Jake 3 and Jake 4 (= Laura 5) merge into one step.** The player loses a second front-door goodnight that
+  repeated the first. No other built step is cut.
 
 ## Phone thread
 
@@ -105,6 +152,7 @@ Each follow-up waits for her reply (`after_round`), and a different answer follo
 | key choice | source |
 |---|---|
 | steps and nos | SP2 · the arc ideas (Jake B) |
+| the release-1 ladder, four steps, the merge, "Sneak him in", the end of a date | `proposals/JAKE_R1_LADDER.md`, signed by LO 2026-11-01 (DECISIONS 99–111) |
 | dates booked on his thread | LO, 2026-10-07 |
 | the shared step | LO, 2026-10-08 (SP3) |
 | the thread's timing | guess |

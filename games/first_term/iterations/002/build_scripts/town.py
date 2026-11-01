@@ -148,6 +148,62 @@ text = ("# =====================================================================
         "# First Term — 5 · scenes · TOWN (iteration 002, part 5): random town events, Zoe's flat alone,\n"
         "# the corner shop's grocery run, the cocky guy at the party. Source: iterations/002/build_scripts/town.py.\n"
         "# =============================================================================\n")
+
+# ── the street sees what she wears (street_seen.md, signed 2026-11-01; meters.md rule 2; DECISIONS 121) ──
+# Once a day (out_shown_today, cleared in the daily tick). The first day out in each level pays both meters;
+# every day after, Exhibitionism only. One witness by the hour: Mr. Vance on his porch (his 18:00-22:00 row),
+# the corner-shop guy by day, a car slowing down at night.
+VANCE_PORCH = {"type": "npc_at_location", "location_id": "vance_house", "npc_id": "npc_vance", "operator": "is_present"}
+VANCE_AWAY = {"type": "npc_at_location", "location_id": "vance_house", "npc_id": "npc_vance", "operator": "is_absent"}
+SKIRT_ON = {"type": "worn_type", "operator": "eq", "value": "short_skirt"}
+SKIRT_OFF = {"type": "worn_type", "operator": "neq", "value": "short_skirt"}
+BRA_OFF = {"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}
+BRA_ON = {"type": "clothing_slot", "slot": "bra", "operator": "equipped"}
+PANTIES_OFF = {"type": "clothing_slot", "slot": "underwear", "operator": "unequipped"}
+PANTIES_ON = {"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}
+DAYTIME, NIGHT = tod("08:00", "18:00"), tod("22:00", "08:00")
+CAFE_GIRL = G(cond(trait("cafe_footfall", "gte", 10)), WHO("You're the girl from the café."))
+# (case, its worn items, level, Vance's line, the shop guy's line, the car's line)
+STREET_CASES = [
+    ("skirt", [SKIRT_ON, PANTIES_ON], 1,
+     [D("npc_vance", "Mark's girl is growing up."), P("He doesn't pretend to read his paper.")],
+     "He comes out from behind the counter to stack a box that doesn't need stacking, and watches you all the way past.",
+     "A car slows beside you. The window comes down halfway. It stays with you to the end of the street, then goes."),
+    ("nobra", [BRA_OFF, SKIRT_OFF, PANTIES_ON], 1,
+     [P("Mr. Vance sets the paper down. He looks at your chest and doesn't look away.")],
+     "He comes out from behind the counter to stack a box that doesn't need stacking, and watches you all the way past.",
+     "A car slows beside you. The window comes down halfway. It stays with you to the end of the street, then goes."),
+    ("nopanties", [PANTIES_OFF], 2,
+     [P("A breeze comes down the street as you pass his gate, and there's nothing under your clothes to stop it. Mr. Vance stands up off his chair.")],
+     "He drops his change on the step. He doesn't pick it up until you've turned the corner.",
+     "A car slows, then stops. Someone whistles. You don't walk faster."),
+]
+for case, worn, lv, vance, shop, car in STREET_CASES:
+    first = f"street_first_l{lv}"
+    cap = 39 if lv == 1 else 59
+    pay_first = [{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": cap},
+                 {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": cap}]
+    pay_after = [{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": cap}]
+    exits = []
+    for w_items, extra_eff in [([VANCE_PORCH], [nadd("npc_vance", "want", 2)]), ([VANCE_AWAY, DAYTIME], []),
+                               ([VANCE_AWAY, NIGHT], []), ([VANCE_AWAY, tod("18:00", "22:00")], [])]:
+        for is_first in (True, False):
+            exits.append(go("Keep walking.", loc="street", mins=2, cond_=cond(*w_items, flag(first, not is_first)),
+                            eff=(pay_first if is_first else pay_after) + extra_eff,
+                            flags=[fset("out_shown_today")] + ([fset(first)] if is_first else [])))
+    out.append({
+        "id": f"street_seen_{case}", "name": "Somebody's looking",
+        "description": f"The street sees what she's wearing ({case}): one witness a day by the hour; the first day out in level {lv} pays both meters, after that Exhibitionism (meters.md rule 2).",
+        "trigger": {"location": "street", "is_repeatable": True, "priority": 3 + lv, "is_active": True, "max_triggers_per_day": 1,
+                    "conditions": cond(flag("out_shown_today", False), *worn)},
+        "nodes": [node("seen", "Somebody's looking", [
+            G(cond(VANCE_PORCH), *vance, P("He'll be on his porch tomorrow evening. He always is.")),
+            G(cond(VANCE_AWAY, DAYTIME), P(shop)),
+            G(cond(VANCE_AWAY, NIGHT), P(car)),
+            G(cond(VANCE_AWAY, tod("18:00", "22:00")), P(car)),
+            CAFE_GIRL,
+        ], exits)]})
+
 text += "".join(emit(c) for c in out)
 open(__import__("sys").argv[1], "w").write(text)
 print("town:", len(out), "canvases")

@@ -1,5 +1,7 @@
 # [READY] Scene — ryan_05_thin_walls
 
+> **Changed 2026-11-01, signed by LO 2026-11-01 ("Signed")** (DECISIONS 99–113): Ryan's release-1 ladder (`sheets/people/npc_ryan.md`, signed). Changed: gate Corruption 20 · his Want 40 (Exhibitionism 40 dropped); Want +5. The written screens stand.
+
 > Signed by LO: LO, 2026-10-08.
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. **The batch 5 voice sample, in full:** every screen written by
@@ -9,13 +11,14 @@
 |---|---|
 | person · step | `npc_ryan` · 5 (Ryan A 6) |
 | where · when | her bed, `home_ella_room` · Friday 22:00–00:00, seen from his room |
-| gate | Corruption 20 · Exhibitionism 40 · his Want 40 · the boost off |
+| gate | Corruption 20 · his Want 40 · the boost off |
 | want (test 1) | his hand on her ankle while he lied to Kayla (step 4) |
 | next step (test 2) | her first explicit act at home, and he hears it |
 | hook (test 3) | Kayla in the hall at dawn; one bathroom (step 6) |
 | what she wears here (test 8) | not named: the sheet only |
 | her voice | stage 2, "warming up": shocked, honest, then she does it |
 | the crude-word ceiling | Ryan's middle column: ass, tits, cock, wet (LO, 2026-10-08: middle = stage 3) |
+| her_line_low · her_line_high (rule 7) | low (under the stage): "This is Ryan. You should go." · high (over it): "You want him to hear Kayla on the phone while you do this." (the person sheet's pair; worded for this screen when the prose is written) |
 
 ## Branch map — one row per screen (S1)
 
@@ -23,7 +26,7 @@
 |---|---|---|---|---|
 | `wall` | the headboard through the wall; Kayla; she can't stop listening | no | "Listen." → `listen` · "Put your headphones in." → parked | none |
 | `listen` | she listens on purpose; her body answers | yes (3 words) | "Touch yourself." → `act` · "Roll over. Sleep." → parked | none |
-| `act` | her fingers, his rhythm; she comes; his headboard stops dead | yes (9 words) | "Lie still." → `after` | corruption add +1 · Ryan's Want add +10 |
+| `act` | her fingers, his rhythm; she comes; his headboard stops dead | yes (9 words) | "Lie still." → `after` | corruption add +1 · Ryan's Want add +5 |
 | `after` | silence; "...@player.nickname?" through the wall; she doesn't answer | no | "Sleep." → `hall` · "Knock back twice." locked: "Needs Bold" | `ryan_heard_her` set · `ryan_step` set 5 |
 | `hall` | Saturday dawn: Kayla in his T-shirt: "You must be @player.nickname." | no | "Take the shower." → the bathroom, Sat 08:00 | energy set 100 (a night's sleep, guess) |
 

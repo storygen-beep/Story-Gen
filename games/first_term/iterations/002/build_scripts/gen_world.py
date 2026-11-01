@@ -88,6 +88,17 @@ tom_step   = 0
 zoe_step   = 0
 hale_step  = 0
 jake_step  = 0
+# release 1 (2026-11-01, DECISIONS 112-121): the counters the redesigned sheets read
+rent_short_weeks   = 0   # the engine adds 1 every short Sunday (setup.carryRent)
+rent_late_fee      = 0   # part of next Sunday's due (rent_short_2: Vance's $15)
+cafe_shifts_worked = 0   # Tom's step 2 needs 5
+cafe_l2_shifts     = 0   # the café's level 3 opens after 3
+cafe_footfall      = 0   # job.md: the café keeps score
+cafe_name          = 0
+laura_gaps_watched = 0   # Laura's step 4 needs 3 (her bedroom gap and the shower)
+zoe_dares_done     = 0   # Zoe's step 5 needs 4
+hale_claire_roll   = 0   # 1-4: on 1, Claire is early (hale_thursday_session)
+jake_catch_roll    = 0   # 1-8: on 1 or 2, a near-catch (jake_date_end)
 
 [player.trait_decay]
 hygiene = 10
@@ -190,6 +201,15 @@ for p in PEOPLE:
         w(f"activity   = {q(r['activity'])}")
         if r.get("when"):
             w(f"when       = {v(r['when'])}")
+
+# ── the timetable screen (college.md; engine [[ui.timetable]], DECISIONS 112): written from the same
+#    schedules the class canvases use (classes.py), so the two can't disagree. [ui] itself is in 0_. ──
+from classes import timetable_rows
+w("\n# ── the timetable screen (classes.py, college.md) ──")
+for r in timetable_rows():
+    w("\n[[ui.timetable]]")
+    for k in ("class", "place", "lecturer", "weekdays", "from", "to"):
+        w(f"{k:<8} = {v(r[k])}")
 
 open(OUT, "w").write("\n".join(L) + "\n")
 print("wrote", OUT, len(LOCATIONS), "places", len(PEOPLE), "people")

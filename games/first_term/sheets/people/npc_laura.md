@@ -1,5 +1,9 @@
 # [READY] Person — Laura
 
+> **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the release-1 ladder, from `proposals/LAURA_R1_LADDER.md` (signed 2026-11-01). Changed: what she keeps, the Saturday shower row, Ladder, the seven columns, Leak and promise, step 4, the gaps, Everyday (tease and touch cut, Love +2 once a day in total), Cut. Everything else as signed.
+
+> **Changed 2026-10-31, re-signed by LO 2026-10-31** (DECISIONS 98): the towel at home.
+
 > **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
 
 > **Changed 2026-10-29, re-signed by LO 2026-10-29** (DECISIONS 87–88): her dinner text books dinner; a no-show costs warmth and suspicion; saying "eating out" and eating with her is a lie she sees.
@@ -14,14 +18,14 @@
 | role | mom |
 | what she wants from her | to stay her good girl, and to be close to her |
 | what she visibly wants, each visit | a happy house; she wants @player nearer than she says |
-| what she keeps | want + warmth · also reads `laura_suspicion`, below |
+| what she keeps | want + warmth · her lock is **Love** (`warmth`); nothing of hers reads Want · also reads `laura_suspicion`, below |
 | where she sleeps | `home_master_bedroom` |
 | what she calls her | "sweetheart" |
 | met | day 1, breakfast in the kitchen |
 | her line: short skirt | "Is that for college or for a guy?" |
 | her line: her blue dress | "It never fit me like that." Her hand smooths the hip. |
 | her line: no bra | Her eyes stop on @player's chest, then she pours the coffee (breakfast) or the wine (evenings). |
-| her line: towel | Kitchen: "Robe, sweetheart. Not at my table." · the hall (the stairs, at night): "Hall's cold, sweetheart. Don't stand there." |
+| her line: towel | Kitchen: "Go and get dressed, sweetheart. You'll catch your death." (LO, 2026-10-31) · the hall (the stairs, at night): "Hall's cold, sweetheart. Don't stand there." |
 
 ## Schedule grid (S5)
 
@@ -34,6 +38,7 @@
 | `home_master_bedroom` | Mon, Tue, Wed, Thu, Fri, Sun | 23:00 | 06:30 | sleeps; dresses Saturday |
 | `home_master_bedroom` | Sat | 00:00 | 07:00 | sleeps; dresses Saturday |
 | `home_master_bedroom` | Sun | 00:00 | 07:00 | sleeps; dresses Saturday |
+| `home_bathroom` | Sat | 16:30 | 17:00 | her shower before she dresses; the lock sticks halfway (new 2026-11-01, the shower gap) |
 | `home_master_bedroom` | Sat | 17:00 | 18:30 | sleeps; dresses Saturday |
 | `home_living_room` | Sat | 22:00 | 00:00 | waiting up, Saturday |
 
@@ -44,18 +49,25 @@ her, and she lies awake after (`master_door_saturday_night`). Same row, same pla
 
 ## Ladder — one guidance card per step (S10)
 
+> **Changed 2026-11-01, re-signed by LO 2026-11-01:** four steps, one per first (sized by firsts, LO 2026-11-01).
+> Her lock is Love (`warmth`). Each step pays Love +5 and needs 10 more than the last (none, 10, 20, 30).
+
 | n | canvas | where | when | gate | raises | the no | guidance card line |
 |---|---|---|---|---|---|---|---|
-| 1 (Laura C 1) | `laura_01_blue_dress` | `home_master_bedroom` | Tue 18:00–22:00 | none | want add +10 · exhibitionism add +3 | "I can't take this." (parked) | Tuesday evening: Laura is in the kitchen, and she has a dress for you upstairs. |
-| 2 (Laura C 2) | `laura_02_home_late` | `home_hall` | every day 23:00–01:00 | `came_home_late` · Exhib. 20 · her Want 10 | want add +10 | "I was at Zoe's. (she'll know)": Warmth −5 | Come home late: Laura waits on the dark stairs. |
-| 3 (Laura C 3) | `laura_03_wine_in_the_kitchen` | `home_kitchen` | Mon, Tue, Thu, Fri 20:00–22:00 | Corruption 20 · Exhib. 20 · her Want 20 | want add +10 | "I'm tired, Mom." (parked) | Late evening in the kitchen: Laura has a glass of wine. |
-| 4 (Laura C 4) | `laura_04_ryans_door` | `home_ryan_room` | Mon, Tue, Thu, Sun 20:00–22:00 | Corruption 20 · Exhib. 20 · her Want 30 · ryan_step gte 4 (card goal: "after Ryan's feet-in-his-lap night") | want add +10 | "It's nothing. (she'll know)" (parked) | An evening in Ryan's room, your feet in his lap: Laura opens the door. |
-| 5 (Laura C 5) | `laura_05_jake_at_the_door` | `home_front_door` | Sat 22:30–00:00 | Corruption 40 · Exhib. 40 · her Want 40 · jake_step eq 3 · `jake_date_booked` | want add +10 | "Goodnight, Jake." (parked) | Saturday night, after a date with Jake: the front door. Laura waits up. |
-| 6 (Laura C 6) | `laura_06_take_me_with_you` | `home_master_bedroom` | Sat 17:00–18:30 | Corruption 40 · Exhib. 40 · her Want 50 | want add +10 | "Ask Mark." (parked) | Saturday early evening: Laura is dressing to go out. Zip her up. |
-| 7 (Laura C 7) | `laura_07_dark_stairs` | `home_kitchen` | Fri 18:00–21:00 | Corruption 40 · Exhib. 40 · her Want 60 · zoe_step gte 1 | want add +10 · corruption add +3 | "Not tonight, Mom." (parked) | Friday evening: Laura wants to come to Zoe's party. Leave together from the kitchen. |
-| 8 (Laura C 8) | `laura_08_it_wasnt_the_wine` | `home_kitchen` | Mon–Fri 06:30–08:00 (Monday's breakfast after the party) | Corruption 40 · Exhib. 40 · her Want 70 | want add +10 | "It was the wine." (parked) · hers: "I'm your mother." | Monday's breakfast: Laura is in the kitchen. |
+| 1 | `laura_01_blue_dress` | `home_master_bedroom` | Tue 18:00–22:00 | none | warmth add +5 · exhibitionism add +3 (was want +10) | "I can't take this." (parked) | Tuesday evening: Laura is in the kitchen, and she has a dress for you upstairs. |
+| 2 | `laura_03_wine_in_the_kitchen` | `home_kitchen` | Mon, Tue, Thu, Fri 20:00–22:00 | her Love 10 (only) | warmth add +5 | "I'm tired, Mom." (parked) | Late evening in the kitchen: Laura has a glass of wine. |
+| 3 | `laura_06_take_me_with_you`, reworked as **All dressed up** | `home_master_bedroom` | Sat 17:00–18:30 | her Love 20 | warmth add +5 · `laura_lonely` set | "Ask Mark." (parked) | Saturday early evening: Laura is dressing up. Zip her up. |
+| 4 | `laura_04_she_saw_you` (new, top step) | `home_master_bedroom` (her door gap) | Sun–Fri 22:00–23:00 | Corruption 20 · her Love 30 · step 3 · Ella watched through a gap 3 times (bedroom or shower) | warmth add +5 · `laura_said_ryan` set | "Step back from the gap." | A weeknight, late: Laura's door is open a gap again. |
 
 Every step's gate also says the drinks boost is off. Stage numbers: 20 is Curious or Daring, 40 Bold or Showing.
+
+**Moved to their owners, not cut** (they stop setting `laura_step`):
+- **Home late** (`laura_02_home_late`): becomes the **curfew rule**, a repeatable that fires whenever `came_home_late`
+  is set, owned by her suspicion. Her stairs row stays.
+- **Ryan's door** (`laura_04_ryans_door`): an event on Ryan's ladder after his step 4 ("Laura opens the door",
+  `npc_ryan.md`).
+- **Jake at the door** (`laura_05_jake_at_the_door`): merged into Jake's step 3, Laura watching from the dark
+  (`npc_jake.md`).
 
 ## Card goals (LO's play note, 2026-10-08)
 
@@ -63,31 +75,71 @@ Each guidance card's goals are the step's real requirements: the meters, flags, 
 row above. Never the step counter (no "1 / 2"). A requirement on another person's ladder is named as
 the event, e.g. "after Ryan's feet-in-his-lap night".
 
+## Each step, by the seven columns (`sheets/TASTE_COLUMNS.md`)
+
+| n | the moment | who sees or knows | what she risks | how Ella says yes | Laura's move | does it finish | what changes after |
+|---|---|---|---|---|---|---|---|
+| 1 | Laura gives her the blue dress she can't wear any more: "It never fit me like that." | Laura | — | she tries it on | the gift, and her hand on the hip | yes | the dress is Ella's; Laura's line on it |
+| 2 | two glasses poured; "Mark hasn't looked at me like that since the wedding." | Laura's secret is Ella's | — | she sits and drinks with her | the second glass, poured before Ella came down | yes | Ella knows she's lonely |
+| 3 | Ella zips her mother into her good dress. Mark calls from downstairs that he's going to the bar. Laura sits on the bed, dressed up, with nowhere to go | Ella; Mark, not looking | — | "You look beautiful, Mom." · or she says nothing | she asks to be zipped, then asks, "Do I still look like someone you'd look at?" | yes | `laura_lonely`: the alone-in-bed line now names this night |
+| 4 | through the gap: Laura comes, biting the back of her hand, and when her eyes open they're on the door, on Ella | **Laura sees Ella** | being caught watching her mother | she stays at the gap (Curious) | after: she doesn't pull the sheet up fast. "Go to bed, sweetheart." | **yes**: Laura finishes before she sees her | breakfast: "We don't talk about last night." · the gap changes |
+
+**Her voice (rule 7):** low line, "That's your mom. Go to bed." · high line, "She's lonely, and you can't stop
+watching her be lonely." Both on each step sheet.
 
 ### Leak and promise (S5)
 
-| n | the leak: his want, shown before | the promise: the line it ends on |
+| n | the leak: her want, shown before | the promise: the line it ends on |
 |---|---|---|
 | 1 | none: step 1, and it says so | "It never fit me like that." |
-| 2 | she looks too long at the dress | "Did anyone look at you in it?" |
-| 3 | she keeps a glass poured for two | "Like you get looked at." |
-| 4 | she asks about Ryan, lightly | "Mark doesn't need to hear about this." |
-| 5 | "Is Jake bringing you home?" | "Was he any good?" |
-| 6 | she leaves her door open while dressing | "Take me with you one night." |
-| 7 | "Wear something short." Her own words, back | "Don't stop for him." |
-| 8 | she can't meet @player's eyes at breakfast | "I'm your mother." |
+| 2 | she keeps a glass poured for two | "Like you get looked at." |
+| 3 | she leaves her door open while dressing | "Do I still look like someone you'd look at?" |
+| 4 | the alone-in-bed line names the dressed-up night | "We don't talk about last night." |
 
 **Final no:** "You're my mom. That's all you get to be. (ends her path)". Every catch after is a strict-mom punishment.
 
-**What the last 0.1 step turns into:** her catches go on: home late, she waits on the stairs, and "tell me everything" reads her suspicion.
+**What the release ends on:** step 4 and the changed gap; whether the gap gets wider is a later release.
 
-**After** (SP2, where the arc ends, past 0.1): her catches keep coming, and her questions become foreplay.
+## Step 4, "She saw you"
+
+- **When:** a weeknight 22:00–23:00, the `laura_alone_in_bed` gap, after step 3 and after Ella has kept watching
+  three times. The counter counts both gaps, the bedroom and the shower.
+- **The act** is Laura's, alone, shown to its end: her hand under the sheet, her breath, her thighs, biting the
+  back of her other hand so Mark won't hear. Crude words: her late column, "pussy, wet" (`spine/SP2_ladders.md:192`).
+  **LO confirms on the scene sheet.**
+- **What she whispers** as she comes: **"Ryan."** (LO, 2026-11-01). Ella hears it; her thought sits beside it. Flag
+  `laura_said_ryan` set, for a later release. Nothing else of Laura's reads it this release.
+- **Then** her eyes open on the door. Ella's choices: "Step back from the gap." · "Stay where she can see you."
+  (Curious). Either way: "Go to bed, sweetheart."
+- **Breakfast, next morning:** "We don't talk about last night." Ella: "Okay, Mom." (Love +5) · "You should talk to
+  Mark." (suspicion −5, Love +2).
+- **The gap after step 4:** still runs; Laura knows, turns her face to the wall, quieter.
+
+## The gaps (her hot repeatables)
+
+| gap | where · when | pays | status |
+|---|---|---|---|
+| `laura_alone_in_bed` | her door, Sun–Fri 22:00–23:00, Mark downstairs | "Keep watching": corruption add +1, cap 19 · the step-4 counter +1 | built (DECISIONS 82) |
+| `master_door_saturday_night` | her door, Sun 00:00–01:00 | staying: corruption add +1, cap 19 | built (DECISIONS 79–80) |
+| the shower | `home_bathroom`, Sat 16:30–17:00; the lock sticks halfway, the door doesn't close; through the steam, her hand between her legs | "Keep watching": corruption add +1, cap 19 · the step-4 counter +1 · once a week | **new** |
+
+Declared exception to taste rule 6: Laura isn't a heat ladder before step 4; the gaps are open from Good Girl.
+
+## Cut, and what the player loses
+
+- **Laura C 7**, the kiss on the dark stairs, and **Laura C 8**, "It wasn't the wine." / "I'm your mother."
+  (`laura_07_dark_stairs`, `laura_08_it_wasnt_the_wine`, sheets marked cut). Laura's climb toward Ella is gone;
+  built step 6's promise, "Take me with you one night", goes with it.
+- **The 17 placeholder tease and touch screens** on her plain items (`laura.py:377`, `:380`). Never written;
+  mother-daughter teases are against "good mom". The plain items stay.
+- **Want as her lock.** The meter stays; nothing of hers reads it.
 
 ## Everyday at home (system `home_life`, LO's picks, 2026-10-08)
 
-Each item is a choice inside Laura's hub in that room and window, never its own scene. Raise: Laura's
-Warmth add +1 (movie night +2), once a day per item. Tease from Curious and Laura C 1; touch from Bold
-and Laura C 7; her sex version waits for Hungry ("Needs Corruption 60"). Lines are samples (guess).
+Each item is a choice inside Laura's hub in that room and window, never its own scene. **Changed 2026-11-01:**
+her plain items pay **Love +2, once a day in total** (one daily brake across all of them, not one per item), so
+two or three days pass between steps. **The tease and touch columns below are cut** (never written; against
+"good mom"); they stay in this table only as the record of what was cut. Lines are samples (guess).
 
 | item | where · when | plain (Good Girl) | tease (Curious) | touch (Bold) |
 |---|---|---|---|---|
@@ -154,9 +206,7 @@ awake. She never says where @player is; the engine can't see that.
 ## The towel at home (DECISIONS 98, LO, 2026-10-31)
 
 Laura's kitchen, living room (waiting up) and bedroom (only while she dresses, Saturday 17:00–18:30) hubs
-react to the towel, every visit. Built in `iterations/002/build_scripts/laura.py` (`laura_towel`). The
-kitchen's built line is "Go and get dressed, sweetheart. You'll catch your death." (the row above says "Robe,
-sweetheart. Not at my table." — the sheet and the build already differed before this; LO's call which stays).
+react to the towel, every visit. Built in `iterations/002/build_scripts/laura.py` (`laura_towel`).
 
 | her Love | her line (one of three) | "Let her fix it." (no Exhibitionism gate) |
 |---|---|---|
@@ -173,13 +223,14 @@ sweetheart. Not at my table." — the sheet and the build already differed befor
 |---|---|
 | her stairs row first in her list | standing surface (Laura there for the catch) |
 | `laura_suspicion` read twice | a meter is read |
-| Want read by every step gate | the men's numbers are read |
+| Love read by every step gate | the men's numbers are read |
 
 ## Why — the source of each key choice
 
 | key choice | source |
 |---|---|
 | steps, lines and nos | SP2 · the arc ideas (Laura C) |
+| the release-1 ladder, four steps, Love as her lock, the shower gap, "Ryan.", the cuts | `proposals/LAURA_R1_LADDER.md`, signed by LO 2026-11-01 (DECISIONS 99–111) |
 | two suspicion readers | LO, 2026-10-08 (question 5) |
 | the raise sizes, the 50 | LO, 2026-10-08 (question 20) |
 | first-match row order | `v2.py:4304-4318` |

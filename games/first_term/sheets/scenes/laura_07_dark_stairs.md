@@ -1,4 +1,6 @@
-# [READY] Scene — laura_07_dark_stairs
+# [CUT] Scene — laura_07_dark_stairs
+
+> **CUT 2026-11-01** (DECISIONS 113): Laura's release-1 ladder cuts her climb toward Ella (`npc_laura.md`). Kept on disk as the record; not built in release 1.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

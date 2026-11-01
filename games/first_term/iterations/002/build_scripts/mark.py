@@ -38,17 +38,27 @@ def count_exits(text, dest, mins, eff=(), flags=(), consumes=False, node_=None):
     base_f = list(flags) + COUNT_CLEAR
     return [
         go(text, cond_=cond(*FULL_ITEMS, trait("paid_full_streak", "lt", 3)),
-           eff=list(eff) + [add("paid_full_streak", 1, clamp=False), nadd(M, "power", -3)], flags=base_f, **kw),
+           eff=list(eff) + [add("paid_full_streak", 1, clamp=False), nadd(M, "power", -3)], flags=base_f + PAID_BACK, **kw),
         go(text, cond_=cond(*FULL_ITEMS, trait("paid_full_streak", "gte", 3)),
            eff=list(eff) + [add("paid_full_streak", 1, clamp=False), nadd(M, "power", -3)],
-           flags=base_f + [fset("pays_her_own_way")], **kw),
+           flags=base_f + PAID_BACK + [fset("pays_her_own_way")], **kw),
         go(text, cond_=BROKEN, eff=list(eff) + [setv("paid_full_streak", 0), nadd(M, "power", 3)], flags=base_f, **kw),
     ]
 
+# ── what a short Sunday costs, and paying it back (rent_short.md, money_pressure.md; DECISIONS 121) ──
+HELD = ["short_skirt", "thin_top", "sports_bra"]           # the fixed order Mark takes them in
+HELD_NAME = {"short_skirt": "short skirt", "thin_top": "sheer blouse", "sports_bra": "sports bra"}
+PAID_BACK = [funset("her_door_unlocked")] + [funset(f"garage_holds_{i}") for i in HELD]
+PAYBACK_LINES = [
+    G(cond(*FULL_ITEMS, flag("her_door_unlocked")), D(M, "Key."), P("He slides your door key across the table without looking at it.")),
+    *[G(cond(*FULL_ITEMS, flag(f"garage_holds_{i}")), D(M, f"The {HELD_NAME[i]}'s on the nail. Take it.")) for i in HELD],
+]
+# (reader fix, 2026-11-01) read before the count adds this Sunday, so a full Sunday says the streak it is about to
+# make, and a carried or covered Sunday says nothing
 STREAK_LINES = [
-    G(cond(trait("paid_full_streak", "eq", 1)), P("One Sunday paid your way. He writes a small 1 on the back of the envelope and doesn't say anything about it.")),
-    G(cond(trait("paid_full_streak", "eq", 2)), P("Two Sundays in a row, your own money. He notices. He doesn't like noticing.")),
-    G(cond(trait("paid_full_streak", "gte", 3)), P("Sunday after Sunday, all of it, from your own pocket. He counts it like he's hoping it's wrong.")),
+    G(cond(*FULL_ITEMS, trait("paid_full_streak", "eq", 0)), P("One Sunday paid your way. He writes a small 1 on the back of the envelope and doesn't say anything about it.")),
+    G(cond(*FULL_ITEMS, trait("paid_full_streak", "eq", 1)), P("Two Sundays in a row, your own money. He notices. He doesn't like noticing.")),
+    G(cond(*FULL_ITEMS, trait("paid_full_streak", "gte", 2)), P("Sunday after Sunday, all of it, from your own pocket. He counts it like he's hoping it's wrong.")),
 ]
 
 # ── step 1 · Mark A 1 · count it slowly ──
@@ -87,7 +97,7 @@ out.append({
             G(cond(SHORT), P("He writes the gap on the back of the envelope in pencil and taps it twice."), D(M, "The rest waits a week. Vance doesn't.")),
             G(cond(flag("rent_carried", False)), D(M, "That's the week. Same again Sunday.")),
             G(cond(SLEEP_SHIRT), D(M, "And not the shirt, next time.")),
-            *STREAK_LINES,
+            *STREAK_LINES, *PAYBACK_LINES,
             T("He counted you as much as the money."),
         ], count_exits("\"Fine.\"", "home_hall", 5, eff=[nadd(M, "want", 10), setv("mark_step", 1)], flags=[done(1)], consumes=True)),
         node("dressed", "Suit yourself", [
@@ -133,7 +143,7 @@ out.append({
         node("start", "Sunday", [
             G(cond(HIS),
               P("Mark doesn't look up from the envelope when you come in."),
-              D(M, "Not the shirt this time. Shorts. Since you're listening at doors now.")),
+              D(M, "Shorts this time. Since you're reading my mail now.")),
             G(cond(HERS),
               P("Sunday. Mark's at the table with the envelope, and you know what he's going to ask for. You don't wait to be asked.")),
         ], [
@@ -150,7 +160,7 @@ out.append({
             P("You sit. The chair is cold on the backs of your thighs. When you lean over to push the envelope at him, the shorts ride up and you feel his eyes go down the curve of your ass and stay there."),
             P("His count goes slow. He loses his place twice. He starts again."),
             D(M, "Every Sunday. Like that."),
-            *STREAK_LINES,
+            *STREAK_LINES, *PAYBACK_LINES,
         ], count_exits("\"Count, Mark.\"", "home_hall", 10,
                        eff=[nadd(M, "want", 10), add("exhibitionism", 3), setv("mark_step", 3)],
                        flags=[done(3), fset("mark_dress_rule")], consumes=True)),
@@ -158,104 +168,17 @@ out.append({
                 "home_hall", 7, eff=[nadd(M, "power", -2)]),
     ]})
 
-# ── step 4 · Mark A 4 · after she's asleep ──
-_t4 = step_trigger(M, 4)
-_t4["conditions"]["items"] += [NOT_LATE, LAURA_IN_BED]
-out.append({
-    "id": "mark_04_after_shes_asleep", "name": "After she's gone up",
-    "description": "Mark step 4 (Mark A 4), the living room late: the ask. The introduction of his paid route (her climb).",
-    "trigger": _t4,
-    "nodes": [
-        node("start", "Late", [
-            G(cond(HIS),
-              P("Mark's on the couch with the TV low and a beer on his knee. Laura's gone up. He doesn't look round when you come in, but he turns the TV down further."),
-              D(M, "Come down after your mother's gone to bed. Some night. We'll talk about the rent.")),
-            G(cond(HERS, *BARE_LEGS),
-              P("Mark's on the couch with the TV low, the house dark round him. You sit on the arm of the couch beside him, close, your bare knee by his shoulder.")),
-            G(cond(HERS, {"type": "clothing_item", "item_id": "jeans", "operator": "equipped"}),
-              P("Mark's on the couch with the TV low, the house dark round him. You sit on the arm of the couch beside him, close, your knee by his shoulder.")),
-            G(cond(HERS, {"type": "clothing_item", "item_id": "leggings", "operator": "equipped"}),
-              P("Mark's on the couch with the TV low, the house dark round him. You sit on the arm of the couch beside him, close, your knee by his shoulder.")),
-            G(cond(HERS), ME("What's the difference worth, Mark? Between what I pay and what you owe?")),
-        ], [
-            go("\"What for?\"", node="price", mins=5, cond_=cond(HIS), eff=[nadd(M, "power", 3)]),
-            go("\"I'll pay it Sunday like everyone else.\"", node="no", mins=2, cond_=cond(HIS)),
-            go("Wait for his answer.", node="price", mins=5, cond_=cond(HERS), eff=[nadd(M, "power", -3)]),
-        ]),
-        node("price", "The difference", [
-            P("He looks at the ceiling, where Laura's gone to bed. Then he looks at your legs, for a long time, slowly, from your ankles up."),
-            D(M, "You know what you're asking me, @player."),
-            P("He doesn't answer it. Not yet. But he's thinking about a price, and he's letting you watch him think about it."),
-            T("He's going to name a number. You want to hear it."),
-        ], [go("\"Think about it.\"", loc="home_living_room", mins=5, consumes=True,
-               eff=[nadd(M, "want", 10), setv("mark_step", 4)], flags=[done(4)])]),
-        no_node("no", [P("He turns the TV back up without looking at you."), D(M, "Like everyone else. Sure, @player."), P("But he doesn't change the channel, and he doesn't stop watching you leave.")],
-                "home_living_room", 3, eff=[nadd(M, "power", -2)]),
-    ]})
-
-# ── step 5 · Mark A 5 · a bill an inch (his voice sample; every screen as signed) ──
-_t5 = step_trigger(M, 5, retry_days=3)
-_t5["conditions"]["items"] += BARE_LEGS + [NOT_LATE, LAURA_IN_BED]
-out.append({
-    "id": "mark_05_a_bill_an_inch", "name": "A bill an inch",
-    "description": "Mark step 5 (Mark A 5), his first paid touch: five an inch, cash, twenty tops. Two voices by his Power; a stop exit at ten. Sets mark_paid_touch.",
-    "trigger": _t5,
-    "nodes": [
-        node("start", "Midnight", [
-            G(cond(HIS),
-              P("It's late, the house asleep, the TV muttering low. Mark sits on the couch with a folded bill between two fingers. \"You asked what the difference was worth, @player. Here it is.\" He pats the cushion beside him. \"Five for every inch my hand climbs your bare thigh. Cash. Twenty tops.\" His voice drops on the last word. He stares at your legs like a starving man. Then his eyes flick to the ceiling, where your mother sleeps. *He actually said it out loud.* You aren't scared of him, but you've already done the math. He holds the bill out and waits.")),
-            G(cond(HERS),
-              P("The house is asleep, but Mark is still on the couch, pretending to watch a TV he turned down low. You sit on the arm beside him. Then you put one bare leg across his lap. \"I asked what the difference was worth. Here's my answer,\" you say. \"Five for every inch your hand climbs. Cash. Twenty tops.\" He swallows. His eyes drop to your thigh and stay there. Then they go to the ceiling, where your mother is sleeping. \"Jesus, @player.nickname,\" he says, rough. He wants it, and it's all over his face. Your heart is pounding, but your leg stays put. You wait for his hand.")),
-        ], [
-            go("Sit down.", node="climb", mins=5, cond_=cond(HIS), eff=[nadd(M, "power", 3)]),
-            go("\"Hands off, Mark.\"", node="no_m", mins=2, cond_=cond(HIS)),
-            go("Let him.", node="climb", mins=5, cond_=cond(HERS), eff=[nadd(M, "power", -3)]),
-            go("\"Not tonight.\"", node="no_e", mins=2, cond_=cond(HERS)),
-        ]),
-        node("climb", "Five. Ten.", [
-            P("The TV mutters low. His rough palm settles on your bare knee, warm and heavy. \"Five,\" Mark breathes, and the hand slides up. Your breath goes quick and shallow. \"Ten.\" His thumb drags along the inside of your thigh, and your legs part a little for him. His cock is hard in his sweatpants, a thick ridge you can see from where you sit. Your nipples pull tight, and your tits ache with every short breath."),
-            VID("a man's hand sliding up a girl's bare inner thigh on a couch at night, TV glow", "hand sliding up inner thigh couch night", "man paying to touch thigh living room tv glow", file="sex/mark_05_climb_t4.webm"),
-        ], [
-            go("\"Keep going.\"", node="climb2", mins=3),
-            go("\"That's far enough.\"", node="half", mins=2),
-        ]),
-        node("climb2", "Fifteen. Twenty.", [
-            P("\"Fifteen.\" His fingers are shaking now, but they climb anyway, rough skin on soft. \"Twenty.\" He stops one inch short of the top of your thigh. His hand stays there, hot and trembling, while his cock twitches against the grey cotton."),
-        ], [go("\"Keep going.\"", node="stop", mins=3)]),
-        node("stop", "Not yet", [
-            P("\"Keep going,\" you say. His hand stays where it is, one inch short of the top of your thigh. His jaw is tight. His cock strains against his sweatpants, hard and close enough to touch. His palm trembles on your skin, but it does not move up. \"Not yet, @player.\" Upstairs, a floorboard creaks. Your mother. You both freeze, his fingers still spread on your leg. He takes his hand back slowly. Then he lays four fives on your knee, right where his palm was. Your nipples are still hard, and your tits ache with it. Your legs stay open, and your thigh still burns where his hand was."),
-            VID("four bills laid on a girl's bare knee on a couch at night, his hand pulling back", "money on bare knee couch night", "man pays girl lays cash on her thigh", file="sex/mark_05_stop_t4.webm"),
-        ], [go("Take the money.", node="after", mins=2,
-               eff=[{"targetType": "player", "trait": "money", "op": "add", "value": 20, "clamp": False}, add("corruption", 3), nadd(M, "want", 10)])]),
-        node("half", "Ten", [
-            P("You put your hand over his and press it still on your thigh. Mark freezes. His breath comes hard through his nose. Under his sweatpants his cock is a thick ridge, straining the cotton. He takes his hand back. He peels off two fives and lays them in your palm. Ten, not twenty. His eyes drop to your bare legs and stay there. Your tits ache, the nipples tight and hard. You keep your legs where they are a moment longer, on purpose. His cock jerks against the cotton."),
-            VID("a girl presses a man's hand still on her thigh on a couch, two bills in her palm", "girl stops his hand on her thigh couch", "hand held still on bare thigh money in palm", file="sex/mark_05_half_t4.webm"),
-        ], [go("Take it and go to bed.", loc="home_ella_room", mins=5, consumes=True,
-               eff=[{"targetType": "player", "trait": "money", "op": "add", "value": 10, "clamp": False}, add("corruption", 3), nadd(M, "want", 10), setv("mark_step", 5)],
-               flags=[done(5), fset("mark_paid_touch"), fset("mark_money_week")])]),
-        node("after", "Twenty", [
-            P("Four fives in your fist, still warm from Mark's wallet. He won't look at you. He turns the TV up until the room is only noise. \"Go to bed, @player.nickname,\" he says, rough. You climb the stairs and pass your mother's door. It's shut, but you walk past it slowly. *You just got paid to let your step-father touch you. It was the easiest twenty you ever made.* Sunday you pay your rent at the kitchen table with his own money. He'll sit across from you and count it, and you already want to know what he'll ask for next."),
-        ], [go("Go to bed.", loc="home_ella_room", mins=5, consumes=True,
-               eff=[setv("mark_step", 5)], flags=[done(5), fset("mark_paid_touch"), fset("mark_money_week")])]),
-        # Two written nos, one per voice (mark_05 sheet, sweep A3-13); verbatim from the sheet.
-        node("no_m", "Hands off", [
-            P("\"Hands off, Mark.\" His hand stops on the cushion an inch from your thigh and goes back to his own knee. He folds the twenty and shoves it in his pocket. \"Suit yourself. Rent's still Sunday.\" The no cost you twenty, nothing more. But he'll offer again, and you both know it. You walk to the stairs. His eyes follow your bare legs all the way up."),
-        ], [go("Go to bed.", loc="home_ella_room", mins=3, retry=3)]),
-        node("no_e", "Not tonight", [
-            P("\"Not tonight.\" You swing your leg off his lap and stand up. His hand is still in the air where your thigh was. He folds the twenty back into his pocket. \"Your call. Rent's still Sunday.\" It cost you twenty, nothing more, and he'll be on this couch tomorrow night. You walk to the stairs. His eyes follow you all the way up."),
-        ], [go("Go to bed.", loc="home_ella_room", mins=3, retry=3)]),
-    ]})
-
 # ── step 6 · Mark A 6 · our arrangement ──
 out.append({
     "id": "mark_06_our_arrangement", "name": "Our arrangement",
-    "description": "Mark step 6 (Mark A 6), the garage: each holds the other's secret. Sets mark_arrangement.",
-    "trigger": step_trigger(M, 6),
+    "description": "Mark step 4 of 4, the top step (release 1): the garage; he saw her come out of Ryan's room; each holds the other's secret. Sets mark_arrangement.",
+    "trigger": step_trigger(M, 4, retry_days=3),
     "nodes": [
         node("start", "The garage", [
-            P("Mark's at his workbench with the radio on and his hands black with oil. He's been off with you at dinner since the couch, eating with his eyes on his plate. He hears you come in and doesn't turn round."),
+            P("Mark's at his workbench with the radio on and his hands black with oil. He hears you come in and doesn't turn round."),
+            D(M, "I saw you come out of Ryan's room. Middle of the night."),
             G(cond(HIS), D(M, "Our arrangement. Your mother has enough to worry about. We understand each other.")),
-            G(cond(HERS), ME("Vance's letter is in the drawer. And your hand was on my leg. So we each keep one.")),
+            G(cond(HERS), ME("Vance's letter is in the drawer. So we each keep one.")),
         ], [
             go("\"Vance's letter is in the drawer.\"", node="keep", mins=5, cond_=cond(HIS), eff=[nadd(M, "power", -3)]),
             go("\"There's no arrangement.\"", node="no", mins=2, cond_=cond(HIS)),
@@ -266,84 +189,9 @@ out.append({
             D(M, "Our arrangement."),
             T("Your secret for his. He thinks it's even. It isn't."),
         ], [go("\"Deal.\"", loc="home_hall", mins=3, consumes=True,
-               eff=[nadd(M, "want", 10), setv("mark_step", 6)], flags=[done(6), fset("mark_arrangement")])]),
-        no_node("no", [D(M, "There is now, @player. There has been since the couch."), P("He turns back to the bench. The radio fills the garage. You leave him to it, and your face is hot all the way up the stairs.")],
+               eff=[nadd(M, "want", 10), setv("mark_step", 4)], flags=[done(6), fset("mark_arrangement")])]),
+        no_node("no", [D(M, "There is now, @player. Since Ryan's door."), P("He turns back to the bench. The radio fills the garage. You leave him to it, and your face is hot all the way up the stairs.")],
                 "home_hall", 3, eff=[nadd(M, "power", 2)]),
-    ]})
-
-# ── step 7 · Mark A 7 · twenty, and you can look ──
-out.append({
-    "id": "mark_07_twenty_and_you_can_look", "name": "Twenty, and you can look",
-    "description": "Mark step 7 (Mark A 7), Sunday at the table, Laura out shopping: she sets the price herself. The price is said in the scene, never on the button (D11).",
-    "trigger": step_trigger(M, 7, retry_days=7),
-    "nodes": [
-        node("count", "The rent, counted", [
-            P("Laura's out shopping. Ryan's door is shut upstairs. The rent sits counted on the table between you, and Mark counts the twenties twice. He does that now."),
-            P("On the fridge behind him, Laura's calendar. Wednesday says WORK LATE in blue."),
-            G(cond(HIS), D(M, "Something you want to say, @player?")),
-            G(cond(HERS), P("You don't wait for him to ask.")),
-            *STREAK_LINES,
-        ], count_exits("\"Twenty, and you can look.\"", None, 3, node_="look")
-          + [go("\"Just the rent.\"", node="no", mins=2, cond_=cond(flag("sunday_counted_today", False)))]),
-        node("look", "Look", [
-            P("The rent sits counted on the kitchen table. You lay one more twenty on top of it yourself. \"Twenty, and you can look.\" Mark slides his own twenty across the wood first. \"Go on then, @player.\" You bare your tits for him under the kitchen light, and nothing sits between them and his eyes. The cold hits them. Your nipples go hard, tight and pointed straight at him. His breath goes short. His hand lies flat on the table, pressing white. His cock is hard under his jeans, a thick ridge straining the denim. You arch your back so your tits lift for him. He looks as long as the twenty buys, and you let him, your nipples aching in the cold while his eyes stay on them."),
-            VID("a girl at a kitchen table baring her breasts for a man across from her, money on the table, morning light", "girl flashes tits at kitchen table for money", "topless girl kitchen table man staring cash", file="sex/mark_07_look_t4.webm"),
-        ], [go("\"Time's up.\"", loc="home_hall", mins=10, consumes=True,
-               eff=[{"targetType": "player", "trait": "money", "op": "add", "value": 20, "clamp": False}, add("exhibitionism", 3), nadd(M, "want", 10), setv("mark_step", 7)],
-               flags=[done(7), fset("mark_money_week")])]),
-        no_node("no", [G(cond(HIS), P("He puts his wallet away."), D(M, "It'll be here next week.")),
-                       G(cond(HERS), P("He nods and puts his wallet away, slower than he took it out."), D(M, "Next week, then.")),
-                       P("He folds the rent into the envelope with Vance's name on it.")],
-                "home_hall", 7, eff=[nadd(M, "want", 2)], flags=COUNT_CLEAR),
-    ]})
-
-# ── step 8 · Mark A 8 · the red circle ──
-out.append({
-    "id": "mark_08_the_red_circle", "name": "The red circle",
-    "description": "Mark step 8 (Mark A 8), Sunday afternoon: she circles Laura's late Wednesday on the fridge calendar.",
-    "trigger": step_trigger(M, 8),
-    "nodes": [
-        node("calendar", "The calendar", [
-            P("The family calendar is on the fridge under a magnet shaped like a lemon. Laura's writing in blue: dentist, Mark's mother, WORK LATE on Wednesday. Ryan's in green: league, Wednesday. You find the red pen in the drawer."),
-        ], [
-            go("Circle Wednesday.", node="see", mins=3),
-            go("Never mind.", loc="home_kitchen", mins=1, retry=7),
-        ]),
-        node("see", "You'll see", [
-            P("You draw a slow red circle round Wednesday evening. When you turn round, Mark is at the table with his paper, watching you over the top of it. His chair's pulled out beside him for nobody."),
-            D(M, "What's that for?"),
-            ME("You'll see."),
-            T("Laura late. Ryan out. Just him, and his chair."),
-        ], [go("\"Wednesday.\"", loc="home_hall", mins=3, consumes=True,
-               eff=[nadd(M, "want", 10), setv("mark_step", 8)], flags=[done(8)])]),
-    ]})
-
-# ── step 9 · Mark A 9 · his chair (goal 1's body route) ──
-out.append({
-    "id": "mark_09_his_chair", "name": "His chair",
-    "description": "Mark step 9 (Mark A 9), Wednesday evening, Laura late, Ryan out: she takes his chair. Goal 1's body route: sets pays_her_own_way.",
-    "trigger": step_trigger(M, 9),
-    "nodes": [
-        node("chair", "His chair", [
-            P("He's cooking, Wednesday, his back to you. You sit down in his chair at the head of the table and cross your legs, count your money out of your purse onto the table in front of you, and wait."),
-            G(cond(HIS), P("He turns round with the spatula in his hand and stops dead."), D(M, "My chair.")),
-            G(cond(HERS), P("He turns round and sees you, and he puts the spatula down. He comes and stands by the table. He doesn't sit. You fan your money out on the table between you."),
-              ME("Sunday. Count it slowly, Mark.")),
-        ], [
-            go("\"Count it slowly, Mark.\"", node="count", mins=5, cond_=cond(HIS), eff=[nadd(M, "power", -5)]),
-            go("\"No. I count.\"", node="no", mins=2, cond_=cond(HIS)),
-            go("Watch him count.", node="count", mins=5, cond_=cond(HERS)),
-        ]),
-        node("count", "He counts standing", [
-            P("He counts it standing up, like a man at somebody else's table. His voice is rough on the numbers. He's hard in his jeans, right there at the edge of the table where you can see, and he doesn't try to hide it, and he doesn't sit down until you tell him he can."),
-            D(M, "That's what you've got."),
-            ME("For Sunday."),
-            P("You fold it back into your purse. That money is for the weekend's count, and he'll count it again then."),
-            T("It's your table now. He knows it. His lap is right there, waiting, and you're not ready to give him that. Not yet."),
-        ], [go("\"Good.\"", loc="home_hall", mins=5, consumes=True,
-               eff=[nadd(M, "want", 10), setv("mark_step", 9)], flags=[done(9), fset("pays_her_own_way")])]),
-        no_node("no", [D(M, "You count, do you."), P("He stands over you until you get up. Then he sits in his chair, heavily, and eats his chilli, and doesn't look at you once."), T("Not yet. But he moved."),],
-                "home_kitchen", 7, eff=[nadd(M, "power", 3)]),
     ]})
 
 # ── the twist's offer, after goal 1 (DIRECTION §2 · money sheet: the answer stays parked) ──
@@ -397,47 +245,103 @@ out.append({
               D(M, "Sit down. You're making me lose count.")),
             G(cond({"type": "worn_exposure", "operator": "eq", "value": 1}, {"type": "worn_type", "operator": "neq", "value": "towel"}, {"type": "worn_type", "operator": "neq", "value": "sleep_shirt"}),
               D(M, "Your mother's out."), P("He doesn't tell you to cover up.")),
-            G(cond(SHORT), P("He counts it slow, and it's short, and he writes the gap on the envelope in pencil without a word.")),
-            G(cond(flag("rent_carried", False)), P("It's all there. He counts it twice anyway, because he wants to sit here longer.")),
-            *STREAK_LINES,
+            G(cond(flag("mark_arrangement", False), SHORT), P("He counts it slow, and it's short, and he writes the gap on the envelope in pencil without a word.")),
+            G(cond(flag("mark_arrangement"), SHORT), P("It's short, and he writes the gap on the envelope in pencil without a word.")),
+            G(cond(flag("mark_arrangement", False), flag("rent_carried", False)), P("It's all there. He counts it twice anyway, because he wants to sit here longer.")),
+            *STREAK_LINES, *PAYBACK_LINES,
             D(M, "Next Sunday. Same table."),
         ], count_exits("\"Count it, Mark.\"", None, 15, eff=[nadd(M, "want", 2)], node_="counted")),
         node("counted", "Counted", [
             P("He folds the rent into the envelope with Vance's name on it and leaves his hand flat on top of it."),
-            G(cond(trait("mark_step", "gte", 7)), P("His eyes go to you and stay. He counts the twenties in his wallet without taking them out.")),
+            # after his step 4, the arrangement (mark_sunday_table.md, signed 2026-11-01): normal speed, his eyes on
+            # her, a new line a week from a shuffle bag of five
+            G(cond(flag("mark_arrangement")), P("He counts it once, at normal speed, and his eyes don't go to the money once."),
+              POOL(P("He slides the envelope across to you to check, and keeps his fingers on it a second after you've taken it."),
+                   P("He doesn't say good morning. He says your name, once, and then he counts."),
+                   P("He puts the pencil behind his ear and looks at you instead of writing anything down."),
+                   P("He licks his thumb, and stops, and counts the rest without it."),
+                   P("When you stand up he watches you all the way to the door. He doesn't pretend he isn't."),
+                   pid="mark_table_after", bag=True)),
         ], [
-            go("\"Twenty, and you can look.\"", node="look_his", mins=3,
-               cond_=cond(trait("mark_step", "gte", 7), trait("corruption", "gte", 40), HIS)),
-            go("\"Twenty, and you can look.\"", node="look_hers", mins=3,
-               cond_=cond(trait("mark_step", "gte", 7), trait("corruption", "gte", 40), HERS)),
             go("Leave him to his envelope.", loc="home_kitchen", mins=2),
         ]),
-        node("look_his", "Look (his terms)", [
-            G(cond(trait("corruption", "lt", 50)), P("The rent sits counted on the kitchen table. You lay one more twenty on top of it yourself. \"Twenty, and you can look.\" Mark slides his own twenty across the wood first. \"Go on then, @player.\" You bare your tits for him under the kitchen light, and nothing sits between them and his eyes. The cold hits them. Your nipples go hard, tight and pointed straight at him. His breath goes short. His hand lies flat on the table, pressing white. His cock is hard under his jeans, a thick ridge straining the denim. You arch your back so your tits lift for him. He looks as long as the twenty buys, and you let him, your nipples aching in the cold while his eyes stay on them.")),
-            G(cond(trait("corruption", "gte", 50)), P(BOLD_HIS)),
-            VID("a girl baring her breasts at a kitchen table for a man who pays first, Sunday morning", "girl topless kitchen table man pays to look", "flash tits for money kitchen stepfather", pool_dir="sex/mark_table_look_his_t4"),
-        ], [
-            go("\"Time's up.\"", loc="home_kitchen", mins=10,
-               eff=[{"targetType": "player", "trait": "money", "op": "add", "value": 20, "clamp": False}, {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 59}],
-               flags=[fset("mark_money_week")]),
-            go("Cover up. Give him his twenty back.", node="cover", mins=2),
-        ]),
-        node("look_hers", "Look (your terms)", [
-            G(cond(trait("corruption", "lt", 50)), P(HERS_LOOK)),
-            G(cond(trait("corruption", "gte", 50)), P(BOLD_HERS)),
-            VID("a girl in charge at a kitchen table baring her breasts, a man staring, money under her hand", "girl flashes breasts kitchen table takes his money", "topless young woman kitchen table older man staring", pool_dir="sex/mark_table_look_hers_t4"),
-        ], [
-            go("\"Time's up.\"", loc="home_kitchen", mins=10,
-               eff=[{"targetType": "player", "trait": "money", "op": "add", "value": 20, "clamp": False}, {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 59}],
-               flags=[fset("mark_money_week")]),
-            go("Cover up. Give him his twenty back.", node="cover", mins=2),
-        ]),
-        node("cover", "Covered", [
-            P("You cover up before the twenty's spent and push the bill back across the table. He stares at it, then at you."),
-            D(M, "Your call, @player."),
-            P("He doesn't pick the money up until you've left the room."),
-        ], [go("Go.", loc="home_kitchen", mins=3, eff=[nadd(M, "want", 2)])]),
     ]})
+
+# ── the three short Sundays (rent_short.md, signed 2026-11-01, DECISIONS 121): on the Sunday morning, before the
+#    count (priority 7 over the table's 5). rent_carried is stamped at Sunday 00:00, so "under 12 hours" is this morning. ──
+THIS_SHORT = [SHORT, {"type": "hours_since_flag", "subject": "player", "flag_key": "rent_carried", "operator": "lt", "value": 12}]
+def short_trigger(extra, repeat=False):
+    t = {"location": "home_kitchen", "npc": M, "requires_npc": M, "is_repeatable": repeat, "priority": 7, "is_active": True,
+         "schedules": [{"weekdays": [6], "start_time": "08:00", "end_time": "12:00"}],
+         "conditions": cond(*THIS_SHORT, *extra)}
+    if repeat:
+        t["max_triggers_per_day"] = 1
+    return t
+
+out.append({
+    "id": "rent_short_1", "name": "The key",
+    "description": "The first short Sunday: Mark takes her bedroom-door key until she's paid up (her_door_unlocked).",
+    "trigger": short_trigger([trait("rent_short_weeks", "eq", 1)]),
+    "nodes": [node("key", "The key", [
+        P("Mark doesn't count it twice. He counts it once, and it's short, and he puts the envelope down."),
+        D(M, "Then it's owed. Vance doesn't wait, so I don't."),
+        P("He holds out his hand, palm up."),
+        D(M, "Your door key. You get it back when you're square."),
+        T("Anyone can open your door now. Anyone in this house."),
+    ], [go("\"Here.\"", loc="home_kitchen", mins=5, flags=[fset("her_door_unlocked")], eff=[nadd(M, "power", 5)])])]})
+
+out.append({
+    "id": "rent_short_2", "name": "The late fee",
+    "description": "The second short Sunday: Vance charges late, $15 on next Sunday's rent (rent_late_fee, the engine adds it to the due).",
+    "trigger": short_trigger([trait("rent_short_weeks", "eq", 2)]),
+    "nodes": [node("fee", "Fifteen", [
+        D(M, "Twice now. Vance comes round tomorrow night, and Vance charges late. Fifteen."),
+        P("He writes it on the envelope under the rest, in pencil, and underlines it."),
+        D(M, "That's yours, not mine."),
+    ], [go("\"How much?\"", loc="home_kitchen", mins=5, eff=[add("rent_late_fee", 15, clamp=False), nadd(M, "power", 5)])])]})
+
+def _take_cases():
+    """Mark takes the first of HELD she owns and he doesn't already hold; flat cases, since a condition
+    can't nest (v2.py triggerConditionsSatisfied): every earlier item is either not owned or already held."""
+    import itertools
+    cases = []
+    for k, item in enumerate(HELD):
+        here = [{"type": "clothing_item", "item_id": item, "operator": "owned"}, flag(f"garage_holds_{item}", False)]
+        for gone in itertools.product(*[[("not_owned", e), ("held", e)] for e in HELD[:k]]):
+            items = list(here)
+            for why, e in gone:
+                items.append({"type": "clothing_item", "item_id": e, "operator": "not_owned"} if why == "not_owned" else flag(f"garage_holds_{e}"))
+            cases.append((item, items))
+    return cases
+
+TAKE_LINES, TAKE_EXITS = [], []
+for item, items in _take_cases():
+    nm = HELD_NAME[item]
+    TAKE_LINES.append(G(cond(*items, {"type": "clothing_item", "item_id": item, "operator": "unequipped"}),
+        P(f"He doesn't shout. He gets up, goes upstairs, and comes back down with the {nm} over his arm. The one you bought.")))
+    TAKE_LINES.append(G(cond(*items, {"type": "clothing_item", "item_id": item, "operator": "equipped"}),
+        P(f"He doesn't shout. He holds his hand out across the table for the {nm} you've got on, and waits until you go and change and put it in his hand. The one you bought.")))
+    TAKE_LINES.append(G(cond(*items),
+        D(M, "Garage. On the table, then you get it back."),
+        P("Through the kitchen window you watch him hang it on the nail by his workbench, where you'll see it every time you walk past.")))
+    TAKE_EXITS.append(go("\"That's mine.\"", loc="home_kitchen", mins=5, cond_=cond(*items),
+                         flags=[fset(f"garage_holds_{item}")], wardrobe=[{"action": "unequip", "item_id": item}], eff=[nadd(M, "power", 5)]))
+import itertools as _it
+# nothing left to take: every item either not owned or already held (2^3 flat cases)
+NOTHING_CASES = [[{"type": "clothing_item", "item_id": i, "operator": "not_owned"} if w == "n" else flag(f"garage_holds_{i}")
+                  for i, w in zip(HELD, ws)] for ws in _it.product("nh", repeat=len(HELD))]
+out.append({
+    "id": "rent_short_3", "name": "The garage",
+    "description": "The third short Sunday and every one after: Mark takes one thing she bought (skirt, sheer blouse, sports bra, in that order) and keeps it in the garage until she's paid up. The garment's own conditions lock it in her wardrobe.",
+    "trigger": short_trigger([trait("rent_short_weeks", "gte", 3)], repeat=True),
+    "nodes": [node("take", "Three times", [
+        G(cond(trait("rent_short_weeks", "eq", 3)), D(M, "Three times.")),
+        G(cond(trait("rent_short_weeks", "gte", 4)), D(M, "Again.")),
+        *TAKE_LINES,
+        *[G(cond(*nc), P("He looks you over like he's pricing you, and finds nothing of yours left to take."), D(M, "Next week, then. On top."))
+          for nc in NOTHING_CASES],
+    ], TAKE_EXITS + [go("\"Next week.\"", loc="home_kitchen", mins=5, cond_=cond(*nc), eff=[nadd(M, "power", 5)])
+                     for nc in NOTHING_CASES])]})
 
 # ── Vance's knock after a short Sunday (money sheet: the next evening; once per carried week) ──
 out.append({
@@ -460,6 +364,7 @@ out.append({
               P("He looks past you into the hall, then back at you, slow, all the way down and up."),
               D(V, "Come and see me one evening. We'll talk about what's owed.")),
             G(cond(ntrait(V, "want", "gte", 30)), P("He doesn't look at your face once while he says it.")),
+            G(cond(trait("rent_late_fee", "gt", 0)), D(V, "Fifteen on top, Miss. That's how it works.")),
             T("A short week, and it comes to the door."),
         ], [
             go("\"Mark will pay.\" Close the door.", node="shut", mins=5, eff=[nadd(V, "power", 10)], flags=[funset("rent_carried")]),
@@ -486,6 +391,8 @@ def m_tease(line, what, label="Let him look."):
     return {"label": label, "ref": f"{MS}:{line}", "gate": [CURIOUS, trait("mark_step", "gte", 3)],
             "eff": [want(M)], "what": f"Mark, {what}: tease (Curious, Mark A 3)"}
 def m_paid(line, what, label="Let him pay to look."):
+    return None   # release 1: Mark's paid look is cut (npc_mark.md, "Cut": no money for her body)
+def _m_paid_cut(line, what, label="Let him pay to look."):
     # Writer fix pass (LO, 2026-10-10): behind his paid route, the flags his first paid touch (A 5)
     # and the arrangement (A 6) set, as well as the step that makes the price hers (A 7).
     return {"label": label, "ref": f"{MS}:{line}", "gate": [BOLD, trait("mark_step", "gte", 7), *MARK_PAID_ROUTE],
@@ -505,19 +412,19 @@ MARK_STATE_LINES = [
 LEAKS_LATE = [
     G(cond(trait("mark_step", "eq", 1)), P("His eyes go to your hem and back to the TV, every time you move.")),
     G(cond(trait("mark_step", "eq", 3)), P("He stays up later than he used to.")),
-    G(cond(trait("mark_step", "eq", 4)), P("There's a folded bill on the arm of the couch, under his hand. Waiting.")),
+    G(cond(trait("mark_step", "eq", 4)), P("He watches you from the couch the way he watches the game. He doesn't pretend not to.")),
 ]
 LEAKS_GARAGE = [
-    G(cond(trait("mark_step", "eq", 5)), P("He can't hold your look. He hasn't been able to since the couch.")),
+    # the leak before his step 4 (npc_mark.md, release 1): he can't hold her look
+    G(cond(trait("mark_step", "eq", 3)), P("He can't hold your look. He looks at the bench instead.")),
 ]
 LEAKS_KITCHEN = [
     G(cond(trait("mark_step", "eq", 2)), P("His eyes go to your hem and stay, the way they did at the first count.")),
-    G(cond(trait("mark_step", "eq", 7)), P("His chair is pulled out from the table for nobody.")),
-    G(cond(trait("mark_step", "eq", 8)), P("He keeps looking at the fridge. At the red circle.")),
 ]
 # ── the towel at home (LO, 2026-10-31, DECISIONS 98): his reaction by his Dominance, every visit, in his
 #    hub's own bands (<40, 40-59, 60+); "Let it slip." (Daring) pays his Dominance +2 once a day; "Drop it."
-#    needs Showing, his top band and step 5. Living room and kitchen only (LO: bedroom and garage out). ──
+#    needs Showing and his top band, no story step (LO, 2026-10-31). Living room and kitchen only (LO:
+#    bedroom and garage out). ──
 MARK_TOWEL_LEAD = [P("You loosen the tuck and let the towel slip. It drops to your waist before you catch it, and your tits are out in front of him, wet and bare, your nipples hard.")]
 MARK_TOWEL_SLIP = [
     [P("Mark looks straight at your tits for one second, then at the wall."), D(M, "Cover yourself. Now."),
@@ -552,7 +459,7 @@ def mark_towel(cid, loc):
         ],
         slip=MARK_TOWEL_SLIP, slip_lead=MARK_TOWEL_LEAD,
         slip_media=VID("a young woman letting her bath towel slip off her breasts in front of an older man on a couch", "girl drops towel in front of older man", "towel slip flash stepdad", pool_dir="sex/towel_mark_slip_t4"),
-        drop=MARK_TOWEL_DROP, drop_gate=[SHOWING, trait("mark_step", "gte", 5)],
+        drop=MARK_TOWEL_DROP, drop_gate=[SHOWING],
         drop_media=VID("a young woman standing naked with her bath towel on the floor, an older man looking at her", "girl drops towel naked older man", "towel drop naked stepdad", pool_dir="sex/towel_mark_drop_t4"),
         caught_by=L, caught=TOWEL_CAUGHT)
 
@@ -677,14 +584,9 @@ out.append(mark_hub("hub_mark_kitchen", K, "Mark, in the kitchen", "the kitchen"
 cards = step_cards(M, {
     1: ("Sunday. Mark counts the rent at the kitchen table.", "Sunday morning: the kitchen, while Mark counts the rent"),
     2: ("His eyes were on your hem at the count. He's on the phone a lot, late.", "Late at night: the kitchen drawer, Mark next door"),
-    3: ("\"Friday, Frank.\" He knows you heard. Sunday's coming.", "Sunday morning at the table (Curious, Daring)"),
-    4: ("He stays up after Laura's gone up.", "Late at night in the living room, Laura gone up (Bold)"),
-    5: ("\"What's the difference worth?\" He's thought about it.", "Late at night in the living room, close to midnight (Bold)"),
-    6: ("He can't look at you at dinner. He wants to talk terms.", "An evening in the garage, while Mark is out there (Bold)"),
-    7: ("He counts the twenties twice now.", "Sunday morning at the table, Laura out (Bold, Showing)"),
-    8: ("The fridge calendar has Laura's late Wednesday on it.", "Sunday afternoon in the kitchen, at the fridge (Bold)"),
-    9: ("Wednesday. Laura late, Ryan out. His chair.", "Wednesday evening in the kitchen: take Mark's chair (Bold, Showing)"),
-}, terminal_text=("The Sunday table is yours: his terms or yours, and his lap waiting.", "Mark's next step comes in the next release."),
+    3: ("\"Friday, Frank.\" He knows you heard. Sunday's coming.", "Sunday morning at the table, after a short week"),
+    4: ("He can't hold your look at the table. He wants to talk terms.", "An evening in the garage, after a late night in Ryan's room"),
+}, terminal_text=("The Sunday table, every week: his eyes on you.", "Mark, later. (After the house is yours.)"),
    closed_text="You told him you'd tell Mom. The rent is strict now, every Sunday, and nothing else.")
 for c in cards:
     c["when"].append({"flag": "opening_done", "op": "is_true"})

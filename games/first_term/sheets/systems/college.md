@@ -1,5 +1,7 @@
 # [READY] System — college
 
+> **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the first college day and the timetable screen, from `proposals/R1_SYSTEM_COLLEGE_DAY.md` (signed 2026-11-01). Added: the opening hands her to the dean, the dean's office (one time), Hale's week-one window, the timetable screen (engine shipped, DECISIONS 112), the week-one card. Everything else as signed.
+
 > **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
@@ -25,8 +27,8 @@
 | reads | energy, what she wears, Corruption, Exhibitionism, `intelligence` |
 | what drives it (S8) | her two stages and her clothes pick the risky slot; grades pick office lines |
 | link into the hook | her grades go home to Laura; failing brings the curfew |
-| leads to | Hale, Nadia, the art lecturer, the Biology TA, the dean |
-| day 1 | yes: Monday's first class is the opening day |
+| leads to | Hale, Nadia, the art lecturer, the Biology TA, the dean (met in his office on day 1) |
+| day 1 | yes: the opening ends "Go to campus.", the dean's office, then Monday's first class (Hale's week-one window) |
 | BRAKE (S9) | each class canvas fires once per class window, on its trigger |
 
 ## The timetable
@@ -38,6 +40,59 @@
 | Wed | Psychology | Business | Figure drawing |
 | Thu | Figure drawing | Biology | Psychology |
 | Fri | Psychology | free | free |
+
+**Rooms and lecturers** (checked 2026-11-01, `iterations/002/build_scripts/people_data.py:78-139`): every class is in
+`lecture_hall`. Psychology is Dr. Hale, Business the Business lecturer, Biology the Biology TA, Figure drawing the art
+lecturer.
+
+## The first college day (new 2026-11-01)
+
+**What was wrong** (LO, 2026-10-31): the first class was easy to miss (the class scene opens only in its first 15
+minutes, `college.py:22-28`; the game starts Monday 07:00 at home and nothing walks her there), and the timetable was a
+paragraph with no times taped to the hall door (`lecture_timetable`, `college.py:465-476`).
+
+1. **The opening hands her to college.** The opening's last screen (`card`, `toml_phases/2_one_shots.toml:502`) ends with
+   Laura: "You'll be late on your first day." Its button is **"Go to campus."** It walks her to the dean's office
+   (15 minutes).
+2. **The dean's office, one time, Monday of week one** (`dean_office`; the dean, 55, "what he visibly wants: to be
+   obeyed"). Four short screens:
+   1. He doesn't look up for a while. Then he does, and takes his time over her. In a short skirt, his signed line: "Is
+      that what you wore to class?"
+   2. The rules, his way: classes are not optional; two complaints and she's in this office again; "I don't like seeing
+      a student twice."
+   3. **He hands her the timetable.** It opens the timetable screen, Monday picked, Psychology marked "Next".
+   4. "Psychology. Lecture hall. You're already late." Button: **"Go to Psychology."** It takes her to the lecture hall.
+3. **Week one only, Hale's first lecture waits for her:** its window on Monday of week one runs 08:30–10:00, not 15
+   minutes. She walks in late and the room turns to look. Every later class keeps the 15-minute rule.
+4. **The dean is a seed:** his ladder (Zoe's later rung) is a later release. Here he is a man who watched her too long
+   and a door she'll be sent back to.
+
+**Against the taste columns** (an onboarding scene, not a heat step): who sees, the dean, then a full lecture hall
+turning round · what she risks, being late on day one, the dean's second visit · his move, the look and the rules ·
+what changes after, she has the timetable, the dean knows her name, the complaint rule is live.
+
+## The timetable screen (new 2026-11-01)
+
+- **One screen, like the people's schedule pop-up:** day chips across the top with today picked, then one row per
+  class: the time · the class · the room · the lecturer.
+- **Now and Next:** the class on now says **Now**; the next one today says **Next · in 25 min** (or "in 1 h 25 min"); a
+  class already over today is dimmed.
+- **Where it opens:** a **Timetable** button in the sidebar, after People · the dean's screen 3 · the lecture-hall door
+  (the door's paragraph is replaced by the button).
+- **One source of truth:** the build writes the `[[ui.timetable]]` rows from the same `PSYCH`, `BUSI`, `BIO`, `FIG`
+  schedules the class scenes use (`college.py:17-20`), so the screen can't disagree with the classes.
+- **Engine (shipped 2026-11-01, DECISIONS 112):** `[[ui.timetable]]` rows (class, place, lecturer, weekdays, from, to),
+  drawn by `setup.timetableHtml(day)` and opened by `setup.openTimetable(day)`; `[ui] timetable_button = true` adds the
+  sidebar button. Tests: `apps/game_generation/tests/test_timetable.py`. Opening it from the dean's screen and the door
+  needs a link that runs `setup.openTimetable()`: check at build how a canvas button runs it.
+
+## The card
+
+Week one's goal: "Go to your first class: Psychology, **08:30**, in the lecture hall." (today it has no time:
+`0_systems_spec.toml:498`).
+
+**Not decided here:** whether missing a class costs anything this release (signed as "a lecturer's warning; again, a
+complaint"). Proposed: as signed.
 
 ## A class visit — the rows
 

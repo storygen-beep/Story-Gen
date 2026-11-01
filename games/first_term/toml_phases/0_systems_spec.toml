@@ -74,7 +74,11 @@ flagEffects = [
   { targetType = "player", flag = "couch_seen", op = "unset" },
   { targetType = "player", flag = "mark_paid_look", op = "unset" },
   { targetType = "player", flag = "mark_tv_paid", op = "unset" },   # channel 5 with Mark pays once a day (DECISIONS 92)
-  { targetType = "player", flag = "ryan_towel_today", op = "unset" },   # the towel at home pays once a day per person (DECISIONS 98)
+  { targetType = "player", flag = "ryan_towel_today", op = "unset" },
+  { targetType = "player", flag = "out_shown_today", op = "unset" },
+  { targetType = "player", flag = "ryan_hot_today", op = "unset" },
+  { targetType = "player", flag = "laura_love_today", op = "unset" },
+  { targetType = "player", flag = "zoe_dared", op = "unset" },   # Zoe's dares: one a party night (zoe_dares.md); arriving at the party clears it too   # Laura's plain items pay Love +2 once a day in total (npc_laura.md)   # Ryan's hot repeatables pay once a day (ryan_hot_repeatables.md)   # the street sees her once a day (street_seen.md, DECISIONS 121)   # the towel at home pays once a day per person (DECISIONS 98)
   { targetType = "player", flag = "mark_towel_today", op = "unset" },
   { targetType = "player", flag = "laura_towel_today", op = "unset" },
   { targetType = "player", flag = "cafe_shift_1_today", op = "unset" },
@@ -320,6 +324,55 @@ key    = "jake_step"
 label  = "Jake's step"
 hidden = true
 
+# release 1 (DECISIONS 112-121): the redesign's counters
+
+[[traits.labels]]
+key    = "rent_short_weeks"
+label  = "Short Sundays"
+hidden = true
+
+[[traits.labels]]
+key    = "rent_late_fee"
+label  = "Late fee"
+
+[[traits.labels]]
+key    = "cafe_shifts_worked"
+label  = "Shifts worked"
+hidden = true
+
+[[traits.labels]]
+key    = "cafe_l2_shifts"
+label  = "Busy shifts"
+hidden = true
+
+[[traits.labels]]
+key    = "cafe_footfall"
+label  = "Café regulars"
+
+[[traits.labels]]
+key    = "cafe_name"
+label  = "The café's name"
+
+[[traits.labels]]
+key    = "laura_gaps_watched"
+label  = "Times you watched Laura"
+hidden = true
+
+[[traits.labels]]
+key    = "zoe_dares_done"
+label  = "Zoe's dares"
+hidden = true
+
+[[traits.labels]]
+key    = "hale_claire_roll"
+label  = "Claire's Thursday"
+hidden = true
+
+[[traits.labels]]
+key    = "jake_catch_roll"
+label  = "A close call"
+hidden = true
+
 # ── the sidebar (DECISIONS 95): no Stats, Schedules or Flags buttons (each person's schedule opens
 #    from their card on the People page); on a phone, a clock in the corner while the sidebar is closed ──
 [ui]
@@ -327,6 +380,8 @@ sidebar_hide = ["stats", "schedules", "flags"]
 phone_clock  = true
 # DECISIONS 97 — the Quests page as short tap-to-open rows: My story, then people ready first.
 quests_layout = "list"
+# DECISIONS 112, 121 — her classes as a table: a Timetable button after People (rows: 1_, from classes.py).
+timetable_button = true
 
 # ── the cast page (engine.md §34) — lists only the people she has met ──
 [ui.cast_page]
@@ -439,6 +494,8 @@ price = 30
 type = "short_skirt"
 beauty = 2
 corruption = 1
+# the garage hold (rent_short_3, money_pressure.md, DECISIONS 121): while Mark keeps it, it can't be worn
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "garage_holds_short_skirt", operator = "is_false" } ] }
 
 [[clothing]]
 id = "thin_top"
@@ -447,6 +504,8 @@ slot = "top"
 price = 20
 type = "thin_top"
 beauty = 1
+# the garage hold (rent_short_3, money_pressure.md, DECISIONS 121): while Mark keeps it, it can't be worn
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "garage_holds_thin_top", operator = "is_false" } ] }
 
 [[clothing]]
 id = "sports_bra"
@@ -455,6 +514,8 @@ slot = "bra"
 price = 25
 type = "sports_bra"
 beauty = 1
+# the garage hold (rent_short_3, money_pressure.md, DECISIONS 121): while Mark keeps it, it can't be worn
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "garage_holds_sports_bra", operator = "is_false" } ] }
 
 [[clothing]]
 id = "cafe_uniform_normal"
