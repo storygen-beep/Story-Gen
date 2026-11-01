@@ -49,7 +49,7 @@ conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subjec
 id          = "feed_followers_dm"
 app         = "feed"
 poster_name = "@quad_watch"
-caption     = "mirror pic of the week. you know who you are 🔥"
+caption     = "mirror pic of the week. that ass, those legs. you know who you are 🔥 dm us the rest"
 likes       = 340
 image       = "phone/feed_followers_dm.jpg"
 search_queries = ["girl mirror selfie bedroom phone"]

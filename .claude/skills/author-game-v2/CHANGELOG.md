@@ -5,6 +5,52 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-01 — the heat ladder: which low-heat kind opens when, and what it contains (`the-heat-ladder.md` H1–H7)
+
+**What.**
+- `references/the-heat-ladder.md` (new): H1 the order across an arc and the stage each kind opens at (the default
+  table is first_term's signed one, `games/first_term/spine/SP2_ladders.md:34-44`, plus the kinds the 2026-11-01
+  study placed), with audience size setting the stage; H2 step-family and anyone she lives with start with
+  accidents; H3 a table of twelve kinds (opens at, must contain, climbs by, cite); H4 what every low-heat scene
+  contains (a named part of her body, his reaction, a "not yet" or a price, a hook; talk only is the failure
+  shape); H5 what pays; H6 the bridge from an accident to her choice; H7 his leak, physical and seen.
+- `references/the-arc.md`: A2 says no sex act is not no heat; A4d says the event's raise goes to him and sets a
+  flag; A13's leak is on his body and seen, and "a nice type waits, so she moves" holds only where her stage
+  allows a chosen act.
+- `references/the-want.md` §4b: "direct from 5" is scoped to people outside the house, and its source is named
+  as a FAIL game (numbers only).
+- `references/the-surfaces.md`: R5b says what her no moves; the worked ladder's rungs 2, 5 and 7 are restored to
+  the source's own (tease, watching, showing off; `Female_PC_Craft_Study_20260823/findings_E_yes.md:174-180`),
+  where an earlier edit had relabelled them as questions and a visit.
+- `references/register.md`: test 10, "low heat is on the body"; "nine tests" becomes ten, also in
+  `references/agents.md` and `SKILL.md`.
+- `references/the-spine.md` SP2 and `templates/spine/SP2_ladders.md`: a Heat line (stage per kind, audience size,
+  accident first at home).
+- `templates/sheets/scene.md`: a "Kind · stage" line above the step row. `references/the-sheets.md` S14: "the
+  moment" names its kind and stage.
+- `SKILL.md`: the heat ladder joins the load-bearing list.
+- `.claude/agents/v2-reader.md`: row 12, "low heat is on the body", which also fails a chosen act below its stage
+  and a first chosen act at home with no accident before it. `.claude/agents/v2-pitcher.md`: the pitch names its
+  kind and stage, and a talk-only or too-early pitch is not returned.
+
+**Why.** first_term's "Lean in his doorway." let a Good Girl (Corruption 6) choose to tease her step-brother, and
+the screen was banter. LO (2026-11-01): not hot, and too early. The heat study's order (`HEAT_STUDY.md:544-555`,
+"strong") and stage map (§7.3) had never reached the skill, the skill contradicted itself on accidents
+(`the-want.md` §4b against `the-arc.md` A4d), and B15's leak fix had not landed. A new study of the signed
+pass-list games (9 files in `~/Documents/Great_Games_Study_20260926/round12_tease/`) supplied the craft, and two
+audits of the older studies found what else was lost. LO decided two calls on 2026-11-01: her no never raises her
+climb but always moves something; an accident pays his meter and sets a flag, and only her choice pays her.
+B151, B14, B15 and B24 in `SKILL_CHANGES_FROM_FIRST_TERM.md`.
+
+**How verified.** Every cite in the new file re-read with sed against its source; four loose cites tightened
+(the "NADA" quote is `home_kinds.md:407`; the itch excuse is `um:1702`). Each quote's game line checked
+(`ihoh:43257`, `:4770`, `:16886`, `:57449`; `cot:L41386`, `:67778-67779`, `:67794-67799`, `:72330`, `:72343`,
+`:72476`, `:72525`; `um:10274`, `:10276`). Every `the-heat-ladder.md` pointer resolves to an H heading. No
+"nine tests" count left outside history. `gates.py` reads reader verdict keys generically (`gates.py:12176-12187`),
+so the new test needs no gate change; no gate, engine or game file changed.
+
+---
+
 ## 2026-11-01 — the step row: taste as a design input (`the-sheets.md` S14)
 
 **What.**

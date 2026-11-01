@@ -227,7 +227,7 @@ climb or does the CAST?** The field splits 8 roster / 9 ladder with nothing betw
 `v2-player` (plays the build), `v2-pitcher` (three per release, no shared context: two on the
 most-owed relationships, one on a thread of her life), `v2-prose` (one beat against `gates.py --beat`), `v2-attack` (one lens per
 instance, before the build; the `excitement` lens reads each pitch), `v2-listener` (loop step 8,
-what players said, via `scripts/listen_mopoga.py`), `v2-reader` (the nine scene tests in
+what players said, via `scripts/listen_mopoga.py`), `v2-reader` (the ten scene tests in
 `register.md`, "What a scene contains", required on every touched canvas; its verdicts gate). The Panel has no instrument of its own (`agents.md`).
 The state schema is in
 `references/state.md`. Engine facts are in `references/engine.md` — and **only** there.
@@ -426,6 +426,8 @@ Each of these is taught in one place and holds up much of the rest. Change one o
 with LO's yes — never as a side effect of another edit. *(LO decided.)*
 
 - **The arc** — `references/the-arc.md` A1–A14: numbered one-time steps that convert into a loop.
+- **The heat ladder** — `references/the-heat-ladder.md` H1–H7: which low-heat kind opens at which stage, in
+  what order, what each scene contains, and what it pays.
 - **The world reacts** — `the-meters.md` W5b (who knows about her) and W8 (what sticks);
   `register.md`, "What a scene contains", test 5 (who notices).
 - **Doors close out loud** — `the-want.md` §1, `the-arc.md` A3, `the-meters.md` W8.

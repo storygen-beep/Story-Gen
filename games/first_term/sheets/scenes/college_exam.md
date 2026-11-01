@@ -1,4 +1,6 @@
-# [READY] Scene — college_exam
+# [REVIEW]] Scene — college_exam
+
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
@@ -8,7 +10,7 @@
 |---|---|
 | system · pool | college · `college_exam` |
 | where · when | the lecture hall · midterms, weeks 7–8, once per exam |
-| gate | Focus: none · the study guy: Curious · the flash: Exhibitionism 20 |
+| gate | Focus: none · the study guy: Curious · the flash: Exhibitionism 40 (was 20: DECISIONS 124), cap 59 |
 | who sees the flash | the cocky guy (21) only: a flash for one person she knows |
 | what she wears here (test 8) | not named; "pull everything up" |
 | BRAKE (S9) | once per exam |

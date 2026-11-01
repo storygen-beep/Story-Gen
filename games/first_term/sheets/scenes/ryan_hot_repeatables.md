@@ -1,5 +1,7 @@
 # [READY] Scene — ryan_hot_repeatables
 
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): row 1 rewritten as a real tease (H4) and gated at Curious after the hall accident; rows 2, 4, 6 and 7 open at their SP2 stage; caps per stage.
+
 > **New 2026-11-01, signed by LO 2026-11-01 ("Signed")** (DECISIONS 99–113). From `sheets/people/npc_ryan.md`, "The hot repeatables,
 > one per stage". All written in full, no placeholders: 21 pool entries, below, written by `v2-prose` and measured.
 
@@ -10,13 +12,13 @@ repeats until all have shown). None shows with Laura in the room (Laura's rule).
 
 | # | opens after | where · when | what she does | gate | meters (`meters.md`) | explicit? · column | the no | change from built |
 |---|---|---|---|---|---|---|---|---|
-| 1 | step 2 | his doorway, evenings he's home (Mon, Tue, Thu, Sun 19:00–22:00) | she leans in his door and asks what Kayla's worth tonight; he can't stop looking at her legs, then her mouth | none | none (talk) | no · early | "Night, Ryan." | new |
-| 2 | step 3 | the couch, Sat/Sun 14:00–18:00 | feet in his lap, rubbing him through his shorts until he's hard and the game's forgotten | Curious | corruption add +1 | yes · middle | "Watch the game." | built ("Put your feet in his lap"): pays +3 not +1, rewritten to go further |
-| 3 | step 4 | the couch, Sat/Sun 14:00–18:00 | she watches his game in her underwear; he has to adjust himself, and she makes him say why | Daring | exhibitionism add +1 · corruption add +1 (shown by choice) | yes · middle | "Get dressed." | new |
-| 4 | step 5 | his bed, evenings he's home | she lies on his bed and touches herself until she comes; he isn't allowed to touch, only watch | Curious · Daring (mixed: both) | both add +1 | yes · middle | "Not tonight." | new |
-| 5 | step 6 | his room, evenings he's home | naked in his room; he strokes himself while she watches, and she tells him when he can come | Showing | exhibitionism add +1 · corruption add +1 | yes · late (cum) | "Not tonight." | new |
-| 6 | step 7 | the couch, under the blanket (Sat/Sun 14:00–18:00) | a handjob to the end under the blanket, with Mark's TV on in the next room | Bold · Daring (mixed: seen, `meters.md` rule 4) | both add +1 | yes · late (cum) | "Just the film." | built ("Share the blanket"): pays +3 not +1, now finishes |
-| 7 | step 8 | his room, two knocks, not Friday, 22:00–00:00 | sex. One night in four someone nearly catches them: Laura knocks, or Kayla calls mid-act | — | corruption add +1 | yes · whole late | "Not tonight." | new, replaces the built two-knocks repeat |
+| 1 | step 2 · `ryan_hall_seen` | his doorway, evenings he's home (Mon, Tue, Thu, Sun 19:00–22:00) | a first tease for one person (H3): she shows him her body in the doorway (a stretch, a finger down her thigh, a bend for a sock), he hides what it does to him and fails, and she leaves on "not tonight" | Curious (was none) | corruption add +1, cap 39 | no · early | "Night, Ryan." | rewritten 2026-11-01 (was talk only) |
+| 2 | step 4 (was 3) | the couch, Sat/Sun 14:00–18:00 | feet in his lap, rubbing him through his shorts until he's hard and the game's forgotten | Bold (was Curious) | corruption add +1, cap 59 | yes · middle | "Watch the game." | built ("Put your feet in his lap"): pays +3 not +1, rewritten to go further |
+| 3 | step 4 | the couch, Sat/Sun 14:00–18:00 | she watches his game in her underwear; he has to adjust himself, and she makes him say why | Daring (step 4 needs Bold) | exhibitionism add +1 · corruption add +1 (shown by choice), cap 39 | yes · middle | "Get dressed." | new |
+| 4 | step 6 (was 5) | his bed, evenings he's home | she lies on his bed and touches herself until she comes; he isn't allowed to touch, only watch | Bold · Showing (was Curious · Daring; naked by choice for one is Bold) | both add +1, cap 59 | yes · middle | "Not tonight." | new |
+| 5 | step 6 | his room, evenings he's home | naked in his room; he strokes himself while she watches, and she tells him when he can come | Showing | exhibitionism add +1 · corruption add +1, cap 59 | yes · late (cum) | "Not tonight." | new |
+| 6 | step 7 | the couch, under the blanket (Sat/Sun 14:00–18:00) | a handjob to the end under the blanket, with Mark's TV on in the next room | Hungry · Daring (was Bold; the taboo act at home is Hungry, SP2) | both add +1, cap 79 | yes · late (cum) | "Just the film." | built ("Share the blanket"): pays +3 not +1, now finishes |
+| 7 | step 8 | his room, two knocks, not Friday, 22:00–00:00 | sex. One night in four someone nearly catches them: Laura knocks, or Kayla calls mid-act | — (step 8 needs Corruption 60) | corruption add +1, cap 79 (was 59) | yes · whole late | "Not tonight." | new, replaces the built two-knocks repeat |
 
 **Gates as signed** (`npc_ryan.md`): the stage column is the gate. Row 6's "Bold" is signed; "· Daring" is the mixed
 rule (`meters.md` rule 4: seen and sexual needs both) applied, confirmed by LO 2026-11-01 ("Continue").
@@ -30,17 +32,21 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Each entry 
 
 ### 1 · his doorway · early column
 
-**1a** · 68 words · explicit words 0 · median sentence 6
+Rewritten 2026-11-01 (DECISIONS 124) by the lead, against `the-heat-ladder.md` H4: her body named, his reaction on his
+body (at stage 2 he hides it and fails), a "not yet" said out loud, a hook (tomorrow). No garment is named, so each
+entry is true in whatever she wears. A tease screen, not explicit, by design.
 
-> You lean in Ryan's doorway. He's on the bed with his phone, and he puts it down fast. "Texting Kayla?" you ask. "What's she worth to you, Ryan? Be honest." "More than you, @player.nickname." "Then why are you staring at my legs?" He doesn't answer. His eyes climb your legs, slow, and stop at your mouth. *He's such a liar.* He swallows. His eyes stay on your lips.
+**1a**
 
-**1b** · 84 words · explicit words 0 · median sentence 8
+> You lean in Ryan's doorway and stretch, arms over your head, slow. Your tits lift. He's on the bed with his phone, and he puts it face down. "Texting Kayla?" "Was." His eyes drop to your chest and stay there. He pulls a pillow into his lap. "What's the pillow for, Ryan?" "Nothing. Go away." "Liar." You turn to go and take your time about it, so he gets your ass all the way to the door. "Not tonight. Ask me nicely tomorrow."
 
-> Ryan's at his desk with his headphones round his neck. You knock on the frame and lean there. "So what's Kayla worth? Dinner? A movie? Or does she just get your bed?" "Get out, @player.nickname." "You don't want me out." You cross one leg over the other. He laughs, but his eyes drop to your legs. They stay there a long second. Then they come up to your mouth. "Say that again," he says. He watches your lips the whole time you say it.
+**1b**
 
-**1c** · 78 words · explicit words 1 · median sentence 7
+> Ryan's at his desk, headphones round his neck. You knock on the frame and lean there, one hip out. "So what's Kayla worth? Dinner? Or does she just get your bed?" "Get out, @player.nickname." "You don't want me out." You run one finger down the front of your thigh, slow. His eyes follow it all the way down. He shifts in the chair and turns it a little away from you. You see the bulge in his shorts anyway. "Is that for Kayla too?" He goes red to the ears. "Night, Ryan. Maybe tomorrow."
 
-> You hang in Ryan's door with one hand on the frame. He's on the floor with a controller. "Hey. What's Kayla worth to you? Out of ten." "Ten. Obviously." "Liar. You paused the game when I walked in." He did. He's turned right round to look at your legs. "Go away, @player.nickname." "Make me." *He won't. He likes looking too much.* His eyes slide up your legs, over your tits, and stop on your mouth. He doesn't blink.
+**1c**
+
+> You hang in Ryan's door with one hand on the frame. He's on the floor with a controller. "Hey. What's Kayla worth to you? Out of ten." "Ten. Obviously." "Liar. You paused the game when I walked in." He did. He's turned right round, looking at your ass in the doorway. You bend, slowly, for a sock on his floor, and toss it at him. He catches it in his lap and leaves it there, over the front of his shorts. *He's hard. For you.* "Not tonight, Ryan. Keep the sock."
 
 ### 2 · feet in his lap · middle column
 

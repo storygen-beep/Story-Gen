@@ -1,5 +1,7 @@
 # [READY] Person — Zoe
 
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): the hot tub at Bold · Showing, paying +3 cap 79; every dare the room watches, the park dare and the hollow at Hungry or Watched; "Let him watch." at Watched; her no moves a counter, not her meter; the locked dare shows "(Next release)". Sections changed: Ladder, the dares, Step 5, the park (new).
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the release-1 ladder, from `proposals/ZOE_R1_LADDER.md` (signed 2026-11-01). Changed: Ladder, the seven columns, Leak and promise, the dares, step 5, the party regulars. Everything else as signed.
 
 > **Changed 2026-10-29, re-signed by LO 2026-10-29** (DECISIONS 87–88): her run text books the run; a no-show sets `zoe_bailed`, read by her next park line. Her party text: "obviously" is a promise to come short.
@@ -59,14 +61,15 @@ A choice in Zoe's hub in her living room, Friday 18:00–19:00, before the party
 | n | canvas | where | when | gate | raises | the no | guidance card line |
 |---|---|---|---|---|---|---|---|
 | 0 | `zoe_00_quad_meeting` | `quad` | her hours | none | `zoe_met` set · her number | (as built) | The quad, between classes: a girl who's looking at you. |
-| 1 | `zoe_01_first_party` (= Jake 1) | `zoe_apartment` | Fri 19:00–23:00 | step 0 (built: jake_step eq 0, the shared step) | exhibitionism add +3 | "Not tonight, Zo." (parked; costs nothing) | Friday evening: Zoe's party at her apartment, and she has a dress for you. |
+| 1 | `zoe_01_first_party` (= Jake 1) | `zoe_apartment` | Fri 19:00–23:00 | step 0 (built: jake_step eq 0, the shared step) | exhibitionism add +3 (on the yes only) | "Not tonight, Zo." (parked; pays her nothing, was Exhibitionism +3; adds 1 to `zoe_refused`, which her next line reads: "Next time, then.") | Friday evening: Zoe's party at her apartment, and she has a dress for you. |
 | 2 | `zoe_02_bra_through_the_sleeve` | `zoe_apartment` | Fri 21:00–00:00 | Corruption 20 **or** Exhibitionism 20 (was and) | exhibitionism add +3 | "Not tonight, Zo." (parked) | A Friday party at Zoe's, out on the balcony: Zoe has a dare. |
-| 3 | `zoe_03_hot_tub` | `party_house` | Sat 20:00–00:00 | Corruption 20 · Exhibitionism 20 (was 40 · 40) | exhibitionism add +3 · corruption add +3 | "Not tonight, Zo." (parked) | Saturday night: the hot tub at the party house. Zoe's friends head inside first. |
+| 3 | `zoe_03_hot_tub` | `party_house` | Sat 20:00–00:00 | Corruption 40 · Exhibitionism 40 (was 20 · 20; topless and a kiss for one person she knows is Bold · Showing, DECISIONS 124) | exhibitionism add +3 · corruption add +3, cap 79 | "Not tonight, Zo." (parked) | Saturday night: the hot tub at the party house. Zoe's friends head inside first. |
 | 4 | `zoe_04_i_pick_the_dares` | `zoe_apartment` | Mon–Thu 18:00–22:00 · Sat 18:00–20:00 | step 3 (was Corruption 40) | `picks_the_dares` set: **the dares open** | Zoe's: "Not that one, babe." (parked) | An evening at Zoe's, on her couch, after the hot tub. |
-| 5 | `zoe_05_no_dare` (new, top step) | `zoe_bedroom` | after a Friday party, Sat 00:00–02:00 | step 4 · Corruption 40 · four dares done | `zoe_together` set · `zoe_let_him_watch` (her pick) | "Ask me again." | After Friday's party: Zoe's bedroom, the music still through the door. |
-| — | locked | her card | — | Corruption 60 | — | — | "Zoe's next dare. (Needs Corruption 60.)" (threesome, foursome, gloryhole, the dean, the porn video, gangbang: later) |
+| 5 | `zoe_05_no_dare` (new, top step) | `zoe_bedroom` | after a Friday party, Sat 00:00–02:00 | step 4 · Corruption 40 · four dares done | `zoe_together` set · `zoe_let_him_watch` (her pick; "Let him watch." needs Exhibitionism 60) | "Ask me again." | After Friday's party: Zoe's bedroom, the music still through the door. |
+| — | locked | her card | — | not written | — | — | "Zoe's next dare. (Next release)" (DECISIONS 124) (threesome, foursome, gloryhole, the dean, the porn video, gangbang: later) |
 
-Every step's gate also says the drinks boost is off. Stage numbers: 20 is Curious or Daring, 40 Bold or Showing.
+Every step's gate also says the drinks boost is off. Stage numbers: 20 is Curious or Daring, 40 Bold or Showing, 60
+Hungry or Watched.
 
 ## Card goals (LO's play note, 2026-10-08)
 
@@ -109,14 +112,23 @@ worse." Both on each step sheet.
   Zoe picks it; her line names the dare.
 - **Every dare:** a showing yes, a doing yes and the no (`sheets/systems/meters.md`).
 
-| stage | showing yes (Exhibitionism) | doing yes (Corruption) | pays |
-|---|---|---|---|
-| Curious · Daring | "Flash the guy at the keg." | "Kiss the cocky guy. Properly." | that meter +1 (both when seen) |
-| Bold · Showing | "Topless in the kitchen till the song ends." | "Sit in his lap until he's hard. Make him beg." (mixed: Corruption 40 and Exhibitionism 20) | +1 each, mixed pays both |
-| after step 5 | Zoe joins the dare: "Kiss me where they can see." | "Let her watch you with him." | both +1 |
-| Corruption 60 | — | — | locked: "Zoe's next dare. (Needs Corruption 60.)" |
+Gates changed 2026-11-01 (DECISIONS 124): the stage turns on how many see her (SP2's Heat line), and the room sees
+every dare but the kiss, so every showing yes, the lap and Zoe's two are Watched. Each still shows locked with its number
+where she can see it.
 
-- **The no:** "Not tonight." Zoe pouts and picks something tamer next week. Never a cost but the meter.
+| dare | gate (was) | pays |
+|---|---|---|
+| "Kiss the cocky guy. Properly." (doing) | Curious (as built) | Corruption +1, cap 39 |
+| "Flash the guy at the keg." (showing, the room sees) | Exhibitionism 60 (was 20) | Exhibitionism +1, cap 79 |
+| "Topless in the kitchen till the song ends." (showing) | Exhibitionism 60 (was 40) | both +1, cap 79 |
+| "Sit in his lap until he's hard. Make him beg." (mixed) | Exhibitionism 60 · Corruption 40 (was Corruption 40 · Exhibitionism 20) | both +1, cap 79 |
+| after step 5, Zoe joins: "Kiss me where they can see." | Exhibitionism 60 (was none) | both +1, cap 79 |
+| after step 5: "Let her watch you with him." | Exhibitionism 60 (was none) | both +1, cap 79 |
+| the next dare | not written | locked: "Zoe's next dare. (Next release)" |
+
+- **The no:** "Not tonight." Zoe pouts and picks something tamer next week. It pays her nothing and adds 1 to
+  `zoe_refused` (her next pick reads it: "Something easy, then."). No dare in release 1 writes the room pushing, so
+  no no can fail yet (H5: a no fails only where the push is on the page).
 - **Who sees:** the room, every time; the regular in the dare remembers it next party ("You again.").
 - **Jake:** if Jake is her boyfriend (Jake step 3), each dare with a man carries one line of risk: someone at the party
   knows Jake. Jake finding out is a later release.
@@ -126,10 +138,19 @@ guy at the keg, the hot-tub girl. Each has one detail and a memory of what she d
 
 ## Step 5, "No dare"
 
-- **The door:** the player's pick on a button: "Tell him to go." / "Let him watch." Both finish the act. "Let him
+- **The door:** the player's pick on a button: "Tell him to go." / "Let him watch." (Exhibitionism 60: he is a
+  watcher, and a watched act is Watched; DECISIONS 124). Both finish the act; the watched one pays her Exhibitionism
+  +3, cap 79. "Let him
   watch" sets `zoe_let_him_watch`, which the locked threesome reads later.
 - **Crude words:** step 5 is Bold (stage 3, the middle column), which can't write this act on the body.
   **Proposed:** step 5 uses the late column ("pussy, clit, fuck"). **LO confirms on the scene sheet.**
+
+## The park (DECISIONS 124)
+
+| canvas · choice | gate (was) | why |
+|---|---|---|
+| `zoe_park_dare` "Do it." (Zoe dares her in front of a stranger) | Exhibitionism 60 (was Corruption 20) | a stranger watching an act is Watched |
+| `park_hidden` (the hollow, joggers a few metres off) | Corruption 60 (was 40) | sex where strangers are able to see is Hungry (SP2) |
 
 ## Not cut, but changed
 

@@ -3,6 +3,8 @@ Source: sheets/scenes/ryan_0*.md, sheets/people/npc_ryan.md. Explicit screens pa
 from canv import *
 from sheetbeats import beat, pool
 from tomlw import tod, wd
+def cap(k, n, c):   # (DECISIONS 124) used by the steps above the hot repeatables too
+    return {"targetType": "player", "trait": k, "op": "add", "value": n, "cap": c}
 
 R = "npc_ryan"
 out = []
@@ -21,7 +23,7 @@ out.append({
                 "steamy bathroom shower door phone on sink", "girl brushing teeth bathroom guy in shower"),
             P("The shower's running and the door doesn't lock, so you go in anyway, because you have class and he's had the bathroom long enough. Ryan is a shape behind the fogged glass. You brush your teeth at the sink with your back to him."),
             D(R, "Seriously, @player.nickname? Two minutes."),
-            P("His eyes find you in the mirror through the steam, and go away again too fast. Then his phone buzzes on the edge of the sink, right by your hand. The screen lights up: a name, Kayla, and a heart, and a message that starts *can't wait for friday, sneak me in the back again*."),
+            P("His eyes find you in the mirror through the steam. They drop down your back to your ass and stay there. Then he catches himself, looks at the tiles, and turns to face the wall, fast, so you can't see the front of him. Then his phone buzzes on the edge of the sink, right by your hand. The screen lights up: a name, Kayla, and a heart, and a message that starts *can't wait for friday, sneak me in the back again*."),
             G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}, {"type": "worn_type", "operator": "eq", "value": "thin_top"}),
               P("In the steam your sheer blouse sticks to you. There's no bra under it, and the mirror shows him that too.")),
         ], [
@@ -122,7 +124,7 @@ out.append({
             T("He lied to her with your foot in his lap. He'd do it again."),
         ], [
             go("\"Liar.\"", loc="home_hall", mins=5, consumes=True,
-               eff=[nadd(R, "want", 5), setv("ryan_step", 4)], flags=[done(4)]),
+               eff=[nadd(R, "want", 5), cap("corruption", 3, 79), setv("ryan_step", 4)], flags=[done(4)]),  # a Bold one-time step: +3, cap 79 (DECISIONS 124)
         ]),
     ]})
 
@@ -194,7 +196,7 @@ out.append({
             P(beat("ryan_06_after_the_shower", "look")),
             VID("a wet naked girl out of the shower, a guy in the bathroom doorway with his cock out, stroking", "naked girl shower guy in doorway jerking off", "guy masturbating watching naked wet woman bathroom", pool_dir="sex/ryan_06_look_t5"),
         ], [
-            go("Watch him.", node="comes", mins=3, eff=[add("exhibitionism", 3), add("corruption", 1)]),
+            go("Watch him.", node="comes", mins=3, eff=[cap("exhibitionism", 3, 79), add("corruption", 1)]),  # DECISIONS 124: cap 79
         ]),
         node("comes", "Babe?", [
             P(beat("ryan_06_after_the_shower", "comes")),
@@ -242,7 +244,7 @@ out.append({
             P("From now on his phone is face-down every time you knock."),
         ], [
             go("Go to your room.", loc="home_hall", mins=2, consumes=True,
-               eff=[nadd(R, "want", 5), add("corruption", 3), setv("ryan_step", 7)], flags=[done(7)]),
+               eff=[nadd(R, "want", 5), cap("corruption", 3, 79), setv("ryan_step", 7)], flags=[done(7)]),  # DECISIONS 124: cap 79
         ]),
     ]})
 
@@ -295,7 +297,7 @@ out.append({
             term_exit("\"Keep Kayla. I'm the secret.\"", "ryan_terms_secret"),
             term_exit("\"Mom finds out when I want.\"", "ryan_terms_mine"),
             term_exit("\"You're my brother, that's all.\" (ends his path)", "ryan_path_closed", final=True),
-            go("Further. (Needs Corruption 60)", node="terms", swl=True, cond_=cond(HUNGRY)),
+            go("Further. (Next release)", node="terms", swl=True, cond_=cond(NEXT_RELEASE)),
         ]),
     ]})
 
@@ -324,27 +326,29 @@ def hot_choice(n, label, gate, wardrobe=None):
     return go(label, node=f"hot{n}", mins=0, cond_=cond(HOT_FREE, *gate), wardrobe=wardrobe)
 DRESS_BACK = DRESS_DAY
 HOT_ROOM = [  # his room, evenings he's home (Mon, Tue, Thu, Sun 19:00-22:00)
-    (1, "Lean in his doorway.", [trait("ryan_step", "gte", 2)], None,
-     [], [hot_exit("\"Night, Ryan.\"", "home_hall", 10, [])]),
-    (4, "Lie on his bed. He only watches.", [trait("ryan_step", "gte", 5), CUR, DAR], STRIP,
+    (1, "Lean in his doorway.", [trait("ryan_step", "gte", 2), CUR, flag("ryan_hall_seen")], None,   # a first tease, Curious, after the hall accident (DECISIONS 124)
+     [], [hot_exit("\"Night, Ryan.\"", "home_hall", 10, [cap("corruption", 1, 39)])]),
+    (4, "Lie on his bed. He only watches.", [trait("ryan_step", "gte", 6), BOLD_, SHOW], STRIP,   # naked by choice for one: Bold (DECISIONS 124)
      [VID("a naked girl on a bed touching herself, a guy in a chair gripping it, watching", "girl masturbates on his bed he watches", "only watch no touching girl fingers herself", pool_dir="sex/ryan_hot4_t5")],
-     [hot_exit("Get dressed.", "home_hall", 30, [cap("corruption", 1, 39), cap("exhibitionism", 1, 39)], wardrobe=DRESS_BACK)]),
-    (5, "Stand naked in his room. Tell him when.", [trait("ryan_step", "gte", 6), SHOW], STRIP,
+     [hot_exit("Get dressed.", "home_hall", 30, [cap("corruption", 1, 59), cap("exhibitionism", 1, 59)], wardrobe=DRESS_BACK)]),
+    (5, "Stand naked in his room. Tell him when.", [trait("ryan_step", "gte", 6), BOLD_, SHOW], STRIP,   # it pays Corruption: Bold too (DECISIONS 124, reader)
      [VID("a naked girl watching a guy stroke his cock in his bedroom, telling him when", "naked girl watches guy jerk off", "she tells him when to cum", pool_dir="sex/ryan_hot5_t5")],
      [hot_exit("Get dressed.", "home_hall", 30, [cap("exhibitionism", 1, 59), cap("corruption", 1, 59)], wardrobe=DRESS_BACK)]),
 ]
 HOT_COUCH = [  # the couch, Sat/Sun 14:00-18:00
-    (2, "Put your feet in his lap.", [trait("ryan_step", "gte", 3), CUR], [{"action": "unequip", "item_id": "sneakers"}],
+    (2, "Put your feet in his lap.", [trait("ryan_step", "gte", 4), BOLD_],   # private contact: Bold (DECISIONS 124)
+     [{"action": "unequip", "item_id": "sneakers"}],
      [VID("bare feet rubbing a guy's crotch through his shorts on a couch, a game on", "feet in his lap rubbing his cock couch", "footjob through shorts gaming couch", pool_dir="sex/ryan_hot2_t4")],
-     [hot_exit("\"Watch the game.\"", "home_living_room", 30, [cap("corruption", 1, 39)])]),
+     [hot_exit("\"Watch the game.\"", "home_living_room", 30, [cap("corruption", 1, 59)])]),
     (3, "Watch his game in your underwear.", [trait("ryan_step", "gte", 4), DAR] + BRA_AND_PANTIES, UNDRESS_TO_UNDERWEAR,
      [VID("a girl in her bra and panties on a couch, a guy with a controller adjusting himself", "girl in underwear on couch guy hard", "watching tv in underwear he gets hard", pool_dir="sex/ryan_hot3_t4")],
      [hot_exit("Get dressed.", "home_living_room", 30, [cap("exhibitionism", 1, 39), cap("corruption", 1, 39)], wardrobe=DRESS_BACK)]),
     # row 6: Mark's TV in the next room is only true when his row has him in the kitchen (Sunday 08:00-22:00)
-    (6, "Share the blanket.", [trait("ryan_step", "gte", 7), BOLD_, DAR,
+    (6, "Share the blanket.", [trait("ryan_step", "gte", 7), HUNGRY, DAR,   # the taboo act at home: Hungry (DECISIONS 124)
+                              
                                {"type": "npc_at_location", "location_id": "home_kitchen", "npc_id": "npc_mark", "operator": "is_present"}], None,
      [VID("a handjob under a blanket on a couch, a film on, someone in the next room", "handjob under blanket couch", "secret handjob under blanket family home", pool_dir="sex/ryan_hot6_t5")],
-     [hot_exit("\"Just the film.\"", "home_living_room", 60, [cap("corruption", 1, 59), cap("exhibitionism", 1, 59)])]),
+     [hot_exit("\"Just the film.\"", "home_living_room", 60, [cap("corruption", 1, 79), cap("exhibitionism", 1, 79)])]),
 ]
 
 # ── the repeat after step 8: two knocks, sex (hot repeatable 7), Sun-Thu 22:00-00:00 (see step 8) ──
@@ -359,19 +363,19 @@ out.append({
         node("door", "Two knocks", [P("Two knocks. His phone is face-down on the desk before the second one lands.")], [
             go("Go in.", node="hot7", mins=2),
             go("\"Not tonight.\"", loc="home_hall", mins=2),
-            go("Further. (Needs Corruption 60)", node="door", swl=True, cond_=cond(HUNGRY)),
+            go("Further. (Next release)", node="door", swl=True, cond_=cond(NEXT_RELEASE)),
         ]),
         hot_node(7, "Two knocks",
                  [VID("a couple having sex in his bedroom late at night, keeping quiet", "quiet sex his bedroom late night", "sneaky sex step brother room", pool_dir="sex/ryan_hot7_t5")],
                  [go("Back to your room.", loc="home_hall", mins=45,
-                     eff=[cap("corruption", 1, 59)], flags=[]),
+                     eff=[cap("corruption", 1, 79)], flags=[]),
                   ]),
     ]})
 # Lust +3 once a day on the two-knocks repeat too: split its exit on the day's flag
 _tk = out[-1]["nodes"][1]
 _tk["choices"] = [
-    go("Back to your room.", loc="home_hall", mins=45, cond_=cond(HOT_FREE), eff=[cap("corruption", 1, 59)] + HOT_PAY, flags=HOT_FLAG),
-    go("Back to your room.", loc="home_hall", mins=45, cond_=cond(flag("ryan_hot_today")), eff=[cap("corruption", 1, 59)]),
+    go("Back to your room.", loc="home_hall", mins=45, cond_=cond(HOT_FREE), eff=[cap("corruption", 1, 79)] + HOT_PAY, flags=HOT_FLAG),
+    go("Back to your room.", loc="home_hall", mins=45, cond_=cond(flag("ryan_hot_today")), eff=[cap("corruption", 1, 79)]),
 ]
 
 # ── the towel at home (LO, 2026-10-31, DECISIONS 98): his reaction by his Lust, every visit, in his
@@ -533,7 +537,7 @@ RT_LIVING = ryan_towel("hub_ryan_living_room", LR, LOW_LOOK)
 lc, ln = item("tv", "Play his game with him.", [], "watched_tv", LR,
     [P("His game, your turn. You lose in under a minute."), D(R, "You're terrible, @player.nickname.")],
     [energy(5), warm(R)], 60,
-    hungry="Further. (Needs Corruption 60)")   # its tease and touch are hot repeatables 2 and 6 now (release 1)
+    hungry="Further. (Next release)")   # its tease and touch are hot repeatables 2 and 6 now (release 1)
 fc, fn = item("film", "Watch a film with him.", [], "movie_night", LR,
     [P("He lets you pick and complains about it, but he watches the whole thing."), D(R, "Fine. That was good. Don't tell anyone.")],
     [energy(5), warm(R)], 120)

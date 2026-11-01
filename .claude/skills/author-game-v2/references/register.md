@@ -345,8 +345,9 @@ numbers only: 84.6% of 39 willingness pairs put the composure on the high branch
 
 ## What a scene contains
 
-**Every scene with a named person answers nine tests, one line each.** The first three go on its
-scene sheet (`the-sheets.md` S1); `v2-reader` judges all nine (`agents.md`, The Reader).
+**Every scene with a named person answers ten tests, one line each.** The first three go on its
+scene sheet (`the-sheets.md` S1); `v2-reader` judges all ten (`agents.md`, The Reader; test 10 is its row 12,
+after its two truth tests).
 
 1. **Want** — what this person visibly wants here. On a sexual step, an **earlier** scene has already
    shown him wanting it (`the-arc.md` A13): wanting shown before it is acted on. Scoped to a person
@@ -366,6 +367,10 @@ scene sheet (`the-sheets.md` S1); `v2-reader` judges all nine (`agents.md`, The 
    garment of hers the scene names is backed by a clothing condition (the truth rule, rule 5).
 9. **Companion and rival** — where `want.companion_is_rival` is declared, her scenes show both the help
    and the competition *(LO decided, D15)*.
+10. **Low heat is on the body** — a scene with a sexual charge and no explicit beat names a part of her
+    body, writes his reaction, and holds a "not yet" or a price; its kind opens at her stage
+    (`the-heat-ladder.md` H1, H4). Talk only is the failure shape. N/A for a scene with no charge *(LO,
+    2026-11-01)*.
 
 ## One event, several levels
 

@@ -364,6 +364,16 @@ label  = "Zoe's dares"
 hidden = true
 
 [[traits.labels]]
+key    = "zoe_refused"
+label  = "Times you told Zoe no"
+hidden = true
+
+[[traits.labels]]
+key    = "release_2_written"
+label  = "Next release"
+hidden = true
+
+[[traits.labels]]
 key    = "hale_claire_roll"
 label  = "Claire's Thursday"
 hidden = true

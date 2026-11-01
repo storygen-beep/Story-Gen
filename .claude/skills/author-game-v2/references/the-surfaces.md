@@ -448,16 +448,18 @@ The same ladder from her side, on one man's screen — rung numbers the game's, 
 
 ```
  0  Flirt with him                    10  Strip for him / Watch him jerk off
- 2  Ask about his hours               12  Hand him your vibrator / Use it on his cock
+ 2  Tease him                         12  Hand him your vibrator / Use it on his cock
  4    → conversation                  14    → conversation
- 5  Ask about his divorce             15  Suck his cock / Sit on his face
- 7  Visit when he's alone             17  Ride him / Bend over for him
+ 5  Touch yourself while he watches   15  Suck his cock / Sit on his face
+ 7  Show off for him                  17  Ride him / Bend over for him
  9    → conversation                  20  Put your wrists in his hand
                                       22  Say yes to his friend
 ```
 
-The first third has no sex in it (`the-arc.md` A2): rung 2 learns when he is alone, rung 5 what he
-is touchy about, and rung 7 spends what rung 2 found.
+The first third has no sex **with him** in it (`the-arc.md` A2), but it is not talk: rungs 2, 5 and 7 are
+being teased, watching her, and her showing off, between the talks (the source's own rungs,
+`Female_PC_Craft_Study_20260823/findings_E_yes.md:174-180`, restored 2026-11-01; an earlier edit had
+relabelled them as questions and a visit). Each sits at its stage (`the-heat-ladder.md` H1).
 
 **1 · Each act is written twice, then becomes furniture.** Every rung is gated `== N`, then `== N+1`,
 then survives on `>= N+2`. It is fresh for exactly two visits and standing content afterwards —
@@ -534,6 +536,10 @@ man stays in the world.
 
 Being refused is content too (`course-of-temptation`: friendship −50, arousal −100, *"That
 certainly backfired."*). **A "no" that returns the player to an unchanged menu was never a door.**
+
+**What her no moves** (LO, 2026-11-01): it never raises her own climb, and it always moves something else:
+his meter, the relationship, or a counter the world keeps. Where a friend or a crowd pushes on the page, the
+no can be a contest she loses (`the-heat-ladder.md` H5).
 
 > ⚠️ **Gate `she can say no` checks only that one exists** — it fails on zero and prints the rate
 > beside the verdict (field: 2.09% of labels, 79% going somewhere the yes does not, median 262 words

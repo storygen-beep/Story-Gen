@@ -15,7 +15,7 @@ out.append({
     "nodes": [node("coffee", "A coffee", [
         P("You take the stool at the end of the counter, watching the room, the regulars, the door."),
         G(cond(NORMAL_ON), P("In the uniform, off shift, the regulars still wave you over for refills. You ignore them, but it's nice to be asked.")),
-        G(cond(SEXY_ON), P("In the tight uniform the man at the counter can't decide where to look, so he looks everywhere but his newspaper.")),
+        G(cond(SEXY_ON), P("In the tight uniform the man at the counter can't decide between your tits and your ass, so he looks at both, and his newspaper ends up in his lap. He asks you for a refill. You're off shift, so no.")),
         G(cond({"type": "worn_type", "operator": "neq", "value": "cafe_uniform"}, flag("tom_met", False)), P("Nobody here knows you when you're not in the apron. It's strange how much that changes.")),
         G(cond({"type": "worn_type", "operator": "neq", "value": "cafe_uniform"}, flag("tom_met")), P("Out of the apron you're just a customer here, and Tom still clocks you from the till.")),
     ], [go("Drink it. ($3)", loc="cafe", mins=20, costs=[{"trait": "money", "value": 3}],
@@ -77,14 +77,19 @@ for trait_k, bands in [
                      "Reach Curious (Corruption 20): stay and look: the park couple, the library stacks, Ryan's door at night, Laura's door at night, their door on Saturday night"),
                     (20, 40, "Curious. Bold opens at 40: hands, mouths, a price for a look.",
                      "Reach Bold (Corruption 40): your room, the bathroom, the women's toilet, the park"),
-                    (40, 60, "Bold. Hungry is the next release: strangers, a crowd, the taboo at home.",
-                     "Hungry (Corruption 60) opens in the next release")]),
+                    # DECISIONS 124: release 1 reaches Hungry
+                    (40, 60, "Bold. Hungry opens at 60: the taboo at home, strangers who can see, a room watching.",
+                     "Reach Hungry (Corruption 60): Ryan's couch, the gym with Jake, a party, the street with nothing under your skirt"),
+                    (60, 80, "Hungry. Shameless is the next release: a crowd, free use.",
+                     "Shameless (Corruption 80) opens in the next release")]),
     ("exhibitionism", [(0, 20, "Covered. Daring opens at 20: no bra, a short skirt out of the house.",
                         "Reach Daring (Exhibitionism 20): the lecture hall, the park"),
                        (20, 40, "Daring. Showing opens at 40: no panties out, naked for someone you know.",
                         "Reach Showing (Exhibitionism 40): the campus gym, the women's toilet, the garden, the hall, the living room, the lecture hall, the park"),
-                       (40, 60, "Showing. Watched is the next release: posing for the class, a crowd.",
-                        "Watched (Exhibitionism 60) opens in the next release")])]:
+                       (40, 60, "Showing. Watched opens at 60: a room watching, a stranger, your feed.",
+                        "Reach Watched (Exhibitionism 60): the lecture hall, the campus gym, the garden, the park, the street"),
+                       (60, 80, "Watched. Posing for the class and a crowd come in the next release.",
+                        "On Display (Exhibitionism 80) opens in the next release")])]:
     for lo, hi, text, label in bands:
         cards.append({"group": f"tier_{trait_k}", "priority": 5, "text": text,
                       "when": [{"flag": "opening_done", "op": "is_true"},

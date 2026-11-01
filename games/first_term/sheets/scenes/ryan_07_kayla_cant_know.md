@@ -1,4 +1,6 @@
-# [READY] Scene — ryan_07_kayla_cant_know
+# [REVIEW]] Scene — ryan_07_kayla_cant_know
+
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > **Changed 2026-11-01 after the build, signed by LO 2026-11-01 ("Signed, build them")** (the reader's FAILs; LO's picks in chat): `comes` ends on what comes next.
 
@@ -10,7 +12,7 @@
 |---|---|
 | person · step | `npc_ryan` · 7 (new) |
 | where · when | his room, `home_ryan_room` · Mon, Tue, Thu, Sun 19:00–22:00, after two knocks |
-| gate | Corruption 40 · his Want 60 · `ryan_step` eq 6 · the boost off |
+| gate | Corruption 60 (was 40: DECISIONS 124) · his Want 60 · `ryan_step` eq 6 · the boost off |
 | want (test 1) | his door left open a hand's width since the shower (step 6) |
 | next step (test 2) | her hand on him, to the end, while Kayla's photo lights up his phone |
 | hook (test 3) | his phone face-down every time she knocks after this; step 8, two knocks late at night |

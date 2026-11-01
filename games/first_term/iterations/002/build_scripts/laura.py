@@ -166,11 +166,16 @@ out.append({
         ]),
         node("zipped", "The front door", [
             P("You pull the zip up slowly, all the way to her shoulder blades. She smooths the dress over her hips and turns side-on to the mirror."),
+            # her want for Ryan, on her body, before her step 4 says his name; true only while he is on the couch (DECISIONS 124)
+            G(cond({"type": "npc_at_location", "location_id": "home_living_room", "npc_id": "npc_ryan", "operator": "is_present"}),
+              P("Downstairs Ryan laughs at something on the TV. Laura's hands stop on the dress. She looks at the door, not at you, and her chest rises fast under the silk.")),
             D(M, "Laur? I'm off to the bar with the guys. Don't wait up."),
             P("The front door goes before she can answer. Laura stands very still in front of the mirror."),
         ], [go("Wait.", node="bed", mins=2)]),
         node("bed", "Nowhere to go", [
             P("She sits down on the end of the bed in her good dress, her heels in her hand. Her lipstick is perfect. She has nowhere to go."),
+            # copy fix A6 (DECISIONS 125): her want on her body, Laura's early column ("chest"); the Ryan line is in `zipped`
+            P("She pulls her shoulders back for the mirror, and her chest lifts in the dress. She's looking at herself the way she wants somebody to look at her."),
             D(L, "Do I still look like someone you'd look at?"),
             T("She's asking you, because nobody else is here to ask."),
         ], [
@@ -231,7 +236,7 @@ add_item("breakfast", "Have breakfast with her.", WEEKDAY_AM, "ate_breakfast", K
           G(cond(flag("had_coffee", False)), D(L, "Tell me one thing about yesterday."))],
          None, 15, done_exits=[go("Eat.", loc=K, mins=15, flags=[fset("ate_breakfast")], eff=[energy(10), warm(L)])] + COFFEE_EXITS,
          tease=l_tease(86, "breakfast"), touch=l_touch(86, "breakfast"),
-         hungry="Further. (Needs Corruption 60)")
+         hungry="Further. (Next release)")
 # One dinner, every evening she cooks (Mon, Tue, Thu, Fri, Sun 18:00-20:00). Sunday dinner reads
 # room_tidy and clears it (npc_laura.md:96; home_ella_room.md:41): +2 tidy, -1 messy on top of dinner's +1.
 NOT_SUN = wd(0, 1, 3, 4)
@@ -544,7 +549,7 @@ out.append({
         node("comes", "Ryan", [P(beat("laura_04_she_saw_you", "comes")),
             VID("a woman alone in bed coming hard, biting her knuckles, whispering a name", "woman orgasm in bed whispering a name", "mom cums biting hand bed", pool_dir="sex/laura_04_comes_t5")],
             [go("Stay where you are.", node="eyes", mins=2,
-                eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}, add("laura_gaps_watched", 1)])]),
+                eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 59}, add("laura_gaps_watched", 1)])]),
         node("eyes", "Her eyes", [
             P("Laura's eyes open. They go straight to the door. To the gap. To you."),
             P("She doesn't pull the sheet up fast. She doesn't pull it up at all. She lies there with her hand still between her legs, and she looks at you."),

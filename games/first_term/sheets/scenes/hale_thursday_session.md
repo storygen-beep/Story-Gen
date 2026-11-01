@@ -1,4 +1,6 @@
-# [READY] Scene — hale_thursday_session
+# [READY]] Scene — hale_thursday_session
+
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > **New 2026-11-01, signed by LO 2026-11-01 ("Continue")** (DECISIONS 99–117). Hale's hot repeatable, from his signed release-1 ladder
 > (`sheets/people/npc_hale.md`, "His hot repeatable"). Reworks the built canvas `hale_thursdays` (its sheet `hale_05`
@@ -8,7 +10,7 @@
 |---|---|
 | system · place | Hale · his office, `hale_office` |
 | where · when | Thursday 18:30–19:05, once a Thursday (as built: done before Claire's half past seven) |
-| gate | Hale's step counter eq 4 · Corruption 20 · Exhibitionism 20 (the built `hale_step eq 5 · corruption 40` goes) |
+| gate | Hale's step counter eq 4 · the low tier Corruption 40 · Exhibitionism 40 (cap 59), the high tier Corruption 60 (cap 79) (DECISIONS 124) |
 | two tiers | **`touch_low`** (Curious and Daring, either meter under 40): his hands over her clothes, she says what she feels · **`touch_high`** (Bold **and** Showing: Corruption 40 and Exhibitionism 40, mixed): her top off, his hand inside her clothes, or she touches herself while he watches and takes notes · **Corruption 60:** shown locked, "Hale, further. (Needs Corruption 60.)" |
 | pays | each session: `grade_psych` add +2 · corruption add +1 · exhibitionism add +1 (mixed act), each under her stage cap (19 / 39 / 59, DECISIONS 78) |
 | the three answers | every session: "Let him." · "This isn't coaching." (`grade_psych` add −1) · Run. (`grade_psych` add −2). Each no costs only grade |

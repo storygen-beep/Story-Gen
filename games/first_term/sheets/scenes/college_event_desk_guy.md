@@ -1,4 +1,6 @@
-# [READY] Scene — college_event_desk_guy
+# [REVIEW]] Scene — college_event_desk_guy
+
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
@@ -8,7 +10,7 @@
 |---|---|
 | system · pool | college · `college_event_desk_guy` |
 | where · when | Psychology and Business classes (his seats) · once a day |
-| gate | Curious: she watches · Bold (Corruption 40): her hand, unseen |
+| gate | Curious: she watches · Hungry (Corruption 60, was 40: DECISIONS 124): her hand, in a full hall; pays cap 79 |
 | who sees | nobody: the desk hides it; that is the stage (SP2) |
 | what she wears here (test 8) | not named |
 | BRAKE (S9) | once a day, on the trigger |

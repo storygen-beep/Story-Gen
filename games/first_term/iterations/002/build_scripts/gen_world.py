@@ -97,6 +97,8 @@ cafe_footfall      = 0   # job.md: the café keeps score
 cafe_name          = 0
 laura_gaps_watched = 0   # Laura's step 4 needs 3 (her bedroom gap and the shower)
 zoe_dares_done     = 0   # Zoe's step 5 needs 4
+zoe_refused        = 0   # her nos to Zoe (DECISIONS 124): a no moves this, never her meter
+release_2_written  = 0   # never raised: the "(Next release)" locks read it (DECISIONS 124)
 hale_claire_roll   = 0   # 1-4: on 1, Claire is early (hale_thursday_session)
 jake_catch_roll    = 0   # 1-8: on 1 or 2, a near-catch (jake_date_end)
 

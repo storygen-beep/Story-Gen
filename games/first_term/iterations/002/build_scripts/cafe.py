@@ -42,8 +42,10 @@ L1_LINES = ["You bend to wipe a table and the conversation at the next one stops
 # One setup for both yeses, so the line before each beat is true whichever she picks (a build note to LO:
 # the sheet's pool of three setups would let a setup and the other yes's beat disagree).
 L2_SETUP = ("In the back booth, one of three guys asks, \"Are you on the menu?\" and the table laughs. "
-            "At the counter, a guy on his own asks what time you get off.")
-L3_SETUP = "The slow hours are the ones where somebody always tries it. Today somebody does."
+            "All three of them are looking at your tits. "
+            "At the counter, a guy on his own asks what time you get off, and his eyes drop to your ass when you turn.")
+L3_SETUP = ("The slow hours are the ones where somebody always tries it. All shift, men's eyes have been on your ass "
+            "every time you bend to a table. Today one of them does more than look.")
 L2_PLAY = "You don't tell them off. You smile and bring the check over slow. You lean across their table, much lower than you need to. They can see right down the front of your uniform. Your tits hang there for them, and your nipples are hard against the cloth. It scares you, and you like it more than it scares you. \"Ten,\" the one by the wall says, loud enough for the counter to hear. Tom watches from behind it and says nothing. You take your time with the cups, one at a time. Your ass is pushed out at the next booth the whole while. The bills on the check come to more than the meal. You stay bent over their table, your tits close enough for them to touch."
 L2_FLIRT = "You lean on the counter across from him, close. \"I get off when you stop staring at my tits.\" Your voice shakes on the last word, but you say it. He doesn't stop. His eyes stay right there, and your nipples go hard under your uniform. You walk two fingers up his arm, slow, from his wrist to his elbow. He swallows. You scoop whipped cream off a mug with your thumb and lick it clean, slowly. He watches your mouth the whole time. \"I'll think about it,\" you tell him. His face goes red and he shifts on his stool. At the coffee machine, Tom watches and says nothing. You turn away, and the guy's eyes drop to your ass. He tips double, eyes on your tits, while your nipples press hard against your apron."
 L3_A = "His hand lands on your ass as you lean in with the plate. You don't move. He squeezes, slow, a full handful through your uniform. You set the knife down. Then the fork, slower. His friend across the booth stops chewing and watches. The hand slides lower, onto the back of your bare thigh. His palm is warm and in no hurry. Your tits feel heavy, your nipples hard under your uniform, and his friend can see them. You're wet. You can't believe it. You still don't move. At the counter Tom has stopped wiping. His eyes follow the hand up your thigh. He says nothing. The man tucks a folded ten into your apron. Then his fingers go back to your thigh and squeeze, high, right under your ass."
@@ -138,14 +140,14 @@ out.append({
         ], choices + [go("Not today.", loc="cafe", mins=1)]),
         node("shift", "Three hours", [
             G(cond(tod("11:00", "14:00")), P("The lunch rush hits all at once: twelve coffees, a birthday, a baby that screams through all of it. You carry plates until your arms burn. A man at table two tells you you've got a lovely smile and leaves his number on a napkin under the tip.")),
-            G(cond(tod("14:00", "18:00")), P("Slow afternoon. You wipe tables that are clean and refill sugar that's full, and the regulars at the counter watch you bend over to do it. One of them pretends to read his phone the whole time, upside down.")),
+            G(cond(tod("14:00", "18:00")), P("Slow afternoon. You wipe tables that are clean and refill sugar that's full, and the regulars at the counter watch your ass every time you bend over to do it. One of them pretends to read his phone the whole time, upside down.")),
             POOL(
                 P("A table of guys from the team come in and order nothing but coffee for an hour so they can watch you walk back and forth. Tom lets them. They tip like they're trying to impress each other."),
                 P("Two women in gym clothes, a businessman on a call, a pensioner who wants his toast cut into soldiers. Your feet hurt, but you're good at this. You can feel it in the tips."),
                 pid="cafe_shift_lines"),
             G(cond(SEXY_ON), P("In the tight uniform with the top button open, every man who orders leans a little further over the counter. Every one of them tips more.")),
             G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}),
-              P("No bra under the uniform. Every time you lean to pour, somebody stops talking.")),
+              P("No bra under the uniform, and your nipples show through it. Every time you lean to pour, somebody stops talking and looks at your tits.")),
             # (cut 2026-11-01: Tom's "Booth four's going to tip big today." Tom is strict, DECISIONS 117)
             G(cond(trait("tom_step", "gte", 1), ntrait(TM, "want", "gte", 30)), P("Tom reties your apron on his way past, both times you go by.")),
             G(cond(trait("hygiene", "lt", 30), flag("hygiene_off", False)), P("A woman at table three wrinkles her nose when you lean in. Her tip is coins.")),
@@ -157,24 +159,24 @@ out.append({
             *at_level("L3", P(L3_SETUP)),
             *at_level("L3", D(GY, GARY_AFTER), extra=[GARY_IN, flag("gary_let_it")]),
         ], level1_exits()
-           + go_level("L2", "Play along.", "l2_play")
+           + go_level("L2", "Play along.", "l2_play", extra=[trait("exhibitionism", "gte", 60)])   # a table and the counter watch: Watched (DECISIONS 124)
            + go_level("L2", "Flirt back.", "l2_flirt", extra=[C_HI])
            + go_level("L2", "\"Not tonight, hon.\"", "l2_no")
-           + go_level("L3", "Let it.", "l3_let")
+           + go_level("L3", "Let it.", "l3_let", extra=[trait("corruption", "gte", 40)])   # his hand on her, let: Bold; below it the grope still happens, and she refuses (DECISIONS 124)
            + go_level("L3", "\"Your food's here, sir.\"", "l3_pull")
            + go_level("L3", "Slap it away.", "l3_slap")),
         node("l2_play", "Play along", [P(L2_PLAY),
             VID("a waitress leaning low over a booth table, men looking down her uniform", "waitress leaning over table men staring cleavage", "waitress bends over booth customers look", pool_dir="sex/cafe_l2_play_t3")],
-             outcome_exits("l2_play", 6, 10, eff=[capped_e("exhibitionism", 1, 39), add("cafe_footfall", 1), add("cafe_l2_shifts", 1)])),
+             outcome_exits("l2_play", 6, 10, eff=[capped_e("exhibitionism", 1, 79), add("cafe_footfall", 1), add("cafe_l2_shifts", 1)])),
         node("l2_flirt", "Flirt back", [P(L2_FLIRT),
             VID("a waitress flirting across a cafe counter with a customer, licking cream off her thumb", "waitress flirting counter customer", "flirty waitress licks cream finger customer stares", pool_dir="sex/cafe_l2_flirt_t3")],
              outcome_exits("l2_flirt", 6, 10, eff=[capped_e("corruption", 1, 39), add("cafe_footfall", 1), add("cafe_l2_shifts", 1)])),
-        node("l2_no", "Not tonight", [P(L2_NO)], outcome_exits("l2_no", 2, 4, eff=[add("cafe_l2_shifts", 1)])),
+        node("l2_no", "Not tonight", [P(L2_NO)], outcome_exits("l2_no", 2, 4)),   # her no never opens "Let it." (H5, DECISIONS 124)
         node("l3_let", "Let it", [
             G(cond(GARY_IN), POOL(P(L3_A), P(L3_B), P(L3_C), pid="cafe_l3_gary", bag=True)),
             G(cond(GARY_OUT), POOL(P(L3_A), P(L3_C), pid="cafe_l3_strangers", bag=True)),
             VID("a waitress letting a customer's hand stay on her as she serves, the manager watching from the counter", "customer grabs waitress ass she lets him", "waitress groped at table lets it happen", pool_dir="sex/cafe_l3_let_t4")],
-             outcome_exits("l3_let", 10, 16, eff=[capped_e("corruption", 1, 39), capped_e("exhibitionism", 1, 39),
+             outcome_exits("l3_let", 10, 16, eff=[capped_e("corruption", 1, 59), capped_e("exhibitionism", 1, 59),
                                                   add("cafe_footfall", 1), add("cafe_name", -1)],
                            flags=[fset("cafe_let_it")], gary_flag=True)),
         node("l3_pull", "Your food's here", [P(L3_PULL)], outcome_exits("l3_pull", 4, 8)),

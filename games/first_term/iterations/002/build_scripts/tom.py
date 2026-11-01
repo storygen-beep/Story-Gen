@@ -112,9 +112,9 @@ out.append({
     "nodes": [
         node("back", "The back room", [
             P("When you come off the floor Tom is in the back room, leaning on the shelf by the tip jar, and he shuts the door behind you."),
-            P("You can still feel where the man's hand was."),
+            P("Your ass still burns where the man had you, and your face is hot with it."),
             D(TM, "Reputation's going. People talk. And the tables are full."),
-            P("He doesn't sound angry. He sounds like he's done the sums."),
+            P("He doesn't sound angry. He sounds like he's done the sums. His eyes drop to your ass, once, and he drags them back up to your face."),
         ], [
             go("\"Say it, Tom.\"", node="line", mins=2),
             go("\"Not now, Tom.\"", loc="cafe", mins=2, retry=1),
@@ -160,7 +160,7 @@ out.append({
             # release 1, strict (tom_01_the_apron.md, his counter): he never tells her to show
             G(cond(UNIFORM, {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "equipped"}), P("He looks once."), D(TM, "Your choice. Tables don't wait.")),
             G(cond(UNIFORM, {"type": "clothing_item", "item_id": "cafe_uniform_normal", "operator": "equipped"}),
-              P("He reties your apron from behind on his way past."), D(TM, "Tables first.")),
+              P("He reties your apron from behind on his way past. His knuckles brush your ass. He takes his hand back fast, like the knot burned him."), D(TM, "Tables first.")),
             G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}, UNIFORM), D(TM, "Apron on. Keep it on.")),
             G(cond(trait("tom_step", "eq", 1), {"type": "worn_type", "operator": "eq", "value": "cafe_uniform"}), P("His eyes are on your apron strings again.")),
             G(cond(trait("tom_step", "eq", 1)), P("He counts the tip jar when you're near.")),
@@ -178,8 +178,8 @@ out.append({
             go("Sit at the counter a while.", loc="cafe", mins=20, cond_=cond({"type": "worn_type", "operator": "neq", "value": "cafe_uniform"}, tod("08:00", "21:30"))),
             go("Go.", loc="town")]),
         node("tight", "The tight top", [
-            P("Tom reaches under the counter without a word and puts it on the counter between you: the black top, tighter than the dress."),
-            D(TM, "Your choice. Tables don't wait."),
+            P("Tom reaches under the counter without a word and puts it on the counter between you: the black top, tighter than the dress and cut for your tits. His eyes go to your chest once. He makes them go back to the till."),
+            D(TM, "Your choice. They tip more for it. They grab more too."),
         ], [go("Take it.", loc="cafe", mins=3, flags=[fset("uniform_sexy")], wardrobe=[{"action": "add", "item_id": "cafe_uniform_sexy"}])]),
     ]})
 
@@ -201,7 +201,7 @@ cards = step_cards(TM, {
     1: ("Tom gave you the job. Your first shift is waiting.", "Take a shift at the café, afternoon or evening, Monday to Saturday"),
     2: ("He counts the tip jar when you're near.", "Five shifts in: a café shift, watch the back room"),
     3: ("He watches the customers' hands. He wants a word.", "A café shift after you let a customer's hand stay"),
-}, met_flag="tom_met", terminal_text=("The window rule: the street can't see.", "Tom, later. (Needs Corruption 60.)"))
+}, met_flag="tom_met", terminal_text=("The window rule: the street can't see.", "Tom, later. (Next release)"))
 
 text = ("# =============================================================================\n"
         "# First Term — 5 · scenes · TOM (sheets/scenes/tom_0*.md, cafe_gary_ten_minutes.md, people/npc_tom.md)\n"

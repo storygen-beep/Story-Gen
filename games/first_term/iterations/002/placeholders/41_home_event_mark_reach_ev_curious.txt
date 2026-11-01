@@ -11,9 +11,10 @@ facts (truth rule, checked against the built 7_final_game.toml and the sheets):
 
 Mark reaches over your head for a mug on the top shelf, his chest right at your back. You lean back into him. Your ass presses against the front of his jeans. He goes still with his arm up. You feel him get hard against your ass, slow, and he doesn't pull away. He takes the mug down. He doesn't step back for a long second.
 "Excuse me, @player."
-His voice is rough, and he still doesn't move.
+His voice is rough. Then he steps back and puts the mug down hard.
+"Not here."
 
-*He could have asked you to pass it. He didn't want to.*
+*Not here, he said. He didn't say no.*
 
 === MEASURED · gates.py --beat (the screen; each variant on its own) ===
   beat 1: 78 words · explicit 2 (ass) · median sentence 9 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0 1 0 1 0 0 0

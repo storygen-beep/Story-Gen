@@ -15,6 +15,9 @@
 
 Two empty columns: the step is not written. One empty column: the Why table says why.
 
+**Kind · stage:** <the kind (`the-heat-ladder.md` H3) · the stage it opens at in this game's SP2 Heat line> ·
+<for step-family or anyone she lives with: the accident before her first chosen act (H2)>
+
 | the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
 |---|---|---|---|---|---|---|
 | <what a player would name; what is new against the step before> | <who is there or finds out · "nobody", declared> | <caught · a secret · a person · a price> | <out loud; the button carries it> | <what he does, for his own reason> | <finished on the body · the ladder's one cut-off> | <a rule · schedule · label · price · standing line · the next step> |

@@ -46,6 +46,9 @@ carries `where` (provisional, above), `when`, `gate`, and one **hint line** for 
 | `who_notices` | who reacts to what she did, or nobody | `the-meters.md` W5b |
 | `refusal` | `parked` (the step comes back after a wait) or `final` (the button says "(ends his path)") | `the-surfaces.md` R5b · `the-arc.md` A3 |
 
+**The Heat line** records the stage each kind of act opens at, with audience size and the accident-first rule
+for the people she lives with (`the-heat-ladder.md` H1, H2).
+
 Arc rules: `the-arc.md` A1–A14. Ledger: `board.who_climbs`, `board.ascent_tiers`,
 `board.characters[].ladder`. `lint · the arc ladder` prints each person's longest chain.
 

@@ -1,4 +1,6 @@
-# [READY] Scene — park_hidden
+# [REVIEW]] Scene — park_hidden
+
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
@@ -9,7 +11,7 @@
 |---|---|
 | system · pool | the park · `park_hidden` |
 | where · when | the park, after the run with Zoe · Saturday and Sunday 08:00–10:00 |
-| gate | Corruption 40 · Zoe present · after Zoe A 3 (guess) |
+| gate | Corruption 60 (was 40: DECISIONS 124; joggers a few metres off can see) · pays cap 79 · Zoe present · after Zoe A 3 (guess) |
 | who sees | nobody: a hollow off the path; joggers pass, unseeing |
 | what she wears here (test 8) | not named |
 | BRAKE (S9) | once a day, on the trigger |

@@ -16,6 +16,8 @@ You step back with the pan. He still hasn't moved.
 
 *He made you touch him. Now he can say he didn't touch you.*
 "Salt." He holds his hand out without looking at you.
+"And not while I'm cooking, @player."
+His knuckles are white on the spoon.
 
 === MEASURED · gates.py --beat (the screen; each variant on its own) ===
   beat 1: 71 words · explicit 1 (ass) · median sentence 5 · dashes 0 · act rungs: none — anatomy without an act, or no act here · body words by sentence: 0 0 0 1 0 0 0 0 0

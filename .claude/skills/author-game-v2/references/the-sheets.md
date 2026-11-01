@@ -309,7 +309,7 @@ release redesigned against them shipped with its explicit repeatable beats up fr
 
 | column | the question | where the test already lives |
 |---|---|---|
-| **the moment** | One line: the thing a player would name afterwards, and what is new in it against the step before. | `the-arc.md` A14 (a chain of steps, each new) |
+| **the moment** | One line: the thing a player would name afterwards, and what is new in it against the step before. It names its kind and the stage that kind opens at; a chosen act below its stage is not written (`the-heat-ladder.md` H1–H3). | `the-arc.md` A14 (a chain of steps, each new) |
 | **who sees or knows** | Who is in the room, or finds out after. "Nobody" is allowed only as a declared choice, written down. | `register.md` test 5 (who notices) |
 | **what she risks** | Being caught, a secret, a person, a price. The stake is hers, not the player's loss of control. | `register.md` test 6 (the reluctance is hers) |
 | **how she says yes** | Out loud, and both minds if she has two. The button carries the yes. | `register.md` test 4 (her voice at her level) |

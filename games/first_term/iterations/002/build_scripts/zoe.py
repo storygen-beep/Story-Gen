@@ -75,15 +75,15 @@ out.append({
             P("She puts her head on your shoulder on the couch and says it into your ear, like a secret:"),
             D(Z, "Kiss someone. Or don't, and I'll keep asking."),
         ], [
-            go("\"Not tonight, Zo.\"", node="no_dare", mins=5, flags=[fset("party_went")], eff=[add("exhibitionism", 3)]),
+            go("\"Not tonight, Zo.\"", node="no_dare", mins=5, flags=[fset("party_went")], eff=[add("zoe_refused", 1)]),   # a no pays her nothing (H5, DECISIONS 124)
             go("Kiss Zoe.", node="kiss_zoe", mins=5, cond_=cond(CURIOUS), flags=[fset("party_went")], eff=[add("exhibitionism", 3)]),
             go("Kiss the guy who's staring.", node="jake", mins=5, cond_=cond(CURIOUS), flags=[fset("party_went"), fset("jake_kissed")], eff=[add("exhibitionism", 3)]),
         ]),
         node("no_dare", "Not tonight", [D(Z, "Boring. Fine. I'll keep asking."), P("She steals your drink instead and dances off into the crowd. Across the room a guy in a team jacket is watching you. Not Zoe. You.")],
              [go("Look back at him.", node="jake", mins=15)]),
         node("kiss_zoe", "Zoe", [
-            P("You turn your head and kiss her, right there on the couch. She makes a surprised little sound against your mouth, and then she kisses you back, harder, her hand in your hair. Somebody whoops. When she pulls back her eyes are huge."),
-            D(Z, "Oh. Okay. Okay."),
+            P("You turn your head and kiss her, right there on the couch. She makes a surprised little sound against your mouth, then kisses you back, harder, one hand in your hair and the other on your thigh, under the hem of her own dress. Somebody whoops. Her hand stops there, and she pulls back with her eyes huge."),
+            D(Z, "Oh. Okay. Okay. Not on the couch, babe. Not yet."),
             P("Across the room a guy in a team jacket is watching you. Not Zoe. You."),
         ], [go("Look back at him.", node="jake", mins=5)]),
         node("jake", "Across the room", [
@@ -110,6 +110,8 @@ out.append({
     "trigger": step_trigger(Z, 2, retry_days=7),
     "nodes": [
         node("balcony", "The balcony", [
+            # her no at the first party is remembered (zoe_refused; DECISIONS 124: a no moves a counter, never her meter)
+            G(cond(trait("zoe_refused", "gte", 1)), D(Z, "You chickened out on me last time. Not tonight, babe.")),
             # Iteration 002, part 8 (reader): the strap only when there is one.
             G(cond({"type": "clothing_slot", "slot": "bra", "operator": "equipped"}),
               P("Zoe pulls you out onto the balcony, away from the noise. The glass door is behind you and the whole party is on the other side of it. She leans on the rail and looks at the strap on your shoulder and doesn't look anywhere else.")),
@@ -181,10 +183,10 @@ out.append({
         node("kiss", "Topless", [
             P("You unhook your bra and toss it on the deck. The steam rolls over your bare tits. The night air is cold on them, so your nipples go hard above the water. Zoe stares at them. \"Babe,\" she breathes. \"Look at you.\" You grab the back of her neck and pull her in. You kiss her hard, open-mouthed, until she moans into you. Her tits press flat against yours. Her nipples drag across your nipples, hard and wet. Her thigh slides between your thighs under the water. It presses up, slow and firm. Her breath catches. Your hands run down her slick back to her ass. You grab it with both hands and pull her tits tight against yours."),
             VID("two topless girls kissing in a steaming hot tub at night, breasts pressed together", "two girls topless kissing hot tub night", "lesbian kiss hot tub steam topless", file="sex/zoe_03_kiss_t5.webm"),
-        ], [go("Hold her.", node="asked", mins=10, eff=[add("exhibitionism", 3), add("corruption", 3)])]),
+        ], [go("Hold her.", node="asked", mins=10, eff=[{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 3, "cap": 79}, {"targetType": "player", "trait": "corruption", "op": "add", "value": 3, "cap": 79}])]),
         # No bra to take off: the sheet's beat names unhooking it, so this screen is a placeholder (iteration 002).
         node("kiss_bare", "Topless", [placeholder("sheets/scenes/zoe_03_hot_tub.md:44", "Zoe A 3, the kiss when she wore no bra into the tub")],
-             [go("Hold her.", node="asked", mins=10, eff=[add("exhibitionism", 3), add("corruption", 3)])]),
+             [go("Hold her.", node="asked", mins=10, eff=[{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 3, "cap": 79}, {"targetType": "player", "trait": "corruption", "op": "add", "value": 3, "cap": 79}])]),
         node("asked", "You could've asked", [
             P("Zoe pulls back, flushed and breathless, and laughs. \"Took you long enough, babe.\" \"You could've asked,\" you tell her. She goes quiet. She opens her mouth, but she doesn't answer that. Not yet. All term she dared you instead of asking for this. You liked every single dare. The sliding door bangs open. Your friends spill back out, shrieking. You sink to your shoulders in the hot water. Across the bubbles, Zoe is still looking at you. Next time you two are alone, somebody has to ask first."),
         ], [go("Go home.", node="home", mins=m, cond_=cond(tod(a, b)), consumes=True,
@@ -225,7 +227,7 @@ out.append({
 #    her apartment where her row is; she takes her to her bedroom. Her late column (signed). ──
 _t5 = step_trigger(Z, 5, retry_days=7)
 _t5["conditions"]["items"].append({"type": "hours_since_flag", "subject": "player", "flag_key": "party_went", "operator": "lt", "value": 8})
-STEP5 = dict(eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 3, "cap": 59}, setv("zoe_step", 5)],
+STEP5 = dict(eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 3, "cap": 79}, setv("zoe_step", 5)],
              flags=[done(5), fset("zoe_together")])
 out.append({
     "id": "zoe_05_no_dare", "name": "No dare",
@@ -246,7 +248,7 @@ out.append({
         node("comes", "The door", [P(beat("zoe_05_no_dare", "comes")),
             VID("a girl coming with her hand over her mouth, her friend between her thighs, a guy in the doorway", "girl orgasm hand over mouth door opens", "lesbian caught by guy at door", pool_dir="sex/zoe_05_comes_t5")],
             [go("\"Tell him to go.\"", node="out", mins=1),
-             go("\"Let him watch.\"", node="watch", mins=1)]),
+             go("\"Let him watch.\"", node="watch", mins=1, cond_=cond(trait("exhibitionism", "gte", 60)))]),   # a watcher: Watched (DECISIONS 124)
         node("out", "Out", [
             D(Z, "Out."),
             P("The door clicks shut. The music goes muffled again. Zoe crawls up the bed and kisses you, and you taste yourself on her."),
@@ -257,7 +259,7 @@ out.append({
             P("He stays. He leans in the doorway with his beer and doesn't say a word. Zoe crawls up the bed and kisses you slowly, so he can see all of it."),
             D(Z, "Friday, babe. I'm in the dare with you now."),
         ], [go("Stay with her.", loc="zoe_apartment", mins=30, consumes=True,
-               eff=STEP5["eff"] + [{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 3, "cap": 59}],
+               eff=STEP5["eff"] + [{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 3, "cap": 79}],   # Watched (DECISIONS 124)
                flags=STEP5["flags"] + [fset("zoe_let_him_watch")])]),
         node("again", "Next Friday", [
             ME("Ask me again."),
@@ -269,7 +271,8 @@ out.append({
 # ── her hubs ──
 ZOE_STATE = [
     G(cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}), D(Z, "Now we're talking. Turn around.")),
-    G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}, {"type": "worn_exposure", "operator": "eq", "value": 0}, {"type": "weekday", "weekdays": [0, 1, 2, 3, 4]}), D(Z, "Oh, you're ready for Friday.")),
+    G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}, {"type": "worn_exposure", "operator": "eq", "value": 0}, {"type": "weekday", "weekdays": [0, 1, 2, 3, 4]}),
+      P("Her eyes drop to your tits and stay there. She bites her lip."), D(Z, "Oh, you're ready for Friday. Keep them in for now, babe.")),
     G(cond(PARTY_DRESS), P("She bites her lip at the strap of her own dress on you."), D(Z, "Nope. Eyes stay.")),
 ]
 ZOE_LEAKS = [
@@ -391,7 +394,8 @@ out.append({
         ]),
         # Iteration 002, part 8 (reader): the dress is on her before the screen says so.
         node("dress", "Her dress", [
-            P("You change in front of her. She doesn't look away once. When you've got it on she whistles, low, and says keep it."),
+            P("You change in front of her. She doesn't look away once, not while you strip, not when you tug the dress down over your ass. When it's on she whistles, low, and hooks one finger under the strap on your shoulder, and stops there."),
+            D(Z, "Keep it. If I fix that strap I won't stop. Wear it Friday."),
         ], [go("Keep it.", loc="zoe_apartment", mins=10)]),
     ]})
 
@@ -432,14 +436,14 @@ out.append({
     "id": "zoe_park_dare", "name": "\"Dare me, Zo.\"",
     "description": "Zoe's dare on her run (the park sheet, Curious): a flash on the path. Exhibitionism +1, once a day.",
     "trigger": {"location": "park", "requires_npc": Z, "is_repeatable": True, "priority": 4, "is_active": True, "max_triggers_per_day": 1,
-                "conditions": cond(flag("zoe_met"), CURIOUS, {"type": "clothing_slot", "slot": "top", "operator": "equipped"})},
+                "conditions": cond(flag("zoe_met"), {"type": "clothing_slot", "slot": "top", "operator": "equipped"})},
     "nodes": [
         node("ask", "Her dare", [D(Z, "Flash me. Right here. Two seconds. There's a guy on the bench, so make it count.")],
-             [go("Do it.", node="dare", mins=1), go("\"Not here, Zo.\"", node="no", mins=1)]),
+             [go("Do it.", node="dare", mins=1, cond_=cond(trait("exhibitionism", "gte", 60))), go("\"Not here, Zo.\"", node="no", mins=1)]),   # a stranger watching: Watched (DECISIONS 124)
         node("dare", "Her dare", [
-            P("You check the path both ways, pull everything up for one long second, and drop it. Zoe shrieks. The guy on the bench drops his coffee."),
-            D(Z, "Oh my god. I love you. Run!"),
-        ], [go("Run.", loc="park", mins=10, eff=[{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 59}])]),
+            P("You check the path both ways and pull your top up, and everything under it, for one long second. Your tits are out in the open air. Zoe shrieks. The guy on the bench drops his coffee and doesn't look away."),
+            D(Z, "Oh my god. Two seconds, that's all he gets. Run!"),
+        ], [go("Run.", loc="park", mins=10, eff=[{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 79}])]),
         node("no", "Not here", [D(Z, "Chicken."), P("She laughs and sprints off up the path, and you have to run to catch her.")], [go("Run after her.", loc="park", mins=10, flags=[fset("park_cool_zoe")])]),
     ]})
 
@@ -449,7 +453,7 @@ cards = step_cards(Z, {
     3: ("\"There's a hot tub Saturday. Just us.\"", "Saturday night: the hot tub at the party house (Curious, Daring)"),
     4: ("\"You didn't need me in the hot tub.\" She still won't ask.", "An evening at Zoe's apartment, on her couch"),
     5: ("Party nights are hers. Four dares, and she stops daring.", "After a Friday party, past midnight (Bold)"),
-}, met_flag="zoe_met", terminal_text=("Her dares, every Friday: she joins in now.", "Zoe's next dare. (Needs Corruption 60.)"))
+}, met_flag="zoe_met", terminal_text=("Her dares, every Friday: she joins in now.", "Zoe's next dare. (Next release)"))
 
 story = [{"group": "story_goals", "priority": 15, "text": "Someone from your Biology class hangs out on the quad in the afternoons.",
           "tip": "The quad, on Tuesday, Thursday or Friday afternoon.",

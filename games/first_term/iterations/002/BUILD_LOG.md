@@ -1105,3 +1105,66 @@ sheets' own, and none is a tease, touch or paid look.
 ## 2026-11-01: step 7, the taste columns into the skill
 
 - `TASTE_COLUMNS.md` is now skill rule S14 (`the-sheets.md`), with the step row in the scene template, the ladder rules in the person template, and the step row in `v2-pitcher`. B150 done; the skill CHANGELOG has the entry. No game file changed; gates 62/89.
+
+## 2026-11-01: the lecture links (LO: "College lectures have psychology business Links and wierd. It can be like attend lecture. And biology lecture just should the lecture no where to attend the lecture")
+
+- The class button in the lecture hall was the canvas name ("Psychology (Dr. Hale)", "Business", "Biology", "Figure drawing"). Renamed to "Attend the Psychology lecture", "Attend the Business lecture", "Attend the Biology lecture", "Attend Figure drawing" (`college.py`, the four `class_row` calls).
+- The first Business, Biology and Figure drawing classes (`meet_*`) ended back in the hall, so the first class read as over and nothing said where to attend. Their last button ("Find a seat." / "Find your charcoal.") now opens the class's own seat (Focus, Chat, Doze, Skip, the risky slot) inside the same canvas, with the same met flags; the class opening lines are left out because the meeting has just said them, except Figure drawing keeps its pose (`college.py`, `into_class`). Psychology's first lecture is Hale 1 and is unchanged.
+- Dev + debug rebuild. Gates 62/89, nothing lost against the baseline. Probes A–I all pass; `probe_lect2.py` 21/21 (each first class opens the seat, no repeated opening, back in the hall after, no second class in the same slot, the "Attend" link next time opens the seat).
+
+## 2026-11-02: the heat ladder applied, release 1 to Hungry (DECISIONS 124–125, "Signed, go ahead and build")
+
+- **Gates** (the change page `sheets/HEAT_LADDER_A2.md` §1–3): 15 acts to Bold or Showing, 17 to Hungry or Watched, 3 teases
+  to Curious. Step gates in the ledger (`v2_state.json` board ladders: Ryan 4 → C40, Ryan 7 and 8 → C60, Zoe 3 and Hale 4 →
+  40/40, Mark 3 + `mark_saw_her`); the rest in the build scripts, each line commented "DECISIONS 124".
+- **Pays:** Bold one-time steps +3 cap 79 (Ryan 4 and 7, Ryan 6's Exhibitionism, the hot tub, Hale 4, Zoe 5, Jake 4);
+  Bold acts cap 59, Hungry acts cap 79. Zoe's first no pays nothing and adds `zoe_refused` (read on her balcony line); the
+  dress-code warning pays nothing; the café's no no longer counts toward "Let it."; the stairs get a way out that pays her
+  nothing and moves Mark's Want when he is below; Laura 4's stay caps at 59; Mark's towel slip pays her like Ryan's.
+- **New:** `mark_00_the_dryer` (Mark's first accident, Saturday in the garage; his teases, "Play up to Mark", and step 3 read
+  `mark_saw_her`); the skip-opening hall screen (`2_one_shots.toml` `skip_hall`; she is dressed on its "Get dressed."); the
+  door crack's low-Want branch (`crack_low`, `watch_low`, from its sheet); Ryan banging on the shower door on weekdays
+  06:25–06:45 ("Wrap up and get out." / "\"Five minutes.\"", his Warmth −1); Laura's look at the door when Ryan laughs
+  downstairs (step 3, only while he is on the couch); the hall towel screen by what she wears.
+- **Locks:** every "(Needs Corruption 60)" / "(Needs Exhibitionism 60)" lock and the cards' terminal lines now read "(Next
+  release)" (18 buttons and 4 card lines, Tom's included). The gate is `canv.NEXT_RELEASE`, a hidden counter
+  `release_2_written` gated at 1 that nothing raises: the engine prints "(Corruption N+ (you have M))" beside a trait lock
+  of 2 or more (`v2.py:16462-16468`), and a flag gate fails the build's flag-chain check. Each carries its label as
+  `locked_text` (gate: a locked door says why). The "It comes later" screens say "That's in the next release of First Term."
+- **The Quests stage cards** reach Hungry and Watched (`extras.py`): Bold's card names what pays at Bold, and two new cards
+  (Hungry, Watched) say what the next release holds.
+- **Copy (H4):** the 73 signed rows (`round12_tease/copy_fixes_{A,B,C}.md`), applied by three agents on disjoint files.
+  Judgement calls they made: Hale's pen screen has him hold out his hand, flat (the draft took the pen before her button);
+  the class risky lines take one group per clothing set (`college.py` `by_clothes`; the bio braless-in-jeans line was false
+  and is fixed); the cocky guy's "Not yet." shows only Friday before midnight, while `hookup_today` can tell; Mark's stairs
+  line catches her halfway up so both her buttons answer it; the shop says "strip down" with no underwear; Mark's laundry
+  not-yet points at his laundry tease again, not the cut "Let him fold them."; the garden show has a catch-all line for a
+  watcher who has gone in the hour.
+- **Build deviations from the sheets:**
+  - Jake's car choices read `jake_step` gte 3, not eq 3. His step 4 takes the first Bold Saturday, so with eq 3 the car
+    scenes would almost never show (probe H found it).
+  - "Let it." at the café: below Corruption 40 the grope still happens at level 3, and she can only refuse (being groped
+    is stage 1; her answer is what climbs).
+  - The party tub has no meter pay (it pays energy, as built); the gate is on the canvas.
+- **Gates** 61/89 against the 62/89 baseline. Lost: `ends on an opening`. The declared door ("Further. (Next release)" on
+  Ryan 8) can never come true in this build, and the gate wants a door the player can open later in the same build. That
+  is LO's call (waive it for release 1, or declare a different door). Nothing else lost.
+- **Probes:** `probe_a2.py` 16/16 (the skip shows the hall, the lean only at Curious and on the body, it pays +1, Ryan 4
+  waits for Bold, the dryer fires and pays, no "Needs Corruption 60" anywhere, 0 page errors). A–I updated to the new gates
+  (A 15/15, B 11/11, C 10/10, D 8/8, E 12/12, F 7/7, G 9/9, H 10/10, I 6/6).
+- Rebuilt with `--dev --debug`. Not committed.
+- **Reader** (`v2-reader`, all 89 changed canvases in three groups; tables in
+  `~/Documents/Great_Games_Study_20260926/round12_tease/first_term_reader/reader_a2_{home,college,out}.md`): 107 FAILs of
+  1,068 verdicts. Fixed now, the ones this change caused:
+  - the hall accident's "Knock next time." and "Stop and talk." set `ryan_hall_seen` too (without it the doorway lean could
+    never open on those branches);
+  - Mark's other chosen acts follow his accident (`mark_saw_her`): the towel slip and drop, channel 5's "Leave it on.", the
+    couch with him passing, the garden's "Let Mark look." and "Show off" with him;
+  - `mark_03`: "Fine." needs Daring like "Go up and change."; her version has "I'm not changing for you."; under Daring her
+    version has him ask instead of a screen with no button;
+  - the keg flash (now Watched) loses the Curious excuse ("It's a dare. It doesn't count." became "Let the whole room look.");
+  - the stairs fire only with Mark below (an empty house paid her for nobody);
+  - "Stand naked in his room." needs Bold too (it pays Corruption);
+  - the dryer's cover-up ending has her pushback ("Mom's husband. Don't think about it.").
+  The rest were in the game before this change; they are listed for LO in the report. Gates 61/89 (only `ends on an opening`
+  lost, as above); probes 104/104, 0 page errors. Rebuilt `--dev --debug`.
