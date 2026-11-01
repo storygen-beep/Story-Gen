@@ -1,4 +1,6 @@
-# [READY] Scene — ryan_08_two_knocks_first_sex
+# [REVIEW]] Scene — ryan_08_two_knocks_first_sex
+
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > **New 2026-11-01, signed by LO 2026-11-01 ("Signed")** (DECISIONS 99–113). From Ryan's signed release-1 ladder
 > (`sheets/people/npc_ryan.md`, step 8, the top step). Replaces `ryan_08_two_knocks` (cut): the talk's terms move here,
@@ -8,7 +10,7 @@
 |---|---|
 | person · step | `npc_ryan` · 8 (new, top step) |
 | where · when | his room, `home_ryan_room` · any night but Friday, 22:00–00:00, after two knocks |
-| gate | Corruption 40 · his Want 70 · `ryan_step` eq 7 · not Friday · the boost off |
+| gate | Corruption 60 (was 40: DECISIONS 124) · his Want 70 · `ryan_step` eq 7 · not Friday · the boost off |
 | want (test 1) | his phone face-down when she knocks (step 7's after) |
 | next step (test 2) | first sex, on a night that isn't Kayla's; his headboard hits the wall she listened through |
 | hook (test 3) | the terms; the step-8 repeat; step 9 shown locked, "Further. (Needs Corruption 60)" |

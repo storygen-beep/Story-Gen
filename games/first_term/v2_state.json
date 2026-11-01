@@ -453,8 +453,8 @@
     ],
     "door": {
       "canvas": "ryan_08_two_knocks_first_sex",
-      "choice": "Further. (Needs Corruption 60)",
-      "locked_next": "Ryan's step 9, Kayla in the house, shown locked: \"Further. (Needs Corruption 60)\" (npc_ryan.md, release 1)"
+      "choice": "Further. (Next release)",
+      "locked_next": "Ryan's step 9, Kayla in the house, shown locked: \"Further. (Next release)\" (npc_ryan.md, DECISIONS 124)"
     },
     "reader": {
       "ryan_01_hall_first_morning": {
@@ -5769,7 +5769,7 @@
                 {
                   "trait": "corruption",
                   "op": "gte",
-                  "value": 20
+                  "value": 40
                 },
                 {
                   "type": "modifier",
@@ -5890,7 +5890,7 @@
                 {
                   "trait": "corruption",
                   "op": "gte",
-                  "value": 40
+                  "value": 60
                 },
                 {
                   "type": "modifier",
@@ -5933,7 +5933,7 @@
                 {
                   "trait": "corruption",
                   "op": "gte",
-                  "value": 40
+                  "value": 60
                 },
                 {
                   "type": "modifier",
@@ -6479,6 +6479,10 @@
                   "trait": "rent_short_weeks",
                   "op": "gte",
                   "value": 1
+                },
+                {
+                  "flag": "mark_saw_her",
+                  "op": "is_true"
                 }
               ],
               "hint": "Sunday morning at the table, after a short week: Mark wants shorts this time.",
@@ -6906,12 +6910,12 @@
                 {
                   "trait": "corruption",
                   "op": "gte",
-                  "value": 20
+                  "value": 40
                 },
                 {
                   "trait": "exhibitionism",
                   "op": "gte",
-                  "value": 20
+                  "value": 40
                 },
                 {
                   "type": "modifier",
@@ -7125,12 +7129,12 @@
                 {
                   "trait": "corruption",
                   "op": "gte",
-                  "value": 20
+                  "value": 40
                 },
                 {
                   "trait": "exhibitionism",
                   "op": "gte",
-                  "value": 20
+                  "value": 40
                 },
                 {
                   "type": "modifier",
@@ -8227,5 +8231,15 @@
         }
       }
     }
-  ]
+  ],
+  "build": {
+    "pieces": [
+      {
+        "id": "a2-heat-ladder",
+        "what": "every scene at its heat stage, release 1 to Hungry",
+        "built_at": "2026-11-02 02:10",
+        "played": null
+      }
+    ]
+  }
 }

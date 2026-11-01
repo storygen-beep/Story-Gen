@@ -1,4 +1,6 @@
-# [READY] Scene — jake_date_end
+# [READY]] Scene — jake_date_end
+
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > **New 2026-11-01, signed by LO 2026-11-01 ("Continue")** (DECISIONS 99–119). Jake's hot repeatable, "The end of a date", from his
 > signed release-1 ladder (`sheets/people/npc_jake.md`). Reworks the built canvas `jake_saturday_date`
@@ -7,7 +9,7 @@
 | row | answer |
 |---|---|
 | where · when | outside the house after a date, Sat 22:00–00:00, once a week (as built: `jake_date_went` tonight) |
-| gate | `jake_step` gte 3 (was gte 4) · the date tonight |
+| gate | `jake_step` gte 3 (was gte 4) · the date tonight · the car by stage (DECISIONS 124): the kiss Corruption 40–59, cap 59; his hand or hers Corruption 60, cap 79 |
 | tiers | **Curious** (Corruption under 40): `car_low` · **Bold** (Corruption 40), before his step 4: two yeses, `car_his` · `car_hers` · **after step 4**: "Come up." → `sneak` (a two-entry pool, `memory = "seen"`, `seen_weight = 0`) |
 | pays | `car_low`, `car_his`, `car_hers`: corruption add +1 · exhibitionism add +1 (seen: the street, Laura's window; `meters.md` rule 3) · `sneak`: corruption add +1 (behind her door) · each under her stage cap |
 | the near-catch | after step 4, one night in four: the `door` exit rolls `jake_catch_roll` (random 1–8, `v2.py:7328`); 1: Laura's door opens across the landing · 2 (Ryan's knock code set, `ryan_knock_code`): two knocks on the wall. Each is one line after the `sneak` entry; they don't stop |

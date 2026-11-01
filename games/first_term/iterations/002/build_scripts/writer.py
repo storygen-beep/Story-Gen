@@ -21,8 +21,9 @@ NPC = {**{n: "npc_ryan" for n in (1, 2, 3, 34, 35, 38, 39, 43)},
        **{n: "npc_mark" for n in (21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 36, 37, 41, 42)},
        31: "npc_zoe", 32: "npc_hale", 33: "npc_hale"}
 # Who says each quotation-only line of the SCREEN, in reading order: N = the person, M = her.
-SPEAKERS = {2: "NM", 3: "M", 21: "NMN", 22: "N", 23: "NM", 24: "N", 25: "NM", 27: "N", 28: "NM",
-            34: "NM", 35: "M", 36: "NM", 37: "N", 38: "NM", 39: "NM", 41: "N"}
+# Copy fixes A8-A15 (DECISIONS 125) added a spoken not-yet to #21, #23, #25, #27, #28, #29, #36 and #41.
+SPEAKERS = {2: "NM", 3: "M", 21: "NMNN", 22: "N", 23: "NMMN", 24: "N", 25: "NMN", 27: "NN", 28: "NMN", 29: "N",
+            34: "NM", 35: "M", 36: "NMN", 37: "N", 38: "NM", 39: "NM", 41: "NN"}
 
 ANY = {"type": "worn_exposure", "operator": "gte", "value": 0}          # always true: the chain's else
 def wt(v): return {"type": "worn_type", "operator": "eq", "value": v}
@@ -30,6 +31,7 @@ def slot(s, on=True): return {"type": "clothing_slot", "slot": s, "operator": "e
 LAURA_IN_KITCHEN = {"type": "npc_at_location", "location_id": "home_kitchen", "npc_id": "npc_laura", "operator": "is_present"}
 def corr(op, v): return {"type": "trait", "subject": "player", "trait_key": "corruption", "operator": op, "value": v}
 def tod(a, b): return {"type": "time_of_day", "start_time": a, "end_time": b}
+NOT_SATURDAY = {"type": "weekday", "weekdays": [0, 1, 2, 3, 4, 6]}   # tomlw.wd: 0 = Monday, 5 = Saturday
 CLAIRE_MET = {"type": "flag", "subject": "player", "flag_key": "claire_met", "operator": "is_true"}
 BRA_ONLY = [slot("top", False), slot("dress", False), slot("bra")]
 TOPS_AND_BRAS = [{"action": "unequip", "item_id": i} for i in ("tshirt", "thin_top", "plain_bra", "sports_bra")]
@@ -74,10 +76,13 @@ VARIANTS = [
     (2, 1, "replace_lines", None, [corr("lt", 40)], [("N", '"You\'re distracting me, @player.nickname."'), ("M", '"Then I\'ll move them."')]),
     (2, 2, "replace_line", "He wants this.", [corr("lt", 40)],
      [(None, "*This is Ryan. Your step-brother. You should take your feet back. He picks the controller back up one-handed, and the other hand stays on you, so you leave them where they are.*")]),
-    (21, 2, "replace_sentence", "Let him count.", [corr("lt", 40)],
+    # (copy fixes A8/A10, DECISIONS 125, replaced the thoughts these hung on; the voice now follows the new thought)
+    (21, 2, "after_sentence", "He didn't say not ever.", [corr("lt", 40)],
      [(None, "He's your mom's husband. You should tuck your legs back under you. You don't.")]),
-    (25, 2, "replace_sentence", "Let him look.", [corr("lt", 40)],
+    (25, 3, "after_sentence", "So somewhere else.", [corr("lt", 40)],
      [(None, "You think about putting your feet down. You keep them where they are.")]),
+    # copy fix A15 (DECISIONS 125): "a Saturday" only on Saturday; his garage rows are Mon, Tue, Thu, Fri evenings too
+    (36, 1, "replace_lines", None, [NOT_SATURDAY], [("N", '"That how you spend an evening, @player?"'), ("M", '"It\'s how I\'m spending this one."')]),
 ]
 
 # Unconditional changes to the screen's own text, made before the variants: (file #, old, new).

@@ -144,12 +144,16 @@ out.append({
             G(cond(HIS),
               P("Mark doesn't look up from the envelope when you come in."),
               D(M, "Shorts this time. Since you're reading my mail now.")),
-            G(cond(HERS),
+            G(cond(HERS, trait("exhibitionism", "gte", 20)),
               P("Sunday. Mark's at the table with the envelope, and you know what he's going to ask for. You don't wait to be asked.")),
+            # under Daring she waits, and he asks (reader: the screen promised an act she could not take)
+            G(cond(HERS, trait("exhibitionism", "lt", 20)),
+              P("Sunday. Mark's at the table with the envelope. He looks you up and down, slow."), D(M, "Shorts next time. You know the ones.")),
         ], [
-            go("\"Fine.\"", node="shorts", mins=5, cond_=cond(HIS), wardrobe=SHORTS_ON, eff=[nadd(M, "power", 3)]),
+            go("\"Fine.\"", node="shorts", mins=5, cond_=cond(HIS, trait("exhibitionism", "gte", 20)), wardrobe=SHORTS_ON, eff=[nadd(M, "power", 3)]),   # her show: Daring (DECISIONS 124)
             go("\"I'm not changing for you.\"", node="no", mins=2, cond_=cond(HIS)),
-            go("Go up and change.", node="hers_down", mins=5, cond_=cond(HERS), wardrobe=SHORTS_ON),
+            go("Go up and change.", node="hers_down", mins=5, cond_=cond(HERS, trait("exhibitionism", "gte", 20)), wardrobe=SHORTS_ON),
+            go("\"I'm not changing for you.\"", node="no", mins=2, cond_=cond(HERS)),   # her version has a no too (reader)   # her chosen show: Daring (DECISIONS 124)
         ]),
         # Iteration 002, part 8 (reader): the shorts are on her before the screen names them.
         node("hers_down", "Saved you asking", [
@@ -361,7 +365,7 @@ out.append({
               P("He hands you the envelope. His fingers stay on it a second after yours close.")),
             G(cond(ntrait(V, "power", "gte", 60)),
               D(V, "I didn't come for Mark. I came for you, Miss. You're the one who pays in that house now, aren't you?"),
-              P("He looks past you into the hall, then back at you, slow, all the way down and up."),
+              P("He looks past you into the hall, then back at you, slow: your legs, your chest, all the way down and up. He wets his lips."),   # copy fix A18 (DECISIONS 125)
               D(V, "Come and see me one evening. We'll talk about what's owed.")),
             G(cond(ntrait(V, "want", "gte", 30)), P("He doesn't look at your face once while he says it.")),
             G(cond(trait("rent_late_fee", "gt", 0)), D(V, "Fifteen on top, Miss. That's how it works.")),
@@ -387,8 +391,9 @@ MS = "sheets/people/npc_mark.md"
 MARK_PAID_ROUTE = [flag("mark_paid_touch"), flag("mark_arrangement")]
 L = "npc_laura"
 R = "npc_ryan"
-def m_tease(line, what, label="Let him look."):
-    return {"label": label, "ref": f"{MS}:{line}", "gate": [CURIOUS, trait("mark_step", "gte", 3)],
+def m_tease(line, what, label="Let him look.", bold=False):
+    # DECISIONS 124 (H2): his teases follow his accident (mark_00_the_dryer); a touch needs Bold
+    return {"label": label, "ref": f"{MS}:{line}", "gate": [BOLD if bold else CURIOUS, trait("mark_step", "gte", 3), flag("mark_saw_her")],
             "eff": [want(M)], "what": f"Mark, {what}: tease (Curious, Mark A 3)"}
 def m_paid(line, what, label="Let him pay to look."):
     return None   # release 1: Mark's paid look is cut (npc_mark.md, "Cut": no money for her body)
@@ -445,7 +450,7 @@ MARK_TOWEL_DROP = [
 
 def mark_towel(cid, loc):
     return towel_set(
-        cid, M, "power", 40, 60, "mark_towel_today", [npc_add(M, "power", 2)], loc,
+        cid, M, "power", 40, 60, "mark_towel_today", [npc_add(M, "power", 2), EXH1], loc,   # her slip pays her, like Ryan's (DECISIONS 124)
         lines=[
             [D(M, "Get dressed. This isn't a hotel."),
              GC(cond(TOWEL_ON), P("Mark looks at the towel, then at his beer."), D(M, "Put something on, @player.")),
@@ -459,7 +464,7 @@ def mark_towel(cid, loc):
         ],
         slip=MARK_TOWEL_SLIP, slip_lead=MARK_TOWEL_LEAD,
         slip_media=VID("a young woman letting her bath towel slip off her breasts in front of an older man on a couch", "girl drops towel in front of older man", "towel slip flash stepdad", pool_dir="sex/towel_mark_slip_t4"),
-        drop=MARK_TOWEL_DROP, drop_gate=[SHOWING],
+        slip_gate=(DARING, flag("mark_saw_her")), drop=MARK_TOWEL_DROP, drop_gate=[SHOWING, flag("mark_saw_her")],   # his chosen acts follow his accident (H2, DECISIONS 124)
         drop_media=VID("a young woman standing naked with her bath towel on the floor, an older man looking at her", "girl drops towel naked older man", "towel drop naked stepdad", pool_dir="sex/towel_mark_drop_t4"),
         caught_by=L, caught=TOWEL_CAUGHT)
 
@@ -493,7 +498,7 @@ out.append(mark_hub("hub_mark_living_room", LR, "Mark, up late", "the living roo
       None, 30),
      dict(done_exits=[go("Done.", loc=LR, mins=30, eff=[want(M)], flags=[fset("had_drink_home")], mods=DRINK)],
           tease=m_tease(108, "late TV and a beer", "Curl up on the couch."), touch=m_paid(108, "late TV and a beer"),
-          hungry="Further. (Needs Corruption 60)")),
+          hungry="Further. (Next release)")),
     (("film", "Put a film on with him.", [tod("22:00", "00:00")], "movie_night", LR,
       [P("He lets you pick. He falls asleep in the second half, and you watch the end with his snoring for a soundtrack.")],
       [energy(5), want(M)], 120), {}),
@@ -520,12 +525,11 @@ _hub["nodes"] += [
         G(cond(trait("mark_step", "lt", 4)), D(M, "Change it, @player."), P("He says it. He doesn't reach for the remote.")),
         G(cond(trait("mark_step", "gte", 4)), P("He doesn't tell you to change it. He watches the screen, and then he watches you watching it.")),
         VID("porn playing on a living room TV at night, a man and a woman, seen from the couch", "porn on tv late night couch", "watching porn on tv with someone", pool_dir="sex/tv_adult_mark_t5")],
-        [go("Leave it on.", node="mleave", mins=5),
+        [go("Leave it on.", node="mleave", mins=5, cond_=cond(CURIOUS, flag("mark_saw_her"))),   # porn beside him is a chosen act for one: Curious (DECISIONS 124)
          go("Change the channel.", node="mremote"), go("Leave him to it.", loc="home_hall")]),
     node("mleave", "Leave it on", [P(MARK_TV_LEAVE),
         VID("a man on a couch at night watching porn on TV, a beer can in his lap", "man watching porn tv couch beer", "stepdad watching porn on tv", pool_dir="sex/tv_adult_mark_leave_t5")],
-        [go("Keep watching.", loc=LR, mins=25, eff=tv_pay(2, 19) + [want(M, 2)], flags=[fset("mark_tv_paid")],
-            cond_=cond(TV_GG, flag("mark_tv_paid", False))),
+        [   # (DECISIONS 124) "Leave it on." needs Curious, so the Good Girl pay row is gone
          go("Keep watching.", loc=LR, mins=25, eff=tv_pay(2, 39) + [want(M, 2)], flags=[fset("mark_tv_paid")],
             cond_=cond(TV_CUR, flag("mark_tv_paid", False))),
          go("Keep watching.", loc=LR, mins=25, cond_=cond(flag("mark_tv_paid"))),
@@ -562,7 +566,7 @@ out.append(mark_hub("hub_mark_kitchen", K, "Mark, in the kitchen", "the kitchen"
       [P("He slides the paper over."), G(cond(flag("rent_starts"), flag("sunday_counted_today", False)), D(M, "Eat, @player. Then the rent.")),
        G(cond(flag("sunday_counted_today")), D(M, "Eat, @player.")), G(cond(flag("rent_starts", False)), D(M, "Eat, @player."))],
       [energy(10), want(M)], 15),
-     dict(tease=m_tease(104, "Sunday breakfast"), touch=m_paid(104, "Sunday breakfast"), hungry="Further. (Needs Corruption 60)")),
+     dict(tease=m_tease(104, "Sunday breakfast"), touch=m_paid(104, "Sunday breakfast"), hungry="Further. (Next release)")),
     (("dinner", "Sit down to dinner.", [wd(0, 1, 2, 3, 4, 6), tod("18:00", "20:00")], "ate_dinner", K,
       [G(cond(wd(0, 1, 3, 4, 6)), P("Burnt chops."), D(M, "Your mother cooks. I fill plates.")),
        G(cond(wd(2)), P("Chilli, again."), D(M, "It's always chilli. Eat it.")),
@@ -573,7 +577,7 @@ out.append(mark_hub("hub_mark_kitchen", K, "Mark, in the kitchen", "the kitchen"
     (("cook", "Help him cook.", [wd(2), tod("18:00", "19:00")], "helped_cook", K,
       [D(M, "Hand me the salt. No, the other salt.")],
       [energy(-5), want(M)], 30),
-     dict(plain_costs=[{"trait": "energy", "value": 5}], tease=m_tease(106, "help him cook", "Reach past him for the pan."))),
+     dict(plain_costs=[{"trait": "energy", "value": 5}], tease=m_tease(106, "help him cook", "Reach past him for the pan.", bold=True))),
     (("dishes", "Do the dishes with him.", [wd(2, 6), tod("19:00", "21:00")], "did_dishes", K,
       [P("He dries, slow."), D(M, "You missed one.")],
       [energy(-5), want(M)], 20),
@@ -590,6 +594,35 @@ cards = step_cards(M, {
    closed_text="You told him you'd tell Mom. The rent is strict now, every Sunday, and nothing else.")
 for c in cards:
     c["when"].append({"flag": "opening_done", "op": "is_true"})
+
+from sheetbeats import beat
+# ── step 0 · the dryer (mark_00_the_dryer.md, signed 2026-11-02; DECISIONS 124-125, the-heat-ladder.md H2):
+#    his first accident. It happens to her; it pays his Want and sets mark_saw_her, which his chosen acts read.
+BRA_ON = {"type": "clothing_slot", "slot": "bra", "operator": "equipped"}
+BRA_OFF = {"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}
+SAW = [nadd(M, "want", 5)]
+SAW_FLAGS = [fset("mark_saw_her")]
+out.append({
+    "id": "mark_00_the_dryer", "name": "The washer hose",
+    "description": "Mark's first accident (DECISIONS 124): Saturday in the garage, the washer hose soaks her; he looks, then turns his back and holds out a towel. His Want +5 and mark_saw_her either way; her \"Don't take it yet.\" pays Exhibitionism +1, cap 19.",
+    "trigger": {"location": "home_garage", "npc": M, "requires_npc": M, "is_repeatable": False, "priority": 9, "is_active": True,
+                "consume_on": "exit",
+                "schedules": [{"weekdays": [5], "start_time": "09:00", "end_time": "17:00"}],
+                "conditions": cond(flag("opening_done"), flag("mark_saw_her", False))},
+    "nodes": [
+        node("hose", "The washer hose", [
+            GC(cond(BRA_ON), P(beat("mark_00_the_dryer", "hose_bra"))),
+            GC(cond(BRA_OFF), P(beat("mark_00_the_dryer", "hose_nobra"))),
+        ], [
+            go("Take the towel.", node="covered", mins=2),
+            go("Don't take it yet.", node="stay", mins=2),
+        ]),
+        node("covered", "Back to his bench", [P(beat("mark_00_the_dryer", "covered"))],
+             [go("Go and change.", loc="home_hall", mins=10, consumes=True, eff=SAW, flags=SAW_FLAGS)]),
+        node("stay", "Not yet", [P(beat("mark_00_the_dryer", "stay"))],
+             [go("Go and change.", loc="home_hall", mins=10, consumes=True, flags=SAW_FLAGS,
+                 eff=SAW + [{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 19}])]),
+    ]})
 
 text = ("# =============================================================================\n"
         "# First Term — 5 · scenes · MARK (sheets/scenes/mark_0*.md, people/npc_mark.md, systems/money_pressure.md)\n"

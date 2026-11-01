@@ -1,4 +1,6 @@
-# [READY] Scene — cafe_shift_scene
+# [REVIEW]] Scene — cafe_shift_scene
+
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > **Changed 2026-11-01 after the build, signed by LO 2026-11-01 ("Signed, build them")** (the reader's FAILs; LO's picks in chat): l3_let a: "a folded twenty" becomes "a folded ten", so the line agrees with the signed tip ($10–16).
 

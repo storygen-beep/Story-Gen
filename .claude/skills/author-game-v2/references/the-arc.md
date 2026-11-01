@@ -109,6 +109,10 @@ Note what steps 0–3 are made of: a **place**, an **hour**, and **who else is i
 That is `the-clock.md` and `the-map.md` doing arc work. An arc opening needs no new systems. Night
 one's explicit beat comes from outside the arc: a stranger or a one-off (A15).
 
+**No sex act is not no heat.** The opening is filled with the kinds her stage allows: at stage 1, things that
+happen to her and his leak; her chosen act waits for stage 2 (`the-heat-ladder.md` H1, H2). An opening of
+talks only is the failure shape (H4).
+
 ---
 
 ## A3 · Saying no — parked by default, final only when the button says so
@@ -229,7 +233,8 @@ something that happens *to* her.
 - **The event sets the scene; the button pays.** Walking into a couple, a brother in a towel, a robe
   that slips: the event itself pays nothing. Each carries a button where she goes further than she had
   to — a second look, staying a moment longer — and that button pays. The way out ("Run", "Close the
-  door") pays nothing and is always there.
+  door") pays nothing and is always there. The event's raise goes to **him**: it moves his meter and sets
+  a flag, and the way out leaves that standing (`the-heat-ladder.md` H5, LO 2026-11-01).
 - **Each act pays only inside its own stage.** +1 for an everyday act, +3 for a big one-time step, and
   the act's `cap` sits at the top of its stage (19, 39, 59 on a 20-point ladder), so repeating an easy
   act cannot carry her past it. This is A4's "only while she is under it", stated for the stage.
@@ -576,8 +581,9 @@ which is commitment 4 (*a release adds events, not places*) with a mechanism und
 
 ## A13 · Their wanting is shown before it is acted on
 
-**The shape:** before he acts, the player has already seen that he wants her — a small line or
-look on his hub, tied to his number, repeated on every visit. Then 3–5 small steps on separate
+**The shape:** before he acts, the player has already seen that he wants her — on his body, and she
+sees it: a look he catches himself in, the bulge he turns away (`the-heat-ladder.md` H7). It sits on his hub,
+tied to his number, repeated on every visit. Then 3–5 small steps on separate
 days, each ending on a promise. And when she teases him, **it comes back in his mouth** later.
 
 > ⚠️ **EVIDENCE — NOT A TEMPLATE.** Three loved arcs read in order (Great Games Study, round 6):
@@ -593,8 +599,9 @@ a dice roll with no line linking it to anything she did. Players call that "rand
 nowhere". Nobody in the three arcs complained that a man was too eager; they complained when his
 move came from nowhere.
 
-A pressure type moves first and names the act; a nice type waits, so she moves. Both show the want
-first.
+A pressure type moves first and names the act; a nice type waits, so she moves, **where her stage allows a
+chosen act** (`the-heat-ladder.md` H1; for anyone she lives with, after an accident, H2, H6). Both show the
+want first.
 
 Scoped to a person with a ladder; a stranger or one-off (A15) passes if the same canvas shows his want
 before the act.

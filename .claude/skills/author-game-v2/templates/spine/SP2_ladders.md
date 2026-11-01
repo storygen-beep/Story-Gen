@@ -1,12 +1,17 @@
 # SP2 · The ladders — <game title>
 
 > [REVIEW] · drafted <date> · signed by LO: <name, date>
-> A decision record, ≤ 400 words. The rules: `references/the-spine.md` SP2 · `the-arc.md` A1–A14 · `the-meters.md` W1, W1b, W5b.
+> A decision record, ≤ 400 words. The rules: `references/the-spine.md` SP2 · `the-arc.md` A1–A14 · `the-heat-ladder.md` H1–H2 · `the-meters.md` W1, W1b, W5b.
 
 **Who climbs:** player · cast · both
 
 **Her tiers** (game-wide, on the board): <the ascent tiers, or none>. **Each person's own meters** (what he
 keeps, `want.cast[].keeps`): at most two per person.
+
+**Heat** — the stage each kind of act opens at, in the field's order (`references/the-heat-ladder.md` H1; start
+from its table and move a row only with a reason): <stage 1 kinds> · <stage 2> · <stage 3> · <stage 4> ·
+<stage 5>. **Audience size sets the stage:** one person, or a group. **Step-family and anyone she lives with
+start with accidents** (H2).
 
 One table per person. Record it in `board.characters[].ladder`. A gate's first rung sits near 5
 (`the-meters.md` W4); the board may move it.

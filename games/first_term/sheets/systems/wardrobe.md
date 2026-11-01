@@ -1,4 +1,6 @@
-# [READY] System — wardrobe
+# [REVIEW]] System — wardrobe
+
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): leaving a room now needs Corruption **or** Exhibitionism, wearing it out pays both, the two events pay by rule, and a bought item can be held in the garage. The rules live in `sheets/systems/meters.md` and `sheets/systems/money_pressure.md`.
 

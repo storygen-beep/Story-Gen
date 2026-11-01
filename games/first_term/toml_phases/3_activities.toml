@@ -68,7 +68,7 @@ npcId   = "npc_vance"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "His eyes go down you and come back up without hurrying. He's not hiding it. He doesn't think he has to."
+content = "His eyes go down you, to your tits, down your legs, and come back up without hurrying. He's not hiding it. He doesn't think he has to."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -137,7 +137,7 @@ blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", item
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
 blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "gte", value = 60 } ] }, blocks = [
-  { type = "paragraph", content = "Vance is standing before you reach his gate. He leans on the porch rail and lets you see him look, all of you, slow, the way you'd look at a car you meant to buy." },
+  { type = "paragraph", content = "Vance is standing before you reach his gate. He leans on the porch rail and lets you see him look. Your tits, your hips, your legs, slow, the way you'd look at a car you meant to buy." },
   { type = "dialog", content = "You know what your stepfather owes me, Miss? He'd sell me a lot of things to clear it.", props = { speaker = "npc", npcId = "npc_vance" } },
 ] } ]
 
@@ -245,7 +245,7 @@ name = "Past his porch"
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
-blocks = [ { type = "group", conditions = { version = "1.0", logic = "OR", items = [ { type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "clothing_slot", slot = "bra", operator = "unequipped" } ] }, blocks = [ { type = "paragraph", content = "You take the long way past his gate, slow. You feel his eyes land on you and stay. The paper lowers. He wets his lips. You don't look back, but you feel him watch you all the way to the corner." } ] } ]
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "OR", items = [ { type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "clothing_slot", slot = "bra", operator = "unequipped" } ] }, blocks = [ { type = "paragraph", content = "You take the long way past his gate, slow. The paper lowers. His eyes land on your ass and stay there, and he wets his lips. He half gets out of his chair, then sits back down. You don't stop for him. Not yet. You feel him watch you all the way to the corner." } ] } ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
@@ -837,9 +837,18 @@ is_active     = true
 id   = "changing_room"
 name = "The changing room"
 
+# "strip to your underwear" only while she's wearing panties (copy fixes C37, DECISIONS 125)
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_slot", slot = "underwear", operator = "equipped" } ] }, blocks = [ { type = "paragraph", content = "The changing room is a curtain that doesn't reach the wall on one side. You pull it as far as it goes and strip to your underwear in the gap, and try on what you picked." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_slot", slot = "underwear", operator = "unequipped" } ] }, blocks = [ { type = "paragraph", content = "The changing room is a curtain that doesn't reach the wall on one side. You pull it as far as it goes and strip down in the gap, and try on what you picked." } ] } ]
+
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "The changing room is a curtain that doesn't reach the wall on one side. You pull it as far as it goes and strip to your underwear in the gap, and try on what you picked."
+content = "By the shirt rail a man has stopped pretending to look at shirts. He's looking at your ass, and he doesn't look away when you catch him in the mirror."
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -883,6 +892,8 @@ is_repeatable = true
 priority      = 3
 is_active     = true
 max_triggers_per_day = 1
+# naked in the tub with strangers is naked for a group: Watched (DECISIONS 124)
+conditions    = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 } ] }
 
 [[canvases.nodes]]
 id   = "tub"
@@ -896,7 +907,7 @@ content = "You strip on the cold deck and get in fast. The water is almost too h
 type = "block_pool"
 blocks = [
   { type = "paragraph", content = "Two of Zoe's friends are on the other side, kissing like you aren't there. You try not to watch, but under the water his hand is somewhere you can guess." },
-  { type = "paragraph", content = "A guy you don't know gets in, says hi, and spends the next ten minutes trying not to look at your chest through the water. He fails, but you let him." },
+  { type = "paragraph", content = "A guy you don't know gets in, says hi, and spends the next ten minutes trying not to look at your tits through the water. He fails, but you let him. When his knee finds yours under the water, you move it away. Not here." },
 ]
 
 [canvases.nodes.exit_block]

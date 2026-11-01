@@ -8,6 +8,14 @@ import json
 import re
 from tomlw import q, v, cond, flag, trait, ntrait, boost_off, add, setv, nadd, fset, funset, DAYS
 
+# A lock on a scene release 1 does not write (DECISIONS 124): shown greyed as "(Next release)", never opens.
+# Release 1 now reaches Corruption 60, so a "(Needs Corruption 60)" lock would open onto "It comes later".
+# A hidden counter gated at 1: the engine prints "(Corruption N+ (you have M))" beside a locked trait
+# gate only when its value is 2 or more (v2.py:16462-16468), and a flag gate fails the build's
+# flag-chain check unless something sets it. Nothing raises this counter in release 1.
+NEXT_RELEASE = trait("release_2_written", "gte", 1)
+NEXT_RELEASE_TEXT = "That's in the next release of First Term."
+
 STATE = json.load(open("/Users/a0000/Desktop/Desktop_Archive_Backup/story_gen/story_gen_web_app/story_gen_django/games/first_term/v2_state.json"))
 LADDERS = {c["id"]: c["ladder"] for c in STATE["board"]["characters"] if c.get("ladder")}
 
@@ -98,6 +106,8 @@ def go(text, node=None, loc=None, mins=None, eff=None, flags=None, cond_=None, w
         c["show_when_locked"] = True
     if locked:
         c["locked_text"] = locked
+    elif swl and cond_ and NEXT_RELEASE in (cond_.get("items") or []):
+        c["locked_text"] = text   # a story lock says its why in its own label (gates: a locked door says why)
     if costs:
         c["costs"] = costs
     if eff:

@@ -1,5 +1,7 @@
 # [READY] Person — Jake
 
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): the end of a date by SP2 stage: the grinding kiss in the car at Bold, his hand or hers with the street able to see at Hungry; step 4 pays +3 cap 79; the lock shows "(Next release)". Sections changed: Ladder note, the end of a date.
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the release-1 ladder, from `proposals/JAKE_R1_LADDER.md` (signed 2026-11-01). Changed: Ladder, the seven columns, Leak and promise, step 4, the end of a date. Everything else as signed.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
@@ -54,7 +56,8 @@ A ceiling, never a floor. LO took these, 2026-10-08.
 | 3 | `jake_03_my_boyfriend`, merged with `laura_05_jake_at_the_door` | `home_front_door` | Sat 22:30–00:00, after a date | Corruption 20 · Exhibitionism 20 · a date tonight (`jake_date_booked`) | the counter only · Ryan's Lust +5 (built) | "Goodnight, Jake." (parked) | Saturday night, after your date: Jake at the front door. The house is home. |
 | 4 | `jake_04_sneak_him_in` (new, top step) | `home_ella_room` | Sat 00:00–02:00, after a date | step 3 · Corruption 40 | `jake_first_time` set · Ryan's Lust +5 (if Ryan is past his step 5) | on the step sheet (LO confirms) | After a Saturday date, past midnight: sneak Jake up to your room. |
 
-Every step's gate also says the drinks boost is off. Stage numbers: 20 is Curious or Daring, 40 Bold or Showing.
+Every step's gate also says the drinks boost is off. Stage numbers: 20 is Curious or Daring, 40 Bold or Showing, 60
+Hungry or Watched. Step 4's Corruption +3 is a Bold one-time step: cap 79 (DECISIONS 124).
 
 **Why 3 merges:** built Jake 3 (she names him to the house; Ryan opens the door) and built Jake 4 = Laura 5 (the
 goodnight kiss; Laura watching from the dark) are the same place, the same night, the same kiss. Now one step: she
@@ -107,9 +110,12 @@ are parked.
 ## His hot repeatable: the end of a date (rule 6)
 
 - **After step 3, every booked Saturday.** One a week. It grows with her:
-  - Curious: making out in his car outside the house, Mark's TV light in the window;
-  - Bold: in the car, his hand down her jeans until she comes, or her hand on him (mixed if the street can see: both
-    meters);
+  - Curious: the porch goodnight only; the car waits (DECISIONS 124);
+  - Bold (was Curious): making out in his car outside the house, grinding in his lap, Mark's TV light in the window;
+    pays cap 59;
+  - Hungry (was Bold): in the car under the street lamp, his hand down her jeans until she comes, or her hand on him,
+    a passer-by able to see (sex where strangers can see, SP2); mixed, both meters, cap 79;
+  - further: locked, "Jake, further. (Next release)";
   - after step 4: she sneaks him in. One night in four, a near-catch: Laura's door opens, or Ryan knocks twice on the
     wall.
 - Each pays both meters by the meters sheet's rules (seen: both; behind her door: Corruption).

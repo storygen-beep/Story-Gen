@@ -14,8 +14,10 @@ You curl up on the other end of the couch with the can cold in your hand. You tu
 "Sit still, @player."
 "I am sitting still."
 "Then keep sitting like that."
+You slide your foot along the cushion until it touches his thigh. He lifts it off with one hand, slow, and his hand stays round your ankle a second too long.
+"Not that close, @player."
 
-*He's counting every inch of your legs. Let him count.*
+*He said not that close. He didn't say not ever.*
 
 === VARIANTS (each a group on the gate shown) ===
 

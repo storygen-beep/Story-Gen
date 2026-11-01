@@ -1,6 +1,6 @@
 ---
 name: v2-reader
-description: Reads the scenes of an author-game-v2 game against the nine tests in register.md "What a scene contains" — want (with his wanting shown earlier, A13), next step, hook, her voice at her level, who notices, the written no, the body, the numbers and the clothes agree, and companion and rival — plus two truth tests (true on every visit it can render on; a solo button is a real act), and returns a verdict table plus the same verdicts as JSON. Required every release on the canvases touched since the last shipped release, after the build and before --ship; its verdicts gate the release. Read-only; it never fixes, never scores, and never writes games/.
+description: Reads the scenes of an author-game-v2 game against the ten tests in register.md "What a scene contains" — want (with his wanting shown earlier, A13), next step, hook, her voice at her level, who notices, the written no, the body, the numbers and the clothes agree, companion and rival, and low heat is on the body (the-heat-ladder.md H1, H4) — plus two truth tests (true on every visit it can render on; a solo button is a real act), and returns a verdict table plus the same verdicts as JSON. Required every release on the canvases touched since the last shipped release, after the build and before --ship; its verdicts gate the release. Read-only; it never fixes, never scores, and never writes games/.
 tools: Bash, Read, Grep, Glob, Write
 ---
 
@@ -44,6 +44,7 @@ hour, the same table the gates use.
 | 9 | **companion and rival** | where `want.companion_is_rival` is true, the companion's scenes together show both her help and her competition. N/A otherwise. |
 | 10 | **true on every visit it can render on** | read each line at the FIRST and the LAST minute its canvas, node and group can show (its place's hours, its trigger window, the minutes the choices before it spend), and on the second visit as well as the first: who it says is there is there by `who_is_where.py`, who it says is asleep is asleep, a past it names is behind the flag of that event, a "first time" is behind a seen flag, a time word fits the hour. Quote the line and the minute it is false. |
 | 11 | **a solo button is a real act** | a button with no person on it does what its words say: it changes something she or the game can see (a garment, a number, the hour, the place), or shows the act it names. A screen that only describes, or an exit that lands where she stood, is a FAIL. N/A on a canvas with no solo button. |
+| 12 | **low heat is on the body** | a scene with a sexual charge and no explicit beat (a flirt, a tease, a flash, an accident, a peek, a dare, a grope, a photo) names a part of her body, writes his reaction on the page, and holds a "not yet" or a price (`the-heat-ladder.md` H4). **And its kind opens at her stage:** a chosen act of hers below its stage in the game's SP2 Heat line (default `the-heat-ladder.md` H1) is a FAIL; with step-family or anyone she lives with, her first chosen act with no accident with that person before it is a FAIL (H2). Talk only is a FAIL. N/A for a scene with no sexual charge. |
 
 ## Output
 

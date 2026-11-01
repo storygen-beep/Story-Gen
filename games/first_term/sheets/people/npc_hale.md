@@ -1,5 +1,7 @@
 # [READY] Person — Dr. Hale
 
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): step 4 and the low Thursday session at Bold · Showing, the high one at Hungry; step 4 pays +3 cap 79; his leak is on his body; the lock shows "(Next release)". Sections changed: the clothing lines, Ladder, Step 4, the Thursday session.
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the release-1 ladder, from `proposals/HALE_R1_LADDER.md` (signed 2026-11-01). Changed: what he keeps, Ladder, the seven columns, Leak and promise, step 4, the Thursday session, Cut, Rows a gate needs. Everything else as signed.
 
 > **Changed 2026-10-29, re-signed by LO 2026-10-29** (DECISIONS 87–88): his emails book Thursday; a no-show costs her Psychology grade.
@@ -18,7 +20,7 @@
 | where he sleeps | offscreen |
 | what he calls her | "@player" |
 | met | Monday's first class, day 1 |
-| his line: short skirt | He loses the sentence, and starts it again. |
+| his line: short skirt | His eyes drop to her thighs. He loses the sentence, steps behind the lectern (in his office, sits down behind the desk), and starts it again. (H7: at stage 1 he leaks and covers it) |
 | his line: no bra | He keeps the lectern between them. |
 | his line: no panties | He sees. Three rows hear him stop. |
 
@@ -51,8 +53,8 @@ A ceiling, never a floor. LO took these, 2026-10-08.
 | 1 | `hale_01_first_lecture`, reworked: his first move | `lecture_hall` | Monday of week one 08:30–10:00 (the whole class, this week only; `sheets/systems/college.md`) | the dean's "Go to Psychology." | the counter only | "Look away." (parked) | Monday, first class: Psychology with Dr. Hale. You're already late. |
 | 2 | `hale_02_lost_his_place` | `lecture_hall` | Mon, Wed, Fri 08:30–10:00 | step 1 · Exhibitionism 20 (was Corruption 20 · Exhib. 20) | exhibitionism add +3 | "Fix your skirt." (parked) · his: "Not here. Office hours." | The next Psychology class, front row. |
 | 3 | `hale_03_private_coaching` (was `hale_03_photo_face_down`, reworked) | `hale_office` | Thu 18:00–19:30 | step 2 (was Corruption 20 · Exhib. 20) | the counter only · `hale_coaching_offered` set | "That isn't coaching." · she walks out | Thursday evening: Dr. Hale's office on the faculty floor. |
-| 4 | `hale_04_the_first_session` (was `hale_04_claire_knocks`, reworked; top step) | `hale_office` | Thu 18:30–19:30 | step 3 · Corruption 20 · Exhibitionism 20 (was 40 · 40) | her three answers, below · `hale_touched` set | "This isn't coaching." · Run | Thursday evening in his office: your first session. |
-| — | locked | his card | — | Corruption 60 | — | — | "Hale, further. (Needs Corruption 60.)" |
+| 4 | `hale_04_the_first_session` (was `hale_04_claire_knocks`, reworked; top step) | `hale_office` | Thu 18:30–19:30 | step 3 · Corruption 40 · Exhibitionism 40 (was 20 · 20; his hand on her is private contact, Bold: DECISIONS 124) | her three answers, below · `hale_touched` set | "This isn't coaching." · Run | Thursday evening in his office: your first session. |
+| — | locked | his card | — | not written | — | — | "Hale, further. (Next release)" (DECISIONS 124) |
 
 Every step's gate also says the drinks boost is off.
 
@@ -88,7 +90,8 @@ she earns.
 
 ## Step 4, "The first session"
 
-- **Let him.** His hand keeps going until the knock. Grade +5, Corruption +3, Exhibitionism +3 (a big first; mixed act).
+- **Let him.** His hand keeps going until the knock. Grade +5, Corruption +3, Exhibitionism +3, each cap 79 (a big
+  first; mixed act; a Bold one-time step, DECISIONS 124).
 - **"This isn't coaching."** She does her blouse back up. He sits back: "Then you'll stay at a C." Grade unchanged. He
   asks again next Thursday.
 - **Run.** She grabs her bag and is out of the door. In the corridor she passes a woman with car keys: Claire. Grade −2.
@@ -100,10 +103,10 @@ corrupted enough") and rule 5 (a step counter, paced by his week; the lever is h
 ## His hot repeatable: the Thursday session (rule 6)
 
 - **After step 4, every Thursday 18:30–19:30.** One a week. It grows with her and stops at touching:
-  - Curious and Daring: his hand over her clothes, while she says what she feels;
-  - Bold or Showing: her top off, his hand inside her clothes, and she touches herself while he watches and takes
-    notes (mixed: needs both meters at that stage);
-  - Corruption 60: locked ("Hale, further. (Needs Corruption 60.)").
+  - Bold and Showing (was Curious and Daring): his hand over her clothes, while she says what she feels; pays cap 59;
+  - Hungry (was Bold or Showing): her top off, his hand inside her clothes, and she touches herself while he watches
+    and takes notes; pays cap 79 (DECISIONS 124);
+  - further: locked ("Hale, further. (Next release)").
 - **Each session:** grade +2 and both meters +1 (mixed act). The same three answers; each "no" costs only grade.
 - **One Thursday in four,** Claire waits in the car park, and he cuts it short.
 

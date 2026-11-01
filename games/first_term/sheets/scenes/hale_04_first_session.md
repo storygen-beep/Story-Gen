@@ -1,4 +1,6 @@
-# [READY] Scene — hale_04_first_session
+# [REVIEW]] Scene — hale_04_first_session
+
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > **New 2026-11-01, signed by LO 2026-11-01 ("Continue")** (DECISIONS 99–117). From Hale's signed release-1 ladder
 > (`sheets/people/npc_hale.md`, step 4, the top step; `proposals/HALE_R1_LADDER.md`). Reworks the built canvas
@@ -9,7 +11,7 @@
 |---|---|
 | person · step | `npc_hale` · 4 of 4, top step · Claire (38), his wife, met here |
 | where · when | his office, the faculty floor · Thursday 18:30–19:30 (Claire's pickup is half past seven) |
-| gate | Hale's step counter eq 3 · Corruption 20 · Exhibitionism 20 · the boost off (was Corruption 40 · Exhibitionism 40) |
+| gate | Hale's step counter eq 3 · Corruption 40 · Exhibitionism 40 (back to 40 · 40: DECISIONS 124) · the boost off · pays +3 each, cap 79 |
 | want (test 1) | "Thursdays. Half past six. The door will be locked." (step 3) |
 | next step (test 2) | his hand, his questions; her saying it out loud |
 | hook (test 3) | "My wife. Same time next week, @player." The weekly session opens · his card: "Hale, further. (Needs Corruption 60.)" |

@@ -351,6 +351,11 @@ same way: *"I really want this, Bobby. Please don't stop"* (In Her Own Hands).
 So do not design a reason for every act. **Design what stops her**, and let the meter be how far
 she will go (`the-meters.md` W1b).
 
+**Scoped 2026-11-01: this holds for people she meets outside the house.** Step-family and anyone she lives
+with start with accidents, and her chosen act waits for her stage (`the-heat-ladder.md` H1, H2). The numbers
+above come from a game that fails the adults-only rule (numbers only); the passing games put accidents first
+with the people she lives with.
+
 ⚠️ **Deniability is a late tool for the target she cannot face.** The five excuse-shaped scenes —
 a slipped top, a door left open — gate at **45–80**, every one behind that game's hardest unlock. She notices half a second too late, every time, which lets
 her escalate without deciding to and lets the player enjoy it without her becoming a cartoon.

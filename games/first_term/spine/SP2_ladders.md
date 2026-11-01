@@ -1,6 +1,8 @@
 # SP2 · The ladders — First Term
 
 > [READY] · drafted 2026-10-04 · updated 2026-10-08 (where each stage starts) · signed by LO: LO, 2026-10-08
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder, proposal a2): release 1 writes
+> stages 1–4; the raises per stage; the Heat line gains what pays and the accident rule; "(Next release)" locks.
 > A scaffold: what every later step stands on, so later releases add steps without breaking shipped
 > scenes, numbers or saves. No steps here — they live in `proposals/ARC_IDEAS.md` now and on each
 > person's sheet later. Rules: `the-arc.md` A1–A5b, A13–A14 · `the-meters.md` W1, W1b.
@@ -25,9 +27,21 @@
   Good Girl: "Run to your room" · Curious adds "Walk past slowly" · Bold adds "Let him look".
 - **Her voice has three tiers:** shy (stage 1), warming up (2–3), bold (4–5), read from the meter the
   scene's choices use.
-- **Release 1 writes stages 1–3.** Stages 4–5 get their choices and lines in later releases.
+- **Release 1 writes stages 1–4** (DECISIONS 124; was 1–3). Stage 5 gets its choices and lines in a later
+  release. A locked button whose scene is not written yet shows "(Next release)" greyed, with no number
+  (it waives DECISIONS 90 for those buttons only).
 - **Raises:** small acts +1, big scenes +3; drinks give a boost that clears overnight; an act stops
   paying once she's past its stage (A4).
+  - Good Girl and Curious acts pay +1, capped at 19 and 39 (DECISIONS 78).
+  - Bold acts pay +1, capped at 59. A Bold one-time step pays +3, capped at 79, so a big step carries her
+    into Hungry (`the-arc.md` A4d).
+  - Hungry acts pay +1, capped at 79.
+  - She crosses a stage line two ways: a one-time step's +3, or a drink's boost that lets her try a
+    choice of the next stage, whose raise she keeps (`the-arc.md` A4d). An act capped at its stage's top
+    never carries her over.
+  - An accident pays his number and sets a flag, never hers; only her button to go further pays her. Her no
+    never raises her climb, and always moves something else: his number, the relationship, or a counter
+    (`the-heat-ladder.md` H5, LO 2026-11-01).
 - **College first.** Zoe, parties, campus and the café carry her early Corruption. Home pays little
   Corruption until Bold, but can still pay Exhibitionism.
 - **Talk tracks:** `campus_talk` (who approaches her) and `laura_suspicion` (how her mom treats her).
@@ -42,6 +56,14 @@
     past the first; the taboo act at home; naked or a flash for a group, known or not (posing for the
     figure-drawing class; LO, 2026-10-07: the stage turns on how many see her).
   - Shameless · On Display: sex in front of a crowd; group or free use; her own plan built on sex.
+  - At home, every person she lives with starts with an accident that happens to her; her first chosen act
+    with him needs that accident's flag (`the-heat-ladder.md` H2). The accident watching scenes (the door
+    crack, Laura's gaps, their door, the back stacks) stay at Good Girl: the look happens to her, and only
+    "stay" pays, +1 cap 19 (DECISIONS 79).
+  - Every chosen low-heat scene names her body, writes his reaction, has a "not yet" or a price, and ends
+    on a hook (`the-heat-ladder.md` H4).
+  - The game's gates follow this line (DECISIONS 124). Where a person's sheet once gated an act a stage
+    lower, the sheet changed, not this line.
 
 ## 2. How each arc rises
 

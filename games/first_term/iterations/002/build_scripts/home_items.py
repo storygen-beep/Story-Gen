@@ -103,7 +103,7 @@ def item(prefix, label, when, key, back, plain_blocks, plain_eff, mins,
                           [placeholder(spec["ref"], spec.get("what", kind))],
                           [go("Done.", loc=back, mins=mins)]))
     if hungry:
-        exits.append(go(hungry, node="hl_hungry", swl=True, cond_=cond(HUNGRY)))
+        exits.append(go(hungry, node="hl_hungry", swl=True, cond_=cond(NEXT_RELEASE)))
     # One way out free of every cap and cost (gate: a spent day still has a door, the-surfaces.md R7).
     exits.append(go("Not now.", loc="home_hall"))
     for c in exits:
@@ -138,7 +138,7 @@ SEXY_ON = {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": 
 def hungry_node(back):
     """The screen behind every "(Needs Corruption 60)" choice, as the college classes have it."""
     return node("hl_hungry", "Further", [
-        P("That's further than you go in this release of First Term. It comes later, when your Corruption reaches 60."),
+        P(NEXT_RELEASE_TEXT),
     ], [go("Back.", loc=back)])
 
 

@@ -1,4 +1,6 @@
-# [READY] Scene — ryan_04_feet_in_his_lap
+# [REVIEW]] Scene — ryan_04_feet_in_his_lap
+
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > **Changed 2026-11-01 after the build, signed by LO 2026-11-01 ("Signed, build them")** (the reader's FAILs; LO's picks in chat): the no gets his reply.
 
@@ -12,7 +14,7 @@
 |---|---|
 | person · step | `npc_ryan` · 4 (Ryan A 5) |
 | where · when | his room · Sun–Thu 22:00–00:00, after two knocks |
-| gate | Corruption 20 · his Want 30 · the boost off |
+| gate | Corruption 40 (was 20: DECISIONS 124) · his Want 30 · the boost off · pays Corruption +3, cap 79 |
 | want (test 1) | he opens on the second knock, every time, and leaves room on the bed |
 | next step (test 2) | a touch he makes: he presses her foot onto his cock while Kayla is on the phone |
 | hook (test 3) | "Liar." And Laura can open this door ("Laura opens the door" on his sheet reads this step) |

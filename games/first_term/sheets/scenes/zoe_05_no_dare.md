@@ -1,4 +1,6 @@
-# [READY] Scene — zoe_05_no_dare
+# [READY]] Scene — zoe_05_no_dare
+
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > **Changed 2026-11-01 after the build, signed by LO 2026-11-01 ("Signed, build them")** (the reader's FAILs; LO's picks in chat): both endings point ahead.
 
@@ -10,7 +12,7 @@
 |---|---|
 | person · step | `npc_zoe` · 5 (new, top step) |
 | where · when | Zoe's bedroom, `zoe_bedroom` · Sat 00:00–02:00, after a Friday party (`AT_PARTY` was set tonight), the music still through the door |
-| gate | `zoe_step` eq 4 · Corruption 40 · player counter `zoe_dares_done` gte 4 (+1 on every yes in `zoe_dares`; name mine) · the boost off |
+| gate | `zoe_step` eq 4 · Corruption 40 · "Let him watch." needs Exhibitionism 60 (DECISIONS 124) · player counter `zoe_dares_done` gte 4 (+1 on every yes in `zoe_dares`; name mine) · the boost off |
 | want (test 1) | "I dared you instead of asking. I always do." (step 4) |
 | next step (test 2) | she stops daring and asks |
 | hook (test 3) | the cocky guy at the door; `zoe_let_him_watch` for the locked threesome · the dares change (`zoe_dares.md`) · locked: "Zoe's next dare. (Needs Corruption 60.)" |

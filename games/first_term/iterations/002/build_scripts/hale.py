@@ -57,12 +57,12 @@ out.append({
             go("Leave it.", node="left", mins=2),
         ]),
         node("pen", "His pen", [
-            P("You bend down for it, all the way, and when you come back up he's looking right at you. He's hard. You can see the line of it against his trousers from the front row, and he doesn't move to hide it."),
-            P("He holds his hand out for the pen."),
-            D(H, "Thank you, @player."),
+            P("You bend down for it, all the way, and when you come back up his eyes are on your chest, not your face. He's hard. You can see the line of it against his trousers from the front row. He sees you see it, and steps back behind the lectern."),
+            P("He reaches over it and holds his hand out for the pen, flat, so your fingers won't touch his."),
+            D(H, "Thank you, @player. Eyes on the slides."),
         ], [go("Hand it back.", node="nadia", mins=60, eff=[setv("hale_step", 1)], consumes=True, flags=[done(1), fset("hale_pen_picked")])]),
         node("left", "The hall waits", [
-            P("You don't move. The hall goes quiet, waiting to see who gives first. Dr. Hale comes down off the stage, crouches at your feet and picks the pen up, and looks up at you from there, slowly, all the way up."),
+            P("You don't move. The hall goes quiet, waiting to see who gives first. Dr. Hale comes down off the stage, crouches at your feet and picks the pen up, and looks up at you from there, slowly, all the way up your legs to your face."),
             D(H, "Noted."),
         ], [go("Sit through the lecture.", node="nadia", mins=60, eff=[setv("hale_step", 1)], consumes=True, flags=[done(1)])]),
         node("nadia", "Last spring", [
@@ -184,7 +184,7 @@ out.append({
              go("Run.", node="run", mins=1)]),
         node("higher", "Higher", [P(beat("hale_04_first_session", "higher")),
             VID("a professor's hand moving up a student's inner thigh in his office", "teacher hand up student thigh office", "professor touching student between her legs", pool_dir="sex/hale_04_higher_t4")],
-            [go("Wait.", node="knock", mins=5, eff=[add("grade_psych", 5), CAP("corruption", 3, 39), CAP("exhibitionism", 3, 39)])]),
+            [go("Wait.", node="knock", mins=5, eff=[add("grade_psych", 5), CAP("corruption", 3, 79), CAP("exhibitionism", 3, 79)])]),   # a Bold one-time step (DECISIONS 124)
         node("knock", "You ready, love?", [
             P("The knock is two raps, light. A woman's voice through the door, bright."),
             D(CL, "You ready, love? I'm early."),
@@ -214,8 +214,9 @@ out.append({
 
 # ── his hot repeatable, the Thursday session (hale_thursday_session.md, signed 2026-11-01): reworks hale_thursdays.
 #    Two tiers of three pooled screens; Claire early one Thursday in four (a 1-4 roll on "Let him."). ──
-LOW_CASES = [[trait("corruption", "lt", 40)], [trait("corruption", "gte", 40), trait("exhibitionism", "lt", 40)]]
-HIGH = [trait("corruption", "gte", 40), trait("exhibitionism", "gte", 40)]
+# DECISIONS 124: his hands on her open at Bold · Showing; her top off and her own hand while he watches at Hungry.
+LOW_CASES = [[trait("corruption", "lt", 60)]]
+HIGH = [trait("corruption", "gte", 60)]
 ROLL = lambda op, v: trait("hale_claire_roll", op, v)
 SESSION_PAY = lambda c: [add("grade_psych", 2), CAP("corruption", 1, c), CAP("exhibitionism", 1, c)]
 out.append({
@@ -224,7 +225,7 @@ out.append({
     "trigger": {"location": "hale_office", "requires_npc": H, "is_repeatable": True, "priority": 5, "is_active": True,
                 "max_triggers_per_day": 1,
                 "schedules": [{"weekdays": [3], "start_time": "18:30", "end_time": "19:05"}],   # done before Claire at half past (as built)
-                "conditions": cond(trait("hale_step", "eq", 4), trait("corruption", "gte", 20), trait("exhibitionism", "gte", 20))},
+                "conditions": cond(trait("hale_step", "eq", 4), trait("corruption", "gte", 40), trait("exhibitionism", "gte", 40))},
     "nodes": [
         node("door", "Twenty minutes", [
             P("His office door is unlocked. He locks it behind you without a word. The photo is already face-down."),
@@ -232,7 +233,7 @@ out.append({
         ], [go("Let him.", node="roll", mins=1, eff=[{"targetType": "player", "trait": "hale_claire_roll", "op": "set", "value": {"type": "random", "min": 1, "max": 4}}]),
             go("\"This isn't coaching.\"", node="isnt", mins=2, eff=[add("grade_psych", -1)]),
             go("Run.", node="run", mins=1, eff=[add("grade_psych", -2)]),
-            go("Hale, further. (Needs Corruption 60)", node="door", swl=True, cond_=cond(trait("corruption", "gte", 60)))]),
+            go("Hale, further. (Next release)", node="door", swl=True, cond_=cond(NEXT_RELEASE))]),
         node("roll", "His hands", [P("He comes round the desk.")],
             [go("Go on.", node="claire_car", mins=1, cond_=cond(ROLL("eq", 1)))]
             + [go("Go on.", node="touch_low", mins=1, cond_=cond(ROLL("gte", 2), *c)) for c in LOW_CASES]
@@ -240,10 +241,10 @@ out.append({
         node("touch_low", "Tell me what you feel", [G(cond(*[{"type": "clothing_item", "item_id": d, "operator": "unequipped"} for d in DRESSES]), POOL(P(beat("hale_thursday_session", "A a")), P(beat("hale_thursday_session", "A b")), P(beat("hale_thursday_session", "A c")), pid="hale_touch_low", bag=True)),
             *[G(cond({"type": "clothing_item", "item_id": d, "operator": "equipped"}), POOL(*[P(beat("hale_thursday_session", k).replace("your top", "your dress")) for k in ("A a", "A b", "A c")], pid=f"hale_touch_low_{d}", bag=True)) for d in DRESSES],
             VID("a professor's hands on a student over her clothes in his office, her answering him", "professor touches student over clothes office", "teacher hands on student body talking", pool_dir="sex/hale_thursday_low_t4")],
-            [go("\"Same time next week.\"", node="end", mins=15, eff=SESSION_PAY(39))]),
+            [go("\"Same time next week.\"", node="end", mins=15, eff=SESSION_PAY(59))]),
         node("touch_high", "Describe it", [POOL(P(beat("hale_thursday_session", "B a")), P(beat("hale_thursday_session", "B b")), P(beat("hale_thursday_session", "B c")), pid="hale_touch_high", bag=True),
             VID("a topless student touching herself in her professor's office while he watches and takes notes", "student masturbates professor watches notes", "girl touches herself teacher watching office", pool_dir="sex/hale_thursday_high_t5")],
-            [go("\"Same time next week.\"", node="end", mins=15, eff=SESSION_PAY(59))]),
+            [go("\"Same time next week.\"", node="end", mins=15, eff=SESSION_PAY(79))]),
         node("claire_car", "She's early", [
             P("His phone buzzes on the desk before he's touched you. He reads it and his face goes flat."),
             D(H, "She's early. She's in the car park."),
@@ -280,7 +281,7 @@ out.append({
         G(cond(trait("grade_psych", "lt", 40)), D(H, "You're failing my course, @player. That isn't like you.")),
         G(cond(trait("grade_psych", "gte", 40), trait("grade_psych", "lt", 70)), D(H, "A pass. You could do better. You know you could.")),
         G(cond(trait("grade_psych", "gte", 70)), D(H, "Top of the class. I'd say I'm proud, but you'd make something of it.")),
-        G(cond(SKIRT), P("He loses the sentence, and starts it again.")),
+        G(cond(SKIRT), P("His eyes drop to your thighs, and his neck goes red. He loses the sentence, pulls his chair in tight under the desk, and starts it again.")),
         G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}, {"type": "worn_exposure", "operator": "eq", "value": 0}), P("He keeps the desk between you.")),
         G(cond(flag("college_for_grades")), D(H, "You're here for the grades. I can always tell the ones who are.")),
         G(cond(flag("college_for_fun")), D(H, "You're here for the fun, aren't you? Is this fun?")),
@@ -315,7 +316,7 @@ cards = step_cards(H, {
     2: ("His eyes are on the front row every class.", "The next Psychology class, front row, Monday, Wednesday or Friday morning (Daring)"),
     3: ("\"Thursday. Office hours.\"", "Thursday evening: Dr. Hale's office on the faculty floor, during his office hours"),
     4: ("\"Thursdays. Half past six. The door will be locked.\"", "Thursday, half past six: his office (Curious, Daring)"),
-}, terminal_text=("Thursdays, half past six: his office, the door locked.", "Hale, further. (Needs Corruption 60.)"))
+}, terminal_text=("Thursdays, half past six: his office, the door locked.", "Hale, further. (Next release)"))
 for c in cards:
     c["when"].append({"flag": "opening_done", "op": "is_true"})
 

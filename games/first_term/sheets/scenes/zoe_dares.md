@@ -1,4 +1,6 @@
-# [READY] Scene — zoe_dares
+# [READY]] Scene — zoe_dares
+
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > **New 2026-11-01, signed by LO 2026-11-01 ("Continue")** (DECISIONS 99–118). Zoe's hot repeatable, from her signed release-1 ladder
 > (`sheets/people/npc_zoe.md`, "The dares"). Replaces the built `party_dare` (`iterations/002/build_scripts/pools.py:87`;
@@ -8,7 +10,7 @@
 | row | answer |
 |---|---|
 | system · place | parties · Zoe's apartment (Friday) and the party house (Saturday), her party hours |
-| gate | `picks_the_dares` (Zoe's step 4) · Zoe present · a party tonight · not dared tonight (`zoe_dared_today`, cleared by the daily tick) |
+| gate | `picks_the_dares` (Zoe's step 4) · Zoe present · a party tonight · not dared tonight (`zoe_dared_today`, cleared by the daily tick) · each yes by its stage (DECISIONS 124): the kiss Curious, every dare the room watches Exhibitionism 60, cap 79 |
 | BRAKE (S9) | **one dare a night** (was two) |
 | who picks | Zoe. Her line names the dare; the screen offers a showing yes, a doing yes and the no (`meters.md` rule 5) |
 | which tier | after Zoe's step 5 (`zoe_together`): **Zoe joins** · else Corruption 40 or Exhibitionism 40: **Bold · Showing** · else **Curious · Daring**. Each yes shows by its own meter (below); a yes she can't take shows locked with the number |
@@ -45,7 +47,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Where the t
 
 **`low_show`** · 136 words · explicit words 5 · median sentence 9
 
-> You walk straight to the keg with Zoe laughing behind you. The guy in the backwards cap is pumping it. You stand right in front of him and wait. He looks up. You grab your top and yank it up to your chin. Your tits are bare to him in the middle of the party. He freezes with the pump in his fist. Beer foams over his cup. Someone by the keg cheers. *It's a dare. It doesn't count.* Your heart is slamming, but you hold it there one long second. The air is cold on your bare tits. Your nipples go tight and hard while he stares at them. Your face burns. You're wet, and your thighs press together. You pull your top down over your hard nipples, and your tits still tingle under it.
+> You walk straight to the keg with Zoe laughing behind you. The guy in the backwards cap is pumping it. You stand right in front of him and wait. He looks up. You grab your top and yank it up to your chin. Your tits are bare to him in the middle of the party. He freezes with the pump in his fist. Beer foams over his cup. Someone by the keg cheers. *Let the whole room look.* Your heart is slamming, and you hold it there one long second. The air is cold on your bare tits. Your nipples go tight and hard while he stares at them. Your face burns. You're wet, and your thighs press together. You pull your top down over your hard nipples, and your tits still tingle under it.
 
 **`low_do`** · 128 words · explicit words 6 · median sentence 11 · act rungs: touch · also played by Zoe's step 2, "Dare me something else."
 

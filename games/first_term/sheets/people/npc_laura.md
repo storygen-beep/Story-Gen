@@ -1,4 +1,6 @@
-# [READY] Person — Laura
+# [REVIEW] Person — Laura
+
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): step 4's "Stay where you are." pays Corruption +1 cap 59 (was cap 19, which could never pay behind its Curious gate); a sign on her body that she wants Ryan before step 4 turns on his name (step 3). Sections changed: Ladder, the seven columns, Leak and promise.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the release-1 ladder, from `proposals/LAURA_R1_LADDER.md` (signed 2026-11-01). Changed: what she keeps, the Saturday shower row, Ladder, the seven columns, Leak and promise, step 4, the gaps, Everyday (tease and touch cut, Love +2 once a day in total), Cut. Everything else as signed.
 
@@ -57,7 +59,7 @@ her, and she lies awake after (`master_door_saturday_night`). Same row, same pla
 | 1 | `laura_01_blue_dress` | `home_master_bedroom` | Tue 18:00–22:00 | none | warmth add +5 · exhibitionism add +3 (was want +10) | "I can't take this." (parked) | Tuesday evening: Laura is in the kitchen, and she has a dress for you upstairs. |
 | 2 | `laura_03_wine_in_the_kitchen` | `home_kitchen` | Mon, Tue, Thu, Fri 20:00–22:00 | her Love 10 (only) | warmth add +5 | "I'm tired, Mom." (parked) | Late evening in the kitchen: Laura has a glass of wine. |
 | 3 | `laura_06_take_me_with_you`, reworked as **All dressed up** | `home_master_bedroom` | Sat 17:00–18:30 | her Love 20 | warmth add +5 · `laura_lonely` set | "Ask Mark." (parked) | Saturday early evening: Laura is dressing up. Zip her up. |
-| 4 | `laura_04_she_saw_you` (new, top step) | `home_master_bedroom` (her door gap) | Sun–Fri 22:00–23:00 | Corruption 20 · her Love 30 · step 3 · Ella watched through a gap 3 times (bedroom or shower) | warmth add +5 · `laura_said_ryan` set | "Step back from the gap." | A weeknight, late: Laura's door is open a gap again. |
+| 4 | `laura_04_she_saw_you` (new, top step) | `home_master_bedroom` (her door gap) | Sun–Fri 22:00–23:00 | Corruption 20 · her Love 30 · step 3 · Ella watched through a gap 3 times (bedroom or shower) | warmth add +5 · `laura_said_ryan` set · "Stay where you are." Corruption +1, cap 59 (a one-time step may carry her over a line: SP2) | "Step back from the gap." | A weeknight, late: Laura's door is open a gap again. |
 
 Every step's gate also says the drinks boost is off. Stage numbers: 20 is Curious or Daring, 40 Bold or Showing.
 
@@ -81,7 +83,7 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 |---|---|---|---|---|---|---|---|
 | 1 | Laura gives her the blue dress she can't wear any more: "It never fit me like that." | Laura | — | she tries it on | the gift, and her hand on the hip | yes | the dress is Ella's; Laura's line on it |
 | 2 | two glasses poured; "Mark hasn't looked at me like that since the wedding." | Laura's secret is Ella's | — | she sits and drinks with her | the second glass, poured before Ella came down | yes | Ella knows she's lonely |
-| 3 | Ella zips her mother into her good dress. Mark calls from downstairs that he's going to the bar. Laura sits on the bed, dressed up, with nowhere to go | Ella; Mark, not looking | — | "You look beautiful, Mom." · or she says nothing | she asks to be zipped, then asks, "Do I still look like someone you'd look at?" | yes | `laura_lonely`: the alone-in-bed line now names this night |
+| 3 | Ella zips her mother into her good dress. Mark calls from downstairs that he's going to the bar. Laura sits on the bed, dressed up, with nowhere to go | Ella; Mark, not looking | — | "You look beautiful, Mom." · or she says nothing | she asks to be zipped, then asks, "Do I still look like someone you'd look at?" Ryan's laugh comes up the stairs from the couch, and her hands stop on the zip: she looks at the door, not at Ella, and her chest rises fast under the slip (her want for Ryan, on her body, before step 4 says his name; shown only while Ryan is in the living room, his Saturday row ending 18:00; DECISIONS 124) | yes | `laura_lonely`: the alone-in-bed line now names this night |
 | 4 | through the gap: Laura comes, biting the back of her hand, and when her eyes open they're on the door, on Ella | **Laura sees Ella** | being caught watching her mother | she stays at the gap (Curious) | after: she doesn't pull the sheet up fast. "Go to bed, sweetheart." | **yes**: Laura finishes before she sees her | breakfast: "We don't talk about last night." · the gap changes |
 
 **Her voice (rule 7):** low line, "That's your mom. Go to bed." · high line, "She's lonely, and you can't stop
@@ -93,7 +95,7 @@ watching her be lonely." Both on each step sheet.
 |---|---|---|
 | 1 | none: step 1, and it says so | "It never fit me like that." |
 | 2 | she keeps a glass poured for two | "Like you get looked at." |
-| 3 | she leaves her door open while dressing | "Do I still look like someone you'd look at?" |
+| 3 | she leaves her door open while dressing; Ryan's laugh stops her hands on the zip | "Do I still look like someone you'd look at?" |
 | 4 | the alone-in-bed line names the dressed-up night | "We don't talk about last night." |
 
 **Final no:** "You're my mom. That's all you get to be. (ends her path)". Every catch after is a strict-mom punishment.

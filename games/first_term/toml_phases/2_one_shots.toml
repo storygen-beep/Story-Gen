@@ -69,16 +69,43 @@ wardrobeEffects = [ { action = "add", item_id = "sleep_shirt" }, { action = "add
 [[canvases.nodes.exit_block.choices]]
 text       = "Skip the opening"
 targetType = "node"
-nodeId     = "card"
+nodeId     = "skip_hall"
 time_progression_minutes = 45
 # (2026-11-01) dressed as the full opening leaves her, since the card now walks her to campus (DECISIONS 121)
-wardrobeEffects = [ { action = "add", item_id = "sleep_shirt" }, { action = "add", item_id = "towel" }, { action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" } ]
+wardrobeEffects = [ { action = "add", item_id = "sleep_shirt" }, { action = "add", item_id = "towel" } ]   # dressed on the hall screen's "Get dressed." (DECISIONS 124)
 flagEffects = [
   { targetType = "player", flag = "rent_starts", op = "set" },
   { targetType = "player", flag = "laura_rule_ryan_first", op = "set" },
   { targetType = "player", flag = "ryan_hall_seen", op = "set" },
 ]
 effects = [ { targetType = "player", trait = "ryan_step", op = "set", value = 1 }, { targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 10 } ]
+
+# ── the skip's one screen (DECISIONS 124, the-heat-ladder.md H2): a skipping player still meets Ryan by accident
+#    first. It shows the hall accident the skip records (ryan_hall_seen, his Want +10), then the card. ──
+[[canvases.nodes]]
+id   = "skip_hall"
+name = "The hall"
+
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You get the bathroom first, before anyone. When you come out in the towel, Ryan is in the hall. His eyes drop down your bare legs and come back up slow, and stop on the knot at your chest. He doesn't move out of your way."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "First day of college, huh. Look at you."
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_ryan"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get dressed."
+targetType = "node"
+nodeId     = "card"
+time_progression_minutes = 2
+wardrobeEffects = [ { action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" } ]
 
 # ── screen 3 · the problem ──
 [[canvases.nodes]]
@@ -191,14 +218,14 @@ text        = "Knock next time."
 targetType  = "node"
 nodeId      = "knock"
 time_progression_minutes = 3
-flagEffects = [ { targetType = "player", flag = "ryan_hall_knock", op = "set" } ]
+flagEffects = [ { targetType = "player", flag = "ryan_hall_knock", op = "set" }, { targetType = "player", flag = "ryan_hall_seen", op = "set" } ]
 
 [[canvases.nodes.exit_block.choices]]
 text        = "Stop and talk."
 targetType  = "node"
 nodeId      = "talk"
 time_progression_minutes = 3
-flagEffects = [ { targetType = "player", flag = "ryan_hall_talked", op = "set" } ]
+flagEffects = [ { targetType = "player", flag = "ryan_hall_talked", op = "set" }, { targetType = "player", flag = "ryan_hall_seen", op = "set" } ]
 effects     = [ { targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 5 } ]
 
 [[canvases.nodes.exit_block.choices]]

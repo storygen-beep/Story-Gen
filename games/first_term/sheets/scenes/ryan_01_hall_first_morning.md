@@ -1,4 +1,6 @@
-# [READY] Scene — ryan_01_hall_first_morning
+# [REVIEW]] Scene — ryan_01_hall_first_morning
+
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > Signed by LO: LO, 2026-10-08.
 

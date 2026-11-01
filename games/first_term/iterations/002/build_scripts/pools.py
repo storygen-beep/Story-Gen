@@ -89,24 +89,25 @@ FLASH = ("\"Flash them, babe. Three seconds,\" Zoe says. The circle goes quiet. 
 from sheetbeats import beat
 D_ = lambda key: beat("zoe_dares", key)
 TOGETHER, APART = flag("zoe_together"), flag("zoe_together", False)
-TIER = {"low": [[APART, trait("corruption", "lt", 40), trait("exhibitionism", "lt", 40)]],
-        "high": [[APART, trait("corruption", "gte", 40)], [APART, trait("corruption", "lt", 40), trait("exhibitionism", "gte", 40)]],
-        "z": [[TOGETHER]]}
-ZOE_LINE = {"low": "Flash the guy at the keg. Or kiss the cocky guy. Properly. Pick.",
-            "high": "Topless in the kitchen till the song ends. Or his lap, till he's hard. Make him beg.",
+# DECISIONS 124: the room watches every dare but the kiss, and a watched act is Watched (Exhibitionism 60).
+TIER = {"low": [[trait("exhibitionism", "lt", 60)]],
+        "high": [[APART, trait("exhibitionism", "gte", 60)]],
+        "z": [[TOGETHER, trait("exhibitionism", "gte", 60)]]}
+ZOE_LINE = {"low": "Kiss the cocky guy. Properly. Tongue, hands, the lot.",
+            "high": "Flash the guy at the keg. Or topless in the kitchen till the song ends. Or his lap, till he's hard. Make him beg.",
             "z": "Kiss me where they can see. Or let me watch you with him."}
-YESES = {"low": [("\"Watch me.\"", "low_show", [trait("exhibitionism", "gte", 20)], "Needs Exhibitionism 20", "keg"),
-                 ("\"Watch this.\"", "low_do", [trait("corruption", "gte", 20)], "Needs Corruption 20", "cocky")],
-         "high": [("\"Start the song.\"", "high_show", [trait("exhibitionism", "gte", 40)], "Needs Exhibitionism 40", "keg"),
+YESES = {"low": [("\"Watch this.\"", "low_do", [trait("corruption", "gte", 20)], "Needs Corruption 20", "cocky")],
+         "high": [("\"Watch me.\"", "low_show", [], None, "keg"),
+                  ("\"Start the song.\"", "high_show", [], None, "keg"),
                   ("\"Easy.\"", "high_do", [trait("corruption", "gte", 40), trait("exhibitionism", "gte", 20)], "Needs Corruption 40", "cocky")],
          "z": [("\"Here?\"", "z_show", [], None, "cocky"),
                ("\"Watch, then.\"", "z_do", [], None, "cocky")]}
-PAY = {"low_show": [capped("exhibitionism", 1, CAP_CUR)],
+PAY = {"low_show": [capped("exhibitionism", 1, 79)],
        "low_do": [capped("corruption", 1, CAP_CUR), capped("exhibitionism", 1, CAP_CUR)],
-       "high_show": [capped("exhibitionism", 1, CAP_BOLD), capped("corruption", 1, CAP_BOLD)],
-       "high_do": [capped("corruption", 1, CAP_BOLD), capped("exhibitionism", 1, CAP_BOLD)],
-       "z_show": [capped("corruption", 1, CAP_BOLD), capped("exhibitionism", 1, CAP_BOLD)],
-       "z_do": [capped("corruption", 1, CAP_BOLD), capped("exhibitionism", 1, CAP_BOLD)]}
+       "high_show": [capped("exhibitionism", 1, 79), capped("corruption", 1, 79)],
+       "high_do": [capped("corruption", 1, 79), capped("exhibitionism", 1, 79)],
+       "z_show": [capped("corruption", 1, 79), capped("exhibitionism", 1, 79)],
+       "z_do": [capped("corruption", 1, 79), capped("exhibitionism", 1, 79)]}
 MEDIA = {"low_show": VID("a girl flashing her breasts at a guy by a keg at a house party", "girl flashes guy at keg party", "party flash dare keg", pool_dir="sex/zoe_dare_low_show_t4"),
          "low_do": VID("a girl kissing a guy hard at a party, his hands on her ass, people cheering", "girl kisses guy at party dare", "dare kiss party hands on ass", pool_dir="sex/zoe_dare_low_do_t3"),
          "high_show": VID("a topless girl in a crowded party kitchen, everyone staring", "topless girl party kitchen", "topless dare at party", pool_dir="sex/zoe_dare_high_show_t4"),
@@ -145,7 +146,7 @@ out.append({
               D(C, "You again. Where's my beer?")),
         ], dare_choices + [
             go("\"Not tonight.\"", node="no", mins=1),
-            go("Zoe's next dare. (Needs Corruption 60)", node="dare", swl=True, cond_=cond(trait("corruption", "gte", 60))),
+            go("Zoe's next dare. (Next release)", node="dare", swl=True, cond_=cond(NEXT_RELEASE)),
         ]),
         *dare_nodes,
         node("no", "Boo", [D(Z, "Boo. Next one's tamer."), P("She goes and dares the guy on the couch to drink something from the sink instead. He does.")],
@@ -205,9 +206,9 @@ out.append({
         POOL(P("You walk the loop round the pond. Ducks, dog walkers, a man on a bench with a newspaper. He's reading it, but he lowers it as you pass."),
              P("The wind comes off the water, cold enough to make you hug yourself. A jogger turns his head to watch you go by, and nearly runs into a bin."),
              P("Two guys playing frisbee stop playing frisbee while you walk past. One of them says something. The other one laughs."), pid="park_walk_lines"),
-        G(cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}), P("The skirt is a problem in this wind. You let it be a problem.")),
+        G(cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}), P("The skirt is a problem in this wind. It flips up over your ass, and a dog walker stops dead on the path to stare. You let it be a problem.")),
         G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}), P("No bra, and the air is cool. Every man on the path finds a reason to look at your chest.")),
-    ], [go("Finish the loop.", loc="park", mins=30), go("Let strangers see. (Needs Corruption 60)", node="wall", swl=True, cond_=cond(trait("corruption", "gte", 60)))]),
+    ], [go("Finish the loop.", loc="park", mins=30), go("Let strangers see. (Next release)", node="wall", swl=True, cond_=cond(NEXT_RELEASE))]),
         node("wall", "Further", [P("That's further than you go in this release of First Term.")], [go("Back.", loc="park")])]})
 
 out.append({
@@ -219,7 +220,7 @@ out.append({
           P("Leggings and a top, the normal way. You run the loop twice and your lungs burn and nobody looks twice, except the old man on the bench who looks at everybody.")),
         G(cond(*SPORTS_ONLY["items"], {"type": "worn_type", "operator": "eq", "value": "leggings"}), P("Just the sports bra and your leggings, and it's like you've set off an alarm. Heads turn on the whole loop. A guy doing push-ups stops at the top of one and stays there.")),
         G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}, {"type": "clothing_slot", "slot": "top", "operator": "equipped"}),
-          P("No bra under your top, and every stride shows it. A cyclist wobbles. A man walking his dog lets the dog walk him into a hedge.")),
+          P("No bra under your top, and every stride shows it: your tits bounce, your nipples hard against the cloth. A cyclist wobbles. A man walking his dog lets the dog walk him into a hedge. One of them calls something after you. You don't slow down.")),
         POOL(P("You finish at the gates with your hands on your knees, sweating, buzzing."), P("Your legs are jelly by the end. Your face is red and not only from running.")),
     ], [
         go("Cool down. (10 energy)", loc="park", mins=40, costs=[{"trait": "energy", "value": 10}], cond_=DARING_RUN, eff=[capped("exhibitionism", 1, CAP_BOLD)]),
@@ -242,10 +243,13 @@ out.append({
     "trigger": {"location": "park", "is_repeatable": True, "priority": 3, "is_active": True, "max_triggers_per_day": 1},
     "nodes": [node("photo", "A selfie", [
         # Iteration 002, part 8 (reader): nothing is posted until she posts it.
-        P("You find a spot by the willow and take twenty photos to get one. A man on a bench watches you do it, every angle."),
-        G(cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}), P("The best one is the one where the wind has the skirt.")),
+        P("You find a spot by the willow and take twenty photos to get one. A man on a bench watches you do it, every angle, his eyes on your ass each time you bend for the shot. He folds his paper into his lap. Whatever you post stays up for anyone to see."),
+        G(cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}), P("The best one is the one where the wind has the skirt, and your ass is half out of it. Post that, and everyone who follows you sees it, for good.")),
         G(SPORTS_ONLY, P("Sports bra, sweat, the pond behind you.")),
-    ], [go("Post it.", node="posted", mins=10, eff=[add("followers", 2, clamp=False), capped("exhibitionism", 1, CAP_BOLD)]), go("Delete them all.", loc="park", mins=5)]),
+    ], [  # DECISIONS 124: the skirt photo on her feed is a flash for a group, Watched
+        go("Post it.", node="posted", mins=10, cond_=cond({"type": "worn_type", "operator": "neq", "value": "short_skirt"}), eff=[add("followers", 2, clamp=False), capped("exhibitionism", 1, CAP_BOLD)]),
+        go("Post it.", node="posted", mins=10, cond_=cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}, trait("exhibitionism", "gte", 60)), eff=[add("followers", 2, clamp=False), capped("exhibitionism", 1, 79)]),
+        go("Delete them all.", loc="park", mins=5)]),
         node("posted", "Posted", [
             P("You post it."),
             G(SPORTS_ONLY, P("The likes start before you've got your breath back.")),
@@ -295,14 +299,14 @@ out.append({
     "trigger": {"location": "park", "requires_npc": Z, "is_repeatable": True, "priority": 5, "is_active": True, "max_triggers_per_day": 1,
                 "schedules": [{"weekdays": [5, 6], "start_time": "08:00", "end_time": "09:30"}],   # done before her park row ends at 10:00
                 # after a run with her (the "Run a lap with her" button, within the hour): park_hidden.md (part 8, reader)
-                "conditions": cond(BOLD, trait("zoe_step", "gte", 3), flag("ran_with_zoe"),
+                "conditions": cond(trait("corruption", "gte", 60), trait("zoe_step", "gte", 3), flag("ran_with_zoe"),   # strangers able to see: Hungry (DECISIONS 124)
                                    {"type": "hours_since_flag", "subject": "player", "flag_key": "ran_with_zoe", "operator": "lt", "value": 1})},
     "nodes": [
         node("pull", "After the run", [P("Zoe jogs to a stop beside you, pink and breathless, and grabs your wrist."), D(Z, "Come here. I know a place.")],
              [go("Follow her.", node="hidden", mins=5), go("\"Not here, Zo.\"", node="no", mins=1)]),
         node("hidden", "The hollow", [P("A man walking his dog slows on the path above the hollow, looks your way, and walks on."), P(HIDDEN),
             VID("two girls in running clothes hidden in bushes, one with her hand down the other's leggings, kissing against a tree", "girl fingers girlfriend in park bushes", "lesbian hidden in park hand down leggings", pool_dir="sex/park_hidden_t5")],
-            [go("Back to the path.", node="after", mins=15, eff=[capped("corruption", 1, CAP_BOLD)])]),
+            [go("Back to the path.", node="after", mins=15, eff=[capped("corruption", 1, 79)])]),
         node("after", "Back on the path", [D(Z, "Same time next weekend. Don't be late."), P("She jogs off backwards, grinning, and doesn't fix her hair.")], [go("Go.", loc="park", mins=2)]),
         node("no", "Not here", [D(Z, "Your loss, babe."), P("She laughs and runs off ahead, looking back over her shoulder every few strides.")], [go("Go.", loc="park", mins=5, flags=[fset("park_cool_zoe")])]),
     ]})
@@ -334,21 +338,36 @@ for cid, loc, name, text, back, extra in [
 # ═════════════ THE STAIRS (wardrobe event): a short skirt or no panties, someone below ═════════════
 SKIRT = {"type": "worn_type", "operator": "eq", "value": "short_skirt"}
 NO_PANTIES = {"type": "clothing_slot", "slot": "underwear", "operator": "unequipped"}
+MARK_BELOW = {"type": "npc_at_location", "location_id": "home_living_room", "npc_id": M, "operator": "is_present"}
+MARK_NOT_BELOW = {"type": "npc_at_location", "location_id": "home_living_room", "npc_id": M, "operator": "is_absent"}
 out.append({
     "id": "wardrobe_event_stairs", "name": "Take the stairs slowly",
     "description": "The stairs event (wardrobe pool): a short skirt or no panties, and someone below. Exhibitionism +1, once a day.",
     "trigger": {"location": "home_hall", "is_repeatable": True, "priority": 3, "is_active": True, "max_triggers_per_day": 1,
-                "conditions": cond(SKIRT, trait("exhibitionism", "gte", 20))},
+                # (DECISIONS 124) only with Mark below to see it (reader: an empty house paid her for nobody);
+                # the evaluator takes flat lists, so one watcher is the trigger and the others are extra lines
+                "conditions": cond(SKIRT, trait("exhibitionism", "gte", 20), MARK_BELOW)},
     "nodes": [node("stairs", "The stairs", [
         P("You go up the stairs slowly, one hand on the rail."),
         G(cond({"type": "npc_at_location", "location_id": "home_living_room", "npc_id": M, "operator": "is_present"}),
-          P("Mark comes out of the living room into the hall below just as you reach the top. He stops. He looks up the stairs, straight up your skirt, and doesn't look away until you're on the landing.")),
+          # copy fixes A16 + C34 merged (DECISIONS 125): mid-climb, so both exits below ("Hold your skirt down." /
+          # "Take the stairs slower.") still answer him
+          P("Mark comes out of the living room into the hall below when you're halfway up. He stops. He looks up the stairs, straight up your skirt to your ass, and he doesn't look away. His hand has gone white on the banister."),
+          D(M, "That skirt doesn't go up stairs in my house, @player."),
+          P("He stays at the bottom of the stairs and waits to see what you do.")),
         G(cond({"type": "npc_at_location", "location_id": "home_ryan_room", "npc_id": R, "operator": "is_present"}),
           P("Ryan is coming down as you go up. You pass on the narrow stairs, and he has to flatten himself to the wall, and his eyes go down your legs on the way past.")),
         G(cond({"type": "npc_at_location", "location_id": "home_kitchen", "npc_id": L, "operator": "is_present"}),
           D(L, "Is that for college or for a guy?")),
-        G(cond(SKIRT, NO_PANTIES), P("There's nothing under the skirt. Anyone at the bottom of these stairs gets everything, and you climb slower.")),
-    ], [go("Keep climbing.", loc="home_hall", mins=2, eff=[capped("exhibitionism", 1, CAP_BOLD)])])]})
+        G(cond(SKIRT, NO_PANTIES), P("There's nothing under the skirt. Anyone at the bottom of these stairs gets your bare ass and your pussy.")),
+    ], [  # DECISIONS 124 (H5): a way out that pays her nothing; the watcher's look moves his meter; only her going slower pays her
+        go("Hold your skirt down.", loc="home_hall", mins=2, cond_=cond(MARK_BELOW), eff=[nadd(M, "want", 1)]),
+        go("Hold your skirt down.", loc="home_hall", mins=2, cond_=cond(MARK_NOT_BELOW)),
+        go("Take the stairs slower.", loc="home_hall", mins=3, cond_=cond({"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}),
+           eff=[capped("exhibitionism", 1, CAP_CUR)]),
+        go("Take the stairs slower.", loc="home_hall", mins=3, cond_=cond(NO_PANTIES, trait("exhibitionism", "gte", 40)),
+           eff=[capped("exhibitionism", 1, CAP_BOLD)]),
+    ])]})
 
 # Iteration 002, part 3: leaving this outing after 22:00 sets late_party and came_home_late (Q69,
 # the street sheet "Why she's late"; canv.mark_late). Each is read for 4 hours; her bed clears them.

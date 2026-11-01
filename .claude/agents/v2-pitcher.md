@@ -75,6 +75,10 @@ and A14; and, given a thread, "Her life — the threads" in `references/the-want
 - **The pitch fills the step row** (`the-sheets.md` S14): the moment, who sees or knows, what she risks,
   how she says yes, his move, does it finish, what changes after. A pitch with two empty columns is not
   returned: pick again. One empty column says why it is empty on purpose.
+- **The pitch names its kind and the stage it opens at** (`the-heat-ladder.md` H1, H3). A chosen act of hers
+  below its stage is not returned, and nor is her first chosen act with step-family or anyone she lives with
+  when no accident with that person comes before it (H2). A low-heat step names a part of her body, his
+  reaction, and a "not yet" or a price (H4): talk only is not returned.
 - **The clip is part of the pitch.** Say what it is, so it can be found.
 - **Adults only.** Never set anything in a school or with anyone under 18. An adult college is allowed:
   everyone 18+ and stated, university words only, never a word on the banned list (`the-voice.md`,

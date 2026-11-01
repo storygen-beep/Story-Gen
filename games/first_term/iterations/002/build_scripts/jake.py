@@ -35,7 +35,7 @@ out.append({
             go("\"Not now.\"", node="no", mins=2),
         ]),
         node("kiss", "In front of them", [
-            P("He kisses you right there, in front of all of them, his hand low on your back, low enough that it's on your ass by the end. Somebody whistles. He pulls back grinning."),
+            P("He kisses you right there, in front of all of them, his hand low on your back, low enough that it's on your ass by the end. Somebody whistles. You feel him hard against your hip, and you move his hand back up to your waist. Not in front of them. Not yet. He pulls back grinning, red to the ears."),
             D(J, "Again. They missed it."),
             T("He wants them to see you're his. You want them to see too."),
         ], [go("\"Again.\"", node="ask", mins=3, eff=[add("exhibitionism", 3)])]),
@@ -160,7 +160,7 @@ out.append({
             P("Jake's asleep in under a minute, one arm heavy across you, taking up most of the bed."),
             G(cond(RYAN_PAST_5), P("Through the wall, very low, so low you might have dreamed it:"), D(R, "…@player.nickname?"), T("He heard. Every second.")),
         ], [go("Sleep.", loc="home_ella_room", mins=360, consumes=True,
-               eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 3, "cap": 59}, setv("jake_step", 4), nadd(R, "want", 5)],
+               eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 3, "cap": 79}, setv("jake_step", 4), nadd(R, "want", 5)],   # a Bold one-time step (DECISIONS 124)
                flags=[fset("jake_04_done"), fset("jake_first_time"), funset("jake_date_booked")])]),
     ]})
 
@@ -181,23 +181,25 @@ out.append({
             P("Jake parks outside the house and kills the engine. The street lamp lights the whole car."),
             G(cond(LAURA_DRESS), D(J, "Everyone was looking at you tonight.")),
         ], [
-            go("Kiss him.", node="car_low", mins=2, cond_=cond(trait("corruption", "lt", 40), trait("jake_step", "eq", 3))),
-            go("\"Your hand. Now.\"", node="car_his", mins=2, cond_=cond(BOLD, trait("jake_step", "eq", 3))),
-            go("\"Lean back.\"", node="car_hers", mins=2, cond_=cond(BOLD, trait("jake_step", "eq", 3))),
+            # DECISIONS 124: grinding in his lap is private contact (Bold); his hand or hers under the street lamp is sex strangers can see (Hungry).
+            # jake_step gte 3, not eq 3: his step 4 takes the first Bold Saturday, so the car stays open after it.
+            go("Kiss him.", node="car_low", mins=2, cond_=cond(BOLD, trait("corruption", "lt", 60), trait("jake_step", "gte", 3))),
+            go("\"Your hand. Now.\"", node="car_his", mins=2, cond_=cond(trait("corruption", "gte", 60), trait("jake_step", "gte", 3))),
+            go("\"Lean back.\"", node="car_hers", mins=2, cond_=cond(trait("corruption", "gte", 60), trait("jake_step", "gte", 3))),
             go("\"Come up.\"", node="sneak", mins=5, cond_=cond(trait("jake_step", "gte", 4)),
                eff=[{"targetType": "player", "trait": "jake_catch_roll", "op": "set", "value": {"type": "random", "min": 1, "max": 8}}]),
             go("\"Goodnight, Jake.\"", node="night", mins=2),
-            go("Jake, further. (Needs Corruption 60)", node="door", swl=True, cond_=cond(trait("corruption", "gte", 60))),
+            go("Jake, further. (Next release)", node="door", swl=True, cond_=cond(NEXT_RELEASE)),
         ]),
         node("car_low", "The car", [*top_or_dress(beat("jake_date_end", "car_low")),
             VID("a couple making out in a parked car at night, windows fogging", "couple making out parked car night", "car makeout outside her house", pool_dir="sex/jake_car_low_t4")],
-            [go("\"Goodnight, gorgeous.\"", loc="home_hall", mins=20, eff=CAR_PAY(39), flags=[funset("jake_date_booked")])]),
+            [go("\"Goodnight, gorgeous.\"", loc="home_hall", mins=20, eff=CAR_PAY(59), flags=[funset("jake_date_booked")])]),
         node("car_his", "His hand", [*top_or_dress(beat("jake_date_end", "car_his")),
             VID("a guy fingering his girlfriend in a parked car under a street lamp", "fingering in parked car", "car fingering orgasm street lamp", pool_dir="sex/jake_car_his_t5")],
-            [go("\"Goodnight, gorgeous.\"", loc="home_hall", mins=20, eff=CAR_PAY(59), flags=[funset("jake_date_booked")])]),
+            [go("\"Goodnight, gorgeous.\"", loc="home_hall", mins=20, eff=CAR_PAY(79), flags=[funset("jake_date_booked")])]),
         node("car_hers", "Your hand", [*top_or_dress(beat("jake_date_end", "car_hers")),
             VID("a girl giving her boyfriend a handjob in a parked car, a passer-by looking", "handjob in parked car", "car handjob caught", pool_dir="sex/jake_car_hers_t5")],
-            [go("\"Goodnight, gorgeous.\"", loc="home_hall", mins=20, eff=CAR_PAY(59), flags=[funset("jake_date_booked")])]),
+            [go("\"Goodnight, gorgeous.\"", loc="home_hall", mins=20, eff=CAR_PAY(79), flags=[funset("jake_date_booked")])]),
         node("sneak", "Up the stairs", [
             POOL(P(beat("jake_date_end", "`sneak` a")), P(beat("jake_date_end", "`sneak` b")), pid="jake_sneak", bag=True),
             # (reader fix) Laura is downstairs, waiting up, on a Saturday night: her feet on the stairs, not her door
@@ -212,7 +214,9 @@ out.append({
 
 # ── his hubs: the quad (mornings), the canteen (lunch), Zoe's party ──
 JAKE_STATE = [
-    G(cond(SKIRT), D(J, "Guys. Look at her."), P("He says it to whoever's nearest.")),
+    G(cond(SKIRT), D(J, "Guys. Look at her."),
+      P("He says it to whoever's nearest, and his hand slides down onto your ass so they know whose legs they're looking at. His own eyes keep dropping to your hem."),
+      D(J, "Later. When they're not looking.")),
     G(cond(ZOE_DRESS), P("His eyes go down your legs and stay there.")),
     G(cond(LAURA_DRESS), D(J, "Everyone was looking at you tonight.")),
     G(cond(trait("jake_step", "eq", 1)), P("He puts his hand low on your back the second you're close enough.")),
@@ -270,8 +274,8 @@ out.append({
             D(J, "Ten. Look at you. Ten."),
         ], [go("Done.", loc="campus", mins=5)]),
         node("hips", "His hands on your hips", [
-            P("He stands behind you at the rack and puts his hands on your hips to show you how low to go. They stay there on the way down, and on the way back up, and on the next one too. Somebody on the team whistles."),
-            D(J, "Lower. Like that. Perfect."),
+            P("He stands behind you at the rack and puts his hands on your hips to show you how low to go. They stay there on the way down, and on the way back up, and on the next one too. On the third rep your ass brushes him and he's hard, and he steps back fast. Somebody on the team whistles."),
+            D(J, "Lower. Like that. Not here, though. Not with them watching."),
         ], [go("Done.", loc="campus", mins=5)]),
         node("lockers", "Against the lockers", [
             P("You take his wrist and walk him into the empty locker room, and he lets you. He kisses you up against the lockers, hard enough that the metal rattles, his hands on your waist, until someone's voice in the corridor makes you both stop."),
@@ -284,7 +288,7 @@ cards = step_cards(J, {
     2: ("He's got your number. He hangs out on the quad with his team.", "A Monday, Wednesday or Friday morning on the quad, Jake and his team (Curious or Daring)"),
     3: ("Saturday. He picks you up at the door.", "Saturday night: a date with Jake, back to the front door after eleven (Curious, Daring)"),
     4: ("His car outside the house, Saturday after Saturday. He wants more than the car.", "Saturday night after a date: the front door (Bold)"),
-}, met_flag="jake_met", terminal_text=("Saturdays: a date, and your room after.", "Jake, further. (Needs Corruption 60.)"), skip=(1,))
+}, met_flag="jake_met", terminal_text=("Saturdays: a date, and your room after.", "Jake, further. (Next release)"), skip=(1,))
 
 text = ("# =============================================================================\n"
         "# First Term — 5 · scenes · JAKE (sheets/scenes/jake_*.md, people/npc_jake.md)\n"

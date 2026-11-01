@@ -1,5 +1,7 @@
 # [READY] Person — Mark
 
+> **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): a first accident at home (`mark_00_the_dryer`) that his chosen acts follow; step 3's "Go up and change." at Daring after it; the two touches at Bold; channel 5 at Curious; his towel buttons pay her like Ryan's. Sections changed: Ladder, Everyday, the towel, channel 5.
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the release-1 ladder, from `proposals/MARK_R1_LADDER.md` (signed 2026-11-01). Changed: what he keeps, Ladder, the seven columns, Leak and promise, step 4, Everyday (the paid-look column cut), Cut, Rows a gate needs. Everything else as signed.
 
 > **Changed 2026-10-31, re-signed by LO 2026-10-31** (DECISIONS 98): the towel at home.
@@ -53,7 +55,8 @@
 |---|---|---|---|---|---|---|---|
 | 1 | `mark_01_count_it_slowly` | `home_kitchen` | Sun 08:00–12:00 | `rent_starts` | want add +10 | "Let me get dressed first." (parked) | Sunday morning, the kitchen: Mark counts the rent. |
 | 2 | `mark_02_late_notice` | `home_kitchen` | Mon, Tue, Wed, Thu, Fri, Sun 22:00–00:00 | step 1 (was his Want 10) | want add +10 · `knows_mark_debt` set | "Shut the drawer." (parked) | Late at night, the kitchen drawer: Mark is on the phone next door. |
-| 3 | `mark_03_shorts` | `home_kitchen` | Sun 08:00–12:00 | step 2 · she has been short once (`rent_carried` set; was Corruption 20 · Exhib. 20 · his Want 20) | want add +10 · exhibitionism add +3 · `mark_dress_rule` set | "I'm not changing for you." (parked) | Sunday morning at the table, after a short week: Mark wants shorts this time. |
+| 0 | `mark_00_the_dryer` (new, an accident: H2) | `home_garage` | Sat 09:00–17:00, once | Mark in the garage · `opening_done` | his Want +5 · `mark_saw_her` set · her "Take your time." Exhibitionism +1, cap 19 | "Tug the shirt down." (pays nothing; his Want stands) | not a card: it happens to her |
+| 3 | `mark_03_shorts` | `home_kitchen` | Sun 08:00–12:00 | step 2 · she has been short once (`rent_carried` set; was Corruption 20 · Exhib. 20 · his Want 20) · `mark_saw_her` · "Go up and change." needs Exhibitionism 20 (DECISIONS 124) | want add +10 · exhibitionism add +3 · `mark_dress_rule` set | "I'm not changing for you." (parked) | Sunday morning at the table, after a short week: Mark wants shorts this time. |
 | 4 | `mark_06_our_arrangement`, reworked (top step) | `home_garage` | Mon, Tue, Thu, Fri 19:00–22:00 | step 3 · Ryan's step 4 done (was Corruption 40 · his Want 50) | want add +10 · `mark_arrangement` set | "There's no arrangement." (parked) | An evening in the garage: Mark saw something, and wants to talk terms. |
 | — | locked | his card | — | — | — | — | "Mark, later. (After the house is yours.)" |
 
@@ -131,14 +134,15 @@ Each follow-up waits for her reply (`after_round`), and a different answer follo
 ## Everyday at home (system `home_life`, LO's picks, 2026-10-08)
 
 Each item is a choice inside Mark's hub in that room and window. Raise: Mark's Want add +1, once a day
-per item. Tease from Curious and Mark step 3. **Changed 2026-11-01: the paid-look column below is cut** (no money
+per item. Tease from Curious and Mark step 3, after his accident (`mark_saw_her`, DECISIONS 124); a touch (the pan,
+leaning back into him) needs Bold. **Changed 2026-11-01: the paid-look column below is cut** (no money
 for her body, LO); it stays in this table only as the record of what was cut. Lines are samples (guess).
 
 | item | where · when | plain (Good Girl) | tease (Curious) | the paid look (Bold) |
 |---|---|---|---|---|
 | Sunday breakfast and coffee | kitchen · Sun 08:00–11:00, after the count | He slides the paper over. "Eat, @player. Then the rent." | In the sleep shirt: "Your mother lets you sit like that?" His eyes stay on @player's legs. | "Twenty." The bill on the table. @player lifts the shirt to the ribs, and he looks at @player's tits until the coffee goes cold. |
 | dinner | kitchen · Mon, Tue, Thu, Fri 18:00–19:00 (with Laura) · Wed 18:00–20:00 (he cooks) | Burnt chops. "Your mother cooks. I fill plates." | He watches @player eat. "Slower." | — |
-| help him cook | kitchen · Wed 18:00–19:00 | "Hand me the salt. No, the other salt." | @player reaches past him for the pan; he doesn't move, and @player's ass presses his hip. | — |
+| help him cook | kitchen · Wed 18:00–19:00 | "Hand me the salt. No, the other salt." | Bold (was Curious): @player reaches past him for the pan; he doesn't move, and @player's ass presses his hip. | — |
 | dishes | kitchen · Wed and Sun 19:00–21:00 | He dries, slow. "You missed one." | @player bends to the dishwasher in a short skirt. He stops drying. | "Twenty and you stay bent." His bill on the counter; his eyes on @player's ass in the panties. |
 | late TV and a beer | living room · Sun–Fri 22:00–00:00 · Mon–Sat 00:00–02:00 | The game on low. "Laura's upstairs. Keep it down." | He hands @player a beer. @player curls up on the couch in the sleep shirt; he counts the inches of leg. | "Twenty. The shirt." He watches the TV light on @player's bare tits. |
 | laundry | garage, at the washer · Mon, Tue, Thu, Fri 19:00–22:00 · Sat 09:00–17:00 | "Whites with whites, @player." | @player's panties in the basket on top. He picks them up, turns them over, puts them back. | "Leave those. I'll fold them." A bill under the basket. |
@@ -159,7 +163,15 @@ Mark's living room (up late) and kitchen hubs react to the towel, every visit. B
 | 60+ | "Stand there. Let me look at you." / "Don't you dare go and change." / "Come here." | "Did I say you could cover up?" He looks as long as he likes. |
 
 - "Drop it." needs Exhibitionism 40 and his Dominance 60+, no story step (LO, 2026-10-31): "Turn round." "Pick it up. Slowly."
-- Pays his Dominance +2 once a day (`mark_towel_today`). Laura in the room: caught, her Love −3, no pay.
+- Pays his Dominance +2 once a day (`mark_towel_today`), and "Let it slip." / "Drop it." pay her Exhibitionism +1
+  like Ryan's (cap 39 / 59; DECISIONS 124, was his only). Laura in the room: caught, her Love −3, no pay.
+
+## The random reach and channel 5 (DECISIONS 124)
+
+- `home_event_mark_reach` (Sunday kitchen, 25%): an accident; "Duck out of his way." pays his Want only. "Lean back
+  into him." needs Corruption 40 (was 20): her body against his is a touch, Bold.
+- Channel 5 with him, "Leave it on." (`living_tv_channels.md`, `mleave`): needs Corruption 20 (was ungated). Watching
+  porn beside him is a chosen act for one person she knows, Curious. Alone, the TV stays at Good Girl (DECISIONS 86).
 
 ## Rows a gate needs
 
