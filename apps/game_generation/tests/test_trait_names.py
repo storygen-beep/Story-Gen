@@ -106,6 +106,20 @@ def test_the_dev_list_skips_only_hidden_so_a_sidebar_meter_keeps_its_buttons():
     assert "setup.hiddenTraits.includes(_nk)" in npc and "dumpSkipTraits" not in npc
 
 
+def test_the_dev_screen_is_in_dev_builds_only():
+    """The dev screen (2026-11-02): a DevPage, its script and a sidebar button in --dev; a
+    player build carries only an empty devButton widget (the dev caption is the only caller)."""
+    graph = build_game_graph(normalize(_raw()))
+    dev = TweeComprehensiveGeneratorV2().generate(graph.project, {"dev_mode": True}, graph=graph)
+    assert "\n:: DevPage\n" in dev and ":: DevPageScript [script]" in dev
+    assert "<<devButton>>" in dev and "setup.devSteps = function" in dev
+    assert '"DevPage"' in dev  # an info page: commitMoment publishes its changes, Back skips it
+    graph = build_game_graph(normalize(_raw()))
+    plain = TweeComprehensiveGeneratorV2().generate(graph.project, {}, graph=graph)
+    assert ":: DevPage\n" not in plain and "setup.devSteps" not in plain
+    assert '<<widget "devButton">><</widget>>' in plain
+
+
 def test_the_python_side_now_asks_for_an_npc_only_gates_suffix():
     board = _passage(_twee(), BOARD)
     npc_only = next(l for l in board.splitlines() if "Ask him to stay." in l and "locked-choice" in l)
