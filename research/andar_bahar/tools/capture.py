@@ -109,7 +109,9 @@ class Recorder:
         self.last_frame_ts = time.time()
 
     def stalled(self, now: float | None = None) -> bool:
-        return (now or time.time()) - self.last_frame_ts >= STALL_SECONDS
+        # Not before the first game message: until then the user may be logging in by hand,
+        # and a reload would wipe the half-filled login form.
+        return self.frames > 0 and (now or time.time()) - self.last_frame_ts >= STALL_SECONDS
 
     # -- DOM fallback ------------------------------------------------------
 

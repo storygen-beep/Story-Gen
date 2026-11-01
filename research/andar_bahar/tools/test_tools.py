@@ -242,6 +242,9 @@ def test_capture_notices_inactivity_disconnect(tmp_path):
     rec.poll(FakePage("Statistics\nB\nA\n1:1\nANDAR"))
     assert not rec.disconnected and rec.snapshots == 1
     import capture
+    rec.frames = 0
+    assert not rec.stalled(rec.last_frame_ts + capture.STALL_SECONDS)   # waiting for a login
+    rec.frames = 1
     assert not rec.stalled(rec.last_frame_ts + capture.STALL_SECONDS - 1)
     assert rec.stalled(rec.last_frame_ts + capture.STALL_SECONDS)
 
