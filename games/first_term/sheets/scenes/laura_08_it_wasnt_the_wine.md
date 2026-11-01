@@ -1,4 +1,6 @@
-# [READY] Scene — laura_08_it_wasnt_the_wine
+# [CUT] Scene — laura_08_it_wasnt_the_wine
+
+> **CUT 2026-11-01** (DECISIONS 113): Laura's release-1 ladder cuts her climb toward Ella (`npc_laura.md`). Kept on disk as the record; not built in release 1.
 
 > **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
 

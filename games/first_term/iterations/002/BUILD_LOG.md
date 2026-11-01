@@ -991,3 +991,117 @@ sheets' own, and none is a tease, touch or paid look.
 - Sheets `people/npc_ryan.md`, `npc_mark.md`, `npc_laura.md` get a towel section, waiting for LO's re-sign. Snapshot: `first_term_snapshots/20261031_towel_before/`.
 - Rebuilt with dev + debug. Gates 61/89, the same pass/fail on every gate. Explicit floor 12.8% to 17.0% of repeatable beats; 54/76 explicit beats carry a clip (71%, floor 50%). "Her climb" (already failing) went from 10 to 17 problems: the towel pay makes Ryan's room hub and others count as paid repeatables open on a new save.
 - Probe `towel.js` 22/22, 0 page errors: the band line follows the meter; Daring 19 / 20 and the Drop gates; pay once, unpaid the same day; `advanceDay()` clears the flag; dressed shows nothing; Laura at dinner catches it (Love −3); Mark Drop +2; Mark's garage untouched; Laura's fix without Daring, Love +2; her room only while she dresses; the bathroom knock.
+
+## 2026-10-31: the towel, LO's three answers (DECISIONS 98)
+
+- "Drop it." loses its story step (LO: "no"): Ryan and Mark now need only Exhibitionism 40 and their top band (`ryan.py`, `mark.py` `drop_gate=[SHOWING]`).
+- Laura's kitchen towel line stays the built one, "Go and get dressed, sweetheart. You'll catch your death."; `npc_laura.md` row "her line: towel" now says it (LO's pick).
+- `npc_ryan.md`, `npc_mark.md`, `npc_laura.md`: the towel section re-signed by LO 2026-10-31.
+- Rebuilt with dev + debug. Gates 61/89, the same per gate. Probe `towel.js` 22/22, 0 page errors (Drop it now shows at Ryan's step 5).
+
+## 2026-11-01: release 1, slice A — the systems (DECISIONS 112–121)
+
+- Baseline first: the unchanged build gave gates 61/89 and a byte-identical `7_final_game.toml`.
+- Engine: a rent late fee. `rent_late_fee` (a player trait) is part of the next Sunday's due under `on_short = "carry"`, said on its own line ("Late fee: $15."), zeroed by a full payment, folded into `owed` by a carry (`v2.py` RentDay, `setup.carryRent`). Three new tests in `test_rent_carry.py`; rent tests 42 passed. It was needed because `rent_state.owed` is reachable by no effect or condition.
+- The ledger (`v2_state.json`): the dean's Monday 08:00–09:00 row (`when` dean_met) and `dean_office` hours "Mon 08:00-09:00; Mon-Fri 09:00-17:00", hidden until `dean_met`; Laura's Saturday 16:30–17:00 bathroom row; Gary's rows `when` cafe_job (met at level 1). The sheet said the dean from 07:30; the faculty floor opens at 08:00, so 08:00 (a build fix, said here, not written back).
+- `classes.py`: the four class schedules, read by `college.py` and by `gen_world.py`, which writes the `[[ui.timetable]]` rows; `[ui] timetable_button = true`.
+- `gen_world.py`: the release-1 counters in `[player.core_traits]`; `0_systems_spec.toml`: their labels, the garage-hold `conditions` on the short skirt, sheer blouse and sports bra, `out_shown_today` in the daily tick.
+- The opening's card: Laura's "You'll be late on your first day."; "Go to campus." walks her to the dean's office (20 minutes). The skip path now dresses her as the full opening does (the dean's office has clothing rules; the probe caught it).
+- `college.py`: `college_dean_office` (four screens; the timetable opens from a `<<link>>` in a paragraph, which renders raw, v2.py:18310); the door's timetable paragraph is the same link; the dean's hub reads `dean_met`, with the warning line only after `dean_summons`.
+- `cafe.py`: the three levels as five flat, mutually exclusive cases (the evaluator takes flat lists only: a nested group has no `type` and fails, v2.py `triggerConditionsSatisfied`). Five measured beats pasted verbatim. Pay $8 plus a random tip (`{"type": "random"}`, applied on choices, v2.py:17264), doubled by the sexy uniform and the Friday close as built. Counters: shifts worked, level-2 shifts, footfall, name; `cafe_let_it`; Gary met at level 1. Build note for LO: the sheet's level-2 "pool of three setups" became one setup that names both tables, so the line before each yes is true whichever she picks.
+- `mark.py`: `rent_short_1` (the key), `_2` (Mark names the $15; `rent_late_fee` add 15; Vance says it at the door), `_3` (the first of skirt, blouse, sports bra she owns and Mark doesn't hold, flat cases; none left: "Next week, then."); a full Sunday gives the key and the held items back.
+- `town.py`: `street_seen_skirt`, `_nobra`, `_nopanties`, once a day, the witness by the hour. `world_data.py`: the street-door rules read either meter, the messages name both numbers.
+- Gates 59/89 (61 before). Newly failing, both expected: "every person here has a face" (Laura's shower row has no canvas until slice C) and "a meter is read" (`cafe_name` and `cafe_shifts_worked` are read by Tom's step 3 and step 2, slice E). Fixed on the way: trait labels, three unbacked garment lines, the dean's face and window.
+- Probe `probe_A.py` 15/15, 0 page errors: the opening, the dean, the timetable dialog (Monday rows), "already late" after 08:30, the lecture hall, the sidebar button, the garage hold refusing to equip.
+
+## 2026-11-01: release 1, slice B — Ryan (DECISIONS 114)
+
+- `sheetbeats.py`: the measured beats are read verbatim from the signed scene sheets (`beat(sheet, node)`, `pool(sheet, n)`); a missing heading stops the build. `canv.POOL(..., bag=True)` writes `seen_weight = 0` (the shuffle bag).
+- The ledger: Ryan's gates as signed (step 2 Lust 10 from 06:45; 3 and 4 Corruption 20; 5 Corruption 20; 6 Exhibitionism 40; 7 Corruption 40 · Lust 60; 8 Corruption 40 · Lust 70), steps 7 and 8 point at the new canvases, the release door at step 8's "Further. (Needs Corruption 60)".
+- `ryan.py`: Lust +5 a step; step 3 Laura calls up the stairs (only while her row has her in the kitchen); step 4 the measured `lap` beat and Kayla's "Who's there?"; step 6 `look` and `comes`; step 7 `ryan_07_kayla_cant_know`; step 8 `ryan_08_two_knocks_first_sex` with the terms after, the Jake line on `jake_met`, step 9 locked. The cut steps are no longer built.
+- Build fix, said here and not written back: step 8 and its repeat run **Sunday to Thursday**, not "any night but Friday". Their signed screens put Laura across the hall ("Mom's right across the hall", her knock, her light), and on Saturday nights her row has her downstairs, waiting up.
+- The hot repeatables: 1, 4, 5 on his room hub (Mon, Tue, Thu, Sun 19:00–22:00), 2, 3, 6 on the couch hub, 7 is the two-knocks repeat. Lust +3 once a day across all seven (`ryan_hot_today`, daily tick); each a shuffle bag of three from the sheet; none with Laura in the room. Row 3 undresses her to her underwear (it needs bra and panties on), rows 4 and 5 strip her and dress her after; row 6 needs Mark in the kitchen (Sunday), as its screens say his TV is in the next room. Row 7's near-catches are two of its three signed entries (7b Laura knocks, 7c Kayla calls), so no separate roll.
+- `ryan_laura_opens_the_door`: Saturday 17:00–18:00, Laura dressing upstairs, once; sets `laura_knows_ryan`. (`laura_04_ryans_door` goes with Laura's slice.)
+- Fixes from the gates: `kayla_met` now set when she reads Kayla's texts at step 2, and read by step 4 (it names Kayla); each hot exit is day-capped on its own and each hot screen has a free "Leave him to it."
+- Gates 59/89, the same two expected gaps as slice A. Probe `probe_B.py` 11/11, 0 page errors: step 8 to the terms and the locked "Further", `ryan_step` 8 and the term flag; hot 1's button, its pool, Lust +3, gone for the day.
+
+## 2026-11-01: release 1, slice C — Laura (DECISIONS 115)
+
+- The ledger: Laura's ladder is four steps (1 the blue dress; 2 the `laura_03` canvas, Love 10; 3 the `laura_06` canvas, Love 20; 4 `laura_04_she_saw_you`, Corruption 20 · Love 30 · `laura_gaps_watched` 3). Her Saturday 16:30 bathroom row came in slice A. Mark gets a Saturday 17:00–18:30 kitchen row, "heading out to the bar": step 3 has him call up the stairs, and his sheet's Saturday had nothing after the garage (a build row, said here).
+- `laura.py`: Love +5 a step (Want dropped: nothing of hers reads it). `laura_02` is the curfew rule: repeatable, no step, once a night (`laura_caught_today`), the kind path pays nothing. The built `laura_catch` repeat is removed: it duplicated the curfew rule and carried the cut climb ("Kiss her goodnight", her Want). `laura_04_ryans_door`, `_07`, `_08` are no longer built; `laura_05` stays one more slice on Jake's counter only (Jake's slice merges it). Step 3 reworked as "All dressed up". Step 4 and its breakfast ("last night" under 12 hours, else "the other night"). Her tease and touch columns are cut; her plain items pay Love +2 once a day in total (`laura_love_today`, a post-pass over her three hubs). Hub lines realigned to the four steps.
+- `home.py`: "Keep watching." adds 1 to `laura_gaps_watched`; the crack's dressed-up line behind `laura_lonely`; `laura_alone_after` (the two measured after-step-4 screens); `laura_shower_gap` (Saturday 16:30–17:00, the two measured screens).
+- `world_data.py`: her door's "The door's ajar." is flat, mutually exclusive cases: step 4 when ready, the after-gap once she's past it, the gap otherwise, each with the once-a-night brake.
+- Gates 60/89. The one expected gap left: "a meter is read" (`cafe_name`, `cafe_shifts_worked`: Tom's slice). Fixed on the way: the curfew rule's `retry_after_days` (a repeatable has none) and its free suspicion rung; step 4's no.
+- Probe `probe_C.py` 10/10, 0 page errors: the door, the gap with the dressed-up line, the counter to 3, step 4 next night ("Ryan.", both choices), `laura_step` 4, `laura_said_ryan`, the breakfast.
+
+## 2026-11-01: release 1, slice D — Mark (DECISIONS 116)
+
+- The ledger: Mark's ladder is four steps (1 count it slowly; 2 the late notice, his step 1 only; 3 shorts, `rent_short_weeks` 1 or more; 4 the `mark_06` canvas in the garage, Mon, Tue, Thu, Fri 19:00–22:00, Ryan's step 4 done).
+- `mark.py`: Mark A 4, 5, 7, 8, 9 are no longer built. Step 4 reworked: "I saw you come out of Ryan's room. Middle of the night."; the couch lines cut; his no "Since Ryan's door."; `mark_step` 4. The Sunday table loses the paid look ("Twenty, and you can look", both voices, the cover screen, the wallet line); after the arrangement he counts at normal speed, plus a shuffle bag of five lines. His paid look on the hubs (`m_paid`) and in the garden (`home.py`) are cut. His leaks realigned (garage: "He can't hold your look" before step 4). Cards: four steps; the locked line "Mark, later. (After the house is yours.)".
+- Gates 61/89 ("sinks >= sources" now passes with the paid sources gone). The one expected gap: "a meter is read" (Tom's slice).
+- Probe `probe_D.py` 8/8, 0 page errors: step 4 in the garage, no couch line, `mark_step` 4 and `mark_arrangement`; the next Sunday's count at normal speed, no paid look.
+
+## 2026-11-01: release 1, slice E — Tom (DECISIONS 117)
+
+- The ledger: Tom's ladder is three steps (1 the apron; 2 the tip jar, `cafe_shifts_worked` 5; 3 `tom_03_not_by_the_window`, footfall 15, name −5 or lower, `cafe_let_it`).
+- `tom.py`: strict. His hire line ("Eight a shift, plus tips. Be on time."; "Smile at booth four" and "Customers like that" cut); step 1 ("Tables first. Phone in the back. Smile.", "Yes, boss.", the two thoughts); step 2 the tip jar (Lust +5, Dominance −5); step 3 new; Tom B 2 and B 4 cut and B 5, B 6, the after-close repeat and Gary's paid ten minutes not built; his counter lines realigned. `phone.py`: "what's it pay" gets "eight and tips. be on time."; the after-close texts are not built (they wait with step 6).
+- Build additions, said here: "Ask for the tight top." on his counter at Daring ("Your choice. Tables don't wait."): with the uniform rule cut, nothing else gives her the tight uniform, and the sheets say it is her choice. `cafe_gary_meet`, a one-time screen in Gary's hours that sets `gary_met` (his booth hub opens on a meeting).
+- A fix to a bug that was already in the build: the clock-in equipped both uniforms, and the engine's "equip" also adds the item (v2.py:17371), so the tight uniform was hers and on from her first shift. The clock-in now puts on the normal uniform unless she has changed into the tight one.
+- Step 3's "this shift" is `cafe_let_it` under 4 hours: the flag is stamped when the clock-out runs, before its 180 minutes pass (the probe caught "under 1 hour" never firing).
+- Gates 62/89, no gate lost against the baseline; "a meter is read" passes again (Tom reads the café counters).
+- Probe `probe_E.py` 12/12, 0 page errors: a level-3 shift, "Let it.", footfall 15, name −5, shifts worked, the pay; Tom's step 3 at clock-out, "It's my tips.", `tom_step` 3, the window rule.
+
+## 2026-11-01: release 1, slice F — Hale (DECISIONS 118)
+
+- The ledger: Hale's ladder is four steps (2 Exhibitionism 20; 3 his step 2 only; 4 Corruption 20 · Exhibitionism 20). Hale B 5 is cut.
+- `hale.py`: step 1 reworked (she walks in late; "Late, on the first day." on day one, "Late." after; "Front row. Where I can see you."; his pen at her feet; picked up or left); its window is the whole lecture now, as she comes from the dean. Step 3 is private coaching (the speech, the hand, three answers, all finish, no grade; the portal). Step 4 reworks `hale_04_claire_knocks` as the first session: the two measured screens, "Let him." pays grade +5 and both meters +3, Claire's knock; "This isn't coaching." and Run park a week, Run costs grade −2. `hale_thursdays` is the Thursday session: two tiers of three measured pooled screens (shuffle bags), Claire early on a 1–4 roll (`hale_claire_roll`), the three answers, "Hale, further. (Needs Corruption 60)" locked. The old step-4 swaps and placeholders are removed; his office line at step 4 is "He looks at the clock, and then at you, like you're both on his schedule." `phone.py`: his Wednesday email follows step 4, "Thursday, my office. Half past six."
+- Gates 62/89, no gate lost against the baseline.
+- Probe `probe_F.py` 7/7, 0 page errors: step 4's three answers, Claire's knock, `hale_step` 4, grade +5; eight Thursdays: seven sessions and one early Claire.
+
+## 2026-11-01: release 1, slice G — Zoe (DECISIONS 119)
+
+- The ledger: step 2 opens on her ladder alone (its "Curious or Daring" is on the screen: each yes reads its own meter and shows locked with the number when she can't take it); step 3 Corruption 20 · Exhibitionism 20; step 4 her step 3 only; step 5 `zoe_05_no_dare`, Saturday 00:00–02:00 at her apartment (where her row is; the scene moves to her bedroom), Corruption 40, four dares done, `cocky_guy_met`, a party tonight.
+- `zoe.py`: step 2's doing yes, "Dare me something else.", plays the dares' measured kiss; step 4 "I dared you instead of asking. I always do." / "Then keep daring me." (Zoe keeps picking; the built "From now on, I pick the dares." cut); step 5 with its two measured screens, "Tell him to go." / "Let him watch." (`zoe_let_him_watch`), Corruption +3, +3 Exhibitionism if he watches. Cards for five steps; the locked line "Zoe's next dare. (Needs Corruption 60.)".
+- `pools.py`: `zoe_dares` replaces `party_dare`. Three tiers as flat cases, two yeses and a no on each, the six measured screens, the built circle flash kept as the Showing dare's second entry (a shuffle bag), the regulars' "You again." lines, the Jake line when she's his girlfriend, `zoe_dares_done` +1 a yes, locked yeses with their number.
+- Build fixes, said here: the dares run at Zoe's Friday party only, **Saturday 00:00–02:00**. The party house on Saturday has none of the regulars, whose rows are Zoe's Friday party only; and a window that crossed midnight let the day roll clear `zoe_dared` and open a second dare the same night (the probe caught it). `zoe_dared` is set by every dare exit, cleared by the daily tick and by arriving at the party.
+- Gates 62/89, no gate lost against the baseline.
+- Probe `probe_G.py` 9/9, 0 page errors: the low tier's line and both yeses, the kiss, `zoe_dares_done` 1, one a night; step 5, "Let him watch.", `zoe_step` 5, `zoe_together`, `zoe_let_him_watch`.
+
+## 2026-11-01: release 1, slice H — Jake (DECISIONS 120)
+
+- The ledger: step 2 opens on his ladder alone ("Hi." reads Curious or Daring, two flat copies, locked with both numbers otherwise); step 4 `jake_04_sneak_him_in`, Saturday 22:00–00:00 at the front door after a date, Corruption 40.
+- `jake.py`: step 3 is merged with built Jake 4 = Laura 5: after Ryan's door, Laura's shape in the dark window; inside, her couch lines ("Was he any good?", both dress answers); Laura present by her row. `laura_05_jake_at_the_door` is no longer built. Step 4 takes the date-end slot: "Come up.", "Your room. Now.", the three measured screens, the keyless landing when `her_door_unlocked`, Ryan through the wall past his step 5, Corruption +3, Ryan's Lust +5, `jake_first_time`. `jake_saturday_date` is the end of a date: the car by stage (the three measured screens; both meters, the street and Laura's window can see), after step 4 "Come up." (a two-entry shuffle bag) with the near-catch on a 1–8 roll (1 Laura's door, 2 Ryan's two knocks), "Jake, further. (Needs Corruption 60)" locked. The date drives her home now (the two date lines and its exit).
+- A fix on the way: my first ledger edit rebound Jake's step 4 in a local map and never wrote it back; the validator caught the quest card still pointing at `laura_05`.
+- Gates 62/89, no gate lost against the baseline (61/89).
+- Probe `probe_H.py` 11/11, 0 page errors: step 3, Laura in the window, "Was he any good?", `jake_step` 3; the car at Curious; step 4, the landing, Ryan through the wall, `jake_step` 4 and `jake_first_time`.
+
+## 2026-11-01: release 1, the reader pass and its fixes
+
+- `v2-reader` on the 54 canvases the build touched: 42 FAILs on 31 canvases (report: the session scratchpad, `reader_first_term.md`). Fixed in the build, the build's own errors:
+  - the locked twin buttons (`zoe_dares`, `jake_02`) are gone: the engine already greys the real button when it fails; `zoe_02`'s "Watch me." no longer claims "Needs Exhibitionism 20" to a girl without a bra;
+  - "your top" in a dress: `canv.top_or_dress` swaps to "your dress" behind the two dresses she goes out in (`zoe_02` kiss, `zoe_dares`, the car, Hale's lower session);
+  - bare feet in sneakers: "Feet up." and hot repeatable 2 take her sneakers off, hot 3 strips them too, the Laura event drops "bare";
+  - `ryan_07`: one entrance (the screen before brings her to his door; the measured beat knocks); `ryan_08`'s Jake line needs `jake_step` 3, a boyfriend who walks her to the door;
+  - `rent_short_2` says Vance comes "tomorrow night" (his knock is Monday); `rent_short_3` says "Three times." only on the third, "Again." after, and asks for the item she's wearing instead of fetching it;
+  - Hale's grade said truly at each band, "Then your grade stays where it is."; Claire's "I'm early." (the knock lands about 18:40);
+  - `zoe_02`'s doing yes needs the cocky guy at the party; the date's near-catch has Laura on the stairs, not upstairs (her Saturday row is the living room);
+  - the curfew rule's "like she did in her mirror" is cut (it could show without the dress scene).
+- Left for LO, listed in the report to LO: the design FAILs (8 hooks, Laura's want before her gaps, 4 written nos), the café's "folded twenty" against a $10–16 tip, and the FAILs in screens this build didn't write (Mark's streak lines read before the count, `mark_03`'s "listening at doors", `tom_01` and `tom_03` after the shifts end or "Busy night?" by day, Ryan's rent cover after the count, the hot tub's "in your clothes").
+- Gates 62/89, no gate lost against the 61/89 baseline. All eight slice probes re-run: 83/83, 0 page errors. Engine suite: 793 passed, 17 skipped.
+
+## 2026-11-01: LO's picks on the reader's FAILs — 5 built; 1–4 drafted on the sheets
+
+- LO's pick 5 ("fix them now"), built, in screens this release didn't write: Mark's streak line now says the streak this Sunday makes (read before the count adds it; nothing on a broken Sunday); `mark_03`'s "Since you're listening at doors now." becomes "Shorts this time. Since you're reading my mail now."; Tom's step 1 window ends at 19:00 (the last shift start) and the screen hands her the apron (it equips the uniform); the tip jar's "Busy night?" becomes "Busy shift?"; Ryan's rent cover on a Sunday only before Mark's count; the hot tub's "Not tonight, Zo." dresses her before she goes home. Gates 62/89; probes A, B, D, E, G re-run, all pass.
+- LO's picks 2b, 3, 4 and the hook lines (1) are drafted on the sheets, waiting for LO's sign: Laura's two gaps open after her step 2; written replies for the four nos (Ryan 4, the job ask, Hale 2 in jeans, Jake 4); "a folded ten" (re-measured); one true closing line each for the street (Vance), Ryan 6 and 7, Laura 3 and her breakfast, Zoe 5. Not built yet.
+
+## 2026-11-01: LO's picks 1–4 built (DECISIONS 123, "Signed, build them")
+
+- (1) Hooks: Ryan 6 and 7 end on a short screen each ("his door is open a hand's width. It stays that way." / "his phone is face-down every time you knock"); Laura 3's two endings and her breakfast point at her weeknight gap; Zoe 5's two endings, "Friday, babe. I'm in the dare with you now."; the street's Vance line, "He'll be on his porch tomorrow evening. He always is."
+- (2b) Laura's bedroom gap and shower gap need `laura_step` 2 (the door options and both triggers).
+- (3) The nos: Ryan 4's "Just saying goodnight." gets his reply; the café job ask has "Not yet." (Tom's reply; the ask is parked a day: `consume_on = "exit"`); Hale 2 has "Sit up straight." out of a skirt; Jake 4's "Goodnight, Jake." gets "Next Saturday, then. Your room."
+- (4) "a folded ten".
+- Gates 62/89, no gate lost against the baseline. Probes A–H 83/83 and `probe_I.py` 6/6 (no gap before step 2, the gap at step 2, the job's "Not yet.", Ryan's goodnight), 0 page errors.
+
+## 2026-11-01: step 7, the taste columns into the skill
+
+- `TASTE_COLUMNS.md` is now skill rule S14 (`the-sheets.md`), with the step row in the scene template, the ladder rules in the person template, and the step row in `v2-pitcher`. B150 done; the skill CHANGELOG has the entry. No game file changed; gates 62/89.

@@ -252,7 +252,7 @@ thread("tom_shift", T, "📱 Tom",
        ["shift after class?"],
        [("on my way after", {"flagEffects": [setf("tom_shift_booked")]}, "apron's on the hook."),
         ("not today", {}, "your loss. tips were good."),
-        ("what's it pay", {"effects": [npc_eff(T, "want", 1)]}, "twelve and tips. more in a tighter top.")],
+        ("what's it pay", {}, "eight and tips. be on time.")],   # release 1: strict, and the right pay (tom_01_the_apron.md)
        ignore=(1, {"effects": [npc_eff(T, "want", -1)]}),
        comment="Tom: caused by cafe_job. The yes books today's first shift (cafe.py).")
 # The last shift starts by 19:00; the yes comes 10:00-14:00, so 9 hours after it the day's shifts are gone.
@@ -261,19 +261,7 @@ noshow("tom_shift_noshow", T, "📱 Tom", "tom_shift_booked", 9,
        [("sorry, class ran late", "tell it to the tip jar."), ("something came up", "don't make it a habit.")],
        {"effects": [npc_eff(T, "want", -1)]}, extra=[HOURS("19:00", "23:00")],
        comment="Tom: she said on my way and never clocked in (DECISIONS 87)")
-thread("tom_close", T, "📱 Tom",
-       [F("tom_06_done"), SINCE("tom_06_done", 1), DAYS(4), HOURS("12:00", "18:00")],
-       ["stay after close", "i'll do the blinds"],
-       [("i'll stay", {"effects": [npc_eff(T, "want", 1)], "flagEffects": [setf("tom_close_booked")]}, None),
-        ("not this week", {}, None)],
-       repeat=6, ignore=(1, {"effects": [npc_eff(T, "want", -1)]}),
-       comment="Tom's repeat, after his step 6: Friday, stay after close. Only a yes opens the night (tom.py).")
-# After close is Friday 22:00-23:00; the yes comes 12:00-18:00, so 12 hours after it the night is over.
-noshow("tom_close_noshow", T, "📱 Tom", "tom_close_booked", 12,
-       ["you said you'd stay.", "blinds stayed up."],
-       [("sorry. next friday", "maybe. we'll see."), ("couldn't get away", "sure you couldn't.")],
-       {"effects": [npc_eff(T, "want", -2)]}, extra=[DAYS(5), HOURS("08:00", "20:00")],
-       comment="Tom: she said she'd stay after close and didn't (DECISIONS 87)")
+# (release 1: Tom's after-close loop waits with his step 6, a later release; tom_close and tom_close_noshow are not built)
 
 # ── 5 · Zoe (npc_zoe.md: zoe_met. The party, Thursday 18:00-22:00; the run, Friday 18:00-22:00; weekly) ──
 thread("zoe_party", Z, "📱 Zoe",
@@ -315,14 +303,14 @@ noshow("hale_office_noshow", H, "📧 College email: Dr. Hale", "hale_office_boo
               {"type": "trait", "subject": "player", "trait_key": "hale_step", "operator": "eq", "value": 2}],
        comment="Hale: she said she'd come to office hours and didn't (DECISIONS 87)")
 thread("hale_thursday", H, "📧 College email: Dr. Hale",
-       [F("hale_05_done"), SINCE("hale_05_done", 1), DAYS(2), HOURS("09:00", "17:00")],
-       ["Thursday, my office. Seven."],
-       [("Seven.", {"flagEffects": [setf("hale_thursday_booked")]}, None),
+       [F("hale_04_done"), SINCE("hale_04_done", 1), DAYS(2), HOURS("09:00", "17:00")],
+       ["Thursday, my office. Half past six."],
+       [("Half past six.", {"flagEffects": [setf("hale_thursday_booked")]}, None),
         ("Not this week.", {}, None)],
-       repeat=6, comment="Hale's repeat, after his step 5: Wednesday, \"Thursday. Seven.\" The yes books it (hale.py).")
+       repeat=6, comment="Hale's repeat, after his step 4 (release 1): Wednesday, \"Thursday. Half past six.\" The yes books it (hale.py).")
 noshow("hale_thursday_noshow", H, "📧 College email: Dr. Hale", "hale_thursday_booked", 24,
-       ["The door was unlocked at seven."],
-       [("I couldn't get away.", "Then don't say seven. — H."), ("Next week.", "We will see. — H.")],
+       ["The door was unlocked at half past six."],
+       [("I couldn't get away.", "Then don't say half past six. — H."), ("Next week.", "We will see. — H.")],
        {"effects": [pl_eff("grade_psych", -1)]},
        extra=[DAYS(4), HOURS("09:00", "17:00")],
        comment="Hale: she said seven and didn't come (DECISIONS 87)")

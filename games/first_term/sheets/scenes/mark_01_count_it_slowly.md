@@ -1,5 +1,7 @@
 # [READY] Scene — mark_01_count_it_slowly
 
+> **Changed 2026-11-01, signed by LO 2026-11-01 ("Signed")** (DECISIONS 99–115): Mark's release-1 ladder (`sheets/people/npc_mark.md`, signed). Changed: her voice row only. The screens, the gate and the pay (his Want +10, stored for a later release) stand as built.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. Every Mark step is written twice, by his Power: his terms (M) or hers (E).
@@ -15,6 +17,8 @@
 | what she wears here (test 8) | her sleep shirt: only in a group on her worn state (guess) |
 | which version | Power 50 or more (guess): his version · under 50: hers |
 | explicit? | no: he only looks |
+| her_line_low · her_line_high (rule 7) | low (under the stage): "He's Mom's husband. Pay him and go." · high (over it): "You want him to lose count." (the person sheet names none; worded by me, signed by LO 2026-11-01) | The built thought on `short` ("He counted you as much as the money.") is the low side. |
+| what changes after | the Sunday table, every week (`mark_sunday_table.md`) |
 
 ## Branch map — one row per screen (S1)
 

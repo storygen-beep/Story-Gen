@@ -379,6 +379,7 @@ out.append({"id": "master_door_saturday_night", "name": "Their door's ajar",
 # Laura alone (DECISIONS 82, laura_alone_in_bed.md): Sun-Fri 22:00-23:00, Mark downstairs. The same walk-in
 # shape: the look pays nothing, "Keep watching." pays corruption +1, cap 19. Reached only by the door.
 LAURA_HOUR = [here(L, "home_master_bedroom"), here(M, "home_master_bedroom", False), wd(6, 0, 1, 2, 3, 4), tod("22:00", "23:00")]
+LAURA_GAP_OPEN = trait("laura_step", "gte", 2)   # LO 2b (2026-11-01): her want is shown first, then the gap
 LAURA_CRACK = ("Laura's door is open a hand's width. The bedside lamp is on low. Downstairs the TV mutters. Laura is alone in bed, the covers kicked down. Her nightdress is pushed up to her waist. Her knees are up and apart, her ass bare on the sheet. Two fingers rub slow circles on her clit. She is wet, and it shines in the lamplight. Her other hand squeezes her tit through the nightdress. Her nipple stands hard against the cotton. Her tits rise and fall faster. Her eyes are shut, her lip caught in her teeth. A small moan escapes her. Her hips lift into her fingers. She hasn't seen you. Your face burns. Heat pools low in your belly. You are wet, and your nipples go tight.")
 LAURA_WATCH = ("You stay. Your hand stays flat on the door frame. Laura pushes two fingers inside herself. Her thumb rubs her clit, faster now. Her other hand squeezes her tit and pinches the nipple. Her hips lift off the mattress. She bites the back of her hand so Mark won't hear. Her fingers pump in and out, wet and loud in the quiet. Then she comes. Her whole body shakes. Her thighs clamp hard on her hand. A moan leaks out around her teeth. Your nipples go tight and ache. You are wet, all at once. You press your thighs together. You do not touch yourself. You want to. Laura goes still, breathing hard, two fingers still inside her. Her tits rise and fall. You back away from the door before she opens her eyes, thighs pressed tight, nipples still hard.")
 out.append({"id": "laura_alone_in_bed", "name": "Laura's door's ajar",
@@ -386,7 +387,7 @@ out.append({"id": "laura_alone_in_bed", "name": "Laura's door's ajar",
     "trigger": {"location": "home_master_bedroom", "is_repeatable": True, "priority": 1, "is_active": True,
                 "substitution_only": True, "max_triggers_per_day": 1,
                 # the door's own window, so a reader of the canvas sees when it can render
-                "conditions": cond(*LAURA_HOUR)},
+                "conditions": cond(*LAURA_HOUR, LAURA_GAP_OPEN)},
     "nodes": [
         node("crack", "Laura's door, ajar", [P(LAURA_CRACK),
             VID("through a bedroom door left ajar, a woman alone in bed in a nightdress touching herself, lamp low", "woman masturbating in bed seen through door", "peeking at mom touching herself in bed door ajar", pool_dir="sex/laura_alone_crack_t5")],
@@ -394,7 +395,45 @@ out.append({"id": "laura_alone_in_bed", "name": "Laura's door's ajar",
              go("Pull the door to.", loc="home_hall", mins=2, flags=[fset("saw_laura_alone"), fset("laura_alone_seen")])]),
         node("watch", "Keep watching", [P(LAURA_WATCH),
             VID("a woman alone in bed fingering herself to orgasm, biting her hand to stay quiet", "woman fingering herself orgasm quiet in bed", "milf masturbating to orgasm biting hand", pool_dir="sex/laura_alone_watch_t5")],
-            [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_laura_alone"), fset("laura_alone_seen")])]),
+            [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}, add("laura_gaps_watched", 1)], flags=[fset("saw_laura_alone"), fset("laura_alone_seen")])]),
+    ]})
+# after her step 3 the crack names the dressed-up night (laura_alone_in_bed.md, changed 2026-11-01)
+out[-1]["nodes"][0]["blocks"].insert(1, G(cond(flag("laura_lonely")), P("The good dress you zipped her into hangs on the wardrobe door.")))
+
+# ── after Laura's step 4 (laura_alone_in_bed.md, "After her step 3 and step 4"): she knows; face to the wall,
+#    quieter. The same door, pay, brake and no; "The door's ajar." opens this once laura_04_done is set. ──
+from sheetbeats import beat
+out.append({"id": "laura_alone_after", "name": "Laura's door's ajar",
+    "description": "Sun-Fri 22:00-23:00 after Laura's step 4: she knows the door is open; face to the wall, quieter. Keep watching pays corruption +1, cap 19, and the gap counter. Reached only by the door; once a night.",
+    "trigger": {"location": "home_master_bedroom", "is_repeatable": True, "priority": 1, "is_active": True,
+                "substitution_only": True, "max_triggers_per_day": 1,
+                "conditions": cond(*LAURA_HOUR, flag("laura_04_done"))},
+    "nodes": [
+        node("crack_after", "Laura's door, ajar", [P(beat("laura_alone_in_bed", "crack_after")),
+            VID("through a bedroom door ajar, a woman on her side facing the wall, her hand between her thighs", "woman masturbating facing wall door ajar", "mom touches herself back to door", pool_dir="sex/laura_alone_after_crack_t5")],
+            [go("Keep watching.", node="watch_after", mins=5, flags=[fset("saw_laura_alone"), fset("laura_alone_seen")]),
+             go("Pull the door to.", loc="home_hall", mins=2, flags=[fset("saw_laura_alone"), fset("laura_alone_seen")])]),
+        node("watch_after", "Keep watching", [P(beat("laura_alone_in_bed", "watch_after")),
+            VID("a woman on her side coming silently into a pillow, her hand between her thighs", "woman silent orgasm into pillow", "mom cums quietly facing the wall", pool_dir="sex/laura_alone_after_watch_t5")],
+            [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}, add("laura_gaps_watched", 1)], flags=[fset("saw_laura_alone"), fset("laura_alone_seen")])]),
+    ]})
+
+# ── the shower gap (laura_shower_gap.md, signed 2026-11-01): Saturday 16:30-17:00, Laura showering before she
+#    dresses; the lock sticks halfway (the opening's fact), the door won't shut. Once a week (her Saturday row). ──
+out.append({"id": "laura_shower_gap", "name": "The bathroom door won't shut",
+    "description": "Saturday 16:30-17:00, Laura in the shower: through the steam her hand between her legs. Keep watching pays corruption +1, cap 19, and the gap counter (Laura's step 4).",
+    "trigger": {"location": "home_bathroom", "npc": L, "requires_npc": L, "is_repeatable": True, "priority": 8, "is_active": True,
+                "max_triggers_per_day": 1,
+                "schedules": [{"weekdays": [5], "start_time": "16:30", "end_time": "17:00"}],
+                "conditions": cond(flag("opening_done"), LAURA_GAP_OPEN)},
+    "nodes": [
+        node("steam", "Steam", [P(beat("laura_shower_gap", "steam")),
+            VID("through a bathroom door stuck open, a naked woman in a steamy shower touching herself", "woman masturbating in shower seen through door", "mom in shower hand between legs steam glass", pool_dir="sex/laura_shower_steam_t5")],
+            [go("Keep watching.", node="watch", mins=5, flags=[fset("laura_shower_seen")]),
+             go("Pull the door to.", loc="home_hall", mins=2, flags=[fset("laura_shower_seen")])]),
+        node("watch", "Under the water", [P(beat("laura_shower_gap", "watch")),
+            VID("a naked woman coming in the shower, forehead on the tiles, a moan under the spray", "woman orgasm in shower forehead on tiles", "mom cums in shower", pool_dir="sex/laura_shower_watch_t5")],
+            [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}, add("laura_gaps_watched", 1)], flags=[fset("laura_shower_seen")])]),
     ]})
 
 # Laura's hour after she watched (DECISIONS 84): one screen, pays nothing.
@@ -498,18 +537,13 @@ sun_nodes = [
     node("sun_mark", "The garage door", [G(cond(MARK_SEES), P("Mark's in the garage door with a beer, and he hasn't gone back in."))], [
         *brake(go("Stretch out for him.", node="sun_mark_tease", flags=[fset("sunned")], eff=[npc_add(M, "want", 1)],
                   cond_=cond(*BRA_ONLY)), "sunned"),
-        *brake(go("Let him pay to look.", node="sun_mark_paid", flags=[fset("sunned"), fset("mark_paid_look")],
-                  cond_=cond(BOLD, trait("mark_step", "gte", 7), flag("mark_paid_touch"), flag("mark_arrangement"), flag("sunned", False)),
-                  eff=[{"targetType": "player", "trait": "money", "op": "add", "value": 20, "clamp": False}, npc_add(M, "want", 1),
-                       {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 59}]), "mark_paid_look"),
+        # (release 1: Mark's paid look is cut, npc_mark.md)
         go("Not today.", loc="home_garden")]),
     node("sun_ryan_tease", "Ryan's window", [placeholder("sheets/people/npc_ryan.md:104", "Ryan, the garden: tease (Curious, Ryan A 4)")],
          [go("Done.", loc="home_garden", mins=30)]),
     node("sun_ryan_touch", "The sun lotion", [placeholder("sheets/people/npc_ryan.md:104", "Ryan, the garden: touch (Bold, Ryan A 8)")],
          [go("Done.", loc="home_garden", mins=30)]),
     node("sun_mark_tease", "The garage door", [placeholder("sheets/people/npc_mark.md:110", "Mark, the garden: tease (Curious, Mark A 3)")],
-         [go("Done.", loc="home_garden", mins=30)]),
-    node("sun_mark_paid", "The paid look", [placeholder("sheets/people/npc_mark.md:110", "Mark, the garden: the paid look (Bold, Mark A 7)")],
          [go("Done.", loc="home_garden", mins=30)]),
 ]
 out.append(solo("garden_sun", "Lie in the sun",

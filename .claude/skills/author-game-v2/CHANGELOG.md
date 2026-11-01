@@ -5,6 +5,35 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-01 — the step row: taste as a design input (`the-sheets.md` S14)
+
+**What.**
+- `references/the-sheets.md`: new rule S14, "A step is designed against seven columns". It holds the seven
+  step columns (the moment, who sees or knows, what she risks, how she says yes, his move, does it finish,
+  what changes after), each citing the test it already lives in (`register.md` tests 1, 3–7; `the-arc.md`
+  A10, A11, A13, A14), with a fail rule (two empty columns: not written). It holds eight ladder rules with a
+  fail rule (two failing: not built), the "not columns, on purpose" list, and where the row is used. One-line
+  pointers in "The workflow" and "Seven sheet types".
+- `templates/sheets/scene.md`: a step row (S14) above the branch map; the Why hint names an empty column.
+- `templates/sheets/person.md`: a `her line low · high` column and a `hot repeatable` row on the ladder; a
+  "Ladder rules (S14)" table, eight rows, pass or fail with one line of evidence.
+- `.claude/agents/v2-pitcher.md`: a rule (the pitch fills the step row; two empty columns, pick again) and a
+  "Step row (S14)" block in the return. It holds only the three columns the eight lines do not already answer:
+  what she risks, does it finish, what changes after.
+
+**Why.** B150 in `SKILL_CHANGES_FROM_FIRST_TERM.md`. first_term's taste review (2026-10-31) and two scouts
+(Course of Temptation's best friend, In Her Own House's Bobby) found every ladder ending in a talk or a locked
+door, the men's meters locking nothing, and cold repeatables. The scene template asked only tests 1, 2, 3
+and 8. LO (2026-11-01): taste is a design input, not an end check. The columns come from the signed
+`games/first_term/sheets/TASTE_COLUMNS.md` (the arc-craft study Q1–Q7, the heat study Q8 and its rules
+1–10, `the-meters.md` rule 4). first_term's release 1 was redesigned and built against it (DECISIONS 99–123):
+explicit repeatable beats 17.0% to 20.9%, gates 61 to 62 of 89.
+
+**How verified.** `grep -rn S14` resolves every pointer to the rule (`the-sheets.md:295`). Every cited
+test and A-rule exists in its file (`register.md:346` list, `the-arc.md` A1/A3/A10/A11/A13/A14,
+`the-meters.md:117`). No script parses the two templates' new rows (`gates.py` reads the Why tables only);
+`gates.py first_term` is 62/89, unchanged. Written in the skill's placeholder voice (S13): no game's people.
+
 ## 2026-10-31 — a greyed number lock without "(you have N)" (`hide_current_value`)
 
 **What.** `references/engine.md`, under the Mode A / Mode B table: one paragraph on the new choice field

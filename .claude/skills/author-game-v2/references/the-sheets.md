@@ -26,6 +26,9 @@ document is argued over first, and whoever implements it is not whoever wrote it
 the point — an author who implements their own sheet fills its gaps from memory without noticing
 there was a gap.
 
+A step's taste is decided at `[REVIEW]`, not checked after the build: its seven columns and its
+ladder's eight rules are filled in before it is written (S14).
+
 ⚠️ **Sheets are mirrored to Notion.** `scripts/notion_sheets_sync.py` mirrors every sheet to a Notion board so one
 can be read and signed away from the repo — sign-off is the only step in the pipeline that is pure
 judgement and needs no terminal, and it was chained to the machine the repo is on. The rules that
@@ -59,6 +62,7 @@ It makes drift **visible**; it does not detect it. S1's finding is untouched.
 | **opening** | the funnel, screen by screen, from the age gate to the first open door | game |
 
 Each type has a one-page template in `templates/sheets/` — slots only, no example prose.
+The person and scene templates carry S14's taste rows: a step is designed against them before it is written.
 
 ⚠️ **The system sheets are written FIRST and the place sheets are written against them**
 (`the-systems.md` SY1–SY3). A room's rows are the systems that live there, reading meters that describe her —
@@ -287,6 +291,73 @@ session, because the next session reads the game.
 - **The skill holds no game's plan.** It holds the rules for every game, with placeholders instead of
   names (`register.md`, "Show the mechanism. Never show the world."). The game-specific version, with
   its people and its facts, only exists on the game's pages.
+
+## S14 · A STEP IS DESIGNED AGAINST SEVEN COLUMNS
+
+**The rule:** before a step is pitched, sheeted or built, it is filled in as one row of seven columns,
+and the whole ladder is checked against eight rules. Taste is a design input. The reader, the gates and
+the live player come after the build and check it; they do not design it.
+
+**Why:** a game's first built ladders were good plumbing with no feeling. Every top step was a talk or a
+locked door, the men's meters locked nothing, and the repeatables were cold next to the top games. The scene
+sheet had asked only for the want, the next step, the hook and the clothes (`register.md` tests 1, 2, 3, 8).
+It never asked who sees, what she risks, how she says yes, what he does, whether the act finishes, or what
+changes after. Scored against the eight rules below, its first built ladder failed five of eight. The
+release redesigned against them shipped with its explicit repeatable beats up from 17% to 21%.
+
+### The step row: seven columns, filled before a step is written
+
+| column | the question | where the test already lives |
+|---|---|---|
+| **the moment** | One line: the thing a player would name afterwards, and what is new in it against the step before. | `the-arc.md` A14 (a chain of steps, each new) |
+| **who sees or knows** | Who is in the room, or finds out after. "Nobody" is allowed only as a declared choice, written down. | `register.md` test 5 (who notices) |
+| **what she risks** | Being caught, a secret, a person, a price. The stake is hers, not the player's loss of control. | `register.md` test 6 (the reluctance is hers) |
+| **how she says yes** | Out loud, and both minds if she has two. The button carries the yes. | `register.md` test 4 (her voice at her level) |
+| **his move** | What he wants for his own reason, shown before, and what he *does* about it here. Reacting is not a move. | `the-arc.md` A13 · `register.md` test 1 |
+| **does it finish** | The act goes to its end on the body and the finish is shown, or this is the ladder's one cut-off, named as such. | `register.md` test 7 (the body) · `the-arc.md` A10, A11 |
+| **what changes after** | Something the world keeps: a rule, a schedule, a label, a price, a person's standing line, the next step. A flag nobody reads is not a change. | `register.md` test 3 (hook) · `the-arc.md` A14 |
+
+**The fail rule.** Two empty columns: the step is not written. One empty column: the sheet's "Why" table
+says why it is empty on purpose. Step 1 of a ladder may leave "what she risks" and "how she says yes"
+empty, because it can be an accident.
+
+`the no` is not a column. It already sits on the person sheet's ladder table (`the-arc.md` A3,
+`register.md` test 6), so it is not asked twice.
+
+### The ladder rules: eight, checked on the whole arc before any step is written
+
+1. **Every step adds a new witness, a new risk or a new kind of yes** over the one before. Two flat steps in
+   a row: cut one.
+2. **The top step of the release is a payoff.** A known person, a witness, the frame the arc built, paid off
+   and finished on the body. A talk or a locked door is not a top step.
+3. **One cut-off per ladder.** A phone call, a knock, a footstep on the stairs: once. Every other step
+   finishes.
+4. **He moves at least every other step.** Not all of it can be her initiative (`the-arc.md` A13).
+5. **His meter is the lock.** A step pays less than the next step needs, and his hot repeatables pay the
+   gap: two to four hot visits between steps (`the-meters.md`, "Whatever he keeps", rule 4). A ladder
+   where each step pays exactly what the next needs has zero visits between steps, and his meter locks nothing.
+6. **Each stage has one hot repeatable,** designed on the same sheet as the step it follows and written in
+   full, with no placeholders. In the top games the handjob and the sex are repeatables, not steps.
+7. **Her voice changes with her level:** a low line and a high line per step (`register.md` test 4).
+8. **Something still happens after the top step.** The arc converts into a loop; it does not stop
+   (`the-arc.md` A1).
+
+**The fail rule.** Two of eight failing: the ladder is not built.
+
+### Not columns, on purpose
+
+- **Media.** A declared media block counts as media present. Files are checked at release, never before.
+- **Word count, the explicit-beat ratio, the crude-word ceiling.** The build measures these after the
+  fact (`scripts/gates.py`). They are checks, not design.
+- **Love on a lust path.** A side meter, such as rent help or covering for her. It never locks a lust step.
+
+### Where it is used
+
+1. **Before a pitch:** `v2-pitcher` fills the seven columns for the step it proposes.
+2. **Before a scene sheet:** the step row sits above the branch map (`templates/sheets/scene.md`).
+3. **Before a build:** the eight ladder rules are ticked on the person sheet, one line each
+   (`templates/sheets/person.md`).
+4. **After the build:** the reader, the gates and the live player check it. They check; they do not design.
 
 ## The opening sheet is a SCREEN WALK
 

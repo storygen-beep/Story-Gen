@@ -1,4 +1,6 @@
-# [READY] Scene — cafe_gary_ten_minutes
+# [CUT] Scene — cafe_gary_ten_minutes
+
+> **CUT 2026-11-01** (DECISIONS 113): Gary's paid ten minutes and Tom's half are cut; Gary is the café's regular at the three levels (`sheets/systems/job.md`). Kept on disk as the record; not built in release 1.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-09).
 

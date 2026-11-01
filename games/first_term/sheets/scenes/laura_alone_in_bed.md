@@ -1,5 +1,9 @@
 # [READY] Scene — laura_alone_in_bed
 
+> **Changed 2026-11-01 after the build, signed by LO 2026-11-01 ("Signed, build them")** (the reader's FAILs; LO's picks in chat): the gap opens after Laura's step 2 (LO's pick 2b: her want is shown first).
+
+> **Changed 2026-11-01, signed by LO 2026-11-01 ("Go ahead")** (DECISIONS 99–114): Laura's release-1 ladder (`sheets/people/npc_laura.md`, signed). Changed: "Keep watching." also adds 1 to `laura_gaps_watched` (her step 4 needs 3, this gap and the shower's); after step 3 one line names the dressed-up night; after step 4 two new screens, `crack_after` and `watch_after` (Laura knows, face to the wall, quieter), by `v2-prose`, measured; on a night her step 4 is ready, `laura_04_she_saw_you` takes this slot. The signed screens stand.
+
 > Signed by LO: LO, 2026-10-29 ("sign all", in chat).
 
 > Written 2026-10-29 from LO's pick in chat ("yes, 1, laura alone, fingering herself", DECISIONS 82). Prose by `v2-prose`, measured with `gates.py --beat`, pasted here.
@@ -12,7 +16,7 @@
 | who | Laura, 41, her mother; she never sees her |
 | what she wears here (test 8) | not named |
 | BRAKE (S9) | once a night (20 hours, as Ryan's door) · after she watched, "Peek through the gap." → `laura_alone_peek`, pays nothing |
-| raises | the look: none · "Keep watching.": corruption add +1, cap 19 · no ladder number moves |
+| raises | the look: none · "Keep watching.": corruption add +1, cap 19 · `laura_gaps_watched` add +1 (counts toward her step 4) |
 | the crude-word ceiling | the park's: tits, nipples, ass, wet, clit · no cunt, fuck, cum, pussy (guess: LO to confirm for Laura) |
 
 ## Branch map — one row per screen (S1)
@@ -25,6 +29,31 @@
 
 **The no** ("Pull the door to."): nothing pays.
 **Laura's want, shown:** alone while Mark stays downstairs; it feeds her arc and the Saturday scene's ending (her hand under the sheet). Nothing in 0.1 reads `saw_laura_alone` yet.
+
+## After her step 3 and step 4 (changed 2026-11-01)
+
+| when | what changes |
+|---|---|
+| `laura_lonely` set (step 3) | `crack` gains one line, after "Downstairs the TV mutters.": "The good dress you zipped her into hangs on the wardrobe door." True on every night after the Saturday it happened |
+| her step 4 ready (its gate met) | `laura_04_she_saw_you` fires in this slot instead (priority over this canvas) |
+| `laura_04_done` set | the door option opens `crack_after` in place of `crack`; "Keep watching." → `watch_after`; the same pay, brake and no |
+
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+|---|---|---|---|---|
+| `crack_after` | Laura on her side, back to the door, face to the wall, her hand between her thighs; she knows the door is open | yes | "Keep watching." → `watch_after` · "Pull the door to." → the hall | `saw_laura_alone`, `laura_alone_seen` set (on every exit) |
+| `watch_after` | she comes into the pillow, almost silent; she doesn't turn round; you go to your room | yes | "Back to your room." → her room | corruption add +1, cap 19 · `laura_gaps_watched` add +1 |
+
+**`crack_after`** · 132 words · explicit words 5 · median sentence 8 · act rungs: hands · written by `v2-prose`, measured by `gates.py --beat`, 2026-11-01. "She is quieter than she used to be" is true only behind `laura_04_done`, where it shows.
+
+> Her door is open a hand's width, and the lamp is low. Laura lies on her side with her back to you, her face to the wall. Her hip is bare, and so is her ass, round and pale. Her hand is between her thighs from the front, moving slow. You hear it, a small wet sound, steady. She is quieter than she used to be. She doesn't look round, but she knows the door is open. Downstairs the TV mutters. You know you should go. You stay. Her shoulders tighten. Her ass clenches as her fingers work her clit. Heat climbs your face. Your nipples go hard, and you are wet. You keep your hands at your sides. A soft moan leaves her, and her thighs press tight around her hand.
+
+*The last sentence:* the moan, her thighs tight round her hand. On the body.
+
+**`watch_after`** · 125 words · explicit words 4 · median sentence 8 · act rungs: hands, vaginal (her own fingers)
+
+> You stay in the gap of the door. Laura's fingers slide off her clit and push inside her, faster now. Her hips rock back toward the door, toward you. She shoves her face into the pillow. Her thighs start to shake. Her ass clenches hard, twice, and she comes with one long breath into the pillow, almost silent. Downstairs, Mark's TV laughs at something. Laura says nothing. She doesn't turn round. She stays on her side, breathing hard, her hand still between her thighs. You back away to your room. You lie down on top of the covers. Your nipples are tight and aching. You're wet, and you press your thighs together hard. Your clit throbs, and you keep both hands flat on the sheet.
+
+*The last sentence:* your clit throbbing, your hands flat on the sheet. On the body.
 
 ## Prose
 
@@ -52,3 +81,10 @@ You stay. Your hand stays flat on the door frame. Laura pushes two fingers insid
 | 22:00–23:00, Mark reworded | LO, 2026-10-29 (DECISIONS 83) |
 | the walk-in shape and pay | DECISIONS 79 |
 | the prose | `v2-prose`, from the spec in chat · guess until LO signs |
+| the counter, the step-3 line, the after-step-4 screens | `proposals/LAURA_R1_LADDER.md`, step 4 and "the gap after step 4" (signed 2026-11-01) |
+
+## Changed after the build (2026-11-01), signed by LO 2026-11-01
+
+| row | was | now |
+|---|---|---|
+| gate | none: open at Good Girl | `laura_step` gte 2: after the wine, "Mark hasn't looked at me like that since the wedding." Her want is shown before the gap |

@@ -1,5 +1,9 @@
 # [READY] Person — Mark
 
+> **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the release-1 ladder, from `proposals/MARK_R1_LADDER.md` (signed 2026-11-01). Changed: what he keeps, Ladder, the seven columns, Leak and promise, step 4, Everyday (the paid-look column cut), Cut, Rows a gate needs. Everything else as signed.
+
+> **Changed 2026-10-31, re-signed by LO 2026-10-31** (DECISIONS 98): the towel at home.
+
 > **Changed 2026-10-30, waiting for LO's re-sign** (DECISIONS 92): channel 5 with him (`living_tv_channels.md`, `mleave`) raises his Want +2 and her Corruption +2 (cap 19 / 39), once a day. He has no Corruption meter; Want is the one that moves.
 
 > **Changed 2026-10-29, re-signed by LO 2026-10-29** (DECISIONS 83): Laura is awake and alone 22:00–23:00, so his lines say she has "gone up", not that she is asleep. Step 4 is named "After she's gone up".
@@ -14,7 +18,7 @@
 | role | step-father |
 | what she wants from him | his approval, and to be off the hook |
 | what he visibly wants, each visit | control, and her |
-| what he keeps | want + power (channel 5 with her: Want +2, once a day, DECISIONS 92) |
+| what he keeps | want + power (channel 5 with her: Want +2, once a day, DECISIONS 92) · **Power +5 on each short Sunday** (`sheets/systems/money_pressure.md`); Power picks his version or hers at the table (his at 50+) · nothing of his reads Want this release; it is stored for later |
 | where he sleeps | `home_master_bedroom` |
 | what he calls her | "@player"; "@player.nickname" when he's soft (LO, 2026-10-08, question 71: never "kid") |
 | met | day 1, the house |
@@ -41,19 +45,19 @@
 
 ## Ladder — one guidance card per step (S10)
 
+> **Changed 2026-11-01, re-signed by LO 2026-11-01:** four steps, one per first. No sex and no money for her body
+> this release (LO). His steps are paced by Sundays and her short weeks, not by his meter: a declared exception to
+> taste rule 5. Raises are as built.
+
 | n | canvas | where | when | gate | raises | the no | guidance card line |
 |---|---|---|---|---|---|---|---|
-| 1 (Mark A 1) | `mark_01_count_it_slowly` | `home_kitchen` | Sun 08:00–12:00 | `rent_starts` | want add +10 | "Let me get dressed first." (parked) | Sunday morning, the kitchen: Mark counts the rent. |
-| 2 (Mark A 2) | `mark_02_late_notice` | `home_kitchen` | Mon, Tue, Wed, Thu, Fri, Sun 22:00–00:00 | his Want 10 | want add +10 | "Shut the drawer." (parked) | Late at night, the kitchen drawer: Mark is on the phone next door. |
-| 3 (Mark A 3) | `mark_03_shorts` | `home_kitchen` | Sun 08:00–12:00 | `rent_starts` · Corruption 20 · Exhib. 20 · his Want 20 | want add +10 · exhibitionism add +3 | "I'm not changing for you." (parked) | Sunday morning at the table: Mark wants shorts this time. |
-| 4 (Mark A 4) | `mark_04_after_shes_asleep` | `home_living_room` | Mon, Tue, Wed, Thu, Fri, Sun 22:00–00:00 | Corruption 40 · Exhib. 20 · his Want 30 | want add +10 | "I'll pay it Sunday like everyone else." (parked) | Late at night in the living room, Laura gone up: Mark is still up. |
-| 5 (Mark A 5) | `mark_05_a_bill_an_inch` | `home_living_room` | Sun–Fri 23:00–00:00 · Mon–Sat 00:00–01:00 (not Sunday 00:00–01:00) | Corruption 40 · Exhib. 20 · his Want 40 | want add +10 · corruption add +3 | "Hands off, Mark." · E: "Not tonight." (parked) | Midnight in the living room: Mark pays by the inch, five an inch, up to twenty. |
-| 6 (Mark A 6) | `mark_06_our_arrangement` | `home_garage` | Mon, Tue, Thu, Fri 19:00–22:00 | Corruption 40 · his Want 50 | want add +10 | "There's no arrangement." (parked) | An evening in the garage: Mark wants to talk terms. |
-| 7 (Mark A 7) | `mark_07_twenty_and_you_can_look` | `home_kitchen` | Sun 08:00–12:00 | `rent_starts` · Corruption 40 · Exhib. 40 · his Want 60 | want add +10 · exhibitionism add +3 | "Just the rent." (parked) | Sunday morning at the table: name a price. |
-| 8 (Mark A 8) | `mark_08_the_red_circle` | `home_kitchen` | Sun 12:00–18:00 | Corruption 40 · his Want 70 | want add +10 | "Never mind." (parked) | Sunday afternoon: the fridge calendar, and Laura's late Wednesday. |
-| 9 (Mark A 9) | `mark_09_his_chair` | `home_kitchen` | Wed 18:00–22:00 | Corruption 40 · Exhib. 40 · his Want 80 | want add +10 | his: "My chair." · hers: "No. I count." (parked) | Wednesday evening, Laura late and Ryan at his league: take Mark's chair. |
+| 1 | `mark_01_count_it_slowly` | `home_kitchen` | Sun 08:00–12:00 | `rent_starts` | want add +10 | "Let me get dressed first." (parked) | Sunday morning, the kitchen: Mark counts the rent. |
+| 2 | `mark_02_late_notice` | `home_kitchen` | Mon, Tue, Wed, Thu, Fri, Sun 22:00–00:00 | step 1 (was his Want 10) | want add +10 · `knows_mark_debt` set | "Shut the drawer." (parked) | Late at night, the kitchen drawer: Mark is on the phone next door. |
+| 3 | `mark_03_shorts` | `home_kitchen` | Sun 08:00–12:00 | step 2 · she has been short once (`rent_carried` set; was Corruption 20 · Exhib. 20 · his Want 20) | want add +10 · exhibitionism add +3 · `mark_dress_rule` set | "I'm not changing for you." (parked) | Sunday morning at the table, after a short week: Mark wants shorts this time. |
+| 4 | `mark_06_our_arrangement`, reworked (top step) | `home_garage` | Mon, Tue, Thu, Fri 19:00–22:00 | step 3 · Ryan's step 4 done (was Corruption 40 · his Want 50) | want add +10 · `mark_arrangement` set | "There's no arrangement." (parked) | An evening in the garage: Mark saw something, and wants to talk terms. |
+| — | locked | his card | — | — | — | — | "Mark, later. (After the house is yours.)" |
 
-Every step's gate also says the drinks boost is off. Stage numbers: 20 is Curious or Daring, 40 Bold or Showing.
+Every step's gate also says the drinks boost is off.
 
 ## Card goals (LO's play note, 2026-10-08)
 
@@ -61,6 +65,16 @@ Each guidance card's goals are the step's real requirements: the meters, flags, 
 row above. Never the step counter (no "1 / 2"). A requirement on another person's ladder is named as
 the event, e.g. "after Ryan's feet-in-his-lap night".
 
+## Each step, by the seven columns (`sheets/TASTE_COLUMNS.md`)
+
+| n | the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
+|---|---|---|---|---|---|---|---|
+| 1 | he licks his thumb and counts her rent out bill by bill, slower than he needs to, his eyes on her legs | Mark | short, in front of him | "Watch him count." · or her tone | the slow count; "And not the shirt, next time." | yes | the Sunday table, every week |
+| 2 | the drawer by the fridge: Vance's LATE NOTICE, and Mark in the doorway on the phone, "Friday, Frank." | his secret is hers | being caught reading it | she reads it | "Put it back." He doesn't shout | yes | `knows_mark_debt`; he owes, and she knows |
+| 3 | "Not the shirt this time. Shorts." She comes down in the pair that shows the curve of her ass, and he loses his place twice | Mark | his rule on her body, every Sunday | she changes, or comes down in them first | the rule; "Every Sunday. Like that." | yes | `mark_dress_rule`: what she wears to the table is his rule |
+| 4 | the garage: "I saw you come out of his room at midnight." / "Vance's letter is in the drawer." Each keeps one | Mark knows about Ryan; she knows about Vance | Mark telling Laura | "Deal." · or "There's no arrangement." | he names what he saw | yes | `mark_arrangement`; the Sunday table changes |
+
+**Her voice (rule 7):** a low and a high line on each step sheet.
 
 ### Leak and promise (S5)
 
@@ -69,18 +83,34 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 | 1 | none: step 1, and it says so | "I am counting." |
 | 2 | his eyes on her hem at every count | "Put it back." |
 | 3 | "Friday, Frank." He knows she heard | "Not the shirt this time." |
-| 4 | he stays up after Laura goes up | "Come down after your mother's gone to bed." |
-| 5 | a bill folded in his hand, waiting | "Keep going." He doesn't, not yet. |
-| 6 | he can't hold her look at dinner | "Our arrangement." |
-| 7 | he counts the twenties twice | "Twenty, and you can look." |
-| 8 | his chair, pulled out for nobody | "You'll see." |
-| 9 | he waits for Wednesday, and she sees it | "Count it slowly, Mark." His lap waits. |
+| 4 | he can't hold her look at dinner | "Our arrangement." |
 
 **Final no:** "I tell Mom (ends his path)". Rent is strict forever.
 
-**What the last 0.1 step turns into:** the Sunday table in two versions, his terms or hers. Hers is goal 1's body route.
+## Step 4, reworked
 
-**After** (SP2, where the arc ends, past 0.1): the rent table plays in two versions, his terms or hers; hers is goal 1's body route, and paying in full is the separate money route.
+- **The built reason is cut:** "your hand was on my leg" came from the paid couch (Mark A 4–5).
+- **The new reason:** Mark has seen her come out of Ryan's room after midnight (the gate reads Ryan's step 4). His
+  version (Power 50+): "Our arrangement. Your mother has enough to worry about." Hers (under 50): she names Vance's
+  letter first.
+- **After:** the Sunday table: he counts at normal speed now, and his eyes stay on her, a new line per week. He
+  knows about Ryan; `mark_arrangement` is stored for a later release (Mark at the door).
+- **Top step, declared not a payoff** (taste rule 2): Mark's release-1 ladder is the rent, by LO's call.
+
+**Declared exceptions** (all from LO's call, no sex with Mark this release): rule 2 (the top step), rule 5 (paced by
+Sundays), rule 6 (no hot repeatable; his looks live in the Sunday table, the towel and channel 5).
+
+**After** (a later release, after she buys the house): peeking, saying her name.
+
+## Cut, and what the player loses
+
+- **Mark A 4, 5, 7, 8, 9:** the whole paid route (`mark_04_after_shes_asleep`, `mark_05_a_bill_an_inch`,
+  `mark_07_twenty_and_you_can_look`, `mark_08_the_red_circle`, `mark_09_his_chair`; sheets marked cut). **Goal 1
+  loses its body route**: she pays her own way through work only.
+- **Every paid source:** the paid look in the garden (`home.py:503`), the Sunday table's twenties at Mark step 7
+  (`mark.py:407-412`), the paid tease and touch on his hubs (`mark.py:486-492`), the paid effects in the cut steps
+  (`mark.py:229, 292, 421, 431`).
+- **"Your hand was on my leg"** at step 4, replaced by Ryan's room.
 
 ## Phone thread
 
@@ -101,8 +131,8 @@ Each follow-up waits for her reply (`after_round`), and a different answer follo
 ## Everyday at home (system `home_life`, LO's picks, 2026-10-08)
 
 Each item is a choice inside Mark's hub in that room and window. Raise: Mark's Want add +1, once a day
-per item. Tease from Curious and Mark A 3; from Bold and Mark A 7, the look he pays for (his 0.1 price,
-"twenty and you can look"); each paid look is money add +20, his Want add +1, Exhibitionism add +1, and one paid look a day across all his items (`mark_paid_look`, 12 hours); sex waits for Hungry. Lines are samples (guess).
+per item. Tease from Curious and Mark step 3. **Changed 2026-11-01: the paid-look column below is cut** (no money
+for her body, LO); it stays in this table only as the record of what was cut. Lines are samples (guess).
 
 | item | where · when | plain (Good Girl) | tease (Curious) | the paid look (Bold) |
 |---|---|---|---|---|
@@ -128,14 +158,14 @@ Mark's living room (up late) and kitchen hubs react to the towel, every visit. B
 | 40–59 | eyes on her thighs, too long / "That's all you've got on." / wet feet to the knot | prices her tits; "Cover up before your mother sees," and watches her do it |
 | 60+ | "Stand there. Let me look at you." / "Don't you dare go and change." / "Come here." | "Did I say you could cover up?" He looks as long as he likes. |
 
-- "Drop it." needs Exhibitionism 40, his Dominance 60+ and his step 5: "Turn round." "Pick it up. Slowly."
+- "Drop it." needs Exhibitionism 40 and his Dominance 60+, no story step (LO, 2026-10-31): "Turn round." "Pick it up. Slowly."
 - Pays his Dominance +2 once a day (`mark_towel_today`). Laura in the room: caught, her Love −3, no pay.
 
 ## Rows a gate needs
 
 | row | gate |
 |---|---|
-| Want read by every step gate | the men's numbers are read |
+| the step counter and `rent_carried` read by his step gates | a flag is read |
 | Power read: which version of the table plays | the men's numbers are read |
 | labelled no on every M version | a no has content |
 
@@ -144,6 +174,7 @@ Mark's living room (up late) and kitchen hubs react to the towel, every visit. B
 | key choice | source |
 |---|---|
 | steps, lines and nos | SP2 · the arc ideas (Mark A) |
+| the release-1 ladder, four steps, no sex, no paid route, step 4's new reason | `proposals/MARK_R1_LADDER.md`, signed by LO 2026-11-01 (DECISIONS 99–111) |
 | every M version has a labelled no | LO, 2026-10-04 |
 | what he calls her, his lines | guess |
 | the rent text | guess · SP4 for the amount |

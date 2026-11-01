@@ -1,4 +1,6 @@
-# [READY] Scene — hale_04_claire_knocks
+# [REWORKED] Scene — hale_04_claire_knocks
+
+> **REWORKED 2026-11-01** (DECISIONS 113): the canvas is rebuilt as Hale's top step, "The first session" (`hale_04_first_session.md`). Her offer ("Undo it.", "Your husband's a great teacher.") becomes his lead. Kept on disk as the record; its beats are not used.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

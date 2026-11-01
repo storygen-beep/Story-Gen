@@ -233,6 +233,16 @@ class TweeComprehensiveGeneratorV2:
         # living in its own section: the widget must be defined unconditionally.
         twee_sections.append(self._generate_cast_page())
 
+        # [ui] timetable_button — its widget, only in a game that asks for it (StoryCaption
+        # calls it only then, so no other game carries an empty widget).
+        if self.timetable_button:
+            twee_sections.append(
+                ':: TimetableWidgets [widget nobr]\n'
+                '<<widget "timetableButton">>\n'
+                '<div id="timetable-btn-widget"><<link "Timetable">><<run setup.openTimetable()>><</link>></div>\n'
+                '<</widget>>\n'
+            )
+
         twee_sections.append(self._generate_cheat_page())
 
         # Add canvas review pages (only in dev mode)
@@ -1313,6 +1323,10 @@ class TweeComprehensiveGeneratorV2:
         self.sidebar_hide = set((self.project.metadata or {}).get("sidebar_hide") or [])
         # [ui] phone_clock — the floating clock while the sidebar is closed on a phone.
         self.phone_clock = bool((self.project.metadata or {}).get("phone_clock"))
+        # [[ui.timetable]] — her classes, drawn by setup.timetableHtml; [ui]
+        # timetable_button adds the sidebar button. Empty = nothing emitted.
+        self.timetable = list((self.project.metadata or {}).get("timetable") or [])
+        self.timetable_button = bool((self.project.metadata or {}).get("timetable_button")) and bool(self.timetable)
         # Player cheat page — empty dict = page + sidebar button not emitted.
         # Authored under [ui.cheat_page]. One build ships everywhere; which rows are
         # live is decided at runtime by the codes the player has entered.
@@ -4055,7 +4069,7 @@ setup.tips_page = {json.dumps(self.tips_page or {})};
 setup.npc_arc_stages = {json.dumps(self.npc_arc_stages_map)};
 // G: per-NPC cast-card tag line, slug-keyed. Empty object = no NPC declares
 // `tags` and the cast card renders no tag row (existing TOMLs unaffected).
-setup.npc_tags = {json.dumps(self.npc_tags_map)};{self._cast_page_js()}{self._cast_traits_js()}{self._phone_clock_js()}
+setup.npc_tags = {json.dumps(self.npc_tags_map)};{self._cast_page_js()}{self._cast_traits_js()}{self._phone_clock_js()}{self._timetable_js()}
 setup.phone_enabled = {"true" if self.phone_enabled else "false"};
 setup.phone_purchase_flag = {json.dumps(self.phone_purchase_flag)};
 setup.phone_data = {phone_data_json};
@@ -6225,17 +6239,26 @@ setup.canvasRollChance = function(canvas) {{
 // pick in $game_state.pool_seen[key] (index -> times shown). Once every entry has been
 // seen the weights are equal again. The map is in the skeleton (and so the backfill)
 // for any game that has such a pool; the guard covers a save the backfill missed.
+// seen_weight = 0 is a shuffle bag: no entry repeats until all have shown. When every
+// entry weighs 0 the round is over, so the map is cleared and the next round starts
+// fresh (before this fix the pick stuck on the last entry for ever).
 setup.pickRememberedPoolEntry = function(key, n, seenWeight) {{
     var gs = State.variables.game_state = State.variables.game_state || {{}};
     if (!gs.pool_seen || typeof gs.pool_seen !== 'object') gs.pool_seen = {{}};
     var seen = gs.pool_seen[key];
     if (!seen || typeof seen !== 'object') seen = gs.pool_seen[key] = {{}};
-    var w = (typeof seenWeight === 'number') ? seenWeight : 0.1;
+    var w = (typeof seenWeight === 'number' && seenWeight > 0) ? seenWeight : (seenWeight === 0 ? 0 : 0.1);
     var weights = [], total = 0;
     for (var i = 0; i < n; i++) {{
         var wi = seen[i] ? w : 1;
         weights.push(wi);
         total += wi;
+    }}
+    if (total <= 0) {{
+        seen = gs.pool_seen[key] = {{}};
+        weights = [];
+        for (var k = 0; k < n; k++) weights.push(1);
+        total = n;
     }}
     var r = Math.random() * total, pick = n - 1;
     for (var j = 0; j < n; j++) {{
@@ -11918,6 +11941,135 @@ jQuery(document).on("click", ".cast-sched .cast-day", function () {
     box.replaceWith(setup.castScheduleHtml(box.attr("data-npc"), Number(this.getAttribute("data-day"))));
 });"""
 
+    def _timetable_js(self) -> str:
+        """[[ui.timetable]] — her classes as a day-by-day table in a dialog, built like the
+        people's schedule pop-up (setup.castScheduleHtml): day chips with today picked, then
+        one row per class: time, class, room, lecturer. Today's rows say Now (on), Next (the
+        first still to start, "in N min") or are dimmed (over). Opened by
+        setup.openTimetable(day) from the sidebar button or any link. Empty unless the game
+        declares a timetable, so every other game carries none of it."""
+        if not self.timetable:
+            return ""
+        rows = json.dumps(self.timetable)
+        place_name = ("setup.locShownName(slug, name)" if self._has_hidden_places() else "name")
+        return """
+// [[ui.timetable]] — the class rows, as the TOML declares them.
+setup.timetable = """ + rows + """;
+setup.timetableHtml = function (day) {
+    var esc = function (s) {
+        return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    };
+    var mins = function (hhmm) { var p = String(hhmm).split(":"); return Number(p[0]) * 60 + Number(p[1]); };
+    var names = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    var ts = State.variables.game_state.time_state;
+    var today = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        .indexOf(ts.current_day);
+    var nowMin = (Number(ts.current_hour) || 0) * 60 + (Number(ts.current_minute) || 0);
+    var placeName = function (slug) {
+        var loc = (setup.locations || {})[slug];
+        var name = (loc && loc.name) || slug;
+        return """ + place_name + """;
+    };
+    var lecturerName = function (slug) {
+        if (!slug) return "";
+        var npc = (State.variables.npcs || {})[setup.resolveNpcId(slug)];
+        return (npc && npc.name) || "";
+    };
+    var range = function (a, b) {
+        var x = setup.formatHHMM(a, true), y = setup.formatHHMM(b, true);
+        var px = x.slice(-3), py = y.slice(-3);
+        if ((px === " AM" || px === " PM") && px === py) x = x.slice(0, -3);
+        return x + "–" + y;
+    };
+    var chips = "";
+    for (var d = 0; d < 7; d++) {
+        var has = setup.timetable.some(function (r) { return r.weekdays.indexOf(d) !== -1; });
+        chips += '<button type="button" class="tt-day' + (has ? "" : " tt-day-empty") +
+            (d === today ? " tt-day-today" : "") + '" data-day="' + d + '" aria-pressed="' +
+            (d === day) + '">' + names[d] + "</button>";
+    }
+    var rows = setup.timetable.filter(function (r) { return r.weekdays.indexOf(day) !== -1; })
+        .slice().sort(function (a, b) { return mins(a.from) - mins(b.from); });
+    var nextSeen = false;
+    var list = rows.length ? rows.map(function (r) {
+        var cls = "tt-row", badge = "";
+        if (day === today) {
+            var a = mins(r.from), b = mins(r.to);
+            if (nowMin >= a && nowMin < b) { cls += " is-now"; badge = "Now"; }
+            else if (nowMin >= b) { cls += " is-over"; }
+            else if (!nextSeen) {
+                nextSeen = true;
+                cls += " is-next";
+                var wait = a - nowMin, h = Math.floor(wait / 60), m = wait % 60;
+                badge = "Next · in " + (h ? h + " h" + (m ? " " + m + " min" : "") : m + " min");
+            }
+        }
+        var who = lecturerName(r.lecturer);
+        return '<li class="' + cls + '"><span class="tt-time">' + esc(range(r.from, r.to)) +
+            '</span><span class="tt-what"><span class="tt-class">' + esc(r["class"]) +
+            (badge ? ' <span class="tt-badge">' + esc(badge) + "</span>" : "") + "</span>" +
+            '<span class="tt-where">' + esc(placeName(r.place)) + (who ? " · " + esc(who) : "") +
+            "</span></span></li>";
+    }).join("") : '<li class="tt-none">No classes this day.</li>';
+    return '<div class="tt"><div class="tt-days">' + chips + '</div><ul class="tt-list">' +
+        list + "</ul></div>";
+};
+setup.openTimetable = function (day) {
+    var today = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        .indexOf(State.variables.game_state.time_state.current_day);
+    var pick = (typeof day === "number") ? day : (today < 0 ? 0 : today);
+    Dialog.setup("Timetable", "timetable-dialog");
+    jQuery(Dialog.body()).empty().append(setup.timetableHtml(pick));
+    Dialog.open();
+};
+// A day chip redraws the table for that day.
+jQuery(document).on("click", ".tt .tt-day", function () {
+    jQuery(this).closest(".tt").replaceWith(setup.timetableHtml(Number(this.getAttribute("data-day"))));
+});"""
+
+    def _timetable_css(self) -> str:
+        """The timetable dialog's look; see _timetable_js. Empty unless the game has one."""
+        if not self.timetable:
+            return ""
+        return """
+/* [[ui.timetable]] — day chips, then one row per class (time | class, room · lecturer). */
+.tt-days { display: flex; gap: 4px; margin: 0 0 12px; }
+.tt-day {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 36px;
+    padding: 0;
+    border: 1px solid var(--theme-border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--theme-text);
+    font-size: 13px;
+    cursor: pointer;
+}
+.tt-day.tt-day-today { font-weight: 700; }
+.tt-day.tt-day-empty { opacity: 0.4; }
+.tt-day[aria-pressed="true"] { background: var(--theme-accent); border-color: var(--theme-accent); color: var(--theme-bg, #111); opacity: 1; }
+.tt-list { list-style: none; margin: 0; padding: 0; }
+.tt-row {
+    display: grid;
+    grid-template-columns: 7.5em 1fr;
+    column-gap: 12px;
+    padding: 9px 8px;
+    border-top: 1px solid var(--theme-border);
+    font-size: 15px;
+}
+.tt-row:first-child { border-top: 0; }
+.tt-time { color: var(--theme-text-muted, #8a8a8a); font-variant-numeric: tabular-nums; }
+.tt-class { display: block; font-weight: 600; }
+.tt-where { display: block; color: var(--theme-text-muted, #8a8a8a); font-size: 14px; }
+.tt-badge { font-weight: 600; font-size: 13px; color: var(--theme-accent); margin-left: 6px; }
+.tt-row.is-now { box-shadow: inset 3px 0 0 var(--theme-accent); background: rgba(255, 255, 255, 0.03); }
+.tt-row.is-now .tt-time { color: var(--theme-accent); font-weight: 600; }
+.tt-row.is-over { opacity: 0.45; }
+.tt-none { padding: 9px 8px; color: var(--theme-text-muted, #8a8a8a); }
+"""
+
     def _phone_clock_js(self) -> str:
         """[ui] phone_clock — a small clock pinned top-left while the sidebar is stowed on a
         narrow screen; a tap opens the sidebar. Empty unless the game asks for it."""
@@ -14999,14 +15151,22 @@ setup.rentStageLine = function () {
 // EN2b — a short week never ends the game. She pays what she can (maybe nothing); the
 // rest is owed on top of next week's rent. Runs inside the RentDay links, so the short
 // screen only reads what this stores and a reload of it charges nothing.
+// Every short week also adds 1 to the player counter `rent_short_weeks`, so a game can
+// make the first, second and third short Sunday cost different things (a condition
+// `trait rent_short_weeks gte N`). The game declares it in [player.core_traits] to read
+// it; an old save without it starts from 0.
 setup.RENT_CARRIED_FLAG = "rent_carried";
+setup.RENT_SHORT_WEEKS_TRAIT = "rent_short_weeks";
 setup.carryRent = function (due, paid) {
     var rs = State.variables.game_state.rent_state;
-    State.variables.player.core_traits.money -= paid;
+    var ct = State.variables.player.core_traits;
+    ct.money -= paid;
     if (setup.recordRentPayment) setup.recordRentPayment(paid);
     rs.owed = due - paid;
+    if (ct.rent_late_fee) ct.rent_late_fee = 0;   // the due included it; now it is part of owed
     rs.short_paid = paid;
     rs.is_due = false;
+    ct[setup.RENT_SHORT_WEEKS_TRAIT] = (Number(ct[setup.RENT_SHORT_WEEKS_TRAIT]) || 0) + 1;
     if (!(State.variables.flags || {})[setup.RENT_CARRIED_FLAG]) {
         setup.applyAndNotifyFlag('player', null, setup.RENT_CARRIED_FLAG, 'set');
     }
@@ -19788,6 +19948,9 @@ $(document).on(':passagestart', function(ev) {
         _nav_buttons = [("quests", "<<journalButton>>"), ("people", "<<castButton>>"),
                         ("tips", "<<tipsButton>>"), ("cheats", "<<cheatButton>>"),
                         ("stats", "<<statsButton>>"), ("schedules", "<<scheduleButton>>")]
+        if self.timetable_button:
+            # [ui] timetable_button — after People, only in a game that asks for it.
+            _nav_buttons.insert(2, ("timetable", "<<timetableButton>>"))
         _nav_dev = "\n".join(w for k, w in _nav_buttons + [("flags", "<<flagsButton>>")]
                              if k not in self.sidebar_hide)
         _nav = "\n".join(w for k, w in _nav_buttons if k not in self.sidebar_hide)
@@ -20051,17 +20214,27 @@ if (clothingMsg) {
             # allowed, and the short screen reports the carry instead of warning or
             # evicting. Every piece is "" without carry.
             carry = self.rent_carries
+            # A late fee (2026-11-01): a game may add to next week's rent through the
+            # player trait `rent_late_fee` (an `add` effect, e.g. the landlord's fee after a
+            # second short week). It is part of the due, said on its own line, and zeroed by
+            # a full payment or folded into `owed` by a carry. A game that never sets it reads 0.
             rent_due_expr = (
-                "(" + rent_expr + ") + ($game_state.rent_state.owed || 0)" if carry else rent_expr
+                "(" + rent_expr + ") + ($game_state.rent_state.owed || 0)"
+                " + ($player.core_traits.rent_late_fee || 0)" if carry else rent_expr
             )
             rent_owed_line = (
                 "<<if $game_state.rent_state.owed gt 0>>\n"
                 '<p class="rent-owed">Owed from last week: <<print _cur>><<print $game_state.rent_state.owed>>.</p>\n'
                 "<</if>>\n"
+                "<<if $player.core_traits.rent_late_fee gt 0>>\n"
+                '<p class="rent-owed">Late fee: <<print _cur>><<print $player.core_traits.rent_late_fee>>.</p>\n'
+                "<</if>>\n"
                 if carry else ""
             )
             rent_paid_clears_owed = (
-                "      <<set $game_state.rent_state.owed to 0>>\n" if carry else ""
+                "      <<set $game_state.rent_state.owed to 0>>\n"
+                "      <<if $player.core_traits.rent_late_fee>><<set $player.core_traits.rent_late_fee to 0>><</if>>\n"
+                if carry else ""
             )
             rent_partial_link = (
                 "  <<if _money gt 0 and _money lt _rent>>\n"
@@ -21032,7 +21205,7 @@ if (clothingMsg) {
     font-size: 11px;
     color: var(--theme-text-muted, #8a8a8a);
     text-align: center;
-}""" + self._cast_page_css() + self._phone_clock_css() + self._cheat_page_css() + """
+}""" + self._cast_page_css() + self._phone_clock_css() + self._timetable_css() + self._cheat_page_css() + """
 
 /* Reduce gap between StoryCaption and Save/Restart menu */
 #story-caption {

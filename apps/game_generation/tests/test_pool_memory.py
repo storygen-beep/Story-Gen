@@ -116,7 +116,8 @@ def _pool(raw, cid="pool_room", i=0):
          'read only with trigger_mode = "random"'),
         (lambda r: _pool(r).update(memory="all"), 'memory must be "seen"'),
         (lambda r: _pool(r, i=1).update(seen_weight=0.5), 'read only with memory = "seen"'),
-        (lambda r: _pool(r).update(seen_weight="low"), "must be a number in (0, 1]"),
+        (lambda r: _pool(r).update(seen_weight="low"), "must be a number in [0, 1]"),
+        (lambda r: _pool(r).update(seen_weight=-0.1), "must be a number in [0, 1]"),
     ],
 )
 def test_misuse_is_an_error(mutation, fragment):
@@ -124,6 +125,13 @@ def test_misuse_is_an_error(mutation, fragment):
     mutation(raw)
     errs = _errors(raw)
     assert any(fragment in e for e in errs), errs
+
+
+def test_a_pool_may_be_a_shuffle_bag():
+    """seen_weight = 0 on a block_pool is legal (2026-11-01): no repeats until all shown."""
+    raw = _raw()
+    _pool(raw).update(seen_weight=0)
+    assert _errors(raw) == []
 
 
 # ── 3. inert without the keys ─────────────────────────────────────────────────
@@ -172,6 +180,25 @@ def test_each_entry_is_shown_once_before_any_repeats(html):
         }""")
         assert picks == [2, 1, 0]
         assert g.sv("game_state.pool_seen.k") == {"0": 1, "1": 1, "2": 1}
+        assert g.errors == []
+
+
+@needs_browser
+def test_a_shuffle_bag_never_repeats_inside_a_round(html):
+    """seen_weight = 0: three draws show all three entries, whatever the dice, and the
+    fourth starts a new round instead of sticking on the last entry (the old bug: every
+    weight 0, so the pick fell through to n - 1 for ever)."""
+    with open_game(html) as g:
+        picks = g.js("""() => {
+            Math.random = () => 0.999;
+            const s = SugarCube.setup;
+            const out = [];
+            for (let i = 0; i < 7; i++) out.push(s.pickRememberedPoolEntry('bag', 3, 0));
+            return out;
+        }""")
+        assert sorted(picks[0:3]) == [0, 1, 2]
+        assert sorted(picks[3:6]) == [0, 1, 2]
+        assert g.sv("game_state.pool_seen.bag") == {str(picks[6]): 1}
         assert g.errors == []
 
 

@@ -7,20 +7,107 @@ TM = "npc_tom"
 out = []
 # Clocking out: the uniform off, her own top and jeans back on (iteration 002: sweep A5-02).
 CLOCK_OUT = [{"action": "unequip", "item_id": "cafe_uniform_normal"}, {"action": "unequip", "item_id": "cafe_uniform_sexy"}, {"action": "equip", "item_id": "tshirt"}, {"action": "equip", "item_id": "jeans"}]
-CLOCK_IN = [{"action": "equip", "item_id": "cafe_uniform_normal"}, {"action": "equip", "item_id": "cafe_uniform_sexy"}]
+# (release 1 fix) "equip" also ADDS the item (v2.py:17371, setup.addToWardrobe + equipItem), so equipping both uniforms
+# gave her the tight one on her first shift and put it on every time. Clock-in puts on the normal uniform, unless she
+# has changed into the tight one herself (her choice, job.md).
+CLOCK_IN = [{"action": "equip", "item_id": "cafe_uniform_normal"}]
 SEXY_ON = {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "equipped"}
 SEXY_OFF = {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "unequipped"}
 NO_CURFEW = cond(NO_CURFEW_ITEM)
 FRI = [wd(4), tod("18:00", "19:00")]   # the Friday evening shift, as it starts (iteration 002: A5-04)
 
+
+# ── the three levels (cafe_shift_scene.md, signed 2026-11-01, DECISIONS 121; job.md) ──
+GY = "npc_gary"
+GARY_IN = {"type": "npc_at_location", "location_id": "cafe", "npc_id": GY, "operator": "is_present"}
+GARY_OUT = {"type": "npc_at_location", "location_id": "cafe", "npc_id": GY, "operator": "is_absent"}
+# The evaluator takes flat lists only (v2.py triggerConditionsSatisfied: a nested group has no `type`
+# and fails), so the three levels are five flat, mutually exclusive cases:
+E_LO, E_HI = trait("exhibitionism", "lt", 20), trait("exhibitionism", "gte", 20)
+C_LO, C_HI = trait("corruption", "lt", 20), trait("corruption", "gte", 20)
+PARTS = {"L1": [[E_LO, SEXY_OFF]],
+         "L2": [[E_LO, SEXY_ON], [E_HI, C_LO], [E_HI, C_HI, trait("cafe_l2_shifts", "lt", 3)]],
+         "L3": [[E_HI, C_HI, trait("cafe_l2_shifts", "gte", 3)]]}
+
+def at_level(lv, *blocks, extra=()):
+    """The blocks, once per flat case of the level (only one case is ever true)."""
+    return [G(cond(*items, *extra), *blocks) for items in PARTS[lv]]
+
+def go_level(lv, text, node_, extra=()):
+    return [go(text, node=node_, mins=0, cond_=cond(*items, *extra)) for items in PARTS[lv]]
+
+L1_LINES = ["You bend to wipe a table and the conversation at the next one stops. When you straighten up it starts again, lower.",
+            "Two men at the counter watch you walk to the kitchen and back. One of them says something. The other one laughs.",
+            "A man in a suit doesn't look at his menu once. He looks at you the whole time you take his order, and over-tips."]
+# One setup for both yeses, so the line before each beat is true whichever she picks (a build note to LO:
+# the sheet's pool of three setups would let a setup and the other yes's beat disagree).
+L2_SETUP = ("In the back booth, one of three guys asks, \"Are you on the menu?\" and the table laughs. "
+            "At the counter, a guy on his own asks what time you get off.")
+L3_SETUP = "The slow hours are the ones where somebody always tries it. Today somebody does."
+L2_PLAY = "You don't tell them off. You smile and bring the check over slow. You lean across their table, much lower than you need to. They can see right down the front of your uniform. Your tits hang there for them, and your nipples are hard against the cloth. It scares you, and you like it more than it scares you. \"Ten,\" the one by the wall says, loud enough for the counter to hear. Tom watches from behind it and says nothing. You take your time with the cups, one at a time. Your ass is pushed out at the next booth the whole while. The bills on the check come to more than the meal. You stay bent over their table, your tits close enough for them to touch."
+L2_FLIRT = "You lean on the counter across from him, close. \"I get off when you stop staring at my tits.\" Your voice shakes on the last word, but you say it. He doesn't stop. His eyes stay right there, and your nipples go hard under your uniform. You walk two fingers up his arm, slow, from his wrist to his elbow. He swallows. You scoop whipped cream off a mug with your thumb and lick it clean, slowly. He watches your mouth the whole time. \"I'll think about it,\" you tell him. His face goes red and he shifts on his stool. At the coffee machine, Tom watches and says nothing. You turn away, and the guy's eyes drop to your ass. He tips double, eyes on your tits, while your nipples press hard against your apron."
+L3_A = "His hand lands on your ass as you lean in with the plate. You don't move. He squeezes, slow, a full handful through your uniform. You set the knife down. Then the fork, slower. His friend across the booth stops chewing and watches. The hand slides lower, onto the back of your bare thigh. His palm is warm and in no hurry. Your tits feel heavy, your nipples hard under your uniform, and his friend can see them. You're wet. You can't believe it. You still don't move. At the counter Tom has stopped wiping. His eyes follow the hand up your thigh. He says nothing. The man tucks a folded ten into your apron. Then his fingers go back to your thigh and squeeze, high, right under your ass."
+L3_B = "Gary holds out his cup without looking up from his paper. You lean in to pour. His free hand slides up the back of your thigh, under the hem of your uniform, and onto your ass. It stays there, warm and heavy. \"Sweetheart,\" he says. He turns a page with his other hand. You keep pouring, very slowly. His thumb strokes the curve of your ass, back and forth. Your nipples go tight against your uniform. You're wet, and your thighs press together. At the counter Tom sees it, but he doesn't stop it. Gary spreads his fingers and squeezes. The coffee climbs toward the rim. His palm stays on your ass until the cup is full."
+L3_C = "You let it. You drop onto his knee and the back table roars. His arm locks round your waist and pulls you tight against his chest. His big hand settles on your thigh and squeezes. Under your ass, through his trousers, his cock goes hard and thick. You feel it press up into you as he shifts. His other hand slides up your side and brushes the curve of your tit. Your nipples tighten under your uniform. You count to ten, slowly, and you do not move. Then you stand and smooth your apron flat. Tom watches from the counter and says nothing. The men slap bills onto the table, each tip bigger than the last. The one whose knee you sat on stays seated, his cock still tenting his trousers, his eyes on your ass."
+L2_NO = "You smile and keep walking. \"Not tonight, hon.\" The table groans. The tip is small."
+L3_PULL = "You step out from under his hand and put the plate down. \"Your food's here, sir.\" He laughs like it was a joke between you."
+L3_SLAP = "You slap his hand off you, loud. The café goes quiet. He throws his napkin on the table and leaves without paying the tip."
+GARY_L1 = "In booth four an older man with a folded newspaper lowers it when you pass, and raises it again when you look. Gary, the regular."
+GARY_L2 = "You've got a lovely way of pouring, sweetheart."
+GARY_AFTER = "Same booth, sweetheart. Same time."
+
+# the pay: $8 a shift plus the tip; the sexy uniform and the Friday evening close each double it (as built:
+# 12 / 16 / 24, cafe.py before 2026-11-01; LO kept the Friday close, DECISIONS 121)
+PAY_WHEN = [(cond(SEXY_OFF, {"type": "weekday", "weekdays": [0, 1, 2, 3, 5]}), 1),
+            (cond(SEXY_OFF, wd(4), tod("08:00", "18:00")), 1),
+            (cond(SEXY_OFF, *FRI), 2),
+            (cond(SEXY_ON, {"type": "weekday", "weekdays": [0, 1, 2, 3, 5]}), 2),
+            (cond(SEXY_ON, wd(4), tod("08:00", "18:00")), 2),
+            (cond(SEXY_ON, *FRI), 4)]
+WORKED = add("cafe_shifts_worked", 1)
+
+def pay(lo, hi, m):
+    return {"targetType": "player", "trait": "money", "op": "add", "clamp": False,
+            "value": 8 + lo * m if lo == hi else {"type": "random", "min": 8 + lo * m, "max": 8 + hi * m}}
+
+def capped_e(k, n, cap):
+    return {"targetType": "player", "trait": k, "op": "add", "value": n, "cap": cap}
+
+def _and(c1, c2):
+    return cond(*c1["items"], *c2["items"])
+
+def outcome_exits(tag, lo, hi, eff=(), flags=(), gary_flag=False):
+    out_ = []
+    for when, m in PAY_WHEN:
+        e = [pay(lo, hi, m), WORKED, *eff]
+        if gary_flag:
+            out_.append(go("Clock out.", loc="cafe", mins=180, wardrobe=CLOCK_OUT, cond_=_and(when, cond(GARY_IN)),
+                           eff=e + [{"targetType": "player", "trait": "money", "op": "add", "value": 4 * m, "clamp": False}],
+                           flags=list(flags) + [fset("gary_met"), fset("gary_let_it")]))
+            out_.append(go("Clock out.", loc="cafe", mins=180, wardrobe=CLOCK_OUT, cond_=_and(when, cond(GARY_OUT)),
+                           eff=e, flags=list(flags)))
+        else:
+            out_.append(go("Clock out.", loc="cafe", mins=180, wardrobe=CLOCK_OUT, cond_=when, eff=e, flags=list(flags) or None))
+    return out_
+
+def level1_exits():
+    """Level 1, no choice: the room looks. $2-4 tips; meeting Gary sets gary_met (npc_gary.md)."""
+    out_ = []
+    for when, m in PAY_WHEN:
+        for gary in (True, False):
+            out_.append(go("Clock out.", loc="cafe", mins=180, wardrobe=CLOCK_OUT,
+                           cond_=cond(*when["items"], *PARTS["L1"][0], GARY_IN if gary else GARY_OUT),
+                           eff=[pay(2, 4, m), WORKED], flags=[fset("gary_met")] if gary else None))
+    return out_
+
 def money(n):
     return {"targetType": "player", "trait": "money", "op": "add", "value": n, "clamp": False}
 
-def shift_choice(label, k, extra=()):
+def shift_choice(label, k, extra=(), sexy=False):
     prev = [flag(f"cafe_shift_{i}_today") for i in range(1, k)]
     return go(label, node="shift", mins=0, costs=[{"trait": "energy", "value": 20}],
-              cond_=cond(*prev, flag(f"cafe_shift_{k}_today", False), *extra),
-              flags=[fset(f"cafe_shift_{k}_today")], wardrobe=CLOCK_IN)
+              cond_=cond(*prev, flag(f"cafe_shift_{k}_today", False), *extra, SEXY_ON if sexy else SEXY_OFF),
+              flags=[fset(f"cafe_shift_{k}_today")], wardrobe=None if sexy else CLOCK_IN)
 
 # the evening shift is shut under the curfew (job sheet: "the evening shift says why")
 DAY = tod("08:00", "18:00")
@@ -31,8 +118,9 @@ BOOKED_PAY = [{"targetType": "player", "trait": "money", "op": "add", "value": 4
 choices = []
 for k in (1, 2, 3):
     for extra in ([DAY], [EVE, NO_CURFEW_ITEM]):
-        c = shift_choice("Work a shift (3 hours, 20 energy).", k, extra)
-        choices += booked_split(c, "tom_shift_booked", eff=BOOKED_PAY) if k == 1 else [c]
+        for sexy in (False, True):
+            c = shift_choice("Work a shift (3 hours, 20 energy).", k, extra, sexy)
+            choices += booked_split(c, "tom_shift_booked", eff=BOOKED_PAY) if k == 1 else [c]
 
 out.append({
     "id": "cafe_shift", "name": "Work a shift",
@@ -58,20 +146,54 @@ out.append({
             G(cond(SEXY_ON), P("In the tight uniform with the top button open, every man who orders leans a little further over the counter. Every one of them tips more.")),
             G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}),
               P("No bra under the uniform. Every time you lean to pour, somebody stops talking.")),
-            G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"},
-                   {"type": "npc_at_location", "location_id": "cafe", "npc_id": "npc_gary", "operator": "is_present"}),
-              D(TM, "Booth four's going to tip big today.")),
+            # (cut 2026-11-01: Tom's "Booth four's going to tip big today." Tom is strict, DECISIONS 117)
             G(cond(trait("tom_step", "gte", 1), ntrait(TM, "want", "gte", 30)), P("Tom reties your apron on his way past, both times you go by.")),
             G(cond(trait("hygiene", "lt", 30), flag("hygiene_off", False)), P("A woman at table three wrinkles her nose when you lean in. Her tip is coins.")),
-        ], [
-            go("Clock out.", loc="cafe", mins=180, wardrobe=CLOCK_OUT, cond_=cond(SEXY_OFF, {"type": "weekday", "weekdays": [0, 1, 2, 3, 5]}), eff=[money(12)]),
-            go("Clock out.", loc="cafe", mins=180, wardrobe=CLOCK_OUT, cond_=cond(SEXY_OFF, wd(4), tod("08:00", "18:00")), eff=[money(12)]),
-            go("Clock out.", loc="cafe", mins=180, wardrobe=CLOCK_OUT, cond_=cond(SEXY_OFF, *FRI), eff=[money(16)]),
-            go("Clock out.", loc="cafe", mins=180, wardrobe=CLOCK_OUT, cond_=cond(SEXY_ON, {"type": "weekday", "weekdays": [0, 1, 2, 3, 5]}), eff=[money(16)]),
-            go("Clock out.", loc="cafe", mins=180, wardrobe=CLOCK_OUT, cond_=cond(SEXY_ON, wd(4), tod("08:00", "18:00")), eff=[money(16)]),
-            go("Clock out.", loc="cafe", mins=180, wardrobe=CLOCK_OUT, cond_=cond(SEXY_ON, *FRI), eff=[money(24)]),
-        ]),
+            # ── the drawn customer scene, one a shift (cafe_shift_scene.md, signed 2026-11-01, DECISIONS 121) ──
+            *at_level("L1", POOL(*[P(t) for t in L1_LINES], pid="cafe_l1_lines")),
+            *at_level("L1", P(GARY_L1), extra=[GARY_IN]),
+            *at_level("L2", P(L2_SETUP)),
+            *at_level("L2", D(GY, GARY_L2), extra=[GARY_IN]),
+            *at_level("L3", P(L3_SETUP)),
+            *at_level("L3", D(GY, GARY_AFTER), extra=[GARY_IN, flag("gary_let_it")]),
+        ], level1_exits()
+           + go_level("L2", "Play along.", "l2_play")
+           + go_level("L2", "Flirt back.", "l2_flirt", extra=[C_HI])
+           + go_level("L2", "\"Not tonight, hon.\"", "l2_no")
+           + go_level("L3", "Let it.", "l3_let")
+           + go_level("L3", "\"Your food's here, sir.\"", "l3_pull")
+           + go_level("L3", "Slap it away.", "l3_slap")),
+        node("l2_play", "Play along", [P(L2_PLAY),
+            VID("a waitress leaning low over a booth table, men looking down her uniform", "waitress leaning over table men staring cleavage", "waitress bends over booth customers look", pool_dir="sex/cafe_l2_play_t3")],
+             outcome_exits("l2_play", 6, 10, eff=[capped_e("exhibitionism", 1, 39), add("cafe_footfall", 1), add("cafe_l2_shifts", 1)])),
+        node("l2_flirt", "Flirt back", [P(L2_FLIRT),
+            VID("a waitress flirting across a cafe counter with a customer, licking cream off her thumb", "waitress flirting counter customer", "flirty waitress licks cream finger customer stares", pool_dir="sex/cafe_l2_flirt_t3")],
+             outcome_exits("l2_flirt", 6, 10, eff=[capped_e("corruption", 1, 39), add("cafe_footfall", 1), add("cafe_l2_shifts", 1)])),
+        node("l2_no", "Not tonight", [P(L2_NO)], outcome_exits("l2_no", 2, 4, eff=[add("cafe_l2_shifts", 1)])),
+        node("l3_let", "Let it", [
+            G(cond(GARY_IN), POOL(P(L3_A), P(L3_B), P(L3_C), pid="cafe_l3_gary", bag=True)),
+            G(cond(GARY_OUT), POOL(P(L3_A), P(L3_C), pid="cafe_l3_strangers", bag=True)),
+            VID("a waitress letting a customer's hand stay on her as she serves, the manager watching from the counter", "customer grabs waitress ass she lets him", "waitress groped at table lets it happen", pool_dir="sex/cafe_l3_let_t4")],
+             outcome_exits("l3_let", 10, 16, eff=[capped_e("corruption", 1, 39), capped_e("exhibitionism", 1, 39),
+                                                  add("cafe_footfall", 1), add("cafe_name", -1)],
+                           flags=[fset("cafe_let_it")], gary_flag=True)),
+        node("l3_pull", "Your food's here", [P(L3_PULL)], outcome_exits("l3_pull", 4, 8)),
+        node("l3_slap", "Slap it away", [P(L3_SLAP)], outcome_exits("l3_slap", 0, 0)),
     ]})
+
+# ── meeting Gary (npc_gary.md, re-signed 2026-11-01): level 1, her first shift he's in. A one-time screen that names
+#    him and sets gary_met, so his booth hub opens on a meeting (gates: every hub is met first). ──
+out.append({
+    "id": "cafe_gary_meet", "name": "Booth four",
+    "description": "The first time Gary is in during her job: the regular in booth four lowers his paper. Sets gary_met.",
+    "trigger": {"location": "cafe", "npc": GY, "requires_npc": GY, "is_repeatable": False, "priority": 7, "is_active": True,
+                "schedules": [{"weekdays": [0, 1, 2, 3, 4], "start_time": "14:30", "end_time": "18:00"},
+                              {"weekdays": [4], "start_time": "20:00", "end_time": "22:00"}],   # his rows (npc_gary.md)
+                "conditions": cond(flag("cafe_job"), flag("gary_met", False))},
+    "nodes": [node("booth", "Booth four", [
+        P(GARY_L1),
+        D(GY, "Top me up when you've a minute, sweetheart."),
+    ], [go("\"Coming.\"", loc="cafe", mins=5, flags=[fset("gary_met")])])]})
 
 text = "# ── the café shift (sheets/systems/job.md) ──\n" + "".join(emit(c) for c in out)
 open(__import__("sys").argv[1], "w").write(text)

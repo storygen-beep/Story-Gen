@@ -452,9 +452,9 @@
       "npc_jake"
     ],
     "door": {
-      "canvas": "ryan_08_two_knocks",
-      "choice": "Two knocks",
-      "locked_next": "the next step's button (Ryan A 10), shown locked and naming Corruption 60 (SP7:11; DECISIONS 90)"
+      "canvas": "ryan_08_two_knocks_first_sex",
+      "choice": "Further. (Needs Corruption 60)",
+      "locked_next": "Ryan's step 9, Kayla in the house, shown locked: \"Further. (Needs Corruption 60)\" (npc_ryan.md, release 1)"
     },
     "reader": {
       "ryan_01_hall_first_morning": {
@@ -5165,10 +5165,11 @@
           ]
         },
         "in_release": true,
-        "hours": "Mon-Fri 09:00-17:00",
+        "hours": "Mon 08:00-09:00; Mon-Fri 09:00-17:00",
         "closed_text": "The office is locked. Office hours are on the door.",
         "alone": "read the notice on the door",
-        "hidden_until": "dean_summons"
+        "hidden_until": "dean_met",
+        "hours_note": "Monday from 08:00 and dean_met: day 1's meeting (college_dean_office, DECISIONS 121); was dean_summons"
       },
       {
         "id": "cafe",
@@ -5682,15 +5683,10 @@
                   "Thu",
                   "Fri"
                 ],
-                "from": "07:00",
+                "from": "06:45",
                 "to": "07:30"
               },
               "gate": [
-                {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 20
-                },
                 {
                   "type": "modifier",
                   "modifier_key": "drinks_boost",
@@ -5729,11 +5725,6 @@
               "gate": [
                 {
                   "trait": "corruption",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
-                  "trait": "exhibitionism",
                   "op": "gte",
                   "value": 20
                 },
@@ -5781,11 +5772,6 @@
                   "value": 20
                 },
                 {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
                   "type": "modifier",
                   "modifier_key": "drinks_boost",
                   "operator": "is_inactive"
@@ -5825,11 +5811,6 @@
                   "value": 20
                 },
                 {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
                   "type": "modifier",
                   "modifier_key": "drinks_boost",
                   "operator": "is_inactive"
@@ -5865,11 +5846,6 @@
               "seen_from": "home_ryan_room",
               "gate": [
                 {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
                   "trait": "exhibitionism",
                   "op": "gte",
                   "value": 40
@@ -5897,8 +5873,8 @@
             },
             {
               "n": 7,
-              "arc_step": "Ryan A 8",
-              "canvas": "ryan_07_first_kiss",
+              "arc_step": "Ryan R1 7",
+              "canvas": "ryan_07_kayla_cant_know",
               "where": "home_ryan_room",
               "when": {
                 "days": [
@@ -5928,7 +5904,7 @@
                   "npc": "npc_ryan"
                 }
               ],
-              "hint": "Ryan's room, an evening he's home: two knocks.",
+              "hint": "Ryan's room, an evening: two knocks. Kayla can't know.",
               "her_line_high": "Ignore it.",
               "who_notices": "Kayla's text lighting up his phone",
               "refusal": "parked",
@@ -5939,18 +5915,19 @@
             },
             {
               "n": 8,
-              "arc_step": "Ryan A 9",
-              "canvas": "ryan_08_two_knocks",
+              "arc_step": "Ryan R1 8",
+              "canvas": "ryan_08_two_knocks_first_sex",
               "where": "home_ryan_room",
               "when": {
                 "days": [
+                  "Sun",
                   "Mon",
                   "Tue",
-                  "Thu",
-                  "Sun"
+                  "Wed",
+                  "Thu"
                 ],
-                "from": "19:00",
-                "to": "22:00"
+                "from": "22:00",
+                "to": "00:00"
               },
               "gate": [
                 {
@@ -5970,7 +5947,7 @@
                   "npc": "npc_ryan"
                 }
               ],
-              "hint": "Ryan's room, an evening after the kiss: two knocks, and ask what you get.",
+              "hint": "Ryan's room, late, any night from Sunday to Thursday: two knocks.",
               "her_line_high": "Kayla gets Fridays. What do I get?",
               "who_notices": "only she knows what they are now",
               "refusal": "parked",
@@ -5978,7 +5955,8 @@
                 "want": 10
               }
             }
-          ]
+          ],
+          "release1_note": "Release 1 (npc_ryan.md, signed 2026-11-01; DECISIONS 99-114). Step 8 runs Sun-Thu, not 'any night but Friday': its screens put Laura across the hall, and on Saturday nights she waits up downstairs (a build fix, BUILD_LOG slice B)."
         },
         "schedule_rows": 5
       },
@@ -6109,6 +6087,15 @@
             "to": "07:00"
           },
           {
+            "where": "home_bathroom",
+            "weekdays": [
+              "Sat"
+            ],
+            "from": "16:30",
+            "to": "17:00",
+            "note": "her shower before she dresses; the lock sticks halfway: laura_shower_gap (npc_laura.md, DECISIONS 113, 115)"
+          },
+          {
             "where": "home_master_bedroom",
             "weekdays": [
               "Sat"
@@ -6153,53 +6140,6 @@
             },
             {
               "n": 2,
-              "canvas": "laura_02_home_late",
-              "where": "home_hall",
-              "when": {
-                "days": [
-                  "Mon",
-                  "Tue",
-                  "Wed",
-                  "Thu",
-                  "Fri",
-                  "Sat",
-                  "Sun"
-                ],
-                "from": "23:00",
-                "to": "01:00"
-              },
-              "gate": [
-                {
-                  "flag": "came_home_late",
-                  "op": "is_true"
-                },
-                {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
-                  "type": "modifier",
-                  "modifier_key": "drinks_boost",
-                  "operator": "is_inactive"
-                },
-                {
-                  "trait": "want",
-                  "op": "gte",
-                  "value": 10,
-                  "npc": "npc_laura"
-                }
-              ],
-              "hint": "Come home late: Laura waits on the dark stairs.",
-              "her_line_high": "Everyone.",
-              "who_notices": "Laura catches her",
-              "refusal": "parked",
-              "raises": {
-                "want": 10
-              }
-            },
-            {
-              "n": 3,
               "canvas": "laura_03_wine_in_the_kitchen",
               "where": "home_kitchen",
               "when": {
@@ -6214,24 +6154,14 @@
               },
               "gate": [
                 {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
                   "type": "modifier",
                   "modifier_key": "drinks_boost",
                   "operator": "is_inactive"
                 },
                 {
-                  "trait": "want",
+                  "trait": "warmth",
                   "op": "gte",
-                  "value": 20,
+                  "value": 10,
                   "npc": "npc_laura"
                 }
               ],
@@ -6241,113 +6171,11 @@
               "refusal": "parked",
               "raises": {
                 "want": 10
-              }
-            },
-            {
-              "n": 4,
-              "canvas": "laura_04_ryans_door",
-              "where": "home_ryan_room",
-              "when": {
-                "days": [
-                  "Mon",
-                  "Tue",
-                  "Thu",
-                  "Sun"
-                ],
-                "from": "20:00",
-                "to": "22:00"
               },
-              "seen_from": "home_kitchen",
-              "gate": [
-                {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
-                  "type": "modifier",
-                  "modifier_key": "drinks_boost",
-                  "operator": "is_inactive"
-                },
-                {
-                  "trait": "want",
-                  "op": "gte",
-                  "value": 30,
-                  "npc": "npc_laura"
-                },
-                {
-                  "trait": "ryan_step",
-                  "op": "gte",
-                  "value": 4
-                }
-              ],
-              "hint": "An evening in Ryan's room, your feet in his lap: Laura opens the door.",
-              "her_line_high": "Then don't tell him.",
-              "who_notices": "Laura sees her with Ryan",
-              "refusal": "parked",
-              "raises": {
-                "want": 10
-              }
+              "arc_step": "Laura R1 2"
             },
             {
-              "n": 5,
-              "canvas": "laura_05_jake_at_the_door",
-              "where": "home_front_door",
-              "when": {
-                "days": [
-                  "Sat"
-                ],
-                "from": "22:30",
-                "to": "00:00"
-              },
-              "seen_from": "home_living_room",
-              "gate": [
-                {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
-                  "type": "modifier",
-                  "modifier_key": "drinks_boost",
-                  "operator": "is_inactive"
-                },
-                {
-                  "trait": "want",
-                  "op": "gte",
-                  "value": 40,
-                  "npc": "npc_laura"
-                },
-                {
-                  "trait": "jake_step",
-                  "op": "eq",
-                  "value": 3
-                },
-                {
-                  "flag": "jake_date_went",
-                  "op": "is_true"
-                }
-              ],
-              "hint": "Saturday night, a date with Jake ends at the front door: Laura is waiting up in the dark.",
-              "her_line_high": "Better in your dress.",
-              "who_notices": "Laura watches from the dark couch; Jake doesn't know",
-              "refusal": "parked",
-              "raises": {
-                "want": 10
-              }
-            },
-            {
-              "n": 6,
+              "n": 3,
               "canvas": "laura_06_take_me_with_you",
               "where": "home_master_bedroom",
               "when": {
@@ -6359,108 +6187,48 @@
               },
               "gate": [
                 {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
                   "type": "modifier",
                   "modifier_key": "drinks_boost",
                   "operator": "is_inactive"
                 },
                 {
-                  "trait": "want",
+                  "trait": "warmth",
                   "op": "gte",
-                  "value": 50,
+                  "value": 20,
                   "npc": "npc_laura"
                 }
               ],
-              "hint": "Saturday early evening: Laura is dressing to go out. Zip her up.",
+              "hint": "Saturday early evening: Laura is dressing up. Zip her up.",
               "her_line_high": "Wear something short.",
               "who_notices": "nobody — only the two of them",
               "refusal": "parked",
               "raises": {
                 "want": 10
-              }
-            },
-            {
-              "n": 7,
-              "canvas": "laura_07_dark_stairs",
-              "where": "home_kitchen",
-              "when": {
-                "days": [
-                  "Fri"
-                ],
-                "from": "18:00",
-                "to": "21:00"
               },
-              "gate": [
-                {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
-                  "type": "modifier",
-                  "modifier_key": "drinks_boost",
-                  "operator": "is_inactive"
-                },
-                {
-                  "trait": "want",
-                  "op": "gte",
-                  "value": 60,
-                  "npc": "npc_laura"
-                },
-                {
-                  "trait": "zoe_step",
-                  "op": "gte",
-                  "value": 1
-                }
-              ],
-              "hint": "Friday evening: Laura wants to come to Zoe's party. Leave together from the kitchen.",
-              "her_line_high": "Don't stop for him.",
-              "who_notices": "Ryan at his door",
-              "refusal": "parked",
-              "raises": {
-                "want": 10,
-                "corruption": 3
-              }
+              "arc_step": "Laura R1 3"
             },
             {
-              "n": 8,
-              "canvas": "laura_08_it_wasnt_the_wine",
-              "where": "home_kitchen",
+              "n": 4,
+              "arc_step": "Laura R1 4",
+              "canvas": "laura_04_she_saw_you",
+              "where": "home_master_bedroom",
               "when": {
                 "days": [
+                  "Sun",
                   "Mon",
                   "Tue",
                   "Wed",
                   "Thu",
                   "Fri"
                 ],
-                "from": "06:30",
-                "to": "08:00"
+                "from": "22:00",
+                "to": "23:00"
               },
               "gate": [
                 {
                   "trait": "corruption",
                   "op": "gte",
-                  "value": 40
-                },
-                {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 40
+                  "value": 20
                 },
                 {
                   "type": "modifier",
@@ -6468,21 +6236,25 @@
                   "operator": "is_inactive"
                 },
                 {
-                  "trait": "want",
+                  "trait": "warmth",
                   "op": "gte",
-                  "value": 70,
+                  "value": 30,
                   "npc": "npc_laura"
+                },
+                {
+                  "trait": "laura_gaps_watched",
+                  "op": "gte",
+                  "value": 3
                 }
               ],
-              "hint": "The next breakfast: Laura is in the kitchen.",
-              "her_line_high": "It wasn't the wine.",
-              "who_notices": "nobody — her no is the locked door",
-              "refusal": "parked",
-              "raises": {
-                "want": 10
-              }
+              "hint": "A weeknight, late: Laura's door is open a gap again.",
+              "her_line_low": "That's your mom. Go to bed.",
+              "her_line_high": "She's lonely, and you can't stop watching her be lonely.",
+              "who_notices": "Laura sees her",
+              "note": "reached through her door ('The door's ajar.'), not a walk-in (world_data.py door options)"
             }
-          ]
+          ],
+          "release1_note": "Release 1 (npc_laura.md, signed 2026-11-01; DECISIONS 113, 115): four steps, her lock is Love. The old steps 2, 4, 5 moved to their owners (the curfew rule, Ryan's 'Laura opens the door', Jake's step 3); 7 and 8 cut."
         },
         "schedule_rows": 7
       },
@@ -6616,6 +6388,15 @@
             ],
             "from": "08:00",
             "to": "22:00"
+          },
+          {
+            "where": "home_kitchen",
+            "weekdays": [
+              "Sat"
+            ],
+            "from": "17:00",
+            "to": "18:30",
+            "note": "heading out to the bar: he calls up the stairs at Laura's step 3 (laura_03b_all_dressed_up.md, DECISIONS 115); a build row, his sheet's Saturday had no evening row"
           }
         ],
         "occupancy_rows": [],
@@ -6664,14 +6445,7 @@
                 "to": "00:00"
               },
               "seen_from": "home_living_room",
-              "gate": [
-                {
-                  "trait": "want",
-                  "op": "gte",
-                  "value": 10,
-                  "npc": "npc_mark"
-                }
-              ],
+              "gate": [],
               "hint": "Late at night, the kitchen drawer: Mark is on the phone next door.",
               "her_line_high": "How late are we?",
               "who_notices": "only her: his debt to Vance",
@@ -6697,28 +6471,17 @@
                   "op": "is_true"
                 },
                 {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
                   "type": "modifier",
                   "modifier_key": "drinks_boost",
                   "operator": "is_inactive"
                 },
                 {
-                  "trait": "want",
+                  "trait": "rent_short_weeks",
                   "op": "gte",
-                  "value": 20,
-                  "npc": "npc_mark"
+                  "value": 1
                 }
               ],
-              "hint": "Sunday morning at the table: Mark wants shorts this time.",
+              "hint": "Sunday morning at the table, after a short week: Mark wants shorts this time.",
               "her_line_high": "Saved you asking.",
               "who_notices": "Mark",
               "refusal": "parked",
@@ -6729,114 +6492,6 @@
             },
             {
               "n": 4,
-              "canvas": "mark_04_after_shes_asleep",
-              "where": "home_living_room",
-              "when": {
-                "days": [
-                  "Sun",
-                  "Mon",
-                  "Tue",
-                  "Wed",
-                  "Thu",
-                  "Fri"
-                ],
-                "from": "22:00",
-                "to": "00:00"
-              },
-              "gate": [
-                {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
-                  "type": "modifier",
-                  "modifier_key": "drinks_boost",
-                  "operator": "is_inactive"
-                },
-                {
-                  "trait": "want",
-                  "op": "gte",
-                  "value": 30,
-                  "npc": "npc_mark"
-                }
-              ],
-              "hint": "Late at night in the living room, Laura asleep upstairs: Mark is still up.",
-              "her_line_high": "What's the difference worth, Mark?",
-              "who_notices": "Laura, asleep upstairs",
-              "refusal": "parked",
-              "raises": {
-                "want": 10
-              }
-            },
-            {
-              "n": 5,
-              "canvas": "mark_05_a_bill_an_inch",
-              "where": "home_living_room",
-              "when": {
-                "days": [
-                  "Sun",
-                  "Mon",
-                  "Tue",
-                  "Wed",
-                  "Thu",
-                  "Fri"
-                ],
-                "from": "23:00",
-                "to": "00:00"
-              },
-              "gate": [
-                {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
-                  "type": "modifier",
-                  "modifier_key": "drinks_boost",
-                  "operator": "is_inactive"
-                },
-                {
-                  "trait": "want",
-                  "op": "gte",
-                  "value": 40,
-                  "npc": "npc_mark"
-                }
-              ],
-              "hint": "Midnight in the living room: Mark pays by the inch.",
-              "her_line_high": "Keep going.",
-              "who_notices": "Laura, asleep upstairs",
-              "refusal": "parked",
-              "raises": {
-                "want": 10,
-                "corruption": 3
-              },
-              "when_also": {
-                "days": [
-                  "Mon",
-                  "Tue",
-                  "Wed",
-                  "Thu",
-                  "Fri",
-                  "Sat"
-                ],
-                "from": "00:00",
-                "to": "01:00"
-              },
-              "gate_note": "needs bare legs: shorts, a skirt, the sleep shirt or nothing below (Q72)"
-            },
-            {
-              "n": 6,
               "canvas": "mark_06_our_arrangement",
               "where": "home_garage",
               "when": {
@@ -6851,157 +6506,27 @@
               },
               "gate": [
                 {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
                   "type": "modifier",
                   "modifier_key": "drinks_boost",
                   "operator": "is_inactive"
                 },
                 {
-                  "trait": "want",
+                  "trait": "ryan_step",
                   "op": "gte",
-                  "value": 50,
-                  "npc": "npc_mark"
+                  "value": 4
                 }
               ],
-              "hint": "An evening in the garage: Mark wants to talk terms.",
+              "hint": "An evening in the garage: Mark saw something, and wants to talk terms.",
               "her_line_high": "Vance's letter is in the drawer. So we each keep one.",
               "who_notices": "nobody — each holds the other's secret",
               "refusal": "parked",
               "raises": {
                 "want": 10
-              }
-            },
-            {
-              "n": 7,
-              "canvas": "mark_07_twenty_and_you_can_look",
-              "where": "home_kitchen",
-              "when": {
-                "days": [
-                  "Sun"
-                ],
-                "from": "08:00",
-                "to": "12:00"
               },
-              "gate": [
-                {
-                  "flag": "rent_starts",
-                  "op": "is_true"
-                },
-                {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
-                  "type": "modifier",
-                  "modifier_key": "drinks_boost",
-                  "operator": "is_inactive"
-                },
-                {
-                  "trait": "want",
-                  "op": "gte",
-                  "value": 60,
-                  "npc": "npc_mark"
-                }
-              ],
-              "hint": "Sunday morning at the table: name a price.",
-              "her_line_high": "Twenty, and you can look.",
-              "who_notices": "Mark",
-              "refusal": "parked",
-              "raises": {
-                "want": 10,
-                "exhibitionism": 3
-              }
-            },
-            {
-              "n": 8,
-              "canvas": "mark_08_the_red_circle",
-              "where": "home_kitchen",
-              "when": {
-                "days": [
-                  "Sun"
-                ],
-                "from": "12:00",
-                "to": "18:00"
-              },
-              "gate": [
-                {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
-                  "type": "modifier",
-                  "modifier_key": "drinks_boost",
-                  "operator": "is_inactive"
-                },
-                {
-                  "trait": "want",
-                  "op": "gte",
-                  "value": 70,
-                  "npc": "npc_mark"
-                }
-              ],
-              "hint": "Sunday afternoon: the fridge calendar, and Laura's late Wednesday.",
-              "her_line_high": "You'll see.",
-              "who_notices": "Mark sees her circle it",
-              "refusal": "parked",
-              "raises": {
-                "want": 10
-              }
-            },
-            {
-              "n": 9,
-              "canvas": "mark_09_his_chair",
-              "where": "home_kitchen",
-              "when": {
-                "days": [
-                  "Wed"
-                ],
-                "from": "18:00",
-                "to": "22:00"
-              },
-              "gate": [
-                {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
-                  "type": "modifier",
-                  "modifier_key": "drinks_boost",
-                  "operator": "is_inactive"
-                },
-                {
-                  "trait": "want",
-                  "op": "gte",
-                  "value": 80,
-                  "npc": "npc_mark"
-                }
-              ],
-              "hint": "Wednesday evening, Laura late and Ryan at his league: take Mark's chair.",
-              "her_line_high": "Count it slowly, Mark.",
-              "who_notices": "Mark",
-              "refusal": "parked",
-              "raises": {
-                "want": 10
-              }
+              "arc_step": "Mark R1 4"
             }
-          ]
+          ],
+          "release1_note": "Release 1 (npc_mark.md, signed 2026-11-01; DECISIONS 116): four steps, paced by Sundays and her short weeks; no sex and no money for her body. Mark A 4, 5, 7, 8, 9 cut; the arrangement (built step 6) is the top step."
         },
         "schedule_rows": 9
       },
@@ -7070,7 +6595,7 @@
                   "Sat"
                 ],
                 "from": "14:30",
-                "to": "22:00"
+                "to": "19:00"
               },
               "gate": [
                 {
@@ -7084,57 +6609,11 @@
               "refusal": "parked",
               "raises": {
                 "want": 10
-              }
+              },
+              "when_note": "while a shift can still start (a reader fix, 2026-11-01: no shift starts after 19:00)"
             },
             {
               "n": 2,
-              "canvas": "tom_02_uniform_rule",
-              "where": "cafe",
-              "when": {
-                "days": [
-                  "Mon",
-                  "Tue",
-                  "Wed",
-                  "Thu",
-                  "Fri",
-                  "Sat"
-                ],
-                "from": "14:30",
-                "to": "22:00"
-              },
-              "gate": [
-                {
-                  "flag": "cafe_job",
-                  "op": "is_true"
-                },
-                {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
-                  "type": "modifier",
-                  "modifier_key": "drinks_boost",
-                  "operator": "is_inactive"
-                },
-                {
-                  "trait": "want",
-                  "op": "gte",
-                  "value": 10,
-                  "npc": "npc_tom"
-                }
-              ],
-              "hint": "A café shift: Tom has a new uniform rule.",
-              "her_line_high": "Is this the uniform, or your idea?",
-              "who_notices": "Gary in booth four, and the room",
-              "refusal": "parked",
-              "raises": {
-                "want": 10,
-                "exhibitionism": 3
-              }
-            },
-            {
-              "n": 3,
               "canvas": "tom_03_the_tip_jar",
               "where": "cafe",
               "when": {
@@ -7155,20 +6634,14 @@
                   "op": "is_true"
                 },
                 {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
                   "type": "modifier",
                   "modifier_key": "drinks_boost",
                   "operator": "is_inactive"
                 },
                 {
-                  "trait": "want",
+                  "trait": "cafe_shifts_worked",
                   "op": "gte",
-                  "value": 20,
-                  "npc": "npc_tom"
+                  "value": 5
                 }
               ],
               "hint": "A café shift, the back room: watch the tip jar.",
@@ -7177,62 +6650,13 @@
               "refusal": "parked",
               "raises": {
                 "want": 10
-              }
-            },
-            {
-              "n": 4,
-              "canvas": "tom_04_booth_four",
-              "where": "cafe",
-              "when": {
-                "days": [
-                  "Mon",
-                  "Tue",
-                  "Wed",
-                  "Thu",
-                  "Fri"
-                ],
-                "from": "14:30",
-                "to": "18:00"
               },
-              "gate": [
-                {
-                  "flag": "cafe_job",
-                  "op": "is_true"
-                },
-                {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
-                  "type": "modifier",
-                  "modifier_key": "drinks_boost",
-                  "operator": "is_inactive"
-                },
-                {
-                  "trait": "want",
-                  "op": "gte",
-                  "value": 30,
-                  "npc": "npc_tom"
-                }
-              ],
-              "hint": "A weekday afternoon shift: Gary is in booth four.",
-              "her_line_high": "Ten minutes. Hands where I can see them.",
-              "who_notices": "Gary; Tom at the counter",
-              "refusal": "parked",
-              "raises": {
-                "want": 10,
-                "corruption": 3
-              }
+              "arc_step": "Tom R1 2"
             },
             {
-              "n": 5,
-              "canvas": "tom_05_half_is_mine",
+              "n": 3,
+              "arc_step": "Tom R1 3",
+              "canvas": "tom_03_not_by_the_window",
               "where": "cafe",
               "when": {
                 "days": [
@@ -7252,83 +6676,32 @@
                   "op": "is_true"
                 },
                 {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
                   "type": "modifier",
                   "modifier_key": "drinks_boost",
                   "operator": "is_inactive"
                 },
                 {
-                  "trait": "want",
+                  "trait": "cafe_footfall",
                   "op": "gte",
-                  "value": 40,
-                  "npc": "npc_tom"
-                }
-              ],
-              "hint": "After a shift, the back room: Tom wants his half.",
-              "her_line_high": "Half's yours till I name the price.",
-              "who_notices": "nobody — the two of them",
-              "refusal": "parked",
-              "raises": {
-                "want": 10
-              }
-            },
-            {
-              "n": 6,
-              "canvas": "tom_06_after_close_kiss",
-              "where": "cafe",
-              "when": {
-                "days": [
-                  "Fri"
-                ],
-                "from": "22:00",
-                "to": "23:00"
-              },
-              "gate": [
+                  "value": 15
+                },
                 {
-                  "flag": "cafe_job",
+                  "trait": "cafe_name",
+                  "op": "lte",
+                  "value": -5
+                },
+                {
+                  "flag": "cafe_let_it",
                   "op": "is_true"
-                },
-                {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
-                  "type": "modifier",
-                  "modifier_key": "drinks_boost",
-                  "operator": "is_inactive"
-                },
-                {
-                  "trait": "want",
-                  "op": "gte",
-                  "value": 50,
-                  "npc": "npc_tom"
                 }
               ],
-              "hint": "Stay after close: Tom pulls the blinds.",
-              "her_line_high": "We're closed.",
-              "who_notices": "a late regular at the glass",
-              "refusal": "parked",
-              "raises": {
-                "want": 10,
-                "corruption": 3
-              }
+              "hint": "A café shift after a customer's hand: Tom wants a word in the back.",
+              "her_line_low": "Say sorry. Keep the job.",
+              "her_line_high": "He watched. He didn't stop it.",
+              "who_notices": "Tom; the room behind the door"
             }
-          ]
+          ],
+          "release1_note": "Release 1 (npc_tom.md, signed 2026-11-01; DECISIONS 117): three steps, strict; Tom B 2 and B 4 cut, B 5 and B 6 a later release."
         },
         "schedule_rows": 2,
         "occupancy_rows": [
@@ -7503,16 +6876,6 @@
               },
               "gate": [
                 {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
                   "type": "modifier",
                   "modifier_key": "drinks_boost",
                   "operator": "is_inactive"
@@ -7524,7 +6887,8 @@
               "refusal": "parked",
               "raises": {
                 "exhibitionism": 3
-              }
+              },
+              "gate_note": "Curious OR Daring: each yes on the screen reads its own meter (conditions can't hold an OR beside the counter)"
             },
             {
               "n": 3,
@@ -7542,12 +6906,12 @@
                 {
                   "trait": "corruption",
                   "op": "gte",
-                  "value": 40
+                  "value": 20
                 },
                 {
                   "trait": "exhibitionism",
                   "op": "gte",
-                  "value": 40
+                  "value": 20
                 },
                 {
                   "type": "modifier",
@@ -7580,11 +6944,6 @@
               },
               "gate": [
                 {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
                   "type": "modifier",
                   "modifier_key": "drinks_boost",
                   "operator": "is_inactive"
@@ -7601,8 +6960,45 @@
                 "from": "18:00",
                 "to": "20:00"
               }
+            },
+            {
+              "n": 5,
+              "arc_step": "Zoe R1 5",
+              "canvas": "zoe_05_no_dare",
+              "where": "zoe_apartment",
+              "when": {
+                "days": [
+                  "Sat"
+                ],
+                "from": "00:00",
+                "to": "02:00"
+              },
+              "gate": [
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "trait": "zoe_dares_done",
+                  "op": "gte",
+                  "value": 4
+                },
+                {
+                  "flag": "cocky_guy_met",
+                  "op": "is_true"
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                }
+              ],
+              "hint": "After a Friday party, Zoe's bedroom: no dare.",
+              "note": "fires at her apartment after midnight, where her row is, and moves to her bedroom inside the scene"
             }
-          ]
+          ],
+          "release1_note": "Release 1 (npc_zoe.md, signed 2026-11-01; DECISIONS 119): five steps after the quad; step 5 'No dare' is the top; the dares are her hot repeatable (zoe_dares, Friday parties)."
         },
         "schedule_rows": 4
       },
@@ -7673,11 +7069,6 @@
               },
               "gate": [
                 {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
                   "trait": "exhibitionism",
                   "op": "gte",
                   "value": 20
@@ -7709,22 +7100,12 @@
               },
               "gate": [
                 {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
                   "type": "modifier",
                   "modifier_key": "drinks_boost",
                   "operator": "is_inactive"
                 }
               ],
-              "hint": "Thursday evening: Dr. Hale's office on the faculty floor.",
+              "hint": "Thursday after six: Dr. Hale's office hours. He wants to talk about your grade.",
               "her_line_high": "Is that a no on my paper, or a yes?",
               "who_notices": "the photo on his desk; Laura sees the grade",
               "refusal": "parked"
@@ -7744,12 +7125,12 @@
                 {
                   "trait": "corruption",
                   "op": "gte",
-                  "value": 40
+                  "value": 20
                 },
                 {
                   "trait": "exhibitionism",
                   "op": "gte",
-                  "value": 40
+                  "value": 20
                 },
                 {
                   "type": "modifier",
@@ -7757,45 +7138,17 @@
                   "operator": "is_inactive"
                 }
               ],
-              "hint": "Thursday evening in his office, close to half past seven.",
+              "hint": "Thursday, half past six: his office, the door locked.",
               "her_line_high": "Your husband's a great teacher.",
               "who_notices": "Claire at the door",
               "refusal": "parked",
               "raises": {
                 "exhibitionism": 3
-              }
-            },
-            {
-              "n": 5,
-              "canvas": "hale_05_seven_twenty",
-              "where": "lecture_hall",
-              "when": {
-                "days": [
-                  "Mon",
-                  "Wed",
-                  "Fri"
-                ],
-                "from": "08:30",
-                "to": "10:00"
               },
-              "gate": [
-                {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 40
-                },
-                {
-                  "type": "modifier",
-                  "modifier_key": "drinks_boost",
-                  "operator": "is_inactive"
-                }
-              ],
-              "hint": "After a Psychology class: stay behind.",
-              "her_line_high": "You'll be done by seven-twenty.",
-              "who_notices": "nobody — then Laura reads the midterm at dinner",
-              "refusal": "parked"
+              "arc_step": "Hale R1 4"
             }
-          ]
+          ],
+          "release1_note": "Release 1 (npc_hale.md, signed 2026-11-01; DECISIONS 118): four steps; Hale B 5 (seven-twenty) cut; the Thursday session is his repeatable after step 4."
         },
         "schedule_rows": 3
       },
@@ -7928,16 +7281,6 @@
               },
               "gate": [
                 {
-                  "trait": "corruption",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 20
-                },
-                {
                   "type": "modifier",
                   "modifier_key": "drinks_boost",
                   "operator": "is_inactive"
@@ -7949,7 +7292,8 @@
               "refusal": "parked",
               "raises": {
                 "exhibitionism": 3
-              }
+              },
+              "gate_note": "Curious OR Daring: read on the screen, by its yes"
             },
             {
               "n": 3,
@@ -7983,23 +7327,23 @@
                   "op": "is_true"
                 }
               ],
-              "hint": "Saturday night: Jake brings you to the front door, and Ryan is due home from Kayla's.",
+              "hint": "Saturday night: a date with Jake, back to the front door. The house is home.",
               "her_line_high": "Ryan, this is Jake. My boyfriend.",
               "who_notices": "Ryan, walking in",
               "refusal": "parked"
             },
             {
               "n": 4,
-              "canvas": "laura_05_jake_at_the_door",
+              "arc_step": "Jake R1 4",
+              "canvas": "jake_04_sneak_him_in",
               "where": "home_front_door",
               "when": {
                 "days": [
                   "Sat"
                 ],
-                "from": "22:30",
+                "from": "22:00",
                 "to": "00:00"
               },
-              "seen_from": "home_living_room",
               "gate": [
                 {
                   "trait": "corruption",
@@ -8007,37 +7351,20 @@
                   "value": 40
                 },
                 {
-                  "trait": "exhibitionism",
-                  "op": "gte",
-                  "value": 40
+                  "flag": "jake_date_went",
+                  "op": "is_true"
                 },
                 {
                   "type": "modifier",
                   "modifier_key": "drinks_boost",
                   "operator": "is_inactive"
-                },
-                {
-                  "trait": "want",
-                  "op": "gte",
-                  "value": 40,
-                  "npc": "npc_laura"
-                },
-                {
-                  "trait": "laura_step",
-                  "op": "eq",
-                  "value": 4
-                },
-                {
-                  "flag": "jake_date_went",
-                  "op": "is_true"
                 }
               ],
-              "hint": "Saturday night, after your date: kiss Jake goodnight at the front door, in Laura's dress.",
-              "her_line_high": "Higher. Don't stop.",
-              "who_notices": "Laura, from the dark living room (Jake doesn't know)",
-              "refusal": "parked"
+              "hint": "Saturday night, after your date: sneak him up to your room.",
+              "note": "takes the date-end slot that night"
             }
-          ]
+          ],
+          "release1_note": "Release 1 (npc_jake.md, signed 2026-11-01; DECISIONS 120): built Jake 3 and Jake 4 (= Laura 5) are one step; step 4 'Sneak him in' is the top step; the end of a date is his repeatable."
         },
         "schedule_rows": 4
       },
@@ -8155,7 +7482,9 @@
               "Fri"
             ],
             "from": "14:30",
-            "to": "18:00"
+            "to": "18:00",
+            "when": "cafe_job",
+            "when_note": "met at level 1, her first shift he's in (npc_gary.md, re-signed 2026-11-01): he is there once she works"
           },
           {
             "where": "cafe",
@@ -8163,7 +7492,9 @@
               "Fri"
             ],
             "from": "20:00",
-            "to": "22:00"
+            "to": "22:00",
+            "when": "cafe_job",
+            "when_note": "met at level 1, her first shift he's in (npc_gary.md, re-signed 2026-11-01): he is there once she works"
           }
         ],
         "schedule_rows": 2
@@ -8281,6 +7612,16 @@
         "name": "the dean",
         "role": "dean",
         "schedule": [
+          {
+            "where": "dean_office",
+            "weekdays": [
+              "Mon"
+            ],
+            "from": "08:00",
+            "to": "09:00",
+            "when": "dean_met",
+            "note": "early on Mondays: day 1's meeting (college_dean_office) is true every week (npc_dean.md, re-signed 2026-11-01, DECISIONS 121); 08:00, when the faculty floor opens (a build fix: the sheet said 07:30)"
+          },
           {
             "where": "dean_office",
             "weekdays": [

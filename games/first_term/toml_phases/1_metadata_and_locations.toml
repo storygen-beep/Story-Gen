@@ -24,6 +24,7 @@ flag_keys = [
   "business_lecturer_met",
   "business_retake_used",
   "cafe_job",
+  "cafe_let_it",
   "cafe_shift_1_today",
   "cafe_shift_2_today",
   "cafe_shift_3_today",
@@ -31,6 +32,7 @@ flag_keys = [
   "canteen_table_today",
   "claire_met",
   "cocky_exam_deal",
+  "cocky_guy_dared",
   "cocky_guy_met",
   "college_for_freedom",
   "college_for_fun",
@@ -57,8 +59,11 @@ flag_keys = [
   "exam_psych_done",
   "failing_noticed",
   "figure_model_met",
+  "garage_holds_short_skirt",
+  "garage_holds_sports_bra",
+  "garage_holds_thin_top",
+  "gary_let_it",
   "gary_met",
-  "gary_ten_minutes_open",
   "grades_seen",
   "groceries_bought",
   "grocery_asked_today",
@@ -71,13 +76,15 @@ flag_keys = [
   "hale_02_done",
   "hale_03_done",
   "hale_04_done",
-  "hale_05_done",
-  "hale_hour_set",
+  "hale_coaching_offered",
   "hale_met",
   "hale_office_booked",
+  "hale_pen_picked",
   "hale_thursday_booked",
+  "hale_touched",
   "heavy_night",
   "helped_cook",
+  "her_door_unlocked",
   "home_event",
   "hookup_today",
   "hot_tub_today",
@@ -88,11 +95,13 @@ flag_keys = [
   "jake_04_done",
   "jake_date_booked",
   "jake_date_went",
+  "jake_first_time",
   "jake_gym_today",
   "jake_kissed",
   "jake_met",
   "jake_number",
   "kayla_met",
+  "keg_guy_dared",
   "knows_about_kayla",
   "knows_mark_debt",
   "knows_tip_jar",
@@ -100,23 +109,21 @@ flag_keys = [
   "late_party",
   "late_shift",
   "laura_01_done",
-  "laura_02_done",
   "laura_03_done",
+  "laura_04_breakfast_done",
   "laura_04_done",
-  "laura_05_done",
   "laura_06_done",
-  "laura_07_done",
-  "laura_08_done",
-  "laura_08_it_wasnt_the_wine_closed",
   "laura_alone_seen",
-  "laura_asked_to_come",
   "laura_call_today",
   "laura_caught_today",
   "laura_counted_twenty",
   "laura_dress_invite",
+  "laura_knows_ryan",
+  "laura_lonely",
+  "laura_love_today",
   "laura_rule_ryan_first",
-  "laura_ryan_saw_kiss",
-  "laura_saw_ryan",
+  "laura_said_ryan",
+  "laura_shower_seen",
   "laura_talk_today",
   "laura_towel_today",
   "laura_wardrobe_today",
@@ -126,18 +133,12 @@ flag_keys = [
   "mark_01_done",
   "mark_02_done",
   "mark_03_done",
-  "mark_04_done",
-  "mark_05_done",
   "mark_06_done",
-  "mark_07_done",
-  "mark_08_done",
-  "mark_09_done",
   "mark_arrangement",
   "mark_dress_rule",
   "mark_laura_seen",
   "mark_money_week",
   "mark_paid_look",
-  "mark_paid_touch",
   "mark_things_today",
   "mark_towel_today",
   "mark_tv_paid",
@@ -146,6 +147,7 @@ flag_keys = [
   "nadia_met",
   "on_probation",
   "opening_done",
+  "out_shown_today",
   "park_cool_zoe",
   "park_flash_today",
   "park_rest_today",
@@ -179,13 +181,14 @@ flag_keys = [
   "ryan_hall_talked",
   "ryan_hall_today",
   "ryan_heard_her",
+  "ryan_hot_today",
   "ryan_knock_booked",
   "ryan_knock_code",
   "ryan_knocked_back",
+  "ryan_path_closed",
   "ryan_talk_today",
-  "ryan_terms_end_kayla",
-  "ryan_terms_keep_kayla",
   "ryan_terms_mine",
+  "ryan_terms_secret",
   "ryan_things_found",
   "ryan_things_today",
   "ryan_towel_today",
@@ -200,6 +203,8 @@ flag_keys = [
   "shower_today",
   "slept_today",
   "stairs_event_today",
+  "street_first_l1",
+  "street_first_l2",
   "studied_home",
   "study_1_today",
   "study_2_today",
@@ -208,14 +213,11 @@ flag_keys = [
   "sunned",
   "toilet_bra_today",
   "tom_01_done",
-  "tom_02_done",
   "tom_03_done",
-  "tom_04_done",
-  "tom_05_done",
-  "tom_06_done",
-  "tom_close_booked",
+  "tom_03b_done",
   "tom_met",
   "tom_shift_booked",
+  "tom_window_rule",
   "touch_bed_today",
   "touch_shower_today",
   "touch_toilet_today",
@@ -230,13 +232,17 @@ flag_keys = [
   "zoe_02_done",
   "zoe_03_done",
   "zoe_04_done",
+  "zoe_05_done",
   "zoe_bailed",
+  "zoe_dared",
   "zoe_face_today",
   "zoe_has_bra",
+  "zoe_let_him_watch",
   "zoe_met",
   "zoe_number",
   "zoe_party_promised",
   "zoe_run_booked",
+  "zoe_together",
 ]
 
 [player.core_traits]
@@ -269,6 +275,17 @@ tom_step   = 0
 zoe_step   = 0
 hale_step  = 0
 jake_step  = 0
+# release 1 (2026-11-01, DECISIONS 112-121): the counters the redesigned sheets read
+rent_short_weeks   = 0   # the engine adds 1 every short Sunday (setup.carryRent)
+rent_late_fee      = 0   # part of next Sunday's due (rent_short_2: Vance's $15)
+cafe_shifts_worked = 0   # Tom's step 2 needs 5
+cafe_l2_shifts     = 0   # the café's level 3 opens after 3
+cafe_footfall      = 0   # job.md: the café keeps score
+cafe_name          = 0
+laura_gaps_watched = 0   # Laura's step 4 needs 3 (her bedroom gap and the shower)
+zoe_dares_done     = 0   # Zoe's step 5 needs 4
+hale_claire_roll   = 0   # 1-4: on 1, Claire is early (hale_thursday_session)
+jake_catch_roll    = 0   # 1-8: on 1 or 2, a near-catch (jake_date_end)
 
 [player.trait_decay]
 hygiene = 10
@@ -300,10 +317,12 @@ navigation_order = ["home", "vance_house", "park", "corner_shop", "campus", "tow
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Going out in it needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Showing.)" },
-  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
 ]
 
 [[locations]]
@@ -397,12 +416,62 @@ goes_to = { type = "canvas", canvas_id = "master_asleep" }
 
 [[locations.door.options]]
 text = "The door's ajar."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "flag", subject = "player", flag_key = "laura_alone_seen", operator = "is_false" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 30 }, { type = "trait", subject = "player", trait_key = "laura_gaps_watched", operator = "gte", value = 3 }, { type = "flag", subject = "player", flag_key = "laura_alone_seen", operator = "is_false" }] }
+goes_to = { type = "canvas", canvas_id = "laura_04_she_saw_you" }
+
+[[locations.door.options]]
+text = "The door's ajar."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 30 }, { type = "trait", subject = "player", trait_key = "laura_gaps_watched", operator = "gte", value = 3 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "gte", value = 20 }] }
+goes_to = { type = "canvas", canvas_id = "laura_04_she_saw_you" }
+
+[[locations.door.options]]
+text = "The door's ajar."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "gte", value = 4 }, { type = "flag", subject = "player", flag_key = "laura_alone_seen", operator = "is_false" }] }
+goes_to = { type = "canvas", canvas_id = "laura_alone_after" }
+
+[[locations.door.options]]
+text = "The door's ajar."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "gte", value = 4 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "gte", value = 20 }] }
+goes_to = { type = "canvas", canvas_id = "laura_alone_after" }
+
+[[locations.door.options]]
+text = "The door's ajar."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "gte", value = 2 }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "lt", value = 3 }, { type = "flag", subject = "player", flag_key = "laura_alone_seen", operator = "is_false" }] }
 goes_to = { type = "canvas", canvas_id = "laura_alone_in_bed" }
 
 [[locations.door.options]]
 text = "The door's ajar."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "gte", value = 20 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "gte", value = 2 }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "lt", value = 3 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "gte", value = 20 }] }
+goes_to = { type = "canvas", canvas_id = "laura_alone_in_bed" }
+
+[[locations.door.options]]
+text = "The door's ajar."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }, { type = "flag", subject = "player", flag_key = "laura_alone_seen", operator = "is_false" }] }
+goes_to = { type = "canvas", canvas_id = "laura_alone_in_bed" }
+
+[[locations.door.options]]
+text = "The door's ajar."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "gte", value = 20 }] }
+goes_to = { type = "canvas", canvas_id = "laura_alone_in_bed" }
+
+[[locations.door.options]]
+text = "The door's ajar."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "lt", value = 30 }, { type = "flag", subject = "player", flag_key = "laura_alone_seen", operator = "is_false" }] }
+goes_to = { type = "canvas", canvas_id = "laura_alone_in_bed" }
+
+[[locations.door.options]]
+text = "The door's ajar."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "lt", value = 30 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "gte", value = 20 }] }
+goes_to = { type = "canvas", canvas_id = "laura_alone_in_bed" }
+
+[[locations.door.options]]
+text = "The door's ajar."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 30 }, { type = "trait", subject = "player", trait_key = "laura_gaps_watched", operator = "lt", value = 3 }, { type = "flag", subject = "player", flag_key = "laura_alone_seen", operator = "is_false" }] }
+goes_to = { type = "canvas", canvas_id = "laura_alone_in_bed" }
+
+[[locations.door.options]]
+text = "The door's ajar."
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 30 }, { type = "trait", subject = "player", trait_key = "laura_gaps_watched", operator = "lt", value = 3 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "gte", value = 20 }] }
 goes_to = { type = "canvas", canvas_id = "laura_alone_in_bed" }
 
 [[locations.door.options]]
@@ -561,11 +630,13 @@ closed_text = "The park gates are locked for the night."
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Going out in it needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }] }, slots_required = ["underwear", "bottom"], message = "Not like this. Not yet." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Showing.)" },
-  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
 ]
 
 [[locations]]
@@ -584,10 +655,12 @@ closed_text = "The shutter's down."
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Going out in it needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Showing.)" },
-  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
 ]
 
 [[locations]]
@@ -617,10 +690,12 @@ closed_text = "The quad is dark and empty."
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Going out in it needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Showing.)" },
-  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
 ]
 
 [[locations]]
@@ -638,10 +713,12 @@ closed_text = "No class now. The timetable is on the door."
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Going out in it needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Showing.)" },
-  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
 ]
 
 [[locations]]
@@ -659,10 +736,12 @@ closed_text = "The library is closed."
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Going out in it needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Showing.)" },
-  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
 ]
 
 [[locations]]
@@ -680,10 +759,12 @@ closed_text = "The canteen is shut."
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Going out in it needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Showing.)" },
-  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
 ]
 
 [[locations]]
@@ -727,11 +808,13 @@ closed_text = "The gym's locked."
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Going out in it needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }] }, slots_required = ["underwear", "bottom"], message = "Not like this. Not yet." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Showing.)" },
-  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
 ]
 
 [[locations]]
@@ -749,10 +832,12 @@ closed_text = "The faculty floor is locked."
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Going out in it needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Showing.)" },
-  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
 ]
 
 [[locations]]
@@ -770,10 +855,12 @@ closed_text = "The office is locked. Office hours are on the door."
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Going out in it needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Showing.)" },
-  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
 ]
 
 [[locations]]
@@ -791,10 +878,12 @@ closed_text = "The office is locked. Office hours are on the door."
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Going out in it needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Showing.)" },
-  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
 ]
 
 [[locations]]
@@ -812,10 +901,12 @@ closed_text = "The office is locked. Office hours are on the door."
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Going out in it needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Showing.)" },
-  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
 ]
 
 [[locations]]
@@ -833,10 +924,12 @@ closed_text = "The office is locked. Office hours are on the door."
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Going out in it needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Showing.)" },
-  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
 ]
 
 [[locations]]
@@ -849,16 +942,18 @@ image_search_queries = ["dean's office"]
 parent      = "campus"
 entry_from  = "faculty_floor"
 navigation_order = []
-hours = [{ weekdays = [0, 1, 2, 3, 4], open = "09:00", close = "17:00" }]
+hours = [{ weekdays = [0], open = "08:00", close = "09:00" }, { weekdays = [0, 1, 2, 3, 4], open = "09:00", close = "17:00" }]
 closed_text = "The office is locked. Office hours are on the door."
-hidden_until = { flag = "dean_summons" }
+hidden_until = { flag = "dean_met" }
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Going out in it needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Showing.)" },
-  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
 ]
 
 [[locations]]
@@ -888,10 +983,12 @@ closed_text = "The café's shut."
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Going out in it needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Showing.)" },
-  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
 ]
 
 [[locations]]
@@ -909,10 +1006,12 @@ closed_text = "Closed."
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Going out in it needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Showing.)" },
-  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
 ]
 
 [[locations]]
@@ -944,10 +1043,12 @@ hidden_until = { flag = "zoe_met" }
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Going out in it needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Showing.)" },
-  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Daring.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
 ]
 
 [[locations]]
@@ -1138,6 +1239,13 @@ end_time   = "07:00"
 activity   = "asleep"
 
 [[npcs.schedules]]
+location   = "home_bathroom"
+weekdays   = [5]
+start_time = "16:30"
+end_time   = "17:00"
+activity   = "in the shower"
+
+[[npcs.schedules]]
 location   = "home_master_bedroom"
 weekdays   = [5]
 start_time = "17:00"
@@ -1238,6 +1346,13 @@ weekdays   = [6]
 start_time = "08:00"
 end_time   = "22:00"
 activity   = "the Sunday table"
+
+[[npcs.schedules]]
+location   = "home_kitchen"
+weekdays   = [5]
+start_time = "17:00"
+end_time   = "18:30"
+activity   = "heading out to the bar"
 
 [[npcs]]
 id           = "npc_tom"
@@ -1557,7 +1672,7 @@ weekdays   = [0, 1, 2, 3, 4]
 start_time = "14:30"
 end_time   = "18:00"
 activity   = "in booth four"
-when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "gary_met", operator = "is_true" }] }
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_job", operator = "is_true" }] }
 
 [[npcs.schedules]]
 location   = "cafe"
@@ -1565,7 +1680,7 @@ weekdays   = [4]
 start_time = "20:00"
 end_time   = "22:00"
 activity   = "in booth four"
-when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "gary_met", operator = "is_true" }] }
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_job", operator = "is_true" }] }
 
 [[npcs]]
 id           = "npc_art_lecturer"
@@ -1681,6 +1796,14 @@ core_traits  = {  }
 
 [[npcs.schedules]]
 location   = "dean_office"
+weekdays   = [0]
+start_time = "08:00"
+end_time   = "09:00"
+activity   = "in his office, early"
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "dean_met", operator = "is_true" }] }
+
+[[npcs.schedules]]
+location   = "dean_office"
 weekdays   = [0, 1, 2, 3, 4]
 start_time = "09:00"
 end_time   = "17:00"
@@ -1765,3 +1888,69 @@ portrait     = "portraits/figure_model.jpg"
 relationship = "The model in Figure drawing, 25. Paid to be drawn, naked, every class."
 role         = "life model"
 core_traits  = {  }
+
+# ── the timetable screen (classes.py, college.md) ──
+
+[[ui.timetable]]
+class    = "Psychology"
+place    = "lecture_hall"
+lecturer = "npc_hale"
+weekdays = [0, 2, 4]
+from     = "08:30"
+to       = "10:00"
+
+[[ui.timetable]]
+class    = "Business"
+place    = "lecture_hall"
+lecturer = "npc_business_lecturer"
+weekdays = [0, 2]
+from     = "10:15"
+to       = "11:45"
+
+[[ui.timetable]]
+class    = "Biology"
+place    = "lecture_hall"
+lecturer = "npc_bio_ta"
+weekdays = [0]
+from     = "13:00"
+to       = "14:30"
+
+[[ui.timetable]]
+class    = "Figure drawing"
+place    = "lecture_hall"
+lecturer = "npc_art_lecturer"
+weekdays = [1, 3]
+from     = "08:30"
+to       = "10:00"
+
+[[ui.timetable]]
+class    = "Biology"
+place    = "lecture_hall"
+lecturer = "npc_bio_ta"
+weekdays = [1, 3]
+from     = "10:15"
+to       = "11:45"
+
+[[ui.timetable]]
+class    = "Business"
+place    = "lecture_hall"
+lecturer = "npc_business_lecturer"
+weekdays = [1]
+from     = "13:00"
+to       = "14:30"
+
+[[ui.timetable]]
+class    = "Figure drawing"
+place    = "lecture_hall"
+lecturer = "npc_art_lecturer"
+weekdays = [2]
+from     = "13:00"
+to       = "14:30"
+
+[[ui.timetable]]
+class    = "Psychology"
+place    = "lecture_hall"
+lecturer = "npc_hale"
+weekdays = [3]
+from     = "13:00"
+to       = "14:30"

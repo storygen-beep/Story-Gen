@@ -11,13 +11,7 @@ Z, L = "npc_zoe", "npc_laura"
 out = []
 cards = []
 
-def sched(*rows):
-    return [{"weekdays": w, "start_time": a, "end_time": b} for w, a, b in rows]
-
-PSYCH = sched(([0, 2, 4], "08:30", "10:00"), ([3], "13:00", "14:30"))
-BUSI = sched(([0, 2], "10:15", "11:45"), ([1], "13:00", "14:30"))
-BIO = sched(([1, 3], "10:15", "11:45"), ([0], "13:00", "14:30"))
-FIG = sched(([1, 3], "08:30", "10:00"), ([2], "13:00", "14:30"))
+from classes import sched, PSYCH, BUSI, BIO, FIG   # one source with the timetable screen
 
 
 def at_start(rows, mins=15):
@@ -395,12 +389,49 @@ out.append(hub("hub_ta_office", "ta_office", TA, "bio_ta_met", "The TA's office"
     *grade_lines(TA, "grade_bio", "Oh! Hi. Your grade. Um. We should fix your grade. Sit?", "You're doing well. Do you want tea?", "You're my best student. Don't tell anyone I said that."),
     clothes_line(TA, "I like your— never mind. Sit down. Please."),
 ]))
+# (2026-11-01) met on day 1 now
+# (college_dean_office), so the warning line shows only after the warning call (dean_summons).
 out.append(hub("hub_dean_office", "dean_office", DEAN, "dean_met", "The dean", [
     P("The dean doesn't get up. He waits for you to sit in the hard chair before he looks at you."),
     G(cond(flag("on_probation")), D(DEAN, "You're on probation. Every grade, every complaint, crosses my desk now.")),
-    G(cond(flag("on_probation", False)), D(DEAN, "You've had your warning. Don't make me write another letter.")),
+    G(cond(flag("on_probation", False), flag("dean_summons")), D(DEAN, "You've had your warning. Don't make me write another letter.")),
+    G(cond(flag("dean_summons", False)), D(DEAN, "Your timetable isn't decoration, @player. Use it.")),
     G(DARING_STATE, D(DEAN, "Is that what you wear to college?")),
 ]))
+
+# ── day 1, the dean's office (college_dean_office.md, signed 2026-11-01, DECISIONS 121): straight from the
+#    opening's "Go to campus."; four screens; the timetable; "Go to Psychology." Time: the opening ends about
+#    07:50, the walk is 15, so "You're already late" is said at about 08:35 (Psychology starts 08:30). ──
+TIMETABLE_LINK = '<<link "Your timetable">><<run setup.openTimetable()>><</link>>'
+out.append({
+    "id": "college_dean_office", "name": "The dean's office",
+    "description": "Day 1, Monday of week one, from the opening: the dean's look, his rules, the timetable, and \"Go to Psychology.\" Sets dean_met.",
+    # Not bound to his face: his rows start at dean_met, which this scene sets (the meeting itself).
+    "trigger": {"location": "dean_office", "is_repeatable": False, "priority": 10, "is_active": True,
+                "schedules": [{"weekdays": [0], "start_time": "08:00", "end_time": "09:00"}],
+                "conditions": cond(flag("opening_done"), flag("dean_met", False))},
+    "nodes": [
+        node("wait", "The dean's office", [
+            P("The dean's office smells of carpet and old coffee. He's writing. He doesn't look up, and he doesn't ask you to sit, so you stand."),
+            P("When he does look up, he takes his time. Your face, then down, then back up, slowly, like he's reading a form."),
+            G(cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}), D(DEAN, "Is that what you wore to class?")),
+            G(cond({"type": "worn_type", "operator": "neq", "value": "short_skirt"}), D(DEAN, "You're the new one. @player.")),
+        ], [go("\"Good morning.\"", node="rules", mins=20, flags=[fset("dean_met")])]),
+        node("rules", "The rules", [
+            D(DEAN, "Classes are not optional. Your grades come to me. Complaints come to me."),
+            P("He taps a folder with one finger."),
+            D(DEAN, "Two complaints and you're back in this office. I don't like seeing a student twice."),
+        ], [go("\"I understand.\"", node="timetable", mins=5)]),
+        node("timetable", "Your timetable", [
+            P("He slides a printed sheet across the desk and keeps two fingers on it a second before he lets go."),
+            D(DEAN, "Your timetable. Learn it."),
+            P(TIMETABLE_LINK),
+        ], [go("Fold it into your bag.", node="late", mins=5)]),
+        node("late", "Already late", [
+            P("He's already looking back at his writing."),
+            D(DEAN, "Psychology. Lecture hall. You're already late."),
+        ], [go("Go to Psychology.", loc="lecture_hall", mins=15)]),
+    ]})
 
 # ── the dean's warning: the call itself (8_phone.toml). It never says where she is and never moves her:
 # both answers return her to where she was; the office opens on her map (dean_summons). ──
@@ -472,8 +503,8 @@ out.append({
     "description": "The timetable: when each class is. Writes nothing.",
     "trigger": {"location": "lecture_hall", "is_repeatable": True, "priority": 1, "is_active": True},
     "nodes": [node("timetable", "The timetable", [
-        P("The timetable is taped to the door, three classes a day. Monday: Psychology, Business, Biology. Tuesday: Figure drawing, Biology, Business. Wednesday: Psychology, Business, Figure drawing. Thursday: Figure drawing, Biology, Psychology. Friday: just Psychology, first thing, and then the weekend."),
-        P("The first class is first thing. The afternoon class starts after lunch. Somebody has drawn a penis on Thursday, but nobody has rubbed it off."),
+        P("The timetable is taped to the door. Somebody has drawn a penis on Thursday, but nobody has rubbed it off."),
+        P(TIMETABLE_LINK),
     ], [go("Done.", loc="lecture_hall")])]})
 
 # ═════════════ THE BACK STACKS (library_back_stacks.md, DECISIONS 79) ═════════════

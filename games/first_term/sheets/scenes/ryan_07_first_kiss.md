@@ -1,4 +1,6 @@
-# [READY] Scene — ryan_07_first_kiss
+# [CUT] Scene — ryan_07_first_kiss
+
+> **CUT 2026-11-01** (DECISIONS 113): Ryan's release-1 ladder (`npc_ryan.md`) replaces it. Kept on disk as the record; not built in release 1.
 
 > Signed by LO: LO, 2026-10-08.
 

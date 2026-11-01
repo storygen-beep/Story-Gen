@@ -1,4 +1,6 @@
-# [READY] Scene — laura_02_home_late
+# [MOVED] Scene — laura_02_home_late
+
+> **MOVED 2026-11-01** (DECISIONS 113): No longer Laura's step: it becomes the curfew rule, owned by her suspicion (`npc_laura.md`). Rebuilt as `laura_curfew_rule.md` (same canvas, no longer a step). Kept on disk as the record.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

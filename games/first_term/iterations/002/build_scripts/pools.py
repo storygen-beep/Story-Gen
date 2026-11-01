@@ -42,7 +42,7 @@ out.append({
         G(cond(*PROMISED_SHORT, NOT_SHORT), D(Z, "\"Obviously\", she said. That's not short, babe.")),
     ], [
         go("Go in. (15 energy)", loc="zoe_apartment", mins=10, costs=[{"trait": "energy", "value": 15}],
-           cond_=cond(SHORT, NO_CURFEW_ITEM), flags=[fset("party_went"), funset("zoe_party_promised")],
+           cond_=cond(SHORT, NO_CURFEW_ITEM), flags=[fset("party_went"), funset("zoe_party_promised"), funset("zoe_dared")],
            eff=[setv("drinks_tonight", 0)]),
         go("Borrow Zoe's dress first.", loc="zoe_bedroom", mins=2),
         go("Go home.", loc="street", mins=2),
@@ -83,32 +83,79 @@ out.append({
     ]), node("no", "No thanks", [P("They shrug and drink it themselves. They look disappointed, but nobody pushes. At Zoe's, a no always works.")], [go("Go.", loc="zoe_apartment", mins=2)])]})
 
 FLASH = ("\"Flash them, babe. Three seconds,\" Zoe says. The circle goes quiet. You pull everything up to your chin, and your tits drop out into the warm air, bare to people you sit next to in class. Your nipples go hard at once, tight and dark, while every eye lands on them. \"One,\" Zoe calls. Somebody whistles. A guy on the couch forgets the drink halfway to his mouth. \"Two.\" Your chest heaves, so your tits bounce with it. \"Three.\" You hold them out a breath past the count, nipples stiff and aching, before you let everything drop.")
+# ── Zoe's dares (zoe_dares.md, signed 2026-11-01): her hot repeatable after her step 4, replacing party_dare. One a
+#    party night, Zoe picks; a showing yes, a doing yes, the no; three tiers, flat cases. At Zoe's Friday party, late,
+#    where the regulars are (the cocky guy's rows: Friday 23:00 to 02:00); the party-house Saturday has none of them. ──
+from sheetbeats import beat
+D_ = lambda key: beat("zoe_dares", key)
+TOGETHER, APART = flag("zoe_together"), flag("zoe_together", False)
+TIER = {"low": [[APART, trait("corruption", "lt", 40), trait("exhibitionism", "lt", 40)]],
+        "high": [[APART, trait("corruption", "gte", 40)], [APART, trait("corruption", "lt", 40), trait("exhibitionism", "gte", 40)]],
+        "z": [[TOGETHER]]}
+ZOE_LINE = {"low": "Flash the guy at the keg. Or kiss the cocky guy. Properly. Pick.",
+            "high": "Topless in the kitchen till the song ends. Or his lap, till he's hard. Make him beg.",
+            "z": "Kiss me where they can see. Or let me watch you with him."}
+YESES = {"low": [("\"Watch me.\"", "low_show", [trait("exhibitionism", "gte", 20)], "Needs Exhibitionism 20", "keg"),
+                 ("\"Watch this.\"", "low_do", [trait("corruption", "gte", 20)], "Needs Corruption 20", "cocky")],
+         "high": [("\"Start the song.\"", "high_show", [trait("exhibitionism", "gte", 40)], "Needs Exhibitionism 40", "keg"),
+                  ("\"Easy.\"", "high_do", [trait("corruption", "gte", 40), trait("exhibitionism", "gte", 20)], "Needs Corruption 40", "cocky")],
+         "z": [("\"Here?\"", "z_show", [], None, "cocky"),
+               ("\"Watch, then.\"", "z_do", [], None, "cocky")]}
+PAY = {"low_show": [capped("exhibitionism", 1, CAP_CUR)],
+       "low_do": [capped("corruption", 1, CAP_CUR), capped("exhibitionism", 1, CAP_CUR)],
+       "high_show": [capped("exhibitionism", 1, CAP_BOLD), capped("corruption", 1, CAP_BOLD)],
+       "high_do": [capped("corruption", 1, CAP_BOLD), capped("exhibitionism", 1, CAP_BOLD)],
+       "z_show": [capped("corruption", 1, CAP_BOLD), capped("exhibitionism", 1, CAP_BOLD)],
+       "z_do": [capped("corruption", 1, CAP_BOLD), capped("exhibitionism", 1, CAP_BOLD)]}
+MEDIA = {"low_show": VID("a girl flashing her breasts at a guy by a keg at a house party", "girl flashes guy at keg party", "party flash dare keg", pool_dir="sex/zoe_dare_low_show_t4"),
+         "low_do": VID("a girl kissing a guy hard at a party, his hands on her ass, people cheering", "girl kisses guy at party dare", "dare kiss party hands on ass", pool_dir="sex/zoe_dare_low_do_t3"),
+         "high_show": VID("a topless girl in a crowded party kitchen, everyone staring", "topless girl party kitchen", "topless dare at party", pool_dir="sex/zoe_dare_high_show_t4"),
+         "high_do": VID("a girl grinding in a guy's lap on a party couch, him begging", "lap grind party couch dare", "girl grinds on guy's lap party", pool_dir="sex/zoe_dare_high_do_t4"),
+         "z_show": VID("two girls making out in the middle of a house party, the room staring", "girls kissing at party everyone watching", "lesbian kiss party dare", pool_dir="sex/zoe_dare_z_show_t4"),
+         "z_do": VID("a girl making out in a guy's lap on a party couch while her girlfriend watches and directs", "girl makes out with guy while girlfriend watches", "party couch girlfriend watching", pool_dir="sex/zoe_dare_z_do_t4")}
+JAKE_LINE = {"cocky": "He's Jake's teammate. He'll tell Jake, or he won't.", "keg": "Half this party knows Jake."}
+REGULAR_FLAG = {"cocky": "cocky_guy_dared", "keg": "keg_guy_dared"}
+dare_choices, dare_nodes = [], []
+for tier, cases in TIER.items():
+    for nm, key, gate, locked, who in YESES[tier]:
+        for items in cases:
+            dare_choices.append(go(nm, node=key, mins=10, cond_=cond(*items, *gate)))
+for key in PAY:
+    blocks = top_or_dress(D_(key)) if key != "high_show" else [POOL(P(D_(key)), P(FLASH), pid="zoe_dare_high_show", bag=True)]
+    who = "keg" if key in ("low_show", "high_show") else "cocky"
+    blocks += [MEDIA[key], G(cond(trait("jake_step", "gte", 3)), T(JAKE_LINE[who]))]
+    dare_nodes.append(node(key, "The dare", blocks, [
+        go("Back to the party.", loc="zoe_apartment", mins=20, cond_=cond(flag("zoe_dared", False)),
+           eff=PAY[key] + [add("zoe_dares_done", 1), add("campus_talk", 1, clamp=False)],
+           flags=[fset(REGULAR_FLAG[who])]),
+        go("Back to the party.", loc="zoe_apartment", mins=20, cond_=cond(flag("zoe_dared")))]))
 out.append({
-    "id": "party_dare", "name": "Zoe's dare",
-    "description": "Zoe's dare after 23:00 (party_dare): at Showing, flash the circle (explicit). After Zoe A 4 she can dare Zoe back. A no costs nothing. Two a night.",
-    "trigger": {"location": "zoe_apartment", "requires_npc": Z, "is_repeatable": True, "priority": 4, "is_active": True, "max_triggers_per_day": 2,
-                "schedules": LATE_PARTY, "conditions": cond(AT_PARTY, trait("exhibitionism", "gte", 40))},
+    "id": "zoe_dares", "name": "Zoe's dare",
+    "description": "Zoe's dares (release 1): after her step 4, one a party night at her Friday party, late. Zoe picks; a showing yes and a doing yes by her stage, the no; three tiers. Each yes counts toward her step 5. Corruption 60 locked.",
+    "trigger": {"location": "zoe_apartment", "requires_npc": Z, "is_repeatable": True, "priority": 4, "is_active": True,
+                # after midnight, so the day roll (which clears zoe_dared) can't open a second dare the same party night
+                "schedules": [{"weekdays": [5], "start_time": "00:00", "end_time": "02:00"}],
+                "conditions": cond(AT_PARTY, flag("picks_the_dares"), flag("zoe_dared", False), flag("cocky_guy_met"))},
     "nodes": [
-        node("dare", "The circle", [
-            P("Somebody's started truth or dare on the living-room floor, and Zoe pulls you down into the circle and puts her chin on your shoulder."),
-            D(Z, "Flash them, babe. Three seconds."),
-            G(cond(flag("picks_the_dares")), D(Z, "Or dare me. Go on. You pick now.")),
-        ], [
-            go("Do it.", node="flash", mins=2),
-            go("Dare Zoe instead.", node="zoe", mins=2, cond_=cond(flag("picks_the_dares"))),
-            go("\"Not tonight, Zo.\"", node="no", mins=1),
+        node("dare", "Zoe's dare", [
+            P("Zoe finds you in the crush, hooks her chin over your shoulder, and looks round the room like she's shopping."),
+            *[G(cond(*items), D(Z, ZOE_LINE[t])) for t, cs in TIER.items() for items in cs],
+            G(cond(flag("keg_guy_dared")), P("The guy at the keg sees you and grins."), WHO("You again. I'm keeping my cup this time.")),
+            G(cond(flag("cocky_guy_dared"), {"type": "npc_at_location", "location_id": "zoe_apartment", "npc_id": C, "operator": "is_present"}),
+              D(C, "You again. Where's my beer?")),
+        ], dare_choices + [
+            go("\"Not tonight.\"", node="no", mins=1),
+            go("Zoe's next dare. (Needs Corruption 60)", node="dare", swl=True, cond_=cond(trait("corruption", "gte", 60))),
         ]),
-        node("flash", "Three seconds", [P(FLASH),
-            VID("a girl at a house party lifting her top to flash a circle of friends, fairy lights, cups", "girl flashing tits at house party circle", "truth or dare flash party", pool_dir="sex/party_dare_flash_t4")],
-            [go("Back to the party.", loc="zoe_apartment", mins=20, eff=[capped("exhibitionism", 1, CAP_BOLD), add("campus_talk", 1, clamp=False)])]),
-        node("zoe", "Dare Zoe", [
-            ME("Kiss the TA's favourite. No, kiss me. Here. In front of them."),
-            P("Zoe stares at you, and the circle goes \"ooooh\", and she climbs into your lap and does it, slow, both hands in your hair, until somebody throws a cushion at you both."),
-            D(Z, "Happy?"),
-        ], [go("Very.", loc="zoe_apartment", mins=20, eff=[capped("exhibitionism", 1, CAP_BOLD), add("campus_talk", 1, clamp=False)])]),
-        node("no", "Not tonight", [D(Z, "Boo. Fine. Next one's yours."), P("She dares the guy on the couch to drink something from the sink instead. He does.")],
+        *dare_nodes,
+        node("no", "Boo", [D(Z, "Boo. Next one's tamer."), P("She goes and dares the guy on the couch to drink something from the sink instead. He does.")],
              [go("Go.", loc="zoe_apartment", mins=10, flags=[fset("party_cool_zoe")])]),
     ]})
+# one a party night: the dare's choices set zoe_dared; arriving at the party clears it
+for _n in out[-1]["nodes"]:
+    for _c in _n["choices"]:
+        if _c.get("targetType") == "location":
+            _c["flagEffects"] = list(_c.get("flagEffects") or []) + [fset("zoe_dared")]
 
 ORAL = ("Zoe's bathroom door is locked, and the party thumps through the wall. You sink to your knees on the cold tiles. Jake's teammate leans on the sink and grins down at you. You open his jeans and pull his cock out, already hard. You lick the head slowly, so he has to watch. Then you take him in your mouth. His hand fists in your hair. He groans and pulls you into a rhythm, deeper with each stroke. You suck him hard while your hand works the base. His balls tighten against your fingers. His hips jerk, and he comes in your mouth, hot and thick. You swallow all of it, his cock still twitching on your tongue, then wipe your lip with your thumb.")
 SEX = ("He locks Zoe's bathroom door and lifts you onto the sink. The party thumps through the wall. You yank his jeans open and his cock springs out, hard and thick. He pushes into you slowly, and you feel every inch stretch you. Then he starts slamming in hard. Your legs lock round his hips. His mouth finds your tits, and he sucks one nipple, then the other. You grab his ass and pull him deeper. The mirror fogs behind you. Somebody bangs on the door. You both keep going, faster. He groans into your neck and comes inside you. You come clenching around his cock, your heels digging into his ass.")

@@ -1,4 +1,6 @@
-# [READY] Scene — laura_06_take_me_with_you
+# [REWORKED] Scene — laura_06_take_me_with_you
+
+> **REWORKED 2026-11-01** (DECISIONS 113): the canvas is rebuilt as Laura's step 3, "All dressed up" (`laura_03b_all_dressed_up.md`). "Take me with you one night" is cut with her climb toward Ella. Kept on disk as the record.
 
 > Signed by LO: LO, 2026-10-08.
 

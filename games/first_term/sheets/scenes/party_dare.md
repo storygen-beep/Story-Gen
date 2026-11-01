@@ -1,4 +1,6 @@
-# [READY] Scene — party_dare
+# [REWORKED] Scene — party_dare
+
+> **REWORKED 2026-11-01** (DECISIONS 113): replaced by `zoe_dares.md` (Zoe's hot repeatable by stage, one a night, Zoe picks). "Dare Zoe instead" is cut (Zoe picks). The circle flash beat below is kept as one of the Showing dares there. Kept on disk as the record.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

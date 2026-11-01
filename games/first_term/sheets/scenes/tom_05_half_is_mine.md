@@ -1,4 +1,6 @@
-# [READY] Scene — tom_05_half_is_mine
+# [LATER] Scene — tom_05_half_is_mine
+
+> **LATER 2026-11-01** (DECISIONS 113): Comes back when she corrupts Tom, a later release (`npc_tom.md`). Kept on disk as the record; not built in release 1.
 
 > Signed by LO: LO, 2026-10-08.
 

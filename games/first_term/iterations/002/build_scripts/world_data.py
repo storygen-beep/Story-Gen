@@ -10,20 +10,31 @@ TOWEL_RULE = {"conditions": cond({"type": "worn_type", "operator": "eq", "value"
 SLEEP_RULE = {"conditions": cond({"type": "worn_type", "operator": "eq", "value": "sleep_shirt"}),
               "slots_required": ["legwear"],
               "message": "Not in your sleep shirt. Get dressed first."}
+# meters.md rule 1 (signed 2026-11-01, DECISIONS 121): the first time out in a level needs Corruption OR
+# Exhibitionism at that level. A rule blocks only when both are under (two `lt` items, AND; no nesting);
+# the slot rules are tried in order, so each "or" is a rule of its own.
 SKIRT_RULE = {"conditions": cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"},
-                                trait("exhibitionism", "lt", 20)),
+                                trait("exhibitionism", "lt", 20), trait("corruption", "lt", 20)),
               "slots_required": ["legwear"],
-              "message": "Not in that skirt. Not yet. (Going out in it needs Daring.)"}
+              "message": "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)"}
+NO_PANTIES_MSG = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)"
+NO_BRA_MSG = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)"
 PUBLIC_RULES = [
     TOWEL_RULE, SLEEP_RULE, SKIRT_RULE,
     {"conditions": cond(trait("exhibitionism", "gte", 40)),
      "slots_required": ["top", "bottom"],
      "message": "Not like this. Not out there. Put something on."},
+    {"conditions": cond(trait("corruption", "gte", 40)),
+     "slots_required": ["top", "bottom"],
+     "message": "Not like this. Not out there. Put something on."},
     {"conditions": cond(trait("exhibitionism", "gte", 20)),
      "slots_required": ["underwear", "top", "bottom"],
-     "message": "Not like this. Not yet. (No panties out of the house needs Showing.)"},
+     "message": NO_PANTIES_MSG},
+    {"conditions": cond(trait("corruption", "gte", 20)),
+     "slots_required": ["underwear", "top", "bottom"],
+     "message": NO_PANTIES_MSG},
     {"slots_required": ["bra", "underwear", "top", "bottom"],
-     "message": "Not like this. Not yet. (Going out without a bra needs Daring.)"},
+     "message": NO_BRA_MSG},
 ]
 # The park: at Daring she may run in a bra with nothing over it (the park sheet).
 PARK_RULES = [
@@ -39,6 +50,28 @@ ALL = [0, 1, 2, 3, 4, 5, 6]
 WEEK = [0, 1, 2, 3, 4]
 
 OFFICE_CLOSED = "The office is locked. Office hours are on the door."
+
+
+# ── Laura's hour at her door (release 1): which canvas "The door's ajar." opens ──
+_L_IN = {"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_laura", "operator": "is_present"}
+_M_OUT = {"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_mark", "operator": "is_absent"}
+_HOUR = [_L_IN, _M_OUT, wd(6, 0, 1, 2, 3, 4), tod("22:00", "23:00")]
+_BRAKES = [flag("laura_alone_seen", False),
+           {"type": "hours_since_flag", "subject": "player", "flag_key": "laura_alone_seen", "operator": "gte", "value": 20}]
+_STEP4_READY = [trait("laura_step", "eq", 3), trait("corruption", "gte", 20),
+                {"type": "trait", "subject": "npc", "npc_id": "npc_laura", "trait_key": "warmth", "operator": "gte", "value": 30},
+                trait("laura_gaps_watched", "gte", 3)]
+_NOT_READY = [[trait("laura_step", "gte", 2), trait("laura_step", "lt", 3)],   # the gap opens after her step 2 (LO 2b, 2026-11-01)
+              [trait("laura_step", "eq", 3), trait("corruption", "lt", 20)],
+              [trait("laura_step", "eq", 3), trait("corruption", "gte", 20),
+               {"type": "trait", "subject": "npc", "npc_id": "npc_laura", "trait_key": "warmth", "operator": "lt", "value": 30}],
+              [trait("laura_step", "eq", 3), trait("corruption", "gte", 20),
+               {"type": "trait", "subject": "npc", "npc_id": "npc_laura", "trait_key": "warmth", "operator": "gte", "value": 30},
+               trait("laura_gaps_watched", "lt", 3)]]
+LAURA_DOOR_OPTIONS = (
+    [dict(text="The door's ajar.", conditions=cond(*_HOUR, *_STEP4_READY, b), goes_to={"type": "canvas", "canvas_id": "laura_04_she_saw_you"}) for b in _BRAKES]
+    + [dict(text="The door's ajar.", conditions=cond(*_HOUR, trait("laura_step", "gte", 4), b), goes_to={"type": "canvas", "canvas_id": "laura_alone_after"}) for b in _BRAKES]
+    + [dict(text="The door's ajar.", conditions=cond(*_HOUR, *nr, b), goes_to={"type": "canvas", "canvas_id": "laura_alone_in_bed"}) for nr in _NOT_READY for b in _BRAKES])
 
 # id, name, entry_from, kind, hours, closed_text, hidden_until, rules, costs, description
 LOCATIONS = [
@@ -123,16 +156,10 @@ LOCATIONS = [
                       goes_to={"type": "canvas", "canvas_id": "master_asleep"}),
                  # Laura's hour (DECISIONS 82, 84): once a night, the brake as two options with one text;
                  # after she watched, a peek that pays nothing.
-                 dict(text="The door's ajar.",
-                      conditions=cond({"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_laura", "operator": "is_present"},
-                                      {"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_mark", "operator": "is_absent"},
-                                      wd(6, 0, 1, 2, 3, 4), tod("22:00", "23:00"), flag("laura_alone_seen", False)),
-                      goes_to={"type": "canvas", "canvas_id": "laura_alone_in_bed"}),
-                 dict(text="The door's ajar.",
-                      conditions=cond({"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_laura", "operator": "is_present"},
-                                      {"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_mark", "operator": "is_absent"},
-                                      wd(6, 0, 1, 2, 3, 4), tod("22:00", "23:00"), {"type": "hours_since_flag", "subject": "player", "flag_key": "laura_alone_seen", "operator": "gte", "value": 20}),
-                      goes_to={"type": "canvas", "canvas_id": "laura_alone_in_bed"}),
+                 # Release 1 (Laura's ladder, DECISIONS 113, 115): the same "The door's ajar." opens her step 4 when it
+                 # is ready, the after-step-4 gap once it's done, and the gap otherwise: flat, mutually exclusive
+                 # cases (conditions don't nest), each with the once-a-night brake as two options.
+                 *LAURA_DOOR_OPTIONS,
                  dict(text="Peek through the gap.",
                       conditions=cond({"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_laura", "operator": "is_present"},
                                       {"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_mark", "operator": "is_absent"},
@@ -286,7 +313,7 @@ LOCATIONS = [
                       "kettle. She keeps her door half open. Your Biology grade is on it.")),
     dict(id="dean_office", name="Dean's Office", entry_from="faculty_floor", kind="destination",
          hours=[H(WEEK, "09:00", "17:00")], closed_text=OFFICE_CLOSED, rules=PUBLIC_RULES,
-         hidden_until="dean_summons",
+         hidden_until="dean_summons",   # (overridden by the ledger, board.locations: v2_state.json)
          description=("The dean's office: a secretary's desk outside, a heavy door, a big desk and two hard "
                       "chairs. You come here when there's trouble: grades, complaints, probation. A notice on "
                       "the door lists who has been called in.")),

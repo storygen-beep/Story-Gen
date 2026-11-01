@@ -1,5 +1,9 @@
 # [READY] Scene — ryan_06_after_the_shower
 
+> **Changed 2026-11-01 after the build, signed by LO 2026-11-01 ("Signed, build them")** (the reader's FAILs; LO's picks in chat): `comes` ends on what comes next.
+
+> **Changed 2026-11-01, signed by LO 2026-11-01 ("Signed")** (DECISIONS 99–113): Ryan's release-1 ladder (`sheets/people/npc_ryan.md`, signed). Changed: gate Exhibitionism 40 · his Want 50 (Corruption 40 dropped); the ending: he stays in the doorway, pulls his cock out and jerks off while she watches, and comes as Kayla calls "Babe?"; Want +5. `look` is rewritten and `comes` is new, both by `v2-prose`; the column confirmed by LO 2026-11-01 ("Continue").
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08. The explicit screen is written by `v2-prose` and measured.
@@ -8,31 +12,40 @@
 |---|---|
 | person · step | `npc_ryan` · 6 (Ryan A 7) |
 | where · when | the bathroom · Saturday 08:00–10:00, seen from his room |
-| gate | Corruption 40 · Exhibitionism 40 · his Want 50 · the boost off |
+| gate | Exhibitionism 40 · his Want 50 · the boost off |
 | want (test 1) | "...@player.nickname?" through the wall last night (step 5) |
-| next step (test 2) | he sees her naked, by her choice, the door locked |
-| hook (test 3) | Kayla calls "Ryan?"; he leaves wanting more (the kiss, step 7) |
+| next step (test 2) | he sees her naked, by her choice, and doesn't stop: he jerks off in the doorway while she watches |
+| hook (test 3) | he comes as Kayla calls "Babe?"; he can't look at Kayla at breakfast; his door stays open a hand's width (step 7) |
 | what she wears here (test 8) | naked: she has just showered; the towel is there and she leaves it |
 | her voice | stage 3, confident |
-| the crude-word ceiling | Ryan's middle column: ass, tits, cock, wet · not cunt, fuck, cum |
+| the crude-word ceiling | his late column for "cum" (cunt, fuck, cum) · signed today at the middle column (ass, tits, cock, wet) · confirmed by LO 2026-11-01 ("Continue") |
+| her_line_low · her_line_high (rule 7) | low (under the stage): "This is Ryan. You should go." · high (over it): "You want him to hear Kayla on the phone while you do this." (the person sheet's pair; worded for this screen when the prose is written) |
 
 ## Branch map — one row per screen (S1)
 
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
 |---|---|---|---|---|
 | `door` | she steps out of the shower; the door swings open: Ryan | no | "Leave the towel." → `look` · "Reach for the towel." → parked | none |
-| `look` | she stays naked, locks the door, lets him look | yes (6 words) | "Let him look." → `kayla` | exhibitionism add +3 · Ryan's Want add +10 |
-| `kayla` | Kayla from the hall: "Ryan?" He unlocks the door and goes, hard | no | "Take your time drying off." → the hall | `ryan_step` set 6 |
+| `look` | she stays naked and leaves the towel; he stays in the doorway, pulls his cock out and strokes it while she watches | yes | "Watch him." → `comes` | exhibitionism add +3 · corruption add +1 (shown by choice, `meters.md` rule 3) |
+| `comes` | he comes, and Kayla calls "Babe?" from the hall as he does; he can't answer her | yes | "Take your time drying off." → the hall | Ryan's Want add +5 · `ryan_step` set 6 |
 
 "Reach for the towel." is the parked no: he backs out, red; the step waits a week.
 
-## The explicit screen, written
+## The explicit screens, written
 
-**`look`** · 147 words · explicit words 6 (ass, cock, naked, nipple, tits) · median sentence 12 · act rungs: strip, hands · Ryan's middle column (SP2 crude table): ass, tits, cock, wet · not cunt, fuck, cum, pussy
+Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Fixes after: Ryan's name for her is `@player.nickname`, not "Ella". One truth fix after: "I heard you last night" became "I heard you through the wall" (step 6 can fire any Saturday after step 5; `ryan_heard_her` backs it).
 
-> You step out of the shower just as the door swings open. Ryan, in nothing but his shorts. Water runs down your tits and drips off your nipples, hard in the cold air. The towel hangs right there on the rail. You stay naked and leave it. His cock is already hard, straining the front of his shorts, and he can't stop looking. "I heard you last night, @player.nickname. All of it." "Good. Now you've seen it too." You reach past him, close enough to feel the heat off his chest, and turn the lock. You turn slowly so he gets your ass, pink from the hot water. A line of water slides down your spine and between your cheeks. Behind you his breathing goes rough. You look back over your shoulder. His hands are fists at his sides, but his cock jerks against the thin cotton.
+**`look`** · 145 words · explicit words 8 · median sentence 9 · act rungs: strip, hands · Ryan's late column: ass, tits, cock, wet, cunt, fuck, cum
 
-*The last sentence:* his fists, his cock against the cotton. On the body; not a pivot.
+> You step out of the shower and the door swings open. Ryan, in his shorts, hair flat from sleep. The towel hangs on the rail. You leave it there and stay naked. His eyes drop straight to your tits, then down to your cunt. This time he stays. "I heard you through the wall, @player.nickname." He leans in the doorway and pulls his cock out of his shorts. It's already hard, thick and dark at the head. He wraps his fist around it and jerks it, slow. *Kayla is in this house. Let him look anyway.* You stand there dripping and let him see all of it. Water runs down your tits and off your hard nipples. Your cunt is wet, and not from the shower. He strokes faster, eyes on it. His fist slides up and down his cock, and you watch every stroke.
+
+*The last sentence:* his fist on his cock, her watching every stroke. On the body; he hasn't come.
+
+**`comes`** · 108 words · explicit words 8 · median sentence 9 · act rungs: strip, hands, finish · Ryan's late column: ass, tits, cock, wet, cunt, fuck, cum
+
+> His fist speeds up on his cock. You stand there naked, still wet from the shower, hands at your sides. His eyes go from your tits to your cunt. His breathing turns ragged. His hips jerk. He comes in thick ropes, spurting over his knuckles onto the tiles. "Babe?" Kayla calls from the hall. He can't answer her. His mouth opens on a choked breath. His cock pulses in his hand, again and again. *She's right there.* Cum drips off his fingers onto the floor between you. You stay exactly where you are, nipples hard, and watch the last of it leak from the head of his cock.
+
+*The last sentence:* her nipples hard, the last of it leaking from his cock. On the body; not a pivot.
 
 ## Why — the source of each key choice
 
@@ -44,3 +57,11 @@
 | the prose | `v2-prose`, measured by `gates.py --beat`, 2026-10-08 |
 | the parked towel no | guess |
 | Kayla in the house on Saturday morning | LIVES (she stays Friday night) · LO, 2026-10-08 (question 70): she leaves Saturday by 10:00, so the step is true any Saturday 08:00–10:00 · sweep A2-10 |
+
+## Changed after the build (2026-11-01), signed by LO 2026-11-01
+
+A hook line, proposed (LO asked whether a line solves it). Each line names a thing that is in the game and comes next, so it is true; a line that points at nothing would break the truth rule instead.
+
+| node | the closing line (mine, signed) | what it points at |
+|---|---|---|
+| `comes` | "When you come out, his door is open a hand's width. It stays that way." | step 7 reads it (his door open every evening since the shower) |

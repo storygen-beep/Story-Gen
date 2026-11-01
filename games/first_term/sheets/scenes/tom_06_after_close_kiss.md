@@ -1,4 +1,6 @@
-# [READY] Scene — tom_06_after_close_kiss
+# [LATER] Scene — tom_06_after_close_kiss
+
+> **LATER 2026-11-01** (DECISIONS 113): Comes back when she corrupts Tom, a later release (`npc_tom.md`). Kept on disk as the record; not built in release 1.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

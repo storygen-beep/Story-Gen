@@ -1,5 +1,7 @@
 # [READY] System — wardrobe
 
+> **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): leaving a room now needs Corruption **or** Exhibitionism, wearing it out pays both, the two events pay by rule, and a bought item can be held in the garage. The rules live in `sheets/systems/meters.md` and `sheets/systems/money_pressure.md`.
+
 > **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
@@ -33,16 +35,20 @@ College clothes are her own outfits at three levels: normal, sexy, slutty. Never
 | state | how the game checks it | leaving a room in it needs | readers, planned (3+ each) |
 |---|---|---|---|
 | covered | nothing showing | nothing | the default line everywhere |
-| short skirt | a short skirt on | Daring: Exhibitionism 20 | the stairs event, Zoe's door, Mark's eyes |
-| no bra | the bra slot empty | Daring: Exhibitionism 20 | the class risky slot, the park run, Ryan's line |
-| no panties | the underwear slot empty | Showing: Exhibitionism 40 | the stairs, the class slot, Mark's table |
+| short skirt | a short skirt on | Corruption 20 **or** Exhibitionism 20 (`meters.md` rule 1) | the stairs event, Zoe's door, Mark's eyes |
+| no bra | the bra slot empty | Corruption 20 **or** Exhibitionism 20 | the class risky slot, the park run, Ryan's line |
+| no panties | the underwear slot empty | Corruption 40 **or** Exhibitionism 40 | the stairs, the class slot, Mark's table |
 | underwear only | underwear, nothing over it | Showing 40, and only at home | Ryan's line, Mark's line, Laura's line |
 | towel | a towel on | allowed at home from day 1 | the hall (Ryan A 1), the bathroom, Laura's line |
 | naked | nothing on | her room and the bathroom only; outside is Watched, later | the bathroom, her room, the selfie (later) |
 
 **One exception (LO, 2026-10-08):** Hale B 2's flash, no panties at Daring, inside that step only.
 
-The door out says why: *"Not like this. Not yet."* (guess) The block names the stage it needs.
+The door out says why and names both numbers: "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)" (`meters.md` rule 1).
+
+**Wearing it out pays** (`meters.md` rule 2): the first day out in each level, Corruption +1 and Exhibitionism +1; each day after, Exhibitionism +1, once a day, through the street scene's witness.
+
+**A held item** (`money_pressure.md`, the third short Sunday): `garage_holds_<item>` locks one bought garment (🔒) until the debt is paid.
 
 ## Key items
 
@@ -71,7 +77,7 @@ The door out says why: *"Not like this. Not yet."* (guess) The block names the s
 | `wardrobe_event_stairs` | a short skirt or no panties on the stairs; someone below | no | her clothing state · who is home | once a day |
 | `wardrobe_event_dress_code` | a lecturer's warning in class | no | her clothing state | once a day |
 
-Both events add Exhibitionism +1 the first time each day she is in that state (guess).
+Both events pay by `meters.md` rule 3 (no longer a guess): shown by her choice, Exhibitionism +1 and Corruption +1; an accident pays nothing.
 
 ## Lewd ladder (`lewd_ladder[]`)
 

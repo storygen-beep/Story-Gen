@@ -1,4 +1,6 @@
-# [READY] Scene — hale_05_seven_twenty
+# [CUT] Scene — hale_05_seven_twenty
+
+> **CUT 2026-11-01** (DECISIONS 113): Her power over him goes against "Hale the jerk" (`npc_hale.md`). Kept on disk as the record; not built in release 1.
 
 > Signed by LO: LO, 2026-10-08.
 

@@ -1,5 +1,7 @@
 # [READY] Scene — laura_01_blue_dress
 
+> **Changed 2026-11-01, signed by LO 2026-11-01 ("Go ahead")** (DECISIONS 99–114): Laura's release-1 ladder (`sheets/people/npc_laura.md`, signed). Changed: the step pays Love +5 and Exhibitionism +3 (Want +10 dropped: nothing of hers reads Want); her voice rows added. The screens and lines stand as built.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08.
@@ -15,6 +17,8 @@
 | what she wears here (test 8) | Laura's blue dress: the scene adds and equips it |
 | her stage here | Good Girl: shy choices only (SP2) |
 | explicit? | no |
+| her_line_low · her_line_high (rule 7) | low (under the stage): "That's your mom. Go to bed." · high (over it): "She's lonely, and you can't stop watching her be lonely." (the person sheet's pair; at step 1 the high line is worded for the mirror: "She's looking at you like a stranger would. You don't hate it.", the built thought) |
+| what changes after | the dress is Ella's; Laura's line on it (`npc_laura.md`, her line: her blue dress) |
 
 ## Branch map — one row per screen (S1)
 
@@ -22,8 +26,8 @@
 |---|---|---|---|---|
 | `kitchen` | Laura, washing up: "Come upstairs. I have something for you." | no | "Follow her." → `mirror` | none |
 | `mirror` | the blue dress, tight across her chest; Laura smooths it over her hips | no | "Is that bad?" → `no` · "I can't take this." → `give` (parked) | `laura_blue_dress` added and worn |
-| `no` | "It never fit me like that." — "No." | no | "Thank you, Mom." → her room | Laura's Want add +10 · exhibitionism add +3 · `laura_step` set 1 · `laura_01_done` set |
-| `give` | "Keep it. Wear it somewhere." Laura doesn't take it back | no | "Okay." → her room | `laura_blue_dress` kept · the step counts, warmer |
+| `no` | "It never fit me like that." — "No." | no | "Thank you, Mom." → her room | Laura's Love (`warmth`) add +5 · exhibitionism add +3 · `laura_step` set 1 · `laura_01_done` set |
+| `give` | "Keep it. Wear it somewhere." Laura doesn't take it back | no | "Okay." → her room | `laura_blue_dress` kept · Laura's Love add +5 (the built extra +3 on this exit is dropped: one pay per step) · exhibitionism add +3 · `laura_step` set 1 · `laura_01_done` set |
 
 Who notices: Laura, behind her in the mirror.
 
@@ -35,3 +39,4 @@ Who notices: Laura, behind her in the mirror.
 | day 2, shy choices only | SP2 §6 (kept) |
 | the dress is equipped by the scene | the truth rule · guess for the mechanism |
 | fix from the false-line sweep | sweep A2-09 (2026-10-08) |
+| Love +5, not Want +10 | `proposals/LAURA_R1_LADDER.md`, the numbers (signed 2026-11-01) |
