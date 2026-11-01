@@ -153,3 +153,6 @@ parsed rounds match the screenshots.
   showed 1xBet's "Please log in!" box: the account had been logged out, most likely also the
   cause of the run 4 stall. Capture now stops after 3 reloads in a row with no game message.
   Total still 270 rounds; the next run needs a login by hand first.
+- Run 6 (2026-11-01, 11:21 to 13:01, after a login by hand): 58 round ids, 5 automatic reloads.
+  Total 322 complete rounds. The audit passes on every family and decide.py says SKIP on every
+  round; results in `PHASE7_8_RESULTS.md`. The check against iPhone screenshots is still open.
