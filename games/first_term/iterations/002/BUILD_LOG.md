@@ -1168,3 +1168,14 @@ sheets' own, and none is a tease, touch or paid look.
   - the dryer's cover-up ending has her pushback ("Mom's husband. Don't think about it.").
   The rest were in the game before this change; they are listed for LO in the report. Gates 61/89 (only `ends on an opening`
   lost, as above); probes 104/104, 0 page errors. Rebuilt `--dev --debug`.
+
+## 2026-11-02: dev mode edits her four sidebar meters (DECISIONS 126, LO: "Add them to the traits. Rebuild commit and push")
+
+- LO could not change Corruption in dev + debug mode: the dev Traits list skipped every `in_dump = false` key
+  (`v2.py:19862`, `:19888`), so the four meters shown as their own sidebar rows (Corruption, Exhibitionism, Energy,
+  Hygiene) had no − / +. Engine: the DEV list now skips only hidden keys; the player's list is unchanged.
+- Tried first: dropping `in_dump = false` in `0_systems_spec.toml`. That failed the gate "a banded meter is shown
+  once" (the player would see Corruption twice), so it was reverted for the engine fix.
+- Engine test `test_the_dev_list_skips_only_hidden_so_a_sidebar_meter_keeps_its_buttons`; engine suite 794 passed,
+  17 skipped. Gates 61/89, as before. `probe_devtraits.py` 7/7 (− / + on all four, `ryan_step` still hidden, + raises
+  Corruption, 0 page errors). Rebuilt `--dev --debug`. a2's play check: "skipped by LO" (recorded by `pieces.py`).

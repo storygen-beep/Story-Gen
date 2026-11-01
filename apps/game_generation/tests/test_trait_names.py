@@ -91,6 +91,21 @@ def test_the_dump_skips_in_dump_false_and_hidden_but_the_stats_page_only_hidden(
     assert "setup.hiddenTraits.includes(_tk)" in stats and "dumpSkipTraits" not in stats
 
 
+def test_the_dev_list_skips_only_hidden_so_a_sidebar_meter_keeps_its_buttons():
+    """first_term 2026-11-02: Corruption has its own sidebar row (in_dump = false), and the dev
+    traits list copied the dump skip, so it had no - / + to test with. Dev skips hidden only."""
+    graph = build_game_graph(normalize(_raw()))
+    twee = TweeComprehensiveGeneratorV2().generate(graph.project, {"dev_mode": True}, graph=graph)
+    widget = _passage(twee, "PlayerTraitsWidget") if "\n:: PlayerTraitsWidget" in twee else twee
+    i = widget.index('<<widget "playerTraits">>')
+    dev = widget[i:widget.index("<</widget>>", i)]
+    assert "dev-player-trait-btn" in dev
+    assert "setup.hiddenTraits.includes(_k)" in dev and "dumpSkipTraits" not in dev
+    j = twee.index('<<widget "npcTraits">>')
+    npc = twee[j:twee.index("<</widget>>", j)]
+    assert "setup.hiddenTraits.includes(_nk)" in npc and "dumpSkipTraits" not in npc
+
+
 def test_the_python_side_now_asks_for_an_npc_only_gates_suffix():
     board = _passage(_twee(), BOARD)
     npc_only = next(l for l in board.splitlines() if "Ask him to stay." in l and "locked-choice" in l)

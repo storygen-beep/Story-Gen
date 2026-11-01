@@ -19849,7 +19849,9 @@ $(document).on(':passagestart', function(ev) {
         <button class="time-btn dev-btn" onclick="devAdvanceHour()" title="Dev: +1 hour" style="background:#ffc107;color:#000;">+1hr</button> | <button class="time-btn dev-btn" onclick="devNextDay()" title="Dev: Next day 7AM" style="background:#ffc107;color:#000;">Next Day</button>
     </div>"""
 
-        # Player traits widget with optional dev controls
+        # Player traits widget with optional dev controls. The DEV list skips only hidden keys, not
+        # `in_dump = false` ones: a meter shown as its own sidebar row (banded, barred) still needs
+        # its - / + for testing, and the player-facing list below keeps the dump skip (first_term, 2026-11-02).
         if self.dev_mode:
             player_traits_widget = """<<widget "playerTraits">>
 <div id="traits-widget" class="traits-display">
@@ -19859,7 +19861,7 @@ $(document).on(':passagestart', function(ev) {
     <ul class="traits-list">
       <<for _i to 0; _i lt _keys.length; _i++>>
         <<set _k to _keys[_i]>>
-        <<if setup.dumpSkipTraits && setup.dumpSkipTraits.includes(_k)>><<continue>><</if>>
+        <<if setup.hiddenTraits && setup.hiddenTraits.includes(_k)>><<continue>><</if>>
         <li class="trait-item">
           <span class="trait-name"><<print setup.traitLabel(_k)>></span>
           <span class="trait-controls"><button class="dev-adj-btn dev-player-trait-btn" @data-trait="_k" data-delta="-1">-</button> <span @id="'sidebar-player-trait-' + _k" class="trait-value"><<print $player.core_traits[_k]>></span> <button class="dev-adj-btn dev-player-trait-btn" @data-trait="_k" data-delta="1">+</button></span>
@@ -19885,7 +19887,7 @@ $(document).on(':passagestart', function(ev) {
           <<set _npcKeys to Object.keys(_npc.core_traits).sort()>>
           <<for _j to 0; _j lt _npcKeys.length; _j++>>
             <<set _nk to _npcKeys[_j]>>
-            <<if setup.dumpSkipTraits && setup.dumpSkipTraits.includes(_nk)>><<continue>><</if>>
+            <<if setup.hiddenTraits && setup.hiddenTraits.includes(_nk)>><<continue>><</if>>
             <li class="trait-item">
               <span class="trait-name"><<print setup.traitLabel(_nk)>></span>
               <span class="trait-controls"><button class="dev-adj-btn dev-npc-trait-btn" @data-npc="_npcId" @data-trait="_nk" data-delta="-1">-</button> <span @id="'sidebar-npc-trait-' + _npcId + '-' + _nk" class="trait-value"><<print _npc.core_traits[_nk]>></span> <button class="dev-adj-btn dev-npc-trait-btn" @data-npc="_npcId" @data-trait="_nk" data-delta="1">+</button></span>
