@@ -1,0 +1,16 @@
+{
+  "id": "hb2_kessler_schedule",
+  "kind": "build",
+  "fixture": "members_only",
+  "source": "members_only FINDINGS #35 (a door step where the person never is)",
+  "rule": "the-sheets.md S5: the person sheet is a schedule grid; the build follows it",
+  "task": "Kessler's schedule rows are missing from the build. Rebuild them from his signed sheet, sheets/people/kessler.md.",
+  "target_lints": [],
+  "note": "Build cases stage members_only at 677cd30f, remove one built piece, keep its signed sheet, and ask for it to be built again. Graded against the INTACT original build (no gate may end worse) plus check.py, which reads only facts where the sheet and the original build agree.",
+  "prepare": [
+    {
+      "op": "remove_schedules",
+      "npc": "kessler"
+    }
+  ]
+}

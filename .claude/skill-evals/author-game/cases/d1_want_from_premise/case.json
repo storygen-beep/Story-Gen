@@ -1,0 +1,10 @@
+{
+  "id": "d1_want_from_premise",
+  "kind": "design",
+  "fixture": "test_game",
+  "preamble": "plain",
+  "source": "SKILL_TEST_REVIEW G2 (the session wrote the spine while the phase was still `want`)",
+  "rule": "SKILL.md:169 (stop at every phase boundary); the-want.md (one page, five parts; D16)",
+  "task": "LO has picked this premise for a new game, slug test_game: Mia, 22, loses her scholarship in her final year and moves into her stepbrother Jake's apartment in the city. Jake, 28, pays her share of the rent and keeps the tab on the fridge; his friends start noticing her. Taboo at home. Write the Want.",
+  "target_lints": []
+}

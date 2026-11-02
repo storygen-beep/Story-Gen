@@ -3,5 +3,7 @@
   "source": "members_only #47 (NPC double-booked in two places)",
   "rule": "the-board.md schedules",
   "task": "Theo now also spends Wednesday afternoons at the firm, from 14:00 to 19:00. Add that to his schedule.",
-  "target_lints": []
+  "target_lints": [],
+  "doctrine": "not in v2",
+  "doctrine_note": "No reference file or gates.py gate covers one NPC's rows overlapping at two locations (engine.md \u00a719 covers two canvases at one location). Kept because the slip was logged (members_only #47)."
 }

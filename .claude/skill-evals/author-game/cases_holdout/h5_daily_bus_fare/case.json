@@ -1,0 +1,8 @@
+{
+  "id": "h5_daily_bus_fare",
+  "source": "members_only #52 (a daily tab charge pushed money below zero, 5 -> -25)",
+  "rule": "engine daily_tick traitEffects: per-effect `conditions`, clamp defaults to false (v2.py:6971-6986)",
+  "task": "Add a daily $10 bus fare that comes out of Emma's money every day.",
+  "target_lints": [],
+  "set": "holdout"
+}

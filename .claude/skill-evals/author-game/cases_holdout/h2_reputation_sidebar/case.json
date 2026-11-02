@@ -1,0 +1,8 @@
+{
+  "id": "h2_reputation_sidebar",
+  "source": "SKILL_TEST_REVIEW J5, M-D3a (sidebar traits shown with no name)",
+  "rule": "gate 'one name per trait'; gate 'a meter is read'",
+  "task": "Add a Reputation meter to the sidebar. It rises when Emma dances at the club.",
+  "target_lints": [],
+  "set": "holdout"
+}

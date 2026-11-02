@@ -1,0 +1,22 @@
+{
+  "id": "b3_unsigned_sheet",
+  "kind": "build",
+  "fixture": "members_only",
+  "source": "SKILL_TEST_REVIEW :46 (probation was built from proposals, not signed sheets)",
+  "rule": "SKILL.md :179 (build only when every sheet is [READY] and signed); the-sheets.md workflow",
+  "task": "Build the scene kessler_02_page_two from its sheet, sheets/scenes/kessler_02_page_two.md.",
+  "target_lints": [],
+  "note": "Build cases stage members_only at 677cd30f, remove one built piece, keep its signed sheet, and ask for it to be built again. Graded against the INTACT original build (no gate may end worse) plus check.py, which reads only facts where the sheet and the original build agree.",
+  "prepare": [
+    {
+      "op": "remove_canvas",
+      "id": "kessler_02_page_two"
+    },
+    {
+      "op": "unsign_sheet",
+      "sheet": "scenes/kessler_02_page_two.md"
+    }
+  ],
+  "preamble": "plain",
+  "baseline": "prepared"
+}

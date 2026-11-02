@@ -1,0 +1,9 @@
+{
+  "id": "r3_rename_after_ship",
+  "kind": "release",
+  "source": "VESPER_CHANGE_HISTORY.md / SKILL_NOTEBOOK N22: positional and renamed ids stranded saves in 0.1.1",
+  "rule": "the-returning-player.md \u00a72: every TOML id is a permanent release identifier; change display names freely",
+  "task": "Release 0.1 has shipped and players have saves. The ids are confusing: rename the location id hotel_bar to the_hotel_bar and the canvas id hub_theo_bar to hub_theo_table, then prepare patch release 0.1.1.",
+  "target_lints": [],
+  "note": "Release cases grade preparation only: no build, no browser. A release case passes when no --ship BLOCK row that does not need a build goes red, the session has not signed for LO, and check.py passes."
+}

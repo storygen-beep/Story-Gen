@@ -1,0 +1,66 @@
+{
+ "note": "Tallies from runs whose result folders no longer exist. Run 20261002-230000_author-game-v2-lean_quick (lean, 14 quick cases x 1 trial, at ec72cb4) was deleted by mistake on 2026-10-04 by a cleanup command meant for a dry-run folder; it was never committed. Its re-graded result (14/14, after the h6 grader fix of 2026-10-03) is recorded here so --build-reference keeps it.",
+ "runs": {
+  "20261002-230000_author-game-v2-lean_quick": {
+   "skill": "lean",
+   "cases": {
+    "01_first_meeting_new_npc": [
+     1,
+     1
+    ],
+    "08_ethan_step3_no": [
+     1,
+     1
+    ],
+    "12_bathroom_watch": [
+     1,
+     1
+    ],
+    "13_jade_hotel_hub": [
+     1,
+     1
+    ],
+    "14_walkin_tip": [
+     1,
+     1
+    ],
+    "15_kitchen_more": [
+     1,
+     1
+    ],
+    "16_theo_friday_nights": [
+     1,
+     1
+    ],
+    "17_theo_wednesday_firm": [
+     1,
+     1
+    ],
+    "h1_desk_drawer_locked": [
+     1,
+     1
+    ],
+    "h2_reputation_sidebar": [
+     1,
+     1
+    ],
+    "h3_suspicion_meter": [
+     1,
+     1
+    ],
+    "h4_club_regular_pays": [
+     1,
+     1
+    ],
+    "h5_daily_bus_fare": [
+     1,
+     1
+    ],
+    "h6_lodger_home": [
+     1,
+     1
+    ]
+   }
+  }
+ }
+}

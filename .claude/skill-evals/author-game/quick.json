@@ -1,0 +1,19 @@
+{
+ "note": "Quick mode: the 8 main cases v2 failed at least once (they separate v2 from lean; the other 10 pass on both and say nothing) plus the 6 frozen held-out cases. 14 sessions at 1 trial.",
+ "cases": [
+  "01_first_meeting_new_npc",
+  "08_ethan_step3_no",
+  "12_bathroom_watch",
+  "13_jade_hotel_hub",
+  "14_walkin_tip",
+  "15_kitchen_more",
+  "16_theo_friday_nights",
+  "17_theo_wednesday_firm",
+  "h1_desk_drawer_locked",
+  "h2_reputation_sidebar",
+  "h3_suspicion_meter",
+  "h4_club_regular_pays",
+  "h5_daily_bus_fare",
+  "h6_lodger_home"
+ ]
+}

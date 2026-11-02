@@ -1,0 +1,23 @@
+{
+ "note": "Test games, staged from git so a deleted game still works. Each case names its fixture (default billable_hours).",
+ "billable_hours": {
+  "commit": "301f6f8",
+  "paths": [
+   "games/billable_hours/toml_phases",
+   "games/billable_hours/v2_state.json"
+  ]
+ },
+ "members_only": {
+  "commit": "677cd30f",
+  "note": "the last commit before games/members_only was deleted (6fd24ab1); signed sheets + the TOML built from them",
+  "paths": [
+   "games/members_only/toml_phases",
+   "games/members_only/v2_state.json",
+   "games/members_only/sheets"
+  ]
+ },
+ "test_game": {
+  "empty": true,
+  "note": "an empty games/test_game/ for 'start a new game' design cases"
+ }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "hr2_jade_line_release",
+  "kind": "release",
+  "source": "SKILL_TEST_REVIEW I1 (reader failed what every gate passed); VESPER_CHANGE_HISTORY.md:63 (version not bumped)",
+  "rule": "the-release.md ship procedure step 4 and 6b",
+  "task": "Jade should say something new at the club when Emma has worked a shift today. Add it to hub_jade_club and prepare it as release 0.1.1 for LO's playtest.",
+  "target_lints": [],
+  "note": "Release cases grade preparation only: no build, no browser. A release case passes when no --ship BLOCK row that does not need a build goes red, the session has not signed for LO, and check.py passes."
+}

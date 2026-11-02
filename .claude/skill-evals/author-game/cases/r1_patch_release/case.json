@@ -1,0 +1,9 @@
+{
+  "id": "r1_patch_release",
+  "kind": "release",
+  "source": "VESPER_CHANGE_HISTORY.md:63 ('a version not bumped'); SKILL_TEST_REVIEW I1 (reader verdicts gate the ship)",
+  "rule": "the-release.md ship procedure step 4 (version) and 6b (reader on every touched canvas)",
+  "task": "Theo should get one more line at his table in hub_theo_bar. Add it, and prepare it as patch release 0.1.1 for LO's playtest.",
+  "target_lints": [],
+  "note": "Release cases grade preparation only: no build, no browser. A release case passes when no --ship BLOCK row that does not need a build goes red, the session has not signed for LO, and check.py passes."
+}

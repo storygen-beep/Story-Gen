@@ -1,0 +1,8 @@
+{
+  "id": "h3_suspicion_meter",
+  "source": "probation note; members_only #47 (meters raised but never read)",
+  "rule": "the-meters.md; gate 'a meter is read'",
+  "task": "Add a Suspicion meter for Diane that rises when Emma flirts with Martin in front of her.",
+  "target_lints": [],
+  "set": "holdout"
+}

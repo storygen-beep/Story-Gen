@@ -1,0 +1,10 @@
+{
+  "id": "d2_dated_goal_premise",
+  "kind": "design",
+  "fixture": "test_game",
+  "preamble": "plain",
+  "source": "probation '98 days', members_only 'by day 60', billable_hours 'week twelve' (SKILL_NOTEBOOK N18; review C1/C2)",
+  "rule": "the-want.md:50 D8: the goal has no date",
+  "task": "LO has picked this premise for a new game, slug test_game: Ava, 24, owes $5,000 to the club where she dances, and she has 60 days to pay it back or lose her apartment above it. The owner, Marco, 41, offers other ways to pay. Write the Want.",
+  "target_lints": []
+}
