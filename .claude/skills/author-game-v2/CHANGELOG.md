@@ -5,6 +5,177 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-03 — an engine commit fixes the cites it moves
+
+**What.**
+- `scripts/hooks/pre-commit` (repo) has a new block 0, which runs first and never refuses. When
+  a commit stages an engine file the skill cites (`v2.py`, `template_import.py`,
+  `apps/stories/models.py`, `game_service.py`, the TARGETS in `scripts/cite_check.py`) and
+  `cite_check.py` finds wrong cites in SKILL.md + references/, it runs `cite_check.py --fix`.
+  A fixed doc file with no other unstaged edits is staged into the same commit. One that has
+  other edits is fixed on disk, left unstaged and named. Cites `--fix` cannot move (ranges,
+  ambiguous anchors) are listed for a later hand fix. It prints one line, for example
+  "the engine moved 17 skill cite(s): 17 fixed, 0 left".
+- The hook reads what LO staged in the skill before block 0 can stage anything, so the fix's
+  own line-number moves don't start the skill check. If LO stages the engine and the skill
+  together, the cites are fixed before the skill check reads them, so it doesn't refuse on
+  them.
+- `SKILL.md` ("Ship on `--ship`"): one clause on the same line, saying an engine commit never
+  waits and carries its cite moves.
+- The 17 wrong cites from the 11-02/03 engine commits (`d9a6fce4`, `c7637655` and others)
+  were fixed with `cite_check.py --fix`: 14 in `references/engine.md`, 2 in `the-release.md`,
+  1 in `the-economy.md`. Line numbers only. A digits-stripped diff of each file matches its
+  backup.
+
+**Why.** The engine drifted 62 cites on 11-02 and 17 more on 11-03. The skill check only runs
+when skill files are staged, so engine commits never tripped it. The cites only got fixed
+when someone noticed. LO said development must not be blocked ("dont want development to be
+blocked by it", 11-02), and LO's 08-29 rule is that a bad cite never fails a build. So this
+block fixes and warns; it never refuses. LO's go: "Go ahead" (11-03).
+
+**Limit.** Cites are checked against the engine file on disk, not the staged copy. A
+partly-staged `v2.py` can be fixed against lines that aren't in the commit.
+
+**Verified.** 6 new tests in `scripts/tests/test_gates_ws6.py`:
+- the fix lands in the same commit;
+- a dirty doc is fixed but not staged;
+- leftovers are listed and the commit goes ahead;
+- engine + skill staged together pass the skill check;
+- true cites print nothing;
+- a non-engine commit skips the fix.
+
+`test_gates_ws6.py` 30 passed. `cite_check.py --strict` 0 wrong. `gates.py --selfcheck`: the
+index is current.
+
+## 2026-11-02 — every piece gets played, and nothing blocks the build
+
+**What.**
+- `.claude/hooks/play_gate.py` and `.claude/settings.json` deleted (never committed). Nothing
+  blocks an edit, a build, a commit or a push any more.
+- `scripts/pieces.py` reshaped:
+  - `done` records the piece and says development carries on.
+  - `chrome <slug> <id> "<report>"` (new) records the building session's own play in Claude in
+    Chrome: does it fire, is it true, can she climb.
+  - `played <slug> <id|--all> "<LO's words>"`: `--all` puts one note on every piece that has
+    none.
+  - `release-check <slug>` (new) exits 1 while any piece has no LO note.
+  - `open` is removed. Chrome and LO notes both go under `## Play notes` in DECISIONS.md, each
+    labelled with who played.
+- The release hold: `scripts/release_upload.py` `check_ship` and the ship block in
+  `scripts/hooks/pre-commit` (non-dev portal builds only) now also run `pieces.py release-check`.
+- `SKILL.md` "Every piece gets played" and `references/state.md` `build.pieces[]`: both rewritten
+  to match.
+- `scripts/tests/test_pieces.py` rewritten: 11 tests, including one that the blocking hook is gone
+  and one that `release_upload` refuses while LO hasn't played.
+
+**Why.** LO, 2026-11-02, choosing option 3 (Claude plays each piece in Chrome, LO plays before a
+release): "No, both but dont want development to be blocked by it." On first_term the blocking
+gate was skipped on all 8 pieces built that day. A rule skipped every time held nothing. The hold
+now sits only where an unplayed build would reach players.
+
+**Verified.** `pytest scripts/tests/test_pieces.py scripts/tests/test_gates_ws6.py`: 34 passed.
+`pieces.py release-check first_term`: exit 0. All 8 pieces carry the "skipped by LO" notes given
+to the old gate, so they count as LO's notes. Said to LO.
+
+## 2026-11-02 — the play gate lets the build reach LO's phone
+
+**What.**
+- `.claude/hooks/play_gate.py`: Bash is no longer refused for naming a build step. It's refused
+  only when it names `games/<slug>` and writes a file (a heredoc, `sed -i`, a `>` redirect,
+  `open(`, `write_text`, `tee`, `cp`/`mv`/`rm`). Appending to `BUILD_LOG.md` or `DECISIONS.md`
+  passes, and so does a lone `pieces.py` call even when the note quotes `>`. Rebuilds
+  (`merge_toml_phases`, `package_from_toml`, a build script), `git add`/`commit`/`push` all pass.
+  Edit/Write on game files stays refused as before.
+- `scripts/pieces.py`: the STOP message says to rebuild, commit and push the dev build (with LO's
+  yes) so it reaches the portal.
+- `SKILL.md`: the same sentence.
+- `scripts/tests/test_pieces.py`: 12 tests. Six writes refused, five rebuild/commit/push commands
+  let through, and the note append and a pieces.py call with ">" in the note let through.
+
+**Why.** LO: "Play gate is wrong, so basically we commit and push to get her so that I can play it
+on my phone, it's not for public." LO plays the dev build from GitHub Pages, so the build has to
+be committed and pushed to `main` before he can play it. The first version refused rebuilds and
+commits, so the main session had to record "skipped by LO" to get the build to his phone. That
+turned the gate into the thing being skipped. It now stops new work on the game, not delivery.
+The portal entry is `dev: true` (`games-data.js`), so the ship check in `scripts/hooks/pre-commit`
+doesn't block a dev push either.
+
+**Verified.** `pytest scripts/tests/test_pieces.py`: 12 passed.
+
+## 2026-11-02 — the play gate: a built piece blocks its game until LO has played it
+
+**What.**
+- `scripts/pieces.py` (new): `done <slug> <id> "<what>"` records a piece in `v2_state.json`
+  `build.pieces[]` with `played = null` and prints the STOP message with four things to look for
+  (does it happen, is it true, is it hot, can she climb). `played <slug> <id> "<LO's words>"`
+  records the note in the ledger and as a line under `## Play notes` in `DECISIONS.md`. An empty
+  note, a second note and a reused id are refused. `status` exits 1 while a piece is unplayed.
+  The ledger is written back in its own format (indent 2, UTF-8, trailing newline).
+- `.claude/hooks/play_gate.py` (new, outside the skill) and `.claude/settings.json` (new): a
+  PreToolUse hook on `Edit|Write|MultiEdit|NotebookEdit|Bash`. While a game has an unplayed piece
+  it refuses edits to files under `games/<slug>/` (not `DECISIONS.md` or
+  `iterations/*/BUILD_LOG.md`), and refuses Bash commands that name `games/<slug>` with
+  `merge_toml_phases`, `package_from_toml`, `build_scripts/` or `toml_phases/`. It fails open on
+  its own errors, so a hook bug never locks a session out.
+- `SKILL.md` "A build stops after each piece": names the two commands and the hook.
+- `references/state.md`: the `build.pieces[]` key.
+- `scripts/tests/test_pieces.py` (new): 11 tests.
+
+**Why.** "A build stops after each piece for LO to play" has been in `SKILL.md` since 2026-10-08.
+It was waived the next day, and iteration 002 then ran ten parts with no play between them. The
+2026-11-02 audit found that in every logged case, only LO playing caught a game that was green
+on every check while it was broken or not hot. Prose rules got waived; scripted ones held.
+
+**Verified.** `pytest scripts/tests/test_pieces.py`: 11 passed. Live in this session, on a
+throwaway `games/_play_gate_probe/` (deleted after): an Edit and a Bash build command were both
+refused by the real hook with the play-gate message, and after `played` the same Edit went through.
+No real game was touched; first_term has no `build` key, so it isn't blocked until its next build
+runs `done`.
+**Known.** The gate holds only after `done` is run: a session that never declares a piece is never
+stopped. The hook can't tell whether a `played` note is really LO's words. A Bash write into a
+game that names no build step (`sed -i`, a heredoc) isn't caught.
+
+## 2026-11-02 — the commit check: a skill commit is refused while the skill's own checkers are red
+
+**What.**
+- `scripts/hooks/pre-commit` (outside the skill, already symlinked from `.git/hooks/pre-commit`):
+  a new first block. It runs when a commit stages anything under `.claude/skills/author-game-v2/`
+  or `.claude/agents/v2-*.md`, and stops at the first red: `gates.py --selfcheck`,
+  `cite_check.py --strict` (it lists the wrong cites), the exam's grader tests
+  (`.claude/skill-evals/author-game/tests`), and the skill's script tests when `scripts/` is
+  staged. It then prints how old the last exam run is and warns when that run is older than the
+  last skill commit. The exam itself is never run from the hook (about an hour of plan quota).
+  The ship block is unchanged and runs after it.
+- `references/*.md`: `cite_check.py --fix` moved 71 drifted `file:line` citations to the lines
+  they name now (engine.md 56, the-clock 3, the-release 3, the-board 2, the-phone 2,
+  the-returning-player 2, the-economy 1, the-first-hour 1, the-systems 1). Line numbers only; the
+  quoted code next to each cite is unchanged.
+- `SKILL.md` "Ship on `--ship`": one sentence naming the new refusal.
+- `scripts/tests/test_gates_ws6.py`: the ship-hook fixture commits its stand-in `gates.py` past
+  the hook first, so those tests still see the ship check alone. Four new tests in a throwaway
+  repo: red selfcheck refused; wrong cite refused and named; green edit allowed with the exam
+  warning; a non-skill commit skips the skill check.
+
+**Why.** The 2026-11-02 audit found the checkers existed and nobody ran them. Citations in
+`SKILL.md` + `references/` had drifted to 71 wrong under LO's baseline of 0 (2026-09-28), the
+same count at HEAD as in the working tree, so the drift was already committed. The exam had not
+run since 2026-10-04 across eight skill commits. Four citation-repair waves in nine weeks
+(08-29, 09-28, 09-30, 10-11) each rotted again because the check was manual. The 2026-08-29
+note "a bad citation does not fail a build" still holds for builds; this refuses a commit.
+
+**Verified.** `cite_check.py --strict`: exit 0, "SKILL.md + references/: 0 citation(s) point at
+the wrong line (baseline 0)". The diff against a backup taken before `--fix` is 71 old and 71 new
+lines, line numbers only. Four rewritten cites read by hand against the source (`v2.py:4962`,
+`:19438`, `:18931`, `template_import.py:7006`). `gates.py --selfcheck`: "the index is current".
+`pytest scripts/tests/test_gates_ws6.py`: 24 passed.
+**Known.** `scripts/tests` has 11 tests that are red on this machine because the Playwright
+browser is not installed (`test_gates_ck1` and `test_gates_ws4` reach_step,
+`test_ship_row_green_on_the_built_fixture`, `test_playtest_l2`). Until it is
+(`venv/bin/playwright install chromium`), a commit that stages `scripts/` is refused.
+**Resolved the same day:** LO said yes and `venv/bin/playwright install chromium` ran (Chrome
+Headless Shell 151, 94.7 MiB, `~/Library/Caches/ms-playwright/chromium_headless_shell-1234`).
+`pytest scripts/tests`: 765 passed, 0 failed.
+
 ## 2026-11-01 — the heat ladder: which low-heat kind opens when, and what it contains (`the-heat-ladder.md` H1–H7)
 
 **What.**

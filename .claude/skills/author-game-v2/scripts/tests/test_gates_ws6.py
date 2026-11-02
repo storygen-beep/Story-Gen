@@ -270,6 +270,10 @@ def _hook_repo(tmp_path, dev):
         "    if a[:1] == ['--portal']: p, a = a[1], a[2:]\n"
         "    print('\\n'.join(real.ship_targets(a, portal=p))); sys.exit(0)\n"
         "print('ship check: FAIL (stand-in)'); sys.exit(1)\n")
+    # The stand-in lives inside the skill folder, so staging it would also fire the hook's
+    # skill check. Commit it first, past the hook, so these tests see the ship check alone.
+    _git(r, "add", "-A")
+    _git(r, "commit", "-q", "--no-verify", "-m", "stand-in gates.py")
     (r / "games" / "fx" / "output").mkdir(parents=True)
     (r / "games" / "fx" / "v2_state.json").write_text("{}")
     (r / "games-data.js").write_text(
@@ -292,6 +296,194 @@ def test_hook_blocks_a_published_v2_build(tmp_path):
 def test_hook_lets_a_dev_build_through(tmp_path):
     r = _hook_repo(tmp_path, dev=True)
     assert _git(r, "commit", "-q", "-m", "test build").returncode == 0
+
+
+# ── the hook's skill check (2026-11-02) ─────────────────────────────────────
+# Stand-ins: --selfcheck goes red when SKILL.md says BROKEN, cite_check --strict goes red
+# when it says BADCITE, and the exam's grader folder holds one passing test. The repo's
+# venv/bin/python is this interpreter, so pytest is there.
+def _skill_hook_repo(tmp_path):
+    r = tmp_path / "repo"
+    r.mkdir()
+    _git(r, "init", "-q")
+    _git(r, "config", "user.email", "t@t")
+    _git(r, "config", "user.name", "t")
+    (r / "venv" / "bin").mkdir(parents=True)
+    # A wrapper, not a symlink: a symlinked venv python looks for pyvenv.cfg beside the
+    # link and loses the venv's site-packages (no pytest).
+    (r / "venv" / "bin" / "python").write_text(f'#!/bin/sh\nexec {sys.executable!r} "$@"\n')
+    os.chmod(r / "venv" / "bin" / "python", 0o755)
+    skill = r / ".claude" / "skills" / "author-game-v2"
+    (skill / "scripts").mkdir(parents=True)
+    (skill / "SKILL.md").write_text("# skill\n")
+    (skill / "scripts" / "gates.py").write_text(
+        "import os, sys\n"
+        "skill = open(os.path.join(os.path.dirname(__file__), '..', 'SKILL.md')).read()\n"
+        "if sys.argv[1] == '--selfcheck':\n"
+        "    print('selfcheck: ' + ('RED' if 'BROKEN' in skill else 'the index is current'))\n"
+        "    sys.exit(1 if 'BROKEN' in skill else 0)\n"
+        "sys.exit(0)\n")
+    (skill / "scripts" / "cite_check.py").write_text(
+        "import os, sys\n"
+        "skill = open(os.path.join(os.path.dirname(__file__), '..', 'SKILL.md')).read()\n"
+        "if 'BADCITE' in skill:\n"
+        "    print('    SKILL.md:1  v2.py:10 → v2.py:20   [strong] stand-in')\n"
+        "    sys.exit(1 if '--strict' in sys.argv else 0)\n"
+        "sys.exit(0)\n")
+    tests = r / ".claude" / "skill-evals" / "author-game" / "tests"
+    tests.mkdir(parents=True)
+    (tests / "test_ok.py").write_text("def test_ok():\n    assert True\n")
+    (r / "README.md").write_text("readme\n")
+    hooks = r / ".git" / "hooks"
+    shutil.copy(os.path.join(REPO, "scripts", "hooks", "pre-commit"), hooks / "pre-commit")
+    os.chmod(hooks / "pre-commit", 0o755)
+    _git(r, "add", "-A")
+    _git(r, "commit", "-q", "--no-verify", "-m", "fixture")
+    return r, skill
+
+
+def _commit(r, msg):
+    # The outer pytest run exports DJANGO_SETTINGS_MODULE; the hook's inner pytest would
+    # then load pytest-django against a throwaway repo with no Django project.
+    env = {k: v for k, v in os.environ.items() if k != "DJANGO_SETTINGS_MODULE"}
+    res = subprocess.run(["git", "commit", "-q", "-m", msg], cwd=r,
+                         capture_output=True, text=True, env=env)
+    return res.returncode, res.stdout + res.stderr
+
+
+def test_hook_refuses_a_skill_commit_when_selfcheck_is_red(tmp_path):
+    r, skill = _skill_hook_repo(tmp_path)
+    (skill / "SKILL.md").write_text("# skill\nBROKEN\n")
+    _git(r, "add", "-A")
+    code, out = _commit(r, "edit skill")
+    assert code != 0 and "selfcheck is red" in out
+
+
+def test_hook_refuses_a_skill_commit_with_a_wrong_cite_and_names_it(tmp_path):
+    r, skill = _skill_hook_repo(tmp_path)
+    (skill / "SKILL.md").write_text("# skill\nBADCITE\n")
+    _git(r, "add", "-A")
+    code, out = _commit(r, "edit skill")
+    assert code != 0 and "point at the wrong line" in out and "SKILL.md:1" in out
+
+
+def test_hook_lets_a_green_skill_commit_through_and_warns_about_the_exam(tmp_path):
+    r, skill = _skill_hook_repo(tmp_path)
+    (skill / "SKILL.md").write_text("# skill\nclean edit\n")
+    _git(r, "add", "-A")
+    code, out = _commit(r, "edit skill")
+    assert code == 0, out
+    assert "skill checks green" in out and "exam has never been run" in out
+
+
+def test_hook_skips_the_skill_check_when_no_skill_file_is_staged(tmp_path):
+    r, skill = _skill_hook_repo(tmp_path)
+    (skill / "SKILL.md").write_text("# skill\nBROKEN\n")   # red, but not staged
+    (r / "README.md").write_text("changed\n")
+    _git(r, "add", "README.md")
+    code, out = _commit(r, "docs")
+    assert code == 0 and "author-game-v2 is staged" not in out
+
+
+# ── the hook's engine cite fix (2026-11-03) ──────────────────────────────────
+# Stand-in cite_check: every OLDCITE in SKILL.md + references/ is a wrong cite --fix can move
+# (to NEWCITE); every RANGECITE is a wrong cite it cannot. The summary line has the real
+# tool's wording, which is what the hook reads.
+_ENGINE_CITE_CHECK = '''import glob, os, sys
+skill = os.path.join(os.path.dirname(__file__), "..")
+docs = [os.path.join(skill, "SKILL.md")] + sorted(glob.glob(os.path.join(skill, "references", "*.md")))
+def wrong():
+    return sum(open(d).read().count("OLDCITE") + open(d).read().count("RANGECITE") for d in docs)
+if "--fix" in sys.argv:
+    for d in docs:
+        t = open(d).read()
+        if "OLDCITE" in t:
+            open(d, "w").write(t.replace("OLDCITE", "NEWCITE"))
+if "--verbose" in sys.argv:
+    for d in docs:
+        if "RANGECITE" in open(d).read():
+            print("    references/" + os.path.basename(d) + ":1  v2.py:5-6   [range] stand-in")
+n = wrong()
+print(f"  SKILL.md + references/: {n} citation(s) point at the wrong line (baseline 0)")
+sys.exit(1 if n and "--strict" in sys.argv else 0)
+'''
+
+ENGINE = "apps/game_generation/twee_comprehensive/generators/v2.py"
+
+
+def _engine_hook_repo(tmp_path, ref_text):
+    r, skill = _skill_hook_repo(tmp_path)
+    (skill / "scripts" / "cite_check.py").write_text(_ENGINE_CITE_CHECK)
+    (skill / "references").mkdir()
+    (skill / "references" / "engine.md").write_text(ref_text)
+    (skill / "references" / "other.md").write_text("untouched\n")
+    (r / ENGINE).parent.mkdir(parents=True)
+    (r / ENGINE).write_text("line 1\n")
+    _git(r, "add", "-A")
+    _git(r, "commit", "-q", "--no-verify", "-m", "engine fixture")
+    (r / ENGINE).write_text("new line\nline 1\n")   # the engine edit that moves lines
+    _git(r, "add", ENGINE)
+    return r, skill
+
+
+def _in_head(r, path):
+    return subprocess.run(["git", "show", f"HEAD:{path}"], cwd=r,
+                          capture_output=True, text=True).stdout
+
+
+def test_an_engine_commit_fixes_the_moved_cites_in_the_same_commit(tmp_path):
+    r, skill = _engine_hook_repo(tmp_path, "see `v2.py` OLDCITE\n")
+    code, out = _commit(r, "engine")
+    assert code == 0, out
+    assert "the engine moved 1 skill cite(s): 1 fixed, 0 left" in out
+    assert "NEWCITE" in _in_head(r, ".claude/skills/author-game-v2/references/engine.md")
+    # the fix's own staging does not start the minute-long skill check
+    assert "author-game-v2 is staged" not in out
+
+
+def test_a_doc_with_other_edits_is_fixed_on_disk_but_not_staged(tmp_path):
+    r, skill = _engine_hook_repo(tmp_path, "see OLDCITE\n")
+    (skill / "references" / "engine.md").write_text("see OLDCITE\nLO's unstaged edit\n")
+    code, out = _commit(r, "engine")
+    assert code == 0, out
+    assert "fixed on disk, not staged: .claude/skills/author-game-v2/references/engine.md" in out
+    assert "OLDCITE" in _in_head(r, ".claude/skills/author-game-v2/references/engine.md")
+    assert "LO's unstaged edit" not in _in_head(r, ".claude/skills/author-game-v2/references/engine.md")
+    assert "NEWCITE" in (skill / "references" / "engine.md").read_text()
+
+
+def test_cites_the_fix_cannot_move_are_listed_and_the_commit_goes_ahead(tmp_path):
+    r, skill = _engine_hook_repo(tmp_path, "see RANGECITE and OLDCITE\n")
+    code, out = _commit(r, "engine")
+    assert code == 0, out
+    assert "1 fixed, 1 left" in out and "references/engine.md:1  v2.py:5-6" in out
+    assert "this commit goes ahead" in out
+
+
+def test_engine_and_skill_staged_together_are_fixed_before_the_skill_check(tmp_path):
+    # Without the fix running first, the skill check would refuse on the moved cites.
+    r, skill = _engine_hook_repo(tmp_path, "see OLDCITE\n")
+    (skill / "SKILL.md").write_text("# skill\nan edit\n")
+    _git(r, "add", ".claude/skills/author-game-v2/SKILL.md")
+    code, out = _commit(r, "engine and skill")
+    assert code == 0, out
+    assert "1 fixed, 0 left" in out and "skill checks green" in out
+
+
+def test_an_engine_commit_with_true_cites_prints_nothing(tmp_path):
+    r, skill = _engine_hook_repo(tmp_path, "see NEWCITE\n")
+    code, out = _commit(r, "engine")
+    assert code == 0 and "engine moved" not in out
+
+
+def test_a_commit_without_the_engine_skips_the_cite_fix(tmp_path):
+    r, skill = _engine_hook_repo(tmp_path, "see OLDCITE\n")
+    _git(r, "reset", "-q", ENGINE)
+    (r / "README.md").write_text("changed\n")
+    _git(r, "add", "README.md")
+    code, out = _commit(r, "docs")
+    assert code == 0 and "engine moved" not in out
+    assert "OLDCITE" in (skill / "references" / "engine.md").read_text()
 
 
 # ── release_upload.py refuses at the ship step ───────────────────────────────
