@@ -1,5 +1,7 @@
 # [READY] Person — Mark
 
+> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, skip the play check, build it"; DECISIONS 128): plain items with him pay him nothing (was his Lust +1 each); laundry is a tease ladder by her stage after his accident, no step needed (`scenes/mark_laundry_teases.md`). Sections changed: Everyday (the laundry row).
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): a first accident at home (`mark_00_the_dryer`) that his chosen acts follow; step 3's "Go up and change." at Daring after it; the two touches at Bold; channel 5 at Curious; his towel buttons pay her like Ryan's. Sections changed: Ladder, Everyday, the towel, channel 5.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the release-1 ladder, from `proposals/MARK_R1_LADDER.md` (signed 2026-11-01). Changed: what he keeps, Ladder, the seven columns, Leak and promise, step 4, Everyday (the paid-look column cut), Cut, Rows a gate needs. Everything else as signed.
@@ -145,7 +147,7 @@ for her body, LO); it stays in this table only as the record of what was cut. Li
 | help him cook | kitchen · Wed 18:00–19:00 | "Hand me the salt. No, the other salt." | Bold (was Curious): @player reaches past him for the pan; he doesn't move, and @player's ass presses his hip. | — |
 | dishes | kitchen · Wed and Sun 19:00–21:00 | He dries, slow. "You missed one." | @player bends to the dishwasher in a short skirt. He stops drying. | "Twenty and you stay bent." His bill on the counter; his eyes on @player's ass in the panties. |
 | late TV and a beer | living room · Sun–Fri 22:00–00:00 · Mon–Sat 00:00–02:00 | The game on low. "Laura's upstairs. Keep it down." | He hands @player a beer. @player curls up on the couch in the sleep shirt; he counts the inches of leg. | "Twenty. The shirt." He watches the TV light on @player's bare tits. |
-| laundry | garage, at the washer · Mon, Tue, Thu, Fri 19:00–22:00 · Sat 09:00–17:00 | "Whites with whites, @player." | @player's panties in the basket on top. He picks them up, turns them over, puts them back. | "Leave those. I'll fold them." A bill under the basket. |
+| laundry | garage, at the washer · Mon, Tue, Thu, Fri 19:00–22:00 · Sat 09:00–17:00 | "Whites with whites, @player." | three by her stage (DECISIONS 128): Curious, the panties on the basket · Curious + Daring, she bends for the bottom drum · Bold + Showing, she washes the top she's wearing and stays in her bra. Plain laundry pays him nothing. | "Leave those. I'll fold them." A bill under the basket. |
 | the garden | garden, from the garage door · Sat 09:00–17:00 | He comes out for a beer and squints at the sky. | @player on the lounger in shorts and a bra; he stands in the garage door and doesn't go back in. | "Twenty to untie it." The bill on the grass. @player lies on the lounger untied, and he looks at the side of @player's tit, pressed flat. |
 
 **Where Mark is not:** weekday breakfasts (work); after dinner on Monday, Tuesday, Thursday and Friday he

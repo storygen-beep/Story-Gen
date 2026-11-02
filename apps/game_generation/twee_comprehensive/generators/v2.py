@@ -12560,6 +12560,9 @@ setup.castTraitRows = function (slug, npc) {
                        step fires the normal way. Clothing and presence items are not forced;
                        the screen marks them for the tester.
           Play it now  jumps into the step's first screen (Engine.play), skipping the trigger.
+                       It moves the clock into the step's window first (meters untouched):
+                       a scene's exits can read the clock (Ryan 5's three "Sleep." exits are
+                       22:00-01:00), and outside the window every exit hid (LO, 2026-11-02).
         """
         if not self.dev_mode:
             return ':: DevPageWidgets [widget nobr]\n<<widget "devButton">><</widget>>\n'
@@ -12700,14 +12703,21 @@ function setUpStep(st) {
     if (gs.trigger_history) delete gs.trigger_history[String(st.id)];
     if (gs.canvas_state) delete gs.canvas_state[String(st.id)];
     ((st.conds || {}).items || []).forEach(applyItem);
+    clockIntoWindow(st, true);
+    var p = locPassage(st.locId);
+    if (p) Engine.play(p); else Engine.play("DevPage");
+}
+/* Moves the clock to 5 minutes after the start of the step's first window (its schedule,
+   else a time_of_day item). always=false keeps the clock when it is already inside a window,
+   so "Play it now" does not jump a tester who set the time by hand. */
+function clockIntoWindow(st, always) {
     var w = (st.sched || [])[0], items = (st.conds || {}).items || [];
     var tod = null; items.forEach(function (it) { if (!tod && it.type === "time_of_day") tod = it; });
+    if (!always && inWindow(st.sched) && (!tod || itemOk(tod))) return;
     var day = nowDayIdx(), start = null;
     if (w) { if (w.weekdays && w.weekdays.length) day = w.weekdays[0]; start = hm(w.startTime); }
     else if (tod) start = hm(tod.start_time);
     if (start) { var mm = start[0] * 60 + start[1] + 5; devSetTime(day, Math.floor(mm / 60) % 24, mm % 60); }
-    var p = locPassage(st.locId);
-    if (p) Engine.play(p); else Engine.play("DevPage");
 }
 function npcRow(e, si) {
     var o = npcObj(e.npc) || {}, ct = sv().player.core_traits || {}, cur = Number(ct[e.counter] || 0);
@@ -12779,7 +12789,7 @@ document.addEventListener("click", function (ev) {
     if (a === "setup" || a === "play") {
         var st = ((setup._devStepsCache || [])[Number(b.dataset.si)] || {steps: []}).steps[Number(b.dataset.j)];
         if (!st) return;
-        if (a === "setup") setUpStep(st); else Engine.play(st.passage);
+        if (a === "setup") setUpStep(st); else { clockIntoWindow(st, false); Engine.play(st.passage); }
         return;
     }
     if (a === "go") { Engine.play(b.dataset.p); return; }

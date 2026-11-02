@@ -114,6 +114,9 @@ def test_the_dev_screen_is_in_dev_builds_only():
     assert "\n:: DevPage\n" in dev and ":: DevPageScript [script]" in dev
     assert "<<devButton>>" in dev and "setup.devSteps = function" in dev
     assert '"DevPage"' in dev  # an info page: commitMoment publishes its changes, Back skips it
+    # "Play it now" moves the clock into the step's window too: a scene's exits can read the
+    # clock (first_term Ryan 5's "Sleep." exits), and outside it every exit hid (2026-11-02).
+    assert "clockIntoWindow(st, false); Engine.play(st.passage);" in dev
     graph = build_game_graph(normalize(_raw()))
     plain = TweeComprehensiveGeneratorV2().generate(graph.project, {}, graph=graph)
     assert ":: DevPage\n" not in plain and "setup.devSteps" not in plain

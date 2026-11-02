@@ -1,5 +1,10 @@
 # [READY] Scene — ryan_hot_repeatables
 
+> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 127) (LO: "cant we have more in the sex screens", "B, sheet it"): row 7
+> becomes a menu. A short normal start at the door, then she picks the act; more acts open as his Lust climbs;
+> each act has a shy and an eager voice by her Corruption; the near-catch is its own screen; the finish is her pick.
+> Sections changed: row 7 in the table, "Row 7's menu" (new), the 7a–7c pool (replaced; kept below as the record).
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): row 1 rewritten as a real tease (H4) and gated at Curious after the hall accident; rows 2, 4, 6 and 7 open at their SP2 stage; caps per stage.
 
 > **New 2026-11-01, signed by LO 2026-11-01 ("Signed")** (DECISIONS 99–113). From `sheets/people/npc_ryan.md`, "The hot repeatables,
@@ -18,14 +23,47 @@ repeats until all have shown). None shows with Laura in the room (Laura's rule).
 | 4 | step 6 (was 5) | his bed, evenings he's home | she lies on his bed and touches herself until she comes; he isn't allowed to touch, only watch | Bold · Showing (was Curious · Daring; naked by choice for one is Bold) | both add +1, cap 59 | yes · middle | "Not tonight." | new |
 | 5 | step 6 | his room, evenings he's home | naked in his room; he strokes himself while she watches, and she tells him when he can come | Showing | exhibitionism add +1 · corruption add +1, cap 59 | yes · late (cum) | "Not tonight." | new |
 | 6 | step 7 | the couch, under the blanket (Sat/Sun 14:00–18:00) | a handjob to the end under the blanket, with Mark's TV on in the next room | Hungry · Daring (was Bold; the taboo act at home is Hungry, SP2) | both add +1, cap 79 | yes · late (cum) | "Just the film." | built ("Share the blanket"): pays +3 not +1, now finishes |
-| 7 | step 8 | his room, two knocks, not Friday, 22:00–00:00 | sex. One night in four someone nearly catches them: Laura knocks, or Kayla calls mid-act | — (step 8 needs Corruption 60) | corruption add +1, cap 79 (was 59) | yes · whole late | "Not tonight." | new, replaces the built two-knocks repeat |
+| 7 | step 8 | his room, two knocks, not Friday, 22:00–00:00 | a menu (below): a kiss at the door, then her pick of the act; more open as his Lust climbs; a near-catch screen; her pick of finish | — (step 8 needs Corruption 60) · acts by his Lust 70 / 80 / 90 | corruption add +1, cap 79 | yes · whole late | "Not tonight." | changed 2026-11-02: was one pool of three whole scenes |
 
 **Gates as signed** (`npc_ryan.md`): the stage column is the gate. Row 6's "Bold" is signed; "· Daring" is the mixed
 rule (`meters.md` rule 4: seen and sexual needs both) applied, confirmed by LO 2026-11-01 ("Continue").
 
 **The nos** in the table are proposed here (the person sheet gives none); confirmed by LO 2026-11-01 ("Continue").
 
-**Row 7's near-catch:** a 1-in-4 roll. Laura's knock: they freeze, she goes. Kayla's call: he lets it ring.
+**Row 7's near-catch:** now its own screen, `twist`, below (was: a 1-in-4 roll inside a whole scene).
+
+## Row 7's menu (changed 2026-11-02, signed by LO 2026-11-02)
+
+The rule it follows: a repeatable changes with her level, two voices per act split on her main sex trait, and a
+menu that grows as the acts open one by one (`the-arc.md:642-643`, `the-surfaces.md` R3c).
+
+| node | what happens | explicit? | exits (label → target) · gate | effects |
+|---|---|---|---|---|
+| `door` | two knocks; his phone face-down before the second lands (as built) | no | "Go in." → `start` · "Not tonight." → the hall · "Further. (Next release)" (locked) | none |
+| `start` | **new.** A normal start, a pool of three, no repeats until all have shown: he kisses her against the door before it's shut · he's half-asleep and pulls her under the covers · he's been waiting, sitting on the bed, and says "Took you long enough." Her clothes come off here, short | no (low) | the act menu, below | none |
+| `suck` | "Go down on him." Her on her knees by his bed | yes | → `twist` · gate: his Lust 70 (open the first night) | none |
+| `ride` | "Ride him." Her on top, his headboard on her wall | yes | → `twist` · gate: his Lust 70 (open the first night) | none |
+| `lick` | "Let him taste you." His mouth on her cunt until she comes, her hand over her mouth | yes | → `twist` · gate: his Lust 80, shown locked below it | none |
+| `wall_back` | "Against the wall." From behind, her palms on the wall she listened through | yes | → `twist` · gate: his Lust 90, shown locked below it | none |
+| `twist` | **new.** A pool of three, no repeats until all have shown: nothing, just him fucking her harder · Laura knocks: "Ryan? Are you up?", they freeze, "Asleep, Mom" · Kayla calls: KAYLA with a heart, it buzzes on the desk, "Let it ring." (her high line here: *You want him to hear Kayla on the phone while you do this.*) Written to fit any of the four acts | yes | "Inside me." → `f_inside` · "On me." → `f_on` · "In my mouth." → `f_mouth` | none |
+| `f_inside` · `f_on` · `f_mouth` | **new.** He comes, her pick; short, written to fit any act | yes | "Back to your room." → the hall (as built: the day's pay split on `ryan_hot_today`) | corruption add +1, cap 79 · his Lust add +3 once a day (as built) |
+
+**The two voices** (each act screen, `suck` `ride` `lick` `wall_back`): **shy** under Corruption 70 (she still checks
+the door, keeps her voice down, *this is Ryan* crosses her mind and she does it anyway); **eager** at 70 and above (she
+sets the pace, says what she wants, doesn't check the door). Proposed split at 70: release 1 caps Corruption at 79,
+so the stage line at 80 would leave the eager voice unseen. LO confirms the number.
+
+**Why his Lust opens the menu:** the loop already pays his Lust +3 a night, and step 8 needs Lust 70, so the first
+night has two acts, the third or fourth night opens `lick` (80), and about a week of nights opens `wall_back` (90).
+Lust stops at 100.
+
+**Screens to write after the sign** (`v2-prose`, measured): `start` ×3 (low), the four acts ×2 voices = 8, `twist` ×3,
+the finishes ×3. 17 in all, 14 of them explicit.
+
+**Media slots (new, LO harvests):** `sex/ryan_hot7_suck_t5`, `sex/ryan_hot7_ride_t5`, `sex/ryan_hot7_lick_t5`,
+`sex/ryan_hot7_wall_t5`, `sex/ryan_hot7_twist_t5`, `sex/ryan_hot7_finish_t5`. The built `sex/ryan_hot7_t5` is retired.
+
+**Confirmed by LO 2026-11-02** ("Signed"): "In my mouth." (as on step 8) · the voice split at Corruption 70 · the Lust gates 70 / 80 / 90.
 
 ## The pools, written
 Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Each entry is one screen (one block, no blank lines). Fixes after: "cums" became "comes" (row 7); Mark calls her `@player`, not the nickname (row 6c, his sheet). The tool's `vaginal` rung on some hand screens is a false reading of "thrust"/"fuck". Row 1 is a tease screen, not explicit, by design.
@@ -118,7 +156,83 @@ entry is true in whatever she wears. A tease screen, not explicit, by design.
 
 > The blanket covers you both. Your hand is already in Ryan's sweats, wrapped around his cock. The film plays. Nobody watches it. "@player," Mark calls from the next room. "You two want popcorn?" "We're good," you call back. Your voice is steady. Your fist isn't. You stroke Ryan root to tip, slow and tight. His cock throbs against your palm. He stares at the screen with his jaw locked. Under the blanket his hips push up into your hand. *Ten feet. Mark is ten feet away.* Your cunt is soaked. Mark's TV laughs. You twist your grip over the swollen head and pump him hard and fast. Ryan grunts into his fist. His cock jerks and he comes, hot cum spilling over your fingers, down his shaft, onto his stomach under the blanket.
 
-### 7 · two knocks · whole late column
+### 7 · the menu (2026-11-02, DECISIONS 127)
+
+Written by `v2-prose` and measured, 2026-11-02. Fixes after: both `7suck` end with him pulling her onto the bed and
+into her, so the twist screens (which assume he's in her) are true after every act; "The bed creaks." cut from `7t_a`
+(not true against the wall); `7t_c`'s thought reworded, since Kayla's call is never answered. Reader pass 2026-11-02: `7ride_shy` names only Laura
+across the hall (Mark is downstairs with the TV); `7t_b` opens on the headboard waking her (she's asleep from 23:00);
+`7t_c` turns the face-down phone over; the door line no longer puts him at the desk (`7s_b` has him in bed).
+
+**7s_a** · 80 words · explicit words 4 · median sentence 8
+
+> Ryan has you against the door before it's even shut. His mouth is on yours, hungry, and his hands go straight to your ass. The door clicks closed behind your back. "Hi, @player.nickname," he breathes into your neck. His cock is already hard against your belly. You drag his shirt over his head. He pulls your clothes off you, quick and rough, and drops them on the floor. Your nipples go tight. His cock presses hot into your bare stomach.
+
+**7s_b** · 86 words · explicit words 3 · median sentence 7
+
+> Ryan's room is dark. He's in bed, half asleep, one arm over his eyes. "That you, @player.nickname?" His voice is thick. He lifts the covers without looking. You slide in, and he pulls you flat against him. He's warm all over. His hand slides down your back to your ass and squeezes. His cock stiffens against your thigh, slow, then all at once. "Awake now," he mumbles. He tugs your clothes off under the covers and kicks them away. Your bare tits press against his chest.
+
+**7s_c** · 79 words · explicit words 4 · median sentence 7
+
+> Ryan's sitting on the edge of his bed, elbows on his knees, waiting. "Took you long enough, @player.nickname." "Miss me?" "Shut the door." You shut it. He pulls you between his knees by the hips and looks up at you. His hands slide round to your ass. His cock is hard in his shorts. "Off," he says. You pull your clothes off and let them drop. He looks at your tits, then lower. His cock jerks against his shorts.
+
+**7t_a** · 101 words · explicit words 8 · median sentence 5
+
+> You don't stop. Neither does he. It gets harder. It gets louder. The wall knocks, steady, and you can't make it quiet. Your cunt is soaking. Sweat runs down your back. His hands dig into your ass, holding you right where he wants you. "Fuck," he groans. "Fuck, @player.nickname." His breath comes short, ragged. Your tits ache. Your nipples are hard as stones. A moan gets out of you before you can stop it. The wall knocks again, faster. His thighs are shaking. You're wet all over him. His cock throbs, thick and hard, right at the edge.
+
+**7t_b** · 107 words · explicit words 5 · median sentence 5
+
+> The headboard's too loud. Across the hall, a door opens. Knuckles rap on his door. "Ryan? Are you up?" You both freeze. Nobody breathes. Your cunt is dripping and you don't dare move. His fingers stay dug into your ass. Your nipples are hard and your heart is hammering. "Asleep, Mom," he calls. His voice barely shakes. A pause. Then her slippers shuffle back across the hall. Her door clicks shut. Ryan lets his breath out. *She was right there.* He grins, and you start again, slow, then not slow at all. You don't stop. His breath goes hot and ragged on your skin. Your wet cunt clenches. His cock jerks, thick and hard, so close now.
+
+**7t_c** · 105 words · explicit words 6 · median sentence 6
+
+> His phone buzzes face-down on the desk. He turns it over. KAYLA, with a heart. It buzzes against the wood, loud in the dark. You both look at it. Ryan doesn't reach for it. "Let it ring," he says, rough. His hands grip your ass harder. You don't stop. *You want her to keep calling while he's inside you.* The phone buzzes and buzzes. Your wet cunt clenches. Your tits ache, the nipples tight. He groans low and doesn't care who hears. "Fuck, @player.nickname." The ringing stops. The screen goes dark. His breath is ragged now. His whole body goes tight, and his cock swells hard.
+
+**7suck_shy** · 121 words · explicit words 5 · median sentence 11
+
+> You kneel on the rug by his bed and glance at the door. Shut. You still listen for Laura's slippers. Ryan sits on the edge of the mattress with his cock hard in his fist. "Come here, @player.nickname," he whispers. You lick the head once, then take it in your mouth. He's hot and salty on your tongue. *This is Ryan.* You suck him deeper anyway. Your lips slide down his shaft until he bumps the back of your throat. He grabs a fistful of your hair and bites back a groan. You keep it slow and quiet, your hand wrapped tight round the base. Your tits brush his knees every time you bob. His cock swells hard against your tongue. Then he pulls you up onto the bed, and his wet cock pushes deep into your cunt.
+
+**7suck_eager** · 121 words · explicit words 9 · median sentence 8
+
+> You push Ryan down to sit on the edge of his bed and drop to your knees between his thighs. You don't look at the door. "Give it to me," you say. His cock is already hard. You lick it from his balls to the tip, slow, while he watches. Then you take him all the way in. He hits the back of your throat and you hold him there. "Fuck, @player.nickname." You pull off, spit on his cock and jerk him in your fist. "Hands in my hair. Fuck my mouth." He does. His hips lift off the mattress. You suck him hard and fast, your tits bouncing against his knees. His cock throbs on your tongue, fat and close. Then he pulls you up onto the bed, and his wet cock pushes deep into your cunt.
+
+**7ride_shy** · 116 words · explicit words 7 · median sentence 7
+
+> Ryan lies back on his pillow and you climb on top of him, one eye on the door. "Slow," you whisper. "She's right across the hall." You lower yourself onto his cock. He stretches your cunt open inch by inch until you're sitting on him. You ride him small and careful. His headboard taps your wall anyway. Knock. Knock. You freeze and listen. Nothing. *This is Ryan.* You rock down on him harder. He grabs your ass and pulls you onto him. Your tits bounce over his face. He catches a nipple in his mouth. You bite your lip to keep quiet. Your wet cunt clenches tight around his cock with every tap of the headboard.
+
+**7ride_eager** · 115 words · explicit words 7 · median sentence 8
+
+> You shove Ryan flat on his back and straddle him. You don't look at the door. You take his cock in your hand and sink straight down on it, all the way. "Fuck, @player.nickname." "Hold on to the headboard," you tell him. "I'm going to ride you hard." You do. You slam your hips down on him fast. His headboard bangs your wall with every stroke. You don't slow down. You grab his hands and put them on your tits. "Squeeze." He squeezes. You grind your clit against him. You roll your hips, then lift and drop until your ass slaps his thighs. His cock fills your cunt to the root every time you drop.
+
+**7lick_shy** · 132 words · explicit words 9 · median sentence 9
+
+> You lie back on Ryan's bed, naked, and glance at the door one more time. He pushes your knees apart. "Eyes on me, @player.nickname." His tongue drags up your cunt, slow, all the way to your clit. You clap a hand over your mouth. *This is Ryan.* You spread your legs wider anyway. He sucks your clit between his lips and slides two fingers into you, deep and curled. You're so wet they slip right in. Your hips lift off the sheets. You bite your palm to stay quiet. He flicks your clit fast with the tip of his tongue. Your thighs clamp around his head. You come shaking against his mouth, your cunt clenching on his fingers. Then he climbs over you, and his hard cock slides into your wet cunt.
+
+**7lick_eager** · 138 words · explicit words 9 · median sentence 10
+
+> You lie back on Ryan's bed and spread your legs wide. You don't look at the door. "Eat my cunt, Ryan. Slow." He kneels between your thighs and does what he's told. His tongue drags flat up your slit, then circles your clit. "Faster," you tell him. You grab his hair and pull his face in hard. He sucks your clit and pushes two fingers deep into you. You grind your wet cunt on his mouth and let yourself moan. *Let the whole hall hear it.* "Right there. Don't stop." Your back arches off the bed. You come hard on his tongue, your thighs locked around his head. Then you pull him up by the hair. His cock is hard and leaking on your stomach. You guide it into your cunt and wrap your legs around his ass.
+
+**7wall_shy** · 129 words · explicit words 8 · median sentence 8
+
+> You kneel on Ryan's bed, naked, and look back at the door once. He kneels behind you. "Hands on the wall, @player.nickname." You press your palms flat against it. Your own room is on the other side. He grabs your hips and pushes his cock into your cunt, slow, all the way in. You gasp, then bite it back. *This is Ryan.* You push your ass back onto him anyway. He pulls out to the tip. He drives in deep. The headboard knocks the wall. "Shh," you whisper. "They'll hear." So he slows down and fucks you deeper instead, grinding in. Your tits sway under you with every thrust. Your fingers slide on the paint. His cock swells inside you, and he holds it there, buried to the hilt.
+
+**7wall_eager** · 131 words · explicit words 11 · median sentence 7
+
+> You climb onto Ryan's bed on your knees and slap both palms flat on the wall. "From behind. Hard." You don't look at the door. He kneels behind you. He rubs his cock along your wet cunt. "Stop teasing. Put it in." He shoves in deep. You push back to take every inch. "Harder." He grabs your hips and fucks you hard, his balls slapping your clit. The headboard bangs the wall. Your own room is on the other side of it, but you don't care. *Let it bang.* You arch your back. You spread your knees wider. "Deeper, Ryan. Right there." He pulls your ass back onto his cock with every thrust. Your tits bounce under you. Your cunt clenches tight around him while he groans and fucks you harder.
+
+**7f_inside** · 95 words · explicit words 7 · median sentence 9
+
+> "I'm close," Ryan groans. "@player.nickname, I'm going to come." "Inside me," you whisper. "Don't pull out." You take his cock all the way into your cunt and squeeze it tight. He grabs your ass with both hands. His hips jerk once, twice. Then his cock throbs deep inside you and he comes hard, with a choked groan. You feel every pulse. Hot cum floods your cunt. He keeps pumping it into you, slow, until he's empty. When he finally pulls out, his cum leaks out of you and runs down your thigh onto his sheets.
+
+**7f_on** · 96 words · explicit words 8 · median sentence 7
+
+> "I'm close," Ryan pants. "On me," you tell him. "I want to see it." He pulls out and fists his cock fast, wet and shining. You drop onto your back. You push your tits together for him. He kneels over you, breathing hard. "Fuck, @player.nickname." His cock jerks in his fist. Thick ropes of cum splash across your tits and stomach. He strokes out every last drop. It pools in your belly button, then runs down your sides onto his sheets. You rub it into your nipples with two fingers while his cock twitches over you.
+
+**7f_mouth** · 103 words · explicit words 9 · median sentence 10
+
+> "I'm close, @player.nickname." "In my mouth." You slide off the bed onto your knees in front of him. He stands over you, fisting his cock, slick and wet. You open wide and stick your tongue out. He feeds you the head. You wrap your lips around it and suck hard, one hand pumping the shaft. His fingers knot in your hair. "Fuck. Fuck, that's it." His cock swells on your tongue. Then he comes, hot and thick, pulse after pulse into your mouth. You keep sucking until he's empty. You swallow it all, then lick the last drop of cum off his cock.
+
+### 7 · two knocks · whole late column (REPLACED 2026-11-02 by the menu above, once signed; kept as the record)
 
 **7a** · 128 words · explicit words 7 · median sentence 11
 

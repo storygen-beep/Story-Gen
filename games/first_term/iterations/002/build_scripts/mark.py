@@ -496,12 +496,12 @@ out.append(mark_hub("hub_mark_living_room", LR, "Mark, up late", "the living roo
     (("beer", "Have a beer with him.", [], "had_drink_home", LR,
       [P("The game on low."), G(cond(LAURA_IN_BED), D(M, "Laura's upstairs. Keep it down.")), P("He hands you a can without asking.")],
       None, 30),
-     dict(done_exits=[go("Done.", loc=LR, mins=30, eff=[want(M)], flags=[fset("had_drink_home")], mods=DRINK)],
+     dict(done_exits=[go("Done.", loc=LR, mins=30, flags=[fset("had_drink_home")], mods=DRINK)],   # plain: no Lust (DECISIONS 128)
           tease=m_tease(108, "late TV and a beer", "Curl up on the couch."), touch=m_paid(108, "late TV and a beer"),
           hungry="Further. (Next release)")),
     (("film", "Put a film on with him.", [tod("22:00", "00:00")], "movie_night", LR,
       [P("He lets you pick. He falls asleep in the second half, and you watch the end with his snoring for a soundtrack.")],
-      [energy(5), want(M)], 120), {}),
+      [energy(5)], 120), {}),
 ]))
 # Watch TV with him (DECISIONS 85-86): the same remote as alone (home.py), his line on each channel,
 # and on channel 5 his reaction by his step. "Leave it on." pays more than alone, once a day (LO, 2026-10-30,
@@ -519,7 +519,7 @@ _hub["nodes"] += [node("mremote", "The remote", [
 for cid, btn, lines, desc, qs, pool in CHANNELS:
     _hub["nodes"].append(node(f"mch_{cid}", btn.split(": ", 1)[1].rstrip(".").capitalize(),
         [POOL(*[P(x) for x in lines]), MARK_CH[cid], VID(desc, *qs, pool_dir=pool.replace("tv/", "tv/mark_"))],
-        [*watch_plain(LR, [want(M)]), go("Change the channel.", node="mremote"), go("Leave him to it.", loc="home_hall")]))
+        [*watch_plain(LR), go("Change the channel.", node="mremote"), go("Leave him to it.", loc="home_hall")]))
 _hub["nodes"] += [
     node("madult", "Channel 5", [P(MARK_TV_ADULT),
         G(cond(trait("mark_step", "lt", 4)), D(M, "Change it, @player."), P("He says it. He doesn't reach for the remote.")),
@@ -543,6 +543,33 @@ out.append(mark_hub("hub_mark_bedroom", "home_master_bedroom", "Mark, asleep", "
     *[G(cond(*hrs), P("Mark is asleep on his back on his side of the bed, snoring, one arm flung out. Even asleep he takes up most of it."))
       for hrs in ASLEEP_HOURS],
 ], awake=False, leave="Back out."))
+# ── the laundry tease ladder (LO, 2026-11-02, DECISIONS 128: "plain chores raises nothing, she can tease at a point").
+#    Plain laundry pays Mark nothing; three teases by her stage, after his accident (`mark_saw_her`), no step needed;
+#    once a day through the item's own `did_laundry`. Screens: sheets/scenes/mark_laundry_teases.md. ──
+from sheetbeats import beat
+MLT = "mark_laundry_teases"
+PANTIES_ON = {"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}
+NO_TOWEL = {"type": "worn_type", "operator": "neq", "value": "towel"}
+def _wt(v): return {"type": "worn_type", "operator": "eq", "value": v}
+LAUNDRY_BASKET = {"label": "Leave your basket on top.", "ref": f"{MS}:109", "gate": [CURIOUS, flag("mark_saw_her")],
+                  "eff": [want(M, 2)], "what": "Mark, laundry: tease (Curious)"}
+LAUNDRY_TEASES = [
+    {"label": "Bend for the bottom drum.", "name": "The bottom drum",
+     "gate": [CURIOUS, DARING, flag("mark_saw_her"), PANTIES_ON, NO_TOWEL],   # seen and sexual: both meters (meters.md rule 4)
+     "eff": [want(M, 3), {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 39}],
+     "blocks": [*[GC(cond(_wt(t)), P(beat(MLT, "daring_skirt"))) for t in ("short_skirt", "laura_dress", "party_dress", "cafe_uniform")],
+                GC(cond(SLEEP_SHIRT), P(beat(MLT, "daring_shirt"))),
+                *[GC(cond(_wt(t)), P(beat(MLT, "daring_jeans"))) for t in ("jeans", "leggings", "shorts")],
+                VID("a girl bending over to load a front-loading washer, her skirt riding up, a man at a workbench watching", "girl bends over washing machine skirt rides up", "bending over laundry panties showing", pool_dir="sex/mark_laundry_bend_t4")]},
+    {"label": "Wash what you're wearing.", "name": "In the wash",
+     "gate": [BOLD, SHOWING, flag("mark_saw_her"), {"type": "clothing_slot", "slot": "top", "operator": "equipped"},
+              {"type": "clothing_slot", "slot": "bra", "operator": "equipped"}],
+     "eff": [want(M, 4), {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 59},
+             {"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 59}],
+     "wardrobe": [{"action": "unequip", "item_id": g} for g in ("tshirt", "thin_top")],   # the top is in the washer
+     "blocks": [P(beat(MLT, "bold")),
+                VID("a girl in her bra by a running washing machine in a garage, a man at a bench staring", "girl in bra doing laundry garage", "topless laundry bra man watching", pool_dir="sex/mark_laundry_wash_t4")]},
+]
 G_ = "home_garage"
 out.append(mark_hub("hub_mark_garage", G_, "Mark, in the garage", "the garage", [
     P("Mark's at his bench with the radio on, doing something to an engine part that doesn't need doing."),
@@ -550,9 +577,9 @@ out.append(mark_hub("hub_mark_garage", G_, "Mark, in the garage", "the garage", 
 ], leaks=LEAKS_GARAGE, items=[
     (("laundry", "Do your laundry while he works.", [tod("07:00", "21:00")], "did_laundry", G_,
       [D(M, "Whites with whites, @player."), P("He watches you load the machine like you're going to break it.")],
-      [energy(-5), want(M)], 30),
+      [energy(-5)], 30),
      dict(plain_costs=[{"trait": "energy", "value": 5}],
-          tease=m_tease(109, "laundry", "Leave your basket on top."), touch=m_paid(109, "laundry", "Let him fold them."))),
+          tease=LAUNDRY_BASKET, teases=LAUNDRY_TEASES)),
 ]))
 K = "home_kitchen"
 out.append(mark_hub("hub_mark_kitchen", K, "Mark, in the kitchen", "the kitchen", [
@@ -565,22 +592,22 @@ out.append(mark_hub("hub_mark_kitchen", K, "Mark, in the kitchen", "the kitchen"
     (("breakfast", "Sunday breakfast with him.", [wd(6), tod("08:00", "11:00")], "ate_breakfast", K,
       [P("He slides the paper over."), G(cond(flag("rent_starts"), flag("sunday_counted_today", False)), D(M, "Eat, @player. Then the rent.")),
        G(cond(flag("sunday_counted_today")), D(M, "Eat, @player.")), G(cond(flag("rent_starts", False)), D(M, "Eat, @player."))],
-      [energy(10), want(M)], 15),
+      [energy(10)], 15),
      dict(tease=m_tease(104, "Sunday breakfast"), touch=m_paid(104, "Sunday breakfast"), hungry="Further. (Next release)")),
     (("dinner", "Sit down to dinner.", [wd(0, 1, 2, 3, 4, 6), tod("18:00", "20:00")], "ate_dinner", K,
       [G(cond(wd(0, 1, 3, 4, 6)), P("Burnt chops."), D(M, "Your mother cooks. I fill plates.")),
        G(cond(wd(2)), P("Chilli, again."), D(M, "It's always chilli. Eat it.")),
        G(cond(here(L, K)), P("Laura sits across from him and asks you about college before he can say anything else.")),
        G(cond(here(R, K)), P("Ryan eats beside you like he's late for something."))],
-      [energy(15), want(M)], 30),
+      [energy(15)], 30),
      dict(tease=m_tease(105, "dinner", "Eat slowly for him."))),
     (("cook", "Help him cook.", [wd(2), tod("18:00", "19:00")], "helped_cook", K,
       [D(M, "Hand me the salt. No, the other salt.")],
-      [energy(-5), want(M)], 30),
+      [energy(-5)], 30),
      dict(plain_costs=[{"trait": "energy", "value": 5}], tease=m_tease(106, "help him cook", "Reach past him for the pan.", bold=True))),
     (("dishes", "Do the dishes with him.", [wd(2, 6), tod("19:00", "21:00")], "did_dishes", K,
       [P("He dries, slow."), D(M, "You missed one.")],
-      [energy(-5), want(M)], 20),
+      [energy(-5)], 20),
      dict(plain_costs=[{"trait": "energy", "value": 5}],
           tease=m_tease(107, "dishes", "Bend to the dishwasher."), touch=m_paid(107, "dishes", "Stay bent."))),
 ]))

@@ -903,7 +903,7 @@ consume_on = "exit"
 retry_after_days = 1
 npc = "npc_ryan"
 requires_npc = "npc_ryan"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "ryan_step", operator = "eq", value = 7 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "modifier", modifier_key = "drinks_boost", operator = "is_inactive" }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "gte", value = 70 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "ryan_step", operator = "eq", value = 7 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "modifier", modifier_key = "drinks_boost", operator = "is_inactive" }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "gte", value = 70 }, { type = "flag", subject = "player", flag_key = "kayla_met", operator = "is_true" }, { type = "clothing_item", item_id = "towel", operator = "unequipped" }] }
 
 [[canvases.trigger.schedules]]
 weekdays = [6, 0, 1, 2, 3]
@@ -927,9 +927,9 @@ props = { speaker = "npc", npcId = "npc_ryan" }
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "\"Fuck me.\""
+text = "Come in."
 targetType = "node"
-nodeId = "bed"
+nodeId = "talk"
 time_progression_minutes = 3
 
 [[canvases.nodes.exit_block.choices]]
@@ -940,12 +940,206 @@ time_progression_minutes = 2
 retry_after_days = 1
 
 [[canvases.nodes]]
-id   = "bed"
+id   = "talk"
 name = "His bed"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "He grabs your wrist and pulls you down onto him. His bed creaks under both of you. You drag his shirt up over his head. He shoves your clothes off you and drops them on the floor. His cock lies hard against your belly, thick and hot. \"Fuck, @player.nickname,\" he breathes. You lift up, take his cock in your fist and line it up with your cunt. You're so wet it slides right in. You sink down slowly until he's all the way inside you. *Oh God, he's big.* His hands grip your ass and pull you down harder. Your tits bounce as you start to ride him. His headboard knocks the wall. It's the wall you listened through when Kayla was here. You ride his cock faster, and the headboard bangs in time with every stroke."
+content = "You sit on the edge of his bed. He sits too, a foot away, like there's a line down the mattress. Neither of you says what happened the last time you knocked."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "So. These walls, huh."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "It's a joke, and it lands wrong, and you both laugh too loud and then stop. He rubs the back of his neck. He looks at the door, then at you."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Last time. With Kayla calling. That can't happen again."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He says it, and he doesn't move away. His knee is an inch from yours."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Then why did you open the door?\""
+targetType = "node"
+nodeId = "doubt"
+time_progression_minutes = 3
+
+[[canvases.nodes]]
+id   = "doubt"
+name = "Ryan"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He doesn't answer. His knee touches yours and stays there. He's looking at your mouth and he isn't hiding it any more, and the front of his shorts isn't hiding anything either."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "This is Ryan. You should go."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Stay."
+targetType = "node"
+nodeId = "kiss"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go."
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 2
+retry_after_days = 1
+
+[[canvases.nodes]]
+id   = "kiss"
+name = "The kiss"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You lean in and kiss him. You've had your hand on his cock and never once kissed him. He kisses you back, hard, and he doesn't stop. His mouth opens on yours. \"@player.nickname,\" he breathes against your lips, and kisses you again. His hand slides up under your clothes and spreads flat on your bare back. His palm is hot. It drags slowly round your ribs, and then he cups your tits through the cloth. He squeezes. Your nipples go hard under his hand, and his thumb rubs one through it. You squirm closer on his bed. His cock is hard against your thigh through his shorts. *Don't stop. Not this time.* He grinds it into you, slow, and squeezes your tit again."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a guy and a girl kissing on his bed at night, his hand under her top", search_queries = ["making out on bed hand under shirt", "kissing on bed he touches her tits through bra"], pool_dir = "sex/ryan_08_kiss_t4" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him."
+targetType = "node"
+nodeId = "undress"
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.choices]]
+text = "Stop. \"Not tonight.\""
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 2
+retry_after_days = 1
+
+[[canvases.nodes]]
+id   = "undress"
+name = "One piece at a time"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He tugs your clothes up over your head and drops them on the floor and looks at you. His eyes go straight to your tits. \"Fuck,\" he whispers. Your bare tits are right there, nipples hard, and he can't stop staring. You hook your fingers in his shorts and push them down. His cock springs out, thick and hard, and slaps up against his stomach. *Not just your hand this time.* He lays you back on his bed. He peels the last of your clothes down your thighs, slow. Then he stares at your cunt. It's already wet, and he can see it. You're both naked on his bed now, his cock hard against your hip."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a couple undressing each other on a bed, one piece at a time", search_queries = ["undressing each other slowly on bed", "he pulls her panties down slow"], pool_dir = "sex/ryan_08_undress_t4" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go down on him."
+targetType = "node"
+nodeId = "suck"
+time_progression_minutes = 5
+wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him taste you."
+targetType = "node"
+nodeId = "lick"
+time_progression_minutes = 5
+wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get on him."
+targetType = "node"
+nodeId = "ride"
+time_progression_minutes = 5
+wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+
+[[canvases.nodes]]
+id   = "suck"
+name = "On your knees"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You slide off his bed onto your knees. Ryan sits on the edge, legs apart, his cock hard in front of your face. You wrap your fist round the base and lick the tip. He sucks in a breath through his teeth. You take him in your mouth. He's thick, and your lips stretch around him. \"Fuck,\" he hisses, too loud, and bites his own fist. Laura's right across the hall. His other hand goes into your hair. He doesn't push, but he holds on while you bob slow on his cock, deeper each time. *Quiet, Ryan. Quiet.* Spit runs down his shaft into your fist. His thighs shake. His cock swells on your tongue. You pull off him with a wet pop, and his cock jerks, slick and hard, an inch from your lips."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl on her knees by a bed sucking a guy's cock, his hand in her hair", search_queries = ["blowjob kneeling by bed hand in hair", "she sucks his cock quietly"], pool_dir = "sex/ryan_08_suck_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Ride him."
+targetType = "node"
+nodeId = "ride"
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.choices]]
+text = "On your back."
+targetType = "node"
+nodeId = "under"
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.choices]]
+text = "Against the wall."
+targetType = "node"
+nodeId = "wall_back"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "lick"
+name = "His mouth"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He pushes you onto your back on his bed and spreads your thighs. Then he kneels between them and puts his mouth on your cunt. His tongue drags up through you, slow and flat. You slap a hand over your own mouth. Laura's right across the hall. He licks you again, then sucks your clit between his lips. Your hips jerk off the mattress. He grabs your ass and holds you down. *Don't make a sound.* His tongue works your clit fast now, and two fingers slide into your wet cunt. You moan into your palm. Your thighs start to shake. Then you come hard, and your thighs clamp tight round his head. He keeps licking your cunt through it while you buck against his mouth."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a guy eating a girl out on his bed, her hand over her mouth, thighs round his head", search_queries = ["he eats her pussy she covers mouth", "cunnilingus thighs around his head"], pool_dir = "sex/ryan_08_lick_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Ride him."
+targetType = "node"
+nodeId = "ride"
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.choices]]
+text = "On your back."
+targetType = "node"
+nodeId = "under"
+time_progression_minutes = 5
+
+[[canvases.nodes.exit_block.choices]]
+text = "Against the wall."
+targetType = "node"
+nodeId = "wall_back"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "ride"
+name = "On top"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You push Ryan flat on his back and climb on. His cock stands up hard between your thighs, thick and hot. \"Fuck, @player.nickname,\" he breathes. You take his cock in your fist and line it up with your cunt. You're so wet it slides right in. You sink down slowly until he's all the way inside you. *Oh God, he's big.* His hands grab your ass and pull you down harder. Your tits bounce as you start to ride him. His headboard knocks the wall. Your wall, the one you listened through when Kayla was here. You lean on his chest and ride his cock faster. The headboard bangs every time your cunt drops onto his cock."
 
 [[canvases.nodes.blocks]]
 type = "video"
@@ -955,18 +1149,60 @@ props = { description = "a girl climbing onto a guy on his bed and sinking onto 
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Ride him."
+text = "\"Harder.\""
 targetType = "node"
-nodeId = "wall"
-time_progression_minutes = 10
+nodeId = "light"
+time_progression_minutes = 5
 
 [[canvases.nodes]]
-id   = "wall"
+id   = "under"
+name = "Under him"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Ryan pulls you up the bed under him and settles between your thighs. The head of his cock presses against your cunt. He pushes in slow, an inch at a time, and watches your face the whole way. You're soaked, and he slides deep. He bottoms out and holds there. \"@player.nickname,\" he says, low. Just your name, with his cock all the way inside you. He pulls almost out and fucks back in, slow and deep. His headboard taps your wall, soft. Tap. Tap. *It's Ryan.* Your tits brush his chest on every stroke. You wrap your legs round his ass and pull him in deeper. He groans into your neck and keeps it slow, grinding into you until your cunt squeezes his cock."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "missionary sex, slow, a guy on top looking at the girl's face", search_queries = ["slow missionary eye contact", "he fucks her slow on her back"], pool_dir = "sex/ryan_08_under_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Harder.\""
+targetType = "node"
+nodeId = "light"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "wall_back"
 name = "Her wall"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "You ride him harder, and his headboard bangs your wall every time you drop onto his cock. Across the hall, a line of light comes on under Laura's door. You both see it. You freeze on him, his cock buried to the root in your cunt. Ryan grabs your hips and fucks up into you hard. You clap a hand over your own mouth. *She's awake. Don't you dare stop.* Your tits bounce with every thrust, and the headboard keeps hitting. \"Fuck,\" he breathes against your fingers when you cover his mouth too. He drags you down onto him, deep. Your wet cunt clenches around his cock on every stroke, and you feel him swell inside you, close."
+content = "You kneel up on his bed, facing the wall, and put your palms flat on it. Your wall, the one you listened through. The plaster is rough under your hands. You can feel the dents his headboard made. Ryan kneels behind you and grabs your ass. His cock slides between your cheeks, then down to your cunt. He pushes in deep in one stroke. You gasp against the wall. \"Fuck,\" he breathes. He pulls back and slams in again. Your tits sway with every thrust. His headboard knocks the plaster next to your hands. *Kayla was right here.* His fingers dig into your hips. He fucks you deep and slow, then faster, his balls slapping your wet cunt."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl kneeling on a bed with her palms on the wall, fucked from behind", search_queries = ["from behind hands on wall kneeling on bed", "doggy against bedroom wall"], pool_dir = "sex/ryan_08_wall_back_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Harder.\""
+targetType = "node"
+nodeId = "light"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "light"
+name = "Laura's light"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "\"Harder,\" you gasp, and Ryan gives it to you. He fucks you so hard the bed shakes. The headboard bangs your wall on every stroke, loud. Across the hall, a line of light comes on under Laura's door. Ryan sees it. \"Laura,\" he breathes. Ryan goes still for a second, his cock buried to the root in your cunt. Neither of you breathes. You clap a hand over your own mouth. *She's awake.* His cock throbs inside you. Your tits heave against your arm. Your wet cunt clenches around him on its own, and he swears through his teeth. His fingers dig into your ass. He's so deep you can feel him twitch. You squeeze his cock again, and his hips jerk once, deeper into your cunt."
 
 [[canvases.nodes.blocks]]
 type = "video"
@@ -976,16 +1212,82 @@ props = { description = "a couple fucking on a bed, the headboard banging the wa
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
+text = "Keep going."
+targetType = "node"
+nodeId = "keep"
+time_progression_minutes = 3
+
+[[canvases.nodes.exit_block.choices]]
+text = "Freeze."
+targetType = "node"
+nodeId = "freeze"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "keep"
+name = "Keep going"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Ryan doesn't stop. His hand clamps over your mouth and he fucks you harder. Deep, fast strokes. His cock slams into your cunt so hard you see stars. The wall bangs. It bangs again. Across the hall, the line of light stays on under Laura's door. You moan into his palm and he presses tighter. \"Quiet,\" he hisses. \"Fuck. Quiet.\" You can't be. You're so wet you can hear it, a slick slap of skin on every stroke. His fingers dig into your ass. Your tits shake with every thrust. *She can hear this.* He doesn't slow down. Your cunt tightens on him and his rhythm breaks, ragged and hard. His cock swells and jerks inside you, right at the edge, and he grits his teeth to hold back his cum."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a guy fucking a girl hard with his hand over her mouth", search_queries = ["hand over mouth fucking hard quiet", "he covers her mouth while fucking"], pool_dir = "sex/ryan_08_keep_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
 text = "\"Inside me.\""
 targetType = "node"
 nodeId = "inside"
-time_progression_minutes = 5
+time_progression_minutes = 3
 
 [[canvases.nodes.exit_block.choices]]
 text = "\"On me.\""
 targetType = "node"
 nodeId = "on"
-time_progression_minutes = 5
+time_progression_minutes = 3
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"In my mouth.\""
+targetType = "node"
+nodeId = "mouth"
+time_progression_minutes = 3
+
+[[canvases.nodes]]
+id   = "freeze"
+name = "Freeze"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You both go still. His cock is buried deep in your cunt and neither of you moves. Your heart slams. You can feel his slamming too. You listen. Nothing across the hall. Just the line of light under Laura's door. Your cunt throbs around him and he grits his teeth. \"Don't,\" he whispers. \"Don't move.\" A minute. Longer. Then the light goes off. Dark under her door. Ryan breathes out. He starts again, slow. He pulls almost all the way out, then sinks back in, inch by inch. It's so slow you're shaking. *Fuck. Fuck, fuck.* You're dripping wet around him. Your tits ache. He does it again, slower, and his cock drags along every inch of you. Your thighs tremble and your cunt clenches on him, desperate, and he still won't fuck you faster."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a couple holding still mid-sex, listening, then moving again slow", search_queries = ["frozen mid sex listening quiet", "slow sex trying not to be heard"], pool_dir = "sex/ryan_08_freeze_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Inside me.\""
+targetType = "node"
+nodeId = "inside"
+time_progression_minutes = 3
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"On me.\""
+targetType = "node"
+nodeId = "on"
+time_progression_minutes = 3
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"In my mouth.\""
+targetType = "node"
+nodeId = "mouth"
+time_progression_minutes = 3
 
 [[canvases.nodes]]
 id   = "inside"
@@ -993,11 +1295,11 @@ name = "Inside"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "His headboard bangs your wall every time you drop. His hands lock on your hips and he takes the pace from you. He pulls you down hard onto his cock and holds you there. \"@player.nickname. I'm close.\" \"Inside,\" you say. \"Do it.\" He drives up once more and his cock jerks deep in your cunt. You feel every pulse. Hot cum floods you, and he keeps grinding you down onto it. *That's him. All of it.* Your thighs start to shake. Your cunt clamps around him and you come loud, nails in his chest. He fucks you through it in short, hard strokes. Cum slides out around his cock and runs wet down your thighs. Your tits heave. He holds your hips down until his cock stops twitching inside you."
+content = "He's close. You can feel it in how hard he's fucking you. His hand grips your hip and he takes the pace from you. The wall bangs, fast. \"@player.nickname. I'm close.\" \"Inside,\" you say. \"Do it.\" He slams deep once more and holds there. His cock jerks in your cunt. You feel every pulse. Hot cum floods you, and he keeps grinding into you through it. *That's him. All of it.* Your thighs start to shake. Your cunt clamps around his cock and you come hard, a sound you can't swallow. He fucks you through it in short, hard strokes. Cum leaks out around his cock and runs wet down your thighs. Your tits heave. He stays buried in you until his cock stops twitching."
 
 [[canvases.nodes.blocks]]
 type = "video"
-props = { description = "a guy coming inside a girl on top of him, holding her hips down", search_queries = ["creampie riding guy holds hips", "he cums inside her on top"], pool_dir = "sex/ryan_08_inside_t5" }
+props = { description = "a guy coming inside a girl, holding her hips down", search_queries = ["creampie he holds her hips", "he cums inside her"], pool_dir = "sex/ryan_08_inside_t5" }
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -1005,7 +1307,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Lie there."
 targetType = "node"
-nodeId = "terms"
+nodeId = "after"
 time_progression_minutes = 10
 
 [[canvases.nodes]]
@@ -1014,7 +1316,7 @@ name = "On you"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "\"Close,\" Ryan grunts. His hands dig into your ass. The headboard bangs your wall one more time. You lift off him. His cock slides out of your cunt, wet and shining, and slaps down on his stomach. You wrap your hand around it. It's slick with you and hot. \"Fuck. Don't stop.\" You pump him fast, root to tip, and his hips jerk off the mattress. *Give it to me.* He swears through his teeth. The first rope of cum hits your stomach. The next splashes across your tits. You keep stroking and he keeps spurting until it drips down your chest. You're panting. His cock twitches in your fist. His cum runs down your belly toward your cunt."
+content = "\"Close,\" Ryan grunts. His fingers dig into your ass. The wall bangs one more time. He pulls out. His cock slides out of your cunt, wet and shining with you. You end up on your back on his sheets, panting. He kneels over you, his fist on his cock. \"Fuck. Don't move.\" You wrap your hand over his and pump with him, root to tip. *Give it to me.* He swears through his teeth. The first rope of cum hits your stomach. The next splashes across your tits. He keeps stroking and keeps spurting until it drips down your chest. Your nipples are slick with it. His cock twitches in your fist. His cum runs down your belly toward your cunt."
 
 [[canvases.nodes.blocks]]
 type = "video"
@@ -1026,8 +1328,55 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Lie there."
 targetType = "node"
-nodeId = "terms"
+nodeId = "after"
 time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "mouth"
+name = "Your mouth"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "\"I'm close,\" he grunts. \"Fuck, @player.nickname.\" You pull off his cock. It slips free, wet and shining with your cunt. You get on your knees on the floor by his bed. He stands over you, breathing hard. You take him in your fist and open your mouth. You suck the head of his cock and pump him hard, root to tip. You taste yourself on him. His hand fists in your hair. *Don't you dare stop.* His hips jerk. His cock swells on your tongue and he comes, hot cum flooding your mouth. Another pulse. Another. You keep sucking through every one. You swallow it all, and cum still drips onto your tits. You lick the last of it off the head while his cock twitches against your lips."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl on her knees by a bed, a guy coming in her mouth, she swallows", search_queries = ["cum in mouth kneeling swallow", "he finishes in her mouth"], pool_dir = "sex/ryan_08_mouth_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Lie there."
+targetType = "node"
+nodeId = "after"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "after"
+name = "After"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You lie with your head on his chest. His heart is still going hard under your ear. Across the hall, Laura's door is dark again. Your thighs are sticky and your lips are sore and every part of you knows whose bed this is."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "That was your brother. You should feel sick."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You don't. You feel warm all the way down, and you're already thinking about the next time you knock. That's the part that scares you."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Ask him."
+targetType = "node"
+nodeId = "terms"
+time_progression_minutes = 5
 
 [[canvases.nodes]]
 id   = "terms"
@@ -1063,6 +1412,7 @@ locationId = "home_hall"
 time_progression_minutes = 5
 effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 5 }, { targetType = "player", trait = "ryan_step", op = "set", value = 8 }]
 flagEffects = [{ targetType = "player", flag = "ryan_terms_secret", op = "set" }, { targetType = "player", flag = "ryan_08_done", op = "set" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
 consumes = true
 
 [[canvases.nodes.exit_block.choices]]
@@ -1072,6 +1422,7 @@ locationId = "home_hall"
 time_progression_minutes = 5
 effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 5 }, { targetType = "player", trait = "ryan_step", op = "set", value = 8 }]
 flagEffects = [{ targetType = "player", flag = "ryan_terms_mine", op = "set" }, { targetType = "player", flag = "ryan_08_done", op = "set" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
 consumes = true
 
 [[canvases.nodes.exit_block.choices]]
@@ -1081,6 +1432,7 @@ locationId = "home_hall"
 time_progression_minutes = 5
 effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 5 }, { targetType = "player", trait = "ryan_step", op = "set", value = -1, clamp = false }]
 flagEffects = [{ targetType = "player", flag = "ryan_path_closed", op = "set" }, { targetType = "player", flag = "ryan_08_done", op = "set" }, { targetType = "player", flag = "ryan_knock_code", op = "unset" }, { targetType = "player", flag = "ryan_08_two_knocks_closed", op = "set" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
 final = true
 
 [[canvases.nodes.exit_block.choices]]
@@ -1094,7 +1446,7 @@ locked_text = "Further. (Next release)"
 [[canvases]]
 id   = "ryan_two_knocks"
 name = "Two knocks on his door"
-description = "The repeat after Ryan step 8 (hot repeatable 7): sex, a shuffle bag of three; two of them are the near-catches (Laura knocks; Kayla calls). Corruption +1, cap 59; Lust +3 once a day."
+description = "The repeat after Ryan step 8 (hot repeatable 7): a menu. A normal start, her pick of the act (more open by his Lust 70/80/90), a shy or eager voice by her Corruption, a near-catch screen, her pick of finish. Corruption +1, cap 79; Lust +3 once a day."
 
 [canvases.trigger]
 location = "home_ryan_room"
@@ -1116,7 +1468,7 @@ name = "Two knocks"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "Two knocks. His phone is face-down on the desk before the second one lands."
+content = "Two knocks. His phone is face-down on the desk. It always is now."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -1124,7 +1476,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Go in."
 targetType = "node"
-nodeId = "hot7"
+nodeId = "start"
 time_progression_minutes = 2
 
 [[canvases.nodes.exit_block.choices]]
@@ -1143,21 +1495,235 @@ show_when_locked = true
 locked_text = "Further. (Next release)"
 
 [[canvases.nodes]]
-id   = "hot7"
-name = "Two knocks"
+id   = "start"
+name = "His room"
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "paragraph", content = "Two knocks, soft. Ryan opens the door and pulls you in by the wrist. \"Took you long enough, @player.nickname.\" He strips you fast and pushes you down on the bed. You climb on top and sink onto his cock. He grabs your ass and drives you down on him, hard. \"Quiet,\" he hisses. \"Mom's right across the hall.\" You bite your lip and ride him faster. Your tits bounce in his face. He buries his mouth between them. Your cunt clenches and you come shaking on top of him, muffled against his shoulder. *God, these walls are thin.* He flips you onto your back and fucks you hard and fast. Then he pulls out and comes across your tits, hot and thick, while your wet cunt still throbs." },
-  { type = "paragraph", content = "Two knocks. Ryan drags you inside and has you naked before the door clicks shut. \"Hands on the headboard, @player.nickname.\" He kneels behind you and fucks your cunt from behind, slow and deep. His hand clamps over your mouth. Then knuckles rap on his door. \"Ryan? Are you up?\" You both freeze. His cock is buried in you to the hilt. \"Asleep, Mom,\" he calls. Her slippers shuffle back across the hall. Her door shuts. Ryan grins against your neck and slams into you hard. *She was right there.* Your tits sway with every thrust. He grips your ass and fucks you faster until you clench around his cock and come. He groans into your hair and comes deep inside your cunt." },
-  { type = "paragraph", content = "Two knocks. Ryan pulls you in and locks the door. \"Desk. Now, @player.nickname.\" He strips you, bends you over his desk and pushes his cock into your wet cunt. Then his phone lights up beside your face. KAYLA, with a heart. It buzzes against the wood. Ryan keeps going. He fucks you slow and deep and watches it ring. \"Let it ring,\" he whispers. \"She can wait.\" *His girlfriend is calling and he's inside you.* The phone buzzes and buzzes. He grabs your hips and slams into you harder. Your tits press flat on the desk. The ringing stops. He pulls you up by the hair and you come with his cock deep in your cunt. Then he pulls out and comes all over your ass." },
+  { type = "paragraph", content = "Ryan has you against the door before it's even shut. His mouth is on yours, hungry, and his hands go straight to your ass. The door clicks closed behind your back. \"Hi, @player.nickname,\" he breathes into your neck. His cock is already hard against your belly. You drag his shirt over his head. He pulls your clothes off you, quick and rough, and drops them on the floor. Your nipples go tight. His cock presses hot into your bare stomach." },
+  { type = "paragraph", content = "Ryan's room is dark. He's in bed, half asleep, one arm over his eyes. \"That you, @player.nickname?\" His voice is thick. He lifts the covers without looking. You slide in, and he pulls you flat against him. He's warm all over. His hand slides down your back to your ass and squeezes. His cock stiffens against your thigh, slow, then all at once. \"Awake now,\" he mumbles. He tugs your clothes off under the covers and kicks them away. Your bare tits press against his chest." },
+  { type = "paragraph", content = "Ryan's sitting on the edge of his bed, elbows on his knees, waiting. \"Took you long enough, @player.nickname.\" \"Miss me?\" \"Shut the door.\" You shut it. He pulls you between his knees by the hips and looks up at you. His hands slide round to your ass. His cock is hard in his shorts. \"Off,\" he says. You pull your clothes off and let them drop. He looks at your tits, then lower. His cock jerks against his shorts." },
 ]
-props = { id = "ryan_hot_7", memory = "seen", seen_weight = 0 }
+props = { id = "ryan_hot_7s", memory = "seen", seen_weight = 0 }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go down on him."
+targetType = "node"
+nodeId = "suck"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "gte", value = 70 }] }
+wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Ride him."
+targetType = "node"
+nodeId = "ride"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "gte", value = 70 }] }
+wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him taste you."
+targetType = "node"
+nodeId = "lick"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "gte", value = 80 }] }
+show_when_locked = true
+wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Against the wall."
+targetType = "node"
+nodeId = "wall_back"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "gte", value = 90 }] }
+show_when_locked = true
+wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave him to it."
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 2
+flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
+
+[[canvases.nodes]]
+id   = "suck"
+name = "On your knees"
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 70 }] }
+blocks = [
+  { type = "paragraph", content = "You kneel on the rug by his bed and glance at the door. Shut. You still listen for Laura's slippers. Ryan sits on the edge of the mattress with his cock hard in his fist. \"Come here, @player.nickname,\" he whispers. You lick the head once, then take it in your mouth. He's hot and salty on your tongue. *This is Ryan.* You suck him deeper anyway. Your lips slide down his shaft until he bumps the back of your throat. He grabs a fistful of your hair and bites back a groan. You keep it slow and quiet, your hand wrapped tight round the base. Your tits brush his knees every time you bob. His cock swells hard against your tongue. Then he pulls you up onto the bed, and his wet cock pushes deep into your cunt." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 70 }] }
+blocks = [
+  { type = "paragraph", content = "You push Ryan down to sit on the edge of his bed and drop to your knees between his thighs. You don't look at the door. \"Give it to me,\" you say. His cock is already hard. You lick it from his balls to the tip, slow, while he watches. Then you take him all the way in. He hits the back of your throat and you hold him there. \"Fuck, @player.nickname.\" You pull off, spit on his cock and jerk him in your fist. \"Hands in my hair. Fuck my mouth.\" He does. His hips lift off the mattress. You suck him hard and fast, your tits bouncing against his knees. His cock throbs on your tongue, fat and close. Then he pulls you up onto the bed, and his wet cock pushes deep into your cunt." },
+]
 
 [[canvases.nodes.blocks]]
 type = "video"
-props = { description = "a couple having sex in his bedroom late at night, keeping quiet", search_queries = ["quiet sex his bedroom late night", "sneaky sex step brother room"], pool_dir = "sex/ryan_hot7_t5" }
+props = { description = "a girl on her knees by a bed sucking a guy's cock late at night", search_queries = ["blowjob kneeling by his bed night", "she sucks her stepbrother quietly"], pool_dir = "sex/ryan_hot7_suck_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Don't stop."
+targetType = "node"
+nodeId = "twist"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "ride"
+name = "On top"
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 70 }] }
+blocks = [
+  { type = "paragraph", content = "Ryan lies back on his pillow and you climb on top of him, one eye on the door. \"Slow,\" you whisper. \"She's right across the hall.\" You lower yourself onto his cock. He stretches your cunt open inch by inch until you're sitting on him. You ride him small and careful. His headboard taps your wall anyway. Knock. Knock. You freeze and listen. Nothing. *This is Ryan.* You rock down on him harder. He grabs your ass and pulls you onto him. Your tits bounce over his face. He catches a nipple in his mouth. You bite your lip to keep quiet. Your wet cunt clenches tight around his cock with every tap of the headboard." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 70 }] }
+blocks = [
+  { type = "paragraph", content = "You shove Ryan flat on his back and straddle him. You don't look at the door. You take his cock in your hand and sink straight down on it, all the way. \"Fuck, @player.nickname.\" \"Hold on to the headboard,\" you tell him. \"I'm going to ride you hard.\" You do. You slam your hips down on him fast. His headboard bangs your wall with every stroke. You don't slow down. You grab his hands and put them on your tits. \"Squeeze.\" He squeezes. You grind your clit against him. You roll your hips, then lift and drop until your ass slaps his thighs. His cock fills your cunt to the root every time you drop." },
+]
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl riding a guy on his bed, the headboard knocking the wall", search_queries = ["girl rides him headboard knocking", "quiet riding sex late night"], pool_dir = "sex/ryan_hot7_ride_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Don't stop."
+targetType = "node"
+nodeId = "twist"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "lick"
+name = "His mouth"
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 70 }] }
+blocks = [
+  { type = "paragraph", content = "You lie back on Ryan's bed, naked, and glance at the door one more time. He pushes your knees apart. \"Eyes on me, @player.nickname.\" His tongue drags up your cunt, slow, all the way to your clit. You clap a hand over your mouth. *This is Ryan.* You spread your legs wider anyway. He sucks your clit between his lips and slides two fingers into you, deep and curled. You're so wet they slip right in. Your hips lift off the sheets. You bite your palm to stay quiet. He flicks your clit fast with the tip of his tongue. Your thighs clamp around his head. You come shaking against his mouth, your cunt clenching on his fingers. Then he climbs over you, and his hard cock slides into your wet cunt." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 70 }] }
+blocks = [
+  { type = "paragraph", content = "You lie back on Ryan's bed and spread your legs wide. You don't look at the door. \"Eat my cunt, Ryan. Slow.\" He kneels between your thighs and does what he's told. His tongue drags flat up your slit, then circles your clit. \"Faster,\" you tell him. You grab his hair and pull his face in hard. He sucks your clit and pushes two fingers deep into you. You grind your wet cunt on his mouth and let yourself moan. *Let the whole hall hear it.* \"Right there. Don't stop.\" Your back arches off the bed. You come hard on his tongue, your thighs locked around his head. Then you pull him up by the hair. His cock is hard and leaking on your stomach. You guide it into your cunt and wrap your legs around his ass." },
+]
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a guy eating a girl out on his bed, her hand over her mouth", search_queries = ["he eats her out she covers mouth", "cunnilingus quiet late night"], pool_dir = "sex/ryan_hot7_lick_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Don't stop."
+targetType = "node"
+nodeId = "twist"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "wall_back"
+name = "Against the wall"
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 70 }] }
+blocks = [
+  { type = "paragraph", content = "You kneel on Ryan's bed, naked, and look back at the door once. He kneels behind you. \"Hands on the wall, @player.nickname.\" You press your palms flat against it. Your own room is on the other side. He grabs your hips and pushes his cock into your cunt, slow, all the way in. You gasp, then bite it back. *This is Ryan.* You push your ass back onto him anyway. He pulls out to the tip. He drives in deep. The headboard knocks the wall. \"Shh,\" you whisper. \"They'll hear.\" So he slows down and fucks you deeper instead, grinding in. Your tits sway under you with every thrust. Your fingers slide on the paint. His cock swells inside you, and he holds it there, buried to the hilt." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 70 }] }
+blocks = [
+  { type = "paragraph", content = "You climb onto Ryan's bed on your knees and slap both palms flat on the wall. \"From behind. Hard.\" You don't look at the door. He kneels behind you. He rubs his cock along your wet cunt. \"Stop teasing. Put it in.\" He shoves in deep. You push back to take every inch. \"Harder.\" He grabs your hips and fucks you hard, his balls slapping your clit. The headboard bangs the wall. Your own room is on the other side of it, but you don't care. *Let it bang.* You arch your back. You spread your knees wider. \"Deeper, Ryan. Right there.\" He pulls your ass back onto his cock with every thrust. Your tits bounce under you. Your cunt clenches tight around him while he groans and fucks you harder." },
+]
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl kneeling on a bed, palms on the wall, fucked from behind", search_queries = ["from behind palms on wall", "doggy against the bedroom wall"], pool_dir = "sex/ryan_hot7_wall_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Don't stop."
+targetType = "node"
+nodeId = "twist"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "twist"
+name = "Late"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "You don't stop. Neither does he. It gets harder. It gets louder. The wall knocks, steady, and you can't make it quiet. Your cunt is soaking. Sweat runs down your back. His hands dig into your ass, holding you right where he wants you. \"Fuck,\" he groans. \"Fuck, @player.nickname.\" His breath comes short, ragged. Your tits ache. Your nipples are hard as stones. A moan gets out of you before you can stop it. The wall knocks again, faster. His thighs are shaking. You're wet all over him. His cock throbs, thick and hard, right at the edge." },
+  { type = "paragraph", content = "The headboard's too loud. Across the hall, a door opens. Knuckles rap on his door. \"Ryan? Are you up?\" You both freeze. Nobody breathes. Your cunt is dripping and you don't dare move. His fingers stay dug into your ass. Your nipples are hard and your heart is hammering. \"Asleep, Mom,\" he calls. His voice barely shakes. A pause. Then her slippers shuffle back across the hall. Her door clicks shut. Ryan lets his breath out. *She was right there.* He grins, and you start again, slow, then not slow at all. You don't stop. His breath goes hot and ragged on your skin. Your wet cunt clenches. His cock jerks, thick and hard, so close now." },
+  { type = "paragraph", content = "His phone buzzes face-down on the desk. He turns it over. KAYLA, with a heart. It buzzes against the wood, loud in the dark. You both look at it. Ryan doesn't reach for it. \"Let it ring,\" he says, rough. His hands grip your ass harder. You don't stop. *You want her to keep calling while he's inside you.* The phone buzzes and buzzes. Your wet cunt clenches. Your tits ache, the nipples tight. He groans low and doesn't care who hears. \"Fuck, @player.nickname.\" The ringing stops. The screen goes dark. His breath is ragged now. His whole body goes tight, and his cock swells hard." },
+]
+props = { id = "ryan_hot_7t", memory = "seen", seen_weight = 0 }
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a couple having sex in his bedroom late at night, keeping quiet", search_queries = ["quiet sex his bedroom late night", "sneaky sex step brother room"], pool_dir = "sex/ryan_hot7_twist_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Inside me.\""
+targetType = "node"
+nodeId = "f_inside"
+time_progression_minutes = 3
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"On me.\""
+targetType = "node"
+nodeId = "f_on"
+time_progression_minutes = 3
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"In my mouth.\""
+targetType = "node"
+nodeId = "f_mouth"
+time_progression_minutes = 3
+
+[[canvases.nodes]]
+id   = "f_inside"
+name = "He comes"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "\"I'm close,\" Ryan groans. \"@player.nickname, I'm going to come.\" \"Inside me,\" you whisper. \"Don't pull out.\" You take his cock all the way into your cunt and squeeze it tight. He grabs your ass with both hands. His hips jerk once, twice. Then his cock throbs deep inside you and he comes hard, with a choked groan. You feel every pulse. Hot cum floods your cunt. He keeps pumping it into you, slow, until he's empty. When he finally pulls out, his cum leaks out of you and runs down your thigh onto his sheets."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a guy finishing, late at night in his bedroom", search_queries = ["he cums late night bedroom", "finish quiet sex"], pool_dir = "sex/ryan_hot7_finish_t5" }
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -1166,19 +1732,91 @@ type = "choices"
 text = "Back to your room."
 targetType = "location"
 locationId = "home_hall"
-time_progression_minutes = 45
+time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 3 }]
-flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
+flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Back to your room."
 targetType = "location"
 locationId = "home_hall"
-time_progression_minutes = 45
+time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_true" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }]
-flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
+
+[[canvases.nodes]]
+id   = "f_on"
+name = "He comes"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "\"I'm close,\" Ryan pants. \"On me,\" you tell him. \"I want to see it.\" He pulls out and fists his cock fast, wet and shining. You drop onto your back. You push your tits together for him. He kneels over you, breathing hard. \"Fuck, @player.nickname.\" His cock jerks in his fist. Thick ropes of cum splash across your tits and stomach. He strokes out every last drop. It pools in your belly button, then runs down your sides onto his sheets. You rub it into your nipples with two fingers while his cock twitches over you."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a guy finishing, late at night in his bedroom", search_queries = ["he cums late night bedroom", "finish quiet sex"], pool_dir = "sex/ryan_hot7_finish_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to your room."
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 3 }]
+flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to your room."
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_true" }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
+
+[[canvases.nodes]]
+id   = "f_mouth"
+name = "He comes"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "\"I'm close, @player.nickname.\" \"In my mouth.\" You slide off the bed onto your knees in front of him. He stands over you, fisting his cock, slick and wet. You open wide and stick your tongue out. He feeds you the head. You wrap your lips around it and suck hard, one hand pumping the shaft. His fingers knot in your hair. \"Fuck. Fuck, that's it.\" His cock swells on your tongue. Then he comes, hot and thick, pulse after pulse into your mouth. You keep sucking until he's empty. You swallow it all, then lick the last drop of cum off his cock."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a guy finishing, late at night in his bedroom", search_queries = ["he cums late night bedroom", "finish quiet sex"], pool_dir = "sex/ryan_hot7_finish_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to your room."
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 3 }]
+flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to your room."
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_true" }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
 
 [[canvases]]
 id   = "hub_ryan_room"
@@ -7270,7 +7908,6 @@ text = "Done."
 targetType = "location"
 locationId = "home_living_room"
 time_progression_minutes = 30
-effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "had_drink_home", op = "set" }]
 modifier_effects = [{ key = "drinks_boost", name = "Tipsy", duration_hours = 3, trait_offsets = { corruption = 20, exhibitionism = 20 } }]
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "had_drink_home", operator = "is_false" }] }
@@ -7337,7 +7974,7 @@ text = "Done."
 targetType = "location"
 locationId = "home_living_room"
 time_progression_minutes = 120
-effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }, { targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, cap = 100 }]
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "movie_night", op = "set" }]
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "movie_night", operator = "is_false" }] }
 
@@ -7541,7 +8178,7 @@ targetType = "location"
 locationId = "home_living_room"
 time_progression_minutes = 30
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }, { targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, cap = 100 }]
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "watched_tv", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -7590,7 +8227,7 @@ targetType = "location"
 locationId = "home_living_room"
 time_progression_minutes = 30
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }, { targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, cap = 100 }]
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "watched_tv", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -7639,7 +8276,7 @@ targetType = "location"
 locationId = "home_living_room"
 time_progression_minutes = 30
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }, { targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, cap = 100 }]
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "watched_tv", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -7688,7 +8325,7 @@ targetType = "location"
 locationId = "home_living_room"
 time_progression_minutes = 30
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }, { targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, cap = 100 }]
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "watched_tv", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -7959,7 +8596,6 @@ targetType = "location"
 locationId = "home_garage"
 time_progression_minutes = 30
 costs = [{ trait = "energy", value = 5 }]
-effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "did_laundry", op = "set" }]
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "did_laundry", operator = "is_false" }] }
 
@@ -7967,9 +8603,26 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 text = "Leave your basket on top."
 targetType = "node"
 nodeId = "hl_laundry_tease"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "mark_step", operator = "gte", value = 3 }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "did_laundry", operator = "is_false" }] }
-effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, cap = 100 }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "did_laundry", operator = "is_false" }] }
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 2, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "did_laundry", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Bend for the bottom drum."
+targetType = "node"
+nodeId = "hl_laundry_tease2"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "worn_type", operator = "neq", value = "towel" }, { type = "flag", subject = "player", flag_key = "did_laundry", operator = "is_false" }] }
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 3, cap = 100 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+flagEffects = [{ targetType = "player", flag = "did_laundry", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Wash what you're wearing."
+targetType = "node"
+nodeId = "hl_laundry_tease3"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }, { type = "clothing_slot", slot = "top", operator = "equipped" }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "flag", subject = "player", flag_key = "did_laundry", operator = "is_false" }] }
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 4, cap = 100 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }]
+flagEffects = [{ targetType = "player", flag = "did_laundry", op = "set" }]
+wardrobeEffects = [{ action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Not now."
@@ -8021,6 +8674,100 @@ props = { speaker = "player" }
 type = "thought_bubble"
 content = "Next time you bring your washing down, you'll leave something smaller on top."
 props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done."
+targetType = "location"
+locationId = "home_garage"
+time_progression_minutes = 30
+
+[[canvases.nodes]]
+id   = "hl_laundry_tease2"
+name = "The bottom drum"
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }] }
+blocks = [
+  { type = "paragraph", content = "Mark's radio plays low over the sound of his sanding. You pull the wet load out and bend from the waist to fill the bottom drum. Your skirt rides up the backs of your thighs. Your panties show, and the curve of your ass under them. The sanding stops. \"Take your time, @player,\" Mark says. His voice comes out rough. You feed the drum one shirt at a time and stay bent over. *He's looking. Good.* When you glance back, he's leaning on the bench, staring at your ass. His cock is hard in his jeans. You straighten and smooth the skirt down. He turns back to the bench, but his cock is still pushing at his zipper." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "laura_dress" }] }
+blocks = [
+  { type = "paragraph", content = "Mark's radio plays low over the sound of his sanding. You pull the wet load out and bend from the waist to fill the bottom drum. Your skirt rides up the backs of your thighs. Your panties show, and the curve of your ass under them. The sanding stops. \"Take your time, @player,\" Mark says. His voice comes out rough. You feed the drum one shirt at a time and stay bent over. *He's looking. Good.* When you glance back, he's leaning on the bench, staring at your ass. His cock is hard in his jeans. You straighten and smooth the skirt down. He turns back to the bench, but his cock is still pushing at his zipper." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "party_dress" }] }
+blocks = [
+  { type = "paragraph", content = "Mark's radio plays low over the sound of his sanding. You pull the wet load out and bend from the waist to fill the bottom drum. Your skirt rides up the backs of your thighs. Your panties show, and the curve of your ass under them. The sanding stops. \"Take your time, @player,\" Mark says. His voice comes out rough. You feed the drum one shirt at a time and stay bent over. *He's looking. Good.* When you glance back, he's leaning on the bench, staring at your ass. His cock is hard in his jeans. You straighten and smooth the skirt down. He turns back to the bench, but his cock is still pushing at his zipper." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "cafe_uniform" }] }
+blocks = [
+  { type = "paragraph", content = "Mark's radio plays low over the sound of his sanding. You pull the wet load out and bend from the waist to fill the bottom drum. Your skirt rides up the backs of your thighs. Your panties show, and the curve of your ass under them. The sanding stops. \"Take your time, @player,\" Mark says. His voice comes out rough. You feed the drum one shirt at a time and stay bent over. *He's looking. Good.* When you glance back, he's leaning on the bench, staring at your ass. His cock is hard in his jeans. You straighten and smooth the skirt down. He turns back to the bench, but his cock is still pushing at his zipper." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }
+blocks = [
+  { type = "paragraph", content = "You're in only your long sleep shirt, barefoot on the cold concrete. Mark is at his bench with the radio on. You bend from the waist to load the bottom drum. The hem rides up over your ass. Your panties are right there, the cotton pulled tight across your cheeks. His screwdriver stops turning. \"Jesus, @player. Laura's in the house.\" He doesn't look away when he says it. *Then don't look.* You stay bent and push the towels in slowly. His eyes stay on your ass, and his cock is hard in his jeans. You stand and tug the hem down. He turns back to the bench with his cock still straining against his fly." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "jeans" }] }
+blocks = [
+  { type = "paragraph", content = "The radio is on and Mark is bent over something at his bench. You bend from the waist to load the bottom drum. The seat pulls tight across your ass. Your waistband slides low at the back, and the top of your panties shows above it. Mark's hands stop. \"You know what you look like right now, @player?\" He doesn't finish. You feel his eyes on your ass while you shove the sheets in. *Say it, then.* He doesn't. When you look over, he's shifting on his stool, his cock hard in his jeans. You straighten and hitch your waistband up. He turns back to the bench, but his cock is still a hard ridge behind his zipper." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "leggings" }] }
+blocks = [
+  { type = "paragraph", content = "The radio is on and Mark is bent over something at his bench. You bend from the waist to load the bottom drum. The seat pulls tight across your ass. Your waistband slides low at the back, and the top of your panties shows above it. Mark's hands stop. \"You know what you look like right now, @player?\" He doesn't finish. You feel his eyes on your ass while you shove the sheets in. *Say it, then.* He doesn't. When you look over, he's shifting on his stool, his cock hard in his jeans. You straighten and hitch your waistband up. He turns back to the bench, but his cock is still a hard ridge behind his zipper." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "shorts" }] }
+blocks = [
+  { type = "paragraph", content = "The radio is on and Mark is bent over something at his bench. You bend from the waist to load the bottom drum. The seat pulls tight across your ass. Your waistband slides low at the back, and the top of your panties shows above it. Mark's hands stop. \"You know what you look like right now, @player?\" He doesn't finish. You feel his eyes on your ass while you shove the sheets in. *Say it, then.* He doesn't. When you look over, he's shifting on his stool, his cock hard in his jeans. You straighten and hitch your waistband up. He turns back to the bench, but his cock is still a hard ridge behind his zipper." },
+]
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl bending over to load a front-loading washer, her skirt riding up, a man at a workbench watching", search_queries = ["girl bends over washing machine skirt rides up", "bending over laundry panties showing"], pool_dir = "sex/mark_laundry_bend_t4" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done."
+targetType = "location"
+locationId = "home_garage"
+time_progression_minutes = 30
+
+[[canvases.nodes]]
+id   = "hl_laundry_tease3"
+name = "In the wash"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You pull your top off over your head and drop it in the drum. Then you stand there in your bra while the machine fills. You don't cover up. The radio keeps playing, but Mark's hands go still on the bench. He looks straight at your tits and doesn't pretend not to. \"That's not laundry, @player. That's a show.\" *So watch it.* Your nipples go hard in the cold air, and he sees that too. He takes a long look at your tits, then another. Somewhere in the house Laura shuts a cupboard. He turns back to the bench, his cock hard in his jeans, his eyes still on your tits."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl in her bra by a running washing machine in a garage, a man at a bench staring", search_queries = ["girl in bra doing laundry garage", "topless laundry bra man watching"], pool_dir = "sex/mark_laundry_wash_t4" }
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -8273,7 +9020,7 @@ text = "Done."
 targetType = "location"
 locationId = "home_kitchen"
 time_progression_minutes = 15
-effects = [{ targetType = "player", trait = "energy", op = "add", value = 10, cap = 100 }, { targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, cap = 100 }]
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 10, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "ate_breakfast", op = "set" }]
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ate_breakfast", operator = "is_false" }] }
 
@@ -8368,7 +9115,7 @@ text = "Done."
 targetType = "location"
 locationId = "home_kitchen"
 time_progression_minutes = 30
-effects = [{ targetType = "player", trait = "energy", op = "add", value = 15, cap = 100 }, { targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, cap = 100 }]
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 15, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "ate_dinner", op = "set" }]
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }
 
@@ -8449,7 +9196,6 @@ targetType = "location"
 locationId = "home_kitchen"
 time_progression_minutes = 30
 costs = [{ trait = "energy", value = 5 }]
-effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "helped_cook", op = "set" }]
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "helped_cook", operator = "is_false" }] }
 
@@ -8537,7 +9283,6 @@ targetType = "location"
 locationId = "home_kitchen"
 time_progression_minutes = 20
 costs = [{ trait = "energy", value = 5 }]
-effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "did_dishes", op = "set" }]
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "did_dishes", operator = "is_false" }] }
 

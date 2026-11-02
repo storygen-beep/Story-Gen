@@ -1195,3 +1195,59 @@ sheets' own, and none is a tease, touch or paid look.
 - Engine tests 795 passed (two new). `probe_devpage.py` 10/10 (the button, Her, all seven people, Set it up fires
   Ryan 4 from Corruption 0, Play it now opens the hot tub, the Hungry button, 22:00, 0 page errors). Gates 61/89;
   probes a2, A–I and devtraits all pass. Rebuilt `--dev --debug`.
+
+## 2026-11-02: "Play it now" moves the clock into the step's window (engine, dev builds only; LO: "1")
+- LO hit a dead end: Play it now on Ryan 5 from a daytime clock left the last screen with no exit (the three
+  "Sleep." exits read 22:00–01:00, "Knock back twice." needs Corruption 40). Play it now set nothing.
+- Fix in `v2.py`: `clockIntoWindow(st, always)`, shared with Set it up. Play it now calls it with `always=false`, so
+  the clock moves to the window's start + 5 minutes only when it is outside the window (schedule or time_of_day);
+  meters, flags and clothes stay as they are. Not a game bug: in real play step 5 starts Friday 22:00–00:00 and
+  the last screen is reached by 00:19 at the latest, inside a "Sleep." window.
+- `test_the_dev_screen_is_in_dev_builds_only` checks the call (18 passed). New `probe_devplay_clock.py` 6/6 (Monday
+  10:00 + C5, Play it now lands Friday 22:05, C stays 5, "Sleep." shows, no dead-end warning, an in-window 23:30 is
+  kept, 0 page errors); `probe_devpage.py` 10/10. Rebuilt `--dev --debug`.
+
+## 2026-11-02: Ryan's step 8 rises from normal, and the two-knocks repeat is a menu (DECISIONS 127; LO: "Signed, go ahead and build")
+- Step 8 (`ryan_08_two_knocks_first_sex`): knocks, then a normal talk on his bed ("I meant it. The girlfriend thing."), her
+  doubt (*This is Ryan. You should go.*: "Stay." / "Go."), the kiss ("Let him." / "Stop. Not tonight."), undressing; then
+  her picks: what first (`suck` / `lick` / straight on), how (`ride` / `under` / `wall_back`), Laura's light (`keep` /
+  `freeze`), the finish (`inside` / `on` / `mouth`); `after` (her feeling, its own screen); the terms as signed. Three
+  parked nos. Stripped on the first act pick; dressed again on the terms exits. Gate, pay and terms unchanged; the
+  trigger now also reads `kayla_met` (gate "no one is named before they're met").
+- The repeat (`ryan_two_knocks`): door, `start` (a bag of three normal starts), the act menu by his Lust (suck and ride
+  at 70, lick at 80, wall at 90, the last two shown locked), each act in two voices split at Corruption 70, `twist` (a
+  bag of three: nothing / Laura knocks / Kayla calls), her pick of finish. Pay as built (C+1 cap 79, Lust +3 once a day).
+- 30 screens by six `v2-prose` writers, measured; read from the sheets. Fixes after: no "asleep" for Laura (awake
+  22:00–23:00); `light` leaves the pause to the player; `kiss`/`undress` name no garment (gate "her clothes are backed");
+  the loop's `7suck` ends with him in her so the twists are true after every act; "The bed creaks." cut; Kayla's
+  thought reworded (her call is never answered).
+- Gates 61/89, the same set as before (only `ends on an opening` off, waiting for LO). Explicit floor 25.4% of
+  repeatable beats. New `probe_ryan8.py` 21/21 (the whole step-8 path, the terms, the loop the next night, the menu at
+  Lust 77 and 92, both voices, the pay, 0 page errors). `probe_B.py` updated to the new path, 11/11; a2, A, C–I, devtraits,
+  devpage, devplay_clock pass (D flaked once on a random home event, then 3/3). Rebuilt `--dev --debug`.
+- New media slots for LO's harvest: `sex/ryan_08_{kiss,undress}_t4`, `sex/ryan_08_{suck,lick,under,wall_back,keep,freeze,mouth}_t5`,
+  `sex/ryan_hot7_{suck,ride,lick,wall,twist,finish}_t5`. Retired: `sex/ryan_hot7_t5`.
+- Reader pass (`v2-reader` on both canvases): 13 fails, the truth ones fixed. Step 7 is "Kayla can't know" (her hand,
+  his phone), not the cut kiss: `talk` now says "Last time. With Kayla calling. That can't happen again." ("Then why did
+  you open the door?"), `kiss` and `undress` follow it. Mark is downstairs with the TV 22:00–02:00, so only Laura is
+  "across the hall" (`suck`, `lick`, `7ride_shy`); `light` has Ryan see the light (she may face the wall); `under` pulls
+  her up the bed; `7t_b` opens on the headboard waking Laura (asleep from 23:00); `7t_c` turns the face-down phone over;
+  the door line no longer puts him at the desk; step 8's trigger skips a towel (`undress` pulls clothes over her head).
+  All changed beats re-measured (explicit 5–10, no pivot). Not fixed, for LO: the reader's R5b, that the parked nos
+  ("Not tonight.", "Go.", "Leave him to it.") move nothing but the retry (as signed). Gates 61/89; probes ryan8 21/21,
+  B 11/11, a2 16/16.
+
+## 2026-11-02: Mark's plain items pay nothing; laundry is a tease ladder (DECISIONS 128; LO: "Signed, skip the play check, build it")
+- `mark.py`: `want(M)` removed from every plain pay (beer, film, the TV's `watch_plain`, laundry, breakfast, dinner,
+  cooking, dishes). Kept: channel 5 "Leave it on." (+2), the towel, his steps, the other items' tease rows.
+- Laundry: `LAUNDRY_BASKET` (Curious · `mark_saw_her`, Lust +2; the filled basket screen, no step needed now) and
+  `LAUNDRY_TEASES`: "Bend for the bottom drum." (Curious · Daring · panties on · not a towel; Lust +3, Exhibitionism +1
+  cap 39; three screens by `worn_type`: skirt or dress / sleep shirt / jeans, leggings, shorts) and "Wash what you're
+  wearing." (Bold · Showing · a top and a bra; Lust +4, Exhibitionism +1, Corruption +1, cap 59; the top unequipped).
+  Once a day through `did_laundry`. Screens by `v2-prose`, measured, in `sheets/scenes/mark_laundry_teases.md`.
+- `home_items.py` `item()`: new `teases=[...]`; a spec may carry `blocks` (its written screen) and `wardrobe`.
+- Gates 61/89, same set. New `probe_mark_laundry.py` 19/19 (plain laundry and TV pay nothing, the ladder by stage,
+  both bend variants, the wash pays and leaves the bra, once a day, 0 page errors). a2, A–C, E–I, devtraits, devpage,
+  devplay_clock, ryan8 pass. D flakes about 1 run in 4: Mark's random "reach" home event can fire in the kitchen on
+  Sunday 09:00 before the rent table (older, not from this change). Rebuilt `--dev --debug`.
+- Media for LO's harvest: `sex/mark_laundry_bend_t4`, `sex/mark_laundry_wash_t4`.

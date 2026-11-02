@@ -78,7 +78,7 @@ def npc_add(npc, key, n):
 
 
 def item(prefix, label, when, key, back, plain_blocks, plain_eff, mins,
-         tease=None, touch=None, hungry=None, done_exits=None, plain_costs=None):
+         tease=None, touch=None, hungry=None, done_exits=None, plain_costs=None, teases=()):
     """One home_life item in a hub.
 
     when: condition items for the hub choice (hours, weekday, who's there).
@@ -92,16 +92,18 @@ def item(prefix, label, when, key, back, plain_blocks, plain_eff, mins,
         go("Done.", loc=back, mins=mins, eff=plain_eff, flags=[fset(key)], costs=plain_costs)]
     exits = list(exits)
     nodes = []
-    for kind, spec in (("tease", tease), ("touch", touch)):
+    # teases: more tease rungs on one item, by her stage (first_term DECISIONS 128, the laundry ladder)
+    for kind, spec in (("tease", tease), ("touch", touch), *[(f"tease{i}", t) for i, t in enumerate(teases, 2)]):
         if not spec:
             continue
         sub = f"{nid}_{kind}"
         flags_ = [fset(key)] + ([fset(spec["brake"])] if spec.get("brake") else [])
-        c = go(spec["label"], node=sub, cond_=cond(*spec["gate"]), eff=spec.get("eff"), flags=flags_)
+        c = go(spec["label"], node=sub, cond_=cond(*spec["gate"]), eff=spec.get("eff"), flags=flags_,
+               wardrobe=spec.get("wardrobe"))
         exits += brake(c, spec["brake"]) if spec.get("brake") else [c]
-        nodes.append(node(sub, spec.get("name", kind.title()),
-                          [placeholder(spec["ref"], spec.get("what", kind))],
-                          [go("Done.", loc=back, mins=mins)]))
+        # a spec with `blocks` carries its written screen; without, the signed line is a marked hole
+        body = list(spec["blocks"]) if spec.get("blocks") else [placeholder(spec["ref"], spec.get("what", kind))]
+        nodes.append(node(sub, spec.get("name", kind.title()), body, [go("Done.", loc=back, mins=mins)]))
     if hungry:
         exits.append(go(hungry, node="hl_hungry", swl=True, cond_=cond(NEXT_RELEASE)))
     # One way out free of every cap and cost (gate: a spent day still has a door, the-surfaces.md R7).
