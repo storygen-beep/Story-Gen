@@ -48,3 +48,10 @@ None in 0.1. Not someone she is involved with in 0.1.
 | sleeps at his house | LO, 2026-10-08 |
 | the readers | LO, 2026-10-08 |
 | the raise sizes | guess, taken by LO 2026-10-08 |
+
+## Changed 2026-11-02 (reader a3, `READER_FAILS_A3.md`, signed by LO 2026-11-02; DECISIONS 131)
+
+- Row 52 (`hub_vance_porch`): from his Lust 30, "Goodnight, Mr. Vance." moves his Lust +1 and gets his line: "Suit yourself, Miss. The step's not going anywhere." Under 30 it moves nothing, as before.
+- Row 60 (`hub_vance_porch`): under Lust 30, "His eyes go to your legs and come back up slow"; at 30–59 his ask is "One evening you'll sit with me, keep an old man company."
+- Row 66 (`vance_meeting`): his first meeting ends on "We'll talk properly some evening."
+- Row 65 (`town_event_vance`): "He lowers it to look at your legs when you pass."

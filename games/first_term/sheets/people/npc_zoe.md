@@ -1,5 +1,7 @@
 # [READY] Person — Zoe
 
+> **Changed 2026-11-02** (reader fails a3, signed by LO 2026-11-02, DECISIONS 131): rows 20, 21, 23, 36–41. Short skirt line: "Her eyes go down your bare legs to the hem, and she bites her lip." · "Now we're talking. Not here, babe." ("Later, babe." in her flat and bedroom). Canteen Mon–Wed: "Friday's coming, babe. Start planning." Class pool adds "Party's Friday. You're coming." Park dare, both branches: "Tomorrow I'm daring you again." (Sat) / "Next weekend I'm daring you again." (Sun); "again", not the sheet's "worse", because no worse park dare is built.
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): the hot tub at Bold · Showing, paying +3 cap 79; every dare the room watches, the park dare and the hollow at Hungry or Watched; "Let him watch." at Watched; her no moves a counter, not her meter; the locked dare shows "(Next release)". Sections changed: Ladder, the dares, Step 5, the park (new).
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the release-1 ladder, from `proposals/ZOE_R1_LADDER.md` (signed 2026-11-01). Changed: Ladder, the seven columns, Leak and promise, the dares, step 5, the party regulars. Everything else as signed.
@@ -20,7 +22,7 @@
 | where she sleeps | `zoe_bedroom` |
 | what she calls her | "babe" |
 | met | the quad, week 1: `zoe_00_quad_meeting` sets `zoe_met` |
-| her line: short skirt | "Now we're talking. Turn around." |
+| her line: short skirt | Her eyes go down her bare legs to the hem, and she bites her lip. "Now we're talking. Not here, babe." (in her flat and bedroom: "Later, babe.") |
 | her line: no bra | "Oh, you're ready for Friday." |
 | her line: her party dress | She bites her lip at the bra strap. "Nope. Eyes stay." |
 

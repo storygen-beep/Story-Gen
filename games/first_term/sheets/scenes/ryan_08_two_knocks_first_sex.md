@@ -118,17 +118,17 @@ positions or none is named. The `vaginal` rung on some oral or hand screens is t
 
 > You kneel up on his bed, facing the wall, and put your palms flat on it. Your wall, the one you listened through. The plaster is rough under your hands. You can feel the dents his headboard made. Ryan kneels behind you and grabs your ass. His cock slides between your cheeks, then down to your cunt. He pushes in deep in one stroke. You gasp against the wall. "Fuck," he breathes. He pulls back and slams in again. Your tits sway with every thrust. His headboard knocks the plaster next to your hands. *Kayla was right here.* His fingers dig into your hips. He fucks you deep and slow, then faster, his balls slapping your wet cunt.
 
-**`light`** · 122 words · explicit words 9 · median sentence 8
+**`light`** · 121 words · explicit words 9 · median sentence 8
 
-> "Harder," you gasp, and Ryan gives it to you. He fucks you so hard the bed shakes. The headboard bangs your wall on every stroke, loud. Across the hall, a line of light comes on under Laura's door. Ryan sees it. "Laura," he breathes. Ryan goes still for a second, his cock buried to the root in your cunt. Neither of you breathes. You clap a hand over your own mouth. *She's awake.* His cock throbs inside you. Your tits heave against your arm. Your wet cunt clenches around him on its own, and he swears through his teeth. His fingers dig into your ass. He's so deep you can feel him twitch. You squeeze his cock again, and his hips jerk once, deeper into your cunt.
+> "Harder," you gasp, and Ryan gives it to you. He fucks you so hard the bed shakes. The headboard bangs your wall on every stroke, loud. Across the hall, Laura's floorboards creak. Ryan hears it. "Laura," he breathes. Ryan goes still for a second, his cock buried to the root in your cunt. Neither of you breathes. You clap a hand over your own mouth. *She's awake.* His cock throbs inside you. Your tits heave against your arm. Your wet cunt clenches around him on its own, and he swears through his teeth. His fingers dig into your ass. He's so deep you can feel him twitch. You squeeze his cock again, and his hips jerk once, deeper into your cunt.
 
-**`keep`** · 131 words · explicit words 11 · median sentence 8
+**`keep`** · 132 words · explicit words 11 · median sentence 8
 
-> Ryan doesn't stop. His hand clamps over your mouth and he fucks you harder. Deep, fast strokes. His cock slams into your cunt so hard you see stars. The wall bangs. It bangs again. Across the hall, the line of light stays on under Laura's door. You moan into his palm and he presses tighter. "Quiet," he hisses. "Fuck. Quiet." You can't be. You're so wet you can hear it, a slick slap of skin on every stroke. His fingers dig into your ass. Your tits shake with every thrust. *She can hear this.* He doesn't slow down. Your cunt tightens on him and his rhythm breaks, ragged and hard. His cock swells and jerks inside you, right at the edge, and he grits his teeth to hold back his cum.
+> Ryan doesn't stop. His hand clamps over your mouth and he fucks you harder. Deep, fast strokes. His cock slams into your cunt so hard you see stars. The wall bangs. It bangs again. Across the hall, the floorboards creak again, closer, and stop at her door. You moan into his palm and he presses tighter. "Quiet," he hisses. "Fuck. Quiet." You can't be. You're so wet you can hear it, a slick slap of skin on every stroke. His fingers dig into your ass. Your tits shake with every thrust. *She can hear this.* He doesn't slow down. Your cunt tightens on him and his rhythm breaks, ragged and hard. His cock swells and jerks inside you, right at the edge, and he grits his teeth to hold back his cum.
 
 **`freeze`** · 135 words · explicit words 10 · median sentence 5
 
-> You both go still. His cock is buried deep in your cunt and neither of you moves. Your heart slams. You can feel his slamming too. You listen. Nothing across the hall. Just the line of light under Laura's door. Your cunt throbs around him and he grits his teeth. "Don't," he whispers. "Don't move." A minute. Longer. Then the light goes off. Dark under her door. Ryan breathes out. He starts again, slow. He pulls almost all the way out, then sinks back in, inch by inch. It's so slow you're shaking. *Fuck. Fuck, fuck.* You're dripping wet around him. Your tits ache. He does it again, slower, and his cock drags along every inch of you. Your thighs tremble and your cunt clenches on him, desperate, and he still won't fuck you faster.
+> You both go still. His cock is buried deep in your cunt and neither of you moves. Your heart slams. You can feel his slamming too. You listen. Across the hall, a floorboard creaks. Then nothing. Your cunt throbs around him and he grits his teeth. "Don't," he whispers. "Don't move." A minute. Longer. Then her steps go back across her room, and her bed creaks. Quiet. Ryan breathes out. He starts again, slow. He pulls almost all the way out, then sinks back in, inch by inch. It's so slow you're shaking. *Fuck. Fuck, fuck.* You're dripping wet around him. Your tits ache. He does it again, slower, and his cock drags along every inch of you. Your thighs tremble and your cunt clenches on him, desperate, and he still won't fuck you faster.
 
 **`inside`** · 125 words · explicit words 11 · median sentence 9
 
@@ -190,3 +190,11 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Fixes after
 | first sex in release 1 | LO, 2026-11-01 (DECISIONS 100) |
 | the whole late column | proposed in the same file; confirmed by LO 2026-11-01 ("Continue") |
 | the parked no, the flag names | proposed here, confirmed by LO 2026-11-01 ("Continue") |
+
+### False lines a3, 2026-11-02 (DECISIONS 129)
+Laura's lamp is already on 22:00–23:00, so a light "coming on" under her door was false on those visits. The near-catch
+is now a sound: in `light` her floorboards creak and Ryan hears it; in `keep` they creak again, closer, and stop at
+her door; in `freeze` a floorboard creaks, then her steps go back and her bed creaks. The after screen reads "Laura's
+room has gone quiet again". Re-measured with `gates.py --beat`: `light` 121 words, 9 explicit; `keep` 132, 11;
+`freeze` 135, 10. The branch map's "light" rows above are the record of the first version.
+

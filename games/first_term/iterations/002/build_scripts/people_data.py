@@ -209,7 +209,7 @@ ACTIVITIES = {
     "npc_business_lecturer": ["teaching Business", "teaching Business", "office hours"],
     "npc_bio_ta": ["teaching Biology", "teaching Biology", "office hours"],
     "npc_dean": ["in his office, early", "in his office"],
-    "npc_cocky_guy": ["at Zoe's party", "at Zoe's party"],
+    "npc_cocky_guy": ["at Zoe's party", "at Zoe's party", "in Figure drawing", "in Figure drawing"],
 }
 # The household is home from the first screen: no met gate (0.1 built them with none).
 _NO_MET = {"npc_ryan", "npc_laura", "npc_mark"}

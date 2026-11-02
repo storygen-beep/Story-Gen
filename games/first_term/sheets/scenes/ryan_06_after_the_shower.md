@@ -64,4 +64,4 @@ A hook line, proposed (LO asked whether a line solves it). Each line names a thi
 
 | node | the closing line (mine, signed) | what it points at |
 |---|---|---|
-| `comes` | "When you come out, his door is open a hand's width. It stays that way." | step 7 reads it (his door open every evening since the shower) |
+| `comes` | "When you come out, his door is open a hand's width." | false lines a3 #6 (DECISIONS 129): "It stays that way." cut; no screen shows his door open after this one |

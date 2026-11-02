@@ -1,5 +1,7 @@
 # [READY] Person — Jake
 
+> **Changed 2026-11-02** (reader fails a3, signed by LO 2026-11-02, DECISIONS 131): rows 30–34, Zoe's dress line adds his not-yet: "Later. When they're not looking." (`jake.py` JAKE_STATE).
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): the end of a date by SP2 stage: the grinding kiss in the car at Bold, his hand or hers with the street able to see at Hungry; step 4 pays +3 cap 79; the lock shows "(Next release)". Sections changed: Ladder note, the end of a date.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the release-1 ladder, from `proposals/JAKE_R1_LADDER.md` (signed 2026-11-01). Changed: Ladder, the seven columns, Leak and promise, step 4, the end of a date. Everything else as signed.
@@ -19,7 +21,7 @@
 | what he calls her | "@player" |
 | met | Zoe's first party (Zoe A 1) |
 | his line: short skirt | "Guys. Look at her." He says it to the team. |
-| his line: Zoe's dress | His eyes go down her legs and stay there. |
+| his line: Zoe's dress | His eyes go down her legs and stay there. "Later. When they're not looking." |
 | his line: Laura's dress | "Everyone was looking at you tonight." (at the door after a date only) · campus: "Is that your mom's?" |
 
 ## Crude words, by stage (SP2: "on their sheets")

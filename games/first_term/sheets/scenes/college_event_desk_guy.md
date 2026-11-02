@@ -1,5 +1,7 @@
 # [REVIEW]] Scene — college_event_desk_guy
 
+> **Changed 2026-11-02** (reader fails a3, signed by LO 2026-11-02, DECISIONS 131): row 27, the `watch` screen names her body: "Your thighs press together under the desk." after he shows her (`college.py`).
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
@@ -22,7 +24,7 @@
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
 |---|---|---|---|---|
 | `ask` | he leans in: "I'm hard. Help me out." | no | "Look." → `watch` · Bold: "Help him." → `hand` · "Not here." | none |
-| `watch` | Curious: she looks; he shifts so she can see | no (1–2 words) | → the class | none |
+| `watch` | Curious: she looks; he shifts so she can see; her thighs press together under the desk | no (1–2 words) | → the class | none |
 | `hand` | Bold: under the desk, her hand round his cock until he comes | yes | "Wipe your hand." → the class | corruption add +1 |
 
 ## The explicit screens, written

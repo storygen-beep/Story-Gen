@@ -103,7 +103,7 @@ out.append({
 #    a customer's hand stay (cafe_let_it, under an hour), at footfall 15 and name -5. ──
 _t3 = step_trigger(TM, 3, retry_days=1)
 # "this shift": the flag is stamped when the clock-out choice runs, before its 180 minutes pass, so under 4 hours
-_t3["conditions"]["items"].append({"type": "hours_since_flag", "subject": "player", "flag_key": "cafe_let_it", "operator": "lt", "value": 4})
+_t3["conditions"]["items"].append({"type": "hours_since_flag", "subject": "player", "flag_key": "cafe_let_it", "operator": "lt", "value": 3.5})   # false lines a3 #15: "off the floor" = within 30 minutes of clocking out
 WINDOW_DONE = dict(eff=[setv("tom_step", 3)], flags=[fset("tom_window_rule"), fset("tom_03b_done")])
 out.append({
     "id": "tom_03_not_by_the_window", "name": "Not by the window",
@@ -158,7 +158,7 @@ out.append({
             G(cond(UNIFORM, tod("08:00", "22:00")), POOL(D(TM, "Table three wants you, @player."), D(TM, "Smile. Table three's waiting."), D(TM, "Two lattes for six. Go."), pid="tom_counter_lines")),
             G(cond({"type": "worn_type", "operator": "neq", "value": "cafe_uniform"}), D(TM, "Day off? Then you're a customer. Sit where I can see you.")),
             # release 1, strict (tom_01_the_apron.md, his counter): he never tells her to show
-            G(cond(UNIFORM, {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "equipped"}), P("He looks once."), D(TM, "Your choice. Tables don't wait.")),
+            G(cond(UNIFORM, {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "equipped"}), P("He looks once, at your tits in it, and makes himself look at the till."), D(TM, "Your choice. Tables don't wait.")),   # reader a3 #59 (DECISIONS 131)
             G(cond(UNIFORM, {"type": "clothing_item", "item_id": "cafe_uniform_normal", "operator": "equipped"}),
               P("He reties your apron from behind on his way past. His knuckles brush your ass. He takes his hand back fast, like the knot burned him."), D(TM, "Tables first.")),
             G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}, UNIFORM), D(TM, "Apron on. Keep it on.")),
@@ -173,14 +173,18 @@ out.append({
             G(cond(tod("22:00", "23:00")), P("The sign's turned to CLOSED. Tom's putting the chairs up on the tables.")),
         ], [go("Back to work.", loc="cafe", mins=30, cond_=cond(UNIFORM, tod("08:00", "21:30"))),
             # a build addition (release 1): with the uniform rule cut, asking is the only way to the tight top; her choice
-            go("Ask for the tight top.", node="tight", mins=2,
+            go("Ask for the tight dress.", node="tight", mins=2,
                cond_=cond(trait("exhibitionism", "gte", 20), {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "not_owned"}, tod("08:00", "22:00"))),
             go("Sit at the counter a while.", loc="cafe", mins=20, cond_=cond({"type": "worn_type", "operator": "neq", "value": "cafe_uniform"}, tod("08:00", "21:30"))),
             go("Go.", loc="town")]),
-        node("tight", "The tight top", [
-            P("Tom reaches under the counter without a word and puts it on the counter between you: the black top, tighter than the dress and cut for your tits. His eyes go to your chest once. He makes them go back to the till."),
+        node("tight", "The tight dress", [
+            P("Tom reaches under the counter without a word and puts it on the counter between you: the black dress, tighter than the other one and cut for your tits. His eyes go to your chest once. He makes them go back to the till."),
             D(TM, "Your choice. They tip more for it. They grab more too."),
-        ], [go("Take it.", loc="cafe", mins=3, flags=[fset("uniform_sexy")], wardrobe=[{"action": "add", "item_id": "cafe_uniform_sexy"}])]),
+        ], [go("Take it.", loc="cafe", mins=3, flags=[fset("uniform_sexy")], wardrobe=[{"action": "add", "item_id": "cafe_uniform_sexy"}]),
+            # reader a3 #51 (DECISIONS 131): the written no. No pay: it's the uniform she turns down, not him.
+            go("Leave it on the counter.", node="leave_it", mins=1)]),
+        node("leave_it", "Not the dress", [D(TM, "Your call."), P("He folds it back under the counter without looking at it, or at you.")],
+             [go("Go.", loc="cafe", mins=1)]),
     ]})
 
 # ── Gary's hub (booth four, his hours) ──

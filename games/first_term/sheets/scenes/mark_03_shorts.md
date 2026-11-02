@@ -1,5 +1,7 @@
 # [REVIEW]] Scene — mark_03_shorts
 
+> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 16: under Exhibitionism 20 both openings (his Power version and hers) add his look: "His eyes go down your legs under the table." ("When you sit, ..." on his version, where he doesn't look up as she comes in). Built in `mark.py`.
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > **Changed 2026-11-01, signed by LO 2026-11-01 ("Signed")** (DECISIONS 99–115): Mark's release-1 ladder (`sheets/people/npc_mark.md`, signed). Changed: the gate is his step 2 and one short week, ever (Corruption 20, Exhibitionism 20 and his Want 20 dropped); her voice row. The screens stand as built.

@@ -1,5 +1,7 @@
 # [REVIEW]] Place — Garden
 
+> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 10: "Lie in the sun an hour. Let Mark look." needs Curious or Daring (two copies) and opens a short screen `sun_mark_look` with his reaction (beer low over his jeans; "You'll burn, @player." while the sun is up, "Fence is low, @player." after 19:00), clothes by the lounger's three slot checks. "Play up to Mark in the garage door." shows only bra-only; "Play up to Ryan's window." only bra-only or with the lotion open (Bold, his step 7), so neither lands on a screen with only "Not today.". Built in `home.py` (garden_sun).
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
@@ -50,3 +52,4 @@ bra and shorts · Showing, topless on her front.
 | off the hall, by the back door | LO, 2026-10-08 (question 49) · the hall is the hub |
 | 07:00–21:00, 1,500 words | LO, 2026-10-08 (question 49) |
 | the everyday rows | LO, 2026-10-08 (the everyday picks) · system `home_life` · times and numbers guess |
+

@@ -143,12 +143,14 @@ out.append({
         node("start", "Sunday", [
             G(cond(HIS),
               P("Mark doesn't look up from the envelope when you come in."),
-              D(M, "Shorts this time. Since you're reading my mail now.")),
+              D(M, "Shorts this time. Since you're reading my mail now."),
+              P("When you sit, his eyes go down your legs under the table.")),   # reader a3 #16 (DECISIONS 131)
             G(cond(HERS, trait("exhibitionism", "gte", 20)),
               P("Sunday. Mark's at the table with the envelope, and you know what he's going to ask for. You don't wait to be asked.")),
             # under Daring she waits, and he asks (reader: the screen promised an act she could not take)
             G(cond(HERS, trait("exhibitionism", "lt", 20)),
-              P("Sunday. Mark's at the table with the envelope. He looks you up and down, slow."), D(M, "Shorts next time. You know the ones.")),
+              P("Sunday. Mark's at the table with the envelope. He looks you up and down, slow."), D(M, "Shorts next time. You know the ones."),
+              P("His eyes go down your legs under the table.")),   # reader a3 #16 (DECISIONS 131)
         ], [
             go("\"Fine.\"", node="shorts", mins=5, cond_=cond(HIS, trait("exhibitionism", "gte", 20)), wardrobe=SHORTS_ON, eff=[nadd(M, "power", 3)]),   # her show: Daring (DECISIONS 124)
             go("\"I'm not changing for you.\"", node="no", mins=2, cond_=cond(HIS)),
@@ -448,6 +450,14 @@ MARK_TOWEL_DROP = [
 ]
 
 
+# reader a3 #5-6 (DECISIONS 131): "Get dressed." after "Come here." / "Stand there." (his Power 60+, her in the towel)
+MARK_TOWEL_NO = [
+    P("You hitch the towel tighter over your tits and turn for the stairs."),
+    D(M, "Suit yourself."),
+    P("He says it to your back. His eyes stay on the backs of your bare thighs all the way to the door, and he doesn't call you back."),
+]
+
+
 def mark_towel(cid, loc):
     return towel_set(
         cid, M, "power", 40, 60, "mark_towel_today", [npc_add(M, "power", 2), EXH1], loc,   # her slip pays her, like Ryan's (DECISIONS 124)
@@ -466,7 +476,9 @@ def mark_towel(cid, loc):
         slip_media=VID("a young woman letting her bath towel slip off her breasts in front of an older man on a couch", "girl drops towel in front of older man", "towel slip flash stepdad", pool_dir="sex/towel_mark_slip_t4"),
         slip_gate=(DARING, flag("mark_saw_her")), drop=MARK_TOWEL_DROP, drop_gate=[SHOWING, flag("mark_saw_her")],   # his chosen acts follow his accident (H2, DECISIONS 124)
         drop_media=VID("a young woman standing naked with her bath towel on the floor, an older man looking at her", "girl drops towel naked older man", "towel drop naked stepdad", pool_dir="sex/towel_mark_drop_t4"),
-        caught_by=L, caught=TOWEL_CAUGHT)
+        caught_by=L, caught=TOWEL_CAUGHT,
+        # reader a3 #5-6 (DECISIONS 131, call A): his order's no, in his top band; his Want +1 once a day
+        no=("Hitch the towel up.", MARK_TOWEL_NO, "home_ella_room", "Go up to your room."))
 
 
 def mark_hub(cid, loc, name, setting, extra=(), awake=True, leaks=(), items=(), leave="Leave him to it.", leave_to="home_hall", towel=False):
@@ -515,7 +527,7 @@ assert _hub["id"] == "hub_mark_living_room"
 _hub["nodes"][0]["choices"].insert(-1, go("Watch TV with him.", node="mremote"))
 _hub["nodes"] += [node("mremote", "The remote", [
         P("You take the other end of the couch, and he hands you the remote without looking."),
-    ], remote_choices("mch_", "madult") + [go("Leave him to it.", loc="home_hall")])]
+    ], remote_choices("mch_", "madult", adult_cond=cond(flag("mark_saw_her"))) + [go("Leave him to it.", loc="home_hall")])]   # reader a3 #1 (DECISIONS 131): channel 5 beside him after his accident, like "Leave it on."
 for cid, btn, lines, desc, qs, pool in CHANNELS:
     _hub["nodes"].append(node(f"mch_{cid}", btn.split(": ", 1)[1].rstrip(".").capitalize(),
         [POOL(*[P(x) for x in lines]), MARK_CH[cid], VID(desc, *qs, pool_dir=pool.replace("tv/", "tv/mark_"))],

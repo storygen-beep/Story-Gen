@@ -47,3 +47,7 @@
 | the invite flag name, the soak | LO took the guesses, 2026-10-08 |
 | inside Town | LO, 2026-10-08 (questions 43–45) |
 | Zoe's Saturday row here | LO, 2026-10-08 (sweep A4-08) |
+
+## Changed 2026-11-02 (reader a3, `READER_FAILS_A3.md`, signed by LO 2026-11-02; DECISIONS 131)
+
+- Rows 45, 54, 63 (`party_house_soak`, `toml_phases/3_activities.toml`). The kissing-friends draw is cut; the knee guy is the screen every time. His knee is her choice: "Move it away." (his line only) or "Leave it." (Corruption +1 and Exhibitionism +1, both capped at 59). Both end on his "Same tub next Saturday?" Note: the soak needs Exhibitionism 60, so the Exhibitionism +1 capped at 59 never moves.

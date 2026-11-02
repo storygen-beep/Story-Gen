@@ -170,9 +170,10 @@ def tv_pay(n, cap):
     return [{"targetType": "player", "trait": "corruption", "op": "add", "value": n, "cap": cap}]
 
 
-def remote_choices(prefix, adult_node):
+def remote_choices(prefix, adult_node, adult_cond=None):
+    # reader a3 #1 (DECISIONS 131): adult_cond gates channel 5 (Mark's hub: only after his accident, mark_saw_her)
     return [go(btn, node=f"{prefix}{cid}", mins=1) for cid, btn, *_ in CHANNELS] + \
-           [go("Channel 5: the adult channel.", node=adult_node, mins=1)]
+           [go("Channel 5: the adult channel.", node=adult_node, mins=1, cond_=adult_cond)]
 
 
 def watch_plain(back, extra_eff=()):
@@ -199,14 +200,17 @@ TOWEL_CAUGHT = [
 
 def towel_set(hub, npc, meter, lo, hi, today, pay, back, lines=(), slip=None, slip_label="Let it slip.",
               slip_gate=(DARING,), slip_lead=(), slip_media=None, drop=None, drop_gate=(), drop_media=None,
-              caught_by=None, caught=None, when=()):
+              caught_by=None, caught=None, when=(), no=None):
     """Returns (hub_blocks, hub_choices, nodes) for one hub.
 
     lines / slip: three lists of blocks, one per band (meter < lo, lo..hi-1, >= hi).
     drop: blocks for the top band only, behind drop_gate (Showing and a step).
     caught_by: an NPC whose rule the slip breaks when she is in the same room (Laura, 2_one_shots
       "not having the two of you in that hall in towels"): the slip goes to `towel_caught` instead,
-      her Love -3, no pay, and the day's flag still set."""
+      her Love -3, no pay, and the day's flag still set.
+    no: (label, blocks, dest, exit label) for the top band, his order's written no (reader a3 #5-8, DECISIONS 131,
+      call A): his Want +1, once a day through the same `today` flag the slip pays on; after that it
+      plays and pays nothing (the mark_tv_paid pattern). No new flag (call B)."""
     assert today in DAILY, today
     bands = [[ntrait(npc, meter, "lt", lo)],
              [ntrait(npc, meter, "gte", lo), ntrait(npc, meter, "lt", hi)],
@@ -240,6 +244,13 @@ def towel_set(hub, npc, meter, lo, hi, today, pay, back, lines=(), slip=None, sl
                           [*slip_lead, *[G(cond(*bands[i]), *bs) for i, bs in enumerate(slip)],
                            *([slip_media] if slip_media else [])],
                           back_out("Tuck it back in.")))
+    if no:   # reader a3 #5-8 (DECISIONS 131): the top band's no costs him Want +1, once a day
+        no_label, no_blocks, no_dest, no_exit = no
+        top = [*base, *bands[2]]
+        choices += [go(no_label, node="towel_no", mins=2, cond_=cond(*top, flag(today, False)),
+                       eff=[nadd(npc, "want", 1)], flags=[fset(today)]),
+                    go(no_label, node="towel_no", mins=2, cond_=cond(*top, flag(today)))]
+        nodes.append(node("towel_no", no_label.rstrip("."), list(no_blocks), [go(no_exit, loc=no_dest, mins=2)]))
     if drop:
         choices += paid("Drop it.", "towel_drop", [*bands[2], *drop_gate])
         nodes.append(node("towel_drop", "Drop it", [*drop, *([drop_media] if drop_media else [])],

@@ -44,3 +44,7 @@ No history words: the screen repeats.
 | after Zoe A 3 | guess: their first kiss comes first |
 | the prose | `v2-prose`, measured by `gates.py --beat`, 2026-10-08 |
 | "still panting from the run" only after `ran_with_zoe` (set by running with Zoe, read for 2 hours); otherwise she walked in, and the line says so | sweep A6-09 |
+
+## Changed 2026-11-02 (reader a3, `READER_FAILS_A3.md`, signed by LO 2026-11-02; DECISIONS 131)
+
+- Row 53. "Not here, Zo." no longer sets `park_cool_zoe`; it moves Zoe's Lust −1 (`pools.py`). Note: Zoe has no declared core traits (`people_data.py`, `core={}`), so her Lust starts at 0 and the −1 clamps there; nothing reads it yet. `party_cool_zoe` (the dare's no) is also set and never read.

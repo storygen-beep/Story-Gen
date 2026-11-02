@@ -1,5 +1,7 @@
 # [READY] Person — the Biology TA
 
+> **Changed 2026-11-02** (reader fails a3, signed by LO 2026-11-02, DECISIONS 131): rows 19, 35, her class hub (`hub_ta_class`): the 40+ grade lines add "My door's open afternoons."; the clothes lines end on "She starts to say \"come by my office\", and doesn't."
+
 > Signed by LO: LO, 2026-10-08.
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the place sheets. Id `npc_bio_ta`.

@@ -44,7 +44,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Fixes after
 
 **`hand`** · 126 words · explicit words 4 · median sentence 6 · act rungs: hands · Ryan's late column: ass, tits, cock, wet, cunt, fuck, cum
 
-> You knock twice. His door is already open a hand's width, so you push it the rest of the way. Ryan looks up from the bed. "@player.nickname. What are you doing?" You put both hands on his chest and shove him flat on the mattress. You yank his shorts down. His cock is already half hard. You wrap your hand around it and squeeze. "Jesus," he breathes. You stroke his cock slowly, base to tip, until it swells thick and hot in your fist. His balls pull tight. *Let her call. Let her call right now.* His phone buzzes on the bed beside him. Kayla's photo lights up the screen. CALLING. You keep pumping his cock, your knuckles an inch from his hip and her smile.
+> You knock twice and push his door open without waiting. Ryan looks up from the bed. "@player.nickname. What are you doing?" You put both hands on his chest and shove him flat on the mattress. You yank his shorts down. His cock is already half hard. You wrap your hand around it and squeeze. "Jesus," he breathes. You stroke his cock slowly, base to tip, until it swells thick and hot in your fist. His balls pull tight. *Let her call. Let her call right now.* His phone buzzes on the bed beside him. Kayla's photo lights up the screen. CALLING. You keep pumping his cock, your knuckles an inch from his hip and her smile.
 
 *The last sentence:* her fist on his cock, an inch from the lit phone. On the body; whether he answers is the next screen.
 

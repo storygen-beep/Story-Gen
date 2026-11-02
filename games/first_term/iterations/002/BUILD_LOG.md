@@ -1251,3 +1251,100 @@ sheets' own, and none is a tease, touch or paid look.
   devplay_clock, ryan8 pass. D flakes about 1 run in 4: Mark's random "reach" home event can fire in the kitchen on
   Sunday 09:00 before the rent table (older, not from this change). Rebuilt `--dev --debug`.
 - Media for LO's harvest: `sex/mark_laundry_bend_t4`, `sex/mark_laundry_wash_t4`.
+
+## 2026-11-02: False lines, pass a3 (DECISIONS 129; LO: "Signed")
+From `sheets/FALSE_LINES_A3.md`: the a2 reader's fails on "true on every visit" and "the numbers and the clothes agree".
+- Home: the shower pool no longer says "Nobody can see" (the lock only catches halfway); at Ryan's Want 40 the peek
+  itself has him keep looking ("He doesn't look at the floor"), so no "This time" sits after "He looks at the floor".
+  The garden opener says "lie down". The opening says "the café near campus" (`2_one_shots.toml`). Ryan 6 loses "It
+  stays that way."; Ryan 7's knock reads "His light is on under his door, and you both know why you're here." (and its
+  card). Ryan 8's near-catch is Laura's floorboards, not her light (her lamp is on 22:00–23:00): `light`, `keep` and
+  `freeze` rewritten in the sheet and re-measured (121 words, 9 explicit; 132, 11; 135, 10); the after screen reads
+  "Laura's room has gone quiet again"; the node and its video description follow.
+- Item 3 (Mark 3 with no exit) was already fixed in a2: her version has "I'm not changing for you." at every stage.
+  The sheet was wrong on it; `probe_a3` checks the button.
+- Out: `cafe_coffee` "Nobody here knows you."; Gary's shifts show only his own L3 screen (`L3_B`; the strangers' two
+  stay for the shifts he isn't in); the tight uniform is "the black dress"; the shop's skirt says "Curious or Daring" and
+  the sports bra loses the park line (`3_activities.toml`). Gates: the no-panties breeze needs no jeans, leggings or
+  shorts on; Tom 3 needs the shift to have ended within 30 minutes (`cafe_let_it` under 3.5 hours); `vance_meeting`
+  waits while his rent row has him at your front door (`npc_at_location home_front_door is_absent`, not "present on his
+  porch": before `vance_met` he has no porch row).
+- College: the cocky guy has Figure drawing rows in `v2_state.json` (Tue/Thu 08:30–10:00, Wed 13:00–14:30, after
+  `cocky_guy_met`), and a new face there, `hub_cocky_class` (needed by the gates "every person here has a face" and
+  "standing surface"). Hale 1 splits on `hale_met` / `nadia_met`. Hale 4's window ends 19:15. "Bye, Dr. Hale." Jake's
+  hubs say "Everyone's looking at you in that dress." (the date car keeps "tonight"). Zoe 2 has sports-bra lines;
+  the hot tub's "Go home" dresses her (`DRESS_DAY`); Zoe's "Start the song." dare draws `FLASH_SONG` ("Till the song
+  ends, babe", 108 words, 4 explicit) instead of the count of three; the park dare is "two long seconds".
+- Gates 61/89; "sinks >= sources" now passes too. New `probe_a3.py` 23/23. A, a2, B (updated for the floorboards),
+  C–I, devplay_clock, mark_laundry, ryan8 pass. `probe_shower.py` is stale (written before DECISIONS 124 changed the
+  weekday shower exits). Rebuilt `--dev --debug`.
+- Reader pass (`v2-reader`, truth and clothes, 28 canvases): 28 of 29 fixes hold. Fixed after it: item 20 really (the
+  "Sorry." link set `nadia_met` before the front row read it; Nadia, the desk guy and the rival are now met on the
+  front row's exits); Ryan 7's knock beat "You knock twice and push his door open without waiting." (116 words, 4
+  explicit); Ryan 8's knock drops "The house is dark." and its other finish reads "Laura's room is quiet again"; Tom's
+  button and screen say "the tight dress"; `hub_cocky_class` names him without Jake, makes no easel or arrival claim,
+  and its stay is "Talk a while.". Gates 61/89; probes a3 24/24 (first visit meets Nadia), A, a2, B, C–I, ryan8,
+  mark_laundry, devplay_clock pass.
+- Reader fails NOT fixed, new finds outside the signed list, for LO: the shower pool's "For ten minutes the house can't
+  get at you." after a peek or a bang; Hale 1's "while the room packs up" can run past 10:00 into Business; the exam's
+  and `meet_figure`'s "Jake's teammate" without `jake_met`, and `meet_figure`'s end easel with two neighbours;
+  `zoe_dares` `low_do` past his 02:00 row; Zoe 2's "under your top" in Laura's dress; the hot tub's "unhook your bra"
+  for a sports bra; Hale 4's "your top" in a dress. Full table: the session scratchpad `reader_first_term.md`.
+- The reader's 8 new finds, fixed (LO: "Yes fix them", then "Skip the play check", recorded on `a3_false_lines`):
+  the shower pool's third line "you stay under it longer than you should"; Hale 1 opens only to 08:55, so the hour
+  of lecture ends by 10:00 (the first Monday's dean path arrives at 08:52, checked live with `probe_hale1.py`); the art
+  midterm names "the cocky guy from Figure drawing" until `jake_met`; the first Figure drawing class takes "an easel
+  halfway round the horseshoe"; Zoe's dares end at 01:50, so a 10-minute yes lands before his 02:00 row ends; Zoe 2 has
+  a sports-bra line under a dress; the hot tub kiss opens "You get your bra off" (120 words, 9 explicit); Hale 4 says
+  "You pull everything up anyway." and "You pull everything back down over your tits." (feel: 116 words, 7 explicit).
+  Gates 61/89; probes a3 24/24, hale1 1/1, A, a2, B–I, ryan8, mark_laundry, devplay_clock pass. Rebuilt `--dev --debug`.
+
+## 2026-11-02: The release door (DECISIONS 130; LO: "Go ahead with your rec", "Skip the play check")
+- `ryan.py`: step 8's terms door is "Further." locked on Corruption 60 (shown locked; the engine prints "(Corruption 60+
+  (you have N))"). Open, a `further` screen: "Ryan's waiting for your answer. Whatever comes after it isn't written
+  yet." and "That's in the next release of First Term.", then "Back." to his terms. No `locked_text`: the gate "a locked
+  door says why" counts a label plus the engine's need as saying it twice. `v2_state.json` `release_page.door` now
+  names "Further.". The other "(Next release)" locks keep `NEXT_RELEASE`.
+- Gates 62/89: "ends on an opening" passes; nothing new fails. New `probe_door.py` 6/6 (locked at 45, open at 60, the
+  screen, back to his terms, 0 page errors). `probe_B.py` updated (at Corruption 65 the door is open), 11/11; A, a2,
+  C, E–I, a3, ryan8, mark_laundry, devplay_clock, hale1 pass; D flaked once on Mark's random reach event (older).
+  Rebuilt `--dev --debug`.
+
+## 2026-11-02: Reader fails, pass a3 (DECISIONS 131; LO: "Signed, go with your recs, skip the play check")
+From `sheets/READER_FAILS_A3.md` (68 rows from three `v2-reader` re-reads of the current build). Built by three agents
+on disjoint scripts (home: mark, ryan, laura, home, home_items, writer; college: college, hale, jake, zoe; out: extras,
+pools, town, tom, cafe, `3_activities.toml`), then one full build. Each change is commented `reader a3 #<row>`; each
+touched sheet has a dated note.
+- Calls as signed: hub nos cost his Want +1 with a line (Mark, Ryan, Vance; Laura's costs her Love −1); no new
+  counters; the five unwritten screens are written (the front step's "Let the street see.", the garden's "Let Mark
+  look.", the couch's "Stay a while." for Mark and Ryan, Laura's tidy tease, the park's walk). None is sex; measured.
+- Deviations: Zoe and the cocky guy have no Want stat, and the validator refuses one, so their nos (park, party wall,
+  art midterm) are his or her line only. Mark's towel no is "Hitch the towel up." (a "Get dressed." that moves no
+  garment fails "a button does something"). Laura's tidy tease says "your laundry … the little things" (the wardrobe
+  has no lace, and "your panties" off her body fails "her clothes are backed"). The front step's showing and Vance's
+  paid no are once a day (`street_step_today`, `vance_no_today` in `[engine.daily_tick]`): as free rungs they failed
+  "the climb is paid for". The hot tub's "Leave it." caps Exhibitionism at 79 (59 never moved at its E60 gate).
+  Hale's office lines and Zoe's park line were reworded to stay true ("Front row tomorrow", "Tomorrow I'm daring you
+  again"). The TA's held-back line is now her eyes on your chest (the first version repeated her door line).
+- Verify pass (`v2-reader`, all twelve tests, 55 canvases): 64 of 68 rows fixed; then fixed: the garden's "Play up to…"
+  only while `sunned` is unset; Laura's tidy tease only after her door or her shower was seen; `hub_cocky_class` has
+  a body line in any outfit, a price after the midterm, and no stale answers line; the park walk ends on her not-yet;
+  `laura_04` needs `laura_alone_seen` (her "Ryan." and "again" were unbacked on a shower-only path).
+- Gates 62/89 (no new fails). New `probe_rf.py` 17/17 (Channel 5 after his accident, the selfie at E20, the park hem
+  under E40, the whistle reply by stage, the front step once a day by daylight, Vance's no paid once a day). A, a2, a3,
+  B, C, E–I, ryan8, mark_laundry, door, hale1 pass. Rebuilt `--dev --debug`.
+- Open, older, for LO: `home_event_laura_robe` "She knows you know it." before `laura_04_done`; `zoe_02`'s "slides out
+  of your sleeve" in Zoe's dress; no hook below the stage on the robe, Mark's reach and Ryan's towel events; Ryan's
+  garden tease and lotion screens are still placeholders; `zoe_park_dare` still sets the unread `park_cool_zoe`; the
+  café strangers' audience at Corruption 40 (a stage call). Verify table: the session scratchpad `reader_a3_verify.md`.
+- The older reader rows (LO: "Skip the play check, fix the older ones too"): the robe's "She knows you know it." needs
+  `laura_04_done`; the robe, Mark's reach and Ryan's towel events each end on a forward thought below their stage
+  ("She's down here in that robe every weekday morning. So are you." · "Next time he reaches past you, you'll know
+  why." · "He's out of that bathroom at this time every weekday."); in Zoe's dress the bra slides out "through the
+  armhole"; `zoe_park_dare` no longer sets the unread `park_cool_zoe` (no longer declared); the café strangers' lap
+  (`L3_C`, the back table roars) only at Exhibitionism 60, `L3_A` below it (a room watching is Watched).
+- Correction: the earlier note said Ryan's garden tease and lotion screens were placeholders. They are not: `writer.py`
+  fills both (#34, #35) from the writer's signed screens, and the lotion button needs a bare back. A first attempt to
+  write them collided with that fill (the build asserted) and was reverted.
+- Gates 62/89; 0 PLACEHOLDER blocks in the build. Probes rf, A, a2, a3, B, C, E–I, ryan8, mark_laundry, door, hale1
+  pass; D 3/4 (Mark's random reach event before the Sunday table, as before). Rebuilt `--dev --debug`.

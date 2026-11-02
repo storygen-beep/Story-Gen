@@ -139,7 +139,7 @@ out.append({
             G(CURFEW_ON, G(cond(EVE), P("Mom's curfew. No evening shifts this week. Tom shrugs like it's your problem, because it is."))),
         ], choices + [go("Not today.", loc="cafe", mins=1)]),
         node("shift", "Three hours", [
-            G(cond(tod("11:00", "14:00")), P("The lunch rush hits all at once: twelve coffees, a birthday, a baby that screams through all of it. You carry plates until your arms burn. A man at table two tells you you've got a lovely smile and leaves his number on a napkin under the tip.")),
+            G(cond(tod("11:00", "14:00")), P("The lunch rush hits all at once: twelve coffees, a birthday, a baby that screams through all of it. You carry plates until your arms burn. A man at table two watches you bend over to set his plate down, and stops, eyes on your ass. He tells you you've got a lovely smile and leaves his number on a napkin under the tip.")),   # reader a3 #57 (DECISIONS 131)
             G(cond(tod("14:00", "18:00")), P("Slow afternoon. You wipe tables that are clean and refill sugar that's full, and the regulars at the counter watch your ass every time you bend over to do it. One of them pretends to read his phone the whole time, upside down.")),
             POOL(
                 P("A table of guys from the team come in and order nothing but coffee for an hour so they can watch you walk back and forth. Tom lets them. They tip like they're trying to impress each other."),
@@ -173,8 +173,10 @@ out.append({
              outcome_exits("l2_flirt", 6, 10, eff=[capped_e("corruption", 1, 39), add("cafe_footfall", 1), add("cafe_l2_shifts", 1)])),
         node("l2_no", "Not tonight", [P(L2_NO)], outcome_exits("l2_no", 2, 4)),   # her no never opens "Let it." (H5, DECISIONS 124)
         node("l3_let", "Let it", [
-            G(cond(GARY_IN), POOL(P(L3_A), P(L3_B), P(L3_C), pid="cafe_l3_gary", bag=True)),
-            G(cond(GARY_OUT), POOL(P(L3_A), P(L3_C), pid="cafe_l3_strangers", bag=True)),
+            G(cond(GARY_IN), P(L3_B)),   # false lines a3 #10 (DECISIONS 129): gary_let_it is set on his clock-out, so his shift shows his touch
+            # reader a3 older (heat ladder: a room watching is Watched, E60): the back table's lap only at Exhibitionism 60
+            G(cond(GARY_OUT, trait("exhibitionism", "lt", 60)), P(L3_A)),
+            G(cond(GARY_OUT, trait("exhibitionism", "gte", 60)), POOL(P(L3_A), P(L3_C), pid="cafe_l3_strangers", bag=True)),
             VID("a waitress letting a customer's hand stay on her as she serves, the manager watching from the counter", "customer grabs waitress ass she lets him", "waitress groped at table lets it happen", pool_dir="sex/cafe_l3_let_t4")],
              outcome_exits("l3_let", 10, 16, eff=[capped_e("corruption", 1, 59), capped_e("exhibitionism", 1, 59),
                                                   add("cafe_footfall", 1), add("cafe_name", -1)],

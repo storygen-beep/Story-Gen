@@ -1,5 +1,7 @@
 # [REVIEW]] Place — Front Door
 
+> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 3: "Let the street see." on the step (short skirt, Exhibitionism 60, 07:00-21:00) opens a short screen `street_sees`: her knees open, her panties or her bare cunt by her underwear slot, a man with his shopping who walks into a gate post, Vance if he is on his porch, a neighbour at her window with her phone. Pays Exhibitionism +1 (cap 79); the price is Mom's suspicion +2. Row 9: the two Exhibitionism 60 lines show only 07:00-21:00 (at night they sat beside "nobody stops"), and each gains a watcher and a not-yet ("Not yet."). Built in `iterations/002/build_scripts/home.py` (front_step).
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > Signed by LO: LO, 2026-10-08.

@@ -45,7 +45,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Shared brie
 
 **`feel`** · 117 words · explicit words 7 · median sentence 6 · act rungs: hands · one line changed after (", but you pull your top up anyway" became two sentences), re-measured
 
-> Dr. Hale locks the door and sits back in his chair. "Tell me what you feel, @player. Bare your tits first." You're scared. You're turned on too. You pull your top up anyway. He takes your tit in his hand. His thumb finds your nipple and circles it, slow. You go quiet. "Out loud," he says. "Your thumb. My nipple's going hard." *He's your professor. He's married.* His thumb doesn't stop. "Again." "It's hot. The heat goes all the way down." He listens like it's a lecture. Your other nipple is hard too, and you're wet. He rolls the nipple between finger and thumb. "Say it." "I'm wet. Your hand on my tit is making me wet."
+> Dr. Hale locks the door and sits back in his chair. "Tell me what you feel, @player. Bare your tits first." You're scared. You're turned on too. You pull everything up anyway. He takes your tit in his hand. His thumb finds your nipple and circles it, slow. You go quiet. "Out loud," he says. "Your thumb. My nipple's going hard." *He's your professor. He's married.* His thumb doesn't stop. "Again." "It's hot. The heat goes all the way down." He listens like it's a lecture. Your other nipple is hard too, and you're wet. He rolls the nipple between finger and thumb. "Say it." "I'm wet. Your hand on my tit is making me wet."
 
 *The last sentence:* her own words, his hand on her tit. On the body.
 
@@ -59,7 +59,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Shared brie
 
 **`knock`:** "The knock is two raps, light. A woman's voice through the door, bright." · Claire, outside: "You ready, love?" · "Dr. Hale takes his hand away, not fast. He doesn't look at the door. He looks at you." · Dr. Hale: "My wife. Same time next week, @player." · *(thought)* "You want to know what he'd do next."
 **`corridor`:** "You pull your clothes straight and pick up your bag. He unlocks the door for you." · "His wife is in the corridor in a neat coat, car keys in her hand. Her smile stops halfway when she sees you. Her eyes go to your face, and then past you, to the face-down photo on his desk." · Dr. Hale, behind you: "Claire. This is one of my students." · "You walk the whole corridor without looking back. Your legs are shaking."
-**`isnt`:** "You pull your top down over your tits." · @player: "This isn't coaching." · "He sits back in his chair." · Dr. Hale: "Then you'll stay at a C." · "He doesn't unlock the door until you're at it."
+**`isnt`:** "You pull everything back down over your tits." · @player: "This isn't coaching." · "He sits back in his chair." · Dr. Hale: "Then you'll stay at a C." · "He doesn't unlock the door until you're at it."
 **`run`:** "You grab your bag and you're out of the door before he can stand up. In the corridor a woman with short dark hair is coming the other way with car keys in her hand. The woman in the photo." · "She smiles at you, polite, the way you smile at a student." · *(thought)* "His wife. She has no idea."
 
 ## After it

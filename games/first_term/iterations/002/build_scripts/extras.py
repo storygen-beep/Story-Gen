@@ -16,7 +16,10 @@ out.append({
         P("You take the stool at the end of the counter, watching the room, the regulars, the door."),
         G(cond(NORMAL_ON), P("In the uniform, off shift, the regulars still wave you over for refills. You ignore them, but it's nice to be asked.")),
         G(cond(SEXY_ON), P("In the tight uniform the man at the counter can't decide between your tits and your ass, so he looks at both, and his newspaper ends up in his lap. He asks you for a refill. You're off shift, so no.")),
-        G(cond({"type": "worn_type", "operator": "neq", "value": "cafe_uniform"}, flag("tom_met", False)), P("Nobody here knows you when you're not in the apron. It's strange how much that changes.")),
+        # reader a3 #43 (DECISIONS 131): the pre-Tom render points at the job. The card is in the window until
+        # cafe_job_ask's "Take the uniform." sets tom_met (tom.py; "Sign stays up till somebody takes it.").
+        G(cond({"type": "worn_type", "operator": "neq", "value": "cafe_uniform"}, flag("tom_met", False)),
+          P("Nobody here knows you. Taped inside the window, the STAFF WANTED card has a coffee ring on it.")),
         G(cond({"type": "worn_type", "operator": "neq", "value": "cafe_uniform"}, flag("tom_met")), P("Out of the apron you're just a customer here, and Tom still clocks you from the till.")),
     ], [go("Drink it. ($3)", loc="cafe", mins=20, costs=[{"trait": "money", "value": 3}],
            eff=[{"targetType": "player", "trait": "energy", "op": "add", "value": 5, "cap": 100}]),

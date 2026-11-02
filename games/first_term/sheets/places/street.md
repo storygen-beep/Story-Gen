@@ -99,3 +99,11 @@ the next night.
 | the walk line by her clothes | guess · the wardrobe sheet |
 | travel shown in the description; the wait button; town events | LO, 2026-10-08 (picks 1, 2, 5) · questions 62, 65 · events and the 1 in 4 guess |
 | a flag per outing, cleared every night | LO's play note, 2026-10-08 · question 69 · sweep A1-17, A2-01, A2-02 |
+
+## Changed 2026-11-02 (reader a3, `READER_FAILS_A3.md`, signed by LO 2026-11-02; DECISIONS 131)
+
+- Row 49 (`town_event_whistle`): her answer to "Get in, baby. I'll give you a ride." reads her stage: "Not a chance." under Exhibitionism 40, "Not for a ride." from 40.
+- Row 56 (`town_event_whistle`, "Walk faster."): accepted, call B. No change.
+- Row 64 (`town_event_jogger`): "looks back over his shoulder at your ass, twice."
+- Row 65 (`town_event_vance`): "He lowers it to look at your legs when you pass."
+- All in `iterations/002/build_scripts/town.py`.

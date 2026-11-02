@@ -45,3 +45,8 @@ A hook line, proposed (LO asked whether a line solves it). Each line names a thi
 |---|---|---|
 | Mr. Vance | "He'll be on his porch tomorrow evening. He always is." | his porch row, every evening; his Lust rises each time she passes, so his line changes |
 | the corner-shop guy, a car | (no line: nothing of theirs comes next) | the street's "You're the girl from the café." at footfall 10 is the hook there |
+
+## Changed 2026-11-02 (reader a3, `READER_FAILS_A3.md`, signed by LO 2026-11-02; DECISIONS 131)
+
+- Rows 46–48 (hook). The corner-shop render now closes on "He'll be out front tomorrow." (the shop opens every day 07:00–22:00, `corner_shop.md`). Both car renders close on "The same car's parked at the corner the next time you look." (one line). This replaces the 2026-11-01 "no line" row above. Built in `iterations/002/build_scripts/town.py` (`SHOP_NEXT`, `CAR_NEXT`).
+- Row 55 (the no-panties offers refused in narration): accepted, call B. No change.

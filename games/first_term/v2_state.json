@@ -453,8 +453,8 @@
     ],
     "door": {
       "canvas": "ryan_08_two_knocks_first_sex",
-      "choice": "Further. (Next release)",
-      "locked_next": "Ryan's step 9, Kayla in the house, shown locked: \"Further. (Next release)\" (npc_ryan.md, DECISIONS 124)"
+      "choice": "Further.",
+      "locked_next": "Ryan's step 9, Kayla in the house, shown locked on Corruption 60: \"Further.\"; open, it says the next release holds it (npc_ryan.md, DECISIONS 124, 130)"
     },
     "reader": {
       "ryan_01_hall_first_morning": {
@@ -7696,6 +7696,27 @@
             "to": "02:00",
             "when": "cocky_guy_met",
             "note": "the same party after midnight (LO, 2026-10-08)"
+          },
+          {
+            "where": "lecture_hall",
+            "weekdays": [
+              "Tue",
+              "Thu"
+            ],
+            "from": "08:30",
+            "to": "10:00",
+            "when": "cocky_guy_met",
+            "note": "Figure drawing: he talks at the next easel and the next desk (false lines a3 #17-19, DECISIONS 129)"
+          },
+          {
+            "where": "lecture_hall",
+            "weekdays": [
+              "Wed"
+            ],
+            "from": "13:00",
+            "to": "14:30",
+            "when": "cocky_guy_met",
+            "note": "Figure drawing, Wednesday (false lines a3 #17-19, DECISIONS 129)"
           }
         ]
       },
@@ -8259,6 +8280,51 @@
         "played": {
           "at": "2026-11-02 13:38",
           "note": "skipped by LO: \"Skip the play check\" (commit and push, he plays it on his phone)"
+        }
+      },
+      {
+        "id": "a3_false_lines",
+        "what": "False lines pass a3: 29 signed fixes built, plus five reader follow-ups (DECISIONS 129)",
+        "built_at": "2026-11-02 15:23",
+        "played": {
+          "at": "2026-11-02 16:13",
+          "note": "skipped by LO: Skip the play check"
+        }
+      },
+      {
+        "id": "a3_reader_followups",
+        "what": "The reader's 8 new false lines after pass a3: shower, Hale 1 window, midterm, easel, dares window, Zoe 2, hot tub, Hale 4",
+        "built_at": "2026-11-02 16:45",
+        "played": {
+          "at": "2026-11-02 17:43",
+          "note": "skipped by LO: Skip the play check"
+        }
+      },
+      {
+        "id": "release_door",
+        "what": "The release door: Ryan 8's Further. locked on Corruption 60, opens to the next-release screen (DECISIONS 130)",
+        "built_at": "2026-11-02 17:49",
+        "played": {
+          "at": "2026-11-02 18:11",
+          "note": "skipped by LO: Signed, go with your recs, skip the play check"
+        }
+      },
+      {
+        "id": "reader_fails_a3",
+        "what": "Reader fails pass a3: 68 rows (DECISIONS 131) plus the verify fixes",
+        "built_at": "2026-11-02 18:57",
+        "played": {
+          "at": "2026-11-02 19:20",
+          "note": "skipped by LO: Skip the play check, fix the older ones too"
+        }
+      },
+      {
+        "id": "reader_older_rows",
+        "what": "The older reader rows: robe gate, three event hooks, Zoe's armhole, park_cool_zoe gone, cafe strangers at E60",
+        "built_at": "2026-11-02 19:27",
+        "played": {
+          "at": "2026-11-02 19:34",
+          "note": "skipped by LO: Skip the play gate"
         }
       }
     ]
