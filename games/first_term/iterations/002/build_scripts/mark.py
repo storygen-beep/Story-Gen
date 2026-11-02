@@ -486,8 +486,6 @@ def mark_hub(cid, loc, name, setting, extra=(), awake=True, leaks=(), items=(), 
     t_blocks, t_choices, t_nodes = mark_towel(cid, loc) if towel else ([], [], [])
     for args, kw in items:
         c, n = item(*args, **kw); choices += c; nodes += n
-    if any(kw.get("hungry") for _, kw in items):
-        nodes.append(hungry_node(loc))
     return {"id": cid, "name": name,
             "description": f"Mark's hub: {setting}. His Want and Power colour it; his lines read what she wears.",
             "trigger": {"location": loc, "npc": M, "requires_npc": M, "is_repeatable": True, "priority": 6,
@@ -509,8 +507,7 @@ out.append(mark_hub("hub_mark_living_room", LR, "Mark, up late", "the living roo
       [P("The game on low."), G(cond(LAURA_IN_BED), D(M, "Laura's upstairs. Keep it down.")), P("He hands you a can without asking.")],
       None, 30),
      dict(done_exits=[go("Done.", loc=LR, mins=30, flags=[fset("had_drink_home")], mods=DRINK)],   # plain: no Lust (DECISIONS 128)
-          tease=m_tease(108, "late TV and a beer", "Curl up on the couch."), touch=m_paid(108, "late TV and a beer"),
-          hungry="Further. (Next release)")),
+          tease=m_tease(108, "late TV and a beer", "Curl up on the couch."), touch=m_paid(108, "late TV and a beer"))),
     (("film", "Put a film on with him.", [tod("22:00", "00:00")], "movie_night", LR,
       [P("He lets you pick. He falls asleep in the second half, and you watch the end with his snoring for a soundtrack.")],
       [energy(5)], 120), {}),
@@ -605,7 +602,7 @@ out.append(mark_hub("hub_mark_kitchen", K, "Mark, in the kitchen", "the kitchen"
       [P("He slides the paper over."), G(cond(flag("rent_starts"), flag("sunday_counted_today", False)), D(M, "Eat, @player. Then the rent.")),
        G(cond(flag("sunday_counted_today")), D(M, "Eat, @player.")), G(cond(flag("rent_starts", False)), D(M, "Eat, @player."))],
       [energy(10)], 15),
-     dict(tease=m_tease(104, "Sunday breakfast"), touch=m_paid(104, "Sunday breakfast"), hungry="Further. (Next release)")),
+     dict(tease=m_tease(104, "Sunday breakfast"), touch=m_paid(104, "Sunday breakfast"))),
     (("dinner", "Sit down to dinner.", [wd(0, 1, 2, 3, 4, 6), tod("18:00", "20:00")], "ate_dinner", K,
       [G(cond(wd(0, 1, 3, 4, 6)), P("Burnt chops."), D(M, "Your mother cooks. I fill plates.")),
        G(cond(wd(2)), P("Chilli, again."), D(M, "It's always chilli. Eat it.")),

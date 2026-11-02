@@ -77,14 +77,15 @@ POOLS = {
         "tired": "Too tired to hold the charcoal straight. Doze, or skip."},
 }
 
-def class_row(cid, name, subj, grade, schedules, lecturer, meet_flags, opening, beside, risky_label, risky_text, hungry_label, extra_blocks=(),
+def class_row(cid, name, subj, grade, schedules, lecturer, meet_flags, opening, beside, risky_label, risky_text, extra_blocks=(),
               pools=None, chat_beside=None):
-    """One class visit (the college sheet's rows): Focus · Chat · Doze · Skip · the risky slot,
-    and the next stage's button shown locked, naming Corruption 60 (SP7 call 1). Once per class window."""
+    """One class visit (the college sheet's rows): Focus · Chat · Doze · Skip · the risky slot.
+    No button for a stage this release does not write (LO 2026-11-03: "dont even show the option").
+    Once per class window."""
     eyes_line = pools["eyes"]
     return {
         "id": cid, "name": name,
-        "description": f"{subj} class: Focus (energy 10, {grade} +2, intelligence +1) · Chat · Doze (energy +5) · Skip ({grade} -2) · the risky slot (Daring) · Hungry shown locked.",
+        "description": f"{subj} class: Focus (energy 10, {grade} +2, intelligence +1) · Chat · Doze (energy +5) · Skip ({grade} -2) · the risky slot (Daring).",
         "trigger": {"location": "lecture_hall", "is_repeatable": True, "priority": 5, "is_active": True,
                     "max_triggers_per_day": 1, "schedules": at_start(schedules), "conditions": cond(flag("opening_done"))},
         "nodes": [
@@ -104,15 +105,12 @@ def class_row(cid, name, subj, grade, schedules, lecturer, meet_flags, opening, 
                 go(risky_label, node="risky", mins=0, flags=meet_flags,
                    cond_=cond(trait("exhibitionism", "gte", 20), {"type": "clothing_slot", "slot": "bra", "operator": "equipped"}, {"type": "worn_type", "operator": "eq", "value": "short_skirt"}),
                    eff=[{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": CAP_BOLD}]),
-                go(hungry_label, node="hungry", swl=True, cond_=cond(NEXT_RELEASE)),
                 go("Skip it.", loc="campus", mins=0, eff=[add(grade, -2)]),
             ]),
             node("focus", "Focus", [POOL(*[P(t) for t in pools["focus"]]), *beside], [go("Pack up.", loc="lecture_hall", mins=90)]),
             node("chat", "Chat", [*(beside if chat_beside is None else chat_beside), POOL(*[P(t) for t in pools["chat"]])], [go("Pack up.", loc="lecture_hall", mins=90)]),
             node("doze", "Doze", [POOL(*[P(t) for t in pools["doze"]])], [go("Wake up.", loc="lecture_hall", mins=90)]),
             node("risky", "Let them look", [P(risky_text)] if isinstance(risky_text, str) else list(risky_text), [go("Pack up, slowly.", loc="lecture_hall", mins=90)]),
-            node("hungry", "Further", [P(NEXT_RELEASE_TEXT)],
-                 [go("Back to the class.", node="class", mins=0)]),
         ]}
 
 # ── Psychology (Hale; Nadia beside her; the guy beside her, the rival) ──
@@ -134,7 +132,7 @@ out.append(class_row(
         [P("You sit in the front row and don't fold your arms over your chest, and don't cross your legs. Dr. Hale lectures to the back wall for ninety minutes, and every time he forgets and looks down at your thighs, his voice goes. Nadia kicks your foot under the desk, grinning.")],
         P("As the room packs up, he says it without looking at you."),
         D(H, "Sit like that again, @player, and we'll talk about your grade.")),
-    "Under the desk, with the class there. (Next release)", pools=POOLS["psych"]))
+    pools=POOLS["psych"]))
 
 # ── Business (strict; the rival; the study guy) ──
 out.append(class_row(
@@ -154,7 +152,7 @@ out.append(class_row(
         [P("You lean back in your chair and stretch, slowly, arms over your head, so what you're wearing pulls tight across your tits. From the row behind, the guy can see straight down it. He stops highlighting.")],
         [P("You lean back in your chair and stretch, slowly, and your skirt rides up your thighs. The guy in the row behind leans sideways to see more. He stops highlighting.")],
         P("Every time the lecturer turns from the board you sit up straight. He'd write you up for less. Two seats down, a girl watches him watching you, and her mouth gets thinner and thinner.")),
-    "Make the whole row look. (Next release)", pools=POOLS["business"]))
+    pools=POOLS["business"]))
 
 # ── Biology (the shy TA; Zoe; the cocky guy) ──
 out.append(class_row(
@@ -171,7 +169,7 @@ out.append(class_row(
         [P("You sit up straight in the second row with your shoulders back, and don't fold your arms. Your tits show through what you're wearing. The TA sees. She drops her pen, picks it up, drops it again.")],
         [P("You sit with your knees apart in the second row and don't fix your skirt. The TA can see right up it. She drops her pen, picks it up, drops it again.")],
         P("She spends the rest of the class looking very hard at her slides, her neck pink all the way down to her collar. Twice she opens her mouth to say something about it, and doesn't.")),
-    "Let the whole lab see. (Next release)", pools=POOLS["bio"]))
+    pools=POOLS["bio"]))
 
 # ── Figure drawing (the model, nude; the art lecturer; Zoe; the cocky guy) — the pose beat every class ──
 POSE = ("The model drops her robe on the platform and steps up naked under the lamp. She sits on the stool and turns her shoulder to the room. Her tits are heavy. They sway when she settles. Her nipples are dark and tight in the cold air. Your charcoal follows the curve of her ass where it spreads on the stool. You draw her thighs, pressed together, and the soft crease between them. You can't stop looking. Your face burns. Your own nipples go hard. The lecturer walks the rows behind you. \"Look at the weight of her,\" she says. \"Draw that.\"")
@@ -193,13 +191,7 @@ fig = class_row(
         [P("You lean into your easel, slow, and your skirt rides up the backs of your thighs. The guy behind you gives up on the model completely.")],
         P("The lecturer stops behind you, looks at your drawing, looks at you."),
         D(ART, "Clothes stay on in my class, @player. Unless you're on the platform.")),
-    "Pose for the class. (Next release)", pools=POOLS["figure"], chat_beside=[])
-# posing nude for the class is Watched (SP2 §1: the stage turns on how many see her)
-fig["nodes"][0]["choices"][[i for i, c in enumerate(fig["nodes"][0]["choices"]) if c["text"].startswith("Pose")][0]] = go("Pose for the class. (Next release)", node="watched", swl=True, cond_=cond(NEXT_RELEASE))
-# its own screen, naming the stage the button names (iteration 002, part 8, reader)
-fig["nodes"] = [n for n in fig["nodes"] if n["id"] != "hungry"]   # its only link now goes to "watched"
-fig["nodes"].append(node("watched", "Further", [P(NEXT_RELEASE_TEXT)],
-                         [go("Back to the class.", node="class", mins=0)]))
+    pools=POOLS["figure"], chat_beside=[])
 # reader a3 #25-26 (DECISIONS 131): the risky screen's title names one watcher here too
 next(n for n in fig["nodes"] if n["id"] == "risky")["name"] = "Let him look"
 out.append(fig)

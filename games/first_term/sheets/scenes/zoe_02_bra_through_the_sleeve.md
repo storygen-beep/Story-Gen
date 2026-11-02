@@ -44,3 +44,13 @@ This step sets `party_house_invite`, which opens the party house (nothing set it
 | the invite flag here | guess (fix 1, the flag check) |
 
 > Changed 2026-11-02 (reader a3, older rows; DECISIONS 131; LO: "fix the older ones too"): in Zoe's dress the bra slides out through the armhole, not a sleeve.
+
+
+## Changed 2026-11-03 (LO: "Go"; DECISIONS 133)
+
+- Not the night of step 1: the balcony waits 24 hours after `zoe_01_done`.
+- Only with a yes on screen: Daring (Exhibitionism 20) for the bra; or Curious (Corruption 20) under Daring with Jake's
+  teammate at the party, where "Dare me something else." is the only yes (its own copy, `zoe_02_balcony_curious`).
+- "You chickened out on me last time." now reads her no on this balcony (`zoe_balcony_refused`), not her no at the
+  first party. The balcony's no moves `zoe_refused` +1.
+- The card adds the goal "Reach Daring (Exhibitionism 20), or Curious (Corruption 20) with Jake's teammate at the party".

@@ -247,8 +247,7 @@ out.append({
             D(H, "Twenty minutes, @player."),
         ], [go("Let him.", node="roll", mins=1, eff=[{"targetType": "player", "trait": "hale_claire_roll", "op": "set", "value": {"type": "random", "min": 1, "max": 4}}]),
             go("\"This isn't coaching.\"", node="isnt", mins=2, eff=[add("grade_psych", -1)]),
-            go("Run.", node="run", mins=1, eff=[add("grade_psych", -2)]),
-            go("Hale, further. (Next release)", node="door", swl=True, cond_=cond(NEXT_RELEASE))]),
+            go("Run.", node="run", mins=1, eff=[add("grade_psych", -2)])]),
         node("roll", "His hands", [P("He comes round the desk.")],
             [go("Go on.", node="claire_car", mins=1, cond_=cond(ROLL("eq", 1)))]
             + [go("Go on.", node="touch_low", mins=1, cond_=cond(ROLL("gte", 2), *c)) for c in LOW_CASES]

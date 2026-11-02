@@ -193,7 +193,6 @@ out.append({
             go("\"Come up.\"", node="sneak", mins=5, cond_=cond(trait("jake_step", "gte", 4)),
                eff=[{"targetType": "player", "trait": "jake_catch_roll", "op": "set", "value": {"type": "random", "min": 1, "max": 8}}]),
             go("\"Goodnight, Jake.\"", node="night", mins=2),
-            go("Jake, further. (Next release)", node="door", swl=True, cond_=cond(NEXT_RELEASE)),
         ]),
         node("car_low", "The car", [*top_or_dress(beat("jake_date_end", "car_low")),
             VID("a couple making out in a parked car at night, windows fogging", "couple making out parked car night", "car makeout outside her house", pool_dir="sex/jake_car_low_t4")],

@@ -77,7 +77,9 @@ out.append({
             P("She puts her head on your shoulder on the couch and says it into your ear, like a secret:"),
             D(Z, "Kiss someone. Or don't, and I'll keep asking."),
         ], [
-            go("\"Not tonight, Zo.\"", node="no_dare", mins=5, flags=[fset("party_went")], eff=[add("zoe_refused", 1)]),   # a no pays her nothing (H5, DECISIONS 124)
+            # a no pays her nothing (H5, DECISIONS 124), and it is not her step 1 (LO 2026-11-03, DECISIONS 133):
+            # it still meets Jake; she asks again on a later Friday (zoe_01b_kiss_again)
+            go("\"Not tonight, Zo.\"", node="no_dare", mins=5, flags=[fset("party_went"), fset("zoe_kiss_refused")], eff=[add("zoe_refused", 1)]),
             go("Kiss Zoe.", node="kiss_zoe", mins=5, cond_=cond(CURIOUS), flags=[fset("party_went")], eff=[add("exhibitionism", 3)]),
             go("Kiss the guy who's staring.", node="jake", mins=5, cond_=cond(CURIOUS), flags=[fset("party_went"), fset("jake_kissed")], eff=[add("exhibitionism", 3)]),
         ]),
@@ -96,13 +98,52 @@ out.append({
             G(cond(PARTY_DRESS), P("His eyes go down your legs in Zoe's dress and stay there.")),
             P("Zoe sits on the arm of the couch watching the two of you with her drink and an unreadable face."),
         ], [
-            go("\"Here's my number.\"", loc="zoe_apartment", mins=30, consumes=True,
+            go("\"Here's my number.\"", loc="zoe_apartment", mins=30, consumes=True, cond_=cond(flag("zoe_kiss_refused", False)),
                eff=[setv("zoe_step", 1), setv("jake_step", 1)], flags=[done(1), fset("jake_met"), fset("jake_number")]),
+            go("\"Here's my number.\"", loc="zoe_apartment", mins=30, consumes=True, cond_=cond(flag("zoe_kiss_refused")),
+               eff=[setv("jake_step", 1)], flags=[fset("jake_met"), fset("jake_number")]),
             go("\"Not tonight.\"", node="jake_no", mins=2),
         ]),
         node("jake_no", "Not tonight", [D(J, "Wasn't planning to give up."), P("He grins and goes back to his team, but he looks over every time you laugh.")],
-             [go("Back to the party.", loc="zoe_apartment", mins=20, consumes=True,
-                 eff=[setv("zoe_step", 1), setv("jake_step", 1)], flags=[done(1), fset("jake_met")])]),
+             [go("Back to the party.", loc="zoe_apartment", mins=20, consumes=True, cond_=cond(flag("zoe_kiss_refused", False)),
+                 eff=[setv("zoe_step", 1), setv("jake_step", 1)], flags=[done(1), fset("jake_met")]),
+              go("Back to the party.", loc="zoe_apartment", mins=20, consumes=True, cond_=cond(flag("zoe_kiss_refused")),
+                 eff=[setv("jake_step", 1)], flags=[fset("jake_met")])]),
+    ]})
+
+# ── step 1 again · her kiss dare, a later Friday, after a no (LO 2026-11-03: "I think dare refusal shouldn't be
+#    counted as done"; DECISIONS 133). Only from Curious: the kiss is Curious, so below it every yes is hidden. ──
+AT_PARTY_Z = {"type": "hours_since_flag", "subject": "player", "flag_key": "party_went", "operator": "lt", "value": 8}
+KISS_DONE = dict(eff=[setv("zoe_step", 1)], flags=[done(1)])
+out.append({
+    "id": "zoe_01b_kiss_again", "name": "Same dare",
+    "description": "Zoe step 1 after a no at her first party: a later Friday party, from Curious, she asks the kiss again. A yes is her step 1; a no parks it a week.",
+    "trigger": {"location": "zoe_apartment", "npc": Z, "requires_npc": Z, "is_repeatable": False, "priority": 10, "is_active": True,
+                "consume_on": "exit", "retry_after_days": 7,
+                "schedules": [{"weekdays": [DAYS["Fri"]], "start_time": "19:00", "end_time": "23:00"}],
+                "conditions": cond(trait("zoe_step", "eq", 0), flag("zoe_kiss_refused"), CURIOUS, AT_PARTY_Z,
+                                   {"type": "hours_since_flag", "subject": "player", "flag_key": "zoe_kiss_refused", "operator": "gte", "value": 24})},
+    "nodes": [
+        node("ask", "Same dare", [
+            P("Zoe finds you on the couch, drops into your lap sideways and hooks an arm round your neck."),
+            D(Z, "You chickened out on me last time. Same dare. Kiss someone. I told you I'd keep asking."),
+            # zoe_refused counts her nos; from the second no to the kiss Zoe says she's counting (true: only kiss nos come before step 1)
+            G(cond(trait("zoe_refused", "gte", 2)), D(Z, "That's twice you've said no, babe. I'm counting.")),
+        ], [
+            go("Kiss Zoe.", node="kiss_zoe", mins=5, eff=[add("exhibitionism", 3)]),
+            go("Kiss the guy by the speakers.", node="kiss_guy", mins=5, eff=[add("exhibitionism", 3)]),
+            go("\"Not tonight, Zo.\"", node="no", mins=2),
+        ]),
+        node("kiss_zoe", "Zoe", [
+            P("You turn in her lap and kiss her. She's ready for it this time. Her mouth opens under yours, her tongue finds yours, and her hand goes straight up your thigh to your hem and stays there. Somebody whoops. She pulls back first, breathing hard, her eyes on your mouth."),
+            D(Z, "Okay. Okay. Worth the wait, babe."),
+        ], [go("Back to the party.", loc="zoe_apartment", mins=15, consumes=True, **KISS_DONE)]),
+        node("kiss_guy", "The guy by the speakers", [
+            P("You get up, cross the room to a guy by the speakers you've never seen before, and kiss him. He's surprised for half a second. Then his hands are on your hips, pulling you into him, his tongue's in your mouth, and one hand slides down onto your ass and squeezes. Somebody whoops. When you let him go he just stares at you."),
+            D(Z, "Babe! Okay! Told you I'd keep asking."),
+        ], [go("Back to the party.", loc="zoe_apartment", mins=15, consumes=True, **KISS_DONE)]),
+        no_node("no", [D(Z, "Boo. Next Friday, then. I'm not giving up on you."), P("She slides off your lap and goes to dance.")],
+                "zoe_apartment", 7, eff=[add("zoe_refused", 1)]),
     ]})
 
 # ── step 2 · Zoe A 2 · bra through the sleeve ──
@@ -112,8 +153,8 @@ out.append({
     "trigger": step_trigger(Z, 2, retry_days=7),
     "nodes": [
         node("balcony", "The balcony", [
-            # her no at the first party is remembered (zoe_refused; DECISIONS 124: a no moves a counter, never her meter)
-            G(cond(trait("zoe_refused", "gte", 1)), D(Z, "You chickened out on me last time. Not tonight, babe.")),
+            # her no on this balcony is remembered (DECISIONS 133; step 1's no has its own re-ask, zoe_01b_kiss_again)
+            G(cond(flag("zoe_balcony_refused")), D(Z, "You chickened out on me last time. Not tonight, babe.")),
             # Iteration 002, part 8 (reader): the strap only when there is one.
             G(cond({"type": "clothing_slot", "slot": "bra", "operator": "equipped"}),
               P("Zoe pulls you out onto the balcony, away from the noise. The glass door is behind you and the whole party is on the other side of it. She leans on the rail and looks at the strap on your shoulder and doesn't look anywhere else.")),
@@ -147,7 +188,8 @@ out.append({
              [go("Laugh with her.", node="mine2", mins=3, eff=[add("exhibitionism", 3)])]),
         node("mine2", "Saturday", [D(Z, "There's a hot tub Saturday. At the party house. Just us. Well. Just us and some people."), T("She keeps looking at your chest. She keeps not asking.")],
              [go("\"Saturday.\"", loc="zoe_apartment", mins=5, consumes=True, eff=[setv("zoe_step", 2)], flags=[done(2), fset("party_house_invite")])]),
-        no_node("no", [D(Z, "Boo. Fine. I'll think of a worse one."), P("She goes back inside and leaves the balcony door open behind her.")], "zoe_apartment", 7),
+        no_node("no", [D(Z, "Boo. Fine. I'll think of a worse one."), P("She goes back inside and leaves the balcony door open behind her.")], "zoe_apartment", 7,
+                eff=[add("zoe_refused", 1)], flags=[fset("zoe_balcony_refused")]),
         node("kiss", "Kiss him", [
             D(Z, "Fine. Kiss the cocky guy. Properly."),
             *top_or_dress(beat("zoe_dares", "low_do")),
@@ -494,6 +536,35 @@ cards.insert(0, {"npc_id": Z, "priority": 10, "text": "The girl from your Biolog
                  "ready_canvas": "zoe_00_quad_meeting"})
 story = []
 
+# Step 2 (DECISIONS 133): not the night of step 1 (24 hours after zoe_01_done), and only when a yes shows:
+# Daring takes the bra dare; Curious under Daring takes "Dare me something else." when the cocky guy is there.
+# The engine has no nested OR in a trigger, so the Curious case is its own copy of the balcony with the kiss route.
+import copy
+_s2 = next(c for c in out if c["id"] == "zoe_02_bra_through_the_sleeve")
+_s2["trigger"]["conditions"]["items"].append({"type": "hours_since_flag", "subject": "player", "flag_key": "zoe_01_done", "operator": "gte", "value": 24})
+_s2c = copy.deepcopy(_s2)
+_s2["trigger"]["conditions"]["items"].append(trait("exhibitionism", "gte", 20))
+_s2c["id"] = "zoe_02_balcony_curious"
+_s2c["description"] = "Zoe step 2, Curious under Daring: the balcony dare when only \"Dare me something else.\" can be a yes (the cocky guy is at the party). Same screens as zoe_02_bra_through_the_sleeve."
+_s2c["trigger"]["conditions"]["items"] += [trait("exhibitionism", "lt", 20), CURIOUS, flag("cocky_guy_met"),
+    {"type": "npc_at_location", "location_id": "zoe_apartment", "npc_id": "npc_cocky_guy", "operator": "is_present"}]
+_s2c["nodes"] = [n for n in _s2c["nodes"] if n["id"] in ("balcony", "kiss", "saturday", "no")]
+_s2c["nodes"][0]["choices"] = [c for c in _s2c["nodes"][0]["choices"] if c.get("nodeId") not in ("sleeve", "already")]   # Daring-only
+out.insert(out.index(_s2) + 1, _s2c)
+_c1 = next(c for c in cards if c.get("ready_canvas") == "zoe_01_first_party")
+_c1["when"].append({"flag": "zoe_kiss_refused", "op": "is_false"})
+cards.insert(cards.index(_c1) + 1, {"npc_id": Z, "priority": 10,
+    "text": "You said no to her kiss dare. She said she'd keep asking.",
+    "tip": "A Friday party at Zoe's, 7 to 11 PM",
+    "when": [{"type": "trait", "subject": "player", "trait": "zoe_step", "op": "eq", "value": 0},
+             {"flag": "zoe_kiss_refused", "op": "is_true"}],
+    "goals": [{"type": "trait", "subject": "player", "trait": "corruption", "op": "gte", "value": 20, "label": "Reach Curious (Corruption 20)"}],
+    "ready_canvas": "zoe_01b_kiss_again"})
+_c2 = next(c for c in cards if c.get("ready_canvas") == "zoe_02_bra_through_the_sleeve")
+_c2["tip"] += "; Daring, or Curious when Jake's teammate is at the party"
+_c2.setdefault("goals", []).append({"type": "trait", "subject": "player", "trait": "exhibitionism", "op": "gte", "value": 20,
+    "label": "Reach Daring (Exhibitionism 20), or Curious (Corruption 20) with Jake's teammate at the party"})
+
 text = ("# =============================================================================\n"
         "# First Term — 5 · scenes · ZOE (sheets/scenes/zoe_0*.md, people/npc_zoe.md)\n"
         "# Her meeting, steps 1-4 (step 1 is also Jake's step 1), her hubs, her cards, the meeting nudge.\n"
@@ -501,7 +572,7 @@ text = ("# =====================================================================
 # Iteration 002, part 3: leaving this outing after 22:00 sets late_party and came_home_late (Q69,
 # the street sheet "Why she's late"; canv.mark_late). Each is read for 4 hours; her bed clears them.
 for _c in out:
-    if _c["id"] in ['zoe_01_first_party', 'zoe_02_bra_through_the_sleeve', 'zoe_03_hot_tub']:
+    if _c["id"] in ['zoe_01_first_party', 'zoe_01b_kiss_again', 'zoe_02_bra_through_the_sleeve', 'zoe_02_balcony_curious', 'zoe_03_hot_tub']:
         mark_late(_c, 'late_party', split=True)
 
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards + story)
