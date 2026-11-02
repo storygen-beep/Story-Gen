@@ -484,11 +484,15 @@ cards = step_cards(Z, {
     5: ("Party nights are hers. Four dares, and she stops daring.", "After a Friday party, past midnight (Bold)"),
 }, met_flag="zoe_met", terminal_text=("Her dares, every Friday: she joins in now.", "Zoe's next dare. (Next release)"))
 
-story = [{"group": "story_goals", "priority": 15, "text": "Someone from your Biology class hangs out on the quad in the afternoons.",
-          "tip": "The quad, on Tuesday, Thursday or Friday afternoon.",
-          "when": [{"flag": "opening_done", "op": "is_true"}, {"days_since_flag": "opening_done", "op": "gte", "value": 1},
-                   {"flag": "zoe_met", "op": "is_false"}],
-          "goals": [{"flag": "zoe_met", "op": "is_true", "label": "Find the girl from Biology on the quad, Tuesday, Thursday or Friday afternoon"}]}]
+# Her meeting card, on her own row under People from the day the opening ends (LO 2026-11-02: "zoe should have
+# a npc card"), the way Dr. Hale's step-1 card points at his first lecture. It was a Story Goals card in group
+# story_goals, where the priority-20 "Week one" card won the group for days 0-6: nothing pointed at her in week
+# one, though her meeting fires from the first Tuesday.
+cards.insert(0, {"npc_id": Z, "priority": 10, "text": "The girl from your Biology class hangs out on the quad in the afternoons.",
+                 "tip": "The quad, Tuesday, Thursday or Friday, 14:30 to 18:00",
+                 "when": [{"flag": "opening_done", "op": "is_true"}, {"flag": "zoe_met", "op": "is_false"}],
+                 "ready_canvas": "zoe_00_quad_meeting"})
+story = []
 
 text = ("# =============================================================================\n"
         "# First Term — 5 · scenes · ZOE (sheets/scenes/zoe_0*.md, people/npc_zoe.md)\n"

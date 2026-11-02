@@ -44,6 +44,10 @@ Both answers count; the second gives his Power add −5: she pushed back (as bui
 | `tray`, thought (Corruption under 20) | "Pretty is worth money here. Is that all you are to him? A tip?" | "He's your boss. Do the job." |
 | `tray`, thought (20 and over) | "Pretty is worth money here. You can do pretty." | "You felt that second. So did he." |
 
+**His hiring card** (LO 2026-11-02, "Yes all three"): until `cafe_job`, his row under People reads "The café in
+town is hiring." · tip "The café in town, Monday to Saturday, 8 AM to 11 PM" · it points at `cafe_job_ask`. Before
+it, only the "Week one" story card named the job, and it is gone after 7 days.
+
 **His hire line** (`cafe_job_ask`, `tom.py:41-47`):
 
 | built | new |

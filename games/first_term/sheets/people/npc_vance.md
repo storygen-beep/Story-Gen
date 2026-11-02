@@ -27,6 +27,10 @@
 
 None in 0.1. His arc is later; the porch look and the knock are in 0.1.
 
+**His meeting card** (LO 2026-11-02, "Yes all three"): before `vance_met`, his row under People reads "Next door: the
+man who owns your house watches the street." · tip "The street, an evening, 6 to 10 PM" · it points at
+`vance_meeting`. Before it, the meeting was found only by chance, and nothing pointed at his porch or his knock.
+
 ## Phone thread
 
 None in 0.1. Not someone she is involved with in 0.1.

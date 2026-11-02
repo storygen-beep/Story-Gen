@@ -579,3 +579,6 @@ One line per built piece, in LO's words, written by `pieces.py played`.
 - 2026-11-02 · release_door · played by LO: "skipped by LO: Signed, go with your recs, skip the play check"
 - 2026-11-02 · reader_fails_a3 · played by LO: "skipped by LO: Skip the play check, fix the older ones too"
 - 2026-11-02 · reader_older_rows · played by LO: "skipped by LO: Skip the play gate"
+- 2026-11-02 · zoe_meeting_card · played by LO: "skipped by LO: Yes build it, skip the play check"
+- 2026-11-02 · pointer_cards · played by LO: "skipped by LO: Yes all three the go ahead"
+- 2026-11-03 · card_labels · played by LO: "skipped by LO: Yes fix the labels too, skip the play check"
