@@ -423,8 +423,8 @@ and a cleanup that expires dates she did not attend.
 That is this file's rule stated as architecture, and it is why that system does not read as bolted on.
 
 **The engine has the primitive.** A chat reply choice carries `effects`,
-`flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2876`).
-`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:7383`) pushes
+`flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2902`).
+`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:7469`) pushes
 onto `game_state.scheduled`; the day tick decrements `daysLeft` and fires at zero
 (`v2.py:6998-6999`), where `setup.fireScheduledEvent` (`v2.py:7397`) can set a flag, start a quest,
 or deliver a conversation.

@@ -235,8 +235,7 @@ add_item("breakfast", "Have breakfast with her.", WEEKDAY_AM, "ate_breakfast", K
          [D(L, "Eat something before class, sweetheart."), P("She pushes the toast over and puts a second mug down beside it."),
           G(cond(flag("had_coffee", False)), D(L, "Tell me one thing about yesterday."))],
          None, 15, done_exits=[go("Eat.", loc=K, mins=15, flags=[fset("ate_breakfast")], eff=[energy(10), warm(L)])] + COFFEE_EXITS,
-         tease=l_tease(86, "breakfast"), touch=l_touch(86, "breakfast"),
-         hungry="Further. (Next release)")
+         tease=l_tease(86, "breakfast"), touch=l_touch(86, "breakfast"))
 # One dinner, every evening she cooks (Mon, Tue, Thu, Fri, Sun 18:00-20:00). Sunday dinner reads
 # room_tidy and clears it (npc_laura.md:96; home_ella_room.md:41): +2 tidy, -1 messy on top of dinner's +1.
 NOT_SUN = wd(0, 1, 3, 4)
@@ -359,7 +358,6 @@ add_item("study", "Study at the kitchen table.", HER_EVE + [tod("19:00", "22:00"
                                for key, name in (("grade_psych", "Psychology"), ("grade_business", "Business"),
                                                  ("grade_bio", "Biology"), ("grade_art", "Figure drawing"))],
          )
-hub_nodes.append(hungry_node(K))
 # ── the towel at home (LO, 2026-10-31, DECISIONS 98): her reaction by her Love, every visit (<40, 40-69,
 #    70+, her hub's own cut points); "Let her fix it." pays her Love +2 once a day. No Daring gate: it's a
 #    mother fussing, not a tease. In her room only while she's up and dressing. ──

@@ -78,7 +78,7 @@ def npc_add(npc, key, n):
 
 
 def item(prefix, label, when, key, back, plain_blocks, plain_eff, mins,
-         tease=None, touch=None, hungry=None, done_exits=None, plain_costs=None, teases=()):
+         tease=None, touch=None, done_exits=None, plain_costs=None, teases=()):
     """One home_life item in a hub.
 
     when: condition items for the hub choice (hours, weekday, who's there).
@@ -104,8 +104,6 @@ def item(prefix, label, when, key, back, plain_blocks, plain_eff, mins,
         # a spec with `blocks` carries its written screen; without, the signed line is a marked hole
         body = list(spec["blocks"]) if spec.get("blocks") else [placeholder(spec["ref"], spec.get("what", kind))]
         nodes.append(node(sub, spec.get("name", kind.title()), body, [go("Done.", loc=back, mins=mins)]))
-    if hungry:
-        exits.append(go(hungry, node="hl_hungry", swl=True, cond_=cond(NEXT_RELEASE)))
     # One way out free of every cap and cost (gate: a spent day still has a door, the-surfaces.md R7).
     exits.append(go("Not now.", loc="home_hall"))
     for c in exits:
@@ -135,13 +133,6 @@ DRINK = [{"key": "drinks_boost", "name": "Tipsy", "duration_hours": 3,
 MADE_UP = [flag("made_up"), since("made_up", "lt", 10)]
 NORMAL_ON = {"type": "clothing_item", "item_id": "cafe_uniform_normal", "operator": "equipped"}
 SEXY_ON = {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "equipped"}
-
-
-def hungry_node(back):
-    """The screen behind every "(Needs Corruption 60)" choice, as the college classes have it."""
-    return node("hl_hungry", "Further", [
-        P(NEXT_RELEASE_TEXT),
-    ], [go("Back.", loc=back)])
 
 
 # The remote (DECISIONS 85-86, living_tv_channels.md), shared by home.py's TV alone and Mark's hub.

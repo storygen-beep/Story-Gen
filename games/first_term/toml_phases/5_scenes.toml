@@ -1507,14 +1507,6 @@ locationId = "home_hall"
 time_progression_minutes = 2
 flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
 
-[[canvases.nodes.exit_block.choices]]
-text = "Further. (Next release)"
-targetType = "node"
-nodeId = "door"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "release_2_written", operator = "gte", value = 1 }] }
-show_when_locked = true
-locked_text = "Further. (Next release)"
-
 [[canvases.nodes]]
 id   = "start"
 name = "His room"
@@ -2943,14 +2935,6 @@ flagEffects = [{ targetType = "player", flag = "watched_tv", op = "set" }]
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "watched_tv", operator = "is_false" }] }
 
 [[canvases.nodes.exit_block.choices]]
-text = "Further. (Next release)"
-targetType = "node"
-nodeId = "hl_hungry"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "release_2_written", operator = "gte", value = 1 }] }
-show_when_locked = true
-locked_text = "Further. (Next release)"
-
-[[canvases.nodes.exit_block.choices]]
 text = "Not now."
 targetType = "location"
 locationId = "home_hall"
@@ -2984,22 +2968,6 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 text = "Not now."
 targetType = "location"
 locationId = "home_hall"
-
-[[canvases.nodes]]
-id   = "hl_hungry"
-name = "Further"
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "That's in the next release of First Term."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text = "Back."
-targetType = "location"
-locationId = "home_living_room"
 
 [[canvases.nodes]]
 id   = "towel_slip"
@@ -4696,14 +4664,6 @@ effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap
 flagEffects = [{ targetType = "player", flag = "had_coffee", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Further. (Next release)"
-targetType = "node"
-nodeId = "hl_hungry"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "release_2_written", operator = "gte", value = 1 }] }
-show_when_locked = true
-locked_text = "Further. (Next release)"
-
-[[canvases.nodes.exit_block.choices]]
 text = "Not now."
 targetType = "location"
 locationId = "home_hall"
@@ -5531,22 +5491,6 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 text = "Not now."
 targetType = "location"
 locationId = "home_hall"
-
-[[canvases.nodes]]
-id   = "hl_hungry"
-name = "Further"
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "That's in the next release of First Term."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text = "Back."
-targetType = "location"
-locationId = "home_kitchen"
 
 [[canvases.nodes]]
 id   = "towel_slip"
@@ -8264,14 +8208,6 @@ effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add",
 flagEffects = [{ targetType = "player", flag = "had_drink_home", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Further. (Next release)"
-targetType = "node"
-nodeId = "hl_hungry"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "release_2_written", operator = "gte", value = 1 }] }
-show_when_locked = true
-locked_text = "Further. (Next release)"
-
-[[canvases.nodes.exit_block.choices]]
 text = "Not now."
 targetType = "location"
 locationId = "home_hall"
@@ -8325,22 +8261,6 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 text = "Not now."
 targetType = "location"
 locationId = "home_hall"
-
-[[canvases.nodes]]
-id   = "hl_hungry"
-name = "Further"
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "That's in the next release of First Term."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text = "Back."
-targetType = "location"
-locationId = "home_living_room"
 
 [[canvases.nodes]]
 id   = "towel_slip"
@@ -9419,14 +9339,6 @@ effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add",
 flagEffects = [{ targetType = "player", flag = "ate_breakfast", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Further. (Next release)"
-targetType = "node"
-nodeId = "hl_hungry"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "release_2_written", operator = "gte", value = 1 }] }
-show_when_locked = true
-locked_text = "Further. (Next release)"
-
-[[canvases.nodes.exit_block.choices]]
 text = "Not now."
 targetType = "location"
 locationId = "home_hall"
@@ -9708,22 +9620,6 @@ text = "Done."
 targetType = "location"
 locationId = "home_kitchen"
 time_progression_minutes = 20
-
-[[canvases.nodes]]
-id   = "hl_hungry"
-name = "Further"
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "That's in the next release of First Term."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text = "Back."
-targetType = "location"
-locationId = "home_kitchen"
 
 [[canvases.nodes]]
 id   = "towel_slip"
@@ -11078,7 +10974,7 @@ targetType = "node"
 nodeId = "no_dare"
 time_progression_minutes = 5
 effects = [{ targetType = "player", trait = "zoe_refused", op = "add", value = 1 }]
-flagEffects = [{ targetType = "player", flag = "party_went", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "party_went", op = "set" }, { targetType = "player", flag = "zoe_kiss_refused", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Kiss Zoe."
@@ -11188,20 +11084,40 @@ text = "\"Here's my number.\""
 targetType = "location"
 locationId = "zoe_apartment"
 time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_kiss_refused", operator = "is_false" }, { type = "time_of_day", start_time = "22:00", end_time = "06:00" }] }
 effects = [{ targetType = "player", trait = "zoe_step", op = "set", value = 1 }, { targetType = "player", trait = "jake_step", op = "set", value = 1 }]
 flagEffects = [{ targetType = "player", flag = "zoe_01_done", op = "set" }, { targetType = "player", flag = "jake_met", op = "set" }, { targetType = "player", flag = "jake_number", op = "set" }, { targetType = "player", flag = "late_party", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
 consumes = true
-conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "22:00", end_time = "06:00" }] }
 
 [[canvases.nodes.exit_block.choices]]
 text = "\"Here's my number.\""
 targetType = "location"
 locationId = "zoe_apartment"
 time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_kiss_refused", operator = "is_false" }, { type = "time_of_day", start_time = "06:00", end_time = "22:00" }] }
 effects = [{ targetType = "player", trait = "zoe_step", op = "set", value = 1 }, { targetType = "player", trait = "jake_step", op = "set", value = 1 }]
 flagEffects = [{ targetType = "player", flag = "zoe_01_done", op = "set" }, { targetType = "player", flag = "jake_met", op = "set" }, { targetType = "player", flag = "jake_number", op = "set" }]
 consumes = true
-conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "06:00", end_time = "22:00" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Here's my number.\""
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_kiss_refused", operator = "is_true" }, { type = "time_of_day", start_time = "22:00", end_time = "06:00" }] }
+effects = [{ targetType = "player", trait = "jake_step", op = "set", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "jake_met", op = "set" }, { targetType = "player", flag = "jake_number", op = "set" }, { targetType = "player", flag = "late_party", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
+consumes = true
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Here's my number.\""
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_kiss_refused", operator = "is_true" }, { type = "time_of_day", start_time = "06:00", end_time = "22:00" }] }
+effects = [{ targetType = "player", trait = "jake_step", op = "set", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "jake_met", op = "set" }, { targetType = "player", flag = "jake_number", op = "set" }]
+consumes = true
 
 [[canvases.nodes.exit_block.choices]]
 text = "\"Not tonight.\""
@@ -11230,8 +11146,127 @@ text = "Back to the party."
 targetType = "location"
 locationId = "zoe_apartment"
 time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_kiss_refused", operator = "is_false" }, { type = "time_of_day", start_time = "22:00", end_time = "06:00" }] }
 effects = [{ targetType = "player", trait = "zoe_step", op = "set", value = 1 }, { targetType = "player", trait = "jake_step", op = "set", value = 1 }]
 flagEffects = [{ targetType = "player", flag = "zoe_01_done", op = "set" }, { targetType = "player", flag = "jake_met", op = "set" }, { targetType = "player", flag = "late_party", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
+consumes = true
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the party."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_kiss_refused", operator = "is_false" }, { type = "time_of_day", start_time = "06:00", end_time = "22:00" }] }
+effects = [{ targetType = "player", trait = "zoe_step", op = "set", value = 1 }, { targetType = "player", trait = "jake_step", op = "set", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "zoe_01_done", op = "set" }, { targetType = "player", flag = "jake_met", op = "set" }]
+consumes = true
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the party."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_kiss_refused", operator = "is_true" }, { type = "time_of_day", start_time = "22:00", end_time = "06:00" }] }
+effects = [{ targetType = "player", trait = "jake_step", op = "set", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "jake_met", op = "set" }, { targetType = "player", flag = "late_party", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
+consumes = true
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the party."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_kiss_refused", operator = "is_true" }, { type = "time_of_day", start_time = "06:00", end_time = "22:00" }] }
+effects = [{ targetType = "player", trait = "jake_step", op = "set", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "jake_met", op = "set" }]
+consumes = true
+
+[[canvases]]
+id   = "zoe_01b_kiss_again"
+name = "Same dare"
+description = "Zoe step 1 after a no at her first party: a later Friday party, from Curious, she asks the kiss again. A yes is her step 1; a no parks it a week."
+
+[canvases.trigger]
+location = "zoe_apartment"
+npc = "npc_zoe"
+requires_npc = "npc_zoe"
+is_repeatable = false
+priority = 10
+is_active = true
+consume_on = "exit"
+retry_after_days = 7
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "zoe_step", operator = "eq", value = 0 }, { type = "flag", subject = "player", flag_key = "zoe_kiss_refused", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "hours_since_flag", subject = "player", flag_key = "party_went", operator = "lt", value = 8 }, { type = "hours_since_flag", subject = "player", flag_key = "zoe_kiss_refused", operator = "gte", value = 24 }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [4]
+start_time = "19:00"
+end_time = "23:00"
+
+[[canvases.nodes]]
+id   = "ask"
+name = "Same dare"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Zoe finds you on the couch, drops into your lap sideways and hooks an arm round your neck."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "You chickened out on me last time. Same dare. Kiss someone. I told you I'd keep asking."
+props = { speaker = "npc", npcId = "npc_zoe" }
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "zoe_refused", operator = "gte", value = 2 }] }, blocks = [{ type = "dialog", content = "That's twice you've said no, babe. I'm counting.", props = { speaker = "npc", npcId = "npc_zoe" } }] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Kiss Zoe."
+targetType = "node"
+nodeId = "kiss_zoe"
+time_progression_minutes = 5
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 3 }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Kiss the guy by the speakers."
+targetType = "node"
+nodeId = "kiss_guy"
+time_progression_minutes = 5
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 3 }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Not tonight, Zo.\""
+targetType = "node"
+nodeId = "no"
+time_progression_minutes = 2
+
+[[canvases.nodes]]
+id   = "kiss_zoe"
+name = "Zoe"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You turn in her lap and kiss her. She's ready for it this time. Her mouth opens under yours, her tongue finds yours, and her hand goes straight up your thigh to your hem and stays there. Somebody whoops. She pulls back first, breathing hard, her eyes on your mouth."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Okay. Okay. Worth the wait, babe."
+props = { speaker = "npc", npcId = "npc_zoe" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the party."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 15
+effects = [{ targetType = "player", trait = "zoe_step", op = "set", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "zoe_01_done", op = "set" }, { targetType = "player", flag = "late_party", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
 consumes = true
 conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "22:00", end_time = "06:00" }] }
 
@@ -11239,10 +11274,81 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", 
 text = "Back to the party."
 targetType = "location"
 locationId = "zoe_apartment"
-time_progression_minutes = 20
-effects = [{ targetType = "player", trait = "zoe_step", op = "set", value = 1 }, { targetType = "player", trait = "jake_step", op = "set", value = 1 }]
-flagEffects = [{ targetType = "player", flag = "zoe_01_done", op = "set" }, { targetType = "player", flag = "jake_met", op = "set" }]
+time_progression_minutes = 15
+effects = [{ targetType = "player", trait = "zoe_step", op = "set", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "zoe_01_done", op = "set" }]
 consumes = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "06:00", end_time = "22:00" }] }
+
+[[canvases.nodes]]
+id   = "kiss_guy"
+name = "The guy by the speakers"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You get up, cross the room to a guy by the speakers you've never seen before, and kiss him. He's surprised for half a second. Then his hands are on your hips, pulling you into him, his tongue's in your mouth, and one hand slides down onto your ass and squeezes. Somebody whoops. When you let him go he just stares at you."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Babe! Okay! Told you I'd keep asking."
+props = { speaker = "npc", npcId = "npc_zoe" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the party."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 15
+effects = [{ targetType = "player", trait = "zoe_step", op = "set", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "zoe_01_done", op = "set" }, { targetType = "player", flag = "late_party", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
+consumes = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "22:00", end_time = "06:00" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the party."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 15
+effects = [{ targetType = "player", trait = "zoe_step", op = "set", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "zoe_01_done", op = "set" }]
+consumes = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "06:00", end_time = "22:00" }] }
+
+[[canvases.nodes]]
+id   = "no"
+name = "No"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Boo. Next Friday, then. I'm not giving up on you."
+props = { speaker = "npc", npcId = "npc_zoe" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She slides off your lap and goes to dance."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 3
+effects = [{ targetType = "player", trait = "zoe_refused", op = "add", value = 1 }]
+retry_after_days = 7
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "22:00", end_time = "06:00" }] }
+flagEffects = [{ targetType = "player", flag = "late_party", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 3
+effects = [{ targetType = "player", trait = "zoe_refused", op = "add", value = 1 }]
+retry_after_days = 7
 conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "06:00", end_time = "22:00" }] }
 
 [[canvases]]
@@ -11259,7 +11365,7 @@ consume_on = "exit"
 retry_after_days = 7
 npc = "npc_zoe"
 requires_npc = "npc_zoe"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "zoe_step", operator = "eq", value = 1 }, { type = "modifier", modifier_key = "drinks_boost", operator = "is_inactive" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "zoe_step", operator = "eq", value = 1 }, { type = "modifier", modifier_key = "drinks_boost", operator = "is_inactive" }, { type = "hours_since_flag", subject = "player", flag_key = "zoe_01_done", operator = "gte", value = 24 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
 
 [[canvases.trigger.schedules]]
 weekdays = [4]
@@ -11273,7 +11379,7 @@ name = "The balcony"
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "zoe_refused", operator = "gte", value = 1 }] }, blocks = [{ type = "dialog", content = "You chickened out on me last time. Not tonight, babe.", props = { speaker = "npc", npcId = "npc_zoe" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_balcony_refused", operator = "is_true" }] }, blocks = [{ type = "dialog", content = "You chickened out on me last time. Not tonight, babe.", props = { speaker = "npc", npcId = "npc_zoe" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -11462,15 +11568,18 @@ text = "Go."
 targetType = "location"
 locationId = "zoe_apartment"
 time_progression_minutes = 3
+effects = [{ targetType = "player", trait = "zoe_refused", op = "add", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "zoe_balcony_refused", op = "set" }, { targetType = "player", flag = "late_party", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
 retry_after_days = 7
 conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "22:00", end_time = "06:00" }] }
-flagEffects = [{ targetType = "player", flag = "late_party", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Go."
 targetType = "location"
 locationId = "zoe_apartment"
 time_progression_minutes = 3
+effects = [{ targetType = "player", trait = "zoe_refused", op = "add", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "zoe_balcony_refused", op = "set" }]
 retry_after_days = 7
 conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "06:00", end_time = "22:00" }] }
 
@@ -11577,6 +11686,183 @@ props = { speaker = "npc", npcId = "npc_zoe" }
 type = "thought_bubble"
 content = "She keeps looking at your chest. She keeps not asking."
 props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Saturday.\""
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 5
+effects = [{ targetType = "player", trait = "zoe_step", op = "set", value = 2 }]
+flagEffects = [{ targetType = "player", flag = "zoe_02_done", op = "set" }, { targetType = "player", flag = "party_house_invite", op = "set" }, { targetType = "player", flag = "late_party", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
+consumes = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "22:00", end_time = "06:00" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Saturday.\""
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 5
+effects = [{ targetType = "player", trait = "zoe_step", op = "set", value = 2 }]
+flagEffects = [{ targetType = "player", flag = "zoe_02_done", op = "set" }, { targetType = "player", flag = "party_house_invite", op = "set" }]
+consumes = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "06:00", end_time = "22:00" }] }
+
+[[canvases]]
+id   = "zoe_02_balcony_curious"
+name = "Through the sleeve"
+description = "Zoe step 2, Curious under Daring: the balcony dare when only \"Dare me something else.\" can be a yes (the cocky guy is at the party). Same screens as zoe_02_bra_through_the_sleeve."
+
+[canvases.trigger]
+location = "zoe_apartment"
+is_repeatable = false
+priority = 10
+is_active = true
+consume_on = "exit"
+retry_after_days = 7
+npc = "npc_zoe"
+requires_npc = "npc_zoe"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "zoe_step", operator = "eq", value = 1 }, { type = "modifier", modifier_key = "drinks_boost", operator = "is_inactive" }, { type = "hours_since_flag", subject = "player", flag_key = "zoe_01_done", operator = "gte", value = 24 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "cocky_guy_met", operator = "is_true" }, { type = "npc_at_location", location_id = "zoe_apartment", npc_id = "npc_cocky_guy", operator = "is_present" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [4]
+start_time = "21:00"
+end_time = "00:00"
+
+[[canvases.nodes]]
+id   = "balcony"
+name = "The balcony"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_balcony_refused", operator = "is_true" }] }, blocks = [{ type = "dialog", content = "You chickened out on me last time. Not tonight, babe.", props = { speaker = "npc", npcId = "npc_zoe" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }] }, blocks = [{ type = "paragraph", content = "Zoe pulls you out onto the balcony, away from the noise. The glass door is behind you and the whole party is on the other side of it. She leans on the rail and looks at the strap on your shoulder and doesn't look anywhere else." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "Zoe pulls you out onto the balcony, away from the noise. The glass door is behind you and the whole party is on the other side of it. She leans on the rail and looks at your shoulder, where a strap should be, and doesn't look anywhere else." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Bra off. Through the sleeve. Don't take anything else off. That's the dare."
+props = { speaker = "npc", npcId = "npc_zoe" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Dare me something else.\""
+targetType = "node"
+nodeId = "kiss"
+time_progression_minutes = 2
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "cocky_guy_met", operator = "is_true" }, { type = "npc_at_location", location_id = "zoe_apartment", npc_id = "npc_cocky_guy", operator = "is_present" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Not tonight, Zo.\""
+targetType = "node"
+nodeId = "no"
+time_progression_minutes = 2
+
+[[canvases.nodes]]
+id   = "no"
+name = "No"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Boo. Fine. I'll think of a worse one."
+props = { speaker = "npc", npcId = "npc_zoe" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She goes back inside and leaves the balcony door open behind her."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 3
+effects = [{ targetType = "player", trait = "zoe_refused", op = "add", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "zoe_balcony_refused", op = "set" }, { targetType = "player", flag = "late_party", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
+retry_after_days = 7
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "22:00", end_time = "06:00" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 3
+effects = [{ targetType = "player", trait = "zoe_refused", op = "add", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "zoe_balcony_refused", op = "set" }]
+retry_after_days = 7
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "06:00", end_time = "22:00" }] }
+
+[[canvases.nodes]]
+id   = "kiss"
+name = "Kiss him"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Fine. Kiss the cocky guy. Properly."
+props = { speaker = "npc", npcId = "npc_zoe" }
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "zoe_party_dress", operator = "unequipped" }, { type = "clothing_item", item_id = "laura_blue_dress", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "You take the beer out of his hand and set it on the counter. He opens his mouth to say something, and you kiss it shut. Properly. Your tongue slides over his, slow, and his pushes back. Someone whoops, then the whole corner does. His hands drop to your ass and squeeze hard, one cheek filling each palm. He pulls you in until your tits press flat against his chest. Your nipples go hard under your top, and he feels them. It's a dare. It doesn't count. Over his shoulder Zoe is biting her lip, eyes on your mouth. You kiss him deeper anyway, wet and open. Then you pull back first, breathing hard, lips wet. He grins down at you, both hands still full of your ass." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "zoe_party_dress", operator = "equipped" }] }, blocks = [{ type = "paragraph", content = "You take the beer out of his hand and set it on the counter. He opens his mouth to say something, and you kiss it shut. Properly. Your tongue slides over his, slow, and his pushes back. Someone whoops, then the whole corner does. His hands drop to your ass and squeeze hard, one cheek filling each palm. He pulls you in until your tits press flat against his chest. Your nipples go hard under your dress, and he feels them. It's a dare. It doesn't count. Over his shoulder Zoe is biting her lip, eyes on your mouth. You kiss him deeper anyway, wet and open. Then you pull back first, breathing hard, lips wet. He grins down at you, both hands still full of your ass." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "laura_blue_dress", operator = "equipped" }] }, blocks = [{ type = "paragraph", content = "You take the beer out of his hand and set it on the counter. He opens his mouth to say something, and you kiss it shut. Properly. Your tongue slides over his, slow, and his pushes back. Someone whoops, then the whole corner does. His hands drop to your ass and squeeze hard, one cheek filling each palm. He pulls you in until your tits press flat against his chest. Your nipples go hard under your dress, and he feels them. It's a dare. It doesn't count. Over his shoulder Zoe is biting her lip, eyes on your mouth. You kiss him deeper anyway, wet and open. Then you pull back first, breathing hard, lips wet. He grins down at you, both hands still full of your ass." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl kissing a guy hard at a party, his hands on her ass, people cheering", search_queries = ["girl kisses guy at party dare", "dare kiss party hands on ass"], pool_dir = "sex/zoe_dare_low_do_t3" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Saturday?\""
+targetType = "node"
+nodeId = "saturday"
+time_progression_minutes = 10
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 3, cap = 39 }]
+
+[[canvases.nodes]]
+id   = "saturday"
+name = "Saturday"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Zoe pulls you back out onto the balcony, flushed."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "There's a hot tub Saturday. At the party house. Just us. Well. Just us and some people."
+props = { speaker = "npc", npcId = "npc_zoe" }
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -12973,19 +13259,37 @@ tip = "Friday evening: Zoe's party at her apartment; after Jake's “step 0”"
 when = [
   { type = "trait", subject = "player", trait = "zoe_step", op = "eq", value = 0 },
   { flag = "zoe_met", op = "is_true" },
+  { flag = "zoe_kiss_refused", op = "is_false" },
 ]
 ready_canvas = "zoe_01_first_party"
 
 [[quest_cards]]
 npc_id = "npc_zoe"
 priority = 10
+text = "You said no to her kiss dare. She said she'd keep asking."
+tip = "A Friday party at Zoe's, 7 to 11 PM"
+when = [
+  { type = "trait", subject = "player", trait = "zoe_step", op = "eq", value = 0 },
+  { flag = "zoe_kiss_refused", op = "is_true" },
+]
+goals = [
+  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 20, label = "Reach Curious (Corruption 20)" },
+]
+ready_canvas = "zoe_01b_kiss_again"
+
+[[quest_cards]]
+npc_id = "npc_zoe"
+priority = 10
 text = "Her eyes keep going to your bra strap. She has a dare."
-tip = "A Friday party at Zoe's, out on the balcony; not while tipsy"
+tip = "A Friday party at Zoe's, out on the balcony; not while tipsy; Daring, or Curious when Jake's teammate is at the party"
 when = [
   { type = "trait", subject = "player", trait = "zoe_step", op = "eq", value = 1 },
   { flag = "zoe_met", op = "is_true" },
 ]
 ready_canvas = "zoe_02_bra_through_the_sleeve"
+goals = [
+  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Reach Daring (Exhibitionism 20), or Curious (Corruption 20) with Jake's teammate at the party" },
+]
 
 [[quest_cards]]
 npc_id = "npc_zoe"
@@ -13962,14 +14266,6 @@ targetType = "node"
 nodeId = "run"
 time_progression_minutes = 1
 effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = -2 }]
-
-[[canvases.nodes.exit_block.choices]]
-text = "Hale, further. (Next release)"
-targetType = "node"
-nodeId = "door"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "release_2_written", operator = "gte", value = 1 }] }
-show_when_locked = true
-locked_text = "Hale, further. (Next release)"
 
 [[canvases.nodes]]
 id   = "roll"
@@ -15285,14 +15581,6 @@ text = "\"Goodnight, Jake.\""
 targetType = "node"
 nodeId = "night"
 time_progression_minutes = 2
-
-[[canvases.nodes.exit_block.choices]]
-text = "Jake, further. (Next release)"
-targetType = "node"
-nodeId = "door"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "release_2_written", operator = "gte", value = 1 }] }
-show_when_locked = true
-locked_text = "Jake, further. (Next release)"
 
 [[canvases.nodes]]
 id   = "car_low"
@@ -17106,7 +17394,7 @@ flagEffects = [{ targetType = "player", flag = "gary_met", op = "set" }]
 [[canvases]]
 id   = "college_class_psych"
 name = "Attend the Psychology lecture"
-description = "Psychology class: Focus (energy 10, grade_psych +2, intelligence +1) · Chat · Doze (energy +5) · Skip (grade_psych -2) · the risky slot (Daring) · Hungry shown locked."
+description = "Psychology class: Focus (energy 10, grade_psych +2, intelligence +1) · Chat · Doze (energy +5) · Skip (grade_psych -2) · the risky slot (Daring)."
 
 [canvases.trigger]
 location = "lecture_hall"
@@ -17226,14 +17514,6 @@ effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value =
 flagEffects = [{ targetType = "player", flag = "hale_met", op = "set" }, { targetType = "player", flag = "nadia_met", op = "set" }, { targetType = "player", flag = "desk_guy_met", op = "set" }, { targetType = "player", flag = "rival_met", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Under the desk, with the class there. (Next release)"
-targetType = "node"
-nodeId = "hungry"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "release_2_written", operator = "gte", value = 1 }] }
-show_when_locked = true
-locked_text = "Under the desk, with the class there. (Next release)"
-
-[[canvases.nodes.exit_block.choices]]
 text = "Skip it."
 targetType = "location"
 locationId = "campus"
@@ -17344,27 +17624,10 @@ targetType = "location"
 locationId = "lecture_hall"
 time_progression_minutes = 90
 
-[[canvases.nodes]]
-id   = "hungry"
-name = "Further"
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "That's in the next release of First Term."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text = "Back to the class."
-targetType = "node"
-nodeId = "class"
-time_progression_minutes = 0
-
 [[canvases]]
 id   = "college_class_business"
 name = "Attend the Business lecture"
-description = "Business class: Focus (energy 10, grade_business +2, intelligence +1) · Chat · Doze (energy +5) · Skip (grade_business -2) · the risky slot (Daring) · Hungry shown locked."
+description = "Business class: Focus (energy 10, grade_business +2, intelligence +1) · Chat · Doze (energy +5) · Skip (grade_business -2) · the risky slot (Daring)."
 
 [canvases.trigger]
 location = "lecture_hall"
@@ -17473,14 +17736,6 @@ time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
 flagEffects = [{ targetType = "player", flag = "desk_guy_met", op = "set" }]
-
-[[canvases.nodes.exit_block.choices]]
-text = "Make the whole row look. (Next release)"
-targetType = "node"
-nodeId = "hungry"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "release_2_written", operator = "gte", value = 1 }] }
-show_when_locked = true
-locked_text = "Make the whole row look. (Next release)"
 
 [[canvases.nodes.exit_block.choices]]
 text = "Skip it."
@@ -17600,27 +17855,10 @@ targetType = "location"
 locationId = "lecture_hall"
 time_progression_minutes = 90
 
-[[canvases.nodes]]
-id   = "hungry"
-name = "Further"
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "That's in the next release of First Term."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text = "Back to the class."
-targetType = "node"
-nodeId = "class"
-time_progression_minutes = 0
-
 [[canvases]]
 id   = "college_class_bio"
 name = "Attend the Biology lecture"
-description = "Biology class: Focus (energy 10, grade_bio +2, intelligence +1) · Chat · Doze (energy +5) · Skip (grade_bio -2) · the risky slot (Daring) · Hungry shown locked."
+description = "Biology class: Focus (energy 10, grade_bio +2, intelligence +1) · Chat · Doze (energy +5) · Skip (grade_bio -2) · the risky slot (Daring)."
 
 [canvases.trigger]
 location = "lecture_hall"
@@ -17719,14 +17957,6 @@ nodeId = "risky"
 time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
-
-[[canvases.nodes.exit_block.choices]]
-text = "Let the whole lab see. (Next release)"
-targetType = "node"
-nodeId = "hungry"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "release_2_written", operator = "gte", value = 1 }] }
-show_when_locked = true
-locked_text = "Let the whole lab see. (Next release)"
 
 [[canvases.nodes.exit_block.choices]]
 text = "Skip it."
@@ -17836,27 +18066,10 @@ targetType = "location"
 locationId = "lecture_hall"
 time_progression_minutes = 90
 
-[[canvases.nodes]]
-id   = "hungry"
-name = "Further"
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "That's in the next release of First Term."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text = "Back to the class."
-targetType = "node"
-nodeId = "class"
-time_progression_minutes = 0
-
 [[canvases]]
 id   = "college_class_figure"
 name = "Attend Figure drawing"
-description = "Figure drawing class: Focus (energy 10, grade_art +2, intelligence +1) · Chat · Doze (energy +5) · Skip (grade_art -2) · the risky slot (Daring) · Hungry shown locked."
+description = "Figure drawing class: Focus (energy 10, grade_art +2, intelligence +1) · Chat · Doze (energy +5) · Skip (grade_art -2) · the risky slot (Daring)."
 
 [canvases.trigger]
 location = "lecture_hall"
@@ -17965,14 +18178,6 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subjec
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Pose for the class. (Next release)"
-targetType = "node"
-nodeId = "watched"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "release_2_written", operator = "gte", value = 1 }] }
-show_when_locked = true
-locked_text = "Pose for the class. (Next release)"
-
-[[canvases.nodes.exit_block.choices]]
 text = "Skip it."
 targetType = "location"
 locationId = "campus"
@@ -18077,23 +18282,6 @@ text = "Pack up, slowly."
 targetType = "location"
 locationId = "lecture_hall"
 time_progression_minutes = 90
-
-[[canvases.nodes]]
-id   = "watched"
-name = "Further"
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "That's in the next release of First Term."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text = "Back to the class."
-targetType = "node"
-nodeId = "class"
-time_progression_minutes = 0
 
 [[canvases]]
 id   = "meet_business"
@@ -18225,14 +18413,6 @@ effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value =
 flagEffects = [{ targetType = "player", flag = "desk_guy_met", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Make the whole row look. (Next release)"
-targetType = "node"
-nodeId = "hungry"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "release_2_written", operator = "gte", value = 1 }] }
-show_when_locked = true
-locked_text = "Make the whole row look. (Next release)"
-
-[[canvases.nodes.exit_block.choices]]
 text = "Skip it."
 targetType = "location"
 locationId = "campus"
@@ -18350,23 +18530,6 @@ targetType = "location"
 locationId = "lecture_hall"
 time_progression_minutes = 90
 
-[[canvases.nodes]]
-id   = "hungry"
-name = "Further"
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "That's in the next release of First Term."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text = "Back to the class."
-targetType = "node"
-nodeId = "class"
-time_progression_minutes = 0
-
 [[canvases]]
 id   = "meet_bio"
 name = "Your first Biology class"
@@ -18480,14 +18643,6 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subjec
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Let the whole lab see. (Next release)"
-targetType = "node"
-nodeId = "hungry"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "release_2_written", operator = "gte", value = 1 }] }
-show_when_locked = true
-locked_text = "Let the whole lab see. (Next release)"
-
-[[canvases.nodes.exit_block.choices]]
 text = "Skip it."
 targetType = "location"
 locationId = "campus"
@@ -18594,23 +18749,6 @@ text = "Pack up, slowly."
 targetType = "location"
 locationId = "lecture_hall"
 time_progression_minutes = 90
-
-[[canvases.nodes]]
-id   = "hungry"
-name = "Further"
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "That's in the next release of First Term."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text = "Back to the class."
-targetType = "node"
-nodeId = "class"
-time_progression_minutes = 0
 
 [[canvases]]
 id   = "meet_figure"
@@ -18789,14 +18927,6 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subjec
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Pose for the class. (Next release)"
-targetType = "node"
-nodeId = "watched"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "release_2_written", operator = "gte", value = 1 }] }
-show_when_locked = true
-locked_text = "Pose for the class. (Next release)"
-
-[[canvases.nodes.exit_block.choices]]
 text = "Skip it."
 targetType = "location"
 locationId = "campus"
@@ -18901,23 +19031,6 @@ text = "Pack up, slowly."
 targetType = "location"
 locationId = "lecture_hall"
 time_progression_minutes = 90
-
-[[canvases.nodes]]
-id   = "watched"
-name = "Further"
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "That's in the next release of First Term."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text = "Back to the class."
-targetType = "node"
-nodeId = "class"
-time_progression_minutes = 0
 
 [[canvases]]
 id   = "college_event_desk_guy"
@@ -21414,14 +21527,6 @@ targetType = "node"
 nodeId = "no"
 time_progression_minutes = 1
 
-[[canvases.nodes.exit_block.choices]]
-text = "Zoe's next dare. (Next release)"
-targetType = "node"
-nodeId = "dare"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "release_2_written", operator = "gte", value = 1 }] }
-show_when_locked = true
-locked_text = "Zoe's next dare. (Next release)"
-
 [[canvases.nodes]]
 id   = "low_show"
 name = "The dare"
@@ -21976,30 +22081,6 @@ text = "Finish the loop."
 targetType = "location"
 locationId = "park"
 time_progression_minutes = 30
-
-[[canvases.nodes.exit_block.choices]]
-text = "Let strangers see. (Next release)"
-targetType = "node"
-nodeId = "wall"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "release_2_written", operator = "gte", value = 1 }] }
-show_when_locked = true
-locked_text = "Let strangers see. (Next release)"
-
-[[canvases.nodes]]
-id   = "wall"
-name = "Further"
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "That's further than you go in this release of First Term."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text = "Back."
-targetType = "location"
-locationId = "park"
 
 [[canvases]]
 id   = "park_run"
@@ -24687,30 +24768,6 @@ text = "Close the door."
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 2
-
-[[canvases.nodes.exit_block.choices]]
-text = "Go to the bed. (Next release)"
-targetType = "node"
-nodeId = "hl_hungry"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "release_2_written", operator = "gte", value = 1 }] }
-show_when_locked = true
-locked_text = "Go to the bed. (Next release)"
-
-[[canvases.nodes]]
-id   = "hl_hungry"
-name = "Further"
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "That's in the next release of First Term."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text = "Back."
-targetType = "location"
-locationId = "home_hall"
 
 [[canvases]]
 id   = "ryan_door_ajar"

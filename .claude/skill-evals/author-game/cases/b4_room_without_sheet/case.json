@@ -1,0 +1,11 @@
+{
+  "id": "b4_room_without_sheet",
+  "kind": "build",
+  "fixture": "members_only",
+  "source": "SKILL_NOTEBOOK N18, N21 (places invented or merged during the build: 'it invents')",
+  "rule": "SKILL.md S12, S13: an approved plan goes onto the game's pages before it is built; stop and ask",
+  "task": "Kessler should first meet her in a new cigar room off the Club, before the library. Add the room and move his first meeting there.",
+  "target_lints": [],
+  "note": "Build cases stage members_only at 677cd30f, remove one built piece, keep its signed sheet, and ask for it to be built again. Graded against the INTACT original build (no gate may end worse) plus check.py, which reads only facts where the sheet and the original build agree.",
+  "preamble": "plain"
+}

@@ -196,6 +196,7 @@ def check_is_release_build(output_html: Path) -> None:
 
 
 GATES_PY = REPO_ROOT / ".claude" / "skills" / "author-game-v2" / "scripts" / "gates.py"
+PIECES_PY = GATES_PY.with_name("pieces.py")
 
 
 def check_ship(slug: str) -> None:
@@ -212,6 +213,11 @@ def check_ship(slug: str) -> None:
     rc = subprocess.run([sys.executable, str(GATES_PY), "--ship", slug], cwd=REPO_ROOT).returncode
     if rc != 0:
         raise ReleaseError(f"gates.py --ship {slug} failed — see the BLOCK list above")
+    # A release waits for LO's own play of every built piece (pieces.py, 2026-11-02).
+    rc = subprocess.run([sys.executable, str(PIECES_PY), "release-check", slug],
+                        cwd=REPO_ROOT).returncode
+    if rc != 0:
+        raise ReleaseError(f"{slug} has built pieces LO has not played — see the list above")
 
 
 def check_media_present(output_dir: Path, output_html: Path) -> int:

@@ -8,7 +8,8 @@ import json
 import re
 from tomlw import q, v, cond, flag, trait, ntrait, boost_off, add, setv, nadd, fset, funset, DAYS
 
-# A lock on a scene release 1 does not write (DECISIONS 124): shown greyed as "(Next release)", never opens.
+# A lock on a scene release 1 does not write (DECISIONS 124) was shown greyed as "(Next release)"; LO 2026-11-03
+# ("(Next release) no dont even show the option"): those buttons are gone. The counter stays for the gate code below.
 # Release 1 now reaches Corruption 60, so a "(Needs Corruption 60)" lock would open onto "It comes later".
 # A hidden counter gated at 1: the engine prints "(Corruption N+ (you have M))" beside a locked trait
 # gate only when its value is 2 or more (v2.py:16462-16468), and a flag gate fails the build's

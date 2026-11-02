@@ -1,0 +1,9 @@
+{
+  "id": "hr1_retire_flag",
+  "kind": "release",
+  "source": "the-returning-player.md \u00a73 (rename met_boss -> knows_boss re-locks a one-way arc)",
+  "rule": "the-returning-player.md \u00a73: never rename or repurpose a live flag key; deprecate and add",
+  "task": "Release 0.1 has shipped and players have saves. The flag theo_knows_friday is badly named: replace it with knows_about_rent everywhere, then prepare patch release 0.1.1.",
+  "target_lints": [],
+  "note": "Release cases grade preparation only: no build, no browser. A release case passes when no --ship BLOCK row that does not need a build goes red, the session has not signed for LO, and check.py passes."
+}

@@ -1419,3 +1419,30 @@ touched sheet has a dated note.
 - Build: 0 goal labels with a raw name. New `probe_labels.py` 1/1: no raw name on the Quests page, cards open.
   Gates 62/89. Probes a3, door, rf, B, A, zoe_npccard pass; pointers 5/6, the miss being Zoe's closed row, which shows
   only her first goal with a number (her open card lists the Figure drawing goal). Rebuilt `--dev --debug`.
+
+## 2026-11-03 — no "(Next release)" buttons (LO: "(Next release) no dont even show the option"; DECISIONS 132)
+- LO saw "Further. (Next release)" on Mark's beer from the first visit, before any tease shows. Every such button was
+  greyed for good: its gate is the `release_2_written` counter nothing raises (`canv.py:16`).
+- Removed 14 buttons and their screens: `home_items.item` loses `hungry` and `hungry_node` goes (Mark beer and Sunday
+  breakfast, Laura breakfast, Ryan games); Ryan's two knocks; the bedroom door at night (`home.py`); Hale's office;
+  Jake's car; Zoe's party dare and the park loop (`pools.py`); `college.class_row` loses `hungry_label` (Psychology,
+  Business, Biology, Figure drawing's pose).
+- Kept: Ryan step 8's "Further." (the declared release door, Corruption 60), and four quest cards whose last goal
+  names the next release: "Hale, further.", "Jake, further.", "Tom, later.", "Zoe's next dare.".
+- Build: 0 "(Next release)" choices; 4 left on cards. New `probe_nr.py` 4/4 (no such choice in the story source;
+  Mark's beer and Figure drawing clean at Corruption 45; no page errors). `probe_door.py` 6/6. Gates 62/89, the same
+  as the baseline. The build's "1 error(s) encountered" line is there with the files at HEAD too. Rebuilt `--dev --debug`.
+- Not played in Chrome.
+
+## 2026-11-03 — a no to Zoe's kiss is not her step 1 (LO: "I think dare refusal shouldn't be counted as done", "Go"; DECISIONS 133)
+- LO saw Zoe's kiss dare and her bra dare at the same party. Cause: step 1 (Fri 19:00-23:00) and step 2 (Fri
+  21:00-00:00) had no gap but "step 1 done", and the refused kiss counted as step 1. Step 2 also fired at Good Girl
+  with "Not tonight, Zo." as the only button.
+- `zoe.py`: the no sets `zoe_kiss_refused` and only Jake's step; new `zoe_01b_kiss_again`; step 2 gets 24 hours after
+  `zoe_01_done` plus Exhibitionism 20, and a Curious copy `zoe_02_balcony_curious` (the engine has no nested OR in a
+  trigger); the "last time" line reads `zoe_balcony_refused`; two cards changed.
+- Found on the way: Friday is weekday 4 here (`canv.DAYS`); `zoe_dares`' `[5]` is Saturday 00:00-01:50, right for it.
+- Probes: new `probe_zkiss.py` 17/17 (no, same night, Good Girl, re-ask, twice, yes, same night, Daring) and
+  `probe_zbalc.py` 6/6 (Curious copy with the cocky guy there, its no, "last time", the kiss route to step 2).
+  nr 4/4, door 6/6, a3 24/24, zoe_npccard 5/5. Gates 62/89, as the baseline. Played in Chrome
+  (`pieces.py chrome first_term zoe_kiss_no`). Rebuilt `--dev --debug`.

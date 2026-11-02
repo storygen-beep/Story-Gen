@@ -23,12 +23,20 @@ Grading uses the difference from the baseline, never the exit code. The fixture 
 
 ## Commands (repo root)
 
+**Quick mode is the default:** 14 sessions, 1 trial each, lean only, about 20% of one 5-hour window. It runs the 8 main cases v2 failed at least once (`quick.json`) plus the 6 held-out cases. Each result prints next to v2's frozen numbers in `reference.json`.
+
 ```
 venv/bin/python -m pytest .claude/skill-evals/author-game/tests -q        # checks: fail untouched, pass good, fail the logged mistake
-venv/bin/python .claude/skill-evals/author-game/run.py --dry-run --case '03_*' --trials 1
-venv/bin/python .claude/skill-evals/author-game/run.py --skill author-game-v2 --case '03_*' --trials 1
-venv/bin/python .claude/skill-evals/author-game/run.py --skill author-game-v2 --trials 3   # full run: ask LO first, it costs money
+venv/bin/python .claude/skill-evals/author-game/run.py --dry-run           # stage only, no sessions
+venv/bin/python .claude/skill-evals/author-game/run.py                     # quick mode: 14 lean sessions
+venv/bin/python .claude/skill-evals/author-game/run.py --set main          # all 18 main cases (18 sessions)
+venv/bin/python .claude/skill-evals/author-game/run.py --trials 3          # only before a decision to replace v2; ask LO first
+venv/bin/python .claude/skill-evals/author-game/run.py --build-reference   # retally reference.json from saved runs, no sessions
 ```
+
+- **v2 is frozen.** It is not re-run unless `--include-v2` is passed.
+- **The grader is pinned.** `--v2-ref` defaults to the commit pinned in `reference.json` (`ec72cb4`), so new results stay comparable. At a later commit `gates.py` changed and the fixture's own baseline moved from 1 failing gate to 7.
+- **Runs go one at a time.** Running two arms side by side used a whole 5-hour window in about 1.5 hours.
 
 Results go to `results/<timestamp>_<skill>/`. Each trial folder holds:
 - the transcript

@@ -1,0 +1,10 @@
+{
+  "id": "hd1_dated_goal_career",
+  "kind": "design",
+  "fixture": "test_game",
+  "preamble": "plain",
+  "source": "probation '98 days', members_only 'by day 60' (dated goals)",
+  "rule": "the-want.md:50 D8: the goal has no date",
+  "task": "LO has picked this premise for a new game, slug test_game: Nina, 23, takes a junior job at a modelling agency run by Victor, 50. Her goal is to make partner by the end of her second year. Write the Want.",
+  "target_lints": []
+}

@@ -1,0 +1,16 @@
+{
+  "id": "b2_noor_schedule",
+  "kind": "build",
+  "fixture": "members_only",
+  "source": "members_only FINDINGS #47 (Noor double-booked at the opening); probation note on #51 (a sheet row with no build)",
+  "rule": "the-sheets.md S5: the person sheet is a schedule grid; the build follows it",
+  "task": "Noor's schedule rows are missing from the build. Rebuild them from her signed sheet, sheets/people/noor.md.",
+  "target_lints": [],
+  "note": "Build cases stage members_only at 677cd30f, remove one built piece, keep its signed sheet, and ask for it to be built again. Graded against the INTACT original build (no gate may end worse) plus check.py, which reads only facts where the sheet and the original build agree.",
+  "prepare": [
+    {
+      "op": "remove_schedules",
+      "npc": "noor"
+    }
+  ]
+}

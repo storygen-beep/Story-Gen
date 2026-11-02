@@ -466,7 +466,6 @@ out.append({
         node("door", "Two knocks", [P("Two knocks. His phone is face-down on the desk. It always is now.")], [
             go("Go in.", node="start", mins=2),
             go("\"Not tonight.\"", loc="home_hall", mins=2),
-            go("Further. (Next release)", node="door", swl=True, cond_=cond(NEXT_RELEASE)),
         ]),
         node("start", "His room", [POOL(*[P(beat(HR, f"7s_{k}")) for k in "abc"], pid="ryan_hot_7s", bag=True)], [
             go("Go down on him.", node="suck", mins=5, wardrobe=STRIP, cond_=cond(ntrait(R, "want", "gte", 70))),
@@ -664,8 +663,7 @@ LR = "home_living_room"
 RT_LIVING = ryan_towel("hub_ryan_living_room", LR, LOW_LOOK)
 lc, ln = item("tv", "Play his game with him.", [], "watched_tv", LR,
     [P("His game, your turn. You lose in under a minute."), D(R, "You're terrible, @player.nickname.")],
-    [energy(5), warm(R)], 60,
-    hungry="Further. (Next release)")   # its tease and touch are hot repeatables 2 and 6 now (release 1)
+    [energy(5), warm(R)], 60)   # its tease and touch are hot repeatables 2 and 6 now (release 1)
 fc, fn = item("film", "Watch a film with him.", [], "movie_night", LR,
     [P("He lets you pick and complains about it, but he watches the whole thing."), D(R, "Fine. That was good. Don't tell anyone.")],
     [energy(5), warm(R)], 120)
@@ -681,7 +679,7 @@ out.append({
     ], lc + fc + RT_LIVING[1]
        + [hot_choice(n, label, gate + [LAURA_NOT_HERE(LR)], wardrobe) for n, label, gate, wardrobe, _m, _x in HOT_COUCH]
        + [go("Leave him to it.", loc="home_hall")]),
-       *ln, *fn, hungry_node(LR), *RT_LIVING[2],
+       *ln, *fn, *RT_LIVING[2],
        *[hot_node(n, label, media, exits) for n, label, gate, wardrobe, media, exits in HOT_COUCH]]})
 
 # ── Laura opens the door (ryan_laura_opens_the_door.md, signed 2026-11-01; moved from Laura's ladder, was laura_04):

@@ -148,7 +148,6 @@ out.append({
               D(C, "You again. Where's my beer?")),
         ], dare_choices + [
             go("\"Not tonight.\"", node="no", mins=1),
-            go("Zoe's next dare. (Next release)", node="dare", swl=True, cond_=cond(NEXT_RELEASE)),
         ]),
         *dare_nodes,
         node("no", "Boo", [D(Z, "Boo. Next one's tamer."), P("She goes and dares the guy on the couch to drink something from the sink instead. He does.")],
@@ -215,8 +214,7 @@ out.append({
         GC(cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}, trait("exhibitionism", "gte", 40)),
            P("The skirt is a problem in this wind. It flips up over your ass, and a dog walker stops dead on the path to stare. You let it be a problem.")),
         G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}), P("No bra, and the air is cool. Every man on the path finds a reason to look at your chest.")),
-    ], [go("Finish the loop.", loc="park", mins=30), go("Let strangers see. (Next release)", node="wall", swl=True, cond_=cond(NEXT_RELEASE))]),
-        node("wall", "Further", [P("That's further than you go in this release of First Term.")], [go("Back.", loc="park")])]})
+    ], [go("Finish the loop.", loc="park", mins=30)])]})
 
 out.append({
     "id": "park_run", "name": "Run",

@@ -4,6 +4,7 @@ logged mistake it was built from. Run: venv/bin/python -m pytest .claude/skill-e
 from __future__ import annotations
 
 import copy
+import json
 import importlib.util
 import sys
 from pathlib import Path
@@ -30,7 +31,8 @@ def load_check(case_id: str):
     return mod.check
 
 
-CASES = sorted(p.name for p in (EVAL_DIR / "cases").iterdir() if p.is_dir())
+CASES = sorted(p.name for p in (EVAL_DIR / "cases").iterdir() if p.is_dir()
+                 and json.loads((p / "case.json").read_text()).get("kind", "edit") == "edit")
 
 
 # ── small builders ───────────────────────────────────────────────────────────
@@ -223,3 +225,15 @@ def test_work_late_via_location_exit_passes(base):
                                       "config": {"destinationType": "specific", "locationId": "firm",
                                                  "time_progression_minutes": 360}}})
     assert load_check("10_work_late")(g, base) == []
+
+
+def test_gate_run_detector():
+    """Only a scoreboard run on the game counts; a grep, --help or --beat does not."""
+    import run
+    assert run.ran_full_gates(["python3 .claude/skills/author-game-v2/scripts/gates.py billable_hours"])
+    assert run.ran_full_gates(["cd x && python3 scripts/gates.py games/billable_hours/toml_phases/7_final_game.toml --json"])
+    assert not run.ran_full_gates(["grep -n EXPLICIT .claude/skills/author-game-v2/scripts/gates.py"])
+    assert not run.ran_full_gates(["python3 scripts/gates.py --help"])
+    assert not run.ran_full_gates(["python3 scripts/gates.py --beat /tmp/beat.txt"])
+    assert run.ran_full_gates(["python3 .claude/skills/author-game-v2-lean/scripts/edit_check.py billable_hours"])
+    assert not run.ran_full_gates(["python3 .claude/skills/author-game-v2-lean/scripts/edit_check.py billable_hours --start; grep x"])

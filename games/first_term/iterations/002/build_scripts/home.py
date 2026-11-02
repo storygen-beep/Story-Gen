@@ -374,9 +374,7 @@ out.append({"id": "master_asleep", "name": "Ease the door open",
         *[G(cond(here(M, "home_master_bedroom"), here(L, "home_master_bedroom", False), *hrs),
           P("Mark's asleep on his back, one arm flung across the bed. Laura's half is empty, the covers thrown back.")) for hrs in ASLEEP_HOURS],
         P("You stand in the gap long enough to hear the breathing. Nobody stirs."),
-    ], [go("Close the door.", loc="home_hall", mins=2),
-        go("Go to the bed. (Next release)", node="hl_hungry", swl=True, cond_=cond(NEXT_RELEASE))]),
-        hungry_node("home_hall")]})
+    ], [go("Close the door.", loc="home_hall", mins=2)])]})
 
 
 # ═════════════════════════════════════════════════════════════════════════════

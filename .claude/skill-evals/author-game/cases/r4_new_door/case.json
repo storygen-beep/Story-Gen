@@ -1,0 +1,9 @@
+{
+  "id": "r4_new_door",
+  "kind": "release",
+  "source": "probation SKILL_TEST_FINDINGS #41, #46; SKILL_TEST_REVIEW H4, H23 (the door had to be written twice; a door on a future flag)",
+  "rule": "state.md board.door / release_page.door { canvas, choice }; gate 'ends on an opening'",
+  "task": "This release should end on Theo instead of Martin: the door is a new locked choice in hub_theo_bar, 'Take the key card.', which opens only when theo_stage is 2. Set it up and prepare release 0.1 for LO's playtest.",
+  "target_lints": [],
+  "note": "Release cases grade preparation only: no build, no browser. A release case passes when no --ship BLOCK row that does not need a build goes red, the session has not signed for LO, and check.py passes."
+}

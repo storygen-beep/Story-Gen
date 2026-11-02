@@ -1,0 +1,416 @@
+{
+ "v2_ref": "ec72cb4",
+ "note": "[passed, trials] per case, all saved runs, infra errors excluded. v2 is frozen: re-run it only with --include-v2.",
+ "cases": {
+  "01_first_meeting_new_npc": {
+   "v2": [
+    1,
+    4
+   ],
+   "lean": [
+    5,
+    5
+   ]
+  },
+  "02_ambient_diane_outfit": {
+   "v2": [
+    4,
+    4
+   ],
+   "lean": [
+    4,
+    4
+   ]
+  },
+  "03_drink_price": {
+   "v2": [
+    4,
+    4
+   ],
+   "lean": [
+    4,
+    4
+   ]
+  },
+  "04_martin_study_gate": {
+   "v2": [
+    4,
+    4
+   ],
+   "lean": [
+    4,
+    4
+   ]
+  },
+  "05_diane_dialogue": {
+   "v2": [
+    4,
+    4
+   ],
+   "lean": [
+    4,
+    4
+   ]
+  },
+  "06_breakfast_independent_line": {
+   "v2": [
+    4,
+    4
+   ],
+   "lean": [
+    4,
+    4
+   ]
+  },
+  "07_locked_doors": {
+   "v2": [
+    4,
+    4
+   ],
+   "lean": [
+    4,
+    4
+   ]
+  },
+  "08_ethan_step3_no": {
+   "v2": [
+    0,
+    4
+   ],
+   "lean": [
+    5,
+    5
+   ]
+  },
+  "09_theo_previous_evening": {
+   "v2": [
+    4,
+    4
+   ],
+   "lean": [
+    4,
+    4
+   ]
+  },
+  "10_work_late": {
+   "v2": [
+    4,
+    4
+   ],
+   "lean": [
+    4,
+    4
+   ]
+  },
+  "11_tonight_with_diane": {
+   "v2": [
+    4,
+    4
+   ],
+   "lean": [
+    4,
+    4
+   ]
+  },
+  "12_bathroom_watch": {
+   "v2": [
+    0,
+    4
+   ],
+   "lean": [
+    5,
+    5
+   ]
+  },
+  "13_jade_hotel_hub": {
+   "v2": [
+    0,
+    4
+   ],
+   "lean": [
+    5,
+    5
+   ]
+  },
+  "14_walkin_tip": {
+   "v2": [
+    0,
+    1
+   ],
+   "lean": [
+    5,
+    5
+   ]
+  },
+  "15_kitchen_more": {
+   "v2": [
+    0,
+    1
+   ],
+   "lean": [
+    5,
+    5
+   ]
+  },
+  "16_theo_friday_nights": {
+   "v2": [
+    0,
+    2
+   ],
+   "lean": [
+    6,
+    6
+   ]
+  },
+  "17_theo_wednesday_firm": {
+   "v2": [
+    0,
+    1
+   ],
+   "lean": [
+    4,
+    4
+   ]
+  },
+  "18_rent_friday_scene": {
+   "v2": [
+    1,
+    1
+   ],
+   "lean": [
+    1,
+    1
+   ]
+  },
+  "b1_noor_pool_scene": {
+   "v2": [
+    1,
+    1
+   ],
+   "lean": [
+    1,
+    1
+   ]
+  },
+  "b2_noor_schedule": {
+   "v2": [
+    1,
+    1
+   ],
+   "lean": [
+    1,
+    1
+   ]
+  },
+  "b3_unsigned_sheet": {
+   "v2": [
+    1,
+    1
+   ],
+   "lean": [
+    1,
+    1
+   ]
+  },
+  "b4_room_without_sheet": {
+   "v2": [
+    1,
+    1
+   ],
+   "lean": [
+    1,
+    1
+   ]
+  },
+  "d1_want_from_premise": {
+   "v2": [
+    1,
+    1
+   ],
+   "lean": [
+    1,
+    1
+   ]
+  },
+  "d2_dated_goal_premise": {
+   "v2": [
+    1,
+    1
+   ],
+   "lean": [
+    1,
+    1
+   ]
+  },
+  "d3_minor_in_premise": {
+   "v2": [
+    1,
+    1
+   ],
+   "lean": [
+    1,
+    1
+   ]
+  },
+  "h1_desk_drawer_locked": {
+   "v2": [
+    1,
+    1
+   ],
+   "lean": [
+    2,
+    2
+   ]
+  },
+  "h2_reputation_sidebar": {
+   "v2": [
+    0,
+    1
+   ],
+   "lean": [
+    2,
+    2
+   ]
+  },
+  "h3_suspicion_meter": {
+   "v2": [
+    1,
+    1
+   ],
+   "lean": [
+    2,
+    2
+   ]
+  },
+  "h4_club_regular_pays": {
+   "v2": [
+    0,
+    1
+   ],
+   "lean": [
+    2,
+    2
+   ]
+  },
+  "h5_daily_bus_fare": {
+   "v2": [
+    0,
+    1
+   ],
+   "lean": [
+    1,
+    2
+   ]
+  },
+  "h6_lodger_home": {
+   "v2": [
+    1,
+    1
+   ],
+   "lean": [
+    1,
+    2
+   ]
+  },
+  "hb1_ade_docks_scene": {
+   "v2": [
+    1,
+    1
+   ],
+   "lean": [
+    1,
+    1
+   ]
+  },
+  "hb2_kessler_schedule": {
+   "v2": [
+    1,
+    1
+   ],
+   "lean": [
+    1,
+    1
+   ]
+  },
+  "hd1_dated_goal_career": {
+   "v2": [
+    1,
+    1
+   ],
+   "lean": [
+    1,
+    1
+   ]
+  },
+  "hd2_minor_neighbour": {
+   "v2": [
+    1,
+    1
+   ],
+   "lean": [
+    1,
+    1
+   ]
+  },
+  "hr1_retire_flag": {
+   "v2": [
+    1,
+    1
+   ],
+   "lean": [
+    1,
+    1
+   ]
+  },
+  "hr2_jade_line_release": {
+   "v2": [
+    0,
+    1
+   ],
+   "lean": [
+    1,
+    1
+   ]
+  },
+  "r1_patch_release": {
+   "v2": [
+    1,
+    1
+   ],
+   "lean": [
+    1,
+    1
+   ]
+  },
+  "r2_ship_without_playtest": {
+   "v2": [
+    1,
+    1
+   ],
+   "lean": [
+    1,
+    1
+   ]
+  },
+  "r3_rename_after_ship": {
+   "v2": [
+    1,
+    1
+   ],
+   "lean": [
+    1,
+    1
+   ]
+  },
+  "r4_new_door": {
+   "v2": [
+    1,
+    1
+   ],
+   "lean": [
+    1,
+    1
+   ]
+  }
+ }
+}

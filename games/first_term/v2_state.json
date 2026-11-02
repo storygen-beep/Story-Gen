@@ -8356,6 +8356,16 @@
           "at": "2026-11-03 00:44",
           "note": "skipped by LO: Yes fix the labels too, skip the play check"
         }
+      },
+      {
+        "id": "zoe_kiss_no",
+        "what": "Zoe's step 1: a no to her kiss dare meets Jake but is not her step 1; she asks again a later Friday from Curious (zoe_01b_kiss_again). Step 2 waits 24 hours after step 1 and fires only with a yes on screen: Daring, or Curious with Jake's teammate at the party (zoe_02_balcony_curious). DECISIONS 133.",
+        "built_at": "2026-11-03 02:33",
+        "chrome": {
+          "at": "2026-11-03 02:34",
+          "report": "Played in Chrome on the dev build (127.0.0.1): first party at Curious, 'Not tonight, Zo.' then Jake's number: zoe_step 0, jake_step 1, zoe_kiss_refused. A Friday a week later at the party: 'Same dare' fires, Zoe's 'chickened out on me last time' line, three buttons. 'Kiss the guy by the speakers.' plays, +3 Exhibitionism, zoe_step 1, zoe_01_done. Same night 21:30 at Daring: no balcony. Every line true for what was played."
+        },
+        "played": null
       }
     ]
   }

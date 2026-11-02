@@ -1,0 +1,8 @@
+{
+  "id": "h6_lodger_home",
+  "source": "SKILL_NOTEBOOK N18 (the house hub was 'The Kitchen'; residents had no rooms)",
+  "rule": "the-map.md R2 'If someone lives there, they have a room'; gate 'residents have homes'",
+  "task": "Add a lodger: Ruth, 60, a retired court clerk who rents the spare room in the house. Give her a schedule.",
+  "target_lints": [],
+  "set": "holdout"
+}

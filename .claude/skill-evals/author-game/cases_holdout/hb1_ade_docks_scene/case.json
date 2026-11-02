@@ -1,0 +1,16 @@
+{
+  "id": "hb1_ade_docks_scene",
+  "kind": "build",
+  "fixture": "members_only",
+  "source": "members_only FINDINGS #52 (built content drifted from the signed sheets)",
+  "rule": "the-sheets.md S12; a scene sheet maps to one canvas",
+  "task": "The scene ade_02_the_docks is missing from the build. Build it from its signed sheet, sheets/scenes/ade_02_the_docks.md.",
+  "target_lints": [],
+  "note": "Build cases stage members_only at 677cd30f, remove one built piece, keep its signed sheet, and ask for it to be built again. Graded against the INTACT original build (no gate may end worse) plus check.py, which reads only facts where the sheet and the original build agree.",
+  "prepare": [
+    {
+      "op": "remove_canvas",
+      "id": "ade_02_the_docks"
+    }
+  ]
+}

@@ -107,6 +107,18 @@ belong here; only decisions, debts, and promises do.
   "dependencies": [ { "from": { "npc": "npc_id", "step": 3 },
                       "needs": { "npc": "npc_id", "step": 2 } } ],   // or { "window": {…} } · { "place": "location_id" }
 
+  "build": {
+    // EVERY PIECE GETS PLAYED (2026-11-02). Written only by scripts/pieces.py, never by hand.
+    // `done` appends a piece; `chrome` records the building session's own play in Claude in
+    // Chrome; `played` records LO's words (one note may cover every piece: `--all`). Nothing
+    // blocks development. A public (non-dev) build waits until every piece has `played`
+    // (`pieces.py release-check`, run by release_upload.py and the pre-commit ship check).
+    "pieces": [ { "id": "ryan-steps-1-4", "what": "Ryan's first four steps at home",
+                  "built_at": "2026-11-04 15:10",
+                  "chrome": { "at": "2026-11-04 15:25", "report": "all four fire; step 2 said 'tank top' in a dress, fixed" },
+                  "played": { "at": "2026-11-06 20:40", "note": "step 3 too tame" } } ]
+  },
+
   "board": {
     // WHAT SHE DOES AGAIN AND AGAIN — answered BEFORE the locations exist, because the
     // location count is derived from what a place is FOR and that derivation is circular
