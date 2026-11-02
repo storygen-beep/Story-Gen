@@ -1,5 +1,10 @@
 # [READY] Person — Ryan
 
+> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 127) (LO: "rise from normal", "more in the sex screens", "B, sheet it"): step 8
+> rises from a talk through her doubt, a kiss and undressing, with her picks in the sex; the step-8 repeat becomes a
+> menu that grows by his Lust. Detail on `scenes/ryan_08_two_knocks_first_sex.md` and `scenes/ryan_hot_repeatables.md`
+> row 7. Sections changed: the step-8 rows in "Each step, by the seven columns" and "The hot repeatables".
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): steps 4, 7 and 8 and five hot repeatables open at their SP2 stage; the Bold steps pay +3 cap 79; the doorway lean opens at Curious after the hall accident and is rewritten; step 9 shows "(Next release)"; the skip-opening, towel, shower and door-crack fixes. Sections changed: Ladder, the hot repeatables, Accidents and fixes (new).
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the release-1 ladder, from `proposals/RYAN_R1_LADDER.md`. Sections changed: Ladder, the seven columns, Leak and promise, the hot repeatables, Laura opens the door, Cut, Crude words. Everything else as signed.
@@ -85,7 +90,7 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 | 5 | she comes to his headboard through the wall | he hears her | Kayla, in the next room | "Touch yourself." | he whispers her name through the wall | yes | `ryan_heard_her`; Kayla meets her at dawn and knows |
 | 6 | naked on purpose; he stays and jerks off in the doorway while she watches | him; Kayla in the hall | Kayla walking in | she leaves the towel | he pulls his cock out and doesn't stop | **yes**: he comes, and Kayla calls "Babe?" as he does | he can't look at Kayla at breakfast; his door stays open a hand's width |
 | 7 | two knocks; Kayla's photo lights up his phone; she jerks him off and he comes in her hand | Kayla, on the screen | Kayla calling while he's in her hand | "Don't answer it." | he reaches for her first, then for the phone, and she pushes his hand away | **yes** | his phone is face-down every time she knocks |
-| 8 | first sex, on a night that isn't Kayla's; his headboard hits the wall, the one she listened through | Laura, across the hall, her light on | Laura hearing the headboard | "Fuck me." | he pulls her onto him | **yes**: inside her or on her (her pick, a button each) | the terms (below); the repeat opens |
+| 8 | first sex, on a night that isn't Kayla's, after a talk, her doubt, a kiss and undressing (changed 2026-11-02); his headboard hits the wall, the one she listened through | Laura, across the hall, her light on | Laura hearing the headboard | "Stay." (was "Fuck me.") | he kisses back and doesn't stop | **yes**: her picks: what first (his cock in her mouth, his mouth on her, straight on), how (on top, under him, against her wall), Laura's light (keep going, freeze), the finish (inside, on her, her mouth) | her feeling after, then the terms (below); the repeat opens |
 
 **Her voice (rule 7):** every step sheet carries `her_line_low` (under the stage: her thought pushes back, "This
 is Ryan. You should go.") and `her_line_high` (over it: appetite, "You want him to hear Kayla on the phone while
@@ -130,7 +135,7 @@ tick like `ryan_towel_today`). Each replays with a POOL of lines. None shows wit
 | step 6 (was 5) | his bed, evenings | she lies on his bed and touches herself until she comes; he isn't allowed to touch, only watch | Bold · Showing (was Curious · Daring) · cap 59 | new |
 | step 6 | his room, evenings | naked in his room; he strokes himself while she watches, and she tells him when he can come | Showing · cap 59 | new |
 | step 7 | the couch, under the blanket | a handjob to the end under the blanket, with Mark's TV on in the next room | Hungry (was Bold) · Daring · cap 79 | built ("Share the blanket"), pays +3 not +1, now finishes |
-| step 8 | his room, two knocks, not Friday | sex. One night in four someone nearly catches them: Laura knocks, or Kayla calls mid-act | — (step 8 needs Corruption 60) · cap 79 (was 59) | new, replaces the built two-knocks repeat |
+| step 8 | his room, two knocks, not Friday | a menu (changed 2026-11-02): a kiss at the door, then her pick of the act, more opening as his Lust climbs (70 / 80 / 90); a near-catch screen (Laura knocks, Kayla calls, or nothing); her pick of finish | — (step 8 needs Corruption 60) · cap 79 (was 59) | new, replaces the built two-knocks repeat |
 
 The towel slip and the drop (DECISIONS 98) stay as they are.
 

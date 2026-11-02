@@ -255,39 +255,120 @@ def term_exit(text, flagname, final=False):
     extra = dict(final=True) if final else dict(consumes=True)
     eff = [nadd(R, "want", 5), setv("ryan_step", 8)] if not final else [nadd(R, "want", 5), setv("ryan_step", -1, clamp=False)]
     flags = [fset(flagname), done(8)] + ([funset("ryan_knock_code"), fset("ryan_08_two_knocks_closed")] if final else [])
-    return go(text, loc="home_hall", mins=5, eff=eff, flags=flags, **extra)
+    return go(text, loc="home_hall", mins=5, eff=eff, flags=flags, wardrobe=DRESS_DAY, **extra)   # undressed on `undress` (DECISIONS 127)
 
+S = "ryan_08_two_knocks_first_sex"   # the step sheet its screens are read from
 out.append({
     "id": "ryan_08_two_knocks_first_sex", "name": "Two knocks",
     "description": "Ryan step 8 (release 1), the top step: first sex in his room, his headboard on her wall, Laura's light coming on across the hall. Inside her or on her, her pick; then his terms. The repeat opens; step 9 shows locked.",
     "trigger": step_trigger(R, 8, retry_days=1),
     "nodes": [
+        # DECISIONS 127 (LO, 2026-11-02, "rise from normal"): a talk, her doubt, a kiss, undressing, a no at each rung;
+        # her picks in the sex (what first, how, Laura's light, the finish); her feeling after; then his terms.
         node("knocks", "Two knocks, late", [
             P("Two knocks, late. The house is dark. He opens on the first one, and his phone is already face-down on the desk. It's face-down every time you knock now."),
             D(R, "Kayla's at her mom's tonight."),
         ], [
-            go("\"Fuck me.\"", node="bed", mins=3),
+            go("Come in.", node="talk", mins=3),
             go("\"Not tonight.\"", loc="home_hall", mins=2, retry=1),
         ]),
-        node("bed", "His bed", [
-            P(beat("ryan_08_two_knocks_first_sex", "bed")),
+        node("talk", "His bed", [
+            P("You sit on the edge of his bed. He sits too, a foot away, like there's a line down the mattress. Neither of you says what happened the last time you knocked."),
+            D(R, "So. These walls, huh."),
+            P("It's a joke, and it lands wrong, and you both laugh too loud and then stop. He rubs the back of his neck. He looks at the door, then at you."),
+            D(R, "Last time. With Kayla calling. That can't happen again."),
+            P("He says it, and he doesn't move away. His knee is an inch from yours."),
+        ], [go("\"Then why did you open the door?\"", node="doubt", mins=3)]),
+        node("doubt", "Ryan", [
+            P("He doesn't answer. His knee touches yours and stays there. He's looking at your mouth and he isn't hiding it any more, and the front of his shorts isn't hiding anything either."),
+            T("This is Ryan. You should go."),
+        ], [
+            go("Stay.", node="kiss", mins=2),
+            go("Go.", loc="home_hall", mins=2, retry=1),
+        ]),
+        node("kiss", "The kiss", [
+            P(beat(S, "kiss")),
+            VID("a guy and a girl kissing on his bed at night, his hand under her top", "making out on bed hand under shirt", "kissing on bed he touches her tits through bra", pool_dir="sex/ryan_08_kiss_t4"),
+        ], [
+            go("Let him.", node="undress", mins=5),
+            go("Stop. \"Not tonight.\"", loc="home_hall", mins=2, retry=1),
+        ]),
+        node("undress", "One piece at a time", [
+            P(beat(S, "undress")),
+            VID("a couple undressing each other on a bed, one piece at a time", "undressing each other slowly on bed", "he pulls her panties down slow", pool_dir="sex/ryan_08_undress_t4"),
+        ], [
+            go("Go down on him.", node="suck", mins=5, wardrobe=STRIP),
+            go("Let him taste you.", node="lick", mins=5, wardrobe=STRIP),
+            go("Get on him.", node="ride", mins=5, wardrobe=STRIP),
+        ]),
+        node("suck", "On your knees", [
+            P(beat(S, "suck")),
+            VID("a girl on her knees by a bed sucking a guy's cock, his hand in her hair", "blowjob kneeling by bed hand in hair", "she sucks his cock quietly", pool_dir="sex/ryan_08_suck_t5"),
+        ], [
+            go("Ride him.", node="ride", mins=5),
+            go("On your back.", node="under", mins=5),
+            go("Against the wall.", node="wall_back", mins=5),
+        ]),
+        node("lick", "His mouth", [
+            P(beat(S, "lick")),
+            VID("a guy eating a girl out on his bed, her hand over her mouth, thighs round his head", "he eats her pussy she covers mouth", "cunnilingus thighs around his head", pool_dir="sex/ryan_08_lick_t5"),
+        ], [
+            go("Ride him.", node="ride", mins=5),
+            go("On your back.", node="under", mins=5),
+            go("Against the wall.", node="wall_back", mins=5),
+        ]),
+        node("ride", "On top", [
+            P(beat(S, "ride")),
             VID("a girl climbing onto a guy on his bed and sinking onto him, a headboard against the wall", "girl rides guy on bed first time", "riding him on his bed headboard", pool_dir="sex/ryan_08_bed_t5"),
-        ], [go("Ride him.", node="wall", mins=10)]),
-        node("wall", "Her wall", [
-            P(beat("ryan_08_two_knocks_first_sex", "wall")),
+        ], [go("\"Harder.\"", node="light", mins=5)]),
+        node("under", "Under him", [
+            P(beat(S, "under")),
+            VID("missionary sex, slow, a guy on top looking at the girl's face", "slow missionary eye contact", "he fucks her slow on her back", pool_dir="sex/ryan_08_under_t5"),
+        ], [go("\"Harder.\"", node="light", mins=5)]),
+        node("wall_back", "Her wall", [
+            P(beat(S, "wall_back")),
+            VID("a girl kneeling on a bed with her palms on the wall, fucked from behind", "from behind hands on wall kneeling on bed", "doggy against bedroom wall", pool_dir="sex/ryan_08_wall_back_t5"),
+        ], [go("\"Harder.\"", node="light", mins=5)]),
+        node("light", "Laura's light", [
+            P(beat(S, "light")),
             VID("a couple fucking on a bed, the headboard banging the wall, a line of light under a door across a dark hall", "riding hard headboard banging wall", "girl on top fucking headboard knocking", pool_dir="sex/ryan_08_wall_t5"),
         ], [
-            go("\"Inside me.\"", node="inside", mins=5),
-            go("\"On me.\"", node="on", mins=5),
+            go("Keep going.", node="keep", mins=3),
+            go("Freeze.", node="freeze", mins=5),
+        ]),
+        node("keep", "Keep going", [
+            P(beat(S, "keep")),
+            VID("a guy fucking a girl hard with his hand over her mouth", "hand over mouth fucking hard quiet", "he covers her mouth while fucking", pool_dir="sex/ryan_08_keep_t5"),
+        ], [
+            go("\"Inside me.\"", node="inside", mins=3),
+            go("\"On me.\"", node="on", mins=3),
+            go("\"In my mouth.\"", node="mouth", mins=3),
+        ]),
+        node("freeze", "Freeze", [
+            P(beat(S, "freeze")),
+            VID("a couple holding still mid-sex, listening, then moving again slow", "frozen mid sex listening quiet", "slow sex trying not to be heard", pool_dir="sex/ryan_08_freeze_t5"),
+        ], [
+            go("\"Inside me.\"", node="inside", mins=3),
+            go("\"On me.\"", node="on", mins=3),
+            go("\"In my mouth.\"", node="mouth", mins=3),
         ]),
         node("inside", "Inside", [
-            P(beat("ryan_08_two_knocks_first_sex", "inside")),
-            VID("a guy coming inside a girl on top of him, holding her hips down", "creampie riding guy holds hips", "he cums inside her on top", pool_dir="sex/ryan_08_inside_t5"),
-        ], [go("Lie there.", node="terms", mins=10)]),
+            P(beat(S, "inside")),
+            VID("a guy coming inside a girl, holding her hips down", "creampie he holds her hips", "he cums inside her", pool_dir="sex/ryan_08_inside_t5"),
+        ], [go("Lie there.", node="after", mins=10)]),
         node("on", "On you", [
-            P(beat("ryan_08_two_knocks_first_sex", "on")),
+            P(beat(S, "on")),
             VID("a guy pulling out and coming on a girl's stomach and tits on his bed", "guy pulls out cums on her", "cum on tits after sex bed", pool_dir="sex/ryan_08_on_t5"),
-        ], [go("Lie there.", node="terms", mins=10)]),
+        ], [go("Lie there.", node="after", mins=10)]),
+        node("mouth", "Your mouth", [
+            P(beat(S, "mouth")),
+            VID("a girl on her knees by a bed, a guy coming in her mouth, she swallows", "cum in mouth kneeling swallow", "he finishes in her mouth", pool_dir="sex/ryan_08_mouth_t5"),
+        ], [go("Lie there.", node="after", mins=10)]),
+        node("after", "After", [
+            P("You lie with your head on his chest. His heart is still going hard under your ear. Across the hall, Laura's door is dark again. Your thighs are sticky and your lips are sore and every part of you knows whose bed this is."),
+            T("That was your brother. You should feel sick."),
+            P("You don't. You feel warm all the way down, and you're already thinking about the next time you knock. That's the part that scares you."),
+        ], [go("Ask him.", node="terms", mins=5)]),
         node("terms", "His terms", [
             P("After, you lie on his chest in the dark. Across the hall Laura's light has gone off again. He rubs his face with one hand. When he speaks, he isn't pretending any more."),
             D(R, "So what is this?"),
@@ -300,6 +381,10 @@ out.append({
             go("Further. (Next release)", node="terms", swl=True, cond_=cond(NEXT_RELEASE)),
         ]),
     ]})
+
+# Kayla is named on step 8's screens ("Kayla's at her mom's", undress): read on the way, as on step 4
+require_present(out, "ryan_08_two_knocks_first_sex", flag("kayla_met"),
+                {"type": "clothing_item", "item_id": "towel", "operator": "unequipped"})   # undress pulls her clothes over her head (reader)
 
 # ── the hot repeatables, one per stage (ryan_hot_repeatables.md, signed 2026-11-01). Lust +3 once a day across all
 #    seven (ryan_hot_today, the daily tick); each a shuffle-bag pool of three; none with Laura in the room. ──
@@ -351,32 +436,56 @@ HOT_COUCH = [  # the couch, Sat/Sun 14:00-18:00
      [hot_exit("\"Just the film.\"", "home_living_room", 60, [cap("corruption", 1, 79), cap("exhibitionism", 1, 79)])]),
 ]
 
-# ── the repeat after step 8: two knocks, sex (hot repeatable 7), Sun-Thu 22:00-00:00 (see step 8) ──
+# ── the repeat after step 8: two knocks, a menu (hot repeatable 7; ryan_hot_repeatables.md "Row 7's menu", DECISIONS 127).
+#    A normal start at the door (a bag of three), her pick of the act (more open as his Lust climbs: 70 / 80 / 90), a
+#    shy or eager voice by her Corruption (split at 70), a near-catch screen (a bag of three), her pick of finish. ──
+HR = "ryan_hot_repeatables"
+SHY_V, EAGER_V = trait("corruption", "lt", 70), trait("corruption", "gte", 70)
+def voices(act):
+    return [GC(cond(SHY_V), P(beat(HR, f"7{act}_shy"))), GC(cond(EAGER_V), P(beat(HR, f"7{act}_eager")))]
+TO_TWIST = [go("Don't stop.", node="twist", mins=10)]
+FINISH_EXITS = [  # the day's pay split on ryan_hot_today, as built; dressed again for the hall
+    go("Back to your room.", loc="home_hall", mins=20, cond_=cond(HOT_FREE), eff=[cap("corruption", 1, 79)] + HOT_PAY, flags=HOT_FLAG, wardrobe=DRESS_DAY),
+    go("Back to your room.", loc="home_hall", mins=20, cond_=cond(flag("ryan_hot_today")), eff=[cap("corruption", 1, 79)], wardrobe=DRESS_DAY),
+]
 out.append({
     "id": "ryan_two_knocks", "name": "Two knocks on his door",
-    "description": "The repeat after Ryan step 8 (hot repeatable 7): sex, a shuffle bag of three; two of them are the near-catches (Laura knocks; Kayla calls). Corruption +1, cap 59; Lust +3 once a day.",
+    "description": "The repeat after Ryan step 8 (hot repeatable 7): a menu. A normal start, her pick of the act (more open by his Lust 70/80/90), a shy or eager voice by her Corruption, a near-catch screen, her pick of finish. Corruption +1, cap 79; Lust +3 once a day.",
     "trigger": {"location": "home_ryan_room", "requires_npc": R, "is_repeatable": True, "priority": 5,
                 "is_active": True, "max_triggers_per_day": 1,
                 "schedules": [{"weekdays": [0, 1, 2, 3, 6], "start_time": "22:00", "end_time": "00:00"}],
                 "conditions": cond(trait("ryan_step", "eq", 8))},
     "nodes": [
-        node("door", "Two knocks", [P("Two knocks. His phone is face-down on the desk before the second one lands.")], [
-            go("Go in.", node="hot7", mins=2),
+        node("door", "Two knocks", [P("Two knocks. His phone is face-down on the desk. It always is now.")], [
+            go("Go in.", node="start", mins=2),
             go("\"Not tonight.\"", loc="home_hall", mins=2),
             go("Further. (Next release)", node="door", swl=True, cond_=cond(NEXT_RELEASE)),
         ]),
-        hot_node(7, "Two knocks",
-                 [VID("a couple having sex in his bedroom late at night, keeping quiet", "quiet sex his bedroom late night", "sneaky sex step brother room", pool_dir="sex/ryan_hot7_t5")],
-                 [go("Back to your room.", loc="home_hall", mins=45,
-                     eff=[cap("corruption", 1, 79)], flags=[]),
-                  ]),
+        node("start", "His room", [POOL(*[P(beat(HR, f"7s_{k}")) for k in "abc"], pid="ryan_hot_7s", bag=True)], [
+            go("Go down on him.", node="suck", mins=5, wardrobe=STRIP, cond_=cond(ntrait(R, "want", "gte", 70))),
+            go("Ride him.", node="ride", mins=5, wardrobe=STRIP, cond_=cond(ntrait(R, "want", "gte", 70))),
+            go("Let him taste you.", node="lick", mins=5, wardrobe=STRIP, swl=True, cond_=cond(ntrait(R, "want", "gte", 80))),
+            go("Against the wall.", node="wall_back", mins=5, wardrobe=STRIP, swl=True, cond_=cond(ntrait(R, "want", "gte", 90))),
+            go("Leave him to it.", loc="home_hall", mins=2),
+        ]),
+        node("suck", "On your knees", [*voices("suck"),
+            VID("a girl on her knees by a bed sucking a guy's cock late at night", "blowjob kneeling by his bed night", "she sucks her stepbrother quietly", pool_dir="sex/ryan_hot7_suck_t5")], TO_TWIST),
+        node("ride", "On top", [*voices("ride"),
+            VID("a girl riding a guy on his bed, the headboard knocking the wall", "girl rides him headboard knocking", "quiet riding sex late night", pool_dir="sex/ryan_hot7_ride_t5")], TO_TWIST),
+        node("lick", "His mouth", [*voices("lick"),
+            VID("a guy eating a girl out on his bed, her hand over her mouth", "he eats her out she covers mouth", "cunnilingus quiet late night", pool_dir="sex/ryan_hot7_lick_t5")], TO_TWIST),
+        node("wall_back", "Against the wall", [*voices("wall"),
+            VID("a girl kneeling on a bed, palms on the wall, fucked from behind", "from behind palms on wall", "doggy against the bedroom wall", pool_dir="sex/ryan_hot7_wall_t5")], TO_TWIST),
+        node("twist", "Late", [POOL(*[P(beat(HR, f"7t_{k}")) for k in "abc"], pid="ryan_hot_7t", bag=True),
+            VID("a couple having sex in his bedroom late at night, keeping quiet", "quiet sex his bedroom late night", "sneaky sex step brother room", pool_dir="sex/ryan_hot7_twist_t5")], [
+            go("\"Inside me.\"", node="f_inside", mins=3),
+            go("\"On me.\"", node="f_on", mins=3),
+            go("\"In my mouth.\"", node="f_mouth", mins=3),
+        ]),
+        *[node(f"f_{k}", "He comes", [P(beat(HR, f"7f_{k}")),
+            VID("a guy finishing, late at night in his bedroom", "he cums late night bedroom", "finish quiet sex", pool_dir="sex/ryan_hot7_finish_t5")], FINISH_EXITS)
+          for k in ("inside", "on", "mouth")],
     ]})
-# Lust +3 once a day on the two-knocks repeat too: split its exit on the day's flag
-_tk = out[-1]["nodes"][1]
-_tk["choices"] = [
-    go("Back to your room.", loc="home_hall", mins=45, cond_=cond(HOT_FREE), eff=[cap("corruption", 1, 79)] + HOT_PAY, flags=HOT_FLAG),
-    go("Back to your room.", loc="home_hall", mins=45, cond_=cond(flag("ryan_hot_today")), eff=[cap("corruption", 1, 79)]),
-]
 
 # ── the towel at home (LO, 2026-10-31, DECISIONS 98): his reaction by his Lust, every visit, in his
 #    hub's own bands (<40, 40-69, 70+); "Let it slip." (Daring) pays his Lust +2 and her Exhibitionism +1
