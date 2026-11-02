@@ -293,3 +293,6 @@ patreon/
 
 # HyperFrames workspace: upstream clone (own .git, node_modules) + local video projects
 /hyper-videos/
+
+# Exam run records (transcripts, diffs, grades), kept on disk only; 125 MB by 2026-10-04 (LO, 2026-11-03)
+.claude/skill-evals/author-game/results/
