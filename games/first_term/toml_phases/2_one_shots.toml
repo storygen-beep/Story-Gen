@@ -532,7 +532,7 @@ name = "Your first week"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Class at half past eight. A café on your street with a sign in the window. Seventy-five for Mark by Sunday. And Ryan's door, shut, at the top of the stairs."
+content = "Class at half past eight. A café near campus with a sign in the window. Seventy-five for Mark by Sunday. And Ryan's door, shut, at the top of the stairs."
 
 [[canvases.nodes.blocks]]
 type    = "heading"
@@ -540,7 +540,7 @@ content = "How this week works"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "You need $75 by Sunday: the rent is taken then. The café on your street is hiring. Classes are three a day Monday to Thursday and one on Friday; skipping one costs your grade. People are in different places at different hours: the People and Schedules pages show where. What you wear changes how people look at you. Hygiene is on unless you turn it off now: shower to keep it up."
+content = "You need $75 by Sunday: the rent is taken then. The café near campus is hiring. Classes are three a day Monday to Thursday and one on Friday; skipping one costs your grade. People are in different places at different hours: the People and Schedules pages show where. What you wear changes how people look at you. Hygiene is on unless you turn it off now: shower to keep it up."
 
 # Release 1 (college.md, "The first college day"; DECISIONS 121): the opening hands her to college.
 # Laura's line, then "Go to campus." walks her to the dean's office (15 minutes; 5 more for the card).

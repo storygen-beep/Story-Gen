@@ -1,5 +1,7 @@
 # [REVIEW] Person — Laura
 
+> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 4: her kitchen invite "Come upstairs after." (Tuesday, her step 0) gets a written no, "\"Not tonight, Mom.\"", Love -1, one line from her ("Oh. Okay, sweetheart. It'll keep."). Row 14: the tidy check's "Ask what she saw in your room." screen is written from the tidy row below (Everyday): her panties on the bed, said low while Mark is at the table, her eyes on Ella's lap. Changed from the signed line: "The lace one." is cut, because the wardrobe has no lace underwear (only `plain_panties`). Built in `laura.py`.
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): step 4's "Stay where you are." pays Corruption +1 cap 59 (was cap 19, which could never pay behind its Curious gate); a sign on her body that she wants Ryan before step 4 turns on his name (step 3). Sections changed: Ladder, the seven columns, Leak and promise.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the release-1 ladder, from `proposals/LAURA_R1_LADDER.md` (signed 2026-11-01). Changed: what she keeps, the Saturday shower row, Ladder, the seven columns, Leak and promise, step 4, the gaps, Everyday (tease and touch cut, Love +2 once a day in total), Cut. Everything else as signed.

@@ -75,6 +75,9 @@ flagEffects = [
   { targetType = "player", flag = "mark_paid_look", op = "unset" },
   { targetType = "player", flag = "mark_tv_paid", op = "unset" },   # channel 5 with Mark pays once a day (DECISIONS 92)
   { targetType = "player", flag = "ryan_towel_today", op = "unset" },
+  # reader a3 (DECISIONS 131): the front step's showing and Vance's paid no, once a day
+  { targetType = "player", flag = "street_step_today", op = "unset" },
+  { targetType = "player", flag = "vance_no_today", op = "unset" },
   { targetType = "player", flag = "out_shown_today", op = "unset" },
   { targetType = "player", flag = "ryan_hot_today", op = "unset" },
   { targetType = "player", flag = "laura_love_today", op = "unset" },

@@ -246,8 +246,12 @@ DINNER_DONE = [
        eff=[energy(15), warm(L, 3)]),
     go("Done.", loc=K, mins=30, cond_=cond(wd(6), flag("room_tidy", False)), flags=[fset("ate_dinner")],
        eff=[energy(15)]),
+    # reader a3 verify (DECISIONS 131): after an accident with her first (H2): her door or her shower; two copies, never both
     go("Ask what she saw in your room.", node="hl_tidy_tease", mins=30,
-       cond_=cond(wd(6), flag("room_tidy"), CURIOUS, flag("ate_dinner", False)),
+       cond_=cond(wd(6), flag("room_tidy"), CURIOUS, flag("ate_dinner", False), flag("saw_laura_alone")),
+       flags=[fset("ate_dinner"), funset("room_tidy")], eff=[energy(15), warm(L, 3)]),
+    go("Ask what she saw in your room.", node="hl_tidy_tease", mins=30,
+       cond_=cond(wd(6), flag("room_tidy"), CURIOUS, flag("ate_dinner", False), flag("saw_laura_alone", False), flag("laura_shower_seen")),
        flags=[fset("ate_dinner"), funset("room_tidy")], eff=[energy(15), warm(L, 3)]),
 ]
 # Her text (phone.py laura_dinner, DECISIONS 87): "yes, starving" sets dinner_promised, so coming pays
@@ -310,8 +314,18 @@ hub_nodes += [
                                                G(cond(flag("laura_counted_twenty")), P("She counts it again."))],
          [go("Sit back down.", node="hl_dinner", flags=[fset("laura_counted_twenty")])]),
 ]
-hub_nodes.append(node("hl_tidy_tease", "Your room", [placeholder(f"{LS}:96", "Laura, Sunday dinner tidy check: tease (Curious)")],
-                      [go("Done.", loc=K)]))
+# reader a3 #14 (DECISIONS 131): written from npc_laura.md (the tidy check row, was :96, now :158). The signed line's
+# "The lace one." names a garment her catalog doesn't have (plain_panties only), so it says "panties".
+# Sunday 18:00-20:00: Mark's Sunday row has him in the kitchen all day, Ryan only 18:00-19:00, so both are groups.
+hub_nodes.append(node("hl_tidy_tease", "Your room", [
+    ME("What did you see in my room, Mom?"),
+    G(cond(here(M, K)), P("Laura looks down the table at Mark, and lowers her voice.")),
+    D(L, "Your laundry was on the bed. The little things, right on top, where anybody could see them."),
+    P("She says it into her wine, pink to the ears. Her eyes go down to your lap under the table, and come back up slowly."),
+    D(L, "I folded them for you. I don't know why I'm telling you that."),
+    T("She had your smallest things in her hands. She's still thinking about it."),
+    D(L, "Eat your dinner, sweetheart."),
+], [go("Done.", loc=K)]))
 add_item("dinner", "Sit down to dinner.", HER_EVE + [tod("18:00", "20:00")], "ate_dinner", K,
          [G(cond(flag("dinner_promised")), D(L, "You came. Sit, sit. It's still hot.")),
           G(cond(flag("dinner_promised", False), flag("said_eating_out"), SAID_OUT),
@@ -427,6 +441,9 @@ out.append({
                eff=[{"targetType": "npc", "npcId": L, "trait": "warmth", "op": "add", "value": 2, "cap": 100}]),
             go("Follow her upstairs.", loc="home_master_bedroom", mins=2, flags=[fset("laura_dress_invite")],
                cond_=cond(wd(1), tod("18:00", "22:00"), trait("laura_step", "eq", 0))),
+            # reader a3 #4 (DECISIONS 131): her invite gets a written no; it costs her Love -1
+            go("\"Not tonight, Mom.\"", node="not_tonight", mins=2, eff=[nadd(L, "warmth", -1)],
+               cond_=cond(wd(1), tod("18:00", "22:00"), trait("laura_step", "eq", 0))),
             go("Leave her to it.", loc="home_hall"),
         ]),
         node("talk", "Talk", [
@@ -438,6 +455,12 @@ out.append({
             G(cond(trait("hygiene", "lt", 30), flag("hygiene_off", False)),
               P("Halfway through she wrinkles her nose and steps back, and the easy goes out of it.")),
         ], [go("Go.", loc=K, mins=5)]),
+        # reader a3 #4 (DECISIONS 131): the no to "Come upstairs after." Every Tuesday at her step 0 she asks again.
+        node("not_tonight", "Not tonight", [
+            ME("Not tonight, Mom."),
+            P("The funny little smile goes. She turns back to the stove and stirs something that doesn't need it."),
+            D(L, "Oh. Okay, sweetheart. It'll keep."),
+        ], [go("Go.", loc="home_hall", mins=2)]),
         *hub_nodes,
         *LT_KITCHEN[2],
     ]})
@@ -535,6 +558,8 @@ out.append({
 from sheetbeats import beat
 _t4 = step_trigger(L, 4, bind_npc=False)
 _t4["substitution_only"] = True
+# reader a3 verify (DECISIONS 131): "Laura's door ... again" and her "Ryan." need her bedroom door seen first, not only the shower
+_t4["conditions"]["items"].append(flag("laura_alone_seen"))
 DONE4_EFF = [nadd(L, "warmth", 5), setv("laura_step", 4)]
 DONE4_FLAGS = [fset("laura_04_done"), fset("laura_said_ryan"), fset("saw_laura_alone"), fset("laura_alone_seen")]
 out.append({

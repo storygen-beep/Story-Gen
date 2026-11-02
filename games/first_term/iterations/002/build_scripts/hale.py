@@ -33,28 +33,38 @@ HAND = ("You sit on the corner of his desk and undo the buttons yourself, one at
 #    walks in late from the dean (college.md), so the step's window is the whole lecture, not its first quarter-hour. ──
 FIRST_DAY = {"type": "hours_since_flag", "subject": "player", "flag_key": "opening_done", "operator": "lt", "value": 12}
 LATER_DAY = {"type": "hours_since_flag", "subject": "player", "flag_key": "opening_done", "operator": "gte", "value": 12}
+# false lines a3, reader follow-up: "Sit through the lecture." takes 60 minutes and the screen after it says the room
+# packs up, so the step opens only while that hour still ends by 10:00 (a late arrival waits for the next Psychology class)
+_t1 = step_trigger(H, 1)
+for _s in _t1["schedules"]:
+    _s["end_time"] = "08:55"
 out.append({
     "id": "hale_01_first_lecture", "name": "Your first lecture",
     "description": "Hale step 1 (release 1): she walks in late; \"Front row, where I can see you.\"; his pen at her feet, and he waits. Meets Hale, Nadia, the guy beside her and the rival girl.",
-    "trigger": step_trigger(H, 1),
+    "trigger": _t1,
     "nodes": [
         node("late", "Late", [
             IMG("scenes/hale_01_lecture.jpg", "a lecture hall, a male professor in his late thirties at a lectern, students in raked seats, a girl in the front row",
                 "professor at lectern lecture hall students", "college lecture hall front row professor"),
-            P("The lecture hall door is heavy and it bangs behind you. Two hundred heads turn. At the lectern a man in a tweed jacket stops in the middle of a sentence and looks at you, and lets the silence go on."),
+            # false lines a3 #20 (DECISIONS 129): a Psychology class can meet Hale and Nadia first
+            G(cond(flag("hale_met", False)), P("The lecture hall door is heavy and it bangs behind you. Two hundred heads turn. At the lectern a man in a tweed jacket stops in the middle of a sentence and looks at you, and lets the silence go on.")),
+            G(cond(flag("hale_met")), P("The lecture hall door is heavy and it bangs behind you. Two hundred heads turn. At the lectern Dr. Hale stops in the middle of a sentence and looks at you, and lets the silence go on.")),
             G(cond(FIRST_DAY), D(H, "Late, on the first day.")),
             G(cond(LATER_DAY), D(H, "Late.")),
             P("He points with his pen at the front row."),
             D(H, "Front row. Where I can see you."),
-        ], [go("\"Sorry.\"", node="front_row", mins=2, flags=[fset("hale_met"), fset("nadia_met"), fset("desk_guy_met"), fset("rival_met")])]),
+        ], [go("\"Sorry.\"", node="front_row", mins=2, flags=[fset("hale_met")])]),
         node("front_row", "The front row", [
-            P("The only free seat in the front row is beside a girl with big glasses and a cardigan, who moves her bag off it for you."),
-            WHO("Sit here. I'm Nadia. Nobody sits at the front for him. You'll see why."),
+            G(cond(flag("nadia_met", False)), P("The only free seat in the front row is beside a girl with big glasses and a cardigan, who moves her bag off it for you."),
+              WHO("Sit here. I'm Nadia. Nobody sits at the front for him. You'll see why.")),
+            G(cond(flag("nadia_met")), P("Nadia waves you over to the free seat beside her in the front row and moves her bag off it."),
+              D("npc_nadia", "Nobody sits at the front for him. You'll see why.")),
             G(cond(SKIRT), P("You sit down and your skirt rides up your thighs. You tug it. He watches you tug it.")),
             P("He goes back to his slide. Then his pen slips out of his fingers and rolls off the stage, and stops against your shoe. He doesn't bend for it. He waits."),
         ], [
-            go("Pick it up.", node="pen", mins=2),
-            go("Leave it.", node="left", mins=2),
+            # false lines a3 #20 (reader): Nadia is met here, after the screen that introduces her has rendered
+            go("Pick it up.", node="pen", mins=2, flags=[fset("nadia_met"), fset("desk_guy_met"), fset("rival_met")]),
+            go("Leave it.", node="left", mins=2, flags=[fset("nadia_met"), fset("desk_guy_met"), fset("rival_met")]),
         ]),
         node("pen", "His pen", [
             P("You bend down for it, all the way, and when you come back up his eyes are on your chest, not your face. He's hard. You can see the line of it against his trousers from the front row. He sees you see it, and steps back behind the lectern."),
@@ -172,10 +182,14 @@ out.append({
 #    leads; "Let him." is a mixed act (both meters); Claire's knock is the ladder's one cut-off. ──
 from sheetbeats import beat, pool
 CAP = lambda k, n, c: {"targetType": "player", "trait": k, "op": "add", "value": n, "cap": c}
+# false lines a3 #21 (DECISIONS 129): the knock is 10 minutes in and Claire's pickup is 19:30, so "I'm early" ends at 19:15
+_t4 = step_trigger(H, 4, retry_days=7)
+for _s in _t4["schedules"]:
+    _s["end_time"] = "19:15"
 out.append({
     "id": "hale_04_claire_knocks", "name": "The first session",
     "description": "Hale step 4 of 4, the top step (release 1): \"Tell me what you feel.\" His hand; Claire knocks. The weekly session opens after it.",
-    "trigger": step_trigger(H, 4, retry_days=7),
+    "trigger": _t4,
     "nodes": [
         node("feel", "Tell me what you feel", [P(beat("hale_04_first_session", "feel")),
             VID("a professor in his office with his hand on a student's bare breast, her saying something", "professor touches student breast office", "teacher hand on tit student office", pool_dir="sex/hale_04_feel_t4")],
@@ -199,7 +213,7 @@ out.append({
             P("You walk the whole corridor without looking back. Your legs are shaking."),
         ], [go("Go home.", loc="home_hall", mins=25, consumes=True, eff=[setv("hale_step", 4)], flags=[done(4), fset("hale_touched")])]),
         node("isnt", "A C", [
-            P("You pull your top down over your tits."),
+            P("You pull everything back down over your tits."),
             ME("This isn't coaching."),
             P("He sits back in his chair."),
             D(H, "Then your grade stays where it is."),
@@ -221,7 +235,8 @@ ROLL = lambda op, v: trait("hale_claire_roll", op, v)
 SESSION_PAY = lambda c: [add("grade_psych", 2), CAP("corruption", 1, c), CAP("exhibitionism", 1, c)]
 out.append({
     "id": "hale_thursdays", "name": "Thursday, half past six",
-    "description": "The Thursday session after Hale's step 4: his hands over her clothes (Curious, Daring) or her top off and touching herself while he takes notes (Bold and Showing). Grade +2, both meters +1. Claire is early one Thursday in four. Corruption 60 locked.",
+    # reader a3, seen by the readers (DECISIONS 131): the stages match the trigger (Corruption 40, Exhibitionism 40)
+    "description": "The Thursday session after Hale's step 4: his hands over her clothes (Bold and Showing: Corruption 40, Exhibitionism 40) or her top off and touching herself while he takes notes (Hungry: Corruption 60). Grade +2, both meters +1. Claire is early one Thursday in four. Hale, further: next release.",
     "trigger": {"location": "hale_office", "requires_npc": H, "is_repeatable": True, "priority": 5, "is_active": True,
                 "max_triggers_per_day": 1,
                 "schedules": [{"weekdays": [3], "start_time": "18:30", "end_time": "19:05"}],   # done before Claire at half past (as built)
@@ -282,13 +297,24 @@ out.append({
         G(cond(trait("grade_psych", "gte", 40), trait("grade_psych", "lt", 70)), D(H, "A pass. You could do better. You know you could.")),
         G(cond(trait("grade_psych", "gte", 70)), D(H, "Top of the class. I'd say I'm proud, but you'd make something of it.")),
         G(cond(SKIRT), P("His eyes drop to your thighs, and his neck goes red. He loses the sentence, pulls his chair in tight under the desk, and starts it again.")),
-        G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}, {"type": "worn_exposure", "operator": "eq", "value": 0}), P("He keeps the desk between you.")),
+        # reader a3 #29 (DECISIONS 131): the braless line names her body. His crude column (npc_hale.md) is legs/ass at
+        # stages 1-2 and tits/nipples from stage 3, so "nipples" waits for his step 3; before it, her chest.
+        G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}, {"type": "worn_exposure", "operator": "eq", "value": 0}, trait("hale_step", "lt", 3)),
+          P("His eyes go to your chest and stay there a second too long. He keeps the desk between you.")),
+        G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}, {"type": "worn_exposure", "operator": "eq", "value": 0}, trait("hale_step", "gte", 3)),
+          P("His eyes go to your nipples, showing through what you're wearing. He keeps the desk between you.")),
         G(cond(flag("college_for_grades")), D(H, "You're here for the grades. I can always tell the ones who are.")),
         G(cond(flag("college_for_fun")), D(H, "You're here for the fun, aren't you? Is this fun?")),
         G(cond(flag("college_for_freedom")), D(H, "You look like someone who came here to get away from something.")),
         G(cond(trait("hale_step", "eq", 2), tod("18:00", "19:30")), P("He looks at the clock. It's after six.")),
         G(cond(trait("hale_step", "eq", 4)), P("He looks at the clock, and then at you, like you're both on his schedule.")),
-    ], [go("\"Goodnight, Dr. Hale.\"", loc="faculty_floor")])]})
+        # reader a3 #18 (DECISIONS 131): every step gets a line pointing at the next visit. This hub runs Thu 17:00-19:30.
+        # Step 1: the next step is a Psychology class (Mon/Wed/Fri), and Friday's is tomorrow. Step 2: his step 3 opens
+        # here at 18:00, so before six he says six. Step 3: his step 4 and the sessions are Thursdays at 18:30.
+        G(cond(trait("hale_step", "eq", 1)), D(H, "Front row tomorrow, @player. Where I can see you.")),
+        G(cond(trait("hale_step", "eq", 2), tod("17:00", "18:00")), D(H, "After six, @player. Not before.")),
+        G(cond(trait("hale_step", "eq", 3)), D(H, "Thursdays. Half past six, @player.")),
+    ], [go("\"Bye, Dr. Hale.\"", loc="faculty_floor")])]})
 
 # ── Nadia: the library, the canteen, beside her in Psychology ──
 NADIA_LINES = POOL(D(N, "Thursday office hours are a trap, you know that?"),
@@ -315,7 +341,8 @@ cards = step_cards(H, {
     1: ("Monday, first class: Psychology with Dr. Hale.", "Go to Psychology on Monday morning, the lecture hall"),
     2: ("His eyes are on the front row every class.", "The next Psychology class, front row, Monday, Wednesday or Friday morning (Daring)"),
     3: ("\"Thursday. Office hours.\"", "Thursday evening: Dr. Hale's office on the faculty floor, during his office hours"),
-    4: ("\"Thursdays. Half past six. The door will be locked.\"", "Thursday, half past six: his office (Curious, Daring)"),
+    # reader a3 (DECISIONS 131): the card names step 4's real gate, Corruption 40 and Exhibitionism 40
+    4: ("\"Thursdays. Half past six. The door will be locked.\"", "Thursday, half past six: his office (Bold, Showing)"),
 }, terminal_text=("Thursdays, half past six: his office, the door locked.", "Hale, further. (Next release)"))
 for c in cards:
     c["when"].append({"flag": "opening_done", "op": "is_true"})

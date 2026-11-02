@@ -1,5 +1,7 @@
 # [READY] Scene — zoe_02_bra_through_the_sleeve
 
+> **Changed 2026-11-02** (reader fails a3, signed by LO 2026-11-02, DECISIONS 131): seen by the readers, the `sleeve` button "Give it back." became "Ask for it back." (Zoe doesn't have the bra yet when it shows; `zoe.py`).
+
 > **Changed 2026-11-01, signed by LO 2026-11-01 ("Continue")** (DECISIONS 99–118): Zoe's release-1 ladder (`sheets/people/npc_zoe.md`, signed). Changed: the gate is Curious **or** Daring (`meters.md` rule 5: a showing yes and a doing yes on one screen); a doing yes added, "Dare me something else.", which plays the dares' kiss screen; her voice row.
 
 > Signed by LO: LO, 2026-10-08.
@@ -27,7 +29,7 @@
 | `balcony` | Zoe: "Bra off. Through the sleeve." | no | "Watch me." → `sleeve` (Daring) · "Dare me something else." → `kiss` (Curious) · "Not tonight, Zo." → the party (parked) | none |
 | `kiss` | Zoe: "Fine. Kiss the cocky guy. Properly." Then the dares' `low_do` beat (`zoe_dares.md`), the room behind the glass watching | yes | "Saturday?" → `saturday` | corruption add +3 |
 | `saturday` | Zoe, flushed: "There's a hot tub Saturday. Just us." | no | "Saturday." → the party | `zoe_step` set 2 · `party_house_invite` set |
-| `sleeve` | she works it out through her sleeve; nipples tight; a guy inside whistles | no | "Give it back." → `mine` | her bra slot emptied · exhibitionism add +3 |
+| `sleeve` | she works it out through her sleeve; nipples tight; a guy inside whistles | no | "Ask for it back." → `mine` | her bra slot emptied · exhibitionism add +3 |
 | `mine` | Zoe tucks it in her back pocket: "Nope. Mine now." Then: the hot tub, Saturday | no | "Saturday." → the party | `zoe_step` set 2 · `party_house_invite` set |
 
 This step sets `party_house_invite`, which opens the party house (nothing set it before).
@@ -40,3 +42,5 @@ This step sets `party_house_invite`, which opens the party house (nothing set it
 |---|---|
 | the scene and its lines | the arc ideas, Zoe A 2 (heat 10-06) |
 | the invite flag here | guess (fix 1, the flag check) |
+
+> Changed 2026-11-02 (reader a3, older rows; DECISIONS 131; LO: "fix the older ones too"): in Zoe's dress the bra slides out through the armhole, not a sleeve.

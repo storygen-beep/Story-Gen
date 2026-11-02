@@ -1,5 +1,7 @@
 # [READY] Person — Ryan
 
+> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): rows 7-8, 13: in the towel at his top band (Want 70+, "One pull, @player.nickname.") a written no, "Hold the knot.": she says "Not tonight." (18:00-06:00) or "Not now.", he says "Tease.", his Want +1 once a day (the towel's `ryan_towel_today`, no new flag); in his room, the kitchen and the couch. His towel event in the hall (`home_event_ryan_towel`) ends its Curious and Bold screens on "Not here. Mom's up." Built in `ryan.py`, `home_items.py` and `writer.py`.
+
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 127) (LO: "rise from normal", "more in the sex screens", "B, sheet it"): step 8
 > rises from a talk through her doubt, a kiss and undressing, with her picks in the sex; the step-8 repeat becomes a
 > menu that grows by his Lust. Detail on `scenes/ryan_08_two_knocks_first_sex.md` and `scenes/ryan_hot_repeatables.md`
@@ -251,3 +253,4 @@ on `home_items.towel_set`.
 | no "this morning" | sweep A6-04 |
 | card goals are the step's real requirements | LO's play note, 2026-10-08 · sweep K8 and its 38 more cards |
 | his underwear line names Laura only when she is home | sweep A2-07 |
+

@@ -50,6 +50,12 @@ type      = "flag"
 subject   = "player"
 flag_key  = "vance_met"
 operator  = "is_false"
+# false lines a3 #16 (DECISIONS 129): his rent row puts him at your front door; the porch screen waits
+[[canvases.trigger.conditions.items]]
+type        = "npc_at_location"
+location_id = "home_front_door"
+npc_id      = "npc_vance"
+operator    = "is_absent"
 
 [[canvases.nodes]]
 id   = "porch"
@@ -72,7 +78,8 @@ content = "His eyes go down you, to your tits, down your legs, and come back up 
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Good. Somebody in that house should. You tell your stepfather I said good evening."
+# reader a3 #66 (DECISIONS 131): his not-yet; the evening talk is hub_vance_porch's steps (Want 30)
+content = "Good. Somebody in that house should. You tell your stepfather I said good evening. We'll talk properly some evening."
 [canvases.nodes.blocks.props]
 speaker = "npc"
 npcId   = "npc_vance"
@@ -123,7 +130,8 @@ name = "His porch"
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
 blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "lt", value = 30 } ] }, blocks = [
-  { type = "paragraph", content = "Vance looks up from the paper he isn't reading and nods. That's all. His eyes stay on you while you stand at the bottom of his steps." },
+  # reader a3 #60 (DECISIONS 131): under Want 30 his look is on her body
+  { type = "paragraph", content = "Vance looks up from the paper he isn't reading and nods. That's all. His eyes go to your legs and come back up slow while you stand at the bottom of his steps." },
   { type = "dialog", content = "Evening. Tell Mark Sunday comes round quicker than he thinks.", props = { speaker = "npc", npcId = "npc_vance" } },
 ] } ]
 
@@ -131,7 +139,8 @@ blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", item
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
 blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "gte", value = 30 }, { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "lt", value = 60 } ] }, blocks = [
   { type = "paragraph", content = "Vance folds the paper and puts it down. He's started doing that when it's you. He looks at your legs like he's doing sums." },
-  { type = "dialog", content = "Mark's girl is growing up. You come and sit out here one evening, keep an old man company.", props = { speaker = "npc", npcId = "npc_vance" } },
+  # reader a3 #60 (DECISIONS 131): the not-yet, "One evening you'll sit with me." (folded into his ask so he doesn't say it twice)
+  { type = "dialog", content = "Mark's girl is growing up. One evening you'll sit with me, keep an old man company.", props = { speaker = "npc", npcId = "npc_vance" } },
 ] } ]
 
 [[canvases.nodes.blocks]]
@@ -153,6 +162,25 @@ text       = "\"Goodnight, Mr. Vance.\""
 targetType = "location"
 locationId = "street"
 time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "lt", value = 30 } ] }
+
+# reader a3 #52 (DECISIONS 131): from Want 30 he has asked her to sit, so the no costs him (call A): Lust +1 and his line
+[[canvases.nodes.exit_block.choices]]
+text       = "\"Goodnight, Mr. Vance.\""
+targetType = "node"
+nodeId     = "goodnight"
+time_progression_minutes = 2
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "gte", value = 30 }, { type = "flag", subject = "player", flag_key = "vance_no_today", operator = "is_false" } ] }
+effects    = [ { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 1 } ]
+flagEffects = [ { targetType = "player", flag = "vance_no_today", op = "set" } ]
+
+# the same no again that day: his line, no pay (the climb is paid for: a no is not a free Want rung)
+[[canvases.nodes.exit_block.choices]]
+text       = "\"Goodnight, Mr. Vance.\""
+targetType = "node"
+nodeId     = "goodnight"
+time_progression_minutes = 2
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "gte", value = 30 }, { type = "flag", subject = "player", flag_key = "vance_no_today", operator = "is_true" } ] }
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Sit on his steps a while."
@@ -167,6 +195,30 @@ targetType = "node"
 nodeId     = "owed"
 time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "power", operator = "gte", value = 60 } ] }
+
+[[canvases.nodes]]
+id   = "goodnight"
+name = "Goodnight"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Suit yourself, Miss. The step's not going anywhere."
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_vance"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He picks the paper back up. He doesn't read it. He watches your ass all the way down his path."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Go."
+targetType = "location"
+locationId = "street"
+time_progression_minutes = 8
 
 [[canvases.nodes]]
 id   = "steps"
@@ -852,7 +904,7 @@ content = "By the shirt rail a man has stopped pretending to look at shirts. He'
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "The short skirt: you turn round to look over your shoulder. The hem stops just under your ass. Wear it out of the house and people look. Wear it to the Sunday table and Mark does more than look. But you'd need to be Daring to walk out the door in it."
+content = "The short skirt: you turn round to look over your shoulder. The hem stops just under your ass. Wear it out of the house and people look. Wear it to the Sunday table and Mark does more than look. But you'd need to be Curious or Daring to walk out the door in it."
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -860,7 +912,7 @@ content = "The sheer blouse: white, soft, and you can see a bra through it, or w
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "The sports bra: tight, black, made for running. In the park, at Daring, you could run in just this with leggings. Everybody on the path would get a show."
+content = "The sports bra: tight, black, made for running."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -903,12 +955,42 @@ name = "The hot tub"
 type = "paragraph"
 content = "You strip on the cold deck and get in fast. The water is almost too hot, but you sink anyway until it's over your tits, then at your chin. The music from the house is far away. The steam goes straight up into the stars."
 
+# reader a3 #63 (DECISIONS 131): the kissing-friends draw is cut (no reaction to her); the knee guy is the screen now
 [[canvases.nodes.blocks]]
-type = "block_pool"
-blocks = [
-  { type = "paragraph", content = "Two of Zoe's friends are on the other side, kissing like you aren't there. You try not to watch, but under the water his hand is somewhere you can guess." },
-  { type = "paragraph", content = "A guy you don't know gets in, says hi, and spends the next ten minutes trying not to look at your tits through the water. He fails, but you let him. When his knee finds yours under the water, you move it away. Not here." },
-]
+type = "paragraph"
+content = "A guy you don't know gets in, says hi, and spends the next ten minutes trying not to look at your tits through the water. He fails, but you let him. Then his knee finds yours under the water, and stays there."
+
+# reader a3 #54 (DECISIONS 131): the knee is her choice, two buttons
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Move it away."
+targetType = "node"
+nodeId     = "moved"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "node"
+nodeId     = "left"
+time_progression_minutes = 5
+effects    = [ { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 } ]
+
+[[canvases.nodes]]
+id   = "moved"
+name = "Not here"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You move your knee away. He lifts both hands out of the water, grinning, and his eyes go straight back to your tits."
+
+# reader a3 #45 (DECISIONS 131): the hook. The party house opens every Saturday night (party_house.md).
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Fair. Same tub next Saturday?"
+[canvases.nodes.blocks.props]
+speaker = "unknown"
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -922,6 +1004,40 @@ conditions = { version = "1.0", logic = "AND", items = [ { type = "time_of_day",
 effects    = [ { targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 } ]
 
 # after 22:00 the same exit marks the late night (Q69; iteration 002, part 5)
+[[canvases.nodes.exit_block.choices]]
+text       = "Get out, dripping."
+targetType = "location"
+locationId = "party_house"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [ { type = "time_of_day", start_time = "22:00", end_time = "06:00" } ] }
+effects    = [ { targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 } ]
+flagEffects = [ { targetType = "player", flag = "late_party", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" } ]
+
+[[canvases.nodes]]
+id   = "left"
+name = "His knee"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You leave it. His knee presses into yours, then his thigh slides along your thigh under the water, slow, all the way up. His eyes don't leave your tits. Your nipples go hard in the steam, and he sees it. He doesn't go further, and you don't move."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Same tub next Saturday?"
+[canvases.nodes.blocks.props]
+speaker = "unknown"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Get out, dripping."
+targetType = "location"
+locationId = "party_house"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [ { type = "time_of_day", start_time = "06:00", end_time = "22:00" } ] }
+effects    = [ { targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 } ]
+
 [[canvases.nodes.exit_block.choices]]
 text       = "Get out, dripping."
 targetType = "location"

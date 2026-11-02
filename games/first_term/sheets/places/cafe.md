@@ -51,3 +51,7 @@
 | the job ask | SYSTEMS §2 (day 1) |
 | inside Town | LO, 2026-10-08 (questions 43–45) |
 | fix from the false-line sweep | sweep A1-20 (2026-10-08) |
+
+## Changed 2026-11-02 (reader a3, `READER_FAILS_A3.md`, signed by LO 2026-11-02; DECISIONS 131)
+
+- Row 43 (`cafe_coffee`, before she meets Tom): "Nobody here knows you. Taped inside the window, the STAFF WANTED card has a coffee ring on it." (`extras.py`).

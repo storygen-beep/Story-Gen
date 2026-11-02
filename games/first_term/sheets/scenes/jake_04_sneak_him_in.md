@@ -1,5 +1,7 @@
 # [READY] Scene — jake_04_sneak_him_in
 
+> **Changed 2026-11-02** (reader fails a3, signed by LO 2026-11-02, DECISIONS 131): row 22, `after` now points ahead: Jake mumbles "Next Saturday. Same room." before he falls asleep (`jake.py`).
+
 > **Changed 2026-11-01 after the build, signed by LO 2026-11-01 ("Signed, build them")** (the reader's FAILs; LO's picks in chat): the no gets his reply.
 
 > **New 2026-11-01, signed by LO 2026-11-01 ("Continue")** (DECISIONS 99–119). From Jake's signed release-1 ladder
@@ -60,7 +62,7 @@ Every last sentence is on the bodies (the headboard and his cock; still inside h
 
 **`door`:** "Jake walks you up to the porch and stops under the light. You don't let go of his hand. You open the front door and pull him in after you." · @player, a whisper: "Come up." · "On the dark stairs he catches your hip and his breath is hot on your ear." · Jake: "Your room. Now."
 **`landing`:** "A footstep on the landing. You both freeze. Your door has no key, not since Sunday." · "Jake's hand goes over your mouth. The footstep stops, and then goes on, and a door closes." · "He doesn't pull out. He starts again, slower."
-**`after`:** "Jake's asleep in under a minute, one arm heavy across you, taking up most of the bed." · if `ryan_step` gte 5: "Through the wall, very low, so low you might have dreamed it:" · Ryan: "…@player.nickname?" · *(thought)* "He heard. Every second."
+**`after`:** "Jake pulls you in against his chest and mumbles it into your hair, already half asleep." · Jake: "Next Saturday. Same room." · "He's asleep in under a minute, one arm heavy across you, taking up most of the bed." · if `ryan_step` gte 5: "Through the wall, very low, so low you might have dreamed it:" · Ryan: "…@player.nickname?" · *(thought)* "He heard. Every second."
 
 ## After it
 - **Ryan, next morning** (his bathroom-door hub, the first morning after `jake_first_time`, once): "Thin walls, @player.nickname. Remember?" Mine.

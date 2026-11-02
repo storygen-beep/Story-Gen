@@ -157,7 +157,11 @@ out.append({
             VID("a couple coming together, her hand over his mouth, still afterwards", "couple cum together quiet", "creampie boyfriend her bed", pool_dir="sex/jake_04_comes_t5")],
             [go("Lie there.", node="after", mins=10)]),
         node("after", "Through the wall", [
-            P("Jake's asleep in under a minute, one arm heavy across you, taking up most of the bed."),
+            # reader a3 #22 (DECISIONS 131): the yes path points ahead. True: after step 4 the date end's "Come up." is his
+            # room visit on any Saturday with a date (jake_saturday_date).
+            P("Jake pulls you in against his chest and mumbles it into your hair, already half asleep."),
+            D(J, "Next Saturday. Same room."),
+            P("He's asleep in under a minute, one arm heavy across you, taking up most of the bed."),
             G(cond(RYAN_PAST_5), P("Through the wall, very low, so low you might have dreamed it:"), D(R, "…@player.nickname?"), T("He heard. Every second.")),
         ], [go("Sleep.", loc="home_ella_room", mins=360, consumes=True,
                eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 3, "cap": 79}, setv("jake_step", 4), nadd(R, "want", 5)],   # a Bold one-time step (DECISIONS 124)
@@ -217,8 +221,10 @@ JAKE_STATE = [
     G(cond(SKIRT), D(J, "Guys. Look at her."),
       P("He says it to whoever's nearest, and his hand slides down onto your ass so they know whose legs they're looking at. His own eyes keep dropping to your hem."),
       D(J, "Later. When they're not looking.")),
+    # reader a3 #30-34 (DECISIONS 131): the not-yet the skirt branch has (and only once, if a skirt shows too)
     G(cond(ZOE_DRESS), P("His eyes go down your legs and stay there.")),
-    G(cond(LAURA_DRESS), D(J, "Everyone was looking at you tonight.")),
+    G(cond(ZOE_DRESS, {"type": "worn_type", "operator": "neq", "value": "short_skirt"}), D(J, "Later. When they're not looking.")),
+    G(cond(LAURA_DRESS), D(J, "Everyone's looking at you in that dress.")),   # false lines a3 #23-26: his hubs are daytime
     G(cond(trait("jake_step", "eq", 1)), P("He puts his hand low on your back the second you're close enough.")),
     G(cond(trait("jake_step", "eq", 2)), P("He keeps his hand on your back like he's already decided something about you.")),
     G(cond(trait("jake_step", "eq", 3)), D(J, "Your brother hates me. I could tell at the door.")),

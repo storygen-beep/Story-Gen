@@ -47,7 +47,7 @@
 
 **`kiss`** · 119 words · explicit words 9 (ass, kiss, moan, nipple, tits) · median sentence 9 · act rung: touch · Zoe's middle column: tits, nipples, wet · early: tits, ass (LO, 2026-10-08)
 
-> You unhook your bra and toss it on the deck. The steam rolls over your bare tits. The night air is cold on them, so your nipples go hard above the water. Zoe stares at them. "Babe," she breathes. "Look at you." You grab the back of her neck and pull her in. You kiss her hard, open-mouthed, until she moans into you. Her tits press flat against yours. Her nipples drag across your nipples, hard and wet. Her thigh slides between your thighs under the water. It presses up, slow and firm. Her breath catches. Your hands run down her slick back to her ass. You grab it with both hands and pull her tits tight against yours.
+> You get your bra off and toss it on the deck. The steam rolls over your bare tits. The night air is cold on them, so your nipples go hard above the water. Zoe stares at them. "Babe," she breathes. "Look at you." You grab the back of her neck and pull her in. You kiss her hard, open-mouthed, until she moans into you. Her tits press flat against yours. Her nipples drag across your nipples, hard and wet. Her thigh slides between your thighs under the water. It presses up, slow and firm. Her breath catches. Your hands run down her slick back to her ass. You grab it with both hands and pull her tits tight against yours.
 
 *The last sentence:* her hands on Zoe's ass, their tits pressed together. On the body; not a pivot.
 

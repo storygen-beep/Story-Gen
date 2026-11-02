@@ -84,3 +84,9 @@ Each level-3 entry carries Tom watching from the counter, and not stopping it: t
 | entry | was | now |
 |---|---|---|
 | `l3_let` a | "The man tucks a folded twenty into your apron." | "The man tucks a folded ten into your apron." · re-measured: 130 words, explicit words 4, median sentence 8 |
+
+## Changed 2026-11-02 (reader a3, `READER_FAILS_A3.md`, signed by LO 2026-11-02; DECISIONS 131)
+
+- Row 57 (the lunch line, `cafe.py`): "A man at table two watches you bend over to set his plate down, and stops, eyes on your ass."
+
+> Changed 2026-11-02 (reader a3, older rows; DECISIONS 131; LO: "fix the older ones too"): the strangers' L3 lap (`L3_C`, the back table roars) only at Exhibitionism 60: a room watching is Watched; below it, `L3_A`.

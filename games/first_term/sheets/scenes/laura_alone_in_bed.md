@@ -1,5 +1,7 @@
 # [READY] Scene — laura_alone_in_bed
 
+> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 2: `crack` gains one ungated line after the signed beat: "Her face is turned on the pillow toward the landing, toward Ryan's door. Her lips move around a word you can't hear, and her fingers go faster." Her want for Ryan on her body before `laura_04_she_saw_you` says his name. True every night of the window: Ryan's row has him in his room 22:00-06:45. The signed `crack` beat itself is unchanged (line in `home.py`).
+
 > **Changed 2026-11-01 after the build, signed by LO 2026-11-01 ("Signed, build them")** (the reader's FAILs; LO's picks in chat): the gap opens after Laura's step 2 (LO's pick 2b: her want is shown first).
 
 > **Changed 2026-11-01, signed by LO 2026-11-01 ("Go ahead")** (DECISIONS 99–114): Laura's release-1 ladder (`sheets/people/npc_laura.md`, signed). Changed: "Keep watching." also adds 1 to `laura_gaps_watched` (her step 4 needs 3, this gap and the shower's); after step 3 one line names the dressed-up night; after step 4 two new screens, `crack_after` and `watch_after` (Laura knows, face to the wall, quieter), by `v2-prose`, measured; on a night her step 4 is ready, `laura_04_she_saw_you` takes this slot. The signed screens stand.

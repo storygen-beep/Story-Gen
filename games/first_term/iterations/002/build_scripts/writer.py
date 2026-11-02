@@ -100,6 +100,10 @@ HOOKS = [
     (24, "*He'll be at that bench the next time you bring your basket down. You already know you'll let him fold them again.*"),
     (41, "*Next time he wants something off that shelf, you'll be standing right under it.*"),
     (42, "*Tomorrow he'll act like it never happened. You want to see if he can.*"),
+    # reader a3 #13 (DECISIONS 131): Ryan's towel event, the Curious and Bold screens end on his not-yet. The event runs
+    # Mon-Fri 06:45-07:30, inside Laura's kitchen row (Mon-Fri 06:30-08:00), so "Mom's up" is true on every visit.
+    (38, 'Downstairs a cupboard door bangs, and he finds his voice. "Not here. Mom\'s up."'),
+    (39, 'Downstairs a cupboard door bangs. Ryan steps back into the bathroom doorway, the towel bunched in his fist. "Not here. Mom\'s up."'),
 ]
 
 # 4 · the paid looks' second voice: SP2's "warming up" (shocked, honest, then she does it) under Hungry,

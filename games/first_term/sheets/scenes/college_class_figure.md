@@ -1,5 +1,7 @@
 # [READY] Scene — college_class_figure
 
+> **Changed 2026-11-02** (reader fails a3, signed by LO 2026-11-02, DECISIONS 131): rows 25–26, the risky slot names one watcher: the button is "Lean into your easel and let him look.", the class line is "The guy at the next easel has stopped drawing the model. What you're wearing is doing its job.", the screen is titled "Let him look" (`college.py`; `meet_figure` copies it).
+
 > **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).

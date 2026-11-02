@@ -82,3 +82,8 @@ Both answers count; the second gives his Power add −5: she pushed back (as bui
 | screen | the no (new) | the reply (mine, signed by LO 2026-11-01) |
 |---|---|---|
 | `cafe_job_ask` (the sign in the window) | "Not yet." | Tom: "Sign stays up till somebody takes it." · "He goes back to wiping the machine." The ask comes back the next time she's in the café. |
+
+## Changed 2026-11-02 (reader a3, `READER_FAILS_A3.md`, signed by LO 2026-11-02; DECISIONS 131)
+
+- Row 59 (`hub_tom_cafe`, the tight uniform): "He looks once, at your tits in it, and makes himself look at the till."
+- Row 51 (`hub_tom_cafe`, the tight-dress node): a written no, "Leave it on the counter.", to a short screen: Tom: "Your call." No pay. Both in `iterations/002/build_scripts/tom.py`.

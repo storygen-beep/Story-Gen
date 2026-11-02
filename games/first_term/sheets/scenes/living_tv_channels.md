@@ -1,5 +1,7 @@
 # [REVIEW]] Scene — living_tv_channels (the remote)
 
+> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 1: in Mark's hub, "Channel 5: the adult channel." shows only after his accident (`mark_saw_her`), the same gate as "Leave it on.", so the explicit beat beside him never opens before any sign that he wants her. Alone on the couch it is unchanged. Built in `mark.py` and `home_items.py` (`remote_choices`).
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > **Changed 2026-10-30, waiting for LO's re-sign** (DECISIONS 91): at most five TV sessions a day; after that the row greys out, "Watch TV — Not now."

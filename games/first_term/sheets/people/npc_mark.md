@@ -1,5 +1,7 @@
 # [READY] Person — Mark
 
+> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): rows 1, 5-6, 16: in his living-room hub, channel 5 beside him needs his accident (`mark_saw_her`), like "Leave it on."; in the towel at his top band (Power 60+, "Come here." / "Stand there.") a written no, "Get dressed.": "Suit yourself.", his Want +1 once a day (the towel's `mark_towel_today`, no new flag), and she goes up to her room; at step 3 (`mark_03_shorts`) both openings under Exhibitionism 20 name his look: "His eyes go down your legs under the table." Built in `mark.py` and `home_items.py`.
+
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, skip the play check, build it"; DECISIONS 128): plain items with him pay him nothing (was his Lust +1 each); laundry is a tease ladder by her stage after his accident, no step needed (`scenes/mark_laundry_teases.md`). Sections changed: Everyday (the laundry row).
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): a first accident at home (`mark_00_the_dryer`) that his chosen acts follow; step 3's "Go up and change." at Daring after it; the two touches at Bold; channel 5 at Curious; his towel buttons pay her like Ryan's. Sections changed: Ladder, Everyday, the towel, channel 5.

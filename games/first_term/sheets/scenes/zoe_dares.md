@@ -90,3 +90,9 @@ Every last sentence is on the body. None has her come; the dares stop where the 
 | one a night, Zoe picks | the same |
 | the circle flash kept | `party_dare.md` (signed 2026-10-09) |
 | the "You again." lines, the counter, the flags | mine, confirmed by LO 2026-11-01 ("Continue") |
+
+### False lines a3, 2026-11-02 (DECISIONS 129)
+Zoe's dare says "till the song ends", but the pool's second entry (the circle flash) counted to three. `high_show`
+entry two is now `FLASH_SONG` (`pools.py`): "Till the song ends, babe," and she holds them out past the last note.
+108 words, 4 explicit (the circle flash it replaces: 97, 4). The circle flash itself stays in `party_dare`.
+

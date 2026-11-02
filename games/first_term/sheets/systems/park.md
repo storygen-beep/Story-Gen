@@ -109,3 +109,10 @@ new person: a written age, your yes and an SP5 re-sign.
 | Zoe in the park, weekend mornings | LO, 2026-10-08 · the hours are a guess |
 | the park couple as the first explicit beat | LO, 2026-10-08 |
 | the feed and the selfie live on the phone only | LO's play note, 2026-10-08 (sweep A1-34, K6) |
+
+## Changed 2026-11-02 (reader a3, `READER_FAILS_A3.md`, signed by LO 2026-11-02; DECISIONS 131)
+
+- Row 44 + 67 (`park_run`). The run now opens on the gates ("You stretch against the park gates…") with "Run the loop. (10 energy)" and "Walk it instead."; the run text shows only after "Run the loop." The walk has its own short screen: a man on the bench watching her legs and tits. The run ends on a hook: "Zoe runs here weekends. She'd make you go further." once `zoe_met` ("Zoe's still out on the loop somewhere…" while she is in the park), otherwise "Same time tomorrow."
+- Row 61 (`park_selfie`). The plain "Post it." needs Exhibitionism 20. Under it only "Delete them all." shows, with her thought "Put yourself up where anyone can look? Not yet."
+- Row 62 (`park_walk`). In the skirt under Exhibitionism 40 she grabs the hem and holds it down; "You let it be a problem." shows from 40.
+- All in `iterations/002/build_scripts/pools.py`.

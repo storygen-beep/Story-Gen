@@ -1,5 +1,7 @@
 # [REVIEW]] Place — Hall
 
+> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): rows 11-13, the random events. `home_event_laura_robe`: "her robe slips open over her tits" (was "at the front"). `home_event_mark_reach`: under Corruption 40 (where "Lean back into him." can't show) he steps back fast, hips turned away, the mug low in front of his jeans: "Mind yourself, @player.". `home_event_ryan_towel`: the Curious and Bold screens end on Ryan's "Not here. Mom's up." (the event runs inside Laura's weekday kitchen row, so it is true every visit; added as a hook in `writer.py`, the screen files untouched). Built in `home.py` and `writer.py`.
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
@@ -66,3 +68,5 @@ when an event rolls with nobody there, it is the alone line.
 | Laura's gated stairs row | LO, 2026-10-08 (LIVES) |
 | a hall mirror | guess |
 | the random events at home | LO, 2026-10-08 (pick 4) · round 11, random events at home 6/12 · the events and the 1 in 4 guess |
+
+> Changed 2026-11-02 (reader a3, older rows; DECISIONS 131; LO: "fix the older ones too"): the robe, Mark reach and towel events each end on a forward thought; the robe's "She knows you know it." needs `laura_04_done`.
