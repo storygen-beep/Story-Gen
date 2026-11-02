@@ -357,7 +357,35 @@ FLAG_WORDS = {
     "rent_starts": "The rent has started",
     "jake_date_went": "Go out with Jake on a Saturday",
     "jake_date_booked": "Book a Saturday with Jake",
+    # Zoe's step 5 needs him; he is met only at Figure drawing (LO 2026-11-02: the label said "Cocky guy met")
+    "cocky_guy_met": "Meet Jake's teammate at Figure drawing (Tuesday or Thursday morning, Wednesday after lunch)",
+    "mark_saw_her": "Mark's first accident: the garage, a Saturday",
+    "cafe_let_it": "Let a customer's hand stay, on a café shift",
 }
+
+
+def _spec_trait_labels():
+    """The game's own name for each counter ([[traits.labels]] in 0_systems_spec.toml). A card goal fell back to the
+    raw key ("zoe_dares_done 4", "cafe_footfall 15") for every counter TRAIT_NAME doesn't list (LO 2026-11-03)."""
+    import os
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "toml_phases", "0_systems_spec.toml")
+    text = open(path, encoding="utf-8").read()
+    return dict(re.findall(r'\[\[traits\.labels\]\]\s*\nkey\s*=\s*"([^"]+)"\s*\nlabel\s*=\s*"([^"]+)"', text))
+
+
+SPEC_LABEL = _spec_trait_labels()
+# A counter whose name alone doesn't say what to do: the goal says how it moves (cafe.py l2_play, l2_flirt, l3_let).
+COUNTER_WORDS = {
+    "cafe_footfall": "Café regulars {v}: play along or flirt back on a busy shift, or let a hand stay",
+    "cafe_name": "The café's name {v}: let a customer's hand stay, on a café shift",
+    "rent_short_weeks": "A Sunday short on the rent",
+}
+
+
+def counter_label(key, val):
+    if key in COUNTER_WORDS:
+        return COUNTER_WORDS[key].format(v=val)
+    return f"{TRAIT_NAME.get(key) or SPEC_LABEL.get(key, key)} {val}"
 
 
 def card_goals(st, counter):
@@ -387,7 +415,7 @@ def card_goals(st, counter):
                           "value": val, "label": f"{NPC_NAME.get(g['npc'], g['npc'])}'s {TRAIT_NAME.get(key, key)} {val}"})
         else:
             stage = STAGE.get(key, {}).get(val)
-            label = f"{TRAIT_NAME.get(key, key)} {val}" + (f" ({stage})" if stage else "")
+            label = counter_label(key, val) + (f" ({stage})" if stage else "")
             goals.append({"type": "trait", "subject": "player", "trait": key, "op": g["op"], "value": val, "label": label})
     return goals, notes
 

@@ -34,7 +34,7 @@ Both answers meet her: the meeting refuses nothing (the first hour's rule), and 
 | where | what | sets |
 |---|---|---|
 | Biology, Mon 13:00 and Tue 10:15 | the girl beside her whispers through the slides: "Quad after?" | nothing |
-| Story Goals card, from day 2, while `zoe_met` is false | "Someone from your Biology class hangs out on the quad in the afternoons." | nothing |
+| her card under People, from the day the opening ends, while `zoe_met` is false (LO 2026-11-02; was a Story Goals card, hidden all week one behind the "Week one" card) | "The girl from your Biology class hangs out on the quad in the afternoons." · tip "The quad, Tuesday, Thursday or Friday, 14:30 to 18:00" | nothing |
 
 ## Why — the source of each key choice
 

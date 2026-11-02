@@ -8326,6 +8326,36 @@
           "at": "2026-11-02 19:34",
           "note": "skipped by LO: Skip the play gate"
         }
+      },
+      {
+        "id": "zoe_meeting_card",
+        "what": "Zoe's meeting card under People from the opening (was a Story Goals card hidden all week one); engine: no empty lines between blocks",
+        "built_at": "2026-11-02 22:49",
+        "chrome": null,
+        "played": {
+          "at": "2026-11-02 22:49",
+          "note": "skipped by LO: Yes build it, skip the play check"
+        }
+      },
+      {
+        "id": "pointer_cards",
+        "what": "Tom's hiring card and Vance's meeting card under People before they are met; Zoe step 5's goal names Figure drawing",
+        "built_at": "2026-11-02 23:58",
+        "chrome": null,
+        "played": {
+          "at": "2026-11-02 23:58",
+          "note": "skipped by LO: Yes all three the go ahead"
+        }
+      },
+      {
+        "id": "card_labels",
+        "what": "Card goals say what to do: counters use the game's own names, the café ones say how, two flags in words",
+        "built_at": "2026-11-03 00:44",
+        "chrome": null,
+        "played": {
+          "at": "2026-11-03 00:44",
+          "note": "skipped by LO: Yes fix the labels too, skip the play check"
+        }
       }
     ]
   }

@@ -1924,28 +1924,22 @@ class Doc69PatternCPreSubstitutionEffectsTests(TestCase):
         twee = TweeComprehensiveGeneratorV2().generate(project)
         # Find the parent canvas's passage in the emitted Twee
         # — it should have applyAndNotifyTrait BEFORE checkAndSubstituteCanvas.
-        # Locate the chunk between `:: ` (passage header) and the next blank line.
-        lines = twee.split("\n")
-        in_target = False
-        pse_idx = None
-        sub_check_idx = None
-        for i, line in enumerate(lines):
-            if line.startswith(":: ") and "canvas_parent" in line:
-                in_target = True
-                continue
-            if in_target and line.startswith(":: "):
-                break
-            if in_target and "applyAndNotifyTrait" in line and pse_idx is None:
-                pse_idx = i
-            if in_target and "checkAndSubstituteCanvas" in line and sub_check_idx is None:
-                sub_check_idx = i
-        self.assertIsNotNone(pse_idx,
+        # Locate the passage from its `:: ` header to the next one. Positions are
+        # character offsets, not line numbers: the generator emits its invisible
+        # macros on one line (each source line break renders as a <br>, 2026-11-02).
+        passage = next(
+            chunk for chunk in ("\n" + twee).split("\n:: ")
+            if "canvas_parent" in chunk.split("\n", 1)[0]
+        )
+        pse_idx = passage.find("applyAndNotifyTrait")
+        sub_check_idx = passage.find("checkAndSubstituteCanvas")
+        self.assertNotEqual(pse_idx, -1,
             f"Expected applyAndNotifyTrait macro in canvas_parent passage. Twee[:1500]:\n{twee[:1500]}")
-        self.assertIsNotNone(sub_check_idx,
+        self.assertNotEqual(sub_check_idx, -1,
             "Expected checkAndSubstituteCanvas call in canvas_parent passage")
         self.assertLess(pse_idx, sub_check_idx,
-            f"Pre-substitution macro (line {pse_idx}) must appear BEFORE "
-            f"substitution check (line {sub_check_idx}) — Doc 69 §4.4 ordering.")
+            f"Pre-substitution macro (offset {pse_idx}) must appear BEFORE "
+            f"substitution check (offset {sub_check_idx}) — Doc 69 §4.4 ordering.")
 
     def test_emission_no_pre_substitution_when_field_empty(self):
         """No pre-substitution effects → no applyAndNotifyTrait macros emitted

@@ -16310,12 +16310,12 @@ setup.carryRent = function (due, paid) {
                     f'<strong>Canvas:</strong> {canvas.name} '
                     f'<span style="opacity:0.7;">({canvas_prefix})</span> | '
                     f'<strong>Node:</strong> {node_display_name}'
-                    f'</div>\n'
+                    f'</div>'
                 )
 
             mark_trigger = ""
             if passage_prefix in ("Canvas", "StartingCanvas") and i == 0:
-                mark_trigger = f"<<script>>setup.markCanvasTriggered(\"{canvas.id}\");<</script>>\n"
+                mark_trigger = f"<<script>>setup.markCanvasTriggered(\"{canvas.id}\");<</script>>"
 
             # PRD 25 — Lane 3 dispatcher substitution injection. Fires BEFORE
             # any visible content renders. Only emitted for Node 1 of canvases
@@ -16339,7 +16339,7 @@ setup.carryRent = function (due, paid) {
                     if canvas.trigger.metadata.get("substitutions"):
                         substitution_check = (
                             f"<<set _sub_target = setup.checkAndSubstituteCanvas(\"{canvas.id}\")>>"
-                            f"<<if _sub_target>><<goto _sub_target>><</if>>\n"
+                            f"<<if _sub_target>><<goto _sub_target>><</if>>"
                         )
                     pre_effects = canvas.trigger.metadata.get("pre_substitution_effects") or []
                     if pre_effects:
@@ -16366,7 +16366,7 @@ setup.carryRent = function (due, paid) {
                                 f'{_pe_cap_js});<</script>>'
                             )
                         if macro_lines:
-                            pre_substitution_macros = "\n".join(macro_lines) + "\n"
+                            pre_substitution_macros = "".join(macro_lines)
 
             # Track node visit in visited_nodes for story arc completion
             node_slug = ""
@@ -16380,19 +16380,25 @@ setup.carryRent = function (due, paid) {
                     f'<<script>>'
                     f'var vn = State.variables.game_state.visited_nodes;'
                     f'if (vn.indexOf("{visit_key}") === -1) {{ vn.push("{visit_key}"); }}'
-                    f'<</script>>\n'
+                    f'<</script>>'
                 )
 
+            # SugarCube renders every source line break as a <br>, so the invisible
+            # bookkeeping macros sit on the content's own line: one per line, they
+            # put ~7 empty lines above the buttons of every screen (2026-11-02).
+            node_bookkeeping = (
+                f"<<set $game_state.current_canvas = \"{canvas.id}\">>"
+                f"<<set $game_state.current_node = \"{node.id}\">>"
+                f"{mark_trigger}"
+                f"{track_visited_node}"
+            )
             passage_header = (
                 f":: {node_passage_name}\n"
                 f"{pre_substitution_macros}"  # Doc 69 Item 2 — unconditional effects, BEFORE substitution check
                 f"{substitution_check}"  # PRD 25 — fires before body / exit_block; Doc 69 Item 2 moves pre-sub effects earlier still
                 f"{dev_canvas_info}"
-                f"{node_content}\n\n"
-                f"<<set $game_state.current_canvas = \"{canvas.id}\">>\n"
-                f"<<set $game_state.current_node = \"{node.id}\">>\n"
-                f"{mark_trigger}"
-                f"{track_visited_node}"
+                f"{node_content}"
+                f"{node_bookkeeping}"
             )
 
             exit_block = getattr(node, 'exit_block', None) or {}
@@ -16425,11 +16431,11 @@ setup.carryRent = function (due, paid) {
             if exit_type == 'choices':
                 # Process choices and render multiple links
                 exit_result = self._process_exit_block(node, return_target)
-                passage_body = "\n"
+                passage_body = ""
 
                 # ── Loop: add loop state init for base node ──
                 if is_loop_base:
-                    passage_body += '<<if ndef $game_state.loop_count>><<set $game_state.loop_count to 0>><<set $game_state.loop_visited to []>><</if>>\n'
+                    passage_body += '<<if ndef $game_state.loop_count>><<set $game_state.loop_count to 0>><<set $game_state.loop_visited to []>><</if>>'
 
                 passage_body += "<<nobr>>\n"
                 if isinstance(exit_result, list):
@@ -16911,7 +16917,7 @@ setup.carryRent = function (due, paid) {
                     # Shouldn't happen for 'choices', but guard anyway
                     next_passage, continue_text = exit_result
                     time_progression = self._get_time_progression_for_node(node)
-                    passage_body += f"{time_progression}\n[[{continue_text}->{next_passage}]]\n"
+                    passage_body += f"{time_progression}[[{continue_text}->{next_passage}]]\n"
 
                 # Cascade-aware exit routing: if the rendered node body carries
                 # the cascade-exit sentinel(s), splice the entire passage_body
@@ -16957,20 +16963,17 @@ setup.carryRent = function (due, paid) {
                     passage_header = (
                         f":: {node_passage_name}\n"
                         f"{dev_canvas_info}"
-                        f"{node_content}\n\n"
-                        f"<<set $game_state.current_canvas = \"{canvas.id}\">>\n"
-                        f"<<set $game_state.current_node = \"{node.id}\">>\n"
-                        f"{mark_trigger}"
-                        f"{track_visited_node}"
+                        f"{node_content}"
+                        f"{node_bookkeeping}"
                     )
                 elif _CASCADE_EXIT_INJECT_SENTINEL in node_content:
                     inner = passage_body
-                    # Strip the wrapping `\n<<nobr>>\n` ... `<</nobr>>\n` so
+                    # Strip the wrapping `<<nobr>>\n` ... `<</nobr>>\n` so
                     # the links land directly inside the linkreplace body.
                     # SugarCube tolerates nested <<nobr>> if the strip misses,
                     # but stripping keeps rendered HTML cleaner.
-                    if inner.startswith("\n<<nobr>>\n"):
-                        inner = inner[len("\n<<nobr>>\n"):]
+                    if inner.startswith("<<nobr>>\n"):
+                        inner = inner[len("<<nobr>>\n"):]
                     if inner.endswith("<</nobr>>\n"):
                         inner = inner[:-len("<</nobr>>\n")]
                     # Replace ALL sentinels (multi-cascade safety).
@@ -16981,11 +16984,8 @@ setup.carryRent = function (due, paid) {
                     passage_header = (
                         f":: {node_passage_name}\n"
                         f"{dev_canvas_info}"
-                        f"{node_content}\n\n"
-                        f"<<set $game_state.current_canvas = \"{canvas.id}\">>\n"
-                        f"<<set $game_state.current_node = \"{node.id}\">>\n"
-                        f"{mark_trigger}"
-                        f"{track_visited_node}"
+                        f"{node_content}"
+                        f"{node_bookkeeping}"
                     )
                     passage_body = ""
 
@@ -17001,7 +17001,7 @@ setup.carryRent = function (due, paid) {
                 safe_end_text = html_escape(str(end_text))
                 passage = (
                     passage_header
-                    + f"{time_progression}\n{trait_effects}\n{flag_effects}\n{wardrobe_effects_code}\n"
+                    + f"{time_progression}{trait_effects}{flag_effects}{wardrobe_effects_code}"
                     + f"<div class='game-end'><h2>{safe_end_text}</h2>"
                     + f"<<link 'Play Again'>><<run Engine.restart()>><</link>>"
                     + f"</div>\n\n"
@@ -17035,9 +17035,10 @@ setup.carryRent = function (due, paid) {
                 trait_effects = self._get_trait_effects_for_node(node)
                 flag_effects = self._get_flag_effects_for_node(node)
                 wardrobe_effects_code = self._get_wardrobe_effects_for_node(node)
+                # One line: each source line break renders as an empty <br> line.
                 effects_block = (
-                    f"{time_progression}\n{trait_effects}\n"
-                    f"{flag_effects}\n{wardrobe_effects_code}\n"
+                    f"{time_progression}{trait_effects}"
+                    f"{flag_effects}{wardrobe_effects_code}"
                 )
                 exit_link = f"[[{continue_text}->{next_passage}]]\n"
                 if (getattr(node, 'exit_block', None) or {}).get('config', {}).get('destinationType') == 'return':
@@ -17788,7 +17789,7 @@ setup.carryRent = function (due, paid) {
             parts.append(self._convert_blocks_to_game_html(default))
 
         parts.append('<</if>>')
-        return "\n".join(parts)
+        return "".join(parts)  # a source line break renders as <br>
 
     def _escape_linkreplace_text(self, text: str) -> str:
         """Escape link text for safe embedding in <<linkreplace "...">>.
@@ -18194,7 +18195,7 @@ setup.carryRent = function (due, paid) {
                                     parts.append('<<else>>')
                                 parts.append(self._convert_blocks_to_game_html([pool_item]))
                             parts.append('<</if>>')
-                            html_parts.append('\n'.join(parts))
+                            html_parts.append(''.join(parts))  # no <br> per macro line
                     i += 1
                     continue
 

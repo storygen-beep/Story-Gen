@@ -6397,7 +6397,7 @@ ready_canvas = "laura_04_she_saw_you"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 20, label = "Corruption 20 (Curious)" },
   { type = "trait", subject = "npc", npc_id = "npc_laura", trait = "warmth", op = "gte", value = 30, label = "Laura's Love 30" },
-  { type = "trait", subject = "player", trait = "laura_gaps_watched", op = "gte", value = 3, label = "laura_gaps_watched 3" },
+  { type = "trait", subject = "player", trait = "laura_gaps_watched", op = "gte", value = 3, label = "Times you watched Laura 3" },
 ]
 
 [[quest_cards]]
@@ -9985,8 +9985,8 @@ when = [
 ready_canvas = "mark_03_shorts"
 goals = [
   { flag = "rent_starts", op = "is_true", label = "The rent has started" },
-  { type = "trait", subject = "player", trait = "rent_short_weeks", op = "gte", value = 1, label = "rent_short_weeks 1" },
-  { flag = "mark_saw_her", op = "is_true", label = "Mark saw her" },
+  { type = "trait", subject = "player", trait = "rent_short_weeks", op = "gte", value = 1, label = "A Sunday short on the rent" },
+  { flag = "mark_saw_her", op = "is_true", label = "Mark's first accident: the garage, a Saturday" },
 ]
 
 [[quest_cards]]
@@ -10762,6 +10762,17 @@ flagEffects = [{ targetType = "player", flag = "served_gary", op = "set" }]
 [[quest_cards]]
 npc_id = "npc_tom"
 priority = 10
+text = "The café in town is hiring."
+tip = "The café in town, Monday to Saturday, 8 AM to 11 PM"
+when = [
+  { flag = "opening_done", op = "is_true" },
+  { flag = "cafe_job", op = "is_false" },
+]
+ready_canvas = "cafe_job_ask"
+
+[[quest_cards]]
+npc_id = "npc_tom"
+priority = 10
 text = "Tom gave you the job. Your first shift is waiting."
 tip = "Take a shift at the café, afternoon or evening, Monday to Saturday"
 when = [
@@ -10785,7 +10796,7 @@ when = [
 ready_canvas = "tom_03_the_tip_jar"
 goals = [
   { flag = "cafe_job", op = "is_true", label = "Cafe job" },
-  { type = "trait", subject = "player", trait = "cafe_shifts_worked", op = "gte", value = 5, label = "cafe_shifts_worked 5" },
+  { type = "trait", subject = "player", trait = "cafe_shifts_worked", op = "gte", value = 5, label = "Shifts worked 5" },
 ]
 
 [[quest_cards]]
@@ -10800,9 +10811,9 @@ when = [
 ready_canvas = "tom_03_not_by_the_window"
 goals = [
   { flag = "cafe_job", op = "is_true", label = "Cafe job" },
-  { type = "trait", subject = "player", trait = "cafe_footfall", op = "gte", value = 15, label = "cafe_footfall 15" },
-  { type = "trait", subject = "player", trait = "cafe_name", op = "lte", value = -5, label = "cafe_name -5" },
-  { flag = "cafe_let_it", op = "is_true", label = "Cafe let it" },
+  { type = "trait", subject = "player", trait = "cafe_footfall", op = "gte", value = 15, label = "Café regulars 15: play along or flirt back on a busy shift, or let a hand stay" },
+  { type = "trait", subject = "player", trait = "cafe_name", op = "lte", value = -5, label = "The café's name -5: let a customer's hand stay, on a café shift" },
+  { flag = "cafe_let_it", op = "is_true", label = "Let a customer's hand stay, on a café shift" },
 ]
 
 [[quest_cards]]
@@ -12946,6 +12957,17 @@ time_progression_minutes = 10
 [[quest_cards]]
 npc_id = "npc_zoe"
 priority = 10
+text = "The girl from your Biology class hangs out on the quad in the afternoons."
+tip = "The quad, Tuesday, Thursday or Friday, 14:30 to 18:00"
+when = [
+  { flag = "opening_done", op = "is_true" },
+  { flag = "zoe_met", op = "is_false" },
+]
+ready_canvas = "zoe_00_quad_meeting"
+
+[[quest_cards]]
+npc_id = "npc_zoe"
+priority = 10
 text = "Zoe's party, Friday, at her place. She has a dress for you."
 tip = "Friday evening: Zoe's party at her apartment; after Jake's “step 0”"
 when = [
@@ -13003,8 +13025,8 @@ when = [
 ready_canvas = "zoe_05_no_dare"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Corruption 40 (Bold)" },
-  { type = "trait", subject = "player", trait = "zoe_dares_done", op = "gte", value = 4, label = "zoe_dares_done 4" },
-  { flag = "cocky_guy_met", op = "is_true", label = "Cocky guy met" },
+  { type = "trait", subject = "player", trait = "zoe_dares_done", op = "gte", value = 4, label = "Zoe's dares 4" },
+  { flag = "cocky_guy_met", op = "is_true", label = "Meet Jake's teammate at Figure drawing (Tuesday or Thursday morning, Wednesday after lunch)" },
 ]
 
 [[quest_cards]]
@@ -13016,20 +13038,6 @@ when = [
 ]
 terminal = true
 terminal_text = "Zoe's next dare. (Next release)"
-
-[[quest_cards]]
-group = "story_goals"
-priority = 15
-text = "Someone from your Biology class hangs out on the quad in the afternoons."
-tip = "The quad, on Tuesday, Thursday or Friday afternoon."
-when = [
-  { flag = "opening_done", op = "is_true" },
-  { days_since_flag = "opening_done", op = "gte", value = 1 },
-  { flag = "zoe_met", op = "is_false" },
-]
-goals = [
-  { flag = "zoe_met", op = "is_true", label = "Find the girl from Biology on the quad, Tuesday, Thursday or Friday afternoon" },
-]
 # =============================================================================
 # First Term — 5 · scenes · DR. HALE (sheets/scenes/hale_0*.md, people/npc_hale.md, people/npc_nadia.md)
 # Steps 1-5, Thursdays at seven, his office hub, Nadia's hubs, his cards.
@@ -22942,6 +22950,17 @@ when = [
   { flag = "dean_met", op = "is_true" },
 ]
 ready_canvas = "hub_dean_office"
+
+[[quest_cards]]
+npc_id = "npc_vance"
+priority = 5
+text = "Next door: the man who owns your house watches the street."
+tip = "The street, an evening, 6 to 10 PM"
+when = [
+  { flag = "opening_done", op = "is_true" },
+  { flag = "vance_met", op = "is_false" },
+]
+ready_canvas = "vance_meeting"
 
 [[quest_cards]]
 npc_id = "npc_kayla"

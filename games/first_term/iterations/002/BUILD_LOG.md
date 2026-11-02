@@ -1348,3 +1348,74 @@ touched sheet has a dated note.
   write them collided with that fill (the build asserted) and was reverted.
 - Gates 62/89; 0 PLACEHOLDER blocks in the build. Probes rf, A, a2, a3, B, C, E–I, ryan8, mark_laundry, door, hale1
   pass; D 3/4 (Mark's random reach event before the Sunday table, as before). Rebuilt `--dev --debug`.
+
+## 2026-11-02 — engine: no empty lines between blocks (LO: "Go ahead")
+- LO's report: Gary's booth showed a big gap above and below his one line, and many screens had empty space. Cause,
+  measured headless: SugarCube renders every source line break as a `<br>`, and the v2 generator put its invisible
+  macros on lines of their own. The line pool and the condition-group chain joined `<<set>>`/`<<if>>`/`<</if>>` with
+  newlines, and every node passage ended its content with `\n\n` plus one line each for the current_canvas and
+  current_node sets, markCanvasTriggered and visited_nodes. Gary's booth: 2 empty lines above, 8 below.
+- Fix in `generators/v2.py` (every v2 game): the pool and group chains join with `""`. The node bookkeeping is one
+  `node_bookkeeping` string written straight after the content, shared by the three header builds. No line break is
+  left after the dev caption, the substitution check, the pre-substitution effects, or before the exits' `<<nobr>>`.
+  The location and game-end exits' effects lines are one line. No TOML changed.
+- Measured over all 593 canvas screens: 5,686 `<br>` before (every screen, up to 17 in a row); 689 after, each one
+  directly after a button (one button per line), none in a row. 0 line breaks between markup outside `<<nobr>>`.
+  Gary's booth is now caption, paragraph, his line, the button.
+- Tests: new `tests/test_no_blank_lines.py` (pool, group, passage head, and a browser sweep of a fixture's screens).
+  `test_legacy_engine.py` Doc 69 ordering test now compares positions, not line numbers (both macros share a line).
+  `apps/game_generation/tests`: 799 passed, 17 skipped. `tests/` + `apps/projects`: 14 fail, and the same 14 fail
+  with HEAD's `v2.py`, so they predate this change.
+- Gates 62/89. "sinks >= sources" differs from the 11-01 baseline file, but it was already that way in every run
+  today: it reads the TOML, not the generator. Probes a3 24/24, door 6/6, rf 17/17, B 11/11. Rebuilt `--dev --debug`.
+
+## 2026-11-02 — Zoe's meeting card under People (LO: "zoe should have a npc card??" · "Yes build it, skip the play check")
+- Before: nothing pointed at Zoe in week one. Every one of her rows and cards needs `zoe_met`, and the one nudge, a
+  Story Goals card ("Someone from your Biology class hangs out on the quad…", priority 15, group `story_goals`), lost
+  its group to the priority-20 "Week one" card for days 0–6 (`pickQuestsCards` shows one card per group). Measured:
+  the Biology card first showed at 7 days since the opening, though her meeting fires from the first Tuesday.
+- Now (`zoe.py`): her own card, `npc_id = npc_zoe`, the way Dr. Hale's step-1 card points at his first lecture.
+  It shows while `opening_done` is set and `zoe_met` is not, with `ready_canvas = zoe_00_quad_meeting`, text "The girl
+  from your Biology class hangs out on the quad in the afternoons." and tip "The quad, Tuesday, Thursday or Friday,
+  14:30 to 18:00". The Story Goals card is cut. Sheet row updated (`sheets/scenes/zoe_00_quad_meeting.md`).
+- Accepted: the People row is headed "Zoe" before she shouts her name in the scene (the engine has no stranger name
+  for an NPC). Her card's text still calls her the girl from Biology.
+- New `probe_zoe_npccard.py` 5/5: opening day shows "Zoe · Tue, Thu, Fri 2:30–6 PM · Quad" under People and no
+  Biology story goal; still there on day 8; Tue 15:00 on the quad plays the meeting; after it her card is the Friday
+  party. Gates 62/89. Probes a3, door, rf, B, A pass. Rebuilt `--dev --debug`.
+
+## 2026-11-02 — pointers to the people a player could miss (LO: "Yes all three the go ahead")
+- Audit after Zoe's card: every scene that opens a person, and what points at it before it fires. Ryan, Laura, Mark
+  and Hale have cards from the start; Jake comes at Zoe's first party, Nadia at Hale's first lecture, Kayla and Claire
+  inside Ryan's and Hale's steps, the party house at Zoe's step 2, the other lecturers on the Timetable. Three gaps:
+  - **Tom / the café job:** only the "Week one" story card named it, gone after 7 days. Measured: day 8, nothing on
+    the Quests page mentioned the café, the job or Tom. Now `tom.py` adds his hiring card, "The café in town is
+    hiring." (tip "The café in town, Monday to Saturday, 8 AM to 11 PM"), shown while `cafe_job` is unset and
+    pointing at `cafe_job_ask`.
+  - **Vance:** met only by chance on the street of an evening; his porch and his knock wait for `vance_met`. Now
+    `extras.py` adds his meeting card, "Next door: the man who owns your house watches the street." (tip "The street,
+    an evening, 6 to 10 PM"), shown while `vance_met` is unset and pointing at `vance_meeting`.
+  - **Zoe's step 5** needs `cocky_guy_met`, met only at Figure drawing; its goal read "Cocky guy met". Now
+    `canv.py` FLAG_WORDS labels it "Meet Jake's teammate at Figure drawing (Tuesday or Thursday morning, Wednesday
+    after lunch)".
+- Sheets: `tom_01_the_apron.md` and `people/npc_vance.md` carry the cards.
+- New `probe_pointers.py`: Tom ("Today 8 AM–11 PM · Café") and Mr. Vance ("Today 6–10 PM · Your Street") under
+  People on day 1 and day 8; once she has the job and has met him, both rows hand over to their usual cards. Zoe's
+  step-5 card, opened, lists the Figure drawing goal (her closed row shows only the first goal with a number).
+- Gates 62/89; 0 PLACEHOLDER. Probes a3, door, rf, B, A, zoe_npccard pass. Rebuilt `--dev --debug`.
+- Seen, not changed: some goal labels still print the raw counter name: "zoe_dares_done 4" (Zoe step 5, and her
+  closed row), and in Tom's cards "cafe_shifts_worked 5", "cafe_footfall 15", "cafe_name -5".
+
+## 2026-11-03 — card goals in words (LO: "Yes fix the labels too, skip the play check")
+- Eight goal labels printed a raw name: "zoe_dares_done 4", "cafe_shifts_worked 5", "cafe_footfall 15",
+  "cafe_name -5", "laura_gaps_watched 3", "rent_short_weeks 1", "Mark saw her", "Cafe let it". Cause:
+  `canv.card_goals` named a counter only from its short `TRAIT_NAME` list, else the key, and a flag only from
+  `FLAG_WORDS`, else the key tidied.
+- Now `canv.py`: a counter falls back to the game's own `[[traits.labels]]` name in `0_systems_spec.toml`
+  (`SPEC_LABEL`), so a new counter is named too. `COUNTER_WORDS` says how for three: "Café regulars 15: play along or
+  flirt back on a busy shift, or let a hand stay", "The café's name -5: let a customer's hand stay, on a café shift"
+  and "A Sunday short on the rent". `FLAG_WORDS` adds "Mark's first accident: the garage, a Saturday" and "Let a
+  customer's hand stay, on a café shift". Also now: "Shifts worked 5", "Times you watched Laura 3", "Zoe's dares 4".
+- Build: 0 goal labels with a raw name. New `probe_labels.py` 1/1: no raw name on the Quests page, cards open.
+  Gates 62/89. Probes a3, door, rf, B, A, zoe_npccard pass; pointers 5/6, the miss being Zoe's closed row, which shows
+  only her first goal with a number (her open card lists the Figure drawing goal). Rebuilt `--dev --debug`.
