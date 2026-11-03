@@ -293,7 +293,16 @@ belong here; only decisions, debts, and promises do.
   ],
 
   "promises": [
-    { "text": "…", "made_in": "0.2", "paid_in": null }   // null = still owed
+    { "text": "…", "made_in": "0.2", "paid_in": null,   // null = still owed
+      "decided": "A10" }                               // optional: the `decided` entry it pays
+  ],
+
+  // LO'S SIGNED CALLS on a check that fails — the checks print DECIDED instead of FAIL.
+  "decided": [
+    { "id": "A10", "gate": "<exact gate, lint or shape.py check name, or null>",
+      "match": ["<substring of a detail row>"],      // or null = every row of that check
+      "decision": "later release",                   // or "waive"
+      "why": "one plain sentence", "signed": "LO 2026-11-03" }
   ],
 
   // WHAT PLAYERS SAID — the-release.md loop step 8, written by the v2-listener agent.
@@ -419,6 +428,28 @@ minute" and is abandoned), and characters dangled for years (*"Are we EVER going
 the university president?"*). Each promise is eventually **paid or cut**, and cutting is
 logged like any other decision.
 
+**`decided`** — LO's signed rulings on a check that fails: `later release` (it is owed, and
+paid later) or `waive` (it stays, on purpose). This is where *"anything left in a list is left on
+purpose, named in the ledger, with the reason"* (`the-release.md` loop steps 5 and 7) is written
+down, and the only place a check reads it. Each entry names one check by its exact printed name —
+a gate, a lint (the words after `lint · `) or a `shape.py` check — or `null` when no check sees the
+slip (recorded, never judged). `match` is a list of substrings of the check's detail rows (a lint's
+full list, including the rows it does not print; for a row that is a record, one field), or `null`
+for every row. Only LO-signed items go here; an item still waiting for LO is not decided.
+- A FAIL whose every row is covered prints **DECIDED** with the decision and the reason, and the
+  tally counts it apart (`92/110 gates pass · 3 decided · 15 fail`). It is not a pass.
+- A FAIL with rows no entry covers stays FAIL, and each covered row is tagged
+  `(decided: <decision>, <why>)`. A lint takes the same marks in its headline and rows.
+- An entry naming a check that passes, a lint that lists nothing, a name no check prints, or a
+  `match` string that hits no row is **stale**: the lint *a decision that no longer applies* lists
+  it (and `shape.py` for its own checks). Re-read it with LO, then rewrite or remove it.
+- `--ship`: a DECIDED BLOCK row stops blocking only when every entry covering it is a `waive`, or a
+  `later release` that a `promises[]` row names (`"decided": "<id>"`, or a list of ids). A later
+  release with no promise stays red: "later" is a debt, and a debt goes on the books.
+- `--json` carries it: each gate has `status` (`PASS` · `FAIL` · `DECIDED` · `n/a` · `parked` ·
+  `few` · `off`) and, when covered, `decided[]`; `tally.decided`; and `decided.lints` /
+  `decided.stale`.
+
 **`decisions`** — the trail. Especially: anything that removes or inverts a source of heat
 must be logged **with what replaces it**. *(LO decided.)*
 
@@ -461,6 +492,7 @@ file sits there being read by a different gate. These are the exact paths:
 | `board.systems[]` | every system has a card | the cards: `[{ id, name, place, hours, cost, pay_ladder[], lewd_ladder[]{acts[]}, one_ladder, people[], pool[], daily, memory, growth, sink, deadline, feeds[], reads[], hook_link, leads_to[] }]`. An entry with `kind` and no card fields is a meter |
 | `board.wardrobe` | every clothing state is read three times | `{ states: [{ id, condition }], key_items: [clothing_id] }`; a condition is one `worn_exposure`, `worn_corruption`, `worn_beauty` or `worn_type` (`operator`, `value`) or `clothing_slot` (`slot`, `operator`) item; a key item is a `[[clothing]]` id (`templates/cards/wardrobe.md`) |
 | `board.coverage[]` | `shape.py` (strict): the coverage rows (`templates/sheets/coverage.md`) | `[{ topic, kind: system \| place \| scene \| mechanic, status: covered \| scouted \| lo \| placeholder \| unknown, source }]`, one per topic. `source` names the rule (file and id) or card, the scout card `games/<slug>/scout/<topic>.md`, LO's call (quote or date), or the release page line of a placeholder |
+| `decided[]` (top level) | every gate, lint and `shape.py` check (DECIDED, tags, stale) · *`--ship`* (a waive, or a later release with a `promises[]` row, stops blocking) | `[{ id, gate, match, decision: "later release" \| "waive", why, signed }]` — `gate` is the exact printed name or `null`; `match` substrings of the detail rows or `null` (every row). See the field rules above. A `later release` entry is also a `promises[]` row carrying `decided: id` |
 | `release_page.rejections[]` | *a skill rejection names a notebook entry* | `[{ what, source, layer, game_fix, skill_fix }]`; `layer` is `skill_wrong` · `skill_silent` · `ignored_rule` · `lo_changed` · `engine`; a skill layer's `skill_fix` names its notebook entry (`N<n>`) |
 | `board.infrastructure[]` | no gate (recorded) | `[{ name, kind: clock \| view \| channel }]` |
 

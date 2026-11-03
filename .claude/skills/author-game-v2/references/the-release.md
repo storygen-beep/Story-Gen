@@ -108,7 +108,8 @@ can be green on every gate with the lints full, and a flagged word nobody reads 
 > prevent. So there is no box to tick here. There is one command you already run, output you are
 > already looking at, and a rule about what leaving it means: **anything left in a list is left on
 > purpose, named in the ledger, with the reason.** A lint you cannot explain leaving is a lint you
-> have not read.
+> have not read. The ledger key is `decided` (`state.md`): LO's signed `later release` or `waive`,
+> with the reason, and the check then prints DECIDED instead of FAIL.
 
 **5b. Check what you MOVED, not just what you added.** Every release after v0.1 lands on people
 holding saves, and the whole scoreboard above is blind to them: renaming a canvas id passes every
@@ -171,8 +172,9 @@ the order and supply small ideas; they do not set the premise** (Great Games Stu
 
 ⚠️ **Nothing checks that you ran them, and nothing can.** `DOCTRINE_GAPS.md` §3a rules out the
 checkbox, and a check that an author read a list is the checkbox. What holds instead is step 7:
-**anything left in a list is left on purpose, named in the ledger, with the reason.** A lint you
-cannot explain leaving is a lint you have not read. That is a discipline, not a guarantee, and it
+**anything left in a list is left on purpose, named in the ledger, with the reason** — in
+`decided` (`state.md`), signed by LO, and a `later release` gets its `promises[]` row too. A lint
+you cannot explain leaving is a lint you have not read. That is a discipline, not a guarantee, and it
 should not be written up as one.
 
 ---

@@ -742,6 +742,11 @@ def is_strict(state, finish=False):
     return finish or (state or {}).get("phase") in STRICT_PHASES
 
 
+def _status(ok):
+    return ("n/a " if ok is None else "WARN" if ok == "warn" else "DECIDED" if ok == "decided"
+            else "PASS" if ok else "FAIL")
+
+
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
     args = [a for a in argv if not a.startswith("--")]
@@ -756,18 +761,26 @@ def main(argv=None):
     state = json.load(open(path))
     strict = is_strict(state, "--finish" in argv)
     rows, flags = check(state, strict, None if target.endswith(".json") else target)
+    # The ledger's `decided` (LO 2026-11-03): a FAIL every row of which LO signed as a later
+    # release or a waive prints DECIDED; an entry naming a check here that passes, or a match
+    # that hits nothing, is listed as stale. A name gates.py also prints is judged there.
+    _gate_names = set(sum(gates._emitted_names(open(gates.__file__, encoding="utf-8").read()), []))
+    rows, dstale = gates.apply_decided_rows(rows, state, lambda n: n not in _gate_names)
     failed = [r for r in rows if r[1] is False]
+    decided = [r for r in rows if r[1] == "decided"]
     if "--json" in argv:
-        print(json.dumps({"strict": strict, "rows": [dict(name=n, ok=o, headline=h, detail=d)
+        print(json.dumps({"strict": strict, "rows": [dict(name=n, ok=o, headline=h, detail=d,
+                                                          status=_status(o).strip())
                                                       for n, o, h, d in rows],
-                          "flags": flags, "failed": len(failed)}, indent=2))
+                          "flags": flags, "failed": len(failed), "decided": len(decided),
+                          "decided_stale": [{"id": w, "why": y} for w, y in dstale]}, indent=2))
         return 1 if failed else 0
     print(f"\n  shape.py — does the spine hold together? ({'strict' if strict else 'lenient'}: "
           f"phase {state.get('phase') or 'unset'}{', --finish' if '--finish' in argv else ''})")
     print(f"  {path}")
     print(f"  {'─'*72}")
     for name, ok, head, detail in rows:
-        tag = "n/a " if ok is None else "WARN" if ok == "warn" else "PASS" if ok else "FAIL"
+        tag = _status(ok)
         print(f"  [{tag}]  {name:42s} {head}")
         for d in detail[:10]:
             print(f"          · {d}")
@@ -775,7 +788,13 @@ def main(argv=None):
     if flags:
         print(f"  flags a step's gate reads — listed, not judged: {', '.join(flags)}")
     warned = sum(1 for r in rows if r[1] == "warn")
-    print(f"  {len(rows) - len(failed) - warned - sum(1 for r in rows if r[1] is None)} pass · "
+    if dstale:
+        print(f"  decided · {gates.DECIDED_STALE_LINT} — {len(dstale)}")
+        for who, why in dstale:
+            print(f"          · {who}: {why}")
+        print(f"  {'─'*72}")
+    print(f"  {len(rows) - len(failed) - len(decided) - warned - sum(1 for r in rows if r[1] is None)}"
+          f" pass · {len(decided)} decided · "
           f"{len(failed)} fail · {warned} warn · {sum(1 for r in rows if r[1] is None)} n/a")
     print()
     return 1 if failed else 0

@@ -5,6 +5,51 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-04 — the checks show LO's signed later/waive calls as DECIDED, not FAIL
+
+**Why.** LO, signing group 1 of first_term's third alignment pass (2026-11-03): *"Write every 'later' and
+'waive' into the ledger with its reason (G54, promises[]). The checks should show them as decided, not
+failing."* Before this, a gate LO had already ruled on printed FAIL beside the gates nobody had looked at, and
+the ruling lived only in DECISIONS.md, which no check reads. This is the check side of that ledger key, not a
+new authoring rule: no gate measures anything differently.
+
+- `scripts/gates.py` (new code above `main()`, the `decided` block): reads the ledger's top-level `decided` list
+  (`{id, gate, match, decision: "later release" | "waive", why, signed}`). A FAIL gate whose every detail row an
+  entry covers prints `[DECIDED]` with the decision and the reason; rows no entry covers keep it FAIL and each
+  covered row is tagged `(decided: <decision>, <why>)`. Lints take the same marks in their headline and rows, judged
+  on their FULL list: `_rows(xs, n)` replaces each lint's `xs[:n]` (56 one-line swaps in `main()`, 7 in
+  `_group2_lints`) and, while `main()` captures its own report, records the list the slice hides. A new lint,
+  **a decision that no longer applies**, lists stale entries: a gate that passes or is n/a, a lint that lists
+  nothing, a name no check prints, a `match` string that hits no row, or a malformed entry.
+- `scripts/gates.py` `main()`: the tally line reads `92/110 gates pass · 3 decided · 15 fail …`; `--json` moved to
+  the end of `main()` so it carries the lint statuses: every gate has `status` (`PASS`/`FAIL`/`DECIDED`/`n/a`/
+  `parked`/`few`/`off`) and `decided[]` when covered, `tally.decided`, and `decided.lints` / `decided.stale`. The exit
+  code counts a DECIDED gate as not failing.
+- `scripts/gates.py` `--ship`, by one-line swaps (no cited line moved): `ship_rows` applies `decided`;
+  `_block_row_verdict` calls `_decided_block_verdict`, which lets a DECIDED BLOCK row through only when every
+  covering entry is a `waive`, or a `later release` that a `promises[]` row names (`"decided": "<id>"` or a list).
+  A later release with no promise stays FAIL and says so. `ship_mode` tags such a row `[DECIDED]`; the
+  `every other gate` report row no longer lists a DECIDED gate as FAIL.
+- `scripts/shape.py` `main()`: the same for its own checks (`gates.apply_decided_rows`): `[DECIDED]`, row tags, a
+  `decided ·` stale list for entries naming a shape check (a name gates.py also prints is judged there), `decided`
+  in the summary line and `status` / `decided` / `decided_stale` in `--json`.
+- `references/state.md`: `decided` in the ledger example, a field rule (what it is, how `match` reads, DECIDED,
+  tags, stale, `--ship`, `--json`), a row in the table of keys the gates read, and `promises[].decided`.
+- `references/the-release.md` loop step 5 and the instruments table: the rule G54 cites (*"anything left in a list
+  is left on purpose, named in the ledger, with the reason"*) now names `decided` as where that is written.
+- `SKILL.md`: the new lint in the lint index.
+- Verified: `scripts/tests/test_gates_decided.py` (19 tests: full, partial and two-entry cover; headline match on
+  a rowless gate; every stale kind; a lint match reaching a row it does not print; record rows; `--ship` waive /
+  later with and without its promise; shape rows; shape `main`; an end-to-end text + `--json` run on a fixture).
+  On first_term at ce8551b1 (no `decided` key yet) the text report is byte-identical to before except the tally
+  line, and `--json` is identical except the added `status`/`decided` keys; on a scratch copy with a test
+  `decided` list, `location fill` printed DECIDED, the floors gate 4 of 7 rows decided, `screen shape` matched a
+  hidden `corner_shop` row (1 of 38), and `--ship` kept a later release with no promise red. `--selfcheck` green
+  (114/114 gates, 67/67 lints), `pytest scripts/tests` 943 passed, `pytest .claude/skill-evals/author-game/tests`
+  107 passed (1 skipped), `cite_check.py --strict` exit 0 (0 wrong cites in SKILL.md + references/).
+
+---
+
 ## 2026-11-03 (night) — hours go only on an activity she chooses; events stay hidden
 
 - `references/the-clock.md` C5: one paragraph. An event that happens to her (the guy beside her, the lecturer's word,
