@@ -72,8 +72,18 @@ def test_an_empty_ledger_finishing_the_spine_fails():
     assert shape.is_strict({"phase": "idea"}, finish=True)
     bad = failing({"phase": "idea"}, strict=True)
     assert {"everyone on the release page has a ladder", "every step has a guidance line",
-            "the door is a declared step", "the promise has a beat this release",
+            "the promise has a beat this release",
             "every spine page is signed"} <= set(bad)
+    assert "the door is a declared step" not in bad     # a door is optional (S12 b)
+
+
+def test_a_spine_with_no_door_finishes():
+    # S12 b (LO, 2026-11-03): the new SP7 lists where each arc ends instead of a door, so a spine
+    # with no door must pass `--finish`; only a declared door that is not a step fails.
+    s = full()
+    s["release_page"].pop("door")
+    assert failing(s, strict=True) == []
+    assert rows(s, strict=True)["the door is a declared step"][0] is None
 
 
 def test_an_empty_ledger_while_the_spine_is_written_is_na():

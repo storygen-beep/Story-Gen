@@ -29,4 +29,4 @@ allowed; hiding one is not (`references/the-release.md`, "When LO rejects someth
 
 | key choice | source |
 |---|---|
-| <each settled decision · each ledger value> | <rule file + id · `scout/<topic>.md` · LO, <date> · guess> |
+| <each settled decision · each ledger value> | <the rule in plain words · the scout card · LO, <date> · guess> |

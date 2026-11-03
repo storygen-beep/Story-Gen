@@ -33,4 +33,4 @@ allowed; hiding one is not (`references/the-release.md`, "When LO rejects someth
 
 | key choice | source |
 |---|---|
-| <what it hangs off · its labels · its hours · its door> | <rule file + id · `scout/<topic>.md` · LO, <date> · guess> |
+| <what it hangs off · its labels · its hours · its door> | <the rule in plain words · the scout card · LO, <date> · guess> |

@@ -198,15 +198,15 @@ A milestone whose only flag is its own once-guard is not a milestone and owes no
 
 ## Every release ends on an opening
 
-Not a cliffhanger. **A goal for the next one.**
+Not a cliffhanger. **Each arc's last quest card says where it stops and what comes next, if anything does.**
 
 A question ("who killed him?") can be answered by reading a thread. A want ("I want into that
 room / I want her to say yes") can only be satisfied by playing. Wants sell the next release.
 
 **Every arc's last quest card says where this release ends, and what comes next if anything does**
 (LO, 2026-11-03; it replaced "every release ends on a visible locked door"). That end line is the
-card's `terminal_text` on its `terminal = true` card (`engine.md` §23): *"Corruption 60 opens the
-rest of this, in the next release."*, or *"You've had all of him there is."* when the arc has truly
+card's `terminal_text` on its `terminal = true` card (`engine.md` §23): *"That's all of him in this
+release. More with him next release."*, or *"You've had all of him there is."* when the arc has truly
 ended. Make the line true: a card must not say "in the next release" about a step this release
 already reaches. A locked door is no longer required. A later release may fix things, add content
 and move thresholds, so no rule says a door must be unreachable this release. Gate `ends on an
@@ -387,7 +387,9 @@ signature of doctrine living in the wrong place:
        --file games/<slug>/toml_phases/7_final_game.toml \
        --output games/<slug>/output --gen-version v2
    ```
-3. **Archived** to `games/<slug>/releases/v<version>.html` — the build itself, kept.
+3. **Archived** to `games/<slug>/releases/v<version>.html` — the build itself, kept. (A dev build LO
+   plays is archived apart, to `releases/dev/<YYYYMMDD-HHMM>.html`, never under a version name:
+   `the-returning-player.md`.)
 4. **`version` set** on the portal entry **and matching `[project] version`** in the TOML —
    the field, the sidebar footer it renders and its four `file:line`s are `engine.md` §38.
 5. **`dev: true` dropped, in the same commit** — that line is what moves the game into the main grid.
@@ -417,7 +419,7 @@ They drift, and nothing compared them until the check existed:
 |---|---|---|
 | portal `version` | what the storefronts are told | gamcore / mopoga / itch |
 | `[project] version` | the sidebar footer (`engine.md` §38) | **the player, in the game** |
-| `releases/v<n>.html` | the build that shipped | you, when a bug report names a version |
+| `releases/v<n>.html` | the build that shipped (dev builds LO plays live in `releases/dev/`, not here) | you, when a bug report names a version; `gates.py --saves` |
 
 
 ### The check

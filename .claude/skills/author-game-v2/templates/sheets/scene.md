@@ -15,8 +15,8 @@
 
 Two empty columns: the step is not written. One empty column: the Why table says why.
 
-**Kind · stage:** <the kind (`the-heat-ladder.md` H3) · the stage it opens at in this game's SP2 Heat line> ·
-<for step-family or anyone she lives with: the accident before her first chosen act (H2)>
+**Kind · stage:** <the kind of moment · the stage it opens at in this game's SP2 Heat line> ·
+<for step-family or anyone she lives with: the accident before her first chosen act>
 
 | the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
 |---|---|---|---|---|---|---|
@@ -35,4 +35,4 @@ allowed; hiding one is not (`references/the-release.md`, "When LO rejects someth
 
 | key choice | source |
 |---|---|
-| <what the scene shows · how far it goes · its exits · why a column of the step row is empty on purpose> | <rule file + id · `scout/<topic>.md` · LO, <date> · guess> |
+| <what the scene shows · how far it goes · its exits · why a column of the step row is empty on purpose> | <the rule in plain words · the scout card · LO, <date> · guess> |

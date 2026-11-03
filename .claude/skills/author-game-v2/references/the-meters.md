@@ -113,10 +113,12 @@ approves. **Whatever he keeps:**
 
 1. A shown number opens something visible, and he reacts the visit it crosses (gate `the men's numbers are read`).
    In a release where it opens nothing, a shown number may only colour his lines when it is stored for a
-   later release's steps and his card says so (LO, 2026-11-03).
+   later release's steps and his card says so (LO, 2026-11-03). Declare it in the ledger as
+   `board.characters[].stored = ["<trait key>", …]` (`state.md`): the gate then needs only his line
+   branch on it, not a step gate. The gate does not read his card; saying so on the card is yours.
 2. No hidden setting overrides the numbers.
 3. A locked step shows how close he is: the locked button names his feeling and the need.
-4. One visit moves about 1–10% of the next threshold, with 2–10 visits between steps (LO, 2026-11-03; R5:243-244
+4. One visit moves about 10–50% of the next threshold, so 2–10 visits sit between steps (LO, 2026-11-03; R5:243-244
    measured 3–10). A slow pace is allowed only when his card always says what to do next and the cheat page
    can skip the wait. LO: *"its okay to make player bored but not lost. So free version can make you grind but
    paid can give you cheats"*.
@@ -282,6 +284,9 @@ per-character meters instead. A lint that read only the first of those would pri
 for a roster game (`gates.py:3400` takes the `who_climbs == "cast"` branch). **Half a fork is not
 an instrument.** A gate above the meter's
 ceiling is skipped on both sides: that is a later release's content, named on a quest card (`the-release.md`), not a rung.
+A later release's content has **no button this release**: not a locked choice, not a greyed one
+(`the-heat-ladder.md` H1). The lint skip is for a gate the author has not removed yet, not a licence to
+show it.
 
 ---
 
@@ -310,12 +315,13 @@ whose effects mostly fall, declared needs excluded. It prints how many times the
 
 **Gate · `ascent tiers expand the world`** fails a player meter that closes more doors than it opens
 and is not declared as a tier. It skips declared needs (`board.needs[]`), because shutting is their job
-(M8), and a performance meter (W5c) (LO, 2026-11-03).
+(M8), and a performance meter (`board.meters[]` entry with `"performance": true`, W5c) (LO, 2026-11-03).
 
 ### W5c · A performance meter opens at the top and closes at the bottom
 
 A grade or a job rating is its own kind (LO, 2026-11-03). Declare it in `board.meters` with
-`"kind": "performance"`. It opens doors at the top (a top grade, a raise) and closes them at the
+`"performance": true` on its entry, beside its `kind` (`ambient` or `sourced`, which says where it is
+fed and stays as it was). It opens doors at the top (a top grade, a raise) and closes them at the
 bottom (failing, a warning, the sack). Both doors are correct design, so the descent check skips it.
 
 ---
@@ -895,7 +901,7 @@ It bounds **how high a trait can go**, not **how fast**:
 - ✅ bounding a restore — a sleep rung adding energy
 - ✅ bounding a repeatable relation grant so one rung cannot max a character on its own
 - ✅ capping one act at the top of its stage — that is the stage rule (`the-arc.md` A4d; LO, 2026-11-03)
-- ❌ **a tier that no act can carry to its top band** — that is the only broken tier, and its caps delete content
+- ❌ **a tier that no act can carry to the top band of the stages this release writes** — that is the only broken tier, and its caps delete content. A band above every cap this release pays is a later release's content (W1; `the-heat-ladder.md` H1), not a broken tier
 - ❌ it is not a throttle. A capped rung is still infinitely clickable up to the cap.
 
 ### M7 · Band a meter, show it once

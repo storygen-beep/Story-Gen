@@ -45,4 +45,4 @@ allowed; hiding one is not (`references/the-release.md`, "When LO rejects someth
 
 | key choice | source |
 |---|---|
-| <place and hours · the pay · each ladder · what it costs> | <rule file + id · `scout/<topic>.md` · LO, <date> · guess> |
+| <place and hours · the pay · each ladder · what it costs> | <the rule in plain words · the scout card · LO, <date> · guess> |

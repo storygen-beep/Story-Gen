@@ -100,3 +100,24 @@ def test_a_gate_on_a_location_a_schedule_or_a_phone_thread_counts():
         else:
             g["phone"] = {"conversations": [{"id": "t", "npc": "npc_vic", "trigger": {"conditions": cond}}]}
         assert row(g)[0] is True, where
+
+
+# ── W4 a (LO, 2026-11-03): a number stored for a later release ───────────────
+
+def test_a_stored_trait_needs_no_step_gate_this_release():
+    # Shown now, colours his lines now, and a later release's steps read it: declared in
+    # `board.characters[].stored`, the missing step gate is not a FAIL.
+    state = {"board": {"characters": [{"id": "npc_vic", "stored": ["trust"]}]}}
+    ok, _h, detail, _n = row(game(page=["trust"], gate_read=False), state)
+    assert ok is True, detail
+
+
+def test_a_stored_trait_still_needs_its_line_branch():
+    state = {"board": {"characters": [{"id": "vic", "stored": ["trust"]}]}}   # bare slug matches too
+    ok, _h, detail, _n = row(game(page=["trust"], gate_read=False, line_read=False), state)
+    assert ok is False and "no line branch reads it" in detail[0] and "no step gate" not in detail[0]
+
+
+def test_an_undeclared_trait_with_no_gate_names_the_stored_key():
+    ok, _h, detail, _n = row(game(page=["trust"], gate_read=False))
+    assert ok is False and "board.characters[].stored" in detail[0]

@@ -5,9 +5,11 @@ save written by the old one, and nothing about that is visible to you: the build
 gates go green, a fresh start plays perfectly. The damage only exists for the player who loads.
 
 **A dev build LO plays counts too** (LO, 2026-11-03). Once LO plays a dev build, the locks in this
-file (ids, flag and trait keys, §8) apply to every rebuild after it, and each pushed build is
-archived to `games/<slug>/releases/v<version>.html` so `gates.py --saves` has something to compare
-against. Renaming an id between two rebuilds breaks LO's own save.
+file (ids, flag and trait keys, §8) apply to every rebuild after it, and each dev build LO plays is
+archived to `games/<slug>/releases/dev/<YYYYMMDD-HHMM>.html`, kept apart from the shipped
+`releases/v<version>.html`. `gates.py --saves` compares shipped builds only; a dev archive is there to
+check LO's own save by hand (load it in the new build) until a tool reads it. Renaming an id between
+two rebuilds breaks LO's own save.
 
 **This file owns what may not CHANGE between releases.** What a release has to *clear* before it
 ships is `the-release.md` § Shipping the build. Both, every time.

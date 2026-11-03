@@ -343,7 +343,7 @@ empty, because it can be an accident.
    finishes.
 4. **He moves at least every other step.** Not all of it can be her initiative (`the-arc.md` A13).
 5. **His meter is the lock.** A step pays less than the next step needs, and his hot repeatables pay the
-   gap: 2–10 hot visits between steps (`the-meters.md`, "Whatever he keeps", rule 4). A slow pace is
+   gap: one hot visit moves about 10–50% of the next threshold, so 2–10 hot visits sit between steps (`the-meters.md`, "Whatever he keeps", rule 4). A slow pace is
    allowed only when his card always says what to do next and the cheat page can skip the wait (LO,
    2026-11-03: bored is fine, lost is not). A ladder
    where each step pays exactly what the next needs has zero visits between steps, and his meter locks nothing.

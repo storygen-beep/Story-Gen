@@ -3290,9 +3290,9 @@ def _ladder_counter_sites(game):
                and str(node.get("trait_key") or "") in stages)
 
 
-# A meter runs 0-100, so a gate above 100 is a locked door declared in the open
-# (`the-release.md` G9), not a rung of the climb. Counting one would credit a game
-# for a step nothing can climb to.
+# A meter runs 0-100, so a gate above 100 is a later release's content (it gets no
+# button this release, the-heat-ladder.md H1), not a rung of the climb. Counting one
+# would credit a game for a step nothing can climb to.
 METER_MAX = 100
 
 
@@ -12474,6 +12474,9 @@ def _no_has_content(game):
 #     LINE BRANCH (a `group` / pool condition inside blocks reading it on him).
 #   · "shown" means it can render: with no `[ui.cast_page]` the engine emits no cast page at
 #     all (`_generate_cast_page`, v2.py:11040), so his own `show_traits` shows nothing.
+#   · a shown trait declared STORED for a later release (`board.characters[].stored = [key, ..]`
+#     in v2_state, LO W4 a, 2026-11-03) needs no step gate this release: it is read by a later
+#     release's steps. It still needs its line branch, because it colours his lines now.
 # Ages are shape.py's (DC2a), not this gate's.
 def _npc_key(x):
     x = str(x or "")
@@ -12488,11 +12491,13 @@ def _mens_numbers(game, state):
     page = (cast_page or {}).get("show_traits") or [] if has_page else []
     hidden = {l.get("key") for l in ((game.get("traits") or {}).get("labels") or [])
               if isinstance(l, dict) and l.get("hidden") is True}
-    counters = {}
+    counters, stored = {}, collections.defaultdict(set)
     for ch in (((state or {}).get("board") or {}).get("characters") or []):
         lad = ch.get("ladder") if isinstance(ch.get("ladder"), dict) else {}
         if lad.get("counter"):
             counters.setdefault(_npc_key(ch.get("id")), set()).add(lad["counter"])
+        if isinstance(ch.get("stored"), list):
+            stored[_npc_key(ch.get("id"))].update(str(k) for k in ch["stored"])
     gates_read, lines_read = collections.defaultdict(set), collections.defaultdict(set)
     for c in game.get("canvases") or []:
         for path, d in _walk_paths(c):
@@ -12526,10 +12531,13 @@ def _mens_numbers(game, state):
         for k in sorted(shown):
             shown_n += 1
             miss = [w for w, got in (("no step gate", gates_read[who]),
-                                     ("no line branch", lines_read[who])) if k not in got]
+                                     ("no line branch", lines_read[who]))
+                    if k not in got and not (w == "no step gate" and k in stored[who])]
             if miss:
                 bad.append(f"{n.get('id')}: `{k}` is shown and {' and '.join(miss)} reads it — a "
-                           f"shown number opens something and gets a reaction (W1 rule 1)")
+                           f"shown number opens something and gets a reaction (W1 rule 1)"
+                           + ("; or, if a later release's steps read it, declare it in "
+                              "board.characters[].stored" if "no step gate" in miss else ""))
     judged = sum(len((n.get("core_traits") or {})) for n in npcs)
     if not judged:
         return None, "no man keeps a trait — nothing to show", [], 0
@@ -15486,12 +15494,14 @@ def _stage_way_up(game, state):
 # ─────────────────────────────────────────────────────────────────────────────
 
 def _performance_meter_keys(state):
-    """Keys of `board.meters[]` entries declared `"kind": "performance"` (S7): grades or a job
+    """Keys of `board.meters[]` entries declared `"performance": true` (S7): grades or a job
     rating. Such a meter opens doors at the top and shuts them at the bottom on purpose, so a
-    descent check must not call it a descent."""
+    descent check must not call it a descent. `kind` stays `ambient`/`sourced`; the older
+    `"kind": "performance"` spelling is still accepted but no longer documented."""
     board = (state or {}).get("board") or {}
     return {str(m.get("key") or m.get("id")) for m in _meters_of_board(board)
-            if m.get("kind") == "performance" and (m.get("key") or m.get("id"))}
+            if (m.get("performance") is True or m.get("kind") == "performance")
+            and (m.get("key") or m.get("id"))}
 
 
 def _descent_exempt_keys(state):

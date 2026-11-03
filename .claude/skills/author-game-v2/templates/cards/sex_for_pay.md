@@ -2,7 +2,9 @@
 
 > **A worked card, not a template.** Take the shape, leave the furniture. Every line cites a traced game:
 > round 9b, `round9b/cards/sex_for_pay.md` and `round9b/traces/sexpay_sd_stroll.md`. Model: **Shady Deals (SD),
-> the street stroll**. Fill your own card on `templates/sheets/system.md`; record it in `board.systems[]`.
+> the street stroll**. Fill your own card on `templates/sheets/system.md`; record it in `board.systems[]` with
+> **`"sex_for_pay": true`** and a **`pool[]`** listing the paid canvases. Without the flag the pay gate reads
+> nothing and shows n/a (`the-systems.md`, "The price is shown before she agrees").
 
 | field | the model (SD stroll) | cite |
 |---|---|---|
@@ -22,7 +24,7 @@
 | leads to | the corner fight; running girls; the video shop | [Band Creation]; [Downtown Spot Combat] |
 
 ## Measured floors (directions, never gates)
-- The price is on screen before she says yes. [Spot Work]
+- The price is on screen before she says yes: said in the scene, not on the button. [Spot Work]
 - 2 or more client types, each with his own line and act mix. [Spot Work]
 - 9 or more act scenes per venue (SD stroll 9). Round 9b `cards/sex_for_pay.md`.
 - A cap on how often (SD 6 a day). Round 9b `cards/sex_for_pay.md`.
@@ -39,4 +41,4 @@
 ## Our engine today (round 9b §6)
 - Missing as a system: no client pool, venue or price formula. Composable from canvases, `block_pool` and money effects.
 - A price from one stat is a stat-based value (`{type = "trait"}`, `setup.resolveEffectValue` (`v2.py:7243`)); a price from several stats is
-  bands per sluttiness tier. The value is worked out when it applies, so the price on the label is authored.
+  bands per sluttiness tier. The value is worked out when it applies, so the price said in the scene is authored: say it in the scene, before her yes, never on the button (`the-voice.md`).

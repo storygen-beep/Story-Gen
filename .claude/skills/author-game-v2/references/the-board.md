@@ -324,9 +324,11 @@ Three hard rules, all gated:
   descent wearing an ascent's clothes.
 - **The ceiling must be bought.** Every band boundary is a promise to the player, so the highest
   band `min` needs an authored gate on that trait at or above it, or the points past the last gate
-  buy nothing. Gate 8. Two exceptions: the band holding the meter's **starting value** (a meter that
-  starts full and drains starts there), and a meter declared `falling = true` in `[[traits.labels]]`
-  (read by `gates.py` only).
+  buy nothing. Gate 8. Three exceptions: the band holding the meter's **starting value** (a meter that
+  starts full and drains starts there), a meter declared `falling = true` in `[[traits.labels]]`
+  (read by `gates.py` only), and a band above every cap this release pays on that meter, which the
+  player cannot reach yet and so belongs to a later release (LO, 2026-11-03, W1; the gate reads the
+  caps and skips it, `engine.md` §29).
 - **Every meter you raise is read by something.** Gate 33, `the-meters.md` W3.
 
 **Where ceilings live:** `sidebar_items[].bands[]`. **Not** in `player.core_traits`, which is

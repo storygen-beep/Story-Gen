@@ -1,7 +1,7 @@
 """The gates changed by LO's decisions of 2026-11-03
 (`~/Documents/Great_Games_Study_20260926/SKILL_DECISIONS_20261103.md`):
 
-  C5 b · S7  ascent tiers expand the world — declared needs and `"kind": "performance"`
+  C5 b · S7  ascent tiers expand the world — declared needs and `"performance": true`
              meters may close more than they open;
   W1 a       meter ceiling — a band above every cap the game pays is a later release's band;
   W12 a      a destination is never open and exit-only — a room whose screen says "nothing to
@@ -67,9 +67,16 @@ def test_an_undeclared_need_and_grade_still_fail_as_descents():
 
 def test_a_declared_need_and_a_performance_meter_are_skipped():
     st = {"board": {"ascent_tiers": ["heat"], "needs": [{"key": "energy"}],
-                    "meters": [{"id": "grade", "key": "grade", "kind": "performance"}]}}
+                    "meters": [{"id": "grade", "key": "grade", "kind": "sourced",
+                                "performance": True}]}}
     r = row(descent_game(), st, ASCENT)
     assert r["pass_"] is True, r["detail"]
+
+
+def test_the_old_kind_performance_spelling_is_still_skipped():
+    st = {"board": {"ascent_tiers": ["heat"], "needs": [{"key": "energy"}],
+                    "meters": [{"id": "grade", "key": "grade", "kind": "performance"}]}}
+    assert row(descent_game(), st, ASCENT)["pass_"] is True
 
 
 def test_a_sourced_grade_is_not_skipped():

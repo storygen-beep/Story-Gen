@@ -99,7 +99,7 @@ The spine is finished when every page is signed and `shape.py <slug> --finish` p
 ledger only and FAILS on: a step at an undeclared place (once the board declares places), hours that
 are not a window, a trait the ledger never declares, a dependency on a missing step or in a cycle,
 pressure the release's weeks cannot pay without a declared `shortfall`, a release person with no
-ladder, a step with no `hint`, a door that is not a declared step, a promise with no beat on the
+ladder, a step with no `hint`, a declared door that is not a declared step (a door is optional: none is n/a), a promise with no beat on the
 release page, a READY page unsigned, a gate the start (his meter's, or `board.player_start` for hers) plus the `raises` before it cannot reach (a trait in `board.daily_raises` or `board.repeat_raises` is not judged), a person with no age or
 under 18 (in every mode), a thread whose person is not in the cast, a `keeps` outside the three or
 `none — <why>`, and (strict) a system with no card. With `--finish`, or once the

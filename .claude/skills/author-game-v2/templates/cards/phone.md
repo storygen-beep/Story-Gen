@@ -33,7 +33,7 @@
    people; CoT picks by relationship type; SD calls only met contacts. No live arcs, nothing to say.
 2. **Every message is caused** by a flag a scene set (IHOH 46/46; CW 77/79 read an arc stage).
 3. **Every message is timed:** a delay after the cause (the next day by default) and an hour window.
-4. **Keep it short:** 1–3 bubbles of 3–7 words. Long talk goes into a call or a meeting scene.
+4. **Keep it short:** 1–3 bubbles of 7 words or fewer (a one- or two-word bubble is fine). Long talk goes into a call or a meeting scene.
 5. **Every message ends in a choice that books something** with a place and a time. Warm and cold answers move
    the relationship. **Ignoring costs more than saying no** (CoT −20/−20 vs −2/−3).
 6. **The meeting happens in the world, and missing it costs** (CoT −25 ×3). Point to it everywhere the player
@@ -48,7 +48,7 @@
 - One thread per live arc.
 - 2–3 texts plus 1–2 calls or meetings before the loop (IHOH James: 3 texts, 2 calls).
 - Delay: the next day by default; +2 to +3 days between the steps of a slow burn (CW Damien +2).
-- One loop invite per sex-capable relationship, with a cooldown of 1–3 days.
+- One loop invite per sex-capable relationship, with a cooldown of 1–3 days for a booty call, 2–3 for a boyfriend's dates.
 - One door app.
 - Random *timing* is fine; random *senders and content* are not. IHOH's 4 dice texts all sit on live threads;
   CoT's only random "hi" is the one it switched off.
@@ -75,7 +75,7 @@ meeting scene · the no-show cost · the loop entry.
 ## Failure checklist
 - [ ] Every text is caused by a flag a scene set (not random, not "hi").
 - [ ] Every text has a delay and an hour window.
-- [ ] 3–7 words a bubble, at most 3 bubbles.
+- [ ] 7 words or fewer a bubble, at most 3 bubbles.
 - [ ] Every text ends in a booking or a choice that moves the relationship. Ignoring costs.
 - [ ] The booked meeting is reminded somewhere the player looks.
 - [ ] The thread ends in a loop, not a last text.

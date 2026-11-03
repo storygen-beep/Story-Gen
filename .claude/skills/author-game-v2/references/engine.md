@@ -1471,7 +1471,7 @@ already above the cap it is left alone; the cap only refuses to *raise* it past 
 |---|---|
 | bounding a **restore** — a sleep rung that adds energy | ✅ this is what it is for |
 | bounding a repeatable **relation** or reputation grant so one rung cannot max a character | ✅ |
-| bounding one act on an **ascent tier** at its stage top | ✅ this is the stage rule (`the-arc.md` A4d: the act's `cap` sits at the top of its stage). A tier is broken only when no act can reach its top band; a cap that leaves no path to the top deletes content (LO, 2026-11-03) |
+| bounding one act on an **ascent tier** at its stage top | ✅ this is the stage rule (`the-arc.md` A4d: the act's `cap` sits at the top of its stage). A tier is broken only when no act can reach the top band of the stages **this release writes**; a cap that leaves no path to that band deletes content. A band above every cap this release pays is a later release's content, not a broken tier (LO, 2026-11-03; `the-meters.md` W1, `the-heat-ladder.md` H1) |
 | **throttling how fast** anything rises | ❌ it does not touch the rate. See `the-meters.md` |
 
 `cap` and `clamp` are independent and both apply — clamp first, then cap.
@@ -1874,7 +1874,8 @@ is what the field ships (patriarch gives six people 814 characters between them)
 ⚠️ **WHO IS LISTED IS THE QUEST CARDS' DECISION.** A character appears exactly when
 `setup.pickQuestsCard(slug)` returns a card — the same call and the same gate `QuestsPage` makes.
 Put the meeting flag on their cards (`the-first-hour.md` F8) and both surfaces reveal them in the
-same instant; there is no second gate to keep in sync. The cost, stated plainly: **a character with
+same instant; there is no second gate to keep in sync. A pointer card (the flag with `is_false`) lists the
+person *before* the meeting, under its `heading` and without a portrait (`v2.py:11867`, `v2.py:18923`). The cost, stated plainly: **a character with
 no quest card can never appear here.** The `guidance exists` gate already requires every `[[npcs]]`
 entry to carry one, so this cannot happen in a game that passes its own scoreboard.
 
@@ -2921,7 +2922,9 @@ anything, which is the failure the corpus punishes hardest.
 
 ⚠️ **There is no `locked_text`, `requirement` or `hint` field on a quest card.** The full field
 list is `text · ready_text · tip · npc_id · priority · group · when · goals · ready_canvas ·
-terminal · terminal_text` (`template_import.py:1321-1363`). The only player-facing place a
+terminal · terminal_text · heading` (`template_import.py:1346-1394`). `heading` (NPC cards only) replaces
+the person's name wherever the card is listed by person, and the cast row hides the portrait
+(`v2.py:11867`, `v2.py:18923`); it is how a pointer card names someone not met yet (`the-first-hour.md` F8). The only player-facing place a
 requirement can live is a goal item's `label` — or, in prose, in `text` / `ready_text` / `tip`.
 Do not reach for a field that is not there.
 

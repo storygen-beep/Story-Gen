@@ -5,6 +5,46 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-03 — follow-through on LO's decisions (18 contradictions plus 3 open rows)
+
+**Why.** Two reviews of today's edits checked what was left. A re-check of the 49 skill-side rows found 3 still
+open (W4, W5, S7). A hunt for new contradictions found 18 places where untouched text still taught the old rule,
+or where two of today's edits disagreed. Among them were the release door still required by shape.py, a no that
+must "move something" in the reader's test 6, `heading` missing from the quest-card field list, and the
+`"kind": "performance"` key colliding with `kind` ambient/sourced (now `"performance": true`).
+
+## 2026-11-03 — follow-through on LO's 2026-11-03 decisions (new_conflicts.md rows 1–18, plus E8/W5 and E79/S7)
+
+- `references/the-surfaces.md` R5b "What her no moves": now says a no never raises her climb or his Want, and may cost Warmth, move a world counter, or cost nothing. It used to say the no "always moves his meter", which contradicted `the-heat-ladder.md` H5 (C1 b). Verified by grep: no "his meter" claim is left in R5b.
+- `references/the-surfaces.md` R5b heading and body, `references/register.md` test 6, `.claude/agents/v2-reader.md` test 6: "written and priced" / "moves something" became "written, and lands somewhere: a reply, a parked return, a cost, or a stated nothing". The reader gates the release and was failing a no that costs nothing (C1 b; first_term's "refusals cost nothing", 68621a82).
+- `scripts/shape.py` check 8 *the door is a declared step*: a release page with no door is now n/a in every mode, strict and `--finish` included. Only a declared door that is not a ladder step's canvas fails. `references/the-spine.md:102`, `SKILL.md` (shape.py row) and `references/state.md` (`release_page` row, door marked optional) updated to match. `scripts/tests/test_shape.py`: the empty-ledger test no longer expects the door row to fail, and a new `test_a_spine_with_no_door_finishes` covers the case. Why: a spine filled from the new SP7 template could not pass `--finish` (S12 b + W13 a).
+- `references/engine.md` §29 and `references/the-meters.md` (cap list): a tier is broken only when no act can reach the top band of the stages this release writes. A band above every cap this release pays is a later release's content. Why: this text contradicted W1/S1 (C9 c vs W1 a + S1 a).
+- `references/the-board.md` §3 "The ceiling must be bought": added a third exception, a band above every cap this release pays on that meter. Why: SKILL.md's meter-ceiling row points at this section and already says it (W1 a).
+- `SKILL.md` gate row *ascent tiers expand the world*: says that declared needs and performance meters are skipped (C5 b + S7 a).
+- `scripts/gates.py` `_mens_numbers` (gate *the men's numbers are read*): a shown trait listed in v2_state `board.characters[].stored` needs no step gate this release, but it still needs its line branch. The FAIL detail now names the key. Docs: `references/the-meters.md` W1 rule 1 (the ledger key, and the note that the gate does not read the card), `references/state.md` (new `board.characters[].stored` row), `SKILL.md` gate row. `scripts/tests/test_gates_nc6.py`: three new tests (stored passes with no gate; stored still needs its line; the undeclared FAIL names the key). Why: the doctrine allowed a colour-only number and the gate still failed it (W4 a).
+- `references/engine.md` §47 quest-card field list: added `heading` (cited at `template_import.py:1346-1394`, with `v2.py:11867` and `v2.py:18923`). The cast-page section now says an `is_false` pointer card lists the person before the meeting, under its heading and with no portrait. Why: engine.md told readers not to use the field F8 asks for (C3 c, engine fix 73e69b04).
+- `templates/cards/phone.md`: a bubble is now "7 words or fewer" (in rule 4 and the checklist), and the loop cooldown is "1–3 days for a booty call, 2–3 for a boyfriend's dates". Why: this matches `the-phone.md` (C6 b, W8 a / W11 a).
+- `references/the-first-hour.md` F1 skip: the skip sets every flag the opening always sets, and for a one-of-several choice only the mildest branch's flags. Why: the old wording told authors to set every branch's flags (S3 a).
+- `references/the-release.md` "Every release ends on an opening": the model end line is now *"That's all of him in this release. More with him next release."*, replacing the Corruption-60 line LO flagged. The heading line now matches S12 b (W13 a).
+- `templates/sheets/{person,scene,place,system,decision,opening}.md`: the Why-table source cell now reads "the rule in plain words · the scout card · LO, <date> · guess". The rule ids are gone from person.md's Phone thread heading and from scene.md's kind and stage lines. Why: `the-sheets.md` bans rule ids on the review surface (C8 a).
+- `templates/cards/sex_for_pay.md`: the card now says to record it with `"sex_for_pay": true` and a `pool[]`, or the pay gate shows n/a. "The price on the label" became "the price said in the scene, before her yes, never on the button", and the measured floor now says the same (C7 c + S11 a).
+- `templates/spine/SP4_loop_and_pressure.md`: added two rows. One asks what each short week costs (read from `rent_short_weeks`) and how paying undoes it. The other asks whether a hard-working player can pay the first rent in week one (yes, with the working). Why: S9 a and W9 rent in week one.
+- `references/the-returning-player.md`, `references/the-release.md` (shipping step 3 and the three-places table), and the `SKILL.md` `--saves` row: dev builds LO plays are archived to `games/<slug>/releases/dev/<YYYYMMDD-HHMM>.html`, apart from the shipped `releases/v<version>.html`. `--saves` compares shipped builds only, and a dev archive is for checking LO's save by hand until a tool exists. Docs only. Checked: `--saves` reads only `releases/v*.html`, never `releases/dev/` (gates.py ~10569-10645) (S13 a).
+- `references/the-meters.md` (the W4 gate-above-ceiling note) and the `scripts/gates.py` METER_MAX comment (swapped line for line): a later release's content gets no button this release (`the-heat-ladder.md` H1). The stale G9 "locked door declared in the open" reference is gone (S1 a + S12 b).
+- `references/register.md` model Talk screen: added a TOML rendering, with each spoken line as a `dialog` block that has a speaker and the thought as a `thought_bubble` (`engine.md` §25 shapes) (S2 a).
+- `SKILL.md` frontmatter description, `STATUS.md` and the `references/the-release.md` heading: "every release ending on a visible goal for the next one" became "every release ending with each arc's last quest card saying where it stops and what comes next, if anything does" (S12 b wording). The description is still one line.
+- `references/the-meters.md` "Whatever he keeps" rule 4 and `references/the-sheets.md` ladder rule 5: "One visit moves about 10–50% of the next threshold, so 2–10 visits sit between steps". The old "1–10%" could not give 2–10 visits (E8/W5).
+- `references/the-meters.md` W5c and the ascent-gate paragraph, `references/state.md` (`board.meters[]` paragraph and row), and `SKILL.md`: a performance meter is now declared with `"performance": true` on its `board.meters[]` entry. `kind` stays `ambient`/`sourced`. `scripts/gates.py` `_performance_meter_keys` reads `performance: true` and still accepts the old `kind == "performance"` without documenting it. `scripts/tests/test_gates_lo_20261103.py` now uses the new key and adds a test for the old spelling. Why: the old spelling collided with `board.meters[].kind` (E79/S7).
+- Verified: `gates.py --selfcheck` exit 0, `cite_check.py --strict` with 0 drifted in SKILL.md + references, `pytest scripts/tests` 789 passed, `pytest .claude/skill-evals/author-game/tests` 107 passed and 1 skipped.
+
+**Verified.**
+- `gates.py --selfcheck` is green.
+- `cite_check.py --strict` shows 0 wrong cites in SKILL.md + references/.
+- `pytest scripts/tests`: 789 passed.
+- `pytest .claude/skill-evals/author-game/tests`: 107 passed, 1 skipped.
+
+---
+
 ## 2026-11-03 — the two engine fixes have landed (C3, S15)
 
 - `references/the-first-hour.md` F8: the warning that the Quests page prints the name above a pointer card is

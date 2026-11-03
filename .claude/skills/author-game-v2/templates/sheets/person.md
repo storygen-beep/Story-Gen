@@ -41,7 +41,7 @@ Two failing: the ladder is not built. A rule LO waived in a signed row (a declar
 | 7 · a low line and a high line per step | <pass · fail> | <column above> |
 | 8 · something still happens after the top step | <pass · fail> | <the loop> |
 
-## Phone thread (`the-phone.md` P1–P12 · `templates/cards/phone.md`)
+## Phone thread
 
 | thread | cause flag (a scene sets it) | delay | window | booking (place + time, and its reminder) | loop (after the sex step, cooldown) |
 |---|---|---|---|---|---|
@@ -54,4 +54,4 @@ allowed; hiding one is not (`references/the-release.md`, "When LO rejects someth
 
 | key choice | source |
 |---|---|
-| <where he sleeps · what he wants · each step and its gate> | <rule file + id · `scout/<topic>.md` · LO, <date> · guess> |
+| <where he sleeps · what he wants · each step and its gate> | <the rule in plain words · the scout card · LO, <date> · guess> |

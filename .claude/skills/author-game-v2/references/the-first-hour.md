@@ -211,7 +211,7 @@ two sentences each side of the card.*
 Put one choice on the opening's first screen — *read it* or *skip it*. Fifteen of 26 top games offer a
 skip (Process Review, Round 1, numbers only), and all four passing games do: In Her Own Hands
 [SkipPreface] (*"No, skip the Preface"*), Course of Temptation [QuickstartMenu], Shady Deals' "Custom
-Start", Cupid's Way's "Skip Prologue". The skip sets every flag the opening sets and lands where the
+Start", Cupid's Way's "Skip Prologue". The skip sets every flag the opening always sets (and, for a one-of-several choice, the mildest branch's flags only) and lands where the
 opening hands over, so nothing downstream — `the opening opens a door` included — can tell the difference.
 Where the opening has a choice of one of several, the skip takes the mildest branch, shows it on its own
 screen, and sets that branch's flags. It never takes a no that ends a path (LO, 2026-11-03).

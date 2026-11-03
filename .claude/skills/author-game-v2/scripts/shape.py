@@ -274,11 +274,13 @@ def check(state, strict=False, slug=None, root=None):
         bad = [f"{n} step {s.get('n')}: no `hint`" for n, s in steps if not str(s.get("hint") or "").strip()]
         row("every step has a guidance line", not bad, f"{len(steps) - len(bad)}/{len(steps)} steps", bad)
 
-    # 8 · the door is a declared step (SP7)
+    # 8 · the door is a declared step (SP7). A door is optional since LO's S12 b (2026-11-03): the
+    # release ends on each arc's last quest card, not on a locked door, so a spine with no door is
+    # n/a in every mode. Only a DECLARED door that is not a ladder step's canvas fails.
     door = rp.get("door") if isinstance(rp.get("door"), dict) else {}
     canvases = {s.get("canvas") for _n, s in steps}
     if not door.get("canvas"):
-        row("the door is a declared step", False if strict else None, "release_page.door is not declared (SP7)")
+        row("the door is a declared step", None, "no release_page.door — optional (SP7, S12 b)")
     else:
         ok = door["canvas"] in canvases
         row("the door is a declared step", ok, f"door {door['canvas']}",
