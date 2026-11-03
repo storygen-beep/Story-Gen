@@ -148,6 +148,10 @@ flagEffects = [
   { targetType = "player", flag = "walkin_things_ryan_today", op = "unset" },
   { targetType = "player", flag = "walkin_things_kayla_today", op = "unset" },
   { targetType = "player", flag = "walkin_step_vance_today", op = "unset" },
+  # Mark's Saturday walk-ins (DECISIONS 152; walkins.py)
+  { targetType = "player", flag = "walkin_kitchen_mark_today", op = "unset" },
+  { targetType = "player", flag = "walkin_laundry_mark_sat_today", op = "unset" },
+  { targetType = "player", flag = "walkin_wardrobe_mark_today", op = "unset" },
   # the walk-ins outside the house, once a day each (heat proposal B9-B20, DECISIONS 147 chunk 3; walkins_out.py)
   { targetType = "player", flag = "walkin_cafe_gary_today", op = "unset" },
   { targetType = "player", flag = "walkin_gym_team_today", op = "unset" },

@@ -6405,6 +6405,24 @@
             "from": "17:00",
             "to": "18:30",
             "note": "heading out to the bar: he calls up the stairs at Laura's step 3 (laura_03b_all_dressed_up.md, DECISIONS 115); a build row, his sheet's Saturday had no evening row"
+          },
+          {
+            "where": "home_master_bedroom",
+            "weekdays": [
+              "Sat"
+            ],
+            "from": "07:00",
+            "to": "08:30",
+            "note": "sleeping in (LO, 2026-11-03, DECISIONS 152)"
+          },
+          {
+            "where": "home_kitchen",
+            "weekdays": [
+              "Sat"
+            ],
+            "from": "08:30",
+            "to": "09:00",
+            "note": "coffee at the counter before the garage (LO, 2026-11-03, DECISIONS 152)"
           }
         ],
         "occupancy_rows": [],
@@ -8601,6 +8619,16 @@
         "chrome": {
           "at": "2026-11-03 19:09",
           "report": "Chrome: the dare's Run. paid Exhibitionism 62 -> 63 the first time and 63 -> 63 the second the same day; walkin_tub_zoe reads 'Zoe is already in the water across from you, a drink in each hand.'"
+        },
+        "played": null
+      },
+      {
+        "id": "mark_saturday_rows",
+        "what": "Mark's two Saturday rows (07:00-08:30 in bed, 08:30-09:00 kitchen) and his walk-ins B2 Sat, B4 Sat, B6 (DECISIONS 152)",
+        "built_at": "2026-11-03 19:37",
+        "chrome": {
+          "at": "2026-11-03 19:37",
+          "report": "Chrome: walkin_kitchen_mark ('Reaching past', exit 'His hand stays.'), walkin_laundry_mark_sat ('Bent at the drum'), walkin_wardrobe_mark ('Laura's lingerie') render. Builder's forced-dice probe 17/17: B2 fires Sat 08:20, B4 Sat 08:50, B6 Sat 21:50, none without mark_saw_her or outside the windows; Ryan's Saturday walk-in stops at 08:15, Sunday unchanged. Gates 75/90, truth gates PASS."
         },
         "played": null
       }

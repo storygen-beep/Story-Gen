@@ -19,7 +19,12 @@ The pay rule (proposal B, H5, DECISIONS 143):
 
 Mark is looks only this release (DECISIONS 107), and every Mark walk-in waits for `mark_saw_her` so the
 dryer stays his first accident (H2). Built, then not built, as written in the proposal: see DECISIONS 147.
+
+DECISIONS 152 (LO, 2026-11-03) gave Mark two Saturday rows (bed to 08:30, coffee in the kitchen to 09:00) and with them
+B2 Saturday, B4 Saturday and B6 Mark. Each host needs his room empty, so each rule reads the 15 minutes before the row
+that brings him in (08:15, 08:45, 21:45), the way B4's weekday rule does; Ryan's Saturday kitchen window ends at 08:15.
 """
+import copy
 from canv import *
 from tomlw import tod, wd
 from home_items import here, npc_add, since, CURIOUS, BOLD, DARING, SHOWING
@@ -44,6 +49,7 @@ def lust(npc):
 
 
 ANY = [{"type": "worn_exposure", "operator": "gte", "value": 0}]          # always true: a chain's else
+SAW_ = flag("mark_saw_her")   # every Mark walk-in waits for his first accident (the dryer, H2)
 COVERED = [{"type": "worn_exposure", "operator": "eq", "value": 0}]
 NAKED = [slot("top", False), slot("bottom", False), slot("dress", False), slot("bra", False), slot("underwear", False)]
 UNDIES = [slot("bra"), slot("underwear"), slot("top", False), slot("bottom", False), slot("dress", False)]
@@ -243,8 +249,44 @@ walkin("walkin_kitchen_ryan", "Reaching past", "home_kitchen",
                                              D(R, "Jesus, @player.nickname."),
                                              P("He pulls away like it burns, the mug forgotten on the shelf, and goes back up the stairs with his hand over his boxers.")],
             "Drink your coffee.", "home_kitchen", 10)])
+# Ryan's Saturday window stops where Mark's starts (DECISIONS 152), so the two never overlap; Sunday stays 07:30-10:00.
 for host in ("kitchen_breakfast", "kitchen_coffee"):
-    rule(host, "walkin_kitchen_ryan", 0.25, here(R, "home_ryan_room"), wd(5, 6), tod("07:30", "10:00"))
+    rule(host, "walkin_kitchen_ryan", 0.25, here(R, "home_ryan_room"), wd(5), tod("07:30", "08:15"))
+    rule(host, "walkin_kitchen_ryan", 0.25, here(R, "home_ryan_room"), wd(6), tod("07:30", "10:00"))
+
+# B2 Saturday, Mark (DECISIONS 152): sleeping in until 08:30, then coffee at the counter before the garage. The kitchen
+# hosts need the kitchen empty (home.py KITCHEN_EMPTY), and the engine rolls with the clock where it is when she
+# clicks (v2.py checkAndSubstituteCanvas), so his arrival is the walk-in: the rule reads him upstairs in bed in the 15
+# minutes before his kitchen row, as B4 reads him at dinner before his garage row. Looks and brushes only (DECISIONS 107).
+walkin("walkin_kitchen_mark", "Reaching past", "home_kitchen",
+    "B2, Mark: down from sleeping in on a Saturday for his coffee, he puts his hand on her hip to get past her at the counter; after mark_saw_her. His Lust +2 on the moment; her answer on Corruption: step aside 0, stay +1 cap 19 / 39, push back (Bold) +1 cap 59.",
+    [here(M, "home_master_bedroom"), SAW_],
+    [P("Saturday. You're at the counter with the kettle on and the kitchen to yourself. Upstairs a bed creaks, then the stairs."),
+     P("Mark comes in barefoot in yesterday's jeans, his hair flat on one side from the pillow. He wants the coffee jar, and you're standing in front of it."),
+     P("He doesn't ask you to move. His hand goes flat on your hip, big and warm, and he steps in behind you to reach past.")],
+    "His hand stays.",
+    [P("He takes his time with the jar. His hand stays on your hip the whole time, his thumb pressed into the curve of it. His chest is at your back, and the front of his jeans brushes your ass."),
+     GC(cond(ntrait(M, "want", "lt", 50)), P("He clears his throat and gets the lid off, slow, like that's what he's doing."), D(M, "Morning, @player.")),
+     GC(cond(*ANY), P("He doesn't pretend. He looks down over your shoulder, straight down your front, and his fingers spread on your hip."), D(M, "Lucky your mother's out.")),
+     VID("a middle-aged man behind a girl at a kitchen counter, his hand on her hip, reaching past her", "stepdad hand on hip kitchen counter morning", "man brushes past girl kitchen counter hand on hip", pool_dir="sex/walkin_kitchen_mark_t4")],
+    [go("Step aside.", node="m_aside", mins=2),
+     go("Don't move.", node="m_stay", mins=2, cond_=cond(*C_GG), eff=[pay("corruption", 19)]),
+     go("Don't move.", node="m_stay", mins=2, cond_=cond(*C_CUR), eff=[pay("corruption", 39)]),
+     go("Push back into him.", node="m_push", mins=2, cond_=cond(BOLD), eff=[pay("corruption", 59)])],
+    raise_=[lust(M)], records=["mark_brushed_kitchen"], when=[wd(5), tod("08:15", "08:30")], extra=[
+        res("m_aside", "Step aside", [P("You slide out from under his hand and take your mug to the window. Behind you he spoons his coffee in and leans on the counter to drink it, and you can feel him watching your ass the whole time.")],
+            "Drink your coffee.", "home_kitchen", 10),
+        res("m_stay", "Don't move", [P("You don't move. You stand there with his hand on your hip and let him take as long as he wants. His thumb presses in once. The front of his jeans grazes your ass again, and your nipples go hard."),
+                                     P("Then he steps back with the jar, like nothing happened."),
+                                     D(M, "Good girl."),
+                                     T("He felt you stay. He'll remember it.")],
+            "Drink your coffee.", "home_kitchen", 10),
+        res("m_push", "Push back into him", [P("You push back into him. Your ass presses right into the front of his jeans, and he's hard. His fingers dig into your hip and hold you there."),
+                                             D(M, "Careful, @player."),
+                                             P("One second. Two. Then he lets go, takes his coffee to the end of the counter and drinks it there, looking at you over the mug like he's working something out.")],
+            "Drink your coffee.", "home_kitchen", 10)])
+for host in ("kitchen_breakfast", "kitchen_coffee"):
+    rule(host, "walkin_kitchen_mark", 0.25, here(M, "home_master_bedroom"), wd(5), tod("08:15", "08:30"))
 
 # ═════════════════════════════════════════════════════════════════════════════
 # B3 · THE LIVING ROOM (host living_tv): channel 5 on, someone walks in. C2: the sound up (`tv_loud`) doubles it.
@@ -355,6 +397,18 @@ for chance, loud in ((0.25, TV_QUIET), (0.5, TV_LOUD)):
 PANTIES_ON = slot("underwear")
 NO_TOWEL = {"type": "worn_type", "operator": "neq", "value": "towel"}
 SAW = flag("mark_saw_her")
+# Her answers, shared by the weekday and the Saturday walk-in: they route into the built tease ladder.
+LAUNDRY_ANSWERS = [go("Load it and go.", loc="home_garage", mins=30, flags=[fset("did_laundry")], eff=[add("energy", -5)],
+        costs=[{"trait": "energy", "value": 5}]),
+     go("Leave your basket on top.", node="hub_mark_garage.hl_laundry_tease", cond_=cond(CURIOUS, SAW),
+        eff=[npc_add(M, "want", 2)], flags=[fset("did_laundry")]),
+     go("Bend for the bottom drum.", node="hub_mark_garage.hl_laundry_tease2", cond_=cond(CURIOUS, DARING, SAW, PANTIES_ON, NO_TOWEL),
+        eff=[npc_add(M, "want", 3), pay("exhibitionism", 39)], flags=[fset("did_laundry")]),
+     go("Wash what you're wearing.", node="hub_mark_garage.hl_laundry_tease3",
+        cond_=cond(BOLD, SHOWING, SAW, slot("top"), slot("bra")),
+        eff=[npc_add(M, "want", 4), pay("exhibitionism", 59), pay("corruption", 59)], flags=[fset("did_laundry")],
+        wardrobe=[{"action": "unequip", "item_id": g} for g in ("tshirt", "thin_top")]),
+     go("Leave it for later.", loc="home_hall")]
 walkin("walkin_laundry_mark", "Bent at the drum", "home_garage",
     "B4, Mark: back from dinner to his garage row, he finds her bent at the washer. His Lust +2 on the moment; her answers route into his laundry tease ladder (hub_mark_garage) with its own gates and pays.",
     [here(M, "home_kitchen"), SAW],
@@ -365,19 +419,26 @@ walkin("walkin_laundry_mark", "Bent at the drum", "home_garage",
     [P("He doesn't go to his bench. He leans on the door frame and looks at your ass, slow, and takes a drink of his beer."),
      D(M, "Don't let me stop you."),
      P("The front of his jeans is tight. He doesn't hide it, and he doesn't come any closer.")],
-    [go("Load it and go.", loc="home_garage", mins=30, flags=[fset("did_laundry")], eff=[add("energy", -5)],
-        costs=[{"trait": "energy", "value": 5}]),
-     go("Leave your basket on top.", node="hub_mark_garage.hl_laundry_tease", cond_=cond(CURIOUS, SAW),
-        eff=[npc_add(M, "want", 2)], flags=[fset("did_laundry")]),
-     go("Bend for the bottom drum.", node="hub_mark_garage.hl_laundry_tease2", cond_=cond(CURIOUS, DARING, SAW, PANTIES_ON, NO_TOWEL),
-        eff=[npc_add(M, "want", 3), pay("exhibitionism", 39)], flags=[fset("did_laundry")]),
-     go("Wash what you're wearing.", node="hub_mark_garage.hl_laundry_tease3",
-        cond_=cond(BOLD, SHOWING, SAW, slot("top"), slot("bra")),
-        eff=[npc_add(M, "want", 4), pay("exhibitionism", 59), pay("corruption", 59)], flags=[fset("did_laundry")],
-        wardrobe=[{"action": "unequip", "item_id": g} for g in ("tshirt", "thin_top")]),
-     go("Leave it for later.", loc="home_hall")],
+    LAUNDRY_ANSWERS,
     raise_=[lust(M)], records=["mark_walked_in_laundry"], when=[wd(0, 1, 3, 4), tod("18:45", "19:00")])
 rule("garage_laundry", "walkin_laundry_mark", 0.25, here(M, "home_kitchen"), wd(0, 1, 3, 4), tod("18:45", "19:00"))
+
+# B4 Saturday (DECISIONS 152): Mark out to the garage after his coffee at the counter. The host needs him out of the
+# garage (home.py garage_laundry), so, like the weekday one, the rule reads him in the kitchen in the 15 minutes
+# before his garage row (09:00). His own canvas: the weekday's lines say dinner and beer.
+walkin("walkin_laundry_mark_sat", "Bent at the drum", "home_garage",
+    "B4 Saturday, Mark: in from his coffee for his Saturday in the garage, he finds her bent at the washer. His Lust +2 on the moment; her answers route into his laundry tease ladder (hub_mark_garage) with its own gates and pays.",
+    [here(M, "home_kitchen"), SAW],
+    [P("Saturday morning. You've got your basket on the garage floor and you're bent right over at the drum, feeding it, your ass up in the air."),
+     G(cond(SKIRT), P("Bent like this, your short skirt is up over the backs of your thighs.")),
+     P("The door from the house opens behind you. Mark, with his coffee, out for his day at the bench.")],
+    "He stops in the doorway.",
+    [P("He doesn't go to his bench. He stands in the doorway with the mug halfway to his mouth and looks at your ass, and he doesn't drink."),
+     D(M, "Saturday's my garage, @player. Carry on."),
+     P("He takes his time over the first sip. The front of his jeans is tight, and he stays where he is.")],
+    copy.deepcopy(LAUNDRY_ANSWERS),
+    raise_=[lust(M)], records=["mark_walked_in_laundry"], when=[wd(5), tod("08:45", "09:00")])
+rule("garage_laundry", "walkin_laundry_mark_sat", 0.25, here(M, "home_kitchen"), wd(5), tod("08:45", "09:00"))
 
 # ═════════════════════════════════════════════════════════════════════════════
 # B5 · THE HALL MIRROR (host hall_mirror). One hall accident a day: it shares `home_event`, the brake of the
@@ -452,6 +513,46 @@ walkin("walkin_wardrobe_laura", "Laura's mirror", "home_master_bedroom",
         D(L, "I wore that once. I was about your age."), P("She smooths it down over your hip, then hangs it back up herself."))],
     [go("Hang it back up.", loc="home_hall", mins=5)], records=["laura_saw_wardrobe"], when=[wd(5), tod("16:45", "17:00")])
 rule("master_wardrobe", "walkin_wardrobe_laura", 0.25, here(L, "home_bathroom"), wd(5), tod("16:45", "17:00"))
+
+# B6 Mark (DECISIONS 152): home from the bar, up to bed (his Saturday bedroom row starts at 22:00). The host needs the
+# room empty (home.py master_wardrobe, nobody in it) and the engine rolls at the clock she clicks on, so his arrival is
+# the walk-in: the rule reads the 15 minutes before his row, while he is out (no row 18:30-22:00, read by the window
+# alone, as walkins_out.py reads a walker with no row). A taboo accident, a look, no touch (DECISIONS 107).
+# He says nothing: his rows have him nowhere until 22:00, and a speaker is judged where the scene starts (gate
+# `a named person is where the line says`), so the stare carries it.
+# Laura's lingerie is not a wardrobe item, so what she took off to try it on is worded by what she wears, and the exits
+# put her own things back on: her clothes stay as they were.
+LINGERIE_OFF = [
+    GC(cond(TOWEL), P("Your towel's in a heap on her bed.")),
+    GC(cond(*ANY), P("Your own things are in a heap on her bed.")),
+]
+walkin("walkin_wardrobe_mark", "Laura's lingerie", "home_master_bedroom",
+    "B6, Mark: home from the bar on a Saturday night, up to bed, he finds her at Laura's mirror in Laura's black lace bra and stares; after mark_saw_her. A look, no touch. His Lust +2 on the moment; her answer on Exhibitionism: cover up 0, let him look +1 cap 19 / 39 / 59.",
+    [SAW_],
+    [P("Laura's drawer under the dresses is open. The stockings are still in their packet, and the black lace bra that is not a mom's bra is on you."),
+     *LINGERIE_OFF,
+     P("In her long mirror your tits sit high in the lace, and your nipples show dark right through it. You turn side-on to see how it looks."),
+     P("The front door goes downstairs. Then heavy feet on the stairs, slow, a man's. The bedroom door opens before you can move. Mark, home from the bar.")],
+    "He stops in the doorway.",
+    [P("He smells of beer. He stands in his own bedroom doorway with his keys still in his fist and looks at you in his wife's bra."),
+     P("His eyes go to your tits in the black lace, to your nipples through it, and stay there. Then down your stomach, slow, and back up. The front of his jeans fills. He doesn't take one step into the room."),
+     GC(cond(ntrait(M, "want", "lt", 50)), P("He doesn't say a word. His eyes go to Laura's open drawer and back to your tits, and his jaw works like he's going to tell you to take it off. He doesn't.")),
+     GC(cond(*ANY), P("He doesn't say a word. He leans on the door frame to look longer, and he wets his lips.")),
+     VID("a middle-aged man in a bedroom doorway staring at a girl in a black lace bra at a long mirror", "stepdad catches girl in mom's lingerie", "man walks in on girl trying on lingerie bedroom", pool_dir="sex/walkin_wardrobe_mark_t4")],
+    [go("Cover up.", node="m_cover", mins=2),
+     go("Let him look.", node="m_look", mins=3, cond_=cond(*E_COV), eff=[pay("exhibitionism", 19)]),
+     go("Let him look.", node="m_look", mins=3, cond_=cond(*E_DAR), eff=[pay("exhibitionism", 39)]),
+     go("Let him look.", node="m_look", mins=3, cond_=cond(*E_SHO), eff=[pay("exhibitionism", 59)])],
+    raise_=[lust(M)], records=["mark_saw_lingerie"], when=[wd(5), tod("21:45", "22:00")], extra=[
+        res("m_cover", "Cover up", [P("You cross your arms over your tits, over her lace. Your face is on fire."),
+                                    P("He jerks his chin at Laura's drawer: put it back. Then he stands aside in the doorway while you grab your things, and he watches you the whole time you do.")],
+            "Get changed. Go.", "home_hall", 5),
+        res("m_look", "Let him look", [P("You don't cover up. You turn round to face him, drop your hands to your sides, and let him look at you in his wife's bra."),
+                                       P("He looks. A long time. At your tits in the lace, your nipples hard through it. His keys bite into his fist, and he still doesn't come in."),
+                                       P("He breathes out hard through his nose. Then he steps back onto the landing and pulls the door to without a word, and leaves you to get changed."),
+                                       T("He'll think about this bra every time she wears it.")],
+            "Get changed. Go.", "home_hall", 5)])
+rule("master_wardrobe", "walkin_wardrobe_mark", 0.25, wd(5), tod("21:45", "22:00"))
 
 # ═════════════════════════════════════════════════════════════════════════════
 # B7 · RYAN'S THINGS (host ryan_things, Ryan out): Ryan up from dinner; Kayla early on a Friday.
