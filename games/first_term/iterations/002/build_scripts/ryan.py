@@ -406,9 +406,15 @@ def cap(k, n, c):
 def hot_exit(text, loc, mins, eff, wardrobe=None):
     """A hot repeatable's exit, day-capped on its own conditions as well as the button's (gates: the climb is paid for)."""
     return go(text, loc=loc, mins=mins, cond_=cond(HOT_FREE), eff=HOT_PAY + eff, flags=HOT_FLAG, wardrobe=wardrobe)
+# truth pass (2026-11-03): a hot repeatable whose beats place someone else (row 6: Mark's TV and his call from the
+# next room) carries that person's presence on its screen too, not only on the choice in (canv.pin_blocks)
+HOT_PIN = {6: [{"type": "npc_at_location", "location_id": "home_kitchen", "npc_id": "npc_mark", "operator": "is_present"}]}
 def hot_node(n, name, media, exits, back="home_hall"):
     # + an exit with neither conditions nor costs (gates: a spent day still has a door)
-    return node(f"hot{n}", name, [POOL(*[P(t) for t in pool("ryan_hot_repeatables", n)], pid=f"ryan_hot_{n}", bag=True), *media],
+    beats = [POOL(*[P(t) for t in pool("ryan_hot_repeatables", n)], pid=f"ryan_hot_{n}", bag=True)]
+    if n in HOT_PIN:
+        beats = pin_blocks(beats, *HOT_PIN[n])
+    return node(f"hot{n}", name, [*beats, *media],
                 exits + [go("Leave him to it.", loc=back)])
 # C4 (LO 2026-11-03): hygiene colours, and its colour can work like a lock. Dirty, she still sees the button and
 # still goes to him, but it doesn't happen: he says why. Clean is hygiene 30+, or the hygiene system switched off.
@@ -504,7 +510,13 @@ out.append({
             VID("a guy eating a girl out on his bed, her hand over her mouth", "he eats her out she covers mouth", "cunnilingus quiet late night", pool_dir="sex/ryan_hot7_lick_t5")], TO_TWIST),
         node("wall_back", "Against the wall", [*voices("wall"),
             VID("a girl kneeling on a bed, palms on the wall, fucked from behind", "from behind palms on wall", "doggy against the bedroom wall", pool_dir="sex/ryan_hot7_wall_t5")], TO_TWIST),
-        node("twist", "Late", [POOL(*[GC({"version": "1.0", "logic": "AND", "items": []}, *spoken(f"7t_{k}")) for k in "abc"], pid="ryan_hot_7t", bag=True),
+        # truth pass (2026-11-03): 7t_b is Laura across the hall knocking ("Ryan? Are you up?"), true only while her row
+        # has her in her bedroom (not on the stairs waiting up, came_home_late); without her the bag is a and c
+        node("twist", "Late", [
+            GC(cond(here_at("npc_laura", "home_master_bedroom")),
+               POOL(*[GC({"version": "1.0", "logic": "AND", "items": []}, *spoken(f"7t_{k}")) for k in "abc"], pid="ryan_hot_7t", bag=True)),
+            GC(cond({"type": "worn_exposure", "operator": "gte", "value": 0}),
+               POOL(*[GC({"version": "1.0", "logic": "AND", "items": []}, *spoken(f"7t_{k}")) for k in "ac"], pid="ryan_hot_7t_no_laura", bag=True)),
             VID("a couple having sex in his bedroom late at night, keeping quiet", "quiet sex his bedroom late night", "sneaky sex step brother room", pool_dir="sex/ryan_hot7_twist_t5")], [
             go("\"Inside me.\"", node="f_inside", mins=3),
             go("\"On me.\"", node="f_on", mins=3),

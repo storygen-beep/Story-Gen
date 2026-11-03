@@ -1170,7 +1170,7 @@ activity   = "in the shower first (Laura's rule)"
 [[npcs.schedules]]
 location   = "home_ryan_room"
 weekdays   = [5, 6]
-start_time = "07:30"
+start_time = "06:45"
 end_time   = "14:00"
 activity   = "home, weekend morning"
 

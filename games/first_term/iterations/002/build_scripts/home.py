@@ -275,17 +275,24 @@ out.append(solo("living_couch", "Lie on the couch",
                 "couch_seen")],
             go("Get up.", loc="home_hall", mins=10)]),
         # reader a3 #15 (DECISIONS 131): he answers and holds back. "Your mother" only while Laura is in the house.
+        # truth pass (2026-11-03): he comes back only while his row still has him in the kitchen (the choice in
+        # reads it; this screen is 5 minutes on, and his weekday kitchen row ends at 19:00), so after her own
+        # line every block carries it (canv.pin_blocks). The "your mother" pair is its own chain inside a G.
         node("stay_mark", "Stay a while", [
             P("You don't cover up. You stay on your back with one knee up, in your bra and panties, and let him look."),
-            P("Ten minutes later Mark comes back through from the kitchen, and this time he stops. He stands over you at the end of the couch with the beer. His eyes go down your tits in your bra to your panties, and stay there. The front of his jeans is tight."),
-            D(M, "You're asking for it, lying there like that."),
-            ME("Asking for what?"),
-            GC(cond(*LAURA_IN_HOUSE, logic="OR"), D(M, "Not with your mother home.")),
-            GC(cond(*ANY), D(M, "Your mother'll be back.")),
-            P("He goes back to the kitchen. He doesn't come back, and you lie there with your nipples hard in your bra."),
+            *pin_blocks([
+                P("Ten minutes later Mark comes back through from the kitchen, and this time he stops. He stands over you at the end of the couch with the beer. His eyes go down your tits in your bra to your panties, and stay there. The front of his jeans is tight."),
+                D(M, "You're asking for it, lying there like that."),
+                ME("Asking for what?"),
+                G(cond(*ANY), GC(cond(*LAURA_IN_HOUSE, logic="OR"), D(M, "Not with your mother home.")),
+                              GC(cond(*ANY), D(M, "Your mother'll be back."))),
+                P("He goes back to the kitchen. He doesn't come back, and you lie there with your nipples hard in your bra."),
+            ], here(M, "home_kitchen")),
         ], [go("Get up.", loc="home_living_room", mins=40)]),
+        # truth pass (2026-11-03): as stay_mark, by Ryan's room row (he comes down from it)
         node("stay_ryan", "Stay a while", [
             P("You don't cover up. You stay on your back with one knee up, in your bra and panties, and let him look."),
+          *pin_blocks([
             GC(cond(ntrait(R, "want", "lt", 40)),
                P("Ten minutes later Ryan comes down again, for nothing, and stops on the last stair. He looks at your tits in your bra, at your panties, and goes red to the ears. He doesn't look away.")),
             GC(cond(*ANY),
@@ -294,6 +301,7 @@ out.append(solo("living_couch", "Lie on the couch",
             G(cond(*ANY), GC(cond(*LAURA_IN_HOUSE, logic="OR"), D(R, "Not with Mom home, @player.nickname.")),
                           GC(cond(*ANY), D(R, "Mom'll be back, @player.nickname."))),
             P("He goes back upstairs with his hand in front of his shorts."),
+          ], here(R, "home_ryan_room")),
         ], [go("Get up.", loc="home_living_room", mins=40)]),
     ], conds=LIVING_EMPTY, prio=3))
 
@@ -603,9 +611,11 @@ sun_nodes = [
         GC(cond(*TOPLESS), P("You stay on your front with your arms under your head. From the garage door he gets your bare back all the way down, and the side of your tit pressed flat to the lounger.")),
         GC(cond(*BRA_ONLY), P("You stretch your arms over your head so your tits push up in your bra, and you leave them there.")),
         GC(cond(*ANY), P("You stretch one leg out long and leave the other knee up, so the garage door gets the whole length of your legs.")),
-        P("The radio in the garage stays off. Mark leans in the doorway with his beer held low in front of his jeans and looks, slow, and doesn't go back in."),
-        GC(cond(tod("07:00", "19:00")), D(M, "You'll burn, @player.")),   # the sun only while it's up (the lounger's own split)
-        GC(cond(*ANY), D(M, "Fence is low, @player.")),
+        # truth pass (2026-11-03): Mark's look and lines only while his row still has him in the garage door
+        # (the choice in reads MARK_SEES; the screen is 5 minutes on, and his Saturday garage row ends at 17:00)
+        G(cond(MARK_SEES), P("The radio in the garage stays off. Mark leans in the doorway with his beer held low in front of his jeans and looks, slow, and doesn't go back in.")),
+        GC(cond(tod("07:00", "19:00"), MARK_SEES), D(M, "You'll burn, @player.")),   # the sun only while it's up (the lounger's own split)
+        GC(cond(*ANY, MARK_SEES), D(M, "Fence is low, @player.")),
         P("He doesn't come out. After the hour he goes back to his bench, and the radio comes on loud."),
     ], [go("Get up.", loc="home_garden", mins=55)]),
     node("sun_ryan", "Ryan's window", [G(cond(RYAN_SEES), P("His window is open above you. He isn't pretending to look at his screen any more."))], [
@@ -620,12 +630,14 @@ sun_nodes = [
                   cond_=cond(*BRA_ONLY)), "sunned"),
         # (release 1: Mark's paid look is cut, npc_mark.md)
         go("Not today.", loc="home_garden")]),
-    node("sun_ryan_tease", "Ryan's window", [placeholder("sheets/people/npc_ryan.md:104", "Ryan, the garden: tease (Curious, Ryan A 4)")],
-         [go("Done.", loc="home_garden", mins=30)]),
-    node("sun_ryan_touch", "The sun lotion", [placeholder("sheets/people/npc_ryan.md:104", "Ryan, the garden: touch (Bold, Ryan A 8)")],
-         [go("Done.", loc="home_garden", mins=30)]),
-    node("sun_mark_tease", "The garage door", [placeholder("sheets/people/npc_mark.md:110", "Mark, the garden: tease (Curious, Mark A 3)")],
-         [go("Done.", loc="home_garden", mins=30)]),
+    # truth pass (2026-11-03): each writer screen is about the man at the window / the garage door, so the whole
+    # screen carries his presence (`pin`, canv.pin_blocks, applied after writer.fill swaps the screen in)
+    dict(node("sun_ryan_tease", "Ryan's window", [placeholder("sheets/people/npc_ryan.md:104", "Ryan, the garden: tease (Curious, Ryan A 4)")],
+         [go("Done.", loc="home_garden", mins=30)]), pin=[RYAN_SEES]),
+    dict(node("sun_ryan_touch", "The sun lotion", [placeholder("sheets/people/npc_ryan.md:104", "Ryan, the garden: touch (Bold, Ryan A 8)")],
+         [go("Done.", loc="home_garden", mins=30)]), pin=[RYAN_SEES]),
+    dict(node("sun_mark_tease", "The garage door", [placeholder("sheets/people/npc_mark.md:110", "Mark, the garden: tease (Curious, Mark A 3)")],
+         [go("Done.", loc="home_garden", mins=30)]), pin=[MARK_SEES]),
 ]
 out.append(solo("garden_sun", "Lie in the sun",
     "The lounger: 60 min, energy +5; Daring and seen, exhibitionism +1 (home_garden.md:29-34). Mark sees from the garage door (his Saturday row), Ryan from his window (his weekend row). Their tease and touch lines are placeholders.",

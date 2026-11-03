@@ -234,7 +234,9 @@ out.append({
     "description": "The Sunday count, the repeat after Mark's step 1: his terms or hers by his Power; the streak counts here when no step has counted it. From Bold, after his step 7: \"Twenty, and you can look\", two voices, a stop exit. Once a Sunday.",
     "trigger": {"location": "home_kitchen", "requires_npc": M, "is_repeatable": True, "priority": 5,
                 "is_active": True, "max_triggers_per_day": 1,
-                "schedules": [{"weekdays": [6], "start_time": "08:00", "end_time": "12:00"}],
+                # truth pass (2026-11-03): opens to 11:45, so the count's 15 minutes end before noon and "He doesn't
+                # say good morning" (the counted screen's bag) is still morning
+                "schedules": [{"weekdays": [6], "start_time": "08:00", "end_time": "11:45"}],
                 "conditions": cond(trait("mark_step", "gte", 1), flag("sunday_counted_today", False), flag("rent_starts"))},
     "nodes": [
         node("table", "The Sunday table", [
@@ -563,12 +565,17 @@ NO_TOWEL = {"type": "worn_type", "operator": "neq", "value": "towel"}
 def _wt(v): return {"type": "worn_type", "operator": "eq", "value": v}
 LAUNDRY_BASKET = {"label": "Leave your basket on top.", "ref": f"{MS}:109", "gate": [CURIOUS, flag("mark_saw_her")],
                   "eff": [want(M, 2)], "what": "Mark, laundry: tease (Curious)"}
+LAURA_IN_HOUSE_Q = "\"Jesus, @player. Laura's in the house.\""
+assert beat(MLT, "daring_shirt").count(LAURA_IN_HOUSE_Q) == 1
 LAUNDRY_TEASES = [
     {"label": "Bend for the bottom drum.", "name": "The bottom drum",
      "gate": [CURIOUS, DARING, flag("mark_saw_her"), PANTIES_ON, NO_TOWEL],   # seen and sexual: both meters (meters.md rule 4)
      "eff": [want(M, 3), {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 39}],
      "blocks": [*[GC(cond(_wt(t)), P(beat(MLT, "daring_skirt"))) for t in ("short_skirt", "laura_dress", "party_dress", "cafe_uniform")],
-                GC(cond(SLEEP_SHIRT), P(beat(MLT, "daring_shirt"))),
+                # truth pass (2026-11-03): "Laura's in the house." only while she is (her kitchen row, weekday evenings);
+                # on a Saturday in the garage she is out, and his line stops at "Jesus, @player."
+                GC(cond(SLEEP_SHIRT, here(L, "home_kitchen")), P(beat(MLT, "daring_shirt"))),
+                GC(cond(SLEEP_SHIRT), P(beat(MLT, "daring_shirt").replace(LAURA_IN_HOUSE_Q, '"Jesus, @player."'))),
                 *[GC(cond(_wt(t)), P(beat(MLT, "daring_jeans"))) for t in ("jeans", "leggings", "shorts")],
                 VID("a girl bending over to load a front-loading washer, her skirt riding up, a man at a workbench watching", "girl bends over washing machine skirt rides up", "bending over laundry panties showing", pool_dir="sex/mark_laundry_bend_t4")]},
     {"label": "Wash what you're wearing.", "name": "In the wash",

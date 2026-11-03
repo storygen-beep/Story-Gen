@@ -247,5 +247,8 @@ def towel_set(hub, npc, meter, lo, hi, today, pay, back, lines=(), slip=None, sl
         nodes.append(node("towel_drop", "Drop it", [*drop, *([drop_media] if drop_media else [])],
                           back_out("Wrap it back round you.")))
     if caught_by:
-        nodes.append(node("towel_caught", "Caught", list(caught), [go("Go.", loc="home_hall", mins=2)]))
+        # truth pass (2026-11-03): the choice in reads her in the room; the screen carries it too, so "you see Laura
+        # watching you" is the engine's check on the screen itself (one group round the screen: it is the only block)
+        nodes.append(node("towel_caught", "Caught", [GC(cond(here(caught_by, back)), *caught)],
+                          [go("Go.", loc="home_hall", mins=2)]))
     return blocks, choices, nodes

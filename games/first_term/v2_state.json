@@ -5594,7 +5594,7 @@
               "Sat",
               "Sun"
             ],
-            "from": "07:30",
+            "from": "06:45",
             "to": "14:00"
           },
           {
@@ -6918,7 +6918,7 @@
                   "Sat"
                 ],
                 "from": "20:00",
-                "to": "00:00"
+                "to": "23:30"
               },
               "seen_from": "zoe_apartment",
               "gate": [
@@ -6990,7 +6990,7 @@
                   "Sat"
                 ],
                 "from": "00:00",
-                "to": "02:00"
+                "to": "01:45"
               },
               "gate": [
                 {
@@ -8531,6 +8531,26 @@
         "chrome": {
           "at": "2026-11-03 16:59",
           "report": "Short week: 'You don't have it' sets rent_short; Monday 18:30 Vance is at the Front Door with his 'Mr. Vance' button. Paid week: 'Pay $150 rent' clears rent_short and owed; Monday 18:30 Vance is Next Door and the front door shows only 'Sit on the step'."
+        },
+        "played": null
+      },
+      {
+        "id": "start_outfit",
+        "what": "She starts in her sleep shirt and panties; the first screen adds her day clothes to the wardrobe (was: towel over a bra and sneakers)",
+        "built_at": "2026-11-03 17:22",
+        "chrome": {
+          "at": "2026-11-03 17:22",
+          "report": "New game: equipped dress=sleep_shirt, underwear=plain_panties, all else empty; owned only those two at Start; gate 'one garment per slot' PASS."
+        },
+        "played": null
+      },
+      {
+        "id": "untrue_lines",
+        "what": "Every line that places a person is true at every hour it shows: presence pins (canv.pin_blocks) on Mark's garden and couch lines, the towel catches, Ryan's hot6 and the knock, Zoe's hookup lines, touch_bed's TV, Laura's car-window line, the laundry tease; Sunday table to 11:45; zoe_03 to 23:30, zoe_05 to 01:45; laura_01 needs her in the kitchen; Ryan's weekend room row from 06:45",
+        "built_at": "2026-11-03 17:22",
+        "chrome": {
+          "at": "2026-11-03 17:22",
+          "report": "Gates on the build: 'a named person is where the line says' 170/170, 'nobody is woken' 161/161, 'a day word fits its window' 1 left (a false alarm: 'still here in the morning' said at night about tomorrow)."
         },
         "played": null
       }

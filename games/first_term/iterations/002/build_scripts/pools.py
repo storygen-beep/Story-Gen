@@ -186,9 +186,13 @@ out.append({
         node("sex", "On the sink", [P(SEX),
             VID("a couple having sex on a bathroom sink at a party, her legs locked round him, the mirror fogged", "sex on bathroom sink party", "fucking on the sink at a house party", pool_dir="sex/party_hookup_sex_t5")],
             [go("Back to the party.", node="out", mins=20, eff=[capped("corruption", 1, CAP_BOLD), add("campus_talk", 1, clamp=False)])]),
+        # truth pass (2026-11-03): 15-20 minutes on, Zoe's Friday-night row may be over (it ends 02:00): her lines
+        # only while she is still at the flat
         node("out", "Back out", [
+          *pin_blocks([
             P("You come out first, fixing your hair. Zoe's in the hall with a drink in each hand. She looks at you, and at the bathroom door, and at him coming out behind you, and her mouth opens."),
             D(Z, "In my bathroom? Babe."),
+          ], here_at(Z, "zoe_apartment")),
             T("By Monday half of campus will know. You find you don't mind."),
         ], [go("Go back to the party.", loc="zoe_apartment", mins=5)]),
         node("no", "Not tonight", [D(C, "Your loss."), P("He goes back to his wall and his beer, grinning, still watching you.")], [go("Go.", loc="zoe_apartment", mins=2, flags=[fset("party_cool_cocky_guy")])]),
@@ -344,6 +348,13 @@ TOUCH_SHOWER_HOURS = [{"weekdays": [0, 1, 2, 3, 4, 6], "start_time": "18:00", "e
                       {"weekdays": [0, 1, 2, 3, 4, 5], "start_time": "00:00", "end_time": "02:00"},
                       {"weekdays": [5], "start_time": "09:00", "end_time": "17:00"},
                       {"weekdays": [5], "start_time": "22:00", "end_time": "00:00"}]
+# truth pass (2026-11-03): "someone's TV mutters downstairs" only while someone is in the living room (the any-NPC
+# presence item, v2.py:5244-5256); with nobody down there the sentence keeps its first clause. touch_bed has no hours.
+BED_TV = "Your door is shut, but someone's TV mutters downstairs."
+assert BED.startswith(BED_TV + " ")
+BED_OPEN = [GC(cond({"type": "npc_at_location", "location_id": "home_living_room", "operator": "is_present"}), P(BED_TV)),
+            GC(cond({"type": "worn_exposure", "operator": "gte", "value": 0}), P("Your door is shut.")),
+            P(BED[len(BED_TV) + 1:])]
 for cid, loc, name, text, back, extra in [
         ("touch_bed", "home_ella_room", "Touch yourself", BED, "Lie still.", []),
         ("touch_shower", "home_bathroom", "Touch yourself in the shower", SHOWER, "Done.", [{"type": "npc_at_location", "location_id": "home_bathroom", "npc_id": R, "operator": "is_absent"}]),   # hours when someone is up in the house: TOUCH_SHOWER_HOURS
@@ -353,7 +364,7 @@ for cid, loc, name, text, back, extra in [
         "description": f"Touching herself ({loc}): from Curious, once a day; Corruption +1 until past Curious.",
         "trigger": {"location": loc, "is_repeatable": True, "priority": 3, "is_active": True, "max_triggers_per_day": 1,
                     "conditions": cond(CURIOUS, *extra), **({"schedules": TOUCH_SHOWER_HOURS} if cid == "touch_shower" else {})},
-        "nodes": [node("touch", name, [P(text),
+        "nodes": [node("touch", name, [*(BED_OPEN if cid == "touch_bed" else [P(text)]),
             VID(f"a girl touching herself alone ({loc.replace('_', ' ')})", "girl masturbating alone", f"solo girl {loc.split('_')[-1]} orgasm", pool_dir=f"sex/{cid}_t5")],
             [go(back, loc=loc, mins=20, eff=[capped("corruption", 1, CAP_CUR)])])]})
 

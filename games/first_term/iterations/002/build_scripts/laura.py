@@ -22,7 +22,9 @@ DRESS_ON = {"type": "clothing_item", "item_id": "laura_blue_dress", "operator": 
 
 # ── step 1 · Laura C 1 · the blue dress (fires in her room; the kitchen line is on her hub) ──
 _t1 = step_trigger(L, 1, bind_npc=False)
-_t1["conditions"]["items"] += [flag("laura_dress_invite"),
+# truth pass (2026-11-03): she comes up from the kitchen "still in her kitchen apron", so the step reads her there
+# when it fires (her Tue 18:00-22:00 kitchen row; the invite on her kitchen hub is under an hour old)
+_t1["conditions"]["items"] += [here_at(L, "home_kitchen"), flag("laura_dress_invite"),
                                {"type": "hours_since_flag", "subject": "player", "flag_key": "laura_dress_invite", "operator": "lt", "value": 1}]
 out.append({
     "id": "laura_01_blue_dress", "name": "The blue dress",

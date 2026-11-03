@@ -91,6 +91,9 @@ EDITS = [
     (33, '"Claire\'s here at half past."', '"My wife\'s here at half past."'),         # 3 · the base is his wife
     (35, "His fingers slide under the strap and stay under it.", "His fingers slide around your sides and stay there."),  # 1 · no bra, no strap
     (35, "Your step-brother's hands are on you in broad daylight.", "Your step-brother's hands are on you out in the open garden."),
+    # truth pass (2026-11-03): his row at that hour is "up late with the TV on", and the event's own first screen has his
+    # eyes half shut: he's dozing, not asleep for the night (the canvas's working name, "Mark dozing, TV on")
+    (42, "Mark's asleep on the couch", "Mark's dozing on the couch"),
 ]
 
 # 6 · a forward hook, appended to the screen's last beat: (file #, line).
