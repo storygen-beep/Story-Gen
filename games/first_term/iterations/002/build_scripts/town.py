@@ -61,8 +61,7 @@ out.append(town_event("town_event_jogger", "A jogger looks back", S("07:00", "10
     [P("A jogger goes past in the other direction, and looks back over his shoulder at your ass, twice.")],   # reader a3 #64 (DECISIONS 131)
     "Pretend you didn't see.",
     bolder=("Look back.", [CURIOUS], [], "You look back, and catch him doing it a third time, eyes on your ass. He nearly runs into a lamp post. He slows like he might turn round. You turn the corner first.")))
-out.append(town_event("town_event_quiet", "The street, quiet", None, [],
-    [P("Nothing happens. A dog barks two gardens down.")], "Walk on."))
+# S6 (LO 2026-11-03): no "Nothing happens." random event on the street either.
 
 # ═════════════════════════════════════════════════════════════════════════════
 # ZOE'S FLAT, WHEN ZOE ISN'T IN THE ROOM

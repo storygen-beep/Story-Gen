@@ -451,11 +451,7 @@
       "npc_hale",
       "npc_jake"
     ],
-    "door": {
-      "canvas": "ryan_08_two_knocks_first_sex",
-      "choice": "Further.",
-      "locked_next": "Ryan's step 9, Kayla in the house, shown locked on Corruption 60: \"Further.\"; open, it says the next release holds it (npc_ryan.md, DECISIONS 124, 130)"
-    },
+    "door": null,
     "reader": {
       "ryan_01_hall_first_morning": {
         "want": "PASS",
@@ -3204,7 +3200,8 @@
         "test": "the written no",
         "why": "LO, 2026-10-09 (iteration 002 part 8): kind-D craft FAILs waived for 0.1; the list is kept in iterations/002/REPORT.md"
       }
-    ]
+    ],
+    "door_note": "No release door (LO 2026-11-03, S12 b; DECISIONS 134): every arc's last quest card says where this release ends. Ryan's \"Further.\" on Corruption 60 was removed."
   },
   "spine": {
     "pages": [
@@ -8364,6 +8361,76 @@
         "chrome": {
           "at": "2026-11-03 02:34",
           "report": "Played in Chrome on the dev build (127.0.0.1): first party at Curious, 'Not tonight, Zo.' then Jake's number: zoe_step 0, jake_step 1, zoe_kiss_refused. A Friday a week later at the party: 'Same dare' fires, Zoe's 'chickened out on me last time' line, three buttons. 'Kiss the guy by the speakers.' plays, +3 Exhibitionism, zoe_step 1, zoe_01_done. Same night 21:30 at Daring: no balcony. Every line true for what was played."
+        },
+        "played": null
+      },
+      {
+        "id": "c1_refusal_no_want",
+        "what": "Her refusal never raises his Want: the towel hubs' top-band no, five home random events' way out, the stairs skirt and the cocky guy's exam no (DECISIONS 135)",
+        "built_at": "2026-11-03 14:32",
+        "chrome": {
+          "at": "2026-11-03 14:35",
+          "report": "Fires: Ryan's towel event offers Step round him / Walk past slowly / Let him look; clicking Step round him leaves Ryan's Want at 30 (was +1). True: lines unchanged. Climb: Walk past slowly still there."
+        },
+        "played": null
+      },
+      {
+        "id": "s6_no_quiet_events",
+        "what": "The five 'Nothing happens.' random events (four at home, the street) removed (DECISIONS 136)",
+        "built_at": "2026-11-03 14:32",
+        "chrome": {
+          "at": "2026-11-03 14:35",
+          "report": "'Nothing happens' appears 0 times in the build; no home_event_quiet or town_event_quiet passage exists."
+        },
+        "played": null
+      },
+      {
+        "id": "s12_no_release_door",
+        "what": "Ryan's 'Further.' door and its next-release screen removed; his card's end line says 'More of Ryan in the next release.' (DECISIONS 134)",
+        "built_at": "2026-11-03 14:32",
+        "chrome": {
+          "at": "2026-11-03 14:35",
+          "report": "Ryan's terms screen shows only his three answers, no Further.; 'That's in the next release of First Term' 0 times; his card's end line reads 'More of Ryan in the next release.'"
+        },
+        "played": null
+      },
+      {
+        "id": "c4_hygiene_refusal",
+        "what": "Under hygiene 30, Ryan's room and couch hot repeatables and Jake's date show but he refuses and says why, no pay (DECISIONS 137)",
+        "built_at": "2026-11-03 14:32",
+        "chrome": {
+          "at": "2026-11-03 14:35",
+          "report": "Hygiene 20: Ryan's room shows the same five buttons as at 60; Lie on his bed leads to 'Jesus. When did you last shower? Go and wash.' with no pay. Jake's door at hygiene 20: 'Babe. Did you shower today?' and the booking clears; at 60 the date plays."
+        },
+        "played": null
+      },
+      {
+        "id": "w8_two_dates",
+        "what": "Jake dates Wednesday and Saturday: a Monday/Tuesday text, pickup and the end of a date on both nights, 'Come up.' Saturday only (DECISIONS 138)",
+        "built_at": "2026-11-03 14:32",
+        "chrome": {
+          "at": "2026-11-03 14:35",
+          "report": "Pickup and the end of a date are scheduled Wed and Sat (19-21, 22-00); the wednesday text is in the build; on Wednesday the car offers Kiss him / Goodnight, no Come up (Saturday has it); goodnight says Saturday? on Wed and Wednesday? on Sat."
+        },
+        "played": null
+      },
+      {
+        "id": "s4_busy_and_offices",
+        "what": "Hale's and the art lecturer's class screens say they're teaching; the dean's 'Ask about your grades.' and the TA's 'Ask her to help you with Biology.' (DECISIONS 139)",
+        "built_at": "2026-11-03 14:32",
+        "chrome": {
+          "at": "2026-11-03 14:35",
+          "report": "Hale's class screen carries 'He's mid-lecture...' with Go.; the dean's Ask about your grades gives the probation, failing (Psych 35) or fine line, exactly one; the TA offers Ask her to help you with Biology."
+        },
+        "played": null
+      },
+      {
+        "id": "c3_pointer_heading",
+        "what": "Zoe's, Tom's and Vance's pre-meeting cards carry a heading ('A girl from Biology', 'The café', 'Next door') in place of the name (engine f0d7b863)",
+        "built_at": "2026-11-03 14:32",
+        "chrome": {
+          "at": "2026-11-03 14:35",
+          "report": "Quests page with zoe_met, vance_met and cafe_job false: headings read The café, Next door, A girl from Biology; the name Zoe appears nowhere on the page."
         },
         "played": null
       }

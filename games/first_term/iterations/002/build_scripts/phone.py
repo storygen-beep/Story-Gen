@@ -318,14 +318,24 @@ noshow("hale_thursday_noshow", H, "📧 College email: Dr. Hale", "hale_thursday
 # ── 7 · Jake (npc_jake.md: jake_number, a day later, 18:00-22:00). The date is booked only by her yes;
 # nothing names a pickup before it. Weekly while unbooked. ──
 BOOK = {"flagEffects": [setf("jake_date_booked")]}
+# W8 (LO 2026-11-03): two dates a week, Wednesday and Saturday. The Saturday ask comes Thursday or Friday, the
+# Wednesday ask Monday or Tuesday; one booking at a time.
 thread("jake_date", J, "📱 Jake",
-       [F("jake_number"), SINCE("jake_number", 1), F("jake_date_booked", False), DAYS(0, 1, 2, 3, 4), HOURS("18:00", "22:00")],
+       [F("jake_number"), SINCE("jake_number", 1), F("jake_date_booked", False), DAYS(3, 4), HOURS("18:00", "22:00")],
        ["saturday? i'll pick you up"],
        [("yes", BOOK, "front door. eight. wear something"),
         ("not this week", {}, "next week then. i'm patient"),
         ("where are we going", {}, "surprise. yes or no?")],
        repeat=6, comment="Jake: caused by jake_number (Zoe's first party). The date is booked here.",
        round2=(2, [("yes", BOOK, "front door. eight."), ("no", {}, "next week then")]))
+thread("jake_date_wed", J, "📱 Jake",
+       [F("jake_number"), SINCE("jake_number", 1), F("jake_date_booked", False), DAYS(0, 1), HOURS("18:00", "22:00")],
+       ["wednesday? i'll pick you up"],
+       [("yes", BOOK, "front door. eight."),
+        ("not this week", {}, "saturday then. maybe"),
+        ("again?", {}, "again. yes or no?")],
+       repeat=6, comment="Jake (W8, LO 2026-11-03): the midweek date, booked here.",
+       round2=(2, [("yes", BOOK, "front door. eight."), ("no", {}, "saturday then")]))
 
 w("")
 w(open(os.path.join(HERE, "phone_calls.toml")).read().rstrip("\n"))

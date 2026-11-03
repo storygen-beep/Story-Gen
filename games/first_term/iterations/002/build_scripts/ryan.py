@@ -378,15 +378,9 @@ out.append({
             term_exit("\"Keep Kayla. I'm the secret.\"", "ryan_terms_secret"),
             term_exit("\"Mom finds out when I want.\"", "ryan_terms_mine"),
             term_exit("\"You're my brother, that's all.\" (ends his path)", "ryan_path_closed", final=True),
-            # The release door (DECISIONS 130, LO: "Go ahead with your rec"): locked on Corruption 60, which release 1
-            # can reach, so the gate "ends on an opening" finds a door that opens; open, it says what comes next.
-            # the engine prints the need beside a number lock, so the label carries no "(Next release)" of its own
-            go("Further.", node="further", mins=0, swl=True, cond_=cond(trait("corruption", "gte", 60))),
+            # S12 (LO 2026-11-03, reverses DECISIONS 130): no release door. Ryan's quest card says where his arc
+            # ends this release ("More of Ryan in the next release."), so the "Further." button and its screen are gone.
         ]),
-        node("further", "Further", [
-            P("Ryan's waiting for your answer. Whatever comes after it isn't written yet."),
-            P(NEXT_RELEASE_TEXT),
-        ], [go("Back.", node="terms", mins=0)]),
     ]})
 
 # Kayla is named on step 8's screens ("Kayla's at her mom's", undress): read on the way, as on step 4
@@ -414,8 +408,19 @@ def hot_node(n, name, media, exits, back="home_hall"):
     # + an exit with neither conditions nor costs (gates: a spent day still has a door)
     return node(f"hot{n}", name, [POOL(*[P(t) for t in pool("ryan_hot_repeatables", n)], pid=f"ryan_hot_{n}", bag=True), *media],
                 exits + [go("Leave him to it.", loc=back)])
+# C4 (LO 2026-11-03): hygiene colours, and its colour can work like a lock. Dirty, she still sees the button and
+# still goes to him, but it doesn't happen: he says why. Clean is hygiene 30+, or the hygiene system switched off.
+DIRTY = [trait("hygiene", "lt", 30), flag("hygiene_off", False)]
 def hot_choice(n, label, gate, wardrobe=None):
-    return go(label, node=f"hot{n}", mins=0, cond_=cond(HOT_FREE, *gate), wardrobe=wardrobe)
+    return [go(label, node=f"hot{n}", mins=0, cond_=cond(HOT_FREE, *gate, trait("hygiene", "gte", 30)), wardrobe=wardrobe),
+            go(label, node=f"hot{n}", mins=0, cond_=cond(HOT_FREE, *gate, trait("hygiene", "lt", 30), flag("hygiene_off")), wardrobe=wardrobe),
+            go(label, node="ryan_stink", mins=0, cond_=cond(HOT_FREE, *gate, *DIRTY))]
+def stink_node(back):
+    return node("ryan_stink", "Not like that", [
+        P("You get as far as him, and Ryan pulls his head back."),
+        D(R, "Jesus. When did you last shower? Go and wash. Then come back."),
+        T("You can smell it on yourself now too."),
+    ], [go("Go and shower.", loc=back, mins=2)])
 DRESS_BACK = DRESS_DAY
 HOT_ROOM = [  # his room, evenings he's home (Mon, Tue, Thu, Sun 19:00-22:00)
     (1, "Lean in his doorway.", [trait("ryan_step", "gte", 2), CUR, flag("ryan_hall_seen")], None,   # a first tease, Curious, after the hall accident (DECISIONS 124)
@@ -602,11 +607,12 @@ out.append({
                eff=[{"targetType": "player", "trait": "money", "op": "add", "value": 25, "clamp": False}, nadd(R, "warmth", 5)]),
             *RT_ROOM[1],
             # the hot repeatables in his room (1, 4, 5), evenings he's home
-            *[hot_choice(n, label, gate + [wd(0, 1, 3, 6), tod("19:00", "22:00")], wardrobe) for n, label, gate, wardrobe, _m, _x in HOT_ROOM],
+            *[c for n, label, gate, wardrobe, _m, _x in HOT_ROOM for c in hot_choice(n, label, gate + [wd(0, 1, 3, 6), tod("19:00", "22:00")], wardrobe)],
             go("Leave him to it.", loc="home_hall"),
         ]),
         *RT_ROOM[2],
         *[hot_node(n, label, media, exits) for n, label, gate, wardrobe, media, exits in HOT_ROOM],
+        stink_node("home_hall"),
         node("talk", "Talk", [
             POOL(
                 P("You sit on the end of his bed and he tells you about the yard, about a guy who dropped a pallet on his own foot. You laugh. He watches you laugh."),
@@ -677,10 +683,10 @@ out.append({
         POOL(D(R, "Want next game?"), D(R, "Sit. You're blocking the screen."), D(R, "There's a film on after this if you want.")),
         *RYAN_DRESS_LINES, *RT_LIVING[0],
     ], lc + fc + RT_LIVING[1]
-       + [hot_choice(n, label, gate + [LAURA_NOT_HERE(LR)], wardrobe) for n, label, gate, wardrobe, _m, _x in HOT_COUCH]
+       + [c for n, label, gate, wardrobe, _m, _x in HOT_COUCH for c in hot_choice(n, label, gate + [LAURA_NOT_HERE(LR)], wardrobe)]
        + [go("Leave him to it.", loc="home_hall")]),
        *ln, *fn, *RT_LIVING[2],
-       *[hot_node(n, label, media, exits) for n, label, gate, wardrobe, media, exits in HOT_COUCH]]})
+       *[hot_node(n, label, media, exits) for n, label, gate, wardrobe, media, exits in HOT_COUCH], stink_node("home_living_room")]})
 
 # ── Laura opens the door (ryan_laura_opens_the_door.md, signed 2026-11-01; moved from Laura's ladder, was laura_04):
 #    the first Saturday afternoon on the couch with her feet in his lap while Laura is home, dressing upstairs. Once. ──
@@ -755,7 +761,7 @@ cards = step_cards(R, {
     6: ("He heard you through the wall. Kayla's still in the house on Saturday morning.", "Take a shower on Saturday morning (Showing)"),
     7: ("Since the shower, you both know why you'd knock.", "Two knocks on Ryan's door on an evening he's home (Bold)"),
     8: ("His phone is face-down every time you knock now.", "Two knocks on Ryan's door late, Sunday to Thursday (Bold)"),
-}, terminal_text=("Two knocks, late, Sunday to Thursday. His room, after ten.", "Further: Corruption 60, in the next release."),
+}, terminal_text=("Two knocks, late, Sunday to Thursday. His room, after ten.", "More of Ryan in the next release."),
    closed_text="He's your brother now, polite and cold. Nothing more.", skip=(1,))
 
 text = ("# =============================================================================\n"

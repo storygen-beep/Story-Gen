@@ -356,6 +356,7 @@ COUNTER_OWNER = {lad["counter"]: npc for npc, lad in LADDERS.items()}
 FLAG_WORDS = {
     "came_home_late": "Come home late, after ten at night (in the last four hours)",
     "rent_starts": "The rent has started",
+    # W8 (LO 2026-11-03) adds a Wednesday date, but his steps 3 and 4 read a Saturday one, which these labels name
     "jake_date_went": "Go out with Jake on a Saturday",
     "jake_date_booked": "Book a Saturday with Jake",
     # Zoe's step 5 needs him; he is met only at Figure drawing (LO 2026-11-02: the label said "Cocky guy met")

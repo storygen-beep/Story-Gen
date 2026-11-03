@@ -383,8 +383,7 @@ out.append({
           D(L, "Is that for college or for a guy?")),
         G(cond(SKIRT, NO_PANTIES), P("There's nothing under the skirt. Anyone at the bottom of these stairs gets your bare ass and your pussy.")),
     ], [  # DECISIONS 124 (H5): a way out that pays her nothing; the watcher's look moves his meter; only her going slower pays her
-        go("Hold your skirt down.", loc="home_hall", mins=2, cond_=cond(MARK_BELOW), eff=[nadd(M, "want", 1)]),
-        go("Hold your skirt down.", loc="home_hall", mins=2, cond_=cond(MARK_NOT_BELOW)),
+        go("Hold your skirt down.", loc="home_hall", mins=2),   # C1 (LO 2026-11-03): her no never raises his Want
         go("Take the stairs slower.", loc="home_hall", mins=3, cond_=cond({"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}),
            eff=[capped("exhibitionism", 1, CAP_CUR)]),
         go("Take the stairs slower.", loc="home_hall", mins=3, cond_=cond(NO_PANTIES, trait("exhibitionism", "gte", 40)),

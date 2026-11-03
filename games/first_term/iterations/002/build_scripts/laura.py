@@ -419,7 +419,7 @@ out.append({
             # release 1: the leak before each of her four steps (npc_laura.md, "Leak and promise")
             G(cond(trait("laura_step", "eq", 1)), P("Her eyes go to you and stay a second too long. She keeps a second glass on the counter now.")),
             G(cond(trait("laura_step", "gte", 2), trait("ryan_step", "gte", 2)), D(L, "How's Ryan? You two seem close lately.")),
-            G(cond(trait("laura_step", "gte", 1), flag("jake_date_booked")), D(L, "Is Jake bringing you home on Saturday?")),
+            G(cond(trait("laura_step", "gte", 1), flag("jake_date_booked")), D(L, "Is Jake taking you out again?")),
             G(cond(trait("laura_step", "eq", 2)), P("She's started leaving her bedroom door open when she dresses.")),
             G(cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}), D(L, "Is that for college or for a guy?")),
             G(cond(DRESS_ON), D(L, "It never fit me like that."), P("Her hand smooths the hip of it without thinking.")),

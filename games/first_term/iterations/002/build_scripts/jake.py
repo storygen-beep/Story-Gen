@@ -84,16 +84,17 @@ out.append({
         ], [go("Go in.", loc="home_hall", mins=3, retry=7, flags=[funset("jake_date_booked")])]),
     ]})
 
-# ── the date: Jake picks her up at the door on a booked Saturday; the curfew refuses it ──
+# ── the date: Jake picks her up at the door on a booked Wednesday or Saturday (W8, LO 2026-11-03: two dates a
+#    week); the curfew refuses it ──
 BACK_AT_11 = [(("19:00", "20:00"), 240), (("20:00", "21:00"), 180), (("21:00", "19:00"), 120)]   # catch-all (A4-02)
 WENT_TONIGHT = {"type": "hours_since_flag", "subject": "player", "flag_key": "jake_date_went", "operator": "lt", "value": 6}
 BOOKED_THIS_WEEK = {"type": "hours_since_flag", "subject": "player", "flag_key": "jake_date_booked", "operator": "lt", "value": 168}
 out.append({
     "id": "jake_date_pickup", "name": "Jake's at the door",
-    "description": "A booked Saturday: Jake picks her up; dinner, a film, the walk back. Lands her at the front door after eleven (where his steps and the goodnight play). The curfew refuses it (SYSTEMS §12).",
+    "description": "A booked Wednesday or Saturday: Jake picks her up; dinner, a film, the walk back. Lands her at the front door after eleven (where his steps and the goodnight play). The curfew refuses it (SYSTEMS §12).",
     "trigger": {"location": "home_front_door", "npc": J, "requires_npc": J, "is_repeatable": True, "priority": 6, "is_active": True,
                 "max_triggers_per_day": 1,
-                "schedules": [{"weekdays": [5], "start_time": "19:00", "end_time": "21:00"}],
+                "schedules": [{"weekdays": [2, 5], "start_time": "19:00", "end_time": "21:00"}],
                 "conditions": cond(flag("jake_date_booked"), BOOKED_THIS_WEEK, flag("jake_met"))},
     "nodes": [
         node("door", "The doorbell", [
@@ -103,7 +104,10 @@ out.append({
             D(J, "Ready? I booked the place with the candles. Don't laugh."),
             G(CURFEW_ON, T("You're grounded. Laura would know by morning, she always does.")),
         ], [
-            go("Go out with him.", node="date", mins=10, cond_=NO_CURFEW, flags=[fset("jake_date_went")]),  # Q73 (iteration 002: pulled forward from part 5 so Laura C 5 has its flag)
+            # C4 (LO 2026-11-03): dirty, the date doesn't happen, and he says why
+            go("Go out with him.", node="date", mins=10, cond_=cond(*NO_CURFEW["items"], trait("hygiene", "gte", 30)), flags=[fset("jake_date_went")]),
+            go("Go out with him.", node="date", mins=10, cond_=cond(*NO_CURFEW["items"], trait("hygiene", "lt", 30), flag("hygiene_off")), flags=[fset("jake_date_went")]),
+            go("Go out with him.", node="stink", mins=2, cond_=cond(*NO_CURFEW["items"], trait("hygiene", "lt", 30), flag("hygiene_off", False)), flags=[funset("jake_date_booked")]),  # Q73 (iteration 002: pulled forward from part 5 so Laura C 5 has its flag)
             go("\"I'm grounded. Next week.\"", loc="home_front_door", mins=5, cond_=CURFEW_ON, flags=[funset("jake_date_booked")]),
             go("\"Not tonight, Jake.\"", node="no", mins=2),
         ]),
@@ -114,6 +118,11 @@ out.append({
                 pid="jake_date_lines"),
             D(J, "You're the best-looking girl in this whole town, you know that? Everyone was looking."),
         ], [go("Let him drive you home.", loc="home_front_door", mins=m, cond_=cond(tod(a, b))) for (a, b), m in BACK_AT_11]),
+        node("stink", "Not like that", [
+            P("He leans in to kiss you hello and stops halfway, his nose wrinkling."),
+            D(J, "Babe. Did you shower today? I booked the place with the candles. Go wash. I'll text you."),
+            P("He goes back to his car. You can smell it on yourself now too."),
+        ], [go("Close the door.", loc="home_front_door", mins=2)]),
         node("no", "Not tonight", [D(J, "Oh. Okay. Next week?"), P("He stands on the step for a second with his keys, then goes. He texts you from the car before he's even started it.")],
              [go("Close the door.", loc="home_front_door", mins=2, flags=[funset("jake_date_booked")])]),
     ]})
@@ -178,7 +187,7 @@ out.append({
     "description": "The end of a Saturday date (release 1): the car outside the house by her stage, or after his step 4, her room. Both meters in the car (the street and Laura's window can see); Corruption behind her door. Once a date.",
     "trigger": {"location": "home_front_door", "npc": J, "requires_npc": J, "is_repeatable": True, "priority": 5, "is_active": True,
                 "max_triggers_per_day": 1,
-                "schedules": [{"weekdays": [5], "start_time": "22:00", "end_time": "00:00"}],
+                "schedules": [{"weekdays": [2, 5], "start_time": "22:00", "end_time": "00:00"}],
                 "conditions": cond(flag("jake_date_went"), WENT_TONIGHT, trait("jake_step", "gte", 3))},
     "nodes": [
         node("door", "The car", [
@@ -190,7 +199,8 @@ out.append({
             go("Kiss him.", node="car_low", mins=2, cond_=cond(BOLD, trait("corruption", "lt", 60), trait("jake_step", "gte", 3))),
             go("\"Your hand. Now.\"", node="car_his", mins=2, cond_=cond(trait("corruption", "gte", 60), trait("jake_step", "gte", 3))),
             go("\"Lean back.\"", node="car_hers", mins=2, cond_=cond(trait("corruption", "gte", 60), trait("jake_step", "gte", 3))),
-            go("\"Come up.\"", node="sneak", mins=5, cond_=cond(trait("jake_step", "gte", 4)),
+            # Saturday only: Laura waits up on Saturday nights (her rows), which the near-catch reads
+            go("\"Come up.\"", node="sneak", mins=5, cond_=cond(trait("jake_step", "gte", 4), wd(5)),
                eff=[{"targetType": "player", "trait": "jake_catch_roll", "op": "set", "value": {"type": "random", "min": 1, "max": 8}}]),
             go("\"Goodnight, Jake.\"", node="night", mins=2),
         ]),
@@ -211,7 +221,8 @@ out.append({
             G(cond(ROLL("eq", 2), flag("ryan_knock_code")), P("Two knocks on the wall. Slow. Ryan's code."), D(J, "What was that?"), ME("Nothing. The pipes.")),
             VID("a couple having quiet sex in her bedroom at night", "sneaky sex her room at night", "boyfriend snuck in sex quiet", pool_dir="sex/jake_sneak_t5"),
         ], [go("Let him out before dawn.", loc="home_ella_room", mins=300, eff=[CAP("corruption", 1, 59)], flags=[funset("jake_date_booked")])]),
-        node("night", "Goodnight", [D(J, "Goodnight, gorgeous. Same time next week."), P("He kisses your hand like an idiot and walks backwards down the path.")],
+        node("night", "Goodnight", [GC(cond(wd(2)), D(J, "Goodnight, gorgeous. Saturday?")), GC(cond(wd(5)), D(J, "Goodnight, gorgeous. Wednesday?")),
+                                    P("He kisses your hand like an idiot and walks backwards down the path.")],
              [go("Go in.", loc="home_hall", mins=2, flags=[funset("jake_date_booked")])]),
     ]})
 
@@ -293,7 +304,7 @@ cards = step_cards(J, {
     2: ("He's got your number. He hangs out on the quad with his team.", "A Monday, Wednesday or Friday morning on the quad, Jake and his team (Curious or Daring)"),
     3: ("Saturday. He picks you up at the door.", "Saturday night: a date with Jake, back to the front door after eleven (Curious, Daring)"),
     4: ("His car outside the house, Saturday after Saturday. He wants more than the car.", "Saturday night after a date: the front door (Bold)"),
-}, met_flag="jake_met", terminal_text=("Saturdays: a date, and your room after.", "Jake, further. (Next release)"), skip=(1,))
+}, met_flag="jake_met", terminal_text=("Wednesdays and Saturdays: a date. Saturdays, your room after.", "Jake, further. (Next release)"), skip=(1,))
 
 text = ("# =============================================================================\n"
         "# First Term — 5 · scenes · JAKE (sheets/scenes/jake_*.md, people/npc_jake.md)\n"

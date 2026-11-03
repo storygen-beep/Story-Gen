@@ -208,7 +208,7 @@ cards = step_cards(TM, {
 }, met_flag="tom_met", terminal_text=("The window rule: the street can't see.", "Tom, later. (Next release)"))
 # His hiring card under People until she has the job (LO 2026-11-02, "Yes all three"): only the "Week one" story
 # card named the job, and it goes after 7 days, so a player who skipped it lost Tom, Gary and the shift money.
-cards.insert(0, {"npc_id": TM, "priority": 10, "text": "The café in town is hiring.",
+cards.insert(0, {"npc_id": TM, "priority": 10, "heading": "The café", "text": "The café in town is hiring.",   # C3 (LO 2026-11-03)
                  "tip": "The café in town, Monday to Saturday, 8 AM to 11 PM",
                  "when": [{"flag": "opening_done", "op": "is_true"}, {"flag": "cafe_job", "op": "is_false"}],
                  "ready_canvas": "cafe_job_ask"})

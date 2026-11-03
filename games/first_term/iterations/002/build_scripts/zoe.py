@@ -530,7 +530,8 @@ cards = step_cards(Z, {
 # a npc card"), the way Dr. Hale's step-1 card points at his first lecture. It was a Story Goals card in group
 # story_goals, where the priority-20 "Week one" card won the group for days 0-6: nothing pointed at her in week
 # one, though her meeting fires from the first Tuesday.
-cards.insert(0, {"npc_id": Z, "priority": 10, "text": "The girl from your Biology class hangs out on the quad in the afternoons.",
+# C3 (LO 2026-11-03): the heading stands in for her name until she has met her (engine f0d7b863)
+cards.insert(0, {"npc_id": Z, "priority": 10, "heading": "A girl from Biology", "text": "The girl from your Biology class hangs out on the quad in the afternoons.",
                  "tip": "The quad, Tuesday, Thursday or Friday, 14:30 to 18:00",
                  "when": [{"flag": "opening_done", "op": "is_true"}, {"flag": "zoe_met", "op": "is_false"}],
                  "ready_canvas": "zoe_00_quad_meeting"})
