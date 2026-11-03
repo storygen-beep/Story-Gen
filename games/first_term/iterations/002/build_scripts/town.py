@@ -144,7 +144,7 @@ out.append({
     "nodes": [node("till", "The till", [
         P("Bread, milk, eggs, the wine Laura likes, the washing powder she always forgets. The clerk scans it all without looking up from his phone and bags it in two thin bags that will definitely split."),
     ], [go("Pay with Laura's twenty ($20).", loc="street", mins=15, costs=[{"trait": "money", "value": 20}],
-           eff=[add("money", -20)], flags=[fset("groceries_bought")]),
+           eff=[add("money", -20, clamp=False)], flags=[fset("groceries_bought")]),
         go("Not now.", loc="street")])]})
 
 # ═════════════════════════════════════════════════════════════════════════════

@@ -306,7 +306,7 @@ SHOP_EXITS = [
     # "You hand it back.": only with the twenty still on her, so the unclamped -20 never takes her below 0
     # (engine.md §21, "gate the choice on the trait"; pass 3 J5)
     go("\"I forgot the shopping.\"", node="hl_forgot", mins=2, cond_=cond(*OVERDUE, flag("grocery_done_today", False), trait("money", "gte", 20)),
-       flags=[funset("grocery_list"), fset("grocery_done_today")], eff=[susp(2), add("money", -20)]),
+       flags=[funset("grocery_list"), fset("grocery_done_today")], eff=[susp(2), add("money", -20, clamp=False)]),   # money is a quantity: never clamped (pass 4 J4/F73); the money gte 20 condition keeps it >= 0
     go("Never mind.", node="hl_dinner"),
 ]
 hub_nodes.append(node("hl_shop", "The shopping", [

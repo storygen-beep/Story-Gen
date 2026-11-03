@@ -197,7 +197,7 @@ out.append({
             VID("a waitress letting a customer's hand stay on her as she serves, the manager watching from the counter", "customer grabs waitress ass she lets him", "waitress groped at table lets it happen", pool_dir="sex/cafe_l3_let_t4")],
              # L3 needs Corruption 40 but only Exhibitionism 20, so each meter stops at its own stage's top (pass 3 G8)
              outcome_exits("l3_let", 10, 16, eff=[capped_e("corruption", 1, 59), capped_e("exhibitionism", 1, 39),
-                                                  add("cafe_footfall", 1), add("cafe_name", -1) | {"clamp": True}],
+                                                  add("cafe_footfall", 1), add("cafe_name", -1, clamp=False)],   # Tom 3 reads cafe_name lte -5: a clamp would floor it at 0 (pass 4 E96)
                            flags=[fset("cafe_let_it")], gary_flag=True)),
         node("l3_pull", "Your food's here", [P(L3_PULL), WHO("Feisty. I like feisty. Same table next week, love.")], outcome_exits("l3_pull", 4, 8)),
         node("l3_slap", "Slap it away", [P(L3_SLAP), ME("Hands to yourself. Next time I'll call the police."), D(TM, "Back to work, @player. Table six is waiting.")], outcome_exits("l3_slap", 0, 0)),
