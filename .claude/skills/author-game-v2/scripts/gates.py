@@ -7520,8 +7520,8 @@ def run_gates(model, game, state=None):
 
     # G11 — every location reachable on foot from the start.
     # Movement is undirected: the engine generates the return link from entry_from,
-    # so an edge in either field connects both ways.
-    adj = collections.defaultdict(set)
+    # so an edge in either field connects both ways. Parent/default_entry edges too.
+    adj = _location_parent_adjacency(locs)
     for l in locs:
         lid = l.get("id")
         if not lid:
@@ -8352,13 +8352,13 @@ def run_gates(model, game, state=None):
             continue
         _walk_caps(c, c.get("id", "?"))
 
-    open_caps = sorted(f for f in tick_cleared if cap_read.get(f) and not cap_set.get(f))
+    open_caps = sorted(f for f in tick_cleared if cap_read.get(f) and not cap_set.get(f) and f not in _phone_set_flags(game))
     detail = []
     for f in open_caps:
         where = sorted(cap_read[f])
         detail.append(f"`{f}` — read as is_false in {', '.join(where[:3])}"
                       + (f" (+{len(where) - 3} more)" if len(where) > 3 else "")
-                      + " and cleared in [engine.daily_tick], but NO canvas sets it")
+                      + " and cleared in [engine.daily_tick], but NO canvas or phone reply sets it")
     if open_caps:
         detail.append("the-meters.md M5 — a day cap is three parts. Set the flag on the CHOICE "
                       "that opens the rung (a choice runs its flagEffects BEFORE advanceTime, "
@@ -14157,7 +14157,10 @@ def _tr_placed(rx, sent):
 def _tr_building(game, lid):
     """The places that make one building with `lid`: walk `entry_from` up to the place that
     hangs off an outdoor root (a place with no `entry_from`), and take everything under it.
-    A home is its hall and every room off it; a place off the street is its own building."""
+    A home is its hall and every room off it; a place off the street is its own building.
+    A room under an `is_container` building with a `default_entry` is that building's."""
+    if _tr_container_building(game, lid):
+        return _tr_container_building(game, lid)
     locs = {l.get("id"): l for l in game.get("locations") or [] if l.get("id")}
 
     def top(x):
@@ -14248,9 +14251,10 @@ def _named_person_present(game):
     names = {n["id"]: n.get("name") for n in game.get("npcs") or [] if n.get("id")}
     aliases = _tr_aliases(game)
     calls = _tr_call_canvases(game)
-    rows, n = [], 0
+    rows, n, heard = [], 0, []
     staged = _tr_opening(game)
-    for cid, nid, kind, text, spk, lid, slots, pinned, rep, entry in _tr_texts(game, where):
+    units = _tr_texts(game, where)
+    for i, (cid, nid, kind, text, spk, lid, slots, pinned, rep, entry) in enumerate(units):
         if not slots or cid in staged:
             continue
         claims = []
@@ -14262,8 +14266,14 @@ def _named_person_present(game):
             gone = [s for s in sorted(entry) if lid not in _tr_places(where[spk], s)]
             if gone:
                 n += 1
-                rows.append(f"{cid} · {nid}: {names.get(spk, spk)} speaks — {_tr_slot_name(gone[0])}: "
-                            f"not at {lid} — \"{text.strip()[:110]}\"")
+                row = (f"{cid} · {nid}: {names.get(spk, spk)} speaks — {_tr_slot_name(gone[0])}: "
+                       f"not at {lid} — \"{text.strip()[:110]}\"")
+                # A voice through the door: the marker sits in the line or the block beside it.
+                if _tr_heard_from_next_door(game, where[spk], lid, gone,
+                                            [text] + _tr_unit_neighbours(units, i)):
+                    heard.append(row)
+                else:
+                    rows.append(row)
         bld = _tr_building(game, lid) if lid else None
         for sent in _beat_sentences(text):
             for pid, rx in aliases.items():
@@ -14282,14 +14292,21 @@ def _named_person_present(game):
             ok, why = _tr_unbacked(where[pid], slots, pinned.get(pid), sleep, bld,
                                    bool(_TR_AWAY.search(sent)))
             if not ok:
-                rows.append(f"{cid} · {nid}: {names.get(pid, pid)} — {why} — \"{sent.strip()[:110]}\"")
+                row = f"{cid} · {nid}: {names.get(pid, pid)} — {why} — \"{sent.strip()[:110]}\""
+                # A sound or an act through the wall: the marker sits in the sentence's own block.
+                # "Asleep upstairs" claims a state, not a sound, so a sleep line is never excused.
+                if not sleep and _tr_heard_from_next_door(game, where[pid], lid, slots, [sent, text]):
+                    heard.append(row)
+                else:
+                    rows.append(row)
         # (speakers were counted above)
     rows = sorted(set(rows))
     if not n:
         return None, "no line places a scheduled person", []
+    heard = [f"heard from next door — not counted: {r}" for r in sorted(set(heard))]
     return not rows, (f"{len(rows)} line(s) place a person where their rows don't hold them at "
                       f"every hour the line shows" if rows else
-                      f"{n}/{n} lines that place a person agree with that person's rows"), rows
+                      f"{n}/{n} lines that place a person agree with that person's rows"), rows + heard
 
 
 # ── shared readers for the gates below ────────────────────────────────────────
@@ -15965,6 +15982,125 @@ def _speech_is_a_dialog_block(game):
             for cid, k in sorted(per.items(), key=lambda kv: (-kv[1], kv[0]))]
     return not rows, (f"{sum(per.values())} spoken line(s) in {len(per)} canvas(es) sit in paragraphs"
                       if rows else f"{n}/{n} paragraphs carry no spoken line"), rows
+
+
+# ── truth gates: a building is its container ───────────────────────────────
+# `_tr_building` walked `entry_from` alone, so in a home built the way the-map.md
+# teaches (an `is_container` place entered at its `default_entry`, rooms naming it as
+# `parent`) every room was its own building: first_term's `_tr_building(home_bathroom)`
+# was {home_bathroom}, so Laura in the kitchen was "not here" for a line in the hall.
+# A building here is the TOP `is_container` place with a `default_entry` reached by
+# following `parent` up, with every place under it. The walk stops at the first parent
+# that is not such a container, so a flat under `town` (a container with no
+# default_entry, i.e. a district, not a house) is its own building, not the town's.
+def _tr_building_top(locs, lid):
+    """The top walked-into container over `lid` (itself if it is one), or None."""
+    top, cur, seen = None, lid, set()
+    while cur in locs and cur not in seen:
+        seen.add(cur)
+        l = locs[cur]
+        if l.get("is_container") and l.get("default_entry"):
+            top = cur
+        elif cur != lid:
+            break
+        cur = l.get("parent")
+    return top
+
+
+def _tr_container_building(game, lid):
+    """Every place in `lid`'s container building, or None when it has none."""
+    locs = {l.get("id"): l for l in game.get("locations") or [] if isinstance(l, dict) and l.get("id")}
+    top = _tr_building_top(locs, lid)
+    if not top:
+        return None
+    return {x for x in locs if _tr_building_top(locs, x) == top}
+
+
+# ── a named person is where the line says: heard from next door ──────────────
+# A line can place a person in the NEXT room: a voice through the door, music through
+# the wall, a laugh through the doorway. first_term (2026-11-03) had Laura knocking
+# from across the hall, Mark calling "from the next room" and Ryan's headboard through
+# the plaster, all counted as "not here". Such a line is excused only when BOTH hold:
+#   · the line (or, for a speaker, the block beside it) says it is heard or seen
+#     through a wall or a door — one of `_TR_HEARD`; and
+#   · at every hour judged, every place the person's rows hold them is next to the
+#     scene's room: the same `parent`, one is the other's `parent`, or one is the
+#     other's `entry_from`. "Nowhere" is never next door.
+# Excused lines are printed, not hidden, so a reader can audit them.
+_TR_HEARD = re.compile(
+    r"\b(?:through the (?:wall|walls|door|doorway|plaster|floor|ceiling)|behind (?:the|his|her) door|"
+    r"next door|the next room|you hear|across the hall|downstairs|upstairs)\b", re.I)
+
+
+def _tr_rooms_adjacent(game, a, b):
+    """True when `a` and `b` are the same room or one wall / door apart."""
+    if not a or not b:
+        return False
+    if a == b:
+        return True
+    locs = {l.get("id"): l for l in game.get("locations") or [] if isinstance(l, dict) and l.get("id")}
+    la, lb = locs.get(a) or {}, locs.get(b) or {}
+    pa, pb = la.get("parent"), lb.get("parent")
+    if pa and pa == pb:
+        return True
+    return b in (pa, la.get("entry_from")) or a in (pb, lb.get("entry_from"))
+
+
+def _tr_unit_neighbours(units, i):
+    """The texts of the unit before and after `units[i]` on the same canvas node."""
+    out = []
+    for j in (i - 1, i + 1):
+        if 0 <= j < len(units) and units[j][:2] == units[i][:2]:
+            out.append(units[j][3])
+    return out
+
+
+def _tr_heard_from_next_door(game, table, lid, slots, texts):
+    """Is this a line heard through a wall or a door from where the person is?"""
+    if not lid or not slots or not any(_TR_HEARD.search(t or "") for t in texts):
+        return False
+    for s in slots:
+        places = _tr_places(table, s)
+        if not places or any(not _tr_rooms_adjacent(game, lid, p) for p in places):
+            return False
+    return True
+
+
+# ── G11 world reachable: a building is walked through its parent ────────────
+# the-map.md teaches a home as an `is_container` building: the street links the
+# container, the container drops the player at its `default_entry`, and every room
+# names the building as `parent`. Neither `entry_from` nor `navigation_order` carries
+# those two links, so a walk graph built from them alone strands every room in the
+# building (first_term, 2026-11-03: 10/38 while the built index.html links all 38).
+# The engine lists a container's children inside it, so `parent = X` connects the
+# room to X both ways, and siblings reach each other through X.
+def _location_parent_adjacency(locs):
+    """A walk graph (defaultdict(set)) seeded with the container and parent edges."""
+    adj = collections.defaultdict(set)
+    ids = {l.get("id") for l in locs if isinstance(l, dict) and l.get("id")}
+    for l in locs:
+        lid = l.get("id") if isinstance(l, dict) else None
+        if not lid:
+            continue
+        entry = l.get("default_entry")
+        if l.get("is_container") and entry in ids:
+            adj[lid].add(entry)
+            adj[entry].add(lid)
+        par = l.get("parent")
+        if par in ids and par != lid:
+            adj[lid].add(par)
+            adj[par].add(lid)
+    return adj
+
+
+# ── a day-cap closes: a phone reply is a setter too ─────────────────────────
+# A cap flag set only by a phone reply (first_term's `said_eating_out`, the "eating
+# out tonight" reply in Laura's thread) is set: the reply's flagEffects run when the
+# player taps it. Same reader `a booking can clear` uses, so round 2 and on_ignore
+# effects count as well.
+def _phone_set_flags(game):
+    """Every flag some phone thread or call reply sets."""
+    return {f for _w, f, _v in _phone_reply_sets(game)}
 
 
 def main():
