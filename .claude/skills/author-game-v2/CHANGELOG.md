@@ -5,6 +5,17 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-04 — `a deduction is gated or priced` leaves a meter alone that a condition reads below 0
+
+- `scripts/gates.py` `_deduction_is_gated`: a player meter that some condition reads at `lt`/`lte`/`eq` a negative
+  value (first_term's `cafe_name`: Tom's step 3 needs `lte -5`) is meant to go below 0, so its deductions are not
+  asked for a clamp (a clamp floors it at 0 and locks the step). Found by the fourth alignment pass (E96, J4):
+  group 2's clamp fix floored cafe_name and clamped money.
+- Test: `test_deduction_on_a_meter_read_below_zero_is_left_alone` in `scripts/tests/test_gates_group2_checks.py`.
+- Verified: `pytest scripts/tests` 944 passed; `--selfcheck` green; `cite_check --strict` 0.
+
+---
+
 ## 2026-11-04 — the checks show LO's signed later/waive calls as DECIDED, not FAIL
 
 **Why.** LO, signing group 1 of first_term's third alignment pass (2026-11-03): *"Write every 'later' and

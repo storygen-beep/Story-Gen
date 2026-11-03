@@ -703,3 +703,23 @@ def test_lint_work_inside_a_hub_lists_a_chore():
                                          time_progression_minutes=30)])], npc="npc_mark"))
     out = lints(g)
     assert "lint · work inside a hub" in out and "a chore" in out, out
+
+
+def test_deduction_on_a_meter_read_below_zero_is_left_alone():
+    """Pass 4 (2026-11-04): cafe_name falls on purpose; a step reads it at lte -5, so no clamp."""
+    import copy
+    g = {"project": {"id": "fx", "name": "fx"}, "locations": [{"id": "cafe"}],
+         "player": {"core_traits": {"cafe_name": 0}},
+         "canvases": [
+             {"id": "shift", "trigger": {"location": "cafe", "is_repeatable": True}, "nodes": [
+                 {"id": "n", "blocks": [{"type": "paragraph", "content": "A shift."}],
+                  "exit_block": {"choices": [{"text": "Clock out.", "targetType": "location", "locationId": "cafe",
+                                              "effects": [{"targetType": "player", "trait": "cafe_name", "op": "add",
+                                                           "value": -1, "clamp": False}]}]}}]},
+             {"id": "tom3", "trigger": {"location": "cafe", "is_repeatable": False, "conditions": {
+                 "version": "1.0", "logic": "AND", "items": [{"type": "trait", "subject": "player",
+                 "trait_key": "cafe_name", "operator": "lte", "value": -5}]}},
+              "nodes": [{"id": "n", "blocks": [{"type": "paragraph", "content": "Tom."}]}]}]}
+    model, g2 = gates.build(copy.deepcopy(g))
+    r = next(r for r in gates.run_gates(model, g2, {}) if r["gate"] == "a deduction is gated or priced")
+    assert not r["detail"] and "below 0" not in r["headline"], r

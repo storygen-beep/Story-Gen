@@ -16673,6 +16673,12 @@ def _g2_lowers_raise(c, key):
 # v2.py:16736), so an ungated deduction can carry a meter below 0.
 def _deduction_is_gated(game):
     core = set(((game.get("player") or {}).get("core_traits")) or {})
+    # A meter some condition reads below 0 (first_term's cafe_name: Tom 3 needs lte -5) is meant to go
+    # negative; a clamp would floor it at 0 and lock that step. Its deductions are left alone.
+    import json as _json
+    _blob = _json.dumps(game)
+    below_zero = {k for k in core if re.search(r'"trait_key": "%s", "operator": "(?:lt|lte|eq)", "value": -' % re.escape(k), _blob)}
+    core -= below_zero
     rows, n = [], 0
     sober = set(_wu_modifier_offsets(game))
 
