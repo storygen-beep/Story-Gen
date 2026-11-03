@@ -86,6 +86,16 @@ cards.append({"npc_id": "npc_vance", "priority": 5, "heading": "Next door",   # 
 for npc, met, text in mute:
     cards.append({"npc_id": npc, "priority": 5, "text": text, "when": [{"flag": met, "op": "is_true"}]})
 
+# The small rungs inside the first stage (heat proposal C1-C6, DECISIONS 147): one goal line per rung on its card
+SMALL_RUNGS = {
+    ("corruption", 0): [(5, "Corruption 5: move one aisle closer in the library's back stacks"),
+                        (10, "Corruption 10: turn the sound up on channel 5"),
+                        (15, "Corruption 15: stay at Ryan's door until his light goes off")],
+    ("exhibitionism", 0): [(5, "Exhibitionism 5: leave the shower door unlocked"),
+                           (10, "Exhibitionism 10: leave the changing-room curtain open at the clothes shop"),
+                           (15, "Exhibitionism 15: the sheer blouse on the rack at the clothes shop")],
+}
+
 # ── her two stages: what the next rung opens (the-voice.md R2; DECISIONS: stages at 20/40/60) ──
 for trait_k, bands in [
     ("corruption", [(0, 20, "Good Girl. Curious opens at 20: watching, touching yourself, a kiss, a dare.",
@@ -110,7 +120,9 @@ for trait_k, bands in [
                       "when": [{"flag": "opening_done", "op": "is_true"},
                                {"type": "trait", "subject": "player", "trait": trait_k, "op": "gte", "value": lo},
                                {"type": "trait", "subject": "player", "trait": trait_k, "op": "lt", "value": hi}],
-                      "goals": [{"type": "trait", "subject": "player", "trait": trait_k, "op": "gte", "value": hi, "label": label}]})
+                      "goals": [*[{"type": "trait", "subject": "player", "trait": trait_k, "op": "gte", "value": v, "label": l}
+                                  for v, l in SMALL_RUNGS.get((trait_k, lo), [])],
+                                {"type": "trait", "subject": "player", "trait": trait_k, "op": "gte", "value": hi, "label": label}]})
 
 text = "# ── rows so no place stands empty, the uniform's readers, cards for the light cast and her stages ──\n"
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards)

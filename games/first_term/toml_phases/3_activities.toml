@@ -937,6 +937,63 @@ targetType = "location"
 locationId = "clothes_shop"
 time_progression_minutes = 20
 
+# C5 (DECISIONS 147): Exhibitionism 10. One stranger in the queue looks, and she leaves the curtain where it is
+# (a look that happens to her, stage 1). +1 cap 19, once a day (shop_curtain_today, cleared at midnight).
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave the curtain where it is."
+targetType = "node"
+nodeId     = "curtain"
+show_when_locked = true
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 10 } ] }
+
+[[canvases.nodes]]
+id   = "curtain"
+name = "The curtain"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You don't pull the curtain across. You leave the gap where it is, a hand's width of you showing to the shop floor, and you turn to the mirror and try the next thing on."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "A man in the queue for the till sees. His eyes go through the gap, down your back to your ass, and stay there. The queue moves. He doesn't."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Your face goes hot. Your nipples go tight. You take your time with the zip anyway."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Take your time, love. I'm not going anywhere."
+[canvases.nodes.blocks.props]
+speaker = "unknown"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Pull the curtain shut."
+targetType = "location"
+locationId = "clothes_shop"
+time_progression_minutes = 15
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "shop_curtain_today", operator = "is_false" } ] }
+effects = [ { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 } ]
+flagEffects = [ { targetType = "player", flag = "shop_curtain_today", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Pull the curtain shut."
+targetType = "location"
+locationId = "clothes_shop"
+time_progression_minutes = 15
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "shop_curtain_today", operator = "is_true" } ] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Hang them back up."
+targetType = "location"
+locationId = "clothes_shop"
+time_progression_minutes = 15
+
 
 # zoe_borrow_dress moved into hub_zoe_bedroom (zoe.py, iteration 002 part 5): her face in her bedroom.
 
