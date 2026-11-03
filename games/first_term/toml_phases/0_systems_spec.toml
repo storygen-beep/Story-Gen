@@ -434,13 +434,15 @@ kind  = "next_day"
 wake  = "07:00"
 free  = true
 
+# (2026-11-03, alignment pass 2) she starts in her sleep shirt and panties, in bed; the first screen's "Get up." and
+# "Skip the opening" add the rest of her clothes to the wardrobe ("Get dressed." equips them on the hall screen).
 # ── her clothes (wardrobe sheet: seven states, five key items). A state is read off
 #    what she wears: worn_exposure, a clothing_slot, or a garment's `type`. ──
 [[clothing]]
 id = "plain_bra"
 name = "Plain bra"
 slot = "bra"
-initial = true
+initial = false   # (2026-11-03) owned from the first screen, not worn: she wakes in her sleep shirt
 type = "bra"
 
 [[clothing]]
@@ -454,35 +456,35 @@ type = "panties"
 id = "tshirt"
 name = "T-shirt"
 slot = "top"
-initial = true
+initial = false   # (2026-11-03) owned from the first screen, not worn: she wakes in her sleep shirt
 type = "tshirt"
 
 [[clothing]]
 id = "jeans"
 name = "Jeans"
 slot = "bottom"
-initial = true
+initial = false   # (2026-11-03) owned from the first screen, not worn: she wakes in her sleep shirt
 type = "jeans"
 
 [[clothing]]
 id = "sneakers"
 name = "Sneakers"
 slot = "shoes"
-initial = true
+initial = false   # (2026-11-03) owned from the first screen, not worn: she wakes in her sleep shirt
 type = "sneakers"
 
 [[clothing]]
 id = "leggings"
 name = "Leggings"
 slot = "bottom"
-initial = true
+initial = false   # (2026-11-03) owned from the first screen, not worn: she wakes in her sleep shirt
 type = "leggings"
 
 [[clothing]]
 id = "sleep_shorts"
 name = "Sleep shorts"
 slot = "bottom"
-initial = true
+initial = false   # (2026-11-03) owned from the first screen, not worn: she wakes in her sleep shirt
 type = "shorts"
 beauty = 1
 
@@ -498,7 +500,7 @@ exposure = 1
 id = "towel"
 name = "Towel"
 slot = "dress"
-initial = true
+initial = false   # (2026-11-03) owned from the first screen, not worn: she wakes in her sleep shirt
 type = "towel"
 exposure = 1
 

@@ -310,6 +310,51 @@ def here_at(npc, loc):
     return {"type": "npc_at_location", "location_id": loc, "npc_id": npc, "operator": "is_present"}
 
 
+MEDIA_TYPES = ("image", "video")
+
+
+def _and_items(conds, items):
+    """An AND conditions block with `items` added. An OR block can't take them: wrap it in a G first."""
+    if not conds:
+        return cond(*items)
+    assert str(conds.get("logic", "AND")).upper() == "AND" or len(conds.get("items") or []) <= 1, \
+        "pin_blocks: an OR group can't carry an AND pin; wrap it in G(cond(*ANY), ...) first"
+    return dict(conds, logic="AND", items=list(conds.get("items") or []) + list(items))
+
+
+def pin_blocks(blocks, *items):
+    """Put presence items (here_at) on every text block of a screen, so each line shows only while the person it
+    names is where the line needs them (the truth rule; gates `a named person is where the line says` reads a
+    group's npc_at_location items as the engine's own check). No nesting level is added where one can be avoided,
+    because the importer flattens past depth 4 (template_import.py:8444):
+    - a group gets the items on its own conditions (adjacent groups stay one if/elseif chain, every link pinned);
+    - a one-group pool (G) gets them on its group;
+    - a pool of several entries goes inside one GC (group > pool > entry stays inside depth 4);
+    - any other text block goes inside a G of its own. Media blocks are left as they are."""
+    out = []
+    for b in blocks:
+        t = b.get("type")
+        if t in MEDIA_TYPES:
+            out.append(b)
+        elif t == "group":
+            out.append(dict(b, conditions=_and_items(b.get("conditions"), items)))
+        elif t == "block_pool" and len(b.get("blocks") or []) == 1 and b["blocks"][0].get("type") == "group":
+            g = b["blocks"][0]
+            out.append(dict(b, blocks=[dict(g, conditions=_and_items(g.get("conditions"), items))]))
+        elif t == "block_pool":
+            out.append(GC(cond(*items), b))
+            out[-1]["_pinned_pool"] = True
+        else:
+            out.append(G(cond(*items), b))
+    # a GC round a pool must not sit next to another group, or the two would join one chain
+    for i, b in enumerate(out):
+        if b.pop("_pinned_pool", False):
+            for j in (i - 1, i + 1):
+                if 0 <= j < len(out):
+                    assert out[j].get("type") != "group", "pin_blocks: a pinned pool sits next to a group"
+    return out
+
+
 def require_present(out, cid, *items):
     """Add presence checks to a canvas's trigger (iteration 002, part 7): the person a scene shows is
     where their row puts them when it can fire, which the truth gates read off these items."""
@@ -421,7 +466,13 @@ def with_closed_line(canvas):
 def emit(canvas):
     # The writer session's screens replace their PLACEHOLDER blocks here (writer.py; LO, 2026-10-09).
     from writer import fill
-    canvas = voice_canvas(with_closed_line(fill(canvas)))
+    canvas = fill(canvas)
+    # A node may carry `pin`: presence items put on its whole screen AFTER the writer's screen is swapped in
+    # (pin_blocks; first_term truth pass, 2026-11-03)
+    for n in canvas["nodes"]:
+        if n.get("pin"):
+            n["blocks"] = pin_blocks(n["blocks"], *n.pop("pin"))
+    canvas = voice_canvas(with_closed_line(canvas))
     L = ["\n[[canvases]]", f"id   = {q(canvas['id'])}", f"name = {q(canvas['name'])}"]
     if canvas.get("description"):
         L.append(f"description = {q(canvas['description'])}")

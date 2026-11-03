@@ -184,6 +184,16 @@ out.append({
 CAP = lambda k, n, c: {"targetType": "player", "trait": k, "op": "add", "value": n, "cap": c}
 CAR_PAY = lambda c: [CAP("corruption", 1, c), CAP("exhibitionism", 1, c)]
 ROLL = lambda op, v: trait("jake_catch_roll", op, v)
+# truth pass (2026-11-03): "Laura waits up with the TV" is true only while her row has her in the living room (Sat
+# 22:00-00:00, not on the dark stairs after came_home_late, and never on a Wednesday, when she is in her bedroom), so
+# that sentence and the next ("You look at it once.", the window) show behind her presence; the rest is the beat as signed.
+CAR_LOW_LAURA = "Across the lawn the living-room window glows blue, where Laura waits up with the TV. You look at it once. "
+_car_low = beat("jake_date_end", "car_low")
+assert _car_low.count(CAR_LOW_LAURA) == 1
+_cl_before, _cl_after = _car_low.split(CAR_LOW_LAURA)
+CAR_LOW_BLOCKS = [*top_or_dress(_cl_before.strip()),
+                  G(cond(here_at(L, "home_living_room")), P(CAR_LOW_LAURA.strip())),
+                  *top_or_dress(_cl_after.strip())]
 out.append({
     "id": "jake_saturday_date", "name": "The end of a date",
     "description": "The end of a Saturday date (release 1): the car outside the house by her stage, or after his step 4, her room. Both meters in the car (the street and Laura's window can see); Corruption behind her door. Once a date.",
@@ -206,7 +216,7 @@ out.append({
                eff=[{"targetType": "player", "trait": "jake_catch_roll", "op": "set", "value": {"type": "random", "min": 1, "max": 8}}]),
             go("\"Goodnight, Jake.\"", node="night", mins=2),
         ]),
-        node("car_low", "The car", [*top_or_dress(beat("jake_date_end", "car_low")),
+        node("car_low", "The car", [*CAR_LOW_BLOCKS,
             VID("a couple making out in a parked car at night, windows fogging", "couple making out parked car night", "car makeout outside her house", pool_dir="sex/jake_car_low_t4")],
             [go("\"Goodnight, gorgeous.\"", loc="home_hall", mins=20, eff=CAR_PAY(59), flags=[funset("jake_date_booked")])]),
         node("car_his", "His hand", [*top_or_dress(beat("jake_date_end", "car_his")),

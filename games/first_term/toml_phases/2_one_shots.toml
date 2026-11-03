@@ -64,7 +64,7 @@ text       = "Get up."
 targetType = "node"
 nodeId     = "problem"
 time_progression_minutes = 3
-wardrobeEffects = [ { action = "add", item_id = "sleep_shirt" }, { action = "add", item_id = "towel" } ]
+wardrobeEffects = [ { action = "add", item_id = "towel" }, { action = "add", item_id = "plain_bra" }, { action = "add", item_id = "tshirt" }, { action = "add", item_id = "jeans" }, { action = "add", item_id = "leggings" }, { action = "add", item_id = "sleep_shorts" }, { action = "add", item_id = "sneakers" } ]
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Skip the opening"
@@ -72,7 +72,7 @@ targetType = "node"
 nodeId     = "skip_hall"
 time_progression_minutes = 45
 # (2026-11-01) dressed as the full opening leaves her, since the card now walks her to campus (DECISIONS 121)
-wardrobeEffects = [ { action = "add", item_id = "sleep_shirt" }, { action = "add", item_id = "towel" } ]   # dressed on the hall screen's "Get dressed." (DECISIONS 124)
+wardrobeEffects = [ { action = "add", item_id = "towel" }, { action = "add", item_id = "plain_bra" }, { action = "add", item_id = "tshirt" }, { action = "add", item_id = "jeans" }, { action = "add", item_id = "leggings" }, { action = "add", item_id = "sleep_shorts" }, { action = "add", item_id = "sneakers" } ]   # dressed on the hall screen's "Get dressed." (DECISIONS 124)
 flagEffects = [
   { targetType = "player", flag = "rent_starts", op = "set" },
   { targetType = "player", flag = "laura_rule_ryan_first", op = "set" },

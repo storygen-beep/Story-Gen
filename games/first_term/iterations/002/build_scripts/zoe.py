@@ -213,10 +213,14 @@ out.append({
 # ── step 3 · Zoe A 3 · the hot tub (the voice sample; every screen as signed) ──
 HOME_AT_3 = [(("20:00", "21:00"), 400), (("21:00", "22:00"), 340), (("22:00", "23:00"), 280), (("23:00", "00:00"), 220),
              (("00:00", "20:00"), 160)]   # past midnight: the catch-all (sweep A4-01)
+# truth pass (2026-11-03): the scene runs 28 minutes to "Across the bubbles, Zoe is still looking at you", and her
+# party-house row ends at midnight, so the step opens to 23:30 (the ledger says so too since 2026-11-03)
+_t3 = step_trigger(Z, 3, bind_npc=False, retry_days=7)
+assert [(s_["start_time"], s_["end_time"]) for s_ in _t3["schedules"]] == [("20:00", "23:30")]
 out.append({
     "id": "zoe_03_hot_tub", "name": "The hot tub",
     "description": "Zoe step 3 (Zoe A 3), the voice sample: the party house hot tub, her friends go in first; topless for Zoe alone and she kisses her. Home at three; Ryan at his door.",
-    "trigger": step_trigger(Z, 3, bind_npc=False, retry_days=7),
+    "trigger": _t3,
     "nodes": [
         node("tub", "The hot tub", [
             P("Zoe drags you into the hot tub on the back deck, laughing. Steam rolls off the water. Music thumps through the glass. Three of her friends are already in, drinks on the rim. \"Make room, babe's here.\" She doesn't need room. She sits right against you, her knee pressed to yours under the water. When you talk, she watches your mouth. All term she has dared you instead of asking, but you know what she wants. \"Your tits are floating, babe,\" she says, grinning. Your face goes hot, and it isn't the water. One of her friends stands up, restless. \"Going in for more drinks.\""),
@@ -277,6 +281,9 @@ out.append({
 # ── step 5 · No dare (zoe_05_no_dare.md, signed 2026-11-01), the top step: after a Friday party, past midnight, at
 #    her apartment where her row is; she takes her to her bedroom. Her late column (signed). ──
 _t5 = step_trigger(Z, 5, retry_days=7)
+# truth pass (2026-11-03): "The cocky guy stands there" is 15 minutes in, and his row (and Zoe's) at the flat ends at
+# 02:00, so the step opens to 01:45 (the ledger's window is 00:00-02:00)
+assert [(s_["start_time"], s_["end_time"]) for s_ in _t5["schedules"]] == [("00:00", "01:45")]   # the ledger says so since 2026-11-03
 _t5["conditions"]["items"].append({"type": "hours_since_flag", "subject": "player", "flag_key": "party_went", "operator": "lt", "value": 8})
 STEP5 = dict(eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 3, "cap": 79}, setv("zoe_step", 5)],
              flags=[done(5), fset("zoe_together")])

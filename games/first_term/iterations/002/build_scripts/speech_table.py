@@ -74,6 +74,7 @@ SPEECH = {
     # ── Mark ──
     "hub_mark_garage": {
         "Take your time, @player,": M, "Jesus, @player. Laura's in the house.": M,
+        "Jesus, @player.": M,   # the same line on a Saturday, when Laura is out (mark.py, truth pass 2026-11-03)
         "You know what you look like right now, @player?": M, "That's not laundry, @player. That's a show.": M,
     },
     "hub_mark_kitchen": {"Salt.": M, "You missed one,": M},

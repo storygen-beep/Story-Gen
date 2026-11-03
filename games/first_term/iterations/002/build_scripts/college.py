@@ -338,6 +338,7 @@ for subj, grade, sch, code in [("Psychology", "grade_psych", PSYCH, "psych"), ("
         "nodes": [
             node("paper", "The midterm", [
                 P(f"The {subj} midterm. Desks pulled apart, bags at the front, a proctor reading a paperback by the door. The paper lands face-down in front of you, and the clock on the wall starts."),
+                WHO("Phones in your bags. Ninety minutes. Turn your papers over."),   # LO 2026-11-03: the proctor
                 G(cond(trait("intelligence", "lt", 10)), T("You know some of this. Not enough of it.")),
                 G(cond(trait("intelligence", "gte", 10)), T("You studied. You actually know this.")),
             ], [
@@ -371,6 +372,7 @@ for subj, grade, sch, code in [("Psychology", "grade_psych", PSYCH, "psych"), ("
             ] if code == "art" else []),
             node("result", "Pens down", [
                 P("Pens down. The proctor collects the papers row by row. The results go up on the portal next week, and on the office door."),
+                WHO("Stay in your seats till I have every paper."),
                 G(cond(trait(grade, "lt", 40)), T("It went badly. Laura is going to see this on the portal.")),
                 G(cond(trait(grade, "gte", 40), trait(grade, "lt", 70)), T("It went fine. A pass, probably. Nobody will say anything.")),
                 G(cond(trait(grade, "gte", 70)), T("It went well. For once the portal is going to make Laura smile.")),
@@ -599,6 +601,7 @@ out.append({
                 "conditions": cond(flag("worked_out", False))},
     "nodes": [node("floor", "The gym floor", [
         P("Treadmill, then the weights, then the mats. The mirror wall shows you everything you're doing, and everyone else doing it too."),
+        WHO("You using that bench, or can I jump in?"),   # LO 2026-11-03: someone on the gym floor
         G(cond(*SPORTS_ONLY), P("Just the sports bra and your bottoms. Your tits bounce in it with every stride on the treadmill, and in the mirror wall you can see two guys at the rack stop counting their reps. One looks away when you catch his eye. The other doesn't, and he doesn't come over either. Not yet.")),
         G(cond({"type": "clothing_item", "item_id": "jeans", "operator": "equipped"}), P("You're working out in jeans. It's stupid, and you feel it in every squat.")),
     ], [
@@ -632,10 +635,11 @@ out.append({
                 "schedules": sched(([0, 1, 2, 3, 4], "08:00", "19:45")), "conditions": cond(flag("opening_done"))},
     "nodes": [
         node("stacks", "The back stacks", [P(STACKS_SEEN),
+            WHO("Shh. Quiet. Take my cock and keep quiet."),   # LO 2026-11-03: the senior, in her ear (the park's ceiling: no fuck)
             VID("a couple having sex against a bookshelf at the end of a library aisle, his hand over her mouth", "couple fucking in library stacks", "quiet library sex against bookshelf", pool_dir="sex/library_stacks_seen_t5")],
             [go("Stay behind the shelf.", node="stay", mins=5, flags=[fset("saw_the_library_couple")]),
              go("Take the book and go.", loc="library", mins=5, flags=[fset("saw_the_library_couple")])]),
-        node("stay", "Behind the shelf", [P(STACKS_STAY),
+        node("stay", "Behind the shelf", [WHO("You're so wet. Not a sound, or they'll hear."), P(STACKS_STAY),
             VID("seen through a gap in library books, a couple having sex against the shelves", "voyeur watching couple in library", "peeking through bookshelf at couple sex", pool_dir="sex/library_stacks_stay_t5")],
             [go("Back to your desk.", loc="library", mins=10, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_the_library_couple")])]),
     ]})
