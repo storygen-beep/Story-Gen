@@ -5,6 +5,21 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-03 (late) — `a place is not a catalogue` counts each button label once
+
+- **What.** `scripts/gates.py`: the gate now counts a label written several times with different conditions as one
+  decision, since the player sees one version at a time. This is a same-length swap: the old `if decisions:` line now
+  holds the dedupe line. New test file `scripts/tests/test_gates_catalogue_labels.py` (3 tests).
+- **Why.** first_term's dinner screen counted as 38 buttons. It holds 21 "Done." and 16 "Ask what she saw in your
+  room." variants, and the player sees about 4 buttons. LO asked about "Laura's 38 buttons".
+- **Verified.**
+  - `pytest scripts/tests`: 827 passed.
+  - `--selfcheck` is green.
+  - `cite_check --strict` shows 0 wrong cites.
+  - On first_term the gate drops from 12 screens over the cap to 1 (Laura's kitchen hub, 10 labels).
+
+---
+
 ## 2026-11-03 (night) — "His Want pays for what happened, never for a no", 4 stale lines, and 6 gates so slips can't come back
 
 **Why.** LO's answer to the second alignment pass. His words: "Want pays for what happened, never for a no... Write

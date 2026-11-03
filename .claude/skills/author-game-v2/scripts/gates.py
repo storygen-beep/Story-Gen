@@ -8090,9 +8090,9 @@ def run_gates(model, game, state=None):
             choices = _node_choices(n)
             decisions = [ch for ch in choices
                          if (ch.get("targetType") or "trigger") == "node"
-                         or _choice_acts(ch)]
-            if decisions:
-                (per_hub if c["id"] in npc_bound else per_screen).append(len(decisions))
+                         or _choice_acts(ch)]  # 2026-11-03: one per label: variants of a button (conditions) show one at a time
+            decisions = list({str(ch.get("text") or ""): ch for ch in decisions}.values())
+            (per_hub if c["id"] in npc_bound else per_screen).append(len(decisions)) if decisions else None
             if len(decisions) > MENU_CEILING:
                 exits = len(choices) - len(decisions)
                 fat.append(f"{c['id']} @{c['loc']}: {len(decisions)} decisions on one screen"
