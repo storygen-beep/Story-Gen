@@ -275,12 +275,12 @@ how many fails are [off].
 | money gates something · sinks >= sources · no free uncapped income · a price is on its label · **the obligation is charged** | the economy can say no | `the-economy.md` |
 | **she can say no** | at least one choice in the whole game DECLINES an offer — the field puts a real refusal on one click in fifty, and 79% of them lead somewhere the yes does not | `the-surfaces.md` R5b |
 | **what money buys opens a door** | a thing bought with the currency that survives the night is READ somewhere — money that buys meter points buys nothing | `the-economy.md` R1b |
-| a place is not a catalogue | the backstop on room size — **not** the target | `the-surfaces.md` R2 |
+| a place is not a catalogue | the backstop on room size — **not** the target; counted per hour: the most distinct button labels whose time and weekday conditions can hold at the same step of the week (other conditions count as possibly true), with the hour named | `the-surfaces.md` R2 |
 | **a need shuts a door** | every declared need is read by a condition — a restore that gates nothing buys nothing | `the-meters.md` M8–M10 |
 | a need can be met every day | each declared need has something that raises it live on every weekday — its trigger's days, narrowed by the place's `hours` | `the-meters.md` M8–M10 |
 | **the walk-in floor** | a room where she works alone with someone scheduled carries a walk-in | `the-surfaces.md` R3 |
 | **an explicit beat carries a clip** | the picture is on the beat the player is reading, not on the one above it | `register.md` S1 · `engine.md` §8 |
-| **somebody speaks** | the game is not all narration — field median 2.93:1 | `register.md` S3 |
+| **somebody speaks** | the game is not all narration — field median 2.93:1; measured only on scenes with someone else there (a scene where she is alone is skipped and counted, LO 2026-11-03) | `register.md` S3 |
 | **speakers are named** | every `dialog`/`thought_bubble` says whose it is | `engine.md` §25 |
 | **effects use a live op** | no effect uses an `op` the engine silently discards | `engine.md` §21b |
 | **the climb is paid for** | every meter a gate reads has a brake on the rungs that raise it | `the-meters.md` M1–M5 |

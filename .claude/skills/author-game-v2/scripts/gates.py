@@ -7169,27 +7169,27 @@ def run_gates(model, game, state=None):
     # `thought_bubble` counts as narration on purpose — the bubble was for the NPC's
     # interior in the first place.
     # ═════════════════════════════════════════════════════════════════════════
-    narr_w, spoken_w = _speech_split(game)
+    narr_w, spoken_w, solo = _speech_split_with_company(game)   # LO 11-03: she alone = no talk
     ratio = (narr_w / spoken_w) if spoken_w else float("inf")
     mute = sorted(
         ((sum(b.words for b in c["beats"]), c["id"]) for c in model
          if not any(bl.get("type") == "dialog"
                     for n in (c.get("nodes") or []) for bl in _flat_blocks(n.get("blocks")))
-         and sum(b.words for b in c["beats"]) >= 60),
+         and sum(b.words for b in c["beats"]) >= 60 and c["id"] not in solo),
         reverse=True)
     gate("somebody speaks",
          None if not (narr_w + spoken_w) else ratio <= NARRATION_DIALOGUE_CEILING,
          (f"{ratio:.1f}:1 narration to dialogue — {spoken_w:,} spoken of {narr_w + spoken_w:,} "
           f"words (ceiling {NARRATION_DIALOGUE_CEILING:.0f}:1) · field median 2.93:1, 10 of 27 "
-          f"games at or under 2:1"
+          f"games at or under 2:1 · {len(solo)} solo canvases skipped: she is alone"
           if spoken_w else
-          f"NOBODY SPEAKS — {narr_w:,} words of prose and not one dialog block"),
+          f"NOBODY SPEAKS — {narr_w:,} words of prose and not one dialog block · {len(solo)} solo canvases skipped: she is alone"),
          [f"{cid}: {w:,} words, no dialog block anywhere" for w, cid in mute[:8]]
          + ([f"… and {len(mute)-8} more silent canvases"] if len(mute) > 8 else [])
          + (["the talk screen is the genre's second largest content kind — 15,774 of 54,630 "
              "field screens, 55 words, two-thirds spoken, one picture",
              "prefer a line of speech to a sentence describing a line of speech; if a person is "
-             "in the room, they talk (register.md)"]
+             "in the room, they talk; a scene where she is alone needs none (register.md)"]
             if ratio > NARRATION_DIALOGUE_CEILING else []))
 
     # G5 — traversal heat, redefined by CK7 (PRD v2 phase 4 · D9c), with the old clip-pool
@@ -8060,7 +8060,7 @@ def run_gates(model, game, state=None):
     npc_bound = {x["id"] for x in (game.get("canvases") or [])
                  if (x.get("trigger") or {}).get("npc")
                  or (x.get("trigger") or {}).get("requires_npc")}
-    fat, per_screen, per_hub = [], [], []
+    fat, per_screen, per_hub, peaks = [], [], [], []
     for c in model:
         if not c["rep"]:
             continue
@@ -8086,20 +8086,20 @@ def run_gates(model, game, state=None):
             # (`the-surfaces.md` R9). A location exit that fires nothing is R7's door
             # and stays uncounted; one that grants, flags or charges is an act that
             # happens to end in a room, and it is a decision.
-
             choices = _node_choices(n)
             decisions = [ch for ch in choices
                          if (ch.get("targetType") or "trigger") == "node"
                          or _choice_acts(ch)]  # 2026-11-03: one per label: variants of a button (conditions) show one at a time
+            peak, when = _catalogue_peak(game, c["id"], decisions, peaks) if decisions else (0, "")  # per hour, LO 11-03
             decisions = list({str(ch.get("text") or ""): ch for ch in decisions}.values())
-            (per_hub if c["id"] in npc_bound else per_screen).append(len(decisions)) if decisions else None
-            if len(decisions) > MENU_CEILING:
+            (per_hub if c["id"] in npc_bound else per_screen).append(peak) if decisions else None
+            if peak > MENU_CEILING:
                 exits = len(choices) - len(decisions)
-                fat.append(f"{c['id']} @{c['loc']}: {len(decisions)} decisions on one screen"
+                fat.append(f"{c['id']} @{c['loc']}: {peak} decisions on one screen at {when}"
                            + (f" (+{exits} exits, not counted)" if exits else ""))
     at_cap = sum(1 for k in per_screen if k == MENU_CEILING)
     shape = (f"rooms median {_median(per_screen)} · {at_cap}/{len(per_screen)} at the cap"
-             if per_screen else "no repeatable room screens")
+             if per_screen else "no repeatable room screens") + _catalogue_largest(peaks)
     if per_hub:
         shape += (f" · character hubs median {_median(per_hub)} "
                   f"({sum(1 for k in per_hub if k == MENU_CEILING)}/{len(per_hub)} at the cap)")
@@ -16101,6 +16101,148 @@ def _location_parent_adjacency(locs):
 def _phone_set_flags(game):
     """Every flag some phone thread or call reply sets."""
     return {f for _w, f, _v in _phone_reply_sets(game)}
+
+
+# ── a place is not a catalogue: count per hour (LO, 2026-11-03) ──────────────
+# A screen shows the buttons whose conditions hold NOW. Breakfast (06:30-08:00) and the
+# evening glass (20:00-22:00) are never on the kitchen screen together, so summing every
+# label the node carries over-counts what the player ever sees. The count is the most
+# distinct labels live at one step of the week. Only time items are read (`time_of_day`,
+# `weekday`, the trigger's `schedules`); flag, trait and every other item counts as
+# possibly true, so the number is an upper bound. first_term's hub_laura_kitchen read 10
+# by label and 7 at Tue 19:00 by hour, the same 7 a Chrome play shows (exits not counted).
+_CAT_STEP = 30
+_CAT_TRIGGERS = {}
+
+
+def _cat_trigger_slots(game, cid):
+    """Slots the canvas's own trigger allows: its `schedules` and its AND time items."""
+    key = id(game)
+    if key not in _CAT_TRIGGERS:
+        _CAT_TRIGGERS.clear()
+        _CAT_TRIGGERS[key] = {c.get("id"): c.get("trigger") or {} for c in game.get("canvases") or []}
+    trig = _CAT_TRIGGERS[key].get(cid) or {}
+    slots = set(_TR_ALL)
+    if trig.get("schedules"):
+        slots &= _tr_rows_slots(trig["schedules"])
+    return _tr_narrow(slots, [i for i in _tr_and_items(trig)
+                              if i.get("type") in ("time_of_day", "weekday")], {}, {})
+
+
+def _catalogue_peak(game, cid, decisions, peaks=None):
+    """(most distinct labels live at one step, "Tue 19:00" or "any hour").
+
+    Steps every `_CAT_STEP` minutes over the week plus every window's own start minute, so a
+    window that opens off the grid (06:45) is still sampled where it begins: the most
+    windows overlapping always happens at some window's start. Ties report the earliest step.
+    """
+    labels = {}
+    for ch in decisions:
+        labels.setdefault(str(ch.get("text") or ""), []).append(_tr_choice_items(ch))
+    timed = any(items for vs in labels.values() for items in vs)
+    allowed = _cat_trigger_slots(game, cid) or set(_TR_ALL)
+    if not timed:
+        best, when = len(labels), "any hour"
+    else:
+        starts = {_tr_min(i.get("start_time")) for vs in labels.values() for items in vs
+                  for i in items if i.get("type") == "time_of_day"} - {None}
+        grid = sorted((d, m) for d, m in allowed
+                      if m % _CAT_STEP == 0 or any(m == s // _TR_STEP * _TR_STEP for s in starts))
+        best, when = -1, "no hour"
+        for slot in grid:
+            live = sum(1 for vs in labels.values()
+                       if any(_tr_narrow({slot}, items, {}, {}) for items in vs))
+            if live > best:
+                best, when = live, _tr_slot_name(slot)
+        best = max(best, 0)
+    if peaks is not None:
+        peaks.append((best, cid, when))
+    return best, when
+
+
+def _catalogue_largest(peaks, k=3):
+    """' · largest: hub_laura_kitchen: 7 at Tue 19:00, ...' for the gate's headline."""
+    top = sorted(peaks, key=lambda p: (-p[0], p[1]))[:k]
+    return (" · largest: " + ", ".join(f"{cid}: {n} at {when}" for n, cid, when in top)) if top else ""
+
+
+# ── somebody speaks: a scene where she is alone needs no speech (LO, 2026-11-03) ──
+# The ratio and the silent list read only canvases with someone else there. A canvas is
+# SOLO when nothing puts a person in it:
+#   - no `trigger.npc` / `requires_npc` (its own, or the canvas that links into it);
+#   - no dialog block from anyone but the player (an npc, or a stranger: speaker "unknown");
+#   - no `npc_at_location is_present` item anywhere on it (conservative: a variant that
+#     shows only when someone is there makes the canvas a scene with company);
+#   - no character NAMED in its prose who could be there — a name counts unless the canvas
+#     itself asks `npc_at_location is_absent` for that person, or their schedule rows never
+#     put them at the canvas's place. So master_asleep (Laura and Mark asleep in their own
+#     bed) keeps its company and stays on the silent list, while zoe_bedroom_look (snooping
+#     through Zoe's room, Zoe asked absent) is skipped.
+# A stranger described without a name ("the old man on the bench") is not seen — a
+# HEURISTIC limit, said here so nobody reads the skip count as exact.
+def _speech_people(game):
+    """[(npc id, name regex, set of places their schedule rows name or None if no rows)]."""
+    out = []
+    for p in game.get("npcs") or []:
+        name = str(p.get("name") or "")
+        words = re.sub(r"^(?:dr|mr|mrs|ms|miss|prof|the)\.?\s+", "", name, flags=re.I)
+        if len(words) < 3 or not p.get("id"):
+            continue
+        rx = re.compile(r"\b%s\b" % re.escape(words), re.I if name.lower().startswith("the ") else 0)
+        rows = [r for r in p.get("schedules") or [] if isinstance(r, dict)]
+        out.append((p["id"], rx, {r.get("location") for r in rows} if rows else None))
+    return out
+
+
+def _canvas_has_company(c, parent, people):
+    trigs = [c.get("trigger") or {}, (parent or {}).get("trigger") or {}]
+    if any(t.get("npc") or t.get("requires_npc") for t in trigs):
+        return True
+    place = next((t.get("location") for t in trigs if t.get("location")), None)
+    present, absent = [], set()
+
+    def visit(d):
+        if isinstance(d, dict):
+            if d.get("type") == "npc_at_location":
+                if d.get("operator") == "is_absent":
+                    absent.add(d.get("npc_id"))
+                else:
+                    present.append(d.get("npc_id"))
+            if d.get("type") == "dialog":
+                spk = str((d.get("props") or {}).get("speaker") or d.get("speaker") or "")
+                if spk and spk != "player":
+                    present.append(spk)
+            for v in d.values():
+                visit(v)
+        elif isinstance(d, list):
+            for v in d:
+                visit(v)
+
+    visit(c.get("trigger") or {})
+    visit(c.get("nodes") or [])
+    if present:
+        return True
+    text = " ".join(str(b.get("content") or "") for n in c.get("nodes") or []
+                    for b in _flat_blocks(n.get("blocks")))
+    return any(rx.search(text) and pid not in absent and (where is None or place is None or place in where)
+               for pid, rx, where in people)
+
+
+def _solo_canvases(game):
+    """Ids of canvases where she is alone (see the block comment above)."""
+    by_id = {c.get("id"): c for c in game.get("canvases") or [] if c.get("id")}
+    parents = _tr_parents(game)
+    people = _speech_people(game)
+    return {cid for cid, c in by_id.items()
+            if not _canvas_has_company(c, by_id.get(parents.get(cid)), people)}
+
+
+def _speech_split_with_company(game):
+    """(narration words, spoken words, solo ids) over the canvases with someone else there."""
+    solo = _solo_canvases(game)
+    kept = dict(game, canvases=[c for c in game.get("canvases") or [] if c.get("id") not in solo])
+    narr, spoken = _speech_split(kept)
+    return narr, spoken, solo
 
 
 def main():

@@ -618,6 +618,9 @@ out.append({
               P("He's on your side. He'd cover for you with Laura in a heartbeat, and you both know it.")),
             G(cond(flag("knows_about_kayla"), trait("ryan_step", "gte", 0)),
               P("Kayla's hair tie is on his desk, next to his phone. He sees you see it.")),
+            # B1 (DECISIONS 147): Kayla walked in on her shower; his next day or two reads it
+            G(cond(flag("kayla_saw_her"), {"type": "hours_since_flag", "subject": "player", "flag_key": "kayla_saw_her", "operator": "lt", "value": 48}),
+              D(R, "Kayla says you've got nice tits."), P("He says it to his phone. His ears go red, and his eyes don't stay on the phone.")),
             G(cond(SHY), T("You should knock first. You should stop looking at his arms.")),
             G(cond(WARM, trait("ryan_step", "gte", 0)), T("You like it when he looks. You like it more when he tries not to.")),
         ], [
@@ -800,6 +803,9 @@ text = ("# =====================================================================
         "# =============================================================================\n")
 # Iteration 002, part 7: "Mom's gone to bed. Mark's downstairs." (was "asleep" until DECISIONS 83) holds only while they are (gate: a named person is where the line says)
 require_present(out, "ryan_04_feet_in_his_lap", here_at("npc_laura", "home_master_bedroom"), here_at("npc_mark", "home_living_room"))
+# B7 (DECISIONS 147): the walk-ins on his things (walkins.py holds the canvases; home.py emits them)
+import walkins
+assert "ryan_things" not in walkins.attach(out)
 # Knocking clears her "coming" (phone.py ryan_two_knocks_text, DECISIONS 87).
 for _c in out:
     if _c["id"] == "ryan_two_knocks":

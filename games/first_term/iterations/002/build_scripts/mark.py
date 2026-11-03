@@ -505,6 +505,8 @@ out.append(mark_hub("hub_mark_living_room", LR, "Mark, up late", "the living roo
     P("Mark is on the couch with the TV low and a beer on his knee."),
     G(cond(LAURA_IN_BED), P("Laura's gone up."), D(M, "Shut the door. Your mother's upstairs.")),
     POOL(D(M, "Can't sleep, @player?"), D(M, "Sit if you're sitting. Don't hover."), pid="mark_late_lines"),
+    # B3 (DECISIONS 147): he walked in on her watching channel 5 before his late TV row
+    G(cond(flag("mark_caught_ch5"), since("mark_caught_ch5", "lt", 24)), D(M, "Channel five, was it?"), P("He holds out the remote to you and doesn't let go of it straight away.")),
 ], leaks=LEAKS_LATE, towel=True, items=[
     (("beer", "Have a beer with him.", [], "had_drink_home", LR,
       [P("The game on low."), G(cond(LAURA_IN_BED), D(M, "Laura's upstairs. Keep it down.")), P("He hands you a can without asking.")],
@@ -648,12 +650,17 @@ SAW = [nadd(M, "want", 5)]
 SAW_FLAGS = [fset("mark_saw_her")]
 out.append({
     "id": "mark_00_the_dryer", "name": "The washer hose",
-    "description": "Mark's first accident (DECISIONS 124): Saturday in the garage, the washer hose soaks her; he looks, then turns his back and holds out a towel. His Want +5 and mark_saw_her either way; her \"Don't take it yet.\" pays Exhibitionism +1, cap 19.",
+    "description": "Mark's first accident (DECISIONS 124): Saturday in the garage, the washer hose soaks her; he looks, then turns his back and holds out a towel. His Want +5 on the way in (\"Load the washer.\", DECISIONS 147), mark_saw_her either way; her \"Don't take it yet.\" pays Exhibitionism +1, cap 19.",
     "trigger": {"location": "home_garage", "npc": M, "requires_npc": M, "is_repeatable": False, "priority": 9, "is_active": True,
                 "consume_on": "exit",
                 "schedules": [{"weekdays": [5], "start_time": "09:00", "end_time": "17:00"}],
                 "conditions": cond(flag("opening_done"), flag("mark_saw_her", False))},
     "nodes": [
+        # DECISIONS 147 (H5): his Want +5 moved off both endings onto the moment, the exit into the screen where he sees her
+        node("basket", "Laundry", [
+            P("You carry your basket down to the garage. Mark's at his bench with the radio on, his back to you. He grunts at you without turning round."),
+            D(M, "Machine's playing up. Mind the hose."),
+        ], [go("Load the washer.", node="hose", mins=5, eff=SAW)]),
         node("hose", "The washer hose", [
             GC(cond(BRA_ON), P(beat("mark_00_the_dryer", "hose_bra"))),
             GC(cond(BRA_OFF), P(beat("mark_00_the_dryer", "hose_nobra"))),
@@ -662,10 +669,10 @@ out.append({
             go("Don't take it yet.", node="stay", mins=2),
         ]),
         node("covered", "Back to his bench", [P(beat("mark_00_the_dryer", "covered"))],
-             [go("Go and change.", loc="home_hall", mins=10, consumes=True, eff=SAW, flags=SAW_FLAGS)]),
+             [go("Go and change.", loc="home_hall", mins=10, consumes=True, flags=SAW_FLAGS)]),
         node("stay", "Not yet", [P(beat("mark_00_the_dryer", "stay"))],
              [go("Go and change.", loc="home_hall", mins=10, consumes=True, flags=SAW_FLAGS,
-                 eff=SAW + [{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 19}])]),
+                 eff=[{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 19}])]),
     ]})
 
 text = ("# =============================================================================\n"

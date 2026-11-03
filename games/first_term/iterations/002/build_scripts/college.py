@@ -641,6 +641,16 @@ out.append({
              go("Take the book and go.", loc="library", mins=5, flags=[fset("saw_the_library_couple")])]),
         node("stay", "Behind the shelf", [WHO("You're so wet. Not a sound, or they'll hear."), P(STACKS_STAY),
             VID("seen through a gap in library books, a couple having sex against the shelves", "voyeur watching couple in library", "peeking through bookshelf at couple sex", pool_dir="sex/library_stacks_stay_t5")],
+            [go("Back to your desk.", loc="library", mins=10, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_the_library_couple")]),
+             # C1 (DECISIONS 147): Corruption 5; still hidden, still stage 1. The button pays +1, its screen's exit +1, cap 19
+             go("Move one aisle closer.", node="closer", mins=5, swl=True, cond_=cond(trait("corruption", "gte", 5)),
+                eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_the_library_couple")])]),
+        node("closer", "One aisle closer", [
+            P("You slide along to the next aisle, the one that backs right onto theirs. The gap between the books is a hand's width. They are close enough to touch."),
+            P("You can see the wet shine on his cock every time he pulls out of her. You can hear it. Her tits bounce in his face, and he bites one, and she jerks against his hand and moans into it."),
+            P("You hold your breath. If either of them turns their head, they're looking straight at you. Your nipples ache, and you are soaked."),
+            WHO("God, you're tight. Don't make a sound."),
+            VID("through a gap in library books, very close, a couple having sex against the shelves", "close up voyeur library sex through books", "peeking through bookshelf gap couple close", pool_dir="sex/library_stacks_closer_t5")],
             [go("Back to your desk.", loc="library", mins=10, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_the_library_couple")])]),
     ]})
 

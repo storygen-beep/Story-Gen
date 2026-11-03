@@ -132,17 +132,23 @@ out.append(solo("bathroom_shower", "Take a shower",
     "Hygiene +50, 20 minutes, once a day. Who's near reads who is home. Not while Ryan has the room.",
     "home_bathroom", [
         node("shower", "The shower", [
-            P("You lock the door, but the lock sticks halfway like always. You strip and step under the water while it's still cold. You gasp. Then it runs hot down your back and over your tits, and you stand there with your eyes shut and your hands flat on the tiles."),
+            # C4 (DECISIONS 147): while `shower_unlocked` is set she left the lock off, and every line about the lock says so
+            GC(cond(flag("shower_unlocked", False)), P("You lock the door, but the lock sticks halfway like always. You strip and step under the water while it's still cold. You gasp. Then it runs hot down your back and over your tits, and you stand there with your eyes shut and your hands flat on the tiles.")),
+            GC(cond(flag("shower_unlocked")), P("You don't touch the lock. You left it off last time, and you leave it off now. You strip and step under the water while it's still cold. You gasp. Then it runs hot down your back and over your tits, and you stand there with your eyes shut and your hands flat on the tiles. Anybody could open that door.")),
             # DECISIONS 124: a weekday shower started 06:25-06:45 runs into Ryan's 06:45 row: he bangs on the door
-            G(cond(here(R, "home_ryan_room"), wd(5, 6), ntrait(R, "want", "lt", 40)), P("Ryan's door opens across the hall. The bathroom handle turns, and the sticky lock gives an inch before it catches. You open your eyes. Through the gap Ryan is looking at you, naked and wet, your tits bare under the water. He looks at the floor and turns side-on, one hand in front of his shorts."), D(R, "Sorry."), P("He doesn't move away from the door for a long second.")),
+            G(cond(flag("shower_unlocked", False), here(R, "home_ryan_room"), wd(5, 6), ntrait(R, "want", "lt", 40)), P("Ryan's door opens across the hall. The bathroom handle turns, and the sticky lock gives an inch before it catches. You open your eyes. Through the gap Ryan is looking at you, naked and wet, your tits bare under the water. He looks at the floor and turns side-on, one hand in front of his shorts."), D(R, "Sorry."), P("He doesn't move away from the door for a long second.")),
+            G(cond(flag("shower_unlocked"), here(R, "home_ryan_room"), wd(5, 6), ntrait(R, "want", "lt", 40)), P("Ryan's door opens across the hall. The bathroom handle turns, and the door swings open a hand's width. Nothing stops it. You open your eyes. Through the gap Ryan is looking at you, naked and wet, your tits bare under the water. He looks at the floor and turns side-on, one hand in front of his shorts."), D(R, "Sorry."), P("He doesn't shut it for a long second.")),
             # false lines a3 #1 (DECISIONS 129): at want 40 the peek itself has him keep looking; no "This time" after "He looks at the floor"
-            G(cond(here(R, "home_ryan_room"), wd(5, 6), ntrait(R, "want", "gte", 40)), P("Ryan's door opens across the hall. The bathroom handle turns, and the sticky lock gives an inch before it catches. You open your eyes. Through the gap Ryan is looking at you, naked and wet, your tits bare under the water. He doesn't look at the floor. He turns side-on, one hand in front of his shorts, and keeps looking."), D(R, "Sorry."), P("He doesn't sound sorry. He doesn't look away until the door clicks shut.")),
-            G(cond(here(R, "home_ryan_room"), wd(0, 1, 2, 3, 4), tod("06:45", "06:25"), ntrait(R, "want", "lt", 40)), P("Ryan's door opens across the hall. The bathroom handle turns, and the sticky lock gives an inch before it catches. You open your eyes. Through the gap Ryan is looking at you, naked and wet, your tits bare under the water. He looks at the floor and turns side-on, one hand in front of his shorts."), D(R, "Sorry."), P("He doesn't move away from the door for a long second.")),
-            G(cond(here(R, "home_ryan_room"), wd(0, 1, 2, 3, 4), tod("06:45", "06:25"), ntrait(R, "want", "gte", 40)), P("Ryan's door opens across the hall. The bathroom handle turns, and the sticky lock gives an inch before it catches. You open your eyes. Through the gap Ryan is looking at you, naked and wet, your tits bare under the water. He doesn't look at the floor. He turns side-on, one hand in front of his shorts, and keeps looking."), D(R, "Sorry."), P("He doesn't sound sorry. He doesn't look away until the door clicks shut.")),
+            G(cond(flag("shower_unlocked", False), here(R, "home_ryan_room"), wd(5, 6), ntrait(R, "want", "gte", 40)), P("Ryan's door opens across the hall. The bathroom handle turns, and the sticky lock gives an inch before it catches. You open your eyes. Through the gap Ryan is looking at you, naked and wet, your tits bare under the water. He doesn't look at the floor. He turns side-on, one hand in front of his shorts, and keeps looking."), D(R, "Sorry."), P("He doesn't sound sorry. He doesn't look away until the door clicks shut.")),
+            G(cond(flag("shower_unlocked"), here(R, "home_ryan_room"), wd(5, 6), ntrait(R, "want", "gte", 40)), P("Ryan's door opens across the hall. The bathroom handle turns, and the door swings open a hand's width. Nothing stops it. You open your eyes. Through the gap Ryan is looking at you, naked and wet, your tits bare under the water. He doesn't look at the floor. He turns side-on, one hand in front of his shorts, and keeps looking."), D(R, "Sorry."), P("He doesn't sound sorry. He doesn't look away until he pulls the door to.")),
+            G(cond(flag("shower_unlocked", False), here(R, "home_ryan_room"), wd(0, 1, 2, 3, 4), tod("06:45", "06:25"), ntrait(R, "want", "lt", 40)), P("Ryan's door opens across the hall. The bathroom handle turns, and the sticky lock gives an inch before it catches. You open your eyes. Through the gap Ryan is looking at you, naked and wet, your tits bare under the water. He looks at the floor and turns side-on, one hand in front of his shorts."), D(R, "Sorry."), P("He doesn't move away from the door for a long second.")),
+            G(cond(flag("shower_unlocked"), here(R, "home_ryan_room"), wd(0, 1, 2, 3, 4), tod("06:45", "06:25"), ntrait(R, "want", "lt", 40)), P("Ryan's door opens across the hall. The bathroom handle turns, and the door swings open a hand's width. Nothing stops it. You open your eyes. Through the gap Ryan is looking at you, naked and wet, your tits bare under the water. He looks at the floor and turns side-on, one hand in front of his shorts."), D(R, "Sorry."), P("He doesn't shut it for a long second.")),
+            G(cond(flag("shower_unlocked", False), here(R, "home_ryan_room"), wd(0, 1, 2, 3, 4), tod("06:45", "06:25"), ntrait(R, "want", "gte", 40)), P("Ryan's door opens across the hall. The bathroom handle turns, and the sticky lock gives an inch before it catches. You open your eyes. Through the gap Ryan is looking at you, naked and wet, your tits bare under the water. He doesn't look at the floor. He turns side-on, one hand in front of his shorts, and keeps looking."), D(R, "Sorry."), P("He doesn't sound sorry. He doesn't look away until the door clicks shut.")),
+            G(cond(flag("shower_unlocked"), here(R, "home_ryan_room"), wd(0, 1, 2, 3, 4), tod("06:45", "06:25"), ntrait(R, "want", "gte", 40)), P("Ryan's door opens across the hall. The bathroom handle turns, and the door swings open a hand's width. Nothing stops it. You open your eyes. Through the gap Ryan is looking at you, naked and wet, your tits bare under the water. He doesn't look at the floor. He turns side-on, one hand in front of his shorts, and keeps looking."), D(R, "Sorry."), P("He doesn't sound sorry. He doesn't look away until he pulls the door to.")),
             G(cond(wd(0, 1, 2, 3, 4), tod("06:25", "06:45")), P("At quarter to seven the door shakes in its frame. Ryan, banging."), D(R, "Some of us have work, @player.nickname! Out!")),
             G(cond(here(M, "home_kitchen")), P("Downstairs, Mark shouts something about the hot water bill. The pipes knock, but you turn it up hotter.")),
             G(cond(here(L, "home_kitchen")), P("Laura's voice floats up the stairs. \"Leave some hot water, sweetheart!\"")),
-            POOL(P("You soap yourself slowly, all of you. The lock only catches halfway, and you take your time like someone could walk in. The steam fogs the glass until the room is white."),
+            POOL(P("You soap yourself slowly, all of you. The lock's no use, and you take your time like someone could walk in. The steam fogs the glass until the room is white."),
                  P("You tip your head back and let the water fill your mouth. It runs off your chin, down between your tits. You should be quick, but you stay until your fingertips wrinkle."),
                  P("You wash your hair twice because it feels good. The water drums on your shoulders, and you stay under it longer than you should.")),
         ], [go("Wrap up in a towel.", loc="home_bathroom", mins=20,
@@ -157,6 +163,15 @@ out.append(solo("bathroom_shower", "Take a shower",
                cond_=cond(wd(0, 1, 2, 3, 4), tod("06:25", "06:45")),
                eff=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": 50, "cap": 100}],
                wardrobe=STRIP + [{"action": "equip", "item_id": "towel"}]),
+            # C4 (DECISIONS 147): Exhibitionism 5, +1 cap 19; the shower is once a day, so is the pay. The door stays
+            # unlocked (`shower_unlocked`) until "Lock it again."; while it is, the walk-ins here roll 0.5 (walkins.py B1).
+            go("Leave the door unlocked.", loc="home_hall", mins=20, swl=True, cond_=cond(trait("exhibitionism", "gte", 5)),
+               eff=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": 50, "cap": 100},
+                    {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 19}],
+               flags=[fset("shower_unlocked")], wardrobe=STRIP + [{"action": "equip", "item_id": "towel"}]),
+            go("Lock it again.", loc="home_hall", mins=20, cond_=cond(flag("shower_unlocked")),
+               eff=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": 50, "cap": 100}],
+               flags=[funset("shower_unlocked")], wardrobe=STRIP + [{"action": "equip", "item_id": "towel"}]),
             go("\"Five minutes.\"", loc="home_hall", mins=30,
                cond_=cond(wd(0, 1, 2, 3, 4), tod("06:25", "06:45")),
                eff=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": 50, "cap": 100}, npc_add(R, "warmth", -1)],
@@ -337,7 +352,16 @@ tv_nodes += [
         [go("Keep watching.", loc="home_living_room", mins=30, eff=tv_pay(1, 19), cond_=cond(TV_GG)),
          go("Keep watching.", loc="home_living_room", mins=30, eff=tv_pay(1, 39), cond_=cond(TV_CUR)),
          go("Touch yourself.", node="touch", mins=5, cond_=cond(TV_CUR)),
+         # C2 (DECISIONS 147): Corruption 10, +1 cap 19; it ends the session like "Keep watching." (DECISIONS 91). The sound
+         # stays up for the day (`tv_loud`, cleared at midnight), and while it is the walk-ins here roll 0.5 (walkins.py B3).
+         go("Turn the sound up.", node="loud", mins=1, swl=True, cond_=cond(trait("corruption", "gte", 10))),
          go("Change the channel.", node="remote"), go("Turn it off.", loc="home_hall")]),
+    node("loud", "The sound up", [
+        P("You thumb the volume up, and up again. Her moans fill the whole room. The slap of his hips on her ass is loud as a hand clap. You can hear it bounce off the hall stairs."),
+        P("Anyone in the house can hear it now. Your nipples go hard. You squeeze your thighs together on the couch and leave it right where it is."),
+        WHO("Harder. Oh God, harder. Don't stop."),
+        VID("a couple having sex on a TV screen, the volume bar full, a girl on a couch", "porn on tv volume up living room", "loud porn on tv girl watching", pool_dir="sex/tv_adult_loud_t5")],
+        [go("Keep watching.", loc="home_living_room", mins=30, eff=tv_pay(1, 19), flags=[fset("tv_loud")])]),
     node("touch", "On the couch", [
         G(cond(here(M, "home_kitchen")), P("In the kitchen a cupboard bangs. Mark is home.")),
         G(cond(here(R, "home_ryan_room")), P("Upstairs, Ryan's music thumps through the ceiling.")),
@@ -430,9 +454,20 @@ out.append({"id": "ryan_door_ajar", "name": "His door's open a crack",
              go("Pull the door shut.", loc="home_hall", mins=2, flags=[fset("saw_ryan_alone"), fset("ryan_door_seen")])]),
         node("watch_low", "Keep watching", [P(beat("ryan_door_ajar", "watch_low")),
             VID("a young man on his bed coming over his stomach, his phone on his knee, seen through a door left ajar", "guy cumming to porn on phone seen through door", "voyeur watching man finish phone porn door crack", pool_dir="sex/ryan_door_watch_low_t5")],
-            [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_ryan_alone"), fset("ryan_door_seen")])]),
+            [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_ryan_alone"), fset("ryan_door_seen")]),
+             # C3 (DECISIONS 147): Corruption 15; the button pays +1 and its screen's exit pays +1: +2 a night, cap 19
+             go("Stay until his light goes off.", node="light_off", mins=10, swl=True, cond_=cond(trait("corruption", "gte", 15)), eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_ryan_alone"), fset("ryan_door_seen")])]),
         node("watch", "Keep watching", [P(RYAN_WATCH),
             VID("a young man on his bed coming over his stomach, seen through a door left ajar", "guy cumming jerking off seen through door", "voyeur watching man finish door crack", pool_dir="sex/ryan_door_watch_t5")],
+            [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_ryan_alone"), fset("ryan_door_seen")]),
+             go("Stay until his light goes off.", node="light_off", mins=10, swl=True, cond_=cond(trait("corruption", "gte", 15)), eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_ryan_alone"), fset("ryan_door_seen")])]),
+        # C3: after he comes he cleans up and lies there; she stays in the dark of the landing until his lamp goes off
+        node("light_off", "Until his light goes off", [
+            P("You stay at the crack. Ryan lies there with his chest heaving and his cock going soft on his stomach, in the mess he made. He wipes himself off with a sock and drops it on the floor."),
+            GC(cond(ntrait(R, "want", "lt", 30)), P("He picks up his phone again, scrolls, and puts it face down. Then he reaches over and clicks his lamp off.")),
+            GC(cond(ntrait(R, "want", "gte", 30)), P("He lies there with the pair from the laundry basket balled in his fist against his chest. Then he reaches over and clicks his lamp off, and he doesn't let go of them.")),
+            P("The landing goes black. You stand in the dark with your thighs pressed together, wet, and listen to his breathing go slow."),
+            VID("a dark bedroom seen through a door left ajar, a young man lying back on his bed, the lamp just switched off", "dark bedroom door ajar guy lying in bed after", "peeking through door dark bedroom lamp off", pool_dir="sex/ryan_door_light_off_t4")],
             [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_ryan_alone"), fset("ryan_door_seen")])]),
     ]})
 
@@ -790,6 +825,15 @@ out += event("home_event_ryan_door", "Ryan's door, a hand's width", "home_hall",
              curious=("Stop and look in.", "sheets/places/home_hall.md:48", []))
 # S6 (LO 2026-11-03, reverses DECISIONS 59's quiet events): "no we dont want nothing happens random events
 # anywhere in the game." The four "Nothing happens." events at home are gone.
+
+# ═════════════════════════════════════════════════════════════════════════════
+# THE WALK-INS AT HOME (heat proposal B1-B8, DECISIONS 147): walkins.py holds the canvases and the router rules;
+# the rules go on their host activities here (ryan_things, in ryan.py, takes its own).
+# ═════════════════════════════════════════════════════════════════════════════
+import walkins
+_left = walkins.attach(out)
+assert _left == {"ryan_things"}, _left
+out += walkins.CANVASES
 
 text = ("# =============================================================================\n"
         "# First Term — 5 · scenes · HOME (iteration 002, part 2): every house room's alone rows,\n"

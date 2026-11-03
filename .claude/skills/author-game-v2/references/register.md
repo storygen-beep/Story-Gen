@@ -599,6 +599,10 @@ across the two would be honest.
 > **Prefer a line of speech to a sentence describing a line of speech. If a person is in the room,
 > they talk.**
 
+A scene where she is alone needs no speech: the talk ratio is measured only on scenes with someone
+else there, and a scene with nobody else on the trigger, in a dialog block, in a presence condition
+or named in its prose is skipped (LO, 2026-11-03).
+
 ```
 FIELD   median 2.93 : 1 narration to dialogue        10 of 27 games at or under 2 : 1
 ```

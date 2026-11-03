@@ -5,6 +5,25 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-03 (late) — the button check counts per hour; the talk check skips scenes where she is alone
+
+**Why.** LO: "teach the button check to count per hour. Make the talking check skip scenes where nobody else is there, and
+write that into the skill with a CHANGELOG line."
+
+- 2026-11-03 — `scripts/gates.py`: gate `a place is not a catalogue` now counts per hour (LO: "teach the button check to count per hour"). A screen's count is the most distinct button labels whose time items (`time_of_day`, `weekday`, the canvas trigger's `schedules`) can hold at one step of the week, sampled every 30 minutes plus each window's own start minute; flag, trait and every other item count as possibly true, so the number is an upper bound. The headline names the three largest screens with the hour of the max, and each red row says the hour ("… 9 decisions on one screen at Wed 20:00"). New helpers `_cat_trigger_slots`, `_catalogue_peak`, `_catalogue_largest` sit above `main()`; the gate block keeps its line count and the label-dedupe line the old test reads. first_term (TOML of 17:29): hub_laura_kitchen 10 → 7 at Tue 19:00, the same 7 a Chrome play shows; gate FAIL → PASS. Verified: `scripts/tests/test_gates_k8_hour_and_solo.py` (6 catalogue cases, two still red), `--selfcheck` green, `cite_check.py --strict` 0.
+- 2026-11-03 — `scripts/gates.py`: gate `somebody speaks` skips canvases where she is alone (LO: "make the talking check skip scenes where nobody else is there"). A canvas is solo with no `trigger.npc` / `requires_npc` (its own or its linking parent's), no dialog block from anyone but the player, no `npc_at_location` item other than `is_absent`, and no character named in its prose who could be there (a name counts unless the canvas asks that person `is_absent` or their schedule rows never reach its place). Solo canvases leave both sides of the ratio and the silent list; the headline prints "N solo canvases skipped: she is alone". A person present and silent still counts. New helpers `_speech_people`, `_canvas_has_company`, `_solo_canvases`, `_speech_split_with_company` above `main()`; the G32 block was rewritten line for line. first_term (same TOML): 6.4:1 → 6.2:1, 29 solo canvases skipped, silent list 21 → 12; still FAIL. Verified by the same test file (5 talk cases, one still red) and the full suite (838 passed).
+- 2026-11-03 — `references/register.md` S3 and `SKILL.md` gate table: one sentence under "If a person is in the room, they talk" — a scene where she is alone needs no speech and the talk ratio is measured only on scenes with someone else there (LO, 2026-11-03); the `somebody speaks` and `a place is not a catalogue` rows say the same. Verified: `cite_check.py --strict` 0, `--selfcheck` green.
+
+**Verified.**
+- `--selfcheck` is green.
+- `pytest scripts/tests`: 838 passed (11 new in test_gates_k8_hour_and_solo.py).
+- `pytest .claude/skill-evals/author-game/tests`: 107 passed.
+- `cite_check --strict` shows 0 wrong cites.
+- On first_term, `a place is not a catalogue` now passes (Laura's kitchen: 7 at Tue 19:00). `somebody speaks` is 6.2:1,
+  with 29 solo canvases skipped.
+
+---
+
 ## 2026-11-03 (late) — `a place is not a catalogue` counts each button label once
 
 - **What.** `scripts/gates.py`: the gate now counts a label written several times with different conditions as one
