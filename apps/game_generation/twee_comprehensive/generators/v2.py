@@ -1218,7 +1218,16 @@ class TweeComprehensiveGeneratorV2:
                         "slot": item["slot"],
                         "image": item.get("image", ""),
                     }
-                    initial_equipped[item["slot"]] = item["id"]
+                    # The slot rule of setup.equipItem, in file order: a dress takes
+                    # off the top and bottom, a top or bottom takes off the dress. A
+                    # dress worn at start beside an initial top used to leave all three on.
+                    slot = item["slot"]
+                    if slot == "dress":
+                        initial_equipped["top"] = None
+                        initial_equipped["bottom"] = None
+                    if slot in ("top", "bottom"):
+                        initial_equipped["dress"] = None
+                    initial_equipped[slot] = item["id"]
             clothing_data_json = json.dumps(clothing_items)
             clothing_requirements_json = json.dumps(clothing_requirements)
 
@@ -11852,7 +11861,10 @@ setup.castRoster = function () {
         var loc = setup.getNpcLocation(slug);
         var locName = loc ? (setup._locNameFromUuid(loc.location) || "") : "";
         var next = setup.castNext(card, setup.evaluateGoals(card));
+        // A card with `heading` stands for somebody the player has not met: the row shows the
+        // heading in place of the name and the placeholder in place of the face.
         out.push({ slug: slug, npc: npc, card: card, next: next, locName: locName,
+                   name: card.heading || npc.name, faceHidden: !!card.heading,
                    here: !!locName, rank: locName ? 0 : (next.kind === "ready" ? 1 : 2), order: out.length });
     }
     out.sort(function (a, b) { return (a.rank - b.rank) || (a.order - b.order); });
@@ -11868,9 +11880,12 @@ setup.castHasSchedule = function (slug) {
 setup.castOpenSchedule = function (slug) {
     var id = setup.resolveNpcId(slug);
     var npc = (State.variables.npcs || {})[id];
+    // The live card's `heading` titles the dialog in place of the name, as on the row.
+    var card = setup.pickQuestsCard(slug);
+    var heading = card && card.heading;
     var today = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
         .indexOf(State.variables.game_state.time_state.current_day);
-    Dialog.setup((npc ? npc.name + " · " : "") + "Schedule", "cast-schedule-dialog");
+    Dialog.setup((heading ? heading + " · " : (npc ? npc.name + " · " : "")) + "Schedule", "cast-schedule-dialog");
     jQuery(Dialog.body()).empty().append(setup.castScheduleHtml(id, today < 0 ? 0 : today));
     Dialog.open();
 };
@@ -12900,14 +12915,14 @@ document.addEventListener("click", function (ev) {
   <details name="cast" class="cast-card">
     <summary>
       <span class="cast-face">
-        <<if _npc.portrait>>
+        <<if _npc.portrait and not _e.faceHidden>>
           <img @src="'{video_path}/' + _npc.portrait" @alt="_npc.name" onerror="this.style.display='none';this.parentElement.innerHTML='{escaped_svg}';">
         <<else>>
           {placeholder_svg}
         <</if>>
       </span>
       <span class="cast-head">
-        <span class="stats-name"><<print _npc.name>></span>
+        <span class="stats-name"><<print _e.name>></span>
         <<if _next.line>><span class="cast-line"><<print _next.line>></span><</if>>
       </span>
       <<if _e.here>>
@@ -18904,7 +18919,8 @@ setup.questsRoster = function () {
         var npc = npcs[slugMap[slug] || slug] || npcs[slug];
         var goalState = setup.evaluateGoals(card);
         var next = setup.castNext(card, goalState);
-        var e = { slug: slug, name: (npc && npc.name) || slug.replace("npc_", ""), card: card,
+        // A card with `heading` names the row itself, so a person not yet met is not named.
+        var e = { slug: slug, name: card.heading || (npc && npc.name) || slug.replace("npc_", ""), card: card,
                   next: next, flavor: flavorOf(card, goalState), line: next.line,
                   ready: false, now: false, soon: Infinity, order: order++ };
         if (card.terminal === true) { done.push(e); continue; }
@@ -19575,7 +19591,7 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
       <<run _doneCards.push(_slug)>>
     <<else>>
     <div class="quests-section">
-      <h3><<print ($npcs[_nid] && $npcs[_nid].name) || ($npcs[_slug] && $npcs[_slug].name) || _slug.replace("npc_", "")>></h3>
+      <h3><<print _card.heading || ($npcs[_nid] && $npcs[_nid].name) || ($npcs[_slug] && $npcs[_slug].name) || _slug.replace("npc_", "")>></h3>
       <<renderQuestsCard _card>>
     </div>
     <</if>>
@@ -19587,7 +19603,7 @@ setup.renderQuestsGoalBlock = function(card, goalState) {
     <<set _card = setup.pickQuestsCard(_slug)>>
     <<set _nid = _slugMap[_slug] || _slug>>
     <div class="quests-section">
-      <h3><<print ($npcs[_nid] && $npcs[_nid].name) || ($npcs[_slug] && $npcs[_slug].name) || _slug.replace("npc_", "")>></h3>
+      <h3><<print _card.heading || ($npcs[_nid] && $npcs[_nid].name) || ($npcs[_slug] && $npcs[_slug].name) || _slug.replace("npc_", "")>></h3>
       <<renderQuestsCard _card>>
     </div>
   <</for>>
