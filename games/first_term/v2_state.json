@@ -8558,7 +8558,10 @@
         "id": "silent_people_lines",
         "what": "17 scenes where someone was present and silent now have 1-2 spoken lines each (park couple, TV, the street, Laura alone and in the shower, Laura and Mark through the door, the exam proctor, the café, canteen, gym, Vance walking past, the library stacks, the party drink)",
         "built_at": "2026-11-03 17:31",
-        "chrome": null,
+        "chrome": {
+          "at": "2026-11-03 17:32",
+          "report": "Psychology midterm: the proctor speaks as Stranger on the paper screen; café coffee with tom_met unset: 'Stranger: What can I get you?' and no Tom line. Gates: speech is a dialog block, a named person is where the line says, no one is named before they're met, nobody is woken all PASS."
+        },
         "played": null
       }
     ]
