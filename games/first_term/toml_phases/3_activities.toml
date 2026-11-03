@@ -333,6 +333,8 @@ location      = "quad"
 is_repeatable = true
 priority      = 3
 is_active     = true
+# heat proposal B9-B20 (DECISIONS 147, chunk 3): the walk-ins here; the same rules as walkins_out.RULES (extras.py checks)
+substitutions = [{ target_canvas_id = "walkin_quad_team", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "quad", npc_id = "npc_jake", operator = "is_present" }, { type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "weekday", weekdays = [0, 2, 4] }, { type = "time_of_day", start_time = "08:30", end_time = "08:45" }] } }, { target_canvas_id = "walkin_quad_zoe", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "quad", npc_id = "npc_zoe", operator = "is_present" }, { type = "weekday", weekdays = [1, 3, 4] }, { type = "time_of_day", start_time = "14:30", end_time = "14:45" }] } }]
 
 [[canvases.nodes]]
 id   = "grass"
@@ -378,6 +380,8 @@ location      = "canteen"
 is_repeatable = true
 priority      = 4
 is_active     = true
+# heat proposal B9-B20 (DECISIONS 147, chunk 3): the walk-ins here; the same rules as walkins_out.RULES (extras.py checks)
+substitutions = [{ target_canvas_id = "walkin_canteen_zoe", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "canteen", npc_id = "npc_zoe", operator = "is_present" }, { type = "weekday", weekdays = [0, 2, 4] }, { type = "time_of_day", start_time = "11:45", end_time = "12:00" }] } }, { target_canvas_id = "walkin_canteen_jake", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "canteen", npc_id = "npc_jake", operator = "is_present" }, { type = "weekday", weekdays = [1, 3] }, { type = "time_of_day", start_time = "11:45", end_time = "12:00" }] } }, { target_canvas_id = "walkin_canteen_nadia", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "canteen", npc_id = "npc_nadia", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "hale_met", operator = "is_true" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "12:00", end_time = "12:15" }] } }]
 max_triggers_per_day = 1
 
 [[canvases.nodes]]
@@ -441,6 +445,8 @@ location      = "canteen"
 is_repeatable = true
 priority      = 3
 is_active     = true
+# heat proposal B9-B20 (DECISIONS 147, chunk 3): the walk-ins here; the same rules as walkins_out.RULES (extras.py checks)
+substitutions = [{ target_canvas_id = "walkin_canteen_zoe", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "canteen", npc_id = "npc_zoe", operator = "is_present" }, { type = "weekday", weekdays = [0, 2, 4] }, { type = "time_of_day", start_time = "11:45", end_time = "12:00" }] } }, { target_canvas_id = "walkin_canteen_jake", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "canteen", npc_id = "npc_jake", operator = "is_present" }, { type = "weekday", weekdays = [1, 3] }, { type = "time_of_day", start_time = "11:45", end_time = "12:00" }] } }, { target_canvas_id = "walkin_canteen_nadia", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "canteen", npc_id = "npc_nadia", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "hale_met", operator = "is_true" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "12:00", end_time = "12:15" }] } }]
 
 [[canvases.nodes]]
 id   = "listen"
@@ -549,6 +555,8 @@ location      = "library"
 is_repeatable = true
 priority      = 4
 is_active     = true
+# heat proposal B9-B20 (DECISIONS 147, chunk 3): the walk-ins here; the same rules as walkins_out.RULES (extras.py checks)
+substitutions = [{ target_canvas_id = "walkin_library_nadia", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "library", npc_id = "npc_nadia", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 2, 4] }, { type = "time_of_day", start_time = "14:30", end_time = "14:45" }] } }]
 max_triggers_per_day = 2
 
 [[canvases.nodes]]
@@ -687,6 +695,8 @@ location      = "hale_office"
 is_repeatable = true
 priority      = 2
 is_active     = true
+# heat proposal B9-B20 (DECISIONS 147, chunk 3): the walk-ins here; the same rules as walkins_out.RULES (extras.py checks)
+substitutions = [{ target_canvas_id = "walkin_door_hale", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "hale_office", npc_id = "npc_hale", operator = "is_present" }] } }]
 
 [[canvases.nodes]]
 id   = "door"
@@ -727,6 +737,8 @@ location      = "art_office"
 is_repeatable = true
 priority      = 2
 is_active     = true
+# heat proposal B9-B20 (DECISIONS 147, chunk 3): the walk-ins here; the same rules as walkins_out.RULES (extras.py checks)
+substitutions = [{ target_canvas_id = "walkin_door_art", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "art_office", npc_id = "npc_art_lecturer", operator = "is_present" }] } }]
 
 [[canvases.nodes]]
 id   = "door"
@@ -767,6 +779,8 @@ location      = "business_office"
 is_repeatable = true
 priority      = 2
 is_active     = true
+# heat proposal B9-B20 (DECISIONS 147, chunk 3): the walk-ins here; the same rules as walkins_out.RULES (extras.py checks)
+substitutions = [{ target_canvas_id = "walkin_door_business", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "business_office", npc_id = "npc_business_lecturer", operator = "is_present" }] } }]
 
 [[canvases.nodes]]
 id   = "door"
@@ -807,6 +821,8 @@ location      = "ta_office"
 is_repeatable = true
 priority      = 2
 is_active     = true
+# heat proposal B9-B20 (DECISIONS 147, chunk 3): the walk-ins here; the same rules as walkins_out.RULES (extras.py checks)
+substitutions = [{ target_canvas_id = "walkin_door_ta", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "ta_office", npc_id = "npc_bio_ta", operator = "is_present" }] } }]
 
 [[canvases.nodes]]
 id   = "door"
@@ -847,6 +863,8 @@ location      = "dean_office"
 is_repeatable = true
 priority      = 2
 is_active     = true
+# heat proposal B9-B20 (DECISIONS 147, chunk 3): the walk-ins here; the same rules as walkins_out.RULES (extras.py checks)
+substitutions = [{ target_canvas_id = "walkin_door_dean", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "dean_office", npc_id = "npc_dean", operator = "is_present" }] } }]
 
 [[canvases.nodes]]
 id   = "door"
@@ -1121,6 +1139,8 @@ location      = "party_house"
 is_repeatable = true
 priority      = 3
 is_active     = true
+# heat proposal B9-B20 (DECISIONS 147, chunk 3): the walk-ins here; the same rules as walkins_out.RULES (extras.py checks)
+substitutions = [{ target_canvas_id = "walkin_tub_zoe", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "party_house", npc_id = "npc_zoe", operator = "is_present" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "23:30", end_time = "00:00" }] } }]
 max_triggers_per_day = 1
 # naked in the tub with strangers is naked for a group: Watched (DECISIONS 124)
 conditions    = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 } ] }

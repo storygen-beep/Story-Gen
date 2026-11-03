@@ -367,6 +367,9 @@ for _c in out:
         clear_on_leave(_c, "hale_office_booked")
     if _c["id"] == "hale_thursdays":
         clear_on_leave(_c, "hale_thursday_booked")
+# heat proposal B20 (DECISIONS 147 chunk 3): his office hub reads his door
+import walkins_out
+walkins_out.hub_read(out)
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards)
 open(__import__("sys").argv[1], "w").write(text)
 print("hale:", len(out), "canvases,", len(cards), "cards")

@@ -124,6 +124,16 @@ for trait_k, bands in [
                                   for v, l in SMALL_RUNGS.get((trait_k, lo), [])],
                                 {"type": "trait", "subject": "player", "trait": trait_k, "op": "gte", "value": hi, "label": label}]})
 
+# THE WALK-INS OUTSIDE THE HOUSE (heat proposal B9-B20, DECISIONS 147 chunk 3): walkins_out.py holds the canvases and
+# the router rules. Here: the rules on this file's three hosts, the check that 3_activities.toml's hosts carry the same
+# rules, and every walk-in canvas (emitted once, here).
+import os
+import walkins_out
+_done = walkins_out.attach(out)
+assert _done == {"cafe_coffee", "vance_house_look", "zoe_bedroom_look"}, _done
+walkins_out.check_toml_hosts(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "toml_phases", "3_activities.toml"))
+out += walkins_out.CANVASES
+
 text = "# ── rows so no place stands empty, the uniform's readers, cards for the light cast and her stages ──\n"
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards)
 open(__import__("sys").argv[1], "w").write(text)

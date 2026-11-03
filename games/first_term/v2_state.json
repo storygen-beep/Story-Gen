@@ -8583,6 +8583,16 @@
           "report": "Chrome: Jake's gym hub at Tue 16:35 (jake_first_time, Bold) offers 'Wait for him after training.'; its offer screen gives 'Get on your knees.' and the written no 'Not here, Jake.'; keg_guy_counter and jake_party_bathroom are built with their no screens. Gates: traversal heat 24/31 PASS, explicit pools 26/38 PASS, every truth gate PASS; 21 explicit beats measured with --beat (3-8 frozen words each, last sentences on the body)."
         },
         "played": null
+      },
+      {
+        "id": "chunk3_walkins_out",
+        "what": "B9-B20 walk-ins outside the house: 20 walker canvases (Gary, the team, Jake, Zoe, Nadia, Hale, Vance, the five office doors) (DECISIONS 150)",
+        "built_at": "2026-11-03 19:05",
+        "chrome": {
+          "at": "2026-11-03 19:05",
+          "report": "Chrome: walkin_cafe_gary opens 'Booth four comes to you' with 'His knee finds yours.'; walkin_door_dean shows his line and 'Step back into the corridor.'. Builder's headless dice check: 35 cases, each walk-in fires in its window and returns null outside it or with the walker absent; 59 new nodes render with no errors. Gates: the walk-in floor 24/24 PASS; 75/90; every truth gate PASS."
+        },
+        "played": null
       }
     ]
   }
