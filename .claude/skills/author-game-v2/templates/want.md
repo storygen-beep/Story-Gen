@@ -70,10 +70,11 @@ Record as `want.threads[] = {id, name, person, place, system, link}`; each place
 
 ## Before you leave this page
 
-1. What can she reach at the top that she cannot at the bottom? (§4)
-2. Which person would a player miss if deleted, and what does he want back? (§5)
+1. What does release 41 add? (ask it of the climb, §4)
+2. What can she reach at the top that she cannot at the bottom? (§4)
+3. Which person would a player miss if deleted, and what does he want back? (§5)
    Does she have 4–6 threads, each with a named person? (§5)
-3. Run the vocabulary check and read the list — a list, never a score:
+4. Run the vocabulary check and read the list — a list, never a score:
 
    ```
    python3 scripts/gates.py --words games/<slug>/WANT.md

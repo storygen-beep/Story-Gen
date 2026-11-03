@@ -46,9 +46,10 @@ what their players quote:
 7. **The moment to remember.** Which of the five kinds — her firsts · being seen · her body as the
    price for something she needs · taboo at home · a consequence she lives with — and the line a
    player would quote.
-8. **The door it opens, and the clip we can get.** A door for a later release hangs on a meter rung
-   this release cannot reach, never on a flag nothing sets: the build refuses a gate on a flag no
-   canvas sets (`validate_flag_chains()`, `v2.py:15104`). The live goal, mystery or rival beat it moves,
+8. **What it opens, and the clip we can get.** Where this release stops, the arc's last quest card
+   says so, and says what comes next if anything does ("Every release ends on an opening" below).
+   Never gate a later step on a flag nothing sets: the build refuses a gate on a flag no canvas sets
+   (`validate_flag_chains()`, `v2.py:15104`). The live goal, mystery or rival beat it moves,
    and a clip that exists or can be found for it — at the idea stage, `intent` (what to look for) is
    enough, and it is found later. A moment with no clip is a moment the game cannot show.
 
@@ -197,13 +198,19 @@ A milestone whose only flag is its own once-guard is not a milestone and owes no
 
 ## Every release ends on an opening
 
-Not a cliffhanger. **A door.**
+Not a cliffhanger. **A goal for the next one.**
 
 A question ("who killed him?") can be answered by reading a thread. A want ("I want into that
 room / I want her to say yes") can only be satisfied by playing. Wants sell the next release.
 
-Mechanically: at least one choice rendered `show_when_locked = true`, attached to a person or
-place the player already cares about. Gate 9.
+**Every arc's last quest card says where this release ends, and what comes next if anything does**
+(LO, 2026-11-03; it replaced "every release ends on a visible locked door"). That end line is the
+card's `terminal_text` on its `terminal = true` card (`engine.md` §23): *"Corruption 60 opens the
+rest of this, in the next release."*, or *"You've had all of him there is."* when the arc has truly
+ended. Make the line true: a card must not say "in the next release" about a step this release
+already reaches. A locked door is no longer required. A later release may fix things, add content
+and move thresholds, so no rule says a door must be unreachable this release. Gate `ends on an
+opening` reads the cards: every declared ladder's last card has an end text.
 
 Two measured failure modes to avoid:
 
@@ -476,6 +483,6 @@ is never finished. *(LO decided.)*
   not both; the funnel hands over into something that is open at the minute it lands; every
   character is met before their portrait goes live; the anchor says what kind of place it is the
   first time she walks in.
-- **It ends on a door**, like every release after it.
+- **Every arc's last quest card says where it ends**, like every release after it.
 
 Then set `phase = "release"` in `v2_state.json` and never build a "chapter" again.

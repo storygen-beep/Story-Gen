@@ -6,12 +6,12 @@
 | row | answer |
 |---|---|
 | person · step | <npc_id> · <n> |
-| want (test 1) | <what he visibly wants here> |
-| next step (test 2) | <what goes one step further> |
-| hook (test 3) | <what it points at next> |
-| what she wears here (test 8) | <state or item — and the condition behind it: trigger · group · `entry_conditions` · the choice in · an equip; or "not named"> |
+| want | <what he visibly wants here> |
+| next step | <what goes one step further> |
+| hook | <what it points at next> |
+| what she wears here | <state or item — and the condition behind it: trigger · group · `entry_conditions` · the choice in · an equip; or "not named"> |
 
-## The step row (S14) — filled before the step is written
+## The step row — filled before the step is written
 
 Two empty columns: the step is not written. One empty column: the Why table says why.
 
@@ -22,9 +22,9 @@ Two empty columns: the step is not written. One empty column: the Why table says
 |---|---|---|---|---|---|---|
 | <what a player would name; what is new against the step before> | <who is there or finds out · "nobody", declared> | <caught · a secret · a person · a price> | <out loud; the button carries it> | <what he does, for his own reason> | <finished on the body · the ladder's one cut-off> | <a rule · schedule · label · price · standing line · the next step> |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | <node id> | <line> | <yes · no> | <label → node or location> | <trait op value · flag> |
 

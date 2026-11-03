@@ -457,6 +457,9 @@ this same corpus got it wrong:
   `<<speech>>`, `<<say>>`, `<<nm "Karlee" "…">>`, `<<chat portrait "…">>`,
   `<div class="npctextbox">`, or one macro per character (`<<Mc>>`, `<<AmyBd>>`). A quote-counter
   sees none of it and reports the most spoken game in the corpus as 585 : 1 narration.
+  **Ours is the same, so write it that way** (LO, 2026-11-03): every spoken line is a `dialog`
+  block with its speaker. A quote inside a `paragraph` counts as narration — the portrait and the
+  speaker name render only on a `dialog` block, and the gates count only those.
 
 ---
 

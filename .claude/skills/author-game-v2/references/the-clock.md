@@ -249,10 +249,11 @@ cooldown_message  = "<the hours, as a bare phrase>"
 ⚠️ **BOTH KEYS GO AT THE TOP LEVEL OF `[canvases.trigger]`. THIS SNIPPET PUT THEM IN
 `[canvases.trigger.metadata]` UNTIL 2026-08-25 AND THAT PATH IS DEAD.** The importer reads
 `trig_def.get("show_when_blocked")` and `_require_str(trig_def, "cooldown_message")` —
-`template_import.py:2446-2447`, the trigger table itself — and then writes them **into** metadata at
-`:8009-8010` for the generator to read back at `v2.py:13532-13533`. Authoring them in `metadata` directly
-skips the importer entirely: the TOML is valid, the build is green, every gate passes, and
-`showWhenBlocked` reaches the built HTML **zero** times.
+`template_import.py:2566-2567`, the trigger table itself — and then writes them **into** metadata at
+`:9365-9366` for the generator to read back at `v2.py:14549-14550`. Authoring them in `metadata` directly
+skips the importer entirely: the TOML is valid, the build is green, and `showWhenBlocked` reaches the
+built HTML **zero** times. The gate `no canvas key is discarded` now flags a trigger key written under
+`[canvases.trigger.metadata]` (LO, 2026-11-03).
 
 **The message is a bare phrase, not a sentence.** The engine renders it as `<row name> — <message>`,
 so restating the row's own name doubles it: *"Work the counter — The counter — mornings, seven till

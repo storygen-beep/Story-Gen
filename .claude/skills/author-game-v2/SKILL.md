@@ -1,6 +1,6 @@
 ---
 name: author-game-v2
-description: EXPLICIT-INVOKE ONLY — the experimental v2 of game authoring, run when the user asks for "/author-game-v2", "author-game v2", "v2 on <slug>", or "start a v2 game". Authors adult sandbox games as a release stream that never stalls — a goal can end and a new one opens — rather than as a story with chapters: one ascent meter that buys access, locations that must be filled before new ones open, explicit content living in the surfaces the player returns to, and every release ending on a visible locked door. Ships a runnable scoreboard (scripts/gates.py) whose thresholds came from measuring a top game's own source and, for the world/guidance/economy/prose gates, a field of 18 shipped sandboxes. Do NOT use for a plain "start a new game" / "continue writing <game>" / "add an NPC or beat to games/<slug>" request; those belong to the incumbent author-game skill until the user promotes this one.
+description: EXPLICIT-INVOKE ONLY — the experimental v2 of game authoring, run when the user asks for "/author-game-v2", "author-game v2", "v2 on <slug>", or "start a v2 game". Authors adult sandbox games as a release stream that never stalls — a goal can end and a new one opens — rather than as a story with chapters: one ascent meter that buys access, locations that must be filled before new ones open, explicit content living in the surfaces the player returns to, and every release ending on a visible goal for the next one. Ships a runnable scoreboard (scripts/gates.py) whose thresholds came from measuring a top game's own source and, for the world/guidance/economy/prose gates, a field of 18 shipped sandboxes. Do NOT use for a plain "start a new game" / "continue writing <game>" / "add an NPC or beat to games/<slug>" request; those belong to the incumbent author-game skill until the user promotes this one.
 ---
 
 # author-game v2 — the release stream
@@ -255,7 +255,7 @@ how many fails are [off].
 | repeatable explicit media cycles | re-entered surfaces cycle their clips instead of repeating one | `gates.py` THRESHOLDS |
 | traversal heat | ~60% of destinations hold a sex scene (3+ explicit words or `_t4`/`_t5` media) | `the-board.md` §1 |
 | explicit pools by place | the old heat count: cycling explicit pools | `the-board.md` §1 |
-| her climb | a paid repeatable is introduced, then a step, then a first time; it is shut on a new save; each act node has two voices on a declared tier and a stop exit | `the-arc.md` A15 |
+| her climb | a paid repeatable is introduced, then a step, then a first time; it is shut on a new save; each act node has two voices on a declared tier and a stop exit; only a declared sex-for-pay system's canvases count as paid, and a game with none gets n/a on the paid part | `the-arc.md` A15 |
 | every stage has a way up | each stage of a declared meter, below its highest gate, has repeatable acts that pay sober, read through every choice on the path and only from flags and step counters that stage can reach; prints the daily points and days to the next stage, the drink-only acts, and the Quests card's promise beside what pays | `the-arc.md` A4d |
 | a no has content | a `consume_on` step's exits that leave it unused park, are a labelled final, or reach a reply that changes something | `the-arc.md` A3 |
 | the men's numbers are read | each trait a man keeps is shown on the cast page (hidden and counters aside) and read by a gate and a line | `the-meters.md` W1 |
@@ -264,9 +264,9 @@ how many fails are [off].
 | standing surface | every schedule row has something in the room on each of its weekdays; no portrait is stranded or day-capped on its trigger | `the-board.md` §2 |
 | milestones open something | a milestone that turns nothing on is a dead end. A read that is only `is_false` does not count as opening | this file, "three kinds of content" |
 | ladders move forward | every step declared in `board.characters[].ladder` matches its canvas — place, hours, trigger conditions, the counter it reads (true at N−1, false at N) and sets (N), and the person is there — and every unlock on it can be earned before the step (the day roll's `traitEffects` count). The door's step skips the earnable check; a `fires_from = "opening"` step skips place, hours, person and counter read. n/a until a ladder is declared | `references/state.md` |
-| meter ceiling | the top of a bar buys something | `the-board.md` §3 · `state.md` |
-| ends on an opening | the release closes on the door declared in `release_page.door` (else `board.door`): locked at the start, openable later | `the-release.md` |
-| the door can be seen again | the door's canvas is repeatable, or `consume_on = "exit"` with the door choice not consuming — a one-time canvas shows the door once | `the-release.md` |
+| meter ceiling | the top of a bar buys something; a band above every cap this release pays on that meter is not a promise yet, and the gate reads the caps to skip it | `the-board.md` §3 · `state.md` |
+| ends on an opening | every arc's last quest card says where this release ends: each declared ladder's last card has an end text (`terminal_text`); it lists the ones without | `the-release.md` |
+| the door can be seen again | only when a door is declared (`release_page.door`, else `board.door`): its canvas is repeatable, or `consume_on = "exit"` with the door choice not consuming — a one-time canvas shows the door once; n/a with no door | `the-release.md` |
 | ascent tiers expand the world | your meters open content; **and no player meter quietly closes it** | `the-board.md` §3 |
 | world reachable · residents have homes | the map is a place someone could draw | `the-map.md` |
 | **every authored node is reachable** | no node outside a canvas's entry has zero inbound edges — a screen nothing links to is content the player can never open | `the-surfaces.md` R9 |
@@ -306,9 +306,9 @@ how many fails are [off].
 | every clothing state is read three times | each `board.wardrobe` state and key item has 3+ readers; n/a with clothing off; a `--ship` block | `the-meters.md` W7 |
 | her clothes are backed | a line naming her garment has a check that she wears it; a `--ship` block | `register.md` "The truth rule" |
 | every chat is caused by a scene | each chat's and call's trigger flag is set by a scene, directly or through a caused chat; n/a with no phone; a `--ship` block | `the-phone.md` |
-| a chat is short and timed | 3–7-word bubbles, ≤3 a message, a delay and an hour window on each trigger; a warning | `the-phone.md` P3 · P4 |
+| a chat is short and timed | bubbles of 7 words or fewer, ≤3 a message, a delay and an hour window on each trigger; a warning | `the-phone.md` P3 · P4 |
 | a system meets its floors | a daily card's pool ≥20 built canvases, ≥4 lewd rungs, ≥2 acts a rung; a warning | `the-systems.md` SY8 |
-| sex for pay names the amount | a choice on an explicit canvas that pays her names the sum; a warning | `the-systems.md` SY8 |
+| sex for pay names the amount | a choice that pays her for sex, on a canvas in the `pool[]` of a system card marked `"sex_for_pay": true`, has its sum said in the scene before her yes; wages, loans and gifts are not read; n/a with no such system; a warning | `the-systems.md` SY8 · `the-arc.md` A15 |
 | a skill rejection names a notebook entry | each `release_page.rejections[]` whose layer is the skill names its notebook entry; a warning | `the-release.md` "When LO rejects something" |
 | no unknown topic | every `board.coverage[]` topic has a status but `unknown`; no list is red; a warning, `--ship` names each | `templates/sheets/coverage.md` |
 | a goal's end is built | each goal that can end, except the last, names an `ends_flag` some effect sets; a warning | `the-want.md` §0 |
@@ -484,7 +484,7 @@ with LO's yes — never as a side effect of another edit. *(LO decided.)*
   forward*, and `playtest.reach_step` climbs it in the build — the clock and place are set per
   step, the counter never is) · LO signed the playtest (`release_page.signed_by_lo`) · the build
   exists and is a release build (`--release`) · the last release's saves load (`--saves`) · the
-  declared door works · the pressure can be paid or is signposted · no empty rooms (+ exit-only) · the build
+  last quest card of every arc says where it ends · the pressure can be paid or is signposted · no empty rooms (+ exit-only) · the build
   matches the release page · the reader passed (each touched canvas has verdicts; a FAIL needs a waiver — `the-release.md` 6b) · every system has a card · every system leads to a person or a sex scene · every clothing state is read three times · her clothes are backed · every chat is caused by a scene · the nine truth gates marked *a `--ship` block* above. **Everything else is REPORTED** for LO to judge when he plays —
   dialogue share, every hub met first, clips on explicit beats, the explicit floor, location fill,
   the walk-in floor, traversal heat, explicit pools by place, sentence length, a card per ladder step that says where and
@@ -656,6 +656,8 @@ gate. A piece made by a template script passes the truth gates before anyone pla
 - Then play it yourself in Claude in Chrome on the dev build: does it fire, is every line true,
   can she climb. Fix what is broken and record it:
   `pieces.py chrome <slug> <piece-id> "<what you found>"`. "Is it hot?" is LO's call, not this note's.
+- LO's "skip the play check" covers only his own `played` record. It never skips your Chrome play:
+  the building session still plays each piece and records `chrome` (LO, 2026-11-03).
 - Before a release, LO plays the build and his own words go on every piece:
   `pieces.py played <slug> --all "<his words>"`. `release_upload.py` and the pre-commit ship check
   refuse a public (non-dev) build until they do. A skip is a note too:

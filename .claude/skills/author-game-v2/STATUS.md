@@ -23,7 +23,7 @@ described a world of ten gates and one test game, and had gone materially wrong.
 v1 authored games as stories with chapters. The genre does not work that way: a sandbox is a
 **never-ending release stream**, and everything follows from that — one ascent meter that buys
 access, locations filled before new ones open, explicit content living in the surfaces the player
-returns to, and every release ending on a visible locked door.
+returns to, and every release ending on a visible goal for the next one.
 
 ## The commitment that has held
 

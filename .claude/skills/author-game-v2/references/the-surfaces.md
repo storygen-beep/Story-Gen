@@ -153,7 +153,11 @@ inside one of them, or it belongs on a different surface entirely.
   screen.
 - **A system is what she does here again and again.** A job is a system with a card
   (`the-systems.md` SY8) — one row per system, not one per till-shaped noun.
-- **A person is a hub**, one per schedule row, and it is judged by the object test above.
+- **A person is a hub**, one per schedule row, and it is judged by the object test above. When the
+  person isn't busy, their screen offers at least one choice aimed at them besides the exit. When they
+  are busy (teaching, working, on the phone), the screen may be look-only, and it says why in one line
+  (*"He's mid-lecture. He catches your eye once, then goes back to his slides."*) so it doesn't look
+  broken (LO, 2026-11-03).
 - **A menu item with HOURS says so when it is shut.** A canvas whose schedule window has closed
   simply disappears from the list — no greyed line, no reason, no hours — which reads as a broken
   game rather than a timetable. `show_when_blocked = true` plus a `cooldown_message` keeps the entry
@@ -858,7 +862,9 @@ wins.
 
 **Floor: every location carries at least one `trigger_mode = "random"` event.** It is the cheapest of
 the four to author, it is the only one that can replace the whole screen, and it is engine-cooled per
-location so it cannot spam (`references/engine.md` §7).
+location so it cannot spam (`references/engine.md` §7). **A random event always has content.** Never write
+a "Nothing happens." event; LO: *"no we dont want nothing happens random events anywhere in the game"*
+(2026-11-03).
 
 > ⚠️ **R5 and R6 are reported as LINTS, not gates, with no threshold.** The four mechanisms above
 > are what to look for.

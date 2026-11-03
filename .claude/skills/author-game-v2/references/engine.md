@@ -101,7 +101,9 @@ bands = [ { min = 0, max = 24, text = "…" }, … ]
 ```
 
 A top band with **no** `max` is unbounded by design and promises nothing. A top band *with* a
-`max` is a promise: content must exist up to it.
+`max` is a promise: content must exist up to it. A band above every cap this release pays on that
+meter is not a promise yet: the player cannot reach it, so it belongs to a later release. Gate
+`meter ceiling` reads the caps and skips such a band (LO, 2026-11-03).
 
 ---
 
@@ -162,8 +164,10 @@ v2.py:6673   var cooldowns = sv.game_state.random_cooldowns = sv.game_state.rand
              // after a random event fires, skip N visits before rolling again
 ```
 
-Cooldown is engine-managed per location — do not author your own. Random canvases are
-selected by `triggerMode === "random"`.
+The engine skips visits per location; do not author a second per-location cooldown. For a limit
+across rooms or per day (one random event a day anywhere in the house), author one brake flag, set
+by each event and cleared in the daily tick (`[engine.daily_tick]`). Random canvases are selected by
+`triggerMode === "random"`.
 
 `max_triggers_per_day` is read per trigger (`v2.py:13491`).
 
@@ -193,8 +197,9 @@ A mistyped `targetType` or a missing link drops a fully written canvas this way 
 green. `gates.py --release` checks every canvas against the built HTML for exactly this.
 `defects/001-no-reachability-gate.md`.
 
-`show_when_locked = true` on a choice renders it greyed and visible instead of hidden. This is
-the mechanism behind "every release ends on a visible locked door."
+`show_when_locked = true` on a choice renders it greyed and visible instead of hidden. A release no
+longer has to end on such a door: its end is said on each arc's last quest card (`the-release.md`,
+"Every release ends on an opening"; LO, 2026-11-03).
 
 ### A node link SWAPS the screen. A cascade beat APPENDS to it.
 
@@ -516,7 +521,7 @@ rows in `CONDITION_SCHEMA` (`template_import.py:1670-1677`).
 | `slot` | one of 7 fixed slots: `bra`, `underwear`, `top`, `bottom`, `dress`, `legwear`, `shoes` (`template_import.py:271`) |
 | `exposure` | 0 covers, 1 shows underwear-level skin, 2 leaves the region bare while worn (a mesh top) |
 | `type` | **one** tag per item, read by `worn_type` (no tag list: a garment cannot be both "skirt" and "wet") |
-| `initial`, `price` | owned **and worn** at the start, the last `initial` in a slot winning (`v2.py:1192-1204`); or bought |
+| `initial`, `price` | owned **and worn** at the start, the last `initial` in a slot winning (`v2.py:1208-1221`); or bought. ⚠️ The start loop does not clear `top` and `bottom` for an `initial` `dress` yet (`setup.equipItem` does); the engine fix is pending. Until it lands, never mark a dress `initial` beside a top or bottom `initial`: she starts wearing all three |
 | `conditions` | refuse equipping it (`setup.equipItem`, `v2.py:1715-1716`): the daring price to put it on |
 | `beauty`, `corruption` | folded as a MAX, not a sum: one loaded garment sets the number on its own |
 
@@ -1254,7 +1259,10 @@ paid_closing = "…" · cant_pay = "…" · partial_pay = "…"
    (`setup.carryRent`, `v2.py:14419`); nothing ends.
 
 **`start_after_flag` is what stops it being a scripted loss.** Until that flag is set the demand
-never arms, so the flag belongs on the canvas that first gives her a way to earn.
+never arms, so the flag belongs on the canvas that first gives her a way to earn. The one exception
+(LO, 2026-11-03; `the-economy.md` R3d): rent may start before the job when the early miss is built on
+purpose, with `on_short = "carry"` and a cost she can win back by paying. A player who works hard
+must still be able to pay the first rent in week one.
 
 > ⚠️ **DO NOT ALSO WRITE THE PAYMENT AS A CANVAS.** A hub rung that narrates the payment beside a
 > working `[settings.rent]` gives the player two settle-ups; with no cost on the rung, one of them is
@@ -1269,6 +1277,15 @@ never arms, so the flag belongs on the canvas that first gives her a way to earn
 - A first stage at `after_total_paid = 0` is the starting rent: no payment moves to it, so its line
   never prints, and the importer warns when `stage_lines[0]` has words (`template_import.py:6829`);
   put those words in the rent's own text.
+- **`rent_short_weeks`** — every short week adds 1 to this player counter (`setup.carryRent`,
+  `v2.py:15426-15441`). Read it as a condition (`trait rent_short_weeks gte N`) to make the first,
+  second and third short week cost different things. Declare it in `[player.core_traits]` to read
+  it; an old save starts at 0. The counter only climbs: the game undoes each loss itself, in the
+  scene after a paid week (`the-economy.md` R3c).
+- **`rent_late_fee`** — a player trait an `add` effect sets (the landlord's fee after a second short
+  week, say). With carry it is part of the next due and gets its own "Late fee" line on the rent page
+  (`v2.py:20495-20514`); a full payment zeroes it, and a carry folds it into `owed`
+  (`v2.py:15438`). A game that never sets it reads 0.
 - Carry sets the flag `rent_carried` and ignores `grace_periods` and `eviction_mode`. **No game over
   over rent** *(LO decided, D8d)*. ⚠️ Nothing in the engine clears it (`v2.py:14418-14427`): the game
   clears it on a full week, or it says "short" for the rest of the save (gate *a latch flag is cleared*).
@@ -1454,7 +1471,7 @@ already above the cap it is left alone; the cap only refuses to *raise* it past 
 |---|---|
 | bounding a **restore** — a sleep rung that adds energy | ✅ this is what it is for |
 | bounding a repeatable **relation** or reputation grant so one rung cannot max a character | ✅ |
-| bounding an **ascent tier** | ❌ the tier must be able to reach its top band; a cap there deletes content |
+| bounding one act on an **ascent tier** at its stage top | ✅ this is the stage rule (`the-arc.md` A4d: the act's `cap` sits at the top of its stage). A tier is broken only when no act can reach its top band; a cap that leaves no path to the top deletes content (LO, 2026-11-03) |
 | **throttling how fast** anything rises | ❌ it does not touch the rate. See `the-meters.md` |
 
 `cap` and `clamp` are independent and both apply — clamp first, then cap.
@@ -1679,7 +1696,7 @@ A solo activity whose schedule window has closed is dropped from the location li
 the author opts in:
 
 ```toml
-[canvases.trigger.metadata]
+[canvases.trigger]
 show_when_blocked = true
 cooldown_message  = "Counter work — mornings, eight till one."
 ```
@@ -2126,7 +2143,8 @@ right for what they measure.
 ### ⚠️ Randomise the WORDS. Never randomise the CONTENT.
 
 A pool varies how a beat is phrased. It must never decide **whether the player can reach
-something**. The distinction is not ours — it is what the field's players draw themselves. Course of
+something**. A roll may pick what a repeat visit holds — a knock at the door one visit in four, a
+near-catch one in eight — but never whether a step or a door can be reached (LO, 2026-11-03). The distinction is not ours — it is what the field's players draw themselves. Course of
 Temptation's players resent the dice (*"the rng aspects of this game should be seriously toned
 down"*, 11 likes) while nobody anywhere complains about varied phrasing; the complaint that keeps
 recurring is the opposite one: the same pictures every time you do the same thing
@@ -2207,10 +2225,11 @@ Measured 2026-08-23 — `findings_H_known.md` and `findings_J_players.md` §4.
 
 ### ⚠️ Ours is deterministic, and theirs is a roll
 
-**This engine has no per-choice random outcome.** `conditions` has no `random` type — the
-*"flag/trait/random"* list at `template_import.py:3876` is a docstring, not a feature — and the only
-randomness available is `trigger_mode = "random"` (whether a canvas fires at all) and `block_pool`
-(which words render). A choice goes where its conditions send it.
+**Conditions have no `random` type, so a choice cannot *branch* at random.** The
+*"flag/trait/random"* list at `template_import.py:3940` is a docstring, not a feature. An effect's
+*amount* can be random (`{type = "random", min, max}`, §3): set a trait to a roll, and a later
+condition reads it. Randomness of *whether* a canvas fires is `trigger_mode = "random"`, and of
+*which words* render, `block_pool`. A choice goes where its conditions send it.
 
 That difference is smaller than it looks, because the field **publishes the odds before the click**:
 `<<skillcheck>>` renders a word next to the label — `certain · trivial · easy · moderate ·
@@ -2220,7 +2239,8 @@ A dice roll the player can see and accept is not the RNG their comments resent (
 > A published *threshold* keeps the same promise a published *probability* does: **the player knows
 > what they are risking before they click.** Say the bar out loud: in the label on a `rejection_node`
 > lock (Mode B shows only the label, `v2.py:15673`), or the engine's suffix on a Mode A number lock.
-> Do not simulate a roll.
+> Do not simulate a roll on whether she can reach a step or a door. A roll that picks what a repeat
+> visit holds is allowed (§35, "Randomise the WORDS").
 
 ### The authoring shape
 

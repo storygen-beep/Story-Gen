@@ -630,7 +630,10 @@ Four rules follow:
 *(LO decided, D7; evidence R1, `~/Documents/Skill_Test_Research_20260929/R1_HER_CLIMB.md`. Gate `her climb`.)*
 
 Paid sex is a money system (`the-systems.md` SY8), and this climb is its lewd ladder: each rung opens
-an act and better pay. **The model is Shady Deals' stroll:** the price is built from her stats
+an act and better pay. **A15 covers only money paid for the act on that screen.** Wages, loans and
+gifts are not sex for pay, even on an explicit canvas. A game with no paid sex declares it (no system
+card in `board.systems[]` carries `"sex_for_pay": true`), and the pay gates, `her climb`'s paid part and `sex for pay names the
+amount`, show n/a (LO, 2026-11-03). **The model is Shady Deals' stroll:** the price is built from her stats
 (charm × 10–24, plus 0–120, plus sluttiness × 10–25), the corner picks the act, and the price is on
 screen before she agrees ([Spot Work]). **The failure is Course of Temptation's gloryholes:** 38
 passages, and none pays a cent (round 9b, `cards/sex_for_pay.md`; `templates/cards/sex_for_pay.md`).
@@ -645,8 +648,9 @@ passages, and none pays a cent (round 9b, `cards/sex_for_pay.md`; `templates/car
 - **The start matches the Want's bottom.** Nothing paid is reachable on a new save before its
   introduction and first time; the minimum path is introduced → at least one step → first time. No day
   count (R1:268).
-- **Night one** may carry one hot moment from a stranger or a one-off — never the paid route and never
-  the main man. 3 of 5 games have a day-one scene of that kind (R1:296).
+- **Night one** may carry one explicit hot moment from a stranger or a one-off — never the paid route
+  and never the main man. A non-explicit accident with the main man is allowed (`the-heat-ladder.md`
+  H2; LO, 2026-11-03). 3 of 5 games have a day-one scene of that kind (R1:296).
 - **Always a no before** (5 of 5, R1:228). "Stop him" at each stage of a paid scene costs part of the
   pay (**thin**: only one game does it fully, R1:218-228). The route ends only through a labelled final
   no (A3).

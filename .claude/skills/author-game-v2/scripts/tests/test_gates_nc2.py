@@ -4,7 +4,8 @@ A paid repeatable (an exit that adds money, an explicit beat naming an act) need
 (a) an introduction the first time reads · (b) a first time that sets what it reads ·
 (c) two live groups per act node reading a declared tier at different thresholds ·
 (d) shut on a new save, with introduced → a step → first time · (e) a stop exit on each
-act node that goes on to another act.
+act node that goes on to another act. Only canvases in the pool of a system card declared
+`"sex_for_pay": true` are read (C7 c + S11, LO 2026-11-03).
 
 Fixtures are written here; nothing in games/ is read or written.
 """
@@ -69,7 +70,11 @@ def game(intro=True, middle=True, gated=True, voices=2, stop=True):
             "locations": [{"id": "room"}], "canvases": chain + [sell]}
 
 
-STATE = {"board": {"ascent_tiers": ["nerve"], "economy": {"currency": "money"}}}
+# C7 c + S11 (LO, 2026-11-03): only the pool of a card declared `"sex_for_pay": true` is paid sex.
+SFP_CARD = {"id": "selling", "sex_for_pay": True, "pool": ["sell"]}
+STATE = {"board": {"ascent_tiers": ["nerve"], "economy": {"currency": "money"},
+                   "systems": [SFP_CARD]}}
+STATE_NO_SFP = {"board": {"ascent_tiers": ["nerve"], "economy": {"currency": "money"}}}
 
 
 def climb(g, state=STATE):
@@ -121,7 +126,8 @@ def test_no_stop_exit_fails_e():
 
 
 def test_without_tiers_c_is_noted_not_judged():
-    ok, _h, detail, _n = climb(game(voices=1), {"board": {"economy": {"currency": "money"}}})
+    ok, _h, detail, _n = climb(game(voices=1), {"board": {"economy": {"currency": "money"},
+                                                       "systems": [SFP_CARD]}})
     assert ok is True and any("(c) not judged" in d for d in detail)
 
 

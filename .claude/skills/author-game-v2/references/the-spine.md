@@ -79,7 +79,7 @@ clip (`register.md` S1) — and **her face**, which is recorded once on the idea
 
 ## SP7 · The release page
 
-What this release is: the people in it, each person's top step, the places, **the door** it ends on,
+What this release is: the people in it, each person's top step, the places, **the end cards** it ends on,
 its size, and the `--ship` BLOCK and REPORT lists (`the-release.md`, § Shipping the build). Three rows every release
 page carries:
 

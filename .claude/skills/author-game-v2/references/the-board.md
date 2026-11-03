@@ -44,6 +44,8 @@ Write the list of places that answer at least one of those, and count it. That i
 > `engine.md` §22). A room that is neither is not a location yet. One passing
 > game keeps an open, empty shop — In Her Own Hands' formal-wear shop, empty 76 of its 77 open hours —
 > and it says so: *"There's nothing to do here right now."* [WindsorBase]. That is the exception, named.
+> To use it, the room's own screen carries that line, "nothing to do here right now", and the gate
+> `a destination is never open and exit-only` accepts a room that shows it (LO, 2026-11-03).
 
 Budget the set as a *shape*, not a flat quota:
 

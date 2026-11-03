@@ -110,7 +110,9 @@ belong here; only decisions, debts, and promises do.
   "build": {
     // EVERY PIECE GETS PLAYED (2026-11-02). Written only by scripts/pieces.py, never by hand.
     // `done` appends a piece; `chrome` records the building session's own play in Claude in
-    // Chrome; `played` records LO's words (one note may cover every piece: `--all`). Nothing
+    // Chrome; `played` records LO's words (one note may cover every piece: `--all`). LO's
+    // "skip the play check" covers only his own `played`; the session still plays each piece
+    // and records `chrome` (LO, 2026-11-03). Nothing
     // blocks development. A public (non-dev) build waits until every piece has `played`
     // (`pieces.py release-check`, run by release_upload.py and the pre-commit ship check).
     "pieces": [ { "id": "ryan-steps-1-4", "what": "Ryan's first four steps at home",
@@ -129,7 +131,9 @@ belong here; only decisions, debts, and promises do.
     //               rung lists its `acts`. `pool` — canvas ids; `daily: true` when the pool is
     //               clicked every day. `growth` — "climbs" | "decays". `sink` / `deadline` —
     //               where its money goes and when. `feeds` / `reads` — system or meter ids.
-    //               `leads_to` — npc ids or canvas ids.
+    //               `leads_to` — npc ids or canvas ids. `sex_for_pay: true` — only on a card
+    //               where she is paid for the act; its `pool` is what the pay gates read.
+    //               No such card: those gates show n/a (the-arc.md A15).
     "systems": [
       { "id": "…", "name": "…", "place": "location_id", "hours": "Mon-Fri 18:00-02:00",
         "cost": "60 min · energy", "one_ladder": true,
@@ -339,7 +343,9 @@ its headline. Declaring is strictly better — skills and resources legitimately
 and should not be mistaken for the spine.
 
 **`board.ceilings`** — each tier's top band. If the highest authored gate on a tier sits below
-its ceiling, the top of that bar buys nothing. Gate 8 fails and the player is being lied to.
+its ceiling, the top of that bar buys nothing. Gate 8 fails and the player is being lied to. A band
+above every cap this release pays on that meter is not counted: the player cannot reach it, so it is
+a later release's band, not a promise yet (LO, 2026-11-03).
 
 **`board.systems[]`** — one design card per system (what she does again and again), filled before
 the locations are written. `the-systems.md` SY1; the sheet is `templates/sheets/system.md`.
@@ -437,7 +443,7 @@ file sits there being read by a different gate. These are the exact paths:
 | `board.locations[].fill` | *location fill* | a LIST of `{id, fill}`, **not** a dict — and declared before the prose, or the gate says so |
 | `board.economy` | four economy gates | `{ currency, symbol, week_income, obligation }`; `currency` is the trait key, and without it the economy channel is *"not counted"* |
 | `board.needs[]` | *a need shuts a door* | `[{ key, falls, fills, costs, shuts }]` — and every key must be READ by a condition somewhere in the game |
-| `board.door` | *ends on an opening* | `{ canvas, choice, node? }` — the door this release ends on; `choice` is the choice's text. **A ledger without it or `release_page.door` FAILS the gate** (LO, 2026-09-26). `release_page.door` (SP7) is read first once a release page is written |
+| `board.door` | *the door can be seen again* | `{ canvas, choice, node? }` — an optional door; `choice` is the choice's text. `release_page.door` (SP7) is read first once a release page is written. It is no longer required: *ends on an opening* now reads each declared ladder's last quest card for its `terminal_text` (LO, 2026-11-03, replacing the 2026-09-26 rule that a ledger without a door fails) |
 | `board.characters[].address` · `board.resetting_flags` | *pitch pack* NAMING · lint *a flag that never resets* | what this person calls her (`"love"`, her surname, nothing) — the pack prints it so a pitch uses it; and flags meant to reset that are not named `*_today`/`*_week` |
 | `board.characters[].schedule` | `shape.py` *the person is there at the step's hour* | `[{ where, weekdays, from, to }]` — the person's hours, optional (weekdays as a step's `when.days`; absent = every day). Each ladder step's window must be fully covered by the person's rows at its place (or its `seen_from`), past midnight included, read first match first as the engine reads them: a gated or narrower row goes above the one it overrides, and an overnight row on some weekdays needs its 00:00 half; a `fires_from = "opening"` step is exempt. A row it cannot read (an unknown weekday, or the TOML's `location`/`start_time`/`end_time`) is bad input, and that person's steps are not judged. The per-room count stays `occupancy_rows` |
 | `board.characters[].occupancy_rows` | *standing surface* | `[{ location, start_time, reason }]` — a schedule row whose job is to put a body in a room (asleep, in the bath, blocking a door), backed by that job and not by a canvas. Keyed by the row's start time, never the room, and always with its reason |

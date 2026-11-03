@@ -8,7 +8,7 @@
 | version | |
 | people, and each one's top step | |
 | places | |
-| the door it ends on (canvas, choice) | |
+| where each arc ends this release (each ladder's last quest card) | |
 | size (weeks of play) | |
 | **the promise, kept alive** — the beat that keeps the goal or mystery going | |
 | **scenes replay-ready** | yes · no |

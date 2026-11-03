@@ -399,7 +399,8 @@ threads: job or study, friends, dating, side money, the town. Each thread has:
 - a **named, fixed person** — in `want.cast`, with an age;
 - a **place** — in `want.places`;
 - the **system that runs it** — what she does there again and again (`the-systems.md` SY1; a worked
-  card per system in `templates/cards/`);
+  card per system in `templates/cards/`). It may be one person's repeat loop (`none — <his loop>`, such
+  as his dates), and then that loop runs at least 2–3 times a week (LO, 2026-11-03);
 - **one link into the hook** — how this part of her life feeds the fantasy: a man she brings home,
   money that changes things, a friend who sees.
 

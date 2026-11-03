@@ -390,7 +390,10 @@ the one economy device the corpus universally hates (`sluttown-usa` is the count
 (`v2.py:19512`), so the number there stops being true at the first stage.
 
 **A short week is carried, not a game over** *(LO decided, D8d; R4 found 3 of 9 bill games do end
-it)*: `on_short = "carry"` (`engine.md` §26).
+it)*: `on_short = "carry"` (`engine.md` §26). **And a carried week costs something she can win back
+by paying** (LO, 2026-11-03): an ordered list of losses read from `rent_short_weeks` (the first short
+week takes one thing, the second the next), each one undone when the rent is paid. Carry alone makes
+a short week free.
 
 ### R3d · The obligation is an ignition, not a tax — and it is allowed to go quiet
 
@@ -430,7 +433,10 @@ which leaves a gap where nothing is pulling. Ratchet it through the ignition, th
 
 ⚠️ **And it does not license squeezing.** R3c owns that half and the corpus is unambiguous. The
 opening should be uncoverable by *clean work* — never uncoverable. The transgressive route has to
-be open, obvious and well paid on day one, or the ratchet is a wall instead of a door.
+be open, obvious and well paid on day one, or the ratchet is a wall instead of a door. **One
+exception** (LO, 2026-11-03): a game may build an early miss when its cost can be won back by paying
+(R3c above) and `on_short = "carry"`; rent may then start before the job. Even then, a player who
+works hard can still pay the first rent in week one (LO: "still rent can be paid on week one").
 
 **Not a gate.** Four corpus games carry a recurring obligation; a threshold read off four games
 would be invented.

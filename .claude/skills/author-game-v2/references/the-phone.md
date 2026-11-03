@@ -31,7 +31,7 @@ Engine claims here carry a `file:line` into
 ## Contents
 1. P1 · Every person she is involved with has a thread
 2. P2 · Build the channel, never the hub
-3. P3 · A message is 3–7 words — the phone is its own register
+3. P3 · A message is 7 words or fewer — the phone is its own register
 4. P4 · Every text is caused by a scene and timed — the phone keeps no state of its own
 5. P5 · Everything on the phone costs something — and ignoring costs most
 6. P6 · If she can be looked at, she has to be able to post
@@ -108,9 +108,10 @@ builds down it will build the 4-of-27 thing before the 24-of-27 thing. Read the 
 
 ---
 
-## P3 · A message is 3–7 words — the phone is its own register
+## P3 · A message is 7 words or fewer — the phone is its own register
 
-**1–3 bubbles of 3–7 words.** Course of Temptation's texts run a median of 4 words for the one he
+**1–3 bubbles of 7 words or fewer.** A one- or two-word bubble is fine; only a bubble over 7 words
+is too long (LO, 2026-11-03). Course of Temptation's texts run a median of 4 words for the one he
 sends and 3 for her reply; Cupid's Way's run a median of 5, three lines to a thread (round 9a §2;
 the CoT figure is a regex count). Course of Temptation's booty call is three bubbles: *"Hey <pet
 name>"*, *"Feel like hooking up? I could use it"*, and the address. The phone study's three games
@@ -122,7 +123,12 @@ talking happens in its calls, which run 300–500 words (round 9a §6). No text 
 meeting it books does. A call is `[[phone.calls]]`: it rings, and answering plays its scene (`engine.md` §51).
 
 **It is a WARN, never a block** (gate `a chat is short and timed`). A two-word *"you up"* is
-right; the warning is for the twenty-word paragraph.
+right, and so is a one-word *"good."*; the warning is only for a bubble over 7 words.
+
+**An email is not a text.** A teacher's or an office's email may run one or two short sentences —
+*"Office hours are Thursday, after six. Bring the essay."* A professor whose email reads like a text
+is false to him (LO, 2026-11-03). The gate cannot tell an email from a text, so it may warn on one;
+that warning is expected.
 
 **The worked example.** Cupid's Way, `[Message from Damien]`: he opens with *"hey $name, what
 you up to?"*, and the thread goes on in the same hand:
@@ -259,8 +265,9 @@ voice**, not a greyed-out control (`the-voice.md`).
 - **using:** `time_cost` on a reply, a daily topic, a post or a fast job; `daily_cap` on a post action,
   `cooldown = "per_topic"` on a daily topic, a `corruption_min` she has to have become. Never a free
   infinite button (P11);
-- **a no-show has no hook:** a one-time canvas on her next visit home, gated on the booked flag,
-  `days_since_flag ≥ 2` on it, and the meeting's flag still `is_false`, applies the cost.
+- **a no-show has no hook, so book it with a flag:** the yes sets `<x>_booked`; the scene she shows
+  up to clears it; a no-show text fires on `hours_since_flag` on `<x>_booked`, costs something, and
+  clears it. Without the clear, a booked flag stays true forever (LO, 2026-11-03).
 
 ---
 
@@ -356,7 +363,8 @@ event and hides the rest (`destroyer`, numbers only; n = 1, a shape, not a rate)
 ## P9 · After the sex step, the thread becomes the loop invite
 
 **A thread has no last text; it turns into a loop.** After the arc's sex step, the person invites
-her again on a cooldown of 1–3 days (round 9a §6):
+her again on a cooldown that follows the person's own rhythm: 1–3 days for a booty call, 2–3 days
+for a boyfriend's dates (LO, 2026-11-03; round 9a §6):
 - Course of Temptation: every 3 days at the soonest, 18:00–22:00, rolled on her moves;
 - In Her Own Hands' James: an incoming booty call at 2 in 70 per passage after 20:00, at most once a
   day — and she can call him whenever she wants (P12);
@@ -500,5 +508,5 @@ Two gates read this file:
   holds a `flag` set by a canvas, or by a reply in a conversation that is itself caused this way (P4, P9);
   dev canvases, cheats and the daily tick are not scenes. A game with no phone passes.
 - **gate `a chat is short and timed`** (a warn, never a block — a block would fail a
-  correct two-word message): 3–7 words a bubble, at most 3 bubbles, and every trigger carries a
+  correct short message): at most 7 words a bubble, at most 3 bubbles, and every trigger carries a
   delay and an hour window (P3, P4); a call needs the timing only.

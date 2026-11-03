@@ -1,5 +1,6 @@
 """`a chat is short and timed` (World and Systems PRD, Phase 6B, 2026-10-02): a WARN, a scored
-gate that never blocks. Bubbles of 3–7 words, at most 3 in one message; every conversation
+gate that never blocks. Bubbles of at most 7 words (a short one is fine, LO C6 b, 2026-11-03),
+at most 3 in one message; every conversation
 trigger has a delay and an hour window; a call needs the timing only. n/a with no phone.
 """
 import os
@@ -33,9 +34,16 @@ def test_short_and_timed_passes():
     assert run([chat(msg("you up? come by"), msg("door's open tonight"))])[0] is True
 
 
-def test_a_long_or_a_one_word_bubble_warns():
+def test_a_long_bubble_warns():
     ok, _, d = run([chat(msg("this message is far too long to be a text at all"), msg("hey"))])
-    assert ok is False and "12-word bubble" in d[0] and "1-word bubble" in d[1]
+    assert ok is False and "12-word bubble" in d[0] and len(d) == 1
+
+
+def test_a_one_or_two_word_bubble_passes():
+    # C6 b: "good." and "you up" read like real texts; only a long bubble warns.
+    assert run([chat(msg("good."), msg("you up"))])[0] is True
+    assert run([chat(msg("one two three four five six seven"))])[0] is True
+    assert run([chat(msg("one two three four five six seven eight"))])[0] is False
 
 
 def test_four_bubbles_in_one_message_warn_and_a_reply_resets_the_run():

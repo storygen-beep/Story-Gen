@@ -110,7 +110,9 @@ paid £8.50 — the cost is information, not a wall.
 games print it there. A price the player cannot see is a plan they cannot make, and they are budgeting
 against a bill that comes back. **Pay she earns does not go on the button** *(LO decided, D11)*: 0 of
 the 4 passing games put it there. It is said in the scene that first offers the work, kept on the
-guidance card, and the toast shows it after the click. Spend and income are two rules, kept apart. **And the notation is gated too** — the
+guidance card, and the toast shows it after the click. Pay never goes on the button, and that
+includes sex for pay: real sex for pay states its price in the scene, before she agrees, never on the
+button (LO, 2026-11-03; `the-systems.md` SY8 rule 2). Spend and income are two rules, kept apart. **And the notation is gated too** — the
 amount on the button has to be written in the game's one currency, the same one
 `[settings.rent] currency_symbol` prints on the rent card (gate `the price is in one currency`).
 `references/the-economy.md` R7 owns this; `engine.md` §33 lists every place the engine prints money
