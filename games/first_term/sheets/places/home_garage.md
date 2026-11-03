@@ -1,4 +1,4 @@
-# [READY] Place — Garage
+# [REVIEW] Place — Garage
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. His papers read `rent_short`. New section: what the heat proposal built here. Points at the copy fixes it took.
 

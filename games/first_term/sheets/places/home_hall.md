@@ -1,4 +1,6 @@
-# [READY] Place — Hall
+# [REVIEW] Place — Hall
+
+> Changed 2026-11-04 (LO's answer Q7: one hall, no stairs; Laura's late catch is in the dark hall; the stairs event is "Bend for your bag in the hall"). Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The quiet event is gone (DECISIONS 136). New section: what the heat proposal built here. Points at the copy fixes it took.
 
@@ -26,17 +28,17 @@
 
 | auto-fires | who is here, and when | things to do alone | ways out |
 |---|---|---|---|
-| Ryan A 1, day one only: out of the bathroom into Ryan | Laura, 23:00–02:00, only when she came home late | check what she is wearing on the stairs | the rooms of the house: kitchen, living room, front door |
+| Ryan A 1, day one only: out of the bathroom into Ryan | Laura, 23:00–02:00, only when she came home late | check what she is wearing in the dark hall | the rooms of the house: kitchen, living room, front door |
 | from the street, 22:00 or later: the dark house (sets `came_home_late`) |  |  |  |
-| Laura's catch on the stairs (Laura C 2, then her repeat) |  |  | her room, Ryan's room, master bedroom |
-| the stairs event: short skirt or no panties, someone below |  |  | bathroom, garage, the garden (back door) · out: "Exit Home" to the street |
+| Laura's catch in the dark hall (Laura C 2, then her repeat) |  |  | her room, Ryan's room, master bedroom |
+| the hall event, "Bend for your bag in the hall": short skirt or no panties, someone behind her |  |  | bathroom, garage, the garden (back door) · out: "Exit Home" to the street |
 
 ## Rows (`serves`)
 
 | row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
-| Laura, on the stairs | person | Laura's ladder | `laura_suspicion` read: how hard she asks (colour) | only when `came_home_late` is set | yes |
-| the stairs event | work | wardrobe | exhibitionism add +1, the first time each day | once a day, on the trigger | yes: her body |
+| Laura, waiting up in the dark hall | person | Laura's ladder | `laura_suspicion` read: how hard she asks (colour) | only when `came_home_late` is set | yes |
+| the hall event (`wardrobe_event_stairs`) | work | wardrobe | exhibitionism add +1, the first time each day | once a day, on the trigger | yes: her body |
 | check your clothes in the hall mirror | work | wardrobe | none · the line reads her state | none needed: it writes nothing | yes, one line |
 
 ## Random events at home (system `home_life`; one a day, flag `home_event`)
@@ -68,7 +70,7 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has h
 
 | what | where | buttons and pays |
 |---|---|---|
-| a media pool (A12) | the stairs, no-panties screen | a `_t4` pool, no new prose |
+| a media pool (A12) | the hall event, no-panties screen | a `_t4` pool, no new prose (its clips still show stairs) |
 
 ## Rows a gate needs
 
@@ -85,7 +87,7 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has h
 |---|---|
 | the hall is the house's hub | the board, 2026-10-08 · the map's shape |
 | inside the Home building; the street shows "Home" | LO's play note, 2026-10-08 (sweep A1-35) |
-| Laura's gated stairs row | LO, 2026-10-08 (LIVES) |
+| Laura's gated dark-hall row | LO, 2026-10-08 (LIVES) |
 | a hall mirror | guess |
 | the random events at home | LO, 2026-10-08 (pick 4) · round 11, random events at home 6/12 · the events and the 1 in 4 guess |
 

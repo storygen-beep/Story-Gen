@@ -1,4 +1,4 @@
-# The heat ladder, applied (a2) — signed 2026-11-02 (LO: "Signed, go ahead and build")
+# [REVIEW] The heat ladder, applied (a2) — signed 2026-11-02 (LO: "Signed, go ahead and build")
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Signed date in the title; file cites removed. The "(Next release)" rule here is replaced by DECISIONS 132 (no button) and the door by DECISIONS 134.
 

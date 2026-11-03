@@ -1,4 +1,4 @@
-# [READY] System — park
+# [REVIEW] System — park
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. File and line cites removed. The selfie keeps a photo and posts nothing.
 

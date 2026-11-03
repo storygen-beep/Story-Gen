@@ -1,4 +1,4 @@
-# [READY] Scene — ryan_04_feet_in_his_lap
+# [REVIEW] Scene — ryan_04_feet_in_his_lap
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the step pays Corruption +3 on "Liar."; the no's own screen; the step row. the explicit beats as built, measured.
 

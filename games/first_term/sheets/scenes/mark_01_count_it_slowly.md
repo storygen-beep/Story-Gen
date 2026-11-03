@@ -1,4 +1,4 @@
-# [READY] Scene — mark_01_count_it_slowly
+# [REVIEW] Scene — mark_01_count_it_slowly
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the count's two buttons; the Sunday count on both ways out; the step row.
 

@@ -1,4 +1,4 @@
-# [READY] Scene — jake_date_end
+# [REVIEW] Scene — jake_date_end
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 
@@ -50,7 +50,7 @@ One row per exit. Read from the build; it replaces the drafted map.
 | `car_low` | Jake kills the engine outside your house and reaches for you across the seats. | yes | "Goodnight, gorgeous." → Hall | Corruption +1 (cap 39) · Exhibitionism +1 (cap 39) · `jake_date_booked` cleared · `late_date` set · `came_home_late` set |
 | `car_his` | Jake kills the engine outside your house and the street lamp lights the whole car. | yes | "Goodnight, gorgeous." → Hall | Corruption +1 (cap 79) · Exhibitionism +1 (cap 79) · `jake_date_booked` cleared · `late_date` set · `came_home_late` set |
 | `car_hers` | Jake parks outside your house and kills the engine under the street lamp. | yes | "Goodnight, gorgeous." → Hall | Corruption +1 (cap 79) · Exhibitionism +1 (cap 79) · `jake_date_booked` cleared · `late_date` set · `came_home_late` set |
-| `sneak` | You go up the stairs in the dark with Jake right behind you. | yes | "Let him out before dawn (5h)." → Your Room | Corruption +1 (cap 59) · `jake_date_booked` cleared · `late_date` set · `came_home_late` set |
+| `sneak` | You lead Jake down the dark hall with him right behind you. | yes | "Let him out before dawn (5h)." → Your Room | Corruption +1 (cap 59) · `jake_date_booked` cleared · `late_date` set · `came_home_late` set |
 | `night` | He kisses your hand like an idiot and walks backwards down the path. | no | "Go in." → Hall | `jake_date_booked` cleared · `late_date` set · `came_home_late` set |
 
 ## The entries, written

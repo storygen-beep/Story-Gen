@@ -412,14 +412,13 @@
         "Knock next time (parked)",
         "push past",
         "stop and talk",
-        "'Seen enough?' and let him look",
-        "'Don't ever look at me like that.' (ends his path)"
+        "'Seen enough?' and let him look"
       ],
       "voice": {
         "low": "Ryan — god — I'm in a towel, turn around.",
         "high": "You can look. You were going to anyway."
       },
-      "noticed": "Laura calls up the stairs, looks at both at breakfast, rules Ryan showers first",
+      "noticed": "Laura calls down the hall, looks at both at breakfast, rules Ryan showers first",
       "sticks": "ryan_hall_seen + ryan_hall_tease|talked|knock; Ryan want/warmth",
       "remember": "You can look. You were going to anyway.",
       "door": "Ryan's ladder and Laura's watching",
@@ -4420,42 +4419,42 @@
     "pages": [
       {
         "id": "SP1",
-        "status": "READY",
+        "status": "REVIEW",
         "drafted_at": "2026-10-03",
         "updated_at": "2026-10-08",
         "signed_by": "LO",
         "signed_at": "2026-10-08",
         "changed_at": "2026-11-03",
-        "note": "changed 2026-11-03 to match the build (third pass); waits for LO's re-sign"
+        "note": "changed 2026-11-03/04 to match the build (third and fourth passes); waits for LO's re-sign"
       },
       {
         "id": "SP2",
-        "status": "READY",
+        "status": "REVIEW",
         "drafted_at": "2026-10-04",
         "updated_at": "2026-11-01",
         "signed_by": "LO",
         "signed_at": "2026-11-02",
         "changed_at": "2026-11-03",
-        "note": "changed 2026-11-03 to match the build (third pass); waits for LO's re-sign"
+        "note": "changed 2026-11-03/04 to match the build (third and fourth passes); waits for LO's re-sign"
       },
       {
         "id": "SP3",
-        "status": "READY",
+        "status": "REVIEW",
         "drafted_at": "2026-10-07",
         "updated_at": "2026-10-08",
         "signed_by": "LO",
         "signed_at": "2026-10-08",
         "changed_at": "2026-11-03",
-        "note": "changed 2026-11-03 to match the build (third pass); waits for LO's re-sign"
+        "note": "changed 2026-11-03/04 to match the build (third and fourth passes); waits for LO's re-sign"
       },
       {
         "id": "SP4",
-        "status": "READY",
+        "status": "REVIEW",
         "drafted_at": "2026-10-07",
         "signed_by": "LO",
         "signed_at": "2026-10-07",
         "changed_at": "2026-11-03",
-        "note": "changed 2026-11-03 to match the build (third pass); waits for LO's re-sign"
+        "note": "changed 2026-11-03/04 to match the build (third and fourth passes); waits for LO's re-sign"
       },
       {
         "id": "SP5",
@@ -4474,11 +4473,12 @@
       },
       {
         "id": "SP7",
-        "status": "READY",
+        "status": "REVIEW",
         "drafted_at": "2026-10-07",
         "updated_at": "2026-10-08",
         "signed_by": "LO",
-        "signed_at": "2026-10-08"
+        "signed_at": "2026-10-08",
+        "note": "changed 2026-11-03/04 to match the build (third and fourth passes); waits for LO's re-sign"
       }
     ]
   },
@@ -9012,10 +9012,10 @@
             "weekdays": [
               "Fri"
             ],
-            "from": "17:45",
+            "from": "18:00",
             "to": "00:00",
             "when": "kayla_met",
-            "note": "in Ryan's room, Friday night"
+            "note": "in Ryan's room, Friday night (from 18:00, LO Q9 2026-11-04)"
           },
           {
             "where": "home_ryan_room",
@@ -10108,6 +10108,13 @@
           "report": "New game in Chrome after Q10: wake, problem, shower, hall, run, breakfast, rule, card. Breakfast reads 'Mark, your step-father, has already gone to work.'; the rule screen has Ryan in the shower down the hall, then his door shuts. Ryan's hall offers 'Run to your room.', 'Knock next time.', 'Stop and talk.' with no '(ends his path)'."
         },
         "played": null
+      },
+      {
+        "id": "q4_q12_refills_lace",
+        "what": "Q4: four walk-ins at the refill places (Ryan at her nap, Mark in the garden, Zoe at the college sink, the cocky guy in Zoe's bathroom). Q12: Laura's black lace bra and panties as wardrobe items, worn in Mark's lingerie walk-in",
+        "built_at": "2026-11-04 04:17",
+        "chrome": null,
+        "played": null
       }
     ]
   },
@@ -10276,6 +10283,14 @@
       "decision": "waive",
       "why": "the desk guy, the rival, the study guy and the figure model each live inside one class or scene, and Claire is offscreen: no rows",
       "signed": "LO 2026-11-03"
+    },
+    {
+      "id": "Q3",
+      "gate": "the last step opens a repeatable",
+      "match": null,
+      "decision": "later release",
+      "why": "Mark's and Tom's last steps turn into a repeatable in the next release (their later steps were cut, W4)",
+      "signed": "LO 2026-11-04"
     }
   ],
   "promises": [
@@ -10438,6 +10453,13 @@
       "made_in": "0.1",
       "paid_in": null,
       "pays_with": "Zoe's step 6 (want.promise.goals[1], ends_in_release 2)"
+    },
+    {
+      "text": "A repeatable for Mark after step 4 and for Tom after step 3",
+      "made_in": "0.1",
+      "paid_in": null,
+      "pays_with": "one repeatable scene each, opened by their last step",
+      "decided": "Q3"
     }
   ]
 }

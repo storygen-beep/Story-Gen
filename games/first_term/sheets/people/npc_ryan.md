@@ -1,4 +1,6 @@
-# [READY] Person — Ryan
+# [REVIEW] Person — Ryan
+
+> Changed 2026-11-04 (LO's answers Q1, Q7, Q14; PICKS 17): his Lust starts at 0; his room is shut while Kayla is over; no day-one final no; his short-skirt line and step 3's call name no stairs. Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: weekend mornings from 06:45. The moment column names each step's kind and stage. His Want pays on what happened (step 1 and step 8); no locked step-9 button. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 8 runs Sun–Thu nights.
 
@@ -30,11 +32,12 @@
 | what she wants from him | the one person at home on her side |
 | what he visibly wants, each visit | her, and he stops hiding it |
 | what he keeps | want + warmth |
+| where his Lust starts | 0 (LO, 2026-11-04, Q1): step 1 pays +10, so step 2 (Lust 10) opens on it, and step 3 (Lust 20) needs his repeatables first |
 | where he sleeps | `home_ryan_room` |
 | what he calls her | `@player.nickname` (her nickname, default El) |
 | met | day 1, the hall, out of the shower |
 | his line: towel | "Door's free, @player.nickname." His eyes drop and come back up. |
-| his line: short skirt | "You're wearing that downstairs?" He doesn't look away from her ass. |
+| his line: short skirt | "You're wearing that out there?" He doesn't look away from her ass. |
 | his line: no bra | He talks to her face, hard, and fails. |
 | his line: underwear only | Laura home and awake (her rows): "Jesus. Mom's home." · Laura out or asleep: "Jesus, @player.nickname." He shuts his door, then opens it again. |
 
@@ -53,6 +56,8 @@
 
 His night row ends 06:45, so it doesn't overlap his bathroom row (LO, 2026-10-08).
 
+**His room is shut while Kayla is over** (LO, 2026-11-04, Q14): Friday 18:00 to Saturday 10:00, once she has been met, neither knock shows and his door reads "Kayla's here. His door is shut, and it stays shut till she goes." Before she is met she has no row, and the room stays open on Friday night.
+
 ## Ladder — one guidance card per step
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the release-1 lust ladder, copied from
@@ -61,7 +66,7 @@ His night row ends 06:45, so it doesn't overlap his bathroom row (LO, 2026-10-08
 
 | n | canvas | where | when | gate | raises | the no | guidance card line |
 |---|---|---|---|---|---|---|---|
-| 1 | `ryan_01_hall_first_morning` | `home_hall` | the opening | none | want add +10, on "Open the door." (the moment he sees her) | "Knock next time." (parked) · the day-one final, below | Your first morning: out of the bathroom, Ryan waiting in the hall. |
+| 1 | `ryan_01_hall_first_morning` | `home_hall` | the opening | none | want add +10, on "Open the door." (the moment he sees her) | "Knock next time." (parked) | Your first morning: out of the bathroom, Ryan waiting in the hall. |
 | 2 | `ryan_02_phone_on_the_sink` | `home_bathroom` | Mon–Fri 06:45–07:30 | his Want 10 (Exhibitionism 20 dropped) | want add +5 · `knows_about_kayla` set | "Leave it." (parked) | A weekday morning in the bathroom: Ryan's phone buzzes on the sink. |
 | 3 | `ryan_03_shirt_off` | `home_ryan_room` | Mon, Tue, Thu, Sun 19:00–22:00 | Corruption 20 · his Want 20 | want add +5 · corruption add +1 · the two-knocks code | "Never mind." (parked) | Ryan's room, an evening he's home (not Wednesday or Friday): knock. |
 | 4 | `ryan_04_feet_in_his_lap` | `home_ryan_room` | Mon, Tue, Wed, Thu, Sun 22:00–00:00 | Corruption 40 · his Want 30 (was Corruption 20) | want add +5 · corruption add +3, cap 79 | "Just saying goodnight." (parked) | Ryan's room, late at night (not Friday): two knocks. |
@@ -104,7 +109,7 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 |---|---|---|---|---|---|---|---|
 | 1 | *accident (a look that happens to her) · stage 1, Good Girl* — he looks her up and down in the towel, and doesn't move | him | — (an accident) | — | the long look, blocking the hall | yes | the Laura rule on towels |
 | 2 | *accident (his secret, seen) · stage 1, Good Girl* — Kayla's text lights up by her hand | his secret is hers | — | she reads it | he grabs the phone: "Don't." | yes | `knows_about_kayla`; he's scared of her |
-| 3 | *a chosen tease for one person she knows · stage 2, Curious 20* — he strips and turns on her order, while Laura calls up the stairs "Ryan, is your sister in there?" | him; Laura, nearly | Laura opening the door | "Shirt off." | he answers Laura "No" without taking his eyes off her | yes | the two-knocks code |
+| 3 | *a chosen tease for one person she knows · stage 2, Curious 20* — he strips and turns on her order, while Laura calls down the hall "Ryan? Is your sister in there?" | him; Laura, nearly | Laura opening the door | "Shirt off." | he answers Laura "No" without taking his eyes off her | yes | the two-knocks code |
 | 4 | *private contact with someone she knows · stage 3, Bold 40* — Kayla on the phone; he takes her foot and presses it onto his cock himself | Kayla, on the phone | Kayla hearing it | her toes keep moving | his hand moves her foot, not hers | **cut off** (Kayla: "Who's there?"), the ladder's one cut-off | he lies to Kayla for her; "Liar." |
 | 5 | *a chosen act he hears through the wall · stage 2, Curious 20* — she comes to his headboard through the wall | he hears her | Kayla, in the next room | "Touch yourself." | he whispers her name through the wall | yes | `ryan_heard_her`; Kayla meets her at dawn and knows |
 | 6 | *naked by choice for one person · stage 3, Showing 40* — naked on purpose; he stays and jerks off in the doorway while she watches | him; Kayla in the hall | Kayla walking in | she leaves the towel | he pulls his cock out and doesn't stop | **yes**: he comes, and Kayla calls "Babe?" as he does | he can't look at Kayla at breakfast; his door stays open a hand's width |
@@ -132,8 +137,8 @@ stays in it.
 | 7 | his door open a hand's width (step 6's after) | on the step sheet (LO confirms) |
 | 8 | his phone face-down when she knocks (step 7's after) | the terms |
 
-**Final no:** on day one, "Don't ever look at me like that. (ends his path)"; at step 8, "You're my brother,
-that's all. (ends his path)". Either closes his steps; he stays her brother, and cold.
+**Final no:** at step 8 only, "You're my brother, that's all. (ends his path)". It closes his steps; he stays her
+brother, and cold. The day-one final no is gone: no final no on the arc's first screen (PICKS 17, pass 4).
 
 **What the release ends on:** the step-8 repeat (two knocks, sex, near-catches). No locked button; his card says
 "More of Ryan in the next release."

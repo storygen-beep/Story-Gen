@@ -1,4 +1,4 @@
-# [READY] Scene — tom_03b_not_by_the_window
+# [REVIEW] Scene — tom_03b_not_by_the_window
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 

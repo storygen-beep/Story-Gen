@@ -1,4 +1,4 @@
-# [READY] Scene — hale_02_lost_his_place
+# [REVIEW] Scene — hale_02_lost_his_place
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 

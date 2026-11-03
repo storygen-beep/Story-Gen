@@ -1,4 +1,4 @@
-# [READY] Scene — ryan_08_two_knocks_first_sex
+# [REVIEW] Scene — ryan_08_two_knocks_first_sex
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the talk and doubt buttons as built; his +5 sits on the three finishes, not the terms; no "Further." button; the step row. the explicit beats as built, measured. file and line cites cut.
 

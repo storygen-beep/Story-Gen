@@ -1,4 +1,4 @@
-# [READY] Scene — ryan_02_phone_on_the_sink
+# [REVIEW] Scene — ryan_02_phone_on_the_sink
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. "That depends." and its screen; Kayla is met here; the step row.
 

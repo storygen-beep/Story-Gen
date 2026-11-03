@@ -1,4 +1,4 @@
-# [READY] Scene — tom_01_the_apron
+# [REVIEW] Scene — tom_01_the_apron
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 

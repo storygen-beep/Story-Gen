@@ -1,4 +1,4 @@
-# [READY] Place — Canteen
+# [REVIEW] Place — Canteen
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here.
 

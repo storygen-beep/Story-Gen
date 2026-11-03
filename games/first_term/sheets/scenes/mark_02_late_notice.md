@@ -1,4 +1,4 @@
-# [READY] Scene — mark_02_late_notice
+# [REVIEW] Scene — mark_02_late_notice
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the second answer and its screen; the step row.
 

@@ -1,4 +1,4 @@
-# [READY] The taste columns — what every step is designed against, before it is written
+# [REVIEW] The taste columns — what every step is designed against, before it is written
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. File cites removed.
 

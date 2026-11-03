@@ -1,4 +1,6 @@
-# [READY] System — wardrobe
+# [REVIEW] System — wardrobe
+
+> Changed 2026-11-04 (LO's answers Q7, Q11, Q12: the stairs event is the hall event; the tub strips and dresses her; Laura's black lace set is to build this release). Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Key items: the sheer blouse needs Exhibitionism 15 (heat proposal C6); the sports bra is $25.
 
@@ -39,9 +41,9 @@ College clothes are her own outfits at three levels: normal, sexy, slutty. Never
 | state | how the game checks it | leaving a room in it needs | readers, planned (3+ each) |
 |---|---|---|---|
 | covered | nothing showing | nothing | the default line everywhere |
-| short skirt | a short skirt on | Corruption 20 **or** Exhibitionism 20 (`meters.md` rule 1) | the stairs event, Zoe's door, Mark's eyes |
+| short skirt | a short skirt on | Corruption 20 **or** Exhibitionism 20 (`meters.md` rule 1) | the hall event, Zoe's door, Mark's eyes |
 | no bra | the bra slot empty | Corruption 20 **or** Exhibitionism 20 | the class risky slot, the park run, Ryan's line |
-| no panties | the underwear slot empty | Corruption 40 **or** Exhibitionism 40 | the stairs, the class slot, Mark's table |
+| no panties | the underwear slot empty | Corruption 40 **or** Exhibitionism 40 | the hall event, the class slot, Mark's table |
 | underwear only | underwear, nothing over it | Showing 40, and only at home | Ryan's line, Mark's line, Laura's line |
 | towel | a towel on | allowed at home from day 1 | the hall (Ryan A 1), the bathroom, Laura's line |
 | naked | nothing on | her room and the bathroom only; outside is Watched, later | the bathroom, her room, the selfie (later) |
@@ -62,7 +64,7 @@ The door out says why and names both numbers: "Not in that skirt. Not yet. (Need
 | `cafe_uniform_sexy` | Tom B 2 sets `uniform_sexy` | tips rung 2 · Gary · Mark's "where's a waitress get twenties?" |
 | `cafe_uniform_slutty` | after 0.1 | not a key item until its release (LO, 2026-10-08) |
 | `laura_blue_dress` | Laura C 1, day 2 | Laura's line · Mark's eyes · Ryan's line |
-| `zoe_party_dress` | Zoe A 1, borrowed | the party door · Jake · Laura on the stairs |
+| `zoe_party_dress` | Zoe A 1, borrowed | the party door · Jake · Laura waiting up in the dark hall |
 | `sports_bra` | the clothes shop, $25 | the park run · Ryan's line · Laura's line (guess) |
 | `thin_top` (sheer blouse) | the clothes shop, $20, from Exhibitionism 15 and while the garage doesn't hold it (C6 of `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`) | the scenes that read it worn |
 
@@ -79,7 +81,7 @@ The door out says why and names both numbers: "Not in that skirt. Not yet. (Need
 
 | canvas | what it is | explicit? | what drives it | brake |
 |---|---|---|---|---|
-| `wardrobe_event_stairs` | a short skirt or no panties on the stairs; someone below | no | her clothing state · who is home | once a day |
+| `wardrobe_event_stairs` ("Bend for your bag in the hall") | a short skirt or no panties in the hall; someone behind her | no | her clothing state · who is home | once a day |
 | `wardrobe_event_dress_code` | a lecturer's warning in class | no | her clothing state | once a day |
 
 Both events pay by `meters.md` rule 3 (no longer a guess): shown by her choice, Exhibitionism +1 and Corruption +1; an accident pays nothing.
@@ -128,10 +130,12 @@ only `followers`.
 
 ## A garment reaction is a line in a hub (LO's play note, 2026-10-08)
 
+**Undressing with the scene** (LO, 2026-11-04, Q11): the hot tub's "Strip and get in." takes her clothes off, and every way out puts her day clothes back on. **Laura's black lace bra and panties** become wardrobe items, put on and taken off by Mark's lingerie walk-in (Q12): to build this release, not in the build yet.
+
 A person's line about what she wears ("his line: short skirt") is a line inside that person's existing
 hub, read by her clothes, never its own button. It is true where it shows: a line that names another
 person, a place or a time shows only in the hub where that holds (Laura's towel line differs between
-the kitchen and the stairs; Jake's "tonight" line only at the door after a date).
+the kitchen and the hall; Jake's "tonight" line only at the door after a date).
 
 ## Why — the source of each key choice
 

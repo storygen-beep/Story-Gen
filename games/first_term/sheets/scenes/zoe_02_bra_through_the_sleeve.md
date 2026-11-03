@@ -1,4 +1,4 @@
-# [READY] Scene — zoe_02_bra_through_the_sleeve
+# [REVIEW] Scene — zoe_02_bra_through_the_sleeve
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 

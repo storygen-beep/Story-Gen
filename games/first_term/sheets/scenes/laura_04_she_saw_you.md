@@ -1,4 +1,4 @@
-# [READY] Scene — laura_04_she_saw_you
+# [REVIEW] Scene — laura_04_she_saw_you
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. "Stay where you are." pays cap 59 as built; the gate reads `laura_alone_seen`; the breakfast's second screen; the step row. the explicit beats as built, measured. file and line cites cut.
 

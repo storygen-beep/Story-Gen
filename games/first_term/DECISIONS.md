@@ -1,4 +1,6 @@
-# [READY] Decisions — First Term
+# [REVIEW] Decisions — First Term
+
+> Changed 2026-11-04: Q1-Q17 answered (rows 161-172), the "This release" block added (PICKS I74), three rows on where the ledger and the build differ; waits for LO's re-sign.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-09).
 
@@ -6,29 +8,49 @@
 > This sheet and the ledger say the same thing. Where they differ, it is listed below, and nothing
 > was changed in the ledger.
 
-## Open questions for LO — first
+## This release (0.1)
 
-From the third alignment pass (2026-11-03). Each waits for your call; nothing below is built either way.
+Per person: in, later or cut, and what the player loses by it. From the build (HEAD d779867e), the ledger's
+`release_page`, `decided` and `promises`, and `sheets/RELEASE1_SCOPE.md` (signed 2026-11-01).
 
-| # | question | my recommendation | why it matters |
+| person | in | later | cut | what the player loses |
+|---|---|---|---|---|
+| Ryan | 8 steps; the top step is first sex (two knocks); the step-8 repeat is a menu that grows with his Lust; one hot repeatable per stage | sex while Kayla is in the house; something that opens on his low Love; act-menu loops | the first kiss and the "what are we" talk; the day-one "ends his path" button | the romantic kiss and the talk. Sex with Kayla in the house waits for the next release. |
+| Laura | 4 steps; the top step is "She saw you" (Ella watches her touch herself through the gap); her two gaps | where the gap goes next; a person of her own offscreen | the kiss in the dark hall, "It wasn't the wine", the 17 placeholder teases | Laura's climb toward Ella. There is no sex with Laura. |
+| Mark | 4 steps, the rent man; the top step is "our arrangement"; the Sunday table every week; the walk-ins | his repeatable after step 4 (Q3); his peeking after she buys the house; a person of his own offscreen | the paid route (Mark A 4, 5, 7, 8, 9) | any sex or paid touch with Mark, and goal 1's body route. Paying her way runs only through work. |
+| Tom | 3 steps, the strict boss; the top step is "Not by the window"; the café customers carry the heat | his repeatable after step 3 (Q3); "half is mine"; the after-close kiss; a person of his own offscreen | the uniform rule; booth four | Tom wanting her. He never touches her this release. |
+| Zoe | 5 steps (the quad meeting first); the top step is "No dare"; the dares, one a party night | her next dare, and the threesome and the rest (Corruption 60) | none of her built steps | everything past her top step. |
+| Jake | 4 steps; the top step is "Sneak him in"; the end of a date, twice a week | "Jake, further" | built Jake 3 and 4 merged into one step | a second front-door goodnight that repeated the first. |
+| Hale | 4 steps; the top step is the first session (his hand on her, Claire's knock); the Thursday sessions | "Hale, further" (Corruption 60) | seven-twenty (she sets his hour) | her power over him, and anything past touching. |
+| Kayla, Gary, Vance, Nadia, the dean, the TA, the lecturers and the rest | no ladders; their walk-ins, lines and the scenes they sit inside | — | Gary's ten minutes; the art lecturer's pose (A8); Vance's porch flash (A9) | a paid scene with Gary, and two flashes LO said no to. |
+| Ella | her stages 1-4 on both meters; goal 1 (four Sundays in a row) | stage 5; goal 2 (Ella hosts the party); more rungs on the two meters; her face | — | her top stage, and the end of goal 2. |
+
+Still to build this release (LO, 2026-11-04): walk-ins at the four refill places (Q4) and Laura's black lace set
+as wardrobe items (Q12). Neither is in the build at d779867e.
+
+## Answered (LO, 2026-11-04, the open questions Q1-Q17)
+
+From the third alignment pass (2026-11-03). The build that followed is commit d779867e.
+
+| # | question | LO's answer, 2026-11-04 | where it stands |
 |---|---|---|---|
-| Q1 | Ryan's Lust starts at 20, so his steps 2 and 3 (needs 10 and 20) open with no visits (E8). | Start his Lust at 0. | His meter locks nothing early. |
-| Q2 | One-time scenes sit in the café and her room, the shop and wardrobe rooms (C24). | Move the five café ones to the counter canvas. | The room's shop link hides until they fire. |
-| Q3 | Mark's and Tom's last steps open no repeatable. | One repeatable each, next release. | The arc stops instead of turning into a loop. |
-| Q4 | Four refill places roll no event: the toilet wash, her nap, the garden, Zoe's bathroom. | A walk-in on the garden and the nap. | A refill is a chance for something to happen. |
-| Q5 | Standing Zoe up or ignoring Zoe's and Jake's texts costs nothing. | A small cost on the no-show. | A booking with no cost is not a booking. |
-| Q6 | Mark's signed steps count the rent again after the rent page counts it (F10). | Cut the second count. | The money is counted twice on screen. |
-| Q7 | The house writes "stairs" and "landing", but the map has one hall (H11). | Keep one hall; reword the stairs lines. | The map and the prose disagree. |
-| Q8 | Laura's towel line at Love 70 needs a step gate, or your ok. | Your ok: it reads her Love only. | Her want shows before her step. |
-| Q9 | Kayla's Friday row starts 17:45, inside her own walk-in in Ryan's drawer. | Start her row at 18:00. | The walk-in can never fire while she is there. |
-| Q10 | The opening has Mark and Ryan at breakfast, but their rows put them elsewhere. | Move their rows to match the scene. | A signed scene says what the rows deny. |
-| Q11 | In the hot tub and the soak she is naked, but nothing took her clothes off. | Strip on the way in. | Her clothes and the words disagree. |
-| Q12 | Mark's walk-in names Laura's lingerie, which is no wardrobe item. | Add the item. | Nothing backs the line. |
-| Q13 | The Hale hallway and gym team walk-ins lose the Daring button at Exhibitionism 40 and up. | Keep the button past 40. | A bolder player gets fewer choices. |
-| Q14 | Ryan's room is open Friday 18:00 to Saturday 10:00 while Kayla is there, and she is not shown. | Close it, or show her. | She is in the room and nobody sees her. |
-| Q15 | Ryan's drawer walk-in opens at Good Girl, below the flirt's stage. | Gate it at Curious. | An act opens below its stage. |
-| Q16 | The 27 rule answers (PICKS). | Apply them after the fourth check. | They change skill rules, not this game alone. |
-| Q17 | Built differently from the heat proposal (rows 148-152), not yet confirmed: Laura's walk-in on Sunday 21:30; Mark's Saturday walk-in 14:00-17:00 after his accident; Jake's walk-in left out; the act windows as conditions and their end times; two acts need the short skirt; the soak's exit line; Hale's door in office hours; Vance's porch needs bare legs; Mark's Saturday walk-ins roll in the 15 minutes before his row, and he says nothing in the lingerie one. | Confirm as built. | They were built my way, not as signed. |
+| Q1 | Ryan's Lust starts at 20, so his steps 2 and 3 (needs 10 and 20) open with no visits (E8). | Start Ryan's Lust at 0. | built |
+| Q2 | One-time scenes sit in the café and her room, the shop and wardrobe rooms (C24). | Move the five café one-time scenes to the café counter activity; the wardrobe link always shows. | built |
+| Q3 | Mark's and Tom's last steps open no repeatable. | A later release. | for the ledger's `decided` and `promises` (row 168) |
+| Q4 | Four refill places roll no event: the toilet wash, her nap, the garden, Zoe's bathroom. | Walk-ins at all four, in this release. | to build |
+| Q5 | Standing Zoe up or ignoring Zoe's and Jake's texts costs nothing. | A no-show or an ignored text pushes their next invite back a few days, and they say so in a text. | built |
+| Q6 | Mark's signed steps count the rent again after the rent page counts it (F10). | Cut the second count: Mark's Sunday scenes start after the money is paid. | built |
+| Q7 | The house writes "stairs" and "landing", but the map has one hall (H11). | Keep the one-hall map; reword the stairs, upstairs and landing lines to the hall. | built, except a few lines (row 162) |
+| Q8 | Laura's towel line at Love 70 needs a step gate, or your ok. | OK as it is. | no change |
+| Q9 | Kayla's Friday row starts 17:45, inside her own walk-in in Ryan's drawer. | Start it at 18:00. | built |
+| Q10 | The opening has Mark and Ryan at breakfast, but their rows put them elsewhere. | Change the opening: Mark has already left, and Ryan is in the bathroom. | built |
+| Q11 | In the hot tub and the soak she is naked, but nothing took her clothes off. | Getting in strips her; getting out dresses her. | built |
+| Q12 | Mark's walk-in names Laura's lingerie, which is no wardrobe item. | Add Laura's black lace bra and panties as wardrobe items; the walk-in puts them on and takes them off. | to build |
+| Q13 | The Hale hallway and gym team walk-ins lose the Daring button at Exhibitionism 40 and up. | Show it from 20 up; it still pays only to 39. | built |
+| Q14 | Ryan's room is open Friday 18:00 to Saturday 10:00 while Kayla is there, and she is not shown. | Shut it in those hours, with one closed line. | built |
+| Q15 | Ryan's drawer walk-in opens at Good Girl, below the flirt's stage. | Open it at Curious (Corruption 20). | built |
+| Q16 | The 27 rule answers (PICKS). | Settled: released 2026-11-04. | applied (commit 3614064c) |
+| Q17 | Ten items built differently from the heat proposal (rows 148-152). | Confirm all ten as built. | confirmed (row 170) |
 
 Earlier questions were answered (37 and 39 on 2026-10-09, below).
 
@@ -126,6 +148,18 @@ is a talk or a locked door, the men's meters lock nothing, 17 of Laura's tease s
 | 158 | Three map names: "Mom and Mark's Room", "Landlord's House", "Party House". They change at the next rebuild. | Third pass, names rule. |
 | 159 | Saves from before 2026-11-01 need a new game: 29 scenes and 25 flags of the old ladders are gone. No public build had shipped. | Recorded, third pass. |
 | 160 | Shape check after: 21 pass, 0 fail. Gates: 94 of 110, 2 decided. | Checked 2026-11-03. |
+| 161 | Ryan (Q1, Q14, Q15), built in d779867e: his Lust starts at 0, so step 2 (Lust 10) opens on step 1's +10 and step 3 (Lust 20) needs one of his repeatables first. His room is shut Friday 18:00 to Saturday 10:00 once Kayla is met, with one line: "Kayla's here. His door is shut, and it stays shut till she goes." His drawer flirt "Explain this." needs Corruption 20 and pays +1 to 39; the Good Girl tease that stood in for it is cut. | "Start Ryan's Lust at 0." · "shut ... with one closed line." · "opens at Curious (Corruption 20)." (2026-11-04) |
+| 162 | One hall (Q7), built in d779867e: about 60 lines that said stairs, upstairs, downstairs or landing now say the hall. The stairs event is "Bend for your bag in the hall". Left: three lines where Ryan "stops on the last stair" (home.py), and Jake's sneak-in screen "Up the stairs" on its scene sheet, which waits for LO. The media pool `sex/stairs_skirt_t4` still shows stairs. | "Keep the one-hall map; reword the stairs/upstairs/landing lines to the hall." (2026-11-04) |
+| 163 | The opening and Kayla's row (Q9, Q10), built in d779867e: Mark has already left for work when she comes to breakfast; his RENT envelope is against the sugar bowl, and Laura says the rent for him. His words are last night's, on the "Seventy-five" screen. Ryan is in the shower during breakfast. Kayla's Friday row starts 18:00, so her drawer walk-in (17:45-18:00) can fire. The ledger's mirror of Kayla's row still says 17:45. | "Mark has already left and Ryan is in the bathroom (not the rows)." · "starts at 18:00." (2026-11-04) |
+| 164 | The rent is counted once (Q6), built in d779867e: the rent page takes the money; Mark's step 1, step 3 and the Sunday table no longer count the bills. He sits her at his table with the sealed envelope and looks at her instead. One line is left: Laura's kitchen hub. | "Cut the second rent count: Mark's Sunday scenes start after the money is paid." (2026-11-04) |
+| 165 | The café (Q2), built in d779867e: the five one-time café scenes open from the café's activities (the job ask from the coffee; the apron, the tip jar and Gary from the shift; "Not by the window" from Tom's hub), so the room's shop link always shows. Ryan's thin walls open from "Go to bed". Two now pay Tom's Want +2: "When do I start?" and "Not by the window". | "Move the five café one-time scenes to the café counter activity." (2026-11-04) |
+| 166 | Zoe's and Jake's patience (Q5), built in d779867e: a hidden meter each, full at 6 (Zoe) and 3 (Jake), back one a night. A no-show or an ignored invite empties it, so Zoe skips her next weekly ask and Jake his next one. They text it: Zoe "no invites for you this week"; Jake "asking again in a few days". An ignored invite gets its own text the same day. | "A no-show or ignored text ... pushes their next invite back a few days, and they say so in a text." (2026-11-04) |
+| 167 | The tub and the Daring answer (Q11, Q13), built in d779867e: the soak and Zoe's tub walk-in strip her with "Strip and get in.", and every "Get out" dresses her in her day clothes (the engine keeps no outfit to put back). The Daring answers in Hale's hallway and the gym team's walk-in show from Exhibitionism 20 and still pay only to 39. | "getting in strips her, getting out dresses her." · "shows from 20 up (still pays only to 39)." (2026-11-04) |
+| 168 | Mark's and Tom's repeatables (Q3): a later release. The ledger's `decided` and `promises` get it (the lead adds the entries): "Mark's repeatable after his step 4" and "Tom's repeatable after his step 3". | "later release (record as decided)." (2026-11-04) |
+| 169 | Still to build this release (Q4, Q12): a walk-in at each of the four refill places (the toilet wash, her nap, the garden, Zoe's bathroom), and Laura's black lace bra and panties as wardrobe items, which Mark's lingerie walk-in puts on and takes off. Neither is in d779867e. | "in THIS release." · "Add Laura's black lace bra and panties as wardrobe items." (2026-11-04) |
+| 170 | OK as built (Q8, Q17): Laura's Love-70 towel line stays as it is. The ten built-differently items of rows 148-152 are confirmed as built. One of them has moved since: in the lingerie walk-in Mark now says one line, "That's your mother's." (pass 4, LO 2026-11-04). | "OK as it is." · "Confirm all ten." (2026-11-04) |
+| 171 | The 27 rule answers (Q16) are applied to the skill: commit 3614064c (13 with a check change). | "Settled: the 27 rule answers are released." (2026-11-04) |
+| 172 | Paperwork, 2026-11-04: every signed page whose body changed after LO signed it shows [REVIEW] in its title, with the line that says what changed (PICKS I75); this sheet carries the "This release" block (PICKS I74). Scene sheets wait for the lead, after the build. | LO, 2026-11-03 (I74, I75); "fix the stale lines in SP4 and SP7"; "add town.md's re-sign line" (2026-11-04). |
 
 Engine only (`setup.castScheduleHtml` in `v2.py`). The full Schedules page keeps its weekly table; first_term has no
 button to it since DECISIONS 95.
@@ -443,6 +477,9 @@ accident, allowed at Good Girl. Curious adds "Stay and watch". Day one reaches i
 | 9 | Ryan steps 3 and 5 | fixed: Corruption +1 | — |
 | 10 | the park | its own place | WANT.md still says she walks through it to campus |
 | 11 | Tom's last step | 6 | SP5 fixed to step 6; it waits for your re-sign |
+| 12 | Kayla's Friday row (2026-11-04) | `npc_kayla.schedule_in_build` says 17:45 | the build and her sheet say 18:00 (Q9) |
+| 13 | the opening (2026-11-04) | `release_page.her_moment` lists "'Don't ever look at me like that.' (ends his path)" and "Laura calls up the stairs" | the build has no day-one final no, and Laura's call names no stairs (`sheets/OPENING.md`) |
+| 14 | a week's top pay (2026-11-04) | `week_income` 504: 18 shifts at $28 | $28 is the bottom of the top shift; 18 top shifts make about $520-750 (SP4) |
 
 Row 10 is an older signed page behind a newer one. The newer page holds; WANT.md's line needs your
 edit when you next re-sign it.

@@ -1,4 +1,6 @@
-# [READY] System — home_life
+# [REVIEW] System — home_life
+
+> Changed 2026-11-04 (LO's answer Q6: Sunday breakfast comes before Mark's table, which counts nothing). Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The random events as built: no pool, no quiet event, pays on the moment. Study at the kitchen table is its own activity.
 
@@ -47,7 +49,7 @@
 
 | item | place | when it is open | Laura | Mark | Ryan |
 |---|---|---|---|---|---|
-| 6 breakfast | kitchen | every day 06:30–10:00 | Mon–Fri 06:30–08:00 | Sun 08:00–10:00 (after the count) | — (he showers, then work) |
+| 6 breakfast | kitchen | every day 06:30–10:00 | Mon–Fri 06:30–08:00 | Sun 08:00–10:00 ("Then the rent." until the Sunday table) | — (he showers, then work) |
 | 6 dinner | kitchen | every day 18:00–20:00 | Mon, Tue, Thu, Fri, Sun 18:00–19:00 | Mon, Tue, Thu, Fri 18:00–19:00 · Wed (he cooks) · Sun | Mon, Tue, Thu, Sun 18:00–19:00 |
 | 9 help cook | kitchen | 17:30–19:00, when someone cooks | Mon, Tue, Thu, Fri, Sun 18:00–19:00 | Wed 18:00–19:00 | — |
 | 14 dishes | kitchen | 19:00–21:00 | Mon, Tue, Thu, Fri, Sun | Wed · Sun | — |
@@ -81,7 +83,7 @@
 
 | rung | gate | Laura | Ryan | Mark |
 |---|---|---|---|---|
-| 1 · Good Girl · Covered | none | talk; she reads what @player wears (her line per clothing state) | talk; he looks and looks away | talk; he counts her hem |
+| 1 · Good Girl · Covered | none | talk; she reads what @player wears (her line per clothing state) | talk; he looks and looks away | talk; his eyes go to her hem |
 | 2 · Curious · Daring | her stage 20 · and their step: Laura C 1 · Ryan A 4 · Mark A 3 | a tease: she fixes @player's hair, her hand stays; @player lets her look | a tease: her feet in his lap on the couch, his eyes on her ass | a tease: she bends to the dishwasher and lets him watch |
 | 3 · Bold · Showing | her stage 40 · and their step: Laura C 7 · Ryan A 8 · Mark A 7 | a touch: Laura's hands on her waist at the stove, then her hips | a touch: his hands under the blanket (his 0.1 repeat) | the look he pays for: "twenty and you can look" (his 0.1 price) |
 | 4 · Hungry · Watched | later: "Needs Corruption 60" | later | later | later |

@@ -1,4 +1,6 @@
-# [READY] Place — Kitchen
+# [REVIEW] Place — Kitchen
+
+> Changed 2026-11-04 (LO's answer Q6: the rent page is the one count; Mark's Sunday table counts nothing). Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The drawer reads `rent_short`. New section: what the heat proposal built here. Points at the copy fixes it took.
 
@@ -22,7 +24,7 @@
 
 | auto-fires | who is here, and when | things to do alone | ways out |
 |---|---|---|---|
-| Sunday 08:00–12:00, once: Mark's count (his step, or the table) | Laura: weekdays 06:30–08:00 | the drawer: letters, Vance's after a short week | the hall |
+| Sunday 08:00–12:00, once: Mark's Sunday table (his step, or the table), after the rent page has taken the money; no second count (Q6) | Laura: weekdays 06:30–08:00 | the drawer: letters, Vance's after a short week | the hall |
 | Laura's day 1 breakfast meeting | Laura: Mon, Tue, Thu, Fri, Sun 18:00–22:00 |  |  |
 |  | Mark: Mon, Tue, Thu, Fri 18:00–19:00 (dinner) · Wednesday 18:00–22:00 · all Sunday 08:00–22:00 |  |  |
 |  | Ryan: Mon, Tue, Thu, Sun 18:00–19:00 (dinner) |  |  |
@@ -36,7 +38,7 @@
 | the Sunday table | work | money and rent | as the money sheet: `paid_full_streak` add +1 or set 0 | Sunday morning, once | yes |
 | the drawer | work | money and rent | none · reads `rent_short` and the letter · the letter says what Mark owes Vance only after `knows_mark_debt` (Mark A 2); before it, bills | none needed: it writes nothing | yes |
 
-**The anchor.** 28,000 words: breakfast with Laura, Wednesday with Mark, the Sunday count in two versions, the family table, the wine.
+**The anchor.** 28,000 words: breakfast with Laura, Wednesday with Mark, the Sunday table in two versions, the family table, the wine.
 
 ## Everyday at home (system `home_life`)
 

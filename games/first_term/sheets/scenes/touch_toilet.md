@@ -1,4 +1,4 @@
-# [READY] Scene — touch_toilet
+# [REVIEW] Scene — touch_toilet
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the explicit beats as built, measured.
 

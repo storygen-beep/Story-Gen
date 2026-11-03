@@ -1,4 +1,4 @@
-# [READY] Scene — mark_06_our_arrangement
+# [REVIEW] Scene — mark_06_our_arrangement
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the buttons as built; his card line, no locked button; the step row. file and line cites cut.
 

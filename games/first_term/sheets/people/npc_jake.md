@@ -1,4 +1,6 @@
-# [READY] Person — Jake
+# [REVIEW] Person — Jake
+
+> Changed 2026-11-04 (LO's answers Q5, Q7): a no-show or an ignored date ask costs his patience: his next ask waits about three days, and he says so in a text; the sneak-in's near-catch is in the hall, not on a landing. Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: his two class rows. The moment column names each step's kind and stage. No locked button past the car; only his card names it. Ryan's pay in step 3 sits on the moment he sees her. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 3 from 23:00; step 4 starts at the front door, Sat 22:00–00:00.
 
@@ -76,7 +78,7 @@ watching.
 |---|---|
 | 1 · a new witness, risk or yes each step | yes: the team, the house, then her bed |
 | 2 · the top step is a payoff | yes: step 4, sex on her bed |
-| 3 · one cut-off at most | yes: no cut-off (the landing is a near-catch) |
+| 3 · one cut-off at most | yes: no cut-off (the hall is a near-catch) |
 | 4 · he moves at least every other step | yes: his move is written on every step |
 | 5 · his meter is the lock | waived (declared on this sheet, signed by LO 2026-11-01) |
 | 6 · a hot repeatable per stage | yes: the end of a date by stage, plus three acts |
@@ -98,7 +100,7 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 | 1 | *a look that happens to her · stage 1* — across Zoe's party, a guy who won't stop looking picks her out | Zoe, the party | — | she lets him | he crosses the room | yes | `jake_met`, his number |
 | 2 | *a kiss his team sees · stage 2, Curious or Daring 20 (as built)* — he kisses her in front of his team on the quad | the team | being shown off | she kisses back | "Guys. Look at her." | yes | the first date booked; Ryan's Warmth −5 (built) |
 | 3 | *a kiss the house sees · stage 2, Curious 20 and Daring 20* — at her front door after the date: she kisses him and says it, "my boyfriend", loud enough for the house. Ryan opens the door from inside. Laura is in the dark living room | **Ryan, Laura** | the house knowing | "My boyfriend." | he kisses her with Ryan in the doorway | yes | Jake is her boyfriend; Laura: "Was he any good?"; Ryan's line changes |
-| 4 | *private contact (sex) · stage 3, Bold 40* — past midnight she sneaks him up to her room. Her door won't lock if Mark has her key. They fuck on her bed, and her headboard hits the wall: Ryan's wall, the one she listened through at his step 5 | **Ryan, through the wall** | Laura and Mark across the landing; the door that won't lock | "Come up." | "Your room. Now." · he pins her wrists | **yes** | `jake_first_time`; Ryan's next-morning line; Monday on the quad, the team knows |
+| 4 | *private contact (sex) · stage 3, Bold 40* — past midnight she sneaks him in to her room. Her door won't lock if Mark has her key. They fuck on her bed, and her headboard hits the wall: Ryan's wall, the one she listened through at his step 5 | **Ryan, through the wall** | Laura and Mark across the landing; the door that won't lock | "Come up." | "Your room. Now." · he pins her wrists | **yes** | `jake_first_time`; Ryan's next-morning line; Monday on the quad, the team knows |
 
 **Her voice:** low line, "He's normal. This is normal." · high line, "You want Ryan to hear every second of
 it." Both on each step sheet.
@@ -124,7 +126,7 @@ are parked.
 - **Ryan hears.** If his ladder is past step 5: through the wall, low, "…@player.nickname?" The next morning his line at
   the bathroom door is about it. Ryan's Lust +5.
 - **The unlocked door** (`sheets/systems/money_pressure.md`: Mark has her key after a short Sunday): one line of risk,
-  a footstep on the landing, Jake's hand over her mouth. Not a cut-off: they don't stop.
+  a footstep in the hall, Jake's hand over her mouth. Not a cut-off: they don't stop.
 - **Crude words:** his columns (above): early "ass", middle "ass, tits, cock", late "cock, fuck, cum". **Proposed:** step 4
   and its repeat use the late column. **LO confirms on the scene sheet.**
 
@@ -151,6 +153,16 @@ are parked.
 | thread | cause flag (a scene sets it) | delay | window | booking (place + time, reminder) | loop |
 |---|---|---|---|---|---|
 | `jake` | `jake_number` (Zoe A 1) | 1 day | 18:00–22:00 | "Saturday? I'll pick you up." sets `jake_date_booked` · reminder: quest card, hub line | after step 4: every 7 days, Thursday 18:00–22:00 |
+
+**Bookings and no-shows** (LO, 2026-11-04, Q5). He asks twice a week: Saturday ("saturday? i'll pick you up") and
+Wednesday ("wednesday? i'll pick you up", DECISIONS 138). A hidden meter, `jake_patience`, full at 3 and back one a night;
+both asks wait until it is full.
+
+| what she does | his text | it costs |
+|---|---|---|
+| says yes and never comes (72 hours after the yes) | "sat outside your house twenty minutes" · "you ok?" · "asking again in a few days" | his patience empties, so he skips his next ask; `jake_stood_up` (his hub: "You still owe me a date, you know.") |
+| leaves an ask unanswered | "guess that's a no" · "i'll ask again in a few days", the same day | his patience empties. Her replies ("sorry, i missed it", "ok") change nothing |
+| "not this week" | "next week then. i'm patient" | nothing |
 
 **Jake B 4 is Laura C 5**: one canvas, read by both counters. It waits for Laura C 4 too.
 

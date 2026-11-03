@@ -1,4 +1,4 @@
-# [READY] Scene — jake_04_sneak_him_in
+# [REVIEW] Scene — jake_04_sneak_him_in
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 

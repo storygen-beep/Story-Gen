@@ -1,4 +1,4 @@
-# [READY] Scene — ryan_03_shirt_off
+# [REVIEW] Scene — ryan_03_shirt_off
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. his window starts 19:00; the cap; the step row.
 

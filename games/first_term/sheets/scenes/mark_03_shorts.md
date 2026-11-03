@@ -1,4 +1,4 @@
-# [READY] Scene — mark_03_shorts
+# [REVIEW] Scene — mark_03_shorts
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the gate reads `mark_saw_her`; the counter row reads `rent_short`; the screens and buttons as built; the step row. file and line cites cut.
 

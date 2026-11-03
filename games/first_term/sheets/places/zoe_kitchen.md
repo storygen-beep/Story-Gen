@@ -1,4 +1,4 @@
-# [READY] Place — Zoe's Kitchen
+# [REVIEW] Place — Zoe's Kitchen
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here.
 

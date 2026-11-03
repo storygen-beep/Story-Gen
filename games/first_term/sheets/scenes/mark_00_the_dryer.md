@@ -1,4 +1,4 @@
-# [READY] Scene — mark_00_the_dryer
+# [REVIEW] Scene — mark_00_the_dryer
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. his +5 sits on the first screen, `basket`, "Load the washer."; the flag on the two ways out; a next-step row. file and line cites cut.
 

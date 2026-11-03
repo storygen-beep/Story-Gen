@@ -1,4 +1,4 @@
-# [READY] Person — Mr. Vance
+# [REVIEW] Person — Mr. Vance
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: the Monday knock after a short Sunday. His porch no moves nothing. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took.
 

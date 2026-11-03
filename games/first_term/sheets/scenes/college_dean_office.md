@@ -1,4 +1,4 @@
-# [READY] Scene — college_dean_office
+# [REVIEW] Scene — college_dean_office
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 

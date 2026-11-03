@@ -1,4 +1,4 @@
-# [READY] System — job
+# [REVIEW] System — job
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. File and line cites removed.
 

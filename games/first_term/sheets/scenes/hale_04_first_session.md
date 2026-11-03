@@ -1,4 +1,4 @@
-# [READY] Scene — hale_04_first_session
+# [REVIEW] Scene — hale_04_first_session
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 

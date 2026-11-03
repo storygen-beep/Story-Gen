@@ -1,4 +1,4 @@
-# [READY] Scene — laura_03b_all_dressed_up
+# [REVIEW] Scene — laura_03b_all_dressed_up
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. "Wait." and the `liar` screen as built; the step row.
 

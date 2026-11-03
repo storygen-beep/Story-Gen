@@ -1,4 +1,4 @@
-# [READY] Scene — cafe_shift_scene
+# [REVIEW] Scene — cafe_shift_scene
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 

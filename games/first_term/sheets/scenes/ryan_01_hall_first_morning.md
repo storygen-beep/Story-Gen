@@ -1,4 +1,4 @@
-# [READY] Scene — ryan_01_hall_first_morning
+# [REVIEW] Scene — ryan_01_hall_first_morning
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Ryan's +10 sits on "Open the door."; the card's buttons and exit; the step row.
 

@@ -1,4 +1,4 @@
-# [READY] Scene — laura_curfew_rule
+# [REVIEW] Scene — laura_curfew_rule
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. once a day; the truths by where she was; want, next step and hook rows.
 

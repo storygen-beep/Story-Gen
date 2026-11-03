@@ -1,4 +1,4 @@
-# [READY] Scene — mark_laundry_teases
+# [REVIEW] Scene — mark_laundry_teases
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. want, next step and hook rows. the explicit beats as built, measured.
 

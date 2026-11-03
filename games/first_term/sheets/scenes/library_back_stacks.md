@@ -1,4 +1,4 @@
-# [READY] Scene — library_back_stacks
+# [REVIEW] Scene — library_back_stacks
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 

@@ -1,4 +1,4 @@
-# [READY] Scene — zoe_01_first_party
+# [REVIEW] Scene — zoe_01_first_party
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 

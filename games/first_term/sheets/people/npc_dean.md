@@ -1,4 +1,4 @@
-# [READY] Person — the dean
+# [REVIEW] Person — the dean
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: Monday from 08:00. New section: the walk-ins and acts the heat proposal built.
 

@@ -1,4 +1,4 @@
-# [READY] Scene — ryan_laura_opens_the_door
+# [REVIEW] Scene — ryan_laura_opens_the_door
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Saturday 17:00–18:00 as built; want, next step and hook rows.
 

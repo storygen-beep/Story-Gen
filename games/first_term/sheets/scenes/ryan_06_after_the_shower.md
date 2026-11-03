@@ -1,4 +1,4 @@
-# [READY] Scene — ryan_06_after_the_shower
+# [REVIEW] Scene — ryan_06_after_the_shower
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the pay sits on a new last screen, `after6`; the step row. the explicit beats as built, measured.
 

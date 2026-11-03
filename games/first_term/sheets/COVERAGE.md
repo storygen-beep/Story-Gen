@@ -1,4 +1,4 @@
-# [READY] Coverage — First Term
+# [REVIEW] Coverage — First Term
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The café customers' scout card is now a source.
 

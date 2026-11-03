@@ -1,4 +1,4 @@
-# [READY] Place — Vance's House
+# [REVIEW] Place — Vance's House
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
 

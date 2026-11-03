@@ -1,4 +1,4 @@
-# [READY] Scene — laura_alone_in_bed
+# [REVIEW] Scene — laura_alone_in_bed
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the gate row reads `laura_step` 2 as built; want, next step and hook rows. the explicit beats as built, measured. file and line cites cut.
 

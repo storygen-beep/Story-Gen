@@ -1,4 +1,4 @@
-# [READY] Scene — jake_02_kiss_on_the_quad
+# [REVIEW] Scene — jake_02_kiss_on_the_quad
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 

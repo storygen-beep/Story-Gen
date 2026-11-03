@@ -1,4 +1,4 @@
-# [READY] Person — Dr. Hale
+# [REVIEW] Person — Dr. Hale
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The moment column names each step's kind and stage. No locked button past the session; only his card names it. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 4 to 19:15; step 1 to 08:55.
 

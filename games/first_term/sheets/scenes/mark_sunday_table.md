@@ -1,4 +1,4 @@
-# [READY] Scene — mark_sunday_table
+# [REVIEW] Scene — mark_sunday_table
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. 08:00–11:45 as built; the count's pays; want, next step and hook rows. file and line cites cut.
 

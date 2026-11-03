@@ -1,4 +1,4 @@
-# [READY] Scene — zoe_dares
+# [REVIEW] Scene — zoe_dares
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 

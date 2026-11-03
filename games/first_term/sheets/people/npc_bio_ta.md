@@ -1,4 +1,4 @@
-# [READY] Person — the Biology TA
+# [REVIEW] Person — the Biology TA
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took.
 

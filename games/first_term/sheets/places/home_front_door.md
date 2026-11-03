@@ -1,4 +1,4 @@
-# [READY] Place — Front Door
+# [REVIEW] Place — Front Door
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Vance's knock reads `rent_short` and clears nothing. New section: what the heat proposal built here. Points at the copy fixes it took.
 

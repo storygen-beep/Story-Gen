@@ -1,4 +1,4 @@
-# [READY] Scene — living_tv_channels (the remote)
+# [REVIEW] Scene — living_tv_channels (the remote)
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. C2's "Turn the sound up." and its screen; the walk-ins; Mark's plain channels pay him nothing; his channel 5 caps at 39; want, next step and hook rows. the explicit beats as built, measured. file and line cites cut.
 

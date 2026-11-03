@@ -1,4 +1,4 @@
-# [READY] Scene — ryan_07_kayla_cant_know
+# [REVIEW] Scene — ryan_07_kayla_cant_know
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the door's two buttons as built; the pay sits on `after7`; the step row. the explicit beats as built, measured.
 

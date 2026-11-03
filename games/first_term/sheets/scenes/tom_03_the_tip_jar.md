@@ -1,4 +1,4 @@
-# [READY] Scene — tom_03_the_tip_jar
+# [REVIEW] Scene — tom_03_the_tip_jar
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 

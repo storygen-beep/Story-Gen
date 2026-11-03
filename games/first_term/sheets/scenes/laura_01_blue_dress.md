@@ -1,4 +1,4 @@
-# [READY] Scene — laura_01_blue_dress
+# [REVIEW] Scene — laura_01_blue_dress
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the first screen is `upstairs`, "Try it on."; the cap; the step row.
 

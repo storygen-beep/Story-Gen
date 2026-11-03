@@ -1,4 +1,4 @@
-# [READY] Scene — ryan_05_thin_walls
+# [REVIEW] Scene — ryan_05_thin_walls
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the nos' own screens, the sleep buttons, "Knock back twice." from Corruption 40, the hall's button; the step row. the explicit beats as built, measured.
 

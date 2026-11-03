@@ -1,4 +1,4 @@
-# [READY] Scene — master_door_peek
+# [REVIEW] Scene — master_door_peek
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. want, next step and hook rows.
 

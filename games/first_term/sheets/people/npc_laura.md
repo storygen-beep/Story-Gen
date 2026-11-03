@@ -1,4 +1,6 @@
-# [READY] Person — Laura
+# [REVIEW] Person — Laura
+
+> Changed 2026-11-04 (LO's answers Q7, Q8): one hall, so her late catch is in the dark hall and the stairs lines say the hall or the living room; her Love-70 towel line stays as it is (LO: OK). She keeps no Want meter. Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. She keeps warmth only; the build has no Want for her. The moment column names each step's kind and stage. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build.
 
@@ -31,16 +33,16 @@
 | her line: short skirt | "Is that for college or for a guy?" |
 | her line: her blue dress | "It never fit me like that." Her hand smooths the hip. |
 | her line: no bra | Her eyes stop on @player's chest, then she pours the coffee (breakfast) or the wine (evenings). |
-| her line: towel | Kitchen: "Go and get dressed, sweetheart. You'll catch your death." (LO, 2026-10-31) · the hall (the stairs, at night): "Hall's cold, sweetheart. Don't stand there." |
+| her line: towel | Kitchen: "Go and get dressed, sweetheart. You'll catch your death." (LO, 2026-10-31) · the hall, at night: "Hall's cold, sweetheart. Don't stand there." |
 
 ## Schedule grid
 
 | place | days | from | to | why she is there |
 |---|---|---|---|---|
-| `home_hall` | every day | 23:00 | 02:00 | the catch on the dark stairs · only when `came_home_late` was set in the last 4 hours (question 69) |
+| `home_hall` | every day | 23:00 | 02:00 | waiting up in the dark hall, the catch · only when `came_home_late` was set in the last 4 hours (question 69) |
 | `home_kitchen` | Mon–Fri | 06:30 | 08:00 | breakfast; home evenings |
 | `home_kitchen` | Mon, Tue, Thu, Fri, Sun | 18:00 | 22:00 | breakfast; home evenings |
-| `home_master_bedroom` | Mon, Tue, Wed, Thu, Fri, Sun | 22:00 | 23:00 | awake and alone, Mark downstairs: `laura_alone_in_bed` (DECISIONS 82, changed 2026-10-29, re-signed by LO 2026-10-29) |
+| `home_master_bedroom` | Mon, Tue, Wed, Thu, Fri, Sun | 22:00 | 23:00 | awake and alone, Mark in the living room: `laura_alone_in_bed` (DECISIONS 82, changed 2026-10-29, re-signed by LO 2026-10-29) |
 | `home_master_bedroom` | Mon, Tue, Wed, Thu, Fri, Sun | 23:00 | 06:30 | sleeps; dresses Saturday |
 | `home_master_bedroom` | Sat | 00:00 | 07:00 | sleeps; dresses Saturday |
 | `home_master_bedroom` | Sun | 00:00 | 07:00 | sleeps; dresses Saturday |
@@ -51,7 +53,7 @@
 **Sun 00:00–01:00 she is awake** (changed 2026-10-29, re-signed by LO 2026-10-29): up from waiting up, Mark takes
 her, and she lies awake after (`master_door_saturday_night`). Same row, same place; only the line changes.
 
-**Row order matters.** The engine takes the first matching row, so her stairs row is first. Saturday 00:00–07:00 covers Friday night. Her night row ends 06:30 (all LO, 2026-10-08).
+**Row order matters.** The engine takes the first matching row, so her dark-hall row is first. Saturday 00:00–07:00 covers Friday night. Her night row ends 06:30 (all LO, 2026-10-08).
 
 ## Ladder — one guidance card per step
 
@@ -60,7 +62,7 @@ her, and she lies awake after (`master_door_saturday_night`). Same row, same pla
 
 | n | canvas | where | when | gate | raises | the no | guidance card line |
 |---|---|---|---|---|---|---|---|
-| 1 | `laura_01_blue_dress` | `home_master_bedroom` | Tue 18:00–22:00 | none | warmth add +5 · exhibitionism add +3 (was want +10) | "I can't take this." (parked) | Tuesday evening: Laura is in the kitchen, and she has a dress for you upstairs. |
+| 1 | `laura_01_blue_dress` | `home_master_bedroom` | Tue 18:00–22:00 | none | warmth add +5 · exhibitionism add +3 (was want +10) | "I can't take this." (parked) | Tuesday evening: Laura is in the kitchen, and she has a dress for you in her room. |
 | 2 | `laura_03_wine_in_the_kitchen` | `home_kitchen` | Mon, Tue, Thu, Fri 20:00–22:00 | her Love 10 (only) | warmth add +5 | "I'm tired, Mom." (parked) | Late evening in the kitchen: Laura has a glass of wine. |
 | 3 | `laura_06_take_me_with_you`, reworked as **All dressed up** | `home_master_bedroom` | Sat 17:00–18:30 | her Love 20 | warmth add +5 · `laura_lonely` set | "Ask Mark." (parked) | Saturday early evening: Laura is dressing up. Zip her up. |
 | 4 | `laura_04_she_saw_you` (new, top step) | `home_master_bedroom` (her door gap) | Sun–Fri 22:00–23:00 | Corruption 20 · her Love 30 · step 3 · Ella watched through a gap 3 times (bedroom or shower) | warmth add +5 · `laura_said_ryan` set · "Stay where you are." Corruption +1, cap 59 (a one-time step may carry her over a line: SP2) | "Step back from the gap." | A weeknight, late: Laura's door is open a gap again. |
@@ -69,7 +71,7 @@ Every step's gate also says the drinks boost is off. Stage numbers: 20 is Curiou
 
 **Moved to their owners, not cut** (they stop setting `laura_step`):
 - **Home late** (`laura_02_home_late`): becomes the **curfew rule**, a repeatable that fires whenever `came_home_late`
-  is set, owned by her suspicion. Her stairs row stays.
+  is set, owned by her suspicion. Her dark-hall row stays.
 - **Ryan's door** (`laura_04_ryans_door`): an event on Ryan's ladder after his step 4 ("Laura opens the door",
   `npc_ryan.md`).
 - **Jake at the door** (`laura_05_jake_at_the_door`): merged into Jake's step 3, Laura watching from the dark
@@ -102,7 +104,7 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 |---|---|---|---|---|---|---|---|
 | 1 | *borrowed clothes, no act · stage 1, Good Girl* — Laura gives her the blue dress she can't wear any more: "It never fit me like that." | Laura | — | she tries it on | the gift, and her hand on the hip | yes | the dress is Ella's; Laura's line on it |
 | 2 | *a talk, no act · stage 1, Good Girl* — two glasses poured; "Mark hasn't looked at me like that since the wedding." | Laura's secret is Ella's | — | she sits and drinks with her | the second glass, poured before Ella came down | yes | Ella knows she's lonely |
-| 3 | *a talk, her want on her body · stage 1, Good Girl* — Ella zips her mother into her good dress. Mark calls from downstairs that he's going to the bar. Laura sits on the bed, dressed up, with nowhere to go | Ella; Mark, not looking | — | "You look beautiful, Mom." · or she says nothing | she asks to be zipped, then asks, "Do I still look like someone you'd look at?" Ryan's laugh comes up the stairs from the couch, and her hands stop on the zip: she looks at the door, not at Ella, and her chest rises fast under the slip (her want for Ryan, on her body, before step 4 says his name; shown only while Ryan is in the living room, his Saturday row ending 18:00; DECISIONS 124) | yes | `laura_lonely`: the alone-in-bed line now names this night |
+| 3 | *a talk, her want on her body · stage 1, Good Girl* — Ella zips her mother into her good dress. Mark calls through the door that he's off to the bar. Laura sits on the bed, dressed up, with nowhere to go | Ella; Mark, not looking | — | "You look beautiful, Mom." · or she says nothing | she asks to be zipped, then asks, "Do I still look like someone you'd look at?" Ryan's laugh comes up the stairs from the couch, and her hands stop on the zip: she looks at the door, not at Ella, and her chest rises fast under the slip (her want for Ryan, on her body, before step 4 says his name; shown only while Ryan is in the living room, his Saturday row ending 18:00; DECISIONS 124) | yes | `laura_lonely`: the alone-in-bed line now names this night |
 | 4 | *she watches by choice (the gap) · stage 2, Curious 20* — through the gap: Laura comes, biting the back of her hand, and when her eyes open they're on the door, on Ella | **Laura sees Ella** | being caught watching her mother | she stays at the gap (Curious) | after: she doesn't pull the sheet up fast. "Go to bed, sweetheart." | **yes**: Laura finishes before she sees her | breakfast: "We don't talk about last night." · the gap changes |
 
 **Her voice:** low line, "That's your mom. Go to bed." · high line, "She's lonely, and you can't stop
@@ -140,7 +142,7 @@ watching her be lonely." Both on each step sheet.
 
 | gap | where · when | pays | status |
 |---|---|---|---|
-| `laura_alone_in_bed` | her door, Sun–Fri 22:00–23:00, Mark downstairs | "Keep watching": corruption add +1, cap 19 · the step-4 counter +1 | built (DECISIONS 82) |
+| `laura_alone_in_bed` | her door, Sun–Fri 22:00–23:00, Mark in the living room | "Keep watching": corruption add +1, cap 19 · the step-4 counter +1 | built (DECISIONS 82) |
 | `master_door_saturday_night` | her door, Sun 00:00–01:00 | staying: corruption add +1, cap 19 | built (DECISIONS 79–80) |
 | the shower | `home_bathroom`, Sat 16:30–17:00; the lock sticks halfway, the door doesn't close; through the steam, her hand between her legs | "Keep watching": corruption add +1, cap 19 · the step-4 counter +1 · once a week | **new** |
 
@@ -190,7 +192,7 @@ weekend days she is out. Wednesday dinner is Mark's, because the clinic keeps he
 
 | reader | how it reads |
 |---|---|
-| her catch on the stairs | low: "Where were you?" · high: she checks the dress, the smell |
+| her catch in the dark hall | low: "Where were you?" · high: she checks the dress, the smell |
 | the curfew | low Warmth, or suspicion 50 or more, sets it |
 
 **What raises it** (LO, 2026-10-08): home late add +5 · a lie add +5 · a failing grade add +5 · the letter home add +10 · a missed call add +2.
@@ -242,7 +244,7 @@ react to the towel, every visit.
 
 | row | gate |
 |---|---|
-| her stairs row first in her list | standing surface (Laura there for the catch) |
+| her dark-hall row first in her list | standing surface (Laura there for the catch) |
 | `laura_suspicion` read twice | a meter is read |
 | Love read by every step gate | the men's numbers are read |
 
@@ -269,6 +271,6 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
 | dinner text only on her days, before six | sweep A6-18 |
 | fix from the false-line sweep | sweep A2-05, A2-22, A2-36 (2026-10-08) |
 | the second glass on the counter shows only in the evening, after Laura C 3 | sweep A2-36 |
-| her stairs row reads the flag for 4 hours only | question 69 · sweep A1-17, A2-01 |
+| her dark-hall row reads the flag for 4 hours only | question 69 · sweep A1-17, A2-01 |
 | card goals are the step's real requirements | LO's play note, 2026-10-08 · sweep K8 and its 38 more cards |
 | Laura C 4's card names the Ryan gate | sweep A2-32 |

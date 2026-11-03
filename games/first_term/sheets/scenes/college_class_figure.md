@@ -1,4 +1,4 @@
-# [READY] Scene — college_class_figure
+# [REVIEW] Scene — college_class_figure
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 

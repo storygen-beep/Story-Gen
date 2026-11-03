@@ -1,4 +1,4 @@
-# [READY] Scene — laura_03_wine_in_the_kitchen
+# [REVIEW] Scene — laura_03_wine_in_the_kitchen
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the parked no's own screen; the step row.
 

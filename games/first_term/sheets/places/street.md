@@ -1,4 +1,4 @@
-# [READY] Place — Your Street
+# [REVIEW] Place — Your Street
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The quiet event is gone (DECISIONS 136). New section: what the heat proposal built here. Points at the copy fixes it took.
 

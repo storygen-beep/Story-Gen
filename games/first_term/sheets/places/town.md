@@ -1,4 +1,6 @@
-# [READY] Place — Town (an area)
+# [REVIEW] Place — Town (an area)
+
+> Changed 2026-11-03 (third alignment pass, d9e34078): only the title, set from [REVIEW] to [READY]; nothing else on the page changed. Waits for LO's re-sign.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 

@@ -1,4 +1,4 @@
-# [READY] Scene — ryan_hot_repeatables
+# [REVIEW] Scene — ryan_hot_repeatables
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. row 6's Exhibitionism cap 39; row 7 has no "Further." and gains "Leave him to it."; the acts' "Don't stop." and hygiene cost; one media slot per finish; the pools as built; want, next step and hook rows. the explicit beats as built, measured. file and line cites cut.
 

@@ -1,4 +1,6 @@
-# [READY] Person — Zoe
+# [REVIEW] Person — Zoe
+
+> Changed 2026-11-04 (LO's answer Q5): a no-show or an ignored invite costs her patience: her next weekly invite waits about six days, and she says so in a text. Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: her three class rows. The moment column names each step's kind and stage. No locked next-dare button; only her card names it. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 3 to 23:30; step 5 at her apartment to 01:45.
 
@@ -209,8 +211,10 @@ Each follow-up waits for her reply (`after_round`), and a different answer follo
 
 | text | the yes books | showing up | ignored a day | the no-show text (when) | it costs |
 |---|---|---|---|---|---|
-| "run tmrw? 8. the park" | "i'm in": `zoe_run_booked` | at the park: "You actually came! Okay. I owe you a coffee." (Zoe has no number, so nothing more) | nothing | "you bailed on me 🙄" · "i ran alone like a loser" (16 hours after the yes, 10:00–20:00) | sets `zoe_bailed`: her next park line is "Oh, look who remembered mornings exist." |
-| "party tmrw. wear something short" | "obviously": `zoe_party_promised` (read for 30 hours) | at her door in something short: "Told you. Short. Good girl." · not short: "\"Obviously\", she said. That's not short, babe." | nothing | none | none |
+| "run tmrw? 8. the park" | "i'm in": `zoe_run_booked` | at the park: "You actually came! Okay. I owe you a coffee." (Zoe has no number, so nothing more) | her patience empties, and "wow ok. left on read" · "fine. no invites this week 🙄" the same day | "you bailed on me 🙄" · "i ran alone like a loser" · "no invites for you this week" (16 hours after the yes, 10:00–20:00) | her patience empties: no invite from her for six days, so she skips her next weekly ask; `zoe_bailed` colours her next park line, "Oh, look who remembered mornings exist." |
+| "party tmrw. wear something short" | "obviously": `zoe_party_promised` (read for 30 hours) | at her door in something short: "Told you. Short. Good girl." · not short: "\"Obviously\", she said. That's not short, babe." | her patience empties, and the same "left on read" text | none | ignored: no invite for six days |
+
+**Her patience** (LO, 2026-11-04, Q5): a hidden meter, `zoe_patience`, full at 6 and back one a night. Her party and run invites wait until it is full. A no-show or an ignored invite empties it. Her replies to the "left on read" text ("sorry zo", "i was busy") change nothing; the wait is already paid. "too early" still costs nothing.
 
 ## Rows a gate needs
 

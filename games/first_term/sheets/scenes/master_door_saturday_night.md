@@ -1,4 +1,4 @@
-# [READY] Scene — master_door_saturday_night
+# [REVIEW] Scene — master_door_saturday_night
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. want, next step and hook rows. the explicit beats as built, measured.
 

@@ -1,4 +1,6 @@
-# [READY] Place — Gym
+# [REVIEW] Place — Gym
+
+> Changed 2026-11-04 (LO's answer Q13: the gym team's Daring answer shows from Exhibitionism 20 up). Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
 
@@ -39,7 +41,7 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has h
 
 | who walks in | her activity | when | his pay, on the moment | her bolder answers |
 |---|---|---|---|---|
-| Jake's team | Work out | Tue, Thu 15:00–15:15 | none: no meter | "Finish your set." Exhibitionism +1, cap 39 |
+| Jake's team | Work out | Tue, Thu 15:00–15:15 | none: no meter | "Finish your set." shows from Exhibitionism 20 up, with no top band, and pays +1 to cap 39 (LO, 2026-11-04, Q13) |
 
 **Acts, rungs and pools.**
 

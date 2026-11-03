@@ -1,7 +1,8 @@
-# SP2 · The ladders — First Term
+# [REVIEW] SP2 · The ladders — First Term
 
+> Changed 2026-11-04: Ryan's Lust starts at 0 (Q1); his day-one final no is gone; Laura keeps no Want; one hall (Q7); Mark's and Tom's repeatables later (Q3). Waits for LO's re-sign.
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. No "(Next release)" buttons; a no moves nothing of his; Laura keeps Warmth only.
-> [READY] · drafted 2026-10-04 · updated 2026-10-08 (where each stage starts) · signed by LO: LO, 2026-10-08
+> [REVIEW] (was [READY]) · drafted 2026-10-04 · updated 2026-10-08 (where each stage starts) · signed by LO: LO, 2026-10-08
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder, proposal a2): release 1 writes
 > stages 1–4; the raises per stage; the Heat line gains what pays and the accident rule; "(Next release)" locks.
 > A scaffold: what every later step stands on, so later releases add steps without breaking shipped
@@ -73,7 +74,7 @@
 2. Playing a step raises their number for the next one, and her choices decide how much.
 3. Between steps, everyday acts raise both: what she wears at home, a tease, talking, a party.
 4. Each step pays the one before and points to the next (A14).
-5. The last step turns into a repeatable (A1).
+5. The last step turns into a repeatable (A1). Mark's and Tom's come in a later release (LO, 2026-11-04, Q3).
 
 ## 3. Shared rules
 
@@ -84,7 +85,7 @@
 
 ## 4. Each person
 
-- **Ryan** — want + warmth · central
+- **Ryan** — want + warmth · central · his Lust (want) starts at 0 (LO, 2026-11-04, Q1)
 - Direction: hers — he already wants her; the question is how far she goes.
 - Raised by: what she shows at home, teasing (Want) · talking, keeping his secret, covering for him,
   letting him cover a short Sunday (Warmth; an everyday act, not a step) · Lowered
@@ -93,9 +94,8 @@
   he treats her: protective, covers for her with Laura, jealous of Jake.
 - Who starts: he waits; she moves.
 - Their no: "Kayla's coming over" / "@player.nickname — I've got a girlfriend" (parked) · Her final
-  no, each at its time: on day one, "Don't ever look at me like that. (ends his path)"; later, "Your
-  secret's safe. You're my brother, that's all. (ends his path)" — either closes his steps; he's only
-  a brother, and cold. (fixed 10-06, lead's default)
+  no, at step 8 only: "You're my brother, that's all. (ends his path)" — it closes his steps; he's only
+  a brother, and cold. The day-one final no is gone: no final no on the arc's first screen (PICKS 17).
 - Ends as: his room at night — two knocks, any night.
 - After: the knocks go on around his girlfriend's nights (`LIVES.md:115`), and Laura's knowing grows;
   the beats are Ryan A's After (`proposals/ARC_IDEAS.md:124`).
@@ -105,9 +105,9 @@ Arc: Ryan A · Two Knocks in proposals/ARC_IDEAS.md
 - **Laura** — warmth + her step counter · central (the build keeps no Want for her; her steps carry it)
 - Direction: theirs — Ella works on her until she admits what she wants.
 - Raised by: compliments, being seen, each catch Ella chooses — home late, with Ryan, with a guy, in
-  Laura's dress (Want) · confiding (Warmth) · Lowered by: lying when caught, labelled "(she'll know)";
+  Laura's dress (her steps; she keeps no Want) · confiding (Warmth) · Lowered by: lying when caught, labelled "(she'll know)";
   suspicion rises (Warmth).
-- As it rises: looks too long → keeps Ella's secrets → kisses her on the dark stairs → takes the man's
+- As it rises: looks too long → keeps Ella's secrets → kisses her in the dark hall (cut this release) → takes the man's
   place in Ryan's room. Warmth colours each catch: low, a curfew; high, "Tell me everything."
 - Who starts: she walks in, then waits.
 - Their no: "I'm your mother" (parked) · Her final no: "You're my mom. That's all you get to be. (ends

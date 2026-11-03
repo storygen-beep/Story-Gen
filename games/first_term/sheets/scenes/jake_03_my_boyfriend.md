@@ -1,4 +1,4 @@
-# [READY] Scene — jake_03_my_boyfriend
+# [REVIEW] Scene — jake_03_my_boyfriend
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 

@@ -1,4 +1,4 @@
-# [READY] Scene — park_watch_the_couple
+# [REVIEW] Scene — park_watch_the_couple
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 

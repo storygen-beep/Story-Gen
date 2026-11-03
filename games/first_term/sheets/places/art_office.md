@@ -1,4 +1,4 @@
-# [READY] Place — Art Lecturer's Office
+# [REVIEW] Place — Art Lecturer's Office
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
 

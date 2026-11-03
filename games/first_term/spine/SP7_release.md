@@ -1,8 +1,9 @@
-# SP7 · The release page — First Term
+# [REVIEW] SP7 · The release page — First Term
 
+> Changed 2026-11-04: the ledger's release_page line says what it holds; the Sunday table counts nothing (Q6). Waits for LO's re-sign.
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 > Replaced by the plans approved on 2026-11-01 and 2026-11-03 (DECISIONS 124, 132, 134): the 2026-10-08 people row (Ryan A 9 · Laura C 8 · Mark A 9 · Hale B 5 · Tom B 6) and its door. Do not build from them.
-> [READY] · drafted 2026-10-07 · updated 2026-10-08 · signed by LO: LO, 2026-10-08
+> [REVIEW] (was [READY]) · drafted 2026-10-07 · updated 2026-10-08 · signed by LO: LO, 2026-10-08
 > ≤ 400 words. Rules: `the-spine.md` SP7 · `the-release.md`.
 
 | decision | answer |
@@ -13,7 +14,7 @@
 | the door it ends on | none (DECISIONS 134). Every arc's last quest card says where this release ends |
 | **the end cards** | Ryan: "More of Ryan in the next release." · Laura: "Whether the gap gets wider is the next release." · Mark, Tom: "…, later." · Zoe, Hale, Jake: "(Next release)" · goal 2 and her top stages name what comes next |
 | size (weeks of play) | 8, the term's first half, up to midterms |
-| **the promise, kept alive** | the Sunday table: each count says how many Sundays in a row she has paid her own way (goal 1). Zoe's dares feed `campus_talk` (goal 2) |
+| **the promise, kept alive** | the Sunday table: each Sunday says how many in a row she has paid her own way (goal 1); nobody counts the money twice (Q6). Zoe's dares feed `campus_talk` (goal 2) |
 | **scenes replay-ready** | yes |
 | BLOCK list (`--ship`) | the fixed list in `gates.py`; no waivers |
 | REPORT list (`--ship`) | the fixed list in `gates.py`; nothing added |
@@ -27,5 +28,6 @@
 
 **Systems:** seven cards, each shipped at its release-1 line.
 
-Ledger: `release_page` (it still lists the 2026-10-08 steps; the ledger owner updates it). Run `shape.py`
+Ledger: `release_page`: its `steps` are the built counters above and its `door` is null. Its `her_moment` still
+lists the day-one final no (DECISIONS, where the sheets and the ledger differ, row 13). Run `shape.py`
 and re-sign before changing money, the ending or this page.

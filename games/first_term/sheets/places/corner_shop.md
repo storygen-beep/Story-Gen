@@ -1,4 +1,4 @@
-# [READY] Place — Corner Shop
+# [REVIEW] Place — Corner Shop
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Points at the copy fixes it took.
 

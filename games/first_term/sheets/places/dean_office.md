@@ -1,4 +1,4 @@
-# [READY] Place — Dean's Office
+# [REVIEW] Place — Dean's Office
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here.
 

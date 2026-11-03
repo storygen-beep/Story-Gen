@@ -1,4 +1,6 @@
-# [READY] Person — Tom
+# [REVIEW] Person — Tom
+
+> Changed 2026-11-04 (LO's answers Q2, Q3: his steps 1 and 2 open from "Work a shift" and his top step from him at the counter, not on entry; his repeatable after step 3 is a later release). Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The moment column names each step's kind and stage. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 1 to 19:00.
 
@@ -48,9 +50,9 @@ A ceiling, never a floor. LO took these, 2026-10-08.
 
 | n | canvas | where | when | gate | raises | the no | guidance card line |
 |---|---|---|---|---|---|---|---|
-| 1 | `tom_01_the_apron`, reworked: strict | `cafe` | Mon–Sat 14:30–19:00 | `cafe_job` | want add +10 | "I can tie my own apron." (counts; his Power −5) | Take a shift at the café: Tom is behind the counter. |
-| 2 | `tom_03_the_tip_jar` | `cafe` (the back room) | Mon–Sat 14:30–22:00 | step 1 · five shifts worked (was Exhib. 20 · his Want 20) | want add +5 · power add −5 · `knows_tip_jar` set | walk past (parked) | A café shift, the back room: watch the tip jar. |
-| 3 | `tom_03_not_by_the_window` (new, top step) | `cafe` (the back room) | Mon–Sat 14:30–22:00 | step 2 · `cafe_footfall` 15 · `cafe_name` −5 or lower | the window rule set | on the step sheet (LO confirms) | A café shift after a customer's hand: Tom wants a word in the back. |
+| 1 | `tom_01_the_apron`, reworked: strict | `cafe` | Mon–Sat 14:30–19:00 | `cafe_job` | want add +10 | "I can tie my own apron." (counts; his Power −5) | Take a shift at the café: Tom is behind the counter. (Opens from "Work a shift", Q2.) |
+| 2 | `tom_03_the_tip_jar` | `cafe` (the back room) | Mon–Sat 14:30–22:00 | step 1 · five shifts worked (was Exhib. 20 · his Want 20) | want add +5 · power add −5 · `knows_tip_jar` set | walk past (parked) | A café shift, the back room: watch the tip jar. (Opens from "Work a shift", Q2.) |
+| 3 | `tom_03_not_by_the_window` (new, top step) | `cafe` (the back room) | Mon–Sat 14:30–22:00 | step 2 · `cafe_footfall` 15 · `cafe_name` −5 or lower | the window rule set | on the step sheet (LO confirms) | A café shift after a customer's hand: Tom wants a word in the back. (Opens from Tom at the counter, Q2; every finish pays his Want +2.) |
 | — | locked | his card | — | — | — | — | "Tom, later. (Needs Corruption 60.)" |
 
 Every step's gate also says the drinks boost is off.
@@ -110,6 +112,8 @@ name and his line) and rule 5 (paced by shifts and the café counters). Rule 6 p
   stays as her own choice.
 - **Later:** Tom B 5, "half is mine" (`tom_05_half_is_mine`) and Tom B 6, the kiss after close
   (`tom_06_after_close_kiss`). Sheets marked later. Both come back when she corrupts him.
+- **Later:** a repeatable after his step 3 (LO, 2026-11-04, Q3). This release his arc stops at "Not by the window";
+  the café's three levels carry the heat.
 
 ## Phone thread
 

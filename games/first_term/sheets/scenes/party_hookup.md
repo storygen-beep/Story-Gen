@@ -1,4 +1,4 @@
-# [READY] Scene — party_hookup
+# [REVIEW] Scene — party_hookup
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 

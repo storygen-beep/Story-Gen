@@ -1,4 +1,4 @@
-# [READY] Scene — street_seen
+# [REVIEW] Scene — street_seen
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 
@@ -93,9 +93,9 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > You're the girl from the café.
 
-**`street_seen_nopanties` · `seen`** — 213 words · 4 counted: puss, ass, ass, ass · ceiling: strangers' words (DECISIONS 41): tits, nipples, ass, cock, wet, clit · **past the ceiling: pussy**
+**`street_seen_nopanties` · `seen`** — 213 words · counted: ass, ass, ass · ceiling: strangers' words (DECISIONS 41): tits, nipples, ass, cock, wet, clit · **past the ceiling: pussy**
 
-> A breeze comes down the street as you pass the landlord's gate, and there's nothing under your clothes to stop it. Your pussy is bare under there. Mr. Vance stands up off his chair with his eyes on your hips, and takes one step toward the gate, but you don't stop. Not tonight.
+> A breeze comes down the street as you pass the landlord's gate, and there's nothing under your clothes to stop it. It lifts your hem and runs cool over your bare ass. Mr. Vance stands up off his chair with his eyes on your hips, and takes one step toward the gate, but you don't stop. Not tonight.
 >
 > He'll be on his porch tomorrow evening. He always is.
 >

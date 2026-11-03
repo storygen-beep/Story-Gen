@@ -1,4 +1,4 @@
-# [READY] Scene — rent_short_1, rent_short_2, rent_short_3
+# [REVIEW] Scene — rent_short_1, rent_short_2, rent_short_3
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the three read `rent_short`, not `rent_carried`; the fee's key; "Next week."; want, next step and hook rows. file and line cites cut.
 
