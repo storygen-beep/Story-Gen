@@ -328,6 +328,15 @@ thread("jake_date", J, "📱 Jake",
         ("where are we going", {}, "surprise. yes or no?")],
        repeat=6, comment="Jake: caused by jake_number (Zoe's first party). The date is booked here.",
        round2=(2, [("yes", BOOK, "front door. eight."), ("no", {}, "next week then")]))
+# (alignment pass 2, 2026-11-03) a missed date left jake_date_booked set for good: the pickup reads it only for 168
+# hours and both invites need it false, so Jake never asked again. The no-show text clears it (DECISIONS 87, S10).
+# The latest pickup is 51 hours after the latest ask, so 72 hours after the yes the date is missed. Jake has no
+# meter of his own; the cost is the flag his hub line reads.
+noshow("jake_date_noshow", J, "📱 Jake", "jake_date_booked", 72,
+       ["i was outside your house for twenty minutes", "you ok?"],
+       [("sorry. i fell asleep", "next time text me. ok?"), ("something came up", "fine. you owe me one.")],
+       {"flagEffects": [setf("jake_stood_up")]},
+       comment="Jake: she said yes to a date and wasn't at the door (DECISIONS 87)")
 thread("jake_date_wed", J, "📱 Jake",
        [F("jake_number"), SINCE("jake_number", 1), F("jake_date_booked", False), DAYS(0, 1), HOURS("18:00", "22:00")],
        ["wednesday? i'll pick you up"],

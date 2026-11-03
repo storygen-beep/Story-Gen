@@ -34,6 +34,7 @@ from .template_import import (
     closed_step_flags,
     rent_carries,
     RENT_CARRIED_FLAG,
+    RENT_SHORT_FLAG,
 )
 
 # Coerce "HH:MM" schedule strings to datetime.time exactly as a DB save would
@@ -96,6 +97,8 @@ def build_game_graph(
             _player_flag_keys.append(template.rent_eviction_flag)
     if rent_carries(template) and RENT_CARRIED_FLAG not in _player_flag_keys:  # EN2b
         _player_flag_keys.append(RENT_CARRIED_FLAG)
+    if rent_carries(template) and RENT_SHORT_FLAG not in _player_flag_keys:
+        _player_flag_keys.append(RENT_SHORT_FLAG)
     for _cf in closed_step_flags(template):  # EN1 — `<canvas>_closed`
         if _cf not in _player_flag_keys:
             _player_flag_keys.append(_cf)

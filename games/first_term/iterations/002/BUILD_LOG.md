@@ -1483,3 +1483,18 @@ touched sheet has a dated note.
   on the 13. The party house is still open and empty on Saturday night, which wasn't on the 13 either.
 - Ryan's attribution tags ("Ryan pants.", "You tell him.") now sit as short narration lines between the dialog
   boxes. Every signed word is kept.
+
+## 2026-11-03 (night) — the Want rule and the second-pass slips (DECISIONS 143–144)
+
+- **Want:** his Want now sits on the moment, never on her no. Ryan's opening +10 moved to "Open the door.", his
+  step 8 +5 to the sex, and his Jake step 3 reaction to "Don't stop.". Vance's walk-on pays nothing now.
+- **Jake:** a no-show text clears his booking. **Rent:** the game reads the engine's new `rent_short`. **Goal 2:**
+  its card shows, and its end is set for release 2.
+- **Closed lines:** generated from the hours (`canv.with_closed_line`), 24/24. **Names:** descriptions and the map
+  are unnamed until each meeting, the offices are hidden until met, and "Next Door" replaces "Vance's House".
+- **Speech:** 138 paragraphs became 315 dialog blocks (`speech_table.py`, `canv.speech`). 6 paragraphs are marked
+  `not_speech`. One overheard fragment on the quad stays as narration.
+- **Gates:** 65/90. All six new or changed gates pass. "somebody speaks" is now 6.7:1 and still fails, because
+  scenes with no talk at all can't be fixed by converting quotes.
+- **Verified in Chrome:** the quad unnamed and then named, the faculty floor listing only the offices she has met,
+  the goal-2 card, Jake's no-show in the build, and Ryan's lines in speech boxes.

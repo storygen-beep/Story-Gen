@@ -252,8 +252,11 @@ out.append({
             [go("Go on.", node="claire_car", mins=1, cond_=cond(ROLL("eq", 1)))]
             + [go("Go on.", node="touch_low", mins=1, cond_=cond(ROLL("gte", 2), *c)) for c in LOW_CASES]
             + [go("Go on.", node="touch_high", mins=1, cond_=cond(ROLL("gte", 2), *HIGH))]),
-        node("touch_low", "Tell me what you feel", [G(cond(*[{"type": "clothing_item", "item_id": d, "operator": "unequipped"} for d in DRESSES]), POOL(P(beat("hale_thursday_session", "A a")), P(beat("hale_thursday_session", "A b")), P(beat("hale_thursday_session", "A c")), pid="hale_touch_low", bag=True)),
-            *[G(cond({"type": "clothing_item", "item_id": d, "operator": "equipped"}), POOL(*[P(beat("hale_thursday_session", k).replace("your top", "your dress")) for k in ("A a", "A b", "A c")], pid=f"hale_touch_low_{d}", bag=True)) for d in DRESSES],
+        node("touch_low", "Tell me what you feel", [
+            # GC, not G: the three bands are exclusive (no dress / one dress / the other), and the cut speech
+            # (canv.voice_canvas) puts each pool entry in a group; G's extra pool would pass the importer's depth 4.
+            GC(cond(*[{"type": "clothing_item", "item_id": d, "operator": "unequipped"} for d in DRESSES]), POOL(P(beat("hale_thursday_session", "A a")), P(beat("hale_thursday_session", "A b")), P(beat("hale_thursday_session", "A c")), pid="hale_touch_low", bag=True)),
+            *[GC(cond({"type": "clothing_item", "item_id": d, "operator": "equipped"}), POOL(*[P(beat("hale_thursday_session", k).replace("your top", "your dress")) for k in ("A a", "A b", "A c")], pid=f"hale_touch_low_{d}", bag=True)) for d in DRESSES],
             VID("a professor's hands on a student over her clothes in his office, her answering him", "professor touches student over clothes office", "teacher hands on student body talking", pool_dir="sex/hale_thursday_low_t4")],
             [go("\"Same time next week.\"", node="end", mins=15, eff=SESSION_PAY(59))]),
         node("touch_high", "Describe it", [POOL(P(beat("hale_thursday_session", "B a")), P(beat("hale_thursday_session", "B b")), P(beat("hale_thursday_session", "B c")), pid="hale_touch_high", bag=True),

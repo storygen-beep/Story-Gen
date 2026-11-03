@@ -22,8 +22,12 @@ LADDERS = {c["id"]: c["ladder"] for c in STATE["board"]["characters"] if c.get("
 
 
 # ── blocks ──
-def P(text):
-    return {"type": "paragraph", "content": text}
+def P(text, **props):
+    """props: e.g. not_speech=True on a paragraph whose quote is a sign, a text message or code, not a voice."""
+    b = {"type": "paragraph", "content": text}
+    if props:
+        b["props"] = props
+    return b
 
 
 def D(npc, text):
@@ -36,6 +40,93 @@ def ME(text):
 
 def WHO(text):
     return {"type": "dialog", "content": text, "props": {"speaker": "unknown"}}
+
+
+# ── speech (skill register.md "Speech is a UI component", LO 2026-11-03) ──
+# Every spoken line is a dialog block with its speaker; a quote inside a paragraph counts as narration.
+# The signed beats write speech as quotes inside paragraphs. speech() keeps every word: it cuts the paragraph
+# at each quote, drops the quote marks, turns a trailing comma inside the quote into a period, and capitalises
+# a narration fragment that now starts a block. Nothing else changes.
+QUOTE_RX = re.compile(r'("[^"]+")')
+SPOKEN_RX = re.compile(r'"[A-Z@][^"]{3,}"')   # the scan that finds a paragraph still carrying speech
+NOT_SPEECH = "TEXT"   # speaker code: the quote is a sign, a text on a screen, a note or code, and stays inline
+UNKNOWN = "?"         # speaker code: a stranger with no NPC (WHO, speaker "unknown")
+
+
+def _say(code, line):
+    if code == "ME":
+        return ME(line)
+    if code == UNKNOWN:
+        return WHO(line)
+    assert code.startswith("npc_"), code
+    return D(code, line)
+
+
+def speech(text, speakers):
+    """One paragraph's text in, a block list out: narration and dialog in the order of the text.
+    `speakers` names each quote in order: "ME", an npc id, UNKNOWN, or NOT_SPEECH (kept inside the paragraph,
+    which is then marked not_speech)."""
+    parts = QUOTE_RX.split(text)
+    quotes = [x for x in parts if x.startswith('"') and x.endswith('"') and len(x) > 1]
+    assert len(quotes) == len(speakers), (text[:60], len(quotes), list(speakers))
+    blocks, buf, inline, i = [], "", False, 0
+
+    def flush():
+        nonlocal buf, inline
+        frag = buf.strip()
+        if frag:
+            frag = frag[0].upper() + frag[1:]
+            blocks.append(P(frag, not_speech=True) if inline else P(frag))
+        buf, inline = "", False
+
+    for part in parts:
+        if part.startswith('"') and part.endswith('"') and len(part) > 1:
+            code = speakers[i]; i += 1
+            if code == NOT_SPEECH:
+                buf += part; inline = True
+                continue
+            flush()
+            line = part[1:-1].strip()
+            if line.endswith(","):
+                line = line[:-1] + "."
+            blocks.append(_say(code, line))
+        else:
+            buf += part
+    flush()
+    return blocks
+
+
+def _voice_blocks(blocks, table, cid, in_pool=False):
+    out = []
+    for b in blocks:
+        if b.get("type") == "paragraph" and SPOKEN_RX.search(b.get("content", "")) \
+                and not (b.get("props") or {}).get("not_speech"):
+            quotes = [x[1:-1] for x in QUOTE_RX.findall(b["content"])]
+            if table is None or not all(x in table for x in quotes):
+                missing = [x for x in quotes if table is None or x not in table]
+                if table is not None:
+                    raise KeyError(f"{cid}: no speaker for {missing} (speech_table.py)")
+                print(f"speech: {cid}: paragraph still quotes {missing[:2]} (no speech_table entry)", file=__import__("sys").stderr)
+                out.append(b)
+                continue
+            new = speech(b["content"], [table[x] for x in quotes])
+            if in_pool and len(new) > 1:   # a pool entry is ONE block: keep the cut lines together
+                new = [GC({"version": "1.0", "logic": "AND", "items": []}, *new)]
+            out.extend(new)
+            continue
+        if b.get("blocks"):
+            b = dict(b, blocks=_voice_blocks(b["blocks"], table, cid, b.get("type") == "block_pool"))
+        out.append(b)
+    return out
+
+
+def voice_canvas(canvas):
+    """Apply speech_table.SPEECH to every quoted paragraph of a canvas (called by emit)."""
+    from speech_table import SPEECH
+    table = SPEECH.get(canvas.get("id"))
+    for n in canvas.get("nodes") or []:
+        n["blocks"] = _voice_blocks(n["blocks"], table, canvas.get("id"))
+    return canvas
 
 
 def T(text):
@@ -284,10 +375,53 @@ def _emit_block(b, L):
         L.append(f"props = {v(b['props'])}")
 
 
+_DAY_NAMES = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+
+
+def _clock(hhmm):
+    h, m = (int(x) for x in hhmm.split(":"))
+    suf = "AM" if h < 12 else "PM"
+    h12 = h % 12 or 12
+    return f"{h12}{':' + str(m).zfill(2) if m else ''} {suf}" if hhmm != "00:00" else "midnight"
+
+
+def _days(wds):
+    wds = sorted(set(wds))
+    if wds == list(range(7)):
+        return "Every day"
+    if wds == list(range(5)):
+        return "Weekdays"
+    if wds == [5, 6]:
+        return "Weekends"
+    return ", ".join(_DAY_NAMES[d] for d in wds)
+
+
+def hours_phrase(schedules):
+    """'Weekdays, 11:45 AM-1 PM' for a canvas's schedule rows (the closed line, the-clock.md C5)."""
+    parts = []
+    for s in schedules or []:
+        p_ = f"{_days(s.get('weekdays', list(range(7))))}, {_clock(s['start_time'])}-{_clock(s['end_time'])}"
+        if p_ not in parts:
+            parts.append(p_)
+    return "; ".join(parts[:3])
+
+
+def with_closed_line(canvas):
+    """(alignment pass 2, 2026-11-03) A repeatable solo activity with hours stays on screen when it is shut and says
+    when it opens (the-clock.md C5; gate `a closed activity says when it opens`). Added here so no canvas can miss it;
+    an author's own message wins."""
+    t = canvas.get("trigger") or {}
+    if (t.get("is_repeatable") and t.get("schedules") and not t.get("npc") and not t.get("requires_npc")
+            and t.get("trigger_mode") != "random" and not t.get("show_when_blocked")):
+        t["show_when_blocked"] = True
+        t.setdefault("cooldown_message", hours_phrase(t["schedules"]))
+    return canvas
+
+
 def emit(canvas):
     # The writer session's screens replace their PLACEHOLDER blocks here (writer.py; LO, 2026-10-09).
     from writer import fill
-    canvas = fill(canvas)
+    canvas = voice_canvas(with_closed_line(fill(canvas)))
     L = ["\n[[canvases]]", f"id   = {q(canvas['id'])}", f"name = {q(canvas['name'])}"]
     if canvas.get("description"):
         L.append(f"description = {q(canvas['description'])}")

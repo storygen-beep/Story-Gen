@@ -167,6 +167,9 @@ text       = "Open the door."
 targetType = "node"
 nodeId     = "hall"
 time_progression_minutes = 10
+# LO 2026-11-03: his Want pays for what happened, never for a no. He sees her the moment she opens the door, so
+# his +10 is here; "Run to your room." adds 0.
+effects    = [ { targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 10 } ]
 wardrobeEffects = [ { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "sneakers" }, { action = "equip", item_id = "towel" } ]
 
 # ── screen 5 · the hall: Ryan, the first look (Ryan step 1) ──
@@ -211,7 +214,6 @@ targetType  = "node"
 nodeId      = "run"
 time_progression_minutes = 3
 flagEffects = [ { targetType = "player", flag = "ryan_hall_seen", op = "set" } ]
-effects     = [ { targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 10 } ]
 
 [[canvases.nodes.exit_block.choices]]
 text        = "Knock next time."

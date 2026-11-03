@@ -116,10 +116,16 @@ levels"): *"Hi"* at Exhibitionism 1, *"if you want to look, you can just ask"* a
 
 **LO decided both on 2026-11-01**, from the field below.
 
-- **An accident raises HIS meter and sets a flag. It pays her nothing.** CoT's roommate's partner gains Lust +50
-  from the walk-in whatever she answers (`cot:L72330`, `:72476`); CoT's engine halves what she gains from an
-  accident against the same choice (`HEAT_STUDY.md:334`); new-lust's walk-ins set nothing
-  (`home_kinds.md:91`).
+> **His Want pays for what happened, never for a no** (LO, 2026-11-03). Put the raise on the moment it
+> happens: the button that walks her into the accident (he sees her when she opens the door), or the act
+> itself (the sex, not his terms after it). Never put it on her answer. A no adds 0, and so does a final
+> no that says "(ends his path)". The engine has no node-entry effects, so "the moment" is the exit that
+> leads into the screen where it happens.
+
+- **An accident raises HIS meter and sets a flag. It pays her nothing.** The raise sits on the way in, so he
+  gains the same whatever she answers after. CoT's roommate's partner gains Lust +50 from the walk-in itself
+  (`cot:L72330`, `:72476`); CoT's engine halves what she gains from an accident against the same choice
+  (`HEAT_STUDY.md:334`); new-lust's walk-ins set nothing (`home_kinds.md:91`).
 - **Her button to go further pays her**: a second look, staying a moment longer. +1, capped at the top of her
   stage (`the-arc.md` A4d).
 - **Her no never raises her climb, and never raises his Want or any other meter of his** (LO, 2026-11-03; the

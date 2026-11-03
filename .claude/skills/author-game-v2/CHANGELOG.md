@@ -5,6 +5,62 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-03 (night) — "His Want pays for what happened, never for a no", 4 stale lines, and 6 gates so slips can't come back
+
+**Why.** LO's answer to the second alignment pass. His words: "Want pays for what happened, never for a no... Write
+this as one rule in the skill and fix the-heat-ladder.md." He also said: "Any of these that can come back gets a gate,
+including making the name gate read room descriptions."
+
+### The rule and the stale lines
+- **LO's rule (2026-11-03): his Want pays for what happened, never for a no.** `references/the-heat-ladder.md`
+  H5 gets the rule as one block quote. The raise goes on the moment: the button that walks her into the accident,
+  or the act itself. It never goes on her answer. A no adds 0, and so does a final no that says "(ends his path)".
+  The accident bullet now says the raise sits on the way in, so he gains the same whatever she answers. That
+  removes the contradiction pass 2 found between H5 bullets 1 and 3 (A62). `references/the-arc.md` A3's last
+  bullet points at it. LO's words: "Want pays for what happened, never for a no."
+- **`references/the-economy.md` R3 (pass 2, F18).** The old "uncoverable by clean work" and "transgressive
+  route well paid on day one" text is replaced. The first rent can be paid by a player who works (LO's W9 and
+  first_term's DECISIONS 141). A game may make it tighter, but never so tight that clean work can't cover it. A
+  transgressive route is never the only way to pay.
+- **`references/the-arc.md` A7 (pass 2, G20).** The quiet outcome becomes an ordinary outcome: a real screen
+  she chose, with its own lines and a small pay. It is never "Nothing happens." (S6).
+- **`references/the-first-hour.md` (pass 2, C44).** "There is no time-of-day condition" was false. Descriptions
+  can vary by the hour with `time_of_day` (engine.md §39), as first_term's kitchen does.
+
+### The gates
+- **`a goal's end is built`** (`scripts/gates.py`, `_goal_end_is_built`): a goal with `"ends_in_release": N` where N > 1
+  is a later release's end. It is skipped and listed as "ends in release N". Documented in `references/state.md`
+  (the goals schema) and `references/the-want.md`.
+- **`no one is named before they're met`**: also reads every location `description` and each
+  `description_variants[].text`, through the new helper `_named_in_descriptions`. A name passes when the variant's
+  conditions, or the place's `hidden_until` or `entry_conditions`, read that person's met flags. The gate is still a
+  `--ship` block.
+- **New `a no never raises his Want`**: fails a choice that reads as a no and adds `want` to an NPC. A choice reads
+  as a no when it is `final = true`, says "(ends his path)", or matches the refusal list (`_NO_LABEL_STARTS`,
+  `_NO_LABEL_ANYWHERE`). It reads canvas exits and phone replies. The rule is in the-heat-ladder.md H5.
+- **New `a booking can clear`**: a flag that a plain condition reads, and that is meant to come down, must be cleared
+  somewhere outside its own `hours_since_flag ... lt` window. That clear can be a no-show thread, the daily tick, or
+  the engine (`ENGINE_CLEARED_FLAGS = {"rent_short"}`). Records that stay set, such as `opening_done` or `_seen`
+  stamps, are left out. This covers the window that `a latch flag is cleared` passes as "timed". The pointer is in
+  the-phone.md P5.
+- **New `a closed activity says when it opens`**: a repeatable solo canvas with `trigger.schedules` needs
+  `show_when_blocked` and a `cooldown_message` at the top of `[canvases.trigger]`. Random events are skipped. The
+  pointer is in the-clock.md C5.
+- **New `speech is a dialog block`**: a paragraph whose content holds a quoted spoken line of two or more words fails.
+  A paragraph with `props.not_speech = true` is exempt; register.md says so in one sentence.
+- SKILL.md has 4 new gate rows and 2 updated ones. Tests: `scripts/tests/test_gates_k6.py` (21).
+- The first commit of this work, 9da3c66e, went in without this entry because the notes file for it was missing.
+  This entry is added in the next commit.
+
+**Verified.**
+- `gates.py --selfcheck` is green.
+- `pytest scripts/tests`: 810 passed.
+- `pytest .claude/skill-evals/author-game/tests`: 107 passed, 1 skipped.
+- `cite_check.py --strict` shows 0 wrong cites.
+- On first_term, after its fixes, all six gates pass. The game tally is 65/90.
+
+---
+
 ## 2026-11-03 — follow-through on LO's decisions (18 contradictions plus 3 open rows)
 
 **Why.** Two reviews of today's edits checked what was left. A re-check of the 49 skill-side rows found 3 still

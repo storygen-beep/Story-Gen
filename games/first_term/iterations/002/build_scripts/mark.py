@@ -15,9 +15,9 @@ def done(n):
 
 HIS = ntrait(M, "power", "gte", 50)   # his version (M)
 HERS = ntrait(M, "power", "lt", 50)   # her version (E)
-SHORT = flag("rent_carried")
-FULL_ITEMS = [flag("rent_carried", False), flag("ryan_covered", False), flag("mark_money_week", False)]
-BROKEN = cond(flag("rent_carried"), flag("ryan_covered"), flag("mark_money_week"), logic="OR")
+SHORT = flag("rent_short")
+FULL_ITEMS = [flag("rent_short", False), flag("ryan_covered", False), flag("mark_money_week", False)]
+BROKEN = cond(flag("rent_short"), flag("ryan_covered"), flag("mark_money_week"), logic="OR")
 SLEEP_SHIRT = {"type": "worn_type", "operator": "eq", "value": "sleep_shirt"}
 # Bare legs (LO, 2026-10-08, Q72): shorts, a skirt, the sleep shirt, a dress, or nothing below,
 # which is every outfit without jeans or leggings.
@@ -64,7 +64,7 @@ STREAK_LINES = [
 # ── step 1 · Mark A 1 · count it slowly ──
 out.append({
     "id": "mark_01_count_it_slowly", "name": "Count it slowly",
-    "description": "Mark step 1 (Mark A 1), her first Sunday at the table. The engine took the rent at midnight; this is Mark counting it with her there. Reads rent_carried. Counts the Sunday for the streak.",
+    "description": "Mark step 1 (Mark A 1), her first Sunday at the table. The engine took the rent at midnight; this is Mark counting it with her there. Reads rent_short. Counts the Sunday for the streak.",
     "trigger": step_trigger(M, 1),
     "nodes": [
         node("table", "The kitchen table", [
@@ -84,18 +84,18 @@ out.append({
             G(cond(SHORT),
               P("He licks his thumb and counts the bills out onto the table, one at a time, slow. Slower than he needs to. You're short and you both know it, and he makes you sit through every bill of it."),
               D(M, "Seventy-five, I said.")),
-            G(cond(flag("rent_carried", False)),
+            G(cond(flag("rent_short", False)),
               P("You lean back in the chair and watch him lick his thumb and count. It's all there. Every bill."),
               ME("Count it slowly, Mark. Take your time."),
               P("He looks up. He doesn't like your tone. He counts slower anyway, and his eyes keep leaving the money.")),
         ], [
             go("\"Can you just — count it?\"", node="short", mins=3, cond_=cond(SHORT)),
-            go("Watch him count.", node="short", mins=3, cond_=cond(flag("rent_carried", False))),
+            go("Watch him count.", node="short", mins=3, cond_=cond(flag("rent_short", False))),
         ]),
         node("short", "I am counting", [
             D(M, "I am counting."),
             G(cond(SHORT), P("He writes the gap on the back of the envelope in pencil and taps it twice."), D(M, "The rest waits a week. Vance doesn't.")),
-            G(cond(flag("rent_carried", False)), D(M, "That's the week. Same again Sunday.")),
+            G(cond(flag("rent_short", False)), D(M, "That's the week. Same again Sunday.")),
             G(cond(SLEEP_SHIRT), D(M, "And not the shirt, next time.")),
             *STREAK_LINES, *PAYBACK_LINES,
             T("He counted you as much as the money."),
@@ -253,7 +253,7 @@ out.append({
               D(M, "Your mother's out."), P("He doesn't tell you to cover up.")),
             G(cond(flag("mark_arrangement", False), SHORT), P("He counts it slow, and it's short, and he writes the gap on the envelope in pencil without a word.")),
             G(cond(flag("mark_arrangement"), SHORT), P("It's short, and he writes the gap on the envelope in pencil without a word.")),
-            G(cond(flag("mark_arrangement", False), flag("rent_carried", False)), P("It's all there. He counts it twice anyway, because he wants to sit here longer.")),
+            G(cond(flag("mark_arrangement", False), flag("rent_short", False)), P("It's all there. He counts it twice anyway, because he wants to sit here longer.")),
             *STREAK_LINES, *PAYBACK_LINES,
             D(M, "Next Sunday. Same table."),
         ], count_exits("\"Count it, Mark.\"", None, 15, eff=[nadd(M, "want", 2)], node_="counted")),
@@ -275,7 +275,7 @@ out.append({
 
 # ── the three short Sundays (rent_short.md, signed 2026-11-01, DECISIONS 121): on the Sunday morning, before the
 #    count (priority 7 over the table's 5). rent_carried is stamped at Sunday 00:00, so "under 12 hours" is this morning. ──
-THIS_SHORT = [SHORT, {"type": "hours_since_flag", "subject": "player", "flag_key": "rent_carried", "operator": "lt", "value": 12}]
+THIS_SHORT = [SHORT, {"type": "hours_since_flag", "subject": "player", "flag_key": "rent_short", "operator": "lt", "value": 12}]
 def short_trigger(extra, repeat=False):
     t = {"location": "home_kitchen", "npc": M, "requires_npc": M, "is_repeatable": repeat, "priority": 7, "is_active": True,
          "schedules": [{"weekdays": [6], "start_time": "08:00", "end_time": "12:00"}],
@@ -352,12 +352,13 @@ out.append({
 # ── Vance's knock after a short Sunday (money sheet: the next evening; once per carried week) ──
 out.append({
     "id": "vance_knock", "name": "Answer the door",
-    "description": "Vance at the front door the evening after a short Sunday. Clears rent_carried; Vance's Power +10 (each carried Sunday). At Power 60 he asks for her, not Mark.",
+    "description": "Vance at the front door the evening after a short Sunday. Reads rent_short (set every short Sunday, cleared by a full payment: engine 8da4e050); Vance's Power +10 (each carried Sunday). At Power 60 he asks for her, not Mark.",
     # His row (ledger L23): the front door, Monday 18:00-19:00, the evening after a short Sunday. His face is
-    # here; rent_carried is read for 48 hours (the engine stamps it at Sunday's count, v2.py:14462).
+    # here; rent_short is read for 48 hours. The engine restamps it every short Sunday and clears it on a full
+    # payment, so a missed knock no longer leaves her "short" for good (alignment pass 2, J44; 2026-11-03).
     "trigger": {"location": "home_front_door", "npc": V, "requires_npc": V, "is_repeatable": True, "priority": 6, "is_active": True,
                 "schedules": [{"weekdays": [0], "start_time": "18:00", "end_time": "19:00"}],
-                "conditions": cond(flag("rent_carried"), {"type": "hours_since_flag", "subject": "player", "flag_key": "rent_carried",
+                "conditions": cond(flag("rent_short"), {"type": "hours_since_flag", "subject": "player", "flag_key": "rent_short",
                                                           "operator": "lt", "value": 48}, flag("vance_met")), "max_triggers_per_day": 1},
     "nodes": [
         node("knock", "Vance", [
@@ -373,9 +374,9 @@ out.append({
             G(cond(trait("rent_late_fee", "gt", 0)), D(V, "Fifteen on top, Miss. That's how it works.")),
             T("A short week, and it comes to the door."),
         ], [
-            go("\"Mark will pay.\" Close the door.", node="shut", mins=5, eff=[nadd(V, "power", 10)], flags=[funset("rent_carried")]),
+            go("\"Mark will pay.\" Close the door.", node="shut", mins=5, eff=[nadd(V, "power", 10)]),
             go("\"Maybe one evening.\"", node="maybe", mins=5, cond_=cond(ntrait(V, "power", "gte", 60)),
-               eff=[nadd(V, "power", 10), nadd(V, "want", 3)], flags=[funset("rent_carried")]),
+               eff=[nadd(V, "power", 10), nadd(V, "want", 3)]),
         ]),
         node("shut", "The door", [D(V, "He'd better, Miss."), P("He touches the brim of a hat he isn't wearing and goes back down the path, slow. You lock the door. Through the glass you watch him stop on his own porch and look back.")],
              [go("Go back in.", loc="home_hall", mins=3)]),

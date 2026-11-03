@@ -22,7 +22,9 @@
           "goal": "her name on campus",
           "ends_when": "her campus_talk level opens the party everyone goes to; Ella hosts it, and that party scene sets the flag",
           "ends_flag": "hosts_the_party",
-          "next": "beyond campus"
+          "next": "beyond campus",
+          "ends_in_release": 2,
+          "ends_in_release_note": "Zoe A 6 (Ella hosts) is a later release; release 1 shows goal 2's card with no reachable goal (2026-11-03)."
         },
         {
           "goal": "beyond campus: her name spreads into the town and new people arrive",
@@ -4804,7 +4806,7 @@
       },
       {
         "id": "vance_house",
-        "name": "Vance's House",
+        "name": "Next Door",
         "kind": "destination",
         "job": "Vance's porch: the evening look, the knock after a short Sunday",
         "anchor": false,
@@ -4823,7 +4825,7 @@
         },
         "in_release": true,
         "hours": "Mon-Sun 18:00-22:00",
-        "closed_text": "Vance's porch is empty. The curtains are shut.",
+        "closed_text": "The porch next door is empty. The curtains are shut.",
         "alone": "walk past slowly; he reads what she wears"
       },
       {
@@ -5069,7 +5071,8 @@
         "in_release": true,
         "hours": "Thu 17:00-19:30",
         "closed_text": "The office is locked. Office hours are on the door.",
-        "alone": "read her grade, posted on the door"
+        "alone": "read her grade, posted on the door",
+        "hidden_until": "hale_met"
       },
       {
         "id": "art_office",
@@ -5094,7 +5097,8 @@
         "in_release": true,
         "hours": "Mon,Tue,Thu,Fri 14:30-18:00",
         "closed_text": "The office is locked. Office hours are on the door.",
-        "alone": "read her grade, posted on the door"
+        "alone": "read her grade, posted on the door",
+        "hidden_until": "art_lecturer_met"
       },
       {
         "id": "business_office",
@@ -5119,7 +5123,8 @@
         "in_release": true,
         "hours": "Mon,Wed,Thu,Fri 14:30-18:00",
         "closed_text": "The office is locked. Office hours are on the door.",
-        "alone": "read her grade, posted on the door"
+        "alone": "read her grade, posted on the door",
+        "hidden_until": "business_lecturer_met"
       },
       {
         "id": "ta_office",
@@ -5144,7 +5149,8 @@
         "in_release": true,
         "hours": "Tue,Wed,Thu,Fri 14:30-18:00",
         "closed_text": "The office is locked. Office hours are on the door.",
-        "alone": "read her grade, posted on the door"
+        "alone": "read her grade, posted on the door",
+        "hidden_until": "bio_ta_met"
       },
       {
         "id": "dean_office",
@@ -8495,6 +8501,26 @@
         "chrome": {
           "at": "2026-11-03 15:22",
           "report": "Clock in leaves her in cafe_uniform_normal and does not give the tight one; room_sleep, cafe_shift and party_arrive carry showWhenBlocked with their messages; ryan_two_knocks f_on and twist render Ryan, her and Laura as dialog boxes in order; Hale's office and the art office offer their choice; the Business class says he's mid-lecture; the Quests page shows 'Your Psychology lecturer' and no Hale before the meeting; gates 62/86, meter ceiling and no canvas key discarded now PASS."
+        },
+        "played": null
+      },
+      {
+        "id": "want_on_the_moment",
+        "what": "His Want sits on the moment, never on a no: Ryan's opening +10 on Open the door, step 8 +5 on the sex, his Jake-3 reaction on Don't stop, Vance's walk-on pays 0 (DECISIONS 143)",
+        "built_at": "2026-11-03 16:29",
+        "chrome": {
+          "at": "2026-11-03 16:29",
+          "report": "Gate 'a no never raises his Want' 12/12 on the build; the opening's Open the door carries Ryan +10 and Run to your room carries none (TOML read); Ryan's step 8 terms screen gives no Want."
+        },
+        "played": null
+      },
+      {
+        "id": "pass2_slips",
+        "what": "Jake's no-show clears his booking; rent reads rent_short; goal 2's card; closed lines from hours; no name before the meeting in descriptions or the map; quoted speech as dialog (DECISIONS 144)",
+        "built_at": "2026-11-03 16:29",
+        "chrome": {
+          "at": "2026-11-03 16:29",
+          "report": "Quad unnamed before the meetings and named after; faculty floor lists only the art office when only she is met; goal 2 card text present; jake_date_noshow in the build; setup.RENT_SHORT_FLAG defined; Ryan step 8's talk screen shows his line in a dialog box. Gates 65/90, the six new ones PASS."
         },
         "played": null
       }

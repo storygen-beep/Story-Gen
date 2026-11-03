@@ -739,6 +739,48 @@ after_round = 2
 after_choice = 1
 content = "next week then"
 
+# ── Jake: she said yes to a date and wasn't at the door (DECISIONS 87) ──
+[[phone.conversations]]
+id     = "jake_date_noshow"
+app    = "messages"
+npc    = "npc_jake"
+notify = "📱 Jake"
+repeat_after_days = 1
+ignore_after_days = 1
+on_ignore = { effects = [], flagEffects = [{ targetType = "player", flag = "jake_stood_up", op = "set" }, { targetType = "player", flag = "jake_date_booked", op = "unset" }] }
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "jake_date_booked", operator = "is_true" },
+  { type = "hours_since_flag", subject = "player", flag_key = "jake_date_booked", operator = "gte", value = 72 },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "i was outside your house for twenty minutes"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "you ok?"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "sorry. i fell asleep", effects = [], flagEffects = [{ targetType = "player", flag = "jake_stood_up", op = "set" }, { targetType = "player", flag = "jake_date_booked", op = "unset" }] },
+  { text = "something came up", effects = [], flagEffects = [{ targetType = "player", flag = "jake_stood_up", op = "set" }, { targetType = "player", flag = "jake_date_booked", op = "unset" }] },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "next time text me. ok?"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "fine. you owe me one."
+
 # ── Jake (W8, LO 2026-11-03): the midweek date, booked here. ──
 [[phone.conversations]]
 id     = "jake_date_wed"

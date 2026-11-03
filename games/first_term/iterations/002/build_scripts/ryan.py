@@ -253,7 +253,9 @@ out.append({
 #    on Saturday nights she waits up downstairs. Replaces the talk (cut); the terms move here, after. ──
 def term_exit(text, flagname, final=False):
     extra = dict(final=True) if final else dict(consumes=True)
-    eff = [nadd(R, "want", 5), setv("ryan_step", 8)] if not final else [nadd(R, "want", 5), setv("ryan_step", -1, clamp=False)]
+    # LO 2026-11-03: his Want pays for what happened, never for a no. The +5 is on the sex ("Lie there."); his
+    # terms, and "(ends his path)", add 0.
+    eff = [setv("ryan_step", 8)] if not final else [setv("ryan_step", -1, clamp=False)]
     flags = [fset(flagname), done(8)] + ([funset("ryan_knock_code"), fset("ryan_08_two_knocks_closed")] if final else [])
     return go(text, loc="home_hall", mins=5, eff=eff, flags=flags, wardrobe=DRESS_DAY, **extra)   # undressed on `undress` (DECISIONS 127)
 
@@ -355,15 +357,15 @@ out.append({
         node("inside", "Inside", [
             P(beat(S, "inside")),
             VID("a guy coming inside a girl, holding her hips down", "creampie he holds her hips", "he cums inside her", pool_dir="sex/ryan_08_inside_t5"),
-        ], [go("Lie there.", node="after", mins=10)]),
+        ], [go("Lie there.", node="after", mins=10, eff=[nadd(R, "want", 5)])]),
         node("on", "On you", [
             P(beat(S, "on")),
             VID("a guy pulling out and coming on a girl's stomach and tits on his bed", "guy pulls out cums on her", "cum on tits after sex bed", pool_dir="sex/ryan_08_on_t5"),
-        ], [go("Lie there.", node="after", mins=10)]),
+        ], [go("Lie there.", node="after", mins=10, eff=[nadd(R, "want", 5)])]),
         node("mouth", "Your mouth", [
             P(beat(S, "mouth")),
             VID("a girl on her knees by a bed, a guy coming in her mouth, she swallows", "cum in mouth kneeling swallow", "he finishes in her mouth", pool_dir="sex/ryan_08_mouth_t5"),
-        ], [go("Lie there.", node="after", mins=10)]),
+        ], [go("Lie there.", node="after", mins=10, eff=[nadd(R, "want", 5)])]),
         node("after", "After", [
             P("You lie with your head on his chest. His heart is still going hard under your ear. Across the hall, Laura's room is quiet again. Your thighs are sticky and your lips are sore and every part of you knows whose bed this is."),
             T("That was your brother. You should feel sick."),
@@ -454,7 +456,7 @@ HOT_COUCH = [  # the couch, Sat/Sun 14:00-18:00
 HR = "ryan_hot_repeatables"
 # S2 (skill, LO 2026-11-03): every spoken line is a dialog block with its speaker. The signed beats write speech as
 # quotes inside paragraphs; spoken() keeps every word and cuts the paragraph at each quote, in order, into
-# narration and dialog. The speakers are named per beat by hand ("R" Ryan, "ME" her, "L" Laura at the door).
+# narration and dialog (canv.speech; every other canvas goes through canv.voice_canvas and speech_table.py). The speakers are named per beat by hand ("R" Ryan, "ME" her, "L" Laura at the door).
 SPEAKERS = {
     "7s_a": ["R"], "7s_b": ["R", "R"], "7s_c": ["R", "ME", "R", "R"],
     "7t_a": ["R", "R"], "7t_b": ["L", "R"], "7t_c": ["R", "R"],
@@ -465,26 +467,8 @@ SPEAKERS = {
     "7wall_shy": ["R", "ME", "ME"], "7wall_eager": ["ME", "ME", "ME", "ME"],
 }
 def spoken(key):
-    import re as _re
-    text = beat(HR, key)
-    who = list(SPEAKERS.get(key, []))
-    parts = _re.split(r'("[^"]+")', text)
-    quotes = [p_ for p_ in parts if p_.startswith('"')]
-    assert len(quotes) == len(who), (key, len(quotes), len(who))
-    blocks, i = [], 0
-    for part in parts:
-        part = part.strip()
-        if not part:
-            continue
-        if part.startswith('"'):
-            line = part[1:-1].strip()
-            if line.endswith(","):
-                line = line[:-1] + "."
-            sp = who[i]; i += 1
-            blocks.append(ME(line) if sp == "ME" else D({"R": R, "L": "npc_laura"}[sp], line))
-        else:
-            blocks.append(P(part[0].upper() + part[1:]))
-    return blocks
+    """One beat of the menu, cut into narration and dialog by canv.speech (the shared helper since 2026-11-03)."""
+    return speech(beat(HR, key), [{"R": R, "L": "npc_laura"}.get(sp, sp) for sp in SPEAKERS.get(key, [])])
 SHY_V, EAGER_V = trait("corruption", "lt", 70), trait("corruption", "gte", 70)
 def voices(act):
     return [GC(cond(SHY_V), *spoken(f"7{act}_shy")), GC(cond(EAGER_V), *spoken(f"7{act}_eager"))]

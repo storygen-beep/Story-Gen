@@ -54,6 +54,8 @@ count. A goal that can end names the next (`want.promise.goals[]`; `shape.py`, t
 `ends_flag`, the flag the game sets when it is met: a goal whose end the game can't see is one the
 player never finishes. Checked: `shape.py` warns on a date in a goal's words; gate *a goal's end is
 built* warns on an `ends_flag` nothing sets; `--ship` lists every line naming a future week or day.
+A goal whose end comes in a later release says so with `"ends_in_release": N`, and the gate lists it
+instead of asking for its flag now.
 
 **Name the moment kinds the game promises.** Five recur in what players remember: her firsts · being
 seen · her body as the price for something she needs · taboo at home · a consequence she lives with.

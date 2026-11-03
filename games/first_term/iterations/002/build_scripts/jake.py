@@ -62,11 +62,13 @@ out.append({
         ]),
         node("rail", "The rail", [
             P("You kiss him first, right there under the porch light. Jake makes a low sound and lifts you onto the rail like you weigh nothing. Your legs lock round his waist. His hands sit on your hips, then slide down to grab your ass. \"God, @player,\" he breathes into your mouth. It gets hungry and loud, all teeth and breath. The rail creaks every time he pulls you closer. Anyone inside could hear it, but you don't care. You want more of his mouth. Then, behind you, the lock turns."),
-        ], [go("\"Don't stop.\"", node="ryan", mins=3)]),
+        # LO 2026-11-03: Want pays for what happened, never for a no. Ryan sees her on the rail when the door opens, so
+        # his Love -15 and Want +5 sit on the way in, not on her goodnight
+        ], [go("\"Don't stop.\"", node="ryan", mins=3, eff=[nadd(R, "warmth", -15), nadd(R, "want", 5)])]),
         node("ryan", "Ryan", [
             P("The front door opens behind you. Ryan stands in the doorway and stops dead. You're on the porch rail with your legs locked round Jake's waist, kissing him. Jake's hands are full of your ass. You don't climb down. You look straight at Ryan over Jake's shoulder and hold it. \"Ryan, this is Jake. My boyfriend.\" Ryan's jaw goes tight. His eyes drop to Jake's hands on you, then come back to your face. \"Great.\" Jake grins over his shoulder, not getting it. \"Your brother hates me.\" *Good. Look all you want, Ryan.* Ryan steps back inside without another word. The door slams hard."),
             P("Behind Jake's shoulder, in the dark living-room window, a shape on the couch hasn't moved."),
-        ], [go("\"Goodnight, Jake.\"", node="after", mins=5, eff=[nadd(R, "warmth", -15), nadd(R, "want", 5)])]),  # -10 here, -5 moved from Jake B 2 (jake_02 sheet:28)
+        ], [go("\"Goodnight, Jake.\"", node="after", mins=5)]),  # Ryan's -15 / +5 moved onto "Don't stop." (the moment he sees her)
         node("after", "Next Saturday", [
             P("Jake goes off down the path, whistling. You let yourself in."),
             P("The living room is dark. Laura is on the couch with her knees pulled up and her hand at her throat, and she doesn't pretend she wasn't watching."),
@@ -105,8 +107,8 @@ out.append({
             G(CURFEW_ON, T("You're grounded. Laura would know by morning, she always does.")),
         ], [
             # C4 (LO 2026-11-03): dirty, the date doesn't happen, and he says why
-            go("Go out with him.", node="date", mins=10, cond_=cond(*NO_CURFEW["items"], trait("hygiene", "gte", 30)), flags=[fset("jake_date_went")]),
-            go("Go out with him.", node="date", mins=10, cond_=cond(*NO_CURFEW["items"], trait("hygiene", "lt", 30), flag("hygiene_off")), flags=[fset("jake_date_went")]),
+            go("Go out with him.", node="date", mins=10, cond_=cond(*NO_CURFEW["items"], trait("hygiene", "gte", 30)), flags=[fset("jake_date_went"), funset("jake_stood_up")]),
+            go("Go out with him.", node="date", mins=10, cond_=cond(*NO_CURFEW["items"], trait("hygiene", "lt", 30), flag("hygiene_off")), flags=[fset("jake_date_went"), funset("jake_stood_up")]),
             go("Go out with him.", node="stink", mins=2, cond_=cond(*NO_CURFEW["items"], trait("hygiene", "lt", 30), flag("hygiene_off", False)), flags=[funset("jake_date_booked")]),  # Q73 (iteration 002: pulled forward from part 5 so Laura C 5 has its flag)
             go("\"I'm grounded. Next week.\"", loc="home_front_door", mins=5, cond_=CURFEW_ON, flags=[funset("jake_date_booked")]),
             go("\"Not tonight, Jake.\"", node="no", mins=2),
@@ -250,7 +252,9 @@ for cid, loc, name, line in [("hub_jake_quad", "quad", "Jake, with the team", "J
         "nodes": [node("jake", name, [
             P(line),
             POOL(D(J, "There she is."), D(J, "C'mere. Sit on my knee. They don't believe me about you."), pid=f"{cid}_lines"),
-            G(cond(flag("jake_date_booked", False)), D(J, "Saturday? Say Saturday.")),
+            G(cond(flag("jake_date_booked", False), flag("jake_stood_up", False)), D(J, "Saturday? Say Saturday.")),
+            # the no-show text sets it (phone.py jake_date_noshow); the next date clears it
+            G(cond(flag("jake_date_booked", False), flag("jake_stood_up")), D(J, "You still owe me a date, you know. Saturday?")),
             *JAKE_STATE,
         ], [go("Stay with him a while.", loc=loc, mins=20), go("Go.", loc={"quad": "campus", "canteen": "campus"}.get(loc, "town"))])]})
 

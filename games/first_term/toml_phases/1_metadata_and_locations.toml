@@ -100,6 +100,7 @@ flag_keys = [
   "jake_kissed",
   "jake_met",
   "jake_number",
+  "jake_stood_up",
   "kayla_met",
   "keg_guy_dared",
   "knows_about_kayla",
@@ -161,6 +162,7 @@ flag_keys = [
   "pays_her_own_way",
   "picks_the_dares",
   "ran_with_zoe",
+  "rent_short",
   "rent_starts",
   "rival_met",
   "room_tidy",
@@ -316,7 +318,7 @@ default = "El"
 id          = "street"
 name        = "Your Street"
 kind        = "thoroughfare"
-description = "Your street: the way out to everything. Home is halfway down, with Mr. Vance's porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this pavement, and every neighbour with a window sees what you wore to do it."
+description = "Your street: the way out to everything. Home is halfway down, with the porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this pavement, and every neighbour with a window sees what you wore to do it."
 image       = "locations/street.jpg"
 image_search_queries = ["your street"]
 navigation_order = ["home", "vance_house", "park", "corner_shop", "campus", "town"]
@@ -329,6 +331,9 @@ clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
   { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
+]
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "vance_met", operator = "is_true" }] }, text = "Your street: the way out to everything. Home is halfway down, with Mr. Vance's porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this pavement, and every neighbour with a window sees what you wore to do it." },
 ]
 
 [[locations]]
@@ -358,7 +363,7 @@ navigation_order = ["home_kitchen", "home_living_room", "home_master_bedroom", "
 id          = "home_kitchen"
 name        = "Kitchen"
 kind        = "destination"
-description = "The kitchen: where this family eats, argues and pays. Laura makes breakfast here before work and pours her wine here at night. Mark cooks on Wednesdays and owns the table on Sundays, when he counts the rent into an envelope with Vance's name on it. The drawer by the fridge is where the letters go that nobody wants to open."
+description = "The kitchen: where this family eats, argues and pays. Laura makes breakfast here before work and pours her wine here at night. Mark cooks on Wednesdays and owns the table on Sundays, when he counts the rent into an envelope with the landlord's name on it. The drawer by the fridge is where the letters go that nobody wants to open."
 image       = "locations/home_kitchen.jpg"
 image_search_queries = ["kitchen"]
 parent      = "home"
@@ -611,21 +616,24 @@ closed_text = "It's dark out."
 
 [[locations]]
 id          = "vance_house"
-name        = "Vance's House"
+name        = "Next Door"
 kind        = "destination"
-description = "Next door: Mr. Vance's house, and his porch. He owns your house too, and Mark pays him every Sunday. Most evenings he sits out there with a paper he doesn't read and watches the street. Walk past and he looks at what you wore."
+description = "Next door: a bigger house than yours, and a porch, and an old man on it. He owns your house too, and Mark pays him every Sunday. Most evenings he sits out there with a paper he doesn't read and watches the street. Walk past and he looks at what you wore."
 image       = "locations/vance_house.jpg"
-image_search_queries = ["vance's house"]
+image_search_queries = ["next door"]
 entry_from  = "street"
 navigation_order = []
 hours = [{ weekdays = [0, 1, 2, 3, 4, 5, 6], open = "18:00", close = "22:00" }]
-closed_text = "Vance's porch is empty. The curtains are shut."
+closed_text = "The porch next door is empty. The curtains are shut."
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "vance_met", operator = "is_true" }] }, text = "Next door: Mr. Vance's house, and his porch. He owns your house too, and Mark pays him every Sunday. Most evenings he sits out there with a paper he doesn't read and watches the street. Walk past and he looks at what you wore." },
+]
 
 [[locations]]
 id          = "park"
 name        = "Park"
 kind        = "destination"
-description = "The park at the end of the street: paths, a pond, benches and thick bushes along the far side. People walk here, run here, sit here. You can walk, run or rest on a bench, and what you wear decides who turns to look. Zoe runs here on weekend mornings."
+description = "The park at the end of the street: paths, a pond, benches and thick bushes along the far side. People walk here, run here, sit here. You can walk, run or rest on a bench, and what you wear decides who turns to look. A girl from your Biology class runs here on weekend mornings."
 image       = "locations/park.jpg"
 image_search_queries = ["park"]
 entry_from  = "street"
@@ -643,6 +651,9 @@ clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
   { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
+]
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_met", operator = "is_true" }] }, text = "The park at the end of the street: paths, a pond, benches and thick bushes along the far side. People walk here, run here, sit here. You can walk, run or rest on a bench, and what you wear decides who turns to look. Zoe runs here on weekend mornings." },
 ]
 
 [[locations]]
@@ -685,7 +696,7 @@ navigation_order = ["quad", "lecture_hall", "library", "canteen", "college_women
 id          = "quad"
 name        = "Quad"
 kind        = "destination"
-description = "The quad: the big lawn in the middle of campus, where people sit between classes and everybody watches everybody. Jake's team hangs out here in the mornings; Zoe lies on the grass in the afternoons. Sit down and you'll hear what campus is saying — sometimes about you."
+description = "The quad: the big lawn in the middle of campus, where people sit between classes and everybody watches everybody. The football team hangs out here in the mornings; a girl from your Biology class lies on the grass in the afternoons. Sit down and you'll hear what campus is saying — sometimes about you."
 image       = "locations/quad.jpg"
 image_search_queries = ["quad"]
 parent      = "campus"
@@ -702,6 +713,11 @@ clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
   { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
+]
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_met", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "zoe_met", operator = "is_true" }] }, text = "The quad: the big lawn in the middle of campus, where people sit between classes and everybody watches everybody. Jake's team hangs out here in the mornings; Zoe lies on the grass in the afternoons. Sit down and you'll hear what campus is saying — sometimes about you." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_met", operator = "is_true" }] }, text = "The quad: the big lawn in the middle of campus, where people sit between classes and everybody watches everybody. The football team hangs out here in the mornings; Zoe lies on the grass in the afternoons. Sit down and you'll hear what campus is saying — sometimes about you." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_met", operator = "is_true" }] }, text = "The quad: the big lawn in the middle of campus, where people sit between classes and everybody watches everybody. Jake's team hangs out here in the mornings; a girl from your Biology class lies on the grass in the afternoons. Sit down and you'll hear what campus is saying — sometimes about you." },
 ]
 
 [[locations]]
@@ -731,7 +747,7 @@ clothing_rules = [
 id          = "library"
 name        = "Library"
 kind        = "destination"
-description = "The library: long tables, green lamps and silence. Study here and you learn. It's dull, but the exams read it. Nadia studies here most afternoons."
+description = "The library: long tables, green lamps and silence. Study here and you learn. It's dull, but the exams read it. The girl who sits by you in Psychology studies here most afternoons."
 image       = "locations/library.jpg"
 image_search_queries = ["library"]
 parent      = "campus"
@@ -748,6 +764,9 @@ clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
   { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
+]
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "nadia_met", operator = "is_true" }] }, text = "The library: long tables, green lamps and silence. Study here and you learn. It's dull, but the exams read it. Nadia studies here most afternoons." },
 ]
 
 [[locations]]
@@ -827,7 +846,7 @@ clothing_rules = [
 id          = "faculty_floor"
 name        = "Faculty Floor"
 kind        = "thoroughfare"
-description = "The faculty floor: one long corridor of office doors with name cards. Dr. Hale, the art lecturer, the Business lecturer, the Biology TA and the dean. Each door has its office hours taped to it, and your grades are posted on them."
+description = "The faculty floor: one long corridor of office doors with name cards and office hours taped to them. Your grades are posted on the doors."
 image       = "locations/faculty_floor.jpg"
 image_search_queries = ["faculty floor"]
 parent      = "campus"
@@ -858,6 +877,7 @@ entry_from  = "faculty_floor"
 navigation_order = []
 hours = [{ weekdays = [3], open = "17:00", close = "19:30" }]
 closed_text = "The office is locked. Office hours are on the door."
+hidden_until = { flag = "hale_met" }
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
@@ -881,6 +901,7 @@ entry_from  = "faculty_floor"
 navigation_order = []
 hours = [{ weekdays = [0, 1, 3, 4], open = "14:30", close = "18:00" }]
 closed_text = "The office is locked. Office hours are on the door."
+hidden_until = { flag = "art_lecturer_met" }
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
@@ -904,6 +925,7 @@ entry_from  = "faculty_floor"
 navigation_order = []
 hours = [{ weekdays = [0, 2, 3, 4], open = "14:30", close = "18:00" }]
 closed_text = "The office is locked. Office hours are on the door."
+hidden_until = { flag = "business_lecturer_met" }
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
@@ -927,6 +949,7 @@ entry_from  = "faculty_floor"
 navigation_order = []
 hours = [{ weekdays = [1, 2, 3, 4], open = "14:30", close = "18:00" }]
 closed_text = "The office is locked. Office hours are on the door."
+hidden_until = { flag = "bio_ta_met" }
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
@@ -978,7 +1001,7 @@ navigation_order = ["cafe", "clothes_shop", "zoe_flat", "party_house"]
 id          = "cafe"
 name        = "Café"
 kind        = "destination"
-description = "The café on the town strip: a counter, eight booths and a back room with a staff mirror. Tom runs it. Shifts pay a small wage, but the tips go up with how you look in the uniform. Regulars, mostly men. Shifts end when the café shuts; Tom stays on to close."
+description = "The café on the town strip: a counter, eight booths and a back room with a staff mirror. The owner works the till himself. Shifts pay a small wage, but the tips go up with how you look in the uniform. Regulars, mostly men. A STAFF WANTED card is taped inside the window."
 image       = "locations/cafe.jpg"
 image_search_queries = ["café"]
 parent      = "town"
@@ -995,6 +1018,9 @@ clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)" },
   { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
+]
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tom_met", operator = "is_true" }] }, text = "The café on the town strip: a counter, eight booths and a back room with a staff mirror. Tom runs it. Shifts pay a small wage, but the tips go up with how you look in the uniform. Regulars, mostly men. Shifts end when the café shuts; Tom stays on to close." },
 ]
 
 [[locations]]
@@ -1610,7 +1636,7 @@ weekdays   = [0]
 start_time = "18:00"
 end_time   = "19:00"
 activity   = "at your front door"
-when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_carried", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "rent_carried", operator = "lt", value = 48 }] }
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_carried", operator = "is_true" }] }
 
 [[npcs.schedules]]
 location   = "vance_house"

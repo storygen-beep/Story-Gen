@@ -311,13 +311,13 @@ how many fails are [off].
 | sex for pay names the amount | a choice that pays her for sex, on a canvas in the `pool[]` of a system card marked `"sex_for_pay": true`, has its sum said in the scene before her yes; wages, loans and gifts are not read; n/a with no such system; a warning | `the-systems.md` SY8 · `the-arc.md` A15 |
 | a skill rejection names a notebook entry | each `release_page.rejections[]` whose layer is the skill names its notebook entry; a warning | `the-release.md` "When LO rejects something" |
 | no unknown topic | every `board.coverage[]` topic has a status but `unknown`; no list is red; a warning, `--ship` names each | `templates/sheets/coverage.md` |
-| a goal's end is built | each goal that can end, except the last, names an `ends_flag` some effect sets; a warning | `the-want.md` §0 |
+| a goal's end is built | each goal that can end, except the last, names an `ends_flag` some effect sets; a goal with `"ends_in_release": N` above 1 is a later release's end, skipped and listed; a warning | `the-want.md` §0 · `state.md` |
 | adult wording | no banned school word anywhere a player reads; a warning, never a block | `the-voice.md` "Adult wording" |
 | a named person is where the line says | a line placing a person (name, role or kin word; a sound, a seat, asleep) holds at every five minutes it can show, by their rows, first match, `when` rows both ways; an any-NPC check backs no name; a `--ship` block | `register.md` "The truth rule" |
 | nobody is woken | no knock while someone inside is asleep; a one-time scene's person is in the building and awake at every minute it can fire; a `--ship` block | `the-map.md` R6b · `engine.md` §31 |
 | every person here has a face | each place a person's rows put them has a face there, not only a heat-gated one; a `requires_npc` no row matches is red; occupancy rows excepted; a `--ship` block | `the-first-hour.md` F5b |
 | a past line has its event | a past claim (last night, I heard, told me) reads the flag or step of that event; a met flag or a many-source meter is no proof; a warning | `register.md` "The truth rule" |
-| no one is named before they're met | narration placing a person waits for their `*_met`; every `*_met` read is set; a `--ship` block | `the-first-hour.md` F7 |
+| no one is named before they're met | narration placing a person waits for their `*_met`; so does a name in a location `description` or `description_variants[].text`, unless the variant's conditions or the place's `hidden_until` read their flag; every `*_met` read is set; a `--ship` block | `the-first-hour.md` F7 |
 | a latch flag is cleared | a flag driving a row's `when`, an engine-set flag, or a catch's own flag is in the daily tick or read by hours since; a `--ship` block | `state.md` · `engine.md` §28 |
 | a repeat doesn't say it's the first time | no arrival or first-time line on a repeatable's first screen without a flag; a warning | `register.md` "The truth rule" |
 | a button does something | no exit from a hub in the person's own room, or "go back in" button, that lands where it is with nothing changed; no "get dressed" that moves no garment; a `--ship` block | `the-surfaces.md` R7 |
@@ -328,6 +328,10 @@ how many fails are [off].
 | a phone line is true | a follow-up waits on `after_round`; a call never says where she is or moves her; no text or call from someone asleep; a `--ship` block | `the-phone.md` |
 | one pool, one place · the phone owns posting | no pool or long paragraph pasted into two canvases; no room button posts when the phone does; warnings | `the-phone.md` · `register.md` L3 |
 | a day word fits its window | "this morning", "it's Friday" never show outside their hours or day; a warning | `the-clock.md` C2 |
+| a no never raises his Want | a choice that is `final`, says "(ends his path)", or reads as a refusal or an exit away from him (`_NO_LABEL_STARTS`) adds no `want` to anyone; canvas exits and phone replies; a warning | `the-heat-ladder.md` H5 |
+| a booking can clear | a flag a choice or reply sets, read as a flag and with `hours_since_flag <flag> lt N`, and meant to come down (unset somewhere, set by a reply, or named `_booked`/`_invite`/…), is unset somewhere outside that window, or in the daily tick, or by the engine (`ENGINE_CLEARED_FLAGS`); the window half `a latch flag is cleared` passes as timed; a warning | `the-phone.md` P5 (the no-show bullet) |
+| a closed activity says when it opens | a repeatable solo canvas with `trigger.schedules` (no `npc`, no `requires_npc`, not a random event) sets `show_when_blocked = true` and a `cooldown_message` at the top of `[canvases.trigger]`; a warning | `the-clock.md` C5 |
+| speech is a dialog block | no `paragraph` carries a quoted run of two or more words; `props.not_speech = true` exempts a sign, a screen or a title; a warning | `register.md` "Speech is a UI component" |
 | **the price is in one currency** | every notation on a button, plus the engine's own `currency_symbol`, resolves to ONE currency | `the-economy.md` R7 · `engine.md` §33 |
 | sentence length | the prose has not drifted dense | `register.md` |
 | prose has room | the first floor under the writing: `but` ≥ 2.88 per 1,000 words (field p10) and `and` ≤ 41.1 (field max) — compressed prose drops its joints | `register.md` — "Joints" |

@@ -273,7 +273,8 @@ prose, and it is the one place the player can act on it.
 declared `[[npcs.schedules]]` row as a Time / Location / Activity / Days table. A place with hours
 declares them as `[[locations]] hours` + `closed_text`, and a closed card says when it opens
 (`engine.md` §22). An activity with hours and no `cooldown_message` is a schedule the player can only
-learn by losing a day to it.
+learn by losing a day to it. Checked: gate *a closed activity says when it opens* fails a repeatable solo
+canvas with `trigger.schedules` that lacks either key at the top of `[canvases.trigger]`.
 
 ⚠️ The top-30 mopoga study found **lostness, not grind, is this genre's disease** — 15.5% of player
 comments against grind's 0.9% (Process Review, Round 1). A hidden window is lostness with a clock on it.

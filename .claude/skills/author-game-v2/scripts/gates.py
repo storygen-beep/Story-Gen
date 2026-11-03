@@ -12911,17 +12911,17 @@ _PAST_DURATION_RE = re.compile(r"\b(?:not|never|nobody|nothing|no one|first time
 
 
 def _goal_end_is_built(game, state):
-    """(ok, headline, detail) for `a goal's end is built`.
-
-    Each goal in `want.promise.goals[]` with `ends_when`, except the last, names an `ends_flag`,
-    and some effect in the TOML sets that flag (`_flags_ever_set`). A WARN by type: a scored gate,
-    never a --ship BLOCK. n/a: no ledger, or no goal but the last can end."""
+    """(ok, headline, detail) for `a goal's end is built`. Each goal in `want.promise.goals[]` with
+    `ends_when`, except the last and one whose `ends_in_release` N > 1 (a later release's end, skipped
+    and listed: `_ends_later`), names an `ends_flag` some effect sets (`_flags_ever_set`). A scored
+    gate, never a --ship BLOCK. n/a: no ledger, or no goal ends in this release."""
     prom = (((state or {}).get("want") or {}).get("promise"))
     goals = [g for g in ((prom or {}).get("goals") or []) if isinstance(g, dict)] \
         if isinstance(prom, dict) and isinstance(prom.get("goals"), list) else []
     ending = [g for g in goals[:-1] if str(g.get("ends_when") or "").strip()]
+    later, ending = _later_goal_rows(ending), [g for g in ending if not _ends_later(g)]
     if not ending:
-        return None, "no goal but the last declares ends_when", []
+        return None, "no goal but the last ends in this release", later
     set_flags = _flags_ever_set(game)
     bad = []
     for g in ending:
@@ -12932,7 +12932,7 @@ def _goal_end_is_built(game, state):
         elif flag not in set_flags:
             bad.append(f"\"{label}\": nothing in the TOML sets `{flag}` — the goal can never end")
     return (not bad, f"{len(ending) - len(bad)}/{len(ending)} goal ends are built (the last goal "
-                     f"is exempt)", bad)
+                     f"is exempt)", bad + later)
 
 
 def _future_dates_row(model, game):
@@ -14643,6 +14643,10 @@ def _named_before_met_gate(game):
                 where = "the opening" if c.get("id") in staged else c["id"]
                 rows.append(f"{where} · {nid}: names {name} with nothing on the way reading "
                             f"`{short}_met` — \"{placed[0].strip()[:110]}\"")
+    # LO 2026-11-03: a place's description renders on the room view with no canvas around it,
+    # so any name there is a placing. `_named_in_descriptions`, above main().
+    dn, drows = _named_in_descriptions(game, people, implied)
+    n, rows = n + dn, rows + drows
     if not n and not rows:
         return None, "no person with a met flag is named", []
     return not rows, (f"{len(rows)} line(s) name someone the player may not have met"
@@ -15169,6 +15173,12 @@ def _truth_gates(gate, _N, model, game, state):
     gate("one pool, one place", *_truth_run("one pool, one place", game, state))
     gate("the phone owns posting", *_truth_run("the phone owns posting", game, state))
     gate("a day word fits its window", *_truth_run("a day word fits its window", game, state))
+    # LO 2026-11-03, "Any of these that can come back gets a gate." Scored, never --ship blocks;
+    # each is defined above main().
+    gate("a no never raises his Want", *_no_never_raises_want(game))
+    gate("a booking can clear", *_booking_can_clear(game))
+    gate("a closed activity says when it opens", *_closed_activity_says_when(game))
+    gate("speech is a dialog block", *_speech_is_a_dialog_block(game))
     ok, head, detail, n = _stage_way_up(game, state)
     _N["every stage has a way up"] = n
     gate("every stage has a way up", ok, head, detail)
@@ -15656,6 +15666,305 @@ def _ends_on_an_opening(game, state, census):
     head = (f"{len(ladders) - len(missing)}/{len(ladders)} declared ladders end on a card that says "
             f"where this release ends · " + census)
     return not missing, head, detail
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# LO 2026-11-03: "Any of these that can come back gets a gate." Six defects first_term shipped
+# or nearly shipped, each turned into a check here (above main(), so no cited line moves).
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── a goal's end is built: a later release's end (`ends_in_release`) ─────────
+def _ends_later(goal):
+    """Does this goal end in a later release? `"ends_in_release": N` with N > 1 says its end is
+    built in release N, so this release need not set its `ends_flag` yet."""
+    n = goal.get("ends_in_release")
+    return isinstance(n, (int, float)) and not isinstance(n, bool) and n > 1
+
+
+def _later_goal_rows(goals):
+    """The detail rows for the goals `_ends_later` skips: listed, never judged."""
+    return [f"\"{str(g.get('goal') or '?')[:50]}\": ends in release {int(g['ends_in_release'])} "
+            f"— skipped until that release" for g in goals if _ends_later(g)]
+
+
+# ── no one is named before they're met: the places' own words ────────────────
+def _named_in_descriptions(game, people, implied):
+    """(names seen, rows) for location `description` and `description_variants[].text`.
+
+    A description renders on the room view itself, so a name in it is a placing whether or not
+    a verb follows. It passes when something on its way reads the person's own flags or traits
+    (`<short>_met`, `<short>_step`, …) or a flag only their meeting can set (`implied`): the
+    place's `hidden_until` / `entry_conditions`, or the variant's `conditions` (or `when`). A
+    test that the flag is FALSE is no proof of meeting."""
+    rows, n = [], 0
+
+    def met_ok(it, short, pid):
+        kind, key, op, _v = _cond_parts(it)
+        if op == "is_false":
+            return False
+        return str(key or "").startswith(short + "_") or (kind == "flag" and key in implied[pid])
+
+    for loc in game.get("locations") or []:
+        if not isinstance(loc, dict):
+            continue
+        hid = loc.get("hidden_until")
+        on_way = ([hid] if isinstance(hid, dict) else []) + \
+            list(_tr_and_items({"conditions": loc.get("entry_conditions")}))
+        texts = [("description", loc.get("description"), [])]
+        for i, v in enumerate(loc.get("description_variants") or []):
+            if isinstance(v, dict):
+                cond = v.get("conditions") or v.get("when")
+                texts.append((f"description_variants[{i}]", v.get("text"),
+                               _tr_and_items({"conditions": cond}) if isinstance(cond, dict) else []))
+        for key, text, items in texts:
+            if not isinstance(text, str):
+                continue
+            for pid, (short, rx, name) in people.items():
+                m = rx.search(text)
+                if not m:
+                    continue
+                n += 1
+                if any(met_ok(it, short, pid) for it in on_way + items):
+                    continue
+                a, b = max(0, m.start() - 40), min(len(text), m.end() + 60)
+                rows.append(f"location {loc.get('id')} · {key}: names {name} with nothing on the way "
+                            f"reading `{short}_met` — \"…{text[a:b].strip()}…\"")
+    return n, rows
+
+
+# ── a no never raises his Want (the-heat-ladder.md H5) ───────────────────────
+# "His Want pays for what happened, never for a no ... A no adds 0, and so does a final no that
+# says '(ends his path)'" (LO, 2026-11-03). A choice is a no when it is `final = true`, says
+# "(ends his path)", or its label reads as a refusal or an exit away from him. The refusal
+# patterns live here and nowhere else; each is anchored at the label's start (after an opening
+# quote) unless marked "anywhere", so "Stop and talk." or "Don't stop" never read as a no.
+_NO_LABEL_STARTS = (
+    r"No\b", r"Not tonight", r"Not now", r"Not yet", r"Goodnight", r"Good night",
+    r"Go past", r"Walk past", r"Walk on", r"Step round", r"Step around", r"Duck out", r"Run to",
+    r"Back out", r"Leave (?:him|it|them)\b", r"Look away", r"Hold your [\w ]{1,20}? down",
+    r"Turn [\w ]{1,30}? off and leave", r"Close the door", r"Say no\b",
+    r"Stop(?=[.!,]|\s*$|\s+(?:it|this|that|him|there)\b)",          # "Stop." — not "Stop and talk."
+    r"I can'?t\b", r"I can’t\b",
+)
+_NO_LABEL_ANYWHERE = (r"\(ends (?:his|her|their) path\)", r"\bsay no\b", r"\bI can['’]?t\b")
+_NO_LABEL_RE = re.compile(r"^\s*[\"“'‘]?\s*(?:" + "|".join(_NO_LABEL_STARTS) + r")"
+                          + r"|" + "|".join(_NO_LABEL_ANYWHERE), re.I)
+_WANT_TRAITS = {"want"}       # the meter H5 names; another meter of his is not read here
+
+
+def _is_a_no(choice):
+    return choice.get("final") is True or bool(_NO_LABEL_RE.search(str(choice.get("text") or "")))
+
+
+def _want_raises(choice):
+    """The `want` raises in a choice's effects: an NPC meter, op add, value above 0."""
+    out = []
+    for ef in choice.get("effects") or []:
+        if not isinstance(ef, dict) or (ef.get("trait") or ef.get("trait_key")) not in _WANT_TRAITS:
+            continue
+        if ef.get("targetType", "npc") != "npc" and not (ef.get("npcId") or ef.get("npc_id")):
+            continue
+        if (ef.get("op") or "add") == "add" and _effect_value_sign(ef.get("value")) > 0:
+            out.append(f"{ef.get('npcId') or ef.get('npc_id') or '?'} want +{ef.get('value')}")
+    return out
+
+
+def _no_never_raises_want(game):
+    """(ok, headline, detail) for `a no never raises his Want`: every choice (a canvas exit, a
+    phone reply) that reads as a no (`_is_a_no`) and raises an NPC's `want` is red."""
+    owners = [(c.get("id"), c) for c in game.get("canvases") or [] if not _is_dev(c)]
+    for key, lst in ((game.get("phone") or {}).items()):
+        if isinstance(lst, list):
+            owners += [(f"phone {d.get('id')}", d) for d in lst if isinstance(d, dict)]
+    rows, n = [], 0
+    for where, obj in owners:
+        for _path, d in _walk_paths(obj):
+            if not isinstance(d.get("text"), str) or not isinstance(d.get("effects"), list):
+                continue
+            if not _is_a_no(d):
+                continue
+            n += 1
+            raised = _want_raises(d)
+            if raised:
+                rows.append(f"{where}: \"{d['text'][:80]}\" — {', '.join(raised)}; a no adds 0 "
+                            f"(the-heat-ladder.md H5)")
+    if not n:
+        return None, "no choice reads as a no", []
+    return not rows, (f"{len(rows)} no(s) raise his Want" if rows else
+                      f"{n}/{n} noes leave his Want alone"), rows
+
+
+# ── a booking can clear (the-phone.md, the booking / no-show bullet) ─────────
+# A flag some reply or choice sets and some trigger reads with `hours_since_flag <flag> lt N` is
+# a BOOKING: it opens a window. Once the window passes, only an unset reached OUTSIDE it frees the
+# flag — a no-show thread on `hours_since_flag gte`, the daily tick, or an unconditional clear.
+# An unset that sits only inside the window is skipped by a player who never shows up, and the
+# flag stays true for the whole save. This is the half `a latch flag is cleared` exempts: that gate
+# passes any flag read through hours_since_flag as "timed".
+# Which windowed flags are bookings, measured on first_term 2026-11-03 (the literal reading
+# "every flag a choice sets and a trigger reads with hours_since lt" failed 10 flags, and 8 were
+# records meant to stay set: `opening_done` (36 `is_true` reads), `laura_04_done`, `<x>_seen`):
+#   · it is ALSO read as a plain flag (`is_true` / `is_false`, `hidden_until`) — read through
+#     hours_since / days_since alone it is a timestamp, and staying set changes nothing; and
+#   · it is meant to come down: something unsets it somewhere, a phone reply sets it (the
+#     booking bullet's "the yes sets `<x>_booked`"), or its name says booking (`_BOOKING_NAME`).
+#     A flag set by a scene and never unset anywhere is a record of that scene, not a booking.
+_BOOKING_NAME = re.compile(r"_(?:booked|booking|promised|invited?|date|plans?)$")
+ENGINE_CLEARED_FLAGS = {
+    "rent_short": "engine commit 8da4e050: set every short week, cleared by a full payment",
+}
+
+
+def _window_reads(items, flag):
+    return [it for it in items if it.get("type") == "hours_since_flag" and it.get("flag_key") == flag
+            and it.get("operator") in ("lt", "lte")]
+
+
+def _flag_sites(game):
+    """([(where, flag, N) window reads], [(where, flag, items on the way) unsets]) for the whole
+    game. A canvas's way in is its trigger and the triggers of the canvases that link into it; a
+    phone thread's or call's is its own trigger; anything else has none."""
+    reads, unsets = [], []
+    parents = _tr_parents(game)
+    by_id = {c.get("id"): c for c in game.get("canvases") or [] if c.get("id")}
+
+    def scan(where, obj, base):
+        for _p, d in _walk_paths(obj):
+            if d.get("type") == "hours_since_flag" and d.get("operator") in ("lt", "lte") \
+                    and d.get("flag_key"):
+                reads.append((where, d["flag_key"], d.get("value")))
+            fes = d.get("flagEffects")
+            for fe in fes if isinstance(fes, list) else []:
+                if isinstance(fe, dict) and fe.get("flag") and (
+                        fe.get("op") in ("unset", "clear", "remove") or fe.get("value") is False):
+                    unsets.append((where, fe["flag"], base + list(_conditions_of(d))))
+
+    for c in by_id.values():
+        items, cur, seen = [], c, set()
+        while cur and cur.get("id") not in seen:
+            seen.add(cur.get("id"))
+            items += list(_conditions_of(cur.get("trigger") or {}))
+            cur = by_id.get(parents.get(cur.get("id")))
+        scan(c.get("id"), c, items)
+    for key, lst in (game.get("phone") or {}).items():
+        if isinstance(lst, list):
+            for d in lst:
+                if isinstance(d, dict):
+                    scan(f"phone {d.get('id')}", d, list(_conditions_of(d.get("trigger") or {})))
+        else:
+            scan(f"phone.{key}", lst, [])
+    for key, v in game.items():
+        if key not in ("canvases", "phone"):
+            scan(key, v, [])
+    return reads, unsets
+
+
+def _phone_reply_sets(game):
+    """[(thread id, flag, None)] for every flag a phone thread's reply (or its on_ignore) sets."""
+    out = []
+    for key, lst in (game.get("phone") or {}).items():
+        for d in lst if isinstance(lst, list) else []:
+            for _p, h in _walk_paths(d) if isinstance(d, dict) else []:
+                fes = h.get("flagEffects")
+                for fe in fes if isinstance(fes, list) else []:
+                    if isinstance(fe, dict) and fe.get("flag") and fe.get("op", "set") == "set" \
+                            and fe.get("value") is not False:
+                        out.append((d.get("id"), fe["flag"], None))
+    return out
+
+
+def _booking_can_clear(game):
+    """(ok, headline, detail) for `a booking can clear`."""
+    reads, unsets = _flag_sites(game)
+    set_ever = _flags_ever_set(game) | set(_tr_flag_ops(game)[0])
+    tick = _tr_flag_ops(game)[2]
+    plain = set(_pr_collect(game, lambda d: d.get("flag_key") if d.get("flag_key") and d.get("type")
+                            not in ("hours_since_flag", "days_since_flag") else None, set()))
+    plain |= {(l.get("hidden_until") or {}).get("flag") for l in game.get("locations") or []
+              if isinstance(l, dict) and isinstance(l.get("hidden_until"), dict)}
+    by_reply = {f for _w, f, _v in _phone_reply_sets(game)}
+    comes_down = {f for _w, f, _i in unsets} | by_reply
+    booked = collections.defaultdict(list)
+    for where, f, v in reads:
+        if f in set_ever and f in plain and (f in comes_down or _BOOKING_NAME.search(f)):
+            booked[f].append(f"{where} (< {v}h)")
+    if not booked:
+        return None, "no flag a choice sets is read as a flag and with hours_since_flag lt", []
+    rows, ok_n = [], 0
+    for f in sorted(booked):
+        if f in tick or f in ENGINE_CLEARED_FLAGS:
+            ok_n += 1
+            continue
+        mine = [(w, items) for w, g, items in unsets if g == f]
+        if any(not _window_reads(items, f) for _w, items in mine):
+            ok_n += 1
+            continue
+        inside = sorted({w for w, _i in mine})
+        rows.append(f"`{f}` opens a window at {', '.join(sorted(set(booked[f]))[:3])}; cleared only by "
+                    f"{', '.join(inside) + ' inside that window' if inside else 'nothing'} — add a no-show "
+                    f"thread on hours_since_flag gte that unsets it, or clear it in [engine.daily_tick]")
+    return not rows, (f"{len(rows)} booking flag(s) can stay set for the whole save" if rows else
+                      f"{ok_n}/{len(booked)} booking flags clear outside their window"), rows
+
+
+# ── a closed activity says when it opens (the-clock.md C5) ───────────────────
+def _closed_activity_says_when(game):
+    """(ok, headline, detail) for `a closed activity says when it opens`: a repeatable canvas
+    with `trigger.schedules` and no `npc` / `requires_npc` (a solo activity) sets
+    `show_when_blocked = true` and a non-empty `cooldown_message` at the top level of
+    [canvases.trigger]. A random event (`trigger_mode = "random"`) has no button to dim."""
+    rows, n = [], 0
+    for c in game.get("canvases") or []:
+        t = c.get("trigger") or {}
+        if _is_dev(c) or not t.get("schedules") or not _rep_of(t) or t.get("npc") \
+                or t.get("requires_npc") or t.get("trigger_mode") == "random":
+            continue
+        n += 1
+        miss = []
+        if t.get("show_when_blocked") is not True:
+            miss.append("show_when_blocked = true")
+        if not str(t.get("cooldown_message") or "").strip():
+            miss.append("a cooldown_message")
+        if miss:
+            meta = t.get("metadata") or {}
+            dead = " (it is under [canvases.trigger.metadata], where the importer never reads it)" \
+                if "show_when_blocked" in meta or "cooldown_message" in meta else ""
+            rows.append(f"{c.get('id')} @{t.get('location')}: no {' and no '.join(miss)} at the top of "
+                        f"[canvases.trigger]{dead} — the button vanishes when it closes")
+    if not n:
+        return None, "no solo activity has schedules", []
+    return not rows, (f"{len(rows)} closed activit(ies) vanish without their hours" if rows else
+                      f"{n}/{n} closed activities say when they open"), rows
+
+
+# ── speech is a dialog block (register.md, "Speech is a UI component") ───────
+# A quoted run of two or more words starting with a capital (or an @-name) inside a `paragraph`
+# is a spoken line written as narration: no portrait, no speaker name, and the gates count it as
+# narration. `props.not_speech = true` exempts a paragraph that quotes a sign, a screen or a title.
+_SPEECH_IN_PARAGRAPH = re.compile(r"[\"“]([A-Z@][^\"”]{3,})[\"”]")
+
+
+def _speech_is_a_dialog_block(game):
+    """(ok, headline, detail) for `speech is a dialog block`."""
+    per, first, n = collections.Counter(), {}, 0
+    for c, nid, text, _items, b in _tr_units(game):
+        if b.get("type") != "paragraph":
+            continue
+        n += 1
+        if (b.get("props") or {}).get("not_speech") is True:
+            continue
+        for m in _SPEECH_IN_PARAGRAPH.finditer(text):
+            if len(m.group(1).split()) < 2:
+                continue
+            per[c.get("id")] += 1
+            first.setdefault(c.get("id"), (nid, m.group(0)[:80]))
+    if not n:
+        return None, "no paragraph to read", []
+    rows = [f"{cid}: {k} quoted line(s) in paragraphs — first at {first[cid][0]}: {first[cid][1]} "
+            f"— make each a dialog block with its speaker (or props.not_speech = true)"
+            for cid, k in sorted(per.items(), key=lambda kv: (-kv[1], kv[0]))]
+    return not rows, (f"{sum(per.values())} spoken line(s) in {len(per)} canvas(es) sit in paragraphs"
+                      if rows else f"{n}/{n} paragraphs carry no spoken line"), rows
 
 
 def main():

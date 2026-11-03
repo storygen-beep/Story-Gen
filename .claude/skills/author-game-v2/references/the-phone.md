@@ -267,7 +267,8 @@ voice**, not a greyed-out control (`the-voice.md`).
   infinite button (P11);
 - **a no-show has no hook, so book it with a flag:** the yes sets `<x>_booked`; the scene she shows
   up to clears it; a no-show text fires on `hours_since_flag` on `<x>_booked`, costs something, and
-  clears it. Without the clear, a booked flag stays true forever (LO, 2026-11-03).
+  clears it. Without the clear, a booked flag stays true forever (LO, 2026-11-03). Checked: gate
+  *a booking can clear* fails a booking whose only unset sits inside its own `hours_since_flag lt` window.
 
 ---
 
