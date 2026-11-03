@@ -198,13 +198,13 @@ out.append(solo("hall_mirror", "Check your clothes in the hall mirror", "One lin
 # ═════════════════════════════════════════════════════════════════════════════
 # THE KITCHEN (home_kitchen.md): the drawer (A1-13), and the meals alone
 # ═════════════════════════════════════════════════════════════════════════════
-out.append(solo("kitchen_drawer", "Look through the drawer", "Reads rent_carried, knows_mark_debt and the letter home. Writes nothing.",
+out.append(solo("kitchen_drawer", "Look through the drawer", "Reads rent_short, knows_mark_debt and the letter home. Writes nothing.",
     "home_kitchen", [
         node("drawer", "The drawer", [
             P("The drawer by the fridge sticks, and you have to lift it to open it. Takeaway menus, dead batteries, a roll of tape, and under all of it the letters nobody wants to open."),
-            G(cond(flag("rent_carried")), P("On top, a new one. Vance's handwriting on the envelope, already torn open. Inside, one line: OUTSTANDING, and a figure, underlined twice. Your short week is in that number.")),
-            G(cond(flag("rent_carried", False), flag("knows_mark_debt", False)), P("Bills. Gas, water, the council, a phone contract in Mark's name. Two of them say FINAL in red, but nobody's opened those.")),
-            G(cond(flag("rent_carried", False), flag("knows_mark_debt")), P("Three envelopes from Vance, all opened, all folded back the way they came. The top one says FINAL in red. Now you know what they're about: Mark owes him more than the rent, a lot more.")),
+            G(cond(flag("rent_short")), P("On top, a new one. Vance's handwriting on the envelope, already torn open. Inside, one line: OUTSTANDING, and a figure, underlined twice. Your short week is in that number.")),
+            G(cond(flag("rent_short", False), flag("knows_mark_debt", False)), P("Bills. Gas, water, the council, a phone contract in Mark's name. Two of them say FINAL in red, but nobody's opened those.")),
+            G(cond(flag("rent_short", False), flag("knows_mark_debt")), P("Three envelopes from Vance, all opened, all folded back the way they came. The top one says FINAL in red. Now you know what they're about: Mark owes him more than the rent, a lot more.")),
             G(cond(flag("letter_home"), since("letter_home", "gte", 24)), P("And one from the college, with your name on it, opened. Laura's read it. The dean's signature is at the bottom.")),
         ], [go("Shut the drawer.", loc="home_hall", mins=5)]),
     ], prio=2))
@@ -524,13 +524,13 @@ out.append({"id": "master_door_peek", "name": "Peek through the gap",
 # THE GARAGE (home_garage.md): his things (A1-13, A1-21), the washer alone
 # ═════════════════════════════════════════════════════════════════════════════
 out.append(solo("garage_things", "Go through Mark's things",
-    "When Mark is out. The debt papers: reads rent_carried; the loan is named only after knows_mark_debt. Once a day.",
+    "When Mark is out. The debt papers: reads rent_short; the loan is named only after knows_mark_debt. Once a day.",
     "home_garage", [
         node("bench", "Mark's bench", [
             P("His workbench, his radio, a fridge of beer that hums. The filing box under the bench has a padlock, and the key is on a nail above it, which tells you exactly how much Mark thinks of everybody in this house."),
-            G(cond(flag("rent_carried")), P("On top of the folders, a new page in Mark's square capitals, a figure crossed out and written again, bigger. Your short week is in there. He's added it in red.")),
-            G(cond(flag("rent_carried", False), flag("knows_mark_debt", False)), P("Folders of bank letters, payslips, the car's papers. Columns of numbers in his capitals that never seem to add up to enough.")),
-            G(cond(flag("rent_carried", False), flag("knows_mark_debt")), P("A loan agreement with Vance's signature on every page, the house on the first one. Mark's been paying it off for years and the number at the bottom has barely moved.")),
+            G(cond(flag("rent_short")), P("On top of the folders, a new page in Mark's square capitals, a figure crossed out and written again, bigger. Your short week is in there. He's added it in red.")),
+            G(cond(flag("rent_short", False), flag("knows_mark_debt", False)), P("Folders of bank letters, payslips, the car's papers. Columns of numbers in his capitals that never seem to add up to enough.")),
+            G(cond(flag("rent_short", False), flag("knows_mark_debt")), P("A loan agreement with Vance's signature on every page, the house on the first one. Mark's been paying it off for years and the number at the bottom has barely moved.")),
             P("Under the folders, a magazine. Girls on the cover, bent over. You put it back where it was, square to the edge, the way he'd notice."),
         ], [go("Lock it up again.", loc="home_hall", mins=15)]),
     ], conds=[here(M, "home_garage", False)], prio=3, max_day=1))

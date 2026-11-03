@@ -77,10 +77,23 @@ LAURA_DOOR_OPTIONS = (
 LOCATIONS = [
     dict(id="street", name="Your Street", entry_from=None, kind="thoroughfare",
          costs={"time": 10}, rules=PUBLIC_RULES,
-         description=("Your street: the way out to everything. Your house is halfway down with Mr. Vance's porch "
+         description=("Your street: the way out to everything. Your house is halfway down, with the landlord's porch "
                       "next door. The town starts at the corner: the park, the café, the clothes shop, "
-                      "Zoe's building and the college gates. Every trip out walks this pavement, and every "
-                      "neighbour with a window sees what you wore to do it.")),
+                      "the flats and the college gates. Every trip out walks this pavement, and every "
+                      "neighbour with a window sees what you wore to do it."),
+         # (alignment pass 2, 2026-11-03) names only after the meetings
+         variants=[
+             (cond(flag("vance_met"), flag("zoe_met")),
+              "Your street: the way out to everything. Your house is halfway down with Mr. Vance's porch "
+              "next door. The town starts at the corner: the park, the café, the clothes shop, "
+              "Zoe's building and the college gates. Every trip out walks this pavement, and every "
+              "neighbour with a window sees what you wore to do it."),
+             (cond(flag("vance_met")),
+              "Your street: the way out to everything. Your house is halfway down with Mr. Vance's porch "
+              "next door. The town starts at the corner: the park, the café, the clothes shop, "
+              "the flats and the college gates. Every trip out walks this pavement, and every "
+              "neighbour with a window sees what you wore to do it."),
+         ]),
     # ── the house ──
     dict(id="home_hall", name="Hall", entry_from="street", kind="thoroughfare",
          door=dict(
@@ -101,7 +114,7 @@ LOCATIONS = [
     dict(id="home_kitchen", name="Kitchen", entry_from="home_hall", kind="destination",
          description=("The kitchen: where this family eats, argues and pays. Laura makes breakfast here before "
                       "work and pours her wine here at night. Mark cooks on Wednesdays and owns the table on "
-                      "Sundays, when he counts the rent into an envelope with Vance's name on it. The drawer "
+                      "Sundays, when he counts the rent into an envelope with the landlord's name on it. The drawer "
                       "by the fridge is where the letters go that nobody wants to open."),
          variants=[
              (cond(wd(6), tod("08:00", "12:00")),
@@ -245,17 +258,26 @@ LOCATIONS = [
          description=("The front door and the step outside it: where the house meets the street. The porch "
                       "light is on a timer. You can sit on the step and watch the street go by, and on a "
                       "Saturday night, this is where a date ends — in full view of the living-room window.")),
-    dict(id="vance_house", name="Vance's House", entry_from="street", kind="destination",
-         hours=[H(ALL, "18:00", "22:00")], closed_text="Vance's porch is empty. The curtains are shut.",
-         description=("Next door: Mr. Vance's house, and his porch. He owns your house too, but it's Mark who owes him. "
+    # (alignment pass 2, 2026-11-03) a place name can't vary, so it never names him: "Next Door", like his card
+    dict(id="vance_house", name="Next Door", entry_from="street", kind="destination",
+         hours=[H(ALL, "18:00", "22:00")], closed_text="The porch next door is empty. The curtains are shut.",
+         description=("Next door: the landlord's house, and his porch. He owns your house too, but it's Mark who owes him. "
                       "Every evening he sits out there with a paper he doesn't read, and watches the street. "
-                      "Walk past and he looks at what you wore.")),
+                      "Walk past and he looks at what you wore."),
+         variants=[(cond(flag("vance_met")),
+                    "Next door: Mr. Vance's house, and his porch. He owns your house too, but it's Mark who owes him. "
+                    "Every evening he sits out there with a paper he doesn't read, and watches the street. "
+                    "Walk past and he looks at what you wore.")]),
     dict(id="park", name="Park", entry_from="street", kind="destination",
          hours=[H(ALL, "07:00", "22:00")], closed_text="The park gates are locked for the night.",
          rules=PARK_RULES,
          description=("The park at the end of the street: paths, a pond, benches and thick bushes along the far "
                       "side. People walk here, run here, sit here. You can walk, run or rest on a bench, and what "
-                      "you wear decides who turns to look. Zoe runs here on weekend mornings.")),
+                      "you wear decides who turns to look. A girl from your Biology class runs here on weekend mornings."),
+         variants=[(cond(flag("zoe_met")),
+                    "The park at the end of the street: paths, a pond, benches and thick bushes along the far "
+                    "side. People walk here, run here, sit here. You can walk, run or rest on a bench, and what "
+                    "you wear decides who turns to look. Zoe runs here on weekend mornings.")]),
     # ── campus ──
     dict(id="campus", name="Campus", entry_from="street", kind="thoroughfare",
          hours=[H(ALL, "07:00", "22:00")], closed_text="The college gates are shut.", rules=PUBLIC_RULES,
@@ -265,9 +287,14 @@ LOCATIONS = [
     dict(id="quad", name="Quad", entry_from="campus", kind="destination",
          hours=[H(ALL, "07:00", "22:00")], closed_text="The quad is dark and empty.", rules=PUBLIC_RULES,
          description=("The quad: the big lawn in the middle of campus, where people sit between classes and "
-                      "everybody watches everybody. Jake's team hangs out here in the mornings; Zoe lies on the "
-                      "grass in the afternoons. Sit down and you'll hear what campus is saying — sometimes "
-                      "about you.")),
+                      "everybody watches everybody. The football team hangs out here in the mornings; a girl from "
+                      "your Biology class lies on the grass in the afternoons. Sit down and you'll hear what campus "
+                      "is saying — sometimes about you."),
+         variants=[
+             (cond(flag("jake_met"), flag("zoe_met")), "The quad: the big lawn in the middle of campus, where people sit between classes and everybody watches everybody. Jake's team hangs out here in the mornings; Zoe lies on the grass in the afternoons. Sit down and you'll hear what campus is saying — sometimes about you."),
+             (cond(flag("zoe_met")), "The quad: the big lawn in the middle of campus, where people sit between classes and everybody watches everybody. The football team hangs out here in the mornings; Zoe lies on the grass in the afternoons. Sit down and you'll hear what campus is saying — sometimes about you."),
+             (cond(flag("jake_met")), "The quad: the big lawn in the middle of campus, where people sit between classes and everybody watches everybody. Jake's team hangs out here in the mornings; a girl from your Biology class lies on the grass in the afternoons. Sit down and you'll hear what campus is saying — sometimes about you."),
+         ]),
     dict(id="lecture_hall", name="Lecture Hall", entry_from="campus", kind="destination",
          hours=[H([0, 1, 2, 3], "08:30", "14:30"), H([4], "08:30", "10:00")],
          closed_text="No class now. The timetable is on the door.", rules=PUBLIC_RULES,
@@ -278,7 +305,10 @@ LOCATIONS = [
     dict(id="library", name="Library", entry_from="campus", kind="destination",
          hours=[H(WEEK, "08:00", "20:00")], closed_text="The library is closed.", rules=PUBLIC_RULES,
          description=("The library: long tables, green lamps and silence. Study here and you learn. It's dull, "
-                      "but the exams read it. Nadia studies here most afternoons.")),
+                      "but the exams read it. The girl who sits by you in Psychology studies here most afternoons."),
+         variants=[(cond(flag("nadia_met")),
+                    "The library: long tables, green lamps and silence. Study here and you learn. It's dull, "
+                    "but the exams read it. Nadia studies here most afternoons.")]),
     dict(id="canteen", name="Canteen", entry_from="campus", kind="destination",
          hours=[H(WEEK, "08:00", "18:00")], closed_text="The canteen is shut.", rules=PUBLIC_RULES,
          description=("The canteen: trays, plastic chairs and the loudest room on campus. Food costs money, "
@@ -291,9 +321,8 @@ LOCATIONS = [
                       "The door to the corridor doesn't lock.")),
     dict(id="faculty_floor", name="Faculty Floor", entry_from="campus", kind="thoroughfare",
          hours=[H(WEEK, "08:00", "19:30")], closed_text="The faculty floor is locked.", rules=PUBLIC_RULES,
-         description=("The faculty floor: one long corridor of office doors with name cards. Dr. Hale, the art "
-                      "lecturer, the Business lecturer, the Biology TA and the dean. Each door has its office "
-                      "hours taped to it, and your grades are posted on them.")),
+         description=("The faculty floor: one long corridor of office doors with name cards and office hours "
+                      "taped to them. Your grades are posted on the doors.")),
     dict(id="hale_office", name="Dr. Hale's Office", entry_from="faculty_floor", kind="destination",
          hours=[H([3], "17:00", "19:30")], closed_text=OFFICE_CLOSED, rules=PUBLIC_RULES,
          description=("Dr. Hale's office: books to the ceiling, one window, a desk with a photo of his wife on "
@@ -321,9 +350,12 @@ LOCATIONS = [
     dict(id="cafe", name="Café", entry_from="street", kind="destination",
          hours=[H([0, 1, 2, 3, 4, 5], "08:00", "23:00")], closed_text="Closed. Back Monday.", rules=PUBLIC_RULES,
          description=("The café by the corner: a counter, eight booths and a back room with a staff mirror. "
-                      "Tom runs it. Shifts pay a small wage, but the tips go up with how you look in "
-                      "the uniform. Regulars, mostly men. Gary takes booth four. Shifts end when the café shuts; "
-                      "Tom stays on to close.")),
+                      "The owner works the till himself. Shifts pay a small wage, but the tips go up with how you "
+                      "look in the uniform. Regulars, mostly men. A STAFF WANTED card is taped inside the window."),
+         variants=[
+             (cond(flag("tom_met"), flag("gary_met")), "The café by the corner: a counter, eight booths and a back room with a staff mirror. Tom runs it. Shifts pay a small wage, but the tips go up with how you look in the uniform. Regulars, mostly men. Gary takes booth four. Shifts end when the café shuts; Tom stays on to close."),
+             (cond(flag("tom_met")), "The café by the corner: a counter, eight booths and a back room with a staff mirror. Tom runs it. Shifts pay a small wage, but the tips go up with how you look in the uniform. Regulars, mostly men. Shifts end when the café shuts; Tom stays on to close."),
+         ]),
     dict(id="clothes_shop", name="Clothes Shop", entry_from="street", kind="destination",
          hours=[H([0, 1, 2, 3, 4, 5], "10:00", "18:00")], closed_text="Closed.", rules=PUBLIC_RULES,
          description=("A clothes shop on the strip: racks, a changing room with a curtain, a bored assistant. "
@@ -372,11 +404,9 @@ def _add(after_id, loc):
 
 # ── the street: the ground, no toll of its own; the minutes said once (Q65, exact words) ──
 _BY_ID["street"].pop("costs", None)
-_set("street", description=(
-    "Your street: the way out to everything. Home is halfway down, with Mr. Vance's porch next door, "
-    "the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. "
-    "Town is the bus, fifteen. Home is ten. Every trip out walks this pavement, and every neighbour "
-    "with a window sees what you wore to do it."))
+# (alignment pass 2, 2026-11-03) no name before the meeting: the named text is a variant behind vance_met
+_set("street", description="Your street: the way out to everything. Home is halfway down, with the porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this pavement, and every neighbour with a window sees what you wore to do it.",
+     variants=[(cond(flag("vance_met")), "Your street: the way out to everything. Home is halfway down, with Mr. Vance's porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this pavement, and every neighbour with a window sees what you wore to do it.")])
 
 # ── Home: a building over the house rooms; the street shows "Home" and it opens in the hall ──
 _add("street", dict(
@@ -403,10 +433,8 @@ _add("home_front_door", dict(
                  "Lie in the sun here and whoever's home can see exactly what you're wearing.")))
 
 # ── on the street: Vance (0 min), the park (its own 10), the corner shop (0) ──
-_set("vance_house", description=(
-    "Next door: Mr. Vance's house, and his porch. He owns your house too, and Mark pays him every "
-    "Sunday. Most evenings he sits out there with a paper he doesn't read and watches the street. "
-    "Walk past and he looks at what you wore."))
+_set("vance_house", description="Next door: a bigger house than yours, and a porch, and an old man on it. He owns your house too, and Mark pays him every Sunday. Most evenings he sits out there with a paper he doesn't read and watches the street. Walk past and he looks at what you wore.",
+     variants=[(cond(flag("vance_met")), "Next door: Mr. Vance's house, and his porch. He owns your house too, and Mark pays him every Sunday. Most evenings he sits out there with a paper he doesn't read and watches the street. Walk past and he looks at what you wore.")])
 # In 0.1 the corner shop is for the grocery run only (LO Q50; corner_shop.md): it opens on an errand.
 _add("park", dict(
     id="corner_shop", name="Corner Shop", entry_from="street", kind="destination", rules=PUBLIC_RULES,
@@ -444,10 +472,11 @@ _add("dean_office", dict(
     description="Town: the bus stop, the shops, the café and the flats above them."))
 for _r in ("cafe", "clothes_shop", "party_house"):
     _set(_r, entry_from="town", parent="town")
-_set("cafe", description=(
-    "The café on the town strip: a counter, eight booths and a back room with a staff mirror. Tom runs "
-    "it. Shifts pay a small wage, but the tips go up with how you look in the uniform. Regulars, "
-    "mostly men. Shifts end when the café shuts; Tom stays on to close."))
+# (alignment pass 2, 2026-11-03) the offices are on the map once she has met who works in each one: their
+# hidden_until lives in the ledger (board.locations), which the loop below applies
+
+_set("cafe", description="The café on the town strip: a counter, eight booths and a back room with a staff mirror. The owner works the till himself. Shifts pay a small wage, but the tips go up with how you look in the uniform. Regulars, mostly men. A STAFF WANTED card is taped inside the window.",
+     variants=[(cond(flag("tom_met")), "The café on the town strip: a counter, eight booths and a back room with a staff mirror. Tom runs it. Shifts pay a small wage, but the tips go up with how you look in the uniform. Regulars, mostly men. Shifts end when the café shuts; Tom stays on to close.")])
 _set("party_house", description=(
     "A big house at the edge of town where Zoe's friends throw Saturday nights. Music inside, a garden "
     "out back and a hot tub steaming under the stars. Zoe's friends only."))

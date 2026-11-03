@@ -56,6 +56,9 @@ partial_pay   = "\"That's short.\" He counts it anyway, and writes what's left o
 # ── the overnight list (SP1) — every per-day cap is a *_today flag cleared here ──
 [engine.daily_tick]
 flagEffects = [
+  # (alignment pass 2, 2026-11-03; gate `a booking can clear`) same-day plans clear at midnight
+  { targetType = "player", flag = "said_eating_out", op = "unset" },
+  { targetType = "player", flag = "laura_dress_invite", op = "unset" },
   # home_life brakes: once a day, cleared at midnight (LO, 2026-10-09, DECISIONS 77; iteration 002, home_items.DAILY)
   { targetType = "player", flag = "ate_breakfast", op = "unset" },
   { targetType = "player", flag = "had_coffee", op = "unset" },
@@ -583,3 +586,12 @@ when     = [ { flag = "opening_done", op = "is_true" }, { flag = "pays_her_own_w
 goals    = [
   { type = "trait", subject = "player", trait = "paid_full_streak", op = "gte", value = 4, label = "Pay the rent in full from your own money, four Sundays in a row" },
 ]
+
+# Goal 2 (want.promise.goals[1]) once goal 1 ends. Its end, Ella hosting the party everyone goes to (Zoe A 6), is a
+# later release, so the card says so and carries no goal this release can't reach (alignment pass 2, A1/I38/E63).
+[[quest_cards]]
+group    = "story_goals"
+priority = 10
+text     = "Her name on campus: what campus says about you."
+tip      = "Zoe's parties, her dares, the quad, the gym: what you do there is what campus talks about. Hosting the party everyone goes to comes in the next release."
+when     = [ { flag = "opening_done", op = "is_true" }, { flag = "pays_her_own_way", op = "is_true" } ]

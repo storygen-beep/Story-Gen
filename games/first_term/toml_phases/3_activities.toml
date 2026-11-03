@@ -98,7 +98,7 @@ text        = "Walk on without a word."
 targetType  = "location"
 locationId  = "street"
 flagEffects = [ { targetType = "player", flag = "vance_met", op = "set" } ]
-effects     = [ { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2 } ]
+# LO 2026-11-03: a no never raises his Want (was want +2)
 
 
 [[canvases]]
@@ -356,7 +356,7 @@ blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", item
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
-blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 25 } ] }, blocks = [ { type = "paragraph", content = "A group of guys from the team look over. One of them says your name out loud to the others, then something else, low. They all laugh. A girl you've never met walks past and says \"Hey, @player,\" like she knows you. Everyone seems to." } ] } ]
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 25 } ] }, blocks = [ { type = "paragraph", content = "A group of guys from the team look over. One of them says your name out loud to the others, then something else, low. They all laugh. A girl you've never met walks past and says" }, { type = "dialog", content = "Hey, @player.", props = { speaker = "unknown" } }, { type = "paragraph", content = "Like she knows you. Everyone seems to." } ] } ]
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -446,19 +446,19 @@ content = "You sit with your back to the wall and listen. The canteen is where c
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
-blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 10 } ] }, blocks = [ { type = "paragraph", content = "The table behind you is talking about Dr. Hale. \"He watches the front row like a hawk.\" \"He watches the front row's legs.\" They laugh. You pull your bag onto your lap." } ] } ]
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 10 } ] }, blocks = [ { type = "paragraph", content = "The table behind you is talking about Dr. Hale." }, { type = "dialog", content = "He watches the front row like a hawk.", props = { speaker = "unknown" } }, { type = "dialog", content = "He watches the front row's legs.", props = { speaker = "unknown" } }, { type = "paragraph", content = "They laugh. You pull your bag onto your lap." } ] } ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
-blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 10 }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 25 }, { type = "flag", subject = "player", flag_key = "party_went", operator = "is_true" } ] }, blocks = [ { type = "paragraph", content = "\"The new girl. Zoe's friend.\" \"With the legs?\" \"She was at Zoe's party.\" Nobody says what she did there. Nobody has to." } ] } ]
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 10 }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 25 }, { type = "flag", subject = "player", flag_key = "party_went", operator = "is_true" } ] }, blocks = [ { type = "dialog", content = "The new girl. Zoe's friend.", props = { speaker = "unknown" } }, { type = "dialog", content = "With the legs?", props = { speaker = "unknown" } }, { type = "dialog", content = "She was at Zoe's party.", props = { speaker = "unknown" } }, { type = "paragraph", content = "Nobody says what she did there. Nobody has to." } ] } ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it (iteration 002: A1-08, before any party)
-blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 10 }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 25 }, { type = "flag", subject = "player", flag_key = "party_went", operator = "is_false" } ] }, blocks = [ { type = "paragraph", content = "\"The new girl.\" \"With the legs?\" \"That's her.\" They look over at the same time, and then they all look away at once." } ] } ]
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 10 }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 25 }, { type = "flag", subject = "player", flag_key = "party_went", operator = "is_false" } ] }, blocks = [ { type = "dialog", content = "The new girl.", props = { speaker = "unknown" } }, { type = "dialog", content = "With the legs?", props = { speaker = "unknown" } }, { type = "dialog", content = "That's her.", props = { speaker = "unknown" } }, { type = "paragraph", content = "They look over at the same time, and then they all look away at once." } ] } ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
-blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 25 } ] }, blocks = [ { type = "paragraph", content = "Your name comes up three tables over, then at the next one. A guy with a tray stops right beside you and grins. \"So it's true, then.\" He walks off before you can ask what is." } ] } ]
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 25 } ] }, blocks = [ { type = "paragraph", content = "Your name comes up three tables over, then at the next one. A guy with a tray stops right beside you and grins." }, { type = "dialog", content = "So it's true, then.", props = { speaker = "unknown" } }, { type = "paragraph", content = "He walks off before you can ask what is." } ] } ]
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -481,6 +481,8 @@ is_repeatable = true
 priority      = 3
 is_active     = true
 max_triggers_per_day = 1
+show_when_blocked = true
+cooldown_message  = "Weekdays, 11:45 AM-1 PM"
 
 [[canvases.trigger.schedules]]
 weekdays   = [0, 1, 2, 3, 4]
@@ -730,11 +732,11 @@ content = "The art lecturer has pinned the grades to her door with a drawing pin
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
-blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "grade_art", operator = "lt", value = 40 } ] }, blocks = [ { type = "paragraph", content = "Failing. Underneath, in pencil: \"Look at the body. Really look.\"" } ] } ]
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "grade_art", operator = "lt", value = 40 } ] }, blocks = [ { type = "paragraph", content = "Failing. Underneath, in pencil: \"Look at the body. Really look.\"", props = { not_speech = true } } ] } ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
-blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "grade_art", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "grade_art", operator = "lt", value = 70 } ] }, blocks = [ { type = "paragraph", content = "A pass. \"Better proportions\" written beside it." } ] } ]
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "grade_art", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "grade_art", operator = "lt", value = 70 } ] }, blocks = [ { type = "paragraph", content = "A pass. \"Better proportions\" written beside it.", props = { not_speech = true } } ] } ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
@@ -770,7 +772,7 @@ content = "A typed list in a plastic sleeve, squared to the edge of the door. No
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
-blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "grade_business", operator = "lt", value = 40 } ] }, blocks = [ { type = "paragraph", content = "Failing. Below the list: \"Retakes by appointment. Honest work only.\"" } ] } ]
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "grade_business", operator = "lt", value = 40 } ] }, blocks = [ { type = "paragraph", content = "Failing. Below the list: \"Retakes by appointment. Honest work only.\"", props = { not_speech = true } } ] } ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it

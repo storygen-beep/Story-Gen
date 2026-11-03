@@ -221,7 +221,7 @@ _NO_MET = {"npc_ryan", "npc_laura", "npc_mark"}
 # A latch the ledger writes as a bare flag is read by hours since (gate: a latch flag is cleared): Jake's
 # booking lapses after a week (Q73), the night he took her out lasts 6 hours (jake_saturday_date sheet),
 # Vance knocks the Monday after a short Sunday (the rent is taken Sunday 00:00).
-_LATCH_HOURS = {"jake_date_booked": 168, "jake_date_went": 6, "rent_carried": 48}
+_LATCH_HOURS = {"jake_date_booked": 168, "jake_date_went": 6, "rent_short": 48}
 
 
 def _ledger_when(w):
