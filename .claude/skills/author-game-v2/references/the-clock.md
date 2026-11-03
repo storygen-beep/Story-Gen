@@ -92,7 +92,10 @@ These name an hour and are correct at any minute. Do not sweep them:
 - **Backward canon fixed by a prior chapter** — *"twenty-one years in this room"*, *"eleven years
   behind that counter"*. The player cannot move them.
 - **In-scene relative time** — *"a minute later"*, *"all night"*, *"by the time she is done"*.
-- **A forward consequence** — *"the room will be cold again by six."*
+- **A forward consequence** — *"the room will be cold again by six."* A forward word names a time ahead,
+  not now: *"in the morning"*, *"by morning"*, *"tomorrow"* (*"tomorrow morning"*, *"tomorrow night"*). Gate
+  *a day word fits its window* skips a day-part word that follows one (LO, 2026-11-03, PICKS H65 a), so
+  *"I'll still be here in the morning."* at 22:20 is true.
 
 **The test, in one question:** *if the player reads this line at the last minute of the canvas's
 window, is it still true?* Rule → yes. Reading → no.
@@ -319,13 +322,9 @@ their own wallet is a number the game has to be right about.
 
 ## What the scoreboard checks
 
-One gate and two lints. `python3 scripts/gates.py <slug>`.
-
-| | |
-|---|---|
-| gate · **the label keeps its time** | C3 + C4. No label names a clock time; where a label states a duration, it equals the minutes that click actually spends (choice → target node → that node's exit). Reads **both** exit shapes — a `choices` array **and** a single `exit_block` that is itself the button. **n/a** when a game has no labels at all. |
-| lint · **the clock in the prose** | C2. Every clock reference in a beat with its canvas's window width beside it, plus the game's rate against the field distribution. A list to read, never a score. |
-| lint · **the time cost is not on the button** | C4. Every click that moves the clock 60 minutes or more without a duration on its label. |
+The gates and lints that check this file are in one table, `SKILL.md` "The scoreboard — what fails, and where
+to read about it", each row naming its rule here (LO, 2026-11-03, PICKS C51 b). `python3 scripts/gates.py
+<slug>`.
 
 ⚠️ **And `_CLK_PREP` gained `to`, but only in a narrow form** — `to` + a spelled-out hour that is not
 `one`. Measured across 81,264 corpus labels: `to` in the shared alternation adds **8 hits, all

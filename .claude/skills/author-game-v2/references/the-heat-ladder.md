@@ -42,6 +42,10 @@ where the field gates them. A game's SP2 page may move a row; it may not drop th
 group, known or not, is stage 4. Known against stranger is not the test (`SKILL_CHANGES_FROM_FIRST_TERM.md`
 B24).
 
+**A sex act a group watches is a mixed act** (LO, 2026-11-03, PICKS A68 a). The act uses Corruption and the
+audience uses Exhibitionism, so it needs both meters at stage 4 (Corruption 60 and Exhibitionism 60) and pays
+both. An act with one watcher keeps the act's own meter and stage.
+
 **Two meters, one act** (first_term DECISIONS 103; LO, 2026-11-03). With two player tiers, each act names the
 meter it uses and pays that meter. A mixed act needs both meters at its stage. Her first time out at a stage
 needs either one. Checked: gate *an act pays the meter it uses*.
@@ -49,6 +53,13 @@ needs either one. Checked: gate *an act pays the meter it uses*.
 **A release that writes only some stages** (LO, 2026-11-03). A release that writes stages up to N caps every pay
 at the top of stage N, shows no button for a stage it does not write, and names the next stage only on a quest
 card.
+
+**Small rungs inside a stage** (LO, 2026-11-03, PICKS A69 a). A stage may carry small rungs at fixed steps,
+5, 10 and 15 inside each 20 (Corruption 5, 10, 15; then 25, 30, 35; and so on). Each small rung is a small step of
+the same kind as its stage: one aisle closer, the sound turned up, the door left unlocked, a few seconds longer.
+It is still unseen, so it never moves her to the next stage's kind: staying to watch is still stage 1, and a
+peek she goes after is still stage 2. A small rung may show greyed inside the scene as a preview of the next bolder
+act (`engine.md` §15 rule 1 has the exception, and lint *which refusals are shown at all* skips it).
 
 **A kind climbs inside itself.** Its low version opens low and its high version waits for its stage: CoT's
 flash ladder runs belly 1, bra 2, underwear 3, breasts 4, everything 5, and the payment code uses the same
@@ -147,8 +158,14 @@ with her stage 2, opens her first chosen act with that person.
 
 ## H7 · His leak
 
-Before he acts, his want shows **on his body, and she sees it**. At stage 1 he leaks and covers it: he looks,
-catches himself, looks away; the bulge he turns from her. She only notices. It comes back in his mouth later:
+Before he acts, his want shows **on his body, and she sees it**. At stage 1 a man she lives with leaks and
+covers it: he looks, catches himself, looks away; the bulge he turns from her. She only notices.
+
+**Only the men she lives with cover** (LO, 2026-11-03, PICKS A65 c). The cover belongs to the house (H2): a
+housemate who is caught looking has to keep living with her, so he hides it. A man from outside the house (a
+landlord, a neighbour, a stranger) may look openly from the first scene, as first_term's Vance does. A man she
+lives with covers at stage 1 even when he is the one who walks in on her: first_term's Mark is a housemate, so his
+walk-ins cover. It comes back in his mouth later:
 *"You heard us. And I know you liked it."* (`cot:L72525`). This is `the-arc.md` A13's leak, said loud
 (`SKILL_CHANGES_FROM_FIRST_TERM.md` B15, LO 2026-10-06).
 

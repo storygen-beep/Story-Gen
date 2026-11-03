@@ -13,9 +13,12 @@ is repeating a reference — cut it and point.
 - **Seven pages, SP1–SP7**, each from its template in `templates/spine/`, saved in
   `games/<slug>/spine/`. Tables first.
 - **≤ 400 words a page**, counting words, not table pipes or dashes. Longer means a rule is being
-  restated.
+  restated. **SP2 is exempt** (LO, 2026-11-03, PICKS A26 a): its stage table, its raises and its Heat line
+  are this game's answers, one row per step, and they run long in a game with several ladders.
 - **[REVIEW] → [READY]**, the same workflow as `the-sheets.md`. LO signs each page when LO has read
   it **(LO decided, D13)**.
+- **A signed page whose body changes goes back to [REVIEW]** until LO signs it again (LO, 2026-11-03,
+  PICKS I75 a), the same rule as a sheet (`the-sheets.md`). The re-sign line goes under the title.
 - **One home per decision.** A page records the answer and names the ledger key that holds it
   (`references/state.md`); the ledger does not copy the page. `spine.pages[]` holds only each page's
   status and sign-off.
@@ -99,7 +102,9 @@ The spine is finished when every page is signed and `shape.py <slug> --finish` p
 ledger only and FAILS on: a step at an undeclared place (once the board declares places), hours that
 are not a window, a trait the ledger never declares, a dependency on a missing step or in a cycle,
 pressure the release's weeks cannot pay without a declared `shortfall`, a release person with no
-ladder, a step with no `hint`, a declared door that is not a declared step (a door is optional: none is n/a), a promise with no beat on the
+ladder, a step with no `hint`, a declared door that is not a declared step (a door is optional: none is n/a), `release_page.steps` or SP7's
+"people, and each one's top step" row giving a ladder a top step other than its length (A67, LO 2026-11-03:
+a reach-back that changes a ladder must change both), a promise with no beat on the
 release page, a READY page unsigned, a gate the start (his meter's, or `board.player_start` for hers) plus the `raises` before it cannot reach (a trait in `board.daily_raises` or `board.repeat_raises` is not judged), a person with no age or
 under 18 (in every mode), a thread whose person is not in the cast, a `keeps` outside the three or
 `none — <why>`, and (strict) a system with no card. With `--finish`, or once the

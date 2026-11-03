@@ -292,9 +292,18 @@ already true in the board. The skill prints the list; the author picks from it.
 **Floor: one per qualifying ROOM, not one per pair.** Filling the raw cross-product would rebuild the wall of buttons one layer
 down, which is the objects mistake in a new coat.
 
-**The branch is thin, and the size is stated because it will not hold otherwise.** DoL's are **458–473 bytes**. Target: **a tier band is one or two paragraphs plus a media
-pool** — beats the length of the model beats in `register.md`, not a scene. The temptation is to write a
-full encounter every time because that feels like more care; it is how this rule dies.
+**A walk-in is two screens, and the size is stated per screen because it will not hold otherwise** (LO,
+2026-11-03, PICKS D9 b). DoL's branches are **458–473 bytes**; ours carry one more screen, because R5b (a graded,
+written answer) and R5b.3 (a way out of a moment she did not choose) need a place to answer:
+
+1. **The moment screen** — what happens to her, one tier band per level: **one or two paragraphs plus a media
+   pool**, beats the length of the model beats in `register.md`.
+2. **The answer screen** — one per graded answer she gives (stay, cover, leave, go further): **one or two
+   paragraphs**, his line and hers, and the pay on the button into it.
+
+Then it ends, or routes into a rung that already exists. A third screen, or a moment screen that runs to a
+scene, is the defect. The temptation is to write a full encounter every time because that feels like more care;
+it is how this rule dies.
 
 > ⚠️ **Our variation engine is the media pool**, not a prose bank by body part (a 51 MB text game's
 > answer to having no video). Copy the structure, not the word count.
@@ -546,13 +555,18 @@ certainly backfired."*). **A "no" that returns the player to an unchanged menu w
 counter the world keeps, or cost nothing. Where a friend or a crowd pushes on the page, the
 no can be a contest she loses (`the-heat-ladder.md` H5).
 
+**A no can fail only where a friend or a crowd pushes** (LO, 2026-11-03, PICKS D25 c). That is the one place
+R5b.2 below applies. Everywhere else a no parks (A3), and a no that always works there is correct, not a
+menu item.
+
 > ⚠️ **Gate `she can say no` checks only that one exists** — it fails on zero and prints the rate
 > beside the verdict (field: 2.09% of labels, 79% going somewhere the yes does not, median 262 words
 > behind them). Whether a refusal is graded and written is not gated.
 
-**R5b.2 · A refusal that can never fail is a menu item.** Added 2026-08-24 after the field was
-re-read on exactly this question. R5b above says the decline branch is written and paid; the field
-carries a half we do not have at all.
+**R5b.2 · Where pressure is written, a refusal can fail.** Added 2026-08-24 after the field was
+re-read on exactly this question, and narrowed by LO on 2026-11-03 (PICKS D25 c): it holds only where a
+friend or a crowd pushes on the page (`the-heat-ladder.md` H5). Everywhere else her no parks and always
+works. R5b above says the decline branch is written and paid; the field carries a half we do not have at all.
 
 Course of Temptation does not *grant* a refusal, it **resolves** one. *"Refuse to respond"* to a
 groping in the street routes two ways off a Willpower check whose difficulty is read from the NPC

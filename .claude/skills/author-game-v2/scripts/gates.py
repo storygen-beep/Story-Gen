@@ -955,10 +955,10 @@ def lint_badge_before_content(model, game):
         if card.get("terminal"):
             n_terminal += 1
             gates = [i for i in (card.get("when") or [])
-                     if i.get("trait") and i.get("op") in ("gte", "gt")
+                     if i.get("trait") and not str(i["trait"]).endswith("_step") and i.get("op") in ("gte", "gt")
                      and isinstance(i.get("value"), (int, float))]
             if not gates:
-                pass          # flag-gated or unconditional — this check has no opinion
+                pass          # flag-, `<npc>_step`- (played this, J70 LO 2026-11-03) or un-gated: no opinion
             else:
                 for g in gates:
                     top = ceiling.get((g.get("npc_id") or npc, g["trait"]))
@@ -1010,7 +1010,7 @@ def lint_badge_before_content(model, game):
     return (summary, sorted(set(findings)))
 
 
-def lint_refusal_shape(model, game):
+def lint_refusal_shape(model, game, state=None):
     """WHICH rows are shown locked, and whether the reason on them is a door or a label.
 
     `engine.md` §15 was reversed 2026-08-24 to *"set `locked_text` by default"*, and it is
@@ -1083,7 +1083,7 @@ def lint_refusal_shape(model, game):
             tgt = str(ch.get("nodeId") or "")
             inside = (ch.get("targetType") == "node" and
                       (tgt in node_ids or tgt.startswith(cid + ".")))
-            if not inside:
+            if not inside or _small_rung_choice(ch, _ascent_keys(state)):   # J75, LO 2026-11-03
                 continue
             reads = set()
             for it in ((ch.get("conditions") or {}).get("items") or []):
@@ -1833,7 +1833,7 @@ def lint_person_never_speaks(game):
                 if b.get("type") == "dialog":
                     props = b.get("props") or {}
                     spoke.add(props.get("npcId") or props.get("speaker"))
-        silent = sorted(bound - spoke)
+        silent = sorted(bound - spoke - _sleepers_on(c, bound))     # B52: a sleeper is exempt
         if silent:
             mute.append(f"{c.get('id')}: {', '.join(silent)} never speaks")
     if not scope:
@@ -2294,7 +2294,7 @@ def lint_labels_and_systems(model, game, state):
                             and (key in c["reads"] or key in _cost_traits_of(c["raw"]))})
         if not written_at:
             findings.append(f"meter `{sid}`: nothing at {', '.join(fed)} writes `{key}`")
-        if not elsewhere:
+        if not elsewhere and key not in _ascent_keys(state):  # F31: an ascent tier is fed everywhere
             findings.append(f"meter `{sid}`: `{key}` is read in no room outside {', '.join(fed)} "
                             f"— a source with no readers (SY2)")
 
@@ -14252,14 +14252,40 @@ def _tr_anyone_unbacked(game, where, lid, slots, items_any, want_someone):
     return False, f"{_tr_slot_name(bad)}: {'nobody' if want_someone else ', '.join(sorted(busy(bad)))} in the building"
 
 
+def _tr_walkers(game):
+    """B51 (LO 2026-11-03): {walk-in canvas id: the people whose arrival it is}. A walk-in is a
+    canvas with `substitution_only`, or the target of a substitution rule. Its walker is the
+    person it is bound to (`npc` / `requires_npc` on its trigger); a walk-in bound to nobody
+    has as walkers the people who speak on it. The arrival counts as presence for the walker on
+    that canvas, so the walker may speak there whatever their row says."""
+    npcs = {n.get("id") for n in game.get("npcs") or [] if n.get("id")}
+    targets = {s.get("target_canvas_id") for c in game.get("canvases") or []
+               for s in ((c.get("trigger") or {}).get("substitutions") or []) if isinstance(s, dict)}
+    out = {}
+    for c in game.get("canvases") or []:
+        trig = c.get("trigger") or {}
+        if not (trig.get("substitution_only") or c.get("id") in targets):
+            continue
+        bound = {trig.get("npc"), trig.get("requires_npc")} & npcs
+        if not bound:
+            bound = {(b.get("props") or {}).get("npcId") for nd in c.get("nodes") or []
+                     for b in _flat_blocks(nd.get("blocks"))
+                     if (b.get("props") or {}).get("speaker") == "npc"} & npcs
+        if bound:
+            out[c.get("id")] = bound
+    return out
+
+
 def _named_person_present(game):
-    """(ok, headline, detail) for the gate `a named person is where the line says`."""
+    """(ok, headline, detail) for the gate `a named person is where the line says`.
+    A walk-in's arrival counts as presence for its walker on the walk-in canvas (B51)."""
     where = _tr_where(game)
     if not where:
         return None, "no person has schedule rows", []
     names = {n["id"]: n.get("name") for n in game.get("npcs") or [] if n.get("id")}
     aliases = _tr_aliases(game)
     calls = _tr_call_canvases(game)
+    walkers = _tr_walkers(game)
     rows, n, heard = [], 0, []
     staged = _tr_opening(game)
     units = _tr_texts(game, where)
@@ -14271,7 +14297,8 @@ def _named_person_present(game):
         # don't walk out mid-scene, and a one-time scene's person is `nobody is woken`'s job.
         # A visitor with no row here is red too: the schedule page says they are elsewhere.
         # The fix is a row (gated with `when` if the visit is), not silence.
-        if spk in where and cid not in calls and rep and lid and pinned.get(spk) is None:
+        if spk in where and cid not in calls and rep and lid and pinned.get(spk) is None \
+                and spk not in walkers.get(cid, ()):
             gone = [s for s in sorted(entry) if lid not in _tr_places(where[spk], s)]
             if gone:
                 n += 1
@@ -14286,7 +14313,7 @@ def _named_person_present(game):
         bld = _tr_building(game, lid) if lid else None
         for sent in _beat_sentences(text):
             for pid, rx in aliases.items():
-                if pid in where and pid != spk and _tr_placed(rx, sent):
+                if pid in where and pid != spk and pid not in walkers.get(cid, ()) and _tr_placed(rx, sent):
                     claims.append((pid, sent, bool(_TR_SLEEP.search(sent))))
             if lid and spk is None:
                 for rx, want in ((_TR_SOMEONE, True), (_TR_NOBODY, False)):
@@ -14398,8 +14425,26 @@ def _tr_units(game):
 _TR_KNOCK = re.compile(r"\b(?:knock|knocks|wake (?:him|her|them)|tap on)\b", re.I)
 
 
-def _tr_asleep(table, lid, s):
-    return any(p == lid and _TR_SLEEP.search(a or "") for p, a in table.get(s, ()))
+_TR_AWAKE = re.compile(r"\bawake\b", re.I)
+_TR_NIGHT_END = 360          # H63: 00:00-06:00 is the night
+
+
+def _tr_door_rooms(game):
+    """The rooms behind a door: a location with `[locations.door]` options."""
+    return {l.get("id") for l in game.get("locations") or []
+            if ((l.get("door") or {}).get("options"))}
+
+
+def _tr_sleeps(place, activity, s, doors):
+    """Does this row say asleep at slot `s`? Its words say so, or (H63, LO 2026-11-03) it is a
+    00:00-06:00 slot in a room behind a door and the row does not say "awake"."""
+    if _TR_SLEEP.search(activity or ""):
+        return True
+    return place in doors and s[1] < _TR_NIGHT_END and not _TR_AWAKE.search(activity or "")
+
+
+def _tr_asleep(table, lid, s, doors=frozenset()):
+    return any(p == lid and _tr_sleeps(p, a, s, doors) for p, a in table.get(s, ()))
 
 
 def _nobody_is_woken(game):
@@ -14411,11 +14456,13 @@ def _nobody_is_woken(game):
        screen) is not in the canvas's building at some slot it can fire in, or is asleep then
        while the scene has them awake, is red. The engine runs no presence check on that path
        (`selectAutoFireCanvasForLocation`, v2.py:5755-5774), so the window is all there is.
-    3. A repeatable surface where a person speaks while their row says asleep is red."""
+    3. A repeatable surface where a person speaks while their row says asleep is red.
+    A row says asleep by its words, or (H63) at 00:00-06:00 in a room behind a door unless it says "awake"."""
     where = _tr_where(game)
     if not where:
         return None, "no person has schedule rows", []
     names = {n["id"]: n.get("name") for n in game.get("npcs") or [] if n.get("id")}
+    doors = _tr_door_rooms(game)
     rows, n = [], 0
     for loc in game.get("locations") or []:
         for opt in ((loc.get("door") or {}).get("options") or []):
@@ -14426,7 +14473,7 @@ def _nobody_is_woken(game):
             for pid, table in where.items():
                 if pid in pinned:
                     continue
-                bad = next((s for s in sorted(slots) if _tr_asleep(table, loc["id"], s)), None)
+                bad = next((s for s in sorted(slots) if _tr_asleep(table, loc["id"], s, doors)), None)
                 n += 1
                 if bad:
                     rows.append(f"door {loc['id']} · \"{opt.get('text')}\": {names.get(pid, pid)} is asleep "
@@ -14453,7 +14500,7 @@ def _nobody_is_woken(game):
         if _rep_of(trig):
             for pid in speakers & set(where):
                 n += 1
-                bad = next((s for s in sorted(slots) if _tr_asleep(where[pid], lid, s)), None)
+                bad = next((s for s in sorted(slots) if _tr_asleep(where[pid], lid, s, doors)), None)
                 if bad and not sleepy:
                     rows.append(f"{c['id']}: {names.get(pid, pid)} speaks while asleep at {_tr_slot_name(bad)}")
             continue
@@ -14468,7 +14515,7 @@ def _nobody_is_woken(game):
                             f"{_tr_slot_name(gone)}, and nothing on this path checks")
                 continue
             bad = next((s for s in sorted(slots) if table.get(s) and
-                        all(_TR_SLEEP.search(a or "") for _, a in table.get(s, ()))), None)
+                        all(_tr_sleeps(p, a, s, doors) for p, a in table.get(s, ()))), None)
             if bad and not sleepy:
                 rows.append(f"{c['id']} (one-time): {names.get(pid, pid)} is asleep at {_tr_slot_name(bad)}")
     if not n:
@@ -14680,7 +14727,10 @@ def _named_before_met_gate(game):
 
 
 # ── a latch flag is cleared (B98, B21; sweep O) ──────────────────────────────
-_TR_ENGINE_FLAGS = {"rent_carried": "v2.py:14426-14427 sets it on a short week and nothing in the engine clears it"}
+# J74 (LO 2026-11-03): `rent_carried` is a permanent record ("she has been short at least once") the author never
+# clears, so it is no longer a latch this gate asks to clear; "short right now" is the engine's `rent_short`, which
+# a full payment clears (ENGINE_CLEARED_FLAGS). An engine-set flag that is a latch goes here, with why.
+_TR_ENGINE_FLAGS = {}
 
 
 def _latch_flag_cleared(game):
@@ -14851,15 +14901,44 @@ _TR_STRIP = re.compile(r"\byou (?:strip|undress|peel (?:it|them|everything) off|
 _TR_EXACT = ("clothing_slot", "worn_type", "clothing_item", "wardrobe", "wardrobe_removed")
 
 
+def _clothes_named_after(game, c, nid, garments):
+    """B53: where a later screen (a node reached from `nid` inside canvas `c`) or an exit of the
+    canvas (a choice that leaves it) names her clothes again — "screen <id>", "exit \"<text>\"" —
+    or None. Her clothes are the catalog's garment words after "your" (`_her_garments`), her
+    underwear words, or "your clothes"."""
+    def names(text):
+        return bool(garments(text, None) or _TR_UNDER.search(text) or re.search(r"\byour clothes\b", text, re.I))
+    nodes = {nd.get("id"): nd for nd in c.get("nodes") or [] if nd.get("id")}
+    seen, todo = {nid}, [nid]
+    while todo:
+        cur = nodes.get(todo.pop()) or {}
+        for ch in _tr_choices(cur):
+            tgt = str(ch.get("nodeId") or "").split(".")[-1]
+            if ch.get("targetType") == "node" and tgt in nodes:
+                if tgt not in seen:
+                    seen.add(tgt)
+                    todo.append(tgt)
+            elif names(str(ch.get("text") or "")):
+                return f"exit \"{ch.get('text')}\""
+    for later in sorted(seen - {nid}):
+        text = " ".join(str(b.get("content") or "") for b in _flat_blocks(nodes[later].get("blocks")))
+        if names(text):
+            return f"screen {later}"
+    return None
+
+
 def _clothes_named_exactly(game):
     """(ok, headline, detail) for the gate `her clothes are named exactly`.
     `worn_exposure` 1 or 2 is a level, not a garment: 1 is the towel, the sleep shirt and
     underwear alike, and 2 is either half bare (the larger of the two halves). A line naming
     her underwear or saying she is naked needs a slot, type or item check. A "you strip" line
-    needs a wardrobe effect on the screen it is on or the choice into it."""
+    inside an act needs a wardrobe effect on the screen it is on or the choice into it only when
+    a later screen or an exit of that canvas names her clothes again; elsewhere the act backs it
+    (B53, LO 2026-11-03)."""
     if not game.get("clothing"):
         return None, "no [[clothing]] catalog", []
     rows, n = [], 0
+    garments = _her_garments(game)
     into = collections.defaultdict(list)
     for c in game.get("canvases") or []:
         for nd in c.get("nodes") or []:
@@ -14881,9 +14960,10 @@ def _clothes_named_exactly(game):
                 n += 1
                 nd = next((x for x in c.get("nodes") or [] if x.get("id") == nid), {})
                 wfx = any(ch.get("wardrobeEffects") for ch in _tr_choices(nd) + into[(c.get("id"), nid)])
-                if not wfx:
-                    rows.append(f"{c['id']} · {nid}: she strips and no garment comes off — "
-                                f"\"{sent.strip()[:110]}\"")
+                again = None if wfx else _clothes_named_after(game, c, nid, garments)
+                if not wfx and again:
+                    rows.append(f"{c['id']} · {nid}: she strips and no garment comes off, and {again} "
+                                f"names her clothes again — \"{sent.strip()[:110]}\"")
     if not n:
         return None, "no line names her underwear or a strip", []
     return not rows, (f"{len(rows)} line(s) say more about her clothes than the check behind them"
@@ -15101,10 +15181,15 @@ _TR_DAY_RX = re.compile(r"\b(?:it's|today's|today is|on a|this|every) (monday|tu
                         r"(?:morning|night|evening|afternoon) again\b", re.I)
 
 
+# H65 (LO 2026-11-03): a forward word names a time ahead, not now, so the gate skips it:
+# "in the morning", "by morning", "tomorrow ..." ("tomorrow morning", "tomorrow evening").
+_TR_FORWARD = re.compile(r"(?:\bin the|\bby|\btomorrow)\s+$")
+
+
 def _day_word_fits(game):
     """(ok, headline, detail) for the gate `a day word fits its window`. "Tonight", "this
     morning", "it's Friday" are true only at some slots; a line carrying one must not render
-    outside them."""
+    outside them. A forward word ("in the morning", "by morning", "tomorrow morning") is skipped."""
     where = _tr_where(game)
     rows, n = [], 0
     days = {d.lower(): i for i, d in enumerate(_LOC_DAY_NAMES)}
@@ -15113,7 +15198,9 @@ def _day_word_fits(game):
             continue
         low = text.lower()
         for word, (a, b) in _TR_PARTS.items():
-            if re.search(r"(?<![\w])%s" % re.escape(word), low):
+            hits = [m for m in re.finditer(r"(?<![\w])%s" % re.escape(word), low)
+                    if not _TR_FORWARD.search(low[:m.start()])]
+            if hits:
                 n += 1
                 bad = next((s for s in sorted(slots) if not _tr_in_window(s[1], f"{a // 60:02d}:{a % 60:02d}",
                                                                            f"{b // 60:02d}:{b % 60:02d}")), None)
@@ -15544,11 +15631,21 @@ def _performance_meter_keys(state):
             and (m.get("key") or m.get("id"))}
 
 
+def _spent_meter_keys(state):
+    """Keys of `board.meters[]` entries declared `"spent": true` (E22, LO 2026-11-03): money and
+    other currencies. She spends them on purpose, so a read below a price is a price, not a
+    descent."""
+    board = (state or {}).get("board") or {}
+    return {str(m.get("key") or m.get("id")) for m in _meters_of_board(board)
+            if m.get("spent") is True and (m.get("key") or m.get("id"))}
+
+
 def _descent_exempt_keys(state):
     """Player meters that may close more than they open: declared needs (C5 b, the-meters.md
-    M8: a need is meant to shut something while it is empty) and performance meters (S7)."""
+    M8: a need is meant to shut something while it is empty), performance meters (S7) and
+    spent meters (`"spent": true`, E22)."""
     return {str(n.get("key")) for n in _declared_needs(state) if n.get("key")} \
-        | _performance_meter_keys(state)
+        | _performance_meter_keys(state) | _spent_meter_keys(state)
 
 
 # C7 c + S11 a: only money paid for the act on that screen is sex for pay. A system card in
@@ -17986,6 +18083,45 @@ def _decided_stale_block(stale):
     return buf.getvalue()
 
 
+# ── LO's 27 skill answers, applied 2026-11-04 (pass3/PICKS.md, "your picks on all 27") ──
+# Helpers for checks that sit above the cited lines; they live here so nothing cited moves.
+def _ascent_keys(state):
+    """The declared ascent tiers (`board.ascent_tiers`), or an empty set with no ledger."""
+    return {str(k) for k in (((state or {}).get("board") or {}).get("ascent_tiers") or [])}
+
+
+SMALL_RUNG_STEPS = (5, 10, 15)
+
+
+def _small_rung_choice(ch, tiers):
+    """J75 / A69 (LO 2026-11-03): a small rung inside a stage. True when the choice reads at least
+    one trait and every trait item reads a declared ascent tier `gte`/`gt` at 5, 10 or 15 above a
+    multiple of 20. A flag beside it (a once-a-day cap) does not change what the rung is. Such a
+    rung may show greyed in the scene (`engine.md` §15)."""
+    if not tiers:
+        return False
+    items = [it for it in ((ch.get("conditions") or {}).get("items") or []) if isinstance(it, dict)]
+    traits = [it for it in items if it.get("trait_key") or it.get("trait")]
+    if not traits:
+        return False
+    for it in traits:
+        key, op, val = it.get("trait_key") or it.get("trait"), it.get("operator") or it.get("op"), it.get("value")
+        if it.get("npc_id") or (it.get("subject") or "player") != "player" or str(key) not in tiers:
+            return False
+        if op not in ("gte", "gt") or not isinstance(val, (int, float)) or val % 20 not in SMALL_RUNG_STEPS:
+            return False
+    return True
+
+
+def _sleepers_on(c, bound):
+    """B52 (LO 2026-11-03): the bound people a canvas shows asleep. A sleeper is exempt from
+    "a present person speaks", like an unseen peek. A canvas whose prose says asleep (the sleep
+    words of `nobody is woken`) and on which the person never speaks counts as showing them asleep."""
+    text = " ".join(str(b.get("content") or "") for n in c.get("nodes") or []
+                    for b in _flat_blocks(n.get("blocks")))
+    return set(bound) if _TR_SLEEP.search(text) else set()
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -18049,7 +18185,7 @@ def main():
     lints = lint_dialogue_attribution(model)
     amb_summary, amb_lints = lint_ambient_presence(model, game)
     badge_summary, badge_lints = lint_badge_before_content(model, game)
-    refusal_summary, refusal_lints = lint_refusal_shape(model, game)
+    refusal_summary, refusal_lints = lint_refusal_shape(model, game, state)
     world_lints = lint_world_prose(model, game)
     face_summary, face_lints = lint_faceless_surfaces(game)
     tok_summary, tok_player, tok_dev = lint_unresolved_tokens(game)

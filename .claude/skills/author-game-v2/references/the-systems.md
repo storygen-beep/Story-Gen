@@ -110,6 +110,12 @@ FED,** and the natural reading of it — build the thing in three rooms — desc
 The field's answer is the opposite on the write side: one place feeds the meter, and the rest of
 the game checks it.
 
+**The ascent tiers are exempt** (LO, 2026-11-03, PICKS F31 a). Her stage meters (`board.ascent_tiers`:
+corruption, exhibitionism) are about who she is, and they are fed everywhere by design: every act at every
+stage pays the meter it uses (`the-heat-ladder.md` H5, "Two meters, one act"). So the one-place test does not
+apply to them, whatever `kind` the ledger gives them, and lint *the labels and the systems agree* never asks
+an ascent tier to be read outside the rooms that feed it. Every other meter about her keeps the one-place rule.
+
 **So the payoff of a thin room is not thinness. It is being the only source of something.** A room
 with two rows that feeds a system read in fifty places is doing more work than a room with eight
 rows that feeds nothing.
@@ -422,7 +428,7 @@ In `v2_state.json`, before locations are written (`state.md` carries the schema)
 
 **`fed_at` on a `sourced` meter should usually be ONE location.** If it is five, ask whether the
 thing is actually ambient — that is the SY2 test, and it is cheaper to answer in the ledger than
-after the prose exists.
+after the prose exists. An ascent tier is the exception: it is fed everywhere by design (SY2, LO 2026-11-03).
 
 ---
 
@@ -441,7 +447,7 @@ on the `a need shuts a door` gate. It prints three lists and **moves no score**:
 1. a label on a room that no declared meter names — dead weight
 2. a label a meter names that no room carries — the meter has nowhere to live
 3. for each `sourced` meter: whether `key` is written by a canvas at a `fed_at` location and read
-   by at least one canvas somewhere else
+   by at least one canvas somewhere else (an ascent tier is not asked to be read elsewhere: SY2, F31)
 
 ⚠️ **Why a lint and not a gate.** A count is satisfied by declaring more, which is why R2c shipped
 with nothing and why `objects` / gate 22 had to be deleted after it manufactured nine duplicate room

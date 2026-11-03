@@ -5,6 +5,74 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-04 — LO's 27 skill answers applied (pass3/PICKS.md)
+
+**Why.** LO, 2026-11-03, on the 27 open skill rows of first_term's third alignment pass: *"your picks on all
+27"*; and 2026-11-04: *"Release the hold on the 27 skill answers and apply your picks for all of them. They
+settle rules that already exist."* Each rule below is written with LO's answer and its date.
+
+- **A26 a** `references/the-spine.md`, `templates/spine/SP2_ladders.md`: SP2 is exempt from the 400-word page limit.
+- **A65 c** `references/the-heat-ladder.md` H7: only the men she lives with cover their look at stage 1; an
+  outsider (Vance) may look openly; Mark is a housemate, so his walk-ins cover.
+- **A67 a** `scripts/shape.py`: new row *the release page's steps match the ladders* — `release_page.steps` and
+  SP7's "people, and each one's top step" row against each ladder's top step; a mismatch FAILS, neither present is
+  n/a. `references/the-spine.md` checkpoint A, `state.md` (`release_page.steps`), SKILL.md's shape.py line.
+- **A68 a** `the-heat-ladder.md` H1: a sex act a group watches is a mixed act, both meters at stage 4 (60 and 60).
+- **A69 a / J75 a** `the-heat-ladder.md` H1 (small rungs at 5/10/15 inside each 20, same kind, still unseen) and
+  `engine.md` §15 rule 1's exception; `scripts/gates.py` lint *which refusals are shown at all* skips a small rung
+  (`_small_rung_choice`, a flag beside it allowed; `lint_refusal_shape` now takes the ledger).
+- **B51 a** `register.md` (the speaking exemption) and gate *a named person is where the line says*
+  (`_tr_walkers`): a walk-in's arrival is presence for its walker on the walk-in canvas — the bound person, or
+  whoever speaks on an unbound walk-in.
+- **B52 a** `register.md` and lint *a person who never speaks* (`_sleepers_on`): a sleeper is exempt.
+- **B53 c** `register.md` rule 5 and gate *her clothes are named exactly* (`_clothes_named_after`): a "you strip"
+  line must move a garment only when a later screen or an exit of that canvas names her clothes again.
+- **C49 a** `the-first-hour.md` F4: a whole-system opt-out may sit on the opening's last screen as the second
+  button; the skip takes "on".
+- **C51 b** `the-first-hour.md` and `the-clock.md`: the "What the scoreboard checks" tables are gone; each points
+  at SKILL.md's one table. (The rationale paragraphs under them stay; the "The check" sections of other references
+  describe their lints and were left.)
+- **D9 b** `the-surfaces.md` R3: a walk-in is one moment screen plus one graded answer screen, the size per screen.
+- **D25 c** `the-surfaces.md` R5b and R5b.2: a no can fail only where a friend or a crowd pushes; elsewhere it parks.
+- **E81 a** `the-want.md` (deniability): with housemates it is H2's stage-1 accident; the late excuse-shaped scene is
+  only for the person with power over her, after her own choice.
+- **E22 b** `the-meters.md`, `state.md`, SKILL.md row: `board.meters[]` `"spent": true` (money); gate *ascent tiers
+  expand the world* skips it (`_spent_meter_keys`, in `_descent_exempt_keys`).
+- **E92 a** `the-arc.md` A4d: a sober-only step is allowed when its card says "not while tipsy".
+- **G73 1** `the-arc.md` A3: no final no on the central arc's first step; the opening offers only parked nos.
+- **F18 b** `the-economy.md` R3: a transgressive money route is shown on day one, visible-locked with its stage
+  named; "buys the first transgression" cut.
+- **F21 + J72 a** `engine.md` §21 (rewritten: an omitted clamp is `false` on authored effects, `v2.py:17612`,
+  `:17469`, `:16736`, `:7081`, `:2588`, `:16384`; only cheat rows and canvas/location costs clamp,
+  `template_import.py:726`, `v2.py:6086`), §3's note at :70, §41a, and `the-economy.md` R5 item 4; first_term's
+  `tomlw.add` described as writing `clamp = true` on 0-100 meters and `clamp = false` on quantities.
+- **F31 a** `the-systems.md` SY2 and "The check", `state.md`, SKILL.md lint line; lint *the labels and the systems
+  agree* never asks an ascent tier to be read outside the rooms that feed it.
+- **H63 b** `the-map.md` R6b, SKILL.md row; gate *nobody is woken* (`_tr_sleeps`): a 00:00-06:00 row in a room
+  behind a door is asleep unless its activity says "awake".
+- **H65 a** `the-clock.md` C2, SKILL.md row; gate *a day word fits its window* (`_TR_FORWARD`) skips "in the
+  morning", "by morning", "tomorrow …".
+- **I74 b** `the-sheets.md`, `templates/sheets/decision.md`: a required "This release" block (per person: in /
+  later / cut, and what the player loses).
+- **I75 a** `the-sheets.md`, `the-spine.md`: a signed sheet or spine page whose body changes goes back to
+  [REVIEW] until LO re-signs; the re-sign line goes under the title. This also settles pass 4's A71.
+- **J70 a** `engine.md` §23, SKILL.md lint line; lint *the badge arrives before the content* reads a `_step`
+  terminal as "played this".
+- **J71 a / J74 b** `engine.md` §26 (`rent_short`: short right now, set every short week, cleared by a full payment,
+  `v2.py:15456`, `:20545`; `rent_carried`: a permanent record the author never clears) and §52 (hours since a
+  latch the engine sets once counts from the first set). Gate *a latch flag is cleared* no longer lists
+  `rent_carried` (`_TR_ENGINE_FLAGS` emptied), SKILL.md row.
+- `gates.py` edits keep every cited line: six single-line swaps below :2300, all new code above `main()` or after
+  :14027 (the last cited line).
+- Tests: `scripts/tests/test_gates_picks_20261104.py` (24: 16 fail on the old code, 8 are the still-red controls);
+  `test_shape.py`'s full spine now declares `release_page.steps`.
+- Verified: `pytest scripts/tests` 968 passed; `pytest .claude/skill-evals/author-game/tests` 107 passed, 1
+  skipped; `--selfcheck` green; `cite_check --strict` 0 in SKILL.md + references/. first_term (read-only): gates
+  94/110 → 93/110 (*nobody is woken* FAIL, 3 rows from H63; *her clothes are named exactly* 4 → 2 rows; *a day
+  word fits its window* 2 → 1 row); shape.py gains one PASS row.
+
+---
+
 ## 2026-11-04 — `a deduction is gated or priced` leaves a meter alone that a condition reads below 0
 
 - `scripts/gates.py` `_deduction_is_gated`: a player meter that some condition reads at `lt`/`lte`/`eq` a negative

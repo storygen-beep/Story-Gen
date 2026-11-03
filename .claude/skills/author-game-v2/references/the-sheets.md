@@ -28,6 +28,12 @@ A sheet can also leave the workflow. Its title then carries one of three markers
 - **[CUT]** — dropped for good; nothing builds from it, ever.
 - **[MOVED]** — its content lives on another sheet now; the first line under the title names that sheet.
 
+**A signed sheet whose body changes goes back to [REVIEW]** until LO signs it again (LO, 2026-11-03,
+PICKS I75 a). A change made after his sign-off, even one that only makes the sheet match the build, replaces
+[READY] (or [GAME-READY]) with [REVIEW] in the title, and the line under the title says what changed, with the
+date. When LO re-signs, the re-sign line goes under the title: *"Re-signed by LO, <date>."* The same holds for
+a spine page (`the-spine.md`) and for its `spine.pages[]` row: `status` goes back to `REVIEW`.
+
 Status lives **in the document title**. Taken from the reference game's own Writer's Workflow: the
 document is argued over first, and whoever implements it is not whoever wrote it. That separation is
 the point — an author who implements their own sheet fills its gaps from memory without noticing
@@ -68,6 +74,10 @@ It makes drift **visible**; it does not detect it. S1's finding is untouched.
 | **decision** | what is locked forever, what is expensive, what is cheap — blocked by reversibility | game |
 | **opening** | the funnel, screen by screen, from the age gate to the first open door | game |
 | **pass page** | a signed fix list: what a pass found and what LO signed to fix (LO, 2026-11-03) | pass |
+
+**The decision sheet's this-release block** (LO, 2026-11-03, PICKS I74 b). Every release, the decision sheet
+carries a required block, *This release*: per person, in, later or cut, and what the player loses by it, said
+plainly. A separate per-release scope sheet is not needed; the block is it.
 
 Each type but the pass page has a one-page template in `templates/sheets/` — slots only, no example
 prose. A pass page is a plain list with its signed date in the title.

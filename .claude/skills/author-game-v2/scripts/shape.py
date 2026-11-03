@@ -286,6 +286,12 @@ def check(state, strict=False, slug=None, root=None):
         row("the door is a declared step", ok, f"door {door['canvas']}",
             [] if ok else [f"`{door['canvas']}` is not a ladder step's canvas"])
 
+    # 8b · the release page's steps match the ladders (A67, LO 2026-11-03): `release_page.steps`
+    # ({npc: top step}) and SP7's "people, and each one's top step" row say each ladder's length.
+    # A reach-back that changes a ladder and leaves either one stale fails here.
+    for r in _steps_match_rows(state, ladders, rp, slug, root):
+        row(*r)
+
     # 9 · the promise has a beat this release (IC16, SP7)
     prom_raw = want.get("promise")
     prom = prom_raw if isinstance(prom_raw, dict) else {}       # a string used to crash here
@@ -660,6 +666,69 @@ def check(state, strict=False, slug=None, root=None):
         row(*r)
 
     return rows, sorted(flags)
+
+
+STEPS_MATCH = "the release page's steps match the ladders"
+
+
+def _ladder_length(lad):
+    """The top step of a ladder: its highest `n`, or its step count when no step is numbered."""
+    ns = [s.get("n") for s in (lad.get("steps") or []) if isinstance(s, dict)
+          and isinstance(s.get("n"), (int, float))]
+    return int(max(ns)) if ns else len(lad.get("steps") or [])
+
+
+def _sp7_top_steps(slug, root, state):
+    """{npc id: top step} read from SP7's "people, and each one's top step" row, or None when
+    there is no SP7 page or no such row. A name is matched to a person by the first or last word
+    of their `board.characters[].name`; a word that names nobody ("DECISIONS 101") is skipped."""
+    if not slug:
+        return None
+    sdir = os.path.join(root or os.getcwd(), "games", slug, "spine")
+    page = next((os.path.join(sdir, f) for f in sorted(os.listdir(sdir)) if f.startswith("SP7")
+                 and f.endswith(".md")), None) if os.path.isdir(sdir) else None
+    if not page:
+        return None
+    line = next((ln for ln in open(page, encoding="utf-8", errors="replace")
+                 if ln.lstrip().startswith("|") and re.search(r"top step", ln, re.I)), None)
+    if line is None:
+        return None
+    answer = line.split("|")[2] if line.count("|") >= 3 else line
+    words = {}
+    for c in ((state.get("board") or {}).get("characters") or []):
+        if isinstance(c, dict) and c.get("id") and c.get("name"):
+            parts = re.findall(r"[A-Za-z][\w'-]*", str(c["name"]))
+            for w in {parts[0], parts[-1]} if parts else ():
+                words.setdefault(w, c["id"])
+    out = {}
+    for m in re.finditer(r"\b([A-Z][\w'-]*)\s+(\d+)\b", answer):
+        if m.group(1) in words:
+            out.setdefault(words[m.group(1)], int(m.group(2)))
+    return out
+
+
+def _steps_match_rows(state, ladders, rp, slug, root):
+    """One row (A67): `release_page.steps` and SP7's top steps against each ladder's length."""
+    people = [_person(p) for p in (rp.get("people") or [])]
+    judged = {n: lad for n, lad in ladders.items() if not people or n in people}
+    declared = rp.get("steps") if isinstance(rp.get("steps"), dict) else None
+    sp7 = _sp7_top_steps(slug or state.get("slug"), root, state)
+    if not judged or (declared is None and not sp7):
+        return [(STEPS_MATCH, None, "n/a — no release_page.steps and no SP7 top-step row")]
+    bad = []
+    for npc, lad in sorted(judged.items()):
+        top = _ladder_length(lad)
+        if declared is not None:
+            got = declared.get(npc)
+            if got is None:
+                bad.append(f"{npc}: ladder has {top} step(s), release_page.steps does not name it")
+            elif int(got) != top:
+                bad.append(f"{npc}: release_page.steps says {got}, the ladder has {top}")
+        if sp7 and npc in sp7 and sp7[npc] != top:
+            bad.append(f"{npc}: SP7 says top step {sp7[npc]}, the ladder has {top}")
+    src = " and ".join(x for x in (("release_page.steps" if declared is not None else ""),
+                                   ("SP7" if sp7 else "")) if x)
+    return [(STEPS_MATCH, not bad, f"{len(judged)} ladder(s) against {src}", bad)]
 
 
 COVERAGE_SINCE = gates.COVERAGE_SINCE

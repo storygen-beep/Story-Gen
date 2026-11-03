@@ -358,13 +358,18 @@ with start with accidents, and her chosen act waits for her stage (`the-heat-lad
 above come from a game that fails the adults-only rule (numbers only); the passing games put accidents first
 with the people she lives with.
 
-⚠️ **Deniability is a late tool for the target she cannot face.** The five excuse-shaped scenes —
-a slipped top, a door left open — gate at **45–80**, every one behind that game's hardest unlock. She notices half a second too late, every time, which lets
-her escalate without deciding to and lets the player enjoy it without her becoming a cartoon.
+⚠️ **Deniability comes in two kinds, and they sit at opposite ends** (LO, 2026-11-03, PICKS E81 a).
 
-**Use it for the one or two people the charge makes unapproachable — under Reversal, the person
-with power over her — and use it late.** Spending it on the ordinary cast inverts the ladder: it
-makes the easy targets read as harder than the forbidden one.
+- **With the people she lives with, deniability is the accident, at stage 1.** A slipped towel, a door that
+  does not latch, the look that happens to her: that is what `the-heat-ladder.md` H2 asks for, and it comes
+  first, before any act she chooses with them.
+- **The late, excuse-shaped scene is only for the person with power over her, and only after her own
+  choice.** In the source game the five excuse-shaped scenes (a slipped top, a door left open) gate at
+  **45–80**, every one behind its hardest unlock. She notices half a second too late, every time, which lets
+  her escalate without deciding to and lets the player enjoy it without her becoming a cartoon. Use it for the
+  one or two people the charge makes unapproachable (under Reversal, the person with power over her), after
+  she has already chosen an act with someone. Spending this late kind on the ordinary cast inverts the ladder:
+  it makes the easy targets read as harder than the forbidden one.
 
 ⚠️ **The elaborate route is one shape among several, not the house style.** Problem → practical
 offer → her own justification → appointment → preparation → the preparation is seen — that is

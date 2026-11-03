@@ -243,6 +243,13 @@ anyone designs and the field does not do it: one FAIL-list game (numbers only) s
 **A knock respects who sleeps there.** A knock that can show while the person inside is asleep by their
 row wakes them: write it as that scene, or gate it to their waking hours (gate *nobody is woken*).
 
+**Behind a door, the night is asleep unless the row says awake** (LO, 2026-11-03, PICKS H63 b). A
+schedule row covering any time from 00:00 to 06:00 in a room with a door counts as asleep, whatever its
+words, unless its `activity` says "awake" ("awake, gaming", "awake on her phone"). A resident's night row
+therefore says which it is: "in his room for the night" reads as asleep after midnight, so a knock or a
+scene that has him talking then must be gated off those hours, or the row must say he is awake. Gate
+*nobody is woken* reads rows this way.
+
 What the field makes conditional is the **door's existence**. The reference game (numbers only) puts
 one character's flat on the street only once that character's stage reaches 3; from then on the
 screen always renders.

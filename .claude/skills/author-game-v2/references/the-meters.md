@@ -194,7 +194,9 @@ gates nothing ever. Both look like progress. That is what makes this defect ship
 condition, a `costs` entry, or a quest goal. Deterministic — either a reader exists or none does.
 
 - **`costs` counts as a read.** The engine filters an unaffordable choice rather than letting it
-  fail (`engine.md` §27), so a meter spent through `costs` is gating.
+  fail (`engine.md` §27), so a meter spent through `costs` is gating. A meter she spends (money) is
+  declared `"spent": true` in `board.meters`, or as a need, so the descent gate below does not call its
+  prices a descent (LO, 2026-11-03, PICKS E22 b).
 - **`<npc>_stage` is exempt** when the prefix names a declared character: the *engine* reads those
   (`v2.py:6244-6249`). `sex_stage` is not exempt — no character is called `sex`.
 
@@ -315,7 +317,9 @@ whose effects mostly fall, declared needs excluded. It prints how many times the
 
 **Gate · `ascent tiers expand the world`** fails a player meter that closes more doors than it opens
 and is not declared as a tier. It skips declared needs (`board.needs[]`), because shutting is their job
-(M8), and a performance meter (`board.meters[]` entry with `"performance": true`, W5c) (LO, 2026-11-03).
+(M8), a performance meter (`board.meters[]` entry with `"performance": true`, W5c) (LO, 2026-11-03), and a
+spent meter (`board.meters[]` entry with `"spent": true`: money and any other currency, whose reads below a price
+are prices; LO, 2026-11-03, PICKS E22 b).
 
 ### W5c · A performance meter opens at the top and closes at the bottom
 
