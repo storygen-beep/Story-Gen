@@ -7,12 +7,12 @@
 | row | answer |
 |---|---|
 | kind | thoroughfare |
-| ENTERED FROM (S2) | campus |
+| ENTERED FROM | campus |
 | labels — what kind of place | `zone:campus` |
 | hours | Mon–Fri 08:00–19:30 |
 | closed text | "The faculty floor is locked." |
 | hidden until | no |
-| fill — word budget (S3) | 500 words (ledger, unchanged) |
+| fill — word budget | 500 words (ledger, unchanged) |
 | door | no |
 | dress code or wanted state | none |
 
@@ -24,7 +24,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | walk the corridor | — | the map | no effect | none needed | a line: whose door is open |
 

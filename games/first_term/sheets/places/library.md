@@ -7,12 +7,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | campus |
+| ENTERED FROM | campus |
 | labels — what kind of place | `zone:campus`, `public`, `she_can_study` |
 | hours | Mon–Fri 08:00–20:00 |
 | closed text | "The library is closed." |
 | hidden until | no |
-| fill — word budget (S3) | 1,500 words (ledger, unchanged) |
+| fill — word budget | 1,500 words (ledger, unchanged) |
 | door | no |
 | dress code or wanted state | none |
 
@@ -24,7 +24,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | study | work | college | energy add −10 · `intelligence` add +1 | twice a day, on the trigger | yes, short |
 | Nadia sits down | person | college · Hale's ladder | one line about Hale | once a day, her window | yes |

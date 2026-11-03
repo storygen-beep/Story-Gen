@@ -16,14 +16,14 @@
 | where · when | the landing, their door · Sun–Fri 22:00–23:00, Laura in and awake, Mark downstairs (new row in Laura's schedule) · door option "The door's ajar." in place of "Ease the door open" in that hour |
 | gate | none: open at Good Girl · Laura present, Mark absent |
 | who | Laura, 41, her mother; she never sees her |
-| what she wears here (test 8) | not named |
-| BRAKE (S9) | once a night (20 hours, as Ryan's door) · after she watched, "Peek through the gap." → `laura_alone_peek`, pays nothing |
+| what she wears here | not named |
+| BRAKE | once a night (20 hours, as Ryan's door) · after she watched, "Peek through the gap." → `laura_alone_peek`, pays nothing |
 | raises | the look: none · "Keep watching.": corruption add +1, cap 19 · `laura_gaps_watched` add +1 (counts toward her step 4) |
 | the crude-word ceiling | the park's: tits, nipples, ass, wet, clit · no cunt, fuck, cum, pussy (guess: LO to confirm for Laura) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `crack` | the lamp low, Laura alone, nightdress up, fingers on her clit; she hasn't seen her | yes | "Keep watching." → `watch` · "Pull the door to." → the hall | `saw_laura_alone`, `laura_alone_seen` set (on every exit) |
 | `watch` | two fingers inside, she bites her hand so Mark won't hear, she comes; she backs away | yes | "Back to your room." → her room | corruption add +1, cap 19 |
@@ -40,7 +40,7 @@
 | her step 4 ready (its gate met) | `laura_04_she_saw_you` fires in this slot instead (priority over this canvas) |
 | `laura_04_done` set | the door option opens `crack_after` in place of `crack`; "Keep watching." → `watch_after`; the same pay, brake and no |
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `crack_after` | Laura on her side, back to the door, face to the wall, her hand between her thighs; she knows the door is open | yes | "Keep watching." → `watch_after` · "Pull the door to." → the hall | `saw_laura_alone`, `laura_alone_seen` set (on every exit) |
 | `watch_after` | she comes into the pillow, almost silent; she doesn't turn round; you go to your room | yes | "Back to your room." → her room | corruption add +1, cap 19 · `laura_gaps_watched` add +1 |

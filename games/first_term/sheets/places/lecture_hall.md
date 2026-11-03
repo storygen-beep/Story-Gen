@@ -7,12 +7,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | campus |
+| ENTERED FROM | campus |
 | labels — what kind of place | `zone:campus`, `public`, `she_can_study` |
 | hours | Mon–Thu 08:30–14:30 · Friday 08:30–10:00 |
 | closed text | "No class now. The timetable is on the door." |
 | hidden until | no |
-| fill — word budget (S3) | 8,000 words (ledger, unchanged) |
+| fill — word budget | 8,000 words (ledger, unchanged) |
 | door | no |
 | dress code or wanted state | no code: nothing locks her out · a lecturer may warn her (wardrobe) |
 
@@ -27,7 +27,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | Focus | work | college | energy add −10 · grade add +2 · intelligence add +1 | once per class window | yes, short |
 | Chat | person | college | none · whoever sits beside her | once per class window | yes |

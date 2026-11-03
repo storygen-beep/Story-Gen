@@ -11,16 +11,16 @@
 | where · when | the quad · Tue, Thu, Fri 14:30–18:00 (her row), the first time she's there |
 | gate | `zoe_met` is false · Zoe's schedule window (the meeting fires where she is) |
 | priority | high: it fires before her hub can show |
-| want (test 1) | she picks @player out: someone to drag to her party |
-| next step (test 2) | her name, her number, and Friday |
-| hook (test 3) | "Friday. My place. Wear something short." (her thread, then Zoe A 1) |
-| what she wears here (test 8) | not named |
+| want | she picks @player out: someone to drag to her party |
+| next step | her name, her number, and Friday |
+| hook | "Friday. My place. Wear something short." (her thread, then Zoe A 1) |
+| what she wears here | not named |
 | explicit? | no |
 | role before name | "the girl from Biology", then "Zoe" once she says it |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `wave` | the girl from Biology waves from the grass: "Hey. You. Sit." | no | "Sit with her." → `zoe` · "Can't, I've got a shift." (only with `cafe_job`) or "Can't, I've got class." → `later` | none |
 | `zoe` | "Zoe." She talks fast, looks at @player too long, laughs | no | "Party?" → `friday` | `zoe_met` set |

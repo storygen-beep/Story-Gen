@@ -1,4 +1,4 @@
-# [READY]] Scene — jake_date_end
+# [READY] Scene — jake_date_end
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -17,7 +17,7 @@
 | locked | "Jake, further. (Needs Corruption 60.)" (the built side-of-the-house button, said as the number, DECISIONS 90) |
 | the crude-word ceiling | the car: his middle column (ass, tits, cock) with plain anatomy (nipples, clit, wet, thighs, balls) · `sneak`: Jake's late column: cock, fuck, cum (signed with the proposal, LO 2026-11-01), with ass, tits and plain anatomy (nipples, clit, wet, thighs) · no pussy, cunt |
 | truth | weekly: no "first time", no "again", no counting (`sneak` a: "He knows which stair creaks", true after step 4 only, where it shows) |
-| her_line_low · her_line_high (rule 7) | low: "He's normal. This is normal." · high: "You want Ryan to hear every second of it." | The low line sits in `car_low`. |
+| her_line_low · her_line_high | low: "He's normal. This is normal." · high: "You want Ryan to hear every second of it." | The low line sits in `car_low`. |
 
 ## The car, and two truth fixes
 
@@ -27,9 +27,9 @@
   through the park"). For the car to be outside the house, those two lines become "drives you home the long way" and
   "He drives you home through the park, slowly." Mine; confirmed by LO 2026-11-01 ("Continue").
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `door` | Jake parks outside the house, engine off | no | Curious: "Kiss him." → `car_low` · Bold, before step 4: "Your hand. Now." → `car_his` · "Lean back." → `car_hers` · after step 4: "Come up." → `sneak` · "Goodnight, Jake." → `night` · locked: "Jake, further. (Needs Corruption 60.)" | after step 4, "Come up.": `jake_catch_roll` set random 1–8 |
 | `car_low` / `car_his` / `car_hers` | below | yes | "Goodnight, gorgeous." → the hall | the pay |

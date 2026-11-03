@@ -15,13 +15,13 @@
 | what she calls her | "@player" (guess) |
 | met | her first Psychology class |
 
-## Schedule grid (S5)
+## Schedule grid
 
 | place | days | from | to | why she is there |
 |---|---|---|---|---|
 | none | — | — | — | inside the class scenes: Psychology, Business and the canteen |
 
-## Ladder — one guidance card per step (S10)
+## Ladder — one guidance card per step
 
 None in 0.1. Inside the class scenes; no row, no ladder.
 

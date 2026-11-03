@@ -13,21 +13,21 @@
 | person · step | `npc_jake` · 4 (new, top step) |
 | where · when | the front door after a date, Sat 22:00–00:00 (it takes the date-end slot that night, higher priority), then up to her room, `home_ella_room`; the clock goes past midnight |
 | gate | `jake_step` eq 3 · Corruption 40 · `jake_date_went` (tonight) · the boost off |
-| want (test 1) | the car after his dates (the date end, Bold): he wants more than the car |
-| next step (test 2) | she sneaks him in: Kayla's move, reversed |
-| hook (test 3) | Ryan's next-morning line; Monday, the team knows; the sneak-in repeat opens |
+| want | the car after his dates (the date end, Bold): he wants more than the car |
+| next step | she sneaks him in: Kayla's move, reversed |
+| hook | Ryan's next-morning line; Monday, the team knows; the sneak-in repeat opens |
 | who notices | **Ryan, through the wall** (from his step 5) · a footstep on the landing when her door has no key |
 | what she risks | Laura and Mark across the landing; the door that won't lock |
-| what she wears here (test 8) | not named; "your clothes" come off in the act |
+| what she wears here | not named; "your clothes" come off in the act |
 | her voice | stage 3 (Bold) |
 | the crude-word ceiling | Jake's late column: cock, fuck, cum (signed with the proposal, LO 2026-11-01), with ass, tits and plain anatomy (nipples, clit, wet, thighs) · no pussy, cunt |
-| her_line_low · her_line_high (rule 7) | low: "He's normal. This is normal." · high: "You want Ryan to hear every second of it." | The high line is her thought in `bed` and `wall`. |
+| her_line_low · her_line_high | low: "He's normal. This is normal." · high: "You want Ryan to hear every second of it." | The high line is her thought in `bed` and `wall`. |
 | mixed act? | no: behind her door. Corruption only (`meters.md` rule 3) |
 | does it finish | yes |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `door` | the porch; she takes his hand: "Come up." On the stairs, in the dark: "Your room. Now." | no | "Quiet." → `bed` · "Goodnight, Jake." → the date end's goodnight (parked) | none |
 | `bed` | her door shut; her clothes off, her wrists pinned; he pushes into her; the headboard knocks once | yes | → `wall` | none |

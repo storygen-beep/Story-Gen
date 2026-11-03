@@ -7,12 +7,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | Zoe's Flat opens here (`zoe_flat`, inside Town); the id `zoe_apartment` is kept |
+| ENTERED FROM | Zoe's Flat opens here (`zoe_flat`, inside Town); the id `zoe_apartment` is kept |
 | labels — what kind of place | `zone:town`, `private` |
 | hours | Mon–Sat 18:00–00:00 · Saturday 00:00–02:00 (Zoe's hours) |
 | closed text | "Zoe's out. Nobody answers." |
 | hidden until | until she meets Zoe on campus (`zoe_met`) |
-| fill — word budget (S3) | 6,000 words (ledger, unchanged) |
+| fill — word budget | 6,000 words (ledger, unchanged) |
 | door | no: open only when Zoe is home |
 | dress code or wanted state | Friday party: something short, a skirt or Zoe's dress, checked at arrival |
 
@@ -25,7 +25,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | Zoe | person | Zoe's ladder | Zoe A 2 and 4 here | once per window | yes |
 | the Friday party | work | parties | as the party sheet | Friday only · arrival energy | yes |

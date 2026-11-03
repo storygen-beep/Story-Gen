@@ -11,17 +11,17 @@
 | person · step | `npc_ryan` · 3 (Ryan A 4) |
 | where · when | his room · Mon, Tue, Thu, Sun 18:00–22:00 |
 | gate | Corruption 20 · his Want 20 · the boost off |
-| want (test 1) | "Don't." He holds her look a beat longer since she read the text |
-| next step (test 2) | she names a price for his secret, and he pays it |
-| hook (test 3) | the code: two knocks, and he opens |
+| want | "Don't." He holds her look a beat longer since she read the text |
+| next step | she names a price for his secret, and he pays it |
+| hook | the code: two knocks, and he opens |
 | who notices | Laura, nearly: her call up the stairs (the step's new risk) |
-| what she wears here (test 8) | not named |
+| what she wears here | not named |
 | explicit? | no: he shows, she looks; no body words on the list |
-| her_line_low · her_line_high (rule 7) | low (under the stage): "This is Ryan. You should go." · high (over it): "You want him to hear Kayla on the phone while you do this." (the person sheet's pair; worded for this screen when the prose is written) |
+| her_line_low · her_line_high | low (under the stage): "This is Ryan. You should go." · high (over it): "You want him to hear Kayla on the phone while you do this." (the person sheet's pair; worded for this screen when the prose is written) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `door` | she knocks; he opens, wary: "If this is about Kayla—" | no | "It's about Kayla." → `price` · "Never mind." → the hall (parked) | none |
 | `price` | her price: "You saw me. Shirt off." | no | "Turn around. Slowly." → `look` | none |

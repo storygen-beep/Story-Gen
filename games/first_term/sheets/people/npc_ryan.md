@@ -36,7 +36,7 @@
 | his line: no bra | He talks to her face, hard, and fails. |
 | his line: underwear only | Laura home and awake (her rows): "Jesus. Mom's home." · Laura out or asleep: "Jesus, @player.nickname." He shuts his door, then opens it again. |
 
-## Schedule grid (S5)
+## Schedule grid
 
 | place | days | from | to | why he is there |
 |---|---|---|---|---|
@@ -51,7 +51,7 @@
 
 His night row ends 06:45, so it doesn't overlap his bathroom row (LO, 2026-10-08).
 
-## Ladder — one guidance card per step (S10)
+## Ladder — one guidance card per step
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the release-1 lust ladder, copied from
 > `proposals/RYAN_R1_LADDER.md` (signed 2026-11-01). Lust is his `want` meter. Each step pays Lust +5 (step 1
@@ -94,7 +94,7 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 | 7 | two knocks; Kayla's photo lights up his phone; she jerks him off and he comes in her hand | Kayla, on the screen | Kayla calling while he's in her hand | "Don't answer it." | he reaches for her first, then for the phone, and she pushes his hand away | **yes** | his phone is face-down every time she knocks |
 | 8 | first sex, on a night that isn't Kayla's, after a talk, her doubt, a kiss and undressing (changed 2026-11-02); his headboard hits the wall, the one she listened through | Laura, across the hall, her light on | Laura hearing the headboard | "Stay." (was "Fuck me.") | he kisses back and doesn't stop | **yes**: her picks: what first (his cock in her mouth, his mouth on her, straight on), how (on top, under him, against her wall), Laura's light (keep going, freeze), the finish (inside, on her, her mouth) | her feeling after, then the terms (below); the repeat opens |
 
-**Her voice (rule 7):** every step sheet carries `her_line_low` (under the stage: her thought pushes back, "This
+**Her voice:** every step sheet carries `her_line_low` (under the stage: her thought pushes back, "This
 is Ryan. You should go.") and `her_line_high` (over it: appetite, "You want him to hear Kayla on the phone while
 you do this.").
 
@@ -102,7 +102,7 @@ you do this.").
 "You're my brother, that's all." (ends his path). The Jake line ("And Jake? The guy who walks you to the door?")
 stays in it.
 
-### Leak and promise (S5)
+### Leak and promise
 
 | n | the leak: his want, shown before | the promise: the line it ends on |
 |---|---|---|
@@ -123,7 +123,7 @@ release)".
 
 **After** (next release): sex while Kayla is in the house; Kayla's thread (does she suspect?).
 
-## The hot repeatables, one per stage (rule 6)
+## The hot repeatables, one per stage
 
 Gates changed 2026-11-01 (DECISIONS 124): each opens at its SP2 stage, and pays her +1 capped at that stage's top.
 All written in full, no placeholders. Each pays Lust +3 once a day (flag `ryan_hot_today`, cleared by the daily

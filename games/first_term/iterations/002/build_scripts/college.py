@@ -421,11 +421,15 @@ out.append(hub("hub_art_class", "lecture_hall", ART, "art_lecturer_met", "The ar
 ]))
 out.append(hub("hub_business_class", "lecture_hall", BUS, "business_lecturer_met", "The Business lecturer", [
     P("The Business lecturer is writing headings on the board in long straight lines."),
+    # S4 (LO 2026-11-03): he's teaching, so the screen is look-only and says why
+    P("He's mid-lecture, and he doesn't stop for anyone."),
     *grade_lines(BUS, "grade_business", "Failing. Retakes by appointment.", "Adequate.", "Good. Keep it that way."),
     clothes_line(BUS, "This isn't a beach, @player."),
 ]))
 out.append(hub("hub_ta_class", "lecture_hall", TA, "bio_ta_met", "The Biology TA", [
     P("The TA is sorting a stack of handouts at the front. She turns, sees you, and drops half of them."),
+    # S4 (LO 2026-11-03): she's running the class, so the screen is look-only and says why
+    P("She's handing out the worksheets, too busy to talk."),
     # reader a3 #19 (DECISIONS 131): the 40+ bands point at her office too (her rows: ta_office Tue-Fri 14:30-18:00)
     *grade_lines(TA, "grade_bio", "You're, um. You're struggling. My door's open. If you want.", "You're doing fine! Really fine. My door's open afternoons.", "Top marks. Wow. Sorry. Top marks. My door's open afternoons."),
     # reader a3 #35 (DECISIONS 131): the act she holds back, not only a compliment
@@ -448,6 +452,13 @@ out.append(hub("hub_art_office", "art_office", ART, "art_lecturer_met", "The art
       P("She's already looking at your bare legs below the skirt, pencil moving."),
       D(ART, "Clothes on today. Some day you'll sit for me properly.")),
 ]))
+# S4 (LO 2026-11-03): she isn't busy in her office, so one choice aimed at her. An hour, Figure drawing +1, cap 69.
+_ao = out[-1]
+_ao["nodes"][0]["choices"] = [go("Show her your sketchbook.", node="book", mins=0), go("Go.", loc=LEAVE_TO["art_office"])]
+_ao["nodes"].append(node("book", "Your sketchbook", [
+    P("She turns the pages slowly, and stops on the figures. She takes a pencil and corrects a hip with three lines, without asking."),
+    D(ART, "There. You keep drawing what you think a body does. Draw what it's doing."),
+], [go("Thank her.", loc=LEAVE_TO["art_office"], mins=60, eff=[{"targetType": "player", "trait": "grade_art", "op": "add", "value": 1, "cap": 69}])]))
 out.append(hub("hub_business_office", "business_office", BUS, "business_lecturer_met", "The Business lecturer's office", [
     P("The Business lecturer looks up from his marking and doesn't smile."),
     *grade_lines(BUS, "grade_business", "Failing. I can offer an honest retake. Nothing else.", "You're passing. Keep it honest.", "Good work. That's all."),

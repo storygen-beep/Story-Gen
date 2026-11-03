@@ -7,13 +7,13 @@
 | row | answer |
 |---|---|
 | kind | a building: `is_container`, no content of its own |
-| ENTERED FROM (S2) | town |
+| ENTERED FROM | town |
 | opens into (`default_entry`) | `zoe_apartment`, Zoe's Living Room |
 | the rooms inside it | Zoe's Living Room · Zoe's Kitchen · Zoe's Bathroom · Zoe's Bedroom |
 | labels — what kind of place | `zone:town`, `private` |
 | hours | none on the building: every room carries Zoe's hours, Mon–Sat 18:00–00:00 and Saturday 00:00–02:00 |
 | hidden until | she meets Zoe on campus (`zoe_met`) |
-| fill — word budget (S3) | 0 words |
+| fill — word budget | 0 words |
 | door | no: open only when Zoe is home |
 | dress code or wanted state | none on the building; the party's check is in the living room |
 

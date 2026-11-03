@@ -1,4 +1,4 @@
-# [REVIEW]] Scene — cafe_shift_scene
+# [REVIEW] Scene — cafe_shift_scene
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 

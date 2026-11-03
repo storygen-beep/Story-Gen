@@ -12,14 +12,14 @@
 | where · when | the park, on a walk · starts 07:00–21:30, so every exit (at most 21 minutes) lands before the gates lock at 22:00 (LO, 2026-10-29, reader item 5) |
 | gate | stage 1: none, and `run` offers "Look a second longer." · stage 2 adds "Stay and watch." |
 | who | two strangers, adults, in the bushes; they never learn who she is |
-| what she wears here (test 8) | not named |
-| BRAKE (S9) | once a day, on the walk's trigger |
+| what she wears here | not named |
+| BRAKE | once a day, on the walk's trigger |
 | raises | stage 1: the look none · "Look a second longer." corruption add +1, cap 19 · stage 2: corruption add +1 until she is past Curious |
 | the crude-word ceiling | tits, nipples, ass, cock, wet, clit · no cunt, fuck, cum, pussy (LO, 2026-10-08) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `sound` | a sound off the path; she steps off to look | no | → `run` (Good Girl) · or "Stay and watch." → `watch` (Curious) | none |
 | `run` | she walks into them and sees all of it; they haven't seen her | yes | "Look a second longer." → `linger` · "Run." → the park | `saw_the_couple` set (on both exits) |

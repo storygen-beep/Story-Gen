@@ -95,7 +95,9 @@ def outcome_exits(tag, lo, hi, eff=(), flags=(), gary_flag=False):
 def level1_exits():
     """Level 1, no choice: the room looks. $2-4 tips; meeting Gary sets gary_met (npc_gary.md)."""
     out_ = []
-    for when, m in PAY_WHEN:
+    # (bug fix 2026-11-03) level 1 is the normal uniform only (PARTS["L1"]); the tight-uniform rows of PAY_WHEN
+    # here could never show (both equipped and unequipped). The tight one at E_LO pays on level 2's exits.
+    for when, m in [(w, m) for w, m in PAY_WHEN if SEXY_ON not in w["items"]]:
         for gary in (True, False):
             out_.append(go("Clock out.", loc="cafe", mins=180, wardrobe=CLOCK_OUT,
                            cond_=cond(*when["items"], *PARTS["L1"][0], GARY_IN if gary else GARY_OUT),
@@ -130,7 +132,7 @@ out.append({
     "trigger": {"location": "cafe", "is_repeatable": True, "priority": 4, "is_active": True,
                 "schedules": [{"weekdays": [0, 1, 2, 3, 4, 5], "start_time": "08:00", "end_time": "19:00"}],
                 "conditions": cond(flag("cafe_job"), flag("cafe_shift_3_today", False)),
-                "metadata": {"show_when_blocked": True, "cooldown_message": "No more shifts today."}},
+                "show_when_blocked": True, "cooldown_message": "No more shifts today."},
     "nodes": [
         node("counter", "The counter", [
             D(TM, "Uniform's in the back, @player. Three hours. Smile."),

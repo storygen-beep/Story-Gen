@@ -14,14 +14,14 @@
 | gate | `gary_ten_minutes_open` (Tom B 4) · Corruption 40 · Gary present |
 | the price | said by Tom: "Gary's in. Twenty for ten minutes. Half's mine." · the toast after the click: money add +10 |
 | two voices | reluctant: Corruption 40–49 (guess) · eager: 50 or more |
-| what she wears here (test 8) | her café uniform: the café's dress rule |
-| BRAKE (S9) | once a shift, on the trigger |
+| what she wears here | her café uniform: the café's dress rule |
+| BRAKE | once a shift, on the trigger |
 | raises | corruption add +1, until she is past Bold (repeat raise) |
 | the crude-word ceiling | Tom's middle column: tits, cock · early: ass, tits · no cunt, cum, fuck |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `ask` | Tom at the counter: "Gary's in. Twenty for ten minutes. Half's mine." | no | "Sit with him." → `ten` · "No." → the shift | none |
 | `ten` | reluctant or eager, by her Corruption | yes | "Time." → the shift · "That's enough, Gary." → the shift | money add +10 (or +5 if stopped) · corruption add +1 |

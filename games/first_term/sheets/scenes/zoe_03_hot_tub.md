@@ -1,4 +1,4 @@
-# [REVIEW]] Scene — zoe_03_hot_tub
+# [REVIEW] Scene — zoe_03_hot_tub
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -15,17 +15,17 @@
 | where · when | the party house hot tub · Saturday 20:00–00:00, seen from Zoe's apartment |
 | gate | Corruption 40 · Exhibitionism 40 (was 20 · 20: DECISIONS 124) · pays +3 each, cap 79 · `party_house_invite` (A 2) · `zoe_step` eq 2 · the boost off |
 | mixed act? | yes: topless, seen by Zoe, and a kiss: both meters, as built (+3 each) |
-| her_line_low · her_line_high (rule 7) | low: "It's a dare. It doesn't count." · high: "You want her to dare you something worse." (the person sheet's pair) | |
-| want (test 1) | "There's a hot tub Saturday. Just us." (A 2); her knee against @player's |
-| next step (test 2) | topless for Zoe alone, and @player kisses her first |
-| hook (test 3) | "You could've asked." Zoe answers on her couch (A 4); Ryan sees her come home |
-| what she wears here (test 8) | she strips to her bra and panties at the tub's edge (top and bottom off on the first screen); "it" is her bra, and taking it off takes the bra off |
+| her_line_low · her_line_high | low: "It's a dare. It doesn't count." · high: "You want her to dare you something worse." (the person sheet's pair) | |
+| want | "There's a hot tub Saturday. Just us." (A 2); her knee against @player's |
+| next step | topless for Zoe alone, and @player kisses her first |
+| hook | "You could've asked." Zoe answers on her couch (A 4); Ryan sees her come home |
+| what she wears here | she strips to her bra and panties at the tub's edge (top and bottom off on the first screen); "it" is her bra, and taking it off takes the bra off |
 | only Zoe sees her | her friends go inside first (LO, 2026-10-08): SP2's group rule holds |
 | the crude-word ceiling | Zoe's middle column: tits, nipples, wet · early: tits, ass (LO, 2026-10-08) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `tub` | the hot tub, Zoe's friends, Zoe pressed close | no | "Stay in the water." → `alone` | none |
 | `alone` | the friends go in; Zoe: "Take it off. Just for me." | no | "Take your bra off." → `kiss` (bra off) · "Not tonight, Zo." → `home` (parked) | none |

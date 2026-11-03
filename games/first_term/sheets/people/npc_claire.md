@@ -15,13 +15,13 @@
 | what she calls her | none |
 | met | Hale B 4, the knock |
 
-## Schedule grid (S5)
+## Schedule grid
 
 | place | days | from | to | why she is there |
 |---|---|---|---|---|
 | none | — | — | — | inside Hale's Thursday scenes |
 
-## Ladder — one guidance card per step (S10)
+## Ladder — one guidance card per step
 
 None in 0.1. Inside Hale's scenes.
 

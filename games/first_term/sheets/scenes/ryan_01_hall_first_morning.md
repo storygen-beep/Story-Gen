@@ -1,4 +1,4 @@
-# [REVIEW]] Scene — ryan_01_hall_first_morning
+# [REVIEW] Scene — ryan_01_hall_first_morning
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -10,16 +10,16 @@
 |---|---|
 | person · step | `npc_ryan` · 1 (Ryan A 1) |
 | where · when | the hall, then the kitchen · the opening, Monday 07:15 |
-| want (test 1) | her: he looks, and doesn't move from the wall |
-| next step (test 2) | step 1, and it says so: the first look |
-| hook (test 3) | Laura's rule puts him behind the bathroom door every morning |
-| what she wears here (test 8) | a towel: the boot's shower node equips it (guess) |
+| want | her: he looks, and doesn't move from the wall |
+| next step | step 1, and it says so: the first look |
+| hook | Laura's rule puts him behind the bathroom door every morning |
+| what she wears here | a towel: the boot's shower node equips it (guess) |
 | her stage here | Good Girl only: she starts at 0 |
 | explicit? | no |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `hall` | she steps out in the towel; Ryan on the wall: "Look at you." | no | four choices → the reaction nodes | none |
 | `run` | she runs to her room, face hot; his eyes follow | no | "Get dressed." → `breakfast` | Ryan's Want add +10 · `ryan_hall_seen` set |

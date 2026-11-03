@@ -21,11 +21,11 @@
 | sink and deadline | none: home costs no money |
 | feeds | Laura's Warmth · Ryan's Warmth and Want · Mark's Want · Exhibitionism · Corruption (Bold only) · energy |
 | reads | who is home (their rows) · her two stages · each person's step · what she wears |
-| what drives it (S8) | the person in the room picks the version; her stage picks the choices; her clothes pick their line |
+| what drives it | the person in the room picks the version; her stage picks the choices; her clothes pick their line |
 | link into the hook | the house is where the people live: every small raise here feeds the next step on their ladder |
 | leads to | Laura, Ryan, Mark |
 | day 1 | yes: breakfast with Laura is the opening's; from day 2 every item is open |
-| BRAKE (S9) | each item, once a day per person: its flag is set on use and read as "not set, or set 12 hours ago or more" (hours since a flag; nothing to clear overnight) |
+| BRAKE | each item, once a day per person: its flag is set on use and read as "not set, or set 12 hours ago or more" (hours since a flag; nothing to clear overnight) |
 
 ## The rule for every item (LO, 2026-10-08, from round 11)
 
@@ -60,7 +60,7 @@
 
 ## Costs and what each pays (guesses)
 
-| item | cost, with op (S4) | pays, with op | alone | brake |
+| item | cost, with op | pays, with op | alone | brake |
 |---|---|---|---|---|
 | 6 breakfast | 15 min | energy add +10 | plain: toast at the counter | `ate_breakfast` · 12 h |
 | 6 dinner | 30 min | energy add +15 | plain: a plate alone | `ate_dinner` · 12 h |

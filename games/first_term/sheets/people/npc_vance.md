@@ -17,13 +17,13 @@
 | his line: short skirt | "Mark's girl is growing up." He doesn't pretend to read his paper. |
 | his line: covered | A nod from the porch. Nothing else. |
 
-## Schedule grid (S5)
+## Schedule grid
 
 | place | days | from | to | why he is there |
 |---|---|---|---|---|
 | `vance_house` | every day | 18:00 | 22:00 | his porch, every evening |
 
-## Ladder — one guidance card per step (S10)
+## Ladder — one guidance card per step
 
 None in 0.1. His arc is later; the porch look and the knock are in 0.1.
 

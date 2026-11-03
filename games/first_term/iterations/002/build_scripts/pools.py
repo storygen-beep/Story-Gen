@@ -30,7 +30,7 @@ out.append({
                 "schedules": [{"weekdays": [4], "start_time": "19:00", "end_time": "00:00"}],
                 "conditions": cond(flag("zoe_met"), trait("zoe_step", "gte", 1),
                                    {"type": "hours_since_flag", "subject": "player", "flag_key": "party_went", "operator": "gte", "value": 24}),
-                "metadata": {"show_when_blocked": True, "cooldown_message": "The party is Friday nights, from seven."}},
+                "show_when_blocked": True, "cooldown_message": "The party is Friday nights, from seven."},
     "nodes": [node("door", "Zoe's door", [
         P("You can hear it from the stairwell: bass through the walls, somebody shrieking with laughter, the door propped open with a crate of beer."),
         G(CURFEW_ON, T("Laura said no. Not this Friday.")),

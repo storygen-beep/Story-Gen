@@ -11,18 +11,18 @@
 | person · step | `npc_mark` · 1 (Mark A 1) |
 | where · when | the kitchen table · her first Sunday, 08:00–12:00 |
 | gate | `rent_starts` (set at breakfast, day 1) |
-| want (test 1) | none before: step 1. His eyes go to her legs ("bare" only when they are: shorts, a skirt, the sleep shirt) and stay |
-| next step (test 2) | the count itself: he counts slower when she's short |
-| hook (test 3) | "The thirty-five waits a week." Next time: "Not the shirt." |
-| what she wears here (test 8) | her sleep shirt: only in a group on her worn state (guess) |
+| want | none before: step 1. His eyes go to her legs ("bare" only when they are: shorts, a skirt, the sleep shirt) and stay |
+| next step | the count itself: he counts slower when she's short |
+| hook | "The thirty-five waits a week." Next time: "Not the shirt." |
+| what she wears here | her sleep shirt: only in a group on her worn state (guess) |
 | which version | Power 50 or more (guess): his version · under 50: hers |
 | explicit? | no: he only looks |
-| her_line_low · her_line_high (rule 7) | low (under the stage): "He's Mom's husband. Pay him and go." · high (over it): "You want him to lose count." (the person sheet names none; worded by me, signed by LO 2026-11-01) | The built thought on `short` ("He counted you as much as the money.") is the low side. |
+| her_line_low · her_line_high | low (under the stage): "He's Mom's husband. Pay him and go." · high (over it): "You want him to lose count." (the person sheet names none; worded by me, signed by LO 2026-11-01) | The built thought on `short` ("He counted you as much as the money.") is the low side. |
 | what changes after | the Sunday table, every week (`mark_sunday_table.md`) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `table` | she comes down; Mark at the table: "Count it out." | no | "Here." → `count` · "Let me get dressed first." → `dressed` (parked) | none |
 | `count` | his thumb on a bill; he counts slower; she's short | no | "Can you just — count it?" → `short` | none |

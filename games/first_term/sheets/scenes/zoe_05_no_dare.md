@@ -1,4 +1,4 @@
-# [READY]] Scene — zoe_05_no_dare
+# [READY] Scene — zoe_05_no_dare
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -13,20 +13,20 @@
 | person · step | `npc_zoe` · 5 (new, top step) |
 | where · when | Zoe's bedroom, `zoe_bedroom` · Sat 00:00–02:00, after a Friday party (`AT_PARTY` was set tonight), the music still through the door |
 | gate | `zoe_step` eq 4 · Corruption 40 · "Let him watch." needs Exhibitionism 60 (DECISIONS 124) · player counter `zoe_dares_done` gte 4 (+1 on every yes in `zoe_dares`; name mine) · the boost off |
-| want (test 1) | "I dared you instead of asking. I always do." (step 4) |
-| next step (test 2) | she stops daring and asks |
-| hook (test 3) | the cocky guy at the door; `zoe_let_him_watch` for the locked threesome · the dares change (`zoe_dares.md`) · locked: "Zoe's next dare. (Needs Corruption 60.)" |
+| want | "I dared you instead of asking. I always do." (step 4) |
+| next step | she stops daring and asks |
+| hook | the cocky guy at the door; `zoe_let_him_watch` for the locked threesome · the dares change (`zoe_dares.md`) · locked: "Zoe's next dare. (Needs Corruption 60.)" |
 | who notices | Zoe; **the cocky guy at the door** |
 | what she risks | the party hearing; the guy at the door |
-| what she wears here (test 8) | not named; "your clothes" come off in the act |
+| what she wears here | not named; "your clothes" come off in the act |
 | her voice | stage 3 (Bold) |
 | the crude-word ceiling | Zoe's late column: pussy, clit, fuck, with tits, nipples, wet, ass, thighs · no cunt, cum, cock (signed with the proposal, LO 2026-11-01) |
-| her_line_low · her_line_high (rule 7) | low: "It's a dare. It doesn't count." · high: "You want her to dare you something worse." | The high line is the thought on `asking`. |
+| her_line_low · her_line_high | low: "It's a dare. It doesn't count." · high: "You want her to dare you something worse." | The high line is the thought on `asking`. |
 | does it finish | yes |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `asking` | Zoe shuts the bedroom door on the party: "No dare. I'm asking." | no | "Yes." → `down` · "Ask me again." → the apartment (parked) | none |
 | `down` | she undresses her and goes down on her, the party through the door | yes | → `comes` | none |

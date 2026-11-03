@@ -10,14 +10,14 @@
 | where · when | the library's back stacks · Mon–Fri 08:00–20:00, from the row "Find a book in the back stacks" |
 | gate | none: open at Good Girl |
 | who | two strangers, seniors, both 22; they never see her |
-| what she wears here (test 8) | not named |
-| BRAKE (S9) | once a day, on the trigger |
+| what she wears here | not named |
+| BRAKE | once a day, on the trigger |
 | raises | the look: none · "Stay behind the shelf.": corruption add +1, cap 19 |
 | the crude-word ceiling | the park's: tits, nipples, ass, cock, wet, clit · no cunt, fuck, cum, pussy |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `stacks` | a soft knock of books; she turns the corner into them; she freezes | yes | "Stay behind the shelf." → `stay` · "Take the book and go." → the library | `saw_the_library_couple` set (on both exits) |
 | `stay` | behind the next shelf, through the gap in the books, she watches the woman come; a trolley squeaks; she leaves | yes | "Back to your desk." → the library | corruption add +1, cap 19 |

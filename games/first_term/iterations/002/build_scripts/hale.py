@@ -118,7 +118,7 @@ out.append({
             G(cond(NOT_SKIRT, NO_DRESS), P("Now you lean back in the front row and pull your waistband down an inch at the hip, slowly, and let him see there's nothing under it.")),
             G(cond(IN_DRESS), P("Now you lean back in the front row and inch your hem up your thigh, slowly, and let him see there's nothing under it.")),
             P("Dr. Hale stops in the middle of a sentence. He doesn't start it again. He looks at you and three rows behind you hear the silence, and somebody coughs, and he looks down at his notes like they're in another language."),
-        ], [go("\"You lost your place, Dr. Hale.\"", node="after", mins=60, eff=[add("exhibitionism", 3)])]),
+        ], [go("\"You lost your place, Dr. Hale.\"", node="after", mins=60, eff=[add("exhibitionism", 3, cap=79)])]),
         node("after", "Office hours", [
             P("After class he waits until the room has emptied before he speaks to you. He keeps the lectern between you."),
             D(H, "Not here, @player. Office hours."),
@@ -313,7 +313,14 @@ out.append({
         G(cond(trait("hale_step", "eq", 1)), D(H, "Front row tomorrow, @player. Where I can see you.")),
         G(cond(trait("hale_step", "eq", 2), tod("17:00", "18:00")), D(H, "After six, @player. Not before.")),
         G(cond(trait("hale_step", "eq", 3)), D(H, "Thursdays. Half past six, @player.")),
-    ], [go("\"Bye, Dr. Hale.\"", loc="faculty_floor")])]})
+    ], [
+        # S4 (LO 2026-11-03): in his office he isn't busy, so one choice aimed at him. An hour, Psychology +1, cap 69.
+        go("Ask him about your essay.", node="essay", mins=0),
+        go("\"Bye, Dr. Hale.\"", loc="faculty_floor")]),
+        node("essay", "Your essay", [
+            P("He reads your essay at the desk with his pen out, and talks you through it line by line. He doesn't touch you once. He doesn't need to."),
+            D(H, "Your argument's here, @player. You buried it on page three. Lead with it."),
+        ], [go("Thank him.", loc="faculty_floor", mins=60, eff=[{"targetType": "player", "trait": "grade_psych", "op": "add", "value": 1, "cap": 69}])])]})
 
 # ── Nadia: the library, the canteen, beside her in Psychology ──
 NADIA_LINES = POOL(D(N, "Thursday office hours are a trap, you know that?"),
@@ -337,12 +344,13 @@ for cid, loc, name, setting in [("hub_nadia_library", "library", "Nadia, studyin
         ], [go("Talk a while.", loc=loc, mins=20), go("Go.", loc="campus")])]})
 
 cards = step_cards(H, {
-    1: ("Monday, first class: Psychology with Dr. Hale.", "Go to Psychology on Monday morning, the lecture hall"),
+    1: ("Monday, first class: Psychology.", "Go to Psychology on Monday morning, the lecture hall"),   # C3: no name before the meeting
     2: ("His eyes are on the front row every class.", "The next Psychology class, front row, Monday, Wednesday or Friday morning (Daring)"),
     3: ("\"Thursday. Office hours.\"", "Thursday evening: Dr. Hale's office on the faculty floor, during his office hours"),
     # reader a3 (DECISIONS 131): the card names step 4's real gate, Corruption 40 and Exhibitionism 40
     4: ("\"Thursdays. Half past six. The door will be locked.\"", "Thursday, half past six: his office (Bold, Showing)"),
-}, terminal_text=("Thursdays, half past six: his office, the door locked.", "Hale, further. (Next release)"))
+}, met_flag="hale_met", pointer=(1, "Your Psychology lecturer"),
+   terminal_text=("Thursdays, half past six: his office, the door locked.", "Hale, further. (Next release)"))
 for c in cards:
     c["when"].append({"flag": "opening_done", "op": "is_true"})
 

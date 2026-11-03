@@ -38,7 +38,7 @@ out.append({
             P("He kisses you right there, in front of all of them, his hand low on your back, low enough that it's on your ass by the end. Somebody whistles. You feel him hard against your hip, and you move his hand back up to your waist. Not in front of them. Not yet. He pulls back grinning, red to the ears."),
             D(J, "Again. They missed it."),
             T("He wants them to see you're his. You want them to see too."),
-        ], [go("\"Again.\"", node="ask", mins=3, eff=[add("exhibitionism", 3)])]),
+        ], [go("\"Again.\"", node="ask", mins=3, eff=[add("exhibitionism", 3, cap=79)])]),
         node("ask", "Saturday", [
             P("You kiss him longer this time, long enough that the guys stop whistling and start looking at the grass."),
             ME("Saturday. Pick me up at the door."),

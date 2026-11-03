@@ -7,12 +7,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | zoe_apartment (Zoe's Living Room, inside Zoe's Flat) |
+| ENTERED FROM | zoe_apartment (Zoe's Living Room, inside Zoe's Flat) |
 | labels — what kind of place | `zone:town`, `private`, `has_bed` |
 | hours | Mon–Sat 18:00–00:00 · Saturday 00:00–02:00 (the flat's hours) |
 | closed text | with the apartment |
 | hidden until | with the apartment |
-| fill — word budget (S3) | 1,000 words (ledger, unchanged) |
+| fill — word budget | 1,000 words (ledger, unchanged) |
 | door | no: she goes in with Zoe; on party nights the door stays open |
 | dress code or wanted state | none |
 
@@ -24,7 +24,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | borrow Zoe's dress | work | wardrobe | `zoe_party_dress` to her wardrobe · needs Zoe here (Mon–Thu 22:00–00:00) | once a week | yes: Zoe watches her change |
 | Zoe's bedpost | work | Zoe's ladder | after Zoe A 2: her bra hangs there (colour) | none needed | yes, one line |

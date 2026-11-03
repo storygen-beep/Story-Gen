@@ -1,4 +1,4 @@
-# [REWORKED] Scene — hale_04_claire_knocks
+# [MOVED] Scene — hale_04_claire_knocks
 
 > **REWORKED 2026-11-01** (DECISIONS 113): the canvas is rebuilt as Hale's top step, "The first session" (`hale_04_first_session.md`). Her offer ("Undo it.", "Your husband's a great teacher.") becomes his lead. Kept on disk as the record; its beats are not used.
 
@@ -12,16 +12,16 @@
 | person · step | `npc_hale` · 4 (Hale B 4) · with Claire (38), his wife |
 | where · when | his office, the faculty floor · Thursday 18:30–19:30, near her pickup |
 | gate | Corruption 40 · Exhibitionism 40 · the boost off |
-| want (test 1) | he turned the photo face-down himself (step 3); "like it costs him" |
-| next step (test 2) | her body bare to him, his hand on her; and his wife at the door |
-| hook (test 3) | next class he has to look at her from the lectern (step 5) |
-| what she wears here (test 8) | the button lines only in the sheer blouse (the one top with buttons); in any other top the variant below: she pulls it up |
+| want | he turned the photo face-down himself (step 3); "like it costs him" |
+| next step | her body bare to him, his hand on her; and his wife at the door |
+| hook | next class he has to look at her from the lectern (step 5) |
+| what she wears here | the button lines only in the sheer blouse (the one top with buttons); in any other top the variant below: she pulls it up |
 | Claire, role before name | "his wife", then "Claire" when he says it |
 | the crude-word ceiling | Hale's middle column: tits, nipples, cock · early: legs, ass (LO, 2026-10-08) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `desk` | the corner of his desk; the photo face-down; his eyes | no | "Undo it." → `hand` · "Button up." → `no` | none |
 | `hand` | she undoes her buttons (blouse) or pulls her top up (any other top); his hand inside, his thumb on her nipple | yes (6 words) | → `knock` | exhibitionism add +3 · corruption add +3 |

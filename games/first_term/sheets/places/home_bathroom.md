@@ -1,4 +1,4 @@
-# [REVIEW]] Place — Bathroom
+# [REVIEW] Place — Bathroom
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -9,12 +9,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | home_hall |
+| ENTERED FROM | home_hall |
 | labels — what kind of place | `zone:home`, `private`, `has_shower`, `she_can_undress` |
 | hours | always |
 | closed text | none: always open |
 | hidden until | no |
-| fill — word budget (S3) | 5,000 words (ledger, unchanged) |
+| fill — word budget | 5,000 words (ledger, unchanged) |
 | door | no: a shared room. Who is inside is a row, not a door |
 | dress code or wanted state | none |
 
@@ -27,7 +27,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | shower | need | hygiene | hygiene add +50 (guess) · 20 minutes | once a day, on the trigger | yes: her body, never a toast |
 | someone walks in | person | hygiene · wardrobe | rolled on the shower: Ryan, Kayla, Mark | once a day | yes |

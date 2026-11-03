@@ -16,7 +16,7 @@
 | met | her first Figure drawing class, week 1 |
 | her line: short skirt | One line on what she wears, in the office talk hub. |
 
-## Schedule grid (S5)
+## Schedule grid
 
 | place | days | from | to | why she is there |
 |---|---|---|---|---|
@@ -24,7 +24,7 @@
 | `lecture_hall` | Wed | 13:00 | 14:30 | teaches Figure drawing |
 | `art_office` | Mon, Tue, Thu, Fri | 14:30 | 18:00 | office hours |
 
-## Ladder — one guidance card per step (S10)
+## Ladder — one guidance card per step
 
 None in 0.1. Her Curious and Bold rungs wait for 0.2 (SP5). In 0.1: a talk hub, one line on her grade, one on her clothes.
 

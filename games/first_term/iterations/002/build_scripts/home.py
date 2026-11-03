@@ -44,7 +44,9 @@ def solo(cid, name, desc, loc, nodes, sched=None, conds=(), prio=3, max_day=None
     if sched:
         t["schedules"] = sched
     if metadata:
-        t["metadata"] = metadata
+        # S5 (skill, 2026-11-03): show_when_blocked and cooldown_message are trigger keys; under
+        # [canvases.trigger.metadata] the importer drops them (the-clock.md), so they go on the trigger itself
+        t.update(metadata)
     return {"id": cid, "name": name, "description": desc, "trigger": t, "nodes": nodes}
 
 

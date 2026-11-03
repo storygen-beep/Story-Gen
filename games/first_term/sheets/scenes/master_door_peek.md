@@ -12,13 +12,13 @@
 | when it shows | (a) both inside and she saw `master_door_saturday_night` within 24 hours, so "The door's ajar." is off · (b) Mark inside and Laura not (she is on the stairs: `came_home_late`) |
 | gate | none |
 | who | Mark · Laura when she is in; neither sees her |
-| what she wears here (test 8) | not named |
-| BRAKE (S9) | none needed: it pays nothing |
+| what she wears here | not named |
+| BRAKE | none needed: it pays nothing |
 | raises | none · no ladder number moves |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `peek` | (a) it's over: Mark snores, Laura lies awake staring at the ceiling · (b) Mark sits up awake under the lamp, alone | no | "Close the door." → the hall | none |
 

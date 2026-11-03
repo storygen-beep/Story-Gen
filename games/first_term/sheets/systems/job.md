@@ -23,11 +23,11 @@
 | sink and deadline | rent, Sunday 00:00 · canteen food · the clothes shop |
 | feeds | `money` · Corruption · Exhibitionism · `cafe_footfall` · `cafe_name` |
 | reads | energy, Exhibitionism, Corruption, the uniform, the curfew |
-| what drives it (S8) | her meters pick the level; her choice picks the tip |
+| what drives it | her meters pick the level; her choice picks the tip |
 | link into the hook | it pays her rent, and it is never enough at first (`money_pressure.md`, week one) |
 | leads to | Tom, Gary |
 | day 1 | yes: she can ask for the job on day 1; first shift Tuesday |
-| BRAKE (S9) | one shift on weekdays, two on Saturday (`cafe_shift_<k>_today`) · energy |
+| BRAKE | one shift on weekdays, two on Saturday (`cafe_shift_<k>_today`) · energy |
 
 ## A shift
 

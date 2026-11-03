@@ -1,4 +1,4 @@
-# [REVIEW]] Place — Garden
+# [REVIEW] Place — Garden
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 10: "Lie in the sun an hour. Let Mark look." needs Curious or Daring (two copies) and opens a short screen `sun_mark_look` with his reaction (beer low over his jeans; "You'll burn, @player." while the sun is up, "Fence is low, @player." after 19:00), clothes by the lounger's three slot checks. "Play up to Mark in the garage door." shows only bra-only; "Play up to Ryan's window." only bra-only or with the lotion open (Bold, his step 7), so neither lands on a screen with only "Not today.". Built in `home.py` (garden_sun).
 
@@ -11,12 +11,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | home_hall (the back door), inside Home |
+| ENTERED FROM | home_hall (the back door), inside Home |
 | labels — what kind of place | `zone:home`, `outdoors`, `private`, `she_can_undress` |
 | hours | every day 07:00–21:00 |
 | closed text | "It's dark out." |
 | hidden until | no |
-| fill — word budget (S3) | 1,500 words |
+| fill — word budget | 1,500 words |
 | door | no |
 | dress code or wanted state | none |
 
@@ -28,7 +28,7 @@
 
 ## Everyday at home (system `home_life`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | lie in the sun | need | home_life · energy · wardrobe | 60 min · energy add +5 · Daring, seen: exhibitionism add +1 | `sunned`, 12 h | yes: her body, what she wears |
 | hang the washing | work | home_life | 15 min · alone plain · the wind and her underwear, an accident | with the laundry: `did_laundry` | yes, one line |

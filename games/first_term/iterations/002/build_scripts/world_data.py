@@ -429,7 +429,7 @@ _add("college_womens_toilet", dict(
     id="college_mens_toilet", name="Men's Toilet", entry_from="campus", parent="campus",
     kind="destination", hours=[H(ALL, "07:00", "22:00")], closed_text="The college gates are shut.",
     description=("The men's toilets across the corridor from the women's: a row of urinals, two stalls "
-                 "and a mirror nobody looks in.")))
+                 "and a mirror nobody looks in. There's nothing to do here right now.")))   # W12 (LO 2026-11-03): DECISIONS 76's empty room says so
 _add("college_mens_toilet", dict(
     id="campus_gym", name="Gym", entry_from="campus", parent="campus", kind="destination",
     rules=PARK_RULES,

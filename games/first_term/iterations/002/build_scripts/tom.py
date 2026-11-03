@@ -14,7 +14,11 @@ def done(n):
 
 UNIFORM = {"type": "worn_type", "operator": "eq", "value": "cafe_uniform"}
 SEXY_OWNED = {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "owned"}
-CLOCK_IN = [{"action": "equip", "item_id": "cafe_uniform_normal"}, {"action": "equip", "item_id": "cafe_uniform_sexy"}]
+# (bug fix 2026-11-03) was normal then sexy: equip also gives the garment, so the tight uniform was forced on her
+# first shift (DECISIONS 104: it is her choice). Normal only; in the tight one already, she keeps it on.
+CLOCK_IN = [{"action": "equip", "item_id": "cafe_uniform_normal"}]
+SEXY_WORN = {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "equipped"}
+SEXY_NOT_WORN = {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "unequipped"}
 
 def back(next_node):
     """She changes in the back room: the uniform is equipped before any screen names it."""
@@ -22,7 +26,8 @@ def back(next_node):
         P("Tom looks up from the till as you come in."),
         D(TM, "Uniform, @player. Back room."),
         P("You change in the back room in front of the staff mirror, between the mop bucket and the crates of milk."),
-    ], [go("Clock in.", node=next_node, mins=5, wardrobe=CLOCK_IN)])
+    ], [go("Clock in.", node=next_node, mins=5, cond_=cond(SEXY_NOT_WORN), wardrobe=CLOCK_IN),
+        go("Clock in.", node=next_node, mins=5, cond_=cond(SEXY_WORN))])
 
 # ── the job ask: meets Tom, the job, the uniform ──
 out.append({
@@ -210,7 +215,7 @@ cards = step_cards(TM, {
 # card named the job, and it goes after 7 days, so a player who skipped it lost Tom, Gary and the shift money.
 cards.insert(0, {"npc_id": TM, "priority": 10, "heading": "The café", "text": "The café in town is hiring.",   # C3 (LO 2026-11-03)
                  "tip": "The café in town, Monday to Saturday, 8 AM to 11 PM",
-                 "when": [{"flag": "opening_done", "op": "is_true"}, {"flag": "cafe_job", "op": "is_false"}],
+                 "when": [{"flag": "opening_done", "op": "is_true"}, {"flag": "tom_met", "op": "is_false"}],   # C3: the met flag
                  "ready_canvas": "cafe_job_ask"})
 
 text = ("# =============================================================================\n"

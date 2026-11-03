@@ -11,15 +11,15 @@
 | person · step | `npc_laura` · 5 (Laura C 5) = `npc_jake` · 4 (Jake B 4): one canvas |
 | where · when | the front door, seen from the dark living room · Saturday 22:30–00:00 |
 | gate | stage 3 on both meters, her Want 40, Jake B 3, a date |
-| want (test 1) | Laura: "Is Jake bringing you home?" · Jake: "Is your mom up?" |
-| next step (test 2) | she uses Jake's goodnight on the one watching from the dark |
-| hook (test 3) | "Was he any good?" — "Better in your dress." |
-| what she wears here (test 8) | Laura's dress: only in a group on `laura_blue_dress` worn |
+| want | Laura: "Is Jake bringing you home?" · Jake: "Is your mom up?" |
+| next step | she uses Jake's goodnight on the one watching from the dark |
+| hook | "Was he any good?" — "Better in your dress." |
+| what she wears here | Laura's dress: only in a group on `laura_blue_dress` worn |
 | explicit? | yes: the doorstep screen (heat call A), no new act |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `porch` | Jake walks her to the door: "Everyone was looking at you tonight." | no | "Kiss me." → `kiss` · "Goodnight, Jake." → in (parked) | none |
 | `kiss` | his hands on her ass under the dress; Laura in the dark window | yes (6 words) | "Higher. Don't stop." → `couch` | `jake_date_booked` set false |

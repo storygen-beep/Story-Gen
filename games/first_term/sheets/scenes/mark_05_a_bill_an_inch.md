@@ -12,17 +12,17 @@
 | person · step | `npc_mark` · 5 (Mark A 5) · his first paid touch |
 | where · when | the living room · Sun–Fri 23:00–00:00 and Mon–Sat 00:00–01:00 (never Sunday 00:00–01:00, when Mark is in bed) · Laura asleep upstairs · not on a night she came home late |
 | gate | Corruption 40 · Exhibitionism 20 · his Want 40 · the boost off |
-| want (test 1) | "Come down after your mother's asleep." (step 4); a bill folded, waiting |
-| next step (test 2) | his hand, paid by the inch, in cash |
-| hook (test 3) | Sunday she pays her rent with his money; what he asks next |
-| what she wears here (test 8) | not named: her bare leg and thigh only |
+| want | "Come down after your mother's asleep." (step 4); a bill folded, waiting |
+| next step | his hand, paid by the inch, in cash |
+| hook | Sunday she pays her rent with his money; what he asks next |
+| what she wears here | not named: her bare leg and thigh only |
 | which version | his Power 50 or more: his (M) · under 50: hers (E) |
 | the price | cash: $5 an inch, $20 at most · paid before Sunday's rent |
 | the crude-word ceiling | Mark's middle column: tits, cock · early: legs, ass (LO, 2026-10-08) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `offer_m` | M: he names it: five an inch, cash | no | "Sit down." → `climb` · "Hands off, Mark." → `no_m` | none |
 | `offer_e` | E: her leg across his lap; she names it | no | "Let him." → `climb` · "Not tonight." → `no_e` | none |

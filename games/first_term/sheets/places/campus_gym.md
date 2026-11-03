@@ -7,12 +7,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | campus (inside the Campus area) |
+| ENTERED FROM | campus (inside the Campus area) |
 | labels — what kind of place | `zone:campus`, `public` |
 | hours | Mon–Fri 07:00–21:00 · Sat–Sun 09:00–17:00 |
 | closed text | "The gym's locked." |
 | hidden until | no |
-| fill — word budget (S3) | 1,500 words |
+| fill — word budget | 1,500 words |
 | door | no |
 | dress code or wanted state | none · what she trains in is read (a sports bra is Daring) |
 
@@ -24,7 +24,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | work out | work | wardrobe | 60 min · energy add −15 · exhibitionism add +1 at Daring, if seen | `worked_out`, 12 h | yes: her body, what she wears |
 | Jake, training | person | Jake's ladder · home_life rule | inside his hub: talk, his step read · Curious: his hands on her hips at the squat rack · Bold, after Jake B 2: a kiss against the lockers | once per window | yes |

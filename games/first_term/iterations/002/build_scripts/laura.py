@@ -51,14 +51,14 @@ out.append({
             P("She says it quietly, to the mirror. Then she laughs, too bright, and takes her hands off you."),
             D(L, "No. No, sweetheart. It's not bad."),
         ], [go("\"Thank you, Mom.\"", loc="home_ella_room", mins=5, consumes=True,
-               eff=[nadd(L, "warmth", 5), add("exhibitionism", 3), setv("laura_step", 1)], flags=[done(1)])]),
+               eff=[nadd(L, "warmth", 5), add("exhibitionism", 3, cap=79), setv("laura_step", 1)], flags=[done(1)])]),
         node("give", "Keep it", [
             ME("I can't take this. It's yours."),
             D(L, "Keep it. Wear it somewhere."),
             P("She won't take it back. She folds your hands round the hanger and holds them there, and her thumb strokes the back of your wrist."),
             D(L, "Somebody should look at you in it."),
         ], [go("\"Okay.\"", loc="home_ella_room", mins=5, consumes=True,
-               eff=[nadd(L, "warmth", 5), add("exhibitionism", 3), setv("laura_step", 1)], flags=[done(1)])]),
+               eff=[nadd(L, "warmth", 5), add("exhibitionism", 3, cap=79), setv("laura_step", 1)], flags=[done(1)])]),
     ]})
 
 # ── step 2 · Laura C 2 · home late: the first catch ──

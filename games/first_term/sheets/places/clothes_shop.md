@@ -7,12 +7,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | town (the bus, 15 minutes, on the way in) |
+| ENTERED FROM | town (the bus, 15 minutes, on the way in) |
 | labels — what kind of place | `zone:town`, `public`, `she_can_undress` |
 | hours | Mon–Sat 10:00–18:00 |
 | closed text | "Closed." |
 | hidden until | no |
-| fill — word budget (S3) | 1,000 words (ledger, unchanged) |
+| fill — word budget | 1,000 words (ledger, unchanged) |
 | door | no: a shop |
 | dress code or wanted state | none |
 
@@ -24,7 +24,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | buy | work | wardrobe · money | money add −price · the item to her wardrobe · price on the label | none needed: money brakes it | yes: the shop says where it counts |
 | try on in the changing room | work | wardrobe | none · the mirror reads the new state | none needed | yes: her body |

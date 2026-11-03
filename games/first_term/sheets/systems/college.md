@@ -27,11 +27,11 @@
 | sink and deadline | no money · the deadlines are exams: midterms in weeks 7–8 |
 | feeds | the four grades, `intelligence`, `complaints`, `campus_talk`, `laura_suspicion` |
 | reads | energy, what she wears, Corruption, Exhibitionism, `intelligence` |
-| what drives it (S8) | her two stages and her clothes pick the risky slot; grades pick office lines |
+| what drives it | her two stages and her clothes pick the risky slot; grades pick office lines |
 | link into the hook | her grades go home to Laura; failing brings the curfew |
 | leads to | Hale, Nadia, the art lecturer, the Biology TA, the dean (met in his office on day 1) |
 | day 1 | yes: the opening ends "Go to campus.", the dean's office, then Monday's first class (Hale's week-one window) |
-| BRAKE (S9) | each class canvas fires once per class window, on its trigger |
+| BRAKE | each class canvas fires once per class window, on its trigger |
 
 ## The timetable
 

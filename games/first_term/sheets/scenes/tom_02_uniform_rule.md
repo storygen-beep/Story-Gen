@@ -11,15 +11,15 @@
 | person · step | `npc_tom` · 2 (Tom B 2) |
 | where · when | the café floor · Mon–Sat 14:30–22:00 |
 | gate | `cafe_job` · Exhibitionism 20 · his Want 10 |
-| want (test 1) | his eyes on her apron strings every shift |
-| next step (test 2) | his uniform rule: tight top, top button open |
-| hook (test 3) | Gary lowers his paper; her tips double. Gary is introduced |
-| what she wears here (test 8) | the sexy uniform: the scene adds and equips it |
+| want | his eyes on her apron strings every shift |
+| next step | his uniform rule: tight top, top button open |
+| hook | Gary lowers his paper; her tips double. Gary is introduced |
+| what she wears here | the sexy uniform: the scene adds and equips it |
 | explicit? | no: a dress rule |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `rule` | Tom hands her a tight black top: "Top button stays open." | no | "Is this the uniform, or your idea?" → `both` · "No." → the shift (parked) | none |
 | `both` | "Both." | no | "Fine." → `gary` | `cafe_uniform_sexy` added and worn · `uniform_sexy` set |

@@ -17,14 +17,14 @@
 | what he calls her | "@player" (guess) |
 | met | her first Figure drawing class |
 
-## Schedule grid (S5)
+## Schedule grid
 
 | place | days | from | to | why he is there |
 |---|---|---|---|---|
 | `zoe_apartment` | Fri | 23:00 | 00:00 | Zoe's Friday party, once met (the party hookup) · only when `cocky_guy_met` |
 | `zoe_apartment` | Sat | 00:00 | 02:00 | Zoe's Friday party, once met (the party hookup) · only when `cocky_guy_met` |
 
-## Ladder — one guidance card per step (S10)
+## Ladder — one guidance card per step
 
 None in 0.1. Inside the class scenes; no row, no ladder.
 

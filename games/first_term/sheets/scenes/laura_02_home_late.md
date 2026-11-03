@@ -11,15 +11,15 @@
 | person · step | `npc_laura` · 2 (Laura C 2) |
 | where · when | the hall, the dark stairs · any night 23:00–01:00, home late |
 | gate | `came_home_late` · Exhibitionism 20 · her Want 10 · the boost off |
-| want (test 1) | she looked too long at the dress (step 1) |
-| next step (test 2) | the first catch: punishment or questions, by her Warmth |
-| hook (test 3) | "Did anyone look at you in it?"; the catches go on |
-| what she wears here (test 8) | the dress line only in a group on `laura_blue_dress` worn |
+| want | she looked too long at the dress (step 1) |
+| next step | the first catch: punishment or questions, by her Warmth |
+| hook | "Did anyone look at you in it?"; the catches go on |
+| what she wears here | the dress line only in a group on `laura_blue_dress` worn |
 | explicit? | no |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `stairs` | shoes in her hand; Laura on the dark stairs in her robe; what she smells and asks follows the late flag: `late_party` smoke and cologne · `late_shift` coffee and the café · `late_date` nothing, she just looks · none: "Where were you?" | no | → `low` or `high`, by Laura's Warmth | `laura_suspicion` add +5 (home late) |
 | `low` | Warmth under 40 (guess): "You're grounded. A week." | no | "Fine." → her room · the truth, by the flag ("Zoe's." · "Work." · "Out with Jake." · "Just walking.") → her room · a different place than the flag says, "(she'll know)" → `lie` | `curfew` set true |

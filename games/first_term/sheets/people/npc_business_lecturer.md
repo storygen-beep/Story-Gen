@@ -16,7 +16,7 @@
 | met | her first Business class, week 1 |
 | his line: short skirt | One line on what she wears, in the office talk hub. |
 
-## Schedule grid (S5)
+## Schedule grid
 
 | place | days | from | to | why he is there |
 |---|---|---|---|---|
@@ -24,7 +24,7 @@
 | `lecture_hall` | Tue | 13:00 | 14:30 | teaches Business |
 | `business_office` | Mon, Wed, Thu, Fri | 14:30 | 18:00 | office hours |
 
-## Ladder — one guidance card per step (S10)
+## Ladder — one guidance card per step
 
 None in 0.1. He has no route: an honest retake, once per exam.
 

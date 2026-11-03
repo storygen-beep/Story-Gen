@@ -15,13 +15,13 @@
 | what she calls her | "@player.nickname", from Ryan (guess) |
 | met | Ryan A 6, Saturday morning in the hall |
 
-## Schedule grid (S5)
+## Schedule grid
 
 | place | days | from | to | why she is there |
 |---|---|---|---|---|
 | none | — | — | — | inside Ryan's Friday and Saturday scenes |
 
-## Ladder — one guidance card per step (S10)
+## Ladder — one guidance card per step
 
 None in 0.1. Inside Ryan's scenes.
 

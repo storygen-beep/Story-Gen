@@ -10,14 +10,14 @@
 | where · when | the landing, their door · Sun 00:00–01:00 (Saturday night), both inside and awake (new window, DECISIONS 80) · door option "The door's ajar." in place of "Ease the door open" in that hour |
 | gate | none: open at Good Girl · both present |
 | who | Mark, 46, her step-father · Laura, 41, her mother; neither sees her |
-| what she wears here (test 8) | not named |
-| BRAKE (S9) | once a week (its window) |
+| what she wears here | not named |
+| BRAKE | once a week (its window) |
 | raises | the look: none · "Stay at the gap.": corruption add +1, cap 19 · no ladder number moves |
 | the crude-word ceiling | tits, nipples, ass, cock, wet · no cunt, fuck, cum, pussy, clit |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `gap` | the lamp, the bed; Mark takes Laura from behind; Laura stares at the headboard, bored | yes | "Stay at the gap." → `stay` · "Go back to bed." → her room | `saw_mark_and_laura` set (on both exits) |
 | `stay` | Mark finishes and snores; Laura lies awake, her hand under the sheet; a floorboard creaks | yes | "Back to your room." → her room | corruption add +1, cap 19 |

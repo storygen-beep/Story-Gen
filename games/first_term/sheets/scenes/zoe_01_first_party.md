@@ -1,4 +1,4 @@
-# [REVIEW]] Scene — zoe_01_first_party
+# [REVIEW] Scene — zoe_01_first_party
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -11,16 +11,16 @@
 | person · step | `npc_zoe` · 1 (Zoe A 1) = `npc_jake` · 1 (Jake B 1): one canvas |
 | where · when | Zoe's bedroom, then the party · Friday 19:00–23:00 |
 | gate | `zoe_met` · neither counter started |
-| want (test 1) | Zoe: her head in @player's lap · Jake: he watches her, not Zoe |
-| next step (test 2) | her first party, Zoe's first dare, and a guy who picks her out |
-| hook (test 3) | Jake's number; Zoe's dares go on (A 2) |
-| what she wears here (test 8) | Zoe's party dress: the scene adds and equips it |
+| want | Zoe: her head in @player's lap · Jake: he watches her, not Zoe |
+| next step | her first party, Zoe's first dare, and a guy who picks her out |
+| hook | Jake's number; Zoe's dares go on (A 2) |
+| what she wears here | Zoe's party dress: the scene adds and equips it |
 | her stage here | Good Girl can only refuse the dare; the kiss opens at Curious |
 | explicit? | no |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `dress` | Zoe's bedroom: she changes; Zoe watches: "Turn around. Let me see." | no | "Zoe! Eyes up here." → `party` | `zoe_party_dress` added and worn |
 | `party` | the party; Zoe: "Kiss someone. Or don't, and I'll keep asking." | no | "Not tonight, Zo." · Curious: "Kiss Zoe." · "Kiss the guy staring." → `jake` | `party_went` set · exhibitionism add +3 |

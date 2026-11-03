@@ -89,15 +89,19 @@ Zoe is the companion, one step ahead of Ella.
 | `college` | `npc_hale` | `campus` | college (lectures, grades) | her grades go home to Laura |
 | `job` | `npc_tom` | `cafe` | job (shifts, tips) | it pays her cut of the rent |
 | `friends` | `npc_zoe` | `zoe_apartment` | parties | what she brings home late |
-| `dating` | `npc_jake` | `campus` | none — Jake's Saturday dates, booked on his phone thread (not a system, `SYSTEMS.md` §12, LO 2026-10-07) | Ryan sees |
+| `dating` | `npc_jake` | `campus` | none — Jake's dates, Wednesday and Saturday (DECISIONS 138), booked on his phone thread (not a system, `SYSTEMS.md` §12, LO 2026-10-07) | Ryan sees |
 | `neighbourhood` | `npc_vance` | `vance_house` | money pressure | her $75 is part of what Mark owes him |
 
 ---
 
 ## Before you leave this page
 
-1. What can she reach at the top that she cannot at the bottom? Ryan's bed, Laura's trust used
+1. What does release 41 add? A new person or a new room that reads the same two meters. Past
+   Shameless and On Display, the climb turns to who she does it in front of: a crowd, a room
+   watching, her feed. Each release adds one more of them, and the men she already has get a step
+   further. (My answer, added 2026-11-03 for the template's question; it waits for LO's check.)
+2. What can she reach at the top that she cannot at the bottom? Ryan's bed, Laura's trust used
    the other way, Mark's rent paid her own way, Vance's porch, the professor's office.
-2. Which person would a player miss if deleted, and what does he want back? Ryan — her, and the
+3. Which person would a player miss if deleted, and what does he want back? Ryan — her, and the
    one person in the house on her side.
-3. Vocabulary check: `python3 scripts/gates.py --words games/first_term/WANT.md`.
+4. Vocabulary check: `python3 scripts/gates.py --words games/first_term/WANT.md`.

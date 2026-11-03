@@ -32,13 +32,13 @@
 
 A ceiling, never a floor. LO took these, 2026-10-08.
 
-## Schedule grid (S5)
+## Schedule grid
 
 | place | days | from | to | why he is there |
 |---|---|---|---|---|
 | `cafe` | Mon–Sat | 08:00 | 23:00 | he opens and closes; off Sunday |
 
-## Ladder — one guidance card per step (S10)
+## Ladder — one guidance card per step
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01:** three steps, one per first. His steps are paced by the café
 > (shifts worked, footfall, name), not his meter: a declared exception to taste rule 5. The heat this release is the
@@ -67,13 +67,13 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 | 2 | the back room: Tom folding twenties out of the tip jar into his apron. Her twenties | Tom's secret is hers | being caught seeing it | "Busy night?" | "Not a word." His ears go red | yes | `knows_tip_jar`; Tom owes her; his line at the counter changes |
 | 3 | he's watched a customer's hand on her, and her letting it stay. In the back: "Reputation's going. The tables are full." Then: "Not by the window." | Tom; the room behind the door | her job, his café's name | "Then where?" · "Yes, boss." · "It's my tips." | the line he draws, and that he doesn't stop it | yes | the window rule: level-3 café scenes move away from the window; his look at her changes; his card ends on the locked line |
 
-**Her voice (rule 7):** a low and a high line on each step sheet.
+**Her voice:** a low and a high line on each step sheet.
 
 **Step 1, cut from the built step:** "Like that. You want it to show your waist." and "Regulars tip the pretty
 ones." **Cut from his hire line** (`tom.py:41`): "Regulars tip the pretty ones, so you'll do fine." It becomes
 "Eight a shift, plus tips. Be on time." **Kept:** his hands one second too long.
 
-### Leak and promise (S5)
+### Leak and promise
 
 | n | the leak: his want, shown before | the promise: the line it ends on |
 |---|---|---|

@@ -1,4 +1,4 @@
-# [REVIEW]] Place — Park
+# [REVIEW] Place — Park
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -11,12 +11,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | street · a 10-minute walk, the park's own cost (`costs` time 10); the park is not an area |
+| ENTERED FROM | street · a 10-minute walk, the park's own cost (`costs` time 10); the park is not an area |
 | labels — what kind of place | `zone:street`, `outdoors`, `public`, `she_can_undress` |
 | hours | every day 07:00–22:00 |
 | closed text | "The park gates are locked for the night." (guess) · the dark park is later |
 | hidden until | no |
-| fill — word budget (S3) | 3,000 words (ledger, unchanged) |
+| fill — word budget | 3,000 words (ledger, unchanged) |
 | door | no |
 | dress code or wanted state | none · what she runs in changes who looks (the park sheet) |
 
@@ -28,7 +28,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | walk | work | park | one walk event | once a day, on the trigger | yes |
 | run | work | park · wardrobe | energy add −10 · exhibitionism add +1 if Daring | once a day; energy on the trigger | yes |

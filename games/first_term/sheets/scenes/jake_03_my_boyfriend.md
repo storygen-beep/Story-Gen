@@ -12,20 +12,20 @@
 | person · step | `npc_jake` · 3 (Jake B 3) |
 | where · when | the front door · Saturday 23:00–00:00, after a booked date |
 | gate | Corruption 20 · Exhibitionism 20 · `jake_date_went` (set when she left with him tonight, read for 6 hours) · the boost off |
-| want (test 1) | "Saturday. Pick me up at the door." (B 2); "Is anyone up?" |
-| next step (test 2) | she names him to the house: Ryan |
-| hook (test 3) | Ryan's light goes out; "Next Saturday?" (his thread) |
-| what she wears here (test 8) | not named |
+| want | "Saturday. Pick me up at the door." (B 2); "Is anyone up?" |
+| next step | she names him to the house: Ryan |
+| hook | Ryan's light goes out; "Next Saturday?" (his thread) |
+| what she wears here | not named |
 | explicit? | no: a kiss on the porch rail (stage 2) |
 | who notices | **Ryan, Laura** (in the dark living room, Saturday 22:00–00:00, her waiting-up row) |
 | what she risks | the house knowing |
-| her_line_low · her_line_high (rule 7) | low: "He's normal. This is normal." · high: "You want Ryan to hear every second of it." (the person sheet's pair) | The built thought on `ryan` ("Good. Look all you want, Ryan.") is the high side. |
+| her_line_low · her_line_high | low: "He's normal. This is normal." · high: "You want Ryan to hear every second of it." (the person sheet's pair) | The built thought on `ryan` ("Good. Look all you want, Ryan.") is the high side. |
 | what changes after | Jake is her boyfriend (`jake_step` 3); Laura: "Was he any good?"; Ryan's line changes (built, "Who's Jake?") |
 | the crude-word ceiling | Jake's early column: ass · Ryan's early: ass, tits (LO, 2026-10-08) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `porch` | Jake under the porch light: "Is anyone up?" | no | "Kiss him." → `rail` · "Goodnight, Jake." → `no` | none |
 | `rail` | on the porch rail, her legs round him; the lock turns behind her | no | "Don't stop." → `ryan` | none |

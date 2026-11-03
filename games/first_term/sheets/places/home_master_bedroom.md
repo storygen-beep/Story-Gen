@@ -9,12 +9,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | home_hall |
+| ENTERED FROM | home_hall |
 | labels — what kind of place | `zone:home`, `private`, `has_mirror` |
 | hours | always |
 | closed text | none: always open |
 | hidden until | no |
-| fill — word budget (S3) | 4,000 words (ledger, unchanged) |
+| fill — word budget | 4,000 words (ledger, unchanged) |
 | door | yes: Laura or Mark answers · "Knock" · "Go in" when both are out |
 | dress code or wanted state | none |
 
@@ -27,7 +27,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | Laura, dressing | person | Laura's ladder | Laura C 6 here, Saturday | Saturday only | yes |
 | Laura's wardrobe | work | wardrobe | try on her things · `laura_blue_dress` read | once a day, when both are out | yes: her body in Laura's mirror |

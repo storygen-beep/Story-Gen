@@ -8446,6 +8446,16 @@
           "report": "Quests page with zoe_met, vance_met and cafe_job false: headings read The café, Next door, A girl from Biology; the name Zoe appears nowhere on the page."
         },
         "played": null
+      },
+      {
+        "id": "slips_and_uniform",
+        "what": "The 2 uniform bugs and the 13 alignment game slips (DECISIONS 142): Clock in normal only, caps 79/39, toilet line, trigger keys, met flags and Hale's heading, busy lines and office choices, Ryan's two-knocks speech as dialog, WANT.md release 41, sheet ids and titles",
+        "built_at": "2026-11-03 15:22",
+        "chrome": {
+          "at": "2026-11-03 15:22",
+          "report": "Clock in leaves her in cafe_uniform_normal and does not give the tight one; room_sleep, cafe_shift and party_arrive carry showWhenBlocked with their messages; ryan_two_knocks f_on and twist render Ryan, her and Laura as dialog boxes in order; Hale's office and the art office offer their choice; the Business class says he's mid-lecture; the Quests page shows 'Your Psychology lecturer' and no Hale before the meeting; gates 62/86, meter ceiling and no canvas key discarded now PASS."
+        },
+        "played": null
       }
     ]
   }

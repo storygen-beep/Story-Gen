@@ -11,17 +11,17 @@
 | person · step | `npc_mark` · 7 (Mark A 7) |
 | where · when | the kitchen table · Sunday 08:00–12:00, Laura out shopping |
 | gate | `rent_starts` · Corruption 40 · Exhibitionism 40 · his Want 60 |
-| want (test 1) | he counts the twenties twice since the couch (step 5) |
-| next step (test 2) | she sets the price herself, at his own table |
-| hook (test 3) | the fridge calendar, and Laura's late Wednesday (step 8) |
-| what she wears here (test 8) | not named: she bares herself; what she lifts is not said |
+| want | he counts the twenties twice since the couch (step 5) |
+| next step | she sets the price herself, at his own table |
+| hook | the fridge calendar, and Laura's late Wednesday (step 8) |
+| what she wears here | not named: she bares herself; what she lifts is not said |
 | which version | his Power 50 or more: he slides his twenty first · under 50: hers alone |
 | the price on the button | "Twenty, and you can look." · money add +20 |
 | the crude-word ceiling | Mark's middle column: tits, cock · early: legs, ass · no cunt, fuck, cum |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `count` | the rent counted out; she lays one more twenty on it | no | "Twenty, and you can look." → `look` · "Just the rent." → the hall (parked) | none |
 | `look` | she bares her tits for him under the kitchen light | yes (5 words) | "Time's up." → the hall | money +20 · exhibitionism +3 · his Want +10 (all add) · `mark_step` set 7 |

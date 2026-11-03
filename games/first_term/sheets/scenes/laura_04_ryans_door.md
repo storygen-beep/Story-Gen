@@ -11,15 +11,15 @@
 | person · step | `npc_laura` · 4 (Laura C 4) |
 | where · when | Ryan's room, then her room · Mon, Tue, Thu, Sun 20:00–22:00 |
 | gate | Corruption 20 · Exhibitionism 20 · her Want 30 · Ryan's step 4 |
-| want (test 1) | she asks about Ryan, lightly, at breakfast |
-| next step (test 2) | the second catch: with Ryan, and she keeps the secret |
-| hook (test 3) | "Mark doesn't need to hear about this." A secret between them |
-| what she wears here (test 8) | not named; her bare feet |
+| want | she asks about Ryan, lightly, at breakfast |
+| next step | the second catch: with Ryan, and she keeps the secret |
+| hook | "Mark doesn't need to hear about this." A secret between them |
+| what she wears here | not named; her bare feet |
 | explicit? | no |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `door` | Laura opens Ryan's door: her bare feet in his lap, his hand on her calf | no | "Mom—" → `room` | none |
 | `room` | in her room Laura sits close, her knee against hers | no | "Don't tell Mark." → `secret` · "It's nothing. (she'll know)" → `lie` | none |

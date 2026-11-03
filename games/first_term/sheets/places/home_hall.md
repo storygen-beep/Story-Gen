@@ -1,4 +1,4 @@
-# [REVIEW]] Place — Hall
+# [REVIEW] Place — Hall
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): rows 11-13, the random events. `home_event_laura_robe`: "her robe slips open over her tits" (was "at the front"). `home_event_mark_reach`: under Corruption 40 (where "Lean back into him." can't show) he steps back fast, hips turned away, the mug low in front of his jeans: "Mind yourself, @player.". `home_event_ryan_towel`: the Curious and Bold screens end on Ryan's "Not here. Mom's up." (the event runs inside Laura's weekday kitchen row, so it is true every visit; added as a hook in `writer.py`, the screen files untouched). Built in `home.py` and `writer.py`.
 
@@ -11,12 +11,12 @@
 | row | answer |
 |---|---|
 | kind | thoroughfare |
-| ENTERED FROM (S2) | the street, through "Home": the hall is where the Home building (`home`, new) opens |
+| ENTERED FROM | the street, through "Home": the hall is where the Home building (`home`, new) opens |
 | labels — what kind of place | `zone:home` |
 | hours | always |
 | closed text | none: always open |
 | hidden until | no |
-| fill — word budget (S3) | 2,000 words (ledger, unchanged) |
+| fill — word budget | 2,000 words (ledger, unchanged) |
 | door | no: the house's hub; everyone passes through |
 | dress code or wanted state | none |
 
@@ -31,7 +31,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | Laura, on the stairs | person | Laura's ladder | `laura_suspicion` read: how hard she asks (colour) | only when `came_home_late` is set | yes |
 | the stairs event | work | wardrobe | exhibitionism add +1, the first time each day | once a day, on the trigger | yes: her body |

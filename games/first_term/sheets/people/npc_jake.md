@@ -34,7 +34,7 @@
 
 A ceiling, never a floor. LO took these, 2026-10-08.
 
-## Schedule grid (S5)
+## Schedule grid
 
 | place | days | from | to | why he is there |
 |---|---|---|---|---|
@@ -45,7 +45,7 @@ A ceiling, never a floor. LO took these, 2026-10-08.
 | `home_front_door` | Sat | 19:00 | 21:00 | picks her up · only when `jake_date_booked` (question 73) |
 | `home_front_door` | Sat | 22:00 | 00:00 | brings her home after a date · only when `jake_date_went` (she left with him tonight) |
 
-## Ladder — one guidance card per step (S10)
+## Ladder — one guidance card per step
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01:** four steps, one per first. Paced by Saturday dates
 > (`jake_date_booked`, `jake_date_pickup`) and her meters (a step counter): a declared exception to taste rule 5.
@@ -81,10 +81,10 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 | 3 | at her front door after the date: she kisses him and says it, "my boyfriend", loud enough for the house. Ryan opens the door from inside. Laura is in the dark living room | **Ryan, Laura** | the house knowing | "My boyfriend." | he kisses her with Ryan in the doorway | yes | Jake is her boyfriend; Laura: "Was he any good?"; Ryan's line changes |
 | 4 | past midnight she sneaks him up to her room. Her door won't lock if Mark has her key. They fuck on her bed, and her headboard hits the wall: Ryan's wall, the one she listened through at his step 5 | **Ryan, through the wall** | Laura and Mark across the landing; the door that won't lock | "Come up." | "Your room. Now." · he pins her wrists | **yes** | `jake_first_time`; Ryan's next-morning line; Monday on the quad, the team knows |
 
-**Her voice (rule 7):** low line, "He's normal. This is normal." · high line, "You want Ryan to hear every second of
+**Her voice:** low line, "He's normal. This is normal." · high line, "You want Ryan to hear every second of
 it." Both on each step sheet.
 
-### Leak and promise (S5)
+### Leak and promise
 
 | n | the leak: his want, shown before | the promise: the line it ends on |
 |---|---|---|
@@ -109,7 +109,7 @@ are parked.
 - **Crude words:** his columns (above): early "ass", middle "ass, tits, cock", late "cock, fuck, cum". **Proposed:** step 4
   and its repeat use the late column. **LO confirms on the scene sheet.**
 
-## His hot repeatable: the end of a date (rule 6)
+## His hot repeatable: the end of a date
 
 - **After step 3, every booked Saturday.** One a week. It grows with her:
   - Curious: the porch goodnight only; the car waits (DECISIONS 124);

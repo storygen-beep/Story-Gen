@@ -33,7 +33,7 @@
 | his line: no bra | "Sit down. You're making me lose count." |
 | his line: underwear only | Laura in the house and awake (her rows): "Your mother's in the kitchen." · Laura asleep: "Your mother's asleep." · Laura out: "Lucky your mother's out." He doesn't tell her to cover up. |
 
-## Schedule grid (S5)
+## Schedule grid
 
 | place | days | from | to | why he is there |
 |---|---|---|---|---|
@@ -49,7 +49,7 @@
 | `home_garage` | Sat | 09:00 | 17:00 | his evenings |
 | `home_kitchen` | Sun | 08:00 | 22:00 | Wednesday cooking · all Sunday |
 
-## Ladder — one guidance card per step (S10)
+## Ladder — one guidance card per step
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01:** four steps, one per first. No sex and no money for her body
 > this release (LO). His steps are paced by Sundays and her short weeks, not by his meter: a declared exception to
@@ -81,9 +81,9 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 | 3 | "Not the shirt this time. Shorts." She comes down in the pair that shows the curve of her ass, and he loses his place twice | Mark | his rule on her body, every Sunday | she changes, or comes down in them first | the rule; "Every Sunday. Like that." | yes | `mark_dress_rule`: what she wears to the table is his rule |
 | 4 | the garage: "I saw you come out of his room at midnight." / "Vance's letter is in the drawer." Each keeps one | Mark knows about Ryan; she knows about Vance | Mark telling Laura | "Deal." · or "There's no arrangement." | he names what he saw | yes | `mark_arrangement`; the Sunday table changes |
 
-**Her voice (rule 7):** a low and a high line on each step sheet.
+**Her voice:** a low and a high line on each step sheet.
 
-### Leak and promise (S5)
+### Leak and promise
 
 | n | the leak: his want, shown before | the promise: the line it ends on |
 |---|---|---|

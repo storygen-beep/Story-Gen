@@ -16,7 +16,7 @@
 | met | the first lecture, day 1 |
 | her line: short skirt | "He'll lose his place again." |
 
-## Schedule grid (S5)
+## Schedule grid
 
 | place | days | from | to | why she is there |
 |---|---|---|---|---|
@@ -25,7 +25,7 @@
 | `library` | Mon, Tue, Wed, Fri | 14:30 | 18:00 | studies |
 | `canteen` | Mon–Fri | 11:45 | 13:00 | lunch |
 
-## Ladder — one guidance card per step (S10)
+## Ladder — one guidance card per step
 
 None in 0.1. Her lines ride Hale's steps: one line about him each class.
 

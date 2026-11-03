@@ -8,12 +8,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | campus |
+| ENTERED FROM | campus |
 | labels — what kind of place | `zone:campus`, `public` |
 | hours | not in 0.1 |
 | closed text | not in 0.1 |
 | hidden until | no |
-| fill — word budget (S3) | 0 words (ledger, unchanged) |
+| fill — word budget | 0 words (ledger, unchanged) |
 | door | no |
 | dress code or wanted state | none |
 
@@ -25,7 +25,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | — | — | — | — | — | — |
 

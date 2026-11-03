@@ -13,19 +13,19 @@
 | person · step | `npc_hale` · 2 (Hale B 2) |
 | where · when | the lecture hall · Mon, Wed, Fri 08:30–10:00 |
 | gate | Exhibitionism 20 (Daring) · Hale's step counter eq 1 · the boost off |
-| want (test 1) | his eyes on the front row, every class since the pen |
-| next step (test 2) | her chosen flash, for one person she knows |
-| hook (test 3) | "Thursday, after six." His office (step 3) |
-| what she wears here (test 8) | no panties: the step's own choice, Daring, this step only (LO, 2026-10-08) |
+| want | his eyes on the front row, every class since the pen |
+| next step | her chosen flash, for one person she knows |
+| hook | "Thursday, after six." His office (step 3) |
+| what she wears here | no panties: the step's own choice, Daring, this step only (LO, 2026-10-08) |
 | explicit? | no: a flash under her stage's words |
 | crude words | Hale's early column: legs, ass (stage 2) |
 | who notices | Hale; the guy beside her |
 | what she risks | being seen by the row |
-| her_line_low · her_line_high (rule 7) | low: "He's your professor. He's married." · high: "You want to know what he'd do next." (the person sheet's pair) | |
+| her_line_low · her_line_high | low: "He's your professor. He's married." · high: "You want to know what he'd do next." (the person sheet's pair) | |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `legs` | front row (her seat since step 1); she doesn't fix her skirt; he looks | no | "Uncross your legs, slowly." → `flash` · "Fix your skirt." → the class (parked) | none |
 | `flash` | he sees she's wearing nothing under it; he loses the sentence; three rows hear | no | "You lost your place, Dr. Hale." → `after` | exhibitionism add +3 |

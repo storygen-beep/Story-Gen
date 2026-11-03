@@ -7,12 +7,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | campus |
+| ENTERED FROM | campus |
 | labels — what kind of place | `zone:campus`, `public`, `she_can_undress` |
 | hours | every day 07:00–22:00 |
 | closed text | with campus |
 | hidden until | no |
-| fill — word budget (S3) | 1,000 words (ledger, unchanged) |
+| fill — word budget | 1,000 words (ledger, unchanged) |
 | door | no |
 | dress code or wanted state | none |
 
@@ -24,7 +24,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | a quick wash | need | hygiene | hygiene add +15 | once a day, on the trigger | yes: her body |
 | the mirror | work | wardrobe | none · reads her state | none needed | yes |

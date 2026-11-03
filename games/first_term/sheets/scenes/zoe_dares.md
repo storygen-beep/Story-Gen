@@ -1,4 +1,4 @@
-# [READY]] Scene — zoe_dares
+# [READY] Scene — zoe_dares
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -11,7 +11,7 @@
 |---|---|
 | system · place | parties · Zoe's apartment (Friday) and the party house (Saturday), her party hours |
 | gate | `picks_the_dares` (Zoe's step 4) · Zoe present · a party tonight · not dared tonight (`zoe_dared_today`, cleared by the daily tick) · each yes by its stage (DECISIONS 124): the kiss Curious, every dare the room watches Exhibitionism 60, cap 79 |
-| BRAKE (S9) | **one dare a night** (was two) |
+| BRAKE | **one dare a night** (was two) |
 | who picks | Zoe. Her line names the dare; the screen offers a showing yes, a doing yes and the no (`meters.md` rule 5) |
 | which tier | after Zoe's step 5 (`zoe_together`): **Zoe joins** · else Corruption 40 or Exhibitionism 40: **Bold · Showing** · else **Curious · Daring**. Each yes shows by its own meter (below); a yes she can't take shows locked with the number |
 | Corruption 60 | a fourth button, locked: "Zoe's next dare. (Needs Corruption 60.)" |
@@ -19,7 +19,7 @@
 | counts | each yes: `zoe_dares_done` add +1 (Zoe's step 5 needs 4) |
 | the crude-word ceiling | Zoe's early and middle columns (tits, ass, nipples, wet), with thighs; his cock only through his jeans on the two lap dares (plain anatomy beside her column, as Ryan's and Hale's signed sheets) · no pussy, clit, fuck, cunt, cum. confirmed by LO 2026-11-01 ("Continue") the cock |
 | truth | repeats: no "first time", no "again", no history |
-| her_line_low · her_line_high (rule 7) | low: "It's a dare. It doesn't count." · high: "You want her to dare you something worse." | Both lines sit inside the beats. |
+| her_line_low · her_line_high | low: "It's a dare. It doesn't count." · high: "You want her to dare you something worse." | Both lines sit inside the beats. |
 
 ## The dares by tier
 

@@ -649,7 +649,7 @@ time_progression_minutes = 5
 conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_item", item_id = "plain_bra", operator = "equipped" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "toilet_bra_today", operator = "is_false" } ] }
 wardrobeEffects = [ { action = "unequip", item_id = "plain_bra" } ]
 flagEffects = [ { targetType = "player", flag = "toilet_bra_today", op = "set" } ]
-effects = [ { targetType = "player", trait = "exhibitionism", op = "add", value = 1 } ]
+effects = [ { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 } ]
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Take the sports bra off in a stall."
@@ -659,7 +659,7 @@ time_progression_minutes = 5
 conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_item", item_id = "sports_bra", operator = "equipped" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "toilet_bra_today", operator = "is_false" } ] }
 wardrobeEffects = [ { action = "unequip", item_id = "sports_bra" } ]
 flagEffects = [ { targetType = "player", flag = "toilet_bra_today", op = "set" } ]
-effects = [ { targetType = "player", trait = "exhibitionism", op = "add", value = 1 } ]
+effects = [ { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 } ]
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave it."

@@ -31,7 +31,7 @@
 | her line: no bra | Her eyes stop on @player's chest, then she pours the coffee (breakfast) or the wine (evenings). |
 | her line: towel | Kitchen: "Go and get dressed, sweetheart. You'll catch your death." (LO, 2026-10-31) · the hall (the stairs, at night): "Hall's cold, sweetheart. Don't stand there." |
 
-## Schedule grid (S5)
+## Schedule grid
 
 | place | days | from | to | why she is there |
 |---|---|---|---|---|
@@ -51,7 +51,7 @@ her, and she lies awake after (`master_door_saturday_night`). Same row, same pla
 
 **Row order matters.** The engine takes the first matching row, so her stairs row is first. Saturday 00:00–07:00 covers Friday night. Her night row ends 06:30 (all LO, 2026-10-08).
 
-## Ladder — one guidance card per step (S10)
+## Ladder — one guidance card per step
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01:** four steps, one per first (sized by firsts, LO 2026-11-01).
 > Her lock is Love (`warmth`). Each step pays Love +5 and needs 10 more than the last (none, 10, 20, 30).
@@ -88,10 +88,10 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 | 3 | Ella zips her mother into her good dress. Mark calls from downstairs that he's going to the bar. Laura sits on the bed, dressed up, with nowhere to go | Ella; Mark, not looking | — | "You look beautiful, Mom." · or she says nothing | she asks to be zipped, then asks, "Do I still look like someone you'd look at?" Ryan's laugh comes up the stairs from the couch, and her hands stop on the zip: she looks at the door, not at Ella, and her chest rises fast under the slip (her want for Ryan, on her body, before step 4 says his name; shown only while Ryan is in the living room, his Saturday row ending 18:00; DECISIONS 124) | yes | `laura_lonely`: the alone-in-bed line now names this night |
 | 4 | through the gap: Laura comes, biting the back of her hand, and when her eyes open they're on the door, on Ella | **Laura sees Ella** | being caught watching her mother | she stays at the gap (Curious) | after: she doesn't pull the sheet up fast. "Go to bed, sweetheart." | **yes**: Laura finishes before she sees her | breakfast: "We don't talk about last night." · the gap changes |
 
-**Her voice (rule 7):** low line, "That's your mom. Go to bed." · high line, "She's lonely, and you can't stop
+**Her voice:** low line, "That's your mom. Go to bed." · high line, "She's lonely, and you can't stop
 watching her be lonely." Both on each step sheet.
 
-### Leak and promise (S5)
+### Leak and promise
 
 | n | the leak: her want, shown before | the promise: the line it ends on |
 |---|---|---|

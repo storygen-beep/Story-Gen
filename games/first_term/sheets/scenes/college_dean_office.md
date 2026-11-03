@@ -10,14 +10,14 @@
 | gate | `opening_done` · `dean_met` false |
 | who | the dean, 55, "to be obeyed" (`npc_dean.md`) |
 | the dean's hours | his row is Mon–Fri 09:00–17:00; this scene runs before 09:00 on day 1. His schedule gains **Mon 07:30–09:00** (every Monday, so it is true every week). Mine; confirmed by LO 2026-11-01 ("Continue") |
-| what she wears here (test 8) | the short-skirt line only in a group on her short-skirt state (his signed line) |
+| what she wears here | the short-skirt line only in a group on her short-skirt state (his signed line) |
 | who notices | the dean; then the full lecture hall turning round (Hale's step 1) |
 | what she risks | being late on day one; the dean's second visit |
 | what changes after | she has the timetable; the dean knows her name; the complaint rule is live (`complaints`, two and she's back) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `wait` | he doesn't look up for a while; then he does, and takes his time over her | no | "Good morning." → `rules` | `dean_met` set |
 | `rules` | the rules, his way: classes aren't optional; two complaints and she's back here | no | "I understand." → `timetable` | none |

@@ -422,7 +422,7 @@ def card_goals(st, counter):
     return goals, notes
 
 
-def step_cards(npc, texts, met_flag=None, terminal_text=None, closed_text=None, skip=()):
+def step_cards(npc, texts, met_flag=None, terminal_text=None, closed_text=None, skip=(), pointer=None):
     """One card per step (counter eq n-1): the tip names place and time (the step's hint), and the
     goals are the step's real requirements, never the counter (B84; gate `a card shows the real gates`).
     A step with no gate shows only its place and time. A terminal card; a closed card for a final no."""
@@ -435,24 +435,30 @@ def step_cards(npc, texts, met_flag=None, terminal_text=None, closed_text=None, 
         if n in skip:
             continue
         when = [{"type": "trait", "subject": "player", "trait": counter, "op": "eq", "value": n - 1}]
-        if met_flag:
+        # C3 (skill, LO 2026-11-03): every card after the meeting carries the met flag; a pointer step (the meeting
+        # itself is this step) carries a heading in place of the name instead
+        if met_flag and not (pointer and pointer[0] == n):
             when.append({"flag": met_flag, "op": "is_true"})
         text, label = texts[n]
         goals, notes = card_goals(s, counter)
         label = re.sub(r"\s*\([^()]*\b(?:Curious|Daring|Bold|Showing|Hungry|Watched)\b[^()]*\)", "", label)
         tip = label + ("; " + "; ".join(notes) if notes else "")
         card = {"npc_id": npc, "priority": 10, "text": text, "tip": tip, "when": when, "ready_canvas": s["canvas"]}
+        if pointer and pointer[0] == n:
+            card["heading"] = pointer[1]
         if goals:
             card["goals"] = goals
         out.append(card)
     top = steps[-1]["n"]
     if terminal_text:
         out.append({"npc_id": npc, "priority": 10, "text": terminal_text[0],
-                    "when": [{"type": "trait", "subject": "player", "trait": counter, "op": "gte", "value": top}],
+                    "when": [{"type": "trait", "subject": "player", "trait": counter, "op": "gte", "value": top}]
+                            + ([{"flag": met_flag, "op": "is_true"}] if met_flag else []),
                     "terminal": True, "terminal_text": terminal_text[1]})
     if closed_text:
         out.append({"npc_id": npc, "priority": 20, "text": closed_text,
-                    "when": [{"type": "trait", "subject": "player", "trait": counter, "op": "lt", "value": 0}],
+                    "when": [{"type": "trait", "subject": "player", "trait": counter, "op": "lt", "value": 0}]
+                            + ([{"flag": met_flag, "op": "is_true"}] if met_flag else []),
                     "terminal": True, "terminal_text": "This path is closed."})
     return out
 

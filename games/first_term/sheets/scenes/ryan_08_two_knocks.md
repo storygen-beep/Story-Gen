@@ -13,15 +13,15 @@
 | person · step | `npc_ryan` · 8 (Ryan A 9) · the release's door |
 | where · when | his room · Mon, Tue, Thu, Sun 18:00–22:00, after the kiss |
 | gate | Corruption 40 · his Want 70 · the boost off |
-| want (test 1) | his phone face-down every time she knocks now |
-| next step (test 2) | she sets the terms: what they are, and Kayla's place in it |
-| hook (test 3) | "Two knocks. Any night that isn't Friday." Step 9 shows locked |
-| what she wears here (test 8) | not named |
+| want | his phone face-down every time she knocks now |
+| next step | she sets the terms: what they are, and Kayla's place in it |
+| hook | "Two knocks. Any night that isn't Friday." Step 9 shows locked |
+| what she wears here | not named |
 | explicit? | no: a talk step |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `ask` | after the kiss: "Kayla gets Fridays. What do I get?" | no | → `terms` | none |
 | `terms` | Ryan: "Two knocks. Any night that isn't Friday." · only after Jake has been to the door (Jake B 3, `jake_step` 3 or more): "And Jake?" | no | three answers, the final no → below | none |
@@ -42,7 +42,7 @@ locked: *"Needs Corruption 60."*
 | by her stage | Bold: kissing, his hands over her clothes · Hungry: locked, named on the button |
 | explicit? | no in 0.1: his sex step is later (Ryan A 10) |
 | effects | corruption add +1, the first time each night, until she is past Bold |
-| BRAKE (S9) | once a night, on the trigger |
+| BRAKE | once a night, on the trigger |
 | his thread | after step 8: "two knocks?" every 2 days, 22:00–00:00, not Friday |
 
 ## Why — the source of each key choice

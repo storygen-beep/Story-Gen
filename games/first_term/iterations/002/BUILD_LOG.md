@@ -1470,3 +1470,16 @@ touched sheet has a dated note.
   - `tom.py:17` `CLOCK_IN` equips the tight uniform on her first shift.
   - The tight-uniform "Clock out." choices on the café shift screen under Exhibitionism 20 carry both
     `cafe_uniform_sexy equipped` and `unequipped`, so they can never show.
+
+## 2026-11-03 — the two uniform bugs, the 13 game slips, week one kept easy (DECISIONS 141–142)
+
+- Everything is listed in DECISIONS 142. Week one stays easy (141, LO "B"), and the money_pressure sheet carries a
+  note saying so.
+- Verified in Chrome on the dev build: "Clock in." gives the normal uniform only; the three "come back later"
+  messages are live; Ryan's two-knocks speech shows as dialog; the office choices and busy lines are there; Hale's
+  pointer card hides his name.
+- Gates went from 60/86 to 62/86 (24 fail, 4 n/a). "meter ceiling" and "no canvas key is discarded" pass now.
+  "somebody speaks" went from 8.3 to 8.0 and still fails, because 49 other canvases have no speech; that was not
+  on the 13. The party house is still open and empty on Saturday night, which wasn't on the 13 either.
+- Ryan's attribution tags ("Ryan pants.", "You tell him.") now sit as short narration lines between the dialog
+  boxes. Every signed word is kept.

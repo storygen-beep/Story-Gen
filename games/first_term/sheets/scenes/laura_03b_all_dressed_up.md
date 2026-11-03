@@ -1,4 +1,4 @@
-# [REVIEW]] Scene — laura_03b_all_dressed_up
+# [REVIEW] Scene — laura_03b_all_dressed_up
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -13,18 +13,18 @@
 | person · step | `npc_laura` · 3 of 4 (canvas `laura_06_take_me_with_you`) |
 | where · when | her room, `home_master_bedroom` · Saturday 17:00–18:30, Laura dressing |
 | gate | her Love (`warmth`) 20 · `laura_step` eq 2 · the boost off |
-| want (test 1) | she leaves her door open while she dresses (the leak) |
-| next step (test 2) | she asks to be zipped, then asks if she's still someone you'd look at |
-| hook (test 3) | `laura_lonely`: her alone-in-bed screen names this night after it |
+| want | she leaves her door open while she dresses (the leak) |
+| next step | she asks to be zipped, then asks if she's still someone you'd look at |
+| hook | `laura_lonely`: her alone-in-bed screen names this night after it |
 | who notices | Ella; Mark, not looking (he calls up from downstairs) |
-| what she wears here (test 8) | Laura: her good dress (named in prose, not an item) · Ella: not named |
+| what she wears here | Laura: her good dress (named in prose, not an item) · Ella: not named |
 | explicit? | no: an ask |
-| her_line_low · her_line_high (rule 7) | low: "That's your mom. Go to bed." · high: "She's lonely, and you can't stop watching her be lonely." | The low line sits on the parked no; the high line is the thought on `bed`. |
+| her_line_low · her_line_high | low: "That's your mom. Go to bed." · high: "She's lonely, and you can't stop watching her be lonely." | The low line sits on the parked no; the high line is the thought on `bed`. |
 | what changes after | `laura_lonely` set; the alone-in-bed line names this night |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `zip` | her door open; Laura at the mirror in her good dress, the zip open to the small of her back: "Zip me up, sweetheart? Mark's useless at it." (built line) | no | "Hold still." → `zipped` · "Ask Mark." → `no` (parked) | none |
 | `zipped` | you zip her; Mark calls up the stairs that he's off to the bar; the front door goes | no | → `bed` | none |
