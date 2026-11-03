@@ -31,7 +31,9 @@ out.append({
             go("Leave it.", loc="home_hall", mins=3, retry=1),
         ]),
         node("read", "Kayla", [
-            P("You pick it up. You read the whole thing, out loud in your head, and the next one comes in while you're holding it: a photo, Kayla in his bed in one of his shirts."),
+            P("You pick it up. You read the whole thing, out loud in your head, and the next one comes in while you're holding it: a photo, Kayla in his bed in one of his shirts. Then a voice note. Your thumb hits it before you can stop it, and a girl's voice fills the bathroom, low and laughing."),
+            # pass 3 C33: her meeting has her voice; speaker "unknown" (WHO) until her name is earned in person
+            WHO("Babe. Friday. Back door, after everyone's asleep. And this time you don't get to fall asleep on me."),
             P("The shower slams off. Ryan's arm comes out of the steam and grabs the phone out of your hand, too late, dripping on the floor."),
             D(R, "Give me that."),
         ], [
@@ -45,7 +47,14 @@ out.append({
         ], [
             go("\"Your secret's safe. For now.\"", loc="home_hall", mins=5, consumes=True,
                eff=[nadd(R, "want", 5), setv("ryan_step", 2)], flags=[done(2)]),
+            # reader batch 5 (pass 3): his ask gets a written no. She knows either way, so the step is done; her no
+            # moves no Want (C1, LO 2026-11-03)
+            go("\"That depends.\"", node="depends", mins=2),
         ]),
+        node("depends", "That depends", [
+            D(R, "Depends on what? Don't do this to me, @player.nickname."),
+            P("He holds the phone against his bare chest with the towel slipping on his hips, and he doesn't breathe until you put your toothbrush down and walk out past him."),
+        ], [go("Leave him dripping.", loc="home_hall", mins=3, consumes=True, eff=[setv("ryan_step", 2)], flags=[done(2)])]),
     ]})
 
 # ── step 3 · Ryan A 4 · shirt off ──
@@ -57,7 +66,7 @@ out.append({
         node("door", "His door", [
             P("You knock. He opens it a crack, sees it's you, and opens it the rest of the way, wary, one hand still on the frame."),
             D(R, "If this is about Kayla—"),
-            P("He looks at you a beat longer than he needs to. He's done that every day since you read her text."),
+            P("He looks at you a beat longer than he needs to. He's done that ever since you read her text."),   # reader pass 3 b00: step 3 can fire the evening of step 2
         ], [
             go("\"It's about Kayla.\"", node="price", mins=2),
             go("\"Never mind.\"", loc="home_hall", mins=2, retry=1),
@@ -80,7 +89,7 @@ out.append({
             # the risk (ryan_03_shirt_off.md, signed 2026-11-01): Laura, nearly. Only when her row has her downstairs.
             G(cond({"type": "npc_at_location", "location_id": "home_kitchen", "npc_id": "npc_laura", "operator": "is_present"}),
               D("npc_laura", "Ryan? Is your sister in there?"),
-              P("Her voice comes up the stairs. Ryan doesn't take his eyes off you."),
+              P("Her voice comes up the stairs, but Ryan doesn't take his eyes off you."),
               D(R, "No.")),
             D(R, "Happy?"),
             P("Your mouth has gone dry. You make yourself look at all of him before you stand up, so he knows you did."),
@@ -134,7 +143,7 @@ require_present(out, "ryan_04_feet_in_his_lap", flag("kayla_met"))
 # ── step 5 · Ryan A 6 · thin walls (the voice sample; every screen as signed) ──
 SLEEP_TO_DAWN = [(("22:00", "23:00"), 480), (("23:00", "00:00"), 420), (("00:00", "01:00"), 360)]
 out.append({
-    "id": "ryan_05_thin_walls", "name": "Thin walls",
+    "id": "ryan_05_thin_walls", "name": "Get off to Ryan through the wall",   # pass 3 H33/H34 (the-voice.md R1, D11): the name says what happens if she clicks, and never hides the act
     "description": "Ryan step 5 (Ryan A 6), in her bed on a Friday night, seen from his room. Her first explicit act at home; Kayla in the hall at dawn. Sets ryan_heard_her.",
     "trigger": step_trigger(R, 5, bind_npc=False, retry_days=7),
     "nodes": [
@@ -150,6 +159,7 @@ out.append({
         node("listen", "Listen", [
             P("The headboard thuds against the wall. Thud. Thud. Faster. You lie still and listen on purpose. Kayla moans, high and broken. \"Harder. Don't stop. Right there, Ryan, right there.\" Ryan groans her name, low and rough. That's your brother's voice. Your nipples go tight against the sheet. Your breath comes short. Heat pools between your thighs until you're wet. *That's Ryan. You should be grossed out.* You aren't, but that scares you less than how badly you want to hear more. The headboard speeds up. Kayla cries out. Your hand slides down your stomach and stops an inch above your clit, aching to keep going."),
             VID("in bed at night under a sheet, a girl listening to a couple through the wall, her hand on her stomach", "girl in bed at night listening through wall touching herself", "woman under sheet hand sliding down stomach dark bedroom", file="sex/ryan_05_listen_t4.webm"),
+            D("npc_kayla", "Fuck me. Fuck me, Ryan, I'm so close."),   # pass 3 B4: through the wall
         ], [
             go("Touch yourself.", node="act", mins=10),
             go("Roll over.", node="roll_over", mins=2),
@@ -160,6 +170,7 @@ out.append({
         node("act", "In time with him", [
             P("Your hand slides down under the sheet. Your fingers find your clit, and you're already wet. On the other side of the wall, Ryan's headboard knocks, slow and hard. You rub in time with it. Kayla moans his name. You picture his cock sinking into her, his hands full of her ass, her tits bouncing with every thrust. Your other hand finds a nipple and pinches. Your hips lift off the mattress. The headboard speeds up, so you speed up. Your thighs start to shake. Then Ryan groans through the wall, low and rough, and that does it. You come hard, biting the pillow, but a moan still gets out of you. The headboard stops dead, while your thighs clamp tight around your hand and your clit is still throbbing under your fingers."),
             VID("a girl in bed touching herself under the sheet, hips lifting, biting a pillow as she comes", "girl masturbating under sheet biting pillow orgasm", "woman fingering herself in bed at night hips arching", file="sex/ryan_05_act_t5.webm"),
+            D(R, "Shh. Shh, they'll hear you."), D("npc_kayla", "Let them. Oh God, Ryan. Don't stop."),
         ], [
             go("Lie still.", node="after", mins=5, eff=[add("corruption", 1, cap=79), nadd(R, "want", 5)]),
         ]),
@@ -181,13 +192,15 @@ out.append({
 
 # ── step 6 · Ryan A 7 · after the shower ──
 out.append({
-    "id": "ryan_06_after_the_shower", "name": "After the shower",
+    "id": "ryan_06_after_the_shower", "name": "Let Ryan see you naked",   # pass 3 H33/H34 (the-voice.md R1, D11): the name says what happens if she clicks, and never hides the act
     "description": "Ryan step 6 (Ryan A 7), the bathroom on a Saturday morning, seen from his room. Naked by her choice; Kayla calls him away.",
     "trigger": step_trigger(R, 6, bind_npc=False, retry_days=7),
     "nodes": [
         node("door", "The shower", [
             P("You lock the door behind you, and the lock sticks halfway like it always does. You shower long and hot, because Kayla is somewhere in this house in Ryan's shirt and you want to take your time. You turn the water off. The towel is on the rail."),
             P("Then the handle turns, and the door swings open, and it's Ryan."),
+            D(R, "Shit. Kayla said it was free. I swear she said it was free."),
+            ME("Well, it isn't, is it?"),
         ], [
             go("Leave the towel.", node="look", mins=3, wardrobe=STRIP),
             go("Reach for the towel.", loc="home_hall", mins=5, retry=7, wardrobe=[{"action": "equip", "item_id": "towel"}]),
@@ -195,6 +208,8 @@ out.append({
         node("look", "Let him look", [
             P(beat("ryan_06_after_the_shower", "look")),
             VID("a wet naked girl out of the shower, a guy in the bathroom doorway with his cock out, stroking", "naked girl shower guy in doorway jerking off", "guy masturbating watching naked wet woman bathroom", pool_dir="sex/ryan_06_look_t5"),
+            ME("Go on, then. You came in here. Look."),
+            D(R, "Fuck. Don't move. Please don't move."),
         ], [
             go("Watch him.", node="comes", mins=3, eff=[cap("exhibitionism", 3, 79), add("corruption", 1, cap=79)]),  # DECISIONS 124: cap 79
         ]),
@@ -206,6 +221,7 @@ out.append({
         ]),
         node("after6", "His door", [
             P("When you come out, his door is open a hand's width."),   # false lines a3 #6: no promise it stays open
+            D(R, "@player.nickname. That didn't happen. Okay? That didn't happen."),
         ], [
             go("Go to your room.", loc="home_hall", mins=2, consumes=True,
                eff=[nadd(R, "want", 5), setv("ryan_step", 6)], flags=[done(6), fset("kayla_met")], wardrobe=[{"action": "equip", "item_id": "towel"}]),
@@ -229,9 +245,12 @@ out.append({
         node("hand", "Kayla's photo", [
             P(beat("ryan_07_kayla_cant_know", "hand")),
             VID("a girl's hand stroking a guy's cock on his bed, his phone lighting up beside him", "handjob on bed phone ringing", "girl jerking off boyfriend on bed phone call", pool_dir="sex/ryan_07_hand_t5"),
+            D(R, "That's her. That's Kayla. I have to get it."), ME("No, you don't."),
         ], [go("\"Don't answer it.\"", node="phone", mins=3)]),
         node("phone", "Don't answer it", [
             P(beat("ryan_07_kayla_cant_know", "phone")),
+            ME("Look at me, not the phone. She's not the one with her hand on you."),
+            D(R, "Fuck. Fuck, don't stop."),
         ], [go("Make him come.", node="comes", mins=5)]),
         node("comes", "Voicemail", [
             P(beat("ryan_07_kayla_cant_know", "comes")),
@@ -241,6 +260,7 @@ out.append({
         ]),
         node("after7", "Face-down", [
             P("You wipe your hand on his shirt and leave him lying there."),
+            D(R, "She'll call back. What do I tell her?"), ME("Tell her you were busy."),
             P("From now on his phone is face-down every time you knock."),
         ], [
             go("Go to your room.", loc="home_hall", mins=2, consumes=True,
@@ -279,17 +299,21 @@ out.append({
             D(R, "So. These walls, huh."),
             P("It's a joke, and it lands wrong, and you both laugh too loud and then stop. He rubs the back of his neck. He looks at the door, then at you."),
             D(R, "Last time. With Kayla calling. That can't happen again."),
-            P("He says it, and he doesn't move away. His knee is an inch from yours."),
+            P("He says it, but he doesn't move away. His knee is an inch from yours."),
         ], [go("\"Then why did you open the door?\"", node="doubt", mins=3)]),
         node("doubt", "Ryan", [
             P("He doesn't answer. His knee touches yours and stays there. He's looking at your mouth and he isn't hiding it any more, and the front of his shorts isn't hiding anything either."),
+            ME("Ryan. Answer me."),
+            D(R, "You know why. You've known for weeks. Tell me to stop and I'll stop."),
             T("This is Ryan. You should go."),
         ], [
             go("Stay.", node="kiss", mins=2),
-            go("Go.", loc="home_hall", mins=2, retry=1),
+            go("\"Goodnight, Ryan.\"", loc="home_hall", mins=2, retry=1),   # pass 3 D39 (R7): the way out answers him
         ]),
         node("kiss", "The kiss", [
             P(beat(S, "kiss")),
+            D(R, "Fuck, @player.nickname. I've wanted to do that since the hall."),
+            ME("Then don't stop now."),
             VID("a guy and a girl kissing on his bed at night, his hand under her top", "making out on bed hand under shirt", "kissing on bed he touches her tits through bra", pool_dir="sex/ryan_08_kiss_t4"),
         ], [
             go("Let him.", node="undress", mins=5),
@@ -297,6 +321,8 @@ out.append({
         ]),
         node("undress", "One piece at a time", [
             P(beat(S, "undress")),
+            ME("Look at me. Properly, this time."),
+            D(R, "I am. Christ, I am. You're so fucking beautiful."),
             VID("a couple undressing each other on a bed, one piece at a time", "undressing each other slowly on bed", "he pulls her panties down slow", pool_dir="sex/ryan_08_undress_t4"),
         ], [
             go("Go down on him.", node="suck", mins=5, wardrobe=STRIP),
@@ -305,6 +331,8 @@ out.append({
         ]),
         node("suck", "On your knees", [
             P(beat(S, "suck")),
+            D(R, "Slow. Slow, or I'm done before we start."),
+            ME("Then don't come yet. I'm not finished with you."),
             VID("a girl on her knees by a bed sucking a guy's cock, his hand in her hair", "blowjob kneeling by bed hand in hair", "she sucks his cock quietly", pool_dir="sex/ryan_08_suck_t5"),
         ], [
             go("Ride him.", node="ride", mins=5),
@@ -313,6 +341,8 @@ out.append({
         ]),
         node("lick", "His mouth", [
             P(beat(S, "lick")),
+            ME("Don't stop. Ryan, don't you dare stop."),
+            D(R, "You taste so fucking good. Keep your hand on your mouth."),
             VID("a guy eating a girl out on his bed, her hand over her mouth, thighs round his head", "he eats her pussy she covers mouth", "cunnilingus thighs around his head", pool_dir="sex/ryan_08_lick_t5"),
         ], [
             go("Ride him.", node="ride", mins=5),
@@ -321,18 +351,26 @@ out.append({
         ]),
         node("ride", "On top", [
             P(beat(S, "ride")),
+            D(R, "Fuck. You're so tight. Go slow, go slow."),
+            ME("No. I want all of it."),
             VID("a girl climbing onto a guy on his bed and sinking onto him, a headboard against the wall", "girl rides guy on bed first time", "riding him on his bed headboard", pool_dir="sex/ryan_08_bed_t5"),
         ], [go("\"Harder.\"", node="light", mins=5)]),
         node("under", "Under him", [
             P(beat(S, "under")),
+            D(R, "Look at me. I want to see your face when I'm inside you."),
+            ME("Then fuck me harder and watch."),
             VID("missionary sex, slow, a guy on top looking at the girl's face", "slow missionary eye contact", "he fucks her slow on her back", pool_dir="sex/ryan_08_under_t5"),
         ], [go("\"Harder.\"", node="light", mins=5)]),
         node("wall_back", "Her wall", [
             P(beat(S, "wall_back")),
+            D(R, "Hands on the wall. Don't let go."),
+            ME("Harder. I don't care who hears."),
             VID("a girl kneeling on a bed with her palms on the wall, fucked from behind", "from behind hands on wall kneeling on bed", "doggy against bedroom wall", pool_dir="sex/ryan_08_wall_back_t5"),
         ], [go("\"Harder.\"", node="light", mins=5)]),
         node("light", "Laura's floorboards", [
             P(beat(S, "light")),
+            D(R, "Her light. Her light's on."),
+            ME("I don't care. Don't you stop."),
             VID("a couple fucking on a bed, the headboard banging the wall, both of them frozen, listening to the hall", "riding hard headboard banging wall", "girl on top fucking headboard knocking", pool_dir="sex/ryan_08_wall_t5"),
         ], [
             go("Keep going.", node="keep", mins=3),
@@ -340,6 +378,8 @@ out.append({
         ]),
         node("keep", "Keep going", [
             P(beat(S, "keep")),
+            D(R, "You're going to get us both killed."),
+            ME("Then make it worth it. Fuck me like you mean it."),
             VID("a guy fucking a girl hard with his hand over her mouth", "hand over mouth fucking hard quiet", "he covers her mouth while fucking", pool_dir="sex/ryan_08_keep_t5"),
         ], [
             go("\"Inside me.\"", node="inside", mins=3),
@@ -348,6 +388,8 @@ out.append({
         ]),
         node("freeze", "Freeze", [
             P(beat(S, "freeze")),
+            D(R, "Don't move. Don't breathe."),
+            ME("It's quiet. Ryan. Move."),
             VID("a couple holding still mid-sex, listening, then moving again slow", "frozen mid sex listening quiet", "slow sex trying not to be heard", pool_dir="sex/ryan_08_freeze_t5"),
         ], [
             go("\"Inside me.\"", node="inside", mins=3),
@@ -356,18 +398,27 @@ out.append({
         ]),
         node("inside", "Inside", [
             P(beat(S, "inside")),
+            D(R, "Jesus. I came in you. I actually came in you."),
+            ME("I told you to. Stay there a minute."),
             VID("a guy coming inside a girl, holding her hips down", "creampie he holds her hips", "he cums inside her", pool_dir="sex/ryan_08_inside_t5"),
         ], [go("Lie there.", node="after", mins=10, eff=[nadd(R, "want", 5)])]),
         node("on", "On you", [
             P(beat(S, "on")),
+            ME("Look what you did to me."),
+            D(R, "I'm looking. I'm going to see this every time I close my eyes."),
             VID("a guy pulling out and coming on a girl's stomach and tits on his bed", "guy pulls out cums on her", "cum on tits after sex bed", pool_dir="sex/ryan_08_on_t5"),
         ], [go("Lie there.", node="after", mins=10, eff=[nadd(R, "want", 5)])]),
         node("mouth", "Your mouth", [
             P(beat(S, "mouth")),
+            D(R, "Fuck. Come here. Come up here."),
+            ME("You taste like you, Ryan."),
             VID("a girl on her knees by a bed, a guy coming in her mouth, she swallows", "cum in mouth kneeling swallow", "he finishes in her mouth", pool_dir="sex/ryan_08_mouth_t5"),
         ], [go("Lie there.", node="after", mins=10, eff=[nadd(R, "want", 5)])]),
         node("after", "After", [
             P("You lie with your head on his chest. His heart is still going hard under your ear. Across the hall, Laura's room is quiet again. Your thighs are sticky and your lips are sore and every part of you knows whose bed this is."),
+            D(R, "You okay?"),
+            ME("I'm okay. Are you?"),
+            D(R, "I don't know. I don't know what I am. Ask me tomorrow."),
             T("That was your brother. You should feel sick."),
             P("You don't. You feel warm all the way down, and you're already thinking about the next time you knock. That's the part that scares you."),
         ], [go("Ask him.", node="terms", mins=5)]),
@@ -417,8 +468,15 @@ def hot_node(n, name, media, exits, back="home_hall"):
     beats = [POOL(*[P(t) for t in pool("ryan_hot_repeatables", n)], pid=f"ryan_hot_{n}", bag=True)]
     if n in HOT_PIN:
         beats = pin_blocks(beats, *HOT_PIN[n])
-    return node(f"hot{n}", name, [*beats, *media],
+    return node(f"hot{n}", name, [*beats, *media, *HOT_SAID.get(n, [])],
                 exits + [go("Leave him to it.", loc=back)])
+# pass 3 B4: after each hot repeatable's beat, the two of them talk (row 6 whispers: Mark is next door)
+HOT_SAID = {1: [D(R, "You're doing that on purpose."), ME("Doing what?"), D(R, "Standing like that. In my door. You know what.")],
+            2: [D(R, "If anybody walks in, I'm telling them it was you."), ME("Tell them. See who they believe.")],
+            3: [D(R, "I'm losing because of you. You know that, right?"), ME("Then pause it and look properly.")],
+            4: [D(R, "Fuck. Can I, please, can I touch you?"), ME("No. Hands on the chair. Watch.")],
+            5: [D(R, "Fuck. Look at you. It's all over you."), ME("Next time you wait longer. Get me a towel.")],   # reader pass 3 b00: every 5a-5c ends with him coming
+            6: [D(R, "Quiet. He'll hear the blanket."), ME("Then hold still and let me finish you.")]}
 # C4 (LO 2026-11-03): hygiene colours, and its colour can work like a lock. Dirty, she still sees the button and
 # still goes to him, but it doesn't happen: he says why. Clean is hygiene 30+, or the hygiene system switched off.
 DIRTY = [trait("hygiene", "lt", 30), flag("hygiene_off", False)]
@@ -499,6 +557,19 @@ HOT7_FINISH = {
     "on": ("a guy pulling out and coming on a girl's stomach and tits on his bed late at night", "pulls out cums on her tits bedroom night", "cum on her stomach quiet sex"),
     "mouth": ("a girl on her knees by his bed late at night, a guy coming in her mouth", "cum in mouth kneeling by bed night", "he finishes in her mouth quietly"),
 }
+# pass 3 G23 (the-arc.md:475-479, "the act ends on a written aftermath beat, per partner"): his line after he comes,
+# before the exit; the finish beat itself stays the signed one
+HOT7_AFTER = {
+    "inside": [P("He drops onto his back beside you, breathing hard, his cock wet and going soft on his stomach."),   # scene reader b02: 7f_inside already has him pull out
+               D(R, "Walk slow on the way back. You're dripping, and Mom's door is right there."),
+               ME("Good. I want to feel you dripping out of me all the way to bed.")],   # fix_g3c: her answer (somebody speaks)
+    "on": [P("He drops onto the bed beside you, chest heaving, and watches you rub his cum into your skin."),
+           D(R, "Use my shirt. And don't let anyone see you in the hall like that."),
+           ME("No shirt. I'm wearing your cum to bed.")],
+    "mouth": [P("He sinks down onto the edge of the bed with his cock still wet from your mouth and pulls you up by the wrist."),
+              D(R, "Fuck, @player.nickname. Kiss me before you go."),
+              ME("Then kiss me. Taste yourself on my tongue.")],
+}
 FINISH_EXITS = [  # the day's pay split on ryan_hot_today, as built; dressed again for the hall
     go("Back to your room.", loc="home_hall", mins=20, cond_=cond(HOT_FREE), eff=[cap("corruption", 1, 79)] + HOT_PAY, flags=HOT_FLAG, wardrobe=DRESS_DAY),
     go("Back to your room.", loc="home_hall", mins=20, cond_=cond(flag("ryan_hot_today")), eff=[cap("corruption", 1, 79)], wardrobe=DRESS_DAY),
@@ -511,13 +582,24 @@ out.append({
                 "schedules": [{"weekdays": [0, 1, 2, 3, 6], "start_time": "22:00", "end_time": "00:00"}],
                 "conditions": cond(trait("ryan_step", "eq", 8))},
     "nodes": [
-        node("door", "Two knocks", [P("Two knocks. His phone is face-down on the desk. It always is now."),
+        node("door", "Two knocks", [P("Two knocks. Ryan's phone is face-down on the desk. It always is now."),
                                     # the-phone.md P10 (pass 3 group 2, round 2): her "coming" text is read where she meets it
                                     G(cond(flag("ryan_knock_booked")), D(R, "You said coming. I've been lying here listening for you."))], [
             go("Go in.", node="start", mins=2),
-            go("\"Not tonight.\"", loc="home_hall", mins=2),
+            go("\"Not tonight.\"", node="no_door", mins=2),
         ]),
-        node("start", "His room", [POOL(*[GC({"version": "1.0", "logic": "AND", "items": []}, *spoken(f"7s_{k}")) for k in "abc"], pid="ryan_hot_7s", bag=True)], [
+        # scene reader b02 (2026-11-03): the no gets his reply on its own screen
+        node("no_door", "Not tonight", [
+            ME("Not tonight."),
+            D(R, "Seriously? Fine. Another night, then. I'm not going anywhere."),
+            P("Through the door you hear him drop back onto the bed, hard, and swear into his pillow."),
+        ], [go("Back to your room.", loc="home_hall", mins=1)]),
+        # scene reader b02: 7s_b has him half asleep, which can't follow "I've been lying here listening for you",
+        # so a booked night draws from a and c only
+        node("start", "His room", [
+            GC(cond(flag("ryan_knock_booked")), POOL(*[GC({"version": "1.0", "logic": "AND", "items": []}, *spoken(f"7s_{k}")) for k in "ac"], pid="ryan_hot_7s_booked", bag=True)),
+            # fix_g3c: the chain's else is the booking's own complement, not worn_exposure (a level, not a garment)
+            GC(cond(flag("ryan_knock_booked", False)), POOL(*[GC({"version": "1.0", "logic": "AND", "items": []}, *spoken(f"7s_{k}")) for k in "abc"], pid="ryan_hot_7s", bag=True))], [
             # pass 3 J16: the two higher acts are hidden until his Lust opens them, not greyed: this loop raises his Lust
             # itself, so a greyed rung here would be the scene reading out its own progress bar (engine.md §15 rule 1).
             # pass 3 E95: each act costs 10 energy (greyed "Requires 10 Energy" when she is spent) and lowers hygiene.
@@ -525,16 +607,25 @@ out.append({
             go("Ride him.", node="ride", mins=5, wardrobe=STRIP, cond_=cond(ntrait(R, "want", "gte", 70)), **SEX_PRICE),
             go("Let him taste you.", node="lick", mins=5, wardrobe=STRIP, cond_=cond(ntrait(R, "want", "gte", 80)), **SEX_PRICE),
             go("Against the wall.", node="wall_back", mins=5, wardrobe=STRIP, cond_=cond(ntrait(R, "want", "gte", 90)), **SEX_PRICE),
-            go("Leave him to it.", loc="home_hall", mins=2),
+            go("Leave him to it.", node="no_start", mins=2),
         ]),
+        node("no_start", "Leave him to it", [
+            D(R, "Seriously? Now? Look at me, @player.nickname."),
+            P("He lets go of your ass, his cock still hard and pointing at you, and watches you pull your clothes back on without taking his eyes off your tits once."),
+            D(R, "Next time you knock, you stay."),
+        ], [go("Back to your room.", loc="home_hall", mins=1)]),
         node("suck", "On your knees", [*voices("suck"),
-            VID("a girl on her knees by a bed sucking a guy's cock late at night", "blowjob kneeling by his bed night", "she sucks her stepbrother quietly", pool_dir="sex/ryan_hot7_suck_t5")], TO_TWIST),
+            VID("a girl on her knees by a bed sucking a guy's cock late at night", "blowjob kneeling by his bed night", "she sucks her stepbrother quietly", pool_dir="sex/ryan_hot7_suck_t5"),
+            D(R, "Fuck, your mouth. Every night. I want this every night."), ME("Then keep your door unlocked.")], TO_TWIST),
         node("ride", "On top", [*voices("ride"),
-            VID("a girl riding a guy on his bed, the headboard knocking the wall", "girl rides him headboard knocking", "quiet riding sex late night", pool_dir="sex/ryan_hot7_ride_t5")], TO_TWIST),
+            VID("a girl riding a guy on his bed, the headboard knocking the wall", "girl rides him headboard knocking", "quiet riding sex late night", pool_dir="sex/ryan_hot7_ride_t5"),
+            D(R, "Slow down. The headboard. Slow down."), ME("No. Hold my hips and take it.")], TO_TWIST),
         node("lick", "His mouth", [*voices("lick"),
-            VID("a guy eating a girl out on his bed, her hand over her mouth", "he eats her out she covers mouth", "cunnilingus quiet late night", pool_dir="sex/ryan_hot7_lick_t5")], TO_TWIST),
+            VID("a guy eating a girl out on his bed, her hand over her mouth", "he eats her out she covers mouth", "cunnilingus quiet late night", pool_dir="sex/ryan_hot7_lick_t5"),
+            ME("Right there. Ryan. Right there, don't move."), D(R, "Come on my face, then. Quietly.")], TO_TWIST),
         node("wall_back", "Against the wall", [*voices("wall"),
-            VID("a girl kneeling on a bed, palms on the wall, fucked from behind", "from behind palms on wall", "doggy against the bedroom wall", pool_dir="sex/ryan_hot7_wall_t5")], TO_TWIST),
+            VID("a girl kneeling on a bed, palms on the wall, fucked from behind", "from behind palms on wall", "doggy against the bedroom wall", pool_dir="sex/ryan_hot7_wall_t5"),
+            D(R, "Look at you. Ass up for me, against your own wall."), ME("Harder. Make it knock.")], TO_TWIST),
         # truth pass (2026-11-03): 7t_b is Laura across the hall knocking ("Ryan? Are you up?"), true only while her row
         # has her in her bedroom (not on the stairs waiting up, came_home_late); without her the bag is a and c
         node("twist", "Late", [
@@ -542,13 +633,14 @@ out.append({
                POOL(*[GC({"version": "1.0", "logic": "AND", "items": []}, *spoken(f"7t_{k}")) for k in "abc"], pid="ryan_hot_7t", bag=True)),
             GC(cond({"type": "worn_exposure", "operator": "gte", "value": 0}),
                POOL(*[GC({"version": "1.0", "logic": "AND", "items": []}, *spoken(f"7t_{k}")) for k in "ac"], pid="ryan_hot_7t_no_laura", bag=True)),
-            VID("a couple having sex in his bedroom late at night, keeping quiet", "quiet sex his bedroom late night", "sneaky sex step brother room", pool_dir="sex/ryan_hot7_twist_t5")], [
+            VID("a couple having sex in his bedroom late at night, keeping quiet", "quiet sex his bedroom late night", "sneaky sex step brother room", pool_dir="sex/ryan_hot7_twist_t5"),
+            D(R, "Don't stop. Don't you dare stop now."), ME("I wasn't going to.")], [
             go("\"Inside me.\"", node="f_inside", mins=3),
             go("\"On me.\"", node="f_on", mins=3),
             go("\"In my mouth.\"", node="f_mouth", mins=3),
         ]),
         # pass 3 B37 (one asset, one block): each finish its own pool; was one sex/ryan_hot7_finish_t5 for all three
-        *[node(f"f_{k}", "He comes", [*spoken(f"7f_{k}"), VID(*HOT7_FINISH[k], pool_dir=f"sex/ryan_hot7_finish_{k}_t5")], FINISH_EXITS)
+        *[node(f"f_{k}", "He comes", [*spoken(f"7f_{k}"), VID(*HOT7_FINISH[k], pool_dir=f"sex/ryan_hot7_finish_{k}_t5"), *HOT7_AFTER[k]], FINISH_EXITS)
           for k in ("inside", "on", "mouth")],
     ]})
 
@@ -560,7 +652,7 @@ RYAN_TOWEL_LEAD = [P("You loosen the tuck and let the towel slip. It drops to yo
 RYAN_TOWEL_SLIP = [
     [P("Ryan turns his whole body away."), D(R, "Jesus, @player.nickname! Put it back!"),
      P("You pull it up. He doesn't turn round until you have, and his ears have gone red.")],
-    [P("Ryan stops breathing. He looks at your tits for three whole seconds before you pull the towel back up, and he doesn't say a word."),
+    [P("Ryan stops breathing. He looks at your tits for three whole seconds before you pull the towel back up, but he doesn't say a word."),
      P("His eyes stay on the knot after it's tied again.")],
     [P("Ryan's eyes go straight to your tits and stay there. He wets his lips."), D(R, "Leave it."),
      P("You hold the towel at your waist and let him look. His hand goes to the front of his shorts, and his cock is hard under it.")],
@@ -603,7 +695,10 @@ def ryan_towel(hub, back, first_low, caught=True):
         drop=RYAN_TOWEL_DROP, drop_gate=[SHOWING],
         drop_media=VID("a young woman dropping her bath towel, standing naked in front of a young man in his room", "girl drops towel naked in front of him", "towel drop naked reveal", pool_dir=f"sex/towel_ryan_drop_{hub.replace('hub_ryan_', '')}_t4"),
         caught_by="npc_laura" if caught else None, caught=TOWEL_CAUGHT,
-        no=("Hold the knot.", RYAN_TOWEL_NO, "home_hall", "Go."))   # reader a3 #7-8 (DECISIONS 131, call A): his Want +1 once a day
+        # reader batch 4 (pass 3): Laura is at the table every minute he is in the kitchen
+        # fix_g3c: the room in the line, so each hub reads its own (one pool, one place); seen shows only while Laura is here
+        seen=[P("Ryan's eyes drop to the knot over your tits and snap back up. Mom is right there " + {"home_kitchen": "in the kitchen", "home_living_room": "in the living room", "home_ryan_room": "in his room"}.get(back, "with you") + ", and he goes red to the ears.")] if caught else None,
+        no=("Hold the knot.", RYAN_TOWEL_NO, "home_hall", "Leave him wanting."))   # reader a3 #7-8 (DECISIONS 131, call A): his Want +1 once a day
 
 
 # ── his hub: his room, every window (npc_ryan sheet: his lines by what she wears) ──
@@ -618,19 +713,21 @@ out.append({
                 "priority": 6, "is_active": True, "conditions": cond(flag("opening_done"))},
     "nodes": [
         node("room", "Ryan's room", [
+            # pass 3 D32 (the-surfaces.md R6): ONE constant opener; his Want band only changes his reaction after it
+            P("Ryan's in his room with his headphones round his neck and his phone in his hand."),
             G(cond(flag("ryan_08_two_knocks_closed")),
               P("You knock once. He opens it on the first knock and goes back to his bed. Two knocks was a different door.")),
             G(cond(trait("ryan_step", "lt", 0)),
-              P("Ryan looks up from his phone, polite, like you're a guest."),
+              P("He looks up from it, polite, like you're a guest."),
               D(R, "Need something?")),
             G(cond(trait("ryan_step", "gte", 0), ntrait(R, "want", "lt", 40)),
-              P("Ryan is on his bed with his headphones round his neck and his phone in his hand. He sits up, and his eyes go to you and away too fast."),
+              P("He's flat on his bed. He sits up, and his eyes go to you and away too fast."),
               D(R, "What's up?")),
             G(cond(trait("ryan_step", "gte", 0), ntrait(R, "want", "gte", 40), ntrait(R, "want", "lt", 70)),
-              P("Ryan puts his phone face-down. He looks at you, all of you, and doesn't pretend he isn't."),
+              P("He puts the phone face-down. He looks at you, all of you, and doesn't pretend he isn't."),
               D(R, "Hey, @player.nickname. Shut the door.")),
             G(cond(trait("ryan_step", "gte", 0), ntrait(R, "want", "gte", 70)),
-              P("Ryan's on his feet before you've shut the door. He stops an arm's length away, like that's the deal he made with himself."),
+              P("He's on his feet before you've shut the door. He stops an arm's length away, like that's the deal he made with himself."),
               D(R, "You can't keep walking in here looking like that.")),
             *RT_ROOM[0],
             G(cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}),
@@ -641,8 +738,13 @@ out.append({
               D(R, "Jesus, @player.nickname."), P("He goes and shuts his door, then stands there with his hand on it, not opening it again.")),
             G(cond(ntrait(R, "warmth", "gte", 70)),
               P("He's on your side. He'd cover for you with Laura in a heartbeat, and you both know it.")),
-            G(cond(flag("knows_about_kayla"), trait("ryan_step", "gte", 0)),
+            # reader pass 3 b00: Fri 18:00-Sat 10:00 Kayla is in this room, so the hub puts her on the page then,
+            # and the hair tie (her trace while she's gone) shows only when she isn't
+            G(cond(flag("knows_about_kayla"), trait("ryan_step", "gte", 0),
+                   {"type": "npc_at_location", "location_id": "home_ryan_room", "npc_id": "npc_kayla", "operator": "is_absent"}),
               P("Kayla's hair tie is on his desk, next to his phone. He sees you see it.")),
+            G(cond({"type": "npc_at_location", "location_id": "home_ryan_room", "npc_id": "npc_kayla", "operator": "is_present"}),
+              P("Kayla's sprawled across the end of his bed in one of his hoodies and not much else, scrolling her phone. She looks at you over it, slow, and doesn't move her legs.")),
             # B1 (DECISIONS 147): Kayla walked in on her shower; his next day or two reads it
             G(cond(flag("kayla_saw_her"), {"type": "hours_since_flag", "subject": "player", "flag_key": "kayla_saw_her", "operator": "lt", "value": 48}),
               D(R, "Kayla says you've got nice tits."), P("He says it to his phone. His ears go red, and his eyes don't stay on the phone.")),
@@ -673,14 +775,15 @@ out.append({
         node("talk", "Talk", [
             POOL(
                 P("You sit on the end of his bed and he tells you about the yard, about a guy who dropped a pallet on his own foot. You laugh. He watches you laugh."),
-                P("He asks about college. Not like Mom does. He wants to know who's annoying and who's cute, and he goes quiet when you tell him who's cute."),
+                P("He asks about college, but not like Mom does. He wants to know who's annoying and who's cute, and he goes quiet when you tell him who's cute."),
                 P("You lie across the foot of his bed and talk about nothing for half an hour, about Mark mostly, and how much you both want out of this house."),
             ),
             D(R, "You're all right, you know. For a sister."),
-        ], [go("Go.", loc="home_hall", mins=5)]),
+            ME("Just all right?"), D(R, "Don't push it, @player.nickname."),
+        ], [go("Leave him grinning.", loc="home_hall", mins=5)]),
         node("cover", "Short", [
             P("He doesn't ask what you spent it on. He gets his wallet off the desk and counts out what he has and pushes it into your hand, and holds your hand a second too long."),
-            D(R, "Don't tell Mark it came from me. He'll take it as a loan."),
+            D(R, "Don't tell Mark it came from me. He'll take it as a loan."), ME("I'll pay you back, Ryan."), D(R, "Yeah. You will."),
             G(cond(wd(5)), T("It's not your money. Sunday it'll look like yours, but it won't count.")),
             G(cond(wd(6)), T("It's not your money. At the table it'll look like yours, but it won't count.")),
         ], [go("\"Thank you.\"", loc="home_hall", mins=5)]),
@@ -705,7 +808,7 @@ K = "home_kitchen"
 LOW_LOOK = P("His eyes drop to the towel and come back up.")
 RT_KITCHEN = ryan_towel("hub_ryan_kitchen", K, LOW_LOOK)
 kc, kn = item("dinner", "Sit down to dinner.", [tod("18:00", "19:00")], "ate_dinner", K,
-    [P("He eats like he's late for something."), D(R, "Pass the bread, @player.nickname."),
+    [P("He eats like he's late for something."), D(R, "Pass the bread, @player.nickname."), ME("Say please."), D(R, "Please. Your majesty."),
      G(cond(here(L_, K)), P("Laura asks him about the yard and gets three words.")),
      G(cond(here(M_, K)), P("Mark reads the paper at the head of the table and doesn't look up."))],
     [energy(15), warm(R)], 30,
@@ -725,10 +828,13 @@ out.append({
 LR = "home_living_room"
 RT_LIVING = ryan_towel("hub_ryan_living_room", LR, LOW_LOOK)
 lc, ln = item("tv", "Play his game with him.", [], "watched_tv", LR,
-    [P("His game, your turn. You lose in under a minute."), D(R, "You're terrible, @player.nickname.")],
-    [energy(5), warm(R)], 60)   # its tease and touch are hot repeatables 2 and 6 now (release 1)
+    [P("His game, your turn. You lose in under a minute."), D(R, "You're terrible, @player.nickname."), ME("You cheated."), D(R, "I pressed buttons. That's not cheating. Again?")],
+    [energy(5), warm(R)], 60,   # its tease and touch are hot repeatables 2 and 6 now (release 1)
+    # reader batch 5 (pass 3): his "Again?" gets an answer when she says no
+    no=([D(R, "Coward. You just don't want to lose again."),
+         P("He's already restarted it, but he watches you go over the top of the controller, his eyes on your legs.")], "Leave him to his game."))
 fc, fn = item("film", "Watch a film with him.", [], "movie_night", LR,
-    [P("He lets you pick and complains about it, but he watches the whole thing."), D(R, "Fine. That was good. Don't tell anyone.")],
+    [P("He lets you pick and complains about it, but he watches the whole thing."), D(R, "Fine. That was good. Don't tell anyone."), ME("You cried at the end."), D(R, "I did not. Shut up.")],
     [energy(5), warm(R)], 120)
 out.append({
     "id": "hub_ryan_living_room", "name": "Ryan, on the couch",
@@ -738,6 +844,7 @@ out.append({
     "nodes": [node("couch", "Ryan, on the couch", [
         P("Ryan's sprawled on the couch with a controller, the TV loud, a bag of crisps open on his chest."),
         POOL(D(R, "Want next game?"), D(R, "Sit. You're blocking the screen."), D(R, "There's a film on after this if you want.")),
+        ME("Move your feet, then."), D(R, "Make me."),   # pass 3 B4
         *RYAN_DRESS_LINES, *RT_LIVING[0],
     ], lc + fc + RT_LIVING[1]
        + [c for n, label, gate, wardrobe, _m, _x in HOT_COUCH for c in hot_choice(n, label, gate + [LAURA_NOT_HERE(LR)], wardrobe)]
@@ -783,7 +890,7 @@ out.append({
             P("The shower's running. The door doesn't lock properly, but it's shut, and his towel is gone from the rail in the hall."),
             POOL(D(R, "Two minutes!"), D(R, "Mom's rule, @player.nickname. Wait your turn."), D(R, "You can come in if you want to brush your teeth. I won't look."), pid="ryan_bathroom_lines"),
             G(cond(flag("ryan_heard_her")), D(R, "Don't stand right outside the door. I can hear you breathing.")),
-        ], [*RT_BATH[1], go("Wait your turn.", loc="home_hall", mins=10), go("Leave.", loc="home_hall")]),
+        ], [*RT_BATH[1], go("Wait your turn.", loc="home_hall", mins=10), go("Leave him to his shower.", loc="home_hall")]),
         *RT_BATH[2],
     ]})
 
@@ -796,7 +903,7 @@ out.append({
                 "conditions": cond({"type": "npc_at_location", "location_id": "home_ryan_room", "npc_id": R, "operator": "is_absent"})},
     "nodes": [
         node("things", "His things", [
-            P("His room smells like him: deodorant, the yard, something warm. His bed isn't made. You open his drawers one at a time, quietly, listening for the front door."),
+            P("Ryan's room smells like him: deodorant, the yard, something warm. His bed isn't made. You open his drawers one at a time, quietly, listening for the front door."),
             POOL(
                 P("Under his socks, a box of condoms, opened, half gone. You count them. You put them back exactly where they were."),
                 P("A hoodie on the chair that's softer than anything you own. You put your face in it before you can stop yourself."),

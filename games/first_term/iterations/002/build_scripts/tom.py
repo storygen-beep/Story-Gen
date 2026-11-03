@@ -51,7 +51,7 @@ out.append({
         node("not_yet", "Not yet", [
             D(TM, "Sign stays up till somebody takes it."),
             P("He goes back to wiping the machine."),
-        ], [go("Go.", loc="cafe", mins=2, retry=1)]),
+        ], [go("Leave the sign where it is.", loc="cafe", mins=2, retry=1)]),   # pass 3 D39 (R7): the way out answers him
         node("uniform", "The uniform", [
             P("He reaches under the counter and pushes a folded uniform across to you: a black dress with a white apron, the café's name stitched on the pocket."),
             D(TM, "Eight till seven, up to three shifts a day, Monday to Saturday. Wear that. Be on time."),
@@ -67,15 +67,19 @@ out.append({
     "nodes": [
         back("apron"),
         node("apron", "The apron", [
-            P("Your first shift. Tom hands you an apron, and when you tie it wrong he catches the strings from behind and stops you. He unties them and ties them again, properly. His knuckles press into your hips."),
+            # scene reader b03 (2026-11-03): cafe_shift can play before this step, so the screen doesn't call it her first shift
+            P("Tom hands you a fresh apron at the start of the shift, and when you tie it wrong he catches the strings from behind and stops you. He unties them and ties them again, properly. His knuckles press into your hips."),
             D(TM, "Tables first. Phone in the back. Smile."),
-            P("His hands stay on you one second longer than tying takes."),
+            P("His hands stay on your hips one second longer than tying takes, his thumbs on the curve of your ass. Then he lets go, like a man putting something back on the shelf for later."),   # scene reader b03: the not-yet (H4.3)
         ], [
             go("\"Yes, boss.\"", node="tray", mins=2, wardrobe=[{"action": "equip", "item_id": "cafe_uniform_normal"}]),
             go("\"I can tie my own apron.\"", node="tray", mins=2, eff=[nadd(TM, "power", -5)], wardrobe=[{"action": "equip", "item_id": "cafe_uniform_normal"}]),
         ]),
         node("tray", "Table six", [
             P("You carry the tray out. You can feel his eyes on your ass the whole way across the café, and when you look back at the counter, he's still looking. He doesn't pretend he isn't."),
+            D(TM, "Don't run with it. Walk. Let them see you coming."),   # pass 3 B3: his line beside her thought
+            ME("Table six, boss. I've got it."),
+            D(TM, "Tips go in the jar. I count the jar. See you next shift."),   # scene reader b03: the hook (his step 2 is the tip jar)
             G(cond(trait("corruption", "lt", 20)), T("He's your boss. Do the job.")),
             G(cond(trait("corruption", "gte", 20)), T("You felt that second. So did he.")),
         ], [go("\"Table six.\"", loc="cafe", mins=10, consumes=True,
@@ -98,10 +102,19 @@ out.append({
         node("seen", "Not a word", [
             P("He turns round with his hand still in the jar. He sees you see it. For a second neither of you moves."),
             D(TM, "Not a word."),
+            ME("Twenties, Tom? From the girls' jar?"),
+            D(TM, "Float. I'm counting the float. Not a word, @player."),
             P("He takes his hand out of the jar slowly and puts the lid back on, and his ears go red."),
             T("He's a thief. And now he owes you."),
         ], [go("\"Not a word.\"", loc="cafe", mins=5, consumes=True,
-               eff=[nadd(TM, "want", 5), nadd(TM, "power", -5), setv("tom_step", 2)], flags=[done(3), fset("knows_tip_jar")])]),
+               eff=[nadd(TM, "want", 5), nadd(TM, "power", -5), setv("tom_step", 2)], flags=[done(3), fset("knows_tip_jar")]),
+            # reader batch 5 (pass 3): his ask gets a written no. She saw it either way, so the step is done and she
+            # knows; her no moves none of his meters (C1, LO 2026-11-03)
+            go("\"That depends what's in it for me.\"", node="seen_no", mins=2)]),
+        node("seen_no", "What's in it for you", [
+            D(TM, "You want to play it like that? Fine. Out front. Now."),
+            P("He puts the lid back on the jar too hard, and he doesn't look at you again for the rest of the shift. His ears are still red."),
+        ], [go("Back out front.", loc="cafe", mins=5, consumes=True, eff=[setv("tom_step", 2)], flags=[done(3), fset("knows_tip_jar")])]),
     ]})
 
 # ── step 3 · Not by the window (tom_03b_not_by_the_window.md, signed 2026-11-01), the top step: after a shift she let
@@ -125,7 +138,7 @@ out.append({
             go("\"Not now, Tom.\"", loc="cafe", mins=2, retry=1),
         ]),
         node("line", "The window", [
-            D(TM, "I'm not stopping you. I saw. I didn't stop it."),
+            D(TM, "I'm not stopping you. I saw, but I didn't stop it."),
             P("He looks at the door, at the front of the café behind it, the big window on the street."),
             D(TM, "Not by the window."),
         ], [
@@ -136,13 +149,13 @@ out.append({
         node("where", "Where", [
             D(TM, "Anywhere the street can't see. That's all I'm saying."),
             G(cond(trait("corruption", "lt", 20)), T("Say sorry. Keep the job.")),
-            G(cond(trait("corruption", "gte", 20)), T("He watched. He didn't stop it.")),
+            G(cond(trait("corruption", "gte", 20)), T("He watched, but he didn't stop it.")),
         ], [go("\"Okay.\"", loc="cafe", mins=2, consumes=True, **WINDOW_DONE)]),
         node("yes", "Yes, boss", [
             P("Tom nods once, and opens the door for you, and doesn't look at you while you go past him."),
         ], [go("Back to the floor.", loc="cafe", mins=2, consumes=True, **WINDOW_DONE)]),
         node("tips", "My tips", [
-            D(TM, "Then keep them. Not by the window."),
+            D(TM, "Then keep them, but not by the window."),
             P("His ears go red, the way they did at the tip jar."),
         ], [go("Back to the floor.", loc="cafe", mins=2, consumes=True,
                eff=WINDOW_DONE["eff"] + [nadd(TM, "power", -3)], flags=WINDOW_DONE["flags"])]),
@@ -160,7 +173,8 @@ out.append({
         node("counter", "The counter", [
             P("Tom's behind the counter with a cloth over his shoulder, keeping an eye on the room and an eye on you."),
             # Iteration 002, part 8 (reader): the work lines only while she's in the uniform.
-            G(cond(UNIFORM, tod("08:00", "22:00")), POOL(D(TM, "Table three wants you, @player."), D(TM, "Smile. Table three's waiting."), D(TM, "Two lattes for six. Go."), pid="tom_counter_lines")),
+            G(cond(UNIFORM, tod("08:00", "22:00")), POOL(D(TM, "Table three wants you, @player."), D(TM, "Smile. Table three's waiting."), D(TM, "Two lattes for six. Go."),
+                 D(TM, "I'm the manager, @player, not the help. Table three."), pid="tom_counter_lines")),
             G(cond({"type": "worn_type", "operator": "neq", "value": "cafe_uniform"}), D(TM, "Day off? Then you're a customer. Sit where I can see you.")),
             # release 1, strict (tom_01_the_apron.md, his counter): he never tells her to show
             G(cond(UNIFORM, {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "equipped"}), P("He looks once, at your tits in it, and makes himself look at the till."), D(TM, "Your choice. Tables don't wait.")),   # reader a3 #59 (DECISIONS 131)
@@ -170,7 +184,7 @@ out.append({
             G(cond(trait("tom_step", "eq", 1), {"type": "worn_type", "operator": "eq", "value": "cafe_uniform"}), P("His eyes are on your apron strings again.")),
             G(cond(trait("tom_step", "eq", 1)), P("He counts the tip jar when you're near.")),
             G(cond(trait("tom_step", "eq", 2)), P("He won't look at the tip jar when you're near. Or at you.")),
-            G(cond(trait("tom_step", "eq", 3)), P("He watches the room now, and you in it, and he doesn't say a word about the window.")),
+            G(cond(trait("tom_step", "eq", 3)), P("He watches the room now, and you in it, but he doesn't say a word about the window.")),
             G(cond(ntrait(TM, "want", "gte", 50), UNIFORM, tod("08:00", "22:00")), P("He watches you the whole shift. He doesn't even pretend to watch the room.")),
             G(cond(ntrait(TM, "power", "lt", 40)), P("He asks you now. He used to tell you.")),
             G(cond(ntrait(TM, "power", "gte", 60)), P("He tells you where to stand, and expects you to do it.")),
@@ -181,7 +195,7 @@ out.append({
             go("Ask for the tight dress.", node="tight", mins=2,
                cond_=cond(trait("exhibitionism", "gte", 20), {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "not_owned"}, tod("08:00", "22:00"))),
             go("Sit at the counter a while.", loc="cafe", mins=20, cond_=cond({"type": "worn_type", "operator": "neq", "value": "cafe_uniform"}, tod("08:00", "21:30"))),
-            go("Go.", loc="town")]),
+            go("Leave him to the till.", loc="town")]),
         node("tight", "The tight dress", [
             P("Tom reaches under the counter without a word and puts it on the counter between you: the black dress, tighter than the other one and cut for your tits. His eyes go to your chest once. He makes them go back to the till."),
             D(TM, "Your choice. They tip more for it. They grab more too."),
@@ -189,7 +203,7 @@ out.append({
             # reader a3 #51 (DECISIONS 131): the written no. No pay: it's the uniform she turns down, not him.
             go("Leave it on the counter.", node="leave_it", mins=1)]),
         node("leave_it", "Not the dress", [D(TM, "Your call."), P("He folds it back under the counter without looking at it, or at you.")],
-             [go("Go.", loc="cafe", mins=1)]),
+             [go("Leave him to his folding.", loc="cafe", mins=1)]),
     ]})
 
 # ── Gary's hub (booth four, his hours) ──
@@ -201,16 +215,29 @@ out.append({
     "nodes": [
         node("booth", "Booth four", [
             P("Gary in booth four with his paper and his pot of black tea. He lowers the paper when you come near, an inch at a time."),
-            POOL(D(GY, "There she is. Top me up, sweetheart."), D(GY, "Slow day. I could use the company."), D(GY, "You look lovely today. You always look lovely."), pid="gary_lines"),
+            POOL(D(GY, "There she is. Top me up, doll."), D(GY, "Slow day. I could use the company."), D(GY, "You look lovely today. You always look lovely."), pid="gary_lines"),
             # (release 1: Gary's paid ten minutes are cut, DECISIONS 117)
-        ], [go("Top up his tea.", loc="cafe", mins=10, flags=[fset("served_gary")])]),   # read by Tom's palm line (part 9)
+        ], [go("Top up his tea.", node="poured", mins=10, flags=[fset("served_gary")]),   # read by Tom's palm line (part 9)
+            # reader batch 4 (pass 3): his ask gets a written no
+            go("\"Pour your own, Gary.\"", node="no", mins=2)]),
+        # pass 3 D44 (the-surfaces.md R9): his look when she pours, not a toast
+        node("poured", "His tea", [
+            P("You bend over the booth to pour, slow, and Gary looks straight down the front of you at your tits the whole time the pot is tipped. He wets his lip. He doesn't pretend to read."),
+            P("His hands stay flat on the paper. For now."),
+            # reader batch 4 (pass 3): what comes next is his hand on her on shift (cafe_shift L3, Gary in booth four)
+            D(GY, "Lovely. Lovely, doll. Pour like that when you're on shift, and see what an old man does about it."),
+        ], [go("Take the pot back to the counter.", loc="cafe")]),
+        node("no", "Pour your own", [
+            D(GY, "Hard-hearted, doll. Hard-hearted."),
+            P("He laughs into his paper, but his eyes follow your ass all the way back to the counter."),
+        ], [go("Leave him to his paper.", loc="cafe")]),
     ]})
 
 cards = step_cards(TM, {
     1: ("Tom gave you the job. Your first shift is waiting.", "Take a shift at the café, afternoon or evening, Monday to Saturday"),
     2: ("He counts the tip jar when you're near.", "Five shifts in: a café shift, watch the back room"),
     3: ("He watches the customers' hands. He wants a word.", "A café shift after you let a customer's hand stay"),
-}, met_flag="tom_met", terminal_text=("The window rule: the street can't see.", "Tom, later. (Next release)"))
+}, met_flag="tom_met", terminal_text=("The window rule: the street can't see.", "Tom, later. (Next release) His Want and Power still count: what you do at the café now is kept for the next release."))
 # His hiring card under People until she has the job (LO 2026-11-02, "Yes all three"): only the "Week one" story
 # card named the job, and it goes after 7 days, so a player who skipped it lost Tom, Gary and the shift money.
 cards.insert(0, {"npc_id": TM, "priority": 10, "heading": "The café", "text": "The café in town is hiring.",   # C3 (LO 2026-11-03)

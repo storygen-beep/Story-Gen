@@ -19,13 +19,17 @@ DRINK_MOD = [{"key": "drinks_boost", "name": "Tipsy", "duration_hours": 3, "trai
 # RANDOM EVENTS IN TOWN (street.md "Random events in town"): 1 in 4 when she comes out onto the
 # street, one a day (`town_event`, cleared at midnight). When nothing rolls, nothing shows.
 # ═════════════════════════════════════════════════════════════════════════════
-def town_event(cid, name, sched, conds, blocks, plain, plain_eff=(), bolder=None):
-    # the plain answer is free of every cap (gate: a spent day still has a door); the canvas itself is once a day
-    exits = [go(plain, loc="street", mins=2, eff=list(plain_eff), flags=[fset("town_event")])]
+def town_event(cid, name, sched, conds, blocks, plain, plain_eff=(), bolder=None, plain_after=None):
+    # the plain answer is free of every cap (gate: a spent day still has a door); the canvas itself is once a day.
+    # plain_after: pass 3 D44 (the-surfaces.md R9): the plain answer's screen, his reaction or her body, not a toast
+    exits = [go(plain, mins=2, eff=list(plain_eff), flags=[fset("town_event")],
+                **(dict(node="plain") if plain_after else dict(loc="street")))]
     if bolder:
         label, gate, eff, text = bolder
         exits.append(go(label, node="bolder", mins=2, cond_=cond(flag("town_event", False), *gate), eff=eff, flags=[fset("town_event")]))
     nodes = [node("event", name, blocks, exits)]
+    if plain_after:
+        nodes.append(node("plain", plain.rstrip("."), list(plain_after), [go("Walk on.", loc="street")]))
     if bolder:
         nodes.append(node("bolder", label.rstrip("."), [P(bolder[3])], [go("Walk on.", loc="street", mins=2)]))
     t = {"location": "street", "is_repeatable": True, "priority": 4, "is_active": True, "trigger_mode": "random",
@@ -41,6 +45,7 @@ S = lambda a, b, days=ALL: [{"weekdays": days, "start_time": a, "end_time": b}]
 out.append(town_event("town_event_wind", "The wind and your skirt", S("07:00", "22:00"), [SKIRT],
     [P("A gust comes down the street and gets right under your skirt and lifts it, all the way, for a second and a half. Your ass is out to the whole street. Across the road a man stops dead with his keys in his hand.")],
     "Grab the hem. Too late.",
+    plain_after=[P("You slap the hem down with both hands, too late, your face on fire. The man across the road is still standing there with his keys, and he grins at you like you did it for him.")],
     bolder=("Let it blow.", [trait("exhibitionism", "gte", 40)], [EXH1],   # her underwear, held up for one man: Showing (DECISIONS 124)
             "You don't grab it. You let the wind have it for a second longer, your ass on show to the road, and the man across the road walks into a bin. Then you push the hem down. That's all he gets today.")))
 out.append(town_event("town_event_whistle", "A car slows down", S("07:00", "22:00"), NO_BRA_DRESSED,
@@ -49,6 +54,7 @@ out.append(town_event("town_event_whistle", "A car slows down", S("07:00", "22:0
      GC(cond(trait("exhibitionism", "lt", 40)), P("Not a chance.")),
      GC(cond(trait("exhibitionism", "gte", 40)), P("Not for a ride."))],
     "Walk faster.",
+    plain_after=[P("You walk faster, but that's worse. Your tits bounce loose under your clothes with every step. The car crawls beside you to the end of the street, and he whistles again before it pulls away.")],
     bolder=("Turn and let him look.", [CURIOUS, DARING], [dict(EXH1, cap=39)],   # a Daring act stops at Daring's top (pass 3 G8)
             "You stop and turn to face the car. You let him look at your tits, nipples hard through the cloth, for as long as the light's red. He forgets to drive when it changes.")))
 out.append(town_event("town_event_vance", "Vance on his porch", S("18:00", "22:00"), [here(V, "vance_house"), flag("vance_met")],
@@ -60,7 +66,8 @@ out.append(town_event("town_event_vance", "Vance on his porch", S("18:00", "22:0
 out.append(town_event("town_event_jogger", "A jogger looks back", S("07:00", "10:00"), [],
     [P("A jogger goes past in the other direction, and looks back over his shoulder at your ass, twice.")],   # reader a3 #64 (DECISIONS 131)
     "Pretend you didn't see.",
-    bolder=("Look back.", [CURIOUS], [], "You look back, and catch him doing it a third time, eyes on your ass. He nearly runs into a lamp post. He slows like he might turn round. You turn the corner first.")))
+    plain_after=[P("You keep your eyes front and pretend, but your face goes hot anyway, and you can feel exactly where on your ass his eyes landed, both times.")],
+    bolder=("Look back.", [CURIOUS], [], "You look back, and catch him doing it a third time, eyes on your ass. He nearly runs into a lamp post. He slows like he might turn round. You turn the corner first. He runs this street in the mornings, and now he knows your ass by sight.")))   # reader pass 3 b01: the hook (his window is 07:00-10:00)
 # S6 (LO 2026-11-03): no "Nothing happens." random event on the street either.
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -76,11 +83,16 @@ out.append({
         P("The counter is a wall of bottles and red cups. Somebody's mixing something blue in a mixing bowl."),
         G(cond(trait("drinks_tonight", "eq", 2)), T("That'd be three. You'll feel it tomorrow.")),
     ], [
-        go("Pour one.", loc="zoe_kitchen", mins=10, cond_=cond(trait("drinks_tonight", "lt", 2)), mods=DRINK_MOD, eff=[add("drinks_tonight", 1)]),
-        go("Pour one. (your third)", loc="zoe_kitchen", mins=10, cond_=cond(trait("drinks_tonight", "eq", 2)), mods=DRINK_MOD,
+        # pass 3 D44 (the-surfaces.md R9): the drink lands on her body, not a toast (drinks_tonight is already counted)
+        go("Pour one.", node="poured", mins=10, cond_=cond(trait("drinks_tonight", "lt", 2)), mods=DRINK_MOD, eff=[add("drinks_tonight", 1)]),
+        go("Pour one. (your third)", node="poured", mins=10, cond_=cond(trait("drinks_tonight", "eq", 2)), mods=DRINK_MOD,
            eff=[add("drinks_tonight", 1)], flags=[fset("heavy_night")]),
         go("Back to the party.", loc="zoe_apartment"),
-    ])]})
+    ]),
+        node("poured", "A red cup", [
+            G(cond(trait("drinks_tonight", "lt", 3)), P("You pour something strong into a red cup and knock half of it back at the counter. It burns all the way down and sits warm in your stomach, and a minute later the music is louder and your cheeks are hot.")),
+            G(cond(trait("drinks_tonight", "gte", 3)), P("Three. The kitchen tips when you turn your head, your lips have gone numb, and you're laughing at nothing with your hip against the counter.")),
+        ], [go("Hold on to the cup.", loc="zoe_kitchen")])]})
 out.append({
     "id": "zoe_kitchen_quiet", "name": "Get a glass of water",
     "description": "Zoe's kitchen on an ordinary evening: a glass of water, one line, writes nothing (zoe_kitchen.md).",
@@ -94,17 +106,21 @@ out.append({
     ], [go("Done.", loc="zoe_apartment", mins=5)])]})
 out.append({
     "id": "zoe_bathroom_face", "name": "Fix your face",
-    "description": "Zoe's bathroom: fix your face in her mirror, hygiene +5, once a night; on party night, the queue (zoe_bathroom.md).",
+    "description": "Zoe's bathroom: fix your face in her mirror, hygiene +5, once a night; on party night, the line (zoe_bathroom.md).",
     "trigger": {"location": "zoe_bathroom", "is_repeatable": True, "priority": 4, "is_active": True},
     "nodes": [node("mirror", "Her mirror", [
         P("Zoe's mirror is ringed with bulbs, and the shelf under it holds more make-up than a shop."),
         G(cond(wd(4), tod("19:00", "00:00")), P("Somebody's banging on the door before you've even shut it. \"Two minutes!\" you shout back.")),
         G(cond(wd(5), tod("00:00", "02:00")), P("Somebody's banging on the door before you've even shut it. \"Two minutes!\" you shout back.")),
     ], [
-        go("Fix your face.", loc="zoe_apartment", mins=10, cond_=cond(flag("zoe_face_today", False)), flags=[fset("zoe_face_today")],
+        # pass 3 D44 (the-surfaces.md R9): her face in the mirror after, not a toast
+        go("Fix your face.", node="fixed", mins=10, cond_=cond(flag("zoe_face_today", False)), flags=[fset("zoe_face_today")],
            eff=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": 5, "cap": 100}]),
         go("Leave it.", loc="zoe_apartment"),
-    ])]})
+    ]),
+        node("fixed", "Her mirror", [
+            P("Lipstick, a flick of liner, your hair shaken out over your shoulders. The girl in Zoe's mirror looks ready to be stared at, and your nipples tighten at the thought."),
+        ], [go("Open the door.", loc="zoe_apartment")])]})
 out.append({
     "id": "zoe_couch_alone", "name": "Sit on her couch",
     "description": "Zoe's living room while Zoe is in her bedroom (Mon-Thu 22:00-00:00): her couch, alone (zoe_apartment.md).",
@@ -152,20 +168,26 @@ out.append({
         # reader a3 #58 (DECISIONS 131): the renders the line above is gated off (Saturday 00:00-02:00, his row, and
         # after hookup_today) get his not-yet too. "Later" names no night, so it is true after a hookup as well.
         G(cond(flag("hookup_today"), wd(5), logic="OR"), D(COCKY, "Not here. Find me later.")),
+        # scene reader b02 (2026-11-03): his next step, named. party_hookup (pools.py) outranks this hub at Bold with
+        # Jake out of the flat, so this hub only shows below Bold or with Jake here.
+        G(cond(flag("hookup_today", False), trait("corruption", "lt", 40)),
+          D(COCKY, "When you're done being a good girl, that bathroom door locks. I'm on this wall till two.")),
+        G(cond(flag("hookup_today", False), trait("corruption", "gte", 40), here("npc_jake", "zoe_apartment")),
+          D(COCKY, "Jake's right over there. When he goes home, that bathroom door locks.")),
     ], [
         # reader a3 #68 (DECISIONS 131): the talk is a screen with a pool he says, three lines, no counter (call B)
         go("Talk with him a while.", node="talk", mins=20),
         # reader a3 #50 (DECISIONS 131): the hub no costs him (call A): his Lust +1 and one line
         go("Walk past him.", node="past", mins=1)]),   # reader a3 #50: he has no Want to pay (validator), so the no is his line
         node("talk", "Talking", [
-            P("You lean on the wall beside him. He talks about the team and about nothing, and he doesn't try to keep his eyes off your tits while he does it."),
+            P("You lean on the wall beside him. He talks about the team and about nothing, but he doesn't try to keep his eyes off your tits while he does it."),
             POOL(D(COCKY, "You're easier to talk to than you look. You look like trouble."),
                  D(COCKY, "Everybody in figure drawing draws the model. I'm drawing you. Your ass, mostly."),
                  D(COCKY, "Zoe throws the best parties going. You know why? She invites girls like you."),
                  pid="cocky_talk_lines", bag=True),
         ], [go("Back to the party.", loc="zoe_apartment", mins=2)]),
         node("past", "Past him", [D(COCKY, "Your loss."), P("He tips his beer at you and watches your ass all the way to the kitchen.")],
-             [go("Go.", loc="zoe_kitchen", mins=1)]),
+             [go("Let him watch you go.", loc="zoe_kitchen", mins=1)]),   # pass 3 D39 (R7)
     ]})
 
 # heat proposal A6 (the keg guy, Zoe's kitchen) and A7 (Jake, Zoe's bathroom), DECISIONS 147 chunk 2 (heat_a.py)
@@ -195,15 +217,15 @@ CAFE_GIRL = G(cond(trait("cafe_footfall", "gte", 10)), WHO("You're the girl from
 STREET_CASES = [
     ("skirt", [SKIRT_ON, PANTIES_ON], 1,
      [D("npc_vance", "Mark's girl is growing up."), P("He doesn't pretend to read his paper. His eyes go up your legs to the hem of your skirt and stay there. He pats the step beside him. You keep walking.")],
-     "The shop guy comes out from behind the counter to stack a box that doesn't need stacking, and watches your legs in that skirt all the way past. He starts to say something. You're gone before he finds it.",
-     "A car slows beside you. The window comes down halfway, and the driver is looking at your legs, not your face. It stays with you to the end of the street. You never look in, and it goes."),
+     "The shop guy comes out from behind the counter to stack a box that doesn't need stacking, and watches your legs in that skirt all the way past. He says it to your back as you go past, and you don't turn round.",
+     "A car slows beside you. The window comes down halfway, and the driver is looking at your legs, not your face. It stays with you to the end of the street, but you never look in, and it goes."),
     ("nobra", [BRA_OFF, SKIRT_OFF, PANTIES_ON], 1,
      [P("Mr. Vance sets the paper down. He looks at your tits, at your nipples pushing at the cloth, and doesn't look away. He nods at the step beside him. Not tonight. You keep walking.")],
-     "The shop guy comes out from behind the counter to stack a box that doesn't need stacking. His eyes are on your tits, loose under your clothes, all the way past. He starts to say something. You're gone before he finds it.",
-     "A car slows beside you. The window comes down halfway, and the driver is staring at your tits. It stays with you to the end of the street. You never look in, and it goes."),
+     "The shop guy comes out from behind the counter to stack a box that doesn't need stacking. His eyes are on your tits, loose under your clothes, all the way past. He says it to your back as you go past, and you don't turn round.",
+     "A car slows beside you. The window comes down halfway, and the driver is staring at your tits. It stays with you to the end of the street, but you never look in, and it goes."),
     # false lines a3 #14 (DECISIONS 129): the breeze needs a skirt or a dress, so no jeans, leggings or shorts
     ("nopanties", [PANTIES_OFF] + [{"type": "worn_type", "operator": "neq", "value": t} for t in ("jeans", "leggings", "shorts")], 2,
-     [P("A breeze comes down the street as you pass his gate, and there's nothing under your clothes to stop it. Your pussy is bare under there. Mr. Vance stands up off his chair with his eyes on your hips, and takes one step toward the gate. You don't stop. Not tonight.")],
+     [P("A breeze comes down the street as you pass the landlord's gate, and there's nothing under your clothes to stop it. Your pussy is bare under there. Mr. Vance stands up off his chair with his eyes on your hips, and takes one step toward the gate, but you don't stop. Not tonight.")],
      "The shop guy drops his change on the step and stares at your ass, like he knows there's nothing under your clothes. \"Come in a minute.\" You don't. He doesn't pick the change up until you've turned the corner.",
      "A car slows, then stops. Someone inside whistles at your ass. \"Get in.\" You don't walk faster, and you don't get in."),
 ]
@@ -215,6 +237,10 @@ STREET_POOLS = {
                       "no panties skirt wind street", "skirt blows up no panties walking", pool_dir="sex/street_seen_nopanties_t4")],
 }
 SHOP_NEXT = "He'll be out front tomorrow."
+SHOP_SAID = {"skirt": "Nice day for a skirt like that, sweetheart.", "nobra": "Cold out today, is it? Come in and warm up.",
+             "nopanties": "I mean it. Come in a minute. Just a minute."}
+CAR_SAID = {"skirt": "Hey, legs! Where are you walking to? I'll drive you.", "nobra": "Jesus, look at those. Get in, I'll give you a lift.",
+            "nopanties": "I said get in. I saw that breeze, sweetheart."}
 CAR_NEXT = "The same car's parked at the corner the next time you look."
 for case, worn, lv, vance, shop, car in STREET_CASES:
     first = f"street_first_l{lv}"
@@ -230,7 +256,8 @@ for case, worn, lv, vance, shop, car in STREET_CASES:
                             eff=(pay_first if is_first else pay_after) + extra_eff,
                             flags=[fset("out_shown_today")] + ([fset(first)] if is_first else [])))
     out.append({
-        "id": f"street_seen_{case}", "name": "Somebody's looking",
+        "id": f"street_seen_{case}", "name": {"skirt": "Walk the street in your short skirt", "nobra": "Walk the street with no bra",
+                                              "nopanties": "Walk the street with no panties"}[case],   # pass 3 H33/H34 (the-voice.md R1, D11): the name says what happens if she clicks, and never hides the act
         "description": f"The street sees what she's wearing ({case}): one witness a day by the hour; the first day out in level {lv} pays both meters, after that Exhibitionism (meters.md rule 2).",
         "trigger": {"location": "street", "is_repeatable": True, "priority": 3 + lv, "is_active": True, "max_triggers_per_day": 1,
                     "conditions": cond(flag("out_shown_today", False), *worn)},
@@ -238,9 +265,10 @@ for case, worn, lv, vance, shop, car in STREET_CASES:
             G(cond(VANCE_PORCH), *vance, P("He'll be on his porch tomorrow evening. He always is.")),
             # reader a3 #46-48 (DECISIONS 131): the shop and car renders point at what comes next. The corner shop
             # opens every day 07:00-22:00 (corner_shop.md), so its guy is out front on any daytime walk.
-            G(cond(VANCE_AWAY, DAYTIME), P(shop), P(SHOP_NEXT)),
-            G(cond(VANCE_AWAY, NIGHT), P(car), P(CAR_NEXT)),
-            G(cond(VANCE_AWAY, tod("18:00", "22:00")), P(car), P(CAR_NEXT)),
+            # pass 3 B4: the witness says it out loud (strangers: WHO)
+            G(cond(VANCE_AWAY, DAYTIME), P(shop), WHO(SHOP_SAID[case]), P(SHOP_NEXT)),
+            G(cond(VANCE_AWAY, NIGHT), P(car), WHO(CAR_SAID[case]), ME("Keep driving."), P(CAR_NEXT)),
+            G(cond(VANCE_AWAY, tod("18:00", "22:00")), P(car), WHO(CAR_SAID[case]), ME("Keep driving."), P(CAR_NEXT)),
             CAFE_GIRL,
             *STREET_POOLS.get(case, []),
         ], exits)]})

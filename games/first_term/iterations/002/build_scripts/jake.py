@@ -35,7 +35,7 @@ out.append({
             go("\"Not now.\"", node="no", mins=2),
         ]),
         node("kiss", "In front of them", [
-            P("He kisses you right there, in front of all of them, his hand low on your back, low enough that it's on your ass by the end. Somebody whistles. You feel him hard against your hip, and you move his hand back up to your waist. Not in front of them. Not yet. He pulls back grinning, red to the ears."),
+            P("He kisses you right there, in front of all of them, his hand low on your back, low enough that it's on your ass by the end. Somebody whistles. You feel him hard against your hip, but you move his hand back up to your waist. Not in front of them. Not yet. He pulls back grinning, red to the ears."),
             D(J, "Again. They missed it."),
             T("He wants them to see you're his. You want them to see too."),
         ], [go("\"Again.\"", node="ask", mins=3, eff=[add("exhibitionism", 3, cap=79)])]),
@@ -45,7 +45,8 @@ out.append({
             D(J, "Saturday."),
         ], [go("\"Saturday.\"", loc="quad", mins=5, consumes=True,
                eff=[setv("jake_step", 2)], flags=[done(2), fset("jake_date_booked")])]),
-        no_node("no", [D(J, "Later, then. I'll be here."), P("The guys jeer at him. He shoves the nearest one and grins after you all the way across the quad.")], "quad", 2),
+        no_node("no", [D(J, "Later, then. I'll be here."), P("The guys jeer at him. He shoves the nearest one and grins after you all the way across the quad.")], "quad", 2,
+                label="Leave him with the guys."),
     ]})
 
 # ── step 3 · Jake B 3 · my boyfriend (the voice sample; every screen as signed) ──
@@ -75,10 +76,10 @@ out.append({
             D(L, "Was he any good?"),
             G(cond(LAURA_DRESS), ME("Better in your dress.")),
             G(cond({"type": "clothing_item", "item_id": "laura_blue_dress", "operator": "unequipped"}), ME("Better with you watching.")),
-            P("She makes a sound in her throat. She doesn't get up."),
+            P("She makes a sound in her throat, but she doesn't get up."),
             P("You climb the stairs. Ryan's door is shut, and his light is on under it. You stand outside it a second. You don't knock, but you don't move either. You wanted him to see. You said Jake's name to his face on purpose, and you're not sorry. Not even a little. Jake will want a next Saturday. You already know it. Your phone buzzes in your hand. It's Jake: \"Next Saturday?\" Under Ryan's door, the light goes out."),
             D(R, "Who's Jake, @player.nickname? Really. Who is he?"),
-            P("He says it through the door, low. He doesn't open it."),
+            P("He says it through the door, low, but he doesn't open it."),
         ], [go("Go to bed.", loc="home_ella_room", mins=5, consumes=True,
                eff=[setv("jake_step", 3)], flags=[done(3), funset("jake_date_booked")])]),
         node("no", "A kiss on the cheek", [
@@ -118,11 +119,13 @@ out.append({
                 P("Dinner at the place with the candles. He talks about the team, and the coach, and a guy who threw up on the bus, and you laugh in the right places. He holds your hand on the table where the whole restaurant can see it. Afterwards he drives you home the long way, one hand on the wheel and one on your knee."),
                 P("A film you don't watch. He has his arm round you from the trailers, and his hand on your knee from the first scene, and every time somebody comes down the aisle he kisses you so they'll see. He drives you home through the park, slowly."),
                 pid="jake_date_lines"),
+            # scene reader b03 (2026-11-03): the not-yet on the body (H4.3)
+            P("His hand on your knee squeezes, and his thumb strokes the inside of it, but it never goes higher up your thigh. Not in public. Not yet."),
             D(J, "You're the best-looking girl in this whole town, you know that? Everyone was looking."),
         ], [go("Let him drive you home.", loc="home_front_door", mins=m, cond_=cond(tod(a, b))) for (a, b), m in BACK_AT_11]),
         node("stink", "Not like that", [
             P("He leans in to kiss you hello and stops halfway, his nose wrinkling."),
-            D(J, "Babe. Did you shower today? I booked the place with the candles. Go wash. I'll text you."),
+            D(J, "Gorgeous. Did you shower today? I booked the place with the candles. Go wash. I'll text you."),
             P("He goes back to his car. You can smell it on yourself now too."),
         ], [go("Close the door.", loc="home_front_door", mins=2)]),
         node("no", "Not tonight", [D(J, "Oh. Okay. Next week?"), P("He stands on the step for a second with his keys, then goes. He texts you from the car before he's even started it.")],
@@ -153,19 +156,23 @@ out.append({
             P("He grins and walks backwards down the path, all the way to the car."),
         ], [go("Go in.", loc="home_hall", mins=2, retry=7, flags=[funset("jake_date_booked")])]),
         node("bed", "Your room", [P(beat("jake_04_sneak_him_in", "bed")),
-            VID("a guy pinning a girl's wrists on her bed, pushing into her", "boyfriend pins her wrists sex bed", "first time sex her bedroom", pool_dir="sex/jake_04_bed_t5")],
+            VID("a guy pinning a girl's wrists on her bed, pushing into her", "boyfriend pins her wrists sex bed", "first time sex her bedroom", pool_dir="sex/jake_04_bed_t5"),
+            D(J, "God, you're tight. Is this okay? Tell me this is okay."), ME("It's okay. Don't you dare be gentle.")],
             [go("Harder.", node="wall", mins=10)]),
         node("wall", "Ryan's wall", [P(beat("jake_04_sneak_him_in", "wall")),
-            VID("a headboard banging a wall during sex", "headboard banging wall sex", "loud sex headboard thin wall", pool_dir="sex/jake_04_wall_t5")],
+            VID("a headboard banging a wall during sex", "headboard banging wall sex", "loud sex headboard thin wall", pool_dir="sex/jake_04_wall_t5"),
+            D(J, "Your bed's hitting the wall. Who's on the other side?"), ME("My brother. Don't stop.")],
             [go("Don't stop.", node="landing", mins=5, cond_=cond(DOOR_UNLOCKED)),
              go("Don't stop.", node="comes", mins=5, cond_=cond(flag("her_door_unlocked", False)))]),
-        node("landing", "The landing", [
-            P("A footstep on the landing. You both freeze. Your door has no key, not since Sunday."),
+        node("landing", "The hall", [
+            P("A footstep in the hall. You both freeze. Your door has no key. Mark's still got it."),
             P("Jake's hand goes over your mouth. The footstep stops, and then goes on, and a door closes."),
             P("He doesn't pull out. He starts again, slower."),
+            D(J, "Who was that?"), ME("Nobody. Keep going. Slow, like that."),
         ], [go("Don't stop.", node="comes", mins=5)]),
         node("comes", "Still", [P(beat("jake_04_sneak_him_in", "comes")),
-            VID("a couple coming together, her hand over his mouth, still afterwards", "couple cum together quiet", "creampie boyfriend her bed", pool_dir="sex/jake_04_comes_t5")],
+            VID("a couple coming together, her hand over his mouth, still afterwards", "couple cum together quiet", "creampie boyfriend her bed", pool_dir="sex/jake_04_comes_t5"),
+            D(J, "Fuck. Fuck, @player. I'm still inside you."), ME("Stay there. Don't move yet.")],
             [go("Lie there.", node="after", mins=10)]),
         node("after", "Through the wall", [
             # reader a3 #22 (DECISIONS 131): the yes path points ahead. True: after step 4 the date end's "Come up." is his
@@ -203,8 +210,13 @@ out.append({
                 "conditions": cond(flag("jake_date_went"), WENT_TONIGHT, trait("jake_step", "gte", 3))},
     "nodes": [
         node("door", "The car", [
-            P("Jake parks outside the house and kills the engine. The street lamp lights the whole car."),
+            # reader batch 5 (pass 3): the car beats (sheet jake_date_end) park him and kill the engine, so this line doesn't
+            P("All the way home Jake's hand has been on your knee, and it's still there as he turns into your street."),
             G(cond(LAURA_DRESS), D(J, "Everyone was looking at you tonight.")),
+            # pass 3 B4: the car talks
+            D(J, "So. That was a good night. Right? Tell me that was a good night."),
+            ME("It was a good night, Jake."),
+            D(J, "Good. Because I'm not ready for it to be over yet."),
         ], [
             # DECISIONS 124: grinding in his lap is private contact (Bold); his hand or hers under the street lamp is sex strangers can see (Hungry).
             # jake_step gte 3, not eq 3: his step 4 takes the first Bold Saturday, so the car stays open after it.
@@ -218,13 +230,16 @@ out.append({
             go("\"Goodnight, Jake.\"", node="night", mins=2),
         ]),
         node("car_low", "The car", [*CAR_LOW_BLOCKS,
-            VID("a couple making out in a parked car at night, windows fogging", "couple making out parked car night", "car makeout outside her house", pool_dir="sex/jake_car_low_t4")],
+            VID("a couple making out in a parked car at night, windows fogging", "couple making out parked car night", "car makeout outside her house", pool_dir="sex/jake_car_low_t4"),
+            D(J, "The whole street can see the windows fogging up."), ME("Then stop breathing so hard.")],
             [go("\"Goodnight, gorgeous.\"", loc="home_hall", mins=20, eff=CAR_PAY(39), flags=[funset("jake_date_booked")])]),   # car_low opens at 20 (G8)
         node("car_his", "His hand", [*top_or_dress(beat("jake_date_end", "car_his")),
-            VID("a guy fingering his girlfriend in a parked car under a street lamp", "fingering in parked car", "car fingering orgasm street lamp", pool_dir="sex/jake_car_his_t5")],
+            VID("a guy fingering his girlfriend in a parked car under a street lamp", "fingering in parked car", "car fingering orgasm street lamp", pool_dir="sex/jake_car_his_t5"),
+            D(J, "You're soaked. Right here under the street lamp, and you're soaked."), ME("Don't stop. Let them look.")],
             [go("\"Goodnight, gorgeous.\"", loc="home_hall", mins=20, eff=CAR_PAY(79), flags=[funset("jake_date_booked")])]),
         node("car_hers", "Your hand", [*top_or_dress(beat("jake_date_end", "car_hers")),
-            VID("a girl giving her boyfriend a handjob in a parked car, a passer-by looking", "handjob in parked car", "car handjob caught", pool_dir="sex/jake_car_hers_t5")],
+            VID("a girl giving her boyfriend a handjob in a parked car, a passer-by looking", "handjob in parked car", "car handjob caught", pool_dir="sex/jake_car_hers_t5"),
+            D(J, "Fuck. That guy saw. That guy totally saw."), ME("Good. Now he knows whose you are.")],
             [go("\"Goodnight, gorgeous.\"", loc="home_hall", mins=20, eff=CAR_PAY(79), flags=[funset("jake_date_booked")])]),
         node("sneak", "Up the stairs", [
             POOL(P(beat("jake_date_end", "`sneak` a")), P(beat("jake_date_end", "`sneak` b")), pid="jake_sneak", bag=True),
@@ -233,8 +248,10 @@ out.append({
               D(J, "Your mom?"), ME("Shh.")),
             G(cond(ROLL("eq", 2), flag("ryan_knock_code")), P("Two knocks on the wall. Slow. Ryan's code."), D(J, "What was that?"), ME("Nothing. The pipes.")),
             VID("a couple having quiet sex in her bedroom at night", "sneaky sex her room at night", "boyfriend snuck in sex quiet", pool_dir="sex/jake_sneak_t5"),
+            D(J, "Your bed's so loud. How is your bed this loud?"), ME("Then fuck me quieter. Don't stop."),
         ], [go("Let him out before dawn.", loc="home_ella_room", mins=300, eff=[CAP("corruption", 1, 59)], flags=[funset("jake_date_booked")])]),
         node("night", "Goodnight", [GC(cond(wd(2)), D(J, "Goodnight, gorgeous. Saturday?")), GC(cond(wd(5)), D(J, "Goodnight, gorgeous. Wednesday?")),
+                                    ME("Goodnight, Jake. Text me when you're home."), D(J, "Already writing it."),
                                     P("He kisses your hand like an idiot and walks backwards down the path.")],
              [go("Go in.", loc="home_hall", mins=2, flags=[funset("jake_date_booked")])]),
     ]})
@@ -248,9 +265,9 @@ JAKE_STATE = [
     G(cond(ZOE_DRESS), P("His eyes go down your legs and stay there.")),
     G(cond(ZOE_DRESS, {"type": "worn_type", "operator": "neq", "value": "short_skirt"}), D(J, "Later. When they're not looking.")),
     G(cond(LAURA_DRESS), D(J, "Everyone's looking at you in that dress.")),   # false lines a3 #23-26: his hubs are daytime
-    G(cond(trait("jake_step", "eq", 1)), P("He puts his hand low on your back the second you're close enough.")),
-    G(cond(trait("jake_step", "eq", 2)), P("He keeps his hand on your back like he's already decided something about you.")),
-    G(cond(trait("jake_step", "eq", 3)), D(J, "Your brother hates me. I could tell at the door.")),
+    G(cond(trait("jake_step", "eq", 1)), P("He puts his hand low on your back the second you're close enough."), D(J, "Hey, you. Sit with us."), ME("Just for a minute.")),
+    G(cond(trait("jake_step", "eq", 2)), P("He keeps his hand on your back like he's already decided something about you."), D(J, "There she is. I was starting to think you were avoiding me."), ME("Maybe I was.")),
+    G(cond(trait("jake_step", "eq", 3)), D(J, "Your brother hates me. I could tell at the door."), ME("Ryan hates everyone. Don't take it personally."), D(J, "He looked at me like I'd stolen something.")),
 ]
 for cid, loc, name, line in [("hub_jake_quad", "quad", "Jake, with the team", "Jake's on the grass with his team, a space on the grass beside him so they'll all see who it's for."),
                               ("hub_jake_canteen", "canteen", "Jake, at lunch", "Jake has a tray with three of everything on it. He pulls you onto the bench next to him."),
@@ -267,7 +284,7 @@ for cid, loc, name, line in [("hub_jake_quad", "quad", "Jake, with the team", "J
             # the no-show text sets it (phone.py jake_date_noshow); the next date clears it
             G(cond(flag("jake_date_booked", False), flag("jake_stood_up")), D(J, "You still owe me a date, you know. Saturday?")),
             *JAKE_STATE,
-        ], [go("Stay with him a while.", loc=loc, mins=20), go("Go.", loc={"quad": "campus", "canteen": "campus"}.get(loc, "town"))])]})
+        ], [go("Stay with him a while.", loc=loc, mins=20), go("Leave him to the guys.", loc={"quad": "campus", "canteen": "campus"}.get(loc, "town"))])]})   # pass 3 D39 (R7)
 
 # ── his face in figure drawing, and at the gym (ledger L18, L27; campus_gym.md) ──
 out.append({
@@ -279,7 +296,7 @@ out.append({
         P("Jake has the easel next to yours and hasn't drawn a line. He's watching you set up instead."),
         POOL(D(J, "Draw me after. I'll hold still, I swear."), D(J, "I'm only in this class for the credits. And you."), pid="jake_class_lines"),
         *JAKE_STATE,
-    ], [go("Talk with him a while.", loc="lecture_hall", mins=10), go("Go.", loc="campus")])]})
+    ], [go("Talk with him a while.", loc="lecture_hall", mins=10), go("Leave him to his easel.", loc="campus")])]})
 
 GYM_CAP = "jake_gym_today"   # once per window (the gym sheet): cleared at midnight
 out.append({
@@ -289,7 +306,7 @@ out.append({
                 "conditions": cond(flag("jake_number"))},
     "nodes": [
         node("rack", "Jake, at the rack", [
-            P("Jake's at the squat rack with the team, in a vest soaked through. He racks the bar when he sees you and doesn't pick it up again."),
+            P("Jake's at the squat rack with the team, in a tank top soaked through. He racks the bar when he sees you and doesn't pick it up again."),
             D(J, "You lift? Come here. I'll show you."),
             *JAKE_STATE,
         ], [
@@ -301,7 +318,7 @@ out.append({
                     {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 19}]),   # no Exhibitionism gate: stage 1 (G8)
             go("Pull him into the locker room.", node="lockers", mins=15, cond_=cond(flag(GYM_CAP, False), BOLD, trait("jake_step", "gte", 2)),
                flags=[fset(GYM_CAP)], eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 59}]),
-            go("Go.", loc="campus"),
+            go("Leave him to his reps.", loc="campus"),
         ]),
         node("spot", "Spotting", [
             P("He spots you on the bench, counting your reps out loud, his hands an inch under the bar the whole time. The team pretends not to watch."),
@@ -309,10 +326,10 @@ out.append({
         ], [go("Done.", loc="campus", mins=5)]),
         node("hips", "His hands on your hips", [
             P("He stands behind you at the rack and puts his hands on your hips to show you how low to go. They stay there on the way down, and on the way back up, and on the next one too. On the third rep your ass brushes him and he's hard, and he steps back fast. Somebody on the team whistles."),
-            D(J, "Lower. Like that. Not here, though. Not with them watching."),
+            D(J, "Lower. Like that. But not here. Not with them watching."),
         ], [go("Done.", loc="campus", mins=5)]),
         node("lockers", "Against the lockers", [
-            P("You take his wrist and walk him into the empty locker room, and he lets you. He kisses you up against the lockers, hard enough that the metal rattles, his hands on your waist, until someone's voice in the corridor makes you both stop."),
+            P("You take his wrist and walk him into the empty locker room, and he lets you. He kisses you up against the lockers, hard enough that the metal rattles, his hands on your waist, until someone's voice just outside the locker room makes you both stop."),
             D(J, "You're going to get me thrown off the team."),
         ], [go("Done.", loc="campus", mins=5)]),
     ]})

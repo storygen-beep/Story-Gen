@@ -78,20 +78,30 @@ def npc_add(npc, key, n):
 
 
 def item(prefix, label, when, key, back, plain_blocks, plain_eff, mins,
-         tease=None, touch=None, done_exits=None, plain_costs=None, teases=()):
+         tease=None, touch=None, done_exits=None, plain_costs=None, teases=(), after=None, no=None):
     """One home_life item in a hub.
 
     when: condition items for the hub choice (hours, weekday, who's there).
     tease / touch: dicts {label, ref, gate (items), eff, what, brake (optional extra flag)} or None;
       their screens are placeholders (the signed line is not written in this build).
     done_exits: replaces the plain "Done." (each must set `key` itself).
+    after: (label, blocks, close[, dest]) — pass 3 D44 (the-surfaces.md R9, LO 2026-11-03): the plain finish is an act with a
+      person, so it lands on a short screen of his or her reaction (node `hl_<prefix>_after`) instead of a toast. The
+      act button keeps every effect and the time; the screen's one exit (`close`) is free. A done_exits caller points
+      its own button at that node.
+    no: (blocks, close) — reader batch 5 (pass 3): his offer's "Not now." lands on a short screen of his reply
+      (node `hl_<prefix>_no`), still free of every cap and cost, then out to the hall as before.
     Returns (hub_choices, nodes)."""
     nid = f"hl_{prefix}"
     hub = brake(go(label, node=nid, cond_=cond(*when)), key)
+    plain_to = dict(node=f"{nid}_after") if after else dict(loc=back)
     exits = done_exits if done_exits is not None else [
-        go("Done.", loc=back, mins=mins, eff=plain_eff, flags=[fset(key)], costs=plain_costs)]
+        go(after[0] if after else "Done.", mins=mins, eff=plain_eff, flags=[fset(key)], costs=plain_costs, **plain_to)]
     exits = list(exits)
     nodes = []
+    if after:
+        # an optional 4th item is where the free exit goes, when the hub would come straight back (gate `a button does something`)
+        nodes.append(node(f"{nid}_after", after[0].rstrip("."), list(after[1]), [go(after[2], loc=after[3] if len(after) > 3 else back)]))
     # teases: more tease rungs on one item, by her stage (first_term DECISIONS 128, the laundry ladder)
     for kind, spec in (("tease", tease), ("touch", touch), *[(f"tease{i}", t) for i, t in enumerate(teases, 2)]):
         if not spec:
@@ -105,7 +115,11 @@ def item(prefix, label, when, key, back, plain_blocks, plain_eff, mins,
         body = list(spec["blocks"]) if spec.get("blocks") else [placeholder(spec["ref"], spec.get("what", kind))]
         nodes.append(node(sub, spec.get("name", kind.title()), body, [go("Done.", loc=back, mins=mins)]))
     # One way out free of every cap and cost (gate: a spent day still has a door, the-surfaces.md R7).
-    exits.append(go("Not now.", loc="home_hall"))
+    if no:
+        exits.append(go("Not now.", node=f"{nid}_no"))
+        nodes.append(node(f"{nid}_no", "Not now", list(no[0]), [go(no[1], loc="home_hall")]))
+    else:
+        exits.append(go("Not now.", loc="home_hall"))
     for c in exits:
         if any(f.get("flag") == key for f in c.get("flagEffects", [])):
             c["conditions"] = _with(c.get("conditions"), [flag(key, False)])
@@ -191,7 +205,7 @@ TOWEL_CAUGHT = [
 
 def towel_set(hub, npc, meter, lo, hi, today, pay, back, lines=(), slip=None, slip_label="Let it slip.",
               slip_gate=(DARING,), slip_lead=(), slip_media=None, drop=None, drop_gate=(), drop_media=None,
-              caught_by=None, caught=None, when=(), no=None):
+              caught_by=None, caught=None, when=(), no=None, seen=None):
     """Returns (hub_blocks, hub_choices, nodes) for one hub.
 
     lines / slip: three lists of blocks, one per band (meter < lo, lo..hi-1, >= hi).
@@ -201,7 +215,10 @@ def towel_set(hub, npc, meter, lo, hi, today, pay, back, lines=(), slip=None, sl
       her Love -3, no pay, and the day's flag still set.
     no: (label, blocks, dest, exit label) for the top band, his order's written no (reader a3 #5-8, DECISIONS 131,
       call A): his Want +1, once a day through the same `today` flag the slip pays on; after that it
-      plays and pays nothing (the mark_tv_paid pattern). No new flag (call B)."""
+      plays and pays nothing (the mark_tv_paid pattern). No new flag (call B).
+    seen: blocks shown instead of his band lines while caught_by is in the room (reader batch 4, pass 3: his
+      "Come here." / his finger on the towel played at the dinner table with Laura sitting there). His order's
+      no hides with his lines, since the order it answers is not on the screen."""
     assert today in DAILY, today
     bands = [[ntrait(npc, meter, "lt", lo)],
              [ntrait(npc, meter, "gte", lo), ntrait(npc, meter, "lt", hi)],
@@ -211,9 +228,12 @@ def towel_set(hub, npc, meter, lo, hi, today, pay, back, lines=(), slip=None, sl
     # group nests past the importer's depth 4 and gets flattened, and a pool of mixed types warns.
     def _entry(b, c):
         return GC(c, *(b["blocks"] if b.get("type") == "group" else [b]))
-    blocks = [POOL(*[_entry(b, cond(*base, *bands[i])) for b in ls], pid=f"{hub}_towel_{i}")
-              for i, ls in enumerate(lines)]
     safe = [here(caught_by, back, False)] if caught_by else []
+    alone = safe if seen else []
+    blocks = [POOL(*[_entry(b, cond(*base, *alone, *bands[i])) for b in ls], pid=f"{hub}_towel_{i}")
+              for i, ls in enumerate(lines)]
+    if seen:
+        blocks.append(G(cond(*base, here(caught_by, back)), *seen))
     choices, nodes = [], []
 
     def paid(label, nid, gate):
@@ -242,9 +262,9 @@ def towel_set(hub, npc, meter, lo, hi, today, pay, back, lines=(), slip=None, sl
     if no:   # reader a3 #5-8 (DECISIONS 131): the top band's no costs him Want +1, once a day
         no_label, no_blocks, no_dest, no_exit = no
         top = [*base, *bands[2]]
-        choices += [go(no_label, node="towel_no", mins=2, cond_=cond(*top, flag(today, False)),
+        choices += [go(no_label, node="towel_no", mins=2, cond_=cond(*top, *alone, flag(today, False)),
                        flags=[fset(today)]),   # C1 (LO 2026-11-03): no Want on her no
-                    go(no_label, node="towel_no", mins=2, cond_=cond(*top, flag(today)))]
+                    go(no_label, node="towel_no", mins=2, cond_=cond(*top, *alone, flag(today)))]
         nodes.append(node("towel_no", no_label.rstrip("."), list(no_blocks), [go(no_exit, loc=no_dest, mins=2)]))
     if drop:
         choices += paid("Drop it.", "towel_drop", [*bands[2], *drop_gate])
@@ -254,5 +274,5 @@ def towel_set(hub, npc, meter, lo, hi, today, pay, back, lines=(), slip=None, sl
         # truth pass (2026-11-03): the choice in reads her in the room; the screen carries it too, so "you see Laura
         # watching you" is the engine's check on the screen itself (one group round the screen: it is the only block)
         nodes.append(node("towel_caught", "Caught", [GC(cond(here(caught_by, back)), *caught)],
-                          [go("Go.", loc="home_hall", mins=2)]))
+                          [go("\"Sorry, Mom.\"", loc="home_hall", mins=2)]))   # pass 3 D39 (R7): the way out answers her
     return blocks, choices, nodes

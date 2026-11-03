@@ -165,9 +165,9 @@ A1_NODES = [
         *NEXT_GYM,
     ], act_exits("Go, before Coach comes.", "campus", 15, LOCKERS, [pay("corruption", 79)], "Leave him to his shower.")),
     node("a1_no", "Not here", [
-        D(J, "Saturday, then."),
+        D(J, "Later, then. When Coach isn't next door."),
         P("He grins, slaps the door frame and jogs off after the team. Through the wall they whistle at him."),
-    ], [go("Go.", loc="campus", mins=2)]),
+    ], [go("\"Later.\"", loc="campus", mins=2)]),   # pass 3 reader: "Saturday." booked nothing; dates book on his phone thread   # pass 3 D39 (the-surfaces.md R7): the way out answers him
 ]
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -214,8 +214,8 @@ A3_NODES = [
             pool_dir="sex/jake_quad_show_t4"),
         WHO("Jesus, Jake."),
         D(J, "Told you. Mine."),
-        T("The whole quad could see your ass, and you didn't pull the hem down."),
-    ], act_exits("Get up off his lap.", "quad", 20, QUAD, [pay("exhibitionism", 79), TALK], "Go.", plain_loc="campus",
+        T("The whole quad could see your ass, but you didn't pull the hem down."),
+    ], act_exits("Get up off his lap.", "quad", 20, QUAD, [pay("exhibitionism", 79), TALK], "Leave him to the guys.", plain_loc="campus",
                  also=["team_saw_quad"])),
     node("a3_do", "In front of them", [
         P(A3_DO),
@@ -225,12 +225,14 @@ A3_NODES = [
         WHO("Jesus Christ, man."),
         D(J, "All mine, guys. Look all you want."),
         T("Half the team just watched you come. Your face is burning, and you'd let him do it again."),
-    ], act_exits("Get up off his lap.", "quad", 20, QUAD, [pay("corruption", 79), pay("exhibitionism", 79), TALK], "Go.",
+    ], act_exits("Get up off his lap.", "quad", 20, QUAD, [pay("corruption", 79), pay("exhibitionism", 79), TALK], "Leave him to the guys.",
                  plain_loc="campus", also=["team_saw_quad"])),
+    # reader batch 5 (pass 3): "Saturday." booked nothing (dates book on his phone thread, phone.py jake_date /
+    # jake_date_wed, and a booking made here could bring him to the door on a Wednesday), so neither line names a day
     node("a3_no", "Not in front of them", [
-        D(J, "Saturday, then."),
+        D(J, "Later, then. When it's just us."),
         P("He lets you up, grinning, and the team jeers at him while you walk off across the grass."),
-    ], [go("Go.", loc="campus", mins=2)]),
+    ], [go("\"Later.\"", loc="campus", mins=2)]),
 ]
 
 
@@ -287,7 +289,7 @@ A2_NODES = [
         P("She pulls her hand out and licks two fingers clean, looking right at you."),
         D(Z, "Eat your lunch, babe. You look flushed."),
         T("Half the canteen could have looked down. You wanted one of them to."),
-    ], act_exits("Finish your lunch.", "canteen", 30, TABLE, [pay("corruption", 79)], "Go.", plain_loc="campus")),
+    ], act_exits("Finish your lunch.", "canteen", 30, TABLE, [pay("corruption", 79)], "Leave her to her lunch.", plain_loc="campus")),
     node("a2_no", "Not here", [
         D(Z, "Later, babe."),
         P("She takes her hand back and steals a fry off your tray instead, grinning."),
@@ -399,11 +401,11 @@ A6_COUNTER = (
     "He lifts you onto the counter and pushes everything you're wearing out of the way. Bottles clink behind you. He "
     "opens his jeans, and his cock is thick and already wet at the tip. He rubs the head over your clit until you're "
     "dripping, then drives into you. You lock your legs round him. He pounds you back against the cupboards, his mouth "
-    "on your tits, sucking a nipple hard. Somebody comes in for a cup and goes straight back out. He doesn't stop. You "
+    "on your tits, sucking a nipple hard. Somebody comes in for a cup and goes straight back out, but he doesn't stop. You "
     "come clenching round his cock, your nails dug into his back.",
 )
 TOWN_CANVASES = [{
-    "id": "keg_guy_counter", "name": "Find the guy from the keg",
+    "id": "keg_guy_counter", "name": "Fuck the keg guy on the counter",   # pass 3 H33/H34 (the-voice.md R1, D11): the name says what happens if she clicks, and never hides the act
     "description": "Heat proposal A6 (DECISIONS 147): party night 22:00-02:00, after keg_guy_dared, Hungry. The guy she "
                    "flashed bends her over Zoe's kitchen counter while the party is through the door. Corruption +1, cap "
                    "79, one a party night.",
@@ -416,6 +418,7 @@ TOWN_CANVASES = [{
             P("The guy from the keg is leaning on the counter with a red cup, right where the bottles are. His grin at you "
               "goes slow, but his eyes go straight to your tits."),
             WHO("Look who's back. I still can't stop thinking about your tits."),
+            ME("Just thinking?"), WHO("Come round this side of the counter and find out."),
             P("Through the door the party is loud and close. Anyone could walk in for a drink."),
             T("Anyone could walk in. That's the point."),
         ], [
@@ -427,7 +430,7 @@ TOWN_CANVASES = [{
             VID("a guy fucking a girl bent over a kitchen counter at a house party, red cups everywhere",
                 "fucked over the kitchen counter at a party", "stranger bends her over counter house party",
                 pool_dir="sex/keg_guy_counter_t5"),
-            WHO("Same keg next Friday."),
+            WHO("Same keg next Friday."), ME("Maybe. If you're lucky."),
             T("You don't even know his name. You'll be back at that keg."),
         ], act_exits("Back to the party.", "zoe_apartment", 15, KEG, [pay("corruption", 79)], "Fix yourself up first.",
                      also=("keg_guy_went",))),
@@ -454,17 +457,17 @@ A7_LOCKED = (
     "inside you.",
     "He turns you to face the mirror and bends you over the sink. In the glass you watch him push your clothes out of "
     "the way. His cock slides into you from behind. He holds your hips and thrusts, hard and steady, his eyes on yours "
-    "in the mirror. The queue knocks on the door. Your tits bounce over the basin with every stroke. He reaches round "
+    "in the mirror. The line knocks on the door. Your tits bounce over the basin with every stroke. He reaches round "
     "and squeezes one, rough, and you come on his cock with your palm flat on the cold glass.",
 )
 A7_OPEN = (
     "You don't lock it. Jake sees, and his grin goes wolfish. He shoves your clothes aside, bends you over the sink "
-    "with the queue right outside, and fucks you hard, his cock slamming in deep. The handle turns. The door swings "
+    "with the line right outside, and fucks you hard, his cock slamming in deep. The handle turns. The door swings "
     "open a foot, and a girl with a red cup stares straight at your ass and his cock sliding in and out of you. Jake "
     "doesn't stop. He fucks you faster while she watches, until he pulls you back onto him and his cum runs down your "
     "thighs.",
     "The door stays unlocked, and you both know it. Jake drags your clothes out of the way. He sits on the edge of the "
-    "bath and pulls you down onto his cock, facing the door. You ride him hard, your tits bouncing, while the queue "
+    "bath and pulls you down onto his cock, facing the door. You ride him hard, your tits bouncing, while the line "
     "bangs on the wood. Somebody pushes the door open, sees you, and doesn't shut it. Jake grips your hips and fucks up "
     "into you, faster and harder. You come on his cock in front of the open door, and he groans and fills you with his "
     "cum.",
@@ -485,7 +488,9 @@ TOWN_CANVASES.append({
             P("Jake catches your wrist at the bathroom door and backs you inside. The party thumps through the wall. "
               "Somebody is already queueing in the hall."),
             D(J, "Five minutes. Nobody will notice."),
-            T("Everybody will notice. You want him anyway."),
+            ME("Five minutes? You've never lasted five minutes."),   # pass 3 B3: the talk beside her thought
+            D(J, "Then lock the door and find out."),
+            T("Everybody will notice, but you want him anyway."),
         ], [
             go("Lock the door.", node="locked", mins=0, cond_=cond(BOLD, BATH_FREE)),
             go("Leave it unlocked.", node="open", mins=0, cond_=cond(HUNGRY, BATH_FREE)),
@@ -496,8 +501,9 @@ TOWN_CANVASES.append({
             VID("a guy fucking his girlfriend on a bathroom sink at a house party, make-up everywhere, someone knocking",
                 "sex on bathroom sink at party", "boyfriend fucks her on the sink at a house party",
                 pool_dir="sex/jake_bathroom_locked_t5"),
-            D(J, "Saturday. Your room. I mean it."),
-            T("Somebody in that queue heard every second. Good."),
+            WHO("Some of us need to pee in here!"),
+            D(J, "Next date. Your room. I mean it."),
+            T("Somebody in that line heard every second. Good."),
         ], act_exits("Back to the party.", "zoe_apartment", 15, BATH, [pay("corruption", 59)], "Fix your face first.")),
         node("open", "The door open", [
             bag("jake_bathroom_open", *A7_OPEN),
@@ -505,11 +511,12 @@ TOWN_CANVASES.append({
                 "caught fucking in party bathroom door open", "sex with the bathroom door unlocked party",
                 pool_dir="sex/jake_bathroom_open_t5"),
             WHO("Oh my God. Sorry!"),
-            D(J, "Saturday. Your room. I mean it."),
-            T("By the end of the night half the party will know. You don't care."),
+            ME("Leave it open."),
+            D(J, "Next date. Your room. I mean it."),
+            T("By the end of the night half the party will know, but you don't care."),
         ], act_exits("Back to the party.", "zoe_apartment", 15, BATH, [pay("corruption", 79)], "Fix your face first.")),
         node("no", "Not at Zoe's", [
-            D(J, "Saturday, then."),
+            D(J, "Later, then. Somewhere with a lock."),
             P("He kisses your neck once and lets you go back out into the noise."),
         ], [go("Back to the party.", loc="zoe_apartment", mins=2)]),
     ]})

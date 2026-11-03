@@ -60,7 +60,7 @@ out.append({
             G(cond(flag("nadia_met")), P("Nadia waves you over to the free seat beside her in the front row and moves her bag off it."),
               D("npc_nadia", "Nobody sits at the front for him. You'll see why.")),
             G(cond(SKIRT), P("You sit down and your skirt rides up your thighs. You tug it. He watches you tug it.")),
-            P("He goes back to his slide. Then his pen slips out of his fingers and rolls off the stage, and stops against your shoe. He doesn't bend for it. He waits."),
+            P("He goes back to his slide. Then his pen slips out of his fingers and rolls off the stage, and stops against your shoe, but he doesn't bend for it. He waits."),
         ], [
             # false lines a3 #20 (reader): Nadia is met here, after the screen that introduces her has rendered
             go("Pick it up.", node="pen", mins=2, flags=[fset("nadia_met"), fset("desk_guy_met"), fset("rival_met")]),
@@ -78,7 +78,7 @@ out.append({
         node("nadia", "Last spring", [
             P("The girl beside you leans over while the room packs up, and says it without looking up from her bag."),
             D(N, "He does that. Last spring it was me."),
-            D(N, "His wife picks him up Thursdays. Half past seven, in the car park, every week. Ask anyone. He's very careful about Thursdays."),
+            D(N, "His wife picks him up Thursdays. Half past seven, in the parking lot, every week. Ask anyone. He's very careful about Thursdays."),
             G(cond(flag("hale_pen_picked")), T("Your professor got hard looking at you, and the girl beside you thinks it's funny. Welcome to college.")),
             G(cond(flag("hale_pen_picked", False)), T("He made the whole room watch you. On purpose.")),
         ], [go("\"After class.\"", loc="campus", mins=5)]),
@@ -113,17 +113,20 @@ out.append({
         ]),
         node("flash", "Nothing under it", [
             G(cond(flag("hale02_took_them_off")), P("You went to the toilets before class and took your panties off and put them in your bag.")),
-            G(cond(flag("hale02_took_them_off", False)), P("You came to class with nothing under it, and he doesn't know that yet.")),
+            G(cond(flag("hale02_took_them_off", False)), P("You came to class with nothing under it, but he doesn't know that yet.")),
             G(cond(SKIRT), P("Now you uncross your legs, slowly, in the front row, and let him see.")),
             G(cond(NOT_SKIRT, NO_DRESS), P("Now you lean back in the front row and pull your waistband down an inch at the hip, slowly, and let him see there's nothing under it.")),
             G(cond(IN_DRESS), P("Now you lean back in the front row and inch your hem up your thigh, slowly, and let him see there's nothing under it.")),
             P("Dr. Hale stops in the middle of a sentence. He doesn't start it again. He looks at you and three rows behind you hear the silence, and somebody coughs, and he looks down at his notes like they're in another language."),
+            D(H, "Where was I. Attachment. Secure attachment, and its, its opposite."),   # pass 3 B3: he says it, beside her thought
+            WHO("Page forty, sir. You were on page forty."),
         ], [go("\"You lost your place, Dr. Hale.\"", node="after", mins=60, eff=[add("exhibitionism", 3, cap=79)])]),
         node("after", "Office hours", [
             P("After class he waits until the room has emptied before he speaks to you. He keeps the lectern between you."),
             D(H, "Not here, @player. Office hours."),
             ME("When?"),
             D(H, "Thursday. After six."),
+            ME("I'll bring my essay."), D(H, "Bring the essay. And sit in the second row next time, @player."),
             T("He named the hour himself."),
         ], [go("\"Thursday.\"", loc="campus", mins=5, consumes=True,
                eff=[setv("hale_step", 2)], flags=[done(2)])]),
@@ -149,7 +152,7 @@ out.append({
             P("He reaches over without looking and turns the photo face-down."),
             G(cond(trait("grade_psych", "lt", 40)), D(H, "You're failing, @player. I coach students who want to understand the material.")),
             G(cond(trait("grade_psych", "gte", 40), trait("grade_psych", "lt", 70)), D(H, "Your grade is a C, @player. I coach students who want to understand the material.")),
-            G(cond(trait("grade_psych", "gte", 70)), D(H, "Your grade is good, @player. Good isn't understanding. I coach students who want to understand the material.")),
+            G(cond(trait("grade_psych", "gte", 70)), D(H, "Your grade is good, @player, but good isn't understanding. I coach students who want to understand the material.")),
             P("He comes round the desk and stands behind you, and his hand settles on your shoulder, warm and heavy, and stays."),
             D(H, "Psychology starts with a person's sexuality. If you don't understand yours, you won't get any further."),
             G(cond(trait("corruption", "lt", 20)), T("He's your professor. He's married.")),
@@ -165,10 +168,10 @@ out.append({
         ], [go("Pick up your paper.", node="portal", mins=5, flags=[fset("hale_coaching_offered")])]),
         node("isnt", "A C", [
             D(H, "Then your grade stays where it is."),
-            P("He takes his hand away. He doesn't turn the photo back over."),
+            P("He takes his hand away, but he doesn't turn the photo back over."),
         ], [go("Pick up your paper.", node="portal", mins=2, flags=[fset("hale_coaching_offered")])]),
         node("out", "The offer stands", [
-            P("You pick up your bag and walk out without a word. His voice follows you into the corridor, calm, not raised."),
+            P("You pick up your bag and walk out without a word. His voice follows you out onto the faculty floor, calm, not raised."),
             D(H, "Thursday, @player. The offer stands."),
         ], [go("Keep walking.", node="portal", mins=2, flags=[fset("hale_coaching_offered")])]),
         node("portal", "The portal", [
@@ -207,22 +210,22 @@ out.append({
             P("Dr. Hale takes his hand away, not fast. He doesn't look at the door. He looks at you."),
             D(H, "My wife. Same time next week, @player."),
             T("You want to know what he'd do next."),
-        ], [go("Go.", node="corridor", mins=2, flags=[fset("claire_met")])]),
-        node("corridor", "The corridor", [
+        ], [go("Pick up your bag.", node="corridor", mins=2, flags=[fset("claire_met")])]),   # pass 3 D39 (R7)
+        node("corridor", "The faculty floor", [
             P("You pull your clothes straight and pick up your bag. He unlocks the door for you."),
-            P("His wife is in the corridor in a neat coat, car keys in her hand. Her smile stops halfway when she sees you. Her eyes go to your face, and then past you, to the face-down photo on his desk."),
+            P("His wife is out on the faculty floor in a neat coat, car keys in her hand. Her smile stops halfway when she sees you. Her eyes go to your face, and then past you, to the face-down photo on his desk."),
             D(H, "Claire. This is one of my students."),
-            P("You walk the whole corridor without looking back. Your legs are shaking."),
+            P("You walk the whole length of the faculty floor without looking back. Your legs are shaking."),
         ], [go("Go home.", loc="home_hall", mins=25, consumes=True, eff=[setv("hale_step", 4)], flags=[done(4), fset("hale_touched")])]),
-        node("isnt", "A C", [
+        node("isnt", "Not coaching", [
             P("You pull everything back down over your tits."),
             ME("This isn't coaching."),
             P("He sits back in his chair."),
             D(H, "Then your grade stays where it is."),
             P("He doesn't unlock the door until you're at it."),
-        ], [go("Leave.", loc="faculty_floor", mins=5, retry=7)]),
+        ], [go("Leave him with your grade.", loc="faculty_floor", mins=5, retry=7)]),   # reader pass 3 b01: no grade_psych gate here, so no letter
         node("run", "Run", [
-            P("You grab your bag and you're out of the door before he can stand up. In the corridor a woman with short dark hair is coming the other way with car keys in her hand. The woman in the photo."),
+            P("You grab your bag and you're out of the door before he can stand up. Out on the faculty floor a woman with short dark hair is coming the other way with car keys in her hand. The woman in the photo."),
             P("She smiles at you, polite, the way you smile at a student."),
             T("His wife. She has no idea."),
         ], [go("Keep walking.", loc="campus", mins=5, retry=7, eff=[add("grade_psych", -2) | {"clamp": True}], flags=[fset("claire_met")])]),
@@ -234,12 +237,23 @@ out.append({
 LOW_CASES = [[trait("corruption", "lt", 60)]]
 HIGH = [trait("corruption", "gte", 60)]
 ROLL = lambda op, v: trait("hale_claire_roll", op, v)
+# fix_g3c: the high session in a dress, after "You pull your dress over your head": no garment is left to name for sure
+DRESS_OFF_HAND = (("You slide your hand inside your clothes.", "You slide your hand down to your cunt."),
+                  ("His hand slides inside your clothes and rests flat on your belly.", "His hand slides down your bare belly and rests there, flat."),
+                  ("Your hand is down inside your clothes, two fingers on your clit.", "Your hand is down between your open thighs, two fingers on your clit."))
+
+
+def _dress_off(text):
+    for a, b in DRESS_OFF_HAND:
+        text = text.replace(a, b)
+    assert "inside your clothes" not in text, text[:60]
+    return text
 # each meter stops at the top of its own stage: the high session needs Corruption 60 but only Exhibitionism 40
 # (the trigger), so its Exhibitionism stops at 59 (pass 3 G8)
 SEX_HYGIENE = {"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}   # pass 3 E95
 SESSION_PAY = lambda c, e=None: [add("grade_psych", 2), CAP("corruption", 1, c), CAP("exhibitionism", 1, e or c)]
 out.append({
-    "id": "hale_thursdays", "name": "Thursday, half past six",
+    "id": "hale_thursdays", "name": "Earn your grade in Dr. Hale's office",   # pass 3 H33/H34 (the-voice.md R1, D11): the name says what happens if she clicks, and never hides the act
     # reader a3, seen by the readers (DECISIONS 131): the stages match the trigger (Corruption 40, Exhibitionism 40)
     "description": "The Thursday session after Hale's step 4: his hands over her clothes (Bold and Showing: Corruption 40, Exhibitionism 40) or her top off and touching herself while he takes notes (Hungry: Corruption 60). Grade +2, both meters +1. Claire is early one Thursday in four. Hale, further: next release.",
     "trigger": {"location": "hale_office", "requires_npc": H, "is_repeatable": True, "priority": 5, "is_active": True,
@@ -248,9 +262,10 @@ out.append({
                 "conditions": cond(trait("hale_step", "eq", 4), trait("corruption", "gte", 40), trait("exhibitionism", "gte", 40))},
     "nodes": [
         node("door", "Twenty minutes", [
-            P("His office door is unlocked. He locks it behind you without a word. The photo is already face-down."),
+            P("Dr. Hale's office door is unlocked. He locks it behind you without a word. The photo is already face-down."),
             D(H, "Twenty minutes, @player."),
-            G(cond(flag("hale_thursday_booked")), D(H, "Half past six, you wrote. You're on time.")),   # P10 (round 2): the booking read
+            G(cond(flag("hale_thursday_booked"), tod("18:30", "18:40")), D(H, "Half past six, you wrote. You're on time.")),   # P10 (round 2): the booking read
+            G(cond(flag("hale_thursday_booked"), tod("18:40", "19:05")), D(H, "Half past six, you wrote. You're late, @player. Don't be late again.")),   # scene reader b02: the window runs to 19:05
         # pass 3 E95: the session costs 10 energy on the way in (greyed "Requires 10 Energy" when she is spent; the roll
         # screen has no way out, so the price can't sit behind it), and his hands lower her hygiene on the act itself
         ], [go("Let him.", node="roll", mins=1, costs=[{"trait": "energy", "value": 10}], eff=[{"targetType": "player", "trait": "hale_claire_roll", "op": "set", "value": {"type": "random", "min": 1, "max": 4}}]),
@@ -267,30 +282,35 @@ out.append({
             *[GC(cond({"type": "clothing_item", "item_id": d, "operator": "equipped"}), POOL(*[P(beat("hale_thursday_session", k).replace("your top", "your dress")) for k in ("A a", "A b", "A c")], pid=f"hale_touch_low_{d}", bag=True)) for d in DRESSES],
             VID("a professor's hands on a student over her clothes in his office, her answering him", "professor touches student over clothes office", "teacher hands on student body talking", pool_dir="sex/hale_thursday_low_t4")],
             [go("\"Same time next week.\"", node="end", mins=15, eff=SESSION_PAY(59))]),
-        node("touch_high", "Describe it", [POOL(P(beat("hale_thursday_session", "B a")), P(beat("hale_thursday_session", "B b")), P(beat("hale_thursday_session", "B c")), pid="hale_touch_high", bag=True),
+        # scene reader b02 (2026-11-03): in a dress the top she pulls off is the dress, as touch_low already does
+        node("touch_high", "Describe it", [GC(cond(*[{"type": "clothing_item", "item_id": d, "operator": "unequipped"} for d in DRESSES]), POOL(P(beat("hale_thursday_session", "B a")), P(beat("hale_thursday_session", "B b")), P(beat("hale_thursday_session", "B c")), pid="hale_touch_high", bag=True)),
+            # fix_g3c: with the dress off over her head nothing says she has panties on, so the hand goes to her body
+            # itself (her clit is the next word in all three), not "inside your panties"
+            *[GC(cond({"type": "clothing_item", "item_id": d, "operator": "equipped"}), POOL(*[P(_dress_off(beat("hale_thursday_session", k).replace("your top", "your dress"))) for k in ("B a", "B b", "B c")], pid=f"hale_touch_high_{d}", bag=True)) for d in DRESSES],
             VID("a topless student touching herself in her professor's office while he watches and takes notes", "student masturbates professor watches notes", "girl touches herself teacher watching office", pool_dir="sex/hale_thursday_high_t5")],
             [go("\"Same time next week.\"", node="end", mins=15, eff=SESSION_PAY(79, 59))]),
         node("claire_car", "She's early", [
             P("His phone buzzes on the desk before he's touched you. He reads it and his face goes flat."),
-            D(H, "She's early. She's in the car park."),
+            D(H, "She's early. She's in the parking lot."),
             P("He unlocks the door and holds it open."),
             D(H, "Next Thursday."),
-            P("From the corridor window you can see a car with its engine running."),
-        ], [go("Go.", loc="faculty_floor", mins=5, eff=[add("grade_psych", 2)])]),
+            P("From the window at the end of the faculty floor you can see a car with its engine running."),
+        ], [go("\"Next Thursday.\"", loc="faculty_floor", mins=5, eff=[add("grade_psych", 2)])]),
         node("end", "Thursday", [
             P("He looks at the clock, and straightens his tie, and unlocks the door."),
             D(H, "Thursday."),
-            P("Down in the car park his wife's car isn't there yet."),
-        ], [go("Go.", loc="faculty_floor", mins=2)]),
-        node("isnt", "A C", [
+            P("Down in the parking lot his wife's car isn't there yet."),
+        ], [go("\"Thursday.\"", loc="faculty_floor", mins=2)]),
+        # scene reader b02 (2026-11-03): the no costs a grade point (grade_psych -1), so he says it goes down; no letter named
+        node("isnt", "Not coaching", [
             ME("This isn't coaching."),
-            D(H, "Then your grade stays where it is."),
+            D(H, "Then your grade goes down, @player. Not up."),
             P("He turns the photo face-up and doesn't look at you while you go."),
-        ], [go("Go.", loc="faculty_floor", mins=2)]),
+        ], [go("Leave him to his photo.", loc="faculty_floor", mins=2)]),
         node("run", "Run", [
             P("You're out of the door before he's out of his chair. Behind you, calm, not raised:"),
             D(H, "Next Thursday, @player."),
-        ], [go("Go.", loc="faculty_floor", mins=2)]),
+        ], [go("Keep walking.", loc="faculty_floor", mins=2)]),
     ]})
 
 # ── his office hub (one line on her grade, one on her clothes; the start choice) ──
@@ -329,7 +349,7 @@ out.append({
         go("Ask him about your essay.", node="essay", mins=0),
         go("\"Bye, Dr. Hale.\"", loc="faculty_floor")]),
         node("essay", "Your essay", [
-            P("He reads your essay at the desk with his pen out, and talks you through it line by line. He doesn't touch you once. He doesn't need to."),
+            P("He reads your essay at the desk with his pen out, and talks you through it line by line, but he doesn't touch you once. He doesn't need to."),
             D(H, "Your argument's here, @player. You buried it on page three. Lead with it."),
         ], [go("Thank him.", loc="faculty_floor", mins=60, eff=[{"targetType": "player", "trait": "grade_psych", "op": "add", "value": 1, "cap": 69}])])]})
 
@@ -352,7 +372,7 @@ for cid, loc, name, setting in [("hub_nadia_library", "library", "Nadia, studyin
             *([NADIA_ASKED] if loc != "lecture_hall" else []),
             G(cond(SKIRT, trait("hale_step", "gte", 2)), D(N, "He'll lose his place again.")),
             G(cond(trait("hale_step", "gte", 4)), D(N, "His wife came to the office. Everyone's saying. Was it you?")),
-        ], [go("Talk a while.", loc=loc, mins=20), go("Go.", loc="campus")])]})
+        ], [go("Talk a while.", loc=loc, mins=20), go("Leave her to her notes.", loc="campus")])]})   # pass 3 D39 (R7)
 
 cards = step_cards(H, {
     1: ("Monday, first class: Psychology.", "Go to Psychology on Monday morning, the lecture hall"),   # C3: no name before the meeting

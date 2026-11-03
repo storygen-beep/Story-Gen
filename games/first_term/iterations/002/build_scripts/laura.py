@@ -27,13 +27,13 @@ _t1 = step_trigger(L, 1, bind_npc=False)
 _t1["conditions"]["items"] += [here_at(L, "home_kitchen"), flag("laura_dress_invite"),
                                {"type": "hours_since_flag", "subject": "player", "flag_key": "laura_dress_invite", "operator": "lt", "value": 1}]
 out.append({
-    "id": "laura_01_blue_dress", "name": "The blue dress",
+    "id": "laura_01_blue_dress", "name": "Try on Laura's blue dress",   # pass 3 H33/H34 (the-voice.md R1, D11): the name says what happens if she clicks, and never hides the act
     "description": "Laura step 1 (Laura C 1), Tuesday evening, in the master bedroom (seen from the kitchen: her hub there says 'Come upstairs'). Adds and equips laura_blue_dress. Sets laura_01_done (her thread).",
     "trigger": _t1,
     "nodes": [
         node("upstairs", "Her room", [
             P("Laura is right behind you on the stairs, still in her kitchen apron, drying her hands on it. She shuts her bedroom door and goes straight to the wardrobe and reaches into the back, past the work blouses, to something in dry-cleaner plastic."),
-            D(L, "I was saving this. I don't know what for. Here. Try it."),
+            D(L, "I was saving this, but I don't know what for. Here. Try it."),
             P("It's a dress, blue, soft, short enough that she must have been very young when she wore it. She holds it against you and her eyes go somewhere far away."),
         ], [go("Try it on.", node="mirror", mins=10,
                wardrobe=[{"action": "add", "item_id": "laura_blue_dress"}, {"action": "equip", "item_id": "laura_blue_dress"}])]),
@@ -42,7 +42,7 @@ out.append({
                 "mother behind daughter mirror blue dress", "woman fixing young woman's dress in bedroom mirror"),
             P("It's tight across your chest. It stops high on your thighs. In her long mirror you look like someone older, someone who goes out. Laura stands behind you and smooths the fabric down over your hips with both hands, slowly, and keeps her hands there a second longer than she needs to."),
             P("Her eyes in the mirror aren't on the dress. They're on you."),
-            T("She's looking at you like a stranger would. You don't hate it."),
+            T("She's looking at you like a stranger would, but you don't hate it."),
         ], [
             go("\"Is that bad?\"", node="no", mins=3),
             go("\"I can't take this.\"", node="give", mins=3),
@@ -85,7 +85,7 @@ out.append({
                 "conditions": cond(late_for("came_home_late"), flag("opening_done"), flag("laura_caught_today", False))},
     "nodes": [
         node("stairs", "The dark stairs", [
-            P("You've got your shoes in your hand and you're halfway to the stairs when the lamp on the landing clicks on. Laura is sitting on the third step from the top in her robe, arms round her knees. She's been there a while."),
+            P("You've got your shoes in your hand and you're halfway to the stairs when the hall lamp clicks on. Laura is sitting on the third step from the top in her robe, arms round her knees. She's been there a while."),
             G(cond(trait("laura_suspicion", "gte", 30)),
               P("She comes down to you without a word and takes your chin in her hand and turns your face to the lamp. She looks you up and down, slowly, like she's reading it off you.")),
             *LATE_REASON_LINES,
@@ -125,7 +125,7 @@ out.append({
     "trigger": step_trigger(L, 2),
     "nodes": [
         node("glass", "Sit with me", [
-            P("The kitchen's dark except the light over the stove. Laura's at the table with a bottle of white and two glasses, one of them already poured. Her robe is open at the collar. She's been waiting for somebody, and it wasn't Mark."),
+            P("The kitchen's dark except the light over the stove. Laura's at the table with a bottle of white and two glasses, one of them already poured. Her robe is open at the collar. She's been waiting for somebody, but it wasn't Mark."),
             D(L, "Sit with me. Just for a bit."),
         ], [
             go("\"Pour me one.\"", node="story", mins=10),
@@ -146,7 +146,7 @@ out.append({
         ], [go("\"He should.\"", loc="home_hall", mins=5, consumes=True,
                eff=[nadd(L, "warmth", 5), setv("laura_step", 2)], flags=[done(3)])]),
         no_node("no", [P("She nods and pours the second glass back into the bottle, carefully, so none spills."), D(L, "Go on, then. Bed."), P("She drinks the rest of hers alone, looking at the stove.")],
-                "home_hall", 2, eff=[nadd(L, "warmth", -1)]),
+                "home_hall", 2, eff=[nadd(L, "warmth", -1)], label="Say goodnight and go up."),   # pass 3 D39 (R7)
     ]})
 
 # (release 1: laura_05_jake_at_the_door is merged into Jake's step 3, jake.py)
@@ -178,6 +178,8 @@ out.append({
             P("She sits down on the end of the bed in her good dress, her heels in her hand. Her lipstick is perfect. She has nowhere to go."),
             # copy fix A6 (DECISIONS 125): her want on her body, Laura's early column ("chest"); the Ryan line is in `zipped`
             P("She pulls her shoulders back for the mirror, and her chest lifts in the dress. She's looking at herself the way she wants somebody to look at her."),
+            # reader pass 3 b00: low heat on Ella's body too, and Laura's reaction to it
+            P("Then her eyes find you in the mirror and go down you, slow: your tits, your waist, the curve of your hips. Her mouth goes tight, and she looks away first."),
             D(L, "Do I still look like someone you'd look at?"),
             T("She's asking you, because nobody else is here to ask."),
         ], [
@@ -195,7 +197,7 @@ out.append({
             P("On weeknights now, her bedroom door doesn't quite close."),
         ], [go("\"Goodnight, Mom.\"", loc="home_hall", mins=10, consumes=True, eff=DONE3, flags=[done(6), fset("laura_lonely")])]),
         no_node("no", [D(L, "Mark. Right."), P("She reaches round and does the zip herself, badly, halfway, and leaves it there. She doesn't ask you again tonight.")],
-                "home_hall", 7, eff=[nadd(L, "warmth", -1)]),
+                "home_hall", 7, eff=[nadd(L, "warmth", -1)], label="Leave her with the zip."),   # pass 3 D39 (R7)
     ]})
 # Mark leaves for the bar from the house: his rows put him nowhere Saturday 17:00-22:00 (home, the garage until 17:00).
 
@@ -224,8 +226,14 @@ def add_item(*a, **k):
     hub_choices.extend(c); hub_nodes.extend(n)
 # Breakfast and coffee share one screen (home_life items 6 and 11): "Eat." or "Just a coffee.", each with
 # its own once-a-day flag; the coffee's tease and touch sit beside the breakfast's.
-COFFEE_EXITS = [go("Just a coffee.", loc=K, mins=10, cond_=cond(flag("had_coffee", False)),
+# pass 3 D44 (the-surfaces.md R9): the coffee, breakfast, dishes, cooking, wine and film with her each land on a short
+# screen of her reaction (item(after=...)), not a toast. Same effects, time and caps on the act button.
+COFFEE_EXITS = [go("Just a coffee.", node="hl_coffee_after", mins=10, cond_=cond(flag("had_coffee", False)),
                    flags=[fset("had_coffee")], eff=[energy(5), warm(L)])]
+hub_nodes.append(node("hl_coffee_after", "Just a coffee", [
+    P("You drink it black and too fast, leaning on the counter, and she shakes her head at you over her own mug."),
+    D(L, "That's not breakfast, sweetheart."),
+], [go("Grab your bag.", loc=K)]))
 for kind, spec in (("tease", l_tease(87, "coffee")), ("touch", l_touch(87, "coffee"))):
     if not spec:
         continue
@@ -236,8 +244,10 @@ for kind, spec in (("tease", l_tease(87, "coffee")), ("touch", l_touch(87, "coff
 add_item("breakfast", "Have breakfast with her.", WEEKDAY_AM, "ate_breakfast", K,
          [D(L, "Eat something before class, sweetheart."), P("She pushes the toast over and puts a second mug down beside it."),
           G(cond(flag("had_coffee", False)), D(L, "Tell me one thing about yesterday."))],
-         None, 15, done_exits=[go("Eat.", loc=K, mins=15, flags=[fset("ate_breakfast")], eff=[energy(10), warm(L)])] + COFFEE_EXITS,
-         tease=l_tease(86, "breakfast"), touch=l_touch(86, "breakfast"))
+         None, 15, done_exits=[go("Eat with her.", node="hl_breakfast_after", mins=15, flags=[fset("ate_breakfast")], eff=[energy(10), warm(L)])] + COFFEE_EXITS,
+         tease=l_tease(86, "breakfast"), touch=l_touch(86, "breakfast"),
+         after=("Eat with her.", [P("You eat the toast at the counter while she watches you over her mug, and she wipes a crumb off your lip with her thumb."),
+                                  D(L, "There. Now go and be clever.")], "Grab your bag."))
 # One dinner, every evening she cooks (Mon, Tue, Thu, Fri, Sun 18:00-20:00). Sunday dinner reads
 # room_tidy and clears it (npc_laura.md:96; home_ella_room.md:41): +2 tidy, -1 messy on top of dinner's +1.
 NOT_SUN = wd(0, 1, 3, 4)
@@ -344,21 +354,28 @@ add_item("dinner", "Sit down to dinner.", HER_EVE + [tod("18:00", "20:00")], "at
 add_item("cook", "Help her cook.", HER_EVE + [tod("18:00", "19:00")], "helped_cook", K,
          [P("She hands over the knife."), D(L, "Onions. Don't cry on my sauce.")],
          [energy(-5), warm(L)], 30, plain_costs=[{"trait": "energy", "value": 5}],
+         after=("Chop for her.", [P("You chop until your eyes stream, and she leans past you to taste the sauce, her hip against yours and her hand flat on the small of your back."),
+                                  D(L, "Better. You'll make somebody very happy one day.")], "Leave her to the stove."),
          tease=l_tease(89, "help her cook"), touch=l_touch(89, "help her cook", "Stay at the stove with her."))
 add_item("dishes", "Do the dishes with her.", HER_EVE + [tod("19:00", "21:00")], "did_dishes", K,
          [D(L, "You wash, I dry."), P("Hip to hip at the sink.")],
          [energy(-5), warm(L)], 20, plain_costs=[{"trait": "energy", "value": 5}],
+         after=("Wash up with her.", [P("You wash and she dries, her bare arm brushing yours every time she takes a plate. Suds run down to your elbows, and she flicks water at your neck when you hand one back dirty."),
+                                      D(L, "Again, sweetheart. Properly.")], "Leave her the last pan."),
          tease=l_tease(90, "dishes"), touch=l_touch(90, "dishes"))
 add_item("wine", "Have a glass with her.", HER_EVE + [tod("20:00", "22:00"), trait("laura_step", "gte", 2)], "had_drink_home", K,
          [G(cond({"type": "npc_at_location", "location_id": "home_kitchen", "npc_id": "npc_mark", "operator": "is_absent"}), D(L, "One glass. Don't tell Mark.")), G(cond({"type": "npc_at_location", "location_id": "home_kitchen", "npc_id": "npc_mark", "operator": "is_present"}), D(L, "One glass. Just the one.")),
           P("She pours two and clinks yours before you've picked it up.")],
-         None, 30, done_exits=[go("Done.", loc=K, mins=30, eff=[warm(L)], flags=[fset("had_drink_home")], mods=DRINK)],
-         tease=l_tease(91, "a glass of wine"), touch=l_touch(91, "a glass of wine"))
+         None, 30, done_exits=[go("Drink with her.", node="hl_wine_after", mins=30, eff=[warm(L)], flags=[fset("had_drink_home")], mods=DRINK)],
+         tease=l_tease(91, "a glass of wine"), touch=l_touch(91, "a glass of wine"),
+         after=("Drink with her.", [P("The wine goes warm in your stomach. She laughs with her head back at something you say, then reaches over and tucks your hair behind your ear, and leaves her hand on your cheek a second too long."),
+                                    D(L, "Don't grow up any faster, okay?")], "Rinse your glass."))
 # (pass 3 D1) the study is work, so it is its own canvas beside her hub, not a hub item (the-surfaces.md R1: "Never
 # put work inside a character's hub"). Same screens, hours, pay and once-a-day flag; it still needs her in the
 # kitchen, because she reads over your shoulder. Its Love pay shares her hub's once-a-day brake (below).
 _study_door, _study_nodes = item("study", "Study at the kitchen table.", HER_EVE + [tod("19:00", "22:00")], "studied_home", K,
-         [P("You spread your notes across the end of the table. She reads over your shoulder."), D(L, "That's wrong. No — that.")],
+         [P("You spread your notes across the end of the table. Laura reads over your shoulder."), D(L, "That's wrong. No — that."),
+          D(L, "Bring it down any night I'm in here after dinner, and I'll check it again.")],   # reader pass 3 b01: the hook names her, the place, the when
          None, 60, done_exits=[go(f"{name}.", loc=K, mins=60, flags=[fset("studied_home")],
                                   costs=[{"trait": "energy", "value": 10}],
                                   eff=[energy(-10), warm(L), {"targetType": "player", "trait": key, "op": "add", "value": 1, "cap": 100}])
@@ -458,14 +475,14 @@ out.append({
             G(cond(tod("06:30", "08:00"), flag("ate_breakfast", False)), D(L, "Eat something, sweetheart. You're not going to class on nothing.")),
             G(cond(tod("18:00", "22:00"), flag("college_for_grades")), D(L, "How are the grades? You said grades. I'm holding you to it.")),
             G(cond(tod("18:00", "22:00"), flag("college_for_fun")), D(L, "Having fun yet? You said fun. Don't have too much.")),
-            G(cond(tod("18:00", "22:00"), flag("college_for_freedom")), D(L, "Freedom, you said. You still live in my house, you know.")),
+            G(cond(tod("18:00", "22:00"), flag("college_for_freedom")), D(L, "Freedom, you said, but you still live in my house, you know.")),
             G(cond(wd(1), tod("18:00", "22:00"), trait("laura_step", "eq", 0)),
               P("She dries her hands on her apron and looks at you with a funny little smile."),
               D(L, "Come upstairs after. I have something for you.")),
             # release 1: the leak before each of her four steps (npc_laura.md, "Leak and promise")
             G(cond(trait("laura_step", "eq", 1)), P("Her eyes go to you and stay a second too long. She keeps a second glass on the counter now.")),
             G(cond(trait("laura_step", "gte", 2), trait("ryan_step", "gte", 2)), D(L, "How's Ryan? You two seem close lately.")),
-            G(cond(trait("laura_step", "gte", 1), flag("jake_date_booked")), D(L, "Is Jake taking you out again?")),
+            G(cond(trait("laura_step", "gte", 1), flag("jake_date_booked")), D(L, "So Jake's taking you out Saturday? Where's he taking you?")),   # reader pass 3 b00: booked is set before any date, so no "again"
             G(cond(trait("laura_step", "eq", 2)), P("She's started leaving her bedroom door open when she dresses.")),
             G(cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}), D(L, "Is that for college or for a guy?")),
             G(cond(DRESS_ON), D(L, "It never fit me like that."), P("Her hand smooths the hip of it without thinking.")),
@@ -494,18 +511,18 @@ out.append({
         node("talk", "Talk", [
             POOL(
                 P("You sit on the counter and talk while she works. She asks about your classes, and you tell her the boring half."),
-                P("She tells you about her office, the man who steals her yoghurt, the boss who calls everyone 'champ'. You make her laugh until she has to put the knife down."),
-                P("You lean on the counter beside her while she chops. She hums. For a while it's just the two of you and it's easy."),
+                P("She tells you about her office, the man who steals her yoghurt, the boss who calls everyone 'champ'. You make her laugh until she has to put down whatever's in her hand."),
+                P("You lean on the counter beside her while she works. She hums. For a while it's just the two of you and it's easy."),
             ),
             G(cond(trait("hygiene", "lt", 30), flag("hygiene_off", False)),
               P("Halfway through she wrinkles her nose and steps back, and the easy goes out of it.")),
-        ], [go("Go.", loc=K, mins=5)]),
+        ], [go("Leave her to her kitchen.", loc=K, mins=5)]),   # reader pass 3 b00: Talk opens at breakfast too, when nothing is being chopped   # pass 3 D39 (R7): the way out answers her
         # reader a3 #4 (DECISIONS 131): the no to "Come upstairs after." Every Tuesday at her step 0 she asks again.
         node("not_tonight", "Not tonight", [
             ME("Not tonight, Mom."),
             P("The funny little smile goes. She turns back to the stove and stirs something that doesn't need it."),
             D(L, "Oh. Okay, sweetheart. It'll keep."),
-        ], [go("Go.", loc="home_hall", mins=2)]),
+        ], [go("Leave her to the stove.", loc="home_hall", mins=2)]),
         *hub_nodes,
         *portal_nodes,
         *LT_KITCHEN[2],
@@ -517,13 +534,27 @@ for args, kw in [
     (("film", "Watch the film with her.", [tod("22:00", "00:00")], "movie_night", "home_living_room",
       [P("A film on low, the only light in the room."), D(L, "Sit with me a while.")],
       [energy(5), warm(L, 2)], 120),
-     dict(tease=l_tease(92, "movie night"), touch=l_touch(92, "movie night", "Stay under the blanket with her."))),
+     dict(tease=l_tease(92, "movie night"), touch=l_touch(92, "movie night", "Stay under the blanket with her."),
+          after=("Watch it with her.", [P("Halfway through she pulls the blanket over both of you. By the end her head is on your shoulder and her hand is resting on your knee, warm, forgotten there."),
+                                        D(L, "Don't tell Mark I cried.")], "Say goodnight and go up.", "home_hall"))),
     (("tv", "Watch TV with her.", [tod("22:00", "00:00")], "watched_tv", "home_living_room",
       [P("She hands you the remote without looking away from the door."), D(L, "Find something. Anything.")],
       [energy(5), warm(L)], 60), {}),
 ]:
     c, n = item(*args, **kw); lr_choices += c; lr_nodes += n
-LT_LIVING = laura_towel("hub_laura_living_room", "home_living_room", DEATH)
+# reader pass 3 b01 (the written no): her "Sit with me a while." gets a spoken no and her reaction, not a bare exit
+for _n in lr_nodes:
+    if _n["id"] == "hl_film":
+        for _c in _n["choices"]:
+            if _c.get("text") == "Not now.":
+                _c.pop("locationId", None)
+                _c.update(go("Not now.", node="hl_film_no"))
+lr_nodes.append(node("hl_film_no", "Not now", [
+    ME("Not now, Mom. I'm going up."),
+    D(L, "Oh. No, of course. Go on, sweetheart. I'll just watch the door."),
+    P("She pulls her robe tighter over her knees and turns back to the film, and she doesn't turn the sound up."),
+], [go("Go up.", loc="home_hall")]))
+LT_LIVING =laura_towel("hub_laura_living_room", "home_living_room", DEATH)
 out.append({
     "id": "hub_laura_living_room", "name": "Laura, waiting up",
     "description": "Laura waiting up in the dark living room on Saturday nights; she can see the front door. A film (+2 Warmth) or the TV with her (home_life).",
@@ -591,7 +622,9 @@ out.append({
     "trigger": {"location": "home_ella_room", "is_repeatable": True, "priority": 1, "is_active": True, "substitution_only": True},
     "nodes": [
         node("call", "Mom", [
-            D(L, "It's nine. You know the rule. Home by eleven."),
+            # scene reader b03 (2026-11-03): the call rings wherever she is, her own room too, so it checks on her and
+            # never tells her to come home
+            D(L, "Just checking on you, sweetheart. You know the rule. Eleven, and not one minute after."),
         ], [go("\"I know. Eleven.\"", node="good", mins=2, flags=[fset("laura_call_today")]),
             go("\"I'm staying at Zoe's.\"", node="talk", mins=2, eff=[susp(2)], flags=[fset("laura_call_today")],
                cond_=cond(flag("laura_call_today", False)))]),
@@ -609,12 +642,14 @@ _t4["conditions"]["items"].append(flag("laura_alone_seen"))
 DONE4_EFF = [nadd(L, "warmth", 5), setv("laura_step", 4)]
 DONE4_FLAGS = [fset("laura_04_done"), fset("laura_said_ryan"), fset("saw_laura_alone"), fset("laura_alone_seen")]
 out.append({
-    "id": "laura_04_she_saw_you", "name": "She saw you",
+    "id": "laura_04_she_saw_you", "name": "Watch Laura touch herself",   # pass 3 H33/H34 (the-voice.md R1, D11): the name says what happens if she clicks, and never hides the act
     "description": "Laura step 4 of 4, the top step (release 1): through the gap Laura comes, whispering \"Ryan.\", and her eyes open on Ella. \"Go to bed, sweetheart.\" Sets laura_said_ryan; breakfast follows.",
     "trigger": _t4,
     "nodes": [
         node("gap", "Laura's door, again", [P(beat("laura_04_she_saw_you", "gap")),
-            VID("through a bedroom door left ajar, a woman alone in bed fingering herself, biting her hand", "mom masturbating seen through door gap", "woman fingering herself bed door ajar biting hand", pool_dir="sex/laura_04_gap_t5")],
+            VID("through a bedroom door left ajar, a woman alone in bed fingering herself, biting her hand", "mom masturbating seen through door gap", "woman fingering herself bed door ajar biting hand", pool_dir="sex/laura_04_gap_t5"),
+            D(L, "Oh. Oh God. Please. Please."),   # pass 3 B4: to herself, under her breath
+            ],
             [go("Keep watching.", node="comes", mins=5, flags=[fset("saw_laura_alone"), fset("laura_alone_seen")]),
              go("Pull the door to.", loc="home_hall", mins=2, retry=1, flags=[fset("saw_laura_alone"), fset("laura_alone_seen")])]),
         node("comes", "Ryan", [P(beat("laura_04_she_saw_you", "comes")),
@@ -624,20 +659,23 @@ out.append({
         node("eyes", "Her eyes", [
             P("Laura's eyes open. They go straight to the door. To the gap. To you."),
             P("She doesn't pull the sheet up fast. She doesn't pull it up at all. She lies there with her hand still between her legs, and she looks at you."),
+            D(L, "How long have you been standing there?"),
+            ME("Mom. I'm sorry. I didn't."),
             T("Ryan. She said Ryan. Not Mark."),
         ], [
             go("Step back from the gap.", node="back", mins=1),
             go("Stay where she can see you.", node="stay", mins=1, cond_=cond(trait("corruption", "gte", 20))),
         ]),
         node("back", "Go to bed", [
-            P("You step back into the dark of the landing. Your heart is going so hard you can hear it."),
+            P("You step back into the dark of the hall. Your heart is going so hard you can hear it."),
             D(L, "Go to bed, sweetheart."),
-            P("She says it quietly, through the gap."),
+            P("She says it quietly, through the gap."), ME("Night, Mom."), D(L, "And shut the door all the way this time."),
         ], [go("Back to your room.", loc="home_ella_room", mins=3, consumes=True, eff=DONE4_EFF, flags=DONE4_FLAGS)]),
         node("stay", "Let her see you", [
             P("You don't move. You let her see you."),
             P("Laura holds your eyes for a long second. Her face doesn't change."),
-            D(L, "Go to bed, sweetheart."),
+            ME("You said his name."),
+            D(L, "I know what I said. Go to bed, sweetheart."),
             P("She reaches out and turns off the lamp."),
         ], [go("Back to your room.", loc="home_ella_room", mins=3, consumes=True, eff=DONE4_EFF, flags=DONE4_FLAGS)]),
     ]})

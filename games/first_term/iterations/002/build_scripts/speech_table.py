@@ -143,7 +143,7 @@ SPEECH = {
     "cafe_shift": {
         "Are you on the menu?": WHO, "Ten,": WHO,   # the guys in the back booth
         "I get off when you stop staring at my tits.": ME, "I'll think about it,": ME,
-        "Not tonight, hon.": ME, "Sweetheart,": "npc_gary", "Your food's here, sir.": ME,
+        "Not today, hon.": ME, "Doll,": "npc_gary", "Your food's here, sir.": ME,
     },
     # ── college ──
     "college_class_figure": {"Look at the weight of her,": "npc_art_lecturer", "Draw that.": "npc_art_lecturer"},

@@ -48,7 +48,7 @@ content = "Your alarm goes at seven and you're already awake, staring at the cei
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "You're eighteen. You still live at home, in this house, with your mom and your step-father and your step-brother and one bathroom between the four of you. You've never had a job. You've never had a lock on anything that was yours. Your account has nothing in it, and you checked twice."
+content = "You're eighteen, but you still live at home, in this house, with your mom and your step-father and your step-brother and one bathroom between the four of you. You've never had a job. You've never had a lock on anything that was yours. Your account has nothing in it, and you checked twice."
 
 [[canvases.nodes.blocks]]
 type = "thought_bubble"
@@ -72,7 +72,8 @@ targetType = "node"
 nodeId     = "skip_hall"
 time_progression_minutes = 45
 # (2026-11-01) dressed as the full opening leaves her, since the card now walks her to campus (DECISIONS 121)
-wardrobeEffects = [ { action = "add", item_id = "towel" }, { action = "add", item_id = "plain_bra" }, { action = "add", item_id = "tshirt" }, { action = "add", item_id = "jeans" }, { action = "add", item_id = "leggings" }, { action = "add", item_id = "sleep_shorts" }, { action = "add", item_id = "sneakers" } ]   # dressed on the hall screen's "Get dressed." (DECISIONS 124)
+# reader batch 4 (pass 3): the skip screen says "you come out in the towel", so it puts the towel on as the shower does
+wardrobeEffects = [ { action = "add", item_id = "towel" }, { action = "add", item_id = "plain_bra" }, { action = "add", item_id = "tshirt" }, { action = "add", item_id = "jeans" }, { action = "add", item_id = "leggings" }, { action = "add", item_id = "sleep_shorts" }, { action = "add", item_id = "sneakers" }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "sneakers" }, { action = "equip", item_id = "towel" } ]   # dressed on the hall screen's "Get dressed." (DECISIONS 124)
 flagEffects = [
   { targetType = "player", flag = "rent_starts", op = "set" },
   { targetType = "player", flag = "laura_rule_ryan_first", op = "set" },
@@ -120,7 +121,7 @@ name = "Seventy-five"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Last night Mark put his fork down at dinner and said it like he'd been saving it. You're an adult now. Adults pay their way. Seventy-five a week, from Sunday, at the kitchen table. Laura looked at her plate and said nothing, which is how you knew it was real."
+content = "Last night Mark put his fork down at dinner and said it like he'd been saving it. You're an adult now. Adults pay their way. Seventy-five a week, from Sunday, at the kitchen table. Laura looked at her plate and said nothing. That was how you knew it was real."
 
 [[canvases.nodes.blocks]]
 type = "thought_bubble"
@@ -192,7 +193,7 @@ search_queries = ["guy leaning on hallway wall girl in towel bathroom door", "gi
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "Ryan is leaning on the wall opposite the bathroom door with his arms folded and his towel over his shoulder. Twenty-two, Mark's son, broad from lifting at the yard. He's waiting his turn, and he doesn't move out of your way."
+content = "Ryan is leaning on the wall opposite the bathroom door with his arms folded and his towel over his shoulder. Twenty-two, Mark's son, broad from lifting at the yard. He's waiting his turn, but he doesn't move out of your way."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -203,7 +204,7 @@ npcId   = "npc_ryan"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "His eyes go down your legs, all the way to your wet feet, and come back up slower. He doesn't hide it. He's never once looked at you like this, and you're standing in a towel in the hall with nothing under it, and your face goes hot all at once."
+content = "His eyes go down your legs, all the way to your wet feet, and come back up slower. Then he catches himself. He looks at the ceiling, at the bathroom door, anywhere, and pulls the towel off his shoulder and holds it low in front of his shorts. He's never once looked at you like this, and you're standing in a towel in the hall with nothing under it, and your face goes hot all at once."
 
 [[canvases.nodes.blocks]]
 type = "thought_bubble"
@@ -252,6 +253,18 @@ name = "Down the hall"
 type    = "paragraph"
 content = "You hold the towel shut with both hands and go, fast, past him, close enough to smell his sleep. Your face is burning. You feel his eyes on the backs of your legs the whole way down the hall, and you don't look round, but you know he's still watching when your door shuts."
 
+# H6 (pass 3 A63): after the accident, her own voice turns it into a wish, behind the flag the accident sets
+# reader batch 4 (pass 3): her voice at her level (W1b): pushback below Curious, the wish at Curious and up
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ryan_hall_seen", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 } ] }
+blocks = [ { type = "thought_bubble", content = "You lean on your door with your heart going. Ryan looked at your legs like that. He's your step-brother. You are not going to think about it. You're thinking about it.", props = { speaker = "player" } } ]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ryan_hall_seen", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 } ] }
+blocks = [ { type = "thought_bubble", content = "You lean on your door with your heart going. Ryan looked at you like that. You want him to look again. Longer.", props = { speaker = "player" } } ]
+
 [[canvases.nodes.blocks]]
 type = "dialog"
 content = "@player, you'll be late on your first day!"
@@ -289,7 +302,19 @@ npcId   = "npc_ryan"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "He says sorry, but he doesn't step back, and he doesn't look away until you're past him. Your face is still hot when you shut your door."
+content = "He says sorry, but he doesn't step back. His eyes drop to your towel once, and then he makes himself look at the carpet until you're past him, red to the ears. Your face is still hot when you shut your door."
+
+# H6 (pass 3 A63): after the accident, her own voice turns it into a wish, behind the flag the accident sets
+# reader batch 4 (pass 3): her voice at her level (W1b): pushback below Curious, the wish at Curious and up
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ryan_hall_seen", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 } ] }
+blocks = [ { type = "thought_bubble", content = "He looked. He tried so hard not to, and he looked anyway. That's gross. It is. So why are your nipples hard under the towel?", props = { speaker = "player" } } ]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ryan_hall_seen", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 } ] }
+blocks = [ { type = "thought_bubble", content = "He looked. He tried so hard not to, but he looked anyway. You want to see him try that again.", props = { speaker = "player" } } ]
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -339,7 +364,19 @@ npcId   = "npc_ryan"
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "He's the only one in this house who asked. Then his eyes slip down to where the towel is tucked, and back up, and he grins like he got caught and doesn't mind."
+content = "He's the only one in this house who asked. Then his eyes slip down to where the towel is tucked, and he catches himself and drags them back up to your face, and goes red, and grins like he got caught."
+
+# H6 (pass 3 A63): after the accident, her own voice turns it into a wish, behind the flag the accident sets
+# reader batch 4 (pass 3): her voice at her level (W1b): pushback below Curious, the wish at Curious and up
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ryan_hall_seen", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 } ] }
+blocks = [ { type = "thought_bubble", content = "He's trying so hard to be your brother. Good. He should. You're not going to be the one who makes it harder.", props = { speaker = "player" } } ]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ryan_hall_seen", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 } ] }
+blocks = [ { type = "thought_bubble", content = "He's trying so hard to be your brother. You want to see what happens when he stops trying.", props = { speaker = "player" } } ]
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -492,7 +529,7 @@ blocks = [ { type = "paragraph", content = "Laura beams like you've handed her s
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "college_for_fun", operator = "is_true" } ] }
 blocks = [
-  { type = "paragraph", content = "Laura laughs, surprised, and covers her mouth. Mark doesn't laugh." },
+  { type = "paragraph", content = "Laura laughs, surprised, and covers her mouth, but Mark doesn't laugh." },
   { type = "dialog", content = "Fun's not free. Seventy-five.", props = { speaker = "npc", npcId = "npc_mark" } },
 ]
 

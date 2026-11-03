@@ -219,7 +219,7 @@ type = "message"
 sender = "npc"
 after_round = 1
 after_choice = 1
-content = "ok. text me when you're on your way"
+content = "ok. text me when you're coming"
 [[phone.conversations.blocks]]
 type = "message"
 sender = "npc"
@@ -553,7 +553,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 [[phone.conversations.blocks]]
 type = "message"
 sender = "npc"
-content = "Office hours are Thursday, after six. Bring the essay."
+content = "Thursday, six, my office. Bring the essay."
 [[phone.conversations.blocks]]
 type = "reply"
 round = 1
@@ -662,7 +662,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 [[phone.conversations.blocks]]
 type = "message"
 sender = "npc"
-content = "The door was unlocked at half past six."
+content = "My door was unlocked at half six."
 [[phone.conversations.blocks]]
 type = "reply"
 round = 1
@@ -675,7 +675,7 @@ type = "message"
 sender = "npc"
 after_round = 1
 after_choice = 0
-content = "Then don't say half past six. — H."
+content = "Then don't promise half six. — H."
 [[phone.conversations.blocks]]
 type = "message"
 sender = "npc"
@@ -768,7 +768,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 [[phone.conversations.blocks]]
 type = "message"
 sender = "npc"
-content = "i was outside your house for twenty minutes"
+content = "sat outside your house twenty minutes"
 [[phone.conversations.blocks]]
 type = "message"
 sender = "npc"

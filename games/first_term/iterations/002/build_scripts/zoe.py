@@ -28,8 +28,13 @@ out.append({
         node("wave", "On the grass", [
             IMG("scenes/zoe_00_quad.jpg", "a laughing college girl lying on the grass of a campus quad waving someone over, sunglasses, afternoon",
                 "college girl lying on grass quad waving", "girl on campus lawn sunglasses laughing"),
-            P("The girl from your Biology class, the one who whispers through the slides, is lying on the grass on her elbows with her sunglasses pushed up in her hair. She sees you and waves both arms over her head like you're a plane she's landing."),
-            WHO("Hey. You. Biology. Sit."),
+            # reader batch 5 (pass 3): "your Biology class" only once she has sat one (meet_bio sets bio_ta_met)
+            G(cond(flag("bio_ta_met")),
+              P("The girl from your Biology class, the one who whispers through the slides, is lying on the grass on her elbows with her sunglasses pushed up in her hair. She sees you and waves both arms over her head like you're a plane she's landing."),
+              WHO("Hey. You. Biology. Sit.")),
+            G(cond(flag("bio_ta_met", False)),
+              P("A girl is lying on the grass on her elbows with her sunglasses pushed up in her hair. She sees you and waves both arms over her head like you're a plane she's landing."),
+              WHO("Hey. You. You're on my Biology list and you never come. Sit.")),
         ], [
             go("Sit with her.", node="zoe", mins=5),
             go("\"Can't, I've got a shift.\"", node="later", mins=2, cond_=cond(flag("cafe_job"))),
@@ -37,7 +42,8 @@ out.append({
         ]),
         node("zoe", "Zoe", [
             P("You sit. She rolls over and puts her head straight in your lap like you've known each other for years, and looks up at you upside down."),
-            D(Z, "Zoe. You're the one who sits at the back and pretends not to know the answers. I like you. Do you party?"),
+            G(cond(flag("bio_ta_met")), D(Z, "Zoe. You're the one who sits at the back and pretends not to know the answers. I like you. Do you party?")),
+            G(cond(flag("bio_ta_met", False)), D(Z, "Zoe. You're the one who signed up for Biology and never shows. I like you. Do you party?")),
             P("She talks fast, about everything, Biology and the TA who blushes and a guy on the team with an ass you could bounce coins off. She looks at you a beat too long while she says it, and laughs."),
             G(cond(flag("college_for_fun")), D(Z, "You look like fun. You look like you've been waiting for someone to ask.")),
         ], [go("\"Party?\"", node="friday", mins=10, flags=[fset("zoe_met")])]),
@@ -49,8 +55,8 @@ out.append({
         ], [go("\"Friday.\"", loc="quad", mins=5, flags=[fset("zoe_number")])]),
         node("later", "Run, then", [
             D(Z, "Fine, run! Friday, my place!"),
-            P("She shouts the address after you across the whole quad. Three people turn round. She doesn't care. You've got her name by the time you reach the gate, because she shouted that too: Zoe."),
-        ], [go("Go.", loc="campus", mins=2, flags=[fset("zoe_met"), fset("zoe_number")])]),
+            P("She shouts the address after you across the whole quad. Three people turn round, but she doesn't care. You've got her name by the time you reach the gate, because she shouted that too: Zoe."),
+        ], [go("Wave without looking back.", loc="campus", mins=2, flags=[fset("zoe_met"), fset("zoe_number")])]),   # pass 3 D39 (R7)
     ]})
 
 # ── step 1 · Zoe A 1 = Jake B 1 · the first party (one canvas, both counters) ──
@@ -73,7 +79,7 @@ out.append({
             P("The flat is packed: half of campus, the bass coming up through the floor, red cups on every surface. Zoe walks you through it with her arm round your waist like she's showing you off, and people look. At the dress. At you in it."),
             G(cond(flag("college_for_grades")), D(Z, "Grades, you told your mom? Babe. Tonight you're majoring in this.")),
             G(cond(flag("college_for_fun")), D(Z, "You said fun. This is fun. Drink.")),
-            G(cond(flag("college_for_freedom")), D(Z, "Freedom, babe. No mom, no stepdad, no rules. Breathe it in.")),
+            G(cond(flag("college_for_freedom")), D(Z, "Freedom, babe. No mom, no step-dad, no rules. Breathe it in.")),
             P("She puts her head on your shoulder on the couch and says it into your ear, like a secret:"),
             D(Z, "Kiss someone. Or don't, and I'll keep asking."),
         ], [
@@ -137,7 +143,7 @@ out.append({
             go("\"Not tonight, Zo.\"", node="no", mins=2),
         ]),
         node("kiss_zoe", "Zoe", [
-            P("You turn in her lap and kiss her. She's ready for it this time. Her mouth opens under yours, her tongue finds yours, and her hand goes straight up your thigh to your hem and stays there. Somebody whoops. She pulls back first, breathing hard, her eyes on your mouth."),
+            P("You turn in her lap and kiss her. She's ready for it this time. Her mouth opens under yours, her tongue finds yours, and her hand goes straight up the inside of your thigh, high, and stays there. Somebody whoops. She pulls back first, breathing hard, her eyes on your mouth."),
             D(Z, "Okay. Okay. Worth the wait, babe."),
         ], [go("Back to the party.", loc="zoe_apartment", mins=15, consumes=True, **KISS_DONE)]),
         node("kiss_guy", "The guy by the speakers", [
@@ -145,7 +151,7 @@ out.append({
             D(Z, "Babe! Okay! Told you I'd keep asking."),
         ], [go("Back to the party.", loc="zoe_apartment", mins=15, consumes=True, **KISS_DONE)]),
         no_node("no", [D(Z, "Boo. Next Friday, then. I'm not giving up on you."), P("She slides off your lap and goes to dance.")],
-                "zoe_apartment", 7, eff=[add("zoe_refused", 1)]),
+                "zoe_apartment", 7, eff=[add("zoe_refused", 1)], label="Let her go and dance."),   # pass 3 D39 (R7)
     ]})
 
 # ── step 2 · Zoe A 2 · bra through the sleeve ──
@@ -176,31 +182,51 @@ out.append({
         node("sleeve", "Through the sleeve", [
             # false lines a3 #27 (DECISIONS 129): a sports bra doesn't unhook, so it gets its own line
             G(cond(PARTY_DRESS, PLAIN_BRA), P("You reach up under Zoe's dress and unhook it at the back, and work one strap down your arm and through the armhole of the dress, then the other.")),
-            G(cond({"type": "clothing_item", "item_id": "zoe_party_dress", "operator": "unequipped"}, PLAIN_BRA), P("You reach up the back and unhook it, and work one strap down your arm and out through your sleeve, then the other.")),
+            # scene reader b03 (2026-11-03): a sleeve only when there is a top or a dress; in a bra and nothing over it, no sleeve
+            G(cond({"type": "clothing_item", "item_id": "zoe_party_dress", "operator": "unequipped"}, PLAIN_BRA, {"type": "clothing_slot", "slot": "top", "operator": "equipped"}), P("You reach up the back and unhook it, and work one strap down your arm and out through your sleeve, then the other.")),
+            G(cond({"type": "clothing_slot", "slot": "dress", "operator": "equipped"}, {"type": "clothing_item", "item_id": "zoe_party_dress", "operator": "unequipped"}, PLAIN_BRA), P("You reach up the back and unhook it, and work one strap down your arm and out through the armhole, then the other.")),
+            G(cond({"type": "clothing_slot", "slot": "top", "operator": "unequipped"}, {"type": "clothing_slot", "slot": "dress", "operator": "unequipped"}), P("There's no sleeve to work it through. You reach back, unhook it in one go, and peel it off your tits with the whole party on the other side of the glass.")),
             G(cond(PARTY_DRESS, SPORTS_BRA), P("You reach up under Zoe's dress and drag the sports bra up, and work it off one arm at a time through the armholes of the dress.")),
-            G(cond({"type": "clothing_slot", "slot": "dress", "operator": "unequipped"}, SPORTS_BRA), P("You drag the sports bra up off your tits under your top, and work it off one arm at a time, out through your sleeves.")),
+            G(cond({"type": "clothing_slot", "slot": "dress", "operator": "unequipped"}, {"type": "clothing_slot", "slot": "top", "operator": "equipped"}, SPORTS_BRA), P("You drag the sports bra up off your tits under your top, and work it off one arm at a time, out through your sleeves.")),
             G(cond({"type": "clothing_slot", "slot": "dress", "operator": "equipped"}, {"type": "clothing_item", "item_id": "zoe_party_dress", "operator": "unequipped"}, SPORTS_BRA), P("You reach up under the dress and drag the sports bra up off your tits, and work it off one arm at a time through the armholes.")),
             # reader a3 older: Zoe's dress has armholes, not sleeves
-            G(cond({"type": "clothing_item", "item_id": "zoe_party_dress", "operator": "unequipped"}), P("It takes forever. Zoe watches every second. When it slides out of your sleeve your nipples are hard in the cold air, two points anyone could see, and inside, through the glass, a guy at the window puts two fingers in his mouth and whistles.")),
+            G(cond({"type": "clothing_item", "item_id": "zoe_party_dress", "operator": "unequipped"}, {"type": "clothing_slot", "slot": "top", "operator": "equipped"}), P("It takes forever. Zoe watches every second. When it slides out of your sleeve your nipples are hard in the cold air, two points anyone could see, and inside, through the glass, a guy at the window puts two fingers in his mouth and whistles.")),
+            G(cond({"type": "clothing_item", "item_id": "zoe_party_dress", "operator": "unequipped"}, {"type": "clothing_slot", "slot": "dress", "operator": "equipped"}), P("It takes forever. Zoe watches every second. When it slides out through the armhole your nipples are hard in the cold air, two points anyone could see through the cloth, and inside, through the glass, a guy at the window puts two fingers in his mouth and whistles.")),
+            G(cond({"type": "clothing_slot", "slot": "top", "operator": "unequipped"}, {"type": "clothing_slot", "slot": "dress", "operator": "unequipped"}), P("Your tits are bare on the balcony, your nipples hard in the cold air, and inside, through the glass, a guy at the window puts two fingers in his mouth and whistles.")),
             G(cond(PARTY_DRESS), P("It takes forever. Zoe watches every second. When it slides out through the armhole your nipples are hard in the cold air, two points anyone could see under her dress, and inside, through the glass, a guy at the window puts two fingers in his mouth and whistles.")),
+            # pass 3 B4: the balcony talks
+            D(Z, "Slower. Make the window wait for it."), ME("Zo, that guy is staring right at me."), D(Z, "I know. Isn't it the best?"),
         # reader a3, seen by the readers (DECISIONS 131): Zoe doesn't have it yet when the button shows
         ], [go("Ask for it back.", node="mine", mins=3, eff=[add("exhibitionism", 3, cap=79)], flags=[fset("zoe_has_bra")],
                wardrobe=[{"action": "unequip", "item_id": "plain_bra"}, {"action": "unequip", "item_id": "sports_bra"}])]),
         node("already", "Already", [D(Z, "You're— oh my god. All night? Babe."), P("She looks at your chest for a long second, then laughs and leans on the rail next to you, close, her shoulder on your bare arm.")],
              [go("Laugh with her.", node="mine2", mins=3, eff=[add("exhibitionism", 3, cap=79)])]),
-        node("mine2", "Saturday", [D(Z, "There's a hot tub Saturday. At the party house. Just us. Well. Just us and some people."), T("She keeps looking at your chest. She keeps not asking.")],
+        node("mine2", "Saturday", [D(Z, "There's a hot tub Saturday. At the party house. Just us. Well. Just us and some people."), ME("Some people?"), D(Z, "Some. Bring nothing to wear."), T("She keeps looking at your chest. She keeps not asking.")],
              [go("\"Saturday.\"", loc="zoe_apartment", mins=5, consumes=True, eff=[setv("zoe_step", 2)], flags=[done(2), fset("party_house_invite")])]),
         no_node("no", [D(Z, "Boo. Fine. I'll think of a worse one."), P("She goes back inside and leaves the balcony door open behind her.")], "zoe_apartment", 7,
+                label="Stay out on the balcony a minute.",
                 eff=[add("zoe_refused", 1)], flags=[fset("zoe_balcony_refused")]),
         node("kiss", "Kiss him", [
             D(Z, "Fine. Kiss the cocky guy. Properly."),
-            *top_or_dress(beat("zoe_dares", "low_do")),
+            # scene reader b03 (2026-11-03): worded by what she has on top, as zoe_dares (pools.dare_by_top)
+            # fix_g3c: one beat with only the differing sentence chained (canv.chain_by_sentence); "your dress" only
+            # behind the two dresses themselves (the uniforms, the towel and the sleep shirt are dress-slot items too)
+            *chain_by_sentence([
+                (cond({"type": "clothing_slot", "slot": "top", "operator": "equipped"}, {"type": "clothing_slot", "slot": "dress", "operator": "unequipped"}), beat("zoe_dares", "low_do")),
+                *[(cond({"type": "clothing_item", "item_id": d, "operator": "equipped"}), beat("zoe_dares", "low_do").replace("your top", "your dress")) for d in DRESSES],
+                (cond({"type": "clothing_slot", "slot": "top", "operator": "unequipped"}, {"type": "clothing_slot", "slot": "dress", "operator": "unequipped"}, {"type": "clothing_slot", "slot": "bra", "operator": "equipped"}),
+                 beat("zoe_dares", "low_do").replace("Your nipples go hard under your top, and he feels them.", "Your nipples go hard through your bra, and he feels them.")),
+                (cond({"type": "clothing_slot", "slot": "top", "operator": "unequipped"}, {"type": "clothing_slot", "slot": "dress", "operator": "unequipped"}, {"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}),
+                 beat("zoe_dares", "low_do").replace("Your nipples go hard under your top, and he feels them.", "Your bare nipples go hard against his shirt, and he feels them.")),
+                (cond({"type": "clothing_slot", "slot": "dress", "operator": "equipped"}), beat("zoe_dares", "low_do").replace("your top", "your clothes"))]),   # any other dress-slot item
             # pass 3 B37: its own asset, not zoe_dares' low_do pool (one asset, one block)
             VID("a girl kissing a guy hard at a party, his hands on her ass, people cheering", "girl kisses guy at party dare", "dare kiss party hands on ass", pool_dir="sex/zoe_02_kiss_t3"),
+            D("npc_cocky_guy", "Zoe. I owe you one."), D(Z, "You owe her, not me. Hands off now."),
         ], [go("\"Saturday?\"", node="saturday", mins=10, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 3, "cap": 39}])]),
         node("saturday", "Saturday", [
             P("Zoe pulls you back out onto the balcony, flushed."),
             D(Z, "There's a hot tub Saturday. At the party house. Just us. Well. Just us and some people."),
+            ME("Is he one of the people?"), D(Z, "Only if you want him to be, babe."),
         ], [go("\"Saturday.\"", loc="zoe_apartment", mins=5, consumes=True,
                eff=[setv("zoe_step", 2)], flags=[done(2), fset("party_house_invite")])]),
         node("mine", "Mine now", [
@@ -208,6 +234,7 @@ out.append({
             D(Z, "Nope. Mine now."),
             P("Then she leans on the rail next to you, close, her shoulder against your bare arm, and says it quieter."),
             D(Z, "There's a hot tub Saturday. At the party house. Just us. Well. Just us and some people."),
+            ME("And my bra?"), D(Z, "Stays with me. You won't need it Saturday."),
             T("She keeps looking at your chest. She keeps not asking."),
         ], [go("\"Saturday.\"", loc="zoe_apartment", mins=5, consumes=True,
                eff=[setv("zoe_step", 2)], flags=[done(2), fset("party_house_invite")])]),
@@ -252,7 +279,7 @@ out.append({
         node("home_no", "Home", [D(Z, "Next Saturday, then. I'll ask again."), P("She doesn't sound annoyed. She sounds like she's counting. You climb out and get dressed and go home with dry hair, the chlorine still on your skin, and Ryan's door is shut.")],
              [go("Go to bed.", loc="home_ella_room", mins=5, retry=7)]),
         node("home", "Home at three", [
-            P("You let yourself in. The house is dark, and your hair drips on the mat. You smell of chlorine, and Zoe's lipstick is still on your neck. Upstairs, Ryan's door is open a crack. He is awake. He sees you on the landing. His eyes stop on your wet hair, then drop to your neck and stay there. \"@player.nickname. Where've you been?\" \"Zoe's.\" You say nothing else, because you want him to wonder. Your face goes hot under his stare, but you hold it. Ryan's jaw tightens. He looks a beat too long, then his door closes slowly."),
+            P("You let yourself in. The house is dark, and your hair drips on the mat. You smell of chlorine, and Zoe's lipstick is still on your neck. Upstairs, Ryan's door is open a crack. He is awake. He sees you in the hall. His eyes stop on your wet hair, then drop to your neck and stay there. \"@player.nickname. Where've you been?\" \"Zoe's.\" You say nothing else, because you want him to wonder. Your face goes hot under his stare, but you hold it. Ryan's jaw tightens. He looks a beat too long, then his door closes slowly."),
         ], [go("Go to bed.", loc="home_ella_room", mins=5, retry=7, eff=[nadd("npc_ryan", "want", 5)])]),
     ]})
 
@@ -269,6 +296,7 @@ out.append({
         node("asked", "So I wouldn't have to ask", [
             D(Z, "I dared you instead of asking. I always do. That's all the dares were. Pathetic, right?"),
             P("She says it to the cereal box. Her ears are red."),
+            ME("Not pathetic. A bit stupid, maybe."), D(Z, "Wow. Thanks, babe. Really."),
             T("All term. Every dare. She wanted you and she made it a game so she'd never have to say it."),
         ], [
             go("\"Then keep daring me.\"", node="keep", mins=5),
@@ -298,13 +326,17 @@ out.append({
         node("asking", "I'm asking", [
             P("Zoe pulls you into her bedroom and shuts the door on the party. The music thumps through it. She leans back against the door and, for once, she isn't grinning."),
             D(Z, "No dare. I'm asking."),
-            T("You want her to dare you something worse. She isn't going to."),
+            T("You want her to dare you something worse, but she isn't going to."),
         ], [
             go("\"Yes.\"", node="down", mins=5),
             go("\"Ask me again.\"", node="again", mins=2),
         ]),
         node("down", "Her bed", [P(beat("zoe_05_no_dare", "down")),
-            VID("a girl going down on her friend on a bed, party lights under the door", "girl eats out her friend on bed", "lesbian oral bed party", pool_dir="sex/zoe_05_down_t5")],
+            VID("a girl going down on her friend on a bed, party lights under the door", "girl eats out her friend on bed", "lesbian oral bed party", pool_dir="sex/zoe_05_down_t5"),
+            # reader pass 3 b00: Zoe's mouth is on her, so the begging is Ella's, and Zoe's line is about her own mouth
+            ME("Oh fuck. Right there, Zo. Don't you dare stop."),
+            D(Z, "I've wanted my mouth on your cunt all term, babe."),
+            P("She says it against your clit, and her tongue goes straight back to work.")],
             [go("Don't stop.", node="comes", mins=10)]),
         node("comes", "The door", [P(beat("zoe_05_no_dare", "comes")),
             VID("a girl coming with her hand over her mouth, her friend between her thighs, a guy in the doorway", "girl orgasm hand over mouth door opens", "lesbian caught by guy at door", pool_dir="sex/zoe_05_comes_t5")],
@@ -349,7 +381,7 @@ ZOE_STATE = [
 ZOE_LEAKS = [
     G(cond(trait("zoe_step", "eq", 1), {"type": "clothing_slot", "slot": "bra", "operator": "equipped"}), P("Her eyes keep going to your bra strap.")),
     # not on Saturday: that night she is in the tub (iteration 002, part 8, reader)
-    G(cond(trait("zoe_step", "eq", 2), {"type": "weekday", "weekdays": [0, 1, 2, 3, 4, 6]}), D(Z, "There's a hot tub Saturday. Just us. Don't forget.")),
+    G(cond(trait("zoe_step", "eq", 2), {"type": "weekday", "weekdays": [0, 1, 2, 3, 4, 6]}), D(Z, "There's a hot tub Saturday. You, me, and some people. Don't forget.")),   # scene reader b02: her friends are in the tub (zoe_03)
     G(cond(trait("zoe_step", "eq", 3)), D(Z, "You didn't need me last time, babe.")),
 ]
 
@@ -360,7 +392,10 @@ out.append({
                 "conditions": cond(flag("zoe_met"))},
     "nodes": [node("grass", "The grass", [
         P("Zoe's on the grass with her shoes off. She doesn't say hello. She just puts her head in your lap and looks up at you, and when people look over, she says, \"Let them.\""),
-        POOL(D(Z, "Tell me something bad you did."), D(Z, "That guy's been staring at your legs for ten minutes. Want me to make it twenty?"), D(Z, "Friday. You're coming. I'm not asking."), pid="zoe_quad_lines"),
+        POOL(D(Z, "Tell me something bad you did."), D(Z, "That guy's been staring at your legs for ten minutes. Want me to make it twenty?"), D(Z, "Friday. You're coming. I'm not asking."),
+             D(Z, "Best friend I've made at this whole college, and you're wasted on Psychology."),   # pass 3 C45 (the-first-hour.md F10): who she is, in the pool
+             pid="zoe_quad_lines"),
+        ME("Hey, Zo."), D(Z, "Hey yourself. Stay still, you're my pillow now."),   # pass 3 B4
         *ZOE_STATE, *ZOE_LEAKS,
     ], [go("Lie back with her a while.", loc="quad", mins=30), go("Leave her to the sun.", loc="campus")])]})
 
@@ -375,9 +410,12 @@ out.append({
         G(cond(wd(3, 4)), D(Z, "Friday. Mine. Don't make me come and get you.")),
         # reader a3 #20 (DECISIONS 131): Mon-Wed points ahead too. Her Friday party runs every Friday (hub_zoe_apartment)
         G(cond(wd(0, 1, 2)), D(Z, "Friday's coming, babe. Start planning.")),
-        POOL(D(Z, "Babe. You will not believe what the TA said to me."), D(Z, "Sit. You're with me."), D(Z, "Who's the guy? Don't say no guy. There's a guy."), pid="zoe_lunch_lines"),
+        POOL(D(Z, "Babe. You will not believe what the TA said to me."), D(Z, "Sit. You're with me."), D(Z, "Who's the guy? Don't say no guy. There's a guy."),
+             D(Z, "What are friends for? Give me your fries."),   # pass 3 C45 (F10)
+             pid="zoe_lunch_lines"),
+        ME("Hi, Zo."), D(Z, "Hi, gorgeous. You're buying dessert."),   # pass 3 B4
         *ZOE_STATE,
-    ], [go("Stay for lunch with her.", loc="canteen", mins=30), go("Go.", loc="campus")])]})
+    ], [go("Stay for lunch with her.", loc="canteen", mins=30), go("Leave her your fries.", loc="campus")])]})
 
 # ── her face in class: Biology and figure drawing, once met (ledger L27; sweep A5-11) ──
 out.append({
@@ -390,9 +428,10 @@ out.append({
         POOL(D(Z, "Notes are for people with no friends. I'll copy yours."), D(Z, "Sit with me. This is going to be so boring."),
              D(Z, "Don't let me fall asleep. Actually, do."),
              D(Z, "Party's Friday. You're coming."),   # reader a3 #21 (DECISIONS 131): a forward line; her class rows are Mon-Thu
+             D(Z, "You're my only friend in this class who takes notes. Guard them with your life."),   # pass 3 C45 (F10)
              pid="zoe_class_lines"),
         *ZOE_STATE, *ZOE_LEAKS,
-    ], [go("Whisper with her a while.", loc="lecture_hall", mins=10), go("Go.", loc="campus")])]})
+    ], [go("Whisper with her a while.", loc="lecture_hall", mins=10), go("Leave her to doodle.", loc="campus")])]})
 
 PRE_PARTY = [wd(4), tod("18:00", "19:00")]
 PARTY_ON = cond(wd(4), tod("19:00", "00:00"))
@@ -419,7 +458,9 @@ out.append({
           P("The party's thinner now, the music lower. Zoe's on the arm of the couch with her shoes off, holding court."),
           D(Z, "Now you show up? Get a drink. Catch up.")),
         G(cond(*COUCH), P("Zoe's on the couch in a big T-shirt with the TV on and her feet up. She shoves her feet off the cushion for you."),
-          POOL(D(Z, "Stay. Watch trash with me."), D(Z, "Paint my nails. You've got steadier hands."), D(Z, "I'm bored. Dare me something."), pid="zoe_home_lines")),
+          POOL(D(Z, "Stay. Watch trash with me."), D(Z, "Paint my nails. You've got steadier hands."), D(Z, "I'm bored. Dare me something."),
+               D(Z, "You're my favorite friend at that whole college. Don't tell the others."), pid="zoe_home_lines"),
+          ME("Budge up, then."), D(Z, "Only if you rub my feet.")),   # pass 3 B4
         G(cond(flag("picks_the_dares"), wd(4), tod("23:00", "00:00"), trait("exhibitionism", "gte", 40), {"type": "hours_since_flag", "subject": "player", "flag_key": "party_went", "operator": "lt", "value": 8}), D(Z, "Go on, then. What's tonight's dare?")),
         G(cond(flag("picks_the_dares"), *PARTY_LATE["items"], trait("exhibitionism", "gte", 40), {"type": "hours_since_flag", "subject": "player", "flag_key": "party_went", "operator": "lt", "value": 8}), D(Z, "Go on, then. What's tonight's dare?")),
         *zoe_state("Later, babe."), *ZOE_LEAKS,   # reader a3 #36 (DECISIONS 131): her own flat
@@ -430,15 +471,21 @@ out.append({
            # in her lap with nobody else watching is a thing she does, not shows: Corruption, the meter it is gated on,
            # capped at the top of Curious (pass 3 A48, G8)
            flags=[fset("made_up"), fset("made_up_today")], eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 39}]),
+        # reader batch 5 (pass 3): her "Lips first." gets a written no
+        go("\"I'll do my own face.\"", node="face_no", mins=0, cond_=cond(*PRE_PARTY, flag("made_up_today", False))),
         go("Stay a while.", loc="zoe_apartment", mins=45),
-        go("Go.", loc="town"),
+        go("Leave her to her couch.", loc="town"),
     ]),
+    node("face_no", "Your own face", [
+        D(Z, "Your loss, babe. Don't come crying to me when nobody looks at you."),
+        P("She turns back to the mirror in her underwear and does her own lips, slow, watching you in the glass the whole time."),
+    ], [go("Wait for the party.", loc="zoe_apartment", mins=60)]),
     node("face", "Lips. Open.", [
         P("She sits you on the arm of the couch and tips your chin up with two fingers and does your whole face, eyes and skin and lips, close enough that you can feel her breathing."),
         D(Z, "Lips. Open. There. Now you look like trouble."),
     ], [go("Look in the mirror.", loc="zoe_apartment", mins=5)]),
     node("face_lap", "In her lap", [
-        P("She pulls you into her lap on the couch to do it, your knees either side of hers, and does your eyes with her face an inch from yours. She takes longer than she needs to. Neither of you mentions it."),
+        P("She pulls you into her lap on the couch to do it, your knees either side of hers, and does your eyes with her face an inch from yours. She takes longer than she needs to, but neither of you mentions it."),
         D(Z, "Lips. Open. Don't move. I said don't move."),
     ], [go("Look in the mirror.", loc="zoe_apartment", mins=5)]),
 ]})
@@ -484,9 +531,18 @@ out.append({
                 "conditions": cond(flag("zoe_met"))},
     "nodes": [node("deck", "The deck", [
         P("Zoe's in the hot tub on the back deck with two of her friends, hair piled up, a drink on the rim, steam all round her."),
-        POOL(D(Z, "Get in. The water's perfect."), D(Z, "There she is. Make room, girls."), pid="zoe_party_house_lines"),
+        POOL(D(Z, "Get in. The water's perfect."), D(Z, "There she is. Make room, girls."),
+             D(Z, "Girls, this is my friend from college. Be nice. Or don't."), pid="zoe_party_house_lines"),
+        # reader batch 4 (pass 3): a forward line that can show here (her Friday party at her flat, PARTY_ON)
+        D(Z, "And Friday you're at mine. Don't you dare miss it."),
         *ZOE_STATE, *ZOE_LEAKS,
-    ], [go("Sit on the edge with your feet in.", loc="party_house", mins=20), go("Go.", loc="town")])]})
+    ], [go("Sit on the edge with your feet in.", node="edge", mins=0), go("Leave her to the tub.", loc="town")]),
+        # reader batch 4 (pass 3): her "Get in." answered on the screen it lands on
+        node("edge", "Feet in", [
+            P("You sit on the edge of the tub and put your feet in the water."),
+            D(Z, "Coward. Feet only? Fine. For now."),
+            P("She splashes your knees and laughs, and her eyes run up your wet legs and stay there."),
+        ], [go("Watch the steam a while.", loc="party_house", mins=20)])]})
 
 out.append({
     "id": "hub_zoe_park", "name": "Zoe, running",
@@ -503,10 +559,19 @@ out.append({
             G(cond(flag("zoe_run_booked")), D(Z, "You actually came! Okay. I owe you a coffee.")),
             G(cond(flag("zoe_run_booked", False), flag("zoe_bailed")), D(Z, "Oh, look who remembered mornings exist.")),
         ], [
-            *booked_split(go("Run a lap with her.", loc="park", mins=30, costs=[{"trait": "energy", "value": 10}],
+            # pass 3 D44 (the-surfaces.md R9): the lap with her lands on a screen of it, not a toast
+            *booked_split(go("Run a lap with her.", node="lap", mins=30, costs=[{"trait": "energy", "value": 10}],
                              flags=[fset("ran_with_zoe"), funset("zoe_bailed")]), "zoe_run_booked"),
-            go("Go.", loc="street"),
+            go("Let her run on.", loc="street"),
         ]),
+        node("lap", "A lap with her", [
+            P("She sets the pace and doesn't let up, and by the far end of the pond your lungs are burning and sweat is running down between your tits. Zoe drops back on the last stretch to run behind you."),
+            D(Z, "Just enjoying the view, babe. Keep going."),
+            # scene reader b03 (2026-11-03): the not-yet, and the hook by her run row (Sat and Sun 08:00-10:00)
+            P("She stays two strides behind you all the way to the gates, her eyes on your ass, and she never closes the gap. Not yet."),
+            G(cond(wd(5)), D(Z, "Same loop tomorrow. Eight sharp, babe.")),
+            G(cond(wd(6)), D(Z, "Same loop next Saturday. Eight sharp, babe.")),
+        ], [go("Walk it off.", loc="street")]),
     ]})
 
 # reader a3 #23 (DECISIONS 131): each branch points at her next dare. She runs Sat and Sun 08:00-10:00, and the dare
@@ -537,7 +602,7 @@ out.append({
 cards = step_cards(Z, {
     1: ("Zoe's party, Friday, at her place. She has a dress for you.", "Friday evening: Zoe's party at her apartment"),
     2: ("Her eyes keep going to your bra strap. She has a dare.", "A Friday party at Zoe's, out on the balcony (Curious or Daring)"),
-    3: ("\"There's a hot tub Saturday. Just us.\"", "Saturday night: the hot tub at the party house (Curious, Daring)"),
+    3: ("\"There's a hot tub Saturday. You, me, and some people.\"", "Saturday night: the hot tub at the party house (Curious, Daring)"),
     4: ("\"You didn't need me in the hot tub.\" She still won't ask.", "An evening at Zoe's apartment, on her couch"),
     5: ("Party nights are hers. Four dares, and she stops daring.", "After a Friday party, past midnight (Bold)"),
 }, met_flag="zoe_met", terminal_text=("Her dares, every Friday: she joins in now.", "Zoe's next dare. (Next release)"))
@@ -569,6 +634,13 @@ _s2c["nodes"] = [n for n in _s2c["nodes"] if n["id"] in ("balcony", "kiss", "sat
 own_media(_s2c["nodes"], "curious")   # pass 3 B37: the copy's kiss clip is its own asset
 
 _s2c["nodes"][0]["choices"] = [c for c in _s2c["nodes"][0]["choices"] if c.get("nodeId") not in ("sleeve", "already")]   # Daring-only
+# scene reader b02 (2026-11-03): in this copy "I'm not wearing one" is cut, so with no bra on she has already
+# beaten the bra dare and Zoe says so; the dare line itself only while there is a bra to take off
+_BRA_DARE = D(Z, "Bra off. Through the sleeve. Don't take anything else off. That's the dare.")
+_i = _s2c["nodes"][0]["blocks"].index(_BRA_DARE)
+_s2c["nodes"][0]["blocks"][_i:_i + 1] = [
+    G(cond({"type": "clothing_slot", "slot": "bra", "operator": "equipped"}), _BRA_DARE),
+    G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}), D(Z, "No bra under that? Babe. You've beaten my bra dare before I've said it. So what do I dare you instead?"))]
 out.insert(out.index(_s2) + 1, _s2c)
 _c1 = next(c for c in cards if c.get("ready_canvas") == "zoe_01_first_party")
 _c1["when"].append({"flag": "zoe_kiss_refused", "op": "is_false"})
@@ -577,7 +649,8 @@ cards.insert(cards.index(_c1) + 1, {"npc_id": Z, "priority": 10,
     "tip": "A Friday party at Zoe's, 7 to 11 PM",
     "when": [{"type": "trait", "subject": "player", "trait": "zoe_step", "op": "eq", "value": 0},
              {"flag": "zoe_kiss_refused", "op": "is_true"}, {"flag": "zoe_met", "op": "is_true"}],   # pass 3 C38: every card after the meeting carries it
-    "goals": [{"type": "trait", "subject": "player", "trait": "corruption", "op": "gte", "value": 20, "label": "Reach Curious (Corruption 20)"}],
+    "goals": [{"type": "trait", "subject": "player", "trait": "corruption", "op": "gte", "value": 20,
+               "label": "Reach Curious (Corruption 20): " + STAGE_WAY[("corruption", 20)]}],   # pass 3 J36: the feeder, not a bare number
     "ready_canvas": "zoe_01b_kiss_again"})
 _c2 = next(c for c in cards if c.get("ready_canvas") == "zoe_02_bra_through_the_sleeve")
 _c2["tip"] += "; Daring, or Curious when Jake's teammate is at the party"

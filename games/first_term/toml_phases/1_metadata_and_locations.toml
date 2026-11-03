@@ -408,7 +408,7 @@ default = "El"
 id          = "street"
 name        = "Your Street"
 kind        = "thoroughfare"
-description = "Your street: the way out to everything. Home is halfway down, with the porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this pavement, and every neighbour with a window sees what you wore to do it."
+description = "Your street: the way out to everything. Home is halfway down, with the porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this sidewalk, and every neighbor with a window sees what you wore to do it."
 image       = "locations/street.jpg"
 image_search_queries = ["your street"]
 navigation_order = ["home", "vance_house", "park", "corner_shop", "campus", "town"]
@@ -423,7 +423,7 @@ clothing_rules = [
   { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
 ]
 description_variants = [
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "vance_met", operator = "is_true" }] }, text = "Your street: the way out to everything. Home is halfway down, with Mr. Vance's porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this pavement, and every neighbour with a window sees what you wore to do it." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "vance_met", operator = "is_true" }] }, text = "Your street: the way out to everything. Home is halfway down, with Mr. Vance's porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this sidewalk, and every neighbor with a window sees what you wore to do it." },
 ]
 
 [[locations]]
@@ -487,7 +487,7 @@ entry_from  = "home_hall"
 navigation_order = []
 
 [locations.door]
-description = "Laura and Mark's door, at the end of the landing."
+description = "Laura and Mark's door, at the end of the hall."
 no_answer   = "You knock. Nobody comes to the door."
 
 [[locations.door.options]]
@@ -886,7 +886,7 @@ clothing_rules = [
 id          = "college_womens_toilet"
 name        = "Women's Toilet"
 kind        = "destination"
-description = "The women's toilets by the lecture hall: four stalls, a long mirror and a sink. A quick wash between classes, a look at yourself, a change of clothes behind a locked stall door. The door to the corridor doesn't lock."
+description = "The women's toilets by the lecture hall: four stalls, a long mirror and a sink. A quick wash between classes, a look at yourself, a change of clothes behind a locked stall door. The door out to campus doesn't lock."
 image       = "locations/college_womens_toilet.jpg"
 image_search_queries = ["women's toilet"]
 parent      = "campus"
@@ -899,7 +899,7 @@ closed_text = "The college gates are shut."
 id          = "college_mens_toilet"
 name        = "Men's Toilet"
 kind        = "destination"
-description = "The men's toilets across the corridor from the women's: a row of urinals, two stalls and a mirror nobody looks in. There's nothing to do here right now."
+description = "The men's toilets across from the women's: a row of urinals, two stalls and a mirror nobody looks in. There's nothing to do here right now."
 image       = "locations/college_mens_toilet.jpg"
 image_search_queries = ["men's toilet"]
 parent      = "campus"
@@ -1827,7 +1827,7 @@ name         = "The art lecturer"
 description  = "Your Figure drawing lecturer, 45. Wants to draw you. Age 45."
 portrait     = "portraits/art_lecturer.jpg"
 relationship = "Your Figure drawing lecturer, 45. Wants to draw you."
-role         = "Figure drawing"
+role         = "Figure drawing lecturer"
 tags         = ["Looks for a living", "To draw you", "Charcoal on her hands", "Green tea"]
 core_traits  = {  }
 
@@ -1861,8 +1861,8 @@ name         = "The Business lecturer"
 description  = "Your Business lecturer, 50. Strict. Can't be bought. Age 50."
 portrait     = "portraits/business_lecturer.jpg"
 relationship = "Your Business lecturer, 50. Strict. Can't be bought."
-role         = "Business"
-tags         = ["By the book", "Your work, done", "Grey suit", "Instant coffee"]
+role         = "Business lecturer"
+tags         = ["By the book", "Your work, done", "Gray suit", "Instant coffee"]
 core_traits  = {  }
 
 [[npcs.schedules]]
@@ -1989,7 +1989,7 @@ name         = "The guy beside you"
 description  = "A guy who sits beside you in class, 21. Always needs help with something. Age 21."
 portrait     = "portraits/desk_guy.jpg"
 relationship = "A guy who sits beside you in class, 21. Always needs help with something."
-role         = "the next desk"
+role         = "classmate, next desk"
 core_traits  = {  }
 
 [[npcs]]

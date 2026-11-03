@@ -227,7 +227,7 @@ thread("laura_dinner", LA, "📱 Mom",
        ["home for dinner sweetheart?"],
        [("yes, starving", {"effects": [npc_eff(LA, "warmth", 1)], "flagEffects": [setf("dinner_promised")]},
          "six. kitchen. don't be late"),
-        ("eating out tonight", {"flagEffects": [setf("said_eating_out")]}, "ok. text me when you're on your way"),
+        ("eating out tonight", {"flagEffects": [setf("said_eating_out")]}, "ok. text me when you're coming"),
         ("is mark cooking?", {}, "god no. it's me")],
        repeat=7, ignore=(1, {"effects": [npc_eff(LA, "warmth", -1)]}),
        comment="Laura: caused by laura_01_done (the blue dress). The yes books dinner (laura.py DINNER_DONE).")
@@ -295,7 +295,7 @@ noshow("zoe_run_noshow", Z, "📱 Zoe", "zoe_run_booked", 16,
 # ── 6 · Dr. Hale, his college email (npc_hale.md: hale_02_done, a day later, 09:00-17:00; whole sentences) ──
 thread("hale_office_hours", H, "📧 College email: Dr. Hale",
        [F("hale_02_done"), SINCE("hale_02_done", 1), DAYS(0, 1, 2, 3, 4), HOURS("09:00", "17:00")],
-       ["Office hours are Thursday, after six. Bring the essay."],
+       ["Thursday, six, my office. Bring the essay."],
        [("I'll be there.", {"flagEffects": [setf("hale_office_booked")]}, "Good. — H."),
         ("I can't this Thursday.", {}, "Then next Thursday. — H.")],
        ignore=(1, {"effects": [pl_eff("grade_psych", -1)]}),   # (pass 3 F60) an unanswered email from your lecturer is marked
@@ -318,8 +318,8 @@ thread("hale_thursday", H, "📧 College email: Dr. Hale",
        repeat=6, ignore=(1, {"effects": [pl_eff("grade_psych", -1)]}),   # (pass 3 F60)
        comment="Hale's repeat, after his step 4 (release 1): Wednesday, \"Thursday. Half past six.\" The yes books it (hale.py).")
 noshow("hale_thursday_noshow", H, "📧 College email: Dr. Hale", "hale_thursday_booked", 24,
-       ["The door was unlocked at half past six."],
-       [("I couldn't get away.", "Then don't say half past six. — H."), ("Next week.", "We will see. — H.")],
+       ["My door was unlocked at half six."],
+       [("I couldn't get away.", "Then don't promise half six. — H."), ("Next week.", "We will see. — H.")],
        {"effects": [pl_eff("grade_psych", -1)]},
        extra=[DAYS(4), HOURS("09:00", "17:00")],
        comment="Hale: she said seven and didn't come (DECISIONS 87)")
@@ -342,7 +342,7 @@ thread("jake_date", J, "📱 Jake",
 # The latest pickup is 51 hours after the latest ask, so 72 hours after the yes the date is missed. Jake has no
 # meter of his own; the cost is the flag his hub line reads.
 noshow("jake_date_noshow", J, "📱 Jake", "jake_date_booked", 72,
-       ["i was outside your house for twenty minutes", "you ok?"],
+       ["sat outside your house twenty minutes", "you ok?"],
        [("sorry. i fell asleep", "next time text me. ok?"), ("something came up", "fine. you owe me one.")],
        {"flagEffects": [setf("jake_stood_up")]}, extra=[HOURS("10:00", "22:00")],   # (pass 3 F58) the hour window, P4
        comment="Jake: she said yes to a date and wasn't at the door (DECISIONS 87)")
