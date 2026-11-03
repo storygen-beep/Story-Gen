@@ -198,6 +198,7 @@ def test_a_short_pay_carries_then_a_full_pay_clears_it(html):
         assert g.sv("game_state.rent_state.owed") == 70
         assert g.sv("game_state.rent_state.total_paid") == 30
         assert g.sv("flags.rent_carried") is True
+        assert g.sv("flags.rent_short") is True
         assert g.sv("player.core_traits.rent_short_weeks") == 1
 
         _rent_day(g, money=1000)
@@ -210,6 +211,7 @@ def test_a_short_pay_carries_then_a_full_pay_clears_it(html):
         assert g.sv("game_state.rent_state.total_paid") == 200  # past 100: stage 1
         assert LINE_1 in _text(g)
         assert g.sv("flags.rent_carried") is True  # a record, never cleared
+        assert g.sv("flags.rent_short") is False  # short right now: a full payment clears it (2026-11-03)
         assert g.sv("player.core_traits.rent_short_weeks") == 1  # a full week adds nothing
 
         _rent_day(g, money=1000)
@@ -305,3 +307,21 @@ def test_a_save_made_before_en2b_carries_instead_of_ending(html):
         assert g.sv("flags.rent_carried") is True
         assert g.sv("player.core_traits.rent_short_weeks") == 1  # an old save starts from 0
         assert g.errors == []
+
+
+@needs_browser
+def test_rent_short_is_restamped_on_every_short_week(html):
+    """2026-11-03: rent_carried is stamped only on the first short week, so hours_since_flag on it
+    counted from the first one. rent_short is set on every short week, so its age is this week's."""
+    with open_game(html) as g:
+        _rent_day(g, money=30)
+        g.click("Pay the $30 you have")
+        _short(g)
+        first = g.js("() => SugarCube.State.variables.flags_meta.rent_short.set_minute")
+        g.advance_days(7)
+        _rent_day(g, money=0)
+        g.click("Tell them you can't pay")
+        _short(g)
+        second = g.js("() => SugarCube.State.variables.flags_meta.rent_short.set_minute")
+        assert g.sv("flags.rent_short") is True
+        assert second > first

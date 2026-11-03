@@ -9129,6 +9129,8 @@ def create_project_from_template(
             _player_flag_keys.append(template.rent_eviction_flag)
     if rent_carries(template) and RENT_CARRIED_FLAG not in _player_flag_keys:  # EN2b
         _player_flag_keys.append(RENT_CARRIED_FLAG)
+    if rent_carries(template) and RENT_SHORT_FLAG not in _player_flag_keys:
+        _player_flag_keys.append(RENT_SHORT_FLAG)
     for _cf in closed_step_flags(template):  # EN1 — `<canvas>_closed`
         if _cf not in _player_flag_keys:
             _player_flag_keys.append(_cf)
@@ -9663,6 +9665,9 @@ def closed_step_flags(template: "GameTemplate") -> List[str]:
 
 # EN2b — the flag a carried rent week sets. Fixed, like EN1's `<canvas>_closed`.
 RENT_CARRIED_FLAG = "rent_carried"
+# 2026-11-03: rent_carried is a record (set once, never cleared). RENT_SHORT_FLAG is "short right now": set on every
+# short week (so hours_since_flag counts from this week's Sunday) and cleared when a full payment clears `owed`.
+RENT_SHORT_FLAG = "rent_short"
 
 
 def rent_carries(template: "GameTemplate") -> bool:

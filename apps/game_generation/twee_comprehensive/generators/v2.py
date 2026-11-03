@@ -15100,6 +15100,16 @@ document.addEventListener("click", function (ev) {
                     "npc_name": _rent.get("collector_npc", "") or "player",
                     "is_engine": True,
                 }
+            if "rent_short" not in flag_unlock_map:
+                flag_unlock_map["rent_short"] = {
+                    "canvas_name": "the weekly payment (rent system)",
+                    "canvas_id": None,
+                    "location": None,
+                    "schedule": "when a rent payment is short, until the debt is paid in full",
+                    "canvas_conditions": None,
+                    "npc_name": _rent.get("collector_npc", "") or "player",
+                    "is_engine": True,
+                }
         for fe in ((_engine_meta.get("daily_tick", {}) or {}).get("flagEffects", []) or []):
             if fe.get("op") == "set":
                 fk = fe.get("flag")
@@ -15443,6 +15453,7 @@ setup.rentStageLine = function () {
 // `trait rent_short_weeks gte N`). The game declares it in [player.core_traits] to read
 // it; an old save without it starts from 0.
 setup.RENT_CARRIED_FLAG = "rent_carried";
+setup.RENT_SHORT_FLAG = "rent_short";   // short right now: set every short week, cleared by a full payment
 setup.RENT_SHORT_WEEKS_TRAIT = "rent_short_weeks";
 setup.carryRent = function (due, paid) {
     var rs = State.variables.game_state.rent_state;
@@ -15457,6 +15468,8 @@ setup.carryRent = function (due, paid) {
     if (!(State.variables.flags || {})[setup.RENT_CARRIED_FLAG]) {
         setup.applyAndNotifyFlag('player', null, setup.RENT_CARRIED_FLAG, 'set');
     }
+    // set every time ('set' restamps flags_meta), so hours_since_flag counts from this week's Sunday
+    setup.applyAndNotifyFlag('player', null, setup.RENT_SHORT_FLAG, 'set');
 };"""
 
     def _has_consume_on(self) -> bool:
@@ -20528,6 +20541,8 @@ if (clothingMsg) {
             rent_paid_clears_owed = (
                 "      <<set $game_state.rent_state.owed to 0>>\n"
                 "      <<if $player.core_traits.rent_late_fee>><<set $player.core_traits.rent_late_fee to 0>><</if>>\n"
+                # 2026-11-03: a full payment ends "short right now" (rent_carried stays, a record)
+                "      <<if $flags[setup.RENT_SHORT_FLAG]>><<run setup.applyAndNotifyFlag('player', null, setup.RENT_SHORT_FLAG, 'unset')>><</if>>\n"
                 if carry else ""
             )
             rent_partial_link = (

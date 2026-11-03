@@ -115,7 +115,7 @@ meter is not a promise yet: the player cannot reach it, so it belongs to a later
 ```
 
 ```python
-v2.py:15818   def _resolve_pool_dir(self, pool_dir)     # contents discovered from disk
+v2.py:15831   def _resolve_pool_dir(self, pool_dir)     # contents discovered from disk
 v2.py:14801   def _media_pool_key(...)                  # cycle state key
 v2.py:14960   # ... $game_state.media_cycle
 v2.py:14773-14775  # `pool_dir` is preferred: the count is never hardcoded, so the human curates
@@ -207,7 +207,7 @@ The single most load-bearing fact about how content is composed.
 
 ```python
 v2.py:16205   target_passage = self.passage_name_map.get(str(node_id))   # BUILD-time resolution
-v2.py:17961   body_html = self._convert_blocks_to_game_html(beat_blocks) # INSIDE <<linkreplace>>
+v2.py:17974   body_html = self._convert_blocks_to_game_html(beat_blocks) # INSIDE <<linkreplace>>
 ```
 
 - **`targetType = "node"` is resolved when the game is built**, into a static link to
@@ -351,7 +351,7 @@ array. Two levels of nesting is where it breaks.
 
 **Back to where she was — `destinationType = "return"`** (2026-10-02, opt-in). A call's Answer and a
 launcher option store the room she stands in (`setup.markReturnPlace`, `v2.py:18362`); a `return` exit
-goes back there, free, since it is not a move (`setup.returnPassage`, `v2.py:19727`). If that room is
+goes back there, free, since it is not a move (`setup.returnPassage`, `v2.py:19740`). If that room is
 closed or gone, or nothing is stored (a scene entered from its room), the exit goes to the canvas's
 home, as `trigger` does. Arriving at any room clears it. `$game_state.return_place` exists only in a
 game with a `return` exit or choice; old saves get it empty. A choice uses `targetType = "return"` the same way, resolved on the click, after the choice's time;
@@ -380,7 +380,7 @@ A choice with `show_when_locked = true` renders as `<span class="locked-choice">
 sees what the action was called.
 
 **Omit it on a story lock and the row is the action label, greyed, with nothing beside it.**
-`escaped_locked = (locked_text or choice_text)` at `v2.py:16708`, and the same string is repeated
+`escaped_locked = (locked_text or choice_text)` at `v2.py:16721`, and the same string is repeated
 into the `title` tooltip at `:15444-15445`. The player sees "Kiss him" struck out and learns neither
 why nor when. A number leg gets the engine's suffix; a flag leg gets nothing.
 
@@ -827,7 +827,7 @@ blocked_message  = "The dining room's been dark since the staff went."
 template_import.py:199      entry_conditions: Dict[str, Any] = field(default_factory=dict)
 template_import.py:200      blocked_message: str = ""
 template_import.py:2445-2446 parsed
-template_import.py:9246      loc.properties["entry_conditions"] = l.entry_conditions
+template_import.py:9248      loc.properties["entry_conditions"] = l.entry_conditions
 ```
 
 ⚠️ `entry_conditions` needs `version = "1.0"` like any condition block: the importer refuses it
@@ -933,7 +933,7 @@ BUILD are different endings; it needs `terminal` set or the string is dead, and 
 
 ```
 template_import.py:1388        terminal_text: Optional[str] = None
-v2.py:19400                    var _tlabel = card.terminal_text || "Arc complete";
+v2.py:19413                    var _tlabel = card.terminal_text || "Arc complete";
 ```
 
 ⚠️ **The one-`terminal_text`-per-game cap is scoped to a game whose arcs are CLOSED.** In a build
@@ -1011,15 +1011,15 @@ content`** reports both.
 ⚠️ **`pickQuestsCards` takes EXACTLY ONE scope string, and anything else fails silently.**
 
 ```
-v2.py:19220   setup.pickQuestsCards = function(scope) {
-v2.py:19221       if (scope !== "story_goals") return [];
+v2.py:19233   setup.pickQuestsCards = function(scope) {
+v2.py:19234       if (scope !== "story_goals") return [];
 ```
 
 A hard early return, no error, no warning. A typo in that string gives an **empty top section on the
 guidance page** and no clue why. Read the whole function, not the part that answers your question.
 
-**Selection.** `pickQuestsCards(scope)` (`v2.py:19220`) returns every matching top-tier card;
-`pickQuestsCard(slug)` (`v2.py:19195`) returns the **single highest-`priority`** match for a
+**Selection.** `pickQuestsCards(scope)` (`v2.py:19233`) returns every matching top-tier card;
+`pickQuestsCard(slug)` (`v2.py:19208`) returns the **single highest-`priority`** match for a
 character — so a character's cards are a one-live-at-a-time chain.
 
 ⚠️ **Quest conditions use a SEPARATE evaluator with NO fail-open** — `checkQuestsCondition`,
@@ -1393,7 +1393,7 @@ trigger (`v2.py:13491`) and `markCanvasTriggered` stamps its day key **before** 
 
 A flag read as `is_false` and cleared here, with **no canvas setting it**, is a cap that never
 closes. Nothing in the toolchain objects: the generator's flag-chain validator only reports a
-never-set flag when a condition requires it `is_true` (`validate_flag_chains()`, `v2.py:15119`; the
+never-set flag when a condition requires it `is_true` (`validate_flag_chains()`, `v2.py:15129`; the
 test at `:14187`) — deliberately, since an
 `is_false` read is a re-entry guard rather than a prerequisite — so the gate simply fails open.
 
@@ -1754,7 +1754,7 @@ Since EN2c `currency_symbol` covers every rent screen, and nothing else.
 
 Every honouring site concatenates symbol-then-number:
 `"Pay " + _cur + _rent + " rent"` (`v2.py:19204`),
-`<<print _cur>><<print _money>>` (`v2.py:20574`). There is no suffix form and no format string. An invented unit that reads after the number (`10 coin`, `1000 caps`) cannot be
+`<<print _cur>><<print _money>>` (`v2.py:20589`). There is no suffix form and no format string. An invented unit that reads after the number (`10 coin`, `1000 caps`) cannot be
 expressed through `currency_symbol`.
 
 ### 33.3 The sidebar's label
@@ -2008,9 +2008,9 @@ look, kept across the game: `the-want.md` §6.
 **The engine has had this since v2 shipped.**
 
 ```python
-v2.py:18187   if block_type == "block_pool":
-v2.py:18188       pool_blocks = (block.get("props") or {}).get("blocks", [])
-v2.py:18203       parts = [f'<<set _bp to random(0, {max_idx})>>']
+v2.py:18200   if block_type == "block_pool":
+v2.py:18201       pool_blocks = (block.get("props") or {}).get("blocks", [])
+v2.py:18216       parts = [f'<<set _bp to random(0, {max_idx})>>']
 v2.py:17167-17175 # if / elseif / else chain over the variants
 ```
 
@@ -2181,7 +2181,7 @@ importer's choice dataclass through `game_graph.py` to `v2.py` (choice tuple pos
 
 The generator names Mode B itself —
 `# Mode B: Clickable rejection — redirects to rejection node` (`v2.py:15671`), entered from the
-`if rejection_passage:` branch at `v2.py:16709` (`rejection_passage`
+`if rejection_passage:` branch at `v2.py:16722` (`rejection_passage`
 is the generator's internal name for the field authors write as `rejection_node`). The node id is resolved against `passage_name_map` at `v2.py:16218-16222`, which
 logs a warning rather than failing the build if the target does not exist, so **a typo here is
 silent in the game and visible only in the build log.** Effects are emitted at `v2.py:15674-15694`
@@ -2596,7 +2596,7 @@ costs three build rounds rather than one.
 The suppression is `[[traits.labels]] in_dump = false` (or `hidden = true`, the secret-trait switch)
 and nothing else — §30 above says so, and it is worth repeating here because the wrong key is the
 obvious guess. `hide_value = true` only drops the number from a `trait_bar`'s own label
-(`v2.py:20904`); the auto Traits dump keeps printing the bare number under the band.
+(`v2.py:20919`); the auto Traits dump keeps printing the bare number under the band.
 
 ### 41e. `_is_free` reads the TRIGGER, never the inner choices
 
