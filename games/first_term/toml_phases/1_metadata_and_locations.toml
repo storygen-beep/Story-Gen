@@ -1636,7 +1636,7 @@ weekdays   = [0]
 start_time = "18:00"
 end_time   = "19:00"
 activity   = "at your front door"
-when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_carried", operator = "is_true" }] }
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_short", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "rent_short", operator = "lt", value = 48 }] }
 
 [[npcs.schedules]]
 location   = "vance_house"

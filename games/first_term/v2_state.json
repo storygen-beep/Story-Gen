@@ -7417,7 +7417,7 @@
             ],
             "from": "18:00",
             "to": "19:00",
-            "when": "rent_carried",
+            "when": "rent_short",
             "note": "the knock after a short Sunday, above his porch row (sweep A3-09)"
           },
           {
@@ -7748,7 +7748,7 @@
       "letter_home",
       "on_probation",
       "jake_date_booked",
-      "rent_carried",
+      "rent_short",
       "late_party",
       "late_shift",
       "late_date",
@@ -8521,6 +8521,16 @@
         "chrome": {
           "at": "2026-11-03 16:29",
           "report": "Quad unnamed before the meetings and named after; faculty floor lists only the art office when only she is met; goal 2 card text present; jake_date_noshow in the build; setup.RENT_SHORT_FLAG defined; Ryan step 8's talk screen shows his line in a dialog box. Gates 65/90, the six new ones PASS."
+        },
+        "played": null
+      },
+      {
+        "id": "vance_row_rent_short",
+        "what": "Vance's front-door row reads rent_short with its 48-hour window (was rent_carried, which never clears, so after one short week he stood at the door every Monday even when she had paid)",
+        "built_at": "2026-11-03 16:59",
+        "chrome": {
+          "at": "2026-11-03 16:59",
+          "report": "Short week: 'You don't have it' sets rent_short; Monday 18:30 Vance is at the Front Door with his 'Mr. Vance' button. Paid week: 'Pay $150 rent' clears rent_short and owed; Monday 18:30 Vance is Next Door and the front door shows only 'Sit on the step'."
         },
         "played": null
       }
