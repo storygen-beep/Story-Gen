@@ -1,4 +1,6 @@
-# [READY] The taste columns — what every step is designed against, before it is written
+# [REVIEW] The taste columns — what every step is designed against, before it is written
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. File cites removed.
 
 > Signed by LO: LO, 2026-11-01.
 
@@ -74,8 +76,8 @@ already asked, so it is not repeated here.
 
 ## E. Worked on the built Ryan ladder, as it stands
 
-The proof the page catches what the review found by hand. Sources: `iterations/002/build_scripts/ryan.py`,
-`toml_phases/2_one_shots.toml` (step 1), `sheets/people/npc_ryan.md`.
+The proof the page catches what the review found by hand. Sources: the built Ryan ladder and
+`sheets/people/npc_ryan.md`.
 
 | # | step | the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after | empty |
 |---|---|---|---|---|---|---|---|---|---|

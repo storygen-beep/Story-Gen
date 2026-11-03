@@ -1,6 +1,8 @@
-# [READY] Place — Living Room
+# [REVIEW] Place — Living Room
 
-> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 15: the couch's "Stay a while." (Daring, her underwear, Mark or Ryan passing) opens a short screen, `stay_mark` or `stay_ryan`: ten minutes later he comes back, looks, and holds back: "Not with your mother home." / "Not with Mom home, @player.nickname." while Laura is in the house, "Your mother'll be back." / "Mom'll be back, @player.nickname." while she is out. Same pay and once-a-day brake. Mark's hub in this room (row 1): channel 5 on the remote beside him shows only after his accident (`mark_saw_her`), like "Leave it on."; the towel's top band gets "Get dressed." (rows 5-6, below). Built in `home.py` (living_couch) and `mark.py`.
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
+
+> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 15: the couch's "Stay a while." (Daring, her underwear, Mark or Ryan passing) opens a short screen, `stay_mark` or `stay_ryan`: ten minutes later he comes back, looks, and holds back: "Not with your mother home." / "Not with Mom home, @player.nickname." while Laura is in the house, "Your mother'll be back." / "Mom'll be back, @player.nickname." while she is out. Same pay and once-a-day brake. Mark's hub in this room (row 1): channel 5 on the remote beside him shows only after his accident (`mark_saw_her`), like "Leave it on."; the towel's top band gets "Get dressed." (rows 5-6, below).
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
@@ -44,12 +46,33 @@
 | a beer with Mark | person | home_life · Mark's ladder | 30 min · Mark's Want add +1 · `drinks_boost` on | `had_drink_home`, 12 h | yes |
 | a random event | work | home_life | Mark asleep on the couch with the TV on (00:00–02:00, his row) | one a day | yes |
 
+## Built from the heat proposal (signed 2026-11-03)
+
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has here:
+
+**Walk-ins.** Her activity rolls on entry (1 in 4 at her lowest band, more higher up); on a hit someone walks in. A man's pay sits on the moment; her cover pays 0.
+
+| who walks in | her activity | when | his pay, on the moment | her bolder answers |
+|---|---|---|---|---|
+| Mark | Watch TV | Mon, Tue, Thu, Fri 21:30–22:00 | his Want +2 | "Don't reach for the remote yet." Corruption +1, cap 19; "Leave it on." Corruption +1, cap 39 |
+| Mark | Watch TV | Wed 21:30–22:00 | his Want +2 | "Don't reach for the remote yet." Corruption +1, cap 19; "Leave it on." Corruption +1, cap 39 |
+| Ryan | Watch TV | Sat, Sun 13:30–14:00 | his Want +2 | "Don't reach for the remote yet." Corruption +1, cap 19; "Leave it on." Corruption +1, cap 39 |
+| Laura | Watch TV | Sun 21:30–22:00 | none | a line only, no pay |
+
+**Acts, rungs and pools.**
+
+| what | where | buttons and pays |
+|---|---|---|
+| the sound up (C2) | channel 5, alone | "Turn the sound up." Corruption 10; the walk-in odds rise while it's up |
+
 ## Rows a gate needs
 
 | row | gate |
 |---|---|
 | the couch at every hour | a destination is never open and exit-only |
 | Mark's split night rows | standing surface (past midnight) |
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_A.md` (signed with the a2 sheets, DECISIONS 125).
 
 ## Why — the source of each key choice
 

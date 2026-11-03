@@ -261,7 +261,7 @@ tops out eventually. Every arc therefore needs one card that still matches after
 card, or a goal-less end-of-content card that reads forward (*"his trail is logged; the hunt picks up
 in a future update"*).
 
-Never dangle a live goal bullet that cannot flip in this build. That is a fake objective, forever.
+Never dangle a live goal bullet that cannot flip in this build. That is a fake objective, forever. Checked: gate *a goal can flip*.
 
 **The card that catches them, at the bottom of every ladder:**
 

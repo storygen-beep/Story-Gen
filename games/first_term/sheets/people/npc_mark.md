@@ -1,6 +1,10 @@
-# [READY] Person — Mark
+# [REVIEW] Person — Mark
 
-> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): rows 1, 5-6, 16: in his living-room hub, channel 5 beside him needs his accident (`mark_saw_her`), like "Leave it on."; in the towel at his top band (Power 60+, "Come here." / "Stand there.") a written no, "Get dressed.": "Suit yourself.", his Want +1 once a day (the towel's `mark_towel_today`, no new flag), and she goes up to her room; at step 3 (`mark_03_shorts`) both openings under Exhibitionism 20 name his look: "His eyes go down your legs under the table." Built in `mark.py` and `home_items.py`.
+> Changed 2026-11-04 (LO's answers Q3, Q6, Q7, Q10; pass 4 B51): the rent is counted once, by the rent page, and his Sunday scenes count nothing; he has left before breakfast on day one; he says "That's your mother's." in the lingerie walk-in; his repeatable after step 4 is a later release; one hall. Waits for LO's re-sign.
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: his Saturday rows (DECISIONS 152). Step 3 reads `rent_short_weeks`. The moment column names each step's kind and stage. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build.
+
+> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): rows 1, 5-6, 16: in his living-room hub, channel 5 beside him needs his accident (`mark_saw_her`), like "Leave it on."; in the towel at his top band (Power 60+, "Come here." / "Stand there.") a written no, "Get dressed.": "Suit yourself.", his Want +1 once a day (the towel's `mark_towel_today`, no new flag), and she goes up to her room; at step 3 (`mark_03_shorts`) both openings under Exhibitionism 20 name his look: "His eyes go down your legs under the table."
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, skip the play check, build it"; DECISIONS 128): plain items with him pay him nothing (was his Lust +1 each); laundry is a tease ladder by her stage after his accident, no step needed (`scenes/mark_laundry_teases.md`). Sections changed: Everyday (the laundry row).
 
@@ -27,10 +31,10 @@
 | what he keeps | want + power (channel 5 with her: Want +2, once a day, DECISIONS 92) · **Power +5 on each short Sunday** (`sheets/systems/money_pressure.md`); Power picks his version or hers at the table (his at 50+) · nothing of his reads Want this release; it is stored for later |
 | where he sleeps | `home_master_bedroom` |
 | what he calls her | "@player"; "@player.nickname" when he's soft (LO, 2026-10-08, question 71: never "kid") |
-| met | day 1, the house |
-| his line: sleep shirt (covered) | His thumb on the edge of a bill. He counts slower. |
+| met | day 1: his words from last night's dinner, on the opening's "Seventy-five" screen; he has left for work before breakfast (LO, 2026-11-04, Q10) |
+| his line: sleep shirt (covered) | His thumb works at the edge of whatever he's holding. His eyes are on the hem of her sleep shirt. |
 | his line: short skirt | "That's what you wear to my table?" |
-| his line: no bra | "Sit down. You're making me lose count." |
+| his line: no bra | "Sit down, for God's sake." |
 | his line: underwear only | Laura in the house and awake (her rows): "Your mother's in the kitchen." · Laura asleep: "Your mother's asleep." · Laura out: "Lucky your mother's out." He doesn't tell her to cover up. |
 
 ## Schedule grid
@@ -46,7 +50,10 @@
 | `home_kitchen` | Mon, Tue, Thu, Fri | 18:00 | 19:00 | dinner with the family |
 | `home_garage` | Mon, Tue, Thu, Fri | 19:00 | 22:00 | his evenings |
 | `home_kitchen` | Wed | 18:00 | 22:00 | Wednesday cooking · all Sunday |
-| `home_garage` | Sat | 09:00 | 17:00 | his evenings |
+| `home_master_bedroom` | Sat | 07:00 | 08:30 | sleeps in |
+| `home_kitchen` | Sat | 08:30 | 09:00 | coffee at the counter before the garage |
+| `home_garage` | Sat | 09:00 | 17:00 | his Saturday in the garage |
+| `home_kitchen` | Sat | 17:00 | 18:30 | heading out to the bar |
 | `home_kitchen` | Sun | 08:00 | 22:00 | Wednesday cooking · all Sunday |
 
 ## Ladder — one guidance card per step
@@ -57,14 +64,29 @@
 
 | n | canvas | where | when | gate | raises | the no | guidance card line |
 |---|---|---|---|---|---|---|---|
-| 1 | `mark_01_count_it_slowly` | `home_kitchen` | Sun 08:00–12:00 | `rent_starts` | want add +10 | "Let me get dressed first." (parked) | Sunday morning, the kitchen: Mark counts the rent. |
+| 1 | `mark_01_count_it_slowly` | `home_kitchen` | Sun 08:00–12:00 | `rent_starts` | want add +10 | "Let me get dressed first." (parked) | "Sunday. Mark sits you down at the kitchen table with the rent." |
 | 2 | `mark_02_late_notice` | `home_kitchen` | Mon, Tue, Wed, Thu, Fri, Sun 22:00–00:00 | step 1 (was his Want 10) | want add +10 · `knows_mark_debt` set | "Shut the drawer." (parked) | Late at night, the kitchen drawer: Mark is on the phone next door. |
 | 0 | `mark_00_the_dryer` (new, an accident: H2) | `home_garage` | Sat 09:00–17:00, once | Mark in the garage · `opening_done` | his Want +5 · `mark_saw_her` set · her "Take your time." Exhibitionism +1, cap 19 | "Tug the shirt down." (pays nothing; his Want stands) | not a card: it happens to her |
-| 3 | `mark_03_shorts` | `home_kitchen` | Sun 08:00–12:00 | step 2 · she has been short once (`rent_carried` set; was Corruption 20 · Exhib. 20 · his Want 20) · `mark_saw_her` · "Go up and change." needs Exhibitionism 20 (DECISIONS 124) | want add +10 · exhibitionism add +3 · `mark_dress_rule` set | "I'm not changing for you." (parked) | Sunday morning at the table, after a short week: Mark wants shorts this time. |
+| 3 | `mark_03_shorts` | `home_kitchen` | Sun 08:00–12:00 | step 2 · she has been short once (`rent_short_weeks` 1 or more; was Corruption 20 · Exhib. 20 · his Want 20) · `mark_saw_her` · "Go up and change." needs Exhibitionism 20 (DECISIONS 124) | want add +10 · exhibitionism add +3 · `mark_dress_rule` set | "I'm not changing for you." (parked) | Sunday morning at the table, after a short week: Mark wants shorts this time. |
 | 4 | `mark_06_our_arrangement`, reworked (top step) | `home_garage` | Mon, Tue, Thu, Fri 19:00–22:00 | step 3 · Ryan's step 4 done (was Corruption 40 · his Want 50) | want add +10 · `mark_arrangement` set | "There's no arrangement." (parked) | An evening in the garage: Mark saw something, and wants to talk terms. |
 | — | locked | his card | — | — | — | — | "Mark, later. (After the house is yours.)" |
 
 Every step's gate also says the drinks boost is off.
+
+## The eight ladder rules, checked against the build (2026-11-03)
+
+| rule | as built |
+|---|---|
+| 1 · a new witness, risk or yes each step | yes: count, secret, his rule, his knowledge |
+| 2 · the top step is a payoff | waived (declared on this sheet, signed by LO 2026-11-01) |
+| 3 · one cut-off at most | yes: no cut-off; every step finishes |
+| 4 · he moves at least every other step | yes: his move is written on every step |
+| 5 · his meter is the lock | waived (declared on this sheet, signed by LO 2026-11-01) |
+| 6 · a hot repeatable per stage | waived (declared on this sheet, signed by LO 2026-11-01) |
+| 7 · her voice changes with her level | no: only step 3 reads her level |
+| 8 · something happens after the top step | yes: the Sunday table changes after step 4 |
+
+Failing, waivers not counted: 1 of 8. The ladder may be built (two fails stop it).
 
 ## Card goals (LO's play note, 2026-10-08)
 
@@ -76,10 +98,10 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 
 | n | the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
 |---|---|---|---|---|---|---|---|
-| 1 | he licks his thumb and counts her rent out bill by bill, slower than he needs to, his eyes on her legs | Mark | short, in front of him | "Watch him count." · or her tone | the slow count; "And not the shirt, next time." | yes | the Sunday table, every week |
-| 2 | the drawer by the fridge: Vance's LATE NOTICE, and Mark in the doorway on the phone, "Friday, Frank." | his secret is hers | being caught reading it | she reads it | "Put it back." He doesn't shout | yes | `knows_mark_debt`; he owes, and she knows |
-| 3 | "Not the shirt this time. Shorts." She comes down in the pair that shows the curve of her ass, and he loses his place twice | Mark | his rule on her body, every Sunday | she changes, or comes down in them first | the rule; "Every Sunday. Like that." | yes | `mark_dress_rule`: what she wears to the table is his rule |
-| 4 | the garage: "I saw you come out of his room at midnight." / "Vance's letter is in the drawer." Each keeps one | Mark knows about Ryan; she knows about Vance | Mark telling Laura | "Deal." · or "There's no arrangement." | he names what he saw | yes | `mark_arrangement`; the Sunday table changes |
+| 1 | *a look that happens to her · stage 1, Good Girl* — the rent page has taken the money; he sits her at his table with the sealed envelope and looks at her, not at it (Q6) | Mark | short, in front of him | "Let him look." · or her tone | the look; "And not the shirt, next time." | yes | the Sunday table, every week |
+| 2 | *accident (his secret, found) · stage 1, Good Girl* — the drawer by the fridge: Vance's LATE NOTICE, and Mark in the doorway on the phone, "Friday, Frank." | his secret is hers | being caught reading it | she reads it | "Put it back." He doesn't shout | yes | `knows_mark_debt`; he owes, and she knows |
+| 3 | *what she wears at home, by his rule · stage 2, Daring 20 (after his accident)* — "Not the shirt this time. Shorts." She comes down in the pair that shows the curve of her ass, and he picks his pen up and puts it down again, twice, his eyes on her thighs | Mark | his rule on her body, every Sunday | she changes, or comes down in them first | the rule; "Every Sunday. Like that." | yes | `mark_dress_rule`: what she wears to the table is his rule |
+| 4 | *a talk, no act (declared not a payoff) · stage 1, Good Girl* — the garage: "I saw you come out of his room at midnight." / "Vance's letter is in the drawer." Each keeps one | Mark knows about Ryan; she knows about Vance | Mark telling Laura | "Deal." · or "There's no arrangement." | he names what he saw | yes | `mark_arrangement`; the Sunday table changes |
 
 **Her voice:** a low and a high line on each step sheet.
 
@@ -87,8 +109,8 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 
 | n | the leak: his want, shown before | the promise: the line it ends on |
 |---|---|---|
-| 1 | none: step 1, and it says so | "I am counting." |
-| 2 | his eyes on her hem at every count | "Put it back." |
+| 1 | none: step 1, and it says so | "I'm saying it." |
+| 2 | his eyes on her hem at every Sunday table | "Put it back." |
 | 3 | "Friday, Frank." He knows she heard | "Not the shirt this time." |
 | 4 | he can't hold her look at dinner | "Our arrangement." |
 
@@ -100,9 +122,10 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 - **The new reason:** Mark has seen her come out of Ryan's room after midnight (the gate reads Ryan's step 4). His
   version (Power 50+): "Our arrangement. Your mother has enough to worry about." Hers (under 50): she names Vance's
   letter first.
-- **After:** the Sunday table: he counts at normal speed now, and his eyes stay on her, a new line per week. He
+- **After:** the Sunday table: he doesn't open the envelope, and his eyes stay on her, a new line per week. He
   knows about Ryan; `mark_arrangement` is stored for a later release (Mark at the door).
 - **Top step, declared not a payoff** (taste rule 2): Mark's release-1 ladder is the rent, by LO's call.
+- **No repeatable after step 4 this release** (LO, 2026-11-04, Q3: a later release). The Sunday table is his weekly scene.
 
 **Declared exceptions** (all from LO's call, no sex with Mark this release): rule 2 (the top step), rule 5 (paced by
 Sundays), rule 6 (no hot repeatable; his looks live in the Sunday table, the towel and channel 5).
@@ -114,9 +137,9 @@ Sundays), rule 6 (no hot repeatable; his looks live in the Sunday table, the tow
 - **Mark A 4, 5, 7, 8, 9:** the whole paid route (`mark_04_after_shes_asleep`, `mark_05_a_bill_an_inch`,
   `mark_07_twenty_and_you_can_look`, `mark_08_the_red_circle`, `mark_09_his_chair`; sheets marked cut). **Goal 1
   loses its body route**: she pays her own way through work only.
-- **Every paid source:** the paid look in the garden (`home.py:503`), the Sunday table's twenties at Mark step 7
-  (`mark.py:407-412`), the paid tease and touch on his hubs (`mark.py:486-492`), the paid effects in the cut steps
-  (`mark.py:229, 292, 421, 431`).
+- **Every paid source:** the paid look in the garden, the Sunday table's twenties at Mark step 7,
+  the paid tease and touch on his hubs, the paid effects in the cut steps
+ .
 - **"Your hand was on my leg"** at step 4, replaced by Ryan's room.
 
 ## Phone thread
@@ -127,7 +150,7 @@ Sundays), rule 6 (no hot repeatable; his looks live in the Sunday table, the tow
 
 ### Messages, per reply (LO's note, 2026-10-08)
 
-Each follow-up waits for her reply (`after_round`), and a different answer follows each reply where it matters (`after_choice`). Texts are lowercase, 3–7 words. Lines are samples (guess). Saturday, the night before each Sunday count.
+Each follow-up waits for her reply (`after_round`), and a different answer follows each reply where it matters (`after_choice`). Texts are lowercase, 3–7 words. Lines are samples (guess). Saturday, the night before each Sunday table.
 
 | round | Mark | her reply | after that reply |
 |---|---|---|---|
@@ -144,11 +167,11 @@ for her body, LO); it stays in this table only as the record of what was cut. Li
 
 | item | where · when | plain (Good Girl) | tease (Curious) | the paid look (Bold) |
 |---|---|---|---|---|
-| Sunday breakfast and coffee | kitchen · Sun 08:00–11:00, after the count | He slides the paper over. "Eat, @player. Then the rent." | In the sleep shirt: "Your mother lets you sit like that?" His eyes stay on @player's legs. | "Twenty." The bill on the table. @player lifts the shirt to the ribs, and he looks at @player's tits until the coffee goes cold. |
+| Sunday breakfast and coffee | kitchen · Sun 08:00–11:00, before the table ("Then the rent." shows until the Sunday is counted for the streak) | He slides the paper over. "Eat, @player. Then the rent." | In the sleep shirt: "Your mother lets you sit like that?" His eyes stay on @player's legs. | "Twenty." The bill on the table. @player lifts the shirt to the ribs, and he looks at @player's tits until the coffee goes cold. |
 | dinner | kitchen · Mon, Tue, Thu, Fri 18:00–19:00 (with Laura) · Wed 18:00–20:00 (he cooks) | Burnt chops. "Your mother cooks. I fill plates." | He watches @player eat. "Slower." | — |
 | help him cook | kitchen · Wed 18:00–19:00 | "Hand me the salt. No, the other salt." | Bold (was Curious): @player reaches past him for the pan; he doesn't move, and @player's ass presses his hip. | — |
 | dishes | kitchen · Wed and Sun 19:00–21:00 | He dries, slow. "You missed one." | @player bends to the dishwasher in a short skirt. He stops drying. | "Twenty and you stay bent." His bill on the counter; his eyes on @player's ass in the panties. |
-| late TV and a beer | living room · Sun–Fri 22:00–00:00 · Mon–Sat 00:00–02:00 | The game on low. "Laura's upstairs. Keep it down." | He hands @player a beer. @player curls up on the couch in the sleep shirt; he counts the inches of leg. | "Twenty. The shirt." He watches the TV light on @player's bare tits. |
+| late TV and a beer | living room · Sun–Fri 22:00–00:00 · Mon–Sat 00:00–02:00 | The game on low. Laura in her room: "Laura's in her room. Keep it down." | He hands @player a beer. @player curls up on the couch in the sleep shirt; he counts the inches of leg. | "Twenty. The shirt." He watches the TV light on @player's bare tits. |
 | laundry | garage, at the washer · Mon, Tue, Thu, Fri 19:00–22:00 · Sat 09:00–17:00 | "Whites with whites, @player." | three by her stage (DECISIONS 128): Curious, the panties on the basket · Curious + Daring, she bends for the bottom drum · Bold + Showing, she washes the top she's wearing and stays in her bra. Plain laundry pays him nothing. | "Leave those. I'll fold them." A bill under the basket. |
 | the garden | garden, from the garage door · Sat 09:00–17:00 | He comes out for a beer and squints at the sky. | @player on the lounger in shorts and a bra; he stands in the garage door and doesn't go back in. | "Twenty to untie it." The bill on the grass. @player lies on the lounger untied, and he looks at the side of @player's tit, pressed flat. |
 
@@ -158,7 +181,7 @@ is in the garage.
 ## The towel at home (DECISIONS 98, LO, 2026-10-31)
 
 Mark's living room (up late) and kitchen hubs react to the towel, every visit. Bedroom and garage: no
-(LO). Built in `iterations/002/build_scripts/mark.py` (`mark_towel`, `mark_hub(..., towel=True)`).
+(LO).
 
 | his Dominance | his line (one of three) | "Let it slip." (Exhibitionism 20) |
 |---|---|---|
@@ -181,9 +204,17 @@ Mark's living room (up late) and kitchen hubs react to the towel, every visit. B
 
 | row | gate |
 |---|---|
-| the step counter and `rent_carried` read by his step gates | a flag is read |
+| the step counter and `rent_short_weeks` read by his step gates | a flag is read |
 | Power read: which version of the table plays | the men's numbers are read |
 | labelled no on every M version | a no has content |
+
+## Walk-ins and acts from the heat proposal (signed 2026-11-03, built)
+
+Walk-ins: `home_bathroom`, `home_garage`, `home_hall`, `home_kitchen`, `home_living_room`, `home_master_bedroom`. Each row (when, what pays) is on that place sheet.
+In the lingerie walk-in (the master bedroom, Saturday 21:45–22:00) he says one line, "That's your mother's.", true in every band (pass 4 B51, LO 2026-11-04: Mark may speak here). Laura's black lace set becomes a wardrobe item this release, still to build (Q12).
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_A.md`, `proposals/COPY_FIXES_C.md` (signed with the a2 sheets, DECISIONS 125).
 
 ## Why — the source of each key choice
 

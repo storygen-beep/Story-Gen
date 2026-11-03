@@ -293,7 +293,16 @@ belong here; only decisions, debts, and promises do.
   ],
 
   "promises": [
-    { "text": "…", "made_in": "0.2", "paid_in": null }   // null = still owed
+    { "text": "…", "made_in": "0.2", "paid_in": null,   // null = still owed
+      "decided": "A10" }                               // optional: the `decided` entry it pays
+  ],
+
+  // LO'S SIGNED CALLS on a check that fails — the checks print DECIDED instead of FAIL.
+  "decided": [
+    { "id": "A10", "gate": "<exact gate, lint or shape.py check name, or null>",
+      "match": ["<substring of a detail row>"],      // or null = every row of that check
+      "decision": "later release",                   // or "waive"
+      "why": "one plain sentence", "signed": "LO 2026-11-03" }
   ],
 
   // WHAT PLAYERS SAID — the-release.md loop step 8, written by the v2-listener agent.
@@ -357,11 +366,15 @@ needs a meter about who she is. A `sourced` meter is fed in one or two places an
 Course of Temptation reads her inclinations (`has_inclination`) in **218** of its 5,294 passages,
 e.g. [ClassroomMenu] `<<if $pc.has_inclination("Knowledge from the Deep")`.
 ⚠️ **`fed_at` on a `sourced` meter should usually name ONE location** — if it names five, the
-thing is ambient and the ledger is the cheapest place to find that out. A meter-shaped entry
+thing is ambient and the ledger is the cheapest place to find that out. The ascent tiers
+(`board.ascent_tiers`) are the exception: they are fed everywhere by design (`the-systems.md` SY2, LO
+2026-11-03). A meter-shaped entry
 still in `board.systems[]` (a `kind`, no card fields) is read as a meter until it moves.
 `kind` is only ever `ambient` or `sourced`. A grade or job rating that opens at the top and shuts at the
 bottom adds **`"performance": true`** to its entry (`the-meters.md` W5c, LO S7, 2026-11-03), and gate
-*ascent tiers expand the world* skips it as a descent.
+*ascent tiers expand the world* skips it as a descent. Money and any other currency she spends adds
+**`"spent": true`** (LO, 2026-11-03, PICKS E22 b): the same gate skips it, because a read below a price is a
+price, not a descent. A quantity can also be declared as a need (`board.needs[]`), which the gate skips too.
 
 **`board.infrastructure[]`** — the clocks, views and channels (`kind`: `clock` · `view` ·
 `channel`), named so they are not counted as systems.
@@ -419,6 +432,28 @@ minute" and is abandoned), and characters dangled for years (*"Are we EVER going
 the university president?"*). Each promise is eventually **paid or cut**, and cutting is
 logged like any other decision.
 
+**`decided`** — LO's signed rulings on a check that fails: `later release` (it is owed, and
+paid later) or `waive` (it stays, on purpose). This is where *"anything left in a list is left on
+purpose, named in the ledger, with the reason"* (`the-release.md` loop steps 5 and 7) is written
+down, and the only place a check reads it. Each entry names one check by its exact printed name —
+a gate, a lint (the words after `lint · `) or a `shape.py` check — or `null` when no check sees the
+slip (recorded, never judged). `match` is a list of substrings of the check's detail rows (a lint's
+full list, including the rows it does not print; for a row that is a record, one field), or `null`
+for every row. Only LO-signed items go here; an item still waiting for LO is not decided.
+- A FAIL whose every row is covered prints **DECIDED** with the decision and the reason, and the
+  tally counts it apart (`92/110 gates pass · 3 decided · 15 fail`). It is not a pass.
+- A FAIL with rows no entry covers stays FAIL, and each covered row is tagged
+  `(decided: <decision>, <why>)`. A lint takes the same marks in its headline and rows.
+- An entry naming a check that passes, a lint that lists nothing, a name no check prints, or a
+  `match` string that hits no row is **stale**: the lint *a decision that no longer applies* lists
+  it (and `shape.py` for its own checks). Re-read it with LO, then rewrite or remove it.
+- `--ship`: a DECIDED BLOCK row stops blocking only when every entry covering it is a `waive`, or a
+  `later release` that a `promises[]` row names (`"decided": "<id>"`, or a list of ids). A later
+  release with no promise stays red: "later" is a debt, and a debt goes on the books.
+- `--json` carries it: each gate has `status` (`PASS` · `FAIL` · `DECIDED` · `n/a` · `parked` ·
+  `few` · `off`) and, when covered, `decided[]`; `tally.decided`; and `decided.lints` /
+  `decided.stale`.
+
 **`decisions`** — the trail. Especially: anything that removes or inverts a source of heat
 must be logged **with what replaces it**. *(LO decided.)*
 
@@ -454,13 +489,14 @@ file sits there being read by a different gate. These are the exact paths:
 | `board.characters[].occupancy_rows` | *standing surface* | `[{ location, start_time, reason }]` — a schedule row whose job is to put a body in a room (asleep, in the bath, blocking a door), backed by that job and not by a canvas. Keyed by the row's start time, never the room, and always with its reason |
 | `board.characters[].ladder` | *ladders move forward* · *`--ship`* (each step fires when unlocked) · *repeatables without a step* | `{ counter, steps: [{ n, canvas, where, when: { days, from, to }, gate: [ { flag, op? } \| { trait, op, value, npc? } \| { type: "modifier", modifier_key, operator } ] }] }` — since 2026-09-26 (PRD WS4). `counter` is the player trait the steps read and set (an NPC's `arc_stages` gives `<slug>_stage`). Steps are numbered 1..K. `when` is ONE window — days (`"Mon"` or 0 = Monday) and from/to as `"HH:MM"` — and must equal the canvas's `[[canvases.trigger.schedules]]` exactly. `gate` lists every trigger condition except the counter's, and nothing else. Nothing here is trusted: the gate reads the canvas and fails on any difference. Optional per step (SP2, recorded and not gated): `hint`, `her_line_low`, `her_line_high`, `who_notices`, `refusal: "parked" \| "final"`. Optional `raises = {trait: amount}` — what the step adds. Optional `seen_from` — the room next door he is in (`shape.py` reads his hours there; it must share the step's parent). `shape.py` *a step's gate can be reached* checks each gate against the trait's start (his: `meters[k].start`, else `.min`; hers, a gate with no `npc`: `board.player_start = {trait: n}`, listed as bad input when malformed; else 0) plus the steps before it; a gate with `npc` counts only his steps. A trait in `board.daily_raises = {trait: per_day}` (the daily tick) or `board.repeat_raises = {trait: per_visit}` (a repeatable in the TOML raises it) is not judged. `fires_from: "opening"` (step 1 only) marks a step the opening plays: it needs no `where` or `when`, and its canvas must be the starting canvas or a capstone the opening walks into |
 | `releases[].repeatables` · `releases[].ladder_steps` | *repeatables without a step* | written when a release ships: the repeatable canvas ids, and the count of declared steps. The next release is compared against them |
-| `release_page` | *`--ship`* (the build matches the release page · LO signed the playtest · the reader passed) | `{ version, people[], door{canvas, choice} (optional since S12 b, 2026-11-03; when declared, `shape.py` checks it is a ladder step's canvas), signed_by_lo, signed_at, reader{canvas: {test: PASS\|FAIL\|N/A}}, reader_waivers[{canvas_id, test, why}] }` — `--ship` reads these. SP7 (`the-spine.md`) adds optional `steps{npc: max_step}`, `places[]`, `weeks`, `promise_alive`, `replay_ready` (yes/no), `block[]`, `report[]`, `rebuild` (the one planned rebuild, `the-release.md`), `her_moment` (the chosen step, unshipped; same shape as `releases[].her_moment`), recorded and not gated. `reader` = `{canvas_id: {test: "PASS" \| "FAIL" \| "N/A"}}` (the `v2-reader` verdicts on touched canvases, `the-release.md` 6b) and `reader_waivers` = `[{canvas_id, test, why}]` (LO's). Absent means `--ship` FAILS: nothing says what the release is |
+| `release_page` | *`--ship`* (the build matches the release page · LO signed the playtest · the reader passed) | `{ version, people[], door{canvas, choice} (optional since S12 b, 2026-11-03; when declared, `shape.py` checks it is a ladder step's canvas), signed_by_lo, signed_at, reader{canvas: {test: PASS\|FAIL\|N/A}}, reader_waivers[{canvas_id, test, why}] }` — `--ship` reads these. SP7 (`the-spine.md`) adds optional `steps{npc: max_step}` (when present, `shape.py` fails a ladder whose length differs: A67, LO 2026-11-03), `places[]`, `weeks`, `promise_alive`, `replay_ready` (yes/no), `block[]`, `report[]`, `rebuild` (the one planned rebuild, `the-release.md`), `her_moment` (the chosen step, unshipped; same shape as `releases[].her_moment`), recorded and not gated. `reader` = `{canvas_id: {test: "PASS" \| "FAIL" \| "N/A"}}` (the `v2-reader` verdicts on touched canvases, `the-release.md` 6b) and `reader_waivers` = `[{canvas_id, test, why}]` (LO's). Absent means `--ship` FAILS: nothing says what the release is |
 | `parked.files` | *the tally* (parked, not judged) · *`--ship`* | optional globs relative to `games/<slug>/`, for parked TOML fragments kept outside `parked/`. The `parked/` folder is always read without this. Parked content is scored, never hidden: a gate it would judge counts as not passing |
 | `board.economy.settle_canvas` | *the obligation is charged* | optional canvas id; when declared, the obligation's charge must sit on that canvas |
 | `board.meters[]` | lint *the labels and the systems agree* · *ascent tiers expand the world* (`performance`) | `[{ id, kind, key, fed_at, labels, read_by, performance? }]`; `kind` is `ambient` or `sourced`; `performance: true` marks a grade or job rating the descent check skips (W5c). The lint also reads an old meter-shaped row still in `board.systems[]` |
 | `board.systems[]` | every system has a card | the cards: `[{ id, name, place, hours, cost, pay_ladder[], lewd_ladder[]{acts[]}, one_ladder, people[], pool[], daily, memory, growth, sink, deadline, feeds[], reads[], hook_link, leads_to[] }]`. An entry with `kind` and no card fields is a meter |
 | `board.wardrobe` | every clothing state is read three times | `{ states: [{ id, condition }], key_items: [clothing_id] }`; a condition is one `worn_exposure`, `worn_corruption`, `worn_beauty` or `worn_type` (`operator`, `value`) or `clothing_slot` (`slot`, `operator`) item; a key item is a `[[clothing]]` id (`templates/cards/wardrobe.md`) |
 | `board.coverage[]` | `shape.py` (strict): the coverage rows (`templates/sheets/coverage.md`) | `[{ topic, kind: system \| place \| scene \| mechanic, status: covered \| scouted \| lo \| placeholder \| unknown, source }]`, one per topic. `source` names the rule (file and id) or card, the scout card `games/<slug>/scout/<topic>.md`, LO's call (quote or date), or the release page line of a placeholder |
+| `decided[]` (top level) | every gate, lint and `shape.py` check (DECIDED, tags, stale) · *`--ship`* (a waive, or a later release with a `promises[]` row, stops blocking) | `[{ id, gate, match, decision: "later release" \| "waive", why, signed }]` — `gate` is the exact printed name or `null`; `match` substrings of the detail rows or `null` (every row). See the field rules above. A `later release` entry is also a `promises[]` row carrying `decided: id` |
 | `release_page.rejections[]` | *a skill rejection names a notebook entry* | `[{ what, source, layer, game_fix, skill_fix }]`; `layer` is `skill_wrong` · `skill_silent` · `ignored_rule` · `lo_changed` · `engine`; a skill layer's `skill_fix` names its notebook entry (`N<n>`) |
 | `board.infrastructure[]` | no gate (recorded) | `[{ name, kind: clock \| view \| channel }]` |
 

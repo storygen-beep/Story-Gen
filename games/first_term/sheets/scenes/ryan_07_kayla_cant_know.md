@@ -1,5 +1,7 @@
 # [REVIEW] Scene — ryan_07_kayla_cant_know
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the door's two buttons as built; the pay sits on `after7`; the step row. the explicit beats as built, measured.
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > **Changed 2026-11-01 after the build, signed by LO 2026-11-01 ("Signed, build them")** (the reader's FAILs; LO's picks in chat): `comes` ends on what comes next.
@@ -24,16 +26,25 @@
 | her_line_low · her_line_high | low: "This is Ryan. You should go." · high: "You want him to hear Kayla on the phone while you do this." (worded for this screen with the prose) |
 | mixed act? | no: behind his door, unseen. Corruption only (`meters.md` rule 3) |
 
+## The step row (filled from the build, 2026-11-03)
+
+**Kind · stage:** her hand on him: the taboo act at home (Hungry · Watched 60).
+
+| the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
+|---|---|---|---|---|---|---|
+| her hand on his cock to the end while Kayla's photo lights up his phone | Kayla, on his screen, calling | Kayla, calling while he's in her hand | "Knock twice." · "Don't answer it." | he reaches for her, then for the phone | yes: he comes in her hand | his phone face-down when she knocks; step 8; the blanket repeatable |
+
 ## Branch map — one row per screen
 
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
-| `knocks` | two knocks; he opens; his door was already open a hand's width | no | "Sit down, Ryan." → `hand` · "Just checking you're decent." → the hall (parked) | none |
+| `knocks` | his door is already open a hand's width | no | "Knock twice." → `hand` · "Leave him to it." → the hall (parked) | none |
 | `hand` | she pushes him onto the bed and takes his cock in her hand; his phone lights up on the bed: Kayla's photo | yes | "Don't answer it." → `phone` | none |
 | `phone` | he reaches for her first, then for the phone; she pushes his hand away and keeps stroking | yes | "Make him come." → `comes` | none |
-| `comes` | he comes in her hand while the phone buzzes out; it goes to voicemail | yes | "Wipe your hand on his shirt." → the hall | Ryan's Want add +5 · corruption add +3 · `ryan_step` set 7 |
+| `comes` | he comes in her hand while the phone buzzes out; it goes to voicemail | yes | "Wipe your hand on his shirt." → `after7` | none |
+| `after7` | from now on his phone is face-down every time she knocks | no | "Go to your room." → the hall | Ryan's Want add +5 · corruption add +3, cap 79 · `ryan_step` set 7 |
 
-**The parked no** (confirmed by LO 2026-11-01 ("Continue")): "Just checking you're decent." The step waits a week (`retry_after_days = 7`,
+**The parked no** (as built): "Leave him to it." The signed wording was "Just checking you're decent." The step waits a week (`retry_after_days = 7`,
 as his other steps).
 
 **His move:** he reaches for her first, then for the phone. **Does it finish:** yes, he comes.
@@ -83,3 +94,13 @@ A hook line, proposed (LO asked whether a line solves it). Each line names a thi
 | node | the closing line (mine, signed) | what it points at |
 |---|---|---|
 | `comes` | "From now on his phone is face-down every time you knock." | step 8 opens on it |
+
+## Explicit beats as built (measured 2026-11-03)
+
+One row per explicit screen in the built game: 3 or more words on the build's own list, the count `gates.py` uses. A screen's variants fold into it, so a screen can hold more words than one visit shows. "Sits at" is the highest of the person's crude columns (SP2) that the screen uses. Where a screen's text differs from the prose above, the build is what plays.
+
+| screen | words | counted words | sits at | the text |
+|---|---|---|---|---|
+| `hand` | 128 | 4: cock ×3, balls | Ryan's middle column | on this sheet above |
+| `phone` | 129 | 7: cock ×3, fuck ×3, ass | Ryan's late column | on this sheet above |
+| `comes` | 122 | 6: cock ×3, cum ×2, fuck | Ryan's late column | on this sheet above |

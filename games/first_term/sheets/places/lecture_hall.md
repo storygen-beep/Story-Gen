@@ -1,4 +1,8 @@
-# [READY] Place — Lecture Hall
+# [REVIEW] Place — Lecture Hall
+
+> Changed 2026-11-04 (LO's answer Q13: Hale's hallway Daring answer shows from Exhibitionism 20 up). Waits for LO's re-sign.
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
 
 > Signed by LO: LO, 2026-10-08.
 
@@ -38,6 +42,16 @@
 
 Each class is its own canvas, in its own window. The lecturers and the classmates live inside them.
 
+## Built from the heat proposal (signed 2026-11-03)
+
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has here:
+
+**Walk-ins.** Her activity rolls on entry (1 in 4 at her lowest band, more higher up); on a hit someone walks in. A man's pay sits on the moment; her cover pays 0.
+
+| who walks in | her activity | when | his pay, on the moment | her bolder answers |
+|---|---|---|---|---|
+| Hale | Read the timetable on the door | Mon, Wed, Fri 08:30–08:45; Thu 13:00–13:15 | none: no meter | "Sit on the front desk while he sets up." shows from Exhibitionism 20 up, with no top band, and pays +1 to cap 39 (LO, 2026-11-04, Q13) |
+
 ## Rows a gate needs
 
 | row | gate |
@@ -45,6 +59,8 @@ Each class is its own canvas, in its own window. The lecturers and the classmate
 | a class at every open hour | a destination is never open and exit-only |
 | each staff row has its class | standing surface |
 | Hale B 1 in his window | a meeting fires where they are |
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_B.md` (signed with the a2 sheets, DECISIONS 125).
 
 ## Why — the source of each key choice
 

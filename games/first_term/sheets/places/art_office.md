@@ -1,4 +1,6 @@
-# [READY] Place — Art Lecturer's Office
+# [REVIEW] Place — Art Lecturer's Office
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
 
 > Signed by LO: LO, 2026-10-08.
 
@@ -29,12 +31,24 @@
 | the art lecturer, the talk hub | person | college | one line on her grade, one on her clothes | once a day, on the trigger | yes |
 | read your grade on the door | work | college | none · reads that subject's grade | none needed: it writes nothing | yes, one line |
 
+## Built from the heat proposal (signed 2026-11-03)
+
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has here:
+
+**Walk-ins.** Her activity rolls on entry (1 in 4 at her lowest band, more higher up); on a hit someone walks in. A man's pay sits on the moment; her cover pays 0.
+
+| who walks in | her activity | when | his pay, on the moment | her bolder answers |
+|---|---|---|---|---|
+| the art lecturer | Read your grade on the door | in their office hours | none: no meter | a line only, no pay |
+
 ## Rows a gate needs
 
 | row | gate |
 |---|---|
 | the posted grade, every open hour | a destination is never open and exit-only |
 | the art lecturer's row has a hub | standing surface |
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_B.md` (signed with the a2 sheets, DECISIONS 125).
 
 ## Why — the source of each key choice
 

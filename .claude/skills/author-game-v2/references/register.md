@@ -109,7 +109,9 @@ one was out of character, and one printed a stat that does not exist.
 5. **Prose names her clothes only where a clothing condition backs it**: the trigger's conditions,
    an enclosing `group`'s, the location's `entry_conditions`, the choice that led here, or a
    `wardrobeEffects` equip earlier in the same canvas. Undressing during an explicit act is backed
-   by the act. Gate `her clothes are backed` (a `--ship` block) checks this: garments are the words
+   by the act. A "you strip" line inside an act must move a garment only when a later screen or an exit
+   of that canvas names her clothes again; elsewhere the act backs it (LO, 2026-11-03, PICKS B53 c; gate
+   *her clothes are named exactly*). Gate `her clothes are backed` (a `--ship` block) checks this: garments are the words
    of the game's own catalog names; "undressing" is a strip word or *pulls … off / down / open*. *"Your skirt rides up"* on a canvas any outfit reaches is a lie to every player in jeans.
 
 **A promise about the future must be built.** A line that names a future event (a day, a week or a
@@ -563,7 +565,7 @@ running, and the count comes from disk instead of a number you have to keep corr
 
 ⚠️ **ONE ASSET, ONE BLOCK.** Never reuse a `file` or a `pool_dir` across two blocks. The media
 review dedupes by file, so two beats sharing an asset collect **one** verdict between them, and the
-second beat is reviewed by nobody.
+second beat is reviewed by nobody. Checked: gate *one asset, one block*.
 
 ⚠️ **The node lead's clip does not scroll away — the beats append underneath it.** A cascade renders
 as nested `<<linkreplace>>` (`_render_cascade`, `v2.py:16778`), so nothing is ever removed. That is why a clip at the
@@ -649,8 +651,16 @@ above 18 of the 27, so it is slack rather than an invented line.
 > denominators moved**: 10 of 25 became 10 of 27, 18 of 25 became 18 of 27, and the median holds.
 
 **The exemption is real and narrow: nobody is there to speak.** A solo surface, an unseen peek, the
-interior stretch of a capstone. A *present* character is never exempt, and "she is alone" stops
-being true the moment the walk-in fires.
+interior stretch of a capstone, and a person asleep on the screen (LO, 2026-11-03, PICKS B52 a: a sleeper is
+exempt like an unseen peek, and lint *a person who never speaks* skips a canvas that shows its person
+asleep). An awake *present* character is never exempt, and "she is alone" stops being true the moment the
+walk-in fires.
+
+**A walk-in's arrival is presence** (LO, 2026-11-03, PICKS B51 a). The person who walks in is in the room on
+the walk-in canvas, whatever their schedule row says at that minute, so the walker speaks there like anyone
+present. Gate *a named person is where the line says* counts the arrival as presence for the walker: the
+person the walk-in is bound to (`npc` / `requires_npc` on its trigger) or, when it is bound to nobody, whoever
+speaks on it. Truth rule 1 still holds everywhere else.
 
 ### Write the lines by PERSONALITY, not by person
 

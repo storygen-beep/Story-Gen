@@ -1,4 +1,6 @@
-# [READY] Scene — touch_bed
+# [REVIEW] Scene — touch_bed
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the explicit beats as built, measured.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
@@ -36,3 +38,11 @@ No history words on any screen: each one repeats.
 | the prose | `v2-prose`, measured by `gates.py --beat`, 2026-10-08 |
 | one voice for stages 2–3 | LO, 2026-10-08: SP2 gives both "warming up" |
 | "someone's TV mutters downstairs" only while Mark is in the living room (his rows, 22:00–02:00); in an empty house the line is the quiet | sweep A6-28 |
+
+## Explicit beats as built (measured 2026-11-03)
+
+One row per explicit screen in the built game: 3 or more words on the build's own list, the count `gates.py` uses. A screen's variants fold into it, so a screen can hold more words than one visit shows. "Sits at" is the highest of the person's crude columns (SP2) that the screen uses. Where a screen's text differs from the prose above, the build is what plays.
+
+| screen | words | counted words | sits at | the text |
+|---|---|---|---|---|
+| `touch` | 121 | 6: clit ×3, tits, nipple, ass | Alone: no column on SP2; crude words used: ass, clit, tits | on this sheet above |

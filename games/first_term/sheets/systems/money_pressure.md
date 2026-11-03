@@ -1,4 +1,8 @@
-# [READY] System — money_pressure
+# [REVIEW] System — money_pressure
+
+> Changed 2026-11-04 (LO's answer Q6: the rent page takes the money and is the one count; Mark's Sunday table comes after and counts nothing). Waits for LO's re-sign.
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Rent reads `rent_short`; Vance's knock no longer clears it.
 
 > **Changed 2026-11-03 (LO: "B: keep it easy", DECISIONS 141).** Week one is no longer built to come up short. Up to three café shifts a day make about $205-245 against $75; the section "Week one is built to come up short" below is superseded. What a short Sunday costs is unchanged.
 
@@ -22,7 +26,7 @@
 | sink and deadline | the rent, to Mark, Vance behind him · Sunday 00:00 |
 | feeds | `paid_full_streak` (no `laura_suspicion` raise in 0.1; ledger change 25) |
 | reads | `money` · `rent_short_weeks` |
-| what drives it | money against what she owes · `rent_carried` · `rent_short_weeks` picks the cost · Mark's Power colours the table |
+| what drives it | money against what she owes · `rent_short` · `rent_short_weeks` picks the cost · Mark's Power colours the table |
 | link into the hook | her $75 is part of what Mark owes Vance |
 | leads to | Mark, Vance |
 | day 1 | from the scene where Mark says she pays rent now (`rent_starts`) |
@@ -54,11 +58,11 @@ A normal player misses two rents; a player who grinds every shift misses one.
 | when | what happens | key, with op |
 |---|---|---|
 | Sunday 00:00 | the engine takes the rent | money add −75 (then −90, −100) |
-| she was short | owed again next week, and counted | `rent_carried` set true · `rent_short_weeks` add +1 (both by the engine) |
-| Sunday morning | Mark counts it at the kitchen table | paid in full: `paid_full_streak` add +1 |
+| she was short | owed again next week, and counted | `rent_short` set true (cleared only by a full payment) · `rent_short_weeks` add +1 (both by the engine) |
+| Sunday morning | Mark sits her at the kitchen table with the sealed envelope; nobody counts it twice (Q6) | paid in full: `paid_full_streak` add +1 |
 | a carried Sunday, or Ryan's money | the streak breaks | `paid_full_streak` set 0 |
 | a short Saturday or Sunday morning | Ryan offers at his door, $25 once, at his Love 40 | `ryan_covered` set true · Ryan's Warmth add +5 (guess) · never counts for the streak |
-| the next evening, Monday (guess) | Vance knocks | `rent_carried` set false |
+| the next evening, Monday 18:00–19:00, within 48 hours of the short Sunday | Vance knocks | nothing: his knock no longer clears `rent_short` |
 
 ## What a short Sunday costs (new 2026-11-01)
 
@@ -94,9 +98,9 @@ never counts. Mark's chair (the body route) is cut.
 
 | canvas | what it is | explicit? | what drives it | brake |
 |---|---|---|---|---|
-| `mark_sunday_table` | the count, his terms or hers (no price on her body) | no | Mark's Power · her stage · `mark_dress_rule` | Sunday morning, once |
+| `mark_sunday_table` | the Sunday table, his terms or hers (no price on her body); no second count (Q6) | no | Mark's Power · her stage · `mark_dress_rule` | Sunday morning, once |
 | `rent_short_1`, `rent_short_2`, `rent_short_3` (new) | the costs above | no | `rent_short_weeks` | once each (the third repeats per short week) |
-| `vance_knock` | Vance at the front door after a short week | no | `rent_carried` | once per carried week |
+| `vance_knock` | Vance at the front door after a short week | no | `rent_short`, in its 48 hours | once per short week |
 | `ryan_cover` | Ryan offers what she's short | no | money under the rent | Saturday or Sunday morning, once |
 
 ## Pay ladder (`pay_ladder[]`)
@@ -112,7 +116,7 @@ never counts. Mark's chair (the body route) is cut.
 
 | rung | gate | acts |
 |---|---|---|
-| 1 · Good Girl · Covered | none | counted in her sleep shirt (Mark step 1) · his eyes on the hem |
+| 1 · Good Girl · Covered | none | at his table in her sleep shirt (Mark step 1) · his eyes on the hem |
 | 2 | after one short Sunday | shorts to the table (Mark step 3) · his dress rule at the table |
 | ~~3~~ | cut 2026-11-01 | a bill off, twenty and he can look, his chair (Mark A 5, 7, 9) |
 
@@ -130,7 +134,7 @@ never counts. Mark's chair (the body route) is cut.
 | row | gate |
 |---|---|
 | $75 taken Sunday 00:00, carried when short | the obligation is charged |
-| the table reads `money` and `rent_carried` · the short canvases read `rent_short_weeks` | money gates something |
+| the table reads `money` and `rent_short` · the short canvases read `rent_short_weeks` | money gates something |
 | sink and deadline named | every system has a card |
 | leads to Mark and Vance | leads to a person |
 | `paid_full_streak` read by goal 1 | a meter is read · a goal's end is built |

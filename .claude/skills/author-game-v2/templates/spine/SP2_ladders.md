@@ -1,7 +1,7 @@
 # SP2 · The ladders — <game title>
 
 > [REVIEW] · drafted <date> · signed by LO: <name, date>
-> A decision record, ≤ 400 words. The rules: `references/the-spine.md` SP2 · `the-arc.md` A1–A14 · `the-heat-ladder.md` H1–H2 · `the-meters.md` W1, W1b, W5b.
+> A decision record; SP2 has no word limit (LO, 2026-11-03). The rules: `references/the-spine.md` SP2 · `the-arc.md` A1–A14 · `the-heat-ladder.md` H1–H2 · `the-meters.md` W1, W1b, W5b.
 
 **Who climbs:** player · cast · both
 

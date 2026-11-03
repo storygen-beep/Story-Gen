@@ -1,4 +1,6 @@
-# [READY] System — parties
+# [REVIEW] System — parties
+
+> Changed 2026-11-04 (LO's answer Q7: one hall, so Laura waits up in the dark hall). Waits for LO's re-sign.
 
 > **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
 
@@ -21,7 +23,7 @@
 | feeds | `campus_talk`, Corruption, Exhibitionism, `laura_suspicion` |
 | reads | energy, the curfew, what she wears |
 | what drives it | her stage picks the dares · a drink lifts choices one stage · guests rotate |
-| link into the hook | what she brings home late: Laura on the stairs, Ryan at 3 a.m. |
+| link into the hook | what she brings home late: Laura waiting up in the dark hall, Ryan at 3 a.m. |
 | leads to | Zoe, Jake, Laura, Ryan |
 | day 1 | no: it starts on the first Friday |
 | BRAKE | Friday only · arriving costs energy · `party_went` is read by hours since set |

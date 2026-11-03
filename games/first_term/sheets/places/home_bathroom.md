@@ -1,5 +1,7 @@
 # [REVIEW] Place — Bathroom
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > Signed by LO: LO, 2026-10-08.
@@ -34,12 +36,32 @@
 | touch herself | work | her stage · Corruption | Curious: corruption add +1, first time each day (guess) | once a day, on the trigger | yes: explicit, her body |
 | Ryan's in there | person | — | none · "Ryan's in there." weekday mornings | his window | yes, one line |
 
+## Built from the heat proposal (signed 2026-11-03)
+
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has here:
+
+**Walk-ins.** Her activity rolls on entry (1 in 4 at her lowest band, more higher up); on a hit someone walks in. A man's pay sits on the moment; her cover pays 0.
+
+| who walks in | her activity | when | his pay, on the moment | her bolder answers |
+|---|---|---|---|---|
+| Ryan | Take a shower | Sun, Mon, Tue, Wed, Thu 19:00–00:00; Sat, Sun 07:30–14:00 | his Want +2 | "Don't grab it straight away." Exhibitionism +1, cap 19; "Keep washing." Exhibitionism +1, cap 39; "Turn round." Exhibitionism +1, cap 59 |
+| Kayla | Take a shower | Fri 18:00–22:00 | none: no meter | "Don't grab it straight away." Exhibitionism +1, cap 19; "Keep washing." Exhibitionism +1, cap 39; "Turn round." Exhibitionism +1, cap 59 |
+| Mark | Take a shower | Sat 14:00–17:00 | his Want +2 | "Don't grab it straight away." Exhibitionism +1, cap 19; "Keep washing." Exhibitionism +1, cap 39; "Turn round." Exhibitionism +1, cap 59 |
+
+**Acts, rungs and pools.**
+
+| what | where | buttons and pays |
+|---|---|---|
+| the unlocked door (C4) | the shower | "Leave the door unlocked." Exhibitionism 5, +1, cap 19; it stays unlocked until "Lock it again."; the walk-in odds rise to 0.5–0.9 |
+
 ## Rows a gate needs
 
 | row | gate |
 |---|---|
 | the shower, every day | a need can be met every day |
 | a walk-in on the shower | the walk-in floor |
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_A.md` (signed with the a2 sheets, DECISIONS 125).
 
 ## Why — the source of each key choice
 

@@ -1,4 +1,6 @@
-# [READY] Place — Zoe's Living Room
+# [REVIEW] Place — Zoe's Living Room
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
@@ -32,12 +34,24 @@
 | a dare, a drink, a hookup | work | parties | as the party sheet | per night caps | yes: her body |
 | Jake | person | Jake's ladder | Jake B 1 here (= Zoe A 1) | Friday | yes |
 
+## Built from the heat proposal (signed 2026-11-03)
+
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has here:
+
+**Walk-ins.** Her activity rolls on entry (1 in 4 at her lowest band, more higher up); on a hit someone walks in. A man's pay sits on the moment; her cover pays 0.
+
+| who walks in | her activity | when | his pay, on the moment | her bolder answers |
+|---|---|---|---|---|
+| Zoe | Sit on her couch | Mon, Tue, Wed, Thu 22:00–23:30 | none: no meter | "Pull her down onto the couch." Corruption +1, cap 39 |
+
 ## Rows a gate needs
 
 | row | gate |
 |---|---|
 | the party hookup, explicit and repeatable | explicit in repeatable · traversal heat |
 | Zoe met before her rows show | every hub is met first |
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_B.md`, `proposals/COPY_FIXES_C.md` (signed with the a2 sheets, DECISIONS 125).
 
 ## Why — the source of each key choice
 

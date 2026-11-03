@@ -1,17 +1,22 @@
-# [READY] Scene — mark_sunday_table
+# [REVIEW] Scene — mark_sunday_table
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. 08:00–11:45 as built; the count's pays; want, next step and hook rows. file and line cites cut.
 
 > **New sheet 2026-11-01, signed by LO 2026-11-01 ("Signed")** (DECISIONS 99–115). The built canvas `mark_sunday_table`
-> (`iterations/002/build_scripts/mark.py:379`), the Sunday count after Mark's step 1. Its old sheet was `mark_09`
+>, the Sunday count after Mark's step 1. Its old sheet was `mark_09`
 > (cut). From Mark's signed release-1 ladder (`sheets/people/npc_mark.md`, step 4, "After") and the rent sheet
 > (`sheets/systems/money_pressure.md`: no price on her body). No explicit screen; the new lines are mine.
 
 | row | answer |
 |---|---|
 | system | the rent (`money_pressure.md`) · Mark |
-| where · when | the kitchen table · Sunday 08:00–12:00, once a Sunday (as built) |
+| where · when | the kitchen table · Sunday 08:00–11:45, once a Sunday (as built) |
 | gate | `mark_step` gte 1 · `rent_starts` · not counted today (as built) |
 | which version | his terms (Power 50+) or hers, as built |
-| raises | his Want add +2 (as built, stored) |
+| raises | his Want add +2 (as built, stored) · a full week: her streak +1, his Power −3 · short or covered: streak 0, his Power +3 |
+| want | his eyes on her at the count, not on the money |
+| next step | none: the weekly loop after his step 1 |
+| hook | "Next Sunday. Same table." and the streak line |
 | explicit? | no: he looks |
 
 ## What changes
@@ -33,12 +38,12 @@ streak lines, "Next Sunday. Same table."
 ## The pool, written (mine, signed by LO 2026-11-01)
 
 1. "He slides the envelope across to you to check, and keeps his fingers on it a second after you've taken it."
-2. "He doesn't say good morning. He says your name, once, and then he counts."
+2. "He says your name, once, and then nothing at all."
 3. "He puts the pencil behind his ear and looks at you instead of writing anything down."
 4. "He licks his thumb, and stops, and counts the rest without it."
 5. "When you stand up he watches you all the way to the door. He doesn't pretend he isn't."
 
-Truth: no line names a past Sunday or where anyone else is (Laura is out on Sunday mornings, `mark.py:63`).
+Truth: no line names a past Sunday or where anyone else is (Laura is out on Sunday mornings).
 
 ## Why — the source of each key choice
 

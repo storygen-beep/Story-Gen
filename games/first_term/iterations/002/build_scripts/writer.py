@@ -105,15 +105,15 @@ HOOKS = [
     (42, "*Tomorrow he'll act like it never happened. You want to see if he can.*"),
     # reader a3 #13 (DECISIONS 131): Ryan's towel event, the Curious and Bold screens end on his not-yet. The event runs
     # Mon-Fri 06:45-07:30, inside Laura's kitchen row (Mon-Fri 06:30-08:00), so "Mom's up" is true on every visit.
-    (38, 'Downstairs a cupboard door bangs, and he finds his voice. "Not here. Mom\'s up."'),
-    (39, 'Downstairs a cupboard door bangs. Ryan steps back into the bathroom doorway, the towel bunched in his fist. "Not here. Mom\'s up."'),
+    (38, 'In the kitchen a cupboard door bangs, and he finds his voice. "Not here. Mom\'s up."'),
+    (39, 'In the kitchen a cupboard door bangs. Ryan steps back into the bathroom doorway, the towel bunched in his fist. "Not here. Mom\'s up."'),
 ]
 
 # 4 · the paid looks' second voice: SP2's "warming up" (shocked, honest, then she does it) under Hungry,
 # the bold voice from Hungry (stage 4) up. Its own beat after beat N: (file #, beat #, [(conds, line)]).
 VOICES = [
     (22, 1, [([corr("gte", 60)], "*You were waiting for him to ask. You'd have done it for ten.*"),
-             ([corr("lt", 60)], "*Your step-father wants you to strip for twenty dollars. Your face goes hot, and your hands go to your clothes anyway.*")]),
+             ([corr("lt", 60)], "*Your step-father wants you to strip for $20. Your face goes hot, and your hands go to your clothes anyway.*")]),
     (24, 1, [([corr("gte", 60)], "*You lean back on the washer to watch. You want him to take his time.*"),
              ([corr("lt", 60)], "*He's going to fold those panties in front of you, and you're going to let him. Your face is burning.*")]),
     (26, 1, [([corr("gte", 60)], "*You put your coffee down. You were hoping he'd ask.*"),

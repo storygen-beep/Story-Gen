@@ -58,17 +58,29 @@ CANVASES = []
 RULES = {}          # host canvas id -> [substitution rules]
 DAILY_FLAGS = []    # every `<canvas>_today`, for 0_systems_spec.toml [engine.daily_tick]
 TOML_HOSTS = ("canteen_eat", "canteen_listen", "library_study", "party_house_soak", "quad_grass",
-              "door_grade_psych", "door_grade_art", "door_grade_business", "door_grade_bio", "door_dean_notice")
+              "door_grade_psych", "door_grade_art", "door_grade_business", "door_grade_bio", "door_dean_notice",
+              "toilet_wash")
+
+
+# (pass 3 D52) the meter each walk-in's answers pay (its description: "hers on ..."); its odds band on it. Nadia's,
+# the office doors' and Zoe's park ones (no meter, they route into her park hub) stay flat.
+BAND_ON = {"walkin_cafe_gary": "corruption", "walkin_gym_team": "exhibitionism", "walkin_canteen_zoe": "corruption",
+           "walkin_canteen_jake": "exhibitionism", "walkin_tub_zoe": "corruption", "walkin_quad_team": "exhibitionism",
+           "walkin_quad_zoe": "corruption", "walkin_hall_hale": "exhibitionism", "walkin_couch_zoe": "corruption",
+           "walkin_bedroom_zoe": "corruption", "walkin_house_vance": "exhibitionism",
+           "walkin_toilet_zoe": "exhibitionism", "walkin_zoebath_cocky": "exhibitionism"}
 
 
 def rule(host, target, chance, *items):
-    RULES.setdefault(host, []).append({"target_canvas_id": target, "chance": chance, "conditions": cond(*items)})
+    for odds, band in odds_bands(BAND_ON.get(target), chance):
+        RULES.setdefault(host, []).append({"target_canvas_id": target, "chance": odds, "conditions": cond(*items, *band)})
 
 
 def walkin(cid, name, loc, desc, who, moment, moment_label, answer, answers, raise_=(), records=(), extra=(),
-           shared=(), when=()):
+           shared=(), when=(), moment_wardrobe=None):
     """One walker's walk-in (walkins.py's shape): `who` = trigger items (his presence now, met flags, his gates).
-    `shared` = another walk-in of the same walker whose daily flag this one also reads and sets (one a day)."""
+    `shared` = another walk-in of the same walker whose daily flag this one also reads and sets (one a day).
+    `moment_wardrobe`: wardrobe effects on the moment's button (the tub strips her on the way in, Q11)."""
     today = f"{cid}_today"
     DAILY_FLAGS.append(today)
     CANVASES.append({
@@ -78,7 +90,7 @@ def walkin(cid, name, loc, desc, who, moment, moment_label, answer, answers, rai
                     "conditions": cond(flag("opening_done"), flag(today, False),
                                        *[flag(f"{s}_today", False) for s in shared], *who, *when)},
         "nodes": [node("moment", name, moment,
-                       [go(moment_label, node="answer", mins=2, eff=list(raise_) or None,
+                       [go(moment_label, node="answer", mins=2, eff=list(raise_) or None, wardrobe=moment_wardrobe,
                            flags=[fset(today)] + [fset(f"{s}_today") for s in shared] + [fset(f) for f in records])]),
                   node("answer", name, answer, answers), *extra]})
     return cid
@@ -117,33 +129,34 @@ walkin("walkin_cafe_gary", "Booth four comes to you", "cafe",
     [here(GY, "cafe"), flag("gary_met")],
     [P("You take the stool at the end of the counter with your coffee, off the clock for once."),
      P("Gary gets up out of booth four with his paper under his arm and his pot of tea, and sits down on the stool next to yours. Not across. Right next to you."),
-     D(GY, "Off the clock, sweetheart? Then you can keep an old man company.")],
+     D(GY, "Off the clock, doll? Then you can keep an old man company."), ME("Hi, Gary. Just for a minute.")],
     "His knee finds yours.",
     [P("Under the counter his knee presses against yours, warm and heavy, and stays there. He turns a page of his paper with his other hand like nothing's happening."),
      *legs_line("Your legs are bare. His trouser leg rubs against your skin every time he shifts on the stool.",
                 "Through your jeans you can feel how warm he is.",
                 "Through your leggings you can feel every time he presses."),
      P("His eyes come off the paper and go down to your thighs, and back up to your tits, and he doesn't hurry either way."),
-     D(GY, "You've lovely legs, sweetheart. Shame to waste them behind a counter.")],
+     D(GY, "You've got lovely legs, doll. Shame to waste them behind a counter."), ME("Gary. Your knee."), D(GY, "What about it, doll?")],
     [go("Move your knee.", node="g_move", mins=2),
      go("Leave it.", node="g_leave", mins=10, cond_=cond(*C_GG), eff=[pay("corruption", 19)]),
      go("Let his hand rest on your thigh.", node="g_hand", mins=10, cond_=cond(CURIOUS), eff=[pay("corruption", 39)])],
     records=["gary_sat_with_her"], extra=[
         res("g_move", "Your knee away", [P("You shift your knee away from his and pick up your cup with both hands."),
-                                         D(GY, "Suit yourself, sweetheart."),
+                                         D(GY, "Suit yourself, doll. Old men get cold knees."),
                                          P("He goes back to booth four with his tea, and his paper comes back up, an inch at a time.")],
             "Finish your coffee.", "cafe", 15),
-        res("g_leave", "Leave it", [P("You leave it. His knee stays pressed against yours the whole time you drink your coffee, and you don't look at him once. Your face is hot, and your nipples have gone tight, and you hate that they have."),
-                                    D(GY, "There. That's nice, isn't it?"),
+        res("g_leave", "Leave it", [P("You leave it. His knee stays pressed against yours the whole time you drink your coffee, but you don't look at him once. Your face is hot, and your nipples have gone tight, and you hate that they have."),
+                                    D(GY, "There. That's nice, isn't it?"), ME("Don't make it a thing, Gary."), D(GY, "Wouldn't dream of it."),
                                     P("When you stand up he lets his knee drag along your thigh as you go.")],
-            "Go.", "cafe", 10),
+            "Leave him to his paper.", "cafe", 10),   # pass 3 D39 (R7): the way out answers him
         res("g_hand", "His hand", [P("His hand comes off the paper and settles on your thigh, high up, big and warm. His thumb moves, slow, back and forth, an inch from your crotch."),
                                    G(cond(SKIRT, slot("underwear")), P("It's under your hem. His palm is on your bare skin, and his little finger is right at the edge of your panties.")),
                                    G(cond(SKIRT, slot("underwear", False)), P("It's under your hem. His palm is on your bare skin, and his little finger is an inch from your bare pussy.")),
                                    P("You keep drinking your coffee. You don't move his hand. Your pussy throbs, and you squeeze your thighs together round his fingers, and he feels it and smiles at his paper."),
-                                   D(GY, "Good girl."),
-                                   P("He takes his hand back when you finish the cup, and pats your thigh, twice, like he owns it.")],
-            "Go.", "cafe", 10)])
+                                   D(GY, "Good girl. You're shaking, doll. Drink your coffee."), ME("I'm fine."), D(GY, "You're better than fine."),
+                                   P("He takes his hand back when you finish the cup, and pats your thigh, twice, like he owns it."),
+                                   D(GY, "Booth four, doll, every weekday afternoon. Next time you sit on my side.")],   # scene reader b03: the hook (his rows Mon-Fri 14:30-18:00)
+            "Leave him to his paper.", "cafe", 10)])
 for days, a, b in (((0, 1, 2, 3, 4), "14:30", "18:00"), ((4,), "20:00", "22:00")):
     rule("cafe_coffee", "walkin_cafe_gary", 0.25, here(GY, "cafe"), flag("gary_met"), wd(*days), tod(a, b))
 
@@ -161,30 +174,38 @@ walkin("walkin_gym_team", "The team comes in", "campus_gym",
     [P("You're flat on your back on the bench with the bar over your chest, alone in the free-weights corner."),
      GC(cond(*SPORTS_ONLY), P("Just your sports bra and your bottoms. Your tits strain the bra every time you press the bar up.")),
      GC(cond(*ANY), P("Your clothes are stuck to you with sweat.")),
-     P("The double doors bang open and the team comes in for training, a dozen big guys in team vests, loud, bags over their shoulders.")],
+     P("The double doors bang open and the team comes in for training, a dozen big guys in team jerseys, loud, bags over their shoulders.")],
     "They've seen you.",
     [GC(cond(*SPORTS_ONLY), P("The noise stops. A dozen of them look at you at once: your tits in the sports bra, your stomach, your legs spread either side of the bench. One of them whistles, long and low."),
-       WHO("Bench is ours now, sweetheart. Take your time, though."),
-       P("Nobody laughs. They just keep looking at your tits.")),
+       WHO("Bench is ours now, cutie, but take your time."),
+       P("Nobody laughs. They just keep looking at your tits."), WHO("Seriously. Take all the time you want.")),
      GC(cond(*ANY), P("A dozen heads turn your way. Their eyes go down you on the bench, slow, your legs, your hips."),
-       WHO("We need that bench. No rush.")),
+       WHO("We need that bench. No rush."), ME("Two more sets."), WHO("Do your two sets, then. We'll watch.")),
      G(cond(JN), P("Jake's at the front of them. He drops his bag, and his eyes go down you and stay."),
        D(J, "Easy, boys. Eyes on your own reps.")),
      G(cond(JN), P("He doesn't take his own eyes off you while he says it."))],
     [go("Grab your things and go.", node="t_go", mins=2),
-     go("Finish your set.", node="t_set", mins=15, cond_=cond(*SPORTS_ONLY, *E_DAR), eff=[pay("exhibitionism", 39)])],
+     # the set's energy is a price on the button, which the engine refuses (greyed, "Requires 10 Energy") when she
+     # hasn't got it; an unclamped -10 on the way out took her below 0 (engine.md §21, §27; pass 3 J73)
+     # LO, 2026-11-04 (Q13): Daring from 20 up, no top; it still pays only to 39 (the cap)
+     go("Finish your set.", node="t_set", mins=15, cond_=cond(*SPORTS_ONLY, DARING), eff=[pay("exhibitionism", 39)],
+        costs=[{"trait": "energy", "value": 10}])],
     records=["team_saw_gym"], extra=[
-        res("t_go", "Go", [GC(cond(*SPORTS_ONLY), P("You rack the bar, grab your hoodie off the floor and pull it on over your sports bra, and walk out through the middle of them with your face burning.")),
+        # reader batch 4 (pass 3): no hoodie exists in the catalog, so she covers up with what she has
+        res("t_go", "Go", [GC(cond(*SPORTS_ONLY), P("You rack the bar, grab your bag off the floor and hug it to your sports bra, and walk out through the middle of them with your face burning.")),
                            GC(cond(*ANY), P("You rack the bar and grab your bag and walk out through the middle of them, eyes down.")),
-                           P("The noise starts up again behind you, and you hear the laugh.")],
-            "Go.", "campus", 5),
+                           P("The noise starts up again behind you, and you hear the laugh."),
+                           # reader batch 4 (pass 3): the team trains Tuesday and Thursday, so the next session is named by today
+                           G(cond(wd(1)), WHO("Same time Thursday, cutie!")), G(cond(wd(3)), WHO("Same time Tuesday, cutie!"))],
+            "Keep walking.", "campus", 5),
         res("t_set", "Finish your set", [P("You don't get up. You lie back down under the bar and finish your set, ten slow reps, with a dozen of them standing round watching you do it."),
                                          P("Every time you push the bar up your tits squeeze together in the sports bra, and every time you bring it down they bounce. Your nipples are hard through the cloth. You can feel every pair of eyes on them."),
                                          G(cond(JN), D(J, "Ten. Look at her. Ten.")),
                                          G(cond(here(J, "campus_gym", False)), WHO("Ten. Jesus. Ten.")),
+                                         ME("All yours, boys."), WHO("Fuck. Okay. Somebody else go first."),
                                          P("You rack the bar and sit up slow, and take your time wiping down the bench."),
                                          VID("a girl in a sports bra on a weight bench, a sports team standing round watching her", "girl in sports bra lifting team watching gym", "guys staring at girl working out gym bench", pool_dir="sex/walkin_gym_team_t4")],
-            "Go.", "campus", 5, eff=[add("energy", -10)], flags=[fset("worked_out")])],
+            "Leave them staring.", "campus", 5, flags=[fset("worked_out")])],
     when=[wd(1, 3), tod("15:00", "15:15")])
 rule("gym_workout", "walkin_gym_team", 0.25, wd(1, 3), tod("15:00", "15:15"))
 
@@ -197,7 +218,7 @@ rule("gym_workout", "walkin_gym_team", 0.25, wd(1, 3), tod("15:00", "15:15"))
 walkin("walkin_canteen_zoe", "Budge up", "canteen",
     "B11, Zoe: at the start of lunch she slides in beside her and puts a hand on her knee (F/F tease). Her answer on Corruption: move it 0, let it stay (Curious) +1 cap 39.",
     [here(Z, "canteen"), flag("zoe_met")],
-    [P("You've got a table by the windows to yourself, the lunch queue building."),
+    [P("You've got a table by the windows to yourself, the lunch line building."),
      P("Zoe drops into the chair beside yours, hooks it closer with her foot until your hips touch, and steals your drink.")],
     "Her hand finds your knee.",
     [D(Z, "Budge up, babe. I'm hiding from my Biology group."),
@@ -205,24 +226,25 @@ walkin("walkin_canteen_zoe", "Budge up", "canteen",
      *legs_line("Your leg is bare. Her nails trace a slow circle on the inside of your knee, then an inch up your thigh, and stop.",
                 "Her thumb rubs back and forth on the inside of your knee through your jeans, then an inch higher.",
                 "Her thumb rubs back and forth on the inside of your knee through your leggings, then an inch higher."),
-     P("She keeps talking with her mouth full, like her hand isn't there. She's watching your face the whole time.")],
+     P("She keeps talking with her mouth full, like her hand isn't there. She's watching your face the whole time."),
+     D(Z, "So my lab partner thinks a frog has four hearts. Four. I'm going to fail with him."), ME("Zoe. Your hand."), D(Z, "What about it?")],
     [go("Move her hand.", node="z_move", mins=2),
      go("Let it stay.", node="z_stay", mins=10, cond_=cond(CURIOUS), eff=[pay("corruption", 39)])],
     records=["zoe_canteen_knee"], extra=[
         res("z_move", "Move her hand", [P("You pick her hand up off your leg and put it back on her own."),
                                         D(Z, "Rude. Fine. Later, babe."),
                                         P("She steals another sip of your drink to punish you.")],
-            "Go.", "canteen", 5),
+            "Leave her your drink.", "canteen", 5),
         res("z_stay", "Let it stay", [P("You let it stay. Her hand slides up the inside of your thigh, slow, until her little finger is an inch from your crotch, and stops there. Your pussy clenches. Your nipples go hard, and she sees them do it."),
-                                      D(Z, "Oh, babe. Look at you."),
+                                      D(Z, "Oh, babe. Look at you."), ME("Shut up. Eat your fries."), D(Z, "Gladly. With my other hand."),
                                       P("She squeezes your inner thigh once, hard, then takes her hand back and licks salt off her fingers like nothing happened. Your thighs are still tight together.")],
-            "Go.", "canteen", 10)],
+            "Leave her to her fries.", "canteen", 10)],
     when=[wd(0, 2, 4), tod("11:45", "12:00")])
 
 walkin("walkin_canteen_jake", "The team's table", "canteen",
     "B11, Jake: at the start of lunch he and two of the team drop their trays at her table; in a short skirt he shows her legs off to them. A group look that happens to her: skirt down 0, leave it +1 cap 19 (Exhibitionism).",
     [here(J, "canteen"), flag("jake_met")],
-    [P("You've got a table by the windows to yourself, the lunch queue building."),
+    [P("You've got a table by the windows to yourself, the lunch line building."),
      P("Jake drops his tray across from you, and two of the team drop theirs either side of him.")],
     "They sit down.",
     [GC(cond(SKIRT), P("Your skirt has ridden up your thighs on the plastic chair. Jake's eyes go straight down to it."),
@@ -234,21 +256,25 @@ walkin("walkin_canteen_jake", "The team's table", "canteen",
      go("Eat your lunch.", node="j_eat", mins=2, cond_=cond(NOT_SKIRT)),
      go("Leave it.", node="j_leave", mins=10, cond_=cond(SKIRT, *E_COV), eff=[pay("exhibitionism", 19)])],
     records=["team_saw_canteen"], extra=[
-        res("j_down", "Skirt down", [P("You tug your skirt down to your knees, as far as it goes. The table groans."), D(J, "Spoilsport.")],
-            "Go.", "canteen", 10),
+        # reader batch 4 (pass 3): the hook, the team's training at three (the gym, Tue and Thu)
+        res("j_down", "Skirt down", [P("You tug your skirt down to your knees, as far as it goes. The table groans."), D(J, "Spoilsport."),
+                                     D(J, "Training's at three. Come and watch. Wear that.")],
+            "Leave them to their trays.", "canteen", 10),
         res("j_eat", "Eat", [P("You eat. They talk about Saturday over your head, and the one on the left keeps looking at your tits when he thinks you won't see.")],
-            "Go.", "canteen", 15),
-        res("j_leave", "Leave it", [P("You leave it. You eat your lunch with your skirt up round your thighs and three of them staring at your legs, and you don't look up. Your face is on fire. Your nipples are hard, and the one on the left sees that too."),
-                                    D(J, "Told you, didn't I?")],
-            "Go.", "canteen", 10)],
+            "Leave them to their trays.", "canteen", 15),
+        res("j_leave", "Leave it", [P("You leave it. You eat your lunch with your skirt up round your thighs and three of them staring at your legs, but you don't look up. Your face is on fire. Your nipples are hard, and the one on the left sees that too."),
+                                    D(J, "Told you, didn't I?"), D(J, "Training's at three. Come and watch. Wear that.")],
+            "Leave them to their trays.", "canteen", 10)],
     when=[wd(1, 3), tod("11:45", "12:00")])
 
 walkin("walkin_canteen_nadia", "Nadia sits down", "canteen",
     "B11, Nadia: at lunch she sits down opposite with a line about Dr. Hale. No heat, no pay.",
     [here(N, "canteen"), flag("nadia_met"), flag("hale_met")],
-    [P("You've got a table by the windows to yourself. Nadia comes over from the queue with her salad, puts it down across from you and sits.")],
+    [P("You've got a table by the windows to yourself. Nadia comes over from the line with her salad, puts it down across from you and sits.")],
     "She leans in.",
     [D(N, "Word of advice. Don't sit in the front row for Hale. He learns the front row's names first, and then he learns their legs."),
+     # reader batch 5 (pass 3): her line moves with his step: before his invite, a warning about his Thursday office
+     G(cond(trait("hale_step", "lt", 2)), D(N, "And if he ever asks you to his office on Thursdays, say you're busy.")),
      G(cond(trait("hale_step", "gte", 2)), D(N, "He knows yours already, doesn't he? I've seen him look.")),
      P("She stabs a tomato and doesn't look up.")],
     [go("Eat with her.", loc="canteen", mins=15)],
@@ -287,7 +313,8 @@ rule("library_study", "walkin_library_nadia", 0.25, here(N, "library"), wd(0, 1,
 # The answers route into her built park hub and her dare. One a day between the two.
 # ═════════════════════════════════════════════════════════════════════════════
 def park_answers():
-    return [go("Let her run on.", loc="park", mins=2),
+    # pass 4 reader (the written no): "Let her run on." gets her reply on its own screen (`z_on`, each walk-in's extra)
+    return [go("Let her run on.", node="z_on", mins=1),
             go("Run with her.", node="hub_zoe_park.path", mins=0),
             go("\"Dare me, Zo.\"", node="zoe_park_dare.ask", mins=0, cond_=cond(slot("top")))]
 
@@ -300,8 +327,12 @@ walkin("walkin_run_zoe", "Race you", "park",
     "You spin round.",
     [P("Zoe, in tiny shorts and a sports top, bouncing on her toes, grinning. Her tits bounce with her."),
      D(Z, "Race you. Loser buys coffee."),
-     P("Your ass is still stinging where her hand was, and she knows it.")],
-    park_answers(), records=["zoe_caught_up"], shared=("walkin_rest_zoe",), when=[wd(5, 6), tod("08:00", "08:15")])
+     P("Your ass is still stinging where her hand was, and she knows it."),
+     D(Z, "That one was free. Lose, and the next one's harder.")],   # reader pass 4 b1: the slap's price
+    park_answers(), records=["zoe_caught_up"], shared=("walkin_rest_zoe",), when=[wd(5, 6), tod("08:00", "08:15")],
+    extra=[res("z_on", "Run on", [ME("Go on without me, Zo."), D(Z, "Your loss. You're still buying the coffee."),
+                                  P("She slaps your ass again on her way past, harder, and is off down the path before you can hit her back.")],
+               "Watch her go.", "park", 2)])
 
 walkin("walkin_rest_zoe", "Pillow", "park",
     "B13, Zoe: out for her weekend run, she flops down on the bench with her head in her lap. No meter; the answers route into hub_zoe_park and zoe_park_dare.",
@@ -311,32 +342,39 @@ walkin("walkin_rest_zoe", "Pillow", "park",
     [P("Zoe, in tiny shorts and a sports top, her ponytail spread across your thighs, her face turned in against your stomach. She's warm and smells of sun cream."),
      D(Z, "Five minutes. Then we run. Don't move, you're comfy."),
      P("Her cheek rubs against your thigh when she talks, and her hand settles on your hip.")],
-    park_answers(), records=["zoe_caught_up"], shared=("walkin_run_zoe",), when=[wd(5, 6), tod("08:00", "08:15")])
+    park_answers(), records=["zoe_caught_up"], shared=("walkin_run_zoe",), when=[wd(5, 6), tod("08:00", "08:15")],
+    extra=[res("z_on", "Run on", [ME("I'm not running, Zo. Go."), D(Z, "Lazy. Fine. Keep my pillow warm."),
+                                  P("She pats your thigh twice, rolls off the bench and jogs away backwards, grinning at you till the path bends.")],
+               "Watch her go.", "park", 2)])
 for host, cid in (("park_run", "walkin_run_zoe"), ("park_rest", "walkin_rest_zoe")):
     rule(host, cid, 0.25, here(Z, "park"), wd(5, 6), tod("08:00", "08:15"))
 
 # ═════════════════════════════════════════════════════════════════════════════
 # B14 · THE HOT TUB (host party_house_soak, Watched 60): Zoe, at the party house on her Saturday row, gets in beside
-# her at 23:30-00:00. After zoe_together her hand goes under the water while the deck can see: a mixed act, Hungry
+# her at 23:30-23:45. After zoe_together her hand goes under the water while the deck can see: a mixed act, Hungry
 # (Corruption 60) on top of the tub's own Exhibitionism 60. "Let her." +1 cap 79. Every exit is after 22:00, so each
 # marks the late night like the tub's own (late_party, came_home_late).
 # ═════════════════════════════════════════════════════════════════════════════
 TOG = flag("zoe_together")
 LATE = [fset("late_party"), fset("came_home_late")]
-TUB_EXIT = dict(eff=[{"targetType": "player", "trait": "energy", "op": "add", "value": 5, "cap": 100}], flags=LATE)
+# LO, 2026-11-04 (Q11): getting in strips her (the moment's button) and getting out dresses her, as the soak does;
+# the engine keeps no outfit to put back, so she dresses as every "Get dressed." in this game does (canv.DRESS_DAY)
+TUB_EXIT = dict(eff=[{"targetType": "player", "trait": "energy", "op": "add", "value": 5, "cap": 100}], flags=LATE, wardrobe=DRESS_DAY)
 walkin("walkin_tub_zoe", "Zoe gets in", "party_house",
     "B14, Zoe: late on Saturday she gets into the hot tub beside her; after zoe_together her hand goes under the water while the deck can see. Hers: not here 0; Hungry, let her, Corruption +1 cap 79.",
     [here(Z, "party_house"), flag("zoe_met")],
-    [P("You're naked in the tub up to your tits, the steam going up into the dark. The deck is full: people with drinks along the rail, a couple on the steps, all of them in reach of a look."),
+    [P("The hot tub steams on the back deck. The deck is full: people with drinks along the rail, a couple on the steps, all of them in reach of a look."),
      # (2026-11-03) her party-house hub has her in the tub already, so she is in the water when the walk-in starts
-     P("Zoe is already in the water across from you, a drink in each hand. She slides over beside you, naked, so close her thigh is against yours.")],
-    "Her thigh is against yours.",
-    [D(Z, "There you are. I've been looking everywhere."),
+     P("Zoe is already in the water, naked, a drink in each hand. She holds one up at you."),
+     D(Z, "There you are. I've been looking everywhere. Get in.")],
+    "Strip and get in.",
+    [P("You strip on the cold deck and get in. You're naked in the water up to your tits, the steam going up into the dark. Zoe slides over beside you, so close her thigh is against yours."),
      GC(cond(TOG), P("Under the water her hand lands on your thigh. Then it slides up, slow, to the top of your thigh, and her fingers brush your pussy."),
         P("She doesn't look at you. She sips her drink and smiles at the people on the rail, and her fingers stroke you once, light, under the water where they could all see if they looked down."),
-        D(Z, "Shh. Nobody's looking. Yet.")),
+        D(Z, "Shh. Nobody's looking. Yet."), ME("Zo. They're right there."), D(Z, "I know. Isn't it great?")),
      GC(cond(*ANY), P("She hands you a drink and leans her head on your shoulder. Her wet tits press against your arm. Under the water her foot hooks round your ankle."),
-        D(Z, "This is the life, babe."))],
+        D(Z, "This is the life, babe."), ME("Don't spill that in here."), D(Z, "No promises."),
+        P("Her hand stays flat on her own thigh under the water, an inch from yours. Not yet. Not with the whole deck watching."))],   # scene reader b03: the not-yet
     [go("\"Not here, Zo.\"", node="tub_no", mins=2, cond_=cond(TOG)),
      go("Get out, dripping.", loc="party_house", mins=30, cond_=cond(flag("zoe_together", False)), **TUB_EXIT),
      go("Let her.", node="tub_let", mins=10, cond_=cond(TOG, HUNGRY), eff=[pay("corruption", 79)])],
@@ -348,11 +386,13 @@ walkin("walkin_tub_zoe", "Zoe gets in", "party_house",
         res("tub_let", "Let her", [P("You let her. You open your thighs under the water, and her fingers find your clit straight away and rub it in slow, tight circles."),
                                    P("Then two of her fingers push into your pussy, deep, and curl. You grip the edge of the tub. The guy on the steps has stopped talking. He's looking at the water, at the way your hips are moving, at your tits rising out of it every time you gasp."),
                                    P("Zoe fucks you with her fingers in time with the music from the house, and keeps sipping her drink with her other hand. Your nipples are hard in the cold air. You come with your mouth clamped shut, your pussy clenching round her fingers, half the deck watching your face do it."),
-                                   D(Z, "Good girl. They all saw that."),
+                                   D(Z, "Good girl. They all saw that."), ME("Fuck, Zo."), D(Z, "Later. I'm saving the rest for later."),
                                    VID("two naked girls in a steaming hot tub at night, one fingering the other under the water, people on the deck watching", "lesbian fingering in hot tub party watching", "girl fingers girlfriend hot tub people watching", pool_dir="sex/walkin_tub_zoe_t5")],
             "Get out, dripping.", "party_house", 30, **TUB_EXIT)],
-    when=[wd(5), tod("23:30", "00:00")])
-rule("party_house_soak", "walkin_tub_zoe", 0.25, here(Z, "party_house"), wd(5), tod("23:30", "00:00"))
+    # pass 4 reader (true on every visit): Zoe leaves the party house at midnight, so the walk-in rolls till 23:45 and
+    # its last screen (moment +2, tub_let +10) still lands before 00:00
+    when=[wd(5), tod("23:30", "23:45")], moment_wardrobe=STRIP)
+rule("party_house_soak", "walkin_tub_zoe", 0.25, here(Z, "party_house"), wd(5), tod("23:30", "23:45"))
 
 # ═════════════════════════════════════════════════════════════════════════════
 # B15 · THE QUAD (host quad_grass). Jake and the team, Mon, Wed, Fri 08:30-08:45 as their row starts, when her
@@ -364,7 +404,7 @@ rule("party_house_soak", "walkin_tub_zoe", 0.25, here(Z, "party_house"), wd(5), 
 walkin("walkin_quad_team", "The team's spot", "quad",
     "B15, Jake and the team: arriving at their spot on the grass, they find her with her skirt ridden up. A group look that happens to her: fix it 0, leave it +1 cap 19 (Exhibitionism). Nobody has a meter.",
     [here(J, "quad"), flag("jake_met"), SKIRT],
-    [P("You're lying back on the grass with your bag under your head and your eyes shut. Your skirt has ridden right up your thighs on the slope, and you haven't noticed."),
+    [P("You're lying back on the grass with your bag under your head and your eyes shut. Your skirt has ridden right up your thighs on the slope, but you haven't noticed."),
      P("Then a shadow. Jake and the team, coming across the grass for their spot under the tree.")],
     "They've stopped.",
     [P("You open your eyes. Six of them, standing at your feet, looking straight up your thighs. Your skirt is round your hips."),
@@ -372,16 +412,19 @@ walkin("walkin_quad_team", "The team's spot", "quad",
      G(cond(slot("underwear", False)), P("There's nothing under it. They can see your pussy.")),
      D(J, "Morning. Nice view."),
      WHO("Best thing I've seen all week."),
-     P("Nobody moves to sit down.")],
+     P("Nobody moves to sit down."), D(J, "Don't wake her up, boys. Let her sleep."), WHO("She's awake. Look at her face.")],
     [go("Fix your skirt.", node="q_fix", mins=2),
      go("Leave it.", node="q_leave", mins=10, eff=[pay("exhibitionism", 19)])],
     records=["team_saw_grass"], extra=[
-        res("q_fix", "Fix your skirt", [P("You sit up fast and yank your skirt down over your thighs. Your face is burning. They laugh and sit down round you, and the one nearest keeps looking at your legs anyway.")],
+        res("q_fix", "Fix your skirt", [P("You sit up fast and yank your skirt down over your thighs. Your face is burning."), ME("Enjoying yourselves?"), D(J, "Very much, thanks."),
+                                        P("They laugh and sit down round you, but the one nearest keeps looking at your legs anyway.")],
             "Get up.", "quad", 15),
         res("q_leave", "Leave it", [P("You don't fix it. You shut your eyes again and leave your skirt where it is, round your hips, your thighs bare all the way up, six of them looking."),
                                     P("Your nipples go hard. You can hear them not talking. One of them sits down right by your feet, where the view's best."),
-                                    D(J, "Fuck me. Okay."),
-                                    P("You count to twenty before you sit up and smooth it down.")],
+                                    D(J, "Fuck me. Okay."), WHO("Jake. Jake, is she always like this?"), D(J, "Shut up. Don't look. Okay, look."),
+                                    P("You count to twenty before you sit up and smooth it down."),
+                                    # reader pass 3 b01: the hook; his rows have the team here Mon, Wed, Fri mornings
+                                    D(J, "We're here Monday, Wednesday and Friday mornings, @player. Same spot. Same slope.")],
             "Get up.", "quad", 15)],
     when=[wd(0, 2, 4), tod("08:30", "08:45")])
 
@@ -392,20 +435,21 @@ walkin("walkin_quad_zoe", "Pillow", "quad",
      P("Zoe flops down beside you without a word, shoves your notes off, and puts her head in your lap.")],
     "Her head's in your lap.",
     [P("She turns her face in against your thigh and looks up at you, upside down, her breath warm through your clothes, an inch from your crotch."),
-     D(Z, "Hi. I live here now."),
-     P("Her hand comes up and rests on the outside of your thigh. People on the next blanket look over. She doesn't care, and she doesn't move.")],
+     D(Z, "Hi. I live here now."), ME("Zoe, my notes."), D(Z, "Your notes are fine. I'm tired. You're comfy."),
+     P("Her hand comes up and rests on the outside of your thigh. People on the next blanket look over, but she doesn't care, and she doesn't move.")],
     [go("Sit up. \"Get your own lap.\"", node="qz_up", mins=2),
      go("Leave her there.", node="qz_leave", mins=20, cond_=cond(*C_GG), eff=[pay("corruption", 19)]),
      go("Let her hand slide up your thigh.", node="qz_hand", mins=20, cond_=cond(CURIOUS), eff=[pay("corruption", 39)])],
     records=["zoe_lap_quad"], extra=[
-        res("qz_up", "Get your own lap", [ME("Get your own lap."), P("Zoe rolls off you onto the grass, laughing."), D(Z, "Mean. I'll remember this.")],
+        res("qz_up", "Get your own lap", [ME("Get your own lap."), P("Zoe rolls off you onto the grass, laughing."), D(Z, "Mean. I'll remember this."),
+                                          D(Z, "I'm on this grass most afternoons, babe. Next time you're my pillow, and you don't get a vote.")],   # scene reader b02: the hook
             "Get up.", "quad", 10),
         res("qz_leave", "Leave her there", [P("You leave her there. She shuts her eyes with her cheek against your thigh, and you sit very still with her breath on you and your heart going too fast."),
-                                            D(Z, "See? You like it.")],
+                                            D(Z, "See? You like it."), ME("I didn't say anything."), D(Z, "You didn't have to, babe.")],
             "Get up.", "quad", 10),
         res("qz_hand", "Her hand", [P("Her hand slides from the outside of your thigh to the inside, slow, and keeps going, and stops high, her fingers pressing in right next to your pussy."),
                                     P("She's looking up at your face while she does it. Your nipples go hard, and she sees them, upside down, and grins. On the next blanket two guys have stopped talking."),
-                                    D(Z, "Your face, babe. Your face right now.")],
+                                    D(Z, "Your face, babe. Your face right now."), ME("Zoe. People are looking."), D(Z, "Then let them.")],
             "Get up.", "quad", 10)],
     when=[wd(1, 3, 4), tod("14:30", "14:45")])
 rule("quad_grass", "walkin_quad_team", 0.25, here(J, "quad"), SKIRT, wd(0, 2, 4), tod("08:30", "08:45"))
@@ -428,17 +472,24 @@ walkin("walkin_hall_hale", "Before the lecture", "lecture_hall",
                 "His eyes go down the length of your legs in your jeans and up again to your ass.",
                 "His eyes go down your legs in your leggings, and up again to your ass."),
      P("The pen in his hand clicks, once, twice."),
-     D(H, "Keen, @player. Good.")],
+     # reader batch 5 (pass 3): his Thursday lecture starts at 13:00, so the greeting reads the clock
+     D(H, "Keen, @player. Good."), G(cond(tod("06:00", "12:00")), ME("Morning, Dr. Hale.")), G(cond(tod("12:00", "18:00")), ME("Afternoon, Dr. Hale.")),
+     D(H, "Find a seat. The front fills up fast.")],
+    # LO, 2026-11-04 (Q13): Daring from 20 up, no top; it still pays only to 39 (the cap)
     [go("Take a seat.", node="h_seat", mins=2),
-     go("Sit on the front desk while he sets up.", node="h_desk", mins=10, cond_=cond(*E_DAR), eff=[pay("exhibitionism", 39)])],
+     go("Sit on the front desk while he sets up.", node="h_desk", mins=10, cond_=cond(DARING), eff=[pay("exhibitionism", 39)])],
     records=["hale_early_look"], extra=[
-        res("h_seat", "A seat", [P("You go and sit in the third row while the seats fill up round you. He sets up his laptop at the lectern and doesn't look your way again, and you can tell it costs him.")],
+        res("h_seat", "A seat", [P("You go and sit in the third row while the seats fill up round you."), D(H, "Third row. Sensible."),
+                                 P("He sets up his laptop at the lectern and doesn't look your way again, but you can tell it costs him."),
+                                 # reader pass 4 b4: the hook (his office hours, Thursday 17:00-19:30, people_data.py)
+                                 T("Thursday at five he has office hours, just him and a door that shuts. You could bring him a question.")],
             "Take notes.", "lecture_hall", 5),
         res("h_desk", "The front desk", [P("You hop up onto the front desk, right beside his lectern, and cross your legs."),
-                                         G(cond(SKIRT), P("Your skirt rides up your thighs. You don't pull it down.")),
+                                         G(cond(SKIRT), P("Your skirt rides up your thighs, but you don't pull it down.")),
                                          P("He plugs his laptop in with his back to you. Then he turns round, and his eyes go straight to your legs and stay there, and the pen stops clicking. Behind you the rows are filling, and they can all see where he's looking."),
-                                         D(H, "That's my desk."),
-                                         P("He doesn't tell you to get off it. He goes red to the collar and waits until you slide down and take the front row, right in front of him.")],
+                                         D(H, "That's my desk."), ME("I'm only keeping it warm for you."), D(H, "Front row, @player. Now. Please."),
+                                         P("He doesn't tell you to get off it. He goes red to the collar and waits until you slide down and take the front row, right in front of him."),
+                                         T("Thursday at five he has office hours, with the door shut. You want to see how red he goes in there.")],
             "Take notes.", "lecture_hall", 5)],
     )
 for days, a, b in (((0, 2, 4), "08:30", "08:45"), ((3,), "13:00", "13:15")):
@@ -456,7 +507,7 @@ walkin("walkin_couch_zoe", "Can't sleep", "zoe_apartment",
      P("Zoe pads out barefoot in a sleep shirt that barely covers her ass, no bra under it. Her nipples show through the cotton.")],
     "She drops down next to you.",
     [P("She curls up against your side with her bare legs over your lap. The shirt rides up her thighs. Her tits press soft against your arm."),
-     D(Z, "Can't sleep. Talk to me."),
+     D(Z, "Can't sleep. Talk to me."), ME("About what?"), D(Z, "Anything. Your voice is nice. Keep going."),
      P("She doesn't want to talk. She's looking at your mouth.")],
     [go("Say goodnight.", node="c_night", mins=5),
      go("Pull her down onto the couch.", node="c_pull", mins=15, cond_=cond(CURIOUS), eff=[pay("corruption", 39)]),
@@ -468,7 +519,7 @@ walkin("walkin_couch_zoe", "Can't sleep", "zoe_apartment",
             "Sit a while.", "zoe_apartment", 15),
         res("c_pull", "On the couch", [P("You pull her down on top of you. She lands with a laugh and her whole weight on you, her bare thighs either side of yours, her tits squashed soft against yours through her shirt."),
                                        P("She stops laughing. Her nipples are hard against you. Her hips settle, and press down, once, and you feel the heat of her through your clothes."),
-                                       D(Z, "Oh. Okay. Hi."),
+                                       D(Z, "Oh. Okay. Hi."), ME("Hi."), D(Z, "Don't move. Just. Don't move yet."),
                                        P("She stays there a long minute, her face in your neck, breathing. Then she gets up, tugs her shirt down and goes back to bed without looking back.")],
             "Sit a while.", "zoe_apartment", 15)],
     when=[wd(0, 1, 2, 3), tod("22:00", "23:30")])
@@ -486,18 +537,20 @@ walkin("walkin_bedroom_zoe", "Bedtime", "zoe_bedroom",
      D(Z, "Bedtime. Don't mind me.")],
     "She starts undressing.",
     [P("She pulls her top over her head and drops it on the floor. Then her bra. Her tits come free, round and heavy, her nipples tight in the cool of the room."),
-     P("She hooks her thumbs in her shorts and pushes them down, and steps out of them in just her knickers, and takes her time finding a sleep shirt."),
+     P("She hooks her thumbs in her shorts and pushes them down, and steps out of them in just her panties, and takes her time finding a sleep shirt."),
      P("She catches you in the mirror."),
-     D(Z, "Nope. Eyes stay.")],
+     D(Z, "Nope. Eyes stay."), ME("I wasn't looking."), D(Z, "Liar. You're a terrible liar, babe.")],
     [go("Look away.", node="b_away", mins=2),
      go("Watch her change.", node="b_watch", mins=5, eff=[pay("corruption", 19)])],
     records=["zoe_changed_in_front"], extra=[
-        res("b_away", "Look away", [P("You look at the polaroids. Your face is hot. Behind you she laughs, softly."), D(Z, "Chicken.")],
+        res("b_away", "Look away", [P("You look at the polaroids. Your face is hot. Behind you she laughs, softly."), D(Z, "Chicken."),
+                              D(Z, "School nights I'm in bed by ten, babe. You know where my door is.")],   # scene reader b02: the hook (her window, Mon-Thu 21:45)
             "Leave her to sleep.", "zoe_apartment", 2),
-        res("b_watch", "Watch", [P("You watch. She turns round so you get all of it: her tits, her stomach, the line of her knickers low on her hips. She stretches with her arms over her head, slow, and her tits lift."),
+        res("b_watch", "Watch", [P("You watch. She turns round so you get all of it: her tits, her stomach, the line of her panties low on her hips. She stretches with her arms over her head, slow, and her tits lift."),
                                  P("Then she pulls the sleep shirt on, and her nipples poke through it."),
-                                 D(Z, "Enjoy that?"),
-                                 T("You did. She knows you did.")],
+                                 D(Z, "Enjoy that?"), ME("Maybe."), D(Z, "Maybe. God, you're cute."),
+                                 T("You did. She knows you did."),
+                                 D(Z, "School nights I'm in bed by ten, babe. Next time, don't stand so far away.")],
             "Leave her to sleep.", "zoe_apartment", 2)],
     when=[wd(0, 1, 2, 3), tod("21:45", "22:00")])
 rule("zoe_bedroom_look", "walkin_bedroom_zoe", 0.25, here(Z, "zoe_apartment"), wd(0, 1, 2, 3), tod("21:45", "22:00"))
@@ -508,9 +561,9 @@ rule("zoe_bedroom_look", "walkin_bedroom_zoe", 0.25, here(Z, "zoe_apartment"), w
 # walk on 0, stay where he can see (Daring) +1 cap 39. Bare legs only, like the front step (B8).
 # ═════════════════════════════════════════════════════════════════════════════
 walkin("walkin_house_vance", "Out on his porch", "vance_house",
-    "B19, Vance: he comes out onto his porch and looks at her legs on the pavement. His Lust +2 on the moment; hers on Exhibitionism: walk on 0, stay where he can see (Daring) +1 cap 39.",
+    "B19, Vance: he comes out onto his porch and looks at her legs on the sidewalk. His Lust +2 on the moment; hers on Exhibitionism: walk on 0, stay where he can see (Daring) +1 cap 39.",
     [here(V, "vance_house"), flag("vance_met"), *BARE_LEGS],
-    [P("You're on the pavement looking up at the house next door when the front door opens. Vance comes out onto his porch with his paper and lowers himself into the rocking chair.")],
+    [P("You're on the sidewalk looking up at the house next door when the front door opens. Vance comes out onto his porch with his paper and lowers himself into the rocking chair.")],
     "He looks at your legs.",
     [P("He doesn't open the paper. He looks at your bare legs, from your ankles all the way up, and takes his time."),
      G(cond(SKIRT), P("From up on the porch, in this skirt, he can see right up your thighs.")),
@@ -519,12 +572,15 @@ walkin("walkin_house_vance", "Out on his porch", "vance_house",
         D(V, "Evening, Miss.")),
      GC(cond(*ANY), P("He leans forward in the chair and lets you see him look. Your legs, your hips, your tits."),
         D(V, "Turn round for me, Miss. Let an old man see what Mark's got living under his roof."))],
-    [go("Walk on.", loc="street", mins=2),
+    [go("Walk on.", node="v_walk", mins=2),   # reader pass 3 b00 (the written no): her no is spoken and he answers it
      go("Stay where he can see your legs.", node="v_stay", mins=10, cond_=cond(DARING), eff=[pay("exhibitionism", 39)])],
     raise_=[lust(V)], records=["vance_porch_look"], extra=[
-        res("v_stay", "Where he can see", [P("You stay. You lean back against his gatepost with one knee bent, your bare legs right where he can see them, and you don't look at him."),
+        res("v_walk", "Walk on", [ME("Enjoy your paper, Mr. Vance."), D(V, "Oh, I'm enjoying something, Miss."),
+                                  P("You don't turn round for him. You walk on, and behind you the rocking chair starts up again, slow, and his eyes stay on your bare legs until you're past the hedge.")],
+            "Keep walking.", "street", 0),
+        res("v_stay", "Where he can see", [P("You stay. You lean back against his gatepost with one knee bent, your bare legs right where he can see them, but you don't look at him."),
                                            P("The rocking chair stops rocking. Your face goes hot, and your nipples go tight."),
-                                           D(V, "Nice. Very nice."),
+                                           D(V, "Nice. Very nice. Same time tomorrow, Miss?"), ME("Maybe."), D(V, "I'll be out here either way."),
                                            P("When you finally walk on, you can feel his eyes on your ass all the way down the street.")],
             "Walk on.", "street", 5)],
     when=[tod("18:00", "18:15")])
@@ -547,24 +603,41 @@ one_screen("walkin_door_ta", "The door opens", "ta_office",
     [here(TA, "ta_office"), flag("bio_ta_met")],
     [P("The half-open door swings wide. The TA, with her kettle."),
      P("Her eyes go down you, all the way down, your tits, your legs, and snap back up to your face. Her neck goes pink."),
-     D(TA, "Oh! Hi. It's, um. It's up to date. The grades. Sorry.")],
+     D(TA, "Oh! Hi. It's, um. It's up to date. The grades. Sorry."),
+     # reader pass 4 b0 (the hook): she points at her own office, where "Step back." lands while her hours run
+     D(TA, "The kettle's just boiled. You can come in, if you want.")],
     "Step back.", "ta_office", ["ta_door_seen"])
 one_screen("walkin_door_dean", "The door opens", "dean_office",
     "B20, the dean: he opens his door and reads her clothes. No pay.",
     [here(DEAN, "dean_office"), flag("dean_met")],
     [P("The heavy door opens while you're reading the notice. The dean, a file under his arm."),
-     G(DARING_STATE, P("He looks you down and up, once, slowly."), D(DEAN, "Is that what you wore to class?")),
-     G(cond(slot("bra"), NOT_SKIRT), D(DEAN, "The list is on the door so that you read it, @player. Read it and move along."))],
-    "Step back into the corridor.", "faculty_floor", ["dean_door_seen"])
+     # scene reader b03 (2026-11-03): the look names her body; the line carries a price and points at his chair
+     G(cond(BRALESS), P("He looks you down and up, once, slowly, and stops on your nipples pushing at the fabric with no bra under it.")),
+     G(cond(slot("bra"), SKIRT), P("He looks you down and up, once, slowly, and stops on the hem of your skirt and the bare tops of your thighs.")),
+     G(DARING_STATE, D(DEAN, "Is that what you wore to class? Come to my office dressed like that and it goes in your file.")),
+     G(cond(slot("bra"), NOT_SKIRT), D(DEAN, "The list is on the door so that you read it, @player. Read it and move along. Make sure your name never goes on it, or you'll be sitting in my hard chair."))],
+    "Step back out onto the faculty floor.", "faculty_floor", ["dean_door_seen"])
 one_screen("walkin_door_hale", "The door opens", "hale_office",
     "B20, Dr. Hale: he opens his door in his Thursday hours; his line by his step. No pay.",
     [here(H, "hale_office"), flag("hale_met")],
     [P("You've got your finger on your grade when Dr. Hale opens his door."),
      G(cond(trait("hale_step", "lt", 3)), P("He sees you there, and his eyes go down your legs before they come back up to your face."),
-       D(H, "Checking up on me, @player?")),
+       D(H, "Checking up on me, @player?"),
+       T("He wants a lot more than a look at your legs. Not in a corridor. Not yet.")),   # reader pass 4 b1: the not-yet
      G(cond(trait("hale_step", "gte", 3)), P("He doesn't step out. He holds the door open and waits, and his eyes go to your mouth."),
        D(H, "Come in or don't, @player. Don't stand in my doorway."))],
     "Step back.", "hale_office", ["hale_door_seen"])
+# reader pass 4 b1 (the written no): from his step 3 "Step back." answers "Come in or don't", so it lands on his
+# reply first; the flags go on that screen's own way out, as one_screen's single exit set them
+_hale_door = CANVASES[-1]["nodes"]
+_hale_out = _hale_door[0]["choices"][0]
+_hale_door[0]["choices"] = [go("Step back.", node="no")]
+_hale_door.append(node("no", "Step back", [
+    G(cond(trait("hale_step", "lt", 3)), P("You step back. He watches your legs go, and lets the door swing shut.")),
+    G(cond(trait("hale_step", "gte", 3)), P("You take a step back from his door."),
+      D(H, "Suit yourself. You know where I am on Thursdays."),
+      P("He shuts the door on you, quietly, and you hear him sit back down.")),
+], [dict(_hale_out, text="Walk away.")]))
 one_screen("walkin_door_business", "The door opens", "business_office",
     "B20, the Business lecturer: he opens his door and looks at the grade, not at her. No pay.",
     [here(BUS, "business_office"), flag("business_lecturer_met")],
@@ -579,11 +652,104 @@ for host, cid, npc, office in (("door_grade_art", "walkin_door_art", ART, "art_o
                                ("door_grade_business", "walkin_door_business", BUS, "business_office")):
     rule(host, cid, 0.25, here(npc, office))
 
+# ═════════════════════════════════════════════════════════════════════════════
+# Q4 (LO, 2026-11-04: "Add walkins in this release itself"): the refill places outside the house that rolled no
+# event (gate `a refill place rolls an event`). The same shape: one moment screen, one graded answer screen.
+# B23 · THE WOMEN'S TOILET (host toilet_wash, in 3_activities.toml): Zoe, from her lunch row in the canteen (Mon-Fri
+# 11:45-13:00), in to fix her lipstick, 12:15-12:45. She has no meter; `zoe_saw_toilet` records it. Her words at
+# stage 1-2 are tits and ass (npc_zoe.md). Her answer on Exhibitionism: the door shut 0, then +1 cap 19 / 39 / 59.
+# ═════════════════════════════════════════════════════════════════════════════
+E_SHO = [trait("exhibitionism", "gte", 40)]
+CG = "npc_cocky_guy"
+walkin("walkin_toilet_zoe", "The stall door", "college_womens_toilet",
+    "B23 (Q4), Zoe: in from lunch to fix her lipstick, she pushes open the stall with the broken lock while she washes. No meter moves for her; zoe_saw_toilet. Her answer on Exhibitionism: the door shut 0, then +1 cap 19 / 39 / 59.",
+    [here(Z, "canteen"), flag("zoe_met")],
+    [P("Lunch. You've got a stall in the women's toilets and a fistful of wet paper towels, and you're washing the morning off you in two minutes flat."),
+     GC(cond(slot("top"), slot("bra")), P("Your top is shoved up under your arms with your bra pushed up over your tits, and the cold paper has you shivering.")),
+     GC(cond(slot("top"), slot("bra", False)), P("Your top is shoved up under your arms with nothing under it, and the cold paper has your tits all goosebumps.")),
+     GC(cond(*ANY), P("Your clothes are pushed up and pulled down wherever the paper needs to go.")),
+     P("The stall lock is broken, the way half of them are in here. The door swings in, and Zoe is standing there with her lipstick in her hand."),
+     D(Z, "Oh! Babe. Hi.")],
+    "She doesn't shut the door.",
+    [P("She doesn't shut it. She leans on the frame and looks you over, slow: the wet paper in your hand, your tits, your stomach, all the way down and back up to your face."),
+     D(Z, "So this is what you do at lunch. I've been eating sandwiches like an idiot."), ME("Zoe. The door."), D(Z, "I see the door, babe."),
+     VID("a girl leaning in an open toilet stall door with a lipstick, a half-undressed girl inside washing with paper towels", "friend walks in on girl in toilet stall", "girl opens stall door on half naked girl", pool_dir="sex/walkin_toilet_zoe_t4")],
+    [go("Shove the door shut.", node="z_shut", mins=2),
+     go("Keep washing.", node="z_cov", mins=5, cond_=cond(*E_COV), eff=[pay("exhibitionism", 19)]),
+     go("Turn round and do your back.", node="z_dar", mins=5, cond_=cond(*E_DAR), eff=[pay("exhibitionism", 39)]),
+     go("Let her look.", node="z_sho", mins=5, cond_=cond(*E_SHO), eff=[pay("exhibitionism", 59)])],
+    # pass 4 (LO's note): this screen replaces toilet_wash, and she does wash, so the wash pays hygiene as toilet_wash does
+    raise_=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": 15}],
+    records=["zoe_saw_toilet"], when=[wd(0, 1, 2, 3, 4), tod("12:15", "12:45")], extra=[
+        res("z_shut", "The door shut", [P("You kick the door shut in her face and hold it there with your foot."), ME("Zoe! Use another one!"),
+                                        D(Z, "Spoilsport. I know where to find you at lunch now."),   # pass 4 reader: no "tomorrow" on a Friday
+                                        P("Her heels click over to the mirror. You can hear her doing her lipstick out there, laughing to herself the whole time.")],
+            "Done.", "college_womens_toilet", 10),
+        res("z_cov", "Keep washing", [P("You keep washing. You wipe the cold paper down your stomach like she isn't there, but your face burns the whole time."),
+                                      D(Z, "Look at you, not even blushing. Okay. A bit blushing."), ME("I've got two minutes, Zoe."),
+                                      D(Z, "Then hurry up. I'm not going anywhere."),
+                                      P("She watches till you're done, and then she pushes the stall door shut for you, grinning.")],
+            "Done.", "college_womens_toilet", 10),
+        res("z_dar", "Do your back", [P("You turn round in the stall and reach the wet paper over your shoulder for your back, and give her your bare back and the curve of your ass while you do it."),
+                                      D(Z, "Oh, babe. Okay. Now I'm jealous of the paper."), ME("You're blocking the light, Zoe."),
+                                      D(Z, "I'm blocking the view for anyone else. You're welcome."),
+                                      P("She stays in the doorway till you've finished, but she keeps her back to the sinks, so nobody else gets a look.")],
+            "Done.", "college_womens_toilet", 10),
+        res("z_sho", "Let her look", [P("You turn to face her, drop the paper in the bin, and don't cover anything. You stand there with your tits out and let her look."),
+                                      D(Z, "Babe. You can't stand there like that and expect me to think about anything else all day."),   # pass 4 reader: she has no lecture after lunch Tue/Thu/Fri
+                                      ME("Then don't."), D(Z, "Later. Not in a toilet stall. But later, babe."),
+                                      P("She shuts the stall door on you herself, slow, and you hear her laughing all the way out.")],
+            "Done.", "college_womens_toilet", 10)])
+rule("toilet_wash", "walkin_toilet_zoe", 0.25, here(Z, "canteen"), flag("zoe_met"), wd(0, 1, 2, 3, 4), tod("12:15", "12:45"))
+
+# ═════════════════════════════════════════════════════════════════════════════
+# B24 · ZOE'S BATHROOM (host zoe_bathroom_face, town.py): Zoe's Friday party, while the cocky guy's party rows have
+# him in her flat (Fri 23:00-00:00, Sat 00:00-02:00, once met). The bolt is loose; he barges in for the toilet. A man
+# from outside the house looks openly (H7). He has no meter; `cocky_saw_bathroom` records it. Strangers' and
+# extras' words (DECISIONS 41): tits, nipples, ass, cock, wet, clit. Her answer on Exhibitionism.
+# ═════════════════════════════════════════════════════════════════════════════
+walkin("walkin_zoebath_cocky", "The loose bolt", "zoe_bathroom",
+    "B24 (Q4), the cocky guy: at Zoe's party he barges through the loose bolt while she fixes her face, and stays to look. No meter moves for him; cocky_saw_bathroom. Her answer on Exhibitionism: out 0, then +1 cap 19 / 39 / 59.",
+    [here(CG, "zoe_apartment"), flag("cocky_guy_met")],
+    [P("Party night. You slide the bolt on Zoe's bathroom door, but it wobbles in its screws. You lean over the sink into her ring of bulbs to fix your liner, your ass pushed out behind you."),
+     G(cond(slot("bra", False)), P("No bra tonight. Leaning in like this, your tits hang loose, and in the mirror your nipples show.")),
+     G(cond(SKIRT), P("Your short skirt rides up the backs of your thighs as you lean in.")),
+     P("The bolt gives. The door bangs open, and the cocky guy from your Figure drawing class lurches in with a beer, already reaching for his fly. He stops."),
+     D(CG, "Whoa. Hey, @player.")],
+    "He doesn't back out.",
+    [P("He doesn't back out. He kicks the door to behind him, leans on it, and looks at you in Zoe's mirror, at your ass pushed out over the sink, and he takes his time about it."),
+     D(CG, "Best view at this whole party."), ME("The bolt's broken. Get out."), D(CG, "Finish your face. I can wait."),
+     VID("a young man with a beer leaning on a bathroom door, staring at a girl bent over the sink doing her make-up", "guy barges into bathroom girl doing makeup party", "guy walks in on girl at mirror bathroom party", pool_dir="sex/walkin_zoebath_cocky_t4")],
+    [go("Yank the door open and point.", node="c_out", mins=2),
+     go("Finish your liner.", node="c_cov", mins=5, cond_=cond(*E_COV), eff=[pay("exhibitionism", 19)]),
+     go("Lean in closer to the mirror.", node="c_dar", mins=5, cond_=cond(*E_DAR), eff=[pay("exhibitionism", 39)]),
+     go("Turn round and lean back on the sink.", node="c_sho", mins=5, cond_=cond(*E_SHO), eff=[pay("exhibitionism", 59)])],
+    records=["cocky_saw_bathroom"], extra=[
+        res("c_out", "Out", [P("You shove past him, yank the door open and point down the hall. The music comes in loud."), ME("Out. Pee in the garden."),
+                             D(CG, "Suit yourself. Your loss, @player."),
+                             P("He goes, grinning, and you shoot the loose bolt again with your face on fire.")],
+            "Open the door.", "zoe_apartment", 5),
+        res("c_cov", "Finish your liner", [P("You turn back to the mirror and finish your liner like he isn't there. You try to look calm, but your hand isn't steady. In the glass his eyes go from your ass to your face and back."),
+                                           D(CG, "You always this calm?"), ME("Only when I'm holding something sharp."), D(CG, "Fair."),
+                                           P("He watches till you cap the liner, then holds the door open for you like a gentleman and looks at your ass all the way out.")],
+            "Open the door.", "zoe_apartment", 5),
+        res("c_dar", "Lean in closer", [P("You lean in closer to the mirror, slow, up on your toes, and push your ass right back at him while you do the other eye."),
+                                        D(CG, "Jesus. You're doing that on purpose."), ME("Doing what?"),
+                                        D(CG, "Find me later and I'll tell you."),
+                                        P("He goes, and he leaves the door wide open behind him.")],
+            "Open the door.", "zoe_apartment", 5),
+        res("c_sho", "Lean back on the sink", [P("You turn round and lean back on Zoe's sink, your hands on the edge either side of you, and let him look at the front of you. Your nipples are hard."),
+                                               D(CG, "Jesus Christ, @player."), ME("Not in Zoe's bathroom. Not yet."), D(CG, "Then where?"), ME("Find out."),
+                                               P("Somebody bangs on the door. He grins at you, opens it on the queue outside, and goes out through them.")],
+            "Open the door.", "zoe_apartment", 5)])
+rule("zoe_bathroom_face", "walkin_zoebath_cocky", 0.25, here(CG, "zoe_apartment"), wd(4), tod("23:00", "00:00"))
+rule("zoe_bathroom_face", "walkin_zoebath_cocky", 0.25, here(CG, "zoe_apartment"), wd(5), tod("00:00", "02:00"))
+
 # The hub lines that read the flags (proposal B9 and B20: "read by his/their hub"): Gary for two days, an office hub
 # in the hour after its door (she goes in straight from it).
 HUB_READS = {
     "hub_gary_booth": G(cond(flag("gary_sat_with_her"), since("gary_sat_with_her", "lt", 48)),
-                        D(GY, "Sit with me again sometime, sweetheart. My knee's been cold.")),
+                        D(GY, "Sit with me again sometime, doll. My knee's been cold.")),
     "hub_art_office": G(cond(flag("art_door_seen"), since("art_door_seen", "lt", 1)),
                         D(ART, "You stood very well at my door. Remember how.")),
     "hub_ta_office": G(cond(flag("ta_door_seen"), since("ta_door_seen", "lt", 1)),

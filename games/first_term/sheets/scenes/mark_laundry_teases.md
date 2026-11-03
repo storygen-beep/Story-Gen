@@ -1,4 +1,6 @@
-# [READY] Scene — mark_laundry_teases
+# [REVIEW] Scene — mark_laundry_teases
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. want, next step and hook rows. the explicit beats as built, measured.
 
 > **New 2026-11-02, signed by LO 2026-11-02** ("Signed, skip the play check, build it"; DECISIONS 128). LO: "not
 > dominance, not chores too, plain chores raises nothing, she can tease at a point, like when doing laundry tease
@@ -12,6 +14,9 @@
 | the accident first (H2) | every tease needs `mark_saw_her` (his accident at the dryer, `mark_00_the_dryer`). Mark's step 3 is no longer needed. |
 | once a day | through the item's own `did_laundry`: one laundry, plain or tease, a day |
 | the no | the item's "Not now." (as built) |
+| want | his: he stops sanding when she bends at the drum |
+| next step | the next button opens at Curious + Daring, then Bold + Showing |
+| hook | his walk-ins at the laundry (`walkins_home.md`) come in on this ladder |
 
 ## The ladder
 
@@ -42,3 +47,12 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-02 (low heat, H
 **bold** · 111 words · explicit words 5 · median sentence 11
 
 > You pull your top off over your head and drop it in the drum. Then you stand there in your bra while the machine fills. You don't cover up. The radio keeps playing, but Mark's hands go still on the bench. He looks straight at your tits and doesn't pretend not to. "That's not laundry, @player. That's a show." *So watch it.* Your nipples go hard in the cold air, and he sees that too. He takes a long look at your tits, then another. Somewhere in the house Laura shuts a cupboard. He turns back to the bench, his cock hard in his jeans, his eyes still on your tits.
+
+## Explicit beats as built (measured 2026-11-03)
+
+One row per explicit screen in the built game: 3 or more words on the build's own list, the count `gates.py` uses. A screen's variants fold into it, so a screen can hold more words than one visit shows. "Sits at" is the highest of the person's crude columns (SP2) that the screen uses. Where a screen's text differs from the prose above, the build is what plays.
+
+| screen | words | counted words | sits at | the text |
+|---|---|---|---|---|
+| `hl_laundry_tease2` | 1066 | 36: ass ×18, cock ×18 | Mark's middle column | on this sheet above |
+| `hl_laundry_tease3` | 244 | 10: tits ×6, nipples ×2, cock ×2 | Mark's middle column; also nipples | on this sheet above |

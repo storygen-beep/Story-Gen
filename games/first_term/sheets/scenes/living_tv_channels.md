@@ -1,6 +1,8 @@
 # [REVIEW] Scene — living_tv_channels (the remote)
 
-> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 1: in Mark's hub, "Channel 5: the adult channel." shows only after his accident (`mark_saw_her`), the same gate as "Leave it on.", so the explicit beat beside him never opens before any sign that he wants her. Alone on the couch it is unchanged. Built in `mark.py` and `home_items.py` (`remote_choices`).
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. C2's "Turn the sound up." and its screen; the walk-ins; Mark's plain channels pay him nothing; his channel 5 caps at 39; want, next step and hook rows. the explicit beats as built, measured. file and line cites cut.
+
+> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 1: in Mark's hub, "Channel 5: the adult channel." shows only after his accident (`mark_saw_her`), the same gate as "Leave it on.", so the explicit beat beside him never opens before any sign that he wants her. Alone on the couch it is unchanged.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -18,11 +20,17 @@
 | where · when | alone (`living_tv`): any hour 07:00–02:00 the room is empty · with Mark (his hub `hub_mark_living_room`): whenever he is up late there |
 | gate | none to open · "Touch yourself." alone from Curious |
 | who | alone, or Mark, 46, her step-father; Mark or Ryan may be home (a line names who, read from their rows) |
+| want | Mark's: he doesn't reach for the remote; the can on his lap doesn't hide him |
+| next step | alone: "Touch yourself." at Curious; with Mark, "Leave it on." after his accident |
+| hook | the walk-ins: Mark, Ryan or Laura can come in on her (odds 0.25–0.45 by her Corruption, 0.5–0.9 with the sound up) |
+| with Mark | channel 5 shows only after `mark_saw_her` and from Curious |
 | what she wears here | not named |
 | BRAKE | the plain four: energy +5 once a day (`watched_tv`) · channel 5 pays every time, up to five TV sessions a day (LO, DECISIONS 91); after the fifth the row greys out, "Watch TV — Not now." The count resets at midnight. |
 | raises | channel 5 "Keep watching." alone: corruption add +1, cap 19 at Good Girl, cap 39 at Curious · with Mark: corruption add +2, cap 19 / 39, and his Want add +2, once a day (`mark_tv_paid`, cleared at midnight; DECISIONS 92); after that it plays and pays nothing · alone "Touch yourself." corruption add +2, cap 39 · with Mark, the plain four also his Want add +1 once a day (the old TV item's pay) |
 | the crude-word ceiling | the park's, strangers on a screen: tits, nipples, ass, cock, wet, clit · no cunt, fuck, cum, pussy · with Mark no clit |
 | media | every channel has its own clip pool: `tv/news_t0`, `tv/cooking_t0`, `tv/sports_t0`, `tv/film_t0`, `sex/tv_adult_alone_t5`, `sex/tv_adult_touch_t5`; with Mark `tv/mark_news_t0`, `tv/mark_cooking_t0`, `tv/mark_sports_t0`, `tv/mark_film_t0`, `sex/tv_adult_mark_t5`, `sex/tv_adult_mark_leave_t5` (12 slots, empty until LO's harvest) |
+
+"Turn the sound up." is C2 of the heat proposal, and the walk-ins on this screen are B3 (`proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`, signed 2026-11-03). The walk-in screens are on `walkins_home.md`.
 
 ## Branch map — alone (`living_tv`)
 
@@ -30,7 +38,8 @@
 |---|---|---|---|---|
 | `remote` | the couch, the remote, five channels | no | Channels 1–5 · "Turn it off." | none |
 | `ch_news` / `ch_cooking` / `ch_sports` / `ch_film` | one of two lines of what's on | no | "Watch a while." (30 min) · "Change the channel." · "Turn it off." | energy add +5, once a day |
-| `adult` | channel 5: a couple on screen; her body answers | yes | "Keep watching." (30 min) · "Touch yourself." (Curious) · "Change the channel." · "Turn it off." | +1, cap 19 / 39 |
+| `adult` | channel 5: a couple on screen; her body answers | yes | "Keep watching." (30 min) · "Touch yourself." (Curious) · "Turn the sound up." (Corruption 10) · "Change the channel." · "Turn it off." | +1, cap 19 / 39 |
+| `loud` | the sound up: her moans fill the room; anyone in the house can hear | yes | "Keep watching." → the room | corruption add +1, cap 19 · `tv_loud` set |
 | `touch` | she touches herself on the couch and comes; a line names Mark in the kitchen or Ryan upstairs when they are | yes | "Fix your clothes." | +2, cap 39 |
 
 ## Branch map — with Mark (inside his late hub)
@@ -38,9 +47,9 @@
 | node | what happens | explicit? | exits | effects |
 |---|---|---|---|---|
 | `mremote` | he hands her the remote | no | Channels 1–5 · "Leave him to it." | none |
-| `mch_*` | what's on, and his line: news "Same as yesterday. Same as every day." · cooking "Your mother never cooks like that." · sports "Watch this. Watch. Ah, for God's sake." · film "Seen it. He dies at the end." | no | "Watch a while." · "Change the channel." · "Leave him to it." | energy +5 and his Want +1, once a day |
+| `mch_*` | what's on, and his line: news "Same as yesterday. Same as every day." · cooking "Your mother never cooks like that." · sports "Watch this. Watch. Ah, for God's sake." · film "Seen it. He dies at the end." | no | "Watch a while." · "Change the channel." · "Leave him to it." | energy +5 once a day; nothing of his (DECISIONS 128) · was: energy +5 and his Want +1, once a day |
 | `madult` | channel 5; he stops, doesn't reach for the remote. Before his step 4: "Change it, @player." but he doesn't take it. From step 4: he watches her watching | yes | "Leave it on." · "Change the channel." · "Leave him to it." | none |
-| `mleave` | they both watch; the can on his lap doesn't hide his hard-on; his eyes on her | yes | "Keep watching." (25 min) · "Change the channel." | once a day: +2, cap 19 / 39, and his Want +2; after that nothing |
+| `mleave` | they both watch; the can on his lap doesn't hide his hard-on; his eyes on her | yes | "Keep watching." (25 min) · "Change the channel." | once a day: corruption +2, cap 39, and his Want +2; after that nothing |
 
 **The no:** "Change the channel." and "Turn it off." pay nothing.
 
@@ -62,3 +71,21 @@
 | pays every time, any hour, 30 minutes; five sessions a day since 2026-10-30 (DECISIONS 91) | LO, 2026-10-29 (DECISIONS 86), told it can carry Good Girl in one day and turn "the climb is paid for" red |
 | with Mark, his reaction by his step | LO, 2026-10-29 · the step 4 split: guess |
 | channel lines, Mark's lines | guess |
+
+## Explicit beats as built (measured 2026-11-03)
+
+One row per explicit screen in the built game: 3 or more words on the build's own list, the count `gates.py` uses. A screen's variants fold into it, so a screen can hold more words than one visit shows. "Sits at" is the highest of the person's crude columns (SP2) that the screen uses. Where a screen's text differs from the prose above, the build is what plays.
+
+| screen | words | counted words | sits at | the text |
+|---|---|---|---|---|
+| `living_tv` · `adult` | 113 | 8: ass ×2, cock ×2, tits, moans, nipples, clit | Strangers on the TV: no column on SP2; crude words used: ass, clit, cock, tits | on this sheet above |
+| `living_tv` · `loud` | 70 | 3: moans, ass, nipples | Strangers on the TV: no column on SP2; crude words used: ass | written out below |
+| `living_tv` · `touch` | 163 | 10: cock ×3, clit ×2, tits, thrust, moans, tit, nipple | Strangers on the TV: no column on SP2; crude words used: clit, cock, tits | on this sheet above |
+| `hub_mark_living_room` · `madult` | 139 | 6: sucks, cock, tits, thrust, moans, nipples | Mark's middle column; also nipples | on this sheet above |
+| `hub_mark_living_room` · `mleave` | 103 | 8: moans ×2, thrust ×2, ass, tits, cock, nipples | Mark's middle column; also nipples | on this sheet above |
+
+The screens not written out above, as built:
+
+- `living_tv` · `loud` · 70 words · 3 counted:
+
+> You thumb the volume up, and up again. Her moans fill the whole room. The slap of his hips on her ass is loud as a hand clap. You can hear it bounce off the hall stairs. Anyone in the house can hear it now. Your nipples go hard. You squeeze your thighs together on the couch and leave it right where it is. Harder. Oh God, harder. Don't stop.

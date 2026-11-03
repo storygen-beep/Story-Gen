@@ -92,7 +92,10 @@ These name an hour and are correct at any minute. Do not sweep them:
 - **Backward canon fixed by a prior chapter** — *"twenty-one years in this room"*, *"eleven years
   behind that counter"*. The player cannot move them.
 - **In-scene relative time** — *"a minute later"*, *"all night"*, *"by the time she is done"*.
-- **A forward consequence** — *"the room will be cold again by six."*
+- **A forward consequence** — *"the room will be cold again by six."* A forward word names a time ahead,
+  not now: *"in the morning"*, *"by morning"*, *"tomorrow"* (*"tomorrow morning"*, *"tomorrow night"*). Gate
+  *a day word fits its window* skips a day-part word that follows one (LO, 2026-11-03, PICKS H65 a), so
+  *"I'll still be here in the morning."* at 22:20 is true.
 
 **The test, in one question:** *if the player reads this line at the last minute of the canvas's
 window, is it still true?* Rule → yes. Reading → no.
@@ -274,7 +277,14 @@ declared `[[npcs.schedules]]` row as a Time / Location / Activity / Days table. 
 declares them as `[[locations]] hours` + `closed_text`, and a closed card says when it opens
 (`engine.md` §22). An activity with hours and no `cooldown_message` is a schedule the player can only
 learn by losing a day to it. Checked: gate *a closed activity says when it opens* fails a repeatable solo
-canvas with `trigger.schedules` that lacks either key at the top of `[canvases.trigger]`.
+canvas with `trigger.schedules` that lacks either key at the top of `[canvases.trigger]`, one windowed only by `time_of_day` / `weekday` conditions that lacks them, and a `cooldown_message` that names no hour or day.
+
+**Hours go only on an activity she chooses. An event that happens to her stays hidden when it is shut**
+(LO, 2026-11-03). The guy beside her in class, the lecturer's word about her clothes, a drink somebody hands her:
+a greyed "The guy beside you — Mon, Wed, Fri, 8:30 AM" line tells the player when something will happen to her,
+which spoils it and reads like a timetable of surprises. Mark such a canvas `[canvases.trigger.metadata] kind =
+"event"` (the importer ignores it; the gate reads it) and leave `show_when_blocked` off. The gate skips an event,
+and fails one that shows its hours.
 
 ⚠️ The top-30 mopoga study found **lostness, not grind, is this genre's disease** — 15.5% of player
 comments against grind's 0.9% (Process Review, Round 1). A hidden window is lostness with a clock on it.
@@ -312,13 +322,9 @@ their own wallet is a number the game has to be right about.
 
 ## What the scoreboard checks
 
-One gate and two lints. `python3 scripts/gates.py <slug>`.
-
-| | |
-|---|---|
-| gate · **the label keeps its time** | C3 + C4. No label names a clock time; where a label states a duration, it equals the minutes that click actually spends (choice → target node → that node's exit). Reads **both** exit shapes — a `choices` array **and** a single `exit_block` that is itself the button. **n/a** when a game has no labels at all. |
-| lint · **the clock in the prose** | C2. Every clock reference in a beat with its canvas's window width beside it, plus the game's rate against the field distribution. A list to read, never a score. |
-| lint · **the time cost is not on the button** | C4. Every click that moves the clock 60 minutes or more without a duration on its label. |
+The gates and lints that check this file are in one table, `SKILL.md` "The scoreboard — what fails, and where
+to read about it", each row naming its rule here (LO, 2026-11-03, PICKS C51 b). `python3 scripts/gates.py
+<slug>`.
 
 ⚠️ **And `_CLK_PREP` gained `to`, but only in a narrow form** — `to` + a spelled-out hour that is not
 `one`. Measured across 81,264 corpus labels: `to` in the shared alternation adds **8 hits, all

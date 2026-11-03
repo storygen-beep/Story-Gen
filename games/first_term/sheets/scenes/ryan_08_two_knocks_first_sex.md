@@ -1,10 +1,12 @@
 # [REVIEW] Scene — ryan_08_two_knocks_first_sex
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the talk and doubt buttons as built; his +5 sits on the three finishes, not the terms; no "Further." button; the step row. the explicit beats as built, measured. file and line cites cut.
+
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 127) (LO: "it should be like rise from normal, not jump straight to
 > fucking", "cant we have more in the sex screens", "B, sheet it"). The step now rises from a normal talk through
 > her doubt, a kiss and undressing, one piece at a time, with a no at each rung; the sex has three choices of
 > her own (what first, how, and what to do when Laura's light comes on) and three finishes; her feeling after
-> gets its own screen before his terms (`the-arc.md:640`, a first time: his want, her doubt, the act, her
+> gets its own screen before his terms (the skill's rule for a first time: his want, her doubt, the act, her
 > feeling after). Sections changed: the row table (hook, her voice), Branch map (rewritten), The explicit
 > screens (which change, which are new), Truth checks. Gate, pay, terms and the repeat's trigger unchanged.
 
@@ -21,7 +23,7 @@
 | gate | Corruption 60 (was 40: DECISIONS 124) · his Want 70 · `ryan_step` eq 7 · not Friday · the boost off |
 | want | his phone face-down when she knocks (step 7's after) |
 | next step | first sex, on a night that isn't Kayla's; his headboard hits the wall she listened through |
-| hook | the terms; the step-8 repeat; step 9 shown locked, "Further. (Needs Corruption 60)" |
+| hook | the terms; the two-knocks repeat; his card: "More of Ryan in the next release." |
 | who notices | Laura, across the hall: her light on (`laura_knows_ryan`, from "Laura opens the door") |
 | what she risks | Laura hearing the headboard |
 | what she wears here | not named; undressed on screen |
@@ -29,6 +31,14 @@
 | the crude-word ceiling | Ryan's whole late column, cunt, fuck, cum ("Fuck me.") · confirmed by LO 2026-11-01 ("Continue") |
 | her_line_low · her_line_high | low: "This is Ryan. You should go." · high: "You want him to hear Kayla on the phone while you do this." (worded for this screen with the prose) |
 | mixed act? | no: behind his door. Corruption only |
+
+## The step row (filled from the build, 2026-11-03)
+
+**Kind · stage:** sex, the taboo act at home (Hungry · Watched 60).
+
+| the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
+|---|---|---|---|---|---|---|
+| first sex with Ryan, rising from a talk, with Laura's light on across the hall | Laura: her light comes on under her door | Laura hearing the headboard | "Stay." · "Let him.", then her picks | he kisses back and takes the pace on `keep` | yes: her pick of three finishes | the terms; the two-knocks menu every night but Friday |
 
 ## Branch map — one row per screen
 
@@ -39,8 +49,8 @@ no she can come back from (the parked no: "Not tonight." returns the step the ne
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `knocks` | two knocks, late; he opens on the first; his phone is face-down on the desk; "Kayla's at her mom's tonight." | no | "Come in." → `talk` · "Not tonight." → the hall (parked) | none |
-| `talk` | normal and awkward: they sit on his bed, a foot apart; he tries a joke about the walls; neither says the kiss; he says "I meant it. The girlfriend thing." and doesn't move away | no | "So did I." → `doubt` | none |
-| `doubt` | her low line, out loud in her head: *This is Ryan. You should go.* His knee touches hers. He's looking at her mouth (his want, on his body: H7) | no | "Stay." → `kiss` · "Go." → the hall (parked) | none |
+| `talk` | normal and awkward: they sit on his bed, a foot apart; he tries a joke about the walls; neither says the kiss; he says "I meant it. The girlfriend thing." and doesn't move away | no | "Then why did you open the door?" → `doubt` | none |
+| `doubt` | her low line, out loud in her head: *This is Ryan. You should go.* His knee touches hers. He's looking at her mouth (his want, on his body: H7) | no | "Stay." → `kiss` · "Goodnight, Ryan." → the hall (parked) | none |
 | `kiss` | she kisses him; this time he kisses back and doesn't stop; his hand goes under her top, onto her bare back, then round to her tits through her bra; his cock hard against her thigh | yes (low) | "Let him." → `undress` · "Stop. Not tonight." → the hall (parked) | none |
 | `undress` | one piece at a time: he pulls her top over her head and looks; she unhooks her bra herself; she pushes his shorts down; he peels her panties off, slow, and stares at her cunt; they're naked on his bed | yes | "Go down on him." → `suck` · "Let him taste you." → `lick` · "Get on him." → `ride` | none |
 | `suck` | **new.** On her knees by his bed, his cock in her mouth; he's fighting to stay quiet, one hand in her hair; she stops before he comes | yes | "Ride him." → `ride` · "On your back." → `under` · "Against the wall." → `wall_back` | none |
@@ -51,13 +61,13 @@ no she can come back from (the parked no: "Not tonight." returns the step the ne
 | `light` | across the hall, a line of light comes on under Laura's door; he's buried in her; they both see it (today's `wall`, rewritten to fit all three positions) | yes | "Keep going." → `keep` · "Freeze." → `freeze` | none |
 | `keep` | **new.** He fucks her harder, his hand over her mouth; the bed or the wall knocks; Laura's light stays on | yes | "Inside me." → `inside` · "On me." → `on` · "In my mouth." → `mouth` | none |
 | `freeze` | **new.** They hold still, him deep in her, hearts slamming, listening; the light goes off; he starts again, slow, so slow she's shaking | yes | "Inside me." → `inside` · "On me." → `on` · "In my mouth." → `mouth` | none |
-| `inside` | he comes inside her (as written, one line on the knocking fitted to the position) | yes | "Lie there." → `after` | none |
-| `on` | he pulls out and comes on her tits and stomach (as written, fitted to the position) | yes | "Lie there." → `after` | none |
-| `mouth` | **new.** She gets off him, onto her knees, and he comes in her mouth; she swallows | yes | "Lie there." → `after` | none |
+| `inside` | he comes inside her (as written, one line on the knocking fitted to the position) | yes | "Lie there." → `after` | Ryan's Want add +5 (on the sex) |
+| `on` | he pulls out and comes on her tits and stomach (as written, fitted to the position) | yes | "Lie there." → `after` | Ryan's Want add +5 (on the sex) |
+| `mouth` | **new.** She gets off him, onto her knees, and he comes in her mouth; she swallows | yes | "Lie there." → `after` | Ryan's Want add +5 (on the sex) |
 | `after` | **new.** Her feeling, its own beat: her head on her brother's chest, his cum on her or in her, his heart going; she isn't sorry, and that's the part that scares her | no | "Ask him." → `terms` | none |
-| `terms` | as signed: "So what is this?"; the Jake line stays | no | as signed: the three terms + "Further. (Next release)" | as signed: Ryan's Want add +5 · `ryan_step` set 8 · the term flag |
+| `terms` | as signed: "So what is this?"; the Jake line stays | no | "Keep Kayla. I'm the secret." · "Mom finds out when I want." · "You're my brother, that's all." (ends his path) → the hall | `ryan_step` set 8 and its term flag (the last: `ryan_step` set -1, the knock code cleared) · nothing of his |
 
-**The nos:** "Not tonight." (`knocks`), "Go." (`doubt`), "Stop. Not tonight." (`kiss`). All three parked: the
+**The nos:** "Not tonight." (`knocks`), "Goodnight, Ryan." (`doubt`), "Stop. Not tonight." (`kiss`). All three parked: the
 step comes back the next night that isn't Friday (retry 1 day, as now).
 
 **Her picks, as flags for later** (proposed): none set. The repeat's menu (below) opens by his Lust, not by what she
@@ -65,15 +75,14 @@ picked here, so a first pick is never a wrong pick.
 
 **His move:** he kisses back, and he takes the pace on `keep`. **Does it finish:** yes, her pick of three.
 
-**After:** the step-8 repeat opens with its menu (`ryan_hot_repeatables.md`, row 7, changed the same day); step 9
-shows "(Next release)".
+**After:** the step-8 repeat opens with its menu (`ryan_hot_repeatables.md`, row 7). No step 9 button: his card ends on "More of Ryan in the next release." (DECISIONS 132, 134).
 
 **Media slots (new, LO harvests):** `sex/ryan_08_kiss_t4`, `sex/ryan_08_undress_t4`, `sex/ryan_08_suck_t5`,
 `sex/ryan_08_lick_t5`, `sex/ryan_08_under_t5`, `sex/ryan_08_wall_back_t5`, `sex/ryan_08_keep_t5`,
 `sex/ryan_08_freeze_t5`, `sex/ryan_08_mouth_t5`. Kept: `ryan_08_bed_t5` (now `ride`), `ryan_08_wall_t5` (now
 `light`), `ryan_08_inside_t5`, `ryan_08_on_t5`.
 
-**Confirmed by LO 2026-11-02** ("Signed"): "In my mouth." as a finish (SP2 signs oral at Bold, `SP2_ladders.md:53`).
+**Confirmed by LO 2026-11-02** ("Signed"): "In my mouth." as a finish (SP2 signs oral at Bold).
 
 **Who writes what, after the sign:** `v2-prose` writes the explicit screens (new: `kiss`, `undress`, `suck`, `lick`,
 `under`, `wall_back`, `keep`, `freeze`, `mouth`; rewritten: `ride`, `light`, `inside`, `on`), measured with
@@ -92,7 +101,7 @@ positions or none is named. The `vaginal` rung on some oral or hand screens is t
 
 **`kiss`** · 119 words · explicit words 7 · median sentence 10
 
-> You lean in and kiss him. You've had your hand on his cock and never once kissed him. He kisses you back, hard, and he doesn't stop. His mouth opens on yours. "@player.nickname," he breathes against your lips, and kisses you again. His hand slides up under your clothes and spreads flat on your bare back. His palm is hot. It drags slowly round your ribs, and then he cups your tits through the cloth. He squeezes. Your nipples go hard under his hand, and his thumb rubs one through it. You squirm closer on his bed. His cock is hard against your thigh through his shorts. *Don't stop. Not this time.* He grinds it into you, slow, and squeezes your tit again.
+> You lean in and kiss him. You've had your hand on his cock. Now you want his mouth. He kisses you back, hard, and he doesn't stop. His mouth opens on yours. "@player.nickname," he breathes against your lips, and kisses you again. His hand slides up under your clothes and spreads flat on your bare back. His palm is hot. It drags slowly round your ribs, and then he cups your tits through the cloth. He squeezes. Your nipples go hard under his hand, and his thumb rubs one through it. You squirm closer on his bed. His cock is hard against your thigh through his shorts. *Don't stop. Not this time.* He grinds it into you, slow, and squeezes your tit again.
 
 **`undress`** · 135 words · explicit words 8 · median sentence 11
 
@@ -180,7 +189,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Fixes after
 | not Friday | Kayla's night; the gate's weekday |
 | "the wall she listened through" on `wall_back` | `ryan_heard_her` (step 5 comes before step 8 on every save) |
 | Laura's light on `light`, `keep`, `freeze` | a light coming on under her door claims nothing about what she knows, so it needs no flag; Laura is in her room Sun–Thu from 22:00 on her row. (The older row above, "without it, the line names only her closed door", was never built and is superseded.) |
-| "Last time. With Kayla calling." on `talk` | step 7, `ryan_07_kayla_cant_know` (her hand on him while Kayla called), on every save that reaches step 8 |
+| "That night. With Kayla calling." on `talk` | step 7, `ryan_07_kayla_cant_know` (her hand on him while Kayla called), on every save that reaches step 8 |
 
 ## Why — the source of each key choice
 
@@ -198,3 +207,22 @@ her door; in `freeze` a floorboard creaks, then her steps go back and her bed cr
 room has gone quiet again". Re-measured with `gates.py --beat`: `light` 121 words, 9 explicit; `keep` 132, 11;
 `freeze` 135, 10. The branch map's "light" rows above are the record of the first version.
 
+## Explicit beats as built (measured 2026-11-03)
+
+One row per explicit screen in the built game: 3 or more words on the build's own list, the count `gates.py` uses. A screen's variants fold into it, so a screen can hold more words than one visit shows. "Sits at" is the highest of the person's crude columns (SP2) that the screen uses. Where a screen's text differs from the prose above, the build is what plays.
+
+| screen | words | counted words | sits at | the text |
+|---|---|---|---|---|
+| `kiss` | 137 | 10: cock ×2, kisses ×2, kiss, kissed, tits, nipples, tit, fuck | Ryan's late column; also nipples | on this sheet above |
+| `undress` | 131 | 9: tits ×2, cock ×2, fuck, nipples, cunt, naked, fucking | Ryan's late column; also nipples | on this sheet above |
+| `suck` | 152 | 7: cock ×4, lick, sucks, fuck | Ryan's late column | on this sheet above |
+| `lick` | 144 | 11: cunt ×3, clit ×2, licks, sucks, ass, moan, licking, fucking | Ryan's late column; also clit | on this sheet above |
+| `ride` | 131 | 10: cock ×4, fuck ×2, cunt ×2, ass, tits | Ryan's late column | on this sheet above |
+| `under` | 143 | 9: cock ×3, cunt ×2, fucks, tits, ass, fuck | Ryan's late column | on this sheet above |
+| `wall_back` | 131 | 9: cunt ×2, ass, cock, fuck, tits, thrust, fucks, balls | Ryan's late column | on this sheet above |
+| `light` | 132 | 9: cock ×3, cunt ×3, fucks, tits, ass | Ryan's late column | on this sheet above |
+| `keep` | 150 | 12: cock ×2, cunt ×2, fuck ×2, fucks, moan, ass, tits, thrust, cum | Ryan's late column | on this sheet above |
+| `freeze` | 143 | 10: fuck ×4, cunt ×3, cock ×2, tits | Ryan's late column | on this sheet above |
+| `inside` | 143 | 11: cock ×4, cunt ×2, cum ×2, fucking, fucks, tits | Ryan's late column | on this sheet above |
+| `on` | 140 | 11: cock ×3, cunt ×2, cum ×2, ass, fuck, tits, nipples | Ryan's late column; also nipples | on this sheet above |
+| `mouth` | 140 | 13: cock ×4, fuck ×2, cum ×2, cunt, suck, sucking, tits, lick | Ryan's late column | on this sheet above |

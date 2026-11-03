@@ -49,7 +49,8 @@ def full():
             ],
         },
         "release_page": {"people": ["npc_a", "npc_b"], "door": {"canvas": "a_2", "choice": "Go up"},
-                         "weeks": 4, "promise_alive": "the landlord names a date"},
+                         "weeks": 4, "promise_alive": "the landlord names a date",
+                         "steps": {"npc_a": 2, "npc_b": 1}},          # A67: each ladder's top step
     }
 
 

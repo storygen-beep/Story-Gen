@@ -1,4 +1,6 @@
-# [READY] The heat ladder, applied — First Term (a2)
+# [REVIEW] The heat ladder, applied (a2) — signed 2026-11-02 (LO: "Signed, go ahead and build")
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Signed date in the title; file cites removed. The "(Next release)" rule here is replaced by DECISIONS 132 (no button) and the door by DECISIONS 134.
 
 > **New 2026-11-01, signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124). One page for every scene-level change of proposal a2
 > (`~/Documents/Great_Games_Study_20260926/round12_tease/FIRST_TERM_A2_PROPOSAL.md`, signed "Signed, go ahead"). Each
@@ -68,7 +70,7 @@ to its stage's top (19, 39, 59, 79); a one-time step +3, cap 79 at Bold and Hung
 | `laura_04_she_saw_you` "Stay where you are." | Corruption +1, cap 19 behind a Curious gate (could never pay) | Corruption +1, cap 59 |
 | `library_back_stacks` "Stay behind the shelf." | +1 cap 19, no gate | unchanged (it stays at Good Girl: §3) |
 | Mark's towel "Let it slip." / "Drop it." | his Power only | his Power, and her Exhibitionism +1 (cap 39 / 59), like Ryan's |
-| `cafe_shift` "Not tonight, hon." | traced 2026-11-01: the `l2_no` node's six "Clock out." exits raise `cafe_l2_shifts` +1 (`cafe.py:172` via `outcome_exits`, `cafe.py:79`), so three nos open "Let it." (`cafe.py:29-30`) | the `l2_no` exits stop raising it; only "Play along." and "Flirt back." count toward "Let it." Her no costs tips only (DECISIONS 104) |
+| `cafe_shift` "Not tonight, hon." | traced 2026-11-01: the six "Clock out." exits after her no raised `cafe_l2_shifts` +1, so three nos opened "Let it." | the `l2_no` exits stop raising it; only "Play along." and "Flirt back." count toward "Let it." Her no costs tips only (DECISIONS 104) |
 | `mark_00_the_dryer` (new) | — | his Want +5 and `mark_saw_her`; her "Don't take it yet." +1, cap 19 |
 
 ## 5 · The fixes at home

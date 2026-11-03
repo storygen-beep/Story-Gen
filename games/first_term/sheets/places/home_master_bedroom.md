@@ -1,4 +1,8 @@
-# [READY] Place — Master Bedroom
+# [REVIEW] Place — Master Bedroom
+
+> Changed 2026-11-04 (LO's answers Q7 and Q12, pass 4 B51: one hall, so Mark is in the living room and Laura waits up in the dark hall or the living room; Mark's line in the lingerie walk-in). Waits for LO's re-sign.
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
 
 > **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
 
@@ -39,15 +43,15 @@
 
 | window | who is here | the door offers | faces |
 |---|---|---|---|
-| Sun–Fri 22:00–23:00 | Laura, awake and alone · Mark is downstairs | "The door's ajar." → `laura_alone_in_bed`: the look pays nothing · "Keep watching." corruption add +1, cap 19 · once a night · after she watched: "Peek through the gap." → `laura_alone_peek`, pays nothing (DECISIONS 82, 84, changed 2026-10-29, re-signed by LO 2026-10-29) | Laura |
-| Sun–Fri 23:00–00:00 · Mon–Sat 00:00–02:00 | Laura, asleep · Mark is downstairs | "Ease the door open" (question 58) | Laura, asleep |
+| Sun–Fri 22:00–23:00 | Laura, awake and alone · Mark is in the living room | "The door's ajar." → `laura_alone_in_bed`: the look pays nothing · "Keep watching." corruption add +1, cap 19 · once a night · after she watched: "Peek through the gap." → `laura_alone_peek`, pays nothing (DECISIONS 82, 84, changed 2026-10-29, re-signed by LO 2026-10-29) | Laura |
+| Sun–Fri 23:00–00:00 · Mon–Sat 00:00–02:00 | Laura, asleep · Mark is in the living room | "Ease the door open" (question 58) | Laura, asleep |
 | Sun 00:00–01:00 (Saturday night, changed 2026-10-29) | Laura and Mark, awake: Laura has come up from waiting up | "The door's ajar." → `master_door_saturday_night`: the look pays nothing · "Stay at the gap." corruption add +1, cap 19 · once a week | Laura · Mark |
 | Sun 00:00–01:00, after she has watched (within 24 hours) | Laura and Mark, awake, done | "Peek through the gap." → `master_door_peek`: pays nothing (changed 2026-10-29, reader item 4, re-signed by LO 2026-10-29) | Laura · Mark |
-| Sun 00:00–01:00, `came_home_late` | Mark, awake · Laura is on the stairs | "Peek through the gap." → `master_door_peek`: pays nothing | Mark |
+| Sun 00:00–01:00, `came_home_late` | Mark, awake · Laura is waiting up in the dark hall | "Peek through the gap." → `master_door_peek`: pays nothing | Mark |
 | Sun 01:00–02:00 · every day 02:00–06:30 · Sat, Sun 06:30–07:00 | Laura and Mark, asleep | "Ease the door open" | Laura, asleep · Mark, asleep |
 | Mon–Fri 06:30–07:00 | Mark, asleep · Laura is at breakfast | "Ease the door open" | Mark, asleep |
 | Sat 17:00–18:30 | Laura, dressing | "Knock" | Laura |
-| Sat 22:00–00:00 | Mark, asleep · Laura is waiting up downstairs | "Ease the door open" | Mark, asleep |
+| Sat 22:00–00:00 | Mark, asleep · Laura is waiting up in the living room | "Ease the door open" | Mark, asleep |
 | any other hour | nobody | "Go in" | — |
 
 - **No knock on a sleeping room.** When everyone inside is asleep, the door shows "Ease the door open"
@@ -55,9 +59,20 @@
 - **Ease the door open:** one screen, the room in the dark. The line names who is asleep: "Laura's
   asleep on her side. Mark's half of the bed is empty." Then back to the hall. Nothing else in 0.1;
   what she does at the bedside waits for Hungry ("Needs Corruption 60").
-- **When `came_home_late` is set,** Laura is on the stairs 23:00–02:00, not in bed (her first row wins). In
+- **When `came_home_late` is set,** Laura is waiting up in the dark hall 23:00–02:00, not in bed (her first row wins). In
   those hours the room is empty, or Mark only after 02:00, and the lines say so.
 - **"They're asleep"** (the old row) names only who is asleep, by the table above.
+
+## Built from the heat proposal (signed 2026-11-03)
+
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has here:
+
+**Walk-ins.** Her activity rolls on entry (1 in 4 at her lowest band, more higher up); on a hit someone walks in. A man's pay sits on the moment; her cover pays 0.
+
+| who walks in | her activity | when | his pay, on the moment | her bolder answers |
+|---|---|---|---|---|
+| Laura | Go through Laura's wardrobe | Sat 16:45–17:00 | none | a line only, no pay |
+| Mark | Go through Laura's wardrobe | Sat 21:45–22:00 | his Want +2 | "Let him look." Exhibitionism +1, cap 19/39/59 by her band · his one line, every band: "That's your mother's." · Laura's black lace bra and panties become wardrobe items the walk-in puts on and takes off: to build this release (Q12) |
 
 ## Rows a gate needs
 
@@ -65,6 +80,8 @@
 |---|---|
 | her wardrobe when they're out | a destination is never open and exit-only |
 | a door with a way back | lint: a door opens onto something |
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_A.md` (signed with the a2 sheets, DECISIONS 125).
 
 ## Why — the source of each key choice
 

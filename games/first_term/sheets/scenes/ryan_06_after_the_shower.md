@@ -1,4 +1,6 @@
-# [READY] Scene — ryan_06_after_the_shower
+# [REVIEW] Scene — ryan_06_after_the_shower
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the pay sits on a new last screen, `after6`; the step row. the explicit beats as built, measured.
 
 > **Changed 2026-11-01 after the build, signed by LO 2026-11-01 ("Signed, build them")** (the reader's FAILs; LO's picks in chat): `comes` ends on what comes next.
 
@@ -21,13 +23,22 @@
 | the crude-word ceiling | his late column for "cum" (cunt, fuck, cum) · signed today at the middle column (ass, tits, cock, wet) · confirmed by LO 2026-11-01 ("Continue") |
 | her_line_low · her_line_high | low (under the stage): "This is Ryan. You should go." · high (over it): "You want him to hear Kayla on the phone while you do this." (the person sheet's pair; worded for this screen when the prose is written) |
 
+## The step row (filled from the build, 2026-11-03)
+
+**Kind · stage:** naked by choice for someone she knows (Bold · Showing 40).
+
+| the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
+|---|---|---|---|---|---|---|
+| she leaves the towel, and he jerks off in the doorway while she watches | Ryan; Kayla calls "Babe?" from the hall | Kayla in the house, steps away | "Leave the towel." | he stays in the doorway and pulls his cock out | yes: he comes | his door open a hand's width; step 7; his bed and room repeatables |
+
 ## Branch map — one row per screen
 
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `door` | she steps out of the shower; the door swings open: Ryan | no | "Leave the towel." → `look` · "Reach for the towel." → parked | none |
 | `look` | she stays naked and leaves the towel; he stays in the doorway, pulls his cock out and strokes it while she watches | yes | "Watch him." → `comes` | exhibitionism add +3 · corruption add +1 (shown by choice, `meters.md` rule 3) |
-| `comes` | he comes, and Kayla calls "Babe?" from the hall as he does; he can't answer her | yes | "Take your time drying off." → the hall | Ryan's Want add +5 · `ryan_step` set 6 |
+| `comes` | he comes, and Kayla calls "Babe?" from the hall as he does; he can't answer her | yes | "Take your time drying off." → `after6` | none |
+| `after6` | his door is open a hand's width when she comes out | no | "Go to your room." → the hall | Ryan's Want add +5 · `ryan_step` set 6 · `kayla_met` set |
 
 "Reach for the towel." is the parked no: he backs out, red; the step waits a week.
 
@@ -65,3 +76,12 @@ A hook line, proposed (LO asked whether a line solves it). Each line names a thi
 | node | the closing line (mine, signed) | what it points at |
 |---|---|---|
 | `comes` | "When you come out, his door is open a hand's width." | false lines a3 #6 (DECISIONS 129): "It stays that way." cut; no screen shows his door open after this one |
+
+## Explicit beats as built (measured 2026-11-03)
+
+One row per explicit screen in the built game: 3 or more words on the build's own list, the count `gates.py` uses. A screen's variants fold into it, so a screen can hold more words than one visit shows. "Sits at" is the highest of the person's crude columns (SP2) that the screen uses. Where a screen's text differs from the prose above, the build is what plays.
+
+| screen | words | counted words | sits at | the text |
+|---|---|---|---|---|
+| `look` | 159 | 9: tits ×2, cunt ×2, cock ×2, naked, nipples, fuck | Ryan's late column; also nipples | on this sheet above |
+| `comes` | 108 | 8: cock ×3, naked, tits, cunt, cum, nipples | Ryan's late column; also nipples | on this sheet above |

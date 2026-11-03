@@ -36,6 +36,7 @@ flag_keys = [
   "cocky_exam_deal",
   "cocky_guy_dared",
   "cocky_guy_met",
+  "cocky_saw_bathroom",
   "college_for_freedom",
   "college_for_fun",
   "college_for_grades",
@@ -104,6 +105,7 @@ flag_keys = [
   "jake_date_went",
   "jake_first_time",
   "jake_gym_today",
+  "jake_ignored",
   "jake_kissed",
   "jake_lockers_today",
   "jake_met",
@@ -135,6 +137,7 @@ flag_keys = [
   "laura_knows_ryan",
   "laura_lonely",
   "laura_love_today",
+  "laura_portal_today",
   "laura_rule_ryan_first",
   "laura_said_ryan",
   "laura_saw_ch5",
@@ -151,12 +154,15 @@ flag_keys = [
   "mark_03_done",
   "mark_06_done",
   "mark_arrangement",
+  "mark_asleep_seen",
   "mark_brushed_kitchen",
+  "mark_brushed_reach",
   "mark_caught_ch5",
   "mark_dress_rule",
   "mark_laura_seen",
   "mark_money_week",
   "mark_paid_look",
+  "mark_saw_garden",
   "mark_saw_her",
   "mark_saw_lingerie",
   "mark_saw_mirror",
@@ -189,7 +195,6 @@ flag_keys = [
   "rent_starts",
   "rival_met",
   "room_tidy",
-  "ryan_01_hall_first_morning_closed",
   "ryan_02_done",
   "ryan_03_done",
   "ryan_04_done",
@@ -214,7 +219,9 @@ flag_keys = [
   "ryan_knock_code",
   "ryan_knocked_back",
   "ryan_path_closed",
+  "ryan_saw_her_towel",
   "ryan_saw_mirror",
+  "ryan_saw_nap",
   "ryan_talk_today",
   "ryan_terms_mine",
   "ryan_terms_secret",
@@ -249,6 +256,7 @@ flag_keys = [
   "team_saw_canteen",
   "team_saw_grass",
   "team_saw_gym",
+  "team_saw_quad",
   "toilet_bra_today",
   "tom_01_done",
   "tom_03_done",
@@ -278,6 +286,7 @@ flag_keys = [
   "walkin_door_dean_today",
   "walkin_door_hale_today",
   "walkin_door_ta_today",
+  "walkin_garden_mark_today",
   "walkin_gym_team_today",
   "walkin_hall_hale_today",
   "walkin_house_vance_today",
@@ -288,6 +297,7 @@ flag_keys = [
   "walkin_library_nadia_today",
   "walkin_mirror_mark_today",
   "walkin_mirror_ryan_today",
+  "walkin_nap_ryan_today",
   "walkin_quad_team_today",
   "walkin_quad_zoe_today",
   "walkin_rest_zoe_today",
@@ -298,6 +308,7 @@ flag_keys = [
   "walkin_step_vance_today",
   "walkin_things_kayla_today",
   "walkin_things_ryan_today",
+  "walkin_toilet_zoe_today",
   "walkin_tub_zoe_today",
   "walkin_tv_laura_today",
   "walkin_tv_mark_garage_today",
@@ -305,6 +316,7 @@ flag_keys = [
   "walkin_tv_ryan_today",
   "walkin_wardrobe_laura_today",
   "walkin_wardrobe_mark_today",
+  "walkin_zoebath_cocky_today",
   "wash_today",
   "watched_tv",
   "worked_out",
@@ -323,6 +335,7 @@ flag_keys = [
   "zoe_dared",
   "zoe_face_today",
   "zoe_has_bra",
+  "zoe_ignored",
   "zoe_in_the_tub",
   "zoe_kiss_refused",
   "zoe_lap_quad",
@@ -332,6 +345,7 @@ flag_keys = [
   "zoe_park_dare_today",
   "zoe_party_promised",
   "zoe_run_booked",
+  "zoe_saw_toilet",
   "zoe_table_today",
   "zoe_together",
 ]
@@ -379,6 +393,10 @@ zoe_refused        = 0   # her nos to Zoe (DECISIONS 124): a no moves this, neve
 release_2_written  = 0   # never raised: the "(Next release)" locks read it (DECISIONS 124)
 hale_claire_roll   = 0   # 1-4: on 1, Claire is early (hale_thursday_session)
 jake_catch_roll    = 0   # 1-8: on 1 or 2, a near-catch (jake_date_end)
+# Q5 (LO, 2026-11-04): a no-show or an ignored invite empties the person's patience; one back each midnight, and
+# their invites wait until it is full again (phone.py ZOE_WAIT, JAKE_WAIT)
+zoe_patience       = 6
+jake_patience      = 3
 
 [player.trait_decay]
 hygiene = 10
@@ -403,7 +421,7 @@ default = "El"
 id          = "street"
 name        = "Your Street"
 kind        = "thoroughfare"
-description = "Your street: the way out to everything. Home is halfway down, with the porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this pavement, and every neighbour with a window sees what you wore to do it."
+description = "Your street: the way out to everything. Home is halfway down, with the porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this sidewalk, and every neighbor with a window sees what you wore to do it."
 image       = "locations/street.jpg"
 image_search_queries = ["your street"]
 navigation_order = ["home", "vance_house", "park", "corner_shop", "campus", "town"]
@@ -418,7 +436,7 @@ clothing_rules = [
   { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)" },
 ]
 description_variants = [
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "vance_met", operator = "is_true" }] }, text = "Your street: the way out to everything. Home is halfway down, with Mr. Vance's porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this pavement, and every neighbour with a window sees what you wore to do it." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "vance_met", operator = "is_true" }] }, text = "Your street: the way out to everything. Home is halfway down, with Mr. Vance's porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this sidewalk, and every neighbor with a window sees what you wore to do it." },
 ]
 
 [[locations]]
@@ -438,7 +456,7 @@ navigation_order = []
 id          = "home_hall"
 name        = "Hall"
 kind        = "thoroughfare"
-description = "The hall: the middle of the house, and the stairs. Every door opens off it: the kitchen, the living room, the garage, the one bathroom, the three bedrooms, the front door, and the back door to the garden. There's a mirror by the coats, and the stairs carry every sound up and down."
+description = "The hall: the middle of the house. Every door opens off it: the kitchen, the living room, the garage, the one bathroom, the three bedrooms, the front door, and the back door to the garden. There's a mirror by the coats, and the hall carries every sound from one end to the other."
 image       = "locations/home_hall.jpg"
 image_search_queries = ["hall"]
 parent      = "home"
@@ -472,17 +490,17 @@ navigation_order = []
 
 [[locations]]
 id          = "home_master_bedroom"
-name        = "Master Bedroom"
+name        = "Mom and Mark's Room"
 kind        = "destination"
 description = "Laura and Mark's room: their bed, Laura's long mirror and a wardrobe full of dresses she doesn't wear any more. It smells of her perfume. When they're both out, the wardrobe is yours to go through. When she's up and dressing, you knock; at night, while they sleep, you don't."
 image       = "locations/home_master_bedroom.jpg"
-image_search_queries = ["master bedroom"]
+image_search_queries = ["mom and mark's room"]
 parent      = "home"
 entry_from  = "home_hall"
 navigation_order = []
 
 [locations.door]
-description = "Laura and Mark's door, at the end of the landing."
+description = "Laura and Mark's door, at the end of the hall."
 no_answer   = "You knock. Nobody comes to the door."
 
 [[locations.door.options]]
@@ -625,15 +643,18 @@ navigation_order = []
 [locations.door]
 description = "Ryan's door. A strip of light under it when he's home."
 no_answer   = "You knock. Nothing. He's out."
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_kayla", operator = "is_present" }] }, text = "Kayla's here. His door is shut, and it stays shut till she goes." },
+]
 
 [[locations.door.options]]
 text = "Knock."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "ryan_knock_code", operator = "is_false" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_kayla", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "ryan_knock_code", operator = "is_false" }] }
 goes_to = { type = "enter" }
 
 [[locations.door.options]]
 text = "Two knocks."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "ryan_knock_code", operator = "is_true" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_kayla", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "ryan_knock_code", operator = "is_true" }] }
 goes_to = { type = "enter" }
 
 [[locations.door.options]]
@@ -701,11 +722,11 @@ closed_text = "It's dark out."
 
 [[locations]]
 id          = "vance_house"
-name        = "Next Door"
+name        = "Landlord's House"
 kind        = "destination"
 description = "Next door: a bigger house than yours, and a porch, and an old man on it. He owns your house too, and Mark pays him every Sunday. Most evenings he sits out there with a paper he doesn't read and watches the street. Walk past and he looks at what you wore."
 image       = "locations/vance_house.jpg"
-image_search_queries = ["next door"]
+image_search_queries = ["landlord's house"]
 entry_from  = "street"
 navigation_order = []
 hours = [{ weekdays = [0, 1, 2, 3, 4, 5, 6], open = "18:00", close = "22:00" }]
@@ -881,7 +902,7 @@ clothing_rules = [
 id          = "college_womens_toilet"
 name        = "Women's Toilet"
 kind        = "destination"
-description = "The women's toilets by the lecture hall: four stalls, a long mirror and a sink. A quick wash between classes, a look at yourself, a change of clothes behind a locked stall door. The door to the corridor doesn't lock."
+description = "The women's toilets by the lecture hall: four stalls, a long mirror and a sink. A quick wash between classes, a look at yourself, a change of clothes behind a locked stall door. The door out to campus doesn't lock."
 image       = "locations/college_womens_toilet.jpg"
 image_search_queries = ["women's toilet"]
 parent      = "campus"
@@ -894,7 +915,7 @@ closed_text = "The college gates are shut."
 id          = "college_mens_toilet"
 name        = "Men's Toilet"
 kind        = "destination"
-description = "The men's toilets across the corridor from the women's: a row of urinals, two stalls and a mirror nobody looks in. There's nothing to do here right now."
+description = "The men's toilets across from the women's: a row of urinals, two stalls and a mirror nobody looks in. There's nothing to do here right now."
 image       = "locations/college_mens_toilet.jpg"
 image_search_queries = ["men's toilet"]
 parent      = "campus"
@@ -1212,17 +1233,20 @@ hidden_until = { flag = "zoe_met" }
 
 [[locations]]
 id          = "party_house"
-name        = "The Party House"
+name        = "Party House"
 kind        = "destination"
 description = "A big house at the edge of town where Zoe's friends throw Saturday nights. Music inside, a garden out back and a hot tub steaming under the stars. Zoe's friends only."
 image       = "locations/party_house.jpg"
-image_search_queries = ["the party house"]
+image_search_queries = ["party house"]
 parent      = "town"
 entry_from  = "town"
 navigation_order = []
 hours = [{ weekdays = [5], open = "20:00", close = "24:00" }, { weekdays = [6], open = "00:00", close = "03:00" }]
 closed_text = "Dark. Nobody's home."
 hidden_until = { flag = "party_house_invite" }
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }, { type = "npc_at_location", location_id = "party_house", npc_id = "npc_zoe", operator = "is_absent" }] }, text = "A big house at the edge of town where Zoe's friends throw Saturday nights. Music inside, a garden out back and a hot tub steaming under the stars, full of people you don't know. There's nothing to do here right now." },
+]
 
 
 # ── the people: 21, everyone 18 or older (want.cast[].age, SP5) ──
@@ -1236,7 +1260,7 @@ relationship = "Your step-brother, 22. Mark's son. The only one in this house wh
 role         = "step-brother"
 tags         = ["Says little", "You, and he's stopped hiding it", "Gym shirts", "Energy drinks"]
 show_traits  = ["warmth"]
-core_traits  = { want = 20, warmth = 50 }
+core_traits  = { want = 0, warmth = 50 }
 
 [[npcs.schedules]]
 location   = "home_kitchen"
@@ -1296,14 +1320,14 @@ relationship = "Your mom, 41. Wants a happy house, and wants you closer than she
 role         = "mom"
 tags         = ["Warm until she isn't", "Her good girl, close", "Dresses she doesn't wear", "White wine"]
 show_traits  = ["warmth"]
-core_traits  = { want = 0, warmth = 50 }
+core_traits  = { warmth = 50 }
 
 [[npcs.schedules]]
 location   = "home_hall"
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "23:00"
 end_time   = "02:00"
-activity   = "waiting on the dark stairs"
+activity   = "waiting up in the dark hall"
 when       = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "came_home_late", operator = "lt", value = 4 }] }
 
 [[npcs.schedules]]
@@ -1383,7 +1407,7 @@ description  = "Your step-father, 46. Collects the rent at the kitchen table, an
 portrait     = "portraits/mark.jpg"
 relationship = "Your step-father, 46. Collects the rent at the kitchen table, and owes Vance more than he says."
 role         = "step-father"
-tags         = ["Counts slowly", "Control, and you", "Work boots", "Cheap beer"]
+tags         = ["Takes his time", "Control, and you", "Work boots", "Cheap beer"]
 show_traits  = ["power"]
 core_traits  = { want = 0, power = 50 }
 
@@ -1718,6 +1742,22 @@ end_time   = "14:30"
 activity   = "in class: figure drawing"
 when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_number", operator = "is_true" }] }
 
+[[npcs.schedules]]
+location   = "home_front_door"
+weekdays   = [2]
+start_time = "19:00"
+end_time   = "21:00"
+activity   = "picking you up"
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_date_booked", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "jake_date_booked", operator = "lt", value = 168 }] }
+
+[[npcs.schedules]]
+location   = "home_front_door"
+weekdays   = [2]
+start_time = "22:00"
+end_time   = "00:00"
+activity   = "walking you home"
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_date_went", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "jake_date_went", operator = "lt", value = 6 }] }
+
 [[npcs]]
 id           = "npc_vance"
 name         = "Mr. Vance"
@@ -1819,7 +1859,7 @@ name         = "The art lecturer"
 description  = "Your Figure drawing lecturer, 45. Wants to draw you. Age 45."
 portrait     = "portraits/art_lecturer.jpg"
 relationship = "Your Figure drawing lecturer, 45. Wants to draw you."
-role         = "Figure drawing"
+role         = "Figure drawing lecturer"
 tags         = ["Looks for a living", "To draw you", "Charcoal on her hands", "Green tea"]
 core_traits  = {  }
 
@@ -1853,8 +1893,8 @@ name         = "The Business lecturer"
 description  = "Your Business lecturer, 50. Strict. Can't be bought. Age 50."
 portrait     = "portraits/business_lecturer.jpg"
 relationship = "Your Business lecturer, 50. Strict. Can't be bought."
-role         = "Business"
-tags         = ["By the book", "Your work, done", "Grey suit", "Instant coffee"]
+role         = "Business lecturer"
+tags         = ["By the book", "Your work, done", "Gray suit", "Instant coffee"]
 core_traits  = {  }
 
 [[npcs.schedules]]
@@ -1950,6 +1990,22 @@ relationship = "Ryan's girlfriend, 21. Wants the house to know about her."
 role         = "Ryan's girlfriend"
 core_traits  = {  }
 
+[[npcs.schedules]]
+location   = "home_ryan_room"
+weekdays   = [4]
+start_time = "18:00"
+end_time   = "00:00"
+activity   = "in Ryan's room, Friday night"
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "kayla_met", operator = "is_true" }] }
+
+[[npcs.schedules]]
+location   = "home_ryan_room"
+weekdays   = [5]
+start_time = "00:00"
+end_time   = "10:00"
+activity   = "in Ryan's bed in his shirt, Saturday morning"
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "kayla_met", operator = "is_true" }] }
+
 [[npcs]]
 id           = "npc_claire"
 name         = "Claire"
@@ -1965,7 +2021,7 @@ name         = "The guy beside you"
 description  = "A guy who sits beside you in class, 21. Always needs help with something. Age 21."
 portrait     = "portraits/desk_guy.jpg"
 relationship = "A guy who sits beside you in class, 21. Always needs help with something."
-role         = "the next desk"
+role         = "classmate, next desk"
 core_traits  = {  }
 
 [[npcs]]

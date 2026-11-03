@@ -1498,3 +1498,39 @@ touched sheet has a dated note.
   scenes with no talk at all can't be fixed by converting quotes.
 - **Verified in Chrome:** the quad unnamed and then named, the faculty floor listing only the offices she has met,
   the goal-2 card, Jake's no-show in the build, and Ryan's lines in speech boxes.
+
+## 2026-11-03 (late) — Vance after a short Sunday, the sleep shirt, the true lines (DECISIONS 145)
+
+Added 2026-11-03 by the third alignment pass from DECISIONS 145 and commits `12737f9b`, `a76f776e`.
+
+- Vance's front-door row reads `rent_short` with its 48-hour window, so he comes only after a short Sunday.
+- She starts in her sleep shirt and panties; the first screen adds her day clothes.
+- Every line that places a person is true at every hour it shows; the ledger's ladder windows match.
+
+## 2026-11-03 (late) — the 17 silent people speak (DECISIONS 146)
+
+From commits `94bf8e00`, `762674c4`. A line or two each, gated on who is really there; no effects added.
+
+## 2026-11-03 — the heat proposal, chunks 1–3, and its follow-ups (DECISIONS 147–152)
+
+From commits `9655c8ff`, `c118641b`, `45021e99`, `6e68f353`, `a3a9ec98`. The signed proposal is now in the
+game: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
+
+- **Chunk 1 (148):** home walk-ins B1–B8, the small rungs C1–C6, Mark's dryer +5 on its first screen.
+- **Chunk 2 (149):** sex scenes A1–A7 and media pools A10–A13. Traversal heat and explicit pools pass.
+- **Chunk 3 (150):** walk-ins outside the house B9–B20. The walk-in floor is 24/24.
+- **151:** Zoe's park dare pays once a day; in the hot-tub walk-in Zoe is already in the water.
+- **152:** Mark's Saturday rows (07:00–08:30 bed, 08:30–09:00 kitchen) and his three walk-ins.
+
+## 2026-11-03 (night) — third alignment pass, groups 2 and 3
+
+From commits `7b874e61` (group 2, game logic: pay, systems, structure, a check for each kind of slip) and
+`ce8551b1` (group 3, writing: voice, words, labels, and the scene reader's fails on every changed scene).
+Gates after: 92/110 pass, 18 fail.
+
+## 2026-11-03 (night) — third alignment pass, group 1 (pages only, no build)
+
+No build. The spine (SP1, SP2, SP3, SP4, SP7), `OPENING.md`, `COVERAGE.md`, the person, place, system and
+scene sheets brought to what the build does; 28 signed titles to `[READY]`; the heat proposal and the copy
+fixes copied into `proposals/`; this iteration's SHORT, LONG, CHANGES and BUILD_VS_SHEET written. Every
+changed signed page waits for LO's re-sign.

@@ -18,7 +18,7 @@ PEOPLE = [
     dict(id="npc_ryan", name="Ryan", role="step-brother", age=22,
          relationship="Your step-brother, 22. Mark's son. The only one in this house who asks how your day was.",
          tags=["Says little", "You, and he's stopped hiding it", "Gym shirts", "Energy drinks"],
-         core={"want": 20, "warmth": 50}, show=["warmth"],
+         core={"want": 0, "warmth": 50}, show=["warmth"],
          schedules=[
              row("home_bathroom", WK, "06:45", "07:30", "in the shower first (Laura's rule)"),
              row("home_ryan_room", [0, 1, 3, 4, 6], "18:00", "22:00", "home from the yard"),
@@ -28,9 +28,12 @@ PEOPLE = [
     dict(id="npc_laura", name="Laura", role="mom", age=41,
          relationship="Your mom, 41. Wants a happy house, and wants you closer than she says.",
          tags=["Warm until she isn't", "Her good girl, close", "Dresses she doesn't wear", "White wine"],
-         core={"want": 0, "warmth": 50}, show=["warmth"],
+         # (pass 3 E4 / I56) no `want`: her sheet says "nothing of hers reads Want", nothing raises it, and the cast
+         # page's show_traits = ["want"] printed "Lust 0 · Hides it" all release. A trait she doesn't keep never
+         # shows (engine.md §34). Her lock is Love (warmth), which every step reads.
+         core={"warmth": 50}, show=["warmth"],
          schedules=[
-             row("home_hall", ALL, "23:00", "02:00", "waiting on the dark stairs", when=MET("came_home_late")),
+             row("home_hall", ALL, "23:00", "02:00", "waiting up in the dark hall", when=MET("came_home_late")),
              row("home_kitchen", WK, "06:30", "08:00", "making breakfast before work"),
              row("home_kitchen", [0, 1, 3, 4, 6], "18:00", "22:00", "in the kitchen, evening"),
              row("home_master_bedroom", [6, 0, 1, 2, 3, 4], "22:00", "06:30", "asleep"),
@@ -41,7 +44,7 @@ PEOPLE = [
          ]),
     dict(id="npc_mark", name="Mark", role="step-father", age=46,
          relationship="Your step-father, 46. Collects the rent at the kitchen table, and owes Vance more than he says.",
-         tags=["Counts slowly", "Control, and you", "Work boots", "Cheap beer"],
+         tags=["Takes his time", "Control, and you", "Work boots", "Cheap beer"],
          core={"want": 0, "power": 50}, show=["power"],
          schedules=[
              row("home_living_room", [6, 0, 1, 2, 3, 4], "22:00", "00:00", "up late, Laura gone up"),
@@ -113,7 +116,7 @@ PEOPLE = [
              row("cafe", WK, "14:30", "18:00", "in booth four", when=MET("gary_met")),
              row("cafe", F, "20:00", "22:00", "in booth four", when=MET("gary_met")),
          ]),
-    dict(id="npc_art_lecturer", name="The art lecturer", role="Figure drawing", age=45,
+    dict(id="npc_art_lecturer", name="The art lecturer", role="Figure drawing lecturer", age=45,
          relationship="Your Figure drawing lecturer, 45. Wants to draw you.",
          tags=["Looks for a living", "To draw you", "Charcoal on her hands", "Green tea"],
          core={}, show=[],
@@ -122,9 +125,9 @@ PEOPLE = [
              row("lecture_hall", W, "13:00", "14:30", "teaching Figure drawing", when=MET("art_lecturer_met")),
              row("art_office", [0, 1, 3, 4], "14:30", "18:00", "office hours", when=MET("art_lecturer_met")),
          ]),
-    dict(id="npc_business_lecturer", name="The Business lecturer", role="Business", age=50,
+    dict(id="npc_business_lecturer", name="The Business lecturer", role="Business lecturer", age=50,
          relationship="Your Business lecturer, 50. Strict. Can't be bought.",
-         tags=["By the book", "Your work, done", "Grey suit", "Instant coffee"],
+         tags=["By the book", "Your work, done", "Gray suit", "Instant coffee"],
          core={}, show=[],
          schedules=[
              row("lecture_hall", [0, 2], "10:15", "11:45", "teaching Business", when=MET("business_lecturer_met")),
@@ -151,7 +154,7 @@ PEOPLE = [
     dict(id="npc_claire", name="Claire", role="Hale's wife", age=38,
          relationship="Dr. Hale's wife, 38. Picks him up after office hours.", tags=[], core={}, show=[],
          schedules=[]),
-    dict(id="npc_desk_guy", name="The guy beside you", role="the next desk", age=21,
+    dict(id="npc_desk_guy", name="The guy beside you", role="classmate, next desk", age=21,
          relationship="A guy who sits beside you in class, 21. Always needs help with something.", tags=[],
          core={}, show=[], schedules=[]),
     dict(id="npc_rival", name="The rival girl", role="rival classmate", age=21,
@@ -190,7 +193,7 @@ ACTIVITIES = {
     "npc_ryan": ["at dinner", "in the shower first (Laura's rule)", "home, weekend morning",
                  "in his room for the night", "home in his room, evening", "in his room with Kayla",
                  "watching TV, a film on"],
-    "npc_laura": ["waiting on the dark stairs", "making breakfast before work", "in the kitchen, evening",
+    "npc_laura": ["waiting up in the dark hall", "making breakfast before work", "in the kitchen, evening",
                   "awake, alone", "asleep", "asleep", "awake, with Mark", "asleep", "in the shower", "dressing to go out", "waiting up in the dark"],
     "npc_mark": ["at dinner", "in the garage, evening", "up late with the TV on", "up late with the TV on",
                  "asleep", "asleep", "awake, with Laura", "asleep", "cooking, Wednesday", "in the garage, Saturday",
@@ -253,3 +256,28 @@ def _ledger_schedules(pid):
 
 for _p in PEOPLE:
     _p["schedules"] = _ledger_schedules(_p["id"])
+
+# Jake's Wednesday date (W8, LO 2026-11-03, DECISIONS 138; reader pass 4 b5): the phone thread jake_date_wed books a
+# Wednesday ("wednesday? i'll pick you up", phone.py) and jake_date_pickup / jake_saturday_date both run on Wed and
+# Sat, but his ledger rows at the front door were Saturday only, so the pickup's requires_npc never found him on a
+# Wednesday. The same two rows on Wednesday, read through the same latches. The ledger (v2_state.json
+# board.characters npc_jake) has them Saturday only; it should carry Wednesday too.
+next(p for p in PEOPLE if p["id"] == "npc_jake")["schedules"] += [
+    row("home_front_door", [2], "19:00", "21:00", "picking you up", when=_ledger_when("jake_date_booked")),
+    row("home_front_door", [2], "22:00", "00:00", "walking you home", when=_ledger_when("jake_date_went")),
+]
+
+# Kayla (LO, 2026-11-03, "build now", pass 3 G37): she had walk-ins and lines but no row, so the truth
+# check and the Schedules page never knew where she was. These two rows are read off her scenes, not
+# invented: walkin_things_kayla has her let herself into Ryan's room Fri 17:45-18:00 with an overnight
+# bag; Ryan's Friday 18:00-22:00 row is "Kayla's night", walkin_shower_kayla (Fri 18:00-22:00) has her
+# cross the hall from his room, and ryan_05_thin_walls (Fri 22:00-00:00) hears her through the wall;
+# she is in the hall at Saturday dawn (ryan_05 `hall`) and still in the house for ryan_06 (Sat
+# 08:00-10:00, "Babe?"). Split at midnight because a day-specific overnight row loses its weekday at
+# 00:00. Gated on kayla_met like every other non-household row. Her Friday row starts 18:00, after
+# her own walk-in in Ryan's drawer (17:45-18:00) has let her in (LO, 2026-11-04, Q9). The ledger (v2_state.json
+# board.characters npc_kayla) has no schedule yet; it should carry the same two rows.
+next(p for p in PEOPLE if p["id"] == "npc_kayla")["schedules"] = [
+    row("home_ryan_room", F, "18:00", "00:00", "in Ryan's room, Friday night", when=MET("kayla_met")),
+    row("home_ryan_room", SA, "00:00", "10:00", "in Ryan's bed in his shirt, Saturday morning", when=MET("kayla_met")),
+]

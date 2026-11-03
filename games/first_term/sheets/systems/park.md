@@ -1,4 +1,6 @@
-# [READY] System — park
+# [REVIEW] System — park
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. File and line cites removed. The selfie keeps a photo and posts nothing.
 
 > **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
 
@@ -113,6 +115,5 @@ new person: a written age, your yes and an SP5 re-sign.
 ## Changed 2026-11-02 (reader a3, `READER_FAILS_A3.md`, signed by LO 2026-11-02; DECISIONS 131)
 
 - Row 44 + 67 (`park_run`). The run now opens on the gates ("You stretch against the park gates…") with "Run the loop. (10 energy)" and "Walk it instead."; the run text shows only after "Run the loop." The walk has its own short screen: a man on the bench watching her legs and tits. The run ends on a hook: "Zoe runs here weekends. She'd make you go further." once `zoe_met` ("Zoe's still out on the loop somewhere…" while she is in the park), otherwise "Same time tomorrow."
-- Row 61 (`park_selfie`). The plain "Post it." needs Exhibitionism 20. Under it only "Delete them all." shows, with her thought "Put yourself up where anyone can look? Not yet."
+- Row 61 (`park_selfie`). The plain "Keep the best one." (was "Post it.") needs Exhibitionism 20 and posts nothing; no followers. Under it only "Delete them all." shows, with her thought "Put yourself up where anyone can look? Not yet."
 - Row 62 (`park_walk`). In the skirt under Exhibitionism 40 she grabs the hem and holds it down; "You let it be a problem." shows from 40.
-- All in `iterations/002/build_scripts/pools.py`.

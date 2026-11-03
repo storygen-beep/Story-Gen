@@ -1,4 +1,6 @@
-# [READY] Person — Nadia
+# [REVIEW] Person — Nadia
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: the walk-ins and acts the heat proposal built.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
@@ -32,6 +34,11 @@ None in 0.1. Her lines ride Hale's steps: one line about him each class.
 ## Phone thread
 
 None in 0.1. Not someone she is involved with in 0.1.
+
+## Walk-ins and acts from the heat proposal (signed 2026-11-03, built)
+
+Walk-ins: `canteen`, `library`. Each row (when, what pays) is on that place sheet.
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
 
 ## Why — the source of each key choice
 

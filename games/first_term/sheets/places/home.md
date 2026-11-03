@@ -1,4 +1,6 @@
-# [READY] Place — Home (the house, a building)
+# [REVIEW] Place — Home (the house, a building)
+
+> Changed 2026-11-04 (LO's answer Q7: one hall; every room opens off it, and the house lines say the hall, not stairs or a landing). Waits for LO's re-sign.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
@@ -10,6 +12,7 @@
 | kind | a building: `is_container`, no content of its own |
 | ENTERED FROM | street |
 | opens into (`default_entry`) | `home_hall` — clicking "Home" on the street lands her in the hall |
+| floors | one: every room opens off the hall; there are no stairs (LO, 2026-11-04, Q7) |
 | the rooms inside it | hall, kitchen, living room, front door, garage, bathroom, her room, Ryan's room, the master bedroom, the garden (question 49) |
 | area | Home is its own area: the walk home, 10 minutes, is charged once on the way in (`crossing_costs` time 10, question 44) |
 | labels — what kind of place | `zone:home` |

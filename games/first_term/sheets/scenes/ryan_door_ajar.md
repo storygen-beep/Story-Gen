@@ -1,5 +1,7 @@
 # [REVIEW] Scene — ryan_door_ajar
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. C3's "Stay until his light goes off." and its screen; want, next step and hook rows. the explicit beats as built, measured.
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder H7): the scene reads his Want. Under 30 he watches porn on his phone and her panties lie on the floor, untouched; from 30, the panties to his face (as built). Stays at Good Girl (DECISIONS 79).
 
 > Signed by LO: LO, 2026-10-29 ("sign all", in chat).
@@ -9,22 +11,29 @@
 | row | answer |
 |---|---|
 | system · place | the way up (DECISIONS 78, 79) · `home_ryan_room`, from the door |
-| where · when | the landing, Ryan's door · Sun–Thu 22:00–00:00, Ryan in · new door option "His door's open a crack." |
+| where · when | the hall, Ryan's door · Sun–Thu 22:00–00:00, Ryan in · new door option "His door's open a crack." |
 | gate | none: open at Good Girl · not Friday (Kayla's night) |
 | who | Ryan, 22; he never sees her |
 | what she wears here | not named |
 | BRAKE | once a night |
-| raises | the look: none · "Keep watching.": corruption add +1, cap 19 · no Ryan number moves, no step changes |
+| raises | the look: none · "Back to your room." after watching: corruption add +1, cap 19 · from Corruption 15, "Stay until his light goes off." → `light_off`, whose exit pays +1, cap 19 again · no Ryan number moves, no step changes |
 | the crude-word ceiling | Ryan's middle column: ass, tits, cock, wet · no cunt, fuck, cum, pussy, clit |
+
+| want | his: her panties on the floor (under 30), then in his hand (from 30) |
+| next step | she stays until his light goes off (Corruption 15) |
+| hook | `saw_ryan_alone` is set; nothing reads it this release |
+
+The small rung "Stay until his light goes off." is C3 of the heat proposal (`proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`, signed 2026-11-03).
 
 ## Branch map — one row per screen
 
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `crack_low` (his Want under 30) | his light, the door open a crack; Ryan stroking to porn on his phone, her panties on the floor by the hamper, untouched | yes | "Keep watching." → `watch_low` · "Pull the door shut." → the hall | `saw_ryan_alone` set (on both exits) |
-| `watch_low` | he comes to the phone; his eyes go once to her panties on the floor; she backs away | yes | "Back to your room." → her room | corruption add +1, cap 19 |
+| `watch_low` | he comes to the phone; his eyes go once to her panties on the floor; she backs away | yes | "Back to your room." → her room · "Stay until his light goes off." (Corruption 15) → `light_off` | corruption add +1, cap 19 on the first |
 | `crack` (his Want 30 and up) | his light, the door open a crack; Ryan stroking, her panties from the laundry to his face | yes | "Keep watching." → `watch` · "Pull the door shut." → the hall | `saw_ryan_alone` set (on both exits) |
-| `watch` | he comes saying her nickname; she backs away before he looks up | yes | "Back to your room." → her room | corruption add +1, cap 19 |
+| `watch` | he comes saying her nickname; she backs away before he looks up | yes | "Back to your room." → her room · "Stay until his light goes off." (Corruption 15) → `light_off` | corruption add +1, cap 19 on the first |
+| `light_off` | he wipes up with a sock; under 30 his phone face down, from 30 the panties in his fist; his lamp clicks off; "Jesus Christ. What is wrong with me." | no | "Back to your room." → her room | corruption add +1, cap 19 |
 
 **The no** ("Pull the door shut."): back to the hall; nothing pays.
 **His want, shown (A13, H7):** under 30, his eyes going once to her panties on the floor (he wants her and is not
@@ -59,3 +68,13 @@ No history words on either screen: both repeat. Changed 2026-10-29 in step 5: "y
 | her panties from the laundry | the plan of 2026-10-29: his want shown before (A13) |
 | not Friday | Ryan's Friday is Kayla's night (`npc_ryan.md` schedule) |
 | the split at his Want 30 | LO, 2026-11-01: "until ryan corruption hasnt risen up he doesnt want her then why he is masturbating on her panties??" · DECISIONS 124 |
+
+## Explicit beats as built (measured 2026-11-03)
+
+One row per explicit screen in the built game: 3 or more words on the build's own list, the count `gates.py` uses. A screen's variants fold into it, so a screen can hold more words than one visit shows. "Sits at" is the highest of the person's crude columns (SP2) that the screen uses. Where a screen's text differs from the prose above, the build is what plays.
+
+| screen | words | counted words | sits at | the text |
+|---|---|---|---|---|
+| `crack` | 259 | 12: cock ×4, nipples ×4, fuck ×3, moans | Ryan's late column; also nipples | on this sheet above |
+| `watch_low` | 138 | 6: cock ×2, nipples ×2, fuck ×2 | Ryan's late column; also nipples | on this sheet above |
+| `watch` | 138 | 7: cock ×2, nipples ×2, fuck ×2, fucking | Ryan's late column; also nipples | on this sheet above |

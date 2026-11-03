@@ -121,7 +121,7 @@ approves. **Whatever he keeps:**
 4. One visit moves about 10–50% of the next threshold, so 2–10 visits sit between steps (LO, 2026-11-03; R5:243-244
    measured 3–10). A slow pace is allowed only when his card always says what to do next and the cheat page
    can skip the wait. LO: *"its okay to make player bored but not lost. So free version can make you grind but
-   paid can give you cheats"*.
+   paid can give you cheats"*. Checked: gate *a step's gate sits above his start*.
 
 ---
 
@@ -194,7 +194,9 @@ gates nothing ever. Both look like progress. That is what makes this defect ship
 condition, a `costs` entry, or a quest goal. Deterministic — either a reader exists or none does.
 
 - **`costs` counts as a read.** The engine filters an unaffordable choice rather than letting it
-  fail (`engine.md` §27), so a meter spent through `costs` is gating.
+  fail (`engine.md` §27), so a meter spent through `costs` is gating. A meter she spends (money) is
+  declared `"spent": true` in `board.meters`, or as a need, so the descent gate below does not call its
+  prices a descent (LO, 2026-11-03, PICKS E22 b).
 - **`<npc>_stage` is exempt** when the prefix names a declared character: the *engine* reads those
   (`v2.py:6244-6249`). `sex_stage` is not exempt — no character is called `sex`.
 
@@ -315,7 +317,9 @@ whose effects mostly fall, declared needs excluded. It prints how many times the
 
 **Gate · `ascent tiers expand the world`** fails a player meter that closes more doors than it opens
 and is not declared as a tier. It skips declared needs (`board.needs[]`), because shutting is their job
-(M8), and a performance meter (`board.meters[]` entry with `"performance": true`, W5c) (LO, 2026-11-03).
+(M8), a performance meter (`board.meters[]` entry with `"performance": true`, W5c) (LO, 2026-11-03), and a
+spent meter (`board.meters[]` entry with `"spent": true`: money and any other currency, whose reads below a price
+are prices; LO, 2026-11-03, PICKS E22 b).
 
 ### W5c · A performance meter opens at the top and closes at the bottom
 
@@ -335,7 +339,7 @@ other way and obeys none of W5's rules.
 
 Twelve of twenty-five male-heavy corpus games carry no reputation meter. For a female lead, being
 known is the fantasy and its absence is the complaint: **declare who notices what she does, even
-with no meter at all.**
+with no meter at all.** Checked: lint *a public act moves the audience*.
 
 > ⚠️ **EVIDENCE — NOT A TEMPLATE.** `course-of-temptation` keeps what each person saw; a witness tells others only in scenes she is
 > in, one hop, and a rumour someone only heard is never retold; a man who assumed reads them back — *"Maybe the rumors are wrong."*
@@ -960,7 +964,7 @@ npc and do the stuffs but she couldnt do it and npc told her that she stinks."* 
 names that refusal, or says it colours only.
 
 `shuts` also routes her: a need that is empty sends her to the place that refills it, and that place
-rolls an event (`engine.md` §30.1). A need behind a content toggle has an off switch, a start choice
+rolls an event (`engine.md` §30.1). Checked: gates *a need falls where it says* and *a refill place rolls an event*. A need behind a content toggle has an off switch, a start choice
 (`the-surfaces.md` R5b.4); with it off, nothing reads it.
 
 In the field (three FAIL-list games, numbers only) the fourth field is a stock or a window: no food,

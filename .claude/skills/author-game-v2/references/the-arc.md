@@ -61,7 +61,7 @@ example is being taught too.** *(LO decided.)* Take the mechanism. Leave the fur
 turns the act into something she can simply do · doing *that* repeatedly opens the next act.
 
 The repeatable surface is the **reward for finishing the arc**, not the starting position.
-After the sex step, the arc's phone thread becomes the repeatable invite (`the-phone.md` P9).
+After the sex step, the arc's phone thread becomes the repeatable invite (`the-phone.md` P9). Checked: gate *the last step opens a repeatable*; lint *a set flag is read*.
 
 The same split governs the prose (added 2026-09-24): the full loud version of a moment — the
 reveal, the conversation, the hook — belongs on the one-time step, and the repeatable it converts
@@ -124,6 +124,10 @@ talks only is the failure shape (H4).
   a pushy man says so, a nice man drops it.
 - **A final no exists only on a button that says so** — "(ends his path)" — and sets `final = true`.
   It closes his story, never the person: he stays in the world.
+- **Never a final no on the central arc's first step** (LO, 2026-11-03, PICKS G73 1). The opening, and the
+  first step of the arc the game is about, offer only parked nos: the player has not met the game yet, and one
+  click there would close it. first_term's Ryan meeting loses its "(ends his path)" button. A final no may
+  appear from his second step on.
 - **Who checks what:** the gate *a no has content* takes `retry_after_days` as enough; whether a parked no reaches a reply screen is the reader's test, since a word list can't tell "Never mind." from a refusal.
 - **Where a game gives him feelings** (`the-meters.md` W1), a no may cost Warmth, never Want (R5). His Want
   pays for what happened, never for a no: it sits on the moment, not on her answer (`the-heat-ladder.md` H5,
@@ -243,7 +247,11 @@ something that happens *to* her.
 - **Every stage below the highest gate carries repeatable acts that pay, sober.** A temporary boost (a
   drink's `trait_offsets`) can let her try the next stage early, and that act's raise is kept, but it is
   not the way up: a stage whose only paying acts need the boost is a wall with a hidden door.
-- **The Quests page names only sources that pay at the stage it is shown in.**
+- **A ladder step may be sober-only** (LO, 2026-11-03, PICKS E92 a): gated on the boost being off
+  (`{ type = "modifier", modifier_key = "drinks_boost", operator = "is_inactive" }`), so one drink closes it for the
+  night, only when its quest card says so in words: *"not while tipsy"*. A sober-only step whose card is silent
+  about it is a lock the player cannot see.
+- **The Quests page names only sources that pay at the stage it is shown in.** Checked: gates *a visit pays a meter once*, *an act pays on every way out*, *an act pays inside its own stage* and *an accident pays him*; *every stage has a way up* fails a card line that names a place where nothing pays at its stage.
 
 ⚠️ **Measured, first_term, 2026-10-13.** All 36 Corruption raises needed Corruption 20 or 40. The
 signed park sheet paid "stage 1: none" for walking into the couple, and the home accidents raised only

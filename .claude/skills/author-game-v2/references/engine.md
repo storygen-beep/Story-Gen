@@ -67,8 +67,10 @@ Same concept, different key, and mixing them up is invisible:
 Effects live at `nodes[].exit_block.config.effects` and `nodes[].exit_block.choices[].effects`.
 Flags use `flagEffects` with the key `flag`, at the same two places.
 
-**`clamp = true` matters.** Unclamped effects can drive a trait negative or past its top band,
-and a value outside every band makes the sidebar row silently vanish.
+**Write `clamp` on every effect.** An omitted `clamp` is emitted as `false` on choice, node and entry
+effects (§21), and an unclamped effect can drive a meter negative or past its top band, where a value outside
+every band makes the sidebar row silently vanish. `clamp = true` (or a `cap`) on every 0–100 meter write;
+`clamp = false` on money and other quantities (LO, 2026-11-03).
 
 **A value worked out from her stats** (2026-10-01, opt-in by use). An effect's `value`, or a fast job's
 `income`, can read one player trait at the moment it applies:
@@ -423,6 +425,13 @@ the one place the register says the body is the only thing on screen. Contrast a
 choice gated on something the player goes **elsewhere** and fixes. That is a handle and it is
 correctly spoken.
 
+**The one exception: a small rung inside a stage** (LO, 2026-11-03, PICKS J75 a). A stage may carry small
+rungs at 5, 10 and 15 inside each 20 of an ascent tier (`the-heat-ladder.md` H1). Such a rung may show greyed
+in the scene, on the bar the scene raises, as a preview of the next bolder act: "Move one aisle closer." at
+Corruption 5. The lint skips a shown-locked choice whose every trait item is a declared ascent tier
+(`board.ascent_tiers`) read `gte`/`gt` at a value 5, 10 or 15 above a multiple of 20; a flag beside it, such
+as a once-a-day cap, is allowed (`_small_rung_choice`).
+
 **2 · A blocked WINDOW is a different surface and it is not this one.** An activity out of hours
 belongs in `show_when_blocked` + `cooldown_message` on the canvas trigger — `the-clock.md` C5, where
 the hours are the point and hiding them is *"lostness with a clock on it"*. Do not answer a noisy
@@ -706,31 +715,42 @@ is bound, so nothing can be mis-attributed — there is no character in scope to
 
 ---
 
-## 21. `clamp` is 0–100, it defaults to TRUE, and it will silently cap a CURRENCY
+## 21. `clamp` is 0–100, an omitted one is FALSE on authored effects, and `true` will silently cap a CURRENCY
 
 ```js
-v2.py:7156   if (clampFlag === undefined || clampFlag === null) { clampFlag = true; }
-v2.py:7158   next = window._traitClamp(next, 0, 100);
+v2.py:17612                clamp_flag = eff.get('clamp', False)
+v2.py:7251    if (clampFlag === undefined || clampFlag === null) {{ clampFlag = true; }}
+v2.py:6086        setup.applyAndNotifyTrait('player', null, costs[k].trait, 'add', -Number(costs[k].value), true, null);
 ```
 
-Two facts, and the second one is the dangerous one:
+Three facts (LO, 2026-11-03, PICKS F21 + J72 a, replacing this section's old "omitting `clamp` means
+`clamp = true`", which was wrong):
 
-1. **Omitting `clamp` means `clamp = true`.** The default is not "leave it alone".
-2. **The clamp is a hard 0–100 on every trait, including one you are using as money.**
+1. **An omitted `clamp` is `false` on every authored effect.** The runtime's `applyTraitEffect` would default
+   an undefined clamp to true (`v2.py:7251`), but it never sees one: the generator writes the flag itself and
+   writes `false` when the key is missing, on a choice's effects (`v2.py:17612`, `_emit_trait_effects_inline`),
+   a node's and an entry's (`v2.py:17469`, `_get_trait_effects_for_node`), a rejection branch's
+   (`v2.py:16736`), the daily tick's (`v2.py:7081`), a phone reply's (`v2.py:2588`) and a walk-in's
+   `pre_substitution_effects` (`v2.py:16384`). So an unmarked `hygiene +15` runs past 100.
+2. **Only two paths clamp without being told:** a cheat-page row (`clamp` defaults true on
+   `TemplateCheatGrant`, `template_import.py:726`, read at `template_import.py:3689`), and a canvas or location
+   `costs` deduction (`setup.deductCostArray`, `v2.py:6086`, always `true`). A choice's `costs` is not clamped
+   (`v2.py:16616`).
+3. **The clamp is a hard 0–100 on every trait, including one you are using as money.** A scene declaring
+   `money +120` under `clamp = true` moves the state **0 → 100**. With every money grant clamped, a rent above
+   100 can **never be paid**, and nothing anywhere reports it: the TOML is valid, the build is green, and the
+   sidebar shows a plausible number.
 
-A live effect diff shows it: a scene declaring `money +120` under `clamp = true` moves the state
-**0 → 100**. With every money grant clamped, a rent above 100 can **never be paid**, the eviction
-branch is the only reachable outcome, and nothing anywhere reports it: the TOML is valid, the build
-is green, and the sidebar shows a plausible number.
-
-**Rule: any trait that is a QUANTITY rather than a 0–100 meter must carry `clamp = false` on every
-effect that writes it.** Money, counts, inventory-ish integers. Meters — nerve, exposure, corruption,
-arousal, energy — want the clamp and should keep it.
+**Rule: write `clamp` on every effect.** `clamp = true`, or a `cap`, on every write to a 0–100 meter (nerve,
+exposure, corruption, arousal, energy, hygiene). `clamp = false` on every write to a QUANTITY: money, counts,
+inventory-ish integers, and any meter a condition reads below 0. Since 2026-11-03 first_term's build helper does
+exactly this: `tomlw.add` writes `clamp = true` on a 0–100 meter and `clamp = false` on a quantity (money, and any
+meter a condition reads below 0, such as `cafe_name`) (`games/first_term/iterations/002/build_scripts/tomlw.py:71-78`).
 
 ⚠️ Note the asymmetry with a *deduction*: an unclamped one can go negative. The engine's own
 recurring-demand system (`[settings.rent]`) does its own affordability check; an authored deduction
 does not — gate the choice on the trait, or price it with `costs`, which the engine refuses when
-unaffordable (`v2.py:5800` filters it out, `:5969` is the check — §27).
+unaffordable (`v2.py:5800` filters it out, `:5969` is the check — §27). Checked: gate *a deduction is gated or priced*.
 
 **How to catch it:** diff the state across the scene and compare against the declared value. A
 capped effect looks identical to a working one in the TOML, in the validator, in the build log and
@@ -1002,6 +1022,12 @@ when = [ { flag = "x_loop_played", subject = "player", op = "is_true" } ]
 terminal = true
 ```
 
+**A ladder's step counter is a good terminal gate too** (LO, 2026-11-03, PICKS J70 a). A ladder step sets
+`<npc>_step` to its number on its way out, so `when = [ { trait = "ryan_step", op = "gte", value = 8 } ]` on the
+terminal card means *you have played step 8*, exactly like the flag above, and it serves the ready card the
+same way (`ryan_step eq 7` plus the step's own gates). Lint *the badge arrives before the content* reads a
+`_step` trait as "played this" and has no opinion on it.
+
 ⚠️ **A goal threshold no condition anywhere reads is a number the player climbs to for nothing.**
 Such thresholds stay invisible while the terminal frame outranks the bullets, and the moment
 the badge is fixed they become live instructions to grind for nothing — so fix the numbers in the
@@ -1076,7 +1102,7 @@ carries `the-voice.md` R3 in full: a place, a verb, and a window if the thing is
 
 ⚠️ **Check the label is not circular.** A card must not name a choice gated at the exact value the
 card is trying to reach — a card for `trade ≥ 15` naming a choice that itself requires
-`trade ≥ 15`. Name a choice gated **one tier below** the card's own goal. Nothing in `gates.py` catches this; read each card against the gate on
+`trade ≥ 15`. Name a choice gated **one tier below** the card's own goal. Gate *a goal names the rung below* catches a label that quotes the button; read a paraphrase against the gate on
 the choice it names.
 
 **`locked_text_threshold`** (`v2.py:15730-15731`) prints an explicit *"Requires …"* hint on a
@@ -1286,9 +1312,19 @@ must still be able to pay the first rent in week one.
   week, say). With carry it is part of the next due and gets its own "Late fee" line on the rent page
   (`v2.py:20495-20514`); a full payment zeroes it, and a carry folds it into `owed`
   (`v2.py:15438`). A game that never sets it reads 0.
-- Carry sets the flag `rent_carried` and ignores `grace_periods` and `eviction_mode`. **No game over
-  over rent** *(LO decided, D8d)*. ⚠️ Nothing in the engine clears it (`v2.py:14418-14427`): the game
-  clears it on a full week, or it says "short" for the rest of the save (gate *a latch flag is cleared*).
+- **Two flags, two meanings** (LO, 2026-11-03, PICKS J74 b). Carry ignores `grace_periods` and
+  `eviction_mode`. **No game over over rent** *(LO decided, D8d)*.
+  - **`rent_short`** means *short right now*. `setup.carryRent` sets it on every short week
+    (`setup.RENT_SHORT_FLAG`, `v2.py:15456`, set at the end of `setup.carryRent`), and a full payment on the
+    rent page clears it (`v2.py:20545`). Read it for "she owes this week": a collector's line, a row's `when`.
+  - **`rent_carried`** is a permanent record: *she has been short at least once*. `setup.carryRent` sets it on
+    the first short week only (`setup.RENT_CARRIED_FLAG`, guarded by `if (!…[setup.RENT_CARRIED_FLAG])`), and
+    nothing in the engine clears it. The author never clears it either; read it only for something that is
+    true for the rest of the save.
+  - ⚠️ **`hours_since_flag` on a latch the engine sets once counts from the FIRST set** (LO, 2026-11-03,
+    PICKS J71 a). `rent_carried` is stamped once, on the first short week, so `hours_since_flag rent_carried`
+    counts from that week forever after. For "hours since this week's short Sunday", read `rent_short`: it is
+    set again every short week, and every `set` stamps the time afresh (`v2.py:7321`, `flagMetaNow`).
 - **The old route**, without `on_short`: a fixed `amount`, a short week spends `grace_periods`, then
   the eviction branch — `eviction_mode = "flag_set"` sets `eviction_flag`; the default `"game_end"`
   ends the game.
@@ -2559,7 +2595,8 @@ build or one gate run, and none of them is guessable from the schema.
 valid TOML, survives the importer's dataclasses, reaches the generator and is discarded at runtime.
 
 **To take something away, write `op = "add"` with a NEGATIVE value.** A quantity like `money` also
-needs `clamp = false`, or the default 0–100 clamp (`v2.py:7156-7158`) eats it.
+needs `clamp = false`: an omitted `clamp` is emitted as `false` (§21), but `clamp = true` there, or a canvas
+`costs` deduction, runs the 0–100 clamp and truncates it.
 
 ⚠️ Nine canvases shipped this in one pass. **Every energy cost in the game would have been free.**
 The importer's own validator now catches it with the fix in the message — which is the good version
@@ -3169,6 +3206,10 @@ activity hint (`v2.py:8894`), and quest cards in their own flat shape (`v2.py:17
 { hours_since_flag = "met_dan", op = "gte", value = 3, label = "Let three hours pass" }
 ```
 
+- ⚠️ **A latch the engine sets once counts from its first set** (LO, 2026-11-03, PICKS J71 a). Every `set`
+  stamps the time again, but the engine sets some flags only once: `rent_carried` is set on the first short week
+  and never again (§26), so `hours_since_flag rent_carried` counts from that first week. Read `rent_short`
+  instead, which the engine sets on every short week.
 - Every flag write stores `set_minute` (day × 1440 + the minute of the day) beside `set_day`:
   `applyFlagEffect`, the closed flag a final no sets (§49) and the cheat restore. `setup.hoursSinceFlag`
   (`v2.py:4868`) fails closed on an unset flag or one with no meta, as `days_since_flag` does.

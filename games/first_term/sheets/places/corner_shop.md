@@ -1,4 +1,6 @@
-# [READY] Place — Corner Shop
+# [REVIEW] Place — Corner Shop
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Points at the copy fixes it took.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
@@ -28,6 +30,8 @@
 | row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | buy Laura's list | work | home_life | 15 min · money add −20 (Laura's cash) · `groceries_bought` set true | only while `grocery_list` is set | yes, one line: the clerk, the bags |
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_C.md` (signed with the a2 sheets, DECISIONS 125).
 
 ## Why — the source of each key choice
 

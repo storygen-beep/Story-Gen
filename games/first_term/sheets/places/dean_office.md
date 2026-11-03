@@ -1,4 +1,6 @@
-# [READY] Place — Dean's Office
+# [REVIEW] Place — Dean's Office
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here.
 
 > Signed by LO: LO, 2026-10-08.
 
@@ -29,6 +31,16 @@
 | the dean, the talk hub | person | college | one line on her grade, one on her clothes | once a day, on the trigger | yes |
 | read your grade on the door | work | college | none · reads that subject's grade | none needed: it writes nothing | yes, one line |
 | the warning | person | college | first meeting: a warning · after it, `letter_home` set | once | yes |
+
+## Built from the heat proposal (signed 2026-11-03)
+
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has here:
+
+**Walk-ins.** Her activity rolls on entry (1 in 4 at her lowest band, more higher up); on a hit someone walks in. A man's pay sits on the moment; her cover pays 0.
+
+| who walks in | her activity | when | his pay, on the moment | her bolder answers |
+|---|---|---|---|---|
+| the dean | Read the notice on the door | in their office hours | none: no meter | a line only, no pay |
 
 ## Rows a gate needs
 

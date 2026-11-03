@@ -1,4 +1,8 @@
-# [READY] Place — Kitchen
+# [REVIEW] Place — Kitchen
+
+> Changed 2026-11-04 (LO's answer Q6: the rent page is the one count; Mark's Sunday table counts nothing). Waits for LO's re-sign.
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The drawer reads `rent_short`. New section: what the heat proposal built here. Points at the copy fixes it took.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
@@ -20,7 +24,7 @@
 
 | auto-fires | who is here, and when | things to do alone | ways out |
 |---|---|---|---|
-| Sunday 08:00–12:00, once: Mark's count (his step, or the table) | Laura: weekdays 06:30–08:00 | the drawer: letters, Vance's after a short week | the hall |
+| Sunday 08:00–12:00, once: Mark's Sunday table (his step, or the table), after the rent page has taken the money; no second count (Q6) | Laura: weekdays 06:30–08:00 | the drawer: letters, Vance's after a short week | the hall |
 | Laura's day 1 breakfast meeting | Laura: Mon, Tue, Thu, Fri, Sun 18:00–22:00 |  |  |
 |  | Mark: Mon, Tue, Thu, Fri 18:00–19:00 (dinner) · Wednesday 18:00–22:00 · all Sunday 08:00–22:00 |  |  |
 |  | Ryan: Mon, Tue, Thu, Sun 18:00–19:00 (dinner) |  |  |
@@ -32,9 +36,9 @@
 | Laura | person | Laura's ladder | Laura's Warmth add +2 a talk | once per window, on the trigger | yes |
 | Mark | person | Mark's ladder · money and rent | Mark's Want read: how he looks at her (colour) | once per window, on the trigger | yes |
 | the Sunday table | work | money and rent | as the money sheet: `paid_full_streak` add +1 or set 0 | Sunday morning, once | yes |
-| the drawer | work | money and rent | none · reads `rent_carried` and the letter · the letter says what Mark owes Vance only after `knows_mark_debt` (Mark A 2); before it, bills | none needed: it writes nothing | yes |
+| the drawer | work | money and rent | none · reads `rent_short` and the letter · the letter says what Mark owes Vance only after `knows_mark_debt` (Mark A 2); before it, bills | none needed: it writes nothing | yes |
 
-**The anchor.** 28,000 words: breakfast with Laura, Wednesday with Mark, the Sunday count in two versions, the family table, the wine.
+**The anchor.** 28,000 words: breakfast with Laura, Wednesday with Mark, the Sunday table in two versions, the family table, the wine.
 
 ## Everyday at home (system `home_life`)
 
@@ -54,6 +58,17 @@ Alone, each is its own plain row. With Laura or Mark there, it is a choice insid
 Sunday, when Mark is in here from 08:00. Dinner, 18:00–19:00: Laura, Mark and Ryan on Monday, Tuesday, Thursday and Sunday; Laura and Mark on
 Friday (Ryan has Kayla); Mark alone on Wednesday (question 54).
 
+## Built from the heat proposal (signed 2026-11-03)
+
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has here:
+
+**Walk-ins.** Her activity rolls on entry (1 in 4 at her lowest band, more higher up); on a hit someone walks in. A man's pay sits on the moment; her cover pays 0.
+
+| who walks in | her activity | when | his pay, on the moment | her bolder answers |
+|---|---|---|---|---|
+| Ryan | Make breakfast, Make a coffee | Sat 07:30–08:15; Sun 07:30–10:00 | his Want +2 | "Don't move." Corruption +1, cap 19/39 by her band; "Push back into him." Corruption +1, cap 59 |
+| Mark | Make breakfast, Make a coffee | Sat 08:15–08:30 | his Want +2 | "Don't move." Corruption +1, cap 19/39 by her band; "Push back into him." Corruption +1, cap 59 |
+
 ## Rows a gate needs
 
 | row | gate |
@@ -61,6 +76,8 @@ Friday (Ryan has Kayla); Mark alone on Wednesday (question 54).
 | 30,000 words, about 25% of the new total (COVERAGE, batch 4) | location fill |
 | the drawer, at every hour | a destination is never open and exit-only |
 | Laura and Mark rows each have a hub | standing surface |
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_A.md`, `proposals/COPY_FIXES_C.md` (signed with the a2 sheets, DECISIONS 125).
 
 ## Why — the source of each key choice
 

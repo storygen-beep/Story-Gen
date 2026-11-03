@@ -214,7 +214,7 @@ skip (Process Review, Round 1, numbers only), and all four passing games do: In 
 Start", Cupid's Way's "Skip Prologue". The skip sets every flag the opening always sets (and, for a one-of-several choice, the mildest branch's flags only) and lands where the
 opening hands over, so nothing downstream — `the opening opens a door` included — can tell the difference.
 Where the opening has a choice of one of several, the skip takes the mildest branch, shows it on its own
-screen, and sets that branch's flags. It never takes a no that ends a path (LO, 2026-11-03).
+screen, and sets that branch's flags. It never takes a no that ends a path (LO, 2026-11-03). Checked: gate *the skip sets what the opening sets*.
 
 ## F2 · Boot and capstone are two canvases
 
@@ -407,7 +407,7 @@ replaced it:
 
 For every system switched ON in `0_systems_spec.toml`, either a named beat in the first hour arms
 it, or it sits on the sidebar at value-zero where the player can read it. One row per system, none
-cold.
+cold. Checked: lint *every live system is armed*.
 
 The phone is a channel, and it is armed the same way: by the first scene flag that causes a text
 (`the-phone.md` P4). Its first thread arrives because a scene happened, not because `[phone]` exists.
@@ -475,7 +475,13 @@ ceiling **is** the "there is a climb ahead" read, on frame one, with no teach sc
 > branch (`v2.py:11158` and `:11225`), and `getStoryCanvasRedirect` fires on a non-repeatable canvas
 > *or* a `trigger_mode = "random"` one. Put a one-shot meeting or a random walk-in in that room and
 > the door to the wardrobe or the shop is invisible until it has fired. Pick a room with neither —
-> and note that most corpus shop locations are bare rooms for exactly this reason.
+> and note that most corpus shop locations are bare rooms for exactly this reason. Checked: gate *nothing one-time at the shop or wardrobe*.
+
+**An opt-out of a whole system may sit in the opening** (LO, 2026-11-03, PICKS C49 a). A system a player may
+not want at all (hygiene, say) can be switched off from the opening's last screen, written as the second button
+beside the ordinary one: "Go to campus." and "Go to campus. (Turn hygiene off)". The skip (F1c) always takes
+"on": a returning player who skips the opening gets the system on, and can switch it off where the game keeps
+its settings.
 
 ⚠️ **The rent clock is armed, not fired.** Use `[settings.rent] start_after_flag` pointed at a flag
 the opening raises, so the first session is pressure-free — no charge lands before the player has
@@ -874,7 +880,7 @@ Three things to get right:
   whose card you missed.
 - **Flag names are not validated against anything.** Nothing checks that `met_wade` exists; a typo
   hides that character's guidance forever and no build error says so. Read the name off the
-  meeting canvas's own `flagEffects`, not off memory.
+  meeting canvas's own `flagEffects`, not off memory. Checked: gate *every card carries the met flag*.
 
 ⚠️ **This flag is load-bearing twice.** The cast page (`[ui.cast_page]`, `engine.md` §34) lists a
 character exactly when `pickQuestsCard` returns a card for them, so one flag reveals both surfaces
@@ -1102,15 +1108,9 @@ has to remember who "Stepsister" is.
 
 ## What the scoreboard checks
 
-Two gates and three lints. `python3 scripts/gates.py <slug>`.
-
-| | |
-|---|---|
-| gate · **the opening hands over into an open door** | F3. Walks the funnel's clock and asks whether anything at the landing location is open at that minute. **n/a** when the landing location cannot be resolved. |
-| gate · **every hub is met first** | F5 + F8. Per character: **one** hub gated on a flag a non-repeatable canvas naming them sets, and **no** hub left with zero conditions — or a line in the forced opening. A group scene naming several people meets them all. |
-| lint · **the place says what it is** | F9. Lists every location by how much prose happens there, against how long its own description is. **Whether a description names the function is a reading, not a measurement**, so this is a list to read and never a score. It replaced a gate that required a first-visit canvas at the anchor — a device eighteen of twenty-six top games do not use. |
-| lint · **named before met** | F7. Lists every character named in the opening, a quest card or a room description who has no meeting anywhere in the game. A list to read, never a score. |
-| lint · **the opening arms a card with goals** | F1b step 5. The quest cards visible once the starting canvas's handover flags are set, and whether any of them carries `goals`. A list, never a score (added 2026-09-24). |
+The gates and lints that check this file are in one table, `SKILL.md` "The scoreboard — what fails, and where to read about it", each row naming its
+rule here (LO, 2026-11-03, PICKS C51 b: one table, no per-reference copy to go stale). `python3
+scripts/gates.py <slug>`.
 
 ⚠️ **Nothing checks that the guidance surface waits for the meeting.** The `named before met` lint
 does read `[[quest_cards]]` — every string field on every card, beside the opening and the room

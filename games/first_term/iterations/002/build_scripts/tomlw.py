@@ -70,8 +70,9 @@ def boost_off():
 # effect helpers
 def add(k, n, clamp=True, cap=None):
     d = {"targetType": "player", "trait": k, "op": "add", "value": n}
-    if not clamp:
-        d["clamp"] = False
+    # The engine treats an omitted clamp as false on choice/node/entry effects (v2.py:16736), so write it both ways
+    # (third alignment pass, 2026-11-03: every add() in the game was unclamped).
+    d["clamp"] = bool(clamp)
     if cap is not None:
         d["cap"] = cap
     return d

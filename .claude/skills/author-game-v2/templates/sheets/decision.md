@@ -9,6 +9,15 @@
 |---|---|---|
 | <question> | <answer> | <one line> |
 
+## This release — required
+
+Per person in the game: in this release, kept for a later one, or cut, and what the player loses by it, in
+plain words (LO, 2026-11-03, PICKS I74 b; `references/the-sheets.md`, "The decision sheet's this-release block").
+
+| person | in · later · cut | what the player loses |
+|---|---|---|
+| <person> | <in / later (which release) / cut> | <what she cannot do, see or have because of it; "nothing" for in> |
+
 ## Settled
 
 | locked forever | expensive to change | cheap to change |

@@ -1,4 +1,6 @@
-# [READY] Scene — ryan_hot_repeatables
+# [REVIEW] Scene — ryan_hot_repeatables
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. row 6's Exhibitionism cap 39; row 7 has no "Further." and gains "Leave him to it."; the acts' "Don't stop." and hygiene cost; one media slot per finish; the pools as built; want, next step and hook rows. the explicit beats as built, measured. file and line cites cut.
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 127) (LO: "cant we have more in the sex screens", "B, sheet it"): row 7
 > becomes a menu. A short normal start at the door, then she picks the act; more acts open as his Lust climbs;
@@ -15,6 +17,13 @@ like `ryan_towel_today`). Each replays from a POOL of 3 lines (`block_pool` `mem
 repeats until all have shown). None shows with Laura in the room (Laura's rule). The towel slip and the drop
 (DECISIONS 98) stay as they are.
 
+| row | answer |
+|---|---|
+| person | `npc_ryan`, his hot repeatables, one per stage |
+| want | his: what each step left him wanting, shown on his body every visit |
+| next step | each row opens after a step; row 7 is the loop after his top step |
+| hook | his Lust climbs +3 a night and opens the next act in row 7's menu |
+
 | # | opens after | where · when | what she does | gate | meters (`meters.md`) | explicit? · column | the no | change from built |
 |---|---|---|---|---|---|---|---|---|
 | 1 | step 2 · `ryan_hall_seen` | his doorway, evenings he's home (Mon, Tue, Thu, Sun 19:00–22:00) | a first tease for one person (H3): she shows him her body in the doorway (a stretch, a finger down her thigh, a bend for a sock), he hides what it does to him and fails, and she leaves on "not tonight" | Curious (was none) | corruption add +1, cap 39 | no · early | "Night, Ryan." | rewritten 2026-11-01 (was talk only) |
@@ -22,7 +31,7 @@ repeats until all have shown). None shows with Laura in the room (Laura's rule).
 | 3 | step 4 | the couch, Sat/Sun 14:00–18:00 | she watches his game in her underwear; he has to adjust himself, and she makes him say why | Daring (step 4 needs Bold) | exhibitionism add +1 · corruption add +1 (shown by choice), cap 39 | yes · middle | "Get dressed." | new |
 | 4 | step 6 (was 5) | his bed, evenings he's home | she lies on his bed and touches herself until she comes; he isn't allowed to touch, only watch | Bold · Showing (was Curious · Daring; naked by choice for one is Bold) | both add +1, cap 59 | yes · middle | "Not tonight." | new |
 | 5 | step 6 | his room, evenings he's home | naked in his room; he strokes himself while she watches, and she tells him when he can come | Showing | exhibitionism add +1 · corruption add +1, cap 59 | yes · late (cum) | "Not tonight." | new |
-| 6 | step 7 | the couch, under the blanket (Sat/Sun 14:00–18:00) | a handjob to the end under the blanket, with Mark's TV on in the next room | Hungry · Daring (was Bold; the taboo act at home is Hungry, SP2) | both add +1, cap 79 | yes · late (cum) | "Just the film." | built ("Share the blanket"): pays +3 not +1, now finishes |
+| 6 | step 7 | the couch, under the blanket (Sat/Sun 14:00–18:00) | a handjob to the end under the blanket, with Mark's TV on in the next room | Hungry · Daring (was Bold; the taboo act at home is Hungry, SP2) | corruption add +1, cap 79 · exhibitionism add +1, cap 39 | yes · late (cum) | "Just the film." | built ("Share the blanket"): pays +3 not +1, now finishes |
 | 7 | step 8 | his room, two knocks, not Friday, 22:00–00:00 | a menu (below): a kiss at the door, then her pick of the act; more open as his Lust climbs; a near-catch screen; her pick of finish | — (step 8 needs Corruption 60) · acts by his Lust 70 / 80 / 90 | corruption add +1, cap 79 | yes · whole late | "Not tonight." | changed 2026-11-02: was one pool of three whole scenes |
 
 **Gates as signed** (`npc_ryan.md`): the stage column is the gate. Row 6's "Bold" is signed; "· Daring" is the mixed
@@ -35,16 +44,16 @@ rule (`meters.md` rule 4: seen and sexual needs both) applied, confirmed by LO 2
 ## Row 7's menu (changed 2026-11-02, signed by LO 2026-11-02)
 
 The rule it follows: a repeatable changes with her level, two voices per act split on her main sex trait, and a
-menu that grows as the acts open one by one (`the-arc.md:642-643`, `the-surfaces.md` R3c).
+menu that grows as the acts open one by one (the skill's arc and surfaces rules).
 
 | node | what happens | explicit? | exits (label → target) · gate | effects |
 |---|---|---|---|---|
-| `door` | two knocks; his phone face-down before the second lands (as built) | no | "Go in." → `start` · "Not tonight." → the hall · "Further. (Next release)" (locked) | none |
-| `start` | **new.** A normal start, a pool of three, no repeats until all have shown: he kisses her against the door before it's shut · he's half-asleep and pulls her under the covers · he's been waiting, sitting on the bed, and says "Took you long enough." Her clothes come off here, short | no (low) | the act menu, below | none |
-| `suck` | "Go down on him." Her on her knees by his bed | yes | → `twist` · gate: his Lust 70 (open the first night) | none |
-| `ride` | "Ride him." Her on top, his headboard on her wall | yes | → `twist` · gate: his Lust 70 (open the first night) | none |
-| `lick` | "Let him taste you." His mouth on her cunt until she comes, her hand over her mouth | yes | → `twist` · gate: his Lust 80, shown locked below it | none |
-| `wall_back` | "Against the wall." From behind, her palms on the wall she listened through | yes | → `twist` · gate: his Lust 90, shown locked below it | none |
+| `door` | two knocks; his phone face-down before the second lands (as built) | no | "Go in." → `start` · "Not tonight." → `no_door` ("Back to your room.") | none · the no clears the booked knock |
+| `start` | **new.** A normal start, a pool of three, no repeats until all have shown: he kisses her against the door before it's shut · he's half-asleep and pulls her under the covers · he's been waiting, sitting on the bed, and says "Took you long enough." Her clothes come off here, short | no (low) | the act menu, below · "Leave him to it." → `no_start`: "Seriously? Now? Look at me.", his cock still hard (explicit), "Back to your room." | none |
+| `suck` | "Go down on him." Her on her knees by his bed | yes | "Don't stop." → `twist` · gate: his Lust 70 (open the first night) | hygiene add -10 on the button |
+| `ride` | "Ride him." Her on top, his headboard on her wall | yes | "Don't stop." → `twist` · gate: his Lust 70 (open the first night) | hygiene add -10 on the button |
+| `lick` | "Let him taste you." His mouth on her cunt until she comes, her hand over her mouth | yes | "Don't stop." → `twist` · gate: his Lust 80, shown locked below it | hygiene add -10 on the button |
+| `wall_back` | "Against the wall." From behind, her palms on the wall she listened through | yes | "Don't stop." → `twist` · gate: his Lust 90, shown locked below it | hygiene add -10 on the button |
 | `twist` | **new.** A pool of three, no repeats until all have shown: nothing, just him fucking her harder · Laura knocks: "Ryan? Are you up?", they freeze, "Asleep, Mom" · Kayla calls: KAYLA with a heart, it buzzes on the desk, "Let it ring." (her high line here: *You want him to hear Kayla on the phone while you do this.*) Written to fit any of the four acts | yes | "Inside me." → `f_inside` · "On me." → `f_on` · "In my mouth." → `f_mouth` | none |
 | `f_inside` · `f_on` · `f_mouth` | **new.** He comes, her pick; short, written to fit any act | yes | "Back to your room." → the hall (as built: the day's pay split on `ryan_hot_today`) | corruption add +1, cap 79 · his Lust add +3 once a day (as built) |
 
@@ -60,8 +69,12 @@ Lust stops at 100.
 **Screens to write after the sign** (`v2-prose`, measured): `start` ×3 (low), the four acts ×2 voices = 8, `twist` ×3,
 the finishes ×3. 17 in all, 14 of them explicit.
 
-**Media slots (new, LO harvests):** `sex/ryan_hot7_suck_t5`, `sex/ryan_hot7_ride_t5`, `sex/ryan_hot7_lick_t5`,
-`sex/ryan_hot7_wall_t5`, `sex/ryan_hot7_twist_t5`, `sex/ryan_hot7_finish_t5`. The built `sex/ryan_hot7_t5` is retired.
+**Media slots (as built, LO harvests):** `sex/ryan_hot7_suck_t5`, `sex/ryan_hot7_ride_t5`, `sex/ryan_hot7_lick_t5`,
+`sex/ryan_hot7_wall_t5`, `sex/ryan_hot7_twist_t5`, and one per finish: `sex/ryan_hot7_finish_inside_t5`, `sex/ryan_hot7_finish_on_t5`, `sex/ryan_hot7_finish_mouth_t5`. The built `sex/ryan_hot7_t5` is retired.
+
+**The pools as built:** `start` draws from `ryan_hot_7s`, or on a booked night from `ryan_hot_7s_booked` (7s a and c only, so "half asleep" never follows "listening for you"). `twist` draws from `ryan_hot_7t` while Laura is in her room, or from `ryan_hot_7t_no_laura` (no knock from Laura) when she isn't. After each finish, one body line and one line from Ryan before "Back to your room.".
+
+**Hygiene (DECISIONS 137):** under hygiene 30, with the system on, rows 1–6 still show, but he refuses: "Jesus. When did you last shower? Go and wash.", no pay, "Go and shower.". Rows 2–7's acts cost hygiene -10.
 
 **Confirmed by LO 2026-11-02** ("Signed"): "In my mouth." (as on step 8) · the voice split at Corruption 70 · the Lust gates 70 / 80 / 90.
 
@@ -254,3 +267,32 @@ across the hall (Mark is downstairs with the TV); `7t_b` opens on the headboard 
 | the meters per row | `sheets/systems/meters.md` rules 3–4, signed 2026-11-01 (DECISIONS 113) |
 | no repeats in the pool | engine `seen_weight = 0` (DECISIONS 112) |
 | the nos, row 6's Daring, the late columns | proposed here, confirmed by LO 2026-11-01 ("Continue") |
+
+## Explicit beats as built (measured 2026-11-03)
+
+One row per explicit screen in the built game: 3 or more words on the build's own list, the count `gates.py` uses. A screen's variants fold into it, so a screen can hold more words than one visit shows. "Sits at" is the highest of the person's crude columns (SP2) that the screen uses. Where a screen's text differs from the prose above, the build is what plays.
+
+| screen | words | counted words | sits at | the text |
+|---|---|---|---|---|
+| `hub_ryan_room` · `hot1` | 284 | 3: ass ×2, tits | Ryan's early column | on this sheet above |
+| `hub_ryan_room` · `hot4` | 384 | 31: clit ×7, naked ×3, cock ×3, ass ×3, moan ×3, orgasm ×3, tits ×2, nipples ×2, undress, lick, tit, nipple, fuck | Ryan's late column; also clit, nipples | on this sheet above |
+| `hub_ryan_room` · `hot5` | 376 | 25: cock ×8, naked ×3, tits ×3, cum ×3, cunt ×3, ass ×3, nipples, fuck | Ryan's late column; also nipples | on this sheet above |
+| `hub_ryan_living_room` · `hot2` | 354 | 11: cock ×8, moans ×2, thrust | Ryan's middle column | on this sheet above |
+| `hub_ryan_living_room` · `hot3` | 329 | 15: cock ×7, ass ×4, tits ×3, nipples | Ryan's middle column; also nipples | on this sheet above |
+| `hub_ryan_living_room` · `hot6` | 416 | 15: cock ×8, cum ×3, cunt ×2, balls, tits | Ryan's late column | on this sheet above |
+| `ryan_two_knocks` · `start` | 404 | 19: cock ×9, ass ×5, tits ×3, nipples ×2 | Ryan's middle column; also nipples | on this sheet above |
+| `ryan_two_knocks` · `no_start` | 42 | 3: ass, cock, tits | Ryan's middle column | written out below |
+| `ryan_two_knocks` · `suck` | 291 | 19: cock ×7, fuck ×3, lick ×2, suck ×2, tits ×2, cunt ×2, balls | Ryan's late column | on this sheet above |
+| `ryan_two_knocks` · `ride` | 244 | 14: cock ×4, cunt ×3, ass ×2, tits ×2, nipple, fuck, clit | Ryan's late column; also clit, nipples | on this sheet above |
+| `ryan_two_knocks` · `lick` | 283 | 18: cunt ×6, clit ×5, sucks ×2, cock ×2, naked, moan, ass | Ryan's late column; also clit | on this sheet above |
+| `ryan_two_knocks` · `wall_back` | 275 | 20: cock ×4, cunt ×3, ass ×3, fucks ×3, tits ×2, thrust ×2, naked, balls, clit | Ryan's late column; also clit | on this sheet above |
+| `ryan_two_knocks` · `twist` | 536 | 33: cunt ×6, fuck ×6, ass ×5, nipples ×5, cock ×5, tits ×4, moan ×2 | Ryan's late column; also nipples | on this sheet above |
+| `ryan_two_knocks` · `f_inside` | 142 | 8: cock ×3, cunt ×2, cum ×2, ass | Ryan's late column | on this sheet above |
+| `ryan_two_knocks` · `f_on` | 136 | 10: cock ×3, cum ×3, tits ×2, fuck, nipples | Ryan's late column; also nipples | on this sheet above |
+| `ryan_two_knocks` · `f_mouth` | 142 | 13: cock ×4, fuck ×3, kiss ×2, suck, sucking, lick, cum | Ryan's late column | on this sheet above |
+
+The screens not written out above, as built:
+
+- `ryan_two_knocks` · `no_start` · 42 words · 3 counted:
+
+> Seriously? Now? Look at me, @player.nickname. He lets go of your ass, his cock still hard and pointing at you, and watches you pull your clothes back on without taking his eyes off your tits once. Next time you knock, you stay.

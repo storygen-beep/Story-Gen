@@ -1,4 +1,6 @@
-# [READY] Place — Zoe's Kitchen
+# [REVIEW] Place — Zoe's Kitchen
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
@@ -28,6 +30,16 @@
 |---|---|---|---|---|---|
 | get a drink, party night | work | parties | as "take a drink" on the party sheet: `drinks_tonight` add +1 · the boost on | the party's three-a-night cap | yes, one line |
 | get a drink, another evening | work | parties | none | none needed: it writes nothing | yes, one line |
+
+## Built from the heat proposal (signed 2026-11-03)
+
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has here:
+
+**Acts, rungs and pools.**
+
+| what | where | buttons and pays |
+|---|---|---|
+| the keg guy (A6) | party night, after she dared him | "Let him bend you over the counter." Hungry 60, Corruption +1, cap 79 · "Not tonight." pays 0 |
 
 ## Why — the source of each key choice
 

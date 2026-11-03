@@ -62,6 +62,8 @@ id     = "ryan_kayla"
 app    = "messages"
 npc    = "npc_ryan"
 notify = "📱 Ryan"
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = -1, clamp = true }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "knows_about_kayla", operator = "is_true" },
@@ -217,7 +219,7 @@ type = "message"
 sender = "npc"
 after_round = 1
 after_choice = 1
-content = "ok. text me when you're on your way"
+content = "ok. text me when you're coming"
 [[phone.conversations.blocks]]
 type = "message"
 sender = "npc"
@@ -275,6 +277,8 @@ app    = "messages"
 npc    = "npc_mark"
 notify = "📱 Mark"
 repeat_after_days = 6
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_mark", trait = "power", op = "add", value = 1, cap = 100 }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "rent_starts", operator = "is_true" },
@@ -285,7 +289,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 [[phone.conversations.blocks]]
 type = "message"
 sender = "npc"
-content = "$75. tomorrow. kitchen."
+content = "rent. tomorrow. kitchen."
 [[phone.conversations.blocks]]
 type = "reply"
 round = 1
@@ -409,10 +413,13 @@ app    = "messages"
 npc    = "npc_zoe"
 notify = "📱 Zoe"
 repeat_after_days = 6
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "player", trait = "zoe_patience", op = "add", value = -6, clamp = true }], flagEffects = [{ targetType = "player", flag = "zoe_ignored", op = "set" }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "zoe_met", operator = "is_true" },
   { type = "days_since_flag", subject = "player", flag_key = "zoe_met", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "zoe_patience", operator = "gte", value = 6 },
   { type = "weekday", weekdays = [3] },
   { type = "time_of_day", start_time = "18:00", end_time = "22:00" },
 ] }
@@ -454,10 +461,13 @@ app    = "messages"
 npc    = "npc_zoe"
 notify = "📱 Zoe"
 repeat_after_days = 6
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "player", trait = "zoe_patience", op = "add", value = -6, clamp = true }], flagEffects = [{ targetType = "player", flag = "zoe_bailed", op = "set" }, { targetType = "player", flag = "zoe_ignored", op = "set" }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "zoe_met", operator = "is_true" },
   { type = "days_since_flag", subject = "player", flag_key = "zoe_met", operator = "gte", value = 2 },
+  { type = "trait", subject = "player", trait_key = "zoe_patience", operator = "gte", value = 6 },
   { type = "weekday", weekdays = [4] },
   { type = "time_of_day", start_time = "18:00", end_time = "22:00" },
 ] }
@@ -493,7 +503,7 @@ npc    = "npc_zoe"
 notify = "📱 Zoe"
 repeat_after_days = 1
 ignore_after_days = 1
-on_ignore = { effects = [], flagEffects = [{ targetType = "player", flag = "zoe_bailed", op = "set" }, { targetType = "player", flag = "zoe_run_booked", op = "unset" }] }
+on_ignore = { effects = [{ targetType = "player", trait = "zoe_patience", op = "add", value = -6, clamp = true }], flagEffects = [{ targetType = "player", flag = "zoe_bailed", op = "set" }, { targetType = "player", flag = "zoe_run_booked", op = "unset" }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "zoe_run_booked", operator = "is_true" },
@@ -509,11 +519,15 @@ type = "message"
 sender = "npc"
 content = "i ran alone like a loser"
 [[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "no invites for you this week"
+[[phone.conversations.blocks]]
 type = "reply"
 round = 1
 choices = [
-  { text = "sorry!! next week", effects = [], flagEffects = [{ targetType = "player", flag = "zoe_bailed", op = "set" }, { targetType = "player", flag = "zoe_run_booked", op = "unset" }] },
-  { text = "overslept", effects = [], flagEffects = [{ targetType = "player", flag = "zoe_bailed", op = "set" }, { targetType = "player", flag = "zoe_run_booked", op = "unset" }] },
+  { text = "sorry!! next week", effects = [{ targetType = "player", trait = "zoe_patience", op = "add", value = -6, clamp = true }], flagEffects = [{ targetType = "player", flag = "zoe_bailed", op = "set" }, { targetType = "player", flag = "zoe_run_booked", op = "unset" }] },
+  { text = "overslept", effects = [{ targetType = "player", trait = "zoe_patience", op = "add", value = -6, clamp = true }], flagEffects = [{ targetType = "player", flag = "zoe_bailed", op = "set" }, { targetType = "player", flag = "zoe_run_booked", op = "unset" }] },
 ]
 [[phone.conversations.blocks]]
 type = "message"
@@ -534,6 +548,8 @@ id     = "hale_office_hours"
 app    = "messages"
 npc    = "npc_hale"
 notify = "📧 College email: Dr. Hale"
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = -1, clamp = true }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "hale_02_done", operator = "is_true" },
@@ -544,7 +560,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 [[phone.conversations.blocks]]
 type = "message"
 sender = "npc"
-content = "Office hours are Thursday, after six. Bring the essay."
+content = "Thursday, six, my office. Bring the essay."
 [[phone.conversations.blocks]]
 type = "reply"
 round = 1
@@ -613,6 +629,8 @@ app    = "messages"
 npc    = "npc_hale"
 notify = "📧 College email: Dr. Hale"
 repeat_after_days = 6
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = -1, clamp = true }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "hale_04_done", operator = "is_true" },
@@ -651,7 +669,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 [[phone.conversations.blocks]]
 type = "message"
 sender = "npc"
-content = "The door was unlocked at half past six."
+content = "Half past six. My door was unlocked."
 [[phone.conversations.blocks]]
 type = "reply"
 round = 1
@@ -664,7 +682,7 @@ type = "message"
 sender = "npc"
 after_round = 1
 after_choice = 0
-content = "Then don't say half past six. — H."
+content = "Then don't promise. — H."
 [[phone.conversations.blocks]]
 type = "message"
 sender = "npc"
@@ -679,11 +697,14 @@ app    = "messages"
 npc    = "npc_jake"
 notify = "📱 Jake"
 repeat_after_days = 6
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "player", trait = "jake_patience", op = "add", value = -3, clamp = true }], flagEffects = [{ targetType = "player", flag = "jake_ignored", op = "set" }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "jake_number", operator = "is_true" },
   { type = "days_since_flag", subject = "player", flag_key = "jake_number", operator = "gte", value = 1 },
   { type = "flag", subject = "player", flag_key = "jake_date_booked", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "jake_patience", operator = "gte", value = 3 },
   { type = "weekday", weekdays = [3, 4] },
   { type = "time_of_day", start_time = "18:00", end_time = "22:00" },
 ] }
@@ -747,26 +768,31 @@ npc    = "npc_jake"
 notify = "📱 Jake"
 repeat_after_days = 1
 ignore_after_days = 1
-on_ignore = { effects = [], flagEffects = [{ targetType = "player", flag = "jake_stood_up", op = "set" }, { targetType = "player", flag = "jake_date_booked", op = "unset" }] }
+on_ignore = { effects = [{ targetType = "player", trait = "jake_patience", op = "add", value = -3, clamp = true }], flagEffects = [{ targetType = "player", flag = "jake_stood_up", op = "set" }, { targetType = "player", flag = "jake_date_booked", op = "unset" }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "jake_date_booked", operator = "is_true" },
   { type = "hours_since_flag", subject = "player", flag_key = "jake_date_booked", operator = "gte", value = 72 },
+  { type = "time_of_day", start_time = "10:00", end_time = "22:00" },
 ] }
 [[phone.conversations.blocks]]
 type = "message"
 sender = "npc"
-content = "i was outside your house for twenty minutes"
+content = "sat outside your house twenty minutes"
 [[phone.conversations.blocks]]
 type = "message"
 sender = "npc"
 content = "you ok?"
 [[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "asking again in a few days"
+[[phone.conversations.blocks]]
 type = "reply"
 round = 1
 choices = [
-  { text = "sorry. i fell asleep", effects = [], flagEffects = [{ targetType = "player", flag = "jake_stood_up", op = "set" }, { targetType = "player", flag = "jake_date_booked", op = "unset" }] },
-  { text = "something came up", effects = [], flagEffects = [{ targetType = "player", flag = "jake_stood_up", op = "set" }, { targetType = "player", flag = "jake_date_booked", op = "unset" }] },
+  { text = "sorry. i fell asleep", effects = [{ targetType = "player", trait = "jake_patience", op = "add", value = -3, clamp = true }], flagEffects = [{ targetType = "player", flag = "jake_stood_up", op = "set" }, { targetType = "player", flag = "jake_date_booked", op = "unset" }] },
+  { text = "something came up", effects = [{ targetType = "player", trait = "jake_patience", op = "add", value = -3, clamp = true }], flagEffects = [{ targetType = "player", flag = "jake_stood_up", op = "set" }, { targetType = "player", flag = "jake_date_booked", op = "unset" }] },
 ]
 [[phone.conversations.blocks]]
 type = "message"
@@ -788,11 +814,15 @@ app    = "messages"
 npc    = "npc_jake"
 notify = "📱 Jake"
 repeat_after_days = 6
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "player", trait = "jake_patience", op = "add", value = -3, clamp = true }], flagEffects = [{ targetType = "player", flag = "jake_ignored", op = "set" }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "jake_number", operator = "is_true" },
   { type = "days_since_flag", subject = "player", flag_key = "jake_number", operator = "gte", value = 1 },
   { type = "flag", subject = "player", flag_key = "jake_date_booked", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "jake_stood_up", operator = "is_false" },
+  { type = "trait", subject = "player", trait_key = "jake_patience", operator = "gte", value = 3 },
   { type = "weekday", weekdays = [0, 1] },
   { type = "time_of_day", start_time = "18:00", end_time = "22:00" },
 ] }
@@ -847,6 +877,90 @@ sender = "npc"
 after_round = 2
 after_choice = 1
 content = "saturday then"
+
+# ── Zoe: after she ignored an invite (Q5) ──
+[[phone.conversations]]
+id     = "zoe_ignored_text"
+app    = "messages"
+npc    = "npc_zoe"
+notify = "📱 Zoe"
+repeat_after_days = 1
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "zoe_met", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "zoe_met", operator = "gte", value = 1 },
+  { type = "flag", subject = "player", flag_key = "zoe_ignored", operator = "is_true" },
+  { type = "time_of_day", start_time = "08:00", end_time = "23:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "wow ok. left on read"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "fine. no invites this week 🙄"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "sorry zo" },
+  { text = "i was busy" },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "mm. you'd better be"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "busy. sure."
+
+# ── Jake: after she ignored a date ask (Q5) ──
+[[phone.conversations]]
+id     = "jake_ignored_text"
+app    = "messages"
+npc    = "npc_jake"
+notify = "📱 Jake"
+repeat_after_days = 1
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "jake_number", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "jake_number", operator = "gte", value = 1 },
+  { type = "flag", subject = "player", flag_key = "jake_ignored", operator = "is_true" },
+  { type = "time_of_day", start_time = "08:00", end_time = "22:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "guess that's a no"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "i'll ask again in a few days"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "sorry, i missed it" },
+  { text = "ok" },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "it's ok. i'll ask again"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "ok."
 
 # ── calls (the person sheets: Laura's curfew call; the dean's office arrives with college) ──
 [[phone.apps]]

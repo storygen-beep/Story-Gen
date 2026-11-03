@@ -1,4 +1,6 @@
-# [READY] Scene — ryan_05_thin_walls
+# [REVIEW] Scene — ryan_05_thin_walls
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the nos' own screens, the sleep buttons, "Knock back twice." from Corruption 40, the hall's button; the step row. the explicit beats as built, measured.
 
 > **Changed 2026-11-01, signed by LO 2026-11-01 ("Signed")** (DECISIONS 99–113): Ryan's release-1 ladder (`sheets/people/npc_ryan.md`, signed). Changed: gate Corruption 20 · his Want 40 (Exhibitionism 40 dropped); Want +5. The written screens stand.
 
@@ -20,15 +22,24 @@
 | the crude-word ceiling | Ryan's middle column: ass, tits, cock, wet (LO, 2026-10-08: middle = stage 3) |
 | her_line_low · her_line_high | low (under the stage): "This is Ryan. You should go." · high (over it): "You want him to hear Kayla on the phone while you do this." (the person sheet's pair; worded for this screen when the prose is written) |
 
+## The step row (filled from the build, 2026-11-03)
+
+**Kind · stage:** touching herself while she listens (Curious · Daring 20).
+
+| the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
+|---|---|---|---|---|---|---|
+| she gets off to Ryan and Kayla through the wall, and he hears her come | Ryan, through the wall; Kayla at dawn | Ryan hearing her | "Touch yourself." | his headboard stops, and he says her name through the wall | yes: she comes | `ryan_heard_her`; Kayla meets her at dawn; step 6 |
+
 ## Branch map — one row per screen
 
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
-| `wall` | the headboard through the wall; Kayla; she can't stop listening | no | "Listen." → `listen` · "Put your headphones in." → parked | none |
-| `listen` | she listens on purpose; her body answers | yes (3 words) | "Touch yourself." → `act` · "Roll over. Sleep." → parked | none |
+| `wall` | the headboard through the wall; Kayla; she can't stop listening | no | "Listen." → `listen` · "Put your headphones in." → `headphones` (parked: "Leave them in." → her room) | none |
+| `listen` | she listens on purpose; her body answers | yes (3 words) | "Touch yourself." → `act` · "Roll over." → `roll_over` (parked: "Try to sleep." → her room) | none |
 | `act` | her fingers, his rhythm; she comes; his headboard stops dead | yes (9 words) | "Lie still." → `after` | corruption add +1 · Ryan's Want add +5 |
-| `after` | silence; "...@player.nickname?" through the wall; she doesn't answer | no | "Sleep." → `hall` · "Knock back twice." locked: "Needs Bold" | `ryan_heard_her` set · `ryan_step` set 5 |
-| `hall` | Saturday dawn: Kayla in his T-shirt: "You must be @player.nickname." | no | "Take the shower." → the bathroom, Sat 08:00 | energy set 100 (a night's sleep, guess) |
+| `after` | silence; "...@player.nickname?" through the wall; she doesn't answer | no | "Sleep (8h)." · "(7h)." · "(6h).", by the hour → `hall` · "Knock back twice." from Corruption 40 → `knock_back` | `ryan_heard_her` set · `ryan_step` set 5 |
+| `knock_back` | she knocks back twice through the wall | no | the same sleep buttons → `hall` | as `after`, and `ryan_knocked_back` set |
+| `hall` | Saturday dawn: Kayla in his T-shirt: "You must be @player.nickname." | no | "Wait your turn, then take the shower (2h)." → the bathroom | energy set 100 · `kayla_met` set |
 
 **The parked nos** ("Put your headphones in.", "Roll over. Sleep."): the step comes back next Friday
 (`retry_after_days = 7`, guess). Nothing else moves.
@@ -80,3 +91,12 @@ Re-measured: 97 words.
 | the prose | `v2-prose`, measured by `gates.py --beat`, 2026-10-08 |
 | the middle column for stage 3 | LO, 2026-10-08 (question 28) |
 | retry in 7 days, energy on waking | guess |
+
+## Explicit beats as built (measured 2026-11-03)
+
+One row per explicit screen in the built game: 3 or more words on the build's own list, the count `gates.py` uses. A screen's variants fold into it, so a screen can hold more words than one visit shows. "Sits at" is the highest of the person's crude columns (SP2) that the screen uses. Where a screen's text differs from the prose above, the build is what plays.
+
+| screen | words | counted words | sits at | the text |
+|---|---|---|---|---|
+| `listen` | 113 | 5: fuck ×2, moans, nipples, clit | Ryan's late column; also clit, nipples | on this sheet above |
+| `act` | 145 | 9: clit ×2, moans, cock, ass, tits, thrust, nipple, moan | Ryan's middle column; also clit, nipples | on this sheet above |

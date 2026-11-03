@@ -79,20 +79,20 @@ LOCATIONS = [
          costs={"time": 10}, rules=PUBLIC_RULES,
          description=("Your street: the way out to everything. Your house is halfway down, with the landlord's porch "
                       "next door. The town starts at the corner: the park, the café, the clothes shop, "
-                      "the flats and the college gates. Every trip out walks this pavement, and every "
-                      "neighbour with a window sees what you wore to do it."),
+                      "the flats and the college gates. Every trip out walks this sidewalk, and every "
+                      "neighbor with a window sees what you wore to do it."),
          # (alignment pass 2, 2026-11-03) names only after the meetings
          variants=[
              (cond(flag("vance_met"), flag("zoe_met")),
               "Your street: the way out to everything. Your house is halfway down with Mr. Vance's porch "
               "next door. The town starts at the corner: the park, the café, the clothes shop, "
-              "Zoe's building and the college gates. Every trip out walks this pavement, and every "
-              "neighbour with a window sees what you wore to do it."),
+              "Zoe's building and the college gates. Every trip out walks this sidewalk, and every "
+              "neighbor with a window sees what you wore to do it."),
              (cond(flag("vance_met")),
               "Your street: the way out to everything. Your house is halfway down with Mr. Vance's porch "
               "next door. The town starts at the corner: the park, the café, the clothes shop, "
-              "the flats and the college gates. Every trip out walks this pavement, and every "
-              "neighbour with a window sees what you wore to do it."),
+              "the flats and the college gates. Every trip out walks this sidewalk, and every "
+              "neighbor with a window sees what you wore to do it."),
          ]),
     # ── the house ──
     dict(id="home_hall", name="Hall", entry_from="street", kind="thoroughfare",
@@ -107,9 +107,9 @@ LOCATIONS = [
                       conditions=cond(tod("22:00", "06:00")),
                       goes_to={"type": "canvas", "canvas_id": "hall_home_late"}),
              ]),
-         description=("The hall: the middle of the house, and the stairs. Every door opens off it — the kitchen, "
+         description=("The hall: the middle of the house. Every door opens off it — the kitchen, "
                       "the living room, the garage, the one bathroom, the three bedrooms, the front door. "
-                      "There's a mirror by the coats, and the stairs carry every sound up and down. Nothing "
+                      "There's a mirror by the coats, and the hall carries every sound from one end to the other. Nothing "
                       "happens in this house that the hall doesn't hear first.")),
     dict(id="home_kitchen", name="Kitchen", entry_from="home_hall", kind="destination",
          description=("The kitchen: where this family eats, argues and pays. Laura makes breakfast here before "
@@ -137,7 +137,7 @@ LOCATIONS = [
          # sleeping room. Every row that puts them in here asleep lies inside 22:00-07:00; the one
          # awake row is Laura dressing, Saturday 17:00-18:30.
          door=dict(
-             description="Laura and Mark's door, at the end of the landing.",
+             description="Laura and Mark's door, at the end of the hall.",
              no_answer="You knock. Nobody comes to the door.",
              options=[
                  dict(text="Knock.",
@@ -219,15 +219,23 @@ LOCATIONS = [
          door=dict(
              description="Ryan's door. A strip of light under it when he's home.",
              no_answer="You knock. Nothing. He's out.",
+             # LO, 2026-11-04 (Q14): shut while Kayla is over (her rows, Fri 18:00-Sat 10:00): one closed line,
+             # and neither knock shows. Her walk-in in his drawer (Fri 17:45-18:00) is before she's in.
+             variants=[(cond({"type": "npc_at_location", "location_id": "home_ryan_room", "npc_id": "npc_kayla", "operator": "is_present"}),
+                        "Kayla's here. His door is shut, and it stays shut till she goes.")],
              options=[
                  dict(text="Knock.",
                       conditions=cond({"type": "npc_at_location", "location_id": "home_ryan_room",
                                        "npc_id": "npc_ryan", "operator": "is_present"},
+                                      {"type": "npc_at_location", "location_id": "home_ryan_room",
+                                       "npc_id": "npc_kayla", "operator": "is_absent"},
                                       flag("ryan_knock_code", False)),
                       goes_to={"type": "enter"}),
                  dict(text="Two knocks.",
                       conditions=cond({"type": "npc_at_location", "location_id": "home_ryan_room",
                                        "npc_id": "npc_ryan", "operator": "is_present"},
+                                      {"type": "npc_at_location", "location_id": "home_ryan_room",
+                                       "npc_id": "npc_kayla", "operator": "is_absent"},
                                       flag("ryan_knock_code")),
                       goes_to={"type": "enter"}),
                  # DECISIONS 79 (2026-10-29): Sun-Thu nights, not Friday (Kayla). Once a night: never
@@ -318,7 +326,7 @@ LOCATIONS = [
          hours=[H(ALL, "07:00", "22:00")], closed_text="The college gates are shut.",
          description=("The women's toilets by the lecture hall: four stalls, a long mirror and a sink. A quick "
                       "wash between classes, a look at yourself, a change of clothes behind a locked stall door. "
-                      "The door to the corridor doesn't lock.")),
+                      "The door out to campus doesn't lock.")),
     dict(id="faculty_floor", name="Faculty Floor", entry_from="campus", kind="thoroughfare",
          hours=[H(WEEK, "08:00", "19:30")], closed_text="The faculty floor is locked.", rules=PUBLIC_RULES,
          description=("The faculty floor: one long corridor of office doors with name cards and office hours "
@@ -405,8 +413,8 @@ def _add(after_id, loc):
 # ── the street: the ground, no toll of its own; the minutes said once (Q65, exact words) ──
 _BY_ID["street"].pop("costs", None)
 # (alignment pass 2, 2026-11-03) no name before the meeting: the named text is a variant behind vance_met
-_set("street", description="Your street: the way out to everything. Home is halfway down, with the porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this pavement, and every neighbour with a window sees what you wore to do it.",
-     variants=[(cond(flag("vance_met")), "Your street: the way out to everything. Home is halfway down, with Mr. Vance's porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this pavement, and every neighbour with a window sees what you wore to do it.")])
+_set("street", description="Your street: the way out to everything. Home is halfway down, with the porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this sidewalk, and every neighbor with a window sees what you wore to do it.",
+     variants=[(cond(flag("vance_met")), "Your street: the way out to everything. Home is halfway down, with Mr. Vance's porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this sidewalk, and every neighbor with a window sees what you wore to do it.")])
 
 # ── Home: a building over the house rooms; the street shows "Home" and it opens in the hall ──
 _add("street", dict(
@@ -423,9 +431,9 @@ _BY_ID["home_hall"].pop("entry_from", None)          # the building's default_en
 # came_home_late from the street; Laura's catch reads only the outing flags.
 _BY_ID["home_hall"].pop("door", None)
 _set("home_hall", description=(
-    "The hall: the middle of the house, and the stairs. Every door opens off it: the kitchen, the "
+    "The hall: the middle of the house. Every door opens off it: the kitchen, the "
     "living room, the garage, the one bathroom, the three bedrooms, the front door, and the back door "
-    "to the garden. There's a mirror by the coats, and the stairs carry every sound up and down."))
+    "to the garden. There's a mirror by the coats, and the hall carries every sound from one end to the other."))
 _add("home_front_door", dict(
     id="home_garden", name="Garden", entry_from="home_hall", parent="home", kind="destination",
     description=("The garden out the back door: a square of grass, a washing line, one lounger and a "
@@ -456,7 +464,7 @@ for _r in _CAMPUS:
 _add("college_womens_toilet", dict(
     id="college_mens_toilet", name="Men's Toilet", entry_from="campus", parent="campus",
     kind="destination", hours=[H(ALL, "07:00", "22:00")], closed_text="The college gates are shut.",
-    description=("The men's toilets across the corridor from the women's: a row of urinals, two stalls "
+    description=("The men's toilets across from the women's: a row of urinals, two stalls "
                  "and a mirror nobody looks in. There's nothing to do here right now.")))   # W12 (LO 2026-11-03): DECISIONS 76's empty room says so
 _add("college_mens_toilet", dict(
     id="campus_gym", name="Gym", entry_from="campus", parent="campus", kind="destination",
@@ -479,7 +487,14 @@ _set("cafe", description="The café on the town strip: a counter, eight booths a
      variants=[(cond(flag("tom_met")), "The café on the town strip: a counter, eight booths and a back room with a staff mirror. Tom runs it. Shifts pay a small wage, but the tips go up with how you look in the uniform. Regulars, mostly men. Shifts end when the café shuts; Tom stays on to close.")])
 _set("party_house", description=(
     "A big house at the edge of town where Zoe's friends throw Saturday nights. Music inside, a garden "
-    "out back and a hot tub steaming under the stars. Zoe's friends only."))
+    "out back and a hot tub steaming under the stars. Zoe's friends only."),
+    # pass 3 G33 (the-board.md §1): below Exhibitionism 60 the tub (party_house_soak) is shut to her, and with Zoe
+    # not on her Saturday row there is nobody to sit with, so the room says it has nothing for her
+    variants=[(cond(trait("exhibitionism", "lt", 60),
+                    {"type": "npc_at_location", "location_id": "party_house", "npc_id": "npc_zoe", "operator": "is_absent"}),
+               "A big house at the edge of town where Zoe's friends throw Saturday nights. Music inside, a garden "
+               "out back and a hot tub steaming under the stars, full of people you don't know. There's nothing "
+               "to do here right now.")])
 
 # ── Zoe's Flat: a building in Town, laid out like a flat (L4, Q47) ──
 _add("clothes_shop", dict(

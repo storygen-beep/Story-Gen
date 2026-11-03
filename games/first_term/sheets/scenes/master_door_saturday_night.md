@@ -1,4 +1,6 @@
-# [READY] Scene — master_door_saturday_night
+# [REVIEW] Scene — master_door_saturday_night
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. want, next step and hook rows. the explicit beats as built, measured.
 
 > Signed by LO: LO, 2026-10-29 ("sign all", in chat).
 
@@ -7,9 +9,12 @@
 | row | answer |
 |---|---|
 | system · place | the way up (DECISIONS 78, 79) · `home_master_bedroom`, from the door |
-| where · when | the landing, their door · Sun 00:00–01:00 (Saturday night), both inside and awake (new window, DECISIONS 80) · door option "The door's ajar." in place of "Ease the door open" in that hour |
+| where · when | the hall, their door · Sun 00:00–01:00 (Saturday night), both inside and awake (new window, DECISIONS 80) · door option "The door's ajar." in place of "Ease the door open" in that hour |
 | gate | none: open at Good Girl · both present |
 | who | Mark, 46, her step-father · Laura, 41, her mother; neither sees her |
+| want | Laura's: bored under Mark, then her own hand under the sheet |
+| next step | none: a weekly look |
+| hook | Laura awake after he snores; `mark_laura_seen` is set |
 | what she wears here | not named |
 | BRAKE | once a week (its window) |
 | raises | the look: none · "Stay at the gap.": corruption add +1, cap 19 · no ladder number moves |
@@ -34,7 +39,7 @@ body like that since the wedding", `laura_03`). Nothing in 0.1 reads `saw_mark_a
 
 **`stay`** · 128 words · explicit words 6 (ass, cock, nipple, thrust, tits) · median sentence 8 · ends on her body
 
-> Through the gap you see all of it. Mark has Laura on her knees, her nightdress shoved up over her ass. His cock thrusts into her fast and hard. He grunts with every push. Her tits swing under her. Her face is turned sideways on the pillow, eyes open, bored. He gives one last grunt and rolls off her. A minute later he is snoring. Laura lies on her back, awake, the nightdress still bunched at her waist. Her hand slides down under the sheet, between her own thighs. It starts to move. Your nipples are hard and aching. You are wet. You press your thighs together and stay right there. Then a floorboard creaks under your foot. You slip back to your room, wet, nipples still hard.
+> Through the gap you see all of it. Mark has Laura on her knees, her nightdress shoved up over her ass. His cock thrusts into her fast and hard. He grunts with every push. Her tits swing under her. Her face is turned sideways on the pillow, eyes open, bored. He gives one last grunt and rolls off her. A minute later he is snoring. Laura lies on her back, awake, the nightdress still bunched at her waist. Her hand slides down under the sheet, between her own thighs. It starts to move. Your nipples are hard and aching. You are wet. You press your thighs together and stay right there. Then a floorboard creaks under your foot. You freeze at the gap, wet, nipples still hard.
 
 No history words on either screen: both repeat.
 
@@ -45,3 +50,12 @@ No history words on either screen: both repeat.
 | walking in on Mark and Laura | LO, chat, 2026-10-13, picked 2026-10-29 |
 | Sun 00:00–01:00 | today they are never awake together in the room; Laura comes up from waiting up (DECISIONS 80) |
 | Laura bored | her arc: Mark's distance (`laura_03`), her want (`npc_laura.md`) |
+
+## Explicit beats as built (measured 2026-11-03)
+
+One row per explicit screen in the built game: 3 or more words on the build's own list, the count `gates.py` uses. A screen's variants fold into it, so a screen can hold more words than one visit shows. "Sits at" is the highest of the person's crude columns (SP2) that the screen uses. Where a screen's text differs from the prose above, the build is what plays.
+
+| screen | words | counted words | sits at | the text |
+|---|---|---|---|---|
+| `gap` | 144 | 7: ass ×2, thrusts, cock, tits, thrust, nipples | Mark's middle column; also nipples | on this sheet above |
+| `stay` | 173 | 7: ass ×2, nipples ×2, cock, thrusts, tits | Mark's middle column; also nipples | on this sheet above |

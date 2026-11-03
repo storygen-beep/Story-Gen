@@ -955,10 +955,10 @@ def lint_badge_before_content(model, game):
         if card.get("terminal"):
             n_terminal += 1
             gates = [i for i in (card.get("when") or [])
-                     if i.get("trait") and i.get("op") in ("gte", "gt")
+                     if i.get("trait") and not str(i["trait"]).endswith("_step") and i.get("op") in ("gte", "gt")
                      and isinstance(i.get("value"), (int, float))]
             if not gates:
-                pass          # flag-gated or unconditional — this check has no opinion
+                pass          # flag-, `<npc>_step`- (played this, J70 LO 2026-11-03) or un-gated: no opinion
             else:
                 for g in gates:
                     top = ceiling.get((g.get("npc_id") or npc, g["trait"]))
@@ -1010,7 +1010,7 @@ def lint_badge_before_content(model, game):
     return (summary, sorted(set(findings)))
 
 
-def lint_refusal_shape(model, game):
+def lint_refusal_shape(model, game, state=None):
     """WHICH rows are shown locked, and whether the reason on them is a door or a label.
 
     `engine.md` §15 was reversed 2026-08-24 to *"set `locked_text` by default"*, and it is
@@ -1083,7 +1083,7 @@ def lint_refusal_shape(model, game):
             tgt = str(ch.get("nodeId") or "")
             inside = (ch.get("targetType") == "node" and
                       (tgt in node_ids or tgt.startswith(cid + ".")))
-            if not inside:
+            if not inside or _small_rung_choice(ch, _ascent_keys(state)):   # J75, LO 2026-11-03
                 continue
             reads = set()
             for it in ((ch.get("conditions") or {}).get("items") or []):
@@ -1833,7 +1833,7 @@ def lint_person_never_speaks(game):
                 if b.get("type") == "dialog":
                     props = b.get("props") or {}
                     spoke.add(props.get("npcId") or props.get("speaker"))
-        silent = sorted(bound - spoke)
+        silent = sorted(bound - spoke - _sleepers_on(c, bound))     # B52: a sleeper is exempt
         if silent:
             mute.append(f"{c.get('id')}: {', '.join(silent)} never speaks")
     if not scope:
@@ -2294,7 +2294,7 @@ def lint_labels_and_systems(model, game, state):
                             and (key in c["reads"] or key in _cost_traits_of(c["raw"]))})
         if not written_at:
             findings.append(f"meter `{sid}`: nothing at {', '.join(fed)} writes `{key}`")
-        if not elsewhere:
+        if not elsewhere and key not in _ascent_keys(state):  # F31: an ascent tier is fed everywhere
             findings.append(f"meter `{sid}`: `{key}` is read in no room outside {', '.join(fed)} "
                             f"— a source with no readers (SY2)")
 
@@ -11325,7 +11325,7 @@ def ship_rows(slug, root=None):
     state_path = os.path.join(root, "games", slug, "v2_state.json")
     state = json.load(open(state_path)) if os.path.exists(state_path) else None
     scored, _ = score(model, game, state, os.path.join(root, "games", slug))
-    results = {r["gate"]: r for r in scored}
+    results = {r["gate"]: r for r in _apply_decided(scored, state)}
     rp = (state or {}).get("release_page") or {}
 
     # ── the four untrue or silent screens (lints promoted for shipping) ──────
@@ -11425,7 +11425,7 @@ def ship_rows(slug, root=None):
     shown = (set(SHIP_REPORT_GATES) | set(SHIP_BLOCK_GATES)
              | {j for js in SHIP_BLOCK_JOINS.values() for j in js})
     others = [r for g, r in results.items() if g not in shown]
-    red = [g for g, r in results.items() if g not in shown and not r["na"] and not r["pass_"]]
+    red = [g for g, r in results.items() if g not in shown and r.get("status", "FAIL") == "FAIL" and not r["na"] and not r["pass_"]]
     report.append(_future_dates_row(model, game))
     report.append(_world_size_row(model, state, game))
     report += [_systems_row(state), _coverage_report_row(state), _guess_row(root, slug)]
@@ -11464,12 +11464,12 @@ def ship_rows(slug, root=None):
 
 def _block_row_verdict(gname, results):
     """(ok, headline, detail) for a BLOCK row: its gate plus any SHIP_BLOCK_JOINS gates."""
-    ok, head, detail = _block_gate_verdict(gname, results.get(gname))
+    ok, head, detail = _decided_block_verdict(gname, results.get(gname))
     for j in SHIP_BLOCK_JOINS.get(gname, ()):
         r = results.get(j)
         if r is None or r["na"]:
             continue
-        jok, jhead, jdetail = _block_gate_verdict(j, r)
+        jok, jhead, jdetail = _decided_block_verdict(j, r)
         ok = False if (ok is False or jok is False) else ok
         head = f"{head} · {jhead}"
         detail = list(detail)[:8] + list(jdetail)[:6]
@@ -11495,8 +11495,8 @@ def ship_mode(slug):
     print(f"  {'─'*72}")
     print("  BLOCK — broken, unfinishable or untrue. Any red row stops the publish.")
     for name, ok, head, detail in block:
-        tag = ("WARN" if ok == "warn" else "n/a " if ok is None else
-               ("PASS" if ok else "FAIL"))
+        tag = _ship_tag(ok, head)
+        # (DECIDED for a waived or promised `decided` row — `_ship_tag`, above main())
         print(f"  [{tag}]  {name:42s} {head}")
         for d in detail:
             print(f"          · {d}")
@@ -14144,14 +14144,21 @@ def _tr_placed(rx, sent):
     """Does the sentence place this person? The presence word comes right after the name, or
     after one adverb ("Laura's asleep", "Laura's been asleep", "Ryan's music", "Mark snores"),
     so "the dean's signature is at the bottom" and "Zoe's friends are on the couch" place
-    nobody."""
+    nobody. A voice that comes out of a phone ("Kayla's voice buzzes small from the phone")
+    is a call, not a person in the room, so it places nobody either."""
     for m in rx.finditer(sent):
         tail = sent[m.end():]
         head = re.match(r"(?:\s*'s\b)?(?:\s+%s\b)?\s*" % _TR_GAP_WORDS, tail)
         start = head.end() if head else 0
-        if _TR_PRESENCE.match(tail, start) or _TR_PRESENCE.match(tail, head.start() if head else 0):
+        hit = _TR_PRESENCE.match(tail, start) or _TR_PRESENCE.match(tail, head.start() if head else 0)
+        if hit and not (hit.group(0).lower() == "voice" and _TR_PHONE_VOICE.search(sent)):
             return True
     return False
+
+
+# The phone, a speaker or the line a voice comes out of (see `_tr_placed`).
+_TR_PHONE_VOICE = re.compile(r"\b(?:from|out of|through|over|on|down)\s+(?:the|her|his|your|my)\s+"
+                             r"(?:phone|speaker|line)\b|\bon speaker(?:phone)?\b|\bspeakerphone\b", re.I)
 
 
 def _tr_building(game, lid):
@@ -14177,7 +14184,9 @@ def _tr_building(game, lid):
 
 
 _TR_AWAY = re.compile(r"(?:'s|\bis|\bare)\s+(?:out|gone|away)\b|\b(?:out shopping|at work|not home|"
-                      r"not in|isn't (?:home|in|here)|isn't back)\b", re.I)
+                      r"not in|isn't (?:home|in|here)|isn't back)\b|"
+                      # "Kayla's at her mom's tonight": at somebody else's place is away from here
+                      r"(?:'s|\bis|\bare)\s+at (?:her|his|their) \w+(?:'s|s')(?!\w)", re.I)
 # A line that puts SOMEBODY in the building, or says nobody is in it.
 _TR_SOMEONE = re.compile(r"\b(?:some(?:one|body)(?:'s)?\s+(?:\w+\s+){0,2}(?:mutters|walks|crosses|"
                          r"moves|passes|thumps|laughs|calls|coughs|is up|on the stairs|downstairs|"
@@ -14243,14 +14252,40 @@ def _tr_anyone_unbacked(game, where, lid, slots, items_any, want_someone):
     return False, f"{_tr_slot_name(bad)}: {'nobody' if want_someone else ', '.join(sorted(busy(bad)))} in the building"
 
 
+def _tr_walkers(game):
+    """B51 (LO 2026-11-03): {walk-in canvas id: the people whose arrival it is}. A walk-in is a
+    canvas with `substitution_only`, or the target of a substitution rule. Its walker is the
+    person it is bound to (`npc` / `requires_npc` on its trigger); a walk-in bound to nobody
+    has as walkers the people who speak on it. The arrival counts as presence for the walker on
+    that canvas, so the walker may speak there whatever their row says."""
+    npcs = {n.get("id") for n in game.get("npcs") or [] if n.get("id")}
+    targets = {s.get("target_canvas_id") for c in game.get("canvases") or []
+               for s in ((c.get("trigger") or {}).get("substitutions") or []) if isinstance(s, dict)}
+    out = {}
+    for c in game.get("canvases") or []:
+        trig = c.get("trigger") or {}
+        if not (trig.get("substitution_only") or c.get("id") in targets):
+            continue
+        bound = {trig.get("npc"), trig.get("requires_npc")} & npcs
+        if not bound:
+            bound = {(b.get("props") or {}).get("npcId") for nd in c.get("nodes") or []
+                     for b in _flat_blocks(nd.get("blocks"))
+                     if (b.get("props") or {}).get("speaker") == "npc"} & npcs
+        if bound:
+            out[c.get("id")] = bound
+    return out
+
+
 def _named_person_present(game):
-    """(ok, headline, detail) for the gate `a named person is where the line says`."""
+    """(ok, headline, detail) for the gate `a named person is where the line says`.
+    A walk-in's arrival counts as presence for its walker on the walk-in canvas (B51)."""
     where = _tr_where(game)
     if not where:
         return None, "no person has schedule rows", []
     names = {n["id"]: n.get("name") for n in game.get("npcs") or [] if n.get("id")}
     aliases = _tr_aliases(game)
     calls = _tr_call_canvases(game)
+    walkers = _tr_walkers(game)
     rows, n, heard = [], 0, []
     staged = _tr_opening(game)
     units = _tr_texts(game, where)
@@ -14262,7 +14297,8 @@ def _named_person_present(game):
         # don't walk out mid-scene, and a one-time scene's person is `nobody is woken`'s job.
         # A visitor with no row here is red too: the schedule page says they are elsewhere.
         # The fix is a row (gated with `when` if the visit is), not silence.
-        if spk in where and cid not in calls and rep and lid and pinned.get(spk) is None:
+        if spk in where and cid not in calls and rep and lid and pinned.get(spk) is None \
+                and spk not in walkers.get(cid, ()):
             gone = [s for s in sorted(entry) if lid not in _tr_places(where[spk], s)]
             if gone:
                 n += 1
@@ -14277,7 +14313,7 @@ def _named_person_present(game):
         bld = _tr_building(game, lid) if lid else None
         for sent in _beat_sentences(text):
             for pid, rx in aliases.items():
-                if pid in where and pid != spk and _tr_placed(rx, sent):
+                if pid in where and pid != spk and pid not in walkers.get(cid, ()) and _tr_placed(rx, sent):
                     claims.append((pid, sent, bool(_TR_SLEEP.search(sent))))
             if lid and spk is None:
                 for rx, want in ((_TR_SOMEONE, True), (_TR_NOBODY, False)):
@@ -14389,8 +14425,26 @@ def _tr_units(game):
 _TR_KNOCK = re.compile(r"\b(?:knock|knocks|wake (?:him|her|them)|tap on)\b", re.I)
 
 
-def _tr_asleep(table, lid, s):
-    return any(p == lid and _TR_SLEEP.search(a or "") for p, a in table.get(s, ()))
+_TR_AWAKE = re.compile(r"\bawake\b", re.I)
+_TR_NIGHT_END = 360          # H63: 00:00-06:00 is the night
+
+
+def _tr_door_rooms(game):
+    """The rooms behind a door: a location with `[locations.door]` options."""
+    return {l.get("id") for l in game.get("locations") or []
+            if ((l.get("door") or {}).get("options"))}
+
+
+def _tr_sleeps(place, activity, s, doors):
+    """Does this row say asleep at slot `s`? Its words say so, or (H63, LO 2026-11-03) it is a
+    00:00-06:00 slot in a room behind a door and the row does not say "awake"."""
+    if _TR_SLEEP.search(activity or ""):
+        return True
+    return place in doors and s[1] < _TR_NIGHT_END and not _TR_AWAKE.search(activity or "")
+
+
+def _tr_asleep(table, lid, s, doors=frozenset()):
+    return any(p == lid and _tr_sleeps(p, a, s, doors) for p, a in table.get(s, ()))
 
 
 def _nobody_is_woken(game):
@@ -14402,11 +14456,13 @@ def _nobody_is_woken(game):
        screen) is not in the canvas's building at some slot it can fire in, or is asleep then
        while the scene has them awake, is red. The engine runs no presence check on that path
        (`selectAutoFireCanvasForLocation`, v2.py:5755-5774), so the window is all there is.
-    3. A repeatable surface where a person speaks while their row says asleep is red."""
+    3. A repeatable surface where a person speaks while their row says asleep is red.
+    A row says asleep by its words, or (H63) at 00:00-06:00 in a room behind a door unless it says "awake"."""
     where = _tr_where(game)
     if not where:
         return None, "no person has schedule rows", []
     names = {n["id"]: n.get("name") for n in game.get("npcs") or [] if n.get("id")}
+    doors = _tr_door_rooms(game)
     rows, n = [], 0
     for loc in game.get("locations") or []:
         for opt in ((loc.get("door") or {}).get("options") or []):
@@ -14417,7 +14473,7 @@ def _nobody_is_woken(game):
             for pid, table in where.items():
                 if pid in pinned:
                     continue
-                bad = next((s for s in sorted(slots) if _tr_asleep(table, loc["id"], s)), None)
+                bad = next((s for s in sorted(slots) if _tr_asleep(table, loc["id"], s, doors)), None)
                 n += 1
                 if bad:
                     rows.append(f"door {loc['id']} · \"{opt.get('text')}\": {names.get(pid, pid)} is asleep "
@@ -14444,7 +14500,7 @@ def _nobody_is_woken(game):
         if _rep_of(trig):
             for pid in speakers & set(where):
                 n += 1
-                bad = next((s for s in sorted(slots) if _tr_asleep(where[pid], lid, s)), None)
+                bad = next((s for s in sorted(slots) if _tr_asleep(where[pid], lid, s, doors)), None)
                 if bad and not sleepy:
                     rows.append(f"{c['id']}: {names.get(pid, pid)} speaks while asleep at {_tr_slot_name(bad)}")
             continue
@@ -14459,7 +14515,7 @@ def _nobody_is_woken(game):
                             f"{_tr_slot_name(gone)}, and nothing on this path checks")
                 continue
             bad = next((s for s in sorted(slots) if table.get(s) and
-                        all(_TR_SLEEP.search(a or "") for _, a in table.get(s, ()))), None)
+                        all(_tr_sleeps(p, a, s, doors) for p, a in table.get(s, ()))), None)
             if bad and not sleepy:
                 rows.append(f"{c['id']} (one-time): {names.get(pid, pid)} is asleep at {_tr_slot_name(bad)}")
     if not n:
@@ -14671,7 +14727,10 @@ def _named_before_met_gate(game):
 
 
 # ── a latch flag is cleared (B98, B21; sweep O) ──────────────────────────────
-_TR_ENGINE_FLAGS = {"rent_carried": "v2.py:14426-14427 sets it on a short week and nothing in the engine clears it"}
+# J74 (LO 2026-11-03): `rent_carried` is a permanent record ("she has been short at least once") the author never
+# clears, so it is no longer a latch this gate asks to clear; "short right now" is the engine's `rent_short`, which
+# a full payment clears (ENGINE_CLEARED_FLAGS). An engine-set flag that is a latch goes here, with why.
+_TR_ENGINE_FLAGS = {}
 
 
 def _latch_flag_cleared(game):
@@ -14842,15 +14901,44 @@ _TR_STRIP = re.compile(r"\byou (?:strip|undress|peel (?:it|them|everything) off|
 _TR_EXACT = ("clothing_slot", "worn_type", "clothing_item", "wardrobe", "wardrobe_removed")
 
 
+def _clothes_named_after(game, c, nid, garments):
+    """B53: where a later screen (a node reached from `nid` inside canvas `c`) or an exit of the
+    canvas (a choice that leaves it) names her clothes again — "screen <id>", "exit \"<text>\"" —
+    or None. Her clothes are the catalog's garment words after "your" (`_her_garments`), her
+    underwear words, or "your clothes"."""
+    def names(text):
+        return bool(garments(text, None) or _TR_UNDER.search(text) or re.search(r"\byour clothes\b", text, re.I))
+    nodes = {nd.get("id"): nd for nd in c.get("nodes") or [] if nd.get("id")}
+    seen, todo = {nid}, [nid]
+    while todo:
+        cur = nodes.get(todo.pop()) or {}
+        for ch in _tr_choices(cur):
+            tgt = str(ch.get("nodeId") or "").split(".")[-1]
+            if ch.get("targetType") == "node" and tgt in nodes:
+                if tgt not in seen:
+                    seen.add(tgt)
+                    todo.append(tgt)
+            elif names(str(ch.get("text") or "")):
+                return f"exit \"{ch.get('text')}\""
+    for later in sorted(seen - {nid}):
+        text = " ".join(str(b.get("content") or "") for b in _flat_blocks(nodes[later].get("blocks")))
+        if names(text):
+            return f"screen {later}"
+    return None
+
+
 def _clothes_named_exactly(game):
     """(ok, headline, detail) for the gate `her clothes are named exactly`.
     `worn_exposure` 1 or 2 is a level, not a garment: 1 is the towel, the sleep shirt and
     underwear alike, and 2 is either half bare (the larger of the two halves). A line naming
     her underwear or saying she is naked needs a slot, type or item check. A "you strip" line
-    needs a wardrobe effect on the screen it is on or the choice into it."""
+    inside an act needs a wardrobe effect on the screen it is on or the choice into it only when
+    a later screen or an exit of that canvas names her clothes again; elsewhere the act backs it
+    (B53, LO 2026-11-03)."""
     if not game.get("clothing"):
         return None, "no [[clothing]] catalog", []
     rows, n = [], 0
+    garments = _her_garments(game)
     into = collections.defaultdict(list)
     for c in game.get("canvases") or []:
         for nd in c.get("nodes") or []:
@@ -14872,9 +14960,10 @@ def _clothes_named_exactly(game):
                 n += 1
                 nd = next((x for x in c.get("nodes") or [] if x.get("id") == nid), {})
                 wfx = any(ch.get("wardrobeEffects") for ch in _tr_choices(nd) + into[(c.get("id"), nid)])
-                if not wfx:
-                    rows.append(f"{c['id']} · {nid}: she strips and no garment comes off — "
-                                f"\"{sent.strip()[:110]}\"")
+                again = None if wfx else _clothes_named_after(game, c, nid, garments)
+                if not wfx and again:
+                    rows.append(f"{c['id']} · {nid}: she strips and no garment comes off, and {again} "
+                                f"names her clothes again — \"{sent.strip()[:110]}\"")
     if not n:
         return None, "no line names her underwear or a strip", []
     return not rows, (f"{len(rows)} line(s) say more about her clothes than the check behind them"
@@ -15092,10 +15181,15 @@ _TR_DAY_RX = re.compile(r"\b(?:it's|today's|today is|on a|this|every) (monday|tu
                         r"(?:morning|night|evening|afternoon) again\b", re.I)
 
 
+# H65 (LO 2026-11-03): a forward word names a time ahead, not now, so the gate skips it:
+# "in the morning", "by morning", "tomorrow ..." ("tomorrow morning", "tomorrow evening").
+_TR_FORWARD = re.compile(r"(?:\bin the|\bby|\btomorrow)\s+$")
+
+
 def _day_word_fits(game):
     """(ok, headline, detail) for the gate `a day word fits its window`. "Tonight", "this
     morning", "it's Friday" are true only at some slots; a line carrying one must not render
-    outside them."""
+    outside them. A forward word ("in the morning", "by morning", "tomorrow morning") is skipped."""
     where = _tr_where(game)
     rows, n = [], 0
     days = {d.lower(): i for i, d in enumerate(_LOC_DAY_NAMES)}
@@ -15104,7 +15198,9 @@ def _day_word_fits(game):
             continue
         low = text.lower()
         for word, (a, b) in _TR_PARTS.items():
-            if re.search(r"(?<![\w])%s" % re.escape(word), low):
+            hits = [m for m in re.finditer(r"(?<![\w])%s" % re.escape(word), low)
+                    if not _TR_FORWARD.search(low[:m.start()])]
+            if hits:
                 n += 1
                 bad = next((s for s in sorted(slots) if not _tr_in_window(s[1], f"{a // 60:02d}:{a % 60:02d}",
                                                                            f"{b // 60:02d}:{b % 60:02d}")), None)
@@ -15190,8 +15286,8 @@ def _truth_gates(gate, _N, model, game, state):
     gate("one pool, one place", *_truth_run("one pool, one place", game, state))
     gate("the phone owns posting", *_truth_run("the phone owns posting", game, state))
     gate("a day word fits its window", *_truth_run("a day word fits its window", game, state))
-    # LO 2026-11-03, "Any of these that can come back gets a gate." Scored, never --ship blocks;
-    # each is defined above main().
+    _group2_gates(gate, _N, model, game, state)      # LO 2026-11-03 group 2; scored, never --ship
+    # LO 2026-11-03, "Any of these that can come back gets a gate." Scored; above main().
     gate("a no never raises his Want", *_no_never_raises_want(game))
     gate("a booking can clear", *_booking_can_clear(game))
     gate("a closed activity says when it opens", *_closed_activity_says_when(game))
@@ -15504,6 +15600,8 @@ def _stage_way_up(game, state):
             if places is not None:
                 detail.append(f"    the card says “{g['label']}” — what pays at {floor}: "
                               f"{', '.join(places) if places else 'nothing'}")
+    card_rows = _card_places_pay(game, state, paying_places)   # G15 (group 2, above main())
+    detail = card_rows + detail
     if not checked:
         return None, "no stage sits below a gate", detail, 0
     detail.append("(the-arc.md A4d — only her choice pays, and every stage below the highest gate "
@@ -15511,7 +15609,9 @@ def _stage_way_up(game, state):
                   "further, +1 and capped at the stage's top; a drink's boost is not a way up)")
     head = (f"{len(walls)} of {checked} stage(s) have no repeatable act that pays sober: " + "; ".join(walls)
             if walls else f"all {checked} stage(s) below a gate have a repeatable act that pays sober")
-    return (not walls), head, detail, checked
+    if card_rows:
+        head += f" · {len(card_rows)} card line(s) name a place that pays nothing at that stage"
+    return (not walls and not card_rows), head, detail, checked
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -15531,11 +15631,21 @@ def _performance_meter_keys(state):
             and (m.get("key") or m.get("id"))}
 
 
+def _spent_meter_keys(state):
+    """Keys of `board.meters[]` entries declared `"spent": true` (E22, LO 2026-11-03): money and
+    other currencies. She spends them on purpose, so a read below a price is a price, not a
+    descent."""
+    board = (state or {}).get("board") or {}
+    return {str(m.get("key") or m.get("id")) for m in _meters_of_board(board)
+            if m.get("spent") is True and (m.get("key") or m.get("id"))}
+
+
 def _descent_exempt_keys(state):
     """Player meters that may close more than they open: declared needs (C5 b, the-meters.md
-    M8: a need is meant to shut something while it is empty) and performance meters (S7)."""
+    M8: a need is meant to shut something while it is empty), performance meters (S7) and
+    spent meters (`"spent": true`, E22)."""
     return {str(n.get("key")) for n in _declared_needs(state) if n.get("key")} \
-        | _performance_meter_keys(state)
+        | _performance_meter_keys(state) | _spent_meter_keys(state)
 
 
 # C7 c + S11 a: only money paid for the act on that screen is sex for pay. A system card in
@@ -15627,6 +15737,10 @@ def _trigger_metadata_keys(game, trigger_fields):
             continue
         where = f" @{t['location']}" if t.get("location") else ""
         for k in sorted(meta):
+            # `kind = "event"` is the skill's own marker (the-clock.md C5, LO 2026-11-03): the importer
+            # drops it on purpose and the gates read it, so it is not a lost key.
+            if k == "kind" and meta[k] == "event":
+                continue
             home = ("a [canvases.trigger] field — move it up one level"
                     + (", where this canvas already sets it (the metadata copy is dead)"
                        if k in t else "")) if k in trigger_fields \
@@ -15929,10 +16043,16 @@ def _closed_activity_says_when(game):
     """(ok, headline, detail) for `a closed activity says when it opens`: a repeatable canvas
     with `trigger.schedules` and no `npc` / `requires_npc` (a solo activity) sets
     `show_when_blocked = true` and a non-empty `cooldown_message` at the top level of
-    [canvases.trigger]. A random event (`trigger_mode = "random"`) has no button to dim."""
+    [canvases.trigger]. A random event (`trigger_mode = "random"`) has no button to dim. An event that
+    happens to her (`[canvases.trigger.metadata] kind = "event"`) is skipped, and fails if it shows its hours."""
     rows, n = [], 0
     for c in game.get("canvases") or []:
         t = c.get("trigger") or {}
+        if (t.get("metadata") or {}).get("kind") == "event":   # happens to her: never lists its hours (C5)
+            if t.get("show_when_blocked") is True:
+                rows.append(f"{c.get('id')} @{t.get('location')}: an event that happens to her lists its hours "
+                            f"when shut — hours go only on an activity she chooses; drop show_when_blocked")
+            continue
         if _is_dev(c) or not t.get("schedules") or not _rep_of(t) or t.get("npc") \
                 or t.get("requires_npc") or t.get("trigger_mode") == "random":
             continue
@@ -15948,6 +16068,8 @@ def _closed_activity_says_when(game):
                 if "show_when_blocked" in meta or "cooldown_message" in meta else ""
             rows.append(f"{c.get('id')} @{t.get('location')}: no {' and no '.join(miss)} at the top of "
                         f"[canvases.trigger]{dead} — the button vanishes when it closes")
+    extra, n_windowed = _closed_activity_hours(game)    # H64 · H31 (group 2, above main())
+    rows, n = rows + extra, n + n_windowed
     if not n:
         return None, "no solo activity has schedules", []
     return not rows, (f"{len(rows)} closed activit(ies) vanish without their hours" if rows else
@@ -16245,6 +16367,1761 @@ def _speech_split_with_company(game):
     return narr, spoken, solo
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# GROUP 2 CHECKS (LO, 2026-11-03: fix the game-logic slips "with a check for each kind that
+# can come back"; "No new rules and no new content until it's done"). Every check below
+# enforces a rule the skill already states; the rule is cited on each one. They register
+# from one line in `_truth_gates` (`_group2_gates`), and the lints print from one line in
+# main() (`_group2_lints`). All of it sits here, above main(), so the docs' `gates.py:NNN`
+# cites stay put (memory: gates-py-citation-safe-edits).
+# The ids are the third alignment pass's rows (first_term_alignment_pass3_20261103.md).
+# ─────────────────────────────────────────────────────────────────────────────
+
+def _g2_canvases(game):
+    return [c for c in game.get("canvases") or [] if isinstance(c, dict) and not _is_dev(c)]
+
+
+def _g2_tiers(game, state):
+    """The declared climb: `board.ascent_tiers` that have stages, or []."""
+    board = (state or {}).get("board") or {}
+    return [t for t in (board.get("ascent_tiers") or []) if isinstance(t, str) and _stage_bounds(game, t)]
+
+
+def _g2_key(ef):
+    return ef.get("trait") or ef.get("trait_key")
+
+
+def _g2_player_adds(choice, sign=1):
+    """{trait: amount} for every `add` on the player in this choice whose sign is `sign`."""
+    out = {}
+    for ef in choice.get("effects") or []:
+        if not isinstance(ef, dict) or ef.get("targetType", "player") != "player":
+            continue
+        if (ef.get("op") or "add") == "add" and _effect_value_sign(ef.get("value")) == sign and _g2_key(ef):
+            v = ef.get("value")
+            amt = float(v) if isinstance(v, (int, float)) else float((v or {}).get("max", 1))
+            out[_g2_key(ef)] = out.get(_g2_key(ef), 0.0) + amt
+    return out
+
+
+def _g2_entry_nodes(game):
+    """{canvas id: node ids a visit can start at} — the first node, plus any node another
+    canvas's choice routes into (`nodeId = "<canvas>.<node>"`)."""
+    out = collections.defaultdict(set)
+    for c in _g2_canvases(game):
+        nodes = c.get("nodes") or []
+        if nodes:
+            out[c.get("id")].add(nodes[0].get("id"))
+    for c in _g2_canvases(game):
+        for n in c.get("nodes") or []:
+            for ch in _node_choices(n):
+                tgt = str(ch.get("nodeId") or "")
+                if "." in tgt:
+                    cid, nid = tgt.split(".", 1)
+                    if cid != c.get("id"):
+                        out[cid].add(nid)
+    return out
+
+
+def _g2_inside(c, ch):
+    """The node id this choice moves to inside its own canvas, or None when it ends the visit."""
+    if (ch.get("targetType") or "node") != "node":
+        return None
+    tgt = str(ch.get("nodeId") or "")
+    if tgt.startswith(f"{c.get('id')}."):
+        tgt = tgt.split(".", 1)[1]
+    if not tgt or "." in tgt:
+        return None
+    return tgt
+
+
+def _g2_visits(c, starts, limit=4000):
+    """Every simple path of choices through one visit of canvas `c`, from a start node to a
+    choice that leaves it. A node is never entered twice on one path, so an act-menu loop
+    (menu, act, back to the menu) is two visits of the menu, not one long chain."""
+    nodes = {n.get("id"): n for n in c.get("nodes") or []}
+    out, stack = [], [(s, (), frozenset([s])) for s in sorted(starts) if s in nodes]
+    while stack and len(out) < limit:
+        nid, path, seen = stack.pop()
+        chs = _node_choices(nodes[nid])
+        if not chs:
+            out.append(path)
+        for ch in chs:
+            nxt = _g2_inside(c, ch)
+            if nxt is None or nxt not in nodes:
+                out.append(path + ((nid, ch),))
+            elif nxt not in seen:
+                stack.append((nxt, path + ((nid, ch),), seen | {nxt}))
+    return out
+
+
+# ── G75 · a visit pays a meter once (the-arc.md A4d: +1 for an everyday act) ────────────────
+def _visit_pays_once(game, state):
+    tiers = _g2_tiers(game, state)
+    if not tiers:
+        return None, "no declared ascent tier with stages (board.ascent_tiers)", []
+    entries = _g2_entry_nodes(game)
+    rows, n = [], 0
+    for c in _g2_canvases(game):
+        if not _rep_of(c.get("trigger")):
+            continue
+        n += 1
+        hit = None
+        for path in _g2_visits(c, entries.get(c.get("id"), ())):
+            for t in tiers:
+                paid = [(ch.get("text"), amt) for _nid, ch in path
+                        for k, amt in _g2_player_adds(ch).items() if k == t]
+                if len(paid) > 1:
+                    hit = (t, paid)
+                    break
+            if hit:
+                break
+        if hit:
+            t, paid = hit
+            rows.append(f"{c.get('id')}: one visit pays {t} {len(paid)} times — "
+                        + ", then ".join(f"\"{str(x)[:40]}\" +{a:g}" for x, a in paid[:3])
+                        + " — pay the act once, on the button into it or on the act's way out")
+    if not n:
+        return None, "no repeatable canvas", []
+    return not rows, (f"{len(rows)} repeatable canvas(es) pay a meter twice in one visit" if rows else
+                      f"{n}/{n} repeatable canvases pay each meter at most once a visit"), rows
+
+
+# ── G74 · an act pays on every way out (the-arc.md A4d · the-heat-ladder.md H5) ─────────────
+def _g2_items_key(ch):
+    return {json.dumps(it, sort_keys=True) for it in _conditions_of(ch)}
+
+
+def _g2_goes_on(c, ch):
+    """Does this choice move on to another screen — a node here, or a node in another canvas
+    ("hub_mark_garage.hl_laundry_tease")? Either way the visit goes further, so the screen that
+    offers it is a decision screen, not the screen after the act."""
+    return bool(_g2_inside(c, ch)) or ((ch.get("targetType") or "node") == "node"
+                                       and "." in str(ch.get("nodeId") or ""))
+
+
+def _act_pays_every_way_out(model, game, state):
+    tiers = _g2_tiers(game, state)
+    if not tiers:
+        return None, "no declared ascent tier with stages (board.ascent_tiers)", []
+    explicit = collections.defaultdict(int)
+    for cm in model:
+        for b in cm["beats"]:
+            explicit[(cm["id"], b.node)] = max(explicit[(cm["id"], b.node)], b.explicit)
+    entries = _g2_entry_nodes(game)
+    rows, n = [], 0
+    for c in _g2_canvases(game):
+        if not _rep_of(c.get("trigger")):
+            continue
+        cid = c.get("id")
+        for node in c.get("nodes") or []:
+            nid = node.get("id")
+            chs = _node_choices(node)
+            if nid in entries.get(cid, ()) or len(chs) < 2 or any(_g2_goes_on(c, ch) for ch in chs):
+                continue                      # a decision screen, not the screen after the act
+            for t in tiers:
+                paying = [ch for ch in chs if _g2_player_adds(ch).get(t)]
+                if not paying:
+                    continue
+                n += 1
+                for u in chs:
+                    if u in paying or u.get("final") is True:
+                        continue
+                    if not (explicit[(cid, nid)] >= 3 or not _is_a_no(u)):
+                        continue
+                    if any(_g2_items_key(u) <= _g2_items_key(p) for p in paying):
+                        rows.append(f"{cid}#{nid}: after the act \"{str(paying[0].get('text'))[:40]}\" pays "
+                                    f"{t} +{_g2_player_adds(paying[0])[t]:g} and \"{str(u.get('text'))[:40]}\" "
+                                    f"pays 0, and both show together — move the pay and the day brake onto "
+                                    f"the button into the act")
+                        break
+    if not n:
+        return None, "no act screen pays a declared meter on its way out", []
+    return not rows, (f"{len(rows)} act screen(s) pay by which exit she clicks" if rows else
+                      f"{n}/{n} act screens pay the same on every way out"), rows
+
+
+# ── G8 · G13 · an act pays inside its own stage (the-arc.md A4 · A4d) ───────────────────────
+def _g2_setter_floor(holders, t, need, tiers, memo=None, seen=frozenset()):
+    """The lowest `t` at which something can set what `need` waits on. An act gated on a ladder
+    step (`ryan_step` eq 8) or a flag opens no lower than the exits that set that step or flag:
+    ryan_two_knocks needs ryan_step 8, the only exit that sets 8 needs corruption 60, so the act
+    opens at 60, not at 0. Followed back through the setters' own waits (ryan_step 6 is set at
+    corruption 0, but only after step 5, which waits on step 4 at corruption 40). 0 when
+    nothing sets it."""
+    memo = {} if memo is None else memo
+    waits = [("trait", k, "gte", v) for k, v in need[0].items() if k != t and k not in tiers]
+    waits += [o for o in need[3] if (o[0] == "trait" and o[2] == "eq") or (o[0] == "flag" and o[2] == "is_true")]
+    best = 0.0
+    for w in waits:
+        if w in seen:
+            continue
+        if (t, w) not in memo:
+            kind, key, op, v = w
+            lows = []
+            for h in holders:
+                if kind == "flag":
+                    hit = any(isinstance(fe, dict) and fe.get("flag") == key and (fe.get("op") or "set") == "set"
+                              for fe in h["holder"].get("flagEffects") or [])
+                else:
+                    hit = any(isinstance(ef, dict) and ef.get("op") == "set"
+                              and ef.get("targetType", "player") == "player"
+                              and (ef.get("trait") or ef.get("trait_key")) == key
+                              and isinstance(ef.get("value"), (int, float))
+                              and (ef["value"] == v if op == "eq" else ef["value"] >= v)
+                              for ef in h["holder"].get("effects") or [])
+                if hit:
+                    lows.append(min((max(n[0].get(t, 0.0),
+                                         _g2_setter_floor(holders, t, n, tiers, memo, seen | {w}))
+                                     for n in h["needs"]), default=0.0))
+            memo[(t, w)] = min(lows) if lows else 0.0
+        best = max(best, memo[(t, w)])
+    return best
+
+
+def _act_pays_inside_its_stage(game, state):
+    tiers = _g2_tiers(game, state)
+    if not tiers:
+        return None, "no declared ascent tier with stages (board.ascent_tiers)", []
+    holders = _wu_holders(game)
+    rows, n, seen, memo = [], 0, set(), {}
+    for t in tiers:
+        floors = [f for f, _nm in _stage_bounds(game, t)]
+        for h, amt, cap in _her_raises(holders, t):
+            if not h["repeatable"] or not h["needs"]:
+                continue
+            floor = min(max(need[0].get(t, 0.0), _g2_setter_floor(holders, t, need, tiers, memo))
+                        for need in h["needs"])
+            above = [f for f in floors if f > floor]
+            if not above:
+                continue                      # the top stage: nothing above it to cross into
+            top = min(above) - 1
+            n += 1
+            reach = float(cap) if isinstance(cap, (int, float)) and not isinstance(cap, bool) else math.inf
+            belows = [need[1].get(t) for need in h["needs"]]
+            if all(b is not None for b in belows):
+                reach = min(reach, max(belows) - 1 + amt)
+            if reach > top:
+                key = (h["canvas"], str(h["holder"].get("text")), t)
+                if key in seen:
+                    continue
+                seen.add(key)
+                capt = "no cap" if reach == math.inf else f"cap {cap:g}" if isinstance(cap, (int, float)) else f"reaches {reach:g}"
+                rows.append(f"{h['canvas']}: \"{str(h['holder'].get('text'))[:40]}\" opens at {t} {floor:g} "
+                            f"and pays +{amt:g} with {capt}, past its stage's top {top:g} — cap it at {top:g}")
+    if not n:
+        return None, "no repeatable act pays a declared meter below its top stage", []
+    return not rows, (f"{len(rows)} repeatable act(s) pay past the top of the stage they open in" if rows else
+                      f"{n}/{n} repeatable acts are capped inside their stage"), rows
+
+
+# ── A48 · an act pays the meter it uses (the-heat-ladder.md "Two meters, one act") ──────────
+def _act_pays_its_meter(game, state):
+    tiers = _g2_tiers(game, state)
+    if len(tiers) < 2:
+        return None, "fewer than two declared ascent tiers", []
+    rows, n, seen = [], 0, set()
+    for h in _wu_holders(game):
+        paid = {t for t in tiers if _g2_player_adds(h["holder"]).get(t)}
+        if not paid or not h["needs"]:
+            continue
+        uses = [{t for t in tiers if need[0].get(t, 0) > 0} for need in h["needs"]]
+        if not all(uses):
+            continue
+        n += 1
+        if all(not (u & paid) for u in uses):
+            key = (h["canvas"], str(h["holder"].get("text")))
+            if key not in seen:
+                seen.add(key)
+                rows.append(f"{h['canvas']}: \"{str(h['holder'].get('text'))[:40]}\" needs "
+                            f"{'/'.join(sorted(uses[0]))} and pays only {'/'.join(sorted(paid))} — "
+                            f"pay the meter the act uses, or gate it on both")
+    if not n:
+        return None, "no gated act pays a declared meter", []
+    return not rows, (f"{len(rows)} act(s) gated on one meter pay another" if rows else
+                      f"{n}/{n} gated acts pay the meter they use"), rows
+
+
+# ── E95 · a need falls where it says (the-meters.md M8 · M10) ──────────────────────────────
+_G2_STOP = {"faster", "after", "little", "every", "spent", "decayed", "through", "take", "takes", "taken",
+            "costs", "cost", "lower", "heavy", "starts", "start", "more", "slowly", "also", "only", "with",
+            "from", "when", "each", "them", "then", "that", "this", "they", "into", "onto", "night",
+            "nights", "scene", "scenes", "nothing", "some", "week", "day", "days", "daily", "tick",
+            "overnight", "trait_decay", "player", "running", "lower", "while", "both", "monday", "tuesday",
+            "wednesday", "thursday", "friday", "saturday", "sunday"}
+_G2_DECAY = re.compile(r"trait_decay|every night|each night|nightly|per day|a day\b", re.I)
+
+
+def _g2_stem(w):
+    w = w.lower()
+    if w.endswith("ies"):
+        return w[:-3] + "y"
+    if w.endswith("es") and w[:-2].endswith(("ss", "sh", "ch", "x")):
+        return w[:-2]
+    if w.endswith("s") and not w.endswith("ss"):
+        return w[:-1]
+    return w
+
+
+def _g2_explicit_canvases(model):
+    return {cm["id"] for cm in model if any(b.explicit >= 3 for b in cm["beats"])}
+
+
+def _g2_class(game, model, state, word):
+    """Canvas ids a word in a need's text names: `sex` names the explicit canvases; any other
+    word names the canvases whose id, place or system card carries its stem. None = no match."""
+    if word in ("sex", "explicit"):
+        return _g2_explicit_canvases(model) or None
+    stem = _g2_stem(word)
+    if len(stem) < 4 or stem in _G2_STOP:
+        return None
+    def has(s):                               # a whole word of an id or a name, never a substring
+        return stem in {_g2_stem(w) for w in re.split(r"[^a-z]+", str(s or "").lower()) if w}
+    places = {l.get("id") for l in game.get("locations") or [] if has(l.get("id")) or has(l.get("name"))}
+    for s in ((state or {}).get("board") or {}).get("systems") or []:
+        if isinstance(s, dict) and (has(s.get("id")) or has(s.get("name"))):
+            p = s.get("place")
+            places |= set(p if isinstance(p, list) else [p] if p else [])
+    out = {c.get("id") for c in _g2_canvases(game)
+           if has(c.get("id")) or (c.get("trigger") or {}).get("location") in places}
+    return out or None
+
+
+def _g2_lowers(c, key):
+    """Does canvas `c` take `key` down — a negative add anywhere, or a `costs` row on it?"""
+    for _p, d in _walk_paths(c):
+        for ef in d.get("effects") or [] if isinstance(d.get("effects"), list) else []:
+            if isinstance(ef, dict) and _g2_key(ef) == key and ef.get("targetType", "player") == "player" \
+                    and (ef.get("op") or "add") == "add" and _effect_value_sign(ef.get("value")) < 0:
+                return True
+        costs = d.get("costs")
+        for co in costs if isinstance(costs, list) else []:
+            if isinstance(co, dict) and (co.get("trait") or co.get("trait_key")) == key:
+                return True
+    return False
+
+
+def _need_falls_where_it_says(model, game, state):
+    needs = [x for x in (((state or {}).get("board") or {}).get("needs") or [])
+             if isinstance(x, dict) and x.get("key")]
+    if not needs:
+        return None, "no declared need (board.needs)", []
+    by_id = {c.get("id"): c for c in _g2_canvases(game)}
+    decay = ((game.get("player") or {}).get("trait_decay")) or {}
+    rows, n = [], 0
+    for need in needs:
+        key = need["key"]
+        for clause in re.split(r";", str(need.get("falls") or "")):
+            clause = clause.strip()
+            if not clause or re.match(r"(?i)not\b", clause):
+                continue
+            if _G2_DECAY.search(clause):
+                n += 1
+                if key not in decay:
+                    rows.append(f"{key}: `falls` says \"{clause[:50]}\", and [player.trait_decay] has no {key}")
+                continue
+            body = clause.split(":", 1)[1] if ":" in clause else clause
+            for word in sorted(set(re.findall(r"[a-z_]+", body.lower()))):
+                cls = _g2_class(game, model, state, word)
+                if not cls:
+                    continue
+                n += 1
+                down = sum(1 for cid in cls if cid in by_id and _g2_lowers(by_id[cid], key))
+                # A named place or scene kind needs one canvas that takes it down; "sex" is a claim
+                # about sex scenes as a kind, so most of them (a shift that is explicit is not one).
+                if (2 * down < len(cls)) if word in ("sex", "explicit") else not down:
+                    rows.append(f"{key}: `falls` names {word}, and {down} of its {len(cls)} canvas(es) "
+                                f"({', '.join(sorted(cls)[:3])}…) take {key} down — write the fall or "
+                                f"correct the ledger")
+        for clause in re.split(r";", str(need.get("costs") or "")):
+            if ":" not in clause:
+                continue
+            where, what = (s.strip().lower() for s in clause.split(":", 1))
+            price = next((w for w in re.findall(r"[a-z_]+", what)
+                          if w in ((game.get("player") or {}).get("core_traits") or {})), None)
+            if not price:
+                continue
+            fill = {cid for w in re.findall(r"[a-z_]+", where) for cid in (_g2_class(game, model, state, w) or ())}
+            fill = {cid for cid in fill if cid in by_id and _g2_lowers_raise(by_id[cid], key)}
+            if not fill:
+                continue
+            n += 1
+            if not any(_g2_lowers(by_id[cid], price) for cid in fill):
+                rows.append(f"{key}: `costs` says \"{clause.strip()[:50]}\", and none of "
+                            f"{', '.join(sorted(fill)[:3])} charges {price}")
+    if not n:
+        return None, "no need's falls/costs names a place, a kind of scene or the nightly decay", []
+    return not rows, (f"{len(rows)} claim(s) in board.needs are not true in the build" if rows else
+                      f"{n}/{n} claims in board.needs are true in the build"), rows
+
+
+def _g2_lowers_raise(c, key):
+    """Does canvas `c` raise `key` (a positive add on the player)?"""
+    for _p, d in _walk_paths(c):
+        for ef in d.get("effects") or [] if isinstance(d.get("effects"), list) else []:
+            if isinstance(ef, dict) and _g2_key(ef) == key and ef.get("targetType", "player") == "player" \
+                    and (ef.get("op") or "add") == "add" and _effect_value_sign(ef.get("value")) > 0:
+                return True
+    return False
+
+
+# ── J5 · J73 · a deduction is gated or priced (engine.md §21, the deduction note) ───────────
+# An omitted `clamp` on a choice effect is emitted unclamped (`eff.get('clamp', False)`,
+# v2.py:16736), so an ungated deduction can carry a meter below 0.
+def _deduction_is_gated(game):
+    core = set(((game.get("player") or {}).get("core_traits")) or {})
+    # A meter some condition reads below 0 (first_term's cafe_name: Tom 3 needs lte -5) is meant to go
+    # negative; a clamp would floor it at 0 and lock that step. Its deductions are left alone.
+    import json as _json
+    _blob = _json.dumps(game)
+    below_zero = {k for k in core if re.search(r'"trait_key": "%s", "operator": "(?:lt|lte|eq)", "value": -' % re.escape(k), _blob)}
+    core -= below_zero
+    rows, n = [], 0
+    sober = set(_wu_modifier_offsets(game))
+
+    def priced(obj, key):
+        return any(isinstance(co, dict) and (co.get("trait") or co.get("trait_key")) == key
+                   for co in obj.get("costs") or [] if isinstance(obj.get("costs"), list))
+
+    def judge(where, holder, needs, trig):
+        nonlocal n
+        for ef in holder.get("effects") or []:
+            if not isinstance(ef, dict) or ef.get("targetType", "player") != "player":
+                continue
+            key = _g2_key(ef)
+            if key not in core or (ef.get("op") or "add") != "add" or _effect_value_sign(ef.get("value")) >= 0:
+                continue
+            n += 1
+            if ef.get("clamp") is True or priced(holder, key) or priced(trig or {}, key):
+                continue
+            if needs and all(key in need[0] or key in need[1] or any(o[1] == key for o in need[3])
+                             for need in needs):
+                continue
+            rows.append(f"{where}: \"{str(holder.get('text') or 'on_ignore')[:40]}\" takes {key} "
+                        f"{ef.get('value')} with no condition on {key}, no `costs` and no clamp — "
+                        f"gate it on {key}, price it with `costs`, or add `clamp = true`")
+
+    by_id = {x.get("id"): x for x in _g2_canvases(game)}
+    for h in _wu_holders(game):
+        judge(h["canvas"], h["holder"], h["needs"], (by_id.get(h["canvas"]) or {}).get("trigger"))
+    rows = list(dict.fromkeys(rows))          # one row per button, however many ways reach it
+    for key, lst in (game.get("phone") or {}).items():
+        for d in lst if isinstance(lst, list) else []:
+            if not isinstance(d, dict):
+                continue
+            base = [_wu_needs(d.get("trigger") or {}, sober)]
+            for _p, h in _walk_paths(d.get("blocks") or []):
+                if isinstance(h.get("effects"), list) and "text" in h:
+                    judge(f"phone {d.get('id')}", h, base, None)
+            if isinstance(d.get("on_ignore"), dict):
+                judge(f"phone {d.get('id')}", d["on_ignore"], base, None)
+    if not n:
+        return None, "no authored deduction on a player trait", []
+    return not rows, (f"{len(rows)} deduction(s) can carry a meter below 0" if rows else
+                      f"{n}/{n} deductions are gated, priced or clamped"), rows
+
+
+# ── H64 · H31 · a closed activity says when it opens: the time-window half (the-clock.md C5) ─
+_G2_WHEN = re.compile(r"\d|\b(?:noon|midnight|morning|mornings|afternoon|evening|evenings|night|nights|"
+                      r"weekday|weekdays|weekend|weekends|daily|every day|mon|tue|tues|wed|thu|thur|thurs|fri|"
+                      r"sat|sun|monday|tuesday|wednesday|thursday|friday|saturday|sunday|mondays|tuesdays|"
+                      r"wednesdays|thursdays|fridays|saturdays|sundays)\b", re.I)
+
+
+def _closed_activity_hours(game):
+    """Rows for the two halves `_closed_activity_says_when` does not read: a solo activity
+    windowed by `time_of_day` / `weekday` conditions (not `trigger.schedules`) that sets no
+    hours, and a `cooldown_message` that names no hour or day ("Not now.")."""
+    rows, n = [], 0
+    for c in _g2_canvases(game):
+        t = c.get("trigger") or {}
+        if (t.get("metadata") or {}).get("kind") == "event" or not _rep_of(t) or t.get("npc") \
+                or t.get("requires_npc") or t.get("trigger_mode") == "random" or t.get("substitution_only"):
+            continue
+        items = list(_conditions_of(t))
+        if any(it.get("type") == "npc_at_location" and it.get("operator") == "is_present"
+               and it.get("location_id") == t.get("location") for it in items):
+            continue                          # bound to a person in the room: not a solo activity
+        windowed = any(it.get("type") in ("time_of_day", "weekday") for it in items)
+        if not (t.get("schedules") or windowed):
+            continue
+        n += 0 if t.get("schedules") else 1     # a scheduled one is already counted by the gate
+        msg = str(t.get("cooldown_message") or "").strip()
+        if not t.get("schedules") and (t.get("show_when_blocked") is not True or not msg):
+            rows.append(f"{c.get('id')} @{t.get('location')}: windowed by time_of_day/weekday conditions with "
+                        f"no show_when_blocked and cooldown_message — the button vanishes when it closes; "
+                        f"give it its hours, or mark it `[canvases.trigger.metadata] kind = \"event\"`")
+        elif msg and t.get("show_when_blocked") is True and not _G2_WHEN.search(msg):
+            rows.append(f"{c.get('id')} @{t.get('location')}: cooldown_message \"{msg[:40]}\" names no hour "
+                        f"or day — write the hours as a bare phrase (\"Weekdays, 8 AM-7 PM\")")
+    return rows, n
+
+
+# ── J37 · a goal names the rung below (engine.md §47, "Check the label is not circular") ───
+def _g2_norm(s):
+    import unicodedata                        # local: a top-level import would move every cited line
+    plain = unicodedata.normalize("NFKD", str(s or "")).encode("ascii", "ignore").decode()   # café -> cafe
+    return " ".join(re.findall(r"[a-z0-9']+", plain.lower().replace("’", "'")))
+
+
+def _g2_gated_at(items, trait, value):
+    for it in items:
+        if it.get("type") == "trait" and (it.get("subject") or "player") == "player" \
+                and it.get("trait_key") == trait and isinstance(it.get("value"), (int, float)):
+            if (it.get("operator") == "gte" and it["value"] == value) or \
+                    (it.get("operator") == "gt" and it["value"] == value - 1):
+                return True
+    return False
+
+
+def _goal_names_rung_below(game):
+    labels = []
+    for card in game.get("quest_cards") or []:
+        for g in card.get("goals") or []:
+            t, op, v = g.get("trait") or g.get("trait_key"), g.get("op") or g.get("operator"), g.get("value")
+            if t and op in ("gte", "gt") and isinstance(v, (int, float)) and g.get("label") \
+                    and (g.get("subject") or "player") == "player":
+                labels.append((g["label"], t, v + (1 if op == "gt" else 0)))
+    if not labels:
+        return None, "no goal on a player trait carries a label", []
+    buttons = []
+    for c in _g2_canvases(game):
+        if len(_g2_norm(c.get("name")).split()) >= 3:
+            buttons.append((c.get("id"), c.get("name"), list(_conditions_of(c.get("trigger") or {}))))
+        for n in c.get("nodes") or []:
+            for ch in _node_choices(n):
+                if len(_g2_norm(ch.get("text")).split()) >= 3:
+                    buttons.append((c.get("id"), ch.get("text"), list(_conditions_of(ch))))
+    rows = []
+    for label, t, v in labels:
+        lab = f" {_g2_norm(label)} "
+        for cid, text, items in buttons:
+            if f" {_g2_norm(text)} " in lab and _g2_gated_at(items, t, v):
+                rows.append(f"goal \"{label[:60]}\" names \"{str(text)[:40]}\" ({cid}), which itself needs "
+                            f"{t} {v:g} — name a button gated one rung below the goal")
+                break
+    return not rows, (f"{len(rows)} goal label(s) name a button gated at the goal's own value" if rows else
+                      f"{len(labels)}/{len(labels)} goal labels name nothing gated at their own value"), rows
+
+
+# ── H48 · a goal can flip (the-voice.md: "Never dangle a live goal bullet that cannot flip") ─
+def _goal_can_flip(game):
+    start = ((game.get("player") or {}).get("core_traits")) or {}
+    rows, n = [], 0
+    for card in game.get("quest_cards") or []:
+        for g in card.get("goals") or []:
+            t, op, v = g.get("trait") or g.get("trait_key"), g.get("op") or g.get("operator"), g.get("value")
+            if not t or op not in ("gte", "gt") or not isinstance(v, (int, float)) \
+                    or (g.get("subject") or "player") != "player":
+                continue
+            n += 1
+            need = v + (1 if op == "gt" else 0)
+            top = max(_paid_cap(game, t), float(start.get(t, 0) or 0))
+            if top < need:
+                rows.append(f"goal \"{str(g.get('label') or t)[:60]}\" needs {t} {need:g}, and the most this "
+                            f"build pays is {top:g} — say where it ends in the card's text, not as a goal")
+    if not n:
+        return None, "no goal on a player trait", []
+    return not rows, (f"{len(rows)} goal(s) can never flip in this build" if rows else
+                      f"{n}/{n} goals can flip in this build"), rows
+
+
+# ── G1 · a set flag is read (the-arc.md A1: each step gated on the flag the step before set). A LINT ─
+def _set_flag_is_read(game):
+    sets, reads = collections.defaultdict(set), set()
+
+    def walk(o, path):
+        if isinstance(o, dict):
+            for k, v in o.items():
+                walk(v, path + (k,))
+        elif isinstance(o, list):
+            for v in o:
+                walk(v, path)
+        elif isinstance(o, str) and path:
+            if path[-1] == "flag" and "flagEffects" in path:
+                return
+            if path in (("player", "flags"), ("player", "flag_keys")) \
+                    or path[:3] == ("engine", "daily_tick", "flagEffects"):
+                return
+            reads.add(o)
+
+    for c in _g2_canvases(game):
+        for _p, d in _walk_paths(c):
+            for fe in d.get("flagEffects") or [] if isinstance(d.get("flagEffects"), list) else []:
+                if isinstance(fe, dict) and fe.get("flag") and fe.get("op", "set") == "set" \
+                        and fe.get("value") is not False:
+                    sets[fe["flag"]].add(c.get("id"))
+    walk({k: v for k, v in game.items() if k != "canvases"}, ())
+    for c in _g2_canvases(game):
+        walk(c, ())
+    if not sets:
+        return None, "no canvas sets a flag", []
+    rows = [f"`{f}` is set in {', '.join(sorted(where)[:3])} and read by nothing — gate the next step or a "
+            f"repeatable on it, or drop it" for f, where in sorted(sets.items()) if f not in reads]
+    return not rows, (f"{len(rows)} flag(s) set and never read" if rows else
+                      f"{len(sets)}/{len(sets)} flags a canvas sets are read"), rows
+
+
+# ── G1 · the last step opens a repeatable (the-arc.md A1) ───────────────────────────────────
+def _last_step_opens_repeatable(game, state):
+    ladders = [(c.get("id"), c.get("ladder")) for c in (((state or {}).get("board") or {}).get("characters") or [])
+               if isinstance(c, dict) and isinstance(c.get("ladder"), dict) and c["ladder"].get("steps")]
+    if not ladders:
+        return None, "no declared ladder (board.characters[].ladder)", []
+    by_id = {c.get("id"): c for c in _g2_canvases(game)}
+    rows = []
+    for npc, lad in ladders:
+        counter = lad.get("counter")
+        steps = [s for s in lad["steps"] if isinstance(s, dict) and isinstance(s.get("n"), (int, float))]
+        if not counter or not steps:
+            continue
+        last = max(steps, key=lambda s: s["n"])
+        k = last["n"]
+        last_flags = {fe.get("flag") for _p, d in _walk_paths(by_id.get(last.get("canvas")) or {})
+                      for fe in d.get("flagEffects") or [] if isinstance(d.get("flagEffects"), list)
+                      and isinstance(fe, dict) and fe.get("op", "set") == "set"}
+
+        def opens(it):
+            if it.get("type") == "trait" and it.get("trait_key") == counter and isinstance(it.get("value"), (int, float)):
+                op, v = it.get("operator"), it["value"]
+                return (op == "eq" and v == k) or (op == "gte" and v == k) or (op == "gt" and v == k - 1)
+            return it.get("type") == "flag" and it.get("flag_key") in last_flags and it.get("operator") == "is_true"
+
+        found = False
+        for c in by_id.values():
+            if not _rep_of(c.get("trigger")) or c.get("id") == last.get("canvas"):
+                continue
+            if any(opens(it) for it in _conditions_of(c.get("trigger") or {})):
+                found = True
+            for n in c.get("nodes") or []:
+                found = found or any(opens(it) for ch in _node_choices(n) for it in _conditions_of(ch))
+            if found:
+                break
+        if not found:
+            rows.append(f"{npc}: the last step ({counter} {k:g}, {last.get('canvas')}) opens no repeatable — "
+                        f"no repeatable trigger or button reads {counter} {k:g} or a flag the step sets "
+                        f"(a card or a line group is not a repeatable)")
+    return not rows, (f"{len(rows)} ladder(s) end without turning into a repeatable" if rows else
+                      f"{len(ladders)}/{len(ladders)} ladders end on a repeatable"), rows
+
+
+# ── G12 · an accident pays him (the-arc.md A4d · the-heat-ladder.md H5) ─────────────────────
+def _accident_pays_him(game):
+    targets = collections.defaultdict(list)          # target canvas -> its substitution rules
+    for c in _g2_canvases(game):
+        for s in (c.get("trigger") or {}).get("substitutions") or []:
+            if isinstance(s, dict):
+                targets[s.get("target_canvas_id")].append(s)
+    metered = {x.get("id") for x in game.get("npcs") or []
+               if any(isinstance(v, (int, float)) for v in (x.get("core_traits") or {}).values())}
+    rows, n = [], 0
+    for c in _g2_canvases(game):
+        t = c.get("trigger") or {}
+        if not (t.get("trigger_mode") == "random" or t.get("substitution_only") or c.get("id") in targets):
+            continue
+        # A random event: anyone present is in it. A walk-in: the person it is bound to walks in on
+        # her (`npc` / `requires_npc`); a peek through a door, where only presence is read, is not
+        # an accident he is part of, and is left to the reader.
+        person = {t.get("npc"), t.get("requires_npc")}
+        if t.get("trigger_mode") == "random":
+            person |= {it.get("npc_id") for it in _conditions_of(t)
+                       if it.get("type") == "npc_at_location" and it.get("operator") == "is_present"}
+        if not (person & metered):
+            continue                          # nobody there has a meter to raise
+        n += 1
+        raised = any(ef.get("targetType") == "npc" and (ef.get("op") or "add") == "add"
+                     and _effect_value_sign(ef.get("value")) > 0
+                     for _p, d in _walk_paths(c) for ef in d.get("effects") or []
+                     if isinstance(d.get("effects"), list) and isinstance(ef, dict))
+        # The way in: trigger.pre_substitution_effects run at the top of node 0 (template_import.py:899-906)
+        raised = raised or any(isinstance(ef, dict) and ef.get("targetType") == "npc"
+                               and (ef.get("op") or "add") == "add" and _effect_value_sign(ef.get("value")) > 0
+                               for ef in t.get("pre_substitution_effects") or [])
+        if not raised:
+            rows.append(f"{c.get('id')}: an event with a person in it raises nothing for him — put his "
+                        f"raise (and a flag) on the way in, and her pay on the button where she goes further")
+    if not n:
+        return None, "no event or walk-in with a person in it", []
+    return not rows, (f"{len(rows)} event(s) with a person raise nothing for him" if rows else
+                      f"{n}/{n} events with a person raise his meter"), rows
+
+
+# ── G15 · the Quests page names only places that pay at its stage (the-arc.md A4d) ──────────
+def _g2_card_line_pays(game, state, card, goal, t, floor, pays):
+    """(places that pay `t`, the value they are judged at) for one goal line. A line is live from
+    the rung below it, the card's previous goal on the same meter ("Exhibitionism 15: …" is read
+    once she has 10), not from the stage's floor; and a building pays when a room in it pays
+    ("the shower at home" is home_bathroom, inside `home`)."""
+    at = max([floor] + [x["value"] for x in card.get("goals") or []
+                        if isinstance(x, dict) and (x.get("trait") or x.get("trait_key")) == t
+                        and isinstance(x.get("value"), (int, float)) and x["value"] < goal["value"]])
+    places = set(pays)
+    if at > floor:
+        board = (state or {}).get("board") or {}
+        tiers = [x for x in (board.get("ascent_tiers") or []) if _stage_bounds(game, x)]
+        memo = _g2_card_line_pays.__dict__
+        if memo.get("game") is not game:              # one holder walk per game, not per line
+            memo.update(game=game, holders=_wu_holders(game), reach={})
+        holders = memo["holders"]
+        if (t, at) not in memo["reach"]:
+            memo["reach"][(t, at)] = _wu_reachable(game, holders, t, at, tiers, {})
+        reach = memo["reach"][(t, at)]
+        places = {h["place"] for h, _a, cap in _her_raises(holders, t) if h["repeatable"]
+                  and not (isinstance(cap, (int, float)) and cap <= at)
+                  and any(_wu_meets(n, t, at, tiers, {}, reach) for n in h["needs"])}
+    parent = {l.get("id"): l.get("parent") for l in game.get("locations") or [] if isinstance(l, dict)}
+    for p in list(places):
+        seen = set()
+        while parent.get(p) and p not in seen:
+            seen.add(p)
+            p = parent[p]
+            places.add(p)
+    return sorted(places), at
+
+
+def _card_places_pay(game, state, paying_places):
+    """Rows for `every stage has a way up`: a goal label on a declared tier that names a place
+    (its name or id) where nothing pays that tier at the stage the card is shown in."""
+    names = {}
+    for l in game.get("locations") or []:
+        lid = l.get("id")
+        for nm in (l.get("name"), str(lid or "").replace("_", " ")):
+            nm = re.sub(r"^the ", "", _g2_norm(nm))
+            if lid and len(nm) >= 3:
+                names[nm] = lid
+    rows = []
+    for card in game.get("quest_cards") or []:
+        for g in card.get("goals") or []:
+            t = g.get("trait") or g.get("trait_key")
+            label = str(g.get("label") or "")
+            if ":" not in label or not isinstance(g.get("value"), (int, float)):
+                continue
+            floor = max([f for f, _n in _stage_bounds(game, t) if f < g["value"]] or [0])
+            pays = paying_places.get((t, floor))
+            if pays is None:
+                continue
+            pays, floor = _g2_card_line_pays(game, state, card, g, t, floor, pays)
+            # Each listed item names a place when the item IS a place's name, or ends "at/in the <name>".
+            for item in re.split(r",|;|\band\b|\bor\b", label.split(":", 1)[1]):
+                item = re.sub(r"^the ", "", _g2_norm(item))
+                tail = re.split(r"\b(?:at|in|on) (?:the )?", item)[-1]
+                lid = names.get(item) or names.get(tail)
+                if lid and lid not in pays:
+                    rows.append(f"the card says “{label[:70]}” — {lid} pays nothing toward {t} at {floor}")
+    return rows
+
+
+# ── E8 · a step's gate sits above his start (the-meters.md, "Whatever he keeps" 4) ─────────
+def _step_gate_above_start(game):
+    npcs = {n.get("id"): (n.get("core_traits") or {}) for n in game.get("npcs") or [] if n.get("id")}
+    gates_ = collections.defaultdict(list)                # (npc, trait) -> [(value, canvas)]
+    lowered = set()
+    pays = collections.defaultdict(list)                  # (canvas, npc, trait) -> [amount]
+    for c in _g2_canvases(game):
+        for _p, d in _walk_paths(c):
+            for ef in d.get("effects") or [] if isinstance(d.get("effects"), list) else []:
+                if isinstance(ef, dict) and ef.get("targetType") == "npc" and (ef.get("op") or "add") == "add":
+                    k = (ef.get("npcId") or ef.get("npc_id"), _g2_key(ef))
+                    s = _effect_value_sign(ef.get("value"))
+                    if s < 0:
+                        lowered.add(k)
+                    elif s > 0 and isinstance(ef.get("value"), (int, float)):
+                        pays[(c.get("id"),) + k].append(float(ef["value"]))
+        if _rep_of(c.get("trigger")):
+            continue
+        for it in _conditions_of(c.get("trigger") or {}):
+            if it.get("type") == "trait" and it.get("subject") == "npc" and it.get("operator") in ("gte", "gt") \
+                    and isinstance(it.get("value"), (int, float)):
+                gates_[(it.get("npc_id"), it.get("trait_key"))].append(
+                    (it["value"] + (1 if it.get("operator") == "gt" else 0), c.get("id")))
+    if not gates_:
+        return None, "no one-time step gates on a man's number", []
+    rows, n = [], 0
+    for (npc, t), gl in sorted(gates_.items()):
+        start = npcs.get(npc, {}).get(t)
+        if not isinstance(start, (int, float)):
+            continue
+        for v, cid in sorted(gl):
+            n += 1
+            if v <= start and (npc, t) not in lowered:
+                rows.append(f"{npc} {t}: starts at {start:g} and {cid} needs {v:g} — met before her first "
+                            f"visit, and nothing lowers it")
+        steps = sorted({v for v, _c in gl})
+        for v, cid in sorted(gl):
+            got = pays.get((cid, npc, t))
+            nxt = [w for w in steps if w > v]
+            if got and nxt and max(start, v) + min(got) >= nxt[0] and nxt[0] > start:
+                rows.append(f"{npc} {t}: {cid} (needs {v:g}) pays +{min(got):g}, which already meets the next "
+                            f"step's {nxt[0]:g} — one visit should move 10–50% of the way")
+    if not n:
+        return None, "no one-time step gates on a man's number with a start", []
+    return not rows, (f"{len(rows)} step gate(s) need no visits" if rows else
+                      f"{n}/{n} step gates sit above where he starts"), rows
+
+
+# ── F61 · F60 · F69 · the phone's bookings (the-phone.md P5 · P10) ───────────────────────────
+def _g2_threads(game):
+    out = []
+    for key, lst in (game.get("phone") or {}).items():
+        for d in lst if isinstance(lst, list) else []:
+            if isinstance(d, dict) and d.get("id") and isinstance(d.get("blocks"), list):
+                out.append(d)
+    return out
+
+
+def _g2_replies(d):
+    return [ch for b in d.get("blocks") or [] if isinstance(b, dict) and b.get("type") == "reply"
+            for ch in b.get("choices") or [] if isinstance(ch, dict)]
+
+
+def _g2_noshow_flag(d):
+    items = list(_conditions_of(d.get("trigger") or {}))
+    for it in items:
+        if it.get("type") == "hours_since_flag" and it.get("operator") in ("gte", "gt") and it.get("flag_key"):
+            f = it["flag_key"]
+            if any(x.get("flag_key") == f and x.get("type") == "flag" and x.get("operator") == "is_true"
+                   for x in items):
+                return f
+    return None
+
+
+def _g2_costs_something(h):
+    return any(isinstance(ef, dict) and _effect_value_sign(ef.get("value")) < 0
+               for ef in h.get("effects") or []) or bool(h.get("costs"))
+
+
+def _noshow_costs(game):
+    rows, n = [], 0
+    for d in _g2_threads(game):
+        f = _g2_noshow_flag(d)
+        if not f:
+            continue
+        n += 1
+        ways = _g2_replies(d) + ([d["on_ignore"]] if isinstance(d.get("on_ignore"), dict) else [])
+        free = [str(h.get("text") or "on_ignore") for h in ways if not _g2_costs_something(h)]
+        if not isinstance(d.get("on_ignore"), dict):
+            free.append("(no on_ignore)")
+        if free:
+            rows.append(f"phone {d.get('id')}: the no-show on `{f}` costs nothing on "
+                        f"{', '.join(free[:3])} — a no-show costs something (the-phone.md P5)")
+    if not n:
+        return None, "no no-show thread (a trigger on hours_since_flag gte a flag it reads is_true)", []
+    return not rows, (f"{len(rows)} no-show thread(s) cost nothing" if rows else
+                      f"{n}/{n} no-show threads cost something"), rows
+
+
+def _ignoring_costs(game):
+    rows, n = [], 0
+    for d in _g2_threads(game):
+        if _g2_noshow_flag(d):
+            continue
+        replies = _g2_replies(d)
+        if not any(h.get("flagEffects") or h.get("effects") for h in replies):
+            continue                          # a reply that does nothing: the thread is filler
+        n += 1
+        oi = d.get("on_ignore")
+        if not d.get("ignore_after_days") or not isinstance(oi, dict) or not _g2_costs_something(oi):
+            rows.append(f"phone {d.get('id')}: its replies book or move something, and ignoring it is free — "
+                        f"set ignore_after_days with an on_ignore that costs more than a no")
+    if not n:
+        return None, "no thread whose replies book or move anything", []
+    return not rows, (f"{len(rows)} thread(s) can be ignored for free" if rows else
+                      f"{n}/{n} threads cost something when ignored"), rows
+
+
+def _booking_read_where_met(game):
+    booked = set()
+    for d in _g2_threads(game):
+        for h in _g2_replies(d):
+            for fe in h.get("flagEffects") or []:
+                if isinstance(fe, dict) and fe.get("flag") and fe.get("op", "set") == "set" \
+                        and _BOOKING_NAME.search(fe["flag"]):
+                    booked.add(fe["flag"])
+    for _p, d in _walk_paths(game):
+        for se in d.get("scheduleEffects") or [] if isinstance(d.get("scheduleEffects"), list) else []:
+            for fe in (se or {}).get("flagEffects") or [] if isinstance(se, dict) else []:
+                if isinstance(fe, dict) and fe.get("flag"):
+                    booked.add(fe["flag"])
+    if not booked:
+        return None, "no phone reply books a flag", []
+    met = set()
+    for c in _g2_canvases(game):
+        for _p, d in _walk_paths(c):
+            if d.get("flag_key") in booked and d.get("type") in ("flag", "hours_since_flag", "days_since_flag"):
+                met.add(d["flag_key"])
+    for card in game.get("quest_cards") or []:
+        for _p, d in _walk_paths(card):
+            if d.get("flag") in booked or d.get("flag_key") in booked:
+                met.add(d.get("flag") or d.get("flag_key"))
+    rows = [f"`{f}` is booked on the phone and read by no canvas and no quest card — a hub line, a card or "
+            f"the scene itself must read it (the-phone.md P10)" for f in sorted(booked - met)]
+    return not rows, (f"{len(rows)} booking(s) the player never meets" if rows else
+                      f"{len(booked)}/{len(booked)} bookings are read where she meets them"), rows
+
+
+# ── F72 · the rent page can place its collector (the-economy.md · engine.md §26) ────────────
+_G2_DAYS = {"monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3, "friday": 4, "saturday": 5, "sunday": 6}
+
+
+_G2_REMOTE = r"text|texts|message|messages|call|voicemail|voice note|note|email"
+
+
+def _rent_page_places_collector(game):
+    rent = (game.get("settings") or {}).get("rent") or {}
+    if not rent.get("enabled") or not rent.get("collector_npc"):
+        return None, "no [settings.rent] with a collector", []
+    npc = next((x for x in game.get("npcs") or [] if x.get("id") == rent["collector_npc"]), None)
+    text = (rent.get("text") or {})
+    scene = " ".join(str(text.get(k) or "") for k in ("title", "scene"))
+    name = str((npc or {}).get("name") or "")
+    # "Mark's text came in at midnight" names him without putting him in the room: a mention that
+    # is his text, message, call or note is not him in front of her.
+    if not npc or not (name and re.search(rf"\b{re.escape(name)}\b(?!['’]s\s+(?:{_G2_REMOTE}))", scene)):
+        return True, "the rent page's scene does not put the collector in front of her", []
+    day = _G2_DAYS.get(str(rent.get("due_day") or "").lower())
+    rows_ = [r for r in npc.get("schedules") or [] if day is None or day in (r.get("weekdays") or range(7))]
+    places = {r.get("location") for r in rows_}
+    covered = sum((_g2_minutes(r.get("end_time")) or 1440) - (_g2_minutes(r.get("start_time")) or 0)
+                  for r in rows_ if _g2_minutes(r.get("end_time")) is not None or r.get("end_time") == "00:00")
+    if len(places) == 1 and covered >= 1440:
+        return True, f"{name} is at one place all of {rent.get('due_day')}", []
+    where = ", ".join(f"{r.get('location')} {r.get('start_time')}-{r.get('end_time')}" for r in rows_[:4])
+    return False, "the rent page puts the collector in front of her at an hour he may be elsewhere", [
+        f"[settings.rent.text] scene names {name}, and the page fires on her first move after 00:00 on "
+        f"{rent.get('due_day')} (engine.md §26), while his rows that day are {where or 'none'} — write the scene "
+        f"without placing him, or let him find her"]
+
+
+def _g2_minutes(hhmm):
+    m = re.match(r"^(\d{1,2}):(\d{2})$", str(hhmm or ""))
+    return int(m.group(1)) * 60 + int(m.group(2)) if m else None
+
+
+# ── C24 · nothing one-time at the shop or the wardrobe (the-first-hour.md F3) ───────────────
+def _shop_room_stays_open(game):
+    s = game.get("settings") or {}
+    rooms = set()
+    for k in ("shop_location", "wardrobe_location"):
+        v = s.get(k)
+        rooms |= set(v if isinstance(v, list) else [v] if v else [])
+    if not rooms:
+        return None, "no shop_location or wardrobe_location", []
+    rows = []
+    for c in _g2_canvases(game):
+        t = c.get("trigger") or {}
+        if t.get("location") not in rooms or t.get("substitution_only"):
+            continue
+        if not _rep_of(t) or t.get("trigger_mode") == "random":
+            rows.append(f"{c.get('id')} @{t.get('location')}: "
+                        f"{'a random event' if t.get('trigger_mode') == 'random' else 'a one-time canvas'} in the "
+                        f"shop/wardrobe room hides the injected link until it fires — move it to another room")
+    return not rows, (f"{len(rows)} one-time or random canvas(es) at the shop or a wardrobe room" if rows else
+                      f"nothing one-time at the {len(rooms)} shop/wardrobe room(s)"), rows
+
+
+# ── C38 · every card carries the met flag (the-first-hour.md, "A character's [[quest_cards]]") ─
+def _card_carries_met_flag(game):
+    set_flags = set(_flags_ever_set(game))
+    by_npc = collections.defaultdict(list)
+    for card in game.get("quest_cards") or []:
+        if card.get("npc_id"):
+            by_npc[card["npc_id"]].append(card)
+    rows, n = [], 0
+    for npc, cards in sorted(by_npc.items()):
+        slug = npc[4:] if npc.startswith("npc_") else npc
+        met = next((f for f in (f"{slug}_met", f"met_{slug}") if f in set_flags), None)
+        if not met:
+            continue
+        for card in cards:
+            n += 1
+            ops = {w.get("op") or w.get("operator") for w in card.get("when") or []
+                   if isinstance(w, dict) and w.get("flag") == met}
+            if not ops:
+                rows.append(f"{npc}: card \"{str(card.get('heading') or card.get('text'))[:50]}\" has no `{met}` "
+                            f"in `when` — is_false on a pointer card, is_true on every card after")
+    if not n:
+        return None, "no character card whose meeting flag is set anywhere", []
+    return not rows, (f"{len(rows)} card(s) miss the meeting flag" if rows else
+                      f"{n}/{n} character cards carry the meeting flag"), rows
+
+
+# ── C11 · the skip sets what the opening sets (the-first-hour.md F1c) ───────────────────────
+def _g2_sets(path):
+    out = set()
+    for _nid, ch in path:
+        for fe in ch.get("flagEffects") or []:
+            if isinstance(fe, dict) and fe.get("flag") and fe.get("op", "set") == "set":
+                out.add(fe["flag"])
+        for ef in ch.get("effects") or []:
+            if isinstance(ef, dict) and ef.get("op") == "set" and _g2_key(ef):
+                out.add(f"{_g2_key(ef)}={ef.get('value')}")
+    return out
+
+
+def _skip_sets_what_opening_sets(game):
+    start = (game.get("project") or {}).get("starting_canvas") or game.get("starting_canvas")
+    c = next((x for x in _g2_canvases(game) if x.get("id") == start), None)
+    if not c or not c.get("nodes"):
+        return None, "no starting canvas", []
+    first = c["nodes"][0]
+    skips = [ch for ch in _node_choices(first) if re.search(r"\bskip\b", str(ch.get("text") or ""), re.I)]
+    if not skips:
+        return None, "the opening has no skip on its first screen", []
+    nodes = {n.get("id"): n for n in c["nodes"]}
+    full, skip_paths = [], []
+    for path in _g2_visits(c, {first.get("id")}):
+        if not path:
+            continue
+        (skip_paths if path[0][1] in skips else full).append(path)
+    if not full or not skip_paths:
+        return None, "the opening has no full path beside the skip", []
+    always = set.intersection(*[_g2_sets(p) for p in full])
+    skip_set = set.intersection(*[_g2_sets(p) for p in skip_paths])
+    rows = [f"the skip never sets `{x}`, which every full opening sets" for x in sorted(always - skip_set)]
+    # A one-of-several screen: each of its choices sets something the others do not.
+    for nid, node in nodes.items():
+        branches = []
+        for ch in _node_choices(node):
+            own = _g2_sets([(nid, ch)])
+            if own:
+                branches.append(own)
+        if len(branches) < 2 or not all(b - set.union(*[o for o in branches if o is not b]) for b in branches):
+            continue
+        if not any(b - always <= skip_set for b in branches):
+            names = " / ".join(sorted(next(iter(b - always or b)) for b in branches)[:4])
+            rows.append(f"the skip takes none of {nid}'s branches ({names}) — it takes the mildest branch's flags")
+    return not rows, (f"{len(rows)} thing(s) the full opening sets and the skip does not" if rows else
+                      f"the skip sets the {len(always)} thing(s) every full opening sets"), rows
+
+
+# ── B37 · one asset, one block (register.md "ONE ASSET, ONE BLOCK") ─────────────────────────
+def _one_asset_one_block(game):
+    uses = collections.defaultdict(list)
+    for c in _g2_canvases(game):
+        for nd in c.get("nodes") or []:
+            for b in _flat_blocks(nd.get("blocks")):
+                if b.get("type") not in MEDIA_BLOCKS:
+                    continue
+                p = dict(b.get("props") or {}, **{k: b[k] for k in ("file", "pool_dir", "files") if k in b})
+                keys = [p.get("pool_dir"), p.get("file")] + list(p.get("files") or [])
+                for k in keys:
+                    if isinstance(k, str) and k:
+                        uses[k].append(f"{c.get('id')}#{nd.get('id')}")
+    if not uses:
+        return None, "no media block", []
+    rows = [f"`{k}` serves {len(v)} blocks: {', '.join(v[:3])}" for k, v in sorted(uses.items()) if len(v) > 1]
+    return not rows, (f"{len(rows)} asset(s) serve more than one block" if rows else
+                      f"{len(uses)}/{len(uses)} assets serve one block each"), rows
+
+
+# ── J51 · a refill place rolls an event (the-meters.md M8 · engine.md §30.1) ────────────────
+def _refill_rolls_event(game, state):
+    needs = [x.get("key") for x in (((state or {}).get("board") or {}).get("needs") or []) if isinstance(x, dict)]
+    if not needs:
+        return None, "no declared need (board.needs)", []
+    rooms_with_event = {(c.get("trigger") or {}).get("location") for c in _g2_canvases(game)
+                        if (c.get("trigger") or {}).get("trigger_mode") == "random"
+                        or ((c.get("trigger") or {}).get("metadata") or {}).get("kind") == "event"}
+    rows, n = [], 0
+    for c in _g2_canvases(game):
+        t = c.get("trigger") or {}
+        if not _rep_of(t) or t.get("substitution_only") or t.get("trigger_mode") == "random" or not t.get("location"):
+            continue
+        for key in needs:
+            if not _g2_lowers_raise(c, key):
+                continue
+            n += 1
+            if not t.get("substitutions") and t.get("location") not in rooms_with_event:
+                rows.append(f"{c.get('id')} @{t.get('location')}: refills {key} and rolls no event — a need's refill "
+                            f"place rolls one (a substitution on it, or a random event in the room)")
+    if not n:
+        return None, "nothing refills a declared need", []
+    return not rows, (f"{len(rows)} refill(s) roll no event" if rows else
+                      f"{n}/{n} refills roll an event"), rows
+
+
+def _group2_gates(gate, _N, model, game, state):
+    """The group-2 gates, each called by its literal name so `--selfcheck` can see it."""
+    gate("a visit pays a meter once", *_visit_pays_once(game, state))
+    gate("an act pays on every way out", *_act_pays_every_way_out(model, game, state))
+    gate("an act pays inside its own stage", *_act_pays_inside_its_stage(game, state))
+    gate("an act pays the meter it uses", *_act_pays_its_meter(game, state))
+    gate("a need falls where it says", *_need_falls_where_it_says(model, game, state))
+    gate("a deduction is gated or priced", *_deduction_is_gated(game))
+    gate("a goal names the rung below", *_goal_names_rung_below(game))
+    gate("a goal can flip", *_goal_can_flip(game))
+    gate("the last step opens a repeatable", *_last_step_opens_repeatable(game, state))
+    gate("an accident pays him", *_accident_pays_him(game))
+    gate("a step's gate sits above his start", *_step_gate_above_start(game))
+    gate("a no-show costs", *_noshow_costs(game))
+    gate("ignoring a thread costs", *_ignoring_costs(game))
+    gate("a booking is read where she meets it", *_booking_read_where_met(game))
+    gate("the rent page can place its collector", *_rent_page_places_collector(game))
+    gate("nothing one-time at the shop or wardrobe", *_shop_room_stays_open(game))
+    gate("every card carries the met flag", *_card_carries_met_flag(game))
+    gate("the skip sets what the opening sets", *_skip_sets_what_opening_sets(game))
+    gate("one asset, one block", *_one_asset_one_block(game))
+    gate("a refill place rolls an event", *_refill_rolls_event(game, state))
+
+
+# ── the group-2 lints: a LIST each, never a score (a hit needs a human to judge it) ─────────
+_G2_CROWD = re.compile(r"\b(?:(?:his|the|their) (?:whole )?team|everyone|crowd|people (?:watch|look|stare)|in front of (?:them|"
+                       r"everyone|people)|they watch|the whole (?:room|party|team|class)|strangers?)\b", re.I)
+_G2_AUDIENCE = re.compile(r"talk|rep|known|rumou?r|gossip|fame|follower|notice|name", re.I)
+_G2_WITNESS = re.compile(r"(?:saw|seen|witness|knows|told|heard)", re.I)
+
+
+def _public_act_rows(model, game, state):
+    """E94 · the-meters.md, "declare who notices what she does": an explicit canvas whose prose
+    shows an audience and that moves no audience meter and sets no witness flag."""
+    board = (state or {}).get("board") or {}
+    tiers = set(board.get("ascent_tiers") or [])
+    aud = {m.get("key") or m.get("id") for m in board.get("meters") or [] if isinstance(m, dict)
+           and (m.get("key") or m.get("id")) not in tiers
+           and _G2_AUDIENCE.search(f"{m.get('id')} {m.get('read_by') or ''}")}
+    expl = _g2_explicit_canvases(model)
+    rows = []
+    for c in _g2_canvases(game):
+        if c.get("id") not in expl:
+            continue
+        text = " ".join(str(d.get("content")) for _p, d in _walk_paths(c) if isinstance(d.get("content"), str))
+        if not _G2_CROWD.search(text):
+            continue
+        moved = any(_g2_key(ef) in aud for _p, d in _walk_paths(c) for ef in d.get("effects") or []
+                    if isinstance(d.get("effects"), list) and isinstance(ef, dict))
+        witness = any(_G2_WITNESS.search(str(fe.get("flag") or "")) for _p, d in _walk_paths(c)
+                      for fe in d.get("flagEffects") or [] if isinstance(d.get("flagEffects"), list)
+                      and isinstance(fe, dict))
+        if not moved and not witness:
+            rows.append(f"{c.get('id')}: \"{_G2_CROWD.search(text).group(0)}\" — an explicit act with an "
+                        f"audience moves no audience meter ({', '.join(sorted(aud)) or 'none declared'}) and "
+                        f"sets no witness flag")
+    return rows
+
+
+def _walkin_odds_rows(game, state):
+    """D52 · the-surfaces.md R3: the walk-in odds ride the same trait as the content."""
+    tiers = set(((state or {}).get("board") or {}).get("ascent_tiers") or [])
+    by_target = collections.defaultdict(list)
+    for c in _g2_canvases(game):
+        for s in (c.get("trigger") or {}).get("substitutions") or []:
+            if isinstance(s, dict) and s.get("target_canvas_id"):
+                by_target[s["target_canvas_id"]].append(s)
+    rows = []
+    for tgt, subs in sorted(by_target.items()):
+        reads = {it.get("trait_key") for s in subs for it in _conditions_of(s) if it.get("type") == "trait"}
+        if tiers and not (reads & tiers):
+            rows.append(f"{tgt}: {len(subs)} rule(s), chance {sorted({s.get('chance') for s in subs if s.get('chance') is not None})}"
+                        f" — none reads {'/'.join(sorted(tiers))}")
+    return rows, len(by_target)
+
+
+def _work_in_hub_rows(game, state):
+    """D1 · the-surfaces.md R1: never put work inside a character's hub."""
+    perf = set(_performance_meter_keys(state)) | {k for k in ((game.get("player") or {}).get("core_traits") or {})
+                                                  if re.match(r"grade|study|skill|room_tidy|tidy|clean", k)}
+    rows = []
+    for c in _g2_canvases(game):
+        t = c.get("trigger") or {}
+        if not t.get("npc") or not _rep_of(t):
+            continue
+        for n in c.get("nodes") or []:
+            for ch in _node_choices(n):
+                keys = {_g2_key(ef) for ef in ch.get("effects") or [] if isinstance(ef, dict)}
+                him = any(ef.get("targetType") == "npc" for ef in ch.get("effects") or [] if isinstance(ef, dict))
+                chore = (ch.get("costs") and (ch.get("time_progression_minutes") or 0) >= 30 and not him)
+                if keys & perf:
+                    rows.append(f"{c.get('id')}: \"{str(ch.get('text'))[:50]}\" pays {', '.join(sorted(keys & perf))} "
+                                f"inside {t.get('npc')}'s hub")
+                elif chore:
+                    rows.append(f"{c.get('id')}#{n.get('id')}: \"{str(ch.get('text'))[:50]}\" spends "
+                                f"{ch.get('time_progression_minutes')} min and a cost, and gives him nothing — a chore "
+                                f"inside {t.get('npc')}'s hub")
+    return list(dict.fromkeys(rows))
+
+
+_G2_RENT_WORDS = re.compile(r"\b(?:counts? (?:it|the bills|the money|out)|the rent|rent money|count it)\b", re.I)
+
+
+def _rent_narrated_rows(game):
+    """F10 · the-economy.md: when [settings.rent] charges, no canvas also narrates the payment."""
+    rent = (game.get("settings") or {}).get("rent") or {}
+    if not rent.get("enabled"):
+        return []
+    rows = []
+    for c in _g2_canvases(game):
+        text = " ".join(str(d.get("content") or d.get("text") or "") for _p, d in _walk_paths(c)
+                        if isinstance(d.get("content") or d.get("text"), str))
+        m = _G2_RENT_WORDS.search(text)
+        if m and re.search(r"count", m.group(0), re.I):
+            rows.append(f"{c.get('id')}: \"{m.group(0)}\" — the engine's rent page already counts the money")
+    return rows
+
+
+def _thread_books_rows(game):
+    """F68 · the-phone.md P10: every thread ends in a choice that books something."""
+    rows = []
+    for d in _g2_threads(game):
+        if _g2_noshow_flag(d):
+            continue
+        replies = _g2_replies(d)
+        if replies and not any(fe.get("op", "set") == "set" for h in replies for fe in h.get("flagEffects") or []
+                               if isinstance(fe, dict)) and not any(h.get("scheduleEffects") for h in replies):
+            rows.append(f"phone {d.get('id')}: {len(replies)} repl(ies), none books anything")
+    return rows
+
+
+def _system_armed_rows(game, state):
+    """C19 · the-first-hour.md F4: every live system is armed in the first hour or sits on the sidebar."""
+    systems = [s for s in (((state or {}).get("board") or {}).get("systems") or []) if isinstance(s, dict)]
+    start = (game.get("project") or {}).get("starting_canvas")
+    c = next((x for x in _g2_canvases(game) if x.get("id") == start), {})
+    text = _g2_norm(" ".join(str(d.get("content") or d.get("text") or "") for _p, d in _walk_paths(c)
+                             if isinstance(d.get("content") or d.get("text"), str)))
+    board = (state or {}).get("board") or {}
+    shared = set(board.get("ascent_tiers") or []) | {x.get("key") for x in board.get("needs") or []
+                                                     if isinstance(x, dict)}
+    shown = {str(i.get("trait") or "") for i in game.get("sidebar_items") or []} - shared
+    said = {_g2_stem(w) for w in text.split()}
+    rows = []
+    for s in systems:
+        # Its own words: the id, the name before any "(…)", and its place. A tier or a need
+        # on the sidebar is everyone's meter, so it does not show this system.
+        own = f"{s.get('id')} {str(s.get('name') or '').split('(')[0]}".lower().replace("_", " ")
+        place = s.get("place")
+        own += " " + " ".join(str(p).replace("_", " ") for p in (place if isinstance(place, list) else [place]) if p)
+        words = {_g2_stem(w) for w in re.findall(r"[a-z]{4,}", own) if w not in ("home", "life", "with", "your")}
+        if not (words & said) and not (set(s.get("feeds") or []) & shown):
+            rows.append(f"{s.get('id')}: not named in the opening ({start}) and no meter of it on the sidebar")
+    return rows
+
+
+def _group2_lints(model, game, state):
+    """Print the group-2 lints below the tally, each by its literal name."""
+    pub = _public_act_rows(model, game, state)
+    if pub:
+        print(f"  {'─'*72}")
+        print(f"  lint · a public act moves the audience — {len(pub)} explicit canvas(es) with an audience move no audience meter")
+        for h in _rows(pub, 10):
+            print(f"          · {h}")
+        print("          (the-meters.md, \"declare who notices what she does\" — a LIST: whether the prose shows a"
+              " crowd needs a human to read it)")
+    odds, n_odds = _walkin_odds_rows(game, state)
+    if odds:
+        print(f"  {'─'*72}")
+        print(f"  lint · the walk-in odds ride her climb — {len(odds)} of {n_odds} walk-in target(s) roll flat odds")
+        for h in _rows(odds, 10):
+            print(f"          · {h}")
+        print("          (the-surfaces.md R3 — three chance bands on the trait the content rides; signed flat"
+              " odds are LO's call, which is why this is a list)")
+    hub = _work_in_hub_rows(game, state)
+    if hub:
+        print(f"  {'─'*72}")
+        print(f"  lint · work inside a hub — {len(hub)} hub button(s) pay a grade or a chore")
+        for h in _rows(hub, 10):
+            print(f"          · {h}")
+        print("          (the-surfaces.md R1 — work is its own canvas beside the hub)")
+    rent = _rent_narrated_rows(game)
+    if rent:
+        print(f"  {'─'*72}")
+        print(f"  lint · the rent is narrated once — {len(rent)} canvas(es) count the money the rent page counts")
+        for h in _rows(rent, 10):
+            print(f"          · {h}")
+        print("          (the-economy.md — write the scene beside the payment, never on it)")
+    books = _thread_books_rows(game)
+    if books:
+        print(f"  {'─'*72}")
+        print(f"  lint · a thread books something — {len(books)} thread(s) end on no booking")
+        for h in _rows(books, 10):
+            print(f"          · {h}")
+        print("          (the-phone.md P10 — small talk that leads nowhere is filler)")
+    _ok, _head, unread = _set_flag_is_read(game)
+    if unread:
+        print(f"  {'─'*72}")
+        print(f"  lint · a set flag is read — {len(unread)} flag(s) a canvas sets that nothing reads")
+        for h in _rows(unread, 12):
+            print(f"          · {h}")
+        if len(unread) > 12:
+            print(f"          · … and {len(unread)-12} more")
+        print("          (the-arc.md A1 — a step's flag is what the next step reads. A record kept for a later"
+              " release is legitimate, which is why this is a list; the ladder's own end is the gate"
+              " `the last step opens a repeatable`)")
+    armed = _system_armed_rows(game, state)
+    if armed:
+        print(f"  {'─'*72}")
+        print(f"  lint · every live system is armed — {len(armed)} system(s) not armed in the opening")
+        for h in _rows(armed, 10):
+            print(f"          · {h}")
+        print("          (the-first-hour.md F4 — a named beat in the first hour, or the meter at zero on the sidebar)")
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DECIDED — LO's signed "later release" and "waive" calls (third pass, group 1, 2026-11-03)
+#
+# LO: "Write every 'later' and 'waive' into the ledger with its reason (G54, promises[]). The
+# checks should show them as decided, not failing." Before this, a gate LO had already ruled
+# on printed FAIL beside the gates nobody had looked at, and the only record of the ruling was
+# DECISIONS.md, which no check reads.
+#
+# The ledger's top-level `decided` list (references/state.md) is read here and nowhere else:
+#   {"id", "gate": <gate, lint or shape.py check name, or null>, "match": [<substring of a
+#    detail row>, ...] or null (= every row), "decision": "later release" | "waive", "why",
+#    "signed"}
+#
+#   · a FAIL gate whose every detail row a `decided` entry covers prints DECIDED with the
+#     decision and the reason; it is not a pass, and the tally counts it on its own;
+#   · rows no entry covers keep the gate FAIL, and each covered row is tagged
+#     "(decided: <decision>, <why>)";
+#   · a lint (a list, never a score) gets the same: DECIDED in its headline when every row is
+#     covered, the tag on each covered row otherwise;
+#   · an entry naming a gate that passes, a lint that lists nothing, a name no check prints, or
+#     a `match` string that hits no row is STALE, and is listed by the lint
+#     `a decision that no longer applies`: a ruling on something that changed must be re-read,
+#     not left to excuse whatever lands under the same name next;
+#   · `--ship`: a DECIDED BLOCK row stops blocking only for `waive`, or for `later release`
+#     when a `promises[]` row names the entry (`"decided": "<id>"`), so a "later" always has
+#     a debt on the books. Anything else stays red.
+#
+# ⚠️ This is a record of decisions, not a new rule: nothing here changes what any gate
+# measures, and a decision covers rows only by their own words. An entry with `gate: null`
+# (a slip no check sees) is recorded and never judged.
+#
+# Lints print their own rows and truncate them ("… and 14 more"), so a match against the
+# printed text alone would miss hidden rows and call a decision stale that still applies.
+# `_rows(xs, n)` replaces each lint's `xs[:n]`: it returns the same slice, and while main()
+# is capturing its own output it also records the full list behind a marker line, which
+# `_decided_lints` reads and drops. Wiring is one-line swaps; no lint's own code moved.
+# ─────────────────────────────────────────────────────────────────────────────
+DECIDED_KINDS = ("later release", "waive")
+DECIDED_STALE_LINT = "a decision that no longer applies"
+_DECIDED_MARK = "\x00rows "
+_DECIDED_CAPTURE = {"on": False, "lists": []}
+_DECIDED_HEADER = re.compile(r"^  lint · (.+?) — (.*)$")
+_DECIDED_ROW = "          · "
+
+
+def _rows(xs, n):
+    """`xs[:n]` for a lint's printed rows; under main()'s capture, the full list is recorded."""
+    xs = list(xs or [])
+    if _DECIDED_CAPTURE["on"]:
+        _DECIDED_CAPTURE["lists"].append(xs)
+        print(f"{_DECIDED_MARK}{len(_DECIDED_CAPTURE['lists']) - 1} {n}")
+    return xs[:n]
+
+
+def _decided_name(name):
+    name = str(name).strip()
+    return re.sub(r"^lint\s*·\s*", "", name).strip()
+
+
+def _decided_entries(state):
+    """(entries, bad): the well-formed `decided` rows, and [(label, why)] for the rest."""
+    raw = (state or {}).get("decided")
+    if raw is None:
+        return [], []
+    if not isinstance(raw, list):
+        return [], [("decided", "is not a list")]
+    good, bad = [], []
+    for i, e in enumerate(raw):
+        label = f"decided[{i}]" + (f" {e.get('id')}" if isinstance(e, dict) and e.get("id") else "")
+        if not isinstance(e, dict):
+            bad.append((label, "is not an object"))
+            continue
+        problems = []
+        if e.get("decision") not in DECIDED_KINDS:
+            problems.append(f"decision {e.get('decision')!r} is not 'later release' or 'waive'")
+        if not str(e.get("why") or "").strip():
+            problems.append("has no why")
+        g, m = e.get("gate"), e.get("match")
+        if g is not None and not (isinstance(g, str) and g.strip()):
+            problems.append("gate is neither a name nor null")
+        if m is not None and not (isinstance(m, list) and m
+                                  and all(isinstance(s, str) and s for s in m)):
+            problems.append("match is neither null nor a list of non-empty strings")
+        if problems:
+            bad.append((label, "; ".join(problems)))
+            continue
+        good.append(dict(e, gate=_decided_name(g) if g else None, _label=label))
+    return good, bad
+
+
+def _decided_tag(e):
+    return f"(decided: {e['decision']}, {str(e['why']).strip()})"
+
+
+def _decided_text(x):
+    """A recorded lint row as text: a string as it is, a record as its fields joined."""
+    if isinstance(x, str):
+        return x
+    if isinstance(x, dict):
+        return " · ".join(str(v) for v in x.values())
+    if isinstance(x, (list, tuple)):
+        return " · ".join(str(v) for v in x)
+    return str(x)
+
+
+def _decided_judge(rows, entries):
+    """rows: one tuple of candidate texts per row. Returns (cover, unhit): cover[i] is the
+    first entry covering row i (or None), unhit is [(entry, match string)] that hit no row."""
+    cover = [None] * len(rows)
+    unhit = []
+    for e in entries:
+        m = e.get("match")
+        if m is None:
+            for i in range(len(rows)):
+                cover[i] = cover[i] or e
+            continue
+        for s in m:
+            hit = False
+            for i, texts in enumerate(rows):
+                if any(s in t for t in texts if t):
+                    hit = True
+                    cover[i] = cover[i] or e
+            if not hit:
+                unhit.append((e, s))
+    return cover, unhit
+
+
+def _decided_used(cover):
+    used, seen = [], set()
+    for e in cover:
+        if e is not None and id(e) not in seen:
+            seen.add(id(e))
+            used.append(e)
+    return used
+
+
+def _decided_label(used):
+    return "; ".join(f"{e['decision']}, {str(e['why']).strip()}" for e in used)
+
+
+def _decided_promised(e, state):
+    """A `later release` entry is owed: a `promises[]` row must name it (`decided`: id or ids)."""
+    if e["decision"] == "waive":
+        return True
+    for p in (state or {}).get("promises") or []:
+        if not isinstance(p, dict):
+            continue
+        ref = p.get("decided")
+        ids = ref if isinstance(ref, list) else [ref]
+        if e.get("id") and e.get("id") in ids:
+            return True
+    return False
+
+
+def _gate_status(r):
+    if r.get("parked"):
+        return "parked"
+    if r.get("few"):
+        return "few"
+    if r.get("switched_off") == "na":
+        return "off"
+    if r.get("na"):
+        return "n/a"
+    return "PASS" if r.get("pass_") else "FAIL"
+
+
+def _apply_decided(results, state):
+    """Mark the FAIL gates the ledger's `decided` list covers (see the block comment above).
+    Mutates and returns `results`; every row gets a `status`."""
+    entries, _bad = _decided_entries(state)
+    by = collections.defaultdict(list)
+    for e in entries:
+        if e["gate"]:
+            by[e["gate"]].append(e)
+    for r in results:
+        r["status"] = _gate_status(r)
+        es = by.get(r["gate"])
+        if not es or r["status"] != "FAIL":
+            continue
+        detail = list(r.get("detail") or [])
+        texts = detail or [r["headline"]]
+        cover, _unhit = _decided_judge([(t,) for t in texts], es)
+        used = _decided_used(cover)
+        if not used:
+            continue
+        full = all(cover)
+        if full:
+            r["status"] = "DECIDED"
+            r["headline"] = f"DECIDED ({_decided_label(used)}) — {r['headline']}"
+            r["decided_ships"] = all(_decided_promised(e, state) for e in used)
+            r["decided_unpromised"] = [e.get("id") or e["_label"] for e in used
+                                       if not _decided_promised(e, state)]
+        else:
+            r["headline"] = (f"{r['headline']} · {sum(1 for c in cover if c)} of {len(cover)} "
+                             f"row(s) decided")
+        r["decided"] = [{k: e.get(k) for k in ("id", "decision", "why", "signed", "match")}
+                        for e in used]
+        if detail and (not full or len(used) > 1):
+            r["detail"] = [f"{d} {_decided_tag(c)}" if c else d for d, c in zip(detail, cover)]
+    return results
+
+
+def apply_decided_rows(rows, state, judge_stale=None):
+    """The same for 4-tuple check rows `(name, ok, headline, detail)` — shape.py's. A covered
+    FAIL row comes back with ok = "decided". Returns (rows, stale [(label, why)]) where stale
+    lists only entries naming one of these rows (and passing `judge_stale(name)` if given)."""
+    entries, _bad = _decided_entries(state)
+    by = collections.defaultdict(list)
+    for e in entries:
+        if e["gate"]:
+            by[e["gate"]].append(e)
+    out, stale = [], []
+    for name, ok, head, detail in rows:
+        es = by.get(name)
+        if not es:
+            out.append((name, ok, head, detail))
+            continue
+        mine = judge_stale is None or judge_stale(name)
+        if ok is not False:
+            if mine:
+                for e in es:
+                    stale.append((e.get("id") or e["_label"],
+                                  f"`{name}` {'passes' if ok is True else 'is ' + str(ok or 'n/a')}"
+                                  f" now — the decision has nothing left to cover"))
+            out.append((name, ok, head, detail))
+            continue
+        detail = list(detail or [])
+        texts = detail or [head]
+        cover, unhit = _decided_judge([(t,) for t in texts], es)
+        if mine:
+            stale += [(e.get("id") or e["_label"], f"match {s!r} hits no row of `{name}`")
+                      for e, s in unhit]
+        used = _decided_used(cover)
+        if used and all(cover):
+            ok, head = "decided", f"DECIDED ({_decided_label(used)}) — {head}"
+        elif used:
+            head = f"{head} · {sum(1 for c in cover if c)} of {len(cover)} row(s) decided"
+        if detail and used and (not all(cover) or len(used) > 1):
+            detail = [f"{d} {_decided_tag(c)}" if c else d for d, c in zip(detail, cover)]
+        out.append((name, ok, head, detail))
+    return out, stale
+
+
+def _decided_block_verdict(gname, r):
+    """`_block_gate_verdict`, plus `decided`: a DECIDED gate stops blocking `--ship` only when
+    every entry covering it is a `waive`, or a `later release` with its `promises[]` row."""
+    ok, head, detail = _block_gate_verdict(gname, r)
+    if r is not None and r.get("status") == "DECIDED":
+        if r.get("decided_ships"):
+            return True, head, detail
+        return (False, f"{head} — a later release with no promises[] row "
+                       f"({', '.join(map(str, r.get('decided_unpromised') or []))}) still blocks",
+                detail)
+    return ok, head, detail
+
+
+def _ship_tag(ok, head):
+    if ok is True and str(head).startswith("DECIDED"):
+        return "DECIDED"
+    return ("WARN" if ok == "warn" else "n/a " if ok is None else ("PASS" if ok else "FAIL"))
+
+
+def _decided_capture_start():
+    """Send main()'s printed report to a buffer, so lint blocks can be marked before they show.
+    If main() dies half way, what was printed still reaches the terminal (atexit)."""
+    import atexit
+    import io
+    buf, real = io.StringIO(), sys.stdout
+    state = {"buf": buf, "real": real, "done": False}
+
+    def _flush_raw():
+        if not state["done"]:
+            state["done"] = True
+            sys.stdout = real
+            real.write(buf.getvalue().replace(_DECIDED_MARK, "").replace("\x00", ""))
+            real.flush()
+    atexit.register(_flush_raw)
+    sys.stdout = buf
+    _DECIDED_CAPTURE["on"], _DECIDED_CAPTURE["lists"] = True, []
+    return state
+
+
+def _decided_capture_end(cap):
+    """(captured text) and stdout restored."""
+    cap["done"] = True
+    sys.stdout = cap["real"]
+    _DECIDED_CAPTURE["on"] = False
+    return cap["buf"].getvalue()
+
+
+def _decided_lints(text, entries):
+    """Mark the lint blocks in main()'s captured text. Returns (text, status): status is
+    {label: {"rows", "decided_rows", "status", "decisions", "unhit"}} for every printed lint,
+    whether or not an entry names it (an entry naming a lint that printed nothing is stale)."""
+    lists = _DECIDED_CAPTURE["lists"]
+    by = collections.defaultdict(list)
+    for e in entries:
+        if e["gate"]:
+            by[e["gate"]].append(e)
+    lines = text.split("\n")
+    out, status, i = [], {}, 0
+    while i < len(lines):
+        m = _DECIDED_HEADER.match(lines[i])
+        if not m:
+            if not lines[i].startswith(_DECIDED_MARK):
+                out.append(lines[i])
+            i += 1
+            continue
+        label, rest = m.group(1).strip(), m.group(2)
+        j = i + 1
+        while j < len(lines) and (lines[j].startswith("         ") or lines[j].startswith(_DECIDED_MARK)):
+            j += 1
+        body = lines[i + 1:j]
+        # rows: (texts, printed line index in body or None)
+        rows, k_list, k_left, k_pos = [], None, 0, 0
+        printed_of = {}
+        for bi, ln in enumerate(body):
+            if ln.startswith(_DECIDED_MARK):
+                k, n = ln[len(_DECIDED_MARK):].split()
+                k_list, k_left, k_pos = int(k), min(int(n), len(lists[int(k)])), 0
+                for x in lists[k_list]:
+                    rows.append([_decided_text(x)])
+                printed_of[k_list] = len(rows) - len(lists[k_list])
+                continue
+            if not ln.startswith(_DECIDED_ROW):
+                continue
+            row_text = ln[len(_DECIDED_ROW):]
+            if row_text.lstrip("(dev) ").startswith("… and"):
+                continue
+            if k_list is not None and k_left > 0:
+                ri = printed_of[k_list] + k_pos
+                rows[ri].append(row_text)
+                rows[ri].append(bi)                     # the line to tag, kept last
+                k_pos += 1
+                k_left -= 1
+            else:
+                rows.append([row_text, bi])
+        texts = [tuple(t for t in r if isinstance(t, str)) for r in rows]
+        line_of = [next((t for t in r if isinstance(t, int)), None) for r in rows]
+        es = by.get(label, [])
+        cover, unhit = _decided_judge(texts, es) if es else ([None] * len(rows), [])
+        used = _decided_used(cover)
+        full = bool(rows) and bool(used) and all(cover)
+        status[label] = {"rows": len(rows), "decided_rows": sum(1 for c in cover if c),
+                         "status": ("DECIDED" if full else "partly decided" if used else "listed"),
+                         "decisions": [{k: e.get(k) for k in ("id", "decision", "why", "signed")}
+                                       for e in used],
+                         "unhit": [(e.get("id") or e["_label"], s) for e, s in unhit]}
+        if full:
+            head = f"  lint · {label} — DECIDED ({_decided_label(used)}) — {rest}"
+        elif used:
+            head = f"{lines[i]} · {sum(1 for c in cover if c)} of {len(rows)} row(s) decided"
+        else:
+            head = lines[i]
+        tag_at = {}
+        if used and (not full or len(used) > 1):
+            for c, li in zip(cover, line_of):
+                if c is not None and li is not None:
+                    tag_at[li] = c
+        out.append(head)
+        for bi, ln in enumerate(body):
+            if ln.startswith(_DECIDED_MARK):
+                continue
+            out.append(f"{ln} {_decided_tag(tag_at[bi])}" if bi in tag_at else ln)
+        i = j
+    return "\n".join(out), status
+
+
+def _decided_stale(results, lint_status, state, src=None):
+    """[(id, why)]: entries that no longer cover anything (see the block comment above)."""
+    entries, bad = _decided_entries(state)
+    stale = [(label, f"not read — {why}") for label, why in bad]
+    if not entries:
+        return stale
+    if src is None:
+        src = open(os.path.abspath(__file__), encoding="utf-8").read()
+    _g, lint_names = _emitted_names(src)
+    lint_names = set(lint_names) | {DECIDED_STALE_LINT}
+    by_gate = {r["gate"]: r for r in results}
+    shape_names = set()
+    try:
+        import shape as _shape
+        shape_names = {row[0] for row in _shape.check(state, _shape.is_strict(state))[0]}
+    except Exception:
+        pass
+    for e in entries:
+        g, who = e["gate"], e.get("id") or e["_label"]
+        if g is None:
+            continue
+        if g in by_gate:
+            r = by_gate[g]
+            if r["status"] in ("PASS", "n/a"):
+                stale.append((who, f"`{g}` {'passes' if r['status'] == 'PASS' else 'is n/a'} now"
+                                   f" — the decision has nothing left to cover"))
+            elif r["status"] in ("FAIL", "DECIDED") and e.get("match"):
+                texts = [(t,) for t in (r.get("detail") or [r["headline"]])]
+                _c, unhit = _decided_judge(texts, [e])
+                stale += [(who, f"match {s!r} hits no row of `{g}`") for _e, s in unhit]
+        elif g in lint_names:
+            st = lint_status.get(g)
+            if not st or not st["rows"]:
+                stale.append((who, f"the lint `{g}` lists nothing now"))
+            else:
+                stale += [(w, f"match {s!r} hits no row of the lint `{g}`")
+                          for w, s in st["unhit"] if w == who]
+        elif g not in shape_names:
+            stale.append((who, f"names `{g}`, which no gate, lint or shape.py check prints"))
+    return stale
+
+
+def _decided_stale_block(stale):
+    if not stale:
+        return ""
+    import io
+    import contextlib
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        print(f"  {'─'*72}")
+        print(f"  lint · a decision that no longer applies — {len(stale)} entr"
+              f"{'y' if len(stale) == 1 else 'ies'} in v2_state.json `decided`")
+        for who, why in stale:
+            print(f"          · {who}: {why}")
+        print("          (references/state.md `decided` — LO's signed later/waive calls. A ruling"
+              " on something that changed is re-read with LO, then rewritten or removed: left"
+              " as it is, it excuses whatever lands under the same name next)")
+    return buf.getvalue()
+
+
+# ── LO's 27 skill answers, applied 2026-11-04 (pass3/PICKS.md, "your picks on all 27") ──
+# Helpers for checks that sit above the cited lines; they live here so nothing cited moves.
+def _ascent_keys(state):
+    """The declared ascent tiers (`board.ascent_tiers`), or an empty set with no ledger."""
+    return {str(k) for k in (((state or {}).get("board") or {}).get("ascent_tiers") or [])}
+
+
+SMALL_RUNG_STEPS = (5, 10, 15)
+
+
+def _small_rung_choice(ch, tiers):
+    """J75 / A69 (LO 2026-11-03): a small rung inside a stage. True when the choice reads at least
+    one trait and every trait item reads a declared ascent tier `gte`/`gt` at 5, 10 or 15 above a
+    multiple of 20. A flag beside it (a once-a-day cap) does not change what the rung is. Such a
+    rung may show greyed in the scene (`engine.md` §15)."""
+    if not tiers:
+        return False
+    items = [it for it in ((ch.get("conditions") or {}).get("items") or []) if isinstance(it, dict)]
+    traits = [it for it in items if it.get("trait_key") or it.get("trait")]
+    if not traits:
+        return False
+    for it in traits:
+        key, op, val = it.get("trait_key") or it.get("trait"), it.get("operator") or it.get("op"), it.get("value")
+        if it.get("npc_id") or (it.get("subject") or "player") != "player" or str(key) not in tiers:
+            return False
+        if op not in ("gte", "gt") or not isinstance(val, (int, float)) or val % 20 not in SMALL_RUNG_STEPS:
+            return False
+    return True
+
+
+def _sleepers_on(c, bound):
+    """B52 (LO 2026-11-03): the bound people a canvas shows asleep. A sleeper is exempt from
+    "a present person speaks", like an unseen peek. A canvas whose prose says asleep (the sleep
+    words of `nobody is woken`) and on which the person never speaks counts as showing them asleep."""
+    text = " ".join(str(b.get("content") or "") for n in c.get("nodes") or []
+                    for b in _flat_blocks(n.get("blocks")))
+    return set(bound) if _TR_SLEEP.search(text) else set()
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -16303,11 +18180,12 @@ def main():
     state_path = os.path.join(game_dir, 'v2_state.json')
     state = json.load(open(state_path)) if os.path.exists(state_path) else None
     results, parked_info = score(model, game, state, game_dir)
+    _apply_decided(results, state)                  # the ledger's `decided` (G1, LO 2026-11-03)
 
     lints = lint_dialogue_attribution(model)
     amb_summary, amb_lints = lint_ambient_presence(model, game)
     badge_summary, badge_lints = lint_badge_before_content(model, game)
-    refusal_summary, refusal_lints = lint_refusal_shape(model, game)
+    refusal_summary, refusal_lints = lint_refusal_shape(model, game, state)
     world_lints = lint_world_prose(model, game)
     face_summary, face_lints = lint_faceless_surfaces(game)
     tok_summary, tok_player, tok_dev = lint_unresolved_tokens(game)
@@ -16363,11 +18241,770 @@ def main():
              if arg.endswith(".toml") else arg)
     vol_summary, vol_lints = lint_explicit_volume(_slug)
 
-    if "--json" in sys.argv:
+    as_json = "--json" in sys.argv
+    _cap = _decided_capture_start()
+    name = (game.get("project") or {}).get("name") or os.path.basename(path)
+    npass, nfail, npark, nfew, nna, denom = tally_counts(results)
+    print(f"\n  author-game-v2 gates — {name}")
+    print(f"  {path}")
+    print(f"  {'─'*72}")
+    for r in results:
+        tag = ("DECIDED" if r.get("status") == "DECIDED" else
+               "park" if r.get("parked") else "few " if r.get("few") else
+               "off " if r.get("switched_off") == "na" else
+               "n/a " if r.get("na") else ("PASS" if r["pass_"] else "FAIL"))
+        print(f"  [{tag}]  {r['gate']:32s} {r['headline']}")
+        for d in r["detail"][:12]:
+            print(f"          · {d}")
+        if len(r["detail"]) > 12:
+            print(f"          · … and {len(r['detail'])-12} more")
+    print(f"  {'─'*72}")
+    for f, err in parked_info["errors"]:
+        print(f"  parked: {os.path.relpath(f, game_dir) if os.path.isabs(f) or os.sep in f else f}"
+              f" could not be merged — {err}")
+    # PRD IC21 (LO, 2026-09-27): parked and too-few count in the denominator as NOT
+    # passing, so neither can raise the score; n/a stays out.
+    # Switched-off canvases (LO, 2026-09-28): a gate that passes only with them counted
+    # is a FAIL, and the line says how many fails are [off] so the reason is visible.
+    noff = sum(1 for r in results if r.get("switched_off"))
+    off_note = (f" ({noff} [off] — switched-off canvases counted)" if noff else "")
+    ndec = sum(1 for r in results if r.get("status") == "DECIDED")
+    print(f"  {npass}/{denom} gates pass  ·  {ndec} decided  ·  {nfail - ndec} fail{off_note}  ·  "
+          f"{npark} parked, not judged  ·  "
+          f"{nfew} too few to judge  ·  {nna} n/a (nothing authored)")
+
+    # Lints sit BELOW the tally and never touch it. A warning that can change a
+    # score is a gate, and a gate has to be re-derivable from a measurement.
+    if lints:
+        print(f"  {'─'*72}")
+        print(f"  lint · dialogue attribution — {len(lints)} to eyeball")
+        for h in _rows(lints, 12):
+            print(f"          · {h['canvas']}#{h['node']} speaks as {h['npc']}: {h['line']}…")
+        if len(lints) > 12:
+            print(f"          · … and {len(lints)-12} more")
+        print("          (a canvas that neither binds nor names the speaker — check the"
+              " name that will render)")
+
+    if refusal_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · which refusals are shown at all — {refusal_summary}")
+        for h in _rows(refusal_lints, 14):
+            print(f"          · {h}")
+        if len(refusal_lints) > 14:
+            print(f"          · … and {len(refusal_lints)-14} more")
+        print("          (engine.md §15 says what a shown row must SAY and nothing about how"
+              " many to show. The field's default is silence — 71% of 16,167 refusals render")
+        print("           nothing, per-game median 79% silent across a 22-100% range, which the"
+              " study calls \"a house decision, not a genre norm\". A LIST, never a score.")
+        print("           A row gated on a bar THIS SCENE moves is the machinery narrating its"
+              " own progress bar; a row gated on something the player goes elsewhere and")
+        print("           fixes is a real handle and worth speaking. Length: a refusal is a"
+              " 9-word UI label; a DOOR is in-fiction)")
+
+    if badge_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the badge arrives before the content — {badge_summary}")
+        for h in _rows(badge_lints, 16):
+            print(f"          · {h}")
+        if len(badge_lints) > 16:
+            print(f"          · … and {len(badge_lints)-16} more")
+        print("          (engine.md §23 — Frame 1 fires on `terminal === true` ALONE, ahead of"
+              " ready and goals, and nothing checks achievement. A LIST, never a score:")
+        print("           \"content\" here is a canvas condition reading the same (character,"
+              " trait), which is a proxy. The fix a [badge] row points at is not a bigger")
+        print("           number — a meter is the wrong thing to gate a badge on. Put the ✓ on"
+              " a FLAG the content sets on its way out, so it means \"you played this\")")
+
+    if amb_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the ambient puts him in the room — {amb_summary}")
+        for h in _rows(amb_lints, 16):
+            print(f"          · {h}")
+        if len(amb_lints) > 16:
+            print(f"          · … and {len(amb_lints)-16} more")
+        print("          (the OTHER half of G38, on the path that actually reads the field"
+              " — checkRandomEncounters, v2.py:5245. A LIST, never a score: an ambient may")
+        print("           legitimately place someone off-schedule, and the prose is where"
+              " that is said. Two different fixes — `gate it` is one line of requires_npc;")
+        print("           `or narrate` means no row exists here, so a gate would strand the"
+              " canvas and the arrival belongs in the prose instead)")
+
+    if unwritten_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the act between the click and the number — {unwritten_summary}")
+        for h in _rows(unwritten_lints, 16):
+            print(f"          · {h}")
+        if len(unwritten_lints) > 16:
+            print(f"          · … and {len(unwritten_lints)-16} more")
+        print("          (the-surfaces.md R9 — a LIST, never a score. A location exit"
+              " that fires nothing is R7's door and is fine. One that fires effects is")
+        print("           an ACT that happens to end in a room, and the engine shows it"
+              " as a 2-second numeric toast: the approach is written, the outcome is a")
+        print("           number, and the act between them was never authored. A WORK"
+              " rung may resolve to a toast — nobody needs a paragraph about stacking")
+        print("           shelves. A rung aimed at a PERSON, or at her own body, may"
+              " not. The repair is one follow-up node, and several gated choices can")
+        print("           share it — route them into one banded follow-up node."
+              " ⚠️ Field range is 0-68%, so there is no threshold")
+        print("           to set here that would not fail a game for obeying the"
+              " doctrine — which is why this cannot fail anything)")
+
+    if mute_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the guidance page says nothing — {mute_summary}")
+        for h in _rows(mute_lints, 12):
+            print(f"          · {h}")
+        if len(mute_lints) > 12:
+            print(f"          · … and {len(mute_lints)-12} more")
+        print("          (the-voice.md R3 — a LIST, never a score. A card with no"
+              " `goals`, no `ready_canvas` and not `terminal` renders its flavour text")
+        print("           and then nothing at all (v2.py:15974-15976), because"
+              " evaluateGoals reports allMet vacuously for an empty list. The engine's")
+        print("           own comment calls that shape intentional for transitional"
+              " cards between capstones, so ONE mute card is fine and cannot be failed.")
+        print("           The row worth reading is a character ALL of whose cards are"
+              " mute: their section of the page never says what to do. That is the")
+        print("           corpus's most-punished defect — in-her-own-hands ships 136"
+              " passages for one character behind hints reading \"complete another")
+        print("           task\", and its players quote it back. Trait goals already"
+              " print the number themselves — label — current / target)")
+
+    if door_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · a door opens onto something — {door_summary}")
+        for h in _rows(door_lints, 16):
+            print(f"          · {h}")
+        if len(door_lints) > 16:
+            print(f"          · … and {len(door_lints)-16} more")
+        print("          (the-map.md R6-R6c — a LIST, never a score, and it cannot fail"
+              " anything. A door is the threshold screen the player lands on INSTEAD of")
+        print("           the room. It belongs to a PERSON'S HOME and it is rare: DoL"
+              " carries six named doors in a 15,626-passage game. Presence is not")
+        print("           the test. The"
+              " field never SKIPS a threshold either (become-someone: 54 door screens,")
+        print("           50 gating on occupancy, none skipped); what it makes"
+              " conditional is whether the door exists at all. ⚠️ Declaring another door")
+        print("           makes this output worse, not better, which is the only reason"
+              " it is checked. Silent on a game that declares none, by design)")
+
+    if sys_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the labels and the systems agree — {sys_summary}")
+        for h in _rows(sys_lints, 16):
+            print(f"          · {h}")
+        if len(sys_lints) > 16:
+            print(f"          · … and {len(sys_lints)-16} more")
+        print("          (the-systems.md SY1-SY3 — a LIST, never a score, and it cannot fail"
+              " anything. `serves` is what happens in a room; `labels` is what KIND of place")
+        print("           it is. An AMBIENT meter is fed by nearly every room and so makes no"
+              " room special; a SOURCED one is fed in one or two places and read all over —")
+        print("           measured in family-ties, piercings 2 rooms → 117 read sites, clothes"
+              " 1 → 53. A game of only ambient meters ships a duty list.")
+        print("           ⚠️ Declaring MORE labels makes this output worse, not"
+              " better — that direction is the only reason it is checked at all)")
+
+    if label_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · room-list labels — {label_summary}")
+        for h in _rows(label_lints, 8):
+            print(f"          · {h}")
+        if label_lints:
+            print("          (the-voice.md R1 — a NUMBER, not a bar; any threshold would be"
+                  " invented. The register lives in the paragraph the click"
+                  " produces, never in the button)")
+
+    if browse_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the browse share — {browse_summary}")
+        for h in _rows(browse_lints, 8):
+            print(f"          · {h}")
+        if browse_lints:
+            print("          (a room's list is needs + systems + people, the-surfaces.md R2."
+                  " KNOWN NOISY: a travel bridge legitimately changes nothing, so read WHICH"
+                  " canvases are named, not the percentage alone)")
+
+    if disp_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · dispatch depth — {disp_summary}")
+        for h in _rows(disp_lints, 8):
+            print(f"          · {h}")
+        print("          (the-surfaces.md R3 — one activity DEEPENS, the room does not widen."
+              " The walk-in floor gate only asks whether a room has a branch; this asks how many"
+              " different things the branch can be. `exclusive_group` shares ONE roll across"
+              " buckets (v2.py:5361-5379) — without it every rule rolls its own)")
+
+    if ladder_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the ladder — {ladder_summary}")
+        for h in _rows(ladder_lints, 8):
+            print(f"          · {h}")
+        print("          (register.md — a field scene is ONE rung and the ladder is climbed across"
+              " 3-4 chained screens. Opening at the top means there are no stairs to it; stopping"
+              " below oral means the climb never arrives)")
+
+    if talk_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · talk screens — {talk_summary}")
+        for h in _rows(talk_lints, 8):
+            print(f"          · {h}")
+        print("          (register.md — if a person is in the room, they speak. The `dialog`"
+              " block already exists; this counts whether it was used)")
+
+    if loop_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the act menu — {loop_summary}")
+        for h in _rows(loop_lints, 8):
+            print(f"          · {h}")
+        print("          (the-surfaces.md — a COUNT, never a target. One good loop beats four"
+              " thin ones; a repeatable explicit surface with no act menu is a one-time scene"
+              " the player is asked to re-read)")
+
+    if act_summary:
+        print(f"  {'─'*72}")
+    # lint · she permits or she acts. Measured 2026-08-28, the corpus-verb study.
+    #
+    # The field puts the ACT on the button: across 113,134 clickable labels, `fuck` 1,349,
+    # `cum` 1,073, `blowjob` 492, `missionary` and `doggy` 778 between them. `let` is 779
+    # — 0.69% of all labels.
+    #
+    # A game can invert it: when `Let him…` concentrates inside the sex loops, outside the
+    # bedroom she takes, asks, works and buys, and inside it she almost only permits. The
+    # prose is explicit and the button is a permission, so the verb collapses at exactly
+    # the moment the content is supposed to be hottest.
+    #
+    # ⚠️ REPORTED, NEVER JUDGED. `let` is a proxy for "this choice grants rather than does",
+    # and a proxy is not a defect: a permission is the right button in a scene about being
+    # used. No threshold is defensible from one marker, and the field figure is a
+    # different measurement (field labels include navigation; this reads authored choice
+    # text). It prints the share and stops.
+    # computed here rather than reused from run_gates — different function, different scope
+    _all_ch = [ch.get("text") for c in (game.get("canvases") or [])
+               for n in (c.get("nodes") or [])
+               for ch in ((n.get("exit_block") or {}).get("choices") or [])
+               if isinstance(ch.get("text"), str)]
+    permit = [t for t in _all_ch if re.match(r"^\s*let\b", t, re.I)]
+    if _all_ch:
+        loop_ids = {c.get("id") for c in (game.get("canvases") or [])
+                    if re.search(r"loop|sex|fuck|serve|climax", str(c.get("id") or ""))}
+        loop_ch = [ch.get("text") for c in (game.get("canvases") or []) if c.get("id") in loop_ids
+                   for n in (c.get("nodes") or [])
+                   for ch in ((n.get("exit_block") or {}).get("choices") or [])
+                   if isinstance(ch.get("text"), str)]
+        loop_let = [t for t in loop_ch if re.match(r"^\s*let\b", t, re.I)]
+        bits = [f"{len(permit)}/{len(_all_ch)} choices open with `let` "
+                f"({len(permit)/len(_all_ch)*100:.1f}%)"]
+        if loop_ch:
+            bits.append(f"inside sex loops {len(loop_let)}/{len(loop_ch)} "
+                        f"({len(loop_let)/len(loop_ch)*100:.0f}%)")
+        print(f"  lint · she permits or she acts — " + " · ".join(bits))
+        for t in _rows(permit, 4):
+            print(f"          · {t.strip()[:70]!r}")
+        print("          (reported, never judged. The field puts the act on the button — `fuck`"
+              " 1,349, `cum` 1,073, `blowjob` 492 across 113,134 labels, against `let` at 0.69%."
+              " A permission is the right button in a scene about being used; a game where it is"
+              " the ONLY button has moved the act into the prose and left the player granting"
+              " consent to a paragraph. the-voice.md R6 has the worked rewrites)")
+
+        print(f"  lint · the act nodes — {act_summary}")
+        for h in _rows(act_lints, 10):
+            print(f"          · {h}")
+        print("          (register.md — the beat the player is IN while it is happening. `explicit"
+              " floor` is a game-wide share and a game can clear it with every act node warm."
+              " 3 is the count `explicit floor` needs to call a beat"
+              " explicit at all, not a new threshold)")
+
+    if rung_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the meter ladder — {rung_summary}")
+        for h in _rows(rung_lints, 8):
+            print(f"          · {h}")
+        print("          (the-meters.md W4 — a NUMBER, never a bar. 15/35/55/75 is the DoL"
+              " seed's spacing, one game's, not a ladder to copy. The"
+              " field runs 8-17 rungs, lowest at 5)")
+
+    if cast_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the cast's meters — {cast_summary}")
+        for h in _rows(cast_lints, 8):
+            print(f"          · {h}")
+        print("          (the-meters.md W1/W6 — a roster of identical `relation = 0` is a fine"
+              " answer for a ladder game and the whole engine missing from a roster one. Read it"
+              " next to board.who_climbs)")
+
+    if cw_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the counterweight — {cw_summary}")
+        for h in _rows(cw_lints, 8):
+            print(f"          · {h}")
+        print("          (the-meters.md W5 — HEURISTIC: a player trait starting at 50+ whose"
+              " effects mostly fall, declared needs excluded. One field game in 25 ships one"
+              " that gates)")
+
+    if shape_lints or shape_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · screen shape — {shape_summary}")
+        TAGS = {"rows": "rows", "open": "wide open", "still": "never moves", "thin": "one lever"}
+        for h in _rows(shape_lints, 10):
+            tag = TAGS.get(h["kind"], h["kind"])
+            where = f"{h['id']} @{h['loc']}" if h["id"] != "—" else h["loc"]
+            print(f"          · [{tag}] {where}: {h['note']}")
+        if len(shape_lints) > 10:
+            print(f"          · … and {len(shape_lints)-10} more")
+        print("          (the-surfaces.md R5/R6 — thresholds not yet establishable; judge these,"
+              " do not score them)")
+
+    if words_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the words the player has to already own — {words_summary}")
+        for h in words_lints:
+            print(f"          · {h}")
+        print("          (register.md — a LIST, never a score. Measured against the 25-game"
+              " field's own vocabulary (scripts/genre_words.txt, words used by 4+ games).")
+        print("           The field runs locale-locked nouns at 0.8 per 10k words."
+              " Invented words are safe — the fiction builds them; real regional")
+        print("           objects are the trap, because they look defined and are not. Gloss it"
+              " in the sentence that first uses it, or use the plain word.")
+        print("           [ambiguous] and [false friend] rows come from a CURATED list, not the"
+              " corpus — a false friend is by definition a common word, so genre_words.txt")
+        print("           is structurally blind to them. Expect false positives and read them:"
+              " a `torch` that is a cutting torch is correct everywhere)")
+
+    if gloss_lints:
+        print(f"  {'─'*72}")
+        print(f"  lint · the sentence explains itself — {len(gloss_lints)} gloss(es), "
+              f"{gloss_rate:.2f} per 1,000 words")
+        for h in _rows(gloss_lints, 10):
+            print(f"          · {h['canvas']}: …{h['line']}")
+        if len(gloss_lints) > 10:
+            print(f"          · … and {len(gloss_lints)-10} more")
+        print("          (register.md 'The load rules' L1 — a LIST, never a score. A fact followed"
+              " by an explanation of the fact, welded into one sentence.")
+        print("           Field over 27 games: p50 0.06, p90 0.19, MAX 0.24 (destroyer).")
+        print("           Delete the clause or make it its own"
+              " sentence; deletion is the default, because the fact was")
+        print("           usually already doing the work. A dash or a bracket is NOT the fix —"
+              " the joint survives the swap)")
+
+    if neg_lints or neg_share > FIELD_NEGATION_MAX:
+        print(f"  {'─'*72}")
+        print(f"  lint · what did not happen — {neg_share:.1f}% of {neg_total} sentences carry a "
+              f"negation")
+        for h in _rows(neg_lints, 8):
+            print(f"          · {h['canvas']}: {h['share']:.0f}% ({h['n']}/{h['of']}) — {h['line']}")
+        if len(neg_lints) > 8:
+            print(f"          · … and {len(neg_lints)-8} more canvases over the field max")
+        print("          (register.md L2, RETIRED 2026-09-24 for the loud voice. Printed for"
+              " reference only: a FIGURE and a LIST, never a score, and not a rule."
+              f" Field, NARRATION ONLY, 25 games: p50 {FIELD_NEGATION_P50}%,")
+        print(f"           p90 {FIELD_NEGATION_P90}%, MAX {FIELD_NEGATION_MAX}%"
+              " (become-taxi-driver). Behind almost"
+              " every negation is")
+        print("           a positive fact that is shorter AND more specific — 'it takes you ninety'"
+              " beats 'you have never once done it in forty-five'.")
+        print("           Canvases listed are those over the field max with 8+ sentences. Baseline"
+              " re-measured 2026-09-01: the old figures were taken")
+        print("           with a regex blind to every contraction and against an ALL-TEXT field"
+              " while this reads narration only — see NEGATION_RE)")
+
+    if hist_lints:
+        print(f"  {'─'*72}")
+        print(f"  lint · history on a repeatable screen — {len(hist_lints)} of {hist_total} "
+              f"sentences ({hist_share:.1f}%)")
+        for h in _rows(hist_lints, 10):
+            print(f"          · {h['canvas']} [{h['marker']}]: {h['line']}")
+        if len(hist_lints) > 10:
+            print(f"          · … and {len(hist_lints)-10} more")
+        print("          (register.md 'The load rules' L3 — a LIST, never a score. REPEATABLE"
+              " canvases only: the same sentence on a one-time canvas is")
+        print("           where the doctrine says to PUT it. Field over 27 games: p50 1.64%,"
+              " p90 3.94%, MAX 5.41% (free-cities).")
+        print("           The marker set is temporal (used to / ago / since /"
+              " has been / N days-weeks-months-years) and it OVER-COUNTS a")
+        print("           sentence that merely mentions a duration — read the lines, not the"
+              " number. Clock time is a different rule and belongs to")
+        print("           the-clock.md C2; this one is elapsed time)")
+
+    if past_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · a repeatable claims a past — {past_summary}")
+        for h in _rows(past_lints, 10):
+            print(f"          · {h}")
+        if len(past_lints) > 10:
+            print(f"          · … and {len(past_lints)-10} more")
+        print("          (register.md 'The truth rule' rule 2 and L3 — a LIST, never a score."
+              " Legal inside a group gated on the flag that records the past;")
+        print("           any conditioned group is skipped, so this under-reports. Speech"
+              " counts too: a character can lie about a past the player never had)")
+
+    if stat_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · a printed stat is real — {stat_summary}")
+        for h in _rows(stat_lints, 10):
+            print(f"          · {h}")
+        print("          (the-meters.md 'What the player is shown' — numbers are shown and named;"
+              " a +X for a stat that does not exist")
+        print("           is the defect. A LIST, never a score)")
+
+    if speaks_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · a one-time step speaks — {speaks_summary}")
+        for h in _rows(speaks_lints, 10):
+            print(f"          · {h}")
+        if len(speaks_lints) > 10:
+            print(f"          · … and {len(speaks_lints)-10} more")
+        print("          (register.md 'The voice — say it loud' rule 5 and L3 — the one-time"
+              " step carries the conversation. A LIST, never a score)")
+
+    if arc_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the arc ladder — {arc_summary}")
+        for h in _rows(arc_lints, 10):
+            print(f"          · {h}")
+        print("          (the-arc.md A1 — one or two long chains for the central people. A LIST,"
+              " never a score)")
+
+    if ends_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · a scene ends on nothing — {ends_summary}")
+        for h in _rows(ends_lints, 8):
+            print(f"          · {h}")
+        print("          (register.md 'What a scene contains', test 3 — the hook. A LIST for"
+              " v2-reader, never a score: a last line that points forward is fine)")
+
+    if silent_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · a person who never speaks — {silent_summary}")
+        for h in _rows(silent_lints, 8):
+            print(f"          · {h}")
+        print("          (register.md 'What a scene contains', test 1 — the want. A LIST,"
+              " never a score)")
+
+    if thought_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · thoughts outweigh speech — {thought_summary}")
+        for h in _rows(thought_lints, 10):
+            print(f"          · {h}")
+        if len(thought_lints) > 10:
+            print(f"          · … and {len(thought_lints)-10} more")
+        print("          (register.md rule 3 and S3 — her thoughts go beside the dialogue,"
+              " never instead of it. A LIST, never a score)")
+
+    if opcard_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the opening arms a card with goals — {opcard_summary}")
+        for h in _rows(opcard_lints, 10):
+            print(f"          · {h}")
+        print("          (the-first-hour.md F1b step 5 — the first objective is a quest card"
+              " with goal steps. A LIST, never a score)")
+
+    if fh_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · named before met — {fh_summary}")
+        for h in _rows(fh_lints, 14):
+            print(f"          · {h}")
+        if len(fh_lints) > 14:
+            print(f"          · … and {len(fh_lints)-14} more")
+        print("          (the-first-hour.md F7 — a LIST, never a score. The game does not"
+              " use a name until it has earned it: before the player has met somebody, say")
+        print("           what they ARE and where; after, say the name. A character named in"
+              " passing is fine — read the rows and make the call. degrees-of-lewdity swaps")
+        print("           the description for the name on the meeting flag in 64 places)")
+
+    if label_sum:
+        print(f"  {'─'*72}")
+        print(f"  lint · the label under the name — {label_sum}")
+        for h in _rows(label_rows, 12):
+            print(f"          · {h}")
+        if len(label_rows) > 12:
+            print(f"          · … and {len(label_rows)-12} more")
+        print("          (the-first-hour.md F10 — a LIST, never a score. `npcs[].role` is the"
+              " 1-3 word label the engine prints under the name in EVERY dialogue box;"
+              " `relationship` is the cast page's sentence and does NOT render there. Absent"
+              " is legal and renders no line. READ THE"
+              " LABELS: each must answer WHO THIS PERSON IS. `professor` and `mother`"
+              " pass; `the nine-thirty` names an hour and `pays the rent` names a"
+              " fact)")
+
+    if role_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the role stays attached — {role_summary}")
+        for h in _rows(role_lints, 12):
+            print(f"          · {h}")
+        print("          (the-first-hour.md F10 — a LIST, never a score. F7 puts the role on"
+              " screen at the meeting; this asks whether it is still there on the fortieth")
+        print("           visit. Anchors come from each character's OWN relationship line, not"
+              " from a kin list — a fixed kin list fires wrongly on any cast that")
+        print("           is not family. Do not swap the"
+              " NAME out for the relation: destroyer is the only game of 26 that does, and it")
+        print("           has one of each relation. Both, at the point of use)")
+
+    if place_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the place says what it is — {place_summary}")
+        for h in _rows(place_lints, 14):
+            print(f"          · {h}")
+        if len(place_lints) > 14:
+            print(f"          · … and {len(place_lints)-14} more")
+        print("          (the-first-hour.md F9 — a LIST, never a score. The description is"
+              " the only surface a player sees on EVERY visit, so it is where a place says")
+        print("           what it is. Read whether each one names the FUNCTION.")
+        print("           This replaced a gate requiring a first-visit canvas: that"
+              " device is 1 of 26 games (DoL 258 branches; 18 games have none))")
+
+    if clock_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the clock in the prose — {clock_summary}")
+        for h in _rows(clock_lints, 16):
+            print(f"          · {h}")
+        if len(clock_lints) > 16:
+            print(f"          · … and {len(clock_lints)-16} more")
+        print("          (the-clock.md C2 — a LIST, never a score. Read each line at the LAST"
+              " minute of the window beside it: a RULE is still true there and is correct")
+        print("           work (\"Nobody comes in before eleven on a Monday\"); a READING is"
+              " not (\"Doors open at nine\", true for 1 minute of 300). The turn is")
+        print("           grammatical — the reading becomes a rule and the fact survives:"
+              " \"The doors open at nine\")")
+
+    if tcost_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the time cost is not on the button — {tcost_summary}")
+        for h in _rows(tcost_lints, 10):
+            print(f"          · {h}")
+        if len(tcost_lints) > 10:
+            print(f"          · … and {len(tcost_lints)-10} more")
+        print("          (the-clock.md C4 — a LIST, never a score. The engine tags TRAVEL time"
+              " for you on a nav card (v2.py:4724, \"20m\") and tags ACTIVITY time nowhere")
+        print("           (v2.py:12733), so the sidebar clock jumps unexplained. Recommended,"
+              " not required: 4,219 of the corpus's 4,260 duration tags are one game's)")
+
+    if cur_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the currency in the prose — {cur_summary}")
+        for h in _rows(cur_lints, 10):
+            print(f"          · {h}")
+        if len(cur_lints) > 10:
+            print(f"          · … and {len(cur_lints)-10} more")
+        print("          (the-economy.md R7 — a LIST, never a score. The lines listed are the"
+              " ones NOT in the game's main currency. Field: one notation carries a median 92%"
+              " of a game's money references, and a money word carries an exact amount 20% of"
+              " the time)")
+
+    if price_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the price is spelled out — {price_summary}")
+        for h in _rows(price_lints, 10):
+            print(f"          · {h}")
+        if len(price_lints) > 10:
+            print(f"          · … and {len(price_lints)-10} more")
+        print("          (the-economy.md R7 part 3 — a LIST. 94% of the field's 654 priced"
+              " labels use a symbol, 5% spell the unit out, 0.8% use a currency code. An"
+              " invented unit used consistently — \"10 coin\", \"1000 caps\" — is the field's"
+              " own pattern and is not a defect)")
+
+    if chan_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · money gates content, or only prices it — {chan_summary}")
+        for h in _rows(chan_lints, 10):
+            print(f"          · {h}")
+        if len(chan_lints) > 10:
+            print(f"          · … and {len(chan_lints)-10} more")
+        print("          (the-economy.md R1 — a LIST, never a score. A CONDITION on the currency"
+              " means content exists that money opens; a `costs` block means a thing can be"
+              " bought. Gate 16 passes on either, deliberately — but the field runs a median"
+              " 67.3 money conditions per 1,000 passages and every sandbox has some)")
+
+    if oblig_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the obligation against the week — {oblig_summary}")
+        for h in _rows(oblig_lints, 10):
+            print(f"          · {h}")
+        print("          (the-economy.md R3 — a FIGURE, never a score: any threshold would"
+              " fail a game for obeying the doctrine. Declare board.economy.week_income; an undeclared week is not a pass)")
+
+    if coll_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the collector is also the target — {coll_summary}")
+        for h in _rows(coll_lints, 6):
+            print(f"          · {h}")
+        print("          (the-want.md §4a — a RANK, never a score. The field's collector is"
+              " never the top explicit figure, but DoL makes its collector both deliberately, so a"
+              " threshold here would fail a game for a legitimate design)")
+
+    if dep_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · what a paid repeatable leaves behind — {dep_summary}")
+        for h in _rows(dep_lints, 10):
+            print(f"          · {h}")
+        if len(dep_lints) > 10:
+            print(f"          · … and {len(dep_lints)-10} more")
+        print("          (the-economy.md R1c — a RATE, never a score. A pure sink is not a"
+              " defect; a game made only of pure sinks is. No threshold has been measured,"
+              " so none is set)")
+
+    if grow_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · repeatables without a step — {grow_summary}")
+        for h in _rows(grow_lints, 10):
+            print(f"          · {h}")
+        if len(grow_lints) > 10:
+            print(f"          · … and {len(grow_lints)-10} more")
+        print("          (PRD WS4 — a LIST, never a score. More to do at the same step is"
+              " fine; a release that only adds repeatables has moved nobody on)")
+
+    if reset_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · a flag that never resets — {reset_summary}")
+        for h in _rows(reset_lints, 10):
+            print(f"          · {h}")
+        if reset_lints:
+            print("          (a LIST, never a score. The name promises a reset the game never runs:"
+                  " once set, it holds for the whole save. Clear it in [engine.daily_tick], or"
+                  " rename it if it really is once-per-save — engine.md §28)")
+
+    print(f"  {'─'*72}")
+    print(f"  lint · a cheat page exists — {cheat_summary}")
+    for h in _rows(cheat_lints, 10):
+        print(f"          · {h}")
+    if cheat_lints:
+        print("          (a LIST, never a score. Cut a basic on purpose if the game cannot use it;"
+              " a time-saver behind a code is the one thing SY7 says to give away — engine.md §48)")
+
+    ws_summary, ws_rows = _world_size(model, state, game)
+    print(f"  {'─'*72}")
+    print(f"  lint · world size — {ws_summary}")
+    for h in ws_rows:
+        print(f"          · {h}")
+    print("          (a SIZE, never a score — the-want.md, \"Her life — the threads\")")
+    sc_summary, sc_rows = _systems_and_connections(state)
+    print(f"  {'─'*72}")
+    print(f"  lint · systems and connections — {sc_summary}")
+    for h in sc_rows:
+        print(f"          · {h}")
+
+    print(f"  {'─'*72}")
+    print(f"  lint · toggles declared — {tog_summary}")
+    for h in _rows(tog_lints, 12):
+        print(f"          · {h}")
+    if tog_lints:
+        print("          (a LIST, never a score. A toggle is a start-choice flag every canvas of its"
+              " kind reads; one no canvas reads switches nothing — the-surfaces.md R5b.4)")
+
+    if joint_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · the joints — {joint_summary}")
+        for h in joint_lints:
+            print(f"          · {h}")
+        print("          (a LIST, never a score. `prose has room` judges `but` and `and`; the"
+              " ratio and the glosses are for reading — register.md, \"Joints\" and L1)")
+
+    print(f"  {'─'*72}")
+    print(f"  lint · adjacent groups — {groups_summary}")
+    for h in _rows(groups_lints, 12):
+        print(f"          · {h}")
+    if len(groups_lints) > 12:
+        print(f"          · … and {len(groups_lints) - 12} more")
+    if groups_lints:
+        print("          (a LIST, never a score. Adjacent groups are ONE if/elseif chain: an unconditioned"
+              " group is the <<else>> and first match wins — the-want.md, the placement trap)")
+
+    print(f"  {'─'*72}")
+    print(f"  lint · a pronoun with nobody to point at — "
+          f"{pron_note or f'{len(pron_rows)} screen(s) or place(s)'}")
+    for h in _rows(pron_rows, 10):
+        print(f"          · {h}")
+    if pron_rows:
+        print("          (a LIST, never a score. Put the person on screen before the pronoun:"
+              " a role, a name, or a token — register.md, \"A pronoun needs someone\")")
+
+    if event_rows:
+        print(f"  {'─'*72}")
+        print(f"  lint · a past event the player was never given — {len(event_rows)} line(s)")
+        for h in _rows(event_rows, 10):
+            print(f"          · {h}")
+        print("          (a LIST, never a score. Gate the line on the flag that records it,"
+              " or cut it — register.md, \"The truth rule\")")
+
+    vl_share = 100 * len(vl_rows) / vl_seen if vl_seen else 0.0
+    print(f"  {'─'*72}")
+    print(f"  lint · short lines with no verb — {len(vl_rows)} of {vl_seen:,} sentences "
+          f"({vl_share:.1f}%; field p25 {FIELD_FRAGMENT_SHARE[0]} · median "
+          f"{FIELD_FRAGMENT_SHARE[1]} · p75 {FIELD_FRAGMENT_SHARE[2]})")
+    for h in _rows(vl_rows, 8):
+        print(f"          · {h}")
+    if vl_rows:
+        print("          (a LIST, never a score, and approximate: a curated verb list, no tagger."
+              " A fragment is a choice, not a defect — read them)")
+
+    if vol_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · how much explicit content is in here — {vol_summary}")
+        for h in _rows(vol_lints, 10):
+            print(f"          · {h}")
+        print("          (a NUMBER, never a score. Every other heat check here is a share with"
+              " a hand-picked denominator, so a game can pass every one of them nearly"
+              " empty. Reads the BUILT html on the field's own word list; a rate"
+              " over word count is the only figure comparable across the two bases)")
+
+    if world_lints:
+        print(f"  {'─'*72}")
+        print(f"  lint · the prose names places the map does not have — {len(world_lints)} to eyeball")
+        for h in _rows(world_lints, 10):
+            print(f"          · \"{h['part']}\" ×{h['count']}: {h['line']}…")
+        print("          (either the location is missing, or the sentence is wrong)")
+
+    if face_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · bound to a person, no face — {face_summary}")
+        for h in _rows(face_lints, 10):
+            print(f"          · {h}")
+        if len(face_lints) > 10:
+            print(f"          · … and {len(face_lints)-10} more")
+        print("          (the-first-hour.md F5b — a LIST, never a score. `trigger.npc` renders the"
+              " portrait AND gates the surface on that character's own [[npcs.schedules]]."
+              " `requires_npc` draws no face, but since 2026-09-03 it DOES gate the solo lane"
+              " (setup._npcPresentForCanvas) as well as random ambients and substitution targets,"
+              " so a row carrying it is at least hidden while that person is elsewhere — it is"
+              " the FACE that is still missing. An activity that happens in a place while somebody"
+              " is around is a legitimate shape. A surface ON that person wants the face, and when"
+              " the face is already taken by a higher-priority canvas the surface is a NODE INSIDE"
+              " that canvas, not a second one beside it — a node has no priority to lose (F5b)."
+              " Walk-ins and windowed scenes are legitimate hits, which is why this cannot"
+              " fail anything)")
+
+    _group2_lints(model, game, state)               # LO 2026-11-03 group 2; above main()
+    if tok_summary:
+        print(f"  {'─'*72}")
+        print(f"  lint · a token the engine never resolves — {tok_summary}")
+        for h in _rows(tok_player, 10):
+            print(f"          · {h}")
+        if len(tok_player) > 10:
+            print(f"          · … and {len(tok_player)-10} more player-facing")
+        for h in _rows(tok_dev, 3):
+            print(f"          · (dev) {h}")
+        if len(tok_dev) > 3:
+            print(f"          · (dev) … and {len(tok_dev)-3} more")
+        print("          (engine.md §43 — a LIST, never a score. @-tokens are resolved in block"
+              " content, a location's description and blocked_message, and choice text. Nowhere"
+              " else. A canvas `name` becomes the link label on the room screen and the quest"
+              " card's canvas_name; an npc `description` is the character-creation screen. Write"
+              " the ROLE in these fields — \"his son\", \"Sit with him\" — and keep the token for"
+              " prose)")
+    print()
+    # The captured report: lint blocks marked from the ledger's `decided`, then the stale ones.
+    _text = _decided_capture_end(_cap)
+    _entries, _bad = _decided_entries(state)
+    _named = {e["gate"] for e in _entries if e["gate"]}
+    _text, _lint_status = _decided_lints(_text, _entries)
+    _stale = _decided_stale(results, _lint_status, state)
+    if as_json:
         _tp, _tf, _tk, _tw, _tn, _td = tally_counts(results)
         print(json.dumps({"gates": [dict(r) for r in results],
+                          "decided": {"lints": {k: v for k, v in _lint_status.items()
+                                                if v["decisions"] or k in _named},
+                                      "stale": [{"id": w, "why": y} for w, y in _stale]},
                           "tally": {"pass": _tp, "fail": _tf, "parked": _tk, "few": _tw,
                                     "na": _tn, "denominator": _td,
+                                    "decided": sum(1 for r in results if r.get("status") == "DECIDED"),
                                     "parked_files": parked_info["files"],
                                     "parked_errors": parked_info["errors"],
                                     "switched_off": sum(1 for r in results if r.get("switched_off")),
@@ -16470,754 +19107,18 @@ def main():
         # ⚠️ 2026-09-26 (PRD WS5): this used to `return` and exit 0 whatever the gates said,
         # so a caller reading --json could never see a failure. Same code as the text mode.
         j_judged = sum(1 for r in results if not r.get("na"))
-        j_pass = sum(1 for r in results if r.get("pass_"))
+        j_pass = sum(1 for r in results if r.get("pass_") or r.get("status") == "DECIDED")
         sys.exit(0 if j_judged and j_pass == j_judged else 1)
 
-    name = (game.get("project") or {}).get("name") or os.path.basename(path)
-    npass, nfail, npark, nfew, nna, denom = tally_counts(results)
-    print(f"\n  author-game-v2 gates — {name}")
-    print(f"  {path}")
-    print(f"  {'─'*72}")
-    for r in results:
-        tag = ("park" if r.get("parked") else "few " if r.get("few") else
-               "off " if r.get("switched_off") == "na" else
-               "n/a " if r.get("na") else ("PASS" if r["pass_"] else "FAIL"))
-        print(f"  [{tag}]  {r['gate']:32s} {r['headline']}")
-        for d in r["detail"][:12]:
-            print(f"          · {d}")
-        if len(r["detail"]) > 12:
-            print(f"          · … and {len(r['detail'])-12} more")
-    print(f"  {'─'*72}")
-    for f, err in parked_info["errors"]:
-        print(f"  parked: {os.path.relpath(f, game_dir) if os.path.isabs(f) or os.sep in f else f}"
-              f" could not be merged — {err}")
-    # PRD IC21 (LO, 2026-09-27): parked and too-few count in the denominator as NOT
-    # passing, so neither can raise the score; n/a stays out.
-    # Switched-off canvases (LO, 2026-09-28): a gate that passes only with them counted
-    # is a FAIL, and the line says how many fails are [off] so the reason is visible.
-    noff = sum(1 for r in results if r.get("switched_off"))
-    off_note = (f" ({noff} [off] — switched-off canvases counted)" if noff else "")
-    print(f"  {npass}/{denom} gates pass  ·  {nfail} fail{off_note}  ·  {npark} parked, not judged  ·  "
-          f"{nfew} too few to judge  ·  {nna} n/a (nothing authored)")
-
-    # Lints sit BELOW the tally and never touch it. A warning that can change a
-    # score is a gate, and a gate has to be re-derivable from a measurement.
-    if lints:
-        print(f"  {'─'*72}")
-        print(f"  lint · dialogue attribution — {len(lints)} to eyeball")
-        for h in lints[:12]:
-            print(f"          · {h['canvas']}#{h['node']} speaks as {h['npc']}: {h['line']}…")
-        if len(lints) > 12:
-            print(f"          · … and {len(lints)-12} more")
-        print("          (a canvas that neither binds nor names the speaker — check the"
-              " name that will render)")
-
-    if refusal_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · which refusals are shown at all — {refusal_summary}")
-        for h in refusal_lints[:14]:
-            print(f"          · {h}")
-        if len(refusal_lints) > 14:
-            print(f"          · … and {len(refusal_lints)-14} more")
-        print("          (engine.md §15 says what a shown row must SAY and nothing about how"
-              " many to show. The field's default is silence — 71% of 16,167 refusals render")
-        print("           nothing, per-game median 79% silent across a 22-100% range, which the"
-              " study calls \"a house decision, not a genre norm\". A LIST, never a score.")
-        print("           A row gated on a bar THIS SCENE moves is the machinery narrating its"
-              " own progress bar; a row gated on something the player goes elsewhere and")
-        print("           fixes is a real handle and worth speaking. Length: a refusal is a"
-              " 9-word UI label; a DOOR is in-fiction)")
-
-    if badge_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the badge arrives before the content — {badge_summary}")
-        for h in badge_lints[:16]:
-            print(f"          · {h}")
-        if len(badge_lints) > 16:
-            print(f"          · … and {len(badge_lints)-16} more")
-        print("          (engine.md §23 — Frame 1 fires on `terminal === true` ALONE, ahead of"
-              " ready and goals, and nothing checks achievement. A LIST, never a score:")
-        print("           \"content\" here is a canvas condition reading the same (character,"
-              " trait), which is a proxy. The fix a [badge] row points at is not a bigger")
-        print("           number — a meter is the wrong thing to gate a badge on. Put the ✓ on"
-              " a FLAG the content sets on its way out, so it means \"you played this\")")
-
-    if amb_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the ambient puts him in the room — {amb_summary}")
-        for h in amb_lints[:16]:
-            print(f"          · {h}")
-        if len(amb_lints) > 16:
-            print(f"          · … and {len(amb_lints)-16} more")
-        print("          (the OTHER half of G38, on the path that actually reads the field"
-              " — checkRandomEncounters, v2.py:5245. A LIST, never a score: an ambient may")
-        print("           legitimately place someone off-schedule, and the prose is where"
-              " that is said. Two different fixes — `gate it` is one line of requires_npc;")
-        print("           `or narrate` means no row exists here, so a gate would strand the"
-              " canvas and the arrival belongs in the prose instead)")
-
-    if unwritten_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the act between the click and the number — {unwritten_summary}")
-        for h in unwritten_lints[:16]:
-            print(f"          · {h}")
-        if len(unwritten_lints) > 16:
-            print(f"          · … and {len(unwritten_lints)-16} more")
-        print("          (the-surfaces.md R9 — a LIST, never a score. A location exit"
-              " that fires nothing is R7's door and is fine. One that fires effects is")
-        print("           an ACT that happens to end in a room, and the engine shows it"
-              " as a 2-second numeric toast: the approach is written, the outcome is a")
-        print("           number, and the act between them was never authored. A WORK"
-              " rung may resolve to a toast — nobody needs a paragraph about stacking")
-        print("           shelves. A rung aimed at a PERSON, or at her own body, may"
-              " not. The repair is one follow-up node, and several gated choices can")
-        print("           share it — route them into one banded follow-up node."
-              " ⚠️ Field range is 0-68%, so there is no threshold")
-        print("           to set here that would not fail a game for obeying the"
-              " doctrine — which is why this cannot fail anything)")
-
-    if mute_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the guidance page says nothing — {mute_summary}")
-        for h in mute_lints[:12]:
-            print(f"          · {h}")
-        if len(mute_lints) > 12:
-            print(f"          · … and {len(mute_lints)-12} more")
-        print("          (the-voice.md R3 — a LIST, never a score. A card with no"
-              " `goals`, no `ready_canvas` and not `terminal` renders its flavour text")
-        print("           and then nothing at all (v2.py:15974-15976), because"
-              " evaluateGoals reports allMet vacuously for an empty list. The engine's")
-        print("           own comment calls that shape intentional for transitional"
-              " cards between capstones, so ONE mute card is fine and cannot be failed.")
-        print("           The row worth reading is a character ALL of whose cards are"
-              " mute: their section of the page never says what to do. That is the")
-        print("           corpus's most-punished defect — in-her-own-hands ships 136"
-              " passages for one character behind hints reading \"complete another")
-        print("           task\", and its players quote it back. Trait goals already"
-              " print the number themselves — label — current / target)")
-
-    if door_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · a door opens onto something — {door_summary}")
-        for h in door_lints[:16]:
-            print(f"          · {h}")
-        if len(door_lints) > 16:
-            print(f"          · … and {len(door_lints)-16} more")
-        print("          (the-map.md R6-R6c — a LIST, never a score, and it cannot fail"
-              " anything. A door is the threshold screen the player lands on INSTEAD of")
-        print("           the room. It belongs to a PERSON'S HOME and it is rare: DoL"
-              " carries six named doors in a 15,626-passage game. Presence is not")
-        print("           the test. The"
-              " field never SKIPS a threshold either (become-someone: 54 door screens,")
-        print("           50 gating on occupancy, none skipped); what it makes"
-              " conditional is whether the door exists at all. ⚠️ Declaring another door")
-        print("           makes this output worse, not better, which is the only reason"
-              " it is checked. Silent on a game that declares none, by design)")
-
-    if sys_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the labels and the systems agree — {sys_summary}")
-        for h in sys_lints[:16]:
-            print(f"          · {h}")
-        if len(sys_lints) > 16:
-            print(f"          · … and {len(sys_lints)-16} more")
-        print("          (the-systems.md SY1-SY3 — a LIST, never a score, and it cannot fail"
-              " anything. `serves` is what happens in a room; `labels` is what KIND of place")
-        print("           it is. An AMBIENT meter is fed by nearly every room and so makes no"
-              " room special; a SOURCED one is fed in one or two places and read all over —")
-        print("           measured in family-ties, piercings 2 rooms → 117 read sites, clothes"
-              " 1 → 53. A game of only ambient meters ships a duty list.")
-        print("           ⚠️ Declaring MORE labels makes this output worse, not"
-              " better — that direction is the only reason it is checked at all)")
-
-    if label_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · room-list labels — {label_summary}")
-        for h in label_lints[:8]:
-            print(f"          · {h}")
-        if label_lints:
-            print("          (the-voice.md R1 — a NUMBER, not a bar; any threshold would be"
-                  " invented. The register lives in the paragraph the click"
-                  " produces, never in the button)")
-
-    if browse_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the browse share — {browse_summary}")
-        for h in browse_lints[:8]:
-            print(f"          · {h}")
-        if browse_lints:
-            print("          (a room's list is needs + systems + people, the-surfaces.md R2."
-                  " KNOWN NOISY: a travel bridge legitimately changes nothing, so read WHICH"
-                  " canvases are named, not the percentage alone)")
-
-    if disp_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · dispatch depth — {disp_summary}")
-        for h in disp_lints[:8]:
-            print(f"          · {h}")
-        print("          (the-surfaces.md R3 — one activity DEEPENS, the room does not widen."
-              " The walk-in floor gate only asks whether a room has a branch; this asks how many"
-              " different things the branch can be. `exclusive_group` shares ONE roll across"
-              " buckets (v2.py:5361-5379) — without it every rule rolls its own)")
-
-    if ladder_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the ladder — {ladder_summary}")
-        for h in ladder_lints[:8]:
-            print(f"          · {h}")
-        print("          (register.md — a field scene is ONE rung and the ladder is climbed across"
-              " 3-4 chained screens. Opening at the top means there are no stairs to it; stopping"
-              " below oral means the climb never arrives)")
-
-    if talk_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · talk screens — {talk_summary}")
-        for h in talk_lints[:8]:
-            print(f"          · {h}")
-        print("          (register.md — if a person is in the room, they speak. The `dialog`"
-              " block already exists; this counts whether it was used)")
-
-    if loop_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the act menu — {loop_summary}")
-        for h in loop_lints[:8]:
-            print(f"          · {h}")
-        print("          (the-surfaces.md — a COUNT, never a target. One good loop beats four"
-              " thin ones; a repeatable explicit surface with no act menu is a one-time scene"
-              " the player is asked to re-read)")
-
-    if act_summary:
-        print(f"  {'─'*72}")
-    # lint · she permits or she acts. Measured 2026-08-28, the corpus-verb study.
-    #
-    # The field puts the ACT on the button: across 113,134 clickable labels, `fuck` 1,349,
-    # `cum` 1,073, `blowjob` 492, `missionary` and `doggy` 778 between them. `let` is 779
-    # — 0.69% of all labels.
-    #
-    # A game can invert it: when `Let him…` concentrates inside the sex loops, outside the
-    # bedroom she takes, asks, works and buys, and inside it she almost only permits. The
-    # prose is explicit and the button is a permission, so the verb collapses at exactly
-    # the moment the content is supposed to be hottest.
-    #
-    # ⚠️ REPORTED, NEVER JUDGED. `let` is a proxy for "this choice grants rather than does",
-    # and a proxy is not a defect: a permission is the right button in a scene about being
-    # used. No threshold is defensible from one marker, and the field figure is a
-    # different measurement (field labels include navigation; this reads authored choice
-    # text). It prints the share and stops.
-    # computed here rather than reused from run_gates — different function, different scope
-    _all_ch = [ch.get("text") for c in (game.get("canvases") or [])
-               for n in (c.get("nodes") or [])
-               for ch in ((n.get("exit_block") or {}).get("choices") or [])
-               if isinstance(ch.get("text"), str)]
-    permit = [t for t in _all_ch if re.match(r"^\s*let\b", t, re.I)]
-    if _all_ch:
-        loop_ids = {c.get("id") for c in (game.get("canvases") or [])
-                    if re.search(r"loop|sex|fuck|serve|climax", str(c.get("id") or ""))}
-        loop_ch = [ch.get("text") for c in (game.get("canvases") or []) if c.get("id") in loop_ids
-                   for n in (c.get("nodes") or [])
-                   for ch in ((n.get("exit_block") or {}).get("choices") or [])
-                   if isinstance(ch.get("text"), str)]
-        loop_let = [t for t in loop_ch if re.match(r"^\s*let\b", t, re.I)]
-        bits = [f"{len(permit)}/{len(_all_ch)} choices open with `let` "
-                f"({len(permit)/len(_all_ch)*100:.1f}%)"]
-        if loop_ch:
-            bits.append(f"inside sex loops {len(loop_let)}/{len(loop_ch)} "
-                        f"({len(loop_let)/len(loop_ch)*100:.0f}%)")
-        print(f"  lint · she permits or she acts — " + " · ".join(bits))
-        for t in permit[:4]:
-            print(f"          · {t.strip()[:70]!r}")
-        print("          (reported, never judged. The field puts the act on the button — `fuck`"
-              " 1,349, `cum` 1,073, `blowjob` 492 across 113,134 labels, against `let` at 0.69%."
-              " A permission is the right button in a scene about being used; a game where it is"
-              " the ONLY button has moved the act into the prose and left the player granting"
-              " consent to a paragraph. the-voice.md R6 has the worked rewrites)")
-
-        print(f"  lint · the act nodes — {act_summary}")
-        for h in act_lints[:10]:
-            print(f"          · {h}")
-        print("          (register.md — the beat the player is IN while it is happening. `explicit"
-              " floor` is a game-wide share and a game can clear it with every act node warm."
-              " 3 is the count `explicit floor` needs to call a beat"
-              " explicit at all, not a new threshold)")
-
-    if rung_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the meter ladder — {rung_summary}")
-        for h in rung_lints[:8]:
-            print(f"          · {h}")
-        print("          (the-meters.md W4 — a NUMBER, never a bar. 15/35/55/75 is the DoL"
-              " seed's spacing, one game's, not a ladder to copy. The"
-              " field runs 8-17 rungs, lowest at 5)")
-
-    if cast_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the cast's meters — {cast_summary}")
-        for h in cast_lints[:8]:
-            print(f"          · {h}")
-        print("          (the-meters.md W1/W6 — a roster of identical `relation = 0` is a fine"
-              " answer for a ladder game and the whole engine missing from a roster one. Read it"
-              " next to board.who_climbs)")
-
-    if cw_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the counterweight — {cw_summary}")
-        for h in cw_lints[:8]:
-            print(f"          · {h}")
-        print("          (the-meters.md W5 — HEURISTIC: a player trait starting at 50+ whose"
-              " effects mostly fall, declared needs excluded. One field game in 25 ships one"
-              " that gates)")
-
-    if shape_lints or shape_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · screen shape — {shape_summary}")
-        TAGS = {"rows": "rows", "open": "wide open", "still": "never moves", "thin": "one lever"}
-        for h in shape_lints[:10]:
-            tag = TAGS.get(h["kind"], h["kind"])
-            where = f"{h['id']} @{h['loc']}" if h["id"] != "—" else h["loc"]
-            print(f"          · [{tag}] {where}: {h['note']}")
-        if len(shape_lints) > 10:
-            print(f"          · … and {len(shape_lints)-10} more")
-        print("          (the-surfaces.md R5/R6 — thresholds not yet establishable; judge these,"
-              " do not score them)")
-
-    if words_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the words the player has to already own — {words_summary}")
-        for h in words_lints:
-            print(f"          · {h}")
-        print("          (register.md — a LIST, never a score. Measured against the 25-game"
-              " field's own vocabulary (scripts/genre_words.txt, words used by 4+ games).")
-        print("           The field runs locale-locked nouns at 0.8 per 10k words."
-              " Invented words are safe — the fiction builds them; real regional")
-        print("           objects are the trap, because they look defined and are not. Gloss it"
-              " in the sentence that first uses it, or use the plain word.")
-        print("           [ambiguous] and [false friend] rows come from a CURATED list, not the"
-              " corpus — a false friend is by definition a common word, so genre_words.txt")
-        print("           is structurally blind to them. Expect false positives and read them:"
-              " a `torch` that is a cutting torch is correct everywhere)")
-
-    if gloss_lints:
-        print(f"  {'─'*72}")
-        print(f"  lint · the sentence explains itself — {len(gloss_lints)} gloss(es), "
-              f"{gloss_rate:.2f} per 1,000 words")
-        for h in gloss_lints[:10]:
-            print(f"          · {h['canvas']}: …{h['line']}")
-        if len(gloss_lints) > 10:
-            print(f"          · … and {len(gloss_lints)-10} more")
-        print("          (register.md 'The load rules' L1 — a LIST, never a score. A fact followed"
-              " by an explanation of the fact, welded into one sentence.")
-        print("           Field over 27 games: p50 0.06, p90 0.19, MAX 0.24 (destroyer).")
-        print("           Delete the clause or make it its own"
-              " sentence; deletion is the default, because the fact was")
-        print("           usually already doing the work. A dash or a bracket is NOT the fix —"
-              " the joint survives the swap)")
-
-    if neg_lints or neg_share > FIELD_NEGATION_MAX:
-        print(f"  {'─'*72}")
-        print(f"  lint · what did not happen — {neg_share:.1f}% of {neg_total} sentences carry a "
-              f"negation")
-        for h in neg_lints[:8]:
-            print(f"          · {h['canvas']}: {h['share']:.0f}% ({h['n']}/{h['of']}) — {h['line']}")
-        if len(neg_lints) > 8:
-            print(f"          · … and {len(neg_lints)-8} more canvases over the field max")
-        print("          (register.md L2, RETIRED 2026-09-24 for the loud voice. Printed for"
-              " reference only: a FIGURE and a LIST, never a score, and not a rule."
-              f" Field, NARRATION ONLY, 25 games: p50 {FIELD_NEGATION_P50}%,")
-        print(f"           p90 {FIELD_NEGATION_P90}%, MAX {FIELD_NEGATION_MAX}%"
-              " (become-taxi-driver). Behind almost"
-              " every negation is")
-        print("           a positive fact that is shorter AND more specific — 'it takes you ninety'"
-              " beats 'you have never once done it in forty-five'.")
-        print("           Canvases listed are those over the field max with 8+ sentences. Baseline"
-              " re-measured 2026-09-01: the old figures were taken")
-        print("           with a regex blind to every contraction and against an ALL-TEXT field"
-              " while this reads narration only — see NEGATION_RE)")
-
-    if hist_lints:
-        print(f"  {'─'*72}")
-        print(f"  lint · history on a repeatable screen — {len(hist_lints)} of {hist_total} "
-              f"sentences ({hist_share:.1f}%)")
-        for h in hist_lints[:10]:
-            print(f"          · {h['canvas']} [{h['marker']}]: {h['line']}")
-        if len(hist_lints) > 10:
-            print(f"          · … and {len(hist_lints)-10} more")
-        print("          (register.md 'The load rules' L3 — a LIST, never a score. REPEATABLE"
-              " canvases only: the same sentence on a one-time canvas is")
-        print("           where the doctrine says to PUT it. Field over 27 games: p50 1.64%,"
-              " p90 3.94%, MAX 5.41% (free-cities).")
-        print("           The marker set is temporal (used to / ago / since /"
-              " has been / N days-weeks-months-years) and it OVER-COUNTS a")
-        print("           sentence that merely mentions a duration — read the lines, not the"
-              " number. Clock time is a different rule and belongs to")
-        print("           the-clock.md C2; this one is elapsed time)")
-
-    if past_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · a repeatable claims a past — {past_summary}")
-        for h in past_lints[:10]:
-            print(f"          · {h}")
-        if len(past_lints) > 10:
-            print(f"          · … and {len(past_lints)-10} more")
-        print("          (register.md 'The truth rule' rule 2 and L3 — a LIST, never a score."
-              " Legal inside a group gated on the flag that records the past;")
-        print("           any conditioned group is skipped, so this under-reports. Speech"
-              " counts too: a character can lie about a past the player never had)")
-
-    if stat_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · a printed stat is real — {stat_summary}")
-        for h in stat_lints[:10]:
-            print(f"          · {h}")
-        print("          (the-meters.md 'What the player is shown' — numbers are shown and named;"
-              " a +X for a stat that does not exist")
-        print("           is the defect. A LIST, never a score)")
-
-    if speaks_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · a one-time step speaks — {speaks_summary}")
-        for h in speaks_lints[:10]:
-            print(f"          · {h}")
-        if len(speaks_lints) > 10:
-            print(f"          · … and {len(speaks_lints)-10} more")
-        print("          (register.md 'The voice — say it loud' rule 5 and L3 — the one-time"
-              " step carries the conversation. A LIST, never a score)")
-
-    if arc_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the arc ladder — {arc_summary}")
-        for h in arc_lints[:10]:
-            print(f"          · {h}")
-        print("          (the-arc.md A1 — one or two long chains for the central people. A LIST,"
-              " never a score)")
-
-    if ends_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · a scene ends on nothing — {ends_summary}")
-        for h in ends_lints[:8]:
-            print(f"          · {h}")
-        print("          (register.md 'What a scene contains', test 3 — the hook. A LIST for"
-              " v2-reader, never a score: a last line that points forward is fine)")
-
-    if silent_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · a person who never speaks — {silent_summary}")
-        for h in silent_lints[:8]:
-            print(f"          · {h}")
-        print("          (register.md 'What a scene contains', test 1 — the want. A LIST,"
-              " never a score)")
-
-    if thought_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · thoughts outweigh speech — {thought_summary}")
-        for h in thought_lints[:10]:
-            print(f"          · {h}")
-        if len(thought_lints) > 10:
-            print(f"          · … and {len(thought_lints)-10} more")
-        print("          (register.md rule 3 and S3 — her thoughts go beside the dialogue,"
-              " never instead of it. A LIST, never a score)")
-
-    if opcard_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the opening arms a card with goals — {opcard_summary}")
-        for h in opcard_lints[:10]:
-            print(f"          · {h}")
-        print("          (the-first-hour.md F1b step 5 — the first objective is a quest card"
-              " with goal steps. A LIST, never a score)")
-
-    if fh_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · named before met — {fh_summary}")
-        for h in fh_lints[:14]:
-            print(f"          · {h}")
-        if len(fh_lints) > 14:
-            print(f"          · … and {len(fh_lints)-14} more")
-        print("          (the-first-hour.md F7 — a LIST, never a score. The game does not"
-              " use a name until it has earned it: before the player has met somebody, say")
-        print("           what they ARE and where; after, say the name. A character named in"
-              " passing is fine — read the rows and make the call. degrees-of-lewdity swaps")
-        print("           the description for the name on the meeting flag in 64 places)")
-
-    if label_sum:
-        print(f"  {'─'*72}")
-        print(f"  lint · the label under the name — {label_sum}")
-        for h in label_rows[:12]:
-            print(f"          · {h}")
-        if len(label_rows) > 12:
-            print(f"          · … and {len(label_rows)-12} more")
-        print("          (the-first-hour.md F10 — a LIST, never a score. `npcs[].role` is the"
-              " 1-3 word label the engine prints under the name in EVERY dialogue box;"
-              " `relationship` is the cast page's sentence and does NOT render there. Absent"
-              " is legal and renders no line. READ THE"
-              " LABELS: each must answer WHO THIS PERSON IS. `professor` and `mother`"
-              " pass; `the nine-thirty` names an hour and `pays the rent` names a"
-              " fact)")
-
-    if role_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the role stays attached — {role_summary}")
-        for h in role_lints[:12]:
-            print(f"          · {h}")
-        print("          (the-first-hour.md F10 — a LIST, never a score. F7 puts the role on"
-              " screen at the meeting; this asks whether it is still there on the fortieth")
-        print("           visit. Anchors come from each character's OWN relationship line, not"
-              " from a kin list — a fixed kin list fires wrongly on any cast that")
-        print("           is not family. Do not swap the"
-              " NAME out for the relation: destroyer is the only game of 26 that does, and it")
-        print("           has one of each relation. Both, at the point of use)")
-
-    if place_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the place says what it is — {place_summary}")
-        for h in place_lints[:14]:
-            print(f"          · {h}")
-        if len(place_lints) > 14:
-            print(f"          · … and {len(place_lints)-14} more")
-        print("          (the-first-hour.md F9 — a LIST, never a score. The description is"
-              " the only surface a player sees on EVERY visit, so it is where a place says")
-        print("           what it is. Read whether each one names the FUNCTION.")
-        print("           This replaced a gate requiring a first-visit canvas: that"
-              " device is 1 of 26 games (DoL 258 branches; 18 games have none))")
-
-    if clock_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the clock in the prose — {clock_summary}")
-        for h in clock_lints[:16]:
-            print(f"          · {h}")
-        if len(clock_lints) > 16:
-            print(f"          · … and {len(clock_lints)-16} more")
-        print("          (the-clock.md C2 — a LIST, never a score. Read each line at the LAST"
-              " minute of the window beside it: a RULE is still true there and is correct")
-        print("           work (\"Nobody comes in before eleven on a Monday\"); a READING is"
-              " not (\"Doors open at nine\", true for 1 minute of 300). The turn is")
-        print("           grammatical — the reading becomes a rule and the fact survives:"
-              " \"The doors open at nine\")")
-
-    if tcost_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the time cost is not on the button — {tcost_summary}")
-        for h in tcost_lints[:10]:
-            print(f"          · {h}")
-        if len(tcost_lints) > 10:
-            print(f"          · … and {len(tcost_lints)-10} more")
-        print("          (the-clock.md C4 — a LIST, never a score. The engine tags TRAVEL time"
-              " for you on a nav card (v2.py:4724, \"20m\") and tags ACTIVITY time nowhere")
-        print("           (v2.py:12733), so the sidebar clock jumps unexplained. Recommended,"
-              " not required: 4,219 of the corpus's 4,260 duration tags are one game's)")
-
-    if cur_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the currency in the prose — {cur_summary}")
-        for h in cur_lints[:10]:
-            print(f"          · {h}")
-        if len(cur_lints) > 10:
-            print(f"          · … and {len(cur_lints)-10} more")
-        print("          (the-economy.md R7 — a LIST, never a score. The lines listed are the"
-              " ones NOT in the game's main currency. Field: one notation carries a median 92%"
-              " of a game's money references, and a money word carries an exact amount 20% of"
-              " the time)")
-
-    if price_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the price is spelled out — {price_summary}")
-        for h in price_lints[:10]:
-            print(f"          · {h}")
-        if len(price_lints) > 10:
-            print(f"          · … and {len(price_lints)-10} more")
-        print("          (the-economy.md R7 part 3 — a LIST. 94% of the field's 654 priced"
-              " labels use a symbol, 5% spell the unit out, 0.8% use a currency code. An"
-              " invented unit used consistently — \"10 coin\", \"1000 caps\" — is the field's"
-              " own pattern and is not a defect)")
-
-    if chan_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · money gates content, or only prices it — {chan_summary}")
-        for h in chan_lints[:10]:
-            print(f"          · {h}")
-        if len(chan_lints) > 10:
-            print(f"          · … and {len(chan_lints)-10} more")
-        print("          (the-economy.md R1 — a LIST, never a score. A CONDITION on the currency"
-              " means content exists that money opens; a `costs` block means a thing can be"
-              " bought. Gate 16 passes on either, deliberately — but the field runs a median"
-              " 67.3 money conditions per 1,000 passages and every sandbox has some)")
-
-    if oblig_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the obligation against the week — {oblig_summary}")
-        for h in oblig_lints[:10]:
-            print(f"          · {h}")
-        print("          (the-economy.md R3 — a FIGURE, never a score: any threshold would"
-              " fail a game for obeying the doctrine. Declare board.economy.week_income; an undeclared week is not a pass)")
-
-    if coll_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the collector is also the target — {coll_summary}")
-        for h in coll_lints[:6]:
-            print(f"          · {h}")
-        print("          (the-want.md §4a — a RANK, never a score. The field's collector is"
-              " never the top explicit figure, but DoL makes its collector both deliberately, so a"
-              " threshold here would fail a game for a legitimate design)")
-
-    if dep_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · what a paid repeatable leaves behind — {dep_summary}")
-        for h in dep_lints[:10]:
-            print(f"          · {h}")
-        if len(dep_lints) > 10:
-            print(f"          · … and {len(dep_lints)-10} more")
-        print("          (the-economy.md R1c — a RATE, never a score. A pure sink is not a"
-              " defect; a game made only of pure sinks is. No threshold has been measured,"
-              " so none is set)")
-
-    if grow_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · repeatables without a step — {grow_summary}")
-        for h in grow_lints[:10]:
-            print(f"          · {h}")
-        if len(grow_lints) > 10:
-            print(f"          · … and {len(grow_lints)-10} more")
-        print("          (PRD WS4 — a LIST, never a score. More to do at the same step is"
-              " fine; a release that only adds repeatables has moved nobody on)")
-
-    if reset_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · a flag that never resets — {reset_summary}")
-        for h in reset_lints[:10]:
-            print(f"          · {h}")
-        if reset_lints:
-            print("          (a LIST, never a score. The name promises a reset the game never runs:"
-                  " once set, it holds for the whole save. Clear it in [engine.daily_tick], or"
-                  " rename it if it really is once-per-save — engine.md §28)")
-
-    print(f"  {'─'*72}")
-    print(f"  lint · a cheat page exists — {cheat_summary}")
-    for h in cheat_lints[:10]:
-        print(f"          · {h}")
-    if cheat_lints:
-        print("          (a LIST, never a score. Cut a basic on purpose if the game cannot use it;"
-              " a time-saver behind a code is the one thing SY7 says to give away — engine.md §48)")
-
-    ws_summary, ws_rows = _world_size(model, state, game)
-    print(f"  {'─'*72}")
-    print(f"  lint · world size — {ws_summary}")
-    for h in ws_rows:
-        print(f"          · {h}")
-    print("          (a SIZE, never a score — the-want.md, \"Her life — the threads\")")
-    sc_summary, sc_rows = _systems_and_connections(state)
-    print(f"  {'─'*72}")
-    print(f"  lint · systems and connections — {sc_summary}")
-    for h in sc_rows:
-        print(f"          · {h}")
-
-    print(f"  {'─'*72}")
-    print(f"  lint · toggles declared — {tog_summary}")
-    for h in tog_lints[:12]:
-        print(f"          · {h}")
-    if tog_lints:
-        print("          (a LIST, never a score. A toggle is a start-choice flag every canvas of its"
-              " kind reads; one no canvas reads switches nothing — the-surfaces.md R5b.4)")
-
-    if joint_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · the joints — {joint_summary}")
-        for h in joint_lints:
-            print(f"          · {h}")
-        print("          (a LIST, never a score. `prose has room` judges `but` and `and`; the"
-              " ratio and the glosses are for reading — register.md, \"Joints\" and L1)")
-
-    print(f"  {'─'*72}")
-    print(f"  lint · adjacent groups — {groups_summary}")
-    for h in groups_lints[:12]:
-        print(f"          · {h}")
-    if len(groups_lints) > 12:
-        print(f"          · … and {len(groups_lints) - 12} more")
-    if groups_lints:
-        print("          (a LIST, never a score. Adjacent groups are ONE if/elseif chain: an unconditioned"
-              " group is the <<else>> and first match wins — the-want.md, the placement trap)")
-
-    print(f"  {'─'*72}")
-    print(f"  lint · a pronoun with nobody to point at — "
-          f"{pron_note or f'{len(pron_rows)} screen(s) or place(s)'}")
-    for h in pron_rows[:10]:
-        print(f"          · {h}")
-    if pron_rows:
-        print("          (a LIST, never a score. Put the person on screen before the pronoun:"
-              " a role, a name, or a token — register.md, \"A pronoun needs someone\")")
-
-    if event_rows:
-        print(f"  {'─'*72}")
-        print(f"  lint · a past event the player was never given — {len(event_rows)} line(s)")
-        for h in event_rows[:10]:
-            print(f"          · {h}")
-        print("          (a LIST, never a score. Gate the line on the flag that records it,"
-              " or cut it — register.md, \"The truth rule\")")
-
-    vl_share = 100 * len(vl_rows) / vl_seen if vl_seen else 0.0
-    print(f"  {'─'*72}")
-    print(f"  lint · short lines with no verb — {len(vl_rows)} of {vl_seen:,} sentences "
-          f"({vl_share:.1f}%; field p25 {FIELD_FRAGMENT_SHARE[0]} · median "
-          f"{FIELD_FRAGMENT_SHARE[1]} · p75 {FIELD_FRAGMENT_SHARE[2]})")
-    for h in vl_rows[:8]:
-        print(f"          · {h}")
-    if vl_rows:
-        print("          (a LIST, never a score, and approximate: a curated verb list, no tagger."
-              " A fragment is a choice, not a defect — read them)")
-
-    if vol_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · how much explicit content is in here — {vol_summary}")
-        for h in vol_lints[:10]:
-            print(f"          · {h}")
-        print("          (a NUMBER, never a score. Every other heat check here is a share with"
-              " a hand-picked denominator, so a game can pass every one of them nearly"
-              " empty. Reads the BUILT html on the field's own word list; a rate"
-              " over word count is the only figure comparable across the two bases)")
-
-    if world_lints:
-        print(f"  {'─'*72}")
-        print(f"  lint · the prose names places the map does not have — {len(world_lints)} to eyeball")
-        for h in world_lints[:10]:
-            print(f"          · \"{h['part']}\" ×{h['count']}: {h['line']}…")
-        print("          (either the location is missing, or the sentence is wrong)")
-
-    if face_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · bound to a person, no face — {face_summary}")
-        for h in face_lints[:10]:
-            print(f"          · {h}")
-        if len(face_lints) > 10:
-            print(f"          · … and {len(face_lints)-10} more")
-        print("          (the-first-hour.md F5b — a LIST, never a score. `trigger.npc` renders the"
-              " portrait AND gates the surface on that character's own [[npcs.schedules]]."
-              " `requires_npc` draws no face, but since 2026-09-03 it DOES gate the solo lane"
-              " (setup._npcPresentForCanvas) as well as random ambients and substitution targets,"
-              " so a row carrying it is at least hidden while that person is elsewhere — it is"
-              " the FACE that is still missing. An activity that happens in a place while somebody"
-              " is around is a legitimate shape. A surface ON that person wants the face, and when"
-              " the face is already taken by a higher-priority canvas the surface is a NODE INSIDE"
-              " that canvas, not a second one beside it — a node has no priority to lose (F5b)."
-              " Walk-ins and windowed scenes are legitimate hits, which is why this cannot"
-              " fail anything)")
-
-    if tok_summary:
-        print(f"  {'─'*72}")
-        print(f"  lint · a token the engine never resolves — {tok_summary}")
-        for h in tok_player[:10]:
-            print(f"          · {h}")
-        if len(tok_player) > 10:
-            print(f"          · … and {len(tok_player)-10} more player-facing")
-        for h in tok_dev[:3]:
-            print(f"          · (dev) {h}")
-        if len(tok_dev) > 3:
-            print(f"          · (dev) … and {len(tok_dev)-3} more")
-        print("          (engine.md §43 — a LIST, never a score. @-tokens are resolved in block"
-              " content, a location's description and blocked_message, and choice text. Nowhere"
-              " else. A canvas `name` becomes the link label on the room screen and the quest"
-              " card's canvas_name; an npc `description` is the character-creation screen. Write"
-              " the ROLE in these fields — \"his son\", \"Sit with him\" — and keep the token for"
-              " prose)")
-    print()
-    # Parked and too-few are in `denom` and never passes, so either keeps this non-zero.
-    sys.exit(0 if denom and npass == denom else 1)
+    _block = _decided_stale_block(_stale)
+    if _block and _text.endswith("\n\n"):
+        _text = _text[:-1] + _block + "\n"
+    else:
+        _text += _block
+    sys.stdout.write(_text)
+    # Parked and too-few are in `denom` and never passes, so either keeps this non-zero. A
+    # DECIDED gate is LO's signed call and does not; `--ship` is where `later release` bites.
+    sys.exit(0 if denom and npass + ndec == denom else 1)
 
 
 if __name__ == "__main__":

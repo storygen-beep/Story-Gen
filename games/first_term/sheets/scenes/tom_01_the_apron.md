@@ -1,4 +1,8 @@
-# [READY] Scene — tom_01_the_apron
+# [REVIEW] Scene — tom_01_the_apron
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+
+> The signed plans behind this page: `proposals/COPY_FIXES_C.md`.
 
 > **Changed 2026-11-01 after the build, signed by LO 2026-11-01 ("Signed, build them")** (the reader's FAILs; LO's picks in chat): the job ask gets a no.
 
@@ -11,8 +15,8 @@
 | row | answer |
 |---|---|
 | person · step | `npc_tom` · 1 (Tom B 1) |
-| where · when | the café counter · Mon–Sat 14:30–22:00, her first shift |
-| gate | `cafe_job` |
+| where · when | the café · Mon-Sat, starts 14:30-19:00, her first shift |
+| gate | `cafe_job` · his step 0 |
 | want | none before: step 1. His eyes on her ass as she carries the tray |
 | next step | he touches her, as if it's nothing: the apron |
 | hook | "Tables first. Phone in the back. Smile." The job's rules; the tip jar (step 2) |
@@ -22,18 +26,34 @@
 | what she risks | her first day |
 | her_line_low · her_line_high | low (under the stage): "He's your boss. Do the job." · high (over it): "You felt that second. So did he." (the person sheet names none; worded by me, signed by LO 2026-11-01) | |
 
-## Branch map — one row per screen
+## The step row (as built, 2026-11-03)
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
+The seven columns, filled from what the build does.
+
+**Kind · stage:** his hands on her for one second too long, nothing she chose · stage 1 (no gate)
+
+| the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
+|---|---|---|---|---|---|---|
+| he reties her apron strings, properly; his hands stay a second longer | Tom | her first day | "Yes, boss." or "I can tie my own apron." (his Power -5) | "Tables first. Phone in the back. Smile." | yes | his step 1; his Want +10; "Tips go in the jar. I count the jar." |
+
+## Branch map — as built (2026-11-03)
+
+One row per exit. Read from the build; it replaces the drafted map.
+
+**`tom_01_the_apron`** — Café · Mon/Tue/Wed/Thu/Fri/Sat 14:30-19:00 · Tom there · needs Tom's step = 0 · `cafe_job` · one time
+
+| node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
 |---|---|---|---|---|
-| `apron` | Tom reties her apron from behind, properly, because she did it wrong: "Tables first. Phone in the back. Smile." His hands stay one second longer than tying takes | no | "Yes, boss." → `tray` · "I can tie my own apron." → `tray` (his Power add −5) | none |
-| `tray` | she carries the tray out; his eyes follow her across the café, and he doesn't pretend they don't | no | "Table six." → the shift | Tom's Want add +10 (stored) · `tom_step` set 1 · `tom_01_done` set |
-
-Both answers count; the second gives his Power add −5: she pushed back (as built).
+| `back` | Tom looks up from the till as you come in. | no | "Clock in." — 2 versions, by clothes → `apron` | — · varies: equip cafe uniform normal |
+| `apron` | Tom hands you a fresh apron at the start of the shift, and when you tie … | no | "Yes, boss." → `tray` | equip cafe uniform normal |
+| | | | "I can tie my own apron." → `tray` | Tom's Power -5 · equip cafe uniform normal |
+| `tray` | You carry the tray out. | no | "Table six." → Café | Tom's Want +10 · Tom's step = 1 · `tom_01_done` set |
 
 ## The lines that change (mine, for signed by LO 2026-11-01)
 
-**The step** (`tom.py:59-71`):
+> Drafted before the build and kept as the signed record. Where it differs, the branch map and the beats above say what the build does.
+
+**The step**:
 
 | where | built | new |
 |---|---|---|
@@ -48,7 +68,7 @@ Both answers count; the second gives his Power add −5: she pushed back (as bui
 town is hiring." · tip "The café in town, Monday to Saturday, 8 AM to 11 PM" · it points at `cafe_job_ask`. Before
 it, only the "Week one" story card named the job, and it is gone after 7 days.
 
-**His hire line** (`cafe_job_ask`, `tom.py:41-47`):
+**His hire line** (`cafe_job_ask`):
 
 | built | new |
 |---|---|
@@ -57,7 +77,7 @@ it, only the "Week one" story card named the job, and it is gone after 7 days.
 | "Wear that. Be on time. Smile at booth four." | "Wear that. Be on time." |
 | (`college_for_fun`) "You look like you like a good time. Customers like that." | cut |
 
-**His counter** (`hub_tom_cafe`, `tom.py:300-315`), by his steps as they are now:
+**His counter** (`hub_tom_cafe`), by his steps as they are now:
 
 | built line | new |
 |---|---|
@@ -90,4 +110,4 @@ it, only the "Week one" story card named the job, and it is gone after 7 days.
 ## Changed 2026-11-02 (reader a3, `READER_FAILS_A3.md`, signed by LO 2026-11-02; DECISIONS 131)
 
 - Row 59 (`hub_tom_cafe`, the tight uniform): "He looks once, at your tits in it, and makes himself look at the till."
-- Row 51 (`hub_tom_cafe`, the tight-dress node): a written no, "Leave it on the counter.", to a short screen: Tom: "Your call." No pay. Both in `iterations/002/build_scripts/tom.py`.
+- Row 51 (`hub_tom_cafe`, the tight-dress node): a written no, "Leave it on the counter.", to a short screen: Tom: "Your call." No pay. Both in the build .

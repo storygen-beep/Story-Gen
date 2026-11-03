@@ -1,6 +1,8 @@
-# SP2 · The ladders — First Term
+# [REVIEW] SP2 · The ladders — First Term
 
-> [READY] · drafted 2026-10-04 · updated 2026-10-08 (where each stage starts) · signed by LO: LO, 2026-10-08
+> Changed 2026-11-04: Ryan's Lust starts at 0 (Q1); his day-one final no is gone; Laura keeps no Want; one hall (Q7); Mark's and Tom's repeatables later (Q3). Waits for LO's re-sign.
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. No "(Next release)" buttons; a no moves nothing of his; Laura keeps Warmth only.
+> [REVIEW] (was [READY]) · drafted 2026-10-04 · updated 2026-10-08 (where each stage starts) · signed by LO: LO, 2026-10-08
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder, proposal a2): release 1 writes
 > stages 1–4; the raises per stage; the Heat line gains what pays and the accident rule; "(Next release)" locks.
 > A scaffold: what every later step stands on, so later releases add steps without breaking shipped
@@ -28,8 +30,8 @@
 - **Her voice has three tiers:** shy (stage 1), warming up (2–3), bold (4–5), read from the meter the
   scene's choices use.
 - **Release 1 writes stages 1–4** (DECISIONS 124; was 1–3). Stage 5 gets its choices and lines in a later
-  release. A locked button whose scene is not written yet shows "(Next release)" greyed, with no number
-  (it waives DECISIONS 90 for those buttons only).
+  release. A scene this release does not write has no button at all (DECISIONS 132, which removed the
+  greyed "(Next release)" buttons). Each arc's last quest card says where this release ends (DECISIONS 134).
 - **Raises:** small acts +1, big scenes +3; drinks give a boost that clears overnight; an act stops
   paying once she's past its stage (A4).
   - Good Girl and Curious acts pay +1, capped at 19 and 39 (DECISIONS 78).
@@ -39,9 +41,9 @@
   - She crosses a stage line two ways: a one-time step's +3, or a drink's boost that lets her try a
     choice of the next stage, whose raise she keeps (`the-arc.md` A4d). An act capped at its stage's top
     never carries her over.
-  - An accident pays his number and sets a flag, never hers; only her button to go further pays her. Her no
-    never raises her climb, and always moves something else: his number, the relationship, or a counter
-    (`the-heat-ladder.md` H5, LO 2026-11-01).
+  - An accident pays his number and sets a flag, never hers; only her button to go further pays her. His
+    Want pays for what happened, never for her answer. Her no pays nothing: not her climb, not his Want
+    (`the-heat-ladder.md` H5; DECISIONS 135, 143).
 - **College first.** Zoe, parties, campus and the café carry her early Corruption. Home pays little
   Corruption until Bold, but can still pay Exhibitionism.
 - **Talk tracks:** `campus_talk` (who approaches her) and `laura_suspicion` (how her mom treats her).
@@ -72,7 +74,7 @@
 2. Playing a step raises their number for the next one, and her choices decide how much.
 3. Between steps, everyday acts raise both: what she wears at home, a tease, talking, a party.
 4. Each step pays the one before and points to the next (A14).
-5. The last step turns into a repeatable (A1).
+5. The last step turns into a repeatable (A1). Mark's and Tom's come in a later release (LO, 2026-11-04, Q3).
 
 ## 3. Shared rules
 
@@ -83,7 +85,7 @@
 
 ## 4. Each person
 
-- **Ryan** — want + warmth · central
+- **Ryan** — want + warmth · central · his Lust (want) starts at 0 (LO, 2026-11-04, Q1)
 - Direction: hers — he already wants her; the question is how far she goes.
 - Raised by: what she shows at home, teasing (Want) · talking, keeping his secret, covering for him,
   letting him cover a short Sunday (Warmth; an everyday act, not a step) · Lowered
@@ -92,21 +94,20 @@
   he treats her: protective, covers for her with Laura, jealous of Jake.
 - Who starts: he waits; she moves.
 - Their no: "Kayla's coming over" / "@player.nickname — I've got a girlfriend" (parked) · Her final
-  no, each at its time: on day one, "Don't ever look at me like that. (ends his path)"; later, "Your
-  secret's safe. You're my brother, that's all. (ends his path)" — either closes his steps; he's only
-  a brother, and cold. (fixed 10-06, lead's default)
+  no, at step 8 only: "You're my brother, that's all. (ends his path)" — it closes his steps; he's only
+  a brother, and cold. The day-one final no is gone: no final no on the arc's first screen (PICKS 17).
 - Ends as: his room at night — two knocks, any night.
 - After: the knocks go on around his girlfriend's nights (`LIVES.md:115`), and Laura's knowing grows;
   the beats are Ryan A's After (`proposals/ARC_IDEAS.md:124`).
 
 Arc: Ryan A · Two Knocks in proposals/ARC_IDEAS.md
 
-- **Laura** — want + warmth · central
+- **Laura** — warmth + her step counter · central (the build keeps no Want for her; her steps carry it)
 - Direction: theirs — Ella works on her until she admits what she wants.
 - Raised by: compliments, being seen, each catch Ella chooses — home late, with Ryan, with a guy, in
-  Laura's dress (Want) · confiding (Warmth) · Lowered by: lying when caught, labelled "(she'll know)";
+  Laura's dress (her steps; she keeps no Want) · confiding (Warmth) · Lowered by: lying when caught, labelled "(she'll know)";
   suspicion rises (Warmth).
-- As it rises: looks too long → keeps Ella's secrets → kisses her on the dark stairs → takes the man's
+- As it rises: looks too long → keeps Ella's secrets → kisses her in the dark hall (cut this release) → takes the man's
   place in Ryan's room. Warmth colours each catch: low, a curfew; high, "Tell me everything."
 - Who starts: she walks in, then waits.
 - Their no: "I'm your mother" (parked) · Her final no: "You're my mom. That's all you get to be. (ends
@@ -204,7 +205,7 @@ opens his steps and Warmth colours how he treats her.
 
 ## 6. Kept from earlier calls
 
-- Everyone keeps their pair: Want + Warmth (Ryan, Laura), Want + Power (Mark, Tom), steps (Zoe, Hale, Jake).
+- Everyone keeps their pair: Want + Warmth (Ryan), Warmth + steps (Laura), Want + Power (Mark, Tom), steps (Zoe, Hale, Jake).
 - Laura's dress stays on day 2, with shy choices only.
 - Crude words:
 

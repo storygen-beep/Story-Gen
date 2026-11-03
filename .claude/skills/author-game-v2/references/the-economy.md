@@ -290,7 +290,7 @@ Three things make it work, and they are cheap:
 > - **If `[settings.rent]` is doing the charging, do not also author a canvas that narrates the
 >   payment.** Write the scene beside it instead — the evening after, the ask before. `engine.md` §26
 >   has the full mechanism, including the fact that it arms at MIDNIGHT on `due_day`, not at the
->   hour the collector's schedule row puts him in front of the player.
+>   hour the collector's schedule row puts him in front of the player. Checked: gate *the rent page can place its collector*; lint *the rent is narrated once*.
 > - **Gate 24 reads `[settings.rent]` as a charge channel**, beside `costs` entries and
 >   `op = "add"` with a negative value. It does not count `op = "subtract"`: that op does nothing
 >   (`engine.md` §21b).
@@ -423,8 +423,9 @@ left his reason in the build: `/* !!!! must be removed someday once money is eas
 thread, and the rest are save migration. Against that, **1,336** sites are gated on tier rungs.
 
 **So the bill's job is the opening hours, and only those.** It has to be there in week one, when
-she has no standing, no capability and no ladder — that is what buys the first transgression. Once
-the meters gate content, the bill going soft is the system working, not the system failing.
+she has no standing, no capability and no ladder: it is what gives her a reason to look at the work, and at the
+other ways to earn she can see but not yet take. Once the meters gate content, the bill going soft is the
+system working, not the system failing.
 
 ⚠️ **This does NOT license a flat number.** R3b still holds for the stretch where the bill is doing
 its job: a constant against a rising income goes soft *before* the meters are ready to take over,
@@ -436,8 +437,10 @@ opening must never be uncoverable. **The first rent can be paid by a player who 
 2026-11-03: "still rent can be paid on week one"; first_term keeps week one easy, its DECISIONS
 141). A game may make it tighter, but only so tight that clean work still covers it. A game may also
 build an early miss when its cost can be won back by paying (R3c above) and `on_short = "carry"`;
-rent may then start before the job. Where a game has a transgressive route to money, it is open and
-obvious on day one, never the only way to pay.
+rent may then start before the job. Where a game has a transgressive route to money, it is **shown on day
+one**: visible but locked, with its stage named on the row or its card ("Corruption 20"), and opened at that
+stage like any other act (SY8 rule 4, `the-heat-ladder.md` H1). It is never open on day one and never the only
+way to pay (LO, 2026-11-03, PICKS F18 b).
 
 **Not a gate.** Four corpus games carry a recurring obligation; a threshold read off four games
 would be invented.
@@ -523,9 +526,16 @@ Six rules are carried by that one choice:
    again from the second night. `engine.md` §28.
 3. **A flag, not a counter trait.** A counter trait with an `lt` condition works and reads to
    gate 10 as a meter that only ever closes. `the-meters.md` M5.
-4. **`clamp = false` on the money grant**, or the engine caps the balance at 100 (`engine.md` §21).
-   ⚠️ And know the asymmetry: a **canvas or location `costs` deduction is clamped to 0–100** and
-   cannot be unclamped, so above 100 it truncates the balance. A choice's `costs` is not clamped. §27.
+4. **Write `clamp` on every effect, because the engine does not default it the way you would guess**
+   (`engine.md` §21; LO, 2026-11-03, PICKS F21 + J72 a). An effect with no `clamp` on a choice, a node or an
+   entry is emitted unclamped (`v2.py:17612`, `:17469`): money stays whole, and a 0–100 meter can run past 100
+   or below 0. So write `clamp = true` (or a `cap`) on every write to a 0–100 meter, and `clamp = false` on
+   money and every other quantity, never `clamp = true` there, which truncates a balance at 100. Since
+   2026-11-03 first_term's helper `tomlw.add` writes it both ways: `clamp = true` on a 0–100 meter, and
+   `clamp = false` on a quantity (money, and any meter a condition reads below 0, like `cafe_name`).
+   ⚠️ Only two paths clamp on their own: a **canvas or location `costs` deduction** is clamped to 0–100
+   (`v2.py:6086`) and cannot be unclamped, so above 100 it truncates the balance; and a cheat-page row clamps
+   unless it says `clamp = false`. A choice's `costs` is not clamped. §27.
 5. **`show_when_locked` + `locked_text`** — a shown-locked row with no reason is mute, which is the
    gate `a locked door says why`. A cost-only choice is exempt, because the engine writes its own
    reason; a *flag*-locked one is not (a number lock gets the engine's line, `engine.md` §15).

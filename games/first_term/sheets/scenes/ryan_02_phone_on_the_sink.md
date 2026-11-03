@@ -1,4 +1,6 @@
-# [READY] Scene — ryan_02_phone_on_the_sink
+# [REVIEW] Scene — ryan_02_phone_on_the_sink
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. "That depends." and its screen; Kayla is met here; the step row.
 
 > **Changed 2026-11-01, signed by LO 2026-11-01 ("Signed")** (DECISIONS 99–113): Ryan's release-1 ladder (`sheets/people/npc_ryan.md`, signed). Changed: the gate drops Exhibitionism 20, the window starts 06:45, Want +5.
 
@@ -18,13 +20,22 @@
 | explicit? | no |
 | her_line_low · her_line_high | low (under the stage): "This is Ryan. You should go." · high (over it): "You want him to hear Kayla on the phone while you do this." (the person sheet's pair; worded for this screen when the prose is written) |
 
+## The step row (filled from the build, 2026-11-03)
+
+**Kind · stage:** overhearing a secret (Good Girl · Covered).
+
+| the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
+|---|---|---|---|---|---|---|
+| she reads Kayla on his phone and holds his secret | Ryan; Kayla, by her text and voice note | empty on purpose: nothing of hers is at stake yet | "Your secret's safe. For now." | he grabs for the phone: "Don't." | not a sex act | she knows about Kayla; step 3 makes him pay for it |
+
 ## Branch map — one row per screen
 
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `sink` | she brushes her teeth; his phone buzzes: a text from Kayla | no | "Read it." → `read` · "Leave it." → the hall (parked) | none |
-| `read` | he grabs the phone, too late | no | "Sneaking her in past Mom, huh?" → `secret` | `knows_about_kayla` set |
-| `secret` | Ryan: "Don't." She smiles at him in the mirror | no | "Your secret's safe. For now." → the hall | Ryan's Want add +5 · `ryan_step` set 2 |
+| `read` | he grabs the phone, too late; a voice note from Kayla plays | no | "Sneaking her in past Mom, huh?" → `secret` | `knows_about_kayla` set · `kayla_met` set (on "Read it.") |
+| `secret` | Ryan: "Don't." She smiles at him in the mirror | no | "Your secret's safe. For now." → the hall · "That depends." → `depends` | first: Ryan's Want add +5 · `ryan_step` set 2 |
+| `depends` | she leaves him guessing | no | "Leave him dripping." → the hall | `ryan_step` set 2 · nothing of his |
 
 "Leave it." is the parked no: the step comes back the next weekday morning.
 

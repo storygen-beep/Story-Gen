@@ -1,4 +1,8 @@
-# [READY] Scene — zoe_dares
+# [REVIEW] Scene — zoe_dares
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+
+> The signed plans behind this page: `proposals/COPY_FIXES_B.md`.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -9,14 +13,18 @@
 
 | row | answer |
 |---|---|
-| system · place | parties · Zoe's apartment (Friday) and the party house (Saturday), her party hours |
-| gate | `picks_the_dares` (Zoe's step 4) · Zoe present · a party tonight · not dared tonight (`zoe_dared_today`, cleared by the daily tick) · each yes by its stage (DECISIONS 124): the kiss Curious, every dare the room watches Exhibitionism 60, cap 79 |
+| where · when | Sat 00:00-01:50, within 8 hours of `party_went` |
+| system · place | parties · Zoe's living room, after the Friday party |
+| want | Zoe picks a dare that keeps Ella close to her |
+| next step | a bolder dare by her stage; after step 5 Zoe joins |
+| hook | four dares open Zoe's step 5 |
+| gate | `picks_the_dares` · `cocky_guy_met` · not dared tonight (`zoe_dared`, cleared at midnight) |
 | BRAKE | **one dare a night** (was two) |
 | who picks | Zoe. Her line names the dare; the screen offers a showing yes, a doing yes and the no (`meters.md` rule 5) |
 | which tier | after Zoe's step 5 (`zoe_together`): **Zoe joins** · else Corruption 40 or Exhibitionism 40: **Bold · Showing** · else **Curious · Daring**. Each yes shows by its own meter (below); a yes she can't take shows locked with the number |
-| Corruption 60 | a fourth button, locked: "Zoe's next dare. (Needs Corruption 60.)" |
+| Corruption 60 | no locked button in the build; her card ends "Zoe's next dare. (Next release)" |
 | who sees | the room, every time |
-| counts | each yes: `zoe_dares_done` add +1 (Zoe's step 5 needs 4) |
+| counts | each first yes: Zoe's dares +1 · Campus talk +1 |
 | the crude-word ceiling | Zoe's early and middle columns (tits, ass, nipples, wet), with thighs; his cock only through his jeans on the two lap dares (plain anatomy beside her column, as Ryan's and Hale's signed sheets) · no pussy, clit, fuck, cunt, cum. confirmed by LO 2026-11-01 ("Continue") the cock |
 | truth | repeats: no "first time", no "again", no history |
 | her_line_low · her_line_high | low: "It's a dare. It doesn't count." · high: "You want her to dare you something worse." | Both lines sit inside the beats. |
@@ -34,10 +42,10 @@ but the meter.
 
 ## The regulars remember
 - A dare with the guy at the keg sets `keg_guy_dared`; with the cocky guy, `cocky_guy_dared`. At the next party, his
-  line: keg guy, "You again. I'm keeping my cup this time." · cocky guy, "You again. Where's my beer?" Mine.
+ line: keg guy, "You again. I'm keeping my cup this time." · cocky guy, "You again. Where's my beer?" Mine.
 - **Jake** (`jake_step` gte 3, her boyfriend): a dare with a man adds one line. Cocky guy: "He's Jake's teammate. He'll
-  tell Jake, or he won't." (`extras.py:68`: "Jake's teammate") · keg guy: "Half this party knows Jake." Jake finding out is
-  a later release.
+ tell Jake, or he won't." (the build : "Jake's teammate") · keg guy: "Half this party knows Jake." Jake finding out is
+ a later release.
 
 ## The dares, written
 
@@ -59,7 +67,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Where the t
 
 > "Start the song," you say, and Zoe hits play. You pull your top off over your head and drop it on the counter. Your tits are bare under the kitchen light. The guys by the fridge stop talking. The guy at the keg stops pumping and stares from the doorway, cap backwards, mouth open. You pour a drink and lean on the counter, ass pushed back. Someone lifts a phone and Zoe slaps it down. "Eyes only," she yells. Your nipples are hard and tight in the open air. You're wet, and you don't cover up. "Look all you want," you tell the room. You want her to dare you something worse. The song hits its last beat, and every eye in the kitchen is on your bare tits.
 
-**`high_show`, entry two:** the built circle flash (`pools.py:85`, signed in `party_dare.md`), Zoe's line "Flash them, babe. Three seconds."
+**`high_show`, entry two:** the built circle flash (the build , signed in `party_dare.md`), Zoe's line "Flash them, babe. Three seconds."
 
 **`high_do`** · 137 words · explicit words 9 · median sentence 9 · act rungs: hands · a mixed act, seen
 
@@ -82,6 +90,241 @@ Every last sentence is on the body. None has her come; the dares stop where the 
 - Two dares a night: one now.
 - Its gate (Exhibitionism 40, Friday after 23:00): the dares open at step 4, both party nights.
 
+## Branch map — as built (2026-11-03)
+
+One row per exit. Read from the build; it replaces the drafted map.
+
+**`zoe_dares`** — Zoe's Living Room · Sat 00:00-01:50 · needs under 8h since `party_went` · `picks_the_dares` · not `zoe_dared` · `cocky_guy_met` · repeatable
+
+| node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
+|---|---|---|---|---|
+| `dare` | Zoe finds you in the crush, hooks her chin over your shoulder, and looks round the … | yes | "Watch this." (Exhibitionism under 60 · Corruption 20+) → `low_do` | — |
+| | | | "Watch me." (not `zoe_together` · Exhibitionism 60+) → `low_show` | — |
+| | | | "Start the song." (not `zoe_together` · Exhibitionism 60+) → `high_show` | — |
+| | | | "Easy." (not `zoe_together` · Exhibitionism 60+ · Corruption 40+ · Exhibitionism 20+) → `high_do` | — |
+| | | | "Here?" (`zoe_together` · Exhibitionism 60+) → `z_show` | — |
+| | | | "Watch, then." (`zoe_together` · Exhibitionism 60+) → `z_do` | — |
+| | | | "Not tonight." → `no` | — |
+| `low_show` | You walk straight to the keg with Zoe laughing behind you. | yes | "Back to the party." — 2 versions, by flags → Zoe's Living Room | `zoe_dared` set · varies: Campus talk, Exhibitionism, Zoe's dares, `keg_guy_dared` set |
+| `low_do` | You take the beer out of his hand and set it on the counter. | yes | "Back to the party." — 2 versions, by flags → Zoe's Living Room | `zoe_dared` set · varies: Campus talk, Corruption, Exhibitionism, Zoe's dares, `cocky_guy_dared` set |
+| `high_show` | You say, and Zoe hits play. | yes | "Back to the party." — 2 versions, by flags → Zoe's Living Room | `zoe_dared` set · varies: Campus talk, Corruption, Exhibitionism, Zoe's dares, `keg_guy_dared` set |
+| `high_do` | The cocky guy grins up at you from the couch, beer still in his hand. | yes | "Back to the party." — 2 versions, by flags → Zoe's Living Room | `zoe_dared` set · varies: Campus talk, Corruption, Exhibitionism, Zoe's dares, `cocky_guy_dared` set |
+| `z_show` | You grab her face and kiss her, right there in the middle of the room. | yes | "Back to the party." — 2 versions, by flags → Zoe's Living Room | `zoe_dared` set · varies: Campus talk, Corruption, Exhibitionism, Zoe's dares, `cocky_guy_dared` set |
+| `z_do` | The cocky guy on the corner couch grins up at you and sets his beer on … | yes | "Back to the party." — 2 versions, by flags → Zoe's Living Room | `zoe_dared` set · varies: Campus talk, Corruption, Exhibitionism, Zoe's dares, `cocky_guy_dared` set |
+| `no` | She goes and dares the guy on the couch to drink something from the sink instead. | no | "Let her have her dare." → Zoe's Living Room | `party_cool_zoe` set · `zoe_dared` set |
+
+## The explicit beats, as built (2026-11-03)
+
+Every screen the build counts as explicit (3+ words from the frozen list), word for word, with its measurement. It replaces the drafted text.
+
+**`zoe_dares` · `dare`** — 88 words · 3 counted: kiss, cock, kiss · ceiling: Zoe's early and middle columns: tits, ass, nipples, wet; his cock only through his jeans
+
+> Zoe finds you in the crush, hooks her chin over your shoulder, and looks round the room like she's shopping.
+>
+> Kiss the cocky guy. Properly. Tongue, hands, the lot.
+>
+> Flash the guy at the keg. Or topless in the kitchen till the song ends. Or his lap, till he's hard. Make him beg.
+>
+> Kiss me where they can see. Or let me watch you with him.
+>
+> The guy at the keg sees you and grins.
+>
+> You again. I'm keeping my cup this time.
+>
+> You again. Where's my beer?
+
+**`zoe_dares` · `low_show`** — 428 words · 26 counted: tits, tits, tits, tits, tits, tits, tits, tits, tits, nipple, nipple, tits, nipple, tits, nipple, tits, nipple, tits, nipple, tits, nipple, tits, nipple, tits, nipple, tits · ceiling: Zoe's early and middle columns: tits, ass, nipples, wet; his cock only through his jeans
+
+> You walk straight to the keg with Zoe laughing behind you. The guy in the backwards cap is pumping it. You stand right in front of him and wait. He looks up.
+>
+> You grab your top and yank it up to your chin. Your tits are bare to him in the middle of the party.
+>
+> You grab your dress and yank it up to your chin. Your tits are bare to him in the middle of the party.
+>
+> You grab your dress and yank it up to your chin. Your tits are bare to him in the middle of the party.
+>
+> You grab your uniform and yank it up to your chin. Your tits are bare to him in the middle of the party.
+>
+> You grab your uniform and yank it up to your chin. Your tits are bare to him in the middle of the party.
+>
+> You grab your bra and yank it up to your chin. Your tits are bare to him in the middle of the party.
+>
+> You're already bare on top, and you push your tits right out at him. They're bare to him in the middle of the party.
+>
+> You grab your clothes and yank it up to your chin. Your tits are bare to him in the middle of the party.
+>
+> He freezes with the pump in his fist. Beer foams over his cup. Someone by the keg cheers.
+>
+> Let the whole room look.
+>
+> Your heart is slamming, and you hold it there one long second. The air is cold on your bare tits. Your nipples go tight and hard while he stares at them. Your face burns. You're wet, and your thighs press together.
+>
+> You pull your top down over your hard nipples, and your tits still tingle under it.
+>
+> You pull your dress down over your hard nipples, and your tits still tingle under it.
+>
+> You pull your dress down over your hard nipples, and your tits still tingle under it.
+>
+> You pull your uniform down over your hard nipples, and your tits still tingle under it.
+>
+> You pull your uniform down over your hard nipples, and your tits still tingle under it.
+>
+> You pull your bra back down over your hard nipples, and your tits still tingle under it.
+>
+> You cross your arms over your hard nipples, and your tits still tingle under them.
+>
+> You pull your clothes down over your hard nipples, and your tits still tingle under it.
+>
+> Holy shit. Again. Do it again.
+>
+> That's my girl. His drinks are yours now.
+>
+> Half this party knows Jake.
+
+**`zoe_dares` · `low_do`** — 230 words · 14 counted: kiss, ass, tits, nipple, nipple, nipple, nipple, nipple, nipple, nipple, nipple, kiss, ass, fuck · ceiling: Zoe's early and middle columns: tits, ass, nipples, wet; his cock only through his jeans · **past the ceiling: fuck**
+
+> You take the beer out of his hand and set it on the counter. He opens his mouth to say something, and you kiss it shut. Properly. Your tongue slides over his, slow, and his pushes back. Someone whoops, then the whole corner does. His hands drop to your ass and squeeze hard, one cheek filling each palm. He pulls you in until your tits press flat against his chest.
+>
+> Your nipples go hard under your top, and he feels them.
+>
+> Your nipples go hard under your dress, and he feels them.
+>
+> Your nipples go hard under your dress, and he feels them.
+>
+> Your nipples go hard under your uniform, and he feels them.
+>
+> Your nipples go hard under your uniform, and he feels them.
+>
+> Your nipples go hard through your bra, and he feels them.
+>
+> Your bare nipples go hard against his shirt, and he feels them.
+>
+> Your nipples go hard under your clothes, and he feels them.
+>
+> It's a dare. It doesn't count. Over his shoulder Zoe is biting her lip, eyes on your mouth. You kiss him deeper anyway, wet and open. Then you pull back first, breathing hard, lips wet. He grins down at you, both hands still full of your ass.
+>
+> Fuck. Zoe should dare you more often.
+>
+> Okay, okay, break it up before he proposes.
+>
+> He's Jake's teammate. He'll tell Jake, or he won't.
+
+**`zoe_dares` · `high_show`** — 261 words · 8 counted: tits, ass, nipple, tits, tits, nipple, tits, nipple · ceiling: Zoe's early and middle columns: tits, ass, nipples, wet; his cock only through his jeans
+
+> Start the song.
+>
+> You say, and Zoe hits play. You pull your top off over your head and drop it on the counter. Your tits are bare under the kitchen light. The guys by the fridge stop talking. The guy at the keg stops pumping and stares from the doorway, cap backwards, mouth open. You pour a drink and lean on the counter, ass pushed back. Someone lifts a phone and Zoe slaps it down.
+>
+> Eyes only.
+>
+> She yells. Your nipples are hard and tight in the open air. You're wet, and you don't cover up.
+>
+> Look all you want.
+>
+> You tell the room. You want her to dare you something worse. The song hits its last beat, and every eye in the kitchen is on your bare tits.
+>
+> Till the song ends, babe.
+>
+> Zoe says, and turns the music up. The kitchen goes quiet under it. You pull everything up to your chin, and your tits drop out into the warm air, bare to people you sit next to in class. Your nipples go hard at once, tight and dark, while every eye lands on them. Somebody whistles. A guy at the counter forgets the drink halfway to his mouth. The chorus comes round again. Your chest heaves, so your tits bounce with it. The last note goes, and you hold them out a breath past it, nipples stiff and aching, before you let everything drop.
+>
+> Zoe, your friends are the best thing about this party.
+>
+> Covered or not, babe, nobody here is forgetting those.
+>
+> Half this party knows Jake.
+
+**`zoe_dares` · `high_do`** — 231 words · 17 counted: cock, ass, cock, tits, ass, cock, nipple, nipple, nipple, nipple, nipple, nipple, nipple, nipple, cock, ass, fuck · ceiling: Zoe's early and middle columns: tits, ass, nipples, wet; his cock only through his jeans · **past the ceiling: fuck**
+
+> The cocky guy grins up at you from the couch, beer still in his hand. You sit in his lap facing the room. Then you grind your ass down on him, slow. His cock gets hard under you, thick through his jeans. His hands grab your hips and hold on. He groans into your neck. One hand slides up toward your tits, but you push it back down.
+>
+> Not those.
+>
+> You tell him.
+>
+> Say please.
+>
+> You roll your ass over his cock until his breath shakes.
+>
+> Please.
+>
+> He says, loud. The people on the couch hear it and laugh. Zoe watches from the arm of the couch, grinning.
+>
+> Good boy.
+>
+> She says.
+>
+> Your nipples are tight against your top, and you're wet.
+>
+> Your nipples are tight against your dress, and you're wet.
+>
+> Your nipples are tight against your dress, and you're wet.
+>
+> Your nipples are tight against your uniform, and you're wet.
+>
+> Your nipples are tight against your uniform, and you're wet.
+>
+> Your nipples are tight against your bra, and you're wet.
+>
+> Your bare nipples are tight in the open air, and you're wet.
+>
+> Your nipples are tight against your clothes, and you're wet.
+>
+> You keep grinding. He begs into your neck, and his cock jerks under your ass.
+>
+> Please. Fuck. Please, okay? I'm begging.
+>
+> You heard him. He begged. Dare done.
+>
+> He's Jake's teammate. He'll tell Jake, or he won't.
+
+**`zoe_dares` · `z_show`** — 138 words · 8 counted: kiss, ass, tits, cock, kiss, ass, nipple, tits · ceiling: Zoe's early and middle columns: tits, ass, nipples, wet; his cock only through his jeans
+
+> You grab her face and kiss her, right there in the middle of the room. Her mouth opens under yours. Her tongue finds yours, slow and greedy. Her hands go into your hair, then slide down to your ass to pull you in hard. Your tits press flat against hers. Her thigh pushes between yours. You grind down on it. The room goes loud, whistles and shouting over the music. Then it goes quiet. Everyone stares. The cocky guy stands by the wall, his beer stopped halfway to his mouth. Zoe grins into the kiss. She squeezes your ass harder and drags you tighter onto her thigh. You're wet. Your nipples are hard against her tits.
+>
+> Mm. You taste like vodka. Again.
+>
+> Everyone's watching us.
+>
+> That's the point, babe.
+>
+> He's Jake's teammate. He'll tell Jake, or he won't.
+
+**`zoe_dares` · `z_do`** — 234 words · 15 counted: cock, kiss, tits, tits, tits, tits, tits, tits, tits, tits, cock, nipple, nipple, cock, tits · ceiling: Zoe's early and middle columns: tits, ass, nipples, wet; his cock only through his jeans
+
+> The cocky guy on the corner couch grins up at you and sets his beer on the floor. You straddle his lap and kiss him hard, with the whole room watching.
+>
+> His hands slide up under your top and close on your bare tits.
+>
+> His hands slide up under your dress and close on your bare tits.
+>
+> His hands slide up under your dress and close on your bare tits.
+>
+> His hands slide up under your uniform and close on your bare tits.
+>
+> His hands slide up under your uniform and close on your bare tits.
+>
+> His hands push up under your bra and close on your bare tits.
+>
+> His hands slide up your stomach and close on your bare tits.
+>
+> His hands slide up under your clothes and close on your bare tits.
+>
+> His cock is hard under you through his jeans, and your hips roll on it. Zoe sits right beside you, close enough to touch. Her hand rests on your thigh.
+>
+> Slower.
+>
+> She tells him, and he slows. His thumbs find your nipples.
+>
+> Her nipples. Yes. Like that.
+>
+> You keep your eyes on Zoe while he touches you. You're wet, grinding down on his cock. His hands squeeze your tits, and Zoe's fingers press into your thigh.
+>
+> Slower. Make him wait for it.
+>
+> Jesus Christ, you two are going to kill me.
+>
+> He's Jake's teammate. He'll tell Jake, or he won't.
+
 ## Why — the source of each key choice
 
 | key choice | source |
@@ -93,6 +336,6 @@ Every last sentence is on the body. None has her come; the dares stop where the 
 
 ### False lines a3, 2026-11-02 (DECISIONS 129)
 Zoe's dare says "till the song ends", but the pool's second entry (the circle flash) counted to three. `high_show`
-entry two is now `FLASH_SONG` (`pools.py`): "Till the song ends, babe," and she holds them out past the last note.
+entry two is now `FLASH_SONG`: "Till the song ends, babe," and she holds them out past the last note.
 108 words, 4 explicit (the circle flash it replaces: 97, 4). The circle flash itself stays in `party_dare`.
 

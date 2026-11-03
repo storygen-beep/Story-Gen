@@ -1,4 +1,6 @@
-# [READY] Person — the art lecturer
+# [REVIEW] Person — the art lecturer
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took.
 
 > Signed by LO: LO, 2026-10-08.
 
@@ -31,6 +33,13 @@ None in 0.1. Her Curious and Bold rungs wait for 0.2 (SP5). In 0.1: a talk hub, 
 ## Phone thread
 
 None in 0.1. Not someone she is involved with in 0.1.
+
+## Walk-ins and acts from the heat proposal (signed 2026-11-03, built)
+
+Walk-ins: `art_office`. Each row (when, what pays) is on that place sheet.
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_B.md` (signed with the a2 sheets, DECISIONS 125).
 
 ## Why — the source of each key choice
 

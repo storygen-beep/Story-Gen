@@ -1,4 +1,8 @@
-# [READY] Place — Ryan's Room
+# [REVIEW] Place — Ryan's Room
+
+> Changed 2026-11-04 (LO's answers Q14, Q15: his room is shut while Kayla is over; his drawer flirt opens at Curious). Waits for LO's re-sign.
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08). Re-signed 2026-10-29 ("sign all", in chat).
 
@@ -13,7 +17,7 @@
 | closed text | none: always open |
 | hidden until | no |
 | fill — word budget | 8,000 words (ledger, unchanged) |
-| door | yes: Ryan · "Knock" · "Two knocks" from step 3 · "Go in" |
+| door | yes: Ryan · "Knock" · "Two knocks" from step 3 · "Go in" · shut Fri 18:00–Sat 10:00 while Kayla is there (once she is met): no knock shows, and the door reads "Kayla's here. His door is shut, and it stays shut till she goes." (LO, 2026-11-04, Q14) |
 | dress code or wanted state | none |
 
 ## On entering
@@ -34,6 +38,23 @@
 
 > Changed 2026-10-29 (the door option "His door's open a crack.", LO's pick of 2026-10-29); re-signed by LO 2026-10-29.
 
+## Built from the heat proposal (signed 2026-11-03)
+
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has here:
+
+**Walk-ins.** Her activity rolls on entry (1 in 4 at her lowest band, more higher up); on a hit someone walks in. A man's pay sits on the moment; her cover pays 0.
+
+| who walks in | her activity | when | his pay, on the moment | her bolder answers |
+|---|---|---|---|---|
+| Ryan | Go through his things | Sun, Mon, Tue, Thu 18:45–19:00 | his Want +2 | "Hold it up. "Explain this."" needs Corruption 20, pays +1, cap 39 (LO, 2026-11-04, Q15); the Good Girl tease that stood in for it is cut |
+| Kayla | Go through his things | Fri 17:45–18:00 | none: no meter | a line only, no pay |
+
+**Acts, rungs and pools.**
+
+| what | where | buttons and pays |
+|---|---|---|
+| his light (C3) | his door ajar, at night | "Stay until his light goes off." Corruption 15 |
+
 ## Rows a gate needs
 
 | row | gate |
@@ -41,6 +62,8 @@
 | his room while he's out | a destination is never open and exit-only |
 | the two knocks repeat | the door can be seen again |
 | Ryan's rows have a hub | standing surface |
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_A.md` (signed with the a2 sheets, DECISIONS 125).
 
 ## Why — the source of each key choice
 

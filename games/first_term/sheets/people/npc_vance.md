@@ -1,4 +1,6 @@
-# [READY] Person — Mr. Vance
+# [REVIEW] Person — Mr. Vance
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: the Monday knock after a short Sunday. His porch no moves nothing. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took.
 
 > Signed by LO: LO, 2026-10-08.
 
@@ -22,6 +24,7 @@
 | place | days | from | to | why he is there |
 |---|---|---|---|---|
 | `vance_house` | every day | 18:00 | 22:00 | his porch, every evening |
+| `home_front_door` | Mon | 18:00 | 19:00 | at her door, only in the 48 hours after a short Sunday (`rent_short`) |
 
 ## Ladder — one guidance card per step
 
@@ -44,6 +47,13 @@ None in 0.1. Not someone she is involved with in 0.1.
 | Want and Power each read by a condition | the men's numbers are read |
 | his porch row has a hub | standing surface |
 
+## Walk-ins and acts from the heat proposal (signed 2026-11-03, built)
+
+Walk-ins: `home_front_door`, `vance_house`. Each row (when, what pays) is on that place sheet.
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_A.md`, `proposals/COPY_FIXES_C.md` (signed with the a2 sheets, DECISIONS 125).
+
 ## Why — the source of each key choice
 
 | key choice | source |
@@ -55,7 +65,7 @@ None in 0.1. Not someone she is involved with in 0.1.
 
 ## Changed 2026-11-02 (reader a3, `READER_FAILS_A3.md`, signed by LO 2026-11-02; DECISIONS 131)
 
-- Row 52 (`hub_vance_porch`): from his Lust 30, "Goodnight, Mr. Vance." moves his Lust +1 and gets his line: "Suit yourself, Miss. The step's not going anywhere." Under 30 it moves nothing, as before.
+- Row 52 (`hub_vance_porch`): from his Lust 30, "Goodnight, Mr. Vance." gets his line and moves nothing (DECISIONS 135): "Suit yourself, Miss. The step's not going anywhere." Under 30 it moves nothing too.
 - Row 60 (`hub_vance_porch`): under Lust 30, "His eyes go to your legs and come back up slow"; at 30–59 his ask is "One evening you'll sit with me, keep an old man company."
 - Row 66 (`vance_meeting`): his first meeting ends on "We'll talk properly some evening."
 - Row 65 (`town_event_vance`): "He lowers it to look at your legs when you pass."

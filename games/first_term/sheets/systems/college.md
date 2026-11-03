@@ -1,4 +1,6 @@
-# [READY] System — college
+# [REVIEW] System — college
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. File and line cites removed.
 
 > **Changed 2026-11-02** (reader fails a3, signed by LO 2026-11-02, DECISIONS 131): rows 19, 24–28, 42 (see `npc_bio_ta.md`, `npc_cocky_guy.md`, `college_class_figure.md`, `college_event_desk_guy.md`). The dress-code warning's skirt line is "Their eyes go to your bare thighs below the skirt, and away."
 
@@ -43,17 +45,17 @@
 | Thu | Figure drawing | Biology | Psychology |
 | Fri | Psychology | free | free |
 
-**Rooms and lecturers** (checked 2026-11-01, `iterations/002/build_scripts/people_data.py:78-139`): every class is in
+**Rooms and lecturers** (checked 2026-11-01): every class is in
 `lecture_hall`. Psychology is Dr. Hale, Business the Business lecturer, Biology the Biology TA, Figure drawing the art
 lecturer.
 
 ## The first college day (new 2026-11-01)
 
 **What was wrong** (LO, 2026-10-31): the first class was easy to miss (the class scene opens only in its first 15
-minutes, `college.py:22-28`; the game starts Monday 07:00 at home and nothing walks her there), and the timetable was a
-paragraph with no times taped to the hall door (`lecture_timetable`, `college.py:465-476`).
+minutes; the game starts Monday 07:00 at home and nothing walks her there), and the timetable was a
+paragraph with no times taped to the hall door (`lecture_timetable`).
 
-1. **The opening hands her to college.** The opening's last screen (`card`, `toml_phases/2_one_shots.toml:502`) ends with
+1. **The opening hands her to college.** The opening's last screen (`card`) ends with
    Laura: "You'll be late on your first day." Its button is **"Go to campus."** It walks her to the dean's office
    (15 minutes).
 2. **The dean's office, one time, Monday of week one** (`dean_office`; the dean, 55, "what he visibly wants: to be
@@ -82,16 +84,15 @@ what changes after, she has the timetable, the dean knows her name, the complain
 - **Where it opens:** a **Timetable** button in the sidebar, after People · the dean's screen 3 · the lecture-hall door
   (the door's paragraph is replaced by the button).
 - **One source of truth:** the build writes the `[[ui.timetable]]` rows from the same `PSYCH`, `BUSI`, `BIO`, `FIG`
-  schedules the class scenes use (`college.py:17-20`), so the screen can't disagree with the classes.
+  schedules the class scenes use, so the screen can't disagree with the classes.
 - **Engine (shipped 2026-11-01, DECISIONS 112):** `[[ui.timetable]]` rows (class, place, lecturer, weekdays, from, to),
   drawn by `setup.timetableHtml(day)` and opened by `setup.openTimetable(day)`; `[ui] timetable_button = true` adds the
-  sidebar button. Tests: `apps/game_generation/tests/test_timetable.py`. Opening it from the dean's screen and the door
+  sidebar button. Opening it from the dean's screen and the door
   needs a link that runs `setup.openTimetable()`: check at build how a canvas button runs it.
 
 ## The card
 
-Week one's goal: "Go to your first class: Psychology, **08:30**, in the lecture hall." (today it has no time:
-`0_systems_spec.toml:498`).
+Week one's goal: "Go to your first class: Psychology, **08:30**, in the lecture hall." (today it has no time).
 
 **Not decided here:** whether missing a class costs anything this release (signed as "a lecturer's warning; again, a
 complaint"). Proposed: as signed.

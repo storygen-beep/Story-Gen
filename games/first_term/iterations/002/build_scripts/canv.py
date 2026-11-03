@@ -109,14 +109,45 @@ def _voice_blocks(blocks, table, cid, in_pool=False):
                 print(f"speech: {cid}: paragraph still quotes {missing[:2]} (no speech_table entry)", file=__import__("sys").stderr)
                 out.append(b)
                 continue
-            new = speech(b["content"], [table[x] for x in quotes])
+            new = [x for p in speech(b["content"], [table[x] for x in quotes]) for x in thought_split(p)]
             if in_pool and len(new) > 1:   # a pool entry is ONE block: keep the cut lines together
+                new = [GC({"version": "1.0", "logic": "AND", "items": []}, *new)]
+            out.extend(new)
+            continue
+        if b.get("type") == "paragraph" and THOUGHT_RX.search(b.get("content", "")):
+            new = thought_split(b)
+            if in_pool and len(new) > 1:
                 new = [GC({"version": "1.0", "logic": "AND", "items": []}, *new)]
             out.extend(new)
             continue
         if b.get("blocks"):
             b = dict(b, blocks=_voice_blocks(b["blocks"], table, cid, b.get("type") == "block_pool"))
         out.append(b)
+    return out
+
+
+# ── her thought is a thought block (skill register.md :32-33, :855-856; pass 3 B6, 2026-11-03) ──
+# The signed beats write her thought as *italics* inside the paragraph, where the thought-vs-speech lint can't
+# see it and the screen shows it as narration. thought_split() cuts the paragraph at each italic span the way
+# speech() cuts at quotes: narration, then T(the thought, without the asterisks), then narration. Every word
+# stays. A span that starts lower-case is text on a screen (a phone message, a sticky note), not her voice,
+# and stays inside the paragraph.
+THOUGHT_RX = re.compile(r"\*([A-Z][^*]*)\*")
+
+
+def thought_split(b):
+    if b.get("type") != "paragraph" or not THOUGHT_RX.search(b.get("content", "")):
+        return [b]
+    props = {k: v for k, v in (b.get("props") or {}).items()}
+    out = []
+    for i, part in enumerate(THOUGHT_RX.split(b["content"])):
+        part = part.strip()
+        if not part:
+            continue
+        if i % 2:
+            out.append(T(part))
+        else:
+            out.append(dict(P(part[0].upper() + part[1:]), **({"props": props} if props else {})))
     return out
 
 
@@ -178,9 +209,55 @@ def VID(desc, *queries, file=None, pool_dir=None):
     return {"type": "video", "props": props}
 
 
+def odds_bands(meter, chance):
+    """(pass 3 D52, the-surfaces.md R3: "the odds ride the same trait as the content") a walk-in's substitution odds
+    in three bands on HER meter that its answers pay: under 20, 20-39, 40 and up (the stage lines). The lowest band
+    keeps the signed odds (DECISIONS 148: 0.25, or 0.5 with C4's unlocked door or C2's loud TV); the world leans
+    x1.4 and x1.8 as she climbs, never past 0.9. Returns [(chance, condition items)], mutually exclusive.
+    `meter` None: a walk-in with no heat and no pay keeps one flat rule."""
+    if not meter:
+        return [(chance, [])]
+    return [(chance, [trait(meter, "lt", 20)]),
+            (min(0.9, round(chance * 1.4, 2)), [trait(meter, "gte", 20), trait(meter, "lt", 40)]),
+            (min(0.9, round(chance * 1.8, 2)), [trait(meter, "gte", 40)])]
+
+
+def own_media(tree, tag):
+    """(pass 3 B37, register.md "ONE ASSET, ONE BLOCK") give every media block in a COPIED canvas or node list its
+    own asset: `_<tag>` goes in before the tier suffix (sex/x_t4 -> sex/x_<tag>_t4; a file keeps its extension).
+    The media review dedupes by file, so a copy sharing the original's asset would never get its own verdict."""
+    if isinstance(tree, list):
+        for x in tree:
+            own_media(x, tag)
+    elif isinstance(tree, dict):
+        props = tree.get("props") if tree.get("type") in ("video", "image") else None
+        if isinstance(props, dict):
+            for k in ("pool_dir", "file"):
+                if props.get(k):
+                    props[k] = re.sub(r"(_t\d)((?:\.\w+)?)$", rf"_{tag}\1\2", props[k], count=1) \
+                        if re.search(r"_t\d(?:\.\w+)?$", props[k]) else re.sub(r"((?:\.\w+)?)$", rf"_{tag}\1", props[k], count=1)
+        for x in tree.values():
+            own_media(x, tag)
+    return tree
+
+
 # ── choices ──
+def with_duration(text, mins):
+    """the-clock.md C4 (pass 3 H28): a click that moves the clock an hour or more says how long, in brackets, in
+    one form ("Clock out (3h).", "Pack up (1h 30m)."). The tag is built from the same `mins` the choice charges,
+    so it cannot drift from the spend (gate `the label keeps its time`). A spoken line keeps its quote whole."""
+    h, m = divmod(int(mins), 60)
+    tag = f"({h}h{f' {m}m' if m else ''})"
+    t = text.rstrip()
+    if t.endswith(".") and not t.endswith('."'):
+        return f"{t[:-1]} {tag}."
+    return f"{t} {tag}"
+
+
 def go(text, node=None, loc=None, mins=None, eff=None, flags=None, cond_=None, wardrobe=None,
        costs=None, locked=None, swl=False, consumes=False, final=False, retry=None, ret=False, mods=None):
+    if mins is not None and mins >= 60 and not re.search(r"\(\s*\d", text):
+        text = with_duration(text, mins)
     c = {"text": text}
     if node:
         c["targetType"] = "node"
@@ -272,6 +349,55 @@ def clear_on_leave(canvas, *keys):
             if c.get("targetType") != "node":
                 c["flagEffects"] = list(c.get("flagEffects", [])) + [funset(k) for k in keys]
     return canvas
+
+
+def sex_takes_needs(out, cid, node_id, text):
+    """A one-time partnered sex step takes energy and hygiene like the repeatable acts (heat_a ACT_COSTS /
+    ACT_HYGIENE, 10 each), on the choice out of the act. The ledger's board.needs says partnered sex takes both
+    (pass 4 E95); the steps took neither. Clamped at 0: a need is a 0-100 meter."""
+    hits = 0
+    for c in out:
+        if c["id"] != cid:
+            continue
+        for n in c["nodes"]:
+            if n["id"] != node_id:
+                continue
+            for ch in n["choices"]:
+                if ch["text"] == text:
+                    ch["effects"] = list(ch.get("effects", [])) + [
+                        {"targetType": "player", "trait": "energy", "op": "add", "value": -10, "clamp": True},
+                        {"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}]
+                    hits += 1
+    assert hits, (cid, node_id, text)
+
+
+# pass 4 A57 (the-heat-ladder.md H4, "her line changes with her level"): on a walk-in's answer screen, last before
+# she picks, one short thought of hers by the stage of the meter its answers read: being seen reads Exhibitionism
+# (Covered / Daring / Showing / Watched), the taboo reads Corruption (Good Girl / Curious / Bold / Hungry). The lines
+# are wants, never acts, so they stay true whichever button she then takes. Each canvas gets its own four lines (one
+# shared line pasted into many canvases fails `one pool, one place`), short, so the screen still says more than she
+# thinks (lint `thoughts outweigh speech`). The bands are one if/elseif chain (GC) with an always-true else, one
+# bound a band (each bound is a tier gate site, gate `the climb is where you said it is`); when a group already
+# ends the screen they are standalone G bands instead, so they cannot join its chain.
+def her_band_line(canvases, lines_by_canvas):
+    """lines_by_canvas: {cid: (meter, [line under 20, under 40, under 60, 60 and up])}."""
+    done = set()
+    for c in canvases:
+        if c["id"] not in lines_by_canvas:
+            continue
+        meter, texts = lines_by_canvas[c["id"]]
+        assert len(texts) == 4, c["id"]
+        ans = next(n for n in c["nodes"] if n["id"] == "answer")
+        if ans["blocks"][-1].get("type") != "group":
+            lines = [GC(cond(trait(meter, "lt", hi)), T(t)) for hi, t in zip((20, 40, 60), texts)]
+            lines.append(GC(cond({"type": "worn_exposure", "operator": "gte", "value": 0}), T(texts[3])))   # the else
+        else:
+            bounds = [(None, 20), (20, 40), (40, 60), (60, None)]
+            lines = [G(cond(*([trait(meter, "gte", lo)] if lo is not None else []),
+                            *([trait(meter, "lt", hi)] if hi is not None else [])), T(t)) for (lo, hi), t in zip(bounds, texts)]
+        ans["blocks"] = list(ans["blocks"]) + lines
+        done.add(c["id"])
+    assert done == set(lines_by_canvas), set(lines_by_canvas) - done
 
 
 def booked_split(choice, key, eff=(), flags=()):
@@ -384,6 +510,14 @@ def ledger_step(npc, n):
     return lad["counter"], st
 
 
+def on_activity(target, *items):
+    """A one-time scene that opens from an activity instead of firing on entry (LO, 2026-11-04, Q2; gate `nothing
+    one-time at the shop or wardrobe`): a substitution rule at chance 1 on the host. The target keeps its own trigger
+    (window, gates, its person, parking), marked substitution_only so it never auto-fires; the engine checks all of
+    that on the target before it swaps in (setup._tryRule, isCanvasValid, canTriggerCanvas)."""
+    return {"target_canvas_id": target, "chance": 1.0, "conditions": cond(*items)}
+
+
 def step_trigger(npc, n, extra_counters=(), bind_npc=True, priority=10, retry_days=1):
     """The trigger of ladder step n: place, window, the declared gate + the counter at n-1."""
     counter, st = ledger_step(npc, n)
@@ -448,7 +582,7 @@ def hours_phrase(schedules):
         p_ = f"{_days(s.get('weekdays', list(range(7))))}, {_clock(s['start_time'])}-{_clock(s['end_time'])}"
         if p_ not in parts:
             parts.append(p_)
-    return "; ".join(parts[:3])
+    return "; ".join(parts)   # every row: a dropped row hid when it opens (pass 4 H66)
 
 
 def with_closed_line(canvas):
@@ -456,6 +590,12 @@ def with_closed_line(canvas):
     when it opens (the-clock.md C5; gate `a closed activity says when it opens`). Added here so no canvas can miss it;
     an author's own message wins."""
     t = canvas.get("trigger") or {}
+    # An event that happens to her (the guy beside her, the lecturer's word, a drink handed to her) never lists its
+    # hours: hours go only on an activity she chooses (the-clock.md C5; LO, 2026-11-03). The mark rides in
+    # trigger.metadata, which the importer ignores and the gate reads.
+    if canvas.get("event"):
+        t.setdefault("metadata", {})["kind"] = "event"
+        return canvas
     if (t.get("is_repeatable") and t.get("schedules") and not t.get("npc") and not t.get("requires_npc")
             and t.get("trigger_mode") != "random" and not t.get("show_when_blocked")):
         t["show_when_blocked"] = True
@@ -569,6 +709,26 @@ COUNTER_WORDS = {
     "cafe_name": "Let customers' hands stay on café shifts, until the café gets a name for it",
     "cafe_shifts_worked": "Work {v} café shifts",
     "rent_short_weeks": "A Sunday short on the rent",
+    # pass 3 J36 (engine.md:1074-1075): a counter goal says where, what to do and when, not a bare number
+    "zoe_dares_done": "Take {v} of Zoe's dares at her Friday party, late",
+    "laura_gaps_watched": "Watch Laura through her door or the bathroom door at night, {v} times",
+}
+# pass 3 J36: a meter goal names its feeder (the-voice.md R3: a place, a person, a verb, and the window when there is
+# one). NPC_FEED is what raises his or her meter (the feeders in the build: hub_ryan_*, walkin_*_ryan, home_event_ryan_*,
+# garden_sun; hub_laura_*, home_event_laura_robe). STAGE_WAY is what pays her in the stage BELOW the value, the same acts
+# extras.py's tier cards name (engine.md section 23: never the button the value itself opens).
+NPC_FEED = {
+    ("npc_ryan", "want"): "let him see you at home: your towel in the hall, the shower, the lounger under his window, his room in the evenings",
+    ("npc_laura", "warmth"): "spend time with her: breakfast on weekday mornings, cooking, dinner and the dishes on her evenings in the kitchen",
+}
+STAGE_WAY = {
+    ("corruption", 20): "stay and look: the park couple, the library stacks, a door left open at home at night",
+    ("corruption", 40): "touch yourself in your bed, in the shower or in a college toilet stall; watch the couple in the park",
+    ("corruption", 60): "get on Ryan's couch with him, pull Jake into the gym locker room",   # pass 4: the watched dares need Corruption 60 now
+    # pass 4 G15: the park and street dress codes open no bra / a short skirt at Corruption 20 for a Covered player
+    ("exhibitionism", 20): "let someone walk in on your shower; once you're Curious, run in the park and walk the street",
+    ("exhibitionism", 40): "let them look at the campus gym and in class, take your bra off in the college toilet, let the towel slip at home",
+    ("exhibitionism", 60): "show off on the lounger in the garden, let the wind have your skirt on the street, drop the towel at home",
 }
 
 
@@ -602,10 +762,12 @@ def card_goals(st, counter):
             continue
         if g.get("npc"):
             goals.append({"type": "trait", "subject": "npc", "npc_id": g["npc"], "trait": key, "op": g["op"],
-                          "value": val, "label": f"{NPC_NAME.get(g['npc'], g['npc'])}'s {TRAIT_NAME.get(key, key)} {val}"})
+                          "value": val, "label": f"{NPC_NAME.get(g['npc'], g['npc'])}'s {TRAIT_NAME.get(key, key)} {val}"
+                                                  + (f": {NPC_FEED[(g['npc'], key)]}" if (g["npc"], key) in NPC_FEED else "")})
         else:
             stage = STAGE.get(key, {}).get(val)
-            label = counter_label(key, val) + (f" ({stage})" if stage else "")
+            label = counter_label(key, val) + (f" ({stage})" if stage else "") \
+                + (f": {STAGE_WAY[(key, val)]}" if (key, val) in STAGE_WAY else "")
             goals.append({"type": "trait", "subject": "player", "trait": key, "op": g["op"], "value": val, "label": label})
     return goals, notes
 
@@ -632,10 +794,16 @@ def step_cards(npc, texts, met_flag=None, terminal_text=None, closed_text=None, 
         label = re.sub(r"\s*\([^()]*\b(?:Curious|Daring|Bold|Showing|Hungry|Watched)\b[^()]*\)", "", label)
         tip = label + ("; " + "; ".join(notes) if notes else "")
         card = {"npc_id": npc, "priority": 10, "text": text, "tip": tip, "when": when, "ready_canvas": s["canvas"]}
-        if pointer and pointer[0] == n:
-            card["heading"] = pointer[1]
         if goals:
             card["goals"] = goals
+        if pointer and pointer[0] == n and met_flag:
+            # (pass 3 C38, the-first-hour.md "every ladder card carries the met flag") the pointer card is the
+            # unmet one: met flag is_false + heading. A meeting can come before the step (Hale: an ordinary
+            # Psychology class sets hale_met), so the same step also gets a named card with is_true.
+            out.append(dict(card, when=when + [{"flag": met_flag, "op": "is_false"}], heading=pointer[1]))
+            card = dict(card, when=when + [{"flag": met_flag, "op": "is_true"}])
+        elif pointer and pointer[0] == n:
+            card["heading"] = pointer[1]
         out.append(card)
     top = steps[-1]["n"]
     if terminal_text:
@@ -668,3 +836,36 @@ def no_node(nid, blocks, dest, retry, eff=None, flags=None, label="Go.", mins=3)
 CURFEW_ON = cond(trait("curfew_days", "gt", 0))
 NO_CURFEW_ITEM = trait("curfew_days", "eq", 0)
 CURFEW_EFF = [setv("curfew_days", 7)]
+
+
+# ── one beat worded by what she wears, as one beat (fix_g3c, 2026-11-03) ──
+# A beat that names her top is worded once per wardrobe case (a top, a dress, a uniform, a bra only, bare). As a chain
+# of whole-beat copies, every case carried the full beat: zoe_dares came to 4,491 words of narration for about 600
+# the player can read, which is what tipped `somebody speaks` over 5:1, and the copies pasted into zoe_02's kiss.
+# Here the sentences every case shares print once, and only the sentences that differ sit in a chain of exclusive
+# groups. Every case still reads exactly its own words, in the same order.
+_CASE_SENT_RX = re.compile(r"(?<=[.!?*])\s+(?=[A-Z\"*])")
+
+
+def chain_by_sentence(variants):
+    """variants: [(conditions, text)], exclusive and in chain order. Blocks: shared runs as P, differing runs as GC."""
+    split = [_CASE_SENT_RX.split(t) for _, t in variants]
+    whole = [GC(c, P(t)) for c, t in variants]
+    if len({len(s) for s in split}) != 1:
+        return whole
+    out, i, n = [], 0, len(split[0])
+    while i < n:
+        same = all(s[i] == split[0][i] for s in split)
+        j = i
+        while j < n and all(s[j] == split[0][j] for s in split) == same:
+            j += 1
+        if same:
+            out.append(P(" ".join(split[0][i:j])))
+        else:
+            out += [GC(c, P(" ".join(s[i:j]))) for (c, _), s in zip(variants, split)]
+        i = j
+    texts = [b["content"] for b in out if b.get("type") == "paragraph"] + \
+            [x["content"] for b in out if b.get("type") == "group" for x in b["blocks"]]
+    if any(t.count('"') % 2 or t.count("*") % 2 for t in texts):   # a cut inside a quote or a thought: keep whole copies
+        return whole
+    return out
