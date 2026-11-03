@@ -8,12 +8,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | street (next to home: no walk time) |
+| ENTERED FROM | street (next to home: no walk time) |
 | labels — what kind of place | `zone:street`, `public` |
 | hours | every day 07:00–22:00 |
 | closed text | "The shutter's down." |
 | hidden until | no |
-| fill — word budget (S3) | 1,000 words |
+| fill — word budget | 1,000 words |
 | door | no |
 | dress code or wanted state | none |
 
@@ -25,7 +25,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | buy Laura's list | work | home_life | 15 min · money add −20 (Laura's cash) · `groceries_bought` set true | only while `grocery_list` is set | yes, one line: the clerk, the bags |
 

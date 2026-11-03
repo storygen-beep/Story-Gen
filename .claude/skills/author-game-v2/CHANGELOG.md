@@ -5,6 +5,190 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-03 — follow-through on LO's decisions (18 contradictions plus 3 open rows)
+
+**Why.** Two reviews of today's edits checked what was left. A re-check of the 49 skill-side rows found 3 still
+open (W4, W5, S7). A hunt for new contradictions found 18 places where untouched text still taught the old rule,
+or where two of today's edits disagreed. Among them were the release door still required by shape.py, a no that
+must "move something" in the reader's test 6, `heading` missing from the quest-card field list, and the
+`"kind": "performance"` key colliding with `kind` ambient/sourced (now `"performance": true`).
+
+## 2026-11-03 — follow-through on LO's 2026-11-03 decisions (new_conflicts.md rows 1–18, plus E8/W5 and E79/S7)
+
+- `references/the-surfaces.md` R5b "What her no moves": now says a no never raises her climb or his Want, and may cost Warmth, move a world counter, or cost nothing. It used to say the no "always moves his meter", which contradicted `the-heat-ladder.md` H5 (C1 b). Verified by grep: no "his meter" claim is left in R5b.
+- `references/the-surfaces.md` R5b heading and body, `references/register.md` test 6, `.claude/agents/v2-reader.md` test 6: "written and priced" / "moves something" became "written, and lands somewhere: a reply, a parked return, a cost, or a stated nothing". The reader gates the release and was failing a no that costs nothing (C1 b; first_term's "refusals cost nothing", 68621a82).
+- `scripts/shape.py` check 8 *the door is a declared step*: a release page with no door is now n/a in every mode, strict and `--finish` included. Only a declared door that is not a ladder step's canvas fails. `references/the-spine.md:102`, `SKILL.md` (shape.py row) and `references/state.md` (`release_page` row, door marked optional) updated to match. `scripts/tests/test_shape.py`: the empty-ledger test no longer expects the door row to fail, and a new `test_a_spine_with_no_door_finishes` covers the case. Why: a spine filled from the new SP7 template could not pass `--finish` (S12 b + W13 a).
+- `references/engine.md` §29 and `references/the-meters.md` (cap list): a tier is broken only when no act can reach the top band of the stages this release writes. A band above every cap this release pays is a later release's content. Why: this text contradicted W1/S1 (C9 c vs W1 a + S1 a).
+- `references/the-board.md` §3 "The ceiling must be bought": added a third exception, a band above every cap this release pays on that meter. Why: SKILL.md's meter-ceiling row points at this section and already says it (W1 a).
+- `SKILL.md` gate row *ascent tiers expand the world*: says that declared needs and performance meters are skipped (C5 b + S7 a).
+- `scripts/gates.py` `_mens_numbers` (gate *the men's numbers are read*): a shown trait listed in v2_state `board.characters[].stored` needs no step gate this release, but it still needs its line branch. The FAIL detail now names the key. Docs: `references/the-meters.md` W1 rule 1 (the ledger key, and the note that the gate does not read the card), `references/state.md` (new `board.characters[].stored` row), `SKILL.md` gate row. `scripts/tests/test_gates_nc6.py`: three new tests (stored passes with no gate; stored still needs its line; the undeclared FAIL names the key). Why: the doctrine allowed a colour-only number and the gate still failed it (W4 a).
+- `references/engine.md` §47 quest-card field list: added `heading` (cited at `template_import.py:1346-1394`, with `v2.py:11867` and `v2.py:18923`). The cast-page section now says an `is_false` pointer card lists the person before the meeting, under its heading and with no portrait. Why: engine.md told readers not to use the field F8 asks for (C3 c, engine fix 73e69b04).
+- `templates/cards/phone.md`: a bubble is now "7 words or fewer" (in rule 4 and the checklist), and the loop cooldown is "1–3 days for a booty call, 2–3 for a boyfriend's dates". Why: this matches `the-phone.md` (C6 b, W8 a / W11 a).
+- `references/the-first-hour.md` F1 skip: the skip sets every flag the opening always sets, and for a one-of-several choice only the mildest branch's flags. Why: the old wording told authors to set every branch's flags (S3 a).
+- `references/the-release.md` "Every release ends on an opening": the model end line is now *"That's all of him in this release. More with him next release."*, replacing the Corruption-60 line LO flagged. The heading line now matches S12 b (W13 a).
+- `templates/sheets/{person,scene,place,system,decision,opening}.md`: the Why-table source cell now reads "the rule in plain words · the scout card · LO, <date> · guess". The rule ids are gone from person.md's Phone thread heading and from scene.md's kind and stage lines. Why: `the-sheets.md` bans rule ids on the review surface (C8 a).
+- `templates/cards/sex_for_pay.md`: the card now says to record it with `"sex_for_pay": true` and a `pool[]`, or the pay gate shows n/a. "The price on the label" became "the price said in the scene, before her yes, never on the button", and the measured floor now says the same (C7 c + S11 a).
+- `templates/spine/SP4_loop_and_pressure.md`: added two rows. One asks what each short week costs (read from `rent_short_weeks`) and how paying undoes it. The other asks whether a hard-working player can pay the first rent in week one (yes, with the working). Why: S9 a and W9 rent in week one.
+- `references/the-returning-player.md`, `references/the-release.md` (shipping step 3 and the three-places table), and the `SKILL.md` `--saves` row: dev builds LO plays are archived to `games/<slug>/releases/dev/<YYYYMMDD-HHMM>.html`, apart from the shipped `releases/v<version>.html`. `--saves` compares shipped builds only, and a dev archive is for checking LO's save by hand until a tool exists. Docs only. Checked: `--saves` reads only `releases/v*.html`, never `releases/dev/` (gates.py ~10569-10645) (S13 a).
+- `references/the-meters.md` (the W4 gate-above-ceiling note) and the `scripts/gates.py` METER_MAX comment (swapped line for line): a later release's content gets no button this release (`the-heat-ladder.md` H1). The stale G9 "locked door declared in the open" reference is gone (S1 a + S12 b).
+- `references/register.md` model Talk screen: added a TOML rendering, with each spoken line as a `dialog` block that has a speaker and the thought as a `thought_bubble` (`engine.md` §25 shapes) (S2 a).
+- `SKILL.md` frontmatter description, `STATUS.md` and the `references/the-release.md` heading: "every release ending on a visible goal for the next one" became "every release ending with each arc's last quest card saying where it stops and what comes next, if anything does" (S12 b wording). The description is still one line.
+- `references/the-meters.md` "Whatever he keeps" rule 4 and `references/the-sheets.md` ladder rule 5: "One visit moves about 10–50% of the next threshold, so 2–10 visits sit between steps". The old "1–10%" could not give 2–10 visits (E8/W5).
+- `references/the-meters.md` W5c and the ascent-gate paragraph, `references/state.md` (`board.meters[]` paragraph and row), and `SKILL.md`: a performance meter is now declared with `"performance": true` on its `board.meters[]` entry. `kind` stays `ambient`/`sourced`. `scripts/gates.py` `_performance_meter_keys` reads `performance: true` and still accepts the old `kind == "performance"` without documenting it. `scripts/tests/test_gates_lo_20261103.py` now uses the new key and adds a test for the old spelling. Why: the old spelling collided with `board.meters[].kind` (E79/S7).
+- Verified: `gates.py --selfcheck` exit 0, `cite_check.py --strict` with 0 drifted in SKILL.md + references, `pytest scripts/tests` 789 passed, `pytest .claude/skill-evals/author-game/tests` 107 passed and 1 skipped.
+
+**Verified.**
+- `gates.py --selfcheck` is green.
+- `cite_check.py --strict` shows 0 wrong cites in SKILL.md + references/.
+- `pytest scripts/tests`: 789 passed.
+- `pytest .claude/skill-evals/author-game/tests`: 107 passed, 1 skipped.
+
+---
+
+## 2026-11-03 — the two engine fixes have landed (C3, S15)
+
+- `references/the-first-hour.md` F8: the warning that the Quests page prints the name above a pointer card is
+  replaced by how to use the new quest-card field `heading` (engine commit f0d7b863). The Quests page, its list
+  layout and the cast page print the heading in place of the name and hide the portrait. The card's own text is
+  not rewritten.
+- `references/engine.md` §17: the "dress `initial` beside a top or bottom" warning is replaced. The start now
+  follows `setup.equipItem`'s slot rule (`v2.py:1209-1230`).
+- Why: LO's skill decisions C3 and S15. Verified: read both engine lines; cite_check --strict.
+
+---
+
+## 2026-11-03 — LO's decisions from the first_term alignment check
+
+**What and why.** LO answered the 39 skill questions in
+`~/Documents/Great_Games_Study_20260926/SKILL_DECISIONS_20261103.md`: 9 rules that fought each other (C), 15
+rules out of date against his DECISIONS rows (W) and 15 places the skill was silent (S). This edit applies every
+answer, along with the 6 plain text fixes the re-check found. Each bullet names the decision id. Two of LO's
+answers replaced Claude's pick: C1 b, a refusal never raises his Want, and S6, no "Nothing happens." random events
+anywhere. Two answers were LO's own variants: C4, where hygiene's colour may be a refusal in the scene, and S4,
+where a person screen may be look-only while the person is busy. S12 b replaces the headline rule "every release
+ends on a visible locked door" with "every arc's last quest card says where this release ends".
+
+**Verified.**
+- `gates.py --selfcheck` is green.
+- `cite_check.py --strict` shows 0 wrong cites in SKILL.md + references/.
+- `pytest scripts/tests`: 784 passed.
+- `pytest .claude/skill-evals/author-game/tests`: 107 passed, 1 skipped.
+- first_term gates moved from 62/89 to 61/87 (26 fail, 3 n/a).
+
+### The references, part 1 (doctrine)
+- **C1 (LO, 2026-11-03, b)** — `references/the-heat-ladder.md` H5: the "her no" bullet now says a no never raises her climb and never raises his Want or any other meter of his; it may cost Warmth, move a world counter, or cost nothing. It now agrees with `the-arc.md` A3. Why: LO picked C1 b, which also reverses first_term DECISIONS 131(A). Verified: grep shows no other line in the file has a no moving his meter.
+- **C2 (LO, c)** — `references/the-first-hour.md` F1b item 4: the main man may give the opening's hot moment when it is an accident and not explicit (H2). An explicit opening beat stays outside the arc (A15). Verified by reading the item back.
+- **C3 (LO, c)** — `references/the-first-hour.md` "The same flag belongs on that character's quest cards": a pointer card before the meeting is allowed (`is_false`); it says what the person is and where, never their name; every card after the meeting carries `is_true`. Added a warning that the Quests heading still prints the name until the engine fix ships, so check pointer cards live. The "every card" bullet and the "no heading" sentence were adjusted to match. No new code cite. Verified: cite_check --strict, 0 wrong in references/.
+- **C4 (LO, c + LO's variant)** — `references/the-meters.md` needs intro, M8, M9 and W7: an energy-type need shuts a door while it is empty; a body value (hygiene, arousal, clothes) colours the words and never hides a button, and its colour may be a refusal in the scene where the person says why. LO's own words quoted in M8. M9 says gate 29 counts those reads. Verified by reading the sections back.
+- **C5 (LO, b, text side)** — `references/the-meters.md` W5: added a paragraph on the gate `ascent tiers expand the world` saying it skips declared needs (`board.needs[]`) and performance meters. Gate name checked against SKILL.md:270.
+- **C9 (LO, c)** — `references/the-meters.md` M6: the "never on an ascent tier" row is replaced. Capping one act at its stage top is the stage rule (`the-arc.md` A4d); a tier is broken only when no act can reach its top band.
+- **W3 (LO, a)** — `references/the-heat-ladder.md` H1 table: a look that happens to her, even when she stays, is stage 1; stage 2 is a peek she goes after.
+- **W4 (LO, a)** — `references/the-meters.md` W1 rule 1: in a release where it opens nothing, a shown number may only colour his lines when it is stored for a later release's steps and his card says so.
+- **W5 (Claude's pick, LO ok)** — `references/the-meters.md` W1 rule 4: 2–10 visits between steps (the R5 source measured 3–10, noted). A slow pace is allowed only when his card always says what to do next and the cheat page can skip the wait; LO's words quoted.
+- **W6 (LO, c)** — no skill edit; the rule is kept.
+- **W7 (LO, a)** — `references/the-meters.md` W6 table: the "service / workplace — trust only" row is split. A workplace man with a sex arc keeps Want, plus Power when he is the pressure; trust only is for a service man with no arc.
+- **W8 (LO, a)** — `references/the-want.md` threads: a thread's system may be one person's repeat loop (`none — <his loop>`), and then the loop runs at least 2–3 times a week.
+- **W12 (LO, a)** — `references/the-board.md` two kinds of place: the named exception stays; the room's own screen must carry the line "nothing to do here right now", and the gate `a destination is never open and exit-only` accepts it. Gate name checked against SKILL.md:263.
+- **S1 (LO, a)** — `references/the-heat-ladder.md` H1: new paragraph. A release that writes stages up to N caps every pay at N's top, shows no button for a stage it does not write, and names the next stage only on a quest card.
+- **S3 (LO, a)** — `references/the-first-hour.md` F1c: for a choice of one of several, the skip takes the mildest branch, shows it on its own screen, and never takes a no that ends a path.
+- **S4 (LO's variant)** — `references/the-surfaces.md` R2 list: a person screen can be look-only when the person is busy (teaching, working, on the phone) and then says why in one line; when the person isn't busy, it offers at least one choice aimed at them.
+- **S5 (LO, a, text)** — `references/the-clock.md` C5: dropped "every gate passes" and added that the gate `no canvas key is discarded` now flags a trigger key under `[canvases.trigger.metadata]`. Gate name checked against SKILL.md:299.
+- **S6 (LO)** — `references/the-surfaces.md` random-event floor: a random event always has content; never a "Nothing happens." event. LO's words quoted.
+- **S7 (LO, a)** — `references/the-meters.md` new W5c: a performance meter (grades, a job rating) is declared in `board.meters` with `"kind": "performance"`; it opens doors at the top and closes them at the bottom; the descent check skips it.
+- **S8 (LO, a)** — `references/the-heat-ladder.md` H1: new paragraph "Two meters, one act". Each act names the meter it uses and pays it; a mixed act needs both stages; a first time out at a stage needs either one (first_term DECISIONS 103).
+- Verified for all of the above: `cite_check.py --strict` exits 0, and SKILL.md + references/ have 0 citations pointing at the wrong line.
+
+### The references, part 2 (phone, economy, release, sheets, engine.md, SKILL.md, templates)
+# K2 changelog bullets — 2026-11-03 (LO's decisions, SKILL_DECISIONS_20261103.md)
+
+- **C6 b, short bubbles are fine.** `references/the-phone.md` P3 (heading, contents line, the "1–3 bubbles" rule, the WARN paragraph, "What is gated here") and `SKILL.md` gate row `a chat is short and timed`: a bubble is 7 words or fewer; a one- or two-word bubble is right and the warning is only for a bubble over 7 words. Why: LO's C6 b. Verified: re-read P3; no other "3–7" left in SKILL.md or references.
+- **C7 c, pay never on the button; the gate reads declared sex-for-pay scenes only.** `references/the-voice.md` (money paragraph): pay never goes on the button, and real sex for pay states its price in the scene before she agrees. `references/the-systems.md` SY8 rule 2: price said in the scene, never on the button; `sex for pay names the amount` reads only canvases in the `pool[]` of a system card marked `"sex_for_pay": true`; wages, loans and gifts are not checked; n/a with no such card. `SKILL.md` row `sex for pay names the amount` rewritten to match. Why: LO's C7 c. Verified: the key `sex_for_pay` and the `pool[]` read are K3's (`SEX_FOR_PAY_KEY`, `_sex_for_pay_pool` in the gates.py diff).
+- **C8 a, no rule ids in the sheet templates.** `templates/sheets/place.md` (ENTERED FROM, fill, cost and effect, BRAKE), `templates/sheets/person.md` (Schedule grid, Ladder, Ladder rules headings), `templates/sheets/scene.md` (want/next step/hook/what she wears rows, step row and branch map headings, effects column): the "(S2)", "(S3)", "(S4)", "(S5)", "(S9)", "(S10)", "(S14)", "(S1)" and "(test N)" ids came out; the words stayed. The top "> Rules:" pointer lines and slot text inside `<…>` were left as they are. Why: LO's C8 a. Verified: grep for `\((S|H|test )[0-9]+\)` in templates/sheets finds only one inside a `<…>` slot.
+- **C9 c, a per-act cap at its stage top is allowed.** `references/engine.md` §29 cap table: the ❌ "bounding an ascent tier" row now reads ✅ for one act capped at its stage top (`the-arc.md` A4d), and a tier is broken only when no act can reach its top band. Why: LO's C9 c. Verified: A4d heading at `the-arc.md:227`.
+- **W1 a, a band above every cap is not a promise yet.** `references/engine.md` §4 (top band with a `max`), `references/state.md` `board.ceilings`, `SKILL.md` row `meter ceiling`: a band above every cap this release pays on that meter is a later release's band; the gate reads the caps and skips it. Why: LO's W1 a. Verified: re-read all three.
+- **W2 c, LO's skip covers only his own `played`.** `SKILL.md` "Every piece gets played" list (new bullet) and `references/state.md` `build.pieces` comment: the building session still plays each piece in Chrome and records `chrome`. Why: LO's W2 c. Verified: re-read.
+- **W5, 2–10 visits between steps.** `references/the-sheets.md` ladder rule 5 and `templates/sheets/person.md` rule 5 row: "two to four" became 2–10; a slow pace is allowed only when his card always says what to do next and the cheat page can skip the wait. Why: W5 (Claude's pick, LO ok; "bored is ok, lost is not"). Verified: matches K1's the-meters W1 rule 4 wording.
+- **W9 a + LO's condition, an early rent miss.** `references/the-economy.md` R3d ("does not license squeezing") and `references/engine.md` §26 (`start_after_flag`): an early miss is allowed when its cost can be won back by paying and `on_short = "carry"`; rent may start before the job; a player who works hard can still pay the first rent in week one. Why: LO's W9 a, quoted. Verified: re-read; R3d is the section that holds the paragraph.
+- **W10 a, an email is not a text.** `references/the-phone.md` P3: an email may run one or two short sentences; the gate cannot tell them apart, so its warning there is expected. Why: LO's W10 a. Verified: re-read.
+- **W11 a + W8, invite cooldown follows his rhythm.** `references/the-phone.md` P9: 1–3 days for a booty call, 2–3 days for a boyfriend's dates. Why: LO's W11 a with his W8 answer. Verified: no other "1–3 days" rule left in references.
+- **W13 a + S12 b, the release ends on the quest cards, not a locked door.** `references/the-release.md` (step item 8 renamed "What it opens", the "Every release ends on an opening" section rewritten, v0.1 list bullet), `SKILL.md` (frontmatter description now "every release ending on a visible goal for the next one"; gate rows `ends on an opening` and `the door can be seen again`; the `--ship` BLOCK list), `references/state.md` (`board.door` row: optional, no longer read by `ends on an opening`), `references/engine.md` §8 (`show_when_locked` no longer "the mechanism behind every release ends on a visible locked door"). Every arc's last quest card says where this release ends and what comes next if anything does; a later release may fix things, add content and move thresholds. Gate name `ends on an opening` kept. Why: LO's W13 a and S12 b. Verified: grep for "locked door", "ends on a door", "release_page.door", "board.door" in my files; remaining hits are the `a locked door says why` gate and the optional-door row.
+- **W14 a, a declared exception does not count.** `references/the-sheets.md` ladder fail rule and `templates/sheets/person.md` ("Two failing…"): a rule LO waives in a signed row does not count toward the two of eight. Why: LO's W14 a. Verified: re-read.
+- **W15 a, a roll may vary a repeat visit.** `references/engine.md` §35 "Randomise the WORDS" and the "Ours is deterministic" section's last quote: a roll may pick what a repeat visit holds (a knock, a near-catch), never whether a step or door can be reached. Why: LO's W15 a. Verified: re-read.
+- **S2 a, speech is a `dialog` block.** `references/register.md`, the "Speech is a UI component" bullet: every spoken line is a `dialog` block with its speaker; a quote inside a paragraph counts as narration. Why: LO's S2 a. Verified: re-read.
+- **S9 a, a carried week costs something she can win back.** `references/the-economy.md` R3c ("A short week is carried"): an ordered list of losses read from `rent_short_weeks`, each undone when the rent is paid. Why: LO's S9 a. Verified: `rent_short_weeks` is at `v2.py:15426-15441`.
+- **S10 a, the booked flag is cleared.** `references/the-phone.md` P5 no-show bullet: the yes sets `<x>_booked`; the scene clears it; a no-show text fires on `hours_since_flag`, costs something and clears it. Why: LO's S10 a. Verified: re-read.
+- **S11 a, wages and gifts are not sex for pay.** `references/the-arc.md` A15 (opening paragraph): A15 covers only money paid for the act on that screen; a game with no paid sex declares no `"sex_for_pay": true` card and the pay gates show n/a. Also `SKILL.md` row `her climb`, `references/state.md` systems schema comment (`sex_for_pay: true`). Why: LO's S11 a. Verified: matches K3's gates.py key.
+- **C2 c follow-through in the-arc.md.** `references/the-arc.md` A15 "Night one" bullet: the stranger rule is for an explicit hot moment; a non-explicit accident with the main man is allowed (`the-heat-ladder.md` H2). Why: LO's C2 c (K1 edits the-first-hour; this bullet said the same thing). Verified: `the-arc.md:110` already scoped it to the explicit beat.
+- **S13 a, dev builds LO plays.** `references/the-returning-player.md` (top): once LO plays a dev build, the locks apply to every rebuild, and each pushed build is archived to `games/<slug>/releases/v<version>.html` for `--saves`. Why: LO's S13 a. Verified: `--saves` reads `releases/v*.html` (gates.py).
+- **S14 a, [LATER] / [CUT] / [MOVED] and the pass page.** `references/the-sheets.md`: the workflow gains three title markers; "Seven sheet types" became "Eight", with the pass page (a signed fix list, one per pass, no template); the DECISIONS.md note says "eight". Why: LO's S14 a. Verified: grep found no other "seven sheet types" reference.
+- **S15 c (doc side), dress `initial`.** `references/engine.md` §17 clothing table: the start loop does not clear top and bottom for an `initial` dress yet (engine fix pending); never mark a dress `initial` beside a top or bottom `initial` until then. Why: LO's S15 c. Verified: loop at `v2.py:1208-1221`.
+- **Plain fixes (no decision).** `references/engine.md`: §35 "no per-choice random" rewritten (conditions can't branch at random; an effect's amount can be random, §3; the stale `template_import.py:3876` cite moved to `:3940`); §7 cooldown (the engine skips visits per location; for a limit across rooms or per day, one brake flag cleared in the daily tick); §32.3 snippet heading `[canvases.trigger.metadata]` → `[canvases.trigger]`; §17 cite `v2.py:1192-1204` → `v2.py:1208-1221`; §26 new bullets on `rent_short_weeks` (`v2.py:15426-15441`) and `rent_late_fee` (`v2.py:20495-20514`, `:15438`). `templates/want.md` "Before you leave this page": "What does release 41 add? (ask it of the climb, §4)" is question 1 (§4 is the template's climb section). Verified: each line read in v2.py/template_import.py; `cite_check.py --strict` exit 0, SKILL.md + references/ 0 drifted.
+
+### gates.py and its tests
+- **2026-11-03 · C5 b + S7 (LO) — `scripts/gates.py`, gate `ascent tiers expand the world` and `lint_counterweight`.**
+  The descent check now skips declared needs (`board.needs[]`) and any `board.meters[]` entry declared
+  `"kind": "performance"` (new helpers `_descent_exempt_keys` / `_performance_meter_keys`, above `main()`).
+  A need is meant to shut something while it is empty (the-meters.md M8), and a grade that opens doors at the
+  top and shuts them at the bottom is correct design. Verified: `test_gates_lo_20261103.py` (three tests);
+  first_term no longer lists `energy` or `hygiene` (its grades stay listed until the game declares them
+  `performance`).
+- **2026-11-03 · C6 b (LO) — `scripts/gates.py`, gate `a chat is short and timed`.** The 3-word floor is gone;
+  a bubble warns only when it is over 7 words (`CHAT_WORDS` upper bound only). "good." and "you up" read like
+  real texts. Verified: `test_gates_chat_short_timed.py` (new test for 1- and 2-word bubbles); first_term
+  5 problems to 4 (`mark_rent`'s "good." no longer warns).
+- **2026-11-03 · C7 c + S11 a (LO) — `scripts/gates.py`, gates `sex for pay names the amount` and `her climb`.**
+  Both read only the canvases in the `pool[]` of a `board.systems[]` card declared `"sex_for_pay": true`
+  (`_sex_for_pay_pool`); wages, loans and gifts are never read. No such card: both are n/a, with a headline
+  that names the key. `sex for pay names the amount` now looks for the price in the scene (any screen of the
+  canvas, `_scene_names_amount`), not on the button (the-voice.md D11). Verified: `test_gates_lo_20261103.py`
+  (six tests), `test_gates_nc2.py` and `test_gates_system_floors.py` fixtures updated; first_term both FAIL to
+  n/a (it declares no paid sex, DECISIONS 102).
+- **2026-11-03 · W1 a (LO) — `scripts/gates.py`, gate `meter ceiling`.** A sidebar band whose floor is above
+  every cap the game's raises pay on that meter (`cap` on a positive `add`, or the value of a `set`) is a later
+  release's band and is not counted (`_paid_caps`). One uncapped raise keeps the meter open-ended. Verified:
+  `test_gates_lo_20261103.py` (three tests). first_term still FAILS: 3 corruption and 15 exhibitionism
+  one-time raises carry no `cap`, so 80 is still reachable.
+- **2026-11-03 · W12 a (LO) — `scripts/gates.py`, gate `a destination is never open and exit-only`.** A room
+  whose own screen (`description` or a `description_variants` entry) carries "nothing to do here right now"
+  (case-insensitive) passes — the-board.md's named exception (`_says_nothing_to_do`). The fix line names the
+  option. Verified: `test_gates_lo_20261103.py` (two tests); first_term unchanged until the toilet gets the line.
+- **2026-11-03 · S5 a (LO) — `scripts/gates.py`, gate `no canvas key is discarded`.** It now also flags every key
+  written under `[canvases.trigger.metadata]`, which the importer never reads (template_import.py:2566-2567);
+  a trigger key is told to move up one level (`_trigger_metadata_keys`). Verified: `test_gates_lo_20261103.py`
+  (two tests); first_term PASS to FAIL: `cafe_shift`, `party_arrive`, `room_sleep` each carry
+  `show_when_blocked` + `cooldown_message` under metadata (6 keys).
+- **2026-11-03 · S6 (LO: "no we dont want nothing happens random events anywhere in the game") —
+  `scripts/gates.py`, `lint_screen_shape`.** A random event whose only screen says "Nothing happens." no longer
+  counts toward the random-event count and is listed first as `[empty event]` (`_nothing_happens`,
+  `_empty_random_events`). Verified: `test_gates_lo_20261103.py`; first_term 5/38 to 4/38 locations carry a
+  random event, and the five quiet events are listed.
+- **2026-11-03 · S12 b + W13 a (LO) — `scripts/gates.py`, gate `ends on an opening` (name kept).** It no longer
+  reads a declared door. It passes when every person with a declared ladder (`board.characters[].ladder`) has a
+  quest card of their own that is `terminal = true` with a `terminal_text`, and fails naming the ones without
+  (`_ends_on_an_opening`); n/a with no ledger or no ladder. The `--ship` row it feeds is renamed from "the
+  declared door works" to "every arc's last card says where the release ends". `_declared_door` stays for
+  `the door can be seen again` and the ladder check. Verified: `test_gates_ws5.py` (three new tests replace the
+  five door tests), `test_gates_ws6.py` (green fixture gains an end card; the block test now drops it),
+  `test_gates_ck2.py` (now tests `_declared_door`'s precedence directly); first_term PASS, 7/7 ladders.
+- **Line shift note.** The old door block in `run_gates` was 36 lines longer than its replacement, so every
+  `gates.py` line after ~7383 moved up 36 (the new helpers sit above `main()`). `the-meters.md:24` and `:799`
+  cite `gates.py:8567` (`the climb is paid for`); it is now `gates.py:8531`. cite_check counts these as
+  UNVERIFIABLE, so it does not catch them.
+
+### Lead's clean-up, after the three parts
+- **Old locked-door text that nobody had been assigned (S12 b):**
+  - `references/the-spine.md` SP7 ("**the end cards** it ends on");
+  - `templates/spine/SP7_release.md` (the row is now "where each arc ends this release");
+  - `STATUS.md` (the headline);
+  - `references/the-meters.md` (a band above the ceiling is a later release's content, named on a card, not a locked door).
+- **Stale cites:**
+  - `references/the-clock.md`: `template_import.py:2446-2447` became `:2566-2567`, `:8009-8010` became `:9365-9366`,
+    and `v2.py:13532-13533` became `:14549-14550`. Each was checked by reading the line.
+  - `references/the-meters.md:24` and `:799`: `gates.py:8567` became `:8531`, the line gates.py's edit moved it to.
+    cite_check can't verify either one.
+
+---
+
 ## 2026-11-03 — an engine commit fixes the cites it moves
 
 **What.**

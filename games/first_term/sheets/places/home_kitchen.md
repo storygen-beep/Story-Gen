@@ -7,12 +7,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | home_hall |
+| ENTERED FROM | home_hall |
 | labels — what kind of place | `zone:home`, `private` |
 | hours | always |
 | closed text | none: always open |
 | hidden until | no |
-| fill — word budget (S3) | 30,000 words (was 28,000): +2,000 for the meals, coffee, cooking and dishes · the anchor (question 51; COVERAGE settles it in batch 4) |
+| fill — word budget | 30,000 words (was 28,000): +2,000 for the meals, coffee, cooking and dishes · the anchor (question 51; COVERAGE settles it in batch 4) |
 | door | no: a shared room. Who is inside is a row, not a door |
 | dress code or wanted state | none required · what she wears to the Sunday table is read (Mark A 3) |
 
@@ -27,7 +27,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | Laura | person | Laura's ladder | Laura's Warmth add +2 a talk | once per window, on the trigger | yes |
 | Mark | person | Mark's ladder · money and rent | Mark's Want read: how he looks at her (colour) | once per window, on the trigger | yes |
@@ -40,7 +40,7 @@
 
 Alone, each is its own plain row. With Laura or Mark there, it is a choice inside their hub here (their sheets carry the lines).
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | breakfast | need | home_life · energy | 15 min · energy add +10 · with Laura (Mon–Fri 06:30–08:00) or Mark (Sun 08:00–10:00): their +1 | `ate_breakfast`, 12 h | yes: who is at the table |
 | coffee | need | home_life · energy | 10 min · energy add +5 · with Laura or Mark, as breakfast: +1 | `had_coffee`, 12 h | yes, one line |

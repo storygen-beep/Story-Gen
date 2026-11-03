@@ -1,4 +1,4 @@
-# [REVIEW]] Place — Front Door
+# [REVIEW] Place — Front Door
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 3: "Let the street see." on the step (short skirt, Exhibitionism 60, 07:00-21:00) opens a short screen `street_sees`: her knees open, her panties or her bare cunt by her underwear slot, a man with his shopping who walks into a gate post, Vance if he is on his porch, a neighbour at her window with her phone. Pays Exhibitionism +1 (cap 79); the price is Mom's suspicion +2. Row 9: the two Exhibitionism 60 lines show only 07:00-21:00 (at night they sat beside "nobody stops"), and each gains a watcher and a not-yet ("Not yet."). Built in `iterations/002/build_scripts/home.py` (front_step).
 
@@ -11,12 +11,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | home_hall |
+| ENTERED FROM | home_hall |
 | labels — what kind of place | `zone:home`, `outdoors` |
 | hours | always |
 | closed text | none: always open |
 | hidden until | no |
-| fill — word budget (S3) | 3,000 words (ledger, unchanged) |
+| fill — word budget | 3,000 words (ledger, unchanged) |
 | door | no: it is the house's own doorstep |
 | dress code or wanted state | none |
 
@@ -30,7 +30,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | Jake's goodnight | person | Jake's ladder | Jake's step read · `jake_date_booked` set false | only after a booked date | yes |
 | Vance's knock | work | money and rent | `rent_carried` set false | once per carried week | yes |

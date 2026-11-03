@@ -44,6 +44,8 @@ Write the list of places that answer at least one of those, and count it. That i
 > `engine.md` §22). A room that is neither is not a location yet. One passing
 > game keeps an open, empty shop — In Her Own Hands' formal-wear shop, empty 76 of its 77 open hours —
 > and it says so: *"There's nothing to do here right now."* [WindsorBase]. That is the exception, named.
+> To use it, the room's own screen carries that line, "nothing to do here right now", and the gate
+> `a destination is never open and exit-only` accepts a room that shows it (LO, 2026-11-03).
 
 Budget the set as a *shape*, not a flat quota:
 
@@ -156,8 +158,8 @@ fails otherwise.
 the weekday are two separate checks, and the weekday one runs first against **today**:
 
 ```
-v2.py:4352   if (!setup._weekdayMatches(ds.weekdays, todayIndex)) continue;
-v2.py:4353   if (!setup.isCurrentTimeSlot(ds.start_time, ds.end_time)) continue;
+v2.py:4361   if (!setup._weekdayMatches(ds.weekdays, todayIndex)) continue;
+v2.py:4362   if (!setup.isCurrentTimeSlot(ds.start_time, ds.end_time)) continue;
 ```
 
 `isCurrentTimeSlot` does handle the wrap (`if (endTotal < startTotal) return currentTotal >=
@@ -322,9 +324,11 @@ Three hard rules, all gated:
   descent wearing an ascent's clothes.
 - **The ceiling must be bought.** Every band boundary is a promise to the player, so the highest
   band `min` needs an authored gate on that trait at or above it, or the points past the last gate
-  buy nothing. Gate 8. Two exceptions: the band holding the meter's **starting value** (a meter that
-  starts full and drains starts there), and a meter declared `falling = true` in `[[traits.labels]]`
-  (read by `gates.py` only).
+  buy nothing. Gate 8. Three exceptions: the band holding the meter's **starting value** (a meter that
+  starts full and drains starts there), a meter declared `falling = true` in `[[traits.labels]]`
+  (read by `gates.py` only), and a band above every cap this release pays on that meter, which the
+  player cannot reach yet and so belongs to a later release (LO, 2026-11-03, W1; the gate reads the
+  caps and skips it, `engine.md` §29).
 - **Every meter you raise is read by something.** Gate 33, `the-meters.md` W3.
 
 **Where ceilings live:** `sidebar_items[].bands[]`. **Not** in `player.core_traits`, which is

@@ -11,20 +11,20 @@
 | person · step | `npc_mark` · 4 of 4, top step (was 6, Mark A 6; the canvas id stays) |
 | where · when | the garage, `home_garage` · Mon, Tue, Thu, Fri 19:00–22:00 (his person sheet's row) |
 | gate | `mark_step` eq 3 · `ryan_step` gte 4 (Ryan's feet-in-his-lap night done) · the boost off (was Corruption 40 · his Want 50) |
-| want (test 1) | he can't hold her look at the Sunday table (the leak); the built "since the couch" line is cut |
-| next step (test 2) | it becomes a deal: each holds the other's secret |
-| hook (test 3) | "So we each keep one." The Sunday table changes after it · the locked button: "Mark, later. (After the house is yours.)" |
-| what she wears here (test 8) | not named |
+| want | he can't hold her look at the Sunday table (the leak); the built "since the couch" line is cut |
+| next step | it becomes a deal: each holds the other's secret |
+| hook | "So we each keep one." The Sunday table changes after it · the locked button: "Mark, later. (After the house is yours.)" |
+| what she wears here | not named |
 | which version | Power 50 or more (guess): his version · under 50: hers |
 | explicit? | no: a talk |
 | who notices | Mark knows about Ryan; she knows about Vance |
 | what she risks | Mark telling Laura |
-| her_line_low · her_line_high (rule 7) | low (under the stage): "He's Mom's husband. Pay him and go." · high (over it): "You want him to lose count." (the person sheet names none; worded by me, signed by LO 2026-11-01) | The built thought on `keep` ("He thinks it's even. It isn't.") is the high side. |
+| her_line_low · her_line_high | low (under the stage): "He's Mom's husband. Pay him and go." · high (over it): "You want him to lose count." (the person sheet names none; worded by me, signed by LO 2026-11-01) | The built thought on `keep` ("He thinks it's even. It isn't.") is the high side. |
 | top step, declared not a payoff | taste rule 2: Mark's release-1 ladder is the rent (LO, no sex with Mark this release) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `m` | M: "I saw you come out of Ryan's room. Middle of the night." Then: "Our arrangement. Your mother has enough to worry about." | no | "Vance's letter is in the drawer." → `keep` · "There's no arrangement." → parked | none |
 | `e` | E: he says what he saw; she names Vance's letter first: "Vance's letter is in the drawer. So we each keep one." | no | → `keep` | none |

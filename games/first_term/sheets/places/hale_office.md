@@ -7,12 +7,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | faculty_floor |
+| ENTERED FROM | faculty_floor |
 | labels — what kind of place | `zone:campus`, `private` |
 | hours | Thursday 17:00–19:30 |
 | closed text | "The office is locked. Office hours are on the door." |
 | hidden until | no |
-| fill — word budget (S3) | 4,000 words (ledger, unchanged) |
+| fill — word budget | 4,000 words (ledger, unchanged) |
 | door | no: an office, open in office hours |
 | dress code or wanted state | none |
 
@@ -24,7 +24,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | Hale, the talk hub | person | college | one line on her grade, one on her clothes | once a day, on the trigger | yes |
 | read your grade on the door | work | college | none · reads that subject's grade | none needed: it writes nothing | yes, one line |

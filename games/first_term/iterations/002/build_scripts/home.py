@@ -44,7 +44,9 @@ def solo(cid, name, desc, loc, nodes, sched=None, conds=(), prio=3, max_day=None
     if sched:
         t["schedules"] = sched
     if metadata:
-        t["metadata"] = metadata
+        # S5 (skill, 2026-11-03): show_when_blocked and cooldown_message are trigger keys; under
+        # [canvases.trigger.metadata] the importer drops them (the-clock.md), so they go on the trigger itself
+        t.update(metadata)
     return {"id": cid, "name": name, "description": desc, "trigger": t, "nodes": nodes}
 
 
@@ -706,7 +708,7 @@ out += event("home_event_ryan_towel", "Ryan out of the shower", "home_hall", S([
                  P("His eyes drop to your tits and jump back to your face. He goes red. He turns side-on, one fist tight on the front of his towel.")),
               D(R, "Sorry."), ME("Sorry."),
               T("He's out of that bathroom at this time every weekday.")],   # reader a3 older: a hook
-             "Step round him.", [npc_add(R, "want", 1)],
+             "Step round him.", [],   # C1 (LO 2026-11-03): her no never raises his Want
              curious=("Walk past slowly.", "sheets/places/home_hall.md:44", [BOLD]),   # her tits brush his chest: a touch, Bold (DECISIONS 124)
              bold=("Let him look.", "sheets/places/home_hall.md:44", [trait("ryan_step", "gte", 3)]))
 out += event("home_event_laura_robe", "Laura's robe", "home_kitchen", S([0, 1, 2, 3, 4], "06:30", "08:00"),
@@ -734,25 +736,20 @@ out += event("home_event_mark_reach", "Mark reaching past", "home_kitchen", S([6
               # reader a3 #12 (DECISIONS 131): under Bold (where "Lean back into him." can't show) he pulls away himself
               G(cond(trait("corruption", "lt", 40)), P("Then he steps back fast, his hips turned away from you, the mug held low in front of his jeans."),
                 D(M, "Mind yourself, @player."), T("Next time he reaches past you, you'll know why."))],   # reader a3 older: a hook
-             "Duck out of his way.", [npc_add(M, "want", 1)],
+             "Duck out of his way.", [],   # C1 (LO 2026-11-03)
              curious=("Lean back into him.", "sheets/places/home_hall.md:46", [BOLD]))   # a touch: Bold (DECISIONS 124)
 out += event("home_event_mark_asleep", "Mark asleep, TV on", "home_living_room", S([0, 1, 2, 3, 4, 5], "00:00", "02:00"),
              [here(M, "home_living_room")],
              [P("Mark is slumped on the couch with the TV still on, eyes half shut, a beer going warm in his hand, his head tipped back.")],
-             "Turn the TV off and leave him.", [npc_add(M, "want", 1)],
+             "Turn the TV off and leave him.", [],   # C1 (LO 2026-11-03)
              curious=("Take the beer out of his hand.", "sheets/places/home_hall.md:47", []), ph_name="Mark dozing, TV on")
 out += event("home_event_ryan_door", "Ryan's door, a hand's width", "home_hall", S(ALL, "22:00", "00:00"),
              [here(R, "home_ryan_room"), trait("ryan_step", "gte", 7)],
              [P("Ryan's door is open a hand's width. Light under it, music low.")],
-             "Go past.", [npc_add(R, "want", 1)],
+             "Go past.", [],   # C1 (LO 2026-11-03)
              curious=("Stop and look in.", "sheets/places/home_hall.md:48", []))
-QUIET = {"home_hall": "Nothing happens. The fridge hums downstairs, and the stairs creak once on their own.",
-         "home_kitchen": "Nothing happens. The fridge hums.",
-         "home_living_room": "Nothing happens. The cushions still have somebody's shape in them.",
-         "home_bathroom": "Nothing happens. The tap drips."}
-for loc, line in QUIET.items():
-    out += event(f"home_event_quiet_{loc.replace('home_', '')}", "The house, quiet", loc, None,
-                 [nobody(loc), flag("opening_done")], [P(line)], "Go on.", [])
+# S6 (LO 2026-11-03, reverses DECISIONS 59's quiet events): "no we dont want nothing happens random events
+# anywhere in the game." The four "Nothing happens." events at home are gone.
 
 text = ("# =============================================================================\n"
         "# First Term — 5 · scenes · HOME (iteration 002, part 2): every house room's alone rows,\n"

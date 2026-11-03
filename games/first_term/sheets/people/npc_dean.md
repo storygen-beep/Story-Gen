@@ -21,14 +21,14 @@
 | his line: short skirt | "Is that what you wore to class?" |
 | his line: the rules | "Two complaints and you're back in this office. I don't like seeing a student twice." |
 
-## Schedule grid (S5)
+## Schedule grid
 
 | place | days | from | to | why he is there |
 |---|---|---|---|---|
 | `dean_office` | Mon | 07:30 | 09:00 | early on Mondays: day 1's meeting is true every week (new 2026-11-01) |
 | `dean_office` | Mon–Fri | 09:00 | 17:00 | weekday office hours |
 
-## Ladder — one guidance card per step (S10)
+## Ladder — one guidance card per step
 
 None in release 1. **He is a seed:** a man who watched her too long on day 1, and a door she'll be sent back to (two
 complaints). His ladder is a later release (Zoe's later rung, "fucking dean", is behind her Corruption 60 line).

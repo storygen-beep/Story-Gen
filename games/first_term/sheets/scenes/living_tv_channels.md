@@ -1,4 +1,4 @@
-# [REVIEW]] Scene — living_tv_channels (the remote)
+# [REVIEW] Scene — living_tv_channels (the remote)
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 1: in Mark's hub, "Channel 5: the adult channel." shows only after his accident (`mark_saw_her`), the same gate as "Leave it on.", so the explicit beat beside him never opens before any sign that he wants her. Alone on the couch it is unchanged. Built in `mark.py` and `home_items.py` (`remote_choices`).
 
@@ -18,8 +18,8 @@
 | where · when | alone (`living_tv`): any hour 07:00–02:00 the room is empty · with Mark (his hub `hub_mark_living_room`): whenever he is up late there |
 | gate | none to open · "Touch yourself." alone from Curious |
 | who | alone, or Mark, 46, her step-father; Mark or Ryan may be home (a line names who, read from their rows) |
-| what she wears here (test 8) | not named |
-| BRAKE (S9) | the plain four: energy +5 once a day (`watched_tv`) · channel 5 pays every time, up to five TV sessions a day (LO, DECISIONS 91); after the fifth the row greys out, "Watch TV — Not now." The count resets at midnight. |
+| what she wears here | not named |
+| BRAKE | the plain four: energy +5 once a day (`watched_tv`) · channel 5 pays every time, up to five TV sessions a day (LO, DECISIONS 91); after the fifth the row greys out, "Watch TV — Not now." The count resets at midnight. |
 | raises | channel 5 "Keep watching." alone: corruption add +1, cap 19 at Good Girl, cap 39 at Curious · with Mark: corruption add +2, cap 19 / 39, and his Want add +2, once a day (`mark_tv_paid`, cleared at midnight; DECISIONS 92); after that it plays and pays nothing · alone "Touch yourself." corruption add +2, cap 39 · with Mark, the plain four also his Want add +1 once a day (the old TV item's pay) |
 | the crude-word ceiling | the park's, strangers on a screen: tits, nipples, ass, cock, wet, clit · no cunt, fuck, cum, pussy · with Mark no clit |
 | media | every channel has its own clip pool: `tv/news_t0`, `tv/cooking_t0`, `tv/sports_t0`, `tv/film_t0`, `sex/tv_adult_alone_t5`, `sex/tv_adult_touch_t5`; with Mark `tv/mark_news_t0`, `tv/mark_cooking_t0`, `tv/mark_sports_t0`, `tv/mark_film_t0`, `sex/tv_adult_mark_t5`, `sex/tv_adult_mark_leave_t5` (12 slots, empty until LO's harvest) |

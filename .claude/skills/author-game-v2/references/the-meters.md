@@ -21,7 +21,7 @@ between an ascent and a button.
 **M8–M10 — the body.** A need falls on its own, she refills it, and while it is empty something is
 shut. Missing until 2026-08-18.
 
-> **Gate `the climb is paid for`** (gates.py:8567) walks every trait any condition reads, not just
+> **Gate `the climb is paid for`** (gates.py:8531) walks every trait any condition reads, not just
 > the declared tiers. It fails when any route into a rung that raises a gated meter carries no
 > `costs`, no `max_triggers_per_day` on the target's trigger, and no day-cap flag cleared in
 > `[engine.daily_tick]`. One free route is enough to fail. It prints clicks and in-game time to the
@@ -112,9 +112,16 @@ It can differ per man: a pressure man gets Power, a nice man doesn't. The author
 approves. **Whatever he keeps:**
 
 1. A shown number opens something visible, and he reacts the visit it crosses (gate `the men's numbers are read`).
+   In a release where it opens nothing, a shown number may only colour his lines when it is stored for a
+   later release's steps and his card says so (LO, 2026-11-03). Declare it in the ledger as
+   `board.characters[].stored = ["<trait key>", …]` (`state.md`): the gate then needs only his line
+   branch on it, not a step gate. The gate does not read his card; saying so on the card is yours.
 2. No hidden setting overrides the numbers.
 3. A locked step shows how close he is: the locked button names his feeling and the need.
-4. One visit moves about 1–10% of the next threshold, with 3–10 visits between steps (R5:243-244).
+4. One visit moves about 10–50% of the next threshold, so 2–10 visits sit between steps (LO, 2026-11-03; R5:243-244
+   measured 3–10). A slow pace is allowed only when his card always says what to do next and the cheat page
+   can skip the wait. LO: *"its okay to make player bored but not lost. So free version can make you grind but
+   paid can give you cheats"*.
 
 ---
 
@@ -276,7 +283,10 @@ roster game (`who_climbs = "cast"`, which leaves that list empty by definition) 
 per-character meters instead. A lint that read only the first of those would print nothing
 for a roster game (`gates.py:3400` takes the `who_climbs == "cast"` branch). **Half a fork is not
 an instrument.** A gate above the meter's
-ceiling is skipped on both sides: that is a locked door (`the-release.md` G9), not a rung.
+ceiling is skipped on both sides: that is a later release's content, named on a quest card (`the-release.md`), not a rung.
+A later release's content has **no button this release**: not a locked choice, not a greyed one
+(`the-heat-ladder.md` H1). The lint skip is for a gate the author has not removed yet, not a licence to
+show it.
 
 ---
 
@@ -302,6 +312,17 @@ does **not** mean never-mechanical.
 
 **Lint · the counterweight.** Heuristic, which is why it is a lint: a player trait starting at 50+
 whose effects mostly fall, declared needs excluded. It prints how many times the thing is read.
+
+**Gate · `ascent tiers expand the world`** fails a player meter that closes more doors than it opens
+and is not declared as a tier. It skips declared needs (`board.needs[]`), because shutting is their job
+(M8), and a performance meter (`board.meters[]` entry with `"performance": true`, W5c) (LO, 2026-11-03).
+
+### W5c · A performance meter opens at the top and closes at the bottom
+
+A grade or a job rating is its own kind (LO, 2026-11-03). Declare it in `board.meters` with
+`"performance": true` on its entry, beside its `kind` (`ambient` or `sourced`, which says where it is
+fed and stays as it was). It opens doors at the top (a top grade, a raise) and closes them at the
+bottom (failing, a warning, the sack). Both doors are correct design, so the descent check skips it.
 
 ---
 
@@ -482,7 +503,8 @@ memory flags is correct and deliberate: the tiers do the gating. For a **roster*
 
 | the relationship | what he keeps |
 |---|---|
-| service / workplace | trust only; willingness does not apply |
+| workplace man with a sex arc | Want, and Power when he is the pressure (LO, 2026-11-03) |
+| service man with no arc | trust only; willingness does not apply |
 | **someone she already belongs to** | **no climbing meter at all** — presence plus one opened flag. He is not a conquest; the variation is in pose and framing, not in a rising bar |
 
 A suspicion or a debt he holds is a number like any other: shown, and he reacts when it crosses.
@@ -559,6 +581,10 @@ carries, plus how many distinct shapes exist across the cast.
 > it only at a door that says why: a daring price to leave in a revealing state, a dress code, a
 > place that wants her bare. A gate that hides its reason is the field's biggest clothing failure
 > (41 of 194 classed player failures, round 9a §5).**
+
+**A body value never hides a button** (LO, 2026-11-03). Where it stops an act, it stops it in the
+scene: she tries, it doesn't happen, and the person says why (*"you stink"*). A door that says why is
+the same rule at a place.
 
 W5 is the counterweight that shuts doors, W5b the audience meter that almost never refuses, W6 the cast's own
 gating meters. **The body is a fourth shape and it behaves like none of them.**
@@ -776,7 +802,7 @@ always compute the same two numbers:
 clicks to the top band  ·  in-game minutes to the top band
 ```
 
-`the climb is paid for` prints both numbers for every free route (gates.py:8567).
+`the climb is paid for` prints both numbers for every free route (gates.py:8531).
 
 ### M3 · The throttle menu — four levers, and none of them works alone
 
@@ -874,7 +900,8 @@ It bounds **how high a trait can go**, not **how fast**:
 
 - ✅ bounding a restore — a sleep rung adding energy
 - ✅ bounding a repeatable relation grant so one rung cannot max a character on its own
-- ❌ **never on an ascent tier** — the tier must reach its top band, and a cap there deletes content
+- ✅ capping one act at the top of its stage — that is the stage rule (`the-arc.md` A4d; LO, 2026-11-03)
+- ❌ **a tier that no act can carry to the top band of the stages this release writes** — that is the only broken tier, and its caps delete content. A band above every cap this release pays is a later release's content (W1; `the-heat-ladder.md` H1), not a broken tier
 - ❌ it is not a throttle. A capped rung is still infinitely clickable up to the cap.
 
 ### M7 · Band a meter, show it once
@@ -908,7 +935,7 @@ card vanishes, which reads as a missing HUD element rather than a wrong number. 
 
 M1–M7 govern the **ascent**: a meter that climbs and buys access. A need is the other kind of meter
 and it runs the opposite way — it **falls on its own**, she refills it, and while it is empty
-something is shut.
+something is shut, or someone refuses her in the scene (M8).
 
 **Needs are declared per game, never a fixed list.** A truck stop's body is not a
 household's. What is fixed is the *form*.
@@ -925,6 +952,13 @@ household's. What is fixed is the *form*.
 ]
 ```
 
+**What `shuts` means depends on the need** (LO, 2026-11-03). An energy-type need shuts a door while it
+is empty. A body value (hygiene, arousal, clothes) colours the words and never hides a button (W7). Its
+colour may be a refusal in the scene: she tries an act with a person, it doesn't happen, and the person
+says why. LO's words: *"hygiene colour is also basically like a lock like she went on to interact with an
+npc and do the stuffs but she couldnt do it and npc told her that she stinks."* For a body value, `shuts`
+names that refusal, or says it colours only.
+
 `shuts` also routes her: a need that is empty sends her to the place that refills it, and that place
 rolls an event (`engine.md` §30.1). A need behind a content toggle has an off switch, a start choice
 (`the-surfaces.md` R5b.4); with it off, nothing reads it.
@@ -938,7 +972,8 @@ no meal; breakfast once a day in its hours; no ingredients, no recipe.
 game. Deterministic, no threshold to invent: either something gates on it or nothing does.
 
 A restore with no gate behind it is a button that maintains a number. It costs the player time and
-buys them nothing.
+buys them nothing. For a body value the read is a line that colours or a refusal in the scene (M8),
+and gate 29 counts those reads the same way.
 
 **This is also what makes a room worth entering.** `the-surfaces.md` R2 says a room's list is needs,
 systems and people — a *need* on that list has to be a real one, or R2 degrades into the object rule

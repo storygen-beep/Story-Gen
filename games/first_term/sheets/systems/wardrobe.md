@@ -1,4 +1,4 @@
-# [REVIEW]] System — wardrobe
+# [REVIEW] System — wardrobe
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -24,11 +24,11 @@
 | sink and deadline | the clothes shop · no due day |
 | feeds | Exhibitionism, `complaints` |
 | reads | Exhibitionism, Corruption |
-| what drives it (S8) | her clothing state, and Exhibitionism for leaving a room in it |
+| what drives it | her clothing state, and Exhibitionism for leaving a room in it |
 | link into the hook | at home, Ryan, Mark and Laura each react, by their numbers |
 | leads to | Ryan, Laura |
 | day 1 | yes |
-| BRAKE (S9) | changing writes nothing, so none · each event once a day, on its trigger |
+| BRAKE | changing writes nothing, so none · each event once a day, on its trigger |
 
 College clothes are her own outfits at three levels: normal, sexy, slutty. Never a "college uniform".
 
@@ -112,7 +112,7 @@ Both events pay by `meters.md` rule 3 (no longer a guess): shown by her choice, 
 
 The selfie and the feed live on the phone only; no room has a row that copies them.
 
-| row | where | cost and effect, with op (S4) | BRAKE (S9) |
+| row | where | cost and effect, with op | BRAKE |
 |---|---|---|---|
 | "Post a selfie" | the phone, anywhere | Covered: `gate_trait` exhibitionism, min 0 · `followers` add +3 to +8 | once a day (the engine's daily cap) |
 | "Post one in your bra" | the phone, anywhere | Daring: exhibitionism 20 or more · `followers` add +10 to +25 | once a day |

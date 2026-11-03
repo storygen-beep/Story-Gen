@@ -1,4 +1,4 @@
-# [REVIEW]] Place — Garage
+# [REVIEW] Place — Garage
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -9,12 +9,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | home_hall |
+| ENTERED FROM | home_hall |
 | labels — what kind of place | `zone:home`, `private` |
 | hours | always |
 | closed text | none: always open |
 | hidden until | no |
-| fill — word budget (S3) | 2,000 words (was 1,500): +500 for laundry |
+| fill — word budget | 2,000 words (was 1,500): +500 for laundry |
 | door | no: Mark's workshop, not a bedroom |
 | dress code or wanted state | none |
 
@@ -26,14 +26,14 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | Mark | person | Mark's ladder | Mark A 6 here · his Power read (colour) | once per window, on the trigger | yes |
 | his things | work | money and rent | the debt papers: reads `rent_carried` · the loan with Vance is named only after `knows_mark_debt` (Mark A 2) | once a day, when he's out | yes |
 
 ## Everyday at home (system `home_life`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | laundry, the washer | work | home_life | 30 min · energy add −5 · alone plain · with Mark here (Mon, Tue, Thu, Fri 19:00–22:00 · Sat 09:00–17:00): his Want +1, inside his hub | `did_laundry`, 12 h | yes |
 

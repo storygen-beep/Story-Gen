@@ -1,4 +1,4 @@
-# [REVIEW]] Scene — laura_04_she_saw_you
+# [REVIEW] Scene — laura_04_she_saw_you
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -14,21 +14,21 @@
 | where · when | her door, `home_master_bedroom` from the landing · Sun–Fri 22:00–23:00, Laura in and awake, Mark downstairs: it takes the `laura_alone_in_bed` slot that night (higher priority) |
 | gate | Corruption 20 · her Love 30 · `laura_step` eq 3 · player counter `laura_gaps_watched` gte 3 · the boost off |
 | the counter | `laura_gaps_watched` (player trait, declared 0): +1 on "Keep watching." in `laura_alone_in_bed` and in `laura_shower_gap`. Name mine; confirmed by LO 2026-11-01 ("Go ahead") |
-| want (test 1) | the alone-in-bed line names the dressed-up night (`laura_lonely`, step 3) |
-| next step (test 2) | Laura comes, and sees her |
-| hook (test 3) | "Ryan." `laura_said_ryan` set, for a later release |
+| want | the alone-in-bed line names the dressed-up night (`laura_lonely`, step 3) |
+| next step | Laura comes, and sees her |
+| hook | "Ryan." `laura_said_ryan` set, for a later release |
 | who notices | **Laura sees Ella** |
 | what she risks | being caught watching her mother |
-| what she wears here (test 8) | Laura: her nightdress (named in prose) · Ella: not named |
+| what she wears here | Laura: her nightdress (named in prose) · Ella: not named |
 | her voice | stage 2 (Curious) |
 | the crude-word ceiling | Laura's late column: pussy, wet (`spine/SP2_ladders.md:192`), with the park's tits, nipples, ass, clit · no cunt, fuck, cum, cock. confirmed by LO 2026-11-01 ("Go ahead") |
-| her_line_low · her_line_high (rule 7) | low: "That's your mom. Go to bed." · high: "She's lonely, and you can't stop watching her be lonely." | The low line is the thought "You should walk away" in `gap`; the high side is "you stay, because you want to watch her". |
+| her_line_low · her_line_high | low: "That's your mom. Go to bed." · high: "She's lonely, and you can't stop watching her be lonely." | The low line is the thought "You should walk away" in `gap`; the high side is "you stay, because you want to watch her". |
 | mixed act? | no: watching, unseen until the end. Corruption only (`meters.md` rule 3) |
 | does it finish | yes: Laura comes before she sees her |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `gap` | the door a hand's width again; Laura fingering herself, biting her hand, close | yes | "Keep watching." → `comes` · "Pull the door to." → the hall | `saw_laura_alone`, `laura_alone_seen` set (on every exit) |
 | `comes` | she comes; through her teeth she whispers "Ryan."; her eyes stay shut | yes | → `eyes` | corruption add +1, cap 19 · `laura_gaps_watched` add +1 |

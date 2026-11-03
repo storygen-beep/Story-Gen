@@ -13,18 +13,18 @@
 | person · step | `npc_zoe` · 2 (Zoe A 2) |
 | where · when | Zoe's balcony, a Friday party · 21:00–00:00 |
 | gate | Corruption 20 **or** Exhibitionism 20 · `zoe_step` eq 1 · the boost off · each yes by its own meter: "Watch me." needs Exhibitionism 20, "Dare me something else." needs Corruption 20 |
-| want (test 1) | she keeps her eyes on the bra strap |
-| next step (test 2) | a dress dare with the room behind the glass |
-| hook (test 3) | "Nope. Mine now." And: "There's a hot tub Saturday. Just us." |
-| what she wears here (test 8) | the dress in a group on `zoe_party_dress` worn; the bra comes off here |
+| want | she keeps her eyes on the bra strap |
+| next step | a dress dare with the room behind the glass |
+| hook | "Nope. Mine now." And: "There's a hot tub Saturday. Just us." |
+| what she wears here | the dress in a group on `zoe_party_dress` worn; the bra comes off here |
 | explicit? | the showing path no (under 3 list words, as built); the doing path yes (the kiss, `zoe_dares` `low_do`) |
 | who notices | the room behind the glass |
 | what she risks | strangers seeing |
-| her_line_low · her_line_high (rule 7) | low: "It's a dare. It doesn't count." · high: "You want her to dare you something worse." (the person sheet's pair) | |
+| her_line_low · her_line_high | low: "It's a dare. It doesn't count." · high: "You want her to dare you something worse." (the person sheet's pair) | |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `balcony` | Zoe: "Bra off. Through the sleeve." | no | "Watch me." → `sleeve` (Daring) · "Dare me something else." → `kiss` (Curious) · "Not tonight, Zo." → the party (parked) | none |
 | `kiss` | Zoe: "Fine. Kiss the cocky guy. Properly." Then the dares' `low_do` beat (`zoe_dares.md`), the room behind the glass watching | yes | "Saturday?" → `saturday` | corruption add +3 |

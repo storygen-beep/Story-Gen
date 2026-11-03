@@ -68,10 +68,12 @@ def boost_off():
 
 
 # effect helpers
-def add(k, n, clamp=True):
+def add(k, n, clamp=True, cap=None):
     d = {"targetType": "player", "trait": k, "op": "add", "value": n}
     if not clamp:
         d["clamp"] = False
+    if cap is not None:
+        d["cap"] = cap
     return d
 
 

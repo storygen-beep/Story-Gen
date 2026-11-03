@@ -11,18 +11,18 @@
 | person · step | `npc_hale` · 3 of 4 (canvas `hale_03_photo_face_down`) |
 | where · when | his office, the faculty floor · Thursday 18:00–19:30 (his office hour, from his email after step 2) |
 | gate | Hale's step counter eq 2 · the boost off (was Corruption 20 · Exhibitionism 20) |
-| want (test 1) | "Not here. Office hours." He named the hour himself (step 2) |
-| next step (test 2) | his offer: coaching, and what he says it's for |
-| hook (test 3) | `hale_coaching_offered`; her grade only goes up if she comes back · Laura reads the grade on the portal |
+| want | "Not here. Office hours." He named the hour himself (step 2) |
+| next step | his offer: coaching, and what he says it's for |
+| hook | `hale_coaching_offered`; her grade only goes up if she comes back · Laura reads the grade on the portal |
 | who notices | Hale; Laura, through the grade |
 | what she risks | her grade; Laura reading it |
-| what she wears here (test 8) | the skirt line only in a group on her short-skirt state (as built) |
+| what she wears here | the skirt line only in a group on her short-skirt state (as built) |
 | explicit? | no: a non-sexual touch, the offer |
-| her_line_low · her_line_high (rule 7) | low: "He's your professor. He's married." · high: "You want to know what he'd do next." (the person sheet's pair) | |
+| her_line_low · her_line_high | low: "He's your professor. He's married." · high: "You want to know what he'd do next." (the person sheet's pair) | |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `desk` | as built: his door open an inch, her paper, the wedding photo face-up; she sits on the corner of his desk | no | → `offer` | none |
 | `offer` | he turns the photo face-down; "Your grade is a C…"; the speech; his hand on her shoulder, staying | no | "When?" → `when` · "That isn't coaching." → `isnt` · Walk out. → `out` | none |

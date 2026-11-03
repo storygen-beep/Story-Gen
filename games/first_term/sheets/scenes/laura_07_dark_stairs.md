@@ -12,16 +12,16 @@
 | person · step | `npc_laura` · 7 (Laura C 7) |
 | where · when | the kitchen, Friday 18:00–21:00 · then Zoe's party · then the dark stairs |
 | gate | Corruption 40 · Exhibitionism 40 · her Want 60 · Zoe A 1 |
-| want (test 1) | "Take me with you one night." (step 6); tonight she dressed for her |
-| next step (test 2) | the first kiss, and Ryan sees it |
-| hook (test 3) | Monday's breakfast: she'll have to look at her (step 8) |
-| what she wears here (test 8) | not named; Laura's short dress is Laura's |
+| want | "Take me with you one night." (step 6); tonight she dressed for her |
+| next step | the first kiss, and Ryan sees it |
+| hook | Monday's breakfast: she'll have to look at her (step 8) |
+| what she wears here | not named; Laura's short dress is Laura's |
 | her voice | stage 3, confident with her mother |
 | the crude-word ceiling | Laura's middle column: tits, nipples · no pussy · Ryan's middle column for his line |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `kitchen` | Laura in a short dress, wine: "Take me with you tonight." | no | "Come on, then." → `party` · "Not tonight, Mom." → parked | none |
 | `party` | Zoe's: Laura dances, drinks, can't stop looking at her | no | "Take her home." → `stairs` | the clock to 02:15 (Mark asleep by then) |

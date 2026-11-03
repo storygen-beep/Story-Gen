@@ -1446,3 +1446,40 @@ touched sheet has a dated note.
   `probe_zbalc.py` 6/6 (Curious copy with the cocky guy there, its no, "last time", the kiss route to step 2).
   nr 4/4, door 6/6, a3 24/24, zoe_npccard 5/5. Gates 62/89, as the baseline. Played in Chrome
   (`pieces.py chrome first_term zoe_kiss_no`). Rebuilt `--dev --debug`.
+
+## 2026-11-03 — LO's skill decisions applied to the game (DECISIONS 134–140)
+
+- **C1 (DECISIONS 135).** Her refusal never raises his Want. The +1 is gone from `home_items.py` (the towel no),
+  `home.py` (the five random events' way out), `pools.py` (the stairs skirt) and `college.py` (the cocky guy).
+- **S6 (136).** The five "Nothing happens." random events are removed from `home.py` and `town.py`.
+- **S12 (134).** Ryan's "Further." door and its screen are removed (`ryan.py`). His card's end line is now "More of
+  Ryan in the next release.", and `v2_state.release_page.door` is null.
+- **C4 (137).** Under hygiene 30, Ryan's hot repeatables (his room, the couch) and Jake's date still show. When she
+  goes, he refuses and says why, with no pay (`ryan.py` `hot_choice`/`stink_node`, `jake.py`).
+- **W8 (138).** Jake dates Wednesday and Saturday: a second text, `jake_date_wed` (`phone.py`), and the pickup and
+  the end of a date on both nights. "Come up." stays Saturday only. Laura's line is now "Is Jake taking you out
+  again?"
+- **S4 (139).** The class screens say they're teaching. The dean gets "Ask about your grades." and the TA gets "Ask
+  her to help you with Biology." (`college.py`).
+- **C3.** Zoe's, Tom's and Vance's pre-meeting cards carry a `heading` (engine f0d7b863).
+- **W9 (140).** Checked, nothing changed: the build already lets a hard-working player pay the first rent.
+- **Verified.** Dev and debug rebuild; each change grepped in index.html. Gates went from 61/87 to 60/86 (26 fail,
+  4 n/a): "the door can be seen again" is n/a now that there is no door, and nothing regressed. All 7 pieces were
+  played in Chrome, and `pieces.py chrome` records them.
+- **Found, not fixed (not in LO's list):**
+  - `tom.py:17` `CLOCK_IN` equips the tight uniform on her first shift.
+  - The tight-uniform "Clock out." choices on the café shift screen under Exhibitionism 20 carry both
+    `cafe_uniform_sexy equipped` and `unequipped`, so they can never show.
+
+## 2026-11-03 — the two uniform bugs, the 13 game slips, week one kept easy (DECISIONS 141–142)
+
+- Everything is listed in DECISIONS 142. Week one stays easy (141, LO "B"), and the money_pressure sheet carries a
+  note saying so.
+- Verified in Chrome on the dev build: "Clock in." gives the normal uniform only; the three "come back later"
+  messages are live; Ryan's two-knocks speech shows as dialog; the office choices and busy lines are there; Hale's
+  pointer card hides his name.
+- Gates went from 60/86 to 62/86 (24 fail, 4 n/a). "meter ceiling" and "no canvas key is discarded" pass now.
+  "somebody speaks" went from 8.3 to 8.0 and still fails, because 49 other canvases have no speech; that was not
+  on the 13. The party house is still open and empty on Saturday night, which wasn't on the 13 either.
+- Ryan's attribution tags ("Ryan pants.", "You tell him.") now sit as short narration lines between the dialog
+  boxes. Every signed word is kept.

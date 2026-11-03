@@ -12,14 +12,14 @@
 | where · when | the landing, Ryan's door · Sun–Thu 22:00–00:00, Ryan in · new door option "His door's open a crack." |
 | gate | none: open at Good Girl · not Friday (Kayla's night) |
 | who | Ryan, 22; he never sees her |
-| what she wears here (test 8) | not named |
-| BRAKE (S9) | once a night |
+| what she wears here | not named |
+| BRAKE | once a night |
 | raises | the look: none · "Keep watching.": corruption add +1, cap 19 · no Ryan number moves, no step changes |
 | the crude-word ceiling | Ryan's middle column: ass, tits, cock, wet · no cunt, fuck, cum, pussy, clit |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `crack_low` (his Want under 30) | his light, the door open a crack; Ryan stroking to porn on his phone, her panties on the floor by the hamper, untouched | yes | "Keep watching." → `watch_low` · "Pull the door shut." → the hall | `saw_ryan_alone` set (on both exits) |
 | `watch_low` | he comes to the phone; his eyes go once to her panties on the floor; she backs away | yes | "Back to your room." → her room | corruption add +1, cap 19 |

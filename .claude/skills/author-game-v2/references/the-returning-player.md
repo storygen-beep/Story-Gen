@@ -4,6 +4,13 @@ Every release after v0.1 lands on people who are already playing. They open the 
 save written by the old one, and nothing about that is visible to you: the build passes clean, the
 gates go green, a fresh start plays perfectly. The damage only exists for the player who loads.
 
+**A dev build LO plays counts too** (LO, 2026-11-03). Once LO plays a dev build, the locks in this
+file (ids, flag and trait keys, §8) apply to every rebuild after it, and each dev build LO plays is
+archived to `games/<slug>/releases/dev/<YYYYMMDD-HHMM>.html`, kept apart from the shipped
+`releases/v<version>.html`. `gates.py --saves` compares shipped builds only; a dev archive is there to
+check LO's own save by hand (load it in the new build) until a tool reads it. Renaming an id between
+two rebuilds breaks LO's own save.
+
 **This file owns what may not CHANGE between releases.** What a release has to *clear* before it
 ships is `the-release.md` § Shipping the build. Both, every time.
 
@@ -174,10 +181,10 @@ Ship the grant that way from the start and the version boundary can never strand
 | `last_version` / `last_schema` | the release **currently running**, restamped by `:passagestart` whenever it changes |
 
 `*_schema` is a fingerprint of the trait/flag key surface and the corruption tiers
-(`Config.saves.version`, `v2.py:3926`). Two builds with the same number are join-compatible on
+(`Config.saves.version`, `v2.py:3935`). Two builds with the same number are join-compatible on
 everything §3 and §4 govern; two different numbers mean something in that surface moved.
 
-**A mismatch is recorded, never refused.** `Config.saves.onLoad` (`v2.py:3964`) logs the comparison
+**A mismatch is recorded, never refused.** `Config.saves.onLoad` (`v2.py:3973`) logs the comparison
 and returns. Throwing from there would abort the load with a dialog — that *is* the reject-on-mismatch
 handler the stamp was minted for, and it stays unused on purpose: the backfill heals the mismatches a
 player can actually hit, and refusing a save costs somebody their whole run over a difference they

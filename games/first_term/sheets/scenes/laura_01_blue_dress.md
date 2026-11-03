@@ -11,18 +11,18 @@
 | person · step | `npc_laura` · 1 (Laura C 1) |
 | where · when | the kitchen, then the master bedroom · Tuesday 18:00–22:00, day 2 or later · it starts only from "Follow her upstairs." in Laura's kitchen hub (that choice sets `laura_dress_invite`), never by walking into the bedroom |
 | gate | none: step 1, day 2 |
-| want (test 1) | none before it: step 1, and it says so |
-| next step (test 2) | she dresses her daughter, and lingers |
-| hook (test 3) | the dress is hers now; it comes home late (step 2) |
-| what she wears here (test 8) | Laura's blue dress: the scene adds and equips it |
+| want | none before it: step 1, and it says so |
+| next step | she dresses her daughter, and lingers |
+| hook | the dress is hers now; it comes home late (step 2) |
+| what she wears here | Laura's blue dress: the scene adds and equips it |
 | her stage here | Good Girl: shy choices only (SP2) |
 | explicit? | no |
-| her_line_low · her_line_high (rule 7) | low (under the stage): "That's your mom. Go to bed." · high (over it): "She's lonely, and you can't stop watching her be lonely." (the person sheet's pair; at step 1 the high line is worded for the mirror: "She's looking at you like a stranger would. You don't hate it.", the built thought) |
+| her_line_low · her_line_high | low (under the stage): "That's your mom. Go to bed." · high (over it): "She's lonely, and you can't stop watching her be lonely." (the person sheet's pair; at step 1 the high line is worded for the mirror: "She's looking at you like a stranger would. You don't hate it.", the built thought) |
 | what changes after | the dress is Ella's; Laura's line on it (`npc_laura.md`, her line: her blue dress) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `kitchen` | Laura, washing up: "Come upstairs. I have something for you." | no | "Follow her." → `mirror` | none |
 | `mirror` | the blue dress, tight across her chest; Laura smooths it over her hips | no | "Is that bad?" → `no` · "I can't take this." → `give` (parked) | `laura_blue_dress` added and worn |

@@ -40,7 +40,7 @@ it is the player's pace.
 grep -E 'target_hour|advance_to|until_time|time_target' v2.py     0 hits
 ```
 
-`advanceTime(minutes)` (`v2.py:6883`) adds minutes to `time_state` and rolls the day when the hours
+`advanceTime(minutes)` (`v2.py:6892`) adds minutes to `time_state` and rolls the day when the hours
 pass 24. That is the whole time API. There is **no way to send the clock to a named hour**, and no
 way to print the current one into prose either — `_resolve_at_references` (`v2.py:16998`) resolves
 `@player` and `@<npc>` and nothing else, so there is no `@time` token to fall back on.
@@ -195,7 +195,7 @@ option, because there is no absolute advance to reach for.
 
 The engine is already inconsistent with itself here, and the author is the one who pays.
 
-- **Travel time is tagged automatically.** `getLocationCostTag` (`v2.py:6142`) renders `20m` on the
+- **Travel time is tagged automatically.** `getLocationCostTag` (`v2.py:6151`) renders `20m` on the
   navigation card from `[[locations.costs]] time`, used at `v2.py:22760` and `:22794`.
 - **Activity time is not tagged at all.** A choice's `time_progression_minutes` emits a bare
   `<<script>>advanceTime(150);<</script>>` at the bottom of the passage body (`v2.py:15649`) with
@@ -249,10 +249,11 @@ cooldown_message  = "<the hours, as a bare phrase>"
 ⚠️ **BOTH KEYS GO AT THE TOP LEVEL OF `[canvases.trigger]`. THIS SNIPPET PUT THEM IN
 `[canvases.trigger.metadata]` UNTIL 2026-08-25 AND THAT PATH IS DEAD.** The importer reads
 `trig_def.get("show_when_blocked")` and `_require_str(trig_def, "cooldown_message")` —
-`template_import.py:2446-2447`, the trigger table itself — and then writes them **into** metadata at
-`:8009-8010` for the generator to read back at `v2.py:13532-13533`. Authoring them in `metadata` directly
-skips the importer entirely: the TOML is valid, the build is green, every gate passes, and
-`showWhenBlocked` reaches the built HTML **zero** times.
+`template_import.py:2566-2567`, the trigger table itself — and then writes them **into** metadata at
+`:9365-9366` for the generator to read back at `v2.py:14549-14550`. Authoring them in `metadata` directly
+skips the importer entirely: the TOML is valid, the build is green, and `showWhenBlocked` reaches the
+built HTML **zero** times. The gate `no canvas key is discarded` now flags a trigger key written under
+`[canvases.trigger.metadata]` (LO, 2026-11-03).
 
 **The message is a bare phrase, not a sentence.** The engine renders it as `<row name> — <message>`,
 so restating the row's own name doubles it: *"Work the counter — The counter — mornings, seven till
@@ -335,7 +336,7 @@ to one?"*); excluding `one` leaves **0**.
 ## Cheat sheet
 
 - **Name a time only where the engine pins it.** It pins exactly one: `[time] starting_hour`.
-- **There is no absolute-time advance** — `advanceTime(minutes)` is the whole API (`v2.py:6883`),
+- **There is no absolute-time advance** — `advanceTime(minutes)` is the whole API (`v2.py:6892`),
   and there is no `@time` token to print the clock either (`v2.py:16998`).
 - **A beat may not say what time it is.** A repeatable canvas fires at any minute of its window.
 - **Turn the reading into a rule.** *"Doors open at nine"* → *"The doors open at nine."*

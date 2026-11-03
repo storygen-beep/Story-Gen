@@ -140,7 +140,8 @@ def test_a_cast_page_without_show_traits_is_emitted_as_before():
     """§0 rule 7. The golden is the CastPage passage the engine BEFORE EN7 (the EN5 tree,
     snapshotted to scratch; it ignores these keys) generated for this fixture.
     Regenerated 2026-10-30 when the page became a tap-to-open list with a Schedule button (first_term
-    DECISIONS 94, 95): a deliberate layout change. What this still guards is that a page
+    DECISIONS 94, 95): a deliberate layout change. Edited 2026-11-03 for the quest card's
+    `heading` (C3): the row prints _e.name and hides the face when the card has one. What this still guards is that a page
     without show_traits carries none of EN7's pieces."""
     twee = _twee(_bare(_raw()))
     assert _passage(twee, "CastPage").strip() == read_data("en7_castpage_golden.txt")

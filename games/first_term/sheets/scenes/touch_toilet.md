@@ -9,14 +9,14 @@
 | place · row | `college_womens_toilet`, a locked stall · "Touch yourself" |
 | gate | Curious: Corruption 20 (LO, 2026-10-08) |
 | who | nobody: she is alone |
-| what she wears here (test 8) | not named |
-| BRAKE (S9) | once a day, on the trigger |
+| what she wears here | not named |
+| BRAKE | once a day, on the trigger |
 | raises | corruption add +1, the first time each day, until past Curious |
 | the crude-word ceiling | tits, nipples, ass, cock, wet, clit · no cunt, fuck, cum, pussy (LO, 2026-10-08) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `touch` | alone, she touches herself until she comes | yes | "Get dressed." → the room | corruption add +1 |
 

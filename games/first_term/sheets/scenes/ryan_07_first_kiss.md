@@ -11,15 +11,15 @@
 | person · step | `npc_ryan` · 7 (Ryan A 8) |
 | where · when | his room · Mon, Tue, Thu, Sun 18:00–22:00, after two knocks |
 | gate | Corruption 40 · his Want 60 · the boost off |
-| want (test 1) | since the shower he leaves his door open a hand's width |
-| next step (test 2) | the first kiss, and she starts it |
-| hook (test 3) | his no, "I've got a girlfriend", and what she gets instead (step 8) |
-| what she wears here (test 8) | not named |
+| want | since the shower he leaves his door open a hand's width |
+| next step | the first kiss, and she starts it |
+| hook | his no, "I've got a girlfriend", and what she gets instead (step 8) |
+| what she wears here | not named |
 | explicit? | yes: the kiss screen (heat call A), no new act |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `knocks` | two knocks; he opens; neither sits down | no | "Kiss him." → `kiss` · "Goodnight, Ryan." → the hall (parked) | none |
 | `kiss` | she kisses him first; his hands on her ass; his cock hard against her | yes (8 words) | "Don't stop." → `text` | none |

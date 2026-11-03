@@ -175,6 +175,10 @@ Both are LO's call.
 ## Mark — central · contest · Want + Power · scaffold ends as: Sunday rent paid her way
 
 ### Mark A — The Table (power game over the rent) · **PICKED**
+> **Status 2026-11-03 (LO, W4: "yes").** Release 1 built Mark A 1–3 and a reworked step 6 as its four steps
+> (`MARK_R1_LADDER.md`, DECISIONS 107). **Cut for good, not later:** Mark A 4, 5, 7, 8 and 9 (the ask, a bill an
+> inch, twenty and you can look, the red circle, his chair), with every paid $20. The reason is LO's "no sex for
+> money" (DECISIONS 102). Don't build them in a later release. Steps 10–15 are not decided for release 2.
 **Pitch:** Rent is counted every Sunday on the kitchen table, and each Sunday Mark sets a new term for the shortfall, until Ella sits in his chair and sets them herself.
 **How Power colours it:** every step has an M version (he names it) and an E version (she does). Paying in full still plays the step, in the E version.
 **Every M version carries a labelled no** (fixed 10-04): the button names what it does, and it is parked unless it says "(ends his path)". Each row's M no is written in its moment.
@@ -218,6 +222,10 @@ Both are LO's call.
 ## Tom — central (LO, 10-04; small, 9–12 steps) · contest · Want + Power · scaffold ends as: after closing
 
 ### Tom B — Her Price (power game with the regulars) · **PICKED**
+> **Status 2026-11-03 (LO, W4: "yes").** Release 1 built Tom B 1 (reworked strict), B 3 and his top step "Not by
+> the window" (`TOM_R1_LADDER.md`, DECISIONS 108). **Cut for good:** B 2 (the uniform rule) and B 4 (booth four,
+> Tom selling her time), because Tom never tells her to show and never sells her (LO, 2026-10-31). **Later:** B 5
+> ("half is mine") and B 6 (the kiss after close). B 7 onward is not decided for release 2.
 **Pitch:** Tom sells her time to the regulars and keeps half, until Ella learns what she's worth, names her price in front of the whole room, and Tom ends up working for her after closing.
 **Proposed:** central, small (12 steps).
 

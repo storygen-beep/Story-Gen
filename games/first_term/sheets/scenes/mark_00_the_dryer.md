@@ -9,16 +9,16 @@
 | where · when | the garage, at the washer · Saturday 09:00–17:00, Mark in the garage (`npc_mark.md` schedule) · once |
 | gate | `opening_done` · Mark in `home_garage` · `mark_saw_her` is false · auto-fires when she walks in |
 | who | Mark; nobody else |
-| what she wears here (test 8) | not named; the soaked screen branches on her bra only (`clothing_slot` bra equipped / unequipped) |
-| want (test 1) | his leak, on his body, covered (H7, stage 1): he looks, catches himself, turns to the bench |
-| hook (test 3) | `mark_saw_her`; her bridge thought (H6) turns it into a wish; his step 3 and his teases read the flag |
+| what she wears here | not named; the soaked screen branches on her bra only (`clothing_slot` bra equipped / unequipped) |
+| want | his leak, on his body, covered (H7, stage 1): he looks, catches himself, turns to the bench |
+| hook | `mark_saw_her`; her bridge thought (H6) turns it into a wish; his step 3 and his teases read the flag |
 | raises (H5) | the accident: his Want +5 and `mark_saw_her`, whatever she does · "Don't take it yet.": her Exhibitionism +1, cap 19 · "Take the towel.": nothing of hers |
 | explicit? | no: an accident screen, wet clothes, no act |
 | crude-word ceiling | Mark's early column: legs, ass (`SP2_ladders.md` §6); her own thought may say tits |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `hose` | the washer hose jumps off its tap and soaks her from the neck down; Mark at the bench sees it | no | "Take the towel." → `covered` · "Don't take it yet." → `stay` | `mark_saw_her` set · Mark `want` add +5 (on both exits) |
 | `covered` | she takes the towel; he goes back to his bench; her bridge thought | no | "Go and change." → `home_hall` | none |

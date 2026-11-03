@@ -80,8 +80,8 @@ out.append({
             # a no pays her nothing (H5, DECISIONS 124), and it is not her step 1 (LO 2026-11-03, DECISIONS 133):
             # it still meets Jake; she asks again on a later Friday (zoe_01b_kiss_again)
             go("\"Not tonight, Zo.\"", node="no_dare", mins=5, flags=[fset("party_went"), fset("zoe_kiss_refused")], eff=[add("zoe_refused", 1)]),
-            go("Kiss Zoe.", node="kiss_zoe", mins=5, cond_=cond(CURIOUS), flags=[fset("party_went")], eff=[add("exhibitionism", 3)]),
-            go("Kiss the guy who's staring.", node="jake", mins=5, cond_=cond(CURIOUS), flags=[fset("party_went"), fset("jake_kissed")], eff=[add("exhibitionism", 3)]),
+            go("Kiss Zoe.", node="kiss_zoe", mins=5, cond_=cond(CURIOUS), flags=[fset("party_went")], eff=[add("exhibitionism", 3, cap=79)]),
+            go("Kiss the guy who's staring.", node="jake", mins=5, cond_=cond(CURIOUS), flags=[fset("party_went"), fset("jake_kissed")], eff=[add("exhibitionism", 3, cap=79)]),
         ]),
         node("no_dare", "Not tonight", [D(Z, "Boring. Fine. I'll keep asking."), P("She steals your drink instead and dances off into the crowd. Across the room a guy in a team jacket is watching you. Not Zoe. You.")],
              [go("Look back at him.", node="jake", mins=15)]),
@@ -130,8 +130,8 @@ out.append({
             # zoe_refused counts her nos; from the second no to the kiss Zoe says she's counting (true: only kiss nos come before step 1)
             G(cond(trait("zoe_refused", "gte", 2)), D(Z, "That's twice you've said no, babe. I'm counting.")),
         ], [
-            go("Kiss Zoe.", node="kiss_zoe", mins=5, eff=[add("exhibitionism", 3)]),
-            go("Kiss the guy by the speakers.", node="kiss_guy", mins=5, eff=[add("exhibitionism", 3)]),
+            go("Kiss Zoe.", node="kiss_zoe", mins=5, eff=[add("exhibitionism", 3, cap=79)]),
+            go("Kiss the guy by the speakers.", node="kiss_guy", mins=5, eff=[add("exhibitionism", 3, cap=79)]),
             go("\"Not tonight, Zo.\"", node="no", mins=2),
         ]),
         node("kiss_zoe", "Zoe", [
@@ -182,10 +182,10 @@ out.append({
             G(cond({"type": "clothing_item", "item_id": "zoe_party_dress", "operator": "unequipped"}), P("It takes forever. Zoe watches every second. When it slides out of your sleeve your nipples are hard in the cold air, two points anyone could see, and inside, through the glass, a guy at the window puts two fingers in his mouth and whistles.")),
             G(cond(PARTY_DRESS), P("It takes forever. Zoe watches every second. When it slides out through the armhole your nipples are hard in the cold air, two points anyone could see under her dress, and inside, through the glass, a guy at the window puts two fingers in his mouth and whistles.")),
         # reader a3, seen by the readers (DECISIONS 131): Zoe doesn't have it yet when the button shows
-        ], [go("Ask for it back.", node="mine", mins=3, eff=[add("exhibitionism", 3)], flags=[fset("zoe_has_bra")],
+        ], [go("Ask for it back.", node="mine", mins=3, eff=[add("exhibitionism", 3, cap=79)], flags=[fset("zoe_has_bra")],
                wardrobe=[{"action": "unequip", "item_id": "plain_bra"}, {"action": "unequip", "item_id": "sports_bra"}])]),
         node("already", "Already", [D(Z, "You're— oh my god. All night? Babe."), P("She looks at your chest for a long second, then laughs and leans on the rail next to you, close, her shoulder on your bare arm.")],
-             [go("Laugh with her.", node="mine2", mins=3, eff=[add("exhibitionism", 3)])]),
+             [go("Laugh with her.", node="mine2", mins=3, eff=[add("exhibitionism", 3, cap=79)])]),
         node("mine2", "Saturday", [D(Z, "There's a hot tub Saturday. At the party house. Just us. Well. Just us and some people."), T("She keeps looking at your chest. She keeps not asking.")],
              [go("\"Saturday.\"", loc="zoe_apartment", mins=5, consumes=True, eff=[setv("zoe_step", 2)], flags=[done(2), fset("party_house_invite")])]),
         no_node("no", [D(Z, "Boo. Fine. I'll think of a worse one."), P("She goes back inside and leaves the balcony door open behind her.")], "zoe_apartment", 7,
@@ -530,7 +530,8 @@ cards = step_cards(Z, {
 # a npc card"), the way Dr. Hale's step-1 card points at his first lecture. It was a Story Goals card in group
 # story_goals, where the priority-20 "Week one" card won the group for days 0-6: nothing pointed at her in week
 # one, though her meeting fires from the first Tuesday.
-cards.insert(0, {"npc_id": Z, "priority": 10, "text": "The girl from your Biology class hangs out on the quad in the afternoons.",
+# C3 (LO 2026-11-03): the heading stands in for her name until she has met her (engine f0d7b863)
+cards.insert(0, {"npc_id": Z, "priority": 10, "heading": "A girl from Biology", "text": "The girl from your Biology class hangs out on the quad in the afternoons.",
                  "tip": "The quad, Tuesday, Thursday or Friday, 14:30 to 18:00",
                  "when": [{"flag": "opening_done", "op": "is_true"}, {"flag": "zoe_met", "op": "is_false"}],
                  "ready_canvas": "zoe_00_quad_meeting"})

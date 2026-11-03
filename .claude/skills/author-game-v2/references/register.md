@@ -359,8 +359,8 @@ after its two truth tests).
    appetite (`the-meters.md` W1b, "One event, several levels" below).
 5. **Who notices** — someone in the world reacts to what she does, or the game has declared that
    nobody does (`the-meters.md` W5b).
-6. **The written no** — where there is an offer, a refusal exists, is written and is priced
-   (`the-surfaces.md` R5b).
+6. **The written no** — where there is an offer, a refusal exists, is written, and lands somewhere:
+   a reply, a parked return, a cost, or a stated nothing (`the-surfaces.md` R5b).
 7. **The body** — an explicit beat stays on the body to its last sentence (the pivot, above).
 8. **The numbers and the clothes agree** — every number the scene states agrees with the Want and the
    ledger, and the Want's own numbers agree with each other (one span said two ways is a FAIL); every
@@ -457,6 +457,9 @@ this same corpus got it wrong:
   `<<speech>>`, `<<say>>`, `<<nm "Karlee" "…">>`, `<<chat portrait "…">>`,
   `<div class="npctextbox">`, or one macro per character (`<<Mc>>`, `<<AmyBd>>`). A quote-counter
   sees none of it and reports the most spoken game in the corpus as 585 : 1 narration.
+  **Ours is the same, so write it that way** (LO, 2026-11-03): every spoken line is a `dialog`
+  block with its speaker. A quote inside a `paragraph` counts as narration — the portrait and the
+  speaker name render only on a `dialog` block, and the gates count only those.
 
 ---
 
@@ -842,6 +845,16 @@ shape is rule 5: she speaks, the protagonist answers, she pushes, the protagonis
 italics, between two spoken lines, never in place of them. She has her own want and says it, and
 "sweetheart" is her term of address and nobody else's. The version this replaced said "That's twice
 this week" on a screen that can be the first visit, which the truth rule now forbids.*
+
+In the TOML every spoken line above is its own `dialog` block with its speaker, and the thought is a
+`thought_bubble` (the shapes are `engine.md` §25's); a quote inside a `paragraph` would count as narration:
+
+```toml
+{ type = "dialog",         props = { speaker = "npc", npcId = "npc_cashier" }, content = "You're early. Couldn't sleep?" }
+{ type = "dialog",         props = { speaker = "player" },                     content = "The apartment's too quiet." }
+{ type = "dialog",         props = { speaker = "npc", npcId = "npc_cashier" }, content = "Quiet's good. Quiet's cheap." }
+{ type = "thought_bubble", props = { speaker = "player" },                     content = "Easy for her to say. She gets to go home to somebody." }
+```
 
 **Explicit beat, repeatable surface** — crude is the default, and the beat stays on the body for
 its whole length. The thought gets its own beat, after:

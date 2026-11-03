@@ -1,4 +1,4 @@
-# [REVIEW]] Place — The Party House
+# [REVIEW] Place — The Party House
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -9,12 +9,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | town (the bus, 15 minutes, on the way in) |
+| ENTERED FROM | town (the bus, 15 minutes, on the way in) |
 | labels — what kind of place | `zone:town`, `private`, `outdoors` |
 | hours | Saturday 20:00 to Sunday 03:00 |
 | closed text | "Dark. Nobody's home." |
 | hidden until | until Zoe invites her (`party_house_invite`) |
-| fill — word budget (S3) | 2,000 words (ledger, unchanged) |
+| fill — word budget | 2,000 words (ledger, unchanged) |
 | door | no |
 | dress code or wanted state | none |
 
@@ -26,7 +26,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | soak in the hot tub | need | energy | energy add +5 | once a night | yes: her body |
 | Zoe A 3 | person | Zoe's ladder | only Zoe sees her (LO, 2026-10-08) | once | yes |

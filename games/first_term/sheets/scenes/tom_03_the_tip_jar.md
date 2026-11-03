@@ -12,19 +12,19 @@
 | where · when | the back room · Mon–Sat 14:30–22:00 |
 | gate | `cafe_job` · `tom_step` eq 1 · player counter `cafe_shifts_worked` gte 5 · the boost off |
 | the counter | `cafe_shifts_worked` (player trait, declared 0): +1 on every "Work a shift". No counter exists today (`grep` of `build_scripts/`); name mine, confirmed by LO 2026-11-01 ("Signed") |
-| want (test 1) | he counts the jar when she's near |
-| next step (test 2) | she catches him stealing: leverage |
-| hook (test 3) | "Not a word." She holds his secret; it's her lever in a later release ("half is mine", later) |
-| what she wears here (test 8) | the café uniform |
+| want | he counts the jar when she's near |
+| next step | she catches him stealing: leverage |
+| hook | "Not a word." She holds his secret; it's her lever in a later release ("half is mine", later) |
+| what she wears here | the café uniform |
 | explicit? | no: info |
 | who notices | Tom's secret is hers |
 | what she risks | being caught seeing it |
-| her_line_low · her_line_high (rule 7) | low (under the stage): "He's your boss. Do the job." · high (over it): "You felt that second. So did he." (the person sheet names none; worded by me, signed by LO 2026-11-01) | The built thought on `seen` ("He's a thief. And now he owes you.") is the high side. |
+| her_line_low · her_line_high | low (under the stage): "He's your boss. Do the job." · high (over it): "You felt that second. So did he." (the person sheet names none; worded by me, signed by LO 2026-11-01) | The built thought on `seen` ("He's a thief. And now he owes you.") is the high side. |
 | what changes after | `knows_tip_jar`; his line at the counter changes (`tom_01_the_apron.md`, his counter) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `jar` | she sees Tom fold twenties from the tip jar into his apron | no | "Busy night?" → `seen` · walk past → the shift (parked) | none |
 | `seen` | he sees her see it: "Not a word." | no | "Not a word." → the shift | Tom's Want add +5 · Tom's Power add −5 · `tom_step` set 2 · `tom_03_done` set · `knows_tip_jar` set |

@@ -11,18 +11,18 @@
 | person · step | `npc_laura` · 2 of 4 (was 3, Laura C 3; the canvas id stays) |
 | where · when | the kitchen · Mon, Tue, Thu, Fri 20:00–22:00 (not Sunday: Mark is at the table) |
 | gate | her Love (`warmth`) 10 · `laura_step` eq 1 · the boost off |
-| want (test 1) | she keeps a glass poured for two (the leak) |
-| next step (test 2) | her secret: at 19 she snuck out in her mother's dress |
-| hook (test 3) | "Like you get looked at." She wants to be looked at too |
-| what she wears here (test 8) | not named |
+| want | she keeps a glass poured for two (the leak) |
+| next step | her secret: at 19 she snuck out in her mother's dress |
+| hook | "Like you get looked at." She wants to be looked at too |
+| what she wears here | not named |
 | explicit? | no: a talk |
 | who notices | Laura's secret is Ella's |
-| her_line_low · her_line_high (rule 7) | low: "That's your mom. Go to bed." · high: "She's lonely, and you can't stop watching her be lonely." The built thought on `mark` ("She wants somebody to look at her. She's telling you.") is the high side; the low line goes on the parked no ("I'm tired, Mom.") |
+| her_line_low · her_line_high | low: "That's your mom. Go to bed." · high: "She's lonely, and you can't stop watching her be lonely." The built thought on `mark` ("She wants somebody to look at her. She's telling you.") is the high side; the low line goes on the parked no ("I'm tired, Mom.") |
 | what changes after | Ella knows she's lonely |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `glass` | Laura with wine, her robe open at the collar: "Sit with me." | no | "Pour me one." → `story` · "I'm tired, Mom." → the hall (parked) | none |
 | `story` | at 19 she snuck out in her own mother's dress, home at dawn (no clock hour); "Like you get looked at." (the promise) | no | "Mom!" → `mark` | none |

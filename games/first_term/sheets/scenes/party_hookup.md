@@ -12,14 +12,14 @@
 | gate | Corruption 40 · he is met and at the party (ledger change 26) |
 | who | the cocky guy: his portrait at the party; she knows him from class |
 | his want, shown first | his stare in Figure drawing; the exam's price, if she paid it |
-| what she wears here (test 8) | not named; "pushed aside" at most |
-| BRAKE (S9) | once a night, on the trigger |
+| what she wears here | not named; "pushed aside" at most |
+| BRAKE | once a night, on the trigger |
 | raises | corruption add +1 until past Bold · `campus_talk` add +1 |
 | the crude-word ceiling | tits, nipples, ass, cock, wet, clit · no cunt, fuck, cum, pussy (LO, 2026-10-08) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `ask` | Jake's teammate, at the party, his eyes on her: "Bathroom's free." | no | "Lead the way." → `door` · "Not tonight." → the party | none · a no costs nothing |
 | `door` | Zoe's bathroom, locked; the party through the wall | no | "Get on your knees." → `oral` · "Pull him in." → `sex` | none |

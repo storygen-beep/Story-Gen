@@ -7,12 +7,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | home_hall |
+| ENTERED FROM | home_hall |
 | labels — what kind of place | `zone:home`, `private`, `home_base`, `has_bed`, `has_mirror`, `she_can_undress` |
 | hours | always |
 | closed text | none: always open |
 | hidden until | no |
-| fill — word budget (S3) | 5,300 words (was 5,000): +300 for tidying |
+| fill — word budget | 5,300 words (was 5,000): +300 for tidying |
 | door | no: her own room |
 | dress code or wanted state | none |
 
@@ -25,7 +25,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | sleep | need | energy | energy set 100 (guess) · the clock to 07:00 · `came_home_late`, `late_party`, `late_shift`, `late_date` set false | once a night | yes: her bed, never a toast |
 | change clothes | work | wardrobe | none · 1–2 clicks, saved outfits | none needed: it writes nothing | yes: the wardrobe screen |
@@ -36,7 +36,7 @@
 
 ## Everyday at home (system `home_life`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | tidy your room | work | home_life | 30 min · energy add −5 · `room_tidy` set true | once a week: Sunday dinner reads it and sets it false | yes, one line |
 

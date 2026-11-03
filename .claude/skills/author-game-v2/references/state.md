@@ -110,7 +110,9 @@ belong here; only decisions, debts, and promises do.
   "build": {
     // EVERY PIECE GETS PLAYED (2026-11-02). Written only by scripts/pieces.py, never by hand.
     // `done` appends a piece; `chrome` records the building session's own play in Claude in
-    // Chrome; `played` records LO's words (one note may cover every piece: `--all`). Nothing
+    // Chrome; `played` records LO's words (one note may cover every piece: `--all`). LO's
+    // "skip the play check" covers only his own `played`; the session still plays each piece
+    // and records `chrome` (LO, 2026-11-03). Nothing
     // blocks development. A public (non-dev) build waits until every piece has `played`
     // (`pieces.py release-check`, run by release_upload.py and the pre-commit ship check).
     "pieces": [ { "id": "ryan-steps-1-4", "what": "Ryan's first four steps at home",
@@ -129,7 +131,9 @@ belong here; only decisions, debts, and promises do.
     //               rung lists its `acts`. `pool` — canvas ids; `daily: true` when the pool is
     //               clicked every day. `growth` — "climbs" | "decays". `sink` / `deadline` —
     //               where its money goes and when. `feeds` / `reads` — system or meter ids.
-    //               `leads_to` — npc ids or canvas ids.
+    //               `leads_to` — npc ids or canvas ids. `sex_for_pay: true` — only on a card
+    //               where she is paid for the act; its `pool` is what the pay gates read.
+    //               No such card: those gates show n/a (the-arc.md A15).
     "systems": [
       { "id": "…", "name": "…", "place": "location_id", "hours": "Mon-Fri 18:00-02:00",
         "cost": "60 min · energy", "one_ladder": true,
@@ -339,7 +343,9 @@ its headline. Declaring is strictly better — skills and resources legitimately
 and should not be mistaken for the spine.
 
 **`board.ceilings`** — each tier's top band. If the highest authored gate on a tier sits below
-its ceiling, the top of that bar buys nothing. Gate 8 fails and the player is being lied to.
+its ceiling, the top of that bar buys nothing. Gate 8 fails and the player is being lied to. A band
+above every cap this release pays on that meter is not counted: the player cannot reach it, so it is
+a later release's band, not a promise yet (LO, 2026-11-03).
 
 **`board.systems[]`** — one design card per system (what she does again and again), filled before
 the locations are written. `the-systems.md` SY1; the sheet is `templates/sheets/system.md`.
@@ -352,6 +358,9 @@ e.g. [ClassroomMenu] `<<if $pc.has_inclination("Knowledge from the Deep")`.
 ⚠️ **`fed_at` on a `sourced` meter should usually name ONE location** — if it names five, the
 thing is ambient and the ledger is the cheapest place to find that out. A meter-shaped entry
 still in `board.systems[]` (a `kind`, no card fields) is read as a meter until it moves.
+`kind` is only ever `ambient` or `sourced`. A grade or job rating that opens at the top and shuts at the
+bottom adds **`"performance": true`** to its entry (`the-meters.md` W5c, LO S7, 2026-11-03), and gate
+*ascent tiers expand the world* skips it as a descent.
 
 **`board.infrastructure[]`** — the clocks, views and channels (`kind`: `clock` · `view` ·
 `channel`), named so they are not counted as systems.
@@ -437,16 +446,17 @@ file sits there being read by a different gate. These are the exact paths:
 | `board.locations[].fill` | *location fill* | a LIST of `{id, fill}`, **not** a dict — and declared before the prose, or the gate says so |
 | `board.economy` | four economy gates | `{ currency, symbol, week_income, obligation }`; `currency` is the trait key, and without it the economy channel is *"not counted"* |
 | `board.needs[]` | *a need shuts a door* | `[{ key, falls, fills, costs, shuts }]` — and every key must be READ by a condition somewhere in the game |
-| `board.door` | *ends on an opening* | `{ canvas, choice, node? }` — the door this release ends on; `choice` is the choice's text. **A ledger without it or `release_page.door` FAILS the gate** (LO, 2026-09-26). `release_page.door` (SP7) is read first once a release page is written |
+| `board.door` | *the door can be seen again* | `{ canvas, choice, node? }` — an optional door; `choice` is the choice's text. `release_page.door` (SP7) is read first once a release page is written. It is no longer required: *ends on an opening* now reads each declared ladder's last quest card for its `terminal_text` (LO, 2026-11-03, replacing the 2026-09-26 rule that a ledger without a door fails) |
+| `board.characters[].stored` | *the men's numbers are read* | optional list of his trait keys (`["want", …]`) that are shown this release and read by a **later** release's steps (LO, W4 a, 2026-11-03). A stored key needs no step gate this release, only a line branch (it colours his lines); his quest card says the number is for later. Leave a key out once a step this release reads it |
 | `board.characters[].address` · `board.resetting_flags` | *pitch pack* NAMING · lint *a flag that never resets* | what this person calls her (`"love"`, her surname, nothing) — the pack prints it so a pitch uses it; and flags meant to reset that are not named `*_today`/`*_week` |
 | `board.characters[].schedule` | `shape.py` *the person is there at the step's hour* | `[{ where, weekdays, from, to }]` — the person's hours, optional (weekdays as a step's `when.days`; absent = every day). Each ladder step's window must be fully covered by the person's rows at its place (or its `seen_from`), past midnight included, read first match first as the engine reads them: a gated or narrower row goes above the one it overrides, and an overnight row on some weekdays needs its 00:00 half; a `fires_from = "opening"` step is exempt. A row it cannot read (an unknown weekday, or the TOML's `location`/`start_time`/`end_time`) is bad input, and that person's steps are not judged. The per-room count stays `occupancy_rows` |
 | `board.characters[].occupancy_rows` | *standing surface* | `[{ location, start_time, reason }]` — a schedule row whose job is to put a body in a room (asleep, in the bath, blocking a door), backed by that job and not by a canvas. Keyed by the row's start time, never the room, and always with its reason |
 | `board.characters[].ladder` | *ladders move forward* · *`--ship`* (each step fires when unlocked) · *repeatables without a step* | `{ counter, steps: [{ n, canvas, where, when: { days, from, to }, gate: [ { flag, op? } \| { trait, op, value, npc? } \| { type: "modifier", modifier_key, operator } ] }] }` — since 2026-09-26 (PRD WS4). `counter` is the player trait the steps read and set (an NPC's `arc_stages` gives `<slug>_stage`). Steps are numbered 1..K. `when` is ONE window — days (`"Mon"` or 0 = Monday) and from/to as `"HH:MM"` — and must equal the canvas's `[[canvases.trigger.schedules]]` exactly. `gate` lists every trigger condition except the counter's, and nothing else. Nothing here is trusted: the gate reads the canvas and fails on any difference. Optional per step (SP2, recorded and not gated): `hint`, `her_line_low`, `her_line_high`, `who_notices`, `refusal: "parked" \| "final"`. Optional `raises = {trait: amount}` — what the step adds. Optional `seen_from` — the room next door he is in (`shape.py` reads his hours there; it must share the step's parent). `shape.py` *a step's gate can be reached* checks each gate against the trait's start (his: `meters[k].start`, else `.min`; hers, a gate with no `npc`: `board.player_start = {trait: n}`, listed as bad input when malformed; else 0) plus the steps before it; a gate with `npc` counts only his steps. A trait in `board.daily_raises = {trait: per_day}` (the daily tick) or `board.repeat_raises = {trait: per_visit}` (a repeatable in the TOML raises it) is not judged. `fires_from: "opening"` (step 1 only) marks a step the opening plays: it needs no `where` or `when`, and its canvas must be the starting canvas or a capstone the opening walks into |
 | `releases[].repeatables` · `releases[].ladder_steps` | *repeatables without a step* | written when a release ships: the repeatable canvas ids, and the count of declared steps. The next release is compared against them |
-| `release_page` | *`--ship`* (the build matches the release page · LO signed the playtest · the reader passed) | `{ version, people[], door{canvas, choice}, signed_by_lo, signed_at, reader{canvas: {test: PASS\|FAIL\|N/A}}, reader_waivers[{canvas_id, test, why}] }` — `--ship` reads these. SP7 (`the-spine.md`) adds optional `steps{npc: max_step}`, `places[]`, `weeks`, `promise_alive`, `replay_ready` (yes/no), `block[]`, `report[]`, `rebuild` (the one planned rebuild, `the-release.md`), `her_moment` (the chosen step, unshipped; same shape as `releases[].her_moment`), recorded and not gated. `reader` = `{canvas_id: {test: "PASS" \| "FAIL" \| "N/A"}}` (the `v2-reader` verdicts on touched canvases, `the-release.md` 6b) and `reader_waivers` = `[{canvas_id, test, why}]` (LO's). Absent means `--ship` FAILS: nothing says what the release is |
+| `release_page` | *`--ship`* (the build matches the release page · LO signed the playtest · the reader passed) | `{ version, people[], door{canvas, choice} (optional since S12 b, 2026-11-03; when declared, `shape.py` checks it is a ladder step's canvas), signed_by_lo, signed_at, reader{canvas: {test: PASS\|FAIL\|N/A}}, reader_waivers[{canvas_id, test, why}] }` — `--ship` reads these. SP7 (`the-spine.md`) adds optional `steps{npc: max_step}`, `places[]`, `weeks`, `promise_alive`, `replay_ready` (yes/no), `block[]`, `report[]`, `rebuild` (the one planned rebuild, `the-release.md`), `her_moment` (the chosen step, unshipped; same shape as `releases[].her_moment`), recorded and not gated. `reader` = `{canvas_id: {test: "PASS" \| "FAIL" \| "N/A"}}` (the `v2-reader` verdicts on touched canvases, `the-release.md` 6b) and `reader_waivers` = `[{canvas_id, test, why}]` (LO's). Absent means `--ship` FAILS: nothing says what the release is |
 | `parked.files` | *the tally* (parked, not judged) · *`--ship`* | optional globs relative to `games/<slug>/`, for parked TOML fragments kept outside `parked/`. The `parked/` folder is always read without this. Parked content is scored, never hidden: a gate it would judge counts as not passing |
 | `board.economy.settle_canvas` | *the obligation is charged* | optional canvas id; when declared, the obligation's charge must sit on that canvas |
-| `board.meters[]` | lint *the labels and the systems agree* | `[{ id, kind, key, fed_at, labels, read_by }]`. The lint also reads an old meter-shaped row still in `board.systems[]` |
+| `board.meters[]` | lint *the labels and the systems agree* · *ascent tiers expand the world* (`performance`) | `[{ id, kind, key, fed_at, labels, read_by, performance? }]`; `kind` is `ambient` or `sourced`; `performance: true` marks a grade or job rating the descent check skips (W5c). The lint also reads an old meter-shaped row still in `board.systems[]` |
 | `board.systems[]` | every system has a card | the cards: `[{ id, name, place, hours, cost, pay_ladder[], lewd_ladder[]{acts[]}, one_ladder, people[], pool[], daily, memory, growth, sink, deadline, feeds[], reads[], hook_link, leads_to[] }]`. An entry with `kind` and no card fields is a meter |
 | `board.wardrobe` | every clothing state is read three times | `{ states: [{ id, condition }], key_items: [clothing_id] }`; a condition is one `worn_exposure`, `worn_corruption`, `worn_beauty` or `worn_type` (`operator`, `value`) or `clothing_slot` (`slot`, `operator`) item; a key item is a `[[clothing]]` id (`templates/cards/wardrobe.md`) |
 | `board.coverage[]` | `shape.py` (strict): the coverage rows (`templates/sheets/coverage.md`) | `[{ topic, kind: system \| place \| scene \| mechanic, status: covered \| scouted \| lo \| placeholder \| unknown, source }]`, one per topic. `source` names the rule (file and id) or card, the scout card `games/<slug>/scout/<topic>.md`, LO's call (quote or date), or the release page line of a placeholder |

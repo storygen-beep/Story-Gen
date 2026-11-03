@@ -6,25 +6,25 @@
 | row | answer |
 |---|---|
 | person · step | <npc_id> · <n> |
-| want (test 1) | <what he visibly wants here> |
-| next step (test 2) | <what goes one step further> |
-| hook (test 3) | <what it points at next> |
-| what she wears here (test 8) | <state or item — and the condition behind it: trigger · group · `entry_conditions` · the choice in · an equip; or "not named"> |
+| want | <what he visibly wants here> |
+| next step | <what goes one step further> |
+| hook | <what it points at next> |
+| what she wears here | <state or item — and the condition behind it: trigger · group · `entry_conditions` · the choice in · an equip; or "not named"> |
 
-## The step row (S14) — filled before the step is written
+## The step row — filled before the step is written
 
 Two empty columns: the step is not written. One empty column: the Why table says why.
 
-**Kind · stage:** <the kind (`the-heat-ladder.md` H3) · the stage it opens at in this game's SP2 Heat line> ·
-<for step-family or anyone she lives with: the accident before her first chosen act (H2)>
+**Kind · stage:** <the kind of moment · the stage it opens at in this game's SP2 Heat line> ·
+<for step-family or anyone she lives with: the accident before her first chosen act>
 
 | the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
 |---|---|---|---|---|---|---|
 | <what a player would name; what is new against the step before> | <who is there or finds out · "nobody", declared> | <caught · a secret · a person · a price> | <out loud; the button carries it> | <what he does, for his own reason> | <finished on the body · the ladder's one cut-off> | <a rule · schedule · label · price · standing line · the next step> |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | <node id> | <line> | <yes · no> | <label → node or location> | <trait op value · flag> |
 
@@ -35,4 +35,4 @@ allowed; hiding one is not (`references/the-release.md`, "When LO rejects someth
 
 | key choice | source |
 |---|---|
-| <what the scene shows · how far it goes · its exits · why a column of the step row is empty on purpose> | <rule file + id · `scout/<topic>.md` · LO, <date> · guess> |
+| <what the scene shows · how far it goes · its exits · why a column of the step row is empty on purpose> | <the rule in plain words · the scout card · LO, <date> · guess> |

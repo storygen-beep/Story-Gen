@@ -1,4 +1,4 @@
-# [REVIEW]] Scene — college_exam
+# [REVIEW] Scene — college_exam
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -12,14 +12,14 @@
 | where · when | the lecture hall · midterms, weeks 7–8, once per exam |
 | gate | Focus: none · the study guy: Curious · the flash: Exhibitionism 40 (was 20: DECISIONS 124), cap 59 |
 | who sees the flash | the cocky guy (21) only: a flash for one person she knows |
-| what she wears here (test 8) | not named; "pull everything up" |
-| BRAKE (S9) | once per exam |
+| what she wears here | not named; "pull everything up" |
+| BRAKE | once per exam |
 | effects | the result reads `intelligence` + that grade · copying adds +5 to the grade (guess) |
 | the crude-word ceiling | tits, nipples, ass, cock, wet, clit · no cunt, fuck, cum, pussy (LO, 2026-10-08) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `paper` | the exam paper, the proctor at the front | no | "Focus." · "Flirt with the study guy." · "Look at the cocky guy." → `price` | none |
 | `price` | "Show me and I'll tilt my paper." | no | "Show him." → `flash` · "No." → `result` | none |

@@ -1,4 +1,4 @@
-# [REVIEW]] Scene — park_hidden
+# [REVIEW] Scene — park_hidden
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -13,15 +13,15 @@
 | where · when | the park, after the run with Zoe · Saturday and Sunday 08:00–10:00 |
 | gate | Corruption 60 (was 40: DECISIONS 124; joggers a few metres off can see) · pays cap 79 · Zoe present · after Zoe A 3 (guess) |
 | who sees | nobody: a hollow off the path; joggers pass, unseeing |
-| what she wears here (test 8) | not named |
-| BRAKE (S9) | once a day, on the trigger |
+| what she wears here | not named |
+| BRAKE | once a day, on the trigger |
 | raises | corruption add +1 (the repeat raise) |
 | no clit in the prose | Zoe's middle column has tits, nipples, wet; clit is her late column |
 | the crude-word ceiling | Zoe's middle column: tits, nipples, wet · early: tits, ass (LO, 2026-10-08) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `pull` | Zoe pulls her off the path after the run | no | "Follow her." → `hidden` · "Not here, Zo." → the park | none |
 | `hidden` | against a tree; Zoe's hand makes her come; footsteps pass | yes (5 words) | "Back to the path." → the park | corruption add +1 |

@@ -73,7 +73,8 @@ mute = [
 ]
 # Vance's meeting card under People until she has met him (LO 2026-11-02, "Yes all three"): the meeting fired
 # only if she happened to cross the street of an evening, and his porch and his knock wait for vance_met.
-cards.append({"npc_id": "npc_vance", "priority": 5, "text": "Next door: the man who owns your house watches the street.",
+cards.append({"npc_id": "npc_vance", "priority": 5, "heading": "Next door",   # C3 (LO 2026-11-03)
+              "text": "Next door: the man who owns your house watches the street.",
               "tip": "The street, an evening, 6 to 10 PM",
               "when": [{"flag": "opening_done", "op": "is_true"}, {"flag": "vance_met", "op": "is_false"}],
               "ready_canvas": "vance_meeting"})

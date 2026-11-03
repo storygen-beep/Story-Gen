@@ -373,8 +373,12 @@ to a traced game, in `templates/cards/`). A job is a system with a card. Five ru
    A second ladder with its own rank is `ranks` on a fast job, counted per job (`engine.md` §51); a
    canvas job keeps its rank as a trait.
 2. **The price is shown before she agrees.** Shady Deals prices the client before she says yes (round
-   9b, `cards/sex_for_pay.md`). Gate 21 covers money prices (`the-economy.md`, "a price is on its label"); `sex for pay names the
-   amount` warns on a paying choice that doesn't.
+   9b, `cards/sex_for_pay.md`). The price is said in the scene, before her yes, and never on the button
+   (`the-voice.md`, D11; LO, 2026-11-03). Gate 21 covers money prices (`the-economy.md`, "a price is on its label"); `sex for pay names the
+   amount` warns on a paying choice that doesn't, and it reads only the canvases of a system card
+   declared as sex for pay (`"sex_for_pay": true` on the card in `board.systems[]`; its `pool[]` lists
+   the paid canvases). Wages, loans and gifts are not sex for pay, and the gate does not check
+   them; a game that declares no sex-for-pay system gets n/a (`the-arc.md` A15).
 3. **≥2 connections, and ≥1 ends in a person or a sex scene.** Name them in `feeds[]`, `reads[]` and
    `leads_to[]`. The systems with no such link are the measured failures — Course of Temptation's 38
    gloryhole passages pay $0, and its shops carry items whose bonus nothing reads (round 9b §3).
@@ -384,7 +388,7 @@ to a traced game, in `templates/cards/`). A job is a system with a card. Five ru
    pool ids must be built): ≥20 events in a pool clicked daily, ≥4 lewd
    rungs, ≥2 acts per rung, and a seen event weighted down — Course of Temptation drops it to 1/10
    (round 9b, `cards/job.md`, `cards/streaming.md`). A pool weights a seen entry down with
-   `memory = "seen"` (`engine.md` §35, "A pool that remembers"; `setup.pickRememberedPoolEntry`, `v2.py:6249`).
+   `memory = "seen"` (`engine.md` §35, "A pool that remembers"; `setup.pickRememberedPoolEntry`, `v2.py:6258`).
 
 **Reputation is meters until the engine can remember who saw what.** Course of Temptation runs it on per-person
 memory, spread only in scenes she is in, one hop (round 10, `cards/gossip.md`). Until then: **one audience** with an

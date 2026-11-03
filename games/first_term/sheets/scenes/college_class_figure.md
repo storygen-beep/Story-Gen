@@ -14,14 +14,14 @@
 | where · when | the lecture hall · Tue, Thu 08:30 · Wed 13:00 |
 | gate | none: every figure-drawing class |
 | who | the model, the art lecturer, Zoe, Jake, the cocky guy · Zoe's sentence ("Zoe kicks your ankle") shows only after `zoe_met`; before it she is "the girl at the next easel" |
-| what she wears here (test 8) | not named; no dress code for her |
-| BRAKE (S9) | once per class window |
+| what she wears here | not named; no dress code for her |
+| BRAKE | once per class window |
 | raises | none: it is a class (her grade moves by her row choice) |
 | the crude-word ceiling | tits, nipples, ass, naked · no cock, cunt, pussy, fuck, cum (LO, 2026-10-08) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `pose` | the model drops her robe and poses; she draws her | yes | the class rows: Focus · Chat · Doze · Skip | as the college sheet · first class: `cocky_guy_met` set |
 | locked | posing nude for the class herself | — | "Pose for the class." Needs Corruption 60 | — |

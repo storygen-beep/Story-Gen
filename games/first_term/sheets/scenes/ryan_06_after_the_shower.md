@@ -13,17 +13,17 @@
 | person · step | `npc_ryan` · 6 (Ryan A 7) |
 | where · when | the bathroom · Saturday 08:00–10:00, seen from his room |
 | gate | Exhibitionism 40 · his Want 50 · the boost off |
-| want (test 1) | "...@player.nickname?" through the wall last night (step 5) |
-| next step (test 2) | he sees her naked, by her choice, and doesn't stop: he jerks off in the doorway while she watches |
-| hook (test 3) | he comes as Kayla calls "Babe?"; he can't look at Kayla at breakfast; his door stays open a hand's width (step 7) |
-| what she wears here (test 8) | naked: she has just showered; the towel is there and she leaves it |
+| want | "...@player.nickname?" through the wall last night (step 5) |
+| next step | he sees her naked, by her choice, and doesn't stop: he jerks off in the doorway while she watches |
+| hook | he comes as Kayla calls "Babe?"; he can't look at Kayla at breakfast; his door stays open a hand's width (step 7) |
+| what she wears here | naked: she has just showered; the towel is there and she leaves it |
 | her voice | stage 3, confident |
 | the crude-word ceiling | his late column for "cum" (cunt, fuck, cum) · signed today at the middle column (ass, tits, cock, wet) · confirmed by LO 2026-11-01 ("Continue") |
-| her_line_low · her_line_high (rule 7) | low (under the stage): "This is Ryan. You should go." · high (over it): "You want him to hear Kayla on the phone while you do this." (the person sheet's pair; worded for this screen when the prose is written) |
+| her_line_low · her_line_high | low (under the stage): "This is Ryan. You should go." · high (over it): "You want him to hear Kayla on the phone while you do this." (the person sheet's pair; worded for this screen when the prose is written) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `door` | she steps out of the shower; the door swings open: Ryan | no | "Leave the towel." → `look` · "Reach for the towel." → parked | none |
 | `look` | she stays naked and leaves the towel; he stays in the doorway, pulls his cock out and strokes it while she watches | yes | "Watch him." → `comes` | exhibitionism add +3 · corruption add +1 (shown by choice, `meters.md` rule 3) |

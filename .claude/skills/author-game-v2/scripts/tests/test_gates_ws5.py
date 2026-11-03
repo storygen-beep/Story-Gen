@@ -174,44 +174,29 @@ def test_obligation_alternatives_on_one_capped_canvas_are_not_summed():
     assert v == "FAIL"            # 20 × 7 = 140 < 150, not (10 + 20) × 7 = 210
 
 
-# ── ends on an opening ───────────────────────────────────────────────────────
-def door_game():
+# ── ends on an opening (S12 b, LO 2026-11-03: the arcs' last cards, not a door) ──
+LADDER_STATE = {"board": {"characters": [{"id": "npc_a", "ladder": {"counter": "a_step",
+                                                                     "steps": []}}]}}
+
+
+def end_card_game(text="A, further. (Next release)"):
     g = base_game()
-    g["canvases"].append({"id": "office", "trigger": {"location": "work", "is_repeatable": True},
-                          "nodes": [{"id": "n", "blocks": [], "exit_block": {"choices": [
-                              {"text": "Take the closing shift", "show_when_locked": True,
-                               "conditions": cond({"type": "flag", "flag_key": "earned_it",
-                                                   "operator": "is_true"})}]}}]})
-    g["canvases"].append({"id": "earn", "trigger": {"location": "work", "is_repeatable": False},
-                          "nodes": [{"id": "n", "blocks": [], "exit_block": {"config": {
-                              "flagEffects": [{"flag": "earned_it", "op": "set"}]}}}]})
+    g["quest_cards"].append({"id": "a_end", "npc_id": "npc_a", "text": "A.", "terminal": True,
+                             **({"terminal_text": text} if text is not None else {})})
     return g
 
 
-def test_door_undeclared_fails_when_a_ledger_exists():
-    assert verdict(door_game(), {"board": {}}, "ends on an opening")[0] == "FAIL"
+def test_an_arc_whose_last_card_says_where_the_release_ends_passes():
+    assert verdict(end_card_game(), LADDER_STATE, "ends on an opening")[0] == "PASS"
 
 
-def test_door_is_na_without_a_ledger():
-    assert verdict(door_game(), None, "ends on an opening")[0] == "n/a"
+def test_an_arc_with_no_end_text_fails_and_names_the_person():
+    v, r = verdict(end_card_game(text=None), LADDER_STATE, "ends on an opening")
+    assert v == "FAIL" and r["detail"][0].startswith("npc_a: no terminal quest card")
 
 
-def test_door_declared_locked_and_openable_passes():
-    st = {"board": {"door": {"canvas": "office", "choice": "Take the closing shift"}}}
-    assert verdict(door_game(), st, "ends on an opening")[0] == "PASS"
-
-
-def test_door_that_can_never_open_fails():
-    g = door_game()
-    g["canvases"] = [c for c in g["canvases"] if c["id"] != "earn"]
-    st = {"board": {"door": {"canvas": "office", "choice": "Take the closing shift"}}}
-    v, r = verdict(g, st, "ends on an opening")
-    assert v == "FAIL" and any("never come true" in d for d in r["detail"])
-
-
-def test_door_on_a_missing_choice_fails():
-    st = {"board": {"door": {"canvas": "office", "choice": "No such choice"}}}
-    assert verdict(door_game(), st, "ends on an opening")[0] == "FAIL"
+def test_ends_on_an_opening_is_na_without_a_ledger():
+    assert verdict(end_card_game(), None, "ends on an opening")[0] == "n/a"
 
 
 # ── guidance exists ──────────────────────────────────────────────────────────

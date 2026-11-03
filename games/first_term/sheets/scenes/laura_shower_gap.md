@@ -12,16 +12,16 @@
 | where · when | the bathroom door · Sat 16:30–17:00, Laura in the shower (new row in her schedule) · door option "The bathroom door won't shut." in place of the plain way in during that half hour |
 | gate | none: open at Good Girl · Laura present |
 | who | Laura, 41, her mother; she never sees her |
-| what she wears here (test 8) | not named (she's in the shower) |
-| BRAKE (S9) | once a week: the window is Saturday only, plus a 20-hour flag as her bedroom gap (`laura_shower_seen`) |
+| what she wears here | not named (she's in the shower) |
+| BRAKE | once a week: the window is Saturday only, plus a 20-hour flag as her bedroom gap (`laura_shower_seen`) |
 | raises | the look: none · "Keep watching.": corruption add +1, cap 19 · `laura_gaps_watched` add +1 (counts toward her step 4) |
 | the crude-word ceiling | the park's, as her bedroom gap: tits, nipples, ass, wet, clit, naked, moan · no pussy, cunt, fuck, cum, cock |
 | truth | weekly: no "first time", no history. "The lock sticks halfway, the way it always does" is the opening's fact (`2_one_shots.toml`) |
 | mixed act? | no: watching, unseen. Corruption only (`meters.md` rule 3) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `steam` | the door stuck open; through the steam, Laura naked, her hand on her clit | yes | "Keep watching." → `watch` · "Pull the door to." → the hall | `laura_shower_seen` set (on every exit) |
 | `watch` | she comes under the water; you back away before she turns round | yes | "Back to your room." → her room | corruption add +1, cap 19 · `laura_gaps_watched` add +1 |

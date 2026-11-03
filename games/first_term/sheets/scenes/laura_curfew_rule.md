@@ -11,7 +11,7 @@
 | fires | every time it's met: no `consumes` (was once, as a step) |
 | what changes | no `laura_step` set, no `laura_02_done`, no Want. Every screen, line, and the low/high split by Love 40 or suspicion 50 stand as built |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
 | node | what happens | exits | effects |
 |---|---|---|---|

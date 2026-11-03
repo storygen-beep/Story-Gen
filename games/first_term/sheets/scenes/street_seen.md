@@ -13,7 +13,7 @@
 | pays | **the first day out in each level:** corruption add +1 · exhibitionism add +1 (`street_first_l1` / `street_first_l2` set) · **every day after:** exhibitionism add +1 · each under her stage cap |
 | who sees | one witness, picked by the hour: **Mr. Vance** on his porch (18:00–22:00, his row), else **the guy at the corner shop** (shop hours), else **a car slowing down** |
 | from `cafe_footfall` 10 | the witness line gains the café: "You're the girl from the café." (`job.md`, the café reaches the rest of her life) |
-| what she wears here (test 8) | read from her worn state; each line names only what the group's condition backs |
+| what she wears here | read from her worn state; each line names only what the group's condition backs |
 | explicit? | no (under 3 list words) |
 
 ## The lines, by witness and level (mine, except Vance's signed lines)

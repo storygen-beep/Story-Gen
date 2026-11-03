@@ -20,11 +20,11 @@
 | sink and deadline | none: the park costs no money |
 | feeds | Exhibitionism, energy |
 | reads | what she wears, Corruption, Exhibitionism |
-| what drives it (S8) | her clothing state and her two stages · walk events rotate, seen ones weighted down |
+| what drives it | her clothing state and her two stages · walk events rotate, seen ones weighted down |
 | link into the hook | what she does in public; later, a regular may be goal 3's man from town |
 | leads to | `park_watch_the_couple` · Zoe |
 | day 1 | yes: walk, rest and run at stage 1 |
-| BRAKE (S9) | each row once a day, on its trigger · the run's energy cost too |
+| BRAKE | each row once a day, on its trigger · the run's energy cost too |
 
 **Its own place, not a walk to campus.** She can walk, rest and run there.
 

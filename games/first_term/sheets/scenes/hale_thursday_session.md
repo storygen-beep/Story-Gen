@@ -1,4 +1,4 @@
-# [READY]] Scene — hale_thursday_session
+# [READY] Scene — hale_thursday_session
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -20,9 +20,9 @@
 | truth | weekly: no "first time", no "again", no counting, no history |
 | her voice | `touch_low` stage 2 · `touch_high` stage 3 (her high line sits in B a) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `door` | the door locked behind her, the photo already face-down: "Twenty minutes, @player." | no | "Let him." → `touch_low` or `touch_high` by her stage, or `claire_car` on the roll · "This isn't coaching." → `isnt` · Run. → `run` · locked: "Hale, further. (Needs Corruption 60.)" | "Let him.": `hale_claire_roll` set random 1–4 |
 | `touch_low` | one of A a, b, c | yes | "Same time next week." → `end` | the session's pay |

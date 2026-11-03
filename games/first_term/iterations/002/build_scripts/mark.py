@@ -168,7 +168,7 @@ out.append({
             D(M, "Every Sunday. Like that."),
             *STREAK_LINES, *PAYBACK_LINES,
         ], count_exits("\"Count, Mark.\"", "home_hall", 10,
-                       eff=[nadd(M, "want", 10), add("exhibitionism", 3), setv("mark_step", 3)],
+                       eff=[nadd(M, "want", 10), add("exhibitionism", 3, cap=79), setv("mark_step", 3)],
                        flags=[done(3), fset("mark_dress_rule")], consumes=True)),
         no_node("no", [D(M, "Suit yourself."), P("He counts it with his eyes on the money and not on you, and writes something on the back of the envelope that you don't get to see."), G(cond(SHORT), D(M, "Then the short stays on the tab, @player."))],
                 "home_hall", 7, eff=[nadd(M, "power", -2)]),

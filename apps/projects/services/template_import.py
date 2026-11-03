@@ -1386,6 +1386,12 @@ class QuestsCard:
     # to be able to say so, e.g. "Chapter complete — the story continues in
     # the next release".
     terminal_text: Optional[str] = None
+    # Replaces the person's name wherever this card is listed by person (the
+    # Quests page heading and list row, the cast page row and its schedule
+    # dialog; the cast row also hides the portrait). Exists because a card
+    # shown before the player has met the person cannot name them, e.g.
+    # "Someone at the bar". NPC cards only (the validator warns otherwise).
+    heading: Optional[str] = None
 
 
 def _parse_quests_condition(d: Dict[str, Any]) -> QuestsCondition:
@@ -1461,6 +1467,7 @@ def _parse_quests_card(d: Dict[str, Any]) -> QuestsCard:
         ready_canvas=_require_str(d, "ready_canvas", "") or None,
         terminal=terminal,
         terminal_text=_require_str(d, "terminal_text", "") or None,
+        heading=_require_str(d, "heading", "") or None,
     )
 
 
@@ -7724,6 +7731,12 @@ def _validate_quests_cards(
                 f"{ctx}: `group` is Story Goal only (cards without npc_id). "
                 f"Setting group on an NPC card has no effect."
             )
+        if card.heading and not card.npc_id:
+            _w.warn(
+                f"{ctx}: `heading` is NPC cards only (it replaces the person's "
+                f"name). A Story Goal card has no name to replace, so this "
+                f"string is dead. Add npc_id or drop heading."
+            )
 
 
 def _lint_hint_templates(template: "GameTemplate") -> None:
@@ -8290,6 +8303,8 @@ def _serialize_quests_card(card: QuestsCard) -> Dict[str, Any]:
         out["terminal"] = True
     if card.terminal_text:
         out["terminal_text"] = card.terminal_text
+    if card.heading:
+        out["heading"] = card.heading
     return out
 
 

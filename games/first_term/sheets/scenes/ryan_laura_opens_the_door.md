@@ -11,15 +11,15 @@
 | gate | `ryan_step` gte 4 · Laura home · `laura_knows_ryan` false |
 | who notices | Laura |
 | what she risks | Mark hearing about it |
-| what she wears here (test 8) | not named; her bare feet |
+| what she wears here | not named; her bare feet |
 | explicit? | no |
 
 **Engine note:** Laura's rule hides the hot repeatables in a room she is in. This event is the one exception: it fires
 as she walks **in** on them, then her rule applies again.
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `couch` | Laura comes into the living room on Ella's feet in Ryan's lap; Ella doesn't move them | no | "Leave your feet where they are." → `laura` | none |
 | `laura` | Laura: "Mark doesn't need to hear about this." She goes | no | "Okay, Mom." → the living room | `laura_knows_ryan` set |

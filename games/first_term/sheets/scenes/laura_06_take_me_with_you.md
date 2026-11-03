@@ -1,4 +1,4 @@
-# [REWORKED] Scene — laura_06_take_me_with_you
+# [MOVED] Scene — laura_06_take_me_with_you
 
 > **REWORKED 2026-11-01** (DECISIONS 113): the canvas is rebuilt as Laura's step 3, "All dressed up" (`laura_03b_all_dressed_up.md`). "Take me with you one night" is cut with her climb toward Ella. Kept on disk as the record.
 
@@ -11,15 +11,15 @@
 | person · step | `npc_laura` · 6 (Laura C 6) |
 | where · when | the master bedroom · Saturday 17:00–18:30, Laura dressing |
 | gate | Corruption 40 · Exhibitionism 40 · her Want 50 · the boost off |
-| want (test 1) | she leaves her door open while she dresses |
-| next step (test 2) | she asks for something: to come out with her daughter |
-| hook (test 3) | "Wear something short." Step 7 pays it |
-| what she wears here (test 8) | not named |
+| want | she leaves her door open while she dresses |
+| next step | she asks for something: to come out with her daughter |
+| hook | "Wear something short." Step 7 pays it |
+| what she wears here | not named |
 | explicit? | no: an ask |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `zip` | "Zip me up?" @player's knuckles slide up Laura's bare back | no | "Hold still." → `lean` · "Ask Mark." → the hall (parked) | none |
 | `lean` | Laura leans back into her hands, her fingers on Laura's ribs | no | → `ask` | none |

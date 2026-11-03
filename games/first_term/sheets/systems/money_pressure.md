@@ -1,5 +1,7 @@
 # [READY] System — money_pressure
 
+> **Changed 2026-11-03 (LO: "B: keep it easy", DECISIONS 141).** Week one is no longer built to come up short. Up to three café shifts a day make about $205-245 against $75; the section "Week one is built to come up short" below is superseded. What a short Sunday costs is unchanged.
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): rent that bites, from `proposals/R1_SYSTEM_RENT.md` (signed 2026-11-01). Changed: the pay, week one built to come up short, what a short Sunday costs, the cards, Mark's prices cut. Engine: `rent_short_weeks` counts short Sundays (DECISIONS 112).
 
 > Signed by LO: LO, 2026-10-08.
@@ -20,11 +22,11 @@
 | sink and deadline | the rent, to Mark, Vance behind him · Sunday 00:00 |
 | feeds | `paid_full_streak` (no `laura_suspicion` raise in 0.1; ledger change 25) |
 | reads | `money` · `rent_short_weeks` |
-| what drives it (S8) | money against what she owes · `rent_carried` · `rent_short_weeks` picks the cost · Mark's Power colours the table |
+| what drives it | money against what she owes · `rent_carried` · `rent_short_weeks` picks the cost · Mark's Power colours the table |
 | link into the hook | her $75 is part of what Mark owes Vance |
 | leads to | Mark, Vance |
 | day 1 | from the scene where Mark says she pays rent now (`rent_starts`) |
-| BRAKE (S9) | the table fires once, Sunday morning only, on its trigger |
+| BRAKE | the table fires once, Sunday morning only, on its trigger |
 
 ## The pay (changed 2026-11-01)
 

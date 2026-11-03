@@ -20,11 +20,11 @@
 | sink and deadline | none: no money at a party |
 | feeds | `campus_talk`, Corruption, Exhibitionism, `laura_suspicion` |
 | reads | energy, the curfew, what she wears |
-| what drives it (S8) | her stage picks the dares · a drink lifts choices one stage · guests rotate |
+| what drives it | her stage picks the dares · a drink lifts choices one stage · guests rotate |
 | link into the hook | what she brings home late: Laura on the stairs, Ryan at 3 a.m. |
 | leads to | Zoe, Jake, Laura, Ryan |
 | day 1 | no: it starts on the first Friday |
-| BRAKE (S9) | Friday only · arriving costs energy · `party_went` is read by hours since set |
+| BRAKE | Friday only · arriving costs energy · `party_went` is read by hours since set |
 
 ## Getting in
 

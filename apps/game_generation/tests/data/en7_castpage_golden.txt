@@ -14,14 +14,14 @@
   <details name="cast" class="cast-card">
     <summary>
       <span class="cast-face">
-        <<if _npc.portrait>>
+        <<if _npc.portrait and not _e.faceHidden>>
           <img @src="'./media/' + _npc.portrait" @alt="_npc.name" onerror="this.style.display='none';this.parentElement.innerHTML='&lt;svg viewBox=&quot;0 0 100 100&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;&lt;circle cx=&quot;50&quot; cy=&quot;35&quot; r=&quot;20&quot; fill=&quot;#6c757d&quot;/&gt;&lt;ellipse cx=&quot;50&quot; cy=&quot;85&quot; rx=&quot;35&quot; ry=&quot;25&quot; fill=&quot;#6c757d&quot;/&gt;&lt;/svg&gt;';">
         <<else>>
           <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="35" r="20" fill="#6c757d"/><ellipse cx="50" cy="85" rx="35" ry="25" fill="#6c757d"/></svg>
         <</if>>
       </span>
       <span class="cast-head">
-        <span class="stats-name"><<print _npc.name>></span>
+        <span class="stats-name"><<print _e.name>></span>
         <<if _next.line>><span class="cast-line"><<print _next.line>></span><</if>>
       </span>
       <<if _e.here>>

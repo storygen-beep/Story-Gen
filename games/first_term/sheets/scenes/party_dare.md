@@ -1,4 +1,4 @@
-# [REWORKED] Scene — party_dare
+# [MOVED] Scene — party_dare
 
 > **REWORKED 2026-11-01** (DECISIONS 113): replaced by `zoe_dares.md` (Zoe's hot repeatable by stage, one a night, Zoe picks). "Dare Zoe instead" is cut (Zoe picks). The circle flash beat below is kept as one of the Showing dares there. Kept on disk as the record.
 
@@ -14,14 +14,14 @@
 | gate | Exhibitionism 40 for this screen · Zoe present |
 | who dares | Zoe, until Zoe A 4; then @player can dare Zoe too |
 | who watches | people she knows: friends and classmates (strangers are a later stage) |
-| what she wears here (test 8) | not named; "everything" is what she lifts |
-| BRAKE (S9) | two dares a night, on the trigger |
+| what she wears here | not named; "everything" is what she lifts |
+| BRAKE | two dares a night, on the trigger |
 | raises | exhibitionism add +1 · `campus_talk` add +1 |
 | the crude-word ceiling | Zoe's middle column: tits, nipples, wet · early: tits, ass (LO, 2026-10-08) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `dare` | Zoe: "Flash them, babe. Three seconds." | no | "Do it." → `flash` · "Not tonight, Zo." → the party | none · a no costs nothing |
 | `flash` | she bares her tits to the circle; Zoe counts | yes (4 words) | "Back to the party." → the party | exhibitionism add +1 · `campus_talk` add +1 |

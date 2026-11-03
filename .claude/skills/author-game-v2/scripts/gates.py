@@ -1166,12 +1166,12 @@ def lint_screen_shape(model, game):
         loc = trig.get("location")
         if not loc:
             continue
-        if trig.get("trigger_mode") == "random":
+        if trig.get("trigger_mode") == "random" and not _nothing_happens(x):   # S6: empty is not an event
             mech[loc].add("event")
         if trig.get("npc") or trig.get("requires_npc"):
             mech[loc].add("presence")
 
-    out, tot, opened, menus = [], 0, 0, 0
+    out, tot, opened, menus = _empty_random_events(game), 0, 0, 0   # S6 rows lead the list
     rows = []
     for c in model:
         if not c["rep"] or c["id"] not in located:
@@ -3290,9 +3290,9 @@ def _ladder_counter_sites(game):
                and str(node.get("trait_key") or "") in stages)
 
 
-# A meter runs 0-100, so a gate above 100 is a locked door declared in the open
-# (`the-release.md` G9), not a rung of the climb. Counting one would credit a game
-# for a step nothing can climb to.
+# A meter runs 0-100, so a gate above 100 is a later release's content (it gets no
+# button this release, the-heat-ladder.md H1), not a rung of the climb. Counting one
+# would credit a game for a step nothing can climb to.
 METER_MAX = 100
 
 
@@ -3459,7 +3459,7 @@ def lint_counterweight(game, state):
     matches the same shape and is a different kind of meter entirely (M8).
     """
     core = ((game.get("player") or {}).get("core_traits") or {})
-    needs = {str(n.get("key")) for n in _declared_needs(state)}
+    needs = _descent_exempt_keys(state)          # declared needs (M8) + performance meters (S7)
     decay = set((game.get("player") or {}).get("trait_decay") or {})
     up, down = collections.Counter(), collections.Counter()
     for path, node in _walk_paths(game):
@@ -7343,8 +7343,8 @@ def run_gates(model, game, state=None):
         # starting band is dropped — not the highest `max`, which is missing entirely once
         # the top band is (correctly) left unbounded. A rising meter starting at 0 drops
         # only its bottom band, so it is still judged at its top band's `min`.
-        promised = [b["min"] for b in bands
-                    if isinstance(b.get("min"), (int, float)) and not holds_start(b)]
+        promised = [b["min"] for b in bands if isinstance(b.get("min"), (int, float))  # W1 a: a band
+                    and not holds_start(b) and b["min"] <= _paid_cap(game, key)]   # above every cap waits
         top_min = max(promised, default=None)
         if top_min is None or top_min == 0:
             continue
@@ -7357,7 +7357,7 @@ def run_gates(model, game, state=None):
          f"{len(over)} visible meters rise past their content" if tops
          else "no authored trait gates yet — nothing to promise", over)
 
-    # G9 — a release must end on a visible locked door
+    # G9 — a release ends on its arcs' last quest cards (was: a visible locked door)
     #
     # ⚠️ `locked > 0` is an EXISTENCE check and it stays one — inventing a ratio ceiling
     # here is the mistake that demoted the-surfaces R5. What it must not do is report a
@@ -7382,53 +7382,17 @@ def run_gates(model, game, state=None):
     census = (f"{locked} choices render visible-but-locked · "
               f"{gated}/{len(all_choices)} choices carry any gate at all "
               f"({100 * (len(all_choices) - gated) // n_ch}% open on turn one)")
-    door = _declared_door(state) if state is not None else None
-    if state is None:
-        gate("ends on an opening", None, "no v2_state.json — no declared door to check · " + census)
-    elif door is None:
-        gate("ends on an opening", False,
-             "no door declared — name the door this release ends on in release_page.door "
-             "(or board.door before the release page exists) · " + census,
-             ["declare release_page.door = {canvas = <canvas id>, choice = <the choice's text>} "
-              "in v2_state.json; `the-release.md`: every release ends on a visible locked door, "
-              "and a count of locked choices cannot tell which one that is"])
-    else:
-        problems = []
-        src = ("release_page.door" if door is ((state.get("release_page") or {}).get("door"))
-               else "board.door")
-        canvas = next((c for c in (game.get("canvases") or []) if c.get("id") == door["canvas"]), None)
-        choice = None
-        if canvas is None:
-            problems.append(f"{src}.canvas '{door['canvas']}' is not a canvas in the game")
-        else:
-            if _is_dev(canvas):
-                problems.append(f"'{door['canvas']}' is a dev canvas — a shipped build strips it")
-            choice = _door_choice(canvas, door)
-            if choice is None:
-                problems.append(f"no choice with text '{door['choice']}' on '{door['canvas']}'")
-        if choice is not None:
-            if not choice.get("show_when_locked"):
-                problems.append("the door does not render locked (no show_when_locked) — the "
-                                "player never sees it")
-            items = list(_conditions_of(choice))
-            if not items:
-                problems.append("the door has no conditions — it is open, not a door")
-            start_flags = _opening_flags(game) or set()
-            start_traits = dict(((game.get("player") or {}).get("core_traits")) or {})
-            ever_set = _flags_ever_set(game)
-            written = set(_player_trait_raises(game))
-            states = [(it, _cond_state(it, start_flags, start_traits, ever_set, written))
-                      for it in items]
-            if items and all(s == "open" for _, s in states):
-                problems.append("every condition on the door is already true at the start — "
-                                "it opens on turn one")
-            for it, s in states:
-                if s == "never":
-                    kind, key, op, val = _cond_parts(it)
-                    problems.append(f"condition {key} {op} {val if val is not None else ''} can "
-                                    f"never come true — nothing in the game sets or raises it")
-        gate("ends on an opening", not problems,
-             f"declared door ({src}): {door['canvas']} · \"{door['choice']}\" · " + census, problems)
+    # S12 b + W13 a (LO, 2026-11-03): the release no longer ends on a locked door. The old
+    # check read a declared door (`release_page.door` / `board.door`) and passed on a door the
+    # player never saw locked: first_term's "Further." was gated on the same Corruption 60 as
+    # the screen it sat on. The rule now reads the quest cards: every arc's last card says
+    # where this release ends, and what comes next if anything does. A later release may fix
+    # things, add content and move thresholds, so nothing here asks that a door be
+    # unreachable. Every declared ladder (`board.characters[].ladder`) needs a terminal card
+    # of its own with `terminal_text`; see `_ends_on_an_opening`, above main(). The census of
+    # locked and gated choices still prints beside the verdict, for the reason given above.
+    #
+    gate("ends on an opening", *_ends_on_an_opening(game, state, census))
 
     # G9b — the door can be seen again (PRD v2 CK1 · I24, 2026-09-30). A door is a
     # locked choice the player is meant to walk past now and come back to. On a
@@ -7523,7 +7487,7 @@ def run_gates(model, game, state=None):
                if isinstance(l, dict) and l.get("hidden") and l.get("key")}
     descents = [k for k in sorted(set(p_expand) | set(p_contract))
                 if p_contract[k] >= p_expand[k] and (p_expand[k] + p_contract[k])
-                and k not in bad and k not in _hidden]
+                and k not in bad and k not in _hidden and k not in _descent_exempt_keys(state)]
 
     read_tiers = [k for k in tiers if k not in unread]
     gate("ascent tiers expand the world",
@@ -9865,9 +9829,9 @@ def run_gates(model, game, state=None):
             else:
                 home = "not a field the importer reads anywhere"
             misplaced.append(f"{c.get('id')}{where}: `{k}` on [[canvases]] is discarded — {home}")
-    n_misplaced = len(misplaced)
+    n_misplaced = len(misplaced := misplaced + _trigger_metadata_keys(game, TRIGGER_FIELDS))  # S5
     gate("no canvas key is discarded", not n_misplaced,
-         f"{n_misplaced} canvas key(s) sit on [[canvases]] and are dropped by the importer"
+         f"{n_misplaced} canvas key(s) sit on [[canvases]] or under [canvases.trigger.metadata] and are dropped"
          if n_misplaced else "every canvas key is one the importer reads",
          misplaced)
 
@@ -11205,7 +11169,7 @@ SHIP_REPORT_GATES = [
     "explicit pools by place", "sentence length",
 ]
 SHIP_BLOCK_GATES = {
-    "ends on an opening": "the declared door works",
+    "ends on an opening": "every arc's last card says where the release ends",   # S12 b, was "the declared door works"
     "the obligation is charged": "the pressure can be paid or is signposted",
     "standing surface": "no empty rooms",
 }
@@ -12076,7 +12040,7 @@ def _ck7_rows(model, game, state):
                             "offscreen", [], 0)
     else:
         eo, unread = _ck7_exit_only(game)
-        bad = sorted((lid, s) for lid, s in eo.items() if s)
+        bad = sorted((lid, s) for lid, s in eo.items() if s and not _says_nothing_to_do(places.get(lid)))
         rows[name] = (
             not bad,
             f"{len(denom) - len(bad)}/{len(denom)} destinations offer something she can do alone "
@@ -12084,7 +12048,7 @@ def _ck7_rows(model, game, state):
             [f"{lid}: open with nothing to do ({len(s)} h) — {_ck7_hours_text(s)}"
              for lid, s in bad]
             + (["give the place a repeatable she can do alone at those hours, close it then "
-                "(`hours` + `closed_text`), or mark it `kind = \"thoroughfare\"` — the-board.md §1"]
+                "(`hours` + `closed_text`), mark it a thoroughfare, or say \"nothing to do here right now\" on its screen (the-board.md §1)"]
                if bad else [])
             + [f"not judged at {lid}: {', '.join(v[:4])} — a condition shape this check can't "
                f"read, counted as not live" for lid, v in sorted(unread.items())],
@@ -12291,7 +12255,7 @@ def _her_climb(game, state):
 
     paid = []
     for c in canvases:
-        if (not _rep_of(c.get("trigger")) or not money
+        if (not _rep_of(c.get("trigger")) or not money or c.get("id") not in (_sex_for_pay_pool(state) or ())
                 or (c.get("trigger") or {}).get("substitution_only") or c.get("id") not in explicit_ids):
             continue
         pays = any((ef.get("trait") or ef.get("trait_key")) == money
@@ -12300,8 +12264,8 @@ def _her_climb(game, state):
         if pays and _rungs_of(" ".join(_node_text(n) for n in c.get("nodes") or []))[1] - {"touch"}:
             paid.append(c)
     if not paid:
-        return None, ("no paid repeatable — nothing whose exit adds to "
-                      f"`{money}` names an act" if money else "no money trait declared or found"), [], 0
+        return None, (_SFP_NONE if _sex_for_pay_pool(state) is None else "no paid repeatable — nothing "
+                      f"whose exit adds to `{money}` names an act" if money else "no money trait declared or found"), [], 0
 
     tiers = set(((state or {}).get("board") or {}).get("ascent_tiers") or [])
     start_flags = _opening_flags(game) or set()
@@ -12510,6 +12474,9 @@ def _no_has_content(game):
 #     LINE BRANCH (a `group` / pool condition inside blocks reading it on him).
 #   · "shown" means it can render: with no `[ui.cast_page]` the engine emits no cast page at
 #     all (`_generate_cast_page`, v2.py:11040), so his own `show_traits` shows nothing.
+#   · a shown trait declared STORED for a later release (`board.characters[].stored = [key, ..]`
+#     in v2_state, LO W4 a, 2026-11-03) needs no step gate this release: it is read by a later
+#     release's steps. It still needs its line branch, because it colours his lines now.
 # Ages are shape.py's (DC2a), not this gate's.
 def _npc_key(x):
     x = str(x or "")
@@ -12524,11 +12491,13 @@ def _mens_numbers(game, state):
     page = (cast_page or {}).get("show_traits") or [] if has_page else []
     hidden = {l.get("key") for l in ((game.get("traits") or {}).get("labels") or [])
               if isinstance(l, dict) and l.get("hidden") is True}
-    counters = {}
+    counters, stored = {}, collections.defaultdict(set)
     for ch in (((state or {}).get("board") or {}).get("characters") or []):
         lad = ch.get("ladder") if isinstance(ch.get("ladder"), dict) else {}
         if lad.get("counter"):
             counters.setdefault(_npc_key(ch.get("id")), set()).add(lad["counter"])
+        if isinstance(ch.get("stored"), list):
+            stored[_npc_key(ch.get("id"))].update(str(k) for k in ch["stored"])
     gates_read, lines_read = collections.defaultdict(set), collections.defaultdict(set)
     for c in game.get("canvases") or []:
         for path, d in _walk_paths(c):
@@ -12562,10 +12531,13 @@ def _mens_numbers(game, state):
         for k in sorted(shown):
             shown_n += 1
             miss = [w for w, got in (("no step gate", gates_read[who]),
-                                     ("no line branch", lines_read[who])) if k not in got]
+                                     ("no line branch", lines_read[who]))
+                    if k not in got and not (w == "no step gate" and k in stored[who])]
             if miss:
                 bad.append(f"{n.get('id')}: `{k}` is shown and {' and '.join(miss)} reads it — a "
-                           f"shown number opens something and gets a reaction (W1 rule 1)")
+                           f"shown number opens something and gets a reaction (W1 rule 1)"
+                           + ("; or, if a later release's steps read it, declare it in "
+                              "board.characters[].stored" if "no step gate" in miss else ""))
     judged = sum(len((n.get("core_traits") or {})) for n in npcs)
     if not judged:
         return None, "no man keeps a trait — nothing to show", [], 0
@@ -13445,11 +13417,11 @@ SHIP_NA_PASSES.add("every chat is caused by a scene")
 
 
 # ── the-phone.md P3/P4: a chat is short and timed (a WARN: a scored gate, never a block) ─────
-# A message bubble is 3–7 words, and a message (one sender's bubbles in a row, in one round) is at
-# most 3 of them. Every conversation trigger carries a delay (`days_since_flag` or
+# A message bubble is at most 7 words (a short one is fine, LO C6 b, 2026-11-03), and a message
+# (one sender's bubbles in a row, in one round) is at most 3 of them. Every conversation trigger carries a delay (`days_since_flag` or
 # `hours_since_flag`) and an hour window (`time_of_day` or `weekday`); a call needs the timing
 # only. Directions from four games (round 9a), so no grandfathering. n/a with no phone.
-CHAT_WORDS, CHAT_BUBBLES = (3, 7), 3
+CHAT_WORDS, CHAT_BUBBLES = (0, 7), 3  # only the upper bound is read: no word floor (C6 b)
 
 
 def _chats_short_and_timed(game):
@@ -13480,9 +13452,9 @@ def _chats_short_and_timed(game):
                 run = run + 1 if key == last else 1
                 last = key
                 n = len(str(b.get("content") or "").split())
-                if not CHAT_WORDS[0] <= n <= CHAT_WORDS[1]:
+                if n > CHAT_WORDS[1]:
                     bad.append(f"chat `{c.get('id')}`: a {n}-word bubble "
-                               f"({CHAT_WORDS[0]}–{CHAT_WORDS[1]})")
+                               f"(over {CHAT_WORDS[1]})")
                 if run == CHAT_BUBBLES + 1:
                     bad.append(f"chat `{c.get('id')}`: more than {CHAT_BUBBLES} bubbles in one message")
     n = len(convs) + len(calls)
@@ -13529,9 +13501,9 @@ def _paid_choice_names_amount(model, game, state):
         (k for k in ((game.get("player") or {}).get("core_traits") or {}) if CURRENCY_HINT.search(k)),
         None)
     hot = {m["id"] for m in model if any(b.explicit >= 3 for b in m["beats"])}
-    paid, bad = 0, []
+    paid, bad, pool = 0, [], _sex_for_pay_pool(state)      # C7 c + S11: declared paid scenes only
     for c in game.get("canvases") or []:
-        if not money or _is_dev(c) or c.get("id") not in hot:
+        if not money or pool is None or _is_dev(c) or c.get("id") not in hot or c.get("id") not in pool:
             continue
         for n in c.get("nodes") or []:
             for ch in _node_choices(n):
@@ -13541,11 +13513,11 @@ def _paid_choice_names_amount(model, game, state):
                            for ef in (ch.get("effects") or []) if isinstance(ef, dict)):
                     continue
                 paid += 1
-                if not _NAMES_AMOUNT.search(str(ch.get("text") or "")):
+                if not _scene_names_amount(c):      # the price is in the scene, never on the button
                     bad.append(f"{c.get('id')}/{n.get('id')}: \"{ch.get('text')}\" pays "
-                               f"`{money}` and names no amount")
+                               f"`{money}` and the scene names no price before her yes")
     if not paid:
-        return None, "no choice on an explicit canvas pays her", []
+        return None, (_SFP_NONE if pool is None else "no paid choice on a declared sex-for-pay scene"), []
     return not bad, f"{paid - len(bad)}/{paid} paid choices name the amount", bad
 
 
@@ -15513,6 +15485,177 @@ def _stage_way_up(game, state):
     head = (f"{len(walls)} of {checked} stage(s) have no repeatable act that pays sober: " + "; ".join(walls)
             if walls else f"all {checked} stage(s) below a gate have a repeatable act that pays sober")
     return (not walls), head, detail, checked
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# LO's decisions of 2026-11-03 (SKILL_DECISIONS_20261103.md). The helpers live here, above
+# main(), so the gates that call them keep their lines and the docs' `gates.py:NNN` cites
+# stay put (memory: gates-py-citation-safe-edits).
+# ─────────────────────────────────────────────────────────────────────────────
+
+def _performance_meter_keys(state):
+    """Keys of `board.meters[]` entries declared `"performance": true` (S7): grades or a job
+    rating. Such a meter opens doors at the top and shuts them at the bottom on purpose, so a
+    descent check must not call it a descent. `kind` stays `ambient`/`sourced`; the older
+    `"kind": "performance"` spelling is still accepted but no longer documented."""
+    board = (state or {}).get("board") or {}
+    return {str(m.get("key") or m.get("id")) for m in _meters_of_board(board)
+            if (m.get("performance") is True or m.get("kind") == "performance")
+            and (m.get("key") or m.get("id"))}
+
+
+def _descent_exempt_keys(state):
+    """Player meters that may close more than they open: declared needs (C5 b, the-meters.md
+    M8: a need is meant to shut something while it is empty) and performance meters (S7)."""
+    return {str(n.get("key")) for n in _declared_needs(state) if n.get("key")} \
+        | _performance_meter_keys(state)
+
+
+# C7 c + S11 a: only money paid for the act on that screen is sex for pay. A system card in
+# `board.systems[]` declares itself with `"sex_for_pay": true`, and the canvases in its
+# `pool[]` are the paid scenes. Wages, loans and gifts sit on other cards (or none) and are
+# never read. No such card: the game has no paid sex, and the pay checks are n/a.
+SEX_FOR_PAY_KEY = "sex_for_pay"
+_SFP_NONE = ("no system card declared as sex for pay (`\"sex_for_pay\": true` in "
+             "board.systems[]) — wages, loans and gifts are not paid sex")
+
+
+def _sex_for_pay_pool(state):
+    """The canvas ids of every declared sex-for-pay card's `pool[]`, or None with no such card."""
+    cards = [c for c in _system_cards(state) if c.get(SEX_FOR_PAY_KEY) is True]
+    if not cards:
+        return None
+    return {str(p) for c in cards for p in (c.get("pool") or []) if p}
+
+
+def _scene_names_amount(canvas):
+    """Does the scene itself say the price? Any screen of the canvas naming an amount counts;
+    the button does not (the-voice.md D11: pay never goes on the button)."""
+    return any(_NAMES_AMOUNT.search(_node_text(n)) for n in canvas.get("nodes") or [])
+
+
+_PAID_CAPS_CACHE = {}
+
+
+def _paid_caps(game):
+    """{trait: the highest value its raises can reach, or inf} (W1 a). A raise is a positive
+    `add` (its `cap`) or a `set` to a number (its value). One uncapped add makes the meter
+    open-ended. A trait nothing raises is open-ended too, so this never hides a band."""
+    key = id(game)
+    if key in _PAID_CAPS_CACHE:
+        return _PAID_CAPS_CACHE[key]
+    caps = collections.defaultdict(list)
+
+    def walk(o):
+        if isinstance(o, dict):
+            trait = o.get("trait") or o.get("trait_key")
+            op, val = o.get("op"), o.get("value")
+            if trait and "operator" not in o:
+                if op == "add" and _effect_value_sign(val) > 0:
+                    cap = o.get("cap")
+                    caps[trait].append(float(cap) if isinstance(cap, (int, float))
+                                       and not isinstance(cap, bool) else math.inf)
+                elif op == "set" and isinstance(val, (int, float)) and not isinstance(val, bool):
+                    caps[trait].append(float(val))
+            for v in o.values():
+                walk(v)
+        elif isinstance(o, list):
+            for v in o:
+                walk(v)
+
+    walk(game)
+    out = collections.defaultdict(lambda: math.inf, {t: max(v) for t, v in caps.items() if v})
+    _PAID_CAPS_CACHE.clear()
+    _PAID_CAPS_CACHE[key] = out
+    return out
+
+
+def _paid_cap(game, trait):
+    """The highest value `trait` can be paid up to this release (inf when uncapped)."""
+    return _paid_caps(game)[trait]
+
+
+# W12 a: the-board.md's named exception. A room open with nothing to do passes when its own
+# screen says so, in the words of the model: "There's nothing to do here right now."
+_NOTHING_TO_DO = re.compile(r"nothing to do here right now", re.I)
+
+
+def _says_nothing_to_do(loc):
+    """Does the location's own screen (description or a description variant) carry the line?"""
+    loc = loc or {}
+    texts = [loc.get("description")] + [
+        v.get("text") or v.get("description") or v.get("content") if isinstance(v, dict) else v
+        for v in (loc.get("description_variants") or [])]
+    return any(isinstance(t, str) and _NOTHING_TO_DO.search(t) for t in texts)
+
+
+def _trigger_metadata_keys(game, trigger_fields):
+    """S5 a: every key written under [canvases.trigger.metadata]. The importer reads the trigger
+    table only (template_import.py:2566-2567), so all of them are dropped."""
+    out = []
+    for c in game.get("canvases") or []:
+        t = c.get("trigger") or {}
+        meta = t.get("metadata")
+        if not isinstance(meta, dict):
+            continue
+        where = f" @{t['location']}" if t.get("location") else ""
+        for k in sorted(meta):
+            home = ("a [canvases.trigger] field — move it up one level"
+                    + (", where this canvas already sets it (the metadata copy is dead)"
+                       if k in t else "")) if k in trigger_fields \
+                else "not a field the importer reads anywhere"
+            out.append(f"{c.get('id')}{where}: `{k}` under [canvases.trigger.metadata] is "
+                       f"discarded — {home}")
+    return out
+
+
+# S6 (LO, 2026-11-03): "no we dont want nothing happens random events anywhere in the game."
+_NOTHING_HAPPENS = re.compile(r"\bnothing happens\b", re.I)
+
+
+def _nothing_happens(canvas):
+    """A random event whose only screen says "Nothing happens." It is not content: it does not
+    count toward the random-event floor, and it is listed as a problem."""
+    nodes = [n for n in canvas.get("nodes") or [] if isinstance(n, dict)]
+    return len(nodes) == 1 and bool(_NOTHING_HAPPENS.search(_node_text(nodes[0])))
+
+
+def _empty_random_events(game):
+    """The screen-shape lint's rows for every "Nothing happens." random event (S6)."""
+    return [dict(kind="empty event", id=c.get("id"), loc=(c.get("trigger") or {}).get("location"),
+                 note="a random event whose only screen is \"Nothing happens.\" — not content, so "
+                      "it does not count toward the floor; give it a real event or cut it")
+            for c in game.get("canvases") or []
+            if (c.get("trigger") or {}).get("trigger_mode") == "random"
+            and (c.get("trigger") or {}).get("location") and not _is_dev(c) and _nothing_happens(c)]
+
+
+def _ends_on_an_opening(game, state, census):
+    """(ok, headline, detail) for `ends on an opening` (S12 b + W13 a, LO 2026-11-03).
+
+    The release no longer ends on a locked door. Every arc's last quest card says where this
+    release ends, and what comes next if anything does. So every person with a declared ladder
+    (`board.characters[].ladder`) needs a quest card of their own (`npc_id`) that is terminal
+    (`terminal = true`) and carries its end text (`terminal_text`). n/a with no ledger or no
+    declared ladder; the `--ship` row reads an n/a as red (an absence is not a pass)."""
+    if state is None:
+        return None, "no v2_state.json — no declared ladder to read · " + census, []
+    ladders = _declared_ladders(state)
+    if not ladders:
+        return None, "no ladder declared in board.characters[].ladder — no arc to end · " + census, []
+    ends = collections.defaultdict(list)
+    for card in game.get("quest_cards") or []:
+        text = str(card.get("terminal_text") or "").strip()
+        if card.get("npc_id") and card.get("terminal") and text:
+            ends[card["npc_id"]].append(text)
+    missing = [who for who, _lad in ladders if not ends.get(who)]
+    detail = [f"{who}: no terminal quest card with an end text — the last card says where this "
+              f"release ends, and what comes next if anything does (`terminal = true` + "
+              f"`terminal_text`)" for who in missing]
+    detail += [f"{who}: “{ends[who][0]}”" for who, _lad in ladders if ends.get(who)]
+    head = (f"{len(ladders) - len(missing)}/{len(ladders)} declared ladders end on a card that says "
+            f"where this release ends · " + census)
+    return not missing, head, detail
 
 
 def main():

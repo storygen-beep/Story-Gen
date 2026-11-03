@@ -11,16 +11,16 @@
 | person · step | `npc_mark` · 4 (Mark A 4) |
 | where · when | the living room · Sun–Fri 22:00–00:00 · Laura has gone up (her bed row from 22:00) · not on a night she came home late (`came_home_late` in the last 4 hours: Laura is on the stairs) |
 | gate | Corruption 40 · Exhibitionism 20 · his Want 30 |
-| want (test 1) | he stays up after Laura sleeps, the TV low |
-| next step (test 2) | the ask: a price is named for the first time |
-| hook (test 3) | "What's the difference worth?" Step 5 answers |
-| what she wears here (test 8) | not named |
+| want | he stays up after Laura sleeps, the TV low |
+| next step | the ask: a price is named for the first time |
+| hook | "What's the difference worth?" Step 5 answers |
+| what she wears here | not named |
 | which version | Power 50 or more (guess): his version · under 50: hers |
 | explicit? | no: an ask |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `m` | M: "Come down after your mother's asleep." | no | "What for?" → `price` · "I'll pay it Sunday like everyone else." → parked | none |
 | `e` | E: she sits on the arm of the couch: "What's the difference worth, Mark?" | no | → `price` | none |

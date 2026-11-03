@@ -12,17 +12,17 @@
 | person · step | `npc_ryan` · 5 (Ryan A 6) |
 | where · when | her bed, `home_ella_room` · Friday 22:00–00:00, seen from his room |
 | gate | Corruption 20 · his Want 40 · the boost off |
-| want (test 1) | his hand on her ankle while he lied to Kayla (step 4) |
-| next step (test 2) | her first explicit act at home, and he hears it |
-| hook (test 3) | Kayla in the hall at dawn; one bathroom (step 6) |
-| what she wears here (test 8) | not named: the sheet only |
+| want | his hand on her ankle while he lied to Kayla (step 4) |
+| next step | her first explicit act at home, and he hears it |
+| hook | Kayla in the hall at dawn; one bathroom (step 6) |
+| what she wears here | not named: the sheet only |
 | her voice | stage 2, "warming up": shocked, honest, then she does it |
 | the crude-word ceiling | Ryan's middle column: ass, tits, cock, wet (LO, 2026-10-08: middle = stage 3) |
-| her_line_low · her_line_high (rule 7) | low (under the stage): "This is Ryan. You should go." · high (over it): "You want him to hear Kayla on the phone while you do this." (the person sheet's pair; worded for this screen when the prose is written) |
+| her_line_low · her_line_high | low (under the stage): "This is Ryan. You should go." · high (over it): "You want him to hear Kayla on the phone while you do this." (the person sheet's pair; worded for this screen when the prose is written) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `wall` | the headboard through the wall; Kayla; she can't stop listening | no | "Listen." → `listen` · "Put your headphones in." → parked | none |
 | `listen` | she listens on purpose; her body answers | yes (3 words) | "Touch yourself." → `act` · "Roll over. Sleep." → parked | none |

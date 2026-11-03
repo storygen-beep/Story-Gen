@@ -11,6 +11,8 @@
 | the obligation, its amount and day | |
 | does the obligation move? `stages` (amount after total paid) and each `stage_lines` entry | |
 | a short week: `on_short = "carry"` (owed next week, no game over) | |
+| what each short week costs (read from `rent_short_weeks`: the first short week takes one thing, the second the next) and how paying undoes it | |
+| a hard-working player can pay the first rent in week one | <yes, with the working> |
 | a hold that is not money: what repeats, who collects, what a miss costs, its stages | |
 
 Record money in `board.economy` and `[settings.rent]` (`engine.md` §26); any hold in `board.pressure`.

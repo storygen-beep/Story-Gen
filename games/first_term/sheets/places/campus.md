@@ -7,12 +7,12 @@
 | row | answer |
 |---|---|
 | kind | an area: `is_container`, no content of its own (LO, 2026-10-08, question 43) |
-| ENTERED FROM (S2) | street · a 15-minute walk, charged once on the way in (`crossing_costs` time 15) |
+| ENTERED FROM | street · a 15-minute walk, charged once on the way in (`crossing_costs` time 15) |
 | labels — what kind of place | `zone:campus`, `outdoors`, `public` |
 | hours | none: an area can't close; each room keeps its own hours (the quad 07:00–22:00) |
 | closed text | none: each room's own |
 | hidden until | no |
-| fill — word budget (S3) | 0 words: its 500 moved to the quad |
+| fill — word budget | 0 words: its 500 moved to the quad |
 | door | no |
 | dress code or wanted state | none |
 
@@ -25,7 +25,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | the walk in | — | the map | time 15, charged on crossing in · no effect | none needed | no: the minutes show on the way in |
 

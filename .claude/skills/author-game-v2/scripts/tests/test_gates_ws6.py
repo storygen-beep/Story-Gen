@@ -60,7 +60,11 @@ def green_game():
         ],
         "quest_cards": [{"id": "card", "text": "Find A.", "goals": [
             {"flag": "met_a", "label": "Meet A"}],
-            "when": [{"flag": "opening_done", "op": "is_true"}]}],
+            "when": [{"flag": "opening_done", "op": "is_true"}]},
+            # S12 b: A's arc ends on a card that says where this release ends.
+            {"id": "a_end", "npc_id": "npc_a", "text": "A.", "terminal": True,
+             "terminal_text": "A, further. (Next release)",
+             "when": [{"flag": "met_a", "op": "is_true"}]}],
     }
 
 
@@ -75,7 +79,8 @@ def green_card():
 
 def green_state():
     return {"board": {"door": {"canvas": "office", "choice": "Take the closing shift"},
-                      "characters": [{"id": "npc_a"}], "systems": [green_card()]},
+                      "characters": [{"id": "npc_a", "ladder": {"counter": "a_step", "steps": []}}],
+                      "systems": [green_card()]},
             "release_page": {"version": "0.1", "people": ["npc_a"],
                              "door": {"canvas": "office", "choice": "Take the closing shift"},
                              "signed_by_lo": True, "signed_at": "2026-09-26",
@@ -152,12 +157,11 @@ def test_broken_saves_block(tmp_path, monkeypatch):
     flips(tmp_path, monkeypatch, "last release's saves still load", saves_rc=1)
 
 
-def test_undeclared_door_blocks(tmp_path, monkeypatch):
-    # Undeclared means neither copy: since CK2 the release page's door alone counts.
-    st = green_state()
-    del st["board"]["door"]
-    del st["release_page"]["door"]
-    flips(tmp_path, monkeypatch, "the declared door works", state=st)
+def test_an_arc_with_no_end_card_blocks(tmp_path, monkeypatch):
+    # S12 b (LO, 2026-11-03): the release ends on its arcs' last quest cards, not on a door.
+    g = green_game()
+    g["quest_cards"] = [c for c in g["quest_cards"] if not c.get("terminal")]
+    flips(tmp_path, monkeypatch, "every arc's last card says where the release ends", game=g)
 
 
 def test_unpayable_pressure_blocks(tmp_path, monkeypatch):

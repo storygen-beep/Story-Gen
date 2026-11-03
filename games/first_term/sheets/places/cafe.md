@@ -7,12 +7,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | town (the bus, 15 minutes, on the way in) |
+| ENTERED FROM | town (the bus, 15 minutes, on the way in) |
 | labels — what kind of place | `zone:town`, `public` |
 | hours | Mon–Sat 08:00–23:00 (changed 2026-10-29, LO: open till 23:00 so Tom's after-close scenes can play; re-signed by LO 2026-10-29) |
 | closed text | "The café's shut." (every day; the engine adds when it opens) · 22:00–23:00 the shifts are over and Tom is closing |
 | hidden until | no |
-| fill — word budget (S3) | 9,000 words (ledger, unchanged) |
+| fill — word budget | 9,000 words (ledger, unchanged) |
 | door | no: a shop |
 | dress code or wanted state | the café uniform on shift (`clothing_rules`) · "Uniform, @player." · she changes in the back |
 
@@ -25,7 +25,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | ask for a job | work | job | `cafe_job` set true · meets Tom | once | yes |
 | work a shift | work | job | energy add −20 · money add +12 or +16 | energy on the trigger; gone after 3 | yes, short |

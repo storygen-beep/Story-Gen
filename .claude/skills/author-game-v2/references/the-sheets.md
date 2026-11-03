@@ -21,6 +21,13 @@ then does anything become a game.
 [REVIEW]  →  LO reads and edits  →  [READY]  →  built  →  [GAME-READY]
 ```
 
+A sheet can also leave the workflow. Its title then carries one of three markers instead (LO,
+2026-11-03):
+
+- **[LATER]** — kept for a later release; nothing builds from it now.
+- **[CUT]** — dropped for good; nothing builds from it, ever.
+- **[MOVED]** — its content lives on another sheet now; the first line under the title names that sheet.
+
 Status lives **in the document title**. Taken from the reference game's own Writer's Workflow: the
 document is argued over first, and whoever implements it is not whoever wrote it. That separation is
 the point — an author who implements their own sheet fills its gaps from memory without noticing
@@ -49,7 +56,7 @@ It makes drift **visible**; it does not detect it. S1's finding is untouched.
 
 ---
 
-## Seven sheet types, and they never merge
+## Eight sheet types, and they never merge
 
 | | what it carries | one per |
 |---|---|---|
@@ -60,8 +67,10 @@ It makes drift **visible**; it does not detect it. S1's finding is untouched.
 | **scene** | one rung: branch map, node bodies, exits, and every explicit beat written out | rung |
 | **decision** | what is locked forever, what is expensive, what is cheap — blocked by reversibility | game |
 | **opening** | the funnel, screen by screen, from the age gate to the first open door | game |
+| **pass page** | a signed fix list: what a pass found and what LO signed to fix (LO, 2026-11-03) | pass |
 
-Each type has a one-page template in `templates/sheets/` — slots only, no example prose.
+Each type but the pass page has a one-page template in `templates/sheets/` — slots only, no example
+prose. A pass page is a plain list with its signed date in the title.
 The person and scene templates carry S14's taste rows: a step is designed against them before it is written.
 
 ⚠️ **The system sheets are written FIRST and the place sheets are written against them**
@@ -334,7 +343,9 @@ empty, because it can be an accident.
    finishes.
 4. **He moves at least every other step.** Not all of it can be her initiative (`the-arc.md` A13).
 5. **His meter is the lock.** A step pays less than the next step needs, and his hot repeatables pay the
-   gap: two to four hot visits between steps (`the-meters.md`, "Whatever he keeps", rule 4). A ladder
+   gap: one hot visit moves about 10–50% of the next threshold, so 2–10 hot visits sit between steps (`the-meters.md`, "Whatever he keeps", rule 4). A slow pace is
+   allowed only when his card always says what to do next and the cheat page can skip the wait (LO,
+   2026-11-03: bored is fine, lost is not). A ladder
    where each step pays exactly what the next needs has zero visits between steps, and his meter locks nothing.
 6. **Each stage has one hot repeatable,** designed on the same sheet as the step it follows and written in
    full, with no placeholders. In the top games the handjob and the sex are repeatables, not steps.
@@ -342,7 +353,9 @@ empty, because it can be an accident.
 8. **Something still happens after the top step.** The arc converts into a loop; it does not stop
    (`the-arc.md` A1).
 
-**The fail rule.** Two of eight failing: the ladder is not built.
+**The fail rule.** Two of eight failing: the ladder is not built. A rule LO waives in a signed row
+(a declared exception, such as "no sex with him this release") does not count toward the two (LO,
+2026-11-03).
 
 ### Not columns, on purpose
 
@@ -403,7 +416,7 @@ games/<slug>/
 `sheets/` is the design as it stands. `iterations/` is what each release did, and never changes
 again.
 
-⚠️ **`DECISIONS.md` is a sheet and sits outside `sheets/`.** It is one of the seven types and carries a
+⚠️ **`DECISIONS.md` is a sheet and sits outside `sheets/`.** It is one of the eight types and carries a
 status marker like the rest, and because of where it lives the first version of the mirror could not
 see it. Anything walking the sheets collects it explicitly.
 

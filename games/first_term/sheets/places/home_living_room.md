@@ -9,12 +9,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | home_hall |
+| ENTERED FROM | home_hall |
 | labels — what kind of place | `zone:home`, `private` |
 | hours | always |
 | closed text | none: always open |
 | hidden until | no |
-| fill — word budget (S3) | 6,000 words (was 5,000): +1,000 for TV and the film (question 51) |
+| fill — word budget | 6,000 words (was 5,000): +1,000 for TV and the film (question 51) |
 | door | no: a shared room. Who is inside is a row, not a door |
 | dress code or wanted state | none |
 
@@ -28,7 +28,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | Mark, late | person | Mark's ladder | Mark's Want read (colour) · Mark A 4 and 5 here | once a night, on the trigger | yes |
 | Laura, waiting up | person | Laura's ladder | sees the front door (the shared step) | Saturday only | yes |
@@ -36,7 +36,7 @@
 
 ## Everyday at home (system `home_life`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | TV | work | home_life · energy | 60 min · energy add +5 · alone plain · with Mark (late), Laura (Sat 22:00–00:00) or Ryan (Sat, Sun 14:00–18:00): +1, inside their hub | `watched_tv`, 12 h | yes: what's on, who's on the couch |
 | TV: the remote (changed 2026-10-29, DECISIONS 85–86, signed by LO 2026-10-29) | work | the way up · home_life | alone (`living_tv`) and with Mark (his hub): 5 channels, each with its own clip. News, cooking, sports, old film: 30 min, energy add +5 once a day (`watched_tv`). Channel 5, the adult channel, any hour: "Keep watching." 30 min, corruption add +1, cap 19 at Good Girl, cap 39 at Curious · alone at Curious, "Touch yourself." corruption add +2, cap 39 · with Mark, his reaction by his step | none on the adult channel: it pays every time (LO, 2026-10-29); time is the limit | yes: `scenes/living_tv_channels.md` |

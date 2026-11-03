@@ -19,24 +19,24 @@
 | person · step | `npc_ryan` · 8 (new, top step) |
 | where · when | his room, `home_ryan_room` · any night but Friday, 22:00–00:00, after two knocks |
 | gate | Corruption 60 (was 40: DECISIONS 124) · his Want 70 · `ryan_step` eq 7 · not Friday · the boost off |
-| want (test 1) | his phone face-down when she knocks (step 7's after) |
-| next step (test 2) | first sex, on a night that isn't Kayla's; his headboard hits the wall she listened through |
-| hook (test 3) | the terms; the step-8 repeat; step 9 shown locked, "Further. (Needs Corruption 60)" |
+| want | his phone face-down when she knocks (step 7's after) |
+| next step | first sex, on a night that isn't Kayla's; his headboard hits the wall she listened through |
+| hook | the terms; the step-8 repeat; step 9 shown locked, "Further. (Needs Corruption 60)" |
 | who notices | Laura, across the hall: her light on (`laura_knows_ryan`, from "Laura opens the door") |
 | what she risks | Laura hearing the headboard |
-| what she wears here (test 8) | not named; undressed on screen |
+| what she wears here | not named; undressed on screen |
 | her voice | stage 3 (Bold) at the door, her low line on `doubt`; stage 4 (Hungry) once she says "Stay." |
 | the crude-word ceiling | Ryan's whole late column, cunt, fuck, cum ("Fuck me.") · confirmed by LO 2026-11-01 ("Continue") |
-| her_line_low · her_line_high (rule 7) | low: "This is Ryan. You should go." · high: "You want him to hear Kayla on the phone while you do this." (worded for this screen with the prose) |
+| her_line_low · her_line_high | low: "This is Ryan. You should go." · high: "You want him to hear Kayla on the phone while you do this." (worded for this screen with the prose) |
 | mixed act? | no: behind his door. Corruption only |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
 The order: a normal talk, then her doubt, then the kiss, then clothes, then her pick of what first, then her pick
 of how, then Laura's light, then the finish, then how she feels, then his terms. Every rung before the sex has a
 no she can come back from (the parked no: "Not tonight." returns the step the next night that isn't Friday).
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `knocks` | two knocks, late; he opens on the first; his phone is face-down on the desk; "Kayla's at her mom's tonight." | no | "Come in." → `talk` · "Not tonight." → the hall (parked) | none |
 | `talk` | normal and awkward: they sit on his bed, a foot apart; he tries a joke about the walls; neither says the kiss; he says "I meant it. The girlfriend thing." and doesn't move away | no | "So did I." → `doubt` | none |

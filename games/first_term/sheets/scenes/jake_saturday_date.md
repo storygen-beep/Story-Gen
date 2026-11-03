@@ -1,4 +1,4 @@
-# [REWORKED] Scene — jake_saturday_date
+# [MOVED] Scene — jake_saturday_date
 
 > **REWORKED 2026-11-01** (DECISIONS 113): the canvas is rebuilt as Jake's hot repeatable, "The end of a date" (`jake_date_end.md`). Kept on disk as the record.
 
@@ -15,14 +15,14 @@
 | where · when | the front door · Saturday 22:00–00:00 (his gated row) |
 | gate | `jake_date_went` (she left with him tonight) · Jake B 4 done |
 | booked by | his thread, Thursday 18:00–22:00: "Saturday?" · reminder: quest card, his quad hub line |
-| what she wears here (test 8) | Laura's dress line only in a group on `laura_blue_dress` worn |
+| what she wears here | Laura's dress line only in a group on `laura_blue_dress` worn |
 | explicit? | no in 0.1: kisses and his hands; his sex step (B 5) is later |
-| BRAKE (S9) | once a week: the booking flag, cleared at the door |
+| BRAKE | once a week: the booking flag, cleared at the door |
 | raises | corruption add +1, until she is past Bold (repeat raise) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `door` | the goodnight at the door, by her stage | no | "Kiss him." → `watch` · "Goodnight, Jake." → in | `jake_date_booked` set false · `late_date` set true |
 | `watch` | who's watching: Laura from the dark couch (after C 5), or Ryan coming in | no | "Let them look." → in | corruption add +1 |

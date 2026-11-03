@@ -323,7 +323,7 @@ out.append({
 # people_data.py (core={}), and a pay to a trait he doesn't declare is a made-up stat (call B), so the pay
 # switches on by itself once people_data.py gives him a "want" (that file is the lead's to change).
 from people_data import PEOPLE as _PEOPLE
-COCKY_NO_PAY = [nadd(COCKY, "want", 1)] if "want" in next(p for p in _PEOPLE if p["id"] == COCKY)["core"] else []
+COCKY_NO_PAY = []   # C1 (LO 2026-11-03, reverses DECISIONS 131 call A): her no never raises his Want
 FLASH = ("The proctor sits at the front, reading. Every head in the row is bent over a page. You check the room once. Then you pull everything up under the desk line, where only he can see. Your tits are bare in the cold hall air. Your nipples go hard at once, tight and aching. His pen stops mid-word. His eyes drop to your tits and stay there. One second. Two. Three. You yank everything down and cover your breasts. He slides his paper to the edge of his desk. Your nipples are still hard, and his stare is still on your chest.")
 WEEKS_7_8 = [{"type": "days_since_flag", "subject": "player", "flag_key": "opening_done", "operator": "gte", "value": 42},
              {"type": "days_since_flag", "subject": "player", "flag_key": "opening_done", "operator": "lt", "value": 56}]
@@ -398,6 +398,8 @@ def clothes_line(npc, line):
 
 out.append(hub("hub_hale_class", "lecture_hall", H, "hale_met", "Dr. Hale, at the lectern", [
     P("Dr. Hale is at the lectern with his notes, squaring the edges."),
+    # S4 (LO 2026-11-03): he's teaching, so this screen is look-only, and it says why
+    P("He's mid-lecture. He catches your eye once, then goes back to his slides."),
     *grade_lines(H, "grade_psych", "You're behind, @player. Come and see me on Thursday.", "Good work. Could be better.", "Best paper in the room. Don't let it go to your head."),
     # reader a3 #17 (DECISIONS 131): at grade 40+ a line points at his office. Office hours are Thu 17:00-19:30
     # (his rows); he names it only from his step 2 on, the step where he invites her. This hub fires Mon/Wed/Fri
@@ -409,6 +411,8 @@ out.append(hub("hub_hale_class", "lecture_hall", H, "hale_met", "Dr. Hale, at th
 ]))
 out.append(hub("hub_art_class", "lecture_hall", ART, "art_lecturer_met", "The art lecturer", [
     P("The art lecturer is moving between the easels with a box of charcoal, looking at you the way she looks at the model."),
+    # S4 (LO 2026-11-03): she's teaching, so this screen is look-only, and it says why
+    P("She's teaching. She holds your eye over an easel for a second, then turns back to the model."),
     *grade_lines(ART, "grade_art", "You're drawing what you expect, not what's there. Look harder.", "Better. Your lines are getting braver.", "You see bodies properly. I'd like to draw you one day."),
     G(cond(BRALESS), P("She looks at your tits the way she looks at the model, slow, measuring the weight, and doesn't pretend she isn't."),
       D(ART, "That's a good line today. I mean the shape under it, not the clothes. Not yet, anyway.")),
@@ -417,11 +421,15 @@ out.append(hub("hub_art_class", "lecture_hall", ART, "art_lecturer_met", "The ar
 ]))
 out.append(hub("hub_business_class", "lecture_hall", BUS, "business_lecturer_met", "The Business lecturer", [
     P("The Business lecturer is writing headings on the board in long straight lines."),
+    # S4 (LO 2026-11-03): he's teaching, so the screen is look-only and says why
+    P("He's mid-lecture, and he doesn't stop for anyone."),
     *grade_lines(BUS, "grade_business", "Failing. Retakes by appointment.", "Adequate.", "Good. Keep it that way."),
     clothes_line(BUS, "This isn't a beach, @player."),
 ]))
 out.append(hub("hub_ta_class", "lecture_hall", TA, "bio_ta_met", "The Biology TA", [
     P("The TA is sorting a stack of handouts at the front. She turns, sees you, and drops half of them."),
+    # S4 (LO 2026-11-03): she's running the class, so the screen is look-only and says why
+    P("She's handing out the worksheets, too busy to talk."),
     # reader a3 #19 (DECISIONS 131): the 40+ bands point at her office too (her rows: ta_office Tue-Fri 14:30-18:00)
     *grade_lines(TA, "grade_bio", "You're, um. You're struggling. My door's open. If you want.", "You're doing fine! Really fine. My door's open afternoons.", "Top marks. Wow. Sorry. Top marks. My door's open afternoons."),
     # reader a3 #35 (DECISIONS 131): the act she holds back, not only a compliment
@@ -444,6 +452,13 @@ out.append(hub("hub_art_office", "art_office", ART, "art_lecturer_met", "The art
       P("She's already looking at your bare legs below the skirt, pencil moving."),
       D(ART, "Clothes on today. Some day you'll sit for me properly.")),
 ]))
+# S4 (LO 2026-11-03): she isn't busy in her office, so one choice aimed at her. An hour, Figure drawing +1, cap 69.
+_ao = out[-1]
+_ao["nodes"][0]["choices"] = [go("Show her your sketchbook.", node="book", mins=0), go("Go.", loc=LEAVE_TO["art_office"])]
+_ao["nodes"].append(node("book", "Your sketchbook", [
+    P("She turns the pages slowly, and stops on the figures. She takes a pencil and corrects a hip with three lines, without asking."),
+    D(ART, "There. You keep drawing what you think a body does. Draw what it's doing."),
+], [go("Thank her.", loc=LEAVE_TO["art_office"], mins=60, eff=[{"targetType": "player", "trait": "grade_art", "op": "add", "value": 1, "cap": 69}])]))
 out.append(hub("hub_business_office", "business_office", BUS, "business_lecturer_met", "The Business lecturer's office", [
     P("The Business lecturer looks up from his marking and doesn't smile."),
     *grade_lines(BUS, "grade_business", "Failing. I can offer an honest retake. Nothing else.", "You're passing. Keep it honest.", "Good work. That's all."),
@@ -467,6 +482,14 @@ out.append(hub("hub_ta_office", "ta_office", TA, "bio_ta_met", "The TA's office"
       D(TA, "I like your— never mind. Sit down. Please."),
       P("She gets up to shut the door, stops with her hand on it, and leaves it open.")),
 ]))
+# S4 (LO 2026-11-03): a person who isn't busy gets one choice aimed at them. An hour of her help, Biology +1,
+# capped at 69 so the top band is still earned in class.
+_ta = out[-1]
+_ta["nodes"][0]["choices"] = [go("Ask her to help you with Biology.", node="help", mins=0), go("Go.", loc=LEAVE_TO["ta_office"])]
+_ta["nodes"].append(node("help", "Her help", [
+    P("She pulls her chair round to your side of the desk and goes through your last lab with a pencil, too close, apologising every time her knee touches yours."),
+    D(TA, "See? You had it. You just didn't believe it."),
+], [go("Thank her.", loc=LEAVE_TO["ta_office"], mins=60, eff=[{"targetType": "player", "trait": "grade_bio", "op": "add", "value": 1, "cap": 69}])]))
 # (2026-11-01) met on day 1 now
 # (college_dean_office), so the warning line shows only after the warning call (dean_summons).
 out.append(hub("hub_dean_office", "dean_office", DEAN, "dean_met", "The dean", [
@@ -476,6 +499,17 @@ out.append(hub("hub_dean_office", "dean_office", DEAN, "dean_met", "The dean", [
     G(cond(flag("dean_summons", False)), D(DEAN, "Your timetable isn't decoration, @player. Use it.")),
     G(DARING_STATE, D(DEAN, "Is that what you wear to college?")),
 ]))
+# S4 (LO 2026-11-03): one choice aimed at the dean. A talk, no counter: his answer reads her grades.
+ANY_FAILING = cond(*[trait(g, "lt", 40) for g in ("grade_psych", "grade_business", "grade_bio", "grade_art")], logic="OR")
+_dean = out[-1]
+_dean["nodes"][0]["choices"] = [go("Ask about your grades.", node="grades", mins=0), go("Go.", loc=LEAVE_TO["dean_office"])]
+_dean["nodes"].append(node("grades", "Your grades", [
+    P("He turns his screen so you can see it, and reads your grades off it without looking at you."),
+    # adjacent groups render as one if/elseif chain (canv.G's docstring), so exactly one answer shows
+    GC(cond(flag("on_probation")), D(DEAN, "Every one of these goes up, or you go home. That's what probation means.")),
+    GC(ANY_FAILING, D(DEAN, "Some of these worry me. Fix them before I have to.")),
+    GC(cond(flag("on_probation", False)), D(DEAN, "Fine. Keep them there.")),
+], [go("Go.", loc=LEAVE_TO["dean_office"], mins=10)]))
 
 # ── day 1, the dean's office (college_dean_office.md, signed 2026-11-01, DECISIONS 121): straight from the
 #    opening's "Go to campus."; four screens; the timetable; "Go to Psychology." Time: the opening ends about

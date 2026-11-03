@@ -36,7 +36,7 @@
 
 A ceiling, never a floor. LO took these, 2026-10-08.
 
-## Schedule grid (S5)
+## Schedule grid
 
 | place | days | from | to | why she is there |
 |---|---|---|---|---|
@@ -54,7 +54,7 @@ A ceiling, never a floor. LO took these, 2026-10-08.
 A choice in Zoe's hub in her living room, Friday 18:00–19:00, before the party: "Lips. Open." Zoe does
 @player's face; `made_up` set true (10 hours). Curious: she does it sitting in @player's lap. Lines guess.
 
-## Ladder — one guidance card per step (S10)
+## Ladder — one guidance card per step
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01:** six steps, one per first. Paced by party nights and Ella's own
 > meters (a step counter): a declared exception to taste rule 5. The dares are her hot repeatable, and where both of
@@ -90,10 +90,10 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 | 4 | Zoe's couch: "I dared you instead of asking. I always do." | Zoe's secret is hers | — | "Then keep daring me." | the admission | yes | `picks_the_dares`: party nights are Zoe's to dare; the dares open |
 | 5 | after the party, Zoe's bedroom: "No dare. I'm asking." Ella says yes, and Zoe goes down on her, and Ella comes with her hand over her mouth. The door opens: the cocky guy, a beer in his hand. Zoe, without looking up: "Out." Or: "Stay. Watch." | Zoe; **the cocky guy at the door** | the party hearing; the guy at the door | "Yes." (out loud) · "Ask me again." | she asks; she decides about the door | **yes** | `zoe_together`; the dares change; the door line is the hook for the locked threesome |
 
-**Her voice (rule 7):** low line, "It's a dare. It doesn't count." · high line, "You want her to dare you something
+**Her voice:** low line, "It's a dare. It doesn't count." · high line, "You want her to dare you something
 worse." Both on each step sheet.
 
-### Leak and promise (S5)
+### Leak and promise
 
 | n | the leak: her want, shown before | the promise: the line it ends on |
 |---|---|---|

@@ -356,12 +356,14 @@ COUNTER_OWNER = {lad["counter"]: npc for npc, lad in LADDERS.items()}
 FLAG_WORDS = {
     "came_home_late": "Come home late, after ten at night (in the last four hours)",
     "rent_starts": "The rent has started",
+    # W8 (LO 2026-11-03) adds a Wednesday date, but his steps 3 and 4 read a Saturday one, which these labels name
     "jake_date_went": "Go out with Jake on a Saturday",
     "jake_date_booked": "Book a Saturday with Jake",
     # Zoe's step 5 needs him; he is met only at Figure drawing (LO 2026-11-02: the label said "Cocky guy met")
     "cocky_guy_met": "Meet Jake's teammate at Figure drawing (Tuesday or Thursday morning, Wednesday after lunch)",
     "mark_saw_her": "Mark's first accident: the garage, a Saturday",
     "cafe_let_it": "Let a customer's hand stay, on a café shift",
+    "cafe_job": "Get the job at the café",
 }
 
 
@@ -378,7 +380,9 @@ SPEC_LABEL = _spec_trait_labels()
 # A counter whose name alone doesn't say what to do: the goal says how it moves (cafe.py l2_play, l2_flirt, l3_let).
 COUNTER_WORDS = {
     "cafe_footfall": "Café regulars {v}: play along or flirt back on a busy shift, or let a hand stay",
-    "cafe_name": "The café's name {v}: let a customer's hand stay, on a café shift",
+    # (Chrome play 2026-11-03: "The café's name -5" read as a number, not a task)
+    "cafe_name": "Let customers' hands stay on café shifts, until the café gets a name for it",
+    "cafe_shifts_worked": "Work {v} café shifts",
     "rent_short_weeks": "A Sunday short on the rent",
 }
 
@@ -421,7 +425,7 @@ def card_goals(st, counter):
     return goals, notes
 
 
-def step_cards(npc, texts, met_flag=None, terminal_text=None, closed_text=None, skip=()):
+def step_cards(npc, texts, met_flag=None, terminal_text=None, closed_text=None, skip=(), pointer=None):
     """One card per step (counter eq n-1): the tip names place and time (the step's hint), and the
     goals are the step's real requirements, never the counter (B84; gate `a card shows the real gates`).
     A step with no gate shows only its place and time. A terminal card; a closed card for a final no."""
@@ -434,24 +438,30 @@ def step_cards(npc, texts, met_flag=None, terminal_text=None, closed_text=None, 
         if n in skip:
             continue
         when = [{"type": "trait", "subject": "player", "trait": counter, "op": "eq", "value": n - 1}]
-        if met_flag:
+        # C3 (skill, LO 2026-11-03): every card after the meeting carries the met flag; a pointer step (the meeting
+        # itself is this step) carries a heading in place of the name instead
+        if met_flag and not (pointer and pointer[0] == n):
             when.append({"flag": met_flag, "op": "is_true"})
         text, label = texts[n]
         goals, notes = card_goals(s, counter)
         label = re.sub(r"\s*\([^()]*\b(?:Curious|Daring|Bold|Showing|Hungry|Watched)\b[^()]*\)", "", label)
         tip = label + ("; " + "; ".join(notes) if notes else "")
         card = {"npc_id": npc, "priority": 10, "text": text, "tip": tip, "when": when, "ready_canvas": s["canvas"]}
+        if pointer and pointer[0] == n:
+            card["heading"] = pointer[1]
         if goals:
             card["goals"] = goals
         out.append(card)
     top = steps[-1]["n"]
     if terminal_text:
         out.append({"npc_id": npc, "priority": 10, "text": terminal_text[0],
-                    "when": [{"type": "trait", "subject": "player", "trait": counter, "op": "gte", "value": top}],
+                    "when": [{"type": "trait", "subject": "player", "trait": counter, "op": "gte", "value": top}]
+                            + ([{"flag": met_flag, "op": "is_true"}] if met_flag else []),
                     "terminal": True, "terminal_text": terminal_text[1]})
     if closed_text:
         out.append({"npc_id": npc, "priority": 20, "text": closed_text,
-                    "when": [{"type": "trait", "subject": "player", "trait": counter, "op": "lt", "value": 0}],
+                    "when": [{"type": "trait", "subject": "player", "trait": counter, "op": "lt", "value": 0}]
+                            + ([{"flag": met_flag, "op": "is_true"}] if met_flag else []),
                     "terminal": True, "terminal_text": "This path is closed."})
     return out
 

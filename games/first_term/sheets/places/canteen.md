@@ -7,12 +7,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | campus |
+| ENTERED FROM | campus |
 | labels — what kind of place | `zone:campus`, `public`, `sells_food` |
 | hours | Mon–Fri 08:00–18:00 |
 | closed text | "The canteen is shut." |
 | hidden until | no |
-| fill — word budget (S3) | 2,500 words (ledger, unchanged) |
+| fill — word budget | 2,500 words (ledger, unchanged) |
 | door | no |
 | dress code or wanted state | none |
 
@@ -24,7 +24,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | eat | need | energy · money | energy add +20 · money add −5 (guess) · price on the label | once a day, on the trigger | yes, short |
 | sit with the table | person | college · `campus_talk` | `campus_talk` add +1 (guess) · the rival may start trouble | once a day, lunch | yes |

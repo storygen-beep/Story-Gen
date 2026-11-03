@@ -7,12 +7,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | home_hall |
+| ENTERED FROM | home_hall |
 | labels — what kind of place | `zone:home`, `private`, `has_bed` |
 | hours | always |
 | closed text | none: always open |
 | hidden until | no |
-| fill — word budget (S3) | 8,000 words (ledger, unchanged) |
+| fill — word budget | 8,000 words (ledger, unchanged) |
 | door | yes: Ryan · "Knock" · "Two knocks" from step 3 · "Go in" |
 | dress code or wanted state | none |
 
@@ -25,7 +25,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | Ryan | person | Ryan's ladder | Ryan's Want read: the look (colour) | once per window, on the trigger | yes |
 | his things | work | Ryan's ladder | first find sets a memory flag | once a day, when he's out | yes |

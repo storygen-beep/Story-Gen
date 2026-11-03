@@ -1,4 +1,4 @@
-# [REVIEW]] Scene — ryan_04_feet_in_his_lap
+# [REVIEW] Scene — ryan_04_feet_in_his_lap
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -15,16 +15,16 @@
 | person · step | `npc_ryan` · 4 (Ryan A 5) |
 | where · when | his room · Sun–Thu 22:00–00:00, after two knocks |
 | gate | Corruption 40 (was 20: DECISIONS 124) · his Want 30 · the boost off · pays Corruption +3, cap 79 |
-| want (test 1) | he opens on the second knock, every time, and leaves room on the bed |
-| next step (test 2) | a touch he makes: he presses her foot onto his cock while Kayla is on the phone |
-| hook (test 3) | "Liar." And Laura can open this door ("Laura opens the door" on his sheet reads this step) |
-| what she wears here (test 8) | not named; her bare feet only |
+| want | he opens on the second knock, every time, and leaves room on the bed |
+| next step | a touch he makes: he presses her foot onto his cock while Kayla is on the phone |
+| hook | "Liar." And Laura can open this door ("Laura opens the door" on his sheet reads this step) |
+| what she wears here | not named; her bare feet only |
 | explicit? | yes, `lap`: her foot on his cock (Curious) · the crude-word ceiling: Ryan's middle column, ass, tits, cock, wet · not cunt, fuck, cum |
-| her_line_low · her_line_high (rule 7) | low (under the stage): "This is Ryan. You should go." · high (over it): "You want him to hear Kayla on the phone while you do this." (the person sheet's pair; worded for this screen when the prose is written) |
+| her_line_low · her_line_high | low (under the stage): "This is Ryan. You should go." · high (over it): "You want him to hear Kayla on the phone while you do this." (the person sheet's pair; worded for this screen when the prose is written) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `knocks` | two knocks; he opens; a game on, low | no | "Feet up." → `lap` · "Just saying goodnight." → the hall (parked) | none |
 | `lap` | her bare feet in his lap; Kayla calls; "Yeah, babe. I'm alone." He takes her foot and presses it onto his cock, hard under his shorts, and holds it there | yes | "Keep your toes moving." → `liar` | none |

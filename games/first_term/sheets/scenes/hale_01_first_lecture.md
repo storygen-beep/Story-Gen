@@ -11,20 +11,20 @@
 | person · step | `npc_hale` · 1 of 4 · meets Hale and Nadia (and the desk guy and the rival, as built: the flags are set here) |
 | where · when | the lecture hall · Monday 08:30–10:00, day 1, from the dean's "Go to Psychology." (`college.md`, the first day) |
 | gate | none: the first class |
-| want (test 1) | none before: step 1. His eyes on her from the lectern while he says good morning to the room |
-| next step (test 2) | his order, his pen, and his wait |
-| hook (test 3) | Nadia: "He does that. Last spring it was me." His wife's Thursdays |
+| want | none before: step 1. His eyes on her from the lectern while he says good morning to the room |
+| next step | his order, his pen, and his wait |
+| hook | Nadia: "He does that. Last spring it was me." His wife's Thursdays |
 | who notices | the whole hall |
 | what she risks | the room's eyes, day one |
-| what she wears here (test 8) | a skirt line only in a group on her short-skirt state (as built) |
+| what she wears here | a skirt line only in a group on her short-skirt state (as built) |
 | her stage here | Good Girl |
 | explicit? | no |
-| her_line_low · her_line_high (rule 7) | low: "He's your professor. He's married." · high: "You want to know what he'd do next." (the person sheet's pair) | The low side here: "He's your professor. Everyone's watching." |
+| her_line_low · her_line_high | low: "He's your professor. He's married." · high: "You want to know what he'd do next." (the person sheet's pair) | The low side here: "He's your professor. Everyone's watching." |
 | what changes after | front row is her seat (Psychology's class canvas seats her there) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `late` | she comes in late; the room turns; he stops mid-sentence: "Late, on the first day. Front row, where I can see you." | no | "Sorry." → `front_row` | `hale_met`, `nadia_met`, `desk_guy_met`, `rival_met` set |
 | `front_row` | the only seat is front row, next to Nadia; he goes on, and drops his pen; it rolls to her feet; he waits | no | "Pick it up." → `pen` · "Leave it." → `left` | none |

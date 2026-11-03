@@ -7,12 +7,12 @@
 | row | answer |
 |---|---|
 | kind | destination |
-| ENTERED FROM (S2) | campus |
+| ENTERED FROM | campus |
 | labels — what kind of place | `zone:campus`, `outdoors`, `public` |
 | hours | every day 07:00–22:00 |
 | closed text | "The quad is dark and empty." |
 | hidden until | no |
-| fill — word budget (S3) | 3,000 words: 2,500 plus the 500 that were the campus page's (question 43) |
+| fill — word budget | 3,000 words: 2,500 plus the 500 that were the campus page's (question 43) |
 | door | no |
 | dress code or wanted state | none |
 
@@ -25,7 +25,7 @@
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | Jake | person | Jake's ladder | Jake B 2 here · his look (colour) | once per window, on the trigger | yes |
 | Zoe | person | Zoe's ladder | her want shown first: her head in @player's lap | once per window, on the trigger | yes |

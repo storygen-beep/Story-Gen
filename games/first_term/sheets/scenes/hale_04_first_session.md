@@ -1,4 +1,4 @@
-# [REVIEW]] Scene — hale_04_first_session
+# [REVIEW] Scene — hale_04_first_session
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -12,22 +12,22 @@
 | person · step | `npc_hale` · 4 of 4, top step · Claire (38), his wife, met here |
 | where · when | his office, the faculty floor · Thursday 18:30–19:30 (Claire's pickup is half past seven) |
 | gate | Hale's step counter eq 3 · Corruption 40 · Exhibitionism 40 (back to 40 · 40: DECISIONS 124) · the boost off · pays +3 each, cap 79 |
-| want (test 1) | "Thursdays. Half past six. The door will be locked." (step 3) |
-| next step (test 2) | his hand, his questions; her saying it out loud |
-| hook (test 3) | "My wife. Same time next week, @player." The weekly session opens · his card: "Hale, further. (Needs Corruption 60.)" |
+| want | "Thursdays. Half past six. The door will be locked." (step 3) |
+| next step | his hand, his questions; her saying it out loud |
+| hook | "My wife. Same time next week, @player." The weekly session opens · his card: "Hale, further. (Needs Corruption 60.)" |
 | who notices | Hale; **Claire**, through the door |
 | what she risks | his wife; her grade; how far he'll go |
-| what she wears here (test 8) | not named (the beats say "your top", "your clothes" only) |
+| what she wears here | not named (the beats say "your top", "your clothes" only) |
 | her voice | stage 2 (Curious and Daring) |
 | the crude-word ceiling | Hale's middle column (tits, nipples, cock: his, only hard under his trousers) with plain anatomy beside it (ass, thighs, wet, clit), as Ryan's signed sheets (DECISIONS 114) · no fuck, cum, pussy, cunt (his late column is not used: it goes no further) · **at stage 2 this is a column above her stage, as Ryan's step 4 (C20, middle column); confirmed by LO 2026-11-01 ("Continue")** |
-| her_line_low · her_line_high (rule 7) | low: "He's your professor. He's married." (in `feel`) · high: "You want to know what he'd do next." (on `knock`) |
+| her_line_low · her_line_high | low: "He's your professor. He's married." (in `feel`) · high: "You want to know what he'd do next." (on `knock`) |
 | mixed act? | **yes** (`meters.md` rule 4): it shows her and it's sexual, so the gate needs both 20s and "Let him." pays both |
 | his move | his hand, his questions |
 | does it finish | **cut off** (Claire): the ladder's one cut-off |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `feel` | he locks the door: "Tell me what you feel. Bare your tits first."; his thumb on her nipple; she says it out loud | yes | "Let him." → `higher` · "This isn't coaching." → `isnt` · Run. → `run` | none |
 | `higher` | his hand down her ribs, her thigh, higher, pressed on her clit through her clothes; she says every inch | yes | → `knock` | `grade_psych` add +5 · corruption add +3 · exhibitionism add +3 (caps 39 and 39, her stage caps, DECISIONS 78) |

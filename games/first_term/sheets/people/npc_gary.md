@@ -25,14 +25,14 @@
 | his line: the sexy uniform | He lowers his paper when she leans to pour. (signed) |
 | his tip | +$4 over strangers |
 
-## Schedule grid (S5)
+## Schedule grid
 
 | place | days | from | to | why he is there |
 |---|---|---|---|---|
 | `cafe` | Mon–Fri | 14:30 | 18:00 | booth four |
 | `cafe` | Fri | 20:00 | 22:00 | booth four |
 
-## Ladder — one guidance card per step (S10)
+## Ladder — one guidance card per step
 
 None in release 1. He lives inside the café's levels (`job.md`). His own route is a later release.
 

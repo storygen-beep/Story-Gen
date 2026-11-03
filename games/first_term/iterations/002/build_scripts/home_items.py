@@ -239,7 +239,7 @@ def towel_set(hub, npc, meter, lo, hi, today, pay, back, lines=(), slip=None, sl
         no_label, no_blocks, no_dest, no_exit = no
         top = [*base, *bands[2]]
         choices += [go(no_label, node="towel_no", mins=2, cond_=cond(*top, flag(today, False)),
-                       eff=[nadd(npc, "want", 1)], flags=[fset(today)]),
+                       flags=[fset(today)]),   # C1 (LO 2026-11-03): no Want on her no
                     go(no_label, node="towel_no", mins=2, cond_=cond(*top, flag(today)))]
         nodes.append(node("towel_no", no_label.rstrip("."), list(no_blocks), [go(no_exit, loc=no_dest, mins=2)]))
     if drop:

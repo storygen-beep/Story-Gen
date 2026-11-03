@@ -1,4 +1,4 @@
-# [REVIEW]] Scene — mark_03_shorts
+# [REVIEW] Scene — mark_03_shorts
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 16: under Exhibitionism 20 both openings (his Power version and hers) add his look: "His eyes go down your legs under the table." ("When you sit, ..." on his version, where he doesn't look up as she comes in). Built in `mark.py`.
 
@@ -16,20 +16,20 @@
 | where · when | the kitchen table · Sunday 08:00–12:00 |
 | gate | `rent_starts` · `mark_step` eq 2 · player counter `rent_short_weeks` gte 1 (she has been short at least once) |
 | why the counter | `rent_carried` is read for 48 hours and cleared by `vance_knock` (`mark.py:444-447`), so it can't say "short once, ever". `rent_short_weeks` is the engine's durable count (DECISIONS 112); the game declares it 0 in `[player.core_traits]` |
-| want (test 1) | "Friday, Frank." He knows she heard |
-| next step (test 2) | he sets what she wears to the table |
-| hook (test 3) | his dress rule stands at every count after |
-| what she wears here (test 8) | shorts: the step reads her short-skirt state or the scene equips shorts (guess) |
+| want | "Friday, Frank." He knows she heard |
+| next step | he sets what she wears to the table |
+| hook | his dress rule stands at every count after |
+| what she wears here | shorts: the step reads her short-skirt state or the scene equips shorts (guess) |
 | which version | Power 50 or more (guess): his version · under 50: hers |
 | explicit? | no: a dress dare (1 list word at most) |
 | who notices | Mark |
 | what she risks | his rule on her body, every Sunday |
-| her_line_low · her_line_high (rule 7) | low (under the stage): "He's Mom's husband. Pay him and go." · high (over it): "You want him to lose count." (the person sheet names none; worded by me, signed by LO 2026-11-01) | |
+| her_line_low · her_line_high | low (under the stage): "He's Mom's husband. Pay him and go." · high (over it): "You want him to lose count." (the person sheet names none; worded by me, signed by LO 2026-11-01) | |
 | guidance card line | Sunday morning at the table, after a short week: Mark wants shorts this time. |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `m` | M: "Not the shirt this time. Shorts. Since you're listening." | no | "Fine." → `shorts` · "I'm not changing for you." → parked | none |
 | `e` | E: she comes down already in her shortest pair: "Saved you asking." | no | → `shorts` | none |

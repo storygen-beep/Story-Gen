@@ -1,4 +1,4 @@
-# [REVIEW]] Scene — college_event_desk_guy
+# [REVIEW] Scene — college_event_desk_guy
 
 > **Changed 2026-11-02** (reader fails a3, signed by LO 2026-11-02, DECISIONS 131): row 27, the `watch` screen names her body: "Your thighs press together under the desk." after he shows her (`college.py`).
 
@@ -14,14 +14,14 @@
 | where · when | Psychology and Business classes (his seats) · once a day |
 | gate | Curious: she watches · Hungry (Corruption 60, was 40: DECISIONS 124): her hand, in a full hall; pays cap 79 |
 | who sees | nobody: the desk hides it; that is the stage (SP2) |
-| what she wears here (test 8) | not named |
-| BRAKE (S9) | once a day, on the trigger |
+| what she wears here | not named |
+| BRAKE | once a day, on the trigger |
 | raises | corruption add +1 until past Bold |
 | the crude-word ceiling | tits, nipples, ass, cock, wet, clit · no cunt, fuck, cum, pussy (LO, 2026-10-08) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `ask` | he leans in: "I'm hard. Help me out." | no | "Look." → `watch` · Bold: "Help him." → `hand` · "Not here." | none |
 | `watch` | Curious: she looks; he shifts so she can see; her thighs press together under the desk | no (1–2 words) | → the class | none |

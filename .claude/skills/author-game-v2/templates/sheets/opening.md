@@ -21,4 +21,4 @@ allowed; hiding one is not (`references/the-release.md`, "When LO rejects someth
 
 | key choice | source |
 |---|---|
-| <the goal · the first objective · the starting clock> | <rule file + id · `scout/<topic>.md` · LO, <date> · guess> |
+| <the goal · the first objective · the starting clock> | <the rule in plain words · the scout card · LO, <date> · guess> |

@@ -13,17 +13,17 @@
 | person · step | `npc_tom` · 4 (Tom B 4) · with Gary (52) |
 | where · when | the café, booth four · weekdays 14:30–18:00, Gary's hours |
 | gate | `cafe_job` · Corruption 40 · Exhibitionism 20 · his Want 30 |
-| want (test 1) | Tom: "Gary asks about you." · Gary lowered his paper at step 2 |
-| next step (test 2) | she is paid for her company: Gary's hand on her thigh |
-| hook (test 3) | Tom's open palm: whose price is it? (step 5) |
-| what she wears here (test 8) | her café uniform: the café's dress rule backs it |
+| want | Tom: "Gary asks about you." · Gary lowered his paper at step 2 |
+| next step | she is paid for her company: Gary's hand on her thigh |
+| hook | Tom's open palm: whose price is it? (step 5) |
+| what she wears here | her café uniform: the café's dress rule backs it |
 | the price | said by Tom in the scene: "Twenty for ten minutes. Half's mine." · on the guidance card · the toast after the click: money add +10 |
 | her climb (paid) | introduced: step 2 (Gary) · first time: here · then the repeat |
 | the crude-word ceiling | Tom's middle column: tits, cock · early: ass, tits (LO, 2026-10-08) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `counter` | Tom sells her time: twenty, half his | no | "Sit with him." → `booth` · "Not today." → `no` | none |
 | `booth` | beside Gary; her rule: "Hands where I can see them." | no | "Ten minutes." → `ten` | none |

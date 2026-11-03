@@ -32,8 +32,8 @@ where the field gates them. A game's SP2 page may move a row; it may not drop th
 
 | stage | opens here | the field's evidence |
 |---|---|---|
-| 1 | an accident; overhearing; a brush or grope from him; borrowed or stolen clothes; his leak (H7) | accidents need no stat in CoT, only a day count (`home_kinds.md:157-161`); being groped needs no stat, the stat shapes her answer (`out_kinds.md:299`); hearing strangers is ungated (`home_kinds.md:336`) |
-| 2 | she watches (a peek, a catch); what she wears at home, by her meter; a flirt with her body in it; a chosen flash or tease for one person she knows; a first dare; a photo short of nude | her peek at him has no gate or the first rung (`home_kinds.md:249`); flirt at Disinhibition 1, tease at 1–2 (`cot.md:33-34`); dares from Exhibitionism 2 with a bargain (`out_kinds.md:193`); the photo menu starts at a face shot (`out_kinds.md:466`) |
+| 1 | an accident, including a look that happens to her, even when she stays to watch (LO, 2026-11-03); overhearing; a brush or grope from him; borrowed or stolen clothes; his leak (H7) | accidents need no stat in CoT, only a day count (`home_kinds.md:157-161`); being groped needs no stat, the stat shapes her answer (`out_kinds.md:299`); hearing strangers is ungated (`home_kinds.md:336`) |
+| 2 | she watches by choice (a peek she goes after, a catch); what she wears at home, by her meter; a flirt with her body in it; a chosen flash or tease for one person she knows; a first dare; a photo short of nude | her peek at him has no gate or the first rung (`home_kinds.md:249`); flirt at Disinhibition 1, tease at 1–2 (`cot.md:33-34`); dares from Exhibitionism 2 with a bargain (`out_kinds.md:193`); the photo menu starts at a face shot (`out_kinds.md:466`) |
 | 3 | private contact with someone she knows; naked by choice for one person; asked to show, with a price; a tease with "not yet" and a bolder button beside it; paid at the first price | asked to show sits mid-ladder, CoT Exhibitionism 4 (`out_kinds.md:97`); "Okay, but *just* the top" at Exhibitionism 2 against "Yeah, why not?" at 4 (`cot:L67778-67779`) |
 | 4 | anything a group sees: a flash, a striptease, posing; known people together; sharing; the taboo act at home | striptease at CoT Exhibitionism 5, the top of its flash ladder (`out_kinds.md:373`) |
 | 5 | a crowd; free use; her own plan built on sex | `SP2_ladders.md:44` |
@@ -41,6 +41,14 @@ where the field gates them. A game's SP2 page may move a row; it may not drop th
 **Audience size sets the stage** (LO, 2026-10-07): one person is stage 2 (a flash) or 3 (naked, private); a
 group, known or not, is stage 4. Known against stranger is not the test (`SKILL_CHANGES_FROM_FIRST_TERM.md`
 B24).
+
+**Two meters, one act** (first_term DECISIONS 103; LO, 2026-11-03). With two player tiers, each act names the
+meter it uses and pays that meter. A mixed act needs both meters at its stage. Her first time out at a stage
+needs either one.
+
+**A release that writes only some stages** (LO, 2026-11-03). A release that writes stages up to N caps every pay
+at the top of stage N, shows no button for a stage it does not write, and names the next stage only on a quest
+card.
 
 **A kind climbs inside itself.** Its low version opens low and its high version waits for its stage: CoT's
 flash ladder runs belly 1, bra 2, underwear 3, breasts 4, everything 5, and the payment code uses the same
@@ -114,9 +122,10 @@ levels"): *"Hi"* at Exhibitionism 1, *"if you want to look, you can just ask"* a
   (`home_kinds.md:91`).
 - **Her button to go further pays her**: a second look, staying a moment longer. +1, capped at the top of her
   stage (`the-arc.md` A4d).
-- **Her no never raises her climb, and always moves something else**: his meter (he saw her anyway), the
-  relationship (CoT: friendship −10 polite, −25 annoyed, `cot:L72330`, `:72343`), or a counter the world keeps
-  (CoT's `discouraged++`, `cot.md:131`). The no is always on the screen.
+- **Her no never raises her climb, and never raises his Want or any other meter of his** (LO, 2026-11-03; the
+  same rule as `the-arc.md` A3). A no may cost Warmth (CoT: friendship −10 polite, −25 annoyed, `cot:L72330`,
+  `:72343`), move a counter the world keeps (CoT's `discouraged++`, `cot.md:131`), or cost nothing. The no is
+  always on the screen.
 - **Where pressure is written, the no can fail.** A friend or a crowd pushing (*"Come on, do it,"*
   `cot:L67794`) turns the no into a contest: CoT's Willpower check can fail and she gives in
   (`cot:L67797-67799`). Build it as a no gated on her meter, shown locked above it (`show_when_locked`), and

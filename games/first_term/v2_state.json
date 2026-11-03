@@ -451,11 +451,7 @@
       "npc_hale",
       "npc_jake"
     ],
-    "door": {
-      "canvas": "ryan_08_two_knocks_first_sex",
-      "choice": "Further.",
-      "locked_next": "Ryan's step 9, Kayla in the house, shown locked on Corruption 60: \"Further.\"; open, it says the next release holds it (npc_ryan.md, DECISIONS 124, 130)"
-    },
+    "door": null,
     "reader": {
       "ryan_01_hall_first_morning": {
         "want": "PASS",
@@ -3204,7 +3200,8 @@
         "test": "the written no",
         "why": "LO, 2026-10-09 (iteration 002 part 8): kind-D craft FAILs waived for 0.1; the list is kept in iterations/002/REPORT.md"
       }
-    ]
+    ],
+    "door_note": "No release door (LO 2026-11-03, S12 b; DECISIONS 134): every arc's last quest card says where this release ends. Ryan's \"Further.\" on Corruption 60 was removed."
   },
   "spine": {
     "pages": [
@@ -4263,7 +4260,8 @@
         "labels": [
           "she_can_study"
         ],
-        "read_by": "every exam result"
+        "read_by": "every exam result",
+        "performance": true
       },
       {
         "id": "grade_psych",
@@ -4275,7 +4273,8 @@
         "labels": [
           "she_can_study"
         ],
-        "read_by": "Laura, Hale, Mark, the dean; failing / fine / top"
+        "read_by": "Laura, Hale, Mark, the dean; failing / fine / top",
+        "performance": true
       },
       {
         "id": "grade_art",
@@ -4287,7 +4286,8 @@
         "labels": [
           "she_can_study"
         ],
-        "read_by": "Laura, the art lecturer, Mark, the dean"
+        "read_by": "Laura, the art lecturer, Mark, the dean",
+        "performance": true
       },
       {
         "id": "grade_business",
@@ -4299,7 +4299,8 @@
         "labels": [
           "she_can_study"
         ],
-        "read_by": "Laura, the Business lecturer's retake, Mark, the dean"
+        "read_by": "Laura, the Business lecturer's retake, Mark, the dean",
+        "performance": true
       },
       {
         "id": "grade_bio",
@@ -4311,7 +4312,8 @@
         "labels": [
           "she_can_study"
         ],
-        "read_by": "Laura, the Biology TA, Mark, the dean"
+        "read_by": "Laura, the Biology TA, Mark, the dean",
+        "performance": true
       },
       {
         "id": "complaints",
@@ -6532,7 +6534,10 @@
           ],
           "release1_note": "Release 1 (npc_mark.md, signed 2026-11-01; DECISIONS 116): four steps, paced by Sundays and her short weeks; no sex and no money for her body. Mark A 4, 5, 7, 8, 9 cut; the arrangement (built step 6) is the top step."
         },
-        "schedule_rows": 9
+        "schedule_rows": 9,
+        "stored": [
+          "want"
+        ]
       },
       {
         "id": "npc_tom",
@@ -6714,6 +6719,10 @@
             "start_time": "22:00",
             "reason": "closing, room shut: the café shuts at 22:00 and Tom stays on to close; she can be inside only for Friday's after-close (LO, 2026-10-09, option A, like Ryan's shower hour)"
           }
+        ],
+        "stored": [
+          "want",
+          "power"
         ]
       },
       {
@@ -7738,7 +7747,8 @@
       "late_shift",
       "late_date",
       "came_home_late"
-    ]
+    ],
+    "notes_20261103": "W4 (LO 2026-11-03): Mark's want and Tom's want and power are stored for a later release's steps (board.characters[].stored). S7: the grades and intelligence are performance meters (\"performance\": true)."
   },
   "dependencies": [
     {
@@ -8262,6 +8272,10 @@
         "played": {
           "at": "2026-11-02 03:41",
           "note": "skipped by LO: \"Add them to the traits. Rebuild commit and push\" (Corruption can't be changed in dev mode, so a2 can't be tested yet)"
+        },
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "Ryan's room by stage: Corruption 10 shows only talk; 25 adds the doorway lean (Curious); 45 with Showing adds 'Lie on his bed' and 'Stand naked' (Bold). Acts open at their stage."
         }
       },
       {
@@ -8271,6 +8285,10 @@
         "played": {
           "at": "2026-11-02 13:10",
           "note": "skipped by LO: \"Signed, skip the play check, build it\" (Mark's chores pay nothing; laundry tease ladder)"
+        },
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "Step 8 rises: knocks (Come in / Not tonight), talk, doubt (Stay / Go), kiss (Let him / Stop), undress (her pick of three), light (Keep going / Freeze). The two-knocks menu by his Lust: 70 shows go down and ride; 90 adds taste and the wall."
         }
       },
       {
@@ -8280,6 +8298,10 @@
         "played": {
           "at": "2026-11-02 13:38",
           "note": "skipped by LO: \"Skip the play check\" (commit and push, he plays it on his phone)"
+        },
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "The laundry screen before Mark's accident: Done / Not now only. After it at Corruption 45: Leave your basket on top and Bend for the bottom drum appear."
         }
       },
       {
@@ -8289,6 +8311,10 @@
         "played": {
           "at": "2026-11-02 16:13",
           "note": "skipped by LO: Skip the play check"
+        },
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "Sampled: the café hiring lines say 'in town' or 'near campus', never 'on your street' (rows 4-5). No false line found in the samples."
         }
       },
       {
@@ -8298,6 +8324,10 @@
         "played": {
           "at": "2026-11-02 17:43",
           "note": "skipped by LO: Skip the play check"
+        },
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "Sampled the exam and Hale lines on the new build: the cocky guy's 'Your loss.' renders with no pay, after C1. No false line found in the samples."
         }
       },
       {
@@ -8307,6 +8337,10 @@
         "played": {
           "at": "2026-11-02 18:11",
           "note": "skipped by LO: Signed, go with your recs, skip the play check"
+        },
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "Superseded on 2026-11-03 by S12 (DECISIONS 134): the door is removed, the terms screen shows only Ryan's three answers, and his card's end line reads 'More of Ryan in the next release.'"
         }
       },
       {
@@ -8316,6 +8350,10 @@
         "played": {
           "at": "2026-11-02 19:20",
           "note": "skipped by LO: Skip the play check, fix the older ones too"
+        },
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "Sampled rows 1, 24, 60: Channel 5 appears only after mark_saw_her; the exam no gives his line and nothing else (C1); Vance's porch at Want 20 is the legs line, and at 40 adds 'One evening you'll sit with me' and the steps."
         }
       },
       {
@@ -8325,13 +8363,20 @@
         "played": {
           "at": "2026-11-02 19:34",
           "note": "skipped by LO: Skip the play gate"
+        },
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "park_cool_zoe is gone from the build; Vance's porch lines are banded on his Lust; the robe and event hooks render."
         }
       },
       {
         "id": "zoe_meeting_card",
         "what": "Zoe's meeting card under People from the opening (was a Story Goals card hidden all week one); engine: no empty lines between blocks",
         "built_at": "2026-11-02 22:49",
-        "chrome": null,
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "Zoe's pointer card shows under People as 'A girl from Biology', Tue/Thu/Fri 2:30-6 PM at the quad, before the meeting. Direct <br>s on screens are only the breaks between choice buttons."
+        },
         "played": {
           "at": "2026-11-02 22:49",
           "note": "skipped by LO: Yes build it, skip the play check"
@@ -8341,7 +8386,10 @@
         "id": "pointer_cards",
         "what": "Tom's hiring card and Vance's meeting card under People before they are met; Zoe step 5's goal names Figure drawing",
         "built_at": "2026-11-02 23:58",
-        "chrome": null,
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "Tom's ('The café') and Vance's ('Next door') pointer cards show before the meeting with no name; Zoe step 5's goal names Figure drawing."
+        },
         "played": {
           "at": "2026-11-02 23:58",
           "note": "skipped by LO: Yes all three the go ahead"
@@ -8351,7 +8399,10 @@
         "id": "card_labels",
         "what": "Card goals say what to do: counters use the game's own names, the café ones say how, two flags in words",
         "built_at": "2026-11-03 00:44",
-        "chrome": null,
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "Found and fixed: Tom's goals read 'Cafe job' and 'Shifts worked 5'. Now 'Get the job at the café', 'Work 5 café shifts' and 'Let customers' hands stay on café shifts, until the café gets a name for it' (canv.py FLAG_WORDS/COUNTER_WORDS), rebuilt."
+        },
         "played": {
           "at": "2026-11-03 00:44",
           "note": "skipped by LO: Yes fix the labels too, skip the play check"
@@ -8364,6 +8415,86 @@
         "chrome": {
           "at": "2026-11-03 02:34",
           "report": "Played in Chrome on the dev build (127.0.0.1): first party at Curious, 'Not tonight, Zo.' then Jake's number: zoe_step 0, jake_step 1, zoe_kiss_refused. A Friday a week later at the party: 'Same dare' fires, Zoe's 'chickened out on me last time' line, three buttons. 'Kiss the guy by the speakers.' plays, +3 Exhibitionism, zoe_step 1, zoe_01_done. Same night 21:30 at Daring: no balcony. Every line true for what was played."
+        },
+        "played": null
+      },
+      {
+        "id": "c1_refusal_no_want",
+        "what": "Her refusal never raises his Want: the towel hubs' top-band no, five home random events' way out, the stairs skirt and the cocky guy's exam no (DECISIONS 135)",
+        "built_at": "2026-11-03 14:32",
+        "chrome": {
+          "at": "2026-11-03 14:35",
+          "report": "Fires: Ryan's towel event offers Step round him / Walk past slowly / Let him look; clicking Step round him leaves Ryan's Want at 30 (was +1). True: lines unchanged. Climb: Walk past slowly still there."
+        },
+        "played": null
+      },
+      {
+        "id": "s6_no_quiet_events",
+        "what": "The five 'Nothing happens.' random events (four at home, the street) removed (DECISIONS 136)",
+        "built_at": "2026-11-03 14:32",
+        "chrome": {
+          "at": "2026-11-03 14:35",
+          "report": "'Nothing happens' appears 0 times in the build; no home_event_quiet or town_event_quiet passage exists."
+        },
+        "played": null
+      },
+      {
+        "id": "s12_no_release_door",
+        "what": "Ryan's 'Further.' door and its next-release screen removed; his card's end line says 'More of Ryan in the next release.' (DECISIONS 134)",
+        "built_at": "2026-11-03 14:32",
+        "chrome": {
+          "at": "2026-11-03 14:35",
+          "report": "Ryan's terms screen shows only his three answers, no Further.; 'That's in the next release of First Term' 0 times; his card's end line reads 'More of Ryan in the next release.'"
+        },
+        "played": null
+      },
+      {
+        "id": "c4_hygiene_refusal",
+        "what": "Under hygiene 30, Ryan's room and couch hot repeatables and Jake's date show but he refuses and says why, no pay (DECISIONS 137)",
+        "built_at": "2026-11-03 14:32",
+        "chrome": {
+          "at": "2026-11-03 14:35",
+          "report": "Hygiene 20: Ryan's room shows the same five buttons as at 60; Lie on his bed leads to 'Jesus. When did you last shower? Go and wash.' with no pay. Jake's door at hygiene 20: 'Babe. Did you shower today?' and the booking clears; at 60 the date plays."
+        },
+        "played": null
+      },
+      {
+        "id": "w8_two_dates",
+        "what": "Jake dates Wednesday and Saturday: a Monday/Tuesday text, pickup and the end of a date on both nights, 'Come up.' Saturday only (DECISIONS 138)",
+        "built_at": "2026-11-03 14:32",
+        "chrome": {
+          "at": "2026-11-03 14:35",
+          "report": "Pickup and the end of a date are scheduled Wed and Sat (19-21, 22-00); the wednesday text is in the build; on Wednesday the car offers Kiss him / Goodnight, no Come up (Saturday has it); goodnight says Saturday? on Wed and Wednesday? on Sat."
+        },
+        "played": null
+      },
+      {
+        "id": "s4_busy_and_offices",
+        "what": "Hale's and the art lecturer's class screens say they're teaching; the dean's 'Ask about your grades.' and the TA's 'Ask her to help you with Biology.' (DECISIONS 139)",
+        "built_at": "2026-11-03 14:32",
+        "chrome": {
+          "at": "2026-11-03 14:35",
+          "report": "Hale's class screen carries 'He's mid-lecture...' with Go.; the dean's Ask about your grades gives the probation, failing (Psych 35) or fine line, exactly one; the TA offers Ask her to help you with Biology."
+        },
+        "played": null
+      },
+      {
+        "id": "c3_pointer_heading",
+        "what": "Zoe's, Tom's and Vance's pre-meeting cards carry a heading ('A girl from Biology', 'The café', 'Next door') in place of the name (engine f0d7b863)",
+        "built_at": "2026-11-03 14:32",
+        "chrome": {
+          "at": "2026-11-03 14:35",
+          "report": "Quests page with zoe_met, vance_met and cafe_job false: headings read The café, Next door, A girl from Biology; the name Zoe appears nowhere on the page."
+        },
+        "played": null
+      },
+      {
+        "id": "slips_and_uniform",
+        "what": "The 2 uniform bugs and the 13 alignment game slips (DECISIONS 142): Clock in normal only, caps 79/39, toilet line, trigger keys, met flags and Hale's heading, busy lines and office choices, Ryan's two-knocks speech as dialog, WANT.md release 41, sheet ids and titles",
+        "built_at": "2026-11-03 15:22",
+        "chrome": {
+          "at": "2026-11-03 15:22",
+          "report": "Clock in leaves her in cafe_uniform_normal and does not give the tight one; room_sleep, cafe_shift and party_arrive carry showWhenBlocked with their messages; ryan_two_knocks f_on and twist render Ryan, her and Laura as dialog boxes in order; Hale's office and the art office offer their choice; the Business class says he's mid-lecture; the Quests page shows 'Your Psychology lecturer' and no Hale before the meeting; gates 62/86, meter ceiling and no canvas key discarded now PASS."
         },
         "played": null
       }

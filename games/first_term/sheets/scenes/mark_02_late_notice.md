@@ -11,18 +11,18 @@
 | person · step | `npc_mark` · 2 (Mark A 2) |
 | where · when | the kitchen drawer, late · Sun–Fri 22:00–00:00, Mark next door |
 | gate | `mark_step` eq 1 (was his Want 10) |
-| want (test 1) | his eyes on her hem at the first count |
-| next step (test 2) | she learns his weak spot: the debt to Vance |
-| hook (test 3) | "Put it back." Each of them now holds something |
-| what she wears here (test 8) | not named |
+| want | his eyes on her hem at the first count |
+| next step | she learns his weak spot: the debt to Vance |
+| hook | "Put it back." Each of them now holds something |
+| what she wears here | not named |
 | explicit? | no: info |
 | who notices | his secret is hers |
 | what she risks | being caught reading it |
-| her_line_low · her_line_high (rule 7) | low (under the stage): "He's Mom's husband. Pay him and go." · high (over it): "You want him to lose count." (the person sheet names none; worded by me, signed by LO 2026-11-01) | The built thought on `put` ("You've got something on him now.") is the high side. |
+| her_line_low · her_line_high | low (under the stage): "He's Mom's husband. Pay him and go." · high (over it): "You want him to lose count." (the person sheet names none; worded by me, signed by LO 2026-11-01) | The built thought on `put` ("You've got something on him now.") is the high side. |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `drawer` | under the takeout menus, Vance's late notice | no | "Read it." → `phone` · "Shut the drawer." → the kitchen (parked) | none |
 | `phone` | Mark in the doorway, on the phone: "Friday, Frank. I'll have it Friday." | no | "How late are we?" → `put` | `knows_mark_debt` set |

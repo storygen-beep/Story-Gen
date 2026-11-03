@@ -13,18 +13,18 @@
 | person · step | `npc_tom` · 1 (Tom B 1) |
 | where · when | the café counter · Mon–Sat 14:30–22:00, her first shift |
 | gate | `cafe_job` |
-| want (test 1) | none before: step 1. His eyes on her ass as she carries the tray |
-| next step (test 2) | he touches her, as if it's nothing: the apron |
-| hook (test 3) | "Tables first. Phone in the back. Smile." The job's rules; the tip jar (step 2) |
-| what she wears here (test 8) | the normal café uniform (the dress rule) |
+| want | none before: step 1. His eyes on her ass as she carries the tray |
+| next step | he touches her, as if it's nothing: the apron |
+| hook | "Tables first. Phone in the back. Smile." The job's rules; the tip jar (step 2) |
+| what she wears here | the normal café uniform (the dress rule) |
 | explicit? | no |
 | who notices | Tom |
 | what she risks | her first day |
-| her_line_low · her_line_high (rule 7) | low (under the stage): "He's your boss. Do the job." · high (over it): "You felt that second. So did he." (the person sheet names none; worded by me, signed by LO 2026-11-01) | |
+| her_line_low · her_line_high | low (under the stage): "He's your boss. Do the job." · high (over it): "You felt that second. So did he." (the person sheet names none; worded by me, signed by LO 2026-11-01) | |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `apron` | Tom reties her apron from behind, properly, because she did it wrong: "Tables first. Phone in the back. Smile." His hands stay one second longer than tying takes | no | "Yes, boss." → `tray` · "I can tie my own apron." → `tray` (his Power add −5) | none |
 | `tray` | she carries the tray out; his eyes follow her across the café, and he doesn't pretend they don't | no | "Table six." → the shift | Tom's Want add +10 (stored) · `tom_step` set 1 · `tom_01_done` set |

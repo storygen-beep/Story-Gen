@@ -684,7 +684,7 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "jake_number", operator = "is_true" },
   { type = "days_since_flag", subject = "player", flag_key = "jake_number", operator = "gte", value = 1 },
   { type = "flag", subject = "player", flag_key = "jake_date_booked", operator = "is_false" },
-  { type = "weekday", weekdays = [0, 1, 2, 3, 4] },
+  { type = "weekday", weekdays = [3, 4] },
   { type = "time_of_day", start_time = "18:00", end_time = "22:00" },
 ] }
 [[phone.conversations.blocks]]
@@ -738,6 +738,73 @@ sender = "npc"
 after_round = 2
 after_choice = 1
 content = "next week then"
+
+# ── Jake (W8, LO 2026-11-03): the midweek date, booked here. ──
+[[phone.conversations]]
+id     = "jake_date_wed"
+app    = "messages"
+npc    = "npc_jake"
+notify = "📱 Jake"
+repeat_after_days = 6
+[phone.conversations.trigger]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "jake_number", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "jake_number", operator = "gte", value = 1 },
+  { type = "flag", subject = "player", flag_key = "jake_date_booked", operator = "is_false" },
+  { type = "weekday", weekdays = [0, 1] },
+  { type = "time_of_day", start_time = "18:00", end_time = "22:00" },
+] }
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+content = "wednesday? i'll pick you up"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 1
+choices = [
+  { text = "yes", flagEffects = [{ targetType = "player", flag = "jake_date_booked", op = "set" }] },
+  { text = "not this week" },
+  { text = "again?" },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 0
+content = "front door. eight."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 1
+content = "saturday then. maybe"
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 1
+after_choice = 2
+content = "again. yes or no?"
+[[phone.conversations.blocks]]
+type = "reply"
+round = 2
+after_round = 1
+after_choice = 2
+choices = [
+  { text = "yes", flagEffects = [{ targetType = "player", flag = "jake_date_booked", op = "set" }] },
+  { text = "no" },
+]
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 2
+after_choice = 0
+content = "front door. eight."
+[[phone.conversations.blocks]]
+type = "message"
+sender = "npc"
+after_round = 2
+after_choice = 1
+content = "saturday then"
 
 # ── calls (the person sheets: Laura's curfew call; the dean's office arrives with college) ──
 [[phone.apps]]

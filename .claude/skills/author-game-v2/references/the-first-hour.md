@@ -100,7 +100,9 @@ setup → problem → character interaction → conflict → choice → temptati
    choice, and it is the shape: the engine has no other place to print a line after a click.
 4. **An early temptation** in the first few scenes: attraction, tension, a look, a suggestive
    choice. The player should know within minutes that sex is what this game is about. A hot moment
-   here comes from a stranger or a one-off, never the paid route or the main man (`the-arc.md` A15). 15 of 26 top
+   here may come from the main man when it is an accident and not explicit (`the-heat-ladder.md` H2). An
+   explicit opening beat stays outside the arc: a stranger or a one-off, never the paid route or the main
+   man (`the-arc.md` A15; LO, 2026-11-03). 15 of 26 top
    games put something tempting in the opening and 3 put explicit sex there; 8 put nothing
    (measured 2026-09-24 in the 26 games' own source).
 5. **The first objective is a quest card with goal steps.** Not a tip alone: `goals`, so the page
@@ -209,8 +211,10 @@ two sentences each side of the card.*
 Put one choice on the opening's first screen — *read it* or *skip it*. Fifteen of 26 top games offer a
 skip (Process Review, Round 1, numbers only), and all four passing games do: In Her Own Hands
 [SkipPreface] (*"No, skip the Preface"*), Course of Temptation [QuickstartMenu], Shady Deals' "Custom
-Start", Cupid's Way's "Skip Prologue". The skip sets every flag the opening sets and lands where the
+Start", Cupid's Way's "Skip Prologue". The skip sets every flag the opening always sets (and, for a one-of-several choice, the mildest branch's flags only) and lands where the
 opening hands over, so nothing downstream — `the opening opens a door` included — can tell the difference.
+Where the opening has a choice of one of several, the skip takes the mildest branch, shows it on its own
+screen, and sets that branch's flags. It never takes a no that ends a path (LO, 2026-11-03).
 
 ## F2 · Boot and capstone are two canvases
 
@@ -840,7 +844,15 @@ spoils every meeting in the game. The field keeps the name back until the meetin
 Hands' [Progress_Hints_Base], behind `<<if not $xr.ab.m>>`, gives only *"I should check out some of
 the local shops . . ."*
 
-**A character's `[[quest_cards]]` carry that character's meeting flag in `when`.**
+**A character's `[[quest_cards]]` carry that character's meeting flag in `when`.** A card *before* the
+meeting is allowed (LO, 2026-11-03): it carries the flag with `is_false`, and it says what the person is
+and where, never their name (*"The girl from your Biology class hangs out on the quad."*). Every card
+after the meeting carries the flag with `is_true`.
+
+A pointer card carries `heading = "<what she knows them as>"` (for example `"A girl from Biology"`). The Quests
+page, its list layout and the cast page print the heading in place of the name and hide the portrait
+(`v2.py:11867`, `v2.py:18923`; engine fix 2026-11-03, C3). The card's own `text` and `tip` are not rewritten, so
+keep the name out of them too.
 
 ```toml
 when = [ { flag = "met_wade", subject = "player", op = "is_true" },
@@ -849,7 +861,7 @@ when = [ { flag = "met_wade", subject = "player", op = "is_true" },
 
 The engine already does the rest. `QuestsPage` wraps each character's section in `<<if _card>>`
 (`v2.py:18245`) and `setup.pickQuestsCard` returns `null` when no card's `when` matches
-(`v2.py:17870`), so an unmet character renders **no heading and no section** — the roster fills in
+(`v2.py:17870`), so an unmet character with no pointer card renders **no heading and no section** — the roster fills in
 as the player meets people, which is what the field ships (the-company's cast table is
 `<<if $player.met[_char.id]>>` per row).
 
@@ -857,8 +869,9 @@ Three things to get right:
 
 - **A `when` item sets `flag` *or* `trait`, never both** — the importer rejects an item carrying
   both (`template_import.py:5765`). The meeting flag is its own item beside the trait band.
-- **Put it on *every* card in that character's ladder**, not just the first. A gap means the
-  character reappears at the band whose card you missed.
+- **Put it on *every* card in that character's ladder**, not just the first: `is_false` on a pointer
+  card, `is_true` on every card after the meeting. A gap means the character reappears at the band
+  whose card you missed.
 - **Flag names are not validated against anything.** Nothing checks that `met_wade` exists; a typo
   hides that character's guidance forever and no build error says so. Read the name off the
   meeting canvas's own `flagEffects`, not off memory.

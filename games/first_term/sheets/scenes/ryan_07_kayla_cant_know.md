@@ -1,4 +1,4 @@
-# [REVIEW]] Scene — ryan_07_kayla_cant_know
+# [REVIEW] Scene — ryan_07_kayla_cant_know
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -13,20 +13,20 @@
 | person · step | `npc_ryan` · 7 (new) |
 | where · when | his room, `home_ryan_room` · Mon, Tue, Thu, Sun 19:00–22:00, after two knocks |
 | gate | Corruption 60 (was 40: DECISIONS 124) · his Want 60 · `ryan_step` eq 6 · the boost off |
-| want (test 1) | his door left open a hand's width since the shower (step 6) |
-| next step (test 2) | her hand on him, to the end, while Kayla's photo lights up his phone |
-| hook (test 3) | his phone face-down every time she knocks after this; step 8, two knocks late at night |
+| want | his door left open a hand's width since the shower (step 6) |
+| next step | her hand on him, to the end, while Kayla's photo lights up his phone |
+| hook | his phone face-down every time she knocks after this; step 8, two knocks late at night |
 | who notices | Kayla, on the screen: she calls while he's in Ella's hand |
 | what she risks | Kayla calling while he's in her hand |
-| what she wears here (test 8) | not named |
+| what she wears here | not named |
 | her voice | stage 3 (Bold) |
 | the crude-word ceiling | Ryan's late column for "cum" (cunt, fuck, cum) · confirmed by LO 2026-11-01 ("Continue") |
-| her_line_low · her_line_high (rule 7) | low: "This is Ryan. You should go." · high: "You want him to hear Kayla on the phone while you do this." (worded for this screen with the prose) |
+| her_line_low · her_line_high | low: "This is Ryan. You should go." · high: "You want him to hear Kayla on the phone while you do this." (worded for this screen with the prose) |
 | mixed act? | no: behind his door, unseen. Corruption only (`meters.md` rule 3) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `knocks` | two knocks; he opens; his door was already open a hand's width | no | "Sit down, Ryan." → `hand` · "Just checking you're decent." → the hall (parked) | none |
 | `hand` | she pushes him onto the bed and takes his cock in her hand; his phone lights up on the bed: Kayla's photo | yes | "Don't answer it." → `phone` | none |
@@ -36,7 +36,7 @@
 **The parked no** (confirmed by LO 2026-11-01 ("Continue")): "Just checking you're decent." The step waits a week (`retry_after_days = 7`,
 as his other steps).
 
-**His move (rule 4):** he reaches for her first, then for the phone. **Does it finish:** yes, he comes.
+**His move:** he reaches for her first, then for the phone. **Does it finish:** yes, he comes.
 
 ## The explicit screens, written
 

@@ -41,7 +41,7 @@ already asked, so it is not repeated here.
    finished on the body. A talk or a locked door is not a top step. (HEAT Q8; §4, "a payoff after a long
    build")
 3. **One cut-off per ladder.** Kayla's call, Claire's knock, a footstep on the stairs: once. Every other step
-   finishes. (rule 5)
+   finishes.
 4. **He moves at least every other step.** Not all her initiative. (ARC Q3. IHOH's Bobby pulls her legs into
    his lap; CoT's best friend asks her.)
 5. **His meter is the lock.** A step pays less than the next step needs; the gap is paid by his hot

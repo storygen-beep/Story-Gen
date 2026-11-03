@@ -15,7 +15,7 @@
 
 ## The ladder
 
-| button | gate | pays | what she wears (test 8) |
+| button | gate | pays | what she wears |
 |---|---|---|---|
 | "Leave your basket on top." | Curious · `mark_saw_her` | Mark's Lust +2 | not named (the built screen: her panties on the basket) |
 | "Bend for the bottom drum." | Curious · Daring (mixed: `meters.md` rule 4) · `mark_saw_her` · panties on · not a towel | Mark's Lust +3 · Exhibitionism +1, cap 39 | three screens by what she wears: a skirt or dress · the sleep shirt · jeans, leggings or shorts |

@@ -164,14 +164,14 @@ locationId = "street"
 time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "lt", value = 30 } ] }
 
-# reader a3 #52 (DECISIONS 131): from Want 30 he has asked her to sit, so the no costs him (call A): Lust +1 and his line
+# reader a3 #52 (DECISIONS 131): from Want 30 he has asked her to sit, so the no gets his line. C1 (LO 2026-11-03,
+# DECISIONS 135): her no never raises his Want, so the +1 is gone.
 [[canvases.nodes.exit_block.choices]]
 text       = "\"Goodnight, Mr. Vance.\""
 targetType = "node"
 nodeId     = "goodnight"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "gte", value = 30 }, { type = "flag", subject = "player", flag_key = "vance_no_today", operator = "is_false" } ] }
-effects    = [ { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 1 } ]
 flagEffects = [ { targetType = "player", flag = "vance_no_today", op = "set" } ]
 
 # the same no again that day: his line, no pay (the climb is paid for: a no is not a free Want rung)
@@ -649,7 +649,7 @@ time_progression_minutes = 5
 conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_item", item_id = "plain_bra", operator = "equipped" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "toilet_bra_today", operator = "is_false" } ] }
 wardrobeEffects = [ { action = "unequip", item_id = "plain_bra" } ]
 flagEffects = [ { targetType = "player", flag = "toilet_bra_today", op = "set" } ]
-effects = [ { targetType = "player", trait = "exhibitionism", op = "add", value = 1 } ]
+effects = [ { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 } ]
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Take the sports bra off in a stall."
@@ -659,7 +659,7 @@ time_progression_minutes = 5
 conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_item", item_id = "sports_bra", operator = "equipped" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "toilet_bra_today", operator = "is_false" } ] }
 wardrobeEffects = [ { action = "unequip", item_id = "sports_bra" } ]
 flagEffects = [ { targetType = "player", flag = "toilet_bra_today", op = "set" } ]
-effects = [ { targetType = "player", trait = "exhibitionism", op = "add", value = 1 } ]
+effects = [ { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 } ]
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave it."

@@ -7,12 +7,12 @@
 | row | answer |
 |---|---|
 | kind | thoroughfare |
-| ENTERED FROM (S2) | nothing: the ground, the only root |
+| ENTERED FROM | nothing: the ground, the only root |
 | labels — what kind of place | `zone:street`, `outdoors`, `public` |
 | hours | always |
 | closed text | none: always open |
 | hidden until | no |
-| fill — word budget (S3) | 1,500 words (ledger, unchanged) |
+| fill — word budget | 1,500 words (ledger, unchanged) |
 | door | no |
 | dress code or wanted state | none |
 
@@ -31,7 +31,7 @@ nothing extra (LO, 2026-10-08, questions 43–46).
 
 ## Rows (`serves`)
 
-| row | kind | system | cost and effect, with op (S4) | BRAKE (S9) | on a screen? |
+| row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | walk | — | the map | the area's time, charged on the way in: Home 10, Campus 15, Town 15 · no effect | none needed | a walk line by her clothes |
 | home, late (22:00 or later) | work | parties · the curfew | `came_home_late` set true (read for 4 hours; her bed clears it); "Home" lands her in the hall | once a night | yes: the dark house, one line |

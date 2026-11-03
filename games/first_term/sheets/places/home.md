@@ -8,14 +8,14 @@
 | row | answer |
 |---|---|
 | kind | a building: `is_container`, no content of its own |
-| ENTERED FROM (S2) | street |
+| ENTERED FROM | street |
 | opens into (`default_entry`) | `home_hall` — clicking "Home" on the street lands her in the hall |
 | the rooms inside it | hall, kitchen, living room, front door, garage, bathroom, her room, Ryan's room, the master bedroom, the garden (question 49) |
 | area | Home is its own area: the walk home, 10 minutes, is charged once on the way in (`crossing_costs` time 10, question 44) |
 | labels — what kind of place | `zone:home` |
 | hours | none: a building can't close; each room keeps its own |
 | hidden until | no |
-| fill — word budget (S3) | 0 words: a building has no screen of its own |
+| fill — word budget | 0 words: a building has no screen of its own |
 | door | no: the doors in the house are on Ryan's room and the master bedroom |
 | dress code or wanted state | none |
 

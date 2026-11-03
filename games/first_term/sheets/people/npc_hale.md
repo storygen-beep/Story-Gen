@@ -36,7 +36,7 @@
 
 A ceiling, never a floor. LO took these, 2026-10-08.
 
-## Schedule grid (S5)
+## Schedule grid
 
 | place | days | from | to | why he is there |
 |---|---|---|---|---|
@@ -44,7 +44,7 @@ A ceiling, never a floor. LO took these, 2026-10-08.
 | `lecture_hall` | Thu | 13:00 | 14:30 | teaches Psychology |
 | `hale_office` | Thu | 17:00 | 19:30 | Thursday office hours |
 
-## Ladder — one guidance card per step (S10)
+## Ladder — one guidance card per step
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01:** four steps, one per first. Paced by his week and her meters, not
 > a meter of his: a declared exception to taste rule 5. The touch is a mixed act (`sheets/systems/meters.md`): it
@@ -75,10 +75,10 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 | 3 | his office. His wedding photo turned face-down. "Your grade is a C. I coach students who want to understand the material. Psychology starts with a person's sexuality. If you don't understand yours, you won't get past a C." His hand on her shoulder | Hale; Laura, through the grade | her grade; Laura reading it | "When?" · "That isn't coaching." · she walks out | the offer, the photo, the hand | yes | `hale_coaching_offered`; the grade goes up only if she comes back |
 | 4 | the first session. "Tell me what you feel." He has her undo her blouse and say it out loud while his hand moves on her: her breast, her thigh, higher. Then Claire knocks | Hale; **Claire**, through the door | his wife; her grade; how far he'll go | three answers, below | his hand, his questions | **cut off** (Claire), the ladder's one cut-off | `hale_touched`; the weekly session opens; he names Claire |
 
-**Her voice (rule 7):** low line, "He's your professor. He's married." · high line, "You want to know what he'd do
+**Her voice:** low line, "He's your professor. He's married." · high line, "You want to know what he'd do
 next." Both on each step sheet.
 
-### Leak and promise (S5)
+### Leak and promise
 
 | n | the leak: his want, shown before | the promise: the line it ends on |
 |---|---|---|
@@ -102,7 +102,7 @@ she earns.
 **Declared exceptions:** rule 2 (the top is his touch, cut off by Claire: LO, "things doesn't go beyond as she is not
 corrupted enough") and rule 5 (a step counter, paced by his week; the lever is her grade).
 
-## His hot repeatable: the Thursday session (rule 6)
+## His hot repeatable: the Thursday session
 
 - **After step 4, every Thursday 18:30–19:30.** One a week. It grows with her and stops at touching:
   - Bold and Showing (was Curious and Daring): his hand over her clothes, while she says what she feels; pays cap 59;

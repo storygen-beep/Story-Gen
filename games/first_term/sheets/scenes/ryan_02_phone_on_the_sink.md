@@ -11,16 +11,16 @@
 | person · step | `npc_ryan` · 2 (Ryan A 3) |
 | where · when | the bathroom · weekdays 06:45–07:30, while he's in there (his bathroom row) |
 | gate | his Want 10 · the drinks boost off (Exhibitionism 20 dropped: his meter is the lock) |
-| want (test 1) | his eyes go to her and away too fast, every morning since step 1 |
-| next step (test 2) | she learns his secret: Kayla, who sneaks in on Fridays |
-| hook (test 3) | "Don't." She holds his secret; step 3 makes him pay for it |
-| what she wears here (test 8) | a thin top: only in a group on "no bra"; otherwise no garment named |
+| want | his eyes go to her and away too fast, every morning since step 1 |
+| next step | she learns his secret: Kayla, who sneaks in on Fridays |
+| hook | "Don't." She holds his secret; step 3 makes him pay for it |
+| what she wears here | a thin top: only in a group on "no bra"; otherwise no garment named |
 | explicit? | no |
-| her_line_low · her_line_high (rule 7) | low (under the stage): "This is Ryan. You should go." · high (over it): "You want him to hear Kayla on the phone while you do this." (the person sheet's pair; worded for this screen when the prose is written) |
+| her_line_low · her_line_high | low (under the stage): "This is Ryan. You should go." · high (over it): "You want him to hear Kayla on the phone while you do this." (the person sheet's pair; worded for this screen when the prose is written) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `sink` | she brushes her teeth; his phone buzzes: a text from Kayla | no | "Read it." → `read` · "Leave it." → the hall (parked) | none |
 | `read` | he grabs the phone, too late | no | "Sneaking her in past Mom, huh?" → `secret` | `knows_about_kayla` set |

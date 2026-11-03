@@ -11,16 +11,16 @@
 | person · step | `npc_mark` · 9 (Mark A 9) · goal 1's body route |
 | where · when | the kitchen · Wednesday 18:00–22:00, Laura late, Ryan out |
 | gate | Corruption 40 · Exhibitionism 40 · his Want 80 |
-| want (test 1) | his chair, pulled out; he waits for Wednesday and she sees it |
-| next step (test 2) | she takes his chair and sets the terms |
-| hook (test 3) | "His lap waits." Step 10 is later; the table is hers now |
-| what she wears here (test 8) | not named |
+| want | his chair, pulled out; he waits for Wednesday and she sees it |
+| next step | she takes his chair and sets the terms |
+| hook | "His lap waits." Step 10 is later; the table is hers now |
+| what she wears here | not named |
 | which version | Power 50 or more (guess): his version · under 50: hers |
 | explicit? | no: power (under 3 list words) |
 
-## Branch map — one row per screen (S1)
+## Branch map — one row per screen
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op (S4) |
+| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `chair` | she sits in his chair, legs crossed, Sunday's rent counted out of her purse in front of her, then back in it | no | → `m` or `e` | none: no money moves on a Wednesday |
 | `m` | M: "My chair." | no | "Count it slowly, Mark." → `count` · "No. I count." → parked | none |
@@ -37,7 +37,7 @@
 | what happens | the count in two versions, his terms or hers, by his Power |
 | priced options | "Twenty, and you can look" from Bold, the price on the button (LO, 2026-10-08) |
 | explicit? | yes: Mark A 7's beat, in two voices at the build |
-| BRAKE (S9) | once a Sunday, on the trigger |
+| BRAKE | once a Sunday, on the trigger |
 
 ## Why — the source of each key choice
 
