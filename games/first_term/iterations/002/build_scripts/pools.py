@@ -414,6 +414,11 @@ for _c in out:
     if _c["id"] in ['party_arrive', 'party_chat', 'party_dare', 'party_drink_offer', 'party_hookup']:
         mark_late(_c, 'late_party', split=True)
 
+# heat proposal B13 (Zoe in the park), DECISIONS 147 chunk 3
+import walkins_out
+_done = walkins_out.attach(out)
+assert _done == {"park_run", "park_rest"}, _done
+
 text = "# ── the pool and system scenes: parties, the park, touching herself, the stairs ──\n" + "".join(emit(c) for c in out)
 open(__import__("sys").argv[1], "w").write(text)
 print("pools:", len(out), "canvases")

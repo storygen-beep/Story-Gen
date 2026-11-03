@@ -688,6 +688,12 @@ out.append({
             pid="cocky_class_talk", bag=True),
     ], [go("Back to your easel.", loc="lecture_hall", mins=20)])]})
 
+# heat proposal B10 (the gym), B16 (the lecture hall) and B20 (the office doors' hub lines), DECISIONS 147 chunk 3
+import walkins_out
+_done = walkins_out.attach(out)
+assert _done == {"gym_workout", "lecture_timetable"}, _done
+walkins_out.hub_read(out)
+
 text = "# ── college (sheets/systems/college.md · scenes college_*.md) ──\n" + "".join(emit(c) for c in out)
 open(__import__("sys").argv[1], "w").write(text)
 print("college:", len(out), "canvases")

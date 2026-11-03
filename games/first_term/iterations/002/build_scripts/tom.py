@@ -234,6 +234,9 @@ for _c in out:
 for _c in out:
     if _c["id"] == "tom_after_close":
         clear_on_leave(_c, "tom_close_booked")
+# heat proposal B9 (DECISIONS 147 chunk 3): Gary's booth reads his walk-in
+import walkins_out
+walkins_out.hub_read(out)
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards)
 open(__import__("sys").argv[1], "w").write(text)
 print("tom:", len(out), "canvases,", len(cards), "cards")
