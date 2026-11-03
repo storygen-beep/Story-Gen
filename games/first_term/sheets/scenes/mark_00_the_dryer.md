@@ -42,11 +42,11 @@
 
 **`covered`**
 
-> You take the towel and hold it over your chest. Mark is already bent over his bench again, screwing something that doesn't need screwing. His ears are red. *He looked. Mom's husband looked at your tits, and then he turned his back like they burned him.* You go up to change, fast, your face burning. *Mom's husband. Don't think about it.* You think about it all the way down the hall.
+> You take the towel and hold it over your chest. Mark is already bent over his bench again, screwing something that doesn't need screwing. His ears are red. *He looked. Mom's husband looked at your tits, and then he turned his back like they burned him.* You go to your room to change, fast, your face burning. *Mom's husband. Don't think about it.* You think about it all the way down the hall.
 
 **`stay`**
 
-> You don't take it. Not yet. You stand there dripping, and you let him see you not take it. He doesn't turn round. His hand with the towel shakes, once. "@player. Take the towel." You take it, slowly. *He wanted to look. He made himself stop.* You go up to change, and your nipples are still hard under the wet cloth all the way down the hall. *Next time, see if he stops.*
+> You don't take it. Not yet. You stand there dripping, and you let him see you not take it. He doesn't turn round. His hand with the towel shakes, once. "@player. Take the towel." You take it, slowly. *He wanted to look. He made himself stop.* You go to your room to change, and your nipples are still hard under the wet cloth all the way down the hall. *Next time, see if he stops.*
 
 The +5 on the moment is from the heat proposal's "Found while reading" (`proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`, signed 2026-11-03).
 

@@ -71,8 +71,8 @@ C4, "Leave the door unlocked.", sits on the shower itself and raises these odds 
 | who · when | Ryan, down from his room · Saturday 07:30–08:15 · Sunday 07:30–10:00 |
 | want | his: morning wood against her ass as he reaches past |
 | next step | "Push back into him." at Bold |
-| hook | `ryan_brushed_kitchen` is set; nothing reads it this release |
-| screen 1 | "He freezes." · his Lust +2 |
+| hook | `ryan_brushed_kitchen` is set; nothing reads it this release · every answer names next weekend's mug: "Next weekend he'll come in for a mug again." (step aside, don't move; pass 4 reader) · "Next weekend I'm coming in for that mug again." (push back) |
+| screen 1 | "He freezes." · his Lust +2 · he "comes in from the hall" (Q7, one hall) |
 | her answers | "Step aside." 0 · "Don't move." +1, cap 19 (cap 39 from Curious) · "Push back into him." (Bold) +1, cap 59 |
 | every way out | "Drink your coffee." |
 
@@ -98,7 +98,7 @@ C4, "Leave the door unlocked.", sits on the shower itself and raises these odds 
 
 | row | answer |
 |---|---|
-| want | his: he stops on the stairs or in the door and watches the screen with her |
+| want | his: he stops in the doorway and watches the screen with her |
 | next step | "Leave it on." from Curious |
 | hook | Mark: `mark_caught_ch5` gives him a line in his late hub for 24 hours · Ryan, Laura: a flag nothing reads yet |
 | screen 1 | "He's seen the screen." · his Lust +2 · Laura: "She's seen the screen." · nothing moves |
@@ -212,19 +212,19 @@ One row per explicit screen in the built game: 3 or more words on the build's ow
 | screen | words | counted words | sits at | the text |
 |---|---|---|---|---|
 | `walkin_shower_ryan` · `answer` | 119 | 4: tits ×2, naked, cock | Ryan's middle column | written out below |
-| `walkin_shower_kayla` · `answer` | 73 | 3: tits ×2, pussy | Kayla: no column on SP2; crude words used: pussy, tits | written out below |
+| `walkin_shower_kayla` · `answer` | 72 | 3: tits ×2, pussy | Kayla: no column on SP2; crude words used: pussy, tits | written out below |
 | `walkin_shower_kayla` · `k_cov` | 53 | 4: tits ×3, nipples | Kayla: no column on SP2; crude words used: tits | written out below |
 | `walkin_shower_kayla` · `k_sho` | 59 | 3: ass ×2, nipples | Kayla: no column on SP2; crude words used: ass | written out below |
 | `walkin_shower_mark` · `answer` | 165 | 3: naked, tits, pussy | Mark's middle column; also pussy | written out below |
-| `walkin_kitchen_ryan` · `r_stay` | 59 | 3: cock, ass, nipples | Ryan's middle column; also nipples | written out below |
+| `walkin_kitchen_ryan` · `r_stay` | 62 | 3: cock, ass, nipples | Ryan's middle column; also nipples | written out below |
 | `walkin_tv_mark_garage` · `moment` | 83 | 4: cock, tits, thrust, moans | Mark's middle column | written out below |
 | `walkin_tv_mark_kitchen` · `moment` | 73 | 4: cock, kisses, tits, moaning | Mark's middle column | written out below |
 | `walkin_tv_mark_kitchen` · `m_gg` | 63 | 3: licks, nipple, nipples | under Mark's columns; also nipples | written out below |
 | `walkin_tv_ryan` · `moment` | 72 | 3: tits, ass, moans | Ryan's early column | written out below |
-| `walkin_tv_ryan` · `answer` | 56 | 3: cock, moans, tits | Ryan's middle column | written out below |
+| `walkin_tv_ryan` · `answer` | 58 | 3: cock, moans, tits | Ryan's middle column | written out below |
 | `walkin_tv_ryan` · `r_cur` | 77 | 3: moans, cock, fuck | Ryan's late column | written out below |
 | `walkin_mirror_ryan` · `answer` | 200 | 7: tits ×2, ass ×2, naked, pussy, nipples | Ryan's early column; also nipples, pussy | written out below |
-| `walkin_mirror_mark` · `answer` | 214 | 7: tits ×2, ass ×2, naked, pussy, nipples | Mark's middle column; also nipples, pussy | written out below |
+| `walkin_mirror_mark` · `answer` | 208 | 7: tits ×2, ass ×2, naked, pussy, nipples | Mark's middle column; also nipples, pussy | written out below |
 | `walkin_wardrobe_mark` · `answer` | 222 | 7: tits ×4, nipples ×3 | Mark's middle column; also nipples | written out below |
 | `walkin_wardrobe_mark` · `m_look` | 143 | 3: nipples ×2, tits | Mark's middle column; also nipples | written out below |
 
@@ -234,9 +234,9 @@ The screens not written out above, as built:
 
 > You're naked and wet three feet from him. His eyes go straight to your tits, then down, all the way down, and come back up slow. He goes red to the ears. He turns side-on, too late. The front of his shorts is already tenting. Shit. Sorry. I didn't. The lock. I didn't know you were in here. Well, now you know. He doesn't go red. He leans on the door frame and keeps looking at your tits. His cock is hard in his shorts, and he doesn't turn it away. Don't mind me. I'm just getting my toothbrush. Your toothbrush is on the sink, Ryan. You left the door unlocked for this. For somebody to walk through it.
 
-- `walkin_shower_kayla` · `answer` · 73 words · 3 counted:
+- `walkin_shower_kayla` · `answer` · 72 words · 3 counted:
 
-> She pees with the shower running and looks you over the whole time, from your wet tits down to your pussy and back up. Oh, hi. Don't mind me. Your bathroom's nicer than his. She flushes and doesn't leave. She leans on the sink and looks at your tits like she's comparing. Look at you, step-sister. And you're in my bathroom. You left the lock off. Somebody was always going to use it.
+> She pees with the shower running and looks you over the whole time, from your wet tits down to your pussy and back up. Oh, hi. Don't mind me. I couldn't hold it. She flushes and doesn't leave. She leans on the sink and looks at your tits like she's comparing. Look at you, step-sister. And you're in my bathroom. You left the lock off. Somebody was always going to use it.
 
 - `walkin_shower_kayla` · `k_cov` · 53 words · 4 counted:
 
@@ -250,9 +250,9 @@ The screens not written out above, as built:
 
 > You're naked under the water. His eyes go to your tits and stay there. Then lower, to your pussy, and they stay there too. Then he catches himself. He turns to the sink, hard, and puts his eyes on the tiles above the tap. He turns his hip to you, so the front of his jeans faces the wall. Sink's the only one with hot water. I'll be one minute. Don't. Don't what? Don't stand there like that. Wash, girl. He doesn't look away. He turns the tap on at the sink and scrubs his hands, and in the mirror his eyes are on you the whole time. Sink's the only one with hot water. Don't mind me. He doesn't look away. He turns the tap on at the sink and scrubs his hands, and in the mirror his eyes are on you the whole time. Don't stop on my account. You left the lock off, and he walked right in. You knew he might.
 
-- `walkin_kitchen_ryan` · `r_stay` · 59 words · 3 counted:
+- `walkin_kitchen_ryan` · `r_stay` · 62 words · 3 counted:
 
-> You don't move. You stand there with his cock pressed into your ass and let him feel you not moving. Your nipples go hard. @player.nickname. You're. You're not moving. Neither are you. He breathes out, shaky, and steps back. He takes his mug upstairs and doesn't look at you once. He felt you stay. He knows you felt him.
+> You don't move. You stand there with his cock pressed into your ass and let him feel you not moving. Your nipples go hard. @player.nickname. You're. You're not moving. Neither are you. He breathes out, shaky, and steps back. He takes his mug back to his room and doesn't look at you once. He felt you stay. He knows you felt him.
 
 - `walkin_tv_mark_garage` · `moment` · 83 words · 4 counted:
 
@@ -268,11 +268,11 @@ The screens not written out above, as built:
 
 - `walkin_tv_ryan` · `moment` · 72 words · 3 counted:
 
-> You drop onto the couch and flick to channel 5. A man flat on his back and a girl riding him, her tits bouncing, his hands full of her ass. You left the sound up. Her moans go all the way up the stairs. You keep the sound low, and you keep one eye on the hall door. Ryan comes down the stairs for the TV and stops on the last one.
+> You drop onto the couch and flick to channel 5. A man flat on his back and a girl riding him, her tits bouncing, his hands full of her ass. You left the sound up. Her moans go all the way down the hall. You keep the sound low, and you keep one eye on the hall door. Ryan comes in from the hall for the TV and stops in the doorway.
 
-- `walkin_tv_ryan` · `answer` · 56 words · 3 counted:
+- `walkin_tv_ryan` · `answer` · 58 words · 3 counted:
 
-> He looks at the screen. She drops down on the man's cock, and she moans. Then he looks at you. Seriously, @player.nickname? It's the middle of the day. And? He goes red, but he doesn't go back up. His eyes go back to her tits on the screen, and he shoves his hands in his pockets.
+> He looks at the screen. She drops down on the man's cock, and she moans. Then he looks at you. Seriously, @player.nickname? It's the middle of the day. And? He goes red, but he doesn't go back to his room. His eyes go back to her tits on the screen, and he shoves his hands in his pockets.
 
 - `walkin_tv_ryan` · `r_cur` · 77 words · 3 counted:
 
@@ -282,9 +282,9 @@ The screens not written out above, as built:
 
 > You're in a towel. From his doorway, in the glass, his eyes go to the knot over your tits, then down your bare thighs. You're naked. From his doorway, in the glass, his eyes go straight to your tits, then down to your pussy, and stay. Bra and panties. From his doorway, his eyes go down your back to your ass in your panties. Nothing under your skirt, and it's short. From his doorway, his eyes go to the backs of your thighs and up, to where the hem stops. Your skirt is short. From his doorway, his eyes go up the backs of your bare thighs to your hem. No bra. From his doorway, in the glass, his eyes find your nipples through your top. You're dressed. From his doorway, his eyes go down your back to your ass anyway. Half dressed. From his doorway, his eyes go to what's missing first. He catches you catching him in the glass. He goes red and looks at the carpet. Is the bathroom free? Since when do you ask? Since now. Is it? He catches your eyes in the glass and doesn't look away. Looking good, @player.nickname. Going somewhere? Not anymore.
 
-- `walkin_mirror_mark` · `answer` · 214 words · 7 counted:
+- `walkin_mirror_mark` · `answer` · 208 words · 7 counted:
 
-> You're in a towel. From the top step, in the glass, his eyes go to the knot over your tits, then down your bare thighs. You're naked. From the top step, in the glass, his eyes go straight to your tits, then down to your pussy, and stay. Bra and panties. From the top step, his eyes go down your back to your ass in your panties. Nothing under your skirt, and it's short. From the top step, his eyes go to the backs of your thighs and up, to where the hem stops. Your skirt is short. From the top step, his eyes go up the backs of your bare thighs to your hem. No bra. From the top step, in the glass, his eyes find your nipples through your top. You're dressed. From the top step, his eyes go down your back to your ass anyway. Half dressed. From the top step, his eyes go to what's missing first. His hand tightens on the rail. Then he catches himself. He looks down at the stair carpet, at his own feet, anywhere but the glass. Bit late to be dressing up, @player. Bed. Night, Mark. Night. He stands there and doesn't pretend he's doing anything else. Bit late to be dressing up, @player.
+> You're in a towel. From behind you, in the glass, his eyes go to the knot over your tits, then down your bare thighs. You're naked. From behind you, in the glass, his eyes go straight to your tits, then down to your pussy, and stay. Bra and panties. From behind you, his eyes go down your back to your ass in your panties. Nothing under your skirt, and it's short. From behind you, his eyes go to the backs of your thighs and up, to where the hem stops. Your skirt is short. From behind you, his eyes go up the backs of your bare thighs to your hem. No bra. From behind you, in the glass, his eyes find your nipples through your top. You're dressed. From behind you, his eyes go down your back to your ass anyway. Half dressed. From behind you, his eyes go to what's missing first. His hands close into fists at his sides. Then he catches himself. He looks down at the hall carpet, at his own feet, anywhere but the glass. Bit late to be dressing up, @player. Bed. Night, Mark. Night. He stands there and doesn't pretend he's doing anything else. Bit late to be dressing up, @player.
 
 - `walkin_wardrobe_mark` · `answer` · 222 words · 7 counted:
 

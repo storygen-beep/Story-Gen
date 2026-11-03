@@ -139,16 +139,17 @@ Built differently from the proposal, for LO to confirm (DECISIONS 150): B10-B13 
 | want | she slaps Ella's ass at the park gates: "Race you." |
 | next step | "Run with her." or "Dare me, Zo." (her park dare) |
 | hook | her park run and dare |
-| the no | "Let her run on." pays 0 |
+| the no | "Let her run on." pays 0; Zoe answers it on `z_on` |
 
 **`walkin_run_zoe`** — Park · needs `opening_done` · not `walkin_run_zoe_today` · not `walkin_rest_zoe_today` · Zoe in Park · `zoe_met` · Sat/Sun · 08:00-08:15 · repeatable · walk-in only
 
 | node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
 |---|---|---|---|---|
 | `moment` | You're stretching against the park gates, bent over your knees, when somebody comes up behind you … | no | "You spin round." → `answer` | `walkin_run_zoe_today` set · `walkin_rest_zoe_today` set · `zoe_caught_up` set |
-| `answer` | Zoe, in tiny shorts and a sports top, bouncing on her toes, grinning. | no | "Let her run on." → Park | — |
+| `answer` | Zoe, in tiny shorts and a sports top, bouncing on her toes, grinning. | no | "Let her run on." → `z_on` | — |
 |  |  |  | "Run with her." → `hub_zoe_park` `path` | — |
 |  |  |  | "Dare me, Zo." (top on) → `zoe_park_dare` `ask` | — |
+| `z_on` | "Go on without me, Zo." · Zoe: "Your loss. You're still buying the coffee." She slaps her ass again and runs off | no | "Watch her go." → Park | — |
 
 ## B13 · `walkin_rest_zoe`
 
@@ -159,29 +160,30 @@ Built differently from the proposal, for LO to confirm (DECISIONS 150): B10-B13 
 | want | her head in Ella's lap on the bench, her hand on her hip |
 | next step | "Run with her." or "Dare me, Zo." |
 | hook | her park run and dare |
-| the no | "Let her run on." pays 0 |
+| the no | "Let her run on." pays 0; Zoe answers it on `z_on` |
 
 **`walkin_rest_zoe`** — Park · needs `opening_done` · not `walkin_rest_zoe_today` · not `walkin_run_zoe_today` · Zoe in Park · `zoe_met` · Sat/Sun · 08:00-08:15 · repeatable · walk-in only
 
 | node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
 |---|---|---|---|---|
 | `moment` | You're stretched out on a bench by the pond with your eyes shut when somebody drops … | no | "A head lands in your lap." → `answer` | `walkin_rest_zoe_today` set · `walkin_run_zoe_today` set · `zoe_caught_up` set |
-| `answer` | Zoe, in tiny shorts and a sports top, her ponytail spread across your thighs, her face … | no | "Let her run on." → Park | — |
+| `answer` | Zoe, in tiny shorts and a sports top, her ponytail spread across your thighs, her face … | no | "Let her run on." → `z_on` | — |
 |  |  |  | "Run with her." → `hub_zoe_park` `path` | — |
 |  |  |  | "Dare me, Zo." (top on) → `zoe_park_dare` `ask` | — |
+| `z_on` | "I'm not running, Zo. Go." · Zoe: "Lazy. Fine. Keep my pillow warm." She pats her thigh and jogs off | no | "Watch her go." → Park | — |
 
 ## B14 · `walkin_tub_zoe`
 
 | row | answer |
 |---|---|
 | host · who | `party_house_soak` · Zoe, the deck watching |
-| when | Sat 23:30-00:00 · odds 0.25, 0.35, 0.45 |
+| when | Sat 23:30-23:45 (pass 4: every screen lands before Zoe leaves at midnight) · odds 0.25, 0.35, 0.45 |
 | want | under the water her fingers brush Ella's pussy |
 | next step | "Let her." (after `zoe_together`, Hungry) |
 | hook | none in the build: nothing reads `zoe_in_the_tub` |
 | the no | "Not here, Zo." or "Get out, dripping." |
 
-**`walkin_tub_zoe`** — The Party House · needs `opening_done` · not `walkin_tub_zoe_today` · Zoe in The Party House · `zoe_met` · Sat · 23:30-00:00 · repeatable · walk-in only
+**`walkin_tub_zoe`** — The Party House · needs `opening_done` · not `walkin_tub_zoe_today` · Zoe in The Party House · `zoe_met` · Sat · 23:30-23:45 · repeatable · walk-in only
 
 | node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
 |---|---|---|---|---|
@@ -244,7 +246,7 @@ Built differently from the proposal, for LO to confirm (DECISIONS 150): B10-B13 
 | when | Mon/Wed/Fri 08:30-08:45; Thu 13:00-13:15 · odds 0.25, 0.35, 0.45 |
 | want | his eyes on her legs, a second too long |
 | next step | "Sit on the front desk while he sets up." (Daring) |
-| hook | none in the build: nothing reads `hale_early_look` |
+| hook | her thought on both answers: his office hours, Thursday at five, with the door shut (reader pass 4, 2026-11-04) |
 | the no | "Take a seat." pays 0 |
 
 **`walkin_hall_hale`** — Lecture Hall · needs `opening_done` · not `walkin_hall_hale_today` · Dr. Hale in Lecture Hall · `hale_met` · `hale_01_done` · repeatable · walk-in only
@@ -345,7 +347,7 @@ Built differently from the proposal, for LO to confirm (DECISIONS 150): B10-B13 
 | host · who | `door_grade_bio` · the Biology TA |
 | when | in the walker's own hours · odds 0.25 |
 | want | her eyes go down Ella and snap back up |
-| next step | none: one screen |
+| next step | "The kettle's just boiled. You can come in, if you want." (her office, where "Step back." lands in her hours) |
 | hook | her office hub reads `ta_door_seen` |
 | the no | one screen: "Step back." |
 
@@ -381,13 +383,14 @@ Built differently from the proposal, for LO to confirm (DECISIONS 150): B10-B13 
 | want | his eyes down her legs: "Checking up on me?" |
 | next step | "Come in or don't." His office hours |
 | hook | his office hub reads `hale_door_seen` |
-| the no | one screen: "Step back." |
+| the no | "Step back." lands on `no`: before his step 3 he watches her legs go; from his step 3, "Suit yourself. You know where I am on Thursdays." and he shuts the door |
 
 **`walkin_door_hale`** — Dr. Hale's Office · needs `opening_done` · not `walkin_door_hale_today` · Dr. Hale in Dr. Hale's Office · `hale_met` · repeatable · walk-in only
 
 | node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
 |---|---|---|---|---|
-| `door` | You've got your finger on your grade when Dr. Hale opens his door. | no | "Step back." → Dr. Hale's Office | `walkin_door_hale_today` set · `hale_door_seen` set |
+| `door` | You've got your finger on your grade when Dr. Hale opens his door. | no | "Step back." → `no` | — |
+| `no` | You step back. He watches your legs go, and lets the door swing shut. (before his step 3) · You take a step back from his door. (from his step 3) | no | "Walk away." → Dr. Hale's Office | `walkin_door_hale_today` set · `hale_door_seen` set |
 
 ## B20 · `walkin_door_business`
 

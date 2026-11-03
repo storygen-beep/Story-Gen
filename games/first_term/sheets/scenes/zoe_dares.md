@@ -209,7 +209,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > He's Jake's teammate. He'll tell Jake, or he won't.
 
-**`zoe_dares` · `high_show`** — 260 words · 8 counted: tits, ass, nipple, tits, tits, nipple, tits, nipple · ceiling: Zoe's early and middle columns: tits, ass, nipples, wet; his cock only through his jeans
+**`zoe_dares` · `high_show`** — 261 words · 8 counted: tits, ass, nipple, tits, tits, nipple, tits, nipple · ceiling: Zoe's early and middle columns: tits, ass, nipples, wet; his cock only through his jeans
 
 > Start the song.
 >
@@ -229,7 +229,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > Zoe, your friends are the best thing about this party.
 >
-> Put them away, babe. Or don't. Your call.
+> Covered or not, babe, nobody here is forgetting those.
 >
 > Half this party knows Jake.
 

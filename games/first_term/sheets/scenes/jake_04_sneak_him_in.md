@@ -18,8 +18,8 @@
 | want | the car after his dates (the date end, Bold): he wants more than the car |
 | next step | she sneaks him in: Kayla's move, reversed |
 | hook | Ryan's next-morning line; Monday, the team knows; the sneak-in repeat opens |
-| who notices | **Ryan, through the wall** (from his step 5) · a footstep on the landing when her door has no key |
-| what she risks | Laura and Mark across the landing; the door that won't lock |
+| who notices | **Ryan, through the wall** (from his step 5) · a footstep in the hall when her door has no key |
+| what she risks | Laura and Mark down the hall; the door that won't lock |
 | what she wears here | not named; "your clothes" come off in the act |
 | her voice | stage 3 (Bold) |
 | the crude-word ceiling | Jake's late column: cock, fuck, cum (signed with the proposal, LO 2026-11-01), with ass, tits and plain anatomy (nipples, clit, wet, thighs) · no pussy, cunt |
@@ -35,7 +35,7 @@ The seven columns, filled from what the build does.
 
 | the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
 |---|---|---|---|---|---|---|
-| she sneaks him up; they fuck on her bed against Ryan's wall | Ryan, through the wall; a footstep if her door is unlocked | Laura and Mark across the landing | "Come up." then "Harder." | "Your room. Now." He pins her wrists | yes, on the body | his step 4; `jake_first_time`; Corruption +3; Ryan's Want +5 |
+| she sneaks him up; they fuck on her bed against Ryan's wall | Ryan, through the wall; a footstep if her door is unlocked | Laura and Mark down the hall | "Come up." then "Harder." | "Your room. Now." He pins her wrists | yes, on the body | his step 4; `jake_first_time`; Corruption +3; Ryan's Want +5 |
 
 ## Branch map — as built (2026-11-03)
 
@@ -75,8 +75,8 @@ Every last sentence is on the bodies (the headboard and his cock; still inside h
 
 ## The other screens (mine, signed by LO 2026-11-01)
 
-**`door`:** "Jake walks you up to the porch and stops under the light. You don't let go of his hand. You open the front door and pull him in after you." · @player, a whisper: "Come up." · "On the dark stairs he catches your hip and his breath is hot on your ear." · Jake: "Your room. Now."
-**`landing`:** "A footstep on the landing. You both freeze. Your door has no key, not since Sunday." · "Jake's hand goes over your mouth. The footstep stops, and then goes on, and a door closes." · "He doesn't pull out. He starts again, slower."
+**`door`:** "Jake walks you up to the porch and stops under the light. You don't let go of his hand. You open the front door and pull him in after you." · @player, a whisper: "Come up." · "In the dark hall he catches your hip and his breath is hot on your ear." · Jake: "Your room. Now."
+**`landing`:** "A footstep in the hall. You both freeze. Your door has no key. Mark's still got it." · "Jake's hand goes over your mouth. The footstep stops, and then goes on, and a door closes." · "He doesn't pull out. He starts again, slower."
 **`after`:** "Jake pulls you in against his chest and mumbles it into your hair, already half asleep." · Jake: "Next Saturday. Same room." · "He's asleep in under a minute, one arm heavy across you, taking up most of the bed." · if `ryan_step` gte 5: "Through the wall, very low, so low you might have dreamed it:" · Ryan: "…@player.nickname?" · *(thought)* "He heard. Every second."
 
 ## After it

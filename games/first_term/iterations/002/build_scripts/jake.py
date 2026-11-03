@@ -16,6 +16,7 @@ def done(n):
 
 SKIRT = {"type": "worn_type", "operator": "eq", "value": "short_skirt"}
 LAURA_DRESS = {"type": "clothing_item", "item_id": "laura_blue_dress", "operator": "equipped"}
+ANY_ = [{"type": "worn_exposure", "operator": "gte", "value": 0}]   # always true: a chain's else
 ZOE_DRESS = {"type": "clothing_item", "item_id": "zoe_party_dress", "operator": "equipped"}
 NO_CURFEW = cond(NO_CURFEW_ITEM)
 
@@ -68,15 +69,22 @@ out.append({
         ], [go("\"Don't stop.\"", node="ryan", mins=3, eff=[nadd(R, "warmth", -15), nadd(R, "want", 5)])]),
         node("ryan", "Ryan", [
             P("The front door opens behind you. Ryan stands in the doorway and stops dead. You're on the porch rail with your legs locked round Jake's waist, kissing him. Jake's hands are full of your ass. You don't climb down. You look straight at Ryan over Jake's shoulder and hold it. \"Ryan, this is Jake. My boyfriend.\" Ryan's jaw goes tight. His eyes drop to Jake's hands on you, then come back to your face. \"Great.\" Jake grins over his shoulder, not getting it. \"Your brother hates me.\" *Good. Look all you want, Ryan.* Ryan steps back inside without another word. The door slams hard."),
-            P("Behind Jake's shoulder, in the dark living-room window, a shape on the couch hasn't moved."),
+            G(cond(here_at(L, "home_living_room")), P("Behind Jake's shoulder, in the dark living-room window, a shape on the couch hasn't moved.")),   # pass 4: only while she is on it
         ], [go("\"Goodnight, Jake.\"", node="after", mins=5)]),  # Ryan's -15 / +5 moved onto "Don't stop." (the moment he sees her)
         node("after", "Next Saturday", [
             P("Jake goes off down the path, whistling. You let yourself in."),
-            P("The living room is dark. Laura is on the couch with her knees pulled up and her hand at her throat, and she doesn't pretend she wasn't watching."),
-            D(L, "Was he any good?"),
-            G(cond(LAURA_DRESS), ME("Better in your dress.")),
-            G(cond({"type": "clothing_item", "item_id": "laura_blue_dress", "operator": "unequipped"}), ME("Better with you watching.")),
-            P("She makes a sound in her throat, but she doesn't get up."),
+            # pass 4 reader (true on every visit): the window runs to 00:00 and this screen is 11 minutes in; at midnight
+            # Laura leaves the living room (the hall, or asleep in her room), so where she is picks the line
+            GC(cond(here_at(L, "home_living_room")),
+               P("The living room is dark. Laura is on the couch with her knees pulled up and her hand at her throat, and she doesn't pretend she wasn't watching.")),
+            GC(cond(here_at(L, "home_hall")),
+               P("The hall lamp is off. Laura is on the bench by the coats with her knees pulled up and her hand at her throat. She came out of the dark living room when the door slammed, and she doesn't pretend she wasn't watching.")),
+            GC(cond(*ANY_), P("The living room is dark and empty. Down the hall Laura's door is shut. The couch cushion at her end is still dented.")),
+            *[blk for where in ("home_living_room", "home_hall") for blk in (
+                G(cond(here_at(L, where)), D(L, "Was he any good?")),
+                G(cond(here_at(L, where), LAURA_DRESS), ME("Better in your dress.")),
+                G(cond(here_at(L, where), {"type": "clothing_item", "item_id": "laura_blue_dress", "operator": "unequipped"}), ME("Better with you watching.")),
+                G(cond(here_at(L, where)), P("She makes a sound in her throat, but she doesn't get up.")))],
             P("You go down the hall. Ryan's door is shut, and his light is on under it. You stand outside it a second. You don't knock, but you don't move either. You wanted him to see. You said Jake's name to his face on purpose, and you're not sorry. Not even a little. Jake will want a next Saturday. You already know it. Your phone buzzes in your hand. It's Jake: \"Next Saturday?\" Under Ryan's door, the light goes out."),
             D(R, "Who's Jake, @player.nickname? Really. Who is he?"),
             P("He says it through the door, low, but he doesn't open it."),
@@ -147,6 +155,8 @@ out.append({
         node("door", "Come up", [
             P("Jake walks you up to the porch and stops under the light. You don't let go of his hand. You open the front door and pull him in after you."),
             ME("Come up."),
+            # reader pass 4 b4: Laura waits up in the living room Sat 22:00-00:00; the sneak-in passes her doorway
+            G(cond(here_at(L, "home_living_room")), P("The living-room doorway flickers blue. Mom's on the couch in the dark with the TV on low, waiting up, her back to the hall. You get him past it on your toes, his hand on your ass the whole way.")),
             P("In the dark hall he catches your hip and his breath is hot on your ear."),
             D(J, "Your room. Now."),
         ], [go("\"Quiet.\"", node="bed", mins=5),
@@ -225,7 +235,8 @@ out.append({
             go("\"Your hand. Now.\"", node="car_his", mins=2, cond_=cond(trait("corruption", "gte", 60), trait("jake_step", "gte", 3)), costs=[{"trait": "energy", "value": 10}], eff=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}]),
             go("\"Lean back.\"", node="car_hers", mins=2, cond_=cond(trait("corruption", "gte", 60), trait("jake_step", "gte", 3)), costs=[{"trait": "energy", "value": 10}], eff=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}]),
             # Saturday only: Laura waits up on Saturday nights (her rows), which the near-catch reads
-            go("\"Come up.\"", node="sneak", mins=5, cond_=cond(trait("jake_step", "gte", 4), wd(5)),
+            go("\"Come up.\"", node="sneak", mins=5, cond_=cond(trait("jake_step", "gte", 4), wd(5),
+                                                          {"type": "npc_at_location", "location_id": "home_hall", "npc_id": "npc_laura", "operator": "is_absent"}),   # pass 4 reader: never walk into Laura waiting in the hall
                eff=[{"targetType": "player", "trait": "jake_catch_roll", "op": "set", "value": {"type": "random", "min": 1, "max": 8}}]),
             go("\"Goodnight, Jake.\"", node="night", mins=2),
         ]),
@@ -241,7 +252,7 @@ out.append({
             VID("a girl giving her boyfriend a handjob in a parked car, a passer-by looking", "handjob in parked car", "car handjob caught", pool_dir="sex/jake_car_hers_t5"),
             D(J, "Fuck. That guy saw. That guy totally saw."), ME("Good. Now he knows whose you are.")],
             [go("\"Goodnight, gorgeous.\"", loc="home_hall", mins=20, eff=CAR_PAY(79), flags=[funset("jake_date_booked")])]),
-        node("sneak", "Up the stairs", [   # Q7: the title stays with its signed beat (jake_date_end.md `sneak`, "up the stairs") until the sheet is re-signed
+        node("sneak", "Down the hall", [   # Q7: one hall (the sheet beat reads "down the dark hall")
             POOL(P(beat("jake_date_end", "`sneak` a")), P(beat("jake_date_end", "`sneak` b")), pid="jake_sneak", bag=True),
             # (reader fix) Laura is downstairs, waiting up, on a Saturday night: her feet on the stairs, not her door
             G(cond(ROLL("eq", 1)), P("In the living room the TV goes quiet. Laura's feet in the hall. You both stop breathing. They stop halfway, and go back."),

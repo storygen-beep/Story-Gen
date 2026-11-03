@@ -8,8 +8,8 @@
 | row | answer |
 |---|---|
 | system | her suspicion (`laura_suspicion`), `npc_laura.md` |
-| where · when | the dark stairs, `home_hall` · her stairs row, every day 23:00–02:00, only when `came_home_late` was set in the last 4 hours (as built) |
-| gate | `came_home_late` set · Laura present (her stairs row). No `laura_step` read |
+| where · when | the dark hall, `home_hall` · her hall row, every day 23:00–02:00, only when `came_home_late` was set in the last 4 hours (as built) |
+| gate | `came_home_late` set · Laura present (her hall row). No `laura_step` read |
 | fires | once a day at most (`laura_caught_today`), within 4 hours of `came_home_late` |
 | want | Laura's, on the high side: "Did anyone look at you?" |
 | next step | none: a house rule, not a step |
@@ -20,7 +20,7 @@
 
 | node | what happens | exits | effects |
 |---|---|---|---|
-| `stairs` | Laura on the stairs in the lamp; what she smells follows the late flag (as built) | "Wait for it." → `low` or `high` | `laura_suspicion` add +5 |
+| `stairs` | Laura in the dark hall, in the lamp; what she smells follows the late flag (as built) | "Wait for it." → `low` or `high` | `laura_suspicion` add +5 |
 | `low` | "You're grounded. A week." | "Fine." · the truth ("Zoe's.", "Work." or "Out with Jake.", by where she was) → her room · a lie ("... (she'll know)") → `lie` | curfew 7 days · `came_home_late` cleared |
 | `lie` | "Bed. Now." | "Goodnight, Mom." → her room | Laura's Love add −5 · `laura_suspicion` add +5 · the curfew |
 | `high` | "I'm not angry. I was nineteen once." · "Did anyone look at you?" | "Everyone." → her room | `came_home_late` cleared (was: Want +10, `laura_step` 2) |

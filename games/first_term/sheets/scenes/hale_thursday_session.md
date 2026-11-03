@@ -21,7 +21,7 @@
 | two tiers | `touch_low` (Corruption under 60): over her clothes, she says what she feels · `touch_high` (Corruption 60) |
 | pays | each session: Psychology grade +2 · Corruption +1 (cap 59, or 79 high) · Exhibitionism +1 (cap 59) |
 | the three answers | every session: "Let him." · "This isn't coaching." (`grade_psych` add −1) · Run. (`grade_psych` add −2). Each no costs only grade |
-| Claire in the car park | "Let him." rolls Claire's Thursday 1-4; on 1 his phone ends it, grade +2 |
+| Claire in the parking lot | "Let him." rolls Claire's Thursday 1-4; on 1 his phone ends it, grade +2 |
 | the pools | each tier is a `block_pool`, three entries, `memory = "seen"`, `seen_weight = 0` (the shuffle bag, DECISIONS 112) |
 | the crude-word ceiling | Hale's middle column (tits, nipples, cock: his, only hard under his trousers) with plain anatomy beside it (ass, thighs, wet, clit), as Ryan's signed sheets (DECISIONS 114) · no fuck, cum, pussy, cunt (his late column is not used: it goes no further) · the same as his step 4 |
 | truth | weekly: no "first time", no "again", no counting, no history |
@@ -51,6 +51,8 @@ One row per exit. Read from the build; it replaces the drafted map.
 ## The pools, written
 
 Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Shared brief: he leads, touches, nothing of his comes out, no garment of hers named.
+
+In a one-piece the build swaps "your top" for the garment she has on: "your dress" in the blue dress or Zoe's party dress, "your uniform" in either café uniform (pass 4 reader, 2026-11-04: the uniforms sit in the dress slot, so there is no top).
 
 ### `touch_low` (Curious and Daring)
 

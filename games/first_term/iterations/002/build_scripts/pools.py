@@ -136,7 +136,7 @@ REGULAR_FLAG = {"cocky": "cocky_guy_dared", "keg": "keg_guy_dared"}
 # pass 3 B4: the room talks after each dare (the keg guy has no NPC: WHO, speaker "unknown")
 DARE_SAID = {"low_show": [WHO("Holy shit. Again. Do it again."), D(Z, "That's my girl. His drinks are yours now.")],
              "low_do": [D(C, "Fuck. Zoe should dare you more often."), D(Z, "Okay, okay, break it up before he proposes.")],
-             "high_show": [WHO("Zoe, your friends are the best thing about this party."), D(Z, "Put them away, babe. Or don't. Your call.")],
+             "high_show": [WHO("Zoe, your friends are the best thing about this party."), D(Z, "Covered or not, babe, nobody here is forgetting those.")],
              "high_do": [D(C, "Please. Fuck. Please, okay? I'm begging."), D(Z, "You heard him. He begged. Dare done.")],
              "z_show": [D(Z, "Mm. You taste like vodka. Again."), ME("Everyone's watching us."), D(Z, "That's the point, babe.")],
              "z_do": [D(Z, "Slower. Make him wait for it."), D(C, "Jesus Christ, you two are going to kill me.")]}
@@ -490,7 +490,7 @@ out.append({
         node("down", "Skirt down", [
             P("You clamp your skirt to the backs of your thighs with one hand, straighten up and get down the hall fast."),
             G(cond(MARK_BELOW), D(M, "Better."),
-              P("He's still in the doorway when you reach your room, still looking at your legs.")),
+              P("He's still in the doorway when you reach the far end of the hall, still looking at your legs.")),   # pass 4 reader: "Go on." lands in the hall, not her room
             P("Mark's in that living room most nights. This hall will still be here."),
         ], [go("Go on.", loc="home_hall")])]})
 

@@ -38,7 +38,7 @@ streak lines, "Next Sunday. Same table."
 ## The pool, written (mine, signed by LO 2026-11-01)
 
 1. "He slides the envelope across to you to check, and keeps his fingers on it a second after you've taken it."
-2. "He doesn't say good morning. He says your name, once, and then he counts."
+2. "He says your name, once, and then nothing at all."
 3. "He puts the pencil behind his ear and looks at you instead of writing anything down."
 4. "He licks his thumb, and stops, and counts the rest without it."
 5. "When you stand up he watches you all the way to the door. He doesn't pretend he isn't."

@@ -35,9 +35,9 @@
 
 > Drafted before the build and kept as the signed record. Where it differs, the branch map and the beats above say what the build does.
 
-1. "You bend to wipe a table and the conversation at the next one stops. When you straighten up it starts again, lower."
-2. "Two men at the counter watch you walk to the kitchen and back. One of them says something. The other one laughs."
-3. "A man in a suit doesn't look at his menu once. He looks at you the whole time you take his order, and over-tips."
+1. "You bend to wipe a table and the conversation at the next one stops: every man at it is looking at your ass. When you straighten up it starts again, lower. Nobody touches. Not yet."
+2. "Two men at the counter watch your ass all the way to the kitchen and back. One of them says something. The other one laughs."
+3. "A man in a suit doesn't look at his menu once. He looks at your tits the whole time you take his order, and over-tips."
 
 ## Level 2 · They say it
 
@@ -114,7 +114,7 @@ One row per exit. Read from the build; it replaces the drafted map.
 
 Every screen the build counts as explicit (3+ words from the frozen list), word for word, with its measurement. It replaces the drafted text.
 
-**`cafe_shift` · `shift`** — 723 words · 12 counted: ass, ass, nipple, tits, ass, tits, ass, tits, ass, tits, ass, ass · ceiling: the café: tits, ass, nipples; level 3 adds wet, thighs, a cock through his trousers
+**`cafe_shift` · `shift`** — 736 words · 15 counted: ass, ass, nipple, tits, ass, ass, tits, ass, tits, ass, tits, ass, tits, ass, ass · ceiling: the café: tits, ass, nipples; level 3 adds wet, thighs, a cock through his trousers
 
 > The lunch rush hits all at once: twelve coffees, a birthday, a baby that screams through all of it. You carry plates until your arms burn. A man at table two watches you bend over to set his plate down, and stops, eyes on your ass.
 >
@@ -148,15 +148,15 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > Busy day, was it, dear? You might want a shower before the next one.
 >
-> You bend to wipe a table and the conversation at the next one stops. When you straighten up it starts again, lower.
+> You bend to wipe a table and the conversation at the next one stops: every man at it is looking at your ass. When you straighten up it starts again, lower. Nobody touches. Not yet.
 >
 > Don't mind us, honey. Carry on.
 >
-> Two men at the counter watch you walk to the kitchen and back. One of them says something. The other one laughs.
+> Two men at the counter watch your ass all the way to the kitchen and back. One of them says something. The other one laughs.
 >
 > Nice legs on the new girl. Turn around, baby, let's see the rest.
 >
-> A man in a suit doesn't look at his menu once. He looks at you the whole time you take his order, and over-tips.
+> A man in a suit doesn't look at his menu once. He looks at your tits the whole time you take his order, and over-tips.
 >
 > Whatever you're having. Surprise me. I'll be back tomorrow, same table.
 >
@@ -186,7 +186,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > You've got a lovely way of pouring, doll.
 >
-> The slow hours are the ones where somebody always tries it. All shift, men's eyes have been on your ass every time you bend to a table. Today one of them does more than look.
+> Sooner or later, somebody always tries it. All shift, men's eyes have been on your ass every time you bend to a table. Today one of them does more than look.
 >
 > Tom's rule since the back room: nothing by the window. Whatever happens now happens where the street can't see it.
 >

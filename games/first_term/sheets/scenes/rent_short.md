@@ -35,9 +35,9 @@ Lines: Mark: "Twice now. Vance comes round tonight, and Vance charges late. Fift
 
 | node | what happens | exits | effects |
 |---|---|---|---|
-| `take` | Mark names the first she owns of the skirt, the sheer blouse, the sports bra (that order), and takes it to the garage | "That's mine." → the kitchen · "Next week." when she owns none of the three, or all are held (his Power +5) | `garage_holds_<item>` set · that garment unequipped and locked in her wardrobe (🔒) · Mark's Power add +5 |
+| `take` | Mark names the first she owns of the skirt, the sheer blouse, the sports bra (that order), and takes it to the garage | "That's mine." → the kitchen · "Next week." when she owns none of the three, or all are held (his Power +5) | `garage_holds_<item>` set · that garment unequipped and locked in her wardrobe (🔒); if she had it on, she changes into her plain one (jeans, T-shirt, plain bra; pass 4 reader) · Mark's Power add +5 |
 
-Lines: Mark: "Three times." · "He doesn't shout. He gets up, goes upstairs, and comes back down with your <item> over his arm." · Mark: "Garage. On the table, then you get it back." · "Through the kitchen window you watch him hang it on the nail by his workbench, where you'll see it every time you walk past." · In her wardrobe, the item shows 🔒 with "In the garage. (Pay what you owe.)"
+Lines: Mark: "Three times." · "He doesn't shout. He gets up, goes down the hall, and comes back with the <item> over his arm. The one you bought." (worn: "He holds his hand out across the table for the <item> you've got on, and waits until you go and change and put it in his hand. The one you bought.") · Mark: "Garage. On the table, then you get it back." · "Through the kitchen window you watch him hang it on the nail by his workbench, where you'll see it every time you walk past." · In her wardrobe, the item shows 🔒 with "In the garage. (Pay what you owe.)"
 
 ## Paying it back (the count, any Sunday)
 

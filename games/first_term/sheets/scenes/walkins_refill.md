@@ -28,11 +28,11 @@ The same machine as the walk-ins at home and outside (`walkins_home.md`, `walkin
 
 | row | answer |
 |---|---|
-| who · when | Ryan, from his room · Saturday and Sunday 10:00–14:00 (after Kayla's Saturday row in his room ends at 10:00, before his TV row) |
+| who · when | Ryan, from his room · Saturday and Sunday, the nap starting 10:00–12:00 (after Kayla's Saturday row in his room ends at 10:00; the two-hour nap ends before his 14:00 TV row) |
 | want | his: he comes in for her phone charger and stands looking at her asleep on the covers |
-| her clothes | read on screen 1: towel come undone · naked · bra and panties · sleep shirt · short skirt · dressed · half dressed |
+| her clothes | read on screen 2, when she wakes: towel come undone · naked · bra and panties · sleep shirt · short skirt · dressed · half dressed |
 | his leak (H7) | under his Want 40 he goes red, turns to the wall and holds the charger in front of his shorts; from 40 he leans on her desk and keeps looking |
-| screen 1 | "He's looking at you." · his Lust +2 |
+| screen 1 | she lies down; "Sleep (2h)." spends the nap it replaces (120 minutes, energy +30, cap 100) · his Lust +2. The one walk-in that pays the refill: it is her nap, slept through before the door clicks (reader pass 4, 2026-11-04) |
 | her answers | "Pull the blanket over you." 0 · "Don't move." +1, cap 19 · "Stretch." (Daring) +1, cap 39 · "Roll onto your back." (Showing) +1, cap 59 |
 | not yet | "Not now. Not with the house this full." (on her Showing answer) |
 | hook | `ryan_saw_nap` is set; nothing reads it this release · "Lock your door next time. Or don't." |
@@ -65,10 +65,10 @@ The same machine as the walk-ins at home and outside (`walkins_home.md`, `walkin
 | who · when | Zoe, from her lunch row in the canteen · Monday–Friday 12:15–12:45 · after `zoe_met` |
 | want | hers: in to fix her lipstick, she pushes open the stall with the broken lock while @player washes, and leans on the frame to look |
 | her clothes | read on screen 1: top up with a bra · top up with no bra · anything else |
-| screen 1 | "She doesn't shut the door." · nothing moves |
+| screen 1 | "She doesn't shut the door." · hygiene add +15 (she washes, as `toilet_wash` pays; the one walk-in that pays its refill, pass 4) |
 | her answers | "Shove the door shut." 0 · "Keep washing." +1, cap 19 · "Turn round and do your back." (Daring) +1, cap 39 · "Let her look." (Showing) +1, cap 59 |
 | not yet | "Later. Not in a toilet stall. But later, babe." (Showing) |
-| hook | `zoe_saw_toilet` is set; nothing reads it this release · "Same time tomorrow?" |
+| hook | `zoe_saw_toilet` is set; nothing reads it this release · "I know where to find you at lunch now." · "Later. Not in a toilet stall. But later, babe." |
 | every way out | "Done." back to the toilets |
 | words | Zoe's early column: tits, ass |
 | the host | `toilet_wash` lives in `3_activities.toml`; its `substitutions` line is pasted there by hand and `extras.py` checks it against `walkins_out.RULES` |

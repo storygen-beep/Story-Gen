@@ -101,7 +101,7 @@ positions or none is named. The `vaginal` rung on some oral or hand screens is t
 
 **`kiss`** · 119 words · explicit words 7 · median sentence 10
 
-> You lean in and kiss him. You've had your hand on his cock and never once kissed him. He kisses you back, hard, and he doesn't stop. His mouth opens on yours. "@player.nickname," he breathes against your lips, and kisses you again. His hand slides up under your clothes and spreads flat on your bare back. His palm is hot. It drags slowly round your ribs, and then he cups your tits through the cloth. He squeezes. Your nipples go hard under his hand, and his thumb rubs one through it. You squirm closer on his bed. His cock is hard against your thigh through his shorts. *Don't stop. Not this time.* He grinds it into you, slow, and squeezes your tit again.
+> You lean in and kiss him. You've had your hand on his cock. Now you want his mouth. He kisses you back, hard, and he doesn't stop. His mouth opens on yours. "@player.nickname," he breathes against your lips, and kisses you again. His hand slides up under your clothes and spreads flat on your bare back. His palm is hot. It drags slowly round your ribs, and then he cups your tits through the cloth. He squeezes. Your nipples go hard under his hand, and his thumb rubs one through it. You squirm closer on his bed. His cock is hard against your thigh through his shorts. *Don't stop. Not this time.* He grinds it into you, slow, and squeezes your tit again.
 
 **`undress`** · 135 words · explicit words 8 · median sentence 11
 
@@ -189,7 +189,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Fixes after
 | not Friday | Kayla's night; the gate's weekday |
 | "the wall she listened through" on `wall_back` | `ryan_heard_her` (step 5 comes before step 8 on every save) |
 | Laura's light on `light`, `keep`, `freeze` | a light coming on under her door claims nothing about what she knows, so it needs no flag; Laura is in her room Sun–Thu from 22:00 on her row. (The older row above, "without it, the line names only her closed door", was never built and is superseded.) |
-| "Last time. With Kayla calling." on `talk` | step 7, `ryan_07_kayla_cant_know` (her hand on him while Kayla called), on every save that reaches step 8 |
+| "That night. With Kayla calling." on `talk` | step 7, `ryan_07_kayla_cant_know` (her hand on him while Kayla called), on every save that reaches step 8 |
 
 ## Why — the source of each key choice
 

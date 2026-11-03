@@ -257,6 +257,16 @@ def _ledger_schedules(pid):
 for _p in PEOPLE:
     _p["schedules"] = _ledger_schedules(_p["id"])
 
+# Jake's Wednesday date (W8, LO 2026-11-03, DECISIONS 138; reader pass 4 b5): the phone thread jake_date_wed books a
+# Wednesday ("wednesday? i'll pick you up", phone.py) and jake_date_pickup / jake_saturday_date both run on Wed and
+# Sat, but his ledger rows at the front door were Saturday only, so the pickup's requires_npc never found him on a
+# Wednesday. The same two rows on Wednesday, read through the same latches. The ledger (v2_state.json
+# board.characters npc_jake) has them Saturday only; it should carry Wednesday too.
+next(p for p in PEOPLE if p["id"] == "npc_jake")["schedules"] += [
+    row("home_front_door", [2], "19:00", "21:00", "picking you up", when=_ledger_when("jake_date_booked")),
+    row("home_front_door", [2], "22:00", "00:00", "walking you home", when=_ledger_when("jake_date_went")),
+]
+
 # Kayla (LO, 2026-11-03, "build now", pass 3 G37): she had walk-ins and lines but no row, so the truth
 # check and the Schedules page never knew where she was. These two rows are read off her scenes, not
 # invented: walkin_things_kayla has her let herself into Ryan's room Fri 17:45-18:00 with an overnight

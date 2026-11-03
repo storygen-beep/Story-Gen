@@ -25,7 +25,7 @@
 
 | the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
 |---|---|---|---|---|---|---|
-| Ryan sees her in the towel in the hall, and can't hide it | Ryan; Laura, calling up the stairs | empty: step 1 is an accident | empty: step 1 is an accident | he waits at the bathroom door and doesn't move out of her way | not a sex act: a look | Laura's rule (Ryan showers first); his doorway tease can open; the rent starts |
+| Ryan sees her in the towel in the hall, and can't hide it | Ryan; Laura, calling down the hall | empty: step 1 is an accident | empty: step 1 is an accident | he waits at the bathroom door and doesn't move out of her way | not a sex act: a look | Laura's rule (Ryan showers first); his doorway tease can open; the rent starts |
 
 Not on the map: the boot's `wake` and `problem` screens (Mark's rent, told the night before), and "Skip the opening", which sets step 1, his Want +10 and every opening flag and goes straight to the card.
 
@@ -43,7 +43,7 @@ Not on the map: the boot's `wake` and `problem` screens (Mark's rent, told the n
 | `rule` | Laura: "Ryan, you shower first from now on." | no | "Grab your bag." → `card` | `laura_rule_ryan_first` set |
 | `card` | the opening card and the plain lines | no | "Go to campus." · "Go to campus. (Turn hygiene off)" → the dean's office | `opening_done` set · `hygiene_off` set on the second |
 
-Laura calls up the stairs on every branch: *"@player, you'll be late on your first day!"* That is who notices.
+Laura calls down the hall on every branch: *"@player, you'll be late on your first day!"* That is who notices.
 
 ## Why — the source of each key choice
 

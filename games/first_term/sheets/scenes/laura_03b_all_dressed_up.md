@@ -18,7 +18,7 @@
 | want | she leaves her door open while she dresses (the leak) |
 | next step | she asks to be zipped, then asks if she's still someone you'd look at |
 | hook | `laura_lonely`: her alone-in-bed screen names this night after it |
-| who notices | Ella; Mark, not looking (he calls up from downstairs) |
+| who notices | Ella; Mark, not looking (he calls through the door from the hall) |
 | what she wears here | Laura: her good dress (named in prose, not an item) · Ella: not named |
 | explicit? | no: an ask |
 | her_line_low · her_line_high | low: "That's your mom. Go to bed." · high: "She's lonely, and you can't stop watching her be lonely." | The low line sits on the parked no; the high line is the thought on `bed`. |
@@ -30,14 +30,14 @@
 
 | the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
 |---|---|---|---|---|---|---|
-| she zips her mother into her good dress, and Laura asks if she's still worth looking at | Ella; Mark, calling up the stairs on his way out | empty on purpose: nothing of hers is at stake | "Hold still." | Laura: "Do I still look like someone you'd look at?" | not a sex act | `laura_lonely`; her bedroom door doesn't quite close on weeknights |
+| she zips her mother into her good dress, and Laura asks if she's still worth looking at | Ella; Mark, calling through the door on his way out | empty on purpose: nothing of hers is at stake | "Hold still." | Laura: "Do I still look like someone you'd look at?" | not a sex act | `laura_lonely`; her bedroom door doesn't quite close on weeknights |
 
 ## Branch map — one row per screen
 
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `zip` | her door open; Laura at the mirror in her good dress, the zip open to the small of her back: "Zip me up, sweetheart? Mark's useless at it." (built line) | no | "Hold still." → `zipped` · "Ask Mark." → `no` (parked) | none |
-| `zipped` | you zip her; Mark calls up the stairs that he's off to the bar; the front door goes | no | "Wait." → `bed` | none |
+| `zipped` | you zip her; Mark calls from the kitchen that he's heading out to the bar, and doesn't come to see her | no | "Wait." → `bed` | none |
 | `bed` | Laura sits on the end of the bed, dressed up, nowhere to go: "Do I still look like someone you'd look at?" | no | "You look beautiful, Mom." → `liar` · "Say nothing." → `quiet` | none |
 | `liar` | Laura: "Liar." Smiling, eyes wet. "On weeknights now, her bedroom door doesn't quite close." | no | "Goodnight, Mom." → the hall | Laura's Love add +5 · `laura_lonely` set · `laura_step` set 3 · `laura_06_done` set |
 | `quiet` | you sit beside her and say nothing; she leans her head on your shoulder | no | "Goodnight, Mom." → the hall | Laura's Love add +5 · `laura_lonely` set · `laura_step` set 3 · `laura_06_done` set |
@@ -48,7 +48,7 @@
 
 ## The lines (not explicit; mine, for LO to read)
 
-**`zipped`:** "You pull the zip up slowly, all the way to her shoulder blades. She smooths the dress over her hips and turns side-on to the mirror." · Mark, from the bottom of the stairs: "Laur? I'm off to the bar with the guys. Don't wait up." · "The front door goes before she can answer. Laura stands very still in front of the mirror."
+**`zipped`:** "You pull the zip up slowly, all the way to her shoulder blades. She smooths the dress over her hips and turns side-on to the mirror." · Mark, from the kitchen: "Laur? I'm heading out to the bar with the guys. Don't wait up." · "In the kitchen his keys jingle. He doesn't come to see her in the dress. Laura stands very still in front of the mirror." (reader pass 4, 2026-11-04: his row keeps him in the kitchen till 18:30)
 
 **`bed`:** "She sits down on the end of the bed in her good dress, her heels in her hand. Her lipstick is perfect. She has nowhere to go." · Laura: "Do I still look like someone you'd look at?" · *(thought)* "She's asking you, because nobody else is here to ask."
 

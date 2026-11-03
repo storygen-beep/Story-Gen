@@ -12,7 +12,7 @@
 | row | answer |
 |---|---|
 | person · step | `npc_jake` · 3 (Jake B 3) |
-| where · when | the front door · Saturday 23:00–00:00, after a booked date |
+| where · when | the front door · Saturday 23:00–00:00, after a booked date (pass 4 reader: `after` is 11 minutes in, so past midnight Laura is read where her row has her: the couch, the bench in the hall, or asleep with her door shut, and she speaks only while she is up) |
 | gate | his step 2 · Corruption 20 · Exhibitionism 20 · a date tonight · Laura in the living room · the boost off |
 | want | "Saturday. Pick me up at the door." (B 2); "Is anyone up?" |
 | next step | she names him to the house: Ryan |
@@ -55,7 +55,7 @@ One row per exit. Read from the build; it replaces the drafted map.
 > Drafted before the build and kept as the signed record. Where it differs, the branch map and the beats above say what the build does.
 
 - **`ryan`, after "The door slams hard.":** "Behind Jake's shoulder, in the dark living-room window, a shape on the couch hasn't moved." (from `laura_05`'s porch line, built)
-- **`after`:** the built first sentences become "Jake goes off down the path, whistling. You let yourself in." · then "The living room is dark. Laura is on the couch with her knees pulled up and her hand at her throat, and she doesn't pretend she wasn't watching." (built, `laura_05` `couch`) · Laura: "Was he any good?" · in the blue dress, "Better in your dress." · otherwise, "Better with you watching." (both built) · "She makes a sound in her throat. She doesn't get up." (built) · then "You climb the stairs." and the built rest from "Ryan's door is shut, and his light is on under it."
+- **`after`:** the built first sentences become "Jake goes off down the path, whistling. You let yourself in." · then "The living room is dark. Laura is on the couch with her knees pulled up and her hand at her throat, and she doesn't pretend she wasn't watching." (built, `laura_05` `couch`) · Laura: "Was he any good?" · in the blue dress, "Better in your dress." · otherwise, "Better with you watching." (both built) · "She makes a sound in her throat. She doesn't get up." (built) · then the built rest from "You go down the hall." and "Ryan's door is shut, and his light is on under it."
 - **Truth:** the porch screen's "Nobody. Not yet." stays her line; she hasn't seen Laura in the dark. The window line comes after Ryan, when she looks back.
 
 ## Truth checks

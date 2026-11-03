@@ -98,8 +98,9 @@ def rule(host, target, chance, *items):
 
 
 def walkin(cid, name, loc, desc, who, moment, moment_label, answer, answers, raise_=(), records=(), extra=(),
-           also_set=(), when=(), moment_wardrobe=None):
-    """One walker's walk-in: `who` = trigger items (his presence now, met flags, his gates)."""
+           also_set=(), when=(), moment_wardrobe=None, moment_mins=2):
+    """One walker's walk-in: `who` = trigger items (his presence now, met flags, his gates).
+    `moment_mins`: the clock on the moment's button (the nap spends its two hours there, B21)."""
     today = f"{cid}_today"
     DAILY_FLAGS.append(today)
     CANVASES.append({
@@ -108,7 +109,7 @@ def walkin(cid, name, loc, desc, who, moment, moment_label, answer, answers, rai
                     "substitution_only": True,
                     "conditions": cond(flag("opening_done"), flag(today, False), *who, *when)},
         "nodes": [node("moment", name, moment,
-                       [go(moment_label, node="answer", mins=2, eff=list(raise_), wardrobe=moment_wardrobe,
+                       [go(moment_label, node="answer", mins=moment_mins, eff=list(raise_), wardrobe=moment_wardrobe,
                            flags=[fset(today)] + [fset(f) for f in records] + list(also_set))]),
                   node("answer", name, answer, answers), *extra]})
     return cid
@@ -159,7 +160,7 @@ a, n = shower_answers("r",
      ME("It's my shower. You walked in."), P("The door swings shut behind him.")],
     [P("You turn round under the water, slow, and give him your back and your wet ass. You bend for the soap and take your time coming up."),
      P("The door frame creaks where he's gripping it."), ME("Seen enough?"), D(R, "You're killing me. You know that? You're actually killing me."),
-     P("He goes. His door slams across the hall."), T("He'll be thinking about your ass all night. Good.")])
+     P("He goes. His door slams across the hall."), T("He'll be thinking about your ass for hours. Good.")])
 walkin("walkin_shower_ryan", "The door opens", "home_bathroom",
     "B1, Ryan: from his room, for his toothbrush, he walks in on her in the shower. His Lust +2 on the moment; her answer on Exhibitionism: the towel 0, then +1 cap 19 / 39 / 59.",
     [here(R, "home_ryan_room")],
@@ -195,7 +196,7 @@ walkin("walkin_shower_kayla", "The door opens", "home_bathroom",
     + [P("The door opens. A girl with long dark hair walks in, in one of Ryan's T-shirts and nothing else. Kayla. She doesn't stop.")],
     "She sits down to pee.",
     [P("She pees with the shower running and looks you over the whole time, from your wet tits down to your pussy and back up."),
-     D(K, "Oh, hi. Don't mind me. Your bathroom's nicer than his."),
+     D(K, "Oh, hi. Don't mind me. I couldn't hold it."),
      P("She flushes and doesn't leave. She leans on the sink and looks at your tits like she's comparing."),
      D(K, "Look at you, step-sister."), ME("And you're in my bathroom."),   # scene reader b03: true on every Friday, not only the first D(K, "Our bathroom, Fridays. Get used to it."),
      unlock_line("You left the lock off. Somebody was always going to use it."),
@@ -254,7 +255,7 @@ for chance, lock in ((0.25, LOCKED), (0.5, UNLOCKED)):
 walkin("walkin_kitchen_ryan", "Reaching past", "home_kitchen",
     "B2, Ryan: down from his room in his boxers on a weekend morning, he reaches over her for a mug and his morning wood presses into her ass. His Lust +2 on the moment; her answer on Corruption: step aside 0, stay +1 cap 19 / 39, push back (Bold) +1 cap 59.",
     [here(R, "home_ryan_room")],
-    [P("You're at the counter with the kettle on, the kitchen to yourself. Ryan comes down in his boxers, half asleep, his hair everywhere."),
+    [P("You're at the counter with the kettle on, the kitchen to yourself. Ryan comes in from the hall in his boxers, half asleep, his hair everywhere."),   # pass 4 reader: one hall, no stairs (Q7)
      P("He reaches over you for a mug off the top shelf. His chest is against your back. His morning wood presses right into your ass.")],
     "He freezes.",
     [P("He feels it the same second you do. Neither of you moves. His cock is hard against your ass through his boxers, and his breath is hot on your neck."),
@@ -267,12 +268,14 @@ walkin("walkin_kitchen_ryan", "Reaching past", "home_kitchen",
      go("Push back into him.", node="r_push", mins=2, cond_=cond(BOLD), eff=[pay("corruption", 59)])],
     raise_=[lust(R)], records=["ryan_brushed_kitchen"], when=[wd(5, 6), tod("07:30", "10:00")], extra=[
         res("r_aside", "Step aside", [P("You duck out from under his arm and take your coffee to the window."), ME("Kettle's just boiled. Help yourself."), D(R, "Yeah. Thanks. I'll, yeah."),
-                                      P("Behind you he fills his mug and goes back to his room fast, the mug in front of his boxers.")],
+                                      P("Behind you he fills his mug and goes back to his room fast, the mug in front of his boxers."),
+                                      P("Next weekend he'll come in for a mug again. You'll know to listen for him.")],   # pass 4 reader: the hook
             "Drink your coffee.", "home_kitchen", 10),
         res("r_stay", "Don't move", [P("You don't move. You stand there with his cock pressed into your ass and let him feel you not moving. Your nipples go hard."),
                                      D(R, "@player.nickname. You're. You're not moving."), ME("Neither are you."),
                                      P("He breathes out, shaky, and steps back. He takes his mug back to his room and doesn't look at you once."),
-                                     T("He felt you stay. He knows you felt him.")],
+                                     T("He felt you stay. He knows you felt him."),
+                                     P("Next weekend he'll come in for a mug again, and you'll be at this counter.")],   # pass 4 reader: the hook
             "Drink your coffee.", "home_kitchen", 10),
         res("r_push", "Push back into him", [P("You push back into him. Your ass grinds right back against his cock, slow, once, and his hand grips the edge of the counter beside yours."),
                                              D(R, "Jesus, @player.nickname. Anybody could walk in."), ME("Then be quick about it."),
@@ -389,7 +392,7 @@ walkin("walkin_tv_ryan", "Channel 5", "home_living_room",
     "He's seen the screen.",
     [P("He looks at the screen. She drops down on the man's cock, and she moans. Then he looks at you."),
      D(R, "Seriously, @player.nickname? It's the middle of the day."), ME("And?"),
-     P("He goes red, but he doesn't go back up. His eyes go back to her tits on the screen, and he shoves his hands in his pockets."),
+     P("He goes red, but he doesn't go back to his room. His eyes go back to her tits on the screen, and he shoves his hands in his pockets."),
      VID("a young man on the bottom stair staring at porn on the living room TV, a girl on the couch", "brother catches sister watching porn", "guy walks in girl watching porn couch", pool_dir="sex/walkin_tv_ryan_t5")],
     CH5_ANS("r"), raise_=[lust(R)], records=["ryan_caught_ch5"], when=[wd(5, 6), tod("13:30", "14:00")], extra=[
         res("r_off", "Turn it off", [P("You jab the remote. The screen goes black. Ryan lets out a breath."), D(R, "My turn for the TV, then."), ME("Don't you dare tell anyone."), D(R, "Who would I tell? Mom?")],
@@ -526,8 +529,8 @@ walkin("walkin_mirror_mark", "In the mirror", "home_hall",
     [P("You're at the hall mirror checking yourself over when the living-room door creaks. Mark, on his way to bed. In the glass you see him stop behind you.")],
     "He's looking.",
     mirror_seen("his", "From behind you") + [
-        P("His hand tightens on the rail."),   # DO NOT DELETE: a non-group block, so his bands below are not elseifs of mirror_seen's
-        GC(cond(ntrait(M, "want", "lt", 20)), P("Then he catches himself. He looks down at the stair carpet, at his own feet, anywhere but the glass."),
+        P("His hands close into fists at his sides."),   # DO NOT DELETE: a non-group block, so his bands below are not elseifs of mirror_seen's
+        GC(cond(ntrait(M, "want", "lt", 20)), P("Then he catches himself. He looks down at the hall carpet, at his own feet, anywhere but the glass."),
            D(M, "Bit late to be dressing up, @player. Bed."), ME("Night, Mark."), D(M, "Night.")),
         GC(cond(*ANY), P("He stands there and doesn't pretend he's doing anything else."),
            D(M, "Bit late to be dressing up, @player."))],
@@ -707,11 +710,14 @@ NAP_SEEN = [
 walkin("walkin_nap_ryan", "The door clicks", "home_ella_room",
     "B21 (Q4), Ryan: from his room on a weekend late morning, he comes in for her charger and finds her asleep on the covers. His Lust +2 on the moment; her answer on Exhibitionism: the blanket 0, then +1 cap 19 / 39 / 59.",
     [here(R, "home_ryan_room")],
-    [P("You lie down on top of the covers for an hour, and you're asleep before your head is properly on the pillow."),
+    # reader pass 4 b4: it replaces room_nap's "Sleep (2h)." (120 minutes, energy +30), so the nap is spent on the
+    # moment's button, and the door clicks after it; it starts by 12:00 so it ends inside his room row (to 14:00)
+    [P("You lie down on top of the covers for a nap, and you're asleep before your head is properly on the pillow.")],
+    "Sleep.",
+    [P("Your door clicks. You open your eyes."),
      *NAP_SEEN,
-     P("Your door clicks. You open your eyes. Ryan is in your room with your phone charger in his hand, but he isn't looking at the charger.")],
-    "He's looking at you.",
-    [P("His eyes go all the way down you and all the way back up, slow. Then they get to your face, and he sees your eyes are open."),
+     P("Ryan is in your room with your phone charger in his hand, but he isn't looking at the charger. He's looking at you."),
+     P("His eyes go all the way down you and all the way back up, slow. Then they get to your face, and he sees your eyes are open."),
      GC(cond(ntrait(R, "want", "lt", 40)), P("He goes red to the ears and turns to the wall, fast. He holds the charger in front of his shorts like it hides anything. It doesn't. He's hard."),
         D(R, "Charger. Mine's dead. You were asleep, I wasn't going to wake you. I'm going."), ME("You could knock.")),
      GC(cond(*ANY), P("He doesn't go red, but he doesn't leave either. He leans back on your desk and keeps looking, and he doesn't turn the front of his shorts away from you."),
@@ -721,7 +727,8 @@ walkin("walkin_nap_ryan", "The door clicks", "home_ella_room",
      go("Don't move.", node="r_cov", mins=3, cond_=cond(*E_COV), eff=[pay("exhibitionism", 19)]),
      go("Stretch.", node="r_dar", mins=3, cond_=cond(*E_DAR), eff=[pay("exhibitionism", 39)]),
      go("Roll onto your back.", node="r_sho", mins=5, cond_=cond(*E_SHO), eff=[pay("exhibitionism", 59)])],
-    raise_=[lust(R)], records=["ryan_saw_nap"], when=[wd(5, 6), tod("10:00", "14:00")], extra=[
+    raise_=[lust(R), {"targetType": "player", "trait": "energy", "op": "add", "value": 30, "cap": 100}], moment_mins=120,
+    records=["ryan_saw_nap"], when=[wd(5, 6), tod("10:00", "12:00")], extra=[
         res("r_cover", "The blanket", [P("You drag the blanket up to your chin and glare at him over the top of it."), ME("Out. Now. And knock next time."),
                                        D(R, "Going. Sorry. I'm going."), P("He backs out with your charger. His door shuts across the hall, and a second later his music comes on loud.")],
             "Get up.", "home_ella_room", 5),
@@ -730,7 +737,7 @@ walkin("walkin_nap_ryan", "The door clicks", "home_ella_room",
                                     P("He goes, and he leaves your door open behind him.")],
             "Get up.", "home_ella_room", 5),
         res("r_dar", "Stretch", [P("You stretch, slow, your arms over your head and your back arching off the covers, and you take your time about it. Your ass lifts off the bed. His breath goes out of him."),
-                                 D(R, "Jesus, @player.nickname. Anybody could come up those stairs."), ME("So? I'm only stretching."),
+                                 D(R, "Jesus, @player.nickname. Anybody could come down that hall."), ME("So? I'm only stretching."),
                                  D(R, "Lock your door next time. Or don't. I don't know any more."), P("He goes with the charger held low in front of his shorts.")],
             "Get up.", "home_ella_room", 5),
         res("r_sho", "Roll onto your back", [P("You roll onto your back, slow, and stretch your arms up over your head, and give him the whole front of you."),
@@ -741,7 +748,7 @@ walkin("walkin_nap_ryan", "The door clicks", "home_ella_room",
                                              D(R, "Not now. Not with the house this full. But Jesus, @player.nickname."),
                                              P("He goes, and his door shuts hard across the hall.")],
             "Get up.", "home_ella_room", 5)])
-rule("room_nap", "walkin_nap_ryan", 0.25, here(R, "home_ryan_room"), wd(5, 6), tod("10:00", "14:00"))
+rule("room_nap", "walkin_nap_ryan", 0.25, here(R, "home_ryan_room"), wd(5, 6), tod("10:00", "12:00"))
 
 # ═════════════════════════════════════════════════════════════════════════════
 # B22 · THE LOUNGER (host garden_sun): Mark out of the kitchen on a Sunday (his Sunday table row, 08:00-22:00) for
@@ -763,7 +770,7 @@ walkin("walkin_garden_mark", "The back step", "home_garden",
     [P("He doesn't turn the hose on. He stands on the step with his beer and looks at you, from your feet all the way up, slow."),
      GC(cond(ntrait(M, "want", "lt", 20)), P("Then he catches himself. He turns his back on you and gives the tomatoes a soaking they don't need, and he keeps the beer low in front of his jeans the whole time."),
         D(M, "You'll burn, lying out like that. Your mother'll blame me."), ME("Then don't look, Mark."), D(M, "I'm watering.")),
-     GC(cond(ntrait(M, "want", "lt", 50)), P("He doesn't turn away. He waters the same pot until it runs over the rim and onto his boots, and his eyes stay on your legs and your ass the whole time."),
+     GC(cond(ntrait(M, "want", "lt", 50)), P("He doesn't turn away. He waters the same pot until it runs over the rim and onto his boots, and his eyes stay on your legs the whole time, slow up your thighs and back down."),
         D(M, "Nice day for it, @player."), ME("The tomatoes are drowning, Mark.")),
      GC(cond(*ANY), P("He doesn't pretend. He drops the hose on the grass, still running, and drinks his beer and looks, and the front of his jeans fills."),
         D(M, "Sunday's my day off, @player. This is a good way to spend it.")),
@@ -777,7 +784,7 @@ walkin("walkin_garden_mark", "The back step", "home_garden",
                                     ME("Mark! You could say something before you come out."), D(M, "It's my garden. I don't have to say anything."),
                                     P("He waters the tomatoes with his back to you while you grab your things and go in.")],
             "Go in.", "home_hall", 5),
-        res("m_stay", "Stay as you are", [P("You stay exactly as you are, eyes shut, and let him look. You can feel where his eyes are by the heat of them: your legs, your ass. Your face goes red, but you still don't move."),
+        res("m_stay", "Stay as you are", [P("You stay exactly as you are, eyes shut, and let him look. You can feel where his eyes are by the heat of them: your legs, the tops of your thighs. Your face goes red, but you still don't move."),
                                           D(M, "Tomatoes need doing every Sunday, @player."), ME("Then I'll be out here every Sunday."),
                                           P("He waters them slow, but he doesn't look at the tomatoes once.")],
             "Get up off the lounger.", "home_garden", 20),
@@ -786,9 +793,10 @@ walkin("walkin_garden_mark", "The back step", "home_garden",
                                                    GC(cond(*ANY), P("He looks all he wants. He takes a long drink, and his eyes go from your knee all the way down your thigh.")),
                                                    D(M, "Not out here, @player. The neighbours can see over that fence."), ME("Then come and stand in front of me."), D(M, "Not yet.")],
             "Get up off the lounger.", "home_garden", 20),
-        res("m_turn", "Turn over for him", [P("You roll over slow on the lounger and let him have the front of you."),
-                                            GC(cond(*LOUNGER_TOPLESS), P("You're topless, and you don't cover up. You lie back with your arms behind your head, bare to the sky and to him.")),
-                                            GC(cond(*ANY), P("You lie back with your arms behind your head and let him look at all of it.")),
+        # reader pass 4 b5: only the topless visit is on her front, so only it rolls over; the others are on their backs
+        res("m_turn", "Turn over for him", [GC(cond(*LOUNGER_TOPLESS), P("You roll over slow on the lounger and let him have the front of you."),
+                                               P("You're topless, and you don't cover up. You lie back with your arms behind your head, bare to the sky and to him.")),
+                                            GC(cond(*ANY), P("You're already on your back. You stretch your arms up behind your head, arch off the lounger, and let him look at all of it.")),
                                             P("On the step, Mark goes still."),   # DO NOT DELETE: a non-group block, so his bands below are not elseifs of the clothes chain
                                             GC(cond(ntrait(M, "want", "lt", 20)), P("His jaw goes tight. He turns his back on you and turns the hose up hard on the tomatoes, and his free hand goes to the front of his jeans to hide it."),
                                                D(M, "Get some clothes on, @player. Anybody could look out a window."), ME("Somebody is looking, Mark. You.")),

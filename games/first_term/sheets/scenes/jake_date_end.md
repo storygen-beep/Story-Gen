@@ -67,7 +67,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Fixes after
 
 **`car_hers`** (Bold) · 136 words · explicit words 5 · median sentence 9 · act rungs: none named ("stroke", "comes" are not on the list)
 
-> Jake parks outside your house and kills the engine under the street lamp. You lean back, then reach over and open his jeans. His cock is already hard when you pull it out. "Hands on the wheel," you tell him. He grabs it. You stroke him slow, base to tip, until his hips lift off the seat. "@player," he says. "Oh god, @player." One hand leaves the wheel to find your tits under your top. He squeezes, his thumb dragging over your nipple. You let him, but you go faster. A man walking a dog stops on the pavement and looks in. You don't stop for him. Jake's thighs shake. His balls pull tight. He groans, head back on the seat, and comes hot over your hand. You keep stroking his cock slow while he pants.
+> Jake parks outside your house and kills the engine under the street lamp. You lean back, then reach over and open his jeans. His cock is already hard when you pull it out. "Hands on the wheel," you tell him. He grabs it. You stroke him slow, base to tip, until his hips lift off the seat. "@player," he says. "Oh god, @player." One hand leaves the wheel to find your tits under your top. He squeezes, his thumb dragging over your nipple. You let him, but you go faster. A man walking a dog stops on the sidewalk and looks in. You don't stop for him. Jake's thighs shake. His balls pull tight. He groans, head back on the seat, and comes hot over your hand. You keep stroking his cock slow while he pants.
 
 **`sneak` a** (after step 4) · 133 words · explicit words 6 · median sentence 9 · act rungs: hands, vaginal, finish
 

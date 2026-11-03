@@ -36,7 +36,7 @@
 |---|---|---|---|---|
 | `upstairs` | her room; Laura takes a blue dress from the back of her wardrobe: "Here. Try it." (the invite, "Follow her upstairs.", is in her kitchen hub) | no | "Try it on." → `mirror` | none |
 | `mirror` | the blue dress, tight across her chest; Laura smooths it over her hips | no | "Is that bad?" → `no` · "I can't take this." → `give` (parked) | `laura_blue_dress` added and worn |
-| `no` | "It never fit me like that." — "No." | no | "Thank you, Mom." → her room | Laura's Love (`warmth`) add +5 · exhibitionism add +3, cap 79 · `laura_step` set 1 · `laura_01_done` set |
+| `no` | "It never fit me like that." — "No." — "Keep it. Wear it somewhere somebody can see you in it." | no | "Thank you, Mom." → her room | Laura's Love (`warmth`) add +5 · exhibitionism add +3, cap 79 · `laura_step` set 1 · `laura_01_done` set |
 | `give` | "Keep it. Wear it somewhere." Laura doesn't take it back | no | "Okay." → her room | `laura_blue_dress` kept · Laura's Love add +5 (the built extra +3 on this exit is dropped: one pay per step) · exhibitionism add +3 · `laura_step` set 1 · `laura_01_done` set |
 
 Who notices: Laura, behind her in the mirror.

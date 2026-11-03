@@ -9,7 +9,7 @@
 | row | answer |
 |---|---|
 | system · place | the way up (DECISIONS 78, 79) · `home_master_bedroom`, from the door |
-| where · when | the landing, their door · Sun 00:00–01:00 (Saturday night), both inside and awake (new window, DECISIONS 80) · door option "The door's ajar." in place of "Ease the door open" in that hour |
+| where · when | the hall, their door · Sun 00:00–01:00 (Saturday night), both inside and awake (new window, DECISIONS 80) · door option "The door's ajar." in place of "Ease the door open" in that hour |
 | gate | none: open at Good Girl · both present |
 | who | Mark, 46, her step-father · Laura, 41, her mother; neither sees her |
 | want | Laura's: bored under Mark, then her own hand under the sheet |
@@ -39,7 +39,7 @@ body like that since the wedding", `laura_03`). Nothing in 0.1 reads `saw_mark_a
 
 **`stay`** · 128 words · explicit words 6 (ass, cock, nipple, thrust, tits) · median sentence 8 · ends on her body
 
-> Through the gap you see all of it. Mark has Laura on her knees, her nightdress shoved up over her ass. His cock thrusts into her fast and hard. He grunts with every push. Her tits swing under her. Her face is turned sideways on the pillow, eyes open, bored. He gives one last grunt and rolls off her. A minute later he is snoring. Laura lies on her back, awake, the nightdress still bunched at her waist. Her hand slides down under the sheet, between her own thighs. It starts to move. Your nipples are hard and aching. You are wet. You press your thighs together and stay right there. Then a floorboard creaks under your foot. You slip back to your room, wet, nipples still hard.
+> Through the gap you see all of it. Mark has Laura on her knees, her nightdress shoved up over her ass. His cock thrusts into her fast and hard. He grunts with every push. Her tits swing under her. Her face is turned sideways on the pillow, eyes open, bored. He gives one last grunt and rolls off her. A minute later he is snoring. Laura lies on her back, awake, the nightdress still bunched at her waist. Her hand slides down under the sheet, between her own thighs. It starts to move. Your nipples are hard and aching. You are wet. You press your thighs together and stay right there. Then a floorboard creaks under your foot. You freeze at the gap, wet, nipples still hard.
 
 No history words on either screen: both repeat.
 

@@ -98,7 +98,7 @@ out.append({
     "nodes": [
         back("jar"),
         node("jar", "The back room", [
-            P("He counts the jar when you're near now, lips moving. Today you go into the back room for milk and he's there with the tip jar on the shelf, folding twenties out of it into his apron pocket. Your twenties. Everybody's."),
+            P("He counts the jar when you're near now, lips moving. Today you go into the back room for milk and he's there with the tip jar on the shelf, folding the bills out of it into his apron pocket, the other girls' twenties first. Your singles are in there too. Everybody's."),
         ], [
             go("\"Busy shift?\"", node="seen", mins=2),
             go("Walk past.", loc="cafe", mins=2, retry=3),

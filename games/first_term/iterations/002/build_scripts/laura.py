@@ -52,6 +52,7 @@ out.append({
             D(L, "It never fit me like that."),
             P("She says it quietly, to the mirror. Then she laughs, too bright, and takes her hands off you."),
             D(L, "No. No, sweetheart. It's not bad."),
+            D(L, "Keep it. Wear it somewhere somebody can see you in it."),   # pass 4 reader (hook): this branch names what comes next too
         ], [go("\"Thank you, Mom.\"", loc="home_ella_room", mins=5, consumes=True,
                eff=[nadd(L, "warmth", 5), add("exhibitionism", 3, cap=79), setv("laura_step", 1)], flags=[done(1)])]),
         node("give", "Keep it", [
@@ -66,7 +67,7 @@ out.append({
 # ── step 2 · Laura C 2 · home late: the first catch ──
 # What she smells and asks follows the late flag (laura_02 sheet; the street sheet, "Why she's late").
 LATE_REASON_LINES = [
-    G(cond(late_for("late_party")), P("Smoke in your hair, somebody's cologne on your neck. She smells it from the step."), D(L, "Zoe's?")),
+    G(cond(late_for("late_party")), P("Smoke in your hair, somebody's cologne on your neck. She smells it from the bench."), D(L, "Zoe's?")),   # pass 4 reader: one hall, no stairs (Q7)
     G(cond(late_for("late_shift")), P("You smell of coffee and the café's fryer. She knows that smell."), D(L, "Tom kept you late?")),
     G(cond(late_for("late_date")), P("She doesn't ask. She just looks at you, at your mouth, at your hair.")),
 ]
@@ -87,7 +88,7 @@ out.append({
         node("stairs", "The dark hall", [
             P("You've got your shoes in your hand and you're halfway down the hall when the hall lamp clicks on. Laura is sitting on the bench by the coats in her robe, arms round her knees. She's been there a while."),
             G(cond(trait("laura_suspicion", "gte", 30)),
-              P("She comes down to you without a word and takes your chin in her hand and turns your face to the lamp. She looks you up and down, slowly, like she's reading it off you.")),
+              P("She gets up and comes to you without a word and takes your chin in her hand and turns your face to the lamp. She looks you up and down, slowly, like she's reading it off you.")),
             *LATE_REASON_LINES,
             G(cond(DRESS_ON), P("Her eyes stop on the blue dress. Her dress. She doesn't say anything about it, but she looks at it for a long time.")),
         ], [
@@ -110,7 +111,7 @@ out.append({
         ], [go("\"Goodnight, Mom.\"", loc="home_ella_room", mins=3,
                eff=[nadd(L, "warmth", -5), susp(5)] + CURFEW_EFF, flags=CURFEW_SET + [LATE_CLEAR, fset("laura_caught_today")])]),
         node("high", "Did anyone look", [
-            P("She doesn't shout. She pats the step beside her, and you sit, and she looks at you sideways in the lamplight."),
+            P("She doesn't shout. She pats the bench beside her, and you sit, and she looks at you sideways in the lamplight."),
             D(L, "I'm not angry. I was nineteen once. Just— did you have fun?"),
             ME("Yeah."),
             G(cond(DRESS_ON), D(L, "Did anyone look at you in it?")),
@@ -166,13 +167,15 @@ out.append({
             go("\"Hold still.\"", node="zipped", mins=3),
             go("\"Ask Mark.\"", node="no", mins=2),
         ]),
-        node("zipped", "The front door", [
+        node("zipped", "Heading out", [
             P("You pull the zip up slowly, all the way to her shoulder blades. She smooths the dress over her hips and turns side-on to the mirror."),
             # her want for Ryan, on her body, before her step 4 says his name; true only while he is on the couch (DECISIONS 124)
             G(cond({"type": "npc_at_location", "location_id": "home_living_room", "npc_id": "npc_ryan", "operator": "is_present"}),
               P("In the living room Ryan laughs at something on the TV. Laura's hands stop on the dress. She looks at the door, not at you, and her chest rises fast under the silk.")),
-            D(M, "Laur? I'm off to the bar with the guys. Don't wait up."),
-            P("The front door goes before she can answer. Laura stands very still in front of the mirror."),
+            # reader pass 4 b5: his row has him in the kitchen till 18:30 ("heading out to the bar"), so he calls from
+            # there and has not left yet; the front door does not go on this screen
+            D(M, "Laur? I'm heading out to the bar with the guys. Don't wait up."),
+            P("In the kitchen his keys jingle. He doesn't come to see her in the dress. Laura stands very still in front of the mirror."),
         ], [go("Wait.", node="bed", mins=2)]),
         node("bed", "Nowhere to go", [
             P("She sits down on the end of the bed in her good dress, her heels in her hand. Her lipstick is perfect. She has nowhere to go."),

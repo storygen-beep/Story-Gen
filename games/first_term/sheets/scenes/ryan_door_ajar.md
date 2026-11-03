@@ -11,7 +11,7 @@
 | row | answer |
 |---|---|
 | system · place | the way up (DECISIONS 78, 79) · `home_ryan_room`, from the door |
-| where · when | the landing, Ryan's door · Sun–Thu 22:00–00:00, Ryan in · new door option "His door's open a crack." |
+| where · when | the hall, Ryan's door · Sun–Thu 22:00–00:00, Ryan in · new door option "His door's open a crack." |
 | gate | none: open at Good Girl · not Friday (Kayla's night) |
 | who | Ryan, 22; he never sees her |
 | what she wears here | not named |

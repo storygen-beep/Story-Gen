@@ -36,9 +36,9 @@ def at_level(lv, *blocks, extra=()):
 def go_level(lv, text, node_, extra=()):
     return [go(text, node=node_, mins=0, cond_=cond(*items, *extra)) for items in PARTS[lv]]
 
-L1_LINES = ["You bend to wipe a table and the conversation at the next one stops. When you straighten up it starts again, lower.",
-            "Two men at the counter watch you walk to the kitchen and back. One of them says something. The other one laughs.",
-            "A man in a suit doesn't look at his menu once. He looks at you the whole time you take his order, and over-tips."]
+L1_LINES = ["You bend to wipe a table and the conversation at the next one stops: every man at it is looking at your ass. When you straighten up it starts again, lower. Nobody touches. Not yet.",
+            "Two men at the counter watch your ass all the way to the kitchen and back. One of them says something. The other one laughs.",
+            "A man in a suit doesn't look at his menu once. He looks at your tits the whole time you take his order, and over-tips."]
 # pass 3 B4: what the room says beside each look (a stranger, speaker "unknown")
 L1_SAID = ["Don't mind us, honey. Carry on.", "Nice legs on the new girl. Turn around, baby, let's see the rest.",
            "Whatever you're having. Surprise me. I'll be back tomorrow, same table."]
@@ -47,7 +47,7 @@ L1_SAID = ["Don't mind us, honey. Carry on.", "Nice legs on the new girl. Turn a
 L2_SETUP = ("In the back booth, one of three guys asks, \"Are you on the menu?\" and the table laughs. "
             "All three of them are looking at your tits. "
             "At the counter, a guy on his own asks what time you get off, and his eyes drop to your ass when you turn.")
-L3_SETUP = ("The slow hours are the ones where somebody always tries it. All shift, men's eyes have been on your ass "
+L3_SETUP = ("Sooner or later, somebody always tries it. All shift, men's eyes have been on your ass "
             "every time you bend to a table. Today one of them does more than look.")
 L2_PLAY = "You don't tell them off. You smile and bring the check over slow. You lean across their table, much lower than you need to. They can see right down the front of your uniform. Your tits hang there for them, and your nipples are hard against the cloth. It scares you, and you like it more than it scares you. \"Ten,\" the one by the wall says, loud enough for the counter to hear. Tom watches from behind it and says nothing. You take your time with the cups, one at a time. Your ass is pushed out at the next booth the whole while. The bills on the check come to more than the meal. You stay bent over their table, your tits close enough for them to touch."
 L2_FLIRT = "You lean on the counter across from him, close. \"I get off when you stop staring at my tits.\" Your voice shakes on the last word, but you say it. He doesn't stop. His eyes stay right there, and your nipples go hard under your uniform. You walk two fingers up his arm, slow, from his wrist to his elbow. He swallows. You scoop whipped cream off a mug with your thumb and lick it clean, slowly. He watches your mouth the whole time. \"I'll think about it,\" you tell him. His face goes red and he shifts on his stool. At the coffee machine, Tom watches and says nothing. You turn away, and the guy's eyes drop to your ass. He tips double, eyes on your tits, while your nipples press hard against your apron."

@@ -127,7 +127,7 @@ corrupted enough") and rule 5 (a step counter, paced by his week; the lever is h
     and takes notes; pays cap 79 (DECISIONS 124);
   - further: not written, and no button; his card says "Hale, further. (Next release)".
 - **Each session:** grade +2 and both meters +1 (mixed act). The same three answers; each "no" costs only grade.
-- **One Thursday in four,** Claire waits in the car park, and he cuts it short.
+- **One Thursday in four,** Claire waits in the parking lot, and he cuts it short.
 
 ## Cut, and what the player loses
 

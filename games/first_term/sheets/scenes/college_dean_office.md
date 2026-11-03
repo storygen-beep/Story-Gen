@@ -37,7 +37,7 @@ One row per exit. Read from the build; it replaces the drafted map.
 
 > Drafted before the build and kept as the signed record. Where it differs, the branch map and the beats above say what the build does.
 
-**`wait`:** "The dean's office smells of carpet and old coffee. He's writing. He doesn't look up, and he doesn't ask you to sit, so you stand." · "When he does look up, he takes his time. Your face, then down, then back up, slowly, like he's reading a form." · in a short skirt: Dean: "Is that what you wore to class?" · otherwise: Dean: "You're the new one. @player."
+**`wait`:** "The dean's office smells of carpet and old coffee. He's writing. He doesn't look up, and he doesn't ask you to sit, so you stand." · "When he does look up, he takes his time. Your face, then down, then back up, slowly, like he's reading a form." · in a short skirt: Dean: "Is that what you're wearing to class?" · otherwise: Dean: "You're the new one. @player."
 **`rules`:** Dean: "Classes are not optional. Your grades come to me. Complaints come to me." · "He taps a folder with one finger." · Dean: "Two complaints and you're back in this office. I don't like seeing a student twice."
 **`timetable`:** "He slides a printed sheet across the desk and keeps two fingers on it a second before he lets go." · Dean: "Your timetable. Learn it."
 **`late`:** "He's already looking back at his writing." · Dean: "Psychology. Lecture hall. You're already late."
@@ -47,6 +47,6 @@ One row per exit. Read from the build; it replaces the drafted map.
 | key choice | source |
 |---|---|
 | the four screens, his lines, the timetable, the walk to Psychology | `college.md`, "The first college day" (signed 2026-11-01) |
-| "Is that what you wore to class?" | `npc_dean.md` (signed 2026-10-08) |
+| "Is that what you're wearing to class?" | `npc_dean.md` (signed 2026-10-08) |
 | the timetable button | the engine: `setup.openTimetable(day)` (DECISIONS 112); how a canvas button runs it is checked at build (`college.md`) |
 | his Monday 07:30 row, `has_timetable` | mine, confirmed by LO 2026-11-01 ("Continue") |

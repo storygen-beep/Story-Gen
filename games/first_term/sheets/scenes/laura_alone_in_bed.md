@@ -72,7 +72,7 @@ Laura's door is open a hand's width. The bedside lamp is on low. Down the hall t
 
 You stay. Your hand stays flat on the door frame. Laura pushes two fingers inside herself. Her thumb rubs her clit, faster now. Her other hand squeezes her tit and pinches the nipple. Her hips lift off the mattress. She bites the back of her hand so Mark won't hear. Her fingers pump in and out, wet and loud in the quiet. Then she comes. Her whole body shakes. Her thighs clamp hard on her hand. A moan leaks out around her teeth. Your nipples go tight and ache. You are wet, all at once. You press your thighs together. You do not touch yourself. You want to. Laura goes still, breathing hard, two fingers still inside her. Her tits rise and fall. You back away from the door before she opens her eyes, thighs pressed tight, nipples still hard.
 
-**`laura_alone_peek`:** "You ease the door a finger's width wider. The lamp is off now." · "Laura lies on her side with the sheet pulled up to her shoulder, breathing slow. Her nightdress is still rucked up at her hip." · "Down the hall the TV mutters. You pull the door to without a sound."
+**`laura_alone_peek`:** "You ease the door a finger's width wider. The lamp is off now." · "Laura lies on her side with the sheet kicked down to her knees, breathing slow. Her nightdress is still rucked up over her hip, her bare ass pale in the dark, and her hand is still tucked between her thighs." · "Your nipples go tight. You could go in. Not tonight." · "Down the hall the TV mutters. You pull the door to without a sound."
 
 ## What else changed for it
 

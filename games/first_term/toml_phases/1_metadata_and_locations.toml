@@ -1742,6 +1742,22 @@ end_time   = "14:30"
 activity   = "in class: figure drawing"
 when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_number", operator = "is_true" }] }
 
+[[npcs.schedules]]
+location   = "home_front_door"
+weekdays   = [2]
+start_time = "19:00"
+end_time   = "21:00"
+activity   = "picking you up"
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_date_booked", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "jake_date_booked", operator = "lt", value = 168 }] }
+
+[[npcs.schedules]]
+location   = "home_front_door"
+weekdays   = [2]
+start_time = "22:00"
+end_time   = "00:00"
+activity   = "walking you home"
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_date_went", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "jake_date_went", operator = "lt", value = 6 }] }
+
 [[npcs]]
 id           = "npc_vance"
 name         = "Mr. Vance"

@@ -65,7 +65,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Fixes after
 
 | node | the no | the reply (mine, signed by LO 2026-11-01) |
 |---|---|---|
-| `knocks` | "Just saying goodnight." | Ryan: "Yeah. Night, @player.nickname." · "He doesn't shut his door until you're in your room." The step waits a night, as before. |
+| `knocks` | "Just saying goodnight." | Ryan: "Yeah. Night, @player.nickname." · "He stays in his doorway with his hand on the frame, and his eyes stay on your ass all the way out into the hall." The step waits a night, as before. |
 
 ## Explicit beats as built (measured 2026-11-03)
 

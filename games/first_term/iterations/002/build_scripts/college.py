@@ -584,7 +584,7 @@ out.append({
         node("wait", "The dean's office", [
             P("The dean's office smells of carpet and old coffee. He's writing. He doesn't look up, and he doesn't ask you to sit, so you stand."),
             P("When he does look up, he takes his time. Your face, then down, then back up, slowly, like he's reading a form."),
-            G(cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}), D(DEAN, "Is that what you wore to class?")),
+            G(cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}), D(DEAN, "Is that what you're wearing to class?")),
             G(cond({"type": "worn_type", "operator": "neq", "value": "short_skirt"}), D(DEAN, "You're the new one. @player.")),
         ], [go("\"Good morning.\"", node="rules", mins=20, flags=[fset("dean_met")])]),
         node("rules", "The rules", [

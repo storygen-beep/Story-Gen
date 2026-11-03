@@ -117,7 +117,7 @@ out.append({
         ]),
         node("night", "Night", [
             D(R, "Yeah. Night, @player.nickname."),
-            P("He doesn't shut his door until you're in your room."),
+            P("He stays in his doorway with his hand on the frame, and his eyes stay on your ass all the way out into the hall."),   # reader pass 4 b5: the exit lands in the hall, not her room
         ], [go("Go to bed.", loc="home_hall", mins=2, retry=1)]),
         node("lap", "His lap", [
             P(beat("ryan_04_feet_in_his_lap", "lap")),
@@ -295,10 +295,10 @@ out.append({
             go("\"Not tonight.\"", loc="home_hall", mins=2, retry=1),
         ]),
         node("talk", "His bed", [
-            P("You sit on the edge of his bed. He sits too, a foot away, like there's a line down the mattress. Neither of you says what happened the last time you knocked."),
+            P("You sit on the edge of his bed. He sits too, a foot away, like there's a line down the mattress. Neither of you says what happened the night Kayla called."),
             D(R, "So. These walls, huh."),
             P("It's a joke, and it lands wrong, and you both laugh too loud and then stop. He rubs the back of his neck. He looks at the door, then at you."),
-            D(R, "Last time. With Kayla calling. That can't happen again."),
+            D(R, "That night. With Kayla calling. That can't happen again."),
             P("He says it, but he doesn't move away. His knee is an inch from yours."),
         ], [go("\"Then why did you open the door?\"", node="doubt", mins=3)]),
         node("doubt", "Ryan", [
@@ -473,10 +473,10 @@ def hot_node(n, name, media, exits, back="home_hall"):
 # pass 3 B4: after each hot repeatable's beat, the two of them talk (row 6 whispers: Mark is next door)
 HOT_SAID = {1: [D(R, "You're doing that on purpose."), ME("Doing what?"), D(R, "Standing like that. In my door. You know what.")],
             2: [D(R, "If anybody walks in, I'm telling them it was you."), ME("Tell them. See who they believe.")],
-            3: [D(R, "I'm losing because of you. You know that, right?"), ME("Then pause it and look properly.")],
+            3: [D(R, "I'm losing because of you. You know that, right?"), ME("Then lose. And keep looking.")],
             4: [D(R, "Fuck. Can I, please, can I touch you?"), ME("No. Hands on the chair. Watch.")],
             5: [D(R, "Fuck. Look at you. It's all over you."), ME("Next time you wait longer. Get me a towel.")],   # reader pass 3 b00: every 5a-5c ends with him coming
-            6: [D(R, "Quiet. He'll hear the blanket."), ME("Then hold still and let me finish you.")]}
+            6: [D(R, "Quiet. He'll hear the blanket."), ME("Then hold still while I wipe my hand on you.")]}
 # C4 (LO 2026-11-03): hygiene colours, and its colour can work like a lock. Dirty, she still sees the button and
 # still goes to him, but it doesn't happen: he says why. Clean is hygiene 30+, or the hygiene system switched off.
 DIRTY = [trait("hygiene", "lt", 30), flag("hygiene_off", False)]
@@ -648,7 +648,7 @@ out.append({
 #    hub's own bands (<40, 40-69, 70+); "Let it slip." (Daring) pays his Lust +2 and her Exhibitionism +1
 #    once a day; "Drop it." needs Showing and his top band, no story step (LO, 2026-10-31). ──
 from home_items import towel_set, TOWEL_CAUGHT, TOWEL_ON, DARING, SHOWING, EXH1, here, want as _want
-RYAN_TOWEL_LEAD = [P("You loosen the tuck and let the towel slip. It drops to your waist before you catch it, and your tits are out, wet and bare, your nipples tight in the cold air.")]
+RYAN_TOWEL_LEAD = [P("You loosen the tuck and let the towel slip. It drops to your waist before you catch it, and your tits are out, bare, your nipples tight in the cold air.")]
 RYAN_TOWEL_SLIP = [
     [P("Ryan turns his whole body away."), D(R, "Jesus, @player.nickname! Put it back!"),
      P("You pull it up. He doesn't turn round until you have, and his ears have gone red.")],
@@ -657,8 +657,9 @@ RYAN_TOWEL_SLIP = [
     [P("Ryan's eyes go straight to your tits and stay there. He wets his lips."), D(R, "Leave it."),
      P("You hold the towel at your waist and let him look. His hand goes to the front of his shorts, and his cock is hard under it.")],
 ]
+# reader pass 4 b5: the towel can come from her wardrobe with no shower, so no line says she is wet from one
 RYAN_TOWEL_DROP = [
-    P("You pull the knot and let the towel fall to the floor. You're naked in front of him, still wet from the shower. Your tits are bare, your nipples hard. Your cunt is bare, and a drop of water runs down your thigh. Ryan's eyes go down your body and stop on your cunt. His cock is hard in his shorts, pushing the cotton out. He doesn't touch it. He doesn't touch you. He stares at your tits, at your cunt, at your tits again, breathing through his mouth."),
+    P("You pull the knot and let the towel fall to the floor. You're naked in front of him, nothing on you but the flush going down your chest. Your tits are bare, your nipples hard. Your cunt is bare, and you can feel how wet it's getting. Ryan's eyes go down your body and stop on your cunt. His cock is hard in his shorts, pushing the cotton out. He doesn't touch it. He doesn't touch you. He stares at your tits, at your cunt, at your tits again, breathing through his mouth."),
     P("You turn round slowly so he gets your ass too. You hear him swallow."),
     D(R, "Fuck, @player.nickname."),
     P("You bend and pick the towel up off the floor, slow, with your bare ass to him, and wrap it round your tits again."),
@@ -676,9 +677,9 @@ RYAN_TOWEL_NO = [
 ]
 
 
-def ryan_towel(hub, back, first_low, caught=True):
+def ryan_towel(hub, back, first_low, caught=True, when=()):
     return towel_set(
-        hub, R, "want", 40, 70, "ryan_towel_today", [_want(R, 2), EXH1], back,
+        hub, R, "want", 40, 70, "ryan_towel_today", [_want(R, 2), EXH1], back, when=when,
         lines=[
             [first_low,
              GC(cond(TOWEL_ON), P("Ryan looks at the ceiling, at the wall, at anything but you."), D(R, "Jesus. Put some clothes on, @player.nickname.")),
@@ -702,8 +703,12 @@ def ryan_towel(hub, back, first_low, caught=True):
 
 
 # ── his hub: his room, every window (npc_ryan sheet: his lines by what she wears) ──
+# pass 4 reader (low heat, H1): with Kayla on his bed the slip plays to two people, a group the Daring slip does not
+# open; his door is shut while she is in (Q14), but a visit that runs on past 18:00 Friday finds her there, so the
+# towel set waits for her to be gone
 RT_ROOM = ryan_towel("hub_ryan_room", "home_ryan_room",
-                     GC(cond(TOWEL_ON), D(R, "Door's free, @player.nickname."), P("His eyes drop and come back up.")))
+                     GC(cond(TOWEL_ON), D(R, "Door's free, @player.nickname."), P("His eyes drop and come back up.")),
+                     when=[{"type": "npc_at_location", "location_id": "home_ryan_room", "npc_id": "npc_kayla", "operator": "is_absent"}])
 SHY = trait("corruption", "lt", 20)
 WARM = trait("corruption", "gte", 20)
 out.append({
@@ -807,7 +812,9 @@ out.append({
         node("asleep", "Ryan's room", [
             P("You knock, and nothing comes back. You open his door anyway."),
             P("Ryan's face-down on his bed in his boxers, the sheet kicked down round his knees, one arm hanging off the mattress and his phone face-down on the floor. He's breathing slow and heavy into the pillow, dead to the world. He doesn't move."),
-            T("You could wake him. You don't."),
+            # reader pass 4 b4: his want, asleep (from Want 20, when the game has shown it awake), and the hook (his hub opens at 06:00)
+            G(cond(ntrait(R, "want", "gte", 20)), P("He mumbles something into the pillow, thick with sleep, and it's your name. His hips grind once into the mattress, slow.")),
+            T("You could wake him. You don't. He's up at six. Knock then."),
         ], [go("Shut his door.", loc="home_hall", mins=2)]),
     ]})
 
@@ -856,8 +863,10 @@ lc, ln = item("tv", "Play his game with him.", [], "watched_tv", LR,
     no=([D(R, "Coward. You just don't want to lose again."),
          P("He's already restarted it, but he watches you go over the top of the controller, his eyes on your legs.")], "Leave him to his game."))
 fc, fn = item("film", "Watch a film with him.", [], "movie_night", LR,
-    [P("He lets you pick and complains about it, but he watches the whole thing."), D(R, "Fine. That was good. Don't tell anyone."), ME("You cried at the end."), D(R, "I did not. Shut up.")],
-    [energy(5), warm(R)], 120)
+    # reader pass 4 b0: the film plays behind the act button (after=), so "Not now." never follows a film already watched
+    [P("He has the film menu up already. He holds the remote out to you without looking away from the screen."), D(R, "Your pick. If it's boring, I'm talking through it.")],
+    [energy(5), warm(R)], 120,
+    after=("Watch it with him.", [P("He lets you pick and complains about it, but he watches the whole thing."), D(R, "Fine. That was good. Don't tell anyone."), ME("You cried at the end."), D(R, "I did not. Shut up.")], "Get up.", "home_hall"))
 out.append({
     "id": "hub_ryan_living_room", "name": "Ryan, on the couch",
     "description": "Ryan on weekend afternoons in the living room (Sat, Sun 14:00-18:00, Q55): his game or a film with him (home_life).",
@@ -891,7 +900,7 @@ out.append({
         node("laura", "Mark doesn't need to hear", [
             P("You don't move them. Laura looks at you for a long second, and something in her face decides."),
             D("npc_laura", "Mark doesn't need to hear about this."),
-            P("She goes back up to finish dressing. Ryan breathes out like he's been underwater."),
+            P("She goes back down the hall to finish dressing. Ryan breathes out like he's been underwater."),
             T("Laura knows. And she's keeping it."),
         ], [go("\"Okay, Mom.\"", loc=LR, mins=5, flags=[fset("laura_knows_ryan")])]),
     ]})

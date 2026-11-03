@@ -245,6 +245,11 @@ DRESS_OFF_HAND = (("You slide your hand inside your clothes.", "You slide your h
                   ("Your hand is down inside your clothes, two fingers on your clit.", "Your hand is down between your open thighs, two fingers on your clit."))
 
 
+# pass 4 reader (numbers/clothes): the café uniforms sit in the dress slot too, so a shift-clothes Thursday has
+# no "top" either; each one-piece names itself where the beat says "your top"
+ONE_PIECE = {**{d: "your dress" for d in DRESSES}, "cafe_uniform_normal": "your uniform", "cafe_uniform_sexy": "your uniform"}
+
+
 def _dress_off(text):
     for a, b in DRESS_OFF_HAND:
         text = text.replace(a, b)
@@ -280,15 +285,15 @@ out.append({
         node("touch_low", "Tell me what you feel", [
             # GC, not G: the three bands are exclusive (no dress / one dress / the other), and the cut speech
             # (canv.voice_canvas) puts each pool entry in a group; G's extra pool would pass the importer's depth 4.
-            GC(cond(*[{"type": "clothing_item", "item_id": d, "operator": "unequipped"} for d in DRESSES]), POOL(P(beat("hale_thursday_session", "A a")), P(beat("hale_thursday_session", "A b")), P(beat("hale_thursday_session", "A c")), pid="hale_touch_low", bag=True)),
-            *[GC(cond({"type": "clothing_item", "item_id": d, "operator": "equipped"}), POOL(*[P(beat("hale_thursday_session", k).replace("your top", "your dress")) for k in ("A a", "A b", "A c")], pid=f"hale_touch_low_{d}", bag=True)) for d in DRESSES],
+            GC(cond(*[{"type": "clothing_item", "item_id": d, "operator": "unequipped"} for d in ONE_PIECE]), POOL(P(beat("hale_thursday_session", "A a")), P(beat("hale_thursday_session", "A b")), P(beat("hale_thursday_session", "A c")), pid="hale_touch_low", bag=True)),
+            *[GC(cond({"type": "clothing_item", "item_id": d, "operator": "equipped"}), POOL(*[P(beat("hale_thursday_session", k).replace("your top", ONE_PIECE[d])) for k in ("A a", "A b", "A c")], pid=f"hale_touch_low_{d}", bag=True)) for d in ONE_PIECE],
             VID("a professor's hands on a student over her clothes in his office, her answering him", "professor touches student over clothes office", "teacher hands on student body talking", pool_dir="sex/hale_thursday_low_t4")],
             [go("\"Same time next week.\"", node="end", mins=15, eff=SESSION_PAY(59))]),
         # scene reader b02 (2026-11-03): in a dress the top she pulls off is the dress, as touch_low already does
-        node("touch_high", "Describe it", [GC(cond(*[{"type": "clothing_item", "item_id": d, "operator": "unequipped"} for d in DRESSES]), POOL(P(beat("hale_thursday_session", "B a")), P(beat("hale_thursday_session", "B b")), P(beat("hale_thursday_session", "B c")), pid="hale_touch_high", bag=True)),
+        node("touch_high", "Describe it", [GC(cond(*[{"type": "clothing_item", "item_id": d, "operator": "unequipped"} for d in ONE_PIECE]), POOL(P(beat("hale_thursday_session", "B a")), P(beat("hale_thursday_session", "B b")), P(beat("hale_thursday_session", "B c")), pid="hale_touch_high", bag=True)),
             # fix_g3c: with the dress off over her head nothing says she has panties on, so the hand goes to her body
             # itself (her clit is the next word in all three), not "inside your panties"
-            *[GC(cond({"type": "clothing_item", "item_id": d, "operator": "equipped"}), POOL(*[P(_dress_off(beat("hale_thursday_session", k).replace("your top", "your dress"))) for k in ("B a", "B b", "B c")], pid=f"hale_touch_high_{d}", bag=True)) for d in DRESSES],
+            *[GC(cond({"type": "clothing_item", "item_id": d, "operator": "equipped"}), POOL(*[P(_dress_off(beat("hale_thursday_session", k).replace("your top", ONE_PIECE[d]))) for k in ("B a", "B b", "B c")], pid=f"hale_touch_high_{d}", bag=True)) for d in ONE_PIECE],
             VID("a topless student touching herself in her professor's office while he watches and takes notes", "student masturbates professor watches notes", "girl touches herself teacher watching office", pool_dir="sex/hale_thursday_high_t5")],
             [go("\"Same time next week.\"", node="end", mins=15, eff=SESSION_PAY(79, 59))]),
         node("claire_car", "She's early", [

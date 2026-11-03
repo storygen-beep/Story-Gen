@@ -238,6 +238,7 @@ the couch, and the bathroom door.
 - Pays his Lust +2 and her Exhibitionism +1, once a day (`ryan_towel_today`, cleared at midnight). After that it plays and pays nothing.
 - At the bathroom door: no lines (he can't see her through it), only "Knock, and let the towel slip."
 - Laura in the same room breaks her towel rule: "What did I say about towels in this house?" Her Love −3, no pay.
+- In his room the towel set waits while Kayla is on his bed (Fri 18:00–Sat 10:00): with her there the slip plays to two people, a group the Daring slip does not open (pass 4 reader, 2026-11-04).
 
 ## Accidents and fixes (DECISIONS 124, the heat ladder H2, H4, H5)
 
