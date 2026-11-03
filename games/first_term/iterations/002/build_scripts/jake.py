@@ -56,7 +56,7 @@ out.append({
     "trigger": step_trigger(J, 3, retry_days=7),
     "nodes": [
         node("porch", "The porch", [
-            P("Jake walks you up to the porch and stops under the light. The downstairs is dark. He looks past you at the windows, then up at the second floor. \"Is anyone up?\" He sounds like he hopes so. \"Nobody,\" you say. \"Not yet.\" Upstairs, Ryan's window is lit, right above the porch. He's home. You want him to look. \"Shame,\" Jake says. \"I want them to see you're mine, @player.\" His hand slides down your back and settles on your ass. You should move it, but you like being shown off. He leans in, and his mouth stops an inch from yours."),
+            P("Jake walks you up to the porch and stops under the light. The front of the house is dark. He looks past you at the dark windows. \"Is anyone up?\" He sounds like he hopes so. \"Nobody,\" you say. \"Not yet.\" Ryan's window is lit, right beside the porch. He's home. You want him to look. \"Shame,\" Jake says. \"I want them to see you're mine, @player.\" His hand slides down your back and settles on your ass. You should move it, but you like being shown off. He leans in, and his mouth stops an inch from yours."),
         ], [
             go("Kiss him.", node="rail", mins=3),
             go("\"Goodnight, Jake.\"", node="no", mins=2),
@@ -77,7 +77,7 @@ out.append({
             G(cond(LAURA_DRESS), ME("Better in your dress.")),
             G(cond({"type": "clothing_item", "item_id": "laura_blue_dress", "operator": "unequipped"}), ME("Better with you watching.")),
             P("She makes a sound in her throat, but she doesn't get up."),
-            P("You climb the stairs. Ryan's door is shut, and his light is on under it. You stand outside it a second. You don't knock, but you don't move either. You wanted him to see. You said Jake's name to his face on purpose, and you're not sorry. Not even a little. Jake will want a next Saturday. You already know it. Your phone buzzes in your hand. It's Jake: \"Next Saturday?\" Under Ryan's door, the light goes out."),
+            P("You go down the hall. Ryan's door is shut, and his light is on under it. You stand outside it a second. You don't knock, but you don't move either. You wanted him to see. You said Jake's name to his face on purpose, and you're not sorry. Not even a little. Jake will want a next Saturday. You already know it. Your phone buzzes in your hand. It's Jake: \"Next Saturday?\" Under Ryan's door, the light goes out."),
             D(R, "Who's Jake, @player.nickname? Really. Who is he?"),
             P("He says it through the door, low, but he doesn't open it."),
         ], [go("Go to bed.", loc="home_ella_room", mins=5, consumes=True,
@@ -147,7 +147,7 @@ out.append({
         node("door", "Come up", [
             P("Jake walks you up to the porch and stops under the light. You don't let go of his hand. You open the front door and pull him in after you."),
             ME("Come up."),
-            P("On the dark stairs he catches your hip and his breath is hot on your ear."),
+            P("In the dark hall he catches your hip and his breath is hot on your ear."),
             D(J, "Your room. Now."),
         ], [go("\"Quiet.\"", node="bed", mins=5),
             go("\"Goodnight, Jake.\"", node="next_sat", mins=2)]),
@@ -241,10 +241,10 @@ out.append({
             VID("a girl giving her boyfriend a handjob in a parked car, a passer-by looking", "handjob in parked car", "car handjob caught", pool_dir="sex/jake_car_hers_t5"),
             D(J, "Fuck. That guy saw. That guy totally saw."), ME("Good. Now he knows whose you are.")],
             [go("\"Goodnight, gorgeous.\"", loc="home_hall", mins=20, eff=CAR_PAY(79), flags=[funset("jake_date_booked")])]),
-        node("sneak", "Up the stairs", [
+        node("sneak", "Up the stairs", [   # Q7: the title stays with its signed beat (jake_date_end.md `sneak`, "up the stairs") until the sheet is re-signed
             POOL(P(beat("jake_date_end", "`sneak` a")), P(beat("jake_date_end", "`sneak` b")), pid="jake_sneak", bag=True),
             # (reader fix) Laura is downstairs, waiting up, on a Saturday night: her feet on the stairs, not her door
-            G(cond(ROLL("eq", 1)), P("Downstairs the TV goes quiet. Laura's feet on the stairs. You both stop breathing. They stop halfway up, and go back down."),
+            G(cond(ROLL("eq", 1)), P("In the living room the TV goes quiet. Laura's feet in the hall. You both stop breathing. They stop halfway, and go back."),
               D(J, "Your mom?"), ME("Shh.")),
             G(cond(ROLL("eq", 2), flag("ryan_knock_code")), P("Two knocks on the wall. Slow. Ryan's code."), D(J, "What was that?"), ME("Nothing. The pipes.")),
             VID("a couple having quiet sex in her bedroom at night", "sneaky sex her room at night", "boyfriend snuck in sex quiet", pool_dir="sex/jake_sneak_t5"),

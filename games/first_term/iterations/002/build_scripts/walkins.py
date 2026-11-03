@@ -222,7 +222,7 @@ walkin("walkin_shower_mark", "The door opens", "home_bathroom",
     [here(M, "home_garage"), flag("mark_saw_her")],
     shower_in("The lock catches halfway and sticks. You leave it. You strip off and step into the hot water.",
               "The lock's still off from last time, but you don't fix it. You strip off and step into the hot water.",
-              "Downstairs Mark's radio is on in the garage. You soap your tits and your stomach with your eyes shut.")
+              "Down the hall Mark's radio is on in the garage. You soap your tits and your stomach with your eyes shut.")
     + [P("The door opens. Mark walks in with grease to his elbows, heading for the sink. He stops.")],
     "He's seen you.",
     [P("You're naked under the water. His eyes go to your tits and stay there. Then lower, to your pussy, and they stay there too."),
@@ -266,17 +266,17 @@ walkin("walkin_kitchen_ryan", "Reaching past", "home_kitchen",
      go("Push back into him.", node="r_push", mins=2, cond_=cond(BOLD), eff=[pay("corruption", 59)])],
     raise_=[lust(R)], records=["ryan_brushed_kitchen"], when=[wd(5, 6), tod("07:30", "10:00")], extra=[
         res("r_aside", "Step aside", [P("You duck out from under his arm and take your coffee to the window."), ME("Kettle's just boiled. Help yourself."), D(R, "Yeah. Thanks. I'll, yeah."),
-                                      P("Behind you he fills his mug and goes back up two stairs at a time, the mug in front of his boxers.")],
+                                      P("Behind you he fills his mug and goes back to his room fast, the mug in front of his boxers.")],
             "Drink your coffee.", "home_kitchen", 10),
         res("r_stay", "Don't move", [P("You don't move. You stand there with his cock pressed into your ass and let him feel you not moving. Your nipples go hard."),
                                      D(R, "@player.nickname. You're. You're not moving."), ME("Neither are you."),
-                                     P("He breathes out, shaky, and steps back. He takes his mug upstairs and doesn't look at you once."),
+                                     P("He breathes out, shaky, and steps back. He takes his mug back to his room and doesn't look at you once."),
                                      T("He felt you stay. He knows you felt him.")],
             "Drink your coffee.", "home_kitchen", 10),
         res("r_push", "Push back into him", [P("You push back into him. Your ass grinds right back against his cock, slow, once, and his hand grips the edge of the counter beside yours."),
-                                             D(R, "Jesus, @player.nickname. Anybody could come down."), ME("Then be quick about it."),
-                                             P("He pulls away like it burns, the mug forgotten on the shelf, and goes back up the stairs with his hand over his boxers."),
-                                             D(R, "Next weekend I'm coming down for that mug again. You be at this counter.")],   # scene reader b02: the hook
+                                             D(R, "Jesus, @player.nickname. Anybody could walk in."), ME("Then be quick about it."),
+                                             P("He pulls away like it burns, the mug forgotten on the shelf, and goes back down the hall with his hand over his boxers."),
+                                             D(R, "Next weekend I'm coming in for that mug again. You be at this counter.")],   # scene reader b02: the hook
             "Drink your coffee.", "home_kitchen", 10)])
 # Ryan's Saturday window stops where Mark's starts (DECISIONS 152), so the two never overlap; Sunday stays 07:30-10:00.
 for host in ("kitchen_breakfast", "kitchen_coffee"):
@@ -290,7 +290,7 @@ for host in ("kitchen_breakfast", "kitchen_coffee"):
 walkin("walkin_kitchen_mark", "Reaching past", "home_kitchen",
     "B2, Mark: down from sleeping in on a Saturday for his coffee, he puts his hand on her hip to get past her at the counter; after mark_saw_her. His Lust +2 on the moment; her answer on Corruption: step aside 0, stay +1 cap 19 / 39, push back (Bold) +1 cap 59.",
     [here(M, "home_master_bedroom"), SAW_],
-    [P("Saturday. You're at the counter with the kettle on and the kitchen to yourself. Upstairs a bed creaks, then the stairs."),
+    [P("Saturday. You're at the counter with the kettle on and the kitchen to yourself. Down the hall a bed creaks, then a door."),
      P("Mark comes in barefoot in yesterday's jeans, his hair flat on one side from the pillow. He wants the coffee jar, and you're standing in front of it."),
      P("He doesn't ask you to move. His hand goes flat on your hip, big and warm, and he steps in behind you to reach past.")],
     "His hand stays.",
@@ -383,8 +383,8 @@ walkin("walkin_tv_ryan", "Channel 5", "home_living_room",
     "B3, Ryan: down from his room for his weekend TV row, he finds channel 5 on. His Lust +2 on the moment; her answer on Corruption: off 0, wait +1 cap 19, leave it on (Curious) +1 cap 39.",
     [here(R, "home_ryan_room")],
     ch5_in("A man flat on his back and a girl riding him, her tits bouncing, his hands full of her ass.",
-           "You left the sound up. Her moans go all the way up the stairs.")
-    + [P("Ryan comes down the stairs for the TV and stops on the last one.")],
+           "You left the sound up. Her moans go all the way down the hall.")
+    + [P("Ryan comes in from the hall for the TV and stops in the doorway.")],
     "He's seen the screen.",
     [P("He looks at the screen. She drops down on the man's cock, and she moans. Then he looks at you."),
      D(R, "Seriously, @player.nickname? It's the middle of the day."), ME("And?"),
@@ -520,11 +520,11 @@ walkin("walkin_mirror_ryan", "In the mirror", "home_hall",
             "Go on.", "home_hall", 2)])
 
 walkin("walkin_mirror_mark", "In the mirror", "home_hall",
-    "B5, Mark: up the stairs to bed after his late TV, he stops behind her at the hall mirror; after mark_saw_her. His Lust +2 on the moment; her answer on Exhibitionism: her room 0, stay +1 cap 19 / 39 / 59. Shares home_event.",
+    "B5, Mark: down the hall to bed after his late TV, he stops behind her at the hall mirror; after mark_saw_her. His Lust +2 on the moment; her answer on Exhibitionism: her room 0, stay +1 cap 19 / 39 / 59. Shares home_event.",
     [here(M, "home_living_room"), SAW, flag("home_event", False)],
-    [P("You're at the hall mirror checking yourself over when the stairs creak. Mark, coming up to bed. In the glass you see him stop on the top step.")],
+    [P("You're at the hall mirror checking yourself over when the living-room door creaks. Mark, on his way to bed. In the glass you see him stop behind you.")],
     "He's looking.",
-    mirror_seen("his", "From the top step") + [
+    mirror_seen("his", "From behind you") + [
         P("His hand tightens on the rail."),   # DO NOT DELETE: a non-group block, so his bands below are not elseifs of mirror_seen's
         GC(cond(ntrait(M, "want", "lt", 20)), P("Then he catches himself. He looks down at the stair carpet, at his own feet, anywhere but the glass."),
            D(M, "Bit late to be dressing up, @player. Bed."), ME("Night, Mark."), D(M, "Night.")),
@@ -580,7 +580,7 @@ walkin("walkin_wardrobe_mark", "Laura's lingerie", "home_master_bedroom",
     [P("Laura's drawer under the dresses is open. The stockings are still in their packet, and the black lace bra that is not a mom's bra is on you."),
      *LINGERIE_OFF,
      P("In her long mirror your tits sit high in the lace, and your nipples show dark right through it. You turn side-on to see how it looks."),
-     P("The front door goes downstairs. Then heavy feet on the stairs, slow, a man's. The bedroom door opens before you can move. Mark, home from the bar."),
+     P("The front door goes. Then heavy feet in the hall, slow, a man's. The bedroom door opens before you can move. Mark, home from the bar."),
      # pass 3 B4: the speech on this screen is hers; Mark's one line is on the next (pass 4 B51)
      ME("Mark. I was just. I was only trying it on.")],
     "He stops in the doorway.",
@@ -617,7 +617,7 @@ rule("master_wardrobe", "walkin_wardrobe_mark", 0.25, wd(5), tod("21:45", "22:00
 # B7 · RYAN'S THINGS (host ryan_things, Ryan out): Ryan up from dinner; Kayla early on a Friday.
 # ═════════════════════════════════════════════════════════════════════════════
 walkin("walkin_things_ryan", "Caught", "home_ryan_room",
-    "B7, Ryan: up from dinner, he catches her with the box from his drawer. His Lust +2 on the moment; her answer on Corruption: put it back 0, \"Explain this.\" +1 cap 19.",
+    "B7, Ryan: up from dinner, he catches her with the box from his drawer. His Lust +2 on the moment; her answer on Corruption: put it back 0, \"Explain this.\" (Curious, Corruption 20 up; LO 2026-11-04, Q15) +1 cap 39.",
     [here(R, "home_kitchen")],
     [P("You've got Ryan's bedside drawer open and the box of condoms in your hand, opened, half gone, when the door opens behind you."),
      P("Ryan, up from dinner.")],
@@ -627,16 +627,14 @@ walkin("walkin_things_ryan", "Caught", "home_ryan_room",
      GC(cond(*ANY), P("He shuts the door behind him and leans on it. His eyes go down you, slow, your tits, your legs, the box in your hand."),
         D(R, "Find what you were looking for?"), ME("Maybe. Half the box is gone, Ryan."), D(R, "Counting, are you?"))],
     [go("Put it back.", loc="home_hall", mins=5),
-     go("Hold it up. \"Explain this.\"", node="explain", mins=3, eff=[pay("corruption", 19)])],
+     go("Hold it up. \"Explain this.\"", node="explain", mins=3, eff=[pay("corruption", 39)], cond_=cond(CURIOUS))],
     raise_=[lust(R)], records=["ryan_caught_snooping", "ryan_things_found"], when=[wd(6, 0, 1, 3), tod("18:45", "19:00")], extra=[
         res("explain", "Explain this", [ME("Explain this."),
                                         P("You hold the box up between you. Half gone. Ryan looks at it, then at you, and his ears go red."),
                                         G(cond(flag("knows_about_kayla")), D(R, "That's mine and Kayla's business.")),
                                         G(cond(flag("knows_about_kayla", False)), D(R, "That's none of your business.")),
-                                        # scene reader b02 (2026-11-03): the button is open at Good Girl, and a flirt opens at Curious (H1),
-                                        # so under Corruption 20 she teases him like a sister and the flirt is the Curious line
-                                        GC(cond(trait("corruption", "lt", 20)), P("He snatches it out of your hand and shoves it back in the drawer, red to the ears."),
-                                           D(R, "Out. Before I tell Mom you go through my drawers."), ME("Tell her. I'll tell her what I found.")),
+                                        # LO, 2026-11-04 (Q15): the flirt opens at Curious, so the button waits for Corruption 20
+                                        # and the Good Girl tease that stood in for it below 20 is gone
                                         GC(cond(*ANY), P("He takes it out of your hand. His fingers close over yours on the box, but he doesn't let go as fast as he should. His eyes drop to your mouth."),
                                            D(R, "Out. Before I start asking what you're doing in my drawer."), ME("Ask, then."))],
             "Leave him to it.", "home_hall", 2)])

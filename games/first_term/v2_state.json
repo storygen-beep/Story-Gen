@@ -6886,7 +6886,7 @@
             "type": "opens his next step",
             "min": 0,
             "max": 100,
-            "start": 20
+            "start": 0
           },
           "warmth": {
             "type": "colours how he treats her: protective, covers for her with Laura, jealous of Jake (SP2:69-70)",
@@ -10096,6 +10096,16 @@
         "chrome": {
           "at": "2026-11-03 22:12",
           "report": "Dev build after group 2 (2026-11-03). Lecture room shut at Tue 15:00: only the four lectures show, each with its hours; 'The guy beside you' and 'A word about what you're wearing' are hidden, and show as links on Mon 08:35. home_event_ryan_towel: Ryan's Want 20 to 22 on the way in, stays 22 after 'Step round him.', ryan_saw_her_towel set. Jake A1 'Get on your knees.': energy 50 to 40, hygiene 80 to 70, corruption 45 to 46 on the button in; the free exit pays nothing more; hygiene 5 clamps to 0; at energy 5 the button is locked 'Requires 10 Energy'. Zoe's flat at Fri 23:00 with corruption 10: the keg guy row does not show."
+        },
+        "played": null
+      },
+      {
+        "id": "q1_q17_line_fixes",
+        "what": "LO's answers Q1-Q17 (2026-11-04), line and gate fixes: Ryan's Lust starts 0, cafe one-time scenes off the wardrobe room, Zoe/Jake no-show patience, the rent counted once, one hall, Kayla's row at 18:00, the opening true to the rows, the tub strips her, Daring past 40, Ryan's door shut while Kayla is over, the drawer flirt at Curious, nobody is woken",
+        "built_at": "2026-11-04 03:58",
+        "chrome": {
+          "at": "2026-11-04 03:58",
+          "report": "New game in Chrome after Q10: wake, problem, shower, hall, run, breakfast, rule, card. Breakfast reads 'Mark, your step-father, has already gone to work.'; the rule screen has Ryan in the shower down the hall, then his door shuts. Ryan's hall offers 'Run to your room.', 'Knock next time.', 'Stop and talk.' with no '(ends his path)'."
         },
         "played": null
       }

@@ -410,7 +410,7 @@ out.append({
     ]})
 
 # ═════════════ TOUCHING HERSELF (from Curious; DECISIONS 13) ═════════════
-BED = ("Your door is shut, but someone's TV mutters downstairs. Under the sheet, you slide a hand up and squeeze your tits. You pinch a nipple until it goes hard between your fingers, and the jolt runs straight down to your clit. So you follow it down. You're wet already, and you want to know how much more you can take. Two fingers circle your clit, slow, until your hips start to lift. Then faster. Your heels dig in, your ass comes off the mattress, chasing your hand. The walls are thin, so you bite your lip hard to keep quiet. You come with your thighs clamped on your wrist, legs shaking, fingers still pressed to your clit.")
+BED = ("Your door is shut, but someone's TV mutters down the hall. Under the sheet, you slide a hand up and squeeze your tits. You pinch a nipple until it goes hard between your fingers, and the jolt runs straight down to your clit. So you follow it down. You're wet already, and you want to know how much more you can take. Two fingers circle your clit, slow, until your hips start to lift. Then faster. Your heels dig in, your ass comes off the mattress, chasing your hand. The walls are thin, so you bite your lip hard to keep quiet. You come with your thighs clamped on your wrist, legs shaking, fingers still pressed to your clit.")
 SHOWER = ("You lock the door and step naked under the hot water. Footsteps cross the hall outside and keep going. The water runs down your tits and drips off your nipples. You soap them slowly, thumbs circling until they stand hard and ache. Your hand slides down your belly and between your legs. You are slick there, and not from the shower. Two fingers find your clit and press. The water drums on your back and your ass. You lean one hand on the tile and rub faster. Your hips jerk against your fingers. The orgasm hits hard, and you bite down on the moan. Your knees go weak, and you hold the tile while your clit throbs under your hand.")
 TOILET = ("You lock the stall and lean back against the cold wall. Your hand slides inside, and you are already wet. Two fingers find your clit and press. Your other hand clamps over your mouth. A faucet runs three feet away. A girl laughs at the mirror. You rock your hips against your fingers, slow, so the latch doesn't rattle. Your nipples go hard and tight. The door bangs, and you freeze with your fingers on your clit. Nobody knocks. So you keep going, faster, while the hand dryer roars. The moan stays trapped under your palm. The orgasm hits without a sound, and your thighs clamp shut on your hand.")
 # "Footsteps cross the hall" (touch_shower.md): only at hours somebody is up in the house, by their rows
@@ -422,7 +422,7 @@ TOUCH_SHOWER_HOURS = [{"weekdays": [0, 1, 2, 3, 4, 6], "start_time": "18:00", "e
                       {"weekdays": [5], "start_time": "22:00", "end_time": "00:00"}]
 # truth pass (2026-11-03): "someone's TV mutters downstairs" only while someone is in the living room (the any-NPC
 # presence item, v2.py:5244-5256); with nobody down there the sentence keeps its first clause. touch_bed has no hours.
-BED_TV = "Your door is shut, but someone's TV mutters downstairs."
+BED_TV = "Your door is shut, but someone's TV mutters down the hall."
 assert BED.startswith(BED_TV + " ")
 BED_OPEN = [GC(cond({"type": "npc_at_location", "location_id": "home_living_room", "operator": "is_present"}), P(BED_TV)),
             GC(cond({"type": "worn_exposure", "operator": "gte", "value": 0}), P("Your door is shut.")),
@@ -446,53 +446,53 @@ NO_PANTIES = {"type": "clothing_slot", "slot": "underwear", "operator": "unequip
 MARK_BELOW = {"type": "npc_at_location", "location_id": "home_living_room", "npc_id": M, "operator": "is_present"}
 MARK_NOT_BELOW = {"type": "npc_at_location", "location_id": "home_living_room", "npc_id": M, "operator": "is_absent"}
 out.append({
-    "id": "wardrobe_event_stairs", "name": "Take the stairs slowly",
-    "description": "The stairs event (wardrobe pool): a short skirt or no panties, and someone below. Exhibitionism +1, once a day.",
+    "id": "wardrobe_event_stairs", "name": "Bend for your bag in the hall",
+    "description": "The hall event (wardrobe pool; was the stairs, Q7 one hall, LO 2026-11-04): a short skirt or no panties, and someone behind her. Exhibitionism +1, once a day.",
     "trigger": {"location": "home_hall", "is_repeatable": True, "priority": 3, "is_active": True, "max_triggers_per_day": 1,
                 # (DECISIONS 124) only with Mark below to see it (reader: an empty house paid her for nobody);
                 # the evaluator takes flat lists, so one watcher is the trigger and the others are extra lines
                 "conditions": cond(SKIRT, trait("exhibitionism", "gte", 20), MARK_BELOW)},
-    "nodes": [node("stairs", "The stairs", [
-        P("You go up the stairs slowly, one hand on the rail."),
+    "nodes": [node("stairs", "The hall", [
+        P("Your bag strap slips off your shoulder in the hall, and you bend to catch it, slowly."),
         G(cond({"type": "npc_at_location", "location_id": "home_living_room", "npc_id": M, "operator": "is_present"}),
-          # copy fixes A16 + C34 merged (DECISIONS 125): mid-climb, so both exits below ("Hold your skirt down." /
-          # "Take the stairs slower.") still answer him
-          P("Mark comes out of the living room into the hall below when you're halfway up. He stops. He looks up the stairs, straight up your skirt to your ass, and he doesn't look away. His hand has gone white on the banister."),
-          D(M, "That skirt doesn't go up stairs in my house, @player."),
-          P("He stays at the bottom of the stairs and waits to see what you do.")),
+          # copy fixes A16 + C34 merged (DECISIONS 125): mid-bend, so both exits below ("Hold your skirt down." /
+          # "Take your time getting up.") still answer him
+          P("Mark comes out of the living room into the hall behind you while you're bent over. He stops. He looks straight up your skirt to your ass, and he doesn't look away. His hand has gone white on the door frame."),
+          D(M, "That skirt doesn't bend over in my house, @player."),
+          P("He stays in the living-room doorway and waits to see what you do.")),
         G(cond({"type": "npc_at_location", "location_id": "home_ryan_room", "npc_id": R, "operator": "is_present"}),
-          P("Ryan is coming down as you go up. You pass on the narrow stairs, and he has to flatten himself to the wall, and his eyes go down your legs on the way past.")),
+          P("Ryan comes out of his room as you straighten up. You pass in the narrow hall, and he has to flatten himself to the wall, and his eyes go down your legs on the way past.")),
         G(cond({"type": "npc_at_location", "location_id": "home_kitchen", "npc_id": L, "operator": "is_present"}),
           D(L, "Is that for college or for a guy?")),
-        G(cond(SKIRT, NO_PANTIES), P("There's nothing under the skirt. Anyone at the bottom of these stairs gets your bare ass and your pussy."),
+        G(cond(SKIRT, NO_PANTIES), P("There's nothing under the skirt. Anyone behind you in this hall gets your bare ass and your pussy."),
           # heat proposal A12 (DECISIONS 147): a _t4 pool on the no-panties screen (media only)
-          VID("a girl in a short skirt and no panties climbing the stairs, a man at the bottom looking straight up it",
-              "upskirt stairs no panties", "girl climbs stairs short skirt man below looks up", pool_dir="sex/stairs_skirt_t4")),
+          VID("a girl in a short skirt and no panties bending over in a hallway, a man behind her looking straight up it",
+              "upskirt bending over no panties hallway", "girl bends over short skirt man behind looks", pool_dir="sex/stairs_skirt_t4")),
     ], [  # DECISIONS 124 (H5): a way out that pays her nothing; the watcher's look moves his meter; only her going slower pays her
         go("Hold your skirt down.", node="down", mins=2),   # C1 (LO 2026-11-03): her no never raises his Want; reader batch 4 (pass 3): he answers it
         # pass 3 D44 (the-surfaces.md R9): going slower for him lands on his look, not a toast (Mark is below: the trigger)
         # reader batch 4 (pass 3): her chosen tease for Mark follows his accident, as his towel acts do (H2, DECISIONS 124)
-        go("Take the stairs slower.", node="slower", mins=3, cond_=cond({"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}, flag("mark_saw_her")),
+        go("Take your time getting up.", node="slower", mins=3, cond_=cond({"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}, flag("mark_saw_her")),
            eff=[capped("exhibitionism", 1, CAP_CUR)]),
-        go("Take the stairs slower.", node="slower", mins=3, cond_=cond(NO_PANTIES, trait("exhibitionism", "gte", 40), flag("mark_saw_her")),
+        go("Take your time getting up.", node="slower", mins=3, cond_=cond(NO_PANTIES, trait("exhibitionism", "gte", 40), flag("mark_saw_her")),
            eff=[capped("exhibitionism", 1, CAP_BOLD)]),
     ]),
         node("slower", "Slower", [
             G(cond(MARK_BELOW, {"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}),
-              P("You take each step slower than the last, hips swaying, the skirt riding up with every one. At the bottom Mark doesn't move. He watches your ass and your panties all the way to the top.")),
+              P("You take your time with the strap, hips swaying, the skirt riding up as you reach for it. In the doorway Mark doesn't move. He watches your ass and your panties the whole time.")),
             G(cond(MARK_BELOW, NO_PANTIES),
-              P("You take each step slower than the last, and on the top step you bend forward, legs straight, for one long breath. From the bottom of the stairs Mark gets your bare ass and your pussy, and his breath goes out of him loud enough to hear.")),
+              P("You don't straighten up. You stay bent forward, legs straight, for one long breath. From the doorway Mark gets your bare ass and your pussy, and his breath goes out of him loud enough to hear.")),
             G(cond(MARK_BELOW), D(M, "Christ, @player.")),
-            G(cond(MARK_NOT_BELOW), P("You take the last steps slow anyway. At the top the hall below is empty, and your face is hot.")),
-            P("Mark's down in that living room most nights. These stairs will still be here."),   # reader batch 4 (pass 3): the hook
-        ], [go("Go on up.", loc="home_hall")]),
+            G(cond(MARK_NOT_BELOW), P("You straighten up slow anyway. When you look round the hall is empty, and your face is hot.")),
+            P("Mark's in that living room most nights. This hall will still be here."),   # reader batch 4 (pass 3): the hook
+        ], [go("Go on.", loc="home_hall")]),
         # reader batch 4 (pass 3): the written no, his answer on the screen it lands on (Mark is below: the trigger)
         node("down", "Skirt down", [
-            P("You clamp your skirt to the backs of your thighs with one hand and take the rest of the stairs fast."),
+            P("You clamp your skirt to the backs of your thighs with one hand, straighten up and get down the hall fast."),
             G(cond(MARK_BELOW), D(M, "Better."),
-              P("He's still at the bottom when you reach the top, still looking up at your legs.")),
-            P("Mark's down in that living room most nights. These stairs will still be here."),
-        ], [go("Go on up.", loc="home_hall")])]})
+              P("He's still in the doorway when you reach your room, still looking at your legs.")),
+            P("Mark's in that living room most nights. This hall will still be here."),
+        ], [go("Go on.", loc="home_hall")])]})
 
 # Iteration 002, part 3: leaving this outing after 22:00 sets late_party and came_home_late (Q69,
 # the street sheet "Why she's late"; canv.mark_late). Each is read for 4 hours; her bed clears them.

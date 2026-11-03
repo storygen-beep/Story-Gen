@@ -1211,6 +1211,26 @@ max_triggers_per_day = 1
 # naked in the tub with strangers is naked for a group: Watched (DECISIONS 124)
 conditions    = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 } ] }
 
+# pass 4 (LO, 2026-11-04, Q11): getting in strips her and getting out dresses her (the wardrobe, not only the words).
+# The engine keeps no outfit to put back, so the way out dresses her as every "Get dressed." here does (canv.DRESS_DAY).
+[[canvases.nodes]]
+id   = "deck"
+name = "The hot tub"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The hot tub steams on the back deck, lit blue from under the water. Nobody gets in it dressed."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Strip and get in."
+targetType = "node"
+nodeId     = "tub"
+time_progression_minutes = 2
+wardrobeEffects = [ { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" } ]
+
 [[canvases.nodes]]
 id   = "tub"
 name = "The hot tub"
@@ -1267,6 +1287,7 @@ text       = "Get out, dripping."
 targetType = "location"
 locationId = "party_house"
 time_progression_minutes = 30
+wardrobeEffects = [ { action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" } ]
 conditions = { version = "1.0", logic = "AND", items = [ { type = "time_of_day", start_time = "06:00", end_time = "22:00" } ] }
 effects    = [ { targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 } ]
 
@@ -1276,6 +1297,7 @@ text       = "Get out, dripping."
 targetType = "location"
 locationId = "party_house"
 time_progression_minutes = 30
+wardrobeEffects = [ { action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" } ]
 conditions = { version = "1.0", logic = "AND", items = [ { type = "time_of_day", start_time = "22:00", end_time = "06:00" } ] }
 effects    = [ { targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 } ]
 flagEffects = [ { targetType = "player", flag = "late_party", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" } ]
@@ -1311,6 +1333,7 @@ text       = "Get out, dripping."
 targetType = "location"
 locationId = "party_house"
 time_progression_minutes = 30
+wardrobeEffects = [ { action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" } ]
 conditions = { version = "1.0", logic = "AND", items = [ { type = "time_of_day", start_time = "06:00", end_time = "22:00" } ] }
 effects    = [ { targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 } ]
 
@@ -1319,6 +1342,7 @@ text       = "Get out, dripping."
 targetType = "location"
 locationId = "party_house"
 time_progression_minutes = 30
+wardrobeEffects = [ { action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" } ]
 conditions = { version = "1.0", logic = "AND", items = [ { type = "time_of_day", start_time = "22:00", end_time = "06:00" } ] }
 effects    = [ { targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 } ]
 flagEffects = [ { targetType = "player", flag = "late_party", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" } ]

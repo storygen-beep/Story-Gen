@@ -33,7 +33,10 @@ def back(next_node):
 out.append({
     "id": "cafe_job_ask", "name": "Ask about the job",
     "description": "Meets Tom: the sign in the window. Sets cafe_job and tom_met; adds the café uniform.",
+    # Q2 (LO, 2026-11-04): opens from the coffee at the counter (extras.py cafe_coffee), not on entry, so the café's
+    # wardrobe link always shows
     "trigger": {"location": "cafe", "requires_npc": TM, "is_repeatable": False, "priority": 10, "is_active": True,
+                "substitution_only": True,
                 "consume_on": "exit", "retry_after_days": 1,   # "Not yet." parks it (tom_01_the_apron.md, signed 2026-11-01)
                 "schedules": [{"weekdays": [0, 1, 2, 3, 4, 5], "start_time": "08:00", "end_time": "23:00"}],
                 "conditions": cond(flag("opening_done"), flag("cafe_job", False))},
@@ -46,7 +49,8 @@ out.append({
             ME("I can start today. I need the money."),
             D(TM, "Everybody needs the money. Eight a shift, plus tips. Be on time."),
             T("He looked at you one second too long. Then he was all business."),
-        ], [go("\"When do I start?\"", node="uniform", mins=5),
+        # Q2 (LO, 2026-11-04): from the counter now, which makes it an event to the gates; his look pays him (H5)
+        ], [go("\"When do I start?\"", node="uniform", mins=5, eff=[nadd(TM, "want", 2)]),
             go("\"Not yet.\"", node="not_yet", mins=2)]),
         node("not_yet", "Not yet", [
             D(TM, "Sign stays up till somebody takes it."),
@@ -62,8 +66,8 @@ out.append({
 # ── step 1 · Tom B 1 · the apron ──
 out.append({
     "id": "tom_01_the_apron", "name": "The apron",
-    "description": "Tom step 1 (Tom B 1), her first shift: he reties her apron. Both answers count.",
-    "trigger": step_trigger(TM, 1),
+    "description": "Tom step 1 (Tom B 1), her first shift: he reties her apron. Both answers count. Opens from \"Work a shift\" (Q2).",
+    "trigger": dict(step_trigger(TM, 1), substitution_only=True),   # Q2: from the shift at the counter (cafe.py)
     "nodes": [
         back("apron"),
         node("apron", "The apron", [
@@ -90,7 +94,7 @@ out.append({
 out.append({
     "id": "tom_03_the_tip_jar", "name": "The tip jar",
     "description": "Tom step 2 of 3 (release 1; was Tom B 3): she sees him steal from the tip jar. Sets knows_tip_jar.",
-    "trigger": step_trigger(TM, 2, retry_days=3),
+    "trigger": dict(step_trigger(TM, 2, retry_days=3), substitution_only=True),   # Q2: from the shift at the counter (cafe.py)
     "nodes": [
         back("jar"),
         node("jar", "The back room", [
@@ -120,9 +124,11 @@ out.append({
 # ── step 3 · Not by the window (tom_03b_not_by_the_window.md, signed 2026-11-01), the top step: after a shift she let
 #    a customer's hand stay (cafe_let_it, under an hour), at footfall 15 and name -5. ──
 _t3 = step_trigger(TM, 3, retry_days=1)
+_t3["substitution_only"] = True   # Q2 (LO, 2026-11-04): opens from Tom's hub at the counter (hub_tom_cafe below)
 # "this shift": the flag is stamped when the clock-out choice runs, before its 180 minutes pass, so under 4 hours
 _t3["conditions"]["items"].append({"type": "hours_since_flag", "subject": "player", "flag_key": "cafe_let_it", "operator": "lt", "value": 3.5})   # false lines a3 #15: "off the floor" = within 30 minutes of clocking out
-WINDOW_DONE = dict(eff=[setv("tom_step", 3)], flags=[fset("tom_window_rule"), fset("tom_03b_done")])
+# Q2 (LO, 2026-11-04): from his hub now, an event to the gates; he watched her let it happen, which pays him (H5)
+WINDOW_DONE = dict(eff=[setv("tom_step", 3), nadd(TM, "want", 2)], flags=[fset("tom_window_rule"), fset("tom_03b_done")])
 out.append({
     "id": "tom_03_not_by_the_window", "name": "Not by the window",
     "description": "Tom step 3 of 3, the top step (release 1): in the back room after a shift she let a customer touch her. \"Reputation's going. The tables are full.\" \"Not by the window.\" Sets tom_window_rule; his card ends on the locked line.",
@@ -168,7 +174,9 @@ out.append({
     # The counter is the open café, 08:00-22:00. The café stays open till 23:00 for his closing hour
     # (LO, 2026-10-29), and that hour's face is after close; this hub would take it (priority 6 over 5).
     "trigger": {"location": "cafe", "npc": TM, "requires_npc": TM, "is_repeatable": True, "priority": 6,
-                "is_active": True, "conditions": cond(flag("tom_met"), tod("08:00", "22:00"))},
+                "is_active": True, "conditions": cond(flag("tom_met"), tod("08:00", "22:00")),
+                # Q2 (LO, 2026-11-04): his top step opens from him, after the shift, not on entry
+                "substitutions": [on_activity("tom_03_not_by_the_window", flag("cafe_job"))]},
     "nodes": [
         node("counter", "The counter", [
             P("Tom's behind the counter with a cloth over his shoulder, keeping an eye on the room and an eye on you."),

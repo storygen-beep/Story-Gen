@@ -46,11 +46,12 @@ currency_symbol  = "$"
 # (pass 3 F72, F10) The engine shows these pages on her first move after Sunday 00:00, wherever she is and whatever
 # the hour, while Mark is in bed until 07:00 and in the kitchen only from 08:00. So the pages never put him in the
 # room: his text, sent at midnight when he is still up (00:00-01:00, the master bedroom), says it, and she puts the
-# money aside for him. The count itself happens once, with him there, at his Sunday table (mark.py).
+# money aside for him. This page is the one count: his Sunday table (mark.py) sits beside it and never counts it
+# again (LO, 2026-11-04, Q6).
 [settings.rent.text]
 title        = "Sunday. The rent."
 scene         = "Your step-father's text came in at midnight on the dot. It's Sunday, and he wants his money."
-greeting      = "Rent. In the envelope. I count it at the kitchen table in the morning, with you sitting there."
+greeting      = "Rent. In the envelope. It goes in Vance's at the kitchen table in the morning, with you sitting there."
 paid_scene    = "You fold it away for him, every bill of it. It's Mark's money now."
 paid_response = "Good."
 paid_closing  = "Whatever's left in your purse is yours."
@@ -195,9 +196,15 @@ flagEffects = [
   # (alignment pass 3 group 2, round 2) Laura's grade portal in her kitchen hub, once a day as the four
   # laura_reads_<grade> canvases were (max_triggers_per_day) before C30 moved them into the hub (laura.py PORTAL)
   { targetType = "player", flag = "laura_portal_today", op = "unset" },
+  # Q5 (LO, 2026-11-04): the day an invite was ignored; its one follow-up text reads it (phone.py)
+  { targetType = "player", flag = "zoe_ignored", op = "unset" },
+  { targetType = "player", flag = "jake_ignored", op = "unset" },
 ]
 traitEffects = [
   { targetType = "player", trait = "curfew_days", op = "add", value = -1, clamp = true },
+  # Q5 (LO, 2026-11-04): Zoe's and Jake's patience comes back one a night, to full (phone.py ZOE_WAIT, JAKE_WAIT)
+  { targetType = "player", trait = "zoe_patience", op = "add", value = 1, cap = 6 },
+  { targetType = "player", trait = "jake_patience", op = "add", value = 1, cap = 3 },
 ]
 
 # ── her face (SP6 · engine.md §34b). The look is not chosen yet (DECISIONS 1):
@@ -340,6 +347,16 @@ label  = "Sundays paid in a row"
 [[traits.labels]]
 key    = "curfew_days"
 label  = "Curfew, days left"
+hidden = true
+
+[[traits.labels]]
+key    = "zoe_patience"
+label  = "Zoe's patience"
+hidden = true
+
+[[traits.labels]]
+key    = "jake_patience"
+label  = "Jake's patience"
 hidden = true
 
 [[traits.labels]]

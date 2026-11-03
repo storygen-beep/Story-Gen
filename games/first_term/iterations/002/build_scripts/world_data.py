@@ -107,9 +107,9 @@ LOCATIONS = [
                       conditions=cond(tod("22:00", "06:00")),
                       goes_to={"type": "canvas", "canvas_id": "hall_home_late"}),
              ]),
-         description=("The hall: the middle of the house, and the stairs. Every door opens off it — the kitchen, "
+         description=("The hall: the middle of the house. Every door opens off it — the kitchen, "
                       "the living room, the garage, the one bathroom, the three bedrooms, the front door. "
-                      "There's a mirror by the coats, and the stairs carry every sound up and down. Nothing "
+                      "There's a mirror by the coats, and the hall carries every sound from one end to the other. Nothing "
                       "happens in this house that the hall doesn't hear first.")),
     dict(id="home_kitchen", name="Kitchen", entry_from="home_hall", kind="destination",
          description=("The kitchen: where this family eats, argues and pays. Laura makes breakfast here before "
@@ -219,15 +219,23 @@ LOCATIONS = [
          door=dict(
              description="Ryan's door. A strip of light under it when he's home.",
              no_answer="You knock. Nothing. He's out.",
+             # LO, 2026-11-04 (Q14): shut while Kayla is over (her rows, Fri 18:00-Sat 10:00): one closed line,
+             # and neither knock shows. Her walk-in in his drawer (Fri 17:45-18:00) is before she's in.
+             variants=[(cond({"type": "npc_at_location", "location_id": "home_ryan_room", "npc_id": "npc_kayla", "operator": "is_present"}),
+                        "Kayla's here. His door is shut, and it stays shut till she goes.")],
              options=[
                  dict(text="Knock.",
                       conditions=cond({"type": "npc_at_location", "location_id": "home_ryan_room",
                                        "npc_id": "npc_ryan", "operator": "is_present"},
+                                      {"type": "npc_at_location", "location_id": "home_ryan_room",
+                                       "npc_id": "npc_kayla", "operator": "is_absent"},
                                       flag("ryan_knock_code", False)),
                       goes_to={"type": "enter"}),
                  dict(text="Two knocks.",
                       conditions=cond({"type": "npc_at_location", "location_id": "home_ryan_room",
                                        "npc_id": "npc_ryan", "operator": "is_present"},
+                                      {"type": "npc_at_location", "location_id": "home_ryan_room",
+                                       "npc_id": "npc_kayla", "operator": "is_absent"},
                                       flag("ryan_knock_code")),
                       goes_to={"type": "enter"}),
                  # DECISIONS 79 (2026-10-29): Sun-Thu nights, not Friday (Kayla). Once a night: never
@@ -423,9 +431,9 @@ _BY_ID["home_hall"].pop("entry_from", None)          # the building's default_en
 # came_home_late from the street; Laura's catch reads only the outing flags.
 _BY_ID["home_hall"].pop("door", None)
 _set("home_hall", description=(
-    "The hall: the middle of the house, and the stairs. Every door opens off it: the kitchen, the "
+    "The hall: the middle of the house. Every door opens off it: the kitchen, the "
     "living room, the garage, the one bathroom, the three bedrooms, the front door, and the back door "
-    "to the garden. There's a mirror by the coats, and the stairs carry every sound up and down."))
+    "to the garden. There's a mirror by the coats, and the hall carries every sound from one end to the other."))
 _add("home_front_door", dict(
     id="home_garden", name="Garden", entry_from="home_hall", parent="home", kind="destination",
     description=("The garden out the back door: a square of grass, a washing line, one lounger and a "

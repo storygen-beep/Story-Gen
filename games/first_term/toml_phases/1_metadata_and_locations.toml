@@ -104,6 +104,7 @@ flag_keys = [
   "jake_date_went",
   "jake_first_time",
   "jake_gym_today",
+  "jake_ignored",
   "jake_kissed",
   "jake_lockers_today",
   "jake_met",
@@ -327,6 +328,7 @@ flag_keys = [
   "zoe_dared",
   "zoe_face_today",
   "zoe_has_bra",
+  "zoe_ignored",
   "zoe_in_the_tub",
   "zoe_kiss_refused",
   "zoe_lap_quad",
@@ -383,6 +385,10 @@ zoe_refused        = 0   # her nos to Zoe (DECISIONS 124): a no moves this, neve
 release_2_written  = 0   # never raised: the "(Next release)" locks read it (DECISIONS 124)
 hale_claire_roll   = 0   # 1-4: on 1, Claire is early (hale_thursday_session)
 jake_catch_roll    = 0   # 1-8: on 1 or 2, a near-catch (jake_date_end)
+# Q5 (LO, 2026-11-04): a no-show or an ignored invite empties the person's patience; one back each midnight, and
+# their invites wait until it is full again (phone.py ZOE_WAIT, JAKE_WAIT)
+zoe_patience       = 6
+jake_patience      = 3
 
 [player.trait_decay]
 hygiene = 10
@@ -442,7 +448,7 @@ navigation_order = []
 id          = "home_hall"
 name        = "Hall"
 kind        = "thoroughfare"
-description = "The hall: the middle of the house, and the stairs. Every door opens off it: the kitchen, the living room, the garage, the one bathroom, the three bedrooms, the front door, and the back door to the garden. There's a mirror by the coats, and the stairs carry every sound up and down."
+description = "The hall: the middle of the house. Every door opens off it: the kitchen, the living room, the garage, the one bathroom, the three bedrooms, the front door, and the back door to the garden. There's a mirror by the coats, and the hall carries every sound from one end to the other."
 image       = "locations/home_hall.jpg"
 image_search_queries = ["hall"]
 parent      = "home"
@@ -629,15 +635,18 @@ navigation_order = []
 [locations.door]
 description = "Ryan's door. A strip of light under it when he's home."
 no_answer   = "You knock. Nothing. He's out."
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_kayla", operator = "is_present" }] }, text = "Kayla's here. His door is shut, and it stays shut till she goes." },
+]
 
 [[locations.door.options]]
 text = "Knock."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "ryan_knock_code", operator = "is_false" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_kayla", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "ryan_knock_code", operator = "is_false" }] }
 goes_to = { type = "enter" }
 
 [[locations.door.options]]
 text = "Two knocks."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "ryan_knock_code", operator = "is_true" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_kayla", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "ryan_knock_code", operator = "is_true" }] }
 goes_to = { type = "enter" }
 
 [[locations.door.options]]
@@ -1243,7 +1252,7 @@ relationship = "Your step-brother, 22. Mark's son. The only one in this house wh
 role         = "step-brother"
 tags         = ["Says little", "You, and he's stopped hiding it", "Gym shirts", "Energy drinks"]
 show_traits  = ["warmth"]
-core_traits  = { want = 20, warmth = 50 }
+core_traits  = { want = 0, warmth = 50 }
 
 [[npcs.schedules]]
 location   = "home_kitchen"
@@ -1310,7 +1319,7 @@ location   = "home_hall"
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "23:00"
 end_time   = "02:00"
-activity   = "waiting on the dark stairs"
+activity   = "waiting up in the dark hall"
 when       = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "came_home_late", operator = "lt", value = 4 }] }
 
 [[npcs.schedules]]
@@ -1960,7 +1969,7 @@ core_traits  = {  }
 [[npcs.schedules]]
 location   = "home_ryan_room"
 weekdays   = [4]
-start_time = "17:45"
+start_time = "18:00"
 end_time   = "00:00"
 activity   = "in Ryan's room, Friday night"
 when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "kayla_met", operator = "is_true" }] }

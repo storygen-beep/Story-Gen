@@ -72,7 +72,7 @@ out.append({
             go("\"Never mind.\"", loc="home_hall", mins=2, retry=1),
         ]),
         node("price", "Her price", [
-            P("You walk past him into his room and sit on the end of his bed like it's yours. He shuts the door so nobody downstairs hears."),
+            P("You walk past him into his room and sit on the end of his bed like it's yours. He shuts the door so nobody in the house hears."),
             ME("You saw me. In the hall. In a towel."),
             D(R, "That was an accident."),
             ME("So's this. Shirt off."),
@@ -89,7 +89,7 @@ out.append({
             # the risk (ryan_03_shirt_off.md, signed 2026-11-01): Laura, nearly. Only when her row has her downstairs.
             G(cond({"type": "npc_at_location", "location_id": "home_kitchen", "npc_id": "npc_laura", "operator": "is_present"}),
               D("npc_laura", "Ryan? Is your sister in there?"),
-              P("Her voice comes up the stairs, but Ryan doesn't take his eyes off you."),
+              P("Her voice comes down the hall, but Ryan doesn't take his eyes off you."),
               D(R, "No.")),
             D(R, "Happy?"),
             P("Your mouth has gone dry. You make yourself look at all of him before you stand up, so he knows you did."),
@@ -110,7 +110,7 @@ out.append({
     "nodes": [
         node("knocks", "Two knocks", [
             P("Two knocks. He opens on the second one, like he was waiting by the door. A game on the TV, the sound low, and his bed pushed against the wall with room left on it."),
-            D(R, "Mom's gone to bed. Mark's downstairs. Get in before someone sees."),
+            D(R, "Mom's gone to bed. Mark's in the living room. Get in before someone sees."),
         ], [
             go("\"Feet up.\"", node="lap", mins=5, wardrobe=[{"action": "unequip", "item_id": "sneakers"}]),
             go("\"Just saying goodnight.\"", node="night", mins=2),
@@ -145,7 +145,7 @@ SLEEP_TO_DAWN = [(("22:00", "23:00"), 480), (("23:00", "00:00"), 420), (("00:00"
 out.append({
     "id": "ryan_05_thin_walls", "name": "Get off to Ryan through the wall",   # pass 3 H33/H34 (the-voice.md R1, D11): the name says what happens if she clicks, and never hides the act
     "description": "Ryan step 5 (Ryan A 6), in her bed on a Friday night, seen from his room. Her first explicit act at home; Kayla in the hall at dawn. Sets ryan_heard_her.",
-    "trigger": step_trigger(R, 5, bind_npc=False, retry_days=7),
+    "trigger": dict(step_trigger(R, 5, bind_npc=False, retry_days=7), substitution_only=True),   # Q2: from "Go to bed" (home.py room_sleep)
     "nodes": [
         node("wall", "Through the wall", [
             P("Thump. Thump. Thump. Ryan's headboard hits the wall a foot from your pillow. Kayla moans through the plaster, high and breathless. Then Ryan's voice, low: \"Quiet. They'll hear.\" She doesn't get quiet. The knocking gets faster. You knew Kayla sneaks in on Fridays. You read her text on his phone. Knowing it and hearing it are not the same thing. Your face is hot. You pull the sheet up to your chin, but you don't cover your ears. *Turn over. Go to sleep.* Kayla gasps his name. You lie still and listen to every second of it."),
@@ -709,8 +709,13 @@ WARM = trait("corruption", "gte", 20)
 out.append({
     "id": "hub_ryan_room", "name": "Ryan",
     "description": "Ryan's hub in his room. His Want and Warmth colour it; his lines read what she wears. Warmth gates his cover on a short weekend.",
+    # pass 4 (gate `nobody is woken`, the-map.md R6b / H63): his night row is asleep from 00:00 to 06:00, and
+    # this hub has him talking, so it waits for 06:00; ryan_asleep is his room then. While Kayla is over (Q14) his
+    # door is shut (world_data.py), so the hub needs no gate of its own for her; one would make it heat-gated
+    # to the face check (gates.py _tr_base_face reads an is_absent item that way).
     "trigger": {"location": "home_ryan_room", "npc": R, "requires_npc": R, "is_repeatable": True,
-                "priority": 6, "is_active": True, "conditions": cond(flag("opening_done"))},
+                "priority": 6, "is_active": True,
+                "conditions": cond(flag("opening_done"), tod("06:00", "00:00"))},
     "nodes": [
         node("room", "Ryan's room", [
             # pass 3 D32 (the-surfaces.md R6): ONE constant opener; his Want band only changes his reaction after it
@@ -731,7 +736,7 @@ out.append({
               D(R, "You can't keep walking in here looking like that.")),
             *RT_ROOM[0],
             G(cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}),
-              D(R, "You're wearing that downstairs?"), P("He doesn't look away from your ass when you turn.")),
+              D(R, "You're wearing that out there?"), P("He doesn't look away from your ass when you turn.")),
             G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}, {"type": "worn_exposure", "operator": "eq", "value": 0}),
               P("He talks to your face, hard, and fails. Twice.")),
             G(cond({"type": "worn_exposure", "operator": "eq", "value": 1}, {"type": "worn_type", "operator": "neq", "value": "towel"}),
@@ -739,7 +744,8 @@ out.append({
             G(cond(ntrait(R, "warmth", "gte", 70)),
               P("He's on your side. He'd cover for you with Laura in a heartbeat, and you both know it.")),
             # reader pass 3 b00: Fri 18:00-Sat 10:00 Kayla is in this room, so the hub puts her on the page then,
-            # and the hair tie (her trace while she's gone) shows only when she isn't
+            # and the hair tie (her trace while she's gone) shows only when she isn't. Since Q14 (LO, 2026-11-04) his
+            # door is shut while she's in (world_data.py); her line stays for any other way in.
             G(cond(flag("knows_about_kayla"), trait("ryan_step", "gte", 0),
                    {"type": "npc_at_location", "location_id": "home_ryan_room", "npc_id": "npc_kayla", "operator": "is_absent"}),
               P("Kayla's hair tie is on his desk, next to his phone. He sees you see it.")),
@@ -789,6 +795,22 @@ out.append({
         ], [go("\"Thank you.\"", loc="home_hall", mins=5)]),
     ]})
 
+# ── his room at night (pass 4, gate `nobody is woken`; the-map.md R6b, H63): from 00:00 to 06:00 his row is
+#    asleep behind his door, so a knock that gets her in finds him asleep, and he says nothing. ──
+out.append({
+    "id": "ryan_asleep", "name": "Ryan",
+    "description": "Ryan's room from 00:00 to 06:00: he's asleep. One screen, no pay; the knock written as the scene it is (R6b).",
+    "trigger": {"location": "home_ryan_room", "npc": R, "requires_npc": R, "is_repeatable": True,
+                "priority": 6, "is_active": True,
+                "conditions": cond(flag("opening_done"), tod("00:00", "06:00"))},
+    "nodes": [
+        node("asleep", "Ryan's room", [
+            P("You knock, and nothing comes back. You open his door anyway."),
+            P("Ryan's face-down on his bed in his boxers, the sheet kicked down round his knees, one arm hanging off the mattress and his phone face-down on the floor. He's breathing slow and heavy into the pillow, dead to the world. He doesn't move."),
+            T("You could wake him. You don't."),
+        ], [go("Shut his door.", loc="home_hall", mins=2)]),
+    ]})
+
 # ── his everyday hubs (iteration 002, part 2): dinner in the kitchen, TV on weekend afternoons ──
 # npc_ryan.md:94-107; home_life.md. Plain lines are the sheet's; the tease and touch screens are
 # placeholders (LO, 2026-10-09). Raise: Warmth +1 plain, Want +1 a tease, once a day per item.
@@ -798,7 +820,7 @@ L_ = "npc_laura"
 M_ = "npc_mark"
 RYAN_DRESS_LINES = [
     G(cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}),
-      D(R, "You're wearing that downstairs?"), P("He doesn't look away from your ass when you turn.")),
+      D(R, "You're wearing that out there?"), P("He doesn't look away from your ass when you turn.")),
     G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}, {"type": "worn_exposure", "operator": "eq", "value": 0}),
       P("He talks to your face, hard, and fails. Twice.")),
     G(cond({"type": "worn_type", "operator": "eq", "value": "cafe_uniform"}),
@@ -864,7 +886,7 @@ out.append({
     "nodes": [
         node("couch", "The couch", [
             P("You're on the couch with your feet in Ryan's lap and his game on loud. His hand is round your ankle like it lives there."),
-            P("The stairs creak. Laura comes in half dressed for tonight, an earring in her hand, and stops in the doorway. She looks at your feet. She looks at his hand. Ryan doesn't move it fast enough."),
+            P("The hall floor creaks. Laura comes in half dressed for tonight, an earring in her hand, and stops in the doorway. She looks at your feet. She looks at his hand. Ryan doesn't move it fast enough."),
         ], [go("Leave your feet where they are.", node="laura", mins=2)]),
         node("laura", "Mark doesn't need to hear", [
             P("You don't move them. Laura looks at you for a long second, and something in her face decides."),

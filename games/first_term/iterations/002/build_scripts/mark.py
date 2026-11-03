@@ -58,13 +58,13 @@ PAYBACK_LINES = [
 STREAK_LINES = [
     G(cond(*FULL_ITEMS, trait("paid_full_streak", "eq", 0)), P("One Sunday paid your way. He writes a small 1 on the back of the envelope and doesn't say anything about it.")),
     G(cond(*FULL_ITEMS, trait("paid_full_streak", "eq", 1)), P("Two Sundays in a row, your own money. He notices, but he doesn't like noticing.")),
-    G(cond(*FULL_ITEMS, trait("paid_full_streak", "gte", 2)), P("Sunday after Sunday, all of it, from your own pocket. He counts it like he's hoping it's wrong.")),
+    G(cond(*FULL_ITEMS, trait("paid_full_streak", "gte", 2)), P("Sunday after Sunday, all of it, from your own pocket. He looks at the envelope like he's hoping it's wrong.")),
 ]
 
 # ── step 1 · Mark A 1 · count it slowly ──
 out.append({
     "id": "mark_01_count_it_slowly", "name": "Count it slowly",
-    "description": "Mark step 1 (Mark A 1), her first Sunday at the table. The engine took the rent at midnight; this is Mark counting it with her there. Reads rent_short. Counts the Sunday for the streak.",
+    "description": "Mark step 1 (Mark A 1), her first Sunday at the table. The rent page took the money; this is Mark at his table with it and her there, not a second count (LO, 2026-11-04, Q6). Reads rent_short. Counts the Sunday for the streak.",
     "trigger": step_trigger(M, 1),
     "nodes": [
         node("table", "The kitchen table", [
@@ -75,36 +75,38 @@ out.append({
             G(cond({"type": "clothing_item", "item_id": "jeans", "operator": "equipped"}), P("He looks up, and his eyes go down your legs in your jeans, and stay.")),
             G(cond({"type": "clothing_item", "item_id": "leggings", "operator": "equipped"}), P("He looks up, and his eyes go down your legs in your leggings, and stay.")),
             G(cond(SLEEP_SHIRT), P("You came down in your sleep shirt. It stops mid-thigh. He watches the hem the whole way to the table.")),
-            D(M, "Sit. I count it in front of you. That way nobody says I took more than I did."),
+            D(M, "Sit. Every Sunday, you sit at my table while this goes in Vance's envelope. That way nobody says I took more than I did."),
         ], [
             go("\"Here.\"", node="count", mins=5),
             go("\"Let me get dressed first.\"", node="dressed", mins=5, wardrobe=DRESS_DAY),
         ]),
-        node("count", "The count", [
+        # LO, 2026-11-04 (Q6): the rent page has already taken the money, so nobody counts it twice; he makes her
+        # sit with the envelope instead, and looks at her, not at it
+        node("count", "The envelope", [
             G(cond(SHORT),
-              P("He licks his thumb and counts the bills out onto the table, one at a time, slow. Slower than he needs to. You're short and you both know it, and he makes you sit through every bill of it."),
+              P("He doesn't open the envelope. He doesn't need to. You're short and you both know it, and he makes you sit there and look at it with him, the way he'd make you sit through every bill."),
               D(M, "Seventy-five, I said.")),
             G(cond(flag("rent_short", False)),
-              P("You lean back in the chair and watch him lick his thumb and count. It's all there. Every bill."),
-              ME("Count it slowly, Mark. Take your time."),
-              P("He looks up. He doesn't like your tone, but he counts slower anyway, and his eyes keep leaving the money.")),
+              P("You lean back in the chair. It's all in there, every bill, and he knows it."),
+              ME("It's all there, Mark. Take your time."),
+              P("He looks up. He doesn't like your tone, but he takes his time anyway, and his eyes keep leaving the envelope for your legs.")),
         ], [
-            go("\"Can you just — count it?\"", node="short", mins=3, cond_=cond(SHORT)),
-            go("Watch him count.", node="short", mins=3, cond_=cond(flag("rent_short", False))),
+            go("\"Can you just — say it?\"", node="short", mins=3, cond_=cond(SHORT)),
+            go("Let him look.", node="short", mins=3, cond_=cond(flag("rent_short", False))),
         ]),
-        node("short", "I am counting", [
-            D(M, "I am counting."),
+        node("short", "I'm saying it", [
+            D(M, "I'm saying it."),
             G(cond(SHORT), P("He writes the gap on the back of the envelope in pencil and taps it twice."), D(M, "The rest waits a week, but Vance doesn't.")),
             G(cond(flag("rent_short", False)), D(M, "That's the week. Same again Sunday.")),
             G(cond(SLEEP_SHIRT), D(M, "And not the shirt, next time.")),
             *STREAK_LINES, *PAYBACK_LINES,
-            T("He counted you as much as the money."),
+            T("He looked at you longer than he ever looked at the money."),
         ], count_exits("\"Fine.\"", "home_hall", 5, eff=[nadd(M, "want", 10), setv("mark_step", 1)], flags=[done(1)], consumes=True)),
         node("dressed", "Suit yourself", [
             D(M, "Suit yourself."),
-            P("You go up and put clothes on and come back down. He's counted it without you. He pushes the envelope at you to look at, and doesn't look at you at all."),
+            P("You go and put clothes on and come back. He's sealed the envelope without you. He pushes it at you to look at, and doesn't look at you at all."),
             G(cond(SHORT), D(M, "Short. The rest waits a week.")),
-        ], count_exits("Go back upstairs.", "home_hall", 15, eff=[setv("mark_step", 1)], flags=[done(1)], consumes=True)),
+        ], count_exits("Go back to your room.", "home_hall", 15, eff=[setv("mark_step", 1)], flags=[done(1)], consumes=True)),
     ]})
 
 # ── step 2 · Mark A 2 · the late notice ──
@@ -166,18 +168,18 @@ out.append({
         ]),
         # Iteration 002, part 8 (reader): the shorts are on her before the screen names them.
         node("hers_down", "Saved you asking", [
-            P("You come down in the shortest thing you own to sleep in, the pair that shows the curve of your ass when you walk. Mark looks up and stops with his thumb on a bill."),
+            P("You come back in the shortest thing you own to sleep in, the pair that shows the curve of your ass when you walk. Mark looks up and stops with his coffee halfway to his mouth."),
             ME("Saved you asking."),
         ], [go("Sit down across from him.", node="shorts", mins=2, eff=[nadd(M, "power", -3)])]),
-        node("shorts", "His count goes slow", [
+        node("shorts", "His eyes go slow", [
             P("You sit. The chair is cold on the backs of your thighs. When you lean over to push the envelope at him, the shorts ride up and you feel his eyes go down the curve of your ass and stay there."),
-            P("His count goes slow. He loses his place twice. He starts again."),
+            P("He doesn't touch the envelope. He picks his pen up and puts it down again, twice, and his eyes go back to your thighs every time."),
             D(M, "Every Sunday. Like that."),
             *STREAK_LINES, *PAYBACK_LINES,
-        ], count_exits("\"Count, Mark.\"", "home_hall", 10,
+        ], count_exits("\"Eyes up, Mark.\"", "home_hall", 10,
                        eff=[nadd(M, "want", 10), add("exhibitionism", 3, cap=79), setv("mark_step", 3)],
                        flags=[done(3), fset("mark_dress_rule")], consumes=True)),
-        no_node("no", [D(M, "Suit yourself."), P("He counts it with his eyes on the money and not on you, and writes something on the back of the envelope that you don't get to see."), G(cond(SHORT), D(M, "Then the short stays on the tab, @player."))],
+        no_node("no", [D(M, "Suit yourself."), P("He keeps his eyes on the envelope and not on you, and writes something on the back of it that you don't get to see."), G(cond(SHORT), D(M, "Then the short stays on the tab, @player."))],
                 "home_hall", 7, eff=[nadd(M, "power", -2)], label="Leave him to his envelope."),   # pass 3 D39 (R7)
     ]})
 
@@ -204,7 +206,7 @@ out.append({
             G(cond(flag("rent_starts")), D(M, "Sunday morning. The rent, at my table. Don't be late.")),   # reader pass 3 b01: the hook; the Sunday count reads mark_arrangement
         ], [go("\"Deal.\"", loc="home_hall", mins=3, consumes=True,
                eff=[nadd(M, "want", 10), setv("mark_step", 4)], flags=[done(6), fset("mark_arrangement")])]),
-        no_node("no", [D(M, "There is now, @player. Since Ryan's door."), P("He turns back to the bench. The radio fills the garage. You leave him to it, and your face is hot all the way up the stairs.")],
+        no_node("no", [D(M, "There is now, @player. Since Ryan's door."), P("He turns back to the bench. The radio fills the garage. You leave him to it, and your face is hot all the way down the hall.")],
                 "home_hall", 3, eff=[nadd(M, "power", 2)], label="Leave him to the radio."),   # pass 3 D39 (R7)
     ]})
 
@@ -240,7 +242,7 @@ BOLD_HIS = open(os.path.join(HERE, "beat_mark_table_look_his_bold.txt")).read().
 BOLD_HERS = open(os.path.join(HERE, "beat_mark_table_look_hers_bold.txt")).read().strip()
 out.append({
     "id": "mark_sunday_table", "name": "Sit down at the table",
-    "description": "The Sunday count, the repeat after Mark's step 1: his terms or hers by his Power; the streak counts here when no step has counted it. From Bold, after his step 7: \"Twenty, and you can look\", two voices, a stop exit. Once a Sunday.",
+    "description": "The Sunday table, the repeat after Mark's step 1, after the rent page has taken the money (no second count, LO 2026-11-04, Q6): his terms or hers by his Power; the streak counts here when no step has counted it. From Bold, after his step 7: \"Twenty, and you can look\", two voices, a stop exit. Once a Sunday.",
     "trigger": {"location": "home_kitchen", "requires_npc": M, "is_repeatable": True, "priority": 5,
                 "is_active": True, "max_triggers_per_day": 1,
                 # truth pass (2026-11-03): opens to 11:45, so the count's 15 minutes end before noon and "He doesn't
@@ -250,33 +252,33 @@ out.append({
     "nodes": [
         node("table", "The Sunday table", [
             G(cond(HIS), P("Mark's at the table with the envelope, the way he is every Sunday, but he doesn't say good morning. He points at the chair across from him with his pen."),
-              D(M, "Sit. Watch me count.")),
+              D(M, "Sit. My table, my Sunday.")),
             G(cond(HERS), P("Mark's at the table with the envelope. He's on his feet, and he doesn't sit back down until you've sat."),
               D(M, "Morning. Go on, then.")),
             G(cond(flag("mark_dress_rule"), {"type": "worn_type", "operator": "eq", "value": "shorts"}),
-              P("You're in the shorts. His rule. His eyes go down your bare thighs to where the hem cuts into them, and his count slows before he's started.")),   # scene reader b02: the look lands on her body
+              P("You're in the shorts. His rule. His eyes go down your bare thighs to where the hem cuts into them, and he forgets his coffee.")),   # scene reader b02: the look lands on her body
             G(cond(flag("mark_dress_rule"), {"type": "worn_type", "operator": "neq", "value": "shorts"}),
               D(M, "That's not what I asked you to wear to my table.")),
             G(cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}), D(M, "That's what you wear to my table?")),
             G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}, {"type": "worn_exposure", "operator": "eq", "value": 0}),
-              P("With no bra your nipples push at the cloth, and his eyes go straight to them."), D(M, "Sit down. You're making me lose count.")),
+              P("With no bra your nipples push at the cloth, and his eyes go straight to them."), D(M, "Sit down, for God's sake.")),
             G(cond({"type": "worn_exposure", "operator": "eq", "value": 1}, {"type": "worn_type", "operator": "neq", "value": "towel"}, {"type": "worn_type", "operator": "neq", "value": "sleep_shirt"}),
               D(M, "Your mother's out."), P("His eyes go down to your tits and stay there while he talks. He doesn't tell you to cover up.")),
-            G(cond(flag("mark_arrangement", False), SHORT), P("He counts it slow, and it's short, and he writes the gap on the envelope in pencil without a word.")),
+            G(cond(flag("mark_arrangement", False), SHORT), P("It's short. He writes the gap on the envelope in pencil, slow, and taps it twice without a word.")),
             G(cond(flag("mark_arrangement"), SHORT), P("It's short, and he writes the gap on the envelope in pencil without a word.")),
-            G(cond(flag("mark_arrangement", False), flag("rent_short", False)), P("It's all there, but he counts it twice anyway, because he wants to sit here longer.")),
+            G(cond(flag("mark_arrangement", False), flag("rent_short", False)), P("It's all there, and he knows it. He keeps the envelope in front of him anyway, because he wants to sit here longer.")),
             *STREAK_LINES, *PAYBACK_LINES,
             D(M, "Next Sunday. Same table."),
-        ], count_exits("\"Count it, Mark.\"", None, 15, eff=[nadd(M, "want", 2)], node_="counted")),
-        node("counted", "Counted", [
+        ], count_exits("Sit down across from him.", None, 15, eff=[nadd(M, "want", 2)], node_="counted")),
+        node("counted", "Sunday", [
             P("He folds the rent into the envelope with Vance's name on it and leaves his hand flat on top of it."),
             # after his step 4, the arrangement (mark_sunday_table.md, signed 2026-11-01): normal speed, his eyes on
             # her, a new line a week from a shuffle bag of five
-            G(cond(flag("mark_arrangement")), P("He counts it once, at normal speed, and his eyes don't go to the money once."),
+            G(cond(flag("mark_arrangement")), P("He doesn't open the envelope, and his eyes don't go to the money once."),
               POOL(P("He slides the envelope across to you to check, and keeps his fingers on it a second after you've taken it."),
-                   P("He doesn't say good morning. He says your name, once, and then he counts."),
+                   P("He doesn't say good morning. He says your name, once, and then nothing at all."),
                    P("He puts the pencil behind his ear and looks at you instead of writing anything down."),
-                   P("He licks his thumb, and stops, and counts the rest without it."),
+                   P("He licks his thumb to open the envelope, and stops, and leaves it shut."),
                    P("When you stand up he watches you all the way to the door. He doesn't pretend he isn't."),
                    pid="mark_table_after", bag=True)),
         ], [
@@ -300,7 +302,7 @@ out.append({
     "description": "The first short Sunday: Mark takes her bedroom-door key until she's paid up (her_door_unlocked).",
     "trigger": short_trigger([trait("rent_short_weeks", "eq", 1)]),
     "nodes": [node("key", "The key", [
-        P("Mark doesn't count it twice. He counts it once, and it's short, and he puts the envelope down."),
+        P("Mark doesn't open the envelope. He knows it's short, and he puts it down on the table between you."),   # Q6: no second count
         D(M, "Then it's owed. Vance doesn't wait, so I don't."),
         P("He holds out his hand, palm up."),
         D(M, "Your door key. You get it back when you're square."),
@@ -335,7 +337,7 @@ TAKE_LINES, TAKE_EXITS = [], []
 for item, items in _take_cases():
     nm = HELD_NAME[item]
     TAKE_LINES.append(G(cond(*items, {"type": "clothing_item", "item_id": item, "operator": "unequipped"}),
-        P(f"He doesn't shout. He gets up, goes upstairs, and comes back down with the {nm} over his arm. The one you bought.")))
+        P(f"He doesn't shout. He gets up, goes down the hall, and comes back with the {nm} over his arm. The one you bought.")))
     TAKE_LINES.append(G(cond(*items, {"type": "clothing_item", "item_id": item, "operator": "equipped"}),
         P(f"He doesn't shout. He holds his hand out across the table for the {nm} you've got on, and waits until you go and change and put it in his hand. The one you bought.")))
     TAKE_LINES.append(G(cond(*items),
@@ -438,7 +440,7 @@ LEAKS_GARAGE = [
     G(cond(trait("mark_step", "eq", 3)), P("He can't hold your look. He looks at the bench instead.")),
 ]
 LEAKS_KITCHEN = [
-    G(cond(trait("mark_step", "eq", 2)), P("His eyes go to your hem and stay, the way they did at the first count.")),
+    G(cond(trait("mark_step", "eq", 2)), P("His eyes go to your hem and stay, the way they did at the first Sunday table.")),
 ]
 # ── the towel at home (LO, 2026-10-31, DECISIONS 98): his reaction by his Dominance, every visit, in his
 #    hub's own bands (<40, 40-59, 60+); "Let it slip." (Daring) pays his Dominance +2 once a day; "Drop it."
@@ -464,7 +466,7 @@ MARK_TOWEL_DROP = [
 
 # reader a3 #5-6 (DECISIONS 131): "Get dressed." after "Come here." / "Stand there." (his Power 60+, her in the towel)
 MARK_TOWEL_NO = [
-    P("You hitch the towel tighter over your tits and turn for the stairs."),
+    P("You hitch the towel tighter over your tits and turn for the hall."),
     D(M, "Suit yourself."),
     P("He says it to your back. His eyes stay on the backs of your bare thighs all the way to the door, but he doesn't call you back."),
 ]
@@ -516,13 +518,13 @@ def mark_hub(cid, loc, name, setting, extra=(), awake=True, leaks=(), items=(), 
 LR = "home_living_room"
 out.append(mark_hub("hub_mark_living_room", LR, "Mark, up late", "the living room late", [
     P("Mark is on the couch with the TV low and a beer on his knee."),
-    G(cond(LAURA_IN_BED), P("Laura's gone up."), D(M, "Shut the door. Your mother's upstairs.")),
+    G(cond(LAURA_IN_BED), P("Laura's gone to bed."), D(M, "Shut the door. Your mother's in her room.")),
     POOL(D(M, "Can't sleep, @player?"), D(M, "Sit if you're sitting. Don't hover."), pid="mark_late_lines"),
     # B3 (DECISIONS 147): he walked in on her watching channel 5 before his late TV row
     G(cond(flag("mark_caught_ch5"), since("mark_caught_ch5", "lt", 24)), D(M, "Channel five, was it?"), P("He holds out the remote to you and doesn't let go of it straight away.")),
 ], leaks=LEAKS_LATE, towel=True, items=[
     (("beer", "Have a beer with him.", [], "had_drink_home", LR,
-      [P("The game on low."), G(cond(LAURA_IN_BED), D(M, "Laura's upstairs. Keep it down.")), P("He hands you a can without asking."),
+      [P("The game on low."), G(cond(LAURA_IN_BED), D(M, "Laura's in her room. Keep it down.")), P("He hands you a can without asking."),
        ME("Who's winning?"), D(M, "Not us. Never us. Drink your beer.")],
       None, 30),
      # pass 3 D44 (the-surfaces.md R9): the beer, the laundry, the dishes and Sunday breakfast with him each land on a
@@ -589,7 +591,7 @@ out.append(mark_hub("hub_mark_bedroom", "home_master_bedroom", "Mark, in bed", "
     G(cond(wd(6), tod("00:00", "01:00"), here(L, "home_master_bedroom")), P("Laura is face down beside him, already half asleep, and doesn't lift her head.")),
     # scene reader b02: his want on the page while he sleeps, and where he is when he's awake
     G(cond(ntrait(M, "want", "gte", 30), tod("01:00", "08:30")), P("He mutters in his sleep and rolls toward the door, toward you. Under the sheet his cock is a hard ridge against his thigh.")),
-    G(cond(wd(0, 1, 2, 3, 4, 5), tod("01:00", "00:00"), logic="OR"), P("Most nights he's downstairs late with a beer and the TV low, awake, and watching you. Not now.")),
+    G(cond(wd(0, 1, 2, 3, 4, 5), tod("01:00", "00:00"), logic="OR"), P("Most nights he's in the living room late with a beer and the TV low, awake, and watching you. Not now.")),
 ], awake=False, leave="Back out."))
 # ── the laundry tease ladder (LO, 2026-11-02, DECISIONS 128: "plain chores raises nothing, she can tease at a point").
 #    Plain laundry pays Mark nothing; three teases by her stage, after his accident (`mark_saw_her`), no step needed;
@@ -688,8 +690,8 @@ out.append(mark_hub("hub_mark_kitchen", K, "Mark, in the kitchen", "the kitchen"
 ]))
 
 cards = step_cards(M, {
-    1: ("Sunday. Mark counts the rent at the kitchen table.", "Sunday morning: the kitchen, while Mark counts the rent"),
-    2: ("His eyes were on your hem at the count. He's on the phone a lot, late.", "Late at night: the kitchen drawer, Mark next door"),
+    1: ("Sunday. Mark sits you down at the kitchen table with the rent.", "Sunday morning: the kitchen, Mark and the rent envelope"),   # Q6: no second count
+    2: ("His eyes were on your hem at the table. He's on the phone a lot, late.", "Late at night: the kitchen drawer, Mark next door"),
     3: ("\"Friday, Frank.\" He knows you heard. Sunday's coming.", "Sunday morning at the table, after a short week"),
     4: ("He can't hold your look at the table. He wants to talk terms.", "An evening in the garage, after a late night in Ryan's room"),
 }, terminal_text=("The Sunday table, every week: his eyes on you.", "Mark, later. (After the house is yours.) His Want still counts: every look you give him is kept for the next release."),

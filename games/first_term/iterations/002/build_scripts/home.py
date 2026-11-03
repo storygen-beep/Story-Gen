@@ -80,7 +80,10 @@ out.append(solo("room_sleep", "Go to bed",
             go("Get up, slowly.", loc="home_ella_room", cond_=cond(flag("heavy_night")),
                eff=[add("energy", -30) | {"clamp": True}], flags=[funset("heavy_night")])]),   # clamp: energy floors at 0
     ], sched=S(ALL, "19:00", "07:00"), prio=5,
-    metadata={"show_when_blocked": True, "cooldown_message": "Every day, 7 PM-7 AM"}))   # pass 3 H31: the hours, a bare phrase (C5)
+    metadata={"show_when_blocked": True, "cooldown_message": "Every day, 7 PM-7 AM",   # pass 3 H31: the hours, a bare phrase (C5)
+              # Q2 (LO, 2026-11-04): Ryan's step 5 is her in bed on a Friday night, so it opens from going to bed,
+              # not on entry, and her room's wardrobe link always shows
+              "substitutions": [on_activity("ryan_05_thin_walls", flag("opening_done"))]}))
 
 out.append(solo("room_nap", "Take a nap", "A daytime nap: two hours, energy +30. Once a day.", "home_ella_room", [
     node("nap", "A nap", [
@@ -147,8 +150,8 @@ out.append(solo("bathroom_shower", "Take a shower",
             G(cond(flag("shower_unlocked", False), here(R, "home_ryan_room"), wd(0, 1, 2, 3, 4), tod("06:45", "06:25"), ntrait(R, "want", "gte", 40)), P("Ryan's door opens across the hall. The bathroom handle turns, and the sticky lock gives an inch before it catches. You open your eyes. Through the gap Ryan is looking at you, naked and wet, your tits bare under the water. He doesn't look at the floor. He turns side-on, one hand in front of his shorts, and keeps looking."), ME("Ryan! Do you mind?"), D(R, "Not really. Sorry."), P("He doesn't sound sorry. He doesn't look away until the door clicks shut.")),
             G(cond(flag("shower_unlocked"), here(R, "home_ryan_room"), wd(0, 1, 2, 3, 4), tod("06:45", "06:25"), ntrait(R, "want", "gte", 40)), P("Ryan's door opens across the hall. The bathroom handle turns, and the door swings open a hand's width. Nothing stops it. You open your eyes. Through the gap Ryan is looking at you, naked and wet, your tits bare under the water. He doesn't look at the floor. He turns side-on, one hand in front of his shorts, and keeps looking."), ME("Ryan! Do you mind?"), D(R, "Not really. Sorry."), P("He doesn't sound sorry. He doesn't look away until he pulls the door to.")),
             G(cond(wd(0, 1, 2, 3, 4), tod("06:25", "06:45")), P("The door shakes in its frame. Ryan, banging."), D(R, "Some of us have work, @player.nickname! Out!")),
-            G(cond(here(M, "home_kitchen")), P("Downstairs, Mark shouts up the stairs."), D(M, "That's my hot water you're burning, @player! Five minutes!"), P("The pipes knock, but you turn it up hotter.")),
-            G(cond(here(L, "home_kitchen")), P("Laura's voice floats up the stairs. \"Leave some hot water, sweetheart!\"")),
+            G(cond(here(M, "home_kitchen")), P("From the kitchen, Mark shouts down the hall."), D(M, "That's my hot water you're burning, @player! Five minutes!"), P("The pipes knock, but you turn it up hotter.")),
+            G(cond(here(L, "home_kitchen")), P("Laura's voice comes down the hall from the kitchen. \"Leave some hot water, sweetheart!\"")),
             POOL(P("You soap yourself slowly, all of you. The lock's no use, and you take your time like someone could walk in. The steam fogs the glass until the room is white."),
                  P("You tip your head back and let the water fill your mouth. It runs off your chin, down between your tits. You should be quick, but you stay until your fingertips wrinkle."),
                  P("You wash your hair twice because it feels good. The water drums on your shoulders, and you stay under it longer than you should.")),
@@ -179,7 +182,7 @@ out.append(solo("bathroom_shower", "Take a shower",
                eff=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": 50, "cap": 100}, npc_add(R, "warmth", -1)],
                wardrobe=STRIP + [{"action": "equip", "item_id": "towel"}])]),
         node("unlocked", "The lock off", [
-            P("You towel off with the lock off and the door open a crack, your nipples hard in the draft from the hall. Anybody coming up the stairs gets the lot, and you take your time drying between your legs."),
+            P("You towel off with the lock off and the door open a crack, your nipples hard in the draft from the hall. Anybody coming down the hall gets the lot, and you take your time drying between your legs."),
         ], [go("Go out in the towel.", loc="home_hall")]),
     ], conds=[here(R, "home_bathroom", False)], prio=5, max_day=1))
 
@@ -203,8 +206,8 @@ out.append(solo("hall_mirror", "Check your clothes in the hall mirror", "One lin
             GC(cond(TOWEL), P("A towel, in the hall, where anyone can come out of any door. Your heart beats in your throat.")),
             GC(cond(*NAKED), P("Naked in the hall. Every door off it could open.")),
             GC(cond(*UNDIES), P("Bra and panties in the hall, where every door off it could open.")),
-            GC(cond(SKIRT, slot("underwear", False)), P("Nothing under the skirt, and the stairs are right there. Anyone at the bottom looking up gets everything.")),
-            GC(cond(SKIRT, slot("underwear")), P("The skirt is short enough that the stairs are a problem. Anyone at the bottom looking up gets your panties. You tug it down, but it doesn't help.")),
+            GC(cond(SKIRT, slot("underwear", False)), P("Nothing under the skirt, and the hall is right there. Bend for anything out there, and anyone behind you gets everything.")),
+            GC(cond(SKIRT, slot("underwear")), P("The skirt is short enough that the hall is a problem. Bend for anything out there, and anyone behind you gets your panties. You tug it down, but it doesn't help.")),
             # Iteration 002, part 8 (reader): the top only when there is one; "good girl" only in plain clothes.
             GC(cond(slot("bra", False), slot("top"), *COVERED), P("No bra. Your nipples show through your top, plain as anything in the hall light.")),
             GC(cond(slot("bra", False), slot("dress"), *COVERED), P("No bra under it. Your nipples show through the fabric, plain as anything in the hall light.")),
@@ -324,7 +327,7 @@ out.append(solo("living_couch", "Lie on the couch",
             # its own chain: adjacent GCs would join the Want chain above
             G(cond(*ANY), GC(cond(*LAURA_IN_HOUSE, logic="OR"), D(R, "Not with Mom home, @player.nickname.")),
                           GC(cond(*ANY), D(R, "Mom'll be back, @player.nickname."))),
-            P("He goes back upstairs with his hand in front of his shorts."),
+            P("He goes back down the hall with his hand in front of his shorts."),
           ], here(R, "home_ryan_room")),
         ], [go("Get up.", loc="home_living_room", mins=40)]),
     ], conds=LIVING_EMPTY, prio=3))
@@ -366,14 +369,14 @@ tv_nodes += [
          go("Turn the sound up.", node="loud", mins=1, swl=True, cond_=cond(trait("corruption", "gte", 10))),
          go("Change the channel.", node="remote"), go("Turn it off.", loc="home_hall")]),
     node("loud", "The sound up", [
-        P("You thumb the volume up, and up again. Her moans fill the whole room. The slap of his hips on her ass is loud as a hand clap. You can hear it bounce off the hall stairs."),
+        P("You thumb the volume up, and up again. Her moans fill the whole room. The slap of his hips on her ass is loud as a hand clap. You can hear it bounce off the hall walls."),
         P("Anyone in the house can hear it now. Your nipples go hard. You squeeze your thighs together on the couch and leave it right where it is."),
         WHO("Harder. Oh God, harder. Don't stop."),
         VID("a couple having sex on a TV screen, the volume bar full, a girl on a couch", "porn on tv volume up living room", "loud porn on tv girl watching", pool_dir="sex/tv_adult_loud_t5")],
         [go("Keep watching.", loc="home_living_room", mins=30, eff=tv_pay(1, 19), flags=[fset("tv_loud")])]),
     node("touch", "On the couch", [
         G(cond(here(M, "home_kitchen")), P("In the kitchen a cupboard bangs. Mark is home.")),
-        G(cond(here(R, "home_ryan_room")), P("Upstairs, Ryan's music thumps through the ceiling.")),
+        G(cond(here(R, "home_ryan_room")), P("Across the hall, Ryan's music thumps through his door.")),
         P(LIVING_TV_TOUCH),
         WHO("Yes. Give me that cock. Yes."),
         VID("a girl alone on a couch touching herself while porn plays on the TV", "girl masturbating on couch watching porn on tv", "woman fingering herself couch tv porn", pool_dir="sex/tv_adult_touch_t5")],
@@ -512,10 +515,10 @@ out.append({"id": "master_door_saturday_night", "name": "Their door's ajar",
 # shape: the look pays nothing, "Keep watching." pays corruption +1, cap 19. Reached only by the door.
 LAURA_HOUR = [here(L, "home_master_bedroom"), here(M, "home_master_bedroom", False), wd(6, 0, 1, 2, 3, 4), tod("22:00", "23:00")]
 LAURA_GAP_OPEN = trait("laura_step", "gte", 2)   # LO 2b (2026-11-01): her want is shown first, then the gap
-LAURA_CRACK = ("Laura's door is open a hand's width. The bedside lamp is on low. Downstairs the TV mutters. Laura is alone in bed, the covers kicked down. Her nightdress is pushed up to her waist. Her knees are up and apart, her ass bare on the sheet. Two fingers rub slow circles on her clit. She is wet, and it shines in the lamplight. Her other hand squeezes her tit through the nightdress. Her nipple stands hard against the cotton. Her tits rise and fall faster. Her eyes are shut, her lip caught in her teeth. A small moan escapes her. Her hips lift into her fingers. She hasn't seen you. Your face burns. Heat pools low in your belly. You are wet, and your nipples go tight.")
+LAURA_CRACK = ("Laura's door is open a hand's width. The bedside lamp is on low. Down the hall the TV mutters. Laura is alone in bed, the covers kicked down. Her nightdress is pushed up to her waist. Her knees are up and apart, her ass bare on the sheet. Two fingers rub slow circles on her clit. She is wet, and it shines in the lamplight. Her other hand squeezes her tit through the nightdress. Her nipple stands hard against the cotton. Her tits rise and fall faster. Her eyes are shut, her lip caught in her teeth. A small moan escapes her. Her hips lift into her fingers. She hasn't seen you. Your face burns. Heat pools low in your belly. You are wet, and your nipples go tight.")
 LAURA_WATCH = ("You stay. Your hand stays flat on the door frame. Laura pushes two fingers inside herself. Her thumb rubs her clit, faster now. Her other hand squeezes her tit and pinches the nipple. Her hips lift off the mattress. She bites the back of her hand so Mark won't hear. Her fingers pump in and out, wet and loud in the quiet. Then she comes. Her whole body shakes. Her thighs clamp hard on her hand. A moan leaks out around her teeth. Your nipples go tight and ache. You are wet, all at once. You press your thighs together. You do not touch yourself. You want to. Laura goes still, breathing hard, two fingers still inside her. Her tits rise and fall. You back away from the door before she opens her eyes, thighs pressed tight, nipples still hard.")
 out.append({"id": "laura_alone_in_bed", "name": "Laura's door's ajar",
-    "description": "Sun-Fri 22:00-23:00, Laura awake and alone, Mark downstairs: through the gap she fingers herself. Keep watching pays corruption +1, cap 19 (DECISIONS 82). Reached only by the door; once a night.",
+    "description": "Sun-Fri 22:00-23:00, Laura awake and alone, Mark in the living room: through the gap she fingers herself. Keep watching pays corruption +1, cap 19 (DECISIONS 82). Reached only by the door; once a night.",
     "trigger": {"location": "home_master_bedroom", "is_repeatable": True, "priority": 1, "is_active": True,
                 "substitution_only": True, "max_triggers_per_day": 1,
                 # the door's own window, so a reader of the canvas sees when it can render
@@ -591,12 +594,12 @@ out.append({"id": "laura_alone_peek", "name": "Peek through the gap",
     "nodes": [node("peek", "Through the gap", [
         P("You ease the door a finger's width wider. The lamp is off now."),
         P("Laura lies on her side with the sheet pulled up to her shoulder, breathing slow. Her nightdress is still rucked up at her hip."),
-        P("Downstairs the TV mutters. You pull the door to without a sound."),
+        P("Down the hall the TV mutters. You pull the door to without a sound."),
     ], [go("Close the door.", loc="home_hall", mins=2)])]})
 
 # Reader item 4 (LO, 2026-10-29, master_door_peek.md): the hour's other face. One screen, pays nothing.
 out.append({"id": "master_door_peek", "name": "Peek through the gap",
-    "description": "Sun 00:00-01:00, someone inside and 'The door's ajar.' off: after she has watched, or Mark alone while Laura waits on the stairs. One screen, pays nothing. Reached only by the door.",
+    "description": "Sun 00:00-01:00, someone inside and 'The door's ajar.' off: after she has watched, or Mark alone while Laura waits up in the hall. One screen, pays nothing. Reached only by the door.",
     "trigger": {"location": "home_master_bedroom", "is_repeatable": True, "priority": 1, "is_active": True,
                 "substitution_only": True,
                 # the door's own window, so a reader of the canvas sees when it can render
@@ -608,7 +611,7 @@ out.append({"id": "master_door_peek", "name": "Peek through the gap",
           D(L, "Sleep well, then.")),   # LO 2026-11-03: to the ceiling, flat; he snores on
         G(cond(here(M, "home_master_bedroom"), here(L, "home_master_bedroom", False)),
           P("Mark's sitting up against the headboard under the lamp, awake and alone, his phone lit in his hand. Laura's side of the bed is empty."),
-          D(M, "You coming up or not?")),   # LO 2026-11-03: toward the stairs, where Laura waits (master_door_peek.md case b)
+          D(M, "You coming to bed or not?")),   # LO 2026-11-03: down the hall, where Laura waits (master_door_peek.md case b; Q7, one hall)
         P("Nobody looks at the door. You pull it to without a sound."),
     ], [go("Close the door.", loc="home_hall", mins=2)])]})
 

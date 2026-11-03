@@ -137,6 +137,11 @@ out.append({
     "trigger": {"location": "cafe", "is_repeatable": True, "priority": 4, "is_active": True,
                 "schedules": [{"weekdays": [0, 1, 2, 3, 4, 5], "start_time": "08:00", "end_time": "19:00"}],
                 "conditions": cond(flag("cafe_job"), flag("cafe_shift_3_today", False)),
+                # Q2 (LO, 2026-11-04): the café's one-time scenes open from the shift, not on entry, so the
+                # wardrobe link always shows; each target keeps its own window and gates (canv.on_activity)
+                "substitutions": [on_activity("tom_01_the_apron", flag("cafe_job")),
+                                  on_activity("tom_03_the_tip_jar", flag("cafe_job")),
+                                  on_activity("cafe_gary_meet", flag("cafe_job"))],
                 "show_when_blocked": True, "cooldown_message": "Mon-Sat, 8 AM-7 PM, three shifts a day"},   # pass 3 H31: the hours, a bare phrase (the-clock.md C5)
     "nodes": [
         node("counter", "The counter", [
@@ -209,6 +214,7 @@ out.append({
     "id": "cafe_gary_meet", "name": "Booth four",
     "description": "The first time Gary is in during her job: the regular in booth four lowers his paper. Sets gary_met.",
     "trigger": {"location": "cafe", "npc": GY, "requires_npc": GY, "is_repeatable": False, "priority": 7, "is_active": True,
+                "substitution_only": True,   # Q2 (LO, 2026-11-04): opens from "Work a shift" (cafe_shift above)
                 "schedules": [{"weekdays": [0, 1, 2, 3, 4], "start_time": "14:30", "end_time": "18:00"},
                               {"weekdays": [4], "start_time": "20:00", "end_time": "22:00"}],   # his rows (npc_gary.md)
                 "conditions": cond(flag("cafe_job"), flag("gary_met", False))},

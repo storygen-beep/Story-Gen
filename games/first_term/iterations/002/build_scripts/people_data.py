@@ -18,7 +18,7 @@ PEOPLE = [
     dict(id="npc_ryan", name="Ryan", role="step-brother", age=22,
          relationship="Your step-brother, 22. Mark's son. The only one in this house who asks how your day was.",
          tags=["Says little", "You, and he's stopped hiding it", "Gym shirts", "Energy drinks"],
-         core={"want": 20, "warmth": 50}, show=["warmth"],
+         core={"want": 0, "warmth": 50}, show=["warmth"],
          schedules=[
              row("home_bathroom", WK, "06:45", "07:30", "in the shower first (Laura's rule)"),
              row("home_ryan_room", [0, 1, 3, 4, 6], "18:00", "22:00", "home from the yard"),
@@ -33,7 +33,7 @@ PEOPLE = [
          # shows (engine.md §34). Her lock is Love (warmth), which every step reads.
          core={"warmth": 50}, show=["warmth"],
          schedules=[
-             row("home_hall", ALL, "23:00", "02:00", "waiting on the dark stairs", when=MET("came_home_late")),
+             row("home_hall", ALL, "23:00", "02:00", "waiting up in the dark hall", when=MET("came_home_late")),
              row("home_kitchen", WK, "06:30", "08:00", "making breakfast before work"),
              row("home_kitchen", [0, 1, 3, 4, 6], "18:00", "22:00", "in the kitchen, evening"),
              row("home_master_bedroom", [6, 0, 1, 2, 3, 4], "22:00", "06:30", "asleep"),
@@ -193,7 +193,7 @@ ACTIVITIES = {
     "npc_ryan": ["at dinner", "in the shower first (Laura's rule)", "home, weekend morning",
                  "in his room for the night", "home in his room, evening", "in his room with Kayla",
                  "watching TV, a film on"],
-    "npc_laura": ["waiting on the dark stairs", "making breakfast before work", "in the kitchen, evening",
+    "npc_laura": ["waiting up in the dark hall", "making breakfast before work", "in the kitchen, evening",
                   "awake, alone", "asleep", "asleep", "awake, with Mark", "asleep", "in the shower", "dressing to go out", "waiting up in the dark"],
     "npc_mark": ["at dinner", "in the garage, evening", "up late with the TV on", "up late with the TV on",
                  "asleep", "asleep", "awake, with Laura", "asleep", "cooking, Wednesday", "in the garage, Saturday",
@@ -264,9 +264,10 @@ for _p in PEOPLE:
 # cross the hall from his room, and ryan_05_thin_walls (Fri 22:00-00:00) hears her through the wall;
 # she is in the hall at Saturday dawn (ryan_05 `hall`) and still in the house for ryan_06 (Sat
 # 08:00-10:00, "Babe?"). Split at midnight because a day-specific overnight row loses its weekday at
-# 00:00. Gated on kayla_met like every other non-household row. The ledger (v2_state.json
+# 00:00. Gated on kayla_met like every other non-household row. Her Friday row starts 18:00, after
+# her own walk-in in Ryan's drawer (17:45-18:00) has let her in (LO, 2026-11-04, Q9). The ledger (v2_state.json
 # board.characters npc_kayla) has no schedule yet; it should carry the same two rows.
 next(p for p in PEOPLE if p["id"] == "npc_kayla")["schedules"] = [
-    row("home_ryan_room", F, "17:45", "00:00", "in Ryan's room, Friday night", when=MET("kayla_met")),
+    row("home_ryan_room", F, "18:00", "00:00", "in Ryan's room, Friday night", when=MET("kayla_met")),
     row("home_ryan_room", SA, "00:00", "10:00", "in Ryan's bed in his shirt, Saturday morning", when=MET("kayla_met")),
 ]

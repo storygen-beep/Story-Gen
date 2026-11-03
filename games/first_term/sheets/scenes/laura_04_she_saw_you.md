@@ -13,7 +13,7 @@
 | row | answer |
 |---|---|
 | person · step | `npc_laura` · 4 of 4 (new, top step) |
-| where · when | her door, `home_master_bedroom` from the landing · Sun–Fri 22:00–23:00, Laura in and awake, Mark downstairs: it takes the `laura_alone_in_bed` slot that night (higher priority) |
+| where · when | her door, `home_master_bedroom` from the hall · Sun–Fri 22:00–23:00, Laura in and awake, Mark in the living room: it takes the `laura_alone_in_bed` slot that night (higher priority) |
 | gate | Corruption 20 · her Love 30 · `laura_step` eq 3 · `laura_gaps_watched` gte 3 · `laura_alone_seen` · the boost off |
 | the counter | `laura_gaps_watched` (player trait, declared 0): +1 on "Keep watching." in `laura_alone_in_bed` and in `laura_shower_gap`. Name mine; confirmed by LO 2026-11-01 ("Go ahead") |
 | want | the alone-in-bed line names the dressed-up night (`laura_lonely`, step 3) |
@@ -55,7 +55,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. The tool's 
 
 **`gap`** · 138 words · explicit words 6 · median sentence 12 · act rungs: hands
 
-> Laura's door is open a hand's width again, and the lamp is low. She lies on top of the sheet with her nightdress pushed up to her waist. Her knees are apart. Her fingers slide slow through her pussy, and you can hear how wet she is. You should walk away. You know it, but you stay, because you want to watch her. She rubs her clit in small circles, then harder. Her tits shake under the thin cotton, nipples stiff against it. She bites the back of her other hand to keep the moan in. Downstairs, Mark's TV mutters on. Heat climbs your chest. Your own nipples tighten and you're wet too, but your hands stay flat on the wall. Laura's thighs start to tremble. Her hips lift off the bed as she pushes two fingers inside.
+> Laura's door is open a hand's width again, and the lamp is low. She lies on top of the sheet with her nightdress pushed up to her waist. Her knees are apart. Her fingers slide slow through her pussy, and you can hear how wet she is. You should walk away. You know it, but you stay, because you want to watch her. She rubs her clit in small circles, then harder. Her tits shake under the thin cotton, nipples stiff against it. She bites the back of her other hand to keep the moan in. Down the hall, Mark's TV mutters on. Heat climbs your chest. Your own nipples tighten and you're wet too, but your hands stay flat on the wall. Laura's thighs start to tremble. Her hips lift off the bed as she pushes two fingers inside.
 
 *The last sentence:* her hips lifting, two fingers going in. On the body; the tool flags it only because "hips" and "fingers" aren't on its list.
 
@@ -69,7 +69,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. The tool's 
 
 **`eyes`:** "Laura's eyes open. They go straight to the door. To the gap. To you." · "She doesn't pull the sheet up fast. She doesn't pull it up at all. She lies there with her hand still between her legs, and she looks at you." · *(thought)* "Ryan. She said Ryan. Not Mark."
 
-**`back`:** "You step back into the dark of the landing. Your heart is going so hard you can hear it." · Laura, quietly, through the gap: "Go to bed, sweetheart."
+**`back`:** "You step back into the dark of the hall. Your heart is going so hard you can hear it." · Laura, quietly, through the gap: "Go to bed, sweetheart."
 
 **`stay`:** "You don't move. You let her see you." · "Laura holds your eyes for a long second. Her face doesn't change." · Laura, quietly: "Go to bed, sweetheart." · "She reaches out and turns off the lamp."
 

@@ -510,6 +510,14 @@ def ledger_step(npc, n):
     return lad["counter"], st
 
 
+def on_activity(target, *items):
+    """A one-time scene that opens from an activity instead of firing on entry (LO, 2026-11-04, Q2; gate `nothing
+    one-time at the shop or wardrobe`): a substitution rule at chance 1 on the host. The target keeps its own trigger
+    (window, gates, its person, parking), marked substitution_only so it never auto-fires; the engine checks all of
+    that on the target before it swaps in (setup._tryRule, isCanvasValid, canTriggerCanvas)."""
+    return {"target_canvas_id": target, "chance": 1.0, "conditions": cond(*items)}
+
+
 def step_trigger(npc, n, extra_counters=(), bind_npc=True, priority=10, retry_days=1):
     """The trigger of ladder step n: place, window, the declared gate + the counter at n-1."""
     counter, st = ledger_step(npc, n)

@@ -78,7 +78,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Shared brie
 
 **B c** · 138 words · explicit words 6 · median sentence 9 · act rungs: hands
 
-> You sit in his chair with your top off and your tits bare. Your knees are wide apart. Dr. Hale stands at the window with his back to the car park, taking notes. Your hand is down inside your clothes, two fingers on your clit. You are so wet he can hear it. "Slower," he says. You slow down, and your thighs shake. "Now tell me." "I'm close," you say. "I'm so close it hurts." He writes that down. Then he crosses the room and pinches your nipple once, hard. You gasp and your hips jerk off the seat. His cock is hard under his trousers, right at your shoulder. He goes back to the window and his notes. Your fingers keep circling your clit, slow, the way he said. Your nipple throbs, and your thighs stay open.
+> You sit in his chair with your top off and your tits bare. Your knees are wide apart. Dr. Hale stands at the window with his back to the parking lot, taking notes. Your hand is down inside your clothes, two fingers on your clit. You are so wet he can hear it. "Slower," he says. You slow down, and your thighs shake. "Now tell me." "I'm close," you say. "I'm so close it hurts." He writes that down. Then he crosses the room and pinches your nipple once, hard. You gasp and your hips jerk off the seat. His cock is hard under his trousers, right at your shoulder. He goes back to the window and his notes. Your fingers keep circling your clit, slow, the way he said. Your nipple throbs, and your thighs stay open.
 
 Every last sentence is on her body (her nipples, her hips, his hand an inch from her clit, his fingers on her clit, her
 thighs open). None of them has her come; the session stops at touching (LO: "things doesn't go beyond").
@@ -86,8 +86,8 @@ thighs open). None of them has her come; the session stops at touching (LO: "thi
 ## The other screens (mine, signed by LO 2026-11-01)
 
 **`door`:** "His office door is unlocked. He locks it behind you without a word. The photo is already face-down." · Dr. Hale: "Twenty minutes, @player."
-**`claire_car`:** "His phone buzzes on the desk before he's touched you. He reads it and his face goes flat." · Dr. Hale: "She's early. She's in the car park." · "He unlocks the door and holds it open." · Dr. Hale: "Next Thursday." · "From the corridor window you can see a car with its engine running."
-**`end`:** "He looks at the clock, and straightens his tie, and unlocks the door." · Dr. Hale: "Thursday." · "Down in the car park his wife's car isn't there yet."
+**`claire_car`:** "His phone buzzes on the desk before he's touched you. He reads it and his face goes flat." · Dr. Hale: "She's early. She's in the parking lot." · "He unlocks the door and holds it open." · Dr. Hale: "Next Thursday." · "From the corridor window you can see a car with its engine running."
+**`end`:** "He looks at the clock, and straightens his tie, and unlocks the door." · Dr. Hale: "Thursday." · "Down in the parking lot his wife's car isn't there yet."
 **`isnt`:** @player: "This isn't coaching." · Dr. Hale: "Then you'll stay at a C." · "He turns the photo face-up and doesn't look at you while you go."
 **`run`:** "You're out of the door before he's out of his chair. Behind you, calm, not raised:" · Dr. Hale: "Next Thursday, @player."
 
@@ -337,7 +337,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > Your hips lift off the desk into his hand. His wet fingers keep circling your clit.
 >
-> You sit in his chair with your top off and your tits bare. Your knees are wide apart. Dr. Hale stands at the window with his back to the car park, taking notes. Your hand is down inside your clothes, two fingers on your clit. You are so wet he can hear it.
+> You sit in his chair with your top off and your tits bare. Your knees are wide apart. Dr. Hale stands at the window with his back to the parking lot, taking notes. Your hand is down inside your clothes, two fingers on your clit. You are so wet he can hear it.
 >
 > Slower.
 >
@@ -397,7 +397,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > Your hips lift off the desk into his hand. His wet fingers keep circling your clit.
 >
-> You sit in his chair with your dress off and your tits bare. Your knees are wide apart. Dr. Hale stands at the window with his back to the car park, taking notes. Your hand is down between your open thighs, two fingers on your clit. You are so wet he can hear it.
+> You sit in his chair with your dress off and your tits bare. Your knees are wide apart. Dr. Hale stands at the window with his back to the parking lot, taking notes. Your hand is down between your open thighs, two fingers on your clit. You are so wet he can hear it.
 >
 > Slower.
 >
@@ -457,7 +457,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > Your hips lift off the desk into his hand. His wet fingers keep circling your clit.
 >
-> You sit in his chair with your dress off and your tits bare. Your knees are wide apart. Dr. Hale stands at the window with his back to the car park, taking notes. Your hand is down between your open thighs, two fingers on your clit. You are so wet he can hear it.
+> You sit in his chair with your dress off and your tits bare. Your knees are wide apart. Dr. Hale stands at the window with his back to the parking lot, taking notes. Your hand is down between your open thighs, two fingers on your clit. You are so wet he can hear it.
 >
 > Slower.
 >

@@ -75,9 +75,10 @@ def rule(host, target, chance, *items):
 
 
 def walkin(cid, name, loc, desc, who, moment, moment_label, answer, answers, raise_=(), records=(), extra=(),
-           shared=(), when=()):
+           shared=(), when=(), moment_wardrobe=None):
     """One walker's walk-in (walkins.py's shape): `who` = trigger items (his presence now, met flags, his gates).
-    `shared` = another walk-in of the same walker whose daily flag this one also reads and sets (one a day)."""
+    `shared` = another walk-in of the same walker whose daily flag this one also reads and sets (one a day).
+    `moment_wardrobe`: wardrobe effects on the moment's button (the tub strips her on the way in, Q11)."""
     today = f"{cid}_today"
     DAILY_FLAGS.append(today)
     CANVASES.append({
@@ -87,7 +88,7 @@ def walkin(cid, name, loc, desc, who, moment, moment_label, answer, answers, rai
                     "conditions": cond(flag("opening_done"), flag(today, False),
                                        *[flag(f"{s}_today", False) for s in shared], *who, *when)},
         "nodes": [node("moment", name, moment,
-                       [go(moment_label, node="answer", mins=2, eff=list(raise_) or None,
+                       [go(moment_label, node="answer", mins=2, eff=list(raise_) or None, wardrobe=moment_wardrobe,
                            flags=[fset(today)] + [fset(f"{s}_today") for s in shared] + [fset(f) for f in records])]),
                   node("answer", name, answer, answers), *extra]})
     return cid
@@ -184,7 +185,8 @@ walkin("walkin_gym_team", "The team comes in", "campus_gym",
     [go("Grab your things and go.", node="t_go", mins=2),
      # the set's energy is a price on the button, which the engine refuses (greyed, "Requires 10 Energy") when she
      # hasn't got it; an unclamped -10 on the way out took her below 0 (engine.md §21, §27; pass 3 J73)
-     go("Finish your set.", node="t_set", mins=15, cond_=cond(*SPORTS_ONLY, *E_DAR), eff=[pay("exhibitionism", 39)],
+     # LO, 2026-11-04 (Q13): Daring from 20 up, no top; it still pays only to 39 (the cap)
+     go("Finish your set.", node="t_set", mins=15, cond_=cond(*SPORTS_ONLY, DARING), eff=[pay("exhibitionism", 39)],
         costs=[{"trait": "energy", "value": 10}])],
     records=["team_saw_gym"], extra=[
         # reader batch 4 (pass 3): no hoodie exists in the catalog, so she covers up with what she has
@@ -345,15 +347,18 @@ for host, cid in (("park_run", "walkin_run_zoe"), ("park_rest", "walkin_rest_zoe
 # ═════════════════════════════════════════════════════════════════════════════
 TOG = flag("zoe_together")
 LATE = [fset("late_party"), fset("came_home_late")]
-TUB_EXIT = dict(eff=[{"targetType": "player", "trait": "energy", "op": "add", "value": 5, "cap": 100}], flags=LATE)
+# LO, 2026-11-04 (Q11): getting in strips her (the moment's button) and getting out dresses her, as the soak does;
+# the engine keeps no outfit to put back, so she dresses as every "Get dressed." in this game does (canv.DRESS_DAY)
+TUB_EXIT = dict(eff=[{"targetType": "player", "trait": "energy", "op": "add", "value": 5, "cap": 100}], flags=LATE, wardrobe=DRESS_DAY)
 walkin("walkin_tub_zoe", "Zoe gets in", "party_house",
     "B14, Zoe: late on Saturday she gets into the hot tub beside her; after zoe_together her hand goes under the water while the deck can see. Hers: not here 0; Hungry, let her, Corruption +1 cap 79.",
     [here(Z, "party_house"), flag("zoe_met")],
-    [P("You're naked in the tub up to your tits, the steam going up into the dark. The deck is full: people with drinks along the rail, a couple on the steps, all of them in reach of a look."),
+    [P("The hot tub steams on the back deck. The deck is full: people with drinks along the rail, a couple on the steps, all of them in reach of a look."),
      # (2026-11-03) her party-house hub has her in the tub already, so she is in the water when the walk-in starts
-     P("Zoe is already in the water across from you, a drink in each hand. She slides over beside you, naked, so close her thigh is against yours.")],
-    "Her thigh is against yours.",
-    [D(Z, "There you are. I've been looking everywhere."),
+     P("Zoe is already in the water, naked, a drink in each hand. She holds one up at you."),
+     D(Z, "There you are. I've been looking everywhere. Get in.")],
+    "Strip and get in.",
+    [P("You strip on the cold deck and get in. You're naked in the water up to your tits, the steam going up into the dark. Zoe slides over beside you, so close her thigh is against yours."),
      GC(cond(TOG), P("Under the water her hand lands on your thigh. Then it slides up, slow, to the top of your thigh, and her fingers brush your pussy."),
         P("She doesn't look at you. She sips her drink and smiles at the people on the rail, and her fingers stroke you once, light, under the water where they could all see if they looked down."),
         D(Z, "Shh. Nobody's looking. Yet."), ME("Zo. They're right there."), D(Z, "I know. Isn't it great?")),
@@ -374,7 +379,7 @@ walkin("walkin_tub_zoe", "Zoe gets in", "party_house",
                                    D(Z, "Good girl. They all saw that."), ME("Fuck, Zo."), D(Z, "Later. I'm saving the rest for later."),
                                    VID("two naked girls in a steaming hot tub at night, one fingering the other under the water, people on the deck watching", "lesbian fingering in hot tub party watching", "girl fingers girlfriend hot tub people watching", pool_dir="sex/walkin_tub_zoe_t5")],
             "Get out, dripping.", "party_house", 30, **TUB_EXIT)],
-    when=[wd(5), tod("23:30", "00:00")])
+    when=[wd(5), tod("23:30", "00:00")], moment_wardrobe=STRIP)
 rule("party_house_soak", "walkin_tub_zoe", 0.25, here(Z, "party_house"), wd(5), tod("23:30", "00:00"))
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -458,8 +463,9 @@ walkin("walkin_hall_hale", "Before the lecture", "lecture_hall",
      # reader batch 5 (pass 3): his Thursday lecture starts at 13:00, so the greeting reads the clock
      D(H, "Keen, @player. Good."), G(cond(tod("06:00", "12:00")), ME("Morning, Dr. Hale.")), G(cond(tod("12:00", "18:00")), ME("Afternoon, Dr. Hale.")),
      D(H, "Find a seat. The front fills up fast.")],
+    # LO, 2026-11-04 (Q13): Daring from 20 up, no top; it still pays only to 39 (the cap)
     [go("Take a seat.", node="h_seat", mins=2),
-     go("Sit on the front desk while he sets up.", node="h_desk", mins=10, cond_=cond(*E_DAR), eff=[pay("exhibitionism", 39)])],
+     go("Sit on the front desk while he sets up.", node="h_desk", mins=10, cond_=cond(DARING), eff=[pay("exhibitionism", 39)])],
     records=["hale_early_look"], extra=[
         res("h_seat", "A seat", [P("You go and sit in the third row while the seats fill up round you."), D(H, "Third row. Sensible."),
                                  P("He sets up his laptop at the lectern and doesn't look your way again, but you can tell it costs him.")],

@@ -223,9 +223,10 @@ STREET_CASES = [
      [P("Mr. Vance sets the paper down. He looks at your tits, at your nipples pushing at the cloth, and doesn't look away. He nods at the step beside him. Not tonight. You keep walking.")],
      "The shop guy comes out from behind the counter to stack a box that doesn't need stacking. His eyes are on your tits, loose under your clothes, all the way past. He says it to your back as you go past, and you don't turn round.",
      "A car slows beside you. The window comes down halfway, and the driver is staring at your tits. It stays with you to the end of the street, but you never look in, and it goes."),
-    # false lines a3 #14 (DECISIONS 129): the breeze needs a skirt or a dress, so no jeans, leggings or shorts
+    # false lines a3 #14 (DECISIONS 129): the breeze needs a skirt or a dress, so no jeans, leggings or shorts.
+    # pass 4 (LO, 2026-11-04): "pussy" was past the strangers' ceiling (DECISIONS 41); the breeze is on her ass now.
     ("nopanties", [PANTIES_OFF] + [{"type": "worn_type", "operator": "neq", "value": t} for t in ("jeans", "leggings", "shorts")], 2,
-     [P("A breeze comes down the street as you pass the landlord's gate, and there's nothing under your clothes to stop it. Your pussy is bare under there. Mr. Vance stands up off his chair with his eyes on your hips, and takes one step toward the gate, but you don't stop. Not tonight.")],
+     [P("A breeze comes down the street as you pass the landlord's gate, and there's nothing under your clothes to stop it. It lifts your hem and runs cool over your bare ass. Mr. Vance stands up off his chair with his eyes on your hips, and takes one step toward the gate, but you don't stop. Not tonight.")],
      "The shop guy drops his change on the step and stares at your ass, like he knows there's nothing under your clothes. \"Come in a minute.\" You don't. He doesn't pick the change up until you've turned the corner.",
      "A car slows, then stops. Someone inside whistles at your ass. \"Get in.\" You don't walk faster, and you don't get in."),
 ]

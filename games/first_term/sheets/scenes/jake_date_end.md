@@ -19,7 +19,7 @@
 | gate | his step 3+ · a date tonight · the car by Corruption: 40-59 the kiss, 60 his hand or hers |
 | tiers | **Curious** (Corruption under 40): `car_low` · **Bold** (Corruption 40), before his step 4: two yeses, `car_his` · `car_hers` · **after step 4**: "Come up." → `sneak` (a two-entry pool, `memory = "seen"`, `seen_weight = 0`) |
 | pays | the kiss: Corruption +1, Exhibitionism +1 (cap 39) · hands: each +1 (cap 79) · the sneak: Corruption +1 (cap 59) |
-| the near-catch | after step 4, one night in four: the `door` exit rolls `jake_catch_roll` (random 1–8); 1: Laura's door opens across the landing · 2 (Ryan's knock code set, `ryan_knock_code`): two knocks on the wall. Each is one line after the `sneak` entry; they don't stop |
+| the near-catch | after step 4, one night in four: the `door` exit rolls `jake_catch_roll` (random 1–8); 1: Laura's door opens across the hall · 2 (Ryan's knock code set, `ryan_knock_code`): two knocks on the wall. Each is one line after the `sneak` entry; they don't stop |
 | the no | "Goodnight, Jake." → he walks backwards down the path |
 | locked | none: the build shows no locked button; his card ends "Jake, further. (Next release)" |
 | the crude-word ceiling | the car: his middle column (ass, tits, cock) with plain anatomy (nipples, clit, wet, thighs, balls) · `sneak`: Jake's late column: cock, fuck, cum (signed with the proposal, LO 2026-11-01), with ass, tits and plain anatomy (nipples, clit, wet, thighs) · no pussy, cunt |
@@ -71,7 +71,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Fixes after
 
 **`sneak` a** (after step 4) · 133 words · explicit words 6 · median sentence 9 · act rungs: hands, vaginal, finish
 
-> You go up the stairs in the dark with Jake right behind you. He knows which stair creaks and steps over it. Your door clicks shut. He bends you over your bed and pulls your clothes down to your thighs. His jeans hit the floor. His hands grip your hips, and his cock pushes into you from behind, slow, then all of it. "Quiet, gorgeous," he whispers, grinning. Then he starts to fuck you hard. You bite your pillow so you don't moan. Your headboard knocks the wall, and Ryan's room is right on the other side. His hand slides round to your clit and rubs. You come with your face in the pillow, shaking. He grabs your ass, holds you down and comes deep inside you. His cum runs down your thighs.
+> You lead Jake down the dark hall with him right behind you. He knows which floorboard creaks and steps over it. Your door clicks shut. He bends you over your bed and pulls your clothes down to your thighs. His jeans hit the floor. His hands grip your hips, and his cock pushes into you from behind, slow, then all of it. "Quiet, gorgeous," he whispers, grinning. Then he starts to fuck you hard. You bite your pillow so you don't moan. Your headboard knocks the wall, and Ryan's room is right on the other side. His hand slides round to your clit and rubs. You come with your face in the pillow, shaking. He grabs your ass, holds you down and comes deep inside you. His cum runs down your thighs.
 
 **`sneak` b** · 140 words · explicit words 9 · median sentence 11 · act rungs: vaginal, finish
 
@@ -79,7 +79,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Fixes after
 
 ## The near-catch lines (mine, signed by LO 2026-11-01)
 
-- **1, Laura's door:** "Across the landing a door opens. Light under yours. You both stop breathing. Then Laura's slippers go to the bathroom, and back, and her door shuts." · Jake, into your neck: "Your mom?" · @player: "Shh."
+- **1, Laura's door:** "Across the hall a door opens. Light under yours. You both stop breathing. Then Laura's slippers go to the bathroom, and back, and her door shuts." · Jake, into your neck: "Your mom?" · @player: "Shh."
 - **2, Ryan's knock:** "Two knocks on the wall. Slow. Ryan's code." · Jake: "What was that?" · @player: "Nothing. The pipes."
 
 ## The explicit beats, as built (2026-11-03)
@@ -164,7 +164,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > Oh god, @player.
 >
-> One hand leaves the wheel to find your tits under your top. He squeezes, his thumb dragging over your nipple. You let him, but you go faster. A man walking a dog stops on the pavement and looks in. You don't stop for him. Jake's thighs shake. His balls pull tight. He groans, head back on the seat, and comes hot over your hand. You keep stroking his cock slow while he pants.
+> One hand leaves the wheel to find your tits under your top. He squeezes, his thumb dragging over your nipple. You let him, but you go faster. A man walking a dog stops on the sidewalk and looks in. You don't stop for him. Jake's thighs shake. His balls pull tight. He groans, head back on the seat, and comes hot over your hand. You keep stroking his cock slow while he pants.
 >
 > Jake parks outside your house and kills the engine under the street lamp. You lean back, then reach over and open his jeans. His cock is already hard when you pull it out.
 >
@@ -178,7 +178,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > Oh god, @player.
 >
-> One hand leaves the wheel to find your tits under your dress. He squeezes, his thumb dragging over your nipple. You let him, but you go faster. A man walking a dog stops on the pavement and looks in. You don't stop for him. Jake's thighs shake. His balls pull tight. He groans, head back on the seat, and comes hot over your hand. You keep stroking his cock slow while he pants.
+> One hand leaves the wheel to find your tits under your dress. He squeezes, his thumb dragging over your nipple. You let him, but you go faster. A man walking a dog stops on the sidewalk and looks in. You don't stop for him. Jake's thighs shake. His balls pull tight. He groans, head back on the seat, and comes hot over your hand. You keep stroking his cock slow while he pants.
 >
 > Jake parks outside your house and kills the engine under the street lamp. You lean back, then reach over and open his jeans. His cock is already hard when you pull it out.
 >
@@ -192,7 +192,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > Oh god, @player.
 >
-> One hand leaves the wheel to find your tits under your dress. He squeezes, his thumb dragging over your nipple. You let him, but you go faster. A man walking a dog stops on the pavement and looks in. You don't stop for him. Jake's thighs shake. His balls pull tight. He groans, head back on the seat, and comes hot over your hand. You keep stroking his cock slow while he pants.
+> One hand leaves the wheel to find your tits under your dress. He squeezes, his thumb dragging over your nipple. You let him, but you go faster. A man walking a dog stops on the sidewalk and looks in. You don't stop for him. Jake's thighs shake. His balls pull tight. He groans, head back on the seat, and comes hot over your hand. You keep stroking his cock slow while he pants.
 >
 > Fuck. That guy saw. That guy totally saw.
 >
@@ -200,7 +200,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 
 **`jake_saturday_date` · `sneak`** — 328 words · 16 counted: cock, fuck, moan, clit, ass, cum, cock, tits, nipple, fuck, ass, clit, cock, cock, cum, fuck · ceiling: the car: Jake's middle (ass, tits, cock) · the sneak: his late (cock, fuck, cum)
 
-> You go up the stairs in the dark with Jake right behind you. He knows which stair creaks and steps over it. Your door clicks shut. He bends you over your bed and pulls your clothes down to your thighs. His jeans hit the floor. His hands grip your hips, and his cock pushes into you from behind, slow, then all of it.
+> You lead Jake down the dark hall with him right behind you. He knows which floorboard creaks and steps over it. Your door clicks shut. He bends you over your bed and pulls your clothes down to your thighs. His jeans hit the floor. His hands grip your hips, and his cock pushes into you from behind, slow, then all of it.
 >
 > Quiet, gorgeous.
 >
@@ -212,7 +212,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > He says, way too loud. You clamp a hand over his mouth and ride him harder. The headboard knocks the thin wall. His hands drop to grip your ass and pull you down on every stroke. You grind your clit against him until your thighs shake. You come on his cock with your palm still over his mouth. He groans into your hand and holds your hips down hard. His cock pulses deep, and his cum fills you while you shake on top of him.
 >
-> Downstairs the TV goes quiet. Laura's feet on the stairs. You both stop breathing. They stop halfway up, and go back down.
+> In the living room the TV goes quiet. Laura's feet in the hall. You both stop breathing. They stop halfway to your door, and go back.
 >
 > Your mom?
 >
