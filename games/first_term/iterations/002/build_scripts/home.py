@@ -290,8 +290,8 @@ out.append(solo("living_couch", "Lie on the couch",
             P("You stretch out on the couch, one knee up, the remote on your stomach."),
             G(cond(*UNDIES, here(M, "home_kitchen")), P("Mark comes through from the kitchen with a beer and stops behind the couch. You're in your underwear, but he doesn't say cover up. He looks down the length of you, at your legs, at your ass in your panties. The beer stops halfway to his mouth."), D(M, "Comfortable, @player?"), ME("Very."), D(M, "Hm."), P("Then he goes, slowly.")),
             # copy fix A17 (DECISIONS 125): his look by his Want band (npc_ryan.md:205 under 40; at 40 he stops pretending)
-            G(cond(*UNDIES, here(R, "home_ryan_room"), ntrait(R, "want", "lt", 40)), P("Ryan comes down for a drink and stops on the last stair. His eyes go straight to your tits in your bra. Then they go up to the ceiling. \"Jesus, @player.nickname.\" He goes to the kitchen without looking again. He takes a long time getting that drink. On the way back up he holds the can in front of his shorts.")),
-            G(cond(*UNDIES, here(R, "home_ryan_room"), ntrait(R, "want", "gte", 40)), P("Ryan comes down for a drink and stops on the last stair. His eyes go down you, your tits, your panties, and come back up slow. He doesn't pretend he wasn't looking. \"Jesus, @player.nickname.\" He takes a long time getting that drink. On the way back up he holds the can in front of his shorts.")),
+            G(cond(*UNDIES, here(R, "home_ryan_room"), ntrait(R, "want", "lt", 40)), P("Ryan comes out of his room for a drink and stops at the end of the hall. His eyes go straight to your tits in your bra. Then they go up to the ceiling. \"Jesus, @player.nickname.\" He goes to the kitchen without looking again. He takes a long time getting that drink. On the way back up he holds the can in front of his shorts.")),
+            G(cond(*UNDIES, here(R, "home_ryan_room"), ntrait(R, "want", "gte", 40)), P("Ryan comes out of his room for a drink and stops at the end of the hall. His eyes go down you, your tits, your panties, and come back up slow. He doesn't pretend he wasn't looking. \"Jesus, @player.nickname.\" He takes a long time getting that drink. On the way back up he holds the can in front of his shorts.")),
             G(cond(SKIRT), P("With your knee up, the skirt is nowhere. Anybody coming in from the hall would see straight up it.")),
             G(cond(*COVERED), P("Nobody looks twice at a girl on a couch in her clothes.")),
             G(cond(*UNDIES, here(R, "home_ryan_room")), ME("Get me one too, Ryan."), D(R, "Get your own. And put some clothes on.")),   # pass 3 B4
@@ -321,7 +321,7 @@ out.append(solo("living_couch", "Lie on the couch",
             P("You don't cover up. You stay on your back with one knee up, in your bra and panties, for whoever comes through next."),   # reader pass 3 b01: he may be gone by now; the pinned blocks say if he comes
           *pin_blocks([
             GC(cond(ntrait(R, "want", "lt", 40)),
-               P("Ten minutes later Ryan comes down again, for nothing, and stops on the last stair. He looks at your tits in your bra, at your panties, and goes red to the ears, but he doesn't look away.")),
+               P("Ten minutes later Ryan comes out again, for nothing, and stops at the end of the hall. He looks at your tits in your bra, at your panties, and goes red to the ears, but he doesn't look away.")),
             GC(cond(*ANY),
                P("Ten minutes later Ryan comes down again and sits on the arm of the couch, right by your feet. His eyes go down you slow, your tits, your panties, the inside of your raised knee. His cock is hard in his shorts, and he doesn't hide it.")),
             # its own chain: adjacent GCs would join the Want chain above

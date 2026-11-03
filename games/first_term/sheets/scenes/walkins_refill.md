@@ -1,0 +1,104 @@
+# [REVIEW] Scenes — the walk-ins on the refill places (B21-B24), and Laura's lace set (Q12)
+
+> New 2026-11-04: written from the build, for LO to read and sign. LO's answers of 2026-11-04: Q4 ("Add walkins in
+> this release itself") at the four refill places the gate `a refill place rolls an event` listed, and Q12 (Laura's
+> black lace bra and panties become wardrobe items, worn in `walkin_wardrobe_mark`). The build does not read this
+> sheet; the canvases live in `iterations/002/build_scripts/walkins.py` (B21, B22, B6) and `walkins_out.py` (B23, B24).
+
+## How each one works, as built
+
+The same machine as the walk-ins at home and outside (`walkins_home.md`, `walkins_out.md`):
+
+| row | answer |
+|---|---|
+| where it starts | she clicks the refill activity; on entry the game rolls, and a hit shows the walk-in instead |
+| odds | 0.25 · 0.35 · 0.45 by her Exhibitionism band (under 20 · 20–39 · 40+) |
+| screen 1 | the moment, once a day per walk-in; Lust +2 on its only button where the walker has a Lust meter (Ryan, Mark) |
+| screen 2 | her answer: the cover pays 0; one bolder button per band pays her Exhibitionism +1, capped at the band's top (19 · 39 · 59) |
+| no meter | Zoe, the cocky guy: nothing of theirs moves; a flag records it |
+| once a day | each sets its own `walkin_*_today`, cleared at midnight |
+| a miss | her activity, as it is today |
+| the refill | a walk-in does not pay the refill (no energy, no hygiene); the activity is still there after it, and the walk-in cannot roll twice that day |
+
+---
+
+## B21 · her nap (`room_nap`)
+
+### `walkin_nap_ryan`
+
+| row | answer |
+|---|---|
+| who · when | Ryan, from his room · Saturday and Sunday 10:00–14:00 (after Kayla's Saturday row in his room ends at 10:00, before his TV row) |
+| want | his: he comes in for her phone charger and stands looking at her asleep on the covers |
+| her clothes | read on screen 1: towel come undone · naked · bra and panties · sleep shirt · short skirt · dressed · half dressed |
+| his leak (H7) | under his Want 40 he goes red, turns to the wall and holds the charger in front of his shorts; from 40 he leans on her desk and keeps looking |
+| screen 1 | "He's looking at you." · his Lust +2 |
+| her answers | "Pull the blanket over you." 0 · "Don't move." +1, cap 19 · "Stretch." (Daring) +1, cap 39 · "Roll onto your back." (Showing) +1, cap 59 |
+| not yet | "Not now. Not with the house this full." (on her Showing answer) |
+| hook | `ryan_saw_nap` is set; nothing reads it this release · "Lock your door next time. Or don't." |
+| every way out | "Get up." back to her room |
+| words | Ryan's early column: ass, tits |
+
+## B22 · the lounger (`garden_sun`)
+
+### `walkin_garden_mark`
+
+| row | answer |
+|---|---|
+| who · when | Mark, out of the kitchen on his Sunday table row · Sunday 10:00–18:00 (Laura is out until her 18:00 kitchen row) · after `mark_saw_her` |
+| want | his: he comes out with a beer and the hose for the tomatoes and stops on the back step |
+| her clothes | read on screen 1: topless · bra only · anything else |
+| his leak (H7) | under his Want 20 he turns his back and waters the tomatoes, the beer held in front of his jeans; 20–49 he waters the same pot over and keeps looking; from 50 he drops the hose and looks |
+| screen 1 | "He's stopped on the step." · his Lust +2 |
+| her answers | "Sit up and cover up." 0 · "Stay as you are." +1, cap 19 · "Stretch your legs out." (Daring) +1, cap 39 · "Turn over for him." (Showing) +1, cap 59 |
+| not yet | "Not yet." (Daring) · "Not today. That's all you get." (Showing, from his Want 20) |
+| hook | `mark_saw_garden` is set; nothing reads it this release · "Tomatoes need doing every Sunday." |
+| the way out | "Go in." after the cover; "Get up off the lounger." after the others |
+| words | Mark's early column: legs, ass |
+
+## B23 · the women's toilet (`toilet_wash`)
+
+### `walkin_toilet_zoe`
+
+| row | answer |
+|---|---|
+| who · when | Zoe, from her lunch row in the canteen · Monday–Friday 12:15–12:45 · after `zoe_met` |
+| want | hers: in to fix her lipstick, she pushes open the stall with the broken lock while @player washes, and leans on the frame to look |
+| her clothes | read on screen 1: top up with a bra · top up with no bra · anything else |
+| screen 1 | "She doesn't shut the door." · nothing moves |
+| her answers | "Shove the door shut." 0 · "Keep washing." +1, cap 19 · "Turn round and do your back." (Daring) +1, cap 39 · "Let her look." (Showing) +1, cap 59 |
+| not yet | "Later. Not in a toilet stall. But later, babe." (Showing) |
+| hook | `zoe_saw_toilet` is set; nothing reads it this release · "Same time tomorrow?" |
+| every way out | "Done." back to the toilets |
+| words | Zoe's early column: tits, ass |
+| the host | `toilet_wash` lives in `3_activities.toml`; its `substitutions` line is pasted there by hand and `extras.py` checks it against `walkins_out.RULES` |
+
+## B24 · Zoe's bathroom (`zoe_bathroom_face`)
+
+### `walkin_zoebath_cocky`
+
+| row | answer |
+|---|---|
+| who · when | the cocky guy, on his party rows in Zoe's flat · Friday 23:00–00:00 · Saturday 00:00–02:00 · after `cocky_guy_met` |
+| want | his: the bolt is loose, he barges in for the toilet, finds her bent over the sink doing her liner, and stays to look |
+| her clothes | read on screen 1: no bra · a short skirt |
+| how he looks | openly, from the first look: he is from outside the house (H7) |
+| screen 1 | "He doesn't back out." · nothing moves (he has no meter) |
+| her answers | "Yank the door open and point." 0 · "Finish your liner." +1, cap 19 · "Lean in closer to the mirror." (Daring) +1, cap 39 · "Turn round and lean back on the sink." (Showing) +1, cap 59 |
+| not yet | "Not in Zoe's bathroom. Not yet." (Showing) |
+| hook | `cocky_saw_bathroom` is set; nothing reads it this release · "Find me later and I'll tell you." |
+| every way out | "Open the door." back to Zoe's living room |
+| words | strangers' and extras' list (DECISIONS 41): tits, nipples, ass, cock, wet, clit |
+
+---
+
+## Q12 · Laura's lace set in `walkin_wardrobe_mark` (B6)
+
+| row | answer |
+|---|---|
+| the items | `laura_lace_bra` "Laura's black lace bra" (bra) · `laura_lace_panties` "Laura's black lace panties" (underwear) · type `lingerie`, beauty 3, corruption 2 · no price, so no shop shows them |
+| screen 1 | she finds the set under the stockings in Laura's drawer, strips (her towel, or her own things, in a heap on Laura's bed) and puts both on |
+| on the moment's button | everything she wore comes off and the lace pair goes on, so from screen 2 on the sidebar shows what the words say |
+| every way out | both pieces are removed (back in Laura's drawer, never in her wardrobe), and she dresses in the game's day clothes (bra, cotton panties, T-shirt, jeans, sneakers) |
+| different from asked | LO asked for what she wore to come back, or the default outfit "as the engine allows". The engine keeps no outfit to put back (its wardrobe actions are add, equip, unequip, remove), so it is the default, as the hot tub's way out already does. A save that went in wearing a towel comes out dressed |
+| new line | on "Let him look.", after he goes: she looks at herself in Laura's set a second longer, then folds it back into the drawer |

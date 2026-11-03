@@ -58,7 +58,8 @@ CANVASES = []
 RULES = {}          # host canvas id -> [substitution rules]
 DAILY_FLAGS = []    # every `<canvas>_today`, for 0_systems_spec.toml [engine.daily_tick]
 TOML_HOSTS = ("canteen_eat", "canteen_listen", "library_study", "party_house_soak", "quad_grass",
-              "door_grade_psych", "door_grade_art", "door_grade_business", "door_grade_bio", "door_dean_notice")
+              "door_grade_psych", "door_grade_art", "door_grade_business", "door_grade_bio", "door_dean_notice",
+              "toilet_wash")
 
 
 # (pass 3 D52) the meter each walk-in's answers pay (its description: "hers on ..."); its odds band on it. Nadia's,
@@ -66,7 +67,8 @@ TOML_HOSTS = ("canteen_eat", "canteen_listen", "library_study", "party_house_soa
 BAND_ON = {"walkin_cafe_gary": "corruption", "walkin_gym_team": "exhibitionism", "walkin_canteen_zoe": "corruption",
            "walkin_canteen_jake": "exhibitionism", "walkin_tub_zoe": "corruption", "walkin_quad_team": "exhibitionism",
            "walkin_quad_zoe": "corruption", "walkin_hall_hale": "exhibitionism", "walkin_couch_zoe": "corruption",
-           "walkin_bedroom_zoe": "corruption", "walkin_house_vance": "exhibitionism"}
+           "walkin_bedroom_zoe": "corruption", "walkin_house_vance": "exhibitionism",
+           "walkin_toilet_zoe": "exhibitionism", "walkin_zoebath_cocky": "exhibitionism"}
 
 
 def rule(host, target, chance, *items):
@@ -622,6 +624,97 @@ for host, cid, npc, office in (("door_grade_art", "walkin_door_art", ART, "art_o
                                ("door_grade_psych", "walkin_door_hale", H, "hale_office"),
                                ("door_grade_business", "walkin_door_business", BUS, "business_office")):
     rule(host, cid, 0.25, here(npc, office))
+
+# ═════════════════════════════════════════════════════════════════════════════
+# Q4 (LO, 2026-11-04: "Add walkins in this release itself"): the refill places outside the house that rolled no
+# event (gate `a refill place rolls an event`). The same shape: one moment screen, one graded answer screen.
+# B23 · THE WOMEN'S TOILET (host toilet_wash, in 3_activities.toml): Zoe, from her lunch row in the canteen (Mon-Fri
+# 11:45-13:00), in to fix her lipstick, 12:15-12:45. She has no meter; `zoe_saw_toilet` records it. Her words at
+# stage 1-2 are tits and ass (npc_zoe.md). Her answer on Exhibitionism: the door shut 0, then +1 cap 19 / 39 / 59.
+# ═════════════════════════════════════════════════════════════════════════════
+E_SHO = [trait("exhibitionism", "gte", 40)]
+CG = "npc_cocky_guy"
+walkin("walkin_toilet_zoe", "The stall door", "college_womens_toilet",
+    "B23 (Q4), Zoe: in from lunch to fix her lipstick, she pushes open the stall with the broken lock while she washes. No meter moves for her; zoe_saw_toilet. Her answer on Exhibitionism: the door shut 0, then +1 cap 19 / 39 / 59.",
+    [here(Z, "canteen"), flag("zoe_met")],
+    [P("Lunch. You've got a stall in the women's toilets and a fistful of wet paper towels, and you're washing the morning off you in two minutes flat."),
+     GC(cond(slot("top"), slot("bra")), P("Your top is shoved up under your arms with your bra pushed up over your tits, and the cold paper has you shivering.")),
+     GC(cond(slot("top"), slot("bra", False)), P("Your top is shoved up under your arms with nothing under it, and the cold paper has your tits all goosebumps.")),
+     GC(cond(*ANY), P("Your clothes are pushed up and pulled down wherever the paper needs to go.")),
+     P("The stall lock is broken, the way half of them are in here. The door swings in, and Zoe is standing there with her lipstick in her hand."),
+     D(Z, "Oh! Babe. Hi.")],
+    "She doesn't shut the door.",
+    [P("She doesn't shut it. She leans on the frame and looks you over, slow: the wet paper in your hand, your tits, your stomach, all the way down and back up to your face."),
+     D(Z, "So this is what you do at lunch. I've been eating sandwiches like an idiot."), ME("Zoe. The door."), D(Z, "I see the door, babe."),
+     VID("a girl leaning in an open toilet stall door with a lipstick, a half-undressed girl inside washing with paper towels", "friend walks in on girl in toilet stall", "girl opens stall door on half naked girl", pool_dir="sex/walkin_toilet_zoe_t4")],
+    [go("Shove the door shut.", node="z_shut", mins=2),
+     go("Keep washing.", node="z_cov", mins=5, cond_=cond(*E_COV), eff=[pay("exhibitionism", 19)]),
+     go("Turn round and do your back.", node="z_dar", mins=5, cond_=cond(*E_DAR), eff=[pay("exhibitionism", 39)]),
+     go("Let her look.", node="z_sho", mins=5, cond_=cond(*E_SHO), eff=[pay("exhibitionism", 59)])],
+    records=["zoe_saw_toilet"], when=[wd(0, 1, 2, 3, 4), tod("12:15", "12:45")], extra=[
+        res("z_shut", "The door shut", [P("You kick the door shut in her face and hold it there with your foot."), ME("Zoe! Use another one!"),
+                                        D(Z, "Spoilsport. Same time tomorrow?"),
+                                        P("Her heels click over to the mirror. You can hear her doing her lipstick out there, laughing to herself the whole time.")],
+            "Done.", "college_womens_toilet", 10),
+        res("z_cov", "Keep washing", [P("You keep washing. You wipe the cold paper down your stomach like she isn't there, but your face burns the whole time."),
+                                      D(Z, "Look at you, not even blushing. Okay. A bit blushing."), ME("I've got two minutes, Zoe."),
+                                      D(Z, "Then hurry up. I'm not going anywhere."),
+                                      P("She watches till you're done, and then she pushes the stall door shut for you, grinning.")],
+            "Done.", "college_womens_toilet", 10),
+        res("z_dar", "Do your back", [P("You turn round in the stall and reach the wet paper over your shoulder for your back, and give her your bare back and the curve of your ass while you do it."),
+                                      D(Z, "Oh, babe. Okay. Now I'm jealous of the paper."), ME("You're blocking the light, Zoe."),
+                                      D(Z, "I'm blocking the view for anyone else. You're welcome."),
+                                      P("She stays in the doorway till you've finished, but she keeps her back to the sinks, so nobody else gets a look.")],
+            "Done.", "college_womens_toilet", 10),
+        res("z_sho", "Let her look", [P("You turn to face her, drop the paper in the bin, and don't cover anything. You stand there with your tits out and let her look."),
+                                      D(Z, "Babe. You can't stand there like that and expect me to sit through a lecture after."),
+                                      ME("Then don't go to the lecture."), D(Z, "Later. Not in a toilet stall. But later, babe."),
+                                      P("She shuts the stall door on you herself, slow, and you hear her laughing all the way out.")],
+            "Done.", "college_womens_toilet", 10)])
+rule("toilet_wash", "walkin_toilet_zoe", 0.25, here(Z, "canteen"), flag("zoe_met"), wd(0, 1, 2, 3, 4), tod("12:15", "12:45"))
+
+# ═════════════════════════════════════════════════════════════════════════════
+# B24 · ZOE'S BATHROOM (host zoe_bathroom_face, town.py): Zoe's Friday party, while the cocky guy's party rows have
+# him in her flat (Fri 23:00-00:00, Sat 00:00-02:00, once met). The bolt is loose; he barges in for the toilet. A man
+# from outside the house looks openly (H7). He has no meter; `cocky_saw_bathroom` records it. Strangers' and
+# extras' words (DECISIONS 41): tits, nipples, ass, cock, wet, clit. Her answer on Exhibitionism.
+# ═════════════════════════════════════════════════════════════════════════════
+walkin("walkin_zoebath_cocky", "The loose bolt", "zoe_bathroom",
+    "B24 (Q4), the cocky guy: at Zoe's party he barges through the loose bolt while she fixes her face, and stays to look. No meter moves for him; cocky_saw_bathroom. Her answer on Exhibitionism: out 0, then +1 cap 19 / 39 / 59.",
+    [here(CG, "zoe_apartment"), flag("cocky_guy_met")],
+    [P("Party night. You slide the bolt on Zoe's bathroom door, but it wobbles in its screws. You lean over the sink into her ring of bulbs to fix your liner, your ass pushed out behind you."),
+     G(cond(slot("bra", False)), P("No bra tonight. Leaning in like this, your tits hang loose, and in the mirror your nipples show.")),
+     G(cond(SKIRT), P("Your short skirt rides up the backs of your thighs as you lean in.")),
+     P("The bolt gives. The door bangs open, and the cocky guy from your Figure drawing class lurches in with a beer, already reaching for his fly. He stops."),
+     D(CG, "Whoa. Hey, @player.")],
+    "He doesn't back out.",
+    [P("He doesn't back out. He kicks the door to behind him, leans on it, and looks at you in Zoe's mirror, at your ass pushed out over the sink, and he takes his time about it."),
+     D(CG, "Best view at this whole party."), ME("The bolt's broken. Get out."), D(CG, "Finish your face. I can wait."),
+     VID("a young man with a beer leaning on a bathroom door, staring at a girl bent over the sink doing her make-up", "guy barges into bathroom girl doing makeup party", "guy walks in on girl at mirror bathroom party", pool_dir="sex/walkin_zoebath_cocky_t4")],
+    [go("Yank the door open and point.", node="c_out", mins=2),
+     go("Finish your liner.", node="c_cov", mins=5, cond_=cond(*E_COV), eff=[pay("exhibitionism", 19)]),
+     go("Lean in closer to the mirror.", node="c_dar", mins=5, cond_=cond(*E_DAR), eff=[pay("exhibitionism", 39)]),
+     go("Turn round and lean back on the sink.", node="c_sho", mins=5, cond_=cond(*E_SHO), eff=[pay("exhibitionism", 59)])],
+    records=["cocky_saw_bathroom"], extra=[
+        res("c_out", "Out", [P("You shove past him, yank the door open and point down the hall. The music comes in loud."), ME("Out. Pee in the garden."),
+                             D(CG, "Suit yourself. Your loss, @player."),
+                             P("He goes, grinning, and you shoot the loose bolt again with your face on fire.")],
+            "Open the door.", "zoe_apartment", 5),
+        res("c_cov", "Finish your liner", [P("You turn back to the mirror and finish your liner like he isn't there. You try to look calm, but your hand isn't steady. In the glass his eyes go from your ass to your face and back."),
+                                           D(CG, "You always this calm?"), ME("Only when I'm holding something sharp."), D(CG, "Fair."),
+                                           P("He watches till you cap the liner, then holds the door open for you like a gentleman and looks at your ass all the way out.")],
+            "Open the door.", "zoe_apartment", 5),
+        res("c_dar", "Lean in closer", [P("You lean in closer to the mirror, slow, up on your toes, and push your ass right back at him while you do the other eye."),
+                                        D(CG, "Jesus. You're doing that on purpose."), ME("Doing what?"),
+                                        D(CG, "Find me later and I'll tell you."),
+                                        P("He goes, and he leaves the door wide open behind him.")],
+            "Open the door.", "zoe_apartment", 5),
+        res("c_sho", "Lean back on the sink", [P("You turn round and lean back on Zoe's sink, your hands on the edge either side of you, and let him look at the front of you. Your nipples are hard."),
+                                               D(CG, "Jesus Christ, @player."), ME("Not in Zoe's bathroom. Not yet."), D(CG, "Then where?"), ME("Find out."),
+                                               P("Somebody bangs on the door. He grins at you, opens it on the queue outside, and goes out through them.")],
+            "Open the door.", "zoe_apartment", 5)])
+rule("zoe_bathroom_face", "walkin_zoebath_cocky", 0.25, here(CG, "zoe_apartment"), wd(4), tod("23:00", "00:00"))
+rule("zoe_bathroom_face", "walkin_zoebath_cocky", 0.25, here(CG, "zoe_apartment"), wd(5), tod("00:00", "02:00"))
 
 # The hub lines that read the flags (proposal B9 and B20: "read by his/their hub"): Gary for two days, an office hub
 # in the hour after its door (she goes in straight from it).

@@ -88,7 +88,8 @@ BAND_ON = {"walkin_shower_ryan": "exhibitionism", "walkin_shower_kayla": "exhibi
            "walkin_step_vance": "exhibitionism",
            "walkin_kitchen_ryan": "corruption", "walkin_kitchen_mark": "corruption", "walkin_tv_ryan": "corruption",
            "walkin_tv_mark_garage": "corruption", "walkin_tv_mark_kitchen": "corruption", "walkin_things_ryan": "corruption",
-           "walkin_laundry_mark": "corruption", "walkin_laundry_mark_sat": "corruption"}
+           "walkin_laundry_mark": "corruption", "walkin_laundry_mark_sat": "corruption",
+           "walkin_nap_ryan": "exhibitionism", "walkin_garden_mark": "exhibitionism"}
 
 
 def rule(host, target, chance, *items):
@@ -568,18 +569,27 @@ rule("master_wardrobe", "walkin_wardrobe_laura", 0.25, here(L, "home_bathroom"),
 # alone, as walkins_out.py reads a walker with no row). A taboo accident, a look, no touch (DECISIONS 107).
 # He says nothing: his rows have him nowhere until 22:00, and a speaker is judged where the scene starts (gate
 # `a named person is where the line says`), so the stare carries it.
-# Laura's lingerie is not a wardrobe item, so what she took off to try it on is worded by what she wears, and the exits
-# put her own things back on: her clothes stay as they were.
+# Q12 (LO, 2026-11-04): Laura's black lace bra and panties are wardrobe items (0_systems_spec.toml, no price, so
+# no shop sells them). The moment's button takes off what she wore and puts the pair on, so from the answer screen
+# on the sidebar and the words agree. Every way out removes the pair (it goes back in Laura's drawer, not into
+# hers) and dresses her as every "Get dressed." in this game does (canv.DRESS_DAY): the engine keeps no outfit to
+# put back (engine.md §17, the wardrobe actions are add / equip / unequip / remove). What she took off is worded
+# on screen 1 by what she wears, before the button reads it away.
+LACE = ("laura_lace_bra", "laura_lace_panties")
+LACE_ON = ([{"action": "unequip", "item_id": g} for g in ALL_GARMENTS if g != "sneakers"]
+           + [{"action": "equip", "item_id": g} for g in LACE])
+LACE_OFF = [{"action": "remove", "item_id": g} for g in LACE] + DRESS_DAY
+IN_LACE = {"type": "clothing_item", "item_id": "laura_lace_panties", "operator": "equipped"}
 LINGERIE_OFF = [
-    GC(cond(TOWEL), P("Your towel's in a heap on her bed.")),
-    GC(cond(*ANY), P("Your own things are in a heap on her bed.")),
+    GC(cond(TOWEL), P("You drop your towel in a heap on her bed.")),
+    GC(cond(*ANY), P("You strip off and leave your own things in a heap on her bed.")),
 ]
 walkin("walkin_wardrobe_mark", "Laura's lingerie", "home_master_bedroom",
     "B6, Mark: home from the bar on a Saturday night, up to bed, he finds her at Laura's mirror in Laura's black lace bra and stares; after mark_saw_her. A look, no touch. His Lust +2 on the moment; her answer on Exhibitionism: cover up 0, let him look +1 cap 19 / 39 / 59.",
     [SAW_],
-    [P("Laura's drawer under the dresses is open. The stockings are still in their packet, and the black lace bra that is not a mom's bra is on you."),
+    [P("Laura's drawer under the dresses is open. The stockings are still in their packet. Under them is a black lace bra and the panties that match it, and neither one is a mom's."),
      *LINGERIE_OFF,
-     P("In her long mirror your tits sit high in the lace, and your nipples show dark right through it. You turn side-on to see how it looks."),
+     P("You hook her bra on and pull her panties up. In her long mirror your tits sit high in the lace, and your nipples show dark right through it. You turn side-on to see how the lace looks on your ass."),
      P("The front door goes. Then heavy feet in the hall, slow, a man's. The bedroom door opens before you can move. Mark, home from the bar."),
      # pass 3 B4: the speech on this screen is hers; Mark's one line is on the next (pass 4 B51)
      ME("Mark. I was just. I was only trying it on.")],
@@ -599,18 +609,19 @@ walkin("walkin_wardrobe_mark", "Laura's lingerie", "home_master_bedroom",
      go("Let him look.", node="m_look", mins=3, cond_=cond(*E_COV), eff=[pay("exhibitionism", 19)]),
      go("Let him look.", node="m_look", mins=3, cond_=cond(*E_DAR), eff=[pay("exhibitionism", 39)]),
      go("Let him look.", node="m_look", mins=3, cond_=cond(*E_SHO), eff=[pay("exhibitionism", 59)])],
-    raise_=[lust(M)], records=["mark_saw_lingerie"], when=[wd(5), tod("21:45", "22:00")], extra=[
+    raise_=[lust(M)], records=["mark_saw_lingerie"], when=[wd(5), tod("21:45", "22:00")], moment_wardrobe=LACE_ON, extra=[
         res("m_cover", "Cover up", [P("You cross your arms over your tits, over her lace. Your face is on fire."), ME("Don't tell her. Please don't tell Mom."),
                                     P("He jerks his chin at Laura's drawer: put it back. Then he stands aside in the doorway while you grab your things, and he watches you the whole time you do.")],
-            "Get changed. Go.", "home_hall", 5),
+            "Get changed. Go.", "home_hall", 5, wardrobe=LACE_OFF),
         # scene reader b03 (2026-11-03): her voice at her level: under Daring she can't make her arms move; from Daring she asks
         res("m_look", "Let him look", [GC(cond(trait("exhibitionism", "lt", 20)), P("You don't cover up. You can't make your arms move. You stand there facing him in his wife's bra with your face on fire and your nipples hard through her lace."),
                                           ME("Mark. Say something. Please."), T("*Cover up. Cover up. You don't.*")),
                                        GC(cond(trait("exhibitionism", "gte", 20)), P("You don't cover up. You turn round to face him, drop your hands to your sides, and let him look at you in his wife's bra."), ME("Does it look better on her, Mark? Or on me?")),
                                        P("He looks. A long time. At your tits in the lace, your nipples hard through it. His keys bite into his fist, but he still doesn't come in."),
                                        P("He breathes out hard through his nose. Then he steps back into the hall and pulls the door to without a word, and leaves you to get changed."),
+                                       G(cond(IN_LACE), P("Alone, you look at yourself in her mirror a second longer: her bra, her panties, your body in them. Then you take them off and fold them back into her drawer the way you found them.")),
                                        T("He'll think about this bra every time she wears it.")],
-            "Get changed. Go.", "home_hall", 5)])
+            "Get changed. Go.", "home_hall", 5, wardrobe=LACE_OFF)])
 rule("master_wardrobe", "walkin_wardrobe_mark", 0.25, wd(5), tod("21:45", "22:00"))
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -675,6 +686,116 @@ walkin("walkin_step_vance", "At the gate", "home_front_door",
                                                    D(V, "Mark's a lucky man, having you in that house."), ME("Does he know that?"), D(V, "He will."), P("He goes back up to his porch and sits where he can see you.")],
             "Go back in.", "home_hall", 10)])
 rule("front_step", "walkin_step_vance", 0.25, here(V, "vance_house"), tod("18:00", "21:00"))
+
+# ═════════════════════════════════════════════════════════════════════════════
+# Q4 (LO, 2026-11-04: "Add walkins in this release itself"): the refill places that rolled no event (gate `a refill
+# place rolls an event`). The same shape as B1-B8: one moment screen, one graded answer screen (the-surfaces.md R3).
+# B21 · HER NAP (host room_nap): Ryan across the hall on a weekend, after Kayla's Friday night is over (her row in
+# his room ends 10:00 on Saturday) and before his TV row (14:00). He comes in for her charger. A housemate covers
+# at his low Want (the-heat-ladder.md H7). His Lust +2 on the moment; her answer on Exhibitionism.
+# ═════════════════════════════════════════════════════════════════════════════
+SLEEP_SHIRT = wt("sleep_shirt")
+NAP_SEEN = [
+    GC(cond(TOWEL), P("You fell asleep in your towel. In your sleep it has come undone down one side, and it's open from your hip to the side of your tits.")),
+    GC(cond(*NAKED), P("You fell asleep naked on top of the covers, on your front, your bare ass to the door.")),
+    GC(cond(*UNDIES), P("Bra and panties, on top of the covers. You've rolled onto your front in your sleep, and your panties have ridden up into the crack of your ass.")),
+    GC(cond(SLEEP_SHIRT), P("Your sleep shirt has rucked up round your hips in your sleep, and the backs of your thighs are bare to the door.")),
+    GC(cond(SKIRT), P("Your short skirt has ridden up in your sleep, all the way up the backs of your thighs.")),
+    GC(cond(*COVERED), P("You fell asleep dressed, on your front, one knee pulled up under you.")),
+    GC(cond(*ANY), P("You fell asleep half dressed on top of the covers, and the half that's bare is the half facing the door.")),
+]
+walkin("walkin_nap_ryan", "The door clicks", "home_ella_room",
+    "B21 (Q4), Ryan: from his room on a weekend late morning, he comes in for her charger and finds her asleep on the covers. His Lust +2 on the moment; her answer on Exhibitionism: the blanket 0, then +1 cap 19 / 39 / 59.",
+    [here(R, "home_ryan_room")],
+    [P("You lie down on top of the covers for an hour, and you're asleep before your head is properly on the pillow."),
+     *NAP_SEEN,
+     P("Your door clicks. You open your eyes. Ryan is in your room with your phone charger in his hand, but he isn't looking at the charger.")],
+    "He's looking at you.",
+    [P("His eyes go all the way down you and all the way back up, slow. Then they get to your face, and he sees your eyes are open."),
+     GC(cond(ntrait(R, "want", "lt", 40)), P("He goes red to the ears and turns to the wall, fast. He holds the charger in front of his shorts like it hides anything. It doesn't. He's hard."),
+        D(R, "Charger. Mine's dead. You were asleep, I wasn't going to wake you. I'm going."), ME("You could knock.")),
+     GC(cond(*ANY), P("He doesn't go red, but he doesn't leave either. He leans back on your desk and keeps looking, and he doesn't turn the front of his shorts away from you."),
+        D(R, "Didn't want to wake you. Good nap?"), ME("So you stood there and watched me instead.")),
+     VID("a young man in a bedroom holding a phone charger, staring at a girl waking up on top of the covers", "brother walks in on sister napping", "guy walks in on girl sleeping in bed", pool_dir="sex/walkin_nap_ryan_t4")],
+    [go("Pull the blanket over you.", node="r_cover", mins=2),
+     go("Don't move.", node="r_cov", mins=3, cond_=cond(*E_COV), eff=[pay("exhibitionism", 19)]),
+     go("Stretch.", node="r_dar", mins=3, cond_=cond(*E_DAR), eff=[pay("exhibitionism", 39)]),
+     go("Roll onto your back.", node="r_sho", mins=5, cond_=cond(*E_SHO), eff=[pay("exhibitionism", 59)])],
+    raise_=[lust(R)], records=["ryan_saw_nap"], when=[wd(5, 6), tod("10:00", "14:00")], extra=[
+        res("r_cover", "The blanket", [P("You drag the blanket up to your chin and glare at him over the top of it."), ME("Out. Now. And knock next time."),
+                                       D(R, "Going. Sorry. I'm going."), P("He backs out with your charger. His door shuts across the hall, and a second later his music comes on loud.")],
+            "Get up.", "home_ella_room", 5),
+        res("r_cov", "Don't move", [P("You don't move. You lie there with your cheek on the pillow and let him look, one second, two, three. Your face is hot, but you stay put, your nipples hard against the covers."),
+                                    D(R, "You're. You're awake."), ME("I am. And you're still looking."), D(R, "Yeah. I. Yeah. Sorry."),
+                                    P("He goes, and he leaves your door open behind him.")],
+            "Get up.", "home_ella_room", 5),
+        res("r_dar", "Stretch", [P("You stretch, slow, your arms over your head and your back arching off the covers, and you take your time about it. Your ass lifts off the bed. His breath goes out of him."),
+                                 D(R, "Jesus, @player.nickname. Anybody could come up those stairs."), ME("So? I'm only stretching."),
+                                 D(R, "Lock your door next time. Or don't. I don't know any more."), P("He goes with the charger held low in front of his shorts.")],
+            "Get up.", "home_ella_room", 5),
+        res("r_sho", "Roll onto your back", [P("You roll onto your back, slow, and stretch your arms up over your head, and give him the whole front of you."),
+                                             GC(cond(*NAKED), P("Your tits are bare, and you leave them bare. His eyes go to them and stay.")),
+                                             GC(cond(TOWEL), P("The towel stays where it fell, open down your side, and his eyes go to the bare curve of your tit and stay.")),
+                                             GC(cond(*ANY), P("His eyes go down the front of you, slow, to every place your clothes don't cover.")),
+                                             D(R, "You want me to look."), ME("You walked in, Ryan. Not me."),
+                                             D(R, "Not now. Not with the house this full. But Jesus, @player.nickname."),
+                                             P("He goes, and his door shuts hard across the hall.")],
+            "Get up.", "home_ella_room", 5)])
+rule("room_nap", "walkin_nap_ryan", 0.25, here(R, "home_ryan_room"), wd(5, 6), tod("10:00", "14:00"))
+
+# ═════════════════════════════════════════════════════════════════════════════
+# B22 · THE LOUNGER (host garden_sun): Mark out of the kitchen on a Sunday (his Sunday table row, 08:00-22:00) for
+# the tomatoes by the fence, while Laura is out (her Sunday kitchen row starts 18:00). After mark_saw_her (the
+# dryer stays first, H2). A housemate: he covers at his low Want (H7). Mark's early words are legs and ass
+# (spine/SP2_ladders.md). His Lust +2 on the moment; her answer on Exhibitionism.
+# ═════════════════════════════════════════════════════════════════════════════
+LOUNGER_TOPLESS = [slot("top", False), slot("dress", False), slot("bra", False)]
+LOUNGER_BRA = [slot("top", False), slot("dress", False), slot("bra")]
+walkin("walkin_garden_mark", "The back step", "home_garden",
+    "B22 (Q4), Mark: out of the kitchen on a Sunday with a beer and the hose, he stops on the back step and looks at her on the lounger; after mark_saw_her. His Lust +2 on the moment; her answer on Exhibitionism: cover up 0, then +1 cap 19 / 39 / 59.",
+    [here(M, "home_kitchen"), SAW_],
+    [P("Sunday. You drag the lounger into the sun on the grass and lie back with your eyes shut. Behind you the house is quiet except for the kitchen radio."),
+     GC(cond(*LOUNGER_TOPLESS), P("Topless, on your front, bare to the waist, the sun hot all down your back.")),
+     GC(cond(*LOUNGER_BRA), P("Just your bra on top, on your back, the sun on your bare stomach.")),
+     GC(cond(*ANY), P("On your back in what you have on, your face turned up to the sun.")),
+     P("The back door bangs. Mark comes out of the kitchen with a beer in one hand and the hose in the other, for the tomatoes by the fence, and stops on the step.")],
+    "He's stopped on the step.",
+    [P("He doesn't turn the hose on. He stands on the step with his beer and looks at you, from your feet all the way up, slow."),
+     GC(cond(ntrait(M, "want", "lt", 20)), P("Then he catches himself. He turns his back on you and gives the tomatoes a soaking they don't need, and he keeps the beer low in front of his jeans the whole time."),
+        D(M, "You'll burn, lying out like that. Your mother'll blame me."), ME("Then don't look, Mark."), D(M, "I'm watering.")),
+     GC(cond(ntrait(M, "want", "lt", 50)), P("He doesn't turn away. He waters the same pot until it runs over the rim and onto his boots, and his eyes stay on your legs and your ass the whole time."),
+        D(M, "Nice day for it, @player."), ME("The tomatoes are drowning, Mark.")),
+     GC(cond(*ANY), P("He doesn't pretend. He drops the hose on the grass, still running, and drinks his beer and looks, and the front of his jeans fills."),
+        D(M, "Sunday's my day off, @player. This is a good way to spend it.")),
+     VID("a middle-aged man on a back step with a beer and a garden hose, staring at a girl sunbathing on a lounger", "stepdad watches girl sunbathing garden", "man stares at girl sunbathing backyard", pool_dir="sex/walkin_garden_mark_t4")],
+    [go("Sit up and cover up.", node="m_cover", mins=2),
+     go("Stay as you are.", node="m_stay", mins=5, cond_=cond(*E_COV), eff=[pay("exhibitionism", 19)]),
+     go("Stretch your legs out.", node="m_stretch", mins=5, cond_=cond(*E_DAR), eff=[pay("exhibitionism", 39)]),
+     go("Turn over for him.", node="m_turn", mins=5, cond_=cond(*E_SHO), eff=[pay("exhibitionism", 59)])],
+    raise_=[lust(M)], records=["mark_saw_garden"], when=[wd(6), tod("10:00", "18:00")], extra=[
+        res("m_cover", "Cover up", [P("You sit up fast and hug your knees to your chest, and your face goes hot."),
+                                    ME("Mark! You could say something before you come out."), D(M, "It's my garden. I don't have to say anything."),
+                                    P("He waters the tomatoes with his back to you while you grab your things and go in.")],
+            "Go in.", "home_hall", 5),
+        res("m_stay", "Stay as you are", [P("You stay exactly as you are, eyes shut, and let him look. You can feel where his eyes are by the heat of them: your legs, your ass. Your face goes red, but you still don't move."),
+                                          D(M, "Tomatoes need doing every Sunday, @player."), ME("Then I'll be out here every Sunday."),
+                                          P("He waters them slow, but he doesn't look at the tomatoes once.")],
+            "Get up off the lounger.", "home_garden", 20),
+        res("m_stretch", "Stretch your legs out", [P("You stretch out long on the lounger, one knee up, your arms over your head, and you hold it there for him."),
+                                                   GC(cond(ntrait(M, "want", "lt", 20)), P("He looks once, long. Then he looks at the fence instead, hard, like he's counting the slats.")),
+                                                   GC(cond(*ANY), P("He looks all he wants. He takes a long drink, and his eyes go from your knee all the way down your thigh.")),
+                                                   D(M, "Not out here, @player. The neighbours can see over that fence."), ME("Then come and stand in front of me."), D(M, "Not yet.")],
+            "Get up off the lounger.", "home_garden", 20),
+        res("m_turn", "Turn over for him", [P("You roll over slow on the lounger and let him have the front of you."),
+                                            GC(cond(*LOUNGER_TOPLESS), P("You're topless, and you don't cover up. You lie back with your arms behind your head, bare to the sky and to him.")),
+                                            GC(cond(*ANY), P("You lie back with your arms behind your head and let him look at all of it.")),
+                                            P("On the step, Mark goes still."),   # DO NOT DELETE: a non-group block, so his bands below are not elseifs of the clothes chain
+                                            GC(cond(ntrait(M, "want", "lt", 20)), P("His jaw goes tight. He turns his back on you and turns the hose up hard on the tomatoes, and his free hand goes to the front of his jeans to hide it."),
+                                               D(M, "Get some clothes on, @player. Anybody could look out a window."), ME("Somebody is looking, Mark. You.")),
+                                            GC(cond(*ANY), P("He doesn't turn away. He drinks and looks, a long time, and the front of his jeans is tight."),
+                                               D(M, "Cover up, @player. Not out here."), ME("Then where?"), D(M, "Not today. That's all you get."))],
+            "Get up off the lounger.", "home_garden", 20)])
+rule("garden_sun", "walkin_garden_mark", 0.25, here(M, "home_kitchen"), wd(6), tod("10:00", "18:00"))
 
 # pass 4 A57: her own line by her stage on the walk-ins where a short band line does it (canv.her_band_line)
 her_band_line(CANVASES, {

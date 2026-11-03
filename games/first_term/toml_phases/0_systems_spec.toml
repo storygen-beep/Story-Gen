@@ -181,6 +181,11 @@ flagEffects = [
   { targetType = "player", flag = "walkin_door_dean_today", op = "unset" },
   { targetType = "player", flag = "walkin_door_hale_today", op = "unset" },
   { targetType = "player", flag = "walkin_door_business_today", op = "unset" },
+  # Q4 (LO, 2026-11-04): the walk-ins on the four refill places (walkins.py B21-B22, walkins_out.py B23-B24)
+  { targetType = "player", flag = "walkin_nap_ryan_today", op = "unset" },
+  { targetType = "player", flag = "walkin_garden_mark_today", op = "unset" },
+  { targetType = "player", flag = "walkin_toilet_zoe_today", op = "unset" },
+  { targetType = "player", flag = "walkin_zoebath_cocky_today", op = "unset" },
   # C2: the TV sound left up stays up for the day (DECISIONS 147); C5: the shop curtain pays once a day
   { targetType = "player", flag = "tv_loud", op = "unset" },
   { targetType = "player", flag = "shop_curtain_today", op = "unset" },
@@ -520,7 +525,7 @@ free  = true
 # and its own exits move his counter. Tom's step 3 waits on five shifts, a condition a play row cannot skip.
 [[ui.cheat_page.grants]]
 id     = "next_mark_01"
-label  = "Next step now: Mark's first Sunday count"
+label  = "Next step now: Mark's first Sunday"
 kind   = "play"
 canvas = "mark_01_count_it_slowly"
 free   = true
@@ -665,6 +670,24 @@ type = "party_dress"
 beauty = 3
 corruption = 2
 
+# Q12 (LO, 2026-11-04): Laura's black lace set, from her drawer. No price, so no shop sells it. walkin_wardrobe_mark
+# (walkins.py B6) puts both on her on the way into his look and removes both on every way out, so she never keeps them.
+[[clothing]]
+id = "laura_lace_bra"
+name = "Laura's black lace bra"
+slot = "bra"
+type = "lingerie"
+beauty = 3
+corruption = 2
+
+[[clothing]]
+id = "laura_lace_panties"
+name = "Laura's black lace panties"
+slot = "underwear"
+type = "lingerie"
+beauty = 3
+corruption = 2
+
 # ── the story card (Story Goals): the opening's card, then goal 1 (OPENING.md screen 9) ──
 [[quest_cards]]
 group    = "story_goals"
@@ -682,7 +705,7 @@ goals    = [
 group    = "story_goals"
 priority = 10
 text     = "Pay your own way: the rent paid your way, not Mark's."
-tip      = "Mark counts the rent at the kitchen table on Sunday mornings. Four Sundays in a row paid in full from your own money ends it — so does taking his chair."
+tip      = "Mark takes the rent at the kitchen table on Sunday mornings. Four Sundays in a row paid in full from your own money ends it."
 when     = [ { flag = "opening_done", op = "is_true" }, { flag = "pays_her_own_way", op = "is_false" } ]
 goals    = [
   { type = "trait", subject = "player", trait = "paid_full_streak", op = "gte", value = 4, label = "Pay the rent in full from your own money, four Sundays in a row" },

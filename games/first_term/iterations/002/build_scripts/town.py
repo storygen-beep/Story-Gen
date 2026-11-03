@@ -274,10 +274,10 @@ for case, worn, lv, vance, shop, car in STREET_CASES:
             *STREET_POOLS.get(case, []),
         ], exits)]})
 
-# heat proposal B17 (Zoe out of her bedroom), DECISIONS 147 chunk 3
+# heat proposal B17 (Zoe out of her bedroom), DECISIONS 147 chunk 3; B24 (Q4, LO 2026-11-04) on Zoe's bathroom
 import walkins_out
 _done = walkins_out.attach(out)
-assert _done == {"zoe_couch_alone"}, _done
+assert _done == {"zoe_couch_alone", "zoe_bathroom_face"}, _done   # B24 (Q4): the loose bolt
 
 text += "".join(emit(c) for c in out)
 open(__import__("sys").argv[1], "w").write(text)

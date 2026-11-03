@@ -36,6 +36,7 @@ flag_keys = [
   "cocky_exam_deal",
   "cocky_guy_dared",
   "cocky_guy_met",
+  "cocky_saw_bathroom",
   "college_for_freedom",
   "college_for_fun",
   "college_for_grades",
@@ -161,6 +162,7 @@ flag_keys = [
   "mark_laura_seen",
   "mark_money_week",
   "mark_paid_look",
+  "mark_saw_garden",
   "mark_saw_her",
   "mark_saw_lingerie",
   "mark_saw_mirror",
@@ -219,6 +221,7 @@ flag_keys = [
   "ryan_path_closed",
   "ryan_saw_her_towel",
   "ryan_saw_mirror",
+  "ryan_saw_nap",
   "ryan_talk_today",
   "ryan_terms_mine",
   "ryan_terms_secret",
@@ -283,6 +286,7 @@ flag_keys = [
   "walkin_door_dean_today",
   "walkin_door_hale_today",
   "walkin_door_ta_today",
+  "walkin_garden_mark_today",
   "walkin_gym_team_today",
   "walkin_hall_hale_today",
   "walkin_house_vance_today",
@@ -293,6 +297,7 @@ flag_keys = [
   "walkin_library_nadia_today",
   "walkin_mirror_mark_today",
   "walkin_mirror_ryan_today",
+  "walkin_nap_ryan_today",
   "walkin_quad_team_today",
   "walkin_quad_zoe_today",
   "walkin_rest_zoe_today",
@@ -303,6 +308,7 @@ flag_keys = [
   "walkin_step_vance_today",
   "walkin_things_kayla_today",
   "walkin_things_ryan_today",
+  "walkin_toilet_zoe_today",
   "walkin_tub_zoe_today",
   "walkin_tv_laura_today",
   "walkin_tv_mark_garage_today",
@@ -310,6 +316,7 @@ flag_keys = [
   "walkin_tv_ryan_today",
   "walkin_wardrobe_laura_today",
   "walkin_wardrobe_mark_today",
+  "walkin_zoebath_cocky_today",
   "wash_today",
   "watched_tv",
   "worked_out",
@@ -338,6 +345,7 @@ flag_keys = [
   "zoe_park_dare_today",
   "zoe_party_promised",
   "zoe_run_booked",
+  "zoe_saw_toilet",
   "zoe_table_today",
   "zoe_together",
 ]
@@ -1399,7 +1407,7 @@ description  = "Your step-father, 46. Collects the rent at the kitchen table, an
 portrait     = "portraits/mark.jpg"
 relationship = "Your step-father, 46. Collects the rent at the kitchen table, and owes Vance more than he says."
 role         = "step-father"
-tags         = ["Counts slowly", "Control, and you", "Work boots", "Cheap beer"]
+tags         = ["Takes his time", "Control, and you", "Work boots", "Cheap beer"]
 show_traits  = ["power"]
 core_traits  = { want = 0, power = 50 }
 

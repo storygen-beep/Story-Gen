@@ -44,7 +44,7 @@ PEOPLE = [
          ]),
     dict(id="npc_mark", name="Mark", role="step-father", age=46,
          relationship="Your step-father, 46. Collects the rent at the kitchen table, and owes Vance more than he says.",
-         tags=["Counts slowly", "Control, and you", "Work boots", "Cheap beer"],
+         tags=["Takes his time", "Control, and you", "Work boots", "Cheap beer"],
          core={"want": 0, "power": 50}, show=["power"],
          schedules=[
              row("home_living_room", [6, 0, 1, 2, 3, 4], "22:00", "00:00", "up late, Laura gone up"),
