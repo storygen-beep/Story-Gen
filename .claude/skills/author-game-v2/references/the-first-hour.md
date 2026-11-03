@@ -965,11 +965,9 @@ text = "…and the roller door is up. Air tools go in bursts and stop."
 `conditions{}` without it, so a variant missing it renders forever and the location's own
 description is never seen again. The importer refuses it rather than building green.
 
-⚠️ **There is no time-of-day condition.** The evaluator has `flag`, `trait`, `npc_at_location`,
-`stage`, `quest`, `item`, `days_since_flag`, `corruption_level` and the clothing family — and
-nothing that reads the hour. So the field's 17%-vary-by-hour column is still **not authorable**;
-schedules gate canvases by time, not descriptions. Gate presence-variants on who is there instead,
-which is where the hour shows up anyway.
+**A description can vary by the hour.** The `time_of_day` condition (`engine.md` §39) works in
+`description_variants` as it does anywhere else; first_term's kitchen uses it. Gate presence
+variants on who is there as well, which is where the hour usually shows.
 
 ⚠️ **A random ambient still takes the WHOLE screen, and that is an engine limit, not a choice.**
 When a Lane 2 ambient rolls on entry the room `<<goto>>`s to it — no title, no description, no

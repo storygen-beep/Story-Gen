@@ -432,11 +432,12 @@ which leaves a gap where nothing is pulling. Ratchet it through the ignition, th
 **A plateau is fine, but the deadline persists:** the bill stops climbing; it does not stop coming due.
 
 ⚠️ **And it does not license squeezing.** R3c owns that half and the corpus is unambiguous. The
-opening should be uncoverable by *clean work* — never uncoverable. The transgressive route has to
-be open, obvious and well paid on day one, or the ratchet is a wall instead of a door. **One
-exception** (LO, 2026-11-03): a game may build an early miss when its cost can be won back by paying
-(R3c above) and `on_short = "carry"`; rent may then start before the job. Even then, a player who
-works hard can still pay the first rent in week one (LO: "still rent can be paid on week one").
+opening must never be uncoverable. **The first rent can be paid by a player who works** (LO,
+2026-11-03: "still rent can be paid on week one"; first_term keeps week one easy, its DECISIONS
+141). A game may make it tighter, but only so tight that clean work still covers it. A game may also
+build an early miss when its cost can be won back by paying (R3c above) and `on_short = "carry"`;
+rent may then start before the job. Where a game has a transgressive route to money, it is open and
+obvious on day one, never the only way to pay.
 
 **Not a gate.** Four corpus games carry a recurring obligation; a threshold read off four games
 would be invented.
@@ -568,7 +569,7 @@ who arrives at R5 by way of a money bug does not leave thinking money was the wh
 > ```
 >
 > A `[[traits.labels]] key = "money"` label does reach the sidebar: `trait_bar` reads
-> `_item.label || setup.traitLabel(_tbKey)` (`v2.py:20881`), and `setup.traitLabel` reads the trait
+> `_item.label || setup.traitLabel(_tbKey)` (`v2.py:20896`), and `setup.traitLabel` reads the trait
 > labels (`v2.py:4701`, `engine.md` §33.3).
 
 **The field's mechanism is one printer.** Measured across the 25-game corpus, the games with a real

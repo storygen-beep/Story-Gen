@@ -125,7 +125,9 @@ talks only is the failure shape (H4).
 - **A final no exists only on a button that says so** — "(ends his path)" — and sets `final = true`.
   It closes his story, never the person: he stays in the world.
 - **Who checks what:** the gate *a no has content* takes `retry_after_days` as enough; whether a parked no reaches a reply screen is the reader's test, since a word list can't tell "Never mind." from a refusal.
-- **Where a game gives him feelings** (`the-meters.md` W1), a no may cost Warmth, never Want (R5).
+- **Where a game gives him feelings** (`the-meters.md` W1), a no may cost Warmth, never Want (R5). His Want
+  pays for what happened, never for a no: it sits on the moment, not on her answer (`the-heat-ladder.md` H5,
+  LO 2026-11-03). A final no adds 0 too.
 
 > ⚠️ **EVIDENCE — NOT A TEMPLATE.** In-scene lines from the passing games:
 >
@@ -382,11 +384,14 @@ and whether it counts as a rung.
 
 ---
 
-## A7 · A dispatching place keeps a quiet outcome, and the quiet outcome pays
+## A7 · A dispatching place keeps an ordinary outcome, and the ordinary outcome pays
 
-**The shape:** most visits to a place produce nothing, the nothing is written several ways, and
+**The shape:** most visits to a place are ordinary, the ordinary visit is written several ways, and
 it returns something the player wanted anyway — rest, time, a small restore. Sitting down is a
-real action that *might* turn into something.
+real action that *might* turn into something. **Ordinary is never "nothing"** (LO, 2026-11-03,
+`the-surfaces.md` random events): the quiet visit is a real screen she chose, the sofa, the film, the
+walk, with its own lines and its own small pay. A random event that says only "Nothing happens." is
+banned.
 
 > ⚠️ **EVIDENCE — NOT A TEMPLATE.** `in-her-own-hands`, TV with Shaun in the living room: a roll of
 > one to twelve, and ten of the twelve are the quiet *"Come watch with me."* — an hour on the
