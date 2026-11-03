@@ -563,7 +563,7 @@ running, and the count comes from disk instead of a number you have to keep corr
 
 ⚠️ **ONE ASSET, ONE BLOCK.** Never reuse a `file` or a `pool_dir` across two blocks. The media
 review dedupes by file, so two beats sharing an asset collect **one** verdict between them, and the
-second beat is reviewed by nobody.
+second beat is reviewed by nobody. Checked: gate *one asset, one block*.
 
 ⚠️ **The node lead's clip does not scroll away — the beats append underneath it.** A cascade renders
 as nested `<<linkreplace>>` (`_render_cascade`, `v2.py:16778`), so nothing is ever removed. That is why a clip at the

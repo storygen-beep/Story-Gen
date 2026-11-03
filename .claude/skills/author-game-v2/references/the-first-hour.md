@@ -214,7 +214,7 @@ skip (Process Review, Round 1, numbers only), and all four passing games do: In 
 Start", Cupid's Way's "Skip Prologue". The skip sets every flag the opening always sets (and, for a one-of-several choice, the mildest branch's flags only) and lands where the
 opening hands over, so nothing downstream — `the opening opens a door` included — can tell the difference.
 Where the opening has a choice of one of several, the skip takes the mildest branch, shows it on its own
-screen, and sets that branch's flags. It never takes a no that ends a path (LO, 2026-11-03).
+screen, and sets that branch's flags. It never takes a no that ends a path (LO, 2026-11-03). Checked: gate *the skip sets what the opening sets*.
 
 ## F2 · Boot and capstone are two canvases
 
@@ -407,7 +407,7 @@ replaced it:
 
 For every system switched ON in `0_systems_spec.toml`, either a named beat in the first hour arms
 it, or it sits on the sidebar at value-zero where the player can read it. One row per system, none
-cold.
+cold. Checked: lint *every live system is armed*.
 
 The phone is a channel, and it is armed the same way: by the first scene flag that causes a text
 (`the-phone.md` P4). Its first thread arrives because a scene happened, not because `[phone]` exists.
@@ -475,7 +475,7 @@ ceiling **is** the "there is a climb ahead" read, on frame one, with no teach sc
 > branch (`v2.py:11158` and `:11225`), and `getStoryCanvasRedirect` fires on a non-repeatable canvas
 > *or* a `trigger_mode = "random"` one. Put a one-shot meeting or a random walk-in in that room and
 > the door to the wardrobe or the shop is invisible until it has fired. Pick a room with neither —
-> and note that most corpus shop locations are bare rooms for exactly this reason.
+> and note that most corpus shop locations are bare rooms for exactly this reason. Checked: gate *nothing one-time at the shop or wardrobe*.
 
 ⚠️ **The rent clock is armed, not fired.** Use `[settings.rent] start_after_flag` pointed at a flag
 the opening raises, so the first session is pressure-free — no charge lands before the player has
@@ -874,7 +874,7 @@ Three things to get right:
   whose card you missed.
 - **Flag names are not validated against anything.** Nothing checks that `met_wade` exists; a typo
   hides that character's guidance forever and no build error says so. Read the name off the
-  meeting canvas's own `flagEffects`, not off memory.
+  meeting canvas's own `flagEffects`, not off memory. Checked: gate *every card carries the met flag*.
 
 ⚠️ **This flag is load-bearing twice.** The cast page (`[ui.cast_page]`, `engine.md` §34) lists a
 character exactly when `pickQuestsCard` returns a card for them, so one flag reveals both surfaces

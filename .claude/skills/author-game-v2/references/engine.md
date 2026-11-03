@@ -730,7 +730,7 @@ arousal, energy — want the clamp and should keep it.
 ⚠️ Note the asymmetry with a *deduction*: an unclamped one can go negative. The engine's own
 recurring-demand system (`[settings.rent]`) does its own affordability check; an authored deduction
 does not — gate the choice on the trait, or price it with `costs`, which the engine refuses when
-unaffordable (`v2.py:5800` filters it out, `:5969` is the check — §27).
+unaffordable (`v2.py:5800` filters it out, `:5969` is the check — §27). Checked: gate *a deduction is gated or priced*.
 
 **How to catch it:** diff the state across the scene and compare against the declared value. A
 capped effect looks identical to a working one in the TOML, in the validator, in the build log and
@@ -1076,7 +1076,7 @@ carries `the-voice.md` R3 in full: a place, a verb, and a window if the thing is
 
 ⚠️ **Check the label is not circular.** A card must not name a choice gated at the exact value the
 card is trying to reach — a card for `trade ≥ 15` naming a choice that itself requires
-`trade ≥ 15`. Name a choice gated **one tier below** the card's own goal. Nothing in `gates.py` catches this; read each card against the gate on
+`trade ≥ 15`. Name a choice gated **one tier below** the card's own goal. Gate *a goal names the rung below* catches a label that quotes the button; read a paraphrase against the gate on
 the choice it names.
 
 **`locked_text_threshold`** (`v2.py:15730-15731`) prints an explicit *"Requires …"* hint on a

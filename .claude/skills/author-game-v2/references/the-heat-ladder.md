@@ -44,7 +44,7 @@ B24).
 
 **Two meters, one act** (first_term DECISIONS 103; LO, 2026-11-03). With two player tiers, each act names the
 meter it uses and pays that meter. A mixed act needs both meters at its stage. Her first time out at a stage
-needs either one.
+needs either one. Checked: gate *an act pays the meter it uses*.
 
 **A release that writes only some stages** (LO, 2026-11-03). A release that writes stages up to N caps every pay
 at the top of stage N, shows no button for a stage it does not write, and names the next stage only on a quest

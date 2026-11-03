@@ -251,7 +251,7 @@ A phone that keeps private variables nothing else reads is the bolted-on phone, 
 
 **Ignoring a text costs more than saying no.** Course of Temptation's booty call charges −20
 friendship and −20 romance for "Ignore it", and only −2 / −3 for "no thanks" (round 9a §1a). A
-thread she can leave unread for free is a thread she will leave unread.
+thread she can leave unread for free is a thread she will leave unread. Checked: gates *ignoring a thread costs* and *a no-show costs*.
 
 **A no-show costs.** The reply books a meeting; missing it costs Course of Temptation −25 romance,
 −25 lust and −25 friendship. The booking and its reminder are P10.
@@ -460,7 +460,7 @@ hand.**
   nowhere**. There is no morning summary, no header line, no calendar. So a `scheduleEffect` that
   nothing else surfaces is a plan the player will not turn up for. **If you schedule something, the
   flag it sets must be read by something the player meets** — a quest card, a hub line, an ambient
-  on waking. One of the three, minimum.
+  on waking. One of the three, minimum. Checked: gate *a booking is read where she meets it*; lint *a thread books something*.
 
 ⚠️ **`linked_phone` is the other direction** — a canvas node completed by a phone conversation
 (`template_import.py:1009`, `v2.py:8136`).

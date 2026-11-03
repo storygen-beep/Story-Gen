@@ -14144,14 +14144,21 @@ def _tr_placed(rx, sent):
     """Does the sentence place this person? The presence word comes right after the name, or
     after one adverb ("Laura's asleep", "Laura's been asleep", "Ryan's music", "Mark snores"),
     so "the dean's signature is at the bottom" and "Zoe's friends are on the couch" place
-    nobody."""
+    nobody. A voice that comes out of a phone ("Kayla's voice buzzes small from the phone")
+    is a call, not a person in the room, so it places nobody either."""
     for m in rx.finditer(sent):
         tail = sent[m.end():]
         head = re.match(r"(?:\s*'s\b)?(?:\s+%s\b)?\s*" % _TR_GAP_WORDS, tail)
         start = head.end() if head else 0
-        if _TR_PRESENCE.match(tail, start) or _TR_PRESENCE.match(tail, head.start() if head else 0):
+        hit = _TR_PRESENCE.match(tail, start) or _TR_PRESENCE.match(tail, head.start() if head else 0)
+        if hit and not (hit.group(0).lower() == "voice" and _TR_PHONE_VOICE.search(sent)):
             return True
     return False
+
+
+# The phone, a speaker or the line a voice comes out of (see `_tr_placed`).
+_TR_PHONE_VOICE = re.compile(r"\b(?:from|out of|through|over|on|down)\s+(?:the|her|his|your|my)\s+"
+                             r"(?:phone|speaker|line)\b|\bon speaker(?:phone)?\b|\bspeakerphone\b", re.I)
 
 
 def _tr_building(game, lid):
@@ -14177,7 +14184,9 @@ def _tr_building(game, lid):
 
 
 _TR_AWAY = re.compile(r"(?:'s|\bis|\bare)\s+(?:out|gone|away)\b|\b(?:out shopping|at work|not home|"
-                      r"not in|isn't (?:home|in|here)|isn't back)\b", re.I)
+                      r"not in|isn't (?:home|in|here)|isn't back)\b|"
+                      # "Kayla's at her mom's tonight": at somebody else's place is away from here
+                      r"(?:'s|\bis|\bare)\s+at (?:her|his|their) \w+(?:'s|s')(?!\w)", re.I)
 # A line that puts SOMEBODY in the building, or says nobody is in it.
 _TR_SOMEONE = re.compile(r"\b(?:some(?:one|body)(?:'s)?\s+(?:\w+\s+){0,2}(?:mutters|walks|crosses|"
                          r"moves|passes|thumps|laughs|calls|coughs|is up|on the stairs|downstairs|"
@@ -15190,8 +15199,8 @@ def _truth_gates(gate, _N, model, game, state):
     gate("one pool, one place", *_truth_run("one pool, one place", game, state))
     gate("the phone owns posting", *_truth_run("the phone owns posting", game, state))
     gate("a day word fits its window", *_truth_run("a day word fits its window", game, state))
-    # LO 2026-11-03, "Any of these that can come back gets a gate." Scored, never --ship blocks;
-    # each is defined above main().
+    _group2_gates(gate, _N, model, game, state)      # LO 2026-11-03 group 2; scored, never --ship
+    # LO 2026-11-03, "Any of these that can come back gets a gate." Scored; above main().
     gate("a no never raises his Want", *_no_never_raises_want(game))
     gate("a booking can clear", *_booking_can_clear(game))
     gate("a closed activity says when it opens", *_closed_activity_says_when(game))
@@ -15504,6 +15513,8 @@ def _stage_way_up(game, state):
             if places is not None:
                 detail.append(f"    the card says “{g['label']}” — what pays at {floor}: "
                               f"{', '.join(places) if places else 'nothing'}")
+    card_rows = _card_places_pay(game, state, paying_places)   # G15 (group 2, above main())
+    detail = card_rows + detail
     if not checked:
         return None, "no stage sits below a gate", detail, 0
     detail.append("(the-arc.md A4d — only her choice pays, and every stage below the highest gate "
@@ -15511,7 +15522,9 @@ def _stage_way_up(game, state):
                   "further, +1 and capped at the stage's top; a drink's boost is not a way up)")
     head = (f"{len(walls)} of {checked} stage(s) have no repeatable act that pays sober: " + "; ".join(walls)
             if walls else f"all {checked} stage(s) below a gate have a repeatable act that pays sober")
-    return (not walls), head, detail, checked
+    if card_rows:
+        head += f" · {len(card_rows)} card line(s) name a place that pays nothing at that stage"
+    return (not walls and not card_rows), head, detail, checked
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -15627,6 +15640,10 @@ def _trigger_metadata_keys(game, trigger_fields):
             continue
         where = f" @{t['location']}" if t.get("location") else ""
         for k in sorted(meta):
+            # `kind = "event"` is the skill's own marker (the-clock.md C5, LO 2026-11-03): the importer
+            # drops it on purpose and the gates read it, so it is not a lost key.
+            if k == "kind" and meta[k] == "event":
+                continue
             home = ("a [canvases.trigger] field — move it up one level"
                     + (", where this canvas already sets it (the metadata copy is dead)"
                        if k in t else "")) if k in trigger_fields \
@@ -15929,10 +15946,16 @@ def _closed_activity_says_when(game):
     """(ok, headline, detail) for `a closed activity says when it opens`: a repeatable canvas
     with `trigger.schedules` and no `npc` / `requires_npc` (a solo activity) sets
     `show_when_blocked = true` and a non-empty `cooldown_message` at the top level of
-    [canvases.trigger]. A random event (`trigger_mode = "random"`) has no button to dim."""
+    [canvases.trigger]. A random event (`trigger_mode = "random"`) has no button to dim. An event that
+    happens to her (`[canvases.trigger.metadata] kind = "event"`) is skipped, and fails if it shows its hours."""
     rows, n = [], 0
     for c in game.get("canvases") or []:
         t = c.get("trigger") or {}
+        if (t.get("metadata") or {}).get("kind") == "event":   # happens to her: never lists its hours (C5)
+            if t.get("show_when_blocked") is True:
+                rows.append(f"{c.get('id')} @{t.get('location')}: an event that happens to her lists its hours "
+                            f"when shut — hours go only on an activity she chooses; drop show_when_blocked")
+            continue
         if _is_dev(c) or not t.get("schedules") or not _rep_of(t) or t.get("npc") \
                 or t.get("requires_npc") or t.get("trigger_mode") == "random":
             continue
@@ -15948,6 +15971,8 @@ def _closed_activity_says_when(game):
                 if "show_when_blocked" in meta or "cooldown_message" in meta else ""
             rows.append(f"{c.get('id')} @{t.get('location')}: no {' and no '.join(miss)} at the top of "
                         f"[canvases.trigger]{dead} — the button vanishes when it closes")
+    extra, n_windowed = _closed_activity_hours(game)    # H64 · H31 (group 2, above main())
+    rows, n = rows + extra, n + n_windowed
     if not n:
         return None, "no solo activity has schedules", []
     return not rows, (f"{len(rows)} closed activit(ies) vanish without their hours" if rows else
@@ -16243,6 +16268,1288 @@ def _speech_split_with_company(game):
     kept = dict(game, canvases=[c for c in game.get("canvases") or [] if c.get("id") not in solo])
     narr, spoken = _speech_split(kept)
     return narr, spoken, solo
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# GROUP 2 CHECKS (LO, 2026-11-03: fix the game-logic slips "with a check for each kind that
+# can come back"; "No new rules and no new content until it's done"). Every check below
+# enforces a rule the skill already states; the rule is cited on each one. They register
+# from one line in `_truth_gates` (`_group2_gates`), and the lints print from one line in
+# main() (`_group2_lints`). All of it sits here, above main(), so the docs' `gates.py:NNN`
+# cites stay put (memory: gates-py-citation-safe-edits).
+# The ids are the third alignment pass's rows (first_term_alignment_pass3_20261103.md).
+# ─────────────────────────────────────────────────────────────────────────────
+
+def _g2_canvases(game):
+    return [c for c in game.get("canvases") or [] if isinstance(c, dict) and not _is_dev(c)]
+
+
+def _g2_tiers(game, state):
+    """The declared climb: `board.ascent_tiers` that have stages, or []."""
+    board = (state or {}).get("board") or {}
+    return [t for t in (board.get("ascent_tiers") or []) if isinstance(t, str) and _stage_bounds(game, t)]
+
+
+def _g2_key(ef):
+    return ef.get("trait") or ef.get("trait_key")
+
+
+def _g2_player_adds(choice, sign=1):
+    """{trait: amount} for every `add` on the player in this choice whose sign is `sign`."""
+    out = {}
+    for ef in choice.get("effects") or []:
+        if not isinstance(ef, dict) or ef.get("targetType", "player") != "player":
+            continue
+        if (ef.get("op") or "add") == "add" and _effect_value_sign(ef.get("value")) == sign and _g2_key(ef):
+            v = ef.get("value")
+            amt = float(v) if isinstance(v, (int, float)) else float((v or {}).get("max", 1))
+            out[_g2_key(ef)] = out.get(_g2_key(ef), 0.0) + amt
+    return out
+
+
+def _g2_entry_nodes(game):
+    """{canvas id: node ids a visit can start at} — the first node, plus any node another
+    canvas's choice routes into (`nodeId = "<canvas>.<node>"`)."""
+    out = collections.defaultdict(set)
+    for c in _g2_canvases(game):
+        nodes = c.get("nodes") or []
+        if nodes:
+            out[c.get("id")].add(nodes[0].get("id"))
+    for c in _g2_canvases(game):
+        for n in c.get("nodes") or []:
+            for ch in _node_choices(n):
+                tgt = str(ch.get("nodeId") or "")
+                if "." in tgt:
+                    cid, nid = tgt.split(".", 1)
+                    if cid != c.get("id"):
+                        out[cid].add(nid)
+    return out
+
+
+def _g2_inside(c, ch):
+    """The node id this choice moves to inside its own canvas, or None when it ends the visit."""
+    if (ch.get("targetType") or "node") != "node":
+        return None
+    tgt = str(ch.get("nodeId") or "")
+    if tgt.startswith(f"{c.get('id')}."):
+        tgt = tgt.split(".", 1)[1]
+    if not tgt or "." in tgt:
+        return None
+    return tgt
+
+
+def _g2_visits(c, starts, limit=4000):
+    """Every simple path of choices through one visit of canvas `c`, from a start node to a
+    choice that leaves it. A node is never entered twice on one path, so an act-menu loop
+    (menu, act, back to the menu) is two visits of the menu, not one long chain."""
+    nodes = {n.get("id"): n for n in c.get("nodes") or []}
+    out, stack = [], [(s, (), frozenset([s])) for s in sorted(starts) if s in nodes]
+    while stack and len(out) < limit:
+        nid, path, seen = stack.pop()
+        chs = _node_choices(nodes[nid])
+        if not chs:
+            out.append(path)
+        for ch in chs:
+            nxt = _g2_inside(c, ch)
+            if nxt is None or nxt not in nodes:
+                out.append(path + ((nid, ch),))
+            elif nxt not in seen:
+                stack.append((nxt, path + ((nid, ch),), seen | {nxt}))
+    return out
+
+
+# ── G75 · a visit pays a meter once (the-arc.md A4d: +1 for an everyday act) ────────────────
+def _visit_pays_once(game, state):
+    tiers = _g2_tiers(game, state)
+    if not tiers:
+        return None, "no declared ascent tier with stages (board.ascent_tiers)", []
+    entries = _g2_entry_nodes(game)
+    rows, n = [], 0
+    for c in _g2_canvases(game):
+        if not _rep_of(c.get("trigger")):
+            continue
+        n += 1
+        hit = None
+        for path in _g2_visits(c, entries.get(c.get("id"), ())):
+            for t in tiers:
+                paid = [(ch.get("text"), amt) for _nid, ch in path
+                        for k, amt in _g2_player_adds(ch).items() if k == t]
+                if len(paid) > 1:
+                    hit = (t, paid)
+                    break
+            if hit:
+                break
+        if hit:
+            t, paid = hit
+            rows.append(f"{c.get('id')}: one visit pays {t} {len(paid)} times — "
+                        + ", then ".join(f"\"{str(x)[:40]}\" +{a:g}" for x, a in paid[:3])
+                        + " — pay the act once, on the button into it or on the act's way out")
+    if not n:
+        return None, "no repeatable canvas", []
+    return not rows, (f"{len(rows)} repeatable canvas(es) pay a meter twice in one visit" if rows else
+                      f"{n}/{n} repeatable canvases pay each meter at most once a visit"), rows
+
+
+# ── G74 · an act pays on every way out (the-arc.md A4d · the-heat-ladder.md H5) ─────────────
+def _g2_items_key(ch):
+    return {json.dumps(it, sort_keys=True) for it in _conditions_of(ch)}
+
+
+def _g2_goes_on(c, ch):
+    """Does this choice move on to another screen — a node here, or a node in another canvas
+    ("hub_mark_garage.hl_laundry_tease")? Either way the visit goes further, so the screen that
+    offers it is a decision screen, not the screen after the act."""
+    return bool(_g2_inside(c, ch)) or ((ch.get("targetType") or "node") == "node"
+                                       and "." in str(ch.get("nodeId") or ""))
+
+
+def _act_pays_every_way_out(model, game, state):
+    tiers = _g2_tiers(game, state)
+    if not tiers:
+        return None, "no declared ascent tier with stages (board.ascent_tiers)", []
+    explicit = collections.defaultdict(int)
+    for cm in model:
+        for b in cm["beats"]:
+            explicit[(cm["id"], b.node)] = max(explicit[(cm["id"], b.node)], b.explicit)
+    entries = _g2_entry_nodes(game)
+    rows, n = [], 0
+    for c in _g2_canvases(game):
+        if not _rep_of(c.get("trigger")):
+            continue
+        cid = c.get("id")
+        for node in c.get("nodes") or []:
+            nid = node.get("id")
+            chs = _node_choices(node)
+            if nid in entries.get(cid, ()) or len(chs) < 2 or any(_g2_goes_on(c, ch) for ch in chs):
+                continue                      # a decision screen, not the screen after the act
+            for t in tiers:
+                paying = [ch for ch in chs if _g2_player_adds(ch).get(t)]
+                if not paying:
+                    continue
+                n += 1
+                for u in chs:
+                    if u in paying or u.get("final") is True:
+                        continue
+                    if not (explicit[(cid, nid)] >= 3 or not _is_a_no(u)):
+                        continue
+                    if any(_g2_items_key(u) <= _g2_items_key(p) for p in paying):
+                        rows.append(f"{cid}#{nid}: after the act \"{str(paying[0].get('text'))[:40]}\" pays "
+                                    f"{t} +{_g2_player_adds(paying[0])[t]:g} and \"{str(u.get('text'))[:40]}\" "
+                                    f"pays 0, and both show together — move the pay and the day brake onto "
+                                    f"the button into the act")
+                        break
+    if not n:
+        return None, "no act screen pays a declared meter on its way out", []
+    return not rows, (f"{len(rows)} act screen(s) pay by which exit she clicks" if rows else
+                      f"{n}/{n} act screens pay the same on every way out"), rows
+
+
+# ── G8 · G13 · an act pays inside its own stage (the-arc.md A4 · A4d) ───────────────────────
+def _g2_setter_floor(holders, t, need, tiers, memo=None, seen=frozenset()):
+    """The lowest `t` at which something can set what `need` waits on. An act gated on a ladder
+    step (`ryan_step` eq 8) or a flag opens no lower than the exits that set that step or flag:
+    ryan_two_knocks needs ryan_step 8, the only exit that sets 8 needs corruption 60, so the act
+    opens at 60, not at 0. Followed back through the setters' own waits (ryan_step 6 is set at
+    corruption 0, but only after step 5, which waits on step 4 at corruption 40). 0 when
+    nothing sets it."""
+    memo = {} if memo is None else memo
+    waits = [("trait", k, "gte", v) for k, v in need[0].items() if k != t and k not in tiers]
+    waits += [o for o in need[3] if (o[0] == "trait" and o[2] == "eq") or (o[0] == "flag" and o[2] == "is_true")]
+    best = 0.0
+    for w in waits:
+        if w in seen:
+            continue
+        if (t, w) not in memo:
+            kind, key, op, v = w
+            lows = []
+            for h in holders:
+                if kind == "flag":
+                    hit = any(isinstance(fe, dict) and fe.get("flag") == key and (fe.get("op") or "set") == "set"
+                              for fe in h["holder"].get("flagEffects") or [])
+                else:
+                    hit = any(isinstance(ef, dict) and ef.get("op") == "set"
+                              and ef.get("targetType", "player") == "player"
+                              and (ef.get("trait") or ef.get("trait_key")) == key
+                              and isinstance(ef.get("value"), (int, float))
+                              and (ef["value"] == v if op == "eq" else ef["value"] >= v)
+                              for ef in h["holder"].get("effects") or [])
+                if hit:
+                    lows.append(min((max(n[0].get(t, 0.0),
+                                         _g2_setter_floor(holders, t, n, tiers, memo, seen | {w}))
+                                     for n in h["needs"]), default=0.0))
+            memo[(t, w)] = min(lows) if lows else 0.0
+        best = max(best, memo[(t, w)])
+    return best
+
+
+def _act_pays_inside_its_stage(game, state):
+    tiers = _g2_tiers(game, state)
+    if not tiers:
+        return None, "no declared ascent tier with stages (board.ascent_tiers)", []
+    holders = _wu_holders(game)
+    rows, n, seen, memo = [], 0, set(), {}
+    for t in tiers:
+        floors = [f for f, _nm in _stage_bounds(game, t)]
+        for h, amt, cap in _her_raises(holders, t):
+            if not h["repeatable"] or not h["needs"]:
+                continue
+            floor = min(max(need[0].get(t, 0.0), _g2_setter_floor(holders, t, need, tiers, memo))
+                        for need in h["needs"])
+            above = [f for f in floors if f > floor]
+            if not above:
+                continue                      # the top stage: nothing above it to cross into
+            top = min(above) - 1
+            n += 1
+            reach = float(cap) if isinstance(cap, (int, float)) and not isinstance(cap, bool) else math.inf
+            belows = [need[1].get(t) for need in h["needs"]]
+            if all(b is not None for b in belows):
+                reach = min(reach, max(belows) - 1 + amt)
+            if reach > top:
+                key = (h["canvas"], str(h["holder"].get("text")), t)
+                if key in seen:
+                    continue
+                seen.add(key)
+                capt = "no cap" if reach == math.inf else f"cap {cap:g}" if isinstance(cap, (int, float)) else f"reaches {reach:g}"
+                rows.append(f"{h['canvas']}: \"{str(h['holder'].get('text'))[:40]}\" opens at {t} {floor:g} "
+                            f"and pays +{amt:g} with {capt}, past its stage's top {top:g} — cap it at {top:g}")
+    if not n:
+        return None, "no repeatable act pays a declared meter below its top stage", []
+    return not rows, (f"{len(rows)} repeatable act(s) pay past the top of the stage they open in" if rows else
+                      f"{n}/{n} repeatable acts are capped inside their stage"), rows
+
+
+# ── A48 · an act pays the meter it uses (the-heat-ladder.md "Two meters, one act") ──────────
+def _act_pays_its_meter(game, state):
+    tiers = _g2_tiers(game, state)
+    if len(tiers) < 2:
+        return None, "fewer than two declared ascent tiers", []
+    rows, n, seen = [], 0, set()
+    for h in _wu_holders(game):
+        paid = {t for t in tiers if _g2_player_adds(h["holder"]).get(t)}
+        if not paid or not h["needs"]:
+            continue
+        uses = [{t for t in tiers if need[0].get(t, 0) > 0} for need in h["needs"]]
+        if not all(uses):
+            continue
+        n += 1
+        if all(not (u & paid) for u in uses):
+            key = (h["canvas"], str(h["holder"].get("text")))
+            if key not in seen:
+                seen.add(key)
+                rows.append(f"{h['canvas']}: \"{str(h['holder'].get('text'))[:40]}\" needs "
+                            f"{'/'.join(sorted(uses[0]))} and pays only {'/'.join(sorted(paid))} — "
+                            f"pay the meter the act uses, or gate it on both")
+    if not n:
+        return None, "no gated act pays a declared meter", []
+    return not rows, (f"{len(rows)} act(s) gated on one meter pay another" if rows else
+                      f"{n}/{n} gated acts pay the meter they use"), rows
+
+
+# ── E95 · a need falls where it says (the-meters.md M8 · M10) ──────────────────────────────
+_G2_STOP = {"faster", "after", "little", "every", "spent", "decayed", "through", "take", "takes", "taken",
+            "costs", "cost", "lower", "heavy", "starts", "start", "more", "slowly", "also", "only", "with",
+            "from", "when", "each", "them", "then", "that", "this", "they", "into", "onto", "night",
+            "nights", "scene", "scenes", "nothing", "some", "week", "day", "days", "daily", "tick",
+            "overnight", "trait_decay", "player", "running", "lower", "while", "both", "monday", "tuesday",
+            "wednesday", "thursday", "friday", "saturday", "sunday"}
+_G2_DECAY = re.compile(r"trait_decay|every night|each night|nightly|per day|a day\b", re.I)
+
+
+def _g2_stem(w):
+    w = w.lower()
+    if w.endswith("ies"):
+        return w[:-3] + "y"
+    if w.endswith("es") and w[:-2].endswith(("ss", "sh", "ch", "x")):
+        return w[:-2]
+    if w.endswith("s") and not w.endswith("ss"):
+        return w[:-1]
+    return w
+
+
+def _g2_explicit_canvases(model):
+    return {cm["id"] for cm in model if any(b.explicit >= 3 for b in cm["beats"])}
+
+
+def _g2_class(game, model, state, word):
+    """Canvas ids a word in a need's text names: `sex` names the explicit canvases; any other
+    word names the canvases whose id, place or system card carries its stem. None = no match."""
+    if word in ("sex", "explicit"):
+        return _g2_explicit_canvases(model) or None
+    stem = _g2_stem(word)
+    if len(stem) < 4 or stem in _G2_STOP:
+        return None
+    def has(s):                               # a whole word of an id or a name, never a substring
+        return stem in {_g2_stem(w) for w in re.split(r"[^a-z]+", str(s or "").lower()) if w}
+    places = {l.get("id") for l in game.get("locations") or [] if has(l.get("id")) or has(l.get("name"))}
+    for s in ((state or {}).get("board") or {}).get("systems") or []:
+        if isinstance(s, dict) and (has(s.get("id")) or has(s.get("name"))):
+            p = s.get("place")
+            places |= set(p if isinstance(p, list) else [p] if p else [])
+    out = {c.get("id") for c in _g2_canvases(game)
+           if has(c.get("id")) or (c.get("trigger") or {}).get("location") in places}
+    return out or None
+
+
+def _g2_lowers(c, key):
+    """Does canvas `c` take `key` down — a negative add anywhere, or a `costs` row on it?"""
+    for _p, d in _walk_paths(c):
+        for ef in d.get("effects") or [] if isinstance(d.get("effects"), list) else []:
+            if isinstance(ef, dict) and _g2_key(ef) == key and ef.get("targetType", "player") == "player" \
+                    and (ef.get("op") or "add") == "add" and _effect_value_sign(ef.get("value")) < 0:
+                return True
+        costs = d.get("costs")
+        for co in costs if isinstance(costs, list) else []:
+            if isinstance(co, dict) and (co.get("trait") or co.get("trait_key")) == key:
+                return True
+    return False
+
+
+def _need_falls_where_it_says(model, game, state):
+    needs = [x for x in (((state or {}).get("board") or {}).get("needs") or [])
+             if isinstance(x, dict) and x.get("key")]
+    if not needs:
+        return None, "no declared need (board.needs)", []
+    by_id = {c.get("id"): c for c in _g2_canvases(game)}
+    decay = ((game.get("player") or {}).get("trait_decay")) or {}
+    rows, n = [], 0
+    for need in needs:
+        key = need["key"]
+        for clause in re.split(r";", str(need.get("falls") or "")):
+            clause = clause.strip()
+            if not clause or re.match(r"(?i)not\b", clause):
+                continue
+            if _G2_DECAY.search(clause):
+                n += 1
+                if key not in decay:
+                    rows.append(f"{key}: `falls` says \"{clause[:50]}\", and [player.trait_decay] has no {key}")
+                continue
+            body = clause.split(":", 1)[1] if ":" in clause else clause
+            for word in sorted(set(re.findall(r"[a-z_]+", body.lower()))):
+                cls = _g2_class(game, model, state, word)
+                if not cls:
+                    continue
+                n += 1
+                down = sum(1 for cid in cls if cid in by_id and _g2_lowers(by_id[cid], key))
+                # A named place or scene kind needs one canvas that takes it down; "sex" is a claim
+                # about sex scenes as a kind, so most of them (a shift that is explicit is not one).
+                if (2 * down < len(cls)) if word in ("sex", "explicit") else not down:
+                    rows.append(f"{key}: `falls` names {word}, and {down} of its {len(cls)} canvas(es) "
+                                f"({', '.join(sorted(cls)[:3])}…) take {key} down — write the fall or "
+                                f"correct the ledger")
+        for clause in re.split(r";", str(need.get("costs") or "")):
+            if ":" not in clause:
+                continue
+            where, what = (s.strip().lower() for s in clause.split(":", 1))
+            price = next((w for w in re.findall(r"[a-z_]+", what)
+                          if w in ((game.get("player") or {}).get("core_traits") or {})), None)
+            if not price:
+                continue
+            fill = {cid for w in re.findall(r"[a-z_]+", where) for cid in (_g2_class(game, model, state, w) or ())}
+            fill = {cid for cid in fill if cid in by_id and _g2_lowers_raise(by_id[cid], key)}
+            if not fill:
+                continue
+            n += 1
+            if not any(_g2_lowers(by_id[cid], price) for cid in fill):
+                rows.append(f"{key}: `costs` says \"{clause.strip()[:50]}\", and none of "
+                            f"{', '.join(sorted(fill)[:3])} charges {price}")
+    if not n:
+        return None, "no need's falls/costs names a place, a kind of scene or the nightly decay", []
+    return not rows, (f"{len(rows)} claim(s) in board.needs are not true in the build" if rows else
+                      f"{n}/{n} claims in board.needs are true in the build"), rows
+
+
+def _g2_lowers_raise(c, key):
+    """Does canvas `c` raise `key` (a positive add on the player)?"""
+    for _p, d in _walk_paths(c):
+        for ef in d.get("effects") or [] if isinstance(d.get("effects"), list) else []:
+            if isinstance(ef, dict) and _g2_key(ef) == key and ef.get("targetType", "player") == "player" \
+                    and (ef.get("op") or "add") == "add" and _effect_value_sign(ef.get("value")) > 0:
+                return True
+    return False
+
+
+# ── J5 · J73 · a deduction is gated or priced (engine.md §21, the deduction note) ───────────
+# An omitted `clamp` on a choice effect is emitted unclamped (`eff.get('clamp', False)`,
+# v2.py:16736), so an ungated deduction can carry a meter below 0.
+def _deduction_is_gated(game):
+    core = set(((game.get("player") or {}).get("core_traits")) or {})
+    rows, n = [], 0
+    sober = set(_wu_modifier_offsets(game))
+
+    def priced(obj, key):
+        return any(isinstance(co, dict) and (co.get("trait") or co.get("trait_key")) == key
+                   for co in obj.get("costs") or [] if isinstance(obj.get("costs"), list))
+
+    def judge(where, holder, needs, trig):
+        nonlocal n
+        for ef in holder.get("effects") or []:
+            if not isinstance(ef, dict) or ef.get("targetType", "player") != "player":
+                continue
+            key = _g2_key(ef)
+            if key not in core or (ef.get("op") or "add") != "add" or _effect_value_sign(ef.get("value")) >= 0:
+                continue
+            n += 1
+            if ef.get("clamp") is True or priced(holder, key) or priced(trig or {}, key):
+                continue
+            if needs and all(key in need[0] or key in need[1] or any(o[1] == key for o in need[3])
+                             for need in needs):
+                continue
+            rows.append(f"{where}: \"{str(holder.get('text') or 'on_ignore')[:40]}\" takes {key} "
+                        f"{ef.get('value')} with no condition on {key}, no `costs` and no clamp — "
+                        f"gate it on {key}, price it with `costs`, or add `clamp = true`")
+
+    by_id = {x.get("id"): x for x in _g2_canvases(game)}
+    for h in _wu_holders(game):
+        judge(h["canvas"], h["holder"], h["needs"], (by_id.get(h["canvas"]) or {}).get("trigger"))
+    rows = list(dict.fromkeys(rows))          # one row per button, however many ways reach it
+    for key, lst in (game.get("phone") or {}).items():
+        for d in lst if isinstance(lst, list) else []:
+            if not isinstance(d, dict):
+                continue
+            base = [_wu_needs(d.get("trigger") or {}, sober)]
+            for _p, h in _walk_paths(d.get("blocks") or []):
+                if isinstance(h.get("effects"), list) and "text" in h:
+                    judge(f"phone {d.get('id')}", h, base, None)
+            if isinstance(d.get("on_ignore"), dict):
+                judge(f"phone {d.get('id')}", d["on_ignore"], base, None)
+    if not n:
+        return None, "no authored deduction on a player trait", []
+    return not rows, (f"{len(rows)} deduction(s) can carry a meter below 0" if rows else
+                      f"{n}/{n} deductions are gated, priced or clamped"), rows
+
+
+# ── H64 · H31 · a closed activity says when it opens: the time-window half (the-clock.md C5) ─
+_G2_WHEN = re.compile(r"\d|\b(?:noon|midnight|morning|mornings|afternoon|evening|evenings|night|nights|"
+                      r"weekday|weekdays|weekend|weekends|daily|every day|mon|tue|tues|wed|thu|thur|thurs|fri|"
+                      r"sat|sun|monday|tuesday|wednesday|thursday|friday|saturday|sunday|mondays|tuesdays|"
+                      r"wednesdays|thursdays|fridays|saturdays|sundays)\b", re.I)
+
+
+def _closed_activity_hours(game):
+    """Rows for the two halves `_closed_activity_says_when` does not read: a solo activity
+    windowed by `time_of_day` / `weekday` conditions (not `trigger.schedules`) that sets no
+    hours, and a `cooldown_message` that names no hour or day ("Not now.")."""
+    rows, n = [], 0
+    for c in _g2_canvases(game):
+        t = c.get("trigger") or {}
+        if (t.get("metadata") or {}).get("kind") == "event" or not _rep_of(t) or t.get("npc") \
+                or t.get("requires_npc") or t.get("trigger_mode") == "random" or t.get("substitution_only"):
+            continue
+        items = list(_conditions_of(t))
+        if any(it.get("type") == "npc_at_location" and it.get("operator") == "is_present"
+               and it.get("location_id") == t.get("location") for it in items):
+            continue                          # bound to a person in the room: not a solo activity
+        windowed = any(it.get("type") in ("time_of_day", "weekday") for it in items)
+        if not (t.get("schedules") or windowed):
+            continue
+        n += 0 if t.get("schedules") else 1     # a scheduled one is already counted by the gate
+        msg = str(t.get("cooldown_message") or "").strip()
+        if not t.get("schedules") and (t.get("show_when_blocked") is not True or not msg):
+            rows.append(f"{c.get('id')} @{t.get('location')}: windowed by time_of_day/weekday conditions with "
+                        f"no show_when_blocked and cooldown_message — the button vanishes when it closes; "
+                        f"give it its hours, or mark it `[canvases.trigger.metadata] kind = \"event\"`")
+        elif msg and t.get("show_when_blocked") is True and not _G2_WHEN.search(msg):
+            rows.append(f"{c.get('id')} @{t.get('location')}: cooldown_message \"{msg[:40]}\" names no hour "
+                        f"or day — write the hours as a bare phrase (\"Weekdays, 8 AM-7 PM\")")
+    return rows, n
+
+
+# ── J37 · a goal names the rung below (engine.md §47, "Check the label is not circular") ───
+def _g2_norm(s):
+    import unicodedata                        # local: a top-level import would move every cited line
+    plain = unicodedata.normalize("NFKD", str(s or "")).encode("ascii", "ignore").decode()   # café -> cafe
+    return " ".join(re.findall(r"[a-z0-9']+", plain.lower().replace("’", "'")))
+
+
+def _g2_gated_at(items, trait, value):
+    for it in items:
+        if it.get("type") == "trait" and (it.get("subject") or "player") == "player" \
+                and it.get("trait_key") == trait and isinstance(it.get("value"), (int, float)):
+            if (it.get("operator") == "gte" and it["value"] == value) or \
+                    (it.get("operator") == "gt" and it["value"] == value - 1):
+                return True
+    return False
+
+
+def _goal_names_rung_below(game):
+    labels = []
+    for card in game.get("quest_cards") or []:
+        for g in card.get("goals") or []:
+            t, op, v = g.get("trait") or g.get("trait_key"), g.get("op") or g.get("operator"), g.get("value")
+            if t and op in ("gte", "gt") and isinstance(v, (int, float)) and g.get("label") \
+                    and (g.get("subject") or "player") == "player":
+                labels.append((g["label"], t, v + (1 if op == "gt" else 0)))
+    if not labels:
+        return None, "no goal on a player trait carries a label", []
+    buttons = []
+    for c in _g2_canvases(game):
+        if len(_g2_norm(c.get("name")).split()) >= 3:
+            buttons.append((c.get("id"), c.get("name"), list(_conditions_of(c.get("trigger") or {}))))
+        for n in c.get("nodes") or []:
+            for ch in _node_choices(n):
+                if len(_g2_norm(ch.get("text")).split()) >= 3:
+                    buttons.append((c.get("id"), ch.get("text"), list(_conditions_of(ch))))
+    rows = []
+    for label, t, v in labels:
+        lab = f" {_g2_norm(label)} "
+        for cid, text, items in buttons:
+            if f" {_g2_norm(text)} " in lab and _g2_gated_at(items, t, v):
+                rows.append(f"goal \"{label[:60]}\" names \"{str(text)[:40]}\" ({cid}), which itself needs "
+                            f"{t} {v:g} — name a button gated one rung below the goal")
+                break
+    return not rows, (f"{len(rows)} goal label(s) name a button gated at the goal's own value" if rows else
+                      f"{len(labels)}/{len(labels)} goal labels name nothing gated at their own value"), rows
+
+
+# ── H48 · a goal can flip (the-voice.md: "Never dangle a live goal bullet that cannot flip") ─
+def _goal_can_flip(game):
+    start = ((game.get("player") or {}).get("core_traits")) or {}
+    rows, n = [], 0
+    for card in game.get("quest_cards") or []:
+        for g in card.get("goals") or []:
+            t, op, v = g.get("trait") or g.get("trait_key"), g.get("op") or g.get("operator"), g.get("value")
+            if not t or op not in ("gte", "gt") or not isinstance(v, (int, float)) \
+                    or (g.get("subject") or "player") != "player":
+                continue
+            n += 1
+            need = v + (1 if op == "gt" else 0)
+            top = max(_paid_cap(game, t), float(start.get(t, 0) or 0))
+            if top < need:
+                rows.append(f"goal \"{str(g.get('label') or t)[:60]}\" needs {t} {need:g}, and the most this "
+                            f"build pays is {top:g} — say where it ends in the card's text, not as a goal")
+    if not n:
+        return None, "no goal on a player trait", []
+    return not rows, (f"{len(rows)} goal(s) can never flip in this build" if rows else
+                      f"{n}/{n} goals can flip in this build"), rows
+
+
+# ── G1 · a set flag is read (the-arc.md A1: each step gated on the flag the step before set). A LINT ─
+def _set_flag_is_read(game):
+    sets, reads = collections.defaultdict(set), set()
+
+    def walk(o, path):
+        if isinstance(o, dict):
+            for k, v in o.items():
+                walk(v, path + (k,))
+        elif isinstance(o, list):
+            for v in o:
+                walk(v, path)
+        elif isinstance(o, str) and path:
+            if path[-1] == "flag" and "flagEffects" in path:
+                return
+            if path in (("player", "flags"), ("player", "flag_keys")) \
+                    or path[:3] == ("engine", "daily_tick", "flagEffects"):
+                return
+            reads.add(o)
+
+    for c in _g2_canvases(game):
+        for _p, d in _walk_paths(c):
+            for fe in d.get("flagEffects") or [] if isinstance(d.get("flagEffects"), list) else []:
+                if isinstance(fe, dict) and fe.get("flag") and fe.get("op", "set") == "set" \
+                        and fe.get("value") is not False:
+                    sets[fe["flag"]].add(c.get("id"))
+    walk({k: v for k, v in game.items() if k != "canvases"}, ())
+    for c in _g2_canvases(game):
+        walk(c, ())
+    if not sets:
+        return None, "no canvas sets a flag", []
+    rows = [f"`{f}` is set in {', '.join(sorted(where)[:3])} and read by nothing — gate the next step or a "
+            f"repeatable on it, or drop it" for f, where in sorted(sets.items()) if f not in reads]
+    return not rows, (f"{len(rows)} flag(s) set and never read" if rows else
+                      f"{len(sets)}/{len(sets)} flags a canvas sets are read"), rows
+
+
+# ── G1 · the last step opens a repeatable (the-arc.md A1) ───────────────────────────────────
+def _last_step_opens_repeatable(game, state):
+    ladders = [(c.get("id"), c.get("ladder")) for c in (((state or {}).get("board") or {}).get("characters") or [])
+               if isinstance(c, dict) and isinstance(c.get("ladder"), dict) and c["ladder"].get("steps")]
+    if not ladders:
+        return None, "no declared ladder (board.characters[].ladder)", []
+    by_id = {c.get("id"): c for c in _g2_canvases(game)}
+    rows = []
+    for npc, lad in ladders:
+        counter = lad.get("counter")
+        steps = [s for s in lad["steps"] if isinstance(s, dict) and isinstance(s.get("n"), (int, float))]
+        if not counter or not steps:
+            continue
+        last = max(steps, key=lambda s: s["n"])
+        k = last["n"]
+        last_flags = {fe.get("flag") for _p, d in _walk_paths(by_id.get(last.get("canvas")) or {})
+                      for fe in d.get("flagEffects") or [] if isinstance(d.get("flagEffects"), list)
+                      and isinstance(fe, dict) and fe.get("op", "set") == "set"}
+
+        def opens(it):
+            if it.get("type") == "trait" and it.get("trait_key") == counter and isinstance(it.get("value"), (int, float)):
+                op, v = it.get("operator"), it["value"]
+                return (op == "eq" and v == k) or (op == "gte" and v == k) or (op == "gt" and v == k - 1)
+            return it.get("type") == "flag" and it.get("flag_key") in last_flags and it.get("operator") == "is_true"
+
+        found = False
+        for c in by_id.values():
+            if not _rep_of(c.get("trigger")) or c.get("id") == last.get("canvas"):
+                continue
+            if any(opens(it) for it in _conditions_of(c.get("trigger") or {})):
+                found = True
+            for n in c.get("nodes") or []:
+                found = found or any(opens(it) for ch in _node_choices(n) for it in _conditions_of(ch))
+            if found:
+                break
+        if not found:
+            rows.append(f"{npc}: the last step ({counter} {k:g}, {last.get('canvas')}) opens no repeatable — "
+                        f"no repeatable trigger or button reads {counter} {k:g} or a flag the step sets "
+                        f"(a card or a line group is not a repeatable)")
+    return not rows, (f"{len(rows)} ladder(s) end without turning into a repeatable" if rows else
+                      f"{len(ladders)}/{len(ladders)} ladders end on a repeatable"), rows
+
+
+# ── G12 · an accident pays him (the-arc.md A4d · the-heat-ladder.md H5) ─────────────────────
+def _accident_pays_him(game):
+    targets = collections.defaultdict(list)          # target canvas -> its substitution rules
+    for c in _g2_canvases(game):
+        for s in (c.get("trigger") or {}).get("substitutions") or []:
+            if isinstance(s, dict):
+                targets[s.get("target_canvas_id")].append(s)
+    metered = {x.get("id") for x in game.get("npcs") or []
+               if any(isinstance(v, (int, float)) for v in (x.get("core_traits") or {}).values())}
+    rows, n = [], 0
+    for c in _g2_canvases(game):
+        t = c.get("trigger") or {}
+        if not (t.get("trigger_mode") == "random" or t.get("substitution_only") or c.get("id") in targets):
+            continue
+        # A random event: anyone present is in it. A walk-in: the person it is bound to walks in on
+        # her (`npc` / `requires_npc`); a peek through a door, where only presence is read, is not
+        # an accident he is part of, and is left to the reader.
+        person = {t.get("npc"), t.get("requires_npc")}
+        if t.get("trigger_mode") == "random":
+            person |= {it.get("npc_id") for it in _conditions_of(t)
+                       if it.get("type") == "npc_at_location" and it.get("operator") == "is_present"}
+        if not (person & metered):
+            continue                          # nobody there has a meter to raise
+        n += 1
+        raised = any(ef.get("targetType") == "npc" and (ef.get("op") or "add") == "add"
+                     and _effect_value_sign(ef.get("value")) > 0
+                     for _p, d in _walk_paths(c) for ef in d.get("effects") or []
+                     if isinstance(d.get("effects"), list) and isinstance(ef, dict))
+        # The way in: trigger.pre_substitution_effects run at the top of node 0 (template_import.py:899-906)
+        raised = raised or any(isinstance(ef, dict) and ef.get("targetType") == "npc"
+                               and (ef.get("op") or "add") == "add" and _effect_value_sign(ef.get("value")) > 0
+                               for ef in t.get("pre_substitution_effects") or [])
+        if not raised:
+            rows.append(f"{c.get('id')}: an event with a person in it raises nothing for him — put his "
+                        f"raise (and a flag) on the way in, and her pay on the button where she goes further")
+    if not n:
+        return None, "no event or walk-in with a person in it", []
+    return not rows, (f"{len(rows)} event(s) with a person raise nothing for him" if rows else
+                      f"{n}/{n} events with a person raise his meter"), rows
+
+
+# ── G15 · the Quests page names only places that pay at its stage (the-arc.md A4d) ──────────
+def _g2_card_line_pays(game, state, card, goal, t, floor, pays):
+    """(places that pay `t`, the value they are judged at) for one goal line. A line is live from
+    the rung below it, the card's previous goal on the same meter ("Exhibitionism 15: …" is read
+    once she has 10), not from the stage's floor; and a building pays when a room in it pays
+    ("the shower at home" is home_bathroom, inside `home`)."""
+    at = max([floor] + [x["value"] for x in card.get("goals") or []
+                        if isinstance(x, dict) and (x.get("trait") or x.get("trait_key")) == t
+                        and isinstance(x.get("value"), (int, float)) and x["value"] < goal["value"]])
+    places = set(pays)
+    if at > floor:
+        board = (state or {}).get("board") or {}
+        tiers = [x for x in (board.get("ascent_tiers") or []) if _stage_bounds(game, x)]
+        memo = _g2_card_line_pays.__dict__
+        if memo.get("game") is not game:              # one holder walk per game, not per line
+            memo.update(game=game, holders=_wu_holders(game), reach={})
+        holders = memo["holders"]
+        if (t, at) not in memo["reach"]:
+            memo["reach"][(t, at)] = _wu_reachable(game, holders, t, at, tiers, {})
+        reach = memo["reach"][(t, at)]
+        places = {h["place"] for h, _a, cap in _her_raises(holders, t) if h["repeatable"]
+                  and not (isinstance(cap, (int, float)) and cap <= at)
+                  and any(_wu_meets(n, t, at, tiers, {}, reach) for n in h["needs"])}
+    parent = {l.get("id"): l.get("parent") for l in game.get("locations") or [] if isinstance(l, dict)}
+    for p in list(places):
+        seen = set()
+        while parent.get(p) and p not in seen:
+            seen.add(p)
+            p = parent[p]
+            places.add(p)
+    return sorted(places), at
+
+
+def _card_places_pay(game, state, paying_places):
+    """Rows for `every stage has a way up`: a goal label on a declared tier that names a place
+    (its name or id) where nothing pays that tier at the stage the card is shown in."""
+    names = {}
+    for l in game.get("locations") or []:
+        lid = l.get("id")
+        for nm in (l.get("name"), str(lid or "").replace("_", " ")):
+            nm = re.sub(r"^the ", "", _g2_norm(nm))
+            if lid and len(nm) >= 3:
+                names[nm] = lid
+    rows = []
+    for card in game.get("quest_cards") or []:
+        for g in card.get("goals") or []:
+            t = g.get("trait") or g.get("trait_key")
+            label = str(g.get("label") or "")
+            if ":" not in label or not isinstance(g.get("value"), (int, float)):
+                continue
+            floor = max([f for f, _n in _stage_bounds(game, t) if f < g["value"]] or [0])
+            pays = paying_places.get((t, floor))
+            if pays is None:
+                continue
+            pays, floor = _g2_card_line_pays(game, state, card, g, t, floor, pays)
+            # Each listed item names a place when the item IS a place's name, or ends "at/in the <name>".
+            for item in re.split(r",|;|\band\b|\bor\b", label.split(":", 1)[1]):
+                item = re.sub(r"^the ", "", _g2_norm(item))
+                tail = re.split(r"\b(?:at|in|on) (?:the )?", item)[-1]
+                lid = names.get(item) or names.get(tail)
+                if lid and lid not in pays:
+                    rows.append(f"the card says “{label[:70]}” — {lid} pays nothing toward {t} at {floor}")
+    return rows
+
+
+# ── E8 · a step's gate sits above his start (the-meters.md, "Whatever he keeps" 4) ─────────
+def _step_gate_above_start(game):
+    npcs = {n.get("id"): (n.get("core_traits") or {}) for n in game.get("npcs") or [] if n.get("id")}
+    gates_ = collections.defaultdict(list)                # (npc, trait) -> [(value, canvas)]
+    lowered = set()
+    pays = collections.defaultdict(list)                  # (canvas, npc, trait) -> [amount]
+    for c in _g2_canvases(game):
+        for _p, d in _walk_paths(c):
+            for ef in d.get("effects") or [] if isinstance(d.get("effects"), list) else []:
+                if isinstance(ef, dict) and ef.get("targetType") == "npc" and (ef.get("op") or "add") == "add":
+                    k = (ef.get("npcId") or ef.get("npc_id"), _g2_key(ef))
+                    s = _effect_value_sign(ef.get("value"))
+                    if s < 0:
+                        lowered.add(k)
+                    elif s > 0 and isinstance(ef.get("value"), (int, float)):
+                        pays[(c.get("id"),) + k].append(float(ef["value"]))
+        if _rep_of(c.get("trigger")):
+            continue
+        for it in _conditions_of(c.get("trigger") or {}):
+            if it.get("type") == "trait" and it.get("subject") == "npc" and it.get("operator") in ("gte", "gt") \
+                    and isinstance(it.get("value"), (int, float)):
+                gates_[(it.get("npc_id"), it.get("trait_key"))].append(
+                    (it["value"] + (1 if it.get("operator") == "gt" else 0), c.get("id")))
+    if not gates_:
+        return None, "no one-time step gates on a man's number", []
+    rows, n = [], 0
+    for (npc, t), gl in sorted(gates_.items()):
+        start = npcs.get(npc, {}).get(t)
+        if not isinstance(start, (int, float)):
+            continue
+        for v, cid in sorted(gl):
+            n += 1
+            if v <= start and (npc, t) not in lowered:
+                rows.append(f"{npc} {t}: starts at {start:g} and {cid} needs {v:g} — met before her first "
+                            f"visit, and nothing lowers it")
+        steps = sorted({v for v, _c in gl})
+        for v, cid in sorted(gl):
+            got = pays.get((cid, npc, t))
+            nxt = [w for w in steps if w > v]
+            if got and nxt and max(start, v) + min(got) >= nxt[0] and nxt[0] > start:
+                rows.append(f"{npc} {t}: {cid} (needs {v:g}) pays +{min(got):g}, which already meets the next "
+                            f"step's {nxt[0]:g} — one visit should move 10–50% of the way")
+    if not n:
+        return None, "no one-time step gates on a man's number with a start", []
+    return not rows, (f"{len(rows)} step gate(s) need no visits" if rows else
+                      f"{n}/{n} step gates sit above where he starts"), rows
+
+
+# ── F61 · F60 · F69 · the phone's bookings (the-phone.md P5 · P10) ───────────────────────────
+def _g2_threads(game):
+    out = []
+    for key, lst in (game.get("phone") or {}).items():
+        for d in lst if isinstance(lst, list) else []:
+            if isinstance(d, dict) and d.get("id") and isinstance(d.get("blocks"), list):
+                out.append(d)
+    return out
+
+
+def _g2_replies(d):
+    return [ch for b in d.get("blocks") or [] if isinstance(b, dict) and b.get("type") == "reply"
+            for ch in b.get("choices") or [] if isinstance(ch, dict)]
+
+
+def _g2_noshow_flag(d):
+    items = list(_conditions_of(d.get("trigger") or {}))
+    for it in items:
+        if it.get("type") == "hours_since_flag" and it.get("operator") in ("gte", "gt") and it.get("flag_key"):
+            f = it["flag_key"]
+            if any(x.get("flag_key") == f and x.get("type") == "flag" and x.get("operator") == "is_true"
+                   for x in items):
+                return f
+    return None
+
+
+def _g2_costs_something(h):
+    return any(isinstance(ef, dict) and _effect_value_sign(ef.get("value")) < 0
+               for ef in h.get("effects") or []) or bool(h.get("costs"))
+
+
+def _noshow_costs(game):
+    rows, n = [], 0
+    for d in _g2_threads(game):
+        f = _g2_noshow_flag(d)
+        if not f:
+            continue
+        n += 1
+        ways = _g2_replies(d) + ([d["on_ignore"]] if isinstance(d.get("on_ignore"), dict) else [])
+        free = [str(h.get("text") or "on_ignore") for h in ways if not _g2_costs_something(h)]
+        if not isinstance(d.get("on_ignore"), dict):
+            free.append("(no on_ignore)")
+        if free:
+            rows.append(f"phone {d.get('id')}: the no-show on `{f}` costs nothing on "
+                        f"{', '.join(free[:3])} — a no-show costs something (the-phone.md P5)")
+    if not n:
+        return None, "no no-show thread (a trigger on hours_since_flag gte a flag it reads is_true)", []
+    return not rows, (f"{len(rows)} no-show thread(s) cost nothing" if rows else
+                      f"{n}/{n} no-show threads cost something"), rows
+
+
+def _ignoring_costs(game):
+    rows, n = [], 0
+    for d in _g2_threads(game):
+        if _g2_noshow_flag(d):
+            continue
+        replies = _g2_replies(d)
+        if not any(h.get("flagEffects") or h.get("effects") for h in replies):
+            continue                          # a reply that does nothing: the thread is filler
+        n += 1
+        oi = d.get("on_ignore")
+        if not d.get("ignore_after_days") or not isinstance(oi, dict) or not _g2_costs_something(oi):
+            rows.append(f"phone {d.get('id')}: its replies book or move something, and ignoring it is free — "
+                        f"set ignore_after_days with an on_ignore that costs more than a no")
+    if not n:
+        return None, "no thread whose replies book or move anything", []
+    return not rows, (f"{len(rows)} thread(s) can be ignored for free" if rows else
+                      f"{n}/{n} threads cost something when ignored"), rows
+
+
+def _booking_read_where_met(game):
+    booked = set()
+    for d in _g2_threads(game):
+        for h in _g2_replies(d):
+            for fe in h.get("flagEffects") or []:
+                if isinstance(fe, dict) and fe.get("flag") and fe.get("op", "set") == "set" \
+                        and _BOOKING_NAME.search(fe["flag"]):
+                    booked.add(fe["flag"])
+    for _p, d in _walk_paths(game):
+        for se in d.get("scheduleEffects") or [] if isinstance(d.get("scheduleEffects"), list) else []:
+            for fe in (se or {}).get("flagEffects") or [] if isinstance(se, dict) else []:
+                if isinstance(fe, dict) and fe.get("flag"):
+                    booked.add(fe["flag"])
+    if not booked:
+        return None, "no phone reply books a flag", []
+    met = set()
+    for c in _g2_canvases(game):
+        for _p, d in _walk_paths(c):
+            if d.get("flag_key") in booked and d.get("type") in ("flag", "hours_since_flag", "days_since_flag"):
+                met.add(d["flag_key"])
+    for card in game.get("quest_cards") or []:
+        for _p, d in _walk_paths(card):
+            if d.get("flag") in booked or d.get("flag_key") in booked:
+                met.add(d.get("flag") or d.get("flag_key"))
+    rows = [f"`{f}` is booked on the phone and read by no canvas and no quest card — a hub line, a card or "
+            f"the scene itself must read it (the-phone.md P10)" for f in sorted(booked - met)]
+    return not rows, (f"{len(rows)} booking(s) the player never meets" if rows else
+                      f"{len(booked)}/{len(booked)} bookings are read where she meets them"), rows
+
+
+# ── F72 · the rent page can place its collector (the-economy.md · engine.md §26) ────────────
+_G2_DAYS = {"monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3, "friday": 4, "saturday": 5, "sunday": 6}
+
+
+_G2_REMOTE = r"text|texts|message|messages|call|voicemail|voice note|note|email"
+
+
+def _rent_page_places_collector(game):
+    rent = (game.get("settings") or {}).get("rent") or {}
+    if not rent.get("enabled") or not rent.get("collector_npc"):
+        return None, "no [settings.rent] with a collector", []
+    npc = next((x for x in game.get("npcs") or [] if x.get("id") == rent["collector_npc"]), None)
+    text = (rent.get("text") or {})
+    scene = " ".join(str(text.get(k) or "") for k in ("title", "scene"))
+    name = str((npc or {}).get("name") or "")
+    # "Mark's text came in at midnight" names him without putting him in the room: a mention that
+    # is his text, message, call or note is not him in front of her.
+    if not npc or not (name and re.search(rf"\b{re.escape(name)}\b(?!['’]s\s+(?:{_G2_REMOTE}))", scene)):
+        return True, "the rent page's scene does not put the collector in front of her", []
+    day = _G2_DAYS.get(str(rent.get("due_day") or "").lower())
+    rows_ = [r for r in npc.get("schedules") or [] if day is None or day in (r.get("weekdays") or range(7))]
+    places = {r.get("location") for r in rows_}
+    covered = sum((_g2_minutes(r.get("end_time")) or 1440) - (_g2_minutes(r.get("start_time")) or 0)
+                  for r in rows_ if _g2_minutes(r.get("end_time")) is not None or r.get("end_time") == "00:00")
+    if len(places) == 1 and covered >= 1440:
+        return True, f"{name} is at one place all of {rent.get('due_day')}", []
+    where = ", ".join(f"{r.get('location')} {r.get('start_time')}-{r.get('end_time')}" for r in rows_[:4])
+    return False, "the rent page puts the collector in front of her at an hour he may be elsewhere", [
+        f"[settings.rent.text] scene names {name}, and the page fires on her first move after 00:00 on "
+        f"{rent.get('due_day')} (engine.md §26), while his rows that day are {where or 'none'} — write the scene "
+        f"without placing him, or let him find her"]
+
+
+def _g2_minutes(hhmm):
+    m = re.match(r"^(\d{1,2}):(\d{2})$", str(hhmm or ""))
+    return int(m.group(1)) * 60 + int(m.group(2)) if m else None
+
+
+# ── C24 · nothing one-time at the shop or the wardrobe (the-first-hour.md F3) ───────────────
+def _shop_room_stays_open(game):
+    s = game.get("settings") or {}
+    rooms = set()
+    for k in ("shop_location", "wardrobe_location"):
+        v = s.get(k)
+        rooms |= set(v if isinstance(v, list) else [v] if v else [])
+    if not rooms:
+        return None, "no shop_location or wardrobe_location", []
+    rows = []
+    for c in _g2_canvases(game):
+        t = c.get("trigger") or {}
+        if t.get("location") not in rooms or t.get("substitution_only"):
+            continue
+        if not _rep_of(t) or t.get("trigger_mode") == "random":
+            rows.append(f"{c.get('id')} @{t.get('location')}: "
+                        f"{'a random event' if t.get('trigger_mode') == 'random' else 'a one-time canvas'} in the "
+                        f"shop/wardrobe room hides the injected link until it fires — move it to another room")
+    return not rows, (f"{len(rows)} one-time or random canvas(es) at the shop or a wardrobe room" if rows else
+                      f"nothing one-time at the {len(rooms)} shop/wardrobe room(s)"), rows
+
+
+# ── C38 · every card carries the met flag (the-first-hour.md, "A character's [[quest_cards]]") ─
+def _card_carries_met_flag(game):
+    set_flags = set(_flags_ever_set(game))
+    by_npc = collections.defaultdict(list)
+    for card in game.get("quest_cards") or []:
+        if card.get("npc_id"):
+            by_npc[card["npc_id"]].append(card)
+    rows, n = [], 0
+    for npc, cards in sorted(by_npc.items()):
+        slug = npc[4:] if npc.startswith("npc_") else npc
+        met = next((f for f in (f"{slug}_met", f"met_{slug}") if f in set_flags), None)
+        if not met:
+            continue
+        for card in cards:
+            n += 1
+            ops = {w.get("op") or w.get("operator") for w in card.get("when") or []
+                   if isinstance(w, dict) and w.get("flag") == met}
+            if not ops:
+                rows.append(f"{npc}: card \"{str(card.get('heading') or card.get('text'))[:50]}\" has no `{met}` "
+                            f"in `when` — is_false on a pointer card, is_true on every card after")
+    if not n:
+        return None, "no character card whose meeting flag is set anywhere", []
+    return not rows, (f"{len(rows)} card(s) miss the meeting flag" if rows else
+                      f"{n}/{n} character cards carry the meeting flag"), rows
+
+
+# ── C11 · the skip sets what the opening sets (the-first-hour.md F1c) ───────────────────────
+def _g2_sets(path):
+    out = set()
+    for _nid, ch in path:
+        for fe in ch.get("flagEffects") or []:
+            if isinstance(fe, dict) and fe.get("flag") and fe.get("op", "set") == "set":
+                out.add(fe["flag"])
+        for ef in ch.get("effects") or []:
+            if isinstance(ef, dict) and ef.get("op") == "set" and _g2_key(ef):
+                out.add(f"{_g2_key(ef)}={ef.get('value')}")
+    return out
+
+
+def _skip_sets_what_opening_sets(game):
+    start = (game.get("project") or {}).get("starting_canvas") or game.get("starting_canvas")
+    c = next((x for x in _g2_canvases(game) if x.get("id") == start), None)
+    if not c or not c.get("nodes"):
+        return None, "no starting canvas", []
+    first = c["nodes"][0]
+    skips = [ch for ch in _node_choices(first) if re.search(r"\bskip\b", str(ch.get("text") or ""), re.I)]
+    if not skips:
+        return None, "the opening has no skip on its first screen", []
+    nodes = {n.get("id"): n for n in c["nodes"]}
+    full, skip_paths = [], []
+    for path in _g2_visits(c, {first.get("id")}):
+        if not path:
+            continue
+        (skip_paths if path[0][1] in skips else full).append(path)
+    if not full or not skip_paths:
+        return None, "the opening has no full path beside the skip", []
+    always = set.intersection(*[_g2_sets(p) for p in full])
+    skip_set = set.intersection(*[_g2_sets(p) for p in skip_paths])
+    rows = [f"the skip never sets `{x}`, which every full opening sets" for x in sorted(always - skip_set)]
+    # A one-of-several screen: each of its choices sets something the others do not.
+    for nid, node in nodes.items():
+        branches = []
+        for ch in _node_choices(node):
+            own = _g2_sets([(nid, ch)])
+            if own:
+                branches.append(own)
+        if len(branches) < 2 or not all(b - set.union(*[o for o in branches if o is not b]) for b in branches):
+            continue
+        if not any(b - always <= skip_set for b in branches):
+            names = " / ".join(sorted(next(iter(b - always or b)) for b in branches)[:4])
+            rows.append(f"the skip takes none of {nid}'s branches ({names}) — it takes the mildest branch's flags")
+    return not rows, (f"{len(rows)} thing(s) the full opening sets and the skip does not" if rows else
+                      f"the skip sets the {len(always)} thing(s) every full opening sets"), rows
+
+
+# ── B37 · one asset, one block (register.md "ONE ASSET, ONE BLOCK") ─────────────────────────
+def _one_asset_one_block(game):
+    uses = collections.defaultdict(list)
+    for c in _g2_canvases(game):
+        for nd in c.get("nodes") or []:
+            for b in _flat_blocks(nd.get("blocks")):
+                if b.get("type") not in MEDIA_BLOCKS:
+                    continue
+                p = dict(b.get("props") or {}, **{k: b[k] for k in ("file", "pool_dir", "files") if k in b})
+                keys = [p.get("pool_dir"), p.get("file")] + list(p.get("files") or [])
+                for k in keys:
+                    if isinstance(k, str) and k:
+                        uses[k].append(f"{c.get('id')}#{nd.get('id')}")
+    if not uses:
+        return None, "no media block", []
+    rows = [f"`{k}` serves {len(v)} blocks: {', '.join(v[:3])}" for k, v in sorted(uses.items()) if len(v) > 1]
+    return not rows, (f"{len(rows)} asset(s) serve more than one block" if rows else
+                      f"{len(uses)}/{len(uses)} assets serve one block each"), rows
+
+
+# ── J51 · a refill place rolls an event (the-meters.md M8 · engine.md §30.1) ────────────────
+def _refill_rolls_event(game, state):
+    needs = [x.get("key") for x in (((state or {}).get("board") or {}).get("needs") or []) if isinstance(x, dict)]
+    if not needs:
+        return None, "no declared need (board.needs)", []
+    rooms_with_event = {(c.get("trigger") or {}).get("location") for c in _g2_canvases(game)
+                        if (c.get("trigger") or {}).get("trigger_mode") == "random"
+                        or ((c.get("trigger") or {}).get("metadata") or {}).get("kind") == "event"}
+    rows, n = [], 0
+    for c in _g2_canvases(game):
+        t = c.get("trigger") or {}
+        if not _rep_of(t) or t.get("substitution_only") or t.get("trigger_mode") == "random" or not t.get("location"):
+            continue
+        for key in needs:
+            if not _g2_lowers_raise(c, key):
+                continue
+            n += 1
+            if not t.get("substitutions") and t.get("location") not in rooms_with_event:
+                rows.append(f"{c.get('id')} @{t.get('location')}: refills {key} and rolls no event — a need's refill "
+                            f"place rolls one (a substitution on it, or a random event in the room)")
+    if not n:
+        return None, "nothing refills a declared need", []
+    return not rows, (f"{len(rows)} refill(s) roll no event" if rows else
+                      f"{n}/{n} refills roll an event"), rows
+
+
+def _group2_gates(gate, _N, model, game, state):
+    """The group-2 gates, each called by its literal name so `--selfcheck` can see it."""
+    gate("a visit pays a meter once", *_visit_pays_once(game, state))
+    gate("an act pays on every way out", *_act_pays_every_way_out(model, game, state))
+    gate("an act pays inside its own stage", *_act_pays_inside_its_stage(game, state))
+    gate("an act pays the meter it uses", *_act_pays_its_meter(game, state))
+    gate("a need falls where it says", *_need_falls_where_it_says(model, game, state))
+    gate("a deduction is gated or priced", *_deduction_is_gated(game))
+    gate("a goal names the rung below", *_goal_names_rung_below(game))
+    gate("a goal can flip", *_goal_can_flip(game))
+    gate("the last step opens a repeatable", *_last_step_opens_repeatable(game, state))
+    gate("an accident pays him", *_accident_pays_him(game))
+    gate("a step's gate sits above his start", *_step_gate_above_start(game))
+    gate("a no-show costs", *_noshow_costs(game))
+    gate("ignoring a thread costs", *_ignoring_costs(game))
+    gate("a booking is read where she meets it", *_booking_read_where_met(game))
+    gate("the rent page can place its collector", *_rent_page_places_collector(game))
+    gate("nothing one-time at the shop or wardrobe", *_shop_room_stays_open(game))
+    gate("every card carries the met flag", *_card_carries_met_flag(game))
+    gate("the skip sets what the opening sets", *_skip_sets_what_opening_sets(game))
+    gate("one asset, one block", *_one_asset_one_block(game))
+    gate("a refill place rolls an event", *_refill_rolls_event(game, state))
+
+
+# ── the group-2 lints: a LIST each, never a score (a hit needs a human to judge it) ─────────
+_G2_CROWD = re.compile(r"\b(?:(?:his|the|their) (?:whole )?team|everyone|crowd|people (?:watch|look|stare)|in front of (?:them|"
+                       r"everyone|people)|they watch|the whole (?:room|party|team|class)|strangers?)\b", re.I)
+_G2_AUDIENCE = re.compile(r"talk|rep|known|rumou?r|gossip|fame|follower|notice|name", re.I)
+_G2_WITNESS = re.compile(r"(?:saw|seen|witness|knows|told|heard)", re.I)
+
+
+def _public_act_rows(model, game, state):
+    """E94 · the-meters.md, "declare who notices what she does": an explicit canvas whose prose
+    shows an audience and that moves no audience meter and sets no witness flag."""
+    board = (state or {}).get("board") or {}
+    tiers = set(board.get("ascent_tiers") or [])
+    aud = {m.get("key") or m.get("id") for m in board.get("meters") or [] if isinstance(m, dict)
+           and (m.get("key") or m.get("id")) not in tiers
+           and _G2_AUDIENCE.search(f"{m.get('id')} {m.get('read_by') or ''}")}
+    expl = _g2_explicit_canvases(model)
+    rows = []
+    for c in _g2_canvases(game):
+        if c.get("id") not in expl:
+            continue
+        text = " ".join(str(d.get("content")) for _p, d in _walk_paths(c) if isinstance(d.get("content"), str))
+        if not _G2_CROWD.search(text):
+            continue
+        moved = any(_g2_key(ef) in aud for _p, d in _walk_paths(c) for ef in d.get("effects") or []
+                    if isinstance(d.get("effects"), list) and isinstance(ef, dict))
+        witness = any(_G2_WITNESS.search(str(fe.get("flag") or "")) for _p, d in _walk_paths(c)
+                      for fe in d.get("flagEffects") or [] if isinstance(d.get("flagEffects"), list)
+                      and isinstance(fe, dict))
+        if not moved and not witness:
+            rows.append(f"{c.get('id')}: \"{_G2_CROWD.search(text).group(0)}\" — an explicit act with an "
+                        f"audience moves no audience meter ({', '.join(sorted(aud)) or 'none declared'}) and "
+                        f"sets no witness flag")
+    return rows
+
+
+def _walkin_odds_rows(game, state):
+    """D52 · the-surfaces.md R3: the walk-in odds ride the same trait as the content."""
+    tiers = set(((state or {}).get("board") or {}).get("ascent_tiers") or [])
+    by_target = collections.defaultdict(list)
+    for c in _g2_canvases(game):
+        for s in (c.get("trigger") or {}).get("substitutions") or []:
+            if isinstance(s, dict) and s.get("target_canvas_id"):
+                by_target[s["target_canvas_id"]].append(s)
+    rows = []
+    for tgt, subs in sorted(by_target.items()):
+        reads = {it.get("trait_key") for s in subs for it in _conditions_of(s) if it.get("type") == "trait"}
+        if tiers and not (reads & tiers):
+            rows.append(f"{tgt}: {len(subs)} rule(s), chance {sorted({s.get('chance') for s in subs if s.get('chance') is not None})}"
+                        f" — none reads {'/'.join(sorted(tiers))}")
+    return rows, len(by_target)
+
+
+def _work_in_hub_rows(game, state):
+    """D1 · the-surfaces.md R1: never put work inside a character's hub."""
+    perf = set(_performance_meter_keys(state)) | {k for k in ((game.get("player") or {}).get("core_traits") or {})
+                                                  if re.match(r"grade|study|skill|room_tidy|tidy|clean", k)}
+    rows = []
+    for c in _g2_canvases(game):
+        t = c.get("trigger") or {}
+        if not t.get("npc") or not _rep_of(t):
+            continue
+        for n in c.get("nodes") or []:
+            for ch in _node_choices(n):
+                keys = {_g2_key(ef) for ef in ch.get("effects") or [] if isinstance(ef, dict)}
+                him = any(ef.get("targetType") == "npc" for ef in ch.get("effects") or [] if isinstance(ef, dict))
+                chore = (ch.get("costs") and (ch.get("time_progression_minutes") or 0) >= 30 and not him)
+                if keys & perf:
+                    rows.append(f"{c.get('id')}: \"{str(ch.get('text'))[:50]}\" pays {', '.join(sorted(keys & perf))} "
+                                f"inside {t.get('npc')}'s hub")
+                elif chore:
+                    rows.append(f"{c.get('id')}#{n.get('id')}: \"{str(ch.get('text'))[:50]}\" spends "
+                                f"{ch.get('time_progression_minutes')} min and a cost, and gives him nothing — a chore "
+                                f"inside {t.get('npc')}'s hub")
+    return list(dict.fromkeys(rows))
+
+
+_G2_RENT_WORDS = re.compile(r"\b(?:counts? (?:it|the bills|the money|out)|the rent|rent money|count it)\b", re.I)
+
+
+def _rent_narrated_rows(game):
+    """F10 · the-economy.md: when [settings.rent] charges, no canvas also narrates the payment."""
+    rent = (game.get("settings") or {}).get("rent") or {}
+    if not rent.get("enabled"):
+        return []
+    rows = []
+    for c in _g2_canvases(game):
+        text = " ".join(str(d.get("content") or d.get("text") or "") for _p, d in _walk_paths(c)
+                        if isinstance(d.get("content") or d.get("text"), str))
+        m = _G2_RENT_WORDS.search(text)
+        if m and re.search(r"count", m.group(0), re.I):
+            rows.append(f"{c.get('id')}: \"{m.group(0)}\" — the engine's rent page already counts the money")
+    return rows
+
+
+def _thread_books_rows(game):
+    """F68 · the-phone.md P10: every thread ends in a choice that books something."""
+    rows = []
+    for d in _g2_threads(game):
+        if _g2_noshow_flag(d):
+            continue
+        replies = _g2_replies(d)
+        if replies and not any(fe.get("op", "set") == "set" for h in replies for fe in h.get("flagEffects") or []
+                               if isinstance(fe, dict)) and not any(h.get("scheduleEffects") for h in replies):
+            rows.append(f"phone {d.get('id')}: {len(replies)} repl(ies), none books anything")
+    return rows
+
+
+def _system_armed_rows(game, state):
+    """C19 · the-first-hour.md F4: every live system is armed in the first hour or sits on the sidebar."""
+    systems = [s for s in (((state or {}).get("board") or {}).get("systems") or []) if isinstance(s, dict)]
+    start = (game.get("project") or {}).get("starting_canvas")
+    c = next((x for x in _g2_canvases(game) if x.get("id") == start), {})
+    text = _g2_norm(" ".join(str(d.get("content") or d.get("text") or "") for _p, d in _walk_paths(c)
+                             if isinstance(d.get("content") or d.get("text"), str)))
+    board = (state or {}).get("board") or {}
+    shared = set(board.get("ascent_tiers") or []) | {x.get("key") for x in board.get("needs") or []
+                                                     if isinstance(x, dict)}
+    shown = {str(i.get("trait") or "") for i in game.get("sidebar_items") or []} - shared
+    said = {_g2_stem(w) for w in text.split()}
+    rows = []
+    for s in systems:
+        # Its own words: the id, the name before any "(…)", and its place. A tier or a need
+        # on the sidebar is everyone's meter, so it does not show this system.
+        own = f"{s.get('id')} {str(s.get('name') or '').split('(')[0]}".lower().replace("_", " ")
+        place = s.get("place")
+        own += " " + " ".join(str(p).replace("_", " ") for p in (place if isinstance(place, list) else [place]) if p)
+        words = {_g2_stem(w) for w in re.findall(r"[a-z]{4,}", own) if w not in ("home", "life", "with", "your")}
+        if not (words & said) and not (set(s.get("feeds") or []) & shown):
+            rows.append(f"{s.get('id')}: not named in the opening ({start}) and no meter of it on the sidebar")
+    return rows
+
+
+def _group2_lints(model, game, state):
+    """Print the group-2 lints below the tally, each by its literal name."""
+    pub = _public_act_rows(model, game, state)
+    if pub:
+        print(f"  {'─'*72}")
+        print(f"  lint · a public act moves the audience — {len(pub)} explicit canvas(es) with an audience move no audience meter")
+        for h in pub[:10]:
+            print(f"          · {h}")
+        print("          (the-meters.md, \"declare who notices what she does\" — a LIST: whether the prose shows a"
+              " crowd needs a human to read it)")
+    odds, n_odds = _walkin_odds_rows(game, state)
+    if odds:
+        print(f"  {'─'*72}")
+        print(f"  lint · the walk-in odds ride her climb — {len(odds)} of {n_odds} walk-in target(s) roll flat odds")
+        for h in odds[:10]:
+            print(f"          · {h}")
+        print("          (the-surfaces.md R3 — three chance bands on the trait the content rides; signed flat"
+              " odds are LO's call, which is why this is a list)")
+    hub = _work_in_hub_rows(game, state)
+    if hub:
+        print(f"  {'─'*72}")
+        print(f"  lint · work inside a hub — {len(hub)} hub button(s) pay a grade or a chore")
+        for h in hub[:10]:
+            print(f"          · {h}")
+        print("          (the-surfaces.md R1 — work is its own canvas beside the hub)")
+    rent = _rent_narrated_rows(game)
+    if rent:
+        print(f"  {'─'*72}")
+        print(f"  lint · the rent is narrated once — {len(rent)} canvas(es) count the money the rent page counts")
+        for h in rent[:10]:
+            print(f"          · {h}")
+        print("          (the-economy.md — write the scene beside the payment, never on it)")
+    books = _thread_books_rows(game)
+    if books:
+        print(f"  {'─'*72}")
+        print(f"  lint · a thread books something — {len(books)} thread(s) end on no booking")
+        for h in books[:10]:
+            print(f"          · {h}")
+        print("          (the-phone.md P10 — small talk that leads nowhere is filler)")
+    _ok, _head, unread = _set_flag_is_read(game)
+    if unread:
+        print(f"  {'─'*72}")
+        print(f"  lint · a set flag is read — {len(unread)} flag(s) a canvas sets that nothing reads")
+        for h in unread[:12]:
+            print(f"          · {h}")
+        if len(unread) > 12:
+            print(f"          · … and {len(unread)-12} more")
+        print("          (the-arc.md A1 — a step's flag is what the next step reads. A record kept for a later"
+              " release is legitimate, which is why this is a list; the ladder's own end is the gate"
+              " `the last step opens a repeatable`)")
+    armed = _system_armed_rows(game, state)
+    if armed:
+        print(f"  {'─'*72}")
+        print(f"  lint · every live system is armed — {len(armed)} system(s) not armed in the opening")
+        for h in armed[:10]:
+            print(f"          · {h}")
+        print("          (the-first-hour.md F4 — a named beat in the first hour, or the meter at zero on the sidebar)")
 
 
 def main():
@@ -17198,6 +18505,7 @@ def main():
               " Walk-ins and windowed scenes are legitimate hits, which is why this cannot"
               " fail anything)")
 
+    _group2_lints(model, game, state)               # LO 2026-11-03 group 2; above main()
     if tok_summary:
         print(f"  {'─'*72}")
         print(f"  lint · a token the engine never resolves — {tok_summary}")

@@ -274,7 +274,14 @@ declared `[[npcs.schedules]]` row as a Time / Location / Activity / Days table. 
 declares them as `[[locations]] hours` + `closed_text`, and a closed card says when it opens
 (`engine.md` §22). An activity with hours and no `cooldown_message` is a schedule the player can only
 learn by losing a day to it. Checked: gate *a closed activity says when it opens* fails a repeatable solo
-canvas with `trigger.schedules` that lacks either key at the top of `[canvases.trigger]`.
+canvas with `trigger.schedules` that lacks either key at the top of `[canvases.trigger]`, one windowed only by `time_of_day` / `weekday` conditions that lacks them, and a `cooldown_message` that names no hour or day.
+
+**Hours go only on an activity she chooses. An event that happens to her stays hidden when it is shut**
+(LO, 2026-11-03). The guy beside her in class, the lecturer's word about her clothes, a drink somebody hands her:
+a greyed "The guy beside you — Mon, Wed, Fri, 8:30 AM" line tells the player when something will happen to her,
+which spoils it and reads like a timetable of surprises. Mark such a canvas `[canvases.trigger.metadata] kind =
+"event"` (the importer ignores it; the gate reads it) and leave `show_when_blocked` off. The gate skips an event,
+and fails one that shows its hours.
 
 ⚠️ The top-30 mopoga study found **lostness, not grind, is this genre's disease** — 15.5% of player
 comments against grind's 0.9% (Process Review, Round 1). A hidden window is lostness with a clock on it.

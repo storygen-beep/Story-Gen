@@ -5,6 +5,118 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-03 (night) — hours go only on an activity she chooses; events stay hidden
+
+- `references/the-clock.md` C5: one paragraph. An event that happens to her (the guy beside her, the lecturer's word,
+  a drink handed to her) stays hidden when shut; only an activity she chooses lists its hours. Such a canvas is marked
+  `[canvases.trigger.metadata] kind = "event"`. LO found it in play: the lecture room listed "A word about what
+  you're wearing" and "The guy beside you" with their hours.
+- `scripts/gates.py` `a closed activity says when it opens`: skips a canvas marked `kind = "event"`, and fails one
+  that sets `show_when_blocked` (an event that shows its hours).
+- Verified: the final suite run of 2026-11-03 (night), after the group-2 checks below: `--selfcheck` green (114/114 gates,
+  66/66 lints documented), `pytest scripts/tests` 904 passed, `pytest .claude/skill-evals/author-game/tests` 107 passed
+  (1 skipped), `cite_check.py --strict` 0 wrong cites in SKILL.md + references/. `scripts/tests/test_gates_k9_events_hidden.py`
+  (3 tests) is part of the 904.
+
+---
+
+## 2026-11-03 (night) — group 2: a check for every game-logic slip that can come back
+
+**Why.** LO, on the third alignment pass of first_term: fix group 2 (game logic) "with a check for each kind that can
+come back", and "No new rules and no new content until it's done." Every check below enforces a rule the skill already
+states. The references gained only one-sentence pointers ("Checked: gate …") at the end of an existing line, so no
+reference line moved. PICKS.md (LO's 27 rule answers) was not applied.
+
+- `scripts/gates.py`: 20 new gates and 7 new lints, all defined in one block above `main()`. The gates register from one
+  line in `_truth_gates` (`_group2_gates`; that line replaced half of a two-line comment, so the function kept its length).
+  The lints print from one line in `main()` (`_group2_lints`). Every gates.py line the docs cite (all at or below :14027)
+  is unchanged. The new gates are scored and never block `--ship`. Gates, with the pass-3 ids they answer:
+  - *a visit pays a meter once* (G75), *an act pays on every way out* (G74), *an act pays inside its own stage* (G8, G13),
+    *an accident pays him* (G12): `the-arc.md` A4d.
+  - *an act pays the meter it uses* (A48): `the-heat-ladder.md` "Two meters, one act".
+  - *a need falls where it says* (E95): `the-meters.md` M8/M10. *a refill place rolls an event* (J51): M8 and `engine.md` §30.1.
+  - *a deduction is gated or priced* (J5, J73): `engine.md` §21.
+  - *a goal names the rung below* (J37): `engine.md` §47. *a goal can flip* (H48): `the-voice.md`.
+  - *the last step opens a repeatable* (G1): `the-arc.md` A1.
+  - *a step's gate sits above his start* (E8): `the-meters.md` "Whatever he keeps" 4.
+  - *a no-show costs* (F61), *ignoring a thread costs* (F60): `the-phone.md` P5. *a booking is read where she meets it*
+    (F69): P10.
+  - *the rent page can place its collector* (F72): `the-economy.md` and `engine.md` §26.
+  - *nothing one-time at the shop or wardrobe* (C24), *every card carries the met flag* (C38), *the skip sets what the
+    opening sets* (C11): `the-first-hour.md`.
+  - *one asset, one block* (B37): `register.md`.
+- `scripts/gates.py`, two gates that missed their slip were fixed:
+  - *a closed activity says when it opens* now also fails a solo activity windowed only by `time_of_day` / `weekday`
+    conditions with no hours (H64), and a `cooldown_message` that names no hour or day (H31). It keeps the lead's skip
+    for `[canvases.trigger.metadata] kind = "event"`.
+  - *every stage has a way up* now fails a card line that names a place where nothing pays at the stage the card shows in
+    (G15). It used to only print the line.
+- Lints (lists; each needs a human to judge a hit): *a public act moves the audience* (E94), *the walk-in odds ride her
+  climb* (D52), *work inside a hub* (D1), *the rent is narrated once* (F10), *a thread books something* (F68), *every live
+  system is armed* (C19), *a set flag is read* (G1). The last one is a lint because a record kept for a later release is
+  legitimate (first_term has 76 of them).
+- `SKILL.md`: 20 gate-table rows, the two fixed rows reworded, and the 7 lints in the lint paragraph.
+- References, one pointer sentence each, at the end of the existing rule line: `the-arc.md` (A4d, A1), `the-heat-ladder.md`
+  (two meters), `the-meters.md` (M8; "Whatever he keeps" 4; who notices), `engine.md` (§21; §47, where "Nothing in
+  `gates.py` catches this" is now "Gate *a goal names the rung below* catches a label that quotes the button"),
+  `the-voice.md`, `the-phone.md` (P5, P10), `the-economy.md` (rent), `the-first-hour.md` (F1c, F3, the cards' meeting
+  flag, F4), `register.md` (one asset), `the-surfaces.md` (R1, R3), `the-clock.md` (C5).
+- New test file `scripts/tests/test_gates_group2_checks.py`: 63 tests, fixtures only, with a fail case and a pass case for
+  every gate and every lint.
+- On first_term (TOML of 2026-11-03 night, read-only): each new gate fails on the slip it was written for. Two findings are
+  new and are for LO to judge. *an act pays on every way out* finds 28 act screens, not only the 11 in heat_a.py: the hub
+  "hot" nodes have the same shape. *the last step opens a repeatable* also fails Mark: his step 4 is read only by line
+  groups at the Sunday table. `gates.py first_term`: 73/110 pass.
+- Verified: `--selfcheck` green (114/114 gates, 66/66 lints), `pytest scripts/tests` 904 passed (63 new),
+  `pytest .claude/skill-evals/author-game/tests` 107 passed (1 skipped), `cite_check.py --strict` 0 wrong cites.
+
+---
+
+## 2026-11-03 (night, round 2) — six checks that misread first_term
+
+**Why.** The lead's gate run on the rebuilt first_term showed hits that are the checker misreading the game, not slips.
+LO: "No new rules and no new content until it's done", so each fix makes a check read what the skill already says, and
+each keeps the hit it was written for (a fixture for the fail case stays red). All edits are in `scripts/gates.py` above
+`main()`, at or below :14143, so no cited line moved.
+
+- *no canvas key is discarded* (`_trigger_metadata_keys`): `kind = "event"` under `[canvases.trigger.metadata]` is the
+  skill's own marker (`the-clock.md` C5), so it is accepted and prints nothing. Any other metadata key, or `kind` with
+  another value, is still flagged. first_term: the 3 hits (college_event_desk_guy, college_event_dress_code,
+  party_drink_offer) are gone.
+- *a named person is where the line says*: `_tr_placed` no longer counts a voice that comes out of a phone, a speaker or
+  the line (`_TR_PHONE_VOICE`) as the person in the room. `_TR_AWAY` now reads "X's at her/his/their <someone>'s" as away.
+  A voice with no phone, an away line while her rows hold her here, and a line that puts her in the room all stay red.
+  first_term: 8 to 5. The two Kayla phone lines and "Kayla's at her mom's tonight." are gone; the 5 walkin_shower_kayla
+  lines (Kayla speaks in the bathroom with no row there) stay.
+- *an act pays on every way out*: a choice into a node of another canvas (`hub_mark_garage.hl_laundry_tease2`) goes on,
+  so the screen that offers it is a decision screen (`_g2_goes_on`). first_term: 5 to 1. The 4 laundry walk-in hits are
+  gone; shop_try_on#curtain (two exits, one paid) stays.
+- *an act pays inside its own stage*: an act gated on a ladder step or a flag opens no lower than the exits that set that
+  step or flag, followed back through those exits' own waits (`_g2_setter_floor`). ryan_two_knocks needs ryan_step 8,
+  which is set only at corruption 60, so the act opens at 60, not 0. first_term: 15 to 11. The rows that stay are real:
+  an act with no gate on that meter (park_run), one opened by the other meter (party_house_soak, street_seen_*,
+  hub_jake_gym), and two whose true floor is now printed (zoe_dares opens at corruption 40 with cap 79; jake_saturday_date
+  at exhibitionism 20 with cap 59).
+- *every stage has a way up*, the card-line half (`_g2_card_line_pays`): a goal line is judged from the rung below it (the
+  card's previous goal on that meter), not from the stage's floor, and a building pays when a room inside it pays ("the
+  shower at home"). first_term: the 2 card-line hits are gone. The gate passes.
+- *the rent page can place its collector*: a mention that is his text, message, call or note ("Mark's text came in at
+  midnight") does not put him in front of her. first_term: the gate passes.
+- Read and left alone, because each one is a real slip: *a need falls where it says* (ryan_08's first sex costs no energy),
+  *a deduction is gated or priced* (choice effects are emitted unclamped, `v2.py:16736`), *an accident pays him*,
+  *a step's gate sits above his start*, *a no-show costs* and *ignoring a thread costs* (a mood flag is not a cost under
+  P5), *a booking is read where she meets it* (the three flags are only cleared, never read), *nothing one-time at the
+  shop or wardrobe* (cafe and home_ella_room are wardrobe rooms), *a refill place rolls an event*, *the last step opens a
+  repeatable* (LO's call, as in round 1).
+- New test file `scripts/tests/test_gates_checks_round2.py`: 20 tests, fixtures only. 13 of them fail on round 1's
+  gates.py; the other 7 pass on both and guard the hits each fix keeps.
+- On first_term (TOML of 2026-11-03 night, read-only): 79/110 to 82/110.
+- Verified: `--selfcheck` green (114/114 gates, 66/66 lints), `pytest scripts/tests` 924 passed (20 new),
+  `pytest .claude/skill-evals/author-game/tests` 107 passed (1 skipped), `cite_check.py --strict` exit 0 with 0 wrong
+  cites in SKILL.md + references/.
+
+---
+
 ## 2026-11-03 (late) — the button check counts per hour; the talk check skips scenes where she is alone
 
 **Why.** LO: "teach the button check to count per hour. Make the talking check skip scenes where nobody else is there, and

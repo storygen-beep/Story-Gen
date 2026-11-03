@@ -121,7 +121,7 @@ approves. **Whatever he keeps:**
 4. One visit moves about 10–50% of the next threshold, so 2–10 visits sit between steps (LO, 2026-11-03; R5:243-244
    measured 3–10). A slow pace is allowed only when his card always says what to do next and the cheat page
    can skip the wait. LO: *"its okay to make player bored but not lost. So free version can make you grind but
-   paid can give you cheats"*.
+   paid can give you cheats"*. Checked: gate *a step's gate sits above his start*.
 
 ---
 
@@ -335,7 +335,7 @@ other way and obeys none of W5's rules.
 
 Twelve of twenty-five male-heavy corpus games carry no reputation meter. For a female lead, being
 known is the fantasy and its absence is the complaint: **declare who notices what she does, even
-with no meter at all.**
+with no meter at all.** Checked: lint *a public act moves the audience*.
 
 > ⚠️ **EVIDENCE — NOT A TEMPLATE.** `course-of-temptation` keeps what each person saw; a witness tells others only in scenes she is
 > in, one hop, and a rumour someone only heard is never retold; a man who assumed reads them back — *"Maybe the rumors are wrong."*
@@ -960,7 +960,7 @@ npc and do the stuffs but she couldnt do it and npc told her that she stinks."* 
 names that refusal, or says it colours only.
 
 `shuts` also routes her: a need that is empty sends her to the place that refills it, and that place
-rolls an event (`engine.md` §30.1). A need behind a content toggle has an off switch, a start choice
+rolls an event (`engine.md` §30.1). Checked: gates *a need falls where it says* and *a refill place rolls an event*. A need behind a content toggle has an off switch, a start choice
 (`the-surfaces.md` R5b.4); with it off, nothing reads it.
 
 In the field (three FAIL-list games, numbers only) the fourth field is a stock or a window: no food,

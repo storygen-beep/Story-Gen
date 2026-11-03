@@ -290,7 +290,7 @@ Three things make it work, and they are cheap:
 > - **If `[settings.rent]` is doing the charging, do not also author a canvas that narrates the
 >   payment.** Write the scene beside it instead — the evening after, the ask before. `engine.md` §26
 >   has the full mechanism, including the fact that it arms at MIDNIGHT on `due_day`, not at the
->   hour the collector's schedule row puts him in front of the player.
+>   hour the collector's schedule row puts him in front of the player. Checked: gate *the rent page can place its collector*; lint *the rent is narrated once*.
 > - **Gate 24 reads `[settings.rent]` as a charge channel**, beside `costs` entries and
 >   `op = "add"` with a negative value. It does not count `op = "subtract"`: that op does nothing
 >   (`engine.md` §21b).

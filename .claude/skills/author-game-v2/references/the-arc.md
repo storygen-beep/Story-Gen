@@ -61,7 +61,7 @@ example is being taught too.** *(LO decided.)* Take the mechanism. Leave the fur
 turns the act into something she can simply do · doing *that* repeatedly opens the next act.
 
 The repeatable surface is the **reward for finishing the arc**, not the starting position.
-After the sex step, the arc's phone thread becomes the repeatable invite (`the-phone.md` P9).
+After the sex step, the arc's phone thread becomes the repeatable invite (`the-phone.md` P9). Checked: gate *the last step opens a repeatable*; lint *a set flag is read*.
 
 The same split governs the prose (added 2026-09-24): the full loud version of a moment — the
 reveal, the conversation, the hook — belongs on the one-time step, and the repeatable it converts
@@ -243,7 +243,7 @@ something that happens *to* her.
 - **Every stage below the highest gate carries repeatable acts that pay, sober.** A temporary boost (a
   drink's `trait_offsets`) can let her try the next stage early, and that act's raise is kept, but it is
   not the way up: a stage whose only paying acts need the boost is a wall with a hidden door.
-- **The Quests page names only sources that pay at the stage it is shown in.**
+- **The Quests page names only sources that pay at the stage it is shown in.** Checked: gates *a visit pays a meter once*, *an act pays on every way out*, *an act pays inside its own stage* and *an accident pays him*; *every stage has a way up* fails a card line that names a place where nothing pays at its stage.
 
 ⚠️ **Measured, first_term, 2026-10-13.** All 36 Corruption raises needed Corruption 20 or 40. The
 signed park sheet paid "stage 1: none" for walking into the couple, and the home accidents raised only

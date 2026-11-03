@@ -140,7 +140,7 @@ to every day is not one.
 
 **R1 · One canvas per (who it's aimed at × when).** A location where she both deals with a person
 and does her own work is **at least two canvases**, plus a walk-in if anyone can interrupt her.
-Never put work inside a character's hub.
+Never put work inside a character's hub. Checked: lint *work inside a hub*.
 
 **R2 · A room's list is needs, systems and people — nothing else.**
 
@@ -252,7 +252,7 @@ substitutions = [
 #   the lowest band watches, the middle band touches, the top band acts
 ```
 
-Same button. The world leans harder on it as the trait climbs. **Nothing new was needed to build that.**
+Same button. The world leans harder on it as the trait climbs. **Nothing new was needed to build that.** Checked: lint *the walk-in odds ride her climb*.
 
 > This example is deliberately a *mechanism*, not a world: what an author copies from it is three
 > chance bands riding the same trait as the content, which is the thing to copy. Its ids are
