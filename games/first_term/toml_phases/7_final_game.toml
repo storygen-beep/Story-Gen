@@ -15128,7 +15128,7 @@ when = [
 ]
 ready_canvas = "tom_01_the_apron"
 goals = [
-  { flag = "cafe_job", op = "is_true", label = "Cafe job" },
+  { flag = "cafe_job", op = "is_true", label = "Get the job at the café" },
 ]
 
 [[quest_cards]]
@@ -15142,8 +15142,8 @@ when = [
 ]
 ready_canvas = "tom_03_the_tip_jar"
 goals = [
-  { flag = "cafe_job", op = "is_true", label = "Cafe job" },
-  { type = "trait", subject = "player", trait = "cafe_shifts_worked", op = "gte", value = 5, label = "Shifts worked 5" },
+  { flag = "cafe_job", op = "is_true", label = "Get the job at the café" },
+  { type = "trait", subject = "player", trait = "cafe_shifts_worked", op = "gte", value = 5, label = "Work 5 café shifts" },
 ]
 
 [[quest_cards]]
@@ -15157,9 +15157,9 @@ when = [
 ]
 ready_canvas = "tom_03_not_by_the_window"
 goals = [
-  { flag = "cafe_job", op = "is_true", label = "Cafe job" },
+  { flag = "cafe_job", op = "is_true", label = "Get the job at the café" },
   { type = "trait", subject = "player", trait = "cafe_footfall", op = "gte", value = 15, label = "Café regulars 15: play along or flirt back on a busy shift, or let a hand stay" },
-  { type = "trait", subject = "player", trait = "cafe_name", op = "lte", value = -5, label = "The café's name -5: let a customer's hand stay, on a café shift" },
+  { type = "trait", subject = "player", trait = "cafe_name", op = "lte", value = -5, label = "Let customers' hands stay on café shifts, until the café gets a name for it" },
   { flag = "cafe_let_it", op = "is_true", label = "Let a customer's hand stay, on a café shift" },
 ]
 

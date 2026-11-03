@@ -8272,6 +8272,10 @@
         "played": {
           "at": "2026-11-02 03:41",
           "note": "skipped by LO: \"Add them to the traits. Rebuild commit and push\" (Corruption can't be changed in dev mode, so a2 can't be tested yet)"
+        },
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "Ryan's room by stage: Corruption 10 shows only talk; 25 adds the doorway lean (Curious); 45 with Showing adds 'Lie on his bed' and 'Stand naked' (Bold). Acts open at their stage."
         }
       },
       {
@@ -8281,6 +8285,10 @@
         "played": {
           "at": "2026-11-02 13:10",
           "note": "skipped by LO: \"Signed, skip the play check, build it\" (Mark's chores pay nothing; laundry tease ladder)"
+        },
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "Step 8 rises: knocks (Come in / Not tonight), talk, doubt (Stay / Go), kiss (Let him / Stop), undress (her pick of three), light (Keep going / Freeze). The two-knocks menu by his Lust: 70 shows go down and ride; 90 adds taste and the wall."
         }
       },
       {
@@ -8290,6 +8298,10 @@
         "played": {
           "at": "2026-11-02 13:38",
           "note": "skipped by LO: \"Skip the play check\" (commit and push, he plays it on his phone)"
+        },
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "The laundry screen before Mark's accident: Done / Not now only. After it at Corruption 45: Leave your basket on top and Bend for the bottom drum appear."
         }
       },
       {
@@ -8299,6 +8311,10 @@
         "played": {
           "at": "2026-11-02 16:13",
           "note": "skipped by LO: Skip the play check"
+        },
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "Sampled: the café hiring lines say 'in town' or 'near campus', never 'on your street' (rows 4-5). No false line found in the samples."
         }
       },
       {
@@ -8308,6 +8324,10 @@
         "played": {
           "at": "2026-11-02 17:43",
           "note": "skipped by LO: Skip the play check"
+        },
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "Sampled the exam and Hale lines on the new build: the cocky guy's 'Your loss.' renders with no pay, after C1. No false line found in the samples."
         }
       },
       {
@@ -8317,6 +8337,10 @@
         "played": {
           "at": "2026-11-02 18:11",
           "note": "skipped by LO: Signed, go with your recs, skip the play check"
+        },
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "Superseded on 2026-11-03 by S12 (DECISIONS 134): the door is removed, the terms screen shows only Ryan's three answers, and his card's end line reads 'More of Ryan in the next release.'"
         }
       },
       {
@@ -8326,6 +8350,10 @@
         "played": {
           "at": "2026-11-02 19:20",
           "note": "skipped by LO: Skip the play check, fix the older ones too"
+        },
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "Sampled rows 1, 24, 60: Channel 5 appears only after mark_saw_her; the exam no gives his line and nothing else (C1); Vance's porch at Want 20 is the legs line, and at 40 adds 'One evening you'll sit with me' and the steps."
         }
       },
       {
@@ -8335,13 +8363,20 @@
         "played": {
           "at": "2026-11-02 19:34",
           "note": "skipped by LO: Skip the play gate"
+        },
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "park_cool_zoe is gone from the build; Vance's porch lines are banded on his Lust; the robe and event hooks render."
         }
       },
       {
         "id": "zoe_meeting_card",
         "what": "Zoe's meeting card under People from the opening (was a Story Goals card hidden all week one); engine: no empty lines between blocks",
         "built_at": "2026-11-02 22:49",
-        "chrome": null,
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "Zoe's pointer card shows under People as 'A girl from Biology', Tue/Thu/Fri 2:30-6 PM at the quad, before the meeting. Direct <br>s on screens are only the breaks between choice buttons."
+        },
         "played": {
           "at": "2026-11-02 22:49",
           "note": "skipped by LO: Yes build it, skip the play check"
@@ -8351,7 +8386,10 @@
         "id": "pointer_cards",
         "what": "Tom's hiring card and Vance's meeting card under People before they are met; Zoe step 5's goal names Figure drawing",
         "built_at": "2026-11-02 23:58",
-        "chrome": null,
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "Tom's ('The café') and Vance's ('Next door') pointer cards show before the meeting with no name; Zoe step 5's goal names Figure drawing."
+        },
         "played": {
           "at": "2026-11-02 23:58",
           "note": "skipped by LO: Yes all three the go ahead"
@@ -8361,7 +8399,10 @@
         "id": "card_labels",
         "what": "Card goals say what to do: counters use the game's own names, the café ones say how, two flags in words",
         "built_at": "2026-11-03 00:44",
-        "chrome": null,
+        "chrome": {
+          "at": "2026-11-03 15:26",
+          "report": "Found and fixed: Tom's goals read 'Cafe job' and 'Shifts worked 5'. Now 'Get the job at the café', 'Work 5 café shifts' and 'Let customers' hands stay on café shifts, until the café gets a name for it' (canv.py FLAG_WORDS/COUNTER_WORDS), rebuilt."
+        },
         "played": {
           "at": "2026-11-03 00:44",
           "note": "skipped by LO: Yes fix the labels too, skip the play check"

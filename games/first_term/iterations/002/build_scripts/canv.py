@@ -363,6 +363,7 @@ FLAG_WORDS = {
     "cocky_guy_met": "Meet Jake's teammate at Figure drawing (Tuesday or Thursday morning, Wednesday after lunch)",
     "mark_saw_her": "Mark's first accident: the garage, a Saturday",
     "cafe_let_it": "Let a customer's hand stay, on a café shift",
+    "cafe_job": "Get the job at the café",
 }
 
 
@@ -379,7 +380,9 @@ SPEC_LABEL = _spec_trait_labels()
 # A counter whose name alone doesn't say what to do: the goal says how it moves (cafe.py l2_play, l2_flirt, l3_let).
 COUNTER_WORDS = {
     "cafe_footfall": "Café regulars {v}: play along or flirt back on a busy shift, or let a hand stay",
-    "cafe_name": "The café's name {v}: let a customer's hand stay, on a café shift",
+    # (Chrome play 2026-11-03: "The café's name -5" read as a number, not a task)
+    "cafe_name": "Let customers' hands stay on café shifts, until the café gets a name for it",
+    "cafe_shifts_worked": "Work {v} café shifts",
     "rent_short_weeks": "A Sunday short on the rent",
 }
 
