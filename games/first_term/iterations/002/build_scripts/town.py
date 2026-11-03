@@ -49,7 +49,7 @@ out.append(town_event("town_event_whistle", "A car slows down", S("07:00", "22:0
      GC(cond(trait("exhibitionism", "lt", 40)), P("Not a chance.")),
      GC(cond(trait("exhibitionism", "gte", 40)), P("Not for a ride."))],
     "Walk faster.",
-    bolder=("Turn and let him look.", [CURIOUS, DARING], [EXH1],
+    bolder=("Turn and let him look.", [CURIOUS, DARING], [dict(EXH1, cap=39)],   # a Daring act stops at Daring's top (pass 3 G8)
             "You stop and turn to face the car. You let him look at your tits, nipples hard through the cloth, for as long as the light's red. He forgets to drive when it changes.")))
 out.append(town_event("town_event_vance", "Vance on his porch", S("18:00", "22:00"), [here(V, "vance_house"), flag("vance_met")],
     [P("Mr. Vance is on his porch with his paper. He lowers it to look at your legs when you pass."), D(V, "Evening, Miss."),   # reader a3 #65 (DECISIONS 131)

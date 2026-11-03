@@ -12,9 +12,11 @@ The shape of every one (the-surfaces.md, the-heat-ladder.md H5):
   buttons and a written no;
 - every act screen is a shuffle bag of explicit beats (POOL bag=True) and a clip behind it (VID, pool_dir only;
   no harvest is run here: the folders render their fallback until LO runs one);
-- the pay is +1 capped at the top of the stage the act opens at (59 Bold, 79 Hungry or Watched), on the act's
-  exit, day-capped on the exit itself: the exit reads `<x>_today` is_false and sets it, and [engine.daily_tick]
-  clears it (gates.py _holder_day_capped). Beside it an exit that pays nothing (a spent day still has a door);
+- the pay is +1 capped at the top of the stage the act opens at (59 Bold, 79 Hungry or Watched), on the button
+  into the act (pass 3 G74: before, it rode one of two exits, so the pay hung on the exit label), day-capped on
+  that button: it reads `<x>_today` is_false and sets it, and [engine.daily_tick] clears it (gates.py
+  _holder_day_capped). The same button costs 10 energy and lowers hygiene 10 (pass 3 E95, D18). Both exits after
+  the act pay nothing (a spent day still has a door);
 - the no pays 0 to everyone. Jake and Zoe have no Want meter, so no act moves a meter of theirs.
 
 Timing (the truth rule): the offer and act screens move the clock 0 minutes; the time is on the exit. Each hub
@@ -43,11 +45,42 @@ def pay(meter, cap):
     return {"targetType": "player", "trait": meter, "op": "add", "value": 1, "cap": cap}
 
 
+# What a sex act takes from her body (board.needs, v2_state.json: energy is "spent ... sex scenes take it through
+# costs", hygiene "falls faster after ... sex"; the-meters.md M8, M10; pass 3 E95). The energy cost is also the rung's
+# floor with its refusal line: a priced exit-block choice stays on screen greyed, "Requires 10 Energy (you have 6)",
+# so a tired day throttles the act (the-surfaces.md R3c; engine.md §27; pass 3 D18).
+ACT_COSTS = [{"trait": "energy", "value": 10}]
+ACT_HYGIENE = {"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}
+
+
 def act_exits(label, loc, mins, brake, eff, plain, plain_loc=None, also=()):
-    """The act's exit, day-capped on itself, plus an exit that pays nothing (the spent day's door)."""
-    return [go(label, loc=loc, mins=mins, cond_=cond(flag(brake, False)), eff=eff,
-               flags=[fset(brake)] + [fset(f) for f in also]),
-            go(plain, loc=plain_loc or loc, mins=mins, flags=[fset(f) for f in also] or None)]
+    """The act's two exits. Both pay nothing: the act pays, on the button into it (pay_on_the_way_in), so the same
+    act pays the same whichever door she takes out (the-heat-ladder.md H5, "the exit that leads into the screen
+    where it happens"; pass 3 G74). The marker carries the pay and the day brake to that button."""
+    exits = [go(label, loc=loc, mins=mins, flags=[fset(f) for f in also] or None),
+             go(plain, loc=plain_loc or loc, mins=mins, flags=[fset(f) for f in also] or None)]
+    exits[0]["_act"] = (eff, brake)
+    return exits
+
+
+def pay_on_the_way_in(nodes):
+    """Move each act's pay and day brake onto every button into its screen: the button reads the brake is_false
+    (it already does) and now sets it and pays, so it is day-capped on itself (gates.py _holder_day_capped); it
+    also costs energy and lowers hygiene (ACT_COSTS, ACT_HYGIENE)."""
+    acts = {}
+    for n in nodes:
+        for c in n["choices"]:
+            if "_act" in c:
+                acts[n["id"]] = c.pop("_act")
+    for n in nodes:
+        for c in n["choices"]:
+            if c.get("targetType") == "node" and c.get("nodeId") in acts:
+                eff, brake = acts[c["nodeId"]]
+                assert flag(brake, False) in c["conditions"]["items"], (n["id"], c["text"])
+                c["effects"] = list(eff) + [ACT_HYGIENE]
+                c["flagEffects"] = [fset(brake)]
+                c["costs"] = list(ACT_COSTS)
+    return nodes
 
 
 def bag(pid, *beats):
@@ -155,6 +188,11 @@ A3_DO = ("Jake's hand stays under your skirt. His fingers slide between your leg
          "His cock throbs under you. You come on his fingers with your face in his shoulder, your thighs shaking where "
          "everyone can see them.")
 
+# A public act feeds the audience meter like the other public acts (the-meters.md W5b; SYSTEMS.md campus_talk, "the
+# public class moments"; pass 3 E94): campus_talk +1 on either yes, day-capped with the pay, and the team's witness
+# flag (one NPC flag per thing a person saw, as the walk-ins record team_saw_gym / _canteen / _grass).
+TALK = add("campus_talk", 1, clamp=False)
+
 A3_BUTTON = go("Sit in his lap.", node="a3_offer", mins=0,
                cond_=cond(flag("jake_first_time"), SKIRT, WATCHED, QUAD_FREE, tod("08:30", "11:30")))
 A3_NODES = [
@@ -177,7 +215,8 @@ A3_NODES = [
         WHO("Jesus, Jake."),
         D(J, "Told you. Mine."),
         T("The whole quad could see your ass, and you didn't pull the hem down."),
-    ], act_exits("Get up off his lap.", "quad", 20, QUAD, [pay("exhibitionism", 79)], "Go.", plain_loc="campus")),
+    ], act_exits("Get up off his lap.", "quad", 20, QUAD, [pay("exhibitionism", 79), TALK], "Go.", plain_loc="campus",
+                 also=["team_saw_quad"])),
     node("a3_do", "In front of them", [
         P(A3_DO),
         VID("a guy fingering his girlfriend in his lap on a college lawn, his friends watching",
@@ -186,13 +225,17 @@ A3_NODES = [
         WHO("Jesus Christ, man."),
         D(J, "All mine, guys. Look all you want."),
         T("Half the team just watched you come. Your face is burning, and you'd let him do it again."),
-    ], act_exits("Get up off his lap.", "quad", 20, QUAD, [pay("corruption", 79), pay("exhibitionism", 79)], "Go.",
-                 plain_loc="campus")),
+    ], act_exits("Get up off his lap.", "quad", 20, QUAD, [pay("corruption", 79), pay("exhibitionism", 79), TALK], "Go.",
+                 plain_loc="campus", also=["team_saw_quad"])),
     node("a3_no", "Not in front of them", [
         D(J, "Saturday, then."),
         P("He lets you up, grinning, and the team jeers at him while you walk off across the grass."),
     ], [go("Go.", loc="campus", mins=2)]),
 ]
+
+
+pay_on_the_way_in(A1_NODES)
+pay_on_the_way_in(A3_NODES)
 
 
 def attach_jake(out):
@@ -325,6 +368,10 @@ A5_NODES = [
 ]
 
 
+pay_on_the_way_in(A2_NODES)
+pay_on_the_way_in(A5_NODES)
+
+
 def attach_zoe(out):
     _add_button(_canvas(out, "hub_zoe_canteen"), A2_BUTTON, A2_NODES)
     _add_button(_canvas(out, "hub_zoe_bedroom"), A5_BUTTON, A5_NODES)
@@ -361,7 +408,9 @@ TOWN_CANVASES = [{
                    "flashed bends her over Zoe's kitchen counter while the party is through the door. Corruption +1, cap "
                    "79, one a party night.",
     "trigger": {"location": "zoe_kitchen", "is_repeatable": True, "priority": 4, "is_active": True,
-                "conditions": cond(AT_PARTY, tod("22:00", "02:00"), flag("keg_guy_dared"), HUNGRY, KEG_ONCE)},
+                "conditions": cond(AT_PARTY, tod("22:00", "02:00"), flag("keg_guy_dared"), HUNGRY, KEG_ONCE),
+                # pass 3 H64: an act she chooses, windowed by a condition, so it says its hours when shut (C5)
+                "show_when_blocked": True, "cooldown_message": "Party nights, 10 PM-2 AM"},
     "nodes": [
         node("keg", "The keg", [
             P("The guy from the keg is leaning on the counter with a red cup, right where the bottles are. His grin at you "
@@ -428,7 +477,9 @@ TOWN_CANVASES.append({
                    "(cap 79). Once a day.",
     "trigger": {"location": "zoe_bathroom", "is_repeatable": True, "priority": 5, "is_active": True,
                 "conditions": cond(AT_PARTY, JAKE_AT_PARTY, flag("jake_first_time"), BOLD, wd(4), tod("19:00", "23:45"),
-                                   BATH_FREE)},
+                                   BATH_FREE),
+                # pass 3 H64: an act she chooses, windowed by a condition, so it says its hours when shut (C5)
+                "show_when_blocked": True, "cooldown_message": "Fri, 7 PM-11:45 PM"},
     "nodes": [
         node("door", "Zoe's bathroom", [
             P("Jake catches your wrist at the bathroom door and backs you inside. The party thumps through the wall. "
@@ -462,3 +513,6 @@ TOWN_CANVASES.append({
             P("He kisses your neck once and lets you go back out into the noise."),
         ], [go("Back to the party.", loc="zoe_apartment", mins=2)]),
     ]})
+
+for _c in TOWN_CANVASES:   # A6, A7: the pay rides the button into the act (pass 3 G74)
+    pay_on_the_way_in(_c["nodes"])

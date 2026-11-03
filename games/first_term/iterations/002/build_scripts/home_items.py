@@ -217,8 +217,12 @@ def towel_set(hub, npc, meter, lo, hi, today, pay, back, lines=(), slip=None, sl
     choices, nodes = [], []
 
     def paid(label, nid, gate):
+        # Her pay stops at the top of the stage the button opens at: the Daring slip at 39, the Showing drop at its
+        # own cap (the-arc.md "Each act pays only inside its own stage"; pass 3 G8: the slip carried her through Showing)
+        eff = [dict(e, cap=min(e.get("cap", 100), 39)) if DARING in gate and SHOWING not in gate
+               and e.get("targetType") == "player" and e.get("trait") == "exhibitionism" else e for e in pay]
         return [go(label, node=nid, mins=5, cond_=cond(*base, *gate, *safe, flag(today, False)),
-                   eff=list(pay), flags=[fset(today)]),
+                   eff=eff, flags=[fset(today)]),
                 go(label, node=nid, mins=5, cond_=cond(*base, *gate, *safe, flag(today)))]
 
     def back_out(label):

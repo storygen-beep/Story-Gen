@@ -479,7 +479,14 @@ _set("cafe", description="The café on the town strip: a counter, eight booths a
      variants=[(cond(flag("tom_met")), "The café on the town strip: a counter, eight booths and a back room with a staff mirror. Tom runs it. Shifts pay a small wage, but the tips go up with how you look in the uniform. Regulars, mostly men. Shifts end when the café shuts; Tom stays on to close.")])
 _set("party_house", description=(
     "A big house at the edge of town where Zoe's friends throw Saturday nights. Music inside, a garden "
-    "out back and a hot tub steaming under the stars. Zoe's friends only."))
+    "out back and a hot tub steaming under the stars. Zoe's friends only."),
+    # pass 3 G33 (the-board.md §1): below Exhibitionism 60 the tub (party_house_soak) is shut to her, and with Zoe
+    # not on her Saturday row there is nobody to sit with, so the room says it has nothing for her
+    variants=[(cond(trait("exhibitionism", "lt", 60),
+                    {"type": "npc_at_location", "location_id": "party_house", "npc_id": "npc_zoe", "operator": "is_absent"}),
+               "A big house at the edge of town where Zoe's friends throw Saturday nights. Music inside, a garden "
+               "out back and a hot tub steaming under the stars, full of people you don't know. There's nothing "
+               "to do here right now.")])
 
 # ── Zoe's Flat: a building in Town, laid out like a flat (L4, Q47) ──
 _add("clothes_shop", dict(

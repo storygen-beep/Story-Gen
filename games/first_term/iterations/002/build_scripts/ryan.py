@@ -404,8 +404,11 @@ BRA_AND_PANTIES = [{"type": "clothing_slot", "slot": "bra", "operator": "equippe
 def cap(k, n, c):
     return {"targetType": "player", "trait": k, "op": "add", "value": n, "cap": c}
 def hot_exit(text, loc, mins, eff, wardrobe=None):
-    """A hot repeatable's exit, day-capped on its own conditions as well as the button's (gates: the climb is paid for)."""
-    return go(text, loc=loc, mins=mins, cond_=cond(HOT_FREE), eff=HOT_PAY + eff, flags=HOT_FLAG, wardrobe=wardrobe)
+    """A hot repeatable's exit. It pays nothing: the act pays on the button into it (hot_choice, HOT_ACT_PAY), so
+    "Leave him to it." beside it is the same act at the same price (the-heat-ladder.md H5; pass 3 G74)."""
+    c = go(text, loc=loc, mins=mins, wardrobe=wardrobe)
+    c["_pay"] = HOT_PAY + eff
+    return c
 # truth pass (2026-11-03): a hot repeatable whose beats place someone else (row 6: Mark's TV and his call from the
 # next room) carries that person's presence on its screen too, not only on the choice in (canv.pin_blocks)
 HOT_PIN = {6: [{"type": "npc_at_location", "location_id": "home_kitchen", "npc_id": "npc_mark", "operator": "is_present"}]}
@@ -419,9 +422,17 @@ def hot_node(n, name, media, exits, back="home_hall"):
 # C4 (LO 2026-11-03): hygiene colours, and its colour can work like a lock. Dirty, she still sees the button and
 # still goes to him, but it doesn't happen: he says why. Clean is hygiene 30+, or the hygiene system switched off.
 DIRTY = [trait("hygiene", "lt", 30), flag("hygiene_off", False)]
+# The sex rows (2 his feet, 4 and 5 naked for him, 6 the blanket) cost what sex costs her body (board.needs: energy is
+# spent by sex scenes through costs, hygiene falls after sex; pass 3 E95), and the energy floor greys the button with
+# the engine's own "Requires 10 Energy" (the-surfaces.md R3c; pass 3 D18). Rows 1 and 3 are looks, not sex.
+HOT_SEX = {2, 4, 5, 6}
+SEX_HYGIENE = {"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}
 def hot_choice(n, label, gate, wardrobe=None):
-    return [go(label, node=f"hot{n}", mins=0, cond_=cond(HOT_FREE, *gate, trait("hygiene", "gte", 30)), wardrobe=wardrobe),
-            go(label, node=f"hot{n}", mins=0, cond_=cond(HOT_FREE, *gate, trait("hygiene", "lt", 30), flag("hygiene_off")), wardrobe=wardrobe),
+    # the act pays on the way in, day-capped on this button (it reads HOT_FREE and sets it)
+    act = dict(eff=HOT_ACT_PAY[n] + ([SEX_HYGIENE] if n in HOT_SEX else []), flags=HOT_FLAG,
+               costs=[{"trait": "energy", "value": 10}] if n in HOT_SEX else None)
+    return [go(label, node=f"hot{n}", mins=0, cond_=cond(HOT_FREE, *gate, trait("hygiene", "gte", 30)), wardrobe=wardrobe, **act),
+            go(label, node=f"hot{n}", mins=0, cond_=cond(HOT_FREE, *gate, trait("hygiene", "lt", 30), flag("hygiene_off")), wardrobe=wardrobe, **act),
             go(label, node="ryan_stink", mins=0, cond_=cond(HOT_FREE, *gate, *DIRTY))]
 def stink_node(back):
     return node("ryan_stink", "Not like that", [
@@ -453,8 +464,10 @@ HOT_COUCH = [  # the couch, Sat/Sun 14:00-18:00
                               
                                {"type": "npc_at_location", "location_id": "home_kitchen", "npc_id": "npc_mark", "operator": "is_present"}], None,
      [VID("a handjob under a blanket on a couch, a film on, someone in the next room", "handjob under blanket couch", "secret handjob under blanket family home", pool_dir="sex/ryan_hot6_t5")],
-     [hot_exit("\"Just the film.\"", "home_living_room", 60, [cap("corruption", 1, 79), cap("exhibitionism", 1, 79)])]),
+     # Exhibitionism is gated at Daring here, so it stops at Daring's top (pass 3 G8)
+     [hot_exit("\"Just the film.\"", "home_living_room", 60, [cap("corruption", 1, 79), cap("exhibitionism", 1, 39)])]),
 ]
+HOT_ACT_PAY = {n: exits[0].pop("_pay") for n, _l, _g, _w, _m, exits in HOT_ROOM + HOT_COUCH}   # read by hot_choice
 
 # ── the repeat after step 8: two knocks, a menu (hot repeatable 7; ryan_hot_repeatables.md "Row 7's menu", DECISIONS 127).
 #    A normal start at the door (a bag of three), her pick of the act (more open as his Lust climbs: 70 / 80 / 90), a
@@ -479,6 +492,13 @@ SHY_V, EAGER_V = trait("corruption", "lt", 70), trait("corruption", "gte", 70)
 def voices(act):
     return [GC(cond(SHY_V), *spoken(f"7{act}_shy")), GC(cond(EAGER_V), *spoken(f"7{act}_eager"))]
 TO_TWIST = [go("Don't stop.", node="twist", mins=10)]
+SEX_PRICE = dict(costs=[{"trait": "energy", "value": 10}], eff=[SEX_HYGIENE])   # what sex takes from her body (pass 3 E95)
+# pass 3 B37: one clip pool per finish, each described as the finish it shows (was one shared pool)
+HOT7_FINISH = {
+    "inside": ("a guy coming inside a girl on his bed late at night, holding her hips down", "he cums inside her late night bedroom", "creampie quiet sex his bed"),
+    "on": ("a guy pulling out and coming on a girl's stomach and tits on his bed late at night", "pulls out cums on her tits bedroom night", "cum on her stomach quiet sex"),
+    "mouth": ("a girl on her knees by his bed late at night, a guy coming in her mouth", "cum in mouth kneeling by bed night", "he finishes in her mouth quietly"),
+}
 FINISH_EXITS = [  # the day's pay split on ryan_hot_today, as built; dressed again for the hall
     go("Back to your room.", loc="home_hall", mins=20, cond_=cond(HOT_FREE), eff=[cap("corruption", 1, 79)] + HOT_PAY, flags=HOT_FLAG, wardrobe=DRESS_DAY),
     go("Back to your room.", loc="home_hall", mins=20, cond_=cond(flag("ryan_hot_today")), eff=[cap("corruption", 1, 79)], wardrobe=DRESS_DAY),
@@ -491,15 +511,20 @@ out.append({
                 "schedules": [{"weekdays": [0, 1, 2, 3, 6], "start_time": "22:00", "end_time": "00:00"}],
                 "conditions": cond(trait("ryan_step", "eq", 8))},
     "nodes": [
-        node("door", "Two knocks", [P("Two knocks. His phone is face-down on the desk. It always is now.")], [
+        node("door", "Two knocks", [P("Two knocks. His phone is face-down on the desk. It always is now."),
+                                    # the-phone.md P10 (pass 3 group 2, round 2): her "coming" text is read where she meets it
+                                    G(cond(flag("ryan_knock_booked")), D(R, "You said coming. I've been lying here listening for you."))], [
             go("Go in.", node="start", mins=2),
             go("\"Not tonight.\"", loc="home_hall", mins=2),
         ]),
         node("start", "His room", [POOL(*[GC({"version": "1.0", "logic": "AND", "items": []}, *spoken(f"7s_{k}")) for k in "abc"], pid="ryan_hot_7s", bag=True)], [
-            go("Go down on him.", node="suck", mins=5, wardrobe=STRIP, cond_=cond(ntrait(R, "want", "gte", 70))),
-            go("Ride him.", node="ride", mins=5, wardrobe=STRIP, cond_=cond(ntrait(R, "want", "gte", 70))),
-            go("Let him taste you.", node="lick", mins=5, wardrobe=STRIP, swl=True, cond_=cond(ntrait(R, "want", "gte", 80))),
-            go("Against the wall.", node="wall_back", mins=5, wardrobe=STRIP, swl=True, cond_=cond(ntrait(R, "want", "gte", 90))),
+            # pass 3 J16: the two higher acts are hidden until his Lust opens them, not greyed: this loop raises his Lust
+            # itself, so a greyed rung here would be the scene reading out its own progress bar (engine.md §15 rule 1).
+            # pass 3 E95: each act costs 10 energy (greyed "Requires 10 Energy" when she is spent) and lowers hygiene.
+            go("Go down on him.", node="suck", mins=5, wardrobe=STRIP, cond_=cond(ntrait(R, "want", "gte", 70)), **SEX_PRICE),
+            go("Ride him.", node="ride", mins=5, wardrobe=STRIP, cond_=cond(ntrait(R, "want", "gte", 70)), **SEX_PRICE),
+            go("Let him taste you.", node="lick", mins=5, wardrobe=STRIP, cond_=cond(ntrait(R, "want", "gte", 80)), **SEX_PRICE),
+            go("Against the wall.", node="wall_back", mins=5, wardrobe=STRIP, cond_=cond(ntrait(R, "want", "gte", 90)), **SEX_PRICE),
             go("Leave him to it.", loc="home_hall", mins=2),
         ]),
         node("suck", "On your knees", [*voices("suck"),
@@ -522,8 +547,8 @@ out.append({
             go("\"On me.\"", node="f_on", mins=3),
             go("\"In my mouth.\"", node="f_mouth", mins=3),
         ]),
-        *[node(f"f_{k}", "He comes", [*spoken(f"7f_{k}"),
-            VID("a guy finishing, late at night in his bedroom", "he cums late night bedroom", "finish quiet sex", pool_dir="sex/ryan_hot7_finish_t5")], FINISH_EXITS)
+        # pass 3 B37 (one asset, one block): each finish its own pool; was one sex/ryan_hot7_finish_t5 for all three
+        *[node(f"f_{k}", "He comes", [*spoken(f"7f_{k}"), VID(*HOT7_FINISH[k], pool_dir=f"sex/ryan_hot7_finish_{k}_t5")], FINISH_EXITS)
           for k in ("inside", "on", "mouth")],
     ]})
 
@@ -574,9 +599,9 @@ def ryan_towel(hub, back, first_low, caught=True):
              GC(cond(TOWEL_ON), D(R, "Mom's going to kill us both."), P("He says it to your tits, not your face."))],
         ],
         slip=RYAN_TOWEL_SLIP, slip_lead=RYAN_TOWEL_LEAD,
-        slip_media=VID("a young woman in a bath towel letting it slip off her breasts in front of a young man, at home", "girl drops towel in front of guy", "towel slip flash at home", pool_dir="sex/towel_ryan_slip_t4"),
+        slip_media=VID("a young woman in a bath towel letting it slip off her breasts in front of a young man, at home", "girl drops towel in front of guy", "towel slip flash at home", pool_dir=f"sex/towel_ryan_slip_{hub.replace('hub_ryan_', '')}_t4"),
         drop=RYAN_TOWEL_DROP, drop_gate=[SHOWING],
-        drop_media=VID("a young woman dropping her bath towel, standing naked in front of a young man in his room", "girl drops towel naked in front of him", "towel drop naked reveal", pool_dir="sex/towel_ryan_drop_t4"),
+        drop_media=VID("a young woman dropping her bath towel, standing naked in front of a young man in his room", "girl drops towel naked in front of him", "towel drop naked reveal", pool_dir=f"sex/towel_ryan_drop_{hub.replace('hub_ryan_', '')}_t4"),
         caught_by="npc_laura" if caught else None, caught=TOWEL_CAUGHT,
         no=("Hold the knot.", RYAN_TOWEL_NO, "home_hall", "Go."))   # reader a3 #7-8 (DECISIONS 131, call A): his Want +1 once a day
 

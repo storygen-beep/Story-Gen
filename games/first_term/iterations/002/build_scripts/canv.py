@@ -178,6 +178,38 @@ def VID(desc, *queries, file=None, pool_dir=None):
     return {"type": "video", "props": props}
 
 
+def odds_bands(meter, chance):
+    """(pass 3 D52, the-surfaces.md R3: "the odds ride the same trait as the content") a walk-in's substitution odds
+    in three bands on HER meter that its answers pay: under 20, 20-39, 40 and up (the stage lines). The lowest band
+    keeps the signed odds (DECISIONS 148: 0.25, or 0.5 with C4's unlocked door or C2's loud TV); the world leans
+    x1.4 and x1.8 as she climbs, never past 0.9. Returns [(chance, condition items)], mutually exclusive.
+    `meter` None: a walk-in with no heat and no pay keeps one flat rule."""
+    if not meter:
+        return [(chance, [])]
+    return [(chance, [trait(meter, "lt", 20)]),
+            (min(0.9, round(chance * 1.4, 2)), [trait(meter, "gte", 20), trait(meter, "lt", 40)]),
+            (min(0.9, round(chance * 1.8, 2)), [trait(meter, "gte", 40)])]
+
+
+def own_media(tree, tag):
+    """(pass 3 B37, register.md "ONE ASSET, ONE BLOCK") give every media block in a COPIED canvas or node list its
+    own asset: `_<tag>` goes in before the tier suffix (sex/x_t4 -> sex/x_<tag>_t4; a file keeps its extension).
+    The media review dedupes by file, so a copy sharing the original's asset would never get its own verdict."""
+    if isinstance(tree, list):
+        for x in tree:
+            own_media(x, tag)
+    elif isinstance(tree, dict):
+        props = tree.get("props") if tree.get("type") in ("video", "image") else None
+        if isinstance(props, dict):
+            for k in ("pool_dir", "file"):
+                if props.get(k):
+                    props[k] = re.sub(r"(_t\d)((?:\.\w+)?)$", rf"_{tag}\1\2", props[k], count=1) \
+                        if re.search(r"_t\d(?:\.\w+)?$", props[k]) else re.sub(r"((?:\.\w+)?)$", rf"_{tag}\1", props[k], count=1)
+        for x in tree.values():
+            own_media(x, tag)
+    return tree
+
+
 # ── choices ──
 def go(text, node=None, loc=None, mins=None, eff=None, flags=None, cond_=None, wardrobe=None,
        costs=None, locked=None, swl=False, consumes=False, final=False, retry=None, ret=False, mods=None):
@@ -456,6 +488,12 @@ def with_closed_line(canvas):
     when it opens (the-clock.md C5; gate `a closed activity says when it opens`). Added here so no canvas can miss it;
     an author's own message wins."""
     t = canvas.get("trigger") or {}
+    # An event that happens to her (the guy beside her, the lecturer's word, a drink handed to her) never lists its
+    # hours: hours go only on an activity she chooses (the-clock.md C5; LO, 2026-11-03). The mark rides in
+    # trigger.metadata, which the importer ignores and the gate reads.
+    if canvas.get("event"):
+        t.setdefault("metadata", {})["kind"] = "event"
+        return canvas
     if (t.get("is_repeatable") and t.get("schedules") and not t.get("npc") and not t.get("requires_npc")
             and t.get("trigger_mode") != "random" and not t.get("show_when_blocked")):
         t["show_when_blocked"] = True
@@ -632,10 +670,16 @@ def step_cards(npc, texts, met_flag=None, terminal_text=None, closed_text=None, 
         label = re.sub(r"\s*\([^()]*\b(?:Curious|Daring|Bold|Showing|Hungry|Watched)\b[^()]*\)", "", label)
         tip = label + ("; " + "; ".join(notes) if notes else "")
         card = {"npc_id": npc, "priority": 10, "text": text, "tip": tip, "when": when, "ready_canvas": s["canvas"]}
-        if pointer and pointer[0] == n:
-            card["heading"] = pointer[1]
         if goals:
             card["goals"] = goals
+        if pointer and pointer[0] == n and met_flag:
+            # (pass 3 C38, the-first-hour.md "every ladder card carries the met flag") the pointer card is the
+            # unmet one: met flag is_false + heading. A meeting can come before the step (Hale: an ordinary
+            # Psychology class sets hale_met), so the same step also gets a named card with is_true.
+            out.append(dict(card, when=when + [{"flag": met_flag, "op": "is_false"}], heading=pointer[1]))
+            card = dict(card, when=when + [{"flag": met_flag, "op": "is_true"}])
+        elif pointer and pointer[0] == n:
+            card["heading"] = pointer[1]
         out.append(card)
     top = steps[-1]["n"]
     if terminal_text:

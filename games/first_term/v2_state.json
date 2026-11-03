@@ -8631,6 +8631,16 @@
           "report": "Chrome: walkin_kitchen_mark ('Reaching past', exit 'His hand stays.'), walkin_laundry_mark_sat ('Bent at the drum'), walkin_wardrobe_mark ('Laura's lingerie') render. Builder's forced-dice probe 17/17: B2 fires Sat 08:20, B4 Sat 08:50, B6 Sat 21:50, none without mark_saw_her or outside the windows; Ryan's Saturday walk-in stops at 08:15, Sunday unchanged. Gates 75/90, truth gates PASS."
         },
         "played": null
+      },
+      {
+        "id": "group2_logic_fixes",
+        "what": "Third-pass group 2: pay on the way in, caps inside the stage, costs on sex, clamps, phone no-shows, rent text, Kayla's rows, the lecture events hidden when shut",
+        "built_at": "2026-11-03 22:12",
+        "chrome": {
+          "at": "2026-11-03 22:12",
+          "report": "Dev build after group 2 (2026-11-03). Lecture room shut at Tue 15:00: only the four lectures show, each with its hours; 'The guy beside you' and 'A word about what you're wearing' are hidden, and show as links on Mon 08:35. home_event_ryan_towel: Ryan's Want 20 to 22 on the way in, stays 22 after 'Step round him.', ryan_saw_her_towel set. Jake A1 'Get on your knees.': energy 50 to 40, hygiene 80 to 70, corruption 45 to 46 on the button in; the free exit pays nothing more; hygiene 5 clamps to 0; at energy 5 the button is locked 'Requires 10 Energy'. Zoe's flat at Fri 23:00 with corruption 10: the keg guy row does not show."
+        },
+        "played": null
       }
     ]
   }

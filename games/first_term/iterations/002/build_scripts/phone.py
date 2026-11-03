@@ -203,6 +203,8 @@ thread("ryan_kayla", R, "📱 Ryan", [F("knows_about_kayla"), SINCE("knows_about
        [("your secret's safe", {"effects": [npc_eff(R, "warmth", 2)]}, "owe you one. two knocks?"),
         ("what's it worth?", {"effects": [npc_eff(R, "want", 1)]}, "come find out. two knocks"),
         ("who's kayla?", {}, "friday. you'll hear her")],
+       # (pass 3 F60) leaving him on read after he trusted her with it costs more than any answer
+       ignore=(1, {"effects": [npc_eff(R, "warmth", -1)]}),
        comment="Ryan: caused by knows_about_kayla (his step 2)")
 # his repeat after step 8: every 2 days, 22:00-00:00, not Friday (Kayla's night); he's in his room, awake
 thread("ryan_two_knocks_text", R, "📱 Ryan",
@@ -244,7 +246,9 @@ thread("mark_rent", M, "📱 Mark",
        [("i'll have it", {}, "good."),
         ("i might be short", {"effects": [npc_eff(M, "want", 1)]}, "then we talk tomorrow."),
         ("what if i'm not", {}, "you will be. kitchen. eight.")],
-       repeat=6, comment="Mark: caused by rent_starts (breakfast, day 1); Saturday, every week")
+       # (pass 3 F60) no answer to the man she owes: his Dominance +1, so his terms come sooner at the table
+       repeat=6, ignore=(1, {"effects": [{"targetType": "npc", "npcId": M, "trait": "power", "op": "add", "value": 1, "cap": 100}]}),
+       comment="Mark: caused by rent_starts (breakfast, day 1); Saturday, every week")
 
 # ── 4 · Tom (npc_tom.md: cafe_job, a day later, 10:00-14:00; no clock time: "after class") ──
 thread("tom_shift", T, "📱 Tom",
@@ -271,14 +275,17 @@ thread("zoe_party", Z, "📱 Zoe",
         ("what counts as short", {}, "come by tonight. i'll lend you one"),
         ("can't. my mom", {}, "sneak out. kidding. kinda")],
        repeat=6, comment="Zoe: the party (Thursday; she's home till midnight, so 'tonight' holds)")
+# (pass 3 F60, F61) a bail costs: while `zoe_bailed` holds she stops asking, until she runs with Zoe anyway (the
+# park run unbooked clears it, zoe.py hub_zoe_park). Ignoring the text counts as a bail; "too early" costs nothing.
 thread("zoe_run", Z, "📱 Zoe",
-       [F("zoe_met"), SINCE("zoe_met", 2), DAYS(4), HOURS("18:00", "22:00")],
+       [F("zoe_met"), SINCE("zoe_met", 2), F("zoe_bailed", False), DAYS(4), HOURS("18:00", "22:00")],
        ["run tmrw? 8. the park"],
        [("i'm in", {"flagEffects": [setf("zoe_run_booked")]}, "wear the sports bra 😏"),
         ("too early", {}, "lazy. next week then")],
-       repeat=6, comment="Zoe: the run (Friday; her park row is weekend mornings 08:00-10:00). The yes books it (zoe.py).")
+       repeat=6, ignore=(1, {"flagEffects": [setf("zoe_bailed")]}), comment="Zoe: the run (Friday; her park row is weekend mornings 08:00-10:00). The yes books it (zoe.py).")
 # Saturday's run ends 10:00; the yes comes Friday 18:00-22:00, so 16 hours after it she ran alone.
-# Zoe has no number; the cost is `zoe_bailed`, read by her next park line (zoe.py).
+# Zoe has no number; the cost is `zoe_bailed`, read by her next park line (zoe.py), and it stops her run texts
+# until she runs with Zoe at the park (pass 3 F61).
 noshow("zoe_run_noshow", Z, "📱 Zoe", "zoe_run_booked", 16,
        ["you bailed on me 🙄", "i ran alone like a loser"],
        [("sorry!! next week", "you're buying coffee."), ("overslept", "obviously. lazy bones.")],
@@ -291,6 +298,7 @@ thread("hale_office_hours", H, "📧 College email: Dr. Hale",
        ["Office hours are Thursday, after six. Bring the essay."],
        [("I'll be there.", {"flagEffects": [setf("hale_office_booked")]}, "Good. — H."),
         ("I can't this Thursday.", {}, "Then next Thursday. — H.")],
+       ignore=(1, {"effects": [pl_eff("grade_psych", -1)]}),   # (pass 3 F60) an unanswered email from your lecturer is marked
        comment="Dr. Hale (his college email): caused by hale_02_done. The yes books step 3 (hale.py).")
 # His step 3 is Thursday 18:00-19:30. On Friday, a day after the yes, a booking still open with the
 # step not done means she never came.
@@ -307,7 +315,8 @@ thread("hale_thursday", H, "📧 College email: Dr. Hale",
        ["Thursday, my office. Half past six."],
        [("Half past six.", {"flagEffects": [setf("hale_thursday_booked")]}, None),
         ("Not this week.", {}, None)],
-       repeat=6, comment="Hale's repeat, after his step 4 (release 1): Wednesday, \"Thursday. Half past six.\" The yes books it (hale.py).")
+       repeat=6, ignore=(1, {"effects": [pl_eff("grade_psych", -1)]}),   # (pass 3 F60)
+       comment="Hale's repeat, after his step 4 (release 1): Wednesday, \"Thursday. Half past six.\" The yes books it (hale.py).")
 noshow("hale_thursday_noshow", H, "📧 College email: Dr. Hale", "hale_thursday_booked", 24,
        ["The door was unlocked at half past six."],
        [("I couldn't get away.", "Then don't say half past six. — H."), ("Next week.", "We will see. — H.")],
@@ -335,10 +344,13 @@ thread("jake_date", J, "📱 Jake",
 noshow("jake_date_noshow", J, "📱 Jake", "jake_date_booked", 72,
        ["i was outside your house for twenty minutes", "you ok?"],
        [("sorry. i fell asleep", "next time text me. ok?"), ("something came up", "fine. you owe me one.")],
-       {"flagEffects": [setf("jake_stood_up")]},
+       {"flagEffects": [setf("jake_stood_up")]}, extra=[HOURS("10:00", "22:00")],   # (pass 3 F58) the hour window, P4
        comment="Jake: she said yes to a date and wasn't at the door (DECISIONS 87)")
+# (pass 3 F61) standing him up costs the midweek date: while `jake_stood_up` holds he asks only for Saturday (his hub
+# line: "You still owe me a date, you know. Saturday?"), until a date clears it (jake.py jake_date_pickup).
 thread("jake_date_wed", J, "📱 Jake",
-       [F("jake_number"), SINCE("jake_number", 1), F("jake_date_booked", False), DAYS(0, 1), HOURS("18:00", "22:00")],
+       [F("jake_number"), SINCE("jake_number", 1), F("jake_date_booked", False), F("jake_stood_up", False), DAYS(0, 1),
+        HOURS("18:00", "22:00")],
        ["wednesday? i'll pick you up"],
        [("yes", BOOK, "front door. eight."),
         ("not this week", {}, "saturday then. maybe"),

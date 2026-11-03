@@ -80,8 +80,20 @@ RULES = {}          # host canvas id -> [substitution rules]
 DAILY_FLAGS = []    # every `<canvas>_today`, for 0_systems_spec.toml [engine.daily_tick]
 
 
+# (pass 3 D52) the meter each walk-in's answers pay (its description: "her answer on ..."); its odds band on it.
+# Laundry routes into Mark's laundry ladder, whose rungs open on Curious (Corruption). Laura's and Kayla's carry no
+# heat and no pay, so they stay flat.
+BAND_ON = {"walkin_shower_ryan": "exhibitionism", "walkin_shower_kayla": "exhibitionism", "walkin_shower_mark": "exhibitionism",
+           "walkin_mirror_ryan": "exhibitionism", "walkin_mirror_mark": "exhibitionism", "walkin_wardrobe_mark": "exhibitionism",
+           "walkin_step_vance": "exhibitionism",
+           "walkin_kitchen_ryan": "corruption", "walkin_kitchen_mark": "corruption", "walkin_tv_ryan": "corruption",
+           "walkin_tv_mark_garage": "corruption", "walkin_tv_mark_kitchen": "corruption", "walkin_things_ryan": "corruption",
+           "walkin_laundry_mark": "corruption", "walkin_laundry_mark_sat": "corruption"}
+
+
 def rule(host, target, chance, *items):
-    RULES.setdefault(host, []).append({"target_canvas_id": target, "chance": chance, "conditions": cond(*items)})
+    for odds, band in odds_bands(BAND_ON.get(target), chance):
+        RULES.setdefault(host, []).append({"target_canvas_id": target, "chance": odds, "conditions": cond(*items, *band)})
 
 
 def walkin(cid, name, loc, desc, who, moment, moment_label, answer, answers, raise_=(), records=(), extra=(),
@@ -170,7 +182,9 @@ a, n = shower_answers("k",
      D(K, "Oh, you're trouble."), P("She smacks the door frame on her way out. You stand there wet and grinning, nipples hard.")])
 walkin("walkin_shower_kayla", "The door opens", "home_bathroom",
     "B1, Kayla: a Friday with Ryan, she comes in to pee and looks her over. No meter moves for her; kayla_saw_her (Ryan's hub reads it). Her answer on Exhibitionism: the towel 0, then +1 cap 19 / 39 / 59.",
-    [here(R, "home_ryan_room"), flag("kayla_met")],
+    # (pass 3 group 2, round 2) she walks in from Ryan's room, where her Friday row holds her (people_data.py):
+    # the trigger reads her there, as Ryan's own walk-in reads him, so the engine only runs it while she is across the hall
+    [here(R, "home_ryan_room"), here(K, "home_ryan_room"), flag("kayla_met")],
     shower_in("You shove the lock across. It sticks halfway, the way it always does. You peel your clothes off and get under the spray.",
               "You leave the lock alone. It's been off since last time. You peel your clothes off and get under the spray.",
               "Across the hall Ryan's music thumps. You tip your head back and let the hot water run over your face and down between your tits.")

@@ -30,7 +30,7 @@ out.append({
                 "schedules": [{"weekdays": [4], "start_time": "19:00", "end_time": "00:00"}],
                 "conditions": cond(flag("zoe_met"), trait("zoe_step", "gte", 1),
                                    {"type": "hours_since_flag", "subject": "player", "flag_key": "party_went", "operator": "gte", "value": 24}),
-                "show_when_blocked": True, "cooldown_message": "The party is Friday nights, from seven."},
+                "show_when_blocked": True, "cooldown_message": "Fri, 7 PM-midnight"},   # pass 3 H31: a bare phrase (C5)
     "nodes": [node("door", "Zoe's door", [
         P("You can hear it from the stairwell: bass through the walls, somebody shrieking with laughter, the door propped open with a crate of beer."),
         G(CURFEW_ON, T("Laura said no. Not this Friday.")),
@@ -67,7 +67,7 @@ out.append({
 
 DRINK_MOD = [{"key": "drinks_boost", "name": "Tipsy", "duration_hours": 3, "trait_offsets": {"corruption": 20, "exhibitionism": 20}}]
 out.append({
-    "id": "party_drink_offer", "name": "Somebody hands you a drink",
+    "id": "party_drink_offer", "event": True, "name": "Somebody hands you a drink",
     "description": "A drink (the parties sheet): drinks_tonight +1 and the drinks boost for 3 hours (one stage up on both meters, for choices only; steps ignore it). The third drink sets heavy_night. A no always works.",
     "trigger": {"location": "zoe_apartment", "is_repeatable": True, "priority": 4, "is_active": True,
                 "schedules": PARTY_SCHED, "conditions": cond(AT_PARTY, trait("drinks_tonight", "lt", 3))},
@@ -181,7 +181,8 @@ out.append({
         ]),
         node("door", "Locked", [
             P("Zoe's bathroom: fairy lights round the mirror, her makeup all over the sink. He locks the door. The party is right there through the wall, and he's looking at you like he's already decided."),
-        ], [go("Get on your knees.", node="oral", mins=2), go("Pull him in.", node="sex", mins=2), go("Unlock the door.", node="no", mins=1)]),
+        # pass 3 E95: sex costs her 10 energy (greyed "Requires 10 Energy" when spent) and lowers hygiene (board.needs)
+        ], [go("Get on your knees.", node="oral", mins=2, costs=[{"trait": "energy", "value": 10}], eff=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}]), go("Pull him in.", node="sex", mins=2, costs=[{"trait": "energy", "value": 10}], eff=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}]), go("Unlock the door.", node="no", mins=1)]),
         node("oral", "On your knees", [P(ORAL),
             VID("a girl on her knees on a bathroom floor at a party sucking a guy's cock as he leans on the sink", "blowjob party bathroom on knees", "girl sucks cock locked bathroom party", pool_dir="sex/party_hookup_oral_t5")],
             [go("Back to the party.", node="out", mins=15, eff=[capped("corruption", 1, CAP_BOLD), add("campus_talk", 1, clamp=False)])]),
@@ -230,7 +231,7 @@ out.append({
     "nodes": [node("gates", "The gates", [
         P("You stretch against the park gates. The loop round the pond is two laps if you mean it."),
     ], [
-        go("Run the loop. (10 energy)", node="run", mins=35, costs=[{"trait": "energy", "value": 10}], cond_=DARING_RUN, eff=[capped("exhibitionism", 1, CAP_BOLD)]),
+        go("Run the loop. (10 energy)", node="run", mins=35, costs=[{"trait": "energy", "value": 10}], cond_=DARING_RUN, eff=[capped("exhibitionism", 1, CAP_CUR)]),   # Daring opens at 20: pays to 39 (pass 3 G8)
         go("Run the loop. (10 energy)", node="run", mins=35, costs=[{"trait": "energy", "value": 10}], cond_=cond({"type": "clothing_slot", "slot": "bra", "operator": "equipped"}, {"type": "clothing_slot", "slot": "top", "operator": "equipped"})),
         go("Walk it instead.", node="walk", mins=20),
     ]),
@@ -265,7 +266,7 @@ out.append({
 
 out.append({
     "id": "park_selfie", "name": "Take a selfie on the path",
-    "description": "A photo on the path for her feed: followers +2, Exhibitionism +1. Once a day.",
+    "description": "Photos on the path, a man on a bench watching her pose: Exhibitionism +1. Once a day. Posting is the phone's (pass 3 F64): followers move only on the Feed.",
     "trigger": {"location": "park", "is_repeatable": True, "priority": 3, "is_active": True, "max_triggers_per_day": 1},
     "nodes": [node("photo", "A selfie", [
         # Iteration 002, part 8 (reader): nothing is posted until she posts it.
@@ -275,13 +276,12 @@ out.append({
         # reader a3 #61 (DECISIONS 131): a photo of her on show pays from Daring (SP2 stage 2); under it, a not-yet
         G(cond(trait("exhibitionism", "lt", 20)), T("Put yourself up where anyone can look? Not yet.")),
     ], [  # DECISIONS 124: the skirt photo on her feed is a flash for a group, Watched
-        go("Post it.", node="posted", mins=10, cond_=cond({"type": "worn_type", "operator": "neq", "value": "short_skirt"}, trait("exhibitionism", "gte", 20)), eff=[add("followers", 2, clamp=False), capped("exhibitionism", 1, CAP_BOLD)]),
-        go("Post it.", node="posted", mins=10, cond_=cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}, trait("exhibitionism", "gte", 60)), eff=[add("followers", 2, clamp=False), capped("exhibitionism", 1, 79)]),
+        # (pass 3 F64, the-phone.md P6 "the phone owns posting") she keeps the shot here; the Feed posts it
+        go("Keep the best one.", node="posted", mins=10, cond_=cond({"type": "worn_type", "operator": "neq", "value": "short_skirt"}, trait("exhibitionism", "gte", 20)), eff=[capped("exhibitionism", 1, CAP_CUR)]),   # a Daring post stops at Daring's top (pass 3 G8)
+        go("Keep the best one.", node="posted", mins=10, cond_=cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}, trait("exhibitionism", "gte", 60)), eff=[capped("exhibitionism", 1, 79)]),
         go("Delete them all.", loc="park", mins=5)]),
-        node("posted", "Posted", [
-            P("You post it."),
-            G(SPORTS_ONLY, P("The likes start before you've got your breath back.")),
-            G(cond({"type": "clothing_slot", "slot": "top", "operator": "equipped"}), P("The likes start before you're off the path.")),
+        node("posted", "Kept", [
+            P("You keep the best one. It's on your phone now, one tap from your feed, and the man on the bench is still staring at you."),
         ], [go("Put the phone away.", loc="park", mins=5)])]})
 
 # Step 4 (DECISIONS 79): `run` stops before he looks up; her choice to stay is `linger`, which pays.
@@ -294,7 +294,9 @@ out.append({
     "description": "The first explicit scene (LO, question 8): a couple in the bushes, strangers. Good Girl: she walks into them and runs. Curious: she watches, then touches herself. Once a day.",
     "trigger": {"location": "park", "is_repeatable": True, "priority": 4, "is_active": True, "max_triggers_per_day": 1,
                 # starts by 21:30: the longest path is 21 minutes, so every exit lands before the 22:00 lock (reader item 5)
-                "conditions": cond(flag("opening_done"), tod("07:00", "21:30"))},
+                "conditions": cond(flag("opening_done"), tod("07:00", "21:30")),
+                # pass 3 H64: a walk she chooses, windowed by a condition, so it says its hours when shut (C5)
+                "show_when_blocked": True, "cooldown_message": "Every day, 7 AM-9:30 PM, once a day"},
     "nodes": [
         node("sound", "The far path", [
             P("The far path behind the rhododendrons is empty and quiet. Then it isn't: a sound off to the left, through the leaves, low and rhythmic."),
@@ -333,7 +335,7 @@ out.append({
                                    {"type": "hours_since_flag", "subject": "player", "flag_key": "ran_with_zoe", "operator": "lt", "value": 1})},
     "nodes": [
         node("pull", "After the run", [P("Zoe jogs to a stop beside you, pink and breathless, and grabs your wrist."), D(Z, "Come here. I know a place.")],
-             [go("Follow her.", node="hidden", mins=5), go("\"Not here, Zo.\"", node="no", mins=1)]),
+             [go("Follow her.", node="hidden", mins=5, costs=[{"trait": "energy", "value": 10}], eff=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}]), go("\"Not here, Zo.\"", node="no", mins=1)]),   # pass 3 E95
         node("hidden", "The hollow", [P("A man walking his dog slows on the path above the hollow, looks your way, and walks on."), P(HIDDEN),
             VID("two girls in running clothes hidden in bushes, one with her hand down the other's leggings, kissing against a tree", "girl fingers girlfriend in park bushes", "lesbian hidden in park hand down leggings", pool_dir="sex/park_hidden_t5")],
             [go("Back to the path.", node="after", mins=15, eff=[capped("corruption", 1, 79)])]),

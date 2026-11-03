@@ -293,7 +293,9 @@ SHOP_EXITS = [
        flags=[fset("grocery_list"), fset("grocery_asked_today")], eff=[{"targetType": "player", "trait": "money", "op": "add", "value": 20, "clamp": False}]),
     go("Give her the shopping.", node="hl_given", mins=2, cond_=cond(flag("groceries_bought"), flag("grocery_done_today", False)),
        flags=[funset("grocery_list"), funset("groceries_bought"), fset("grocery_done_today")], eff=[warm(L, 2)]),
-    go("\"I forgot the shopping.\"", node="hl_forgot", mins=2, cond_=cond(*OVERDUE, flag("grocery_done_today", False)),
+    # "You hand it back.": only with the twenty still on her, so the unclamped -20 never takes her below 0
+    # (engine.md §21, "gate the choice on the trait"; pass 3 J5)
+    go("\"I forgot the shopping.\"", node="hl_forgot", mins=2, cond_=cond(*OVERDUE, flag("grocery_done_today", False), trait("money", "gte", 20)),
        flags=[funset("grocery_list"), fset("grocery_done_today")], eff=[susp(2), add("money", -20)]),
     go("Never mind.", node="hl_dinner"),
 ]
@@ -352,7 +354,10 @@ add_item("wine", "Have a glass with her.", HER_EVE + [tod("20:00", "22:00"), tra
           P("She pours two and clinks yours before you've picked it up.")],
          None, 30, done_exits=[go("Done.", loc=K, mins=30, eff=[warm(L)], flags=[fset("had_drink_home")], mods=DRINK)],
          tease=l_tease(91, "a glass of wine"), touch=l_touch(91, "a glass of wine"))
-add_item("study", "Study at the kitchen table.", HER_EVE + [tod("19:00", "22:00")], "studied_home", K,
+# (pass 3 D1) the study is work, so it is its own canvas beside her hub, not a hub item (the-surfaces.md R1: "Never
+# put work inside a character's hub"). Same screens, hours, pay and once-a-day flag; it still needs her in the
+# kitchen, because she reads over your shoulder. Its Love pay shares her hub's once-a-day brake (below).
+_study_door, _study_nodes = item("study", "Study at the kitchen table.", HER_EVE + [tod("19:00", "22:00")], "studied_home", K,
          [P("You spread your notes across the end of the table. She reads over your shoulder."), D(L, "That's wrong. No — that.")],
          None, 60, done_exits=[go(f"{name}.", loc=K, mins=60, flags=[fset("studied_home")],
                                   costs=[{"trait": "energy", "value": 10}],
@@ -360,6 +365,13 @@ add_item("study", "Study at the kitchen table.", HER_EVE + [tod("19:00", "22:00"
                                for key, name in (("grade_psych", "Psychology"), ("grade_business", "Business"),
                                                  ("grade_bio", "Biology"), ("grade_art", "Figure drawing"))],
          )
+STUDY_KITCHEN = {
+    "id": "kitchen_study", "name": "Study at the kitchen table",
+    "description": "Study at the kitchen table while Laura's there: 60 min, energy -10, one subject's grade +1, her Love (once a day with her hub). Work, so not in her hub (R1).",
+    "trigger": {"location": K, "requires_npc": L, "is_repeatable": True, "priority": 3, "is_active": True,
+                "schedules": [{"weekdays": [0, 1, 3, 4, 6], "start_time": "19:00", "end_time": "22:00"}],
+                "conditions": cond(flag("opening_done"), flag("studied_home", False))},
+    "nodes": _study_nodes}
 # ── the towel at home (LO, 2026-10-31, DECISIONS 98): her reaction by her Love, every visit (<40, 40-69,
 #    70+, her hub's own cut points); "Let her fix it." pays her Love +2 once a day. No Daring gate: it's a
 #    mother fussing, not a tease. In her room only while she's up and dressing. ──
@@ -393,6 +405,38 @@ UNIFORM_LINES = [
     G(cond(NORMAL_ON), D(L, "Look at you. My working girl. Sit, I'll make you something.")),
     G(cond(SEXY_ON), P("Laura looks at the open top button for a long second."), D(L, "Is that the uniform, or Tom's idea?")),
 ]
+# ── (pass 3 C30) the failing chain: Laura reads the grades. One node per subject INSIDE her kitchen hub
+# (the-first-hour.md, "a second surface for the same person in the same room is a NODE INSIDE THE FIRST").
+# Until pass 3 these were four solo canvases laura_reads_<grade> in college.py beside this hub; no flag, gate or
+# phone reads those ids. Only the first failing subject shows a door, so one button at a time; grades_seen
+# (cleared at the Sunday count) keeps it to once a week, and laura_portal_today (cleared in [engine.daily_tick])
+# is the day brake the canvases' max_triggers_per_day was, which a hub node has no trigger to carry (the-meters.md M3-M5).
+PORTAL = [("grade_psych", "Psychology"), ("grade_business", "Business"), ("grade_bio", "Biology"), ("grade_art", "Figure drawing")]
+portal_choices, portal_nodes = [], []
+for _i, (grade, subj) in enumerate(PORTAL):
+    _first_failing = [trait(g, "gte", 40) for g, _s in PORTAL[:_i]] + [trait(grade, "lt", 40)]
+    # (pass 3 group 2, round 2; gate `the climb is paid for`) her sitting down is the moment: Laura's suspicion +5 and
+    # the day brake ride this button, which reads the brake itself (a self-capped choice, the-meters.md M3-M5). Both
+    # "I'll fix it." exits paid the same +5 before, so the pay is unchanged; their split now reads suspicion AFTER the
+    # +5, so 45 became 50 (the same players are grounded). The exits keep no brake, so the screen always has a door.
+    portal_choices.append(go("Sit with her. She has your grades up.", node=f"portal_{grade}", mins=0,
+                             cond_=cond(wd(0, 1, 3, 4, 6), tod("18:00", "22:00"), flag("grades_seen", False),
+                                        flag("laura_portal_today", False), *_first_failing),
+                             eff=[add("laura_suspicion", 5)], flags=[fset("laura_portal_today")]))
+    portal_nodes.append(node(f"portal_{grade}", "The portal", [
+        P(f"Laura is at the kitchen table with her phone, and the college's portal open on it, and your {subj} grade in red. She turns the phone round so you can see it."),
+        D(L, "Do you want to explain this to me, sweetheart?"),
+        G(cond(flag("letter_home")), D(L, "After the letter. After the dean wrote to us.")),
+    ], [
+        go("\"I'll fix it.\"", loc="home_kitchen", mins=15, cond_=cond(ntrait(L, "warmth", "gte", 40), trait("laura_suspicion", "lt", 50)),
+           flags=[fset("grades_seen"), fset("failing_noticed")]),
+        go("\"I'll fix it.\"", node="portal_curfew", mins=5, cond_=cond(ntrait(L, "warmth", "lt", 40), trait("laura_suspicion", "gte", 50), logic="OR"),
+           flags=[fset("grades_seen"), fset("failing_noticed")]),
+    ]))
+portal_nodes.append(node("portal_curfew", "Grounded", [
+    D(L, "You'll fix it from this house, then. A week. No parties, no late shifts, no dates."),
+], [go("\"Fine.\"", loc="home_kitchen", mins=10, flags=[fset("curfew")], eff=CURFEW_EFF)]))
+
 out.append({
     "id": "hub_laura_kitchen", "name": "Laura",
     "description": "Laura's hub in the kitchen: breakfast, coffee, dinner, help her cook, dishes, a glass, study at the table (home_life). Warmth +2 a talk (once a day). Reads her clothes lines, her ladder's leaks, the start choice (at dinner), hygiene, made_up.",
@@ -435,6 +479,7 @@ out.append({
             G(cond(ntrait(L, "warmth", "gte", 70)), P("She touches your hair when she passes. She's on your side, whatever you've done.")),
         ], [
             *hub_choices,
+            *portal_choices,
             *LT_KITCHEN[1],
             go("Talk to her.", node="talk", mins=20, cond_=cond(flag("laura_talk_today", False)),
                flags=[fset("laura_talk_today")],
@@ -462,6 +507,7 @@ out.append({
             D(L, "Oh. Okay, sweetheart. It'll keep."),
         ], [go("Go.", loc="home_hall", mins=2)]),
         *hub_nodes,
+        *portal_nodes,
         *LT_KITCHEN[2],
     ]})
 
@@ -617,7 +663,7 @@ out.append({
     node("mark", "Eat your toast", [
         P("She laughs, once, without anything in it."),
         D(L, "Eat your toast, sweetheart."),
-    ], [go("Eat your toast.", loc=K, mins=10, eff=[add("laura_suspicion", -5), nadd(L, "warmth", 2)], flags=[fset("laura_04_breakfast_done")])])]})
+    ], [go("Eat your toast.", loc=K, mins=10, eff=[add("laura_suspicion", -5) | {"clamp": True}, nadd(L, "warmth", 2)], flags=[fset("laura_04_breakfast_done")])])]})
 
 cards = step_cards(L, {
     1: ("Laura has a dress for you upstairs. She said so on Tuesday.", "Tuesday evening: find Laura in the kitchen, then go up to her room"),
@@ -651,8 +697,9 @@ def _love_once_a_day(canvas):
                 free.pop("effects")
             new += [paid, free]
         nd["choices"] = new
+out.append(STUDY_KITCHEN)
 for _c in out:
-    if _c["id"] in ("hub_laura_kitchen", "hub_laura_living_room", "hub_laura_bedroom"):
+    if _c["id"] in ("hub_laura_kitchen", "hub_laura_living_room", "hub_laura_bedroom", "kitchen_study"):
         _love_once_a_day(_c)
 
 text = ("# =============================================================================\n"

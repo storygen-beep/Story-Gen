@@ -77,6 +77,7 @@ flagEffects = [
   { targetType = "player", flag = "rent_starts", op = "set" },
   { targetType = "player", flag = "laura_rule_ryan_first", op = "set" },
   { targetType = "player", flag = "ryan_hall_seen", op = "set" },
+  { targetType = "player", flag = "college_for_grades", op = "set" },   # (pass 3 C11) breakfast's one-of-three, mildest branch, shown on skip_hall (the-first-hour.md F1c)
 ]
 effects = [ { targetType = "player", trait = "ryan_step", op = "set", value = 1 }, { targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 10 } ]
 
@@ -96,6 +97,11 @@ content = "First day of college, huh. Look at you."
 [canvases.nodes.blocks.props]
 speaker = "npc"
 npcId   = "npc_ryan"
+
+# (pass 3 C11) the skip takes breakfast's mildest answer and shows it here; it sets college_for_grades
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "Last night Mom asked what you want from college. You told her good grades, because it's the answer she wanted."
 
 [canvases.nodes.exit_block]
 type = "choices"

@@ -62,6 +62,8 @@ id     = "ryan_kayla"
 app    = "messages"
 npc    = "npc_ryan"
 notify = "📱 Ryan"
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = -1, clamp = true }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "knows_about_kayla", operator = "is_true" },
@@ -275,6 +277,8 @@ app    = "messages"
 npc    = "npc_mark"
 notify = "📱 Mark"
 repeat_after_days = 6
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_mark", trait = "power", op = "add", value = 1, cap = 100 }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "rent_starts", operator = "is_true" },
@@ -454,10 +458,13 @@ app    = "messages"
 npc    = "npc_zoe"
 notify = "📱 Zoe"
 repeat_after_days = 6
+ignore_after_days = 1
+on_ignore = { flagEffects = [{ targetType = "player", flag = "zoe_bailed", op = "set" }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "zoe_met", operator = "is_true" },
   { type = "days_since_flag", subject = "player", flag_key = "zoe_met", operator = "gte", value = 2 },
+  { type = "flag", subject = "player", flag_key = "zoe_bailed", operator = "is_false" },
   { type = "weekday", weekdays = [4] },
   { type = "time_of_day", start_time = "18:00", end_time = "22:00" },
 ] }
@@ -534,6 +541,8 @@ id     = "hale_office_hours"
 app    = "messages"
 npc    = "npc_hale"
 notify = "📧 College email: Dr. Hale"
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = -1, clamp = true }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "hale_02_done", operator = "is_true" },
@@ -613,6 +622,8 @@ app    = "messages"
 npc    = "npc_hale"
 notify = "📧 College email: Dr. Hale"
 repeat_after_days = 6
+ignore_after_days = 1
+on_ignore = { effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = -1, clamp = true }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "hale_04_done", operator = "is_true" },
@@ -752,6 +763,7 @@ on_ignore = { effects = [], flagEffects = [{ targetType = "player", flag = "jake
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "jake_date_booked", operator = "is_true" },
   { type = "hours_since_flag", subject = "player", flag_key = "jake_date_booked", operator = "gte", value = 72 },
+  { type = "time_of_day", start_time = "10:00", end_time = "22:00" },
 ] }
 [[phone.conversations.blocks]]
 type = "message"
@@ -793,6 +805,7 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "jake_number", operator = "is_true" },
   { type = "days_since_flag", subject = "player", flag_key = "jake_number", operator = "gte", value = 1 },
   { type = "flag", subject = "player", flag_key = "jake_date_booked", operator = "is_false" },
+  { type = "flag", subject = "player", flag_key = "jake_stood_up", operator = "is_false" },
   { type = "weekday", weekdays = [0, 1] },
   { type = "time_of_day", start_time = "18:00", end_time = "22:00" },
 ] }

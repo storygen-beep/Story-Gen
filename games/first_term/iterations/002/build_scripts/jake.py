@@ -209,8 +209,9 @@ out.append({
             # DECISIONS 124: grinding in his lap is private contact (Bold); his hand or hers under the street lamp is sex strangers can see (Hungry).
             # jake_step gte 3, not eq 3: his step 4 takes the first Bold Saturday, so the car stays open after it.
             go("Kiss him.", node="car_low", mins=2, cond_=cond(BOLD, trait("corruption", "lt", 60), trait("jake_step", "gte", 3))),
-            go("\"Your hand. Now.\"", node="car_his", mins=2, cond_=cond(trait("corruption", "gte", 60), trait("jake_step", "gte", 3))),
-            go("\"Lean back.\"", node="car_hers", mins=2, cond_=cond(trait("corruption", "gte", 60), trait("jake_step", "gte", 3))),
+            # pass 3 E95: the two sex acts in the car cost her 10 energy and lower hygiene (board.needs)
+            go("\"Your hand. Now.\"", node="car_his", mins=2, cond_=cond(trait("corruption", "gte", 60), trait("jake_step", "gte", 3)), costs=[{"trait": "energy", "value": 10}], eff=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}]),
+            go("\"Lean back.\"", node="car_hers", mins=2, cond_=cond(trait("corruption", "gte", 60), trait("jake_step", "gte", 3)), costs=[{"trait": "energy", "value": 10}], eff=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}]),
             # Saturday only: Laura waits up on Saturday nights (her rows), which the near-catch reads
             go("\"Come up.\"", node="sneak", mins=5, cond_=cond(trait("jake_step", "gte", 4), wd(5)),
                eff=[{"targetType": "player", "trait": "jake_catch_roll", "op": "set", "value": {"type": "random", "min": 1, "max": 8}}]),
@@ -218,7 +219,7 @@ out.append({
         ]),
         node("car_low", "The car", [*CAR_LOW_BLOCKS,
             VID("a couple making out in a parked car at night, windows fogging", "couple making out parked car night", "car makeout outside her house", pool_dir="sex/jake_car_low_t4")],
-            [go("\"Goodnight, gorgeous.\"", loc="home_hall", mins=20, eff=CAR_PAY(59), flags=[funset("jake_date_booked")])]),
+            [go("\"Goodnight, gorgeous.\"", loc="home_hall", mins=20, eff=CAR_PAY(39), flags=[funset("jake_date_booked")])]),   # car_low opens at 20 (G8)
         node("car_his", "His hand", [*top_or_dress(beat("jake_date_end", "car_his")),
             VID("a guy fingering his girlfriend in a parked car under a street lamp", "fingering in parked car", "car fingering orgasm street lamp", pool_dir="sex/jake_car_his_t5")],
             [go("\"Goodnight, gorgeous.\"", loc="home_hall", mins=20, eff=CAR_PAY(79), flags=[funset("jake_date_booked")])]),
@@ -293,8 +294,11 @@ out.append({
             *JAKE_STATE,
         ], [
             go("Train with him.", node="spot", mins=30, cond_=cond(flag(GYM_CAP, False)), flags=[fset(GYM_CAP)]),
+            # his hands on her with the team whistling: the touch pays Corruption (its gate), being seen pays Exhibitionism,
+            # both capped at the top of the stage it opens at (pass 3 A48, G8)
             go("Let him fix your squat.", node="hips", mins=30, cond_=cond(flag(GYM_CAP, False), CURIOUS), flags=[fset(GYM_CAP)],
-               eff=[{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 59}]),
+               eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 39},
+                    {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 19}]),   # no Exhibitionism gate: stage 1 (G8)
             go("Pull him into the locker room.", node="lockers", mins=15, cond_=cond(flag(GYM_CAP, False), BOLD, trait("jake_step", "gte", 2)),
                flags=[fset(GYM_CAP)], eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 59}]),
             go("Go.", loc="campus"),

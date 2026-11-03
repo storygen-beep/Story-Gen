@@ -61,8 +61,17 @@ TOML_HOSTS = ("canteen_eat", "canteen_listen", "library_study", "party_house_soa
               "door_grade_psych", "door_grade_art", "door_grade_business", "door_grade_bio", "door_dean_notice")
 
 
+# (pass 3 D52) the meter each walk-in's answers pay (its description: "hers on ..."); its odds band on it. Nadia's,
+# the office doors' and Zoe's park ones (no meter, they route into her park hub) stay flat.
+BAND_ON = {"walkin_cafe_gary": "corruption", "walkin_gym_team": "exhibitionism", "walkin_canteen_zoe": "corruption",
+           "walkin_canteen_jake": "exhibitionism", "walkin_tub_zoe": "corruption", "walkin_quad_team": "exhibitionism",
+           "walkin_quad_zoe": "corruption", "walkin_hall_hale": "exhibitionism", "walkin_couch_zoe": "corruption",
+           "walkin_bedroom_zoe": "corruption", "walkin_house_vance": "exhibitionism"}
+
+
 def rule(host, target, chance, *items):
-    RULES.setdefault(host, []).append({"target_canvas_id": target, "chance": chance, "conditions": cond(*items)})
+    for odds, band in odds_bands(BAND_ON.get(target), chance):
+        RULES.setdefault(host, []).append({"target_canvas_id": target, "chance": odds, "conditions": cond(*items, *band)})
 
 
 def walkin(cid, name, loc, desc, who, moment, moment_label, answer, answers, raise_=(), records=(), extra=(),
@@ -172,7 +181,10 @@ walkin("walkin_gym_team", "The team comes in", "campus_gym",
        D(J, "Easy, boys. Eyes on your own reps.")),
      G(cond(JN), P("He doesn't take his own eyes off you while he says it."))],
     [go("Grab your things and go.", node="t_go", mins=2),
-     go("Finish your set.", node="t_set", mins=15, cond_=cond(*SPORTS_ONLY, *E_DAR), eff=[pay("exhibitionism", 39)])],
+     # the set's energy is a price on the button, which the engine refuses (greyed, "Requires 10 Energy") when she
+     # hasn't got it; an unclamped -10 on the way out took her below 0 (engine.md §21, §27; pass 3 J73)
+     go("Finish your set.", node="t_set", mins=15, cond_=cond(*SPORTS_ONLY, *E_DAR), eff=[pay("exhibitionism", 39)],
+        costs=[{"trait": "energy", "value": 10}])],
     records=["team_saw_gym"], extra=[
         res("t_go", "Go", [GC(cond(*SPORTS_ONLY), P("You rack the bar, grab your hoodie off the floor and pull it on over your sports bra, and walk out through the middle of them with your face burning.")),
                            GC(cond(*ANY), P("You rack the bar and grab your bag and walk out through the middle of them, eyes down.")),
@@ -184,7 +196,7 @@ walkin("walkin_gym_team", "The team comes in", "campus_gym",
                                          G(cond(here(J, "campus_gym", False)), WHO("Ten. Jesus. Ten.")),
                                          P("You rack the bar and sit up slow, and take your time wiping down the bench."),
                                          VID("a girl in a sports bra on a weight bench, a sports team standing round watching her", "girl in sports bra lifting team watching gym", "guys staring at girl working out gym bench", pool_dir="sex/walkin_gym_team_t4")],
-            "Go.", "campus", 5, eff=[add("energy", -10)], flags=[fset("worked_out")])],
+            "Go.", "campus", 5, flags=[fset("worked_out")])],
     when=[wd(1, 3), tod("15:00", "15:15")])
 rule("gym_workout", "walkin_gym_team", 0.25, wd(1, 3), tod("15:00", "15:15"))
 

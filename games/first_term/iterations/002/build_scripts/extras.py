@@ -86,14 +86,18 @@ cards.append({"npc_id": "npc_vance", "priority": 5, "heading": "Next door",   # 
 for npc, met, text in mute:
     cards.append({"npc_id": npc, "priority": 5, "text": text, "when": [{"flag": met, "op": "is_true"}]})
 
-# The small rungs inside the first stage (heat proposal C1-C6, DECISIONS 147): one goal line per rung on its card
+# The small rungs inside the first stage (heat proposal C1-C6, DECISIONS 147): one goal line per rung on its card.
+# Each line names the act ONE RUNG BELOW the value it climbs to, the one that pays her there, never the button the
+# value itself opens (engine.md §23 "Check the label is not circular"; pass 3 J37): the stacks' shelf (Corruption 0)
+# to 5, one aisle closer (5) to 10, channel 5's sound (10) to 15; the shower walk-in's towel (Exhibitionism 0) to 5,
+# the unlocked shower door (5) to 10, the open curtain (10) to 15. Each of these pays +1 there, cap 19.
 SMALL_RUNGS = {
-    ("corruption", 0): [(5, "Corruption 5: move one aisle closer in the library's back stacks"),
-                        (10, "Corruption 10: turn the sound up on channel 5"),
-                        (15, "Corruption 15: stay at Ryan's door until his light goes off")],
-    ("exhibitionism", 0): [(5, "Exhibitionism 5: leave the shower door unlocked"),
-                           (10, "Exhibitionism 10: leave the changing-room curtain open at the clothes shop"),
-                           (15, "Exhibitionism 15: the sheer blouse on the rack at the clothes shop")],
+    ("corruption", 0): [(5, "Corruption 5: stay behind the shelf in the library's back stacks"),
+                        (10, "Corruption 10: move one aisle closer in the library's back stacks"),
+                        (15, "Corruption 15: turn the sound up on channel 5")],
+    ("exhibitionism", 0): [(5, "Exhibitionism 5: when someone walks in on your shower, don't grab the towel straight away"),
+                           (10, "Exhibitionism 10: leave the shower door unlocked"),
+                           (15, "Exhibitionism 15: leave the changing-room curtain open when you try clothes on")],   # pass 3 G15 (round 2): the shop pays from Exhibitionism 10, not from the stage floor, so the line names the act, not the place
 }
 
 # ── her two stages: what the next rung opens (the-voice.md R2; DECISIONS: stages at 20/40/60) ──
@@ -108,21 +112,33 @@ for trait_k, bands in [
                     (60, 80, "Hungry. Shameless is the next release: a crowd, free use.",
                      "Shameless (Corruption 80) opens in the next release")]),
     ("exhibitionism", [(0, 20, "Covered. Daring opens at 20: no bra, a short skirt out of the house.",
-                        "Reach Daring (Exhibitionism 20): the lecture hall, the park"),
+                        # pass 3 G15: only places that pay her Exhibitionism while she is Covered (park_run, the
+                        # street's looks, the shower walk-ins); the lecture hall pays nothing below Daring
+                        "Reach Daring (Exhibitionism 20): the park, the street, your shower"),   # round 2: "at home" named the whole house, which pays nothing at 0
                        (20, 40, "Daring. Showing opens at 40: no panties out, naked for someone you know.",
-                        "Reach Showing (Exhibitionism 40): the campus gym, the women's toilet, the garden, the hall, the living room, the lecture hall, the park"),
+                        # pass 3 G15: the garden pays only from Showing (garden_sun), so it is not a way through Daring
+                        "Reach Showing (Exhibitionism 40): the campus gym, the women's toilet, the hall, the living room, the lecture hall, the park"),
                        (40, 60, "Showing. Watched opens at 60: a room watching, a stranger, your feed.",
-                        "Reach Watched (Exhibitionism 60): the lecture hall, the campus gym, the garden, the park, the street"),
+                        # pass 3 G15: what pays while she is Showing (garden_sun, park_run, the wind and the street, the
+                        # towel drops in the hall and living room); nothing repeatable pays it in the lecture hall or gym
+                        "Reach Watched (Exhibitionism 60): the garden, the street, the hall, the living room"),
                        (60, 80, "Watched. Posing for the class and a crowd come in the next release.",
                         "On Display (Exhibitionism 80) opens in the next release")])]:
     for lo, hi, text, label in bands:
-        cards.append({"group": f"tier_{trait_k}", "priority": 5, "text": text,
-                      "when": [{"flag": "opening_done", "op": "is_true"},
-                               {"type": "trait", "subject": "player", "trait": trait_k, "op": "gte", "value": lo},
-                               {"type": "trait", "subject": "player", "trait": trait_k, "op": "lt", "value": hi}],
-                      "goals": [*[{"type": "trait", "subject": "player", "trait": trait_k, "op": "gte", "value": v, "label": l}
-                                  for v, l in SMALL_RUNGS.get((trait_k, lo), [])],
-                                {"type": "trait", "subject": "player", "trait": trait_k, "op": "gte", "value": hi, "label": label}]})
+        card = {"group": f"tier_{trait_k}", "priority": 5, "text": text,
+                "when": [{"flag": "opening_done", "op": "is_true"},
+                         {"type": "trait", "subject": "player", "trait": trait_k, "op": "gte", "value": lo},
+                         {"type": "trait", "subject": "player", "trait": trait_k, "op": "lt", "value": hi}],
+                "goals": [*[{"type": "trait", "subject": "player", "trait": trait_k, "op": "gte", "value": v, "label": l}
+                            for v, l in SMALL_RUNGS.get((trait_k, lo), [])],
+                          {"type": "trait", "subject": "player", "trait": trait_k, "op": "gte", "value": hi, "label": label}]}
+        if hi == 80:
+            # The climb stops at 79 in this release (DECISIONS 142), so a goal at 80 can never flip: the top card is
+            # terminal and says where the stage ends, with no live goal (the-voice.md "Never dangle a live goal bullet
+            # that cannot flip in this build"; engine.md §23; pass 3 H48)
+            del card["goals"]
+            card.update(terminal=True, terminal_text=label)
+        cards.append(card)
 
 # THE WALK-INS OUTSIDE THE HOUSE (heat proposal B9-B20, DECISIONS 147 chunk 3): walkins_out.py holds the canvases and
 # the router rules. Here: the rules on this file's three hosts, the check that 3_activities.toml's hosts carry the same

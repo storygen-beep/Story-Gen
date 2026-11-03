@@ -78,9 +78,9 @@ out.append(solo("room_sleep", "Go to bed",
             G(cond(flag("heavy_night", False)), P("Morning. You stretch until your toes crack and lie there a minute, warm, listening to the house wake up around you.")),
         ], [go("Get up.", loc="home_ella_room", cond_=cond(flag("heavy_night", False))),
             go("Get up, slowly.", loc="home_ella_room", cond_=cond(flag("heavy_night")),
-               eff=[add("energy", -30)], flags=[funset("heavy_night")])]),
+               eff=[add("energy", -30) | {"clamp": True}], flags=[funset("heavy_night")])]),   # clamp: energy floors at 0
     ], sched=S(ALL, "19:00", "07:00"), prio=5,
-    metadata={"show_when_blocked": True, "cooldown_message": "Too early for bed."}))
+    metadata={"show_when_blocked": True, "cooldown_message": "Every day, 7 PM-7 AM"}))   # pass 3 H31: the hours, a bare phrase (C5)
 
 out.append(solo("room_nap", "Take a nap", "A daytime nap: two hours, energy +30. Once a day.", "home_ella_room", [
     node("nap", "A nap", [
@@ -285,8 +285,8 @@ out.append(solo("living_couch", "Lie on the couch",
             G(cond(*COVERED), P("Nobody looks twice at a girl on a couch in her clothes.")),
         ], [*[c for who, stay in zip(PASSERS, ("stay_mark", "stay_ryan")) for c in brake(
                 go("Stay a while.", node=stay, mins=5, flags=[fset("couch_seen")],   # reader a3 #15 (DECISIONS 131): a screen, not a jump back
-                   cond_=cond(DARING, *UNDIES, *who),
-                   eff=[{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 59}]),
+                   cond_=cond(DARING, *UNDIES, *who),   # a Daring act stops at Daring's top (pass 3 G8)
+                   eff=[{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 39}]),
                 "couch_seen")],
             go("Get up.", loc="home_hall", mins=10)]),
         # reader a3 #15 (DECISIONS 131): he answers and holds back. "Your mother" only while Laura is in the house.
@@ -376,7 +376,7 @@ out.append(solo("living_tv", "Watch TV",
     # Five sessions a day (LO, 2026-10-30, DECISIONS 91); the row greys out after. The grey row also shows
     # when the room is busy or it's past 02:00 (v2.py renderSoloActivities), so its text must be true then too.
     max_day=5))
-out[-1]["trigger"].update({"show_when_blocked": True, "cooldown_message": "Not now."})   # trigger keys, not metadata (template_import.py:2548)
+out[-1]["trigger"].update({"show_when_blocked": True, "cooldown_message": "Every day, 7 AM-2 AM, five times a day"})   # pass 3 H31: true on every greyed visit (busy room, cap, hours)   # trigger keys, not metadata (template_import.py:2548)
 
 out += brake_canvas(solo("living_film", "Put a film on",
     "A film alone: 120 min, energy +5 (home_life.md:70).",
@@ -455,12 +455,13 @@ out.append({"id": "ryan_door_ajar", "name": "His door's open a crack",
         node("watch_low", "Keep watching", [P(beat("ryan_door_ajar", "watch_low")),
             VID("a young man on his bed coming over his stomach, his phone on his knee, seen through a door left ajar", "guy cumming to porn on phone seen through door", "voyeur watching man finish phone porn door crack", pool_dir="sex/ryan_door_watch_low_t5")],
             [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_ryan_alone"), fset("ryan_door_seen")]),
-             # C3 (DECISIONS 147): Corruption 15; the button pays +1 and its screen's exit pays +1: +2 a night, cap 19
-             go("Stay until his light goes off.", node="light_off", mins=10, swl=True, cond_=cond(trait("corruption", "gte", 15)), eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_ryan_alone"), fset("ryan_door_seen")])]),
+             # C3 (DECISIONS 147): Corruption 15; its screen's exit pays +1, cap 19, and the button pays nothing: +1 a
+             # night whichever way she goes (the-arc.md "+1 for an everyday act"; pass 3 G75)
+             go("Stay until his light goes off.", node="light_off", mins=10, swl=True, cond_=cond(trait("corruption", "gte", 15)), flags=[fset("saw_ryan_alone"), fset("ryan_door_seen")])]),
         node("watch", "Keep watching", [P(RYAN_WATCH),
             VID("a young man on his bed coming over his stomach, seen through a door left ajar", "guy cumming jerking off seen through door", "voyeur watching man finish door crack", pool_dir="sex/ryan_door_watch_t5")],
             [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_ryan_alone"), fset("ryan_door_seen")]),
-             go("Stay until his light goes off.", node="light_off", mins=10, swl=True, cond_=cond(trait("corruption", "gte", 15)), eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_ryan_alone"), fset("ryan_door_seen")])]),
+             go("Stay until his light goes off.", node="light_off", mins=10, swl=True, cond_=cond(trait("corruption", "gte", 15)), flags=[fset("saw_ryan_alone"), fset("ryan_door_seen")])]),
         # C3: after he comes he cleans up and lies there; she stays in the dark of the landing until his lamp goes off
         node("light_off", "Until his light goes off", [
             P("You stay at the crack. Ryan lies there with his chest heaving and his cock going soft on his stomach, in the mess he made. He wipes himself off with a sock and drops it on the floor."),
@@ -753,14 +754,27 @@ out.append(solo("front_step", "Sit on the step", "Watch the street. Who passes r
 # room or bathroom, one a day. Each shows only when its person's row puts them there; with nobody
 # there it is the room's quiet line. One brake flag across all of them, read 24 hours.
 # ═════════════════════════════════════════════════════════════════════════════
-def event(cid, name, loc, sched, conds, blocks, plain, raise_eff, curious=None, bold=None, ph_name=None):
-    exits = [go(plain, loc=loc, mins=2, eff=raise_eff, flags=[fset("home_event")])]
+def event(cid, name, loc, sched, conds, blocks, plain, raise_eff, curious=None, bold=None, ph_name=None,
+          record=(), pay_her=False, entry_eff=()):
+    """entry_eff: his raise for what happened, paid on the way in: the event has no button into it, so it rides the
+    trigger's `pre_substitution_effects`, which the engine runs unconditionally at the top of node 0
+    (template_import.py:899-906, :2618-2622, :9404-9407; v2.py:16364-16397). His Want then pays for the moment and
+    never for her no (the-heat-ladder.md H5; the-arc.md "the event's raise goes to him"). That hook takes trait
+    effects only, so `record` (his flag for what happened) rides every exit alike: it records the moment, which
+    happened whichever button she clicks. raise_eff rides every exit too (Laura's robe, a warmth beat on her side).
+    pay_her: her go-further button also pays her Corruption +1, capped at the top of the stage it opens at
+    (39 Curious, 59 Bold); the way out pays her nothing (pass 3 G12)."""
+    rec = [fset(f) for f in record]
+    exits = [go(plain, loc=loc, mins=2, eff=raise_eff, flags=[fset("home_event")] + rec)]
     nodes = []
     for kind, spec, gate in (("curious", curious, [CURIOUS]), ("bold", bold, [BOLD])):
         if not spec:
             continue
         label, ref, extra = spec
-        exits.append(go(label, node=f"ev_{kind}", cond_=cond(*gate, *extra), eff=raise_eff, flags=[fset("home_event")]))
+        her = ([{"targetType": "player", "trait": "corruption", "op": "add", "value": 1,
+                 "cap": 59 if BOLD in gate + list(extra) else 39}] if pay_her else [])
+        exits.append(go(label, node=f"ev_{kind}", cond_=cond(*gate, *extra), eff=list(raise_eff) + her or None,
+                        flags=[fset("home_event")] + rec))
         nodes.append(node(f"ev_{kind}", label.rstrip("."), [placeholder(ref, f"{ph_name or name}: {kind}")], [go("Go on.", loc=loc, mins=2)]))
     c = {"id": cid, "name": name, "description": f"Random event at home (home_hall.md): {name}. 1 in 4, one a day.",
          "trigger": {"location": loc, "is_repeatable": True, "priority": 4, "is_active": True,
@@ -768,6 +782,8 @@ def event(cid, name, loc, sched, conds, blocks, plain, raise_eff, curious=None, 
          "nodes": [node("event", name, blocks, exits)] + nodes}
     if sched:
         c["trigger"]["schedules"] = sched
+    if entry_eff:
+        c["trigger"]["pre_substitution_effects"] = list(entry_eff)
     return brake_canvas(c, "home_event")
 
 
@@ -786,7 +802,10 @@ out += event("home_event_ryan_towel", "Ryan out of the shower", "home_hall", S([
                  P("His eyes drop to your tits and jump back to your face. He goes red. He turns side-on, one fist tight on the front of his towel.")),
               D(R, "Sorry."), ME("Sorry."),
               T("He's out of that bathroom at this time every weekday.")],   # reader a3 older: a hook
-             "Step round him.", [],   # C1 (LO 2026-11-03): her no never raises his Want
+             # pass 3 G12: he sees her, so the moment raises his Want +2 (as the walk-ins do) on the way in, and records it
+             # on every exit alike, so it is never a raise for her answer (C1, LO 2026-11-03; H5: a no adds 0); her bolder
+             # buttons pay her
+             "Step round him.", [], record=["ryan_saw_her_towel"], pay_her=True, entry_eff=[npc_add(R, "want", 2)],
              curious=("Walk past slowly.", "sheets/places/home_hall.md:44", [BOLD]),   # her tits brush his chest: a touch, Bold (DECISIONS 124)
              bold=("Let him look.", "sheets/places/home_hall.md:44", [trait("ryan_step", "gte", 3)]))
 out += event("home_event_laura_robe", "Laura's robe", "home_kitchen", S([0, 1, 2, 3, 4], "06:30", "08:00"),
@@ -814,17 +833,24 @@ out += event("home_event_mark_reach", "Mark reaching past", "home_kitchen", S([6
               # reader a3 #12 (DECISIONS 131): under Bold (where "Lean back into him." can't show) he pulls away himself
               G(cond(trait("corruption", "lt", 40)), P("Then he steps back fast, his hips turned away from you, the mug held low in front of his jeans."),
                 D(M, "Mind yourself, @player."), T("Next time he reaches past you, you'll know why."))],   # reader a3 older: a hook
-             "Duck out of his way.", [],   # C1 (LO 2026-11-03)
+             # pass 3 G12: his chest at her back is the moment: his Want +2 on the way in and a record on every exit alike
+             # (C1 holds: nothing rides on her answer; H5: a no adds 0); "Lean back into him." pays her
+             "Duck out of his way.", [], record=["mark_brushed_reach"], pay_her=True, entry_eff=[npc_add(M, "want", 2)],
              curious=("Lean back into him.", "sheets/places/home_hall.md:46", [BOLD]))   # a touch: Bold (DECISIONS 124)
 out += event("home_event_mark_asleep", "Mark asleep, TV on", "home_living_room", S([0, 1, 2, 3, 4, 5], "00:00", "02:00"),
              [here(M, "home_living_room")],
              [P("Mark is slumped on the couch with the TV still on, eyes half shut, a beer going warm in his hand, his head tipped back.")],
-             "Turn the TV off and leave him.", [],   # C1 (LO 2026-11-03)
+             # pass 3 G12 (round 2): she stands over him with the TV light on her, so the moment raises his Want +1 on the
+             # way in, recorded on every exit alike (A4d: an accident pays him); her going further pays her
+             "Turn the TV off and leave him.", [], record=["mark_asleep_seen"], pay_her=True,   # C1 (LO 2026-11-03)
+             entry_eff=[npc_add(M, "want", 1)],
              curious=("Take the beer out of his hand.", "sheets/places/home_hall.md:47", []), ph_name="Mark dozing, TV on")
 out += event("home_event_ryan_door", "Ryan's door, a hand's width", "home_hall", S(ALL, "22:00", "00:00"),
              [here(R, "home_ryan_room"), trait("ryan_step", "gte", 7)],
              [P("Ryan's door is open a hand's width. Light under it, music low.")],
-             "Go past.", [],   # C1 (LO 2026-11-03)
+             # C1 (LO 2026-11-03); pass 3 G12 (round 2): the door left open for her is the moment, so his Want +1 on the
+             # way in and a record on every exit alike (A4d: an accident pays him); her look pays her
+             "Go past.", [], record=["ryan_door_seen"], pay_her=True, entry_eff=[npc_add(R, "want", 1)],
              curious=("Stop and look in.", "sheets/places/home_hall.md:48", []))
 # S6 (LO 2026-11-03, reverses DECISIONS 59's quiet events): "no we dont want nothing happens random events
 # anywhere in the game." The four "Nothing happens." events at home are gone.

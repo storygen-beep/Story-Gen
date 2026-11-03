@@ -142,6 +142,8 @@ out.append({
             P("His office door is open an inch. He's at his desk with your paper in front of him and the wedding photo beside it, face-up: Dr. Hale and a woman with short dark hair, laughing on a beach. You sit on the corner of his desk instead of the chair."),
             G(cond(SKIRT), P("Your skirt rides up. He reads the same line of your paper three times.")),
             D(H, "Your argument on page two is good. Page three falls apart."),
+            # the-phone.md P10 (pass 3 group 2, round 2): the scene her email reply booked reads the booking
+            G(cond(flag("hale_office_booked")), D(H, "You said you'd be here. Good. Most of them don't come.")),
         ], [go("Lean over to see.", node="offer", mins=10)]),
         node("offer", "Face-down", [
             P("He reaches over without looking and turns the photo face-down."),
@@ -223,7 +225,7 @@ out.append({
             P("You grab your bag and you're out of the door before he can stand up. In the corridor a woman with short dark hair is coming the other way with car keys in her hand. The woman in the photo."),
             P("She smiles at you, polite, the way you smile at a student."),
             T("His wife. She has no idea."),
-        ], [go("Keep walking.", loc="campus", mins=5, retry=7, eff=[add("grade_psych", -2)], flags=[fset("claire_met")])]),
+        ], [go("Keep walking.", loc="campus", mins=5, retry=7, eff=[add("grade_psych", -2) | {"clamp": True}], flags=[fset("claire_met")])]),
     ]})
 
 # ── his hot repeatable, the Thursday session (hale_thursday_session.md, signed 2026-11-01): reworks hale_thursdays.
@@ -232,7 +234,10 @@ out.append({
 LOW_CASES = [[trait("corruption", "lt", 60)]]
 HIGH = [trait("corruption", "gte", 60)]
 ROLL = lambda op, v: trait("hale_claire_roll", op, v)
-SESSION_PAY = lambda c: [add("grade_psych", 2), CAP("corruption", 1, c), CAP("exhibitionism", 1, c)]
+# each meter stops at the top of its own stage: the high session needs Corruption 60 but only Exhibitionism 40
+# (the trigger), so its Exhibitionism stops at 59 (pass 3 G8)
+SEX_HYGIENE = {"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}   # pass 3 E95
+SESSION_PAY = lambda c, e=None: [add("grade_psych", 2), CAP("corruption", 1, c), CAP("exhibitionism", 1, e or c)]
 out.append({
     "id": "hale_thursdays", "name": "Thursday, half past six",
     # reader a3, seen by the readers (DECISIONS 131): the stages match the trigger (Corruption 40, Exhibitionism 40)
@@ -245,13 +250,16 @@ out.append({
         node("door", "Twenty minutes", [
             P("His office door is unlocked. He locks it behind you without a word. The photo is already face-down."),
             D(H, "Twenty minutes, @player."),
-        ], [go("Let him.", node="roll", mins=1, eff=[{"targetType": "player", "trait": "hale_claire_roll", "op": "set", "value": {"type": "random", "min": 1, "max": 4}}]),
-            go("\"This isn't coaching.\"", node="isnt", mins=2, eff=[add("grade_psych", -1)]),
-            go("Run.", node="run", mins=1, eff=[add("grade_psych", -2)])]),
+            G(cond(flag("hale_thursday_booked")), D(H, "Half past six, you wrote. You're on time.")),   # P10 (round 2): the booking read
+        # pass 3 E95: the session costs 10 energy on the way in (greyed "Requires 10 Energy" when she is spent; the roll
+        # screen has no way out, so the price can't sit behind it), and his hands lower her hygiene on the act itself
+        ], [go("Let him.", node="roll", mins=1, costs=[{"trait": "energy", "value": 10}], eff=[{"targetType": "player", "trait": "hale_claire_roll", "op": "set", "value": {"type": "random", "min": 1, "max": 4}}]),
+            go("\"This isn't coaching.\"", node="isnt", mins=2, eff=[add("grade_psych", -1) | {"clamp": True}]),
+            go("Run.", node="run", mins=1, eff=[add("grade_psych", -2) | {"clamp": True}])]),   # clamp: the grade floors at 0
         node("roll", "His hands", [P("He comes round the desk.")],
             [go("Go on.", node="claire_car", mins=1, cond_=cond(ROLL("eq", 1)))]
-            + [go("Go on.", node="touch_low", mins=1, cond_=cond(ROLL("gte", 2), *c)) for c in LOW_CASES]
-            + [go("Go on.", node="touch_high", mins=1, cond_=cond(ROLL("gte", 2), *HIGH))]),
+            + [go("Go on.", node="touch_low", mins=1, cond_=cond(ROLL("gte", 2), *c), eff=[SEX_HYGIENE]) for c in LOW_CASES]
+            + [go("Go on.", node="touch_high", mins=1, cond_=cond(ROLL("gte", 2), *HIGH), eff=[SEX_HYGIENE])]),
         node("touch_low", "Tell me what you feel", [
             # GC, not G: the three bands are exclusive (no dress / one dress / the other), and the cut speech
             # (canv.voice_canvas) puts each pool entry in a group; G's extra pool would pass the importer's depth 4.
@@ -261,7 +269,7 @@ out.append({
             [go("\"Same time next week.\"", node="end", mins=15, eff=SESSION_PAY(59))]),
         node("touch_high", "Describe it", [POOL(P(beat("hale_thursday_session", "B a")), P(beat("hale_thursday_session", "B b")), P(beat("hale_thursday_session", "B c")), pid="hale_touch_high", bag=True),
             VID("a topless student touching herself in her professor's office while he watches and takes notes", "student masturbates professor watches notes", "girl touches herself teacher watching office", pool_dir="sex/hale_thursday_high_t5")],
-            [go("\"Same time next week.\"", node="end", mins=15, eff=SESSION_PAY(79))]),
+            [go("\"Same time next week.\"", node="end", mins=15, eff=SESSION_PAY(79, 59))]),
         node("claire_car", "She's early", [
             P("His phone buzzes on the desk before he's touched you. He reads it and his face goes flat."),
             D(H, "She's early. She's in the car park."),

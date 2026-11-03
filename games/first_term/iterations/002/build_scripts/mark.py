@@ -476,9 +476,9 @@ def mark_towel(cid, loc):
              GC(cond(TOWEL_ON), P("He looks at the towel like it belongs to him, and what's under it too."), D(M, "Come here."))],
         ],
         slip=MARK_TOWEL_SLIP, slip_lead=MARK_TOWEL_LEAD,
-        slip_media=VID("a young woman letting her bath towel slip off her breasts in front of an older man on a couch", "girl drops towel in front of older man", "towel slip flash stepdad", pool_dir="sex/towel_mark_slip_t4"),
+        slip_media=VID("a young woman letting her bath towel slip off her breasts in front of an older man on a couch", "girl drops towel in front of older man", "towel slip flash stepdad", pool_dir=f"sex/towel_mark_slip_{cid.replace('hub_mark_', '')}_t4"),
         slip_gate=(DARING, flag("mark_saw_her")), drop=MARK_TOWEL_DROP, drop_gate=[SHOWING, flag("mark_saw_her")],   # his chosen acts follow his accident (H2, DECISIONS 124)
-        drop_media=VID("a young woman standing naked with her bath towel on the floor, an older man looking at her", "girl drops towel naked older man", "towel drop naked stepdad", pool_dir="sex/towel_mark_drop_t4"),
+        drop_media=VID("a young woman standing naked with her bath towel on the floor, an older man looking at her", "girl drops towel naked older man", "towel drop naked stepdad", pool_dir=f"sex/towel_mark_drop_{cid.replace('hub_mark_', '')}_t4"),
         caught_by=L, caught=TOWEL_CAUGHT,
         # reader a3 #5-6 (DECISIONS 131, call A): his order's no, in his top band; his Want +1 once a day
         no=("Hitch the towel up.", MARK_TOWEL_NO, "home_ella_room", "Go up to your room."))

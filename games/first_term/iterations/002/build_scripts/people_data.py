@@ -28,7 +28,10 @@ PEOPLE = [
     dict(id="npc_laura", name="Laura", role="mom", age=41,
          relationship="Your mom, 41. Wants a happy house, and wants you closer than she says.",
          tags=["Warm until she isn't", "Her good girl, close", "Dresses she doesn't wear", "White wine"],
-         core={"want": 0, "warmth": 50}, show=["warmth"],
+         # (pass 3 E4 / I56) no `want`: her sheet says "nothing of hers reads Want", nothing raises it, and the cast
+         # page's show_traits = ["want"] printed "Lust 0 · Hides it" all release. A trait she doesn't keep never
+         # shows (engine.md §34). Her lock is Love (warmth), which every step reads.
+         core={"warmth": 50}, show=["warmth"],
          schedules=[
              row("home_hall", ALL, "23:00", "02:00", "waiting on the dark stairs", when=MET("came_home_late")),
              row("home_kitchen", WK, "06:30", "08:00", "making breakfast before work"),
@@ -253,3 +256,17 @@ def _ledger_schedules(pid):
 
 for _p in PEOPLE:
     _p["schedules"] = _ledger_schedules(_p["id"])
+
+# Kayla (LO, 2026-11-03, "build now", pass 3 G37): she had walk-ins and lines but no row, so the truth
+# check and the Schedules page never knew where she was. These two rows are read off her scenes, not
+# invented: walkin_things_kayla has her let herself into Ryan's room Fri 17:45-18:00 with an overnight
+# bag; Ryan's Friday 18:00-22:00 row is "Kayla's night", walkin_shower_kayla (Fri 18:00-22:00) has her
+# cross the hall from his room, and ryan_05_thin_walls (Fri 22:00-00:00) hears her through the wall;
+# she is in the hall at Saturday dawn (ryan_05 `hall`) and still in the house for ryan_06 (Sat
+# 08:00-10:00, "Babe?"). Split at midnight because a day-specific overnight row loses its weekday at
+# 00:00. Gated on kayla_met like every other non-household row. The ledger (v2_state.json
+# board.characters npc_kayla) has no schedule yet; it should carry the same two rows.
+next(p for p in PEOPLE if p["id"] == "npc_kayla")["schedules"] = [
+    row("home_ryan_room", F, "17:45", "00:00", "in Ryan's room, Friday night", when=MET("kayla_met")),
+    row("home_ryan_room", SA, "00:00", "10:00", "in Ryan's bed in his shirt, Saturday morning", when=MET("kayla_met")),
+]

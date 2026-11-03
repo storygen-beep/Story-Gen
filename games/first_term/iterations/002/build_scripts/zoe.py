@@ -80,8 +80,10 @@ out.append({
             # a no pays her nothing (H5, DECISIONS 124), and it is not her step 1 (LO 2026-11-03, DECISIONS 133):
             # it still meets Jake; she asks again on a later Friday (zoe_01b_kiss_again)
             go("\"Not tonight, Zo.\"", node="no_dare", mins=5, flags=[fset("party_went"), fset("zoe_kiss_refused")], eff=[add("zoe_refused", 1)]),
-            go("Kiss Zoe.", node="kiss_zoe", mins=5, cond_=cond(CURIOUS), flags=[fset("party_went")], eff=[add("exhibitionism", 3, cap=79)]),
-            go("Kiss the guy who's staring.", node="jake", mins=5, cond_=cond(CURIOUS), flags=[fset("party_went"), fset("jake_kissed")], eff=[add("exhibitionism", 3, cap=79)]),
+            # a kiss on the couch with the party whooping: the doing pays Corruption (it is gated on it) and being seen
+            # pays Exhibitionism (the-heat-ladder.md "Two meters, one act"; DECISIONS 103; pass 3 A48)
+            go("Kiss Zoe.", node="kiss_zoe", mins=5, cond_=cond(CURIOUS), flags=[fset("party_went")], eff=[add("corruption", 3, cap=39), add("exhibitionism", 3, cap=79)]),
+            go("Kiss the guy who's staring.", node="jake", mins=5, cond_=cond(CURIOUS), flags=[fset("party_went"), fset("jake_kissed")], eff=[add("corruption", 3, cap=39), add("exhibitionism", 3, cap=79)]),
         ]),
         node("no_dare", "Not tonight", [D(Z, "Boring. Fine. I'll keep asking."), P("She steals your drink instead and dances off into the crowd. Across the room a guy in a team jacket is watching you. Not Zoe. You.")],
              [go("Look back at him.", node="jake", mins=15)]),
@@ -130,8 +132,8 @@ out.append({
             # zoe_refused counts her nos; from the second no to the kiss Zoe says she's counting (true: only kiss nos come before step 1)
             G(cond(trait("zoe_refused", "gte", 2)), D(Z, "That's twice you've said no, babe. I'm counting.")),
         ], [
-            go("Kiss Zoe.", node="kiss_zoe", mins=5, eff=[add("exhibitionism", 3, cap=79)]),
-            go("Kiss the guy by the speakers.", node="kiss_guy", mins=5, eff=[add("exhibitionism", 3, cap=79)]),
+            go("Kiss Zoe.", node="kiss_zoe", mins=5, eff=[add("corruption", 3, cap=39), add("exhibitionism", 3, cap=79)]),   # pass 3 A48: both meters
+            go("Kiss the guy by the speakers.", node="kiss_guy", mins=5, eff=[add("corruption", 3, cap=39), add("exhibitionism", 3, cap=79)]),
             go("\"Not tonight, Zo.\"", node="no", mins=2),
         ]),
         node("kiss_zoe", "Zoe", [
@@ -193,7 +195,8 @@ out.append({
         node("kiss", "Kiss him", [
             D(Z, "Fine. Kiss the cocky guy. Properly."),
             *top_or_dress(beat("zoe_dares", "low_do")),
-            VID("a girl kissing a guy hard at a party, his hands on her ass, people cheering", "girl kisses guy at party dare", "dare kiss party hands on ass", pool_dir="sex/zoe_dare_low_do_t3"),
+            # pass 3 B37: its own asset, not zoe_dares' low_do pool (one asset, one block)
+            VID("a girl kissing a guy hard at a party, his hands on her ass, people cheering", "girl kisses guy at party dare", "dare kiss party hands on ass", pool_dir="sex/zoe_02_kiss_t3"),
         ], [go("\"Saturday?\"", node="saturday", mins=10, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 3, "cap": 39}])]),
         node("saturday", "Saturday", [
             P("Zoe pulls you back out onto the balcony, flushed."),
@@ -424,7 +427,9 @@ out.append({
         go("Let her do your face.", node="face", mins=20, cond_=cond(*PRE_PARTY, flag("made_up_today", False)),
            flags=[fset("made_up"), fset("made_up_today")]),
         go("Let her do your face in her lap.", node="face_lap", mins=20, cond_=cond(*PRE_PARTY, flag("made_up_today", False), CURIOUS),
-           flags=[fset("made_up"), fset("made_up_today")], eff=[{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 59}]),
+           # in her lap with nobody else watching is a thing she does, not shows: Corruption, the meter it is gated on,
+           # capped at the top of Curious (pass 3 A48, G8)
+           flags=[fset("made_up"), fset("made_up_today")], eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 39}]),
         go("Stay a while.", loc="zoe_apartment", mins=45),
         go("Go.", loc="town"),
     ]),
@@ -561,6 +566,8 @@ _s2c["description"] = "Zoe step 2, Curious under Daring: the balcony dare when o
 _s2c["trigger"]["conditions"]["items"] += [trait("exhibitionism", "lt", 20), CURIOUS, flag("cocky_guy_met"),
     {"type": "npc_at_location", "location_id": "zoe_apartment", "npc_id": "npc_cocky_guy", "operator": "is_present"}]
 _s2c["nodes"] = [n for n in _s2c["nodes"] if n["id"] in ("balcony", "kiss", "saturday", "no")]
+own_media(_s2c["nodes"], "curious")   # pass 3 B37: the copy's kiss clip is its own asset
+
 _s2c["nodes"][0]["choices"] = [c for c in _s2c["nodes"][0]["choices"] if c.get("nodeId") not in ("sleeve", "already")]   # Daring-only
 out.insert(out.index(_s2) + 1, _s2c)
 _c1 = next(c for c in cards if c.get("ready_canvas") == "zoe_01_first_party")
@@ -569,7 +576,7 @@ cards.insert(cards.index(_c1) + 1, {"npc_id": Z, "priority": 10,
     "text": "You said no to her kiss dare. She said she'd keep asking.",
     "tip": "A Friday party at Zoe's, 7 to 11 PM",
     "when": [{"type": "trait", "subject": "player", "trait": "zoe_step", "op": "eq", "value": 0},
-             {"flag": "zoe_kiss_refused", "op": "is_true"}],
+             {"flag": "zoe_kiss_refused", "op": "is_true"}, {"flag": "zoe_met", "op": "is_true"}],   # pass 3 C38: every card after the meeting carries it
     "goals": [{"type": "trait", "subject": "player", "trait": "corruption", "op": "gte", "value": 20, "label": "Reach Curious (Corruption 20)"}],
     "ready_canvas": "zoe_01b_kiss_again"})
 _c2 = next(c for c in cards if c.get("ready_canvas") == "zoe_02_bra_through_the_sleeve")

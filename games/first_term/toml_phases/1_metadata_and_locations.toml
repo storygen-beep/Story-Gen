@@ -135,6 +135,7 @@ flag_keys = [
   "laura_knows_ryan",
   "laura_lonely",
   "laura_love_today",
+  "laura_portal_today",
   "laura_rule_ryan_first",
   "laura_said_ryan",
   "laura_saw_ch5",
@@ -151,7 +152,9 @@ flag_keys = [
   "mark_03_done",
   "mark_06_done",
   "mark_arrangement",
+  "mark_asleep_seen",
   "mark_brushed_kitchen",
+  "mark_brushed_reach",
   "mark_caught_ch5",
   "mark_dress_rule",
   "mark_laura_seen",
@@ -214,6 +217,7 @@ flag_keys = [
   "ryan_knock_code",
   "ryan_knocked_back",
   "ryan_path_closed",
+  "ryan_saw_her_towel",
   "ryan_saw_mirror",
   "ryan_talk_today",
   "ryan_terms_mine",
@@ -249,6 +253,7 @@ flag_keys = [
   "team_saw_canteen",
   "team_saw_grass",
   "team_saw_gym",
+  "team_saw_quad",
   "toilet_bra_today",
   "tom_01_done",
   "tom_03_done",
@@ -1223,6 +1228,9 @@ navigation_order = []
 hours = [{ weekdays = [5], open = "20:00", close = "24:00" }, { weekdays = [6], open = "00:00", close = "03:00" }]
 closed_text = "Dark. Nobody's home."
 hidden_until = { flag = "party_house_invite" }
+description_variants = [
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }, { type = "npc_at_location", location_id = "party_house", npc_id = "npc_zoe", operator = "is_absent" }] }, text = "A big house at the edge of town where Zoe's friends throw Saturday nights. Music inside, a garden out back and a hot tub steaming under the stars, full of people you don't know. There's nothing to do here right now." },
+]
 
 
 # ── the people: 21, everyone 18 or older (want.cast[].age, SP5) ──
@@ -1296,7 +1304,7 @@ relationship = "Your mom, 41. Wants a happy house, and wants you closer than she
 role         = "mom"
 tags         = ["Warm until she isn't", "Her good girl, close", "Dresses she doesn't wear", "White wine"]
 show_traits  = ["warmth"]
-core_traits  = { want = 0, warmth = 50 }
+core_traits  = { warmth = 50 }
 
 [[npcs.schedules]]
 location   = "home_hall"
@@ -1949,6 +1957,22 @@ portrait     = "portraits/kayla.jpg"
 relationship = "Ryan's girlfriend, 21. Wants the house to know about her."
 role         = "Ryan's girlfriend"
 core_traits  = {  }
+
+[[npcs.schedules]]
+location   = "home_ryan_room"
+weekdays   = [4]
+start_time = "17:45"
+end_time   = "00:00"
+activity   = "in Ryan's room, Friday night"
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "kayla_met", operator = "is_true" }] }
+
+[[npcs.schedules]]
+location   = "home_ryan_room"
+weekdays   = [5]
+start_time = "00:00"
+end_time   = "10:00"
+activity   = "in Ryan's bed in his shirt, Saturday morning"
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "kayla_met", operator = "is_true" }] }
 
 [[npcs]]
 id           = "npc_claire"

@@ -67,6 +67,8 @@ PAY_WHEN = [(cond(SEXY_OFF, {"type": "weekday", "weekdays": [0, 1, 2, 3, 5]}), 1
             (cond(SEXY_ON, wd(4), tod("08:00", "18:00")), 2),
             (cond(SEXY_ON, *FRI), 4)]
 WORKED = add("cafe_shifts_worked", 1)
+# three hours on her feet lower her hygiene (board.needs: hygiene "falls faster after work"; pass 3 E95)
+SHIFT_SWEAT = {"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}
 
 def pay(lo, hi, m):
     return {"targetType": "player", "trait": "money", "op": "add", "clamp": False,
@@ -81,7 +83,7 @@ def _and(c1, c2):
 def outcome_exits(tag, lo, hi, eff=(), flags=(), gary_flag=False):
     out_ = []
     for when, m in PAY_WHEN:
-        e = [pay(lo, hi, m), WORKED, *eff]
+        e = [pay(lo, hi, m), WORKED, SHIFT_SWEAT, *eff]
         if gary_flag:
             out_.append(go("Clock out.", loc="cafe", mins=180, wardrobe=CLOCK_OUT, cond_=_and(when, cond(GARY_IN)),
                            eff=e + [{"targetType": "player", "trait": "money", "op": "add", "value": 4 * m, "clamp": False}],
@@ -101,7 +103,7 @@ def level1_exits():
         for gary in (True, False):
             out_.append(go("Clock out.", loc="cafe", mins=180, wardrobe=CLOCK_OUT,
                            cond_=cond(*when["items"], *PARTS["L1"][0], GARY_IN if gary else GARY_OUT),
-                           eff=[pay(2, 4, m), WORKED], flags=[fset("gary_met")] if gary else None))
+                           eff=[pay(2, 4, m), WORKED, SHIFT_SWEAT], flags=[fset("gary_met")] if gary else None))
     return out_
 
 def money(n):
@@ -132,7 +134,7 @@ out.append({
     "trigger": {"location": "cafe", "is_repeatable": True, "priority": 4, "is_active": True,
                 "schedules": [{"weekdays": [0, 1, 2, 3, 4, 5], "start_time": "08:00", "end_time": "19:00"}],
                 "conditions": cond(flag("cafe_job"), flag("cafe_shift_3_today", False)),
-                "show_when_blocked": True, "cooldown_message": "No more shifts today."},
+                "show_when_blocked": True, "cooldown_message": "Mon-Sat, 8 AM-7 PM, three shifts a day"},   # pass 3 H31: the hours, a bare phrase (the-clock.md C5)
     "nodes": [
         node("counter", "The counter", [
             D(TM, "Uniform's in the back, @player. Three hours. Smile."),
@@ -159,6 +161,10 @@ out.append({
             *at_level("L2", P(L2_SETUP)),
             *at_level("L2", D(GY, GARY_L2), extra=[GARY_IN]),
             *at_level("L3", P(L3_SETUP)),
+            # Tom's step 3 converts into the shift (the-arc.md A1; cafe_shift_scene.md "the window rule"): the
+            # level-3 touch now reads tom_window_rule, so the top step changes the repeatable it sits on.
+            *at_level("L3", P("Tom's rule since the back room: nothing by the window. Whatever happens now happens where the street can't see it."),
+                      extra=[flag("tom_window_rule")]),
             *at_level("L3", D(GY, GARY_AFTER), extra=[GARY_IN, flag("gary_let_it")]),
         ], level1_exits()
            + go_level("L2", "Play along.", "l2_play", extra=[trait("exhibitionism", "gte", 60)])   # a table and the counter watch: Watched (DECISIONS 124)
@@ -180,8 +186,9 @@ out.append({
             G(cond(GARY_OUT, trait("exhibitionism", "lt", 60)), P(L3_A)),
             G(cond(GARY_OUT, trait("exhibitionism", "gte", 60)), POOL(P(L3_A), P(L3_C), pid="cafe_l3_strangers", bag=True)),
             VID("a waitress letting a customer's hand stay on her as she serves, the manager watching from the counter", "customer grabs waitress ass she lets him", "waitress groped at table lets it happen", pool_dir="sex/cafe_l3_let_t4")],
-             outcome_exits("l3_let", 10, 16, eff=[capped_e("corruption", 1, 59), capped_e("exhibitionism", 1, 59),
-                                                  add("cafe_footfall", 1), add("cafe_name", -1)],
+             # L3 needs Corruption 40 but only Exhibitionism 20, so each meter stops at its own stage's top (pass 3 G8)
+             outcome_exits("l3_let", 10, 16, eff=[capped_e("corruption", 1, 59), capped_e("exhibitionism", 1, 39),
+                                                  add("cafe_footfall", 1), add("cafe_name", -1) | {"clamp": True}],
                            flags=[fset("cafe_let_it")], gary_flag=True)),
         node("l3_pull", "Your food's here", [P(L3_PULL)], outcome_exits("l3_pull", 4, 8)),
         node("l3_slap", "Slap it away", [P(L3_SLAP)], outcome_exits("l3_slap", 0, 0)),

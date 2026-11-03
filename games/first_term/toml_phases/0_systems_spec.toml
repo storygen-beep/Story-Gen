@@ -43,15 +43,22 @@ stage_lines = [ "", "Vance put it up. Ninety from now on. Don't look at me, it's
 on_short         = "carry"
 currency_symbol  = "$"
 
+# (pass 3 F72, F10) The engine shows these pages on her first move after Sunday 00:00, wherever she is and whatever
+# the hour, while Mark is in bed until 07:00 and in the kitchen only from 08:00. So the pages never put him in the
+# room: his text, sent at midnight when he is still up (00:00-01:00, the master bedroom), says it, and she puts the
+# money aside for him. The count itself happens once, with him there, at his Sunday table (mark.py).
 [settings.rent.text]
-title         = "Sunday. The rent."
-scene         = "Mark is at the kitchen table with an envelope in front of him and a coffee going cold beside it. Vance's name is on the envelope, in Mark's writing. He doesn't look up when you come in."
-greeting      = "Rent. On the table."
-paid_scene    = "You count it out onto the table, bill by bill. He counts it again, slower, licking his thumb."
-paid_response = "That's the week."
-paid_closing  = "He folds the money into the envelope and pushes your chair back in with his foot."
-cant_pay      = "You don't have it. He looks at the empty table, then at you, for a long time. \"Then it's owed. Vance doesn't wait, so I don't.\""
-partial_pay   = "\"That's short.\" He counts it anyway, and writes what's left on the back of the envelope. \"Next week. On top.\""
+title        = "Sunday. The rent."
+scene         = "Your step-father's text came in at midnight on the dot. It's Sunday, and he wants his money."
+greeting      = "Rent. In the envelope. I count it at the kitchen table in the morning, with you sitting there."
+paid_scene    = "You fold it away for him, every bill of it. It's Mark's money now."
+paid_response = "Good."
+paid_closing  = "Whatever's left in your purse is yours."
+cant_pay      = "\"I don't have it.\""
+partial_pay   = "Put aside what you have."
+carry_scene   = "You're short, and his midnight text already said what happens then."
+carry_response = "Short goes on top of next week's. Vance doesn't wait, so I don't."
+carry_closing = "The gap waits for next Sunday, on top of the rent."
 
 # ── the overnight list (SP1) — every per-day cap is a *_today flag cleared here ──
 [engine.daily_tick]
@@ -185,6 +192,9 @@ flagEffects = [
   { targetType = "player", flag = "keg_counter_today", op = "unset" },
   { targetType = "player", flag = "jake_bathroom_today", op = "unset" },
   { targetType = "player", flag = "shop_touch_today", op = "unset" },
+  # (alignment pass 3 group 2, round 2) Laura's grade portal in her kitchen hub, once a day as the four
+  # laura_reads_<grade> canvases were (max_triggers_per_day) before C30 moved them into the hub (laura.py PORTAL)
+  { targetType = "player", flag = "laura_portal_today", op = "unset" },
 ]
 traitEffects = [
   { targetType = "player", trait = "curfew_days", op = "add", value = -1, clamp = true },
@@ -487,6 +497,23 @@ label = "Skip to morning"
 kind  = "next_day"
 wake  = "07:00"
 free  = true
+
+# (pass 3 E9, F40, J67; the-systems.md SY7 "the next step now", engine.md §48) Mark's steps 1 and 3 wait for a
+# Sunday morning. A play row skips only that wait (the place and the hours): the step's own conditions still decide,
+# and its own exits move his counter. Tom's step 3 waits on five shifts, a condition a play row cannot skip.
+[[ui.cheat_page.grants]]
+id     = "next_mark_01"
+label  = "Next step now: Mark's first Sunday count"
+kind   = "play"
+canvas = "mark_01_count_it_slowly"
+free   = true
+
+[[ui.cheat_page.grants]]
+id     = "next_mark_03"
+label  = "Next step now: Mark's short Sunday"
+kind   = "play"
+canvas = "mark_03_shorts"
+free   = true
 
 # (2026-11-03, alignment pass 2) she starts in her sleep shirt and panties, in bed; the first screen's "Get up." and
 # "Skip the opening" add the rest of her clothes to the wardrobe ("Get dressed." equips them on the hall screen).
