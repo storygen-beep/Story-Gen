@@ -64,6 +64,7 @@ partial_pay   = "\"That's short.\" He counts it anyway, and writes what's left o
 # ── the overnight list (SP1) — every per-day cap is a *_today flag cleared here ──
 [engine.daily_tick]
 flagEffects = [
+  { targetType = "player", flag = "zoe_park_dare_today", op = "unset" },
   # (alignment pass 2, 2026-11-03; gate `a booking can clear`) same-day plans clear at midnight
   { targetType = "player", flag = "said_eating_out", op = "unset" },
   { targetType = "player", flag = "laura_dress_invite", op = "unset" },
@@ -986,6 +987,7 @@ flag_keys = [
   "zoe_let_him_watch",
   "zoe_met",
   "zoe_number",
+  "zoe_park_dare_today",
   "zoe_party_promised",
   "zoe_run_booked",
   "zoe_table_today",
@@ -18941,7 +18943,16 @@ text = "Run."
 targetType = "location"
 locationId = "park"
 time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_park_dare_today", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "zoe_park_dare_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Run."
+targetType = "location"
+locationId = "park"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_park_dare_today", operator = "is_true" }] }
 
 [[canvases.nodes]]
 id   = "no"
@@ -30682,7 +30693,7 @@ content = "You're naked in the tub up to your tits, the steam going up into the 
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "Zoe comes out of the house with a drink in each hand, steps out of her dress on the deck, and gets in beside you, naked, so close her thigh is against yours."
+content = "Zoe is already in the water across from you, a drink in each hand. She slides over beside you, naked, so close her thigh is against yours."
 
 [canvases.nodes.exit_block]
 type = "choices"

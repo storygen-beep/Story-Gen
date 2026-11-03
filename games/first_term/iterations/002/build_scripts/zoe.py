@@ -521,7 +521,11 @@ out.append({
             P("You check the path both ways and pull your top up, and everything under it, for two long seconds. Your tits are out in the open air. Zoe shrieks. The guy on the bench drops his coffee and doesn't look away."),
             D(Z, "Oh my god. Two seconds, that's all he gets. Run!"),
             *PARK_NEXT,
-        ], [go("Run.", loc="park", mins=10, eff=[{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 79}])]),
+        # (2026-11-03) the walk-in B13 opens this node directly, past the canvas's own daily cap, so the pay carries
+        # its own: once a day through zoe_park_dare_today (cleared in the daily tick)
+        ], [go("Run.", loc="park", mins=10, cond_=cond(flag("zoe_park_dare_today", False)), flags=[fset("zoe_park_dare_today")],
+               eff=[{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 79}]),
+            go("Run.", loc="park", mins=10, cond_=cond(flag("zoe_park_dare_today")))]),
         node("no", "Not here", [D(Z, "Chicken."), P("She laughs and sprints off up the path, and you have to run to catch her."), *PARK_NEXT], [go("Run after her.", loc="park", mins=10)]),   # reader a3 older: park_cool_zoe was read by nothing
     ]})
 

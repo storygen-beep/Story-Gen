@@ -8593,6 +8593,16 @@
           "report": "Chrome: walkin_cafe_gary opens 'Booth four comes to you' with 'His knee finds yours.'; walkin_door_dean shows his line and 'Step back into the corridor.'. Builder's headless dice check: 35 cases, each walk-in fires in its window and returns null outside it or with the walker absent; 59 new nodes render with no errors. Gates: the walk-in floor 24/24 PASS; 75/90; every truth gate PASS."
         },
         "played": null
+      },
+      {
+        "id": "two_zoe_bugs",
+        "what": "Zoe's park dare pays once a day (its own zoe_park_dare_today, since the walk-in opens the node past the canvas's daily cap); in the hot-tub walk-in Zoe is already in the water (DECISIONS 151)",
+        "built_at": "2026-11-03 19:09",
+        "chrome": {
+          "at": "2026-11-03 19:09",
+          "report": "Chrome: the dare's Run. paid Exhibitionism 62 -> 63 the first time and 63 -> 63 the second the same day; walkin_tub_zoe reads 'Zoe is already in the water across from you, a drink in each hand.'"
+        },
+        "played": null
       }
     ]
   }
