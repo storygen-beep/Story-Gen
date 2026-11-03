@@ -168,6 +168,10 @@ out.append({
              [go("Go.", loc="zoe_kitchen", mins=1)]),
     ]})
 
+# heat proposal A6 (the keg guy, Zoe's kitchen) and A7 (Jake, Zoe's bathroom), DECISIONS 147 chunk 2 (heat_a.py)
+import heat_a
+out += heat_a.TOWN_CANVASES
+
 text = ("# =============================================================================\n"
         "# First Term — 5 · scenes · TOWN (iteration 002, part 5): random town events, Zoe's flat alone,\n"
         "# the corner shop's grocery run, the cocky guy at the party. Source: iterations/002/build_scripts/town.py.\n"
@@ -203,6 +207,13 @@ STREET_CASES = [
      "The shop guy drops his change on the step and stares at your ass, like he knows there's nothing under your clothes. \"Come in a minute.\" You don't. He doesn't pick the change up until you've turned the corner.",
      "A car slows, then stops. Someone inside whistles at your ass. \"Get in.\" You don't walk faster, and you don't get in."),
 ]
+# heat proposal A11 (DECISIONS 147): a _t4 pool on the two witness screens that show her body (media only)
+STREET_POOLS = {
+    "nobra": [VID("a braless girl walking down a street, her nipples showing through her top, a man staring at her tits",
+                  "braless walking street nipples showing", "no bra walk in public stared at", pool_dir="sex/street_seen_nobra_t4")],
+    "nopanties": [VID("a girl in a short skirt on a windy street, the breeze lifting the hem over her bare ass",
+                      "no panties skirt wind street", "skirt blows up no panties walking", pool_dir="sex/street_seen_nopanties_t4")],
+}
 SHOP_NEXT = "He'll be out front tomorrow."
 CAR_NEXT = "The same car's parked at the corner the next time you look."
 for case, worn, lv, vance, shop, car in STREET_CASES:
@@ -231,6 +242,7 @@ for case, worn, lv, vance, shop, car in STREET_CASES:
             G(cond(VANCE_AWAY, NIGHT), P(car), P(CAR_NEXT)),
             G(cond(VANCE_AWAY, tod("18:00", "22:00")), P(car), P(CAR_NEXT)),
             CAFE_GIRL,
+            *STREET_POOLS.get(case, []),
         ], exits)]})
 
 text += "".join(emit(c) for c in out)

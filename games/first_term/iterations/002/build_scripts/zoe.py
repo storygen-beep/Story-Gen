@@ -573,6 +573,10 @@ _c2["tip"] += "; Daring, or Curious when Jake's teammate is at the party"
 _c2.setdefault("goals", []).append({"type": "trait", "subject": "player", "trait": "exhibitionism", "op": "gte", "value": 20,
     "label": "Reach Daring (Exhibitionism 20), or Curious (Corruption 20) with Jake's teammate at the party"})
 
+# heat proposal A2 (the canteen) and A5 (her bedroom), DECISIONS 147 chunk 2: screens inside her hubs (heat_a.py)
+import heat_a
+heat_a.attach_zoe(out)
+
 text = ("# =============================================================================\n"
         "# First Term — 5 · scenes · ZOE (sheets/scenes/zoe_0*.md, people/npc_zoe.md)\n"
         "# Her meeting, steps 1-4 (step 1 is also Jake's step 1), her hubs, her cards, the meeting nudge.\n"

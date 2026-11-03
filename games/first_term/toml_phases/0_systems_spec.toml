@@ -150,6 +150,15 @@ flagEffects = [
   # C2: the TV sound left up stays up for the day (DECISIONS 147); C5: the shop curtain pays once a day
   { targetType = "player", flag = "tv_loud", op = "unset" },
   { targetType = "player", flag = "shop_curtain_today", op = "unset" },
+  # the sex scenes in the cold places, once a day each (heat proposal A1-A7, DECISIONS 147; heat_a.py, and A4 in
+  # 3_activities.toml shop_try_on)
+  { targetType = "player", flag = "jake_lockers_today", op = "unset" },
+  { targetType = "player", flag = "jake_quad_today", op = "unset" },
+  { targetType = "player", flag = "zoe_table_today", op = "unset" },
+  { targetType = "player", flag = "zoe_bed_today", op = "unset" },
+  { targetType = "player", flag = "keg_counter_today", op = "unset" },
+  { targetType = "player", flag = "jake_bathroom_today", op = "unset" },
+  { targetType = "player", flag = "shop_touch_today", op = "unset" },
 ]
 traitEffects = [
   { targetType = "player", trait = "curfew_days", op = "add", value = -1, clamp = true },

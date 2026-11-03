@@ -8573,6 +8573,16 @@
           "report": "Chrome: walkin_shower_ryan renders (answer screen: Grab the towel / Keep washing; media pool missing as expected); bathroom_shower at Exhibitionism 6 offers 'Leave the door unlocked.'; the dryer now opens on 'basket'. The building agent forced the dice headless: all 11 hosts route to their walk-in in window, Mark's shower one holds without mark_saw_her, 30 walk-in screens render with no JS errors. Gates: walk-in floor 8/24 (red until chunk 3), every truth gate PASS."
         },
         "played": null
+      },
+      {
+        "id": "chunk2_sex_scenes",
+        "what": "A1-A7 new repeatable sex surfaces (gym, canteen, quad, changing room, Zoe's bed, the keg guy, Zoe's bathroom) and A10-A13 media pools (DECISIONS 149)",
+        "built_at": "2026-11-03 18:39",
+        "chrome": {
+          "at": "2026-11-03 18:39",
+          "report": "Chrome: Jake's gym hub at Tue 16:35 (jake_first_time, Bold) offers 'Wait for him after training.'; its offer screen gives 'Get on your knees.' and the written no 'Not here, Jake.'; keg_guy_counter and jake_party_bathroom are built with their no screens. Gates: traversal heat 24/31 PASS, explicit pools 26/38 PASS, every truth gate PASS; 21 explicit beats measured with --beat (3-8 frozen words each, last sentences on the body)."
+        },
+        "played": null
       }
     ]
   }

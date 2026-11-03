@@ -331,6 +331,9 @@ for _c in out:
     if _c["id"] in ['jake_03_my_boyfriend', 'jake_saturday_date', 'jake_04_sneak_him_in']:
         mark_late(_c, 'late_date', split=False)
 require_present(out, "jake_03_my_boyfriend", here_at(L, "home_living_room"))
+# heat proposal A1 (the gym) and A3 (the quad), DECISIONS 147 chunk 2: screens inside his hubs (heat_a.py)
+import heat_a
+heat_a.attach_jake(out)
 
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards)
 open(__import__("sys").argv[1], "w").write(text)

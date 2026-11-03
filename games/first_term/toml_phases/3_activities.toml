@@ -947,6 +947,119 @@ show_when_locked = true
 time_progression_minutes = 5
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 10 } ] }
 
+# Heat proposal A4 (DECISIONS 147): Curious. In the changing room she touches herself in the mirror while the
+# assistant asks about the size. Corruption +1, cap 39 (the same as touch_toilet, touch_shower, touch_bed), once a
+# day (shop_touch_today, cleared at midnight). Her alone: the strangers' words (DECISIONS 41).
+[[canvases.nodes.exit_block.choices]]
+text       = "Look at yourself in the mirror."
+targetType = "node"
+nodeId     = "mirror"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "shop_touch_today", operator = "is_false" } ] }
+
+[[canvases.nodes]]
+id   = "mirror"
+name = "The mirror"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You're alone behind the curtain with the mirror and whatever you're halfway into. Your face is still hot from the man by the shirt rail. So is the rest of you."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Everything all right in there? Shout if you need another size."
+[canvases.nodes.blocks.props]
+speaker = "unknown"
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Nobody would know. Only you, and the mirror."
+[canvases.nodes.blocks.props]
+speaker = "player"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Touch yourself."
+targetType = "node"
+nodeId     = "touch"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "shop_touch_today", operator = "is_false" } ] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "\"Not here.\""
+targetType = "node"
+nodeId     = "touch_no"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "touch"
+name = "In the mirror"
+
+# a shuffle bag of two (seen_weight 0: neither repeats until both have shown)
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "You face the mirror with your back to the curtain. One hand slides up and squeezes your tits, and your nipples go hard against your palm. The other goes down between your legs. You find your clit and rub it in small, hard circles. You're wet already. In the mirror your mouth is open and your cheeks are red. Outside the curtain the assistant asks about the size again. You bite your lip and rub faster, until your knees buckle and you come on your own fingers, your clit throbbing under them." },
+  { type = "paragraph", content = "You sit on the little stool with your knees spread and watch yourself in the mirror. Two fingers go in your mouth, then down between your legs. You rub your clit slow, then push both fingers inside you, deep. Your free hand pinches a nipple until it stings. The curtain sways a hand's width from your knee. Footsteps pass. You ride your own fingers harder, your thumb on your clit, until you come shaking on the stool with your nipple pinched tight." },
+]
+props = { id = "shop_touch", memory = "seen", seen_weight = 0 }
+
+[[canvases.nodes.blocks]]
+type = "video"
+[canvases.nodes.blocks.props]
+description = "a girl alone in a shop changing room touching herself in the mirror, a curtain beside her"
+search_queries = ["girl masturbating in changing room mirror", "fitting room masturbation curtain"]
+pool_dir = "sex/shop_touch_t5"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "All right in there, love?"
+[canvases.nodes.blocks.props]
+speaker = "unknown"
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "A curtain and a bored assistant, a foot away. You liked that part best."
+[canvases.nodes.blocks.props]
+speaker = "player"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "\"Fine, thanks.\""
+targetType = "location"
+locationId = "clothes_shop"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "shop_touch_today", operator = "is_false" } ] }
+effects = [ { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 } ]
+flagEffects = [ { targetType = "player", flag = "shop_touch_today", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Hang them back up."
+targetType = "location"
+locationId = "clothes_shop"
+time_progression_minutes = 20
+
+[[canvases.nodes]]
+id   = "touch_no"
+name = "Not here"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You catch your own eye in the mirror and laugh at yourself. Not here. You get dressed instead, quickly, before the assistant comes to check."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Hang them back up."
+targetType = "location"
+locationId = "clothes_shop"
+time_progression_minutes = 15
+
 [[canvases.nodes]]
 id   = "curtain"
 name = "The curtain"
@@ -1084,7 +1197,16 @@ name = "His knee"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "You leave it. His knee presses into yours, then his thigh slides along your thigh under the water, slow, all the way up. His eyes don't leave your tits. Your nipples go hard in the steam, and he sees it. He doesn't go further, and you don't move."
+content = "You leave it. His knee presses into yours, then his thigh slides along your thigh under the water, slow, all the way up. His eyes don't leave your tits. Your nipples go hard in the steam, and he sees it. Under the water his cock is hard against your hip. He doesn't go further, and you don't move."
+
+# heat proposal A13 (DECISIONS 147): a _t4 pool on "Leave it." (nudity, not sex; media only), and one more body
+# word above ("his cock", strangers' words, DECISIONS 41) so the screen counts 3
+[[canvases.nodes.blocks]]
+type = "video"
+[canvases.nodes.blocks.props]
+description = "a naked girl in a steaming hot tub at night, a stranger beside her pressing his leg against hers, staring at her breasts"
+search_queries = ["naked girl hot tub party stranger", "topless hot tub night guy staring"]
+pool_dir = "sex/party_house_soak_left_t4"
 
 [[canvases.nodes.blocks]]
 type = "dialog"

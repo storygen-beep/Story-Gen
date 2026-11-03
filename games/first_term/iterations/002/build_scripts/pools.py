@@ -396,7 +396,10 @@ out.append({
           P("Ryan is coming down as you go up. You pass on the narrow stairs, and he has to flatten himself to the wall, and his eyes go down your legs on the way past.")),
         G(cond({"type": "npc_at_location", "location_id": "home_kitchen", "npc_id": L, "operator": "is_present"}),
           D(L, "Is that for college or for a guy?")),
-        G(cond(SKIRT, NO_PANTIES), P("There's nothing under the skirt. Anyone at the bottom of these stairs gets your bare ass and your pussy.")),
+        G(cond(SKIRT, NO_PANTIES), P("There's nothing under the skirt. Anyone at the bottom of these stairs gets your bare ass and your pussy."),
+          # heat proposal A12 (DECISIONS 147): a _t4 pool on the no-panties screen (media only)
+          VID("a girl in a short skirt and no panties climbing the stairs, a man at the bottom looking straight up it",
+              "upskirt stairs no panties", "girl climbs stairs short skirt man below looks up", pool_dir="sex/stairs_skirt_t4")),
     ], [  # DECISIONS 124 (H5): a way out that pays her nothing; the watcher's look moves his meter; only her going slower pays her
         go("Hold your skirt down.", loc="home_hall", mins=2),   # C1 (LO 2026-11-03): her no never raises his Want
         go("Take the stairs slower.", loc="home_hall", mins=3, cond_=cond({"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}),

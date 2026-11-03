@@ -158,6 +158,15 @@ flagEffects = [
   # C2: the TV sound left up stays up for the day (DECISIONS 147); C5: the shop curtain pays once a day
   { targetType = "player", flag = "tv_loud", op = "unset" },
   { targetType = "player", flag = "shop_curtain_today", op = "unset" },
+  # the sex scenes in the cold places, once a day each (heat proposal A1-A7, DECISIONS 147; heat_a.py, and A4 in
+  # 3_activities.toml shop_try_on)
+  { targetType = "player", flag = "jake_lockers_today", op = "unset" },
+  { targetType = "player", flag = "jake_quad_today", op = "unset" },
+  { targetType = "player", flag = "zoe_table_today", op = "unset" },
+  { targetType = "player", flag = "zoe_bed_today", op = "unset" },
+  { targetType = "player", flag = "keg_counter_today", op = "unset" },
+  { targetType = "player", flag = "jake_bathroom_today", op = "unset" },
+  { targetType = "player", flag = "shop_touch_today", op = "unset" },
 ]
 traitEffects = [
   { targetType = "player", trait = "curfew_days", op = "add", value = -1, clamp = true },
@@ -725,18 +734,23 @@ flag_keys = [
   "jake_02_done",
   "jake_03_done",
   "jake_04_done",
+  "jake_bathroom_today",
   "jake_date_booked",
   "jake_date_went",
   "jake_first_time",
   "jake_gym_today",
   "jake_kissed",
+  "jake_lockers_today",
   "jake_met",
   "jake_number",
+  "jake_quad_today",
   "jake_stood_up",
   "kayla_caught_her",
   "kayla_met",
   "kayla_saw_her",
+  "keg_counter_today",
   "keg_guy_dared",
+  "keg_guy_went",
   "knows_about_kayla",
   "knows_mark_debt",
   "knows_tip_jar",
@@ -848,6 +862,7 @@ flag_keys = [
   "selfie_today",
   "served_gary",
   "shop_curtain_today",
+  "shop_touch_today",
   "shower_today",
   "shower_unlocked",
   "slept_today",
@@ -903,6 +918,7 @@ flag_keys = [
   "zoe_05_done",
   "zoe_bailed",
   "zoe_balcony_refused",
+  "zoe_bed_today",
   "zoe_dared",
   "zoe_face_today",
   "zoe_has_bra",
@@ -912,6 +928,7 @@ flag_keys = [
   "zoe_number",
   "zoe_party_promised",
   "zoe_run_booked",
+  "zoe_table_today",
   "zoe_together",
 ]
 
@@ -4194,6 +4211,119 @@ show_when_locked = true
 time_progression_minutes = 5
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 10 } ] }
 
+# Heat proposal A4 (DECISIONS 147): Curious. In the changing room she touches herself in the mirror while the
+# assistant asks about the size. Corruption +1, cap 39 (the same as touch_toilet, touch_shower, touch_bed), once a
+# day (shop_touch_today, cleared at midnight). Her alone: the strangers' words (DECISIONS 41).
+[[canvases.nodes.exit_block.choices]]
+text       = "Look at yourself in the mirror."
+targetType = "node"
+nodeId     = "mirror"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "shop_touch_today", operator = "is_false" } ] }
+
+[[canvases.nodes]]
+id   = "mirror"
+name = "The mirror"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You're alone behind the curtain with the mirror and whatever you're halfway into. Your face is still hot from the man by the shirt rail. So is the rest of you."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Everything all right in there? Shout if you need another size."
+[canvases.nodes.blocks.props]
+speaker = "unknown"
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Nobody would know. Only you, and the mirror."
+[canvases.nodes.blocks.props]
+speaker = "player"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Touch yourself."
+targetType = "node"
+nodeId     = "touch"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "shop_touch_today", operator = "is_false" } ] }
+
+[[canvases.nodes.exit_block.choices]]
+text       = "\"Not here.\""
+targetType = "node"
+nodeId     = "touch_no"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "touch"
+name = "In the mirror"
+
+# a shuffle bag of two (seen_weight 0: neither repeats until both have shown)
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "You face the mirror with your back to the curtain. One hand slides up and squeezes your tits, and your nipples go hard against your palm. The other goes down between your legs. You find your clit and rub it in small, hard circles. You're wet already. In the mirror your mouth is open and your cheeks are red. Outside the curtain the assistant asks about the size again. You bite your lip and rub faster, until your knees buckle and you come on your own fingers, your clit throbbing under them." },
+  { type = "paragraph", content = "You sit on the little stool with your knees spread and watch yourself in the mirror. Two fingers go in your mouth, then down between your legs. You rub your clit slow, then push both fingers inside you, deep. Your free hand pinches a nipple until it stings. The curtain sways a hand's width from your knee. Footsteps pass. You ride your own fingers harder, your thumb on your clit, until you come shaking on the stool with your nipple pinched tight." },
+]
+props = { id = "shop_touch", memory = "seen", seen_weight = 0 }
+
+[[canvases.nodes.blocks]]
+type = "video"
+[canvases.nodes.blocks.props]
+description = "a girl alone in a shop changing room touching herself in the mirror, a curtain beside her"
+search_queries = ["girl masturbating in changing room mirror", "fitting room masturbation curtain"]
+pool_dir = "sex/shop_touch_t5"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "All right in there, love?"
+[canvases.nodes.blocks.props]
+speaker = "unknown"
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "A curtain and a bored assistant, a foot away. You liked that part best."
+[canvases.nodes.blocks.props]
+speaker = "player"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "\"Fine, thanks.\""
+targetType = "location"
+locationId = "clothes_shop"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "shop_touch_today", operator = "is_false" } ] }
+effects = [ { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 } ]
+flagEffects = [ { targetType = "player", flag = "shop_touch_today", op = "set" } ]
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Hang them back up."
+targetType = "location"
+locationId = "clothes_shop"
+time_progression_minutes = 20
+
+[[canvases.nodes]]
+id   = "touch_no"
+name = "Not here"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You catch your own eye in the mirror and laugh at yourself. Not here. You get dressed instead, quickly, before the assistant comes to check."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Hang them back up."
+targetType = "location"
+locationId = "clothes_shop"
+time_progression_minutes = 15
+
 [[canvases.nodes]]
 id   = "curtain"
 name = "The curtain"
@@ -4331,7 +4461,16 @@ name = "His knee"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "You leave it. His knee presses into yours, then his thigh slides along your thigh under the water, slow, all the way up. His eyes don't leave your tits. Your nipples go hard in the steam, and he sees it. He doesn't go further, and you don't move."
+content = "You leave it. His knee presses into yours, then his thigh slides along your thigh under the water, slow, all the way up. His eyes don't leave your tits. Your nipples go hard in the steam, and he sees it. Under the water his cock is hard against your hip. He doesn't go further, and you don't move."
+
+# heat proposal A13 (DECISIONS 147): a _t4 pool on "Leave it." (nudity, not sex; media only), and one more body
+# word above ("his cock", strangers' words, DECISIONS 41) so the screen counts 3
+[[canvases.nodes.blocks]]
+type = "video"
+[canvases.nodes.blocks.props]
+description = "a naked girl in a steaming hot tub at night, a stranger beside her pressing his leg against hers, staring at her breasts"
+search_queries = ["naked girl hot tub party stranger", "topless hot tub night guy staring"]
+pool_dir = "sex/party_house_soak_left_t4"
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -17775,9 +17914,135 @@ locationId = "canteen"
 time_progression_minutes = 30
 
 [[canvases.nodes.exit_block.choices]]
+text = "Slide in next to Zoe."
+targetType = "node"
+nodeId = "a2_offer"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_together", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "flag", subject = "player", flag_key = "zoe_table_today", operator = "is_false" }, { type = "time_of_day", start_time = "11:45", end_time = "12:45" }] }
+
+[[canvases.nodes.exit_block.choices]]
 text = "Go."
 targetType = "location"
 locationId = "campus"
+
+[[canvases.nodes]]
+id   = "a2_offer"
+name = "Under the table"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You slide in beside Zoe on the bench, close enough that her thigh is hot against yours. Her hand lands on your knee under the table, then on the inside of it."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "I said not here. I lied. Hold still, babe."
+props = { speaker = "npc", npcId = "npc_zoe" }
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "canteen", npc_id = "npc_nadia", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "nadia_met", operator = "is_true" }] }
+blocks = [
+  { type = "paragraph", content = "Across the table Nadia has her textbook open and hasn't noticed a thing." },
+  { type = "dialog", content = "Forty pages of reading. Who sets forty pages?", props = { speaker = "npc", npcId = "npc_nadia" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "paragraph", content = "Across the table two girls from Biology are arguing about a test, and neither of them looks down." },
+]
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Anyone who looks under this table will see everything. You hope somebody does."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let her."
+targetType = "node"
+nodeId = "a2_fingers"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "flag", subject = "player", flag_key = "zoe_table_today", operator = "is_false" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Not here, Zo.\""
+targetType = "node"
+nodeId = "a2_no"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "a2_fingers"
+name = "Her fingers"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Zoe keeps eating fries with her left hand. Her right slides up your thigh and under your skirt. She finds your clit first and rubs it in slow, lazy circles until you're soaking. Then two fingers push into your pussy, deep, and curl. You grip the edge of the table. Zoe fucks you with her fingers in time with the talk across the table, slow, then fast, her thumb back on your clit. Your pussy clenches round her fingers. You come with your mouth shut tight and your thighs locked round her wrist." },
+  { type = "paragraph", content = "Zoe leans her chin on her hand like she's listening across the table. Under it her fingers are already inside you. She pumps them slow and deep, so the bench doesn't creak. Her thumb rubs your clit until your pussy is dripping on her palm. You bite the inside of your cheek. She curls her fingers and fucks you harder, right where it makes your thighs jump. Your tray rattles. She doesn't stop until you come on her hand, your pussy pulsing round her fingers." },
+]
+props = { id = "zoe_table_fingers", memory = "seen", seen_weight = 0 }
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl fingering her girlfriend under a canteen table at lunch, the table talking across from them", search_queries = ["fingered under the table in public", "lesbian fingering under cafeteria table"], pool_dir = "sex/zoe_table_fingers_t5" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She pulls her hand out and licks two fingers clean, looking right at you."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Eat your lunch, babe. You look flushed."
+props = { speaker = "npc", npcId = "npc_zoe" }
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Half the canteen could have looked down. You wanted one of them to."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Finish your lunch."
+targetType = "location"
+locationId = "canteen"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_table_today", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "zoe_table_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go."
+targetType = "location"
+locationId = "campus"
+time_progression_minutes = 30
+
+[[canvases.nodes]]
+id   = "a2_no"
+name = "Not here"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Later, babe."
+props = { speaker = "npc", npcId = "npc_zoe" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She takes her hand back and steals a fry off your tray instead, grinning."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Finish your lunch."
+targetType = "location"
+locationId = "canteen"
+time_progression_minutes = 30
 
 [[canvases]]
 id   = "hub_zoe_class"
@@ -18093,6 +18358,13 @@ nodeId = "wardrobe"
 time_progression_minutes = 5
 
 [[canvases.nodes.exit_block.choices]]
+text = "Get into her bed."
+targetType = "node"
+nodeId = "a5_offer"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_together", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "flag", subject = "player", flag_key = "zoe_bed_today", operator = "is_false" }, { type = "time_of_day", start_time = "22:00", end_time = "23:45" }] }
+
+[[canvases.nodes.exit_block.choices]]
 text = "Leave her to sleep."
 targetType = "location"
 locationId = "zoe_apartment"
@@ -18152,6 +18424,212 @@ text = "Keep it."
 targetType = "location"
 locationId = "zoe_apartment"
 time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "a5_offer"
+name = "Stay over"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Zoe lifts the edge of her duvet without looking up from her phone."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Stay over. I'm not asking twice."
+props = { speaker = "npc", npcId = "npc_zoe" }
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Her bed, her rules. You want both."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get in with her."
+targetType = "node"
+nodeId = "a5_bold"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "flag", subject = "player", flag_key = "zoe_bed_today", operator = "is_false" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Her mouth. Down there."
+targetType = "node"
+nodeId = "a5_lick"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "flag", subject = "player", flag_key = "zoe_bed_today", operator = "is_false" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Your fingers in her."
+targetType = "node"
+nodeId = "a5_hers"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "flag", subject = "player", flag_key = "zoe_bed_today", operator = "is_false" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Not tonight, Zo.\""
+targetType = "node"
+nodeId = "a5_no"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "a5_bold"
+name = "Her bed"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "You get under the duvet with her. Zoe rolls on top of you, pushes your clothes out of her way and kisses you, slow and wet. Then her mouth goes to your tits. She sucks one nipple hard, then the other, until both are wet and aching. Her hand slides down your stomach and between your legs. You're already wet. Two of her fingers slip into you and curl, and she sucks your nipple in time with them. Your hips lift off her sheets. You come on her fingers with her teeth on your nipple." },
+  { type = "paragraph", content = "Under the duvet Zoe shoves your clothes out of the way. She peels her T-shirt over her head and pulls you down onto her. Her tits press soft against yours. She kisses your neck, then takes your nipple in her mouth and sucks. Her fingers find you, slick and wet. She rubs you slow while her tongue flicks your nipple, then pushes two fingers inside. You grab her hair. She sucks harder and curls her fingers deep, until you come shaking against her, your nipple still in her mouth." },
+]
+props = { id = "zoe_bed_bold", memory = "seen", seen_weight = 0 }
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl sucking her girlfriend's nipple in bed under a duvet, fingers between her legs", search_queries = ["lesbian nipple sucking fingering in bed", "girlfriends in bed fingering sleepover"], pool_dir = "sex/zoe_bed_bold_t5" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Mine tonight. Shh. Sleep."
+props = { speaker = "npc", npcId = "npc_zoe" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She falls asleep with her face in your neck and one leg thrown over yours."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Her bed smells like her. You don't want to get out of it."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Slip out while she sleeps."
+targetType = "location"
+locationId = "town"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_bed_today", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }]
+flagEffects = [{ targetType = "player", flag = "zoe_bed_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Kiss her goodnight."
+targetType = "location"
+locationId = "town"
+time_progression_minutes = 60
+
+[[canvases.nodes]]
+id   = "a5_lick"
+name = "Her mouth"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You're naked under her duvet before she's put her phone down. Zoe kisses down your stomach and pushes your thighs apart with both hands. She licks your pussy in one long stroke, bottom to top, and laughs at the noise you make. Then she sucks your clit into her mouth. Two fingers fuck into you while her tongue works. You grab her hair and grind on her face. Your pussy clenches round her fingers, and you come with your thighs clamped round her head."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl eating her girlfriend out in bed, thighs clamped round her head", search_queries = ["lesbian eating pussy in bed", "girlfriend licks her clit sleepover"], pool_dir = "sex/zoe_bed_lick_t5" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Stay. Don't you dare go home yet."
+props = { speaker = "npc", npcId = "npc_zoe" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She falls asleep with her face in your neck and one leg thrown over yours."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Her bed smells like her. You don't want to get out of it."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Slip out while she sleeps."
+targetType = "location"
+locationId = "town"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_bed_today", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "zoe_bed_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Kiss her goodnight."
+targetType = "location"
+locationId = "town"
+time_progression_minutes = 60
+
+[[canvases.nodes]]
+id   = "a5_hers"
+name = "Your fingers"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You push Zoe onto her back and drag her T-shirt up over her tits. She's bare under it. You suck her nipple and slide your hand down between her legs. Her pussy is soaked. You rub her clit in fast circles while she swears at the ceiling. Then you push two fingers into her and fuck her with them, hard, the way she begs you to. She comes bucking against your hand, her pussy tight round your fingers."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl fingering her girlfriend hard on her back in bed, the other one swearing", search_queries = ["fingering her girlfriend in bed", "lesbian fingering orgasm bed"], pool_dir = "sex/zoe_bed_hers_t5" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Fuck, babe. Where did you learn that?"
+props = { speaker = "npc", npcId = "npc_zoe" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She falls asleep with her face in your neck and one leg thrown over yours."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Her bed smells like her. You don't want to get out of it."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Slip out while she sleeps."
+targetType = "location"
+locationId = "town"
+time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_bed_today", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "zoe_bed_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Kiss her goodnight."
+targetType = "location"
+locationId = "town"
+time_progression_minutes = 60
+
+[[canvases.nodes]]
+id   = "a5_no"
+name = "Not tonight"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Fine. Ask me again when you're brave."
+props = { speaker = "npc", npcId = "npc_zoe" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She drops the duvet and goes back to her phone, but she's smiling at it."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave her to sleep."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 2
 
 [[canvases]]
 id   = "hub_zoe_party_house"
@@ -21354,9 +21832,173 @@ locationId = "quad"
 time_progression_minutes = 20
 
 [[canvases.nodes.exit_block.choices]]
+text = "Sit in his lap."
+targetType = "node"
+nodeId = "a3_offer"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_first_time", operator = "is_true" }, { type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "flag", subject = "player", flag_key = "jake_quad_today", operator = "is_false" }, { type = "time_of_day", start_time = "08:30", end_time = "11:30" }] }
+
+[[canvases.nodes.exit_block.choices]]
 text = "Go."
 targetType = "location"
 locationId = "campus"
+
+[[canvases.nodes]]
+id   = "a3_offer"
+name = "His lap"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Jake pulls you down into his lap on the grass, sideways, right in front of the team. His hand settles on your bare thigh, just under the hem of your skirt."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Forget later. Guys. Look at her."
+props = { speaker = "npc", npcId = "npc_jake" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Four of them look. None of them looks away."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "He wants them to see what's his. You want them to see more than that."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him show them."
+targetType = "node"
+nodeId = "a3_show"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "flag", subject = "player", flag_key = "jake_quad_today", operator = "is_false" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him in."
+targetType = "node"
+nodeId = "a3_do"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "flag", subject = "player", flag_key = "jake_quad_today", operator = "is_false" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Not in front of them.\""
+targetType = "node"
+nodeId = "a3_no"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "a3_show"
+name = "For the team"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "His hand slides up under your skirt and lifts the hem with his wrist, so the whole team gets a look. His palm is on your ass, out in the open air, squeezing. Four guys stop talking. One of them forgets his drink halfway to his mouth. Jake runs his thumb slow along the crease of your ass while they stare. His other hand cups your tits. Under your thigh his cock is hard, pressing up through his jeans."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a guy on the grass lifting his girlfriend's skirt over her bare ass for his friends to see", search_queries = ["boyfriend shows off girlfriend's ass in public", "lifts her skirt on campus lawn friends watching"], pool_dir = "sex/jake_quad_show_t4" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Jesus, Jake."
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Told you. Mine."
+props = { speaker = "npc", npcId = "npc_jake" }
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "The whole quad could see your ass, and you didn't pull the hem down."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get up off his lap."
+targetType = "location"
+locationId = "quad"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_quad_today", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "jake_quad_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go."
+targetType = "location"
+locationId = "campus"
+time_progression_minutes = 20
+
+[[canvases.nodes]]
+id   = "a3_do"
+name = "In front of them"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Jake's hand stays under your skirt. His fingers slide between your legs from behind and push into you, two of them, deep, right there on the grass. The team can see his wrist working. You grind down on his hand and moan into his neck. He fucks you with his fingers, slow and then fast, his thumb pressed up against your ass. His cock throbs under you. You come on his fingers with your face in his shoulder, your thighs shaking where everyone can see them."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a guy fingering his girlfriend in his lap on a college lawn, his friends watching", search_queries = ["fingered in public on the grass", "boyfriend fingers girlfriend in front of friends outdoors"], pool_dir = "sex/jake_quad_do_t5" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Jesus Christ, man."
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "All mine, guys. Look all you want."
+props = { speaker = "npc", npcId = "npc_jake" }
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Half the team just watched you come. Your face is burning, and you'd let him do it again."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get up off his lap."
+targetType = "location"
+locationId = "quad"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_quad_today", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "jake_quad_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go."
+targetType = "location"
+locationId = "campus"
+time_progression_minutes = 20
+
+[[canvases.nodes]]
+id   = "a3_no"
+name = "Not in front of them"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Saturday, then."
+props = { speaker = "npc", npcId = "npc_jake" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He lets you up, grinning, and the team jeers at him while you walk off across the grass."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go."
+targetType = "location"
+locationId = "campus"
+time_progression_minutes = 2
 
 [[canvases]]
 id   = "hub_jake_canteen"
@@ -21739,6 +22381,13 @@ effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1,
 flagEffects = [{ targetType = "player", flag = "jake_gym_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
+text = "Wait for him after training."
+targetType = "node"
+nodeId = "a1_offer"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_first_time", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "flag", subject = "player", flag_key = "jake_lockers_today", operator = "is_false" }, { type = "time_of_day", start_time = "16:30", end_time = "16:45" }] }
+
+[[canvases.nodes.exit_block.choices]]
 text = "Go."
 targetType = "location"
 locationId = "campus"
@@ -21808,6 +22457,181 @@ text = "Done."
 targetType = "location"
 locationId = "campus"
 time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1_offer"
+name = "After training"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Training ends. The team drifts off to the showers, loud, towels over their shoulders. Jake hangs back by the locker-room door, and the sweat is still running down his neck."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Locker room's empty for ten minutes. Get in here, @player."
+props = { speaker = "npc", npcId = "npc_jake" }
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Ten minutes, and his whole team on the other side of one wall. You want it more because of that."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get on your knees."
+targetType = "node"
+nodeId = "a1_mouth"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "flag", subject = "player", flag_key = "jake_lockers_today", operator = "is_false" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Against the lockers.\""
+targetType = "node"
+nodeId = "a1_lockers"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "flag", subject = "player", flag_key = "jake_lockers_today", operator = "is_false" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Not here, Jake.\""
+targetType = "node"
+nodeId = "a1_no"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "a1_mouth"
+name = "On your knees"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Jake kicks the locker-room door shut behind you. You push him back against the lockers and drop to your knees on the wet tiles. You tug his shorts down, and his cock springs out, hard and flushed. You wrap your fist round the base and lick the head, slow, so he has to watch. He thumps his head back on the metal. Then you suck him in deep, your hand pumping what your mouth can't take. The showers hiss on the other side of the wall. His hips jerk, and his cock throbs hot on your tongue." },
+  { type = "paragraph", content = "The door hasn't swung shut before your hand is inside his shorts. His cock is hot and heavy in your fist, slick with sweat. You stroke him slow, but he's already leaking, so you drop to your knees and take him in your mouth. He grabs the top of a locker with both hands. You suck harder, your cheeks hollow, your spit running down to your fist. His thighs shake. He comes in your mouth with a grunt he can't keep in. You swallow all of it, then lick his cock clean." },
+]
+props = { id = "jake_lockers_mouth", memory = "seen", seen_weight = 0 }
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl on her knees on a wet locker-room floor sucking an athlete's cock, his back to the lockers", search_queries = ["blowjob locker room on knees", "girlfriend sucks athlete after practice locker room"], pool_dir = "sex/jake_lockers_mouth_t5" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Jesus, @player. Coach is going to smell you on me."
+props = { speaker = "npc", npcId = "npc_jake" }
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "His whole team was through that wall. That was the best part."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [1] }] }, blocks = [{ type = "dialog", content = "Thursday. Same time. Don't you dare say no.", props = { speaker = "npc", npcId = "npc_jake" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [3] }] }, blocks = [{ type = "dialog", content = "Tuesday. Same time. Don't you dare say no.", props = { speaker = "npc", npcId = "npc_jake" } }] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Wipe your mouth. Go."
+targetType = "location"
+locationId = "campus"
+time_progression_minutes = 15
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_lockers_today", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }]
+flagEffects = [{ targetType = "player", flag = "jake_lockers_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave him to his shower."
+targetType = "location"
+locationId = "campus"
+time_progression_minutes = 15
+
+[[canvases.nodes]]
+id   = "a1_lockers"
+name = "Against the lockers"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Jake spins you round and pushes you face-first into the lockers. The metal is cold on your tits. He shoves everything you're wearing out of his way and kicks your feet apart. His cock slides along your ass, then into you in one hard thrust. He fucks you hard and fast, one hand over your mouth, the other gripping your hip. The locker doors bang with every stroke. Through the wall the team laughs at something. He slams in to the hilt, and his cum floods into you." },
+  { type = "paragraph", content = "Jake lifts you up against the lockers like you weigh nothing. Your clothes are in a heap on the bench. Your legs lock round his waist, and his cock pushes up into you, thick, stretching you open. He holds you pinned to the metal and fucks you in short, hard strokes that rattle every door down the row. Somebody shouts his name from the showers. He doesn't answer. He buries his face in your tits and fucks you harder, until you clench round his cock and come. He groans, and his cum spills hot inside you." },
+]
+props = { id = "jake_lockers_fuck", memory = "seen", seen_weight = 0 }
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "an athlete fucking his girlfriend against the lockers in an empty locker room, showers running next door", search_queries = ["fucked against lockers locker room", "athlete fucks girlfriend locker room after practice"], pool_dir = "sex/jake_lockers_fuck_t5" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "If Coach walks in, I'm telling him it was your idea."
+props = { speaker = "npc", npcId = "npc_jake" }
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "You'd let him fuck you in front of the whole team. You know that now."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [1] }] }, blocks = [{ type = "dialog", content = "Thursday. Same time. Don't you dare say no.", props = { speaker = "npc", npcId = "npc_jake" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [3] }] }, blocks = [{ type = "dialog", content = "Tuesday. Same time. Don't you dare say no.", props = { speaker = "npc", npcId = "npc_jake" } }] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go, before Coach comes."
+targetType = "location"
+locationId = "campus"
+time_progression_minutes = 15
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_lockers_today", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "jake_lockers_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave him to his shower."
+targetType = "location"
+locationId = "campus"
+time_progression_minutes = 15
+
+[[canvases.nodes]]
+id   = "a1_no"
+name = "Not here"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Saturday, then."
+props = { speaker = "npc", npcId = "npc_jake" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He grins, slaps the door frame and jogs off after the team. Through the wall they whistle at him."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go."
+targetType = "location"
+locationId = "campus"
+time_progression_minutes = 2
 
 [[quest_cards]]
 npc_id = "npc_jake"
@@ -28617,7 +29441,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "clothing_slot", slot = "underwear", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "There's nothing under the skirt. Anyone at the bottom of these stairs gets your bare ass and your pussy." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "clothing_slot", slot = "underwear", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "There's nothing under the skirt. Anyone at the bottom of these stairs gets your bare ass and your pussy." }, { type = "video", props = { description = "a girl in a short skirt and no panties climbing the stairs, a man at the bottom looking straight up it", search_queries = ["upskirt stairs no panties", "girl climbs stairs short skirt man below looks up"], pool_dir = "sex/stairs_skirt_t4" } }] },
 ]
 
 [canvases.nodes.exit_block]
@@ -31579,6 +32403,10 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure"
 blocks = [
   { type = "paragraph", content = "You stay exactly as you are until whoever was looking has gone. Your skin is hot, and you don't cover up." },
 ]
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a topless girl sunbathing on a lounger in a back garden, a man watching her from a doorway or a window", search_queries = ["topless sunbathing back garden watched", "topless girl on lounger neighbour watching"], pool_dir = "sex/garden_sun_seen_t4" }
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -35452,6 +36280,291 @@ locationId = "zoe_kitchen"
 time_progression_minutes = 1
 
 [[canvases]]
+id   = "keg_guy_counter"
+name = "Find the guy from the keg"
+description = "Heat proposal A6 (DECISIONS 147): party night 22:00-02:00, after keg_guy_dared, Hungry. The guy she flashed bends her over Zoe's kitchen counter while the party is through the door. Corruption +1, cap 79, one a party night."
+
+[canvases.trigger]
+location = "zoe_kitchen"
+is_repeatable = true
+priority = 4
+is_active = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "party_went", operator = "lt", value = 8 }, { type = "time_of_day", start_time = "22:00", end_time = "02:00" }, { type = "flag", subject = "player", flag_key = "keg_guy_dared", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "hours_since_flag", subject = "player", flag_key = "keg_guy_went", operator = "gte", value = 6 }] }
+
+[[canvases.nodes]]
+id   = "keg"
+name = "The keg"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The guy from the keg is leaning on the counter with a red cup, right where the bottles are. His grin at you goes slow, but his eyes go straight to your tits."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Look who's back. I still can't stop thinking about your tits."
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Through the door the party is loud and close. Anyone could walk in for a drink."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Anyone could walk in. That's the point."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him bend you over the counter."
+targetType = "node"
+nodeId = "counter"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "flag", subject = "player", flag_key = "keg_counter_today", operator = "is_false" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Not tonight.\""
+targetType = "node"
+nodeId = "no"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "counter"
+name = "Over the counter"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "He turns you round and bends you over the counter between the bottles. He shoves everything you're wearing out of his way. His cock is hard against your ass. He pushes into you from behind in one slow thrust, and the edge of the counter digs into your hips. Then he slams into you, hard and fast, one hand on the back of your neck. Red cups roll off onto the floor. Your tits drag on the sticky worktop with every stroke. He grabs your ass with both hands and empties into you with a groan, buried as deep as he goes." },
+  { type = "paragraph", content = "He lifts you onto the counter and pushes everything you're wearing out of the way. Bottles clink behind you. He opens his jeans, and his cock is thick and already wet at the tip. He rubs the head over your clit until you're dripping, then drives into you. You lock your legs round him. He pounds you back against the cupboards, his mouth on your tits, sucking a nipple hard. Somebody comes in for a cup and goes straight back out. He doesn't stop. You come clenching round his cock, your nails dug into his back." },
+]
+props = { id = "keg_guy_counter", memory = "seen", seen_weight = 0 }
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a guy fucking a girl bent over a kitchen counter at a house party, red cups everywhere", search_queries = ["fucked over the kitchen counter at a party", "stranger bends her over counter house party"], pool_dir = "sex/keg_guy_counter_t5" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Same keg next Friday."
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "You don't even know his name. You'll be back at that keg."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the party."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 15
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "keg_counter_today", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "keg_counter_today", op = "set" }, { targetType = "player", flag = "keg_guy_went", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Fix yourself up first."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 15
+flagEffects = [{ targetType = "player", flag = "keg_guy_went", op = "set" }]
+
+[[canvases.nodes]]
+id   = "no"
+name = "Not tonight"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "You know where the keg is."
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He lifts his cup at you and goes back to pouring."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the party."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 2
+
+[[canvases]]
+id   = "jake_party_bathroom"
+name = "Pull Jake into the bathroom"
+description = "Heat proposal A7 (DECISIONS 147): Zoe's Friday party, Jake in the living room (his row), after jake_first_time. Bold: the locked door (Corruption +1, cap 59). Hungry: the door left unlocked (cap 79). Once a day."
+
+[canvases.trigger]
+location = "zoe_bathroom"
+is_repeatable = true
+priority = 5
+is_active = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "party_went", operator = "lt", value = 8 }, { type = "npc_at_location", location_id = "zoe_apartment", npc_id = "npc_jake", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "jake_first_time", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "19:00", end_time = "23:45" }, { type = "flag", subject = "player", flag_key = "jake_bathroom_today", operator = "is_false" }] }
+
+[[canvases.nodes]]
+id   = "door"
+name = "Zoe's bathroom"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Jake catches your wrist at the bathroom door and backs you inside. The party thumps through the wall. Somebody is already queueing in the hall."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Five minutes. Nobody will notice."
+props = { speaker = "npc", npcId = "npc_jake" }
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Everybody will notice. You want him anyway."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Lock the door."
+targetType = "node"
+nodeId = "locked"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "flag", subject = "player", flag_key = "jake_bathroom_today", operator = "is_false" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave it unlocked."
+targetType = "node"
+nodeId = "open"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "flag", subject = "player", flag_key = "jake_bathroom_today", operator = "is_false" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Not at Zoe's.\""
+targetType = "node"
+nodeId = "no"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "locked"
+name = "On the sink"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "Jake locks the door and lifts you onto the sink. Zoe's make-up clatters into the basin. He shoves everything you're wearing out of his way and pushes his cock into you, slow and thick, all the way in. Then he starts slamming. The mirror bulbs shake with every thrust. Somebody bangs on the door. He grabs your ass with both hands and pulls you onto him harder. You come clenching round his cock, and he groans into your tits as he empties inside you." },
+  { type = "paragraph", content = "He turns you to face the mirror and bends you over the sink. In the glass you watch him push your clothes out of the way. His cock slides into you from behind. He holds your hips and thrusts, hard and steady, his eyes on yours in the mirror. The queue knocks on the door. Your tits bounce over the basin with every stroke. He reaches round and squeezes one, rough, and you come on his cock with your palm flat on the cold glass." },
+]
+props = { id = "jake_bathroom_locked", memory = "seen", seen_weight = 0 }
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a guy fucking his girlfriend on a bathroom sink at a house party, make-up everywhere, someone knocking", search_queries = ["sex on bathroom sink at party", "boyfriend fucks her on the sink at a house party"], pool_dir = "sex/jake_bathroom_locked_t5" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Saturday. Your room. I mean it."
+props = { speaker = "npc", npcId = "npc_jake" }
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Somebody in that queue heard every second. Good."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the party."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 15
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_bathroom_today", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }]
+flagEffects = [{ targetType = "player", flag = "jake_bathroom_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Fix your face first."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 15
+
+[[canvases.nodes]]
+id   = "open"
+name = "The door open"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "paragraph", content = "You don't lock it. Jake sees, and his grin goes wolfish. He shoves your clothes aside, bends you over the sink with the queue right outside, and fucks you hard, his cock slamming in deep. The handle turns. The door swings open a foot, and a girl with a red cup stares straight at your ass and his cock sliding in and out of you. Jake doesn't stop. He fucks you faster while she watches, until he pulls you back onto him and his cum runs down your thighs." },
+  { type = "paragraph", content = "The door stays unlocked, and you both know it. Jake drags your clothes out of the way. He sits on the edge of the bath and pulls you down onto his cock, facing the door. You ride him hard, your tits bouncing, while the queue bangs on the wood. Somebody pushes the door open, sees you, and doesn't shut it. Jake grips your hips and fucks up into you, faster and harder. You come on his cock in front of the open door, and he groans and fills you with his cum." },
+]
+props = { id = "jake_bathroom_open", memory = "seen", seen_weight = 0 }
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a couple fucking in a party bathroom with the door open, a girl in the doorway staring", search_queries = ["caught fucking in party bathroom door open", "sex with the bathroom door unlocked party"], pool_dir = "sex/jake_bathroom_open_t5" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Oh my God. Sorry!"
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Saturday. Your room. I mean it."
+props = { speaker = "npc", npcId = "npc_jake" }
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "By the end of the night half the party will know. You don't care."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the party."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 15
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_bathroom_today", operator = "is_false" }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "jake_bathroom_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Fix your face first."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 15
+
+[[canvases.nodes]]
+id   = "no"
+name = "Not at Zoe's"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Saturday, then."
+props = { speaker = "npc", npcId = "npc_jake" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He kisses your neck once and lets you go back out into the noise."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the party."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 2
+
+[[canvases]]
 id   = "street_seen_skirt"
 name = "Somebody's looking"
 description = "The street sees what she's wearing (skirt): one witness a day by the hour; the first day out in level 1 pays both meters, after that Exhibitionism (meters.md rule 2)."
@@ -35620,6 +36733,10 @@ blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "cafe_footfall", operator = "gte", value = 10 }] }, blocks = [{ type = "dialog", content = "You're the girl from the café.", props = { speaker = "unknown" } }] },
 ]
 
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a braless girl walking down a street, her nipples showing through her top, a man staring at her tits", search_queries = ["braless walking street nipples showing", "no bra walk in public stared at"], pool_dir = "sex/street_seen_nobra_t4" }
+
 [canvases.nodes.exit_block]
 type = "choices"
 
@@ -35741,6 +36858,10 @@ type = "block_pool"
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "cafe_footfall", operator = "gte", value = 10 }] }, blocks = [{ type = "dialog", content = "You're the girl from the café.", props = { speaker = "unknown" } }] },
 ]
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl in a short skirt on a windy street, the breeze lifting the hem over her bare ass", search_queries = ["no panties skirt wind street", "skirt blows up no panties walking"], pool_dir = "sex/street_seen_nopanties_t4" }
 
 [canvases.nodes.exit_block]
 type = "choices"
