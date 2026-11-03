@@ -14357,7 +14357,16 @@ text = "Run."
 targetType = "location"
 locationId = "park"
 time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_park_dare_today", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "zoe_park_dare_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Run."
+targetType = "location"
+locationId = "park"
+time_progression_minutes = 10
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_park_dare_today", operator = "is_true" }] }
 
 [[canvases.nodes]]
 id   = "no"
@@ -26098,7 +26107,7 @@ content = "You're naked in the tub up to your tits, the steam going up into the 
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "Zoe comes out of the house with a drink in each hand, steps out of her dress on the deck, and gets in beside you, naked, so close her thigh is against yours."
+content = "Zoe is already in the water across from you, a drink in each hand. She slides over beside you, naked, so close her thigh is against yours."
 
 [canvases.nodes.exit_block]
 type = "choices"
