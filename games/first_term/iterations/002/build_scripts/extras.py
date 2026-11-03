@@ -14,13 +14,18 @@ out.append({
     "trigger": {"location": "cafe", "is_repeatable": True, "priority": 2, "is_active": True, "max_triggers_per_day": 1},
     "nodes": [node("coffee", "A coffee", [
         P("You take the stool at the end of the counter, watching the room, the regulars, the door."),
-        G(cond(NORMAL_ON), P("In the uniform, off shift, the regulars still wave you over for refills. You ignore them, but it's nice to be asked.")),
-        G(cond(SEXY_ON), P("In the tight uniform the man at the counter can't decide between your tits and your ass, so he looks at both, and his newspaper ends up in his lap. He asks you for a refill. You're off shift, so no.")),
+        G(cond(NORMAL_ON), P("In the uniform, off shift, the regulars still wave you over for refills. You ignore them, but it's nice to be asked."),
+          WHO("Refill over here, when you get a minute!")),
+        G(cond(SEXY_ON), P("In the tight uniform the man at the counter can't decide between your tits and your ass, so he looks at both, and his newspaper ends up in his lap. He asks you for a refill. You're off shift, so no."),
+          WHO("Go on. One refill. I'll make it worth your while.")),   # LO 2026-11-03: the regular pushes
         # reader a3 #43 (DECISIONS 131): the pre-Tom render points at the job. The card is in the window until
         # cafe_job_ask's "Take the uniform." sets tom_met (tom.py; "Sign stays up till somebody takes it.").
         G(cond({"type": "worn_type", "operator": "neq", "value": "cafe_uniform"}, flag("tom_met", False)),
-          P("Nobody here knows you. Taped inside the window, the STAFF WANTED card has a coffee ring on it.")),
+          P("Nobody here knows you. Taped inside the window, the STAFF WANTED card has a coffee ring on it."),
+          WHO("What can I get you?")),   # LO 2026-11-03: the man at the till, not yet a name (tom_met unset)
         G(cond({"type": "worn_type", "operator": "neq", "value": "cafe_uniform"}, flag("tom_met")), P("Out of the apron you're just a customer here, and Tom still clocks you from the till.")),
+        # LO 2026-11-03: Tom's line only while his row has him in (Mon-Sat 08:00-23:00), strict, @player on shift
+        G(cond(flag("tom_met"), here_at("npc_tom", "cafe")), D("npc_tom", "Off the clock, @player? Then you pay like everyone else.")),
     ], [go("Drink it. ($3)", loc="cafe", mins=20, costs=[{"trait": "money", "value": 3}],
            eff=[{"targetType": "player", "trait": "energy", "op": "add", "value": 5, "cap": 100}]),
         go("Leave it.", loc="cafe")])]})

@@ -72,8 +72,10 @@ out.append({
     "trigger": {"location": "zoe_apartment", "is_repeatable": True, "priority": 4, "is_active": True,
                 "schedules": PARTY_SCHED, "conditions": cond(AT_PARTY, trait("drinks_tonight", "lt", 3))},
     "nodes": [node("cup", "A red cup", [
-        POOL(P("Someone pushes a red cup into your hand. Vodka and something orange. It's strong."),
-             P("Zoe appears with two shots and holds one to your lips."), P("A guy from the team pours you something from a bottle with no label and winks.")),
+        # LO 2026-11-03: the one who hands it over says something. Each entry is a group so the pool stays one type.
+        POOL(GC(cond(AT_PARTY), P("Someone pushes a red cup into your hand. Vodka and something orange. It's strong."), WHO("Drink up. It's a party.")),
+             GC(cond(AT_PARTY), P("Zoe appears with two shots and holds one to your lips."), D(Z, "Open up, babe. One for you, one for me.")),
+             GC(cond(AT_PARTY), P("A guy from the team pours you something from a bottle with no label and winks."), WHO("Don't ask what's in it. Just drink."))),
         G(cond(trait("drinks_tonight", "eq", 2)), T("That'd be three. You'll feel it tomorrow.")),
     ], [
         go("Drink it.", loc="zoe_apartment", mins=15, cond_=cond(trait("drinks_tonight", "lt", 2)), mods=DRINK_MOD, eff=[add("drinks_tonight", 1)]),
@@ -302,17 +304,19 @@ out.append({
             go("Stay and watch.", node="watch", mins=5, cond_=cond(CURIOUS)),
             go("Walk the other way.", node="away", mins=2),
         ]),
-        node("run", "Run", [P(RUN_SEEN)],
+        node("run", "Run", [P(RUN_SEEN), WHO("Oh God. Harder. Don't you dare stop.")],   # LO 2026-11-03: the woman
             [go("Look a second longer.", node="linger", mins=3, flags=[fset("saw_the_couple")]),
              go("Run.", loc="park", mins=15, flags=[fset("saw_the_couple")])]),
-        node("linger", "A second longer", [P(LINGER),
+        node("linger", "A second longer", [P(LINGER), P("Behind you, the man laughs."), WHO("Come back! She likes being watched!"),
             VID("a couple having sex against a log in the bushes of a park, the man looks up", "couple fucking in park bushes caught", "outdoor sex in park man looks up", pool_dir="sex/park_couple_run_t5")],
             [go("Keep walking.", loc="park", mins=15, eff=[capped("corruption", 1, CAP_GG)], flags=[fset("saw_the_couple")])]),
         node("watch", "Watch", [P("Behind you on the path a jogger thuds past. You hold your breath until he's gone."), P(WATCH),
+            WHO("Look at you, taking all of my cock. Moan for me."),   # LO 2026-11-03: the man
             VID("seen through leaves, a man fucking a woman bent against a tree in a park", "voyeur watching couple fuck in park", "hidden in bushes watching outdoor sex", pool_dir="sex/park_couple_watch_t5")],
             [go("Leave before they see.", loc="park", mins=10, eff=[capped("corruption", 1, CAP_CUR)], flags=[fset("saw_the_couple")]),
              go("Touch yourself while you watch.", node="touch", mins=5)]),
         node("touch", "With him", [P("A dog barks somewhere along the path, and you freeze with your hand on your belly. Nobody comes."), P(TOUCH),
+            WHO("Take it. Take all of it."),
             VID("a girl hidden in bushes touching herself while watching a couple have sex against a tree", "girl masturbating watching couple outdoors", "voyeur girl fingers herself in park", pool_dir="sex/park_couple_touch_t5")],
             [go("Slip away.", loc="park", mins=10, eff=[capped("corruption", 2, CAP_CUR)], flags=[fset("saw_the_couple")])]),
         node("away", "The other way", [P("You turn round and walk the other way, fast, and don't look back. Your face is burning anyway.")], [go("Back to the pond.", loc="park", mins=10)]),

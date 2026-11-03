@@ -310,14 +310,29 @@ out.append(solo("living_couch", "Lie on the couch",
 # pays every time she watches (LO, 2026-10-29), up to five TV sessions a day (LO, 2026-10-30, DECISIONS 91).
 LIVING_TV_WATCH = ("Channel 5 fills the screen. A woman rides a man on a leather couch. Her tits bounce with every drop of her hips. His hands grip her ass and pull her down hard. The camera cuts low. His cock slides out of her, shiny and thick, and sinks back in to the root. She moans loud. The speakers carry it through the room. You jab the remote and the volume drops. On screen she rides him faster. He grunts and squeezes her ass. Your face goes hot. Your nipples pull tight and ache. You are wet. Your clit throbs, and you squeeze your thighs together hard.")
 LIVING_TV_TOUCH = ("The adult channel is on, the sound turned low. On the screen a man is taking her from behind on a couch like yours, his hands on her hips, his cock driving in deep. Her tits swing with every thrust. She moans through the speakers, low and steady. Your hand slides down your belly and inside your clothes. Your fingers find your clit, and you are already wet. You rub in time with him, hard when he drives in, slow when he pulls out. Your other hand squeezes your tit, your thumb on the nipple. One eye stays on the doorway to the hall. Anyone could walk in. You rub faster. He slams his cock into her, and you come on the couch, biting your lip. Your hips lift off the cushion while your fingers keep working your clit through it.")
+# LO 2026-11-03 ("a line or two for each of the 17 silent people"): she is alone on the couch (LIVING_EMPTY), so the
+# voice is the TV's, speaker "unknown". One line per pool entry, kept with its entry in a group (a pool entry is one block).
+# The adult channel holds to the strangers-on-a-screen ceiling (living_tv_channels.md: no cunt, fuck, cum, pussy).
+TV_VOICE = {
+    "A reporter stands in the rain outside a courthouse. Then the weather: more rain.": "And there's more rain on the way, I'm afraid.",
+    "The local news: a fire on the ring road, a lost dog, the council shouting about parking.": "Police are asking drivers to stay off the ring road.",
+    "A chef with huge arms folds butter into pastry and won't stop talking about it.": "Cold butter, cold hands. Never, ever warm butter.",
+    "Two women race to ice a cake before the clock runs out. One of them cries.": "Thirty seconds, ladies! Hands where I can see them!",
+    "Football, a match nobody in this house cares about. Two-nil.": "And that's two! Two-nil, and they've earned it!",
+    "Highlights: a man runs a very long way while the commentator loses his mind.": "Look at him go! He's still going!",
+    "An old black-and-white film. A woman in a fur coat slaps a man, then kisses him.": "You're a brute, Johnny. Do it again.",
+    "A cop film from the nineties. Everything explodes, twice.": "Get down! It's gonna blow!",
+}
+_ANYWAY = {"version": "1.0", "logic": "AND", "items": []}
 tv_nodes = [node("remote", "The remote", [
         P("You drop onto the couch and pick up the remote. Five channels, and one of them is the one Mark pays for."),
     ], remote_choices("ch_", "adult") + [go("Turn it off.", loc="home_hall")])]
 for cid, btn, lines, desc, qs, pool in CHANNELS:
-    tv_nodes.append(node(f"ch_{cid}", btn.split(": ", 1)[1].rstrip(".").capitalize(), [POOL(*[P(x) for x in lines]), VID(desc, *qs, pool_dir=pool)],
+    tv_nodes.append(node(f"ch_{cid}", btn.split(": ", 1)[1].rstrip(".").capitalize(), [POOL(*[GC(_ANYWAY, P(x), WHO(TV_VOICE[x])) for x in lines]), VID(desc, *qs, pool_dir=pool)],
         [*watch_plain("home_living_room"), go("Change the channel.", node="remote"), go("Turn it off.", loc="home_hall")]))
 tv_nodes += [
     node("adult", "Channel 5", [P(LIVING_TV_WATCH),
+        WHO("Oh God, your cock. Harder. Don't stop."),
         VID("a couple having sex on a TV screen in a dark living room, the woman riding the man", "porn on tv screen living room", "woman riding man on tv adult channel", pool_dir="sex/tv_adult_alone_t5")],
         [go("Keep watching.", loc="home_living_room", mins=30, eff=tv_pay(1, 19), cond_=cond(TV_GG)),
          go("Keep watching.", loc="home_living_room", mins=30, eff=tv_pay(1, 39), cond_=cond(TV_CUR)),
@@ -327,6 +342,7 @@ tv_nodes += [
         G(cond(here(M, "home_kitchen")), P("In the kitchen a cupboard bangs. Mark is home.")),
         G(cond(here(R, "home_ryan_room")), P("Upstairs, Ryan's music thumps through the ceiling.")),
         P(LIVING_TV_TOUCH),
+        WHO("Yes. Give me that cock. Yes."),
         VID("a girl alone on a couch touching herself while porn plays on the TV", "girl masturbating on couch watching porn on tv", "woman fingering herself couch tv porn", pool_dir="sex/tv_adult_touch_t5")],
         [go("Fix your clothes.", loc="home_living_room", mins=25, eff=tv_pay(2, 39))]),
 ]
@@ -430,10 +446,11 @@ out.append({"id": "master_door_saturday_night", "name": "Their door's ajar",
                 "conditions": cond(here(L, "home_master_bedroom"), here(M, "home_master_bedroom"), wd(6), tod("00:00", "01:00"))},
     "nodes": [
         node("gap", "Their door, ajar", [P(MASTER_GAP),
+            G(cond(here(L, "home_master_bedroom"), here(M, "home_master_bedroom")), D(M, "Christ, that ass. Keep still."), D(L, "Are you nearly done?")),   # LO 2026-11-03: his grunt, her flat voice
             VID("through a bedroom door left ajar, a middle-aged man taking a woman from behind on the bed, lamp on", "couple sex seen through bedroom door ajar", "peeking at parents bedroom door gap", pool_dir="sex/master_door_gap_t5")],
             [go("Stay at the gap.", node="stay", mins=5, flags=[fset("saw_mark_and_laura"), fset("mark_laura_seen")]),
              go("Go back to bed.", loc="home_ella_room", mins=2, flags=[fset("saw_mark_and_laura"), fset("mark_laura_seen")])]),
-        node("stay", "At the gap", [P(MASTER_STAY),
+        node("stay", "At the gap", [G(cond(here(L, "home_master_bedroom"), here(M, "home_master_bedroom")), D(M, "Ass up, Laura. Nearly there.")), P(MASTER_STAY),
             VID("a woman lying awake in bed touching herself under the sheet while the man beside her sleeps", "wife masturbating next to sleeping husband", "woman touches herself after husband falls asleep", pool_dir="sex/master_door_stay_t5")],
             [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_mark_and_laura"), fset("mark_laura_seen")])]),
     ]})
@@ -452,10 +469,12 @@ out.append({"id": "laura_alone_in_bed", "name": "Laura's door's ajar",
                 "conditions": cond(*LAURA_HOUR, LAURA_GAP_OPEN)},
     "nodes": [
         node("crack", "Laura's door, ajar", [P(LAURA_CRACK),
+            G(cond(here(L, "home_master_bedroom")), D(L, "Oh God. Oh, God, yes.")),   # LO 2026-11-03: a line for the silent; to herself, under her breath
             VID("through a bedroom door left ajar, a woman alone in bed in a nightdress touching herself, lamp low", "woman masturbating in bed seen through door", "peeking at mom touching herself in bed door ajar", pool_dir="sex/laura_alone_crack_t5")],
             [go("Keep watching.", node="watch", mins=5, flags=[fset("saw_laura_alone"), fset("laura_alone_seen")]),
              go("Pull the door to.", loc="home_hall", mins=2, flags=[fset("saw_laura_alone"), fset("laura_alone_seen")])]),
         node("watch", "Keep watching", [P(LAURA_WATCH),
+            G(cond(here(L, "home_master_bedroom")), D(L, "Mm. There. Right there.")),
             VID("a woman alone in bed fingering herself to orgasm, biting her hand to stay quiet", "woman fingering herself orgasm quiet in bed", "milf masturbating to orgasm biting hand", pool_dir="sex/laura_alone_watch_t5")],
             [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}, add("laura_gaps_watched", 1)], flags=[fset("saw_laura_alone"), fset("laura_alone_seen")])]),
     ]})
@@ -475,6 +494,7 @@ out.append({"id": "laura_alone_after", "name": "Laura's door's ajar",
                 "conditions": cond(*LAURA_HOUR, flag("laura_04_done"))},
     "nodes": [
         node("crack_after", "Laura's door, ajar", [P(beat("laura_alone_in_bed", "crack_after")),
+            G(cond(here(L, "home_master_bedroom")), D(L, "Oh God. Quiet. Quiet.")),   # LO 2026-11-03: to herself; watch_after's beat says "Laura says nothing."
             VID("through a bedroom door ajar, a woman on her side facing the wall, her hand between her thighs", "woman masturbating facing wall door ajar", "mom touches herself back to door", pool_dir="sex/laura_alone_after_crack_t5")],
             [go("Keep watching.", node="watch_after", mins=5, flags=[fset("saw_laura_alone"), fset("laura_alone_seen")]),
              go("Pull the door to.", loc="home_hall", mins=2, flags=[fset("saw_laura_alone"), fset("laura_alone_seen")])]),
@@ -493,10 +513,11 @@ out.append({"id": "laura_shower_gap", "name": "The bathroom door won't shut",
                 "conditions": cond(flag("opening_done"), LAURA_GAP_OPEN)},
     "nodes": [
         node("steam", "Steam", [P(beat("laura_shower_gap", "steam")),
+            G(cond(here(L, "home_bathroom")), D(L, "Mm. God, yes.")),   # LO 2026-11-03: to herself, under the spray
             VID("through a bathroom door stuck open, a naked woman in a steamy shower touching herself", "woman masturbating in shower seen through door", "mom in shower hand between legs steam glass", pool_dir="sex/laura_shower_steam_t5")],
             [go("Keep watching.", node="watch", mins=5, flags=[fset("laura_shower_seen")]),
              go("Pull the door to.", loc="home_hall", mins=2, flags=[fset("laura_shower_seen")])]),
-        node("watch", "Under the water", [P(beat("laura_shower_gap", "watch")),
+        node("watch", "Under the water", [G(cond(here(L, "home_bathroom")), D(L, "Right there. Oh God, right there.")), P(beat("laura_shower_gap", "watch")),
             VID("a naked woman coming in the shower, forehead on the tiles, a moan under the spray", "woman orgasm in shower forehead on tiles", "mom cums in shower", pool_dir="sex/laura_shower_watch_t5")],
             [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}, add("laura_gaps_watched", 1)], flags=[fset("laura_shower_seen")])]),
     ]})
@@ -522,9 +543,11 @@ out.append({"id": "master_door_peek", "name": "Peek through the gap",
     "nodes": [node("peek", "Through the gap", [
         P("You ease the handle down and open the door a finger's width. The lamp is still on."),
         G(cond(here(L, "home_master_bedroom"), here(M, "home_master_bedroom")),
-          P("It's over. Mark's on his back, snoring. Laura lies awake beside him, staring at the ceiling, her nightdress still bunched up at her waist.")),
+          P("It's over. Mark's on his back, snoring. Laura lies awake beside him, staring at the ceiling, her nightdress still bunched up at her waist."),
+          D(L, "Sleep well, then.")),   # LO 2026-11-03: to the ceiling, flat; he snores on
         G(cond(here(M, "home_master_bedroom"), here(L, "home_master_bedroom", False)),
-          P("Mark's sitting up against the headboard under the lamp, awake and alone, his phone lit in his hand. Laura's side of the bed is empty.")),
+          P("Mark's sitting up against the headboard under the lamp, awake and alone, his phone lit in his hand. Laura's side of the bed is empty."),
+          D(M, "You coming up or not?")),   # LO 2026-11-03: toward the stairs, where Laura waits (master_door_peek.md case b)
         P("Nobody looks at the door. You pull it to without a sound."),
     ], [go("Close the door.", loc="home_hall", mins=2)])]})
 
@@ -662,6 +685,9 @@ out.append(solo("front_step", "Sit on the step", "Watch the street. Who passes r
                 P("You sit on the front step with your knees up and watch the street. A car goes by slow. A guy walking his dog looks over, and keeps looking."),
                 P("Two doors down a man is washing his car, and he stops washing it when you sit down."))),
             GC(cond(tod("21:00", "07:00")), P("The street is dark and quiet, the porch light on its timer. A car passes now and then, slow, headlights sliding over you, but nobody stops.")),
+            # LO 2026-11-03: the street speaks. G (a pool) breaks the clock chain above.
+            G(cond(tod("07:00", "21:00")), WHO("Don't get up on my account.")),
+            G(cond(tod("21:00", "07:00")), P("A window comes down on a passing car."), WHO("Hey, gorgeous! Want a ride?")),
             # DECISIONS 124: showing the street is showing a group, Watched (Exhibitionism 60); under it she keeps her knees down
             # reader a3 #9 (DECISIONS 131): the E60 lines only by day, beside a watcher, and each holds a not-yet
             G(cond(SKIRT, slot("underwear"), trait("exhibitionism", "gte", 60), tod("07:00", "21:00")), P("With your knees up in this skirt, anyone passing can see your panties. A man across the road stops with his keys in his hand and looks straight between your knees. You could put your knees down. You don't. You don't open them for him either. Not yet.")),
@@ -676,7 +702,9 @@ out.append(solo("front_step", "Sit on the step", "Watch the street. Who passes r
             GC(cond(slot("underwear")), P("You let your knees fall open on the step. The skirt slides up your thighs, and your panties are right there for the street, the cotton pulled tight over your cunt.")),
             GC(cond(*ANY), P("You let your knees fall open on the step. The skirt slides up your thighs, and there's nothing under it. Your cunt is bare to the street, and the air is cool on it.")),
             P("A man coming up the pavement with his shopping sees. He slows right down. His eyes go between your knees and stay there, and he walks into the gate post two doors down. He goes past twice."),
+            WHO("Jesus. Sorry. Jesus Christ."),   # LO 2026-11-03
             G(cond(here("npc_vance", "vance_house")), P("Next door, Vance's paper is down in his lap. He doesn't pretend to read it.")),
+            G(cond(here("npc_vance", "vance_house"), flag("vance_met")), D("npc_vance", "Mark's girl is growing up.")),   # his short-skirt line (npc_vance.md); she is in the skirt here
             P("Across the road a curtain moves. The woman at the window has her phone in her hand, and she knows your mother."),
             T("That'll get back to Mom. You keep your knees open a minute longer anyway."),
         ], [go("Knees together. Go in.", loc="home_hall", mins=15)]),

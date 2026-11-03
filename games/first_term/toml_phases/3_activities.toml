@@ -297,7 +297,7 @@ name = "Past his porch"
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
-blocks = [ { type = "group", conditions = { version = "1.0", logic = "OR", items = [ { type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "clothing_slot", slot = "bra", operator = "unequipped" } ] }, blocks = [ { type = "paragraph", content = "You take the long way past his gate, slow. The paper lowers. His eyes land on your ass and stay there, and he wets his lips. He half gets out of his chair, then sits back down. You don't stop for him. Not yet. You feel him watch you all the way to the corner." } ] } ]
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "OR", items = [ { type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "clothing_slot", slot = "bra", operator = "unequipped" } ] }, blocks = [ { type = "paragraph", content = "You take the long way past his gate, slow. The paper lowers. His eyes land on your ass and stay there, and he wets his lips. He half gets out of his chair, then sits back down. You don't stop for him. Not yet. You feel him watch you all the way to the corner." }, { type = "dialog", content = "Take your time, Miss. I'm not going anywhere.", props = { speaker = "npc", npcId = "npc_vance" } } ] } ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
@@ -388,6 +388,12 @@ name = "A tray"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "The counter: pasta under the lamp, burgers, fries, cans of something sweet. Five dollars a tray."
+
+# LO 2026-11-03 ("a line or two for each of the 17 silent people"): the woman behind the counter, a stranger.
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Next! Pasta or burger? Keep the line moving."
+props = { speaker = "unknown" }
 
 [canvases.nodes.exit_block]
 type = "choices"
