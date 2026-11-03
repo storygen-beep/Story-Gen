@@ -5,6 +5,18 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-03 — the two engine fixes have landed (C3, S15)
+
+- `references/the-first-hour.md` F8: the warning that the Quests page prints the name above a pointer card is
+  replaced by how to use the new quest-card field `heading` (engine commit f0d7b863). The Quests page, its list
+  layout and the cast page print the heading in place of the name and hide the portrait. The card's own text is
+  not rewritten.
+- `references/engine.md` §17: the "dress `initial` beside a top or bottom" warning is replaced. The start now
+  follows `setup.equipItem`'s slot rule (`v2.py:1209-1230`).
+- Why: LO's skill decisions C3 and S15. Verified: read both engine lines; cite_check --strict.
+
+---
+
 ## 2026-11-03 — LO's decisions from the first_term alignment check
 
 **What and why.** LO answered the 39 skill questions in

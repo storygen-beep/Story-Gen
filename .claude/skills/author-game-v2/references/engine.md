@@ -521,7 +521,7 @@ rows in `CONDITION_SCHEMA` (`template_import.py:1670-1677`).
 | `slot` | one of 7 fixed slots: `bra`, `underwear`, `top`, `bottom`, `dress`, `legwear`, `shoes` (`template_import.py:271`) |
 | `exposure` | 0 covers, 1 shows underwear-level skin, 2 leaves the region bare while worn (a mesh top) |
 | `type` | **one** tag per item, read by `worn_type` (no tag list: a garment cannot be both "skirt" and "wet") |
-| `initial`, `price` | owned **and worn** at the start, the last `initial` in a slot winning (`v2.py:1208-1221`); or bought. ⚠️ The start loop does not clear `top` and `bottom` for an `initial` `dress` yet (`setup.equipItem` does); the engine fix is pending. Until it lands, never mark a dress `initial` beside a top or bottom `initial`: she starts wearing all three |
+| `initial`, `price` | owned **and worn** at the start, the last `initial` in a slot winning (`v2.py:1209-1230`); or bought. The start follows `setup.equipItem`'s slot rule in file order: a dress takes off the top and bottom, and a top or bottom takes off the dress (fixed 2026-11-03, S15) |
 | `conditions` | refuse equipping it (`setup.equipItem`, `v2.py:1715-1716`): the daring price to put it on |
 | `beauty`, `corruption` | folded as a MAX, not a sum: one loaded garment sets the number on its own |
 

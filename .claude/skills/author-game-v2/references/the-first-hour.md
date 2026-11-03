@@ -849,9 +849,10 @@ meeting is allowed (LO, 2026-11-03): it carries the flag with `is_false`, and it
 and where, never their name (*"The girl from your Biology class hangs out on the quad."*). Every card
 after the meeting carries the flag with `is_true`.
 
-⚠️ The Quests page prints the character's name as the section heading, so a pointer card still shows the
-name above its text. An engine fix to print "Someone" there until the meeting is pending; until it ships,
-check the pointer card live.
+A pointer card carries `heading = "<what she knows them as>"` (for example `"A girl from Biology"`). The Quests
+page, its list layout and the cast page print the heading in place of the name and hide the portrait
+(`v2.py:11867`, `v2.py:18923`; engine fix 2026-11-03, C3). The card's own `text` and `tip` are not rewritten, so
+keep the name out of them too.
 
 ```toml
 when = [ { flag = "met_wade", subject = "player", op = "is_true" },
