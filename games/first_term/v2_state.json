@@ -4260,7 +4260,8 @@
         "labels": [
           "she_can_study"
         ],
-        "read_by": "every exam result"
+        "read_by": "every exam result",
+        "performance": true
       },
       {
         "id": "grade_psych",
@@ -4272,7 +4273,8 @@
         "labels": [
           "she_can_study"
         ],
-        "read_by": "Laura, Hale, Mark, the dean; failing / fine / top"
+        "read_by": "Laura, Hale, Mark, the dean; failing / fine / top",
+        "performance": true
       },
       {
         "id": "grade_art",
@@ -4284,7 +4286,8 @@
         "labels": [
           "she_can_study"
         ],
-        "read_by": "Laura, the art lecturer, Mark, the dean"
+        "read_by": "Laura, the art lecturer, Mark, the dean",
+        "performance": true
       },
       {
         "id": "grade_business",
@@ -4296,7 +4299,8 @@
         "labels": [
           "she_can_study"
         ],
-        "read_by": "Laura, the Business lecturer's retake, Mark, the dean"
+        "read_by": "Laura, the Business lecturer's retake, Mark, the dean",
+        "performance": true
       },
       {
         "id": "grade_bio",
@@ -4308,7 +4312,8 @@
         "labels": [
           "she_can_study"
         ],
-        "read_by": "Laura, the Biology TA, Mark, the dean"
+        "read_by": "Laura, the Biology TA, Mark, the dean",
+        "performance": true
       },
       {
         "id": "complaints",
@@ -6529,7 +6534,10 @@
           ],
           "release1_note": "Release 1 (npc_mark.md, signed 2026-11-01; DECISIONS 116): four steps, paced by Sundays and her short weeks; no sex and no money for her body. Mark A 4, 5, 7, 8, 9 cut; the arrangement (built step 6) is the top step."
         },
-        "schedule_rows": 9
+        "schedule_rows": 9,
+        "stored": [
+          "want"
+        ]
       },
       {
         "id": "npc_tom",
@@ -6711,6 +6719,10 @@
             "start_time": "22:00",
             "reason": "closing, room shut: the café shuts at 22:00 and Tom stays on to close; she can be inside only for Friday's after-close (LO, 2026-10-09, option A, like Ryan's shower hour)"
           }
+        ],
+        "stored": [
+          "want",
+          "power"
         ]
       },
       {
@@ -7735,7 +7747,8 @@
       "late_shift",
       "late_date",
       "came_home_late"
-    ]
+    ],
+    "notes_20261103": "W4 (LO 2026-11-03): Mark's want and Tom's want and power are stored for a later release's steps (board.characters[].stored). S7: the grades and intelligence are performance meters (\"performance\": true)."
   },
   "dependencies": [
     {
