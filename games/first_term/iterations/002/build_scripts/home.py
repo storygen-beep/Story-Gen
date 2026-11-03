@@ -663,6 +663,9 @@ sun_nodes = [
         GC(cond(RYAN_SEES, here(M, "home_garage", False)), P("You roll onto your back, and your tits are bare to the sky and to his window. His music doesn't come back on. Ryan stands at the glass, then steps back fast, red to the ears."),
            ME("Want a better look, Ryan? Come down and ask me."), P("He doesn't come down. Not today.")),
         GC(cond(*ANY), P("You stay exactly as you are until whoever was looking has gone. Your skin is hot, and you don't cover up.")),
+        # heat proposal A10 (DECISIONS 147): a _t4 pool on the show-off screen (nudity, not sex; media only)
+        VID("a topless girl sunbathing on a lounger in a back garden, a man watching her from a doorway or a window",
+            "topless sunbathing back garden watched", "topless girl on lounger neighbour watching", pool_dir="sex/garden_sun_seen_t4"),
     ], [go("Go in.", loc="home_hall")]),
     # reader a3 #10 (DECISIONS 131): "Let Mark look." gets his reaction. Clothes by the same three slots the lounger names.
     node("sun_mark_look", "Let Mark look", [
