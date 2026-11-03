@@ -142,7 +142,7 @@ out.append({
     "trigger": {"location": "corner_shop", "is_repeatable": True, "priority": 4, "is_active": True,
                 "conditions": cond(flag("grocery_list"), flag("groceries_bought", False))},
     "nodes": [node("till", "The till", [
-        P("Bread, milk, eggs, the wine Laura likes, the washing powder she always forgets. The clerk scans it all without looking up from his phone and bags it in two thin bags that will definitely split."),
+        P("Bread, milk, eggs, the wine Laura likes, the laundry detergent she always forgets. The clerk scans it all without looking up from his phone and bags it in two thin bags that will definitely split."),
     ], [go("Pay with Laura's twenty ($20).", loc="street", mins=15, costs=[{"trait": "money", "value": 20}],
            eff=[add("money", -20, clamp=False)], flags=[fset("groceries_bought")]),
         go("Not now.", loc="street")])]})
@@ -237,10 +237,10 @@ STREET_POOLS = {
                       "no panties skirt wind street", "skirt blows up no panties walking", pool_dir="sex/street_seen_nopanties_t4")],
 }
 SHOP_NEXT = "He'll be out front tomorrow."
-SHOP_SAID = {"skirt": "Nice day for a skirt like that, sweetheart.", "nobra": "Cold out today, is it? Come in and warm up.",
+SHOP_SAID = {"skirt": "Nice day for a skirt like that.", "nobra": "Cold out today, is it? Come in and warm up.",
              "nopanties": "I mean it. Come in a minute. Just a minute."}
 CAR_SAID = {"skirt": "Hey, legs! Where are you walking to? I'll drive you.", "nobra": "Jesus, look at those. Get in, I'll give you a lift.",
-            "nopanties": "I said get in. I saw that breeze, sweetheart."}
+            "nopanties": "I said get in. I saw that breeze, legs."}
 CAR_NEXT = "The same car's parked at the corner the next time you look."
 for case, worn, lv, vance, shop, car in STREET_CASES:
     first = f"street_first_l{lv}"

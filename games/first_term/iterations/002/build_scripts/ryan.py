@@ -842,7 +842,7 @@ out.append({
     "trigger": {"location": LR, "npc": R, "requires_npc": R, "is_repeatable": True, "priority": 6, "is_active": True,
                 "conditions": cond(flag("opening_done"))},
     "nodes": [node("couch", "Ryan, on the couch", [
-        P("Ryan's sprawled on the couch with a controller, the TV loud, a bag of crisps open on his chest."),
+        P("Ryan's sprawled on the couch with a controller, the TV loud, a bag of chips open on his chest."),
         POOL(D(R, "Want next game?"), D(R, "Sit. You're blocking the screen."), D(R, "There's a film on after this if you want.")),
         ME("Move your feet, then."), D(R, "Make me."),   # pass 3 B4
         *RYAN_DRESS_LINES, *RT_LIVING[0],
@@ -942,6 +942,10 @@ assert "ryan_things" not in walkins.attach(out)
 for _c in out:
     if _c["id"] == "ryan_two_knocks":
         clear_on_leave(_c, "ryan_knock_booked")
+# pass 4 E95: the one-time sex step takes energy and hygiene like the repeatable acts (board.needs)
+sex_takes_needs(out, "ryan_07_kayla_cant_know", "after7", "Go to your room.")
+for _n in ("inside", "on", "mouth"):
+    sex_takes_needs(out, "ryan_08_two_knocks_first_sex", _n, "Lie there.")
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards)
 open(__import__("sys").argv[1], "w").write(text)
 print("ryan:", len(out), "canvases,", len(cards), "cards")

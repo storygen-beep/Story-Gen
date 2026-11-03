@@ -289,7 +289,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 [[phone.conversations.blocks]]
 type = "message"
 sender = "npc"
-content = "$75. tomorrow. kitchen."
+content = "rent. tomorrow. kitchen."
 [[phone.conversations.blocks]]
 type = "reply"
 round = 1
@@ -662,7 +662,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 [[phone.conversations.blocks]]
 type = "message"
 sender = "npc"
-content = "My door was unlocked at half six."
+content = "Half past six. My door was unlocked."
 [[phone.conversations.blocks]]
 type = "reply"
 round = 1
@@ -675,7 +675,7 @@ type = "message"
 sender = "npc"
 after_round = 1
 after_choice = 0
-content = "Then don't promise half six. — H."
+content = "Then don't promise. — H."
 [[phone.conversations.blocks]]
 type = "message"
 sender = "npc"

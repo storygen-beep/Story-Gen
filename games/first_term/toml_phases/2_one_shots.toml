@@ -12,7 +12,7 @@
 [[canvases]]
 id   = "ryan_01_hall_first_morning"
 name = "Your first morning"
-description = "The opening and Ryan step 1. Sets opening_done, rent_starts, the start choice, laura_rule_ryan_first, hygiene_off (or not), ryan_step 1 (or -1: his path ends)."
+description = "The opening and Ryan step 1. Sets opening_done, rent_starts, the start choice, laura_rule_ryan_first, hygiene_off (or not), ryan_step 1."
 
 [canvases.trigger]
 location      = "home_hall"
@@ -162,6 +162,13 @@ content = "Some of us have places to be, @player.nickname."
 speaker = "npc"
 npcId   = "npc_ryan"
 
+# pass 4 B3: her answer through the door (her talk beside her thoughts)
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Two minutes!"
+[canvases.nodes.blocks.props]
+speaker = "player"
+
 [[canvases.nodes.blocks]]
 type    = "paragraph"
 content = "Ryan. Your step-brother, through the door, right outside it. You turn the water off and wrap the towel round yourself and tuck it in over your tits. It covers you. Mostly."
@@ -237,33 +244,42 @@ time_progression_minutes = 3
 flagEffects = [ { targetType = "player", flag = "ryan_hall_talked", op = "set" }, { targetType = "player", flag = "ryan_hall_seen", op = "set" } ]
 effects     = [ { targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 5 } ]
 
-[[canvases.nodes.exit_block.choices]]
-text        = "Don't ever look at me like that. (ends his path)"
-targetType  = "node"
-nodeId      = "final"
-time_progression_minutes = 3
-flagEffects = [ { targetType = "player", flag = "ryan_01_hall_first_morning_closed", op = "set" } ]
+# pass 4 G73 (LO, PICKS 17 "ban it"): no final no on the central arc's first screen. "Knock next time." is the
+# parked no; the old "(ends his path)" button and its screen are gone.
 
 # ── screen 6 · the reaction ──
 [[canvases.nodes]]
 id   = "run"
 name = "Down the hall"
 
+# pass 4 B3: he says something as she bolts, so the screen talks as well as thinks
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Morning to you too."
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_ryan"
+
 [[canvases.nodes.blocks]]
 type    = "paragraph"
 content = "You hold the towel shut with both hands and go, fast, past him, close enough to smell his sleep. Your face is burning. You feel his eyes on the backs of your legs the whole way down the hall, and you don't look round, but you know he's still watching when your door shuts."
+
+# pass 4 B3: the door is narration, so it is a paragraph; the thoughts below keep only what she thinks
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You lean on your door with your heart going."
 
 # H6 (pass 3 A63): after the accident, her own voice turns it into a wish, behind the flag the accident sets
 # reader batch 4 (pass 3): her voice at her level (W1b): pushback below Curious, the wish at Curious and up
 [[canvases.nodes.blocks]]
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ryan_hall_seen", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 } ] }
-blocks = [ { type = "thought_bubble", content = "You lean on your door with your heart going. Ryan looked at your legs like that. He's your step-brother. You are not going to think about it. You're thinking about it.", props = { speaker = "player" } } ]
+blocks = [ { type = "thought_bubble", content = "Ryan looked at your legs like that. He's your step-brother. You are not going to think about it. You're thinking about it.", props = { speaker = "player" } } ]
 
 [[canvases.nodes.blocks]]
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ryan_hall_seen", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 } ] }
-blocks = [ { type = "thought_bubble", content = "You lean on your door with your heart going. Ryan looked at you like that. You want him to look again. Longer.", props = { speaker = "player" } } ]
+blocks = [ { type = "thought_bubble", content = "Ryan looked at you like that. You want him to look again. Longer.", props = { speaker = "player" } } ]
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -396,49 +412,6 @@ time_progression_minutes = 12
 effects    = [ { targetType = "player", trait = "ryan_step", op = "set", value = 1 } ]
 wardrobeEffects = [ { action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" } ]
 
-[[canvases.nodes]]
-id   = "final"
-name = "Don't"
-
-[[canvases.nodes.blocks]]
-type = "dialog"
-content = "Don't ever look at me like that."
-[canvases.nodes.blocks.props]
-speaker = "player"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "He goes white. He steps back against the wall like you slapped him, and he looks at the carpet."
-
-[[canvases.nodes.blocks]]
-type = "dialog"
-content = "Right. Yeah. Got it."
-[canvases.nodes.blocks.props]
-speaker = "npc"
-npcId   = "npc_ryan"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "He goes into the bathroom and shuts the door, and from now on he's your brother and nothing else, and polite, and cold."
-
-[[canvases.nodes.blocks]]
-type = "dialog"
-content = "@player, you'll be late on your first day!"
-[canvases.nodes.blocks.props]
-speaker = "npc"
-npcId   = "npc_laura"
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Get dressed."
-targetType = "node"
-nodeId     = "breakfast"
-time_progression_minutes = 12
-effects    = [ { targetType = "player", trait = "ryan_step", op = "set", value = -1, clamp = false } ]
-wardrobeEffects = [ { action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" } ]
-
 # ── screen 7 · breakfast: Laura, Mark, the rent, the start choice ──
 [[canvases.nodes]]
 id   = "breakfast"
@@ -556,6 +529,13 @@ content = "Fine by me."
 speaker = "npc"
 npcId   = "npc_ryan"
 
+# pass 4 B3: her answer to the rule
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Mom. Nobody was in a towel on purpose."
+[canvases.nodes.blocks.props]
+speaker = "player"
+
 [[canvases.nodes.blocks]]
 type    = "paragraph"
 content = "Mark leaves without saying goodbye. The back door bangs. Ryan takes his toast upstairs, and his door shuts behind him."
@@ -593,6 +573,12 @@ content = "You need $75 by Sunday: the rent is taken then. The café near campus
 type    = "dialog"
 content = "You'll be late on your first day."
 props   = { speaker = "npc", npcId = "npc_laura" }
+
+# pass 4 B3: her answer
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "I'm going, Mom. I'm going."
+props   = { speaker = "player" }
 
 [canvases.nodes.exit_block]
 type = "choices"

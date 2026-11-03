@@ -504,7 +504,7 @@ out.append({"id": "master_door_saturday_night", "name": "Their door's ajar",
             G(cond(here(L, "home_master_bedroom")), D(L, "Oh. Oh, God. Yes."), P("She says it into the pillow, so quiet it's almost nothing.")),
             VID("a woman lying awake in bed touching herself under the sheet while the man beside her sleeps", "wife masturbating next to sleeping husband", "woman touches herself after husband falls asleep", pool_dir="sex/master_door_stay_t5"),
             # scene reader b03 (2026-11-03): the hook (the canvas's window is every Saturday night, Sun 00:00-01:00)
-            T("Next Saturday night, after midnight, their door will be open a crack again. You already know you'll be out on that landing.")],
+            T("Next Saturday night, after midnight, their door will be open a crack again. You already know you'll be out in that hall.")],
             [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}], flags=[fset("saw_mark_and_laura"), fset("mark_laura_seen")])]),
     ]})
 
@@ -764,7 +764,7 @@ out.append(solo("front_step", "Sit on the step", "Watch the street. Who passes r
             GC(cond(tod("21:00", "07:00")), P("The street is dark and quiet, the porch light on its timer. A car passes now and then, slow, headlights sliding over you, but nobody stops.")),
             # LO 2026-11-03: the street speaks. G (a pool) breaks the clock chain above.
             G(cond(tod("07:00", "21:00")), WHO("Don't get up on my account.")),
-            G(cond(tod("21:00", "07:00")), P("A window comes down on a passing car."), WHO("Hey, gorgeous! Want a ride?")),
+            G(cond(tod("21:00", "07:00")), P("A window comes down on a passing car."), WHO("Hey, beautiful! Want a ride?")),
             # DECISIONS 124: showing the street is showing a group, Watched (Exhibitionism 60); under it she keeps her knees down
             # reader a3 #9 (DECISIONS 131): the E60 lines only by day, beside a watcher, and each holds a not-yet
             G(cond(SKIRT, slot("underwear"), trait("exhibitionism", "gte", 60), tod("07:00", "21:00")), P("With your knees up in this skirt, anyone passing can see your panties. A man across the road stops with his keys in his hand and looks straight between your knees. You could put your knees down, but you don't. You don't open them for him either. Not yet.")),

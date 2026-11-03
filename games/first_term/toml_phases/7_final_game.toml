@@ -886,7 +886,6 @@ flag_keys = [
   "rent_starts",
   "rival_met",
   "room_tidy",
-  "ryan_01_hall_first_morning_closed",
   "ryan_02_done",
   "ryan_03_done",
   "ryan_04_done",
@@ -2838,7 +2837,7 @@ to       = "14:30"
 [[canvases]]
 id   = "ryan_01_hall_first_morning"
 name = "Your first morning"
-description = "The opening and Ryan step 1. Sets opening_done, rent_starts, the start choice, laura_rule_ryan_first, hygiene_off (or not), ryan_step 1 (or -1: his path ends)."
+description = "The opening and Ryan step 1. Sets opening_done, rent_starts, the start choice, laura_rule_ryan_first, hygiene_off (or not), ryan_step 1."
 
 [canvases.trigger]
 location      = "home_hall"
@@ -2988,6 +2987,13 @@ content = "Some of us have places to be, @player.nickname."
 speaker = "npc"
 npcId   = "npc_ryan"
 
+# pass 4 B3: her answer through the door (her talk beside her thoughts)
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Two minutes!"
+[canvases.nodes.blocks.props]
+speaker = "player"
+
 [[canvases.nodes.blocks]]
 type    = "paragraph"
 content = "Ryan. Your step-brother, through the door, right outside it. You turn the water off and wrap the towel round yourself and tuck it in over your tits. It covers you. Mostly."
@@ -3063,33 +3069,42 @@ time_progression_minutes = 3
 flagEffects = [ { targetType = "player", flag = "ryan_hall_talked", op = "set" }, { targetType = "player", flag = "ryan_hall_seen", op = "set" } ]
 effects     = [ { targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 5 } ]
 
-[[canvases.nodes.exit_block.choices]]
-text        = "Don't ever look at me like that. (ends his path)"
-targetType  = "node"
-nodeId      = "final"
-time_progression_minutes = 3
-flagEffects = [ { targetType = "player", flag = "ryan_01_hall_first_morning_closed", op = "set" } ]
+# pass 4 G73 (LO, PICKS 17 "ban it"): no final no on the central arc's first screen. "Knock next time." is the
+# parked no; the old "(ends his path)" button and its screen are gone.
 
 # ── screen 6 · the reaction ──
 [[canvases.nodes]]
 id   = "run"
 name = "Down the hall"
 
+# pass 4 B3: he says something as she bolts, so the screen talks as well as thinks
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Morning to you too."
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId   = "npc_ryan"
+
 [[canvases.nodes.blocks]]
 type    = "paragraph"
 content = "You hold the towel shut with both hands and go, fast, past him, close enough to smell his sleep. Your face is burning. You feel his eyes on the backs of your legs the whole way down the hall, and you don't look round, but you know he's still watching when your door shuts."
+
+# pass 4 B3: the door is narration, so it is a paragraph; the thoughts below keep only what she thinks
+[[canvases.nodes.blocks]]
+type    = "paragraph"
+content = "You lean on your door with your heart going."
 
 # H6 (pass 3 A63): after the accident, her own voice turns it into a wish, behind the flag the accident sets
 # reader batch 4 (pass 3): her voice at her level (W1b): pushback below Curious, the wish at Curious and up
 [[canvases.nodes.blocks]]
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ryan_hall_seen", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 } ] }
-blocks = [ { type = "thought_bubble", content = "You lean on your door with your heart going. Ryan looked at your legs like that. He's your step-brother. You are not going to think about it. You're thinking about it.", props = { speaker = "player" } } ]
+blocks = [ { type = "thought_bubble", content = "Ryan looked at your legs like that. He's your step-brother. You are not going to think about it. You're thinking about it.", props = { speaker = "player" } } ]
 
 [[canvases.nodes.blocks]]
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "ryan_hall_seen", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 } ] }
-blocks = [ { type = "thought_bubble", content = "You lean on your door with your heart going. Ryan looked at you like that. You want him to look again. Longer.", props = { speaker = "player" } } ]
+blocks = [ { type = "thought_bubble", content = "Ryan looked at you like that. You want him to look again. Longer.", props = { speaker = "player" } } ]
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -3222,49 +3237,6 @@ time_progression_minutes = 12
 effects    = [ { targetType = "player", trait = "ryan_step", op = "set", value = 1 } ]
 wardrobeEffects = [ { action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" } ]
 
-[[canvases.nodes]]
-id   = "final"
-name = "Don't"
-
-[[canvases.nodes.blocks]]
-type = "dialog"
-content = "Don't ever look at me like that."
-[canvases.nodes.blocks.props]
-speaker = "player"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "He goes white. He steps back against the wall like you slapped him, and he looks at the carpet."
-
-[[canvases.nodes.blocks]]
-type = "dialog"
-content = "Right. Yeah. Got it."
-[canvases.nodes.blocks.props]
-speaker = "npc"
-npcId   = "npc_ryan"
-
-[[canvases.nodes.blocks]]
-type    = "paragraph"
-content = "He goes into the bathroom and shuts the door, and from now on he's your brother and nothing else, and polite, and cold."
-
-[[canvases.nodes.blocks]]
-type = "dialog"
-content = "@player, you'll be late on your first day!"
-[canvases.nodes.blocks.props]
-speaker = "npc"
-npcId   = "npc_laura"
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text       = "Get dressed."
-targetType = "node"
-nodeId     = "breakfast"
-time_progression_minutes = 12
-effects    = [ { targetType = "player", trait = "ryan_step", op = "set", value = -1, clamp = false } ]
-wardrobeEffects = [ { action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" } ]
-
 # ── screen 7 · breakfast: Laura, Mark, the rent, the start choice ──
 [[canvases.nodes]]
 id   = "breakfast"
@@ -3382,6 +3354,13 @@ content = "Fine by me."
 speaker = "npc"
 npcId   = "npc_ryan"
 
+# pass 4 B3: her answer to the rule
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Mom. Nobody was in a towel on purpose."
+[canvases.nodes.blocks.props]
+speaker = "player"
+
 [[canvases.nodes.blocks]]
 type    = "paragraph"
 content = "Mark leaves without saying goodbye. The back door bangs. Ryan takes his toast upstairs, and his door shuts behind him."
@@ -3419,6 +3398,12 @@ content = "You need $75 by Sunday: the rent is taken then. The café near campus
 type    = "dialog"
 content = "You'll be late on your first day."
 props   = { speaker = "npc", npcId = "npc_laura" }
+
+# pass 4 B3: her answer
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "I'm going, Mom. I'm going."
+props   = { speaker = "player" }
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -3865,7 +3850,7 @@ name = "A tray"
 # Iteration 002, part 8 (reader): the counter first; she eats only after "Eat".
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "The counter: pasta under the lamp, burgers, fries, cans of something sweet. Five dollars a tray."
+content = "The counter: pasta under the lamp, burgers, fries, cans of something sweet. $5 a tray."
 
 # LO 2026-11-03 ("a line or two for each of the 17 silent people"): the woman behind the counter, a stranger.
 [[canvases.nodes.blocks]]
@@ -4682,7 +4667,10 @@ text       = "Leave it."
 targetType = "node"
 nodeId     = "left"
 time_progression_minutes = 5
-effects    = [ { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 } ]
+# pass 4 (A68 rule, LO 2026-11-04): an act a group watches needs both meters at stage 4, Corruption 60 and
+# Exhibitionism 60 (the canvas holds the 60). It opens at stage 4, so it pays inside stage 4 (cap 79 on both).
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 } ] }
+effects    = [ { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 } ]
 
 [[canvases.nodes]]
 id   = "moved"
@@ -6028,7 +6016,7 @@ text = "Go to your room."
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 2
-effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 5 }, { targetType = "player", trait = "corruption", op = "add", value = 3, cap = 79 }, { targetType = "player", trait = "ryan_step", op = "set", value = 7 }]
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 5 }, { targetType = "player", trait = "corruption", op = "add", value = 3, cap = 79 }, { targetType = "player", trait = "ryan_step", op = "set", value = 7 }, { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "ryan_07_done", op = "set" }]
 consumes = true
 
@@ -6798,7 +6786,7 @@ text = "Lie there."
 targetType = "node"
 nodeId = "after"
 time_progression_minutes = 10
-effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 5 }]
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 5 }, { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 
 [[canvases.nodes]]
 id   = "on"
@@ -6853,7 +6841,7 @@ text = "Lie there."
 targetType = "node"
 nodeId = "after"
 time_progression_minutes = 10
-effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 5 }]
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 5 }, { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 
 [[canvases.nodes]]
 id   = "mouth"
@@ -6908,7 +6896,7 @@ text = "Lie there."
 targetType = "node"
 nodeId = "after"
 time_progression_minutes = 10
-effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 5 }]
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 5 }, { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 
 [[canvases.nodes]]
 id   = "after"
@@ -8763,7 +8751,7 @@ name = "Ryan, on the couch"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "Ryan's sprawled on the couch with a controller, the TV loud, a bag of crisps open on his chest."
+content = "Ryan's sprawled on the couch with a controller, the TV loud, a bag of chips open on his chest."
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -9688,7 +9676,7 @@ when = [
 ]
 ready_canvas = "ryan_07_kayla_cant_know"
 goals = [
-  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 60, label = "Corruption 60 (Hungry): get on Ryan's couch with him, pull Jake into the gym locker room, take a dare at Zoe's party" },
+  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 60, label = "Corruption 60 (Hungry): get on Ryan's couch with him, pull Jake into the gym locker room" },
   { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 60, label = "Ryan's Lust 60: let him see you at home: your towel in the hall, the shower, the lounger under his window, his room in the evenings" },
 ]
 
@@ -9702,7 +9690,7 @@ when = [
 ]
 ready_canvas = "ryan_08_two_knocks_first_sex"
 goals = [
-  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 60, label = "Corruption 60 (Hungry): get on Ryan's couch with him, pull Jake into the gym locker room, take a dare at Zoe's party" },
+  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 60, label = "Corruption 60 (Hungry): get on Ryan's couch with him, pull Jake into the gym locker room" },
   { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 70, label = "Ryan's Lust 70: let him see you at home: your towel in the hall, the shower, the lounger under his window, his room in the evenings" },
 ]
 
@@ -15970,7 +15958,31 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "08:30", end_time = "09:00" }] }, blocks = [{ type = "paragraph", content = "Saturday. Mark's on his feet at the counter with his coffee, in his work jeans. The garage is waiting for him." }, { type = "dialog", content = "Morning.", props = { speaker = "npc", npcId = "npc_mark" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "11:00", end_time = "18:00" }] }, blocks = [{ type = "paragraph", content = "He has the sports pages spread over the whole table and doesn't look up. Sunday afternoon is his, and he wants it quiet." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "18:00", end_time = "20:00" }] }, blocks = [{ type = "paragraph", content = "Sunday dinner. Mark's at the head of the table with his sleeves rolled, waiting to be fed." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "20:00", end_time = "22:00" }] }, blocks = [{ type = "paragraph", content = "Sunday night. Mark's at the table with a beer and the game on the radio, the dinner plates stacked by the sink." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "08:30", end_time = "09:00" }] }, blocks = [{ type = "paragraph", content = "Saturday. Mark's on his feet at the counter with his coffee, in his work jeans. He drinks it standing, on his way to the garage, and he isn't stopping to talk." }, { type = "dialog", content = "Morning.", props = { speaker = "npc", npcId = "npc_mark" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "17:00", end_time = "18:30" }] }, blocks = [{ type = "paragraph", content = "Saturday. Mark's at the counter in a clean shirt with his keys in his hand, on his way out to the bar with the guys." }, { type = "dialog", content = "Don't wait up.", props = { speaker = "npc", npcId = "npc_mark" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -18695,7 +18707,7 @@ text = "Ask for it back."
 targetType = "node"
 nodeId = "mine"
 time_progression_minutes = 3
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 3, clamp = true, cap = 79 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 3, clamp = true, cap = 79 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
 flagEffects = [{ targetType = "player", flag = "zoe_has_bra", op = "set" }]
 wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }]
 
@@ -18886,7 +18898,7 @@ text = "\"Saturday?\""
 targetType = "node"
 nodeId = "saturday"
 time_progression_minutes = 10
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 3, cap = 39 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 3, cap = 39 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
 
 [[canvases.nodes]]
 id   = "saturday"
@@ -19182,7 +19194,7 @@ text = "\"Saturday?\""
 targetType = "node"
 nodeId = "saturday"
 time_progression_minutes = 10
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 3, cap = 39 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 3, cap = 39 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
 
 [[canvases.nodes]]
 id   = "saturday"
@@ -19811,6 +19823,7 @@ text = "Don't stop."
 targetType = "node"
 nodeId = "comes"
 time_progression_minutes = 10
+effects = [{ targetType = "player", trait = "energy", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 
 [[canvases.nodes]]
 id   = "comes"
@@ -20094,7 +20107,7 @@ props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Hi, gorgeous. You're buying dessert."
+content = "Hi, babe. You're buying dessert."
 props = { speaker = "npc", npcId = "npc_zoe" }
 
 [[canvases.nodes.blocks]]
@@ -21426,14 +21439,14 @@ text = "Pick it up."
 targetType = "node"
 nodeId = "pen"
 time_progression_minutes = 2
-flagEffects = [{ targetType = "player", flag = "nadia_met", op = "set" }, { targetType = "player", flag = "desk_guy_met", op = "set" }, { targetType = "player", flag = "rival_met", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "nadia_met", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Leave it."
 targetType = "node"
 nodeId = "left"
 time_progression_minutes = 2
-flagEffects = [{ targetType = "player", flag = "nadia_met", op = "set" }, { targetType = "player", flag = "desk_guy_met", op = "set" }, { targetType = "player", flag = "rival_met", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "nadia_met", op = "set" }]
 
 [[canvases.nodes]]
 id   = "pen"
@@ -22174,7 +22187,7 @@ text = "Wait."
 targetType = "node"
 nodeId = "knock"
 time_progression_minutes = 5
-effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = 5, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 3, cap = 79 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 3, cap = 79 }]
+effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = 5, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 3, cap = 79 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 3, cap = 79 }, { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 
 [[canvases.nodes]]
 id   = "knock"
@@ -22988,7 +23001,7 @@ when = [
 ]
 ready_canvas = "hale_02_lost_his_place"
 goals = [
-  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Exhibitionism 20 (Daring): run in the park, walk the street, let someone walk in on your shower" },
+  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Exhibitionism 20 (Daring): let someone walk in on your shower; once you're Curious, run in the park and walk the street" },
 ]
 
 [[quest_cards]]
@@ -23893,6 +23906,7 @@ text = "Lie there."
 targetType = "node"
 nodeId = "after"
 time_progression_minutes = 10
+effects = [{ targetType = "player", trait = "energy", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 
 [[canvases.nodes]]
 id   = "after"
@@ -24896,7 +24910,7 @@ targetType = "node"
 nodeId = "hips"
 time_progression_minutes = 30
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_gym_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
 flagEffects = [{ targetType = "player", flag = "jake_gym_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -25184,7 +25198,7 @@ when = [
 ready_canvas = "jake_03_my_boyfriend"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 20, label = "Corruption 20 (Curious): stay and look: the park couple, the library stacks, a door left open at home at night" },
-  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Exhibitionism 20 (Daring): run in the park, walk the street, let someone walk in on your shower" },
+  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Exhibitionism 20 (Daring): let someone walk in on your shower; once you're Curious, run in the park and walk the street" },
   { flag = "jake_date_went", op = "is_true", label = "Go out with Jake on a Saturday" },
 ]
 
@@ -25445,7 +25459,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "A table of guys from the team come in and order nothing but coffee for an hour so they can watch you walk back and forth. Tom lets them. They tip like they're trying to impress each other." }, { type = "dialog", content = "Same again, gorgeous. And walk slower this time, we're paying for the view.", props = { speaker = "unknown" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "A table of guys from the team come in and order nothing but coffee for an hour so they can watch you walk back and forth. Tom lets them. They tip like they're trying to impress each other." }, { type = "dialog", content = "Same again, honey. And walk slower this time, we're paying for the view.", props = { speaker = "unknown" } }] },
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Two women in gym clothes, a businessman on a call, a pensioner who wants the crusts cut off his toast. Your feet hurt, but you're good at this. You can feel it in the tips." }, { type = "dialog", content = "Crusts off, I said. Thank you, dear. You're the only one here who listens.", props = { speaker = "unknown" } }] },
 ]
 props = { id = "cafe_shift_lines", memory = "seen" }
@@ -25453,7 +25467,7 @@ props = { id = "cafe_shift_lines", memory = "seen" }
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }] }, blocks = [{ type = "paragraph", content = "In the tight uniform with the top button open, every man who orders leans a little further over the counter. Every one of them tips more." }, { type = "dialog", content = "Whatever you recommend. Keep the change, gorgeous. Buy yourself a smaller shirt.", props = { speaker = "unknown" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }] }, blocks = [{ type = "paragraph", content = "In the tight uniform with the top button open, every man who orders leans a little further over the counter. Every one of them tips more." }, { type = "dialog", content = "Whatever you recommend. Keep the change, honey. Buy yourself a smaller shirt.", props = { speaker = "unknown" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -25549,7 +25563,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [0, 1, 2, 3, 5] }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 10, max = 12 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 10, max = 12 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "gary_met", op = "set" }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
@@ -25559,7 +25573,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [0, 1, 2, 3, 5] }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_absent" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 10, max = 12 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 10, max = 12 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -25568,7 +25582,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 10, max = 12 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 10, max = 12 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "gary_met", op = "set" }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
@@ -25578,7 +25592,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_absent" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 10, max = 12 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 10, max = 12 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -25587,7 +25601,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 12, max = 16 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 12, max = 16 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "gary_met", op = "set" }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
@@ -25597,7 +25611,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_absent" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 12, max = 16 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 12, max = 16 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -25714,7 +25728,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [0, 1, 2, 3, 5] }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 14, max = 18 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 14, max = 18 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -25723,7 +25737,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 14, max = 18 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 14, max = 18 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -25732,7 +25746,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 20, max = 28 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 20, max = 28 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -25741,7 +25755,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [0, 1, 2, 3, 5] }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 20, max = 28 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 20, max = 28 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -25750,7 +25764,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 20, max = 28 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 20, max = 28 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -25759,7 +25773,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 32, max = 48 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 32, max = 48 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes]]
@@ -25801,7 +25815,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [0, 1, 2, 3, 5] }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 14, max = 18 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 14, max = 18 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -25810,7 +25824,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 14, max = 18 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 14, max = 18 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -25819,7 +25833,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 20, max = 28 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 20, max = 28 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -25828,7 +25842,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [0, 1, 2, 3, 5] }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 20, max = 28 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 20, max = 28 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -25837,7 +25851,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 20, max = 28 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 20, max = 28 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -25846,7 +25860,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 32, max = 48 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 32, max = 48 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_l2_shifts", op = "add", value = 1, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes]]
@@ -25880,7 +25894,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [0, 1, 2, 3, 5] }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 10, max = 12 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 10, max = 12 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -25889,7 +25903,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 10, max = 12 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 10, max = 12 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -25898,7 +25912,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 12, max = 16 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 12, max = 16 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -25907,7 +25921,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [0, 1, 2, 3, 5] }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 12, max = 16 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 12, max = 16 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -25916,7 +25930,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 12, max = 16 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 12, max = 16 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -25925,7 +25939,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 16, max = 24 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 16, max = 24 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes]]
@@ -25963,7 +25977,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [0, 1, 2, 3, 5] }, { type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 18, max = 24 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }, { targetType = "player", trait = "money", op = "add", value = 4, clamp = false }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 18, max = 24 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }, { targetType = "player", trait = "money", op = "add", value = 4, clamp = false }]
 flagEffects = [{ targetType = "player", flag = "cafe_let_it", op = "set" }, { targetType = "player", flag = "gary_met", op = "set" }, { targetType = "player", flag = "gary_let_it", op = "set" }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
@@ -25973,7 +25987,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [0, 1, 2, 3, 5] }, { type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_absent" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 18, max = 24 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 18, max = 24 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }]
 flagEffects = [{ targetType = "player", flag = "cafe_let_it", op = "set" }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
@@ -25983,7 +25997,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 18, max = 24 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }, { targetType = "player", trait = "money", op = "add", value = 4, clamp = false }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 18, max = 24 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }, { targetType = "player", trait = "money", op = "add", value = 4, clamp = false }]
 flagEffects = [{ targetType = "player", flag = "cafe_let_it", op = "set" }, { targetType = "player", flag = "gary_met", op = "set" }, { targetType = "player", flag = "gary_let_it", op = "set" }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
@@ -25993,7 +26007,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_absent" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 18, max = 24 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 18, max = 24 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }]
 flagEffects = [{ targetType = "player", flag = "cafe_let_it", op = "set" }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
@@ -26003,7 +26017,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }, { type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 28, max = 40 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }, { targetType = "player", trait = "money", op = "add", value = 8, clamp = false }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 28, max = 40 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }, { targetType = "player", trait = "money", op = "add", value = 8, clamp = false }]
 flagEffects = [{ targetType = "player", flag = "cafe_let_it", op = "set" }, { targetType = "player", flag = "gary_met", op = "set" }, { targetType = "player", flag = "gary_let_it", op = "set" }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
@@ -26013,7 +26027,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }, { type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_absent" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 28, max = 40 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 28, max = 40 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }]
 flagEffects = [{ targetType = "player", flag = "cafe_let_it", op = "set" }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
@@ -26023,7 +26037,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [0, 1, 2, 3, 5] }, { type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 28, max = 40 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }, { targetType = "player", trait = "money", op = "add", value = 8, clamp = false }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 28, max = 40 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }, { targetType = "player", trait = "money", op = "add", value = 8, clamp = false }]
 flagEffects = [{ targetType = "player", flag = "cafe_let_it", op = "set" }, { targetType = "player", flag = "gary_met", op = "set" }, { targetType = "player", flag = "gary_let_it", op = "set" }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
@@ -26033,7 +26047,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [0, 1, 2, 3, 5] }, { type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_absent" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 28, max = 40 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 28, max = 40 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }]
 flagEffects = [{ targetType = "player", flag = "cafe_let_it", op = "set" }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
@@ -26043,7 +26057,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 28, max = 40 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }, { targetType = "player", trait = "money", op = "add", value = 8, clamp = false }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 28, max = 40 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }, { targetType = "player", trait = "money", op = "add", value = 8, clamp = false }]
 flagEffects = [{ targetType = "player", flag = "cafe_let_it", op = "set" }, { targetType = "player", flag = "gary_met", op = "set" }, { targetType = "player", flag = "gary_let_it", op = "set" }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
@@ -26053,7 +26067,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_absent" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 28, max = 40 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 28, max = 40 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }]
 flagEffects = [{ targetType = "player", flag = "cafe_let_it", op = "set" }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
@@ -26063,7 +26077,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }, { type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 48, max = 72 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }, { targetType = "player", trait = "money", op = "add", value = 16, clamp = false }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 48, max = 72 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }, { targetType = "player", trait = "money", op = "add", value = 16, clamp = false }]
 flagEffects = [{ targetType = "player", flag = "cafe_let_it", op = "set" }, { targetType = "player", flag = "gary_met", op = "set" }, { targetType = "player", flag = "gary_let_it", op = "set" }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
@@ -26073,7 +26087,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }, { type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_absent" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 48, max = 72 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 48, max = 72 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "cafe_name", op = "add", value = -1, clamp = false }]
 flagEffects = [{ targetType = "player", flag = "cafe_let_it", op = "set" }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
@@ -26108,7 +26122,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [0, 1, 2, 3, 5] }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 12, max = 16 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 12, max = 16 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -26117,7 +26131,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 12, max = 16 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 12, max = 16 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -26126,7 +26140,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 16, max = 24 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 16, max = 24 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -26135,7 +26149,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [0, 1, 2, 3, 5] }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 16, max = 24 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 16, max = 24 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -26144,7 +26158,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 16, max = 24 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 16, max = 24 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -26153,7 +26167,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 24, max = 40 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = { type = "random", min = 24, max = 40 } }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes]]
@@ -26183,7 +26197,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [0, 1, 2, 3, 5] }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = 8 }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = 8 }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -26192,7 +26206,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = 8 }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = 8 }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -26201,7 +26215,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = 8 }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = 8 }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -26210,7 +26224,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [0, 1, 2, 3, 5] }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = 8 }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = 8 }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -26219,7 +26233,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = 8 }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = 8 }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -26228,7 +26242,7 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 180
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }] }
-effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = 8 }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
+effects = [{ targetType = "player", trait = "money", op = "add", clamp = false, value = 8 }, { targetType = "player", trait = "cafe_shifts_worked", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 wardrobeEffects = [{ action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }]
 
 [[canvases]]
@@ -30127,7 +30141,7 @@ nodeId = "looked"
 time_progression_minutes = 60
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "worked_out", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_item", item_id = "sports_bra", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }] }
 costs = [{ trait = "energy", value = 15 }]
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
 flagEffects = [{ targetType = "player", flag = "worked_out", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -30508,7 +30522,7 @@ locationId = "zoe_apartment"
 time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_beauty", operator = "gte", value = 2 }, { type = "trait", subject = "player", trait_key = "curfew_days", operator = "eq", value = 0 }, { type = "time_of_day", start_time = "22:00", end_time = "06:00" }] }
 costs = [{ trait = "energy", value = 15 }]
-effects = [{ targetType = "player", trait = "drinks_tonight", op = "set", value = 0 }]
+effects = [{ targetType = "player", trait = "drinks_tonight", op = "set", value = 0 }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "party_went", op = "set" }, { targetType = "player", flag = "zoe_party_promised", op = "unset" }, { targetType = "player", flag = "zoe_dared", op = "unset" }, { targetType = "player", flag = "late_party", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -30518,7 +30532,7 @@ locationId = "zoe_apartment"
 time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_beauty", operator = "gte", value = 2 }, { type = "trait", subject = "player", trait_key = "curfew_days", operator = "eq", value = 0 }, { type = "time_of_day", start_time = "06:00", end_time = "22:00" }] }
 costs = [{ trait = "energy", value = 15 }]
-effects = [{ targetType = "player", trait = "drinks_tonight", op = "set", value = 0 }]
+effects = [{ targetType = "player", trait = "drinks_tonight", op = "set", value = 0 }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "party_went", op = "set" }, { targetType = "player", flag = "zoe_party_promised", op = "unset" }, { targetType = "player", flag = "zoe_dared", op = "unset" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -30773,7 +30787,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", 
 
 [[canvases]]
 id   = "zoe_dares"
-name = "Zoe's dare"
+name = "Take Zoe's dare"
 description = "Zoe's dares (release 1): after her step 4, one a party night at her Friday party, late. Zoe picks; a showing yes and a doing yes by her stage, the no; three tiers. Each yes counts toward her step 5. Corruption 60 locked."
 
 [canvases.trigger]
@@ -30842,35 +30856,37 @@ text = "\"Watch me.\""
 targetType = "node"
 nodeId = "low_show"
 time_progression_minutes = 10
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_together", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_together", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
 
 [[canvases.nodes.exit_block.choices]]
 text = "\"Start the song.\""
 targetType = "node"
 nodeId = "high_show"
 time_progression_minutes = 10
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_together", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_together", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
 
 [[canvases.nodes.exit_block.choices]]
 text = "\"Easy.\""
 targetType = "node"
 nodeId = "high_do"
 time_progression_minutes = 10
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_together", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_together", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
+costs = [{ trait = "energy", value = 10 }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "\"Here?\""
 targetType = "node"
 nodeId = "z_show"
 time_progression_minutes = 10
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_together", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_together", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
 
 [[canvases.nodes.exit_block.choices]]
 text = "\"Watch, then.\""
 targetType = "node"
 nodeId = "z_do"
 time_progression_minutes = 10
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_together", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_together", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
+costs = [{ trait = "energy", value = 10 }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "\"Not tonight.\""
@@ -32480,7 +32496,7 @@ priority = 3
 is_active = true
 max_triggers_per_day = 1
 show_when_blocked = true
-cooldown_message = "Mon, Tue, Wed, Thu, Fri, Sun, 6 PM-midnight; Mon, Tue, Wed, Thu, Fri, Sat, midnight-2 AM; Sat, 9 AM-5 PM"
+cooldown_message = "Mon, Tue, Wed, Thu, Fri, Sun, 6 PM-midnight; Mon, Tue, Wed, Thu, Fri, Sat, midnight-2 AM; Sat, 9 AM-5 PM; Sat, 10 PM-midnight"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "npc_at_location", location_id = "home_bathroom", npc_id = "npc_ryan", operator = "is_absent" }] }
 
 [[canvases.trigger.schedules]]
@@ -32655,7 +32671,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_mark", operator = "is_absent" }] }, blocks = [{ type = "paragraph", content = "You take the last steps slow anyway. By the landing the hall below is empty, and your face is hot." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_mark", operator = "is_absent" }] }, blocks = [{ type = "paragraph", content = "You take the last steps slow anyway. At the top the hall below is empty, and your face is hot." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -32681,7 +32697,7 @@ content = "You clamp your skirt to the backs of your thighs with one hand and ta
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_mark", operator = "is_present" }] }, blocks = [{ type = "dialog", content = "Better.", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "paragraph", content = "He's still at the bottom when you reach the landing, still looking up at your legs." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_mark", operator = "is_present" }] }, blocks = [{ type = "dialog", content = "Better.", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "paragraph", content = "He's still at the bottom when you reach the top, still looking up at your legs." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -35454,7 +35470,7 @@ when = [
   { type = "trait", subject = "player", trait = "corruption", op = "lt", value = 60 },
 ]
 goals = [
-  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 60, label = "Reach Hungry (Corruption 60): get on Ryan's couch with him, pull Jake into the gym locker room, take a dare at Zoe's party, walk the street with nothing under your skirt" },
+  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 60, label = "Reach Hungry (Corruption 60): get on Ryan's couch with him, pull Jake into the gym locker room, walk the street with nothing under your skirt" },
 ]
 
 [[quest_cards]]
@@ -35482,7 +35498,7 @@ goals = [
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 5, label = "Exhibitionism 5: when someone walks in on your shower, don't grab the towel straight away" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 10, label = "Exhibitionism 10: leave the shower door unlocked" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 15, label = "Exhibitionism 15: leave the changing-room curtain open when you try clothes on" },
-  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Reach Daring (Exhibitionism 20): run in the park, walk the street, let someone walk in on your shower" },
+  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Reach Daring (Exhibitionism 20): let someone walk in on your shower; once you're Curious, run in the park and walk the street" },
 ]
 
 [[quest_cards]]
@@ -37505,7 +37521,7 @@ props = { description = "a woman lying awake in bed touching herself under the s
 
 [[canvases.nodes.blocks]]
 type = "thought_bubble"
-content = "Next Saturday night, after midnight, their door will be open a crack again. You already know you'll be out on that landing."
+content = "Next Saturday night, after midnight, their door will be open a crack again. You already know you'll be out in that hall."
 props = { speaker = "player" }
 
 [canvases.nodes.exit_block]
@@ -38511,7 +38527,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "21:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "A window comes down on a passing car." }, { type = "dialog", content = "Hey, gorgeous! Want a ride?", props = { speaker = "unknown" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "21:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "A window comes down on a passing car." }, { type = "dialog", content = "Hey, beautiful! Want a ride?", props = { speaker = "unknown" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -39380,6 +39396,34 @@ blocks = [
 type = "video"
 props = { description = "a young man frozen in a bathroom doorway, a naked girl in the shower looking back at him", search_queries = ["brother walks in on sister in shower", "guy walks in on naked girl showering"], pool_dir = "sex/walkin_shower_ryan_t4" }
 
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "thought_bubble", content = "Ryan. In here. Grab the towel.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }] }
+blocks = [
+  { type = "thought_bubble", content = "Ryan's looking. You don't want the towel yet.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }] }
+blocks = [
+  { type = "thought_bubble", content = "Let your step-brother look. See how long he stays.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "thought_bubble", content = "Ryan can look all he wants. You want him to.", props = { speaker = "player" } },
+]
+
 [canvases.nodes.exit_block]
 type = "choices"
 
@@ -39665,6 +39709,34 @@ blocks = [
 type = "video"
 props = { description = "a girl in a man's T-shirt leaning on a bathroom sink, a naked girl in the shower", search_queries = ["girlfriend walks in on girl in shower", "girl watches naked girl shower bathroom"], pool_dir = "sex/walkin_shower_kayla_t4" }
 
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "thought_bubble", content = "Kayla, a foot away. You want the towel.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }] }
+blocks = [
+  { type = "thought_bubble", content = "Kayla's watching. You mind less than you should.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }] }
+blocks = [
+  { type = "thought_bubble", content = "Let Ryan's girlfriend see what's across the hall.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "thought_bubble", content = "Let her look, and tell Ryan all of it.", props = { speaker = "player" } },
+]
+
 [canvases.nodes.exit_block]
 type = "choices"
 
@@ -39828,7 +39900,7 @@ props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Don't play dumb with me, babe. Shake that ass at him and you'll have me to deal with."
+content = "Don't play dumb with me, @player.nickname. Shake that ass at him and you'll have me to deal with."
 props = { speaker = "npc", npcId = "npc_kayla" }
 
 [[canvases.nodes.blocks]]
@@ -39940,6 +40012,34 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "video"
 props = { description = "a middle-aged man at a bathroom sink watching a naked girl in the shower in the mirror", search_queries = ["stepdad walks in on girl in shower", "man watches naked girl shower mirror"], pool_dir = "sex/walkin_shower_mark_t4" }
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "thought_bubble", content = "Mom's husband, and you're naked. Cover up.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }] }
+blocks = [
+  { type = "thought_bubble", content = "Mark's looking. You don't want to cover up yet.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }] }
+blocks = [
+  { type = "thought_bubble", content = "Let Mark look. Watch what it does to him.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "thought_bubble", content = "You want Mark thinking about this at dinner.", props = { speaker = "player" } },
+]
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -41023,6 +41123,34 @@ content = "He goes red, but he doesn't go back up. His eyes go back to her tits 
 type = "video"
 props = { description = "a young man on the bottom stair staring at porn on the living room TV, a girl on the couch", search_queries = ["brother catches sister watching porn", "guy walks in girl watching porn couch"], pool_dir = "sex/walkin_tv_ryan_t5" }
 
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "thought_bubble", content = "Ryan saw it. You want the floor to swallow you.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 40 }] }
+blocks = [
+  { type = "thought_bubble", content = "Ryan saw it. You want to know what he thinks.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 60 }] }
+blocks = [
+  { type = "thought_bubble", content = "You don't want to turn it off. Not with him here.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "thought_bubble", content = "You want to watch the rest with Ryan.", props = { speaker = "player" } },
+]
+
 [canvases.nodes.exit_block]
 type = "choices"
 
@@ -41973,7 +42101,7 @@ type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "want", operator = "lt", value = 20 }] }
 blocks = [
   { type = "paragraph", content = "His eyes go to your tits in the black lace, to your nipples through it. Then he catches himself and looks at the wall above your head, hard, and keeps them there. He doesn't take one step into the room." },
-  { type = "paragraph", content = "He doesn't say a word. His jaw works like he's going to tell you to take it off, but he doesn't." },
+  { type = "paragraph", content = "His jaw works like he's going to tell you to take it off." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -41981,7 +42109,7 @@ type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "want", operator = "lt", value = 50 }] }
 blocks = [
   { type = "paragraph", content = "His eyes go to your tits in the black lace, to your nipples through it, and stay there. Then down your stomach, slow, and back up. The front of his jeans fills, but he doesn't take one step into the room." },
-  { type = "paragraph", content = "He doesn't say a word. His eyes go to Laura's open drawer and back to your tits, and his jaw works like he's going to tell you to take it off, but he doesn't." },
+  { type = "paragraph", content = "His eyes go to Laura's open drawer and back to your tits, and his jaw works like he's going to tell you to take it off." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -41989,8 +42117,13 @@ type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
 blocks = [
   { type = "paragraph", content = "His eyes go to your tits in the black lace, to your nipples through it, and stay there. Then down your stomach, slow, and back up. The front of his jeans fills, but he doesn't take one step into the room." },
-  { type = "paragraph", content = "He doesn't say a word. He leans on the door frame to look longer, and he wets his lips." },
+  { type = "paragraph", content = "He leans on the door frame to look longer, and he wets his lips." },
 ]
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "That's your mother's."
+props = { speaker = "npc", npcId = "npc_mark" }
 
 [[canvases.nodes.blocks]]
 type = "video"
@@ -42286,7 +42419,7 @@ props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "You know exactly what it means. Put them back, babe."
+content = "You know exactly what it means. Put them back, @player.nickname."
 props = { speaker = "npc", npcId = "npc_kayla" }
 
 [canvases.nodes.exit_block]
@@ -43058,7 +43191,7 @@ name = "The till"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "Bread, milk, eggs, the wine Laura likes, the washing powder she always forgets. The clerk scans it all without looking up from his phone and bags it in two thin bags that will definitely split."
+content = "Bread, milk, eggs, the wine Laura likes, the laundry detergent she always forgets. The clerk scans it all without looking up from his phone and bags it in two thin bags that will definitely split."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -43348,7 +43481,7 @@ name = "Zoe's bathroom"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "Jake catches your wrist at the bathroom door and backs you inside. The party thumps through the wall. Somebody is already queueing in the hall."
+content = "Jake catches your wrist at the bathroom door and backs you inside. The party thumps through the wall. Somebody is already lined up in the hall."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -43544,7 +43677,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }] }, blocks = [{ type = "paragraph", content = "The shop guy comes out from behind the counter to stack a box that doesn't need stacking, and watches your legs in that skirt all the way past. He says it to your back as you go past, and you don't turn round." }, { type = "dialog", content = "Nice day for a skirt like that, sweetheart.", props = { speaker = "unknown" } }, { type = "paragraph", content = "He'll be out front tomorrow." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }] }, blocks = [{ type = "paragraph", content = "The shop guy comes out from behind the counter to stack a box that doesn't need stacking, and watches your legs in that skirt all the way past. He says it to your back as you go past, and you don't turn round." }, { type = "dialog", content = "Nice day for a skirt like that.", props = { speaker = "unknown" } }, { type = "paragraph", content = "He'll be out front tomorrow." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -43798,13 +43931,13 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "22:00", end_time = "08:00" }] }, blocks = [{ type = "paragraph", content = "A car slows, then stops. Someone inside whistles at your ass." }, { type = "dialog", content = "Get in.", props = { speaker = "unknown" } }, { type = "paragraph", content = "You don't walk faster, and you don't get in." }, { type = "dialog", content = "I said get in. I saw that breeze, sweetheart.", props = { speaker = "unknown" } }, { type = "dialog", content = "Keep driving.", props = { speaker = "player" } }, { type = "paragraph", content = "The same car's parked at the corner the next time you look." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "22:00", end_time = "08:00" }] }, blocks = [{ type = "paragraph", content = "A car slows, then stops. Someone inside whistles at your ass." }, { type = "dialog", content = "Get in.", props = { speaker = "unknown" } }, { type = "paragraph", content = "You don't walk faster, and you don't get in." }, { type = "dialog", content = "I said get in. I saw that breeze, legs.", props = { speaker = "unknown" } }, { type = "dialog", content = "Keep driving.", props = { speaker = "player" } }, { type = "paragraph", content = "The same car's parked at the corner the next time you look." }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }] }, blocks = [{ type = "paragraph", content = "A car slows, then stops. Someone inside whistles at your ass." }, { type = "dialog", content = "Get in.", props = { speaker = "unknown" } }, { type = "paragraph", content = "You don't walk faster, and you don't get in." }, { type = "dialog", content = "I said get in. I saw that breeze, sweetheart.", props = { speaker = "unknown" } }, { type = "dialog", content = "Keep driving.", props = { speaker = "player" } }, { type = "paragraph", content = "The same car's parked at the corner the next time you look." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }] }, blocks = [{ type = "paragraph", content = "A car slows, then stops. Someone inside whistles at your ass." }, { type = "dialog", content = "Get in.", props = { speaker = "unknown" } }, { type = "paragraph", content = "You don't walk faster, and you don't get in." }, { type = "dialog", content = "I said get in. I saw that breeze, legs.", props = { speaker = "unknown" } }, { type = "dialog", content = "Keep driving.", props = { speaker = "player" } }, { type = "paragraph", content = "The same car's parked at the corner the next time you look." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -44187,7 +44320,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 [[phone.conversations.blocks]]
 type = "message"
 sender = "npc"
-content = "$75. tomorrow. kitchen."
+content = "rent. tomorrow. kitchen."
 [[phone.conversations.blocks]]
 type = "reply"
 round = 1
@@ -44560,7 +44693,7 @@ conditions = { version = "1.0", logic = "AND", items = [
 [[phone.conversations.blocks]]
 type = "message"
 sender = "npc"
-content = "My door was unlocked at half six."
+content = "Half past six. My door was unlocked."
 [[phone.conversations.blocks]]
 type = "reply"
 round = 1
@@ -44573,7 +44706,7 @@ type = "message"
 sender = "npc"
 after_round = 1
 after_choice = 0
-content = "Then don't promise half six. — H."
+content = "Then don't promise. — H."
 [[phone.conversations.blocks]]
 type = "message"
 sender = "npc"

@@ -351,6 +351,55 @@ def clear_on_leave(canvas, *keys):
     return canvas
 
 
+def sex_takes_needs(out, cid, node_id, text):
+    """A one-time partnered sex step takes energy and hygiene like the repeatable acts (heat_a ACT_COSTS /
+    ACT_HYGIENE, 10 each), on the choice out of the act. The ledger's board.needs says partnered sex takes both
+    (pass 4 E95); the steps took neither. Clamped at 0: a need is a 0-100 meter."""
+    hits = 0
+    for c in out:
+        if c["id"] != cid:
+            continue
+        for n in c["nodes"]:
+            if n["id"] != node_id:
+                continue
+            for ch in n["choices"]:
+                if ch["text"] == text:
+                    ch["effects"] = list(ch.get("effects", [])) + [
+                        {"targetType": "player", "trait": "energy", "op": "add", "value": -10, "clamp": True},
+                        {"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}]
+                    hits += 1
+    assert hits, (cid, node_id, text)
+
+
+# pass 4 A57 (the-heat-ladder.md H4, "her line changes with her level"): on a walk-in's answer screen, last before
+# she picks, one short thought of hers by the stage of the meter its answers read: being seen reads Exhibitionism
+# (Covered / Daring / Showing / Watched), the taboo reads Corruption (Good Girl / Curious / Bold / Hungry). The lines
+# are wants, never acts, so they stay true whichever button she then takes. Each canvas gets its own four lines (one
+# shared line pasted into many canvases fails `one pool, one place`), short, so the screen still says more than she
+# thinks (lint `thoughts outweigh speech`). The bands are one if/elseif chain (GC) with an always-true else, one
+# bound a band (each bound is a tier gate site, gate `the climb is where you said it is`); when a group already
+# ends the screen they are standalone G bands instead, so they cannot join its chain.
+def her_band_line(canvases, lines_by_canvas):
+    """lines_by_canvas: {cid: (meter, [line under 20, under 40, under 60, 60 and up])}."""
+    done = set()
+    for c in canvases:
+        if c["id"] not in lines_by_canvas:
+            continue
+        meter, texts = lines_by_canvas[c["id"]]
+        assert len(texts) == 4, c["id"]
+        ans = next(n for n in c["nodes"] if n["id"] == "answer")
+        if ans["blocks"][-1].get("type") != "group":
+            lines = [GC(cond(trait(meter, "lt", hi)), T(t)) for hi, t in zip((20, 40, 60), texts)]
+            lines.append(GC(cond({"type": "worn_exposure", "operator": "gte", "value": 0}), T(texts[3])))   # the else
+        else:
+            bounds = [(None, 20), (20, 40), (40, 60), (60, None)]
+            lines = [G(cond(*([trait(meter, "gte", lo)] if lo is not None else []),
+                            *([trait(meter, "lt", hi)] if hi is not None else [])), T(t)) for (lo, hi), t in zip(bounds, texts)]
+        ans["blocks"] = list(ans["blocks"]) + lines
+        done.add(c["id"])
+    assert done == set(lines_by_canvas), set(lines_by_canvas) - done
+
+
 def booked_split(choice, key, eff=(), flags=()):
     """The choice written twice with the same text: the booked copy pays `eff` on top and clears
     `key`; the other copy is the choice as it was. Conditions don't nest, so both are AND lists."""
@@ -525,7 +574,7 @@ def hours_phrase(schedules):
         p_ = f"{_days(s.get('weekdays', list(range(7))))}, {_clock(s['start_time'])}-{_clock(s['end_time'])}"
         if p_ not in parts:
             parts.append(p_)
-    return "; ".join(parts[:3])
+    return "; ".join(parts)   # every row: a dropped row hid when it opens (pass 4 H66)
 
 
 def with_closed_line(canvas):
@@ -667,8 +716,9 @@ NPC_FEED = {
 STAGE_WAY = {
     ("corruption", 20): "stay and look: the park couple, the library stacks, a door left open at home at night",
     ("corruption", 40): "touch yourself in your bed, in the shower or in a college toilet stall; watch the couple in the park",
-    ("corruption", 60): "get on Ryan's couch with him, pull Jake into the gym locker room, take a dare at Zoe's party",
-    ("exhibitionism", 20): "run in the park, walk the street, let someone walk in on your shower",
+    ("corruption", 60): "get on Ryan's couch with him, pull Jake into the gym locker room",   # pass 4: the watched dares need Corruption 60 now
+    # pass 4 G15: the park and street dress codes open no bra / a short skirt at Corruption 20 for a Covered player
+    ("exhibitionism", 20): "let someone walk in on your shower; once you're Curious, run in the park and walk the street",
     ("exhibitionism", 40): "let them look at the campus gym and in class, take your bra off in the college toilet, let the towel slip at home",
     ("exhibitionism", 60): "show off on the lounger in the garden, let the wind have your skirt on the street, drop the towel at home",
 }

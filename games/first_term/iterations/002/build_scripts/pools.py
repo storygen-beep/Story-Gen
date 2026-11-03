@@ -43,7 +43,8 @@ out.append({
     ], [
         go("Go in. (15 energy)", loc="zoe_apartment", mins=10, costs=[{"trait": "energy", "value": 15}],
            cond_=cond(SHORT, NO_CURFEW_ITEM), flags=[fset("party_went"), funset("zoe_party_promised"), funset("zoe_dared")],
-           eff=[setv("drinks_tonight", 0)]),
+           # pass 4 E95: a party night takes hygiene (board.needs "faster after ... parties"), once a night with the door
+           eff=[setv("drinks_tonight", 0), add("hygiene", -10)]),
         go("Borrow Zoe's dress first.", loc="zoe_bedroom", mins=2),
         go("Go home.", loc="street", mins=2),
     ])]})
@@ -105,12 +106,19 @@ TIER = {"low": [[trait("exhibitionism", "lt", 60)]],
 ZOE_LINE = {"low": "Kiss the cocky guy. Properly. Tongue, hands, the lot.",
             "high": "Flash the guy at the keg. Or topless in the kitchen till the song ends. Or his lap, till he's hard. Make him beg.",
             "z": "Kiss me where they can see. Or let me watch you with him."}
+# pass 4 (A68 rule, LO 2026-11-04): an act a group watches needs both meters at stage 4, Corruption 60 and
+# Exhibitionism 60 (the tier holds the Exhibitionism 60). Every dare but the kiss is watched (DECISIONS 124), so each
+# watched yes reads Corruption 60 too, and it pays inside stage 4 (cap 79, PAY below).
+WATCHED = [trait("corruption", "gte", 60)]
 YESES = {"low": [("\"Watch this.\"", "low_do", [trait("corruption", "gte", 20)], "Needs Corruption 20", "cocky")],
-         "high": [("\"Watch me.\"", "low_show", [], None, "keg"),
-                  ("\"Start the song.\"", "high_show", [], None, "keg"),
-                  ("\"Easy.\"", "high_do", [trait("corruption", "gte", 40), trait("exhibitionism", "gte", 20)], "Needs Corruption 40", "cocky")],
-         "z": [("\"Here?\"", "z_show", [], None, "cocky"),
-               ("\"Watch, then.\"", "z_do", [], None, "cocky")]}
+         "high": [("\"Watch me.\"", "low_show", WATCHED, "Needs Corruption 60", "keg"),
+                  ("\"Start the song.\"", "high_show", WATCHED, "Needs Corruption 60", "keg"),
+                  ("\"Easy.\"", "high_do", WATCHED, "Needs Corruption 60", "cocky")],
+         "z": [("\"Here?\"", "z_show", WATCHED, "Needs Corruption 60", "cocky"),
+               ("\"Watch, then.\"", "z_do", WATCHED, "Needs Corruption 60", "cocky")]}
+# pass 4 D18: a doing dare is a sex rung, so it costs energy like the other acts (heat_a ACT_COSTS): greyed
+# "Requires 10 Energy" when she is spent (the-surfaces.md R3c)
+DARE_COSTS = {"high_do": [{"trait": "energy", "value": 10}], "z_do": [{"trait": "energy", "value": 10}]}
 PAY = {"low_show": [capped("exhibitionism", 1, 79)],
        "low_do": [capped("corruption", 1, CAP_CUR), capped("exhibitionism", 1, CAP_CUR)],
        "high_show": [capped("exhibitionism", 1, 79), capped("corruption", 1, 79)],
@@ -176,7 +184,7 @@ dare_choices, dare_nodes = [], []
 for tier, cases in TIER.items():
     for nm, key, gate, locked, who in YESES[tier]:
         for items in cases:
-            dare_choices.append(go(nm, node=key, mins=10, cond_=cond(*items, *gate)))
+            dare_choices.append(go(nm, node=key, mins=10, cond_=cond(*items, *gate), costs=DARE_COSTS.get(key)))
 for key in PAY:
     blocks = dare_by_top(key, D_(key)) if key != "high_show" else [POOL(P(D_(key)), P(FLASH_SONG), pid="zoe_dare_high_show", bag=True)]
     who = "keg" if key in ("low_show", "high_show") else "cocky"
@@ -187,7 +195,7 @@ for key in PAY:
            flags=[fset(REGULAR_FLAG[who])]),
         go("Back to the party.", loc="zoe_apartment", mins=20, cond_=cond(flag("zoe_dared")))]))
 out.append({
-    "id": "zoe_dares", "name": "Zoe's dare",
+    "id": "zoe_dares", "name": "Take Zoe's dare",   # pass 4 H33: a room-list label says what the click does
     "description": "Zoe's dares (release 1): after her step 4, one a party night at her Friday party, late. Zoe picks; a showing yes and a doing yes by her stage, the no; three tiers. Each yes counts toward her step 5. Corruption 60 locked.",
     "trigger": {"location": "zoe_apartment", "requires_npc": Z, "is_repeatable": True, "priority": 4, "is_active": True,
                 # after midnight, so the day roll (which clears zoe_dared) can't open a second dare the same party night
@@ -475,14 +483,14 @@ out.append({
             G(cond(MARK_BELOW, NO_PANTIES),
               P("You take each step slower than the last, and on the top step you bend forward, legs straight, for one long breath. From the bottom of the stairs Mark gets your bare ass and your pussy, and his breath goes out of him loud enough to hear.")),
             G(cond(MARK_BELOW), D(M, "Christ, @player.")),
-            G(cond(MARK_NOT_BELOW), P("You take the last steps slow anyway. By the landing the hall below is empty, and your face is hot.")),
+            G(cond(MARK_NOT_BELOW), P("You take the last steps slow anyway. At the top the hall below is empty, and your face is hot.")),
             P("Mark's down in that living room most nights. These stairs will still be here."),   # reader batch 4 (pass 3): the hook
         ], [go("Go on up.", loc="home_hall")]),
         # reader batch 4 (pass 3): the written no, his answer on the screen it lands on (Mark is below: the trigger)
         node("down", "Skirt down", [
             P("You clamp your skirt to the backs of your thighs with one hand and take the rest of the stairs fast."),
             G(cond(MARK_BELOW), D(M, "Better."),
-              P("He's still at the bottom when you reach the landing, still looking up at your legs.")),
+              P("He's still at the bottom when you reach the top, still looking up at your legs.")),
             P("Mark's down in that living room most nights. These stairs will still be here."),
         ], [go("Go on up.", loc="home_hall")])]})
 

@@ -647,7 +647,9 @@ out.append({
         go("Work out.", node="worked", mins=60, costs=[{"trait": "energy", "value": 15}],
            eff=[add("energy", -15)], flags=[fset("worked_out")], cond_=cond(flag("worked_out", False))),
         go("Work out, and let them look.", node="looked", mins=60, costs=[{"trait": "energy", "value": 15}],
-           eff=[add("energy", -15), {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": CAP_DARING}],
+           # pass 4 E94: the two guys at the rack watch her, so campus talks (once a day, worked_out)
+           eff=[add("energy", -15), {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": CAP_DARING},
+                add("campus_talk", 1, clamp=False)],
            flags=[fset("worked_out")], cond_=cond(flag("worked_out", False), trait("exhibitionism", "gte", 20), *SPORTS_ONLY)),
         go("Not today.", loc="campus"),
     ]),

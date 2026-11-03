@@ -315,7 +315,8 @@ out.append({
             # both capped at the top of the stage it opens at (pass 3 A48, G8)
             go("Let him fix your squat.", node="hips", mins=30, cond_=cond(flag(GYM_CAP, False), CURIOUS), flags=[fset(GYM_CAP)],
                eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 39},
-                    {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 19}]),   # no Exhibitionism gate: stage 1 (G8)
+                    {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 19},   # no Exhibitionism gate: stage 1 (G8)
+                    add("campus_talk", 1, clamp=False)]),   # pass 4 E94: the team whistles, so campus talks; once a day (GYM_CAP)
             go("Pull him into the locker room.", node="lockers", mins=15, cond_=cond(flag(GYM_CAP, False), BOLD, trait("jake_step", "gte", 2)),
                flags=[fset(GYM_CAP)], eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 59}]),
             go("Leave him to his reps.", loc="campus"),
@@ -356,6 +357,8 @@ require_present(out, "jake_03_my_boyfriend", here_at(L, "home_living_room"))
 import heat_a
 heat_a.attach_jake(out)
 
+# pass 4 E95: the one-time sex step takes energy and hygiene like the repeatable acts (board.needs)
+sex_takes_needs(out, "jake_04_sneak_him_in", "comes", "Lie there.")
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards)
 open(__import__("sys").argv[1], "w").write(text)
 print("jake:", len(out), "canvases,", len(cards), "cards")

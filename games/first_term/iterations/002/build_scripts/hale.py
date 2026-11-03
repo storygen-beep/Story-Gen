@@ -62,9 +62,11 @@ out.append({
             G(cond(SKIRT), P("You sit down and your skirt rides up your thighs. You tug it. He watches you tug it.")),
             P("He goes back to his slide. Then his pen slips out of his fingers and rolls off the stage, and stops against your shoe, but he doesn't bend for it. He waits."),
         ], [
-            # false lines a3 #20 (reader): Nadia is met here, after the screen that introduces her has rendered
-            go("Pick it up.", node="pen", mins=2, flags=[fset("nadia_met"), fset("desk_guy_met"), fset("rival_met")]),
-            go("Leave it.", node="left", mins=2, flags=[fset("nadia_met"), fset("desk_guy_met"), fset("rival_met")]),
+            # false lines a3 #20 (reader): Nadia is met here, after the screen that introduces her has rendered.
+            # The guy beside her and the rival are not on this screen, so it does not meet them (pass 4 C36):
+            # the Psychology class row sets desk_guy_met / rival_met where they are.
+            go("Pick it up.", node="pen", mins=2, flags=[fset("nadia_met")]),
+            go("Leave it.", node="left", mins=2, flags=[fset("nadia_met")]),
         ]),
         node("pen", "His pen", [
             P("You bend down for it, all the way, and when you come back up his eyes are on your chest, not your face. He's hard. You can see the line of it against his trousers from the front row. He sees you see it, and steps back behind the lectern."),
@@ -398,6 +400,8 @@ for _c in out:
 # heat proposal B20 (DECISIONS 147 chunk 3): his office hub reads his door
 import walkins_out
 walkins_out.hub_read(out)
+# pass 4 E95: the one-time sex step takes energy and hygiene like the repeatable acts (board.needs)
+sex_takes_needs(out, "hale_04_claire_knocks", "higher", "Wait.")
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards)
 open(__import__("sys").argv[1], "w").write(text)
 print("hale:", len(out), "canvases,", len(cards), "cards")

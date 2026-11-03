@@ -113,7 +113,7 @@ HOOKS = [
 # the bold voice from Hungry (stage 4) up. Its own beat after beat N: (file #, beat #, [(conds, line)]).
 VOICES = [
     (22, 1, [([corr("gte", 60)], "*You were waiting for him to ask. You'd have done it for ten.*"),
-             ([corr("lt", 60)], "*Your step-father wants you to strip for twenty dollars. Your face goes hot, and your hands go to your clothes anyway.*")]),
+             ([corr("lt", 60)], "*Your step-father wants you to strip for $20. Your face goes hot, and your hands go to your clothes anyway.*")]),
     (24, 1, [([corr("gte", 60)], "*You lean back on the washer to watch. You want him to take his time.*"),
              ([corr("lt", 60)], "*He's going to fold those panties in front of you, and you're going to let him. Your face is burning.*")]),
     (26, 1, [([corr("gte", 60)], "*You put your coffee down. You were hoping he'd ask.*"),

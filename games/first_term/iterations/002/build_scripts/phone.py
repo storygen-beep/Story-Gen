@@ -242,7 +242,7 @@ noshow("laura_dinner_noshow", LA, "📱 Mom", "dinner_promised", 4,
 # every 7 days) ──
 thread("mark_rent", M, "📱 Mark",
        [F("rent_starts"), SINCE("rent_starts", 5), DAYS(5), HOURS("18:00", "21:00")],
-       ["$75. tomorrow. kitchen."],
+       ["rent. tomorrow. kitchen."],   # pass 4 F75: no hand-typed price; the engine re-prices to 90 and 100 (settings.rent stages)
        [("i'll have it", {}, "good."),
         ("i might be short", {"effects": [npc_eff(M, "want", 1)]}, "then we talk tomorrow."),
         ("what if i'm not", {}, "you will be. kitchen. eight.")],
@@ -318,8 +318,8 @@ thread("hale_thursday", H, "📧 College email: Dr. Hale",
        repeat=6, ignore=(1, {"effects": [pl_eff("grade_psych", -1)]}),   # (pass 3 F60)
        comment="Hale's repeat, after his step 4 (release 1): Wednesday, \"Thursday. Half past six.\" The yes books it (hale.py).")
 noshow("hale_thursday_noshow", H, "📧 College email: Dr. Hale", "hale_thursday_booked", 24,
-       ["My door was unlocked at half six."],
-       [("I couldn't get away.", "Then don't promise half six. — H."), ("Next week.", "We will see. — H.")],
+       ["Half past six. My door was unlocked."],   # pass 4 B48: "half past", and 7 words a bubble
+       [("I couldn't get away.", "Then don't promise. — H."), ("Next week.", "We will see. — H.")],
        {"effects": [pl_eff("grade_psych", -1)]},
        extra=[DAYS(4), HOURS("09:00", "17:00")],
        comment="Hale: she said seven and didn't come (DECISIONS 87)")

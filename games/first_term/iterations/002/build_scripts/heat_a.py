@@ -486,7 +486,7 @@ TOWN_CANVASES.append({
     "nodes": [
         node("door", "Zoe's bathroom", [
             P("Jake catches your wrist at the bathroom door and backs you inside. The party thumps through the wall. "
-              "Somebody is already queueing in the hall."),
+              "Somebody is already lined up in the hall."),
             D(J, "Five minutes. Nobody will notice."),
             ME("Five minutes? You've never lasted five minutes."),   # pass 3 B3: the talk beside her thought
             D(J, "Then lock the door and find out."),

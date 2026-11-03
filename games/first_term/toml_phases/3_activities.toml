@@ -422,7 +422,7 @@ name = "A tray"
 # Iteration 002, part 8 (reader): the counter first; she eats only after "Eat".
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "The counter: pasta under the lamp, burgers, fries, cans of something sweet. Five dollars a tray."
+content = "The counter: pasta under the lamp, burgers, fries, cans of something sweet. $5 a tray."
 
 # LO 2026-11-03 ("a line or two for each of the 17 silent people"): the woman behind the counter, a stranger.
 [[canvases.nodes.blocks]]
@@ -1239,7 +1239,10 @@ text       = "Leave it."
 targetType = "node"
 nodeId     = "left"
 time_progression_minutes = 5
-effects    = [ { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 } ]
+# pass 4 (A68 rule, LO 2026-11-04): an act a group watches needs both meters at stage 4, Corruption 60 and
+# Exhibitionism 60 (the canvas holds the 60). It opens at stage 4, so it pays inside stage 4 (cap 79 on both).
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 } ] }
+effects    = [ { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 } ]
 
 [[canvases.nodes]]
 id   = "moved"

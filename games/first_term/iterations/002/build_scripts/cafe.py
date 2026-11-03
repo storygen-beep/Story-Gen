@@ -69,7 +69,7 @@ PAY_WHEN = [(cond(SEXY_OFF, {"type": "weekday", "weekdays": [0, 1, 2, 3, 5]}), 1
             (cond(SEXY_ON, {"type": "weekday", "weekdays": [0, 1, 2, 3, 5]}), 2),
             (cond(SEXY_ON, wd(4), tod("08:00", "18:00")), 2),
             (cond(SEXY_ON, *FRI), 4)]
-WORKED = add("cafe_shifts_worked", 1)
+WORKED = add("cafe_shifts_worked", 1, clamp=False)   # pass 4 J4: a count is never clamped (the-meters.md)
 # three hours on her feet lower her hygiene (board.needs: hygiene "falls faster after work"; pass 3 E95)
 SHIFT_SWEAT = {"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}
 
@@ -152,12 +152,12 @@ out.append({
             POOL(
                 # pass 3 B4: somebody in the room talks (a stranger with no NPC: WHO, speaker "unknown")
                 GC({"version": "1.0", "logic": "AND", "items": []}, P("A table of guys from the team come in and order nothing but coffee for an hour so they can watch you walk back and forth. Tom lets them. They tip like they're trying to impress each other."),
-                   WHO("Same again, gorgeous. And walk slower this time, we're paying for the view.")),
+                   WHO("Same again, honey. And walk slower this time, we're paying for the view.")),
                 GC({"version": "1.0", "logic": "AND", "items": []}, P("Two women in gym clothes, a businessman on a call, a pensioner who wants the crusts cut off his toast. Your feet hurt, but you're good at this. You can feel it in the tips."),
                    WHO("Crusts off, I said. Thank you, dear. You're the only one here who listens.")),
                 pid="cafe_shift_lines"),
             G(cond(SEXY_ON), P("In the tight uniform with the top button open, every man who orders leans a little further over the counter. Every one of them tips more."),
-              WHO("Whatever you recommend. Keep the change, gorgeous. Buy yourself a smaller shirt.")),
+              WHO("Whatever you recommend. Keep the change, honey. Buy yourself a smaller shirt.")),
             G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}),
               P("No bra under the uniform, and your nipples show through it. Every time you lean to pour, somebody stops talking and looks at your tits."),
               WHO("Cold in here today, is it?")),

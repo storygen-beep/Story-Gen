@@ -182,7 +182,7 @@ a, n = shower_answers("k",
     [P("You keep washing. You soap your tits, slow, while she watches from the sink with her arms folded."),
      D(K, "Okay. Now I see what all the fuss is about."), ME("What fuss?"), D(K, "Ask your brother. Not tonight, though. Tonight he's mine."), P("She leaves the door open behind her.")],   # scene reader b03: the not-yet
     [P("You turn round under the water and give her your wet ass. Kayla laughs, low."),
-     D(K, "Oh, you're trouble. Does he know you're trouble?"), ME("Who?"), D(K, "Don't play dumb with me, babe. Shake that ass at him and you'll have me to deal with."), P("She smacks the door frame on her way out. You stand there wet and grinning, nipples hard.")])
+     D(K, "Oh, you're trouble. Does he know you're trouble?"), ME("Who?"), D(K, "Don't play dumb with me, @player.nickname. Shake that ass at him and you'll have me to deal with."), P("She smacks the door frame on her way out. You stand there wet and grinning, nipples hard.")])
 walkin("walkin_shower_kayla", "The door opens", "home_bathroom",
     "B1, Kayla: a Friday with Ryan, she comes in to pee and looks her over. No meter moves for her; kayla_saw_her (Ryan's hub reads it). Her answer on Exhibitionism: the towel 0, then +1 cap 19 / 39 / 59.",
     # (pass 3 group 2, round 2) she walks in from Ryan's room, where her Friday row holds her (people_data.py):
@@ -581,17 +581,19 @@ walkin("walkin_wardrobe_mark", "Laura's lingerie", "home_master_bedroom",
      *LINGERIE_OFF,
      P("In her long mirror your tits sit high in the lace, and your nipples show dark right through it. You turn side-on to see how it looks."),
      P("The front door goes downstairs. Then heavy feet on the stairs, slow, a man's. The bedroom door opens before you can move. Mark, home from the bar."),
-     # pass 3 B4/B51: Mark has no row before 22:00 for a line, so the speech here is hers
+     # pass 3 B4: the speech on this screen is hers; Mark's one line is on the next (pass 4 B51)
      ME("Mark. I was just. I was only trying it on.")],
     "He stops in the doorway.",
     [P("He smells of beer. He stands in his own bedroom doorway with his keys still in his fist and looks at you in his wife's bra."),
      # H7 (pass 3 A70): under Want 20 he looks once and puts his eyes on the wall; one chain of three bands
      GC(cond(ntrait(M, "want", "lt", 20)), P("His eyes go to your tits in the black lace, to your nipples through it. Then he catches himself and looks at the wall above your head, hard, and keeps them there. He doesn't take one step into the room."),
-        P("He doesn't say a word. His jaw works like he's going to tell you to take it off, but he doesn't.")),
+        P("His jaw works like he's going to tell you to take it off.")),
      GC(cond(ntrait(M, "want", "lt", 50)), P("His eyes go to your tits in the black lace, to your nipples through it, and stay there. Then down your stomach, slow, and back up. The front of his jeans fills, but he doesn't take one step into the room."),
-        P("He doesn't say a word. His eyes go to Laura's open drawer and back to your tits, and his jaw works like he's going to tell you to take it off, but he doesn't.")),
+        P("His eyes go to Laura's open drawer and back to your tits, and his jaw works like he's going to tell you to take it off.")),
      GC(cond(*ANY), P("His eyes go to your tits in the black lace, to your nipples through it, and stay there. Then down your stomach, slow, and back up. The front of his jeans fills, but he doesn't take one step into the room."),
-        P("He doesn't say a word. He leans on the door frame to look longer, and he wets his lips.")),
+        P("He leans on the door frame to look longer, and he wets his lips.")),
+     # pass 4 B51 (LO, 2026-11-04: Mark may speak here): his one line, true in every band; the chain ends on it
+     D(M, "That's your mother's."),
      VID("a middle-aged man in a bedroom doorway staring at a girl in a black lace bra at a long mirror", "stepdad catches girl in mom's lingerie", "man walks in on girl trying on lingerie bedroom", pool_dir="sex/walkin_wardrobe_mark_t4")],
     [go("Cover up.", node="m_cover", mins=2),
      go("Let him look.", node="m_look", mins=3, cond_=cond(*E_COV), eff=[pay("exhibitionism", 19)]),
@@ -646,7 +648,7 @@ walkin("walkin_things_kayla", "Caught", "home_ryan_room",
     "She's seen you.",
     [D(K, "Snooping?"),
      P("Kayla drops the bag on Ryan's bed and looks at the box in your hand, then at you, up and down, slow, your tits, your legs."),
-     D(K, "Relax. I won't tell him. He's the one who should be worried, with you across the hall."), ME("What's that supposed to mean?"), D(K, "You know exactly what it means. Put them back, babe.")],
+     D(K, "Relax. I won't tell him. He's the one who should be worried, with you across the hall."), ME("What's that supposed to mean?"), D(K, "You know exactly what it means. Put them back, @player.nickname.")],
     [go("Put it back.", loc="home_hall", mins=5)], records=["kayla_caught_her", "ryan_things_found"], when=[wd(4), tod("17:45", "18:00")])
 rule("ryan_things", "walkin_things_ryan", 0.25, here(R, "home_kitchen"), wd(6, 0, 1, 3), tod("18:45", "19:00"))
 rule("ryan_things", "walkin_things_kayla", 0.25, flag("kayla_met"), wd(4), tod("17:45", "18:00"))
@@ -676,6 +678,29 @@ walkin("walkin_step_vance", "At the gate", "home_front_door",
             "Go back in.", "home_hall", 10)])
 rule("front_step", "walkin_step_vance", 0.25, here(V, "vance_house"), tod("18:00", "21:00"))
 
+# pass 4 A57: her own line by her stage on the walk-ins where a short band line does it (canv.her_band_line)
+her_band_line(CANVASES, {
+    "walkin_shower_ryan": ("exhibitionism", [
+        "Ryan. In here. Grab the towel.",
+        "Ryan's looking. You don't want the towel yet.",
+        "Let your step-brother look. See how long he stays.",
+        "Ryan can look all he wants. You want him to."]),
+    "walkin_shower_kayla": ("exhibitionism", [
+        "Kayla, a foot away. You want the towel.",
+        "Kayla's watching. You mind less than you should.",
+        "Let Ryan's girlfriend see what's across the hall.",
+        "Let her look, and tell Ryan all of it."]),
+    "walkin_shower_mark": ("exhibitionism", [
+        "Mom's husband, and you're naked. Cover up.",
+        "Mark's looking. You don't want to cover up yet.",
+        "Let Mark look. Watch what it does to him.",
+        "You want Mark thinking about this at dinner."]),
+    "walkin_tv_ryan": ("corruption", [
+        "Ryan saw it. You want the floor to swallow you.",
+        "Ryan saw it. You want to know what he thinks.",
+        "You don't want to turn it off. Not with him here.",
+        "You want to watch the rest with Ryan."]),
+})
 
 def attach(out):
     """Put each host's rules on its canvas in `out` (host ids not in `out` are skipped and returned)."""

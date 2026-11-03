@@ -197,7 +197,8 @@ out.append({
             # pass 3 B4: the balcony talks
             D(Z, "Slower. Make the window wait for it."), ME("Zo, that guy is staring right at me."), D(Z, "I know. Isn't it the best?"),
         # reader a3, seen by the readers (DECISIONS 131): Zoe doesn't have it yet when the button shows
-        ], [go("Ask for it back.", node="mine", mins=3, eff=[add("exhibitionism", 3, cap=79)], flags=[fset("zoe_has_bra")],
+        # pass 4 E94: the guy at the window whistles, so the party talks (campus_talk, like the party's dares)
+        ], [go("Ask for it back.", node="mine", mins=3, eff=[add("exhibitionism", 3, cap=79), add("campus_talk", 1, clamp=False)], flags=[fset("zoe_has_bra")],
                wardrobe=[{"action": "unequip", "item_id": "plain_bra"}, {"action": "unequip", "item_id": "sports_bra"}])]),
         node("already", "Already", [D(Z, "You're— oh my god. All night? Babe."), P("She looks at your chest for a long second, then laughs and leans on the rail next to you, close, her shoulder on your bare arm.")],
              [go("Laugh with her.", node="mine2", mins=3, eff=[add("exhibitionism", 3, cap=79)])]),
@@ -222,7 +223,9 @@ out.append({
             # pass 3 B37: its own asset, not zoe_dares' low_do pool (one asset, one block)
             VID("a girl kissing a guy hard at a party, his hands on her ass, people cheering", "girl kisses guy at party dare", "dare kiss party hands on ass", pool_dir="sex/zoe_02_kiss_t3"),
             D("npc_cocky_guy", "Zoe. I owe you one."), D(Z, "You owe her, not me. Hands off now."),
-        ], [go("\"Saturday?\"", node="saturday", mins=10, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 3, "cap": 39}])]),
+        # pass 4 E94: the whole corner whoops at the kiss, so the party talks (campus_talk)
+        ], [go("\"Saturday?\"", node="saturday", mins=10, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 3, "cap": 39},
+                                                              add("campus_talk", 1, clamp=False)])]),
         node("saturday", "Saturday", [
             P("Zoe pulls you back out onto the balcony, flushed."),
             D(Z, "There's a hot tub Saturday. At the party house. Just us. Well. Just us and some people."),
@@ -413,7 +416,7 @@ out.append({
         POOL(D(Z, "Babe. You will not believe what the TA said to me."), D(Z, "Sit. You're with me."), D(Z, "Who's the guy? Don't say no guy. There's a guy."),
              D(Z, "What are friends for? Give me your fries."),   # pass 3 C45 (F10)
              pid="zoe_lunch_lines"),
-        ME("Hi, Zo."), D(Z, "Hi, gorgeous. You're buying dessert."),   # pass 3 B4
+        ME("Hi, Zo."), D(Z, "Hi, babe. You're buying dessert."),   # pass 3 B4
         *ZOE_STATE,
     ], [go("Stay for lunch with her.", loc="canteen", mins=30), go("Leave her your fries.", loc="campus")])]})
 
@@ -671,6 +674,8 @@ for _c in out:
     if _c["id"] in ['zoe_01_first_party', 'zoe_01b_kiss_again', 'zoe_02_bra_through_the_sleeve', 'zoe_02_balcony_curious', 'zoe_03_hot_tub']:
         mark_late(_c, 'late_party', split=True)
 
+# pass 4 E95: the one-time sex step takes energy and hygiene like the repeatable acts (board.needs)
+sex_takes_needs(out, "zoe_05_no_dare", "down", "Don't stop.")
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards + story)
 open(__import__("sys").argv[1], "w").write(text)
 print("zoe:", len(out), "canvases,", len(cards) + len(story), "cards")
