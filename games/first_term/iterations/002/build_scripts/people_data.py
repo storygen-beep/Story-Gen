@@ -194,7 +194,8 @@ ACTIVITIES = {
                   "awake, alone", "asleep", "asleep", "awake, with Mark", "asleep", "in the shower", "dressing to go out", "waiting up in the dark"],
     "npc_mark": ["at dinner", "in the garage, evening", "up late with the TV on", "up late with the TV on",
                  "asleep", "asleep", "awake, with Laura", "asleep", "cooking, Wednesday", "in the garage, Saturday",
-                 "the Sunday table", "heading out to the bar"],
+                 "the Sunday table", "heading out to the bar",
+                 "asleep", "at the counter with his coffee"],   # Sat sleeping in, then coffee (LO, 2026-11-03, DECISIONS 152)
     "npc_tom": ["running the café", "closing up, the café shut"],
     "npc_zoe": ["at the party house", "at home", "at home, party night", "at home, the party after midnight",
                 "going to bed", "lying on the grass", "at lunch", "on her weekend run",

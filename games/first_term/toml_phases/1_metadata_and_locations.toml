@@ -151,12 +151,14 @@ flag_keys = [
   "mark_03_done",
   "mark_06_done",
   "mark_arrangement",
+  "mark_brushed_kitchen",
   "mark_caught_ch5",
   "mark_dress_rule",
   "mark_laura_seen",
   "mark_money_week",
   "mark_paid_look",
   "mark_saw_her",
+  "mark_saw_lingerie",
   "mark_saw_mirror",
   "mark_things_today",
   "mark_towel_today",
@@ -279,7 +281,9 @@ flag_keys = [
   "walkin_gym_team_today",
   "walkin_hall_hale_today",
   "walkin_house_vance_today",
+  "walkin_kitchen_mark_today",
   "walkin_kitchen_ryan_today",
+  "walkin_laundry_mark_sat_today",
   "walkin_laundry_mark_today",
   "walkin_library_nadia_today",
   "walkin_mirror_mark_today",
@@ -300,6 +304,7 @@ flag_keys = [
   "walkin_tv_mark_kitchen_today",
   "walkin_tv_ryan_today",
   "walkin_wardrobe_laura_today",
+  "walkin_wardrobe_mark_today",
   "wash_today",
   "watched_tv",
   "worked_out",
@@ -1465,6 +1470,20 @@ weekdays   = [5]
 start_time = "17:00"
 end_time   = "18:30"
 activity   = "heading out to the bar"
+
+[[npcs.schedules]]
+location   = "home_master_bedroom"
+weekdays   = [5]
+start_time = "07:00"
+end_time   = "08:30"
+activity   = "asleep"
+
+[[npcs.schedules]]
+location   = "home_kitchen"
+weekdays   = [5]
+start_time = "08:30"
+end_time   = "09:00"
+activity   = "at the counter with his coffee"
 
 [[npcs]]
 id           = "npc_tom"

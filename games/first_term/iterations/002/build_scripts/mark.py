@@ -606,6 +606,8 @@ out.append(mark_hub("hub_mark_kitchen", K, "Mark, in the kitchen", "the kitchen"
     G(cond(wd(2), tod("20:00", "22:00")), P("Wednesday. The chilli pan is soaking in the sink and Mark's at the table with a beer.")),
     G(cond(wd(6), tod("08:00", "18:00")), P("Sunday. Mark's at the table with the paper and his coffee, in the chair at the head of it.")),
     G(cond(wd(6), tod("08:00", "12:00")), D(M, "Morning.")),
+    # DECISIONS 152: his Saturday coffee row, 08:30-09:00, before the garage
+    G(cond(wd(5), tod("08:30", "09:00")), P("Saturday. Mark's on his feet at the counter with his coffee, in his work jeans. The garage is waiting for him."), D(M, "Morning.")),
     G(cond(wd(0, 1, 3, 4), tod("18:00", "19:00")), P("Mark's at the table for dinner, sleeves rolled, already eating.")),
 ], leaks=LEAKS_KITCHEN, towel=True, items=[
     (("breakfast", "Sunday breakfast with him.", [wd(6), tod("08:00", "11:00")], "ate_breakfast", K,

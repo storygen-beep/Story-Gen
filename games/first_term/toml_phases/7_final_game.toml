@@ -156,6 +156,10 @@ flagEffects = [
   { targetType = "player", flag = "walkin_things_ryan_today", op = "unset" },
   { targetType = "player", flag = "walkin_things_kayla_today", op = "unset" },
   { targetType = "player", flag = "walkin_step_vance_today", op = "unset" },
+  # Mark's Saturday walk-ins (DECISIONS 152; walkins.py)
+  { targetType = "player", flag = "walkin_kitchen_mark_today", op = "unset" },
+  { targetType = "player", flag = "walkin_laundry_mark_sat_today", op = "unset" },
+  { targetType = "player", flag = "walkin_wardrobe_mark_today", op = "unset" },
   # the walk-ins outside the house, once a day each (heat proposal B9-B20, DECISIONS 147 chunk 3; walkins_out.py)
   { targetType = "player", flag = "walkin_cafe_gary_today", op = "unset" },
   { targetType = "player", flag = "walkin_gym_team_today", op = "unset" },
@@ -814,12 +818,14 @@ flag_keys = [
   "mark_03_done",
   "mark_06_done",
   "mark_arrangement",
+  "mark_brushed_kitchen",
   "mark_caught_ch5",
   "mark_dress_rule",
   "mark_laura_seen",
   "mark_money_week",
   "mark_paid_look",
   "mark_saw_her",
+  "mark_saw_lingerie",
   "mark_saw_mirror",
   "mark_things_today",
   "mark_towel_today",
@@ -942,7 +948,9 @@ flag_keys = [
   "walkin_gym_team_today",
   "walkin_hall_hale_today",
   "walkin_house_vance_today",
+  "walkin_kitchen_mark_today",
   "walkin_kitchen_ryan_today",
+  "walkin_laundry_mark_sat_today",
   "walkin_laundry_mark_today",
   "walkin_library_nadia_today",
   "walkin_mirror_mark_today",
@@ -963,6 +971,7 @@ flag_keys = [
   "walkin_tv_mark_kitchen_today",
   "walkin_tv_ryan_today",
   "walkin_wardrobe_laura_today",
+  "walkin_wardrobe_mark_today",
   "wash_today",
   "watched_tv",
   "worked_out",
@@ -2128,6 +2137,20 @@ weekdays   = [5]
 start_time = "17:00"
 end_time   = "18:30"
 activity   = "heading out to the bar"
+
+[[npcs.schedules]]
+location   = "home_master_bedroom"
+weekdays   = [5]
+start_time = "07:00"
+end_time   = "08:30"
+activity   = "asleep"
+
+[[npcs.schedules]]
+location   = "home_kitchen"
+weekdays   = [5]
+start_time = "08:30"
+end_time   = "09:00"
+activity   = "at the counter with his coffee"
 
 [[npcs]]
 id           = "npc_tom"
@@ -14317,6 +14340,12 @@ blocks = [
 type = "block_pool"
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "08:00", end_time = "12:00" }] }, blocks = [{ type = "dialog", content = "Morning.", props = { speaker = "npc", npcId = "npc_mark" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "08:30", end_time = "09:00" }] }, blocks = [{ type = "paragraph", content = "Saturday. Mark's on his feet at the counter with his coffee, in his work jeans. The garage is waiting for him." }, { type = "dialog", content = "Morning.", props = { speaker = "npc", npcId = "npc_mark" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -32851,7 +32880,7 @@ location = "home_kitchen"
 is_repeatable = true
 priority = 3
 is_active = true
-substitutions = [{ target_canvas_id = "walkin_kitchen_ryan", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "07:30", end_time = "10:00" }] } }]
+substitutions = [{ target_canvas_id = "walkin_kitchen_ryan", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "07:30", end_time = "08:15" }] } }, { target_canvas_id = "walkin_kitchen_ryan", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "07:30", end_time = "10:00" }] } }, { target_canvas_id = "walkin_kitchen_mark", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "08:15", end_time = "08:30" }] } }]
 show_when_blocked = true
 cooldown_message = "Every day, 6:30 AM-10 AM"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_kitchen", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "ate_breakfast", operator = "is_false" }] }
@@ -32898,7 +32927,7 @@ location = "home_kitchen"
 is_repeatable = true
 priority = 3
 is_active = true
-substitutions = [{ target_canvas_id = "walkin_kitchen_ryan", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "07:30", end_time = "10:00" }] } }]
+substitutions = [{ target_canvas_id = "walkin_kitchen_ryan", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "07:30", end_time = "08:15" }] } }, { target_canvas_id = "walkin_kitchen_ryan", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "07:30", end_time = "10:00" }] } }, { target_canvas_id = "walkin_kitchen_mark", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "08:15", end_time = "08:30" }] } }]
 show_when_blocked = true
 cooldown_message = "Every day, 6:30 AM-11 AM"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_kitchen", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "had_coffee", operator = "is_false" }] }
@@ -33617,7 +33646,7 @@ is_repeatable = true
 priority = 3
 is_active = true
 max_triggers_per_day = 1
-substitutions = [{ target_canvas_id = "walkin_wardrobe_laura", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_bathroom", npc_id = "npc_laura", operator = "is_present" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "16:45", end_time = "17:00" }] } }]
+substitutions = [{ target_canvas_id = "walkin_wardrobe_laura", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_bathroom", npc_id = "npc_laura", operator = "is_present" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "16:45", end_time = "17:00" }] } }, { target_canvas_id = "walkin_wardrobe_mark", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "21:45", end_time = "22:00" }] } }]
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", operator = "is_absent" }] }
 
 [[canvases.nodes]]
@@ -34400,7 +34429,7 @@ location = "home_garage"
 is_repeatable = true
 priority = 3
 is_active = true
-substitutions = [{ target_canvas_id = "walkin_laundry_mark", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 3, 4] }, { type = "time_of_day", start_time = "18:45", end_time = "19:00" }] } }]
+substitutions = [{ target_canvas_id = "walkin_laundry_mark", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 3, 4] }, { type = "time_of_day", start_time = "18:45", end_time = "19:00" }] } }, { target_canvas_id = "walkin_laundry_mark_sat", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "08:45", end_time = "09:00" }] } }]
 show_when_blocked = true
 cooldown_message = "Every day, 7 AM-9 PM"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "did_laundry", operator = "is_false" }] }
@@ -36443,6 +36472,181 @@ locationId = "home_kitchen"
 time_progression_minutes = 10
 
 [[canvases]]
+id   = "walkin_kitchen_mark"
+name = "Reaching past"
+description = "B2, Mark: down from sleeping in on a Saturday for his coffee, he puts his hand on her hip to get past her at the counter; after mark_saw_her. His Lust +2 on the moment; her answer on Corruption: step aside 0, stay +1 cap 19 / 39, push back (Bold) +1 cap 59."
+
+[canvases.trigger]
+location = "home_kitchen"
+is_repeatable = true
+priority = 1
+is_active = true
+substitution_only = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "walkin_kitchen_mark_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "08:15", end_time = "08:30" }] }
+
+[[canvases.nodes]]
+id   = "moment"
+name = "Reaching past"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Saturday. You're at the counter with the kettle on and the kitchen to yourself. Upstairs a bed creaks, then the stairs."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Mark comes in barefoot in yesterday's jeans, his hair flat on one side from the pillow. He wants the coffee jar, and you're standing in front of it."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He doesn't ask you to move. His hand goes flat on your hip, big and warm, and he steps in behind you to reach past."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "His hand stays."
+targetType = "node"
+nodeId = "answer"
+time_progression_minutes = 2
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 2, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "walkin_kitchen_mark_today", op = "set" }, { targetType = "player", flag = "mark_brushed_kitchen", op = "set" }]
+
+[[canvases.nodes]]
+id   = "answer"
+name = "Reaching past"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He takes his time with the jar. His hand stays on your hip the whole time, his thumb pressed into the curve of it. His chest is at your back, and the front of his jeans brushes your ass."
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "want", operator = "lt", value = 50 }] }
+blocks = [
+  { type = "paragraph", content = "He clears his throat and gets the lid off, slow, like that's what he's doing." },
+  { type = "dialog", content = "Morning, @player.", props = { speaker = "npc", npcId = "npc_mark" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "paragraph", content = "He doesn't pretend. He looks down over your shoulder, straight down your front, and his fingers spread on your hip." },
+  { type = "dialog", content = "Lucky your mother's out.", props = { speaker = "npc", npcId = "npc_mark" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a middle-aged man behind a girl at a kitchen counter, his hand on her hip, reaching past her", search_queries = ["stepdad hand on hip kitchen counter morning", "man brushes past girl kitchen counter hand on hip"], pool_dir = "sex/walkin_kitchen_mark_t4" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Step aside."
+targetType = "node"
+nodeId = "m_aside"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices]]
+text = "Don't move."
+targetType = "node"
+nodeId = "m_stay"
+time_progression_minutes = 2
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Don't move."
+targetType = "node"
+nodeId = "m_stay"
+time_progression_minutes = 2
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 40 }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Push back into him."
+targetType = "node"
+nodeId = "m_push"
+time_progression_minutes = 2
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }]
+
+[[canvases.nodes]]
+id   = "m_aside"
+name = "Step aside"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You slide out from under his hand and take your mug to the window. Behind you he spoons his coffee in and leans on the counter to drink it, and you can feel him watching your ass the whole time."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Drink your coffee."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "m_stay"
+name = "Don't move"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You don't move. You stand there with his hand on your hip and let him take as long as he wants. His thumb presses in once. The front of his jeans grazes your ass again, and your nipples go hard."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Then he steps back with the jar, like nothing happened."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Good girl."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "He felt you stay. He'll remember it."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Drink your coffee."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "m_push"
+name = "Push back into him"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You push back into him. Your ass presses right into the front of his jeans, and he's hard. His fingers dig into your hip and hold you there."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Careful, @player."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "One second. Two. Then he lets go, takes his coffee to the end of the counter and drinks it there, looking at you over the mug like he's working something out."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Drink your coffee."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 10
+
+[[canvases]]
 id   = "walkin_tv_mark_garage"
 name = "Channel 5"
 description = "B3, Mark: in from the garage before his late TV row, he finds channel 5 on. His Lust +2 on the moment; her answer on Corruption: off 0, wait +1 cap 19, leave it on (Curious) +1 cap 39."
@@ -37165,6 +37369,106 @@ targetType = "location"
 locationId = "home_hall"
 
 [[canvases]]
+id   = "walkin_laundry_mark_sat"
+name = "Bent at the drum"
+description = "B4 Saturday, Mark: in from his coffee for his Saturday in the garage, he finds her bent at the washer. His Lust +2 on the moment; her answers route into his laundry tease ladder (hub_mark_garage) with its own gates and pays."
+
+[canvases.trigger]
+location = "home_garage"
+is_repeatable = true
+priority = 1
+is_active = true
+substitution_only = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "walkin_laundry_mark_sat_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "08:45", end_time = "09:00" }] }
+
+[[canvases.nodes]]
+id   = "moment"
+name = "Bent at the drum"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Saturday morning. You've got your basket on the garage floor and you're bent right over at the drum, feeding it, your ass up in the air."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }] }, blocks = [{ type = "paragraph", content = "Bent like this, your short skirt is up over the backs of your thighs." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The door from the house opens behind you. Mark, with his coffee, out for his day at the bench."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "He stops in the doorway."
+targetType = "node"
+nodeId = "answer"
+time_progression_minutes = 2
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 2, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "walkin_laundry_mark_sat_today", op = "set" }, { targetType = "player", flag = "mark_walked_in_laundry", op = "set" }]
+
+[[canvases.nodes]]
+id   = "answer"
+name = "Bent at the drum"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He doesn't go to his bench. He stands in the doorway with the mug halfway to his mouth and looks at your ass, and he doesn't drink."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Saturday's my garage, @player. Carry on."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He takes his time over the first sip. The front of his jeans is tight, and he stays where he is."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Load it and go."
+targetType = "location"
+locationId = "home_garage"
+time_progression_minutes = 30
+costs = [{ trait = "energy", value = 5 }]
+flagEffects = [{ targetType = "player", flag = "did_laundry", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave your basket on top."
+targetType = "node"
+nodeId = "hub_mark_garage.hl_laundry_tease"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }] }
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 2, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "did_laundry", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Bend for the bottom drum."
+targetType = "node"
+nodeId = "hub_mark_garage.hl_laundry_tease2"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "worn_type", operator = "neq", value = "towel" }] }
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 3, cap = 100 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+flagEffects = [{ targetType = "player", flag = "did_laundry", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Wash what you're wearing."
+targetType = "node"
+nodeId = "hub_mark_garage.hl_laundry_tease3"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }, { type = "clothing_slot", slot = "top", operator = "equipped" }, { type = "clothing_slot", slot = "bra", operator = "equipped" }] }
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 4, cap = 100 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }]
+flagEffects = [{ targetType = "player", flag = "did_laundry", op = "set" }]
+wardrobeEffects = [{ action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave it for later."
+targetType = "location"
+locationId = "home_hall"
+
+[[canvases]]
 id   = "walkin_mirror_ryan"
 name = "In the mirror"
 description = "B5, Ryan: his door opens behind her at the hall mirror. His Lust +2 on the moment; her answer on Exhibitionism: her room 0, stay +1 capped at her stage's top (19 / 39 / 59). Shares home_event."
@@ -37548,6 +37852,174 @@ type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
 text = "Hang it back up."
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "walkin_wardrobe_mark"
+name = "Laura's lingerie"
+description = "B6, Mark: home from the bar on a Saturday night, up to bed, he finds her at Laura's mirror in Laura's black lace bra and stares; after mark_saw_her. A look, no touch. His Lust +2 on the moment; her answer on Exhibitionism: cover up 0, let him look +1 cap 19 / 39 / 59."
+
+[canvases.trigger]
+location = "home_master_bedroom"
+is_repeatable = true
+priority = 1
+is_active = true
+substitution_only = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "walkin_wardrobe_mark_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "21:45", end_time = "22:00" }] }
+
+[[canvases.nodes]]
+id   = "moment"
+name = "Laura's lingerie"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Laura's drawer under the dresses is open. The stockings are still in their packet, and the black lace bra that is not a mom's bra is on you."
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }
+blocks = [
+  { type = "paragraph", content = "Your towel's in a heap on her bed." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "paragraph", content = "Your own things are in a heap on her bed." },
+]
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "In her long mirror your tits sit high in the lace, and your nipples show dark right through it. You turn side-on to see how it looks."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The front door goes downstairs. Then heavy feet on the stairs, slow, a man's. The bedroom door opens before you can move. Mark, home from the bar."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "He stops in the doorway."
+targetType = "node"
+nodeId = "answer"
+time_progression_minutes = 2
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 2, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "walkin_wardrobe_mark_today", op = "set" }, { targetType = "player", flag = "mark_saw_lingerie", op = "set" }]
+
+[[canvases.nodes]]
+id   = "answer"
+name = "Laura's lingerie"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He smells of beer. He stands in his own bedroom doorway with his keys still in his fist and looks at you in his wife's bra."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "His eyes go to your tits in the black lace, to your nipples through it, and stay there. Then down your stomach, slow, and back up. The front of his jeans fills. He doesn't take one step into the room."
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "want", operator = "lt", value = 50 }] }
+blocks = [
+  { type = "paragraph", content = "He doesn't say a word. His eyes go to Laura's open drawer and back to your tits, and his jaw works like he's going to tell you to take it off. He doesn't." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "paragraph", content = "He doesn't say a word. He leans on the door frame to look longer, and he wets his lips." },
+]
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a middle-aged man in a bedroom doorway staring at a girl in a black lace bra at a long mirror", search_queries = ["stepdad catches girl in mom's lingerie", "man walks in on girl trying on lingerie bedroom"], pool_dir = "sex/walkin_wardrobe_mark_t4" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Cover up."
+targetType = "node"
+nodeId = "m_cover"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him look."
+targetType = "node"
+nodeId = "m_look"
+time_progression_minutes = 3
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him look."
+targetType = "node"
+nodeId = "m_look"
+time_progression_minutes = 3
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }] }
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him look."
+targetType = "node"
+nodeId = "m_look"
+time_progression_minutes = 3
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
+
+[[canvases.nodes]]
+id   = "m_cover"
+name = "Cover up"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You cross your arms over your tits, over her lace. Your face is on fire."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He jerks his chin at Laura's drawer: put it back. Then he stands aside in the doorway while you grab your things, and he watches you the whole time you do."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get changed. Go."
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "m_look"
+name = "Let him look"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You don't cover up. You turn round to face him, drop your hands to your sides, and let him look at you in his wife's bra."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He looks. A long time. At your tits in the lace, your nipples hard through it. His keys bite into his fist, and he still doesn't come in."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He breathes out hard through his nose. Then he steps back onto the landing and pulls the door to without a word, and leaves you to get changed."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "He'll think about this bra every time she wears it."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get changed. Go."
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 5
