@@ -1,4 +1,6 @@
-# [REVIEW] Scene — laura_03b_all_dressed_up
+# [READY] Scene — laura_03b_all_dressed_up
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. "Wait." and the `liar` screen as built; the step row.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -22,15 +24,24 @@
 | her_line_low · her_line_high | low: "That's your mom. Go to bed." · high: "She's lonely, and you can't stop watching her be lonely." | The low line sits on the parked no; the high line is the thought on `bed`. |
 | what changes after | `laura_lonely` set; the alone-in-bed line names this night |
 
+## The step row (filled from the build, 2026-11-03)
+
+**Kind · stage:** a non-sexual touch (the Curious kind; this step is gated on her Love only).
+
+| the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
+|---|---|---|---|---|---|---|
+| she zips her mother into her good dress, and Laura asks if she's still worth looking at | Ella; Mark, calling up the stairs on his way out | empty on purpose: nothing of hers is at stake | "Hold still." | Laura: "Do I still look like someone you'd look at?" | not a sex act | `laura_lonely`; her bedroom door doesn't quite close on weeknights |
+
 ## Branch map — one row per screen
 
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `zip` | her door open; Laura at the mirror in her good dress, the zip open to the small of her back: "Zip me up, sweetheart? Mark's useless at it." (built line) | no | "Hold still." → `zipped` · "Ask Mark." → `no` (parked) | none |
-| `zipped` | you zip her; Mark calls up the stairs that he's off to the bar; the front door goes | no | → `bed` | none |
-| `bed` | Laura sits on the end of the bed, dressed up, nowhere to go: "Do I still look like someone you'd look at?" | no | "You look beautiful, Mom." → the hall · Say nothing. → `quiet` | first exit: Laura's Love add +5 · `laura_lonely` set · `laura_step` set 3 · `laura_06_done` set |
+| `zipped` | you zip her; Mark calls up the stairs that he's off to the bar; the front door goes | no | "Wait." → `bed` | none |
+| `bed` | Laura sits on the end of the bed, dressed up, nowhere to go: "Do I still look like someone you'd look at?" | no | "You look beautiful, Mom." → `liar` · "Say nothing." → `quiet` | none |
+| `liar` | Laura: "Liar." Smiling, eyes wet. "On weeknights now, her bedroom door doesn't quite close." | no | "Goodnight, Mom." → the hall | Laura's Love add +5 · `laura_lonely` set · `laura_step` set 3 · `laura_06_done` set |
 | `quiet` | you sit beside her and say nothing; she leans her head on your shoulder | no | "Goodnight, Mom." → the hall | Laura's Love add +5 · `laura_lonely` set · `laura_step` set 3 · `laura_06_done` set |
-| `no` | "Mark. Right." She does the zip herself, badly, halfway (built) | no | → the hall | Laura's Love add −1 · the step waits a week |
+| `no` | "Mark. Right." She does the zip herself, badly, halfway (built) | no | "Leave her with the zip." → the hall | Laura's Love add −1 · the step waits a week |
 
 **Dropped from the built canvas:** the `lean` screen (your fingers on her ribs, her hands over them) and the `ask`
 ("Take me with you one night", `laura_asked_to_come`): the climb toward Ella is cut.

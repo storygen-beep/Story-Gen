@@ -1,5 +1,7 @@
 # [READY] Place — Gym
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > New 2026-10-08 (LO's pick 8, question 64). Id `campus_gym`.
@@ -29,12 +31,30 @@
 | work out | work | wardrobe | 60 min · energy add −15 · exhibitionism add +1 at Daring, if seen | `worked_out`, 12 h | yes: her body, what she wears |
 | Jake, training | person | Jake's ladder · home_life rule | inside his hub: talk, his step read · Curious: his hands on her hips at the squat rack · Bold, after Jake B 2: a kiss against the lockers | once per window | yes |
 
+## Built from the heat proposal (signed 2026-11-03)
+
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has here:
+
+**Walk-ins.** Her activity rolls on entry (1 in 4 at her lowest band, more higher up); on a hit someone walks in. A man's pay sits on the moment; her cover pays 0.
+
+| who walks in | her activity | when | his pay, on the moment | her bolder answers |
+|---|---|---|---|---|
+| Jake's team | Work out | Tue, Thu 15:00–15:15 | none: no meter | "Finish your set." Exhibitionism +1, cap 39 |
+
+**Acts, rungs and pools.**
+
+| what | where | buttons and pays |
+|---|---|---|
+| Jake in the locker room (A1) | his gym hub, at training | "Get on your knees." Bold 40, Corruption +1, cap 59 · "Against the lockers." Hungry 60, +1, cap 79 · "Not here, Jake." pays 0 |
+
 ## Rows a gate needs
 
 | row | gate |
 |---|---|
 | work out, every open hour | a destination is never open and exit-only |
 | Jake's row has a hub | standing surface |
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_B.md` (signed with the a2 sheets, DECISIONS 125).
 
 ## Why — the source of each key choice
 

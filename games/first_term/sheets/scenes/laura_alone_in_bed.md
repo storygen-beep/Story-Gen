@@ -1,6 +1,8 @@
 # [READY] Scene — laura_alone_in_bed
 
-> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 2: `crack` gains one ungated line after the signed beat: "Her face is turned on the pillow toward the landing, toward Ryan's door. Her lips move around a word you can't hear, and her fingers go faster." Her want for Ryan on her body before `laura_04_she_saw_you` says his name. True every night of the window: Ryan's row has him in his room 22:00-06:45. The signed `crack` beat itself is unchanged (line in `home.py`).
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the gate row reads `laura_step` 2 as built; want, next step and hook rows. the explicit beats as built, measured. file and line cites cut.
+
+> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 2: `crack` gains one ungated line after the signed beat: "Her face is turned on the pillow toward the landing, toward Ryan's door. Her lips move around a word you can't hear, and her fingers go faster." Her want for Ryan on her body before `laura_04_she_saw_you` says his name. True every night of the window: Ryan's row has him in his room 22:00-06:45. The signed `crack` beat itself is unchanged.
 
 > **Changed 2026-11-01 after the build, signed by LO 2026-11-01 ("Signed, build them")** (the reader's FAILs; LO's picks in chat): the gap opens after Laura's step 2 (LO's pick 2b: her want is shown first).
 
@@ -14,8 +16,11 @@
 |---|---|
 | system · place | the way up (DECISIONS 78, 79, 82) · `home_master_bedroom`, from the door |
 | where · when | the landing, their door · Sun–Fri 22:00–23:00, Laura in and awake, Mark downstairs (new row in Laura's schedule) · door option "The door's ajar." in place of "Ease the door open" in that hour |
-| gate | none: open at Good Girl · Laura present, Mark absent |
+| gate | `laura_step` gte 2 · Laura present, Mark absent · Sun–Fri |
 | who | Laura, 41, her mother; she never sees her |
+| want | Laura's: alone while Mark stays downstairs, her hand between her thighs |
+| next step | three watched gaps open her step 4 (`laura_04_she_saw_you`) |
+| hook | each watch adds 1 to `laura_gaps_watched` |
 | what she wears here | not named |
 | BRAKE | once a night (20 hours, as Ryan's door) · after she watched, "Peek through the gap." → `laura_alone_peek`, pays nothing |
 | raises | the look: none · "Keep watching.": corruption add +1, cap 19 · `laura_gaps_watched` add +1 (counts toward her step 4) |
@@ -90,3 +95,14 @@ You stay. Your hand stays flat on the door frame. Laura pushes two fingers insid
 | row | was | now |
 |---|---|---|
 | gate | none: open at Good Girl | `laura_step` gte 2: after the wine, "Mark hasn't looked at me like that since the wedding." Her want is shown before the gap |
+
+## Explicit beats as built (measured 2026-11-03)
+
+One row per explicit screen in the built game: 3 or more words on the build's own list, the count `gates.py` uses. A screen's variants fold into it, so a screen can hold more words than one visit shows. "Sits at" is the highest of the person's crude columns (SP2) that the screen uses. Where a screen's text differs from the prose above, the build is what plays.
+
+| screen | words | counted words | sits at | the text |
+|---|---|---|---|---|
+| `laura_alone_in_bed` · `crack` | 175 | 7: ass, clit, tit, nipple, tits, moan, nipples | Laura's late column; also ass, clit | on this sheet above |
+| `laura_alone_in_bed` · `watch` | 304 | 15: nipples ×4, clit ×3, tit ×2, nipple ×2, moan ×2, tits ×2 | Laura's late column; also clit | on this sheet above |
+| `laura_alone_after` · `crack_after` | 136 | 5: ass ×2, clit, nipples, moan | Laura's late column; also ass, clit | on this sheet above |
+| `laura_alone_after` · `watch_after` | 141 | 4: clit ×2, ass, nipples | Laura's late column; also ass, clit | on this sheet above |

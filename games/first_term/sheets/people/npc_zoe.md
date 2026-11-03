@@ -1,5 +1,7 @@
 # [READY] Person — Zoe
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: her three class rows. The moment column names each step's kind and stage. No locked next-dare button; only her card names it. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 3 to 23:30; step 5 at her apartment to 01:45.
+
 > **Changed 2026-11-02** (reader fails a3, signed by LO 2026-11-02, DECISIONS 131): rows 20, 21, 23, 36–41. Short skirt line: "Her eyes go down your bare legs to the hem, and she bites her lip." · "Now we're talking. Not here, babe." ("Later, babe." in her flat and bedroom). Canteen Mon–Wed: "Friday's coming, babe. Start planning." Class pool adds "Party's Friday. You're coming." Park dare, both branches: "Tomorrow I'm daring you again." (Sat) / "Next weekend I'm daring you again." (Sun); "again", not the sheet's "worse", because no worse park dare is built.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): the hot tub at Bold · Showing, paying +3 cap 79; every dare the room watches, the park dare and the hollow at Hungry or Watched; "Let him watch." at Watched; her no moves a counter, not her meter; the locked dare shows "(Next release)". Sections changed: Ladder, the dares, Step 5, the park (new).
@@ -48,6 +50,9 @@ A ceiling, never a floor. LO took these, 2026-10-08.
 | `zoe_bedroom` | Mon–Thu | 22:00 | 00:00 | going to bed: she lends the dress |
 | `canteen` | Mon–Fri | 11:45 | 13:00 | lunch |
 | `park` | Sat, Sun | 08:00 | 10:00 | her weekend run |
+| `lecture_hall` | Tue, Thu | 08:30 | 11:45 | in class: figure drawing, then Biology |
+| `lecture_hall` | Mon | 13:00 | 14:30 | in class: Biology |
+| `lecture_hall` | Wed | 13:00 | 14:30 | in class: figure drawing |
 
 ## Everyday: make-up before the party (LO's pick 12, 2026-10-08)
 
@@ -65,13 +70,28 @@ A choice in Zoe's hub in her living room, Friday 18:00–19:00, before the party
 | 0 | `zoe_00_quad_meeting` | `quad` | her hours | none | `zoe_met` set · her number | (as built) | The quad, between classes: a girl who's looking at you. |
 | 1 | `zoe_01_first_party` (= Jake 1) | `zoe_apartment` | Fri 19:00–23:00 | step 0 (built: jake_step eq 0, the shared step) | exhibitionism add +3 (on the yes only) | "Not tonight, Zo." (parked; pays her nothing, was Exhibitionism +3; adds 1 to `zoe_refused`, which her next line reads: "Next time, then.") | Friday evening: Zoe's party at her apartment, and she has a dress for you. |
 | 2 | `zoe_02_bra_through_the_sleeve` | `zoe_apartment` | Fri 21:00–00:00 | Corruption 20 **or** Exhibitionism 20 (was and) | exhibitionism add +3 | "Not tonight, Zo." (parked) | A Friday party at Zoe's, out on the balcony: Zoe has a dare. |
-| 3 | `zoe_03_hot_tub` | `party_house` | Sat 20:00–00:00 | Corruption 40 · Exhibitionism 40 (was 20 · 20; topless and a kiss for one person she knows is Bold · Showing, DECISIONS 124) | exhibitionism add +3 · corruption add +3, cap 79 | "Not tonight, Zo." (parked) | Saturday night: the hot tub at the party house. Zoe's friends head inside first. |
+| 3 | `zoe_03_hot_tub` | `party_house` | Sat 20:00–23:30 | Corruption 40 · Exhibitionism 40 (was 20 · 20; topless and a kiss for one person she knows is Bold · Showing, DECISIONS 124) | exhibitionism add +3 · corruption add +3, cap 79 | "Not tonight, Zo." (parked) | Saturday night: the hot tub at the party house. Zoe's friends head inside first. |
 | 4 | `zoe_04_i_pick_the_dares` | `zoe_apartment` | Mon–Thu 18:00–22:00 · Sat 18:00–20:00 | step 3 (was Corruption 40) | `picks_the_dares` set: **the dares open** | Zoe's: "Not that one, babe." (parked) | An evening at Zoe's, on her couch, after the hot tub. |
-| 5 | `zoe_05_no_dare` (new, top step) | `zoe_bedroom` | after a Friday party, Sat 00:00–02:00 | step 4 · Corruption 40 · four dares done | `zoe_together` set · `zoe_let_him_watch` (her pick; "Let him watch." needs Exhibitionism 60) | "Ask me again." | After Friday's party: Zoe's bedroom, the music still through the door. |
+| 5 | `zoe_05_no_dare` (new, top step) | `zoe_apartment` | after a Friday party, Sat 00:00–01:45 | step 4 · Corruption 40 · four dares done | `zoe_together` set · `zoe_let_him_watch` (her pick; "Let him watch." needs Exhibitionism 60) | "Ask me again." | After Friday's party: Zoe's bedroom, the music still through the door. |
 | — | locked | her card | — | not written | — | — | "Zoe's next dare. (Next release)" (DECISIONS 124) (threesome, foursome, gloryhole, the dean, the porn video, gangbang: later) |
 
 Every step's gate also says the drinks boost is off. Stage numbers: 20 is Curious or Daring, 40 Bold or Showing, 60
 Hungry or Watched.
+
+## The eight ladder rules, checked against the build (2026-11-03)
+
+| rule | as built |
+|---|---|
+| 1 · a new witness, risk or yes each step | yes: a new room, witness or dare each step |
+| 2 · the top step is a payoff | yes: step 5, Zoe goes down on her |
+| 3 · one cut-off at most | yes: no cut-off; every step finishes |
+| 4 · he moves at least every other step | yes: her move is written on every step |
+| 5 · his meter is the lock | waived (declared on this sheet, signed by LO 2026-11-01) |
+| 6 · a hot repeatable per stage | yes: the dares, plus the canteen and "Stay over" |
+| 7 · her voice changes with her level | no: no step reads her level |
+| 8 · something happens after the top step | yes: the dares and her bed keep running |
+
+Failing, waivers not counted: 1 of 8. The ladder may be built (two fails stop it).
 
 ## Card goals (LO's play note, 2026-10-08)
 
@@ -83,12 +103,12 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 
 | n | the moment | who sees or knows | what she risks | how she says yes | Zoe's move | does it finish | what changes after |
 |---|---|---|---|---|---|---|---|
-| 0 | Zoe on the quad: "You're new. Party Friday. Wear something short." | Zoe | — | she takes Zoe's number | the invite | yes | `zoe_met`, her number |
-| 1 | Zoe's dress on her, her first dare, and a guy who picks her out: Jake | Zoe, the party, Jake | the party's eyes | she takes the dare | the dress and the dare | yes | Jake met; party nights |
-| 2 | a dress dare on the balcony, the room behind the glass watching: her bra comes off through her sleeve | the room behind the glass | strangers seeing | "Watch me." (showing) · "Dare me something else." (doing) | the dare, and her eyes on Ella | yes | the party house invite |
-| 3 | the hot tub: her friends go in first; topless for Zoe alone, and Zoe kisses her | Zoe; the friends in the water | being seen topless; a girl's mouth on hers | the top comes off · she kisses back | the kiss | yes | home at three; Ryan at his door sees her come in (Ryan's Lust +5, built) |
-| 4 | Zoe's couch: "I dared you instead of asking. I always do." | Zoe's secret is hers | — | "Then keep daring me." | the admission | yes | `picks_the_dares`: party nights are Zoe's to dare; the dares open |
-| 5 | after the party, Zoe's bedroom: "No dare. I'm asking." Ella says yes, and Zoe goes down on her, and Ella comes with her hand over her mouth. The door opens: the cocky guy, a beer in his hand. Zoe, without looking up: "Out." Or: "Stay. Watch." | Zoe; **the cocky guy at the door** | the party hearing; the guy at the door | "Yes." (out loud) · "Ask me again." | she asks; she decides about the door | **yes** | `zoe_together`; the dares change; the door line is the hook for the locked threesome |
+| 0 | *a meeting, no act · stage 1* — Zoe on the quad: "You're new. Party Friday. Wear something short." | Zoe | — | she takes Zoe's number | the invite | yes | `zoe_met`, her number |
+| 1 | *a first dare · stage 2, Curious 20* — Zoe's dress on her, her first dare, and a guy who picks her out: Jake | Zoe, the party, Jake | the party's eyes | she takes the dare | the dress and the dare | yes | Jake met; party nights |
+| 2 | *a dare a room can see, nothing bared · stage 2, Daring 20 or Curious 20* — a dress dare on the balcony, the room behind the glass watching: her bra comes off through her sleeve | the room behind the glass | strangers seeing | "Watch me." (showing) · "Dare me something else." (doing) | the dare, and her eyes on Ella | yes | the party house invite |
+| 3 | *naked by choice for one person, and a kiss · stage 3, Bold 40 and Showing 40* — the hot tub: her friends go in first; topless for Zoe alone, and Zoe kisses her | Zoe; the friends in the water | being seen topless; a girl's mouth on hers | the top comes off · she kisses back | the kiss | yes | home at three; Ryan at his door sees her come in (Ryan's Lust +5, built) |
+| 4 | *a talk, no act · stage 1* — Zoe's couch: "I dared you instead of asking. I always do." | Zoe's secret is hers | — | "Then keep daring me." | the admission | yes | `picks_the_dares`: party nights are Zoe's to dare; the dares open |
+| 5 | *private contact (sex with her) · stage 3, Bold 40; "Let him watch." stage 4, Watched 60* — after the party, Zoe's bedroom: "No dare. I'm asking." Ella says yes, and Zoe goes down on her, and Ella comes with her hand over her mouth. The door opens: the cocky guy, a beer in his hand. Zoe, without looking up: "Out." Or: "Stay. Watch." | Zoe; **the cocky guy at the door** | the party hearing; the guy at the door | "Yes." (out loud) · "Ask me again." | she asks; she decides about the door | **yes** | `zoe_together`; the dares change; the door line is the hook for the locked threesome |
 
 **Her voice:** low line, "It's a dare. It doesn't count." · high line, "You want her to dare you something
 worse." Both on each step sheet.
@@ -126,7 +146,7 @@ where she can see it.
 | "Sit in his lap until he's hard. Make him beg." (mixed) | Exhibitionism 60 · Corruption 40 (was Corruption 40 · Exhibitionism 20) | both +1, cap 79 |
 | after step 5, Zoe joins: "Kiss me where they can see." | Exhibitionism 60 (was none) | both +1, cap 79 |
 | after step 5: "Let her watch you with him." | Exhibitionism 60 (was none) | both +1, cap 79 |
-| the next dare | not written | locked: "Zoe's next dare. (Next release)" |
+| the next dare | not written | no button; her card says "Zoe's next dare. (Next release)" |
 
 - **The no:** "Not tonight." Zoe pouts and picks something tamer next week. It pays her nothing and adds 1 to
   `zoe_refused` (her next pick reads it: "Something easy, then."). No dare in release 1 writes the room pushing, so
@@ -199,6 +219,14 @@ Each follow-up waits for her reply (`after_round`), and a different answer follo
 | the step counter read by every gate | ladders move forward |
 | the four-dares counter read by step 5 | a meter is read |
 | her park row has a hub | standing surface |
+
+## Walk-ins and acts from the heat proposal (signed 2026-11-03, built)
+
+Walk-ins: `canteen`, `park`, `party_house`, `quad`, `zoe_apartment`, `zoe_bedroom`. Each row (when, what pays) is on that place sheet.
+Acts: under the canteen table (A2, `canteen`), "Stay over" in her bed (A5, `zoe_bedroom`).
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_B.md` (signed with the a2 sheets, DECISIONS 125).
 
 ## Why — the source of each key choice
 

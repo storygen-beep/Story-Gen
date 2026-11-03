@@ -1,5 +1,7 @@
 # [READY] Place — Quad
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the system sheets. Id `quad`.
@@ -31,12 +33,31 @@
 | Zoe | person | Zoe's ladder | her want shown first: her head in @player's lap | once per window, on the trigger | yes |
 | sit on the grass | work | college · `campus_talk` | none · what she overhears reads `campus_talk` | none needed: it writes nothing | yes |
 
+## Built from the heat proposal (signed 2026-11-03)
+
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has here:
+
+**Walk-ins.** Her activity rolls on entry (1 in 4 at her lowest band, more higher up); on a hit someone walks in. A man's pay sits on the moment; her cover pays 0.
+
+| who walks in | her activity | when | his pay, on the moment | her bolder answers |
+|---|---|---|---|---|
+| Jake's team | Sit on the grass | Mon, Wed, Fri 08:30–08:45 | none: no meter | "Leave it." Exhibitionism +1, cap 19 |
+| Zoe | Sit on the grass | Tue, Thu, Fri 14:30–14:45 | none: no meter | "Leave her there." Corruption +1, cap 19; "Let her hand slide up your thigh." Corruption +1, cap 39 |
+
+**Acts, rungs and pools.**
+
+| what | where | buttons and pays |
+|---|---|---|
+| Jake shows her off (A3) | his quad hub | "Let him show them." Watched 60, Exhibitionism +1, cap 79 · "Let him in." both at 60, both +1, cap 79 · "Not in front of them." pays 0 |
+
 ## Rows a gate needs
 
 | row | gate |
 |---|---|
 | `campus_talk` read here | a meter is read |
 | the grass at every hour | a destination is never open and exit-only |
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_B.md` (signed with the a2 sheets, DECISIONS 125).
 
 ## Why — the source of each key choice
 

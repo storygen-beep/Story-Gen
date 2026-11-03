@@ -1,5 +1,7 @@
 # [READY] System — home_life
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The random events as built: no pool, no quiet event, pays on the moment. Study at the kitchen table is its own activity.
+
 > **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
@@ -15,7 +17,7 @@
 | cost | time on every item · a little energy on the chores · no money |
 | one ladder or two | one: the person who is there sets the rung |
 | people | Laura, Mark, Ryan: only where their rows put them |
-| pool | `home_event` (the random events at home) · `daily = true` |
+| pool | no pool: five random events (Ryan's towel, Laura's robe, Mark's reach, Mark asleep, Ryan's door), each 1 in 4 on entering; one a day (flag `home_event`, cleared at midnight) |
 | memory | each item's "done" flag, read by hours since it was set · `room_tidy` for the week |
 | growth | climbs, through the person who is there |
 | sink and deadline | none: home costs no money |
@@ -73,7 +75,7 @@
 | 13 laundry | 30 min · energy add −5 | the person: +1 | plain | `did_laundry` · 12 h |
 | 16 tidy her room | 30 min · energy add −5 | `room_tidy` set true | plain | once a week: Sunday dinner reads and clears it |
 | 17 the garden | 60 min | energy add +5 · exhibitionism add +1 at Daring, seen | plain: the sun | `sunned` · 12 h |
-| 4 random events | none | by the event | "Nothing happens." written out | one per day, rolled 1 in 4 on entering (question 59) |
+| 5 random events | none | his Want, on the moment (Ryan's towel +2, Mark's reach +2, Mark asleep +1, Ryan's door +1; Laura's robe none) | none: a miss shows the room as it is | one a day (`home_event`), each 1 in 4 on entering |
 
 ## Lewd ladder (`lewd_ladder[]`) — what each person turns it into
 
@@ -100,7 +102,7 @@ Ryan early ass, tits · middle cock, wet. Mark early legs, ass · middle tits, c
 | item | where · when | alone | with a person | cost and pay, with op | brake |
 |---|---|---|---|---|---|
 | 15 the grocery run | Laura asks at dinner (her evenings) · the corner shop 07:00–22:00 · back to Laura in the kitchen | — | Laura: "Could you get these? Here's twenty." money add +20, `grocery_list` set · delivered at her next evening: Warmth add +2, `grocery_list` and `groceries_bought` set false · not done after 24 hours: "Where's my shopping?" `laura_suspicion` add +2 | 15 min at the shop · money add −20 there | one list at a time |
-| 7 study at the kitchen table | kitchen · Laura's evenings 19:00–22:00 | (her desk, her room: plain) | Laura reads over @player's shoulder: Warmth add +1 · Curious: her hand on @player's neck while she reads | 60 min · energy add −10 · the grade add +1 | `studied_home`, 12 h |
+| 7 study at the kitchen table (its own activity now, only with Laura there) | kitchen · Mon, Tue, Thu, Fri, Sun 19:00–22:00 | (her desk, her room: plain) | Laura reads over @player's shoulder: Warmth add +1 · Curious: her hand on @player's neck while she reads | 60 min · energy add −10 · the grade add +1 | `studied_home`, 12 h |
 | 12 hair and make-up with someone | master bedroom · Sat 17:00–18:30 (Laura dressing) · Zoe's Living Room · Fri 18:00–19:00 | her mirror: plain | Laura does @player's hair: Warmth add +1 · Zoe does @player's face before the party: "Lips. Open." | 20 min · `made_up` set true | `made_up`, 10 h |
 
 Round 11 cards: groceries 3/12 · study at home 5/12 · getting ready 3/12.
@@ -112,7 +114,7 @@ Round 11 cards: groceries 3/12 · study at home 5/12 · getting ready 3/12.
 | a meal every day at home | a need can be met every day |
 | each item with a person leads to that person | leads to a person |
 | each item has its brake on the way in | an act is never free |
-| the random events write "nothing happens" | random events say so |
+| no "Nothing happens." events anywhere (DECISIONS 136) | random events say so |
 
 ## Why — the source of each key choice
 

@@ -1,5 +1,7 @@
 # [READY] Coverage — First Term
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The café customers' scout card is now a source.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 from the ledger's `board.coverage`: 38 rows (37, plus `home_life`, 2026-10-08). Five more wait for LO's yes (L28, below).
@@ -58,7 +60,7 @@
 |---|---|---|---|---|
 | the Friday party | scene | scouted | `scout/party.md` | |
 | a class visit | scene | covered | card: college | |
-| a café shift | scene | covered | card: job | |
+| a café shift | scene | covered, scouted | card: job · `scout/cafe_customers.md` | the three customer levels and tips by her answer |
 | the Sunday rent table | scene | covered | card: money pressure | |
 | Jake's Saturday date and the door | scene | lo | LO, 2026-10-07: dating is not a system; booked on his thread | |
 | the home steps (step-family heat) | scene | lo | LO picked the home arcs, 2026-10-04 | no pass-list game models it |
@@ -110,5 +112,6 @@ is on the list:
 | the park as a system and a place | LO, 2026-10-08 (SYSTEMS §14) |
 | each card source | `templates/cards/<card>.md` |
 | the party card | `games/first_term/scout/party.md` (scouted 2026-10-07) |
+| the café customers card | `games/first_term/scout/cafe_customers.md` (scouted 2026-10-31; LO's yes the same day) |
 | `home_life` and the five new topics | LO, 2026-10-08 (the everyday picks) |
 | the word budget | the ledger's `fill` on each place in `release_page.places` |

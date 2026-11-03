@@ -1,4 +1,8 @@
-# [REVIEW] Scene — zoe_03_hot_tub
+# [READY] Scene — zoe_03_hot_tub
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+
+> The signed plans behind this page: `proposals/COPY_FIXES_B.md`.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -12,8 +16,8 @@
 | row | answer |
 |---|---|
 | person · step | `npc_zoe` · 3 (Zoe A 3) |
-| where · when | the party house hot tub · Saturday 20:00–00:00, seen from Zoe's apartment |
-| gate | Corruption 40 · Exhibitionism 40 (was 20 · 20: DECISIONS 124) · pays +3 each, cap 79 · `party_house_invite` (A 2) · `zoe_step` eq 2 · the boost off |
+| where · when | the party house hot tub · Saturday 20:00-23:30 |
+| gate | her step 2 · Corruption 40 · Exhibitionism 40 · the boost off · pays +3 each, cap 79 |
 | mixed act? | yes: topless, seen by Zoe, and a kiss: both meters, as built (+3 each) |
 | her_line_low · her_line_high | low: "It's a dare. It doesn't count." · high: "You want her to dare you something worse." (the person sheet's pair) | |
 | want | "There's a hot tub Saturday. Just us." (A 2); her knee against @player's |
@@ -23,43 +27,69 @@
 | only Zoe sees her | her friends go inside first (LO, 2026-10-08): SP2's group rule holds |
 | the crude-word ceiling | Zoe's middle column: tits, nipples, wet · early: tits, ass (LO, 2026-10-08) |
 
-## Branch map — one row per screen
+## The step row (as built, 2026-11-03)
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
+The seven columns, filled from what the build does.
+
+**Kind · stage:** naked by choice for someone she knows, and a kiss · Bold · Showing (40)
+
+| the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
+|---|---|---|---|---|---|---|
+| her friends go in; topless for Zoe alone, and Zoe kisses her | Zoe; her friends, until the door shuts | being seen topless; a girl's mouth on hers | "Take your bra off." or "Let her look." | she pulls her into the tub; the kiss | yes | her step 3; home late; Ryan's Want +5 at the door |
+
+## Branch map — as built (2026-11-03)
+
+One row per exit. Read from the build; it replaces the drafted map.
+
+**`zoe_03_hot_tub`** — The Party House · Sat 20:00-23:30 · needs Zoe's step = 2 · Corruption 40+ · Exhibitionism 40+ · drinks boost off · one time
+
+| node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
 |---|---|---|---|---|
-| `tub` | the hot tub, Zoe's friends, Zoe pressed close | no | "Stay in the water." → `alone` | none |
-| `alone` | the friends go in; Zoe: "Take it off. Just for me." | no | "Take your bra off." → `kiss` (bra off) · "Not tonight, Zo." → `home` (parked) | none |
-| `kiss` | topless in the steam; she pulls Zoe in and kisses her | yes (9 words) | "Hold her." → `asked` | exhibitionism add +3 · corruption add +3 |
-| `asked` | "Took you long enough." — "You could've asked." | no | "Go home." → `home` | `zoe_step` set 3 |
-| `home` | home late, wet hair, Zoe's lipstick; Ryan at his door | no | "Go to bed." → her room | Ryan's Want add +5 (guess) |
+| `tub` | Zoe drags you into the hot tub on the back deck, laughing. | no | "Stay in the water." → `alone` | changes her clothes (unequip) |
+| `alone` | The door slides shut behind her friends. | no | "Take your bra off." (bra on) → `kiss` | unequip plain bra · unequip sports bra |
+| | | | "Let her look." (no bra) → `kiss_bare` | — |
+| | | | "Not tonight, Zo." (1h)" → `home_no` | changes her clothes (equip) |
+| `kiss` | You get your bra off and toss it on the deck. | yes | "Hold her." → `asked` | Exhibitionism +3 (cap 79) · Corruption +3 (cap 79) |
+| `kiss_bare` | You don't have anything to take off. | yes | "Hold her." → `asked` | Exhibitionism +3 (cap 79) · Corruption +3 (cap 79) |
+| `asked` | Zoe pulls back, flushed and breathless, and laughs. | no | "Go home (6h 40m)." (20:00-21:00) → `home` | Zoe's step = 3 · `zoe_03_done` set · changes her clothes (equip) |
+| | | | "Go home (5h 40m)." (21:00-22:00) → `home` | Zoe's step = 3 · `zoe_03_done` set · changes her clothes (equip) |
+| | | | "Go home (4h 40m)." (22:00-23:00) → `home` | Zoe's step = 3 · `zoe_03_done` set · changes her clothes (equip) |
+| | | | "Go home (3h 40m)." (23:00-00:00) → `home` | Zoe's step = 3 · `zoe_03_done` set · changes her clothes (equip) |
+| | | | "Go home (2h 40m)." (00:00-20:00) → `home` | Zoe's step = 3 · `zoe_03_done` set · changes her clothes (equip) |
+| `home_no` | She doesn't sound annoyed. | no | "Go to bed." — 2 versions, by hour → Your Room | back in 7 days · varies: `came_home_late` set, `late_party` set |
+| `home` | You let yourself in. | no | "Go to bed." — 2 versions, by hour → Your Room | Ryan's Want +5 · back in 7 days · varies: `came_home_late` set, `late_party` set |
 
-"Not tonight, Zo." costs nothing: the dare comes back next Saturday.
+## The explicit beats, as built (2026-11-03)
 
-## The screens, written
+Every screen the build counts as explicit (3+ words from the frozen list), word for word, with its measurement. It replaces the drafted text.
 
-**`tub`** · 105 words · explicit words 1 (tits) · median sentence 8
+**`zoe_03_hot_tub` · `kiss`** — 120 words · 9 counted: tits, nipple, kiss, moan, tits, nipple, nipple, ass, tits · ceiling: Zoe's middle column: tits, nipples, wet
 
-> Zoe drags you into the hot tub on the back deck, laughing. Steam rolls off the water. Music thumps through the glass. Three of her friends are already in, drinks on the rim. "Make room, babe's here." She doesn't need room. She sits right against you, her knee pressed to yours under the water. When you talk, she watches your mouth. All term she has dared you instead of asking, but you know what she wants. "Your tits are floating, babe," she says, grinning. Your face goes hot, and it isn't the water. One of her friends stands up, restless. "Going in for more drinks."
+> You get your bra off and toss it on the deck. The steam rolls over your bare tits. The night air is cold on them, so your nipples go hard above the water. Zoe stares at them.
+>
+> Babe.
+>
+> She breathes.
+>
+> Look at you.
+>
+> You grab the back of her neck and pull her in. You kiss her hard, open-mouthed, until she moans into you. Her tits press flat against yours. Her nipples drag across your nipples, hard and wet. Her thigh slides between your thighs under the water. It presses up, slow and firm. Her breath catches. Your hands run down her slick back to her ass. You grab it with both hands and pull her tits tight against yours.
 
-**`alone`** · 99 words · explicit words 2 (nipple, tits) · median sentence 7
+**`zoe_03_hot_tub` · `kiss_bare`** — 128 words · 9 counted: tits, nipple, kiss, moan, tits, tits, nipple, ass, nipple · ceiling: Zoe's middle column: tits, nipples, wet
 
-> The door slides shut behind her friends. Now it is just the two of you in the steam. Zoe goes quiet, and Zoe is never quiet. "Take it off, babe," she says, low. "Just for me. Nobody else is here." Her eyes drop to your chest and stay there. She bites her lip. Her breath comes short across the water. "Everything on you is wet anyway. I can see your nipples, babe. I want to see your tits." Your heart pounds, because you want her to keep looking. Your hands drift up and stop. She waits for your answer.
-
-**`kiss`** · 119 words · explicit words 9 (ass, kiss, moan, nipple, tits) · median sentence 9 · act rung: touch · Zoe's middle column: tits, nipples, wet · early: tits, ass (LO, 2026-10-08)
-
-> You get your bra off and toss it on the deck. The steam rolls over your bare tits. The night air is cold on them, so your nipples go hard above the water. Zoe stares at them. "Babe," she breathes. "Look at you." You grab the back of her neck and pull her in. You kiss her hard, open-mouthed, until she moans into you. Her tits press flat against yours. Her nipples drag across your nipples, hard and wet. Her thigh slides between your thighs under the water. It presses up, slow and firm. Her breath catches. Your hands run down her slick back to her ass. You grab it with both hands and pull her tits tight against yours.
-
-*The last sentence:* her hands on Zoe's ass, their tits pressed together. On the body; not a pivot.
-
-**`asked`** · 88 words · explicit words 0 · median sentence 9 · the meaning beat
-
-> Zoe pulls back, flushed and breathless, and laughs. "Took you long enough, babe." "You could've asked," you tell her. She goes quiet. She opens her mouth, but she doesn't answer that. Not yet. All term she dared you instead of asking for this. You liked every single dare. The sliding door bangs open. Your friends spill back out, shrieking. You sink to your shoulders in the hot water. Across the bubbles, Zoe is still looking at you. Next time you two are alone, somebody has to ask first.
-
-**`home`** · 98 words · explicit words 0 · median sentence 11
-
-> You let yourself in. The house is dark, and your hair drips on the mat. You smell of chlorine, and Zoe's lipstick is still on your neck. Upstairs, Ryan's door is open a crack. He is awake. He sees you on the landing. His eyes stop on your wet hair, then drop to your neck and stay there. "@player.nickname. Where've you been?" "Zoe's." You say nothing else, because you want him to wonder. Your face goes hot under his stare, but you hold it. Ryan's jaw tightens. He looks a beat too long, then his door closes slowly.
+> You don't have anything to take off. You just rise up out of the water to your waist and let her look. Your bare tits come up out of the steam, wet and shining, and the night air hits them, so your nipples go hard. Zoe's mouth falls open.
+>
+> Babe.
+>
+> She breathes.
+>
+> You came in like that? All night?
+>
+> You grab the back of her neck and pull her in. You kiss her hard, open-mouthed, until she moans into you. Her tits press flat against your bare tits. Her wet nipples drag across yours. Her thigh slides between your thighs under the water and presses up, slow. Your hands run down her slick back to her ass, and you squeeze it and pull her nipples tight against yours.
 
 ## Truth checks
+
+> Drafted before the build and kept as the signed record. Where it differs, the branch map and the beats above say what the build does.
 
 | line | what backs it |
 |---|---|

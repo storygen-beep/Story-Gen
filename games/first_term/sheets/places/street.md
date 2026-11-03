@@ -1,5 +1,7 @@
 # [READY] Place — Your Street
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The quiet event is gone (DECISIONS 136). New section: what the heat proposal built here. Points at the copy fixes it took.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the system sheets. Id `street`.
@@ -61,7 +63,8 @@ rolls, nothing shows.
 | a car slows, a guy whistles | Daring clothes, 07:00–22:00 | she walks faster | she turns and lets him look | exhibitionism add +1 at Daring |
 | Vance on his porch | 18:00–22:00 (his row) | "Evening." He watches her past. | she slows down for him | Vance's Want add +2 (his sheet) |
 | a jogger looks back | 07:00–10:00 | she pretends not to see | she looks back | none |
-| the street, quiet | any time | "Nothing happens. A dog barks two gardens down." | | none |
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_C.md` (signed with the a2 sheets, DECISIONS 125).
 
 ## Why she's late (LO's play note, 2026-10-08)
 
@@ -78,6 +81,16 @@ true reason. The street's way home after 22:00 still sets `came_home_late` (ques
 **Cleared every night, two ways** (question 69): each is read only for 4 hours after it is set (hours
 since the flag), and her bed sets them all false, with `came_home_late`. So a flag never lasts into
 the next night.
+
+## Built from the heat proposal (signed 2026-11-03)
+
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has here:
+
+**Acts, rungs and pools.**
+
+| what | where | buttons and pays |
+|---|---|---|
+| media pools (A11) | the no-bra and no-panties witness screens | `_t4` pools, no new prose |
 
 ## Rows a gate needs
 
@@ -106,4 +119,3 @@ the next night.
 - Row 56 (`town_event_whistle`, "Walk faster."): accepted, call B. No change.
 - Row 64 (`town_event_jogger`): "looks back over his shoulder at your ass, twice."
 - Row 65 (`town_event_vance`): "He lowers it to look at your legs when you pass."
-- All in `iterations/002/build_scripts/town.py`.

@@ -1,5 +1,7 @@
 # [READY] Scene — zoe_00_quad_meeting
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 (fix 1). Zoe's meeting: nothing set `zoe_met` before, so her
@@ -9,7 +11,7 @@
 |---|---|
 | person · step | `npc_zoe` · her meeting (a one-time scene, not a ladder step) |
 | where · when | the quad · Tue, Thu, Fri 14:30–18:00 (her row), the first time she's there |
-| gate | `zoe_met` is false · Zoe's schedule window (the meeting fires where she is) |
+| gate | `opening_done` · `zoe_met` false · Tue, Thu, Fri 14:30-18:00 on the quad |
 | priority | high: it fires before her hub can show |
 | want | she picks @player out: someone to drag to her party |
 | next step | her name, her number, and Friday |
@@ -18,18 +20,34 @@
 | explicit? | no |
 | role before name | "the girl from Biology", then "Zoe" once she says it |
 
-## Branch map — one row per screen
+## The step row (as built, 2026-11-03)
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
+The seven columns, filled from what the build does.
+
+**Kind · stage:** an invite, nothing she does · stage 1 (no gate)
+
+| the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
+|---|---|---|---|---|---|---|
+| Zoe on the quad: a party Friday; she types her number into Ella's phone | Zoe; the quad | none: step 0, it can be an accident | "Sit with her." then "Party?" (or "Can't...", she shouts the address) | the invite; her number | yes | `zoe_met`, `zoe_number`: the Friday party opens |
+
+## Branch map — as built (2026-11-03)
+
+One row per exit. Read from the build; it replaces the drafted map.
+
+**`zoe_00_quad_meeting`** — Quad · Tue/Thu/Fri 14:30-18:00 · needs `opening_done` · not `zoe_met` · one time
+
+| node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
 |---|---|---|---|---|
-| `wave` | the girl from Biology waves from the grass: "Hey. You. Sit." | no | "Sit with her." → `zoe` · "Can't, I've got a shift." (only with `cafe_job`) or "Can't, I've got class." → `later` | none |
-| `zoe` | "Zoe." She talks fast, looks at @player too long, laughs | no | "Party?" → `friday` | `zoe_met` set |
-| `friday` | "Friday. My place. Wear something short." She takes her phone, types her number | no | "Friday." → the quad | `zoe_number` set |
-| `later` | "Fine, run. Friday, my place!" She shouts the address after her | no | → campus | `zoe_met` set · `zoe_number` set |
-
-Both answers meet her: the meeting refuses nothing (the first hour's rule), and "Can't" still gets the invite.
+| `wave` | The girl from your Biology class, the one who whispers through the slides, is lying on … | no | "Sit with her." → `zoe` | — |
+| | | | "Can't, I've got a shift." (`cafe_job`) → `later` | — |
+| | | | "Can't, I've got class." (not `cafe_job`) → `later` | — |
+| `zoe` | You sit. | no | "Party?" → `friday` | `zoe_met` set |
+| `friday` | She takes your phone out of your hand without asking and types her number into it, … | no | "Friday." → Quad | `zoe_number` set |
+| `later` | She shouts the address after you across the whole quad. | no | "Wave without looking back." → Campus | `zoe_met` set · `zoe_number` set |
 
 ## The nudges, so she isn't missed
+
+> Drafted before the build and kept as the signed record. Where it differs, the branch map and the beats above say what the build does.
 
 | where | what | sets |
 |---|---|---|

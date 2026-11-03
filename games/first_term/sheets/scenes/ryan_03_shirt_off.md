@@ -1,5 +1,7 @@
 # [READY] Scene — ryan_03_shirt_off
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. his window starts 19:00; the cap; the step row.
+
 > **Changed 2026-11-01, signed by LO 2026-11-01 ("Signed")** (DECISIONS 99–113): Ryan's release-1 ladder (`sheets/people/npc_ryan.md`, signed). Changed: gate Corruption 20 · his Want 20 (Exhibitionism 20 dropped); Laura calls up the stairs while he strips (the risk); Want +5.
 
 > Signed by LO: LO, 2026-10-08.
@@ -9,7 +11,7 @@
 | row | answer |
 |---|---|
 | person · step | `npc_ryan` · 3 (Ryan A 4) |
-| where · when | his room · Mon, Tue, Thu, Sun 18:00–22:00 |
+| where · when | his room · Mon, Tue, Thu, Sun 19:00–22:00 |
 | gate | Corruption 20 · his Want 20 · the boost off |
 | want | "Don't." He holds her look a beat longer since she read the text |
 | next step | she names a price for his secret, and he pays it |
@@ -19,13 +21,21 @@
 | explicit? | no: he shows, she looks; no body words on the list |
 | her_line_low · her_line_high | low (under the stage): "This is Ryan. You should go." · high (over it): "You want him to hear Kayla on the phone while you do this." (the person sheet's pair; worded for this screen when the prose is written) |
 
+## The step row (filled from the build, 2026-11-03)
+
+**Kind · stage:** a dare for one person she knows (Curious · Daring 20): she makes him strip.
+
+| the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
+|---|---|---|---|---|---|---|
+| she names her price for his secret: his shirt off, turning on her order | Ryan; Laura nearly, calling up the stairs | Laura opening the door on her in his room | "Turn around. Slowly." | he strips and lies to Laura without looking away | not a sex act: it ends on "Happy?" | the knock code: two knocks and he opens |
+
 ## Branch map — one row per screen
 
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `door` | she knocks; he opens, wary: "If this is about Kayla—" | no | "It's about Kayla." → `price` · "Never mind." → the hall (parked) | none |
 | `price` | her price: "You saw me. Shirt off." | no | "Turn around. Slowly." → `look` | none |
-| `look` | the shirt over his head; he turns on her order; Laura calls up the stairs, "Ryan, is your sister in there?"; he answers "No" without taking his eyes off her; "Happy?" | no | "Two knocks. That's me." → the hall | Ryan's Want add +5 · corruption add +1 · `ryan_knock_code` set · `ryan_step` set 3 |
+| `look` | the shirt over his head; he turns on her order; Laura calls up the stairs, "Ryan, is your sister in there?"; he answers "No" without taking his eyes off her; "Happy?" | no | "Two knocks. That's me." → the hall | Ryan's Want add +5 · corruption add +1, cap 79 · `ryan_knock_code` set · `ryan_step` set 3 |
 
 His parked no, if she comes on a Friday or he has a call: *"Kayla's coming over."*
 

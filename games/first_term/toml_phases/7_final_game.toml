@@ -1171,11 +1171,11 @@ navigation_order = []
 
 [[locations]]
 id          = "home_master_bedroom"
-name        = "Master Bedroom"
+name        = "Mom and Mark's Room"
 kind        = "destination"
 description = "Laura and Mark's room: their bed, Laura's long mirror and a wardrobe full of dresses she doesn't wear any more. It smells of her perfume. When they're both out, the wardrobe is yours to go through. When she's up and dressing, you knock; at night, while they sleep, you don't."
 image       = "locations/home_master_bedroom.jpg"
-image_search_queries = ["master bedroom"]
+image_search_queries = ["mom and mark's room"]
 parent      = "home"
 entry_from  = "home_hall"
 navigation_order = []
@@ -1400,11 +1400,11 @@ closed_text = "It's dark out."
 
 [[locations]]
 id          = "vance_house"
-name        = "Next Door"
+name        = "Landlord's House"
 kind        = "destination"
 description = "Next door: a bigger house than yours, and a porch, and an old man on it. He owns your house too, and Mark pays him every Sunday. Most evenings he sits out there with a paper he doesn't read and watches the street. Walk past and he looks at what you wore."
 image       = "locations/vance_house.jpg"
-image_search_queries = ["next door"]
+image_search_queries = ["landlord's house"]
 entry_from  = "street"
 navigation_order = []
 hours = [{ weekdays = [0, 1, 2, 3, 4, 5, 6], open = "18:00", close = "22:00" }]
@@ -1911,11 +1911,11 @@ hidden_until = { flag = "zoe_met" }
 
 [[locations]]
 id          = "party_house"
-name        = "The Party House"
+name        = "Party House"
 kind        = "destination"
 description = "A big house at the edge of town where Zoe's friends throw Saturday nights. Music inside, a garden out back and a hot tub steaming under the stars. Zoe's friends only."
 image       = "locations/party_house.jpg"
-image_search_queries = ["the party house"]
+image_search_queries = ["party house"]
 parent      = "town"
 entry_from  = "town"
 navigation_order = []

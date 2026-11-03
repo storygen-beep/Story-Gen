@@ -1,4 +1,6 @@
-# [REVIEW] System — wardrobe
+# [READY] System — wardrobe
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Key items: the sheer blouse needs Exhibitionism 15 (heat proposal C6); the sports bra is $25.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -61,7 +63,8 @@ The door out says why and names both numbers: "Not in that skirt. Not yet. (Need
 | `cafe_uniform_slutty` | after 0.1 | not a key item until its release (LO, 2026-10-08) |
 | `laura_blue_dress` | Laura C 1, day 2 | Laura's line · Mark's eyes · Ryan's line |
 | `zoe_party_dress` | Zoe A 1, borrowed | the party door · Jake · Laura on the stairs |
-| `sports_bra` | the clothes shop, $25 (guess) | the park run · Ryan's line · Laura's line (guess) |
+| `sports_bra` | the clothes shop, $25 | the park run · Ryan's line · Laura's line (guess) |
+| `thin_top` (sheer blouse) | the clothes shop, $20, from Exhibitionism 15 and while the garage doesn't hold it (C6 of `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`) | the scenes that read it worn |
 
 ## Where the world asks for clothes
 

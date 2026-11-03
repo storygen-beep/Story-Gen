@@ -1,5 +1,6 @@
 # SP2 · The ladders — First Term
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. No "(Next release)" buttons; a no moves nothing of his; Laura keeps Warmth only.
 > [READY] · drafted 2026-10-04 · updated 2026-10-08 (where each stage starts) · signed by LO: LO, 2026-10-08
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder, proposal a2): release 1 writes
 > stages 1–4; the raises per stage; the Heat line gains what pays and the accident rule; "(Next release)" locks.
@@ -28,8 +29,8 @@
 - **Her voice has three tiers:** shy (stage 1), warming up (2–3), bold (4–5), read from the meter the
   scene's choices use.
 - **Release 1 writes stages 1–4** (DECISIONS 124; was 1–3). Stage 5 gets its choices and lines in a later
-  release. A locked button whose scene is not written yet shows "(Next release)" greyed, with no number
-  (it waives DECISIONS 90 for those buttons only).
+  release. A scene this release does not write has no button at all (DECISIONS 132, which removed the
+  greyed "(Next release)" buttons). Each arc's last quest card says where this release ends (DECISIONS 134).
 - **Raises:** small acts +1, big scenes +3; drinks give a boost that clears overnight; an act stops
   paying once she's past its stage (A4).
   - Good Girl and Curious acts pay +1, capped at 19 and 39 (DECISIONS 78).
@@ -39,9 +40,9 @@
   - She crosses a stage line two ways: a one-time step's +3, or a drink's boost that lets her try a
     choice of the next stage, whose raise she keeps (`the-arc.md` A4d). An act capped at its stage's top
     never carries her over.
-  - An accident pays his number and sets a flag, never hers; only her button to go further pays her. Her no
-    never raises her climb, and always moves something else: his number, the relationship, or a counter
-    (`the-heat-ladder.md` H5, LO 2026-11-01).
+  - An accident pays his number and sets a flag, never hers; only her button to go further pays her. His
+    Want pays for what happened, never for her answer. Her no pays nothing: not her climb, not his Want
+    (`the-heat-ladder.md` H5; DECISIONS 135, 143).
 - **College first.** Zoe, parties, campus and the café carry her early Corruption. Home pays little
   Corruption until Bold, but can still pay Exhibitionism.
 - **Talk tracks:** `campus_talk` (who approaches her) and `laura_suspicion` (how her mom treats her).
@@ -101,7 +102,7 @@
 
 Arc: Ryan A · Two Knocks in proposals/ARC_IDEAS.md
 
-- **Laura** — want + warmth · central
+- **Laura** — warmth + her step counter · central (the build keeps no Want for her; her steps carry it)
 - Direction: theirs — Ella works on her until she admits what she wants.
 - Raised by: compliments, being seen, each catch Ella chooses — home late, with Ryan, with a guy, in
   Laura's dress (Want) · confiding (Warmth) · Lowered by: lying when caught, labelled "(she'll know)";
@@ -204,7 +205,7 @@ opens his steps and Warmth colours how he treats her.
 
 ## 6. Kept from earlier calls
 
-- Everyone keeps their pair: Want + Warmth (Ryan, Laura), Want + Power (Mark, Tom), steps (Zoe, Hale, Jake).
+- Everyone keeps their pair: Want + Warmth (Ryan), Warmth + steps (Laura), Want + Power (Mark, Tom), steps (Zoe, Hale, Jake).
 - Laura's dress stays on day 2, with shy choices only.
 - Crude words:
 

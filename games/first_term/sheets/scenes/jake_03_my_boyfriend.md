@@ -1,5 +1,7 @@
 # [READY] Scene — jake_03_my_boyfriend
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+
 > **Changed 2026-11-01, signed by LO 2026-11-01 ("Continue")** (DECISIONS 99–119): Jake's release-1 ladder (`sheets/people/npc_jake.md`, signed). **Merged** with built Jake 4 = Laura 5 (`laura_05_jake_at_the_door`, sheet marked moved): one step, one night. Changed: Laura in the dark living room, seen on `ryan`; her "Was he any good?" moves to `after`; her voice row. The signed screens stand; two lines are added, below.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
@@ -11,7 +13,7 @@
 |---|---|
 | person · step | `npc_jake` · 3 (Jake B 3) |
 | where · when | the front door · Saturday 23:00–00:00, after a booked date |
-| gate | Corruption 20 · Exhibitionism 20 · `jake_date_went` (set when she left with him tonight, read for 6 hours) · the boost off |
+| gate | his step 2 · Corruption 20 · Exhibitionism 20 · a date tonight · Laura in the living room · the boost off |
 | want | "Saturday. Pick me up at the door." (B 2); "Is anyone up?" |
 | next step | she names him to the house: Ryan |
 | hook | Ryan's light goes out; "Next Saturday?" (his thread) |
@@ -23,48 +25,42 @@
 | what changes after | Jake is her boyfriend (`jake_step` 3); Laura: "Was he any good?"; Ryan's line changes (built, "Who's Jake?") |
 | the crude-word ceiling | Jake's early column: ass · Ryan's early: ass, tits (LO, 2026-10-08) |
 
-## Branch map — one row per screen
+## The step row (as built, 2026-11-03)
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
+The seven columns, filled from what the build does.
+
+**Kind · stage:** a kiss at home, where her brother sees · Curious · Daring (20)
+
+| the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
+|---|---|---|---|---|---|---|
+| she kisses him at the front door; Ryan opens it on them | Ryan at the door; Laura in the living room | the house knowing | "Kiss him.", then "Don't stop." | "I want them to see you're mine." | yes | his step 3; "My boyfriend."; Ryan's Warmth -15, Want +5 |
+
+## Branch map — as built (2026-11-03)
+
+One row per exit. Read from the build; it replaces the drafted map.
+
+**`jake_03_my_boyfriend`** — Front Door · Sat 23:00-00:00 · Jake there · needs Jake's step = 2 · Corruption 20+ · Exhibitionism 20+ · drinks boost off · under 6h since `jake_date_went` · Laura in Living Room · one time
+
+| node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
 |---|---|---|---|---|
-| `porch` | Jake under the porch light: "Is anyone up?" | no | "Kiss him." → `rail` · "Goodnight, Jake." → `no` | none |
-| `rail` | on the porch rail, her legs round him; the lock turns behind her | no | "Don't stop." → `ryan` | none |
-| `ryan` | Ryan opens the front door from inside: "Ryan, this is Jake. My boyfriend." | no | "Goodnight, Jake." → `after` | Ryan's Warmth add −10 (guess) · Ryan's Want add +5 (guess) |
-| `after` | inside, Laura on the dark couch: "Was he any good?" (from `laura_05`, both dress lines); then the stairs, Ryan's door, his light; "Next Saturday?" | no | "Go to bed." → her room | `jake_step` set 3 · `jake_date_booked` set false · `jake_03_done` set (the built `laura_step` 5 and Laura's Want +10 are dropped) |
-| `no` | a kiss on the cheek; "Next Saturday, then?" | no | "Go in." → the hall | `jake_date_booked` set false · the step returns next date |
-
-## The screens, written
-
-**`porch`** · 102 words · explicit words 1 · median sentence 10
-
-> Jake walks you up to the porch and stops under the light. The downstairs is dark. He looks past you at the windows, then up at the second floor. "Is anyone up?" He sounds like he hopes so. "Nobody," you say. "Not yet." Upstairs, Ryan's window is lit, right above the porch. He's home. You want him to look. "Shame," Jake says. "I want them to see you're mine, @player." His hand slides down your back and settles on your ass. You should move it, but you like being shown off. He leans in, and his mouth stops an inch from yours.
-
-**`rail`** · 90 words · explicit words 2 · median sentence 9
-
-> You kiss him first, right there under the porch light. Jake makes a low sound and lifts you onto the rail like you weigh nothing. Your legs lock round his waist. His hands sit on your hips, then slide down to grab your ass. "God, @player," he breathes into your mouth. It gets hungry and loud, all teeth and breath. The rail creaks every time he pulls you closer. Anyone inside could hear it, but you don't care. You want more of his mouth. Then, behind you, the lock turns.
-
-**`ryan`** · 104 words · explicit words 2 · median sentence 7
-
-> The front door opens behind you. Ryan stands in the doorway and stops dead. You're on the porch rail with your legs locked round Jake's waist, kissing him. Jake's hands are full of your ass. You don't climb down. You look straight at Ryan over Jake's shoulder and hold it. "Ryan, this is Jake. My boyfriend." Ryan's jaw goes tight. His eyes drop to Jake's hands on you, then come back to your face. "Great." Jake grins over his shoulder, not getting it. "Your brother hates me." *Good. Look all you want, Ryan.* Ryan steps back inside without another word. The door slams hard.
-
-**`after`** · 89 words · explicit words 0 · median sentence 7 · the meaning beat
-
-> Jake goes off down the path, whistling. You let yourself in and climb the stairs. Ryan's door is shut, and his light is on under it. You stand outside it a second. You don't knock, but you don't move either. You wanted him to see. You said Jake's name to his face on purpose, and you're not sorry. Not even a little. Jake will want a next Saturday. You already know it. Your phone buzzes in your hand. It's Jake: "Next Saturday?" Under Ryan's door, the light goes out.
-
-**`no`** · 63 words · explicit words 1 · median sentence 10 · the written no
-
-> You kiss his cheek, quick, and step back before he can turn it into more. Jake wanted the porch rail. It's all over his face, but he lets it go. "Okay, @player. Next Saturday, then?" He's disappointed, and somehow he's grinning harder than before. "Next Saturday," you say, and your stomach flips. Jake walks backwards down the path, still grinning at your door.
-
-Changed after `v2-prose` (LO, 2026-10-08): Ryan is home, in his room from 22:00 (his schedule), so he opens the front
-door from inside. Screens 1–3 re-measured.
+| `porch` | Jake walks you up to the porch and stops under the light. | no | "Kiss him." → `rail` | — |
+| | | | "Goodnight, Jake." → `no` | — |
+| `rail` | You kiss him first, right there under the porch light. | no | "Don't stop." → `ryan` | Ryan's Warmth -15 · Ryan's Want +5 |
+| `ryan` | The front door opens behind you. | no | "Goodnight, Jake." → `after` | — |
+| `after` | Jake goes off down the path, whistling. | no | "Go to bed." → Your Room | Jake's step = 3 · `jake_03_done` set · `jake_date_booked` cleared · `late_date` set · `came_home_late` set |
+| `no` | You kiss his cheek, quick, and step back before he can turn it into more. | no | "Go in." → Hall | `jake_date_booked` cleared · `late_date` set · `came_home_late` set · back in 7 days |
 
 ## Lines added by the merge (mine, except where marked)
 
+> Drafted before the build and kept as the signed record. Where it differs, the branch map and the beats above say what the build does.
+
 - **`ryan`, after "The door slams hard.":** "Behind Jake's shoulder, in the dark living-room window, a shape on the couch hasn't moved." (from `laura_05`'s porch line, built)
-- **`after`:** the built first sentences become "Jake goes off down the path, whistling. You let yourself in." (`jake.py:68`, split) · then "The living room is dark. Laura is on the couch with her knees pulled up and her hand at her throat, and she doesn't pretend she wasn't watching." (built, `laura_05` `couch`) · Laura: "Was he any good?" · in the blue dress, "Better in your dress." · otherwise, "Better with you watching." (both built) · "She makes a sound in her throat. She doesn't get up." (built) · then "You climb the stairs." and the built rest from "Ryan's door is shut, and his light is on under it."
+- **`after`:** the built first sentences become "Jake goes off down the path, whistling. You let yourself in." · then "The living room is dark. Laura is on the couch with her knees pulled up and her hand at her throat, and she doesn't pretend she wasn't watching." (built, `laura_05` `couch`) · Laura: "Was he any good?" · in the blue dress, "Better in your dress." · otherwise, "Better with you watching." (both built) · "She makes a sound in her throat. She doesn't get up." (built) · then "You climb the stairs." and the built rest from "Ryan's door is shut, and his light is on under it."
 - **Truth:** the porch screen's "Nobody. Not yet." stays her line; she hasn't seen Laura in the dark. The window line comes after Ryan, when she looks back.
 
 ## Truth checks
+
+> Drafted before the build and kept as the signed record. Where it differs, the branch map and the beats above say what the build does.
 
 | line | what backs it |
 |---|---|

@@ -1,31 +1,31 @@
 # SP7 · The release page — First Term
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+> Replaced by the plans approved on 2026-11-01 and 2026-11-03 (DECISIONS 124, 132, 134): the 2026-10-08 people row (Ryan A 9 · Laura C 8 · Mark A 9 · Hale B 5 · Tom B 6) and its door. Do not build from them.
 > [READY] · drafted 2026-10-07 · updated 2026-10-08 · signed by LO: LO, 2026-10-08
-> A decision record, ≤ 400 words. The rules: `references/the-spine.md` SP7 · `the-release.md`, § Shipping the build.
+> ≤ 400 words. Rules: `the-spine.md` SP7 · `the-release.md`.
 
 | decision | answer |
 |---|---|
-| version | 0.1 (`the-release.md` § The first release) |
-| people, and each one's top step | Ryan A 9 (steps 1 and 3–9) · Laura C 8 · Mark A 9 · Zoe A 4 · Hale B 5 · Jake B 4 · Tom B 6. Stages 1–3 (`SP2_ladders.md:28`); the release-1 tags (`ARC_IDEAS.md:126`, `:164`, `:202`, `:333`). The rest: SP5 |
-| places | all of `want.places` but the corner shop and the men's toilet, empty in stages 1–3 (LO, 2026-10-07). The park is its own place (`SYSTEMS.md` §14). Provisional (`the-spine.md:24-26`) |
-| the door it ends on (canvas, choice) | Ryan's door after Ryan A 9, "Two knocks", with step 10's button shown locked and naming Hungry (`the-release.md:198-206`). Canvas: `ryan_08_two_knocks` (the board) |
-| size (weeks of play) | 8, the term's first half, up to midterms (`DIRECTION.md:119`) |
-| **the promise, kept alive** | the Sunday table: each count says how many Sundays in a row she has paid her own way (goal 1; Mark A 1, 3, 7, 9). Zoe A 4 hands her the dares, which feeds `campus_talk` (goal 2) |
+| version | 0.1 |
+| people, and each one's top step (built) | Ryan 8 (the first sex, two knocks) · Laura 4 (she saw you) · Mark 4 (our arrangement) · Tom 3 (not by the window) · Zoe 5 (no dare) · Jake 4 (sneak him in) · Hale 4 (Claire knocks). 32 steps (DECISIONS 101, 106–109). Her stages 1–4 (DECISIONS 124). The rest: SP5 |
+| places | all 38 built places; the men's toilet is built empty (DECISIONS 76). Provisional (`the-spine.md`) |
+| the door it ends on | none (DECISIONS 134). Every arc's last quest card says where this release ends |
+| **the end cards** | Ryan: "More of Ryan in the next release." · Laura: "Whether the gap gets wider is the next release." · Mark, Tom: "…, later." · Zoe, Hale, Jake: "(Next release)" · goal 2 and her top stages name what comes next |
+| size (weeks of play) | 8, the term's first half, up to midterms |
+| **the promise, kept alive** | the Sunday table: each count says how many Sundays in a row she has paid her own way (goal 1). Zoe's dares feed `campus_talk` (goal 2) |
 | **scenes replay-ready** | yes |
-| BLOCK list (`--ship`) | the fixed list (`gates.py:11207-11216`, plus the rows appended above `main()`); no waivers |
-| REPORT list (`--ship`) | the fixed list (`gates.py:11202-11205`); nothing added |
-| signed by LO, with the date | LO, 2026-10-07 (this page; the ship sign-off, `release_page.signed_by_lo`, comes after the playtest) |
+| BLOCK list (`--ship`) | the fixed list in `gates.py`; no waivers |
+| REPORT list (`--ship`) | the fixed list in `gates.py`; nothing added |
+| signed by LO, with the date | LO, 2026-10-07; the ship sign-off comes after the playtest |
 
-**LO's calls, 2026-10-07** (`SYSTEMS.md:527`, `:533`)
-1. **The Hungry class moments:** none ship. Each class shows its next button locked, naming Hungry;
-   `SP2_ladders.md:28` stands.
-2. **Tom B, the weakest arc** (`ARC_IDEAS.md:242`): in to step 6 (LO, 2026-10-08). Step 7 needs stage 4;
-   it waits with 8–9 for his rewrite.
-3. **Goal 1 can end in 0.1**, by Mark A 9 or the streak (SP4): the twist's offer scene ships, and her
-   answer stays parked until 0.2 writes the help (`DIRECTION.md:30-31`).
+**LO's calls that still hold**
+1. **No button for a scene this release does not write** (DECISIONS 132).
+2. **The release-1 ladders** (DECISIONS 101, 106–109): Laura, Mark and Hale four steps, Tom three.
+3. **Goal 1 can end in 0.1** by the streak only: four Sundays in a row (SP4). The body route (Mark A 9) is cut.
+   Goal 2's end (Ella hosts) is a later release.
 
-**Steps:** 44 (`ARC_IDEAS.md:886`, less Tom B 7–9). **Systems:** each `SYSTEMS.md` block ships
-at its Day 1 line, except streaming (`SYSTEMS.md:387`).
+**Systems:** seven cards, each shipped at its release-1 line.
 
-Recorded in `release_page`; the board wrote `people` and `door` on 2026-10-08
-(`shape.py:238-266` checks both).
+Ledger: `release_page` (it still lists the 2026-10-08 steps; the ledger owner updates it). Run `shape.py`
+and re-sign before changing money, the ending or this page.

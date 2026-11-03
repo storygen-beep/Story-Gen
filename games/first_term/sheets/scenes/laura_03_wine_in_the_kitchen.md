@@ -1,5 +1,7 @@
 # [READY] Scene — laura_03_wine_in_the_kitchen
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the parked no's own screen; the step row.
+
 > **Changed 2026-11-01, signed by LO 2026-11-01 ("Go ahead")** (DECISIONS 99–114): Laura's release-1 ladder (`sheets/people/npc_laura.md`, signed). Changed: now her step 2 of 4; the gate is her Love 10 only (Corruption 20, Exhibitionism 20 and Want 20 dropped); it pays Love +5 and sets `laura_step` 2; voice rows added. The screens and lines stand as built.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
@@ -20,13 +22,22 @@
 | her_line_low · her_line_high | low: "That's your mom. Go to bed." · high: "She's lonely, and you can't stop watching her be lonely." The built thought on `mark` ("She wants somebody to look at her. She's telling you.") is the high side; the low line goes on the parked no ("I'm tired, Mom.") |
 | what changes after | Ella knows she's lonely |
 
+## The step row (filled from the build, 2026-11-03)
+
+**Kind · stage:** a secret told (Good Girl · Covered): she hears her mother's want.
+
+| the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
+|---|---|---|---|---|---|---|
+| Laura, on wine, tells her secret and says Mark doesn't look at her | Laura and Ella, alone | empty on purpose: a talk, nothing of hers at stake | "Pour me one." | Laura: "Mark hasn't looked at my body like that since the wedding." | not a sex act | Love +5; her bedroom gap and shower gap open |
+
 ## Branch map — one row per screen
 
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
-| `glass` | Laura with wine, her robe open at the collar: "Sit with me." | no | "Pour me one." → `story` · "I'm tired, Mom." → the hall (parked) | none |
+| `glass` | Laura with wine, her robe open at the collar: "Sit with me." | no | "Pour me one." → `story` · "I'm tired, Mom." → `no` (parked) | none |
 | `story` | at 19 she snuck out in her own mother's dress, home at dawn (no clock hour); "Like you get looked at." (the promise) | no | "Mom!" → `mark` | none |
 | `mark` | "Mark hasn't looked at my body like that since the wedding." | no | "He should." → the hall | Laura's Love add +5 · `laura_step` set 2 · `laura_03_done` set |
+| `no` | the parked no | no | "Say goodnight and go up." → the hall | Laura's Love add −1 |
 
 ## Why — the source of each key choice
 

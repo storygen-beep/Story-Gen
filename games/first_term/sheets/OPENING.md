@@ -1,4 +1,6 @@
-# [REVIEW] Opening — First Term
+# [READY] Opening — First Term
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Every button quoted as built; the funnel ends in the dean's office; Ryan's +10 on "Open the door.".
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -14,33 +16,34 @@
 | starting clock | Monday, 07:00: her first morning of college |
 | boot | her room: she wakes, then the shower |
 | capstone | Ryan A 1 in the hall, running into breakfast in the kitchen |
-| the handover lands at | `home_kitchen`, Monday 07:50: Laura is there until 08:00 |
-| the first open door | the first class, Psychology, 08:30, in the lecture hall |
-| a returning player | "Skip the opening" on screen 2 sets every flag and goes to screen 9 |
+| the handover lands at | the dean's office, Monday 08:05: his one-time welcome |
+| the first open door | the dean's "Go to Psychology.": the first class, in the lecture hall |
+| a returning player | "Skip the opening" on screen 2 sets every flag, shows one hall screen, then screen 9 |
 
 ## The screen walk
 
 | # | screen | who speaks | what she learns | button (quoted) | clock after |
 |---|---|---|---|---|---|
-| 0 | the engine's title card and age gate | nobody | everyone here is 18 or older | "✓ I am 18 or older - Enter Game" | 07:00 |
+| 0 | the engine's title card and age gate | nobody | everyone here is 18 or older | "✓ I am 18 or older - Enter Game" · "✗ I am NOT 18 or older" | 07:00 |
 | 1 | the engine's character screen: two text boxes | nobody | her name and what Ryan calls her (defaults on the name screen) | "Continue to Game" | 07:00 |
-| 2 | boot · her room: who she is, the problem | her own voice | 18, first day of college, no job, no money | "Get up." · "Skip the opening" | 07:03 |
-| 3 | boot · her room: the problem, said | her own voice | from Sunday she pays Mark $75, every week | "Grab a towel." | 07:05 |
-| 4 | boot · the shower | her own voice | the one bathroom, the thin walls, the clock | "Open the door." | 07:15 |
+| 2 | boot · her room: who she is | her own voice | 18, first day of college, no job, no money; she wakes in her sleep shirt | "Get up." · "Skip the opening" | 07:03 |
+| 3 | boot · her room: the problem | her own voice | from Sunday she pays Mark $75, every week | "Grab a towel." | 07:05 |
+| 4 | boot · the shower | her own voice · Ryan through the door | the one bathroom, the thin walls; Ryan's "Some of us have places to be" | "Open the door." (Ryan's Want +10) | 07:15 |
 | 5 | capstone · the hall: Ryan waiting his turn | Ryan · her | he looks, and doesn't move | four, below | 07:18 |
-| 6 | capstone · the reaction to her choice | Ryan · Laura up the stairs | what her answer did | "Get dressed." | 07:30 |
-| 7 | capstone · breakfast: Laura, Mark leaving for work | Laura · Mark · her | the rent is real: Sunday, the table, $75 | three, below | 07:40 |
-| 8 | capstone · Laura's rule | Laura · Ryan | Ryan showers first from now on | "Grab your bag." | 07:45 |
-| 9 | capstone · the card and the plain lines | the game's voice | where to go, and how the game works | "Keep hygiene on" · "Turn hygiene off" | 07:50 |
-| — | **THE FUNNEL ENDS.** The kitchen, Monday 07:50 | Laura, her hub | | | |
+| 6 | capstone · the reaction to her choice | Ryan · Laura up the stairs | what her answer did | "Get dressed." (`ryan_step` 1, or −1 after the final no) | 07:30 |
+| 7 | capstone · breakfast: Laura, Mark leaving for work | Laura · Mark | the rent is real: Sunday, the table, $75, Vance behind it | three, below | 07:40 |
+| 8 | capstone · Laura's rule | Laura · Ryan | Ryan showers first from now on; Mark leaves | "Grab your bag." | 07:45 |
+| 9 | capstone · the card and the plain lines | the game's voice · Laura | where to go, and how the game works | "Go to campus." · "Go to campus. (Turn hygiene off)" | 08:05 |
+| — | **THE FUNNEL ENDS.** The dean's office, Monday 08:05: his welcome, the timetable, "Go to Psychology." | the dean | | | |
+| skip | the hall, one screen: Ryan's look and line | Ryan | | "Get dressed." | 07:47, then screen 9 |
 
 **Screen 5, her choices** (Good Girl only; she starts at stage 1):
 
 | button | the reaction line | sets |
 |---|---|---|
-| "Run to your room." | her face hot; his eyes follow her down the hall | Ryan's Want add +10 · `ryan_hall_seen` |
-| "Knock next time." (parked) | *"Yeah. Sorry."* His next step waits three days | `ryan_hall_knock` |
-| "Stop and talk." | he's the only one who asks about her first day | Ryan's Warmth add +5 (guess) · `ryan_hall_talked` |
+| "Run to your room." | her face hot; his eyes follow her down the hall | `ryan_hall_seen` (his +10 is on "Open the door.", DECISIONS 143) |
+| "Knock next time." (parked) | *"Yeah. Sorry."* He looks at the carpet | `ryan_hall_knock` · `ryan_hall_seen` |
+| "Stop and talk." | he's the only one who asks about her first day | Ryan's Warmth add +5 · `ryan_hall_talked` · `ryan_hall_seen` |
 | "Don't ever look at me like that. (ends his path)" | he goes white, and steps back | `ryan_01_hall_first_morning_closed` |
 
 **Screen 7, the start choice**, asked by Laura over coffee: *"So. What do you want from college, sweetheart?"*
@@ -71,14 +74,14 @@ The breakfast scene sets `rent_starts`. The rent is armed here and charged only 
 
 | goal | when it's done |
 |---|---|
-| Go to your first class: Psychology, 08:30 | `hale_01_first_lecture` played |
+| Go to your first class: Psychology, Monday morning, in the lecture hall | `hale_met` set |
 | Ask for a job at the café | `cafe_job` set |
 | Have $75 by Sunday | `money` 75 or more |
 
-**Screen 9, the plain lines** (the game's own voice, not a scene): *You need $75 by Sunday. The café in
-town is hiring: fifteen minutes on the bus. Campus is fifteen minutes on foot. Classes are three a day;
-skipping one costs your grade. The buttons under the clock let you wait. People are in different places at
-different hours. What you wear changes how they look at you. Hygiene is on: shower to keep it up.*
+**Screen 9, the plain lines** (as built): *You need $75 by Sunday: the rent is taken then. The café near campus is hiring.
+Classes are three a day Monday to Thursday and one on Friday; skipping one costs your grade. People are in
+different places at different hours: the People and Schedules pages show where. What you wear changes how
+people look at you. Hygiene is on unless you turn it off now: shower to keep it up.*
 
 **Screen 9, the hook:** class at 08:30, the café is hiring, Mark's $75, and Ryan's door shut behind her.
 
@@ -107,8 +110,8 @@ scene, not a row (LO, 2026-10-08).
 | her two meters | — | her two stages, at the bottom |
 | parties | not in the opening: Zoe tells her on campus in week 1 | — |
 | the park | not in the opening: its own place, open all day, 10 minutes' walk | — |
-| life at home | breakfast with Laura on screen 7 is its first beat; it sets `ate_breakfast`, so the kitchen doesn't offer breakfast again that morning | — |
-| the map and the clock | the plain lines name the walk and the wait button | the wait buttons under the clock |
+| life at home | breakfast with Laura on screen 7 is its first beat (it does not set `ate_breakfast`) | — |
+| the map and the clock | the plain lines point at the People and Schedules pages | the wait buttons under the clock |
 | the phone | Mark's rent text, caused by `rent_starts`, arrives Saturday | — |
 
 ## The early first explicit beat
@@ -121,7 +124,7 @@ opens at 07:00. No step, no main man, no paid route.
 
 | row | gate |
 |---|---|
-| the kitchen at 07:50, Laura there until 08:00 | the opening opens a door |
+| the dean's office at 08:05, his one-time welcome | the opening opens a door |
 | Ryan, Laura and Mark in the forced opening | every hub is met first |
 | Hale met at the 08:30 class, in his window | a meeting fires where they are |
 | the card's three goals | the opening arms a card with goals (lint) |
@@ -144,10 +147,10 @@ Hale's office line each read which answer she gave.
 | Laura's rule at breakfast | IDEA §4 |
 | the rent starts after Mark's scene | LO, 2026-10-07 (SYSTEMS, decided item 2) |
 | hygiene off as a start choice | LO, chat 2026-10-06 (SYSTEMS §6) |
-| the hygiene choice on screen 9 | LO, 2026-10-08 |
+| the hygiene choice on screen 9, on the "Go to campus." button | LO, 2026-10-08 |
 | a skip on screen 2 | `the-first-hour.md` F1c |
 | Mark leaving at 07:40, the opening only | LO, 2026-10-08 |
-| the clock after each screen | guess |
+| the clock after each screen | as built |
 | the start-choice readers | LO, 2026-10-08 (flag names a guess) |
 | the park couple, not in the funnel | LO, 2026-10-08 · `the-arc.md` A15 |
-| the walk and the wait in the plain lines; breakfast sets `ate_breakfast` | LO, 2026-10-08 (picks 1, 2, 6) |
+| the walk and the wait in the plain lines | LO, 2026-10-08 (picks 1, 2, 6); the build's lines name the People and Schedules pages instead |

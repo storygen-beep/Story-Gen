@@ -1,5 +1,7 @@
 # [READY] Place — Clothes Shop
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08 against the system sheets. Id `clothes_shop`.
@@ -31,12 +33,25 @@
 
 **Prices (guess):** `sports_bra` $25 · a short skirt $30 · a thin top $20. Each label says where it counts.
 
+## Built from the heat proposal (signed 2026-11-03)
+
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has here:
+
+**Acts, rungs and pools.**
+
+| what | where | buttons and pays |
+|---|---|---|
+| the changing-room mirror (A4) | trying clothes on | "Touch yourself." Curious 20, Corruption +1, cap 39 · "Not here." pays 0 |
+| the curtain (C5) | trying clothes on | "Leave the curtain where it is." Exhibitionism 10, +1, cap 19 |
+
 ## Rows a gate needs
 
 | row | gate |
 |---|---|
 | the sports bra sold with a price | a declared garment can be got |
 | what she buys is read elsewhere | what money buys opens a door |
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_C.md` (signed with the a2 sheets, DECISIONS 125).
 
 ## Why — the source of each key choice
 

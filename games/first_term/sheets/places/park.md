@@ -1,4 +1,6 @@
-# [REVIEW] Place — Park
+# [READY] Place — Park
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -36,6 +38,17 @@
 | Zoe, running | person | Zoe's ladder · park | her dare: a flash (Curious) · somewhere hidden (Bold) | once a day, her window | yes |
 | the next locked act | — | park | shown with what it needs: "Needs Corruption 60" | — | yes, one line |
 
+## Built from the heat proposal (signed 2026-11-03)
+
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has here:
+
+**Walk-ins.** Her activity rolls on entry (1 in 4 at her lowest band, more higher up); on a hit someone walks in. A man's pay sits on the moment; her cover pays 0.
+
+| who walks in | her activity | when | his pay, on the moment | her bolder answers |
+|---|---|---|---|---|
+| Zoe | Run | Sat, Sun 08:00–08:15 | none: no meter | a line only, no pay |
+| Zoe | Rest on a bench | Sat, Sun 08:00–08:15 | none: no meter | a line only, no pay |
+
 ## Rows a gate needs
 
 | row | gate |
@@ -43,6 +56,8 @@
 | the couple scene is explicit | leads to a sex scene · traversal heat |
 | the bench every day | a need can be met every day |
 | Zoe's park row has a hub | standing surface |
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_B.md`, `proposals/COPY_FIXES_C.md` (signed with the a2 sheets, DECISIONS 125).
 
 ## Why — the source of each key choice
 

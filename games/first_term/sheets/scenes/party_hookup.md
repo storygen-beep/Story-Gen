@@ -1,5 +1,9 @@
 # [READY] Scene — party_hookup
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+
+> The signed plans behind this page: `proposals/COPY_FIXES_B.md` · `proposals/COPY_FIXES_C.md`.
+
 > Signed by LO: LO, 2026-10-08.
 
 > Placed in sheets/ 2026-10-08. Written 2026-10-08, heat call A: the party's Bold repeat, with the cocky guy (21),
@@ -8,45 +12,55 @@
 | row | answer |
 |---|---|
 | system · pool | parties · `party_hookup` |
-| where · when | Zoe's Friday party, after 23:00 · Zoe's bathroom, locked |
-| gate | Corruption 40 · he is met and at the party (ledger change 26) |
+| where · when | Zoe's party, within 8 hours of arriving · then Zoe's bathroom, locked |
+| gate | Corruption 40 · `cocky_guy_met` · the cocky guy there, Jake not · not tonight already |
 | who | the cocky guy: his portrait at the party; she knows him from class |
 | his want, shown first | his stare in Figure drawing; the exam's price, if she paid it |
+| want | "Bathroom's free. Just saying." |
+| next step | on her knees, or on the sink |
+| hook | "You still owe me for that exam." He's at the next party |
 | what she wears here | not named; "pushed aside" at most |
 | BRAKE | once a night, on the trigger |
-| raises | corruption add +1 until past Bold · `campus_talk` add +1 |
+| raises | each yes: Corruption +1 (cap 59) · Campus talk +1 · Hygiene -10, Energy 10 |
 | the crude-word ceiling | tits, nipples, ass, cock, wet, clit · no cunt, fuck, cum, pussy (LO, 2026-10-08) |
 
-## Branch map — one row per screen
+## Branch map — as built (2026-11-03)
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
+One row per exit. Read from the build; it replaces the drafted map.
+
+**`party_hookup`** — Zoe's Living Room · The cocky guy there · needs under 8h since `party_went` · Corruption 40+ · `cocky_guy_met` · Jake not in Zoe's Living Room · not `hookup_today` · repeatable
+
+| node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
 |---|---|---|---|---|
-| `ask` | Jake's teammate, at the party, his eyes on her: "Bathroom's free." | no | "Lead the way." → `door` · "Not tonight." → the party | none · a no costs nothing |
-| `door` | Zoe's bathroom, locked; the party through the wall | no | "Get on your knees." → `oral` · "Pull him in." → `sex` | none |
-| `oral` | she takes his cock in her mouth until he comes | yes | "Back to the party." → the party | corruption add +1 · `campus_talk` add +1 |
-| `sex` | on the sink, his cock inside her, they both come | yes | "Back to the party." → the party | corruption add +1 · `campus_talk` add +1 |
+| `ask` | Jake's teammate, the cocky one from figure drawing, is leaning on the wall by Zoe's bathroom … | no | "Lead the way." → `door` | `hookup_today` set |
+| | | | "Not tonight." → `no` | — |
+| `door` | Zoe's bathroom: fairy lights round the mirror, her makeup all over the sink. | no | "Get on your knees." → `oral` | Hygiene -10 · costs Energy 10 |
+| | | | "Pull him in." → `sex` | Hygiene -10 · costs Energy 10 |
+| | | | "Unlock the door." → `no` | — |
+| `oral` | Zoe's bathroom door is locked, and the party thumps through the wall. | yes | "Back to the party." → `out` | Corruption +1 (cap 59) · Campus talk +1 |
+| `sex` | He locks Zoe's bathroom door and lifts you onto the sink. | yes | "Back to the party." → `out` | Corruption +1 (cap 59) · Campus talk +1 |
+| `out` | You come out first, fixing your hair. | no | "Go back to the party." — 2 versions, by hour → Zoe's Living Room | — · varies: `came_home_late` set, `late_party` set |
+| `no` | He goes back to his wall and his beer, grinning, still watching you. | no | "Leave him to his wall." — 2 versions, by hour → Zoe's Living Room | `party_cool_cocky_guy` set · varies: `came_home_late` set, `late_party` set |
 
-**Jake at the party:** if Jake is there (until midnight), the ask waits until he has gone (guess), so the hookup never
-plays in front of him.
+## The explicit beats, as built (2026-11-03)
 
-**Who notices:** Zoe sees them come out of her bathroom; campus talk rises.
+Every screen the build counts as explicit (3+ words from the frozen list), word for word, with its measurement. It replaces the drafted text.
 
-## The explicit screens, written
-
-**`oral`** · 125 words · explicit words 5 (balls, cock, lick, suck) · median sentence 11 · act rungs: hands, oral
+**`party_hookup` · `oral`** — 153 words · 7 counted: cock, lick, suck, balls, cock, cock, fuck · ceiling: strangers' words (DECISIONS 41): tits, nipples, ass, cock, wet, clit · **past the ceiling: fuck**
 
 > Zoe's bathroom door is locked, and the party thumps through the wall. You sink to your knees on the cold tiles. Jake's teammate leans on the sink and grins down at you. You open his jeans and pull his cock out, already hard. You lick the head slowly, so he has to watch. Then you take him in your mouth. His hand fists in your hair. He groans and pulls you into a rhythm, deeper with each stroke. You suck him hard while your hand works the base. His balls tighten against your fingers. His hips jerk, and he comes in your mouth, hot and thick. You swallow all of it, his cock still twitching on your tongue, then wipe your lip with your thumb.
+>
+> He sags back against the sink with his cock still wet from your mouth and fumbles his jeans shut.
+>
+> Fuck. Does Jake have any idea what he's missing?
 
-**`sex`** · 111 words · explicit words 7 (ass, cock, nipple, suck, tits) · median sentence 8
+**`party_hookup` · `sex`** — 142 words · 8 counted: cock, tits, suck, nipple, ass, cock, ass, cum · ceiling: strangers' words (DECISIONS 41): tits, nipples, ass, cock, wet, clit · **past the ceiling: cum**
 
 > He locks Zoe's bathroom door and lifts you onto the sink. The party thumps through the wall. You yank his jeans open and his cock springs out, hard and thick. He pushes into you slowly, and you feel every inch stretch you. Then he starts slamming in hard. Your legs lock round his hips. His mouth finds your tits, and he sucks one nipple, then the other. You grab his ass and pull him deeper. The mirror fogs behind you. Somebody bangs on the door. You both keep going, faster. He groans into your neck and comes inside you. You come clenching around his cock, your heels digging into his ass.
-
-One change after `v2-prose`: "deeper every time" became "deeper with each stroke" (no history words on a repeat).
-
-**A tool limit, not a defect:** `--beat` tags the `sex` screen's act as oral, from "sucks", because the words its list
-uses for intercourse are all outside this ceiling. The screen still counts as explicit.
-
-No history words on either screen: both repeat.
+>
+> He stays buried in you, panting, then lifts you down off the sink. His cum runs down the inside of your thigh.
+>
+> Fix your hair. They're all going to know anyway.
 
 ## Why — the source of each key choice
 

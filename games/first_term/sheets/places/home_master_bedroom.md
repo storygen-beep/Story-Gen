@@ -1,5 +1,7 @@
 # [READY] Place — Master Bedroom
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
+
 > **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08). Re-signed 2026-10-29 ("sign all", in chat).
@@ -59,12 +61,25 @@
   those hours the room is empty, or Mark only after 02:00, and the lines say so.
 - **"They're asleep"** (the old row) names only who is asleep, by the table above.
 
+## Built from the heat proposal (signed 2026-11-03)
+
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has here:
+
+**Walk-ins.** Her activity rolls on entry (1 in 4 at her lowest band, more higher up); on a hit someone walks in. A man's pay sits on the moment; her cover pays 0.
+
+| who walks in | her activity | when | his pay, on the moment | her bolder answers |
+|---|---|---|---|---|
+| Laura | Go through Laura's wardrobe | Sat 16:45–17:00 | none | a line only, no pay |
+| Mark | Go through Laura's wardrobe | Sat 21:45–22:00 | his Want +2 | "Let him look." Exhibitionism +1, cap 19/39/59 by her band |
+
 ## Rows a gate needs
 
 | row | gate |
 |---|---|
 | her wardrobe when they're out | a destination is never open and exit-only |
 | a door with a way back | lint: a door opens onto something |
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_A.md` (signed with the a2 sheets, DECISIONS 125).
 
 ## Why — the source of each key choice
 

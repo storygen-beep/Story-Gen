@@ -1,5 +1,7 @@
 # [READY] System — job
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. File and line cites removed.
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the café customers, from
 > `proposals/R1_SYSTEM_CAFE.md` (signed 2026-11-01), with pay from `proposals/R1_SYSTEM_RENT.md`. Changed: the shift,
 > pay, one drawn customer scene a shift in three levels, Gary as the regular, the café's footfall and name, Tom's top
@@ -99,7 +101,7 @@ At **footfall 15 and name −5**, Tom's top step, "Not by the window" (`npc_tom.
 | 2 | level 2 (Daring, or the sexy uniform) | $8 + $4–8; playing along $6–10; sexy uniform +50% tips |
 | 3 | level 3 | $8 + $4–8; let it, $10–16 |
 | busy | `cafe_footfall` 10 | tips +$2 |
-| Friday close | stays as built: a Friday evening shift pays $16, $24 in the sexy uniform (`cafe.py:69`, `:72`) (LO, 2026-11-01, "Continue") | — |
+| Friday close | stays as built: a Friday evening shift pays $16, $24 in the sexy uniform (LO, 2026-11-01, "Continue") | — |
 | ~~paid~~ | cut 2026-11-01 | Gary's ten minutes, "$20 — Tom takes half": Tom never sells her |
 
 ## Lewd ladder (`lewd_ladder[]`)

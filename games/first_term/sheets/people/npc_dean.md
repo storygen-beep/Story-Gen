@@ -1,5 +1,7 @@
 # [READY] Person — the dean
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: Monday from 08:00. New section: the walk-ins and acts the heat proposal built.
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-01 ("Continue")** (DECISIONS 99–120): the release-1 college day (`sheets/systems/college.md`,
 > signed 2026-11-01). Changed: met on day 1 in his office, not at her first trouble; his Monday-morning row; what he is
 > this release. Everything else as signed.
@@ -25,7 +27,7 @@
 
 | place | days | from | to | why he is there |
 |---|---|---|---|---|
-| `dean_office` | Mon | 07:30 | 09:00 | early on Mondays: day 1's meeting is true every week (new 2026-11-01) |
+| `dean_office` | Mon | 08:00 | 09:00 | early on Mondays: day 1's meeting is true every week (new 2026-11-01) |
 | `dean_office` | Mon–Fri | 09:00 | 17:00 | weekday office hours |
 
 ## Ladder — one guidance card per step
@@ -36,6 +38,11 @@ complaints). His ladder is a later release (Zoe's later rung, "fucking dean", is
 ## Phone thread
 
 None in release 1. His office calls her in: a call, caused by `dean_summons` (two complaints).
+
+## Walk-ins and acts from the heat proposal (signed 2026-11-03, built)
+
+Walk-ins: `dean_office`. Each row (when, what pays) is on that place sheet.
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
 
 ## Why — the source of each key choice
 

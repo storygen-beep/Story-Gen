@@ -1,4 +1,8 @@
-# [REVIEW] Scene — hale_04_first_session
+# [READY] Scene — hale_04_first_session
+
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+
+> The signed plans behind this page: `proposals/COPY_FIXES_B.md`.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
@@ -10,11 +14,11 @@
 | row | answer |
 |---|---|
 | person · step | `npc_hale` · 4 of 4, top step · Claire (38), his wife, met here |
-| where · when | his office, the faculty floor · Thursday 18:30–19:30 (Claire's pickup is half past seven) |
-| gate | Hale's step counter eq 3 · Corruption 40 · Exhibitionism 40 (back to 40 · 40: DECISIONS 124) · the boost off · pays +3 each, cap 79 |
-| want | "Thursdays. Half past six. The door will be locked." (step 3) |
-| next step | his hand, his questions; her saying it out loud |
-| hook | "My wife. Same time next week, @player." The weekly session opens · his card: "Hale, further. (Needs Corruption 60.)" |
+| where · when | his office · Thursday, starts 18:30-19:15 |
+| gate | his step 3 · Corruption 40 · Exhibitionism 40 · the boost off · "Let him." pays +3 each, cap 79 |
+| want | he locks the door; "Tell me what you feel." |
+| next step | his hand on her tits, then higher, until Claire knocks |
+| hook | Claire at the door; the Thursday sessions open |
 | who notices | Hale; **Claire**, through the door |
 | what she risks | his wife; her grade; how far he'll go |
 | what she wears here | not named (the beats say "your top", "your clothes" only) |
@@ -25,19 +29,32 @@
 | his move | his hand, his questions |
 | does it finish | **cut off** (Claire): the ladder's one cut-off |
 
-## Branch map — one row per screen
+## The step row (as built, 2026-11-03)
 
-| node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
+The seven columns, filled from what the build does.
+
+**Kind · stage:** private sexual touch with someone she knows · Bold · Showing (40)
+
+| the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
+|---|---|---|---|---|---|---|
+| locked office: she says what she feels while his hand moves on her; Claire knocks | Hale; Claire, at the door | his wife; her grade | "Let him." | locks the door; his hand and his questions | cut off: Claire's knock, the ladder's one cut-off | his step 4; `hale_touched`, `claire_met`; grade +5; Thursdays open |
+
+## Branch map — as built (2026-11-03)
+
+One row per exit. Read from the build; it replaces the drafted map.
+
+**`hale_04_claire_knocks`** — Dr. Hale's Office · Thu 18:30-19:15 · Dr. Hale there · needs Hale's step = 3 · Corruption 40+ · Exhibitionism 40+ · drinks boost off · one time
+
+| node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
 |---|---|---|---|---|
-| `feel` | he locks the door: "Tell me what you feel. Bare your tits first."; his thumb on her nipple; she says it out loud | yes | "Let him." → `higher` · "This isn't coaching." → `isnt` · Run. → `run` | none |
-| `higher` | his hand down her ribs, her thigh, higher, pressed on her clit through her clothes; she says every inch | yes | → `knock` | `grade_psych` add +5 · corruption add +3 · exhibitionism add +3 (caps 39 and 39, her stage caps, DECISIONS 78) |
-| `knock` | the knock; "You ready, love?"; he takes his hand away: "My wife. Same time next week, @player." | no | "Go." → `corridor` | `claire_met` set |
-| `corridor` | she covers up and walks out past his wife in the corridor | no | "Go home." → campus | Hale's step counter set 4 · `hale_04_done` · `hale_touched` set |
-| `isnt` | she covers up: "This isn't coaching." — "Then you'll stay at a C." | no | "Leave." → the faculty floor | none · the step returns next Thursday (parked) |
-| `run` | she grabs her bag and runs; in the corridor a woman with car keys: Claire | no | "Keep walking." → campus | `grade_psych` add −2 · `claire_met` set · the step returns next Thursday (parked) |
-
-**The two nos** are parked, as the proposal says ("He will ask again next Thursday"); each costs only grade (−2 on Run,
-nothing on "This isn't coaching.", as the proposal). Mine: both park rather than finish. confirmed by LO 2026-11-01 ("Continue").
+| `feel` | Dr. Hale locks the door and sits back in his chair. | yes | "Let him." → `higher` | — |
+| | | | "This isn't coaching." → `isnt` | — |
+| | | | "Run." → `run` | — |
+| `higher` | His hand leaves your tit, your nipple still stiff from his thumb. | yes | "Wait." → `knock` | Psychology grade +5 · Corruption +3 (cap 79) · Exhibitionism +3 (cap 79) |
+| `knock` | The knock is two raps, light. | no | "Pick up your bag." → `corridor` | `claire_met` set |
+| `corridor` | You pull your clothes straight and pick up your bag. | no | "Go home." → Hall | Hale's step = 4 · `hale_04_done` set · `hale_touched` set |
+| `isnt` | You pull everything back down over your tits. | no | "Leave him with your grade." → Faculty Floor | back in 7 days |
+| `run` | You grab your bag and you're out of the door before he can stand up. | no | "Keep walking." → Campus | Psychology grade -2 · `claire_met` set · back in 7 days |
 
 ## The explicit screens, written
 
@@ -66,7 +83,63 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Shared brie
 - **The weekly session** opens (`hale_thursday_session.md`).
 - **His card** ends on the locked line: "Hale, further. (Needs Corruption 60.)"
 - **His office hub:** the built line at step 4 ("He can't look at you for long. He checks the corridor before he speaks.") is
-  against "the jerk"; it becomes "He looks at the clock, and then at you, like you're both on his schedule." Mine; confirmed by LO 2026-11-01 ("Continue").
+ against "the jerk"; it becomes "He looks at the clock, and then at you, like you're both on his schedule." Mine; confirmed by LO 2026-11-01 ("Continue").
+
+## The explicit beats, as built (2026-11-03)
+
+Every screen the build counts as explicit (3+ words from the frozen list), word for word, with its measurement. It replaces the drafted text.
+
+**`hale_04_claire_knocks` · `feel`** — 116 words · 7 counted: tits, tit, nipple, nipple, nipple, nipple, tit · ceiling: Hale's middle column: tits, nipples, cock, with plain anatomy
+
+> Dr. Hale locks the door and sits back in his chair.
+>
+> Tell me what you feel, @player. Bare your tits first.
+>
+> You're scared. You're turned on too. You pull everything up anyway. He takes your tit in his hand. His thumb finds your nipple and circles it, slow. You go quiet.
+>
+> Out loud.
+>
+> He says.
+>
+> Your thumb. My nipple's going hard.
+>
+> He's your professor. He's married.
+>
+> His thumb doesn't stop.
+>
+> Again.
+>
+> It's hot. The heat goes all the way down.
+>
+> He listens like it's a lecture. Your other nipple is hard too, and you're wet. He rolls the nipple between finger and thumb.
+>
+> Say it.
+>
+> I'm wet. Your hand on my tit is making me wet.
+
+**`hale_04_claire_knocks` · `higher`** — 125 words · 4 counted: tit, nipple, cock, clit · ceiling: Hale's middle column: tits, nipples, cock, with plain anatomy
+
+> His hand leaves your tit, your nipple still stiff from his thumb.
+>
+> Keep talking.
+>
+> His hand slides down over your ribs, slow.
+>
+> Your hand is on my ribs.
+>
+> You say. Your voice shakes. It moves to your hip, then flat onto your thigh.
+>
+> My thigh.
+>
+> His fingers turn in, onto the soft inside of it.
+>
+> The inside. Higher.
+>
+> He goes higher, an inch at a time, and you say every inch out loud. Your knees fall open. His fingertips reach the heat between your thighs and press there, once, through your clothes. You're wet, and his fingers find it.
+>
+> Right there.
+>
+> You whisper. His cock is hard under his trousers, right by your knee. His fingers stay pressed on your clit, and your breath catches.
 
 ## Why — the source of each key choice
 

@@ -1,6 +1,8 @@
 # [READY] Person — Ryan
 
-> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): rows 7-8, 13: in the towel at his top band (Want 70+, "One pull, @player.nickname.") a written no, "Hold the knot.": she says "Not tonight." (18:00-06:00) or "Not now.", he says "Tease.", his Want +1 once a day (the towel's `ryan_towel_today`, no new flag); in his room, the kitchen and the couch. His towel event in the hall (`home_event_ryan_towel`) ends its Curious and Bold screens on "Not here. Mom's up." Built in `ryan.py`, `home_items.py` and `writer.py`.
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: weekend mornings from 06:45. The moment column names each step's kind and stage. His Want pays on what happened (step 1 and step 8); no locked step-9 button. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 8 runs Sun–Thu nights.
+
+> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): rows 7-8, 13: in the towel at his top band (Want 70+, "One pull, @player.nickname.") a written no, "Hold the knot.": she says "Not tonight." (18:00-06:00) or "Not now.", he says "Tease.", his Want +1 once a day (the towel's `ryan_towel_today`, no new flag); in his room, the kitchen and the couch. His towel event in the hall (`home_event_ryan_towel`) ends its Curious and Bold screens on "Not here. Mom's up."
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 127) (LO: "rise from normal", "more in the sex screens", "B, sheet it"): step 8
 > rises from a talk through her doubt, a kiss and undressing, with her picks in the sex; the step-8 repeat becomes a
@@ -44,7 +46,7 @@
 | `home_kitchen` | Mon, Tue, Thu, Sun | 18:00 | 19:00 | dinner with the family |
 | `home_ryan_room` | Mon, Tue, Thu, Sun | 19:00 | 22:00 | home from the yard |
 | `home_ryan_room` | Fri | 18:00 | 22:00 | Kayla's night |
-| `home_ryan_room` | Sat, Sun | 07:30 | 14:00 | weekend mornings |
+| `home_ryan_room` | Sat, Sun | 06:45 | 14:00 | weekend mornings |
 | `home_living_room` | Sat, Sun | 14:00 | 18:00 | TV and a film |
 | `home_ryan_room` | every day | 22:00 | 06:45 | home from the yard |
 | `home_ryan_room` | Sat | 18:00 | 22:00 | home from the yard · only when `ryan_cancelled_kayla` · later (Ryan A 12) |
@@ -59,21 +61,36 @@ His night row ends 06:45, so it doesn't overlap his bathroom row (LO, 2026-10-08
 
 | n | canvas | where | when | gate | raises | the no | guidance card line |
 |---|---|---|---|---|---|---|---|
-| 1 | `ryan_01_hall_first_morning` | `home_hall` | the opening | none | want add +10 | "Knock next time." (parked) · the day-one final, below | Your first morning: out of the bathroom, Ryan waiting in the hall. |
+| 1 | `ryan_01_hall_first_morning` | `home_hall` | the opening | none | want add +10, on "Open the door." (the moment he sees her) | "Knock next time." (parked) · the day-one final, below | Your first morning: out of the bathroom, Ryan waiting in the hall. |
 | 2 | `ryan_02_phone_on_the_sink` | `home_bathroom` | Mon–Fri 06:45–07:30 | his Want 10 (Exhibitionism 20 dropped) | want add +5 · `knows_about_kayla` set | "Leave it." (parked) | A weekday morning in the bathroom: Ryan's phone buzzes on the sink. |
 | 3 | `ryan_03_shirt_off` | `home_ryan_room` | Mon, Tue, Thu, Sun 19:00–22:00 | Corruption 20 · his Want 20 | want add +5 · corruption add +1 · the two-knocks code | "Never mind." (parked) | Ryan's room, an evening he's home (not Wednesday or Friday): knock. |
 | 4 | `ryan_04_feet_in_his_lap` | `home_ryan_room` | Mon, Tue, Wed, Thu, Sun 22:00–00:00 | Corruption 40 · his Want 30 (was Corruption 20) | want add +5 · corruption add +3, cap 79 | "Just saying goodnight." (parked) | Ryan's room, late at night (not Friday): two knocks. |
 | 5 | `ryan_05_thin_walls` | `home_ella_room` | Fri 22:00–00:00 | Corruption 20 · his Want 40 (was Exhibitionism 40) | want add +5 · corruption add +1 · `ryan_heard_her` set | "Put your headphones in." · "Roll over. Sleep." (parked) | Friday night in your bed: Kayla is over, and the wall is thin. |
 | 6 | `ryan_06_after_the_shower` | `home_bathroom` | Sat 08:00–10:00 | Exhibitionism 40 · his Want 50 | want add +5 · exhibitionism add +3, cap 79 | "Reach for the towel." (parked) | Saturday morning, the shower: Kayla is still in the house. |
 | 7 | `ryan_07_kayla_cant_know` (new) | `home_ryan_room` | Mon, Tue, Thu, Sun 19:00–22:00 | Corruption 60 · his Want 60 (was Corruption 40) | want add +5 · corruption add +3, cap 79 | on the step sheet (LO confirms) | Ryan's room, an evening he's home: two knocks. |
-| 8 | `ryan_08_two_knocks_first_sex` (new) | `home_ryan_room` | not Friday, 22:00–00:00 | Corruption 60 · his Want 70 (was Corruption 40) | want add +5 · his terms · the step-8 repeat opens | on the step sheet (LO confirms) · the final: "You're my brother, that's all." (ends his path) | Ryan's room, late, any night but Friday: two knocks. |
-| 9 | locked | `home_ryan_room` | Friday | not written | — | — | shows locked: "Further. (Next release)" (DECISIONS 124) |
+| 8 | `ryan_08_two_knocks_first_sex` (new) | `home_ryan_room` | Sun–Thu 22:00–00:00 | Corruption 60 · his Want 70 (was Corruption 40) | want add +5, on the sex ("Lie there."); his terms and "(ends his path)" add 0 · the step-8 repeat opens | on the step sheet (LO confirms) · the final: "You're my brother, that's all." (ends his path) | Ryan's room, late, any night but Friday: two knocks. |
+| — | not written | — | — | — | — | — | no button; his card ends "More of Ryan in the next release." (DECISIONS 134) |
 
 Every step's gate also says the drinks boost is off. Stage numbers: 20 is Curious or Daring, 40 Bold or Showing, 60
 Hungry or Watched. Corruption pays only under the stage cap (19, 39, 59, 79: DECISIONS 78, 124). The steps follow
 SP2's Heat line: his foot on his cock (4) is private sexual contact, Bold; the handjob (7) and sex (8) are the taboo
 act at home, Hungry (DECISIONS 124). Love (`warmth`) stays a side meter and never
 opens a step. Laura's rule (built): in a room Laura is in, the hot repeatables don't show.
+
+## The eight ladder rules, checked against the build (2026-11-03)
+
+| rule | as built |
+|---|---|
+| 1 · a new witness, risk or yes each step | yes: each step adds Laura, Kayla or a new yes |
+| 2 · the top step is a payoff | yes: step 8, sex, finished on the body |
+| 3 · one cut-off at most | yes: step 4, Kayla's "Who's there?", once |
+| 4 · he moves at least every other step | yes: his move is written on every step |
+| 5 · his meter is the lock | yes: Want gates 10–70; steps pay +5; hot repeatables pay the gap |
+| 6 · a hot repeatable per stage | yes: a hot repeatable per stage, plus the step-8 repeat |
+| 7 · her voice changes with her level | no: only step 1 reads her level; steps 2–8 have one voice |
+| 8 · something happens after the top step | yes: the step-8 repeat, near-catches |
+
+Failing, waivers not counted: 1 of 8. The ladder may be built (two fails stop it).
 
 ## Card goals (LO's play note, 2026-10-08)
 
@@ -85,14 +102,14 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 
 | n | the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
 |---|---|---|---|---|---|---|---|
-| 1 | he looks her up and down in the towel, and doesn't move | him | — (an accident) | — | the long look, blocking the hall | yes | the Laura rule on towels |
-| 2 | Kayla's text lights up by her hand | his secret is hers | — | she reads it | he grabs the phone: "Don't." | yes | `knows_about_kayla`; he's scared of her |
-| 3 | he strips and turns on her order, while Laura calls up the stairs "Ryan, is your sister in there?" | him; Laura, nearly | Laura opening the door | "Shirt off." | he answers Laura "No" without taking his eyes off her | yes | the two-knocks code |
-| 4 | Kayla on the phone; he takes her foot and presses it onto his cock himself | Kayla, on the phone | Kayla hearing it | her toes keep moving | his hand moves her foot, not hers | **cut off** (Kayla: "Who's there?"), the ladder's one cut-off | he lies to Kayla for her; "Liar." |
-| 5 | she comes to his headboard through the wall | he hears her | Kayla, in the next room | "Touch yourself." | he whispers her name through the wall | yes | `ryan_heard_her`; Kayla meets her at dawn and knows |
-| 6 | naked on purpose; he stays and jerks off in the doorway while she watches | him; Kayla in the hall | Kayla walking in | she leaves the towel | he pulls his cock out and doesn't stop | **yes**: he comes, and Kayla calls "Babe?" as he does | he can't look at Kayla at breakfast; his door stays open a hand's width |
-| 7 | two knocks; Kayla's photo lights up his phone; she jerks him off and he comes in her hand | Kayla, on the screen | Kayla calling while he's in her hand | "Don't answer it." | he reaches for her first, then for the phone, and she pushes his hand away | **yes** | his phone is face-down every time she knocks |
-| 8 | first sex, on a night that isn't Kayla's, after a talk, her doubt, a kiss and undressing (changed 2026-11-02); his headboard hits the wall, the one she listened through | Laura, across the hall, her light on | Laura hearing the headboard | "Stay." (was "Fuck me.") | he kisses back and doesn't stop | **yes**: her picks: what first (his cock in her mouth, his mouth on her, straight on), how (on top, under him, against her wall), Laura's light (keep going, freeze), the finish (inside, on her, her mouth) | her feeling after, then the terms (below); the repeat opens |
+| 1 | *accident (a look that happens to her) · stage 1, Good Girl* — he looks her up and down in the towel, and doesn't move | him | — (an accident) | — | the long look, blocking the hall | yes | the Laura rule on towels |
+| 2 | *accident (his secret, seen) · stage 1, Good Girl* — Kayla's text lights up by her hand | his secret is hers | — | she reads it | he grabs the phone: "Don't." | yes | `knows_about_kayla`; he's scared of her |
+| 3 | *a chosen tease for one person she knows · stage 2, Curious 20* — he strips and turns on her order, while Laura calls up the stairs "Ryan, is your sister in there?" | him; Laura, nearly | Laura opening the door | "Shirt off." | he answers Laura "No" without taking his eyes off her | yes | the two-knocks code |
+| 4 | *private contact with someone she knows · stage 3, Bold 40* — Kayla on the phone; he takes her foot and presses it onto his cock himself | Kayla, on the phone | Kayla hearing it | her toes keep moving | his hand moves her foot, not hers | **cut off** (Kayla: "Who's there?"), the ladder's one cut-off | he lies to Kayla for her; "Liar." |
+| 5 | *a chosen act he hears through the wall · stage 2, Curious 20* — she comes to his headboard through the wall | he hears her | Kayla, in the next room | "Touch yourself." | he whispers her name through the wall | yes | `ryan_heard_her`; Kayla meets her at dawn and knows |
+| 6 | *naked by choice for one person · stage 3, Showing 40* — naked on purpose; he stays and jerks off in the doorway while she watches | him; Kayla in the hall | Kayla walking in | she leaves the towel | he pulls his cock out and doesn't stop | **yes**: he comes, and Kayla calls "Babe?" as he does | he can't look at Kayla at breakfast; his door stays open a hand's width |
+| 7 | *the taboo act at home (her hand) · stage 4, Hungry 60* — two knocks; Kayla's photo lights up his phone; she jerks him off and he comes in her hand | Kayla, on the screen | Kayla calling while he's in her hand | "Don't answer it." | he reaches for her first, then for the phone, and she pushes his hand away | **yes** | his phone is face-down every time she knocks |
+| 8 | *the taboo act at home (sex) · stage 4, Hungry 60* — first sex, on a night that isn't Kayla's, after a talk, her doubt, a kiss and undressing (changed 2026-11-02); his headboard hits the wall, the one she listened through | Laura, across the hall, her light on | Laura hearing the headboard | "Stay." (was "Fuck me.") | he kisses back and doesn't stop | **yes**: her picks: what first (his cock in her mouth, his mouth on her, straight on), how (on top, under him, against her wall), Laura's light (keep going, freeze), the finish (inside, on her, her mouth) | her feeling after, then the terms (below); the repeat opens |
 
 **Her voice:** every step sheet carries `her_line_low` (under the stage: her thought pushes back, "This
 is Ryan. You should go.") and `her_line_high` (over it: appetite, "You want him to hear Kayla on the phone while
@@ -118,8 +135,8 @@ stays in it.
 **Final no:** on day one, "Don't ever look at me like that. (ends his path)"; at step 8, "You're my brother,
 that's all. (ends his path)". Either closes his steps; he stays her brother, and cold.
 
-**What the release ends on:** the step-8 repeat (two knocks, sex, near-catches) and step 9 shown locked, "(Next
-release)".
+**What the release ends on:** the step-8 repeat (two knocks, sex, near-catches). No locked button; his card says
+"More of Ryan in the next release."
 
 **After** (next release): sex while Kayla is in the house; Kayla's thread (does she suspect?).
 
@@ -159,7 +176,7 @@ The towel slip and the drop (DECISIONS 98) stay as they are.
 
 ## Crude words (LO confirms on the step sheets)
 
-Ryan's columns (`spine/SP2_ladders.md:191`): early "ass, tits", middle "cock, wet", late "cunt, fuck, cum". Steps
+Ryan's columns (`spine/SP2_ladders.md`): early "ass, tits", middle "cock, wet", late "cunt, fuck, cum". Steps
 5 and 6 are signed at the middle column. **Proposed:** steps 6 (he comes) and 7 use the late column for "cum";
 step 8 and its repeat use the whole late column ("Fuck me.").
 
@@ -204,8 +221,7 @@ yet" (`the-heat-ladder.md` H4). Lines are samples (guess).
 ## The towel at home (DECISIONS 98, LO, 2026-10-31)
 
 In a towel she can't leave the house, so every Ryan hub at home reacts to it, every visit: his room, dinner,
-the couch, and the bathroom door. Built in `iterations/002/build_scripts/ryan.py` (`ryan_towel`, `RT_BATH`)
-on `home_items.towel_set`.
+the couch, and the bathroom door.
 
 | his Lust | his line (one of three, they take turns) | "Let it slip." (Exhibitionism 20) |
 |---|---|---|
@@ -235,6 +251,13 @@ on `home_items.towel_set`.
 | Want read by every step gate | the men's numbers are read |
 | Warmth read: his lines with Laura and Jake | the men's numbers are read |
 | the step-8 repeat (two knocks, sex) | the door can be seen again |
+
+## Walk-ins and acts from the heat proposal (signed 2026-11-03, built)
+
+Walk-ins: `home_bathroom`, `home_hall`, `home_kitchen`, `home_living_room`, `home_ryan_room`. Each row (when, what pays) is on that place sheet.
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_A.md` (signed with the a2 sheets, DECISIONS 125).
 
 ## Why — the source of each key choice
 

@@ -1,5 +1,7 @@
 # [READY] System — meters
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. File and line cites removed.
+
 > **New 2026-11-01, signed by LO 2026-11-01** ("Signed", DECISIONS 113). Written from `proposals/R1_SYSTEM_METERS.md` (signed by
 > LO 2026-11-01, "Signed."). It changes the meter rules of DECISIONS 78 and the street-door rows of
 > `sheets/systems/wardrobe.md` (that sheet points here). Nothing new is decided here.
@@ -12,8 +14,8 @@
 | caps | a meter pays only while she is under her stage cap (19, 39, 59: DECISIONS 78, only her choice pays) |
 | feeds | Corruption, Exhibitionism, the named men's Lust |
 | reads | Corruption, Exhibitionism, her clothing state |
-| what measured it (2026-11-01, `toml_phases/5_scenes.toml`) | of 106 effects that raise her meters, 3 raise both (43 only Corruption, 60 only Exhibitionism); of 207 conditions that read them, 27 read both. Wearing it out paid nothing |
-| source | LO (2026-10-31): "first to wear something short she need corruption, after that increases her corruption and exhibition both, learn how top games work on this matter." · CoT (`heat_study/p2_cot.md:25-40`) |
+| what measured it (2026-11-01) | of 106 effects that raise her meters, 3 raise both (43 only Corruption, 60 only Exhibitionism); of 207 conditions that read them, 27 read both. Wearing it out paid nothing |
+| source | LO (2026-10-31): "first to wear something short she need corruption, after that increases her corruption and exhibition both, learn how top games work on this matter." · CoT (`heat_study/p2_cot.md`) |
 
 ## Rule 1 · the first time out takes nerve
 
@@ -27,7 +29,7 @@ Going out in a level for the first time needs Corruption **or** Exhibitionism at
 
 - The door's message names both numbers: "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)"
   (DECISIONS 90: name the number).
-- **Engine (no change):** each street-door rule (`1_metadata_and_locations.toml:300-307`) gets a second `lt` item for
+- **Engine (no change):** each street-door rule gets a second `lt` item for
   Corruption, so it blocks only when **both** are under the level. AND of two items; no nested condition (B70).
 
 ## Rule 2 · wearing it out raises both

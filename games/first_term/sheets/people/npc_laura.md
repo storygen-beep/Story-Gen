@@ -1,6 +1,8 @@
-# [REVIEW] Person — Laura
+# [READY] Person — Laura
 
-> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 4: her kitchen invite "Come upstairs after." (Tuesday, her step 0) gets a written no, "\"Not tonight, Mom.\"", Love -1, one line from her ("Oh. Okay, sweetheart. It'll keep."). Row 14: the tidy check's "Ask what she saw in your room." screen is written from the tidy row below (Everyday): her panties on the bed, said low while Mark is at the table, her eyes on Ella's lap. Changed from the signed line: "The lace one." is cut, because the wardrobe has no lace underwear (only `plain_panties`). Built in `laura.py`.
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. She keeps warmth only; the build has no Want for her. The moment column names each step's kind and stage. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build.
+
+> **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 4: her kitchen invite "Come upstairs after." (Tuesday, her step 0) gets a written no, "\"Not tonight, Mom.\"", Love -1, one line from her ("Oh. Okay, sweetheart. It'll keep."). Row 14: the tidy check's "Ask what she saw in your room." screen is written from the tidy row below (Everyday): her panties on the bed, said low while Mark is at the table, her eyes on Ella's lap. Changed from the signed line: "The lace one." is cut, because the wardrobe has no lace underwear (only `plain_panties`).
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): step 4's "Stay where you are." pays Corruption +1 cap 59 (was cap 19, which could never pay behind its Curious gate); a sign on her body that she wants Ryan before step 4 turns on his name (step 3). Sections changed: Ladder, the seven columns, Leak and promise.
 
@@ -22,7 +24,7 @@
 | role | mom |
 | what she wants from her | to stay her good girl, and to be close to her |
 | what she visibly wants, each visit | a happy house; she wants @player nearer than she says |
-| what she keeps | want + warmth · her lock is **Love** (`warmth`); nothing of hers reads Want · also reads `laura_suspicion`, below |
+| what she keeps | warmth only: her lock is **Love** · also `laura_suspicion`, below. The build has no Want for her |
 | where she sleeps | `home_master_bedroom` |
 | what she calls her | "sweetheart" |
 | met | day 1, breakfast in the kitchen |
@@ -73,6 +75,21 @@ Every step's gate also says the drinks boost is off. Stage numbers: 20 is Curiou
 - **Jake at the door** (`laura_05_jake_at_the_door`): merged into Jake's step 3, Laura watching from the dark
   (`npc_jake.md`).
 
+## The eight ladder rules, checked against the build (2026-11-03)
+
+| rule | as built |
+|---|---|
+| 1 · a new witness, risk or yes each step | yes: a new secret or witness each step |
+| 2 · the top step is a payoff | yes: step 4, she comes and sees Ella |
+| 3 · one cut-off at most | yes: no cut-off; every step finishes |
+| 4 · he moves at least every other step | yes: her move is written on every step |
+| 5 · his meter is the lock | yes: Love gates 10, 20, 30; steps pay +5 |
+| 6 · a hot repeatable per stage | waived (declared on this sheet, signed by LO 2026-11-01) |
+| 7 · her voice changes with her level | no: no step reads her level |
+| 8 · something happens after the top step | yes: the gaps keep running |
+
+Failing, waivers not counted: 1 of 8. The ladder may be built (two fails stop it).
+
 ## Card goals (LO's play note, 2026-10-08)
 
 Each guidance card's goals are the step's real requirements: the meters, flags, place and hour in its
@@ -83,10 +100,10 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 
 | n | the moment | who sees or knows | what she risks | how Ella says yes | Laura's move | does it finish | what changes after |
 |---|---|---|---|---|---|---|---|
-| 1 | Laura gives her the blue dress she can't wear any more: "It never fit me like that." | Laura | — | she tries it on | the gift, and her hand on the hip | yes | the dress is Ella's; Laura's line on it |
-| 2 | two glasses poured; "Mark hasn't looked at me like that since the wedding." | Laura's secret is Ella's | — | she sits and drinks with her | the second glass, poured before Ella came down | yes | Ella knows she's lonely |
-| 3 | Ella zips her mother into her good dress. Mark calls from downstairs that he's going to the bar. Laura sits on the bed, dressed up, with nowhere to go | Ella; Mark, not looking | — | "You look beautiful, Mom." · or she says nothing | she asks to be zipped, then asks, "Do I still look like someone you'd look at?" Ryan's laugh comes up the stairs from the couch, and her hands stop on the zip: she looks at the door, not at Ella, and her chest rises fast under the slip (her want for Ryan, on her body, before step 4 says his name; shown only while Ryan is in the living room, his Saturday row ending 18:00; DECISIONS 124) | yes | `laura_lonely`: the alone-in-bed line now names this night |
-| 4 | through the gap: Laura comes, biting the back of her hand, and when her eyes open they're on the door, on Ella | **Laura sees Ella** | being caught watching her mother | she stays at the gap (Curious) | after: she doesn't pull the sheet up fast. "Go to bed, sweetheart." | **yes**: Laura finishes before she sees her | breakfast: "We don't talk about last night." · the gap changes |
+| 1 | *borrowed clothes, no act · stage 1, Good Girl* — Laura gives her the blue dress she can't wear any more: "It never fit me like that." | Laura | — | she tries it on | the gift, and her hand on the hip | yes | the dress is Ella's; Laura's line on it |
+| 2 | *a talk, no act · stage 1, Good Girl* — two glasses poured; "Mark hasn't looked at me like that since the wedding." | Laura's secret is Ella's | — | she sits and drinks with her | the second glass, poured before Ella came down | yes | Ella knows she's lonely |
+| 3 | *a talk, her want on her body · stage 1, Good Girl* — Ella zips her mother into her good dress. Mark calls from downstairs that he's going to the bar. Laura sits on the bed, dressed up, with nowhere to go | Ella; Mark, not looking | — | "You look beautiful, Mom." · or she says nothing | she asks to be zipped, then asks, "Do I still look like someone you'd look at?" Ryan's laugh comes up the stairs from the couch, and her hands stop on the zip: she looks at the door, not at Ella, and her chest rises fast under the slip (her want for Ryan, on her body, before step 4 says his name; shown only while Ryan is in the living room, his Saturday row ending 18:00; DECISIONS 124) | yes | `laura_lonely`: the alone-in-bed line now names this night |
+| 4 | *she watches by choice (the gap) · stage 2, Curious 20* — through the gap: Laura comes, biting the back of her hand, and when her eyes open they're on the door, on Ella | **Laura sees Ella** | being caught watching her mother | she stays at the gap (Curious) | after: she doesn't pull the sheet up fast. "Go to bed, sweetheart." | **yes**: Laura finishes before she sees her | breakfast: "We don't talk about last night." · the gap changes |
 
 **Her voice:** low line, "That's your mom. Go to bed." · high line, "She's lonely, and you can't stop
 watching her be lonely." Both on each step sheet.
@@ -109,7 +126,7 @@ watching her be lonely." Both on each step sheet.
 - **When:** a weeknight 22:00–23:00, the `laura_alone_in_bed` gap, after step 3 and after Ella has kept watching
   three times. The counter counts both gaps, the bedroom and the shower.
 - **The act** is Laura's, alone, shown to its end: her hand under the sheet, her breath, her thighs, biting the
-  back of her other hand so Mark won't hear. Crude words: her late column, "pussy, wet" (`spine/SP2_ladders.md:192`).
+  back of her other hand so Mark won't hear. Crude words: her late column, "pussy, wet" (`spine/SP2_ladders.md`).
   **LO confirms on the scene sheet.**
 - **What she whispers** as she comes: **"Ryan."** (LO, 2026-11-01). Ella hears it; her thought sits beside it. Flag
   `laura_said_ryan` set, for a later release. Nothing else of Laura's reads it this release.
@@ -134,9 +151,9 @@ Declared exception to taste rule 6: Laura isn't a heat ladder before step 4; the
 - **Laura C 7**, the kiss on the dark stairs, and **Laura C 8**, "It wasn't the wine." / "I'm your mother."
   (`laura_07_dark_stairs`, `laura_08_it_wasnt_the_wine`, sheets marked cut). Laura's climb toward Ella is gone;
   built step 6's promise, "Take me with you one night", goes with it.
-- **The 17 placeholder tease and touch screens** on her plain items (`laura.py:377`, `:380`). Never written;
+- **The 17 placeholder tease and touch screens** on her plain items. Never written;
   mother-daughter teases are against "good mom". The plain items stay.
-- **Want as her lock.** The meter stays; nothing of hers reads it.
+- **Want as her lock.** Dropped: the build gives her no Want meter.
 
 ## Everyday at home (system `home_life`, LO's picks, 2026-10-08)
 
@@ -210,7 +227,7 @@ awake. She never says where @player is; the engine can't see that.
 ## The towel at home (DECISIONS 98, LO, 2026-10-31)
 
 Laura's kitchen, living room (waiting up) and bedroom (only while she dresses, Saturday 17:00–18:30) hubs
-react to the towel, every visit. Built in `iterations/002/build_scripts/laura.py` (`laura_towel`).
+react to the towel, every visit.
 
 | her Love | her line (one of three) | "Let her fix it." (no Exhibitionism gate) |
 |---|---|---|
@@ -229,6 +246,13 @@ react to the towel, every visit. Built in `iterations/002/build_scripts/laura.py
 | `laura_suspicion` read twice | a meter is read |
 | Love read by every step gate | the men's numbers are read |
 
+## Walk-ins and acts from the heat proposal (signed 2026-11-03, built)
+
+Walk-ins: `home_living_room`, `home_master_bedroom`. Each row (when, what pays) is on that place sheet.
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_A.md` (signed with the a2 sheets, DECISIONS 125).
+
 ## Why — the source of each key choice
 
 | key choice | source |
@@ -237,7 +261,7 @@ react to the towel, every visit. Built in `iterations/002/build_scripts/laura.py
 | the release-1 ladder, four steps, Love as her lock, the shower gap, "Ryan.", the cuts | `proposals/LAURA_R1_LADDER.md`, signed by LO 2026-11-01 (DECISIONS 99–111) |
 | two suspicion readers | LO, 2026-10-08 (question 5) |
 | the raise sizes, the 50 | LO, 2026-10-08 (question 20) |
-| first-match row order | `v2.py:4304-4318` |
+| first-match row order | the engine takes the first matching row |
 | her lines per clothing state | guess |
 | her everyday items and lines | LO, 2026-10-08 (the everyday picks) · lines and numbers guess |
 | messages per reply | LO's play note, 2026-10-08 (chats wait for her reply) · lines guess |

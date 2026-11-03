@@ -1,5 +1,7 @@
 # [READY] Scene — master_door_peek
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. want, next step and hook rows.
+
 > Signed by LO: LO, 2026-10-29 ("sign all", in chat).
 
 > Written 2026-10-29 from LO's "go" in chat (reader item 4: the door said
@@ -12,6 +14,9 @@
 | when it shows | (a) both inside and she saw `master_door_saturday_night` within 24 hours, so "The door's ajar." is off · (b) Mark inside and Laura not (she is on the stairs: `came_home_late`) |
 | gate | none |
 | who | Mark · Laura when she is in; neither sees her |
+| want | Laura's, case (a): awake beside him, her nightdress still bunched at her waist |
+| next step | none: it pays nothing |
+| hook | none on purpose: it fills the hour |
 | what she wears here | not named |
 | BRAKE | none needed: it pays nothing |
 | raises | none · no ladder number moves |

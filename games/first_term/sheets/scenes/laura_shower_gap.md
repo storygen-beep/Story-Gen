@@ -1,5 +1,7 @@
 # [READY] Scene — laura_shower_gap
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the gate row reads `laura_step` 2 as built; want, next step and hook rows. the explicit beats as built, measured. file and line cites cut.
+
 > **Changed 2026-11-01 after the build, signed by LO 2026-11-01 ("Signed, build them")** (the reader's FAILs; LO's picks in chat): the gap opens after Laura's step 2 (LO's pick 2b: her want is shown first).
 
 > **New 2026-11-01, signed by LO 2026-11-01 ("Go ahead")** (DECISIONS 99–114). From Laura's signed release-1 ladder
@@ -10,13 +12,16 @@
 |---|---|
 | system · place | the way up (DECISIONS 78, 79, 82) · `home_bathroom`, from the hall door |
 | where · when | the bathroom door · Sat 16:30–17:00, Laura in the shower (new row in her schedule) · door option "The bathroom door won't shut." in place of the plain way in during that half hour |
-| gate | none: open at Good Girl · Laura present |
+| gate | `laura_step` gte 2 · Laura present |
 | who | Laura, 41, her mother; she never sees her |
+| want | Laura's: her hand on her clit under the water, alone |
+| next step | three watched gaps open her step 4 (`laura_04_she_saw_you`) |
+| hook | each watch adds 1 to `laura_gaps_watched` |
 | what she wears here | not named (she's in the shower) |
 | BRAKE | once a week: the window is Saturday only, plus a 20-hour flag as her bedroom gap (`laura_shower_seen`) |
 | raises | the look: none · "Keep watching.": corruption add +1, cap 19 · `laura_gaps_watched` add +1 (counts toward her step 4) |
 | the crude-word ceiling | the park's, as her bedroom gap: tits, nipples, ass, wet, clit, naked, moan · no pussy, cunt, fuck, cum, cock |
-| truth | weekly: no "first time", no history. "The lock sticks halfway, the way it always does" is the opening's fact (`2_one_shots.toml`) |
+| truth | weekly: no "first time", no history. "The lock sticks halfway, the way it always does" is the opening's fact |
 | mixed act? | no: watching, unseen. Corruption only (`meters.md` rule 3) |
 
 ## Branch map — one row per screen
@@ -58,3 +63,12 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01.
 | row | was | now |
 |---|---|---|
 | gate | none: open at Good Girl | `laura_step` gte 2: after the wine, "Mark hasn't looked at me like that since the wedding." Her want is shown before the gap |
+
+## Explicit beats as built (measured 2026-11-03)
+
+One row per explicit screen in the built game: 3 or more words on the build's own list, the count `gates.py` uses. A screen's variants fold into it, so a screen can hold more words than one visit shows. "Sits at" is the highest of the person's crude columns (SP2) that the screen uses. Where a screen's text differs from the prose above, the build is what plays.
+
+| screen | words | counted words | sits at | the text |
+|---|---|---|---|---|
+| `steam` | 146 | 9: nipples ×2, clit ×2, naked, tits, ass, moan, fuck | Laura's late column; also ass, clit, fuck | on this sheet above |
+| `watch` | 145 | 7: naked, clit, tit, nipple, moan, ass, nipples | Laura's late column; also ass, clit | on this sheet above |

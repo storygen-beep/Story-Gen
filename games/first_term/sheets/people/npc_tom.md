@@ -1,5 +1,7 @@
 # [READY] Person — Tom
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The moment column names each step's kind and stage. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 1 to 19:00.
+
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the release-1 ladder, from `proposals/TOM_R1_LADDER.md` (signed 2026-11-01). Changed: his lines, Ladder, the seven columns, Leak and promise, the phone loop, Cut and later, Rows a gate needs. Everything else as signed.
 
 > **Changed 2026-10-29, re-signed by LO 2026-10-29** (DECISIONS 87–88): his shift text books the day's first shift; his Friday text is the only way into after close; a no-show costs his Want.
@@ -46,12 +48,27 @@ A ceiling, never a floor. LO took these, 2026-10-08.
 
 | n | canvas | where | when | gate | raises | the no | guidance card line |
 |---|---|---|---|---|---|---|---|
-| 1 | `tom_01_the_apron`, reworked: strict | `cafe` | Mon–Sat 14:30–22:00 | `cafe_job` | want add +10 | "I can tie my own apron." (counts; his Power −5) | Take a shift at the café: Tom is behind the counter. |
+| 1 | `tom_01_the_apron`, reworked: strict | `cafe` | Mon–Sat 14:30–19:00 | `cafe_job` | want add +10 | "I can tie my own apron." (counts; his Power −5) | Take a shift at the café: Tom is behind the counter. |
 | 2 | `tom_03_the_tip_jar` | `cafe` (the back room) | Mon–Sat 14:30–22:00 | step 1 · five shifts worked (was Exhib. 20 · his Want 20) | want add +5 · power add −5 · `knows_tip_jar` set | walk past (parked) | A café shift, the back room: watch the tip jar. |
 | 3 | `tom_03_not_by_the_window` (new, top step) | `cafe` (the back room) | Mon–Sat 14:30–22:00 | step 2 · `cafe_footfall` 15 · `cafe_name` −5 or lower | the window rule set | on the step sheet (LO confirms) | A café shift after a customer's hand: Tom wants a word in the back. |
 | — | locked | his card | — | — | — | — | "Tom, later. (Needs Corruption 60.)" |
 
 Every step's gate also says the drinks boost is off.
+
+## The eight ladder rules, checked against the build (2026-11-03)
+
+| rule | as built |
+|---|---|
+| 1 · a new witness, risk or yes each step | yes: his hands, his secret, his rule |
+| 2 · the top step is a payoff | waived (declared on this sheet, signed by LO 2026-11-01) |
+| 3 · one cut-off at most | yes: no cut-off; every step finishes |
+| 4 · he moves at least every other step | yes: his move is written on every step |
+| 5 · his meter is the lock | waived (declared on this sheet, signed by LO 2026-11-01) |
+| 6 · a hot repeatable per stage | yes: the café's three levels |
+| 7 · her voice changes with her level | no: steps 1 and 3 read her level, step 2 doesn't |
+| 8 · something happens after the top step | yes: the café shifts go on under his rule |
+
+Failing, waivers not counted: 1 of 8. The ladder may be built (two fails stop it).
 
 ## Card goals (LO's play note, 2026-10-08)
 
@@ -63,14 +80,14 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 
 | n | the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
 |---|---|---|---|---|---|---|---|
-| 1 | her first tray: he catches her apron strings and reties them, properly, because she did it wrong. "Tables first. Phone in the back. Smile." His hands stay one second longer than tying takes | Tom | her first day | "Yes, boss." · or "I can tie my own apron." | the retie, and the second he doesn't let go | yes | the job's rules; her uniform is the normal one until she buys or picks another |
-| 2 | the back room: Tom folding twenties out of the tip jar into his apron. Her twenties | Tom's secret is hers | being caught seeing it | "Busy night?" | "Not a word." His ears go red | yes | `knows_tip_jar`; Tom owes her; his line at the counter changes |
-| 3 | he's watched a customer's hand on her, and her letting it stay. In the back: "Reputation's going. The tables are full." Then: "Not by the window." | Tom; the room behind the door | her job, his café's name | "Then where?" · "Yes, boss." · "It's my tips." | the line he draws, and that he doesn't stop it | yes | the window rule: level-3 café scenes move away from the window; his look at her changes; his card ends on the locked line |
+| 1 | *a brush from him · stage 1, Good Girl* — her first tray: he catches her apron strings and reties them, properly, because she did it wrong. "Tables first. Phone in the back. Smile." His hands stay one second longer than tying takes | Tom | her first day | "Yes, boss." · or "I can tie my own apron." | the retie, and the second he doesn't let go | yes | the job's rules; her uniform is the normal one until she buys or picks another |
+| 2 | *accident (his secret, found) · stage 1, Good Girl* — the back room: Tom folding twenties out of the tip jar into his apron. Her twenties | Tom's secret is hers | being caught seeing it | "Busy night?" | "Not a word." His ears go red | yes | `knows_tip_jar`; Tom owes her; his line at the counter changes |
+| 3 | *a talk, his rule on her · stage 2, Curious 20 (her answer)* — he's watched a customer's hand on her, and her letting it stay. In the back: "Reputation's going. The tables are full." Then: "Not by the window." | Tom; the room behind the door | her job, his café's name | "Then where?" · "Yes, boss." · "It's my tips." | the line he draws, and that he doesn't stop it | yes | the window rule: level-3 café scenes move away from the window; his look at her changes; his card ends on the locked line |
 
 **Her voice:** a low and a high line on each step sheet.
 
 **Step 1, cut from the built step:** "Like that. You want it to show your waist." and "Regulars tip the pretty
-ones." **Cut from his hire line** (`tom.py:41`): "Regulars tip the pretty ones, so you'll do fine." It becomes
+ones." **Cut from his hire line**: "Regulars tip the pretty ones, so you'll do fine." It becomes
 "Eight a shift, plus tips. Be on time." **Kept:** his hands one second too long.
 
 ### Leak and promise
@@ -123,6 +140,8 @@ Each follow-up waits for her reply (`after_round`), and a different answer follo
 |---|---|
 | shifts worked, `cafe_footfall`, `cafe_name` read by his step gates | a meter is read |
 | the window rule read by the café's level-3 scenes | a flag is read |
+
+**Copy:** lines here were rewritten from `proposals/COPY_FIXES_C.md` (signed with the a2 sheets, DECISIONS 125).
 
 ## Why — the source of each key choice
 

@@ -1,5 +1,7 @@
 # [READY] Place — Zoe's Bathroom
 
+> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here.
+
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
 > New 2026-10-08 (question 47). Id `zoe_bathroom`.
@@ -28,6 +30,16 @@
 |---|---|---|---|---|---|
 | fix your face | need | hygiene | hygiene add +5 | once a night | yes, one line by what she wears |
 | the queue, party night | work | parties | none · a line by her stage | none needed: it writes nothing | yes, one line |
+
+## Built from the heat proposal (signed 2026-11-03)
+
+The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has here:
+
+**Acts, rungs and pools.**
+
+| what | where | buttons and pays |
+|---|---|---|
+| Jake at the party (A7) | party night, after Jake's step 4 | "Lock the door." Bold 40, Corruption +1, cap 59 · "Leave it unlocked." Hungry 60, +1, cap 79 · "Not at Zoe's." pays 0 |
 
 ## Why — the source of each key choice
 
