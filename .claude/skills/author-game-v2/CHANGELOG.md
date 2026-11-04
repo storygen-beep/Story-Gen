@@ -5,6 +5,23 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-04 — the engine can put back what she came in
+
+- `references/engine.md`: documents two new wardrobe actions, `remember_outfit` and `restore_outfit`, with `unless_wearing`
+  (LO: "she always leaves in what she came in"). A description of the engine, not a new rule. Verified:
+  `apps/game_generation/tests/test_kept_outfit.py` 8 passed.
+
+## 2026-11-04 — a walk-in pays the refill only when the screen shows her doing it; the reader honours a waiver
+
+- `references/the-surfaces.md` R3: one sentence. LO: "a walk-in pays the refill only when the screen shows her doing it."
+  No check: whether the screen shows the act needs a reader. On first_term the paying walk-ins (sink, nap, shower,
+  tub) all show it.
+- `.claude/agents/v2-reader.md`: a test LO waived in `release_page.reader_waivers` gets N/A, naming the waiver (LO: "record
+  it as decided so the reader stops failing it").
+- Verified: `pytest scripts/tests` 968 passed; `--selfcheck` green; `cite_check --strict` 0.
+
+---
+
 ## 2026-11-04 — LO's 27 skill answers applied (pass3/PICKS.md)
 
 **Why.** LO, 2026-11-03, on the 27 open skill rows of first_term's third alignment pass: *"your picks on all

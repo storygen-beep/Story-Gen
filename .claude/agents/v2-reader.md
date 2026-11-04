@@ -69,4 +69,5 @@ cannot quote a line for is not a FAIL — say N/A and why.
 
 - write, edit or delete anything under `games/`;
 - judge anything the scoreboard already prints (`gates.py <slug>`) — read it first and leave those alone;
+- fail a test LO has waived for that canvas in `release_page.reader_waivers`: give it N/A and name the waiver;
 - invent an earlier scene for test 1: name the canvases you checked.

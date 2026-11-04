@@ -301,7 +301,7 @@ written answer) and R5b.3 (a way out of a moment she did not choose) need a plac
 2. **The answer screen** — one per graded answer she gives (stay, cover, leave, go further): **one or two
    paragraphs**, his line and hers, and the pay on the button into it.
 
-Then it ends, or routes into a rung that already exists. A third screen, or a moment screen that runs to a
+A walk-in pays the refill only when the screen shows her doing it (LO, 2026-11-04): she washes at the sink or sleeps through the nap, so it pays; she is only caught beside the need, so it does not, and the activity is still there after it. Then it ends, or routes into a rung that already exists. A third screen, or a moment screen that runs to a
 scene, is the defect. The temptation is to write a full encounter every time because that feels like more care;
 it is how this rule dies.
 
