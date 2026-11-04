@@ -1858,7 +1858,7 @@ def lint_thoughts_over_speech(game):
         if not (said or thought):
             continue
         scope += 1
-        if thought > said:
+        if thought - _thought_in_level_bands(c) > said:   # only one band of her voice shows on a visit
             over.append(f"{c.get('id')}: {thought} thought words against {said} spoken")
     if not scope:
         return "", []
@@ -3278,6 +3278,9 @@ def _school_split(game, state):
             npc[f"{node.get('npc_id') or '?'}.{key}"] += 1
         elif key in tiers:
             player[key] += 1
+    for key, n in _voice_only_sites(game).items():   # a line of hers by level opens nothing (H4, LO 2026-11-04)
+        if player.get(key):
+            player[key] = max(0, player[key] - n)
     return player, npc
 
 
@@ -4274,7 +4277,7 @@ def _week_income(game, currency):
         if not _rep_of(t):
             times, how = 1, "once"
         else:
-            cap = t.get("max_triggers_per_day") or 1
+            cap = t.get("max_triggers_per_day") or _daily_flag_chain(canvas_reads_false & sets_on_canvas & cleared)
             times, how = days_per_week * cap, f"{cap}/day × {days_per_week} days"
         mean_total += best_mean * times
         max_total += best_max * times
@@ -4599,6 +4602,8 @@ def _ladder_earnable(item, step_canvas_id, counter, n, game, ctx, opening_ids=fr
     """None if this gate item can be earned before step N, else why not."""
     kind, key, op, val = _cond_parts(item)
     npc = item.get("npc_id") or item.get("npc")
+    if kind == "trait" and key == "rent_short_weeks" and ((game.get("settings") or {}).get("rent") or {}).get("enabled"):
+        return None   # the engine adds 1 every short Sunday (setup.carryRent), so a short week earns it
     start_flags, start_traits, ever_set, written = ctx
     open_setters = [c for c in game.get("canvases") or []
                     if c.get("id") != step_canvas_id and _ladder_reachable(c, opening_ids)
@@ -4787,11 +4792,12 @@ def ladder_problems(game, state, notes=None):
                 problems.append(f"{tag}: declared {when}, but the canvas has no hours of its own — "
                                 f"it fires at any time")
             else:
-                c_days = set()
+                also = st.get("when_also") or {}      # a second window the ledger declares for the step
+                c_days, days = set(), list(days) + [_ladder_day(d) for d in also.get("days") or []]
                 bad = []
                 for s in scheds:
                     c_days |= set(s.get("weekdays") or range(7))
-                    if (s.get("start_time"), s.get("end_time")) != (frm, to):
+                    if (s.get("start_time"), s.get("end_time")) not in ((frm, to), (also.get("from"), also.get("to"))):
                         bad.append(f"{s.get('start_time')}-{s.get('end_time')}")
                 if bad:
                     problems.append(f"{tag}: declared {frm}-{to}, the canvas's hours are "
@@ -4813,14 +4819,14 @@ def ladder_problems(game, state, notes=None):
             if why:
                 problems.append(f"{tag}: {why}")
             actual = {_ladder_cond_key(it) for it in conds
-                      if _ladder_cond_key(it)[:2] != ("trait", counter)
+                      if _ladder_cond_key(it)[:2] != ("trait", counter) and not _ladder_is_moment(it)
                       and not (it.get("flag_key") == "dev_mode_enabled")}
-            declared_items = st.get("gate") or []
+            declared_items = list(st.get("gate") or []) + list(st.get("also_needs") or [])
             declared = {_ladder_cond_key(it) for it in declared_items}
             for k in sorted(actual - declared, key=str):
                 problems.append(f"{tag}: the canvas also needs {_ladder_key_text(k)}, "
                                 f"which the ladder does not declare")
-            for k in sorted(declared - actual, key=str):
+            for k in sorted(declared - actual - _ladder_window_flags(conds, st), key=str):
                 problems.append(f"{tag}: the ladder declares {_ladder_key_text(k)}, "
                                 f"which the canvas does not check")
             # ── the counter moves ──
@@ -5656,7 +5662,7 @@ def lint_named_before_met(model, game):
     # second one misses a character named on a mid-arc milestone gated long after the
     # hub is in use.
     met, _cast, _owners, _cold = _fh_cast_met(game)
-    has_meeting = set(met)
+    has_meeting = set(met) | _met_by_one_time_scene(game)
 
     start = (game.get("project") or {}).get("starting_canvas")
     opening = next((c for c in (game.get("canvases") or [])
@@ -15183,7 +15189,7 @@ _TR_DAY_RX = re.compile(r"\b(?:it's|today's|today is|on a|this|every) (monday|tu
 
 # H65 (LO 2026-11-03): a forward word names a time ahead, not now, so the gate skips it:
 # "in the morning", "by morning", "tomorrow ..." ("tomorrow morning", "tomorrow evening").
-_TR_FORWARD = re.compile(r"(?:\bin the|\bby|\btomorrow)\s+$")
+_TR_FORWARD = re.compile(r"(?:\bin the|\bby|\btomorrow|\b(?:mon|tues|wednes|thurs|fri|satur|sun)day)\s+$")
 
 
 def _day_word_fits(game):
@@ -15645,7 +15651,7 @@ def _descent_exempt_keys(state):
     M8: a need is meant to shut something while it is empty), performance meters (S7) and
     spent meters (`"spent": true`, E22)."""
     return {str(n.get("key")) for n in _declared_needs(state) if n.get("key")} \
-        | _performance_meter_keys(state) | _spent_meter_keys(state)
+        | _performance_meter_keys(state) | _spent_meter_keys(state) | _opens_at_bottom_keys(state)
 
 
 # C7 c + S11 a: only money paid for the act on that screen is sex for pay. A system card in
@@ -17186,7 +17192,7 @@ def _g2_noshow_flag(d):
 
 
 def _g2_costs_something(h):
-    return any(isinstance(ef, dict) and _effect_value_sign(ef.get("value")) < 0
+    return any(isinstance(ef, dict) and (_effect_value_sign(ef.get("value")) < 0 or _hold_rises(ef))
                for ef in h.get("effects") or []) or bool(h.get("costs"))
 
 
@@ -18120,6 +18126,106 @@ def _sleepers_on(c, bound):
     text = " ".join(str(b.get("content") or "") for n in c.get("nodes") or []
                     for b in _flat_blocks(n.get("blocks")))
     return set(bound) if _TR_SLEEP.search(text) else set()
+
+
+# ── false-alarm fixes (LO 2026-11-04, item 5 of his list) ────────────────────
+_LADDER_MOMENT_TYPES = {"npc_at_location", "clothing_item", "clothing_slot", "worn_type", "worn_exposure",
+                        "time_of_day", "weekday", "hours_since_flag"}
+
+
+def _ladder_is_moment(item):
+    """A condition that says when the moment can be true (who is in the room, what she has on, how long
+    since a flag), not what the player must earn. A card has no goal for it, so the ladder never declares it."""
+    return item.get("type") in _LADDER_MOMENT_TYPES
+
+
+def _ladder_window_flags(conds, step):
+    """A declared `flag is_true` is checked when the canvas reads the same flag through hours_since_flag:
+    a time since a flag holds only once the flag is set."""
+    keys = {it.get("flag_key") for it in conds if it.get("type") == "hours_since_flag"}
+    return {("flag", k, "is_true") for k in keys}
+
+
+def _opens_at_bottom_keys(state):
+    """A falling meter whose bottom opens content (`"opens_at_bottom": true` in board.meters): its low
+    read opens a scene, so it is no descent wearing an ascent's clothes (I79, LO 2026-11-04)."""
+    meters = ((state or {}).get("board") or {}).get("meters") or []
+    rows = meters if isinstance(meters, list) else list(meters.values())
+    return {str(m.get("key") or m.get("id")) for m in rows if isinstance(m, dict) and m.get("opens_at_bottom")}
+
+
+def _met_by_one_time_scene(game):
+    """People a one-time scene names and whose id or first name its met flag carries: `kayla_met` set in a
+    scene that names Kayla is a meeting, hub or no hub (C54, LO 2026-11-04)."""
+    out = set()
+    for n in game.get("npcs") or []:
+        first = str(n.get("name") or "").split()[0] if n.get("name") else ""
+        if not first:
+            continue
+        flag = f"{first.lower()}_met"
+        for c in game.get("canvases") or []:
+            if ((c.get("trigger") or {}).get("is_repeatable")) or flag not in json.dumps(c.get("nodes"), default=str):
+                continue
+            if first in json.dumps(c.get("nodes"), default=str):
+                out.add(n.get("id"))
+                break
+    return out
+
+
+def _voice_only_sites(game):
+    """Trait reads on groups that hold only her own line or thought: her voice changing with her level
+    gates no access, so `the climb is where you said it is` does not count them as climb."""
+    sites = collections.Counter()
+
+    def rec(blocks):
+        for b in blocks or []:
+            if not isinstance(b, dict):
+                continue
+            kids = b.get("blocks") or (b.get("props") or {}).get("blocks") or []
+            if b.get("type") == "group" and kids and all(
+                    k.get("type") == "thought_bubble"
+                    or (k.get("type") == "dialog" and (k.get("props") or {}).get("speaker") == "player") for k in kids):
+                for path, node in _walk_paths({k: v for k, v in b.items() if k != "blocks"}):
+                    if node.get("type") == "trait" and node.get("subject") != "npc" and node.get("trait_key"):
+                        sites[str(node["trait_key"])] += 1
+            rec(kids)
+    for c in game.get("canvases") or []:
+        for nd in c.get("nodes") or []:
+            rec(nd.get("blocks"))
+    return sites
+
+
+def _thought_in_level_bands(c):
+    """Words of thought inside groups that read her own meter: bands of one line, and a visit shows one."""
+    total = 0
+
+    def rec(blocks):
+        nonlocal total
+        for b in blocks or []:
+            if not isinstance(b, dict):
+                continue
+            kids = b.get("blocks") or (b.get("props") or {}).get("blocks") or []
+            if b.get("type") == "group" and kids and all(k.get("type") == "thought_bubble" for k in kids) \
+                    and any(it.get("trait_key") in ("corruption", "exhibitionism") and it.get("subject") != "npc"
+                            for it in ((b.get("conditions") or {}).get("items") or [])):
+                total += sum(len(str(k.get("content") or "").split()) for k in kids)
+            rec(kids)
+    for nd in c.get("nodes") or []:
+        rec(nd.get("blocks"))
+    return total
+
+
+def _hold_rises(ef):
+    """His hold on her rising costs her too: Power up on the man she owes, suspicion up on her mother."""
+    key = str(ef.get("trait") or ef.get("trait_key") or "")
+    return _effect_value_sign(ef.get("value")) > 0 and key.endswith(("power", "dominance", "suspicion"))
+
+
+def _daily_flag_chain(flags):
+    """Visits a day a canvas allows through numbered daily flags (cafe_shift_1_today .. _3_today is three
+    shifts a day). Unnumbered flags are one visit, as before."""
+    fams = collections.Counter(re.sub(r"\d+", "#", f) for f in flags if re.search(r"\d", f))
+    return max(fams.values(), default=1)
 
 
 def main():

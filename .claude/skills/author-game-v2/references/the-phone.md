@@ -251,7 +251,7 @@ A phone that keeps private variables nothing else reads is the bolted-on phone, 
 
 **Ignoring a text costs more than saying no.** Course of Temptation's booty call charges −20
 friendship and −20 romance for "Ignore it", and only −2 / −3 for "no thanks" (round 9a §1a). A
-thread she can leave unread for free is a thread she will leave unread. Checked: gates *ignoring a thread costs* and *a no-show costs*.
+thread she can leave unread for free is a thread she will leave unread. Checked: gates *ignoring a thread costs* and *a no-show costs*. A rise in his Power or her suspicion counts as a cost: it is his hold on her (LO, 2026-11-04).
 
 **A no-show costs.** The reply books a meeting; missing it costs Course of Temptation −25 romance,
 −25 lust and −25 friendship. The booking and its reminder are P10.
