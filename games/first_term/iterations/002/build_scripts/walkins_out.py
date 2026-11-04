@@ -165,11 +165,11 @@ for days, a, b in (((0, 1, 2, 3, 4), "14:30", "18:00"), ((4,), "20:00", "22:00")
 # training row (built differently from the proposal's 14:45-15:00: before 15:00 Jake has no row, so a line placing him
 # in the gym would be untrue). Jake is in it only while his row has him there (once she has his number); before that
 # the team is strangers and he is not named.
-# A group look that happens to her in a sports bra. Her answer on Exhibitionism: go 0, finish your set (Daring) +1 cap 39.
+# A group look that happens to her in a sports bra. Her answer on Exhibitionism: go 0, finish your set (Watched) +1 cap 79.
 # ═════════════════════════════════════════════════════════════════════════════
 JN = here(J, "campus_gym")
 walkin("walkin_gym_team", "The team comes in", "campus_gym",
-    "B10, the team: in for training on Tuesday or Thursday at 15:00, they walk in on her at the bench. Jake leads them while his row has him there; nobody has a meter. Her answer on Exhibitionism: go 0, finish your set in her sports bra (Daring) +1 cap 39.",
+    "B10, the team: in for training on Tuesday or Thursday at 15:00, they walk in on her at the bench. Jake leads them while his row has him there; nobody has a meter. Her answer on Exhibitionism: go 0, finish your set in her sports bra (Watched: a group seeing her is stage 4) +1 cap 79.",
     [],
     [P("You're flat on your back on the bench with the bar over your chest, alone in the free-weights corner."),
      GC(cond(*SPORTS_ONLY), P("Just your sports bra and your bottoms. Your tits strain the bra every time you press the bar up.")),
@@ -189,8 +189,9 @@ walkin("walkin_gym_team", "The team comes in", "campus_gym",
     [go("Grab your things and go.", node="t_go", mins=2),
      # the set's energy is a price on the button, which the engine refuses (greyed, "Requires 10 Energy") when she
      # hasn't got it; an unclamped -10 on the way out took her below 0 (engine.md §21, §27; pass 3 J73)
-     # LO, 2026-11-04 (Q13): Daring from 20 up, no top; it still pays only to 39 (the cap)
-     go("Finish your set.", node="t_set", mins=15, cond_=cond(*SPORTS_ONLY, DARING), eff=[pay("exhibitionism", 39)],
+     # LO, 2026-11-04: her staying for a dozen of them is a group seeing her, stage 4 (the-heat-ladder.md H1). Below it she
+     # goes, and t_go's bands and her band line are the mild answer.
+     go("Finish your set.", node="t_set", mins=15, cond_=cond(*SPORTS_ONLY, trait("exhibitionism", "gte", 60)), eff=[pay("exhibitionism", 79)],
         costs=[{"trait": "energy", "value": 10}])],
     records=["team_saw_gym"], extra=[
         # reader batch 4 (pass 3): no hoodie exists in the catalog, so she covers up with what she has
@@ -792,7 +793,7 @@ her_band_line(CANVASES, {
     "walkin_canteen_jake": ("exhibitionism", [
         "Three of them looking at you. You want to eat and get out.",
         "Three of them looking. You don't mind it the way you thought you would.",
-        "Let them forget their lunch. You're not hiding from anybody.",
+        "Not three of them at once. Not yet. But part of you wants to see how long they'd keep looking.",
         "You want all three still looking when you stand up."]),
     "walkin_quad_team": ("exhibitionism", [
         "Six of them, and your skirt's round your hips. Fix it. Fix it now.",

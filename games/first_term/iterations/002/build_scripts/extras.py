@@ -106,14 +106,14 @@ for npc, met, text, tip, where in mute:
 # Each line names the act ONE RUNG BELOW the value it climbs to, the one that pays her there, never the button the
 # value itself opens (engine.md §23 "Check the label is not circular"; pass 3 J37): the stacks' shelf (Corruption 0)
 # to 5, one aisle closer (5) to 10, channel 5's sound (10) to 15; the shower walk-in's towel (Exhibitionism 0) to 5,
-# the unlocked shower door (5) to 10, the open curtain (10) to 15. Each of these pays +1 there, cap 19.
+# the unlocked shower door (5) to 15. Each of these pays +1 there, cap 19. The curtain opens at 20 now (LO, 2026-11-04).
 SMALL_RUNGS = {
     ("corruption", 0): [(5, "Corruption 5: stay behind the shelf in the library's back stacks"),
                         (10, "Corruption 10: move one aisle closer in the library's back stacks"),
                         (15, "Corruption 15: turn the sound up on channel 5")],
     ("exhibitionism", 0): [(5, "Exhibitionism 5: when someone walks in on your shower, don't grab the towel straight away"),
                            (10, "Exhibitionism 10: leave the shower door unlocked"),
-                           (15, "Exhibitionism 15: leave the changing-room curtain open when you try clothes on")],   # pass 3 G15 (round 2): the shop pays from Exhibitionism 10, not from the stage floor, so the line names the act, not the place
+                           (15, "Exhibitionism 15: keep leaving the shower door unlocked")],
 }
 
 # ── her two stages: what the next rung opens (the-voice.md R2; DECISIONS: stages at 20/40/60) ──
@@ -125,7 +125,7 @@ for trait_k, bands in [
                      "Reach Bold (Corruption 40): touch yourself in your bed, in the shower or in a stall in the women's toilet; watch the couple in the park"),
                     # DECISIONS 124: release 1 reaches Hungry
                     (40, 60, "Bold. Hungry opens at 60: the taboo at home, strangers who can see, a room watching.",
-                     "Reach Hungry (Corruption 60): get on Ryan's couch with him, pull Jake into the gym locker room"),   # pass 4: a watched dare now needs Corruption 60, so it pays nothing at Bold
+                     "Reach Hungry (Corruption 60): get on Ryan's couch with him, pull Jake into the gym locker room"),   # pass 4: a watched dare now needs Corruption 60, so it pays nothing at Bold   # the street pays Corruption only on a level's first day out (played 2026-11-04), so no card sends her there for it
                     (60, 80, "Hungry. Shameless is the next release: a crowd, free use.",
                      "Shameless (Corruption 80) opens in the next release")]),
     ("exhibitionism", [(0, 20, "Covered. Daring opens at 20: no bra, a short skirt out of the house, and bigger tips at the café if you let them look.",
@@ -134,11 +134,11 @@ for trait_k, bands in [
                         "Reach Daring (Exhibitionism 20): let someone walk in on your shower; once you're Curious, run in the park and walk the street"),   # pass 4 G15: the park and street dress codes need Curious while she is Covered   # round 2: "at home" named the whole house, which pays nothing at 0
                        (20, 40, "Daring. Showing opens at 40: no panties out, naked for someone you know.",
                         # pass 3 G15: the garden pays only from Showing (garden_sun), so it is not a way through Daring
-                        "Reach Showing (Exhibitionism 40): let them look at the campus gym and in the lecture hall, take your bra off in the women's toilet, let the towel slip in the kitchen or the living room"),
+                        "Reach Showing (Exhibitionism 40): let them look at the campus gym and in the lecture hall, run in the park, walk the street in your short skirt, leave the changing-room curtain open, take your bra off in the women's toilet, let the towel slip in the kitchen or the living room"),   # LO, 2026-11-04: the street and park pay to 39 again; the curtain opens here
                        (40, 60, "Showing. Watched opens at 60: a room watching, a stranger, your feed.",
-                        # pass 3 G15: what pays while she is Showing (garden_sun, park_run, the wind and the street, the
-                        # towel drops in the hall and living room); nothing repeatable pays it in the lecture hall or gym
-                        "Reach Watched (Exhibitionism 60): show off on the lounger in the garden, let the wind have your skirt on the street, drop the towel in the kitchen or the living room"),
+                        # what pays while she is Showing (garden_sun, the wind and the street with no panties, cap 59, the
+                        # towel drops); the park stops at 39 (LO, 2026-11-04), and nothing repeatable pays it in the lecture hall or gym
+                        "Reach Watched (Exhibitionism 60): show off on the lounger in the garden, walk the street with no panties and let the wind have your skirt, drop the towel in the kitchen or the living room"),
                        (60, 80, "Watched. Posing for the class and a crowd come in the next release.",
                         "On Display (Exhibitionism 80) opens in the next release")])]:
     for lo, hi, text, label in bands:

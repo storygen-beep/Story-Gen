@@ -724,11 +724,11 @@ NPC_FEED = {
 STAGE_WAY = {
     ("corruption", 20): "stay and look: the park couple, the library stacks, a door left open at home at night",
     ("corruption", 40): "touch yourself in your bed, in the shower or in a college toilet stall; watch the couple in the park",
-    ("corruption", 60): "get on Ryan's couch with him, pull Jake into the gym locker room",   # pass 4: the watched dares need Corruption 60 now
+    ("corruption", 60): "get on Ryan's couch with him, pull Jake into the gym locker room, walk the street with nothing under your skirt",   # pass 4: the watched dares need Corruption 60 now
     # pass 4 G15: the park and street dress codes open no bra / a short skirt at Corruption 20 for a Covered player
     ("exhibitionism", 20): "let someone walk in on your shower; once you're Curious, run in the park and walk the street",
-    ("exhibitionism", 40): "let them look at the campus gym and in class, take your bra off in the college toilet, let the towel slip at home",
-    ("exhibitionism", 60): "show off on the lounger in the garden, let the wind have your skirt on the street, drop the towel at home",
+    ("exhibitionism", 40): "let them look at the campus gym and in class, run in the park, walk the street in your short skirt, leave the changing-room curtain open, take your bra off in the college toilet, let the towel slip at home",
+    ("exhibitionism", 60): "show off on the lounger in the garden, walk the street with no panties and let the wind have your skirt, drop the towel at home",
 }
 
 

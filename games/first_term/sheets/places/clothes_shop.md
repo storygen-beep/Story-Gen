@@ -1,4 +1,5 @@
 # [REVIEW] Place — Clothes Shop
+> Changed 2026-11-04, LO's answers: the curtain needs Exhibitionism 20 and pays to cap 39 (B); waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
 
@@ -42,7 +43,7 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has h
 | what | where | buttons and pays |
 |---|---|---|
 | the changing-room mirror (A4) | trying clothes on | "Touch yourself." Curious 20, Corruption +1, cap 39 · "Not here." pays 0 |
-| the curtain (C5) | trying clothes on | "Leave the curtain where it is." Exhibitionism 10, +1, cap 19 |
+| the curtain (C5) | trying clothes on | "Leave the curtain where it is." Exhibitionism 20, +1, cap 39 |
 
 ## Rows a gate needs
 

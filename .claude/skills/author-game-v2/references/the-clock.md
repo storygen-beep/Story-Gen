@@ -40,7 +40,7 @@ it is the player's pace.
 grep -E 'target_hour|advance_to|until_time|time_target' v2.py     0 hits
 ```
 
-`advanceTime(minutes)` (`v2.py:6929`) adds minutes to `time_state` and rolls the day when the hours
+`advanceTime(minutes)` (`v2.py:6959`) adds minutes to `time_state` and rolls the day when the hours
 pass 24. That is the whole time API. There is **no way to send the clock to a named hour**, and no
 way to print the current one into prose either — `_resolve_at_references` (`v2.py:16998`) resolves
 `@player` and `@<npc>` and nothing else, so there is no `@time` token to fall back on.
@@ -54,7 +54,7 @@ The clock is not hidden — `<<timeDisplay>>` sits at the top of `StoryCaption` 
 (`v2.py:18883`, `:18900`), rendering a live reading through `<<timeFormatted>>`
 (`v2.py:19326`) — 12-hour by default, 24-hour if the player ticks it in Settings (`setup.formatTime`
 is the one formatter every engine-printed time goes through) — and it carries **wait buttons**: `>` is 10 minutes, `>>` is an hour, `>>>>>` is a
-day (`v2.py:20823-20845`, `waitTime` at `v2.py:6970`). The player can always see the time and can
+day (`v2.py:20853-20875`, `waitTime` at `v2.py:7000`). The player can always see the time and can
 always move it. That is exactly why the prose must not compete with it.
 
 **What C1 licenses.** The opening's first node, before any exit has fired, may state the starting
@@ -198,7 +198,7 @@ option, because there is no absolute advance to reach for.
 
 The engine is already inconsistent with itself here, and the author is the one who pays.
 
-- **Travel time is tagged automatically.** `getLocationCostTag` (`v2.py:6188`) renders `20m` on the
+- **Travel time is tagged automatically.** `getLocationCostTag` (`v2.py:6217`) renders `20m` on the
   navigation card from `[[locations.costs]] time`, used at `v2.py:22760` and `:22794`.
 - **Activity time is not tagged at all.** A choice's `time_progression_minutes` emits a bare
   `<<script>>advanceTime(150);<</script>>` at the bottom of the passage body (`v2.py:15649`) with
@@ -263,14 +263,18 @@ so restating the row's own name doubles it: *"Work the counter — The counter �
 one"*. The house shape is a bare phrase — lowercase, no restatement, no full stop:
 *"mornings, `<hour>` till `<hour>`"*, *"after `<hour>` at night"*.
 
-`show_when_blocked` and `cooldown_message` are read at `v2.py:14596-14600` and emitted as
-`showWhenBlocked` / `cooldownMessage` (`v2.py:14660-14661`). When `isCanvasValid` returns false —
+`show_when_blocked` and `cooldown_message` are read at `v2.py:14626-14630` and emitted as
+`showWhenBlocked` / `cooldownMessage` (`v2.py:14690-14691`). When `isCanvasValid` returns false —
 and it returns false on a **schedule miss** first of all (`v2.py:5919-5925`) — the renderer keeps
 the entry as a dimmed, non-clickable line carrying the author's message instead of dropping it
 (`v2.py:6482`, `:6488`, `:6527-6534`).
 
 That line is the right home for an hour. It is a rule, it is in the interface rather than the
 prose, and it is the one place the player can act on it.
+
+**The row shows its hours only when the clock shut it** (LO, 2026-11-04, H67; `setup.onlyTheClockShut`). The clock is
+a schedule, a `time_of_day` or `weekday` item, and a since-flag wait already running. If a meter, a flag, a person or
+a garment also shuts it, the row is hidden: Corruption 40 is not something the player can wait out until Friday.
 
 **People and places both have this surface now.** `SchedulePage` (`v2.py:22349`) publishes every
 declared `[[npcs.schedules]]` row as a Time / Location / Activity / Days table. A place with hours
@@ -343,7 +347,7 @@ to one?"*); excluding `one` leaves **0**.
 ## Cheat sheet
 
 - **Name a time only where the engine pins it.** It pins exactly one: `[time] starting_hour`.
-- **There is no absolute-time advance** — `advanceTime(minutes)` is the whole API (`v2.py:6929`),
+- **There is no absolute-time advance** — `advanceTime(minutes)` is the whole API (`v2.py:6959`),
   and there is no `@time` token to print the clock either (`v2.py:16998`).
 - **A beat may not say what time it is.** A repeatable canvas fires at any minute of its window.
 - **Turn the reading into a rule.** *"Doors open at nine"* → *"The doors open at nine."*

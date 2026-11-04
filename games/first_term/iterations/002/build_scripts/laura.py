@@ -489,11 +489,11 @@ LAURA_TOWEL_WORDS = {
 }
 
 
-def laura_towel(hub, back, words, when=()):
+def laura_towel(hub, back, words, when=(), lines_when=()):
     w = LAURA_TOWEL_WORDS[words]
     return towel_set(
         hub, L, "warmth", 40, 70, "laura_towel_today", [warm(L, 2)], back, when=when,
-        lines=w["lines"],
+        lines=w["lines"], lines_when=lines_when,
         slip=w["fix"], slip_label="Let her fix it.", slip_gate=())
 
 
@@ -676,7 +676,8 @@ bd_choices, bd_nodes = item("hair", "Let her do your hair.", DRESSING, "made_up_
 ASLEEP_HOURS = [(wd(0, 1, 2, 3, 4, 5), tod("22:00", "07:00")), (wd(6), tod("22:00", "00:00")), (wd(6), tod("01:00", "07:00"))]
 # Laura is awake and alone Sun-Fri 22:00-23:00 (DECISIONS 82), so a line saying she is asleep skips that hour too.
 LAURA_ASLEEP_HOURS = [(wd(0, 1, 2, 3, 4), tod("23:00", "07:00")), (wd(5), tod("22:00", "07:00")), (wd(6), tod("23:00", "00:00")), (wd(6), tod("01:00", "07:00"))]
-LT_BED = laura_towel("hub_laura_bedroom", "home_master_bedroom", "bedroom", when=DRESSING)
+LT_BED = laura_towel("hub_laura_bedroom", "home_master_bedroom", "bedroom", when=DRESSING,
+                     lines_when=[flag("laura_dress_chosen", False)])   # the lines have her in her slip, choosing; chosen, she's in the green
 out.append({
     "id": "hub_laura_bedroom", "name": "Laura",
     "description": "Laura in her room: dressing on Saturday evenings with the door open (her hair, home_life item 12), or asleep at night (her face; home_master_bedroom.md:36-45).",
@@ -728,13 +729,13 @@ out.append({
     "trigger": {"location": "home_ella_room", "is_repeatable": True, "priority": 1, "is_active": True, "substitution_only": True},
     "nodes": [
         node("call", "Mom", [
-            # scene reader b03 (2026-11-03): the call rings wherever she is, her own room too, so it checks on her and
-            # never tells her to come home
-            D(L, "Just checking on you, sweetheart. You know the rule. Eleven, and not one minute after."),
-        ], [go("\"I know. Eleven.\"", node="good", mins=2, flags=[fset("laura_call_today")]),
+            # scene reader b03 (2026-11-03): the call rings wherever she is, her own room too, and no condition reads where
+            # the player is (the kitchen with Laura too), so it never says she is away or tells her to come home
+            D(L, "Good, your phone's on, sweetheart. You know the rule. No parties, no late shifts, no dates."),
+        ], [go("\"I know. Not this week.\"", node="good", mins=2, flags=[fset("laura_call_today")]),
             go("\"I'm staying at Zoe's.\"", node="talk", mins=2, eff=[susp(2)], flags=[fset("laura_call_today")],
                cond_=cond(flag("laura_call_today", False)))]),
-        node("good", "Good girl", [D(L, "Good girl.")], [go("Hang up.", ret=True)]),
+        node("good", "The rule", [D(L, "That's all I wanted to hear, sweetheart.")], [go("Hang up.", ret=True)]),
         node("talk", "We'll talk", [D(L, "We'll talk about this."), P("She hangs up before you can answer.")], [go("Put the phone away.", ret=True)]),
     ]})
 

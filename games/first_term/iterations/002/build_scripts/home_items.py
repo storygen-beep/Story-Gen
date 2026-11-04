@@ -205,7 +205,7 @@ TOWEL_CAUGHT = [
 
 def towel_set(hub, npc, meter, lo, hi, today, pay, back, lines=(), slip=None, slip_label="Let it slip.",
               slip_gate=(DARING,), slip_lead=(), slip_media=None, drop=None, drop_gate=(), drop_media=None,
-              caught_by=None, caught=None, when=(), no=None, seen=None):
+              caught_by=None, caught=None, when=(), no=None, seen=None, lines_when=()):
     """Returns (hub_blocks, hub_choices, nodes) for one hub.
 
     lines / slip: three lists of blocks, one per band (meter < lo, lo..hi-1, >= hi).
@@ -218,7 +218,8 @@ def towel_set(hub, npc, meter, lo, hi, today, pay, back, lines=(), slip=None, sl
       plays and pays nothing (the mark_tv_paid pattern). No new flag (call B).
     seen: blocks shown instead of his band lines while caught_by is in the room (reader batch 4, pass 3: his
       "Come here." / his finger on the towel played at the dinner table with Laura sitting there). His order's
-      no hides with his lines, since the order it answers is not on the screen."""
+      no hides with his lines, since the order it answers is not on the screen.
+    lines_when: extra conditions on the band lines only; the buttons keep theirs."""
     assert today in DAILY, today
     bands = [[ntrait(npc, meter, "lt", lo)],
              [ntrait(npc, meter, "gte", lo), ntrait(npc, meter, "lt", hi)],
@@ -230,7 +231,7 @@ def towel_set(hub, npc, meter, lo, hi, today, pay, back, lines=(), slip=None, sl
         return GC(c, *(b["blocks"] if b.get("type") == "group" else [b]))
     safe = [here(caught_by, back, False)] if caught_by else []
     alone = safe if seen else []
-    blocks = [POOL(*[_entry(b, cond(*base, *alone, *bands[i])) for b in ls], pid=f"{hub}_towel_{i}")
+    blocks = [POOL(*[_entry(b, cond(*base, *alone, *lines_when, *bands[i])) for b in ls], pid=f"{hub}_towel_{i}")
               for i, ls in enumerate(lines)]
     if seen:
         blocks.append(G(cond(*base, here(caught_by, back)), *seen))

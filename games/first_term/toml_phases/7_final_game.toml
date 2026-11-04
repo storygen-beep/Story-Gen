@@ -2061,7 +2061,7 @@ description  = "Your mom, 41. Wants a happy house, and wants you closer than she
 portrait     = "portraits/laura.jpg"
 relationship = "Your mom, 41. Wants a happy house, and wants you closer than she says."
 role         = "mom"
-tags         = ["Warm until she isn't", "Her good girl, close", "Dresses she doesn't wear", "White wine"]
+tags         = ["Warm until she isn't", "Wants her daughter close", "Dresses she doesn't wear", "White wine"]
 show_traits  = ["warmth"]
 core_traits  = { warmth = 50 }
 
@@ -2955,7 +2955,7 @@ content = "Your alarm goes at seven and you're already awake, staring at the cei
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "You're eighteen, but you still live at home, in this house, with your mom and your step-father and your step-brother and one bathroom between the four of you. You've never had a job. You've never had a lock on anything that was yours. Your account has nothing in it, and you checked twice."
+content = "You're eighteen, but you still live at home, in this house, with your mom and your step-father and your step-brother and one bathroom between the four of you. You've never had a job. You've got an old key to your bedroom door, and not much else that's yours. Your account has nothing in it, and you checked twice."
 
 [[canvases.nodes.blocks]]
 type = "thought_bubble"
@@ -4543,7 +4543,7 @@ speaker = "unknown"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "The short skirt: you turn round to look over your shoulder. The hem stops just under your ass. Wear it out of the house and people look. Wear it to the Sunday table and Mark does more than look. But you'd need to be Curious or Daring to walk out the door in it."
+content = "The short skirt: you turn round to look over your shoulder. The hem stops just under your ass. Wear it out of the house and heads turn. Wear it to the Sunday table and Mark has something to say about it. But you'd need to be Curious or Daring to walk out the door in it."
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -4568,19 +4568,18 @@ targetType = "location"
 locationId = "clothes_shop"
 time_progression_minutes = 20
 
-# C5 (DECISIONS 147): Exhibitionism 10. One stranger in the line looks, and she leaves the curtain where it is
-# (a look that happens to her, stage 1). +1 cap 19, once a day (shop_curtain_today, cleared at midnight).
+# C5 (DECISIONS 147), raised by LO 2026-11-04: Exhibitionism 20. One stranger in the line looks, and she leaves the
+# curtain where it is: her chosen flash for one person, stage 2 (the-heat-ladder.md H1). +1 cap 39, once a day
+# (shop_curtain_today, cleared at midnight). Below 20 no button: the room above reads true without it.
 # (pass 3 group 2, round 2; gate `an act pays on every way out`) the pay and the day brake ride this button into the
-# act, so both ways out of the curtain pay the same; once spent it greys out for the day.
+# act, so both ways out of the curtain pay the same; once spent it goes for the day.
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave the curtain where it is."
 targetType = "node"
 nodeId     = "curtain"
-show_when_locked = true
-locked_text = "Leave the curtain open: once a day."
 time_progression_minutes = 5
-conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 10 }, { type = "flag", subject = "player", flag_key = "shop_curtain_today", operator = "is_false" } ] }
-effects = [ { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 } ]
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "shop_curtain_today", operator = "is_false" } ] }
+effects = [ { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 } ]
 flagEffects = [ { targetType = "player", flag = "shop_curtain_today", op = "set" } ]
 
 # Heat proposal A4 (DECISIONS 147): Curious. In the changing room she touches herself in the mirror while the
@@ -7925,13 +7924,13 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 0 }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "gte", value = 40 }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "lt", value = 70 }] }, blocks = [{ type = "paragraph", content = "He puts the phone face-down. He looks at you, all of you, and doesn't pretend he isn't." }, { type = "dialog", content = "Hey, @player.nickname. Shut the door.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 0 }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "gte", value = 40 }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "lt", value = 70 }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_kayla", operator = "is_absent" }] }, blocks = [{ type = "paragraph", content = "He puts the phone face-down. He looks at you, all of you, and doesn't pretend he isn't." }, { type = "dialog", content = "Hey, @player.nickname. Shut the door.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 0 }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "gte", value = 70 }] }, blocks = [{ type = "paragraph", content = "He's on his feet before you've shut the door. He stops an arm's length away, like that's the deal he made with himself." }, { type = "dialog", content = "You can't keep walking in here looking like that.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 0 }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "gte", value = 70 }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_kayla", operator = "is_absent" }] }, blocks = [{ type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_08_two_knocks_closed", operator = "is_false" }] }, blocks = [{ type = "paragraph", content = "He's on his feet before you've shut the door. He stops an arm's length away, like that's the deal he made with himself." }] }, { type = "dialog", content = "You can't keep walking in here looking like that.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -8162,7 +8161,7 @@ time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 6 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "weekday", weekdays = [0, 1, 3, 6] }, { type = "time_of_day", start_time = "19:00", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "hygiene", operator = "lt", value = 30 }, { type = "flag", subject = "player", flag_key = "hygiene_off", operator = "is_false" }] }
 
 [[canvases.nodes.exit_block.choices]]
-text = "Stand naked in his room. Tell him when."
+text = "Get naked in his room. Tell him when."
 targetType = "node"
 nodeId = "hot5"
 time_progression_minutes = 0
@@ -8173,7 +8172,7 @@ flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }]
 wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Stand naked in his room. Tell him when."
+text = "Get naked in his room. Tell him when."
 targetType = "node"
 nodeId = "hot5"
 time_progression_minutes = 0
@@ -8184,7 +8183,7 @@ flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }]
 wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Stand naked in his room. Tell him when."
+text = "Get naked in his room. Tell him when."
 targetType = "node"
 nodeId = "ryan_stink"
 time_progression_minutes = 0
@@ -8417,7 +8416,7 @@ wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equi
 
 [[canvases.nodes]]
 id   = "hot5"
-name = "Stand naked in his room. Tell him when."
+name = "Get naked in his room. Tell him when."
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -9654,7 +9653,7 @@ name = "Watch his game in your underwear."
 type = "block_pool"
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Ryan's game is loud and he isn't watching it. You're curled on the other end of the couch in your bra and panties, one knee up. His eyes keep dropping to your tits. His hand goes to his shorts. He shifts his cock over fast, but you see it." }, { type = "dialog", content = "What was that?", props = { speaker = "player" } }, { type = "paragraph", content = "You ask." }, { type = "dialog", content = "Nothing. Watch the game, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "dialog", content = "Say it. Out loud.", props = { speaker = "player" } }, { type = "paragraph", content = "He grips the controller." }, { type = "dialog", content = "You're in your underwear and I'm hard. Happy?", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "thought_bubble", content = "Very.", props = { speaker = "player" } }, { type = "paragraph", content = "You stretch so your ass lifts off the cushion. His cock jumps in his shorts, and your nipples push hard against your bra." }] },
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "You lean across Ryan for the remote on the far arm, slow, in nothing but your bra and panties. Your tits hang an inch from his face. You keep your hands to yourself. When you sit back, he's tugging at the front of his shorts." }, { type = "dialog", content = "Problem?", props = { speaker = "player" } }, { type = "dialog", content = "Shut up.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "dialog", content = "Tell me why you're fixing yourself, Ryan. Use the word.", props = { speaker = "player" } }, { type = "paragraph", content = "He stares at the screen. His team is losing." }, { type = "dialog", content = "Because my cock's hard, @player.nickname. Because of your tits.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "thought_bubble", content = "Good boy.", props = { speaker = "player" } }, { type = "paragraph", content = "You slide one bra strap off your shoulder. His cock twitches in his shorts, and you squeeze your thighs together over your wet panties." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "You lean across Ryan for the remote on the far arm, slow, in nothing but your bra and panties. Your tits hang an inch from his face. You keep your hands to yourself. When you sit back, he's tugging at the front of his shorts." }, { type = "dialog", content = "Problem?", props = { speaker = "player" } }, { type = "dialog", content = "Shut up.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "dialog", content = "Tell me why you're fixing yourself, Ryan. Use the word.", props = { speaker = "player" } }, { type = "paragraph", content = "He stares at the screen. He's not following the game." }, { type = "dialog", content = "Because my cock's hard, @player.nickname. Because of your tits.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "thought_bubble", content = "Good boy.", props = { speaker = "player" } }, { type = "paragraph", content = "You slide one bra strap off your shoulder. His cock twitches in his shorts, and you squeeze your thighs together over your wet panties." }] },
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "You lie on your stomach at the far end of the couch, chin on your arms, in your bra and panties. Your ass sits right in Ryan's eyeline. His game plays on, but his eyes are on you. He pauses it. He reaches down and drags his cock straight inside his shorts." }, { type = "dialog", content = "Everything okay down there?", props = { speaker = "player" } }, { type = "paragraph", content = "You ask." }, { type = "dialog", content = "It's fine.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "dialog", content = "Then say why you did that.", props = { speaker = "player" } }, { type = "paragraph", content = "His jaw works." }, { type = "dialog", content = "Your ass. In those panties. It's making me hard.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "dialog", content = "Louder.", props = { speaker = "player" } }, { type = "dialog", content = "Your ass is making my cock hard, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "thought_bubble", content = "God, he's so easy.", props = { speaker = "player" } }, { type = "paragraph", content = "You arch your back and rock your hips once. His cock tents his shorts, and your panties go wet against the cushion." }] },
 ]
 props = { id = "ryan_hot_3", memory = "seen", seen_weight = 0 }
@@ -10051,7 +10050,7 @@ when = [
 ]
 ready_canvas = "ryan_06_after_the_shower"
 goals = [
-  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Exhibitionism 40 (Showing): let them look at the campus gym and in class, take your bra off in the college toilet, let the towel slip at home" },
+  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Exhibitionism 40 (Showing): let them look at the campus gym and in class, run in the park, walk the street in your short skirt, leave the changing-room curtain open, take your bra off in the college toilet, let the towel slip at home" },
   { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 50, label = "Ryan's Lust 50: let him see you at home: your towel in the hall, the shower, the lounger under his window, his room in the evenings" },
 ]
 
@@ -10065,7 +10064,7 @@ when = [
 ]
 ready_canvas = "ryan_07_kayla_cant_know"
 goals = [
-  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 60, label = "Corruption 60 (Hungry): get on Ryan's couch with him, pull Jake into the gym locker room" },
+  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 60, label = "Corruption 60 (Hungry): get on Ryan's couch with him, pull Jake into the gym locker room, walk the street with nothing under your skirt" },
   { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 60, label = "Ryan's Lust 60: let him see you at home: your towel in the hall, the shower, the lounger under his window, his room in the evenings" },
 ]
 
@@ -10079,7 +10078,7 @@ when = [
 ]
 ready_canvas = "ryan_08_two_knocks_first_sex"
 goals = [
-  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 60, label = "Corruption 60 (Hungry): get on Ryan's couch with him, pull Jake into the gym locker room" },
+  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 60, label = "Corruption 60 (Hungry): get on Ryan's couch with him, pull Jake into the gym locker room, walk the street with nothing under your skirt" },
   { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 70, label = "Ryan's Lust 70: let him see you at home: your towel in the hall, the shower, the lounger under his window, his room in the evenings" },
 ]
 
@@ -12826,27 +12825,27 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "17:00", end_time = "18:30" }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "lt", value = 40 }] }, blocks = [{ type = "dialog", content = "I'm trying to get dressed, sweetheart. Go and put something on.", props = { speaker = "npc", npcId = "npc_laura" } }] },
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "17:00", end_time = "18:30" }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "lt", value = 40 }] }, blocks = [{ type = "dialog", content = "Two of us half dressed in this room is plenty.", props = { speaker = "npc", npcId = "npc_laura" } }] },
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "17:00", end_time = "18:30" }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "lt", value = 40 }] }, blocks = [{ type = "paragraph", content = "Laura looks at your towel in the mirror, then at her open door, and pushes it almost shut with her foot." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "17:00", end_time = "18:30" }, { type = "flag", subject = "player", flag_key = "laura_dress_chosen", operator = "is_false" }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "lt", value = 40 }] }, blocks = [{ type = "dialog", content = "I'm trying to get dressed, sweetheart. Go and put something on.", props = { speaker = "npc", npcId = "npc_laura" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "17:00", end_time = "18:30" }, { type = "flag", subject = "player", flag_key = "laura_dress_chosen", operator = "is_false" }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "lt", value = 40 }] }, blocks = [{ type = "dialog", content = "Two of us half dressed in this room is plenty.", props = { speaker = "npc", npcId = "npc_laura" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "17:00", end_time = "18:30" }, { type = "flag", subject = "player", flag_key = "laura_dress_chosen", operator = "is_false" }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "lt", value = 40 }] }, blocks = [{ type = "paragraph", content = "Laura looks at your towel in the mirror, then at her open door, and pushes it almost shut with her foot." }] },
 ]
 props = { id = "hub_laura_bedroom_towel_0", memory = "seen" }
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "17:00", end_time = "18:30" }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 40 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "lt", value = 70 }] }, blocks = [{ type = "paragraph", content = "Laura clicks her tongue at the mirror, turns round, and yanks the towel higher over your tits." }, { type = "dialog", content = "You'll be sick by Monday.", props = { speaker = "npc", npcId = "npc_laura" } }] },
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "17:00", end_time = "18:30" }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 40 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "lt", value = 70 }] }, blocks = [{ type = "dialog", content = "Don't sit on my bed in that, sweetheart. I've got a dress laid out on it.", props = { speaker = "npc", npcId = "npc_laura" } }] },
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "17:00", end_time = "18:30" }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 40 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "lt", value = 70 }] }, blocks = [{ type = "paragraph", content = "She looks you over in the mirror, bare feet to bare shoulders, and goes back to her two dresses with a small smile." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "17:00", end_time = "18:30" }, { type = "flag", subject = "player", flag_key = "laura_dress_chosen", operator = "is_false" }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 40 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "lt", value = 70 }] }, blocks = [{ type = "paragraph", content = "Laura clicks her tongue at the mirror, turns round, and yanks the towel higher over your tits." }, { type = "dialog", content = "You'll be sick by Monday.", props = { speaker = "npc", npcId = "npc_laura" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "17:00", end_time = "18:30" }, { type = "flag", subject = "player", flag_key = "laura_dress_chosen", operator = "is_false" }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 40 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "lt", value = 70 }] }, blocks = [{ type = "dialog", content = "Don't sit on my bed in that, sweetheart. I've got a dress laid out on it.", props = { speaker = "npc", npcId = "npc_laura" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "17:00", end_time = "18:30" }, { type = "flag", subject = "player", flag_key = "laura_dress_chosen", operator = "is_false" }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 40 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "lt", value = 70 }] }, blocks = [{ type = "paragraph", content = "She looks you over in the mirror, bare feet to bare shoulders, and goes back to her two dresses with a small smile." }] },
 ]
 props = { id = "hub_laura_bedroom_towel_1", memory = "seen" }
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "17:00", end_time = "18:30" }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 70 }] }, blocks = [{ type = "dialog", content = "Stand next to me. Look at the two of us.", props = { speaker = "npc", npcId = "npc_laura" } }, { type = "paragraph", content = "She says it quietly to the mirror, and her eyes go over your towel, not her own slip." }] },
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "17:00", end_time = "18:30" }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 70 }] }, blocks = [{ type = "dialog", content = "You could carry the green one better than I can.", props = { speaker = "npc", npcId = "npc_laura" } }] },
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "17:00", end_time = "18:30" }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 70 }] }, blocks = [{ type = "paragraph", content = "She reaches across, hooks a strand of hair behind your ear, and her fingers stay on your bare neck." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "17:00", end_time = "18:30" }, { type = "flag", subject = "player", flag_key = "laura_dress_chosen", operator = "is_false" }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 70 }] }, blocks = [{ type = "dialog", content = "Stand next to me. Look at the two of us.", props = { speaker = "npc", npcId = "npc_laura" } }, { type = "paragraph", content = "She says it quietly to the mirror, and her eyes go over your towel, not her own slip." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "17:00", end_time = "18:30" }, { type = "flag", subject = "player", flag_key = "laura_dress_chosen", operator = "is_false" }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 70 }] }, blocks = [{ type = "dialog", content = "You could carry the green one better than I can.", props = { speaker = "npc", npcId = "npc_laura" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "17:00", end_time = "18:30" }, { type = "flag", subject = "player", flag_key = "laura_dress_chosen", operator = "is_false" }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 70 }] }, blocks = [{ type = "paragraph", content = "She reaches across, hooks a strand of hair behind your ear, and her fingers stay on your bare neck." }] },
 ]
 props = { id = "hub_laura_bedroom_towel_2", memory = "seen" }
 
@@ -13030,14 +13029,14 @@ name = "Mom"
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Just checking on you, sweetheart. You know the rule. Eleven, and not one minute after."
+content = "Good, your phone's on, sweetheart. You know the rule. No parties, no late shifts, no dates."
 props = { speaker = "npc", npcId = "npc_laura" }
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "\"I know. Eleven.\""
+text = "\"I know. Not this week.\""
 targetType = "node"
 nodeId = "good"
 time_progression_minutes = 2
@@ -13054,11 +13053,11 @@ flagEffects = [{ targetType = "player", flag = "laura_call_today", op = "set" }]
 
 [[canvases.nodes]]
 id   = "good"
-name = "Good girl"
+name = "The rule"
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Good girl."
+content = "That's all I wanted to hear, sweetheart."
 props = { speaker = "npc", npcId = "npc_laura" }
 
 [canvases.nodes.exit_block]
@@ -14557,7 +14556,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "eq", value = 1 }, { type = "worn_type", operator = "neq", value = "towel" }, { type = "worn_type", operator = "neq", value = "sleep_shirt" }] }, blocks = [{ type = "dialog", content = "Your mother's out.", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "paragraph", content = "His eyes go down to your tits and stay there while he talks. He doesn't tell you to cover up." }, { type = "thought_bubble", content = "He'd have his hands on them if you let him. Not yet. Not at his table.", props = { speaker = "player" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "eq", value = 1 }, { type = "worn_type", operator = "neq", value = "towel" }, { type = "worn_type", operator = "neq", value = "sleep_shirt" }] }, blocks = [{ type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }] }, blocks = [{ type = "dialog", content = "Your mother's out.", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "paragraph", content = "His eyes go down to your tits and stay there while he talks. He doesn't tell you to cover up." }, { type = "thought_bubble", content = "He'd have his hands on them if you let him. Not yet. Not at his table.", props = { speaker = "player" } }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }, blocks = [{ type = "paragraph", content = "You sit down half dressed before you think about it, and your arm goes across your chest. Mark looks at the envelope, only the envelope." }, { type = "dialog", content = "Your mother's out. Put something on next time, @player.", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "dialog", content = "Sorry. I forgot.", props = { speaker = "player" } }, { type = "dialog", content = "Next time.", props = { speaker = "npc", npcId = "npc_mark" } }] }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -16491,7 +16490,7 @@ content = "You bend over the basket and feed the drum, and behind you the wrench
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Whites with whites. Good girl."
+content = "Whites with whites. Fine. You proved it."
 props = { speaker = "npc", npcId = "npc_mark" }
 
 [canvases.nodes.exit_block]
@@ -22540,7 +22539,7 @@ when = [
 ready_canvas = "zoe_03_hot_tub"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Corruption 40 (Bold): touch yourself in your bed, in the shower or in a college toilet stall; watch the couple in the park" },
-  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Exhibitionism 40 (Showing): let them look at the campus gym and in class, take your bra off in the college toilet, let the towel slip at home" },
+  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Exhibitionism 40 (Showing): let them look at the campus gym and in class, run in the park, walk the street in your short skirt, leave the changing-room curtain open, take your bra off in the college toilet, let the towel slip at home" },
 ]
 
 [[quest_cards]]
@@ -24341,7 +24340,7 @@ when = [
 ready_canvas = "hale_04_claire_knocks"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Corruption 40 (Bold): touch yourself in your bed, in the shower or in a college toilet stall; watch the couple in the park" },
-  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Exhibitionism 40 (Showing): let them look at the campus gym and in class, take your bra off in the college toilet, let the towel slip at home" },
+  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Exhibitionism 40 (Showing): let them look at the campus gym and in class, run in the park, walk the street in your short skirt, leave the changing-room curtain open, take your bra off in the college toilet, let the towel slip at home" },
 ]
 
 [[quest_cards]]
@@ -24469,7 +24468,7 @@ text = "\"Again.\""
 targetType = "node"
 nodeId = "ask"
 time_progression_minutes = 3
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 3, clamp = true, cap = 79 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 3, clamp = true, cap = 79 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
 
 [[canvases.nodes]]
 id   = "ask"
@@ -25451,7 +25450,7 @@ content = "All the way home Jake's hand has been on your knee, and it's still th
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "laura_blue_dress", operator = "equipped" }] }, blocks = [{ type = "dialog", content = "Everyone was looking at you tonight.", props = { speaker = "npc", npcId = "npc_jake" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "laura_blue_dress", operator = "equipped" }] }, blocks = [{ type = "dialog", content = "Every guy in that place was looking at you tonight.", props = { speaker = "npc", npcId = "npc_jake" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -28425,7 +28424,7 @@ effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap
 flagEffects = [{ targetType = "player", flag = "desk_guy_met", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Lean back so the row behind can see."
+text = "Lean back for the guy in the row behind."
 targetType = "node"
 nodeId = "risky"
 time_progression_minutes = 0
@@ -28434,7 +28433,7 @@ effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value =
 flagEffects = [{ targetType = "player", flag = "desk_guy_met", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Lean back so the row behind can see."
+text = "Lean back for the guy in the row behind."
 targetType = "node"
 nodeId = "risky"
 time_progression_minutes = 0
@@ -28605,7 +28604,7 @@ time_progression_minutes = 90
 [[canvases]]
 id   = "college_class_bio"
 name = "Attend the Biology lecture"
-description = "Biology class: Focus (energy 10, grade_bio +2, intelligence +1) · Chat · Doze (energy +5) · Skip (grade_bio -2) · the risky slot (Daring)."
+description = "Biology class: Focus (energy 10, grade_bio +2, intelligence +1) · Chat · Doze (energy +5) · Skip (grade_bio -2) · the risky slot (Watched, a milder one at Daring)."
 
 [canvases.trigger]
 location = "lecture_hall"
@@ -28644,7 +28643,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_met", operator = "is_true" }] }, blocks = [{ type = "dialog", content = "Babe. Look at the TA. She's staring at your legs again.", props = { speaker = "npc", npcId = "npc_zoe" } }, { type = "paragraph", content = "The TA catches you catching her. Her neck goes pink, but she only turns to her slide. She won't look at your legs again, not with the whole hall here." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_met", operator = "is_true" }] }, blocks = [{ type = "dialog", content = "Babe. Look at the TA. She's staring at your legs again.", props = { speaker = "npc", npcId = "npc_zoe" } }, { type = "paragraph", content = "The TA catches you catching her. Her neck goes pink, but she only turns to her slide." }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "neq", value = "short_skirt" }] }, blocks = [{ type = "paragraph", content = "She won't look at your legs again, not with the whole hall here." }] }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -28696,15 +28695,31 @@ text = "Let the TA see."
 targetType = "node"
 nodeId = "risky"
 time_progression_minutes = 0
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Let the TA see."
 targetType = "node"
 nodeId = "risky"
 time_progression_minutes = 0
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Catch the TA's eye."
+targetType = "node"
+nodeId = "risky_mild"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Catch the TA's eye."
+targetType = "node"
+nodeId = "risky_mild"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -28833,6 +28848,51 @@ props = { speaker = "npc", npcId = "npc_bio_ta" }
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }, blocks = [{ type = "thought_bubble", content = "Forget the pen. You want her to stop the class and look at your tits with the whole hall watching.", props = { speaker = "player" } }] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Pack up, slowly (1h 30m)."
+targetType = "location"
+locationId = "lecture_hall"
+time_progression_minutes = 90
+
+[[canvases.nodes]]
+id   = "risky_mild"
+name = "Catch the TA's eye"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "You wait until the row is bent over its notes. Then you turn your shoulders to the front and put your arms down, and your nipples push at what you're wearing, on the side nobody else can see. The TA looks up from her slide and sees. Her pen slips out of her fingers and rolls off the lectern." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }, blocks = [{ type = "paragraph", content = "You wait until the row is bent over its notes. Then you let your knees drift apart under the desk, on the side that faces the front, and nobody else has the angle. The TA looks up from her slide and sees. Her pen slips out of her fingers and rolls off the lectern." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "When the room packs up she's wiping a board that's already clean, and she doesn't turn around."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "I didn't see anything, @player. Okay? So don't. Not in here."
+props = { speaker = "npc", npcId = "npc_bio_ta" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "See what?"
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }] }, blocks = [{ type = "thought_bubble", content = "Your neck is as pink as hers now. You wonder if she can tell your nipples are hard from up there.", props = { speaker = "player" } }] },
 ]
 
@@ -28840,12 +28900,6 @@ blocks = [
 type = "block_pool"
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }] }, blocks = [{ type = "thought_bubble", content = "You like making her drop that pen. Next class you'll see if you can make her lose her slide.", props = { speaker = "player" } }] },
-]
-
-[[canvases.nodes.blocks]]
-type = "block_pool"
-blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }, blocks = [{ type = "thought_bubble", content = "Forget the pen. You want her to stop the class and look at your tits with the whole hall watching.", props = { speaker = "player" } }] },
 ]
 
 [canvases.nodes.exit_block]
@@ -29247,15 +29301,31 @@ text = "Lean back so the row behind can see."
 targetType = "node"
 nodeId = "risky"
 time_progression_minutes = 0
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Lean back so the row behind can see."
 targetType = "node"
 nodeId = "risky"
 time_progression_minutes = 0
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Stretch for the guy behind you."
+targetType = "node"
+nodeId = "risky_mild"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Stretch for the guy behind you."
+targetType = "node"
+nodeId = "risky_mild"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -29382,19 +29452,63 @@ props = { speaker = "npc", npcId = "npc_study_guy" }
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }, blocks = [{ type = "thought_bubble", content = "One row is a start. You want every guy in this gray room to know your tits by the end of term.", props = { speaker = "player" } }] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Pack up, slowly (1h 30m)."
+targetType = "location"
+locationId = "lecture_hall"
+time_progression_minutes = 90
+
+[[canvases.nodes]]
+id   = "risky_mild"
+name = "Stretch for the guy behind you"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "You've been in this room ten minutes when you stretch, small, one arm up, like your shoulder's stiff. With no bra on, your tits lift under what you're wearing, and only the seat right behind you has the angle. The guy with the highlighters looks, and his ears go red." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }, blocks = [{ type = "paragraph", content = "You've been in this room ten minutes when you hook one ankle behind the other and let your skirt ride an inch up the back of your thigh. Only the seat right behind you has the angle. The guy with the highlighters looks, and his ears go red." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Nobody else looks up. The gray man goes on reading out headings."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Um. You dropped. No. You didn't drop anything."
+props = { speaker = "npc", npcId = "npc_study_guy" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "No, I didn't."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Not in here, okay? He'd throw me out. Same seat next time?"
+props = { speaker = "npc", npcId = "npc_study_guy" }
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }] }, blocks = [{ type = "thought_bubble", content = "First class in this room, and you already did that on purpose. You wonder what he makes of you. Your nipples don't mind.", props = { speaker = "player" } }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }] }, blocks = [{ type = "thought_bubble", content = "Not bad for a first lecture. This row knows your face now, and you'll make sure they remember the rest.", props = { speaker = "player" } }] },
-]
-
-[[canvases.nodes.blocks]]
-type = "block_pool"
-blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }, blocks = [{ type = "thought_bubble", content = "One row is a start. You want every guy in this gray room to know your tits by the end of term.", props = { speaker = "player" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }] }, blocks = [{ type = "thought_bubble", content = "Not bad for a first lecture. He knows your face now, and you'll make sure he remembers the rest.", props = { speaker = "player" } }] },
 ]
 
 [canvases.nodes.exit_block]
@@ -29452,7 +29566,7 @@ props = { speaker = "npc", npcId = "npc_bio_ta" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "She says it to the whole room, but she's looking at your chest when she runs out of words. She turns to the slides before anyone can ask what she meant."
+content = "She says it to all of you, but she's looking at your chest when she runs out of words. She turns to the slides before anyone can ask what she meant."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -29511,15 +29625,31 @@ text = "Let the TA see."
 targetType = "node"
 nodeId = "risky"
 time_progression_minutes = 0
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Let the TA see."
 targetType = "node"
 nodeId = "risky"
 time_progression_minutes = 0
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Catch the TA's eye."
+targetType = "node"
+nodeId = "risky_mild"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Catch the TA's eye."
+targetType = "node"
+nodeId = "risky_mild"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -29648,6 +29778,51 @@ props = { speaker = "npc", npcId = "npc_bio_ta" }
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }, blocks = [{ type = "thought_bubble", content = "She told the room her door's open. You want her to shut it and look at your tits properly.", props = { speaker = "player" } }] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Pack up, slowly (1h 30m)."
+targetType = "location"
+locationId = "lecture_hall"
+time_progression_minutes = 90
+
+[[canvases.nodes]]
+id   = "risky_mild"
+name = "Catch the TA's eye"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "Your first class, and while the row around you hunts for pens you turn your shoulders to the front. Your nipples show through what you're wearing, on the side only she can see. The TA's eyes land there, and her clicker jumps a slide." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }, blocks = [{ type = "paragraph", content = "Your first class, and while the row around you hunts for pens you let your knees fall open under the desk, on the side only she can see. The TA's eyes land there, and her clicker jumps a slide." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She goes back a slide without looking up, and she keeps her eyes on the wall after that."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Sorry. Wrong one. Nobody saw that. The slide, I mean."
+props = { speaker = "npc", npcId = "npc_bio_ta" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "I didn't see a thing."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }] }, blocks = [{ type = "thought_bubble", content = "One class, and you've already made the TA lose her slide. You wonder why that makes your nipples go hard.", props = { speaker = "player" } }] },
 ]
 
@@ -29655,12 +29830,6 @@ blocks = [
 type = "block_pool"
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }] }, blocks = [{ type = "thought_bubble", content = "She blushes at the word reproductive. You liked that, and next class you'll make her say it to your face.", props = { speaker = "player" } }] },
-]
-
-[[canvases.nodes.blocks]]
-type = "block_pool"
-blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }, blocks = [{ type = "thought_bubble", content = "She told the room her door's open. You want her to shut it and look at your tits properly.", props = { speaker = "player" } }] },
 ]
 
 [canvases.nodes.exit_block]
@@ -29805,7 +29974,7 @@ props = { description = "a nude female life model posing on a stool under a lamp
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cocky_guy_met", operator = "is_true" }] }, blocks = [{ type = "paragraph", content = "The guy in the team jacket has turned his pad so you can see it. There's no model on it. It's your neck, and he's started on your chest." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cocky_guy_met", operator = "is_true" }] }, blocks = [{ type = "paragraph", content = "The guy in that jacket has turned his pad so you can see it. There's no model on it. It's your neck, and he's started on your chest." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -29817,7 +29986,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "OR", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }, blocks = [{ type = "block_pool", blocks = [{ type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cocky_guy_met", operator = "is_false" }] }, blocks = [{ type = "paragraph", content = "The guy in the team jacket hasn't touched his paper since you sat down." }] }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, blocks = [{ type = "paragraph", content = "You're not sorry about what you wore." }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, blocks = [{ type = "paragraph", content = "You pull your arms in and keep your eyes on your page. You should have worn something else." }] }] },
+  { type = "group", conditions = { version = "1.0", logic = "OR", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }, blocks = [{ type = "block_pool", blocks = [{ type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cocky_guy_met", operator = "is_false" }] }, blocks = [{ type = "paragraph", content = "The guy in that jacket hasn't touched his paper since you sat down." }] }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, blocks = [{ type = "paragraph", content = "You're not sorry about what you wore." }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, blocks = [{ type = "paragraph", content = "You pull your arms in and keep your eyes on your page. You should have worn something else." }] }] },
 ]
 
 [canvases.nodes.exit_block]
@@ -29941,13 +30110,13 @@ name = "Let him look"
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "You've barely finished that second bad sketch when you stretch up to the top of the paper and stay there. Your tits swing forward against what you're wearing, loose, and your nipples push through it. The guy in the team jacket stops pretending to look at the model." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "You've barely finished that second bad sketch when you stretch up to the top of the paper and stay there. Your tits swing forward against what you're wearing, loose, and your nipples push through it. The guy in that jacket stops pretending to look at the model." }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }, blocks = [{ type = "paragraph", content = "You've barely finished that second bad sketch when you bend to the ledge of your easel and take your time. Your skirt climbs the backs of your thighs. The guy in the team jacket stops pretending to look at the model." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }, blocks = [{ type = "paragraph", content = "You've barely finished that second bad sketch when you bend to the ledge of your easel and take your time. Your skirt climbs the backs of your thighs. The guy in that jacket stops pretending to look at the model." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -33786,9 +33955,26 @@ text = "Run the loop. (10 energy)"
 targetType = "node"
 nodeId = "run"
 time_progression_minutes = 35
-conditions = { version = "1.0", logic = "OR", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
 costs = [{ trait = "energy", value = 10 }]
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Run the loop. (10 energy)"
+targetType = "node"
+nodeId = "run"
+time_progression_minutes = 35
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }] }
+costs = [{ trait = "energy", value = 10 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Run the loop. (10 energy)"
+targetType = "node"
+nodeId = "run"
+time_progression_minutes = 35
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "dress", operator = "equipped" }] }
+costs = [{ trait = "energy", value = 10 }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Run the loop. (10 energy)"
@@ -35049,7 +35235,7 @@ time_progression_minutes = 10
 [[canvases]]
 id   = "walkin_gym_team"
 name = "The team comes in"
-description = "B10, the team: in for training on Tuesday or Thursday at 15:00, they walk in on her at the bench. Jake leads them while his row has him there; nobody has a meter. Her answer on Exhibitionism: go 0, finish your set in her sports bra (Daring) +1 cap 39."
+description = "B10, the team: in for training on Tuesday or Thursday at 15:00, they walk in on her at the bench. Jake leads them while his row has him there; nobody has a meter. Her answer on Exhibitionism: go 0, finish your set in her sports bra (Watched: a group seeing her is stage 4) +1 cap 79."
 
 [canvases.trigger]
 location = "campus_gym"
@@ -35175,9 +35361,9 @@ text = "Finish your set."
 targetType = "node"
 nodeId = "t_set"
 time_progression_minutes = 15
-conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "sports_bra", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "sports_bra", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
 costs = [{ trait = "energy", value = 10 }]
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }]
 
 [[canvases.nodes]]
 id   = "t_go"
@@ -35556,7 +35742,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }] }, blocks = [{ type = "thought_bubble", content = "Let them forget their lunch. You're not hiding from anybody.", props = { speaker = "player" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }] }, blocks = [{ type = "thought_bubble", content = "Not three of them at once. Not yet. But part of you wants to see how long they'd keep looking.", props = { speaker = "player" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -38463,7 +38649,7 @@ when = [
 goals = [
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 5, label = "Exhibitionism 5: when someone walks in on your shower, don't grab the towel straight away" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 10, label = "Exhibitionism 10: leave the shower door unlocked" },
-  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 15, label = "Exhibitionism 15: leave the changing-room curtain open when you try clothes on" },
+  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 15, label = "Exhibitionism 15: keep leaving the shower door unlocked" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Reach Daring (Exhibitionism 20): let someone walk in on your shower; once you're Curious, run in the park and walk the street" },
 ]
 
@@ -38477,7 +38663,7 @@ when = [
   { type = "trait", subject = "player", trait = "exhibitionism", op = "lt", value = 40 },
 ]
 goals = [
-  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Reach Showing (Exhibitionism 40): let them look at the campus gym and in the lecture hall, take your bra off in the women's toilet, let the towel slip in the kitchen or the living room" },
+  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Reach Showing (Exhibitionism 40): let them look at the campus gym and in the lecture hall, run in the park, walk the street in your short skirt, leave the changing-room curtain open, take your bra off in the women's toilet, let the towel slip in the kitchen or the living room" },
 ]
 
 [[quest_cards]]
@@ -38490,7 +38676,7 @@ when = [
   { type = "trait", subject = "player", trait = "exhibitionism", op = "lt", value = 60 },
 ]
 goals = [
-  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 60, label = "Reach Watched (Exhibitionism 60): show off on the lounger in the garden, let the wind have your skirt on the street, drop the towel in the kitchen or the living room" },
+  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 60, label = "Reach Watched (Exhibitionism 60): show off on the lounger in the garden, walk the street with no panties and let the wind have your skirt, drop the towel in the kitchen or the living room" },
 ]
 
 [[quest_cards]]
@@ -39245,7 +39431,7 @@ blocks = [
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "eq", value = 0 }, { type = "worn_corruption", operator = "eq", value = 0 }, { type = "worn_type", operator = "neq", value = "thin_top" }] }
 blocks = [
-  { type = "paragraph", content = "Covered, neat, nothing anyone could say a word about. You look like Laura's good girl." },
+  { type = "paragraph", content = "Covered, neat, nothing anyone could say a word about. Laura would approve." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -39513,7 +39699,7 @@ locationId = "home_hall"
 [[canvases]]
 id   = "living_couch"
 name = "Lie on the couch"
-description = "Alone in the room. Who passes through reads what she has on; exhibitionism +1 once a day if Daring, in her underwear, and someone's home to pass."
+description = "Alone in the room. Who passes through reads what she has on (in her underwear they look only from Daring, Mark also after his accident; below it she covers up); exhibitionism +1 once a day if Daring, in her underwear, and someone's home to pass."
 
 [canvases.trigger]
 location = "home_living_room"
@@ -39533,25 +39719,31 @@ content = "You stretch out on the couch, one knee up, the remote on your stomach
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "Mark comes through from the kitchen with a drink and stops behind the couch. You're in your underwear, but he doesn't say cover up. He looks down the length of you, at your legs, at your ass in your panties. The drink stops halfway to his mouth." }, { type = "dialog", content = "Comfortable, @player?", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "dialog", content = "Very.", props = { speaker = "player" } }, { type = "dialog", content = "Hm.", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "paragraph", content = "Then he goes, slowly." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }] }, blocks = [{ type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }] }, blocks = [{ type = "paragraph", content = "Mark comes through from the kitchen with a drink and stops behind the couch. You're in your underwear, but he doesn't say cover up. He looks down the length of you, at your legs, at your ass in your panties. The drink stops halfway to his mouth." }, { type = "dialog", content = "Comfortable, @player?", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "dialog", content = "Very.", props = { speaker = "player" } }, { type = "dialog", content = "Hm.", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "paragraph", content = "Then he goes, slowly." }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }, blocks = [{ type = "paragraph", content = "The kitchen door goes, and you grab the cushion and hold it over your bra. Mark comes through with a drink and sees your bare legs and the cushion. He catches himself and looks at the blank TV." }, { type = "dialog", content = "Put some clothes on, @player.", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "dialog", content = "I was just getting up.", props = { speaker = "player" } }, { type = "paragraph", content = "He goes, and he doesn't look back." }] }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "lt", value = 40 }] }, blocks = [{ type = "paragraph", content = "Ryan comes out of his room for a drink and stops at the end of the hall. His eyes go straight to your tits in your bra. Then they go up to the ceiling." }, { type = "dialog", content = "Jesus, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He goes to the kitchen without looking again." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "lt", value = 40 }] }, blocks = [{ type = "paragraph", content = "Ryan comes out of his room for a drink and stops at the end of the hall. His eyes go straight to your tits in your bra. Then they go up to the ceiling." }, { type = "dialog", content = "Jesus, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He goes to the kitchen without looking again." }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "gte", value = 40 }] }, blocks = [{ type = "paragraph", content = "Ryan comes out of his room for a drink and stops at the end of the hall. His eyes go down you, your tits, your panties, and come back up slow. He doesn't pretend he wasn't looking." }, { type = "dialog", content = "Jesus, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "gte", value = 40 }] }, blocks = [{ type = "paragraph", content = "Ryan comes out of his room for a drink and stops at the end of the hall. His eyes go down you, your tits, your panties, and come back up slow. He doesn't pretend he wasn't looking." }, { type = "dialog", content = "Jesus, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }] }, blocks = [{ type = "dialog", content = "Get me one too, Ryan.", props = { speaker = "player" } }, { type = "dialog", content = "Get your own. And put some clothes on.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He takes a long time getting that drink. On the way back down the hall he holds the can in front of his shorts." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "Ryan's door opens down the hall, and you drag the cushion across your chest. He comes out for a drink and stops at the end of the hall. He sees your bare legs and the cushion, goes red and looks at the ceiling." }, { type = "dialog", content = "Warn a guy, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "dialog", content = "It's my couch too.", props = { speaker = "player" } }, { type = "paragraph", content = "He gets his drink with his back to you." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }] }, blocks = [{ type = "dialog", content = "Get me one too, Ryan.", props = { speaker = "player" } }, { type = "dialog", content = "Get your own. And put some clothes on.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He takes a long time getting that drink. On the way back down the hall he holds the can in front of his shorts." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -39993,7 +40185,7 @@ name = "The sound up"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "You thumb the volume up, and up again. Her moans fill the whole room. The slap of his hips on her ass is loud as a hand clap. You can hear it bounce off the hall walls."
+content = "You thumb the volume up, and up again. Her moans fill the living room. The slap of his hips on her ass is loud as a hand clap. You can hear it bounce off the hall walls."
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -41243,7 +41435,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_locatio
 text = "Play up to Ryan's window."
 targetType = "node"
 nodeId = "sun_ryan"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 3 }, { type = "flag", subject = "player", flag_key = "sunned", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 7 }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 3 }, { type = "flag", subject = "player", flag_key = "sunned", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 7 }, { type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_absent" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
 
 [[canvases.nodes.exit_block.choices]]
 text = "Play up to Mark in the garage door."
@@ -43775,6 +43967,26 @@ content = "He takes his time with the jar. His hand stays on your hip the whole 
 
 [[canvases.nodes.blocks]]
 type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "want", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "paragraph", content = "Then he catches himself. He clears his throat and looks at the jar, hard, not down your front, and he keeps his hips back from you now. His hand is still on your hip, and he's the last to notice it." },
+  { type = "dialog", content = "Sorry, @player. You're in front of the coffee.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "dialog", content = "You could have asked me to move.", props = { speaker = "player" } },
+  { type = "dialog", content = "I should have.", props = { speaker = "npc", npcId = "npc_mark" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "paragraph", content = "Then he catches himself. He clears his throat and looks at the jar, hard, not down your front, and he keeps his hips back from you now. His hand is still on your hip, and he's the last to notice it." },
+  { type = "dialog", content = "Sorry, @player. You're in front of the coffee.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "dialog", content = "You could have asked me to move.", props = { speaker = "player" } },
+  { type = "dialog", content = "I should have.", props = { speaker = "npc", npcId = "npc_mark" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "want", operator = "lt", value = 50 }] }
 blocks = [
   { type = "paragraph", content = "He clears his throat and gets the lid off, slow, like that's what he's doing." },
@@ -43849,8 +44061,25 @@ content = "It's Saturday. I'm allowed."
 props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
-type = "paragraph"
-content = "Behind you he spoons his coffee in and leans on the counter to drink it, and you can feel him watching your ass the whole time."
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "want", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "paragraph", content = "Behind you he spoons his coffee in. In the window glass you catch his eyes on your ass. He catches himself, looks down into his mug and holds it low, in front of his jeans." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "paragraph", content = "Behind you he spoons his coffee in. In the window glass you catch his eyes on your ass. He catches himself, looks down into his mug and holds it low, in front of his jeans." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "paragraph", content = "Behind you he spoons his coffee in and leans on the counter to drink it, and you can feel him watching your ass the whole time." },
+]
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -43866,27 +44095,35 @@ id   = "m_stay"
 name = "Don't move"
 
 [[canvases.nodes.blocks]]
-type = "paragraph"
-content = "You don't move. You stand there with his hand on your hip and let him take as long as he wants. His thumb presses in once. The front of his jeans grazes your ass again, and your nipples go hard."
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "want", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "paragraph", content = "You don't move. You stand there with his hand on your hip, and your nipples go hard. He looks at the jar the whole time. His thumb presses in once, and then he catches himself and takes the hand away like the stove's on." },
+  { type = "dialog", content = "Sorry. Coffee.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "dialog", content = "Sorry for what?", props = { speaker = "player" } },
+  { type = "dialog", content = "Nothing. Forget it.", props = { speaker = "npc", npcId = "npc_mark" } },
+]
 
 [[canvases.nodes.blocks]]
-type = "paragraph"
-content = "Then he steps back with the jar, like nothing happened."
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "paragraph", content = "You don't move. You stand there with his hand on your hip, and your nipples go hard. He looks at the jar the whole time. His thumb presses in once, and then he catches himself and takes the hand away like the stove's on." },
+  { type = "dialog", content = "Sorry. Coffee.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "dialog", content = "Sorry for what?", props = { speaker = "player" } },
+  { type = "dialog", content = "Nothing. Forget it.", props = { speaker = "npc", npcId = "npc_mark" } },
+]
 
 [[canvases.nodes.blocks]]
-type = "dialog"
-content = "Good girl."
-props = { speaker = "npc", npcId = "npc_mark" }
-
-[[canvases.nodes.blocks]]
-type = "dialog"
-content = "For what?"
-props = { speaker = "player" }
-
-[[canvases.nodes.blocks]]
-type = "dialog"
-content = "For staying out of my way."
-props = { speaker = "npc", npcId = "npc_mark" }
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "paragraph", content = "You don't move. You stand there with his hand on your hip and let him take as long as he wants. His thumb presses in once. The front of his jeans grazes your ass again, and your nipples go hard." },
+  { type = "paragraph", content = "Then he steps back with the jar, like nothing happened." },
+  { type = "dialog", content = "You didn't move.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "dialog", content = "You didn't ask me to.", props = { speaker = "player" } },
+  { type = "dialog", content = "No. I didn't.", props = { speaker = "npc", npcId = "npc_mark" } },
+]
 
 [[canvases.nodes.blocks]]
 type = "thought_bubble"
@@ -43952,7 +44189,7 @@ name = "Channel 5"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "You drop onto the couch and flick to channel 5. A woman on her knees on a bed, a man behind her, his cock sliding in and out of her. Her tits swing with every thrust."
+content = "You drop onto the couch and thumb the TV on, and it comes up on channel 5, where whoever had it last left it. A woman on her knees on a bed, a man behind her, his cock sliding in and out of her. Her tits swing with every thrust."
 
 [[canvases.nodes.blocks]]
 type = "group"
@@ -43965,7 +44202,7 @@ blocks = [
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }] }
 blocks = [
-  { type = "paragraph", content = "You keep the sound low, and you keep one eye on the hall door." },
+  { type = "paragraph", content = "The sound's low, at least. You look at the hall door, quick." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -43997,8 +44234,25 @@ content = "Channel five, @player?"
 props = { speaker = "npc", npcId = "npc_mark" }
 
 [[canvases.nodes.blocks]]
-type = "paragraph"
-content = "He doesn't sit. He stands there with the can halfway to his mouth, and the front of his jeans fills."
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "want", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "paragraph", content = "He catches himself. His eyes come off you and go to the can in his hand, then the hall door, anywhere but the couch. He moves the beer down in front of his jeans." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "paragraph", content = "He catches himself. His eyes come off you and go to the can in his hand, then the hall door, anywhere but the couch. He moves the beer down in front of his jeans." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "paragraph", content = "He doesn't sit. He stands there with the can halfway to his mouth, and the front of his jeans fills." },
+]
 
 [[canvases.nodes.blocks]]
 type = "video"
@@ -44039,7 +44293,7 @@ content = "You jab the remote and the screen goes black. Your face is burning."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "I was flicking through. It was just on."
+content = "I didn't put this on. It was just on."
 props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
@@ -44048,8 +44302,25 @@ content = "I pay for that channel, you know. I know what's on it."
 props = { speaker = "npc", npcId = "npc_mark" }
 
 [[canvases.nodes.blocks]]
-type = "paragraph"
-content = "He drinks, but he doesn't take his eyes off you while he does it."
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "want", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "paragraph", content = "He drinks with his eyes on the black screen, and he doesn't look at you until you're up." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "paragraph", content = "He drinks with his eyes on the black screen, and he doesn't look at you until you're up." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "paragraph", content = "He drinks, but he doesn't take his eyes off you while he does it." },
+]
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -44066,7 +44337,7 @@ name = "Not yet"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "You don't reach for the remote. Not yet. On screen he grips her hips and pounds her, and the two of you watch it together, Mark standing, you on the couch with your face hot and your nipples tight."
+content = "You don't reach for the remote. Not yet. On screen he grips her hips and pounds her. Mark watches two seconds of it with you, then he catches himself and looks at the hall door. Your face is hot and your nipples are tight."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -44080,12 +44351,12 @@ props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "No. You're not."
+content = "I know. Turn it off, @player."
 props = { speaker = "npc", npcId = "npc_mark" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "Then you turn it off. He breathes out through his nose."
+content = "You turn it off. He breathes out through his nose and keeps his eyes on the hall door."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -44120,7 +44391,7 @@ props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "He says it, but he doesn't go."
+content = "You say it, but he doesn't go."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -44159,7 +44430,7 @@ name = "Channel 5"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "You drop onto the couch and flick to channel 5. Two women on a couch with one man between them. One rides his cock while the other one kisses her tits."
+content = "The TV's on with nobody watching it, stuck on channel 5. You're on the couch before you see what's on it. Two women on a couch with one man between them. One rides his cock while the other one kisses her tits."
 
 [[canvases.nodes.blocks]]
 type = "group"
@@ -44172,7 +44443,7 @@ blocks = [
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }] }
 blocks = [
-  { type = "paragraph", content = "You keep the sound low, and you keep one eye on the hall door." },
+  { type = "paragraph", content = "The sound's low, at least. You look at the hall door, quick." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -44204,8 +44475,25 @@ content = "Channel five, @player?"
 props = { speaker = "npc", npcId = "npc_mark" }
 
 [[canvases.nodes.blocks]]
-type = "paragraph"
-content = "He leans on the back of the couch with both hands. The bulge in his jeans is right there at the edge of your eye, and he doesn't move it."
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "want", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "paragraph", content = "He catches himself. He straightens up off the couch, looks at the ceiling, then the fan through the door, and he holds the can low, in front of his jeans." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "paragraph", content = "He catches himself. He straightens up off the couch, looks at the ceiling, then the fan through the door, and he holds the can low, in front of his jeans." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "paragraph", content = "He leans on the back of the couch with both hands. The bulge in his jeans is right there at the edge of your eye, and he doesn't move it." },
+]
 
 [[canvases.nodes.blocks]]
 type = "video"
@@ -44246,7 +44534,7 @@ content = "You jab the remote and the screen goes black. Your face is burning."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "I was flicking through. It was just on."
+content = "I didn't put this on. It was just on."
 props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
@@ -44255,8 +44543,25 @@ content = "I pay for that channel, you know. I know what's on it."
 props = { speaker = "npc", npcId = "npc_mark" }
 
 [[canvases.nodes.blocks]]
-type = "paragraph"
-content = "He drinks, but he doesn't take his eyes off you while he does it."
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "want", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "paragraph", content = "He turns his back to set the can down on the shelf, and he stays turned until you're up." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "paragraph", content = "He turns his back to set the can down on the shelf, and he stays turned until you're up." },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "paragraph", content = "He drinks, but he doesn't take his eyes off you while he does it." },
+]
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -44273,7 +44578,7 @@ name = "Not yet"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "You don't reach for the remote. Not yet. On screen the girl on top comes, loud, and the other one licks her nipple. Mark breathes out hard over your head. Your face is burning, and your nipples are tight."
+content = "You don't reach for the remote. Not yet. On screen the girl on top comes, loud, and the other one licks her nipple. Mark's hands come off the back of the couch, and he catches himself and looks at the ceiling. Your face is burning, and your nipples are tight."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -44287,12 +44592,12 @@ props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "No. You're not."
+content = "I know. Turn it off, @player."
 props = { speaker = "npc", npcId = "npc_mark" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "Then you turn it off. He breathes out through his nose."
+content = "You turn it off. He lets his breath go and looks anywhere but at you."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -44327,7 +44632,7 @@ props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "He says it, but he doesn't go."
+content = "You say it, but he doesn't go."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -44366,7 +44671,7 @@ name = "Channel 5"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "You drop onto the couch and flick to channel 5. A man flat on his back and a girl riding him, her tits bouncing, his hands full of her ass."
+content = "You flop down, hit the power button, and there it is, channel 5, the last thing anybody had on. A man flat on his back and a girl riding him, her tits bouncing, his hands full of her ass."
 
 [[canvases.nodes.blocks]]
 type = "group"
@@ -44379,7 +44684,7 @@ blocks = [
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }] }
 blocks = [
-  { type = "paragraph", content = "You keep the sound low, and you keep one eye on the hall door." },
+  { type = "paragraph", content = "The sound's low, at least. You look at the hall door, quick." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -44608,7 +44913,7 @@ name = "Channel 5"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "You drop onto the couch and flick to channel 5. A man has a woman bent over the arm of a couch, his cock driving into her from behind."
+content = "You press power without looking, and the set comes up on channel 5. Nobody changed it back. A man has a woman bent over the arm of a couch, his cock driving into her from behind."
 
 [[canvases.nodes.blocks]]
 type = "group"
@@ -44621,7 +44926,7 @@ blocks = [
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }] }
 blocks = [
-  { type = "paragraph", content = "You keep the sound low, and you keep one eye on the hall door." },
+  { type = "paragraph", content = "The sound's low, at least. You look at the hall door, quick." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -44739,7 +45044,7 @@ name = "Bent at the drum"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "He doesn't go to his bench. He leans on the door frame and looks at your ass, slow, and takes a drink of his beer."
+content = "He takes his time getting to his bench. He leans on the door frame first and looks at your ass, slow, and takes a drink of his beer."
 
 [[canvases.nodes.blocks]]
 type = "group"
@@ -44862,7 +45167,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Wait out the wash."
 targetType = "location"
-locationId = "home_garage"
+locationId = "home_hall"
 time_progression_minutes = 28
 
 [[canvases.nodes]]
@@ -44940,7 +45245,7 @@ name = "Bent at the drum"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "He doesn't go to his bench. He stands in the doorway with the mug halfway to his mouth and looks at your ass, but he doesn't drink."
+content = "He doesn't go to his bench yet. He stands in the doorway with the mug halfway to his mouth and looks at your ass, but he doesn't drink."
 
 [[canvases.nodes.blocks]]
 type = "group"
@@ -45063,7 +45368,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Wait out the wash."
 targetType = "location"
-locationId = "home_garage"
+locationId = "home_hall"
 time_progression_minutes = 28
 
 [[canvases.nodes]]
@@ -47887,7 +48192,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2, clamp = true }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l1", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -47896,7 +48201,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2, clamp = true }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -47905,7 +48210,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l1", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -47914,7 +48219,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -47923,7 +48228,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "22:00", end_time = "08:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l1", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -47932,7 +48237,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "22:00", end_time = "08:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -47941,7 +48246,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l1", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -47950,7 +48255,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases]]
@@ -48013,7 +48318,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2, clamp = true }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l1", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -48022,7 +48327,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2, clamp = true }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -48031,7 +48336,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l1", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -48040,7 +48345,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -48049,7 +48354,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "22:00", end_time = "08:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l1", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -48058,7 +48363,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "22:00", end_time = "08:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -48067,7 +48372,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l1", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -48076,7 +48381,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases]]
@@ -48139,7 +48444,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "street_first_l2", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2, clamp = true }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l2", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -48148,7 +48453,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "street_first_l2", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2, clamp = true }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -48157,7 +48462,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "flag", subject = "player", flag_key = "street_first_l2", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l2", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -48166,7 +48471,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "flag", subject = "player", flag_key = "street_first_l2", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -48175,7 +48480,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "22:00", end_time = "08:00" }, { type = "flag", subject = "player", flag_key = "street_first_l2", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l2", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -48184,7 +48489,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "22:00", end_time = "08:00" }, { type = "flag", subject = "player", flag_key = "street_first_l2", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -48193,7 +48498,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "flag", subject = "player", flag_key = "street_first_l2", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l2", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -48202,7 +48507,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "flag", subject = "player", flag_key = "street_first_l2", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 # ══════════════════════════════════════════════════════════════════

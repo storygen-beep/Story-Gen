@@ -1,4 +1,5 @@
 # [REVIEW] System — park
+> Changed 2026-11-04, LO's answers: the run pays Exhibitionism +1, cap 39 (F); waits for LO's re-sign.
 
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. The run pays Exhibitionism +1, cap 19, with no bra or no top.
 
@@ -37,7 +38,7 @@
 | row | effect, with op | lands on a screen? |
 |---|---|---|
 | Walk | one event from the walk pool | yes: who she passes, what they see |
-| Run | energy add −10 · Exhibitionism add +1, cap 19, with no bra or no top (DECISIONS 176) | yes: who looks, by what she wears |
+| Run | energy add −10 · Exhibitionism add +1, cap 39, with no bra or no top (LO, 2026-11-04) | yes: who looks, by what she wears |
 | Rest on a bench | energy add +5 (guess) | yes, short: her body, never a toast |
 | the next locked act | shown with what it needs | yes, one line |
 

@@ -528,7 +528,7 @@ Six rules are carried by that one choice:
    gate 10 as a meter that only ever closes. `the-meters.md` M5.
 4. **Write `clamp` on every effect, because the engine does not default it the way you would guess**
    (`engine.md` §21; LO, 2026-11-03, PICKS F21 + J72 a). An effect with no `clamp` on a choice, a node or an
-   entry is emitted unclamped (`v2.py:17612`, `:17469`): money stays whole, and a 0–100 meter can run past 100
+   entry is emitted unclamped (`v2.py:17679`, `:17536`): money stays whole, and a 0–100 meter can run past 100
    or below 0. So write `clamp = true` (or a `cap`) on every write to a 0–100 meter, and `clamp = false` on
    money and every other quantity, never `clamp = true` there, which truncates a balance at 100. Since
    2026-11-03 first_term's helper `tomlw.add` writes it both ways: `clamp = true` on a 0–100 meter, and
@@ -579,7 +579,7 @@ who arrives at R5 by way of a money bug does not leave thinking money was the wh
 > ```
 >
 > A `[[traits.labels]] key = "money"` label does reach the sidebar: `trait_bar` reads
-> `_item.label || setup.traitLabel(_tbKey)` (`v2.py:20938`), and `setup.traitLabel` reads the trait
+> `_item.label || setup.traitLabel(_tbKey)` (`v2.py:20968`), and `setup.traitLabel` reads the trait
 > labels (`v2.py:4701`, `engine.md` §33.3).
 
 **The field's mechanism is one printer.** Measured across the 25-game corpus, the games with a real

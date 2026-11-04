@@ -143,9 +143,10 @@ levels"): *"Hi"* at Exhibitionism 1, *"if you want to look, you can just ask"* a
   same rule as `the-arc.md` A3). A no may cost Warmth (CoT: friendship −10 polite, −25 annoyed, `cot:L72330`,
   `:72343`), move a counter the world keeps (CoT's `discouraged++`, `cot.md:131`), or cost nothing. The no is
   always on the screen.
-- **Where pressure is written, the no can fail.** A friend or a crowd pushing (*"Come on, do it,"*
+- **Where pressure is written, the no may fail: an option, never a duty; a no that always works is fine** (LO,
+  2026-11-04, D25 a). A friend or a crowd pushing (*"Come on, do it,"*
   `cot:L67794`) turns the no into a contest: CoT's Willpower check can fail and she gives in
-  (`cot:L67797-67799`). Build it as a no gated on her meter, shown locked above it (`show_when_locked`), and
+  (`cot:L67797-67799`). If you build it, build a no gated on her meter, shown locked above it (`show_when_locked`), and
   only where the push is on the page.
 
 ## H6 · The bridge from an accident to her choice

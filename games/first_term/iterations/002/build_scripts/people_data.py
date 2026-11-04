@@ -27,7 +27,7 @@ PEOPLE = [
          ]),
     dict(id="npc_laura", name="Laura", role="mom", age=41,
          relationship="Your mom, 41. Wants a happy house, and wants you closer than she says.",
-         tags=["Warm until she isn't", "Her good girl, close", "Dresses she doesn't wear", "White wine"],
+         tags=["Warm until she isn't", "Wants her daughter close", "Dresses she doesn't wear", "White wine"],
          # (pass 3 E4 / I56) no `want`: her sheet says "nothing of hers reads Want", nothing raises it, and the cast
          # page's show_traits = ["want"] printed "Lust 0 · Hides it" all release. A trait she doesn't keep never
          # shows (engine.md §34). Her lock is Love (warmth), which every step reads.

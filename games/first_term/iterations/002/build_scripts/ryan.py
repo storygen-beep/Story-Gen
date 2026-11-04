@@ -525,13 +525,14 @@ def stink_node(back):
         D(R, "Jesus. When did you last shower? Go and wash. Then come back."),
         T("You can smell it on yourself now too."),
     ], [go("Go and shower.", loc=back, mins=2)])
+KAYLA_OUT = {"type": "npc_at_location", "location_id": "home_ryan_room", "npc_id": "npc_kayla", "operator": "is_absent"}
 HOT_ROOM = [  # his room, evenings he's home (Mon, Tue, Thu, Sun 19:00-22:00)
     (1, "Lean in his doorway.", [trait("ryan_step", "gte", 2), CUR, flag("ryan_hall_seen")], None,   # a first tease, Curious, after the hall accident (DECISIONS 124)
      [], [hot_exit("\"Night, Ryan.\"", "home_hall", 10, [cap("corruption", 1, 39)])]),
     (4, "Lie on his bed. He only watches.", [trait("ryan_step", "gte", 6), BOLD_, SHOW], STRIP,   # naked by choice for one: Bold (DECISIONS 124)
      [VID("a naked girl on a bed touching herself, a guy in a chair gripping it, watching", "girl masturbates on his bed he watches", "only watch no touching girl fingers herself", pool_dir="sex/ryan_hot4_t5")],
      [hot_exit("Get dressed.", "home_hall", 30, [cap("corruption", 1, 59), cap("exhibitionism", 1, 59)], wardrobe=DRESS_BACK)]),
-    (5, "Stand naked in his room. Tell him when.", [trait("ryan_step", "gte", 6), BOLD_, SHOW], STRIP,   # it pays Corruption: Bold too (DECISIONS 124, reader)
+    (5, "Get naked in his room. Tell him when.", [trait("ryan_step", "gte", 6), BOLD_, SHOW], STRIP,   # it pays Corruption: Bold too (DECISIONS 124, reader)
      [VID("a naked girl watching a guy stroke his cock in his bedroom, telling him when", "naked girl watches guy jerk off", "she tells him when to cum", pool_dir="sex/ryan_hot5_t5")],
      [hot_exit("Get dressed.", "home_hall", 30, [cap("exhibitionism", 1, 59), cap("corruption", 1, 59)], wardrobe=DRESS_BACK)]),
 ]
@@ -851,11 +852,12 @@ out.append({
             G(cond(trait("ryan_step", "gte", 0), ntrait(R, "want", "lt", 40)),
               P("He's flat on his bed. He sits up, and his eyes go to you and away too fast."),
               D(R, "What's up?")),
-            G(cond(trait("ryan_step", "gte", 0), ntrait(R, "want", "gte", 40), ntrait(R, "want", "lt", 70)),
+            G(cond(trait("ryan_step", "gte", 0), ntrait(R, "want", "gte", 40), ntrait(R, "want", "lt", 70), KAYLA_OUT),
               P("He puts the phone face-down. He looks at you, all of you, and doesn't pretend he isn't."),
               D(R, "Hey, @player.nickname. Shut the door.")),
-            G(cond(trait("ryan_step", "gte", 0), ntrait(R, "want", "gte", 70)),
-              P("He's on his feet before you've shut the door. He stops an arm's length away, like that's the deal he made with himself."),
+            G(cond(trait("ryan_step", "gte", 0), ntrait(R, "want", "gte", 70), KAYLA_OUT),
+              GC(cond(flag("ryan_08_two_knocks_closed", False)),   # once closed, he opens on one knock and goes back to his bed
+                P("He's on his feet before you've shut the door. He stops an arm's length away, like that's the deal he made with himself.")),
               D(R, "You can't keep walking in here looking like that.")),
             *RT_ROOM[0],
             G(cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}),

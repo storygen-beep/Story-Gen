@@ -57,7 +57,7 @@ out.append({
                       curious=T("He wants them to see you're his. You wonder what it would be like to let them."),
                       bold=T("He wants them to see you're his. You want them to see too."),
                       hungry=T("He wants them to see you're his. You want them to see a lot more than a kiss.")),
-        ], [go("\"Again.\"", node="ask", mins=3, eff=[add("exhibitionism", 3, cap=79)])]),
+        ], [go("\"Again.\"", node="ask", mins=3, eff=[add("exhibitionism", 3, cap=79), add("campus_talk", 1, clamp=False)])]),
         node("ask", "Saturday", [
             P("You kiss him longer this time, long enough that the guys stop whistling and start looking at the grass."),
             ME("Saturday. Pick me up at the door."),
@@ -277,7 +277,7 @@ out.append({
         node("door", "The car", [
             # reader batch 5 (pass 3): the car beats (sheet jake_date_end) park him and kill the engine, so this line doesn't
             P("All the way home Jake's hand has been on your knee, and it's still there as he turns into your street."),
-            G(cond(LAURA_DRESS), D(J, "Everyone was looking at you tonight.")),
+            G(cond(LAURA_DRESS), D(J, "Every guy in that place was looking at you tonight.")),
             # pass 3 B4: the car talks
             D(J, "So. That was a good night. Right? Tell me that was a good night."),
             ME("It was a good night, Jake."),

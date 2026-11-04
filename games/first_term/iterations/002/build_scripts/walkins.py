@@ -299,6 +299,9 @@ walkin("walkin_kitchen_mark", "Reaching past", "home_kitchen",
      P("He doesn't ask you to move. His hand goes flat on your hip, big and warm, and he steps in behind you to reach past.")],
     "His hand stays.",
     [P("He takes his time with the jar. His hand stays on your hip the whole time, his thumb pressed into the curve of it. His chest is at your back, and the front of his jeans brushes your ass."),
+     # LO, 2026-11-04: he covers it at her first level (_cover_while_she_is_new copies this band for Corruption under 20)
+     GC(cond(ntrait(M, "want", "lt", 20)), P("Then he catches himself. He clears his throat and looks at the jar, hard, not down your front, and he keeps his hips back from you now. His hand is still on your hip, and he's the last to notice it."),
+        D(M, "Sorry, @player. You're in front of the coffee."), ME("You could have asked me to move."), D(M, "I should have.")),
      GC(cond(ntrait(M, "want", "lt", 50)), P("He clears his throat and gets the lid off, slow, like that's what he's doing."), D(M, "Morning, @player. You're in my way."), ME("You could have asked me to move."), D(M, "Could have.")),
      GC(cond(*ANY), P("He doesn't pretend. He looks down over your shoulder, straight down your front, and his fingers spread on your hip."), D(M, "Nice view from up here, @player."), ME("Get your coffee, Mark."), D(M, "I'm getting it.")),
      VID("a middle-aged man behind a girl at a kitchen counter, his hand on her hip, reaching past her", "stepdad hand on hip kitchen counter morning", "man brushes past girl kitchen counter hand on hip", pool_dir="sex/walkin_kitchen_mark_t4")],
@@ -308,11 +311,14 @@ walkin("walkin_kitchen_mark", "Reaching past", "home_kitchen",
      go("Push back into him.", node="m_push", mins=2, cond_=cond(BOLD), eff=[pay("corruption", 59)])],
     raise_=[lust(M)], records=["mark_brushed_kitchen"], when=[wd(5), tod("08:15", "08:30")], extra=[
         res("m_aside", "Step aside", [P("You slide out from under his hand and take your mug to the window."), D(M, "Touchy this morning."), ME("It's Saturday. I'm allowed."),
-                                      P("Behind you he spoons his coffee in and leans on the counter to drink it, and you can feel him watching your ass the whole time.")],
+                                      GC(cond(ntrait(M, "want", "lt", 20)), P("Behind you he spoons his coffee in. In the window glass you catch his eyes on your ass. He catches himself, looks down into his mug and holds it low, in front of his jeans.")),
+                                      GC(cond(*ANY), P("Behind you he spoons his coffee in and leans on the counter to drink it, and you can feel him watching your ass the whole time."))],
             "Drink your coffee.", "home_kitchen", 10),
-        res("m_stay", "Don't move", [P("You don't move. You stand there with his hand on your hip and let him take as long as he wants. His thumb presses in once. The front of his jeans grazes your ass again, and your nipples go hard."),
-                                     P("Then he steps back with the jar, like nothing happened."),
-                                     D(M, "Good girl."), ME("For what?"), D(M, "For staying out of my way."),
+        res("m_stay", "Don't move", [GC(cond(ntrait(M, "want", "lt", 20)), P("You don't move. You stand there with his hand on your hip, and your nipples go hard. He looks at the jar the whole time. His thumb presses in once, and then he catches himself and takes the hand away like the stove's on."),
+                                        D(M, "Sorry. Coffee."), ME("Sorry for what?"), D(M, "Nothing. Forget it.")),
+                                     GC(cond(*ANY), P("You don't move. You stand there with his hand on your hip and let him take as long as he wants. His thumb presses in once. The front of his jeans grazes your ass again, and your nipples go hard."),
+                                        P("Then he steps back with the jar, like nothing happened."),
+                                        D(M, "You didn't move."), ME("You didn't ask me to."), D(M, "No. I didn't.")),
                                      T("He felt you stay. He'll remember it.")],
             "Drink your coffee.", "home_kitchen", 10),
         res("m_push", "Push back into him", [P("You push back into him. Your ass presses right into the front of his jeans, and he's hard. His fingers dig into your hip and hold you there."),
@@ -327,10 +333,11 @@ for host in ("kitchen_breakfast", "kitchen_coffee"):
 # Mark from the garage (Mon, Tue, Thu, Fri) or the kitchen (Wed), whose late TV row starts at 22:00; Ryan before
 # his weekend TV row (14:00); Laura on a Sunday from the kitchen, the cover branch: one line, no heat, no pay.
 # ═════════════════════════════════════════════════════════════════════════════
-def ch5_in(scene, loud):
-    """Channel 5 on, worded per walker: what is on the screen, then the sound (C2's `tv_loud`)."""
-    return [P("You drop onto the couch and flick to channel 5. " + scene),
-            GC(cond(TV_LOUD), P(loud)), GC(cond(TV_QUIET), P("You keep the sound low, and you keep one eye on the hall door."))]
+def ch5_in(opening, scene, loud):
+    """Channel 5 on by accident (she pressed plain "Watch TV"), worded per walker: how it comes up, what is on the
+    screen, then the sound (C2's `tv_loud`)."""
+    return [P(opening + " " + scene),
+            GC(cond(TV_LOUD), P(loud)), GC(cond(TV_QUIET), P("The sound's low, at least. You look at the hall door, quick."))]
 
 
 CH5_ANS = lambda pre: [
@@ -339,27 +346,32 @@ CH5_ANS = lambda pre: [
     go("Leave it on.", node=f"{pre}_cur", mins=10, cond_=cond(CURIOUS), eff=[pay("corruption", 39)])]
 
 
-def mark_tv(cid, here_item, from_where, mother_line, when, scene, lines, loud):
+# LO, 2026-11-04: `cover` is what he does at her first level, its own text per walk-in (answer, off, the "Not yet" screen).
+# "Not yet" only shows under Corruption 20, so that screen always covers; the other two are bands for _cover_while_she_is_new.
+def mark_tv(cid, here_item, from_where, mother_line, when, opening, scene, lines, loud, cover):
     walkin(cid, "Channel 5", "home_living_room",
         f"B3, Mark: in from {from_where} before his late TV row, he finds channel 5 on. His Lust +2 on the moment; her answer on Corruption: off 0, wait +1 cap 19, leave it on (Curious) +1 cap 39.",
         [here_item, flag("mark_saw_her")],
-        ch5_in(scene, loud)
+        ch5_in(opening, scene, loud)
         + [P(f"Mark walks in from {from_where} with a beer and stops behind the couch.")],
         "He's seen the screen.",
         [P(lines[0]),
          D(M, "Channel five, @player?"),
-         P(lines[1]),
+         GC(cond(ntrait(M, "want", "lt", 20)), P(cover["answer"])),
+         GC(cond(*ANY), P(lines[1])),
          VID("a man standing behind a couch with a beer, staring, porn on the TV, a girl curled on the couch", "stepdad catches girl watching porn tv", "man walks in on girl watching porn living room", pool_dir=f"sex/{cid}_t5")],
         CH5_ANS("m"), raise_=[lust(M)], records=["mark_caught_ch5"], when=when, extra=[
             res("m_off", "Turn it off", [P("You jab the remote and the screen goes black. Your face is burning."),
-                                         ME("I was flicking through. It was just on."),
-                                         D(M, "I pay for that channel, you know. I know what's on it."), P("He drinks, but he doesn't take his eyes off you while he does it.")],
+                                         ME("I didn't put this on. It was just on."),
+                                         D(M, "I pay for that channel, you know. I know what's on it."),
+                                         GC(cond(ntrait(M, "want", "lt", 20)), P(cover["off"])),
+                                         GC(cond(*ANY), P("He drinks, but he doesn't take his eyes off you while he does it."))],
                 "Get up.", "home_hall", 2),
             res("m_gg", "Not yet", [P(lines[2]),
-                                    D(M, "Your mother doesn't watch this one."), ME("I'm not my mother."), D(M, "No. You're not."), P("Then you turn it off. He breathes out through his nose.")],
+                                    D(M, "Your mother doesn't watch this one."), ME("I'm not my mother."), D(M, "I know. Turn it off, @player."), P(cover["gg_end"])],
                 "Get up.", "home_hall", 2),
             res("m_cur", "Leave it on", [P(lines[3]), P(lines[4]),
-                                         D(M, mother_line), ME("So go to bed, Mark."), P("He says it, but he doesn't go."), D(M, "In a minute."),
+                                         D(M, mother_line), ME("So go to bed, Mark."), P("You say it, but he doesn't go."), D(M, "In a minute."),
                                          VID("porn on a living room TV at night, a girl watching from the couch, a man standing behind her", "girl keeps watching porn while stepdad watches", "watching porn on tv man behind couch", pool_dir=f"sex/{cid}_leave_t5")],
                 "Turn it off.", "home_hall", 5)])
     return cid
@@ -367,26 +379,35 @@ def mark_tv(cid, here_item, from_where, mother_line, when, scene, lines, loud):
 
 # Mon, Tue, Thu, Fri 21:30-22:00 Laura is in the kitchen (her evening row); on Wednesday she has no row, she is out
 mark_tv("walkin_tv_mark_garage", here(M, "home_garage"), "the garage", "Not with your mother in the house, @player.", [wd(0, 1, 3, 4), tod("21:30", "22:00")],
+        "You drop onto the couch and thumb the TV on, and it comes up on channel 5, where whoever had it last left it.",
         "A woman on her knees on a bed, a man behind her, his cock sliding in and out of her. Her tits swing with every thrust.",
         ["He looks at the screen. The man's cock drives into her, and she moans. Then Mark looks down at you.",
          "He doesn't sit. He stands there with the can halfway to his mouth, and the front of his jeans fills.",
-         "You don't reach for the remote. Not yet. On screen he grips her hips and pounds her, and the two of you watch it together, Mark standing, you on the couch with your face hot and your nipples tight.",
+         "You don't reach for the remote. Not yet. On screen he grips her hips and pounds her. Mark watches two seconds of it with you, then he catches himself and looks at the hall door. Your face is hot and your nipples are tight.",
          "You leave it on. You don't look at him. On screen she's on her back now, legs up, and he drives into her slow and deep, his cock shining every time it slides out.",
          "Behind you Mark doesn't move. The beer can creaks in his fist. You're wet, and you squeeze your thighs together and keep watching."],
-        "You left the sound up from earlier. Her moans fill the room and carry out to the garage door.")
+        "You left the sound up from earlier. Her moans fill the room and carry out to the garage door.",
+        dict(answer="He catches himself. His eyes come off you and go to the can in his hand, then the hall door, anywhere but the couch. He moves the beer down in front of his jeans.",
+             off="He drinks with his eyes on the black screen, and he doesn't look at you until you're up.",
+             gg_end="You turn it off. He breathes out through his nose and keeps his eyes on the hall door."))
 mark_tv("walkin_tv_mark_kitchen", here(M, "home_kitchen"), "the kitchen", "Your mother'll be back, @player.", [wd(2), tod("21:30", "22:00")],
+        "The TV's on with nobody watching it, stuck on channel 5. You're on the couch before you see what's on it.",
         "Two women on a couch with one man between them. One rides his cock while the other one kisses her tits.",
         ["He smells of chilli and beer. He looks at the screen, at the girl bouncing on that cock, and then at you, curled up in front of it.",
          "He leans on the back of the couch with both hands. The bulge in his jeans is right there at the edge of your eye, and he doesn't move it.",
-         "You don't reach for the remote. Not yet. On screen the girl on top comes, loud, and the other one licks her nipple. Mark breathes out hard over your head. Your face is burning, and your nipples are tight.",
+         "You don't reach for the remote. Not yet. On screen the girl on top comes, loud, and the other one licks her nipple. Mark's hands come off the back of the couch, and he catches himself and looks at the ceiling. Your face is burning, and your nipples are tight.",
          "You leave it on. On screen they swap, and the second girl sinks down on his cock, slow, her ass bouncing. You can feel Mark's eyes on the side of your face.",
          "He doesn't say turn it off. His knuckles go white on the couch. You're wet, and you press your thighs together and watch her ride."],
-        "You left the sound up from earlier. The moaning carries over the kitchen fan.")
+        "You left the sound up from earlier. The moaning carries over the kitchen fan.",
+        dict(answer="He catches himself. He straightens up off the couch, looks at the ceiling, then the fan through the door, and he holds the can low, in front of his jeans.",
+             off="He turns his back to set the can down on the shelf, and he stays turned until you're up.",
+             gg_end="You turn it off. He lets his breath go and looks anywhere but at you."))
 
 walkin("walkin_tv_ryan", "Channel 5", "home_living_room",
     "B3, Ryan: down from his room for his weekend TV row, he finds channel 5 on. His Lust +2 on the moment; her answer on Corruption: off 0, wait +1 cap 19, leave it on (Curious) +1 cap 39.",
     [here(R, "home_ryan_room")],
-    ch5_in("A man flat on his back and a girl riding him, her tits bouncing, his hands full of her ass.",
+    ch5_in("You flop down, hit the power button, and there it is, channel 5, the last thing anybody had on.",
+           "A man flat on his back and a girl riding him, her tits bouncing, his hands full of her ass.",
            "You left the sound up. Her moans go all the way down the hall.")
     + [P("Ryan comes in from the hall for the TV and stops in the doorway.")],
     "He's seen the screen.",
@@ -410,7 +431,8 @@ walkin("walkin_tv_ryan", "Channel 5", "home_living_room",
 walkin("walkin_tv_laura", "Channel 5", "home_living_room",
     "B3, Laura (the cover branch): in from the kitchen on a Sunday night, she sees the screen. One line, no heat, no pay.",
     [here(L, "home_kitchen")],
-    ch5_in("A man has a woman bent over the arm of a couch, his cock driving into her from behind.",
+    ch5_in("You press power without looking, and the set comes up on channel 5. Nobody changed it back.",
+           "A man has a woman bent over the arm of a couch, his cock driving into her from behind.",
            "You left the sound up. Her moans carry all the way into the kitchen.")
     + [P("Laura comes through from the kitchen with a tea towel over her shoulder, and stops.")],
     "She's seen the screen.",
@@ -458,7 +480,7 @@ walkin("walkin_laundry_mark", "Bent at the drum", "home_garage",
      G(cond(SKIRT), P("Your short skirt has ridden up the backs of your thighs.")),
      P("The door from the house opens behind you. Mark, back from dinner.")],
     "He stops in the doorway.",
-    [P("He doesn't go to his bench. He leans on the door frame and looks at your ass, slow, and takes a drink of his beer."),
+    [P("He takes his time getting to his bench. He leans on the door frame first and looks at your ass, slow, and takes a drink of his beer."),
      # H7 (pass 3 A70): under Want 20 he catches himself and looks away; the open look waits for his higher Want
      GC(cond(ntrait(M, "want", "lt", 20)), P("Then he catches himself. He looks at the ceiling, at his bench, anywhere, and his beer hand drops in front of his jeans."),
         D(M, "Whites with whites, @player. Don't let me stop you."), ME("I know how to do laundry, Mark."), D(M, "Could've fooled me.")),
@@ -472,7 +494,7 @@ walkin("walkin_laundry_mark", "Bent at the drum", "home_garage",
                                   P("You slam the drum door and turn the dial, and the machine starts up shaking."),
                                   GC(cond(ntrait(M, "want", "lt", 20)), P("He gets out of the doorway just enough to let you by, and he looks at the ceiling while you do it.")),
                                   GC(cond(*ANY), P("He gets out of the doorway just enough to let you by, and he looks at your ass the whole way past."))],
-            "Wait out the wash.", "home_garage", 28),
+            "Wait out the wash.", "home_hall", 28),
         res("l_later", "Later", [ME("It can wait. I'll do it later."), D(M, "I'm out here till ten."),
                                  P("You pick your basket up off the floor and carry it past him. He doesn't stop you, but he doesn't move much either.")],
             "Take your basket in.", "home_hall", 2)])
@@ -488,7 +510,7 @@ walkin("walkin_laundry_mark_sat", "Bent at the drum", "home_garage",
      G(cond(SKIRT), P("Bent like this, your short skirt is up over the backs of your thighs.")),
      P("The door from the house opens behind you. Mark, with his coffee, out for his day at the bench.")],
     "He stops in the doorway.",
-    [P("He doesn't go to his bench. He stands in the doorway with the mug halfway to his mouth and looks at your ass, but he doesn't drink."),
+    [P("He doesn't go to his bench yet. He stands in the doorway with the mug halfway to his mouth and looks at your ass, but he doesn't drink."),
      GC(cond(ntrait(M, "want", "lt", 20)), P("Then he catches himself and looks at his bench instead, hard, like it owes him money. He holds the mug low, in front of his jeans."),
         D(M, "Saturday's my garage, @player. Be quick about it."), ME("It's one load, Mark. Half an hour."), D(M, "Then stay out of my way for it.")),
      GC(cond(*ANY), D(M, "Saturday's my garage, @player. Carry on."),
@@ -500,7 +522,7 @@ walkin("walkin_laundry_mark_sat", "Bent at the drum", "home_garage",
                                   P("You shut the drum on your Saturday wash and the old thing rattles into life."),
                                   GC(cond(ntrait(M, "want", "lt", 20)), P("He carries his mug to the bench and sets it down with his back to you, and he stays that way until you've gone.")),
                                   GC(cond(*ANY), P("He carries his mug to the bench the long way, past you, and his eyes stay on your ass the whole walk."))],
-            "Wait out the wash.", "home_garage", 28),
+            "Wait out the wash.", "home_hall", 28),
         res("l_later", "Later", [ME("You have your Saturday, Mark. I'll come back when you're done."), D(M, "Five o'clock."),
                                  P("You hook the basket onto your hip and walk it back into the house. He drinks his coffee and watches you go, but he doesn't say anything else.")],
             "Take your basket in.", "home_hall", 2)])

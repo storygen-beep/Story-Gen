@@ -1033,7 +1033,7 @@ speaker = "unknown"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "The short skirt: you turn round to look over your shoulder. The hem stops just under your ass. Wear it out of the house and people look. Wear it to the Sunday table and Mark does more than look. But you'd need to be Curious or Daring to walk out the door in it."
+content = "The short skirt: you turn round to look over your shoulder. The hem stops just under your ass. Wear it out of the house and heads turn. Wear it to the Sunday table and Mark has something to say about it. But you'd need to be Curious or Daring to walk out the door in it."
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -1058,19 +1058,18 @@ targetType = "location"
 locationId = "clothes_shop"
 time_progression_minutes = 20
 
-# C5 (DECISIONS 147): Exhibitionism 10. One stranger in the line looks, and she leaves the curtain where it is
-# (a look that happens to her, stage 1). +1 cap 19, once a day (shop_curtain_today, cleared at midnight).
+# C5 (DECISIONS 147), raised by LO 2026-11-04: Exhibitionism 20. One stranger in the line looks, and she leaves the
+# curtain where it is: her chosen flash for one person, stage 2 (the-heat-ladder.md H1). +1 cap 39, once a day
+# (shop_curtain_today, cleared at midnight). Below 20 no button: the room above reads true without it.
 # (pass 3 group 2, round 2; gate `an act pays on every way out`) the pay and the day brake ride this button into the
-# act, so both ways out of the curtain pay the same; once spent it greys out for the day.
+# act, so both ways out of the curtain pay the same; once spent it goes for the day.
 [[canvases.nodes.exit_block.choices]]
 text       = "Leave the curtain where it is."
 targetType = "node"
 nodeId     = "curtain"
-show_when_locked = true
-locked_text = "Leave the curtain open: once a day."
 time_progression_minutes = 5
-conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 10 }, { type = "flag", subject = "player", flag_key = "shop_curtain_today", operator = "is_false" } ] }
-effects = [ { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 } ]
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "shop_curtain_today", operator = "is_false" } ] }
+effects = [ { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 } ]
 flagEffects = [ { targetType = "player", flag = "shop_curtain_today", op = "set" } ]
 
 # Heat proposal A4 (DECISIONS 147): Curious. In the changing room she touches herself in the mirror while the

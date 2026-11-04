@@ -75,6 +75,17 @@ still speak. That split is L3 below.
 
 ---
 
+## Everyone is an adult
+
+**No child framing next to sex** (LO, 2026-11-04). Everyone is an adult, and flirting between adults stays:
+"good girl" from Jake, Zoe or a stranger is fine. But no line frames her as a child, or as someone's little girl,
+next to a sexual or body-looking line. That covers a parent figure's "good girl" and "my girl" as praise, "so grown
+up", "growing up", "don't grow up", "like you're ten", "the kids", "little girl", "baby girl", "young lady", "when you
+were little", and "daddy" in a sexual scene. Level names on the sidebar and stage cards are UI, not lines. Gate
+*no child framing next to sex*.
+
+---
+
 ## The truth rule
 
 **Loud writing makes claims.** *"She hasn't slept." "You didn't eat last night." "Nobody ever
@@ -111,7 +122,8 @@ one was out of character, and one printed a stat that does not exist.
    `wardrobeEffects` equip earlier in the same canvas. Undressing during an explicit act is backed
    by the act. A "you strip" line inside an act must move a garment only when a later screen or an exit
    of that canvas names her clothes again; elsewhere the act backs it (LO, 2026-11-03, PICKS B53 c; gate
-   *her clothes are named exactly*). Gate `her clothes are backed` (a `--ship` block) checks this: garments are the words
+   *her clothes are named exactly*, which accepts an exact check on the trigger, an enclosing `group` or every
+   choice into the screen, B54). Gate `her clothes are backed` (a `--ship` block) checks this: garments are the words
    of the game's own catalog names; "undressing" is a strip word or *pulls … off / down / open*. *"Your skirt rides up"* on a canvas any outfit reaches is a lie to every player in jeans.
 
 **A promise about the future must be built.** A line that names a future event (a day, a week or a

@@ -556,14 +556,14 @@ counter the world keeps, or cost nothing. Where a friend or a crowd pushes on th
 no can be a contest she loses (`the-heat-ladder.md` H5).
 
 **A no can fail only where a friend or a crowd pushes** (LO, 2026-11-03, PICKS D25 c). That is the one place
-R5b.2 below applies. Everywhere else a no parks (A3), and a no that always works there is correct, not a
-menu item.
+R5b.2 below applies, and there it is **an option, never a duty** (LO, 2026-11-04, D25 a). A no that always
+works is fine, with a push on the page or not. Everywhere else a no parks (A3).
 
 > ⚠️ **Gate `she can say no` checks only that one exists** — it fails on zero and prints the rate
 > beside the verdict (field: 2.09% of labels, 79% going somewhere the yes does not, median 262 words
 > behind them). Whether a refusal is graded and written is not gated.
 
-**R5b.2 · Where pressure is written, a refusal can fail.** Added 2026-08-24 after the field was
+**R5b.2 · Where pressure is written, a refusal may fail: an option, never a duty.** Added 2026-08-24 after the field was
 re-read on exactly this question, and narrowed by LO on 2026-11-03 (PICKS D25 c): it holds only where a
 friend or a crowd pushes on the page (`the-heat-ladder.md` H5). Everywhere else her no parks and always
 works. R5b above says the decline branch is written and paid; the field carries a half we do not have at all.
@@ -580,11 +580,11 @@ meter in opposite directions**:
 Not a special case: **464** skillcheck branch calls and **41** `*Resist*` passages in that game,
 **360** struggle/resist/escape passages in Degrees of Lewdity.
 
-Both ends of the range are defects, and players name both:
+What players say about each end (an observation, not a duty on the game):
 
 - **No refusal at all** is why they leave: a player quit a game after two hours because at every
   step all she could do was resist and hope (`degrees-of-lewdity`, 5 likes; paraphrased).
-- **A refusal that always works** is why they get bored — three separate comments mourn a *removed*
+- **A refusal that always works** bores some of them — three separate comments mourn a *removed*
   failure case: *"did they remove npc's not listening when you resist? ... i really enjoyed that"*
   (8 likes), *"they'd usually ignore your resistance, but now they just relent"* (6 likes) —
   `course-of-temptation`.
@@ -827,6 +827,9 @@ words — `author-game/references/lanes.md:167`: *"The hub opener is ONE constan
 tier the base node into T0/T1/T2 `[group]` blocks… Tiering the opener is a known failure"* — an arc
 whose base node rewrites itself per stat band reads as N different scenes instead of one escalating
 hub.
+
+**What stays the same is the first identity line** (LO, 2026-11-04, D56 a). Level bands may rewrite the rest of a
+hub's opening under that line: that is the screen moving, not the opener changing.
 
 **⚠️ The pool itself can be a function of state, and the field's #2 game buys it.** Added
 2026-08-28 from `~/Documents/Accumulation_Study_20260828/`. `destroyer`'s bedrooms are purchased

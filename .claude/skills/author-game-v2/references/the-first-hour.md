@@ -219,8 +219,8 @@ screen, and sets that branch's flags. It never takes a no that ends a path (LO, 
 ## F2 · Boot and capstone are two canvases
 
 The checker and the template both assume this shape. Gate `the opening opens a door`
-(gates.py:9694) judges the handover at the end of the capstone the funnel walks into (`_capstone_at`,
-gates.py:5086), and `templates/first-hour.toml` A1 is the boot and sets `opening_done`.
+(gates.py:9700) judges the handover at the end of the capstone the funnel walks into (`_capstone_at`,
+gates.py:5322), and `templates/first-hour.toml` A1 is the boot and sets `opening_done`.
 
 The shape:
 
@@ -620,7 +620,7 @@ screen as a face, and the hub cannot appear before the meeting has fired.
 >        checks: schedules · conditions · repeatability.  requiresNpc is never read.
 > ```
 >
-> `requiresNpc` is emitted at `v2.py:14664` and read on the random-encounter selector
+> `requiresNpc` is emitted at `v2.py:14694` and read on the random-encounter selector
 > (`v2.py:6782`), the substitution rules (`v2.py:6861`), and — through `setup._npcPresentForCanvas`
 > (`v2.py:5889`) — the solo lane (`v2.py:5830`, `:6479`) and the launcher (`v2.py:3663`).
 > **None of them is auto-fire.**
@@ -723,6 +723,10 @@ the escalation replaces it whenever its conditions hold.
 ### So a second surface for the same person in the same room is a NODE INSIDE THE FIRST.
 
 His one line on her skirt is such a node, never its own button.
+
+**A whole scene bound to a person in his own hub's room** (LO, 2026-11-04, C58) is its own canvas when it has
+its own window or conditions (its own `trigger.schedules`, hour, meter or flag), with `requires_npc` so it shows
+only while he is there. With neither, it is a node in the hub.
 
 Written as its own canvas, a talk screen cannot take `npc` without the hub swallowing it (the
 selector keeps one canvas per character, `v2.py:5804-5807`), so it lands in the solo lane — the one
@@ -998,7 +1002,7 @@ visit. This is the same rule for people, and it is the one that was missing.**
 "Who is this" is a **standing** question. A meeting answers it once, and the player then spends forty
 visits in a hub where the man is a bare first name.
 
-**Lint `the role stays attached`** (gates.py:5519) takes each character's anchor words from his own
+**Lint `the role stays attached`** (gates.py:5730) takes each character's anchor words from his own
 `npcs[].relationship` line and counts how often his own canvases use them, per 10k words. It prints a
 list, thinnest first, with no bar. It counts every canvas bound to him, so a re-entered surface and a
 one-shot count the same. Reading which is which is yours.
@@ -1112,11 +1116,10 @@ The gates and lints that check this file are in one table, `SKILL.md` "The score
 rule here (LO, 2026-11-03, PICKS C51 b: one table, no per-reference copy to go stale). `python3
 scripts/gates.py <slug>`.
 
-⚠️ **Nothing checks that the guidance surface waits for the meeting.** The `named before met` lint
-does read `[[quest_cards]]` — every string field on every card, beside the opening and the room
-descriptions (`gates.py:5424-5426`) — but it skips any character who has a meeting anywhere
-(`gates.py:5453`). So a game can pass every gate above with its Quests page still naming the whole
-cast on turn one. Read the page yourself at turn one. A gate here needs a second game before its shape is honest.
+**Gate *every card carries the met flag* checks that the guidance surface waits for the meeting** (F8).
+The `named before met` lint cannot: it reads `[[quest_cards]]` — every string field on every card, beside the
+opening and the room descriptions (`gates.py:5684`) — but it skips any character who has a meeting anywhere.
+A card with no person bound to it is outside the gate, so still read the Quests page yourself at turn one.
 
 **The bar is the field's, not an invented number.** Shady Deals' [Car Mechanic] opens on
 `<<if $met_mechanic == 0>>`, so the first visit is the meeting (F5), and 14 field games keep a named

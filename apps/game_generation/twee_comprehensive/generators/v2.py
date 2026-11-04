@@ -6031,6 +6031,35 @@ setup.isCanvasSelectable = function(c) {{
     return setup.isCanvasValid(c);
 }};
 
+// A greyed row's cooldownMessage says when it opens, so it is true only if waiting can open it.
+// Does the row pass once the clock is taken out? The clock is a schedule, a time_of_day or
+// weekday item, and a since-flag wait already running (gte/gt, flag set). A flag, a meter, a
+// person or a garment is not. A one-of-several (OR) holding a clock item can open by waiting.
+setup.onlyTheClockShut = function(c) {{
+    try {{
+        if (!c || c.isActive === false) return false;
+        var cond = c.conditions;
+        if (!cond || cond.version !== '1.0' || !Array.isArray(cond.items)) return true;
+        var isClock = function(it) {{
+            if (!it) return false;
+            if (it.type === 'time_of_day' || it.type === 'weekday') return true;
+            if (it.operator !== 'gte' && it.operator !== 'gt') return false;
+            if (it.type === 'hours_since_flag') return setup.hoursSinceFlag(it) !== null;
+            if (it.type === 'days_since_flag') {{
+                return setup.triggerConditionsSatisfied({{ version: '1.0', logic: 'AND', items: [
+                    {{ type: 'flag', subject: it.subject, flag_key: it.flag_key, operator: 'is_true' }}] }});
+            }}
+            return false;
+        }};
+        if (cond.logic === 'OR' && cond.items.some(isClock)) return true;
+        return setup.triggerConditionsSatisfied({{
+            version: '1.0', logic: cond.logic, items: cond.items.filter(function(it) {{ return !isClock(it); }})
+        }});
+    }} catch (e) {{
+        return false;
+    }}
+}};
+
 // Check if a canvas is valid (schedule, conditions, repeatability)
 // ⚠️ DO NOT add requiresNpc or isActive here. This is the shared chokepoint: the
 // auto-fire selector calls it (78 one-shot meetings across 8 games would tighten at
@@ -6612,8 +6641,9 @@ setup.renderSoloActivities = function(locationId) {{
             // would be a lie. Hide the row; do not explain it.
             if (!setup._npcPresentForCanvas(c, locationId)) continue;
             if (!setup.isCanvasSelectable(c)) {{
-                // E21 — if author opted in, surface as a grayed cooldown entry
-                if (c.showWhenBlocked) {{
+                // E21 — if author opted in, surface as a grayed cooldown entry. Only when the
+                // clock shut it: a row short on a meter or a flag has no hours that open it.
+                if (c.showWhenBlocked && setup.onlyTheClockShut(c)) {{
                     soloCooldownBlocked.push(c);
                 }}
                 continue;

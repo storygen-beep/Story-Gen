@@ -1,4 +1,5 @@
 # [REVIEW] Scene — living_tv_channels (the remote)
+> Changed 2026-11-04, LO's answers: "Her moans fill the living room." (D, a loud TV is no audience); waits for LO's re-sign.
 
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. Ryan is across the hall; the sound bounces off the hall walls (Q7). The build does not read this sheet's beats.
 
@@ -90,4 +91,4 @@ The screens not written out above, as built:
 
 - `living_tv` · `loud` · 70 words · 3 counted:
 
-> You thumb the volume up, and up again. Her moans fill the whole room. The slap of his hips on her ass is loud as a hand clap. You can hear it bounce off the hall walls. Anyone in the house can hear it now. Your nipples go hard. You squeeze your thighs together on the couch and leave it right where it is. Harder. Oh God, harder. Don't stop.
+> You thumb the volume up, and up again. Her moans fill the living room. The slap of his hips on her ass is loud as a hand clap. You can hear it bounce off the hall walls. Anyone in the house can hear it now. Your nipples go hard. You squeeze your thighs together on the couch and leave it right where it is. Harder. Oh God, harder. Don't stop.

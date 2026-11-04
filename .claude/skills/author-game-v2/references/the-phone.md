@@ -433,9 +433,9 @@ That is this file's rule stated as architecture, and it is why that system does 
 
 **The engine has the primitive.** A chat reply choice carries `effects`,
 `flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2948`).
-`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:7515`) pushes
+`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:7545`) pushes
 onto `game_state.scheduled`; the day tick decrements `daysLeft` and fires at zero
-(`v2.py:7132-7133`), where `setup.fireScheduledEvent` (`v2.py:7529`) can set a flag, start a quest,
+(`v2.py:7162-7163`), where `setup.fireScheduledEvent` (`v2.py:7559`) can set a flag, start a quest,
 or deliver a conversation.
 
 ```toml

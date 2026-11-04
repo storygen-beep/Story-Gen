@@ -964,7 +964,7 @@ npc and do the stuffs but she couldnt do it and npc told her that she stinks."* 
 names that refusal, or says it colours only.
 
 `shuts` also routes her: a need that is empty sends her to the place that refills it, and that place
-rolls an event (`engine.md` §30.1). Checked: gates *a need falls where it says* and *a refill place rolls an event*. A need behind a content toggle has an off switch, a start choice
+rolls an event (`engine.md` §30.1). Checked: gates *a need falls where it says* ("sex" in `falls` means partnered scenes, not solo or watching canvases; a canvas she only watches says watch, peek or spy in its id or name) and *a refill place rolls an event*. A need behind a content toggle has an off switch, a start choice
 (`the-surfaces.md` R5b.4); with it off, nothing reads it.
 
 In the field (three FAIL-list games, numbers only) the fourth field is a stock or a window: no food,

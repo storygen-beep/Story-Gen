@@ -1,4 +1,5 @@
 # [REVIEW] Person — Laura
+> Changed 2026-11-04, LO's answers: her want and the curfew call's answer no longer praise her as a child (A); waits for LO's re-sign.
 > Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. Sunday 00:00–01:00 is its own awake row.
@@ -27,7 +28,7 @@
 |---|---|
 | age | 41 |
 | role | mom |
-| what she wants from her | to stay her good girl, and to be close to her |
+| what she wants from her | to tell her everything, and to be close to her |
 | what she visibly wants, each visit | a happy house; she wants @player nearer than she says |
 | what she keeps | warmth only: her lock is **Love** · also `laura_suspicion`, below. The build has no Want for her |
 | where she sleeps | `home_master_bedroom` |
@@ -219,7 +220,7 @@ awake. She never says where @player is; the engine can't see that.
 
 | Laura | her answer | after it |
 |---|---|---|
-| "It's nine. You know the rule. Home by eleven." | "I know. Eleven." | "Good girl." |
+| "Good, your phone's on, sweetheart. You know the rule. No parties, no late shifts, no dates." | "I know. Not this week." | "That's all I wanted to hear, sweetheart." |
 | | "I'm staying at Zoe's." | "We'll talk about this." · `laura_suspicion` add +2 |
 | | (lets it ring) | `laura_suspicion` add +2 |
 

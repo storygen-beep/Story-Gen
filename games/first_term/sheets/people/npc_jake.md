@@ -1,4 +1,5 @@
 # [REVIEW] Person — Jake
+> Changed 2026-11-04, LO's answers: his line after a date is "Every guy in that place was looking at you tonight." (D); waits for LO's re-sign.
 
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. His hot repeatable as built: every booked date, the car's caps (Exhibitionism 39), "Come in." and what it costs.
 
@@ -28,7 +29,7 @@
 | met | Zoe's first party (Zoe A 1) |
 | his line: short skirt | "Guys. Look at her." He says it to the team. |
 | his line: Zoe's dress | His eyes go down her legs and stay there. "Later. When they're not looking." |
-| his line: Laura's dress | "Everyone was looking at you tonight." (at the door after a date only) · campus: "Is that your mom's?" |
+| his line: Laura's dress | "Every guy in that place was looking at you tonight." (at the door after a date only) · campus: "Is that your mom's?" |
 
 ## Crude words, by stage (SP2: "on their sheets")
 

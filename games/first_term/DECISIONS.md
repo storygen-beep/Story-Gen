@@ -14,7 +14,7 @@
 
 ## Open questions (LO's, 2026-11-04)
 
-Stage rows (buttons below their level), rent_short_1's key against the Want, and the skill rows: the list in `iterations/002/OPEN_QUESTIONS_20261104.md`.
+All answered by LO, 2026-11-04 (row 186). None open except his signature.
 
 ## This release (0.1)
 
@@ -181,6 +181,11 @@ is a talk or a locked door, the men's meters lock nothing, 17 of Laura's tease s
 | 183 | Weekly pay: the build's top week is $620-848. `week_income` 504 and SP4's $520-750 were both wrong; both now say the build's figure. | LO's list, item 6. |
 | 184 | Six false-alarm checks fixed (day word, ladders, café name, named before met, ignoring a thread, week income); two more found on the way (her voice lines counted as climb, and as thought over speech). | LO's list, item 5. |
 | 185 | Reader, sixth round: 138 scenes re-read, 83 fails; last look at the 63 the fixes touched, 34 fails, 27 of them fixed after that read and not re-read. Stage rows wait for LO. | Reader pass, 2026-11-04. |
+| 186 | LO's answers on the open questions: raise the class, shop, gym, Sunday table and couch gates; waive the door peek, Mark's "Let him look." and Zoe's strip; change the Want and opening to her old key; waive Laura's Love start; parties and the park stay out of the first hour; the listed lints decided; public acts and Mark's kitchen and TV walk-ins fixed now. | LO, 2026-11-04. |
+| 187 | Child framing finished: no parent figure says "Good girl", and Laura's tag changed. Flirting between adults stays. The skill has the rule and a check. The level name Good Girl stays. | LO, 2026-11-04. |
+| 188 | Street walks pay to the top of the stage their dress code needs (39, 59); the park run to 39 when she runs with no bra or no top. Played 14 days in Chrome: about +1 Exhibitionism a day, Corruption +1 on a level's first day only; with the run about +2 a day, stopping at 39. Not too fast. | LO, 2026-11-04; played. |
+| 189 | A normal week (one shift Monday to Friday, two on Saturday, normal uniform) earns $70-84, or $94-108 with Tom's text answered, against $75. | LO's question, worked from the pay rules. |
+| 190 | Reader: 45 scenes, 13 fails, all fixed after that read and not re-read. | Reader pass, 2026-11-04. |
 
 Engine only (`setup.castScheduleHtml` in `v2.py`). The full Schedules page keeps its weekly table; first_term has no
 button to it since DECISIONS 95.
@@ -731,3 +736,4 @@ One line per built piece, in LO's words, written by `pieces.py played`.
 - 2026-11-04 · q1_q17_line_fixes · played by Claude in Chrome: "New game in Chrome after Q10: wake, problem, shower, hall, run, breakfast, rule, card. Breakfast reads 'Mark, your step-father, has already gone to work.'; the rule screen has Ryan in the shower down the hall, then his door shuts. Ryan's hall offers 'Run to your room.', 'Knock next time.', 'Stop and talk.' with no '(ends his path)'."
 - 2026-11-04 · q4_q12_refills_lace · played by Claude in Chrome: "Full Chrome play of the dev build at 636d8ef4: every Canvas_/StartingCanvas_/Location_ passage (869) rendered with no SugarCube error, no 'Error:', no NaN or [object Object]. Then a new game: the opening, the dean's office, and 1,268 random clicks over 7 game days (week 1 Monday to week 2 Monday, the clock jumped to Friday 18:30 once): no error, no dead end, no screen stuck; Sunday rent ran short ( of ) and rent_short_1 took her key."
 - 2026-11-04 · writing_pass_20261104 · played by Claude in Chrome: "Played in Chrome on the dev build: garage_laundry shows a different thought at Corruption 5 and 25, its buttons work, no error views. Headless: 1,147 passages render, 1,250 random clicks with 0 dead ends."
+- 2026-11-04 · lo_answers_20261104 · played by Claude in Chrome: "Played the street walks and the park run 14 days each in Chrome by real clicks with the day set by script: pace above in DECISIONS 188. Fixed the plain dress paying as no top, and the Hungry card."

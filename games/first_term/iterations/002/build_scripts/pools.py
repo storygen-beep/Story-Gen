@@ -306,7 +306,9 @@ out.append({
         GC(cond(trait("exhibitionism", "lt", 60)), T("Take it past the benches. Let them look.")),
         GC(cond({"type": "worn_exposure", "operator": "gte", "value": 0}), T("You want every man on that loop turning his head.")),
     ], [
-        go("Run the loop. (10 energy)", node="run", mins=35, costs=[{"trait": "energy", "value": 10}], cond_=DARING_RUN, eff=[capped("exhibitionism", 1, CAP_GG)]),   # her clothes open it, not a meter, so it opens at 0 and stops at 19 (LO, 2026-11-04)
+        go("Run the loop. (10 energy)", node="run", mins=35, costs=[{"trait": "energy", "value": 10}], cond_=cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}), eff=[capped("exhibitionism", 1, CAP_CUR)]),   # LO, 2026-11-04: a dress-code act pays to the top of the stage its dress code needs (a meter at 20)
+        go("Run the loop. (10 energy)", node="run", mins=35, costs=[{"trait": "energy", "value": 10}], cond_=cond({"type": "clothing_slot", "slot": "bra", "operator": "equipped"}, {"type": "clothing_slot", "slot": "top", "operator": "unequipped"}, {"type": "clothing_slot", "slot": "dress", "operator": "unequipped"}), eff=[capped("exhibitionism", 1, CAP_CUR)]),
+        go("Run the loop. (10 energy)", node="run", mins=35, costs=[{"trait": "energy", "value": 10}], cond_=cond({"type": "clothing_slot", "slot": "bra", "operator": "equipped"}, {"type": "clothing_slot", "slot": "dress", "operator": "equipped"})),   # a dress empties the top slot, so it is not "no top": no dress code, no pay
         go("Run the loop. (10 energy)", node="run", mins=35, costs=[{"trait": "energy", "value": 10}], cond_=cond({"type": "clothing_slot", "slot": "bra", "operator": "equipped"}, {"type": "clothing_slot", "slot": "top", "operator": "equipped"})),
         go("Walk it instead.", node="walk", mins=20),
     ]),
