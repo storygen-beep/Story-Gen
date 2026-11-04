@@ -1,4 +1,5 @@
 # [REVIEW] Scenes — the sex scenes in the cold places (A1-A7)
+> Changed 2026-11-04, LO's answers: the curtain needs Exhibitionism 20 and pays to cap 39; no greyed button below it (B); waits for LO's re-sign.
 
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. The built-differently items are confirmed, DECISIONS 170.
 
@@ -92,7 +93,7 @@ Each act in the build: an offer screen with a written no that pays nothing, then
 | where · when | the clothes shop changing room, from "Look at yourself in the mirror." |
 | gate | Corruption 20 |
 | want | "Everything all right in there? Shout if you need another size." |
-| next step | she touches herself in the mirror; C5 (Exhibitionism 10): "Leave the curtain where it is." |
+| next step | she touches herself in the mirror; C5 (Exhibitionism 20): "Leave the curtain where it is." |
 | hook | C5 on the same screen: "Leave the curtain where it is." |
 | BRAKE | once a day (`shop_touch_today`, `shop_curtain_today`) |
 | the written no | "Not here." pays 0 |
@@ -103,7 +104,7 @@ Each act in the build: an offer screen with a written no that pays nothing, then
 | node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
 |---|---|---|---|---|
 | `changing_room` | The changing room is a curtain that doesn't reach the wall on one side. | no | "Hang them back up." → Clothes Shop | — |
-|  |  |  | "Leave the curtain where it is." (Exhibitionism 10+ · not `shop_curtain_today`) → `curtain` | Exhibitionism +1 (cap 19) · `shop_curtain_today` set |
+|  |  |  | "Leave the curtain where it is." (Exhibitionism 20+ · not `shop_curtain_today`) → `curtain` | Exhibitionism +1 (cap 39) · `shop_curtain_today` set |
 |  |  |  | "Look at yourself in the mirror." (Corruption 20+ · not `shop_touch_today`) → `mirror` | — |
 | `mirror` | You're alone behind the curtain with the mirror and whatever you're halfway into. | no | "Touch yourself." (Corruption 20+ · not `shop_touch_today`) → `touch` | Corruption +1 (cap 39) · `shop_touch_today` set |
 |  |  |  | "Not here." → `touch_no` | — |

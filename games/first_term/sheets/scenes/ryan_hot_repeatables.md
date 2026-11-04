@@ -1,4 +1,5 @@
 # [REVIEW] Scene — ryan_hot_repeatables
+> Changed 2026-11-04, LO's answers: "He stares at the screen. He's not following the game." (D, a team on TV is no audience); waits for LO's re-sign.
 > Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. Row 6: Sunday only; Mark's TV is his radio in 6a-6c (no screen has a TV in the kitchen). "Go and shower." lands at the shower; row 7's "Back to your room." lands in her room.
@@ -126,7 +127,7 @@ entry is true in whatever she wears. A tease screen, not explicit, by design.
 
 **3b** · 102 words · explicit words 4 · median sentence 10
 
-> You lean across Ryan for the remote on the far arm, slow, in nothing but your bra and panties. Your tits hang an inch from his face. You keep your hands to yourself. When you sit back, he's tugging at the front of his shorts. "Problem?" "Shut up." "Tell me why you're fixing yourself, Ryan. Use the word." He stares at the screen. His team is losing. "Because my cock's hard, @player.nickname. Because of your tits." *Good boy.* You slide one bra strap off your shoulder. His cock twitches in his shorts, and you squeeze your thighs together over your wet panties.
+> You lean across Ryan for the remote on the far arm, slow, in nothing but your bra and panties. Your tits hang an inch from his face. You keep your hands to yourself. When you sit back, he's tugging at the front of his shorts. "Problem?" "Shut up." "Tell me why you're fixing yourself, Ryan. Use the word." He stares at the screen. He's not following the game. "Because my cock's hard, @player.nickname. Because of your tits." *Good boy.* You slide one bra strap off your shoulder. His cock twitches in his shorts, and you squeeze your thighs together over your wet panties.
 
 **3c** · 113 words · explicit words 6 · median sentence 10
 

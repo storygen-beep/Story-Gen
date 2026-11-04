@@ -1317,7 +1317,7 @@ description  = "Your mom, 41. Wants a happy house, and wants you closer than she
 portrait     = "portraits/laura.jpg"
 relationship = "Your mom, 41. Wants a happy house, and wants you closer than she says."
 role         = "mom"
-tags         = ["Warm until she isn't", "Her good girl, close", "Dresses she doesn't wear", "White wine"]
+tags         = ["Warm until she isn't", "Wants her daughter close", "Dresses she doesn't wear", "White wine"]
 show_traits  = ["warmth"]
 core_traits  = { warmth = 50 }
 

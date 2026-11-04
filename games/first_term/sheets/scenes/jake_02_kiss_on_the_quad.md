@@ -1,4 +1,5 @@
 # [REVIEW] Scene — jake_02_kiss_on_the_quad
+> Changed 2026-11-04, LO's answers: the kiss adds campus_talk +1 (D, a real public act); waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 
@@ -33,7 +34,7 @@ The seven columns, filled from what the build does.
 
 | the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
 |---|---|---|---|---|---|---|
-| on the quad he kisses her in front of his team | his team | being shown off | "Hi.", then "Again." | "Guys. Look at her." His hand low on her back | yes | his step 2; Exhibitionism +3 (cap 79); Saturday booked |
+| on the quad he kisses her in front of his team | his team | being shown off | "Hi.", then "Again." | "Guys. Look at her." His hand low on her back | yes | his step 2; Exhibitionism +3 (cap 79); campus_talk +1; Saturday booked |
 
 ## Branch map — as built (2026-11-03)
 
@@ -45,7 +46,7 @@ One row per exit. Read from the build; it replaces the drafted map.
 |---|---|---|---|---|
 | `team` | Jake's on the grass with four guys from the team, all of them in the same … | no | "Hi." — 2 versions, by meters → `kiss` | — |
 | | | | "Not now." → `no` | — |
-| `kiss` | He kisses you right there, in front of all of them, his hand low on your … | no | "Again." → `ask` | Exhibitionism +3 (cap 79) |
+| `kiss` | He kisses you right there, in front of all of them, his hand low on your … | no | "Again." → `ask` | Exhibitionism +3 (cap 79) · campus_talk +1 |
 | `ask` | You kiss him longer this time, long enough that the guys stop whistling and start looking … | no | "Saturday." → Quad | Jake's step = 2 · `jake_02_done` set · `jake_date_booked` set |
 | `no` | The guys jeer at him. | no | "Leave him with the guys." → Quad | back in 2 days |
 

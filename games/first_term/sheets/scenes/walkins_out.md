@@ -1,4 +1,5 @@
 # [REVIEW] Scenes — the walk-ins outside the house (B9-B20)
+> Changed 2026-11-04, LO's answers: the gym's "Finish your set." needs Exhibitionism 60 and pays to cap 79, a group seeing her is stage 4 (B); waits for LO's re-sign.
 > Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. B14: "Strip and get in."; "Let her." needs Exhibitionism 60, pays both meters, costs Energy 10 and Hygiene 10.
@@ -41,7 +42,7 @@ Built differently from the proposal (DECISIONS 150), confirmed, DECISIONS 170: B
 | host · who | `gym_workout` · Jake's team (Jake at the front, once she knows him) |
 | when | Tue/Thu 15:00-15:15 · odds 0.25, 0.35, 0.45 |
 | want | a dozen of them stop and look at her on the bench |
-| next step | "Finish your set." in her sports bra (Daring) |
+| next step | "Finish your set." in her sports bra (Watched, Exhibitionism 60) |
 | hook | none in the build: nothing reads `team_saw_gym` |
 | the no | "Grab your things and go." pays 0 |
 
@@ -51,7 +52,7 @@ Built differently from the proposal (DECISIONS 150), confirmed, DECISIONS 170: B
 |---|---|---|---|---|
 | `moment` | You're flat on your back on the bench with the bar over your chest, alone in … | no | "They've seen you." → `answer` | `walkin_gym_team_today` set · `team_saw_gym` set |
 | `answer` | The noise stops. | no | "Grab your things and go." → `t_go` | — |
-|  |  |  | "Finish your set." (wearing sports bra · no top · no dress · Exhibitionism 20+ · Exhibitionism under 40) → `t_set` | Exhibitionism +1 (cap 39) · costs Energy 10 |
+|  |  |  | "Finish your set." (wearing sports bra · no top · no dress · Exhibitionism 60+) → `t_set` | Exhibitionism +1 (cap 79) · costs Energy 10 |
 | `t_go` | You rack the bar, grab your bag off the floor and hug it to your sports … | no | "Keep walking." → Campus | — |
 | `t_set` | You don't get up. | yes | "Leave them staring." → Campus | `worked_out` set |
 

@@ -1,4 +1,5 @@
 # [REVIEW] Scenes — the walk-ins at home (B1-B8)
+> Changed 2026-11-04, LO's answers: Mark covers while her Corruption is under 20 in walkin_kitchen_mark and both walkin_tv_mark, "Good girl." reworded (E, A); waits for LO's re-sign.
 
 > New 2026-11-03 (third alignment pass): written from the build, for LO to read and sign. The plan is the signed
 > heat proposal, `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`, part B (signed 2026-11-03, DECISIONS 147),
@@ -256,19 +257,19 @@ The screens not written out above, as built:
 
 - `walkin_tv_mark_garage` · `moment` · 83 words · 4 counted:
 
-> You drop onto the couch and flick to channel 5. A woman on her knees on a bed, a man behind her, his cock sliding in and out of her. Her tits swing with every thrust. You left the sound up from earlier. Her moans fill the room and carry out to the garage door. You keep the sound low, and you keep one eye on the hall door. Mark walks in from the garage with a beer and stops behind the couch.
+> You drop onto the couch and thumb the TV on, and it comes up on channel 5, where whoever had it last left it. A woman on her knees on a bed, a man behind her, his cock sliding in and out of her. Her tits swing with every thrust. You left the sound up from earlier. Her moans fill the room and carry out to the garage door. The sound's low, at least. You look at the hall door, quick. Mark walks in from the garage with a beer and stops behind the couch.
 
 - `walkin_tv_mark_kitchen` · `moment` · 73 words · 4 counted:
 
-> You drop onto the couch and flick to channel 5. Two women on a couch with one man between them. One rides his cock while the other one kisses her tits. You left the sound up from earlier. The moaning carries over the kitchen fan. You keep the sound low, and you keep one eye on the hall door. Mark walks in from the kitchen with a beer and stops behind the couch.
+> The TV's on with nobody watching it, stuck on channel 5. You're on the couch before you see what's on it. Two women on a couch with one man between them. One rides his cock while the other one kisses her tits. You left the sound up from earlier. The moaning carries over the kitchen fan. The sound's low, at least. You look at the hall door, quick. Mark walks in from the kitchen with a beer and stops behind the couch.
 
 - `walkin_tv_mark_kitchen` · `m_gg` · 63 words · 3 counted:
 
-> You don't reach for the remote. Not yet. On screen the girl on top comes, loud, and the other one licks her nipple. Mark breathes out hard over your head. Your face is burning, and your nipples are tight. Your mother doesn't watch this one. I'm not my mother. No. You're not. Then you turn it off. He breathes out through his nose.
+> You don't reach for the remote. Not yet. On screen the girl on top comes, loud, and the other one licks her nipple. Mark's hands come off the back of the couch, and he catches himself and looks at the ceiling. Your face is burning, and your nipples are tight. Your mother doesn't watch this one. I'm not my mother. I know. Turn it off, @player. You turn it off. He lets his breath go and looks anywhere but at you.
 
 - `walkin_tv_ryan` · `moment` · 72 words · 3 counted:
 
-> You drop onto the couch and flick to channel 5. A man flat on his back and a girl riding him, her tits bouncing, his hands full of her ass. You left the sound up. Her moans go all the way down the hall. You keep the sound low, and you keep one eye on the hall door. Ryan comes in from the hall for the TV and stops in the doorway.
+> You flop down, hit the power button, and there it is, channel 5, the last thing anybody had on. A man flat on his back and a girl riding him, her tits bouncing, his hands full of her ass. You left the sound up. Her moans go all the way down the hall. The sound's low, at least. You look at the hall door, quick. Ryan comes in from the hall for the TV and stops in the doorway.
 
 - `walkin_tv_ryan` · `answer` · 58 words · 3 counted:
 

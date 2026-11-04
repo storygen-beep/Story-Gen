@@ -1,4 +1,5 @@
 # [REVIEW] The Want — First Term
+> Changed 2026-11-04, LO's answers: her old bedroom key (C), Laura's want reworded so she doesn't praise her as a child (A); waits for LO's re-sign.
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. The rent runs $75, $90, $100; the rent page takes it (Q6); goal 1 ends on four Sundays in a row; one hall (Q7).
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-09). One page, five parts. Doctrine: `references/the-want.md`.
 > **Re-read this before every release.** Bump `want.last_read_at_release` in `v2_state.json`.
@@ -13,7 +14,7 @@
 
 Ella is 18, and the game says so on day one. Today is her first day of college. She still lives at
 home in a rented house with her mom Laura, her step-father Mark and her step-brother Ryan. She has
-never had a job, her own money or a lock on her door.
+never had a job or her own money. She has an old key to her bedroom door, and little else that's hers.
 
 **The places she knows:**
 
@@ -71,7 +72,7 @@ Everyone is 18 or older, and the game says so.
 |---|---|---|---|---|
 | `npc_ryan` — step-brother | 22 | the one person at home on her side | her, and he stops hiding it | want + warmth |
 | `npc_mark` — step-father | 46 | his approval, and to be off the hook | control, and her | want + power |
-| `npc_laura` — mom | 41 | to stay her good girl, and to be close to her | a happy house; she watches everything, and she wants Ella nearer than she says | warmth |
+| `npc_laura` — mom | 41 | to tell her everything, and to be close to her | a happy house; she watches everything, and she wants Ella nearer than she says | warmth |
 | `npc_zoe` — college friend | 19 | someone to follow into fun | a partner in trouble | step counter + memory flags |
 | `npc_tom` — café manager | 31 | shifts and good tips | her behind the counter, closing late | want + power |
 | `npc_hale` — professor | 39 | a passing grade | to see how far she will go | step counter + memory flags |

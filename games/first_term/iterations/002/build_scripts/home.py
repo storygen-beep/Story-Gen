@@ -219,11 +219,11 @@ out.append(solo("hall_mirror", "Check your clothes in the hall mirror", "One lin
             GC(cond(slot("top", False), slot("dress", False), slot("bottom"), slot("bra", False)), P("Topless in the hall. Your bare tits are out, and every door off it could open.")),
             GC(cond(slot("bottom", False), slot("dress", False), slot("top"), slot("underwear")), P("A top and your panties and nothing else, in the hall where every door off it could open.")),
             GC(cond(slot("bottom", False), slot("dress", False), slot("top"), slot("underwear", False)), P("A top and nothing under it. Your bare ass is out in the hall, where every door off it could open.")),
-            # Iteration 002, part 8 (reader): the top only when there is one; "good girl" only in plain clothes.
+            # Iteration 002, part 8 (reader): the top only when there is one; "Laura would approve" only in plain clothes.
             GC(cond(slot("bra", False), slot("top"), *COVERED), P("No bra. Your nipples show through your top, plain as anything in the hall light.")),
             GC(cond(slot("bra", False), slot("dress"), *COVERED), P("No bra under it. Your nipples show through the fabric, plain as anything in the hall light.")),
             GC(cond(*COVERED, {"type": "worn_corruption", "operator": "eq", "value": 0}, {"type": "worn_type", "operator": "neq", "value": "thin_top"}),
-               P("Covered, neat, nothing anyone could say a word about. You look like Laura's good girl.")),
+               P("Covered, neat, nothing anyone could say a word about. Laura would approve.")),
             # scene reader b03 (2026-11-03): the blue dress is Laura's own, so "nothing Laura would have bought you" can't be its line
             GC(cond(*COVERED, {"type": "clothing_item", "item_id": "laura_blue_dress", "operator": "equipped"}),
                P("Laura's blue dress, and it's tighter on your tits and your ass than it ever was on her. Covered, technically.")),
@@ -295,16 +295,20 @@ LIVING_EMPTY = [nobody("home_living_room")]
 LAURA_IN_HOUSE = [here(L, x) for x in ("home_kitchen", "home_master_bedroom", "home_hall", "home_bathroom", "home_garden", "home_ella_room", "home_ryan_room", "home_garage", "home_front_door")]
 PASSERS = [[here(M, "home_kitchen"), flag("mark_saw_her")], [here(R, "home_ryan_room"), here(M, "home_kitchen", False)]]   # Mark after his accident (H2, DECISIONS 124)
 out.append(solo("living_couch", "Lie on the couch",
-    "Alone in the room. Who passes through reads what she has on; exhibitionism +1 once a day if Daring, in her underwear, and someone's home to pass.",
+    "Alone in the room. Who passes through reads what she has on (in her underwear they look only from Daring, Mark also after his accident; below it she covers up); exhibitionism +1 once a day if Daring, in her underwear, and someone's home to pass.",
     "home_living_room", [
         node("couch", "The couch", [
             P("You stretch out on the couch, one knee up, the remote on your stomach."),
-            G(cond(*UNDIES, here(M, "home_kitchen")), P("Mark comes through from the kitchen with a drink and stops behind the couch. You're in your underwear, but he doesn't say cover up. He looks down the length of you, at your legs, at your ass in your panties. The drink stops halfway to his mouth."), D(M, "Comfortable, @player?"), ME("Very."), D(M, "Hm."), P("Then he goes, slowly.")),
+            # LO, 2026-11-04 (the-heat-ladder.md H1, H2): what she wears at home needs Exhibitionism 20, and for Mark his accident first
+            G(cond(*UNDIES, here(M, "home_kitchen")),
+              GC(cond(DARING, flag("mark_saw_her")), P("Mark comes through from the kitchen with a drink and stops behind the couch. You're in your underwear, but he doesn't say cover up. He looks down the length of you, at your legs, at your ass in your panties. The drink stops halfway to his mouth."), D(M, "Comfortable, @player?"), ME("Very."), D(M, "Hm."), P("Then he goes, slowly.")),
+              GC(cond(*ANY), P("The kitchen door goes, and you grab the cushion and hold it over your bra. Mark comes through with a drink and sees your bare legs and the cushion. He catches himself and looks at the blank TV."), D(M, "Put some clothes on, @player."), ME("I was just getting up."), P("He goes, and he doesn't look back."))),
             # copy fix A17 (DECISIONS 125): his look by his Want band (npc_ryan.md:205 under 40; at 40 he stops pretending)
-            G(cond(*UNDIES, here(R, "home_ryan_room"), ntrait(R, "want", "lt", 40)), P("Ryan comes out of his room for a drink and stops at the end of the hall. His eyes go straight to your tits in your bra. Then they go up to the ceiling. \"Jesus, @player.nickname.\" He goes to the kitchen without looking again.")),
-            G(cond(*UNDIES, here(R, "home_ryan_room"), ntrait(R, "want", "gte", 40)), P("Ryan comes out of his room for a drink and stops at the end of the hall. His eyes go down you, your tits, your panties, and come back up slow. He doesn't pretend he wasn't looking. \"Jesus, @player.nickname.\"")),
+            G(cond(*UNDIES, DARING, here(R, "home_ryan_room"), ntrait(R, "want", "lt", 40)), P("Ryan comes out of his room for a drink and stops at the end of the hall. His eyes go straight to your tits in your bra. Then they go up to the ceiling. \"Jesus, @player.nickname.\" He goes to the kitchen without looking again.")),
+            G(cond(*UNDIES, DARING, here(R, "home_ryan_room"), ntrait(R, "want", "gte", 40)), P("Ryan comes out of his room for a drink and stops at the end of the hall. His eyes go down you, your tits, your panties, and come back up slow. He doesn't pretend he wasn't looking. \"Jesus, @player.nickname.\"")),
             # reader 2026-11-04: her "Get me one too" goes while he is still on his way to the kitchen, before he comes back with the can
-            G(cond(*UNDIES, here(R, "home_ryan_room")), ME("Get me one too, Ryan."), D(R, "Get your own. And put some clothes on."), P("He takes a long time getting that drink. On the way back down the hall he holds the can in front of his shorts.")),   # pass 3 B4
+            G(cond(*UNDIES, trait("exhibitionism", "lt", 20), here(R, "home_ryan_room")), P("Ryan's door opens down the hall, and you drag the cushion across your chest. He comes out for a drink and stops at the end of the hall. He sees your bare legs and the cushion, goes red and looks at the ceiling."), D(R, "Warn a guy, @player.nickname."), ME("It's my couch too."), P("He gets his drink with his back to you.")),
+            G(cond(*UNDIES, DARING, here(R, "home_ryan_room")), ME("Get me one too, Ryan."), D(R, "Get your own. And put some clothes on."), P("He takes a long time getting that drink. On the way back down the hall he holds the can in front of his shorts.")),   # pass 3 B4
             G(cond(SKIRT), P("With your knee up, the skirt is nowhere. Anybody coming in from the hall would see straight up it.")),
             G(cond(*COVERED, {"type": "worn_type", "operator": "neq", "value": "short_skirt"}), P("Nobody looks twice at a girl on a couch in her clothes.")),
         ], [*[c for who, stay in zip(PASSERS, ("stay_mark", "stay_ryan")) for c in brake(
@@ -381,7 +385,7 @@ tv_nodes += [
          go("Turn the sound up.", node="loud", mins=1, swl=True, cond_=cond(trait("corruption", "gte", 10))),
          go("Change the channel.", node="remote"), go("Turn it off.", loc="home_hall")]),
     node("loud", "The sound up", [
-        P("You thumb the volume up, and up again. Her moans fill the whole room. The slap of his hips on her ass is loud as a hand clap. You can hear it bounce off the hall walls."),
+        P("You thumb the volume up, and up again. Her moans fill the living room. The slap of his hips on her ass is loud as a hand clap. You can hear it bounce off the hall walls."),
         P("Anyone in the house can hear it now. Your nipples go hard. You squeeze your thighs together on the couch and leave it right where it is."),
         WHO("Harder. Oh God, harder. Don't stop."),
         VID("a couple having sex on a TV screen, the volume bar full, a girl on a couch", "porn on tv volume up living room", "loud porn on tv girl watching", pool_dir="sex/tv_adult_loud_t5")],
@@ -723,7 +727,7 @@ sun_nodes = [
           # scene reader b02 (2026-11-03): the lotion choice itself needs no top and no dress (writer.CHOICES), so the
           # only other live copy is topless; the bra-and-top / bra-and-dress copies led to a screen of "Not today." alone
           for extra in (BRA_ONLY,
-                        [BOLD, trait("ryan_step", "gte", 7), *TOPLESS])],
+                        [BOLD, trait("ryan_step", "gte", 7), here(M, "home_garage", False), *TOPLESS])],   # the lotion needs Mark out of the garage door
         go("Play up to Mark in the garage door.", node="sun_mark", cond_=cond(MARK_SEES, CURIOUS, trait("mark_step", "gte", 3), flag("mark_saw_her"), flag("sunned", False), *BRA_ONLY)),   # after his accident (H2, DECISIONS 124)
         # reader 2026-11-04 (a solo button is a real act): Mark in the garage door and no look button open to her,
         # before his accident or under both her stages: the same hour and the same pay as her other sun button

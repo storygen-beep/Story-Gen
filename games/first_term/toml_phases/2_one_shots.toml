@@ -48,7 +48,7 @@ content = "Your alarm goes at seven and you're already awake, staring at the cei
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
-content = "You're eighteen, but you still live at home, in this house, with your mom and your step-father and your step-brother and one bathroom between the four of you. You've never had a job. You've never had a lock on anything that was yours. Your account has nothing in it, and you checked twice."
+content = "You're eighteen, but you still live at home, in this house, with your mom and your step-father and your step-brother and one bathroom between the four of you. You've never had a job. You've got an old key to your bedroom door, and not much else that's yours. Your account has nothing in it, and you checked twice."
 
 [[canvases.nodes.blocks]]
 type = "thought_bubble"

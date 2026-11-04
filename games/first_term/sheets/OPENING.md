@@ -1,4 +1,5 @@
 # [REVIEW] Opening — First Term
+> Changed 2026-11-04, LO's answers: she has an old key to her bedroom door and little else that's hers (C); waits for LO's re-sign.
 
 > Changed 2026-11-04 (LO's answer Q10; PICKS 17): Mark has already left for work, so his words are last night's on screen 3 and his RENT envelope sits at breakfast; Ryan is in the shower during breakfast; no final no on Ryan's first meeting; Laura's call names no stairs; the start-choice reactions as built. Waits for LO's re-sign.
 
@@ -63,7 +64,7 @@ The breakfast scene sets `rent_starts`. The rent is armed here and charged only 
 
 | # | the job of the screen | the line it carries |
 |---|---|---|
-| 2 | setup: who she is, plainly, in her voice | first day, still at home, never had a job or a lock |
+| 2 | setup: who she is, plainly, in her voice | first day, still at home, never had a job, an old key to her door and little else that's hers |
 | 3 | the problem | Mark, last night: *"You're an adult now. Adults pay their way."* · *"Seventy-five a week. With what?"* |
 | 4 | her body, her room, the house | the bathroom door, Ryan's voice through it |
 | 5 | the first person, the conflict, the first choice | *"First day of college, huh. Look at you."* |
