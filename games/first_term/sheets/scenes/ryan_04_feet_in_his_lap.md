@@ -1,8 +1,9 @@
-# [REVIEW] Scene — ryan_04_feet_in_his_lap
+# [READY] Scene — ryan_04_feet_in_his_lap
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. "Go to bed." lands in her room.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. "Go to bed." lands in her room.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the step pays Corruption +3 on "Liar."; the no's own screen; the step row. the explicit beats as built, measured.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. the step pays Corruption +3 on "Liar."; the no's own screen; the step row. the explicit beats as built, measured.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 

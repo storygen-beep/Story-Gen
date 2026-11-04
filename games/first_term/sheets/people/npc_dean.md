@@ -1,6 +1,7 @@
-# [REVIEW] Person — the dean
+# [READY] Person — the dean
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: Monday from 08:00. New section: the walk-ins and acts the heat proposal built.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. Grid: Monday from 08:00. New section: the walk-ins and acts the heat proposal built.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01 ("Continue")** (DECISIONS 99–120): the release-1 college day (`sheets/systems/college.md`,
 > signed 2026-11-01). Changed: met on day 1 in his office, not at her first trouble; his Monday-morning row; what he is

@@ -1,8 +1,9 @@
-# [REVIEW] Place — Hall
+# [READY] Place — Hall
+> Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-04 (LO's answer Q7: one hall, no stairs; Laura's late catch is in the dark hall; the stairs event is "Bend for your bag in the hall"). Waits for LO's re-sign.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The quiet event is gone (DECISIONS 136). New section: what the heat proposal built here. Points at the copy fixes it took.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. The quiet event is gone (DECISIONS 136). New section: what the heat proposal built here. Points at the copy fixes it took.
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): rows 11-13, the random events. `home_event_laura_robe`: "her robe slips open over her tits" (was "at the front"). `home_event_mark_reach`: under Corruption 40 (where "Lean back into him." can't show) he steps back fast, hips turned away, the mug low in front of his jeans: "Mind yourself, @player.". `home_event_ryan_towel`: the Curious and Bold screens end on Ryan's "Not here. Mom's up." (the event runs inside Laura's weekday kitchen row, so it is true every visit; added as a hook in `writer.py`, the screen files untouched).
 

@@ -1,10 +1,11 @@
-# [REVIEW] Scene — mark_06_our_arrangement
+# [READY] Scene — mark_06_our_arrangement
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. her_line row and the `keep` thought: what the build says; the paying and losing-count lines are gone (Q6).
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. her_line row and the `keep` thought: what the build says; the paying and losing-count lines are gone (Q6).
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. "Middle of the night." is "Late."
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. "Middle of the night." is "Late."
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the buttons as built; his card line, no locked button; the step row. file and line cites cut.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. the buttons as built; his card line, no locked button; the step row. file and line cites cut.
 
 > **Changed 2026-11-01, signed by LO 2026-11-01 ("Signed")** (DECISIONS 99–115): Mark's release-1 ladder (`sheets/people/npc_mark.md`, signed). Reworked as his step 4 of 4, the top step. Changed: the reason (he saw her come out of Ryan's room; the paid couch is cut), the gate, the lines that named the couch; her voice row; the locked button after it.
 

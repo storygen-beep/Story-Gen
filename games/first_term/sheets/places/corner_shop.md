@@ -1,6 +1,7 @@
-# [REVIEW] Place — Corner Shop
+# [READY] Place — Corner Shop
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Points at the copy fixes it took.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. Points at the copy fixes it took.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

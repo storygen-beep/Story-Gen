@@ -1,4 +1,5 @@
-# [REVIEW] Place — Town (an area)
+# [READY] Place — Town (an area)
+> Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-03 (third alignment pass, d9e34078): only the title, set from [REVIEW] to [READY]; nothing else on the page changed. Waits for LO's re-sign.
 

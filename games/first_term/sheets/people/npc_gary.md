@@ -1,6 +1,7 @@
-# [REVIEW] Person — Gary
+# [READY] Person — Gary
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. He calls her "doll", as built. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. He calls her "doll", as built. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01 ("Continue")** (DECISIONS 99–120): the release-1 café (`sheets/systems/job.md`, signed
 > 2026-11-01). Changed: met at level 1, not at booth four (Tom B 4 and his ten minutes are cut); his lines by level; he

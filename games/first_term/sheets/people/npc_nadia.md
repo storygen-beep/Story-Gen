@@ -1,6 +1,7 @@
-# [REVIEW] Person — Nadia
+# [READY] Person — Nadia
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: the walk-ins and acts the heat proposal built.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. New section: the walk-ins and acts the heat proposal built.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

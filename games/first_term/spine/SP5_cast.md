@@ -1,7 +1,8 @@
-# [REVIEW] SP5 · The cast — First Term
+# [READY] SP5 · The cast — First Term
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Tom's arc is 3 steps, not 6; the ages' ledger cite is `want.cast`.
-> [REVIEW] (was [READY]) · drafted 2026-10-07 · updated 2026-10-08 · signed by LO: LO, 2026-10-08
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Tom's arc is 3 steps, not 6; the ages' ledger cite is `want.cast`.
+> [READY] · drafted 2026-10-07 · updated 2026-10-08 · signed by LO: LO, 2026-10-08
 > A decision record, ≤ 400 words. The rules: `references/the-spine.md` SP5 · `the-want.md` §6.
 
 | decision | answer |

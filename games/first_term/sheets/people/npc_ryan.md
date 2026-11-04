@@ -1,10 +1,11 @@
-# [REVIEW] Person — Ryan
+# [READY] Person — Ryan
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Walk-ins add her room (the refill walk-in at her nap).
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Walk-ins add her room (the refill walk-in at her nap).
 
 > Changed 2026-11-04 (LO's answers Q1, Q7, Q14; PICKS 17): his Lust starts at 0; his room is shut while Kayla is over; no day-one final no; his short-skirt line and step 3's call name no stairs. Waits for LO's re-sign.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: weekend mornings from 06:45. The moment column names each step's kind and stage. His Want pays on what happened (step 1 and step 8); no locked step-9 button. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 8 runs Sun–Thu nights.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. Grid: weekend mornings from 06:45. The moment column names each step's kind and stage. His Want pays on what happened (step 1 and step 8); no locked step-9 button. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 8 runs Sun–Thu nights.
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): rows 7-8, 13: in the towel at his top band (Want 70+, "One pull, @player.nickname.") a written no, "Hold the knot.": she says "Not tonight." (18:00-06:00) or "Not now.", he says "Tease.", his Want +1 once a day (the towel's `ryan_towel_today`, no new flag); in his room, the kitchen and the couch. His towel event in the hall (`home_event_ryan_towel`) ends its Curious and Bold screens on "Not here. Mom's up."
 
@@ -19,7 +20,7 @@
 
 > **Changed 2026-10-31, re-signed by LO 2026-10-31** (DECISIONS 98): the towel at home.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. The 2026-10-29 locked-button note (DECISIONS 90) is corrected: "Needs Corruption 60" and "Needs Exhibitionism 60" are no longer in the game, because the buttons for scenes this release does not write were removed (DECISIONS 132). Any line below that still names one is superseded by that row.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. The 2026-10-29 locked-button note (DECISIONS 90) is corrected: "Needs Corruption 60" and "Needs Exhibitionism 60" are no longer in the game, because the buttons for scenes this release does not write were removed (DECISIONS 132). Any line below that still names one is superseded by that row.
 
 > **Changed 2026-10-29, re-signed by LO 2026-10-29** (DECISIONS 87–88): his two-knocks text: "coming" is a promise; a no-show costs his Warmth.
 

@@ -1,10 +1,11 @@
-# [REVIEW] Decisions — First Term
+# [READY] Decisions — First Term
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Rows 177 and 178 added; rows 167 and 175 name Mark's "Give me a minute."; where the sheets and the ledger differ: rows 10 and 11 fixed, rows 15-18 added; ledger changes of this round listed.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Rows 177 and 178 added; rows 167 and 175 name Mark's "Give me a minute."; where the sheets and the ledger differ: rows 10 and 11 fixed, rows 15-18 added; ledger changes of this round listed.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Q4, Q7, Q12, the "This release" block and rows 162, 163, 167 and 169; rows 12 and 13 of where the sheets and the ledger differ.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Q4, Q7, Q12, the "This release" block and rows 162, 163, 167 and 169; rows 12 and 13 of where the sheets and the ledger differ.
 
-> Changed 2026-11-04: Q1-Q17 answered (rows 161-172), the "This release" block added (PICKS I74), three rows on where the ledger and the build differ; waits for LO's re-sign.
+> Changed 2026-11-04: Q1-Q17 answered (rows 161-172), the "This release" block added (PICKS I74), three rows on where the ledger and the build differ; signed by LO 2026-11-04.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-09).
 
@@ -186,6 +187,7 @@ is a talk or a locked door, the men's meters lock nothing, 17 of Laura's tease s
 | 188 | Street walks pay to the top of the stage their dress code needs (39, 59); the park run to 39 when she runs with no bra or no top. Played 14 days in Chrome: about +1 Exhibitionism a day, Corruption +1 on a level's first day only; with the run about +2 a day, stopping at 39. Not too fast. | LO, 2026-11-04; played. |
 | 189 | A normal week (one shift Monday to Friday, two on Saturday, normal uniform) earns $70-84, or $94-108 with Tom's text answered, against $75. | LO's question, worked from the pay rules. |
 | 190 | Reader: 45 scenes, 13 fails, all fixed after that read and not re-read. | Reader pass, 2026-11-04. |
+| 191 | LO signed the whole page list in one signature: 137 pages to [READY], the spine, the Want, this sheet and the save resets. His release play and one more reader pass are still owed before a public build. | "Sign it", LO, 2026-11-04. |
 
 Engine only (`setup.castScheduleHtml` in `v2.py`). The full Schedules page keeps its weekly table; first_term has no
 button to it since DECISIONS 95.

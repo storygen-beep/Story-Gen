@@ -1,6 +1,7 @@
-# [REVIEW] Place — Front Door
+# [READY] Place — Front Door
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Vance's knock reads `rent_short` and clears nothing. New section: what the heat proposal built here. Points at the copy fixes it took.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. Vance's knock reads `rent_short` and clears nothing. New section: what the heat proposal built here. Points at the copy fixes it took.
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 3: "Let the street see." on the step (short skirt, Exhibitionism 60, 07:00-21:00) opens a short screen `street_sees`: her knees open, her panties or her bare cunt by her underwear slot, a man with his shopping who walks into a gate post, Vance if he is on his porch, a neighbour at her window with her phone. Pays Exhibitionism +1 (cap 79); the price is Mom's suspicion +2. Row 9: the two Exhibitionism 60 lines show only 07:00-21:00 (at night they sat beside "nobody stops"), and each gains a watcher and a not-yet ("Not yet.").
 

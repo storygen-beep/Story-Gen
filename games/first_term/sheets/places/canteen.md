@@ -1,6 +1,7 @@
-# [REVIEW] Place — Canteen
+# [READY] Place — Canteen
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. New section: what the heat proposal built here.
 
 > Signed by LO: LO, 2026-10-08.
 

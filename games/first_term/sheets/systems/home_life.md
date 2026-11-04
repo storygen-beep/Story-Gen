@@ -1,10 +1,11 @@
-# [REVIEW] System — home_life
+# [READY] System — home_life
+> Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-04 (LO's answer Q6: Sunday breakfast comes before Mark's table, which counts nothing). Waits for LO's re-sign.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The random events as built: no pool, no quiet event, pays on the moment. Study at the kitchen table is its own activity.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. The random events as built: no pool, no quiet event, pays on the moment. Study at the kitchen table is its own activity.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. The 2026-10-29 locked-button note (DECISIONS 90) is corrected: "Needs Corruption 60" and "Needs Exhibitionism 60" are no longer in the game, because the buttons for scenes this release does not write were removed (DECISIONS 132). Any line below that still names one is superseded by that row.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. The 2026-10-29 locked-button note (DECISIONS 90) is corrected: "Needs Corruption 60" and "Needs Exhibitionism 60" are no longer in the game, because the buttons for scenes this release does not write were removed (DECISIONS 132). Any line below that still names one is superseded by that row.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

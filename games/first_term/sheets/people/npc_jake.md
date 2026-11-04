@@ -1,11 +1,12 @@
-# [REVIEW] Person — Jake
-> Changed 2026-11-04, LO's answers: his line after a date is "Every guy in that place was looking at you tonight." (D); waits for LO's re-sign.
+# [READY] Person — Jake
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, LO's answers: his line after a date is "Every guy in that place was looking at you tonight." (D); signed by LO 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. His hot repeatable as built: every booked date, the car's caps (Exhibitionism 39), "Come in." and what it costs.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. His hot repeatable as built: every booked date, the car's caps (Exhibitionism 39), "Come in." and what it costs.
 
 > Changed 2026-11-04 (LO's answers Q5, Q7): a no-show or an ignored date ask costs his patience: his next ask waits about three days, and he says so in a text; the sneak-in's near-catch is in the hall, not on a landing. Waits for LO's re-sign.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: his two class rows. The moment column names each step's kind and stage. No locked button past the car; only his card names it. Ryan's pay in step 3 sits on the moment he sees her. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 3 from 23:00; step 4 starts at the front door, Sat 22:00–00:00.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. Grid: his two class rows. The moment column names each step's kind and stage. No locked button past the car; only his card names it. Ryan's pay in step 3 sits on the moment he sees her. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 3 from 23:00; step 4 starts at the front door, Sat 22:00–00:00.
 
 > **Changed 2026-11-02** (reader fails a3, signed by LO 2026-11-02, DECISIONS 131): rows 30–34, Zoe's dress line adds his not-yet: "Later. When they're not looking.".
 

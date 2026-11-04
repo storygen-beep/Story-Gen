@@ -1,8 +1,9 @@
-# [REVIEW] Place — Your Room
+# [READY] Place — Your Room
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Rows add "Take a nap".
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Rows add "Take a nap".
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. New row: the refill walk-in B21, Ryan at her nap.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. New row: the refill walk-in B21, Ryan at her nap.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

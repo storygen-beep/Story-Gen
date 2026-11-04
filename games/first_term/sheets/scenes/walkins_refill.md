@@ -1,9 +1,10 @@
-# [REVIEW] Scenes — the walk-ins on the refill places (B21-B24), and Laura's lace set (Q12)
-> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
+# [READY] Scenes — the walk-ins on the refill places (B21-B24), and Laura's lace set (Q12)
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. A next-step row on each of the four, from the build; Mark's "Give me a minute."
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. A next-step row on each of the four, from the build; Mark's "Give me a minute."
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. She leaves the lace set in what she came in (`remember_outfit`, `restore_outfit`).
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. She leaves the lace set in what she came in (`remember_outfit`, `restore_outfit`).
 
 > New 2026-11-04: written from the build, for LO to read and sign. LO's answers of 2026-11-04: Q4 ("Add walkins in
 > this release itself") at the four refill places the gate `a refill place rolls an event` listed, and Q12 (Laura's

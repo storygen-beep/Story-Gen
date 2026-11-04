@@ -1,6 +1,7 @@
-# [REVIEW] Place — Living Room
+# [READY] Place — Living Room
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. New section: what the heat proposal built here. Points at the copy fixes it took.
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 15: the couch's "Stay a while." (Daring, her underwear, Mark or Ryan passing) opens a short screen, `stay_mark` or `stay_ryan`: ten minutes later he comes back, looks, and holds back: "Not with your mother home." / "Not with Mom home, @player.nickname." while Laura is in the house, "Your mother'll be back." / "Mom'll be back, @player.nickname." while she is out. Same pay and once-a-day brake. Mark's hub in this room (row 1): channel 5 on the remote beside him shows only after his accident (`mark_saw_her`), like "Leave it on."; the towel's top band gets "Get dressed." (rows 5-6, below).
 

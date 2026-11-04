@@ -1,8 +1,9 @@
-# [REVIEW] Scene — master_door_peek
+# [READY] Scene — master_door_peek
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. (a) no word on his breath, in the prose and the branch map.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. (a) no word on his breath, in the prose and the branch map.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. want, next step and hook rows.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. want, next step and hook rows.
 
 > Signed by LO: LO, 2026-10-29 ("sign all", in chat).
 

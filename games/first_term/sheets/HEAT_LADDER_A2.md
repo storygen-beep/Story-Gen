@@ -1,6 +1,7 @@
-# [REVIEW] The heat ladder, applied (a2) — signed 2026-11-02 (LO: "Signed, go ahead and build")
+# [READY] The heat ladder, applied (a2) — signed 2026-11-02 (LO: "Signed, go ahead and build")
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Signed date in the title; file cites removed. The "(Next release)" rule here is replaced by DECISIONS 132 (no button) and the door by DECISIONS 134.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. Signed date in the title; file cites removed. The "(Next release)" rule here is replaced by DECISIONS 132 (no button) and the door by DECISIONS 134.
 
 > **New 2026-11-01, signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124). One page for every scene-level change of proposal a2
 > (`~/Documents/Great_Games_Study_20260926/round12_tease/FIRST_TERM_A2_PROPOSAL.md`, signed "Signed, go ahead"). Each

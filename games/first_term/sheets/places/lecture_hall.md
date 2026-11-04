@@ -1,8 +1,9 @@
-# [REVIEW] Place — Lecture Hall
+# [READY] Place — Lecture Hall
+> Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-04 (LO's answer Q13: Hale's hallway Daring answer shows from Exhibitionism 20 up). Waits for LO's re-sign.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. New section: what the heat proposal built here. Points at the copy fixes it took.
 
 > Signed by LO: LO, 2026-10-08.
 

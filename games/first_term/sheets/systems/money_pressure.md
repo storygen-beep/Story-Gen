@@ -1,10 +1,11 @@
-# [REVIEW] System — money_pressure
+# [READY] System — money_pressure
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. `money` is declared spent in the ledger; "her cut", as the rent rises.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. `money` is declared spent in the ledger; "her cut", as the rent rises.
 
 > Changed 2026-11-04 (LO's answer Q6: the rent page takes the money and is the one count; Mark's Sunday table comes after and counts nothing). Waits for LO's re-sign.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Rent reads `rent_short`; Vance's knock no longer clears it.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. Rent reads `rent_short`; Vance's knock no longer clears it.
 
 > **Changed 2026-11-03 (LO: "B: keep it easy", DECISIONS 141).** Week one is no longer built to come up short. Up to three café shifts a day make about $205-245 against $75; the section "Week one is built to come up short" below is superseded. What a short Sunday costs is unchanged.
 

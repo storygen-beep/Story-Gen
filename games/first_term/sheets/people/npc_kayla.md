@@ -1,10 +1,11 @@
-# [REVIEW] Person — Kayla
+# [READY] Person — Kayla
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Her two rows are the ledger's `occupancy_rows`.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Her two rows are the ledger's `occupancy_rows`.
 
 > Changed 2026-11-04 (LO's answers Q9, Q14): her Friday row starts 18:00, after her drawer walk-in; Ryan's room is shut while she is there. Waits for LO's re-sign.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Her grid has her two rows; met and walk-ins as built.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. Her grid has her two rows; met and walk-ins as built.
 
 > Signed by LO: LO, 2026-10-08.
 

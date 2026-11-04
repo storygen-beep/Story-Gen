@@ -1,6 +1,7 @@
-# [REVIEW] Scene — ryan_laura_opens_the_door
+# [READY] Scene — ryan_laura_opens_the_door
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Saturday 17:00–18:00 as built; want, next step and hook rows.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. Saturday 17:00–18:00 as built; want, next step and hook rows.
 
 > **New 2026-11-01, signed by LO 2026-11-01 ("Signed")** (DECISIONS 99–113). From `sheets/people/npc_ryan.md`, "Laura opens the
 > door" (moved from Laura's ladder). Built canvas: `laura_04_ryans_door` (sheet marked moved); it stops setting

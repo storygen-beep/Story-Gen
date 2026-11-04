@@ -1,8 +1,9 @@
-# [REVIEW] SP3 · Dependencies — First Term
+# [READY] SP3 · Dependencies — First Term
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Padding cut; DECISIONS 106 holds what moved.
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
-> [REVIEW] (was [READY]) · drafted 2026-10-07 · updated 2026-10-08 · signed by LO: LO, 2026-10-08
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Padding cut; DECISIONS 106 holds what moved.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04.
+> [READY] · drafted 2026-10-07 · updated 2026-10-08 · signed by LO: LO, 2026-10-08
 > ≤ 400 words. Rules: `the-spine.md` SP3. Ledger: `dependencies[]`.
 > Step numbers are each person's built counter (Ryan 8, Laura 4, Mark 4, Tom 3, Zoe 5, Jake 4, Hale 4).
 > A step's own step before isn't listed.

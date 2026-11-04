@@ -1,8 +1,9 @@
-# [REVIEW] Scene — mark_00_the_dryer
+# [READY] Scene — mark_00_the_dryer
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. `hose_bra`: "your bra shows dark and wet" (true with no top on).
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. `hose_bra`: "your bra shows dark and wet" (true with no top on).
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. his +5 sits on the first screen, `basket`, "Load the washer."; the flag on the two ways out; a next-step row. file and line cites cut.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. his +5 sits on the first screen, `basket`, "Load the washer."; the flag on the two ways out; a next-step row. file and line cites cut.
 
 > **New 2026-11-01, signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, `the-heat-ladder.md` H2, H5, H6, H7): Mark's first
 > accident at home. Every chosen act with him follows it (`mark_saw_her`). Written by the lead.

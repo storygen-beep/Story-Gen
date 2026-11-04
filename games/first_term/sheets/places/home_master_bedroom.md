@@ -1,12 +1,13 @@
-# [REVIEW] Place — Master Bedroom
+# [READY] Place — Master Bedroom
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Laura's lace set is built.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Laura's lace set is built.
 
 > Changed 2026-11-04 (LO's answers Q7 and Q12, pass 4 B51: one hall, so Mark is in the living room and Laura waits up in the dark hall or the living room; Mark's line in the lingerie walk-in). Waits for LO's re-sign.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. New section: what the heat proposal built here. Points at the copy fixes it took.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. The 2026-10-29 locked-button note (DECISIONS 90) is corrected: "Needs Corruption 60" and "Needs Exhibitionism 60" are no longer in the game, because the buttons for scenes this release does not write were removed (DECISIONS 132). Any line below that still names one is superseded by that row.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. The 2026-10-29 locked-button note (DECISIONS 90) is corrected: "Needs Corruption 60" and "Needs Exhibitionism 60" are no longer in the game, because the buttons for scenes this release does not write were removed (DECISIONS 132). Any line below that still names one is superseded by that row.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08). Re-signed 2026-10-29 ("sign all", in chat).
 

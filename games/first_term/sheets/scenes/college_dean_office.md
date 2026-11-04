@@ -1,6 +1,7 @@
-# [REVIEW] Scene — college_dean_office
+# [READY] Scene — college_dean_office
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04.
 
 > **New 2026-11-01, signed by LO 2026-11-01 ("Continue")** (DECISIONS 99–120). From the signed college system (`sheets/systems/college.md`, "The first college day";
 > `proposals/R1_SYSTEM_COLLEGE_DAY.md`). An onboarding scene, not a heat step. No explicit screen; the lines are mine.

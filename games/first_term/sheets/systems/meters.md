@@ -1,6 +1,7 @@
-# [REVIEW] System — meters
+# [READY] System — meters
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. File and line cites removed.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. File and line cites removed.
 
 > **New 2026-11-01, signed by LO 2026-11-01** ("Signed", DECISIONS 113). Written from `proposals/R1_SYSTEM_METERS.md` (signed by
 > LO 2026-11-01, "Signed."). It changes the meter rules of DECISIONS 78 and the street-door rows of

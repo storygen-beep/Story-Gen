@@ -1,9 +1,10 @@
-# [REVIEW] Place — Gym
-> Changed 2026-11-04, LO's answers: "Finish your set." needs Exhibitionism 60 and pays to cap 79 (B); waits for LO's re-sign.
+# [READY] Place — Gym
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, LO's answers: "Finish your set." needs Exhibitionism 60 and pays to cap 79 (B); signed by LO 2026-11-04.
 
 > Changed 2026-11-04 (LO's answer Q13: the gym team's Daring answer shows from Exhibitionism 20 up). Waits for LO's re-sign.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. New section: what the heat proposal built here. Points at the copy fixes it took.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

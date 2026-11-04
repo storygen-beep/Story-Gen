@@ -1,9 +1,10 @@
-# [REVIEW] Person — the cocky guy
-> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
+# [READY] Person — the cocky guy
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Walk-ins: the refill walk-in at Zoe's bathroom.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Walk-ins: the refill walk-in at Zoe's bathroom.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: his two class rows. A no moves nothing of his. Points at the copy fixes it took.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. Grid: his two class rows. A no moves nothing of his. Points at the copy fixes it took.
 
 > **Changed 2026-11-02** (reader fails a3, signed by LO 2026-11-02, DECISIONS 131): rows 24, 42, and the reader's talk fix. Midterm "No." gets "Your loss." (it moves nothing of his: a no never raises his Want, DECISIONS 135). Class hub: a fixed line "Midterm answers cost a look." until `exam_art_done`; short skirt "His eyes go down your thighs to your hem and stay there"; "Talk with him a while." opens a talk screen, three of his lines in a shuffle bag.
 

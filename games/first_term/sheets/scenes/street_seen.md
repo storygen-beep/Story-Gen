@@ -1,10 +1,11 @@
-# [REVIEW] Scene — street_seen
-> Changed 2026-11-04, LO's answers: skirt and no bra cap at 39, no panties at 59, both meters (F); waits for LO's re-sign.
-> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
+# [READY] Scene — street_seen
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, LO's answers: skirt and no bra cap at 39, no panties at 59, both meters (F); signed by LO 2026-11-04.
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Both meters cap at 19 (DECISIONS 176).
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Both meters cap at 19 (DECISIONS 176).
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04.
 
 > The signed plans behind this page: `proposals/COPY_FIXES_C.md`.
 

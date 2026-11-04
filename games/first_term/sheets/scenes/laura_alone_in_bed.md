@@ -1,10 +1,11 @@
-# [REVIEW] Scene — laura_alone_in_bed
+# [READY] Scene — laura_alone_in_bed
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. The ceiling row says what the beats use; the guess is gone.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. The ceiling row says what the beats use; the guess is gone.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. `watch`: her words before the beat; `watch_after`: "Lie still."
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. `watch`: her words before the beat; `watch_after`: "Lie still."
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the gate row reads `laura_step` 2 as built; want, next step and hook rows. the explicit beats as built, measured. file and line cites cut.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. the gate row reads `laura_step` 2 as built; want, next step and hook rows. the explicit beats as built, measured. file and line cites cut.
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 2: `crack` gains one ungated line after the signed beat: "Her face is turned on the pillow toward the hall, toward Ryan's door. Her lips move around a word you can't hear, and her fingers go faster." Her want for Ryan on her body before `laura_04_she_saw_you` says his name. True every night of the window: Ryan's row has him in his room 22:00-06:45. The signed `crack` beat itself is unchanged.
 

@@ -1,8 +1,9 @@
-# [REVIEW] Scene — touch_bed
+# [READY] Scene — touch_bed
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. The TV mutters down the hall (Q7). The build does not read this sheet's beat.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. The TV mutters down the hall (Q7). The build does not read this sheet's beat.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the explicit beats as built, measured.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. the explicit beats as built, measured.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

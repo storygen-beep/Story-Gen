@@ -1,6 +1,7 @@
-# [REVIEW] Scene — library_back_stacks
+# [READY] Scene — library_back_stacks
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04.
 
 > The signed plans behind this page: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md` (C1, "Move one aisle closer.") · `proposals/COPY_FIXES_B.md`.
 

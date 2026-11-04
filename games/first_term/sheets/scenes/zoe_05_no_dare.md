@@ -1,6 +1,7 @@
-# [REVIEW] Scene — zoe_05_no_dare
+# [READY] Scene — zoe_05_no_dare
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04.
 
 > The signed plans behind this page: `proposals/COPY_FIXES_B.md`.
 

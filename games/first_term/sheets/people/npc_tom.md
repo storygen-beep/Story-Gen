@@ -1,11 +1,12 @@
-# [REVIEW] Person — Tom
-> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
+# [READY] Person — Tom
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. His card's end line as built (DECISIONS 132); the release's three steps in the why table.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. His card's end line as built (DECISIONS 132); the release's three steps in the why table.
 
 > Changed 2026-11-04 (LO's answers Q2, Q3: his steps 1 and 2 open from "Work a shift" and his top step from him at the counter, not on entry; his repeatable after step 3 is a later release). Waits for LO's re-sign.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The moment column names each step's kind and stage. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 1 to 19:00.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. The moment column names each step's kind and stage. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 1 to 19:00.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the release-1 ladder, from `proposals/TOM_R1_LADDER.md` (signed 2026-11-01). Changed: his lines, Ladder, the seven columns, Leak and promise, the phone loop, Cut and later, Rows a gate needs. Everything else as signed.
 

@@ -1,16 +1,17 @@
-# [REVIEW] System — wardrobe
+# [READY] System — wardrobe
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. The hot tub's way out gives back what she came in; Laura's lace set is built.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. The hot tub's way out gives back what she came in; Laura's lace set is built.
 
 > Changed 2026-11-04 (LO's answers Q7, Q11, Q12: the stairs event is the hall event; the tub strips and dresses her; Laura's black lace set is built). Waits for LO's re-sign.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Key items: the sheer blouse needs Exhibitionism 15 (heat proposal C6); the sports bra is $25.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. Key items: the sheer blouse needs Exhibitionism 15 (heat proposal C6); the sports bra is $25.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): leaving a room now needs Corruption **or** Exhibitionism, wearing it out pays both, the two events pay by rule, and a bought item can be held in the garage. The rules live in `sheets/systems/meters.md` and `sheets/systems/money_pressure.md`.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. The 2026-10-29 locked-button note (DECISIONS 90) is corrected: "Needs Corruption 60" and "Needs Exhibitionism 60" are no longer in the game, because the buttons for scenes this release does not write were removed (DECISIONS 132). Any line below that still names one is superseded by that row.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. The 2026-10-29 locked-button note (DECISIONS 90) is corrected: "Needs Corruption 60" and "Needs Exhibitionism 60" are no longer in the game, because the buttons for scenes this release does not write were removed (DECISIONS 132). Any line below that still names one is superseded by that row.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

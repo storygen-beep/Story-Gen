@@ -1,8 +1,9 @@
-# [REVIEW] Scene — ryan_07_kayla_cant_know
+# [READY] Scene — ryan_07_kayla_cant_know
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. "Go to your room." lands in her room.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. "Go to your room." lands in her room.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the door's two buttons as built; the pay sits on `after7`; the step row. the explicit beats as built, measured.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. the door's two buttons as built; the pay sits on `after7`; the step row. the explicit beats as built, measured.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 

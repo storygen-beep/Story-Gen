@@ -1,12 +1,13 @@
-# [REVIEW] Person — Laura
-> Changed 2026-11-04, LO's answers: her want and the curfew call's answer no longer praise her as a child (A); waits for LO's re-sign.
-> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
+# [READY] Person — Laura
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, LO's answers: her want and the curfew call's answer no longer praise her as a child (A); signed by LO 2026-11-04.
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Sunday 00:00–01:00 is its own awake row.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Sunday 00:00–01:00 is its own awake row.
 
 > Changed 2026-11-04 (LO's answers Q7, Q8): one hall, so her late catch is in the dark hall and the stairs lines say the hall or the living room; her Love-70 towel line stays as it is (LO: OK). She keeps no Want meter. Waits for LO's re-sign.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. She keeps warmth only; the build has no Want for her. The moment column names each step's kind and stage. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. She keeps warmth only; the build has no Want for her. The moment column names each step's kind and stage. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build.
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 4: her kitchen invite "Come upstairs after." (Tuesday, her step 0) gets a written no, "\"Not tonight, Mom.\"", Love -1, one line from her ("Oh. Okay, sweetheart. It'll keep."). Row 14: the tidy check's "Ask what she saw in your room." screen is written from the tidy row below (Everyday): her panties on the bed, said low while Mark is at the table, her eyes on Ella's lap. Changed from the signed line: "The lace one." is cut, because the wardrobe has no lace underwear (only `plain_panties`).
 
@@ -16,7 +17,7 @@
 
 > **Changed 2026-10-31, re-signed by LO 2026-10-31** (DECISIONS 98): the towel at home.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. The 2026-10-29 locked-button note (DECISIONS 90) is corrected: "Needs Corruption 60" and "Needs Exhibitionism 60" are no longer in the game, because the buttons for scenes this release does not write were removed (DECISIONS 132). Any line below that still names one is superseded by that row.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. The 2026-10-29 locked-button note (DECISIONS 90) is corrected: "Needs Corruption 60" and "Needs Exhibitionism 60" are no longer in the game, because the buttons for scenes this release does not write were removed (DECISIONS 132). Any line below that still names one is superseded by that row.
 
 > **Changed 2026-10-29, re-signed by LO 2026-10-29** (DECISIONS 87–88): her dinner text books dinner; a no-show costs warmth and suspicion; saying "eating out" and eating with her is a lie she sees.
 

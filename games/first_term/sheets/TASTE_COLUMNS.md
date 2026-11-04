@@ -1,6 +1,7 @@
-# [REVIEW] The taste columns — what every step is designed against, before it is written
+# [READY] The taste columns — what every step is designed against, before it is written
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. File cites removed.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. File cites removed.
 
 > Signed by LO: LO, 2026-11-01.
 

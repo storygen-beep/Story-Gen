@@ -1,7 +1,8 @@
-# [REVIEW] Person — Mr. Vance
-> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
+# [READY] Person — Mr. Vance
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: the Monday knock after a short Sunday. His porch no moves nothing. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. Grid: the Monday knock after a short Sunday. His porch no moves nothing. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took.
 
 > Signed by LO: LO, 2026-10-08.
 

@@ -1,6 +1,6 @@
 # [CUT] [REVIEW] Scene — mark_09_his_chair
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Still cut and not built. Her line telling Mark to count is gone from the map (Q6), and the Sunday table row says what the build does.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Still cut and not built. Her line telling Mark to count is gone from the map (Q6), and the Sunday table row says what the build does.
 
 > **CUT 2026-11-01** (DECISIONS 113): Mark's paid route is cut: no sex and no money for her body (`npc_mark.md`). Kept on disk as the record; not built in release 1.
 

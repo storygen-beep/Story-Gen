@@ -1,8 +1,9 @@
-# [REVIEW] Scene — jake_04_sneak_him_in
+# [READY] Scene — jake_04_sneak_him_in
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. `comes`: "Lie there." takes Energy 10 and Hygiene 10.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. `comes`: "Lie there." takes Energy 10 and Hygiene 10.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04.
 
 > **Changed 2026-11-02** (reader fails a3, signed by LO 2026-11-02, DECISIONS 131): row 22, `after` now points ahead: Jake mumbles "Next Saturday. Same room." before he falls asleep (`jake.py`).
 

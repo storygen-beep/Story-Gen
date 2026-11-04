@@ -1,7 +1,8 @@
-# [REVIEW] Scene — ryan_05_thin_walls
-> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
+# [READY] Scene — ryan_05_thin_walls
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the nos' own screens, the sleep buttons, "Knock back twice." from Corruption 40, the hall's button; the step row. the explicit beats as built, measured.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. the nos' own screens, the sleep buttons, "Knock back twice." from Corruption 40, the hall's button; the step row. the explicit beats as built, measured.
 
 > **Changed 2026-11-01, signed by LO 2026-11-01 ("Signed")** (DECISIONS 99–113): Ryan's release-1 ladder (`sheets/people/npc_ryan.md`, signed). Changed: gate Corruption 20 · his Want 40 (Exhibitionism 40 dropped); Want +5. The written screens stand.
 
