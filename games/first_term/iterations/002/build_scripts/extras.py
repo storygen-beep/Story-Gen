@@ -12,8 +12,7 @@ out.append({
     "id": "cafe_coffee", "name": "Order a coffee ($3)",
     "description": "A coffee at the counter: energy +5 for $3, once a day. The uniform's readers: the regulars look.",
     "trigger": {"location": "cafe", "is_repeatable": True, "priority": 2, "is_active": True, "max_triggers_per_day": 1,
-                # Q2 (LO, 2026-11-04): the job ask opens from the counter, not on entry (the walk-in rules follow)
-                "substitutions": [on_activity("cafe_job_ask", flag("opening_done"))]},
+                "substitutions": []},   # the walk-in rules follow; the job ask has its own row (tom.py, LO 2026-11-05)
     "nodes": [node("coffee", "A coffee", [
         P("You take the stool at the end of the counter, watching the room, the regulars, the door."),
         G(cond(NORMAL_ON), P("In the uniform, off shift, the regulars still wave you over for refills. You ignore them, but it's nice to be asked."),

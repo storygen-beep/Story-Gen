@@ -1,4 +1,5 @@
 # [READY] Scene — tom_01_the_apron
+> Changed 2026-11-05 (DECISIONS 193): the job ask has its own row and no longer needs Tom placed; re-signed by LO 2026-11-05.
 > Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04.
@@ -106,7 +107,7 @@ it, only the "Week one" story card named the job, and it is gone after 7 days.
 
 | screen | the no (new) | the reply (mine, signed by LO 2026-11-01) |
 |---|---|---|
-| `cafe_job_ask` (the sign in the window) | "Not yet." | Tom: "Sign stays up till somebody takes it." · "He goes back to wiping the machine." The ask comes back the next time she's in the café. |
+| `cafe_job_ask` (the sign in the window) | "Not yet." | Tom: "Sign stays up till somebody takes it." · "He goes back to wiping the machine." The ask comes back the next day. |
 
 ## Changed 2026-11-02 (reader a3, `READER_FAILS_A3.md`, signed by LO 2026-11-02; DECISIONS 131)
 

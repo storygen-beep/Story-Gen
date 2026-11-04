@@ -1,4 +1,5 @@
 # [READY] Place — Café
+> Changed 2026-11-05 (DECISIONS 193): the job ask has its own row and no longer needs Tom placed; re-signed by LO 2026-11-05.
 > Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-04 (LO's answer Q2: the café's one-time scenes open from its activities, not on entry). Waits for LO's re-sign.
@@ -25,7 +26,7 @@
 
 | auto-fires | who is here, and when | things to do alone | ways out |
 |---|---|---|---|
-| none (LO, 2026-11-04, Q2): the job ask opens from "Order a coffee ($3)" until `cafe_job`; Tom's apron, the tip jar and Gary's first meeting open from "Work a shift"; "Not by the window" opens from Tom at the counter. Each keeps its own window and gates, and the room's own links always show | Tom: Mon–Sat 08:00–23:00 | work a shift | the street |
+| none (LO, 2026-11-04, Q2): the job ask opens from its own row, "Ask about the job", until `cafe_job` (LO, 2026-11-05; once a day, "Not yet." brings it back the next day); Tom's apron, the tip jar and Gary's first meeting open from "Work a shift"; "Not by the window" opens from Tom at the counter. Each keeps its own window and gates, and the room's own links always show | Tom: Mon–Sat 08:00–23:00 | work a shift | the street |
 |  | Gary: weekdays 14:30–18:00 · Friday 20:00–22:00 |  |  |
 
 ## Rows (`serves`)
