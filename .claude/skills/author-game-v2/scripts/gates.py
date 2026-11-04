@@ -17578,6 +17578,7 @@ def _group2_gates(gate, _N, model, game, state):
     gate("the rent page can place its collector", *_rent_page_places_collector(game))
     gate("nothing one-time at the shop or wardrobe", *_shop_room_stays_open(game))
     gate("every card carries the met flag", *_card_carries_met_flag(game))
+    gate("nobody waits for themselves", *_nobody_waits_for_themselves(game))
     gate("the skip sets what the opening sets", *_skip_sets_what_opening_sets(game))
     gate("one asset, one block", *_one_asset_one_block(game))
     gate("a refill place rolls an event", *_refill_rolls_event(game, state))
@@ -18408,6 +18409,66 @@ def _no_child_framing(game):
     rows = list(dict.fromkeys(rows))
     return not rows, (f"{len(rows)} line(s) frame her as a child beside sex" if rows
                       else "no line frames her as a child beside sex"), rows
+
+
+# ── nobody waits for themselves (first_term, 2026-11-05; the-first-hour.md "A character's [[quest_cards]]") ──
+def _canvas_needs_npc(canvas):
+    """The people a canvas can only open with: its portrait, a `requires_npc` that is read, or an is_present condition."""
+    trig = canvas.get("trigger") or {}
+    out = {trig.get("npc")} - {None}
+    # A one-time scene that fires by itself does not read `requires_npc` (played: first_term's zoe_00_quad_meeting opens
+    # with Zoe placed nowhere). A row, a random event and a swapped-in scene do.
+    fires_itself = (not _rep_of(trig) and not trig.get("substitution_only") and trig.get("trigger_mode") != "random")
+    if trig.get("requires_npc") and not fires_itself:
+        out.add(trig["requires_npc"])
+    conds = trig.get("conditions") or {}
+    if conds.get("logic", "AND") == "AND":
+        for item in conds.get("items") or []:
+            if item.get("type") == "npc_at_location" and item.get("operator") == "is_present":
+                out.add(item.get("npc_id"))
+    return out
+
+
+def _nobody_waits_for_themselves(game):
+    """(ok, headline, detail): a person whose every schedule row waits on a flag only that person's own scenes set.
+
+    first_term's job ask needed Tom in the room, Tom's rows waited on `tom_met`, and only the job ask set `tom_met`.
+    Nothing errored: the scene just never opened, and the whole of Tom's ladder sat behind it. A flag nothing sets
+    at all is a different defect with its own gates, so a row waiting on one is not counted here."""
+    canvases = _g2_canvases(game)
+    start_flags = _opening_flags(game) or set()
+    rows, checked = [], 0
+    for npc in game.get("npcs") or []:
+        slug = npc.get("id")
+        schedule = npc.get("schedules") or []
+        if not slug or not schedule:
+            continue
+        bound = [c for c in canvases if slug in _canvas_needs_npc(c)]
+        if not bound:
+            continue
+        checked += 1
+        bound_ids = {c.get("id") for c in bound}
+        everywhere = _flags_ever_set(game)
+        outside = _flags_ever_set(dict(game, canvases=[c for c in canvases if c.get("id") not in bound_ids]))
+        stuck_on = set()
+        for sched in schedule:
+            when = sched.get("when") or {}
+            needs = set()
+            if when.get("logic", "AND") == "AND":
+                needs = {i.get("flag_key") for i in when.get("items") or []
+                         if i.get("type") == "flag" and i.get("operator") == "is_true"}
+            locked = {f for f in needs if f in everywhere and f not in outside and f not in start_flags}
+            if not locked:
+                stuck_on = None      # this row can come true without them, so they can arrive
+                break
+            stuck_on |= locked
+        if stuck_on:
+            flags = ", ".join(sorted(stuck_on))
+            rows.append(f"{slug}: every schedule row waits on {flags}, and only scenes that need {slug} present set it "
+                        f"({', '.join(sorted(str(i) for i in bound_ids))[:160]}). Drop the presence need on the scene "
+                        f"that meets them, or set the flag somewhere else")
+    return not rows, (f"{len(rows)} person(s) can never arrive: their scenes wait for them, they wait for their scenes"
+                      if rows else f"none of {checked} scheduled people with scenes waits on their own scene"), rows
 
 
 def main():
