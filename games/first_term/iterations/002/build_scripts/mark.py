@@ -79,7 +79,7 @@ out.append({
             D(M, "Sit. Every Sunday, you sit at my table while this goes in Vance's envelope. That way nobody says I took more than I did."),
         ], [
             go("\"Here.\"", node="count", mins=5),
-            go("\"Let me get dressed first.\"", node="dressed", mins=5, wardrobe=DRESS_DAY),
+            go("\"Let me get dressed first.\"", node="dressed", mins=5, wardrobe=[REMEMBER] + DRESS_BACK),
         ]),
         # LO, 2026-11-04 (Q6): the rent page has already taken the money, so nobody counts it twice; he makes her
         # sit with the envelope instead, and looks at her, not at it

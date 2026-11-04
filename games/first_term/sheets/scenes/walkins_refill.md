@@ -1,5 +1,7 @@
 # [REVIEW] Scenes — the walk-ins on the refill places (B21-B24), and Laura's lace set (Q12)
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. She leaves the lace set in what she came in (`remember_outfit`, `restore_outfit`).
+
 > New 2026-11-04: written from the build, for LO to read and sign. LO's answers of 2026-11-04: Q4 ("Add walkins in
 > this release itself") at the four refill places the gate `a refill place rolls an event` listed, and Q12 (Laura's
 > black lace bra and panties become wardrobe items, worn in `walkin_wardrobe_mark`). The build does not read this
@@ -18,7 +20,7 @@ The same machine as the walk-ins at home and outside (`walkins_home.md`, `walkin
 | no meter | Zoe, the cocky guy: nothing of theirs moves; a flag records it |
 | once a day | each sets its own `walkin_*_today`, cleared at midnight |
 | a miss | her activity, as it is today |
-| the refill | a walk-in does not pay the refill (no energy, no hygiene); the activity is still there after it, and the walk-in cannot roll twice that day |
+| the refill | a walk-in pays the refill only when the screen shows her doing it (LO, 2026-11-04): the nap and the sink do; the garden and Zoe's bathroom do not, and the activity is still there after them |
 
 ---
 
@@ -99,6 +101,6 @@ The same machine as the walk-ins at home and outside (`walkins_home.md`, `walkin
 | the items | `laura_lace_bra` "Laura's black lace bra" (bra) · `laura_lace_panties` "Laura's black lace panties" (underwear) · type `lingerie`, beauty 3, corruption 2 · no price, so no shop shows them |
 | screen 1 | she finds the set under the stockings in Laura's drawer, strips (her towel, or her own things, in a heap on Laura's bed) and puts both on |
 | on the moment's button | everything she wore comes off and the lace pair goes on, so from screen 2 on the sidebar shows what the words say |
-| every way out | both pieces are removed (back in Laura's drawer, never in her wardrobe), and she dresses in the game's day clothes (bra, cotton panties, T-shirt, jeans, sneakers) |
-| different from asked | LO asked for what she wore to come back, or the default outfit "as the engine allows". The engine keeps no outfit to put back (its wardrobe actions are add, equip, unequip, remove), so it is the default, as the hot tub's way out already does. A save that went in wearing a towel comes out dressed |
+| every way out | both pieces are removed (back in Laura's drawer, never in her wardrobe), and she gets back what she wore when she came in (`restore_outfit`), the towel too |
+| what she leaves in | what she came in, as LO asked: `remember_outfit` on the moment's button, `restore_outfit` on every way out (LO, 2026-11-04). The same two actions run the tub, the party house soak, Ryan's exits, Zoe's hot tub and Mark's "Let me get dressed first." After a shower, "Get dressed." gives back what she wore before it. The opening's "Get dressed." and the café's "Clock out." are unchanged |
 | new line | on "Let him look.", after he goes: she looks at herself in Laura's set a second longer, then folds it back into the drawer |

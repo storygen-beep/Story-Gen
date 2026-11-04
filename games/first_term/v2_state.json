@@ -3703,7 +3703,7 @@
       "master_door_peek": {
         "want": "PASS",
         "next step": "FAIL",
-        "hook": "FAIL",
+        "hook": "N/A",
         "her voice at her level": "N/A",
         "who notices": "PASS",
         "the written no": "N/A",
@@ -4044,6 +4044,16 @@
         "canvas_id": "hub_cocky_party",
         "test": "the written no",
         "why": "LO, 2026-10-09 (iteration 002 part 8): kind-D craft FAILs waived for 0.1; the list is kept in iterations/002/REPORT.md"
+      },
+      {
+        "canvas_id": "master_door_peek",
+        "test": "hook",
+        "why": "LO, 2026-10-29 and again 2026-11-04: no next step and no hook on purpose; the screen fills the hour and pays nothing"
+      },
+      {
+        "canvas_id": "master_door_peek",
+        "test": "next step",
+        "why": "LO, 2026-10-29 and again 2026-11-04: no next step and no hook on purpose; the screen fills the hour and pays nothing"
       }
     ],
     "reader_after_read": [
@@ -6034,14 +6044,14 @@
     "needs": [
       {
         "key": "energy",
-        "falls": "spent, not decayed: classes, shifts, running in the park, parties and partnered sex scenes take it through costs; not on the overnight tick (SP1:23); a heavy night starts Saturday 30 lower (SP4)",
+        "falls": "spent, not decayed: classes, shifts, running in the park, parties and the heavier partnered scenes take it through costs; not on the overnight tick (SP1:23); a heavy night starts Saturday 30 lower (SP4)",
         "fills": "home_ella_room · sleep in her bed (a scene) · overnight; canteen · food · 30 min (some); lecture_hall · Doze (a little); park · rest on a bench (a little); party_house · soak in the hot tub (a little)",
         "costs": "sleep: nothing; canteen food: money",
         "shuts": "low energy: no café shift, no Focus in class (Doze only), no party — each refusal says why; at zero she falls asleep and wakes next morning"
       },
       {
         "key": "hygiene",
-        "falls": "a little every night ([player.trait_decay]); faster after work, parties and partnered sex scenes",
+        "falls": "a little every night ([player.trait_decay]); faster after work, parties and the heavier partnered scenes",
         "fills": "home_bathroom · a shower, which can roll an event (Ryan, Kayla, Mark) · 20 min; college_womens_toilet · a quick wash (a little)",
         "costs": "nothing",
         "shuts": "no story lock, but it refuses in the scene: under 30 (system on) Ryan's room and couch hot repeatables and Jake's date still show and she still goes, and he says no and why (\"Jesus. When did you last shower? Go and wash.\"; Jake: \"Babe. Did you shower today?\"), with no pay and the date unbooked (DECISIONS 137); it also colours Laura's and a lecturer's lines; with hygiene_off nothing reads it"
@@ -10567,6 +10577,14 @@
       "match": null,
       "decision": "later release",
       "why": "Mark's and Tom's last steps turn into a repeatable in the next release (their later steps were cut, W4)",
+      "signed": "LO 2026-11-04"
+    },
+    {
+      "id": "master_door_peek hook",
+      "gate": null,
+      "match": null,
+      "decision": "waive",
+      "why": "LO, 2026-10-29 and again 2026-11-04: no next step and no hook on purpose; the screen fills the hour and pays nothing",
       "signed": "LO 2026-11-04"
     }
   ],

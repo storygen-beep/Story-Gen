@@ -1,5 +1,7 @@
 # [REVIEW] Person — Mark
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Laura's lace set is built.
+
 > Changed 2026-11-04 (LO's answers Q3, Q6, Q7, Q10; pass 4 B51): the rent is counted once, by the rent page, and his Sunday scenes count nothing; he has left before breakfast on day one; he says "That's your mother's." in the lingerie walk-in; his repeatable after step 4 is a later release; one hall. Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: his Saturday rows (DECISIONS 152). Step 3 reads `rent_short_weeks`. The moment column names each step's kind and stage. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build.
@@ -211,7 +213,7 @@ Mark's living room (up late) and kitchen hubs react to the towel, every visit. B
 ## Walk-ins and acts from the heat proposal (signed 2026-11-03, built)
 
 Walk-ins: `home_bathroom`, `home_garage`, `home_hall`, `home_kitchen`, `home_living_room`, `home_master_bedroom`. Each row (when, what pays) is on that place sheet.
-In the lingerie walk-in (the master bedroom, Saturday 21:45–22:00) he says one line, "That's your mother's.", true in every band (pass 4 B51, LO 2026-11-04: Mark may speak here). Laura's black lace set becomes a wardrobe item this release, still to build (Q12).
+In the lingerie walk-in (the master bedroom, Saturday 21:45–22:00) he says one line, "That's your mother's.", true in every band (pass 4 B51, LO 2026-11-04: Mark may speak here). Laura's black lace set is a wardrobe item, built (Q12).
 The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
 
 **Copy:** lines here were rewritten from `proposals/COPY_FIXES_A.md`, `proposals/COPY_FIXES_C.md` (signed with the a2 sheets, DECISIONS 125).

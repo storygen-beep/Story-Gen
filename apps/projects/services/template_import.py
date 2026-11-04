@@ -6292,7 +6292,7 @@ def validate(template: GameTemplate) -> List[str]:
     # E7a — wardrobe effects: a known action on a declared garment. An unknown action or
     # a missing item_id used to emit nothing at all, with no error anywhere.
     _clothing_ids = {ci.id for ci in template.clothing_items}
-    _wardrobe_actions = ("add", "equip", "unequip", "remove")
+    _wardrobe_actions = ("add", "equip", "unequip", "remove", "remember_outfit", "restore_outfit")
     for c in template.canvases:
         for n in c.nodes:
             _w_sets = [(
@@ -6316,8 +6316,18 @@ def validate(template: GameTemplate) -> List[str]:
                     if action not in _wardrobe_actions:
                         errors.append(
                             f"{_w_ctx}[{wi}].action '{action}' must be one of "
-                            f"add, equip, unequip, remove"
+                            f"add, equip, unequip, remove, remember_outfit, restore_outfit"
                         )
+                    # The private outfit slot names no garment. `unless_wearing` lists garments
+                    # she is not "dressed" in, so remembering them would keep a towel.
+                    if action in ("remember_outfit", "restore_outfit"):
+                        for _w_skip in we.get("unless_wearing") or []:
+                            if _w_skip not in _clothing_ids:
+                                errors.append(
+                                    f"{_w_ctx}[{wi}].unless_wearing '{_w_skip}' is not a declared "
+                                    f"[[clothing]] item"
+                                )
+                        continue
                     item_id = we.get("item_id")
                     if not item_id:
                         errors.append(f"{_w_ctx}[{wi}].item_id is required")

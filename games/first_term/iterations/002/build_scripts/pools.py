@@ -296,7 +296,7 @@ out.append({
     "nodes": [node("gates", "The gates", [
         P("You stretch against the park gates. The loop round the pond is two laps if you mean it."),
     ], [
-        go("Run the loop. (10 energy)", node="run", mins=35, costs=[{"trait": "energy", "value": 10}], cond_=DARING_RUN, eff=[capped("exhibitionism", 1, CAP_CUR)]),   # Daring opens at 20: pays to 39 (pass 3 G8)
+        go("Run the loop. (10 energy)", node="run", mins=35, costs=[{"trait": "energy", "value": 10}], cond_=DARING_RUN, eff=[capped("exhibitionism", 1, CAP_GG)]),   # her clothes open it, not a meter, so it opens at 0 and stops at 19 (LO, 2026-11-04)
         go("Run the loop. (10 energy)", node="run", mins=35, costs=[{"trait": "energy", "value": 10}], cond_=cond({"type": "clothing_slot", "slot": "bra", "operator": "equipped"}, {"type": "clothing_slot", "slot": "top", "operator": "equipped"})),
         go("Walk it instead.", node="walk", mins=20),
     ]),

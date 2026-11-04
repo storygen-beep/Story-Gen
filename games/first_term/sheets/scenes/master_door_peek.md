@@ -15,8 +15,8 @@
 | gate | none |
 | who | Mark · Laura when she is in; neither sees her |
 | want | Laura's, case (a): awake beside him, her nightdress still bunched at her waist |
-| next step | (a) what the watched scene did not show: Laura didn't come, she lies there wide awake · (b) Mark is calling Laura in from the hall, where she waits up for @player (pass 4 reader, 2026-11-04; pays nothing still) |
-| hook | "Next Saturday night the door will be ajar again." (pass 4 reader, 2026-11-04: the reader asks every screen to name what comes next; was "none on purpose") |
+| next step | none on purpose: it pays nothing (LO, 2026-10-29; put back and recorded as decided 2026-11-04) |
+| hook | none on purpose: it fills the hour (LO, 2026-10-29; put back and recorded as decided 2026-11-04) |
 | what she wears here | not named |
 | BRAKE | none needed: it pays nothing |
 | raises | none · no ladder number moves |
@@ -30,9 +30,9 @@
 ## Prose (one line per case, by who is in)
 
 - Opening, always: "You ease the handle down and open the door a finger's width. The lamp is still on."
-- (a) both in: "It's over. Mark's flat on his back with one arm over his eyes, getting his breath back. Laura lies awake beside him, staring at the ceiling, her nightdress still bunched up at her waist." · Laura: "Sleep well, then." · "She didn't come. It's all over her face: he's done, and she's lying there wide awake with her thighs pressed together." (pass 4: Mark's row is awake till 01:00, so not snoring)
-- (b) Mark only: "Mark's sitting up against the headboard under the lamp, awake and alone, his phone lit in his hand. Laura's side of the bed is empty." · Mark: "You coming to bed or not?" · "He's calling down the hall to Mom. She's still up out there, waiting up for you."
-- Close, always: "Nobody looks at the door. You pull it to without a sound." · "Next Saturday night the door will be ajar again."
+- (a) both in: "It's over. Mark's flat on his back with one arm over his eyes, getting his breath back. Laura lies awake beside him, staring at the ceiling, her nightdress still bunched up at her waist." (pass 4: Mark's row is awake till 01:00, so not snoring)
+- (b) Mark only: "Mark's sitting up against the headboard under the lamp, awake and alone, his phone lit in his hand. Laura's side of the bed is empty."
+- Close, always: "Nobody looks at the door. You pull it to without a sound."
 
 ## Why — the source of each key choice
 

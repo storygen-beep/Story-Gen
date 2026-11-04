@@ -1,6 +1,8 @@
 # [REVIEW] System — wardrobe
 
-> Changed 2026-11-04 (LO's answers Q7, Q11, Q12: the stairs event is the hall event; the tub strips and dresses her; Laura's black lace set is to build this release). Waits for LO's re-sign.
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. The hot tub's way out gives back what she came in; Laura's lace set is built.
+
+> Changed 2026-11-04 (LO's answers Q7, Q11, Q12: the stairs event is the hall event; the tub strips and dresses her; Laura's black lace set is built). Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Key items: the sheer blouse needs Exhibitionism 15 (heat proposal C6); the sports bra is $25.
 
@@ -8,7 +10,7 @@
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): leaving a room now needs Corruption **or** Exhibitionism, wearing it out pays both, the two events pay by rule, and a bought item can be held in the garage. The rules live in `sheets/systems/meters.md` and `sheets/systems/money_pressure.md`.
 
-> **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. The 2026-10-29 locked-button note (DECISIONS 90) is corrected: "Needs Corruption 60" and "Needs Exhibitionism 60" are no longer in the game, because the buttons for scenes this release does not write were removed (DECISIONS 132). Any line below that still names one is superseded by that row.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
@@ -130,7 +132,7 @@ only `followers`.
 
 ## A garment reaction is a line in a hub (LO's play note, 2026-10-08)
 
-**Undressing with the scene** (LO, 2026-11-04, Q11): the hot tub's "Strip and get in." takes her clothes off, and every way out puts her day clothes back on. **Laura's black lace bra and panties** become wardrobe items, put on and taken off by Mark's lingerie walk-in (Q12): to build this release, not in the build yet.
+**Undressing with the scene** (LO, 2026-11-04, Q11): the hot tub's "Strip and get in." takes her clothes off, and every way out gives back what she came in (`remember_outfit`, `restore_outfit`, LO, 2026-11-04). **Laura's black lace bra and panties** are wardrobe items, put on and taken off by Mark's lingerie walk-in (Q12): built.
 
 A person's line about what she wears ("his line: short skirt") is a line inside that person's existing
 hub, read by her clothes, never its own button. It is true where it shows: a line that names another

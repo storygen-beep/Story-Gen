@@ -1,4 +1,6 @@
-# [READY] Place — Women's Toilet
+# [REVIEW] Place — Women's Toilet
+
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. New row: the refill walk-in B23, Zoe at the stall door.
 
 > Signed by LO: LO, 2026-10-08.
 
@@ -30,6 +32,14 @@
 | the mirror | work | wardrobe | none · reads her state | none needed | yes |
 | touch herself | work | her stage · Corruption | Curious: corruption add +1, first time each day (guess) | once a day, on the trigger | yes: explicit, her body |
 | take her bra off before class | work | wardrobe | her state becomes "no bra" · needs Daring | none needed: the state is read elsewhere | yes: her body |
+
+## Walk-in (LO's Q4, 2026-11-04; `scenes/walkins_refill.md`)
+
+**Walk-ins.** Her activity rolls on entry (1 in 4 at her lowest band, more higher up); on a hit someone walks in. A man's pay sits on the moment; her cover pays 0.
+
+| who walks in | her activity | when | his pay, on the moment | her bolder answers |
+|---|---|---|---|---|
+| Zoe | Wash at the sink | Mon–Fri 12:15–12:45, after `zoe_met` | none: no meter | "Keep washing." Exhibitionism +1, cap 19; "Turn round and do your back." Exhibitionism +1, cap 39; "Let her look." Exhibitionism +1, cap 59 |
 
 ## Rows a gate needs
 

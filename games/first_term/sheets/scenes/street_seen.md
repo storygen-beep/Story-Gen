@@ -45,19 +45,19 @@ One row per exit. Read from the build; it replaces the drafted map.
 
 | node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
 |---|---|---|---|---|
-| `seen` | He doesn't pretend to read his paper. | no | "Keep walking." — 8 versions, by flags, hour, who's there → Your Street | Exhibitionism +1 (cap 39) · `out_shown_today` set · varies: Corruption, Mr. Vance's Want, `street_first_l1` set |
+| `seen` | He doesn't pretend to read his paper. | no | "Keep walking." — 8 versions, by flags, hour, who's there → Your Street | Exhibitionism +1 (cap 19) · `out_shown_today` set · varies: Corruption, Mr. Vance's Want, `street_first_l1` set |
 
 **`street_seen_nobra`** — Your Street · needs not `out_shown_today` · no bra · not in short skirt · underwear on · repeatable · 1 a day
 
 | node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
 |---|---|---|---|---|
-| `seen` | Mr. Vance sets the paper down. | yes | "Keep walking." — 8 versions, by flags, hour, who's there → Your Street | Exhibitionism +1 (cap 39) · `out_shown_today` set · varies: Corruption, Mr. Vance's Want, `street_first_l1` set |
+| `seen` | Mr. Vance sets the paper down. | yes | "Keep walking." — 8 versions, by flags, hour, who's there → Your Street | Exhibitionism +1 (cap 19) · `out_shown_today` set · varies: Corruption, Mr. Vance's Want, `street_first_l1` set |
 
 **`street_seen_nopanties`** — Your Street · needs not `out_shown_today` · no underwear · not in jeans · not in leggings · not in shorts · repeatable · 1 a day
 
 | node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
 |---|---|---|---|---|
-| `seen` | A breeze comes down the street as you pass the landlord's gate, and there's nothing under … | yes | "Keep walking." — 8 versions, by flags, hour, who's there → Your Street | Exhibitionism +1 (cap 59) · `out_shown_today` set · varies: Corruption, Mr. Vance's Want, `street_first_l2` set |
+| `seen` | A breeze comes down the street as you pass the landlord's gate, and there's nothing under … | yes | "Keep walking." — 8 versions, by flags, hour, who's there → Your Street | Exhibitionism +1 (cap 19) · `out_shown_today` set · varies: Corruption, Mr. Vance's Want, `street_first_l2` set |
 
 ## The explicit beats, as built (2026-11-03)
 

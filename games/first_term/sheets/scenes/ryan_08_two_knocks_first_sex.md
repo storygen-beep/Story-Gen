@@ -1,5 +1,7 @@
 # [REVIEW] Scene — ryan_08_two_knocks_first_sex
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Where Mark is: the living room, in the notes only (Q7). No beat changed.
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the talk and doubt buttons as built; his +5 sits on the three finishes, not the terms; no "Further." button; the step row. the explicit beats as built, measured. file and line cites cut.
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 127) (LO: "it should be like rise from normal, not jump straight to
@@ -94,7 +96,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-02. Read by the
 (the first heading wins), which stay as the record. Fixes after: "asleep" cut from `suck` (Laura is awake 22:00–23:00);
 `light` no longer has Ryan stop dead (the pause is the player's pick); `kiss` and `undress` name no garment
 (gate "her clothes are backed": at night she may be in a sleep shirt, with no bra). Reader pass 2026-11-02: step 7 is
-"Kayla can't know" (her hand, his phone), not the cut kiss, so `kiss` and `undress` follow it; Mark is downstairs with the
+"Kayla can't know" (her hand, his phone), not the cut kiss, so `kiss` and `undress` follow it; Mark is in the living room with the
 TV 22:00–02:00, so only Laura is across the hall; `light` has Ryan see the light (she may face the wall); `under`
 pulls her up the bed (after `lick` she is already on her back). Every screen after `undress` fits all three
 positions or none is named. The `vaginal` rung on some oral or hand screens is the known false reading of "fuck".

@@ -908,7 +908,7 @@ text = "Leave the towel."
 targetType = "node"
 nodeId = "look"
 time_progression_minutes = 3
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Reach for the towel."
@@ -1492,21 +1492,21 @@ text = "Go down on him."
 targetType = "node"
 nodeId = "suck"
 time_progression_minutes = 5
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Let him taste you."
 targetType = "node"
 nodeId = "lick"
 time_progression_minutes = 5
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Get on him."
 targetType = "node"
 nodeId = "ride"
 time_progression_minutes = 5
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
 
 [[canvases.nodes]]
 id   = "suck"
@@ -2217,7 +2217,7 @@ locationId = "home_hall"
 time_progression_minutes = 5
 effects = [{ targetType = "player", trait = "ryan_step", op = "set", value = 8 }]
 flagEffects = [{ targetType = "player", flag = "ryan_terms_secret", op = "set" }, { targetType = "player", flag = "ryan_08_done", op = "set" }]
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 consumes = true
 
 [[canvases.nodes.exit_block.choices]]
@@ -2227,7 +2227,7 @@ locationId = "home_hall"
 time_progression_minutes = 5
 effects = [{ targetType = "player", trait = "ryan_step", op = "set", value = 8 }]
 flagEffects = [{ targetType = "player", flag = "ryan_terms_mine", op = "set" }, { targetType = "player", flag = "ryan_08_done", op = "set" }]
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 consumes = true
 
 [[canvases.nodes.exit_block.choices]]
@@ -2237,7 +2237,7 @@ locationId = "home_hall"
 time_progression_minutes = 5
 effects = [{ targetType = "player", trait = "ryan_step", op = "set", value = -1, clamp = false }]
 flagEffects = [{ targetType = "player", flag = "ryan_path_closed", op = "set" }, { targetType = "player", flag = "ryan_08_done", op = "set" }, { targetType = "player", flag = "ryan_knock_code", op = "unset" }, { targetType = "player", flag = "ryan_08_two_knocks_closed", op = "set" }]
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 final = true
 
 [[canvases]]
@@ -2345,7 +2345,7 @@ time_progression_minutes = 5
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "gte", value = 70 }] }
 costs = [{ trait = "energy", value = 10 }]
 effects = [{ targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Ride him."
@@ -2355,7 +2355,7 @@ time_progression_minutes = 5
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "gte", value = 70 }] }
 costs = [{ trait = "energy", value = 10 }]
 effects = [{ targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Let him taste you."
@@ -2365,7 +2365,7 @@ time_progression_minutes = 5
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "gte", value = 80 }] }
 costs = [{ trait = "energy", value = 10 }]
 effects = [{ targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Against the wall."
@@ -2375,7 +2375,7 @@ time_progression_minutes = 5
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "gte", value = 90 }] }
 costs = [{ trait = "energy", value = 10 }]
 effects = [{ targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Leave him to it."
@@ -2745,7 +2745,7 @@ time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 3 }]
 flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Back to your room."
@@ -2754,7 +2754,7 @@ locationId = "home_hall"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_true" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }]
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
 
 [[canvases.nodes]]
@@ -2826,7 +2826,7 @@ time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 3 }]
 flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Back to your room."
@@ -2835,7 +2835,7 @@ locationId = "home_hall"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_true" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }]
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
 
 [[canvases.nodes]]
@@ -2894,7 +2894,7 @@ time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 3 }]
 flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Back to your room."
@@ -2903,7 +2903,7 @@ locationId = "home_hall"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_true" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }]
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
 
 [[canvases]]
@@ -3165,7 +3165,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 costs = [{ trait = "energy", value = 10 }]
 effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 3 }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }]
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Lie on his bed. He only watches."
@@ -3176,7 +3176,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 costs = [{ trait = "energy", value = 10 }]
 effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 3 }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }]
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Lie on his bed. He only watches."
@@ -3194,7 +3194,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 costs = [{ trait = "energy", value = 10 }]
 effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 3 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }]
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Stand naked in his room. Tell him when."
@@ -3205,7 +3205,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 costs = [{ trait = "energy", value = 10 }]
 effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 3 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }]
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Stand naked in his room. Tell him when."
@@ -3431,7 +3431,7 @@ text = "Get dressed."
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 30
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Leave him to it."
@@ -3473,7 +3473,7 @@ text = "Get dressed."
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 30
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Leave him to it."
@@ -4220,7 +4220,7 @@ time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 4 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_absent" }, { type = "trait", subject = "player", trait_key = "hygiene", operator = "gte", value = 30 }] }
 effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 3 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }]
 flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }]
-wardrobeEffects = [{ action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "unequip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "unequip", item_id = "sneakers" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Watch his game in your underwear."
@@ -4230,7 +4230,7 @@ time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 4 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_absent" }, { type = "trait", subject = "player", trait_key = "hygiene", operator = "lt", value = 30 }, { type = "flag", subject = "player", flag_key = "hygiene_off", operator = "is_true" }] }
 effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 3 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }]
 flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }]
-wardrobeEffects = [{ action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "unequip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "unequip", item_id = "sneakers" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Watch his game in your underwear."
@@ -4604,7 +4604,7 @@ text = "Get dressed."
 targetType = "location"
 locationId = "home_living_room"
 time_progression_minutes = 30
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Leave him to it."
@@ -8338,7 +8338,7 @@ text = "\"Let me get dressed first.\""
 targetType = "node"
 nodeId = "dressed"
 time_progression_minutes = 5
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 
 [[canvases.nodes]]
 id   = "count"
@@ -14692,7 +14692,7 @@ text = "Stay in the water."
 targetType = "node"
 nodeId = "alone"
 time_progression_minutes = 15
-wardrobeEffects = [{ action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "sneakers" }]
 
 [[canvases.nodes]]
 id   = "alone"
@@ -14752,7 +14752,7 @@ text = "\"Not tonight, Zo.\" (1h)"
 targetType = "node"
 nodeId = "home_no"
 time_progression_minutes = 60
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 
 [[canvases.nodes]]
 id   = "kiss"
@@ -14863,7 +14863,7 @@ time_progression_minutes = 400
 conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "20:00", end_time = "21:00" }] }
 effects = [{ targetType = "player", trait = "zoe_step", op = "set", value = 3 }]
 flagEffects = [{ targetType = "player", flag = "zoe_03_done", op = "set" }]
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 consumes = true
 
 [[canvases.nodes.exit_block.choices]]
@@ -14874,7 +14874,7 @@ time_progression_minutes = 340
 conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "21:00", end_time = "22:00" }] }
 effects = [{ targetType = "player", trait = "zoe_step", op = "set", value = 3 }]
 flagEffects = [{ targetType = "player", flag = "zoe_03_done", op = "set" }]
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 consumes = true
 
 [[canvases.nodes.exit_block.choices]]
@@ -14885,7 +14885,7 @@ time_progression_minutes = 280
 conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "22:00", end_time = "23:00" }] }
 effects = [{ targetType = "player", trait = "zoe_step", op = "set", value = 3 }]
 flagEffects = [{ targetType = "player", flag = "zoe_03_done", op = "set" }]
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 consumes = true
 
 [[canvases.nodes.exit_block.choices]]
@@ -14896,7 +14896,7 @@ time_progression_minutes = 220
 conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "23:00", end_time = "00:00" }] }
 effects = [{ targetType = "player", trait = "zoe_step", op = "set", value = 3 }]
 flagEffects = [{ targetType = "player", flag = "zoe_03_done", op = "set" }]
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 consumes = true
 
 [[canvases.nodes.exit_block.choices]]
@@ -14907,7 +14907,7 @@ time_progression_minutes = 160
 conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "00:00", end_time = "20:00" }] }
 effects = [{ targetType = "player", trait = "zoe_step", op = "set", value = 3 }]
 flagEffects = [{ targetType = "player", flag = "zoe_03_done", op = "set" }]
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 consumes = true
 
 [[canvases.nodes]]
@@ -19607,7 +19607,7 @@ text = "\"Goodnight, gorgeous.\""
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 20
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
 flagEffects = [{ targetType = "player", flag = "jake_date_booked", op = "unset" }, { targetType = "player", flag = "late_date", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
 
 [[canvases.nodes]]
@@ -19654,7 +19654,7 @@ text = "\"Goodnight, gorgeous.\""
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 20
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
 flagEffects = [{ targetType = "player", flag = "jake_date_booked", op = "unset" }, { targetType = "player", flag = "late_date", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
 
 [[canvases.nodes]]
@@ -27352,7 +27352,7 @@ nodeId = "run"
 time_progression_minutes = 35
 conditions = { version = "1.0", logic = "OR", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }] }
 costs = [{ trait = "energy", value = 10 }]
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Run the loop. (10 energy)"
@@ -29476,7 +29476,7 @@ targetType = "node"
 nodeId = "answer"
 time_progression_minutes = 2
 flagEffects = [{ targetType = "player", flag = "walkin_tub_zoe_today", op = "set" }, { targetType = "player", flag = "zoe_in_the_tub", op = "set" }]
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
 
 [[canvases.nodes]]
 id   = "answer"
@@ -29526,7 +29526,7 @@ time_progression_minutes = 30
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_together", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "late_party", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Let her."
@@ -29563,7 +29563,7 @@ locationId = "party_house"
 time_progression_minutes = 30
 effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "late_party", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 
 [[canvases.nodes]]
 id   = "tub_let"
@@ -29610,7 +29610,7 @@ locationId = "party_house"
 time_progression_minutes = 30
 effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "late_party", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
-wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 
 [[canvases]]
 id   = "walkin_quad_team"
@@ -32155,7 +32155,7 @@ locationId = "home_bathroom"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "06:45", end_time = "06:25" }] }
 effects = [{ targetType = "player", trait = "hygiene", op = "add", value = 50, cap = 100 }]
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "towel" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "towel" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Wrap up in a towel."
@@ -32164,7 +32164,7 @@ locationId = "home_bathroom"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "06:25", end_time = "06:45" }] }
 effects = [{ targetType = "player", trait = "hygiene", op = "add", value = 50, cap = 100 }]
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "towel" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "towel" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Wrap up and get out."
@@ -32173,7 +32173,7 @@ locationId = "home_hall"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "06:25", end_time = "06:45" }] }
 effects = [{ targetType = "player", trait = "hygiene", op = "add", value = 50, cap = 100 }]
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "towel" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "towel" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Leave the door unlocked."
@@ -32184,7 +32184,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subjec
 show_when_locked = true
 effects = [{ targetType = "player", trait = "hygiene", op = "add", value = 50, cap = 100 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "shower_unlocked", op = "set" }]
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "towel" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "towel" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Lock it again."
@@ -32194,7 +32194,7 @@ time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_true" }] }
 effects = [{ targetType = "player", trait = "hygiene", op = "add", value = 50, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "shower_unlocked", op = "unset" }]
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "towel" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "towel" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "\"Five minutes.\""
@@ -32203,7 +32203,7 @@ locationId = "home_hall"
 time_progression_minutes = 30
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "06:25", end_time = "06:45" }] }
 effects = [{ targetType = "player", trait = "hygiene", op = "add", value = 50, cap = 100 }, { targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = -1, cap = 100 }]
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "towel" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "towel" }]
 
 [[canvases.nodes]]
 id   = "unlocked"
@@ -32788,7 +32788,7 @@ blocks = [
 
 [[canvases.nodes.blocks]]
 type = "group"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }] }
 blocks = [
   { type = "paragraph", content = "Ten minutes later Ryan comes down again and sits on the arm of the couch, right by your feet. His eyes go down you slow, your tits, your panties, the inside of your raised knee. His cock is hard in his shorts, and he doesn't hide it." },
 ]
@@ -34001,22 +34001,18 @@ content = "You ease the handle down and open the door a finger's width. The lamp
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "It's over. Mark's flat on his back with one arm over his eyes, getting his breath back. Laura lies awake beside him, staring at the ceiling, her nightdress still bunched up at her waist." }, { type = "dialog", content = "Sleep well, then.", props = { speaker = "npc", npcId = "npc_laura" } }, { type = "paragraph", content = "She didn't come. It's all over her face: he's done, and she's lying there wide awake with her thighs pressed together." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "It's over. Mark's flat on his back with one arm over his eyes, getting his breath back. Laura lies awake beside him, staring at the ceiling, her nightdress still bunched up at her waist." }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_absent" }] }, blocks = [{ type = "paragraph", content = "Mark's sitting up against the headboard under the lamp, awake and alone, his phone lit in his hand. Laura's side of the bed is empty." }, { type = "dialog", content = "You coming to bed or not?", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "paragraph", content = "He's calling down the hall to Mom. She's still up out there, waiting up for you." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_absent" }] }, blocks = [{ type = "paragraph", content = "Mark's sitting up against the headboard under the lamp, awake and alone, his phone lit in his hand. Laura's side of the bed is empty." }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Nobody looks at the door. You pull it to without a sound."
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "Next Saturday night the door will be ajar again."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -34765,7 +34761,7 @@ blocks = [
 
 [[canvases.nodes.blocks]]
 type = "group"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "underwear", operator = "unequipped" }] }
 blocks = [
   { type = "paragraph", content = "You let your knees fall open on the step. The skirt slides up your thighs, and there's nothing under it. Your cunt is bare to the street, and the air is cool on it." },
 ]
@@ -35538,7 +35534,7 @@ nodeId = "answer"
 time_progression_minutes = 2
 effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 2, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "walkin_shower_ryan_today", op = "set" }, { targetType = "player", flag = "ryan_walked_in_shower", op = "set" }]
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
 
 [[canvases.nodes]]
 id   = "answer"
@@ -35850,7 +35846,7 @@ targetType = "node"
 nodeId = "answer"
 time_progression_minutes = 2
 flagEffects = [{ targetType = "player", flag = "walkin_shower_kayla_today", op = "set" }, { targetType = "player", flag = "kayla_saw_her", op = "set" }]
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
 
 [[canvases.nodes]]
 id   = "answer"
@@ -36147,7 +36143,7 @@ nodeId = "answer"
 time_progression_minutes = 2
 effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 2, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "walkin_shower_mark_today", op = "set" }, { targetType = "player", flag = "mark_walked_in_shower", op = "set" }]
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
 
 [[canvases.nodes]]
 id   = "answer"
@@ -38275,7 +38271,7 @@ nodeId = "answer"
 time_progression_minutes = 2
 effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 2, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "walkin_wardrobe_mark_today", op = "set" }, { targetType = "player", flag = "mark_saw_lingerie", op = "set" }]
-wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "laura_lace_bra" }, { action = "equip", item_id = "laura_lace_panties" }]
+wardrobeEffects = [{ action = "remember_outfit" }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "laura_lace_bra" }, { action = "equip", item_id = "laura_lace_panties" }]
 
 [[canvases.nodes]]
 id   = "answer"
@@ -38376,7 +38372,7 @@ text = "Get changed. Go."
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 5
-wardrobeEffects = [{ action = "remove", item_id = "laura_lace_bra" }, { action = "remove", item_id = "laura_lace_panties" }, { action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "remove", item_id = "laura_lace_bra" }, { action = "remove", item_id = "laura_lace_panties" }, { action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 
 [[canvases.nodes]]
 id   = "m_look"
@@ -38426,7 +38422,7 @@ text = "Get changed. Go."
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 5
-wardrobeEffects = [{ action = "remove", item_id = "laura_lace_bra" }, { action = "remove", item_id = "laura_lace_panties" }, { action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }]
+wardrobeEffects = [{ action = "remove", item_id = "laura_lace_bra" }, { action = "remove", item_id = "laura_lace_panties" }, { action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 
 [[canvases]]
 id   = "walkin_things_ryan"
@@ -40497,7 +40493,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l1", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40506,7 +40502,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40515,7 +40511,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l1", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40524,7 +40520,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40533,7 +40529,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "22:00", end_time = "08:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l1", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40542,7 +40538,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "22:00", end_time = "08:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40551,7 +40547,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l1", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40560,7 +40556,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases]]
@@ -40623,7 +40619,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l1", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40632,7 +40628,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40641,7 +40637,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l1", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40650,7 +40646,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40659,7 +40655,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "22:00", end_time = "08:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l1", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40668,7 +40664,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "22:00", end_time = "08:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40677,7 +40673,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l1", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40686,7 +40682,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "flag", subject = "player", flag_key = "street_first_l1", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases]]
@@ -40749,7 +40745,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "street_first_l2", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l2", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40758,7 +40754,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "street_first_l2", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }, { targetType = "npc", npcId = "npc_vance", trait = "want", op = "add", value = 2 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40767,7 +40763,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "flag", subject = "player", flag_key = "street_first_l2", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l2", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40776,7 +40772,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "flag", subject = "player", flag_key = "street_first_l2", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40785,7 +40781,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "22:00", end_time = "08:00" }, { type = "flag", subject = "player", flag_key = "street_first_l2", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l2", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40794,7 +40790,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "22:00", end_time = "08:00" }, { type = "flag", subject = "player", flag_key = "street_first_l2", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40803,7 +40799,7 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "flag", subject = "player", flag_key = "street_first_l2", operator = "is_false" }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }, { targetType = "player", flag = "street_first_l2", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -40812,5 +40808,5 @@ targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_absent" }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "flag", subject = "player", flag_key = "street_first_l2", operator = "is_true" }] }
-effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
 flagEffects = [{ targetType = "player", flag = "out_shown_today", op = "set" }]

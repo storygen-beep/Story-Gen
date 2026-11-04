@@ -277,7 +277,7 @@ def term_exit(text, flagname, final=False):
     # terms, and "(ends his path)", add 0.
     eff = [setv("ryan_step", 8)] if not final else [setv("ryan_step", -1, clamp=False)]
     flags = [fset(flagname), done(8)] + ([funset("ryan_knock_code"), fset("ryan_08_two_knocks_closed")] if final else [])
-    return go(text, loc="home_hall", mins=5, eff=eff, flags=flags, wardrobe=DRESS_DAY, **extra)   # undressed on `undress` (DECISIONS 127)
+    return go(text, loc="home_hall", mins=5, eff=eff, flags=flags, wardrobe=DRESS_BACK, **extra)   # undressed on `undress` (DECISIONS 127)
 
 S = "ryan_08_two_knocks_first_sex"   # the step sheet its screens are read from
 out.append({
@@ -448,7 +448,7 @@ HOT_FLAG = [fset("ryan_hot_today")]
 LAURA_NOT_HERE = lambda loc: {"type": "npc_at_location", "location_id": loc, "npc_id": "npc_laura", "operator": "is_absent"}
 CUR, DAR, BOLD_, SHOW = (trait("corruption", "gte", 20), trait("exhibitionism", "gte", 20),
                          trait("corruption", "gte", 40), trait("exhibitionism", "gte", 40))
-UNDRESS_TO_UNDERWEAR = [{"action": "unequip", "item_id": g} for g in ALL_GARMENTS
+UNDRESS_TO_UNDERWEAR = [REMEMBER] + [{"action": "unequip", "item_id": g} for g in ALL_GARMENTS
                         if g not in ("plain_bra", "sports_bra", "plain_panties")]
 BRA_AND_PANTIES = [{"type": "clothing_slot", "slot": "bra", "operator": "equipped"},
                    {"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}]
@@ -498,7 +498,6 @@ def stink_node(back):
         D(R, "Jesus. When did you last shower? Go and wash. Then come back."),
         T("You can smell it on yourself now too."),
     ], [go("Go and shower.", loc=back, mins=2)])
-DRESS_BACK = DRESS_DAY
 HOT_ROOM = [  # his room, evenings he's home (Mon, Tue, Thu, Sun 19:00-22:00)
     (1, "Lean in his doorway.", [trait("ryan_step", "gte", 2), CUR, flag("ryan_hall_seen")], None,   # a first tease, Curious, after the hall accident (DECISIONS 124)
      [], [hot_exit("\"Night, Ryan.\"", "home_hall", 10, [cap("corruption", 1, 39)])]),
@@ -571,8 +570,8 @@ HOT7_AFTER = {
               ME("Then kiss me. Taste yourself on my tongue.")],
 }
 FINISH_EXITS = [  # the day's pay split on ryan_hot_today, as built; dressed again for the hall
-    go("Back to your room.", loc="home_hall", mins=20, cond_=cond(HOT_FREE), eff=[cap("corruption", 1, 79)] + HOT_PAY, flags=HOT_FLAG, wardrobe=DRESS_DAY),
-    go("Back to your room.", loc="home_hall", mins=20, cond_=cond(flag("ryan_hot_today")), eff=[cap("corruption", 1, 79)], wardrobe=DRESS_DAY),
+    go("Back to your room.", loc="home_hall", mins=20, cond_=cond(HOT_FREE), eff=[cap("corruption", 1, 79)] + HOT_PAY, flags=HOT_FLAG, wardrobe=DRESS_BACK),
+    go("Back to your room.", loc="home_hall", mins=20, cond_=cond(flag("ryan_hot_today")), eff=[cap("corruption", 1, 79)], wardrobe=DRESS_BACK),
 ]
 out.append({
     "id": "ryan_two_knocks", "name": "Two knocks on his door",

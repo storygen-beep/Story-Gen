@@ -1,5 +1,7 @@
 # [REVIEW] Place — Garden
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. New row: the refill walk-in B22, Mark on the back step.
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 10: "Lie in the sun an hour. Let Mark look." needs Curious or Daring (two copies) and opens a short screen `sun_mark_look` with his reaction (beer low over his jeans; "You'll burn, @player." while the sun is up, "Fence is low, @player." after 19:00), clothes by the lounger's three slot checks. "Play up to Mark in the garage door." shows only bra-only; "Play up to Ryan's window." only bra-only or with the lotion open (Bold, his step 7), so neither lands on a screen with only "Not today.".
@@ -49,6 +51,14 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has h
 | what | where | buttons and pays |
 |---|---|---|
 | a media pool (A10) | the show-off screen in the sun | a `_t4` pool, no new prose |
+
+## Walk-in (LO's Q4, 2026-11-04; `scenes/walkins_refill.md`)
+
+**Walk-ins.** Her activity rolls on entry (1 in 4 at her lowest band, more higher up); on a hit someone walks in. A man's pay sits on the moment; her cover pays 0.
+
+| who walks in | her activity | when | his pay, on the moment | her bolder answers |
+|---|---|---|---|---|
+| Mark | Lie in the sun | Sun 10:00–18:00, after `mark_saw_her` | his Want +2 | "Stay as you are." Exhibitionism +1, cap 19; "Stretch your legs out." Exhibitionism +1, cap 39; "Turn over for him." Exhibitionism +1, cap 59 |
 
 ## Rows a gate needs
 

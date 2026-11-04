@@ -1,4 +1,6 @@
-# [READY] Place — Your Room
+# [REVIEW] Place — Your Room
+
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. New row: the refill walk-in B21, Ryan at her nap.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
@@ -39,6 +41,14 @@
 | row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | tidy your room | work | home_life | 30 min · energy add −5 · `room_tidy` set true | once a week: Sunday dinner reads it and sets it false | yes, one line |
+
+## Walk-in (LO's Q4, 2026-11-04; `scenes/walkins_refill.md`)
+
+**Walk-ins.** Her activity rolls on entry (1 in 4 at her lowest band, more higher up); on a hit someone walks in. A man's pay sits on the moment; her cover pays 0.
+
+| who walks in | her activity | when | his pay, on the moment | her bolder answers |
+|---|---|---|---|---|
+| Ryan | Take a nap | Sat, Sun 10:00–12:00 | his Want +2 | "Don't move." Exhibitionism +1, cap 19; "Stretch." Exhibitionism +1, cap 39; "Roll onto your back." Exhibitionism +1, cap 59 |
 
 ## Rows a gate needs
 

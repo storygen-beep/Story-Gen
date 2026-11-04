@@ -1,8 +1,10 @@
 # [REVIEW] Scenes — the sex scenes in the cold places (A1-A7)
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. The built-differently items are confirmed, DECISIONS 170.
+
 > New 2026-11-03 (third alignment pass), written from the build; waits for LO's sign. The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`, part A (signed by LO 2026-11-03, DECISIONS 147: A1-A7 yes, A8 and A9 no; built in DECISIONS 149).
 
-Each act in the build: an offer screen with a written no that pays nothing, then a shuffle bag of beats with a clip, paying her +1 capped at the stage top, once a day. Built differently from the proposal, for LO to confirm (DECISIONS 149): A6 and A7 hours are conditions, not schedules; A1 runs 16:30-16:45, A3 to 11:30, A2 to 12:45; A2 and A3 need the short skirt; A5's exit is "Slip out while she sleeps."
+Each act in the build: an offer screen with a written no that pays nothing, then a shuffle bag of beats with a clip, paying her +1 capped at the stage top, once a day. Built differently from the proposal (DECISIONS 149), confirmed, DECISIONS 170: A6 and A7 hours are conditions, not schedules; A1 runs 16:30-16:45, A3 to 11:30, A2 to 12:45; A2 and A3 need the short skirt; A5's exit is "Slip out while she sleeps."
 
 ## A1 · `hub_jake_gym`
 

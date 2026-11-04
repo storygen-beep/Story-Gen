@@ -131,7 +131,7 @@ out.append(solo("room_tidy", "Tidy your room",
 # ═════════════════════════════════════════════════════════════════════════════
 # THE BATHROOM (home_bathroom.md): the shower strips her (A1-03), the mirror by slot (A1-05)
 # ═════════════════════════════════════════════════════════════════════════════
-STRIP = [{"action": "unequip", "item_id": g} for g in ALL_GARMENTS if g not in ("sneakers", "towel")]
+STRIP = [REMEMBER] + [{"action": "unequip", "item_id": g} for g in ALL_GARMENTS if g not in ("sneakers", "towel")]
 out.append(solo("bathroom_shower", "Take a shower",
     "Hygiene +50, 20 minutes, once a day. Who's near reads who is home. Not while Ryan has the room.",
     "home_bathroom", [
@@ -327,7 +327,7 @@ out.append(solo("living_couch", "Lie on the couch",
           *pin_blocks([
             GC(cond(ntrait(R, "want", "lt", 40)),
                P("Ten minutes later Ryan comes out again, for nothing, and stops at the end of the hall. He looks at your tits in your bra, at your panties, and goes red to the ears, but he doesn't look away.")),
-            GC(cond(*ANY),
+            GC(cond(*UNDIES),
                P("Ten minutes later Ryan comes down again and sits on the arm of the couch, right by your feet. His eyes go down you slow, your tits, your panties, the inside of your raised knee. His cock is hard in his shorts, and he doesn't hide it.")),
             # its own chain: adjacent GCs would join the Want chain above
             G(cond(*ANY), GC(cond(*LAURA_IN_HOUSE, logic="OR"), D(R, "Not with Mom home, @player.nickname.")),
@@ -616,16 +616,11 @@ out.append({"id": "master_door_peek", "name": "Peek through the gap",
     "nodes": [node("peek", "Through the gap", [
         P("You ease the handle down and open the door a finger's width. The lamp is still on."),
         G(cond(here(L, "home_master_bedroom"), here(M, "home_master_bedroom")),
-          # pass 4 reader: Mark's row is awake till 01:00, so he is spent, not asleep; and the screen says what is new
-          P("It's over. Mark's flat on his back with one arm over his eyes, getting his breath back. Laura lies awake beside him, staring at the ceiling, her nightdress still bunched up at her waist."),
-          D(L, "Sleep well, then."),
-          P("She didn't come. It's all over her face: he's done, and she's lying there wide awake with her thighs pressed together.")),   # LO 2026-11-03: to the ceiling, flat; he snores on
+          # pass 4 reader: Mark's row is awake till 01:00, so he is spent, not asleep. No next step and no hook, as signed (LO, 2026-11-04)
+          P("It's over. Mark's flat on his back with one arm over his eyes, getting his breath back. Laura lies awake beside him, staring at the ceiling, her nightdress still bunched up at her waist.")),
         G(cond(here(M, "home_master_bedroom"), here(L, "home_master_bedroom", False)),
-          P("Mark's sitting up against the headboard under the lamp, awake and alone, his phone lit in his hand. Laura's side of the bed is empty."),
-          D(M, "You coming to bed or not?"),
-          P("He's calling down the hall to Mom. She's still up out there, waiting up for you.")),   # LO 2026-11-03: down the hall, where Laura waits (master_door_peek.md case b; Q7, one hall)
+          P("Mark's sitting up against the headboard under the lamp, awake and alone, his phone lit in his hand. Laura's side of the bed is empty.")),
         P("Nobody looks at the door. You pull it to without a sound."),
-        P("Next Saturday night the door will be ajar again."),   # pass 4 reader (hook): the main scene's next night
     ], [go("Close the door.", loc="home_hall", mins=2)])]})
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -813,7 +808,7 @@ out.append(solo("front_step", "Sit on the step", "Watch the street. Who passes r
         # reader a3 #3 (DECISIONS 131): a passer-by's reaction and a price (the neighbor's phone: Mom's suspicion +2)
         node("street_sees", "Let the street see", [
             GC(cond(slot("underwear")), P("You let your knees fall open on the step. The skirt slides up your thighs, and your panties are right there for the street, the cotton pulled tight over your cunt.")),
-            GC(cond(*ANY), P("You let your knees fall open on the step. The skirt slides up your thighs, and there's nothing under it. Your cunt is bare to the street, and the air is cool on it.")),
+            GC(cond(slot("underwear", False)), P("You let your knees fall open on the step. The skirt slides up your thighs, and there's nothing under it. Your cunt is bare to the street, and the air is cool on it.")),
             P("A man coming up the sidewalk with his shopping sees. He slows right down. His eyes go between your knees and stay there, and he walks into the gate post two doors down. He goes past twice."),
             WHO("Jesus. Sorry. Jesus Christ."),   # LO 2026-11-03
             ME("Watch where you're going."), WHO("I am. Believe me, I am."),

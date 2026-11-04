@@ -1,5 +1,6 @@
 # [REVIEW] SP1 · Time — First Term
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. The overnight counts: 127 flags, 42 of them walk-in caps.
 > Changed 2026-11-04: the overnight list adds Zoe's and Jake's patience and two flags (Q5); Mark's table counts nothing (Q6). Waits for LO's re-sign.
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 > [REVIEW] (was [READY]) · drafted 2026-10-03 · updated 2026-10-08 (the clock in hours) · signed by LO: LO, 2026-10-08
@@ -15,13 +16,13 @@
 | rent | the engine takes it Sunday 00:00, once Mark's rent scene has run; his table scene comes after and counts nothing (Q6) |
 | prose and time | a beat never reads the clock; a closed row shows its hours |
 
-**The overnight list** — `[engine.daily_tick]` at midnight: 123 flags cleared, three traits moved.
+**The overnight list** — `[engine.daily_tick]` at midnight: 127 flags cleared, three traits moved.
 
 | what | overnight |
 |---|---|
 | `curfew_days` | −1, never below 0 (Laura's curfew counts down) |
 | `zoe_patience` · `jake_patience` | +1 each, up to 6 and 3: a no-show or an ignored invite empties it, and her next invite waits until it is full (Q5) |
-| 38 walk-in caps | cleared: `walkin_<canvas>_today`, one per walk-in canvas, so each walker comes once a day |
+| 42 walk-in caps | cleared: `walkin_<canvas>_today`, one per walk-in canvas, so each walker comes once a day |
 | 60 day caps | cleared: the `_today` flags below |
 | 25 once-a-day flags | cleared: listed below |
 | `hygiene` | falls 10 (`[player.trait_decay]`); with hygiene off nothing reads it |

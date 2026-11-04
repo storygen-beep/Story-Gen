@@ -358,8 +358,8 @@ for host, cid in (("park_run", "walkin_run_zoe"), ("park_rest", "walkin_rest_zoe
 TOG = flag("zoe_together")
 LATE = [fset("late_party"), fset("came_home_late")]
 # LO, 2026-11-04 (Q11): getting in strips her (the moment's button) and getting out dresses her, as the soak does;
-# the engine keeps no outfit to put back, so she dresses as every "Get dressed." in this game does (canv.DRESS_DAY)
-TUB_EXIT = dict(eff=[{"targetType": "player", "trait": "energy", "op": "add", "value": 5, "cap": 100}], flags=LATE, wardrobe=DRESS_DAY)
+# she gets back what she took off (canv.DRESS_BACK, LO 2026-11-04)
+TUB_EXIT = dict(eff=[{"targetType": "player", "trait": "energy", "op": "add", "value": 5, "cap": 100}], flags=LATE, wardrobe=DRESS_BACK)
 walkin("walkin_tub_zoe", "Zoe gets in", "party_house",
     "B14, Zoe: late on Saturday she gets into the hot tub beside her; after zoe_together her hand goes under the water while the deck can see. Hers: not here 0; Hungry, let her, Corruption +1 cap 79.",
     [here(Z, "party_house"), flag("zoe_met")],
