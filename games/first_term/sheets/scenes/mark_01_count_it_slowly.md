@@ -41,7 +41,7 @@
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `table` | Mark at the table with the envelope: "Sit. Every Sunday, you sit at my table while this goes in Vance's envelope." | no | "Here." → `count` · "Give me a minute." → `dressed` (parked) | none; "Give me a minute." gives back what she wore before (`remember_outfit`, `restore_outfit`) |
-| `count` | he doesn't open the envelope. Short, she sits and looks at it with him: "Seventy-five, I said." Paid up: "It's all there, Mark. Take your time." and his eyes leave it for her legs | no | "Can you just — say it?" (she's short) · "Let him look." (she isn't) → `short` | none |
+| `count` | he doesn't open the envelope. Short, she sits and looks at it with him: "All of it, I said." Paid up: "It's all there, Mark. Take your time." and his eyes leave it for her legs | no | "Can you just — say it?" (she's short) · "Let him look." (she isn't) → `short` | none |
 | `short` | "I'm saying it." A short goes on the back of the envelope: "The rest waits a week, but Vance doesn't." Paid up: "That's the week. Same again Sunday." | no | "Fine." → the hall | Mark's Want add +10 · `mark_step` set 1 · the Sunday count: a full week adds 1 to her streak, his Power −3; a short or covered week resets it, his Power +3 |
 | `dressed` | "Suit yourself." She goes out and comes back dressed; he has sealed the envelope without her. Short: "Short. The rest waits a week." | no | "Go back to your room." → her room | `mark_step` set 1 and the same Sunday count; no Want |
 

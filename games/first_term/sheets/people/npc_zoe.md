@@ -92,7 +92,7 @@ Hungry or Watched.
 | 4 · he moves at least every other step | yes: her move is written on every step |
 | 5 · his meter is the lock | waived (declared on this sheet, signed by LO 2026-11-01) |
 | 6 · a hot repeatable per stage | yes: the dares, plus the canteen and "Stay over" |
-| 7 · her voice changes with her level | no: no step reads her level |
+| 7 · her voice changes with her level | yes: all five steps change her line by level (2026-11-04) |
 | 8 · something happens after the top step | yes: the dares and her bed keep running |
 
 Failing, waivers not counted: 1 of 8. The ladder may be built (two fails stop it).

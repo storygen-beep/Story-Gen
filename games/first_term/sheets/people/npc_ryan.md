@@ -94,7 +94,7 @@ opens a step. Laura's rule (built): in a room Laura is in, the hot repeatables d
 | 4 · he moves at least every other step | yes: his move is written on every step |
 | 5 · his meter is the lock | yes: Want gates 10–70; steps pay +5; hot repeatables pay the gap |
 | 6 · a hot repeatable per stage | yes: a hot repeatable per stage, plus the step-8 repeat |
-| 7 · her voice changes with her level | no: only step 1 reads her level; steps 2–8 have one voice |
+| 7 · her voice changes with her level | partly: steps 1-6 change her line by level; steps 7 and 8 only open at the top level (2026-11-04) |
 | 8 · something happens after the top step | yes: the step-8 repeat, near-catches |
 
 Failing, waivers not counted: 1 of 8. The ladder may be built (two fails stop it).

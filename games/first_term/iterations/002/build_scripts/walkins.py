@@ -209,13 +209,13 @@ a, n = shower_answers("m",
      ME("Mark. I'm in the shower."), D(M, "I can see that. Mind the hot water. It's not free."), P("He goes, and leaves gray fingerprints on the door.")],
     [P("You don't grab it straight away. You stand there under the water and let him see it, your tits, your nipples hard, the water running down between your legs."),
      GC(cond(ntrait(M, "want", "lt", 20)), P("In the mirror his eyes find you, once, and drop to the drain. He scrubs at a knuckle that's already clean."),
-        D(M, "Lock's broken. I'll fix it. Tonight."), P("Then you reach for the towel, and he turns the tap off without looking up.")),
+        D(M, "Lock's broken. I keep meaning to fix it."), P("Then you reach for the towel, and he turns the tap off without looking up.")),
      GC(cond(*ANY), P("In the mirror his eyes never leave you. Then you reach for the towel, and he turns the tap off."), D(M, "Lock's broken. I'll fix it. Maybe."))],
-    [P("You keep washing. You soap your tits and your stomach, slow, while he scrubs his hands at the sink and watches you in the mirror."),
+    [P("You keep washing. You soap your tits and your stomach, slow, while he scrubs his hands at the sink."),
      GC(cond(ntrait(M, "want", "lt", 20)), P("He scrubs a long time with his eyes on the tiles. The front of his jeans is tight, and he turns his hip into the sink so you won't see it."),
         D(M, "Grease. Gets everywhere."), ME("I can see that, Mark."), D(M, "Don't be smart.")),
-     GC(cond(*ANY), P("He scrubs a long time. The front of his jeans is tight. He doesn't hide it."), D(M, "You're your mother's girl, all right."), ME("Meaning what?"), D(M, "Meaning you know exactly what you're doing.")),
-     P("He goes back down to the garage, and the radio comes on loud.")],
+     GC(cond(*ANY), P("He scrubs a long time and watches you in the mirror. The front of his jeans is tight. He doesn't hide it."), D(M, "You're your mother's girl, all right."), ME("Meaning what?"), D(M, "Meaning you know exactly what you're doing.")),
+     P("He goes, slow, and he doesn't pull the door shut behind him.")],
     [P("You turn round under the water and give him your back and your wet ass, and you don't hurry."),
      P("Behind you the tap stops running."), D(M, "Christ, @player. Anybody could walk in on this."), ME("You did."),
      P("When you look, he's gone, and the door's wide open.")])
@@ -392,7 +392,8 @@ walkin("walkin_tv_ryan", "Channel 5", "home_living_room",
     "He's seen the screen.",
     [P("He looks at the screen. She drops down on the man's cock, and she moans. Then he looks at you."),
      D(R, "Seriously, @player.nickname? It's the middle of the day."), ME("And?"),
-     P("He goes red, but he doesn't go back to his room. His eyes go back to her tits on the screen, and he shoves his hands in his pockets."),
+     P("He goes red, but he doesn't go back to his room. His eyes go to her tits on the screen, then to your chest, then away, fast, and he shoves his hands in his pockets."),
+     D(R, "I'm not sitting down with that on. Not a chance."),   # writing pass: low heat (H4), the not-yet; "Leave it on." is where it gives way
      VID("a young man in the doorway staring at porn on the living room TV, a girl on the couch", "brother catches sister watching porn", "guy walks in girl watching porn couch", pool_dir="sex/walkin_tv_ryan_t5")],
     CH5_ANS("r"), raise_=[lust(R)], records=["ryan_caught_ch5"], when=[wd(5, 6), tod("13:30", "14:00")], extra=[
         res("r_off", "Turn it off", [P("You jab the remote. The screen goes black. Ryan lets out a breath."), D(R, "My turn for the TV, then."), ME("Don't you dare tell anyone."), D(R, "Who would I tell? Mom?")],
@@ -415,10 +416,10 @@ walkin("walkin_tv_laura", "Channel 5", "home_living_room",
     "She's seen the screen.",
     [P("She looks at the screen for one second. Her face goes pink to the hairline."),
      # reader batch 4 (pass 3): the charge on her body, and the price (Laura saw)
-     P("Then her eyes go to you on the couch, to your hot face and your nipples hard through what you're wearing, and stay there one second too long."),
+     P("Then her eyes go to you on the couch, to your hot face and your hard nipples, and stay there one second too long."),
      GC(cond(ntrait(L, "warmth", "lt", 40)), D(L, "Off. Now. And that is Mark's channel, not yours.")),
      GC(cond(*ANY), D(L, "Oh, sweetheart. Not in the living room. Turn it off.")),
-     ME("Sorry, Mom. It was just on."), D(L, "Just on. Right."),
+     ME("Sorry, Mom. It was just on."), D(L, "Just on. Right. You're lucky I came through first and not Mark."),   # writing pass: low heat (H4), the price
      P("She goes back into the kitchen without another word."),
      # reader batch 4 (pass 3): the hook, her Sunday kitchen row (18:00-22:00, hub_laura_kitchen)
      P("She'll be in the kitchen until ten.")],
@@ -439,7 +440,7 @@ PANTIES_ON = slot("underwear")
 NO_TOWEL = {"type": "worn_type", "operator": "neq", "value": "towel"}
 SAW = flag("mark_saw_her")
 # Her answers, shared by the weekday and the Saturday walk-in: they route into the built tease ladder.
-LAUNDRY_ANSWERS = [go("Load it and go.", loc="home_garage", mins=30, flags=[fset("did_laundry")], eff=[add("energy", -5)],
+LAUNDRY_ANSWERS = [go("Load it and go.", node="l_load", mins=2, flags=[fset("did_laundry")], eff=[add("energy", -5)],
         costs=[{"trait": "energy", "value": 5}]),
      go("Leave your basket on top.", node="hub_mark_garage.hl_laundry_tease", cond_=cond(CURIOUS, SAW),
         eff=[npc_add(M, "want", 2)], flags=[fset("did_laundry")]),
@@ -449,7 +450,7 @@ LAUNDRY_ANSWERS = [go("Load it and go.", loc="home_garage", mins=30, flags=[fset
         cond_=cond(BOLD, SHOWING, SAW, slot("top"), slot("bra")),
         eff=[npc_add(M, "want", 4), pay("exhibitionism", 59), pay("corruption", 59)], flags=[fset("did_laundry")],
         wardrobe=[{"action": "unequip", "item_id": g} for g in ("tshirt", "thin_top")]),
-     go("Leave it for later.", loc="home_hall")]
+     go("Leave it for later.", node="l_later", mins=0)]
 walkin("walkin_laundry_mark", "Bent at the drum", "home_garage",
     "B4, Mark: back from dinner to his garage row, he finds her bent at the washer. His Lust +2 on the moment; her answers route into his laundry tease ladder (hub_mark_garage) with its own gates and pays.",
     [here(M, "home_kitchen"), SAW],
@@ -462,9 +463,19 @@ walkin("walkin_laundry_mark", "Bent at the drum", "home_garage",
      GC(cond(ntrait(M, "want", "lt", 20)), P("Then he catches himself. He looks at the ceiling, at his bench, anywhere, and his beer hand drops in front of his jeans."),
         D(M, "Whites with whites, @player. Don't let me stop you."), ME("I know how to do laundry, Mark."), D(M, "Could've fooled me.")),
      GC(cond(*ANY), D(M, "Don't let me stop you."),
-        P("The front of his jeans is tight. He doesn't hide it, but he doesn't come any closer."))],
+        P("The front of his jeans is tight. He doesn't hide it, but he doesn't come any closer.")),
+     # reader 2026-11-04: the hook under Curious, where no tease button is open; his garage rows are Mon, Tue, Thu, Fri evenings and Saturday
+     G(cond(trait("corruption", "lt", 20)), T("He won't say it, but he's out here most nights after dinner. Next load, you'll know he's coming."))],
     LAUNDRY_ANSWERS,
-    raise_=[lust(M)], records=["mark_walked_in_laundry"], when=[wd(0, 1, 3, 4), tod("18:45", "19:00")])
+    raise_=[lust(M)], records=["mark_walked_in_laundry"], when=[wd(0, 1, 3, 4), tod("18:45", "19:00")], extra=[
+        res("l_load", "Load it", [ME("All yours, Mark. I'm done."), D(M, "Hm."),
+                                  P("You slam the drum door and turn the dial, and the machine starts up shaking."),
+                                  GC(cond(ntrait(M, "want", "lt", 20)), P("He gets out of the doorway just enough to let you by, and he looks at the ceiling while you do it.")),
+                                  GC(cond(*ANY), P("He gets out of the doorway just enough to let you by, and he looks at your ass the whole way past."))],
+            "Wait out the wash.", "home_garage", 28),
+        res("l_later", "Later", [ME("It can wait. I'll do it later."), D(M, "I'm out here till ten."),
+                                 P("You pick your basket up off the floor and carry it past him. He doesn't stop you, but he doesn't move much either.")],
+            "Take your basket in.", "home_hall", 2)])
 rule("garage_laundry", "walkin_laundry_mark", 0.25, here(M, "home_kitchen"), wd(0, 1, 3, 4), tod("18:45", "19:00"))
 
 # B4 Saturday (DECISIONS 152): Mark out to the garage after his coffee at the counter. The host needs him out of the
@@ -479,11 +490,20 @@ walkin("walkin_laundry_mark_sat", "Bent at the drum", "home_garage",
     "He stops in the doorway.",
     [P("He doesn't go to his bench. He stands in the doorway with the mug halfway to his mouth and looks at your ass, but he doesn't drink."),
      GC(cond(ntrait(M, "want", "lt", 20)), P("Then he catches himself and looks at his bench instead, hard, like it owes him money. He holds the mug low, in front of his jeans."),
-        D(M, "Saturday's my garage, @player. Be quick about it."), ME("I'll be ten minutes."), D(M, "Five.")),
+        D(M, "Saturday's my garage, @player. Be quick about it."), ME("It's one load, Mark. Half an hour."), D(M, "Then stay out of my way for it.")),
      GC(cond(*ANY), D(M, "Saturday's my garage, @player. Carry on."),
-        P("He takes his time over the first sip. The front of his jeans is tight, and he stays where he is."))],
+        P("He takes his time over the first sip. The front of his jeans is tight, and he stays where he is.")),
+     G(cond(trait("corruption", "lt", 20)), T("He's at that bench till five every Saturday. You'll remember that the next time you bring your basket out."))],
     copy.deepcopy(LAUNDRY_ANSWERS),
-    raise_=[lust(M)], records=["mark_walked_in_laundry"], when=[wd(5), tod("08:45", "09:00")])
+    raise_=[lust(M)], records=["mark_walked_in_laundry"], when=[wd(5), tod("08:45", "09:00")], extra=[
+        res("l_load", "Load it", [ME("There. Your garage."), D(M, "About time."),
+                                  P("You shut the drum on your Saturday wash and the old thing rattles into life."),
+                                  GC(cond(ntrait(M, "want", "lt", 20)), P("He carries his mug to the bench and sets it down with his back to you, and he stays that way until you've gone.")),
+                                  GC(cond(*ANY), P("He carries his mug to the bench the long way, past you, and his eyes stay on your ass the whole walk."))],
+            "Wait out the wash.", "home_garage", 28),
+        res("l_later", "Later", [ME("You have your Saturday, Mark. I'll come back when you're done."), D(M, "Five o'clock."),
+                                 P("You hook the basket onto your hip and walk it back into the house. He drinks his coffee and watches you go, but he doesn't say anything else.")],
+            "Take your basket in.", "home_hall", 2)])
 rule("garage_laundry", "walkin_laundry_mark_sat", 0.25, here(M, "home_kitchen"), wd(5), tod("08:45", "09:00"))
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -534,7 +554,8 @@ walkin("walkin_mirror_mark", "In the mirror", "home_hall",
         GC(cond(ntrait(M, "want", "lt", 20)), P("Then he catches himself. He looks down at the hall carpet, at his own feet, anywhere but the glass."),
            D(M, "Bit late to be standing there, @player. Bed."), ME("Night, Mark."), D(M, "Night.")),
         GC(cond(*ANY), P("He stands there and doesn't pretend he's doing anything else."),
-           D(M, "Bit late to be standing there, @player."))],
+           D(M, "Bit late to be standing there, @player.")),
+        P("He comes down this hall to bed at this hour most nights.")],   # writing pass: the hook (window Mon-Sat 01:30-02:00); a plain block, so it ends his chain
     mirror_answers("m"), raise_=[lust(M)], records=["mark_saw_mirror"], also_set=[fset("home_event")],
     # reader batch 4/5 (pass 3): not while Laura waits on the dark stairs after a late night (her hall row)
     when=[wd(0, 1, 2, 3, 4, 5), tod("01:30", "02:00"), here(L, "home_hall", False)], extra=[
@@ -563,7 +584,7 @@ walkin("walkin_wardrobe_laura", "Laura's mirror", "home_master_bedroom",
         D(L, "I wore that once. I was about your age."), ME("Where did you wear it?"), D(L, "Somewhere I shouldn't have. Don't ask me where."),
         P("She smooths it down over your hip, then hangs it back up herself.")),
      # scene reader b02 (2026-11-03): the hook: her Saturday row has her dressing to go out from 17:00
-     D(L, "Now out, please. I have to get dressed for tonight.")],
+     D(L, "Now out, please. I have to get dressed for tonight. Come back in at five, if you want your hair done.")],   # writing pass: the hook, hub_laura_bedroom's hair (Sat 17:00-18:30)
     [go("Leave her to it.", loc="home_hall", mins=5)], records=["laura_saw_wardrobe"], when=[wd(5), tod("16:45", "17:00")])
 rule("master_wardrobe", "walkin_wardrobe_laura", 0.25, here(L, "home_bathroom"), wd(5), tod("16:45", "17:00"))
 
@@ -731,7 +752,7 @@ walkin("walkin_nap_ryan", "The door clicks", "home_ella_room",
     raise_=[lust(R), {"targetType": "player", "trait": "energy", "op": "add", "value": 30, "cap": 100}], moment_mins=120,
     records=["ryan_saw_nap"], when=[wd(5, 6), tod("10:00", "12:00")], extra=[
         res("r_cover", "The blanket", [P("You drag the blanket up to your chin and glare at him over the top of it."), ME("Out. Now. And knock next time."),
-                                       D(R, "Going. Sorry. I'm going."), P("He backs out with your charger. His door shuts across the hall, and a second later his music comes on loud.")],
+                                       D(R, "Going. Sorry. I'm going."), P("He backs out with your charger, and you lie there and listen to his footsteps go.")],
             "Get up.", "home_ella_room", 5),
         res("r_cov", "Don't move", [P("You don't move. You lie there with your cheek on the pillow and let him look, one second, two, three. Your face is hot, but you stay put, your nipples hard against the covers."),
                                     D(R, "You're. You're still lying there."), ME("I am. And you're still looking."), D(R, "Yeah. I. Yeah. Sorry."),
@@ -746,7 +767,7 @@ walkin("walkin_nap_ryan", "The door clicks", "home_ella_room",
                                              GC(cond(TOWEL), P("The towel stays where it fell, open down your side, and his eyes go to the bare curve of your tit and stay.")),
                                              GC(cond(*ANY), P("His eyes go down the front of you, slow, to every place your clothes don't cover.")),
                                              D(R, "You want me to look."), ME("You walked in, Ryan. Not me."),
-                                             D(R, "Not now. Not with the house this full. But Jesus, @player.nickname."),
+                                             D(R, "Not now. Not with Mark down the hall. But Jesus, @player.nickname."),
                                              P("He goes, and his door shuts hard across the hall.")],
             "Get up.", "home_ella_room", 5)])
 rule("room_nap", "walkin_nap_ryan", 0.25, here(R, "home_ryan_room"), wd(5, 6), tod("10:00", "12:00"))
@@ -808,6 +829,11 @@ rule("garden_sun", "walkin_garden_mark", 0.25, here(M, "home_kitchen"), wd(6), t
 
 # pass 4 A57: her own line by her stage on the walk-ins where a short band line does it (canv.her_band_line)
 her_band_line(CANVASES, {
+    "walkin_wardrobe_mark": ("exhibitionism", [
+        "His wife's bra, and he's looking at you in it. You want to disappear.",
+        "He's looking. Part of you wants to see what he does.",
+        "Mom's lace, and his eyes all over it. You don't want to cover up yet.",
+        "You want him to remember how this lace looks on you."]),
     "walkin_shower_ryan": ("exhibitionism", [
         "Ryan. In here. Grab the towel.",
         "Ryan's looking. You don't want the towel yet.",
@@ -829,6 +855,29 @@ her_band_line(CANVASES, {
         "You don't want to turn it off. Not with him here.",
         "You want to watch the rest with Ryan."]),
 })
+
+def _cover_while_she_is_new(canvases):
+    """H7 for Mark (pass 5 A70): his cover band reads his Want under 20. Stages are hers, so it also shows while she is
+    under Corruption 20. Conditions are flat, so the band is copied as a second branch of the same chain."""
+    def rec(blocks):
+        out_ = []
+        for b in blocks:
+            out_.append(b)
+            if b.get("type") == "group":
+                items = (b.get("conditions") or {}).get("items") or []
+                if len(items) == 1 and items[0].get("npc_id") == M and items[0].get("trait_key") == "want" and items[0].get("operator") == "lt" and items[0].get("value") == 20:
+                    twin = dict(b)
+                    twin["conditions"] = cond(trait("corruption", "lt", 20))
+                    out_.append(twin)
+        return out_
+    for c in canvases:
+        if c.get("id", "").startswith("walkin_") and "mark" in c["id"]:
+            for n in c["nodes"]:
+                n["blocks"] = rec(n.get("blocks") or [])
+
+
+_cover_while_she_is_new(CANVASES)
+
 
 def attach(out):
     """Put each host's rules on its canvas in `out` (host ids not in `out` are skipped and returned)."""

@@ -76,35 +76,123 @@ POOLS = {
         "doze": ["The lamp is warm and the room is quiet except for charcoal on paper. You stop drawing and let your eyes close.",
                  "You sit back from the easel and let the room go soft. Your page stays half a shoulder."],
         # reader a3 #25-26 (DECISIONS 131): one watcher at Exhibitionism 20, not a room of easels (H1: a group is stage 4)
-        "eyes": "The guy at the next easel has stopped drawing the model. What you're wearing is doing its job.",
+        "eyes": "The guy at the next easel has stopped drawing the model. His stare crawls over you, and your nipples go tight.",
         "tired": "Too tired to hold the charcoal straight. Doze, or skip."},
+}
+
+# The meet_* canvases are each class's one-time first sitting, so their seat has its own words (gate one pool, one
+# place, writing pass 2026-11-04). "First class" only: the canvas waits for her first visit, whatever week that is.
+FIRST_POOLS = {
+    "business": {
+        "focus": ["The gray man opens with a definition of profit and doesn't stop. You copy the course outline, the grading scheme and every heading. By the end you know how this class works.",
+                  "The gray man hands out the reading list and tells you which three chapters the exam comes from. You underline all three, twice, and you feel ahead of the whole row."],
+        "chat": ["The guy with the highlighters whispers the whole course to you: which cases come back on the exam, which week is the killer, who got thrown out last year. You don't write down a word.",
+                 "You lean over and ask the girl beside you if he's always like this. She says yes without moving her lips, and she tells you who to sit away from until the gray man stops talking and waits."],
+        "doze": ["The first slide says Introduction. The second says Introduction, continued. You rest your head on your fist, and you're gone by the third.",
+                 "You meant to stay awake for your first class in here. The gray voice doesn't rise or fall once, and your eyes stay shut until chairs start scraping."],
+        "eyes": "The guy with the highlighters is leaning forward to look down your back. You didn't dress for a gray room like this, and it shows.",
+        "tired": "Your first Business class, and you're too tired to follow one slide of it. Doze, or skip."},
+    "bio": {
+        "focus": ["The TA starts at the very beginning, one cell on one slide. You draw it, label the parts and copy down what's on the midterm. It's easier than you expected, and you're pleased.",
+                  "The TA walks you all through the syllabus, apologizing for it. You read every line and write your name at the top before anyone else does."],
+        "chat": ["The girl beside you tells you which seats the TA can't see from and which ones she stares at. It's more useful than the syllabus, and you don't hear a word of the syllabus.",
+                 "Somebody passes up a drawing of a skeleton in a party hat, and you have to ask why. You spend the next twenty minutes hearing about the TA's office."],
+        "doze": ["The lights go down for the slides, and that's the end of you. You surface at the finish with a stripe of desk on your cheek.",
+                 "You put your bag under your head for one minute. The TA's soft voice goes on about membranes, and the minute lasts until the end of class."],
+        "eyes": "The TA hasn't learned one name yet, but her eyes keep coming back to you and jumping off again.",
+        "eyes_bold": "You dressed to be noticed, and she noticed.",
+        "eyes_plain": "You look down at the syllabus with your ears burning, and you wish you'd picked something else to wear.",
+        "tired": "Your first Biology class, and the diagrams swim the moment you look at them. Doze, or skip."},
+    "figure": {
+        "focus": ["Your first hour at an easel. Your first drawing looks like a potato with arms. The lecturer says nothing and moves your hand an inch, and by the last pose your drawing has a spine.",
+                  "The lecturer calls ten poses at two minutes each, so there's no time to be embarrassed. You stop seeing a naked woman and start seeing weight. Your last sketch stands up by itself."],
+        "chat": ["You ask the girl on your other side if this gets less weird. She says no, that's the point, and she spends the rest of the pose telling you who's asked the model out. You draw one knee.",
+                 "You whisper through the whole first pose about how long the model has to sit like that. The lecturer taps your worst sketch with one black finger, and you whisper quieter."],
+        "doze": ["You've got a stool, a warm lamp across the room and two bad sketches on your page. You rest your head against the easel, and the scratching of charcoal puts you out.",
+                 "You meant to rest your eyes through one pose. When you open them the model has moved twice, and your two sketches don't match anything on the stool."],
+        "eyes": "The guy in the team jacket hasn't touched his paper since you sat down.",
+        "eyes_bold": "You're not sorry about what you wore.",
+        "eyes_plain": "You pull your arms in and keep your eyes on your page. You should have worn something else.",
+        "eyes_when": [flag("cocky_guy_met", False)],   # met, his pad line on this screen already has him drawing you
+        "tired": "You can barely lift your arm to the paper, and the charcoal slides around in your fingers. Doze, or skip."},
 }
 
 # pass 3 A57 (the-heat-ladder.md H4, "her line changes with her level"): her own thought on the risky screen reads her
 # Exhibitionism stage. The button opens at 20, so the bands are Daring 20-39, Showing 40-59, Bold 60+, mutually
 # exclusive (adjacent groups merge into one chain). Every risky_text ends on a plain block, so this chain stands alone.
-RISKY_HER_LINE = [
-    G(cond(trait("exhibitionism", "lt", 40)), T("Your face burns. Anyone watching could tell you did that on purpose, and your nipples are hard anyway.")),
-    G(cond(trait("exhibitionism", "gte", 40), trait("exhibitionism", "lt", 60)), T("You liked that. You'll do it again next class, and give them a little more.")),
-    G(cond(trait("exhibitionism", "gte", 60)), T("That was nothing. You want to be looked at properly, tits and all, and soon.")),
-]
+def her_bands(daring, showing, bold):
+    return [
+        G(cond(trait("exhibitionism", "lt", 40)), T(daring)),
+        G(cond(trait("exhibitionism", "gte", 40), trait("exhibitionism", "lt", 60)), T(showing)),
+        G(cond(trait("exhibitionism", "gte", 60)), T(bold)),
+    ]
+
+
+# Each class, and each first class, its own thought (gate one pool, one place).
+RISKY_HER_LINE = {
+    "psych": her_bands("Your face burns. Anyone watching could tell you did that on purpose, and your nipples are hard anyway.",
+                       "You liked that. You'll do it again next class, and give them a little more.",
+                       "That was nothing. You want to be looked at properly, tits and all, and soon."),
+    "business": her_bands("In a room this dull, you just did that on purpose. You wonder if he can see how hard your nipples are.",
+                          "Better than any case study. Next lecture you'll stretch longer, and make him drop the highlighter.",
+                          "One row of highlighters isn't enough. You want the whole front half of this room staring at your tits."),
+    "bio": her_bands("Your neck is as pink as hers now. You wonder if she can tell your nipples are hard from up there.",
+                     "You like making her drop that pen. Next class you'll see if you can make her lose her slide.",
+                     "Forget the pen. You want her to stop the class and look at your tits with the whole hall watching."),
+    "figure": her_bands("The model gets paid to sit there. You're doing it free, and you wonder what he's drawn. Your nipples are tight.",
+                        "You liked being the one on his page. Next class, give him something harder to draw.",
+                        "A sketch isn't enough. You want to be up on that platform with your tits out, and every easel on you."),
+    "first_business": her_bands("First class in this room, and you already did that on purpose. You wonder what he makes of you. Your nipples don't mind.",
+                                "Not bad for a first lecture. This row knows your face now, and you'll make sure they remember the rest.",
+                                "One row is a start. You want every guy in this gray room to know your tits by the end of term."),
+    "first_bio": her_bands("One class, and you've already made the TA lose her slide. You wonder why that makes your nipples go hard.",
+                           "She blushes at the word reproductive. You liked that, and next class you'll make her say it to your face.",
+                           "She told the room her door's open. You want her to shut it and look at your tits properly."),
+    "first_figure": her_bands("First class, and he's looking at you, not the naked woman on the stool. You wonder why your nipples like that.",
+                              "Your first class, and he's already given up on her for you. Sit closer next class and see how far that goes.",
+                              "She gets the lamp and the whole horseshoe. You want that. You want your tits up there under that lamp."),
+}
 
 # pass 3 B3/B4: on the risky screen somebody in the room says it out loud, beside her thought (strangers: WHO)
 RISKY_SAID = {
     "Psychology": [WHO("Jesus. Are you doing that on purpose?"), ME("Doing what?"), WHO("That. You know what. Do it again.")],
     "Business": [WHO("Do that one more time and I'm failing this class."), ME("So fail it."), WHO("Fuck. Okay. Worth it.")],
     # reader batch 5 (pass 3): no lab coat of hers exists, so the line names what the room can see
-    "Biology": [WHO("Hey. You know the whole row can see, right? All of it."), ME("I know."), WHO("Right. Cool. I'll just. Keep looking, then.")],
+    # writing pass 2026-11-04, reader test 12 (H4.3): the price said out loud, by the one person who could report it
+    "Biology": [WHO("Hey. You know the whole row can see, right? All of it."), ME("I know."), WHO("Right. Cool. I'll just. Keep looking, then."),
+                P("When the room packs up she comes down to the second row hugging her clipboard. She looks at your mouth so she won't look anywhere else."),
+                D(TA, "Not in my class, @player. Please. If someone reports it, I have to put my name on it.")],
     "Figure drawing": [WHO("I'm supposed to be drawing her. I've drawn you three times."), ME("Then draw me properly."), WHO("Hold still, then. Don't move. God, don't move."),
                        ME("Like this?"), WHO("Exactly like that. Keep your legs exactly like that.")],
 }
+# The first sitting of each class says it differently (the first class has its own room to read).
+FIRST_SAID = {
+    "business": [WHO("You're new in here, right? Do you always sit like that?"), ME("Only when it's boring."), WHO("It's always boring. Please keep sitting like that."),
+                 P("When the room packs up, the guy with the highlighters catches you at the end of the row. He goes red, and he can't get his eyes any higher than your chest."),
+                 D(STUDY, "You're going to get me thrown out of his class. Not in here, okay? Not where he can see. Are you sitting there next time?")],
+    "bio": [WHO("New? Just so you know, the whole row can see. Everything."), ME("Good."), WHO("Okay. Welcome to Biology, I guess."),
+            P("She waits until you're packing up, then comes down to the second row and talks to your collarbone."),
+            D(TA, "It's only your first class. Not in here. Please. If anyone complains, I'm the one who has to write it up.")],
+    "figure": [D(COCKY, "First class, and I've wrecked my drawing of her. That's you on the page now."), ME("Is it any good?"),
+               D(COCKY, "It will be. Keep leaning like that. Don't you dare move.")],
+}
+
+def eyes_blocks(pools):
+    """The room's look on the Daring-clothes line. A first class splits her own sentence by Exhibitionism 20
+    (scene reader 2026-11-04): under Daring she didn't dress for this on purpose."""
+    if "eyes_bold" not in pools:
+        return [P(pools["eyes"])]
+    look = G(cond(*pools["eyes_when"]), P(pools["eyes"])) if "eyes_when" in pools else P(pools["eyes"])
+    return [look,
+            GC(cond(trait("exhibitionism", "gte", 20)), P(pools["eyes_bold"])),
+            GC(cond(trait("exhibitionism", "lt", 20)), P(pools["eyes_plain"]))]
+
 
 def class_row(cid, name, subj, grade, schedules, lecturer, meet_flags, opening, beside, risky_label, risky_text, extra_blocks=(),
-              pools=None, chat_beside=None):
+              pools=None, chat_beside=None, her_line=(), said=None):
     """One class visit (the college sheet's rows): Focus · Chat · Doze · Skip · the risky slot.
     No button for a stage this release does not write (LO 2026-11-03: "dont even show the option").
     Once per class window."""
-    eyes_line = pools["eyes"]
     return {
         "id": cid, "name": name,
         "description": f"{subj} class: Focus (energy 10, {grade} +2, intelligence +1) · Chat · Doze (energy +5) · Skip ({grade} -2) · the risky slot (Daring).",
@@ -113,7 +201,7 @@ def class_row(cid, name, subj, grade, schedules, lecturer, meet_flags, opening, 
         "nodes": [
             node("class", subj, [*opening, *extra_blocks,
                 G(cond(trait("energy", "lt", 20)), T(pools["tired"])),
-                G(DARING_STATE, P(eyes_line)),
+                G(DARING_STATE, *eyes_blocks(pools)),
             ], [
                 # Shut under 20 energy, as the thought says (college.md "The lock", sweep A5-08)
                 go("Focus. (90 minutes, 10 energy)", node="focus", mins=0, costs=[{"trait": "energy", "value": 10}], flags=meet_flags,
@@ -132,14 +220,14 @@ def class_row(cid, name, subj, grade, schedules, lecturer, meet_flags, opening, 
             node("focus", "Focus", [POOL(*[P(t) for t in pools["focus"]]), *beside], [go("Pack up.", loc="lecture_hall", mins=90)]),
             node("chat", "Chat", [*(beside if chat_beside is None else chat_beside), POOL(*[P(t) for t in pools["chat"]])], [go("Pack up.", loc="lecture_hall", mins=90)]),
             node("doze", "Doze", [POOL(*[P(t) for t in pools["doze"]])], [go("Wake up.", loc="lecture_hall", mins=90)]),
-            node("risky", "Let them look", [*([P(risky_text)] if isinstance(risky_text, str) else list(risky_text)), *RISKY_SAID.get(subj, []), *RISKY_HER_LINE],
+            node("risky", "Let them look", [*([P(risky_text)] if isinstance(risky_text, str) else list(risky_text)), *(RISKY_SAID.get(subj, []) if said is None else said), *her_line],
                  [go("Pack up, slowly.", loc="lecture_hall", mins=90)]),
         ]}
 
 # ── Psychology (Hale; Nadia beside her; the guy beside her, the rival) ──
 out.append(class_row(
     "college_class_psych", "Attend the Psychology lecture", "Psychology", "grade_psych", PSYCH, H,
-    [fset("hale_met"), fset("nadia_met"), fset("desk_guy_met")],
+    [fset("hale_met"), fset("nadia_met")],
     [G(cond(flag("hale_met"), flag("nadia_met")), P("Psychology. Dr. Hale at the lectern in his tweed, the slides already up. Nadia has saved you the seat beside her in the front row, like always.")),
      G(cond(flag("hale_met", False)), P("Psychology. A man in tweed at the lectern, slides already up: Dr. Hale, the timetable says. A girl in big glasses in the front row moves her bag off the seat beside her and pats it."),
        WHO("Sit here. I'm Nadia. Nobody sits at the front for him. You'll see why.")),
@@ -155,13 +243,14 @@ out.append(class_row(
         [P("You sit in the front row and don't fold your arms over your chest, and don't cross your legs. Dr. Hale lectures to the back wall for ninety minutes, and every time he forgets and looks down at your thighs, his voice goes. Nadia kicks your foot under the desk, grinning.")],
         P("As the room packs up, he says it without looking at you."),
         D(H, "Sit like that again, @player, and we'll talk about your grade.")),
-    pools=POOLS["psych"]))
+    pools=POOLS["psych"], her_line=RISKY_HER_LINE["psych"]))
 
 # ── Business (strict; the rival; the study guy) ──
 out.append(class_row(
     "college_class_business", "Attend the Business lecture", "Business", "grade_business", BUSI, BUS,
     [fset("desk_guy_met")],
     [P("Business. The lecturer is a gray man in a gray suit who calls the register and means it."),
+     G(cond(flag("desk_guy_met", False)), P("The guy in the next seat leans over and copies the date off your page without asking."), D(DESK, "You're in my Psych class too. Looks like I sit by you.")),   # pass 5 C36: the row that sets the flag names him
      G(cond(flag("study_guy_met")), P("The study guy is already in the row behind you with three highlighters out.")),
      G(cond(flag("rival_met")), P("The rival girl sits where she can watch you.")),
      D(BUS, "Phones away. Eyes up. This is on the exam."),
@@ -178,7 +267,7 @@ out.append(class_row(
         # pass 3 A56 (the-heat-ladder.md H4): the not-yet said out loud, and the hook, the next lecture
         P("When the room packs up, the guy from the row behind leans over your shoulder, red to the ears."),
         D(STUDY, "Not in here, or he'd write us both up. But same seats next lecture?")),
-    pools=POOLS["business"]))
+    pools=POOLS["business"], her_line=RISKY_HER_LINE["business"]))
 
 # ── Biology (the shy TA; Zoe; the cocky guy) ──
 out.append(class_row(
@@ -186,7 +275,8 @@ out.append(class_row(
     [],
     [P("Biology. The TA runs it, a shy woman in a lab coat who blushes when she has to say reproductive system out loud. The girl beside you whispers through the slides."),
      G(cond(flag("zoe_met", False)), WHO("Find me on the quad. I'm always there. Tuesdays, Thursdays, Fridays.")),
-     G(cond(flag("zoe_met")), D(Z, "Babe. Look at the TA. She's staring at your legs again.")),
+     G(cond(flag("zoe_met")), D(Z, "Babe. Look at the TA. She's staring at your legs again."),
+       P("The TA catches you catching her. Her neck goes pink, but she only turns to her slide. She won't look at your legs again, not with the whole hall here.")),
      G(cond(trait("grade_bio", "lt", 40)), D(TA, "If anyone's struggling, my door's open Tuesday to Friday afternoons. Really.")),
      ],
     [G(cond(flag("zoe_met")), D(Z, "Party Friday. I'm not asking."))],
@@ -195,7 +285,7 @@ out.append(class_row(
         [P("You sit up straight in the second row with your shoulders back, and don't fold your arms. Your tits show through what you're wearing. The TA sees. She drops her pen, picks it up, drops it again.")],
         [P("You sit with your knees apart in the second row and don't fix your skirt. The TA can see right up it. She drops her pen, picks it up, drops it again.")],
         P("She spends the rest of the class looking very hard at her slides, her neck pink all the way down to her collar. Twice she opens her mouth to say something about it, and doesn't.")),
-    pools=POOLS["bio"]))
+    pools=POOLS["bio"], her_line=RISKY_HER_LINE["bio"]))
 
 # ── Figure drawing (the model, nude; the art lecturer; Zoe; the cocky guy) — the pose beat every class ──
 POSE = ("The model drops her robe on the platform and steps up naked under the lamp. She sits on the stool and turns her shoulder to the room. Her tits are heavy. They sway when she settles. Her nipples are dark and tight in the cold air. Your charcoal follows the curve of her ass where it spreads on the stool. You draw her thighs, pressed together, and the soft crease between them. You can't stop looking. Your face burns. Your own nipples go hard. The lecturer walks the rows behind you. \"Look at the weight of her,\" she says. \"Draw that.\"")
@@ -217,7 +307,7 @@ fig = class_row(
         [P("You lean into your easel, slow, and your skirt rides up the backs of your thighs. The guy behind you gives up on the model completely.")],
         P("The lecturer stops behind you, looks at your drawing, looks at you."),
         D(ART, "Clothes stay on in my class, @player. Unless you're on the platform.")),
-    pools=POOLS["figure"], chat_beside=[])
+    pools=POOLS["figure"], chat_beside=[], her_line=RISKY_HER_LINE["figure"])
 # reader a3 #25-26 (DECISIONS 131): the risky screen's title names one watcher here too
 next(n for n in fig["nodes"] if n["id"] == "risky")["name"] = "Let him look"
 out.append(fig)
@@ -232,8 +322,9 @@ def first_class(cid, name, sch, met, people_flags, blocks):
 out.append(first_class("meet_business", "Your first Business class", BUSI, "business_lecturer_met", ["study_guy_met", "rival_met"], [
     P("Business is a gray room with a gray man at the front of it: the Business lecturer, fifty, a suit with no creases, a register in his hand he actually calls."),
     D(BUS, "I don't do extensions. I don't do excuses. I do honest work, and I grade it honestly. Sit down."),
-    P("The guy in the row behind you, the one with three highlighters, leans forward."),
+    P("The guy in the row behind you, the one with three highlighters, leans forward. His eyes go to your chest, and he goes red and looks down at his notes."),
     D(STUDY, "You can borrow my notes. Any time. If you, um. If you want."),
+    P("There's something else he wants to ask you, but he doesn't ask it, not with the gray man looking."),
     P("A sharp girl in the front row watches you sit and doesn't smile."), WHO("New? Don't take my seat."),
 ]))
 out.append(first_class("meet_bio", "Your first Biology class", BIO, "bio_ta_met", [], [
@@ -241,6 +332,7 @@ out.append(first_class("meet_bio", "Your first Biology class", BIO, "bio_ta_met"
     D(TA, "Hi. I'm— I'll be taking you this term. Please don't eat the specimens. That was a joke. Sort of."),
     P("Her eyes go round the room and land on you and skip off you, fast, like she touched something hot."),
     D(TA, "My door's open in the afternoons. If anyone. You know. Needs anything."),
+    P("She says it to the whole room, but she's looking at your chest when she runs out of words. She turns to the slides before anyone can ask what she meant."),
 ]))
 out.append(first_class("meet_figure", "Your first Figure drawing class", FIG, "art_lecturer_met", ["cocky_guy_met", "figure_model_met"], [
     P("Easels in a horseshoe round a platform with a stool on it, and a woman in a dressing gown sitting on the edge of the platform drinking from a flask: the model."),
@@ -262,23 +354,59 @@ _mf["nodes"].append(node("easel", "The next easel", [
 # opens the class's own seat (Focus, Chat, Doze, Skip, the risky slot), copied from the class canvas. The opening
 # lines are left out because the meeting has just said them (Figure drawing keeps its pose, which is the class);
 # the tired and eyes lines stay.
+# Writing pass 2026-11-04 (gate one pool, one place): the seat is built by class_row with its own first-class words,
+# not copied from the class canvas, because a player who sits both must read two different things.
 import copy
-CLASS_OF = {c["id"]: c for c in out if c["id"].startswith("college_class_")}
-def into_class(meet, class_id, exit_text, keep_opening=False):
-    cls = CLASS_OF[class_id]
-    seat = copy.deepcopy(cls["nodes"])
+def into_class(meet, seat_canvas, exit_text, keep_opening=False):
+    seat = copy.deepcopy(seat_canvas["nodes"])
     own_media(seat, "first")   # pass 3 B37: the copied seat's clips are their own assets (sex/figure_class_pose_first_t4)
     if not keep_opening:
         seat[0]["blocks"] = seat[0]["blocks"][-2:]      # the tired line and the eyes line (class_row's last two)
-    seat[0]["name"] = cls["nodes"][0]["name"]
     last = [n for n in meet["nodes"] if any(c.get("locationId") == "lecture_hall" for c in n["choices"])][-1]
     flags = [f for c in last["choices"] for f in c.get("flagEffects", [])]
     last["choices"] = [go(exit_text, node="class", mins=2, flags=flags)]
     meet["nodes"] += seat
 MEETS = {c["id"]: c for c in out if c["id"] in ("meet_business", "meet_bio", "meet_figure")}
-into_class(MEETS["meet_business"], "college_class_business", "Find a seat.")
-into_class(MEETS["meet_bio"], "college_class_bio", "Find a seat.")
-into_class(MEETS["meet_figure"], "college_class_figure", "Find your charcoal.", keep_opening=True)   # the pose is the class
+_seat_business = class_row(
+    "meet_business", "", "Business", "grade_business", BUSI, BUS, [], [],
+    [D(STUDY, "I copied out the reading list for you. In case you missed it. Here.")],   # scene reader 2026-11-04: the rival's dress crack is cut, she has only just met her
+    "Lean back so the row behind can see.",
+    by_clothes(
+        [P("You've been in this room ten minutes when you push your chair back and lift your arms, like you're only stretching. Your tits press up against what you're wearing, with nothing under it to hold them. In the row behind, the guy with the highlighters looks straight down your front. His pen runs off the page.")],
+        [P("You turn sideways in your new seat and cross one leg slowly over the other, and your skirt climbs your thigh. The guy with the highlighters leans out into the aisle to follow it. His pen runs off the page.")],
+        P("You're facing front by the time the gray man turns around, but he reads out the next heading like he's reading out charges. In the front row the sharp girl has twisted in her seat to watch you, and she isn't smiling.")),
+    pools=FIRST_POOLS["business"], her_line=RISKY_HER_LINE["first_business"], said=FIRST_SAID["business"])
+_seat_bio = class_row(
+    "meet_bio", "", "Biology", "grade_bio", BIO, TA, [], [],
+    [G(cond(flag("zoe_met")), D(Z, "Babe. She looked at you and forgot how to talk. This class is going to be my favorite."))],
+    "Let the TA see.",
+    by_clothes(
+        [P("You take the second row for your first class and you don't slouch. Shoulders back, arms down at your sides. Your tits show through what you're wearing, nipples and all. The TA's eyes land there in the middle of a word. The word never comes out, and her clicker jumps two slides.")],
+        [P("You take the second row for your first class, let your knees fall open and leave your skirt where it lands. The TA can see right up it from where she's standing. She says nothing, but her clicker jumps two slides, and she has to go back.")],
+        P("She gets through the rest of it with her eyes on the back wall and her neck pink to the collar of her lab coat, but she looks at your row once more, and looks away so fast she knocks her water over.")),
+    pools=FIRST_POOLS["bio"], her_line=RISKY_HER_LINE["first_bio"], said=FIRST_SAID["bio"])
+FIRST_POSE = ("The model caps her flask, shrugs the dressing gown off her shoulders and climbs onto the stool with nothing on. Her tits are full and hang low, and the left one rolls against her arm when she turns. Her nipples are wide and brown, and they pull tight in the draft. Her ass flattens on the stool. You draw her thighs and the dark hair where they meet. Your hand isn't steady. Your cheeks are hot, and your own nipples have gone hard. The lecturer comes along the horseshoe behind you. \"First thing you learn,\" she says. \"She's not a shape. Get that weight down, the tits, the thighs, all of it.\"")
+_seat_figure = class_row(
+    "meet_figure", "", "Figure drawing", "grade_art", FIG, ART, [],
+    [P(FIRST_POSE),
+     G(cond(flag("zoe_met")), P("Zoe leans around her easel, sees your face and laughs without making a sound.")),
+     G(cond(flag("zoe_met", False)), P("The girl on your other side catches you staring and raises her eyebrows.")),
+     P("Your page has her tits on it now, badly, twice, but your own nipples won't stop aching."),
+     VID("a nude female life model posing on a stool under a lamp in an art class, students drawing at easels", "nude model posing art class students drawing", "life drawing class naked model on stool", pool_dir="sex/figure_class_pose_t4"),
+     G(cond(flag("cocky_guy_met")), P("The guy in the team jacket has turned his pad so you can see it. There's no model on it. It's your neck, and he's started on your chest.")),
+     ],
+    [D(ART, "That's a start. Now forget everything you think you know about a hip.")],
+    "Lean into your easel and let him look.",
+    by_clothes(
+        [P("You've barely finished that second bad sketch when you stretch up to the top of the paper and stay there. Your tits swing forward against what you're wearing, loose, and your nipples push through it. The guy in the team jacket stops pretending to look at the model.")],
+        [P("You've barely finished that second bad sketch when you bend to the ledge of your easel and take your time. Your skirt climbs the backs of your thighs. The guy in the team jacket stops pretending to look at the model.")],
+        P("The lecturer comes back along the horseshoe and stops behind you. She looks at your page, then at you."),
+        D(ART, "First lesson. Down here, the clothes stay on. If you want them off, the platform's right there.")),
+    pools=FIRST_POOLS["figure"], chat_beside=[], her_line=RISKY_HER_LINE["first_figure"], said=FIRST_SAID["figure"])
+next(n for n in _seat_figure["nodes"] if n["id"] == "risky")["name"] = "Let him look"
+into_class(MEETS["meet_business"], _seat_business, "Find a seat.")
+into_class(MEETS["meet_bio"], _seat_bio, "Find a seat.")
+into_class(MEETS["meet_figure"], _seat_figure, "Find your charcoal.", keep_opening=True)   # the pose is the class
 # ── the guy beside her (college_event_desk_guy; Psychology and Business; once a day) ──
 DESK_HAND = ("You check the room first. The lecturer faces the board. The row in front has its heads down. The desk hides everything below your elbows, so you slide your hand under it and open his jeans. His cock springs into your fingers, hot and thick, slick at the tip. You stroke his cock slow, root to head. He grips the desk edge and breathes through his nose so he won't make a sound. Your face burns, but you go faster. His cock throbs in your fist and his balls pull tight. He comes over your knuckles, under the desk where nobody sees. You wipe your palm on his thigh while his cock twitches against his open jeans.")
 out.append({
@@ -352,6 +480,38 @@ out.append({
 from people_data import PEOPLE as _PEOPLE
 COCKY_NO_PAY = []   # C1 (LO 2026-11-03, reverses DECISIONS 131 call A): her no never raises his Want
 FLASH = ("The proctor sits at the front, reading. Every head in the row is bent over a page. You check the room once. Then you pull everything up under the desk line, where only he can see. Your tits are bare in the cold hall air. Your nipples go hard at once, tight and aching. His pen stops mid-word. His eyes drop to your tits and stay there. One second. Two. Three. You yank everything down and cover your breasts. He slides his paper to the edge of his desk. Your nipples are still hard, and his stare is still on your chest.")
+# Each midterm its own thoughts (gate one pool, one place). Psychology keeps the first words; it has the most classes.
+EXAM_TEXT = {
+    "psych": {"low": "You know some of this, but not enough of it.", "high": "You studied. You actually know this.",
+              "down": "Pens down. The proctor collects the papers row by row. The results go up on the portal next week, and on the office door.",
+              "bad": "It went badly. Laura is going to see this on the portal.",
+              "bad_high": "You knew that paper. It can't make up for the weeks before it, and Laura is going to see the number on the portal.",
+              "mid": "It went fine. A pass, probably. Nobody will say anything.",
+              "good": "It went well. For once the portal is going to make Laura smile."},
+    "business": {"low": "Margins, break-even, the shoe company. You remember the shoe company and not much else.",
+                 "high": "Break-even, fixed costs, the shoe company. You can do every one of these.",
+                 "down": "Time. The proctor takes your paper before you've capped your pen and squares the stack like it's money. Grades go up on the portal next week, and on the office door.",
+                 "bad": "You failed that by the numbers. Laura will open the portal and ask what she's paying for.",
+                 "bad_high": "Every sum on that paper is right. One paper doesn't fix your whole grade, and Laura will open the portal and ask what she's paying for.",
+                 "mid_high": "Those sums are right. Your grade's still only a pass, and nobody at home will ask.",
+                 "mid": "A pass, if the gray man's feeling generous. Nobody at home will ask.",
+                 "good": "You'd bet money on that paper. Laura will see it on the portal, and she'll have nothing to say."},
+    "bio": {"low": "You recognize the heart on page one. You can't label half of it.",
+            "high": "The heart is on page one, valve by valve. You could label it with your eyes shut.",
+            "down": "The clock runs out with half the row still labeling. The proctor carries the papers up the aisle in a stack. You'll see your grade on the portal next week, and on the office door.",
+            "bad": "Half those labels were guesses. Laura will read that grade on the portal, and she'll want to talk.",
+            "bad_high": "You labeled every valve. It's too late to save your grade, and Laura will read it on the portal, and she'll want to talk.",
+            "mid_high": "The heart was right, valve by valve. Your grade stays a pass, and nobody's going to call you about it.",
+            "mid": "Enough labels right for a pass, probably. Nobody's going to call you about it.",
+            "good": "You labeled the whole heart. Laura gets a good number on the portal for once."},
+    "art": {"low": "Anatomy and proportion. You know what a back looks like, but you can't name one muscle in it.",
+            "high": "Proportion, foreshortening, the muscles of the back. You've got all of it in your head and your hand.",
+            "down": "The proctor calls time and the hall breathes out. Somebody has sketched him on the back of their paper, and it goes in the stack with the rest. Grades go on the portal next week, and on the office door.",
+            "bad": "You can draw a back, but you can't name it. Laura will see that grade on the portal, and she won't care about your drawings.",
+            "bad_high": "Every muscle in that back is named on your paper. It came too late for your grade, and Laura won't care about your drawings when she sees it on the portal.",
+            "mid": "It'll pass. Nobody at home checks the art grade twice.",
+            "good": "Top of the horseshoe, maybe. Laura will see this on the portal and say something nice about art class."},
+}
 WEEKS_7_8 = [{"type": "days_since_flag", "subject": "player", "flag_key": "opening_done", "operator": "gte", "value": 42},
              {"type": "days_since_flag", "subject": "player", "flag_key": "opening_done", "operator": "lt", "value": 56}]
 for subj, grade, sch, code in [("Psychology", "grade_psych", PSYCH, "psych"), ("Business", "grade_business", BUSI, "business"),
@@ -367,8 +527,8 @@ for subj, grade, sch, code in [("Psychology", "grade_psych", PSYCH, "psych"), ("
                 P(f"The {subj} midterm. Desks pulled apart, bags at the front, a proctor reading a paperback by the door. The paper lands face-down in front of you, and the clock on the wall starts."),
                 WHO("Phones in your bags. Ninety minutes. Turn your papers over."),   # LO 2026-11-03: the proctor
                 WHO("And no talking. Anyone I catch looking at another paper gets a zero."),   # pass 3 B3: the proctor again
-                G(cond(trait("intelligence", "lt", 10)), T("You know some of this, but not enough of it.")),
-                G(cond(trait("intelligence", "gte", 10)), T("You studied. You actually know this.")),
+                G(cond(trait("intelligence", "lt", 10)), T(EXAM_TEXT[code]["low"])),
+                G(cond(trait("intelligence", "gte", 10)), T(EXAM_TEXT[code]["high"])),
             ], [
                 go("Focus. Do it yourself.", node="result", mins=90, cond_=cond(trait("intelligence", "gte", 10)), eff=[add(grade, 6)]),
                 go("Focus. Do it yourself.", node="result", mins=90, cond_=cond(trait("intelligence", "lt", 10)), eff=[add(grade, 1)]),
@@ -383,7 +543,7 @@ for subj, grade, sch, code in [("Psychology", "grade_psych", PSYCH, "psych"), ("
             node("price", "His price", [
                 G(cond(flag("jake_met")), P("Jake's teammate is at the next desk with his paper finished and his pen behind his ear. He sees you looking at it and leans back in his chair.")),
                 G(cond(flag("jake_met", False)), P("The cocky guy from Figure drawing is at the next desk with his paper finished and his pen behind his ear. He sees you looking at it and leans back in his chair.")),
-            ], [go("\"What?\"", node="flash_ask", mins=1), go("Look away.", node="result", mins=89, eff=[add(grade, 1)])]),
+            ], [go("\"What?\"", node="flash_ask", mins=1), go("Look away.", node="result", mins=85, eff=[add(grade, 1)])]),
             node("flash_ask", "Show me", [
                 D(COCKY, "Show me and I'll tilt my paper."),
             ], [go("Show him.", node="flash", mins=2, cond_=cond(trait("exhibitionism", "gte", 40))), go("\"No.\"", node="no", mins=1)]),   # a flash with the hall behind it: Showing (DECISIONS 124)
@@ -391,20 +551,24 @@ for subj, grade, sch, code in [("Psychology", "grade_psych", PSYCH, "psych"), ("
             node("no", "Your loss", [
                 P("He shrugs and turns his paper face-down, slow, so you watch it go."),
                 D(COCKY, "Your loss."),
-            ], [go("Back to your own paper.", node="result", mins=87, eff=[add(grade, 1)] + COCKY_NO_PAY)]),
+            ], [go("Back to your own paper.", node="result", mins=83, eff=[add(grade, 1)] + COCKY_NO_PAY)]),
             node("flash", "Three seconds", [
                 P(FLASH),
                 VID("under a desk in an exam hall a girl lifts her top for the guy at the next desk, rows of students writing", "girl flashes tits during exam under desk", "exam hall flash for answers", file=f"sex/exam_{code}_flash_t4.webm"),
-            ], [go("Copy.", node="result", mins=85, eff=[add(grade, 5), {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": CAP_BOLD}],
+            ], [go("Copy.", node="result", mins=82, eff=[add(grade, 5), {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": CAP_BOLD}],
                    flags=[fset("cocky_exam_deal")])])
             ] if code == "art" else []),
             node("result", "Pens down", [
-                P("Pens down. The proctor collects the papers row by row. The results go up on the portal next week, and on the office door."),
+                P(EXAM_TEXT[code]["down"]),
                 WHO("Stay in your seats till I have every paper."),
                 WHO("How'd you do? I left question four blank. The whole thing, blank."), ME("Don't ask me. I just want a drink."),   # pass 3 B3: the girl at the next desk
-                G(cond(trait(grade, "lt", 40)), T("It went badly. Laura is going to see this on the portal.")),
-                G(cond(trait(grade, "gte", 40), trait(grade, "lt", 70)), T("It went fine. A pass, probably. Nobody will say anything.")),
-                G(cond(trait(grade, "gte", 70)), T("It went well. For once the portal is going to make Laura smile.")),
+                # scene reader 2026-11-04: the grade is the whole course, so she can know the paper and still sit under 40;
+                # the verdict agrees with the Intelligence line on the paper screen
+                G(cond(trait(grade, "lt", 40), trait("intelligence", "lt", 10)), T(EXAM_TEXT[code]["bad"])),
+                G(cond(trait(grade, "lt", 40), trait("intelligence", "gte", 10)), T(EXAM_TEXT[code]["bad_high"])),
+                G(cond(trait(grade, "gte", 40), trait(grade, "lt", 70), trait("intelligence", "lt", 10)), T(EXAM_TEXT[code]["mid"])),
+                G(cond(trait(grade, "gte", 40), trait(grade, "lt", 70), trait("intelligence", "gte", 10)), T(EXAM_TEXT[code].get("mid_high", EXAM_TEXT[code]["mid"]))),
+                G(cond(trait(grade, "gte", 70)), T(EXAM_TEXT[code]["good"])),
             ], [go("Leave the hall.", loc="campus", mins=5, flags=[fset(done_f), fset("midterm_done")])]),
         ]})
 
@@ -471,6 +635,12 @@ out.append(hub("hub_ta_class", "lecture_hall", TA, "bio_ta_met", "The Biology TA
     P("She gathers them up and hands them out, too busy to stop. She only gets a word in as she puts one on your desk."),   # reader pass 3 b01: she talks below, so "too busy to talk" was false
     # reader a3 #19 (DECISIONS 131): the 40+ bands point at her office too (her rows: ta_office Tue-Fri 14:30-18:00)
     *grade_lines(TA, "grade_bio", "You're, um. You're struggling. My door's open. If you want.", "You're doing fine! Really fine. My door's open afternoons.", "Top marks. Wow. Sorry. Top marks. My door's open afternoons."),
+    # writing pass 2026-11-04, reader test 2: how far she looks moves with Exhibitionism, her reaction to being seen
+    G(cond(trait("exhibitionism", "lt", 20), {"type": "clothing_slot", "slot": "bra", "operator": "equipped"}, {"type": "worn_type", "operator": "neq", "value": "short_skirt"}), P("She puts your handout down and doesn't look at you at all, but her neck is already pink.")),
+    G(cond(trait("exhibitionism", "gte", 20), trait("exhibitionism", "lt", 40)), P("She puts your handout down, and her eyes slip to your mouth before she catches them.")),
+    G(cond(trait("exhibitionism", "gte", 40), trait("exhibitionism", "lt", 60)), P("She gets to your desk last, on purpose. Her eyes go down your throat to your chest, and they stay a second longer than she means them to.")),
+    G(cond(trait("exhibitionism", "gte", 60)), P("She stops at your desk and doesn't move on. She looks at your chest in front of the whole row, and the handout shakes in her hand."),
+      D(TA, "Not in class. Please. Not in class.")),
     # reader a3 #35 (DECISIONS 131): the act she holds back, not only a compliment
     G(cond(BRALESS), P("Her eyes go to your chest, to the shape of you under the fabric, and jump back up to your face. Her neck goes pink."),
       D(TA, "You look— sorry. Nothing. You look nice."),
@@ -689,7 +859,12 @@ out.append({
         node("stacks", "The back stacks", [P(STACKS_SEEN),
             WHO("Shh. Quiet. Take my cock and keep quiet."),   # LO 2026-11-03: the senior, in her ear (the park's ceiling: no fuck)
             WHO("I can't. You're too deep. Oh God, I can't be quiet."),   # pass 3 B4: the girl, into his palm
-            VID("a couple having sex against a bookshelf at the end of a library aisle, his hand over her mouth", "couple fucking in library stacks", "quiet library sex against bookshelf", pool_dir="sex/library_stacks_seen_t5")],
+            VID("a couple having sex against a bookshelf at the end of a library aisle, his hand over her mouth", "couple fucking in library stacks", "quiet library sex against bookshelf", pool_dir="sex/library_stacks_seen_t5"),
+            # writing pass 2026-11-04, reader test 4: her thought by Corruption (the scene opens at any level)
+            G(cond(trait("corruption", "lt", 20)), T("Walk away. Why aren't you walking away? They could turn around and see you.")),
+            G(cond(trait("corruption", "gte", 20), trait("corruption", "lt", 40)), T("You wonder what that feels like, with his hand on your mouth and the whole library out there.")),
+            G(cond(trait("corruption", "gte", 40), trait("corruption", "lt", 60)), T("You're not leaving. You want to see her come, and you want to see his face when he does.")),
+            G(cond(trait("corruption", "gte", 60)), T("That should be you on that shelf. You want his cock, and you want that hand on your mouth."))],
             [go("Stay behind the shelf.", node="stay", mins=5, flags=[fset("saw_the_library_couple")]),
              go("Take the book and go.", loc="library", mins=5, flags=[fset("saw_the_library_couple")])]),
         node("stay", "Behind the shelf", [WHO("You're so wet. Not a sound, or they'll hear."), P(STACKS_STAY),

@@ -1,4 +1,5 @@
 # [REVIEW] Scenes — the walk-ins on the refill places (B21-B24), and Laura's lace set (Q12)
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. A next-step row on each of the four, from the build; Mark's "Give me a minute."
 
@@ -38,7 +39,7 @@ The same machine as the walk-ins at home and outside (`walkins_home.md`, `walkin
 | his leak (H7) | under his Want 40 he goes red, turns to the wall and holds the charger in front of his shorts; from 40 he leans on her desk and keeps looking |
 | screen 1 | she lies down; "Sleep (2h)." spends the nap it replaces (120 minutes, energy +30, cap 100) · his Lust +2. The one walk-in that pays the refill: it is her nap, slept through before the door clicks (reader pass 4, 2026-11-04) |
 | her answers | "Pull the blanket over you." 0 · "Don't move." +1, cap 19 · "Stretch." (Daring) +1, cap 39 · "Roll onto your back." (Showing) +1, cap 59 |
-| not yet | "Not now. Not with the house this full." (on her Showing answer) |
+| not yet | "Not now. Not with Mark down the hall." (on her Showing answer) |
 | next step | her bolder answer at the next band; nothing after "Roll onto your back." this release |
 | hook | `ryan_saw_nap` is set; nothing reads it this release · "Lock your door next time. Or don't." |
 | every way out | "Get up." back to her room |

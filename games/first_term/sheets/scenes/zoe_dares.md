@@ -1,4 +1,5 @@
 # [REVIEW] Scene — zoe_dares
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. The doing yeses cost Energy 10.
 
@@ -29,14 +30,14 @@
 | counts | each first yes: Zoe's dares +1 · Campus talk +1 |
 | the crude-word ceiling | Zoe's early and middle columns (tits, ass, nipples, wet), with thighs; his cock only through his jeans on the two lap dares (plain anatomy beside her column, as Ryan's and Hale's signed sheets) · no pussy, clit, fuck, cunt, cum. confirmed by LO 2026-11-01 ("Continue") the cock |
 | truth | repeats: no "first time", no "again", no history |
-| her_line_low · her_line_high | low: "It's a dare. It doesn't count." · high: "You want her to dare you something worse." | Both lines sit inside the beats. |
+| her_line_low · her_line_high | low: "It's a dare. It doesn't count." · high: "You want her to dare you something worse." | The low line is its own thought after `low_do`, by Corruption band; the high line sits inside the beats. |
 
 ## The dares by tier
 
 | tier | Zoe's line | showing yes | doing yes | the no |
 |---|---|---|---|---|
 | Curious · Daring | "Flash the guy at the keg. Or kiss the cocky guy. Properly. Pick." | "Watch me." (Exhibitionism 20) → `low_show` · exhibitionism add +1 | "Watch this." (Corruption 20) → `low_do` · corruption add +1 · exhibitionism add +1 (seen) | "Not tonight." |
-| Bold · Showing | "Topless in the kitchen till the song ends. Or his lap, till he's hard. Make him beg." | "Start the song." (Exhibitionism 40) → `high_show` (a two-entry pool with the built circle flash) · exhibitionism add +1 · corruption add +1 | "Easy." (Corruption 40 and Exhibitionism 20, mixed) → `high_do` · corruption add +1 · exhibitionism add +1 | "Not tonight." |
+| Bold · Showing | "Topless in the kitchen till the song ends. Or the cocky guy's lap, till he's hard. Make him beg." | "Start the song." (Exhibitionism 40) → `high_show` (a two-entry pool with the built circle flash) · exhibitionism add +1 · corruption add +1 | "Easy." (Corruption 40 and Exhibitionism 20, mixed) → `high_do` · corruption add +1 · exhibitionism add +1 | "Not tonight." |
 | Zoe joins (after step 5) | "Kiss me where they can see. Or let me watch you with him." | "Here?" → `z_show` · both add +1 | "Watch, then." → `z_do` · both add +1 | "Not tonight." |
 
 Every pay is under her stage cap (19 / 39 / 59, DECISIONS 78). **The no:** Zoe pouts, "Boo. Next Friday, then." No cost
@@ -59,9 +60,9 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Where the t
 
 > You walk straight to the keg with Zoe laughing behind you. The guy in the backwards cap is pumping it. You stand right in front of him and wait. He looks up. You grab your top and everything under it and yank it all up to your chin. Your tits are bare to him in the middle of the party. He freezes with the pump in his fist. Beer foams over his cup. Someone by the keg cheers. *Let the whole room look.* Your heart is slamming, and you hold it there one long second. The air is cold on your bare tits. Your nipples go tight and hard while he stares at them. Your face burns. You're wet, and your thighs press together. You pull your top down over your hard nipples, and your tits still tingle under it.
 
-**`low_do`** · 128 words · explicit words 6 · median sentence 11 · act rungs: touch · also played by Zoe's step 2, "Dare me something else."
+**`low_do`** · 122 words · explicit words 6 · median sentence 11 · act rungs: touch
 
-> You take the beer out of his hand and set it on the counter. He opens his mouth to say something, and you kiss it shut. Properly. Your tongue slides over his, slow, and his pushes back. Someone whoops, then the whole corner does. His hands drop to your ass and squeeze hard, one cheek filling each palm. He pulls you in until your tits press flat against his chest. Your nipples go hard under your top, and he feels them. It's a dare. It doesn't count. Over his shoulder Zoe is biting her lip, eyes on your mouth. You kiss him deeper anyway, wet and open. Then you pull back first, breathing hard, lips wet. He grins down at you, both hands still full of your ass.
+> You take the beer out of his hand and set it on the counter. He opens his mouth to say something, and you kiss it shut. Properly. Your tongue slides over his, slow, and his pushes back. Someone whoops, then the whole corner does. His hands drop to your ass and squeeze hard, one cheek filling each palm. He pulls you in until your tits press flat against his chest. Your nipples go hard under your top, and he feels them. Over his shoulder Zoe is biting her lip, eyes on your mouth. You kiss him deeper anyway, wet and open. Then you pull back first, breathing hard, lips wet. He grins down at you, both hands still full of your ass.
 
 ### Bold · Showing
 
@@ -125,7 +126,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > Kiss the cocky guy. Properly. Tongue, hands, the lot.
 >
-> Flash the guy at the keg. Or topless in the kitchen till the song ends. Or his lap, till he's hard. Make him beg.
+> Flash the guy at the keg. Or topless in the kitchen till the song ends. Or the cocky guy's lap, till he's hard. Make him beg.
 >
 > Kiss me where they can see. Or let me watch you with him.
 >
@@ -183,7 +184,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > Half this party knows Jake.
 
-**`zoe_dares` · `low_do`** — 230 words · 14 counted: kiss, ass, tits, nipple, nipple, nipple, nipple, nipple, nipple, nipple, nipple, kiss, ass, fuck · ceiling: Zoe's early and middle columns: tits, ass, nipples, wet; his cock only through his jeans · **past the ceiling: fuck**
+**`zoe_dares` · `low_do`** — 224 words · 14 counted: kiss, ass, tits, nipple, nipple, nipple, nipple, nipple, nipple, nipple, nipple, kiss, ass, fuck · ceiling: Zoe's early and middle columns: tits, ass, nipples, wet; his cock only through his jeans · **past the ceiling: fuck**
 
 > You take the beer out of his hand and set it on the counter. He opens his mouth to say something, and you kiss it shut. Properly. Your tongue slides over his, slow, and his pushes back. Someone whoops, then the whole corner does. His hands drop to your ass and squeeze hard, one cheek filling each palm. He pulls you in until your tits press flat against his chest.
 >
@@ -203,11 +204,17 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > Your nipples go hard under your clothes, and he feels them.
 >
-> It's a dare. It doesn't count. Over his shoulder Zoe is biting her lip, eyes on your mouth. You kiss him deeper anyway, wet and open. Then you pull back first, breathing hard, lips wet. He grins down at you, both hands still full of your ass.
+> Over his shoulder Zoe is biting her lip, eyes on your mouth. You kiss him deeper anyway, wet and open. Then you pull back first, breathing hard, lips wet. He grins down at you, both hands still full of your ass.
 >
 > Fuck. Zoe should dare you more often.
 >
 > Okay, okay, break it up before he proposes.
+>
+> It's a dare. It doesn't count. (under Corruption 40)
+>
+> It's a dare. So why do you want to go back for more? (Corruption 40-59)
+>
+> Dare, my ass. You wanted his tongue in your mouth before she said a word. (Corruption 60+)
 >
 > He's Jake's teammate. He'll tell Jake, or he won't.
 

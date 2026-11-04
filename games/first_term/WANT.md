@@ -71,7 +71,7 @@ Everyone is 18 or older, and the game says so.
 |---|---|---|---|---|
 | `npc_ryan` — step-brother | 22 | the one person at home on her side | her, and he stops hiding it | want + warmth |
 | `npc_mark` — step-father | 46 | his approval, and to be off the hook | control, and her | want + power |
-| `npc_laura` — mom | 41 | to stay her good girl, and to be close to her | a happy house; she watches everything, and she wants Ella nearer than she says | want + warmth |
+| `npc_laura` — mom | 41 | to stay her good girl, and to be close to her | a happy house; she watches everything, and she wants Ella nearer than she says | warmth |
 | `npc_zoe` — college friend | 19 | someone to follow into fun | a partner in trouble | step counter + memory flags |
 | `npc_tom` — café manager | 31 | shifts and good tips | her behind the counter, closing late | want + power |
 | `npc_hale` — professor | 39 | a passing grade | to see how far she will go | step counter + memory flags |

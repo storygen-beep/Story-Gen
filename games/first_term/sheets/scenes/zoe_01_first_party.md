@@ -1,4 +1,5 @@
 # [REVIEW] Scene — zoe_01_first_party
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 
@@ -40,7 +41,10 @@ One row per exit. Read from the build; it replaces the drafted map.
 
 | node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
 |---|---|---|---|---|
-| `dress` | Zoe drags you straight past the music into her bedroom and shuts the door. | no | "Zoe! Eyes up here." → `party` | add zoe party dress · equip zoe party dress |
+| `dress` | Zoe drags you straight past the music into her bedroom and shuts the door. | no | "Change in front of her." → `change` | — |
+| | | | "Turn around, Zo." → `change_no` | — |
+| `change` | You change in front of her. | no | "Zoe! Eyes up here." → `party` | add zoe party dress · equip zoe party dress |
+| `change_no` | "Turn around, Zo. I mean it." Zoe: "Boo. Fine. My eyes are shut." You change facing the wall. | no | "You looked." → `party` | add zoe party dress · equip zoe party dress |
 | `party` | The flat is packed: half of campus, the bass coming up through the floor, red cups … | no | "Not tonight, Zo." → `no_dare` | Times you told Zoe no +1 · `party_went` set · `zoe_kiss_refused` set |
 | | | | "Kiss Zoe." (Corruption 20+) → `kiss_zoe` | Corruption +3 (cap 39) · Exhibitionism +3 (cap 79) · `party_went` set |
 | | | | "Kiss the guy who's staring." (Corruption 20+) → `jake` | Corruption +3 (cap 39) · Exhibitionism +3 (cap 79) · `party_went` set · `jake_kissed` set |

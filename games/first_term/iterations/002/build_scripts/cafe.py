@@ -40,7 +40,7 @@ L1_LINES = ["You bend to wipe a table and the conversation at the next one stops
             "Two men at the counter watch your ass all the way to the kitchen and back. One of them says something. The other one laughs.",
             "A man in a suit doesn't look at his menu once. He looks at your tits the whole time you take his order, and over-tips."]
 # pass 3 B4: what the room says beside each look (a stranger, speaker "unknown")
-L1_SAID = ["Don't mind us, honey. Carry on.", "Nice legs on the new girl. Turn around, baby, let's see the rest.",
+L1_SAID = ["Don't mind us, honey. Carry on.", "Nice legs on you. Turn around, baby, let's see the rest.",
            "Whatever you're having. Surprise me. I'll be back, same table."]
 # One setup for both yeses, so the line before each beat is true whichever she picks (a build note to LO:
 # the sheet's pool of three setups would let a setup and the other yes's beat disagree).
@@ -146,10 +146,17 @@ out.append({
     "nodes": [
         node("counter", "The counter", [
             D(TM, "Uniform's in the back, @player. Three hours. Smile."),
-            G(cond(flag("tom_shift_booked")), D(TM, "You came. Good. Four extra for showing up.")),
+            # scene reader 2026-11-04: as BOOKED_PAY, the day's first shift only, and only where its button is open: 20 energy, not the curfew evening
+            G(cond(flag("tom_shift_booked"), flag("cafe_shift_1_today", False), trait("energy", "gte", 20), DAY), D(TM, "Said you'd be here, and you are. Good. Four extra for showing up.")),
+            G(cond(flag("tom_shift_booked"), flag("cafe_shift_1_today", False), trait("energy", "gte", 20), EVE, NO_CURFEW_ITEM), D(TM, "Said you'd be here, and you are. Good. Four extra for showing up.")),
             G(cond(trait("energy", "lt", 20)), T("You'd drop a tray. Not today.")),
             G(CURFEW_ON, G(cond(EVE), P("Mom's curfew. No evening shifts this week. Tom shrugs like it's your problem, because it is."))),
-        ], choices + [go("Not today.", loc="cafe", mins=1)]),
+        ], choices + [go("Not today.", node="not_today")]),
+        # the written no: his "Three hours. Smile." gets an answer; it costs nothing and moves nothing
+        node("not_today", "Not today", [
+            D(TM, "Your call. Sit where I can see you or clear the floor. I've got tables."),
+            P("He flicks the cloth over his shoulder and goes back to the till. His eyes go to your ass as you walk away from the counter, but he doesn't call you back."),
+        ], [go("Leave him to the till.", loc="cafe", mins=1)]),
         node("shift", "Three hours", [
             G(cond(tod("11:00", "14:00")), P("The lunch rush hits all at once: twelve coffees, a birthday, a baby that screams through all of it. You carry plates until your arms burn. A man at table two watches you bend over to set his plate down, and stops, eyes on your ass."),
               WHO("You've got a pretty smile, honey. That's my number on the napkin, under the tip. Use it.")),   # reader a3 #57 (DECISIONS 131)
@@ -189,10 +196,10 @@ out.append({
            + go_level("L3", "Slap it away.", "l3_slap")),
         node("l2_play", "Play along", [P(L2_PLAY),
             VID("a waitress leaning low over a booth table, men looking down her uniform", "waitress leaning over table men staring cleavage", "waitress bends over booth customers look", pool_dir="sex/cafe_l2_play_t3")],
-             outcome_exits("l2_play", 6, 10, eff=[capped_e("exhibitionism", 1, 79), add("cafe_footfall", 1), add("cafe_l2_shifts", 1)])),
+             outcome_exits("l2_play", 6, 10, eff=[capped_e("exhibitionism", 1, 79), add("cafe_footfall", 1, clamp=False), add("cafe_l2_shifts", 1, clamp=False)])),
         node("l2_flirt", "Flirt back", [P(L2_FLIRT),
             VID("a waitress flirting across a cafe counter with a customer, licking cream off her thumb", "waitress flirting counter customer", "flirty waitress licks cream finger customer stares", pool_dir="sex/cafe_l2_flirt_t3")],
-             outcome_exits("l2_flirt", 6, 10, eff=[capped_e("corruption", 1, 39), add("cafe_footfall", 1), add("cafe_l2_shifts", 1)])),
+             outcome_exits("l2_flirt", 6, 10, eff=[capped_e("corruption", 1, 39), add("cafe_footfall", 1, clamp=False), add("cafe_l2_shifts", 1, clamp=False)])),
         node("l2_no", "Not today", [P(L2_NO), WHO("Worth a try. Bring us the check, then, killjoy.")], outcome_exits("l2_no", 2, 4)),   # her no never opens "Let it." (H5, DECISIONS 124)
         node("l3_let", "Let it", [
             G(cond(GARY_IN), P(L3_B)),   # false lines a3 #10 (DECISIONS 129): gary_let_it is set on his clock-out, so his shift shows his touch
@@ -202,7 +209,7 @@ out.append({
             VID("a waitress letting a customer's hand stay on her as she serves, the manager watching from the counter", "customer grabs waitress ass she lets him", "waitress groped at table lets it happen", pool_dir="sex/cafe_l3_let_t4")],
              # L3 needs Corruption 40 but only Exhibitionism 20, so each meter stops at its own stage's top (pass 3 G8)
              outcome_exits("l3_let", 10, 16, eff=[capped_e("corruption", 1, 59), capped_e("exhibitionism", 1, 39),
-                                                  add("cafe_footfall", 1), add("cafe_name", -1, clamp=False)],   # Tom 3 reads cafe_name lte -5: a clamp would floor it at 0 (pass 4 E96)
+                                                  add("cafe_footfall", 1, clamp=False), add("cafe_name", -1, clamp=False)],   # Tom 3 reads cafe_name lte -5: a clamp would floor it at 0 (pass 4 E96)
                            flags=[fset("cafe_let_it")], gary_flag=True)),
         node("l3_pull", "Your food's here", [P(L3_PULL), WHO("Feisty. I like feisty. Same table next week, love.")], outcome_exits("l3_pull", 4, 8)),
         node("l3_slap", "Slap it away", [P(L3_SLAP), ME("Hands to yourself. Next time I'll call the police."), D(TM, "Back to work, @player. Table six is waiting.")], outcome_exits("l3_slap", 0, 0)),
@@ -219,7 +226,8 @@ out.append({
                               {"weekdays": [4], "start_time": "20:00", "end_time": "22:00"}],   # his rows (npc_gary.md)
                 "conditions": cond(flag("cafe_job"), flag("gary_met", False))},
     "nodes": [node("booth", "Booth four", [
-        P(GARY_L1),
+        # his meeting has its own words; GARY_L1 stays on the repeat shift (one pool, one place)
+        P("An older man in booth four has a folded newspaper and a pot of tea, but he brings the paper down an inch when you go by, and his eyes drop to your ass and follow it to the end of the aisle. The paper's back up before you can catch him. Tom calls him Gary. He's the regular."),
         D(GY, "Top me up when you've got a minute, doll."),
     ], [go("\"Coming.\"", loc="cafe", mins=5, flags=[fset("gary_met")])])]})
 

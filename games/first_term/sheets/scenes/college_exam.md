@@ -1,4 +1,5 @@
 # [REVIEW] Scene — college_exam
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 
@@ -58,10 +59,10 @@ One row per exit. Read from the build; it replaces the drafted map.
 | `paper` | The Figure drawing midterm. | no | "Focus. Do it yourself (1h 30m)." — 2 versions, by meters → `result` | — · varies: Figure drawing grade |
 | | | | "Look at the cocky guy." (Exhibitionism 20+ · `cocky_guy_met`) → `price` | — |
 | `price` | Jake's teammate is at the next desk with his paper finished and his pen behind his … | no | "What?" → `flash_ask` | — |
-| | | | "Look away (1h 29m)." → `result` | Figure drawing grade +1 |
+| | | | "Look away." → `result` | Figure drawing grade +1 |
 | `flash_ask` | Show me and I'll tilt my paper. | no | "Show him." (Exhibitionism 40+) → `flash` | — |
 | | | | "No." → `no` | — |
-| `no` | He shrugs and turns his paper face-down, slow, so you watch it go. | no | "Back to your own paper (1h 27m)." → `result` | Figure drawing grade +1 |
+| `no` | He shrugs and turns his paper face-down, slow, so you watch it go. | no | "Back to your own paper." → `result` | Figure drawing grade +1 |
 | `flash` | The proctor sits at the front, reading. | yes | "Copy (1h 25m)." → `result` | Figure drawing grade +5 · Exhibitionism +1 (cap 59) · `cocky_exam_deal` set |
 | `result` | Pens down. | no | "Leave the hall." → Campus | `exam_art_done` set · `midterm_done` set |
 

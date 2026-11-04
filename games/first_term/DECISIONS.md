@@ -12,6 +12,10 @@
 > This sheet and the ledger say the same thing. Where they differ, it is listed below, and nothing
 > was changed in the ledger.
 
+## Open questions (LO's, 2026-11-04)
+
+Stage rows (buttons below their level), rent_short_1's key against the Want, and the skill rows: the list in `iterations/002/OPEN_QUESTIONS_20261104.md`.
+
 ## This release (0.1)
 
 Per person: in, later or cut, and what the player loses by it. From the build (HEAD d779867e), the ledger's
@@ -170,6 +174,13 @@ is a talk or a locked door, the men's meters lock nothing, 17 of Laura's tease s
 | 176 | Acts that opened at 0 and paid past Good Girl stop at 19: street_seen on both meters, the park run on Exhibitionism. The Jake car stops Exhibitionism at 39; its Corruption stays at 79. | "fix the real ones, starting with the 8 acts that pay past their stage" (2026-11-04) |
 | 177 | Recorded as decided for this release: open choices at 52.1%, and three-screen walk-ins (30 of 42 walk-ins run three screens). In the ledger's `decided` as D20 and D9. | "record both as decided for this release" (2026-11-04) |
 | 178 | The scene reader re-read 126 scenes: 134 distinct fails. 93 fixed, 40 left because they need new lines, 1 false. The fixed ones are not re-read. | Reader pass, 2026-11-04. |
+| 179 | LO played the build 2026-11-04 and says it looks good for now. This is not his release play, which comes after this round. | "Don't record that as my release play." |
+| 180 | The 40 reader fails written, none waived. Her voice: 22 ladder steps and the repeat scenes of Zoe, Jake, the team and Mark's laundry change by her level. | LO's list, items 1-2, 2026-11-04. |
+| 181 | Repeated text: 181 pools and paragraphs in more than one canvas (98 pools, 83 paragraphs; 169 different pieces, 321 extra copies) rewritten per room; the check now passes. | LO's list, item 3. |
+| 182 | Youth lines cut: Laura's "My good girl", "so grown up" and "like you're ten" beside her body, her "Don't grow up any faster", and Vance's "Mark's girl is growing up" were reworded. | Writing pass; for LO to read. |
+| 183 | Weekly pay: the build's top week is $620-848. `week_income` 504 and SP4's $520-750 were both wrong; both now say the build's figure. | LO's list, item 6. |
+| 184 | Six false-alarm checks fixed (day word, ladders, café name, named before met, ignoring a thread, week income); two more found on the way (her voice lines counted as climb, and as thought over speech). | LO's list, item 5. |
+| 185 | Reader, sixth round: 138 scenes re-read, 83 fails; last look at the 63 the fixes touched, 34 fails, 27 of them fixed after that read and not re-read. Stage rows wait for LO. | Reader pass, 2026-11-04. |
 
 Engine only (`setup.castScheduleHtml` in `v2.py`). The full Schedules page keeps its weekly table; first_term has no
 button to it since DECISIONS 95.
@@ -460,7 +471,7 @@ accident, allowed at Good Girl. Curious adds "Stay and watch". Day one reaches i
 | `board.map.homes` | Ryan, his room · Laura and Mark, theirs · Zoe, hers · Vance, `vance_house` |
 | `board.who_climbs` | `both` |
 | `board.ascent_tiers` | `corruption`, `exhibitionism` · ceilings 100 each · start 0 |
-| `board.economy` | `$` · a top week pays $504 at most · rent $75, then $90 and $100, Sunday, to Mark |
+| `board.economy` | `$` · a top week pays $620-848 · rent $75, then $90 and $100, Sunday, to Mark |
 | obligation moves | $90 after $300 paid · $100 after $900 · then flat |
 | `board.economy.sinks` | rent · canteen food · the clothes shop |
 | `board.needs` | `energy`: spent, a real lock · `hygiene`: colour, and he refuses in the scene; an off switch |
@@ -489,13 +500,13 @@ accident, allowed at Good Girl. Curious adds "Stay and watch". Day one reaches i
 | 11 | Tom's last step | fixed: 3 (`release_page.steps`) | SP5 fixed to 3 steps; it waits for your re-sign |
 | 12 | Kayla's Friday row (2026-11-04) | fixed: `npc_kayla.schedule_in_build` says 18:00 (Q9) | — |
 | 13 | the opening (2026-11-04) | fixed: `release_page.her_moment` lists no final no, and Laura calls down the hall | — |
-| 14 | a week's top pay (2026-11-04) | `week_income` 504: 18 shifts at $28 | $28 is the bottom of the top shift; 18 top shifts make about $520-750 (SP4) |
+| 14 | a week's top pay (fixed 2026-11-04) | both were wrong: `week_income` 504, SP4 $520-750 | the build's top week is $620-848; ledger 848, SP4 $620-848 |
 | 15 | the rent and goal 1 (2026-11-04) | fixed in the ledger 2026-11-04: `want.obligation`, goal 1 and `want.last_read_note` now match the build | the ledger and the pages agree |
 | 16 | waivers (2026-11-04) | fixed in the ledger 2026-11-04: `release_page.block` now match the build | the ledger and the pages agree |
 | 17 | Mark's her_line (2026-11-04) | fixed in the ledger 2026-11-04: Mark's `her_line_low` now match the build | the ledger and the pages agree |
 | 18 | the Sunday table (2026-11-04) | fixed in the ledger 2026-11-04: `release_page.promise_alive` now match the build | the ledger and the pages agree |
 
-Rows 15-18 wait for the lead: nothing was changed in the ledger.
+Rows 15-18 are fixed in the ledger.
 
 ## Ledger changes
 
@@ -719,3 +730,4 @@ One line per built piece, in LO's words, written by `pieces.py played`.
 - 2026-11-03 · group2_logic_fixes · played by Claude in Chrome: "Dev build after group 2 (2026-11-03). Lecture room shut at Tue 15:00: only the four lectures show, each with its hours; 'The guy beside you' and 'A word about what you're wearing' are hidden, and show as links on Mon 08:35. home_event_ryan_towel: Ryan's Want 20 to 22 on the way in, stays 22 after 'Step round him.', ryan_saw_her_towel set. Jake A1 'Get on your knees.': energy 50 to 40, hygiene 80 to 70, corruption 45 to 46 on the button in; the free exit pays nothing more; hygiene 5 clamps to 0; at energy 5 the button is locked 'Requires 10 Energy'. Zoe's flat at Fri 23:00 with corruption 10: the keg guy row does not show."
 - 2026-11-04 · q1_q17_line_fixes · played by Claude in Chrome: "New game in Chrome after Q10: wake, problem, shower, hall, run, breakfast, rule, card. Breakfast reads 'Mark, your step-father, has already gone to work.'; the rule screen has Ryan in the shower down the hall, then his door shuts. Ryan's hall offers 'Run to your room.', 'Knock next time.', 'Stop and talk.' with no '(ends his path)'."
 - 2026-11-04 · q4_q12_refills_lace · played by Claude in Chrome: "Full Chrome play of the dev build at 636d8ef4: every Canvas_/StartingCanvas_/Location_ passage (869) rendered with no SugarCube error, no 'Error:', no NaN or [object Object]. Then a new game: the opening, the dean's office, and 1,268 random clicks over 7 game days (week 1 Monday to week 2 Monday, the clock jumped to Friday 18:30 once): no error, no dead end, no screen stuck; Sunday rent ran short ( of ) and rent_short_1 took her key."
+- 2026-11-04 · writing_pass_20261104 · played by Claude in Chrome: "Played in Chrome on the dev build: garage_laundry shows a different thought at Corruption 5 and 25, its buttons work, no error views. Headless: 1,147 passages render, 1,250 random clicks with 0 dead ends."

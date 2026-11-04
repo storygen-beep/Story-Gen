@@ -24,7 +24,7 @@ window.GAMES = [
     title: "First Term",
     badge: "v2",
     dev: true,
-    summary: `You're eighteen and starting college, living at home with your mom Laura, your stepdad Mark and your stepbrother Ryan. The bathroom is shared and Ryan doesn't knock. Mark is behind on the rent to the man next door, and every Sunday at the kitchen table he wants your share. There's a café job with a manager who likes the tight uniform, a friend who throws the parties and dares you at all of them, a psychology lecturer who keeps you after class on Thursdays, and a guy on the team who wants to take you out on Saturday. Everyone wants something, and the first term is when you find out what you'll give.`,
+    summary: `You're eighteen and starting college, living at home with your mom Laura, your step-dad Mark and your step-brother Ryan. The bathroom is shared and Ryan doesn't knock. Mark is behind on the rent to the man next door, and every Sunday at the kitchen table he wants your share. There's a café job with a manager who likes the tight uniform, a friend who throws the parties and dares you at all of them, a psychology lecturer who keeps you after class on Thursdays, and a guy on the team who wants to take you out on Saturday. Everyone wants something, and the first term is when you find out what you'll give.`,
   },
   {
     // Listed 2026-10-01. Authored with author-game-v2 as the first game on the fixed skill

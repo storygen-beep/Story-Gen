@@ -1,4 +1,5 @@
 # [REVIEW] Scene — ryan_hot_repeatables
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. Row 6: Sunday only; Mark's TV is his radio in 6a-6c (no screen has a TV in the kitchen). "Go and shower." lands at the shower; row 7's "Back to your room." lands in her room.
 
@@ -93,15 +94,15 @@ entry is true in whatever she wears. A tease screen, not explicit, by design.
 
 **1a**
 
-> You lean in Ryan's doorway and stretch, arms over your head, slow. Your tits lift. He's on the bed with his phone, and he puts it face down. "Texting Kayla?" "Was." His eyes drop to your chest and stay there. He pulls a pillow into his lap. "What's the pillow for, Ryan?" "Nothing. Go away." "Liar." You turn to go and take your time about it, so he gets your ass all the way to the door. "Not tonight. Ask me nicely tomorrow."
+> You lean in Ryan's doorway and stretch, arms over your head, slow. Your tits lift. He forgets the phone in his hand. "Texting Kayla?" "Was." His eyes drop to your chest and stay there. He grabs a pillow off the bed and holds it in front of his shorts. "What's the pillow for, Ryan?" "Nothing. Go away." "Liar." You turn to go and take your time about it, so he gets your ass all the way to the door. "Not tonight. Ask me nicely tomorrow."
 
 **1b**
 
-> Ryan's at his desk, headphones round his neck. You knock on the frame and lean there, one hip out. "So what's Kayla worth? Dinner? Or does she just get your bed?" "Get out, @player.nickname." "You don't want me out." You run one finger down the front of your thigh, slow. His eyes follow it all the way down. He shifts in the chair and turns it a little away from you. You see the bulge in his shorts anyway. "Is that for Kayla too?" He goes red to the ears. "Night, Ryan. Maybe tomorrow."
+> You knock on Ryan's door frame and lean there, one hip out. "So what's Kayla worth? Dinner? Or does she just get your bed?" "Get out, @player.nickname." "You don't want me out." You run one finger down the front of your thigh, slow. His eyes follow it all the way down. He shifts and turns a little away from you. You see the bulge in his shorts anyway. "Is that for Kayla too?" He goes red to the ears. "Night, Ryan. Maybe tomorrow."
 
 **1c**
 
-> You hang in Ryan's door with one hand on the frame. He's on the floor with a controller. "Hey. What's Kayla worth to you? Out of ten." "Ten. Obviously." "Liar. You paused the game when I walked in." He did. He's turned right round, looking at your ass in the doorway. You bend, slowly, for a sock on his floor, and toss it at him. He catches it in his lap and leaves it there, over the front of his shorts. *He's hard. For you.* "Not tonight, Ryan. Keep the sock."
+> You hang in Ryan's door with one hand on the frame. "Hey. What's Kayla worth to you? Out of ten." "Ten. Obviously." "Liar. You put your phone down when I walked in." He did. He's looking at your ass in the doorway. You bend, slowly, for a sock on his floor, and toss it at him. He catches it against the front of his shorts and leaves it there. *He's hard. For you.* "Not tonight, Ryan. Keep the sock."
 
 ### 2 · feet in his lap · middle column
 

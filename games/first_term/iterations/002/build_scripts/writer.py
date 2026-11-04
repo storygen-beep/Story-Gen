@@ -94,11 +94,20 @@ EDITS = [
     # truth pass (2026-11-03): his row at that hour is "up late with the TV on", and the event's own first screen has his
     # eyes half shut: he's dozing, not asleep for the night (the canvas's working name, "Mark dozing, TV on")
     (42, "Mark's asleep on the couch", "Mark's dozing on the couch"),
+    # scene reader 2026-11-04: nothing backs her bottoms on this screen, so the line names no waistband
+    (35, "Then his hands go down to the small of your back, down to your waistband, and stop at the top of your ass.",
+     "Then his hands go down to the small of your back, lower, and stop at the top of your ass."),
+    # reader 2026-11-04: his hours in that kitchen have no steak on them (Wednesday's dinner is chilli)
+    (27, "Mark stops cutting his meat.", "Mark's fork stops over his plate."),
+    (27, "He puts his knife down and doesn't pick it up again.", "He puts his fork down and doesn't pick it up again."),
+    # reader 2026-11-04: the event's first screen already has him out; he doesn't step out twice. She is passing him, not going in.
+    (38, "Ryan steps out of the bathroom in a towel, steam rolling out behind him. He stops dead.", "Ryan's still in the bathroom doorway in his towel, steam rolling out behind him. He hasn't moved."),
+    (38, "all the way to the bathroom door.", "all the way down the hall."),
 ]
 
 # 6 · a forward hook, appended to the screen's last beat: (file #, line).
 HOOKS = [
-    (1, "*After dinner he'll go up to his room. You wonder if he'll leave his door open tonight.*"),
+    (1, "*After dinner he'll go down the hall to his room. You wonder if he'll leave his door open tonight.*"),
     (23, "*Next time you bring your washing down, you'll leave something smaller on top.*"),
     (24, "*He'll be at that bench the next time you bring your basket down. You already know you'll let him fold them again.*"),
     (41, "*Next time he wants something off that shelf, you'll be standing right under it.*"),
@@ -138,7 +147,7 @@ CHOICES = {
     ("hub_mark_kitchen", "hl_breakfast_touch"): [([slot("top"), slot("dress", False)], None), ([wt("sleep_shirt")], None)],
     # "stay bent": something on her bottom half for the screen to name
     ("hub_mark_kitchen", "hl_dishes_touch"): [([slot("bottom")], None), ([slot("dress")], None)],
-    # the lotion goes on a bare back, down to a waistband: no top, no dress
+    # the lotion goes on a bare back: no top, no dress
     ("garden_sun", "sun_ryan_touch"): [([slot("top", False), slot("dress", False)], None)],
     # "strip to the waist" on the grass: the top and the bra come off; no dress
     ("garden_sun", "sun_mark_paid"): [([slot("dress", False)], TOPS_AND_BRAS)],

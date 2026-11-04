@@ -1,4 +1,5 @@
 # [REVIEW] Scene — hale_04_first_session
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. His card's end line as built (DECISIONS 132); "Wait." also takes Energy 10 and Hygiene 10.
 
@@ -56,7 +57,7 @@ One row per exit. Read from the build; it replaces the drafted map.
 | `knock` | The knock is two raps, light. | no | "Pick up your bag." → `corridor` | `claire_met` set |
 | `corridor` | You pull your clothes straight and pick up your bag. | no | "Go home." → Hall | Hale's step = 4 · `hale_04_done` set · `hale_touched` set |
 | `isnt` | You pull everything back down over your tits. | no | "Leave him with your grade." → Faculty Floor | back in 7 days |
-| `run` | You grab your bag and you're out of the door before he can stand up. | no | "Keep walking." → Campus | Psychology grade -2 · `claire_met` set · back in 7 days |
+| `run` | You pull everything back down over your tits, grab your bag and turn the lock yourself. | no | "Keep walking." → Campus | Psychology grade -2 · `claire_met` set · back in 7 days |
 
 ## The explicit screens, written
 
@@ -79,7 +80,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Shared brie
 **`knock`:** "The knock is two raps, light. A woman's voice through the door, bright." · Claire, outside: "You ready, love?" · "Dr. Hale takes his hand away, not fast. He doesn't look at the door. He looks at you." · Dr. Hale: "My wife. Same time next week, @player." · *(thought)* "You want to know what he'd do next."
 **`corridor`:** "You pull your clothes straight and pick up your bag. He unlocks the door for you." · "His wife is in the corridor in a neat coat, car keys in her hand. Her smile stops halfway when she sees you. Her eyes go to your face, and then past you, to the face-down photo on his desk." · Dr. Hale, behind you: "Claire. This is one of my students." · "You walk the whole corridor without looking back. Your legs are shaking."
 **`isnt`:** "You pull everything back down over your tits." · @player: "This isn't coaching." · "He sits back in his chair." · Dr. Hale: "Then you'll stay at a C." · "He doesn't unlock the door until you're at it."
-**`run`:** "You grab your bag and you're out of the door before he can stand up. In the corridor a woman with short dark hair is coming the other way with car keys in her hand. The woman in the photo." · "She smiles at you, polite, the way you smile at a student." · *(thought)* "His wife. She has no idea."
+**`run`:** "You pull everything back down over your tits, grab your bag and turn the lock yourself. You're out of the door before he can stand up. In the corridor a woman with short dark hair is coming the other way with car keys in her hand. The woman in the photo." · "She smiles at you, polite, the way you smile at a student." · *(thought)* "His wife. She has no idea."
 
 ## After it
 - **The weekly session** opens (`hale_thursday_session.md`).

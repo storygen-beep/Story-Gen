@@ -1,4 +1,5 @@
 # [REVIEW] Person — Mr. Vance
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: the Monday knock after a short Sunday. His porch no moves nothing. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took.
 
@@ -16,7 +17,7 @@
 | where he sleeps | `vance_house` |
 | what he calls her | "Miss" (guess) |
 | met | the first evening walk past his porch |
-| his line: short skirt | "Mark's girl is growing up." He doesn't pretend to read his paper. |
+| his line: short skirt | "Mark's girl has good legs." He doesn't pretend to read his paper. |
 | his line: covered | A nod from the porch. Nothing else. |
 
 ## Schedule grid

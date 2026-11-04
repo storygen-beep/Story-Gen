@@ -128,17 +128,17 @@ for trait_k, bands in [
                      "Reach Hungry (Corruption 60): get on Ryan's couch with him, pull Jake into the gym locker room"),   # pass 4: a watched dare now needs Corruption 60, so it pays nothing at Bold
                     (60, 80, "Hungry. Shameless is the next release: a crowd, free use.",
                      "Shameless (Corruption 80) opens in the next release")]),
-    ("exhibitionism", [(0, 20, "Covered. Daring opens at 20: no bra, a short skirt out of the house.",
+    ("exhibitionism", [(0, 20, "Covered. Daring opens at 20: no bra, a short skirt out of the house, and bigger tips at the café if you let them look.",
                         # pass 3 G15: only places that pay her Exhibitionism while she is Covered (park_run, the
                         # street's looks, the shower walk-ins); the lecture hall pays nothing below Daring
                         "Reach Daring (Exhibitionism 20): let someone walk in on your shower; once you're Curious, run in the park and walk the street"),   # pass 4 G15: the park and street dress codes need Curious while she is Covered   # round 2: "at home" named the whole house, which pays nothing at 0
                        (20, 40, "Daring. Showing opens at 40: no panties out, naked for someone you know.",
                         # pass 3 G15: the garden pays only from Showing (garden_sun), so it is not a way through Daring
-                        "Reach Showing (Exhibitionism 40): let them look at the campus gym and in the lecture hall, take your bra off in the women's toilet, let the towel slip in the hall or the living room"),
+                        "Reach Showing (Exhibitionism 40): let them look at the campus gym and in the lecture hall, take your bra off in the women's toilet, let the towel slip in the kitchen or the living room"),
                        (40, 60, "Showing. Watched opens at 60: a room watching, a stranger, your feed.",
                         # pass 3 G15: what pays while she is Showing (garden_sun, park_run, the wind and the street, the
                         # towel drops in the hall and living room); nothing repeatable pays it in the lecture hall or gym
-                        "Reach Watched (Exhibitionism 60): show off on the lounger in the garden, let the wind have your skirt on the street, drop the towel in the hall or the living room"),
+                        "Reach Watched (Exhibitionism 60): show off on the lounger in the garden, let the wind have your skirt on the street, drop the towel in the kitchen or the living room"),
                        (60, 80, "Watched. Posing for the class and a crowd come in the next release.",
                         "On Display (Exhibitionism 80) opens in the next release")])]:
     for lo, hi, text, label in bands:

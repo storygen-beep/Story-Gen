@@ -1,4 +1,5 @@
 # [REVIEW] SP4 · Loop and pressure — First Term
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. Padding cut.
 > Changed 2026-11-04: the ledger's week pay reads $504, and why it differs from this page's top week; the rent is counted once (Q6). Waits for LO's re-sign.
@@ -30,10 +31,9 @@ Friday's evening shift pays about 1.3× at level 1, up to 1.8× at level 3.
 **The week's sums**
 - **Week one** (DECISIONS 140–141): three shifts a day, plus Ryan's $25, is about **$205–245** against $75. One
   shift a day with Ryan is about **$85–97**.
-- **A top week** (level 3, tight uniform, "Let it.", 18 shifts): about **$520–750**, up to **$900** with Gary
-  in every shift, against $75–100.
+- **A top week** (level 3, tight uniform, "Let it.", 18 shifts, Gary in where he can be, Tom's text answered daily): **$620-848**, against $75-100.
 - No other income is built: Gary's ten minutes and Mark's prices are cut; Laura's $20 is shopping money.
-- The ledger's `week_income` reads **$504**: 18 shifts at the top shift's bottom pay, $28 (DECISIONS, where the sheets and the ledger differ, row 14).
+- The ledger's `week_income` is **$848**, the same top week.
 - 8 weeks: $660 owed at most.
 
 **Goal 1** — pay her own way

@@ -1,4 +1,5 @@
 # [REVIEW] Scene — rent_short_1, rent_short_2, rent_short_3
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. The key's first line as built, and the table in place of a count (Q6).
 
@@ -23,7 +24,7 @@
 |---|---|---|---|
 | `key` | Mark: "Then it's owed. Vance doesn't wait, so I don't." He holds his hand out for her bedroom key | "Here." → the kitchen | `her_door_unlocked` set · Mark's Power add +5 |
 
-Lines: "Mark doesn't open the envelope. He knows it's short, and he puts it down on the table between you." · Mark: "Then it's owed. Vance doesn't wait, so I don't." · "He holds out his hand, palm up." · Mark: "Your door key. You get it back when you're square." · *(thought)* "Anyone can open your door now. Anyone in this house."
+Lines: "Mark doesn't open the envelope. He knows it's short, and he puts it down on the table between you." · Mark: "Then it's owed. Vance doesn't wait, so I don't." · "He holds out his hand, palm up." · Mark: "That old key in your bedroom door. Hand it over. You get it back when you're square." · *(thought)* "It's the only key there is. Anyone can open your door now. Anyone in this house."
 
 ## `rent_short_2` · the late fee (`rent_short_weeks` eq 2 · `rent_short`) · once
 

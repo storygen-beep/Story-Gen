@@ -1,4 +1,5 @@
 # [REVIEW] Scene — laura_shower_gap
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the gate row reads `laura_step` 2 as built; want, next step and hook rows. the explicit beats as built, measured. file and line cites cut.
 
@@ -45,7 +46,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01.
 
 **`watch`** · 126 words · explicit words 7 · median sentence 8 · act rungs: strip, hands
 
-> You stay. Laura is naked behind the steamed glass, and you can't look away. She pushes two fingers inside herself. Her thumb works her clit, faster. Her forehead is pressed to the wet tiles. Her free hand squeezes her tit hard, so her nipple pokes out between her fingers. Her hips jerk against her own hand. She comes under the water with a moan the spray barely covers. Her knees nearly give. Then she stands still with her forehead on the tiles, breathing hard, her ass pink from the heat. You back away from the door before she turns round. You are shocked, but you are wet. You keep both hands flat at your sides. You press your thighs together tight, but your nipples still ache.
+> You stay. Laura is naked behind the steamed glass, and you can't look away. She pushes two fingers inside herself. Her thumb works her clit, faster. Her forehead is pressed to the wet tiles. Her free hand squeezes her tit hard, so her nipple pokes out between her fingers. Her hips jerk against her own hand. She comes under the water with a moan the spray barely covers. Her knees nearly give. Then she stands still with her forehead on the tiles, breathing hard, her ass pink from the heat. You back away from the door before she turns round. That's your mother, but you are wet. You keep both hands flat at your sides. You press your thighs together tight, but your nipples still ache.
 
 *The last sentence:* your thighs pressed tight, your nipples aching. On the body.
 

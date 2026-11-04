@@ -10,6 +10,16 @@ L = "npc_laura"
 J = "npc_jake"
 out = []
 
+def at_level(meter, lines, make=T):
+    """Her line by her band of `meter` (register.md, "One event, several levels"). lines: {band floor: text}, only the
+    bands the step can reach; the lowest listed band has no lower bound. Mutually exclusive, so one adjacent chain."""
+    floors = sorted(lines)
+    blocks = []
+    for i, lo in enumerate(floors):
+        items = ([trait(meter, "gte", lo)] if i else []) + ([trait(meter, "lt", floors[i + 1])] if i + 1 < len(floors) else [])
+        blocks.append(GC(cond(*items), make(lines[lo])))
+    return blocks
+
 def done(n):
     return fset(f"laura_0{n}_done")
 
@@ -42,7 +52,11 @@ out.append({
                 "mother behind daughter mirror blue dress", "woman fixing young woman's dress in bedroom mirror"),
             P("It's tight across your chest. It stops high on your thighs. In her long mirror you look like someone older, someone who goes out. Laura stands behind you and smooths the fabric down over your hips with both hands, slowly, and keeps her hands there a second longer than she needs to."),
             P("Her eyes in the mirror aren't on the dress. They're on you."),
-            T("She's looking at you like a stranger would, but you don't hate it."),
+            *at_level("exhibitionism", {
+                0: "It's too tight, it's too short, and your mom is staring at you in it. You want to take it off.",
+                20: "She's looking at you like a stranger would, but you don't hate it.",
+                40: "Let her look. You stand up straighter, and your tits fill the front of the dress.",
+                60: "You want somebody looking at you in this the way she is, and you want it tonight."}),
         ], [
             go("\"Is that bad?\"", node="no", mins=3),
             go("\"I can't take this.\"", node="give", mins=3),
@@ -116,7 +130,22 @@ out.append({
             ME("Yeah."),
             G(cond(DRESS_ON), D(L, "Did anyone look at you in it?")),
             G(cond({"type": "clothing_item", "item_id": "laura_blue_dress", "operator": "unequipped"}), D(L, "Did anyone look at you?")),
-        ], [go("\"Everyone.\"", loc="home_ella_room", mins=5, flags=[LATE_CLEAR, fset("laura_caught_today")])]),
+        ], [go("\"I don't know. Maybe.\"", node="after", mins=1, cond_=cond(trait("exhibitionism", "lt", 20))),
+            go("\"A couple of guys.\"", node="after", mins=1, cond_=cond(trait("exhibitionism", "gte", 20), trait("exhibitionism", "lt", 40))),
+            go("\"Everyone.\"", node="after", mins=1, cond_=cond(trait("exhibitionism", "gte", 40), trait("exhibitionism", "lt", 60))),
+            go("\"Everyone. I made sure of it.\"", node="after", mins=1, cond_=cond(trait("exhibitionism", "gte", 60)))]),
+        # reader 2026-11-04: her answer by Exhibitionism (being looked at), Laura's reply, and the hook: she waits up every late night
+        node("after", "The bench", [
+            GC(cond(trait("exhibitionism", "lt", 20)), D(L, "You'd know, sweetheart. You'd feel it on your skin."),
+               P("You feel it now, her eyes on you in the lamplight, and your face goes hot.")),
+            GC(cond(trait("exhibitionism", "lt", 40)), D(L, "A couple. Good. And you looked back, didn't you?"),
+               P("She's smiling, but her eyes go down your legs and take their time coming back.")),
+            GC(cond(trait("exhibitionism", "lt", 60)), D(L, "Everyone. God, look at you."),
+               P("Her eyes stop on your legs, and she laughs under her breath.")),
+            GC(cond(trait("exhibitionism", "gte", 60)), D(L, "You made sure of it."),
+               P("Her eyes go to your tits and stay a second too long. Then she pulls her robe shut at the neck.")),
+            D(L, "I'll be on this bench the next time you're late. Go to bed."),
+        ], [go("Go to bed.", loc="home_ella_room", mins=4, flags=[LATE_CLEAR, fset("laura_caught_today")])]),
     ]})
 
 # ── step 3 · Laura C 3 · wine in the kitchen ──
@@ -143,7 +172,11 @@ out.append({
             P("She tips the glass at you, smiling, and then the smile goes."),
             D(L, "Mark hasn't looked at my body like that since the wedding."),
             P("She says it to the wine. Then she looks at you, at your mouth, at your throat, and away, fast."),
-            T("She wants somebody to look at her. She's telling you."),
+            *at_level("corruption", {
+                0: "She's your mom. You don't want to hear this. You want to finish your wine and go to bed.",
+                20: "She wants somebody to look at her. She's telling you.",
+                40: "She wants somebody to look at her, and you're the one sitting here. So you look.",
+                60: "She just looked at your mouth. You want to know what she'd do if you looked back and didn't stop."}),
         ], [go("\"He should.\"", loc="home_hall", mins=5, consumes=True,
                eff=[nadd(L, "warmth", 5), setv("laura_step", 2)], flags=[done(3)])]),
         no_node("no", [P("She nods and puts the empty glass back on the shelf, carefully, so it doesn't clink."), D(L, "Go on, then. Bed."), P("She drinks the rest of hers alone, looking at the stove.")],
@@ -184,7 +217,11 @@ out.append({
             # reader pass 3 b00: low heat on Ella's body too, and Laura's reaction to it
             P("Then her eyes find you in the mirror and go down you, slow: your tits, your waist, the curve of your hips. Her mouth goes tight, and she looks away first."),
             D(L, "Do I still look like someone you'd look at?"),
-            T("She's asking you, because nobody else is here to ask."),
+            *at_level("corruption", {
+                0: "She's your mom, and she's asking you this. You don't know where to put your eyes.",
+                20: "She's asking you, because nobody else is here to ask. You wonder what she'd do if you said yes.",
+                40: "She just looked at your tits and looked away. Ask her why, then.",
+                60: "Yes, you'd look. You're looking now, and you want her to know it."}),
         ], [
             go("\"You look beautiful, Mom.\"", node="liar", mins=2),
             go("Say nothing.", node="quiet", mins=2),
@@ -372,7 +409,7 @@ add_item("wine", "Have a glass with her.", HER_EVE + [tod("20:00", "22:00"), tra
          None, 30, done_exits=[go("Drink with her.", node="hl_wine_after", mins=30, eff=[warm(L)], flags=[fset("had_drink_home")], mods=DRINK)],
          tease=l_tease(91, "a glass of wine"), touch=l_touch(91, "a glass of wine"),
          after=("Drink with her.", [P("The wine goes warm in your stomach. She laughs with her head back at something you say, then reaches over and tucks your hair behind your ear, and leaves her hand on your cheek a second too long."),
-                                    D(L, "Don't grow up any faster, okay?")], "Rinse your glass."))
+                                    D(L, "Stay down here a while longer, okay?")], "Rinse your glass."))
 # (pass 3 D1) the study is work, so it is its own canvas beside her hub, not a hub item (the-surfaces.md R1: "Never
 # put work inside a character's hub"). Same screens, hours, pay and once-a-day flag; it still needs her in the
 # kitchen, because she reads over your shoulder. Its Love pay shares her hub's once-a-day brake (below).
@@ -395,32 +432,72 @@ STUDY_KITCHEN = {
 # ── the towel at home (LO, 2026-10-31, DECISIONS 98): her reaction by her Love, every visit (<40, 40-69,
 #    70+, her hub's own cut points); "Let her fix it." pays her Love +2 once a day. No Daring gate: it's a
 #    mother fussing, not a tease. In her room only while she's up and dressing. ──
-LAURA_TOWEL_FIX = [
-    [P("You stand still. She tugs the towel straight and tucks the end in hard over your tits."), D(L, "There. Now go and put some clothes on.")],
-    [P("She tucks the towel again over your tits, slower than she needs to, and smooths it flat with both hands."), D(L, "You're getting so grown up.")],
-    [P("She opens the towel to tuck it again. For a second your tits are bare between her hands, and she looks at them. Then she wraps it tight round you and smooths it down over your hips."), D(L, "There. My good girl.")],
-]
-
-
-def laura_towel(hub, back, first_low, when=()):
-    return towel_set(
-        hub, L, "warmth", 40, 70, "laura_towel_today", [warm(L, 2)], back, when=when,
+LAURA_TOWEL_WORDS = {
+    "kitchen": dict(
+        fix=[
+            [P("You stand still. She tugs the towel straight and tucks the end in hard over your tits."), D(L, "There. Now go and put some clothes on.")],
+            [P("She tucks the towel again over your tits, slower than she needs to, and smooths it flat with both hands."), D(L, "You've got my figure, you know.")],
+            [P("She opens the towel to tuck it again. For a second your tits are bare between her hands, and she looks at them. Then she wraps it tight round you and smooths it down over your hips."), D(L, "There. Now you're decent.")],
+        ],
         lines=[
-            [first_low,
+            [D(L, "Go and get dressed, sweetheart. You'll catch your death."),
              D(L, "Clothes, please. This is a family house."),
              P("Laura looks at the towel and then at the door, like she's counting who could walk in.")],
-            [GC(cond(TOWEL_ON), P("Laura tuts and tucks the towel tighter over your tits, like you're ten."), D(L, "You'll catch your death.")),
+            [GC(cond(TOWEL_ON), P("Laura tuts and tucks the towel tighter over your tits, like it's one more chore."), D(L, "You'll catch your death.")),
              D(L, "Dry your hair at least, sweetheart. You're dripping on my floor."),
              P("She looks you up and down, wet legs to wet hair, and smiles in a way you can't read.")],
-            [GC(cond(TOWEL_ON), D(L, "Look at you. When did you get a body like that?"), P("She says it softly, and her eyes don't leave the towel.")),
+            [GC(cond(TOWEL_ON), D(L, "Look at you. Where have you been hiding a body like that?"), P("She says it softly, and her eyes don't leave the towel.")),
              D(L, "One of my old dresses would look right on you, you know."),
              P("She pushes a wet strand of hair off your face and leaves her hand on your bare shoulder.")],
+        ]),
+    # Saturday night, the dark living room, her on the couch watching the front door
+    "living": dict(
+        fix=[
+            [P("You stop in front of the couch. She leans forward, pulls the towel straight, and shoves the end in over your tits with two fingers."), D(L, "Now go and put something on before you get a chill.")],
+            [P("She pulls you down by the towel and tucks it again over your tits, in no hurry, then flattens it with both hands in the dark."), D(L, "Who's looking at you these days, hm?")],
+            [P("She opens the towel in the dark to tuck it. Your tits are bare a foot from her face, and she stares at them with her wine forgotten. Then she closes it tight and strokes it down over your hips."), D(L, "There, sweetheart. Go on, before I keep you up.")],
         ],
-        slip=LAURA_TOWEL_FIX, slip_label="Let her fix it.", slip_gate=())
+        lines=[
+            [D(L, "You'll freeze, standing in the dark like that. Get something on, sweetheart."),
+             D(L, "Anybody could come through that front door and see you."),
+             P("Laura looks at the towel and then at the front door, the way she looks at everything tonight.")],
+            [GC(cond(TOWEL_ON), P("Laura sets her glass down, reaches up from the couch, and hitches the towel higher over your tits."), D(L, "There. Stand there if you have to.")),
+             D(L, "Sit down or go to bed, sweetheart. You're standing in my view."),
+             P("She looks you over in the dark, bare feet to bare shoulders, and smiles at something she doesn't tell you.")],
+            [GC(cond(TOWEL_ON), D(L, "Stand where I can see you. Who gets to look at you like that?"), P("She says it low, and her eyes stay on the towel.")),
+             D(L, "I used to have legs like that, you know."),
+             P("She reaches up from the couch and rests her warm hand on your bare shoulder, and she doesn't take it back.")],
+        ]),
+    # Saturday 17:00-18:30, her room, her at the long mirror in her slip
+    "bedroom": dict(
+        fix=[
+            [P("You hold your arms out. She pulls the towel up and jams the end in hard over your tits, with the long mirror watching."), D(L, "Better. Now go and find some clothes.")],
+            [P("She turns you to face the long mirror and tucks the towel over your tits, taking her time, and presses it flat with both palms."), D(L, "Now you look like somebody.")],
+            [P("She undoes the towel in front of the long mirror to tuck it properly. Your tits are bare between her hands, and she looks at them in the glass. Then she pulls it snug and runs her palms down over your hips."), D(L, "There, sweetheart. Now you can go.")],
+        ],
+        lines=[
+            [D(L, "I'm trying to get dressed, sweetheart. Go and put something on."),
+             D(L, "Two of us half dressed in this room is plenty."),
+             P("Laura looks at your towel in the mirror, then at her open door, and pushes it almost shut with her foot.")],
+            [GC(cond(TOWEL_ON), P("Laura clicks her tongue at the mirror, turns round, and yanks the towel higher over your tits."), D(L, "You'll be sick by Monday.")),
+             D(L, "Don't sit on my bed in that, sweetheart. I've got a dress laid out on it."),
+             P("She looks you over in the mirror, bare feet to bare shoulders, and goes back to her two dresses with a small smile.")],
+            [GC(cond(TOWEL_ON), D(L, "Stand next to me. Look at the two of us."), P("She says it quietly to the mirror, and her eyes go over your towel, not her own slip.")),
+             D(L, "You could carry the green one better than I can."),
+             P("She reaches across, hooks a strand of hair behind your ear, and her fingers stay on your bare neck.")],
+        ]),
+}
 
 
-DEATH = D(L, "Go and get dressed, sweetheart. You'll catch your death.")
-LT_KITCHEN = laura_towel("hub_laura_kitchen", K, DEATH)
+def laura_towel(hub, back, words, when=()):
+    w = LAURA_TOWEL_WORDS[words]
+    return towel_set(
+        hub, L, "warmth", 40, 70, "laura_towel_today", [warm(L, 2)], back, when=when,
+        lines=w["lines"],
+        slip=w["fix"], slip_label="Let her fix it.", slip_gate=())
+
+
+LT_KITCHEN = laura_towel("hub_laura_kitchen", K, "kitchen")
 UNIFORM_LINES = [
     G(cond(NORMAL_ON), D(L, "Look at you. My working girl. Sit, I'll make you something.")),
     G(cond(SEXY_ON), P("Laura looks at the open top button for a long second."), D(L, "Is that the uniform, or Tom's idea?")),
@@ -542,7 +619,10 @@ for args, kw in [
                                         D(L, "Don't tell Mark I cried.")], "Say goodnight and go.", "home_hall"))),
     (("tv", "Watch TV with her.", [tod("22:00", "00:00")], "watched_tv", "home_living_room",
       [P("She hands you the remote without looking away from the door."), D(L, "Find something. Anything.")],
-      [energy(5), warm(L)], 60), {}),
+      [energy(5), warm(L)], 60),
+     # the written no: her offer gets her daughter's words and her reply; free of every cap and cost
+     dict(no=([ME("Not tonight, Mom. You pick."), D(L, "Go on, then, sweetheart. I'll be here."),
+               P("She takes the remote back and doesn't turn it on. Her eyes are already on the front door again.")], "Leave her the remote."))),
 ]:
     c, n = item(*args, **kw); lr_choices += c; lr_nodes += n
 # reader pass 3 b01 (the written no): her "Sit with me a while." gets a spoken no and her reaction, not a bare exit
@@ -557,7 +637,7 @@ lr_nodes.append(node("hl_film_no", "Not now", [
     D(L, "Oh. No, of course. Go on, sweetheart. I'll just watch the door."),
     P("She pulls her robe tighter over her knees and turns back to the film, and she doesn't turn the sound up."),
 ], [go("Go to your room.", loc="home_ella_room")]))
-LT_LIVING =laura_towel("hub_laura_living_room", "home_living_room", DEATH)
+LT_LIVING = laura_towel("hub_laura_living_room", "home_living_room", "living")
 out.append({
     "id": "hub_laura_living_room", "name": "Laura, waiting up",
     "description": "Laura waiting up in the dark living room on Saturday nights; she can see the front door. A film (+2 Warmth) or the TV with her (home_life).",
@@ -571,7 +651,13 @@ out.append({
                  D(L, "Who's bringing you home tonight?")),
             G(cond(trait("jake_step", "gte", 3)), D(L, "I saw you, you know. On the step. I didn't look away.")),
             *LT_LIVING[0],
-        ], [*lr_choices, *LT_LIVING[1], go("Leave her be.", loc="home_hall")]),
+        ], [*lr_choices, *LT_LIVING[1], go("Leave her be.", node="leave")]),
+        # the written no: "Sit with me" gets her words and Laura's reply, not a bare exit
+        node("leave", "Goodnight", [
+            ME("I'm done for tonight, Mom."),
+            D(L, "Goodnight, sweetheart. I'll hear you if you go back out."),
+            P("She lifts the wine she isn't drinking, a small toast, and her eyes go straight back to the front door."),
+        ], [go("Leave her be.", loc="home_hall")]),
         *lr_nodes, *LT_LIVING[2],
     ]})
 
@@ -581,13 +667,16 @@ bd_choices, bd_nodes = item("hair", "Let her do your hair.", DRESSING, "made_up_
     [P("She sits you down at her mirror and brushes your hair out, long strokes."), D(L, "You had my hair at your age.")],
     [warm(L)], 20,
     done_exits=[go("Done.", loc="home_master_bedroom", mins=20, eff=[warm(L)], flags=[fset("made_up_today"), fset("made_up")])],
+    # reader 2026-11-04: the written no to the brush; it costs nothing
+    no=([ME("Not now, Mom. Leave it."), D(L, "Suit yourself, sweetheart. It's your head."),
+         P("She shrugs at you in the glass and goes back to her own hair with the brush.")], "Leave her to it."),
     )
 # Sun 00:00-01:00 Mark and Laura are awake (DECISIONS 80): the "asleep" line skips that hour, written
 # once per piece of the night because conditions do not nest.
 ASLEEP_HOURS = [(wd(0, 1, 2, 3, 4, 5), tod("22:00", "07:00")), (wd(6), tod("22:00", "00:00")), (wd(6), tod("01:00", "07:00"))]
 # Laura is awake and alone Sun-Fri 22:00-23:00 (DECISIONS 82), so a line saying she is asleep skips that hour too.
 LAURA_ASLEEP_HOURS = [(wd(0, 1, 2, 3, 4), tod("23:00", "07:00")), (wd(5), tod("22:00", "07:00")), (wd(6), tod("23:00", "00:00")), (wd(6), tod("01:00", "07:00"))]
-LT_BED = laura_towel("hub_laura_bedroom", "home_master_bedroom", DEATH, when=DRESSING)
+LT_BED = laura_towel("hub_laura_bedroom", "home_master_bedroom", "bedroom", when=DRESSING)
 out.append({
     "id": "hub_laura_bedroom", "name": "Laura",
     "description": "Laura in her room: dressing on Saturday evenings with the door open (her hair, home_life item 12), or asleep at night (her face; home_master_bedroom.md:36-45).",
@@ -595,19 +684,33 @@ out.append({
                 "priority": 6, "is_active": True, "conditions": cond(flag("opening_done"))},
     "nodes": [
         node("mirror", "Laura", [
-            G(cond(*DRESSING),
+            # scene reader 2026-11-04: once the green is chosen the choice is over for the day (laura_dress_chosen)
+            G(cond(*DRESSING, flag("laura_dress_chosen")),
+              P("Laura's in the green now, at the long mirror, doing her earrings."),
+              D(L, "It's the green, sweetheart. Go on, I've got it from here.")),
+            G(cond(*DRESSING, flag("laura_dress_chosen", False)),
               P("Laura is at her long mirror in her slip, holding two dresses up one after the other."),
               POOL(D(L, "Black or green? Mark won't notice either way."),
                    D(L, "Do I look old in this? Be honest. No, don't be honest."),
                    D(L, "Hand me those earrings, sweetheart."))),
-            G(cond(*DRESSING, trait("laura_step", "gte", 3)), P("She leaves the zip undone and turns her back to you without asking. She knows you'll do it.")),
-            G(cond(*DRESSING, trait("laura_step", "lt", 3)), P("She catches you watching her in the mirror, and holds it.")),
+            G(cond(*DRESSING, flag("laura_dress_chosen", False), trait("laura_step", "gte", 3)), P("She lifts her hair off her neck and turns her back to you without asking. Whichever dress wins, she knows you'll do the zip.")),
+            G(cond(*DRESSING, flag("laura_dress_chosen", False), trait("laura_step", "lt", 3)), P("She catches you watching her in the mirror, and holds it.")),
             *[G(cond(*hrs),
                 P("Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. She doesn't stir."))
               for hrs in LAURA_ASLEEP_HOURS],
+            # reader 2026-11-04: her awake rows outside DRESSING and outside the asleep hours, so the screen is never empty
+            G(cond(wd(0, 1, 2, 3, 4, 6), tod("22:00", "23:00")),
+              P("Laura's on the edge of the bed in her nightdress, wide awake, the lamp on low and a book open on her knees that she isn't reading."),
+              D(L, "It's late, sweetheart. Go on to bed.")),
+            G(cond(wd(5), tod("18:30", "19:00")),
+              P("Laura has her earrings in and her bag on the bed. She looks you over once in the long mirror and picks up her keys."),
+              D(L, "I'm late. Whatever it is, it can wait till tomorrow, sweetheart.")),
+            G(cond(wd(6), tod("00:00", "01:00")),
+              P("The lamp's on. Laura's on the edge of the bed in her nightdress, taking her earrings out."),
+              D(L, "Not now, sweetheart. Go to bed.")),
             *LT_BED[0],
         ], [*bd_choices, *LT_BED[1],
-            go("Help her choose.", node="choose", mins=20, cond_=cond(*DRESSING)),
+            go("Help her choose.", node="choose", mins=20, cond_=cond(*DRESSING, flag("laura_dress_chosen", False)), flags=[fset("laura_dress_chosen")]),
             go("Back out.", loc="home_hall")]),
         node("choose", "Black or green", [
             P("You make her try both. Then the black again. She turns side to side in the mirror while you tell her the truth: the green."),
@@ -658,12 +761,15 @@ out.append({
         node("comes", "Ryan", [P(beat("laura_04_she_saw_you", "comes")),
             VID("a woman alone in bed coming hard, biting her knuckles, whispering a name", "woman orgasm in bed whispering a name", "mom cums biting hand bed", pool_dir="sex/laura_04_comes_t5")],
             [go("Stay where you are.", node="eyes", mins=2,
-                eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 59}, add("laura_gaps_watched", 1)])]),
+                eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 59}, add("laura_gaps_watched", 1, clamp=False)])]),
         node("eyes", "Her eyes", [
             P("Laura's eyes open. They go straight to the door. To the gap. To you."),
             P("She doesn't pull the sheet up fast. She doesn't pull it up at all. She lies there with her hand still between her legs, and she looks at you."),
             D(L, "How long have you been standing there?"),
-            ME("Mom. I'm sorry. I didn't."),
+            *at_level("corruption", {
+                20: "Mom. I'm sorry. I didn't.",
+                40: "Long enough, Mom. I'm not going to say sorry.",
+                60: "Since before you came, Mom. I saw all of it, and I didn't want it to stop."}, make=ME),
             T("Ryan. She said Ryan. Not Mark."),
         ], [
             go("Step back from the gap.", node="back", mins=1),

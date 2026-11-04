@@ -1,4 +1,5 @@
 # [REVIEW] Scenes — the walk-ins outside the house (B9-B20)
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. B14: "Strip and get in."; "Let her." needs Exhibitionism 60, pays both meters, costs Energy 10 and Hygiene 10.
 
@@ -62,7 +63,7 @@ Built differently from the proposal (DECISIONS 150), confirmed, DECISIONS 170: B
 | when | Mon/Wed/Fri 11:45-12:00 · odds 0.25, 0.35, 0.45 |
 | want | her hand on Ella's knee under the table |
 | next step | "Let it stay." (Curious): her hand up her thigh |
-| hook | none in the build: nothing reads `zoe_canteen_knee` |
+| hook | "Let it stay.": "Friday, my place. No table in the way, babe." ("Tonight" on a Friday) |
 | the no | "Move her hand." pays 0 |
 
 **`walkin_canteen_zoe`** — Canteen · needs `opening_done` · not `walkin_canteen_zoe_today` · Zoe in Canteen · `zoe_met` · Mon/Wed/Fri · 11:45-12:00 · repeatable · walk-in only
@@ -82,7 +83,7 @@ Built differently from the proposal (DECISIONS 150), confirmed, DECISIONS 170: B
 | host · who | `canteen_eat`, `canteen_listen` · Jake and two of the team |
 | when | Tue/Thu 11:45-12:00 · odds 0.25, 0.35, 0.45 |
 | want | "Guys. Look at her." at her skirt |
-| next step | "Leave it." (Covered); "Training's at three. Come and watch." |
+| next step | "Leave it." (Covered pays; from Exhibitionism 20 it pays nothing and she looks back); "Training's at three. Come and watch." |
 | hook | none in the build: nothing reads `team_saw_canteen` |
 | the no | "Pull your skirt down." pays 0 |
 
@@ -94,9 +95,11 @@ Built differently from the proposal (DECISIONS 150), confirmed, DECISIONS 170: B
 | `answer` | Your skirt has ridden up your thighs on the plastic chair. | no | "Pull your skirt down." (in short skirt) → `j_down` | — |
 |  |  |  | "Eat your lunch." (not in short skirt) → `j_eat` | — |
 |  |  |  | "Leave it." (in short skirt · Exhibitionism under 20) → `j_leave` | Exhibitionism +1 (cap 19) |
+|  |  |  | "Leave it." (in short skirt · Exhibitionism 60+) → `j_stay` | — |
 | `j_down` | You tug your skirt down your thighs, as far as it goes. | no | "Leave them to their trays." → Canteen | — |
 | `j_eat` | You eat. | no | "Leave them to their trays." → Canteen | — |
 | `j_leave` | You leave it. | no | "Leave them to their trays." → Canteen | — |
+| `j_stay` | You leave it, and look right back at all three of them. | no | "Leave them to their trays." → Canteen | — |
 
 ## B11 · `walkin_canteen_nadia`
 
@@ -153,7 +156,7 @@ Built differently from the proposal (DECISIONS 150), confirmed, DECISIONS 170: B
 | `answer` | Zoe, in tiny shorts and a sports top, bouncing on her toes, grinning. | no | "Let her run on." → `z_on` | — |
 |  |  |  | "Run with her." (10 Energy) → `hub_zoe_park` `lap` | `ran_with_zoe` set · `zoe_bailed` cleared · `zoe_run_booked` cleared |
 |  |  |  | "Dare me, Zo." (top on) → `zoe_park_dare` `ask` | — |
-| `z_on` | "Go on without me, Zo." · Zoe: "Your loss. You're still buying the coffee." She slaps her ass again and runs off | no | "Watch her go." → Park | — |
+| `z_on` | "Go on without me, Zo." · Zoe: "Your loss. That's a great view you're taking home." She slaps her ass again and runs off | no | "Watch her go." → Park | — |
 
 ## B13 · `walkin_rest_zoe`
 
@@ -216,7 +219,7 @@ Built differently from the proposal (DECISIONS 150), confirmed, DECISIONS 170: B
 | `moment` | You're lying back on the grass with your bag under your head and your eyes shut. | no | "They've stopped." → `answer` | `walkin_quad_team_today` set · `team_saw_grass` set |
 | `answer` | You open your eyes. | no | "Fix your skirt." → `q_fix` | — |
 |  |  |  | "Leave it." → `q_leave` | Exhibitionism +1 (cap 19) |
-| `q_fix` | You sit up fast and yank your skirt down over your thighs. | no | "Get up." → Quad | — |
+| `q_fix` | You sit up fast and yank your skirt down over your thighs. (Exhibitionism 60+: "You sit up slow and draw your skirt down your thighs, and you stop an inch short.") | no | "Get up." → Quad | — |
 | `q_leave` | You don't fix it. | no | "Get up." → Quad | — |
 
 ## B15 · `walkin_quad_zoe`
@@ -385,7 +388,7 @@ Built differently from the proposal (DECISIONS 150), confirmed, DECISIONS 170: B
 | host · who | `door_grade_psych` · Dr. Hale |
 | when | in the walker's own hours · odds 0.25 |
 | want | his eyes down her legs: "Checking up on me?" |
-| next step | "Come in or don't." His office hours |
+| next step | "Knock when you mean it, or don't." His office hours |
 | hook | his office hub reads `hale_door_seen` |
 | the no | "Step back." lands on `no`: before his step 3 he watches her legs go; from his step 3, "Suit yourself. You know where I am on Thursdays." and he shuts the door |
 
@@ -403,7 +406,7 @@ Built differently from the proposal (DECISIONS 150), confirmed, DECISIONS 170: B
 | host · who | `door_grade_business` · the Business lecturer |
 | when | in the walker's own hours · odds 0.25 |
 | want | none: he looks at the grade, not at her |
-| next step | none: one screen |
+| next step | at 40-69: "Get it to seventy in my lecture, not at my door." |
 | hook | his office hub reads `business_door_seen` |
 | the no | one screen: "Step back." |
 
@@ -411,7 +414,7 @@ Built differently from the proposal (DECISIONS 150), confirmed, DECISIONS 170: B
 
 | node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
 |---|---|---|---|---|
-| `door` | The door opens. | no | "Step back." → Business Lecturer's Office | `walkin_door_business_today` set · `business_door_seen` set |
+| `door` | The door opens. | no | "Step back." → Faculty Floor | `walkin_door_business_today` set · `business_door_seen` set |
 
 ## Explicit beats on this page
 

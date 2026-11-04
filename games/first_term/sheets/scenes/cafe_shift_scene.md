@@ -1,4 +1,5 @@
 # [REVIEW] Scene — cafe_shift_scene
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 
@@ -154,7 +155,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > Two men at the counter watch your ass all the way to the kitchen and back. One of them says something. The other one laughs.
 >
-> Nice legs on the new girl. Turn around, baby, let's see the rest.
+> Nice legs on you. Turn around, baby, let's see the rest.
 >
 > A man in a suit doesn't look at his menu once. He looks at your tits the whole time you take his order, and over-tips.
 >

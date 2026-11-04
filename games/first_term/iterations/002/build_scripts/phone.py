@@ -18,7 +18,7 @@ w = L.append
 
 
 def npc_eff(npc, trait, n):
-    d = {"targetType": "npc", "npcId": npc, "trait": trait, "op": "add", "value": n}
+    d = {"targetType": "npc", "npcId": npc, "trait": trait, "op": "add", "value": n, "clamp": True}
     if n < 0:
         d["clamp"] = True   # a phone effect is unclamped by default (v2.py applyPhoneEffectSet); a cost stops at 0
     return d
@@ -73,7 +73,7 @@ ZOE_WAIT, JAKE_WAIT = 6, 3
 
 
 def pl_eff(trait, n):
-    d = {"targetType": "player", "trait": trait, "op": "add", "value": n}
+    d = {"targetType": "player", "trait": trait, "op": "add", "value": n, "clamp": True}
     if n < 0:
         d["clamp"] = True
     return d

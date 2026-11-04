@@ -1,4 +1,5 @@
 # [REVIEW] Scene — street_seen
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. Both meters cap at 19 (DECISIONS 176).
 
@@ -31,7 +32,7 @@
 
 | witness | level 1 (short skirt, or no bra) | level 2 (no panties) |
 |---|---|---|
-| Mr. Vance (`npc_vance.md`) | short skirt: "Mark's girl is growing up." He doesn't pretend to read his paper. (signed) · no bra: "He sets the paper down. He looks at your chest and doesn't look away." | "A breeze lifts your skirt as you pass his gate. Mr. Vance stands up off his chair." |
+| Mr. Vance (`npc_vance.md`) | short skirt: "Mark's girl has good legs." He doesn't pretend to read his paper. (signed) · no bra: "He sets the paper down. He looks at your chest and doesn't look away." | "A breeze lifts your skirt as you pass his gate. Mr. Vance stands up off his chair." |
 | the corner-shop guy | "He comes out from behind the counter to stack a box that doesn't need stacking, and watches you all the way past." | "He drops his change on the step. He doesn't pick it up until you've turned the corner." |
 | a car slowing down | "A car slows beside you. The window comes down halfway. It stays with you to the end of the street, then goes." | "A car slows, then stops. Someone whistles. You don't walk faster." |
 | footfall 10 (any witness) | + "You're the girl from the café." | + "You're the girl from the café." |

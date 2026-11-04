@@ -1,4 +1,5 @@
 # [REVIEW] Scene — zoe_04_i_pick_the_dares
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 
@@ -41,8 +42,9 @@ One row per exit. Read from the build; it replaces the drafted map.
 |---|---|---|---|---|
 | `couch` | Zoe's on her couch in a big T-shirt with her bare legs tucked under her, eating … | no | "Sit down next to her." → `asked` | — |
 | `asked` | She says it to the cereal box. | no | "Then keep daring me." → `keep` | — |
-| | | | "Okay." → Zoe's Living Room | back in 3 days |
+| | | | "Okay." → `okay` | — |
 | `keep` | She looks at you properly for the first time tonight. | no | "Every party." → Zoe's Living Room | Zoe's step = 4 · `zoe_04_done` set · `picks_the_dares` set |
+| `okay` | Zoe: "Okay? I say all that, and I get okay? Wow." "Come back when you've got more than that, babe." | no | "Leave her to her cereal." → Zoe's Living Room | back in 3 days |
 
 ## The repeat it turns into — party nights, her call (one sheet row)
 

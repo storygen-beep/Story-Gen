@@ -96,7 +96,10 @@ out.append({
             P("Front row again. His eyes have been on the front row every class since the pen, and today you sit in it on purpose, right in front of the lectern."),
             G(cond(SKIRT), P("You don't fix your skirt when you sit. It rides up and stays up, and he sees it, and loses a word.")),
             G(cond(NOT_SKIRT), P("You sit with your legs crossed and your knee up, and he sees it, and loses a word.")),
-            T("Go on. You came here to do this."),
+            # writing pass 2026-11-04: her thought by Exhibitionism; the step's gate is 20, so no Good Girl line
+            G(cond(trait("exhibitionism", "lt", 40)), T("What does he do if you let him see? You came here to find out.")),
+            G(cond(trait("exhibitionism", "gte", 40), trait("exhibitionism", "lt", 60)), T("Go on. You came here to do this.")),
+            G(cond(trait("exhibitionism", "gte", 60)), T("You want him to see all of it. You want him to lose more than a word.")),
         ], [
             go("Uncross your legs, slowly.", node="flash", mins=5, wardrobe=PANTIES_OFF, flags=[fset("hale02_took_them_off")],
                cond_=cond(SKIRT, {"type": "clothing_item", "item_id": "plain_panties", "operator": "equipped"})),
@@ -211,7 +214,9 @@ out.append({
             D(CL, "You ready, love? I'm early."),
             P("Dr. Hale takes his hand away, not fast. He doesn't look at the door. He looks at you."),
             D(H, "My wife. Same time next week, @player."),
-            T("You want to know what he'd do next."),
+            # writing pass 2026-11-04: her thought by Corruption; the step's gate is 40
+            G(cond(trait("corruption", "lt", 60)), T("He stopped, and you're angry about it. You want to know what his hand does next.")),
+            G(cond(trait("corruption", "gte", 60)), T("Let her wait out there. You want his hand back where it was.")),
         ], [go("Pick up your bag.", node="corridor", mins=2, flags=[fset("claire_met")])]),   # pass 3 D39 (R7)
         node("corridor", "The faculty floor", [
             P("You pull your clothes straight and pick up your bag. He unlocks the door for you."),
@@ -227,7 +232,7 @@ out.append({
             P("He doesn't unlock the door until you're at it."),
         ], [go("Leave him with your grade.", loc="faculty_floor", mins=5, retry=7)]),   # reader pass 3 b01: no grade_psych gate here, so no letter
         node("run", "Run", [
-            P("You grab your bag and you're out of the door before he can stand up. Out on the faculty floor a woman with short dark hair is coming the other way with car keys in her hand. The woman in the photo."),
+            P("You pull everything back down over your tits, grab your bag and turn the lock yourself. You're out of the door before he can stand up. Out on the faculty floor a woman with short dark hair is coming the other way with car keys in her hand. The woman in the photo."),
             P("She smiles at you, polite, the way you smile at a student."),
             T("His wife. She has no idea."),
         ], [go("Keep walking.", loc="campus", mins=5, retry=7, eff=[add("grade_psych", -2) | {"clamp": True}], flags=[fset("claire_met")])]),
@@ -273,6 +278,9 @@ out.append({
             D(H, "Twenty minutes, @player."),
             G(cond(flag("hale_thursday_booked"), tod("18:30", "18:40")), D(H, "Half past six, you wrote. You're on time.")),   # P10 (round 2): the booking read
             G(cond(flag("hale_thursday_booked"), tod("18:40", "19:05")), D(H, "Half past six, you wrote. You're late, @player. Don't be late again.")),   # scene reader b02: the window runs to 19:05
+            # writing pass 2026-11-04, reader test 2: the session moves with her Corruption, as touch_low and touch_high do (both on "Let him.")
+            G(cond(trait("corruption", "lt", 60)), D(H, "My hands, over your clothes. Your clothes stay on until you're further along than this, @player.")),
+            G(cond(trait("corruption", "gte", 60)), D(H, "Over the clothes is finished, @player. Today it comes off, and you describe every second of it to me.")),   # scene reader 2026-11-04: true of all three touch_high screens, his hand or hers
         # pass 3 E95: the session costs 10 energy on the way in (greyed "Requires 10 Energy" when she is spent; the roll
         # screen has no way out, so the price can't sit behind it), and his hands lower her hygiene on the act itself
         ], [go("Let him.", node="roll", mins=1, costs=[{"trait": "energy", "value": 10}], eff=[{"targetType": "player", "trait": "hale_claire_roll", "op": "set", "value": {"type": "random", "min": 1, "max": 4}}]),
@@ -312,10 +320,10 @@ out.append({
         node("isnt", "Not coaching", [
             ME("This isn't coaching."),
             D(H, "Then your grade goes down, @player. Not up."),
-            P("He turns the photo face-up and doesn't look at you while you go."),
+            P("He turns the photo face-up and doesn't look at you while you turn the lock and go."),
         ], [go("Leave him to his photo.", loc="faculty_floor", mins=2)]),
         node("run", "Run", [
-            P("You're out of the door before he's out of his chair. Behind you, calm, not raised:"),
+            P("You turn the lock yourself and you're out of the door before he's out of his chair. Behind you, calm, not raised:"),
             D(H, "Next Thursday, @player."),
         ], [go("Keep walking.", loc="faculty_floor", mins=2)]),
     ]})
@@ -361,10 +369,27 @@ out.append({
         ], [go("Thank him.", loc="faculty_floor", mins=60, eff=[{"targetType": "player", "trait": "grade_psych", "op": "add", "value": 1, "cap": 69}])])]})
 
 # ── Nadia: the library, the canteen, beside her in Psychology ──
-NADIA_LINES = POOL(D(N, "Thursday office hours are a trap, you know that?"),
-                   D(N, "You want my notes? You can have my notes."), D(N, "Sit. I'll tell you which lecturers to avoid."), pid="nadia_lines")
+# Each room its own lines (gate one pool, one place). The library has her most hours, so it keeps the first words of
+# the pool; the lecture hall keeps "He'll lose his place again", the line that belongs to it.
+NADIA_LINES = {
+    "library": POOL(D(N, "Thursday office hours are a trap, you know that?"),
+                    D(N, "You want my notes? You can have my notes."), D(N, "Sit. I'll tell you which lecturers to avoid."), pid="nadia_lines"),
+    "canteen": POOL(D(N, "Don't get the soup. And don't take his Thursday slot either."),
+                    D(N, "Everyone at this table has a story about a lecturer. Ask me which ones are true."),
+                    D(N, "Have my roll. I only got the salad so I could feel better about the roll."), pid="nadia_lines_canteen"),
+    "lecture_hall": POOL(D(N, "Watch his left hand. He turns the ring when he's looking at someone."),
+                         D(N, "I've got today's reading if you didn't do it. Copy fast."),
+                         D(N, "Keep your voice down. He hears everything from that lectern."), pid="nadia_lines_lecture"),
+}
 # "After class" is true only on a Psychology morning, and his interest only after his step 2.
-NADIA_ASKED = G(cond(trait("hale_step", "gte", 2), wd(0, 2, 4)), D(N, "He asked about you. Hale. After class."))
+NADIA_ASKED = {"library": "He asked about you. Hale. After class.",
+               "canteen": "Hale asked me where you sit at lunch. Earlier, after his lecture. I said I didn't know."}
+NADIA_SKIRT = {"lecture_hall": "He'll lose his place again.",
+               "library": "Wear that to Psychology and he won't get past the first slide. Nice legs, by the way.",
+               "canteen": "That skirt? He'll read the same slide twice. I'd pay to watch your legs do it to him."}
+NADIA_WIFE = {"library": "His wife came to the office. Everyone's saying. Was it you?",
+              "canteen": "Eat your lunch and tell me the truth. His wife saw a girl walk out of his office, and this whole table wants to know who. Was it you?",
+              "lecture_hall": "Don't look up. Half this row thinks a student was in his office when his wife came. Was it you?"}
 for cid, loc, name, setting in [("hub_nadia_library", "library", "Nadia, studying", "Nadia at a library table with her headphones round her neck."),
                                  ("hub_nadia_canteen", "canteen", "Nadia, at lunch", "Nadia at the end of a table with a salad and a textbook open beside it."),
                                  ("hub_nadia_lecture", "lecture_hall", "Nadia, beside you", "Nadia in the seat beside yours, her pen already moving.")]:
@@ -375,10 +400,10 @@ for cid, loc, name, setting in [("hub_nadia_library", "library", "Nadia, studyin
                     "conditions": cond(flag("nadia_met"))},
         "nodes": [node("nadia", name, [
             P(setting),
-            NADIA_LINES,
-            *([NADIA_ASKED] if loc != "lecture_hall" else []),
-            G(cond(SKIRT, trait("hale_step", "gte", 2)), D(N, "He'll lose his place again.")),
-            G(cond(trait("hale_step", "gte", 4)), D(N, "His wife came to the office. Everyone's saying. Was it you?")),
+            NADIA_LINES[loc],
+            *([G(cond(trait("hale_step", "gte", 2), wd(0, 2, 4)), D(N, NADIA_ASKED[loc]))] if loc in NADIA_ASKED else []),
+            G(cond(SKIRT, trait("hale_step", "gte", 2)), D(N, NADIA_SKIRT[loc])),
+            G(cond(trait("hale_step", "gte", 4)), D(N, NADIA_WIFE[loc])),
         ], [go("Talk a while.", loc=loc, mins=20), go("Leave her to her notes.", loc="campus")])]})   # pass 3 D39 (R7)
 
 cards = step_cards(H, {
