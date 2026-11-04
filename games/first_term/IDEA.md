@@ -1,5 +1,7 @@
 # The idea — First Term: her moment
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. The rent rises to $100.
+
 > One page, written after the Want and before the world. Doctrine: `references/the-want.md` §0 and §6.
 > LO picked the first step on 2026-10-02. Four `v2-pitcher`s ran (LO asked for four: Ryan, Laura,
 > Mark, and the college thread), each with no shared context.
