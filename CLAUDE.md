@@ -202,3 +202,5 @@ the game, or it ships again next time. If no → fix the one-off or the engine a
 - Match the surrounding code's style and patterns.
 - Be direct with LO. Opinions welcome; politeness theater isn't. If something's
   wrong, say so and fix it.
+- **Send LO a push notification on every chat completion** (the `PushNotification` tool), at the end
+  of every turn: one line saying what finished or what needs his call. LO, 2026-11-04.
