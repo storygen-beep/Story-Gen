@@ -853,7 +853,7 @@ Three things about that line carry the rule:
 - **The price carries a discount earned elsewhere** — `<<if $perk14 is true>><<set _price to _price * 0.8>>`.
 
 ⚠️ **This is authorable here today and needs no engine work** — a `[group]` carrying `conditions` can
-wrap a `block_pool`, and consecutive `[group]` blocks become one `if/elseif` chain at `v2.py:15272`.
+wrap a `block_pool`, and consecutive `[group]` blocks become one `if/elseif` chain at `v2.py:18236`.
 This is recorded as a measured field pattern with the engine verified, and **it is deliberately not gated**.
 `the-economy.md` R1b owns the asset half.
 

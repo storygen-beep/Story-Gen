@@ -236,7 +236,7 @@ non-initial garment at `price = 0` is invisible on the very shop page it sits be
 (`v2.py:2333` stocks only `!initial && price > 0`), so a check reading "a shop exists, therefore
 buyable" would pass a garment nobody can get.
 
-⚠️ **`shop_location` is never validated** (`template_import.py:2824` takes it as a bare string,
+⚠️ **`shop_location` is never validated** (`template_import.py:3132` takes it as a bare string,
 `v2.py:10717` compares it to each location's slug). A typo produces no error, no warning and no shop
 — the same silence as omitting it. After a build, `grep -c "Browse Clothes" <output>/index.html`
 must be 1.
@@ -875,7 +875,7 @@ flagEffects = [ { targetType = "player", flag = "eggs_sold_today", op = "unset" 
 > node exit  advanceTime -> traitEffects -> flagEffects                 v2.py:15258-15267
 > ```
 >
-> `advanceTime` rolls the day inside itself (`v2.py:6601-6604`) and that is where the tick clears
+> `advanceTime` rolls the day inside itself (`v2.py:6940-6943`) and that is where the tick clears
 > every `_today` flag (`v2.py:6741-6743`). So an **exit**-set cap on a rung that crosses midnight is
 > written *after* the clear, and the new day starts already capped.
 >
@@ -884,7 +884,7 @@ flagEffects = [ { targetType = "player", flag = "eggs_sold_today", op = "unset" 
 > says a word.
 >
 > ⚠️ **A LOCATED canvas does not need a flag at all.** `max_triggers_per_day` is read off the
-> trigger (`v2.py:12923`) and `markCanvasTriggered` stamps the day key *before* `advanceTime`
+> trigger (`v2.py:14559`) and `markCanvasTriggered` stamps the day key *before* `advanceTime`
 > (`v2.py:4803`), so it is immune to this. Reach for the flag only when the rung is triggerless.
 
 ⚠️ **Do not do this with a hidden counter trait and an `lt` condition.** It works, and it is what

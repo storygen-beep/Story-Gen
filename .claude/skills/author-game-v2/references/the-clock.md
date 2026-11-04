@@ -54,7 +54,7 @@ The clock is not hidden — `<<timeDisplay>>` sits at the top of `StoryCaption` 
 (`v2.py:18883`, `:18900`), rendering a live reading through `<<timeFormatted>>`
 (`v2.py:19326`) — 12-hour by default, 24-hour if the player ticks it in Settings (`setup.formatTime`
 is the one formatter every engine-printed time goes through) — and it carries **wait buttons**: `>` is 10 minutes, `>>` is an hour, `>>>>>` is a
-day (`v2.py:19398-19420`, `waitTime` at `v2.py:6836`). The player can always see the time and can
+day (`v2.py:20823-20845`, `waitTime` at `v2.py:6970`). The player can always see the time and can
 always move it. That is exactly why the prose must not compete with it.
 
 **What C1 licenses.** The opening's first node, before any exit has fired, may state the starting
@@ -263,8 +263,8 @@ so restating the row's own name doubles it: *"Work the counter — The counter �
 one"*. The house shape is a bare phrase — lowercase, no restatement, no full stop:
 *"mornings, `<hour>` till `<hour>`"*, *"after `<hour>` at night"*.
 
-`show_when_blocked` and `cooldown_message` are read at `v2.py:13529-13533` and emitted as
-`showWhenBlocked` / `cooldownMessage` (`v2.py:13592-13593`). When `isCanvasValid` returns false —
+`show_when_blocked` and `cooldown_message` are read at `v2.py:14596-14600` and emitted as
+`showWhenBlocked` / `cooldownMessage` (`v2.py:14660-14661`). When `isCanvasValid` returns false —
 and it returns false on a **schedule miss** first of all (`v2.py:5919-5925`) — the renderer keeps
 the entry as a dimmed, non-clickable line carrying the author's message instead of dropping it
 (`v2.py:6482`, `:6488`, `:6527-6534`).
