@@ -1,5 +1,7 @@
 # [REVIEW] Scenes — the walk-ins outside the house (B9-B20)
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. B14: "Strip and get in."; "Let her." needs Exhibitionism 60, pays both meters, costs Energy 10 and Hygiene 10.
+
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. The built-differently items are confirmed, DECISIONS 170.
 
 > New 2026-11-03 (third alignment pass), written from the build; waits for LO's sign. The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`, part B (signed by LO 2026-11-03, DECISIONS 147; built in DECISIONS 150-151).
@@ -92,7 +94,7 @@ Built differently from the proposal (DECISIONS 150), confirmed, DECISIONS 170: B
 | `answer` | Your skirt has ridden up your thighs on the plastic chair. | no | "Pull your skirt down." (in short skirt) → `j_down` | — |
 |  |  |  | "Eat your lunch." (not in short skirt) → `j_eat` | — |
 |  |  |  | "Leave it." (in short skirt · Exhibitionism under 20) → `j_leave` | Exhibitionism +1 (cap 19) |
-| `j_down` | You tug your skirt down to your knees, as far as it goes. | no | "Leave them to their trays." → Canteen | — |
+| `j_down` | You tug your skirt down your thighs, as far as it goes. | no | "Leave them to their trays." → Canteen | — |
 | `j_eat` | You eat. | no | "Leave them to their trays." → Canteen | — |
 | `j_leave` | You leave it. | no | "Leave them to their trays." → Canteen | — |
 
@@ -149,7 +151,7 @@ Built differently from the proposal (DECISIONS 150), confirmed, DECISIONS 170: B
 |---|---|---|---|---|
 | `moment` | You're stretching against the park gates, bent over your knees, when somebody comes up behind you … | no | "You spin round." → `answer` | `walkin_run_zoe_today` set · `walkin_rest_zoe_today` set · `zoe_caught_up` set |
 | `answer` | Zoe, in tiny shorts and a sports top, bouncing on her toes, grinning. | no | "Let her run on." → `z_on` | — |
-|  |  |  | "Run with her." → `hub_zoe_park` `path` | — |
+|  |  |  | "Run with her." (10 Energy) → `hub_zoe_park` `lap` | `ran_with_zoe` set · `zoe_bailed` cleared · `zoe_run_booked` cleared |
 |  |  |  | "Dare me, Zo." (top on) → `zoe_park_dare` `ask` | — |
 | `z_on` | "Go on without me, Zo." · Zoe: "Your loss. You're still buying the coffee." She slaps her ass again and runs off | no | "Watch her go." → Park | — |
 
@@ -170,7 +172,7 @@ Built differently from the proposal (DECISIONS 150), confirmed, DECISIONS 170: B
 |---|---|---|---|---|
 | `moment` | You're stretched out on a bench by the pond with your eyes shut when somebody drops … | no | "A head lands in your lap." → `answer` | `walkin_rest_zoe_today` set · `walkin_run_zoe_today` set · `zoe_caught_up` set |
 | `answer` | Zoe, in tiny shorts and a sports top, her ponytail spread across your thighs, her face … | no | "Let her run on." → `z_on` | — |
-|  |  |  | "Run with her." → `hub_zoe_park` `path` | — |
+|  |  |  | "Run with her." (10 Energy) → `hub_zoe_park` `lap` | `ran_with_zoe` set · `zoe_bailed` cleared · `zoe_run_booked` cleared |
 |  |  |  | "Dare me, Zo." (top on) → `zoe_park_dare` `ask` | — |
 | `z_on` | "I'm not running, Zo. Go." · Zoe: "Lazy. Fine. Keep my pillow warm." She pats her thigh and jogs off | no | "Watch her go." → Park | — |
 
@@ -181,7 +183,7 @@ Built differently from the proposal (DECISIONS 150), confirmed, DECISIONS 170: B
 | host · who | `party_house_soak` · Zoe, the deck watching |
 | when | Sat 23:30-23:45 (pass 4: every screen lands before Zoe leaves at midnight) · odds 0.25, 0.35, 0.45 |
 | want | under the water her fingers brush Ella's pussy |
-| next step | "Let her." (after `zoe_together`, Hungry) |
+| next step | "Let her." (after `zoe_together`, Hungry, Exhibitionism 60) |
 | hook | none in the build: nothing reads `zoe_in_the_tub` |
 | the no | "Not here, Zo." or "Get out, dripping." |
 
@@ -189,10 +191,10 @@ Built differently from the proposal (DECISIONS 150), confirmed, DECISIONS 170: B
 
 | node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
 |---|---|---|---|---|
-| `moment` | You're naked in the tub up to your tits, the steam going up into the dark. | yes | "Her thigh is against yours." → `answer` | `walkin_tub_zoe_today` set · `zoe_in_the_tub` set |
-| `answer` | Under the water her hand lands on your thigh. | no | "Not here, Zo." (`zoe_together`) → `tub_no` | — |
+| `moment` | The hot tub steams on the back deck. | yes | "Strip and get in." → `answer` | `walkin_tub_zoe_today` set · `zoe_in_the_tub` set |
+| `answer` | You strip on the cold deck and get in. | no | "Not here, Zo." (`zoe_together`) → `tub_no` | — |
 |  |  |  | "Get out, dripping." (not `zoe_together`) → The Party House | Energy +5 (cap 100) · `late_party` set · `came_home_late` set |
-|  |  |  | "Let her." (`zoe_together` · Corruption 60+) → `tub_let` | Corruption +1 (cap 79) |
+|  |  |  | "Let her." (`zoe_together` · Corruption 60+ · Exhibitionism 60+) → `tub_let` | Corruption +1 (cap 79) · Exhibitionism +1 (cap 79) · Hygiene -10 · costs Energy 10 |
 | `tub_no` | You catch her wrist under the water and put her hand back on her own thigh. | no | "Get out, dripping." → The Party House | Energy +5 (cap 100) · `late_party` set · `came_home_late` set |
 | `tub_let` | You let her. | yes | "Get out, dripping." → The Party House | Energy +5 (cap 100) · `late_party` set · `came_home_late` set |
 
@@ -322,7 +324,7 @@ Built differently from the proposal (DECISIONS 150), confirmed, DECISIONS 170: B
 | `moment` | You're on the sidewalk looking up at the house next door when the front door opens. | no | "He looks at your legs." → `answer` | Mr. Vance's Want +2 (cap 100) · `walkin_house_vance_today` set · `vance_porch_look` set |
 | `answer` | He doesn't open the paper. | no | "Walk on." → `v_walk` | — |
 |  |  |  | "Stay where he can see your legs." (Exhibitionism 20+) → `v_stay` | Exhibitionism +1 (cap 39) |
-| `v_walk` | You don't turn round for him. | no | "Keep walking." → Your Street | — |
+| `v_walk` | You walk on, and behind you the rocking chair starts up again, slow. | no | "Keep walking." → Your Street | — |
 | `v_stay` | You stay. | no | "Walk on." → Your Street | — |
 
 ## B20 · `walkin_door_art`
@@ -392,7 +394,7 @@ Built differently from the proposal (DECISIONS 150), confirmed, DECISIONS 170: B
 | node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
 |---|---|---|---|---|
 | `door` | You've got your finger on your grade when Dr. Hale opens his door. | no | "Step back." → `no` | — |
-| `no` | You step back. He watches your legs go, and lets the door swing shut. (before his step 3) · You take a step back from his door. (from his step 3) | no | "Walk away." → Dr. Hale's Office | `walkin_door_hale_today` set · `hale_door_seen` set |
+| `no` | You step back. He watches your legs go, and lets the door swing shut. (before his step 3) · You take a step back from his door. (from his step 3) | no | "Walk away." → Faculty Floor | `walkin_door_hale_today` set · `hale_door_seen` set |
 
 ## B20 · `walkin_door_business`
 

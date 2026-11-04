@@ -1,5 +1,7 @@
 # [REVIEW] Place — Your Room
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Rows add "Take a nap".
+
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. New row: the refill walk-in B21, Ryan at her nap.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
@@ -22,7 +24,7 @@
 
 | auto-fires | who is here, and when | things to do alone | ways out |
 |---|---|---|---|
-| Ryan A 5, Friday 22:00–00:00: through the wall | nobody | sleep · change · study at the desk · make-up and hair at the mirror | the hall |
+| Ryan A 5, Friday 22:00–00:00: through the wall | nobody | sleep · nap · change · study at the desk · make-up and hair at the mirror | the hall |
 | Saturday morning after a heavy night |  |  |  |
 
 ## Rows (`serves`)
@@ -30,6 +32,7 @@
 | row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | sleep | need | energy | energy set 100 (guess) · the clock to 07:00 · `came_home_late`, `late_party`, `late_shift`, `late_date` set false | once a night | yes: her bed, never a toast |
+| take a nap | need | energy | "Sleep (2h)." 120 min · energy add +30, cap 100 · "Get up again." leaves it | once a day, on the trigger | yes |
 | change clothes | work | wardrobe | none · 1–2 clicks, saved outfits | none needed: it writes nothing | yes: the wardrobe screen |
 | study at the desk | work | college | 60 min · energy add −10 · the subject's grade add +1 (half the library's, guess) · alone, plain | `studied_home`, 12 h | yes, one line |
 | make-up and hair | work | wardrobe | 15 min · `made_up` set true; read for 10 hours by Laura, Zoe, Jake and Tom (a line each) | `made_up`, 10 h | yes: her face in the mirror |

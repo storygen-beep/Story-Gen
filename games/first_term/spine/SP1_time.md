@@ -1,5 +1,6 @@
 # [REVIEW] SP1 · Time — First Term
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Padding cut: the flag names are in `[engine.daily_tick]`.
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. The overnight counts: 127 flags, 42 of them walk-in caps.
 > Changed 2026-11-04: the overnight list adds Zoe's and Jake's patience and two flags (Q5); Mark's table counts nothing (Q6). Waits for LO's re-sign.
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
@@ -23,23 +24,12 @@
 | `curfew_days` | −1, never below 0 (Laura's curfew counts down) |
 | `zoe_patience` · `jake_patience` | +1 each, up to 6 and 3: a no-show or an ignored invite empties it, and her next invite waits until it is full (Q5) |
 | 42 walk-in caps | cleared: `walkin_<canvas>_today`, one per walk-in canvas, so each walker comes once a day |
-| 60 day caps | cleared: the `_today` flags below |
-| 25 once-a-day flags | cleared: listed below |
+| 60 day caps | cleared: the `_today` flags |
+| 25 once-a-day flags | cleared |
 | `hygiene` | falls 10 (`[player.trait_decay]`); with hygiene off nothing reads it |
 | not on the tick | `energy` (her bed refills it) · `drinks_boost` (ends 3 hours after the last drink) · `rent_short` (set each short Sunday, cleared only by a full payment) · `laura_rule_ryan_first` · every meter and step counter |
 
-**Day caps**, each `<name>_today`: zoe_park_dare, made_up, ryan_towel, street_step, vance_no, out_shown,
-ryan_hot, laura_love, mark_towel, laura_towel, cafe_shift_1, cafe_shift_2, cafe_shift_3, ryan_hall, slept,
-shower, wash, selfie, touch_bed, touch_shower, touch_toilet, eat, canteen_table, study_1, study_2, park_walk,
-park_run, park_rest, park_selfie, stairs_event, couch, vance_walk, ryan_things, mark_things, laura_wardrobe,
-hot_tub, dress_code, desk_guy, ryan_talk, laura_talk, ryan_cover, laura_caught, laura_call, jake_gym, zoe_face,
-grocery_asked, grocery_done, sunday_counted, toilet_bra, park_flash, hookup, shop_curtain, jake_lockers,
-jake_quad, zoe_table, zoe_bed, keg_counter, jake_bathroom, shop_touch, laura_portal.
-
-**Once-a-day flags:** said_eating_out, laura_dress_invite, ate_breakfast, had_coffee, ate_dinner, helped_cook,
-did_dishes, had_drink_home, watched_tv, movie_night, did_laundry, sunned, studied_home, hung_washing,
-home_event, couch_seen, mark_paid_look, mark_tv_paid, zoe_dared, worked_out, town_event, jake_date_went, tv_loud,
-zoe_ignored, jake_ignored.
+All 127 names are in `[engine.daily_tick]` in the TOML.
 
 **A flag that must cross midnight is never on the tick** (LO, 2026-10-07); it is read by hours since it was
 set. The party sets `party_went` and its late part reads hours since it, so midnight never splits one party.

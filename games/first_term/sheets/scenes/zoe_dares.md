@@ -1,5 +1,7 @@
 # [REVIEW] Scene — zoe_dares
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. The doing yeses cost Energy 10.
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 
 > The signed plans behind this page: `proposals/COPY_FIXES_B.md`.
@@ -37,12 +39,12 @@
 | Bold · Showing | "Topless in the kitchen till the song ends. Or his lap, till he's hard. Make him beg." | "Start the song." (Exhibitionism 40) → `high_show` (a two-entry pool with the built circle flash) · exhibitionism add +1 · corruption add +1 | "Easy." (Corruption 40 and Exhibitionism 20, mixed) → `high_do` · corruption add +1 · exhibitionism add +1 | "Not tonight." |
 | Zoe joins (after step 5) | "Kiss me where they can see. Or let me watch you with him." | "Here?" → `z_show` · both add +1 | "Watch, then." → `z_do` · both add +1 | "Not tonight." |
 
-Every pay is under her stage cap (19 / 39 / 59, DECISIONS 78). **The no:** Zoe pouts, "Boo. Next one's tamer." No cost
+Every pay is under her stage cap (19 / 39 / 59, DECISIONS 78). **The no:** Zoe pouts, "Boo. Next Friday, then." No cost
 but the meter.
 
 ## The regulars remember
 - A dare with the guy at the keg sets `keg_guy_dared`; with the cocky guy, `cocky_guy_dared`. At the next party, his
- line: keg guy, "You again. I'm keeping my cup this time." · cocky guy, "You again. Where's my beer?" Mine.
+ line: keg guy, "You again. Back for more?" · cocky guy, "You again. Come here." Mine.
 - **Jake** (`jake_step` gte 3, her boyfriend): a dare with a man adds one line. Cocky guy: "He's Jake's teammate. He'll
  tell Jake, or he won't." (the build : "Jake's teammate") · keg guy: "Half this party knows Jake." Jake finding out is
  a later release.
@@ -55,7 +57,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Where the t
 
 **`low_show`** · 136 words · explicit words 5 · median sentence 9
 
-> You walk straight to the keg with Zoe laughing behind you. The guy in the backwards cap is pumping it. You stand right in front of him and wait. He looks up. You grab your top and yank it up to your chin. Your tits are bare to him in the middle of the party. He freezes with the pump in his fist. Beer foams over his cup. Someone by the keg cheers. *Let the whole room look.* Your heart is slamming, and you hold it there one long second. The air is cold on your bare tits. Your nipples go tight and hard while he stares at them. Your face burns. You're wet, and your thighs press together. You pull your top down over your hard nipples, and your tits still tingle under it.
+> You walk straight to the keg with Zoe laughing behind you. The guy in the backwards cap is pumping it. You stand right in front of him and wait. He looks up. You grab your top and everything under it and yank it all up to your chin. Your tits are bare to him in the middle of the party. He freezes with the pump in his fist. Beer foams over his cup. Someone by the keg cheers. *Let the whole room look.* Your heart is slamming, and you hold it there one long second. The air is cold on your bare tits. Your nipples go tight and hard while he stares at them. Your face burns. You're wet, and your thighs press together. You pull your top down over your hard nipples, and your tits still tingle under it.
 
 **`low_do`** · 128 words · explicit words 6 · median sentence 11 · act rungs: touch · also played by Zoe's step 2, "Dare me something else."
 
@@ -65,7 +67,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Where the t
 
 **`high_show`** · 129 words · explicit words 4 · median sentence 9
 
-> "Start the song," you say, and Zoe hits play. You pull your top off over your head and drop it on the counter. Your tits are bare under the kitchen light. The guys by the fridge stop talking. The guy at the keg stops pumping and stares from the doorway, cap backwards, mouth open. You pour a drink and lean on the counter, ass pushed back. Someone lifts a phone and Zoe slaps it down. "Eyes only," she yells. Your nipples are hard and tight in the open air. You're wet, and you don't cover up. "Look all you want," you tell the room. You want her to dare you something worse. The song hits its last beat, and every eye in the kitchen is on your bare tits.
+> "Start the song," you say, and Zoe hits play. You strip to the waist, right there at the counter. Your tits are bare under the kitchen light. The guys by the fridge stop talking. The guy at the keg stops pumping and stares from the doorway, cap backwards, mouth open. You pour a drink and lean on the counter, ass pushed back. Someone lifts a phone and Zoe slaps it down. "Eyes only," she yells. Your nipples are hard and tight in the open air. You're wet, and you don't cover up. "Look all you want," you tell the room. You want her to dare you something worse. The song hits its last beat, and every eye in the kitchen is on your bare tits.
 
 **`high_show`, entry two:** the built circle flash (the build , signed in `party_dare.md`), Zoe's line "Flash them, babe. Three seconds."
 
@@ -81,7 +83,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Where the t
 
 **`z_do`** · 120 words · explicit words 7 (8 listed, one is "cocky") · median sentence 12 · act rungs: touch, hands
 
-> The cocky guy on the corner couch grins up at you and sets his beer on the floor. You straddle his lap and kiss him hard, with the whole room watching. His hands slide up under your top and close on your bare tits. His cock is hard under you through his jeans, and your hips roll on it. Zoe sits right beside you, close enough to touch. Her hand rests on your thigh. "Slower," she tells him, and he slows. His thumbs find your nipples. "Her nipples. Yes. Like that." You keep your eyes on Zoe while he touches you. You're wet, grinding down on his cock. His hands squeeze your tits, and Zoe's fingers press into your thigh.
+> The cocky guy on the corner couch grins up at you and sets his beer on the floor. You straddle his lap and kiss him hard, with the whole room watching. His hands slide up under your top, shove aside whatever's in the way, and close on your bare tits. His cock is hard under you through his jeans, and your hips roll on it. Zoe sits right beside you, close enough to touch. Her hand rests on your thigh. "Slower," she tells him, and he slows. His thumbs find your nipples. "Her nipples. Yes. Like that." You keep your eyes on Zoe while he touches you. You're wet, grinding down on his cock. His hands squeeze your tits, and Zoe's fingers press into your thigh.
 
 Every last sentence is on the body. None has her come; the dares stop where the release's door is.
 
@@ -101,9 +103,9 @@ One row per exit. Read from the build; it replaces the drafted map.
 | `dare` | Zoe finds you in the crush, hooks her chin over your shoulder, and looks round the … | yes | "Watch this." (Exhibitionism under 60 · Corruption 20+) → `low_do` | — |
 | | | | "Watch me." (not `zoe_together` · Exhibitionism 60+) → `low_show` | — |
 | | | | "Start the song." (not `zoe_together` · Exhibitionism 60+) → `high_show` | — |
-| | | | "Easy." (not `zoe_together` · Exhibitionism 60+ · Corruption 40+ · Exhibitionism 20+) → `high_do` | — |
+| | | | "Easy." (not `zoe_together` · Exhibitionism 60+ · Corruption 40+ · Exhibitionism 20+) → `high_do` | costs Energy 10 |
 | | | | "Here?" (`zoe_together` · Exhibitionism 60+) → `z_show` | — |
-| | | | "Watch, then." (`zoe_together` · Exhibitionism 60+) → `z_do` | — |
+| | | | "Watch, then." (`zoe_together` · Exhibitionism 60+) → `z_do` | costs Energy 10 |
 | | | | "Not tonight." → `no` | — |
 | `low_show` | You walk straight to the keg with Zoe laughing behind you. | yes | "Back to the party." — 2 versions, by flags → Zoe's Living Room | `zoe_dared` set · varies: Campus talk, Exhibitionism, Zoe's dares, `keg_guy_dared` set |
 | `low_do` | You take the beer out of his hand and set it on the counter. | yes | "Back to the party." — 2 versions, by flags → Zoe's Living Room | `zoe_dared` set · varies: Campus talk, Corruption, Exhibitionism, Zoe's dares, `cocky_guy_dared` set |
@@ -129,29 +131,29 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > The guy at the keg sees you and grins.
 >
-> You again. I'm keeping my cup this time.
+> You again. Back for more?
 >
-> You again. Where's my beer?
+> You again. Come here.
 
 **`zoe_dares` · `low_show`** — 428 words · 26 counted: tits, tits, tits, tits, tits, tits, tits, tits, tits, nipple, nipple, tits, nipple, tits, nipple, tits, nipple, tits, nipple, tits, nipple, tits, nipple, tits, nipple, tits · ceiling: Zoe's early and middle columns: tits, ass, nipples, wet; his cock only through his jeans
 
 > You walk straight to the keg with Zoe laughing behind you. The guy in the backwards cap is pumping it. You stand right in front of him and wait. He looks up.
 >
-> You grab your top and yank it up to your chin. Your tits are bare to him in the middle of the party.
+> You grab your top and everything under it and yank it all up to your chin. Your tits are bare to him in the middle of the party.
 >
-> You grab your dress and yank it up to your chin. Your tits are bare to him in the middle of the party.
+> You grab your dress and everything under it and yank it all up to your chin. Your tits are bare to him in the middle of the party.
 >
-> You grab your dress and yank it up to your chin. Your tits are bare to him in the middle of the party.
+> You grab your dress and everything under it and yank it all up to your chin. Your tits are bare to him in the middle of the party.
 >
-> You grab your uniform and yank it up to your chin. Your tits are bare to him in the middle of the party.
+> You grab your uniform and everything under it and yank it all up to your chin. Your tits are bare to him in the middle of the party.
 >
-> You grab your uniform and yank it up to your chin. Your tits are bare to him in the middle of the party.
+> You grab your uniform and everything under it and yank it all up to your chin. Your tits are bare to him in the middle of the party.
 >
 > You grab your bra and yank it up to your chin. Your tits are bare to him in the middle of the party.
 >
 > You're already bare on top, and you push your tits right out at him. They're bare to him in the middle of the party.
 >
-> You grab your clothes and yank it up to your chin. Your tits are bare to him in the middle of the party.
+> You grab your clothes and everything under it and yank it all up to your chin. Your tits are bare to him in the middle of the party.
 >
 > He freezes with the pump in his fist. Beer foams over his cup. Someone by the keg cheers.
 >
@@ -213,7 +215,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 
 > Start the song.
 >
-> You say, and Zoe hits play. You pull your top off over your head and drop it on the counter. Your tits are bare under the kitchen light. The guys by the fridge stop talking. The guy at the keg stops pumping and stares from the doorway, cap backwards, mouth open. You pour a drink and lean on the counter, ass pushed back. Someone lifts a phone and Zoe slaps it down.
+> You say, and Zoe hits play. You strip to the waist, right there at the counter. Your tits are bare under the kitchen light. The guys by the fridge stop talking. The guy at the keg stops pumping and stares from the doorway, cap backwards, mouth open. You pour a drink and lean on the counter, ass pushed back. Someone lifts a phone and Zoe slaps it down.
 >
 > Eyes only.
 >
@@ -281,7 +283,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 
 > You grab her face and kiss her, right there in the middle of the room. Her mouth opens under yours. Her tongue finds yours, slow and greedy. Her hands go into your hair, then slide down to your ass to pull you in hard. Your tits press flat against hers. Her thigh pushes between yours. You grind down on it. The room goes loud, whistles and shouting over the music. Then it goes quiet. Everyone stares. The cocky guy stands by the wall, his beer stopped halfway to his mouth. Zoe grins into the kiss. She squeezes your ass harder and drags you tighter onto her thigh. You're wet. Your nipples are hard against her tits.
 >
-> Mm. You taste like vodka. Again.
+> Mm. You taste good. Again.
 >
 > Everyone's watching us.
 >
@@ -293,21 +295,21 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 
 > The cocky guy on the corner couch grins up at you and sets his beer on the floor. You straddle his lap and kiss him hard, with the whole room watching.
 >
-> His hands slide up under your top and close on your bare tits.
+> His hands slide up under your top, shove aside whatever's in the way, and close on your bare tits.
 >
-> His hands slide up under your dress and close on your bare tits.
+> His hands slide up under your dress, shove aside whatever's in the way, and close on your bare tits.
 >
-> His hands slide up under your dress and close on your bare tits.
+> His hands slide up under your dress, shove aside whatever's in the way, and close on your bare tits.
 >
-> His hands slide up under your uniform and close on your bare tits.
+> His hands slide up under your uniform, shove aside whatever's in the way, and close on your bare tits.
 >
-> His hands slide up under your uniform and close on your bare tits.
+> His hands slide up under your uniform, shove aside whatever's in the way, and close on your bare tits.
 >
 > His hands push up under your bra and close on your bare tits.
 >
 > His hands slide up your stomach and close on your bare tits.
 >
-> His hands slide up under your clothes and close on your bare tits.
+> His hands slide up under your clothes, shove aside whatever's in the way, and close on your bare tits.
 >
 > His cock is hard under you through his jeans, and your hips roll on it. Zoe sits right beside you, close enough to touch. Her hand rests on your thigh.
 >

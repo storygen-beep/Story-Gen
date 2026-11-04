@@ -1,5 +1,7 @@
 # [REVIEW] Scene — laura_curfew_rule
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. `stairs` and `high` no longer name her shoes or the bench she has left.
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. once a day; the truths by where she was; want, next step and hook rows.
 
 > **New 2026-11-01, signed by LO 2026-11-01 ("Go ahead")** (DECISIONS 99–114). From Laura's signed release-1 ladder

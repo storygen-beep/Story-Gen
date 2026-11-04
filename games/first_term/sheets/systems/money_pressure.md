@@ -1,5 +1,7 @@
 # [REVIEW] System — money_pressure
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. `money` is declared spent in the ledger; "her cut", as the rent rises.
+
 > Changed 2026-11-04 (LO's answer Q6: the rent page takes the money and is the one count; Mark's Sunday table comes after and counts nothing). Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Rent reads `rent_short`; Vance's knock no longer clears it.
@@ -25,9 +27,9 @@
 | growth | climbs |
 | sink and deadline | the rent, to Mark, Vance behind him · Sunday 00:00 |
 | feeds | `paid_full_streak` (no `laura_suspicion` raise in 0.1; ledger change 25) |
-| reads | `money` · `rent_short_weeks` |
+| reads | `money` (the ledger marks it `"spent": true`: she spends it on purpose, so a read below a price is a price, not a descent) · `rent_short_weeks` |
 | what drives it | money against what she owes · `rent_short` · `rent_short_weeks` picks the cost · Mark's Power colours the table |
-| link into the hook | her $75 is part of what Mark owes Vance |
+| link into the hook | her cut is part of what Mark owes Vance |
 | leads to | Mark, Vance |
 | day 1 | from the scene where Mark says she pays rent now (`rent_starts`) |
 | BRAKE | the table fires once, Sunday morning only, on its trigger |

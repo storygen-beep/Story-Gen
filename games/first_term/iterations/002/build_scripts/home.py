@@ -133,7 +133,7 @@ out.append(solo("room_tidy", "Tidy your room",
 # ═════════════════════════════════════════════════════════════════════════════
 STRIP = [REMEMBER] + [{"action": "unequip", "item_id": g} for g in ALL_GARMENTS if g not in ("sneakers", "towel")]
 out.append(solo("bathroom_shower", "Take a shower",
-    "Hygiene +50, 20 minutes, once a day. Who's near reads who is home. Not while Ryan has the room.",
+    "Hygiene +50, 20 minutes, once a day. Who's near reads who is home. Not while Ryan or Laura has the room.",
     "home_bathroom", [
         node("shower", "The shower", [
             # C4 (DECISIONS 147): while `shower_unlocked` is set she left the lock off, and every line about the lock says so
@@ -184,7 +184,7 @@ out.append(solo("bathroom_shower", "Take a shower",
         node("unlocked", "The lock off", [
             P("You towel off with the lock off and the door open a crack, your nipples hard in the draft from the hall. Anybody coming down the hall gets the lot, and you take your time drying between your legs."),
         ], [go("Go out in the towel.", loc="home_hall")]),
-    ], conds=[here(R, "home_bathroom", False)], prio=5, max_day=1))
+    ], conds=[here(R, "home_bathroom", False), here(L, "home_bathroom", False)], prio=5, max_day=1))
 
 out.append(solo("bathroom_mirror", "Look in the mirror", "The bathroom mirror: one line by what she has on, slot by slot.",
     "home_bathroom", [
@@ -293,13 +293,14 @@ out.append(solo("living_couch", "Lie on the couch",
     "home_living_room", [
         node("couch", "The couch", [
             P("You stretch out on the couch, one knee up, the remote on your stomach."),
-            G(cond(*UNDIES, here(M, "home_kitchen")), P("Mark comes through from the kitchen with a beer and stops behind the couch. You're in your underwear, but he doesn't say cover up. He looks down the length of you, at your legs, at your ass in your panties. The beer stops halfway to his mouth."), D(M, "Comfortable, @player?"), ME("Very."), D(M, "Hm."), P("Then he goes, slowly.")),
+            G(cond(*UNDIES, here(M, "home_kitchen")), P("Mark comes through from the kitchen with a drink and stops behind the couch. You're in your underwear, but he doesn't say cover up. He looks down the length of you, at your legs, at your ass in your panties. The drink stops halfway to his mouth."), D(M, "Comfortable, @player?"), ME("Very."), D(M, "Hm."), P("Then he goes, slowly.")),
             # copy fix A17 (DECISIONS 125): his look by his Want band (npc_ryan.md:205 under 40; at 40 he stops pretending)
-            G(cond(*UNDIES, here(R, "home_ryan_room"), ntrait(R, "want", "lt", 40)), P("Ryan comes out of his room for a drink and stops at the end of the hall. His eyes go straight to your tits in your bra. Then they go up to the ceiling. \"Jesus, @player.nickname.\" He goes to the kitchen without looking again. He takes a long time getting that drink. On the way back up he holds the can in front of his shorts.")),
-            G(cond(*UNDIES, here(R, "home_ryan_room"), ntrait(R, "want", "gte", 40)), P("Ryan comes out of his room for a drink and stops at the end of the hall. His eyes go down you, your tits, your panties, and come back up slow. He doesn't pretend he wasn't looking. \"Jesus, @player.nickname.\" He takes a long time getting that drink. On the way back up he holds the can in front of his shorts.")),
+            G(cond(*UNDIES, here(R, "home_ryan_room"), ntrait(R, "want", "lt", 40)), P("Ryan comes out of his room for a drink and stops at the end of the hall. His eyes go straight to your tits in your bra. Then they go up to the ceiling. \"Jesus, @player.nickname.\" He goes to the kitchen without looking again.")),
+            G(cond(*UNDIES, here(R, "home_ryan_room"), ntrait(R, "want", "gte", 40)), P("Ryan comes out of his room for a drink and stops at the end of the hall. His eyes go down you, your tits, your panties, and come back up slow. He doesn't pretend he wasn't looking. \"Jesus, @player.nickname.\"")),
+            # reader 2026-11-04: her "Get me one too" goes while he is still on his way to the kitchen, before he comes back with the can
+            G(cond(*UNDIES, here(R, "home_ryan_room")), ME("Get me one too, Ryan."), D(R, "Get your own. And put some clothes on."), P("He takes a long time getting that drink. On the way back up he holds the can in front of his shorts.")),   # pass 3 B4
             G(cond(SKIRT), P("With your knee up, the skirt is nowhere. Anybody coming in from the hall would see straight up it.")),
             G(cond(*COVERED), P("Nobody looks twice at a girl on a couch in her clothes.")),
-            G(cond(*UNDIES, here(R, "home_ryan_room")), ME("Get me one too, Ryan."), D(R, "Get your own. And put some clothes on.")),   # pass 3 B4
         ], [*[c for who, stay in zip(PASSERS, ("stay_mark", "stay_ryan")) for c in brake(
                 go("Stay a while.", node=stay, mins=5, flags=[fset("couch_seen")],   # reader a3 #15 (DECISIONS 131): a screen, not a jump back
                    cond_=cond(DARING, *UNDIES, *who),   # a Daring act stops at Daring's top (pass 3 G8)
@@ -313,7 +314,7 @@ out.append(solo("living_couch", "Lie on the couch",
         node("stay_mark", "Stay a while", [
             P("You don't cover up. You stay on your back with one knee up, in your bra and panties, for whoever comes through next."),   # reader pass 3 b01: he may be gone by now; the pinned blocks say if he comes
             *pin_blocks([
-                P("Ten minutes later Mark comes back through from the kitchen, and this time he stops. He stands over you at the end of the couch with the beer. His eyes go down your tits in your bra to your panties, and stay there. The front of his jeans is tight."),
+                P("Ten minutes later Mark comes back through from the kitchen, and this time he stops. He stands over you at the end of the couch with the drink. His eyes go down your tits in your bra to your panties, and stay there. The front of his jeans is tight."),
                 D(M, "You're asking for it, lying there like that."),
                 ME("Asking for what?"),
                 G(cond(*ANY), GC(cond(*LAURA_IN_HOUSE, logic="OR"), D(M, "Not with your mother home.")),
@@ -328,7 +329,7 @@ out.append(solo("living_couch", "Lie on the couch",
             GC(cond(ntrait(R, "want", "lt", 40)),
                P("Ten minutes later Ryan comes out again, for nothing, and stops at the end of the hall. He looks at your tits in your bra, at your panties, and goes red to the ears, but he doesn't look away.")),
             GC(cond(*UNDIES),
-               P("Ten minutes later Ryan comes down again and sits on the arm of the couch, right by your feet. His eyes go down you slow, your tits, your panties, the inside of your raised knee. His cock is hard in his shorts, and he doesn't hide it.")),
+               P("Ten minutes later Ryan comes out again and sits on the arm of the couch, right by your feet. His eyes go down you slow, your tits, your panties, the inside of your raised knee. His cock is hard in his shorts, and he doesn't hide it.")),
             # its own chain: adjacent GCs would join the Want chain above
             G(cond(*ANY), GC(cond(*LAURA_IN_HOUSE, logic="OR"), D(R, "Not with Mom home, @player.nickname.")),
                           GC(cond(*ANY), D(R, "Mom'll be back, @player.nickname."))),
@@ -412,7 +413,7 @@ out.append(solo("master_wardrobe", "Go through Laura's wardrobe",
     "When both are out. Try on her things in her mirror; reads laura_blue_dress. Once a day.",
     "home_master_bedroom", [
         node("wardrobe", "Laura's wardrobe", [
-            P("Laura's wardrobe smells like her perfume. Work blouses, a winter coat, and at the back, in dry-cleaner plastic, dresses she hasn't worn since before Mark. Short ones. Tight ones. A red one with no back at all."),
+            P("Laura's wardrobe smells like her perfume. Work blouses, a winter coat, and at the back, in dry-cleaner plastic, dresses she never wears. Short ones. Tight ones. A red one with no back at all."),
             G(cond({"type": "clothing_item", "item_id": "laura_blue_dress", "operator": "owned"}, {"type": "clothing_item", "item_id": "laura_blue_dress", "operator": "unequipped"}),
               P("There's the gap on the rail where the blue one hung. It's in your room now. She gave it to you like it was nothing, and there's a whole rail of nothing back here.")),
             G(cond({"type": "clothing_item", "item_id": "laura_blue_dress", "operator": "equipped"}),
@@ -537,10 +538,11 @@ out.append({"id": "laura_alone_in_bed", "name": "Laura's door's ajar",
             [go("Keep watching.", node="watch", mins=5, flags=[fset("saw_laura_alone"), fset("laura_alone_seen")]),
              go("Pull the door to.", loc="home_hall", mins=2, flags=[fset("saw_laura_alone"), fset("laura_alone_seen")])]),
         # scene reader b02 (2026-11-03): her voice at her level: under Hungry she holds back; at Hungry her own hand moves
-        node("watch", "Keep watching", [GC(cond(trait("corruption", "lt", 60)), P(LAURA_WATCH)),
+        # reader 2026-11-04: her words first; the beat ends with her come and Ella backing away from the door
+        node("watch", "Keep watching", [G(cond(here(L, "home_master_bedroom")), D(L, "Mm. There. Right there."), D(L, "Don't stop. Don't you stop.")),
+            GC(cond(trait("corruption", "lt", 60)), P(LAURA_WATCH)),
             GC(cond(trait("corruption", "gte", 60)), P(LAURA_WATCH.replace("You press your thighs together. You do not touch yourself. You want to.",
                 "Your other hand is already inside your clothes. Two fingers on your clit, rubbing in time with hers, and you bite your lip so she won't hear you."))),
-            G(cond(here(L, "home_master_bedroom")), D(L, "Mm. There. Right there."), D(L, "Don't stop. Don't you stop.")),
             VID("a woman alone in bed fingering herself to orgasm, biting her hand to stay quiet", "woman fingering herself orgasm quiet in bed", "milf masturbating to orgasm biting hand", pool_dir="sex/laura_alone_watch_t5")],
             [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}, add("laura_gaps_watched", 1)], flags=[fset("saw_laura_alone"), fset("laura_alone_seen")])]),
     ]})
@@ -567,7 +569,7 @@ out.append({"id": "laura_alone_after", "name": "Laura's door's ajar",
         node("watch_after", "Keep watching", [P(beat("laura_alone_in_bed", "watch_after")),
             P("She'll leave the door ajar for you again, another night after ten. She knows you'll look."),   # reader pass 3 b01: the hook (her rows: Sun-Fri 22:00-23:00)
             VID("a woman on her side coming silently into a pillow, her hand between her thighs", "woman silent orgasm into pillow", "mom cums quietly facing the wall", pool_dir="sex/laura_alone_after_watch_t5")],
-            [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}, add("laura_gaps_watched", 1)], flags=[fset("saw_laura_alone"), fset("laura_alone_seen")])]),
+            [go("Lie still.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}, add("laura_gaps_watched", 1)], flags=[fset("saw_laura_alone"), fset("laura_alone_seen")])]),   # reader 2026-11-04: the beat has already put her in her room
     ]})
 
 # ── the shower gap (laura_shower_gap.md, signed 2026-11-01): Saturday 16:30-17:00, Laura showering before she
@@ -616,8 +618,8 @@ out.append({"id": "master_door_peek", "name": "Peek through the gap",
     "nodes": [node("peek", "Through the gap", [
         P("You ease the handle down and open the door a finger's width. The lamp is still on."),
         G(cond(here(L, "home_master_bedroom"), here(M, "home_master_bedroom")),
-          # pass 4 reader: Mark's row is awake till 01:00, so he is spent, not asleep. No next step and no hook, as signed (LO, 2026-11-04)
-          P("It's over. Mark's flat on his back with one arm over his eyes, getting his breath back. Laura lies awake beside him, staring at the ceiling, her nightdress still bunched up at her waist.")),
+          # pass 4 reader: no next step and no hook, as signed (LO, 2026-11-04). Reader 2026-11-04: awake or snoring (she may have stayed at the gap first), so no word on his breath
+          P("It's over. Mark's flat on his back with one arm over his eyes. Laura lies awake beside him, staring at the ceiling, her nightdress still bunched up at her waist.")),
         G(cond(here(M, "home_master_bedroom"), here(L, "home_master_bedroom", False)),
           P("Mark's sitting up against the headboard under the lamp, awake and alone, his phone lit in his hand. Laura's side of the bed is empty.")),
         P("Nobody looks at the door. You pull it to without a sound."),
@@ -662,8 +664,8 @@ sun_nodes = [
         # Iteration 002, part 8 (reader): the sun only while it's up; the garden is open to 21:00.
         G(cond(tod("07:00", "19:00")), P("You drag the lounger into the one patch of sun and lie down with your eyes shut. The grass smells cut. The fence is low.")),
         G(cond(tod("19:00", "21:00")), P("You drag the lounger out and lie down in the last of the light, eyes shut. The grass smells cut. The fence is low.")),
-        GC(cond(*TOPLESS), P("Topless, on your front, the sun on your back and the side of your tits pressed flat to the lounger.")),
-        GC(cond(*BRA_ONLY), P("Your bra and nothing over it, the sun on your stomach.")),
+        GC(cond(*TOPLESS), P("Topless, on your front, the side of your tits pressed flat to the lounger.")),
+        GC(cond(*BRA_ONLY), P("Your bra and nothing over it, your stomach bare.")),
         GC(cond(*ANY), P("In what you have on, face to the sky.")),
         G(cond(MARK_SEES), P("The garage door is open. Mark's radio is on in there, and once the radio goes quiet you know he's standing in the doorway."), D(M, "Is that what you call sunbathing?"), ME("It's what I call lying down, Mark.")),
         G(cond(RYAN_SEES), P("Ryan's window is open above you. His music stops."), D(R, "Seriously, @player.nickname? In the garden?"), ME("Close your curtains, then.")),
@@ -707,14 +709,14 @@ sun_nodes = [
     ], [go("Go in.", loc="home_hall")]),
     node("sun_hour", "An hour in the sun", [
         # scene reader b02 (2026-11-03): the garden is open to 21:00, so an hour that ends after 20:00 ends in the dusk
-        GC(cond(tod("07:00", "20:00")), P("An hour later you sit up, slow and heavy. Your skin is hot and pink all over, the lounger has printed its slats across the backs of your thighs, and sweat has run down between your tits.")),
-        GC(cond(*ANY), P("An hour later you sit up in the dusk, slow and heavy. The light has gone off the garden, the lounger has printed its slats across the backs of your thighs, and the cool air has your nipples standing up hard.")),
+        GC(cond(tod("07:00", "20:00")), P("An hour later you sit up, slow and heavy. Your skin is hot, the lounger has printed its slats into you, and sweat has run down between your tits.")),
+        GC(cond(*ANY), P("An hour later you sit up in the dusk, slow and heavy. The light has gone off the garden, the lounger has printed its slats into you, and the cool air has your nipples standing up hard.")),
     ], [go("Get up off the lounger.", loc="home_garden")]),
     node("sun_wave", "Wave up at Ryan", [
         # pass 4 reader: his line by the clock (the screen renders after the hour, so the sun is up till 20:00, as
         # sun_hour), and the flirt only from Curious (H1: a chosen flirt is stage 2), on her body, with its not-yet
         GC(cond(RYAN_SEES, tod("07:00", "20:00"), trait("corruption", "lt", 20)),
-           P("You wave up at his window. Ryan jerks back from the glass, then comes back and lifts a hand, red to the ears. His eyes go down your bare legs on the lounger before he can stop them."),
+           P("You wave up at his window. Ryan jerks back from the glass, then comes back and lifts a hand, red to the ears. His eyes go down your legs on the lounger before he can stop them."),
            D(R, "Put some sun cream on. You'll fry."), ME("Yes, Mom."), P("He laughs and shuts the window. Every time you stretch, the curtain moves.")),
         GC(cond(RYAN_SEES, tod("07:00", "20:00"), CURIOUS),
            P("You wave up at his window. Ryan jerks back from the glass, then comes back and lifts a hand, red to the ears."),
@@ -722,7 +724,7 @@ sun_nodes = [
            P("His eyes go down your body on the lounger, your tits, your stomach, your legs, and he grips the sill. He doesn't come down. Not yet."),
            P("All hour, every time you shift on the lounger and stretch, his curtain moves.")),
         GC(cond(RYAN_SEES, trait("corruption", "lt", 20)),
-           P("You wave up at his window. Ryan jerks back from the glass, then comes back and lifts a hand, red to the ears. His eyes go down your bare legs on the lounger before he can stop them."),
+           P("You wave up at his window. Ryan jerks back from the glass, then comes back and lifts a hand, red to the ears. His eyes go down your legs on the lounger before he can stop them."),
            D(R, "You'll freeze out there, @player.nickname."), ME("Yes, Mom."), P("He laughs and shuts the window. Every time you stretch, the curtain moves.")),
         GC(cond(RYAN_SEES, CURIOUS),
            P("You wave up at his window. Ryan jerks back from the glass, then comes back and lifts a hand, red to the ears."),
@@ -742,13 +744,13 @@ sun_nodes = [
         GC(cond(tod("07:00", "19:00"), MARK_SEES), D(M, "You'll burn, @player.")),   # the sun only while it's up (the lounger's own split)
         GC(cond(*ANY, MARK_SEES), D(M, "Fence is low, @player.")),
         G(cond(MARK_SEES), ME("You can come out, you know. It's your garden."), D(M, "I can see fine from here.")),
-        P("He doesn't come out. After the hour he goes back to his bench, and the radio comes on loud."),
+        G(cond(MARK_SEES), P("He doesn't come out. After the hour he goes back to his bench, and the radio comes on loud.")),
     ], [go("Get up.", loc="home_garden", mins=55)]),
     node("sun_ryan", "Ryan's window", [G(cond(RYAN_SEES), P("His window is open above you. He isn't pretending to look at his screen any more."))], [
         *brake(go("Stretch out for him.", node="sun_ryan_tease", flags=[fset("sunned")], eff=[npc_add(R, "want", 1)],
                   cond_=cond(*BRA_ONLY)), "sunned"),
         *brake(go("Call him down with the sun lotion.", node="sun_ryan_touch", flags=[fset("sunned")],
-                  cond_=cond(BOLD, trait("ryan_step", "gte", 7)),
+                  cond_=cond(BOLD, trait("ryan_step", "gte", 7), here(M, "home_garage", False)),   # "Somebody's going to look out a window" is only true with Mark not in the garage door
                   eff=[npc_add(R, "want", 1), {"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 59}]), "sunned"),
         go("Not today.", loc="home_garden")]),
     node("sun_mark", "The garage door", [G(cond(MARK_SEES), P("Mark's in the garage door with a beer, and he hasn't gone back in."))], [
@@ -791,11 +793,11 @@ out.append(solo("front_step", "Sit on the step", "Watch the street. Who passes r
                    WHO("Now that's a lovely view."), ME("Keep walking.")),   # reader pass 3 b00: the pool runs 07:00-21:00, not only evenings
                 GC({"version": "1.0", "logic": "AND", "items": []}, P("Two doors down a man is washing his car, and he stops washing it when you sit down."),
                    WHO("You want a job? I pay in ice cream."), ME("I'm good, thanks.")))),
-            GC(cond(tod("21:00", "07:00")), P("The street is dark and quiet, the porch light on its timer. A car passes now and then, slow, headlights sliding over you, but nobody stops.")),
+            GC(cond(tod("21:00", "07:00")), P("The street is dark and quiet, the porch light on its timer. A car passes now and then, slow, headlights sliding over you.")),
             # LO 2026-11-03: the street speaks. G (a pool) breaks the clock chain above.
             G(cond(tod("07:00", "21:00")), WHO("Don't get up on my account.")),
             G(cond(tod("21:00", "07:00")), P("A window comes down on a passing car."), WHO("Hey, beautiful! Want a ride?"),
-              ME("Not from you."), WHO("Your loss, sweetheart."), P("He laughs, and the car pulls off, slow, his eyes on your legs in the mirror till the corner.")),   # reader pass 4 b4: the written no
+              ME("Not from you."), WHO("Your loss, legs."), P("He laughs, and the car pulls off, slow, his eyes on your legs in the mirror till the corner.")),   # reader pass 4 b4: the written no
             # DECISIONS 124: showing the street is showing a group, Watched (Exhibitionism 60); under it she keeps her knees down
             # reader a3 #9 (DECISIONS 131): the E60 lines only by day, beside a watcher, and each holds a not-yet
             G(cond(SKIRT, slot("underwear"), trait("exhibitionism", "gte", 60), tod("07:00", "21:00")), P("With your knees up in this skirt, anyone passing can see your panties. A man across the road stops with his keys in his hand and looks straight between your knees. You could put your knees down, but you don't. You don't open them for him either. Not yet.")),
@@ -807,7 +809,7 @@ out.append(solo("front_step", "Sit on the step", "Watch the street. Who passes r
             go("Go back in.", loc="home_hall", mins=20)]),
         # reader a3 #3 (DECISIONS 131): a passer-by's reaction and a price (the neighbor's phone: Mom's suspicion +2)
         node("street_sees", "Let the street see", [
-            GC(cond(slot("underwear")), P("You let your knees fall open on the step. The skirt slides up your thighs, and your panties are right there for the street, the cotton pulled tight over your cunt.")),
+            GC(cond(slot("underwear")), P("You let your knees fall open on the step. The skirt slides up your thighs, and your panties are right there for the street, the fabric pulled tight over your cunt.")),
             GC(cond(slot("underwear", False)), P("You let your knees fall open on the step. The skirt slides up your thighs, and there's nothing under it. Your cunt is bare to the street, and the air is cool on it.")),
             P("A man coming up the sidewalk with his shopping sees. He slows right down. His eyes go between your knees and stay there, and he walks into the gate post two doors down. He goes past twice."),
             WHO("Jesus. Sorry. Jesus Christ."),   # LO 2026-11-03
@@ -877,7 +879,7 @@ out += event("home_event_ryan_towel", "Ryan out of the shower", "home_hall", S([
                  P("His eyes drop down your sleep shirt to your bare legs and jump back to your face. He goes red. He turns side-on, one fist tight on the front of his towel.")),
               GC(cond(*ANY),
                  P("His eyes drop to your tits and jump back to your face. He goes red. He turns side-on, one fist tight on the front of his towel.")),
-              D(R, "Sorry. Shit. Morning."), ME("Morning. You're dripping on me."), D(R, "Bathroom's free. Go on. Go."),
+              D(R, "Sorry. Shit. Morning."), ME("Morning. You're dripping on me."), D(R, "Two more minutes. Go on. Go."),
               T("He's out of that bathroom at this time every weekday.")],   # reader a3 older: a hook
              # pass 3 G12: he sees her, so the moment raises his Want +2 (as the walk-ins do) on the way in, and records it
              # on every exit alike, so it is never a raise for her answer (C1, LO 2026-11-03; H5: a no adds 0); her bolder

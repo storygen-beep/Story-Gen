@@ -1,5 +1,7 @@
 # [REVIEW] Scene — jake_04_sneak_him_in
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. `comes`: "Lie there." takes Energy 10 and Hygiene 10.
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 
 > **Changed 2026-11-02** (reader fails a3, signed by LO 2026-11-02, DECISIONS 131): row 22, `after` now points ahead: Jake mumbles "Next Saturday. Same room." before he falls asleep (`jake.py`).
@@ -35,7 +37,7 @@ The seven columns, filled from what the build does.
 
 | the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
 |---|---|---|---|---|---|---|
-| she sneaks him up; they fuck on her bed against Ryan's wall | Ryan, through the wall; a footstep if her door is unlocked | Laura and Mark down the hall | "Come up." then "Harder." | "Your room. Now." He pins her wrists | yes, on the body | his step 4; `jake_first_time`; Corruption +3; Ryan's Want +5 |
+| she sneaks him up; they fuck on her bed against Ryan's wall | Ryan, through the wall; a footstep if her door is unlocked | Laura and Mark down the hall | "Come in." then "Harder." | "Your room. Now." He pins her wrists | yes, on the body | his step 4; `jake_first_time`; Corruption +3; Ryan's Want +5 |
 
 ## Branch map — as built (2026-11-03)
 
@@ -47,12 +49,12 @@ One row per exit. Read from the build; it replaces the drafted map.
 |---|---|---|---|---|
 | `door` | Jake walks you up to the porch and stops under the light. | no | "Quiet." → `bed` | — |
 | | | | "Goodnight, Jake." → `next_sat` | — |
-| `next_sat` | He grins and walks backwards down the path, all the way to the car. | no | "Go in." → Hall | `jake_date_booked` cleared · `late_date` set · `came_home_late` set · back in 7 days |
+| `next_sat` | He grins and backs out the front door, and walks backwards down the path, all the way to the car. | no | "Shut the door." → Hall | `jake_date_booked` cleared · `late_date` set · `came_home_late` set · back in 7 days |
 | `bed` | Your door clicks shut behind you both, and Jake is all hands. | yes | "Harder." → `wall` | — |
 | `wall` | Jake pins your wrists above your head and fucks you harder. | yes | "Don't stop." (`her_door_unlocked`) → `landing` | — |
 | | | | "Don't stop." (not `her_door_unlocked`) → `comes` | — |
 | `landing` | A footstep in the hall. | no | "Don't stop." → `comes` | — |
-| `comes` | You come first. | yes | "Lie there." → `after` | — |
+| `comes` | You come first. | yes | "Lie there." → `after` | Energy -10 · Hygiene -10 |
 | `after` | Jake pulls you in against his chest and mumbles it into your hair, already half asleep. | no | "Sleep (6h)." → Your Room | Corruption +3 (cap 79) · Jake's step = 4 · Ryan's Want +5 · `jake_04_done` set · `jake_first_time` set · `jake_date_booked` cleared · `late_date` set · `came_home_late` set |
 
 ## The explicit screens, written
@@ -75,7 +77,7 @@ Every last sentence is on the bodies (the headboard and his cock; still inside h
 
 ## The other screens (mine, signed by LO 2026-11-01)
 
-**`door`:** "Jake walks you up to the porch and stops under the light. You don't let go of his hand. You open the front door and pull him in after you." · @player, a whisper: "Come up." · "In the dark hall he catches your hip and his breath is hot on your ear." · Jake: "Your room. Now."
+**`door`:** "Jake walks you up to the porch and stops under the light. You don't let go of his hand. You open the front door and pull him in after you." · @player, a whisper: "Come in." · "In the dark hall he catches your hip and his breath is hot on your ear." · Jake: "Your room. Now."
 **`landing`:** "A footstep in the hall. You both freeze. Your door has no key. Mark's still got it." · "Jake's hand goes over your mouth. The footstep stops, and then goes on, and a door closes." · "He doesn't pull out. He starts again, slower."
 **`after`:** "Jake pulls you in against his chest and mumbles it into your hair, already half asleep." · Jake: "Next Saturday. Same room." · "He's asleep in under a minute, one arm heavy across you, taking up most of the bed." · if `ryan_step` gte 5: "Through the wall, very low, so low you might have dreamed it:" · Ryan: "…@player.nickname?" · *(thought)* "He heard. Every second."
 
@@ -146,4 +148,4 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 
 | node | the no | the reply (mine, signed by LO 2026-11-01) |
 |---|---|---|
-| `door` | "Goodnight, Jake." | Jake: "Next Saturday, then. Your room." · "He grins and walks backwards down the path, all the way to the car." The step waits for the next date, as before. |
+| `door` | "Goodnight, Jake." | Jake: "Next Saturday, then. Your room." · "He grins and backs out the front door, and walks backwards down the path, all the way to the car." The step waits for the next date, as before. |

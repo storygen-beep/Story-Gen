@@ -670,8 +670,6 @@ goes_to = { type = "canvas", canvas_id = "ryan_door_ajar" }
 [[locations.door.options]]
 text = "Go in."
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_absent" }] }
-show_when_locked = true
-locked_text = "He's in there. Knock first."
 goes_to = { type = "enter" }
 
 [[locations]]
@@ -1353,6 +1351,13 @@ activity   = "awake, alone"
 
 [[npcs.schedules]]
 location   = "home_master_bedroom"
+weekdays   = [6]
+start_time = "00:00"
+end_time   = "01:00"
+activity   = "awake, with Mark"
+
+[[npcs.schedules]]
+location   = "home_master_bedroom"
 weekdays   = [6, 0, 1, 2, 3, 4]
 start_time = "23:00"
 end_time   = "06:30"
@@ -1364,13 +1369,6 @@ weekdays   = [5]
 start_time = "00:00"
 end_time   = "07:00"
 activity   = "asleep"
-
-[[npcs.schedules]]
-location   = "home_master_bedroom"
-weekdays   = [6]
-start_time = "00:00"
-end_time   = "01:00"
-activity   = "awake, with Mark"
 
 [[npcs.schedules]]
 location   = "home_master_bedroom"

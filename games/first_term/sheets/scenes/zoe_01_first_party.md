@@ -76,7 +76,7 @@ One row per exit. Read from the build; it replaces the drafted map.
  `zoe_step` stays 0 and `zoe_kiss_refused` is set.
 - New screen `zoe_01b_kiss_again` ("Same dare"): a later Friday party, 7 to 11 PM, at least 24 hours after the no, only
  from Curious. Zoe: "You chickened out on me last time. Same dare. Kiss someone. I told you I'd keep asking." From the
- second no, also: "That's twice you've said no, babe. I'm counting." Yes: "Kiss Zoe." or "Kiss the guy by the
+ second no only, also: "That's twice you've said no, babe. I'm counting." Yes: "Kiss Zoe." or "Kiss the guy by the
  speakers." (Exhibitionism +3, her step 1). No: "Boo. Next Friday, then. I'm not giving up on you." (`zoe_refused` +1,
  back in a week). Lines mine, signed by LO 2026-11-03 ("Signed").
 - Her card while she waits: "You said no to her kiss dare. She said she'd keep asking." · goal Reach Curious (Corruption 20).

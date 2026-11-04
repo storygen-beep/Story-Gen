@@ -1,5 +1,5 @@
-# [READY] The Want — First Term
-
+# [REVIEW] The Want — First Term
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. The rent runs $75, $90, $100; the rent page takes it (Q6); goal 1 ends on four Sundays in a row; one hall (Q7).
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-09). One page, five parts. Doctrine: `references/the-want.md`.
 > **Re-read this before every release.** Bump `want.last_read_at_release` in `v2_state.json`.
 > Premise picked by LO 2026-10-02: **taboo at home** — the house is the centre; college, the job and
@@ -33,11 +33,11 @@ answer sets a flag that later scenes read. A memory, never a stat screen.
 ## 2. What holds her
 
 The family rents the house from Mr. Vance for $1,200 a month. Now that she is 18, Mark says she
-pays her cut: a quarter, **$75 every Sunday**, counted out on the kitchen table. Short means Mark
+pays her cut every Sunday: **$75, then $90 after $300 paid and $100 after $900, then flat**. The rent page takes it, and Mark sits her at the kitchen table after and counts nothing (Q6). Short means Mark
 decides what happens next. Behind Mark stands Vance, who owns the house and lives next door, and
 who comes knocking when the family is late.
 
-**Hold kind:** `bill` · **collector:** Mark. Numbers here are placeholders until the board sets them.
+**Hold kind:** `bill` · **collector:** Mark. The board has set the numbers (SP4).
 
 ## 3. What she wants
 
@@ -45,8 +45,8 @@ To be wanted by the people she shouldn't want. That never finishes; it is where 
 where she starts.
 
 **The goal that pulls the player:** pay her own way: earn enough of her own money that Sunday
-rent is paid her way, not Mark's. Rent never stops; the goal ends the day she, not Mark, sets how
-it is paid. When it is met, the next goal opens: her name on campus (the chain is on the idea
+rent is paid her way, not Mark's. Rent never stops; the goal ends on four Sundays in a row paid in
+full from her own money (SP4). When it is met, the next goal opens: her name on campus (the chain is on the idea
 page).
 
 **The charge:** taboo first (the house and the family in it), transformation on top (who she
@@ -57,7 +57,7 @@ turns into).
 **Early:** flirting across the café counter for tips; Ryan catching her in a towel outside the
 bathroom; a kiss at a campus party; her mom almost noticing.
 
-**Late:** Ryan in her room while her mom is downstairs; Laura and Ella closer than a mother and
+**Late:** Ryan in her room while her mom is down the hall; Laura and Ella closer than a mother and
 daughter should be; Sunday rent paid her own way; café regulars paying for more; Dr. Hale's office
 after hours; Vance's porch when the family is short.
 
@@ -90,7 +90,7 @@ Zoe is the companion, one step ahead of Ella.
 | `job` | `npc_tom` | `cafe` | job (shifts, tips) | it pays her cut of the rent |
 | `friends` | `npc_zoe` | `zoe_apartment` | parties | what she brings home late |
 | `dating` | `npc_jake` | `campus` | none — Jake's dates, Wednesday and Saturday (DECISIONS 138), booked on his phone thread (not a system, `SYSTEMS.md` §12, LO 2026-10-07) | Ryan sees |
-| `neighbourhood` | `npc_vance` | `vance_house` | money pressure | her $75 is part of what Mark owes him |
+| `neighbourhood` | `npc_vance` | `vance_house` | money pressure | her cut is part of what Mark owes him |
 
 ---
 

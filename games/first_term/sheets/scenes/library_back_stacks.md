@@ -39,7 +39,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 
 **`library_back_stacks` · `stacks`** — 154 words · 7 counted: tits, thrust, cock, moan, nipple, thrust, cock · ceiling: strangers' words (DECISIONS 41): tits, nipples, ass, cock, wet, clit
 
-> The back aisles are dead quiet. You run a finger along the spines, hunting a call number. Then you hear it. A soft knock of books on wood, steady, over and over. A muffled sound under it. You turn the corner. Two seniors fill the dead end of the stacks. She is up on the edge of a low shelf, skirt shoved to her waist, legs locked round him. Her top is pushed up and her tits bounce with every thrust. His jeans hang open. You see his cock slide out of her, wet, and drive back in. His hand is clamped over her mouth. She moans into his palm anyway. Your face goes hot. You stop dead at the end of the aisle. Her nipples are hard. He thrusts again, and the books knock.
+> The back aisles are dead quiet. You run a finger along the spines and pull down your book. Then you hear it. A soft knock of books on wood, steady, over and over. A muffled sound under it. You turn the corner. Two seniors fill the dead end of the stacks. She is up on the edge of a low shelf, skirt shoved to her waist, legs locked round him. Her top is pushed up and her tits bounce with every thrust. His jeans hang open. You see his cock slide out of her, wet, and drive back in. His hand is clamped over her mouth. She moans into his palm anyway. Your face goes hot. You stop dead at the end of the aisle. Her nipples are hard. He thrusts again, and the books knock.
 >
 > Shh. Quiet. Take my cock and keep quiet.
 >

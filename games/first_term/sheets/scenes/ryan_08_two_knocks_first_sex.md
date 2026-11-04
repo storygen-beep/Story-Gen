@@ -1,5 +1,9 @@
 # [REVIEW] Scene — ryan_08_two_knocks_first_sex
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. The three finishes: "Lie there." also takes Energy 10 and Hygiene 10.
+
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. `light`: Ryan's "Laura," cut (he calls her Mom).
+
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. Where Mark is: the living room, in the notes only (Q7). No beat changed.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the talk and doubt buttons as built; his +5 sits on the three finishes, not the terms; no "Further." button; the step row. the explicit beats as built, measured. file and line cites cut.
@@ -63,9 +67,9 @@ no she can come back from (the parked no: "Not tonight." returns the step the ne
 | `light` | across the hall, a line of light comes on under Laura's door; he's buried in her; they both see it (today's `wall`, rewritten to fit all three positions) | yes | "Keep going." → `keep` · "Freeze." → `freeze` | none |
 | `keep` | **new.** He fucks her harder, his hand over her mouth; the bed or the wall knocks; Laura's light stays on | yes | "Inside me." → `inside` · "On me." → `on` · "In my mouth." → `mouth` | none |
 | `freeze` | **new.** They hold still, him deep in her, hearts slamming, listening; the light goes off; he starts again, slow, so slow she's shaking | yes | "Inside me." → `inside` · "On me." → `on` · "In my mouth." → `mouth` | none |
-| `inside` | he comes inside her (as written, one line on the knocking fitted to the position) | yes | "Lie there." → `after` | Ryan's Want add +5 (on the sex) |
-| `on` | he pulls out and comes on her tits and stomach (as written, fitted to the position) | yes | "Lie there." → `after` | Ryan's Want add +5 (on the sex) |
-| `mouth` | **new.** She gets off him, onto her knees, and he comes in her mouth; she swallows | yes | "Lie there." → `after` | Ryan's Want add +5 (on the sex) |
+| `inside` | he comes inside her (as written, one line on the knocking fitted to the position) | yes | "Lie there." → `after` | Ryan's Want add +5 (on the sex) · energy add −10 · hygiene add −10 |
+| `on` | he pulls out and comes on her tits and stomach (as written, fitted to the position) | yes | "Lie there." → `after` | Ryan's Want add +5 (on the sex) · energy add −10 · hygiene add −10 |
+| `mouth` | **new.** She gets off him, onto her knees, and he comes in her mouth; she swallows | yes | "Lie there." → `after` | Ryan's Want add +5 (on the sex) · energy add −10 · hygiene add −10 |
 | `after` | **new.** Her feeling, its own beat: her head on her brother's chest, his cum on her or in her, his heart going; she isn't sorry, and that's the part that scares her | no | "Ask him." → `terms` | none |
 | `terms` | as signed: "So what is this?"; the Jake line stays | no | "Keep Kayla. I'm the secret." · "Mom finds out when I want." · "You're my brother, that's all." (ends his path) → the hall | `ryan_step` set 8 and its term flag (the last: `ryan_step` set -1, the knock code cleared) · nothing of his |
 
@@ -131,7 +135,7 @@ positions or none is named. The `vaginal` rung on some oral or hand screens is t
 
 **`light`** · 121 words · explicit words 9 · median sentence 8
 
-> "Harder," you gasp, and Ryan gives it to you. He fucks you so hard the bed shakes. The headboard bangs your wall on every stroke, loud. Across the hall, Laura's floorboards creak. Ryan hears it. "Laura," he breathes. Ryan goes still for a second, his cock buried to the root in your cunt. Neither of you breathes. You clap a hand over your own mouth. *She's awake.* His cock throbs inside you. Your tits heave against your arm. Your wet cunt clenches around him on its own, and he swears through his teeth. His fingers dig into your ass. He's so deep you can feel him twitch. You squeeze his cock again, and his hips jerk once, deeper into your cunt.
+> "Harder," you gasp, and Ryan gives it to you. He fucks you so hard the bed shakes. The headboard bangs your wall on every stroke, loud. Across the hall, Laura's floorboards creak. Ryan hears it. Ryan goes still for a second, his cock buried to the root in your cunt. Neither of you breathes. You clap a hand over your own mouth. *She's awake.* His cock throbs inside you. Your tits heave against your arm. Your wet cunt clenches around him on its own, and he swears through his teeth. His fingers dig into your ass. He's so deep you can feel him twitch. You squeeze his cock again, and his hips jerk once, deeper into your cunt.
 
 **`keep`** · 132 words · explicit words 11 · median sentence 8
 

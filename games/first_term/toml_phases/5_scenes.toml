@@ -80,7 +80,7 @@ content = "You pick it up. You read the whole thing, out loud in your head, and 
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Babe. Friday. Back door, after everyone's asleep. And this time you don't get to fall asleep on me."
+content = "Babe. Friday. Back door. And this time you don't get to fall asleep on me."
 props = { speaker = "unknown" }
 
 [[canvases.nodes.blocks]]
@@ -384,7 +384,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Go to bed."
 targetType = "location"
-locationId = "home_hall"
+locationId = "home_ella_room"
 time_progression_minutes = 2
 retry_after_days = 1
 
@@ -907,7 +907,7 @@ type = "choices"
 text = "Leave the towel."
 targetType = "node"
 nodeId = "look"
-time_progression_minutes = 3
+time_progression_minutes = 0
 wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "towel" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -965,7 +965,7 @@ type = "choices"
 text = "Watch him."
 targetType = "node"
 nodeId = "comes"
-time_progression_minutes = 3
+time_progression_minutes = 0
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 3, cap = 79 }, { targetType = "player", trait = "corruption", op = "add", value = 1, clamp = true, cap = 79 }]
 
 [[canvases.nodes]]
@@ -1005,7 +1005,7 @@ type = "choices"
 text = "Take your time drying off."
 targetType = "node"
 nodeId = "after6"
-time_progression_minutes = 15
+time_progression_minutes = 21
 
 [[canvases.nodes]]
 id   = "after6"
@@ -1026,7 +1026,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Go to your room."
 targetType = "location"
-locationId = "home_hall"
+locationId = "home_ella_room"
 time_progression_minutes = 2
 effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 5 }, { targetType = "player", trait = "ryan_step", op = "set", value = 6 }]
 flagEffects = [{ targetType = "player", flag = "ryan_06_done", op = "set" }, { targetType = "player", flag = "kayla_met", op = "set" }]
@@ -1258,7 +1258,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Go to your room."
 targetType = "location"
-locationId = "home_hall"
+locationId = "home_ella_room"
 time_progression_minutes = 2
 effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 5 }, { targetType = "player", trait = "corruption", op = "add", value = 3, cap = 79 }, { targetType = "player", trait = "ryan_step", op = "set", value = 7 }, { targetType = "player", trait = "energy", op = "add", value = -10, clamp = true }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "ryan_07_done", op = "set" }]
@@ -1779,16 +1779,7 @@ props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "You gasp, and Ryan gives it to you. He fucks you so hard the bed shakes. The headboard bangs your wall on every stroke, loud. Across the hall, Laura's floorboards creak. Ryan hears it."
-
-[[canvases.nodes.blocks]]
-type = "dialog"
-content = "Laura."
-props = { speaker = "npc", npcId = "npc_ryan" }
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "He breathes. Ryan goes still for a second, his cock buried to the root in your cunt. Neither of you breathes. You clap a hand over your own mouth."
+content = "You gasp, and Ryan gives it to you. He fucks you so hard the bed shakes. The headboard bangs your wall on every stroke, loud. Across the hall, Laura's floorboards creak. Ryan hears it. Ryan goes still for a second, his cock buried to the root in your cunt. Neither of you breathes. You clap a hand over your own mouth."
 
 [[canvases.nodes.blocks]]
 type = "thought_bubble"
@@ -2312,7 +2303,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Back to your room."
 targetType = "location"
-locationId = "home_hall"
+locationId = "home_ella_room"
 time_progression_minutes = 1
 flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
 
@@ -2407,7 +2398,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Back to your room."
 targetType = "location"
-locationId = "home_hall"
+locationId = "home_ella_room"
 time_progression_minutes = 1
 flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
 
@@ -2556,7 +2547,7 @@ props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Come on my face, then. Quietly."
+content = "Come on my cock, then. Quietly."
 props = { speaker = "npc", npcId = "npc_ryan" }
 
 [canvases.nodes.exit_block]
@@ -2740,7 +2731,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Back to your room."
 targetType = "location"
-locationId = "home_hall"
+locationId = "home_ella_room"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 3 }]
@@ -2750,7 +2741,7 @@ wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equi
 [[canvases.nodes.exit_block.choices]]
 text = "Back to your room."
 targetType = "location"
-locationId = "home_hall"
+locationId = "home_ella_room"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_true" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }]
@@ -2821,7 +2812,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Back to your room."
 targetType = "location"
-locationId = "home_hall"
+locationId = "home_ella_room"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 3 }]
@@ -2831,7 +2822,7 @@ wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equi
 [[canvases.nodes.exit_block.choices]]
 text = "Back to your room."
 targetType = "location"
-locationId = "home_hall"
+locationId = "home_ella_room"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_true" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }]
@@ -2889,7 +2880,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Back to your room."
 targetType = "location"
-locationId = "home_hall"
+locationId = "home_ella_room"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 3 }]
@@ -2899,7 +2890,7 @@ wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equi
 [[canvases.nodes.exit_block.choices]]
 text = "Back to your room."
 targetType = "location"
-locationId = "home_hall"
+locationId = "home_ella_room"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_true" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }]
@@ -3053,7 +3044,7 @@ text = "Sit and talk."
 targetType = "node"
 nodeId = "talk"
 time_progression_minutes = 30
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_talk_today", operator = "is_false" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_talk_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_kayla", operator = "is_absent" }] }
 effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 2, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "ryan_talk_today", op = "set" }]
 
@@ -3437,6 +3428,7 @@ wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equi
 text = "Leave him to it."
 targetType = "location"
 locationId = "home_hall"
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 
 [[canvases.nodes]]
 id   = "hot5"
@@ -3479,6 +3471,7 @@ wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equi
 text = "Leave him to it."
 targetType = "location"
 locationId = "home_hall"
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 
 [[canvases.nodes]]
 id   = "ryan_stink"
@@ -3504,7 +3497,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Go and shower."
 targetType = "location"
-locationId = "home_hall"
+locationId = "home_bathroom"
 time_progression_minutes = 2
 
 [[canvases.nodes]]
@@ -4244,7 +4237,7 @@ text = "Share the blanket."
 targetType = "node"
 nodeId = "hot6"
 time_progression_minutes = 0
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 7 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_absent" }, { type = "trait", subject = "player", trait_key = "hygiene", operator = "gte", value = 30 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 7 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "weekday", weekdays = [6] }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_absent" }, { type = "trait", subject = "player", trait_key = "hygiene", operator = "gte", value = 30 }] }
 costs = [{ trait = "energy", value = 10 }]
 effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 3 }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }]
@@ -4254,7 +4247,7 @@ text = "Share the blanket."
 targetType = "node"
 nodeId = "hot6"
 time_progression_minutes = 0
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 7 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_absent" }, { type = "trait", subject = "player", trait_key = "hygiene", operator = "lt", value = 30 }, { type = "flag", subject = "player", flag_key = "hygiene_off", operator = "is_true" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 7 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "weekday", weekdays = [6] }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_absent" }, { type = "trait", subject = "player", trait_key = "hygiene", operator = "lt", value = 30 }, { type = "flag", subject = "player", flag_key = "hygiene_off", operator = "is_true" }] }
 costs = [{ trait = "energy", value = 10 }]
 effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 3 }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }]
@@ -4264,7 +4257,7 @@ text = "Share the blanket."
 targetType = "node"
 nodeId = "ryan_stink"
 time_progression_minutes = 0
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 7 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_absent" }, { type = "trait", subject = "player", trait_key = "hygiene", operator = "lt", value = 30 }, { type = "flag", subject = "player", flag_key = "hygiene_off", operator = "is_false" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 7 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "weekday", weekdays = [6] }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_absent" }, { type = "trait", subject = "player", trait_key = "hygiene", operator = "lt", value = 30 }, { type = "flag", subject = "player", flag_key = "hygiene_off", operator = "is_false" }] }
 
 [[canvases.nodes.exit_block.choices]]
 text = "Leave him to it."
@@ -4610,6 +4603,7 @@ wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equi
 text = "Leave him to it."
 targetType = "location"
 locationId = "home_hall"
+wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 
 [[canvases.nodes]]
 id   = "hot6"
@@ -4619,7 +4613,7 @@ name = "Share the blanket."
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }] }
 blocks = [
-  { type = "block_pool", blocks = [{ type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "The film is loud. Mark's TV is louder, a game show through the doorway with his laugh on top. Under the blanket you slide your hand into Ryan's sweats. You wrap it around his cock. He's already hard, thick and hot, the head slick against your palm." }, { type = "dialog", content = "Slow.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He breathes." }, { type = "dialog", content = "He's right there.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "You stroke him slow, base to tip, your thumb working the head. His hips lift off the cushion. Your cunt goes wet from the sound of him trying not to breathe." }, { type = "thought_bubble", content = "Don't let him make a sound.", props = { speaker = "player" } }, { type = "paragraph", content = "Mark laughs at the TV. Ryan bites his knuckle. You pump him faster with short, tight strokes. His cock jerks in your fist. He comes under the blanket, hot cum pumping over your fingers onto his stomach, and you milk him until his balls are empty." }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Ryan pulls the blanket up to your chins. On the screen somebody is shooting at somebody. In the next room Mark turns his TV up. Ryan takes your wrist and pushes your hand down into his shorts. His cock is hard and heavy. You squeeze it. He hisses through his teeth." }, { type = "dialog", content = "Quiet.", props = { speaker = "player" } }, { type = "paragraph", content = "You whisper." }, { type = "dialog", content = "Or he walks in.", props = { speaker = "player" } }, { type = "paragraph", content = "You jerk him off slow and wet, his precum slick down the shaft. The blanket bobs with your fist." }, { type = "thought_bubble", content = "Let it move.", props = { speaker = "player" } }, { type = "paragraph", content = "His free hand slides over and squeezes your tits under the blanket. His thighs go tight against yours. His cock swells in your grip. You speed up. His breath catches. He shoots under the blanket, thick cum spurting hot across your knuckles and his belly, his cock twitching in your hand with every pulse." }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "The blanket covers you both. Your hand is already in Ryan's sweats, wrapped around his cock. The film plays. Nobody watches it." }, { type = "dialog", content = "@player.", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "paragraph", content = "Mark calls from the next room." }, { type = "dialog", content = "You two want popcorn?", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "dialog", content = "We're good.", props = { speaker = "player" } }, { type = "paragraph", content = "You call back. Your voice is steady. Your fist isn't. You stroke Ryan root to tip, slow and tight. His cock throbs against your palm. He stares at the screen with his jaw locked. Under the blanket his hips push up into your hand." }, { type = "thought_bubble", content = "Ten feet. Mark is ten feet away.", props = { speaker = "player" } }, { type = "paragraph", content = "Your cunt is soaked. Mark's TV laughs. You twist your grip over the swollen head and pump him hard and fast. Ryan grunts into his fist. His cock jerks and he comes, hot cum spilling over your fingers, down his shaft, onto his stomach under the blanket." }] }], props = { id = "ryan_hot_6", memory = "seen", seen_weight = 0 } },
+  { type = "block_pool", blocks = [{ type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "The film is loud. Mark's radio is louder, the game through the doorway with his laugh on top. Under the blanket you slide your hand into Ryan's sweats. You wrap it around his cock. He's already hard, thick and hot, the head slick against your palm." }, { type = "dialog", content = "Slow.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He breathes." }, { type = "dialog", content = "He's right there.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "You stroke him slow, base to tip, your thumb working the head. His hips lift off the cushion. Your cunt goes wet from the sound of him trying not to breathe." }, { type = "thought_bubble", content = "Don't let him make a sound.", props = { speaker = "player" } }, { type = "paragraph", content = "Mark laughs at the radio. Ryan bites his knuckle. You pump him faster with short, tight strokes. His cock jerks in your fist. He comes under the blanket, hot cum pumping over your fingers onto his stomach, and you milk him until his balls are empty." }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Ryan pulls the blanket up to your chins. On the screen somebody is shooting at somebody. In the next room Mark turns his radio up. Ryan takes your wrist and pushes your hand down into his shorts. His cock is hard and heavy. You squeeze it. He hisses through his teeth." }, { type = "dialog", content = "Quiet.", props = { speaker = "player" } }, { type = "paragraph", content = "You whisper." }, { type = "dialog", content = "Or he walks in.", props = { speaker = "player" } }, { type = "paragraph", content = "You jerk him off slow and wet, his precum slick down the shaft. The blanket bobs with your fist." }, { type = "thought_bubble", content = "Let it move.", props = { speaker = "player" } }, { type = "paragraph", content = "His free hand slides over and squeezes your tits under the blanket. His thighs go tight against yours. His cock swells in your grip. You speed up. His breath catches. He shoots under the blanket, thick cum spurting hot across your knuckles and his belly, his cock twitching in your hand with every pulse." }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "The blanket covers you both. Your hand is already in Ryan's sweats, wrapped around his cock. The film plays. Nobody watches it." }, { type = "dialog", content = "@player.", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "paragraph", content = "Mark calls from the next room." }, { type = "dialog", content = "You two want popcorn?", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "dialog", content = "We're good.", props = { speaker = "player" } }, { type = "paragraph", content = "You call back. Your voice is steady. Your fist isn't. You stroke Ryan root to tip, slow and tight. His cock throbs against your palm. He stares at the screen with his jaw locked. Under the blanket his hips push up into your hand." }, { type = "thought_bubble", content = "Ten feet. Mark is ten feet away.", props = { speaker = "player" } }, { type = "paragraph", content = "Your cunt is soaked. Mark's radio laughs. You twist your grip over the swollen head and pump him hard and fast. Ryan grunts into his fist. His cock jerks and he comes, hot cum spilling over your fingers, down his shaft, onto his stomach under the blanket." }] }], props = { id = "ryan_hot_6", memory = "seen", seen_weight = 0 } },
 ]
 
 [[canvases.nodes.blocks]]
@@ -4674,7 +4668,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Go and shower."
 targetType = "location"
-locationId = "home_living_room"
+locationId = "home_bathroom"
 time_progression_minutes = 2
 
 [[canvases]]
@@ -5206,7 +5200,7 @@ name = "The dark hall"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "You've got your shoes in your hand and you're halfway down the hall when the hall lamp clicks on. Laura is sitting on the bench by the coats in her robe, arms round her knees. She's been there a while."
+content = "You're in the hall when the hall lamp clicks on. Laura is sitting on the bench by the coats in her robe, arms round her knees. She's been there a while."
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -5217,7 +5211,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "late_party", operator = "lt", value = 4 }] }, blocks = [{ type = "paragraph", content = "Smoke in your hair, somebody's cologne on your neck. She smells it from the bench." }, { type = "dialog", content = "Zoe's?", props = { speaker = "npc", npcId = "npc_laura" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "late_party", operator = "lt", value = 4 }] }, blocks = [{ type = "paragraph", content = "Smoke in your hair, somebody's cologne on your neck. She smells it on you." }, { type = "dialog", content = "Zoe's?", props = { speaker = "npc", npcId = "npc_laura" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -5364,7 +5358,7 @@ name = "Did anyone look"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "She doesn't shout. She pats the bench beside her, and you sit, and she looks at you sideways in the lamplight."
+content = "She doesn't shout. She sits you down on the bench beside her, and she looks at you sideways in the lamplight."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -5523,7 +5517,7 @@ name = "No"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "She nods and pours the second glass back into the bottle, carefully, so none spills."
+content = "She nods and puts the empty glass back on the shelf, carefully, so it doesn't clink."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -5538,7 +5532,7 @@ content = "She drinks the rest of hers alone, looking at the stove."
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Say goodnight and go up."
+text = "Say goodnight and go."
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 3
@@ -5586,7 +5580,7 @@ type = "choices"
 text = "\"Hold still.\""
 targetType = "node"
 nodeId = "zipped"
-time_progression_minutes = 3
+time_progression_minutes = 0
 
 [[canvases.nodes.exit_block.choices]]
 text = "\"Ask Mark.\""
@@ -5624,7 +5618,7 @@ type = "choices"
 text = "Wait."
 targetType = "node"
 nodeId = "bed"
-time_progression_minutes = 2
+time_progression_minutes = 5
 
 [[canvases.nodes]]
 id   = "bed"
@@ -5688,7 +5682,7 @@ content = "On weeknights now, her bedroom door doesn't quite close."
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "\"Goodnight, Mom.\""
+text = "\"See you later, Mom.\""
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 3
@@ -5717,7 +5711,7 @@ content = "On weeknights now, her bedroom door doesn't quite close."
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "\"Goodnight, Mom.\""
+text = "\"See you later, Mom.\""
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 10
@@ -5788,7 +5782,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "18:00", end_time = "19:50" }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }, blocks = [{ type = "dialog", content = "Dinner in ten. Set the table?", props = { speaker = "npc", npcId = "npc_laura" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "18:00", end_time = "19:00" }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }] }, blocks = [{ type = "dialog", content = "Dinner's on the table. Sit.", props = { speaker = "npc", npcId = "npc_laura" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -5836,7 +5830,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "laura_step", operator = "gte", value = 1 }, { type = "flag", subject = "player", flag_key = "jake_date_booked", operator = "is_true" }] }, blocks = [{ type = "dialog", content = "So Jake's taking you out Saturday? Where's he taking you?", props = { speaker = "npc", npcId = "npc_laura" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "laura_step", operator = "gte", value = 1 }, { type = "flag", subject = "player", flag_key = "jake_date_booked", operator = "is_true" }] }, blocks = [{ type = "dialog", content = "So Jake's taking you out? Where's he taking you?", props = { speaker = "npc", npcId = "npc_laura" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -7368,7 +7362,7 @@ props = { speaker = "npc", npcId = "npc_laura" }
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Say goodnight and go up."
+text = "Say goodnight and go."
 targetType = "location"
 locationId = "home_hall"
 
@@ -7417,7 +7411,7 @@ name = "Not now"
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Not now, Mom. I'm going up."
+content = "Not now, Mom. I'm going to my room."
 props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
@@ -7433,9 +7427,9 @@ content = "She pulls her robe tighter over her knees and turns back to the film,
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go up."
+text = "Go to your room."
 targetType = "location"
-locationId = "home_hall"
+locationId = "home_ella_room"
 
 [[canvases.nodes]]
 id   = "towel_slip"
@@ -8316,7 +8310,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, blocks = [{ type = "paragraph", content = "You came down in your sleep shirt. It stops mid-thigh. He watches the hem the whole way to the table." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, blocks = [{ type = "paragraph", content = "You came in your sleep shirt. It stops mid-thigh. He watches the hem the whole way to the table." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -8334,7 +8328,7 @@ nodeId = "count"
 time_progression_minutes = 5
 
 [[canvases.nodes.exit_block.choices]]
-text = "\"Let me get dressed first.\""
+text = "\"Give me a minute.\""
 targetType = "node"
 nodeId = "dressed"
 time_progression_minutes = 5
@@ -8491,7 +8485,7 @@ props = { speaker = "npc", npcId = "npc_mark" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "You go and put clothes on and come back. He's sealed the envelope without you. He pushes it at you to look at, and doesn't look at you at all."
+content = "You go out and come back dressed. He's sealed the envelope without you. He pushes it at you to look at, and doesn't look at you at all."
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -8505,7 +8499,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Go back to your room."
 targetType = "location"
-locationId = "home_hall"
+locationId = "home_ella_room"
 time_progression_minutes = 15
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_short", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "ryan_covered", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "mark_money_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "paid_full_streak", operator = "lt", value = 3 }] }
 effects = [{ targetType = "player", trait = "mark_step", op = "set", value = 1 }, { targetType = "player", trait = "paid_full_streak", op = "add", value = 1, clamp = false }, { targetType = "npc", npcId = "npc_mark", trait = "power", op = "add", value = -3 }]
@@ -8515,7 +8509,7 @@ consumes = true
 [[canvases.nodes.exit_block.choices]]
 text = "Go back to your room."
 targetType = "location"
-locationId = "home_hall"
+locationId = "home_ella_room"
 time_progression_minutes = 15
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rent_short", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "ryan_covered", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "mark_money_week", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "paid_full_streak", operator = "gte", value = 3 }] }
 effects = [{ targetType = "player", trait = "mark_step", op = "set", value = 1 }, { targetType = "player", trait = "paid_full_streak", op = "add", value = 1, clamp = false }, { targetType = "npc", npcId = "npc_mark", trait = "power", op = "add", value = -3 }]
@@ -8525,7 +8519,7 @@ consumes = true
 [[canvases.nodes.exit_block.choices]]
 text = "Go back to your room."
 targetType = "location"
-locationId = "home_hall"
+locationId = "home_ella_room"
 time_progression_minutes = 15
 conditions = { version = "1.0", logic = "OR", items = [{ type = "flag", subject = "player", flag_key = "rent_short", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ryan_covered", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "mark_money_week", operator = "is_true" }] }
 effects = [{ targetType = "player", trait = "mark_step", op = "set", value = 1 }, { targetType = "player", trait = "paid_full_streak", op = "set", value = 0 }, { targetType = "npc", npcId = "npc_mark", trait = "power", op = "add", value = 3 }]
@@ -8617,7 +8611,7 @@ props = { speaker = "npc", npcId = "npc_mark" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "He doesn't shout. He doesn't come for it. He just waits until you fold it along its creases and put it under the menus and shut the drawer, and then he goes back to his TV."
+content = "He doesn't shout. He doesn't come for it. He just waits for you to fold it along its creases and put it under the menus and shut the drawer."
 
 [[canvases.nodes.blocks]]
 type = "thought_bubble"
@@ -8661,7 +8655,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Go back to bed."
 targetType = "location"
-locationId = "home_kitchen"
+locationId = "home_ella_room"
 time_progression_minutes = 3
 effects = [{ targetType = "player", trait = "mark_step", op = "set", value = 2 }]
 flagEffects = [{ targetType = "player", flag = "mark_02_done", op = "set" }]
@@ -8730,7 +8724,7 @@ time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "power", operator = "gte", value = 50 }] }
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go up and change."
+text = "Go and change."
 targetType = "node"
 nodeId = "hers_down"
 time_progression_minutes = 5
@@ -8920,7 +8914,7 @@ content = "Mark's at his workbench with the radio on and his hands black with oi
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "I saw you come out of Ryan's room. Middle of the night."
+content = "I saw you come out of Ryan's room. Late."
 props = { speaker = "npc", npcId = "npc_mark" }
 
 [[canvases.nodes.blocks]]
@@ -9292,7 +9286,7 @@ name = "Sunday"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "He folds the rent into the envelope with Vance's name on it and leaves his hand flat on top of it."
+content = "He squares up the envelope with Vance's name on it and leaves his hand flat on top of it."
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -10316,6 +10310,27 @@ type = "dialog"
 content = "Fine. Wake me for the car chase."
 props = { speaker = "npc", npcId = "npc_mark" }
 
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Watch it with him (2h)."
+targetType = "node"
+nodeId = "hl_film_after"
+time_progression_minutes = 120
+effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }]
+flagEffects = [{ targetType = "player", flag = "movie_night", op = "set" }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "movie_night", operator = "is_false" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Not now."
+targetType = "location"
+locationId = "home_hall"
+
+[[canvases.nodes]]
+id   = "hl_film_after"
+name = "Watch it with him"
+
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "He falls asleep in the second half, and you watch the end with his snoring for a soundtrack."
@@ -10324,16 +10339,7 @@ content = "He falls asleep in the second half, and you watch the end with his sn
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Done (2h)."
-targetType = "location"
-locationId = "home_living_room"
-time_progression_minutes = 120
-effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }]
-flagEffects = [{ targetType = "player", flag = "movie_night", op = "set" }]
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "movie_night", operator = "is_false" }] }
-
-[[canvases.nodes.exit_block.choices]]
-text = "Not now."
+text = "Get up."
 targetType = "location"
 locationId = "home_hall"
 
@@ -10397,7 +10403,7 @@ content = "He says it to your back. His eyes stay on the backs of your bare thig
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go up to your room."
+text = "Go to your room."
 targetType = "location"
 locationId = "home_ella_room"
 time_progression_minutes = 2
@@ -11344,13 +11350,13 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "11:00", end_time = "18:00" }] }, blocks = [{ type = "paragraph", content = "He has the sports pages spread over the whole table and doesn't look up. Sunday afternoon is his, and he wants it quiet." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "12:00", end_time = "18:00" }] }, blocks = [{ type = "paragraph", content = "He has the sports pages spread over the whole table and doesn't look up. Sunday afternoon is his, and he wants it to himself." }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "18:00", end_time = "20:00" }] }, blocks = [{ type = "paragraph", content = "Sunday dinner. Mark's at the head of the table with his sleeves rolled, waiting to be fed." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "18:00", end_time = "20:00" }] }, blocks = [{ type = "paragraph", content = "Sunday dinner. Mark's at the head of the table with his sleeves rolled, filling his plate." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -12014,7 +12020,7 @@ content = "He says it to your back. His eyes stay on the backs of your bare thig
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go up to your room."
+text = "Go to your room."
 targetType = "location"
 locationId = "home_ella_room"
 time_progression_minutes = 2
@@ -12131,7 +12137,7 @@ name = "The washer hose"
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }] }
 blocks = [
-  { type = "paragraph", content = "You're loading the washer when the hose jumps off the tap. Cold water hits you square in the chest and soaks you from the neck down. You gasp. Everything you have on clings to you, and your bra shows dark right through it. Mark looks up from his bench. His eyes go straight to your chest. They stay there one second, two. Then he catches himself, turns his back, and grabs a towel off the shelf. He holds it out behind him without looking." },
+  { type = "paragraph", content = "You're loading the washer when the hose jumps off the tap. Cold water hits you square in the chest and soaks you from the neck down. You gasp. Everything you have on clings to you, and your bra shows dark and wet. Mark looks up from his bench. His eyes go straight to your chest. They stay there one second, two. Then he catches himself, turns his back, and grabs a towel off the shelf. He holds it out behind him without looking." },
   { type = "dialog", content = "Tap's loose. Here.", props = { speaker = "npc", npcId = "npc_mark" } },
 ]
 
@@ -12670,7 +12676,7 @@ name = "The back room"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "He counts the jar when you're near now, lips moving. Today you go into the back room for milk and he's there with the tip jar on the shelf, folding the bills out of it into his apron pocket, the other girls' twenties first. Your singles are in there too. Everybody's."
+content = "He counts the jar when you're near now, lips moving. Today you go into the back room for milk and he's there with the tip jar on the shelf, folding the bills out of it into his apron pocket, the biggest bills first. Your singles are in there too. Everybody's."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -12703,12 +12709,12 @@ props = { speaker = "npc", npcId = "npc_tom" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Twenties, Tom? From the girls' jar?"
+content = "The tips, Tom? Out of the jar?"
 props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Float. I'm counting the float. Not a word, @player."
+content = "The till. I'm counting the till. Not a word, @player."
 props = { speaker = "npc", npcId = "npc_tom" }
 
 [[canvases.nodes.blocks]]
@@ -13795,7 +13801,7 @@ props = { speaker = "npc", npcId = "npc_zoe" }
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "zoe_refused", operator = "gte", value = 2 }] }, blocks = [{ type = "dialog", content = "That's twice you've said no, babe. I'm counting.", props = { speaker = "npc", npcId = "npc_zoe" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "zoe_refused", operator = "eq", value = 2 }] }, blocks = [{ type = "dialog", content = "That's twice you've said no, babe. I'm counting.", props = { speaker = "npc", npcId = "npc_zoe" } }] },
 ]
 
 [canvases.nodes.exit_block]
@@ -13968,12 +13974,12 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "Zoe pulls you out onto the balcony, away from the noise. The glass door is behind you and the whole party is on the other side of it. She leans on the rail and looks at your shoulder, where a strap should be, and doesn't look anywhere else." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "Zoe pulls you out onto the balcony, away from the noise. The glass door is behind you and the whole party is on the other side of it. She leans on the rail and looks at your shoulder and doesn't look anywhere else." }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Bra off. Through the sleeve. Don't take anything else off. That's the dare."
+content = "Bra off. Don't take anything else off. That's the dare."
 props = { speaker = "npc", npcId = "npc_zoe" }
 
 [canvases.nodes.exit_block]
@@ -14179,7 +14185,7 @@ name = "No"
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Boo. Fine. I'll think of a worse one."
+content = "Boo. Fine. Same dare next Friday."
 props = { speaker = "npc", npcId = "npc_zoe" }
 
 [[canvases.nodes.blocks]]
@@ -14438,13 +14444,13 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "Zoe pulls you out onto the balcony, away from the noise. The glass door is behind you and the whole party is on the other side of it. She leans on the rail and looks at your shoulder, where a strap should be, and doesn't look anywhere else." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "Zoe pulls you out onto the balcony, away from the noise. The glass door is behind you and the whole party is on the other side of it. She leans on the rail and looks at your shoulder and doesn't look anywhere else." }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }] }, blocks = [{ type = "dialog", content = "Bra off. Through the sleeve. Don't take anything else off. That's the dare.", props = { speaker = "npc", npcId = "npc_zoe" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }] }, blocks = [{ type = "dialog", content = "Bra off. Don't take anything else off. That's the dare.", props = { speaker = "npc", npcId = "npc_zoe" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -14475,7 +14481,7 @@ name = "No"
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Boo. Fine. I'll think of a worse one."
+content = "Boo. Fine. Same dare next Friday."
 props = { speaker = "npc", npcId = "npc_zoe" }
 
 [[canvases.nodes.blocks]]
@@ -14703,13 +14709,10 @@ type = "paragraph"
 content = "The door slides shut behind her friends. Now it is just the two of you in the steam. Zoe goes quiet, and Zoe is never quiet."
 
 [[canvases.nodes.blocks]]
-type = "dialog"
-content = "Take it off, babe."
-props = { speaker = "npc", npcId = "npc_zoe" }
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "She says, low."
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }] }, blocks = [{ type = "dialog", content = "Take it off, babe.", props = { speaker = "npc", npcId = "npc_zoe" } }, { type = "paragraph", content = "She says, low." }] },
+]
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -14721,9 +14724,10 @@ type = "paragraph"
 content = "Her eyes drop to your chest and stay there. She bites her lip. Her breath comes short across the water."
 
 [[canvases.nodes.blocks]]
-type = "dialog"
-content = "Everything on you is wet anyway. I can see your nipples, babe. I want to see your tits."
-props = { speaker = "npc", npcId = "npc_zoe" }
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "flag", subject = "player", flag_key = "zoe_in_the_tub", operator = "is_false" }] }, blocks = [{ type = "dialog", content = "Everything on you is wet anyway. I can see your nipples, babe. I want to see your tits.", props = { speaker = "npc", npcId = "npc_zoe" } }] },
+]
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -14850,7 +14854,7 @@ props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "You tell her. She goes quiet. She opens her mouth, but she doesn't answer that. Not yet. All term she dared you instead of asking for this. You liked every single dare. The sliding door bangs open. Your friends spill back out, shrieking. You sink to your shoulders in the hot water. Across the bubbles, Zoe is still looking at you. Next time you two are alone, somebody has to ask first."
+content = "You tell her. She goes quiet. She opens her mouth, but she doesn't answer that. Not yet. All term she dared you instead of asking for this. You liked every single dare. The sliding door bangs open. Her friends spill back out, shrieking. You sink to your shoulders in the hot water. Across the bubbles, Zoe is still looking at you. Next time you two are alone, somebody has to ask first."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -15320,7 +15324,7 @@ content = "Zoe laughs, and something in her face lets go."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Next Friday, then. I'll ask nicer."
+content = "Next Friday, then. I'll ask again."
 props = { speaker = "npc", npcId = "npc_zoe" }
 
 [canvases.nodes.exit_block]
@@ -15680,7 +15684,7 @@ name = "Zoe, beside you"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "Zoe drops into the seat beside yours with her bag on her knee and her pen in her mouth."
+content = "Zoe's in the seat beside yours with her bag on her knee and her pen in her mouth."
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -15794,7 +15798,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 5] }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }] }, blocks = [{ type = "paragraph", content = "Zoe's on the couch in a big T-shirt with the TV on and her feet up. She shoves her feet off the cushion for you." }, { type = "block_pool", blocks = [{ type = "dialog", content = "Stay. Watch trash with me.", props = { speaker = "npc", npcId = "npc_zoe" } }, { type = "dialog", content = "Paint my nails. You've got steadier hands.", props = { speaker = "npc", npcId = "npc_zoe" } }, { type = "dialog", content = "I'm bored. Dare me something.", props = { speaker = "npc", npcId = "npc_zoe" } }, { type = "dialog", content = "You're my favorite friend at that whole college. Don't tell the others.", props = { speaker = "npc", npcId = "npc_zoe" } }], props = { id = "zoe_home_lines", memory = "seen" } }, { type = "dialog", content = "Budge up, then.", props = { speaker = "player" } }, { type = "dialog", content = "Only if you rub my feet.", props = { speaker = "npc", npcId = "npc_zoe" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 5] }, { type = "time_of_day", start_time = "18:00", end_time = "00:00" }] }, blocks = [{ type = "paragraph", content = "Zoe's on the couch in a big T-shirt with the TV on and her feet up. She shoves her feet off the cushion for you." }, { type = "block_pool", blocks = [{ type = "dialog", content = "Stay. Watch trash with me.", props = { speaker = "npc", npcId = "npc_zoe" } }, { type = "dialog", content = "Paint my nails. You've got steadier hands.", props = { speaker = "npc", npcId = "npc_zoe" } }, { type = "dialog", content = "I'm bored. Dare me something.", props = { speaker = "npc", npcId = "npc_zoe" } }, { type = "dialog", content = "You're my favorite friend at that whole college. Don't tell the others.", props = { speaker = "npc", npcId = "npc_zoe" } }], props = { id = "zoe_home_lines", memory = "seen" } }, { type = "dialog", content = "Budge up, then.", props = { speaker = "player" } }, { type = "dialog", content = "Only if you rub my feet.", props = { speaker = "npc", npcId = "npc_zoe" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -15879,7 +15883,7 @@ locationId = "zoe_apartment"
 time_progression_minutes = 45
 
 [[canvases.nodes.exit_block.choices]]
-text = "Leave her to her couch."
+text = "Leave her to it."
 targetType = "location"
 locationId = "town"
 
@@ -17791,7 +17795,7 @@ name = "His hands"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "He comes round the desk."
+content = "He looks you over across the desk."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -18640,7 +18644,7 @@ name = "The porch"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "Jake walks you up to the porch and stops under the light. The front of the house is dark. He looks past you at the dark windows."
+content = "Jake walks you up to the porch and stops under the light. The living room is dark. He looks past you at its dark windows."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -18717,7 +18721,7 @@ props = { speaker = "npc", npcId = "npc_jake" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "He breathes into your mouth. It gets hungry and loud, all teeth and breath. The rail creaks every time he pulls you closer. Anyone inside could hear it, but you don't care. You want more of his mouth. Then, behind you, the lock turns."
+content = "He breathes into your mouth. It gets hungry and loud, all teeth and breath. The rail creaks every time he pulls you closer. Anyone inside could hear it, but you don't care. You want more of his mouth. Then, behind him, the lock turns."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -18735,7 +18739,7 @@ name = "Ryan"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "The front door opens behind you. Ryan stands in the doorway and stops dead. You're on the porch rail with your legs locked round Jake's waist, kissing him. Jake's hands are full of your ass. You don't climb down. You look straight at Ryan over Jake's shoulder and hold it."
+content = "The front door opens behind Jake. Ryan stands in the doorway and stops dead. You're on the porch rail with your legs locked round Jake's waist, kissing him. Jake's hands are full of your ass. You don't climb down. You look straight at Ryan over Jake's shoulder and hold it."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -18966,7 +18970,7 @@ blocks = [
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Ready? I booked the place with the candles. Don't laugh."
+content = "Ready? I've got a whole night planned. Don't laugh."
 props = { speaker = "npc", npcId = "npc_jake" }
 
 [[canvases.nodes.blocks]]
@@ -19133,7 +19137,7 @@ end_time = "00:00"
 
 [[canvases.nodes]]
 id   = "door"
-name = "Come up"
+name = "Come in"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -19141,7 +19145,7 @@ content = "Jake walks you up to the porch and stops under the light. You don't l
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Come up."
+content = "Come in."
 props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
@@ -19185,13 +19189,13 @@ props = { speaker = "npc", npcId = "npc_jake" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "He grins and walks backwards down the path, all the way to the car."
+content = "He grins and backs out the front door, and walks backwards down the path, all the way to the car."
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go in."
+text = "Shut the door."
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 2
@@ -19493,12 +19497,13 @@ costs = [{ trait = "energy", value = 10 }]
 effects = [{ targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "\"Come up.\""
+text = "\"Come in.\""
 targetType = "node"
 nodeId = "sneak"
 time_progression_minutes = 5
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "jake_step", operator = "gte", value = 4 }, { type = "weekday", weekdays = [5] }, { type = "npc_at_location", location_id = "home_hall", npc_id = "npc_laura", operator = "is_absent" }] }
-effects = [{ targetType = "player", trait = "jake_catch_roll", op = "set", value = { type = "random", min = 1, max = 8 } }]
+costs = [{ trait = "energy", value = 10 }]
+effects = [{ targetType = "player", trait = "jake_catch_roll", op = "set", value = { type = "random", min = 1, max = 8 } }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "\"Goodnight, Jake.\""
@@ -19511,22 +19516,49 @@ id   = "car_low"
 name = "The car"
 
 [[canvases.nodes.blocks]]
-type = "block_pool"
+type = "paragraph"
+content = "Jake kills the engine outside your house and reaches for you across the seats. His mouth is on yours, hungry, his tongue pushing in."
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "top", operator = "equipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }] }
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "zoe_party_dress", operator = "unequipped" }, { type = "clothing_item", item_id = "laura_blue_dress", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "Jake kills the engine outside your house and reaches for you across the seats. His mouth is on yours, hungry, his tongue pushing in. His big hand finds your tits through your top and squeezes. Your nipples go hard under his thumb." }, { type = "dialog", content = "God, you're gorgeous.", props = { speaker = "npc", npcId = "npc_jake" } }, { type = "paragraph", content = "He says into your neck." }] },
+  { type = "paragraph", content = "His big hand finds your tits through your top and squeezes." },
 ]
 
 [[canvases.nodes.blocks]]
-type = "block_pool"
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "zoe_party_dress", operator = "equipped" }] }
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "zoe_party_dress", operator = "equipped" }] }, blocks = [{ type = "paragraph", content = "Jake kills the engine outside your house and reaches for you across the seats. His mouth is on yours, hungry, his tongue pushing in. His big hand finds your tits through your dress and squeezes. Your nipples go hard under his thumb." }, { type = "dialog", content = "God, you're gorgeous.", props = { speaker = "npc", npcId = "npc_jake" } }, { type = "paragraph", content = "He says into your neck." }] },
+  { type = "paragraph", content = "His big hand finds your tits through your dress and squeezes." },
 ]
 
 [[canvases.nodes.blocks]]
-type = "block_pool"
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "laura_blue_dress", operator = "equipped" }] }
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "laura_blue_dress", operator = "equipped" }] }, blocks = [{ type = "paragraph", content = "Jake kills the engine outside your house and reaches for you across the seats. His mouth is on yours, hungry, his tongue pushing in. His big hand finds your tits through your dress and squeezes. Your nipples go hard under his thumb." }, { type = "dialog", content = "God, you're gorgeous.", props = { speaker = "npc", npcId = "npc_jake" } }, { type = "paragraph", content = "He says into your neck." }] },
+  { type = "paragraph", content = "His big hand finds your tits through your dress and squeezes." },
 ]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "paragraph", content = "His big hand finds your tits through your clothes and squeezes." },
+]
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Your nipples go hard under his thumb."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "God, you're gorgeous."
+props = { speaker = "npc", npcId = "npc_jake" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He says into your neck."
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -19568,22 +19600,54 @@ id   = "car_his"
 name = "His hand"
 
 [[canvases.nodes.blocks]]
-type = "block_pool"
+type = "paragraph"
+content = "Jake kills the engine outside your house and the street lamp lights the whole car."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "C'mon, gorgeous. Right here."
+props = { speaker = "npc", npcId = "npc_jake" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "His big hand pushes down inside your clothes, flat on your belly, then lower. Two fingers find your clit and rub it fast. Then they slide inside you, deep. You gasp and grab his shirt."
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "top", operator = "equipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }] }
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "zoe_party_dress", operator = "unequipped" }, { type = "clothing_item", item_id = "laura_blue_dress", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "Jake kills the engine outside your house and the street lamp lights the whole car." }, { type = "dialog", content = "C'mon, gorgeous. Right here.", props = { speaker = "npc", npcId = "npc_jake" } }, { type = "paragraph", content = "His big hand pushes down inside your clothes, flat on your belly, then lower. Two fingers find your clit and rub it fast. Then they slide inside you, deep. You gasp and grab his shirt. His other hand shoves up under your top and squeezes your tit, his thumb rolling your nipple." }, { type = "dialog", content = "God, you're so wet.", props = { speaker = "npc", npcId = "npc_jake" } }, { type = "paragraph", content = "His fingers pump harder. Your thigh jams against the door. Your hips buck off the seat into his palm. You come on his hand, shaking, your moan pressed into his shoulder. A car rolls past and its headlights sweep over you both. His fingers are still inside you, and your thighs clamp tight around his wrist." }] },
+  { type = "paragraph", content = "His other hand shoves up under your top and squeezes your tit, his thumb rolling your nipple." },
 ]
 
 [[canvases.nodes.blocks]]
-type = "block_pool"
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "zoe_party_dress", operator = "equipped" }] }
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "zoe_party_dress", operator = "equipped" }] }, blocks = [{ type = "paragraph", content = "Jake kills the engine outside your house and the street lamp lights the whole car." }, { type = "dialog", content = "C'mon, gorgeous. Right here.", props = { speaker = "npc", npcId = "npc_jake" } }, { type = "paragraph", content = "His big hand pushes down inside your clothes, flat on your belly, then lower. Two fingers find your clit and rub it fast. Then they slide inside you, deep. You gasp and grab his shirt. His other hand shoves up under your dress and squeezes your tit, his thumb rolling your nipple." }, { type = "dialog", content = "God, you're so wet.", props = { speaker = "npc", npcId = "npc_jake" } }, { type = "paragraph", content = "His fingers pump harder. Your thigh jams against the door. Your hips buck off the seat into his palm. You come on his hand, shaking, your moan pressed into his shoulder. A car rolls past and its headlights sweep over you both. His fingers are still inside you, and your thighs clamp tight around his wrist." }] },
+  { type = "paragraph", content = "His other hand shoves up under your dress and squeezes your tit, his thumb rolling your nipple." },
 ]
 
 [[canvases.nodes.blocks]]
-type = "block_pool"
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "laura_blue_dress", operator = "equipped" }] }
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "laura_blue_dress", operator = "equipped" }] }, blocks = [{ type = "paragraph", content = "Jake kills the engine outside your house and the street lamp lights the whole car." }, { type = "dialog", content = "C'mon, gorgeous. Right here.", props = { speaker = "npc", npcId = "npc_jake" } }, { type = "paragraph", content = "His big hand pushes down inside your clothes, flat on your belly, then lower. Two fingers find your clit and rub it fast. Then they slide inside you, deep. You gasp and grab his shirt. His other hand shoves up under your dress and squeezes your tit, his thumb rolling your nipple." }, { type = "dialog", content = "God, you're so wet.", props = { speaker = "npc", npcId = "npc_jake" } }, { type = "paragraph", content = "His fingers pump harder. Your thigh jams against the door. Your hips buck off the seat into his palm. You come on his hand, shaking, your moan pressed into his shoulder. A car rolls past and its headlights sweep over you both. His fingers are still inside you, and your thighs clamp tight around his wrist." }] },
+  { type = "paragraph", content = "His other hand shoves up under your dress and squeezes your tit, his thumb rolling your nipple." },
 ]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "paragraph", content = "His other hand shoves up under your clothes and squeezes your tit, his thumb rolling your nipple." },
+]
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "God, you're so wet."
+props = { speaker = "npc", npcId = "npc_jake" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "His fingers pump harder. Your thigh jams against the door. Your hips buck off the seat into his palm. You come on his hand, shaking, your moan pressed into his shoulder. A car rolls past and its headlights sweep over you both. His fingers are still inside you, and your thighs clamp tight around his wrist."
 
 [[canvases.nodes.blocks]]
 type = "video"
@@ -19615,22 +19679,62 @@ id   = "car_hers"
 name = "Your hand"
 
 [[canvases.nodes.blocks]]
-type = "block_pool"
+type = "paragraph"
+content = "Jake parks outside your house and kills the engine under the street lamp. You lean back, then reach over and open his jeans. His cock is already hard when you pull it out."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Hands on the wheel."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You tell him. He grabs it. You stroke him slow, base to tip, until his hips lift off the seat."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "@player."
+props = { speaker = "npc", npcId = "npc_jake" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He says."
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "top", operator = "equipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }] }
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "zoe_party_dress", operator = "unequipped" }, { type = "clothing_item", item_id = "laura_blue_dress", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "Jake parks outside your house and kills the engine under the street lamp. You lean back, then reach over and open his jeans. His cock is already hard when you pull it out." }, { type = "dialog", content = "Hands on the wheel.", props = { speaker = "player" } }, { type = "paragraph", content = "You tell him. He grabs it. You stroke him slow, base to tip, until his hips lift off the seat." }, { type = "dialog", content = "@player.", props = { speaker = "npc", npcId = "npc_jake" } }, { type = "paragraph", content = "He says." }, { type = "dialog", content = "Oh god, @player.", props = { speaker = "npc", npcId = "npc_jake" } }, { type = "paragraph", content = "One hand leaves the wheel to find your tits under your top. He squeezes, his thumb dragging over your nipple. You let him, but you go faster. A man walking a dog stops on the sidewalk and looks in. You don't stop for him. Jake's thighs shake. His balls pull tight. He groans, head back on the seat, and comes hot over your hand. You keep stroking his cock slow while he pants." }] },
+  { type = "dialog", content = "Oh god, @player.", props = { speaker = "npc", npcId = "npc_jake" } },
+  { type = "paragraph", content = "One hand leaves the wheel to find your tits under your top." },
 ]
 
 [[canvases.nodes.blocks]]
-type = "block_pool"
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "zoe_party_dress", operator = "equipped" }] }
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "zoe_party_dress", operator = "equipped" }] }, blocks = [{ type = "paragraph", content = "Jake parks outside your house and kills the engine under the street lamp. You lean back, then reach over and open his jeans. His cock is already hard when you pull it out." }, { type = "dialog", content = "Hands on the wheel.", props = { speaker = "player" } }, { type = "paragraph", content = "You tell him. He grabs it. You stroke him slow, base to tip, until his hips lift off the seat." }, { type = "dialog", content = "@player.", props = { speaker = "npc", npcId = "npc_jake" } }, { type = "paragraph", content = "He says." }, { type = "dialog", content = "Oh god, @player.", props = { speaker = "npc", npcId = "npc_jake" } }, { type = "paragraph", content = "One hand leaves the wheel to find your tits under your dress. He squeezes, his thumb dragging over your nipple. You let him, but you go faster. A man walking a dog stops on the sidewalk and looks in. You don't stop for him. Jake's thighs shake. His balls pull tight. He groans, head back on the seat, and comes hot over your hand. You keep stroking his cock slow while he pants." }] },
+  { type = "dialog", content = "Oh god, @player.", props = { speaker = "npc", npcId = "npc_jake" } },
+  { type = "paragraph", content = "One hand leaves the wheel to find your tits under your dress." },
 ]
 
 [[canvases.nodes.blocks]]
-type = "block_pool"
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "laura_blue_dress", operator = "equipped" }] }
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "laura_blue_dress", operator = "equipped" }] }, blocks = [{ type = "paragraph", content = "Jake parks outside your house and kills the engine under the street lamp. You lean back, then reach over and open his jeans. His cock is already hard when you pull it out." }, { type = "dialog", content = "Hands on the wheel.", props = { speaker = "player" } }, { type = "paragraph", content = "You tell him. He grabs it. You stroke him slow, base to tip, until his hips lift off the seat." }, { type = "dialog", content = "@player.", props = { speaker = "npc", npcId = "npc_jake" } }, { type = "paragraph", content = "He says." }, { type = "dialog", content = "Oh god, @player.", props = { speaker = "npc", npcId = "npc_jake" } }, { type = "paragraph", content = "One hand leaves the wheel to find your tits under your dress. He squeezes, his thumb dragging over your nipple. You let him, but you go faster. A man walking a dog stops on the sidewalk and looks in. You don't stop for him. Jake's thighs shake. His balls pull tight. He groans, head back on the seat, and comes hot over your hand. You keep stroking his cock slow while he pants." }] },
+  { type = "dialog", content = "Oh god, @player.", props = { speaker = "npc", npcId = "npc_jake" } },
+  { type = "paragraph", content = "One hand leaves the wheel to find your tits under your dress." },
 ]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "dialog", content = "Oh god, @player.", props = { speaker = "npc", npcId = "npc_jake" } },
+  { type = "paragraph", content = "One hand leaves the wheel to find your tits under your clothes." },
+]
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He squeezes, his thumb dragging over your nipple. You let him, but you go faster. A man walking a dog stops on the sidewalk and looks in. You don't stop for him. Jake's thighs shake. His balls pull tight. He groans, head back on the seat, and comes hot over your hand. You keep stroking his cock slow while he pants."
 
 [[canvases.nodes.blocks]]
 type = "video"
@@ -19672,7 +19776,7 @@ props = { id = "jake_sneak", memory = "seen", seen_weight = 0 }
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "jake_catch_roll", operator = "eq", value = 1 }] }, blocks = [{ type = "paragraph", content = "In the living room the TV goes quiet. Laura's feet in the hall. You both stop breathing. They stop halfway, and go back." }, { type = "dialog", content = "Your mom?", props = { speaker = "npc", npcId = "npc_jake" } }, { type = "dialog", content = "Shh.", props = { speaker = "player" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "jake_catch_roll", operator = "eq", value = 1 }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "In the living room the TV goes quiet. Laura's feet in the hall. You both stop breathing. They stop halfway, and go back." }, { type = "dialog", content = "Your mom?", props = { speaker = "npc", npcId = "npc_jake" } }, { type = "dialog", content = "Shh.", props = { speaker = "player" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -19692,7 +19796,7 @@ props = { speaker = "npc", npcId = "npc_jake" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Then fuck me quieter. Don't stop."
+content = "Then fuck me quieter next time."
 props = { speaker = "player" }
 
 [canvases.nodes.exit_block]
@@ -20964,7 +21068,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }] }, blocks = [{ type = "block_pool", blocks = [{ type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "You bend to wipe a table and the conversation at the next one stops: every man at it is looking at your ass. When you straighten up it starts again, lower. Nobody touches. Not yet." }, { type = "dialog", content = "Don't mind us, honey. Carry on.", props = { speaker = "unknown" } }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Two men at the counter watch your ass all the way to the kitchen and back. One of them says something. The other one laughs." }, { type = "dialog", content = "Nice legs on the new girl. Turn around, baby, let's see the rest.", props = { speaker = "unknown" } }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "A man in a suit doesn't look at his menu once. He looks at your tits the whole time you take his order, and over-tips." }, { type = "dialog", content = "Whatever you're having. Surprise me. I'll be back tomorrow, same table.", props = { speaker = "unknown" } }] }], props = { id = "cafe_l1_lines", memory = "seen" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }] }, blocks = [{ type = "block_pool", blocks = [{ type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "You bend to wipe a table and the conversation at the next one stops: every man at it is looking at your ass. When you straighten up it starts again, lower. Nobody touches. Not yet." }, { type = "dialog", content = "Don't mind us, honey. Carry on.", props = { speaker = "unknown" } }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Two men at the counter watch your ass all the way to the kitchen and back. One of them says something. The other one laughs." }, { type = "dialog", content = "Nice legs on the new girl. Turn around, baby, let's see the rest.", props = { speaker = "unknown" } }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "A man in a suit doesn't look at his menu once. He looks at your tits the whole time you take his order, and over-tips." }, { type = "dialog", content = "Whatever you're having. Surprise me. I'll be back, same table.", props = { speaker = "unknown" } }] }], props = { id = "cafe_l1_lines", memory = "seen" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -21856,14 +21960,14 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subjec
 show_when_locked = true
 costs = [{ trait = "energy", value = 10 }]
 effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = 2, clamp = true }, { targetType = "player", trait = "intelligence", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "hale_met", op = "set" }, { targetType = "player", flag = "nadia_met", op = "set" }, { targetType = "player", flag = "desk_guy_met", op = "set" }, { targetType = "player", flag = "rival_met", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "hale_met", op = "set" }, { targetType = "player", flag = "nadia_met", op = "set" }, { targetType = "player", flag = "desk_guy_met", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Chat."
 targetType = "node"
 nodeId = "chat"
 time_progression_minutes = 0
-flagEffects = [{ targetType = "player", flag = "hale_met", op = "set" }, { targetType = "player", flag = "nadia_met", op = "set" }, { targetType = "player", flag = "desk_guy_met", op = "set" }, { targetType = "player", flag = "rival_met", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "hale_met", op = "set" }, { targetType = "player", flag = "nadia_met", op = "set" }, { targetType = "player", flag = "desk_guy_met", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Doze."
@@ -21871,7 +21975,7 @@ targetType = "node"
 nodeId = "doze"
 time_progression_minutes = 0
 effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap = 100 }]
-flagEffects = [{ targetType = "player", flag = "hale_met", op = "set" }, { targetType = "player", flag = "nadia_met", op = "set" }, { targetType = "player", flag = "desk_guy_met", op = "set" }, { targetType = "player", flag = "rival_met", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "hale_met", op = "set" }, { targetType = "player", flag = "nadia_met", op = "set" }, { targetType = "player", flag = "desk_guy_met", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Sit in the front row and let him look."
@@ -21880,7 +21984,7 @@ nodeId = "risky"
 time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
-flagEffects = [{ targetType = "player", flag = "hale_met", op = "set" }, { targetType = "player", flag = "nadia_met", op = "set" }, { targetType = "player", flag = "desk_guy_met", op = "set" }, { targetType = "player", flag = "rival_met", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "hale_met", op = "set" }, { targetType = "player", flag = "nadia_met", op = "set" }, { targetType = "player", flag = "desk_guy_met", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Sit in the front row and let him look."
@@ -21889,7 +21993,7 @@ nodeId = "risky"
 time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
-flagEffects = [{ targetType = "player", flag = "hale_met", op = "set" }, { targetType = "player", flag = "nadia_met", op = "set" }, { targetType = "player", flag = "desk_guy_met", op = "set" }, { targetType = "player", flag = "rival_met", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "hale_met", op = "set" }, { targetType = "player", flag = "nadia_met", op = "set" }, { targetType = "player", flag = "desk_guy_met", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Skip it."
@@ -21910,9 +22014,10 @@ blocks = [
 ]
 
 [[canvases.nodes.blocks]]
-type = "dialog"
-content = "He watches you more than the slides. Just saying."
-props = { speaker = "npc", npcId = "npc_nadia" }
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "hale_step", operator = "lt", value = 4 }] }, blocks = [{ type = "dialog", content = "He watches you more than the slides. Just saying.", props = { speaker = "npc", npcId = "npc_nadia" } }] },
+]
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -21928,9 +22033,10 @@ id   = "chat"
 name = "Chat"
 
 [[canvases.nodes.blocks]]
-type = "dialog"
-content = "He watches you more than the slides. Just saying."
-props = { speaker = "npc", npcId = "npc_nadia" }
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "hale_step", operator = "lt", value = 4 }] }, blocks = [{ type = "dialog", content = "He watches you more than the slides. Just saying.", props = { speaker = "npc", npcId = "npc_nadia" } }] },
+]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -22346,7 +22452,7 @@ content = "Biology. The TA runs it, a shy woman in a lab coat who blushes when s
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_met", operator = "is_false" }] }, blocks = [{ type = "dialog", content = "Quad after? I'm always there. Tuesdays, Thursdays, Fridays.", props = { speaker = "unknown" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_met", operator = "is_false" }] }, blocks = [{ type = "dialog", content = "Find me on the quad. I'm always there. Tuesdays, Thursdays, Fridays.", props = { speaker = "unknown" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -22370,7 +22476,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "OR", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }, blocks = [{ type = "paragraph", content = "Across the lab bench, the TA keeps looking and looking away. What you're wearing is doing its job." }] },
+  { type = "group", conditions = { version = "1.0", logic = "OR", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }, blocks = [{ type = "paragraph", content = "From the front of the hall, the TA keeps looking and looking away. What you're wearing is doing its job." }] },
 ]
 
 [canvases.nodes.exit_block]
@@ -22481,7 +22587,7 @@ name = "Doze"
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "paragraph", content = "The lab is warm and the TA's voice is soft. You put your head on the bench and lose twenty minutes." },
+  { type = "paragraph", content = "The hall is warm and the TA's voice is soft. You put your head on the desk and lose twenty minutes." },
   { type = "paragraph", content = "You sit with your eyes half shut while the slides click past. Your body thanks you, but your notes don't." },
 ]
 
@@ -22877,16 +22983,13 @@ content = "You can borrow my notes. Any time. If you, um. If you want."
 props = { speaker = "npc", npcId = "npc_study_guy" }
 
 [[canvases.nodes.blocks]]
-type = "block_pool"
-blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rival_met", operator = "is_true" }] }, blocks = [{ type = "paragraph", content = "And the sharp girl from Psychology watches you sit and doesn't smile." }, { type = "dialog", content = "Oh. You're in this one too.", props = { speaker = "npc", npcId = "npc_rival" } }] },
-]
+type = "paragraph"
+content = "A sharp girl in the front row watches you sit and doesn't smile."
 
 [[canvases.nodes.blocks]]
-type = "block_pool"
-blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "rival_met", operator = "is_false" }] }, blocks = [{ type = "paragraph", content = "A sharp girl in the front row watches you sit and doesn't smile." }, { type = "dialog", content = "New? Don't take my seat.", props = { speaker = "unknown" } }] },
-]
+type = "dialog"
+content = "New? Don't take my seat."
+props = { speaker = "unknown" }
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -23188,7 +23291,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "OR", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }, blocks = [{ type = "paragraph", content = "Across the lab bench, the TA keeps looking and looking away. What you're wearing is doing its job." }] },
+  { type = "group", conditions = { version = "1.0", logic = "OR", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }, blocks = [{ type = "paragraph", content = "From the front of the hall, the TA keeps looking and looking away. What you're wearing is doing its job." }] },
 ]
 
 [canvases.nodes.exit_block]
@@ -23299,7 +23402,7 @@ name = "Doze"
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "paragraph", content = "The lab is warm and the TA's voice is soft. You put your head on the bench and lose twenty minutes." },
+  { type = "paragraph", content = "The hall is warm and the TA's voice is soft. You put your head on the desk and lose twenty minutes." },
   { type = "paragraph", content = "You sit with your eyes half shut while the slides click past. Your body thanks you, but your notes don't." },
 ]
 
@@ -24878,7 +24981,7 @@ content = "The TA is sorting a stack of handouts at the front. She turns, sees y
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "She's handing out the worksheets, too busy to stop. She only gets a word in as she puts one on your desk."
+content = "She gathers them up and hands them out, too busy to stop. She only gets a word in as she puts one on your desk."
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -25038,7 +25141,13 @@ content = "The Business lecturer looks up from his marking and doesn't smile."
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "grade_business", operator = "lt", value = 40 }] }, blocks = [{ type = "dialog", content = "Failing. I can offer an honest retake. Nothing else.", props = { speaker = "npc", npcId = "npc_business_lecturer" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "grade_business", operator = "lt", value = 40 }, { type = "flag", subject = "player", flag_key = "business_retake_used", operator = "is_true" }] }, blocks = [{ type = "dialog", content = "Failing. You've had your retake. Nothing else.", props = { speaker = "npc", npcId = "npc_business_lecturer" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "grade_business", operator = "lt", value = 40 }, { type = "flag", subject = "player", flag_key = "business_retake_used", operator = "is_false" }] }, blocks = [{ type = "dialog", content = "Failing. I can offer an honest retake. Nothing else.", props = { speaker = "npc", npcId = "npc_business_lecturer" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -25587,13 +25696,13 @@ props = { speaker = "unknown" }
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "sports_bra", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "Just the sports bra and your bottoms. Your tits bounce in it with every stride on the treadmill, and in the mirror wall you can see two guys at the rack stop counting their reps. One looks away when you catch his eye. The other doesn't, but he doesn't come over either. Not yet." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "sports_bra", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "Just the sports bra and your bottoms. Your tits bounce in it with every step across the floor, and in the mirror wall you can see two guys at the rack stop counting their reps. One looks away when you catch his eye. The other doesn't, but he doesn't come over either. Not yet." }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "jeans", operator = "equipped" }] }, blocks = [{ type = "paragraph", content = "You're working out in jeans. It's stupid, and you feel it in every squat." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "jeans", operator = "equipped" }] }, blocks = [{ type = "paragraph", content = "You're at the gym in jeans. It's stupid, and you'll feel it in every squat." }] },
 ]
 
 [canvases.nodes.exit_block]
@@ -25723,7 +25832,7 @@ name = "The back stacks"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "The back aisles are dead quiet. You run a finger along the spines, hunting a call number. Then you hear it. A soft knock of books on wood, steady, over and over. A muffled sound under it. You turn the corner. Two seniors fill the dead end of the stacks. She is up on the edge of a low shelf, skirt shoved to her waist, legs locked round him. Her top is pushed up and her tits bounce with every thrust. His jeans hang open. You see his cock slide out of her, wet, and drive back in. His hand is clamped over her mouth. She moans into his palm anyway. Your face goes hot. You stop dead at the end of the aisle. Her nipples are hard. He thrusts again, and the books knock."
+content = "The back aisles are dead quiet. You run a finger along the spines and pull down your book. Then you hear it. A soft knock of books on wood, steady, over and over. A muffled sound under it. You turn the corner. Two seniors fill the dead end of the stacks. She is up on the edge of a low shelf, skirt shoved to her waist, legs locked round him. Her top is pushed up and her tits bounce with every thrust. His jeans hang open. You see his cock slide out of her, wet, and drive back in. His hand is clamped over her mouth. She moans into his palm anyway. Your face goes hot. You stop dead at the end of the aisle. Her nipples are hard. He thrusts again, and the books knock."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -26306,13 +26415,13 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "keg_guy_dared", operator = "is_true" }] }, blocks = [{ type = "paragraph", content = "The guy at the keg sees you and grins." }, { type = "dialog", content = "You again. I'm keeping my cup this time.", props = { speaker = "unknown" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "keg_guy_dared", operator = "is_true" }] }, blocks = [{ type = "paragraph", content = "The guy at the keg sees you and grins." }, { type = "dialog", content = "You again. Back for more?", props = { speaker = "unknown" } }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cocky_guy_dared", operator = "is_true" }, { type = "npc_at_location", location_id = "zoe_apartment", npc_id = "npc_cocky_guy", operator = "is_present" }] }, blocks = [{ type = "dialog", content = "You again. Where's my beer?", props = { speaker = "npc", npcId = "npc_cocky_guy" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cocky_guy_dared", operator = "is_true" }, { type = "npc_at_location", location_id = "zoe_apartment", npc_id = "npc_cocky_guy", operator = "is_present" }] }, blocks = [{ type = "dialog", content = "You again. Come here.", props = { speaker = "npc", npcId = "npc_cocky_guy" } }] },
 ]
 
 [canvases.nodes.exit_block]
@@ -26380,35 +26489,35 @@ content = "You walk straight to the keg with Zoe laughing behind you. The guy in
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "top", operator = "equipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }] }
 blocks = [
-  { type = "paragraph", content = "You grab your top and yank it up to your chin. Your tits are bare to him in the middle of the party." },
+  { type = "paragraph", content = "You grab your top and everything under it and yank it all up to your chin. Your tits are bare to him in the middle of the party." },
 ]
 
 [[canvases.nodes.blocks]]
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "zoe_party_dress", operator = "equipped" }] }
 blocks = [
-  { type = "paragraph", content = "You grab your dress and yank it up to your chin. Your tits are bare to him in the middle of the party." },
+  { type = "paragraph", content = "You grab your dress and everything under it and yank it all up to your chin. Your tits are bare to him in the middle of the party." },
 ]
 
 [[canvases.nodes.blocks]]
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "laura_blue_dress", operator = "equipped" }] }
 blocks = [
-  { type = "paragraph", content = "You grab your dress and yank it up to your chin. Your tits are bare to him in the middle of the party." },
+  { type = "paragraph", content = "You grab your dress and everything under it and yank it all up to your chin. Your tits are bare to him in the middle of the party." },
 ]
 
 [[canvases.nodes.blocks]]
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_normal", operator = "equipped" }] }
 blocks = [
-  { type = "paragraph", content = "You grab your uniform and yank it up to your chin. Your tits are bare to him in the middle of the party." },
+  { type = "paragraph", content = "You grab your uniform and everything under it and yank it all up to your chin. Your tits are bare to him in the middle of the party." },
 ]
 
 [[canvases.nodes.blocks]]
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }] }
 blocks = [
-  { type = "paragraph", content = "You grab your uniform and yank it up to your chin. Your tits are bare to him in the middle of the party." },
+  { type = "paragraph", content = "You grab your uniform and everything under it and yank it all up to your chin. Your tits are bare to him in the middle of the party." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -26429,7 +26538,7 @@ blocks = [
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "dress", operator = "equipped" }] }
 blocks = [
-  { type = "paragraph", content = "You grab your clothes and yank it up to your chin. Your tits are bare to him in the middle of the party." },
+  { type = "paragraph", content = "You grab your clothes and everything under it and yank it all up to your chin. Your tits are bare to him in the middle of the party." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -26656,7 +26765,7 @@ name = "The dare"
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "dialog", content = "Start the song.", props = { speaker = "player" } }, { type = "paragraph", content = "You say, and Zoe hits play. You pull your top off over your head and drop it on the counter. Your tits are bare under the kitchen light. The guys by the fridge stop talking. The guy at the keg stops pumping and stares from the doorway, cap backwards, mouth open. You pour a drink and lean on the counter, ass pushed back. Someone lifts a phone and Zoe slaps it down." }, { type = "dialog", content = "Eyes only.", props = { speaker = "npc", npcId = "npc_zoe" } }, { type = "paragraph", content = "She yells. Your nipples are hard and tight in the open air. You're wet, and you don't cover up." }, { type = "dialog", content = "Look all you want.", props = { speaker = "player" } }, { type = "paragraph", content = "You tell the room. You want her to dare you something worse. The song hits its last beat, and every eye in the kitchen is on your bare tits." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "dialog", content = "Start the song.", props = { speaker = "player" } }, { type = "paragraph", content = "You say, and Zoe hits play. You strip to the waist, right there at the counter. Your tits are bare under the kitchen light. The guys by the fridge stop talking. The guy at the keg stops pumping and stares from the doorway, cap backwards, mouth open. You pour a drink and lean on the counter, ass pushed back. Someone lifts a phone and Zoe slaps it down." }, { type = "dialog", content = "Eyes only.", props = { speaker = "npc", npcId = "npc_zoe" } }, { type = "paragraph", content = "She yells. Your nipples are hard and tight in the open air. You're wet, and you don't cover up." }, { type = "dialog", content = "Look all you want.", props = { speaker = "player" } }, { type = "paragraph", content = "You tell the room. You want her to dare you something worse. The song hits its last beat, and every eye in the kitchen is on your bare tits." }] },
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "dialog", content = "Till the song ends, babe.", props = { speaker = "npc", npcId = "npc_zoe" } }, { type = "paragraph", content = "Zoe says, and turns the music up. The kitchen goes quiet under it. You pull everything up to your chin, and your tits drop out into the warm air, bare to people you sit next to in class. Your nipples go hard at once, tight and dark, while every eye lands on them. Somebody whistles. A guy at the counter forgets the drink halfway to his mouth. The chorus comes round again. Your chest heaves, so your tits bounce with it. The last note goes, and you hold them out a breath past it, nipples stiff and aching, before you let everything drop." }] },
 ]
 props = { id = "zoe_dare_high_show", memory = "seen", seen_weight = 0 }
@@ -26859,7 +26968,7 @@ props = { description = "two girls making out in the middle of a house party, th
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Mm. You taste like vodka. Again."
+content = "Mm. You taste good. Again."
 props = { speaker = "npc", npcId = "npc_zoe" }
 
 [[canvases.nodes.blocks]]
@@ -26910,35 +27019,35 @@ content = "The cocky guy on the corner couch grins up at you and sets his beer o
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "top", operator = "equipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }] }
 blocks = [
-  { type = "paragraph", content = "His hands slide up under your top and close on your bare tits." },
+  { type = "paragraph", content = "His hands slide up under your top, shove aside whatever's in the way, and close on your bare tits." },
 ]
 
 [[canvases.nodes.blocks]]
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "zoe_party_dress", operator = "equipped" }] }
 blocks = [
-  { type = "paragraph", content = "His hands slide up under your dress and close on your bare tits." },
+  { type = "paragraph", content = "His hands slide up under your dress, shove aside whatever's in the way, and close on your bare tits." },
 ]
 
 [[canvases.nodes.blocks]]
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "laura_blue_dress", operator = "equipped" }] }
 blocks = [
-  { type = "paragraph", content = "His hands slide up under your dress and close on your bare tits." },
+  { type = "paragraph", content = "His hands slide up under your dress, shove aside whatever's in the way, and close on your bare tits." },
 ]
 
 [[canvases.nodes.blocks]]
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_normal", operator = "equipped" }] }
 blocks = [
-  { type = "paragraph", content = "His hands slide up under your uniform and close on your bare tits." },
+  { type = "paragraph", content = "His hands slide up under your uniform, shove aside whatever's in the way, and close on your bare tits." },
 ]
 
 [[canvases.nodes.blocks]]
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }] }
 blocks = [
-  { type = "paragraph", content = "His hands slide up under your uniform and close on your bare tits." },
+  { type = "paragraph", content = "His hands slide up under your uniform, shove aside whatever's in the way, and close on your bare tits." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -26959,7 +27068,7 @@ blocks = [
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "dress", operator = "equipped" }] }
 blocks = [
-  { type = "paragraph", content = "His hands slide up under your clothes and close on your bare tits." },
+  { type = "paragraph", content = "His hands slide up under your clothes, shove aside whatever's in the way, and close on your bare tits." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -27035,7 +27144,7 @@ props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Boo. Next one's tamer."
+content = "Boo. Next Friday, then."
 props = { speaker = "npc", npcId = "npc_zoe" }
 
 [[canvases.nodes.blocks]]
@@ -27270,7 +27379,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", 
 [[canvases]]
 id   = "park_walk"
 name = "Walk the path"
-description = "A walk in the park: who she passes, what they see. Once a day. The next locked act is shown, naming Corruption 60."
+description = "A walk in the park: who she passes, what they see. Once a day."
 
 [canvases.trigger]
 location = "park"
@@ -27761,7 +27870,7 @@ text = "Slip away."
 targetType = "location"
 locationId = "park"
 time_progression_minutes = 10
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 2, cap = 39 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }]
 flagEffects = [{ targetType = "player", flag = "saw_the_couple", op = "set" }]
 
 [[canvases.nodes]]
@@ -28080,7 +28189,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "Ryan comes out of his room as you straighten up. You pass in the narrow hall, and he has to flatten himself to the wall, and his eyes go down your legs on the way past." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "Ryan comes out of his room while you're still bent over. He has to flatten himself to the wall to pass you in the narrow hall, and his eyes go down your legs on the way past." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -28649,8 +28758,8 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure"
 blocks = [
   { type = "paragraph", content = "A dozen heads turn your way. Their eyes go down you on the bench, slow, your legs, your hips." },
   { type = "dialog", content = "We need that bench. No rush.", props = { speaker = "unknown" } },
-  { type = "dialog", content = "Two more sets.", props = { speaker = "player" } },
-  { type = "dialog", content = "Do your two sets, then. We'll watch.", props = { speaker = "unknown" } },
+  { type = "dialog", content = "Give me a minute.", props = { speaker = "player" } },
+  { type = "dialog", content = "Take your minute, then. We'll watch.", props = { speaker = "unknown" } },
 ]
 
 [[canvases.nodes.blocks]]
@@ -29029,7 +29138,7 @@ name = "Skirt down"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "You tug your skirt down to your knees, as far as it goes. The table groans."
+content = "You tug your skirt down your thighs, as far as it goes. The table groans."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -29303,8 +29412,21 @@ time_progression_minutes = 1
 [[canvases.nodes.exit_block.choices]]
 text = "Run with her."
 targetType = "node"
-nodeId = "hub_zoe_park.path"
-time_progression_minutes = 0
+nodeId = "hub_zoe_park.lap"
+time_progression_minutes = 30
+costs = [{ trait = "energy", value = 10 }]
+flagEffects = [{ targetType = "player", flag = "ran_with_zoe", op = "set" }, { targetType = "player", flag = "zoe_bailed", op = "unset" }, { targetType = "player", flag = "zoe_run_booked", op = "unset" }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_run_booked", operator = "is_true" }] }
+effects = []
+
+[[canvases.nodes.exit_block.choices]]
+text = "Run with her."
+targetType = "node"
+nodeId = "hub_zoe_park.lap"
+time_progression_minutes = 30
+costs = [{ trait = "energy", value = 10 }]
+flagEffects = [{ targetType = "player", flag = "ran_with_zoe", op = "set" }, { targetType = "player", flag = "zoe_bailed", op = "unset" }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_run_booked", operator = "is_false" }] }
 
 [[canvases.nodes.exit_block.choices]]
 text = "\"Dare me, Zo.\""
@@ -29400,8 +29522,21 @@ time_progression_minutes = 1
 [[canvases.nodes.exit_block.choices]]
 text = "Run with her."
 targetType = "node"
-nodeId = "hub_zoe_park.path"
-time_progression_minutes = 0
+nodeId = "hub_zoe_park.lap"
+time_progression_minutes = 30
+costs = [{ trait = "energy", value = 10 }]
+flagEffects = [{ targetType = "player", flag = "ran_with_zoe", op = "set" }, { targetType = "player", flag = "zoe_bailed", op = "unset" }, { targetType = "player", flag = "zoe_run_booked", op = "unset" }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_run_booked", operator = "is_true" }] }
+effects = []
+
+[[canvases.nodes.exit_block.choices]]
+text = "Run with her."
+targetType = "node"
+nodeId = "hub_zoe_park.lap"
+time_progression_minutes = 30
+costs = [{ trait = "energy", value = 10 }]
+flagEffects = [{ targetType = "player", flag = "ran_with_zoe", op = "set" }, { targetType = "player", flag = "zoe_bailed", op = "unset" }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_run_booked", operator = "is_false" }] }
 
 [[canvases.nodes.exit_block.choices]]
 text = "\"Dare me, Zo.\""
@@ -29533,8 +29668,9 @@ text = "Let her."
 targetType = "node"
 nodeId = "tub_let"
 time_progression_minutes = 10
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_together", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_together", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+costs = [{ trait = "energy", value = 10 }]
+effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
 
 [[canvases.nodes]]
 id   = "tub_no"
@@ -30558,7 +30694,7 @@ props = { speaker = "npc", npcId = "npc_vance" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "You don't turn round for him. You walk on, and behind you the rocking chair starts up again, slow, and his eyes stay on your bare legs until you're past the hedge."
+content = "You walk on, and behind you the rocking chair starts up again, slow, and his eyes stay on your bare legs until you're past the hedge."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -30812,7 +30948,7 @@ type = "choices"
 [[canvases.nodes.exit_block.choices]]
 text = "Walk away."
 targetType = "location"
-locationId = "hale_office"
+locationId = "faculty_floor"
 time_progression_minutes = 2
 flagEffects = [{ targetType = "player", flag = "walkin_door_hale_today", op = "set" }, { targetType = "player", flag = "hale_door_seen", op = "set" }]
 
@@ -30918,7 +31054,7 @@ text = "She doesn't shut the door."
 targetType = "node"
 nodeId = "answer"
 time_progression_minutes = 2
-effects = [{ targetType = "player", trait = "hygiene", op = "add", value = 15 }]
+effects = [{ targetType = "player", trait = "hygiene", op = "add", value = 15, cap = 100 }]
 flagEffects = [{ targetType = "player", flag = "walkin_toilet_zoe_today", op = "set" }, { targetType = "player", flag = "zoe_saw_toilet", op = "set" }]
 
 [[canvases.nodes]]
@@ -31242,7 +31378,7 @@ content = "You shove past him, yank the door open and point down the hall. The m
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Out. Pee in the garden."
+content = "Out. Pee outside."
 props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
@@ -31294,7 +31430,7 @@ content = "He watches till you cap the liner, then holds the door open for you l
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Open the door."
+text = "Back to the party."
 targetType = "location"
 locationId = "zoe_apartment"
 time_progression_minutes = 5
@@ -31330,7 +31466,7 @@ content = "He goes, and he leaves the door wide open behind him."
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Open the door."
+text = "Back to the party."
 targetType = "location"
 locationId = "zoe_apartment"
 time_progression_minutes = 5
@@ -31365,13 +31501,13 @@ props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "Somebody bangs on the door. He grins at you, opens it on the queue outside, and goes out through them."
+content = "Somebody bangs on the door. He grins at you, opens it on the line outside, and goes out through them."
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Open the door."
+text = "Back to the party."
 targetType = "location"
 locationId = "zoe_apartment"
 time_progression_minutes = 5
@@ -31567,7 +31703,7 @@ when = [
   { type = "trait", subject = "player", trait = "corruption", op = "lt", value = 60 },
 ]
 goals = [
-  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 60, label = "Reach Hungry (Corruption 60): get on Ryan's couch with him, pull Jake into the gym locker room, walk the street with nothing under your skirt" },
+  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 60, label = "Reach Hungry (Corruption 60): get on Ryan's couch with him, pull Jake into the gym locker room" },
 ]
 
 [[quest_cards]]
@@ -31608,7 +31744,7 @@ when = [
   { type = "trait", subject = "player", trait = "exhibitionism", op = "lt", value = 40 },
 ]
 goals = [
-  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Reach Showing (Exhibitionism 40): let them look at the campus gym and in the lecture hall, take your bra off in the women's toilet, let the towel slip in the hall or the living room, run in the park" },
+  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Reach Showing (Exhibitionism 40): let them look at the campus gym and in the lecture hall, take your bra off in the women's toilet, let the towel slip in the hall or the living room" },
 ]
 
 [[quest_cards]]
@@ -32042,7 +32178,7 @@ locationId = "home_hall"
 [[canvases]]
 id   = "bathroom_shower"
 name = "Take a shower"
-description = "Hygiene +50, 20 minutes, once a day. Who's near reads who is home. Not while Ryan has the room."
+description = "Hygiene +50, 20 minutes, once a day. Who's near reads who is home. Not while Ryan or Laura has the room."
 
 [canvases.trigger]
 location = "home_bathroom"
@@ -32051,7 +32187,7 @@ priority = 5
 is_active = true
 max_triggers_per_day = 1
 substitutions = [{ target_canvas_id = "walkin_shower_ryan", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_false" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3] }, { type = "time_of_day", start_time = "19:00", end_time = "00:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_shower_ryan", chance = 0.35, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_false" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3] }, { type = "time_of_day", start_time = "19:00", end_time = "00:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_shower_ryan", chance = 0.45, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_false" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3] }, { type = "time_of_day", start_time = "19:00", end_time = "00:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_shower_ryan", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_false" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "07:30", end_time = "14:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_shower_ryan", chance = 0.35, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_false" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "07:30", end_time = "14:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_shower_ryan", chance = 0.45, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_false" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "07:30", end_time = "14:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_shower_kayla", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_false" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_shower_kayla", chance = 0.35, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_false" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_shower_kayla", chance = 0.45, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_false" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_shower_mark", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_false" }, { type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_present" }, { type = "npc_at_location", location_id = "home_bathroom", npc_id = "npc_laura", operator = "is_absent" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "14:00", end_time = "17:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_shower_mark", chance = 0.35, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_false" }, { type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_present" }, { type = "npc_at_location", location_id = "home_bathroom", npc_id = "npc_laura", operator = "is_absent" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "14:00", end_time = "17:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_shower_mark", chance = 0.45, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_false" }, { type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_present" }, { type = "npc_at_location", location_id = "home_bathroom", npc_id = "npc_laura", operator = "is_absent" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "14:00", end_time = "17:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_shower_ryan", chance = 0.5, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_true" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3] }, { type = "time_of_day", start_time = "19:00", end_time = "00:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_shower_ryan", chance = 0.7, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_true" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3] }, { type = "time_of_day", start_time = "19:00", end_time = "00:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_shower_ryan", chance = 0.9, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_true" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3] }, { type = "time_of_day", start_time = "19:00", end_time = "00:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_shower_ryan", chance = 0.5, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_true" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "07:30", end_time = "14:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_shower_ryan", chance = 0.7, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_true" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "07:30", end_time = "14:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_shower_ryan", chance = 0.9, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_true" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "07:30", end_time = "14:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_shower_kayla", chance = 0.5, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_true" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_shower_kayla", chance = 0.7, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_true" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_shower_kayla", chance = 0.9, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_true" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_shower_mark", chance = 0.5, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_true" }, { type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_present" }, { type = "npc_at_location", location_id = "home_bathroom", npc_id = "npc_laura", operator = "is_absent" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "14:00", end_time = "17:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_shower_mark", chance = 0.7, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_true" }, { type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_present" }, { type = "npc_at_location", location_id = "home_bathroom", npc_id = "npc_laura", operator = "is_absent" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "14:00", end_time = "17:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_shower_mark", chance = 0.9, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_true" }, { type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_present" }, { type = "npc_at_location", location_id = "home_bathroom", npc_id = "npc_laura", operator = "is_absent" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "14:00", end_time = "17:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] } }]
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_bathroom", npc_id = "npc_ryan", operator = "is_absent" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_bathroom", npc_id = "npc_ryan", operator = "is_absent" }, { type = "npc_at_location", location_id = "home_bathroom", npc_id = "npc_laura", operator = "is_absent" }] }
 
 [[canvases.nodes]]
 id   = "shower"
@@ -32664,19 +32800,25 @@ content = "You stretch out on the couch, one knee up, the remote on your stomach
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "Mark comes through from the kitchen with a beer and stops behind the couch. You're in your underwear, but he doesn't say cover up. He looks down the length of you, at your legs, at your ass in your panties. The beer stops halfway to his mouth." }, { type = "dialog", content = "Comfortable, @player?", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "dialog", content = "Very.", props = { speaker = "player" } }, { type = "dialog", content = "Hm.", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "paragraph", content = "Then he goes, slowly." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "Mark comes through from the kitchen with a drink and stops behind the couch. You're in your underwear, but he doesn't say cover up. He looks down the length of you, at your legs, at your ass in your panties. The drink stops halfway to his mouth." }, { type = "dialog", content = "Comfortable, @player?", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "dialog", content = "Very.", props = { speaker = "player" } }, { type = "dialog", content = "Hm.", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "paragraph", content = "Then he goes, slowly." }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "lt", value = 40 }] }, blocks = [{ type = "paragraph", content = "Ryan comes out of his room for a drink and stops at the end of the hall. His eyes go straight to your tits in your bra. Then they go up to the ceiling." }, { type = "dialog", content = "Jesus, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He goes to the kitchen without looking again. He takes a long time getting that drink. On the way back up he holds the can in front of his shorts." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "lt", value = 40 }] }, blocks = [{ type = "paragraph", content = "Ryan comes out of his room for a drink and stops at the end of the hall. His eyes go straight to your tits in your bra. Then they go up to the ceiling." }, { type = "dialog", content = "Jesus, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He goes to the kitchen without looking again." }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "gte", value = 40 }] }, blocks = [{ type = "paragraph", content = "Ryan comes out of his room for a drink and stops at the end of the hall. His eyes go down you, your tits, your panties, and come back up slow. He doesn't pretend he wasn't looking." }, { type = "dialog", content = "Jesus, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He takes a long time getting that drink. On the way back up he holds the can in front of his shorts." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "gte", value = 40 }] }, blocks = [{ type = "paragraph", content = "Ryan comes out of his room for a drink and stops at the end of the hall. His eyes go down you, your tits, your panties, and come back up slow. He doesn't pretend he wasn't looking." }, { type = "dialog", content = "Jesus, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }] }, blocks = [{ type = "dialog", content = "Get me one too, Ryan.", props = { speaker = "player" } }, { type = "dialog", content = "Get your own. And put some clothes on.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He takes a long time getting that drink. On the way back up he holds the can in front of his shorts." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -32689,12 +32831,6 @@ blocks = [
 type = "block_pool"
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "eq", value = 0 }] }, blocks = [{ type = "paragraph", content = "Nobody looks twice at a girl on a couch in her clothes." }] },
-]
-
-[[canvases.nodes.blocks]]
-type = "block_pool"
-blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }] }, blocks = [{ type = "dialog", content = "Get me one too, Ryan.", props = { speaker = "player" } }, { type = "dialog", content = "Get your own. And put some clothes on.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
 ]
 
 [canvases.nodes.exit_block]
@@ -32735,7 +32871,7 @@ content = "You don't cover up. You stay on your back with one knee up, in your b
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "Ten minutes later Mark comes back through from the kitchen, and this time he stops. He stands over you at the end of the couch with the beer. His eyes go down your tits in your bra to your panties, and stay there. The front of his jeans is tight." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "Ten minutes later Mark comes back through from the kitchen, and this time he stops. He stands over you at the end of the couch with the drink. His eyes go down your tits in your bra to your panties, and stay there. The front of his jeans is tight." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -32790,7 +32926,7 @@ blocks = [
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }] }
 blocks = [
-  { type = "paragraph", content = "Ten minutes later Ryan comes down again and sits on the arm of the couch, right by your feet. His eyes go down you slow, your tits, your panties, the inside of your raised knee. His cock is hard in his shorts, and he doesn't hide it." },
+  { type = "paragraph", content = "Ten minutes later Ryan comes out again and sits on the arm of the couch, right by your feet. His eyes go down you slow, your tits, your panties, the inside of your raised knee. His cock is hard in his shorts, and he doesn't hide it." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -32827,7 +32963,7 @@ is_active = true
 max_triggers_per_day = 5
 show_when_blocked = true
 cooldown_message = "Every day, 7 AM-2 AM, five times a day"
-substitutions = [{ target_canvas_id = "walkin_tv_mark_garage", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }, { type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 3, 4] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_tv_mark_garage", chance = 0.35, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }, { type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 3, 4] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_tv_mark_garage", chance = 0.45, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }, { type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 3, 4] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_tv_mark_kitchen", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [2] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_tv_mark_kitchen", chance = 0.35, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [2] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_tv_mark_kitchen", chance = 0.45, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [2] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_tv_ryan", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "13:30", end_time = "14:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_tv_ryan", chance = 0.35, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "13:30", end_time = "14:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_tv_ryan", chance = 0.45, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "13:30", end_time = "14:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_tv_laura", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_laura", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }] } }, { target_canvas_id = "walkin_tv_mark_garage", chance = 0.5, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_true" }, { type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 3, 4] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_tv_mark_garage", chance = 0.7, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_true" }, { type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 3, 4] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_tv_mark_garage", chance = 0.9, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_true" }, { type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 3, 4] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_tv_mark_kitchen", chance = 0.5, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_true" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [2] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_tv_mark_kitchen", chance = 0.7, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_true" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [2] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_tv_mark_kitchen", chance = 0.9, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_true" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [2] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_tv_ryan", chance = 0.5, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_true" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "13:30", end_time = "14:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_tv_ryan", chance = 0.7, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_true" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "13:30", end_time = "14:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_tv_ryan", chance = 0.9, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_true" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "13:30", end_time = "14:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_tv_laura", chance = 0.5, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_true" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_laura", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }] } }]
+substitutions = [{ target_canvas_id = "walkin_tv_mark_garage", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }, { type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 3, 4] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_tv_mark_garage", chance = 0.35, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }, { type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 3, 4] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_tv_mark_garage", chance = 0.45, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }, { type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 3, 4] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_tv_mark_kitchen", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [2] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_tv_mark_kitchen", chance = 0.35, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [2] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_tv_mark_kitchen", chance = 0.45, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [2] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_tv_ryan", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "13:30", end_time = "14:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_tv_ryan", chance = 0.35, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "13:30", end_time = "14:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_tv_ryan", chance = 0.45, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "13:30", end_time = "14:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_tv_laura", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_false" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_laura", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "21:30", end_time = "21:58" }] } }, { target_canvas_id = "walkin_tv_mark_garage", chance = 0.5, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_true" }, { type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 3, 4] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_tv_mark_garage", chance = 0.7, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_true" }, { type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 3, 4] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_tv_mark_garage", chance = 0.9, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_true" }, { type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 3, 4] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_tv_mark_kitchen", chance = 0.5, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_true" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [2] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_tv_mark_kitchen", chance = 0.7, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_true" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [2] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_tv_mark_kitchen", chance = 0.9, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_true" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }, { type = "weekday", weekdays = [2] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_tv_ryan", chance = 0.5, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_true" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "13:30", end_time = "14:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_tv_ryan", chance = 0.7, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_true" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "13:30", end_time = "14:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_tv_ryan", chance = 0.9, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_true" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "13:30", end_time = "14:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_tv_laura", chance = 0.5, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "tv_loud", operator = "is_true" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_laura", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "21:30", end_time = "21:58" }] } }]
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_living_room", operator = "is_absent" }] }
 
 [[canvases.trigger.schedules]]
@@ -33252,7 +33388,7 @@ name = "Laura's wardrobe"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "Laura's wardrobe smells like her perfume. Work blouses, a winter coat, and at the back, in dry-cleaner plastic, dresses she hasn't worn since before Mark. Short ones. Tight ones. A red one with no back at all."
+content = "Laura's wardrobe smells like her perfume. Work blouses, a winter coat, and at the back, in dry-cleaner plastic, dresses she never wears. Short ones. Tight ones. A red one with no back at all."
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -33733,6 +33869,12 @@ id   = "watch"
 name = "Keep watching"
 
 [[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }] }, blocks = [{ type = "dialog", content = "Mm. There. Right there.", props = { speaker = "npc", npcId = "npc_laura" } }, { type = "dialog", content = "Don't stop. Don't you stop.", props = { speaker = "npc", npcId = "npc_laura" } }] },
+]
+
+[[canvases.nodes.blocks]]
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 60 }] }
 blocks = [
@@ -33744,12 +33886,6 @@ type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }] }
 blocks = [
   { type = "paragraph", content = "You stay. Your hand stays flat on the door frame. Laura pushes two fingers inside herself. Her thumb rubs her clit, faster now. Her other hand squeezes her tit and pinches the nipple. Her hips lift off the mattress. She bites the back of her hand so Mark won't hear. Her fingers pump in and out, wet and loud in the quiet. Then she comes. Her whole body shakes. Her thighs clamp hard on her hand. A moan leaks out around her teeth. Your nipples go tight and ache. You are wet, all at once. Your other hand is already inside your clothes. Two fingers on your clit, rubbing in time with hers, and you bite your lip so she won't hear you. Laura goes still, breathing hard, two fingers still inside her. Her tits rise and fall. You back away from the door before she opens her eyes, thighs pressed tight, nipples still hard." },
-]
-
-[[canvases.nodes.blocks]]
-type = "block_pool"
-blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }] }, blocks = [{ type = "dialog", content = "Mm. There. Right there.", props = { speaker = "npc", npcId = "npc_laura" } }, { type = "dialog", content = "Don't stop. Don't you stop.", props = { speaker = "npc", npcId = "npc_laura" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -33836,7 +33972,7 @@ props = { description = "a woman on her side coming silently into a pillow, her 
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Back to your room."
+text = "Lie still."
 targetType = "location"
 locationId = "home_ella_room"
 time_progression_minutes = 5
@@ -34001,7 +34137,7 @@ content = "You ease the handle down and open the door a finger's width. The lamp
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "It's over. Mark's flat on his back with one arm over his eyes, getting his breath back. Laura lies awake beside him, staring at the ceiling, her nightdress still bunched up at her waist." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "It's over. Mark's flat on his back with one arm over his eyes. Laura lies awake beside him, staring at the ceiling, her nightdress still bunched up at her waist." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -34152,14 +34288,14 @@ blocks = [
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
 blocks = [
-  { type = "paragraph", content = "Topless, on your front, the sun on your back and the side of your tits pressed flat to the lounger." },
+  { type = "paragraph", content = "Topless, on your front, the side of your tits pressed flat to the lounger." },
 ]
 
 [[canvases.nodes.blocks]]
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "clothing_slot", slot = "bra", operator = "equipped" }] }
 blocks = [
-  { type = "paragraph", content = "Your bra and nothing over it, the sun on your stomach." },
+  { type = "paragraph", content = "Your bra and nothing over it, your stomach bare." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -34310,14 +34446,14 @@ name = "An hour in the sun"
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "07:00", end_time = "20:00" }] }
 blocks = [
-  { type = "paragraph", content = "An hour later you sit up, slow and heavy. Your skin is hot and pink all over, the lounger has printed its slats across the backs of your thighs, and sweat has run down between your tits." },
+  { type = "paragraph", content = "An hour later you sit up, slow and heavy. Your skin is hot, the lounger has printed its slats into you, and sweat has run down between your tits." },
 ]
 
 [[canvases.nodes.blocks]]
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
 blocks = [
-  { type = "paragraph", content = "An hour later you sit up in the dusk, slow and heavy. The light has gone off the garden, the lounger has printed its slats across the backs of your thighs, and the cool air has your nipples standing up hard." },
+  { type = "paragraph", content = "An hour later you sit up in the dusk, slow and heavy. The light has gone off the garden, the lounger has printed its slats into you, and the cool air has your nipples standing up hard." },
 ]
 
 [canvases.nodes.exit_block]
@@ -34336,7 +34472,7 @@ name = "Wave up at Ryan"
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "time_of_day", start_time = "07:00", end_time = "20:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }
 blocks = [
-  { type = "paragraph", content = "You wave up at his window. Ryan jerks back from the glass, then comes back and lifts a hand, red to the ears. His eyes go down your bare legs on the lounger before he can stop them." },
+  { type = "paragraph", content = "You wave up at his window. Ryan jerks back from the glass, then comes back and lifts a hand, red to the ears. His eyes go down your legs on the lounger before he can stop them." },
   { type = "dialog", content = "Put some sun cream on. You'll fry.", props = { speaker = "npc", npcId = "npc_ryan" } },
   { type = "dialog", content = "Yes, Mom.", props = { speaker = "player" } },
   { type = "paragraph", content = "He laughs and shuts the window. Every time you stretch, the curtain moves." },
@@ -34357,7 +34493,7 @@ blocks = [
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] }
 blocks = [
-  { type = "paragraph", content = "You wave up at his window. Ryan jerks back from the glass, then comes back and lifts a hand, red to the ears. His eyes go down your bare legs on the lounger before he can stop them." },
+  { type = "paragraph", content = "You wave up at his window. Ryan jerks back from the glass, then comes back and lifts a hand, red to the ears. His eyes go down your legs on the lounger before he can stop them." },
   { type = "dialog", content = "You'll freeze out there, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } },
   { type = "dialog", content = "Yes, Mom.", props = { speaker = "player" } },
   { type = "paragraph", content = "He laughs and shuts the window. Every time you stretch, the curtain moves." },
@@ -34440,8 +34576,10 @@ blocks = [
 ]
 
 [[canvases.nodes.blocks]]
-type = "paragraph"
-content = "He doesn't come out. After the hour he goes back to his bench, and the radio comes on loud."
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "He doesn't come out. After the hour he goes back to his bench, and the radio comes on loud." }] },
+]
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -34477,7 +34615,7 @@ flagEffects = [{ targetType = "player", flag = "sunned", op = "set" }]
 text = "Call him down with the sun lotion."
 targetType = "node"
 nodeId = "sun_ryan_touch"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 7 }, { type = "flag", subject = "player", flag_key = "sunned", operator = "is_false" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 7 }, { type = "npc_at_location", location_id = "home_garage", npc_id = "npc_mark", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "sunned", operator = "is_false" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }] }
 effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 1, cap = 100 }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }]
 flagEffects = [{ targetType = "player", flag = "sunned", op = "set" }]
 
@@ -34691,7 +34829,7 @@ blocks = [
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "21:00", end_time = "07:00" }] }
 blocks = [
-  { type = "paragraph", content = "The street is dark and quiet, the porch light on its timer. A car passes now and then, slow, headlights sliding over you, but nobody stops." },
+  { type = "paragraph", content = "The street is dark and quiet, the porch light on its timer. A car passes now and then, slow, headlights sliding over you." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -34703,7 +34841,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "21:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "A window comes down on a passing car." }, { type = "dialog", content = "Hey, beautiful! Want a ride?", props = { speaker = "unknown" } }, { type = "dialog", content = "Not from you.", props = { speaker = "player" } }, { type = "dialog", content = "Your loss, sweetheart.", props = { speaker = "unknown" } }, { type = "paragraph", content = "He laughs, and the car pulls off, slow, his eyes on your legs in the mirror till the corner." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "21:00", end_time = "07:00" }] }, blocks = [{ type = "paragraph", content = "A window comes down on a passing car." }, { type = "dialog", content = "Hey, beautiful! Want a ride?", props = { speaker = "unknown" } }, { type = "dialog", content = "Not from you.", props = { speaker = "player" } }, { type = "dialog", content = "Your loss, legs.", props = { speaker = "unknown" } }, { type = "paragraph", content = "He laughs, and the car pulls off, slow, his eyes on your legs in the mirror till the corner." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -34756,7 +34894,7 @@ name = "Let the street see"
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "underwear", operator = "equipped" }] }
 blocks = [
-  { type = "paragraph", content = "You let your knees fall open on the step. The skirt slides up your thighs, and your panties are right there for the street, the cotton pulled tight over your cunt." },
+  { type = "paragraph", content = "You let your knees fall open on the step. The skirt slides up your thighs, and your panties are right there for the street, the fabric pulled tight over your cunt." },
 ]
 
 [[canvases.nodes.blocks]]
@@ -34883,7 +35021,7 @@ props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Bathroom's free. Go on. Go."
+content = "Two more minutes. Go on. Go."
 props = { speaker = "npc", npcId = "npc_ryan" }
 
 [[canvases.nodes.blocks]]
@@ -34927,7 +35065,7 @@ content = "Ryan steps out of the bathroom in a towel, steam rolling out behind h
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Door's free, @player.nickname."
+content = "Not free yet, @player.nickname."
 props = { speaker = "npc", npcId = "npc_ryan" }
 
 [[canvases.nodes.blocks]]
@@ -35701,7 +35839,7 @@ props = { speaker = "npc", npcId = "npc_ryan" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "Then you reach for the towel, slow. He backs out with his toothbrush still in his fist and the front of his shorts tented."
+content = "Then you reach for the towel, slow. He grabs his toothbrush off the sink and backs out with the front of his shorts tented."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -35952,7 +36090,7 @@ name = "The towel"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "You grab the towel and hold it over your tits. Kayla grins and pads back across the hall in his shirt."
+content = "You grab the towel and hold it over your tits. Kayla grins."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -35968,6 +36106,10 @@ props = { speaker = "player" }
 type = "dialog"
 content = "Not at all."
 props = { speaker = "npc", npcId = "npc_kayla" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She pads back across the hall in his shirt."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -36447,7 +36589,7 @@ content = "He feels it the same second you do. Neither of you moves. His cock is
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "lt", value = 40 }] }
 blocks = [
-  { type = "paragraph", content = "Then he jerks his hips back and turns side-on, the mug held low in front of him, red to the ears." },
+  { type = "paragraph", content = "Then he goes red to the ears and stays exactly where he is, too scared to move, his hand frozen on the mug on the top shelf." },
   { type = "dialog", content = "Morning. Sorry. Morning. That was the counter.", props = { speaker = "npc", npcId = "npc_ryan" } },
   { type = "dialog", content = "Sure, Ryan. The counter.", props = { speaker = "player" } },
 ]
@@ -37305,7 +37447,7 @@ content = "He goes red, but he doesn't go back to his room. His eyes go back to 
 
 [[canvases.nodes.blocks]]
 type = "video"
-props = { description = "a young man on the bottom stair staring at porn on the living room TV, a girl on the couch", search_queries = ["brother catches sister watching porn", "guy walks in girl watching porn couch"], pool_dir = "sex/walkin_tv_ryan_t5" }
+props = { description = "a young man in the doorway staring at porn on the living room TV, a girl on the couch", search_queries = ["brother catches sister watching porn", "guy walks in girl watching porn couch"], pool_dir = "sex/walkin_tv_ryan_t5" }
 
 [[canvases.nodes.blocks]]
 type = "group"
@@ -37479,7 +37621,7 @@ is_repeatable = true
 priority = 1
 is_active = true
 substitution_only = true
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "walkin_tv_laura_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_laura", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "21:30", end_time = "22:00" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "walkin_tv_laura_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_laura", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "21:30", end_time = "21:58" }] }
 
 [[canvases.nodes]]
 id   = "moment"
@@ -38057,7 +38199,7 @@ type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "want", operator = "lt", value = 20 }] }
 blocks = [
   { type = "paragraph", content = "Then he catches himself. He looks down at the hall carpet, at his own feet, anywhere but the glass." },
-  { type = "dialog", content = "Bit late to be dressing up, @player. Bed.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "dialog", content = "Bit late to be standing there, @player. Bed.", props = { speaker = "npc", npcId = "npc_mark" } },
   { type = "dialog", content = "Night, Mark.", props = { speaker = "player" } },
   { type = "dialog", content = "Night.", props = { speaker = "npc", npcId = "npc_mark" } },
 ]
@@ -38067,7 +38209,7 @@ type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
 blocks = [
   { type = "paragraph", content = "He stands there and doesn't pretend he's doing anything else." },
-  { type = "dialog", content = "Bit late to be dressing up, @player.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "dialog", content = "Bit late to be standing there, @player.", props = { speaker = "npc", npcId = "npc_mark" } },
 ]
 
 [canvases.nodes.exit_block]
@@ -38109,7 +38251,7 @@ name = "Stay at the mirror"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "You stay at the mirror and take your time, and let him look at all of it. He comes up the last step. He stands right behind you, close enough that you feel the heat off him, but he doesn't touch."
+content = "You stay at the mirror and take your time, and let him look at all of it. He comes down the hall. He stands right behind you, close enough that you feel the heat off him, but he doesn't touch."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -38208,7 +38350,7 @@ props = { speaker = "npc", npcId = "npc_laura" }
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Hang it back up."
+text = "Leave her to it."
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 5
@@ -38243,7 +38385,7 @@ blocks = [
 
 [[canvases.nodes.blocks]]
 type = "group"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+conditions = { version = "1.0", logic = "OR", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "equipped" }, { type = "clothing_slot", slot = "bottom", operator = "equipped" }, { type = "clothing_slot", slot = "dress", operator = "equipped" }] }
 blocks = [
   { type = "paragraph", content = "You strip off and leave your own things in a heap on her bed." },
 ]
@@ -38969,7 +39111,7 @@ content = "You don't move. You lie there with your cheek on the pillow and let h
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "You're. You're awake."
+content = "You're. You're still lying there."
 props = { speaker = "npc", npcId = "npc_ryan" }
 
 [[canvases.nodes.blocks]]
@@ -39353,7 +39495,7 @@ type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "want", operator = "lt", value = 20 }] }
 blocks = [
   { type = "paragraph", content = "His jaw goes tight. He turns his back on you and turns the hose up hard on the tomatoes, and his free hand goes to the front of his jeans to hide it." },
-  { type = "dialog", content = "Get some clothes on, @player. Anybody could look out a window.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "dialog", content = "Get inside, @player. Anybody could look out a window.", props = { speaker = "npc", npcId = "npc_mark" } },
   { type = "dialog", content = "Somebody is looking, Mark. You.", props = { speaker = "player" } },
 ]
 
@@ -39362,7 +39504,7 @@ type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
 blocks = [
   { type = "paragraph", content = "He doesn't turn away. He drinks and looks, a long time, and the front of his jeans is tight." },
-  { type = "dialog", content = "Cover up, @player. Not out here.", props = { speaker = "npc", npcId = "npc_mark" } },
+  { type = "dialog", content = "Not out here, @player.", props = { speaker = "npc", npcId = "npc_mark" } },
   { type = "dialog", content = "Then where?", props = { speaker = "player" } },
   { type = "dialog", content = "Not today. That's all you get.", props = { speaker = "npc", npcId = "npc_mark" } },
 ]
@@ -40057,6 +40199,7 @@ text = "Talk with him a while."
 targetType = "node"
 nodeId = "talk"
 time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "23:00", end_time = "01:40" }] }
 
 [[canvases.nodes.exit_block.choices]]
 text = "Walk past him."

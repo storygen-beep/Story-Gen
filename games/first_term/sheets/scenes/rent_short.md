@@ -1,5 +1,7 @@
 # [REVIEW] Scene — rent_short_1, rent_short_2, rent_short_3
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. The key's first line as built, and the table in place of a count (Q6).
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the three read `rent_short`, not `rent_carried`; the fee's key; "Next week."; want, next step and hook rows. file and line cites cut.
 
 > **New 2026-11-01, signed by LO 2026-11-01 ("Continue")** (DECISIONS 99–120). From the signed rent system (`sheets/systems/money_pressure.md`, "What a short Sunday costs").
@@ -21,7 +23,7 @@
 |---|---|---|---|
 | `key` | Mark: "Then it's owed. Vance doesn't wait, so I don't." He holds his hand out for her bedroom key | "Here." → the kitchen | `her_door_unlocked` set · Mark's Power add +5 |
 
-Lines: "Mark doesn't count it twice. He counts it once, and it's short, and he puts the envelope down." · Mark: "Then it's owed. Vance doesn't wait, so I don't." · "He holds out his hand, palm up." · Mark: "Your door key. You get it back when you're square." · *(thought)* "Anyone can open your door now. Anyone in this house."
+Lines: "Mark doesn't open the envelope. He knows it's short, and he puts it down on the table between you." · Mark: "Then it's owed. Vance doesn't wait, so I don't." · "He holds out his hand, palm up." · Mark: "Your door key. You get it back when you're square." · *(thought)* "Anyone can open your door now. Anyone in this house."
 
 ## `rent_short_2` · the late fee (`rent_short_weeks` eq 2 · `rent_short`) · once
 
@@ -39,9 +41,9 @@ Lines: Mark: "Twice now. Vance comes round tonight, and Vance charges late. Fift
 
 Lines: Mark: "Three times." · "He doesn't shout. He gets up, goes down the hall, and comes back with the <item> over his arm. The one you bought." (worn: "He holds his hand out across the table for the <item> you've got on, and waits until you go and change and put it in his hand. The one you bought.") · Mark: "Garage. On the table, then you get it back." · "Through the kitchen window you watch him hang it on the nail by his workbench, where you'll see it every time you walk past." · In her wardrobe, the item shows 🔒 with "In the garage. (Pay what you owe.)"
 
-## Paying it back (the count, any Sunday)
+## Paying it back (the Sunday table, any Sunday)
 
-When `owed` reaches 0 at Mark's count: the key comes back first (`her_door_unlocked` false; Mark: "Key." and he slides it across the table), then each held item (`garage_holds_<item>` false; "It's on the nail. Take it."). The streak starts that Sunday.
+When `owed` reaches 0 at Mark's table: the key comes back first (`her_door_unlocked` false; Mark: "Key." and he slides it across the table), then each held item (`garage_holds_<item>` false; "It's on the nail. Take it."). The streak starts that Sunday.
 
 ## Why — the source of each key choice
 

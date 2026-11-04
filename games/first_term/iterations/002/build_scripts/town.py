@@ -176,7 +176,7 @@ out.append({
           D(COCKY, "Jake's right over there. When he goes home, that bathroom door locks.")),
     ], [
         # reader a3 #68 (DECISIONS 131): the talk is a screen with a pool he says, three lines, no counter (call B)
-        go("Talk with him a while.", node="talk", mins=20),
+        go("Talk with him a while.", node="talk", mins=20, cond_=cond(tod("23:00", "01:40"))),   # his row and the party end at 02:00: the talk ends before them
         # reader a3 #50 (DECISIONS 131): the hub no costs him (call A): his Lust +1 and one line
         go("Walk past him.", node="past", mins=1)]),   # reader a3 #50: he has no Want to pay (validator), so the no is his line
         node("talk", "Talking", [

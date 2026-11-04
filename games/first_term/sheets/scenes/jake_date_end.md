@@ -1,5 +1,7 @@
 # [REVIEW] Scene — jake_date_end
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. "Come in." costs Energy 10 and Hygiene 10.
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 
 > The signed plans behind this page: `proposals/COPY_FIXES_A.md`.
@@ -14,16 +16,17 @@
 |---|---|
 | where · when | the front door after a date, Wed and Sat 22:00-00:00, once a day |
 | want | his hand on her knee all the way home |
-| next step | the car, by her stage; after step 4, "Come up." (Saturday) |
+| next step | the car, by her stage; after step 4, "Come in." (Saturday) |
 | hook | "Goodnight, gorgeous. Saturday?" (or "Wednesday?"): the next date |
 | gate | his step 3+ · a date tonight · the car by Corruption: 40-59 the kiss, 60 his hand or hers |
-| tiers | **Curious** (Corruption under 40): `car_low` · **Bold** (Corruption 40), before his step 4: two yeses, `car_his` · `car_hers` · **after step 4**: "Come up." → `sneak` (a two-entry pool, `memory = "seen"`, `seen_weight = 0`) |
-| pays | the kiss: Corruption +1, Exhibitionism +1 (cap 39) · hands: Corruption +1 (cap 79), Exhibitionism +1 (cap 39) · the sneak: Corruption +1 (cap 59) |
-| the near-catch | after step 4, one night in four: the `door` exit rolls `jake_catch_roll` (random 1–8); 1: Laura's door opens across the hall · 2 (Ryan's knock code set, `ryan_knock_code`): two knocks on the wall. Each is one line after the `sneak` entry; they don't stop |
+| tiers | **Curious** (Corruption under 40): `car_low` · **Bold** (Corruption 40), before his step 4: two yeses, `car_his` · `car_hers` · **after step 4**: "Come in." → `sneak` (a two-entry pool, `memory = "seen"`, `seen_weight = 0`) |
+| pays | the kiss: Corruption +1, Exhibitionism +1 (cap 39) · hands: Corruption +1 (cap 79), Exhibitionism +1 (cap 39) · the sneak: Corruption +1 (cap 59), and "Come in." costs Energy 10 and Hygiene 10 |
+| the near-catch | after step 4, one night in four: the `door` exit rolls `jake_catch_roll` (random 1–8); 1: Laura's door opens across the hall · 2 (Ryan's knock code set, `ryan_knock_code`): two knocks on the wall. Each is one line after the `sneak` entry; they don't stop. As built: Laura's is her feet in the hall, and it shows only while she is in the living room (2026-11-04) |
 | the no | "Goodnight, Jake." → he walks backwards down the path |
 | locked | none: the build shows no locked button; his card ends "Jake, further. (Next release)" |
 | the crude-word ceiling | the car: his middle column (ass, tits, cock) with plain anatomy (nipples, clit, wet, thighs, balls) · `sneak`: Jake's late column: cock, fuck, cum (signed with the proposal, LO 2026-11-01), with ass, tits and plain anatomy (nipples, clit, wet, thighs) · no pussy, cunt |
-| truth | weekly: no "first time", no "again", no counting (`sneak` a: "He knows which stair creaks", true after step 4 only, where it shows) |
+| clothes | the car beats read "your top" in a top, "your dress" in the two dresses, "your clothes" in anything else (2026-11-04: the door has no clothes gate) |
+| truth | weekly: no "first time", no "again", no counting (`sneak` a shows after step 4 only) |
 | her_line_low · her_line_high | low: "He's normal. This is normal." · high: "You want Ryan to hear every second of it." | The low line sits in `car_low`. |
 
 ## The car, and two truth fixes
@@ -45,7 +48,7 @@ One row per exit. Read from the build; it replaces the drafted map.
 | `door` | All the way home Jake's hand has been on your knee, and it's still there as … | no | "Kiss him." (Corruption 40+ · Corruption under 60 · Jake's step 3+) → `car_low` | — |
 | | | | "Your hand. Now." (Corruption 60+ · Jake's step 3+) → `car_his` | Hygiene -10 · costs Energy 10 |
 | | | | "Lean back." (Corruption 60+ · Jake's step 3+) → `car_hers` | Hygiene -10 · costs Energy 10 |
-| | | | "Come up." (Jake's step 4+ · Sat) → `sneak` | A close call rolls 1-8 |
+| | | | "Come in." (Jake's step 4+ · Sat) → `sneak` | A close call rolls 1-8 · Hygiene -10 · costs Energy 10 |
 | | | | "Goodnight, Jake." → `night` | — |
 | `car_low` | Jake kills the engine outside your house and reaches for you across the seats. | yes | "Goodnight, gorgeous." → Hall | Corruption +1 (cap 39) · Exhibitionism +1 (cap 39) · `jake_date_booked` cleared · `late_date` set · `came_home_late` set |
 | `car_his` | Jake kills the engine outside your house and the street lamp lights the whole car. | yes | "Goodnight, gorgeous." → Hall | Corruption +1 (cap 79) · Exhibitionism +1 (cap 39) · `jake_date_booked` cleared · `late_date` set · `came_home_late` set |
@@ -212,7 +215,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > He says, way too loud. You clamp a hand over his mouth and ride him harder. The headboard knocks the thin wall. His hands drop to grip your ass and pull you down on every stroke. You grind your clit against him until your thighs shake. You come on his cock with your palm still over his mouth. He groans into your hand and holds your hips down hard. His cock pulses deep, and his cum fills you while you shake on top of him.
 >
-> In the living room the TV goes quiet. Laura's feet in the hall. You both stop breathing. They stop halfway to your door, and go back.
+> In the living room the TV goes quiet. Laura's feet in the hall. You both stop breathing. They stop halfway, and go back.
 >
 > Your mom?
 >
@@ -226,7 +229,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > Your bed's so loud. How is your bed this loud?
 >
-> Then fuck me quieter. Don't stop.
+> Then fuck me quieter next time.
 
 ## Why — the source of each key choice
 

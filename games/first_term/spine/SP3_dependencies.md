@@ -1,5 +1,6 @@
 # [REVIEW] SP3 · Dependencies — First Term
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Padding cut; DECISIONS 106 holds what moved.
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 > [REVIEW] (was [READY]) · drafted 2026-10-07 · updated 2026-10-08 · signed by LO: LO, 2026-10-08
 > ≤ 400 words. Rules: `the-spine.md` SP3. Ledger: `dependencies[]`.
@@ -34,8 +35,7 @@
 | Hale 3 | his office, Thursday 18:00–19:30 |
 | Hale 4 | his office, Thursday 18:30–19:15 |
 
-Since the signed page (DECISIONS 106): Laura 4 no longer waits for Ryan (it reads her gaps), and Laura's
-late-night hall key and the Jake 4 / Laura 4 shared canvas are not in the build.
+What moved since the signed page: DECISIONS 106.
 
 **Later releases** (in `proposals/ARC_IDEAS.md` numbering; nothing built)
 

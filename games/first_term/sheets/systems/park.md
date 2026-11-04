@@ -1,5 +1,7 @@
 # [REVIEW] System — park
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. The run pays Exhibitionism +1, cap 19, with no bra or no top.
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. File and line cites removed. The selfie keeps a photo and posts nothing.
 
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. The 2026-10-29 locked-button note (DECISIONS 90) is corrected: "Needs Corruption 60" and "Needs Exhibitionism 60" are no longer in the game, because the buttons for scenes this release does not write were removed (DECISIONS 132). Any line below that still names one is superseded by that row.
@@ -35,7 +37,7 @@
 | row | effect, with op | lands on a screen? |
 |---|---|---|
 | Walk | one event from the walk pool | yes: who she passes, what they see |
-| Run | energy add −10 (guess) · Exhibitionism add +1 if Daring clothes (guess) | yes: who looks, by what she wears |
+| Run | energy add −10 · Exhibitionism add +1, cap 19, with no bra or no top (DECISIONS 176) | yes: who looks, by what she wears |
 | Rest on a bench | energy add +5 (guess) | yes, short: her body, never a toast |
 | the next locked act | shown with what it needs | yes, one line |
 

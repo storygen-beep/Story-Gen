@@ -1,5 +1,7 @@
 # [REVIEW] Place — The Party House
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Zoe's "Let her." as built: both meters, its two gates, its cost.
+
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. She leaves the tub in what she came in (`remember_outfit`, `restore_outfit`).
 
 > Changed 2026-11-04 (LO's answer Q11: getting into the tub strips her, getting out dresses her). Waits for LO's re-sign.
@@ -45,7 +47,7 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has h
 
 | who walks in | her activity | when | his pay, on the moment | her bolder answers |
 |---|---|---|---|---|
-| Zoe | Soak in the hot tub | Sat 23:30–00:00 | none: no meter | "Let her." Corruption +1, cap 79 · Zoe is in the water; "Strip and get in." strips her, and every way out gives back what she came in (Q11) |
+| Zoe | Soak in the hot tub | Sat 23:30–00:00 | none: no meter | "Let her." (Corruption 60, Exhibitionism 60) Corruption +1 and Exhibitionism +1, cap 79, costs Energy 10 and Hygiene 10 · Zoe is in the water; "Strip and get in." strips her, and every way out gives back what she came in (Q11) |
 
 **Acts, rungs and pools.**
 

@@ -46,7 +46,7 @@ One row per exit. Read from the build; it replaces the drafted map.
 | node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
 |---|---|---|---|---|
 | `tub` | Zoe drags you into the hot tub on the back deck, laughing. | no | "Stay in the water." → `alone` | changes her clothes (unequip) |
-| `alone` | The door slides shut behind her friends. | no | "Take your bra off." (bra on) → `kiss` | unequip plain bra · unequip sports bra |
+| `alone` | The door slides shut behind her friends. "Take it off, babe" shows only with a bra on; "I want to see your tits" only with a bra on and `zoe_in_the_tub` not set (2026-11-04). | no | "Take your bra off." (bra on) → `kiss` | unequip plain bra · unequip sports bra |
 | | | | "Let her look." (no bra) → `kiss_bare` | — |
 | | | | "Not tonight, Zo." (1h)" → `home_no` | changes her clothes (equip) |
 | `kiss` | You get your bra off and toss it on the deck. | yes | "Hold her." → `asked` | Exhibitionism +3 (cap 79) · Corruption +3 (cap 79) |

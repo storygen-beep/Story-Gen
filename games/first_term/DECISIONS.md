@@ -1,5 +1,7 @@
 # [REVIEW] Decisions — First Term
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Rows 177 and 178 added; rows 167 and 175 name Mark's "Give me a minute."; where the sheets and the ledger differ: rows 10 and 11 fixed, rows 15-18 added; ledger changes of this round listed.
+
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. Q4, Q7, Q12, the "This release" block and rows 162, 163, 167 and 169; rows 12 and 13 of where the sheets and the ledger differ.
 
 > Changed 2026-11-04: Q1-Q17 answered (rows 161-172), the "This release" block added (PICKS I74), three rows on where the ledger and the build differ; waits for LO's re-sign.
@@ -156,7 +158,7 @@ is a talk or a locked door, the men's meters lock nothing, 17 of Laura's tease s
 | 164 | The rent is counted once (Q6), built in d779867e: the rent page takes the money; Mark's step 1, step 3 and the Sunday table no longer count the bills. He sits her at his table with the sealed envelope and looks at her instead. One line is left: Laura's kitchen hub. | "Cut the second rent count: Mark's Sunday scenes start after the money is paid." (2026-11-04) |
 | 165 | The café (Q2), built in d779867e: the five one-time café scenes open from the café's activities (the job ask from the coffee; the apron, the tip jar and Gary from the shift; "Not by the window" from Tom's hub), so the room's shop link always shows. Ryan's thin walls open from "Go to bed". Two now pay Tom's Want +2: "When do I start?" and "Not by the window". | "Move the five café one-time scenes to the café counter activity." (2026-11-04) |
 | 166 | Zoe's and Jake's patience (Q5), built in d779867e: a hidden meter each, full at 6 (Zoe) and 3 (Jake), back one a night. A no-show or an ignored invite empties it, so Zoe skips her next weekly ask and Jake his next one. They text it: Zoe "no invites for you this week"; Jake "asking again in a few days". An ignored invite gets its own text the same day. | "A no-show or ignored text ... pushes their next invite back a few days, and they say so in a text." (2026-11-04) |
-| 167 | The tub and the Daring answer (Q11, Q13), built in d779867e: the soak and Zoe's tub walk-in strip her with "Strip and get in.", and every "Get out" gives back what she came in. The game has two engine actions for this, remember_outfit and restore_outfit (LO, 2026-11-04): she leaves in what she came in at the tub, the party house soak, the lace set, Ryan's exits, Zoe's hot tub and Mark's "Let me get dressed first." After a shower, "Get dressed." gives back what she wore before it. The opening's "Get dressed." and the café's "Clock out." are unchanged. (This row first said the engine keeps no outfit to put back. That no longer holds.) The Daring answers in Hale's hallway and the gym team's walk-in show from Exhibitionism 20 and still pay only to 39. | "getting in strips her, getting out dresses her." · "shows from 20 up (still pays only to 39)." (2026-11-04) |
+| 167 | The tub and the Daring answer (Q11, Q13), built in d779867e: the soak and Zoe's tub walk-in strip her with "Strip and get in.", and every "Get out" gives back what she came in. The game has two engine actions for this, remember_outfit and restore_outfit (LO, 2026-11-04): she leaves in what she came in at the tub, the party house soak, the lace set, Ryan's exits, Zoe's hot tub and Mark's "Give me a minute." (was "Let me get dressed first.") After a shower, "Get dressed." gives back what she wore before it. The opening's "Get dressed." and the café's "Clock out." are unchanged. (This row first said the engine keeps no outfit to put back. That no longer holds.) The Daring answers in Hale's hallway and the gym team's walk-in show from Exhibitionism 20 and still pay only to 39. | "getting in strips her, getting out dresses her." · "shows from 20 up (still pays only to 39)." (2026-11-04) |
 | 168 | Mark's and Tom's repeatables (Q3): a later release. The ledger's `decided` and `promises` get it (the lead adds the entries): "Mark's repeatable after his step 4" and "Tom's repeatable after his step 3". | "later release (record as decided)." (2026-11-04) |
 | 169 | Built after d779867e, in this release (Q4, Q12; commit 0be74a4b): a walk-in at each of the four refill places (the toilet wash, her nap, the garden, Zoe's bathroom), and Laura's black lace bra and panties as wardrobe items, which Mark's lingerie walk-in puts on and takes off. | "in THIS release." · "Add Laura's black lace bra and panties as wardrobe items." (2026-11-04) |
 | 170 | OK as built (Q8, Q17): Laura's Love-70 towel line stays as it is. The ten built-differently items of rows 148-152 are confirmed as built. One of them has moved since: in the lingerie walk-in Mark now says one line, "That's your mother's." (pass 4, LO 2026-11-04). | "OK as it is." · "Confirm all ten." (2026-11-04) |
@@ -164,8 +166,10 @@ is a talk or a locked door, the men's meters lock nothing, 17 of Laura's tease s
 | 172 | Paperwork, 2026-11-04: every signed page whose body changed after LO signed it shows [REVIEW] in its title, with the line that says what changed (PICKS I75); this sheet carries the "This release" block (PICKS I74). Scene sheets wait for the lead, after the build. | LO, 2026-11-03 (I74, I75); "fix the stale lines in SP4 and SP7"; "add town.md's re-sign line" (2026-11-04). |
 | 173 | A walk-in pays the refill only when the screen shows her doing it: the sink, the nap, the shower and the tub pay; the garden and Zoe's bathroom do not. | "keep it, as one rule" (2026-11-04) |
 | 174 | The master-door peek has no hook and no next step, as signed on 10-29; recorded as decided, so the reader stops failing either. The reader pass's lines are gone (Laura's "Sleep well, then.", "She didn't come.", Mark's "You coming to bed or not?", "He's calling down the hall"). | "put back no hook as signed, and record it as decided"; "remove the next-step lines too, as signed" (2026-11-04) |
-| 175 | She leaves in what she came in: Ryan's exits, Zoe's hot tub, the party house soak, Zoe's tub walk-in and the lace set give back her own clothes, and a towel or sleep clothes are never kept, so getting dressed after a shower gives back what she wore before it. In the lace set a towel comes back as a towel. Mark's "Let me get dressed first." leaves a dressed girl as she is. | "Outfit: A" (2026-11-04) |
+| 175 | She leaves in what she came in: Ryan's exits, Zoe's hot tub, the party house soak, Zoe's tub walk-in and the lace set give back her own clothes, and a towel or sleep clothes are never kept, so getting dressed after a shower gives back what she wore before it. In the lace set a towel comes back as a towel. Mark's "Give me a minute." (was "Let me get dressed first.") leaves a dressed girl as she is. | "Outfit: A" (2026-11-04) |
 | 176 | Acts that opened at 0 and paid past Good Girl stop at 19: street_seen on both meters, the park run on Exhibitionism. The Jake car stops Exhibitionism at 39; its Corruption stays at 79. | "fix the real ones, starting with the 8 acts that pay past their stage" (2026-11-04) |
+| 177 | Recorded as decided for this release: open choices at 52.1%, and three-screen walk-ins (30 of 42 walk-ins run three screens). In the ledger's `decided` as D20 and D9. | "record both as decided for this release" (2026-11-04) |
+| 178 | The scene reader re-read 126 scenes: 133 distinct fails. 93 fixed, 39 left because they need new lines, 1 false. The fixed ones are not re-read. | Reader pass, 2026-11-04. |
 
 Engine only (`setup.castScheduleHtml` in `v2.py`). The full Schedules page keeps its weekly table; first_term has no
 button to it since DECISIONS 95.
@@ -481,14 +485,17 @@ accident, allowed at Good Girl. Curious adds "Stay and watch". Day one reaches i
 | 7 | key items | fixed: the slutty uniform dropped for now | — |
 | 8 | `intelligence` fed at | fixed: the lecture hall added | — |
 | 9 | Ryan steps 3 and 5 | fixed: Corruption +1 | — |
-| 10 | the park | its own place | WANT.md still says she walks through it to campus |
-| 11 | Tom's last step | 6 | SP5 fixed to step 6; it waits for your re-sign |
+| 10 | the park | its own place | fixed: WANT.md says its own place, not her way to campus |
+| 11 | Tom's last step | fixed: 3 (`release_page.steps`) | SP5 fixed to 3 steps; it waits for your re-sign |
 | 12 | Kayla's Friday row (2026-11-04) | fixed: `npc_kayla.schedule_in_build` says 18:00 (Q9) | — |
 | 13 | the opening (2026-11-04) | fixed: `release_page.her_moment` lists no final no, and Laura calls down the hall | — |
 | 14 | a week's top pay (2026-11-04) | `week_income` 504: 18 shifts at $28 | $28 is the bottom of the top shift; 18 top shifts make about $520-750 (SP4) |
+| 15 | the rent and goal 1 (2026-11-04) | `want.obligation` still says $75 every Sunday, counted out to Mark on the kitchen table; goal 1's `ends_when` names the body route; `want.last_read_note` lists both | WANT.md fixed: $75, $90, $100; the rent page takes it; four Sundays in a row. It waits for your re-sign |
+| 16 | waivers (2026-11-04) | `release_page.block` still says "no waivers"; `release_page.reader_waivers` holds 48 and `decided` 7 waives | SP7 names them |
+| 17 | Mark's her_line (2026-11-04) | step 1's `her_line_low` still says "Can you just — count it?" | the build and `mark_01_count_it_slowly.md`: "Can you just — say it?" |
+| 18 | the Sunday table (2026-11-04) | `release_page.promise_alive` still says "each count" | the build counts nothing (Q6); SP7 says "each Sunday" |
 
-Row 10 is an older signed page behind a newer one. The newer page holds; WANT.md's line needs your
-edit when you next re-sign it.
+Rows 15-18 wait for the lead: nothing was changed in the ledger.
 
 ## Ledger changes
 
@@ -604,6 +611,8 @@ shape.py after: 22 pass, 0 fail.
 | L29 | Mark A 5: Sun–Fri 23:00–00:00 and Mon–Sat 00:00–01:00; its bare-legs gate noted |
 
 shape.py after: 22 pass, 0 fail.
+
+**This round (2026-11-04), in the ledger:** `money` in `board.meters` is declared `"spent": true`; Kayla's two rows are `occupancy_rows`; Laura's Sunday 00:00-01:00 row is in place; `decided` adds D20, D9 and G81.
 
 **Not a ledger change:** the ledger keeps no "entered from" per place. The sheets take it from the map's
 shape line, and the build writes it as `entry_from`.

@@ -1,5 +1,7 @@
 # [REVIEW] Person — Tom
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. His card's end line as built (DECISIONS 132); the release's three steps in the why table.
+
 > Changed 2026-11-04 (LO's answers Q2, Q3: his steps 1 and 2 open from "Work a shift" and his top step from him at the counter, not on entry; his repeatable after step 3 is a later release). Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The moment column names each step's kind and stage. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 1 to 19:00.
@@ -53,7 +55,7 @@ A ceiling, never a floor. LO took these, 2026-10-08.
 | 1 | `tom_01_the_apron`, reworked: strict | `cafe` | Mon–Sat 14:30–19:00 | `cafe_job` | want add +10 | "I can tie my own apron." (counts; his Power −5) | Take a shift at the café: Tom is behind the counter. (Opens from "Work a shift", Q2.) |
 | 2 | `tom_03_the_tip_jar` | `cafe` (the back room) | Mon–Sat 14:30–22:00 | step 1 · five shifts worked (was Exhib. 20 · his Want 20) | want add +5 · power add −5 · `knows_tip_jar` set | walk past (parked) | A café shift, the back room: watch the tip jar. (Opens from "Work a shift", Q2.) |
 | 3 | `tom_03_not_by_the_window` (new, top step) | `cafe` (the back room) | Mon–Sat 14:30–22:00 | step 2 · `cafe_footfall` 15 · `cafe_name` −5 or lower | the window rule set | on the step sheet (LO confirms) | A café shift after a customer's hand: Tom wants a word in the back. (Opens from Tom at the counter, Q2; every finish pays his Want +2.) |
-| — | locked | his card | — | — | — | — | "Tom, later. (Needs Corruption 60.)" |
+| — | end line | his card | — | — | — | — | "Tom, later. (Next release) His Want and Power still count: what you do at the café now is kept for the next release." No locked button (DECISIONS 132). |
 
 Every step's gate also says the drinks boost is off.
 
@@ -83,7 +85,7 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 | n | the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
 |---|---|---|---|---|---|---|---|
 | 1 | *a brush from him · stage 1, Good Girl* — her first tray: he catches her apron strings and reties them, properly, because she did it wrong. "Tables first. Phone in the back. Smile." His hands stay one second longer than tying takes | Tom | her first day | "Yes, boss." · or "I can tie my own apron." | the retie, and the second he doesn't let go | yes | the job's rules; her uniform is the normal one until she buys or picks another |
-| 2 | *accident (his secret, found) · stage 1, Good Girl* — the back room: Tom folding twenties out of the tip jar into his apron. Her twenties | Tom's secret is hers | being caught seeing it | "Busy night?" | "Not a word." His ears go red | yes | `knows_tip_jar`; Tom owes her; his line at the counter changes |
+| 2 | *accident (his secret, found) · stage 1, Good Girl* — the back room: Tom folding the bills out of the tip jar into his apron. Her tips too | Tom's secret is hers | being caught seeing it | "Busy night?" | "Not a word." His ears go red | yes | `knows_tip_jar`; Tom owes her; his line at the counter changes |
 | 3 | *a talk, his rule on her · stage 2, Curious 20 (her answer)* — he's watched a customer's hand on her, and her letting it stay. In the back: "Reputation's going. The tables are full." Then: "Not by the window." | Tom; the room behind the door | her job, his café's name | "Then where?" · "Yes, boss." · "It's my tips." | the line he draws, and that he doesn't stop it | yes | the window rule: level-3 café scenes move away from the window; his look at her changes; his card ends on the locked line |
 
 **Her voice:** a low and a high line on each step sheet.
@@ -151,7 +153,7 @@ Each follow-up waits for her reply (`after_round`), and a different answer follo
 
 | key choice | source |
 |---|---|
-| to step 6; 7–9 later | LO, 2026-10-08 (SP7) |
+| to step 3; the rest later | DECISIONS 101, 106–109 (SP7; was to step 6, LO 2026-10-08) |
 | the Friday repeat | LO, 2026-10-08 (question 2) |
 | steps, lines and nos | SP2 · the arc ideas (Tom B) |
 | the release-1 ladder, three steps, strict, the cuts and laters | `proposals/TOM_R1_LADDER.md`, signed by LO 2026-11-01 (DECISIONS 99–111) |

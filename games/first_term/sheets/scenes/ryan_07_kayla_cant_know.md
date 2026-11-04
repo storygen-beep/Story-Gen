@@ -1,5 +1,7 @@
 # [REVIEW] Scene — ryan_07_kayla_cant_know
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. "Go to your room." lands in her room.
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the door's two buttons as built; the pay sits on `after7`; the step row. the explicit beats as built, measured.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
@@ -42,7 +44,7 @@
 | `hand` | she pushes him onto the bed and takes his cock in her hand; his phone lights up on the bed: Kayla's photo | yes | "Don't answer it." → `phone` | none |
 | `phone` | he reaches for her first, then for the phone; she pushes his hand away and keeps stroking | yes | "Make him come." → `comes` | none |
 | `comes` | he comes in her hand while the phone buzzes out; it goes to voicemail | yes | "Wipe your hand on his shirt." → `after7` | none |
-| `after7` | from now on his phone is face-down every time she knocks | no | "Go to your room." → the hall | Ryan's Want add +5 · corruption add +3, cap 79 · `ryan_step` set 7 |
+| `after7` | from now on his phone is face-down every time she knocks | no | "Go to your room." → her room | Ryan's Want add +5 · corruption add +3, cap 79 · `ryan_step` set 7 |
 
 **The parked no** (as built): "Leave him to it." The signed wording was "Just checking you're decent." The step waits a week (`retry_after_days = 7`,
 as his other steps).

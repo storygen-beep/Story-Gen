@@ -76,7 +76,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Where the t
 **`asking`:** "Zoe pulls you into her bedroom and shuts the door on the party. The music thumps through it. She leans back against the door and, for once, she isn't grinning." · Zoe: "No dare. I'm asking." · *(thought, high)* "You want her to dare you something worse. She isn't going to."
 **`out`:** Zoe, without lifting her head: "Out." · "The door clicks shut. The music goes muffled again. Zoe crawls up the bed and kisses you, and you taste yourself on her."
 **`watch`:** Zoe, without lifting her head: "Stay. Watch." · "He stays. He leans in the doorway with his beer and doesn't say a word. Zoe crawls up the bed and kisses you slowly, so he can see all of it."
-**The parked no:** @player: "Ask me again." · "Zoe laughs, and something in her face lets go." · Zoe: "Next Friday, then. I'll ask nicer."
+**The parked no:** @player: "Ask me again." · "Zoe laughs, and something in her face lets go." · Zoe: "Next Friday, then. I'll ask again."
 
 ## The explicit beats, as built (2026-11-03)
 

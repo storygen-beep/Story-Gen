@@ -158,7 +158,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > A man in a suit doesn't look at his menu once. He looks at your tits the whole time you take his order, and over-tips.
 >
-> Whatever you're having. Surprise me. I'll be back tomorrow, same table.
+> Whatever you're having. Surprise me. I'll be back, same table.
 >
 > In booth four an older man with a folded newspaper lowers it when you pass. His eyes stay on your ass all the way down the aisle, and the paper goes back up the second you look round. Gary, the regular.
 >

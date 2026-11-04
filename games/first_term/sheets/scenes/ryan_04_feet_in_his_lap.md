@@ -1,5 +1,7 @@
 # [REVIEW] Scene — ryan_04_feet_in_his_lap
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. "Go to bed." lands in her room.
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the step pays Corruption +3 on "Liar."; the no's own screen; the step row. the explicit beats as built, measured.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
@@ -37,7 +39,7 @@
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `knocks` | two knocks; he opens; a game on, low | no | "Feet up." → `lap` · "Just saying goodnight." → `night` (parked) | none |
-| `night` | Ryan: "Yeah. Night." He doesn't shut his door until she's in her room | no | "Go to bed." → the hall | none |
+| `night` | Ryan: "Yeah. Night." He doesn't shut his door until she's in her room | no | "Go to bed." → her room | none |
 | `lap` | her bare feet in his lap; Kayla calls; "Yeah, babe. I'm alone." He takes her foot and presses it onto his cock, hard under his shorts, and holds it there | yes | "Keep your toes moving." → `liar` | none |
 | `liar` | Kayla: "Who's there?" He lets go of her foot: "No one. The TV." It stops there: the one cut-off | no | "Liar." → the hall | Ryan's Want add +5 · corruption add +3, cap 79 · `ryan_step` set 4 |
 

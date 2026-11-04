@@ -1,5 +1,7 @@
 # [REVIEW] Scene — hale_04_first_session
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. His card's end line as built (DECISIONS 132); "Wait." also takes Energy 10 and Hygiene 10.
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 
 > The signed plans behind this page: `proposals/COPY_FIXES_B.md`.
@@ -50,7 +52,7 @@ One row per exit. Read from the build; it replaces the drafted map.
 | `feel` | Dr. Hale locks the door and sits back in his chair. | yes | "Let him." → `higher` | — |
 | | | | "This isn't coaching." → `isnt` | — |
 | | | | "Run." → `run` | — |
-| `higher` | His hand leaves your tit, your nipple still stiff from his thumb. | yes | "Wait." → `knock` | Psychology grade +5 · Corruption +3 (cap 79) · Exhibitionism +3 (cap 79) |
+| `higher` | His hand leaves your tit, your nipple still stiff from his thumb. | yes | "Wait." → `knock` | Psychology grade +5 · Corruption +3 (cap 79) · Exhibitionism +3 (cap 79) · Energy -10 · Hygiene -10 |
 | `knock` | The knock is two raps, light. | no | "Pick up your bag." → `corridor` | `claire_met` set |
 | `corridor` | You pull your clothes straight and pick up your bag. | no | "Go home." → Hall | Hale's step = 4 · `hale_04_done` set · `hale_touched` set |
 | `isnt` | You pull everything back down over your tits. | no | "Leave him with your grade." → Faculty Floor | back in 7 days |
@@ -81,7 +83,7 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Shared brie
 
 ## After it
 - **The weekly session** opens (`hale_thursday_session.md`).
-- **His card** ends on the locked line: "Hale, further. (Needs Corruption 60.)"
+- **His card** ends on: "Hale, further. (Next release)" No locked button (DECISIONS 132).
 - **His office hub:** the built line at step 4 ("He can't look at you for long. He checks the corridor before he speaks.") is
  against "the jerk"; it becomes "He looks at the clock, and then at you, like you're both on his schedule." Mine; confirmed by LO 2026-11-01 ("Continue").
 

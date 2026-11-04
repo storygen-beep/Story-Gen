@@ -194,7 +194,7 @@ ACTIVITIES = {
                  "in his room for the night", "home in his room, evening", "in his room with Kayla",
                  "watching TV, a film on"],
     "npc_laura": ["waiting up in the dark hall", "making breakfast before work", "in the kitchen, evening",
-                  "awake, alone", "asleep", "asleep", "awake, with Mark", "asleep", "in the shower", "dressing to go out", "waiting up in the dark"],
+                  "awake, alone", "awake, with Mark", "asleep", "asleep", "asleep", "in the shower", "dressing to go out", "waiting up in the dark"],
     "npc_mark": ["at dinner", "in the garage, evening", "up late with the TV on", "up late with the TV on",
                  "asleep", "asleep", "awake, with Laura", "asleep", "cooking, Wednesday", "in the garage, Saturday",
                  "the Sunday table", "heading out to the bar",

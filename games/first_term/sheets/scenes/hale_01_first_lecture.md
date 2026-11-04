@@ -1,5 +1,7 @@
 # [REVIEW] Scene — hale_01_first_lecture
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. This screen meets only Nadia; the rival is met at the first Business class.
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 
 > The signed plans behind this page: `proposals/COPY_FIXES_B.md`.
@@ -12,7 +14,7 @@
 
 | row | answer |
 |---|---|
-| person · step | `npc_hale` · 1 of 4 · meets Hale and Nadia (and the desk guy and the rival, as built: the flags are set here) |
+| person · step | `npc_hale` · 1 of 4 · meets Hale and Nadia (the desk guy at the Psychology class row, the rival at her first Business class) |
 | where · when | the lecture hall · Monday 08:30, day 1 (starts 08:30-08:55), from the dean's "Go to Psychology." |
 | gate | none in the build: his step 0, Hale in the hall |
 | want | none before: step 1. His eyes on her from the lectern while he says good morning to the room |
@@ -45,8 +47,8 @@ One row per exit. Read from the build; it replaces the drafted map.
 | node | what happens (first line) | explicit? | exit (label, what it needs → where) | effects |
 |---|---|---|---|---|
 | `late` | The lecture hall door is heavy and it bangs behind you. | no | "Sorry." → `front_row` | `hale_met` set |
-| `front_row` | The only free seat in the front row is beside a girl with big glasses and … | no | "Pick it up." → `pen` | `nadia_met` set · `desk_guy_met` set · `rival_met` set |
-| | | | "Leave it." → `left` | `nadia_met` set · `desk_guy_met` set · `rival_met` set |
+| `front_row` | The only free seat in the front row is beside a girl with big glasses and … | no | "Pick it up." → `pen` | `nadia_met` set |
+| | | | "Leave it." → `left` | `nadia_met` set |
 | `pen` | You bend down for it, all the way, and when you come back up his eyes … | no | "Hand it back (1h)." → `nadia` | Hale's step = 1 · `hale_01_done` set · `hale_pen_picked` set |
 | `left` | You don't move. | no | "Sit through the lecture (1h)." → `nadia` | Hale's step = 1 · `hale_01_done` set |
 | `nadia` | The girl beside you leans over while the room packs up, and says it without looking … | no | "After class." → Campus | — |

@@ -307,7 +307,7 @@ blocks = [ { type = "group", conditions = { version = "1.0", logic = "OR", items
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
-blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_type", operator = "neq", value = "short_skirt" }, { type = "clothing_slot", slot = "bra", operator = "equipped" } ] }, blocks = [ { type = "paragraph", content = "You walk past his porch. A nod from the rocking chair. Nothing else. You're dressed like anybody's daughter, and to him you're scenery." } ] } ]
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_type", operator = "neq", value = "short_skirt" }, { type = "clothing_slot", slot = "bra", operator = "equipped" } ] }, blocks = [ { type = "paragraph", content = "You walk past his porch. A nod from the rocking chair. Nothing else. To him you're scenery." } ] } ]
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -653,7 +653,7 @@ text       = "Done."
 targetType = "location"
 locationId = "college_womens_toilet"
 time_progression_minutes = 10
-effects    = [ { targetType = "player", trait = "hygiene", op = "add", value = 15 } ]
+effects    = [ { targetType = "player", trait = "hygiene", op = "add", value = 15, cap = 100 } ]
 
 
 [[canvases]]
@@ -1001,7 +1001,7 @@ content = "The short skirt: you turn round to look over your shoulder. The hem s
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "The sheer blouse: white, soft, and you can see a bra through it, or without one, everything. It's a top for the park on a hot day, or for a lecturer who loses his place."
+content = "The sheer blouse: white, soft, and you can see a bra through it, or without one, everything."
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -1162,7 +1162,7 @@ name = "The curtain"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "You don't pull the curtain across. You leave the gap where it is, a hand's width of you showing to the shop floor, and you turn to the mirror and try the next thing on."
+content = "You don't tug the curtain any further. You leave the gap where it is, a hand's width of you showing to the shop floor, and you turn to the mirror and try the next thing on."
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -1182,7 +1182,7 @@ speaker = "unknown"
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Pull the curtain shut."
+text       = "Step back from the gap."
 targetType = "location"
 locationId = "clothes_shop"
 time_progression_minutes = 15

@@ -1,5 +1,7 @@
 # [REVIEW] Scenes — the walk-ins on the refill places (B21-B24), and Laura's lace set (Q12)
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. A next-step row on each of the four, from the build; Mark's "Give me a minute."
+
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. She leaves the lace set in what she came in (`remember_outfit`, `restore_outfit`).
 
 > New 2026-11-04: written from the build, for LO to read and sign. LO's answers of 2026-11-04: Q4 ("Add walkins in
@@ -37,6 +39,7 @@ The same machine as the walk-ins at home and outside (`walkins_home.md`, `walkin
 | screen 1 | she lies down; "Sleep (2h)." spends the nap it replaces (120 minutes, energy +30, cap 100) · his Lust +2. The one walk-in that pays the refill: it is her nap, slept through before the door clicks (reader pass 4, 2026-11-04) |
 | her answers | "Pull the blanket over you." 0 · "Don't move." +1, cap 19 · "Stretch." (Daring) +1, cap 39 · "Roll onto your back." (Showing) +1, cap 59 |
 | not yet | "Not now. Not with the house this full." (on her Showing answer) |
+| next step | her bolder answer at the next band; nothing after "Roll onto your back." this release |
 | hook | `ryan_saw_nap` is set; nothing reads it this release · "Lock your door next time. Or don't." |
 | every way out | "Get up." back to her room |
 | words | Ryan's early column: ass, tits |
@@ -54,6 +57,7 @@ The same machine as the walk-ins at home and outside (`walkins_home.md`, `walkin
 | screen 1 | "He's stopped on the step." · his Lust +2 |
 | her answers | "Sit up and cover up." 0 · "Stay as you are." +1, cap 19 · "Stretch your legs out." (Daring) +1, cap 39 · "Turn over for him." (Showing) +1, cap 59 |
 | not yet | "Not yet." (Daring) · "Not today. That's all you get." (Showing, from his Want 20) |
+| next step | her bolder answer at the next band; nothing after "Turn over for him." this release |
 | hook | `mark_saw_garden` is set; nothing reads it this release · "Tomatoes need doing every Sunday." |
 | the way out | "Go in." after the cover; "Get up off the lounger." after the others |
 | words | Mark's early column: legs, ass |
@@ -70,6 +74,7 @@ The same machine as the walk-ins at home and outside (`walkins_home.md`, `walkin
 | screen 1 | "She doesn't shut the door." · hygiene add +15 (she washes, as `toilet_wash` pays; the one walk-in that pays its refill, pass 4) |
 | her answers | "Shove the door shut." 0 · "Keep washing." +1, cap 19 · "Turn round and do your back." (Daring) +1, cap 39 · "Let her look." (Showing) +1, cap 59 |
 | not yet | "Later. Not in a toilet stall. But later, babe." (Showing) |
+| next step | her bolder answer at the next band; nothing after "Let her look." this release |
 | hook | `zoe_saw_toilet` is set; nothing reads it this release · "I know where to find you at lunch now." · "Later. Not in a toilet stall. But later, babe." |
 | every way out | "Done." back to the toilets |
 | words | Zoe's early column: tits, ass |
@@ -88,8 +93,9 @@ The same machine as the walk-ins at home and outside (`walkins_home.md`, `walkin
 | screen 1 | "He doesn't back out." · nothing moves (he has no meter) |
 | her answers | "Yank the door open and point." 0 · "Finish your liner." +1, cap 19 · "Lean in closer to the mirror." (Daring) +1, cap 39 · "Turn round and lean back on the sink." (Showing) +1, cap 59 |
 | not yet | "Not in Zoe's bathroom. Not yet." (Showing) |
+| next step | her bolder answer at the next band; nothing after "Turn round and lean back on the sink." this release |
 | hook | `cocky_saw_bathroom` is set; nothing reads it this release · "Find me later and I'll tell you." |
-| every way out | "Open the door." back to Zoe's living room |
+| every way out | back to Zoe's living room: "Open the door." after "Yank the door open and point."; "Back to the party." after the other three |
 | words | strangers' and extras' list (DECISIONS 41): tits, nipples, ass, cock, wet, clit |
 
 ---
@@ -102,5 +108,5 @@ The same machine as the walk-ins at home and outside (`walkins_home.md`, `walkin
 | screen 1 | she finds the set under the stockings in Laura's drawer, strips (her towel, or her own things, in a heap on Laura's bed) and puts both on |
 | on the moment's button | everything she wore comes off and the lace pair goes on, so from screen 2 on the sidebar shows what the words say |
 | every way out | both pieces are removed (back in Laura's drawer, never in her wardrobe), and she gets back what she wore when she came in (`restore_outfit`), the towel too |
-| what she leaves in | what she came in, as LO asked: `remember_outfit` on the moment's button, `restore_outfit` on every way out (LO, 2026-11-04). The same two actions run the tub, the party house soak, Ryan's exits, Zoe's hot tub and Mark's "Let me get dressed first." After a shower, "Get dressed." gives back what she wore before it. The opening's "Get dressed." and the café's "Clock out." are unchanged |
+| what she leaves in | what she came in, as LO asked: `remember_outfit` on the moment's button, `restore_outfit` on every way out (LO, 2026-11-04). The same two actions run the tub, the party house soak, Ryan's exits, Zoe's hot tub and Mark's "Give me a minute." After a shower, "Get dressed." gives back what she wore before it. The opening's "Get dressed." and the café's "Clock out." are unchanged |
 | new line | on "Let him look.", after he goes: she looks at herself in Laura's set a second longer, then folds it back into the drawer |

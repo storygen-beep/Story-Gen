@@ -1,4 +1,6 @@
-# [READY] Person — the rival girl
+# [REVIEW] Person — the rival girl
+
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Met at her first Business class, not Psychology.
 
 > Signed by LO: LO, 2026-10-08.
 
@@ -13,7 +15,7 @@
 | what she keeps | none — inside the class and canteen scenes |
 | where she sleeps | offscreen |
 | what she calls her | "@player" (guess) |
-| met | her first Psychology class |
+| met | her first Business class |
 
 ## Schedule grid
 

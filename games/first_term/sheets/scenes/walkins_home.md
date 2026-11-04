@@ -94,7 +94,7 @@ C4, "Leave the door unlocked.", sits on the shower itself and raises these odds 
 | `walkin_tv_mark_garage` | Mark, in from the garage · Mon, Tue, Thu, Fri 21:30–22:00 · after `mark_saw_her` |
 | `walkin_tv_mark_kitchen` | Mark, in from the kitchen · Wednesday 21:30–22:00 · after `mark_saw_her` |
 | `walkin_tv_ryan` | Ryan, down from his room · Sat, Sun 13:30–14:00 |
-| `walkin_tv_laura` | Laura, in from the kitchen · Sunday 21:30–22:00 |
+| `walkin_tv_laura` | Laura, in from the kitchen · Sunday 21:30–21:58 |
 
 | row | answer |
 |---|---|
@@ -151,7 +151,7 @@ C2, "Turn the sound up.", raises these odds (see `living_tv_channels.md`).
 | next step | none: the good-mom branch, no heat |
 | hook | `laura_saw_wardrobe` is set; nothing reads it this release |
 | screen 1 | "She's seen the dress." · nothing moves |
-| her answer | "Hang it back up." · no pay |
+| her answer | "Leave her to it." · no pay |
 
 ### `walkin_wardrobe_mark`
 
@@ -284,7 +284,7 @@ The screens not written out above, as built:
 
 - `walkin_mirror_mark` · `answer` · 208 words · 7 counted:
 
-> You're in a towel. From behind you, in the glass, his eyes go to the knot over your tits, then down your bare thighs. You're naked. From behind you, in the glass, his eyes go straight to your tits, then down to your pussy, and stay. Bra and panties. From behind you, his eyes go down your back to your ass in your panties. Nothing under your skirt, and it's short. From behind you, his eyes go to the backs of your thighs and up, to where the hem stops. Your skirt is short. From behind you, his eyes go up the backs of your bare thighs to your hem. No bra. From behind you, in the glass, his eyes find your nipples through your top. You're dressed. From behind you, his eyes go down your back to your ass anyway. Half dressed. From behind you, his eyes go to what's missing first. His hands close into fists at his sides. Then he catches himself. He looks down at the hall carpet, at his own feet, anywhere but the glass. Bit late to be dressing up, @player. Bed. Night, Mark. Night. He stands there and doesn't pretend he's doing anything else. Bit late to be dressing up, @player.
+> You're in a towel. From behind you, in the glass, his eyes go to the knot over your tits, then down your bare thighs. You're naked. From behind you, in the glass, his eyes go straight to your tits, then down to your pussy, and stay. Bra and panties. From behind you, his eyes go down your back to your ass in your panties. Nothing under your skirt, and it's short. From behind you, his eyes go to the backs of your thighs and up, to where the hem stops. Your skirt is short. From behind you, his eyes go up the backs of your bare thighs to your hem. No bra. From behind you, in the glass, his eyes find your nipples through your top. You're dressed. From behind you, his eyes go down your back to your ass anyway. Half dressed. From behind you, his eyes go to what's missing first. His hands close into fists at his sides. Then he catches himself. He looks down at the hall carpet, at his own feet, anywhere but the glass. Bit late to be standing there, @player. Bed. Night, Mark. Night. He stands there and doesn't pretend he's doing anything else. Bit late to be standing there, @player.
 
 - `walkin_wardrobe_mark` · `answer` · 222 words · 7 counted:
 

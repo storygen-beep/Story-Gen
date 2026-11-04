@@ -1,5 +1,7 @@
 # [REVIEW] Scene — mark_00_the_dryer
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. `hose_bra`: "your bra shows dark and wet" (true with no top on).
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. his +5 sits on the first screen, `basket`, "Load the washer."; the flag on the two ways out; a next-step row. file and line cites cut.
 
 > **New 2026-11-01, signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, `the-heat-ladder.md` H2, H5, H6, H7): Mark's first
@@ -34,7 +36,7 @@
 
 **`hose_bra`** (wearing a bra)
 
-> You're loading the washer when the hose jumps off the tap. Cold water hits you square in the chest and soaks you from the neck down. You gasp. Everything you have on clings to you, and your bra shows dark right through it. Mark looks up from his bench. His eyes go straight to your chest. They stay there one second, two. Then he catches himself, turns his back, and grabs a towel off the shelf. He holds it out behind him without looking. "Tap's loose. Here."
+> You're loading the washer when the hose jumps off the tap. Cold water hits you square in the chest and soaks you from the neck down. You gasp. Everything you have on clings to you, and your bra shows dark and wet. Mark looks up from his bench. His eyes go straight to your chest. They stay there one second, two. Then he catches himself, turns his back, and grabs a towel off the shelf. He holds it out behind him without looking. "Tap's loose. Here."
 
 **`hose_nobra`** (no bra)
 

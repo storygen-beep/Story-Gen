@@ -1,5 +1,7 @@
 # [REVIEW] Place — Kitchen
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. The why row says the table, not a count (Q6).
+
 > Changed 2026-11-04 (LO's answer Q6: the rent page is the one count; Mark's Sunday table counts nothing). Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The drawer reads `rent_short`. New section: what the heat proposal built here. Points at the copy fixes it took.
@@ -84,7 +86,7 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has h
 | key choice | source |
 |---|---|
 | the kitchen is the anchor | the board, 2026-10-08 · `the-release.md` § The first release |
-| Sunday count, Mark collects | LO, 2026-10-07 (SP4) |
+| Sunday table, Mark collects (no second count, Q6) | LO, 2026-10-07 (SP4) |
 | the drawer | LIVES §4 (Vance's letter, any night) |
 | Warmth +2 a talk | guess |
 | the everyday rows | LO, 2026-10-08 (the everyday picks) · system `home_life` · times and numbers guess |

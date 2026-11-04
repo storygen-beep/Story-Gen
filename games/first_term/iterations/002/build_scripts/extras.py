@@ -125,7 +125,7 @@ for trait_k, bands in [
                      "Reach Bold (Corruption 40): touch yourself in your bed, in the shower or in a stall in the women's toilet; watch the couple in the park"),
                     # DECISIONS 124: release 1 reaches Hungry
                     (40, 60, "Bold. Hungry opens at 60: the taboo at home, strangers who can see, a room watching.",
-                     "Reach Hungry (Corruption 60): get on Ryan's couch with him, pull Jake into the gym locker room, walk the street with nothing under your skirt"),   # pass 4: a watched dare now needs Corruption 60, so it pays nothing at Bold
+                     "Reach Hungry (Corruption 60): get on Ryan's couch with him, pull Jake into the gym locker room"),   # pass 4: a watched dare now needs Corruption 60, so it pays nothing at Bold
                     (60, 80, "Hungry. Shameless is the next release: a crowd, free use.",
                      "Shameless (Corruption 80) opens in the next release")]),
     ("exhibitionism", [(0, 20, "Covered. Daring opens at 20: no bra, a short skirt out of the house.",
@@ -134,7 +134,7 @@ for trait_k, bands in [
                         "Reach Daring (Exhibitionism 20): let someone walk in on your shower; once you're Curious, run in the park and walk the street"),   # pass 4 G15: the park and street dress codes need Curious while she is Covered   # round 2: "at home" named the whole house, which pays nothing at 0
                        (20, 40, "Daring. Showing opens at 40: no panties out, naked for someone you know.",
                         # pass 3 G15: the garden pays only from Showing (garden_sun), so it is not a way through Daring
-                        "Reach Showing (Exhibitionism 40): let them look at the campus gym and in the lecture hall, take your bra off in the women's toilet, let the towel slip in the hall or the living room, run in the park"),
+                        "Reach Showing (Exhibitionism 40): let them look at the campus gym and in the lecture hall, take your bra off in the women's toilet, let the towel slip in the hall or the living room"),
                        (40, 60, "Showing. Watched opens at 60: a room watching, a stranger, your feed.",
                         # pass 3 G15: what pays while she is Showing (garden_sun, park_run, the wind and the street, the
                         # towel drops in the hall and living room); nothing repeatable pays it in the lecture hall or gym

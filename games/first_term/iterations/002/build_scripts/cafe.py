@@ -41,7 +41,7 @@ L1_LINES = ["You bend to wipe a table and the conversation at the next one stops
             "A man in a suit doesn't look at his menu once. He looks at your tits the whole time you take his order, and over-tips."]
 # pass 3 B4: what the room says beside each look (a stranger, speaker "unknown")
 L1_SAID = ["Don't mind us, honey. Carry on.", "Nice legs on the new girl. Turn around, baby, let's see the rest.",
-           "Whatever you're having. Surprise me. I'll be back tomorrow, same table."]
+           "Whatever you're having. Surprise me. I'll be back, same table."]
 # One setup for both yeses, so the line before each beat is true whichever she picks (a build note to LO:
 # the sheet's pool of three setups would let a setup and the other yes's beat disagree).
 L2_SETUP = ("In the back booth, one of three guys asks, \"Are you on the menu?\" and the table laughs. "

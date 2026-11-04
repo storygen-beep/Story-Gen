@@ -1,5 +1,7 @@
 # [REVIEW] Person — Mark
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Walk-ins add the garden (the refill walk-in); "Go and change."; his step 4 line as built.
+
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. Laura's lace set is built.
 
 > Changed 2026-11-04 (LO's answers Q3, Q6, Q7, Q10; pass 4 B51): the rent is counted once, by the rent page, and his Sunday scenes count nothing; he has left before breakfast on day one; he says "That's your mother's." in the lingerie walk-in; his repeatable after step 4 is a later release; one hall. Waits for LO's re-sign.
@@ -66,10 +68,10 @@
 
 | n | canvas | where | when | gate | raises | the no | guidance card line |
 |---|---|---|---|---|---|---|---|
-| 1 | `mark_01_count_it_slowly` | `home_kitchen` | Sun 08:00–12:00 | `rent_starts` | want add +10 | "Let me get dressed first." (parked) | "Sunday. Mark sits you down at the kitchen table with the rent." |
+| 1 | `mark_01_count_it_slowly` | `home_kitchen` | Sun 08:00–12:00 | `rent_starts` | want add +10 | "Give me a minute." (parked) | "Sunday. Mark sits you down at the kitchen table with the rent." |
 | 2 | `mark_02_late_notice` | `home_kitchen` | Mon, Tue, Wed, Thu, Fri, Sun 22:00–00:00 | step 1 (was his Want 10) | want add +10 · `knows_mark_debt` set | "Shut the drawer." (parked) | Late at night, the kitchen drawer: Mark is on the phone next door. |
 | 0 | `mark_00_the_dryer` (new, an accident: H2) | `home_garage` | Sat 09:00–17:00, once | Mark in the garage · `opening_done` | his Want +5 · `mark_saw_her` set · her "Take your time." Exhibitionism +1, cap 19 | "Tug the shirt down." (pays nothing; his Want stands) | not a card: it happens to her |
-| 3 | `mark_03_shorts` | `home_kitchen` | Sun 08:00–12:00 | step 2 · she has been short once (`rent_short_weeks` 1 or more; was Corruption 20 · Exhib. 20 · his Want 20) · `mark_saw_her` · "Go up and change." needs Exhibitionism 20 (DECISIONS 124) | want add +10 · exhibitionism add +3 · `mark_dress_rule` set | "I'm not changing for you." (parked) | Sunday morning at the table, after a short week: Mark wants shorts this time. |
+| 3 | `mark_03_shorts` | `home_kitchen` | Sun 08:00–12:00 | step 2 · she has been short once (`rent_short_weeks` 1 or more; was Corruption 20 · Exhib. 20 · his Want 20) · `mark_saw_her` · "Go and change." needs Exhibitionism 20 (DECISIONS 124) | want add +10 · exhibitionism add +3 · `mark_dress_rule` set | "I'm not changing for you." (parked) | Sunday morning at the table, after a short week: Mark wants shorts this time. |
 | 4 | `mark_06_our_arrangement`, reworked (top step) | `home_garage` | Mon, Tue, Thu, Fri 19:00–22:00 | step 3 · Ryan's step 4 done (was Corruption 40 · his Want 50) | want add +10 · `mark_arrangement` set | "There's no arrangement." (parked) | An evening in the garage: Mark saw something, and wants to talk terms. |
 | — | locked | his card | — | — | — | — | "Mark, later. (After the house is yours.)" |
 
@@ -103,7 +105,7 @@ the event, e.g. "after Ryan's feet-in-his-lap night".
 | 1 | *a look that happens to her · stage 1, Good Girl* — the rent page has taken the money; he sits her at his table with the sealed envelope and looks at her, not at it (Q6) | Mark | short, in front of him | "Let him look." · or her tone | the look; "And not the shirt, next time." | yes | the Sunday table, every week |
 | 2 | *accident (his secret, found) · stage 1, Good Girl* — the drawer by the fridge: Vance's LATE NOTICE, and Mark in the doorway on the phone, "Friday, Frank." | his secret is hers | being caught reading it | she reads it | "Put it back." He doesn't shout | yes | `knows_mark_debt`; he owes, and she knows |
 | 3 | *what she wears at home, by his rule · stage 2, Daring 20 (after his accident)* — "Not the shirt this time. Shorts." She comes down in the pair that shows the curve of her ass, and he picks his pen up and puts it down again, twice, his eyes on her thighs | Mark | his rule on her body, every Sunday | she changes, or comes down in them first | the rule; "Every Sunday. Like that." | yes | `mark_dress_rule`: what she wears to the table is his rule |
-| 4 | *a talk, no act (declared not a payoff) · stage 1, Good Girl* — the garage: "I saw you come out of his room at midnight." / "Vance's letter is in the drawer." Each keeps one | Mark knows about Ryan; she knows about Vance | Mark telling Laura | "Deal." · or "There's no arrangement." | he names what he saw | yes | `mark_arrangement`; the Sunday table changes |
+| 4 | *a talk, no act (declared not a payoff) · stage 1, Good Girl* — the garage: "I saw you come out of Ryan's room. Late." / "Vance's letter is in the drawer." Each keeps one | Mark knows about Ryan; she knows about Vance | Mark telling Laura | "Deal." · or "There's no arrangement." | he names what he saw | yes | `mark_arrangement`; the Sunday table changes |
 
 **Her voice:** a low and a high line on each step sheet.
 
@@ -212,7 +214,7 @@ Mark's living room (up late) and kitchen hubs react to the towel, every visit. B
 
 ## Walk-ins and acts from the heat proposal (signed 2026-11-03, built)
 
-Walk-ins: `home_bathroom`, `home_garage`, `home_hall`, `home_kitchen`, `home_living_room`, `home_master_bedroom`. Each row (when, what pays) is on that place sheet.
+Walk-ins: `home_bathroom`, `home_garage`, `home_garden`, `home_hall`, `home_kitchen`, `home_living_room`, `home_master_bedroom`. Each row (when, what pays) is on that place sheet.
 In the lingerie walk-in (the master bedroom, Saturday 21:45–22:00) he says one line, "That's your mother's.", true in every band (pass 4 B51, LO 2026-11-04: Mark may speak here). Laura's black lace set is a wardrobe item, built (Q12).
 The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
 
