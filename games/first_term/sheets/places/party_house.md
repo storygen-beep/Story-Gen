@@ -1,5 +1,7 @@
 # [REVIEW] Place — The Party House
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. She leaves the tub in what she came in (`remember_outfit`, `restore_outfit`).
+
 > Changed 2026-11-04 (LO's answer Q11: getting into the tub strips her, getting out dresses her). Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
@@ -32,7 +34,7 @@
 
 | row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
-| soak in the hot tub | need | energy | energy add +5 · "Strip and get in." takes her clothes off; every "Get out" dresses her in her day clothes (LO, 2026-11-04, Q11) | once a night | yes: her body |
+| soak in the hot tub | need | energy | energy add +5 · "Strip and get in." takes her clothes off; every "Get out" gives back what she came in (LO, 2026-11-04, Q11) | once a night | yes: her body |
 | Zoe A 3 | person | Zoe's ladder | only Zoe sees her (LO, 2026-10-08) | once | yes |
 
 ## Built from the heat proposal (signed 2026-11-03)
@@ -43,7 +45,7 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has h
 
 | who walks in | her activity | when | his pay, on the moment | her bolder answers |
 |---|---|---|---|---|
-| Zoe | Soak in the hot tub | Sat 23:30–00:00 | none: no meter | "Let her." Corruption +1, cap 79 · Zoe is in the water; "Strip and get in." strips her, and every way out dresses her (Q11) |
+| Zoe | Soak in the hot tub | Sat 23:30–00:00 | none: no meter | "Let her." Corruption +1, cap 79 · Zoe is in the water; "Strip and get in." strips her, and every way out gives back what she came in (Q11) |
 
 **Acts, rungs and pools.**
 

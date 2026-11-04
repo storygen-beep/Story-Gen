@@ -18,7 +18,7 @@
 | hook | "Goodnight, gorgeous. Saturday?" (or "Wednesday?"): the next date |
 | gate | his step 3+ · a date tonight · the car by Corruption: 40-59 the kiss, 60 his hand or hers |
 | tiers | **Curious** (Corruption under 40): `car_low` · **Bold** (Corruption 40), before his step 4: two yeses, `car_his` · `car_hers` · **after step 4**: "Come up." → `sneak` (a two-entry pool, `memory = "seen"`, `seen_weight = 0`) |
-| pays | the kiss: Corruption +1, Exhibitionism +1 (cap 39) · hands: each +1 (cap 79) · the sneak: Corruption +1 (cap 59) |
+| pays | the kiss: Corruption +1, Exhibitionism +1 (cap 39) · hands: Corruption +1 (cap 79), Exhibitionism +1 (cap 39) · the sneak: Corruption +1 (cap 59) |
 | the near-catch | after step 4, one night in four: the `door` exit rolls `jake_catch_roll` (random 1–8); 1: Laura's door opens across the hall · 2 (Ryan's knock code set, `ryan_knock_code`): two knocks on the wall. Each is one line after the `sneak` entry; they don't stop |
 | the no | "Goodnight, Jake." → he walks backwards down the path |
 | locked | none: the build shows no locked button; his card ends "Jake, further. (Next release)" |
@@ -48,8 +48,8 @@ One row per exit. Read from the build; it replaces the drafted map.
 | | | | "Come up." (Jake's step 4+ · Sat) → `sneak` | A close call rolls 1-8 |
 | | | | "Goodnight, Jake." → `night` | — |
 | `car_low` | Jake kills the engine outside your house and reaches for you across the seats. | yes | "Goodnight, gorgeous." → Hall | Corruption +1 (cap 39) · Exhibitionism +1 (cap 39) · `jake_date_booked` cleared · `late_date` set · `came_home_late` set |
-| `car_his` | Jake kills the engine outside your house and the street lamp lights the whole car. | yes | "Goodnight, gorgeous." → Hall | Corruption +1 (cap 79) · Exhibitionism +1 (cap 79) · `jake_date_booked` cleared · `late_date` set · `came_home_late` set |
-| `car_hers` | Jake parks outside your house and kills the engine under the street lamp. | yes | "Goodnight, gorgeous." → Hall | Corruption +1 (cap 79) · Exhibitionism +1 (cap 79) · `jake_date_booked` cleared · `late_date` set · `came_home_late` set |
+| `car_his` | Jake kills the engine outside your house and the street lamp lights the whole car. | yes | "Goodnight, gorgeous." → Hall | Corruption +1 (cap 79) · Exhibitionism +1 (cap 39) · `jake_date_booked` cleared · `late_date` set · `came_home_late` set |
+| `car_hers` | Jake parks outside your house and kills the engine under the street lamp. | yes | "Goodnight, gorgeous." → Hall | Corruption +1 (cap 79) · Exhibitionism +1 (cap 39) · `jake_date_booked` cleared · `late_date` set · `came_home_late` set |
 | `sneak` | You lead Jake down the dark hall with him right behind you. | yes | "Let him out before dawn (5h)." → Your Room | Corruption +1 (cap 59) · `jake_date_booked` cleared · `late_date` set · `came_home_late` set |
 | `night` | He kisses your hand like an idiot and walks backwards down the path. | no | "Go in." → Hall | `jake_date_booked` cleared · `late_date` set · `came_home_late` set |
 

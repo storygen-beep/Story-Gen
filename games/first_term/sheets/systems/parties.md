@@ -2,7 +2,7 @@
 
 > Changed 2026-11-04 (LO's answer Q7: one hall, so Laura waits up in the dark hall). Waits for LO's re-sign.
 
-> **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. The 2026-10-29 locked-button note (DECISIONS 90) is corrected: "Needs Corruption 60" and "Needs Exhibitionism 60" are no longer in the game, because the buttons for scenes this release does not write were removed (DECISIONS 132). Any line below that still names one is superseded by that row.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

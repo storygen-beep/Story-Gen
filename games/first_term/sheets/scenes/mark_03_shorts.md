@@ -1,5 +1,7 @@
 # [REVIEW] Scene — mark_03_shorts
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. The `shorts` row as built: "Eyes up, Mark.", and nobody counts (Q6).
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the gate reads `mark_saw_her`; the counter row reads `rent_short`; the screens and buttons as built; the step row. file and line cites cut.
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 16: under Exhibitionism 20 both openings (his Power version and hers) add his look: "His eyes go down your legs under the table." ("When you sit, ..." on his version, where he doesn't look up as she comes in).
@@ -45,7 +47,7 @@
 | `start`, hers (under 50) | E: she decides before he asks | no | "Go up and change." (Exhibitionism 20) → `hers_down` · "I'm not changing for you." → `no` (parked) | none |
 | `hers_down` | she comes down already in her shortest pair: "Saved you asking." | no | "Sit down across from him." → `shorts` | his Power add −3 |
 | `no` | the parked no | no | "Leave him to his envelope." → the hall | his Power add −2 |
-| `shorts` | she sits; the curve of her ass; his count goes slow | no | "Count, Mark." → the hall | Mark's Want add +10 · exhibitionism add +3, cap 79 · `mark_step` set 3 · `mark_dress_rule` set · the Sunday count |
+| `shorts` | she sits; the curve of her ass; he doesn't touch the envelope, and his eyes go back to her thighs: "Every Sunday. Like that." | no | "Eyes up, Mark." → the hall | Mark's Want add +10 · exhibitionism add +3, cap 79 · `mark_step` set 3 · `mark_dress_rule` set · the Sunday count |
 
 "I'm not changing for you." is parked: the short stays on the tab.
 

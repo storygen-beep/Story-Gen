@@ -1,10 +1,12 @@
 # [REVIEW] Place — Master Bedroom
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Laura's lace set is built.
+
 > Changed 2026-11-04 (LO's answers Q7 and Q12, pass 4 B51: one hall, so Mark is in the living room and Laura waits up in the dark hall or the living room; Mark's line in the lingerie walk-in). Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
 
-> **Changed 2026-10-29, waiting for LO's re-sign** (DECISIONS 90): a locked button names the number, "Needs Corruption 60" or "Needs Exhibitionism 60", not the stage word.
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. The 2026-10-29 locked-button note (DECISIONS 90) is corrected: "Needs Corruption 60" and "Needs Exhibitionism 60" are no longer in the game, because the buttons for scenes this release does not write were removed (DECISIONS 132). Any line below that still names one is superseded by that row.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08). Re-signed 2026-10-29 ("sign all", in chat).
 
@@ -72,7 +74,7 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has h
 | who walks in | her activity | when | his pay, on the moment | her bolder answers |
 |---|---|---|---|---|
 | Laura | Go through Laura's wardrobe | Sat 16:45–17:00 | none | a line only, no pay |
-| Mark | Go through Laura's wardrobe | Sat 21:45–22:00 | his Want +2 | "Let him look." Exhibitionism +1, cap 19/39/59 by her band · his one line, every band: "That's your mother's." · Laura's black lace bra and panties become wardrobe items the walk-in puts on and takes off: to build this release (Q12) |
+| Mark | Go through Laura's wardrobe | Sat 21:45–22:00 | his Want +2 | "Let him look." Exhibitionism +1, cap 19/39/59 by her band · his one line, every band: "That's your mother's." · Laura's black lace bra and panties are wardrobe items the walk-in puts on and takes off: built (Q12) |
 
 ## Rows a gate needs
 

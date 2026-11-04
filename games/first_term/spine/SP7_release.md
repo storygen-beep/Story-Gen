@@ -1,5 +1,6 @@
 # [REVIEW] SP7 · The release page — First Term
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. What the ledger's `her_moment` lists.
 > Changed 2026-11-04: the ledger's release_page line says what it holds; the Sunday table counts nothing (Q6). Waits for LO's re-sign.
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 > Replaced by the plans approved on 2026-11-01 and 2026-11-03 (DECISIONS 124, 132, 134): the 2026-10-08 people row (Ryan A 9 · Laura C 8 · Mark A 9 · Hale B 5 · Tom B 6) and its door. Do not build from them.
@@ -28,6 +29,6 @@
 
 **Systems:** seven cards, each shipped at its release-1 line.
 
-Ledger: `release_page`: its `steps` are the built counters above and its `door` is null. Its `her_moment` still
-lists the day-one final no (DECISIONS, where the sheets and the ledger differ, row 13). Run `shape.py`
+Ledger: `release_page`: its `steps` are the built counters above and its `door` is null. Its `her_moment` lists
+no day-one final no and no stairs (DECISIONS, where the sheets and the ledger differ, row 13, fixed). Run `shape.py`
 and re-sign before changing money, the ending or this page.

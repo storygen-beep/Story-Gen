@@ -1,5 +1,7 @@
 # [REVIEW] Scene — ryan_hot_repeatables
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Where Mark is: the living room, in the notes only (Q7). No beat changed.
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. row 6's Exhibitionism cap 39; row 7 has no "Further." and gains "Leave him to it."; the acts' "Don't stop." and hygiene cost; one media slot per finish; the pools as built; want, next step and hook rows. the explicit beats as built, measured. file and line cites cut.
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 127) (LO: "cant we have more in the sex screens", "B, sheet it"): row 7
@@ -174,7 +176,7 @@ entry is true in whatever she wears. A tease screen, not explicit, by design.
 Written by `v2-prose` and measured, 2026-11-02. Fixes after: both `7suck` end with him pulling her onto the bed and
 into her, so the twist screens (which assume he's in her) are true after every act; "The bed creaks." cut from `7t_a`
 (not true against the wall); `7t_c`'s thought reworded, since Kayla's call is never answered. Reader pass 2026-11-02: `7ride_shy` names only Laura
-across the hall (Mark is downstairs with the TV); `7t_b` opens on the headboard waking her (she's asleep from 23:00);
+across the hall (Mark is in the living room with the TV); `7t_b` opens on the headboard waking her (she's asleep from 23:00);
 `7t_c` turns the face-down phone over; the door line no longer puts him at the desk (`7s_b` has him in bed).
 
 **7s_a** · 80 words · explicit words 4 · median sentence 8

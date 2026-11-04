@@ -1,10 +1,12 @@
 # [REVIEW] Scenes — the walk-ins outside the house (B9-B20)
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. The built-differently items are confirmed, DECISIONS 170.
+
 > New 2026-11-03 (third alignment pass), written from the build; waits for LO's sign. The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`, part B (signed by LO 2026-11-03, DECISIONS 147; built in DECISIONS 150-151).
 
 How every walk-in works in the build: she does something alone; on entry the host rolls the odds; on a hit this screen shows instead. Screen 1 is the moment and pays his meter where he has one; screen 2 is her answer. The odds rise with her stage (0.25, 0.35, 0.45). Each walker comes once a day (a `_today` flag cleared at midnight).
 
-Built differently from the proposal, for LO to confirm (DECISIONS 150): B10-B13 and B15 fire in the first 15 minutes of the walker's row; B11 is split by weekday; B16 Hale comes in at the start of his own lecture; B20 Hale in his office hours; B19 needs bare legs.
+Built differently from the proposal (DECISIONS 150), confirmed, DECISIONS 170: B10-B13 and B15 fire in the first 15 minutes of the walker's row; B11 is split by weekday; B16 Hale comes in at the start of his own lecture; B20 Hale in his office hours; B19 needs bare legs.
 
 ## B9 · `walkin_cafe_gary`
 

@@ -71,7 +71,7 @@ TV_LOUD = flag("tv_loud")
 TV_QUIET = flag("tv_loud", False)
 
 # the shower's own finish (home.py bathroom_shower): stripped, a towel on, hygiene +50
-STRIP = [{"action": "unequip", "item_id": g} for g in ALL_GARMENTS if g not in ("sneakers", "towel")]
+STRIP = [REMEMBER] + [{"action": "unequip", "item_id": g} for g in ALL_GARMENTS if g not in ("sneakers", "towel")]
 SHOWER_DONE = dict(eff=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": 50, "cap": 100}],
                    wardrobe=[{"action": "equip", "item_id": "towel"}])
 
@@ -575,13 +575,12 @@ rule("master_wardrobe", "walkin_wardrobe_laura", 0.25, here(L, "home_bathroom"),
 # Q12 (LO, 2026-11-04): Laura's black lace bra and panties are wardrobe items (0_systems_spec.toml, no price, so
 # no shop sells them). The moment's button takes off what she wore and puts the pair on, so from the answer screen
 # on the sidebar and the words agree. Every way out removes the pair (it goes back in Laura's drawer, not into
-# hers) and dresses her as every "Get dressed." in this game does (canv.DRESS_DAY): the engine keeps no outfit to
-# put back (engine.md §17, the wardrobe actions are add / equip / unequip / remove). What she took off is worded
-# on screen 1 by what she wears, before the button reads it away.
+# hers) and gives back what she took off (canv.DRESS_BACK, LO 2026-11-04), the towel too: she "grabs her things".
+# What she took off is worded on screen 1 by what she wears, before the button reads it away.
 LACE = ("laura_lace_bra", "laura_lace_panties")
-LACE_ON = ([{"action": "unequip", "item_id": g} for g in ALL_GARMENTS if g != "sneakers"]
+LACE_ON = ([{"action": "remember_outfit"}] + [{"action": "unequip", "item_id": g} for g in ALL_GARMENTS if g != "sneakers"]
            + [{"action": "equip", "item_id": g} for g in LACE])
-LACE_OFF = [{"action": "remove", "item_id": g} for g in LACE] + DRESS_DAY
+LACE_OFF = [{"action": "remove", "item_id": g} for g in LACE] + DRESS_BACK
 IN_LACE = {"type": "clothing_item", "item_id": "laura_lace_panties", "operator": "equipped"}
 LINGERIE_OFF = [
     GC(cond(TOWEL), P("You drop your towel in a heap on her bed.")),

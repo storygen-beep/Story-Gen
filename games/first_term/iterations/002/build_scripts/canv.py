@@ -822,8 +822,14 @@ def step_cards(npc, texts, met_flag=None, terminal_text=None, closed_text=None, 
 ALL_GARMENTS = ["plain_bra", "sports_bra", "plain_panties", "tshirt", "thin_top", "jeans", "leggings",
                 "sleep_shorts", "short_skirt", "sleep_shirt", "towel", "cafe_uniform_normal",
                 "cafe_uniform_sexy", "laura_blue_dress", "zoe_party_dress", "sneakers"]
-STRIP = [{"action": "unequip", "item_id": g} for g in ALL_GARMENTS if g != "sneakers"]
+# LO, 2026-11-04: she leaves in what she came in. REMEMBER goes before the first thing that takes her clothes off;
+# DRESS_BACK is the way out. The plain set comes first so a garment taken since, or nothing kept, still leaves her
+# dressed. A towel or the sleep clothes are never kept, so "Get dressed." after a shower gives back what she wore before it.
+REMEMBER = {"action": "remember_outfit", "unless_wearing": ["towel", "sleep_shirt", "sleep_shorts"]}
+RESTORE = {"action": "restore_outfit"}
+STRIP = [REMEMBER] + [{"action": "unequip", "item_id": g} for g in ALL_GARMENTS if g != "sneakers"]
 DRESS_DAY = [{"action": "equip", "item_id": g} for g in ("plain_bra", "plain_panties", "tshirt", "jeans", "sneakers")]
+DRESS_BACK = DRESS_DAY + [RESTORE]
 
 
 def no_node(nid, blocks, dest, retry, eff=None, flags=None, label="Go.", mins=3):

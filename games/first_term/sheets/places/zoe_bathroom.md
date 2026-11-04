@@ -1,5 +1,7 @@
 # [REVIEW] Place — Zoe's Bathroom
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. New row: the refill walk-in B24, the cocky guy at the loose bolt.
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
@@ -40,6 +42,14 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has h
 | what | where | buttons and pays |
 |---|---|---|
 | Jake at the party (A7) | party night, after Jake's step 4 | "Lock the door." Bold 40, Corruption +1, cap 59 · "Leave it unlocked." Hungry 60, +1, cap 79 · "Not at Zoe's." pays 0 |
+
+## Walk-in (LO's Q4, 2026-11-04; `scenes/walkins_refill.md`)
+
+**Walk-ins.** Her activity rolls on entry (1 in 4 at her lowest band, more higher up); on a hit someone walks in. A man's pay sits on the moment; her cover pays 0.
+
+| who walks in | her activity | when | his pay, on the moment | her bolder answers |
+|---|---|---|---|---|
+| the cocky guy | Fix your face | Fri 23:00–00:00; Sat 00:00–02:00, after `cocky_guy_met` | none: no meter | "Finish your liner." Exhibitionism +1, cap 19; "Lean in closer to the mirror." Exhibitionism +1, cap 39; "Turn round and lean back on the sink." Exhibitionism +1, cap 59 |
 
 ## Why — the source of each key choice
 

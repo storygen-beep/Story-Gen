@@ -1,5 +1,7 @@
 # [REVIEW] Scene — living_tv_channels (the remote)
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Ryan is across the hall; the sound bounces off the hall walls (Q7). The build does not read this sheet's beats.
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. C2's "Turn the sound up." and its screen; the walk-ins; Mark's plain channels pay him nothing; his channel 5 caps at 39; want, next step and hook rows. the explicit beats as built, measured. file and line cites cut.
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 1: in Mark's hub, "Channel 5: the adult channel." shows only after his accident (`mark_saw_her`), the same gate as "Leave it on.", so the explicit beat beside him never opens before any sign that he wants her. Alone on the couch it is unchanged.
@@ -40,7 +42,7 @@
 | `ch_news` / `ch_cooking` / `ch_sports` / `ch_film` | one of two lines of what's on | no | "Watch a while." (30 min) · "Change the channel." · "Turn it off." | energy add +5, once a day |
 | `adult` | channel 5: a couple on screen; her body answers | yes | "Keep watching." (30 min) · "Touch yourself." (Curious) · "Turn the sound up." (Corruption 10) · "Change the channel." · "Turn it off." | +1, cap 19 / 39 |
 | `loud` | the sound up: her moans fill the room; anyone in the house can hear | yes | "Keep watching." → the room | corruption add +1, cap 19 · `tv_loud` set |
-| `touch` | she touches herself on the couch and comes; a line names Mark in the kitchen or Ryan upstairs when they are | yes | "Fix your clothes." | +2, cap 39 |
+| `touch` | she touches herself on the couch and comes; a line names Mark in the kitchen or Ryan across the hall when they are | yes | "Fix your clothes." | +2, cap 39 |
 
 ## Branch map — with Mark (inside his late hub)
 
@@ -88,4 +90,4 @@ The screens not written out above, as built:
 
 - `living_tv` · `loud` · 70 words · 3 counted:
 
-> You thumb the volume up, and up again. Her moans fill the whole room. The slap of his hips on her ass is loud as a hand clap. You can hear it bounce off the hall stairs. Anyone in the house can hear it now. Your nipples go hard. You squeeze your thighs together on the couch and leave it right where it is. Harder. Oh God, harder. Don't stop.
+> You thumb the volume up, and up again. Her moans fill the whole room. The slap of his hips on her ass is loud as a hand clap. You can hear it bounce off the hall walls. Anyone in the house can hear it now. Your nipples go hard. You squeeze your thighs together on the couch and leave it right where it is. Harder. Oh God, harder. Don't stop.

@@ -245,7 +245,7 @@ CAR_SAID = {"skirt": "Hey, legs! Where are you walking to? I'll drive you.", "no
 CAR_NEXT = "The same car's parked at the corner the next time you look."
 for case, worn, lv, vance, shop, car in STREET_CASES:
     first = f"street_first_l{lv}"
-    cap = 39 if lv == 1 else 59
+    cap = 19   # no meter gates this act, so it opens at 0 and stops at Good Girl's top (LO, 2026-11-04: the check "an act pays inside its own stage")
     pay_first = [{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": cap},
                  {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": cap}]
     pay_after = [{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": cap}]

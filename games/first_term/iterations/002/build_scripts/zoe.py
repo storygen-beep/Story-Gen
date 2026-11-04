@@ -258,7 +258,7 @@ out.append({
         node("tub", "The hot tub", [
             P("Zoe drags you into the hot tub on the back deck, laughing. Steam rolls off the water. Music thumps through the glass. Three of her friends are already in, drinks on the rim. \"Make room, babe's here.\" She doesn't need room. She sits right against you, her knee pressed to yours under the water. When you talk, she watches your mouth. All term she has dared you instead of asking, but you know what she wants. \"Your tits are floating, babe,\" she says, grinning. Your face goes hot, and it isn't the water. One of her friends stands up, restless. \"Going in for more drinks.\""),
         ], [go("Stay in the water.", node="alone", mins=15,
-               wardrobe=[{"action": "unequip", "item_id": g} for g in ("tshirt", "thin_top", "jeans", "leggings", "sleep_shorts",
+               wardrobe=[REMEMBER] + [{"action": "unequip", "item_id": g} for g in ("tshirt", "thin_top", "jeans", "leggings", "sleep_shorts",
                                                                        "short_skirt", "zoe_party_dress", "laura_blue_dress", "sneakers")])]),
         node("alone", "Just us", [
             P("The door slides shut behind her friends. Now it is just the two of you in the steam. Zoe goes quiet, and Zoe is never quiet. \"Take it off, babe,\" she says, low. \"Just for me. Nobody else is here.\" Her eyes drop to your chest and stay there. She bites her lip. Her breath comes short across the water. \"Everything on you is wet anyway. I can see your nipples, babe. I want to see your tits.\" Your heart pounds, because you want her to keep looking. Your hands drift up and stop. She waits for your answer."),
@@ -266,7 +266,7 @@ out.append({
             go("Take your bra off.", node="kiss", mins=3, cond_=cond({"type": "clothing_slot", "slot": "bra", "operator": "equipped"}),
                wardrobe=[{"action": "unequip", "item_id": "plain_bra"}, {"action": "unequip", "item_id": "sports_bra"}]),
             go("Let her look.", node="kiss_bare", mins=3, cond_=cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"})),
-            go("\"Not tonight, Zo.\"", node="home_no", mins=60, wardrobe=DRESS_DAY),
+            go("\"Not tonight, Zo.\"", node="home_no", mins=60, wardrobe=DRESS_BACK),
         ]),
         node("kiss", "Topless", [
             P("You get your bra off and toss it on the deck. The steam rolls over your bare tits. The night air is cold on them, so your nipples go hard above the water. Zoe stares at them. \"Babe,\" she breathes. \"Look at you.\" You grab the back of her neck and pull her in. You kiss her hard, open-mouthed, until she moans into you. Her tits press flat against yours. Her nipples drag across your nipples, hard and wet. Her thigh slides between your thighs under the water. It presses up, slow and firm. Her breath catches. Your hands run down her slick back to her ass. You grab it with both hands and pull her tits tight against yours."),
@@ -277,7 +277,7 @@ out.append({
              [go("Hold her.", node="asked", mins=10, eff=[{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 3, "cap": 79}, {"targetType": "player", "trait": "corruption", "op": "add", "value": 3, "cap": 79}])]),
         node("asked", "You could've asked", [
             P("Zoe pulls back, flushed and breathless, and laughs. \"Took you long enough, babe.\" \"You could've asked,\" you tell her. She goes quiet. She opens her mouth, but she doesn't answer that. Not yet. All term she dared you instead of asking for this. You liked every single dare. The sliding door bangs open. Your friends spill back out, shrieking. You sink to your shoulders in the hot water. Across the bubbles, Zoe is still looking at you. Next time you two are alone, somebody has to ask first."),
-        ], [go("Go home.", node="home", mins=m, cond_=cond(tod(a, b)), consumes=True, wardrobe=DRESS_DAY,   # false lines a3 #28: dressed for the walk home
+        ], [go("Go home.", node="home", mins=m, cond_=cond(tod(a, b)), consumes=True, wardrobe=DRESS_BACK,   # false lines a3 #28: dressed for the walk home
                eff=[setv("zoe_step", 3)], flags=[done(3)]) for (a, b), m in HOME_AT_3]),
         node("home_no", "Home", [D(Z, "Next Saturday, then. I'll ask again."), P("She doesn't sound annoyed. She sounds like she's counting. You climb out and get dressed and go home with dry hair, the chlorine still on your skin, and Ryan's door is shut.")],
              [go("Go to bed.", loc="home_ella_room", mins=5, retry=7)]),

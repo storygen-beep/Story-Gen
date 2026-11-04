@@ -199,7 +199,7 @@ out.append({
 # ── the end of a date (jake_date_end.md, signed 2026-11-01): reworks jake_saturday_date. The car by her stage; after
 #    step 4, "Come up." (a two-entry shuffle bag) with a near-catch on a 1-8 roll. Mark is asleep; Laura waits up. ──
 CAP = lambda k, n, c: {"targetType": "player", "trait": k, "op": "add", "value": n, "cap": c}
-CAR_PAY = lambda c: [CAP("corruption", 1, c), CAP("exhibitionism", 1, c)]
+CAR_PAY = lambda c: [CAP("corruption", 1, c), CAP("exhibitionism", 1, min(c, 39))]   # the car's Corruption gate holds nothing on Exhibitionism: it opens at 20 and stops at 39 (LO, 2026-11-04)
 ROLL = lambda op, v: trait("jake_catch_roll", op, v)
 # truth pass (2026-11-03): "Laura waits up with the TV" is true only while her row has her in the living room (Sat
 # 22:00-00:00, not on the dark stairs after came_home_late, and never on a Wednesday, when she is in her bedroom), so
