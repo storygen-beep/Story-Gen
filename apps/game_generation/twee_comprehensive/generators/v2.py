@@ -1794,6 +1794,43 @@ setup.removeFromWardrobe = function(itemId) {
     return true;
 };
 
+// `remember_outfit` / `restore_outfit` (LO, 2026-11-04): a scene that undresses her puts her
+// back in what she came in. One private slot, not a saved outfit: no name, no cap, nothing on
+// the wardrobe page. Remembering while she wears a garment in `unlessWearing` (a towel) leaves
+// the slot as it is, so "Get dressed." after a shower gives back what she wore before it.
+// Restoring empties the slot. A garment gone since is skipped: its slot keeps what it holds,
+// so a scene lists a plain outfit before `restore_outfit` as the way out when none was kept.
+setup.KEPT_OUTFIT_SLOTS = ['bra', 'underwear', 'top', 'bottom', 'dress', 'legwear', 'shoes'];
+setup.rememberOutfit = function(unlessWearing) {
+    var p = State.variables.player;
+    if (!p || !p.equipped) return false;
+    var slots = setup.KEPT_OUTFIT_SLOTS, skip = unlessWearing || [], i;
+    for (i = 0; i < slots.length; i++) {
+        if (p.equipped[slots[i]] && skip.indexOf(p.equipped[slots[i]]) !== -1) return false;
+    }
+    var snap = {};
+    for (i = 0; i < slots.length; i++) snap[slots[i]] = p.equipped[slots[i]] || null;
+    p.kept_outfit = snap;
+    return true;
+};
+setup.restoreOutfit = function() {
+    var p = State.variables.player;
+    var kept = p && p.kept_outfit;
+    if (!kept || !p.equipped) return false;
+    var owned = function(id) { return p.wardrobe && p.wardrobe[id]; };
+    var lostDress = kept.dress && !owned(kept.dress);
+    for (var i = 0; i < setup.KEPT_OUTFIT_SLOTS.length; i++) {
+        var s = setup.KEPT_OUTFIT_SLOTS[i], id = kept[s];
+        if (id) {
+            if (owned(id)) p.equipped[s] = id;
+        } else if (!(lostDress && (s === 'top' || s === 'bottom'))) {
+            p.equipped[s] = null;
+        }
+    }
+    delete p.kept_outfit;
+    return true;
+};
+
 setup.getWardrobeItemsForSlot = function(slotName) {
     var sv = State.variables;
     if (!sv.player || !sv.player.wardrobe) return [];
@@ -16841,7 +16878,7 @@ setup.carryRent = function (due, paid) {
                                     passage_body += f'<<script>>setup.applyAndNotifyFlag("{ftype}", {npc_js}, "{flag_val}", "{fop}");<</script>>'
                             if self.clothing_enabled and lb_wardrobe_effects and isinstance(lb_wardrobe_effects, list):
                                 for we in lb_wardrobe_effects:
-                                    w_js = self._wardrobe_effect_js(we.get('action', 'add'), we.get('item_id', ''))
+                                    w_js = self._wardrobe_effect_js(we.get('action', 'add'), we.get('item_id', ''), we.get('unless_wearing'))
                                     if w_js:
                                         passage_body += f'<<script>>{w_js}<</script>>'
                             # doc 45 G4/G5 — duplicate quest + scheduled effects on the loop-back choice
@@ -17503,7 +17540,7 @@ setup.carryRent = function (due, paid) {
 
             code_parts = []
             for we in wardrobe_effects:
-                w_js = self._wardrobe_effect_js(we.get('action', 'add'), we.get('item_id', ''))
+                w_js = self._wardrobe_effect_js(we.get('action', 'add'), we.get('item_id', ''), we.get('unless_wearing'))
                 if w_js:
                     code_parts.append(w_js)
 
@@ -17660,10 +17697,15 @@ setup.carryRent = function (due, paid) {
         return "".join(out)
 
     @staticmethod
-    def _wardrobe_effect_js(action, item_id) -> str:
+    def _wardrobe_effect_js(action, item_id, unless_wearing=None) -> str:
         """The JS one wardrobe effect runs, shared by all three emitters (the choice path,
         the loop-back link beat, a node exit's config). "" for an unknown action or no
-        item (the importer rejects both). E7a added `unequip` and `remove`."""
+        item (the importer rejects both). E7a added `unequip` and `remove`;
+        `remember_outfit` and `restore_outfit` name no garment."""
+        if action == 'remember_outfit':
+            return f'setup.rememberOutfit({json.dumps(list(unless_wearing or []))});'
+        if action == 'restore_outfit':
+            return 'setup.restoreOutfit();'
         item_id = str(item_id or '').replace('"', '\\"')
         if not item_id:
             return ""
@@ -17684,7 +17726,7 @@ setup.carryRent = function (due, paid) {
         out = []
         for we in effects:
             try:
-                w_js = self._wardrobe_effect_js(we.get('action', 'add'), we.get('item_id', ''))
+                w_js = self._wardrobe_effect_js(we.get('action', 'add'), we.get('item_id', ''), we.get('unless_wearing'))
                 if w_js:
                     out.append(f'<<script>>{w_js}<</script>>')
             except (KeyError, TypeError, ValueError) as e:

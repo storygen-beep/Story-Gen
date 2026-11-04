@@ -229,6 +229,31 @@ name   = "Gone"
 blocks = [ { type = "paragraph", content = "STRIP_GONE" } ]
 exit_block = { type = "location", text = "Done", config = { destinationType = "trigger", time_progression_minutes = 0, wardrobeEffects = [ { action = "remove", item_id = "skirt" } ] } }
 
+# remember_outfit / restore_outfit: a scene strips her and puts back what she came in
+[[canvases]]
+id   = "kept_scene"
+name = "Kept"
+
+[canvases.trigger]
+location      = "loc_home"
+is_repeatable = true
+is_active     = true
+hidden_from_location = true
+
+[[canvases.nodes]]
+id     = "strip"
+name   = "Strip"
+blocks = [ { type = "paragraph", content = "KEPT_STRIP" } ]
+exit_block = { type = "choices", choices = [
+  { text = "Strip", targetType = "node", nodeId = "naked", wardrobeEffects = [ { action = "remember_outfit", unless_wearing = ["slip"] }, { action = "unequip", item_id = "blouse" }, { action = "unequip", item_id = "skirt" }, { action = "unequip", item_id = "bra" }, { action = "unequip", item_id = "slip" } ] } ] }
+
+[[canvases.nodes]]
+id     = "naked"
+name   = "Naked"
+blocks = [ { type = "paragraph", content = "KEPT_NAKED" } ]
+exit_block = { type = "choices", choices = [
+  { text = "Get dressed", targetType = "location", locationId = "loc_home", wardrobeEffects = [ { action = "equip", item_id = "bra" }, { action = "restore_outfit" } ] } ] }
+
 # E7b — a place that wants a revealing state, and a dress code
 [[locations]]
 id               = "loc_club"
