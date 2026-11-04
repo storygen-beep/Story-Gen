@@ -17,7 +17,7 @@
 | gate | `cafe_job` · `tom_step` eq 1 · player counter `cafe_shifts_worked` gte 5 · the boost off |
 | the counter | `cafe_shifts_worked` (player trait, declared 0): +1 on every "Work a shift". No counter exists today (`grep` of `build_scripts/`); name mine, confirmed by LO 2026-11-01 ("Signed") |
 | want | he counts the jar when she's near |
-| next step | she catches him folding twenties into his apron |
+| next step | she catches him folding the tips into his apron |
 | hook | "Not a word." She holds his secret |
 | what she wears here | the café uniform |
 | explicit? | no: info |
@@ -34,7 +34,7 @@ The seven columns, filled from what the build does.
 
 | the moment | who sees or knows | what she risks | how she says yes | his move | does it finish | what changes after |
 |---|---|---|---|---|---|---|
-| the back room: Tom folding the girls' twenties out of the tip jar | only her: he steals from the jar | being caught seeing it | "Busy shift?" · or "That depends what's in it for me." | "Not a word." His ears go red | yes | his step 2; `knows_tip_jar`; his Want +5, Power -5 on "Not a word." |
+| the back room: Tom folding the bills out of the tip jar | only her: he steals from the jar | being caught seeing it | "Busy shift?" · or "That depends what's in it for me." | "Not a word." His ears go red | yes | his step 2; `knows_tip_jar`; his Want +5, Power -5 on "Not a word." |
 
 ## Branch map — as built (2026-11-03)
 

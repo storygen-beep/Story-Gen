@@ -47,7 +47,7 @@ The running situations, the twist, the threads and the phases are on `DIRECTION.
 
 **The companion:** Zoe (19), one step ahead of her.
 
-**The pressure-man:** Mark (46). He collects her cut of the rent, $75 every Sunday; he turns sexual
+**The pressure-man:** Mark (46). He collects her cut of the rent, $75 every Sunday, rising to $100; he turns sexual
 late.
 
 **Her face:** not yet chosen.

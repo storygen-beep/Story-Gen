@@ -38,7 +38,7 @@ One row per exit. Read from the build; it replaces the drafted map.
 | `door` | Dr. Hale's office door is unlocked. | no | "Let him." → `roll` | Claire's Thursday rolls 1-4 · costs Energy 10 |
 | | | | "This isn't coaching." → `isnt` | Psychology grade -1 |
 | | | | "Run." → `run` | Psychology grade -2 |
-| `roll` | He comes round the desk. | no | "Go on." (Claire's Thursday = 1) → `claire_car` | — |
+| `roll` | He looks you over across the desk. | no | "Go on." (Claire's Thursday = 1) → `claire_car` | — |
 | | | | "Go on." (Claire's Thursday 2+ · Corruption under 60) → `touch_low` | Hygiene -10 |
 | | | | "Go on." (Claire's Thursday 2+ · Corruption 60+) → `touch_high` | Hygiene -10 |
 | `touch_low` | Dr. Hale stands behind your chair. | yes | "Same time next week." → `end` | Psychology grade +2 · Corruption +1 (cap 59) · Exhibitionism +1 (cap 59) |

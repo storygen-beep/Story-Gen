@@ -47,14 +47,14 @@ Going out in a level for the first time needs Corruption **or** Exhibitionism at
 |---|---|
 | she shows herself to someone, by choice (a flash, a towel slip, naked for Ryan) | Exhibitionism (+1 everyday, +3 a big first) **and** Corruption +1 |
 | she does something with someone, unseen (a kiss, a handjob, sex behind a door) | Corruption only |
-| she does something with someone, **seen** (Mark's TV in the next room, a party) | **both** |
+| she does something with someone, **seen** (Mark's radio in the next room, a party) | **both** |
 | she touches herself alone | Corruption only |
 | an accident (seen in the towel when she didn't choose it) | **nothing** (DECISIONS 78) |
 
 ## Rule 4 · mixed acts need both meters
 
 An act that shows **and** is sexual with someone needs **both** stage numbers. Example: "Naked in his room" (Ryan,
-Showing) stays Exhibitionism 40; the handjob under the blanket with Mark's TV next door needs Corruption 40 **and**
+Showing) stays Exhibitionism 40; the handjob under the blanket with Mark's radio next door needs Corruption 40 **and**
 Exhibitionism 20. Each step sheet names which of its buttons are mixed.
 
 ## Rule 5 · one scene, buttons from both meters

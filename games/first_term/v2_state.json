@@ -14,7 +14,7 @@
       "goals": [
         {
           "goal": "pay her own way: earn enough of her own money that Sunday rent is paid her way, not Mark's",
-          "ends_when": "rent never stops; it ends the day Ella, not Mark, sets how it is paid: the money route (she pays in full from her own money for several Sundays in a row, whether or not Mark's path is closed; how many is set on the board) or the body route (Mark A up to step 9, the scene where she takes his chair)",
+          "ends_when": "rent never stops; it ends the day Ella, not Mark, sets how it is paid: she pays in full from her own money four Sundays in a row. Mark's later body route (his chair) is cut from this release",
           "ends_flag": "pays_her_own_way",
           "next": "her name on campus"
         },
@@ -67,7 +67,7 @@
       ]
     },
     "who_she_is": "Ella, 18, first day of college, still living at home in a rented house with her mom, step-father and step-brother; no job, no money of her own, no lock on her door",
-    "obligation": "her cut of the house rent: $75 every Sunday, counted out to Mark on the kitchen table; the house is rented from Mr. Vance next door for $1,200 a month",
+    "obligation": "her cut of the house rent: $75 every Sunday, rising to $90 and then $100, taken by the rent page, with Mark at the kitchen table; the house is rented from Mr. Vance next door for $1,200 a month",
     "hold_kind": "bill",
     "hold_collector": "npc_mark",
     "appetite": "to be wanted by the people she shouldn't want",
@@ -394,7 +394,7 @@
         "link": "her $75 is part of what Mark owes him"
       }
     ],
-    "last_read_note": "owed: the Want was not re-read in the third pass (2026-11-03), so last_read_at_release is not set. Known drift for the re-read: goal 1's ends_when names the body route as Mark up to step 9, but his release-1 ladder has 4 steps and ends on \"Mark, later.\"; WANT.md says $75 every Sunday, and the rent rises to $90 after $300 paid and $100 after $900; WANT.md has no face yet.",
+    "last_read_note": "owed: the Want was not re-read in the third pass (2026-11-03), so last_read_at_release is not set. Goal 1, the rent and the hall were corrected to the build on 2026-11-04. WANT.md has no face yet.",
     "moment_kinds": [
       "being_seen",
       "taboo_at_home",
@@ -425,7 +425,7 @@
       "opens": "step 3: his phone on the sink (Ryan A step 2 was cut 10-06; IDEA.md:105)"
     },
     "version": "0.1",
-    "want_line": "To be wanted by the people she shouldn't want, at home first (WANT.md §2), with the goal that pulls the player: pay her own way on Sunday",
+    "want_line": "To be wanted by the people she shouldn't want, at home first (WANT.md §3), with the goal that pulls the player: pay her own way on Sunday",
     "steps": {
       "npc_ryan": 8,
       "npc_laura": 4,
@@ -475,10 +475,10 @@
       "campus_gym"
     ],
     "weeks": 8,
-    "promise_alive": "the Sunday table: each count says how many Sundays in a row she has paid her own way (goal 1; Mark's steps 1 and 3, and his Sunday table every week); Zoe's step 4 hands her the dares, which feed campus_talk (goal 2, whose end is release 2)",
+    "promise_alive": "the Sunday table: each Sunday table says how many Sundays in a row she has paid her own way (goal 1; Mark's steps 1 and 3, and his Sunday table every week); Zoe's step 4 hands her the dares, which feed campus_talk (goal 2, whose end is release 2)",
     "replay_ready": "yes",
     "block": [
-      "the fixed --ship BLOCK list (gates.py), no waivers"
+      "the fixed --ship BLOCK list (gates.py); LO's reader waivers and decided rows are recorded in reader_waivers and decided"
     ],
     "report": [
       "the fixed --ship REPORT list (gates.py), nothing added"
@@ -500,7 +500,7 @@
         "hook": "PASS",
         "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "PASS",
+        "the written no": "N/A",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
@@ -512,13 +512,13 @@
         "want": "PASS",
         "next step": "PASS",
         "hook": "PASS",
-        "her voice at her level": "N/A",
+        "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "FAIL",
+        "the written no": "PASS",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
@@ -543,7 +543,7 @@
         "her voice at her level": "PASS",
         "who notices": "PASS",
         "the written no": "PASS",
-        "the body": "PASS",
+        "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
         "true on every visit it can render on": "FAIL",
@@ -574,7 +574,7 @@
         "the body": "PASS",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "N/A"
       },
@@ -584,7 +584,7 @@
         "hook": "PASS",
         "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "FAIL",
+        "the written no": "PASS",
         "the body": "PASS",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
@@ -602,17 +602,17 @@
         "the body": "PASS",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
-        "low heat is on the body": "FAIL"
+        "low heat is on the body": "PASS"
       },
       "hub_ryan_kitchen": {
         "want": "PASS",
         "next step": "PASS",
-        "hook": "PASS",
+        "hook": "N/A",
         "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "PASS",
+        "the written no": "FAIL",
         "the body": "PASS",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
@@ -626,7 +626,7 @@
         "hook": "PASS",
         "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "PASS",
+        "the written no": "FAIL",
         "the body": "PASS",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
@@ -658,14 +658,14 @@
         "the body": "N/A",
         "the numbers and the clothes agree": "N/A",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "FAIL",
+        "true on every visit it can render on": "PASS",
         "a solo button is a real act": "PASS",
         "low heat is on the body": "N/A"
       },
       "laura_01_blue_dress": {
         "want": "PASS",
         "next step": "PASS",
-        "hook": "FAIL",
+        "hook": "PASS",
         "her voice at her level": "PASS",
         "who notices": "PASS",
         "the written no": "PASS",
@@ -680,11 +680,11 @@
         "want": "PASS",
         "next step": "PASS",
         "hook": "PASS",
-        "her voice at her level": "N/A",
+        "her voice at her level": "PASS",
         "who notices": "PASS",
         "the written no": "N/A",
         "the body": "N/A",
-        "the numbers and the clothes agree": "PASS",
+        "the numbers and the clothes agree": "FAIL",
         "companion and rival": "N/A",
         "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
@@ -694,13 +694,13 @@
         "want": "PASS",
         "next step": "PASS",
         "hook": "PASS",
-        "her voice at her level": "N/A",
+        "her voice at her level": "PASS",
         "who notices": "PASS",
         "the written no": "PASS",
         "the body": "N/A",
-        "the numbers and the clothes agree": "PASS",
+        "the numbers and the clothes agree": "N/A",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
@@ -708,8 +708,8 @@
         "want": "PASS",
         "next step": "PASS",
         "hook": "PASS",
-        "her voice at her level": "N/A",
-        "who notices": "N/A",
+        "her voice at her level": "PASS",
+        "who notices": "PASS",
         "the written no": "PASS",
         "the body": "N/A",
         "the numbers and the clothes agree": "N/A",
@@ -724,11 +724,11 @@
         "hook": "PASS",
         "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "PASS",
+        "the written no": "N/A",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
@@ -742,7 +742,7 @@
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
@@ -765,11 +765,11 @@
         "hook": "PASS",
         "her voice at her level": "N/A",
         "who notices": "PASS",
-        "the written no": "PASS",
+        "the written no": "N/A",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "FAIL",
+        "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "N/A"
       },
@@ -803,29 +803,29 @@
       },
       "vance_walk_past": {
         "want": "PASS",
-        "next step": "FAIL",
-        "hook": "PASS",
+        "next step": "PASS",
+        "hook": "N/A",
         "her voice at her level": "N/A",
         "who notices": "PASS",
         "the written no": "N/A",
         "the body": "N/A",
-        "the numbers and the clothes agree": "N/A",
+        "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
-        "low heat is on the body": "FAIL"
+        "low heat is on the body": "PASS"
       },
       "mark_01_count_it_slowly": {
         "want": "PASS",
         "next step": "PASS",
         "hook": "PASS",
-        "her voice at her level": "N/A",
+        "her voice at her level": "PASS",
         "who notices": "PASS",
         "the written no": "PASS",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
@@ -835,11 +835,11 @@
         "hook": "PASS",
         "her voice at her level": "N/A",
         "who notices": "PASS",
-        "the written no": "FAIL",
+        "the written no": "PASS",
         "the body": "N/A",
         "the numbers and the clothes agree": "N/A",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "N/A"
       },
@@ -853,21 +853,21 @@
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "FAIL",
+        "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
       "mark_06_our_arrangement": {
         "want": "PASS",
         "next step": "PASS",
-        "hook": "PASS",
+        "hook": "N/A",
         "her voice at her level": "N/A",
         "who notices": "PASS",
         "the written no": "PASS",
         "the body": "N/A",
         "the numbers and the clothes agree": "N/A",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "N/A"
       },
@@ -889,7 +889,7 @@
         "want": "PASS",
         "next step": "PASS",
         "hook": "PASS",
-        "her voice at her level": "N/A",
+        "her voice at her level": "PASS",
         "who notices": "PASS",
         "the written no": "N/A",
         "the body": "N/A",
@@ -897,7 +897,7 @@
         "companion and rival": "N/A",
         "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
-        "low heat is on the body": "FAIL"
+        "low heat is on the body": "PASS"
       },
       "vance_knock": {
         "want": "PASS",
@@ -919,7 +919,7 @@
         "hook": "PASS",
         "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "PASS",
+        "the written no": "FAIL",
         "the body": "PASS",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
@@ -928,9 +928,9 @@
         "low heat is on the body": "PASS"
       },
       "hub_mark_bedroom": {
-        "want": "PASS",
+        "want": "N/A",
         "next step": "PASS",
-        "hook": "PASS",
+        "hook": "N/A",
         "her voice at her level": "N/A",
         "who notices": "PASS",
         "the written no": "N/A",
@@ -939,19 +939,19 @@
         "companion and rival": "N/A",
         "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
-        "low heat is on the body": "FAIL"
+        "low heat is on the body": "PASS"
       },
       "hub_mark_garage": {
         "want": "PASS",
         "next step": "PASS",
-        "hook": "PASS",
-        "her voice at her level": "PASS",
+        "hook": "N/A",
+        "her voice at her level": "N/A",
         "who notices": "PASS",
-        "the written no": "N/A",
+        "the written no": "FAIL",
         "the body": "PASS",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "FAIL",
+        "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
@@ -961,7 +961,7 @@
         "hook": "PASS",
         "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "PASS",
+        "the written no": "FAIL",
         "the body": "PASS",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
@@ -1061,7 +1061,7 @@
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "PASS",
         "low heat is on the body": "PASS"
       },
@@ -1086,7 +1086,7 @@
         "who notices": "N/A",
         "the written no": "N/A",
         "the body": "N/A",
-        "the numbers and the clothes agree": "FAIL",
+        "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
         "true on every visit it can render on": "PASS",
         "a solo button is a real act": "PASS",
@@ -1161,13 +1161,13 @@
         "want": "PASS",
         "next step": "PASS",
         "hook": "PASS",
-        "her voice at her level": "N/A",
+        "her voice at her level": "PASS",
         "who notices": "PASS",
         "the written no": "N/A",
-        "the body": "PASS",
+        "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "PASS",
         "low heat is on the body": "PASS"
       },
@@ -1200,11 +1200,11 @@
         "low heat is on the body": "N/A"
       },
       "master_wardrobe": {
-        "want": "N/A",
+        "want": "PASS",
         "next step": "N/A",
-        "hook": "N/A",
+        "hook": "FAIL",
         "her voice at her level": "N/A",
-        "who notices": "N/A",
+        "who notices": "PASS",
         "the written no": "N/A",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
@@ -1259,13 +1259,13 @@
         "hook": "PASS",
         "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "N/A",
+        "the written no": "FAIL",
         "the body": "PASS",
-        "the numbers and the clothes agree": "PASS",
+        "the numbers and the clothes agree": "FAIL",
         "companion and rival": "N/A",
         "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "FAIL",
-        "low heat is on the body": "FAIL"
+        "low heat is on the body": "PASS"
       },
       "garden_washing": {
         "want": "N/A",
@@ -1282,20 +1282,20 @@
       },
       "front_step": {
         "want": "PASS",
-        "next step": "N/A",
+        "next step": "PASS",
         "hook": "PASS",
         "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "FAIL",
+        "the written no": "PASS",
         "the body": "N/A",
-        "the numbers and the clothes agree": "PASS",
+        "the numbers and the clothes agree": "FAIL",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "PASS",
-        "low heat is on the body": "PASS"
+        "low heat is on the body": "FAIL"
       },
       "home_event_ryan_towel": {
-        "want": "PASS",
+        "want": "N/A",
         "next step": "PASS",
         "hook": "PASS",
         "her voice at her level": "PASS",
@@ -1356,11 +1356,11 @@
         "hook": "PASS",
         "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "FAIL",
+        "the written no": "PASS",
         "the body": "N/A",
         "the numbers and the clothes agree": "N/A",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "FAIL",
+        "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
@@ -1383,11 +1383,11 @@
         "hook": "N/A",
         "her voice at her level": "N/A",
         "who notices": "N/A",
-        "the written no": "N/A",
+        "the written no": "FAIL",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "FAIL",
+        "true on every visit it can render on": "PASS",
         "a solo button is a real act": "PASS",
         "low heat is on the body": "N/A"
       },
@@ -1450,7 +1450,7 @@
         "next step": "N/A",
         "hook": "N/A",
         "her voice at her level": "N/A",
-        "who notices": "N/A",
+        "who notices": "PASS",
         "the written no": "N/A",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
@@ -1515,7 +1515,7 @@
       "hub_zoe_class": {
         "want": "PASS",
         "next step": "PASS",
-        "hook": "PASS",
+        "hook": "N/A",
         "her voice at her level": "N/A",
         "who notices": "PASS",
         "the written no": "N/A",
@@ -1584,15 +1584,15 @@
       },
       "hale_thursdays": {
         "want": "PASS",
-        "next step": "PASS",
+        "next step": "FAIL",
         "hook": "PASS",
         "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "PASS",
+        "the written no": "N/A",
         "the body": "PASS",
-        "the numbers and the clothes agree": "FAIL",
+        "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "N/A"
       },
@@ -1690,8 +1690,8 @@
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
-        "a solo button is a real act": "PASS",
+        "true on every visit it can render on": "FAIL",
+        "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
       "college_class_business": {
@@ -1716,11 +1716,11 @@
         "who notices": "PASS",
         "the written no": "N/A",
         "the body": "N/A",
-        "the numbers and the clothes agree": "FAIL",
+        "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
-        "a solo button is a real act": "PASS",
-        "low heat is on the body": "PASS"
+        "true on every visit it can render on": "FAIL",
+        "a solo button is a real act": "N/A",
+        "low heat is on the body": "FAIL"
       },
       "college_class_figure": {
         "want": "PASS",
@@ -1738,17 +1738,17 @@
       },
       "meet_business": {
         "want": "PASS",
-        "next step": "N/A",
+        "next step": "PASS",
         "hook": "PASS",
         "her voice at her level": "PASS",
         "who notices": "PASS",
         "the written no": "N/A",
-        "the body": "PASS",
+        "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
         "true on every visit it can render on": "PASS",
         "a solo button is a real act": "PASS",
-        "low heat is on the body": "N/A"
+        "low heat is on the body": "FAIL"
       },
       "meet_bio": {
         "want": "PASS",
@@ -1758,11 +1758,11 @@
         "who notices": "PASS",
         "the written no": "N/A",
         "the body": "N/A",
-        "the numbers and the clothes agree": "FAIL",
+        "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
         "true on every visit it can render on": "PASS",
         "a solo button is a real act": "PASS",
-        "low heat is on the body": "PASS"
+        "low heat is on the body": "FAIL"
       },
       "meet_figure": {
         "want": "PASS",
@@ -1891,23 +1891,23 @@
         "low heat is on the body": "PASS"
       },
       "hub_business_class": {
-        "want": "PASS",
-        "next step": "FAIL",
-        "hook": "FAIL",
+        "want": "N/A",
+        "next step": "PASS",
+        "hook": "N/A",
         "her voice at her level": "N/A",
         "who notices": "PASS",
         "the written no": "N/A",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "FAIL",
+        "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "N/A"
       },
       "hub_ta_class": {
         "want": "PASS",
         "next step": "FAIL",
-        "hook": "PASS",
+        "hook": "N/A",
         "her voice at her level": "N/A",
         "who notices": "PASS",
         "the written no": "N/A",
@@ -1935,16 +1935,16 @@
       "hub_business_office": {
         "want": "PASS",
         "next step": "PASS",
-        "hook": "FAIL",
+        "hook": "PASS",
         "her voice at her level": "N/A",
         "who notices": "PASS",
-        "the written no": "PASS",
+        "the written no": "N/A",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
-        "low heat is on the body": "FAIL"
+        "low heat is on the body": "PASS"
       },
       "hub_ta_office": {
         "want": "PASS",
@@ -1952,7 +1952,7 @@
         "hook": "PASS",
         "her voice at her level": "N/A",
         "who notices": "PASS",
-        "the written no": "FAIL",
+        "the written no": "PASS",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
@@ -1972,7 +1972,7 @@
         "companion and rival": "N/A",
         "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
-        "low heat is on the body": "FAIL"
+        "low heat is on the body": "PASS"
       },
       "dean_warning": {
         "want": "PASS",
@@ -1989,15 +1989,15 @@
       },
       "gym_workout": {
         "want": "PASS",
-        "next step": "N/A",
+        "next step": "PASS",
         "hook": "PASS",
         "her voice at her level": "N/A",
         "who notices": "PASS",
         "the written no": "N/A",
-        "the body": "N/A",
+        "the body": "PASS",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "PASS",
         "low heat is on the body": "PASS"
       },
@@ -2015,22 +2015,22 @@
         "a solo button is a real act": "PASS"
       },
       "shop_try_on": {
-        "want": "N/A",
-        "next step": "N/A",
-        "hook": "N/A",
+        "want": "PASS",
+        "next step": "PASS",
+        "hook": "PASS",
         "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "N/A",
+        "the written no": "PASS",
         "the body": "PASS",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "PASS",
-        "low heat is on the body": "FAIL"
+        "low heat is on the body": "PASS"
       },
       "party_house_soak": {
         "want": "PASS",
-        "next step": "N/A",
+        "next step": "PASS",
         "hook": "PASS",
         "her voice at her level": "N/A",
         "who notices": "PASS",
@@ -2040,7 +2040,7 @@
         "companion and rival": "N/A",
         "true on every visit it can render on": "PASS",
         "a solo button is a real act": "PASS",
-        "low heat is on the body": "N/A"
+        "low heat is on the body": "PASS"
       },
       "cafe_job_ask": {
         "want": "PASS",
@@ -2074,7 +2074,7 @@
         "want": "PASS",
         "next step": "PASS",
         "hook": "PASS",
-        "her voice at her level": "N/A",
+        "her voice at her level": "PASS",
         "who notices": "PASS",
         "the written no": "PASS",
         "the body": "N/A",
@@ -2100,21 +2100,7 @@
       },
       "hub_gary_booth": {
         "want": "PASS",
-        "next step": "FAIL",
-        "hook": "FAIL",
-        "her voice at her level": "N/A",
-        "who notices": "PASS",
-        "the written no": "FAIL",
-        "the body": "N/A",
-        "the numbers and the clothes agree": "N/A",
-        "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
-        "a solo button is a real act": "N/A",
-        "low heat is on the body": "FAIL"
-      },
-      "zoe_00_quad_meeting": {
-        "want": "PASS",
-        "next step": "N/A",
+        "next step": "PASS",
         "hook": "PASS",
         "her voice at her level": "N/A",
         "who notices": "PASS",
@@ -2122,7 +2108,21 @@
         "the body": "N/A",
         "the numbers and the clothes agree": "N/A",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "FAIL",
+        "true on every visit it can render on": "PASS",
+        "a solo button is a real act": "N/A",
+        "low heat is on the body": "PASS"
+      },
+      "zoe_00_quad_meeting": {
+        "want": "PASS",
+        "next step": "PASS",
+        "hook": "PASS",
+        "her voice at her level": "PASS",
+        "who notices": "PASS",
+        "the written no": "N/A",
+        "the body": "N/A",
+        "the numbers and the clothes agree": "N/A",
+        "companion and rival": "N/A",
+        "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "N/A"
       },
@@ -2148,9 +2148,9 @@
         "who notices": "PASS",
         "the written no": "PASS",
         "the body": "PASS",
-        "the numbers and the clothes agree": "PASS",
+        "the numbers and the clothes agree": "FAIL",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
@@ -2158,13 +2158,13 @@
         "want": "PASS",
         "next step": "PASS",
         "hook": "PASS",
-        "her voice at her level": "PASS",
+        "her voice at her level": "N/A",
         "who notices": "PASS",
         "the written no": "PASS",
         "the body": "PASS",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "N/A"
       },
@@ -2216,11 +2216,11 @@
         "hook": "PASS",
         "her voice at her level": "N/A",
         "who notices": "PASS",
-        "the written no": "FAIL",
+        "the written no": "N/A",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
@@ -2241,10 +2241,10 @@
       "hub_zoe_party_house": {
         "want": "PASS",
         "next step": "PASS",
-        "hook": "FAIL",
+        "hook": "PASS",
         "her voice at her level": "N/A",
         "who notices": "PASS",
-        "the written no": "FAIL",
+        "the written no": "N/A",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
@@ -2254,17 +2254,17 @@
       },
       "hub_zoe_park": {
         "want": "PASS",
-        "next step": "PASS",
-        "hook": "FAIL",
+        "next step": "N/A",
+        "hook": "N/A",
         "her voice at her level": "N/A",
         "who notices": "PASS",
-        "the written no": "PASS",
+        "the written no": "N/A",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
         "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
-        "low heat is on the body": "FAIL"
+        "low heat is on the body": "PASS"
       },
       "zoe_park_dare": {
         "want": "PASS",
@@ -2309,29 +2309,29 @@
       },
       "jake_date_pickup": {
         "want": "PASS",
-        "next step": "PASS",
+        "next step": "N/A",
         "hook": "PASS",
-        "her voice at her level": "N/A",
+        "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "PASS",
+        "the written no": "FAIL",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
-        "low heat is on the body": "FAIL"
+        "low heat is on the body": "PASS"
       },
       "jake_saturday_date": {
         "want": "PASS",
         "next step": "PASS",
-        "hook": "PASS",
+        "hook": "FAIL",
         "her voice at her level": "PASS",
         "who notices": "PASS",
         "the written no": "PASS",
         "the body": "PASS",
-        "the numbers and the clothes agree": "PASS",
+        "the numbers and the clothes agree": "FAIL",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "N/A"
       },
@@ -2345,7 +2345,7 @@
         "the body": "PASS",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "FAIL",
+        "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
@@ -2380,16 +2380,16 @@
       "cafe_shift": {
         "want": "PASS",
         "next step": "PASS",
-        "hook": "PASS",
+        "hook": "N/A",
         "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "PASS",
+        "the written no": "FAIL",
         "the body": "PASS",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
         "true on every visit it can render on": "FAIL",
-        "a solo button is a real act": "N/A",
-        "low heat is on the body": "FAIL"
+        "a solo button is a real act": "PASS",
+        "low heat is on the body": "PASS"
       },
       "cafe_coffee": {
         "want": "PASS",
@@ -2556,10 +2556,10 @@
         "a solo button is a real act": "PASS"
       },
       "park_run": {
-        "want": "N/A",
+        "want": "PASS",
         "next step": "N/A",
-        "hook": "N/A",
-        "her voice at her level": "PASS",
+        "hook": "PASS",
+        "her voice at her level": "FAIL",
         "who notices": "PASS",
         "the written no": "N/A",
         "the body": "N/A",
@@ -2567,7 +2567,7 @@
         "companion and rival": "N/A",
         "true on every visit it can render on": "PASS",
         "a solo button is a real act": "PASS",
-        "low heat is on the body": "FAIL"
+        "low heat is on the body": "PASS"
       },
       "park_rest": {
         "want": "N/A",
@@ -2607,7 +2607,7 @@
         "companion and rival": "N/A",
         "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
-        "low heat is on the body": "N/A"
+        "low heat is on the body": "FAIL"
       },
       "park_hidden": {
         "want": "PASS",
@@ -2670,7 +2670,7 @@
         "next step": "PASS",
         "hook": "PASS",
         "her voice at her level": "N/A",
-        "who notices": "PASS",
+        "who notices": "N/A",
         "the written no": "PASS",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
@@ -2750,15 +2750,15 @@
       },
       "hub_cocky_party": {
         "want": "PASS",
-        "next step": "FAIL",
+        "next step": "N/A",
         "hook": "PASS",
         "her voice at her level": "N/A",
         "who notices": "PASS",
-        "the written no": "PASS",
+        "the written no": "N/A",
         "the body": "N/A",
-        "the numbers and the clothes agree": "N/A",
+        "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
@@ -2792,7 +2792,7 @@
       },
       "street_seen_skirt": {
         "want": "PASS",
-        "next step": "PASS",
+        "next step": "N/A",
         "hook": "PASS",
         "her voice at her level": "N/A",
         "who notices": "PASS",
@@ -2801,7 +2801,7 @@
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
         "true on every visit it can render on": "PASS",
-        "a solo button is a real act": "N/A",
+        "a solo button is a real act": "PASS",
         "low heat is on the body": "PASS"
       },
       "walkin_canteen_zoe": {
@@ -2824,11 +2824,11 @@
         "hook": "PASS",
         "her voice at her level": "N/A",
         "who notices": "PASS",
-        "the written no": "FAIL",
+        "the written no": "PASS",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
@@ -2852,11 +2852,11 @@
         "hook": "PASS",
         "her voice at her level": "N/A",
         "who notices": "PASS",
-        "the written no": "PASS",
+        "the written no": "N/A",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "FAIL",
+        "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
@@ -2884,7 +2884,7 @@
         "the body": "PASS",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "N/A"
       },
@@ -2904,13 +2904,13 @@
       },
       "kitchen_study": {
         "want": "PASS",
-        "next step": "N/A",
-        "hook": "FAIL",
+        "next step": "PASS",
+        "hook": "PASS",
         "her voice at her level": "N/A",
-        "who notices": "N/A",
+        "who notices": "PASS",
         "the written no": "N/A",
         "the body": "N/A",
-        "the numbers and the clothes agree": "PASS",
+        "the numbers and the clothes agree": "N/A",
         "companion and rival": "N/A",
         "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
@@ -2920,13 +2920,13 @@
         "want": "PASS",
         "next step": "PASS",
         "hook": "PASS",
-        "her voice at her level": "N/A",
+        "her voice at her level": "FAIL",
         "who notices": "PASS",
         "the written no": "N/A",
         "the body": "PASS",
-        "the numbers and the clothes agree": "PASS",
+        "the numbers and the clothes agree": "N/A",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "N/A"
       },
@@ -2960,11 +2960,11 @@
       },
       "walkin_quad_team": {
         "want": "PASS",
-        "next step": "PASS",
-        "hook": "FAIL",
+        "next step": "N/A",
+        "hook": "PASS",
         "her voice at her level": "N/A",
         "who notices": "PASS",
-        "the written no": "N/A",
+        "the written no": "PASS",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
@@ -2988,17 +2988,17 @@
       },
       "walkin_tv_ryan": {
         "want": "PASS",
-        "next step": "N/A",
+        "next step": "PASS",
         "hook": "PASS",
         "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "PASS",
-        "the body": "N/A",
+        "the written no": "N/A",
+        "the body": "PASS",
         "the numbers and the clothes agree": "N/A",
         "companion and rival": "N/A",
         "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
-        "low heat is on the body": "PASS"
+        "low heat is on the body": "FAIL"
       },
       "zoe_01b_kiss_again": {
         "want": "PASS",
@@ -3050,16 +3050,16 @@
         "who notices": "PASS",
         "the written no": "N/A",
         "the body": "PASS",
-        "the numbers and the clothes agree": "N/A",
+        "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "N/A"
       },
       "walkin_bedroom_zoe": {
         "want": "PASS",
         "next step": "PASS",
-        "hook": "FAIL",
+        "hook": "PASS",
         "her voice at her level": "PASS",
         "who notices": "PASS",
         "the written no": "N/A",
@@ -3087,10 +3087,10 @@
       "walkin_kitchen_ryan": {
         "want": "PASS",
         "next step": "PASS",
-        "hook": "FAIL",
+        "hook": "PASS",
         "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "N/A",
+        "the written no": "PASS",
         "the body": "PASS",
         "the numbers and the clothes agree": "N/A",
         "companion and rival": "N/A",
@@ -3101,12 +3101,12 @@
       "walkin_quad_zoe": {
         "want": "PASS",
         "next step": "PASS",
-        "hook": "FAIL",
-        "her voice at her level": "PASS",
+        "hook": "PASS",
+        "her voice at her level": "N/A",
         "who notices": "PASS",
-        "the written no": "N/A",
+        "the written no": "PASS",
         "the body": "N/A",
-        "the numbers and the clothes agree": "N/A",
+        "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
         "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
@@ -3134,9 +3134,9 @@
         "who notices": "PASS",
         "the written no": "N/A",
         "the body": "N/A",
-        "the numbers and the clothes agree": "PASS",
+        "the numbers and the clothes agree": "N/A",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
@@ -3144,13 +3144,13 @@
         "want": "PASS",
         "next step": "PASS",
         "hook": "PASS",
-        "her voice at her level": "PASS",
+        "her voice at her level": "N/A",
         "who notices": "PASS",
         "the written no": "PASS",
         "the body": "PASS",
-        "the numbers and the clothes agree": "PASS",
+        "the numbers and the clothes agree": "FAIL",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
@@ -3160,23 +3160,23 @@
         "hook": "PASS",
         "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "PASS",
+        "the written no": "N/A",
         "the body": "N/A",
-        "the numbers and the clothes agree": "PASS",
+        "the numbers and the clothes agree": "FAIL",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "FAIL",
+        "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
       "master_door_saturday_night": {
         "want": "PASS",
-        "next step": "N/A",
+        "next step": "PASS",
         "hook": "PASS",
-        "her voice at her level": "FAIL",
+        "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "N/A",
+        "the written no": "PASS",
         "the body": "PASS",
-        "the numbers and the clothes agree": "PASS",
+        "the numbers and the clothes agree": "N/A",
         "companion and rival": "N/A",
         "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
@@ -3198,8 +3198,8 @@
       },
       "walkin_door_dean": {
         "want": "PASS",
-        "next step": "FAIL",
-        "hook": "FAIL",
+        "next step": "PASS",
+        "hook": "PASS",
         "her voice at her level": "N/A",
         "who notices": "PASS",
         "the written no": "N/A",
@@ -3208,7 +3208,7 @@
         "companion and rival": "N/A",
         "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
-        "low heat is on the body": "FAIL"
+        "low heat is on the body": "PASS"
       },
       "walkin_laundry_mark": {
         "want": "PASS",
@@ -3236,7 +3236,7 @@
         "companion and rival": "N/A",
         "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
-        "low heat is on the body": "N/A"
+        "low heat is on the body": "PASS"
       },
       "walkin_tub_zoe": {
         "want": "PASS",
@@ -3248,7 +3248,7 @@
         "the body": "PASS",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "FAIL",
+        "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
@@ -3256,15 +3256,15 @@
         "want": "PASS",
         "next step": "PASS",
         "hook": "PASS",
-        "her voice at her level": "PASS",
+        "her voice at her level": "FAIL",
         "who notices": "PASS",
-        "the written no": "PASS",
+        "the written no": "N/A",
         "the body": "PASS",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
         "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
-        "low heat is on the body": "N/A"
+        "low heat is on the body": "PASS"
       },
       "zoe_dares": {
         "want": "PASS",
@@ -3278,7 +3278,7 @@
         "companion and rival": "N/A",
         "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
-        "low heat is on the body": "N/A"
+        "low heat is on the body": "PASS"
       },
       "jake_party_bathroom": {
         "want": "PASS",
@@ -3297,14 +3297,14 @@
       "laura_shower_gap": {
         "want": "PASS",
         "next step": "PASS",
-        "hook": "FAIL",
-        "her voice at her level": "PASS",
-        "who notices": "FAIL",
+        "hook": "PASS",
+        "her voice at her level": "FAIL",
+        "who notices": "PASS",
         "the written no": "N/A",
         "the body": "PASS",
         "the numbers and the clothes agree": "N/A",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "FAIL",
+        "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "N/A"
       },
@@ -3333,7 +3333,7 @@
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
         "true on every visit it can render on": "PASS",
-        "a solo button is a real act": "N/A",
+        "a solo button is a real act": "PASS",
         "low heat is on the body": "PASS"
       },
       "tom_03_not_by_the_window": {
@@ -3354,13 +3354,13 @@
         "want": "PASS",
         "next step": "PASS",
         "hook": "FAIL",
-        "her voice at her level": "N/A",
+        "her voice at her level": "FAIL",
         "who notices": "PASS",
         "the written no": "PASS",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
@@ -3371,10 +3371,10 @@
         "her voice at her level": "N/A",
         "who notices": "PASS",
         "the written no": "PASS",
-        "the body": "N/A",
+        "the body": "PASS",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "FAIL"
       },
@@ -3408,15 +3408,15 @@
       },
       "walkin_tv_laura": {
         "want": "PASS",
-        "next step": "FAIL",
-        "hook": "FAIL",
+        "next step": "PASS",
+        "hook": "PASS",
         "her voice at her level": "N/A",
         "who notices": "PASS",
         "the written no": "N/A",
         "the body": "N/A",
-        "the numbers and the clothes agree": "N/A",
+        "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "FAIL"
       },
@@ -3438,15 +3438,15 @@
         "want": "PASS",
         "next step": "PASS",
         "hook": "PASS",
-        "her voice at her level": "PASS",
-        "who notices": "N/A",
+        "her voice at her level": "FAIL",
+        "who notices": "PASS",
         "the written no": "N/A",
         "the body": "PASS",
         "the numbers and the clothes agree": "N/A",
         "companion and rival": "N/A",
         "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "PASS",
-        "low heat is on the body": "FAIL"
+        "low heat is on the body": "N/A"
       },
       "ryan_08_two_knocks_first_sex": {
         "want": "PASS",
@@ -3478,10 +3478,10 @@
       },
       "walkin_canteen_nadia": {
         "want": "PASS",
-        "next step": "FAIL",
+        "next step": "PASS",
         "hook": "PASS",
         "her voice at her level": "N/A",
-        "who notices": "PASS",
+        "who notices": "N/A",
         "the written no": "N/A",
         "the body": "N/A",
         "the numbers and the clothes agree": "N/A",
@@ -3492,11 +3492,11 @@
       },
       "walkin_hall_hale": {
         "want": "PASS",
-        "next step": "N/A",
-        "hook": "FAIL",
-        "her voice at her level": "N/A",
+        "next step": "PASS",
+        "hook": "PASS",
+        "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "N/A",
+        "the written no": "PASS",
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
@@ -3507,14 +3507,14 @@
       "walkin_mirror_mark": {
         "want": "PASS",
         "next step": "PASS",
-        "hook": "PASS",
+        "hook": "FAIL",
         "her voice at her level": "N/A",
         "who notices": "PASS",
         "the written no": "N/A",
         "the body": "PASS",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
@@ -3525,7 +3525,7 @@
         "her voice at her level": "PASS",
         "who notices": "PASS",
         "the written no": "N/A",
-        "the body": "N/A",
+        "the body": "PASS",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
         "true on every visit it can render on": "FAIL",
@@ -3563,10 +3563,10 @@
       "walkin_door_ta": {
         "want": "PASS",
         "next step": "PASS",
-        "hook": "FAIL",
+        "hook": "PASS",
         "her voice at her level": "N/A",
         "who notices": "PASS",
-        "the written no": "N/A",
+        "the written no": "FAIL",
         "the body": "N/A",
         "the numbers and the clothes agree": "N/A",
         "companion and rival": "N/A",
@@ -3578,13 +3578,13 @@
         "want": "PASS",
         "next step": "PASS",
         "hook": "PASS",
-        "her voice at her level": "PASS",
+        "her voice at her level": "N/A",
         "who notices": "PASS",
         "the written no": "N/A",
         "the body": "N/A",
         "the numbers and the clothes agree": "N/A",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "FAIL",
+        "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
@@ -3608,41 +3608,41 @@
         "hook": "PASS",
         "her voice at her level": "N/A",
         "who notices": "PASS",
-        "the written no": "FAIL",
+        "the written no": "PASS",
         "the body": "N/A",
-        "the numbers and the clothes agree": "N/A",
+        "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
-        "low heat is on the body": "FAIL"
+        "low heat is on the body": "PASS"
       },
       "walkin_door_hale": {
         "want": "PASS",
         "next step": "PASS",
         "hook": "PASS",
-        "her voice at her level": "N/A",
+        "her voice at her level": "PASS",
         "who notices": "PASS",
-        "the written no": "FAIL",
+        "the written no": "PASS",
         "the body": "N/A",
-        "the numbers and the clothes agree": "N/A",
+        "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
-        "low heat is on the body": "FAIL"
+        "low heat is on the body": "PASS"
       },
       "laura_alone_peek": {
-        "want": "N/A",
-        "next step": "N/A",
-        "hook": "N/A",
-        "her voice at her level": "N/A",
-        "who notices": "N/A",
+        "want": "PASS",
+        "next step": "PASS",
+        "hook": "PASS",
+        "her voice at her level": "PASS",
+        "who notices": "PASS",
         "the written no": "N/A",
         "the body": "N/A",
         "the numbers and the clothes agree": "N/A",
         "companion and rival": "N/A",
         "true on every visit it can render on": "PASS",
-        "a solo button is a real act": "PASS",
-        "low heat is on the body": "FAIL"
+        "a solo button is a real act": "N/A",
+        "low heat is on the body": "PASS"
       },
       "laura_04_breakfast": {
         "want": "PASS",
@@ -3677,20 +3677,6 @@
         "next step": "PASS",
         "hook": "PASS",
         "her voice at her level": "N/A",
-        "who notices": "N/A",
-        "the written no": "FAIL",
-        "the body": "N/A",
-        "the numbers and the clothes agree": "N/A",
-        "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
-        "a solo button is a real act": "N/A",
-        "low heat is on the body": "PASS"
-      },
-      "walkin_toilet_zoe": {
-        "want": "PASS",
-        "next step": "PASS",
-        "hook": "PASS",
-        "her voice at her level": "N/A",
         "who notices": "PASS",
         "the written no": "PASS",
         "the body": "N/A",
@@ -3700,9 +3686,23 @@
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
-      "master_door_peek": {
+      "walkin_toilet_zoe": {
         "want": "PASS",
-        "next step": "FAIL",
+        "next step": "PASS",
+        "hook": "PASS",
+        "her voice at her level": "N/A",
+        "who notices": "PASS",
+        "the written no": "N/A",
+        "the body": "N/A",
+        "the numbers and the clothes agree": "PASS",
+        "companion and rival": "N/A",
+        "true on every visit it can render on": "PASS",
+        "a solo button is a real act": "N/A",
+        "low heat is on the body": "PASS"
+      },
+      "master_door_peek": {
+        "want": "FAIL",
+        "next step": "N/A",
         "hook": "N/A",
         "her voice at her level": "N/A",
         "who notices": "PASS",
@@ -3711,8 +3711,8 @@
         "the numbers and the clothes agree": "N/A",
         "companion and rival": "N/A",
         "true on every visit it can render on": "FAIL",
-        "a solo button is a real act": "N/A",
-        "low heat is on the body": "N/A"
+        "a solo button is a real act": "PASS",
+        "low heat is on the body": "FAIL"
       },
       "rent_short_3": {
         "want": "PASS",
@@ -3724,7 +3724,7 @@
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "FAIL",
+        "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "N/A"
       },
@@ -3738,7 +3738,7 @@
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "FAIL",
+        "true on every visit it can render on": "PASS",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "N/A"
       },
@@ -3752,14 +3752,14 @@
         "the body": "N/A",
         "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
       "ryan_asleep": {
-        "want": "FAIL",
+        "want": "PASS",
         "next step": "N/A",
-        "hook": "FAIL",
+        "hook": "PASS",
         "her voice at her level": "N/A",
         "who notices": "N/A",
         "the written no": "N/A",
@@ -3772,15 +3772,15 @@
       },
       "walkin_nap_ryan": {
         "want": "PASS",
-        "next step": "N/A",
+        "next step": "PASS",
         "hook": "PASS",
         "her voice at her level": "N/A",
         "who notices": "PASS",
         "the written no": "PASS",
-        "the body": "N/A",
-        "the numbers and the clothes agree": "FAIL",
+        "the body": "PASS",
+        "the numbers and the clothes agree": "PASS",
         "companion and rival": "N/A",
-        "true on every visit it can render on": "PASS",
+        "true on every visit it can render on": "FAIL",
         "a solo button is a real act": "N/A",
         "low heat is on the body": "PASS"
       },
@@ -3800,9 +3800,9 @@
       },
       "walkin_garden_mark": {
         "want": "PASS",
-        "next step": "N/A",
+        "next step": "PASS",
         "hook": "PASS",
-        "her voice at her level": "N/A",
+        "her voice at her level": "PASS",
         "who notices": "PASS",
         "the written no": "PASS",
         "the body": "N/A",
@@ -4056,648 +4056,12 @@
         "why": "LO, 2026-10-29 and again 2026-11-04: no next step and no hook on purpose; the screen fills the hour and pays nothing"
       }
     ],
-    "reader_after_read": [
-      {
-        "canvas_id": "front_step",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_business_office",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_business_office",
-        "test": "low heat is on the body",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_laura_kitchen",
-        "test": "want",
-        "after": "not fixed"
-      },
-      {
-        "canvas_id": "hub_laura_kitchen",
-        "test": "true (Jake \"again\")",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_laura_kitchen",
-        "test": "true (\"chopping\")",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_ryan_room",
-        "test": "true (Kayla's hair tie)",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_ryan_room",
-        "test": "true (hot5 \"I'm so close\")",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_ryan_room",
-        "test": "true (on the floor with a controller)",
-        "after": "not fixed"
-      },
-      {
-        "canvas_id": "laura_06_take_me_with_you",
-        "test": "low heat is on the body",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "ryan_03_shirt_off",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_house_vance",
-        "test": "the written no",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_step_vance",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "zoe_05_no_dare",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hale_04_claire_knocks",
-        "test": "numbers and clothes agree",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "home_event_ryan_door",
-        "test": "the written no",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "home_event_ryan_door",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_laura_living_room",
-        "test": "the written no",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_ta_class",
-        "test": "next step",
-        "after": "not fixed"
-      },
-      {
-        "canvas_id": "hub_ta_class",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "kitchen_study",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "laura_alone_after",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "living_couch",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "mark_06_our_arrangement",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "ryan_things",
-        "test": "true on every visit",
-        "after": "not fixed"
-      },
-      {
-        "canvas_id": "toilet_mirror",
-        "test": "a solo button is a real act",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "town_event_jogger",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "vance_walk_past",
-        "test": "next step",
-        "after": "not fixed"
-      },
-      {
-        "canvas_id": "vance_walk_past",
-        "test": "low heat is on the body",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_quad_team",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "zoe_01b_kiss_again",
-        "test": "numbers and clothes agree",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "cafe_gary_meet",
-        "test": "low heat is on the body",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "garden_sun",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hale_thursdays",
-        "test": "numbers and clothes agree",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hale_thursdays",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_cocky_party",
-        "test": "next step",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_mark_bedroom",
-        "test": "want",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_mark_bedroom",
-        "test": "next step",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_mark_bedroom",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_mark_bedroom",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_ta_office",
-        "test": "the written no",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_zoe_class",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "laura_alone_in_bed",
-        "test": "her voice at her level",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "mark_sunday_table",
-        "test": "low heat is on the body",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "ryan_two_knocks",
-        "test": "the written no",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "ryan_two_knocks",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_bedroom_zoe",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_door_business",
-        "test": "next step",
-        "after": "not fixed"
-      },
-      {
-        "canvas_id": "walkin_kitchen_ryan",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_kitchen_ryan",
-        "test": "true on every visit",
-        "after": "reader call disputed. Both hosts (kitchen_breakfast, kitchen"
-      },
-      {
-        "canvas_id": "walkin_quad_zoe",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_things_ryan",
-        "test": "low heat is on the body",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_wardrobe_laura",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "zoe_02_balcony_curious",
-        "test": "numbers and clothes agree",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "gym_workout",
-        "test": "low heat is on the body",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hall_mirror",
-        "test": "numbers and clothes agree",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_dean_office",
-        "test": "low heat is on the body",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_mark_garage",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_zoe_park",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_zoe_park",
-        "test": "low heat is on the body",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "jake_date_pickup",
-        "test": "low heat is on the body",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "laura_curfew_call",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "master_door_saturday_night",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "park_run",
-        "test": "low heat is on the body",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "shop_try_on",
-        "test": "low heat is on the body",
-        "after": "not a failure"
-      },
-      {
-        "canvas_id": "tom_01_the_apron",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "tom_01_the_apron",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "tom_01_the_apron",
-        "test": "low heat is on the body",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_cafe_gary",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_door_dean",
-        "test": "next step",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_door_dean",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_door_dean",
-        "test": "low heat is on the body",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_shower_kayla",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_shower_kayla",
-        "test": "low heat is on the body",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_tub_zoe",
-        "test": "numbers and clothes agree",
-        "after": "not fixed"
-      },
-      {
-        "canvas_id": "walkin_tub_zoe",
-        "test": "low heat is on the body",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_wardrobe_mark",
-        "test": "her voice at her level",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_wardrobe_mark",
-        "test": "numbers and clothes agree",
-        "after": "not fixed"
-      },
-      {
-        "canvas_id": "zoe_02_bra_through_the_sleeve",
-        "test": "numbers and clothes agree",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "zoe_dares",
-        "test": "numbers and clothes agree",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "cafe_shift",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_gary_booth",
-        "test": "next step",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_gary_booth",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_gary_booth",
-        "test": "the written no",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_gary_booth",
-        "test": "low heat is on the body",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_mark_kitchen",
-        "test": "the body",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_mark_kitchen",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_ryan_kitchen",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_zoe_party_house",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_zoe_party_house",
-        "test": "the written no",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "laura_shower_gap",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "laura_shower_gap",
-        "test": "who notices",
-        "after": "not fixed"
-      },
-      {
-        "canvas_id": "laura_shower_gap",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "ryan_01_hall_first_morning",
-        "test": "her voice at her level",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "ryan_01_hall_first_morning",
-        "test": "the numbers and the clothes agree",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "ryan_01_hall_first_morning",
-        "test": "true on every visit",
-        "after": "not fixed"
-      },
-      {
-        "canvas_id": "walkin_canteen_jake",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_gym_team",
-        "test": "the numbers and the clothes agree",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_gym_team",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_shower_mark",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_tv_laura",
-        "test": "next step",
-        "after": "not fixed"
-      },
-      {
-        "canvas_id": "walkin_tv_laura",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_tv_laura",
-        "test": "low heat is on the body",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "wardrobe_event_stairs",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "wardrobe_event_stairs",
-        "test": "the written no",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "wardrobe_event_stairs",
-        "test": "low heat is on the body",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "college_class_bio",
-        "test": "the numbers and the clothes agree",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_business_class",
-        "test": "next step",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_business_class",
-        "test": "hook",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_business_class",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_jake_quad",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_mark_living_room",
-        "test": "the written no",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_mark_living_room",
-        "test": "low heat is on the body",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_ryan_living_room",
-        "test": "the written no",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "hub_zoe_apartment",
-        "test": "the written no",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "jake_saturday_date",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "library_back_stacks",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "library_back_stacks",
-        "test": "low heat is on the body",
-        "after": "not fixed"
-      },
-      {
-        "canvas_id": "mark_02_late_notice",
-        "test": "the written no",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "meet_bio",
-        "test": "the numbers and the clothes agree",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "ryan_02_phone_on_the_sink",
-        "test": "the written no",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "tom_03_the_tip_jar",
-        "test": "the written no",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_canteen_nadia",
-        "test": "next step",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_hall_hale",
-        "test": "next step",
-        "after": "not fixed"
-      },
-      {
-        "canvas_id": "walkin_hall_hale",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "walkin_mirror_mark",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      },
-      {
-        "canvas_id": "zoe_00_quad_meeting",
-        "test": "true on every visit",
-        "after": "fixed in ce8551b1, not re-read"
-      }
-    ],
-    "reader_after_read_note": "what group 3 did with each 2026-11-03 FAIL after the read (fix_reader_a/b/c): a FAIL listed as fixed is still a FAIL in `reader` until the v2-reader re-reads that canvas",
+    "reader_after_read": [],
+    "reader_after_read_note": "Superseded by the 2026-11-04 re-read; see reader_note.",
     "door_note": "No release door (LO 2026-11-03, S12 b; DECISIONS 134): every arc's last quest card says where this release ends. Ryan's \"Further.\" on Corruption 60 was removed.",
     "rejections": [],
     "rejections_note": "none recorded in the third pass (2026-11-03); LO's rulings that night are skill decisions and signed later/waive calls, logged in DECISIONS 132-153 and in `decided`",
-    "reader_note": "2026-11-04: 101 scenes re-read after the fourth pass; the 58 FAILs were fixed after reading (pass4/fix_reader_a/b/c), so a re-read is owed before --ship"
+    "reader_note": "2026-11-04: 126 scenes re-read after the fifth pass, 133 distinct fails. 93 were fixed after reading and stand as FAIL here until the next read; 39 are left because they need new lines (written no, hook, next step, want, low heat, her voice, solo act); 1 was false (ryan_asleep). A re-read is owed before --ship."
   },
   "spine": {
     "pages": [
@@ -5966,7 +5330,8 @@
         "labels": [
           "sells_food"
         ],
-        "read_by": "the rent, canteen food, the clothes shop"
+        "read_by": "the rent, canteen food, the clothes shop",
+        "spent": true
       },
       {
         "id": "room_tidy",
@@ -7668,6 +7033,15 @@
           {
             "where": "home_master_bedroom",
             "weekdays": [
+              "Sun"
+            ],
+            "from": "00:00",
+            "to": "01:00",
+            "note": "awake: up from waiting up, with Mark (LO, 2026-10-29, DECISIONS 80)"
+          },
+          {
+            "where": "home_master_bedroom",
+            "weekdays": [
               "Sun",
               "Mon",
               "Tue",
@@ -7686,15 +7060,6 @@
             "from": "00:00",
             "to": "07:00",
             "note": "Friday night after midnight (LO, 2026-10-08)"
-          },
-          {
-            "where": "home_master_bedroom",
-            "weekdays": [
-              "Sun"
-            ],
-            "from": "00:00",
-            "to": "01:00",
-            "note": "awake: up from waiting up, with Mark (LO, 2026-10-29, DECISIONS 80)"
           },
           {
             "where": "home_master_bedroom",
@@ -8058,7 +7423,7 @@
                 }
               ],
               "hint": "Sunday morning, the kitchen: Mark counts the rent.",
-              "her_line_low": "Can you just — count it?",
+              "her_line_low": "Can you just — say it?",
               "who_notices": "Mark; Ryan in the doorway",
               "refusal": "parked",
               "raises": {
@@ -9313,7 +8678,19 @@
           }
         ],
         "schedule_note": "built in people_data.py (LO 2026-11-03, build now). They move to `schedule` when people_data.py gets an ACTIVITIES row for npc_kayla and drops its override",
-        "schedule_rows": 2
+        "schedule_rows": 2,
+        "occupancy_rows": [
+          {
+            "location": "home_ryan_room",
+            "start_time": "18:00",
+            "reason": "a body in Ryan's room: his door is shut while she is in (Q14), and his hub carries her line for any other way in"
+          },
+          {
+            "location": "home_ryan_room",
+            "start_time": "00:00",
+            "reason": "a body in Ryan's room: his door is shut while she is in (Q14), and his hub carries her line for any other way in"
+          }
+        ]
       },
       {
         "id": "npc_claire",
@@ -10586,6 +9963,30 @@
       "decision": "waive",
       "why": "LO, 2026-10-29 and again 2026-11-04: no next step and no hook on purpose; the screen fills the hour and pays nothing",
       "signed": "LO 2026-11-04"
+    },
+    {
+      "id": "D20 open choices",
+      "gate": null,
+      "match": null,
+      "decision": "waive",
+      "why": "52.1% open choices, recorded as decided for this release",
+      "signed": "LO 2026-11-04"
+    },
+    {
+      "id": "D9 three-screen walk-ins",
+      "gate": null,
+      "match": null,
+      "decision": "waive",
+      "why": "30 of 42 walk-ins run three screens; decided for this release, LO will say if they feel long in play",
+      "signed": "LO 2026-11-04"
+    },
+    {
+      "id": "G81 channel 5 pays +2",
+      "gate": null,
+      "match": null,
+      "decision": "waive",
+      "why": "Channel 5's +2 with Mark and alone at Curious is signed in DECISIONS rows 86 and 92",
+      "signed": "LO, DECISIONS 86 and 92"
     }
   ],
   "promises": [

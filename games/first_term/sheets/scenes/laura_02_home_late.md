@@ -21,7 +21,7 @@
 
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
-| `stairs` | shoes in her hand; Laura on the dark stairs in her robe; what she smells and asks follows the late flag: `late_party` smoke and cologne · `late_shift` coffee and the café · `late_date` nothing, she just looks · none: "Where were you?" | no | → `low` or `high`, by Laura's Warmth | `laura_suspicion` add +5 (home late) |
+| `stairs` | Laura on the dark stairs in her robe; what she smells and asks follows the late flag: `late_party` smoke and cologne · `late_shift` coffee and the café · `late_date` nothing, she just looks · none: "Where were you?" | no | → `low` or `high`, by Laura's Warmth | `laura_suspicion` add +5 (home late) |
 | `low` | Warmth under 40 (guess): "You're grounded. A week." | no | "Fine." → her room · the truth, by the flag ("Zoe's." · "Work." · "Out with Jake." · "Just walking.") → her room · a different place than the flag says, "(she'll know)" → `lie` | `curfew` set true |
 | `high` | Warmth 40 or more: "Did anyone look at you in it?" | no | "Everyone." → her room | Laura's Want add +10 · `laura_step` set 2 |
 | `lie` | she knows; her mouth goes thin | no | "Goodnight, Mom." → her room | Laura's Warmth add −5 · `laura_suspicion` add +5 |

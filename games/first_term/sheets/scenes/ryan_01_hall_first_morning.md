@@ -1,5 +1,7 @@
 # [REVIEW] Scene — ryan_01_hall_first_morning
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. `breakfast`: Mark has already left (Q10).
+
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. The final no row is gone; the hall has three choices.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Ryan's +10 sits on "Open the door."; the card's buttons and exit; the step row.
@@ -40,7 +42,7 @@ Not on the map: the boot's `wake` and `problem` screens (Mark's rent, told the n
 | `run` | she runs to her room, face hot; his eyes follow | no | "Get dressed." → `breakfast` | `ryan_step` set 1 · nothing of his ("Run to your room." adds 0) |
 | `knock` | "Knock next time." · "Yeah. Sorry." | no | "Get dressed." → `breakfast` | `ryan_hall_knock` set · `ryan_step` set 1 |
 | `talk` | she stops in the doorway; he asks about her first day | no | "Get dressed." → `breakfast` | Ryan's Warmth add +5 · `ryan_hall_talked` set · `ryan_step` set 1 |
-| `breakfast` | Laura, coffee; Mark at the counter with his keys | no | three start choices → `rule` | `rent_starts` set · one of `college_for_*` set |
+| `breakfast` | Laura, coffee; Mark has already gone to work, his envelope against the sugar bowl, and Laura says the rent for him (Q10) | no | three start choices → `rule` | `rent_starts` set · one of `college_for_*` set |
 | `rule` | Laura: "Ryan, you shower first from now on." | no | "Grab your bag." → `card` | `laura_rule_ryan_first` set |
 | `card` | the opening card and the plain lines | no | "Go to campus." · "Go to campus. (Turn hygiene off)" → the dean's office | `opening_done` set · `hygiene_off` set on the second |
 

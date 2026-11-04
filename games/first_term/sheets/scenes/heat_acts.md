@@ -110,7 +110,7 @@ Each act in the build: an offer screen with a written no that pays nothing, then
 | `touch` | You face the mirror with your back to the curtain. | yes | "Fine, thanks." → Clothes Shop | — |
 |  |  |  | "Hang them back up." → Clothes Shop | — |
 | `touch_no` | You catch your own eye in the mirror and laugh at yourself. | no | "Hang them back up." → Clothes Shop | — |
-| `curtain` | You don't pull the curtain across. | no | "Pull the curtain shut." → Clothes Shop | — |
+| `curtain` | You don't tug the curtain any further. | no | "Step back from the gap." → Clothes Shop | — |
 |  |  |  | "Hang them back up." → Clothes Shop | — |
 
 ## A5 · `hub_zoe_bedroom`

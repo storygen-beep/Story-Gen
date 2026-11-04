@@ -46,7 +46,7 @@ One row per exit. Read from the build; it replaces the drafted map.
 | `porch` | Jake walks you up to the porch and stops under the light. | no | "Kiss him." → `rail` | — |
 | | | | "Goodnight, Jake." → `no` | — |
 | `rail` | You kiss him first, right there under the porch light. | no | "Don't stop." → `ryan` | Ryan's Warmth -15 · Ryan's Want +5 |
-| `ryan` | The front door opens behind you. | no | "Goodnight, Jake." → `after` | — |
+| `ryan` | The front door opens behind Jake. | no | "Goodnight, Jake." → `after` | — |
 | `after` | Jake goes off down the path, whistling. | no | "Go to bed." → Your Room | Jake's step = 3 · `jake_03_done` set · `jake_date_booked` cleared · `late_date` set · `came_home_late` set |
 | `no` | You kiss his cheek, quick, and step back before he can turn it into more. | no | "Go in." → Hall | `jake_date_booked` cleared · `late_date` set · `came_home_late` set · back in 7 days |
 

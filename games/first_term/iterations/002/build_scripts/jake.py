@@ -57,18 +57,18 @@ out.append({
     "trigger": step_trigger(J, 3, retry_days=7),
     "nodes": [
         node("porch", "The porch", [
-            P("Jake walks you up to the porch and stops under the light. The front of the house is dark. He looks past you at the dark windows. \"Is anyone up?\" He sounds like he hopes so. \"Nobody,\" you say. \"Not yet.\" Ryan's window is lit, right beside the porch. He's home. You want him to look. \"Shame,\" Jake says. \"I want them to see you're mine, @player.\" His hand slides down your back and settles on your ass. You should move it, but you like being shown off. He leans in, and his mouth stops an inch from yours."),
+            P("Jake walks you up to the porch and stops under the light. The living room is dark. He looks past you at its dark windows. \"Is anyone up?\" He sounds like he hopes so. \"Nobody,\" you say. \"Not yet.\" Ryan's window is lit, right beside the porch. He's home. You want him to look. \"Shame,\" Jake says. \"I want them to see you're mine, @player.\" His hand slides down your back and settles on your ass. You should move it, but you like being shown off. He leans in, and his mouth stops an inch from yours."),
         ], [
             go("Kiss him.", node="rail", mins=3),
             go("\"Goodnight, Jake.\"", node="no", mins=2),
         ]),
         node("rail", "The rail", [
-            P("You kiss him first, right there under the porch light. Jake makes a low sound and lifts you onto the rail like you weigh nothing. Your legs lock round his waist. His hands sit on your hips, then slide down to grab your ass. \"God, @player,\" he breathes into your mouth. It gets hungry and loud, all teeth and breath. The rail creaks every time he pulls you closer. Anyone inside could hear it, but you don't care. You want more of his mouth. Then, behind you, the lock turns."),
+            P("You kiss him first, right there under the porch light. Jake makes a low sound and lifts you onto the rail like you weigh nothing. Your legs lock round his waist. His hands sit on your hips, then slide down to grab your ass. \"God, @player,\" he breathes into your mouth. It gets hungry and loud, all teeth and breath. The rail creaks every time he pulls you closer. Anyone inside could hear it, but you don't care. You want more of his mouth. Then, behind him, the lock turns."),
         # LO 2026-11-03: Want pays for what happened, never for a no. Ryan sees her on the rail when the door opens, so
         # his Love -15 and Want +5 sit on the way in, not on her goodnight
         ], [go("\"Don't stop.\"", node="ryan", mins=3, eff=[nadd(R, "warmth", -15), nadd(R, "want", 5)])]),
         node("ryan", "Ryan", [
-            P("The front door opens behind you. Ryan stands in the doorway and stops dead. You're on the porch rail with your legs locked round Jake's waist, kissing him. Jake's hands are full of your ass. You don't climb down. You look straight at Ryan over Jake's shoulder and hold it. \"Ryan, this is Jake. My boyfriend.\" Ryan's jaw goes tight. His eyes drop to Jake's hands on you, then come back to your face. \"Great.\" Jake grins over his shoulder, not getting it. \"Your brother hates me.\" *Good. Look all you want, Ryan.* Ryan steps back inside without another word. The door slams hard."),
+            P("The front door opens behind Jake. Ryan stands in the doorway and stops dead. You're on the porch rail with your legs locked round Jake's waist, kissing him. Jake's hands are full of your ass. You don't climb down. You look straight at Ryan over Jake's shoulder and hold it. \"Ryan, this is Jake. My boyfriend.\" Ryan's jaw goes tight. His eyes drop to Jake's hands on you, then come back to your face. \"Great.\" Jake grins over his shoulder, not getting it. \"Your brother hates me.\" *Good. Look all you want, Ryan.* Ryan steps back inside without another word. The door slams hard."),
             G(cond(here_at(L, "home_living_room")), P("Behind Jake's shoulder, in the dark living-room window, a shape on the couch hasn't moved.")),   # pass 4: only while she is on it
         ], [go("\"Goodnight, Jake.\"", node="after", mins=5)]),  # Ryan's -15 / +5 moved onto "Don't stop." (the moment he sees her)
         node("after", "Next Saturday", [
@@ -112,7 +112,7 @@ out.append({
             P("The doorbell goes. Jake's on the step in a clean shirt with his hair still wet, holding his car keys like a man in an advert."),
             G(cond(LAURA_DRESS), D(J, "Whoa. Okay. Everyone's going to be looking at you tonight.")),
             G(cond(SKIRT), P("His eyes go down your legs and stay there.")),
-            D(J, "Ready? I booked the place with the candles. Don't laugh."),
+            D(J, "Ready? I've got a whole night planned. Don't laugh."),
             G(CURFEW_ON, T("You're grounded. Laura would know by morning, she always does.")),
         ], [
             # C4 (LO 2026-11-03): dirty, the date doesn't happen, and he says why
@@ -152,9 +152,9 @@ out.append({
     "description": "Jake step 4, the top step (release 1): she sneaks him up to her room; her headboard on Ryan's wall; the keyless door. Sets jake_first_time; Ryan's Lust +5.",
     "trigger": _t4,
     "nodes": [
-        node("door", "Come up", [
+        node("door", "Come in", [
             P("Jake walks you up to the porch and stops under the light. You don't let go of his hand. You open the front door and pull him in after you."),
-            ME("Come up."),
+            ME("Come in."),
             # reader pass 4 b4: Laura waits up in the living room Sat 22:00-00:00; the sneak-in passes her doorway
             G(cond(here_at(L, "home_living_room")), P("The living-room doorway flickers blue. Mom's on the couch in the dark with the TV on low, waiting up, her back to the hall. You get him past it on your toes, his hand on your ass the whole way.")),
             P("In the dark hall he catches your hip and his breath is hot on your ear."),
@@ -163,8 +163,8 @@ out.append({
             go("\"Goodnight, Jake.\"", node="next_sat", mins=2)]),
         node("next_sat", "Next Saturday", [
             D(J, "Next Saturday, then. Your room."),
-            P("He grins and walks backwards down the path, all the way to the car."),
-        ], [go("Go in.", loc="home_hall", mins=2, retry=7, flags=[funset("jake_date_booked")])]),
+            P("He grins and backs out the front door, and walks backwards down the path, all the way to the car."),
+        ], [go("Shut the door.", loc="home_hall", mins=2, retry=7, flags=[funset("jake_date_booked")])]),
         node("bed", "Your room", [P(beat("jake_04_sneak_him_in", "bed")),
             VID("a guy pinning a girl's wrists on her bed, pushing into her", "boyfriend pins her wrists sex bed", "first time sex her bedroom", pool_dir="sex/jake_04_bed_t5"),
             D(J, "God, you're tight. Is this okay? Tell me this is okay."), ME("It's okay. Don't you dare be gentle.")],
@@ -185,7 +185,7 @@ out.append({
             D(J, "Fuck. Fuck, @player. I'm still inside you."), ME("Stay there. Don't move yet.")],
             [go("Lie there.", node="after", mins=10)]),
         node("after", "Through the wall", [
-            # reader a3 #22 (DECISIONS 131): the yes path points ahead. True: after step 4 the date end's "Come up." is his
+            # reader a3 #22 (DECISIONS 131): the yes path points ahead. True: after step 4 the date end's "Come in." is his
             # room visit on any Saturday with a date (jake_saturday_date).
             P("Jake pulls you in against his chest and mumbles it into your hair, already half asleep."),
             D(J, "Next Saturday. Same room."),
@@ -197,20 +197,30 @@ out.append({
     ]})
 
 # ── the end of a date (jake_date_end.md, signed 2026-11-01): reworks jake_saturday_date. The car by her stage; after
-#    step 4, "Come up." (a two-entry shuffle bag) with a near-catch on a 1-8 roll. Mark is asleep; Laura waits up. ──
+#    step 4, "Come in." (a two-entry shuffle bag) with a near-catch on a 1-8 roll. Mark is asleep; Laura waits up. ──
 CAP = lambda k, n, c: {"targetType": "player", "trait": k, "op": "add", "value": n, "cap": c}
 CAR_PAY = lambda c: [CAP("corruption", 1, c), CAP("exhibitionism", 1, min(c, 39))]   # the car's Corruption gate holds nothing on Exhibitionism: it opens at 20 and stops at 39 (LO, 2026-11-04)
 ROLL = lambda op, v: trait("jake_catch_roll", op, v)
 # truth pass (2026-11-03): "Laura waits up with the TV" is true only while her row has her in the living room (Sat
 # 22:00-00:00, not on the dark stairs after came_home_late, and never on a Wednesday, when she is in her bedroom), so
 # that sentence and the next ("You look at it once.", the window) show behind her presence; the rest is the beat as signed.
+def top_or_clothes(text):
+    """canv.top_or_dress, plus every other outfit: 'Go out with him' has no clothes gate, so she can be in a uniform,
+    a towel or a sleep shirt at the door (scene reader, 2026-11-04). A top, one of the two dresses, else "your clothes"."""
+    if "your top" not in text:
+        return [P(text)]
+    return chain_by_sentence([
+        (cond({"type": "clothing_slot", "slot": "top", "operator": "equipped"}, {"type": "clothing_slot", "slot": "dress", "operator": "unequipped"}), text),
+        *[(cond({"type": "clothing_item", "item_id": d, "operator": "equipped"}), text.replace("your top", "your dress")) for d in DRESSES],
+        (cond(*ANY_), text.replace("your top", "your clothes"))])
+
 CAR_LOW_LAURA = "Across the lawn the living-room window glows blue, where Laura waits up with the TV. You look at it once. "
 _car_low = beat("jake_date_end", "car_low")
 assert _car_low.count(CAR_LOW_LAURA) == 1
 _cl_before, _cl_after = _car_low.split(CAR_LOW_LAURA)
-CAR_LOW_BLOCKS = [*top_or_dress(_cl_before.strip()),
+CAR_LOW_BLOCKS = [*top_or_clothes(_cl_before.strip()),
                   G(cond(here_at(L, "home_living_room")), P(CAR_LOW_LAURA.strip())),
-                  *top_or_dress(_cl_after.strip())]
+                  *top_or_clothes(_cl_after.strip())]
 out.append({
     "id": "jake_saturday_date", "name": "The end of a date",
     "description": "The end of a Saturday date (release 1): the car outside the house by her stage, or after his step 4, her room. Both meters in the car (the street and Laura's window can see); Corruption behind her door. Once a date.",
@@ -235,31 +245,33 @@ out.append({
             go("\"Your hand. Now.\"", node="car_his", mins=2, cond_=cond(trait("corruption", "gte", 60), trait("jake_step", "gte", 3)), costs=[{"trait": "energy", "value": 10}], eff=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}]),
             go("\"Lean back.\"", node="car_hers", mins=2, cond_=cond(trait("corruption", "gte", 60), trait("jake_step", "gte", 3)), costs=[{"trait": "energy", "value": 10}], eff=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}]),
             # Saturday only: Laura waits up on Saturday nights (her rows), which the near-catch reads
-            go("\"Come up.\"", node="sneak", mins=5, cond_=cond(trait("jake_step", "gte", 4), wd(5),
+            go("\"Come in.\"", node="sneak", mins=5, cond_=cond(trait("jake_step", "gte", 4), wd(5),
                                                           {"type": "npc_at_location", "location_id": "home_hall", "npc_id": "npc_laura", "operator": "is_absent"}),   # pass 4 reader: never walk into Laura waiting in the hall
-               eff=[{"targetType": "player", "trait": "jake_catch_roll", "op": "set", "value": {"type": "random", "min": 1, "max": 8}}]),
+               costs=[{"trait": "energy", "value": 10}],   # he fucks her over her bed: it costs as the car does
+               eff=[{"targetType": "player", "trait": "jake_catch_roll", "op": "set", "value": {"type": "random", "min": 1, "max": 8}}, {"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}]),
             go("\"Goodnight, Jake.\"", node="night", mins=2),
         ]),
         node("car_low", "The car", [*CAR_LOW_BLOCKS,
             VID("a couple making out in a parked car at night, windows fogging", "couple making out parked car night", "car makeout outside her house", pool_dir="sex/jake_car_low_t4"),
             D(J, "The whole street can see the windows fogging up."), ME("Then stop breathing so hard.")],
             [go("\"Goodnight, gorgeous.\"", loc="home_hall", mins=20, eff=CAR_PAY(39), flags=[funset("jake_date_booked")])]),   # car_low opens at 20 (G8)
-        node("car_his", "His hand", [*top_or_dress(beat("jake_date_end", "car_his")),
+        node("car_his", "His hand", [*top_or_clothes(beat("jake_date_end", "car_his")),
             VID("a guy fingering his girlfriend in a parked car under a street lamp", "fingering in parked car", "car fingering orgasm street lamp", pool_dir="sex/jake_car_his_t5"),
             D(J, "You're soaked. Right here under the street lamp, and you're soaked."), ME("Don't stop. Let them look.")],
             [go("\"Goodnight, gorgeous.\"", loc="home_hall", mins=20, eff=CAR_PAY(79), flags=[funset("jake_date_booked")])]),
-        node("car_hers", "Your hand", [*top_or_dress(beat("jake_date_end", "car_hers")),
+        node("car_hers", "Your hand", [*top_or_clothes(beat("jake_date_end", "car_hers")),
             VID("a girl giving her boyfriend a handjob in a parked car, a passer-by looking", "handjob in parked car", "car handjob caught", pool_dir="sex/jake_car_hers_t5"),
             D(J, "Fuck. That guy saw. That guy totally saw."), ME("Good. Now he knows whose you are.")],
             [go("\"Goodnight, gorgeous.\"", loc="home_hall", mins=20, eff=CAR_PAY(79), flags=[funset("jake_date_booked")])]),
         node("sneak", "Down the hall", [   # Q7: one hall (the sheet beat reads "down the dark hall")
             POOL(P(beat("jake_date_end", "`sneak` a")), P(beat("jake_date_end", "`sneak` b")), pid="jake_sneak", bag=True),
-            # (reader fix) Laura is downstairs, waiting up, on a Saturday night: her feet on the stairs, not her door
-            G(cond(ROLL("eq", 1)), P("In the living room the TV goes quiet. Laura's feet in the hall. You both stop breathing. They stop halfway, and go back."),
+            # (reader fix) Laura waits up in the living room on a Saturday night: her feet in the hall, not her door. Only while
+            # her row has her there: at midnight she goes to the master bedroom (scene reader, 2026-11-04)
+            G(cond(ROLL("eq", 1), here_at(L, "home_living_room")), P("In the living room the TV goes quiet. Laura's feet in the hall. You both stop breathing. They stop halfway, and go back."),
               D(J, "Your mom?"), ME("Shh.")),
             G(cond(ROLL("eq", 2), flag("ryan_knock_code")), P("Two knocks on the wall. Slow. Ryan's code."), D(J, "What was that?"), ME("Nothing. The pipes.")),
             VID("a couple having quiet sex in her bedroom at night", "sneaky sex her room at night", "boyfriend snuck in sex quiet", pool_dir="sex/jake_sneak_t5"),
-            D(J, "Your bed's so loud. How is your bed this loud?"), ME("Then fuck me quieter. Don't stop."),
+            D(J, "Your bed's so loud. How is your bed this loud?"), ME("Then fuck me quieter next time."),
         ], [go("Let him out before dawn.", loc="home_ella_room", mins=300, eff=[CAP("corruption", 1, 59)], flags=[funset("jake_date_booked")])]),
         node("night", "Goodnight", [GC(cond(wd(2)), D(J, "Goodnight, gorgeous. Saturday?")), GC(cond(wd(5)), D(J, "Goodnight, gorgeous. Wednesday?")),
                                     ME("Goodnight, Jake. Text me when you're home."), D(J, "Already writing it."),

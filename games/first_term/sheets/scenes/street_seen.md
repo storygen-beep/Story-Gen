@@ -1,5 +1,7 @@
 # [REVIEW] Scene — street_seen
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Both meters cap at 19 (DECISIONS 176).
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 
 > The signed plans behind this page: `proposals/COPY_FIXES_C.md`.
@@ -14,7 +16,7 @@
 | system · place | the meters · `street` |
 | when | once a day (`out_shown_today`, cleared in the daily tick), the first time she crosses the street in a level |
 | gate | what she wears: a short skirt, or no bra (level 1); no panties out of jeans, leggings, shorts (level 2) |
-| pays | **the first day out in each level:** corruption add +1 · exhibitionism add +1 (`street_first_l1` / `street_first_l2` set) · **every day after:** exhibitionism add +1 · each under her stage cap |
+| pays | **the first day out in each level:** corruption add +1 · exhibitionism add +1 (`street_first_l1` / `street_first_l2` set) · **every day after:** exhibitionism add +1 · each caps at 19 (DECISIONS 176) |
 | who sees | Mr. Vance if he is at his house, else the shop guy (08:00-18:00), else a car |
 | want | Vance: his eyes up her legs; he pats the step beside him |
 | next step | "He'll be on his porch tomorrow evening. He always is." |

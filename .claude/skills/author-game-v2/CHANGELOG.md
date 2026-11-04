@@ -5,6 +5,14 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-04 — "0 wrong cites" did not mean what it said: 140 cites repaired, the check made honest (J80)
+
+- **What.** `scripts/cite_check.py`: an AMBIGUOUS cite (its anchor is in several places, none of them the cited line) now counts as wrong, in the count, in `--strict` and in the skill commit check. A name counts as the cite's subject only when it comes straight before the cite; a name that merely sits nearby makes the cite UNVERIFIABLE, not wrong. A line inside the named function, or a line that says the name even in a string, reads OK. The summary now prints `of N live cites: X confirmed right, Y wrong, Z can't be checked`. `--fix` also moves these cites: it carries a cite along the engine file's uncommitted diff when the new line still names its anchor (ranges too), else to the one definition, else it leaves and lists it. New `scripts/tests/test_cite_check.py`.
+- **`references/` (11 files).** 140 AMBIGUOUS cites repaired, plus 13 `:NNNN` companions on the same lines. Only digits changed. Most positions came from `git blame` plus `git diff` carrying each line forward; the rest were read by hand.
+- **Why.** The fifth alignment check (J80) found `engine.md` cites 37 lines off while the tool printed 0 wrong. Measured on the 583 live cites: 77 confirmed right, 140 on the wrong line and only warned about, 366 uncheckable. "0" had been reported as the skill's cites being right. A "one definition" repair was tried first and rejected on review: `the predicate at v2.py:5126` would have moved to `getWornExposure`'s definition, which is not what that sentence says.
+- **Limit.** 416 live cites still can't be checked, because nothing marks what they point at, and `--fix` never moves one that has no anchor. Some will be stale. A cite that drifts onto another hit of its own name, or stays within 60 lines below its function, still reads OK.
+- **Verified.** `--strict` exits 0: 167 confirmed right, 0 wrong, 416 can't be checked. A diff shows only digits changed. J80's four examples and a random 15 moved cites read right against the code. Live on a clone: a 3-line `v2.py` shift moved 117 cites in the same commit, 0 left, and `--strict` stayed at 0.
+
 ## 2026-11-04 — the engine can put back what she came in
 
 - `references/engine.md`: documents two new wardrobe actions, `remember_outfit` and `restore_outfit`, with `unless_wearing`

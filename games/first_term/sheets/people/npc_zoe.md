@@ -1,5 +1,7 @@
 # [REVIEW] Person — Zoe
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Walk-ins add the women's toilet (the refill walk-in).
+
 > Changed 2026-11-04 (LO's answer Q5): a no-show or an ignored invite costs her patience: her next weekly invite waits about six days, and she says so in a text. Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: her three class rows. The moment column names each step's kind and stage. No locked next-dare button; only her card names it. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 3 to 23:30; step 5 at her apartment to 01:45.
@@ -150,7 +152,7 @@ where she can see it.
 | after step 5: "Let her watch you with him." | Exhibitionism 60 (was none) | both +1, cap 79 |
 | the next dare | not written | no button; her card says "Zoe's next dare. (Next release)" |
 
-- **The no:** "Not tonight." Zoe pouts and picks something tamer next week. It pays her nothing and adds 1 to
+- **The no:** "Not tonight." Zoe pouts, "Boo. Next Friday, then." It pays her nothing and adds 1 to
   `zoe_refused` (her next pick reads it: "Something easy, then."). No dare in release 1 writes the room pushing, so
   no no can fail yet (H5: a no fails only where the push is on the page).
 - **Who sees:** the room, every time; the regular in the dare remembers it next party ("You again.").
@@ -226,7 +228,7 @@ Each follow-up waits for her reply (`after_round`), and a different answer follo
 
 ## Walk-ins and acts from the heat proposal (signed 2026-11-03, built)
 
-Walk-ins: `canteen`, `park`, `party_house`, `quad`, `zoe_apartment`, `zoe_bedroom`. Each row (when, what pays) is on that place sheet.
+Walk-ins: `canteen`, `college_womens_toilet`, `park`, `party_house`, `quad`, `zoe_apartment`, `zoe_bedroom`. Each row (when, what pays) is on that place sheet.
 Acts: under the canteen table (A2, `canteen`), "Stay over" in her bed (A5, `zoe_bedroom`).
 The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
 

@@ -64,9 +64,9 @@ POOLS = {
                   "The TA goes through the heart valve by valve, pink to the ears. You take careful notes and understand all of it."],
         "chat": ["You whisper with the girl beside you through the slides, about everything but biology.",
                  "The back row passes a phone along with somebody's party photos on it. You look at every one."],
-        "doze": ["The lab is warm and the TA's voice is soft. You put your head on the bench and lose twenty minutes.",
+        "doze": ["The hall is warm and the TA's voice is soft. You put your head on the desk and lose twenty minutes.",
                  "You sit with your eyes half shut while the slides click past. Your body thanks you, but your notes don't."],
-        "eyes": "Across the lab bench, the TA keeps looking and looking away. What you're wearing is doing its job.",
+        "eyes": "From the front of the hall, the TA keeps looking and looking away. What you're wearing is doing its job.",
         "tired": "Too tired to label a single cell. Doze, or skip."},
     "figure": {
         "focus": ["You draw for ninety minutes without looking up. By the end your page holds her shoulder, her hip, the line of her back, and it looks like a person.",
@@ -139,7 +139,7 @@ def class_row(cid, name, subj, grade, schedules, lecturer, meet_flags, opening, 
 # ── Psychology (Hale; Nadia beside her; the guy beside her, the rival) ──
 out.append(class_row(
     "college_class_psych", "Attend the Psychology lecture", "Psychology", "grade_psych", PSYCH, H,
-    [fset("hale_met"), fset("nadia_met"), fset("desk_guy_met"), fset("rival_met")],
+    [fset("hale_met"), fset("nadia_met"), fset("desk_guy_met")],
     [G(cond(flag("hale_met"), flag("nadia_met")), P("Psychology. Dr. Hale at the lectern in his tweed, the slides already up. Nadia has saved you the seat beside her in the front row, like always.")),
      G(cond(flag("hale_met", False)), P("Psychology. A man in tweed at the lectern, slides already up: Dr. Hale, the timetable says. A girl in big glasses in the front row moves her bag off the seat beside her and pats it."),
        WHO("Sit here. I'm Nadia. Nobody sits at the front for him. You'll see why.")),
@@ -148,7 +148,7 @@ out.append(class_row(
      G(cond(trait("grade_psych", "lt", 40)), D(H, "Some of you are failing this course. You know who you are.")),
      G(cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}), P("His eyes drop to your thighs. He loses the sentence, steps back behind the lectern, and starts it again.")),
      ],
-    [D(N, "He watches you more than the slides. Just saying.")],
+    [G(cond(trait("hale_step", "lt", 4)), D(N, "He watches you more than the slides. Just saying."))],   # at step 4+ he keeps his eyes on the back wall
     "Sit in the front row and let him look.",
     by_clothes(
         [P("You sit in the front row and don't fold your arms over your chest, and don't cross your legs. Dr. Hale lectures to the back wall for ninety minutes, and every time he forgets and looks down at your chest, his voice goes. Nadia kicks your foot under the desk, grinning.")],
@@ -185,7 +185,7 @@ out.append(class_row(
     "college_class_bio", "Attend the Biology lecture", "Biology", "grade_bio", BIO, TA,
     [],
     [P("Biology. The TA runs it, a shy woman in a lab coat who blushes when she has to say reproductive system out loud. The girl beside you whispers through the slides."),
-     G(cond(flag("zoe_met", False)), WHO("Quad after? I'm always there. Tuesdays, Thursdays, Fridays.")),
+     G(cond(flag("zoe_met", False)), WHO("Find me on the quad. I'm always there. Tuesdays, Thursdays, Fridays.")),
      G(cond(flag("zoe_met")), D(Z, "Babe. Look at the TA. She's staring at your legs again.")),
      G(cond(trait("grade_bio", "lt", 40)), D(TA, "If anyone's struggling, my door's open Tuesday to Friday afternoons. Really.")),
      ],
@@ -234,8 +234,7 @@ out.append(first_class("meet_business", "Your first Business class", BUSI, "busi
     D(BUS, "I don't do extensions. I don't do excuses. I do honest work, and I grade it honestly. Sit down."),
     P("The guy in the row behind you, the one with three highlighters, leans forward."),
     D(STUDY, "You can borrow my notes. Any time. If you, um. If you want."),
-    G(cond(flag("rival_met")), P("And the sharp girl from Psychology watches you sit and doesn't smile."), D(RIVAL, "Oh. You're in this one too.")),
-    G(cond(flag("rival_met", False)), P("A sharp girl in the front row watches you sit and doesn't smile."), WHO("New? Don't take my seat.")),
+    P("A sharp girl in the front row watches you sit and doesn't smile."), WHO("New? Don't take my seat."),
 ]))
 out.append(first_class("meet_bio", "Your first Biology class", BIO, "bio_ta_met", [], [
     P("Biology is taught by the TA, a shy woman of twenty-eight in a lab coat and big earrings, who blushes when she says reproductive."),
@@ -469,7 +468,7 @@ out.append(hub("hub_business_class", "lecture_hall", BUS, "business_lecturer_met
 out.append(hub("hub_ta_class", "lecture_hall", TA, "bio_ta_met", "The Biology TA", [
     P("The TA is sorting a stack of handouts at the front. She turns, sees you, and drops half of them."),
     # S4 (LO 2026-11-03): she's running the class, so the screen is look-only and says why
-    P("She's handing out the worksheets, too busy to stop. She only gets a word in as she puts one on your desk."),   # reader pass 3 b01: she talks below, so "too busy to talk" was false
+    P("She gathers them up and hands them out, too busy to stop. She only gets a word in as she puts one on your desk."),   # reader pass 3 b01: she talks below, so "too busy to talk" was false
     # reader a3 #19 (DECISIONS 131): the 40+ bands point at her office too (her rows: ta_office Tue-Fri 14:30-18:00)
     *grade_lines(TA, "grade_bio", "You're, um. You're struggling. My door's open. If you want.", "You're doing fine! Really fine. My door's open afternoons.", "Top marks. Wow. Sorry. Top marks. My door's open afternoons."),
     # reader a3 #35 (DECISIONS 131): the act she holds back, not only a compliment
@@ -501,7 +500,10 @@ _ao["nodes"].append(node("book", "Your sketchbook", [
 ], [go("Thank her.", loc=LEAVE_TO["art_office"], mins=60, eff=[{"targetType": "player", "trait": "grade_art", "op": "add", "value": 1, "cap": 69}])]))
 out.append(hub("hub_business_office", "business_office", BUS, "business_lecturer_met", "The Business lecturer's office", [
     P("The Business lecturer looks up from his marking and doesn't smile."),
-    *grade_lines(BUS, "grade_business", "Failing. I can offer an honest retake. Nothing else.", "You're passing. Keep it honest.", "Good work. Honest work."),
+    # scene reader 2026-11-04: the retake is once (business_retake_used is never cleared), so the offer shows only until it is used
+    G(cond(trait("grade_business", "lt", 40), flag("business_retake_used")), D(BUS, "Failing. You've had your retake. Nothing else.")),
+    G(cond(trait("grade_business", "lt", 40), flag("business_retake_used", False)), D(BUS, "Failing. I can offer an honest retake. Nothing else.")),
+    *grade_lines(BUS, "grade_business", "", "You're passing. Keep it honest.", "Good work. Honest work.")[1:],
     # reader pass 3 b00: at 40+ a line points forward (his lecture is on his rows; the retake covers <40)
     G(cond(trait("grade_business", "gte", 40)), D(BUS, "I'll see you in lecture, @player. Front half of the room.")),
     # reader pass 3 b00: the charge is on her body, one group per clothing set; the price is his line
@@ -640,8 +642,8 @@ out.append({
     "nodes": [node("floor", "The gym floor", [
         P("Treadmill, then the weights, then the mats. The mirror wall shows you everything you're doing, and everyone else doing it too."),
         WHO("You using that bench, or can I jump in?"),   # LO 2026-11-03: someone on the gym floor
-        G(cond(*SPORTS_ONLY), P("Just the sports bra and your bottoms. Your tits bounce in it with every stride on the treadmill, and in the mirror wall you can see two guys at the rack stop counting their reps. One looks away when you catch his eye. The other doesn't, but he doesn't come over either. Not yet.")),
-        G(cond({"type": "clothing_item", "item_id": "jeans", "operator": "equipped"}), P("You're working out in jeans. It's stupid, and you feel it in every squat.")),
+        G(cond(*SPORTS_ONLY), P("Just the sports bra and your bottoms. Your tits bounce in it with every step across the floor, and in the mirror wall you can see two guys at the rack stop counting their reps. One looks away when you catch his eye. The other doesn't, but he doesn't come over either. Not yet.")),
+        G(cond({"type": "clothing_item", "item_id": "jeans", "operator": "equipped"}), P("You're at the gym in jeans. It's stupid, and you'll feel it in every squat.")),
     ], [
         # pass 3 D44 (the-surfaces.md R9): an act on her body ends on a screen of it, not a toast; the hour is on the button (H28)
         go("Work out.", node="worked", mins=60, costs=[{"trait": "energy", "value": 15}],
@@ -676,7 +678,7 @@ out.append({
 # A Good Girl way up: the couple is an event and pays nothing; "Stay behind the shelf." is her
 # choice and pays corruption +1, cap 19. Nobody sees her. Once a day; it opens until 19:45 so
 # its 15 minutes of exits land before the library closes at 20:00.
-STACKS_SEEN = ("The back aisles are dead quiet. You run a finger along the spines, hunting a call number. Then you hear it. A soft knock of books on wood, steady, over and over. A muffled sound under it. You turn the corner. Two seniors fill the dead end of the stacks. She is up on the edge of a low shelf, skirt shoved to her waist, legs locked round him. Her top is pushed up and her tits bounce with every thrust. His jeans hang open. You see his cock slide out of her, wet, and drive back in. His hand is clamped over her mouth. She moans into his palm anyway. Your face goes hot. You stop dead at the end of the aisle. Her nipples are hard. He thrusts again, and the books knock.")
+STACKS_SEEN = ("The back aisles are dead quiet. You run a finger along the spines and pull down your book. Then you hear it. A soft knock of books on wood, steady, over and over. A muffled sound under it. You turn the corner. Two seniors fill the dead end of the stacks. She is up on the edge of a low shelf, skirt shoved to her waist, legs locked round him. Her top is pushed up and her tits bounce with every thrust. His jeans hang open. You see his cock slide out of her, wet, and drive back in. His hand is clamped over her mouth. She moans into his palm anyway. Your face goes hot. You stop dead at the end of the aisle. Her nipples are hard. He thrusts again, and the books knock.")
 STACKS_STAY = ("You step back behind the next shelf. Three books are missing at eye height. The senior's cock slides out of the girl, wet and shining, then thrusts back in. Her tits bounce with every push. Her nipples are dark and hard. His hand stays clamped over her mouth. She moans into his palm anyway. Her heels dig into his ass and pull him deeper. That is a real cock, inside a real woman, four feet from you. You should look away, but you don't. Your own nipples go tight. You are wet, and you press your thighs together hard. Your hands stay flat on the shelf. She shudders and comes against his palm, hips jerking. Two aisles over, a book trolley squeaks. You hold still behind the shelf with your book, nipples still tight, thighs clenched.")   # reader batch 5 (pass 3): she is still here, so "Move one aisle closer." is true after it
 out.append({
     "id": "library_back_stacks", "name": "Find a book in the back stacks",

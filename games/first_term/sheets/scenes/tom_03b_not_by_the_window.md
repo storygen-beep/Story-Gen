@@ -1,5 +1,7 @@
 # [REVIEW] Scene — tom_03b_not_by_the_window
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. His card's end line as built (DECISIONS 132).
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 
 > The signed plans behind this page: `proposals/COPY_FIXES_C.md`.
@@ -74,13 +76,13 @@ the gate's level-3 shift, so in practice the high line shows; the low is kept fo
 > Drafted before the build and kept as the signed record. Where it differs, the branch map and the beats above say what the build does.
 - **The window rule** (`tom_window_rule`): level-3 café scenes stop using the window seats (`job.md`, "After Tom's step 3").
 - **His counter line** changes (`tom_01_the_apron.md`, his counter, `tom_step` eq 3).
-- **His card** ends on the locked line: "Tom, later. (Needs Corruption 60.)"
+- **His card** ends on: "Tom, later. (Next release) His Want and Power still count: what you do at the café now is kept for the next release." No locked button (DECISIONS 132).
 
 ## Why — the source of each key choice
 
 | key choice | source |
 |---|---|
-| the step, the three answers, the window rule, the locked line | `proposals/TOM_R1_LADDER.md`, step 3 (signed 2026-11-01) |
+| the step, the three answers, the window rule, the card's end line | `proposals/TOM_R1_LADDER.md`, step 3 (signed 2026-11-01) |
 | footfall 15, name −5 | `sheets/systems/job.md`, the café keeps score (signed) |
 | the shift's "let it" as the trigger | the proposal: "after she's let a customer touch her" · the flag name, mine |
 | the parked no, no meter pay | mine, confirmed by LO 2026-11-01 ("Signed") |

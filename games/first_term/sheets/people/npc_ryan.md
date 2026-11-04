@@ -1,5 +1,7 @@
 # [REVIEW] Person — Ryan
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Walk-ins add her room (the refill walk-in at her nap).
+
 > Changed 2026-11-04 (LO's answers Q1, Q7, Q14; PICKS 17): his Lust starts at 0; his room is shut while Kayla is over; no day-one final no; his short-skirt line and step 3's call name no stairs. Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: weekend mornings from 06:45. The moment column names each step's kind and stage. His Want pays on what happened (step 1 and step 8); no locked step-9 button. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 8 runs Sun–Thu nights.
@@ -158,7 +160,7 @@ tick like `ryan_towel_today`). Each replays with a POOL of lines. None shows wit
 | step 4 | the couch | she watches his game in her underwear; he has to adjust himself, and she makes him say why | Daring | new |
 | step 6 (was 5) | his bed, evenings | she lies on his bed and touches herself until she comes; he isn't allowed to touch, only watch | Bold · Showing (was Curious · Daring) · cap 59 | new |
 | step 6 | his room, evenings | naked in his room; he strokes himself while she watches, and she tells him when he can come | Showing · cap 59 | new |
-| step 7 | the couch, under the blanket | a handjob to the end under the blanket, with Mark's TV on in the next room | Hungry (was Bold) · Daring · cap 79 | built ("Share the blanket"), pays +3 not +1, now finishes |
+| step 7 | the couch, under the blanket | a handjob to the end under the blanket, with Mark's radio on in the next room | Hungry (was Bold) · Daring · cap 79 | built ("Share the blanket"), pays +3 not +1, now finishes |
 | step 8 | his room, two knocks, not Friday | a menu (changed 2026-11-02): a kiss at the door, then her pick of the act, more opening as his Lust climbs (70 / 80 / 90); a near-catch screen (Laura knocks, Kayla calls, or nothing); her pick of finish | — (step 8 needs Corruption 60) · cap 79 (was 59) | new, replaces the built two-knocks repeat |
 
 The towel slip and the drop (DECISIONS 98) stay as they are.
@@ -260,7 +262,7 @@ the couch, and the bathroom door.
 
 ## Walk-ins and acts from the heat proposal (signed 2026-11-03, built)
 
-Walk-ins: `home_bathroom`, `home_hall`, `home_kitchen`, `home_living_room`, `home_ryan_room`. Each row (when, what pays) is on that place sheet.
+Walk-ins: `home_bathroom`, `home_ella_room`, `home_hall`, `home_kitchen`, `home_living_room`, `home_ryan_room`. Each row (when, what pays) is on that place sheet.
 The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
 
 **Copy:** lines here were rewritten from `proposals/COPY_FIXES_A.md` (signed with the a2 sheets, DECISIONS 125).

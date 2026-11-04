@@ -1,5 +1,7 @@
 # [REVIEW] Place — Ryan's Room
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. The door: no greyed "Go in." while he is in.
+
 > Changed 2026-11-04 (LO's answers Q14, Q15: his room is shut while Kayla is over; his drawer flirt opens at Curious). Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
@@ -17,7 +19,7 @@
 | closed text | none: always open |
 | hidden until | no |
 | fill — word budget | 8,000 words (ledger, unchanged) |
-| door | yes: Ryan · "Knock" · "Two knocks" from step 3 · "Go in" · shut Fri 18:00–Sat 10:00 while Kayla is there (once she is met): no knock shows, and the door reads "Kayla's here. His door is shut, and it stays shut till she goes." (LO, 2026-11-04, Q14) |
+| door | yes: Ryan · "Knock" · "Two knocks" from step 3 · "Go in." only while he is out, with no greyed line while he is in · shut Fri 18:00–Sat 10:00 while Kayla is there (once she is met): no knock shows, and the door reads "Kayla's here. His door is shut, and it stays shut till she goes." (LO, 2026-11-04, Q14) |
 | dress code or wanted state | none |
 
 ## On entering

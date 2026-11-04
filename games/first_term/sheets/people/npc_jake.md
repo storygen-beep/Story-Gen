@@ -1,5 +1,7 @@
 # [REVIEW] Person — Jake
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. His hot repeatable as built: every booked date, the car's caps (Exhibitionism 39), "Come in." and what it costs.
+
 > Changed 2026-11-04 (LO's answers Q5, Q7): a no-show or an ignored date ask costs his patience: his next ask waits about three days, and he says so in a text; the sneak-in's near-catch is in the hall, not on a landing. Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: his two class rows. The moment column names each step's kind and stage. No locked button past the car; only his card names it. Ryan's pay in step 3 sits on the moment he sees her. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 3 from 23:00; step 4 starts at the front door, Sat 22:00–00:00.
@@ -132,15 +134,14 @@ are parked.
 
 ## His hot repeatable: the end of a date
 
-- **After step 3, every booked Saturday.** One a week. It grows with her:
+- **After step 3, every booked date** (Wednesday and Saturday, DECISIONS 138). It grows with her:
   - Curious: the porch goodnight only; the car waits (DECISIONS 124);
-  - Bold (was Curious): making out in his car outside the house, grinding in his lap, Mark's TV light in the window;
-    pays cap 59;
+  - Bold (was Curious): making out in his car outside the house, grinding in his lap; pays both meters, cap 39;
   - Hungry (was Bold): in the car under the street lamp, his hand down her jeans until she comes, or her hand on him,
-    a passer-by able to see (sex where strangers can see, SP2); mixed, both meters, cap 79;
+    a passer-by able to see (sex where strangers can see, SP2); Corruption cap 79, Exhibitionism cap 39;
   - further: not written, and no button; his card says "Jake, further. (Next release)";
-  - after step 4: she sneaks him in. One night in four, a near-catch: Laura's door opens, or Ryan knocks twice on the
-    wall.
+  - after step 4, Saturday: "Come in." at her door (Energy 10, Hygiene 10), and she sneaks him in; Corruption cap 59.
+    One night in four, a near-catch: Laura's feet in the hall, or Ryan knocks twice on the wall.
 - Each pays both meters by the meters sheet's rules (seen: both; behind her door: Corruption).
 
 ## Changed, and what the player loses

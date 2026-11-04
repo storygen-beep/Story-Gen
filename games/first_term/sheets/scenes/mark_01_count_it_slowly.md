@@ -1,5 +1,9 @@
 # [REVIEW] Scene — mark_01_count_it_slowly
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. her_line row: what the build says; the paying and losing-count lines are gone (Q6).
+
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. "Give me a minute." (true in jeans too); "Go back to your room." lands in her room.
+
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. The screens and buttons as built: he looks at her, not the money (Q6); "I'm saying it."; no stairs (Q7); her clothes come back on "Let me get dressed first."
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the count's two buttons; the Sunday count on both ways out; the step row.
@@ -21,7 +25,7 @@
 | what she wears here | her sleep shirt: only in a group on her worn state (guess) |
 | which version | Power 50 or more (guess): his version · under 50: hers |
 | explicit? | no: he only looks |
-| her_line_low · her_line_high | low (under the stage): "He's Mom's husband. Pay him and go." · high (over it): "You want him to lose count." (the person sheet names none; worded by me, signed by LO 2026-11-01) | The built thought on `short` ("He looked at you longer than he ever looked at the money.") is the low side. |
+| her_line_low · her_line_high | low, as built: her button "Can you just — say it?", when she is short · high: none built | The built thought on `short` ("He looked at you longer than he ever looked at the money.") is the low side. |
 | what changes after | the Sunday table, every week (`mark_sunday_table.md`) |
 
 ## The step row (filled from the build, 2026-11-03)
@@ -36,10 +40,10 @@
 
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
-| `table` | Mark at the table with the envelope: "Sit. Every Sunday, you sit at my table while this goes in Vance's envelope." | no | "Here." → `count` · "Let me get dressed first." → `dressed` (parked) | none; "Let me get dressed first." gives back what she wore before (`remember_outfit`, `restore_outfit`) |
+| `table` | Mark at the table with the envelope: "Sit. Every Sunday, you sit at my table while this goes in Vance's envelope." | no | "Here." → `count` · "Give me a minute." → `dressed` (parked) | none; "Give me a minute." gives back what she wore before (`remember_outfit`, `restore_outfit`) |
 | `count` | he doesn't open the envelope. Short, she sits and looks at it with him: "Seventy-five, I said." Paid up: "It's all there, Mark. Take your time." and his eyes leave it for her legs | no | "Can you just — say it?" (she's short) · "Let him look." (she isn't) → `short` | none |
 | `short` | "I'm saying it." A short goes on the back of the envelope: "The rest waits a week, but Vance doesn't." Paid up: "That's the week. Same again Sunday." | no | "Fine." → the hall | Mark's Want add +10 · `mark_step` set 1 · the Sunday count: a full week adds 1 to her streak, his Power −3; a short or covered week resets it, his Power +3 |
-| `dressed` | "Suit yourself." She puts clothes on and comes back; he has sealed the envelope without her. Short: "Short. The rest waits a week." | no | "Go back to your room." → the hall | `mark_step` set 1 and the same Sunday count; no Want |
+| `dressed` | "Suit yourself." She goes out and comes back dressed; he has sealed the envelope without her. Short: "Short. The rest waits a week." | no | "Go back to your room." → her room | `mark_step` set 1 and the same Sunday count; no Want |
 
 Who notices: nobody. Ryan's in his room till 14:00 on Sunday; his door is shut. A full week (she isn't short) plays the same scene in her version: "It's all there, Mark. Take your time."
 

@@ -98,7 +98,7 @@ out.append({
     "nodes": [
         back("jar"),
         node("jar", "The back room", [
-            P("He counts the jar when you're near now, lips moving. Today you go into the back room for milk and he's there with the tip jar on the shelf, folding the bills out of it into his apron pocket, the other girls' twenties first. Your singles are in there too. Everybody's."),
+            P("He counts the jar when you're near now, lips moving. Today you go into the back room for milk and he's there with the tip jar on the shelf, folding the bills out of it into his apron pocket, the biggest bills first. Your singles are in there too. Everybody's."),
         ], [
             go("\"Busy shift?\"", node="seen", mins=2),
             go("Walk past.", loc="cafe", mins=2, retry=3),
@@ -106,8 +106,8 @@ out.append({
         node("seen", "Not a word", [
             P("He turns round with his hand still in the jar. He sees you see it. For a second neither of you moves."),
             D(TM, "Not a word."),
-            ME("Twenties, Tom? From the girls' jar?"),
-            D(TM, "Float. I'm counting the float. Not a word, @player."),
+            ME("The tips, Tom? Out of the jar?"),
+            D(TM, "The till. I'm counting the till. Not a word, @player."),
             P("He takes his hand out of the jar slowly and puts the lid back on, and his ears go red."),
             T("He's a thief. And now he owes you."),
         ], [go("\"Not a word.\"", loc="cafe", mins=5, consumes=True,

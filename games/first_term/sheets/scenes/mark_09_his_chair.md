@@ -1,4 +1,6 @@
-# [CUT] Scene — mark_09_his_chair
+# [CUT] [REVIEW] Scene — mark_09_his_chair
+
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Still cut and not built. Her line telling Mark to count is gone from the map (Q6), and the Sunday table row says what the build does.
 
 > **CUT 2026-11-01** (DECISIONS 113): Mark's paid route is cut: no sex and no money for her body (`npc_mark.md`). Kept on disk as the record; not built in release 1.
 
@@ -23,8 +25,8 @@
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `chair` | she sits in his chair, legs crossed, Sunday's rent counted out of her purse in front of her, then back in it | no | → `m` or `e` | none: no money moves on a Wednesday |
-| `m` | M: "My chair." | no | "Count it slowly, Mark." → `count` · "No. I count." → parked | none |
-| `e` | E: he stands; she fans Sunday's money on the table, then takes it back: "Sunday. Count it slowly, Mark." | no | → `count` | none |
+| `m` | M: "My chair." | no | her line telling him to count → `count` · her refusal → parked (both lines cut with the route; nobody counts the rent twice, Q6) | none |
+| `e` | E: he stands; she fans Sunday's money on the table, then takes it back, with the same cut line | no | → `count` | none |
 | `count` | he counts standing, hard under his jeans | no | "Good." → the hall | Mark's Want add +10 · `mark_step` set 9 · `pays_her_own_way` set |
 
 **Goal 1 ends here** (the body route): `pays_her_own_way`. The twist's offer scene follows; her answer stays parked.
@@ -34,9 +36,9 @@
 | row | answer |
 |---|---|
 | where · when | the kitchen, Sunday 08:00–12:00 |
-| what happens | the count in two versions, his terms or hers, by his Power |
-| priced options | "Twenty, and you can look" from Bold, the price on the button (LO, 2026-10-08) |
-| explicit? | yes: Mark A 7's beat, in two voices at the build |
+| what happens | he looks at her and counts nothing (Q6), in two versions, his terms or hers, by his Power |
+| priced options | none: the paid exits are cut (`mark_sunday_table.md`) |
+| explicit? | no: he looks (`mark_sunday_table.md`) |
 | BRAKE | once a Sunday, on the trigger |
 
 ## Why — the source of each key choice

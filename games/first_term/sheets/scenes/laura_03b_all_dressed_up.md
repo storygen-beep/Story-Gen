@@ -1,5 +1,7 @@
 # [REVIEW] Scene — laura_03b_all_dressed_up
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. "See you later, Mom." (it is early evening); "Hold still." 0 minutes, "Wait." 5.
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. "Wait." and the `liar` screen as built; the step row.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
@@ -39,8 +41,8 @@
 | `zip` | her door open; Laura at the mirror in her good dress, the zip open to the small of her back: "Zip me up, sweetheart? Mark's useless at it." (built line) | no | "Hold still." → `zipped` · "Ask Mark." → `no` (parked) | none |
 | `zipped` | you zip her; Mark calls from the kitchen that he's heading out to the bar, and doesn't come to see her | no | "Wait." → `bed` | none |
 | `bed` | Laura sits on the end of the bed, dressed up, nowhere to go: "Do I still look like someone you'd look at?" | no | "You look beautiful, Mom." → `liar` · "Say nothing." → `quiet` | none |
-| `liar` | Laura: "Liar." Smiling, eyes wet. "On weeknights now, her bedroom door doesn't quite close." | no | "Goodnight, Mom." → the hall | Laura's Love add +5 · `laura_lonely` set · `laura_step` set 3 · `laura_06_done` set |
-| `quiet` | you sit beside her and say nothing; she leans her head on your shoulder | no | "Goodnight, Mom." → the hall | Laura's Love add +5 · `laura_lonely` set · `laura_step` set 3 · `laura_06_done` set |
+| `liar` | Laura: "Liar." Smiling, eyes wet. "On weeknights now, her bedroom door doesn't quite close." | no | "See you later, Mom." → the hall | Laura's Love add +5 · `laura_lonely` set · `laura_step` set 3 · `laura_06_done` set |
+| `quiet` | you sit beside her and say nothing; she leans her head on your shoulder | no | "See you later, Mom." → the hall | Laura's Love add +5 · `laura_lonely` set · `laura_step` set 3 · `laura_06_done` set |
 | `no` | "Mark. Right." She does the zip herself, badly, halfway (built) | no | "Leave her with the zip." → the hall | Laura's Love add −1 · the step waits a week |
 
 **Dropped from the built canvas:** the `lean` screen (your fingers on her ribs, her hands over them) and the `ask`

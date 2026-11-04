@@ -219,7 +219,7 @@ screen, and sets that branch's flags. It never takes a no that ends a path (LO, 
 ## F2 · Boot and capstone are two canvases
 
 The checker and the template both assume this shape. Gate `the opening opens a door`
-(gates.py:9424) judges the handover at the end of the capstone the funnel walks into (`_capstone_at`,
+(gates.py:9694) judges the handover at the end of the capstone the funnel walks into (`_capstone_at`,
 gates.py:5086), and `templates/first-hour.toml` A1 is the boot and sets `opening_done`.
 
 The shape:
@@ -423,7 +423,7 @@ ceiling **is** the "there is a climb ahead" read, on frame one, with no teach sc
 > ### ⚠️ Arming a system is not the same as putting a door to it on the screen — and for the wardrobe the engine already put one there.
 >
 > Declaring `wardrobe_location` renders `[[Change Clothes->WardrobePage]]` on that location's screen
-> unconditionally (`v2.py:11209`, and `:11141` for the entry-gated variant); `shop_location` does
+> unconditionally (`v2.py:11358`, and `:11272` for the entry-gated variant); `shop_location` does
 > the same with `Browse Clothes` (`:11214`, `:11146`). It is above the portrait row and above the
 > activity list, on every visit, needing nothing from you.
 >
@@ -472,7 +472,7 @@ ceiling **is** the "there is a climb ahead" read, on frame one, with no teach sc
 > ### ⚠️ Nothing non-repeatable may live at the `shop_location` or the `wardrobe_location`.
 >
 > Both injected links are emitted **inside** the `<<if _autoFire>><<goto _autoFire>><<else>>`
-> branch (`v2.py:11158` and `:11225`), and `getStoryCanvasRedirect` fires on a non-repeatable canvas
+> branch (`v2.py:11289` and `:11374`), and `getStoryCanvasRedirect` fires on a non-repeatable canvas
 > *or* a `trigger_mode = "random"` one. Put a one-shot meeting or a random walk-in in that room and
 > the door to the wardrobe or the shop is invisible until it has fired. Pick a room with neither —
 > and note that most corpus shop locations are bare rooms for exactly this reason. Checked: gate *nothing one-time at the shop or wardrobe*.
@@ -605,7 +605,7 @@ work. What is never correct is a hub with **no conditions at all**: it puts that
 portrait on a location screen from turn one, however well the first hub is gated.
 
 A non-repeatable canvas renders **no portrait** — `selectNpcPortraitCanvasesForLocation` skips
-`if (!c.isRepeatable) continue` (`v2.py:5793`) — so the meeting cannot leak onto the location
+`if (!c.isRepeatable) continue` (`v2.py:5913`) — so the meeting cannot leak onto the location
 screen as a face, and the hub cannot appear before the meeting has fired.
 
 > ### ⚠️ `requires_npc` does NOT gate the auto-fire path. This corrects v1.
@@ -620,8 +620,8 @@ screen as a face, and the hub cannot appear before the meeting has fired.
 >        checks: schedules · conditions · repeatability.  requiresNpc is never read.
 > ```
 >
-> `requiresNpc` is emitted at `v2.py:13596` and read on the random-encounter selector
-> (`v2.py:6648`), the substitution rules (`v2.py:6727`), and — through `setup._npcPresentForCanvas`
+> `requiresNpc` is emitted at `v2.py:14664` and read on the random-encounter selector
+> (`v2.py:6782`), the substitution rules (`v2.py:6861`), and — through `setup._npcPresentForCanvas`
 > (`v2.py:5889`) — the solo lane (`v2.py:5830`, `:6479`) and the launcher (`v2.py:3663`).
 > **None of them is auto-fire.**
 >
@@ -669,7 +669,7 @@ build**. The field the engine reads is `TemplateTrigger.npc` (`:684`), carried t
 **Three things ride on that one key, and all three fail together.**
 
 1. **The face.** `renderNpcPortraits` and its selector both bail on `if (!c.npcId) continue`
-   (`v2.py:6354`, `v2.py:5797`). No `npcId` anywhere in a game means `renderNpcPortraits` returns
+   (`v2.py:6488`, `v2.py:5917`). No `npcId` anywhere in a game means `renderNpcPortraits` returns
    the empty string at every location, for every hour, for the whole run.
 2. **The presence gate.** The portrait renderer is where a character's hours are actually enforced:
    it reads their declared `[[npcs.schedules]]` and compares `getNpcLocation` to where the player is

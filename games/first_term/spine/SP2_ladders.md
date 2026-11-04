@@ -1,5 +1,5 @@
 # [REVIEW] SP2 · The ladders — First Term
-
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Mark: nobody counts the rent twice (Q6); the paid route and goal 1's body route are cut.
 > Changed 2026-11-04: Ryan's Lust starts at 0 (Q1); his day-one final no is gone; Laura keeps no Want; one hall (Q7); Mark's and Tom's repeatables later (Q3). Waits for LO's re-sign.
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. No "(Next release)" buttons; a no moves nothing of his; Laura keeps Warmth only.
 > [REVIEW] (was [READY]) · drafted 2026-10-04 · updated 2026-10-08 (where each stage starts) · signed by LO: LO, 2026-10-08
@@ -122,14 +122,14 @@ Arc: Laura C · The Catch in proposals/ARC_IDEAS.md
 - Direction: contest — who ends up in charge of the rent table.
 - Raised by: her being short, what she wears to the table (Want) · her giving in (Power) · Lowered by:
   paying in full, threatening to tell Laura, his own debt to Vance (Power tips to Ella).
-- As it rises: "count it slowly" → sets what she wears → a price on a look → she sits in his chair and he
-  stands. Power colours each step: written twice, his terms or hers; no step needs a Power level.
+- As it rises: he looks at her at the table and counts nothing (Q6) → sets what she wears → our arrangement; the price
+  on a look and his chair are cut (DECISIONS 113). Power colours each step: written twice, his terms or hers; no step needs a Power level.
 - Who starts: he names the act; every version where he does has a labelled, parked no.
 - Their no: "Not with your mother home" (parked) · Her final no: "I tell Mom (ends his path)" — closes
   his steps; rent is strict forever.
-- Ends as: rent paid her way, his version or hers (rent day: `LIVES.md:29`, `SP1_time.md:12`).
-- After: the rent table plays in two versions, his terms or hers; hers is goal 1's body route, and paying
-  in full is the separate money route (`IDEA.md:29-34`). The beats are Mark A's After
+- Ends as: rent paid her way, his version or hers (rent day: `LIVES.md:29`, SP1's rent row).
+- After: the rent table plays in two versions, his terms or hers. Goal 1's body route is cut; paying in full is
+  its only route this release (SP4). The beats are Mark A's After
   (`proposals/ARC_IDEAS.md:200`).
 
 Arc: Mark A · The Table in proposals/ARC_IDEAS.md

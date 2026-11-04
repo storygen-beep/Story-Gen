@@ -504,7 +504,7 @@ gets neither.
 > **A clip at the top of a canvas is a clip for beat 0. Every beat that ESCALATES carries its own.**
 
 This is an engine fact before it is a rule. A cascade renders as nested `<<linkreplace>>`
-(`v2.py:16924` — the beat's blocks become the linkreplace body, `_render_cascade_tail` at `:16864`), so **every beat
+(`v2.py:18016` — the beat's blocks become the linkreplace body, `_render_cascade_tail` at `:17956`), so **every beat
 appends below the last and nothing is ever removed.** The clip stays pinned where it was. By the
 beat that is the act, it has scrolled away, and the player reads the payoff under a picture of the
 setup.

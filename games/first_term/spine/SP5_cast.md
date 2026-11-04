@@ -1,6 +1,7 @@
-# SP5 · The cast — First Term
+# [REVIEW] SP5 · The cast — First Term
 
-> [READY] · drafted 2026-10-07 · updated 2026-10-08 (Tom to step 6) · signed by LO: LO, 2026-10-08
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Tom's arc is 3 steps, not 6; the ages' ledger cite is `want.cast`.
+> [REVIEW] (was [READY]) · drafted 2026-10-07 · updated 2026-10-08 · signed by LO: LO, 2026-10-08
 > A decision record, ≤ 400 words. The rules: `references/the-spine.md` SP5 · `the-want.md` §6.
 
 | decision | answer |
@@ -8,14 +9,14 @@
 | people in this release | **21**: 7 with an arc, 6 light, 8 extras (below) |
 | a new person joins only when they bring | a thread of her life, or a part in one (`want.threads`) · a ladder, or `none — <inside whose scenes>` · why she wants them (`want.why_this_person`) · a written age, 18 or older. Then a row in `want.cast`, LO's yes and a re-sign of this page |
 
-**The cast, with ages LO confirmed** (`v2_state.json:70-176`; everyone is 18 or older)
+**The cast, with ages LO confirmed** (the ledger's `want.cast`; everyone is 18 or older)
 
 | who | age | in release 1 as |
 |---|---|---|
 | Ryan | 22 | arc |
 | Laura | 41 | arc |
 | Mark | 46 | arc |
-| Tom | 31 | arc, to step 6 (SP7) |
+| Tom | 31 | arc, 3 steps (SP7) |
 | Zoe | 19 | arc |
 | Dr. Hale | 39 | arc |
 | Jake | 20 | arc |

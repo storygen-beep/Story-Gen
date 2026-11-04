@@ -180,7 +180,7 @@ walkin("walkin_gym_team", "The team comes in", "campus_gym",
        WHO("Bench is ours now, cutie, but take your time."),
        P("Nobody laughs. They just keep looking at your tits."), WHO("Seriously. Take all the time you want.")),
      GC(cond(*ANY), P("A dozen heads turn your way. Their eyes go down you on the bench, slow, your legs, your hips."),
-       WHO("We need that bench. No rush."), ME("Two more sets."), WHO("Do your two sets, then. We'll watch.")),
+       WHO("We need that bench. No rush."), ME("Give me a minute."), WHO("Take your minute, then. We'll watch.")),
      G(cond(JN), P("Jake's at the front of them. He drops his bag, and his eyes go down you and stay."),
        D(J, "Easy, boys. Eyes on your own reps.")),
      G(cond(JN), P("He doesn't take his own eyes off you while he says it."))],
@@ -257,7 +257,7 @@ walkin("walkin_canteen_jake", "The team's table", "canteen",
      go("Leave it.", node="j_leave", mins=10, cond_=cond(SKIRT, *E_COV), eff=[pay("exhibitionism", 19)])],
     records=["team_saw_canteen"], extra=[
         # reader batch 4 (pass 3): the hook, the team's training at three (the gym, Tue and Thu)
-        res("j_down", "Skirt down", [P("You tug your skirt down to your knees, as far as it goes. The table groans."), D(J, "Spoilsport."),
+        res("j_down", "Skirt down", [P("You tug your skirt down your thighs, as far as it goes. The table groans."), D(J, "Spoilsport."),
                                      D(J, "Training's at three. Come and watch. Wear that.")],
             "Leave them to their trays.", "canteen", 10),
         res("j_eat", "Eat", [P("You eat. They talk about Saturday over your head, and the one on the left keeps looking at your tits when he thinks you won't see.")],
@@ -315,7 +315,10 @@ rule("library_study", "walkin_library_nadia", 0.25, here(N, "library"), wd(0, 1,
 def park_answers():
     # pass 4 reader (the written no): "Let her run on." gets her reply on its own screen (`z_on`, each walk-in's extra)
     return [go("Let her run on.", node="z_on", mins=1),
-            go("Run with her.", node="hub_zoe_park.path", mins=0),
+            # the lap itself, with the lap button's own price and flags (zoe.py hub_zoe_park): she is already with Zoe here,
+            # so the hub's first screen, "Zoe jogs up the path", would be false
+            *booked_split(go("Run with her.", node="hub_zoe_park.lap", mins=30, costs=[{"trait": "energy", "value": 10}],
+                             flags=[fset("ran_with_zoe"), funset("zoe_bailed")]), "zoe_run_booked"),
             go("\"Dare me, Zo.\"", node="zoe_park_dare.ask", mins=0, cond_=cond(slot("top")))]
 
 
@@ -377,7 +380,8 @@ walkin("walkin_tub_zoe", "Zoe gets in", "party_house",
         P("Her hand stays flat on her own thigh under the water, an inch from yours. Not yet. Not with the whole deck watching."))],   # scene reader b03: the not-yet
     [go("\"Not here, Zo.\"", node="tub_no", mins=2, cond_=cond(TOG)),
      go("Get out, dripping.", loc="party_house", mins=30, cond_=cond(flag("zoe_together", False)), **TUB_EXIT),
-     go("Let her.", node="tub_let", mins=10, cond_=cond(TOG, HUNGRY), eff=[pay("corruption", 79)])],
+     go("Let her.", node="tub_let", mins=10, cond_=cond(TOG, HUNGRY, trait("exhibitionism", "gte", 60)), costs=[{"trait": "energy", "value": 10}],   # a sex act the deck watches: both meters, and it costs as the car does
+        eff=[pay("corruption", 79), pay("exhibitionism", 79), {"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}])],
     records=["zoe_in_the_tub"], extra=[
         res("tub_no", "Not here", [P("You catch her wrist under the water and put her hand back on her own thigh."),
                                    D(Z, "Fine. Later, babe. You owe me."),
@@ -576,7 +580,7 @@ walkin("walkin_house_vance", "Out on his porch", "vance_house",
      go("Stay where he can see your legs.", node="v_stay", mins=10, cond_=cond(DARING), eff=[pay("exhibitionism", 39)])],
     raise_=[lust(V)], records=["vance_porch_look"], extra=[
         res("v_walk", "Walk on", [ME("Enjoy your paper, Mr. Vance."), D(V, "Oh, I'm enjoying something, Miss."),
-                                  P("You don't turn round for him. You walk on, and behind you the rocking chair starts up again, slow, and his eyes stay on your bare legs until you're past the hedge.")],
+                                  P("You walk on, and behind you the rocking chair starts up again, slow, and his eyes stay on your bare legs until you're past the hedge.")],
             "Keep walking.", "street", 0),
         res("v_stay", "Where he can see", [P("You stay. You lean back against his gatepost with one knee bent, your bare legs right where he can see them, but you don't look at him."),
                                            P("The rocking chair stops rocking. Your face goes hot, and your nipples go tight."),
@@ -637,7 +641,7 @@ _hale_door.append(node("no", "Step back", [
     G(cond(trait("hale_step", "gte", 3)), P("You take a step back from his door."),
       D(H, "Suit yourself. You know where I am on Thursdays."),
       P("He shuts the door on you, quietly, and you hear him sit back down.")),
-], [dict(_hale_out, text="Walk away.")]))
+], [dict(_hale_out, text="Walk away.", locationId="faculty_floor")]))
 one_screen("walkin_door_business", "The door opens", "business_office",
     "B20, the Business lecturer: he opens his door and looks at the grade, not at her. No pay.",
     [here(BUS, "business_office"), flag("business_lecturer_met")],
@@ -679,7 +683,7 @@ walkin("walkin_toilet_zoe", "The stall door", "college_womens_toilet",
      go("Turn round and do your back.", node="z_dar", mins=5, cond_=cond(*E_DAR), eff=[pay("exhibitionism", 39)]),
      go("Let her look.", node="z_sho", mins=5, cond_=cond(*E_SHO), eff=[pay("exhibitionism", 59)])],
     # pass 4 (LO's note): this screen replaces toilet_wash, and she does wash, so the wash pays hygiene as toilet_wash does
-    raise_=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": 15}],
+    raise_=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": 15, "cap": 100}],
     records=["zoe_saw_toilet"], when=[wd(0, 1, 2, 3, 4), tod("12:15", "12:45")], extra=[
         res("z_shut", "The door shut", [P("You kick the door shut in her face and hold it there with your foot."), ME("Zoe! Use another one!"),
                                         D(Z, "Spoilsport. I know where to find you at lunch now."),   # pass 4 reader: no "tomorrow" on a Friday
@@ -725,23 +729,23 @@ walkin("walkin_zoebath_cocky", "The loose bolt", "zoe_bathroom",
      go("Lean in closer to the mirror.", node="c_dar", mins=5, cond_=cond(*E_DAR), eff=[pay("exhibitionism", 39)]),
      go("Turn round and lean back on the sink.", node="c_sho", mins=5, cond_=cond(*E_SHO), eff=[pay("exhibitionism", 59)])],
     records=["cocky_saw_bathroom"], extra=[
-        res("c_out", "Out", [P("You shove past him, yank the door open and point down the hall. The music comes in loud."), ME("Out. Pee in the garden."),
+        res("c_out", "Out", [P("You shove past him, yank the door open and point down the hall. The music comes in loud."), ME("Out. Pee outside."),
                              D(CG, "Suit yourself. Your loss, @player."),
                              P("He goes, grinning, and you shoot the loose bolt again with your face on fire.")],
             "Open the door.", "zoe_apartment", 5),
         res("c_cov", "Finish your liner", [P("You turn back to the mirror and finish your liner like he isn't there. You try to look calm, but your hand isn't steady. In the glass his eyes go from your ass to your face and back."),
                                            D(CG, "You always this calm?"), ME("Only when I'm holding something sharp."), D(CG, "Fair."),
                                            P("He watches till you cap the liner, then holds the door open for you like a gentleman and looks at your ass all the way out.")],
-            "Open the door.", "zoe_apartment", 5),
+            "Back to the party.", "zoe_apartment", 5),
         res("c_dar", "Lean in closer", [P("You lean in closer to the mirror, slow, up on your toes, and push your ass right back at him while you do the other eye."),
                                         D(CG, "Jesus. You're doing that on purpose."), ME("Doing what?"),
                                         D(CG, "Find me later and I'll tell you."),
                                         P("He goes, and he leaves the door wide open behind him.")],
-            "Open the door.", "zoe_apartment", 5),
+            "Back to the party.", "zoe_apartment", 5),
         res("c_sho", "Lean back on the sink", [P("You turn round and lean back on Zoe's sink, your hands on the edge either side of you, and let him look at the front of you. Your nipples are hard."),
                                                D(CG, "Jesus Christ, @player."), ME("Not in Zoe's bathroom. Not yet."), D(CG, "Then where?"), ME("Find out."),
-                                               P("Somebody bangs on the door. He grins at you, opens it on the queue outside, and goes out through them.")],
-            "Open the door.", "zoe_apartment", 5)])
+                                               P("Somebody bangs on the door. He grins at you, opens it on the line outside, and goes out through them.")],
+            "Back to the party.", "zoe_apartment", 5)])
 rule("zoe_bathroom_face", "walkin_zoebath_cocky", 0.25, here(CG, "zoe_apartment"), wd(4), tod("23:00", "00:00"))
 rule("zoe_bathroom_face", "walkin_zoebath_cocky", 0.25, here(CG, "zoe_apartment"), wd(5), tod("00:00", "02:00"))
 

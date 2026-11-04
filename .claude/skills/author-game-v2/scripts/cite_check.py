@@ -31,7 +31,15 @@ Three strengths, and the tool only ever proposes a move for the first two:
   none     nothing nearby looks like code. Reported as UNVERIFIABLE and never touched —
            a human has to read the sentence.
 
-  ⚠️ An anchor that matches in many scattered places is reported AMBIGUOUS, not guessed.
+  ⚠️ An anchor that matches in several places, none of them the cited line, is AMBIGUOUS, and it
+  counts as WRONG (2026-11-04, J80). Until then it was only a warning, so "0 wrong" meant "0 among
+  the cites the tool was sure of": 140 of 583 live cites were on the wrong line while it printed 0,
+  and an engine commit's 37-line shift went unseen. Two cases are not wrong, and neither was the old count's fault:
+    · the named token only sits NEAR the cite and the cite is about something else ("the predicate
+      at `v2.py:5246`" after `setup.getWornExposure`). A name counts as the cite's subject only when
+      it comes straight before the cite; anything else with several hits is UNVERIFIABLE.
+    · the cite points at a line INSIDE the function it names, within INSIDE_DEFINITION lines of the
+      definition, which reads as OK.
 
 USAGE
 -----
@@ -39,8 +47,14 @@ USAGE
     python3 .claude/skills/author-game-v2/scripts/cite_check.py --fix      # rewrite
     python3 .claude/skills/author-game-v2/scripts/cite_check.py --strict   # exit 1 on drift
 
-`--fix` rewrites ONLY citations whose anchor resolves to exactly one place. It never
-touches AMBIGUOUS or UNVERIFIABLE ones, and it never invents an anchor.
+`--fix` rewrites a citation whose anchor resolves to exactly one place. An AMBIGUOUS one moves only
+when the engine file's uncommitted diff carries the cited line onto its anchor, or when exactly one
+of the hits defines the name. It never touches UNVERIFIABLE ones, because with no anchor it could not
+tell a moved cite from one already moved, and it never invents an anchor.
+
+Limits, said plainly: "0 wrong" covers the cites with an anchor; the summary line prints how many
+cannot be checked at all. A cite that drifts onto another hit of its own name, or stays within
+INSIDE_DEFINITION lines below its function, still reads OK.
 
 ⚠️ **RUN `--fix` BEFORE HAND-VERIFYING, NEVER AFTER.** It re-anchors on its own
 heuristic and will happily overwrite a better line a human chose. Measured 2026-08-29,
@@ -62,6 +76,7 @@ from __future__ import annotations
 import argparse
 import os
 import re
+import subprocess
 import sys
 from collections import Counter
 
@@ -90,6 +105,9 @@ CODEISH = re.compile(r"[_.(\[]|^[a-z]+[A-Z]")
 
 # Anchors this common are worthless — they match everywhere.
 MAX_MATCHES = 6
+
+# A cite this close below its name's definition is pointing inside that function.
+INSIDE_DEFINITION = 60
 
 # A doc fragment that abbreviates on purpose can never match the source.
 ELIDED = re.compile(r'\u2026|\.\.\.')
@@ -192,9 +210,13 @@ class Citation:
         self.anchor = None
         self.strength = "none"
         self.found: list[int] = []
+        self.moved_to: int | None = None   # where --fix would take this cite
+        self.moved_end: int | None = None  # and the end of its range
 
     @property
     def proposal(self):
+        if self.moved_to:
+            return self.moved_to
         return self.found[0] if len(self.found) == 1 else None
 
 
@@ -261,7 +283,7 @@ def resolve(c: Citation, src: list[str]) -> None:
                 c.found = [i + 1 for i, l in enumerate(src) if pre in brace_norm(l)]
                 if c.found:
                     c.anchor = pre + "…"
-            _verdict(c)
+            _verdict(c, src)
             return
 
     # 2a — a definition beats a call site. An anchor written as `advanceTime(minutes)`
@@ -280,7 +302,7 @@ def resolve(c: Citation, src: list[str]) -> None:
                 if any(f in l for f in forms) and not is_comment(l)]
         if len(hits) == 1:
             c.anchor, c.strength, c.found = f"{name} (definition)", "named", hits
-            _verdict(c)
+            _verdict(c, src)
             return
 
     # 2b — named: a backticked identifier near the citation
@@ -306,22 +328,112 @@ def resolve(c: Citation, src: list[str]) -> None:
             continue
         if 1 <= len(hits) <= MAX_MATCHES:
             c.anchor, c.strength, c.found = needle, "named", hits
-            _verdict(c)
+            _verdict(c, src)
             return
     c.verdict = "UNVERIFIABLE"
 
 
-def _verdict(c: Citation) -> None:
+def _name_of(anchor: str) -> str:
+    """`setup.equipItem(id)` -> `equipItem`: the bare name a definition line would carry."""
+    return re.sub(r"^(?:window\.|setup\.)", "", anchor).split("(")[0].strip()
+
+
+def defining_lines(c: Citation, src: list[str]) -> list[int]:
+    """Which of the anchor's hits define it rather than call or mention it."""
+    name = re.escape(_name_of(str(c.anchor)))
+    form = re.compile(rf"^\s*def {name}\b|{name}\s*=\s*function|function {name}\b|^{name}\s*[:=]")
+    return [f for f in c.found if form.search(src[f - 1])]
+
+
+def _named_right_before(c: Citation) -> bool:
+    """Does the anchor come straight before the cite, as in "`name` (`v2.py:12`)"?
+
+    Any other position is a token that happens to be nearby. "`v2.py:17649`, `_emit_...`" says the
+    line is IN that function; "the trigger (`v2.py:14559`) and `markCanvasTriggered`" is about something else.
+    """
+    i = c.col - max(0, c.col - 200)
+    before, after = c.context[:i], c.context[i + len(c.raw):]
+    if re.match(r"`?,\s*`?:\d", after):
+        return False                   # "`a` / `b` (`v2.py:1`, `:2`)": a list, not one name
+    return bool(re.search(rf"`{re.escape(str(c.anchor))}`[\s,(;`]*$", before))
+
+
+def _verdict(c: Citation, src: list[str]) -> None:
     if not c.found:
         c.verdict = "MISSING"          # the anchor is not in the file at all
+    elif brace_norm(str(c.anchor).rstrip("…")) in brace_norm("\n".join(src[c.line - 1:c.end or c.line])):
+        # The cited line says the name, even inside a string: `<<elseif _item.type is "trait_words">>`
+        # is where trait_words is implemented, though the search above rightly skips strings.
+        c.verdict = "OK"
     elif c.line in c.found or (c.end and any(c.line <= f <= c.end for f in c.found)):
         c.verdict = "OK"
     elif len(c.found) == 1:
         c.verdict = "DRIFTED"
+    elif c.strength == "named" and not _named_right_before(c):
+        c.verdict = "UNVERIFIABLE"     # the name is a neighbour, not what the cite is about
+    elif any(0 < c.line - d <= INSIDE_DEFINITION for d in defining_lines(c, src)):
+        c.verdict = "OK"               # a line inside the function it names
     else:
         # several matches: if one is far closer than the rest, still ambiguous —
         # proximity to a wrong number is not evidence.
         c.verdict = "AMBIGUOUS"
+
+
+HUNK = re.compile(r"^@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@")
+
+
+def uncommitted_hunks(rel: str) -> list[tuple[int, int, int, int]]:
+    """The file's working-tree diff against HEAD, as (old start, old len, new start, new len)."""
+    out = subprocess.run(["git", "diff", "-U0", "HEAD", "--", rel],
+                         capture_output=True, text=True).stdout
+    hunks = []
+    for line in out.split("\n"):
+        m = HUNK.match(line)
+        if m:
+            hunks.append((int(m[1]), int(m[2]) if m[2] is not None else 1,
+                          int(m[3]), int(m[4]) if m[4] is not None else 1))
+    return hunks
+
+
+def carry_line(n: int, hunks: list[tuple[int, int, int, int]]) -> int | None:
+    """Where line n of HEAD sits now. None when the edit rewrote or deleted that line."""
+    shift = 0
+    for old, old_len, new, new_len in hunks:
+        if old_len and old <= n < old + old_len:
+            return None
+        if old_len and n >= old + old_len:
+            shift = (new + new_len) - (old + old_len)
+        elif not old_len and n > old:
+            shift = (new + new_len) - (old + 1)
+    return n + shift
+
+
+def propose_move(c: Citation, src: list[str], hunks) -> None:
+    """Where should --fix take this cite? Leaves moved_to empty when nothing is certain.
+
+    First the engine's own diff: if the line the edit carried the cite to still names its anchor,
+    that is the same code. This is safe to run twice, because a cite that lands there reads OK, and it
+    covers what a search can't: a name inside a string, and a range.
+    """
+    carried = carry_line(c.line, hunks)
+    carried_end = carry_line(c.end, hunks) if c.end else None
+    if carried and (carried_end or not c.end):
+        span = "\n".join(src[carried - 1:carried_end or carried])
+        if brace_norm(str(c.anchor).rstrip("…")) in brace_norm(span):
+            c.moved_to, c.moved_end = carried, carried_end
+            return
+    if c.verdict != "AMBIGUOUS" or c.end is not None:
+        return
+    if carried in c.found:
+        c.moved_to = carried
+        return
+    if carried is not None and any(0 < carried - d <= INSIDE_DEFINITION
+                                   for d in defining_lines(c, src)):
+        c.moved_to = carried
+        return
+    defs = defining_lines(c, src)
+    if len(defs) == 1:
+        c.moved_to = defs[0]
 
 
 def in_scope(c) -> bool:
@@ -357,6 +469,11 @@ def main() -> int:
         if c.base in sources:
             resolve(c, sources[c.base])
 
+    hunks = {base: uncommitted_hunks(rel) for base, rel in TARGETS.items() if base in sources}
+    for c in cites:
+        if in_scope(c) and c.anchor and c.found and c.verdict in ("AMBIGUOUS", "UNVERIFIABLE", "DRIFTED"):
+            propose_move(c, sources[c.base], hunks[c.base])
+
     tally = Counter(c.verdict for c in cites)
     strengths = Counter(c.strength for c in cites if c.verdict != "UNVERIFIABLE")
     total = len(cites)
@@ -368,7 +485,7 @@ def main() -> int:
     for v in ("OK", "DRIFTED", "AMBIGUOUS", "MISSING", "ELIDED", "PROSE",
               "UNVERIFIABLE"):
         if tally[v]:
-            mark = "PASS" if v == "OK" else ("FAIL" if v in ("DRIFTED", "MISSING") else "warn")
+            mark = "PASS" if v == "OK" else ("FAIL" if v in ("DRIFTED", "MISSING", "AMBIGUOUS") else "warn")
         # ELIDED and PROSE are shapes this tool cannot judge, never defects.
             print(f"  [{mark}]  {v:<26} {tally[v]:>5}"
                   f"   ({100 * tally[v] / max(total, 1):.0f}%)")
@@ -387,7 +504,8 @@ def main() -> int:
     # DOCTRINE_GAPS.md and STATUS.md are history: a line number there records what was true
     # when it was written, so --fix never rewrites them and --strict never fails on them.
     fixable = [c for c in cites
-               if c.verdict == "DRIFTED" and c.proposal and c.end is None and in_scope(c)]
+               if (c.moved_to or (c.verdict == "DRIFTED" and c.proposal and c.end is None))
+               and in_scope(c)]
     seen = Counter((c.md, c.mdline, c.proposal) for c in fixable)
     collapsed = {k for k, n in seen.items() if n > 1}
     if collapsed:
@@ -411,7 +529,7 @@ def main() -> int:
     # what it did after the 2026-08-29 engine edits: "21 drifted", no way to see them.
     if args.verbose:
         held = [c for c in cites
-                if c.verdict == "DRIFTED" and c not in set(fixable)]
+                if c.verdict in ("DRIFTED", "AMBIGUOUS") and in_scope(c) and c not in set(fixable)]
         if held:
             print()
             print(f"    {len(held)} drifted but NOT auto-fixable — each needs a human:")
@@ -419,7 +537,7 @@ def main() -> int:
                 if c.end is not None:
                     why = "range: one anchor cannot name a span"
                 elif not c.proposal:
-                    why = "anchor resolves nowhere or to several lines"
+                    why = f"in several places, none here: {c.found[:6]}"
                 else:
                     why = "two citations on one line share a target"
                 print(f"    {os.path.relpath(c.md, SKILL)}:{c.mdline}  "
@@ -438,6 +556,8 @@ def main() -> int:
             for c in sorted(cs, key=lambda c: (-c.mdline, -c.col)):
                 text = lines[c.mdline - 1]
                 new_raw = c.raw.replace(f":{c.line}", f":{c.proposal}", 1)
+                if c.moved_end:
+                    new_raw = new_raw.replace(f"-{c.end}", f"-{c.moved_end}", 1)
                 if text[c.col:c.col + len(c.raw)] != c.raw:
                     continue                      # moved under us; skip rather than guess
                 lines[c.mdline - 1] = text[:c.col] + new_raw + text[c.col + len(c.raw):]
@@ -445,12 +565,18 @@ def main() -> int:
             with open(md, "w", encoding="utf-8") as fh:
                 fh.write("\n".join(lines))
         print(f"\n  rewrote {changed} citation(s) that resolved to exactly one line.")
-        print("  AMBIGUOUS and UNVERIFIABLE ones were not touched — they need a human.")
+        print("  UNVERIFIABLE ones were not touched, and neither was any AMBIGUOUS one it could not place.")
 
-    scoped = sum(1 for c in cites if in_scope(c) and c.verdict in ("DRIFTED", "MISSING"))
-    if tally["DRIFTED"] or tally["MISSING"]:
-        print(f"\n  {tally['DRIFTED'] + tally['MISSING']} citation(s) point at the wrong line "
-              f"across the skill, history included.")
+    wrong = ("DRIFTED", "MISSING", "AMBIGUOUS")
+    live = [c for c in cites if in_scope(c)]
+    scoped = sum(1 for c in live if c.verdict in wrong)
+    n_wrong = sum(tally[v] for v in wrong)
+    if n_wrong:
+        print(f"\n  {n_wrong} citation(s) point at the wrong line across the skill, history included.")
+    # The count alone misled for months: "0 wrong" was read as "all right" (J80). Say what it covers.
+    n_right = sum(1 for c in live if c.verdict == "OK")
+    print(f"  of {len(live)} live cites: {n_right} confirmed right, {scoped} wrong, "
+          f"{len(live) - n_right - scoped} can't be checked")
     print(f"  SKILL.md + references/: {scoped} citation(s) point at the wrong line (baseline 0)"
           + (" — run with --fix, then fix the rest by hand" if scoped else ""))
     if scoped and args.strict:

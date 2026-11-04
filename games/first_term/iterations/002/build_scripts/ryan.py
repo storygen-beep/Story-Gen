@@ -33,7 +33,7 @@ out.append({
         node("read", "Kayla", [
             P("You pick it up. You read the whole thing, out loud in your head, and the next one comes in while you're holding it: a photo, Kayla in his bed in one of his shirts. Then a voice note. Your thumb hits it before you can stop it, and a girl's voice fills the bathroom, low and laughing."),
             # pass 3 C33: her meeting has her voice; speaker "unknown" (WHO) until her name is earned in person
-            WHO("Babe. Friday. Back door, after everyone's asleep. And this time you don't get to fall asleep on me."),
+            WHO("Babe. Friday. Back door. And this time you don't get to fall asleep on me."),
             P("The shower slams off. Ryan's arm comes out of the steam and grabs the phone out of your hand, too late, dripping on the floor."),
             D(R, "Give me that."),
         ], [
@@ -118,7 +118,7 @@ out.append({
         node("night", "Night", [
             D(R, "Yeah. Night, @player.nickname."),
             P("He stays in his doorway with his hand on the frame, and his eyes stay on your ass all the way out into the hall."),   # reader pass 4 b5: the exit lands in the hall, not her room
-        ], [go("Go to bed.", loc="home_hall", mins=2, retry=1)]),
+        ], [go("Go to bed.", loc="home_ella_room", mins=2, retry=1)]),
         node("lap", "His lap", [
             P(beat("ryan_04_feet_in_his_lap", "lap")),
             VID("a girl's bare foot pressed into a young man's lap on a bed, his hand holding her ankle, phone at his ear", "foot on his crotch on bed phone call", "girl foot rubbing guy lap on bed", pool_dir="sex/ryan_04_lap_t4"),
@@ -202,7 +202,7 @@ out.append({
             D(R, "Shit. Kayla said it was free. I swear she said it was free."),
             ME("Well, it isn't, is it?"),
         ], [
-            go("Leave the towel.", node="look", mins=3, wardrobe=STRIP),
+            go("Leave the towel.", node="look", mins=0, wardrobe=STRIP),   # reader 2026-11-04: entered at 09:59, Kayla (out at 10:00) still calls; these 6 minutes go on drying off
             go("Reach for the towel.", loc="home_hall", mins=5, retry=7, wardrobe=[{"action": "equip", "item_id": "towel"}]),
         ]),
         node("look", "Let him look", [
@@ -211,19 +211,19 @@ out.append({
             ME("Go on, then. You came in here. Look."),
             D(R, "Fuck. Don't move. Please don't move."),
         ], [
-            go("Watch him.", node="comes", mins=3, eff=[cap("exhibitionism", 3, 79), add("corruption", 1, cap=79)]),  # DECISIONS 124: cap 79
+            go("Watch him.", node="comes", mins=0, eff=[cap("exhibitionism", 3, 79), add("corruption", 1, cap=79)]),  # DECISIONS 124: cap 79
         ]),
         node("comes", "Babe?", [
             P(beat("ryan_06_after_the_shower", "comes")),
             VID("a guy in a bathroom doorway coming in his hand, a naked wet woman watching", "guy cums in hand watching naked woman bathroom", "man finishes jerking off bathroom doorway", pool_dir="sex/ryan_06_comes_t5"),
         ], [
-            go("Take your time drying off.", node="after6", mins=15),
+            go("Take your time drying off.", node="after6", mins=21),
         ]),
         node("after6", "His door", [
             P("When you come out, his door is open a hand's width."),   # false lines a3 #6: no promise it stays open
             D(R, "@player.nickname. That didn't happen. Okay? That didn't happen."),
         ], [
-            go("Go to your room.", loc="home_hall", mins=2, consumes=True,
+            go("Go to your room.", loc="home_ella_room", mins=2, consumes=True,
                eff=[nadd(R, "want", 5), setv("ryan_step", 6)], flags=[done(6), fset("kayla_met")], wardrobe=[{"action": "equip", "item_id": "towel"}]),
         ]),
     ]})
@@ -263,7 +263,7 @@ out.append({
             D(R, "She'll call back. What do I tell her?"), ME("Tell her you were busy."),
             P("From now on his phone is face-down every time you knock."),
         ], [
-            go("Go to your room.", loc="home_hall", mins=2, consumes=True,
+            go("Go to your room.", loc="home_ella_room", mins=2, consumes=True,
                eff=[nadd(R, "want", 5), cap("corruption", 3, 79), setv("ryan_step", 7)], flags=[done(7)]),  # DECISIONS 124: cap 79
         ]),
     ]})
@@ -460,7 +460,7 @@ def hot_exit(text, loc, mins, eff, wardrobe=None):
     c = go(text, loc=loc, mins=mins, wardrobe=wardrobe)
     c["_pay"] = HOT_PAY + eff
     return c
-# truth pass (2026-11-03): a hot repeatable whose beats place someone else (row 6: Mark's TV and his call from the
+# truth pass (2026-11-03): a hot repeatable whose beats place someone else (row 6: Mark's radio and his call from the
 # next room) carries that person's presence on its screen too, not only on the choice in (canv.pin_blocks)
 HOT_PIN = {6: [{"type": "npc_at_location", "location_id": "home_kitchen", "npc_id": "npc_mark", "operator": "is_present"}]}
 def hot_node(n, name, media, exits, back="home_hall"):
@@ -469,7 +469,8 @@ def hot_node(n, name, media, exits, back="home_hall"):
     if n in HOT_PIN:
         beats = pin_blocks(beats, *HOT_PIN[n])
     return node(f"hot{n}", name, [*beats, *media, *HOT_SAID.get(n, [])],
-                exits + [go("Leave him to it.", loc=back)])
+                # the way out of a screen that undressed her gives her clothes back too (LO, 2026-11-04)
+                exits + [go("Leave him to it.", loc=back, wardrobe=DRESS_BACK if n in (3, 4, 5) else None)])
 # pass 3 B4: after each hot repeatable's beat, the two of them talk (row 6 whispers: Mark is next door)
 HOT_SAID = {1: [D(R, "You're doing that on purpose."), ME("Doing what?"), D(R, "Standing like that. In my door. You know what.")],
             2: [D(R, "If anybody walks in, I'm telling them it was you."), ME("Tell them. See who they believe.")],
@@ -516,8 +517,9 @@ HOT_COUCH = [  # the couch, Sat/Sun 14:00-18:00
     (3, "Watch his game in your underwear.", [trait("ryan_step", "gte", 4), DAR] + BRA_AND_PANTIES, UNDRESS_TO_UNDERWEAR,
      [VID("a girl in her bra and panties on a couch, a guy with a controller adjusting himself", "girl in underwear on couch guy hard", "watching tv in underwear he gets hard", pool_dir="sex/ryan_hot3_t4")],
      [hot_exit("Get dressed.", "home_living_room", 30, [cap("exhibitionism", 1, 39), cap("corruption", 1, 39)], wardrobe=DRESS_BACK)]),
-    # row 6: Mark's TV in the next room is only true when his row has him in the kitchen (Sunday 08:00-22:00)
-    (6, "Share the blanket.", [trait("ryan_step", "gte", 7), HUNGRY, DAR,   # the taboo act at home: Hungry (DECISIONS 124)
+    # row 6: Mark's radio in the next room is only true when his row has him in the kitchen on a Sunday (08:00-22:00);
+    # his Saturday 17:00-18:30 kitchen row has him leaving with his keys (reader 2026-11-04)
+    (6, "Share the blanket.", [trait("ryan_step", "gte", 7), HUNGRY, DAR, wd(6),   # the taboo act at home: Hungry (DECISIONS 124)
                               
                                {"type": "npc_at_location", "location_id": "home_kitchen", "npc_id": "npc_mark", "operator": "is_present"}], None,
      [VID("a handjob under a blanket on a couch, a film on, someone in the next room", "handjob under blanket couch", "secret handjob under blanket family home", pool_dir="sex/ryan_hot6_t5")],
@@ -570,8 +572,8 @@ HOT7_AFTER = {
               ME("Then kiss me. Taste yourself on my tongue.")],
 }
 FINISH_EXITS = [  # the day's pay split on ryan_hot_today, as built; dressed again for the hall
-    go("Back to your room.", loc="home_hall", mins=20, cond_=cond(HOT_FREE), eff=[cap("corruption", 1, 79)] + HOT_PAY, flags=HOT_FLAG, wardrobe=DRESS_BACK),
-    go("Back to your room.", loc="home_hall", mins=20, cond_=cond(flag("ryan_hot_today")), eff=[cap("corruption", 1, 79)], wardrobe=DRESS_BACK),
+    go("Back to your room.", loc="home_ella_room", mins=20, cond_=cond(HOT_FREE), eff=[cap("corruption", 1, 79)] + HOT_PAY, flags=HOT_FLAG, wardrobe=DRESS_BACK),
+    go("Back to your room.", loc="home_ella_room", mins=20, cond_=cond(flag("ryan_hot_today")), eff=[cap("corruption", 1, 79)], wardrobe=DRESS_BACK),
 ]
 out.append({
     "id": "ryan_two_knocks", "name": "Two knocks on his door",
@@ -592,7 +594,7 @@ out.append({
             ME("Not tonight."),
             D(R, "Seriously? Fine. Another night, then. I'm not going anywhere."),
             P("Through the door you hear him drop back onto the bed, hard, and swear into his pillow."),
-        ], [go("Back to your room.", loc="home_hall", mins=1)]),
+        ], [go("Back to your room.", loc="home_ella_room", mins=1)]),
         # scene reader b02: 7s_b has him half asleep, which can't follow "I've been lying here listening for you",
         # so a booked night draws from a and c only
         node("start", "His room", [
@@ -612,7 +614,7 @@ out.append({
             D(R, "Seriously? Now? Look at me, @player.nickname."),
             P("He lets go of your ass, his cock still hard and pointing at you, and watches you pull your clothes back on without taking his eyes off your tits once."),
             D(R, "Next time you knock, you stay."),
-        ], [go("Back to your room.", loc="home_hall", mins=1)]),
+        ], [go("Back to your room.", loc="home_ella_room", mins=1)]),
         node("suck", "On your knees", [*voices("suck"),
             VID("a girl on her knees by a bed sucking a guy's cock late at night", "blowjob kneeling by his bed night", "she sucks her stepbrother quietly", pool_dir="sex/ryan_hot7_suck_t5"),
             D(R, "Fuck, your mouth. Every night. I want this every night."), ME("Then keep your door unlocked.")], TO_TWIST),
@@ -621,7 +623,7 @@ out.append({
             D(R, "Slow down. The headboard. Slow down."), ME("No. Hold my hips and take it.")], TO_TWIST),
         node("lick", "His mouth", [*voices("lick"),
             VID("a guy eating a girl out on his bed, her hand over her mouth", "he eats her out she covers mouth", "cunnilingus quiet late night", pool_dir="sex/ryan_hot7_lick_t5"),
-            ME("Right there. Ryan. Right there, don't move."), D(R, "Come on my face, then. Quietly.")], TO_TWIST),
+            ME("Right there. Ryan. Right there, don't move."), D(R, "Come on my cock, then. Quietly.")], TO_TWIST),
         node("wall_back", "Against the wall", [*voices("wall"),
             VID("a girl kneeling on a bed, palms on the wall, fucked from behind", "from behind palms on wall", "doggy against the bedroom wall", pool_dir="sex/ryan_hot7_wall_t5"),
             D(R, "Look at you. Ass up for me, against your own wall."), ME("Harder. Make it knock.")], TO_TWIST),
@@ -761,7 +763,8 @@ out.append({
             G(cond(SHY), T("You should knock first. You should stop looking at his arms.")),
             G(cond(WARM, trait("ryan_step", "gte", 0)), T("You like it when he looks. You like it more when he tries not to.")),
         ], [
-            go("Sit and talk.", node="talk", mins=30, cond_=cond(flag("ryan_talk_today", False)),
+            go("Sit and talk.", node="talk", mins=30, cond_=cond(flag("ryan_talk_today", False),   # reader 2026-11-04: the talk has the two of them alone on his bed
+                                                                 {"type": "npc_at_location", "location_id": "home_ryan_room", "npc_id": "npc_kayla", "operator": "is_absent"}),
                flags=[fset("ryan_talk_today")], eff=[{"targetType": "npc", "npcId": R, "trait": "warmth", "op": "add", "value": 2, "cap": 100}]),
             go("\"I'm short on the rent.\"", node="cover", mins=10,
                cond_=cond(wd(5), tod("07:30", "12:00"), trait("money", "lt", 75), flag("rent_starts"),
@@ -781,7 +784,7 @@ out.append({
         ]),
         *RT_ROOM[2],
         *[hot_node(n, label, media, exits) for n, label, gate, wardrobe, media, exits in HOT_ROOM],
-        stink_node("home_hall"),
+        stink_node("home_bathroom"),   # reader 2026-11-04: "Go and shower." lands at the shower
         node("talk", "Talk", [
             POOL(
                 P("You sit on the end of his bed and he tells you about the yard, about a guy who dropped a pallet on his own foot. You laugh. He watches you laugh."),
@@ -880,7 +883,7 @@ out.append({
        + [c for n, label, gate, wardrobe, _m, _x in HOT_COUCH for c in hot_choice(n, label, gate + [LAURA_NOT_HERE(LR)], wardrobe)]
        + [go("Leave him to it.", loc="home_hall")]),
        *ln, *fn, *RT_LIVING[2],
-       *[hot_node(n, label, media, exits) for n, label, gate, wardrobe, media, exits in HOT_COUCH], stink_node("home_living_room")]})
+       *[hot_node(n, label, media, exits) for n, label, gate, wardrobe, media, exits in HOT_COUCH], stink_node("home_bathroom")]})
 
 # ── Laura opens the door (ryan_laura_opens_the_door.md, signed 2026-11-01; moved from Laura's ladder, was laura_04):
 #    the first Saturday afternoon on the couch with her feet in his lap while Laura is home, dressing upstairs. Once. ──

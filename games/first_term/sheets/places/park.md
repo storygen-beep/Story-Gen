@@ -1,5 +1,7 @@
 # [REVIEW] Place — Park
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. The run pays Exhibitionism +1, cap 19, with no bra or no top.
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
@@ -33,7 +35,7 @@
 | row | kind | system | cost and effect, with op | BRAKE | on a screen? |
 |---|---|---|---|---|---|
 | walk | work | park | one walk event | once a day, on the trigger | yes |
-| run | work | park · wardrobe | energy add −10 · exhibitionism add +1 if Daring | once a day; energy on the trigger | yes |
+| run | work | park · wardrobe | energy add −10 · exhibitionism add +1, cap 19, with no bra or no top (DECISIONS 176) | once a day; energy on the trigger | yes |
 | rest on a bench | need | energy | energy add +5 | once a day, on the trigger | yes: her body |
 | Zoe, running | person | Zoe's ladder · park | her dare: a flash (Curious) · somewhere hidden (Bold) | once a day, her window | yes |
 | the next locked act | — | park | shown with what it needs: "Needs Corruption 60" | — | yes, one line |

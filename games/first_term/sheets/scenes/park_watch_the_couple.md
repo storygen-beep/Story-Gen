@@ -1,5 +1,7 @@
 # [REVIEW] Scene — park_watch_the_couple
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Touching pays +1, not +2.
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 
 > The signed plans behind this page: `proposals/COPY_FIXES_C.md`.
@@ -18,7 +20,7 @@
 | who | two strangers, adults, in the bushes; they never learn who she is |
 | what she wears here | not named |
 | BRAKE | once a day, on the walk's trigger |
-| raises | "Look a second longer.": +1 (cap 19) · "Stay and watch.": +1 (cap 39) · touching: +2 (cap 39) |
+| raises | "Look a second longer.": +1 (cap 19) · "Stay and watch.": +1 (cap 39) · touching: +1 (cap 39) |
 | the crude-word ceiling | tits, nipples, ass, cock, wet, clit · no cunt, fuck, cum, pussy (LO, 2026-10-08) |
 
 ## Branch map — as built (2026-11-03)
@@ -37,7 +39,7 @@ One row per exit. Read from the build; it replaces the drafted map.
 | `linger` | You stay. | yes | "Keep walking." → Park | Corruption +1 (cap 19) · `saw_the_couple` set |
 | `watch` | Behind you on the path a jogger thuds past. | yes | "Leave before they see." → Park | Corruption +1 (cap 39) · `saw_the_couple` set |
 | | | | "Touch yourself while you watch." → `touch` | — |
-| `touch` | A dog barks somewhere along the path, and you freeze with your hand on your belly, … | yes | "Slip away." → Park | Corruption +2 (cap 39) · `saw_the_couple` set |
+| `touch` | A dog barks somewhere along the path, and you freeze with your hand on your belly, … | yes | "Slip away." → Park | Corruption +1 (cap 39) · `saw_the_couple` set |
 | `away` | You turn round and walk the other way, fast, and don't look back, but your face … | no | "Back to the pond." → Park | — |
 
 ## The explicit beats, as built (2026-11-03)

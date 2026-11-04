@@ -251,7 +251,7 @@ LOCATIONS = [
                  dict(text="Go in.",
                       conditions=cond({"type": "npc_at_location", "location_id": "home_ryan_room",
                                        "npc_id": "npc_ryan", "operator": "is_absent"}),
-                      show_when_locked=True, locked_text="He's in there. Knock first.",
+                      # no greyed line while he's in: "Knock." says it, and with Kayla there the shut door gets one line (Q14)
                       goes_to={"type": "enter"}),
              ])),
     dict(id="home_bathroom", name="Bathroom", entry_from="home_hall", kind="destination",

@@ -64,7 +64,7 @@ out.append({
         ], [
             # false lines a3 #20 (reader): Nadia is met here, after the screen that introduces her has rendered.
             # The guy beside her and the rival are not on this screen, so it does not meet them (pass 4 C36):
-            # the Psychology class row sets desk_guy_met / rival_met where they are.
+            # the Psychology class row sets desk_guy_met; she meets the rival at the first Business class.
             go("Pick it up.", node="pen", mins=2, flags=[fset("nadia_met")]),
             go("Leave it.", node="left", mins=2, flags=[fset("nadia_met")]),
         ]),
@@ -278,7 +278,7 @@ out.append({
         ], [go("Let him.", node="roll", mins=1, costs=[{"trait": "energy", "value": 10}], eff=[{"targetType": "player", "trait": "hale_claire_roll", "op": "set", "value": {"type": "random", "min": 1, "max": 4}}]),
             go("\"This isn't coaching.\"", node="isnt", mins=2, eff=[add("grade_psych", -1) | {"clamp": True}]),
             go("Run.", node="run", mins=1, eff=[add("grade_psych", -2) | {"clamp": True}])]),   # clamp: the grade floors at 0
-        node("roll", "His hands", [P("He comes round the desk.")],
+        node("roll", "His hands", [P("He looks you over across the desk.")],
             [go("Go on.", node="claire_car", mins=1, cond_=cond(ROLL("eq", 1)))]
             + [go("Go on.", node="touch_low", mins=1, cond_=cond(ROLL("gte", 2), *c), eff=[SEX_HYGIENE]) for c in LOW_CASES]
             + [go("Go on.", node="touch_high", mins=1, cond_=cond(ROLL("gte", 2), *HIGH), eff=[SEX_HYGIENE])]),

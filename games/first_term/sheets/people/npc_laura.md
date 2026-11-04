@@ -1,5 +1,7 @@
 # [REVIEW] Person — Laura
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Sunday 00:00–01:00 is its own awake row.
+
 > Changed 2026-11-04 (LO's answers Q7, Q8): one hall, so her late catch is in the dark hall and the stairs lines say the hall or the living room; her Love-70 towel line stays as it is (LO: OK). She keeps no Want meter. Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. She keeps warmth only; the build has no Want for her. The moment column names each step's kind and stage. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build.
@@ -45,13 +47,14 @@
 | `home_master_bedroom` | Mon, Tue, Wed, Thu, Fri, Sun | 22:00 | 23:00 | awake and alone, Mark in the living room: `laura_alone_in_bed` (DECISIONS 82, changed 2026-10-29, re-signed by LO 2026-10-29) |
 | `home_master_bedroom` | Mon, Tue, Wed, Thu, Fri, Sun | 23:00 | 06:30 | sleeps; dresses Saturday |
 | `home_master_bedroom` | Sat | 00:00 | 07:00 | sleeps; dresses Saturday |
-| `home_master_bedroom` | Sun | 00:00 | 07:00 | sleeps; dresses Saturday |
+| `home_master_bedroom` | Sun | 00:00 | 01:00 | awake, with Mark: `master_door_saturday_night` (DECISIONS 80) |
+| `home_master_bedroom` | Sun | 01:00 | 07:00 | asleep |
 | `home_bathroom` | Sat | 16:30 | 17:00 | her shower before she dresses; the lock sticks halfway (new 2026-11-01, the shower gap) |
 | `home_master_bedroom` | Sat | 17:00 | 18:30 | sleeps; dresses Saturday |
 | `home_living_room` | Sat | 22:00 | 00:00 | waiting up, Saturday |
 
 **Sun 00:00–01:00 she is awake** (changed 2026-10-29, re-signed by LO 2026-10-29): up from waiting up, Mark takes
-her, and she lies awake after (`master_door_saturday_night`). Same row, same place; only the line changes.
+her, and she lies awake after (`master_door_saturday_night`). It is its own schedule row, and the row after it has her asleep.
 
 **Row order matters.** The engine takes the first matching row, so her dark-hall row is first. Saturday 00:00–07:00 covers Friday night. Her night row ends 06:30 (all LO, 2026-10-08).
 

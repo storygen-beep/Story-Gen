@@ -1,5 +1,7 @@
 # [REVIEW] System — job
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. Levels 4 and up have no button (DECISIONS 132).
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. File and line cites removed.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the café customers, from
@@ -58,8 +60,7 @@ it is shut. Classes and shifts overlap; she picks.
 - **The sexy uniform is her choice** (Tom doesn't push it). It opens level 2 early and adds +50% to tips.
 - **The no is written at every level** and costs only tips, never her job.
 - **After Tom's step 3** (the window rule), level-3 scenes stop using the window seats.
-- **Levels 4 and up** (under the table, the back room, the regulars as a group) are a later release, shown locked with
-  the number.
+- **Levels 4 and up** (under the table, the back room, the regulars as a group) are a later release, with no button (DECISIONS 132).
 
 ## Gary, the regular
 

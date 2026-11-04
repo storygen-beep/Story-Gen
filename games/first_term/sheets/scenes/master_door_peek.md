@@ -1,5 +1,7 @@
 # [REVIEW] Scene — master_door_peek
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. (a) no word on his breath, in the prose and the branch map.
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. want, next step and hook rows.
 
 > Signed by LO: LO, 2026-10-29 ("sign all", in chat).
@@ -25,12 +27,12 @@
 
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
-| `peek` | (a) it's over: Mark lies spent, getting his breath back, Laura lies awake staring at the ceiling · (b) Mark sits up awake under the lamp, alone | no | "Close the door." → the hall | none |
+| `peek` | (a) it's over: Mark flat on his back, Laura lies awake staring at the ceiling · (b) Mark sits up awake under the lamp, alone | no | "Close the door." → the hall | none |
 
 ## Prose (one line per case, by who is in)
 
 - Opening, always: "You ease the handle down and open the door a finger's width. The lamp is still on."
-- (a) both in: "It's over. Mark's flat on his back with one arm over his eyes, getting his breath back. Laura lies awake beside him, staring at the ceiling, her nightdress still bunched up at her waist." (pass 4: Mark's row is awake till 01:00, so not snoring)
+- (a) both in: "It's over. Mark's flat on his back with one arm over his eyes. Laura lies awake beside him, staring at the ceiling, her nightdress still bunched up at her waist." (no word on his breath: he may have been snoring on the last screen)
 - (b) Mark only: "Mark's sitting up against the headboard under the lamp, awake and alone, his phone lit in his hand. Laura's side of the bed is empty."
 - Close, always: "Nobody looks at the door. You pull it to without a sound."
 

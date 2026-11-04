@@ -1,5 +1,7 @@
 # [REVIEW] Scene — ryan_06_after_the_shower
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. "Go to your room." lands in her room; `look` and `comes` take 0 minutes, drying off 21.
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the pay sits on a new last screen, `after6`; the step row. the explicit beats as built, measured.
 
 > **Changed 2026-11-01 after the build, signed by LO 2026-11-01 ("Signed, build them")** (the reader's FAILs; LO's picks in chat): `comes` ends on what comes next.
@@ -38,7 +40,7 @@
 | `door` | she steps out of the shower; the door swings open: Ryan | no | "Leave the towel." → `look` · "Reach for the towel." → parked | none |
 | `look` | she stays naked and leaves the towel; he stays in the doorway, pulls his cock out and strokes it while she watches | yes | "Watch him." → `comes` | exhibitionism add +3 · corruption add +1 (shown by choice, `meters.md` rule 3) |
 | `comes` | he comes, and Kayla calls "Babe?" from the hall as he does; he can't answer her | yes | "Take your time drying off." → `after6` | none |
-| `after6` | his door is open a hand's width when she comes out | no | "Go to your room." → the hall | Ryan's Want add +5 · `ryan_step` set 6 · `kayla_met` set |
+| `after6` | his door is open a hand's width when she comes out | no | "Go to your room." → her room | Ryan's Want add +5 · `ryan_step` set 6 · `kayla_met` set |
 
 "Reach for the towel." is the parked no: he backs out, red; the step waits a week.
 

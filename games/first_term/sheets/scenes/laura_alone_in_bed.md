@@ -1,5 +1,9 @@
 # [REVIEW] Scene — laura_alone_in_bed
 
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. The ceiling row says what the beats use; the guess is gone.
+
+> Changed 2026-11-04 to match the build; waits for LO's re-sign. `watch`: her words before the beat; `watch_after`: "Lie still."
+
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the gate row reads `laura_step` 2 as built; want, next step and hook rows. the explicit beats as built, measured. file and line cites cut.
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 2: `crack` gains one ungated line after the signed beat: "Her face is turned on the pillow toward the hall, toward Ryan's door. Her lips move around a word you can't hear, and her fingers go faster." Her want for Ryan on her body before `laura_04_she_saw_you` says his name. True every night of the window: Ryan's row has him in his room 22:00-06:45. The signed `crack` beat itself is unchanged.
@@ -24,7 +28,7 @@
 | what she wears here | not named |
 | BRAKE | once a night (20 hours, as Ryan's door) · after she watched, "Peek through the gap." → `laura_alone_peek`, pays nothing |
 | raises | the look: none · "Keep watching.": corruption add +1, cap 19 · `laura_gaps_watched` add +1 (counts toward her step 4) |
-| the crude-word ceiling | the park's: tits, nipples, ass, wet, clit · no cunt, fuck, cum, pussy (guess: LO to confirm for Laura) |
+| the crude-word ceiling | as built: tits, nipples, ass, wet, clit · no cunt, fuck, cum, pussy in its beats |
 
 ## Branch map — one row per screen
 
@@ -48,7 +52,7 @@
 | node | what happens (one line) | explicit? | exits (label → target) | effects, with op |
 |---|---|---|---|---|
 | `crack_after` | Laura on her side, back to the door, face to the wall, her hand between her thighs; she knows the door is open | yes | "Keep watching." → `watch_after` · "Pull the door to." → the hall | `saw_laura_alone`, `laura_alone_seen` set (on every exit) |
-| `watch_after` | she comes into the pillow, almost silent; she doesn't turn round; you go to your room | yes | "Back to your room." → her room | corruption add +1, cap 19 · `laura_gaps_watched` add +1 |
+| `watch_after` | she comes into the pillow, almost silent; she doesn't turn round; you go to your room | yes | "Lie still." → her room | corruption add +1, cap 19 · `laura_gaps_watched` add +1 |
 
 **`crack_after`** · 132 words · explicit words 5 · median sentence 8 · act rungs: hands · written by `v2-prose`, measured by `gates.py --beat`, 2026-11-01. "She is quieter than she used to be" is true only behind `laura_04_done`, where it shows.
 

@@ -37,9 +37,9 @@ that already exists.
 
 ## §1 — What the engine repairs for you, and what it cannot
 
-`setup.backfillStateDefaults` (`v2.py:18551`) runs from the `:passagestart` handler (`v2.py:18704`)
+`setup.backfillStateDefaults` (`v2.py:19966`) runs from the `:passagestart` handler (`v2.py:20119`)
 on **every passage**, and fill-if-absent merges the current default skeleton
-(`setup.stateDefaults`, `v2.py:3935`) into whatever the save carries. It never overwrites a value
+(`setup.stateDefaults`, `v2.py:4024`) into whatever the save carries. It never overwrites a value
 the player earned, and it is idempotent.
 
 **Add these freely. They reach an existing save on the next screen.**
@@ -163,7 +163,7 @@ forward canvas stays shut, and the "go and get it" reaction points at something 
 reaction, never on a lone burn-once grant.** Put an idempotent
 `wardrobeEffects = [ { action = "add", item_id = "…" } ]` on the canvas that already reacts to *you
 don't have it / it isn't on* — the out-of-cover reaction, the locked-door bounce, the wardrobe room.
-`setup.addToWardrobe` returns early when the item is already owned (`v2.py:1703`), so a normal player
+`setup.addToWardrobe` returns early when the item is already owned (`v2.py:1738`), so a normal player
 who merely took it off is untouched and sees no notification. Only the stranded save is healed, the
 instant it lands on that screen.
 

@@ -138,7 +138,7 @@ DARE_SAID = {"low_show": [WHO("Holy shit. Again. Do it again."), D(Z, "That's my
              "low_do": [D(C, "Fuck. Zoe should dare you more often."), D(Z, "Okay, okay, break it up before he proposes.")],
              "high_show": [WHO("Zoe, your friends are the best thing about this party."), D(Z, "Covered or not, babe, nobody here is forgetting those.")],
              "high_do": [D(C, "Please. Fuck. Please, okay? I'm begging."), D(Z, "You heard him. He begged. Dare done.")],
-             "z_show": [D(Z, "Mm. You taste like vodka. Again."), ME("Everyone's watching us."), D(Z, "That's the point, babe.")],
+             "z_show": [D(Z, "Mm. You taste good. Again."), ME("Everyone's watching us."), D(Z, "That's the point, babe.")],
              "z_do": [D(Z, "Slower. Make him wait for it."), D(C, "Jesus Christ, you two are going to kill me.")]}
 # scene reader b03 (2026-11-03): a dare beat that says "your top" is true only in a top. canv.top_or_dress keys on the
 # two going-out dresses being off, so in a cafe uniform, or in only a bra, it named a top she wasn't wearing. Here each
@@ -146,17 +146,17 @@ DARE_SAID = {"low_show": [WHO("Holy shit. Again. Do it again."), D(Z, "That's my
 UNIFORMS = ("cafe_uniform_normal", "cafe_uniform_sexy")
 def slot(s, on=True): return {"type": "clothing_slot", "slot": s, "operator": "equipped" if on else "unequipped"}
 NO_TOP_BRA = {   # (old, new) per beat: a bra and nothing over it
-    "low_show": [("You grab your top and yank it up to your chin.", "You grab your bra and yank it up to your chin."),
+    "low_show": [("You grab your top and everything under it and yank it all up to your chin.", "You grab your bra and yank it up to your chin."),
                  ("You pull your top down over your hard nipples, and your tits still tingle under it.", "You pull your bra back down over your hard nipples, and your tits still tingle under it.")],
     "low_do": [("Your nipples go hard under your top, and he feels them.", "Your nipples go hard through your bra, and he feels them.")],
     "high_do": [("Your nipples are tight against your top, and you're wet.", "Your nipples are tight against your bra, and you're wet.")],
-    "z_do": [("His hands slide up under your top and close on your bare tits.", "His hands push up under your bra and close on your bare tits.")]}
+    "z_do": [("His hands slide up under your top, shove aside whatever's in the way, and close on your bare tits.", "His hands push up under your bra and close on your bare tits.")]}
 NO_TOP_BARE = {   # nothing on top at all
-    "low_show": [("You grab your top and yank it up to your chin. Your tits are bare to him", "You're already bare on top, and you push your tits right out at him. They're bare to him"),
+    "low_show": [("You grab your top and everything under it and yank it all up to your chin. Your tits are bare to him", "You're already bare on top, and you push your tits right out at him. They're bare to him"),
                  ("You pull your top down over your hard nipples, and your tits still tingle under it.", "You cross your arms over your hard nipples, and your tits still tingle under them.")],
     "low_do": [("Your nipples go hard under your top, and he feels them.", "Your bare nipples go hard against his shirt, and he feels them.")],
     "high_do": [("Your nipples are tight against your top, and you're wet.", "Your bare nipples are tight in the open air, and you're wet.")],
-    "z_do": [("His hands slide up under your top and close on your bare tits.", "His hands slide up your stomach and close on your bare tits.")]}
+    "z_do": [("His hands slide up under your top, shove aside whatever's in the way, and close on your bare tits.", "His hands slide up your stomach and close on your bare tits.")]}
 
 
 def _swap(text, pairs):
@@ -205,14 +205,14 @@ out.append({
         node("dare", "Zoe's dare", [
             P("Zoe finds you in the crush, hooks her chin over your shoulder, and looks round the room like she's shopping."),
             *[G(cond(*items), D(Z, ZOE_LINE[t])) for t, cs in TIER.items() for items in cs],
-            G(cond(flag("keg_guy_dared")), P("The guy at the keg sees you and grins."), WHO("You again. I'm keeping my cup this time.")),
+            G(cond(flag("keg_guy_dared")), P("The guy at the keg sees you and grins."), WHO("You again. Back for more?")),
             G(cond(flag("cocky_guy_dared"), {"type": "npc_at_location", "location_id": "zoe_apartment", "npc_id": C, "operator": "is_present"}),
-              D(C, "You again. Where's my beer?")),
+              D(C, "You again. Come here.")),
         ], dare_choices + [
             go("\"Not tonight.\"", node="no", mins=1),
         ]),
         *dare_nodes,
-        node("no", "Boo", [ME("Not tonight, Zoe."), D(Z, "Boo. Next one's tamer."), P("She goes and dares the guy on the couch to drink something from the sink instead. He does.")],
+        node("no", "Boo", [ME("Not tonight, Zoe."), D(Z, "Boo. Next Friday, then."), P("She goes and dares the guy on the couch to drink something from the sink instead. He does.")],
              [go("Let her have her dare.", loc="zoe_apartment", mins=10, flags=[fset("party_cool_zoe")])]),   # pass 3 D39 (R7)
     ]})
 # one a party night: the dare's choices set zoe_dared; arriving at the party clears it
@@ -273,7 +273,7 @@ DARING_RUN = cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipp
 
 out.append({
     "id": "park_walk", "name": "Walk the path",
-    "description": "A walk in the park: who she passes, what they see. Once a day. The next locked act is shown, naming Corruption 60.",
+    "description": "A walk in the park: who she passes, what they see. Once a day.",
     "trigger": {"location": "park", "is_repeatable": True, "priority": 4, "is_active": True, "max_triggers_per_day": 1},
     "nodes": [node("path", "The path", [
         POOL(P("You walk the loop round the pond. Ducks, dog walkers, a man on a bench with a newspaper. He's reading it, but he lowers it as you pass."),
@@ -386,7 +386,7 @@ out.append({
         node("touch", "With him", [P("A dog barks somewhere along the path, and you freeze with your hand on your belly, but nobody comes."), P(TOUCH),
             WHO("Take it. Take all of it."), WHO("I'm coming. Oh God, I'm coming."),
             VID("a girl hidden in bushes touching herself while watching a couple have sex against a tree", "girl masturbating watching couple outdoors", "voyeur girl fingers herself in park", pool_dir="sex/park_couple_touch_t5")],
-            [go("Slip away.", loc="park", mins=10, eff=[capped("corruption", 2, CAP_CUR)], flags=[fset("saw_the_couple")])]),
+            [go("Slip away.", loc="park", mins=10, eff=[capped("corruption", 1, CAP_CUR)], flags=[fset("saw_the_couple")])]),
         node("away", "The other way", [P("You turn round and walk the other way, fast, and don't look back, but your face is burning anyway.")], [go("Back to the pond.", loc="park", mins=10)]),
     ]})
 
@@ -461,7 +461,7 @@ out.append({
           D(M, "That skirt doesn't bend over in my house, @player."),
           P("He stays in the living-room doorway and waits to see what you do.")),
         G(cond({"type": "npc_at_location", "location_id": "home_ryan_room", "npc_id": R, "operator": "is_present"}),
-          P("Ryan comes out of his room as you straighten up. You pass in the narrow hall, and he has to flatten himself to the wall, and his eyes go down your legs on the way past.")),
+          P("Ryan comes out of his room while you're still bent over. He has to flatten himself to the wall to pass you in the narrow hall, and his eyes go down your legs on the way past.")),
         G(cond({"type": "npc_at_location", "location_id": "home_kitchen", "npc_id": L, "operator": "is_present"}),
           D(L, "Is that for college or for a guy?")),
         G(cond(SKIRT, NO_PANTIES), P("There's nothing under the skirt. Anyone behind you in this hall gets your bare ass and your pussy."),
