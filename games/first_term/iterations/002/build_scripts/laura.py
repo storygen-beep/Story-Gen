@@ -731,9 +731,9 @@ out.append({
         node("call", "Mom", [
             # scene reader b03 (2026-11-03): the call rings wherever she is, her own room too, and no condition reads where
             # the player is (the kitchen with Laura too), so it never says she is away or tells her to come home
-            D(L, "Good, your phone's on, sweetheart. You know the rule. No parties, no late shifts, no dates."),
+            D(L, "You know the rule, sweetheart. No parties, no late shifts, no dates."),
         ], [go("\"I know. Not this week.\"", node="good", mins=2, flags=[fset("laura_call_today")]),
-            go("\"I'm staying at Zoe's.\"", node="talk", mins=2, eff=[susp(2)], flags=[fset("laura_call_today")],
+            go("\"You can't ground me forever.\"", node="talk", mins=2, eff=[susp(2)], flags=[fset("laura_call_today")],
                cond_=cond(flag("laura_call_today", False)))]),
         node("good", "The rule", [D(L, "That's all I wanted to hear, sweetheart.")], [go("Hang up.", ret=True)]),
         node("talk", "We'll talk", [D(L, "We'll talk about this."), P("She hangs up before you can answer.")], [go("Put the phone away.", ret=True)]),

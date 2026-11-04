@@ -259,7 +259,7 @@ def towel_set(hub, npc, meter, lo, hi, today, pay, back, lines=(), slip=None, sl
         nodes.append(node("towel_slip", slip_label.rstrip("."),
                           [*slip_lead, *[G(cond(*bands[i]), *bs) for i, bs in enumerate(slip)],
                            *([slip_media] if slip_media else [])],
-                          back_out("Tuck it back in.")))
+                          back_out("Go and find some clothes.")))
     if no:   # reader a3 #5-8 (DECISIONS 131): the top band's no costs him Want +1, once a day
         no_label, no_blocks, no_dest, no_exit = no
         top = [*base, *bands[2]]
