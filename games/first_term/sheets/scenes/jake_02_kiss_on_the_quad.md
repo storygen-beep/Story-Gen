@@ -1,7 +1,8 @@
-# [REVIEW] Scene — jake_02_kiss_on_the_quad
-> Changed 2026-11-04, LO's answers: the kiss adds campus_talk +1 (D, a real public act); waits for LO's re-sign.
+# [READY] Scene — jake_02_kiss_on_the_quad
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, LO's answers: the kiss adds campus_talk +1 (D, a real public act); signed by LO 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04.
 
 > The signed plans behind this page: `proposals/COPY_FIXES_B.md`.
 

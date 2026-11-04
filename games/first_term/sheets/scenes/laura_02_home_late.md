@@ -2,7 +2,7 @@
 
 > **MOVED 2026-11-01** (DECISIONS 113): No longer Laura's step: it becomes the curfew rule, owned by her suspicion (`npc_laura.md`). Rebuilt as `laura_curfew_rule.md` (same canvas, no longer a step). Kept on disk as the record.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. The shoes line is gone.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. The shoes line is gone.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

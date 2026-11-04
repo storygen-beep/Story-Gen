@@ -1,8 +1,9 @@
-# [REVIEW] Scene — laura_03b_all_dressed_up
+# [READY] Scene — laura_03b_all_dressed_up
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. "See you later, Mom." (it is early evening); "Hold still." 0 minutes, "Wait." 5.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. "See you later, Mom." (it is early evening); "Hold still." 0 minutes, "Wait." 5.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. "Wait." and the `liar` screen as built; the step row.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. "Wait." and the `liar` screen as built; the step row.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 

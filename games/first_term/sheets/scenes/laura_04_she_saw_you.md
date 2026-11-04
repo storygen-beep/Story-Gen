@@ -1,6 +1,7 @@
-# [REVIEW] Scene — laura_04_she_saw_you
+# [READY] Scene — laura_04_she_saw_you
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. "Stay where you are." pays cap 59 as built; the gate reads `laura_alone_seen`; the breakfast's second screen; the step row. the explicit beats as built, measured. file and line cites cut.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. "Stay where you are." pays cap 59 as built; the gate reads `laura_alone_seen`; the breakfast's second screen; the step row. the explicit beats as built, measured. file and line cites cut.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 

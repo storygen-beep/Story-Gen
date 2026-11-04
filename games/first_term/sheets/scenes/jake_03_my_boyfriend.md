@@ -1,6 +1,7 @@
-# [REVIEW] Scene — jake_03_my_boyfriend
+# [READY] Scene — jake_03_my_boyfriend
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04.
 
 > **Changed 2026-11-01, signed by LO 2026-11-01 ("Continue")** (DECISIONS 99–119): Jake's release-1 ladder (`sheets/people/npc_jake.md`, signed). **Merged** with built Jake 4 = Laura 5 (`laura_05_jake_at_the_door`, sheet marked moved): one step, one night. Changed: Laura in the dark living room, seen on `ryan`; her "Was he any good?" moves to `after`; her voice row. The signed screens stand; two lines are added, below.
 

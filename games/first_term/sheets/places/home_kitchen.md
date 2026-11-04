@@ -1,10 +1,11 @@
-# [REVIEW] Place — Kitchen
+# [READY] Place — Kitchen
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. The why row says the table, not a count (Q6).
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. The why row says the table, not a count (Q6).
 
 > Changed 2026-11-04 (LO's answer Q6: the rent page is the one count; Mark's Sunday table counts nothing). Waits for LO's re-sign.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The drawer reads `rent_short`. New section: what the heat proposal built here. Points at the copy fixes it took.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. The drawer reads `rent_short`. New section: what the heat proposal built here. Points at the copy fixes it took.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

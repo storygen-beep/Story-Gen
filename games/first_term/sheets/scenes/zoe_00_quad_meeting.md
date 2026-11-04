@@ -1,6 +1,7 @@
-# [REVIEW] Scene — zoe_00_quad_meeting
+# [READY] Scene — zoe_00_quad_meeting
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

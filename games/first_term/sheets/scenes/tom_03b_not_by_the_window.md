@@ -1,8 +1,9 @@
-# [REVIEW] Scene — tom_03b_not_by_the_window
+# [READY] Scene — tom_03b_not_by_the_window
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. His card's end line as built (DECISIONS 132).
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. His card's end line as built (DECISIONS 132).
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04.
 
 > The signed plans behind this page: `proposals/COPY_FIXES_C.md`.
 

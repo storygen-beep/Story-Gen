@@ -1,12 +1,13 @@
-# [REVIEW] Person — Mark
+# [READY] Person — Mark
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Walk-ins add the garden (the refill walk-in); "Go and change."; his step 4 line as built.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Walk-ins add the garden (the refill walk-in); "Go and change."; his step 4 line as built.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Laura's lace set is built.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Laura's lace set is built.
 
 > Changed 2026-11-04 (LO's answers Q3, Q6, Q7, Q10; pass 4 B51): the rent is counted once, by the rent page, and his Sunday scenes count nothing; he has left before breakfast on day one; he says "That's your mother's." in the lingerie walk-in; his repeatable after step 4 is a later release; one hall. Waits for LO's re-sign.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: his Saturday rows (DECISIONS 152). Step 3 reads `rent_short_weeks`. The moment column names each step's kind and stage. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. Grid: his Saturday rows (DECISIONS 152). Step 3 reads `rent_short_weeks`. The moment column names each step's kind and stage. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build.
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): rows 1, 5-6, 16: in his living-room hub, channel 5 beside him needs his accident (`mark_saw_her`), like "Leave it on."; in the towel at his top band (Power 60+, "Come here." / "Stand there.") a written no, "Get dressed.": "Suit yourself.", his Want +1 once a day (the towel's `mark_towel_today`, no new flag), and she goes up to her room; at step 3 (`mark_03_shorts`) both openings under Exhibitionism 20 name his look: "His eyes go down your legs under the table."
 

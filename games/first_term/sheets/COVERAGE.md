@@ -1,6 +1,7 @@
-# [REVIEW] Coverage — First Term
+# [READY] Coverage — First Term
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The café customers' scout card is now a source.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. The café customers' scout card is now a source.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

@@ -1,10 +1,11 @@
-# [REVIEW] Scene — mark_02_late_notice
+# [READY] Scene — mark_02_late_notice
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. her_line row: what the build says; the paying and losing-count lines are gone (Q6). The want row says the table, not a count.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. her_line row: what the build says; the paying and losing-count lines are gone (Q6). The want row says the table, not a count.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. `put`: he waits for her to put it back (she hasn't yet); "Go back to bed." lands in her room.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. `put`: he waits for her to put it back (she hasn't yet); "Go back to bed." lands in her room.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the second answer and its screen; the step row.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. the second answer and its screen; the step row.
 
 > **Changed 2026-11-01, signed by LO 2026-11-01 ("Signed")** (DECISIONS 99–115): Mark's release-1 ladder (`sheets/people/npc_mark.md`, signed). Changed: the gate is his step 1 done (his Want 10 dropped: his steps are paced by Sundays, a declared exception to taste rule 5); her voice row. The screens stand as built.
 

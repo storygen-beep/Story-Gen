@@ -1,8 +1,9 @@
-# [REVIEW] Scene — ryan_06_after_the_shower
+# [READY] Scene — ryan_06_after_the_shower
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. "Go to your room." lands in her room; `look` and `comes` take 0 minutes, drying off 21.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. "Go to your room." lands in her room; `look` and `comes` take 0 minutes, drying off 21.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the pay sits on a new last screen, `after6`; the step row. the explicit beats as built, measured.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. the pay sits on a new last screen, `after6`; the step row. the explicit beats as built, measured.
 
 > **Changed 2026-11-01 after the build, signed by LO 2026-11-01 ("Signed, build them")** (the reader's FAILs; LO's picks in chat): `comes` ends on what comes next.
 

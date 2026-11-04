@@ -1,12 +1,13 @@
-# [REVIEW] Scene — ryan_hot_repeatables
-> Changed 2026-11-04, LO's answers: "He stares at the screen. He's not following the game." (D, a team on TV is no audience); waits for LO's re-sign.
-> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
+# [READY] Scene — ryan_hot_repeatables
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, LO's answers: "He stares at the screen. He's not following the game." (D, a team on TV is no audience); signed by LO 2026-11-04.
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Row 6: Sunday only; Mark's TV is his radio in 6a-6c (no screen has a TV in the kitchen). "Go and shower." lands at the shower; row 7's "Back to your room." lands in her room.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Row 6: Sunday only; Mark's TV is his radio in 6a-6c (no screen has a TV in the kitchen). "Go and shower." lands at the shower; row 7's "Back to your room." lands in her room.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Where Mark is: the living room, in the notes only (Q7). No beat changed.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Where Mark is: the living room, in the notes only (Q7). No beat changed.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. row 6's Exhibitionism cap 39; row 7 has no "Further." and gains "Leave him to it."; the acts' "Don't stop." and hygiene cost; one media slot per finish; the pools as built; want, next step and hook rows. the explicit beats as built, measured. file and line cites cut.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. row 6's Exhibitionism cap 39; row 7 has no "Further." and gains "Leave him to it."; the acts' "Don't stop." and hygiene cost; one media slot per finish; the pools as built; want, next step and hook rows. the explicit beats as built, measured. file and line cites cut.
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 127) (LO: "cant we have more in the sex screens", "B, sheet it"): row 7
 > becomes a menu. A short normal start at the door, then she picks the act; more acts open as his Lust climbs;

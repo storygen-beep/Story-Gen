@@ -1,7 +1,8 @@
-# [REVIEW] Place — Clothes Shop
-> Changed 2026-11-04, LO's answers: the curtain needs Exhibitionism 20 and pays to cap 39 (B); waits for LO's re-sign.
+# [READY] Place — Clothes Shop
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, LO's answers: the curtain needs Exhibitionism 20 and pays to cap 39 (B); signed by LO 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. New section: what the heat proposal built here. Points at the copy fixes it took.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

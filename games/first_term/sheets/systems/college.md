@@ -1,12 +1,13 @@
-# [REVIEW] System — college
+# [READY] System — college
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. File and line cites removed.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. File and line cites removed.
 
 > **Changed 2026-11-02** (reader fails a3, signed by LO 2026-11-02, DECISIONS 131): rows 19, 24–28, 42 (see `npc_bio_ta.md`, `npc_cocky_guy.md`, `college_class_figure.md`, `college_event_desk_guy.md`). The dress-code warning's skirt line is "Their eyes go to your bare thighs below the skirt, and away."
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the first college day and the timetable screen, from `proposals/R1_SYSTEM_COLLEGE_DAY.md` (signed 2026-11-01). Added: the opening hands her to the dean, the dean's office (one time), Hale's week-one window, the timetable screen (engine shipped, DECISIONS 112), the week-one card. Everything else as signed.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. The 2026-10-29 locked-button note (DECISIONS 90) is corrected: "Needs Corruption 60" and "Needs Exhibitionism 60" are no longer in the game, because the buttons for scenes this release does not write were removed (DECISIONS 132). Any line below that still names one is superseded by that row.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. The 2026-10-29 locked-button note (DECISIONS 90) is corrected: "Needs Corruption 60" and "Needs Exhibitionism 60" are no longer in the game, because the buttons for scenes this release does not write were removed (DECISIONS 132). Any line below that still names one is superseded by that row.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

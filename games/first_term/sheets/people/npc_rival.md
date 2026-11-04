@@ -1,6 +1,7 @@
-# [REVIEW] Person — the rival girl
+# [READY] Person — the rival girl
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Met at her first Business class, not Psychology.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Met at her first Business class, not Psychology.
 
 > Signed by LO: LO, 2026-10-08.
 

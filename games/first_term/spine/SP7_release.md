@@ -1,11 +1,12 @@
-# [REVIEW] SP7 · The release page — First Term
+# [READY] SP7 · The release page — First Term
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. LO's waivers beside the BLOCK list; padding cut (the ledger's `her_moment` note is in DECISIONS, where the sheets and the ledger differ, row 13).
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. What the ledger's `her_moment` lists.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. LO's waivers beside the BLOCK list; padding cut (the ledger's `her_moment` note is in DECISIONS, where the sheets and the ledger differ, row 13).
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. What the ledger's `her_moment` lists.
 > Changed 2026-11-04: the ledger's release_page line says what it holds; the Sunday table counts nothing (Q6). Waits for LO's re-sign.
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04.
 > Replaced by the plans approved on 2026-11-01 and 2026-11-03 (DECISIONS 124, 132, 134): the 2026-10-08 people row (Ryan A 9 · Laura C 8 · Mark A 9 · Hale B 5 · Tom B 6) and its door. Do not build from them.
-> [REVIEW] (was [READY]) · drafted 2026-10-07 · updated 2026-10-08 · signed by LO: LO, 2026-10-08
+> [READY] · drafted 2026-10-07 · updated 2026-10-08 · signed by LO: LO, 2026-10-08
 > ≤ 400 words. Rules: `the-spine.md` SP7 · `the-release.md`.
 
 | decision | answer |
@@ -20,7 +21,7 @@
 | **scenes replay-ready** | yes |
 | BLOCK list (`--ship`) | the fixed list in `gates.py`. LO's waivers stand beside it: 48 `release_page.reader_waivers` and 7 `decided` waives |
 | REPORT list (`--ship`) | the fixed list in `gates.py`; nothing added |
-| signed by LO, with the date | LO, 2026-10-07; the ship sign-off comes after the playtest |
+| signed by LO, with the date | LO, 2026-11-04; the ship sign-off comes after the playtest |
 
 **LO's calls that still hold**
 1. **No button for a scene this release does not write** (DECISIONS 132).

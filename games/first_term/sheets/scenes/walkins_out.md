@@ -1,12 +1,13 @@
-# [REVIEW] Scenes — the walk-ins outside the house (B9-B20)
-> Changed 2026-11-04, LO's answers: the gym's "Finish your set." needs Exhibitionism 60 and pays to cap 79, a group seeing her is stage 4 (B); waits for LO's re-sign.
-> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
+# [READY] Scenes — the walk-ins outside the house (B9-B20)
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, LO's answers: the gym's "Finish your set." needs Exhibitionism 60 and pays to cap 79, a group seeing her is stage 4 (B); signed by LO 2026-11-04.
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. B14: "Strip and get in."; "Let her." needs Exhibitionism 60, pays both meters, costs Energy 10 and Hygiene 10.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. B14: "Strip and get in."; "Let her." needs Exhibitionism 60, pays both meters, costs Energy 10 and Hygiene 10.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. The built-differently items are confirmed, DECISIONS 170.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. The built-differently items are confirmed, DECISIONS 170.
 
-> New 2026-11-03 (third alignment pass), written from the build; waits for LO's sign. The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`, part B (signed by LO 2026-11-03, DECISIONS 147; built in DECISIONS 150-151).
+> New 2026-11-03 (third alignment pass), written from the build; signed by LO 2026-11-04. The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`, part B (signed by LO 2026-11-03, DECISIONS 147; built in DECISIONS 150-151).
 
 How every walk-in works in the build: she does something alone; on entry the host rolls the odds; on a hit this screen shows instead. Screen 1 is the moment and pays his meter where he has one; screen 2 is her answer. The odds rise with her stage (0.25, 0.35, 0.45). Each walker comes once a day (a `_today` flag cleared at midnight).
 

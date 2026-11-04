@@ -1,8 +1,9 @@
-# [REVIEW] Scene — hale_01_first_lecture
+# [READY] Scene — hale_01_first_lecture
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. This screen meets only Nadia; the rival is met at the first Business class.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. This screen meets only Nadia; the rival is met at the first Business class.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04.
 
 > The signed plans behind this page: `proposals/COPY_FIXES_B.md`.
 

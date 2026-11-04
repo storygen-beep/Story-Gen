@@ -1,10 +1,11 @@
-# [REVIEW] Person — Zoe
+# [READY] Person — Zoe
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Walk-ins add the women's toilet (the refill walk-in).
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Walk-ins add the women's toilet (the refill walk-in).
 
 > Changed 2026-11-04 (LO's answer Q5): a no-show or an ignored invite costs her patience: her next weekly invite waits about six days, and she says so in a text. Waits for LO's re-sign.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Grid: her three class rows. The moment column names each step's kind and stage. No locked next-dare button; only her card names it. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 3 to 23:30; step 5 at her apartment to 01:45.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. Grid: her three class rows. The moment column names each step's kind and stage. No locked next-dare button; only her card names it. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 3 to 23:30; step 5 at her apartment to 01:45.
 
 > **Changed 2026-11-02** (reader fails a3, signed by LO 2026-11-02, DECISIONS 131): rows 20, 21, 23, 36–41. Short skirt line: "Her eyes go down your bare legs to the hem, and she bites her lip." · "Now we're talking. Not here, babe." ("Later, babe." in her flat and bedroom). Canteen Mon–Wed: "Friday's coming, babe. Start planning." Class pool adds "Party's Friday. You're coming." Park dare, both branches: "Tomorrow I'm daring you again." (Sat) / "Next weekend I'm daring you again." (Sun); "again", not the sheet's "worse", because no worse park dare is built.
 

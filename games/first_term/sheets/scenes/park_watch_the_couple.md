@@ -1,8 +1,9 @@
-# [REVIEW] Scene — park_watch_the_couple
+# [READY] Scene — park_watch_the_couple
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Touching pays +1, not +2.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Touching pays +1, not +2.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04.
 
 > The signed plans behind this page: `proposals/COPY_FIXES_C.md`.
 

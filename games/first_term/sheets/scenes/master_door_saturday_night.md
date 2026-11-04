@@ -1,6 +1,7 @@
-# [REVIEW] Scene — master_door_saturday_night
+# [READY] Scene — master_door_saturday_night
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. want, next step and hook rows. the explicit beats as built, measured.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. want, next step and hook rows. the explicit beats as built, measured.
 
 > Signed by LO: LO, 2026-10-29 ("sign all", in chat).
 

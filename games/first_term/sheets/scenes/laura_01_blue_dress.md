@@ -1,8 +1,9 @@
-# [REVIEW] Scene — laura_01_blue_dress
+# [READY] Scene — laura_01_blue_dress
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. The invite's button: "Follow her to her room." (Q7). The first screen's id is still `upstairs` in the build.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. The invite's button: "Follow her to her room." (Q7). The first screen's id is still `upstairs` in the build.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the first screen is `upstairs`, "Try it on."; the cap; the step row.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. the first screen is `upstairs`, "Try it on."; the cap; the step row.
 
 > **Changed 2026-11-01, signed by LO 2026-11-01 ("Go ahead")** (DECISIONS 99–114): Laura's release-1 ladder (`sheets/people/npc_laura.md`, signed). Changed: the step pays Love +5 and Exhibitionism +3 (Want +10 dropped: nothing of hers reads Want); her voice rows added. The screens and lines stand as built.
 

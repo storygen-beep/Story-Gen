@@ -1,6 +1,7 @@
-# [REVIEW] The Want — First Term
-> Changed 2026-11-04, LO's answers: her old bedroom key (C), Laura's want reworded so she doesn't praise her as a child (A); waits for LO's re-sign.
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. The rent runs $75, $90, $100; the rent page takes it (Q6); goal 1 ends on four Sundays in a row; one hall (Q7).
+# [READY] The Want — First Term
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, LO's answers: her old bedroom key (C), Laura's want reworded so she doesn't praise her as a child (A); signed by LO 2026-11-04.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. The rent runs $75, $90, $100; the rent page takes it (Q6); goal 1 ends on four Sundays in a row; one hall (Q7).
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-09). One page, five parts. Doctrine: `references/the-want.md`.
 > **Re-read this before every release.** Bump `want.last_read_at_release` in `v2_state.json`.
 > Premise picked by LO 2026-10-02: **taboo at home** — the house is the centre; college, the job and
@@ -100,7 +101,7 @@ Zoe is the companion, one step ahead of Ella.
 1. What does release 41 add? A new person or a new room that reads the same two meters. Past
    Shameless and On Display, the climb turns to who she does it in front of: a crowd, a room
    watching, her feed. Each release adds one more of them, and the men she already has get a step
-   further. (My answer, added 2026-11-03 for the template's question; it waits for LO's check.)
+   further. (My answer, added 2026-11-03 for the template's question; signed by LO 2026-11-04.)
 2. What can she reach at the top that she cannot at the bottom? Ryan's bed, Laura's trust used
    the other way, Mark's rent paid her own way, Vance's porch, the professor's office.
 3. Which person would a player miss if deleted, and what does he want back? Ryan — her, and the

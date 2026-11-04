@@ -4080,76 +4080,74 @@
     "door_note": "No release door (LO 2026-11-03, S12 b; DECISIONS 134): every arc's last quest card says where this release ends. Ryan's \"Further.\" on Corruption 60 was removed.",
     "rejections": [],
     "rejections_note": "none recorded in the third pass (2026-11-03); LO's rulings that night are skill decisions and signed later/waive calls, logged in DECISIONS 132-153 and in `decided`",
-    "reader_note": "2026-11-04, LO's answers round: 45 scenes re-read (everything changed since the last commit, and every scene still marked FAIL), 13 fails, all fixed after that read, so they stand as FAIL here until the next read. Earlier today: 138 scenes, 83 fails; then 63 scenes, 34 fails. A re-read is owed before --ship."
+    "reader_note": "2026-11-04, LO's answers round: 45 scenes re-read (everything changed since the last commit, and every scene still marked FAIL), 13 fails, all fixed after that read, so they stand as FAIL here until the next read. Earlier today: 138 scenes, 83 fails; then 63 scenes, 34 fails. A re-read is owed before --ship.",
+    "last_signed": {
+      "by": "LO",
+      "at": "2026-11-04",
+      "note": "\"Sign it\": the whole page list, one signature. His release play is still owed."
+    }
   },
   "spine": {
     "pages": [
       {
         "id": "SP1",
-        "status": "REVIEW",
+        "status": "READY",
         "drafted_at": "2026-10-03",
         "updated_at": "2026-10-08",
         "signed_by": "LO",
-        "signed_at": "2026-10-08",
-        "changed_at": "2026-11-03",
-        "note": "changed 2026-11-03/04 to match the build (third and fourth passes); waits for LO's re-sign"
+        "signed_at": "2026-11-04",
+        "changed_at": "2026-11-03"
       },
       {
         "id": "SP2",
-        "status": "REVIEW",
+        "status": "READY",
         "drafted_at": "2026-10-04",
         "updated_at": "2026-11-01",
         "signed_by": "LO",
-        "signed_at": "2026-11-02",
-        "changed_at": "2026-11-03",
-        "note": "changed 2026-11-03/04 to match the build (third and fourth passes); waits for LO's re-sign"
+        "signed_at": "2026-11-04",
+        "changed_at": "2026-11-03"
       },
       {
         "id": "SP3",
-        "status": "REVIEW",
+        "status": "READY",
         "drafted_at": "2026-10-07",
         "updated_at": "2026-10-08",
         "signed_by": "LO",
-        "signed_at": "2026-10-08",
-        "changed_at": "2026-11-03",
-        "note": "changed 2026-11-03/04 to match the build (third and fourth passes); waits for LO's re-sign"
+        "signed_at": "2026-11-04",
+        "changed_at": "2026-11-03"
       },
       {
         "id": "SP4",
-        "status": "REVIEW",
+        "status": "READY",
         "drafted_at": "2026-10-07",
         "signed_by": "LO",
-        "signed_at": "2026-10-07",
-        "changed_at": "2026-11-03",
-        "note": "changed 2026-11-03/04 to match the build (third and fourth passes); waits for LO's re-sign"
+        "signed_at": "2026-11-04",
+        "changed_at": "2026-11-03"
       },
       {
         "id": "SP5",
-        "status": "REVIEW",
+        "status": "READY",
         "drafted_at": "2026-10-07",
         "updated_at": "2026-10-08",
         "signed_by": "LO",
-        "signed_at": "2026-10-08",
-        "changed_at": "2026-11-04",
-        "note": "Changed 2026-11-04 to match the build; waits for LO's re-sign."
+        "signed_at": "2026-11-04",
+        "changed_at": "2026-11-04"
       },
       {
         "id": "SP6",
-        "status": "REVIEW",
+        "status": "READY",
         "drafted_at": "2026-10-07",
         "signed_by": "LO",
-        "signed_at": "2026-10-07",
-        "changed_at": "2026-11-04",
-        "note": "Changed 2026-11-04 to match the build; waits for LO's re-sign."
+        "signed_at": "2026-11-04",
+        "changed_at": "2026-11-04"
       },
       {
         "id": "SP7",
-        "status": "REVIEW",
+        "status": "READY",
         "drafted_at": "2026-10-07",
         "updated_at": "2026-10-08",
         "signed_by": "LO",
-        "signed_at": "2026-10-08",
-        "note": "changed 2026-11-03/04 to match the build (third and fourth passes); waits for LO's re-sign"
+        "signed_at": "2026-11-04"
       }
     ]
   },
@@ -9441,7 +9439,7 @@
       },
       "compared": "the 2026-11-01 snapshot (games/first_term_snapshots/20261101_r1_redesign_before) against the build at ce8551b1",
       "reset": "a save made before 2026-11-01 starts a new game: its counters and flags point at scenes that are gone. No public build had shipped, so only dev saves are affected. Nothing removed since ccda2a72.",
-      "signed": null
+      "signed": "LO 2026-11-04"
     },
     {
       "at": "0.1, before its first public build (2026-11-04)",
@@ -9458,7 +9456,7 @@
       "start_values_moved": [
         "npc_ryan want 20 to 0"
       ],
-      "signed": null,
+      "signed": "LO 2026-11-04",
       "note": "No public build yet, so no player save holds these."
     }
   ],

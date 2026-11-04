@@ -1,9 +1,10 @@
-# [REVIEW] Scene — zoe_02_bra_through_the_sleeve
-> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
+# [READY] Scene — zoe_02_bra_through_the_sleeve
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
 
 > Changed 2026-11-04 (one pool, one place): the kiss has its own words here, and the Curious copy has its own balcony, its own kiss and its own Saturday line. It no longer plays `zoe_dares` `low_do`. Waits for LO's re-sign.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04.
 
 > **Changed 2026-11-02** (reader fails a3, signed by LO 2026-11-02, DECISIONS 131): seen by the readers, the `sleeve` button "Give it back." became "Ask for it back." (Zoe doesn't have the bra yet when it shows; the build).
 

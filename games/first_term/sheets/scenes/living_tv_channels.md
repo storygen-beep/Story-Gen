@@ -1,9 +1,10 @@
-# [REVIEW] Scene — living_tv_channels (the remote)
-> Changed 2026-11-04, LO's answers: "Her moans fill the living room." (D, a loud TV is no audience); waits for LO's re-sign.
+# [READY] Scene — living_tv_channels (the remote)
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, LO's answers: "Her moans fill the living room." (D, a loud TV is no audience); signed by LO 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Ryan is across the hall; the sound bounces off the hall walls (Q7). The build does not read this sheet's beats.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Ryan is across the hall; the sound bounces off the hall walls (Q7). The build does not read this sheet's beats.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. C2's "Turn the sound up." and its screen; the walk-ins; Mark's plain channels pay him nothing; his channel 5 caps at 39; want, next step and hook rows. the explicit beats as built, measured. file and line cites cut.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. C2's "Turn the sound up." and its screen; the walk-ins; Mark's plain channels pay him nothing; his channel 5 caps at 39; want, next step and hook rows. the explicit beats as built, measured. file and line cites cut.
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 1: in Mark's hub, "Channel 5: the adult channel." shows only after his accident (`mark_saw_her`), the same gate as "Leave it on.", so the explicit beat beside him never opens before any sign that he wants her. Alone on the couch it is unchanged.
 

@@ -1,10 +1,11 @@
-# [REVIEW] Scene — ryan_01_hall_first_morning
+# [READY] Scene — ryan_01_hall_first_morning
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. `breakfast`: Mark has already left (Q10).
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. `breakfast`: Mark has already left (Q10).
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. The final no row is gone; the hall has three choices.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. The final no row is gone; the hall has three choices.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Ryan's +10 sits on "Open the door."; the card's buttons and exit; the step row.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. Ryan's +10 sits on "Open the door."; the card's buttons and exit; the step row.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 

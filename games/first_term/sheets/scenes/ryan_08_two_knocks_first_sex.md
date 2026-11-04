@@ -1,12 +1,13 @@
-# [REVIEW] Scene — ryan_08_two_knocks_first_sex
+# [READY] Scene — ryan_08_two_knocks_first_sex
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. The three finishes: "Lie there." also takes Energy 10 and Hygiene 10.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. The three finishes: "Lie there." also takes Energy 10 and Hygiene 10.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. `light`: Ryan's "Laura," cut (he calls her Mom).
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. `light`: Ryan's "Laura," cut (he calls her Mom).
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Where Mark is: the living room, in the notes only (Q7). No beat changed.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Where Mark is: the living room, in the notes only (Q7). No beat changed.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the talk and doubt buttons as built; his +5 sits on the three finishes, not the terms; no "Further." button; the step row. the explicit beats as built, measured. file and line cites cut.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. the talk and doubt buttons as built; his +5 sits on the three finishes, not the terms; no "Further." button; the step row. the explicit beats as built, measured. file and line cites cut.
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 127) (LO: "it should be like rise from normal, not jump straight to
 > fucking", "cant we have more in the sex screens", "B, sheet it"). The step now rises from a normal talk through

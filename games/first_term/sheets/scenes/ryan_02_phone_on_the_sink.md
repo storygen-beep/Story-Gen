@@ -1,8 +1,9 @@
-# [REVIEW] Scene — ryan_02_phone_on_the_sink
+# [READY] Scene — ryan_02_phone_on_the_sink
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Kayla's voice note: "after everyone's asleep" cut.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Kayla's voice note: "after everyone's asleep" cut.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. "That depends." and its screen; Kayla is met here; the step row.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. "That depends." and its screen; Kayla is met here; the step row.
 
 > **Changed 2026-11-01, signed by LO 2026-11-01 ("Signed")** (DECISIONS 99–113): Ryan's release-1 ladder (`sheets/people/npc_ryan.md`, signed). Changed: the gate drops Exhibitionism 20, the window starts 06:45, Want +5.
 

@@ -1,8 +1,9 @@
-# [REVIEW] SP2 · The ladders — First Term
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Mark: nobody counts the rent twice (Q6); the paid route and goal 1's body route are cut.
+# [READY] SP2 · The ladders — First Term
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Mark: nobody counts the rent twice (Q6); the paid route and goal 1's body route are cut.
 > Changed 2026-11-04: Ryan's Lust starts at 0 (Q1); his day-one final no is gone; Laura keeps no Want; one hall (Q7); Mark's and Tom's repeatables later (Q3). Waits for LO's re-sign.
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. No "(Next release)" buttons; a no moves nothing of his; Laura keeps Warmth only.
-> [REVIEW] (was [READY]) · drafted 2026-10-04 · updated 2026-10-08 (where each stage starts) · signed by LO: LO, 2026-10-08
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. No "(Next release)" buttons; a no moves nothing of his; Laura keeps Warmth only.
+> [READY] · drafted 2026-10-04 · updated 2026-10-08 (where each stage starts) · signed by LO: LO, 2026-10-08
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder, proposal a2): release 1 writes
 > stages 1–4; the raises per stage; the Heat line gains what pays and the accident rule; "(Next release)" locks.
 > A scaffold: what every later step stands on, so later releases add steps without breaking shipped

@@ -1,5 +1,6 @@
-# [REVIEW] Scenes — the walk-ins at home (B1-B8)
-> Changed 2026-11-04, LO's answers: Mark covers while her Corruption is under 20 in walkin_kitchen_mark and both walkin_tv_mark, "Good girl." reworded (E, A); waits for LO's re-sign.
+# [READY] Scenes — the walk-ins at home (B1-B8)
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, LO's answers: Mark covers while her Corruption is under 20 in walkin_kitchen_mark and both walkin_tv_mark, "Good girl." reworded (E, A); signed by LO 2026-11-04.
 
 > New 2026-11-03 (third alignment pass): written from the build, for LO to read and sign. The plan is the signed
 > heat proposal, `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`, part B (signed 2026-11-03, DECISIONS 147),

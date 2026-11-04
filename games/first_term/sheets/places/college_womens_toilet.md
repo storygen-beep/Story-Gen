@@ -1,6 +1,7 @@
-# [REVIEW] Place — Women's Toilet
+# [READY] Place — Women's Toilet
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. New row: the refill walk-in B23, Zoe at the stall door.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. New row: the refill walk-in B23, Zoe at the stall door.
 
 > Signed by LO: LO, 2026-10-08.
 

@@ -1,10 +1,11 @@
-# [REVIEW] Scene — mark_sunday_table
+# [READY] Scene — mark_sunday_table
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. He counts nothing: the want row, the line after his step 4 and pool line 4 as built (Q6).
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. He counts nothing: the want row, the line after his step 4 and pool line 4 as built (Q6).
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. `counted`: he squares up the envelope (no rent to fold on a $0 Sunday).
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. `counted`: he squares up the envelope (no rent to fold on a $0 Sunday).
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. 08:00–11:45 as built; the count's pays; want, next step and hook rows. file and line cites cut.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. 08:00–11:45 as built; the count's pays; want, next step and hook rows. file and line cites cut.
 
 > **New sheet 2026-11-01, signed by LO 2026-11-01 ("Signed")** (DECISIONS 99–115). The built canvas `mark_sunday_table`
 >, the Sunday count after Mark's step 1. Its old sheet was `mark_09`

@@ -1,9 +1,10 @@
-# [REVIEW] Opening — First Term
-> Changed 2026-11-04, LO's answers: she has an old key to her bedroom door and little else that's hers (C); waits for LO's re-sign.
+# [READY] Opening — First Term
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, LO's answers: she has an old key to her bedroom door and little else that's hers (C); signed by LO 2026-11-04.
 
 > Changed 2026-11-04 (LO's answer Q10; PICKS 17): Mark has already left for work, so his words are last night's on screen 3 and his RENT envelope sits at breakfast; Ryan is in the shower during breakfast; no final no on Ryan's first meeting; Laura's call names no stairs; the start-choice reactions as built. Waits for LO's re-sign.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. Every button quoted as built; the funnel ends in the dean's office; Ryan's +10 on "Open the door.".
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. Every button quoted as built; the funnel ends in the dean's office; Ryan's +10 on "Open the door.".
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 

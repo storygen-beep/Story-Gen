@@ -1,11 +1,12 @@
-# [REVIEW] SP4 · Loop and pressure — First Term
-> Changed 2026-11-04, LO's answers: lines brought to the build; waits for LO's re-sign.
-> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
+# [READY] SP4 · Loop and pressure — First Term
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, LO's answers: lines brought to the build; signed by LO 2026-11-04.
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Padding cut.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Padding cut.
 > Changed 2026-11-04: the ledger's week pay reads $504, and why it differs from this page's top week; the rent is counted once (Q6). Waits for LO's re-sign.
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
-> [REVIEW] (was [READY]) · drafted 2026-10-07 · signed by LO: LO, 2026-10-07
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04.
+> [READY] · drafted 2026-10-07 · signed by LO: LO, 2026-10-07
 > ≤ 400 words. Rules: `the-spine.md` SP4 · `the-economy.md`. Ledger: `board.economy`, `[settings.rent]`.
 
 | decision | answer |

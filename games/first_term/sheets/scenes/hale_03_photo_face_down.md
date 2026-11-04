@@ -1,6 +1,7 @@
-# [REVIEW] Scene — hale_03_photo_face_down
+# [READY] Scene — hale_03_photo_face_down
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04.
 
 > **Changed 2026-11-01, signed by LO 2026-11-01 ("Continue")** (DECISIONS 99–117): Hale's release-1 ladder (`sheets/people/npc_hale.md`, signed). Reworked as **Private coaching**: his office, the photo turned down, his offer, his hand on her shoulder. The canvas id stays. The lines below are mine, signed by LO 2026-11-01, except where marked built.
 

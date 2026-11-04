@@ -1,8 +1,9 @@
-# [REVIEW] System — job
+# [READY] System — job
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Levels 4 and up have no button (DECISIONS 132).
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Levels 4 and up have no button (DECISIONS 132).
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. File and line cites removed.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. File and line cites removed.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-01** ("Signed", DECISIONS 113; design DECISIONS 99–112): the café customers, from
 > `proposals/R1_SYSTEM_CAFE.md` (signed 2026-11-01), with pay from `proposals/R1_SYSTEM_RENT.md`. Changed: the shift,

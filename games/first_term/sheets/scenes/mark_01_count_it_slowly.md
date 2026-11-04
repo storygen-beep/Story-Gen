@@ -1,12 +1,13 @@
-# [REVIEW] Scene — mark_01_count_it_slowly
+# [READY] Scene — mark_01_count_it_slowly
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. her_line row: what the build says; the paying and losing-count lines are gone (Q6).
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. her_line row: what the build says; the paying and losing-count lines are gone (Q6).
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. "Give me a minute." (true in jeans too); "Go back to your room." lands in her room.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. "Give me a minute." (true in jeans too); "Go back to your room." lands in her room.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. The screens and buttons as built: he looks at her, not the money (Q6); "I'm saying it."; no stairs (Q7); her clothes come back on "Let me get dressed first."
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. The screens and buttons as built: he looks at her, not the money (Q6); "I'm saying it."; no stairs (Q7); her clothes come back on "Let me get dressed first."
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the count's two buttons; the Sunday count on both ways out; the step row.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. the count's two buttons; the Sunday count on both ways out; the step row.
 
 > **Changed 2026-11-01, signed by LO 2026-11-01 ("Signed")** (DECISIONS 99–115): Mark's release-1 ladder (`sheets/people/npc_mark.md`, signed). Changed: her voice row only. The screens, the gate and the pay (his Want +10, stored for a later release) stand as built.
 

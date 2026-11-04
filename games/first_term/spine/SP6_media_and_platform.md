@@ -1,7 +1,8 @@
-# [REVIEW] SP6 · Media and platform — First Term
+# [READY] SP6 · Media and platform — First Term
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Her face: LO picks it in a later release (signed 2026-11-03, E90).
-> [REVIEW] (was [READY]) · drafted 2026-10-07 · signed by LO: LO, 2026-10-07
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Her face: LO picks it in a later release (signed 2026-11-03, E90).
+> [READY] · drafted 2026-10-07 · signed by LO: LO, 2026-10-07
 > A decision record, ≤ 400 words. The rules: `references/the-spine.md` SP6 · `register.md` S1 · `engine.md` §34b.
 
 | decision | answer |

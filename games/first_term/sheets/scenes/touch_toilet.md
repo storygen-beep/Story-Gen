@@ -1,6 +1,7 @@
-# [REVIEW] Scene — touch_toilet
+# [READY] Scene — touch_toilet
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the explicit beats as built, measured.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. the explicit beats as built, measured.
 
 > Signed by LO: LO, 2026-10-08.
 

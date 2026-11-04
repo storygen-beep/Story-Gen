@@ -1,4 +1,5 @@
-# [REVIEW] Place — Home (the house, a building)
+# [READY] Place — Home (the house, a building)
+> Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-04 (LO's answer Q7: one hall; every room opens off it, and the house lines say the hall, not stairs or a landing). Waits for LO's re-sign.
 

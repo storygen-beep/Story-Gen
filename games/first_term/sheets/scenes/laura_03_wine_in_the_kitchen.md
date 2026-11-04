@@ -1,10 +1,11 @@
-# [REVIEW] Scene — laura_03_wine_in_the_kitchen
+# [READY] Scene — laura_03_wine_in_the_kitchen
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. `no`: "Say goodnight and go." as built (Q7).
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. `no`: "Say goodnight and go." as built (Q7).
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. `no`: she puts the empty glass back (only hers was poured).
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. `no`: she puts the empty glass back (only hers was poured).
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the parked no's own screen; the step row.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. the parked no's own screen; the step row.
 
 > **Changed 2026-11-01, signed by LO 2026-11-01 ("Go ahead")** (DECISIONS 99–114): Laura's release-1 ladder (`sheets/people/npc_laura.md`, signed). Changed: now her step 2 of 4; the gate is her Love 10 only (Corruption 20, Exhibitionism 20 and Want 20 dropped); it pays Love +5 and sets `laura_step` 2; voice rows added. The screens and lines stand as built.
 

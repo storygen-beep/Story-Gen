@@ -1,12 +1,13 @@
-# [REVIEW] Place — The Party House
+# [READY] Place — The Party House
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Zoe's "Let her." as built: both meters, its two gates, its cost.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Zoe's "Let her." as built: both meters, its two gates, its cost.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. She leaves the tub in what she came in (`remember_outfit`, `restore_outfit`).
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. She leaves the tub in what she came in (`remember_outfit`, `restore_outfit`).
 
 > Changed 2026-11-04 (LO's answer Q11: getting into the tub strips her, getting out dresses her). Waits for LO's re-sign.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. New section: what the heat proposal built here. Points at the copy fixes it took.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder a2): its gate or pay changes; the row is in `sheets/HEAT_LADDER_A2.md`.
 

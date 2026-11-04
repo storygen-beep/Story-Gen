@@ -1,7 +1,8 @@
-# [REVIEW] Scene — zoe_04_i_pick_the_dares
-> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
+# [READY] Scene — zoe_04_i_pick_the_dares
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04.
 
 > **Changed 2026-11-01, signed by LO 2026-11-01 ("Continue")** (DECISIONS 99–118): Zoe's release-1 ladder (`sheets/people/npc_zoe.md`, signed). Changed: the gate is her step 3 (Corruption 40 dropped); her admission and Ella's answer as the proposal ("I dared you instead of asking. I always do." / "Then keep daring me."); Zoe keeps picking (the built "From now on, I pick the dares." and Ella daring Zoe are cut); the repeat is now `zoe_dares`.
 

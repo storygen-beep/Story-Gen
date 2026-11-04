@@ -1,6 +1,7 @@
-# [REVIEW] Place — Your Street
+# [READY] Place — Your Street
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The quiet event is gone (DECISIONS 136). New section: what the heat proposal built here. Points at the copy fixes it took.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. The quiet event is gone (DECISIONS 136). New section: what the heat proposal built here. Points at the copy fixes it took.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

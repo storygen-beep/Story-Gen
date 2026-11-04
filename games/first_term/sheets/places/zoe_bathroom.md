@@ -1,8 +1,9 @@
-# [REVIEW] Place — Zoe's Bathroom
+# [READY] Place — Zoe's Bathroom
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. New row: the refill walk-in B24, the cocky guy at the loose bolt.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. New row: the refill walk-in B24, the cocky guy at the loose bolt.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. New section: what the heat proposal built here.
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 

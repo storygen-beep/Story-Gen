@@ -1,8 +1,9 @@
-# [REVIEW] Place — Garden
+# [READY] Place — Garden
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. New row: the refill walk-in B22, Mark on the back step.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. New row: the refill walk-in B22, Mark on the back step.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. New section: what the heat proposal built here. Points at the copy fixes it took.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. New section: what the heat proposal built here. Points at the copy fixes it took.
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): row 10: "Lie in the sun an hour. Let Mark look." needs Curious or Daring (two copies) and opens a short screen `sun_mark_look` with his reaction (beer low over his jeans; "You'll burn, @player." while the sun is up, "Fence is low, @player." after 19:00), clothes by the lounger's three slot checks. "Play up to Mark in the garage door." shows only bra-only; "Play up to Ryan's window." only bra-only or with the lotion open (Bold, his step 7), so neither lands on a screen with only "Not today.".
 

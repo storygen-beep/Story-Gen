@@ -1,9 +1,10 @@
-# [REVIEW] Scene — rent_short_1, rent_short_2, rent_short_3
-> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
+# [READY] Scene — rent_short_1, rent_short_2, rent_short_3
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. The key's first line as built, and the table in place of a count (Q6).
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. The key's first line as built, and the table in place of a count (Q6).
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the three read `rent_short`, not `rent_carried`; the fee's key; "Next week."; want, next step and hook rows. file and line cites cut.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. the three read `rent_short`, not `rent_carried`; the fee's key; "Next week."; want, next step and hook rows. file and line cites cut.
 
 > **New 2026-11-01, signed by LO 2026-11-01 ("Continue")** (DECISIONS 99–120). From the signed rent system (`sheets/systems/money_pressure.md`, "What a short Sunday costs").
 > Three Sunday-morning canvases at the kitchen table, before or as part of Mark's count. No explicit screen; the lines are mine.

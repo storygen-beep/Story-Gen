@@ -1,6 +1,7 @@
-# [REVIEW] Scene — ryan_door_ajar
+# [READY] Scene — ryan_door_ajar
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. C3's "Stay until his light goes off." and its screen; want, next step and hook rows. the explicit beats as built, measured.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. C3's "Stay until his light goes off." and its screen; want, next step and hook rows. the explicit beats as built, measured.
 
 > **Changed 2026-11-01, re-signed by LO 2026-11-02** ("Signed, go ahead and build"; DECISIONS 124, the heat ladder H7): the scene reads his Want. Under 30 he watches porn on his phone and her panties lie on the floor, untouched; from 30, the panties to his face (as built). Stays at Good Girl (DECISIONS 79).
 

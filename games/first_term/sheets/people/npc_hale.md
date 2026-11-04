@@ -1,6 +1,7 @@
-# [REVIEW] Person — Dr. Hale
+# [READY] Person — Dr. Hale
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. The moment column names each step's kind and stage. No locked button past the session; only his card names it. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 4 to 19:15; step 1 to 08:55.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. The moment column names each step's kind and stage. No locked button past the session; only his card names it. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 4 to 19:15; step 1 to 08:55.
 
 > **Changed 2026-11-02** (reader fails a3, signed by LO 2026-11-02, DECISIONS 131): rows 17, 18, 29. His class hub (`hub_hale_class`): at grade 40+, from his step 2, "Thursday, @player. My office." ("Tonight, @player. My office." on Thursday); before step 2, "See me if you're stuck." His office hub (`hub_hale_office`): step 1 "Front row tomorrow, @player. Where I can see you."; step 2 before 18:00 "After six, @player. Not before."; step 3 "Thursdays. Half past six, @player." (the sheet's "Thursday. After six." at step 1 and "Same time next week." at step 3 would be false there: step 3 opens only after step 2, and step 4 can open the same evening). No-bra line in his office: "His eyes go to your chest and stay there a second too long." before step 3, "His eyes go to your nipples, showing through what you're wearing." from step 3 (his crude column), then "He keeps the desk between you." The `hale_thursdays` description and his step-4 card now say Bold and Showing, as the trigger gates.
 

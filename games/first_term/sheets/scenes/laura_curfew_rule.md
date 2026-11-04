@@ -1,9 +1,10 @@
-# [REVIEW] Scene — laura_curfew_rule
-> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
+# [READY] Scene — laura_curfew_rule
+> Signed by LO: LO, 2026-11-04.
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. `stairs` and `high` no longer name her shoes or the bench she has left.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. `stairs` and `high` no longer name her shoes or the bench she has left.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. once a day; the truths by where she was; want, next step and hook rows.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. once a day; the truths by where she was; want, next step and hook rows.
 
 > **New 2026-11-01, signed by LO 2026-11-01 ("Go ahead")** (DECISIONS 99–114). From Laura's signed release-1 ladder
 > (`sheets/people/npc_laura.md`; `proposals/LAURA_R1_LADDER.md`). The built canvas `laura_02_home_late`, moved: no longer her step 2; a repeatable owned by her suspicion.

@@ -1,6 +1,7 @@
-# [REVIEW] Scene — ryan_03_shirt_off
+# [READY] Scene — ryan_03_shirt_off
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. his window starts 19:00; the cap; the step row.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. his window starts 19:00; the cap; the step row.
 
 > **Changed 2026-11-01, signed by LO 2026-11-01 ("Signed")** (DECISIONS 99–113): Ryan's release-1 ladder (`sheets/people/npc_ryan.md`, signed). Changed: gate Corruption 20 · his Want 20 (Exhibitionism 20 dropped); Laura calls down the hall while he strips (the risk); Want +5.
 

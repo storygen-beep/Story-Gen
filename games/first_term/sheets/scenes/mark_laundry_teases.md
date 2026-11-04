@@ -1,6 +1,7 @@
-# [REVIEW] Scene — mark_laundry_teases
+# [READY] Scene — mark_laundry_teases
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. want, next step and hook rows. the explicit beats as built, measured.
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. want, next step and hook rows. the explicit beats as built, measured.
 
 > **New 2026-11-02, signed by LO 2026-11-02** ("Signed, skip the play check, build it"; DECISIONS 128). LO: "not
 > dominance, not chores too, plain chores raises nothing, she can tease at a point, like when doing laundry tease

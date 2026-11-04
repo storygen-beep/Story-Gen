@@ -1,10 +1,11 @@
-# [REVIEW] SP1 · Time — First Term
+# [READY] SP1 · Time — First Term
+> Signed by LO: LO, 2026-11-04.
 
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. Padding cut: the flag names are in `[engine.daily_tick]`.
-> Changed 2026-11-04 to match the build; waits for LO's re-sign. The overnight counts: 128 flags, 42 of them walk-in caps.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Padding cut: the flag names are in `[engine.daily_tick]`.
+> Changed 2026-11-04 to match the build; signed by LO 2026-11-04. The overnight counts: 128 flags, 42 of them walk-in caps.
 > Changed 2026-11-04: the overnight list adds Zoe's and Jake's patience and two flags (Q5); Mark's table counts nothing (Q6). Waits for LO's re-sign.
-> Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
-> [REVIEW] (was [READY]) · drafted 2026-10-03 · updated 2026-10-08 (the clock in hours) · signed by LO: LO, 2026-10-08
+> Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04.
+> [READY] · drafted 2026-10-03 · updated 2026-10-08 (the clock in hours) · signed by LO: LO, 2026-10-08
 > A decision record, ≤ 400 words. Rules: `the-spine.md` SP1 · `the-clock.md` · `engine.md` §28.
 
 | decision | answer |
