@@ -35,11 +35,12 @@ def back(next_node, change="You change in the back room in front of the staff mi
 out.append({
     "id": "cafe_job_ask", "name": "Ask about the job",
     "description": "Meets Tom: the sign in the window. Sets cafe_job and tom_met; adds the café uniform.",
-    # Q2 (LO, 2026-11-04): opens from the coffee at the counter (extras.py cafe_coffee), not on entry, so the café's
-    # wardrobe link always shows
-    "trigger": {"location": "cafe", "requires_npc": TM, "is_repeatable": False, "priority": 10, "is_active": True,
+    # LO 2026-11-05: opens from its own row, cafe_job_row below, so the café's wardrobe link always shows (Q2) and the
+    # job isn't hidden behind a coffee. No requires_npc: Tom's schedule waits on tom_met and only this scene sets it, so
+    # needing him here locked the job (gate `nobody waits for themselves`).
+    "trigger": {"location": "cafe", "is_repeatable": False, "priority": 10, "is_active": True,
                 "substitution_only": True,
-                "consume_on": "exit", "retry_after_days": 1,   # "Not yet." parks it (tom_01_the_apron.md, signed 2026-11-01)
+                "consume_on": "exit", "retry_after_days": 1,   # "Not yet." parks it (tom_01_the_apron.md)
                 "schedules": [{"weekdays": [0, 1, 2, 3, 4, 5], "start_time": "08:00", "end_time": "23:00"}],
                 "conditions": cond(flag("opening_done"), flag("cafe_job", False))},
     "nodes": [
@@ -66,6 +67,19 @@ out.append({
         ], [go("Take the uniform.", loc="cafe", mins=5, consumes=True, flags=[fset("cafe_job"), fset("tom_met")],
                wardrobe=[{"action": "add", "item_id": "cafe_uniform_normal"}])]),
     ]})
+
+# The job's button. A one-time scene can't be a row, so this row hands over to it; its once a day matches "Not yet."
+# parking the scene till tomorrow, and cafe_job takes the row away for good. No schedules: the café's own hours are the
+# same, and a schedule would leave a greyed row after "Not yet." The screen shows only if the handover ever fails.
+out.append({
+    "id": "cafe_job_row", "name": "Ask about the job",
+    "description": "The button for the job: hands over to cafe_job_ask. Writes nothing.",
+    "trigger": {"location": "cafe", "is_repeatable": True, "priority": 3, "is_active": True, "max_triggers_per_day": 1,
+                "substitutions": [on_activity("cafe_job_ask", flag("opening_done"))],
+                "conditions": cond(flag("opening_done"), flag("cafe_job", False))},
+    "nodes": [node("card", "STAFF WANTED", [
+        P("The STAFF WANTED card is still taped inside the window. The man at the counter is busy with a customer."),
+    ], [go("Leave it for now.", loc="cafe")])]})
 
 # ── step 1 · Tom B 1 · the apron ──
 out.append({

@@ -17926,7 +17926,6 @@ description = "Meets Tom: the sign in the window. Sets cafe_job and tom_met; add
 
 [canvases.trigger]
 location = "cafe"
-requires_npc = "npc_tom"
 is_repeatable = false
 priority = 10
 is_active = true
@@ -18042,6 +18041,36 @@ time_progression_minutes = 5
 flagEffects = [{ targetType = "player", flag = "cafe_job", op = "set" }, { targetType = "player", flag = "tom_met", op = "set" }]
 wardrobeEffects = [{ action = "add", item_id = "cafe_uniform_normal" }]
 consumes = true
+
+[[canvases]]
+id   = "cafe_job_row"
+name = "Ask about the job"
+description = "The button for the job: hands over to cafe_job_ask. Writes nothing."
+
+[canvases.trigger]
+location = "cafe"
+is_repeatable = true
+priority = 3
+is_active = true
+max_triggers_per_day = 1
+substitutions = [{ target_canvas_id = "cafe_job_ask", chance = 1.0, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }] } }]
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "cafe_job", operator = "is_false" }] }
+
+[[canvases.nodes]]
+id   = "card"
+name = "STAFF WANTED"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The STAFF WANTED card is still taped inside the window. The man at the counter is busy with a customer."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave it for now."
+targetType = "location"
+locationId = "cafe"
 
 [[canvases]]
 id   = "tom_01_the_apron"
@@ -34850,7 +34879,7 @@ is_repeatable = true
 priority = 2
 is_active = true
 max_triggers_per_day = 1
-substitutions = [{ target_canvas_id = "cafe_job_ask", chance = 1.0, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }] } }, { target_canvas_id = "walkin_cafe_gary", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "gary_met", operator = "is_true" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "14:30", end_time = "18:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_cafe_gary", chance = 0.35, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "gary_met", operator = "is_true" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "14:30", end_time = "18:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_cafe_gary", chance = 0.45, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "gary_met", operator = "is_true" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "14:30", end_time = "18:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_cafe_gary", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "gary_met", operator = "is_true" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "20:00", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_cafe_gary", chance = 0.35, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "gary_met", operator = "is_true" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "20:00", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_cafe_gary", chance = 0.45, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "gary_met", operator = "is_true" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "20:00", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] } }]
+substitutions = [{ target_canvas_id = "walkin_cafe_gary", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "gary_met", operator = "is_true" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "14:30", end_time = "18:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_cafe_gary", chance = 0.35, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "gary_met", operator = "is_true" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "14:30", end_time = "18:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_cafe_gary", chance = 0.45, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "gary_met", operator = "is_true" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "14:30", end_time = "18:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] } }, { target_canvas_id = "walkin_cafe_gary", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "gary_met", operator = "is_true" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "20:00", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }] } }, { target_canvas_id = "walkin_cafe_gary", chance = 0.35, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "gary_met", operator = "is_true" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "20:00", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 40 }] } }, { target_canvas_id = "walkin_cafe_gary", chance = 0.45, conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "gary_met", operator = "is_true" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "20:00", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] } }]
 
 [[canvases.nodes]]
 id   = "coffee"

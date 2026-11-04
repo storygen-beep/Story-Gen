@@ -885,6 +885,9 @@ Three things to get right:
 - **Flag names are not validated against anything.** Nothing checks that `met_wade` exists; a typo
   hides that character's guidance forever and no build error says so. Read the name off the
   meeting canvas's own `flagEffects`, not off memory. Checked: gate *every card carries the met flag*.
+- **The meeting can't wait for the person it meets.** If their schedule rows wait on the met flag, a
+  row or a swapped-in scene that sets it must not carry `requires_npc` for them: they aren't placed yet,
+  so it never opens, and no error says so. Checked: gate *nobody waits for themselves*.
 
 ⚠️ **This flag is load-bearing twice.** The cast page (`[ui.cast_page]`, `engine.md` §34) lists a
 character exactly when `pickQuestsCard` returns a card for them, so one flag reveals both surfaces

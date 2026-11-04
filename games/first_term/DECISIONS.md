@@ -189,6 +189,7 @@ is a talk or a locked door, the men's meters lock nothing, 17 of Laura's tease s
 | 190 | Reader: 45 scenes, 13 fails, all fixed after that read and not re-read. | Reader pass, 2026-11-04. |
 | 191 | LO signed the whole page list in one signature: 137 pages to [READY], the spine, the Want, this sheet and the save resets. His release play and one more reader pass are still owed before a public build. | "Sign it", LO, 2026-11-04. |
 | 192 | Reader's last read: 14 scenes, 4 fails, fixed after that read (Laura's towel button, her curfew call, Mark's laundry walk-ins). LO re-signed `npc_laura.md`. The call can still ring with Ella in the kitchen: the game can't read where the player is for a call. | LO, 2026-11-04. |
+| 193 | The café job could not be reached (LO, 2026-11-05): `cafe_job_ask` needed Tom present, Tom's rows wait on `tom_met`, and only that scene sets it. The scene no longer needs him, and it opens from its own row, "Ask about the job" (`cafe_job_row`), not the coffee: once a day, gone with `cafe_job`. This adjusts Q2 only in that the job no longer sits behind the coffee; it still never fires on entry. New skill gate `nobody waits for themselves`. LO re-signed `cafe.md` and `tom_01_the_apron.md`, 2026-11-05. |
 
 Engine only (`setup.castScheduleHtml` in `v2.py`). The full Schedules page keeps its weekly table; first_term has no
 button to it since DECISIONS 95.

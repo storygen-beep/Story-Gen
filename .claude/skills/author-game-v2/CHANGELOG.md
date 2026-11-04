@@ -5,6 +5,11 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-05 — a person can't wait for their own scene
+
+- **New gate `nobody waits for themselves`** in `scripts/gates.py` (`_nobody_waits_for_themselves`, listed in `SKILL.md`, taught in `references/the-first-hour.md`). It fails a person whose every schedule row waits on a flag that only scenes needing that person set. Why: LO could not ask for the café job in first_term; `cafe_job_ask` had `requires_npc = npc_tom`, Tom's rows wait on `tom_met`, and only that scene sets `tom_met`. The scene worked until it moved from firing on entry to a swap on 2026-11-04, because a one-time scene that fires by itself does not read `requires_npc`.
+- **Verified.** On the unfixed game the first version flagged Tom and Zoe. Zoe was a false alarm: played, `zoe_00_quad_meeting` opens with Zoe placed nowhere, so the gate now skips `requires_npc` on self-firing one-time scenes. After the game fix, first_term passes; new tests in `scripts/tests/test_gates_nobody_waits_20261105.py`.
+
 ## 2026-11-04 — no child framing next to sex, and LO's calls on the sixth check's skill-side rows
 
 - **New rule (LO, 2026-11-04).** `references/register.md` "Everyone is an adult" and new gate `no child framing next to sex` in `scripts/gates.py`, a scored gate listed in `SKILL.md`. Why: adults flirting stays, a line that frames her as a child beside sex does not. Parent figures are read from an npc's role or relationship, which also catches step-brothers through "step-". "my girl" counts only from a parent figure, since from a boyfriend it is what a boyfriend says.

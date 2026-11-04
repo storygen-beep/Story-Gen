@@ -1534,3 +1534,10 @@ No build. The spine (SP1, SP2, SP3, SP4, SP7), `OPENING.md`, `COVERAGE.md`, the 
 scene sheets brought to what the build does; 28 signed titles to `[READY]`; the heat proposal and the copy
 fixes copied into `proposals/`; this iteration's SHORT, LONG, CHANGES and BUILD_VS_SHEET written. Every
 changed signed page waits for LO's re-sign.
+
+## 2026-11-05 — the café job could be reached again
+
+LO could not ask for the job. `cafe_job_ask` needed Tom placed, his schedule waits on `tom_met`, and only that scene sets
+it; this came in on 2026-11-04 when the scene moved from firing on entry to a swap on the coffee. The scene no longer
+needs him and opens from its own row, `cafe_job_row` (DECISIONS 193). New skill gate `nobody waits for themselves`.
+Dev + debug rebuild. Not committed. The one new screen, the row's fallback, has not had a reader pass.
