@@ -96,6 +96,7 @@ flagEffects = [
   { targetType = "player", flag = "zoe_dared", op = "unset" },   # Zoe's dares: one a party night (zoe_dares.md); arriving at the party clears it too   # Laura's plain items pay Love +2 once a day in total (npc_laura.md)   # Ryan's hot repeatables pay once a day (ryan_hot_repeatables.md)   # the street sees her once a day (street_seen.md, DECISIONS 121)   # the towel at home pays once a day per person (DECISIONS 98)
   { targetType = "player", flag = "mark_towel_today", op = "unset" },
   { targetType = "player", flag = "laura_towel_today", op = "unset" },
+  { targetType = "player", flag = "laura_dress_chosen", op = "unset" },   # hub_laura_bedroom: the green is chosen for the day
   { targetType = "player", flag = "cafe_shift_1_today", op = "unset" },
   { targetType = "player", flag = "cafe_shift_2_today", op = "unset" },
   { targetType = "player", flag = "cafe_shift_3_today", op = "unset" },
@@ -536,6 +537,15 @@ label  = "Next step now: Mark's short Sunday"
 kind   = "play"
 canvas = "mark_03_shorts"
 free   = true
+
+# (pass 5 E9) Tom's step 3 waits on 15 regulars' shifts, past the 2-10 visits of the-meters.md rule 4: the page skips that wait.
+[[ui.cheat_page.grants]]
+id    = "next_tom_regulars"
+label = "Next step now: the café's regulars (Tom)"
+trait = "cafe_footfall"
+op    = "set"
+value = 15
+free  = true
 
 # (2026-11-03, alignment pass 2) she starts in her sleep shirt and panties, in bed; the first screen's "Get up." and
 # "Skip the opening" add the rest of her clothes to the wardrobe ("Get dressed." equips them on the hall screen).

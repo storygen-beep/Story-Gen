@@ -1,4 +1,5 @@
 # [REVIEW] Scene — college_class_figure
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 
@@ -84,7 +85,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > Too tired to hold the charcoal straight. Doze, or skip.
 >
-> The guy at the next easel has stopped drawing the model. What you're wearing is doing its job.
+> The guy at the next easel has stopped drawing the model. His stare crawls over you, and your nipples go tight.
 
 **`college_class_figure` · `risky`** — 164 words · 4 counted: tits, nipple, nipple, tits · ceiling: tits, nipples, ass, naked
 
@@ -132,7 +133,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > Too tired to hold the charcoal straight. Doze, or skip.
 >
-> The guy at the next easel has stopped drawing the model. What you're wearing is doing its job.
+> The guy at the next easel has stopped drawing the model. His stare crawls over you, and your nipples go tight.
 
 **`meet_figure` · `risky`** — 164 words · 4 counted: tits, nipple, nipple, tits · ceiling: tits, nipples, ass, naked
 

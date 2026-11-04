@@ -1,4 +1,5 @@
 # [REVIEW] Person — the cocky guy
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. Walk-ins: the refill walk-in at Zoe's bathroom.
 
@@ -52,5 +53,5 @@ Walk-ins: `zoe_bathroom`. The row (when, what pays) is on that place sheet.
 ## Changed 2026-11-02 (reader a3, `READER_FAILS_A3.md`, signed by LO 2026-11-02; DECISIONS 131)
 
 - Row 50 (`hub_cocky_party`): "Walk past him." gets "Your loss." and moves nothing: a no never raises his Want (DECISIONS 135). He has no meter.
-- Row 58: on the renders the "Not yet." line is gated off (Saturday 00:00–02:00, after `hookup_today`), he says "Not here. Find me later."
+- Row 58: on the renders the "Not yet." line is gated off (Saturday 00:00–02:00, after `hookup_today`), he says "Not here. Find me later." (scene reader 2026-11-04: on Saturday 00:00–02:00 his row is ending, so there it is "Not here. Find me next Friday.", only where neither "that bathroom door locks" line shows)
 - Row 68: "Talk with him a while." opens a talk screen with three pool lines he says (a shuffle bag, no counter). It shows until 01:40 (2026-11-04): his row ends at 02:00.

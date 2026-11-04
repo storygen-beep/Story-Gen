@@ -133,6 +133,7 @@ flag_keys = [
   "laura_call_today",
   "laura_caught_today",
   "laura_counted_twenty",
+  "laura_dress_chosen",
   "laura_dress_invite",
   "laura_knows_ryan",
   "laura_lonely",
@@ -466,7 +467,7 @@ navigation_order = ["home_kitchen", "home_living_room", "home_master_bedroom", "
 id          = "home_kitchen"
 name        = "Kitchen"
 kind        = "destination"
-description = "The kitchen: where this family eats, argues and pays. Laura makes breakfast here before work and pours her wine here at night. Mark cooks on Wednesdays and owns the table on Sundays, when he counts the rent into an envelope with the landlord's name on it. The drawer by the fridge is where the letters go that nobody wants to open."
+description = "The kitchen: where this family eats, argues and pays. Laura makes breakfast here before work and pours her wine here at night. Mark cooks on Wednesdays and owns the table on Sundays, when he seals the rent into an envelope with the landlord's name on it. The drawer by the fridge is where the letters go that nobody wants to open."
 image       = "locations/home_kitchen.jpg"
 image_search_queries = ["kitchen"]
 parent      = "home"
@@ -642,7 +643,7 @@ navigation_order = []
 
 [locations.door]
 description = "Ryan's door. A strip of light under it when he's home."
-no_answer   = "You knock. Nothing. He's out."
+no_answer   = "His door stays shut."
 description_variants = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_kayla", operator = "is_present" }] }, text = "Kayla's here. His door is shut, and it stays shut till she goes." },
 ]

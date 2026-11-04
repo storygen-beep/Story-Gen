@@ -65,3 +65,16 @@ LO's re-sign." under its title. The full list is in the pass's report.
 **The Notion mirror** is configured for first_term (`.notion_sheets.json` lists it) and pushes on a commit
 that touches sheets; it has not run for this game, so `sheets/REVIEW_ORDER.md` does not exist yet and no
 sheet carries the four-part verdict. A push writes to Notion, so it is LO's call.
+
+## Pages changed on 2026-11-04 (a reach-back: every spine page it touches)
+
+| page | what changed |
+|---|---|
+| SP1 | the overnight list: the four refill walk-ins' caps |
+| SP2 | Laura and the ladder rows brought to the build |
+| SP3 | padding cut |
+| SP4 | the top week is $620-848, from the build's pay; `week_income` 848 |
+| SP5 | Tom has 3 steps |
+| SP6 | her face is a later release |
+| SP7 | LO's waivers named beside the BLOCK list; each Sunday's table |
+

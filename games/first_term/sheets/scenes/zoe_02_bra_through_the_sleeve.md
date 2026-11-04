@@ -1,4 +1,7 @@
 # [REVIEW] Scene — zoe_02_bra_through_the_sleeve
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
+
+> Changed 2026-11-04 (one pool, one place): the kiss has its own words here, and the Curious copy has its own balcony, its own kiss and its own Saturday line. It no longer plays `zoe_dares` `low_do`. Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 
@@ -19,7 +22,7 @@
 | next step | a dress dare with the room behind the glass |
 | hook | "Nope. Mine now." And: "There's a hot tub Saturday. Just us." |
 | what she wears here | the dress in a group on `zoe_party_dress` worn; the bra comes off here |
-| explicit? | the showing path no (under 3 list words, as built); the doing path yes (the kiss, `zoe_dares` `low_do`) |
+| explicit? | the showing path no (under 3 list words, as built); the doing path yes (the kiss, `kiss` and `kiss_curious` below) |
 | who notices | the room behind the glass |
 | what she risks | strangers seeing |
 | her_line_low · her_line_high | low: "It's a dare. It doesn't count." · high: "You want her to dare you something worse." (the person sheet's pair) | |
@@ -50,7 +53,7 @@ One row per exit. Read from the build; it replaces the drafted map.
 | `already` | She looks at your chest for a long second, then laughs and leans on the rail … | no | "Laugh with her." → `mine2` | Exhibitionism +3 (cap 79) |
 | `mine2` | There's a hot tub Saturday. | no | "Saturday." — 2 versions, by hour → Zoe's Living Room | Zoe's step = 2 · `zoe_02_done` set · `party_house_invite` set · varies: `came_home_late` set, `late_party` set |
 | `no` | She goes back inside and leaves the balcony door open behind her. | no | "Stay out on the balcony a minute." — 2 versions, by hour → Zoe's Living Room | Times you told Zoe no +1 · `zoe_balcony_refused` set · back in 7 days · varies: `came_home_late` set, `late_party` set |
-| `kiss` | You take the beer out of his hand and set it on the counter. | yes | "Saturday?" → `saturday` | Corruption +3 (cap 39) |
+| `kiss` | You slide back in through the glass door and walk straight at him. | yes | "What's next, Zo?" → `saturday` | Corruption +3 (cap 39) |
 | `saturday` | Zoe pulls you back out onto the balcony, flushed. | no | "Saturday." — 2 versions, by hour → Zoe's Living Room | Zoe's step = 2 · `zoe_02_done` set · `party_house_invite` set · varies: `came_home_late` set, `late_party` set |
 | `mine` | Zoe takes it out of your hand and tucks it in her back pocket. | no | "Saturday." — 2 versions, by hour → Zoe's Living Room | Zoe's step = 2 · `zoe_02_done` set · `party_house_invite` set · varies: `came_home_late` set, `late_party` set |
 
@@ -61,8 +64,18 @@ One row per exit. Read from the build; it replaces the drafted map.
 | `balcony` | Zoe pulls you out onto the balcony, away from the noise. | no | "Dare me something else." (Corruption 20+ · `cocky_guy_met` · The cocky guy in Zoe's Living Room) → `kiss` | — |
 | | | | "Not tonight, Zo." → `no` | — |
 | `no` | She goes back inside and leaves the balcony door open behind her. | no | "Stay out on the balcony a minute." — 2 versions, by hour → Zoe's Living Room | Times you told Zoe no +1 · `zoe_balcony_refused` set · back in 7 days · varies: `came_home_late` set, `late_party` set |
-| `kiss` | You take the beer out of his hand and set it on the counter. | yes | "Saturday?" → `saturday` | Corruption +3 (cap 39) |
+| `kiss` | He's on the arm of the couch, just inside the glass door. | yes | "What's next, Zo?" → `saturday` | Corruption +3 (cap 39) |
 | `saturday` | Zoe pulls you back out onto the balcony, flushed. | no | "Saturday." — 2 versions, by hour → Zoe's Living Room | Zoe's step = 2 · `zoe_02_done` set · `party_house_invite` set · varies: `came_home_late` set, `late_party` set |
+
+## The kiss (read by the build)
+
+**`kiss`** · `zoe_02_bra_through_the_sleeve`, "Dare me something else."
+
+> You slide back in through the glass door and walk straight at him. He's leaning on the wall with his cup, and he sees you too late to put it down. You grab his shirt and pull his mouth onto yours. Your tongue goes in first. He kisses you back hard, and the guys beside him start yelling. His hands go straight to your ass and grip it. He drags you up against him until your tits are crushed to his chest. Your nipples harden against your top, and he groans when he feels them. In the doorway Zoe's mouth is open. You kiss him once more, wet and slow. Then you let go, panting, your lips swollen. His hands stay clamped on your ass.
+
+**`kiss_curious`** · `zoe_02_balcony_curious`
+
+> He's on the arm of the couch, just inside the glass door. You don't give yourself time to think. You take his chin, turn his face up, and kiss him in front of the whole room. He makes a surprised noise. Then his mouth opens and his tongue pushes against yours, warm and beery. Somebody starts a slow clap. He stands up into you, and his hands land on your ass and knead it. Your tits flatten on his chest. Your nipples tighten under your top, and he feels them and laughs into your mouth. Your whole neck is burning, but you don't stop. By the door Zoe has both hands over her grin. You kiss him one more time, open-mouthed, then push off him, gasping. He still has your ass in both hands, and he squeezes it hard before he lets go.
 
 ## The explicit beats, as built (2026-11-03)
 
@@ -77,6 +90,8 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 > You reach up the back and unhook it, and work one strap down your arm and out through the armhole, then the other.
 >
 > There's no sleeve to work it through. You reach back, unhook it in one go, and peel it off your tits with the whole party on the other side of the glass.
+>
+> There's no sleeve to work it through. You drag the sports bra up over your head and off your tits, with the whole party on the other side of the glass.
 >
 > You reach up under Zoe's dress and drag the sports bra up, and work it off one arm at a time through the armholes of the dress.
 >
@@ -98,49 +113,55 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > I know. Isn't it the best?
 
-**`zoe_02_bra_through_the_sleeve` · `kiss`** — 203 words · 13 counted: kiss, cock, kiss, ass, tits, nipple, nipple, nipple, nipple, nipple, nipple, kiss, ass · ceiling: Zoe's early column: tits, ass · **past the ceiling: nipples**
+**`zoe_02_bra_through_the_sleeve` · `kiss`** — 197 words · 13 counted: kiss, cock, kiss, ass, tits, nipple, nipple, nipple, nipple, nipple, nipple, kiss, ass · ceiling: Zoe's early column: tits, ass · **past the ceiling: nipples**
 
 > Fine. Kiss the cocky guy. Properly.
 >
-> You take the beer out of his hand and set it on the counter. He opens his mouth to say something, and you kiss it shut. Properly. Your tongue slides over his, slow, and his pushes back. Someone whoops, then the whole corner does. His hands drop to your ass and squeeze hard, one cheek filling each palm. He pulls you in until your tits press flat against his chest.
+> You slide back in through the glass door and walk straight at him. He's leaning on the wall with his cup, and he sees you too late to put it down. You grab his shirt and pull his mouth onto yours. Your tongue goes in first. He kisses you back hard, and the guys beside him start yelling. His hands go straight to your ass and grip it. He drags you up against him until your tits are crushed to his chest.
 >
-> Your nipples go hard under your top, and he feels them.
+> Your nipples harden against your top, and he groans when he feels them.
 >
-> Your nipples go hard under your dress, and he feels them.
+> Your nipples harden against your dress, and he groans when he feels them.
 >
-> Your nipples go hard under your dress, and he feels them.
+> Your nipples harden against your dress, and he groans when he feels them.
 >
-> Your nipples go hard through your bra, and he feels them.
+> Your nipples harden through your bra, and he groans when he feels them.
 >
-> Your bare nipples go hard against his shirt, and he feels them.
+> Your bare nipples harden against his shirt, and he groans when he feels them.
 >
-> Your nipples go hard under your clothes, and he feels them.
+> Your nipples harden against your clothes, and he groans when he feels them.
 >
-> It's a dare. It doesn't count. Over his shoulder Zoe is biting her lip, eyes on your mouth. You kiss him deeper anyway, wet and open. Then you pull back first, breathing hard, lips wet. He grins down at you, both hands still full of your ass.
+> In the doorway Zoe's mouth is open. You kiss him once more, wet and slow. Then you let go, panting, your lips swollen. His hands stay clamped on your ass.
 >
 > Zoe. I owe you one.
 >
 > You owe her, not me. Hands off now.
+>
+> Just a dare, you tell yourself. (under Corruption 40)
+>
+> Just a dare, you tell yourself. You don't believe it. (Corruption 40-59)
+>
+> Just a dare? You'd have kissed him without one, and you're wet to prove it. (Corruption 60+)
 
 **`zoe_02_balcony_curious` · `kiss`** — 203 words · 13 counted: kiss, cock, kiss, ass, tits, nipple, nipple, nipple, nipple, nipple, nipple, kiss, ass · ceiling: Zoe's early column: tits, ass · **past the ceiling: nipples**
 
 > Fine. Kiss the cocky guy. Properly.
 >
-> You take the beer out of his hand and set it on the counter. He opens his mouth to say something, and you kiss it shut. Properly. Your tongue slides over his, slow, and his pushes back. Someone whoops, then the whole corner does. His hands drop to your ass and squeeze hard, one cheek filling each palm. He pulls you in until your tits press flat against his chest.
+> He's on the arm of the couch, just inside the glass door. You don't give yourself time to think. You take his chin, turn his face up, and kiss him in front of the whole room. He makes a surprised noise. Then his mouth opens and his tongue pushes against yours, warm and beery. Somebody starts a slow clap. He stands up into you, and his hands land on your ass and knead it. Your tits flatten on his chest.
 >
-> Your nipples go hard under your top, and he feels them.
+> Your nipples tighten under your top, and he feels them and laughs into your mouth.
 >
-> Your nipples go hard under your dress, and he feels them.
+> Your nipples tighten under your dress, and he feels them and laughs into your mouth.
 >
-> Your nipples go hard under your dress, and he feels them.
+> Your nipples tighten under your dress, and he feels them and laughs into your mouth.
 >
-> Your nipples go hard through your bra, and he feels them.
+> Your nipples tighten through your bra, and he feels them and laughs into your mouth.
 >
-> Your bare nipples go hard against his shirt, and he feels them.
+> Your bare nipples tighten against his shirt, and he feels them and laughs into your mouth.
 >
-> Your nipples go hard under your clothes, and he feels them.
+> Your nipples tighten under your clothes, and he feels them and laughs into your mouth.
 >
-> It's a dare. It doesn't count. Over his shoulder Zoe is biting her lip, eyes on your mouth. You kiss him deeper anyway, wet and open. Then you pull back first, breathing hard, lips wet. He grins down at you, both hands still full of your ass.
+> Your whole neck is burning, but you don't stop. By the door Zoe has both hands over her grin. You kiss him one more time, open-mouthed, then push off him, gasping. He still has your ass in both hands, and he squeezes it hard before he lets go.
 >
 > Zoe. I owe you one.
 >

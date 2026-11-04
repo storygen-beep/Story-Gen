@@ -1,4 +1,5 @@
 # [REVIEW] Person — Laura
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. Sunday 00:00–01:00 is its own awake row.
 
@@ -90,7 +91,7 @@ Every step's gate also says the drinks boost is off. Stage numbers: 20 is Curiou
 | 4 · he moves at least every other step | yes: her move is written on every step |
 | 5 · his meter is the lock | yes: Love gates 10, 20, 30; steps pay +5 |
 | 6 · a hot repeatable per stage | waived (declared on this sheet, signed by LO 2026-11-01) |
-| 7 · her voice changes with her level | no: no step reads her level |
+| 7 · her voice changes with her level | yes: all four steps change her line by level (2026-11-04) |
 | 8 · something happens after the top step | yes: the gaps keep running |
 
 Failing, waivers not counted: 1 of 8. The ladder may be built (two fails stop it).
@@ -237,8 +238,8 @@ react to the towel, every visit.
 | her Love | her line (one of three) | "Let her fix it." (no Exhibitionism gate) |
 |---|---|---|
 | under 40 | "You'll catch your death." / "Clothes, please. This is a family house." / counts who could walk in | tucks it in hard: "Now go and put some clothes on." |
-| 40–69 | tucks it tighter, like you're ten / "You're dripping on my floor." / a smile you can't read | smooths it flat with both hands: "You're getting so grown up." |
-| 70+ | "When did you get a body like that?" / "One of my old dresses would look right on you." / her hand on your bare shoulder | opens it to tuck it again, looks: "There. My good girl." |
+| 40–69 | tucks it tighter, like it's one more chore / "You're dripping on my floor." / a smile you can't read | smooths it flat with both hands: "You've got my figure, you know." |
+| 70+ | "Where have you been hiding a body like that?" / "One of my old dresses would look right on you." / her hand on your bare shoulder | opens it to tuck it again, looks: "Now you're decent." |
 
 - Pays her Love +2 once a day (`laura_towel_today`).
 - Her rule: in Ryan's or Mark's hub, with her in the room, "Let it slip." is caught (her Love −3).

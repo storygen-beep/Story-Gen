@@ -114,7 +114,7 @@ LOCATIONS = [
     dict(id="home_kitchen", name="Kitchen", entry_from="home_hall", kind="destination",
          description=("The kitchen: where this family eats, argues and pays. Laura makes breakfast here before "
                       "work and pours her wine here at night. Mark cooks on Wednesdays and owns the table on "
-                      "Sundays, when he counts the rent into an envelope with the landlord's name on it. The drawer "
+                      "Sundays, when he seals the rent into an envelope with the landlord's name on it. The drawer "
                       "by the fridge is where the letters go that nobody wants to open."),
          variants=[
              (cond(wd(6), tod("08:00", "12:00")),
@@ -218,7 +218,7 @@ LOCATIONS = [
                       "knocks means it's you."),
          door=dict(
              description="Ryan's door. A strip of light under it when he's home.",
-             no_answer="You knock. Nothing. He's out.",
+             no_answer="His door stays shut.",
              # LO, 2026-11-04 (Q14): shut while Kayla is over (her rows, Fri 18:00-Sat 10:00): one closed line,
              # and neither knock shows. Her walk-in in his drawer (Fri 17:45-18:00) is before she's in.
              variants=[(cond({"type": "npc_at_location", "location_id": "home_ryan_room", "npc_id": "npc_kayla", "operator": "is_present"}),

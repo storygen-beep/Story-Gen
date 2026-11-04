@@ -5,6 +5,14 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-04 — six checks stop failing correct scenes (LO's list, item 5)
+
+- **What.** `scripts/gates.py`: *a day word fits its window* reads a named day before "morning" as an appointment ahead (H65). *ladders move forward* no longer asks a ladder to declare moment conditions (presence, clothes, hour, hours since a flag), reads `also_needs` and `when_also`, accepts a declared flag the canvas reads through hours_since_flag, and knows the engine moves `rent_short_weeks`. *ascent tiers expand the world* skips a meter declared `"opens_at_bottom": true` (I79). Lint *named before met* counts a one-time scene that names the person and sets their met flag (C54). *ignoring a thread costs* counts his Power or her suspicion rising as a cost. `_week_income` counts numbered daily flags as that many visits a day (three café shifts).
+- **`references/state.md`.** `opens_at_bottom`, `also_needs` and `when_also` documented.
+- **`references/the-meters.md`, `references/the-phone.md`.** The voice-line skip and the rising-hold cost taught beside their rules (found by the sixth full check, E102, F82, I83).
+- **Why.** Each failed a scene that was right: Mark's "Sunday morning" appointment; Laura waiting in a room; the café's name, which opens Tom's step at the bottom; Kayla and Claire, met in one-time scenes; Mark's Power rising on an ignored rent text; a job that pays three times a day read as once.
+- **Verified.** On first_term the four false fails are gone and only the real fails stay; skill tests and `cite_check.py --strict` in this turn's full run.
+
 ## 2026-11-04 — "0 wrong cites" did not mean what it said: 140 cites repaired, the check made honest (J80)
 
 - **What.** `scripts/cite_check.py`: an AMBIGUOUS cite (its anchor is in several places, none of them the cited line) now counts as wrong, in the count, in `--strict` and in the skill commit check. A name counts as the cite's subject only when it comes straight before the cite; a name that merely sits nearby makes the cite UNVERIFIABLE, not wrong. A line inside the named function, or a line that says the name even in a string, reads OK. The summary now prints `of N live cites: X confirmed right, Y wrong, Z can't be checked`. `--fix` also moves these cites: it carries a cite along the engine file's uncommitted diff when the new line still names its anchor (ranges too), else to the one definition, else it leaves and lists it. New `scripts/tests/test_cite_check.py`.

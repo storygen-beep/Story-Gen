@@ -18,7 +18,7 @@ SPEECH = {
         "Harder. Don't stop. Right there, Ryan, right there.": K,   # Kayla, through the wall
         "What? ... Nothing?": K, "Nothing,": R, "Go to sleep.": R, "...@player.nickname?": R,
         "What was that?": K, "Pipes,": R,
-        "You must be @player.nickname.": K, "I am,": ME, "Thin walls.": ME,
+        "Morning, @player.nickname.": K, "Morning,": ME, "Thin walls.": ME,
         "Shower's free. Go on. I'm not going anywhere.": K,
     },
     "ryan_06_after_the_shower": {"I heard you through the wall, @player.nickname.": R, "Babe?": K},
@@ -43,7 +43,7 @@ SPEECH = {
         "So what's Kayla worth? Dinner? Or does she just get your bed?": ME, "Get out, @player.nickname.": R,
         "You don't want me out.": ME, "Is that for Kayla too?": ME, "Night, Ryan. Maybe tomorrow.": ME,
         "Hey. What's Kayla worth to you? Out of ten.": ME, "Ten. Obviously.": R,
-        "Liar. You paused the game when I walked in.": ME, "Not tonight, Ryan. Keep the sock.": ME,
+        "Liar. You put your phone down when I walked in.": ME, "Not tonight, Ryan. Keep the sock.": ME,
         # hot4: he watches from the chair
         "Jesus, @player.nickname,": R, "Look, don't touch,": ME, "I know, @player.nickname. I know.": R,
         "Rules are rules,": ME, "Then go slow,": R, "Let me see it, @player.nickname.": R,
@@ -147,7 +147,7 @@ SPEECH = {
     },
     # ── college ──
     "college_class_figure": {"Look at the weight of her,": "npc_art_lecturer", "Draw that.": "npc_art_lecturer"},
-    "meet_figure": {"Look at the weight of her,": "npc_art_lecturer", "Draw that.": "npc_art_lecturer"},
+    "meet_figure": {"First thing you learn,": "npc_art_lecturer", "She's not a shape. Get that weight down, the tits, the thighs, all of it.": "npc_art_lecturer"},
     "college_dean_office": {"Your timetable": TEXT},   # a SugarCube <<link>> label, not a voice
     "lecture_timetable": {"Your timetable": TEXT},
     # ── home ──

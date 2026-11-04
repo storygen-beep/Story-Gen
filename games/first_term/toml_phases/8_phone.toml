@@ -82,8 +82,8 @@ content = "don't tell mom"
 type = "reply"
 round = 1
 choices = [
-  { text = "your secret's safe", effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 2 }] },
-  { text = "what's it worth?", effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 1 }] },
+  { text = "your secret's safe", effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 2, clamp = true }] },
+  { text = "what's it worth?", effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 1, clamp = true }] },
   { text = "who's kayla?" },
 ]
 [[phone.conversations.blocks]]
@@ -133,7 +133,7 @@ content = "two knocks. door's open."
 type = "reply"
 round = 1
 choices = [
-  { text = "coming", effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 1 }], flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "set" }] },
+  { text = "coming", effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 1, clamp = true }], flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "set" }] },
   { text = "not tonight" },
 ]
 
@@ -204,7 +204,7 @@ content = "home for dinner sweetheart?"
 type = "reply"
 round = 1
 choices = [
-  { text = "yes, starving", effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 1 }], flagEffects = [{ targetType = "player", flag = "dinner_promised", op = "set" }] },
+  { text = "yes, starving", effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 1, clamp = true }], flagEffects = [{ targetType = "player", flag = "dinner_promised", op = "set" }] },
   { text = "eating out tonight", flagEffects = [{ targetType = "player", flag = "said_eating_out", op = "set" }] },
   { text = "is mark cooking?" },
 ]
@@ -235,7 +235,7 @@ npc    = "npc_laura"
 notify = "📱 Mom"
 repeat_after_days = 1
 ignore_after_days = 1
-on_ignore = { effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = -2, clamp = true }, { targetType = "player", trait = "laura_suspicion", op = "add", value = 2 }], flagEffects = [{ targetType = "player", flag = "dinner_promised", op = "unset" }] }
+on_ignore = { effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = -2, clamp = true }, { targetType = "player", trait = "laura_suspicion", op = "add", value = 2, clamp = true }], flagEffects = [{ targetType = "player", flag = "dinner_promised", op = "unset" }] }
 [phone.conversations.trigger]
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "dinner_promised", operator = "is_true" },
@@ -254,8 +254,8 @@ content = "you said six."
 type = "reply"
 round = 1
 choices = [
-  { text = "sorry. lost track of time", effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = -2, clamp = true }, { targetType = "player", trait = "laura_suspicion", op = "add", value = 2 }], flagEffects = [{ targetType = "player", flag = "dinner_promised", op = "unset" }] },
-  { text = "something came up", effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = -2, clamp = true }, { targetType = "player", trait = "laura_suspicion", op = "add", value = 2 }], flagEffects = [{ targetType = "player", flag = "dinner_promised", op = "unset" }] },
+  { text = "sorry. lost track of time", effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = -2, clamp = true }, { targetType = "player", trait = "laura_suspicion", op = "add", value = 2, clamp = true }], flagEffects = [{ targetType = "player", flag = "dinner_promised", op = "unset" }] },
+  { text = "something came up", effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = -2, clamp = true }, { targetType = "player", trait = "laura_suspicion", op = "add", value = 2, clamp = true }], flagEffects = [{ targetType = "player", flag = "dinner_promised", op = "unset" }] },
 ]
 [[phone.conversations.blocks]]
 type = "message"
@@ -295,7 +295,7 @@ type = "reply"
 round = 1
 choices = [
   { text = "i'll have it" },
-  { text = "i might be short", effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1 }] },
+  { text = "i might be short", effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, clamp = true }] },
   { text = "what if i'm not" },
 ]
 [[phone.conversations.blocks]]

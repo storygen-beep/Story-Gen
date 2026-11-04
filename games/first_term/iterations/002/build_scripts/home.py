@@ -54,6 +54,12 @@ def S(days, a, b):
     return [{"weekdays": days, "start_time": a, "end_time": b}]
 
 
+def her_thought_bands(meter, bounded, top):
+    """Her thought by her band: `bounded` is [(upper bound, line)], `top` the line above them. One if/elseif chain, so
+    the blocks on either side of it must not be groups. Only the bands the scene can reach get a line."""
+    return [GC(cond(trait(meter, "lt", hi)), T(t)) for hi, t in bounded] + [GC(cond(*ANY), T(top))]
+
+
 # ═════════════════════════════════════════════════════════════════════════════
 # HER ROOM (home_ella_room.md): sleep, nap, study, make-up, tidy
 # ═════════════════════════════════════════════════════════════════════════════
@@ -298,9 +304,9 @@ out.append(solo("living_couch", "Lie on the couch",
             G(cond(*UNDIES, here(R, "home_ryan_room"), ntrait(R, "want", "lt", 40)), P("Ryan comes out of his room for a drink and stops at the end of the hall. His eyes go straight to your tits in your bra. Then they go up to the ceiling. \"Jesus, @player.nickname.\" He goes to the kitchen without looking again.")),
             G(cond(*UNDIES, here(R, "home_ryan_room"), ntrait(R, "want", "gte", 40)), P("Ryan comes out of his room for a drink and stops at the end of the hall. His eyes go down you, your tits, your panties, and come back up slow. He doesn't pretend he wasn't looking. \"Jesus, @player.nickname.\"")),
             # reader 2026-11-04: her "Get me one too" goes while he is still on his way to the kitchen, before he comes back with the can
-            G(cond(*UNDIES, here(R, "home_ryan_room")), ME("Get me one too, Ryan."), D(R, "Get your own. And put some clothes on."), P("He takes a long time getting that drink. On the way back up he holds the can in front of his shorts.")),   # pass 3 B4
+            G(cond(*UNDIES, here(R, "home_ryan_room")), ME("Get me one too, Ryan."), D(R, "Get your own. And put some clothes on."), P("He takes a long time getting that drink. On the way back down the hall he holds the can in front of his shorts.")),   # pass 3 B4
             G(cond(SKIRT), P("With your knee up, the skirt is nowhere. Anybody coming in from the hall would see straight up it.")),
-            G(cond(*COVERED), P("Nobody looks twice at a girl on a couch in her clothes.")),
+            G(cond(*COVERED, {"type": "worn_type", "operator": "neq", "value": "short_skirt"}), P("Nobody looks twice at a girl on a couch in her clothes.")),
         ], [*[c for who, stay in zip(PASSERS, ("stay_mark", "stay_ryan")) for c in brake(
                 go("Stay a while.", node=stay, mins=5, flags=[fset("couch_seen")],   # reader a3 #15 (DECISIONS 131): a screen, not a jump back
                    cond_=cond(DARING, *UNDIES, *who),   # a Daring act stops at Daring's top (pass 3 G8)
@@ -421,6 +427,7 @@ out.append(solo("master_wardrobe", "Go through Laura's wardrobe",
             POOL(P("You hold the red one against yourself in her long mirror. It would barely cover your ass. Laura wore this once, somewhere, for someone, and you stand there trying to picture her face when she did."),
                  P("In the drawer under the dresses: stockings, still in the packet, and a black lace bra that is not a mom's bra. You hold it up to your chest in her mirror and your nipples go hard."),
                  P("A photo, tucked in the frame of her mirror: Laura at twenty-something on someone's shoulders at a concert, her top off, laughing. You put it back exactly where it was.")),
+            P("This wardrobe isn't going anywhere, but one of these days somebody's going to walk in and catch you at it."),   # writing pass: the hook (walkin_wardrobe_laura, walkin_wardrobe_mark)
         ], [go("Put it all back.", loc="home_hall", mins=20)]),
     ], conds=[nobody("home_master_bedroom")], prio=3, max_day=1))
 
@@ -505,7 +512,7 @@ out.append({"id": "master_door_saturday_night", "name": "Their door's ajar",
                 "conditions": cond(here(L, "home_master_bedroom"), here(M, "home_master_bedroom"), wd(6), tod("00:00", "01:00"))},
     "nodes": [
         node("gap", "Their door, ajar", [P(MASTER_GAP),
-            G(cond(here(L, "home_master_bedroom"), here(M, "home_master_bedroom")), D(M, "Christ, that ass. Keep still."), D(L, "Are you nearly done?"), D(M, "I'll be done when I'm done. Push back."), D(L, "Mark. The kids.")),   # LO 2026-11-03: his grunt, her flat voice
+            G(cond(here(L, "home_master_bedroom"), here(M, "home_master_bedroom")), D(M, "Christ, that ass. Keep still."), D(L, "Are you nearly done?"), D(M, "I'll be done when I'm done. Push back."), D(L, "Mark. They'll hear.")),   # LO 2026-11-03: his grunt, her flat voice
             VID("through a bedroom door left ajar, a middle-aged man taking a woman from behind on the bed, lamp on", "couple sex seen through bedroom door ajar", "peeking at parents bedroom door gap", pool_dir="sex/master_door_gap_t5")],
             [go("Stay at the gap.", node="stay", mins=5, flags=[fset("saw_mark_and_laura"), fset("mark_laura_seen")]),
              go("Go back to bed.", loc="home_ella_room", mins=2, flags=[fset("saw_mark_and_laura"), fset("mark_laura_seen")])]),
@@ -544,7 +551,7 @@ out.append({"id": "laura_alone_in_bed", "name": "Laura's door's ajar",
             GC(cond(trait("corruption", "gte", 60)), P(LAURA_WATCH.replace("You press your thighs together. You do not touch yourself. You want to.",
                 "Your other hand is already inside your clothes. Two fingers on your clit, rubbing in time with hers, and you bite your lip so she won't hear you."))),
             VID("a woman alone in bed fingering herself to orgasm, biting her hand to stay quiet", "woman fingering herself orgasm quiet in bed", "milf masturbating to orgasm biting hand", pool_dir="sex/laura_alone_watch_t5")],
-            [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}, add("laura_gaps_watched", 1)], flags=[fset("saw_laura_alone"), fset("laura_alone_seen")])]),
+            [go("Back to your room.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}, add("laura_gaps_watched", 1, clamp=False)], flags=[fset("saw_laura_alone"), fset("laura_alone_seen")])]),
     ]})
 # reader a3 #2 (DECISIONS 131): her want for Ryan on her body before laura_04 says his name. Ungated: Ryan's row has
 # him in his room every night 22:00-06:45, so his door is there to listen toward in the whole 22:00-23:00 window.
@@ -563,13 +570,17 @@ out.append({"id": "laura_alone_after", "name": "Laura's door's ajar",
     "nodes": [
         node("crack_after", "Laura's door, ajar", [P(beat("laura_alone_in_bed", "crack_after").replace("Her door is open", "Laura's door is open", 1)),   # pass 3 B13: her name before the pronoun (the sheet is signed; the build swaps it)
             G(cond(here(L, "home_master_bedroom")), D(L, "Oh God. Quiet. Quiet.")),   # LO 2026-11-03: to herself; watch_after's beat says "Laura says nothing."
-            VID("through a bedroom door ajar, a woman on her side facing the wall, her hand between her thighs", "woman masturbating facing wall door ajar", "mom touches herself back to door", pool_dir="sex/laura_alone_after_crack_t5")],
+            VID("through a bedroom door ajar, a woman on her side facing the wall, her hand between her thighs", "woman masturbating facing wall door ajar", "mom touches herself back to door", pool_dir="sex/laura_alone_after_crack_t5"),
+            # writing pass: her voice at her level; laura_04_she_saw_you needs Corruption 20, so the lowest band is Curious
+            *her_thought_bands("corruption", [(40, "She left it open. You want to know why."),
+                                              (60, "She left this door open for somebody. You're not walking away from it.")],
+                               "She wants you watching. You want to see her finish.")],
             [go("Keep watching.", node="watch_after", mins=5, flags=[fset("saw_laura_alone"), fset("laura_alone_seen")]),
              go("Pull the door to.", loc="home_hall", mins=2, flags=[fset("saw_laura_alone"), fset("laura_alone_seen")])]),
         node("watch_after", "Keep watching", [P(beat("laura_alone_in_bed", "watch_after")),
             P("She'll leave the door ajar for you again, another night after ten. She knows you'll look."),   # reader pass 3 b01: the hook (her rows: Sun-Fri 22:00-23:00)
             VID("a woman on her side coming silently into a pillow, her hand between her thighs", "woman silent orgasm into pillow", "mom cums quietly facing the wall", pool_dir="sex/laura_alone_after_watch_t5")],
-            [go("Lie still.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}, add("laura_gaps_watched", 1)], flags=[fset("saw_laura_alone"), fset("laura_alone_seen")])]),   # reader 2026-11-04: the beat has already put her in her room
+            [go("Lie still.", loc="home_ella_room", mins=5, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}, add("laura_gaps_watched", 1, clamp=False)], flags=[fset("saw_laura_alone"), fset("laura_alone_seen")])]),   # reader 2026-11-04: the beat has already put her in her room
     ]})
 
 # ── the shower gap (laura_shower_gap.md, signed 2026-11-01): Saturday 16:30-17:00, Laura showering before she
@@ -584,15 +595,25 @@ out.append({"id": "laura_shower_gap", "name": "The bathroom door won't shut",
         node("steam", "Steam", [P(beat("laura_shower_gap", "steam")),
             G(cond(here(L, "home_bathroom")), D(L, "Mm. God, yes."), D(L, "Fuck. I needed this.")),   # LO 2026-11-03: to herself, under the spray
             VID("through a bathroom door stuck open, a naked woman in a steamy shower touching herself", "woman masturbating in shower seen through door", "mom in shower hand between legs steam glass", pool_dir="sex/laura_shower_steam_t5"),
+            # writing pass: her voice at her level; wants only, true whichever button she takes
+            *her_thought_bands("corruption", [(20, "That's Mom. Step back. Step back right now."),
+                                              (40, "What does she think about in there? You want to know."),
+                                              (60, "You could stay till she finishes. Nobody would know.")],
+                               "Don't stop, Mom. You want to see all of it."),
             P("She showers at this time every Saturday.")],   # reader batch 4 (pass 3): the hook, her Saturday row
             # reader batch 4 (pass 3): the watch plays inside her half hour (fired at 16:56, a 5-minute button put the
             # watch screen at 17:01, when her row has her in the bedroom), so the minutes go on the way out instead
             [go("Keep watching.", node="watch", mins=0, flags=[fset("laura_shower_seen")]),
              go("Pull the door to.", loc="home_hall", mins=2, flags=[fset("laura_shower_seen")])]),
         node("watch", "Under the water", [G(cond(here(L, "home_bathroom")), D(L, "Right there. Oh God, right there.")), P(beat("laura_shower_gap", "watch")),
+            # reader 2026-11-04: shocked is her first Saturday's voice, not her voice at every level; a VID follows, so the chain ends
+            *her_thought_bands("corruption", [(20, "You just watched your mom come. You're shocked, and your legs are shaking."),
+                                              (40, "You want to know what she thinks about in there, to come that hard."),
+                                              (60, "You watched every second, and next Saturday you'll stay longer.")],
+                               "You wanted her to turn round. You wanted her to see how wet you are."),
             VID("a naked woman coming in the shower, forehead on the tiles, a moan under the spray", "woman orgasm in shower forehead on tiles", "mom cums in shower", pool_dir="sex/laura_shower_watch_t5"),
             P("Next Saturday she'll be in here again, and the lock will stick again.")],   # reader batch 4 (pass 3): the hook
-            [go("Back to your room.", loc="home_ella_room", mins=10, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}, add("laura_gaps_watched", 1)], flags=[fset("laura_shower_seen")])]),
+            [go("Back to your room.", loc="home_ella_room", mins=10, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}, add("laura_gaps_watched", 1, clamp=False)], flags=[fset("laura_shower_seen")])]),
     ]})
 
 # Laura's hour after she watched (DECISIONS 84): one screen, pays nothing.
@@ -619,9 +640,10 @@ out.append({"id": "master_door_peek", "name": "Peek through the gap",
         P("You ease the handle down and open the door a finger's width. The lamp is still on."),
         G(cond(here(L, "home_master_bedroom"), here(M, "home_master_bedroom")),
           # pass 4 reader: no next step and no hook, as signed (LO, 2026-11-04). Reader 2026-11-04: awake or snoring (she may have stayed at the gap first), so no word on his breath
-          P("It's over. Mark's flat on his back with one arm over his eyes. Laura lies awake beside him, staring at the ceiling, her nightdress still bunched up at her waist.")),
+          P("It's over. Mark's flat on his back with one arm over his eyes. Laura lies awake beside him, staring at the ceiling, her nightdress still bunched up at her waist. Her hand slides down her bare stomach and stops, but it comes back. She hasn't had what she wanted.")),
         G(cond(here(M, "home_master_bedroom"), here(L, "home_master_bedroom", False)),
-          P("Mark's sitting up against the headboard under the lamp, awake and alone, his phone lit in his hand. Laura's side of the bed is empty.")),
+          P("Mark's sitting up against the headboard under the lamp, awake and alone, his phone lit in his hand. Laura's side of the bed is empty. The sheet is tented over his lap, and he's looking at her pillow, not the phone.")),
+        P("Your face goes hot, and your nipples go tight. One creak from this hinge and you'd have to explain what you're doing at their door at this hour."),   # writing pass: low heat (H4), her body and the price
         P("Nobody looks at the door. You pull it to without a sound."),
     ], [go("Close the door.", loc="home_hall", mins=2)])]})
 
@@ -643,10 +665,19 @@ out.append(solo("garage_things", "Go through Mark's things",
 out += brake_canvas(solo("garage_laundry", "Do your laundry",
     "The washer, alone: 30 min, energy −5 (home_life.md:71). With Mark here it is in his hub.",
     "home_garage", [node("washer", "The washer", [
-        P("You sort your basket on the garage floor, darks and lights, and feed the old machine until it shudders and starts. It sounds like it's dying, but it always sounds like that."),
-    ], [go("Load it.", loc="home_garage", mins=30, flags=[fset("did_laundry")], eff=[add("energy", -5)],
+        P("You sort your basket on the garage floor, darks and lights. The old machine sits there with its door hanging open."),
+        # her voice at her level (Corruption, no floor): Mark's bench is right there, and he isn't
+        G(cond(trait("corruption", "lt", 20)), T("Just laundry. You keep your underwear at the bottom of the basket, where nobody has to see it.")),
+        G(cond(trait("corruption", "gte", 20), trait("corruption", "lt", 40)), T("Your underwear goes round in the drum, right next to his workbench. You wonder if he's ever looked.")),
+        G(cond(trait("corruption", "gte", 40), trait("corruption", "lt", 60)), T("You could leave your smallest underwear on top of the machine, right by his bench. You could see what he does.")),
+        G(cond(trait("corruption", "gte", 60)), T("You want to leave your underwear on his bench, still warm, and make him do something about it.")),
+    # reader 2026-11-04: the machine starts after her yes, so "Later." doesn't leave it running
+    ], [go("Load it.", node="loaded", mins=2, flags=[fset("did_laundry")], eff=[add("energy", -5)],
            costs=[{"trait": "energy", "value": 5}]),
-        go("Later.", loc="home_hall")])],
+        go("Later.", loc="home_hall")]),
+       node("loaded", "The washer", [
+        P("You feed the old machine until it shudders and starts. It sounds like it's dying, but it always sounds like that."),
+       ], [go("Wait for the cycle.", loc="home_garage", mins=28)])],
     sched=S(ALL, "07:00", "21:00"), conds=[here(M, "home_garage", False)]), "did_laundry")
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -694,6 +725,12 @@ sun_nodes = [
           for extra in (BRA_ONLY,
                         [BOLD, trait("ryan_step", "gte", 7), *TOPLESS])],
         go("Play up to Mark in the garage door.", node="sun_mark", cond_=cond(MARK_SEES, CURIOUS, trait("mark_step", "gte", 3), flag("mark_saw_her"), flag("sunned", False), *BRA_ONLY)),   # after his accident (H2, DECISIONS 124)
+        # reader 2026-11-04 (a solo button is a real act): Mark in the garage door and no look button open to her,
+        # before his accident or under both her stages: the same hour and the same pay as her other sun button
+        *brake(go("Lie in the sun.", node="sun_hour", mins=60, flags=[fset("sunned")], eff=[SUN_EFF],
+                  cond_=cond(MARK_SEES, flag("mark_saw_her", False))), "sunned"),
+        *brake(go("Lie in the sun.", node="sun_hour", mins=60, flags=[fset("sunned")], eff=[SUN_EFF],
+                  cond_=cond(MARK_SEES, flag("mark_saw_her"), trait("corruption", "lt", 20), trait("exhibitionism", "lt", 20))), "sunned"),
         go("Go in.", loc="home_hall"),
     ]),
     node("sun_seen", "Seen", [
@@ -752,12 +789,22 @@ sun_nodes = [
         *brake(go("Call him down with the sun lotion.", node="sun_ryan_touch", flags=[fset("sunned")],
                   cond_=cond(BOLD, trait("ryan_step", "gte", 7), here(M, "home_garage", False)),   # "Somebody's going to look out a window" is only true with Mark not in the garage door
                   eff=[npc_add(R, "want", 1), {"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 59}]), "sunned"),
-        go("Not today.", loc="home_garden")]),
+        go("Not today.", node="sun_ryan_no")]),
+    # writing pass (the written no; a solo button is a real act): her no is spoken, he answers, and she goes in. It pays nothing.
+    dict(node("sun_ryan_no", "Not today", [
+        ME("Not today, Ryan. Back to your screen."), D(R, "I didn't say anything."), ME("You didn't have to. Your curtain's been moving."),
+        P("You get up off the lounger and walk to the back door with your back to his window, but his eyes stay on your ass all the way in."),
+    ], [go("Go in.", loc="home_hall", mins=2)]), pin=[RYAN_SEES]),
     node("sun_mark", "The garage door", [G(cond(MARK_SEES), P("Mark's in the garage door with a beer, and he hasn't gone back in."))], [
         *brake(go("Stretch out for him.", node="sun_mark_tease", flags=[fset("sunned")], eff=[npc_add(M, "want", 1)],
                   cond_=cond(*BRA_ONLY)), "sunned"),
         # (release 1: Mark's paid look is cut, npc_mark.md)
-        go("Not today.", loc="home_garden")]),
+        go("Not today.", node="sun_mark_no")]),
+    # writing pass (the written no; a solo button is a real act): the same for Mark. It pays nothing.
+    dict(node("sun_mark_no", "Not today", [
+        ME("Not today, Mark. Your bench is that way."), D(M, "Didn't say a word, @player."),
+        P("He stays in the door with his beer and looks at your bare stomach while you get up. He looks at your legs all the way across the grass."),
+    ], [go("Go in.", loc="home_hall", mins=2)]), pin=[MARK_SEES]),
     # truth pass (2026-11-03): each writer screen is about the man at the window / the garage door, so the whole
     # screen carries his presence (`pin`, canv.pin_blocks, applied after writer.fill swaps the screen in)
     dict(node("sun_ryan_tease", "Ryan's window", [placeholder("sheets/people/npc_ryan.md:104", "Ryan, the garden: tease (Curious, Ryan A 4)")],
@@ -789,10 +836,10 @@ out.append(solo("front_step", "Sit on the step", "Watch the street. Who passes r
     "home_front_door", [
         node("step", "The front step", [
             GC(cond(tod("07:00", "21:00")), POOL(
-                GC({"version": "1.0", "logic": "AND", "items": []}, P("You sit on the front step with your knees up and watch the street. A car goes by slow. A guy walking his dog looks over, and keeps looking."),
-                   WHO("Now that's a lovely view."), ME("Keep walking.")),   # reader pass 3 b00: the pool runs 07:00-21:00, not only evenings
-                GC({"version": "1.0", "logic": "AND", "items": []}, P("Two doors down a man is washing his car, and he stops washing it when you sit down."),
-                   WHO("You want a job? I pay in ice cream."), ME("I'm good, thanks.")))),
+                GC({"version": "1.0", "logic": "AND", "items": []}, P("You sit on the front step with your knees up and watch the street. A car goes by slow. A guy walking his dog looks at your legs, and keeps looking until the dog drags him on."),
+                   WHO("Now that's a lovely view."), ME("Keep walking. Looking's all you get.")),   # reader pass 3 b00: the pool runs 07:00-21:00, not only evenings
+                GC({"version": "1.0", "logic": "AND", "items": []}, P("Two doors down a man is washing his car. He stops when you sit down, and his eyes go up your legs and stay there while the hose runs over his shoes."),
+                   WHO("You want a job? I pay in ice cream."), ME("I'm good, thanks. Eyes on your car.")))),
             GC(cond(tod("21:00", "07:00")), P("The street is dark and quiet, the porch light on its timer. A car passes now and then, slow, headlights sliding over you.")),
             # LO 2026-11-03: the street speaks. G (a pool) breaks the clock chain above.
             G(cond(tod("07:00", "21:00")), WHO("Don't get up on my account.")),
@@ -815,7 +862,7 @@ out.append(solo("front_step", "Sit on the step", "Watch the street. Who passes r
             WHO("Jesus. Sorry. Jesus Christ."),   # LO 2026-11-03
             ME("Watch where you're going."), WHO("I am. Believe me, I am."),
             G(cond(here("npc_vance", "vance_house")), P("Next door, Vance's paper is down in his lap. He doesn't pretend to read it.")),
-            G(cond(here("npc_vance", "vance_house"), flag("vance_met")), D("npc_vance", "Mark's girl is growing up.")),   # his short-skirt line (npc_vance.md); she is in the skirt here
+            G(cond(here("npc_vance", "vance_house"), flag("vance_met")), D("npc_vance", "Mark's girl has good legs.")),   # his short-skirt line (npc_vance.md); she is in the skirt here
             P("Across the road a curtain moves. The woman at the window has her phone in her hand, and she knows your mother."),
             T("That'll get back to Mom, but you keep your knees open a minute longer anyway."),
         ], [go("Knees together. Go in.", loc="home_hall", mins=15)]),

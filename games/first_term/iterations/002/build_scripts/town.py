@@ -66,7 +66,7 @@ out.append(town_event("town_event_vance", "Vance on his porch", S("18:00", "22:0
 out.append(town_event("town_event_jogger", "A jogger looks back", S("07:00", "10:00"), [],
     [P("A jogger goes past in the other direction, and looks back over his shoulder at your ass, twice.")],   # reader a3 #64 (DECISIONS 131)
     "Pretend you didn't see.",
-    plain_after=[P("You keep your eyes front and pretend, but your face goes hot anyway, and you can feel exactly where on your ass his eyes landed, both times.")],
+    plain_after=[P("You keep your eyes front and pretend, but your face goes hot anyway, and you can feel exactly where on your ass his eyes landed, both times. He comes down this street most mornings. He'll look again.")],
     bolder=("Look back.", [CURIOUS], [], "You look back, and catch him doing it a third time, eyes on your ass. He nearly runs into a lamp post. He slows like he might turn round. You turn the corner first. He runs this street in the mornings, and now he knows your ass by sight.")))   # reader pass 3 b01: the hook (his window is 07:00-10:00)
 # S6 (LO 2026-11-03): no "Nothing happens." random event on the street either.
 
@@ -81,7 +81,7 @@ out.append({
                 "conditions": cond(trait("drinks_tonight", "lt", 3))},
     "nodes": [node("counter", "The counter", [
         P("The counter is a wall of bottles and red cups. Somebody's mixing something blue in a mixing bowl."),
-        G(cond(trait("drinks_tonight", "eq", 2)), T("That'd be three. You'll feel it tomorrow.")),
+        G(cond(trait("drinks_tonight", "eq", 2)), T("Number three, from a mixing bowl. Breakfast is going to hurt.")),
     ], [
         # pass 3 D44 (the-surfaces.md R9): the drink lands on her body, not a toast (drinks_tonight is already counted)
         go("Pour one.", node="poured", mins=10, cond_=cond(trait("drinks_tonight", "lt", 2)), mods=DRINK_MOD, eff=[add("drinks_tonight", 1)]),
@@ -167,7 +167,12 @@ out.append({
           P("He pats the wall next to him, not the bathroom door behind it. Not yet.")),
         # reader a3 #58 (DECISIONS 131): the renders the line above is gated off (Saturday 00:00-02:00, his row, and
         # after hookup_today) get his not-yet too. "Later" names no night, so it is true after a hookup as well.
-        G(cond(flag("hookup_today"), wd(5), logic="OR"), D(COCKY, "Not here. Find me later.")),
+        # scene reader 2026-11-04: Saturday 00:00-02:00 is the end of his row, so "later" there is next Friday's party
+        G(cond(flag("hookup_today"), wd(4)), D(COCKY, "Not here. Find me later.")),
+        # scene reader 2026-11-04: only where neither "that bathroom door locks" line below shows
+        G(cond(wd(5), flag("hookup_today")), D(COCKY, "Not here. Find me next Friday.")),
+        G(cond(wd(5), flag("hookup_today", False), trait("corruption", "gte", 40), {"type": "npc_at_location", "location_id": "zoe_apartment", "npc_id": "npc_jake", "operator": "is_absent"}),
+          D(COCKY, "Not here. Find me next Friday.")),
         # scene reader b02 (2026-11-03): his next step, named. party_hookup (pools.py) outranks this hub at Bold with
         # Jake out of the flat, so this hub only shows below Bold or with Jake here.
         G(cond(flag("hookup_today", False), trait("corruption", "lt", 40)),
@@ -212,11 +217,14 @@ BRA_ON = {"type": "clothing_slot", "slot": "bra", "operator": "equipped"}
 PANTIES_OFF = {"type": "clothing_slot", "slot": "underwear", "operator": "unequipped"}
 PANTIES_ON = {"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}
 DAYTIME, NIGHT = tod("08:00", "18:00"), tod("22:00", "08:00")
-CAFE_GIRL = G(cond(trait("cafe_footfall", "gte", 10)), WHO("You're the girl from the café."))
+CAFE_GIRL = {case: G(cond(trait("cafe_footfall", "gte", 10)), WHO(line)) for case, line in (
+    ("skirt", "You're the girl from the café."),
+    ("nobra", "Aren't you from the café? You look different out here."),
+    ("nopanties", "Café girl, right? I'd come in more often for this."))}
 # (case, its worn items, level, Vance's line, the shop guy's line, the car's line)
 STREET_CASES = [
     ("skirt", [SKIRT_ON, PANTIES_ON], 1,
-     [D("npc_vance", "Mark's girl is growing up."), P("He doesn't pretend to read his paper. His eyes go up your legs to the hem of your skirt and stay there. He pats the step beside him. You keep walking.")],
+     [D("npc_vance", "Mark's girl has good legs."), P("He doesn't pretend to read his paper. His eyes go up your legs to the hem of your skirt and stay there. He pats the step beside him. You keep walking.")],
      "The shop guy comes out from behind the counter to stack a box that doesn't need stacking, and watches your legs in that skirt all the way past. He says it to your back as you go past, and you don't turn round.",
      "A car slows beside you. The window comes down halfway, and the driver is looking at your legs, not your face. It stays with you to the end of the street, but you never look in, and it goes."),
     ("nobra", [BRA_OFF, SKIRT_OFF, PANTIES_ON], 1,
@@ -270,7 +278,7 @@ for case, worn, lv, vance, shop, car in STREET_CASES:
             G(cond(VANCE_AWAY, DAYTIME), P(shop), WHO(SHOP_SAID[case]), P(SHOP_NEXT)),
             G(cond(VANCE_AWAY, NIGHT), P(car), WHO(CAR_SAID[case]), ME("Keep driving."), P(CAR_NEXT)),
             G(cond(VANCE_AWAY, tod("18:00", "22:00")), P(car), WHO(CAR_SAID[case]), ME("Keep driving."), P(CAR_NEXT)),
-            CAFE_GIRL,
+            CAFE_GIRL[case],
             *STREET_POOLS.get(case, []),
         ], exits)]})
 

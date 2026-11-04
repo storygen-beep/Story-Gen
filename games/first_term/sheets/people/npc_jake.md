@@ -84,7 +84,7 @@ watching.
 | 4 · he moves at least every other step | yes: his move is written on every step |
 | 5 · his meter is the lock | waived (declared on this sheet, signed by LO 2026-11-01) |
 | 6 · a hot repeatable per stage | yes: the end of a date by stage, plus three acts |
-| 7 · her voice changes with her level | no: only step 2 reads her level |
+| 7 · her voice changes with her level | yes: steps 2-4 change her line by level (2026-11-04) |
 | 8 · something happens after the top step | yes: dates, the locker room, the quad |
 
 Failing, waivers not counted: 1 of 8. The ladder may be built (two fails stop it).

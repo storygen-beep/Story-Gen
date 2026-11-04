@@ -1,4 +1,5 @@
 # [REVIEW] Person — Tom
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. His card's end line as built (DECISIONS 132); the release's three steps in the why table.
 
@@ -69,7 +70,7 @@ Every step's gate also says the drinks boost is off.
 | 4 · he moves at least every other step | yes: his move is written on every step |
 | 5 · his meter is the lock | waived (declared on this sheet, signed by LO 2026-11-01) |
 | 6 · a hot repeatable per stage | yes: the café's three levels |
-| 7 · her voice changes with her level | no: steps 1 and 3 read her level, step 2 doesn't |
+| 7 · her voice changes with her level | yes: all three steps change her line by level (2026-11-04) |
 | 8 · something happens after the top step | yes: the café shifts go on under his rule |
 
 Failing, waivers not counted: 1 of 8. The ladder may be built (two fails stop it).
@@ -137,7 +138,7 @@ Each follow-up waits for her reply (`after_round`), and a different answer follo
 
 | text | the yes books | showing up | ignored a day | the no-show text (when) | it costs |
 |---|---|---|---|---|---|
-| "shift after class?" | "on my way after": `tom_shift_booked` | the day's first shift: "You came. Good. Four extra for showing up." · money add +4 | his Want add −1 | "no show today? really?" · "i covered your tables." (9 hours after the yes, 19:00–23:00) | his Want add −1 |
+| "shift after class?" | "on my way after": `tom_shift_booked` | the day's first shift: "Said you'd be here, and you are. Good. Four extra for showing up." · money add +4 | his Want add −1 | "no show today? really?" · "i covered your tables." (9 hours after the yes, 19:00–23:00) | his Want add −1 |
 | "stay after close" · "i'll do the blinds" (Friday, after step 6) | "i'll stay" (was "maybe"): `tom_close_booked` | `tom_after_close` opens only when booked | his Want add −1 | "you said you'd stay." · "blinds stayed up." (Saturday 08:00–20:00) | his Want add −2 |
 
 ## Rows a gate needs

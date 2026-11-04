@@ -20,12 +20,14 @@ CLOCK_IN = [{"action": "equip", "item_id": "cafe_uniform_normal"}]
 SEXY_WORN = {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "equipped"}
 SEXY_NOT_WORN = {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "unequipped"}
 
-def back(next_node):
-    """She changes in the back room: the uniform is equipped before any screen names it."""
+def back(next_node, change="You change in the back room in front of the staff mirror, between the mop bucket and the crates of milk."):
+    """She changes in the back room: the uniform is equipped before any screen names it.
+    change: each step its own words for it (one pool, one place)."""
     return node("back", "The back room", [
         P("Tom looks up from the till as you come in."),
         D(TM, "Uniform, @player. Back room."),
-        P("You change in the back room in front of the staff mirror, between the mop bucket and the crates of milk."),
+        # scene reader 2026-11-04: in the tight one (or the normal one) she has nothing to change out of
+        G(cond(SEXY_NOT_WORN, {"type": "clothing_item", "item_id": "cafe_uniform_normal", "operator": "unequipped"}), P(change)),
     ], [go("Clock in.", node=next_node, mins=5, cond_=cond(SEXY_NOT_WORN), wardrobe=CLOCK_IN),
         go("Clock in.", node=next_node, mins=5, cond_=cond(SEXY_WORN))])
 
@@ -46,7 +48,9 @@ out.append({
                 "cafe manager behind counter espresso machine", "small cafe interior staff wanted sign"),
             P("There's a card taped inside the café window: STAFF WANTED, NO EXPERIENCE NEEDED. Behind the counter a man in his thirties with his sleeves rolled up is wiping the espresso machine. The manager. Tom, says the badge. He looks you over before you've opened your mouth, top to bottom, the way you'd look at something you were thinking of buying."),
             D(TM, "You're here about the sign."),
-            ME("I can start today. I need the money."),
+            # scene reader 2026-11-04: this screen shows until 23:00 and shifts start by 19:00; "as soon as you open" also holds on a Saturday night
+            G(cond(tod("08:00", "19:00")), ME("I can start today. I need the money.")),
+            G(cond(tod("19:00", "23:00")), ME("I can start as soon as you open. I need the money.")),
             D(TM, "Everybody needs the money. Eight a shift, plus tips. Be on time."),
             T("He looked at you one second too long. Then he was all business."),
         # Q2 (LO, 2026-11-04): from the counter now, which makes it an event to the gates; his look pays him (H5)
@@ -58,7 +62,7 @@ out.append({
         ], [go("Leave the sign where it is.", loc="cafe", mins=2, retry=1)]),   # pass 3 D39 (R7): the way out answers him
         node("uniform", "The uniform", [
             P("He reaches under the counter and pushes a folded uniform across to you: a black dress with a white apron, the café's name stitched on the pocket."),
-            D(TM, "Eight till seven, up to three shifts a day, Monday to Saturday. Wear that. Be on time."),
+            D(TM, "Start by seven at the latest, up to three shifts a day, Monday to Saturday. Wear that. Be on time."),
         ], [go("Take the uniform.", loc="cafe", mins=5, consumes=True, flags=[fset("cafe_job"), fset("tom_met")],
                wardrobe=[{"action": "add", "item_id": "cafe_uniform_normal"}])]),
     ]})
@@ -96,7 +100,7 @@ out.append({
     "description": "Tom step 2 of 3 (release 1; was Tom B 3): she sees him steal from the tip jar. Sets knows_tip_jar.",
     "trigger": dict(step_trigger(TM, 2, retry_days=3), substitution_only=True),   # Q2: from the shift at the counter (cafe.py)
     "nodes": [
-        back("jar"),
+        back("jar", change="You change with your back to the door, the shelves of sugar and paper cups at your elbow, and you're out of your own clothes in under a minute."),
         node("jar", "The back room", [
             P("He counts the jar when you're near now, lips moving. Today you go into the back room for milk and he's there with the tip jar on the shelf, folding the bills out of it into his apron pocket, the biggest bills first. Your singles are in there too. Everybody's."),
         ], [
@@ -110,6 +114,12 @@ out.append({
             D(TM, "The till. I'm counting the till. Not a word, @player."),
             P("He takes his hand out of the jar slowly and puts the lid back on, and his ears go red."),
             T("He's a thief. And now he owes you."),
+            # her voice at her level: the step has no Corruption floor, so every band
+            G(cond(trait("corruption", "lt", 20)), T("You only came in for milk. Your hands are shaking. Go back out front and smile.")),
+            G(cond(trait("corruption", "gte", 20), trait("corruption", "lt", 40)), T("You wonder what he'd do to keep you quiet. You wonder how far he'd go.")),
+            G(cond(trait("corruption", "gte", 40), trait("corruption", "lt", 60)), ME("You owe me now, Tom. I'll let you know how you're paying.")),
+            G(cond(trait("corruption", "gte", 60)), ME("Leave the jar, Tom. You want to pay me back? I can think of better places for that hand."),
+              P("You cup your own tit right in front of him and squeeze it, slow. His eyes drop to your hand and stay there, and his throat works.")),
         ], [go("\"Not a word.\"", loc="cafe", mins=5, consumes=True,
                eff=[nadd(TM, "want", 5), nadd(TM, "power", -5), setv("tom_step", 2)], flags=[done(3), fset("knows_tip_jar")]),
             # reader batch 5 (pass 3): his ask gets a written no. She saw it either way, so the step is done and she

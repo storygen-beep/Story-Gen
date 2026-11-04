@@ -86,7 +86,7 @@ def setv(k, n, clamp=None):
 
 
 def nadd(npc, k, n):
-    return {"targetType": "npc", "npcId": npc, "trait": k, "op": "add", "value": n}
+    return {"targetType": "npc", "npcId": npc, "trait": k, "op": "add", "value": n, "clamp": True}   # F76/J77: a 0-100 meter stays in its band
 
 
 def fset(k):

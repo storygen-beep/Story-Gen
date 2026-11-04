@@ -87,7 +87,7 @@ Every step's gate also says the drinks boost is off.
 | 4 · he moves at least every other step | yes: his move is written on every step |
 | 5 · his meter is the lock | waived (declared on this sheet, signed by LO 2026-11-01) |
 | 6 · a hot repeatable per stage | waived (declared on this sheet, signed by LO 2026-11-01) |
-| 7 · her voice changes with her level | no: only step 3 reads her level |
+| 7 · her voice changes with her level | partly: steps 3 and 4 change her line by level; steps 1 and 2 are pinned to the first Sunday (2026-11-04) |
 | 8 · something happens after the top step | yes: the Sunday table changes after step 4 |
 
 Failing, waivers not counted: 1 of 8. The ladder may be built (two fails stop it).

@@ -1,4 +1,5 @@
 # [REVIEW] Scene — hale_thursday_session
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign.
 
@@ -45,8 +46,8 @@ One row per exit. Read from the build; it replaces the drafted map.
 | `touch_high` | Dr. Hale says it like he is reading a page number. | yes | "Same time next week." → `end` | Psychology grade +2 · Corruption +1 (cap 79) · Exhibitionism +1 (cap 59) |
 | `claire_car` | His phone buzzes on the desk before he's touched you. | no | "Next Thursday." → Faculty Floor | Psychology grade +2 · `hale_thursday_booked` cleared |
 | `end` | He looks at the clock, and straightens his tie, and unlocks the door. | no | "Thursday." → Faculty Floor | `hale_thursday_booked` cleared |
-| `isnt` | He turns the photo face-up and doesn't look at you while you go. | no | "Leave him to his photo." → Faculty Floor | `hale_thursday_booked` cleared |
-| `run` | You're out of the door before he's out of his chair. | no | "Keep walking." → Faculty Floor | `hale_thursday_booked` cleared |
+| `isnt` | He turns the photo face-up and doesn't look at you while you turn the lock and go. | no | "Leave him to his photo." → Faculty Floor | `hale_thursday_booked` cleared |
+| `run` | You turn the lock yourself and you're out of the door before he's out of his chair. | no | "Keep walking." → Faculty Floor | `hale_thursday_booked` cleared |
 
 ## The pools, written
 
@@ -90,8 +91,8 @@ thighs open). None of them has her come; the session stops at touching (LO: "thi
 **`door`:** "His office door is unlocked. He locks it behind you without a word. The photo is already face-down." · Dr. Hale: "Twenty minutes, @player."
 **`claire_car`:** "His phone buzzes on the desk before he's touched you. He reads it and his face goes flat." · Dr. Hale: "She's early. She's in the parking lot." · "He unlocks the door and holds it open." · Dr. Hale: "Next Thursday." · "From the corridor window you can see a car with its engine running."
 **`end`:** "He looks at the clock, and straightens his tie, and unlocks the door." · Dr. Hale: "Thursday." · "Down in the parking lot his wife's car isn't there yet."
-**`isnt`:** @player: "This isn't coaching." · Dr. Hale: "Then you'll stay at a C." · "He turns the photo face-up and doesn't look at you while you go."
-**`run`:** "You're out of the door before he's out of his chair. Behind you, calm, not raised:" · Dr. Hale: "Next Thursday, @player."
+**`isnt`:** @player: "This isn't coaching." · Dr. Hale: "Then you'll stay at a C." · "He turns the photo face-up and doesn't look at you while you turn the lock and go."
+**`run`:** "You turn the lock yourself and you're out of the door before he's out of his chair. Behind you, calm, not raised:" · Dr. Hale: "Next Thursday, @player."
 
 "his wife's car isn't there yet" is true: the session ends by 19:05 and her pickup is half past seven.
 

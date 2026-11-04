@@ -40,7 +40,7 @@ def since(key, op, hours=HOURS):
 DAILY = ["ate_breakfast", "had_coffee", "ate_dinner", "helped_cook", "did_dishes", "had_drink_home",
          "watched_tv", "movie_night", "did_laundry", "sunned", "studied_home", "made_up_today",
          "hung_washing", "home_event", "couch_seen", "mark_paid_look", "mark_tv_paid",
-         "ryan_towel_today", "mark_towel_today", "laura_towel_today"]
+         "ryan_towel_today", "mark_towel_today", "laura_towel_today", "laura_dress_chosen"]
 
 
 def _with(c, extra):

@@ -104,7 +104,7 @@ TIER = {"low": [[trait("exhibitionism", "lt", 60)]],
         "high": [[APART, trait("exhibitionism", "gte", 60)]],
         "z": [[TOGETHER, trait("exhibitionism", "gte", 60)]]}
 ZOE_LINE = {"low": "Kiss the cocky guy. Properly. Tongue, hands, the lot.",
-            "high": "Flash the guy at the keg. Or topless in the kitchen till the song ends. Or his lap, till he's hard. Make him beg.",
+            "high": "Flash the guy at the keg. Or topless in the kitchen till the song ends. Or the cocky guy's lap, till he's hard. Make him beg.",
             "z": "Kiss me where they can see. Or let me watch you with him."}
 # pass 4 (A68 rule, LO 2026-11-04): an act a group watches needs both meters at stage 4, Corruption 60 and
 # Exhibitionism 60 (the tier holds the Exhibitionism 60). Every dare but the kiss is watched (DECISIONS 124), so each
@@ -140,6 +140,11 @@ DARE_SAID = {"low_show": [WHO("Holy shit. Again. Do it again."), D(Z, "That's my
              "high_do": [D(C, "Please. Fuck. Please, okay? I'm begging."), D(Z, "You heard him. He begged. Dare done.")],
              "z_show": [D(Z, "Mm. You taste good. Again."), ME("Everyone's watching us."), D(Z, "That's the point, babe.")],
              "z_do": [D(Z, "Slower. Make him wait for it."), D(C, "Jesus Christ, you two are going to kill me.")]}
+# scene reader 2026-11-04 (her voice): "It doesn't count" is pushback, and at Hungry she isn't pushing back. The kiss
+# opens at Corruption 20, so three bands. Moved out of the low_do beat (zoe_dares.md) so the beat stays on the body.
+LOW_DO_THOUGHT = [G(cond(trait("corruption", "lt", 40)), T("It's a dare. It doesn't count.")),
+                  G(cond(trait("corruption", "gte", 40), trait("corruption", "lt", 60)), T("It's a dare. So why do you want to go back for more?")),
+                  G(cond(trait("corruption", "gte", 60)), T("Dare, my ass. You wanted his tongue in your mouth before she said a word."))]
 # scene reader b03 (2026-11-03): a dare beat that says "your top" is true only in a top. canv.top_or_dress keys on the
 # two going-out dresses being off, so in a cafe uniform, or in only a bra, it named a top she wasn't wearing. Here each
 # beat is worded for what is on: a top, a dress-slot item (the two dresses, the uniforms), a bra and nothing over it, bare.
@@ -188,10 +193,10 @@ for tier, cases in TIER.items():
 for key in PAY:
     blocks = dare_by_top(key, D_(key)) if key != "high_show" else [POOL(P(D_(key)), P(FLASH_SONG), pid="zoe_dare_high_show", bag=True)]
     who = "keg" if key in ("low_show", "high_show") else "cocky"
-    blocks += [MEDIA[key], *DARE_SAID[key], G(cond(trait("jake_step", "gte", 3)), T(JAKE_LINE[who]))]
+    blocks += [MEDIA[key], *DARE_SAID[key], *(LOW_DO_THOUGHT if key == "low_do" else []), G(cond(trait("jake_step", "gte", 3)), T(JAKE_LINE[who]))]
     dare_nodes.append(node(key, "The dare", blocks, [
         go("Back to the party.", loc="zoe_apartment", mins=20, cond_=cond(flag("zoe_dared", False)),
-           eff=PAY[key] + [add("zoe_dares_done", 1), add("campus_talk", 1, clamp=False)],
+           eff=PAY[key] + [add("zoe_dares_done", 1, clamp=False), add("campus_talk", 1, clamp=False)],
            flags=[fset(REGULAR_FLAG[who])]),
         go("Back to the party.", loc="zoe_apartment", mins=20, cond_=cond(flag("zoe_dared")))]))
 out.append({
@@ -295,6 +300,11 @@ out.append({
     # reader a3 #67 (DECISIONS 131): the run is shown only after she picks it; "Walk it instead." gets its own screen.
     "nodes": [node("gates", "The gates", [
         P("You stretch against the park gates. The loop round the pond is two laps if you mean it."),
+        # writing pass: her voice at her level
+        GC(cond(trait("exhibitionism", "lt", 20)), T("Head down, two laps. Nobody needs to look at you.")),
+        GC(cond(trait("exhibitionism", "lt", 40)), T("Somebody on that loop is going to look. You wonder who.")),
+        GC(cond(trait("exhibitionism", "lt", 60)), T("Take it past the benches. Let them look.")),
+        GC(cond({"type": "worn_exposure", "operator": "gte", "value": 0}), T("You want every man on that loop turning his head.")),
     ], [
         go("Run the loop. (10 energy)", node="run", mins=35, costs=[{"trait": "energy", "value": 10}], cond_=DARING_RUN, eff=[capped("exhibitionism", 1, CAP_GG)]),   # her clothes open it, not a meter, so it opens at 0 and stops at 19 (LO, 2026-11-04)
         go("Run the loop. (10 energy)", node="run", mins=35, costs=[{"trait": "energy", "value": 10}], cond_=cond({"type": "clothing_slot", "slot": "bra", "operator": "equipped"}, {"type": "clothing_slot", "slot": "top", "operator": "equipped"})),
@@ -316,7 +326,11 @@ out.append({
     ], [go("Cool down.", loc="park", mins=5)]),
         node("walk", "A walk", [
             P("You walk the loop instead, slow, and let the runners go past you both ways, red-faced and blowing. A man on the bench by the pond watches you all the way round. His eyes go down your legs and back up to your tits, but he doesn't look away when you catch him."),
-            T("Let him look. That's all he gets."),   # reader a3 verify (DECISIONS 131): her not-yet
+            # reader a3 verify (DECISIONS 131): her not-yet; scene reader 2026-11-04: the middle bands only
+            G(cond(trait("exhibitionism", "gte", 20), trait("exhibitionism", "lt", 60)), T("Let him look. That's all he gets.")),
+            # scene reader 2026-11-04: the other bands get theirs on the body too
+            G(cond(trait("exhibitionism", "lt", 20)), P("You cross your arms over your chest and walk faster. Your face is hot, and he doesn't get another look.")),
+            G(cond(trait("exhibitionism", "gte", 60)), P("You slow down right in front of him and roll your shoulders back, so your tits lift, and you keep walking. His mouth opens. Not today.")),
         ], [go("Back to the gates.", loc="park", mins=2)]),
     ]})
 
@@ -364,8 +378,12 @@ out.append({
                 "show_when_blocked": True, "cooldown_message": "Every day, 7 AM-9:30 PM, once a day"},
     "nodes": [
         node("sound", "The far path", [
-            P("The far path behind the rhododendrons is empty and quiet. Then it isn't: a sound off to the left, through the leaves, low and rhythmic."),
+            P("The far path behind the rhododendrons is empty and quiet. Then it isn't: a sound off to the left, through the leaves, low and rhythmic. Your face goes hot, and your nipples go tight."),
+            WHO("Hold still. Hold still for me."),   # writing pass: low heat (H4), the man, through the leaves
             G(cond(CURIOUS), T("You know exactly what that is. You could leave, but you don't want to.")),
+            # writing pass: the price; scene reader 2026-11-04: from visit 2 she has already seen
+            G(cond(trait("corruption", "lt", 20), flag("saw_the_couple", False)), T("One step off this path and you can't say you didn't see.")),
+            G(cond(trait("corruption", "lt", 20), flag("saw_the_couple")), T("You know what's behind those leaves. You saw it last time. Your face burns.")),
         ], [
             go("Step off the path to look.", node="run", mins=3, cond_=cond(trait("corruption", "lt", 20))),
             go("Stay and watch.", node="watch", mins=5, cond_=cond(CURIOUS)),
@@ -387,7 +405,7 @@ out.append({
             WHO("Take it. Take all of it."), WHO("I'm coming. Oh God, I'm coming."),
             VID("a girl hidden in bushes touching herself while watching a couple have sex against a tree", "girl masturbating watching couple outdoors", "voyeur girl fingers herself in park", pool_dir="sex/park_couple_touch_t5")],
             [go("Slip away.", loc="park", mins=10, eff=[capped("corruption", 1, CAP_CUR)], flags=[fset("saw_the_couple")])]),
-        node("away", "The other way", [P("You turn round and walk the other way, fast, and don't look back, but your face is burning anyway.")], [go("Back to the pond.", loc="park", mins=10)]),
+        node("away", "The other way", [P("You turn round and walk the other way, fast, and don't look back, but your face is burning and your nipples are still tight. You can hear them all the way to the pond. Not today.")], [go("Back to the pond.", loc="park", mins=10)]),
     ]})
 
 HIDDEN = ("Zoe drags you off the path into the hollow behind the rhododendrons. Joggers pound past a few yards away. She shoves you against a tree and kisses you hard, both of you still panting from the run. \"Quiet, babe,\" she breathes. Her hand slides down inside, flat on your skin, and finds you wet. Her fingers start slow. You grab her ass and pull her in. Her thumb finds your nipple and rubs. Footsteps crunch past, close enough to touch, but Zoe doesn't stop. Her fingers go fast, deep, until your hips buck into her hand. Your orgasm hits and your knees give out. Zoe pins you to the bark with her whole body, her mouth on yours to swallow every moan.")
@@ -463,7 +481,7 @@ out.append({
         G(cond({"type": "npc_at_location", "location_id": "home_ryan_room", "npc_id": R, "operator": "is_present"}),
           P("Ryan comes out of his room while you're still bent over. He has to flatten himself to the wall to pass you in the narrow hall, and his eyes go down your legs on the way past.")),
         G(cond({"type": "npc_at_location", "location_id": "home_kitchen", "npc_id": L, "operator": "is_present"}),
-          D(L, "Is that for college or for a guy?")),
+          D(L, "Who are you dressed up for?")),
         G(cond(SKIRT, NO_PANTIES), P("There's nothing under the skirt. Anyone behind you in this hall gets your bare ass and your pussy."),
           # heat proposal A12 (DECISIONS 147): a _t4 pool on the no-panties screen (media only)
           VID("a girl in a short skirt and no panties bending over in a hallway, a man behind her looking straight up it",

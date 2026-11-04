@@ -146,7 +146,7 @@ type = "block_pool"   # one-item pool: keeps this group out of the chain beside 
 blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "gte", value = 30 }, { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "lt", value = 60 } ] }, blocks = [
   { type = "paragraph", content = "He folds the paper and puts it down. He's started doing that when it's you. He looks at your legs like he's doing sums." },
   # reader a3 #60 (DECISIONS 131): the not-yet, "One evening you'll sit with me." (folded into his ask so he doesn't say it twice)
-  { type = "dialog", content = "Mark's girl is growing up. One evening you'll sit with me, keep an old man company.", props = { speaker = "npc", npcId = "npc_vance" } },
+  { type = "dialog", content = "Mark's girl has good legs. One evening you'll sit with me, keep an old man company.", props = { speaker = "npc", npcId = "npc_vance" } },
 ] } ]
 
 [[canvases.nodes.blocks]]
@@ -307,7 +307,11 @@ blocks = [ { type = "group", conditions = { version = "1.0", logic = "OR", items
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
-blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_type", operator = "neq", value = "short_skirt" }, { type = "clothing_slot", slot = "bra", operator = "equipped" } ] }, blocks = [ { type = "paragraph", content = "You walk past his porch. A nod from the rocking chair. Nothing else. To him you're scenery." } ] } ]
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_type", operator = "neq", value = "short_skirt" }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "lt", value = 30 } ] }, blocks = [ { type = "paragraph", content = "You walk past his porch. A nod from the rocking chair. Nothing else. To him you're scenery." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # scene reader 2026-11-04: at his Want 30+ she is not scenery to him, whatever she has on
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_type", operator = "neq", value = "short_skirt" }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "gte", value = 30 } ] }, blocks = [ { type = "paragraph", content = "You walk past his porch. The paper comes down anyway. He looks at your ass all the way to the corner, and he doesn't say a word." } ] } ]
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -443,8 +447,35 @@ effects    = [ { targetType = "player", trait = "energy", op = "add", value = 20
 
 [[canvases.nodes.exit_block.choices]]
 text       = "Not hungry."
+targetType = "node"   # writing pass (the written no): a reply, not a bare link back to the same room
+nodeId     = "not_hungry"
+
+[[canvases.nodes]]
+id   = "not_hungry"
+name = "Not hungry"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "I'm good, thanks. Not hungry."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Then you're holding up my line. Out. Next!"
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You step out of the line. The guy behind you is already reaching past you for a tray."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text       = "Find a seat."
 targetType = "location"
 locationId = "canteen"
+time_progression_minutes = 2
 
 [[canvases.nodes]]
 id   = "eaten"
@@ -681,7 +712,11 @@ blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", item
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
-blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_slot", slot = "bra", operator = "equipped" } ] }, blocks = [ { type = "paragraph", content = "Your bra shows a line. You think about the stall behind you, and the lock on it, and what you'd look like walking into class without it." } ] } ]
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 } ] }, blocks = [ { type = "paragraph", content = "Your bra shows a line. You smooth it flat with your thumb, and your face goes hot. Class without it? You'd die." } ] } ]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"   # scene reader 2026-11-04: the stall thought opens with the stall button, at Exhibitionism 20
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 } ] }, blocks = [ { type = "paragraph", content = "Your bra shows a line. You think about the stall behind you, and the lock on it, and what you'd look like walking into class without it." } ] } ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
@@ -711,9 +746,10 @@ flagEffects = [ { targetType = "player", flag = "toilet_bra_today", op = "set" }
 effects = [ { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 } ]
 
 [[canvases.nodes.exit_block.choices]]
-text       = "Leave it."
+text       = "Walk out to campus."
 targetType = "location"
-locationId = "college_womens_toilet"
+locationId = "campus"   # writing pass (a solo button is a real act): "Leave it." landed where she stood
+time_progression_minutes = 2
 
 [[canvases.nodes]]
 id   = "bare"

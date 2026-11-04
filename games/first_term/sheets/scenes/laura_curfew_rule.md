@@ -1,4 +1,5 @@
 # [REVIEW] Scene — laura_curfew_rule
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-04 to match the build; waits for LO's re-sign. `stairs` and `high` no longer name her shoes or the bench she has left.
 
@@ -25,7 +26,7 @@
 | `stairs` | Laura in the dark hall, in the lamp; what she smells follows the late flag (as built) | "Wait for it." → `low` or `high` | `laura_suspicion` add +5 |
 | `low` | "You're grounded. A week." | "Fine." · the truth ("Zoe's.", "Work." or "Out with Jake.", by where she was) → her room · a lie ("... (she'll know)") → `lie` | curfew 7 days · `came_home_late` cleared |
 | `lie` | "Bed. Now." | "Goodnight, Mom." → her room | Laura's Love add −5 · `laura_suspicion` add +5 · the curfew |
-| `high` | "I'm not angry. I was nineteen once." · "Did anyone look at you?" | "Everyone." → her room | `came_home_late` cleared (was: Want +10, `laura_step` 2) |
+| `high` | "I'm not angry. I was nineteen once." · "Did anyone look at you?" | by Exhibitionism: "I don't know. Maybe." · "A couple of guys." · "Everyone." · "Everyone. I made sure of it." → her reply, "I'll be on this bench the next time you're late." → her room | `came_home_late` cleared (was: Want +10, `laura_step` 2) |
 
 ## Why
 

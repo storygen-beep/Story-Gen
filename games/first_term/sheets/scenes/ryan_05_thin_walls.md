@@ -1,4 +1,5 @@
 # [REVIEW] Scene — ryan_05_thin_walls
+> Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); waits for LO's re-sign. the nos' own screens, the sleep buttons, "Knock back twice." from Corruption 40, the hall's button; the step row. the explicit beats as built, measured.
 
@@ -39,7 +40,7 @@
 | `act` | her fingers, his rhythm; she comes; his headboard stops dead | yes (9 words) | "Lie still." → `after` | corruption add +1 · Ryan's Want add +5 |
 | `after` | silence; "...@player.nickname?" through the wall; she doesn't answer | no | "Sleep (8h)." · "(7h)." · "(6h).", by the hour → `hall` · "Knock back twice." from Corruption 40 → `knock_back` | `ryan_heard_her` set · `ryan_step` set 5 |
 | `knock_back` | she knocks back twice through the wall | no | the same sleep buttons → `hall` | as `after`, and `ryan_knocked_back` set |
-| `hall` | Saturday dawn: Kayla in his T-shirt: "You must be @player.nickname." | no | "Wait your turn, then take the shower (2h)." → the bathroom | energy set 100 · `kayla_met` set |
+| `hall` | Saturday dawn: Kayla in his T-shirt: "Morning, @player.nickname." | no | "Wait your turn, then take the shower (2h)." → the bathroom | energy set 100 · `kayla_met` set |
 
 **The parked nos** ("Put your headphones in.", "Roll over. Sleep."): the step comes back next Friday
 (`retry_after_days = 7`, guess). Nothing else moves.
@@ -67,7 +68,7 @@ not said, and the meaning goes to the next screen.
 
 **`hall`** · 97 words · explicit words 1 (ass) · median sentence 9 · not explicit
 
-> Ryan's door clicks open and a girl slips out barefoot. Kayla. She's in one of his T-shirts, and it barely covers her ass. She's sneaking for the bathroom before Mom is up. She sees you and stops. She looks a beat too long, and she's smiling. "You must be @player.nickname." *She heard you. Or he told her.* "I am," you say. "Thin walls." Kayla laughs, low, like she just won something. "Shower's free. Go on. I'm not going anywhere." Behind her, Ryan stands frozen in his doorway, red to the ears, and he can't look at you.
+> Ryan's door clicks open and a girl slips out barefoot. Kayla. She's in one of his T-shirts, and it barely covers her ass. She's sneaking for the bathroom before Mom is up. She sees you and stops. She looks a beat too long, and she's smiling. "Morning, @player.nickname." *She heard you. Or he told her.* "Morning," you say. "Thin walls." Kayla laughs, low, like she just won something. "Shower's free. Go on. I'm not going anywhere." Behind her, Ryan stands frozen in his doorway, red to the ears, and he can't look at you.
 
 One line changed after `v2-prose`: her thought was first person; it is now *"She heard you. Or he told her."*
 Re-measured: 97 words.
