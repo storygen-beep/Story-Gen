@@ -1,4 +1,5 @@
 # [READY] Person — Laura
+> Changed 2026-11-04 after LO's signature: Laura's curfew call no longer says where Ella is; signed by LO 2026-11-04.
 > Signed by LO: LO, 2026-11-04.
 > Changed 2026-11-04, LO's answers: her want and the curfew call's answer no longer praise her as a child (A); signed by LO 2026-11-04.
 > Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
@@ -221,8 +222,8 @@ awake. She never says where @player is; the engine can't see that.
 
 | Laura | her answer | after it |
 |---|---|---|
-| "Good, your phone's on, sweetheart. You know the rule. No parties, no late shifts, no dates." | "I know. Not this week." | "That's all I wanted to hear, sweetheart." |
-| | "I'm staying at Zoe's." | "We'll talk about this." · `laura_suspicion` add +2 |
+| "You know the rule, sweetheart. No parties, no late shifts, no dates." | "I know. Not this week." | "That's all I wanted to hear, sweetheart." |
+| | "You can't ground me forever." | "We'll talk about this." · `laura_suspicion` add +2 |
 | | (lets it ring) | `laura_suspicion` add +2 |
 
 **Bookings and no-shows (changed 2026-10-29, DECISIONS 87–88, re-signed by LO 2026-10-29).** A yes books it; showing up pays or plays its line and clears the booking; a yes with no show brings a short text that costs, whether she answers it or ignores it for a day. Ignoring the first text costs a little. Amounts are guesses for LO.

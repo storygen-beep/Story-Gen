@@ -8228,7 +8228,7 @@ props = { description = "a young woman in a bath towel letting it slip off her b
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Tuck it back in."
+text = "Go and find some clothes."
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 2
@@ -8955,7 +8955,7 @@ props = { description = "a young woman in a bath towel letting it slip off her b
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Tuck it back in."
+text = "Go and find some clothes."
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 2
@@ -9512,7 +9512,7 @@ props = { description = "a young woman in a bath towel letting it slip off her b
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Tuck it back in."
+text = "Go and find some clothes."
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 2
@@ -9931,7 +9931,7 @@ props = { description = "a young woman in a bath towel letting it slip off her b
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Tuck it back in."
+text = "Go and find some clothes."
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 2
@@ -12418,7 +12418,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Tuck it back in."
+text = "Go and find some clothes."
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 2
@@ -12733,7 +12733,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Tuck it back in."
+text = "Go and find some clothes."
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 2
@@ -13006,7 +13006,7 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Tuck it back in."
+text = "Go and find some clothes."
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 2
@@ -13029,7 +13029,7 @@ name = "Mom"
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Good, your phone's on, sweetheart. You know the rule. No parties, no late shifts, no dates."
+content = "You know the rule, sweetheart. No parties, no late shifts, no dates."
 props = { speaker = "npc", npcId = "npc_laura" }
 
 [canvases.nodes.exit_block]
@@ -13043,7 +13043,7 @@ time_progression_minutes = 2
 flagEffects = [{ targetType = "player", flag = "laura_call_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "\"I'm staying at Zoe's.\""
+text = "\"You can't ground me forever.\""
 targetType = "node"
 nodeId = "talk"
 time_progression_minutes = 2
@@ -15772,7 +15772,7 @@ props = { description = "a young woman letting her bath towel slip off her breas
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Tuck it back in."
+text = "Go and find some clothes."
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 2
@@ -17533,7 +17533,7 @@ props = { description = "a young woman letting her bath towel slip off her breas
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Tuck it back in."
+text = "Go and find some clothes."
 targetType = "location"
 locationId = "home_hall"
 time_progression_minutes = 2
@@ -45044,7 +45044,7 @@ name = "Bent at the drum"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "He takes his time getting to his bench. He leans on the door frame first and looks at your ass, slow, and takes a drink of his beer."
+content = "He takes his time getting to his bench. He leans on the door frame first and looks at your ass, slow, and takes a drink of his beer. Then he goes to his bench and turns the radio on low."
 
 [[canvases.nodes.blocks]]
 type = "group"
@@ -45245,7 +45245,7 @@ name = "Bent at the drum"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "He doesn't go to his bench yet. He stands in the doorway with the mug halfway to his mouth and looks at your ass, but he doesn't drink."
+content = "He doesn't go to his bench yet. He stands in the doorway with the mug halfway to his mouth and looks at your ass, but he doesn't drink. Then he takes it to his bench and turns the radio on low."
 
 [[canvases.nodes.blocks]]
 type = "group"
