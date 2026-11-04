@@ -14,7 +14,9 @@ is repeating a reference — cut it and point.
   `games/<slug>/spine/`. Tables first.
 - **≤ 400 words a page**, counting words, not table pipes or dashes. Longer means a rule is being
   restated. **SP2 is exempt** (LO, 2026-11-03, PICKS A26 a): its stage table, its raises and its Heat line
-  are this game's answers, one row per step, and they run long in a game with several ladders.
+  are this game's answers, one row per step, and they run long in a game with several ladders. **Quote lines
+  above the first table (the re-sign lines) do not count** (LO, 2026-11-04, A72 a). No script counts these
+  words; count them by hand.
 - **[REVIEW] → [READY]**, the same workflow as `the-sheets.md`. LO signs each page when LO has read
   it **(LO decided, D13)**.
 - **A signed page whose body changes goes back to [REVIEW]** until LO signs it again (LO, 2026-11-03,

@@ -8245,7 +8245,7 @@ def run_gates(model, game, state=None):
         gate("the obligation is charged", not gaps,
              f"[declared] {ob_amt if isinstance(ob_amt, (int, float)) else '?'} {currency}"
              + (f" · charged by {charged_by}" if charged_by else "")
-             + f" · week income ~{wk_mean:g} (max {wk_max:g}"
+             + f" · week income ~{wk_mean:g} (a ceiling, not a promise: at most {wk_max:g}, reading every shift at the best exit"
              + (f", declared {declared_week:g}" if isinstance(declared_week, (int, float)) else "")
              + (f", {len(wk_uncapped)} uncapped sources" if wk_uncapped else "") + ")",
              gaps + [f"income: {r}" for r in wk_rows[:8]] + [f"uncapped: {u}" for u in wk_uncapped[:5]])
@@ -14933,8 +14933,19 @@ def _clothes_named_after(game, c, nid, garments):
     return None
 
 
+def _clothes_check_on_every_way_in(c, nid, into):
+    """B54, rule 5: the exact clothing checks every choice into this screen makes. A canvas's first
+    screen is also entered by the trigger, which `_tr_units` already reads, so no choice backs it."""
+    ways = into[(c.get("id"), nid)]
+    if not ways or nid == ((c.get("nodes") or [{}])[0]).get("id"):
+        return set()
+    return set.intersection(*[{it.get("type") for it in _conditions_of(ch)} for ch in ways]) & set(_TR_EXACT)
+
+
 def _clothes_named_exactly(game):
     """(ok, headline, detail) for the gate `her clothes are named exactly`.
+    The check behind a line can sit on the trigger, an enclosing group, or every choice into the
+    screen (rule 5; B54).
     `worn_exposure` 1 or 2 is a level, not a garment: 1 is the towel, the sleep shirt and
     underwear alike, and 2 is either half bare (the larger of the two halves). A line naming
     her underwear or saying she is naked needs a slot, type or item check. A "you strip" line
@@ -14951,11 +14962,11 @@ def _clothes_named_exactly(game):
             for ch in _tr_choices(nd):
                 tgt = str(ch.get("nodeId") or "").split(".")[-1]
                 if tgt:
-                    into[(c.get("id"), tgt)].append(ch)
+                    into[(tgt.split(".")[0] if "." in str(ch.get("nodeId")) else c.get("id"), tgt)].append(ch)
     for c, nid, text, items, b in _tr_units(game):
         if (b.get("props") or {}).get("speaker") == "npc":
             continue
-        types = {it.get("type") for it in items}
+        types = {it.get("type") for it in items} | _clothes_check_on_every_way_in(c, nid, into)
         for sent in _beat_sentences(text):
             if _TR_UNDER.search(sent) and types & ({"worn_exposure"} | set(_TR_EXACT)):
                 n += 1
@@ -15253,10 +15264,11 @@ _TRUTH_GATES = (
     ("a card shows the real gates", _card_shows_real_gates, "gs", "card_real_gates"),
     ("a phone line is true", _phone_line_true, "g", "phone_true"),
     ("one pool, one place", _one_pool_one_place, "g", None),
+    ("no child framing next to sex", lambda g: _no_child_framing(g), "g", None),
     ("the phone owns posting", _phone_owns_posting, "g", None),
     ("a day word fits its window", _day_word_fits, "g", None),
 )
-# LO 2026-10-08: these nine BLOCK `--ship`; the other seven are ordinary gates (reported).
+# LO 2026-10-08: these nine BLOCK `--ship`; the others are ordinary gates (reported).
 for _name, _fn, _args, _rule in _TRUTH_GATES:
     if _rule:
         SHIP_BLOCK_GATES[_name] = _name
@@ -15290,6 +15302,7 @@ def _truth_gates(gate, _N, model, game, state):
     gate("a card shows the real gates", *_truth_run("a card shows the real gates", game, state))
     gate("a phone line is true", *_truth_run("a phone line is true", game, state))
     gate("one pool, one place", *_truth_run("one pool, one place", game, state))
+    gate("no child framing next to sex", *_truth_run("no child framing next to sex", game, state))
     gate("the phone owns posting", *_truth_run("the phone owns posting", game, state))
     gate("a day word fits its window", *_truth_run("a day word fits its window", game, state))
     _group2_gates(gate, _N, model, game, state)      # LO 2026-11-03 group 2; scored, never --ship
@@ -16585,12 +16598,96 @@ def _g2_setter_floor(holders, t, need, tiers, memo=None, seen=frozenset()):
     return best
 
 
+# ── G76 · an act whose way in is a dress code (the-arc.md A4d) ─────────────────────────────
+_DC_LEAVES = ("clothing_slot", "worn_type")
+
+
+def _dc_ways(obj):
+    """The garment states a holder's conditions allow: a list of alternatives, each a list of
+    clothing leaves. An OR with a non-clothing leaf demands no garment, so it adds nothing."""
+    cond = obj.get("conditions") if isinstance(obj.get("conditions"), dict) else {}
+    items = [it for it in cond.get("items") or [] if isinstance(it, dict)]
+    leaves = [it for it in items if it.get("type") in _DC_LEAVES]
+    if cond.get("logic") == "OR":
+        return [[lf] for lf in leaves] if leaves and len(leaves) == len(items) else [[]]
+    return [leaves]
+
+
+def _dc_rule_holds(rule, worn, on, traits):
+    """Does a dress-code rule apply to this outfit at these meters? A leaf this reader can't
+    judge (a flag, a clock) leaves the rule out, so an unread rule never raises a floor."""
+    cond = rule.get("conditions") if isinstance(rule.get("conditions"), dict) else {}
+    items = cond.get("items") or []
+    if not items:
+        return True
+    marks = []
+    for it in items:
+        ty, op, val = it.get("type"), it.get("operator"), it.get("value")
+        if ty == "worn_type":
+            marks.append((worn == val) == (op == "eq"))
+        elif ty == "clothing_slot":
+            marks.append((it.get("slot") in on) == (op == "equipped"))
+        elif ty == "trait" and (it.get("subject") or "player") == "player" and isinstance(val, (int, float)):
+            cur = traits.get(it.get("trait_key"), 0.0)
+            marks.append({"gte": cur >= val, "gt": cur > val, "lt": cur < val, "lte": cur <= val}.get(op, False))
+        else:
+            return False
+    return any(marks) if cond.get("logic") == "OR" else all(marks)
+
+
+def _dc_lets_in(rules, worn, on, traits):
+    """`setup.checkLocationClothing`: the first rule that holds decides; a dress covers top and bottom."""
+    for rule in rules:
+        if isinstance(rule, dict) and _dc_rule_holds(rule, worn, on, traits):
+            return all(s in on or (s in ("top", "bottom") and "dress" in on) for s in rule.get("slots_required") or [])
+    return True
+
+
+def _dress_code_floor(game, canvas, holder, t, memo):
+    """G76: the lowest value of meter `t`, the other meters at 0, at which the host location's
+    `clothing_rules` let her in wearing the garment state this act requires. 0 when the act
+    requires none, the place has no dress code, or no value of `t` alone lets her in."""
+    trig = canvas.get("trigger") or {}
+    loc = next((l for l in game.get("locations") or [] if l.get("id") == trig.get("location")), None)
+    rules = (loc or {}).get("clothing_rules") or []
+    if not rules:
+        return 0.0
+    ways = [a + b for a in _dc_ways(trig) for b in _dc_ways(holder)]
+    key = (trig.get("location"), t, repr(ways))
+    if key in memo:
+        return memo[key]
+    catalog = [c for c in game.get("clothing") or [] if isinstance(c, dict)]
+    cuts = {0.0}
+    for rule in rules:
+        for it in ((rule.get("conditions") or {}).get("items") or []) if isinstance(rule, dict) else []:
+            if it.get("type") == "trait" and it.get("trait_key") == t and isinstance(it.get("value"), (int, float)):
+                cuts |= {float(it["value"]), float(it["value"]) + 1}
+
+    def lowest(leaves):
+        if not leaves:
+            return 0.0                        # this way in asks for no garment state
+        off = {lf.get("slot") for lf in leaves if lf.get("type") == "clothing_slot" and lf.get("operator") == "unequipped"}
+        on = {c.get("slot") for c in catalog} - off
+        must = [lf.get("value") for lf in leaves if lf.get("type") == "worn_type" and lf.get("operator") == "eq"]
+        # An act that names no garment type is read in an ordinary outfit: a towel's or sleep shirt's own rule
+        # must not let her in with the rest of the catalogue on (park_run read as open at 0).
+        worn_options = must[:1] or [None]
+        for v in sorted(cuts):
+            if any(_dc_lets_in(rules, w, on, {t: v}) for w in worn_options):
+                return v
+        return 0.0
+
+    memo[key] = min((lowest(w) for w in ways), default=0.0)
+    return memo[key]
+
+
 def _act_pays_inside_its_stage(game, state):
     tiers = _g2_tiers(game, state)
     if not tiers:
         return None, "no declared ascent tier with stages (board.ascent_tiers)", []
     holders = _wu_holders(game)
     rows, n, seen, memo = [], 0, set(), {}
+    by_id, dress_memo = {c.get("id"): c for c in _g2_canvases(game)}, {}
     for t in tiers:
         floors = [f for f, _nm in _stage_bounds(game, t)]
         for h, amt, cap in _her_raises(holders, t):
@@ -16598,6 +16695,7 @@ def _act_pays_inside_its_stage(game, state):
                 continue
             floor = min(max(need[0].get(t, 0.0), _g2_setter_floor(holders, t, need, tiers, memo))
                         for need in h["needs"])
+            floor = max(floor, _dress_code_floor(game, by_id.get(h["canvas"]) or {}, h["holder"], t, dress_memo))
             above = [f for f in floors if f > floor]
             if not above:
                 continue                      # the top stage: nothing above it to cross into
@@ -16673,10 +16771,24 @@ def _g2_explicit_canvases(model):
     return {cm["id"] for cm in model if any(b.explicit >= 3 for b in cm["beats"])}
 
 
+# E98: "watch" in a canvas's id or name marks a scene she watches and does not take part in.
+_G2_WATCHING = re.compile(r"(?:^|[^a-z])(?:watch\w*|peek\w*|spy|spies|spying|overhear\w*|voyeur\w*)(?:[^a-z]|$)", re.I)
+
+
+def _g2_partnered_canvases(game, model):
+    """E98: the explicit canvases with her and someone else in the act: not solo, not watching."""
+    named = {c.get("id"): f"{c.get('id')} {c.get('name')}" for c in game.get("canvases") or []}
+    return {cid for cid in _g2_explicit_canvases(model) - _solo_canvases(game)
+            if not _G2_WATCHING.search(named.get(cid, cid))}
+
+
 def _g2_class(game, model, state, word):
-    """Canvas ids a word in a need's text names: `sex` names the explicit canvases; any other
-    word names the canvases whose id, place or system card carries its stem. None = no match."""
-    if word in ("sex", "explicit"):
+    """Canvas ids a word in a need's text names: `sex` names the partnered explicit canvases and
+    `explicit` all of them; any other word names the canvases whose id, place or system card
+    carries its stem. None = no match."""
+    if word == "sex":
+        return _g2_partnered_canvases(game, model) or None
+    if word == "explicit":
         return _g2_explicit_canvases(model) or None
     stem = _g2_stem(word)
     if len(stem) < 4 or stem in _G2_STOP:
@@ -16774,7 +16886,7 @@ def _g2_lowers_raise(c, key):
 # ── J5 · J73 · a deduction is gated or priced (engine.md §21, the deduction note) ───────────
 # An omitted `clamp` on a choice effect is emitted unclamped (`eff.get('clamp', False)`,
 # v2.py:16736), so an ungated deduction can carry a meter below 0.
-def _deduction_is_gated(game):
+def _deduction_is_gated(game, state=None):
     core = set(((game.get("player") or {}).get("core_traits")) or {})
     # A meter some condition reads below 0 (first_term's cafe_name: Tom 3 needs lte -5) is meant to go
     # negative; a clamp would floor it at 0 and lock that step. Its deductions are left alone.
@@ -16784,6 +16896,7 @@ def _deduction_is_gated(game):
     core -= below_zero
     rows, n = [], 0
     sober = set(_wu_modifier_offsets(game))
+    money = {_declared_currency(state or {}), "money", "cash", "gold", "credits", "coins", "dollars"}  # J76
 
     def priced(obj, key):
         return any(isinstance(co, dict) and (co.get("trait") or co.get("trait_key")) == key
@@ -16798,14 +16911,14 @@ def _deduction_is_gated(game):
             if key not in core or (ef.get("op") or "add") != "add" or _effect_value_sign(ef.get("value")) >= 0:
                 continue
             n += 1
-            if ef.get("clamp") is True or priced(holder, key) or priced(trig or {}, key):
+            if (ef.get("clamp") is True and key not in money) or priced(holder, key) or priced(trig or {}, key):
                 continue
             if needs and all(key in need[0] or key in need[1] or any(o[1] == key for o in need[3])
                              for need in needs):
                 continue
             rows.append(f"{where}: \"{str(holder.get('text') or 'on_ignore')[:40]}\" takes {key} "
-                        f"{ef.get('value')} with no condition on {key}, no `costs` and no clamp — "
-                        f"gate it on {key}, price it with `costs`, or add `clamp = true`")
+                        f"{ef.get('value')} with no condition on {key} and no `costs` — "
+                        f"gate it on {key} or price it with `costs`")
 
     by_id = {x.get("id"): x for x in _g2_canvases(game)}
     for h in _wu_holders(game):
@@ -16824,7 +16937,7 @@ def _deduction_is_gated(game):
     if not n:
         return None, "no authored deduction on a player trait", []
     return not rows, (f"{len(rows)} deduction(s) can carry a meter below 0" if rows else
-                      f"{n}/{n} deductions are gated, priced or clamped"), rows
+                      f"{n}/{n} deductions are gated, priced or a clamped meter"), rows
 
 
 # ── H64 · H31 · a closed activity says when it opens: the time-window half (the-clock.md C5) ─
@@ -17453,7 +17566,7 @@ def _group2_gates(gate, _N, model, game, state):
     gate("an act pays inside its own stage", *_act_pays_inside_its_stage(game, state))
     gate("an act pays the meter it uses", *_act_pays_its_meter(game, state))
     gate("a need falls where it says", *_need_falls_where_it_says(model, game, state))
-    gate("a deduction is gated or priced", *_deduction_is_gated(game))
+    gate("a deduction is gated or priced", *_deduction_is_gated(game, state))
     gate("a goal names the rung below", *_goal_names_rung_below(game))
     gate("a goal can flip", *_goal_can_flip(game))
     gate("the last step opens a repeatable", *_last_step_opens_repeatable(game, state))
@@ -18226,6 +18339,75 @@ def _daily_flag_chain(flags):
     shifts a day). Unnumbered flags are one visit, as before."""
     fams = collections.Counter(re.sub(r"\d+", "#", f) for f in flags if re.search(r"\d", f))
     return max(fams.values(), default=1)
+
+
+# ── no child framing next to sex (LO, 2026-11-04; register.md "Everyone is an adult") ───────
+# Level names on the sidebar and stage cards ("Good Girl") are UI, not lines: this reads canvas
+# blocks and phone chats only, never trait labels or quest cards.
+_CHILD_FRAME = re.compile(r"\b(?:so grown[ -]up|growing up|don't grow up|like you're ten|the kids|little girl"
+                          r"|baby girl|young lady|when you were little|daddy)\b", re.I)
+_PARENT_PRAISE = re.compile(r"\b(?:good girl|my girl)\b", re.I)
+_GOOD_GIRL = re.compile(r"\bgood girl\b", re.I)
+_BODY_WORD = re.compile(r"\b(?:tits|ass|legs|thighs|hem|cunt|cock|nipples|skirt)\b", re.I)
+_PARENT_FIGURE = re.compile(r"\b(?:mom|mother|dad|father)\b|\bstep-|\bstep(?:mom|mother|dad|father)\b", re.I)
+
+
+def _plain_line(text):
+    """The line as the player reads it, so a curly or escaped apostrophe still matches."""
+    return re.sub(r"<[^>]+>", "", str(text)).replace("\u2019", "'").replace("&#x27;", "'").replace("&#39;", "'")
+
+
+def _no_child_framing(game):
+    """(ok, headline, detail) for `no child framing next to sex`. Everyone is an adult, and flirting
+    between adults stays: "good girl" from Jake, Zoe or a stranger passes. A child-frame phrase
+    fails when its node (or chat) holds a frozen-list EXPLICIT word or a body word, and a parent
+    figure's "good girl" fails anywhere. "my girl" is a child frame only from a parent figure;
+    from a boyfriend it is what a boyfriend says."""
+    parents = {p["id"]: p for p in game.get("npcs") or [] if p.get("id") and _PARENT_FIGURE.search(
+        f"{p.get('role') or ''} {p.get('relationship') or ''}")}
+    names = [(pid, rx) for pid, rx, _w in _speech_people(game) if pid in parents]
+
+    def said_by_parent(b, line, bound):
+        """The parent figure this block's line comes from, or None."""
+        props = b.get("props") or {}
+        if b.get("type") == "dialog" or b.get("sender"):
+            if props.get("speaker") == "player" or b.get("sender") == "player":
+                return None
+            who = props.get("npcId") or bound
+            return who if who in parents else None
+        for sent in _beat_sentences(line):
+            if _PARENT_PRAISE.search(sent):
+                hit = next((pid for pid, rx in names if rx.search(sent)), None)
+                if hit:
+                    return hit
+        return None
+
+    rows = []
+
+    def judge(where, blocks, bound):
+        blocks = [b for b in blocks if b.get("content") and b.get("type") not in MEDIA_BLOCKS]
+        lines = [(b, _plain_line(b["content"])) for b in blocks]
+        hot = any(EXPLICIT.search(line) or _BODY_WORD.search(line) for _b, line in lines)
+        for b, line in lines:
+            parent = said_by_parent(b, line, bound) if _PARENT_PRAISE.search(line) else None
+            frame = _CHILD_FRAME.search(line) or (re.search(r"\bmy girl\b", line, re.I) if parent else None)
+            if parent and _GOOD_GIRL.search(line):
+                rows.append(f"{where}: {parent} says \"good girl\", and a parent figure never does — \"{line[:90]}\"")
+            elif hot and frame:
+                rows.append(f"{where}: \"{frame.group(0)}\" beside a sexual or body word — \"{line[:90]}\"")
+
+    for c in game.get("canvases") or []:
+        if not _is_dev(c):
+            for nd in c.get("nodes") or []:
+                judge(f"{c.get('id')} · {nd.get('id')}", _flat_blocks(nd.get("blocks")),
+                      (c.get("trigger") or {}).get("npc"))
+    for lst in (game.get("phone") or {}).values():
+        for d in lst if isinstance(lst, list) else []:
+            if isinstance(d, dict) and d.get("blocks"):
+                judge(f"phone {d.get('id')}", _flat_blocks(d["blocks"]), d.get("npc"))
+    rows = list(dict.fromkeys(rows))
+    return not rows, (f"{len(rows)} line(s) frame her as a child beside sex" if rows
+                      else "no line frames her as a child beside sex"), rows
 
 
 def main():

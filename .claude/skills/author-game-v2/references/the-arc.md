@@ -244,6 +244,9 @@ something that happens *to* her.
 - **Each act pays only inside its own stage.** +1 for an everyday act, +3 for a big one-time step, and
   the act's `cap` sits at the top of its stage (19, 39, 59 on a 20-point ladder), so repeating an easy
   act cannot carry her past it. This is A4's "only while she is under it", stated for the stage.
+- **An act whose way in is a dress code sits at the stage the dress code needs** (LO, 2026-11-04, G76), and pays
+  up to that stage's top. A street walk in a garment the street's `clothing_rules` let out at 20 can cap at 39; one
+  that needs 40 can cap at 59. The gate reads the rules for the garment state the canvas requires, one meter at a time.
 - **Every stage below the highest gate carries repeatable acts that pay, sober.** A temporary boost (a
   drink's `trait_offsets`) can let her try the next stage early, and that act's raise is kept, but it is
   not the way up: a stage whose only paying acts need the boost is a wall with a hidden door.
@@ -429,7 +432,7 @@ next step. If it is, and its conditions hold, it fires. Arc content does not que
 > through to the standard scenes.
 
 **This is available here, and precisely.** Entry-time auto-fire redirects the passage before the
-location screen renders (`getStoryCanvasRedirect`, `v2.py:6439`), and among the candidates
+location screen renders (`getStoryCanvasRedirect`, `v2.py:6468`), and among the candidates
 `selectAutoFireCanvasForLocation` (`v2.py:5875`) takes the **highest `priority`**
 (`v2.py:5210-5211`). So
 an arc beat is a one-shot at the location, priced above the other one-shots that could fire there.

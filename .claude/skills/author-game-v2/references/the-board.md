@@ -435,8 +435,8 @@ wardrobe_location = "her_room"
 ## Before leaving this phase
 
 Record in `v2_state.json`: every system card, every meter and the infrastructure, every location
-with its budget and current fill, every character with its surface count and schedule rows, the
-ascent meter and its ceiling.
+with its budget, every character with its schedule rows, the ascent meter and its ceiling. Current fill
+and surface counts stay out: `gates.py` recomputes them (`state.md`).
 
 Then run the check that reads the ledger alone — before any TOML exists, `gates.py` has nothing to
 read and says so:

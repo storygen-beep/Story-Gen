@@ -237,7 +237,7 @@ NEED = "a need falls where it says"
 
 def need_game(sex_costs):
     eff = [pay("hygiene", -10)] if sex_costs else None
-    return game(cv("bed_sex", [nd("a", [ch("Go.", eff=eff)], text=EXPLICIT)]),
+    return game(cv("bed_sex", [nd("a", [ch("Go.", eff=eff)], text=EXPLICIT)], requires_npc="npc_a"),
                 cv("party_dance", [nd("a", [ch("Go.", eff=[pay("hygiene", -5)])])]),
                 player={"core_traits": {"heat": 0, "show": 0, "hygiene": 50}, "trait_decay": {"hygiene": 5}})
 
