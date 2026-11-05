@@ -5,6 +5,11 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-05 — written lines no longer vanish into "No content"
+
+- **Engine.** `apps/projects/services/template_import.py`: the nesting cap in `_normalize_block_list` goes from 4 to 8, and its warning names what it drops. `apps/game_generation/management/commands/package_from_toml.py`: a build that holds the "No content" stand-in now stops with an error naming the screens. `references/engine.md` updated. Why: first_term lost 8 written lines on 3 screens (LO saw it on a café shift); a stand-alone group is a one-item pool holding a group, so ordinary shapes hit the old cap, and the only sign was a log warning.
+- **Verified.** No stand-ins left in first_term, and a build diff shows only those 3 screens changed. Played; the reader then found the game-side fixes in first_term DECISIONS 195. New tests in `apps/game_generation/tests/test_no_content_stand_in.py`.
+
 ## 2026-11-05 — a person can't wait for their own scene
 
 - **New gate `nobody waits for themselves`** in `scripts/gates.py` (`_nobody_waits_for_themselves`, listed in `SKILL.md`, taught in `references/the-first-hour.md`). It fails a person whose every schedule row waits on a flag that only scenes needing that person set. Why: LO could not ask for the café job in first_term; `cafe_job_ask` had `requires_npc = npc_tom`, Tom's rows wait on `tom_met`, and only that scene sets `tom_met`. The scene worked until it moved from firing on entry to a swap on 2026-11-04, because a one-time scene that fires by itself does not read `requires_npc`.
