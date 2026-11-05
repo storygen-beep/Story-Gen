@@ -383,7 +383,7 @@ runs). The week's demand goes 260 → 400, she is 310 better off, and **both of 
 
 **Two engine routes, both notified.** The bill itself rises with `[settings.rent] stages` (R3b,
 `engine.md` §26); a cost that follows holdings is a daily upkeep: `[engine.daily_tick]` takes
-`traitEffects` with a per-effect condition gate (`template_import.py:777`), applied through
+`traitEffects` with a per-effect condition gate (`template_import.py:786`), applied through
 `setup.applyAndNotifyTrait` (`v2.py:7291`). Either way the player is told. A silent charge meter is
 the one economy device the corpus universally hates (`sluttown-usa` is the counted case).
 ⚠️ With `stages`, never write the rent into a `trait_bar max` or a quest goal: `_traitMax` is static
@@ -579,7 +579,7 @@ who arrives at R5 by way of a money bug does not leave thinking money was the wh
 > ```
 >
 > A `[[traits.labels]] key = "money"` label does reach the sidebar: `trait_bar` reads
-> `_item.label || setup.traitLabel(_tbKey)` (`v2.py:20968`), and `setup.traitLabel` reads the trait
+> `_item.label || setup.traitLabel(_tbKey)` (`v2.py:21383`), and `setup.traitLabel` reads the trait
 > labels (`v2.py:4701`, `engine.md` §33.3).
 
 **The field's mechanism is one printer.** Measured across the 25-game corpus, the games with a real

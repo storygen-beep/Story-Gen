@@ -432,13 +432,13 @@ next step. If it is, and its conditions hold, it fires. Arc content does not que
 > through to the standard scenes.
 
 **This is available here, and precisely.** Entry-time auto-fire redirects the passage before the
-location screen renders (`getStoryCanvasRedirect`, `v2.py:6468`), and among the candidates
-`selectAutoFireCanvasForLocation` (`v2.py:5875`) takes the **highest `priority`**
+location screen renders (`getStoryCanvasRedirect`, `v2.py:6485`), and among the candidates
+`selectAutoFireCanvasForLocation` (`v2.py:5892`) takes the **highest `priority`**
 (`v2.py:5210-5211`). So
 an arc beat is a one-shot at the location, priced above the other one-shots that could fire there.
 
 ⚠️ **It is the auto-fire queue it wins, not the dice.** That selector skips
-`triggerMode == "random"` and `substitutionOnly` canvases outright (`v2.py:5883-5884`); random
+`triggerMode == "random"` and `substitutionOnly` canvases outright (`v2.py:5900-5901`); random
 ambients and substitutions are a separate selector on the location screen. The redirect happening
 first is what gives the same effect as that pre-empt — the player never reaches the roll — but
 the two are different mechanisms and the caveats do not carry across.
@@ -686,7 +686,7 @@ facts; these are the ones this doctrine leans on, and they are repeated here onl
   play in ascending `priority`, and once all are seen it returns the highest-priority one
   forever. **Nothing calls it.** In a built game's `output/index.html` the symbol appears
   three times and is invoked zero times. The live path is `renderSoloActivities`
-  (`v2.py:5913`), which drops every non-repeatable canvas (`if (!c.isRepeatable) continue`) and
+  (`v2.py:5930`), which drops every non-repeatable canvas (`if (!c.isRepeatable) continue`) and
   does no progression at all. **Do not point an author at it.** Wiring it is an open engine
   decision, not a thing this file may assume.
 - **A8 is available** — highest `priority` wins on the auto-fire path (`v2.py:5210-5211`).

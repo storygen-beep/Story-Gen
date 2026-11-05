@@ -5,6 +5,12 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-05 — the wardrobe and the clothes shop as a dressing room
+
+- **`references/engine.md`.** New section `[ui] clothes_layout = "room"`, beside the quests_layout one, and a pointer from §17. It teaches the room pages, `[ui] clothes_door`, the 3:4 garment picture, `[[clothing]] locked_text` and the portrait's `when.wearing`. Why: LO picked the dressing-room redesign for first_term (DECISIONS 194).
+- **Cite repair across `references/`.** The new engine code shifted `v2.py`, so 129 cites pointed at the wrong line. `cite_check.py --fix` re-anchored them (the-arc, the-board, the-clock, the-economy, the-first-hour, the-meters, the-phone, the-release, the-returning-player, the-systems, engine). It also moved two of the new section's own cites onto `worn_type` and `validate()`, so those were reworded by hand and their lines put back.
+- **Verified.** `cite_check.py --strict`: 0 wrong in SKILL.md + references/ (baseline 0). The engine change has 12 tests in `apps/game_generation/tests/test_clothes_room.py`, all passing.
+
 ## 2026-11-05 — a person can't wait for their own scene
 
 - **New gate `nobody waits for themselves`** in `scripts/gates.py` (`_nobody_waits_for_themselves`, listed in `SKILL.md`, taught in `references/the-first-hour.md`). It fails a person whose every schedule row waits on a flag that only scenes needing that person set. Why: LO could not ask for the café job in first_term; `cafe_job_ask` had `requires_npc = npc_tom`, Tom's rows wait on `tom_met`, and only that scene sets `tom_met`. The scene worked until it moved from firing on entry to a swap on 2026-11-04, because a one-time scene that fires by itself does not read `requires_npc`.

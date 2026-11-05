@@ -9854,6 +9854,16 @@
           "report": "Played the street walks and the park run 14 days each in Chrome by real clicks with the day set by script: pace above in DECISIONS 188. Fixed the plain dress paying as no top, and the Hungry card."
         },
         "played": null
+      },
+      {
+        "id": "clothes_room",
+        "what": "Change Clothes and the clothes shop as a dressing room: portrait, slot column, door line, rail; stand, slot tabs, rack of what she does not own (DECISIONS 194)",
+        "built_at": "2026-11-05 10:16",
+        "chrome": {
+          "at": "2026-11-05 10:16",
+          "report": "Played in headless Chromium by script, not Claude in Chrome: slots, rail, dress swap, door line in jeans/skirt/towel, portrait pick per outfit, held skirt stays off, shop reasons, Buy and wear, empty rack; no JS errors. Found: the street's catch-all rule says 'without a bra' for a girl in underwear (game rule, unchanged)."
+        },
+        "played": null
       }
     ]
   },
