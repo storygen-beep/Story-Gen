@@ -110,10 +110,9 @@ FIRST_POOLS = {
                  "You whisper through the whole first pose about how long the model has to sit like that. The lecturer taps your worst sketch with one black finger, and you whisper quieter."],
         "doze": ["You've got a stool, a warm lamp across the room and two bad sketches on your page. You rest your head against the easel, and the scratching of charcoal puts you out.",
                  "You meant to rest your eyes through one pose. When you open them the model has moved twice, and your two sketches don't match anything on the stool."],
-        "eyes": "The guy in that jacket hasn't touched his paper since you sat down.",
+        "eyes": None,   # cut (reader 2026-11-05): needed cocky_guy_met false, but the button into this screen sets it; his pad line has him here
         "eyes_bold": "You're not sorry about what you wore.",
         "eyes_plain": "You pull your arms in and keep your eyes on your page. You should have worn something else.",
-        "eyes_when": [flag("cocky_guy_met", False)],   # met, his pad line on this screen already has him drawing you
         "tired": "You can barely lift your arm to the paper, and the charcoal slides around in your fingers. Doze, or skip."},
 }
 
@@ -182,8 +181,8 @@ def eyes_blocks(pools):
     (scene reader 2026-11-04): under Daring she didn't dress for this on purpose."""
     if "eyes_bold" not in pools:
         return [P(pools["eyes"])]
-    look = G(cond(*pools["eyes_when"]), P(pools["eyes"])) if "eyes_when" in pools else P(pools["eyes"])
-    return [look,
+    look = [P(pools["eyes"])] if pools["eyes"] else []
+    return [*look,
             GC(cond(trait("exhibitionism", "gte", 20)), P(pools["eyes_bold"])),
             GC(cond(trait("exhibitionism", "lt", 20)), P(pools["eyes_plain"]))]
 
@@ -428,7 +427,7 @@ _seat_figure = class_row(
      G(cond(flag("zoe_met", False)), P("The girl on your other side catches you staring and raises her eyebrows.")),
      P("Your page has her tits on it now, badly, twice, but your own nipples won't stop aching."),
      VID("a nude female life model posing on a stool under a lamp in an art class, students drawing at easels", "nude model posing art class students drawing", "life drawing class naked model on stool", pool_dir="sex/figure_class_pose_t4"),
-     G(cond(flag("cocky_guy_met")), P("The guy in that jacket has turned his pad so you can see it. There's no model on it. It's your neck, and he's started on your chest.")),
+     G(cond(flag("cocky_guy_met")), P("The guy in that jacket has turned his pad so you can see it. He's rubbed the model out of it. It's your neck, and he's started on your chest.")),
      ],
     [D(ART, "That's a start. Now forget everything you think you know about a hip.")],
     "Lean into your easel and let him look.",

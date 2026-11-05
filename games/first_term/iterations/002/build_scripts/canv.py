@@ -452,10 +452,10 @@ def pin_blocks(blocks, *items):
     """Put presence items (here_at) on every text block of a screen, so each line shows only while the person it
     names is where the line needs them (the truth rule; gates `a named person is where the line says` reads a
     group's npc_at_location items as the engine's own check). No nesting level is added where one can be avoided,
-    because the importer flattens past depth 4 (template_import.py:8444):
+    because the importer drops anything past its depth cap (template_import.py, `_normalize_block_list`, 8 since 2026-11-05):
     - a group gets the items on its own conditions (adjacent groups stay one if/elseif chain, every link pinned);
     - a one-group pool (G) gets them on its group;
-    - a pool of several entries goes inside one GC (group > pool > entry stays inside depth 4);
+    - a pool of several entries goes inside one GC (group > pool > entry stays shallow);
     - any other text block goes inside a G of its own. Media blocks are left as they are."""
     out = []
     for b in blocks:
