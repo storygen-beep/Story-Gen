@@ -1,4 +1,5 @@
-# [READY] Scene — cafe_shift_scene
+# [REVIEW] Scene — cafe_shift_scene
+> Changed 2026-11-05 (DECISIONS 195): the reader's fails on the recovered lines; Tom's apron line needs Want 15, not 30. Waits for LO's re-sign.
 > Signed by LO: LO, 2026-11-04.
 > Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
 
@@ -37,8 +38,8 @@
 
 > Drafted before the build and kept as the signed record. Where it differs, the branch map and the beats above say what the build does.
 
-1. "You bend to wipe a table and the conversation at the next one stops: every man at it is looking at your ass. When you straighten up it starts again, lower. Nobody touches. Not yet."
-2. "Two men at the counter watch your ass all the way to the kitchen and back. One of them says something. The other one laughs."
+1. "You lean across to clear a table and the conversation at the next one stops: every man at it is looking at your tits. When you straighten up it starts again, lower. Nobody at that table touches you. Not yet."
+2. "Two men at the counter watch your legs all the way to the kitchen and back. One of them says something. The other one laughs and pushes a dollar under his saucer for you."
 3. "A man in a suit doesn't look at his menu once. He looks at your tits the whole time you take his order, and over-tips."
 
 ## Level 2 · They say it
@@ -138,7 +139,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > Whatever you recommend. Keep the change, gorgeous. Buy yourself a smaller shirt.
 >
-> No bra under the uniform, and your nipples show through it. Every time you lean to pour, somebody stops talking and looks at your tits.
+> No bra under the uniform, and your nipples show through it. Every time you lean to pour, a man's eyes drop to your tits.
 >
 > Cold in here today, is it?
 >
@@ -150,11 +151,11 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > Busy day, was it, dear? You might want a shower before the next one.
 >
-> You bend to wipe a table and the conversation at the next one stops: every man at it is looking at your ass. When you straighten up it starts again, lower. Nobody touches. Not yet.
+> You lean across to clear a table and the conversation at the next one stops: every man at it is looking at your tits. When you straighten up it starts again, lower. Nobody at that table touches you. Not yet.
 >
-> Don't mind us, honey. Carry on.
+> Don't mind us, sweetheart. Carry on.
 >
-> Two men at the counter watch your ass all the way to the kitchen and back. One of them says something. The other one laughs.
+> Two men at the counter watch your legs all the way to the kitchen and back. One of them says something. The other one laughs and pushes a dollar under his saucer for you.
 >
 > Nice legs on you. Turn around, baby, let's see the rest.
 >
@@ -162,7 +163,7 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 >
 > Whatever you're having. Surprise me. I'll be back, same table.
 >
-> In booth four an older man with a folded newspaper lowers it when you pass. His eyes stay on your ass all the way down the aisle, and the paper goes back up the second you look round. Gary, the regular.
+> In booth four an older man with a folded newspaper lowers it when you pass. His eyes follow your hips all the way down the aisle, and the paper goes back up the second you look round. Gary, the regular.
 >
 > In the back booth, one of three guys asks,
 >

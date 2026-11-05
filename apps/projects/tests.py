@@ -2970,7 +2970,7 @@ class NestedGroupNormalizationTests(SimpleTestCase):
         self.assertEqual(l3[0]["content"], "deep")
 
     def test_depth_cap_truncates_pathological_nesting(self):
-        """Nesting deeper than max_depth (4) is truncated, not infinite."""
+        """Nesting deeper than max_depth (8) is truncated, not infinite."""
         from apps.projects.services.template_import import _normalize_block_list
 
         def grp(child):
@@ -2981,7 +2981,7 @@ class NestedGroupNormalizationTests(SimpleTestCase):
                 "blocks": [child]}}
 
         deep = {"type": "paragraph", "content": "x"}
-        for _ in range(8):  # 8 levels — well past the depth-4 ceiling
+        for _ in range(12):  # 12 levels — well past the depth-8 ceiling
             deep = grp(deep)
         out = _normalize_block_list([deep])  # must not raise / recurse forever
         # Walk down; the chain terminates (empty blocks) at the cap.
@@ -2993,7 +2993,7 @@ class NestedGroupNormalizationTests(SimpleTestCase):
                 break
             node = kids[0]
             depth += 1
-            self.assertLessEqual(depth, 4, "nesting exceeded max_depth")
+            self.assertLessEqual(depth, 8, "nesting exceeded max_depth")
 
 
 class S8ThoughtBubbleNormalizationTests(SimpleTestCase):

@@ -36,11 +36,13 @@ def at_level(lv, *blocks, extra=()):
 def go_level(lv, text, node_, extra=()):
     return [go(text, node=node_, mins=0, cond_=cond(*items, *extra)) for items in PARTS[lv]]
 
-L1_LINES = ["You bend to wipe a table and the conversation at the next one stops: every man at it is looking at your ass. When you straighten up it starts again, lower. Nobody touches. Not yet.",
-            "Two men at the counter watch your ass all the way to the kitchen and back. One of them says something. The other one laughs.",
+# reader 2026-11-05: "Nobody" is that table only, because Tom and Gary can already have touched her; each moment reads
+# a different part of her, so the screen doesn't say "watch your ass" three times; the second now has a price.
+L1_LINES = ["You lean across to clear a table and the conversation at the next one stops: every man at it is looking at your tits. When you straighten up it starts again, lower. Nobody at that table touches you. Not yet.",
+            "Two men at the counter watch your legs all the way to the kitchen and back. One of them says something. The other one laughs and pushes a dollar under his saucer for you.",
             "A man in a suit doesn't look at his menu once. He looks at your tits the whole time you take his order, and over-tips."]
 # pass 3 B4: what the room says beside each look (a stranger, speaker "unknown")
-L1_SAID = ["Don't mind us, honey. Carry on.", "Nice legs on you. Turn around, baby, let's see the rest.",
+L1_SAID = ["Don't mind us, sweetheart. Carry on.", "Nice legs on you. Turn around, baby, let's see the rest.",
            "Whatever you're having. Surprise me. I'll be back, same table."]
 # One setup for both yeses, so the line before each beat is true whichever she picks (a build note to LO:
 # the sheet's pool of three setups would let a setup and the other yes's beat disagree).
@@ -57,7 +59,7 @@ L3_C = "You let it. You drop onto his knee and the back table roars. His arm loc
 L2_NO = "You smile and keep walking. \"Not today, hon.\" The table groans. The tip is small."
 L3_PULL = "You step out from under his hand and put the plate down. \"Your food's here, sir.\" He laughs like it was a joke between you."
 L3_SLAP = "You slap his hand off you, loud. The café goes quiet. He throws his napkin on the table and leaves without paying the tip."
-GARY_L1 = "In booth four an older man with a folded newspaper lowers it when you pass. His eyes stay on your ass all the way down the aisle, and the paper goes back up the second you look round. Gary, the regular."
+GARY_L1 = "In booth four an older man with a folded newspaper lowers it when you pass. His eyes follow your hips all the way down the aisle, and the paper goes back up the second you look round. Gary, the regular."
 GARY_L2 = "You've got a lovely way of pouring, doll."
 GARY_AFTER = "Same booth, doll. Same time."
 
@@ -145,7 +147,12 @@ out.append({
                 "show_when_blocked": True, "cooldown_message": "Mon-Sat, 8 AM-7 PM, three shifts a day"},   # pass 3 H31: the hours, a bare phrase (the-clock.md C5)
     "nodes": [
         node("counter", "The counter", [
-            D(TM, "Uniform's in the back, @player. Three hours. Smile."),
+            # reader 2026-11-05: his order shows only where a shift can start (the hours, no curfew, the energy), and
+            # "Uniform's in the back" only while she isn't already wearing one
+            *[G(cond(*when, trait("energy", "gte", 20), SEXY_OFF, {"type": "clothing_item", "item_id": "cafe_uniform_normal", "operator": "unequipped"}),
+                D(TM, "Uniform's in the back, @player. Three hours. Smile.")) for when in ([DAY], [EVE, NO_CURFEW_ITEM])],
+            *[G(cond(*when, trait("energy", "gte", 20), {"type": "worn_type", "operator": "eq", "value": "cafe_uniform"}),
+                D(TM, "You're dressed, @player. Three hours. Smile.")) for when in ([DAY], [EVE, NO_CURFEW_ITEM])],
             # scene reader 2026-11-04: as BOOKED_PAY, the day's first shift only, and only where its button is open: 20 energy, not the curfew evening
             G(cond(flag("tom_shift_booked"), flag("cafe_shift_1_today", False), trait("energy", "gte", 20), DAY), D(TM, "Said you'd be here, and you are. Good. Four extra for showing up.")),
             G(cond(flag("tom_shift_booked"), flag("cafe_shift_1_today", False), trait("energy", "gte", 20), EVE, NO_CURFEW_ITEM), D(TM, "Said you'd be here, and you are. Good. Four extra for showing up.")),
@@ -153,8 +160,13 @@ out.append({
             G(CURFEW_ON, G(cond(EVE), P("Mom's curfew. No evening shifts this week. Tom shrugs like it's your problem, because it is."))),
         ], choices + [go("Not today.", node="not_today")]),
         # the written no: his "Three hours. Smile." gets an answer; it costs nothing and moves nothing
+        # reader 2026-11-05: "Your call." only when a shift button is there; under the curfew or too tired it isn't her call
         node("not_today", "Not today", [
-            D(TM, "Your call. Sit where I can see you or clear the floor. I've got tables."),
+            G(cond(trait("energy", "gte", 20), DAY), D(TM, "Your call. Sit where I can see you or clear the floor. I've got tables.")),
+            G(cond(trait("energy", "gte", 20), EVE, NO_CURFEW_ITEM), D(TM, "Your call. Sit where I can see you or clear the floor. I've got tables.")),
+            G(cond(trait("energy", "lt", 20), DAY), D(TM, "You're no use to me like that. Sit where I can see you or clear the floor. I've got tables.")),
+            G(cond(trait("energy", "lt", 20), EVE, NO_CURFEW_ITEM), D(TM, "You're no use to me like that. Sit where I can see you or clear the floor. I've got tables.")),
+            G(CURFEW_ON, G(cond(EVE), D(TM, "Your mother's curfew, not mine. Sit where I can see you or clear the floor. I've got tables."))),
             P("He flicks the cloth over his shoulder and goes back to the till. His eyes go to your ass as you walk away from the counter, but he doesn't call you back."),
         ], [go("Leave him to the till.", loc="cafe", mins=1)]),
         node("shift", "Three hours", [
@@ -164,17 +176,17 @@ out.append({
             POOL(
                 # pass 3 B4: somebody in the room talks (a stranger with no NPC: WHO, speaker "unknown")
                 GC({"version": "1.0", "logic": "AND", "items": []}, P("A table of guys from the team come in and order nothing but coffee for an hour so they can watch you walk back and forth. Tom lets them. They tip like they're trying to impress each other."),
-                   WHO("Same again, honey. And walk slower this time, we're paying for the view.")),
+                   WHO("Same again, darling. And walk slower this time, we're paying for the view.")),
                 GC({"version": "1.0", "logic": "AND", "items": []}, P("Two women in gym clothes, a businessman on a call, a pensioner who wants the crusts cut off his toast. Your feet hurt, but you're good at this. You can feel it in the tips."),
                    WHO("Crusts off, I said. Thank you, dear. You're the only one here who listens.")),
                 pid="cafe_shift_lines"),
             G(cond(SEXY_ON), P("In the tight uniform with the top button open, every man who orders leans a little further over the counter. Every one of them tips more."),
-              WHO("Whatever you recommend. Keep the change, honey. Buy yourself a smaller shirt.")),
+              WHO("Whatever you recommend. Keep the change, sugar. Buy yourself a smaller shirt.")),
             G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}),
-              P("No bra under the uniform, and your nipples show through it. Every time you lean to pour, somebody stops talking and looks at your tits."),
+              P("No bra under the uniform, and your nipples show through it. Every time you lean to pour, a man's eyes drop to your tits."),
               WHO("Cold in here today, is it?")),
             # (cut 2026-11-01: Tom's "Booth four's going to tip big today." Tom is strict, DECISIONS 117)
-            G(cond(trait("tom_step", "gte", 1), ntrait(TM, "want", "gte", 30)), P("Tom reties your apron on his way past, both times you go by."), D(TM, "Hold still. It's slipping again. Can't have you coming apart in front of the customers.")),
+            G(cond(trait("tom_step", "gte", 1), ntrait(TM, "want", "gte", 15)), P("Tom reties your apron on his way past, both times you go by."), D(TM, "Hold still. It's slipping again. Can't have you coming apart in front of the customers.")),
             G(cond(trait("hygiene", "lt", 30), flag("hygiene_off", False)), P("A woman at table three wrinkles her nose when you lean in. Her tip is coins."), WHO("Busy day, was it, dear? You might want a shower before the next one.")),
             # ── the drawn customer scene, one a shift (cafe_shift_scene.md, signed 2026-11-01, DECISIONS 121) ──
             *at_level("L1", POOL(*[GC({"version": "1.0", "logic": "AND", "items": []}, P(t), WHO(w)) for t, w in zip(L1_LINES, L1_SAID)], pid="cafe_l1_lines")),

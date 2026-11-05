@@ -849,7 +849,7 @@ blocked_message  = "The dining room's been dark since the staff went."
 template_import.py:199      entry_conditions: Dict[str, Any] = field(default_factory=dict)
 template_import.py:200      blocked_message: str = ""
 template_import.py:2445-2446 parsed
-template_import.py:9258      loc.properties["entry_conditions"] = l.entry_conditions
+template_import.py:9264      loc.properties["entry_conditions"] = l.entry_conditions
 ```
 
 ⚠️ `entry_conditions` needs `version = "1.0"` like any condition block: the importer refuses it
@@ -2083,7 +2083,7 @@ same ones `group` follows — with one exception that is not.
 | children may sit at **`blocks`** OR **`props.blocks`** | `:7574` — `b.get("blocks") or props.get("blocks")`, the same both-shapes read `group` gets at `:7563` |
 | **a `block_pool` directly inside a `block_pool` is silently dropped** | `:7579` — `inner_safe = [ib for ib in inner_safe if ib.get("type") != "block_pool"]`. A random pick of a random pick is ambiguous and the restriction is deliberate. **Unlike `group`, which MAY nest in `group`** (`:7567-7571`, the same-type-skip rule was removed 2026-05-17) |
 | **mixed child types only WARN** | `:7583` — `logger.warning("block_pool has mixed types …")`. It builds. Same-type children are the intent, and the warning is in the build log, not the game |
-| nesting depth is capped at **4** | `:7492` — a `group` wrapping a pool wrapping a group is depth 3, so 4 is a ceiling rather than a limit you will meet |
+| nesting depth is capped at **8** | `template_import.py`, `_normalize_block_list`. Past the cap the blocks are dropped and the screen prints "No content", so `package_from_toml` fails a build that holds that text. A stand-alone group is a one-item pool holding a group, so a gate round a line pool is already 5 deep (the cap was 4 until 2026-11-05) |
 
 ⚠️ **A pool is an exclusive axis and the scoreboard now reads it as one.** The **beat**
 collector still folds every variant together on purpose, and that is correct: see the folding

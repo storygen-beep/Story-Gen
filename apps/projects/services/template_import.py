@@ -8418,7 +8418,7 @@ def _serialize_hint_template(t: TemplateHintTemplate) -> Dict[str, Any]:
 
 def _normalize_block_list(
     raw_blocks: Any,
-    max_depth: int = 4,
+    max_depth: int = 8,
     _depth: int = 0,
     _prefix: str = "b",
 ) -> List[Dict[str, Any]]:
@@ -8428,9 +8428,11 @@ def _normalize_block_list(
     (``group``, ``block_pool``) get their inner ``blocks`` recursively
     normalized. Reads ``conditions`` and ``blocks`` from top-level OR ``props``
     (the 2026-05-03 bug-fix pattern: TOML may legitimately use either form).
-    Caps recursion at ``max_depth`` (default 4) to prevent pathological nesting;
-    the historical hand-unrolled implementation supported at most depth 3
-    (group inside pool inside group), so 4 is a defensive ceiling.
+    Caps recursion at ``max_depth`` (default 8) to prevent pathological nesting.
+    It was 4 until 2026-11-05, and first_term's real screens reached it: a stand-alone
+    group is a one-item pool holding a group, so a level gate round a line pool is
+    already 5 deep. Everything past the cap is dropped and the generator prints
+    "No content", so ``package_from_toml`` now fails a build that holds that text.
 
     Container nesting: ``group`` MAY be nested directly inside ``group`` —
     a stage gate wrapping flag-gated sub-branches is a legitimate, common
@@ -8453,7 +8455,11 @@ def _normalize_block_list(
     """
     if _depth >= max_depth:
         logger.warning(
-            "Block nesting depth %d exceeded; flattening deeper blocks", max_depth
+            "Block nesting depth %d exceeded; dropping %s (the screen will say No content)",
+            max_depth,
+            [str((b or {}).get("type")) if isinstance(b, dict) else "?" for b in raw_blocks]
+            if isinstance(raw_blocks, list)
+            else "?",
         )
         return []
     if not isinstance(raw_blocks, list):

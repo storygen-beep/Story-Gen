@@ -16,6 +16,10 @@ By default, the database project is deleted after successful packaging.
 Use --keep-project to retain the database records for debugging.
 """
 
+import html
+import re
+from pathlib import Path
+
 from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
@@ -28,6 +32,17 @@ from apps.projects.services.template_import import (
     parse_toml,
     validate,
 )
+
+
+def passages_with_stand_in(built_html: str) -> list:
+    """Names of the passages holding the generator's "No content" stand-in (v2.py `_convert_blocks_to_game_html`)."""
+    return [
+        name
+        for name, body in re.findall(
+            r'<tw-passagedata[^>]*name="([^"]*)"[^>]*>(.*?)</tw-passagedata>', built_html, re.S
+        )
+        if "No content</em>" in html.unescape(body)
+    ]
 
 
 class Command(BaseCommand):
@@ -745,6 +760,14 @@ class Command(BaseCommand):
                 self.stdout.write(f"   - {error}")
             if len(package_result["errors"]) > 5:
                 self.stdout.write(f"   ... and {len(package_result['errors']) - 5} more")
+
+        # A screen that says "No content" lost written lines on the way here; the game shows no error.
+        lost = passages_with_stand_in(Path(package_result["html_path"]).read_text(encoding="utf-8"))
+        if lost:
+            raise CommandError(
+                f"The built game says \"No content\" on {len(lost)} screen(s), so written lines were "
+                f"dropped: {', '.join(lost[:12])}. Don't ship this build."
+            )
 
         # Success message
         self.stdout.write("")

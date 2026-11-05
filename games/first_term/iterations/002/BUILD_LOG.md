@@ -1541,3 +1541,9 @@ LO could not ask for the job. `cafe_job_ask` needed Tom placed, his schedule wai
 it; this came in on 2026-11-04 when the scene moved from firing on entry to a swap on the coffee. The scene no longer
 needs him and opens from its own row, `cafe_job_row` (DECISIONS 193). New skill gate `nobody waits for themselves`.
 Dev + debug rebuild. Not committed. The one new screen, the row's fallback, has not had a reader pass.
+
+## 2026-11-05 — "No content" gone
+
+The importer's nesting cap dropped 8 written lines on 3 screens; the cap went from 4 to 8 and a build holding the stand-in
+now fails (DECISIONS 194). Dev + debug rebuild: stand-ins 5 to 0. Then
+committed. Two reader reads on those screens, fixes in DECISIONS 195; the second read's fixes are not re-read.

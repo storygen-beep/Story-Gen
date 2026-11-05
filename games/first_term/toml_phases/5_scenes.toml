@@ -22110,9 +22110,28 @@ id   = "counter"
 name = "The counter"
 
 [[canvases.nodes.blocks]]
-type = "dialog"
-content = "Uniform's in the back, @player. Three hours. Smile."
-props = { speaker = "npc", npcId = "npc_tom" }
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "trait", subject = "player", trait_key = "energy", operator = "gte", value = 20 }, { type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "clothing_item", item_id = "cafe_uniform_normal", operator = "unequipped" }] }, blocks = [{ type = "dialog", content = "Uniform's in the back, @player. Three hours. Smile.", props = { speaker = "npc", npcId = "npc_tom" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "18:00", end_time = "19:00" }, { type = "trait", subject = "player", trait_key = "curfew_days", operator = "eq", value = 0 }, { type = "trait", subject = "player", trait_key = "energy", operator = "gte", value = 20 }, { type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "clothing_item", item_id = "cafe_uniform_normal", operator = "unequipped" }] }, blocks = [{ type = "dialog", content = "Uniform's in the back, @player. Three hours. Smile.", props = { speaker = "npc", npcId = "npc_tom" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "08:00", end_time = "18:00" }, { type = "trait", subject = "player", trait_key = "energy", operator = "gte", value = 20 }, { type = "worn_type", operator = "eq", value = "cafe_uniform" }] }, blocks = [{ type = "dialog", content = "You're dressed, @player. Three hours. Smile.", props = { speaker = "npc", npcId = "npc_tom" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "18:00", end_time = "19:00" }, { type = "trait", subject = "player", trait_key = "curfew_days", operator = "eq", value = 0 }, { type = "trait", subject = "player", trait_key = "energy", operator = "gte", value = 20 }, { type = "worn_type", operator = "eq", value = "cafe_uniform" }] }, blocks = [{ type = "dialog", content = "You're dressed, @player. Three hours. Smile.", props = { speaker = "npc", npcId = "npc_tom" } }] },
+]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -22307,9 +22326,34 @@ id   = "not_today"
 name = "Not today"
 
 [[canvases.nodes.blocks]]
-type = "dialog"
-content = "Your call. Sit where I can see you or clear the floor. I've got tables."
-props = { speaker = "npc", npcId = "npc_tom" }
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "energy", operator = "gte", value = 20 }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }] }, blocks = [{ type = "dialog", content = "Your call. Sit where I can see you or clear the floor. I've got tables.", props = { speaker = "npc", npcId = "npc_tom" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "energy", operator = "gte", value = 20 }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }, { type = "trait", subject = "player", trait_key = "curfew_days", operator = "eq", value = 0 }] }, blocks = [{ type = "dialog", content = "Your call. Sit where I can see you or clear the floor. I've got tables.", props = { speaker = "npc", npcId = "npc_tom" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "energy", operator = "lt", value = 20 }, { type = "time_of_day", start_time = "08:00", end_time = "18:00" }] }, blocks = [{ type = "dialog", content = "You're no use to me like that. Sit where I can see you or clear the floor. I've got tables.", props = { speaker = "npc", npcId = "npc_tom" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "energy", operator = "lt", value = 20 }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }, { type = "trait", subject = "player", trait_key = "curfew_days", operator = "eq", value = 0 }] }, blocks = [{ type = "dialog", content = "You're no use to me like that. Sit where I can see you or clear the floor. I've got tables.", props = { speaker = "npc", npcId = "npc_tom" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "curfew_days", operator = "gt", value = 0 }] }, blocks = [{ type = "block_pool", blocks = [{ type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "18:00", end_time = "19:00" }] }, blocks = [{ type = "dialog", content = "Your mother's curfew, not mine. Sit where I can see you or clear the floor. I've got tables.", props = { speaker = "npc", npcId = "npc_tom" } }] }] }] },
+]
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -22343,7 +22387,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "A table of guys from the team come in and order nothing but coffee for an hour so they can watch you walk back and forth. Tom lets them. They tip like they're trying to impress each other." }, { type = "dialog", content = "Same again, honey. And walk slower this time, we're paying for the view.", props = { speaker = "unknown" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "A table of guys from the team come in and order nothing but coffee for an hour so they can watch you walk back and forth. Tom lets them. They tip like they're trying to impress each other." }, { type = "dialog", content = "Same again, darling. And walk slower this time, we're paying for the view.", props = { speaker = "unknown" } }] },
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Two women in gym clothes, a businessman on a call, a pensioner who wants the crusts cut off his toast. Your feet hurt, but you're good at this. You can feel it in the tips." }, { type = "dialog", content = "Crusts off, I said. Thank you, dear. You're the only one here who listens.", props = { speaker = "unknown" } }] },
 ]
 props = { id = "cafe_shift_lines", memory = "seen" }
@@ -22351,19 +22395,19 @@ props = { id = "cafe_shift_lines", memory = "seen" }
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }] }, blocks = [{ type = "paragraph", content = "In the tight uniform with the top button open, every man who orders leans a little further over the counter. Every one of them tips more." }, { type = "dialog", content = "Whatever you recommend. Keep the change, honey. Buy yourself a smaller shirt.", props = { speaker = "unknown" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }] }, blocks = [{ type = "paragraph", content = "In the tight uniform with the top button open, every man who orders leans a little further over the counter. Every one of them tips more." }, { type = "dialog", content = "Whatever you recommend. Keep the change, sugar. Buy yourself a smaller shirt.", props = { speaker = "unknown" } }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "No bra under the uniform, and your nipples show through it. Every time you lean to pour, somebody stops talking and looks at your tits." }, { type = "dialog", content = "Cold in here today, is it?", props = { speaker = "unknown" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "No bra under the uniform, and your nipples show through it. Every time you lean to pour, a man's eyes drop to your tits." }, { type = "dialog", content = "Cold in here today, is it?", props = { speaker = "unknown" } }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "tom_step", operator = "gte", value = 1 }, { type = "trait", subject = "npc", npc_id = "npc_tom", trait_key = "want", operator = "gte", value = 30 }] }, blocks = [{ type = "paragraph", content = "Tom reties your apron on his way past, both times you go by." }, { type = "dialog", content = "Hold still. It's slipping again. Can't have you coming apart in front of the customers.", props = { speaker = "npc", npcId = "npc_tom" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "tom_step", operator = "gte", value = 1 }, { type = "trait", subject = "npc", npc_id = "npc_tom", trait_key = "want", operator = "gte", value = 15 }] }, blocks = [{ type = "paragraph", content = "Tom reties your apron on his way past, both times you go by." }, { type = "dialog", content = "Hold still. It's slipping again. Can't have you coming apart in front of the customers.", props = { speaker = "npc", npcId = "npc_tom" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -22375,13 +22419,13 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }] }, blocks = [{ type = "block_pool", blocks = [{ type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "You bend to wipe a table and the conversation at the next one stops: every man at it is looking at your ass. When you straighten up it starts again, lower. Nobody touches. Not yet." }, { type = "dialog", content = "Don't mind us, honey. Carry on.", props = { speaker = "unknown" } }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Two men at the counter watch your ass all the way to the kitchen and back. One of them says something. The other one laughs." }, { type = "dialog", content = "Nice legs on you. Turn around, baby, let's see the rest.", props = { speaker = "unknown" } }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "A man in a suit doesn't look at his menu once. He looks at your tits the whole time you take his order, and over-tips." }, { type = "dialog", content = "Whatever you're having. Surprise me. I'll be back, same table.", props = { speaker = "unknown" } }] }], props = { id = "cafe_l1_lines", memory = "seen" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }] }, blocks = [{ type = "block_pool", blocks = [{ type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "You lean across to clear a table and the conversation at the next one stops: every man at it is looking at your tits. When you straighten up it starts again, lower. Nobody at that table touches you. Not yet." }, { type = "dialog", content = "Don't mind us, sweetheart. Carry on.", props = { speaker = "unknown" } }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Two men at the counter watch your legs all the way to the kitchen and back. One of them says something. The other one laughs and pushes a dollar under his saucer for you." }, { type = "dialog", content = "Nice legs on you. Turn around, baby, let's see the rest.", props = { speaker = "unknown" } }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "A man in a suit doesn't look at his menu once. He looks at your tits the whole time you take his order, and over-tips." }, { type = "dialog", content = "Whatever you're having. Surprise me. I'll be back, same table.", props = { speaker = "unknown" } }] }], props = { id = "cafe_l1_lines", memory = "seen" } }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "In booth four an older man with a folded newspaper lowers it when you pass. His eyes stay on your ass all the way down the aisle, and the paper goes back up the second you look round. Gary, the regular." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "npc_at_location", location_id = "cafe", npc_id = "npc_gary", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "In booth four an older man with a folded newspaper lowers it when you pass. His eyes follow your hips all the way down the aisle, and the paper goes back up the second you look round. Gary, the regular." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -25102,7 +25146,7 @@ props = { description = "a nude female life model posing on a stool under a lamp
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cocky_guy_met", operator = "is_true" }] }, blocks = [{ type = "paragraph", content = "The guy in that jacket has turned his pad so you can see it. There's no model on it. It's your neck, and he's started on your chest." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cocky_guy_met", operator = "is_true" }] }, blocks = [{ type = "paragraph", content = "The guy in that jacket has turned his pad so you can see it. He's rubbed the model out of it. It's your neck, and he's started on your chest." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -25114,7 +25158,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "OR", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }, blocks = [{ type = "block_pool", blocks = [{ type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cocky_guy_met", operator = "is_false" }] }, blocks = [{ type = "paragraph", content = "The guy in that jacket hasn't touched his paper since you sat down." }] }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, blocks = [{ type = "paragraph", content = "You're not sorry about what you wore." }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, blocks = [{ type = "paragraph", content = "You pull your arms in and keep your eyes on your page. You should have worn something else." }] }] },
+  { type = "group", conditions = { version = "1.0", logic = "OR", items = [{ type = "clothing_slot", slot = "bra", operator = "unequipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }, blocks = [{ type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, blocks = [{ type = "paragraph", content = "You're not sorry about what you wore." }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, blocks = [{ type = "paragraph", content = "You pull your arms in and keep your eyes on your page. You should have worn something else." }] }] },
 ]
 
 [canvases.nodes.exit_block]
