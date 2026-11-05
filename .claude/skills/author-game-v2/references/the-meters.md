@@ -236,7 +236,7 @@ non-initial garment at `price = 0` is invisible on the very shop page it sits be
 (`v2.py:2333` stocks only `!initial && price > 0`), so a check reading "a shop exists, therefore
 buyable" would pass a garment nobody can get.
 
-⚠️ **`shop_location` is never validated** (`template_import.py:3132` takes it as a bare string,
+⚠️ **`shop_location` is never validated** (`template_import.py:3143` takes it as a bare string,
 `v2.py:10717` compares it to each location's slug). A typo produces no error, no warning and no shop
 — the same silence as omitting it. After a build, `grep -c "Browse Clothes" <output>/index.html`
 must be 1.

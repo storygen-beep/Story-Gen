@@ -1547,3 +1547,28 @@ Dev + debug rebuild. Not committed. The one new screen, the row's fallback, has 
 The importer's nesting cap dropped 8 written lines on 3 screens; the cap went from 4 to 8 and a build holding the stand-in
 now fails (DECISIONS 194). Dev + debug rebuild: stand-ins 5 to 0. Then
 committed. Two reader reads on those screens, fixes in DECISIONS 195; the second read's fixes are not re-read.
+
+## 2026-11-05 — Change Clothes and the clothes shop as a dressing room
+
+LO picked the v3 dressing-room mockup ("Go ahead", DECISIONS 196). `[ui] clothes_layout = "room"` and
+`clothes_door = "street"` in `0_systems_spec.toml`; `image` on the 18 garments; `locked_text` on the three garage
+items; two portrait rows on the new `wearing`. Engine: the room pages, `when.wearing` and `locked_text`, and theme
+colours for the table pages in every game.
+
+Dev + debug rebuild. This container has no Tweego, so the build was compiled by a local stand-in that puts the new
+story data into the last real build's SugarCube. On the unchanged source it reproduced the committed `index.html` byte
+for byte. Rebuild with real Tweego before a public build. The missing-media count went from 28 to 48: the 18 garment
+pictures and the 2 new portraits, which the media pass is meant to find.
+
+Played in headless Chromium by script, not in Claude in Chrome. What it checked:
+- the slot column and the rail;
+- the door line in jeans, in the short skirt and in the towel;
+- the portrait pick in jeans, the skirt, the towel and the café uniform;
+- a held skirt that will not go on;
+- the dress swap;
+- the shop's reasons, Buy and wear, and the empty rack.
+No JS errors, no sideways scroll at 390px.
+
+Found and not changed: the street's last dress-code rule has no condition and requires bra, panties, top and bottom,
+but its message only says "Going out without a bra…". A girl in her underwear reads that line, here and on the
+ClothingBlock page.

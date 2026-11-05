@@ -1196,6 +1196,11 @@ class TweeComprehensiveGeneratorV2:
         self.wardrobe_change_on_refusal = clothing_settings.get("wardrobe_change_on_refusal") is True
         self.wardrobe_anywhere = clothing_settings.get("wardrobe_anywhere") is not False
         self.saved_outfits = clothing_settings.get("saved_outfits") is True  # E7c
+        # [ui] clothes_layout = "room" and its door (first_term DECISIONS 196). Absent in
+        # every game that does not opt in: the table pages, unchanged.
+        _meta = self.project.metadata or {}
+        self.clothes_layout = _meta.get("clothes_layout") or "table"
+        self.clothes_door = _meta.get("clothes_door") or ""
         clothing_items = clothing_settings.get("items", [])
         clothing_requirements = clothing_settings.get("requirements", {})
         if self.clothing_enabled:
@@ -2018,6 +2023,9 @@ setup.getPlayerPortrait = function() {
                 else if (op === 'eq') ok = (lvl === val);
             }
             if (ok && w.flag && !flags[w.flag]) ok = false;
+            // `wearing`: a garment of this type in ANY slot (the short skirt under a
+            // T-shirt), where worn_type reads only the dominant one (dress || top || bottom).
+            if (ok && w.wearing && setup.getWornTypes().indexOf(w.wearing) === -1) ok = false;
             if (ok) { img = outfits[j].image; break; }
         }
         if (!img) img = cfg.default_image || '';
@@ -2172,7 +2180,12 @@ setup.checkLocationClothing = function(passageName) {
     if (!setup.clothing_enabled) return null;
     var locSlug = (setup.passage_to_location || {})[passageName];
     if (!locSlug) return null;
+    return setup.clothingCheckForLocation(locSlug);
+};
 
+// The same check by location slug: the room layout's door line asks it directly.
+setup.clothingCheckForLocation = function(locSlug) {
+    if (!setup.clothing_enabled || !locSlug) return null;
     var locData = (setup.locations || {})[locSlug];
     if (!locData || !locData.clothing_rules || locData.clothing_rules.length === 0) {
         return null;
@@ -2343,6 +2356,10 @@ jQuery(document).on('click', '.wardrobe-item:not(.wardrobe-item-locked)', functi
     }
 });
 """
+
+        if self._clothes_room():
+            wardrobe_js_block += self._clothes_room_js()
+            wardrobe_handlers_block += self._clothes_room_handlers()
 
         # Shop system JS
         shop_js_block = ""
@@ -12249,6 +12266,375 @@ setup.castTraitRows = function (slug, npc) {
     return rows;
 };"""
 
+    # ── [ui] clothes_layout = "room" (first_term DECISIONS 196) ─────────────────────────
+    # The Change Clothes and Clothing Store pages drawn as a dressing room: her portrait
+    # beside what she wears, a rail of what she owns for one slot; in the shop one piece on
+    # a stand and a rack of what she can still buy. Emitted only when the game opts in, so
+    # every other game keeps its table pages byte for byte (the contrast fix aside).
+
+    def _clothes_room(self) -> bool:
+        return self.clothing_enabled and self.clothes_layout == "room"
+
+    def _clothes_room_js(self) -> str:
+        """Setup functions for the room pages. Plain JS (not an f-string): the only value
+        spliced in is the door location, as JSON."""
+        if not self._clothes_room():
+            return ""
+        return r"""
+// ===== [ui] clothes_layout = "room" =====
+// The door: the location whose dress-code rules the Wearing line and the shop's going-out
+// line read ([ui] clothes_door). Empty means neither line is drawn.
+setup.clothes_door = """ + json.dumps(self.clothes_door or "") + r""";
+setup.CR_SLOTS = ['top', 'bottom', 'dress', 'bra', 'underwear', 'legwear', 'shoes'];
+setup.CR_LABELS = { top: 'Top', bottom: 'Bottom', dress: 'Dress', bra: 'Bra', underwear: 'Underwear', legwear: 'Legwear', shoes: 'Shoes' };
+// Page state that does not belong in a save: which slot the rail shows, which piece is on
+// the shop's stand, the shop's tab and its last receipt.
+setup.wardrobeSel = null;
+setup.shopPick = null;
+setup.shopTab = 'all';
+setup.shopToast = '';
+
+setup._crEsc = function(t) {
+    return String(t == null ? '' : t).replace(/[&<>"']/g, function(c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+};
+// clothing_data is the source of truth; a wardrobe record is a copy taken when she got it.
+setup._crItem = function(id) {
+    var cdata = setup.clothing_data || [];
+    for (var i = 0; i < cdata.length; i++) if (cdata[i].id === id) return cdata[i];
+    var wd = ((State.variables.player || {}).wardrobe) || {};
+    return wd[id] || null;
+};
+// One 3:4 frame for every garment picture. No image, or one that fails to load, shows the
+// garment's name on the plain frame, so a game works before its media lands.
+setup._crPic = function(src, name, cls) {
+    var h = '<span class="cr-pic' + (cls ? ' ' + cls : '') + (src ? '' : ' cr-noimg') + '">';
+    if (src) h += '<img src="' + setup._crEsc(src) + '" alt="' + setup._crEsc(name) + '" onerror="this.parentNode.classList.add(\'cr-noimg\');this.remove();">';
+    return h + '<span class="cr-picname">' + setup._crEsc(name) + '</span></span>';
+};
+// Why a garment cannot be worn or bought: the trait it waits on first (a number she can
+// chase), else the author's locked_text for what no number explains (a flag: "Held in the
+// garage"), else a plain "Locked".
+setup._crLockReason = function(item) {
+    if (!item || !item.conditions || !item.conditions.items || !item.conditions.items.length) return '';
+    if (setup.triggerConditionsSatisfied(item.conditions)) return '';
+    var why = setup.describeUnmetTraits(item.conditions);
+    if (why) return 'Needs ' + why;
+    return item.locked_text || 'Locked';
+};
+// The clothing state in one word or two, read off what she wears.
+setup.clothesStateLabel = function() {
+    var eq = ((State.variables.player || {}).equipped) || {};
+    var u = setup.getUndressLevel();
+    if (u === 'naked') return ['Naked', true];
+    if (u === 'topless') return ['Topless', true];
+    if (u === 'bottomless') return ['Bottomless', true];
+    if (u === 'underwear') return ['Underwear only', true];
+    if (!eq.bra && !eq.underwear) return ['No bra, no panties', true];
+    if (!eq.bra) return ['No bra', true];
+    if (!eq.underwear) return ['No panties', true];
+    return ['Dressed', false];
+};
+// The door's verdict on what she wears now: null when no door is set.
+setup.clothesDoorLine = function() {
+    if (!setup.clothes_door) return null;
+    var msg = setup.clothingCheckForLocation(setup.clothes_door);
+    return msg ? { ok: false, text: msg } : { ok: true, text: 'Fine to go out.' };
+};
+// The door's rule for one garment: the message of the first rule there that names this
+// garment's type. '' when the garment has no type or the door no such rule.
+setup.clothesDoorRuleFor = function(item) {
+    if (!setup.clothes_door || !item || !item.type) return '';
+    var loc = (setup.locations || {})[setup.clothes_door];
+    var rules = (loc && loc.clothing_rules) || [];
+    for (var i = 0; i < rules.length; i++) {
+        var its = (rules[i].conditions && rules[i].conditions.items) || [];
+        for (var j = 0; j < its.length; j++) {
+            if (its[j] && its[j].type === 'worn_type' && its[j].operator === 'eq' && its[j].value === item.type) {
+                return rules[i].message || '';
+            }
+        }
+    }
+    return '';
+};
+
+setup.renderWardrobeRoom = function() {
+    var p = State.variables.player || {};
+    var eq = p.equipped || {};
+    var esc = setup._crEsc;
+    // A slot is shown when she owns something for it or wears something in it.
+    var slots = [];
+    for (var s = 0; s < setup.CR_SLOTS.length; s++) {
+        var sl = setup.CR_SLOTS[s];
+        if (eq[sl] || setup.getWardrobeItemsForSlot(sl).length) slots.push(sl);
+    }
+    if (slots.indexOf(setup.wardrobeSel) === -1) setup.wardrobeSel = slots[0] || null;
+    var sel = setup.wardrobeSel;
+
+    var h = '<div class="cr-room"><div class="cr-her">';
+    var portrait = setup.player_portrait_enabled ? setup.getPlayerPortrait() : '';
+    if (portrait) {
+        h += setup._crPic(portrait, p.name || '', 'cr-portrait');
+    } else {
+        // No portrait in this game: the selected slot's garment stands in her place.
+        var big = sel && eq[sel] ? setup._crItem(eq[sel]) : null;
+        h += setup._crPic(big ? big.image : '', big ? big.name : 'Nothing on', 'cr-portrait');
+    }
+    h += '</div><div class="cr-slots">';
+    for (var k = 0; k < slots.length; k++) {
+        var slot = slots[k];
+        var cur = eq[slot] ? setup._crItem(eq[slot]) : null;
+        var val;
+        if (cur) val = '<span class="cr-v">' + esc(cur.name) + '</span>';
+        else if ((slot === 'top' || slot === 'bottom') && eq.dress) val = '<span class="cr-v cr-none">Under the dress</span>';
+        else val = '<span class="cr-v cr-none">Nothing</span>';
+        h += '<button type="button" class="cr-slot' + (slot === sel ? ' is-sel' : '') + '" data-slot="' + slot + '">' +
+            (cur ? setup._crPic(cur.image, cur.name, 'cr-thumb') : '<span class="cr-pic cr-thumb cr-empty"></span>') +
+            '<span class="cr-slot-text"><span class="cr-k">' + setup.CR_LABELS[slot] + '</span>' + val + '</span></button>';
+    }
+    h += '</div></div>';
+
+    var st = setup.clothesStateLabel();
+    var door = setup.clothesDoorLine();
+    h += '<div class="cr-status"><span class="cr-chip' + (st[1] ? ' is-bare' : '') + '">' + esc(st[0]) + '</span>';
+    if (door) h += '<span class="cr-door ' + (door.ok ? 'is-ok' : 'is-no') + '">' + (door.ok ? '&#10003; ' : '') + esc(door.text) + '</span>';
+    h += '</div>';
+
+    if (!sel) return h + '<p class="cr-empty-note">She has no clothes.</p>';
+    var owned = setup.getWardrobeItemsForSlot(sel);
+    var hint = '';
+    if (sel === 'dress' && (eq.top || eq.bottom)) hint = 'Takes off your top and bottom';
+    if ((sel === 'top' || sel === 'bottom') && eq.dress) hint = 'Takes off the dress';
+    h += '<div class="cr-rail-head"><span class="cr-rail-title">' + setup.CR_LABELS[sel] + ' &middot; ' + owned.length + '</span>' +
+        (hint ? '<span class="cr-rail-hint">' + hint + '</span>' : '') + '</div><div class="cr-rail">';
+    // "Nothing": takes the slot off. Drawn as worn when the slot is empty; dead when the
+    // slot may never be empty (always_required).
+    var canOff = !!eq[sel] && setup.canRemoveSlot(sel);
+    h += '<button type="button" class="cr-hang cr-off' + (!eq[sel] ? ' is-on' : '') + (eq[sel] && !canOff ? ' is-locked' : '') + '"' +
+        (canOff ? ' data-off="' + sel + '"' : ' aria-disabled="true"') + '><span class="cr-pic cr-nothing">Nothing</span><span class="cr-cap">Take off</span></button>';
+    for (var i = 0; i < owned.length; i++) {
+        var it = setup._crItem(owned[i].id) || owned[i];
+        var lock = setup._crLockReason(it);
+        var on = eq[sel] === it.id;
+        h += '<button type="button" class="cr-hang' + (on ? ' is-on' : '') + (lock ? ' is-locked' : '') + '"' +
+            (lock ? ' aria-disabled="true"' : ' data-wear="' + esc(it.id) + '"') + '>' + setup._crPic(it.image, it.name) +
+            '<span class="cr-cap">' + esc(it.name) + (lock ? '<span class="cr-lock">&#128274; ' + esc(lock) + '</span>' : '') + '</span></button>';
+    }
+    return h + '</div>';
+};
+
+// What the shop sells and she does not own yet: priced, not a starting garment.
+setup.shopRoomStock = function() {
+    var wd = ((State.variables.player || {}).wardrobe) || {};
+    var cdata = setup.clothing_data || [];
+    var out = [];
+    for (var i = 0; i < cdata.length; i++) {
+        var c = cdata[i];
+        if (c.initial || !((c.price || 0) > 0) || wd[c.id]) continue;
+        out.push(c);
+    }
+    return out;
+};
+// Why she cannot buy it now: its own conditions first, then the money. '' when she can.
+setup.shopRoomReason = function(item) {
+    var lock = setup._crLockReason(item);
+    if (lock) return lock;
+    var money = ((State.variables.player || {}).core_traits || {}).money || 0;
+    if (money < (item.price || 0)) return 'Need $' + ((item.price || 0) - money) + ' more';
+    return '';
+};
+setup.renderShopRoom = function() {
+    var esc = setup._crEsc;
+    var money = ((State.variables.player || {}).core_traits || {}).money || 0;
+    var stock = setup.shopRoomStock();
+    var h = '<div class="cr-shop-top"><span class="cr-money">$' + money + '</span></div>';
+    if (setup.shopToast) h += '<div class="cr-toast">' + esc(setup.shopToast) + '</div>';
+    if (!stock.length) return h + '<p class="cr-empty-note">You have bought everything here.</p>';
+
+    var pick = null;
+    for (var i = 0; i < stock.length; i++) if (stock[i].id === setup.shopPick) pick = stock[i];
+    if (!pick) { pick = stock[0]; setup.shopPick = pick.id; }
+    var why = setup.shopRoomReason(pick);
+    var rule = setup.clothesDoorRuleFor(pick);
+    h += '<div class="cr-stand">' + setup._crPic(pick.image, pick.name) + '<div class="cr-stand-info">' +
+        '<span class="cr-stand-name">' + esc(pick.name) + '</span>' +
+        '<span class="cr-stand-slot">' + (setup.CR_LABELS[pick.slot] || esc(pick.slot)) + '</span>' +
+        '<span class="cr-stand-price">$' + (pick.price || 0) + '</span>' +
+        (rule ? '<span class="cr-stand-rule">' + esc(rule) + '</span>' : '');
+    if (why) h += '<span class="cr-stand-why">' + esc(why) + '</span>';
+    else h += '<span class="cr-stand-btns"><button type="button" class="cr-buy" data-buy="' + esc(pick.id) + '">Buy</button>' +
+        '<button type="button" class="cr-buy cr-buy-wear" data-buy="' + esc(pick.id) + '" data-and-wear="1">Buy and wear</button></span>';
+    h += '</div></div>';
+
+    // Tabs: All, then each slot the shop has in stock, in body order.
+    var tabs = ['all'];
+    for (var s = 0; s < setup.CR_SLOTS.length; s++) {
+        for (var j = 0; j < stock.length; j++) if (stock[j].slot === setup.CR_SLOTS[s]) { tabs.push(setup.CR_SLOTS[s]); break; }
+    }
+    if (tabs.indexOf(setup.shopTab) === -1) setup.shopTab = 'all';
+    h += '<div class="cr-tabs" role="tablist">';
+    for (var t = 0; t < tabs.length; t++) {
+        var on = tabs[t] === setup.shopTab;
+        h += '<button type="button" role="tab" aria-selected="' + on + '" class="cr-tab' + (on ? ' is-on' : '') + '" data-tab="' + tabs[t] + '">' +
+            (tabs[t] === 'all' ? 'All' : setup.CR_LABELS[tabs[t]]) + '</button>';
+    }
+    h += '</div><div class="cr-rack">';
+    for (var r = 0; r < stock.length; r++) {
+        var it = stock[r];
+        if (setup.shopTab !== 'all' && it.slot !== setup.shopTab) continue;
+        h += '<button type="button" class="cr-peg' + (it.id === pick.id ? ' is-sel' : '') + (setup.shopRoomReason(it) ? ' is-cant' : '') +
+            '" data-pick="' + esc(it.id) + '">' + setup._crPic(it.image, it.name) +
+            '<span class="cr-cap"><span>' + esc(it.name) + '</span><span class="cr-price">$' + (it.price || 0) + '</span></span></button>';
+    }
+    return h + '</div>';
+};
+"""
+
+    def _clothes_room_handlers(self) -> str:
+        """Click handlers for the room pages. Each one changes state and replays the page,
+        as the table pages' handlers do, so the sidebar's portrait and money follow."""
+        if not self._clothes_room():
+            return ""
+        return r"""
+// [ui] clothes_layout = "room" — handlers
+// The rail scrolls sideways: bring what she wears into view, or it can sit off the edge.
+jQuery(document).on(':passagedisplay', function() {
+    var rail = document.querySelector('.cr-rail');
+    var on = rail && rail.querySelector('.cr-hang.is-on');
+    if (on) rail.scrollLeft = Math.max(0, on.offsetLeft - rail.offsetLeft - 8);
+});
+jQuery(document).on('click', '.cr-slot', function(e) {
+    e.preventDefault();
+    setup.wardrobeSel = String(jQuery(this).data('slot'));
+    Engine.play("WardrobePage");
+});
+jQuery(document).on('click', '.cr-hang[data-wear]', function(e) {
+    e.preventDefault();
+    setup.equipItem(String(jQuery(this).attr('data-wear')));
+    Engine.play("WardrobePage");
+});
+jQuery(document).on('click', '.cr-hang[data-off]', function(e) {
+    e.preventDefault();
+    setup.unequipSlot(String(jQuery(this).attr('data-off')));
+    Engine.play("WardrobePage");
+});
+jQuery(document).on('click', '.cr-peg', function(e) {
+    e.preventDefault();
+    setup.shopPick = String(jQuery(this).attr('data-pick'));
+    setup.shopToast = '';
+    Engine.play("ShopPage");
+});
+jQuery(document).on('click', '.cr-tab', function(e) {
+    e.preventDefault();
+    setup.shopTab = String(jQuery(this).attr('data-tab'));
+    Engine.play("ShopPage");
+});
+jQuery(document).on('click', '.cr-buy', function(e) {
+    e.preventDefault();
+    var id = String(jQuery(this).attr('data-buy'));
+    var item = setup._crItem(id);
+    if (item && setup.buyItem(id)) {
+        var wore = jQuery(this).attr('data-and-wear') === '1' && setup.equipItem(id);
+        var left = ((State.variables.player || {}).core_traits || {}).money || 0;
+        setup.shopToast = 'Bought the ' + item.name.charAt(0).toLowerCase() + item.name.slice(1) +
+            (wore ? ' and put it on' : '') + '. $' + left + ' left.';
+        setup.shopPick = null;
+    }
+    setup.showEffectNotification();
+    Engine.play("ShopPage");
+});
+"""
+
+    def _clothes_room_css(self) -> str:
+        """Room-page styling, on the theme tokens. Phone first; on a wide screen the room is
+        capped in width like the cast list, and the shop's rack takes more columns."""
+        if not self._clothes_room():
+            return ""
+        return """
+/* [ui] clothes_layout = "room": the dressing room and the shop's stand. */
+.cr-wrap { max-width: 720px; }
+.cr-pic { position: relative; display: block; aspect-ratio: 3 / 4; max-width: 100%; border-radius: 10px; overflow: hidden;
+    background: var(--theme-surface-alt, #16213e); border: 2px solid transparent; }
+.cr-pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cr-picname { display: none; }
+.cr-pic.cr-noimg .cr-picname { display: flex; position: absolute; inset: 0; align-items: center; justify-content: center;
+    padding: 6px; text-align: center; font-size: 13px; line-height: 1.25; color: var(--theme-text-muted, #9aa0ab); }
+.cr-room { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 10px; }
+.cr-portrait { border: 1px solid var(--theme-border); }
+.cr-slots { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.cr-slot { display: grid; grid-template-columns: 30px minmax(0, 1fr); align-items: center; gap: 8px; min-height: 44px;
+    padding: 3px 8px 3px 4px; border-radius: 8px; border: 1px solid transparent; background: var(--theme-surface);
+    color: var(--theme-text); text-align: left; cursor: pointer; font: inherit; }
+.cr-slot.is-sel { border-color: var(--theme-accent); }
+.cr-thumb { border-radius: 5px; border-width: 0; }
+.cr-thumb.cr-noimg .cr-picname { font-size: 0; }
+.cr-empty { background: transparent; border: 1px dashed var(--theme-border); }
+.cr-slot-text { min-width: 0; display: flex; flex-direction: column; }
+.cr-k { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--theme-text-muted, #9aa0ab); }
+.cr-v { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cr-none { color: var(--theme-text-muted, #9aa0ab); font-style: italic; }
+.cr-status { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0 0; font-size: 14px; }
+.cr-chip { font-size: 13px; padding: 2px 9px; border-radius: 999px; border: 1px solid var(--theme-accent); color: var(--theme-accent); }
+.cr-chip.is-bare { border-color: var(--theme-danger); color: var(--theme-danger); }
+.cr-door.is-ok { color: var(--theme-success, #22c55e); }
+.cr-door.is-no { color: var(--theme-danger); }
+.cr-rail-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin: 14px 0 6px; }
+.cr-rail-title { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--theme-text-muted, #9aa0ab); }
+.cr-rail-hint { font-size: 12px; color: var(--theme-text-muted, #9aa0ab); }
+.cr-rail { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; scroll-snap-type: x mandatory; }
+.cr-hang { flex: 0 0 96px; display: flex; flex-direction: column; gap: 4px; padding: 0; border: 0; background: none;
+    color: var(--theme-text); text-align: left; cursor: pointer; font: inherit; scroll-snap-align: start; }
+.cr-hang.is-on .cr-pic { border-color: var(--theme-success, #22c55e); }
+.cr-hang.is-on .cr-cap { color: var(--theme-success, #22c55e); }
+.cr-hang.is-locked { cursor: default; }
+.cr-hang.is-locked .cr-pic { opacity: .45; }
+.cr-hang.is-locked .cr-cap { color: var(--theme-text-muted, #9aa0ab); }
+.cr-nothing { display: flex; align-items: center; justify-content: center; background: transparent;
+    border: 2px dashed var(--theme-border); color: var(--theme-text-muted, #9aa0ab); font-size: 13px; }
+.cr-hang.is-on .cr-nothing { border-style: solid; }
+.cr-cap { font-size: 13px; line-height: 1.25; }
+.cr-lock { display: block; font-size: 11px; color: var(--theme-text-muted, #9aa0ab); }
+.cr-empty-note { color: var(--theme-text-muted, #9aa0ab); font-style: italic; }
+.cr-shop-top { display: flex; justify-content: flex-end; margin: -6px 0 10px; }
+.cr-money { font-weight: 600; font-variant-numeric: tabular-nums; color: var(--theme-success, #22c55e);
+    border: 1px solid var(--theme-success, #22c55e); border-radius: 999px; padding: 2px 10px; }
+.cr-toast { color: var(--theme-success, #22c55e); background: var(--theme-success-bg, rgba(34,197,94,.1)); border-radius: 8px;
+    padding: 7px 10px; margin-bottom: 10px; font-size: 14px; }
+.cr-stand { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 12px; padding: 10px;
+    background: var(--theme-surface); border: 1px solid var(--theme-border); border-radius: 12px; }
+.cr-stand-info { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.cr-stand-name { font-size: 18px; font-weight: 700; line-height: 1.2; }
+.cr-stand-slot, .cr-stand-rule { font-size: 13px; color: var(--theme-text-muted, #9aa0ab); }
+.cr-stand-price { font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.cr-stand-why { font-size: 14px; color: var(--theme-danger); }
+.cr-stand-btns { display: flex; flex-direction: column; gap: 6px; margin-top: auto; }
+.cr-buy { font: inherit; font-size: 15px; padding: 9px 12px; border-radius: 8px; cursor: pointer; font-weight: 600;
+    background: var(--theme-accent); border: 1px solid var(--theme-accent); color: var(--theme-bg, #0f0f1a); }
+.cr-buy.cr-buy-wear { background: var(--theme-surface-alt, #16213e); border-color: var(--theme-border); color: var(--theme-text); font-weight: 400; }
+.cr-tabs { display: flex; gap: 4px; margin: 14px 0 8px; border-bottom: 1px solid var(--theme-border); overflow-x: auto; }
+.cr-tab { font: inherit; font-size: 14px; background: none; border: 0; border-bottom: 2px solid transparent; padding: 6px 10px;
+    color: var(--theme-text-muted, #9aa0ab); cursor: pointer; white-space: nowrap; }
+.cr-tab.is-on { color: var(--theme-text); border-bottom-color: var(--theme-accent); }
+.cr-rack { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.cr-peg { display: flex; flex-direction: column; gap: 3px; min-width: 0; padding: 0; border: 0; background: none;
+    color: var(--theme-text); text-align: left; cursor: pointer; font: inherit; }
+.cr-peg.is-sel .cr-pic { border-color: var(--theme-accent); }
+.cr-peg.is-cant .cr-pic { opacity: .45; }
+.cr-peg .cr-cap { display: flex; justify-content: space-between; gap: 4px; }
+.cr-peg.is-cant .cr-price { color: var(--theme-text-muted, #9aa0ab); }
+/* SugarCube paints every button on hover and focus (button:hover, 0-1-1); a class with a
+   pseudo-class (0-2-0) keeps the room's own look. */
+.cr-slot:hover, .cr-slot:focus { background: var(--theme-surface-hover, var(--theme-surface)); }
+.cr-hang:hover, .cr-hang:focus, .cr-peg:hover, .cr-peg:focus { background: none; }
+.cr-tab:hover, .cr-tab:focus { background: none; color: var(--theme-text); }
+.cr-buy:hover, .cr-buy:focus { background: var(--theme-accent); filter: brightness(1.1); }
+.cr-buy.cr-buy-wear:hover, .cr-buy.cr-buy-wear:focus { background: var(--theme-surface-hover, var(--theme-surface-alt)); filter: none; }
+.cr-slot:focus-visible, .cr-hang:focus-visible, .cr-peg:focus-visible, .cr-tab:focus-visible, .cr-buy:focus-visible {
+    outline: 2px solid var(--theme-accent); outline-offset: 2px; }
+@media (min-width: 700px) { .cr-rack { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+"""
+
     def _cast_page_css(self) -> str:
         """Cast-page styling, emitted ONLY for games that author a cast page.
 
@@ -20528,6 +20914,27 @@ if (clothingMsg) {
 }
 <</script>><</link>>"""
 
+            if self._clothes_room():
+                # The room layout: Back at the top, as on People and Quests, with the same
+                # dress-code check on the way out and its warning right under it.
+                wardrobe_page = """
+:: WardrobePage
+<<link "← Back">><<script>>
+var dest = State.variables.last_game_passage || "Navigation";
+var clothingMsg = setup.checkLocationClothing(dest);
+if (clothingMsg) {
+    var el = document.getElementById('wardrobe-warning');
+    if (el) { el.innerHTML = clothingMsg; el.style.display = 'block'; }
+} else {
+    setup.smartBack();
+}
+<</script>><</link>>
+<div id="wardrobe-warning" style="display:none; color:var(--theme-danger); margin:10px 0; padding:8px; border:1px solid var(--theme-danger); border-radius:4px;"></div>
+<<nobr>>
+<h2>Change Clothes</h2>
+<div class="cr-wrap"><<= setup.renderWardrobeRoom()>></div>
+<</nobr>>"""
+
             clothing_block_page = """
 :: ClothingBlock
 <h2>Not Dressed for This</h2>
@@ -20567,6 +20974,14 @@ if (clothingMsg) {
 <<= setup.renderShopPage()>>
 <</nobr>>
 <<link "\u2190 Back">><<run setup.smartBack()>><</link>>"""
+            if self._clothes_room():
+                shop_page = """
+:: ShopPage
+<<link "\u2190 Back">><<run setup.smartBack()>><</link>>
+<<nobr>>
+<h2>Clothing Store</h2>
+<div class="cr-wrap"><<= setup.renderShopRoom()>></div>
+<</nobr>>"""
 
         # Rent day page (only if rent enabled)
         rent_page = ""
@@ -21586,7 +22001,7 @@ if (clothingMsg) {
     font-size: 11px;
     color: var(--theme-text-muted, #8a8a8a);
     text-align: center;
-}""" + self._cast_page_css() + self._phone_clock_css() + self._timetable_css() + self._cheat_page_css() + """
+}""" + self._cast_page_css() + self._clothes_room_css() + self._phone_clock_css() + self._timetable_css() + self._cheat_page_css() + """
 
 /* Reduce gap between StoryCaption and Save/Restart menu */
 #story-caption {
@@ -23112,7 +23527,7 @@ if (clothingMsg) {
 .wardrobe-slot-label {
     padding: 12px 8px;
     font-weight: 700;
-    color: #333;
+    color: var(--theme-text-muted);
     width: 90px;
     vertical-align: middle;
     font-size: 0.85em;
@@ -23139,7 +23554,7 @@ if (clothingMsg) {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fff;
+    background: var(--theme-surface-alt);
     transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
 }
 
@@ -23182,7 +23597,7 @@ if (clothingMsg) {
     text-align: center;
     padding: 6px;
     word-break: break-word;
-    color: #333;
+    color: var(--theme-text);
     line-height: 1.2;
 }
 
@@ -23305,8 +23720,8 @@ if (clothingMsg) {
 }
 
 .shop-tier-header {
-    background: var(--theme-text-strong);
-    color: #fff;
+    background: var(--theme-surface-alt);
+    color: var(--theme-text);
     padding: 10px 16px;
     font-weight: 700;
     font-size: 0.95em;
@@ -23366,7 +23781,7 @@ if (clothingMsg) {
     display: flex;
     align-items: center;
     gap: 12px;
-    background: #fff;
+    background: var(--theme-surface-alt);
     border: 1px solid var(--theme-border);
     border-radius: 8px;
     padding: 10px 14px;

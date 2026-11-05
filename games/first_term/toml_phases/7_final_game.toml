@@ -245,6 +245,16 @@ when  = { worn_type = "laura_dress" }
 image = "portraits/her_party_dress.jpg"
 when  = { worn_type = "party_dress" }
 
+# DECISIONS 196 — `wearing` matches a garment in any slot, so the room shows the skirt and the
+# blouse under or over whatever else she has on. After the dress rows: first match wins.
+[[player_portrait.outfits]]
+image = "portraits/her_short_skirt.jpg"
+when  = { wearing = "short_skirt" }
+
+[[player_portrait.outfits]]
+image = "portraits/her_sheer_blouse.jpg"
+when  = { wearing = "thin_top" }
+
 # ── the sidebar: her two stages, money, energy, hygiene, and what's next ──
 [[sidebar_items]]
 type       = "trait_words"
@@ -491,6 +501,10 @@ sidebar_hide = ["stats", "schedules", "flags"]
 phone_clock  = true
 # DECISIONS 97 — the Quests page as short tap-to-open rows: My story, then people ready first.
 quests_layout = "list"
+# DECISIONS 196 — Change Clothes and the clothes shop as a dressing room: her portrait beside what she
+# wears, a rail per slot; the shop as a stand and a rack. The street's dress code answers "can she go out".
+clothes_layout = "room"
+clothes_door   = "street"
 # DECISIONS 112, 121 — her classes as a table: a Timetable button after People (rows: 1_, from classes.py).
 timetable_button = true
 
@@ -563,6 +577,7 @@ free  = true
 id = "plain_bra"
 name = "Plain bra"
 slot = "bra"
+image = "clothing/plain_bra.jpg"
 initial = false   # (2026-11-03) owned from the first screen, not worn: she wakes in her sleep shirt
 type = "bra"
 
@@ -570,6 +585,7 @@ type = "bra"
 id = "plain_panties"
 name = "Cotton panties"
 slot = "underwear"
+image = "clothing/plain_panties.jpg"
 initial = true
 type = "panties"
 
@@ -577,6 +593,7 @@ type = "panties"
 id = "tshirt"
 name = "T-shirt"
 slot = "top"
+image = "clothing/tshirt.jpg"
 initial = false   # (2026-11-03) owned from the first screen, not worn: she wakes in her sleep shirt
 type = "tshirt"
 
@@ -584,6 +601,7 @@ type = "tshirt"
 id = "jeans"
 name = "Jeans"
 slot = "bottom"
+image = "clothing/jeans.jpg"
 initial = false   # (2026-11-03) owned from the first screen, not worn: she wakes in her sleep shirt
 type = "jeans"
 
@@ -591,6 +609,7 @@ type = "jeans"
 id = "sneakers"
 name = "Sneakers"
 slot = "shoes"
+image = "clothing/sneakers.jpg"
 initial = false   # (2026-11-03) owned from the first screen, not worn: she wakes in her sleep shirt
 type = "sneakers"
 
@@ -598,6 +617,7 @@ type = "sneakers"
 id = "leggings"
 name = "Leggings"
 slot = "bottom"
+image = "clothing/leggings.jpg"
 initial = false   # (2026-11-03) owned from the first screen, not worn: she wakes in her sleep shirt
 type = "leggings"
 
@@ -605,6 +625,7 @@ type = "leggings"
 id = "sleep_shorts"
 name = "Sleep shorts"
 slot = "bottom"
+image = "clothing/sleep_shorts.jpg"
 initial = false   # (2026-11-03) owned from the first screen, not worn: she wakes in her sleep shirt
 type = "shorts"
 beauty = 1
@@ -613,6 +634,7 @@ beauty = 1
 id = "sleep_shirt"
 name = "Sleep shirt"
 slot = "dress"
+image = "clothing/sleep_shirt.jpg"
 initial = true
 type = "sleep_shirt"
 exposure = 1
@@ -621,14 +643,17 @@ exposure = 1
 id = "towel"
 name = "Towel"
 slot = "dress"
+image = "clothing/towel.jpg"
 initial = false   # (2026-11-03) owned from the first screen, not worn: she wakes in her sleep shirt
 type = "towel"
 exposure = 1
 
 [[clothing]]
 id = "short_skirt"
+locked_text = "Held in the garage"   # shown only when no trait gate explains the lock
 name = "Short skirt"
 slot = "bottom"
+image = "clothing/short_skirt.jpg"
 price = 30
 type = "short_skirt"
 beauty = 2
@@ -638,8 +663,10 @@ conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subjec
 
 [[clothing]]
 id = "thin_top"
+locked_text = "Held in the garage"   # shown only when no trait gate explains the lock
 name = "Sheer blouse"
 slot = "top"
+image = "clothing/thin_top.jpg"
 price = 20
 type = "thin_top"
 beauty = 1
@@ -649,8 +676,10 @@ conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subjec
 
 [[clothing]]
 id = "sports_bra"
+locked_text = "Held in the garage"   # shown only when no trait gate explains the lock
 name = "Sports bra"
 slot = "bra"
+image = "clothing/sports_bra.jpg"
 price = 25
 type = "sports_bra"
 beauty = 1
@@ -661,6 +690,7 @@ conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subjec
 id = "cafe_uniform_normal"
 name = "Café uniform"
 slot = "dress"
+image = "clothing/cafe_uniform_normal.jpg"
 type = "cafe_uniform"
 beauty = 1
 
@@ -668,6 +698,7 @@ beauty = 1
 id = "cafe_uniform_sexy"
 name = "Tight café uniform"
 slot = "dress"
+image = "clothing/cafe_uniform_sexy.jpg"
 type = "cafe_uniform"
 beauty = 2
 corruption = 1
@@ -676,6 +707,7 @@ corruption = 1
 id = "laura_blue_dress"
 name = "Laura's blue dress"
 slot = "dress"
+image = "clothing/laura_blue_dress.jpg"
 type = "laura_dress"
 beauty = 3
 corruption = 1
@@ -684,6 +716,7 @@ corruption = 1
 id = "zoe_party_dress"
 name = "Zoe's party dress"
 slot = "dress"
+image = "clothing/zoe_party_dress.jpg"
 type = "party_dress"
 beauty = 3
 corruption = 2
@@ -694,6 +727,7 @@ corruption = 2
 id = "laura_lace_bra"
 name = "Laura's black lace bra"
 slot = "bra"
+image = "clothing/laura_lace_bra.jpg"
 type = "lingerie"
 beauty = 3
 corruption = 2
@@ -702,6 +736,7 @@ corruption = 2
 id = "laura_lace_panties"
 name = "Laura's black lace panties"
 slot = "underwear"
+image = "clothing/laura_lace_panties.jpg"
 type = "lingerie"
 beauty = 3
 corruption = 2
