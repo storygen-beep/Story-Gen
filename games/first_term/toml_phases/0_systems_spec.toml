@@ -206,6 +206,9 @@ flagEffects = [
   { targetType = "player", flag = "street_look_today", op = "unset" },
   # gym clothes (DECISIONS 198): one gym accident a day
   { targetType = "player", flag = "gym_accident_today", op = "unset" },
+  # clothing accidents in class and on the shift (DECISIONS 202): one a day each
+  { targetType = "player", flag = "class_accident_today", op = "unset" },
+  { targetType = "player", flag = "cafe_accident_today", op = "unset" },
   # the sex scenes in the cold places, once a day each (heat proposal A1-A7, DECISIONS 147; heat_a.py, and A4 in
   # 3_activities.toml shop_try_on)
   { targetType = "player", flag = "jake_lockers_today", op = "unset" },
@@ -760,6 +763,7 @@ conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subje
 
 [[clothing]]
 id = "cafe_uniform_normal"
+description = "Short in the hem. Bend over a table and the booth behind you sees everything."
 name = "Café uniform"
 slot = "dress"
 image = "clothing/cafe_uniform_normal.jpg"
@@ -768,6 +772,7 @@ beauty = 1
 
 [[clothing]]
 id = "cafe_uniform_sexy"
+description = "A size too small. The top button won't hold for long."
 name = "Tight café uniform"
 slot = "dress"
 image = "clothing/cafe_uniform_sexy.jpg"

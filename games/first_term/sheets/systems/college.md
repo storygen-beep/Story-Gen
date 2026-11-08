@@ -1,4 +1,6 @@
 # [READY] System — college
+> Changed 2026-11-08 (DECISIONS 203, LO: "Yess"): letting bare tits show is Watched (60); letting her bare pussy show is On Display (80), not written this release. Re-signed by LO 2026-11-08 ("Sign them").
+> Changed 2026-11-08 (DECISIONS 202): accidents in class, new section below. Re-signed by LO 2026-11-08 ("Sign them").
 > Changed 2026-11-08, LO's call ("Move to 80", DECISIONS 201): posing naked for the whole figure-drawing class opens at On Display (Exhibitionism 80), as Course of Temptation gates its art-class nude model; what shows sets the stage (DECISIONS 200). Signed by LO 2026-11-08.
 > Signed by LO: LO, 2026-11-04.
 
@@ -111,6 +113,24 @@ complaint"). Proposed: as signed.
 
 **The lock.** Under 20 energy (guess), Focus is shut: *"Too tired to focus. Doze, or skip."*
 
+## Accidents in class (new 2026-11-08, DECISIONS 202)
+
+1 in 4 when she comes into the lecture hall as a class starts, once a day (`class_accident_today`, cleared at midnight).
+Both answers take her to her seat, and the class runs as normal. The room seeing it pays campus talk +1 on both answers;
+letting it be pays her Exhibitionism +1, capped at the stage it shows.
+
+| scene | she wears | what happens | fix it | let it be |
+|---|---|---|---|---|
+| Down your top | low-cut top, bra | she bends for a pen; the row behind sees down her top to her bra | "Hand over your neckline." | "Take your time with the pen." any stage, cap 19 |
+| Down your top | low-cut top, no bra | the same; her bare tits | the same | from 60, cap 79 |
+| Up your skirt | short skirt, panties | climbing the tiered steps, three rows look up it | "Hold your skirt down." | "Keep climbing." from 40, cap 59 |
+| Up your skirt | short skirt, no panties | the same; bare | the same | none this release (On Display, 80) |
+| Soaked through | sheer blouse, bra | a spilt water bottle; the blouse goes clear | "Cover up with your bag." | "Let it dry on you." any stage, cap 19 |
+| Soaked through | sheer blouse, no bra | the same; her bare tits | the same | from 60, cap 79 |
+
+Why: CoT's malfunction marks on clothes (downblouse 330, flip 189, nipslip 109) and water going see-through
+(`exhibition_study/A_cot.md:224`, `:227`).
+
 ## Pool (`pool[]`)
 
 | canvas | what it is | explicit? | what drives it | brake |
@@ -140,7 +160,7 @@ Every grade starts at 50 (guess). The exam result reads `intelligence` plus that
 
 | rung | gate | acts |
 |---|---|---|
-| 1 · Good Girl · Covered | none | the dropped pen, an accident · the dress-code warning |
+| 1 · Good Girl · Covered | none | the dropped pen, an accident (built 2026-11-08, the class accidents below) · the dress-code warning |
 | 2 · Curious · Daring | Exhibitionism or Corruption gte 20 | a flash for Hale (Hale B 2) · she watches the guy beside her |
 | 2, continued | the exam only | flirting for the study guy's paper · a flash for the cocky guy's answers |
 | 3 · Bold · Showing | Corruption gte 40 | a touch in Hale's office (Hale B 3–4) · her hand under the desk, unseen |

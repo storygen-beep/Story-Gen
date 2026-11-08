@@ -1595,3 +1595,12 @@ new pieces in the strip lists and the bare-legs checks. The first build failed t
 panties check, random events in a changing room, a quoted line in a paragraph); all fixed, the accidents moved from
 random-on-entry to swaps from the workout. Dev + debug rebuild; missing media 53 (the 4 new pictures).
 
+## 2026-11-08 — clothing accidents in class and at the café
+
+DECISIONS 202. Eleven accident scenes: six in class (`college.py`, `class_accident`), five on the café shift (`cafe.py`, `cafe_accident`); two daily unsets; shop lines on both uniforms. First build failed two gates: the same hook and Tom line pasted into several scenes (rewritten per scene), and the café accidents each paying a wage (five new money sources; they now pay none and hand her back to the shift). `but` fell under the field floor (2.83); joints added in the new lines. Headless, the class swap ate the class (opening a class uses its one visit), so the class accidents roll on arrival at the hall instead. After: gates 118, 0 fails; shape 22 pass; engine tests 843 pass; skill tests 1,017 pass; cites 0 wrong. Headless with the dice fixed: each accident fires only in its clothes, the let-it-be gates hold at 19/20, 39/40, the class runs after a class accident, no second accident the same day, and the café accident pays no wage and the shift is offered after it.
+
+## 2026-11-08 — the stage for bare skin in the accidents
+
+DECISIONS 203. Bare-tits answers from 60 (cap 79) in five scenes, gym strap included; the bare-skirt stairs answer removed (80). The reader's 11 truth and clothes fails from DECISIONS 202 fixed first (repeat-visit hooks, bra details the trigger doesn't check, table four vs Gary's booth four, the button's gate). Gates 118, 0 fails. Headless: every new gate shut at 59 and open at 60, the stairs answer never shows, bra answers open at any stage.
+
+Reader re-read of the 12 scenes: 7 fails (3 lines that claimed the class or the lunch rush before either happened, 4 café endings with no hook); all rewritten. Rebuilt; gates 118, 0 fails. Not re-read after that rewrite.

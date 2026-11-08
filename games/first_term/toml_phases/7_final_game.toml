@@ -214,6 +214,9 @@ flagEffects = [
   { targetType = "player", flag = "street_look_today", op = "unset" },
   # gym clothes (DECISIONS 198): one gym accident a day
   { targetType = "player", flag = "gym_accident_today", op = "unset" },
+  # clothing accidents in class and on the shift (DECISIONS 202): one a day each
+  { targetType = "player", flag = "class_accident_today", op = "unset" },
+  { targetType = "player", flag = "cafe_accident_today", op = "unset" },
   # the sex scenes in the cold places, once a day each (heat proposal A1-A7, DECISIONS 147; heat_a.py, and A4 in
   # 3_activities.toml shop_try_on)
   { targetType = "player", flag = "jake_lockers_today", op = "unset" },
@@ -768,6 +771,7 @@ conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subje
 
 [[clothing]]
 id = "cafe_uniform_normal"
+description = "Short in the hem. Bend over a table and the booth behind you sees everything."
 name = "Café uniform"
 slot = "dress"
 image = "clothing/cafe_uniform_normal.jpg"
@@ -776,6 +780,7 @@ beauty = 1
 
 [[clothing]]
 id = "cafe_uniform_sexy"
+description = "A size too small. The top button won't hold for long."
 name = "Tight café uniform"
 slot = "dress"
 image = "clothing/cafe_uniform_sexy.jpg"
@@ -884,6 +889,7 @@ flag_keys = [
   "business_door_seen",
   "business_lecturer_met",
   "business_retake_used",
+  "cafe_accident_today",
   "cafe_job",
   "cafe_let_it",
   "cafe_shift_1_today",
@@ -892,6 +898,7 @@ flag_keys = [
   "came_home_late",
   "canteen_table_today",
   "claire_met",
+  "class_accident_today",
   "class_look_today",
   "cocky_exam_deal",
   "cocky_guy_dared",
@@ -27151,7 +27158,7 @@ location = "cafe"
 is_repeatable = true
 priority = 4
 is_active = true
-substitutions = [{ target_canvas_id = "tom_01_the_apron", chance = 1.0, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_job", operator = "is_true" }] } }, { target_canvas_id = "tom_03_the_tip_jar", chance = 1.0, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_job", operator = "is_true" }] } }, { target_canvas_id = "cafe_gary_meet", chance = 1.0, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_job", operator = "is_true" }] } }]
+substitutions = [{ target_canvas_id = "tom_01_the_apron", chance = 1.0, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_job", operator = "is_true" }] } }, { target_canvas_id = "tom_03_the_tip_jar", chance = 1.0, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_job", operator = "is_true" }] } }, { target_canvas_id = "cafe_gary_meet", chance = 1.0, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_job", operator = "is_true" }] } }, { target_canvas_id = "cafe_acc_spill_bra", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_accident_today", operator = "is_false" }] } }, { target_canvas_id = "cafe_acc_spill_bare", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_accident_today", operator = "is_false" }] } }, { target_canvas_id = "cafe_acc_button_bra", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_accident_today", operator = "is_false" }] } }, { target_canvas_id = "cafe_acc_button_bare", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_accident_today", operator = "is_false" }] } }, { target_canvas_id = "cafe_acc_hem", chance = 0.25, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_accident_today", operator = "is_false" }] } }]
 show_when_blocked = true
 cooldown_message = "Mon-Sat, 8 AM-7 PM, three shifts a day"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_job", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "cafe_shift_3_today", operator = "is_false" }] }
@@ -28387,6 +28394,623 @@ targetType = "location"
 locationId = "cafe"
 time_progression_minutes = 5
 flagEffects = [{ targetType = "player", flag = "gary_met", op = "set" }]
+
+[[canvases]]
+id   = "cafe_acc_spill_bra"
+name = "The jug goes over"
+description = "Random shift accident (cafe_shift_scene.md, DECISIONS 202): The jug goes over. 1 in 4, one a day, day shifts, as she comes on; no wage (the shift after it pays); footfall +1 on both answers, letting it be +1 Exhibitionism to cap 19."
+
+[canvases.trigger]
+location = "cafe"
+is_repeatable = true
+priority = 4
+is_active = true
+substitution_only = true
+show_when_blocked = true
+cooldown_message = "Mon, Tue, Wed, Thu, Fri, Sat, 8 AM-6 PM"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_job", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "cafe_shift_3_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "cafe_accident_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "energy", operator = "gte", value = 20 }, { type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "clothing_slot", slot = "bra", operator = "equipped" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4, 5]
+start_time = "08:00"
+end_time = "18:00"
+
+[[canvases.nodes]]
+id   = "counter"
+name = "The counter"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Uniform's in the back, @player. Table nine's waiting. Go."
+props = { speaker = "npc", npcId = "npc_tom" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get changed."
+targetType = "node"
+nodeId = "event"
+time_progression_minutes = 5
+wardrobeEffects = [{ action = "equip", item_id = "cafe_uniform_normal" }]
+
+[[canvases.nodes]]
+id   = "event"
+name = "The jug goes over"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Your first table of the shift, and the man at table nine swings round to wave at somebody and takes the water jug right out of your hand. The whole jug goes down your front. The uniform is soaked through in a second and goes see-through. It clings to you. Your bra shows through it, the shape of your tits in it and all."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Oh God, sorry, love. Sorry. Hell of a view, though."
+props = { speaker = "unknown" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Run for the back room."
+targetType = "node"
+nodeId = "fix"
+time_progression_minutes = 0
+effects = [{ targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "cafe_accident_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Finish the table."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 0
+effects = [{ targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+flagEffects = [{ targetType = "player", flag = "cafe_accident_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "fix"
+name = "Run for the back room"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You fold your arms over your chest and run for the back room, but the whole café saw. You wring the front out in the sink until it's only damp, then go back out. Tom watches you come out and says nothing."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Three hours to go, and everyone remembers."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's a stranger, and he leaves with his eyes still on your chest. Three hours of shift to go, and every table in here saw it."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the counter."
+targetType = "location"
+locationId = "cafe"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "let"
+name = "Finish the table"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You don't run. You finish the table soaking wet, your bra showing through the uniform, and you go on serving in it till it dries. Every table you go to looks. At the counter Tom watches and says nothing. Table nine says sorry three times and doesn't mean it once."
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 10 }] }
+blocks = [
+  { type = "thought_bubble", content = "It's only water. It'll dry.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "thought_bubble", content = "They looked, and you let them.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+blocks = [
+  { type = "thought_bubble", content = "You could have run. You didn't want to.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's a stranger, and he leaves with his eyes still on your chest. Three hours of shift to go, and every table in here saw it."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the counter."
+targetType = "location"
+locationId = "cafe"
+time_progression_minutes = 10
+
+[[canvases]]
+id   = "cafe_acc_spill_bare"
+name = "The jug goes over"
+description = "Random shift accident (cafe_shift_scene.md, DECISIONS 202): The jug goes over. 1 in 4, one a day, day shifts, as she comes on; no wage (the shift after it pays); footfall +1 on both answers, letting it be +1 Exhibitionism to cap 79."
+
+[canvases.trigger]
+location = "cafe"
+is_repeatable = true
+priority = 4
+is_active = true
+substitution_only = true
+show_when_blocked = true
+cooldown_message = "Mon, Tue, Wed, Thu, Fri, Sat, 8 AM-6 PM"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_job", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "cafe_shift_3_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "cafe_accident_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "energy", operator = "gte", value = 20 }, { type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4, 5]
+start_time = "08:00"
+end_time = "18:00"
+
+[[canvases.nodes]]
+id   = "counter"
+name = "The counter"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Uniform's in the back, @player. Table nine's waiting. Go."
+props = { speaker = "npc", npcId = "npc_tom" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get changed."
+targetType = "node"
+nodeId = "event"
+time_progression_minutes = 5
+wardrobeEffects = [{ action = "equip", item_id = "cafe_uniform_normal" }]
+
+[[canvases.nodes]]
+id   = "event"
+name = "The jug goes over"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Your first table of the shift, and the man at table nine swings round to wave at somebody and takes the water jug right out of your hand. The whole jug goes down your front. The uniform is soaked through in a second and goes see-through, and there's no bra under it. It clings to your bare tits. Your nipples are hard from the cold water, dark through the wet cloth, for the whole room."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Jesus. Sorry, love. Sorry. Christ."
+props = { speaker = "unknown" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Run for the back room."
+targetType = "node"
+nodeId = "fix"
+time_progression_minutes = 0
+effects = [{ targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "cafe_accident_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Finish the table."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+effects = [{ targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "cafe_accident_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "fix"
+name = "Run for the back room"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You cross your arms over your tits and run for the back room with the whole café watching you go. You stand in front of the hand dryer until the front stops showing everything, and you go back out with a tray held against your chest. Tom says nothing."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "No bra. Of course today."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's a stranger, and he can't look at your face when he pays. The whole shift is still ahead of you, in a uniform that won't dry."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the counter."
+targetType = "location"
+locationId = "cafe"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "let"
+name = "Finish the table"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You don't run. You finish the table soaking wet, your bare tits and your hard nipples right there through the uniform, and you keep serving in it. Every man in the place orders another coffee. At the counter Tom watches and says nothing."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Everyone can see them. You don't want it to dry."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's a stranger, and he can't look at your face when he pays. The whole shift is still ahead of you, in a uniform that won't dry."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the counter."
+targetType = "location"
+locationId = "cafe"
+time_progression_minutes = 10
+
+[[canvases]]
+id   = "cafe_acc_button_bra"
+name = "The top button goes"
+description = "Random shift accident (cafe_shift_scene.md, DECISIONS 202): The top button goes. 1 in 4, one a day, day shifts, as she comes on; no wage (the shift after it pays); footfall +1 on both answers, letting it be +1 Exhibitionism to cap 19."
+
+[canvases.trigger]
+location = "cafe"
+is_repeatable = true
+priority = 4
+is_active = true
+substitution_only = true
+show_when_blocked = true
+cooldown_message = "Mon, Tue, Wed, Thu, Fri, Sat, 8 AM-6 PM"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_job", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "cafe_shift_3_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "cafe_accident_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "energy", operator = "gte", value = 20 }, { type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "clothing_slot", slot = "bra", operator = "equipped" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4, 5]
+start_time = "08:00"
+end_time = "18:00"
+
+[[canvases.nodes]]
+id   = "counter"
+name = "The counter"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "You're on, @player. The counter's yours. Go."
+props = { speaker = "npc", npcId = "npc_tom" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get to the tables."
+targetType = "node"
+nodeId = "event"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "event"
+name = "The top button goes"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You're leaning over the counter with a man's change when the top button of the tight uniform gives up and pings off the coffee machine. The front falls open to your bra. He gets a long look at your tits pushed up in it."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Well. Thank you, sweetheart."
+props = { speaker = "unknown" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Hold it shut."
+targetType = "node"
+nodeId = "fix"
+time_progression_minutes = 0
+effects = [{ targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "cafe_accident_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave it open."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 0
+effects = [{ targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+flagEffects = [{ targetType = "player", flag = "cafe_accident_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "fix"
+name = "Hold it shut"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You grab the front together with one hand, but it gapes every time you move, so you hold it like that, fixing it every time you lean. Tom finds a safety pin in the till and hands it over without a word."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "A size smaller wasn't a great idea."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He takes his change without counting it. Three hours to go, and that button isn't coming back."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the counter."
+targetType = "location"
+locationId = "cafe"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "let"
+name = "Leave it open"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You leave it. You go back to the tables with the uniform open to your bra, and you lean over every one a little further than you need to. Tom watches from the till and says nothing."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He takes his change without counting it. Three hours to go, and that button isn't coming back."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the counter."
+targetType = "location"
+locationId = "cafe"
+time_progression_minutes = 10
+
+[[canvases]]
+id   = "cafe_acc_button_bare"
+name = "The top button goes"
+description = "Random shift accident (cafe_shift_scene.md, DECISIONS 202): The top button goes. 1 in 4, one a day, day shifts, as she comes on; no wage (the shift after it pays); footfall +1 on both answers, letting it be +1 Exhibitionism to cap 79."
+
+[canvases.trigger]
+location = "cafe"
+is_repeatable = true
+priority = 4
+is_active = true
+substitution_only = true
+show_when_blocked = true
+cooldown_message = "Mon, Tue, Wed, Thu, Fri, Sat, 8 AM-6 PM"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_job", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "cafe_shift_3_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "cafe_accident_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "energy", operator = "gte", value = 20 }, { type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "equipped" }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4, 5]
+start_time = "08:00"
+end_time = "18:00"
+
+[[canvases.nodes]]
+id   = "counter"
+name = "The counter"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "You're on, @player. The counter's yours. Go."
+props = { speaker = "npc", npcId = "npc_tom" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get to the tables."
+targetType = "node"
+nodeId = "event"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "event"
+name = "The top button goes"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You're leaning over the counter with a man's change when the top button of the tight uniform gives up and pings off the coffee machine. There's no bra under it. The front falls open and your bare tits are right there, a nipple out of the gap, a foot from his face."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Oh. Oh, sweetheart."
+props = { speaker = "unknown" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Hold it shut."
+targetType = "node"
+nodeId = "fix"
+time_progression_minutes = 0
+effects = [{ targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "cafe_accident_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave it open."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+effects = [{ targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "cafe_accident_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "fix"
+name = "Hold it shut"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You clutch the front shut and turn away, face burning, and go back out with one hand at your chest. Tom finds a safety pin in the till and hands it over without a word."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "No bra and a tight uniform. Great plan."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He forgets his change on the counter. The men at the window seats saw it all, and they're staying for the rest of your shift."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the counter."
+targetType = "location"
+locationId = "cafe"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "let"
+name = "Leave it open"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You leave it. The uniform hangs open, and every time you lean to pour, your bare tits swing in the gap, nipples and all. Tom watches from the till and says nothing. Men you've never seen before stay for a second coffee."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He forgets his change on the counter. The men at the window seats saw it all, and they're staying for the rest of your shift."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the counter."
+targetType = "location"
+locationId = "cafe"
+time_progression_minutes = 10
+
+[[canvases]]
+id   = "cafe_acc_hem"
+name = "Under the table"
+description = "Random shift accident (cafe_shift_scene.md, DECISIONS 202): Under the table. 1 in 4, one a day, day shifts, as she comes on; no wage (the shift after it pays); footfall +1 on both answers, letting it be +1 Exhibitionism to cap 59."
+
+[canvases.trigger]
+location = "cafe"
+is_repeatable = true
+priority = 4
+is_active = true
+substitution_only = true
+show_when_blocked = true
+cooldown_message = "Mon, Tue, Wed, Thu, Fri, Sat, 8 AM-6 PM"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cafe_job", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "cafe_shift_3_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "cafe_accident_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "energy", operator = "gte", value = 20 }, { type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "unequipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4, 5]
+start_time = "08:00"
+end_time = "18:00"
+
+[[canvases.nodes]]
+id   = "counter"
+name = "The counter"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Uniform's in the back, @player. Table nine's waiting. Go."
+props = { speaker = "npc", npcId = "npc_tom" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get changed."
+targetType = "node"
+nodeId = "event"
+time_progression_minutes = 5
+wardrobeEffects = [{ action = "equip", item_id = "cafe_uniform_normal" }]
+
+[[canvases.nodes]]
+id   = "event"
+name = "Under the table"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "A man in booth two knocks his fork off the table. You bend all the way over to get it from under the seat, and the uniform's hem rides right up over your ass. The whole booth behind you sees your panties, stretched tight over your pussy from behind."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Take your time down there."
+props = { speaker = "unknown" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Pull the hem down."
+targetType = "node"
+nodeId = "fix"
+time_progression_minutes = 0
+effects = [{ targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "cafe_accident_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Take your time down there."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
+effects = [{ targetType = "player", trait = "cafe_footfall", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
+flagEffects = [{ targetType = "player", flag = "cafe_accident_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "fix"
+name = "Pull the hem down"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You come up with the fork, yank the hem down and walk off quick, face red, but the booth is already laughing. Tom watches from the counter and says nothing."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Next time he can get his own fork."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The booth comes in on the same day every week. Somebody's going to drop a fork again."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the counter."
+targetType = "location"
+locationId = "cafe"
+time_progression_minutes = 10
+
+[[canvases.nodes]]
+id   = "let"
+name = "Take your time down there"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You take your time. You stay bent over, feeling under the seat for a fork you already found, your uniform up over your ass and your panties out to the whole booth. Then you stand, smooth it down and hand him a clean one. Tom watches from the counter and says nothing. The booth can't stop grinning at each other."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The booth comes in on the same day every week. Somebody's going to drop a fork again."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the counter."
+targetType = "location"
+locationId = "cafe"
+time_progression_minutes = 10
 # ── college (sheets/systems/college.md · scenes college_*.md) ──
 
 [[canvases]]
@@ -33255,7 +33879,7 @@ locationId = "campus_gym"
 [[canvases]]
 id   = "gym_accident_strap"
 name = "The strap slips"
-description = "Random gym accident (campus_gym.md, DECISIONS 198): The strap slips. 1 in 4, one a day; campus talk +1 on both answers, letting it be +1 to cap 39."
+description = "Random gym accident (campus_gym.md, DECISIONS 198): The strap slips. 1 in 4, one a day; campus talk +1 on both answers, letting it be +1 to cap 79."
 
 [canvases.trigger]
 location = "campus_gym"
@@ -33294,8 +33918,9 @@ text = "Keep running a few steps (1h)."
 targetType = "node"
 nodeId = "let"
 time_progression_minutes = 60
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
 costs = [{ trait = "energy", value = 15 }]
-effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }]
 flagEffects = [{ targetType = "player", flag = "gym_accident_today", op = "set" }, { targetType = "player", flag = "worked_out", op = "set" }]
 
 [[canvases.nodes]]
@@ -33419,6 +34044,830 @@ type = "choices"
 text = "Towel off."
 targetType = "location"
 locationId = "campus_gym"
+
+[[canvases]]
+id   = "class_acc_downblouse_bra"
+name = "Down your top"
+description = "Random class accident (college.md, DECISIONS 202-203): Down your top. 1 in 4, one a day; campus talk +1 on both answers, letting it be +1 to cap 19."
+
+[canvases.trigger]
+location = "lecture_hall"
+is_repeatable = true
+priority = 6
+is_active = true
+trigger_mode = "random"
+chance = 0.25
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "class_accident_today", operator = "is_false" }, { type = "clothing_item", item_id = "low_top", operator = "equipped" }, { type = "clothing_slot", slot = "bra", operator = "equipped" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 2, 4]
+start_time = "08:30"
+end_time = "08:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [3]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 2]
+start_time = "10:15"
+end_time = "10:30"
+
+[[canvases.trigger.schedules]]
+weekdays = [1]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [1, 3]
+start_time = "10:15"
+end_time = "10:30"
+
+[[canvases.trigger.schedules]]
+weekdays = [0]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [1, 3]
+start_time = "08:30"
+end_time = "08:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [2]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.nodes]]
+id   = "event"
+name = "Down your top"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You drop your pen in the aisle and bend straight down for it from the hip. The low-cut top falls open off your chest. The guy in the row behind gets the whole view down it: your bra, your tits pushed up in the cups, all of it."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Whoa. Hello."
+props = { speaker = "unknown" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Hand over your neckline."
+targetType = "node"
+nodeId = "fix"
+time_progression_minutes = 0
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Take your time with the pen."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 0
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "fix"
+name = "Hand over your neckline"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You clap a hand flat over your neckline and come up fast, red to the ears, but it's too late. He's grinning at you over his laptop."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Great. Now he knows what bra you wear."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He sits in that row every week. Now he watches your top more than the slides."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get to your seat."
+targetType = "location"
+locationId = "lecture_hall"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "let"
+name = "Take your time with the pen"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You don't cover up. You take your time with the pen, and he takes his time looking, right down your top at your tits in the bra. You come up slow."
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 10 }] }
+blocks = [
+  { type = "thought_bubble", content = "You only dropped a pen. That's all it was.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "thought_bubble", content = "He looked the whole time, and you let him.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+blocks = [
+  { type = "thought_bubble", content = "A pen. That's all it takes now.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He sits in that row every week. Now he watches your top more than the slides."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get to your seat."
+targetType = "location"
+locationId = "lecture_hall"
+time_progression_minutes = 0
+
+[[canvases]]
+id   = "class_acc_downblouse_bare"
+name = "Down your top"
+description = "Random class accident (college.md, DECISIONS 202-203): Down your top. 1 in 4, one a day; campus talk +1 on both answers, letting it be +1 to cap 79."
+
+[canvases.trigger]
+location = "lecture_hall"
+is_repeatable = true
+priority = 6
+is_active = true
+trigger_mode = "random"
+chance = 0.25
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "class_accident_today", operator = "is_false" }, { type = "clothing_item", item_id = "low_top", operator = "equipped" }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 2, 4]
+start_time = "08:30"
+end_time = "08:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [3]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 2]
+start_time = "10:15"
+end_time = "10:30"
+
+[[canvases.trigger.schedules]]
+weekdays = [1]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [1, 3]
+start_time = "10:15"
+end_time = "10:30"
+
+[[canvases.trigger.schedules]]
+weekdays = [0]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [1, 3]
+start_time = "08:30"
+end_time = "08:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [2]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.nodes]]
+id   = "event"
+name = "Down your top"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You drop your pen in the aisle and bend straight down for it from the hip. With no bra under it, the low-cut top just falls open. Your tits swing free inside it, bare, nipples and all, and the guy in the row behind sees every inch of them."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Oh, fuck me."
+props = { speaker = "unknown" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Hand over your neckline."
+targetType = "node"
+nodeId = "fix"
+time_progression_minutes = 0
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Take your time with the pen."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "fix"
+name = "Hand over your neckline"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You slap a hand over your chest and straighten up so fast your knee hits the desk. It doesn't help. He's still staring at the hand like it isn't there."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "No bra. Of course today."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He sits in that row every week. He saw what's under that top, and he'll be looking for it every time you bend."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get to your seat."
+targetType = "location"
+locationId = "lecture_hall"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "let"
+name = "Take your time with the pen"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You stay bent over. You let your bare tits hang in the open top for him while you fish for the pen, your nipples gone hard in the air of the hall. Then you come up and sit down like nothing happened, but your face is hot."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "You knew it would fall open. You bent anyway."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He sits in that row every week. He saw what's under that top, and he'll be looking for it every time you bend."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get to your seat."
+targetType = "location"
+locationId = "lecture_hall"
+time_progression_minutes = 0
+
+[[canvases]]
+id   = "class_acc_stairs_panties"
+name = "Up your skirt"
+description = "Random class accident (college.md, DECISIONS 202-203): Up your skirt. 1 in 4, one a day; campus talk +1 on both answers, letting it be +1 to cap 59."
+
+[canvases.trigger]
+location = "lecture_hall"
+is_repeatable = true
+priority = 6
+is_active = true
+trigger_mode = "random"
+chance = 0.25
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "class_accident_today", operator = "is_false" }, { type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 2, 4]
+start_time = "08:30"
+end_time = "08:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [3]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 2]
+start_time = "10:15"
+end_time = "10:30"
+
+[[canvases.trigger.schedules]]
+weekdays = [1]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [1, 3]
+start_time = "10:15"
+end_time = "10:30"
+
+[[canvases.trigger.schedules]]
+weekdays = [0]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [1, 3]
+start_time = "08:30"
+end_time = "08:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [2]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.nodes]]
+id   = "event"
+name = "Up your skirt"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The lecture hall goes up in steep tiers, and you're climbing to your row with three rows of guys sitting below you. The short skirt doesn't stand a chance. From their seats they're looking straight up it, at your panties tight between your thighs, every step you take."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Nice. Keep going."
+props = { speaker = "unknown" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Hold your skirt down."
+targetType = "node"
+nodeId = "fix"
+time_progression_minutes = 0
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Keep climbing."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "fix"
+name = "Hold your skirt down"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You clamp your skirt to the backs of your thighs with one hand and take the last steps sideways, face burning, but somebody down there laughs anyway."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Never sitting at the back again."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "They sit in those rows every week. Every time you climb those steps in a skirt, they'll look up."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get to your seat."
+targetType = "location"
+locationId = "lecture_hall"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "let"
+name = "Keep climbing"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You don't touch the hem. You keep climbing, slow, one step at a time, and three rows look up your skirt at your panties and the curve of your ass the whole way to your seat."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "They sit in those rows every week. Every time you climb those steps in a skirt, they'll look up."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get to your seat."
+targetType = "location"
+locationId = "lecture_hall"
+time_progression_minutes = 0
+
+[[canvases]]
+id   = "class_acc_stairs_bare"
+name = "Up your skirt"
+description = "Random class accident (college.md, DECISIONS 202-203): Up your skirt. 1 in 4, one a day; campus talk +1; only the fix this release (letting it be is On Display, 80)."
+
+[canvases.trigger]
+location = "lecture_hall"
+is_repeatable = true
+priority = 6
+is_active = true
+trigger_mode = "random"
+chance = 0.25
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "class_accident_today", operator = "is_false" }, { type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "clothing_slot", slot = "underwear", operator = "unequipped" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 2, 4]
+start_time = "08:30"
+end_time = "08:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [3]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 2]
+start_time = "10:15"
+end_time = "10:30"
+
+[[canvases.trigger.schedules]]
+weekdays = [1]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [1, 3]
+start_time = "10:15"
+end_time = "10:30"
+
+[[canvases.trigger.schedules]]
+weekdays = [0]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [1, 3]
+start_time = "08:30"
+end_time = "08:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [2]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.nodes]]
+id   = "event"
+name = "Up your skirt"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The lecture hall goes up in steep tiers, and you're climbing to your row with three rows of guys sitting below you. Under the short skirt there's nothing. From their seats they're looking straight up it at your bare ass and your pussy, every step you take."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Holy shit. She's not wearing any."
+props = { speaker = "unknown" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Hold your skirt down."
+targetType = "node"
+nodeId = "fix"
+time_progression_minutes = 0
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "fix"
+name = "Hold your skirt down"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You slap a hand to the back of your skirt and take the rest of the steps sideways, pussy clenched, face on fire. The whispering starts behind you before you've sat down."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Everybody heard him say it."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "They sit in those rows every week. They know now what you wear under a skirt, or don't."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get to your seat."
+targetType = "location"
+locationId = "lecture_hall"
+time_progression_minutes = 0
+
+[[canvases]]
+id   = "class_acc_water_bra"
+name = "Soaked through"
+description = "Random class accident (college.md, DECISIONS 202-203): Soaked through. 1 in 4, one a day; campus talk +1 on both answers, letting it be +1 to cap 19."
+
+[canvases.trigger]
+location = "lecture_hall"
+is_repeatable = true
+priority = 6
+is_active = true
+trigger_mode = "random"
+chance = 0.25
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "class_accident_today", operator = "is_false" }, { type = "clothing_item", item_id = "thin_top", operator = "equipped" }, { type = "clothing_slot", slot = "bra", operator = "equipped" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 2, 4]
+start_time = "08:30"
+end_time = "08:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [3]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 2]
+start_time = "10:15"
+end_time = "10:30"
+
+[[canvases.trigger.schedules]]
+weekdays = [1]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [1, 3]
+start_time = "10:15"
+end_time = "10:30"
+
+[[canvases.trigger.schedules]]
+weekdays = [0]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [1, 3]
+start_time = "08:30"
+end_time = "08:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [2]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.nodes]]
+id   = "event"
+name = "Soaked through"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You're unscrewing your water bottle when the guy squeezing past knocks your elbow, and half of it goes straight down your front. The sheer blouse goes clear the second it's wet. It sticks to you. Your bra shows through it like there's no blouse at all, and so does the shape of your tits in it."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Shit, sorry, sorry. I'll get you a, um. Wow."
+props = { speaker = "unknown" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Cover up with your bag."
+targetType = "node"
+nodeId = "fix"
+time_progression_minutes = 0
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let it dry on you."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 0
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "fix"
+name = "Cover up with your bag"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You hold your bag up against your chest for the whole of the walk to your seat, dripping. He doesn't stop saying sorry, but he doesn't stop looking either."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "A see-through blouse and a full water bottle. Smart."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He sits on the end of your row. Until it dries, he's going to be looking."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get to your seat."
+targetType = "location"
+locationId = "lecture_hall"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "let"
+name = "Let it dry on you"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You put the bag down. You sit there soaked, your bra and your tits showing through the wet blouse, and you wait for it to dry. Half the row finds a reason to look over."
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 10 }] }
+blocks = [
+  { type = "thought_bubble", content = "It's only water. It'll dry.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }
+blocks = [
+  { type = "thought_bubble", content = "They looked, and you let them.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+blocks = [
+  { type = "thought_bubble", content = "You could have covered up. You didn't want to.", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He sits on the end of your row. Until it dries, he's going to be looking."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get to your seat."
+targetType = "location"
+locationId = "lecture_hall"
+time_progression_minutes = 0
+
+[[canvases]]
+id   = "class_acc_water_bare"
+name = "Soaked through"
+description = "Random class accident (college.md, DECISIONS 202-203): Soaked through. 1 in 4, one a day; campus talk +1 on both answers, letting it be +1 to cap 79."
+
+[canvases.trigger]
+location = "lecture_hall"
+is_repeatable = true
+priority = 6
+is_active = true
+trigger_mode = "random"
+chance = 0.25
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "class_accident_today", operator = "is_false" }, { type = "clothing_item", item_id = "thin_top", operator = "equipped" }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 2, 4]
+start_time = "08:30"
+end_time = "08:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [3]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 2]
+start_time = "10:15"
+end_time = "10:30"
+
+[[canvases.trigger.schedules]]
+weekdays = [1]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [1, 3]
+start_time = "10:15"
+end_time = "10:30"
+
+[[canvases.trigger.schedules]]
+weekdays = [0]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [1, 3]
+start_time = "08:30"
+end_time = "08:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [2]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.nodes]]
+id   = "event"
+name = "Soaked through"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You're unscrewing your water bottle when the guy squeezing past knocks your elbow, and half of it goes straight down your front. The sheer blouse goes clear and sticks to your bare tits like wet paper. Your nipples are hard from the cold water, dark through the cloth, and everyone near enough can see all of it."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Fuck. Sorry. Shit. I can see your, I'm sorry."
+props = { speaker = "unknown" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Cover up with your bag."
+targetType = "node"
+nodeId = "fix"
+time_progression_minutes = 0
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let it dry on you."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "fix"
+name = "Cover up with your bag"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You crush your bag to your chest and sit hunched behind it, cold and dripping, nipples aching under the wet cloth. He brings you a wad of paper towels and can't look at your face."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "No bra. Of course today."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He sits on the end of your row. The blouse won't dry for an hour, and he knows it."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get to your seat."
+targetType = "location"
+locationId = "lecture_hall"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "let"
+name = "Let it dry on you"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You don't cover up. You sit in the wet blouse with your bare tits and your hard nipples showing right through it, and you get your things out like nothing happened. The guy who knocked you can't stop looking."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Everyone can see them. You don't want it to dry."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He sits on the end of your row. The blouse won't dry for an hour, and he knows it."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get to your seat."
+targetType = "location"
+locationId = "lecture_hall"
+time_progression_minutes = 0
 
 [[canvases]]
 id   = "lecture_timetable"
