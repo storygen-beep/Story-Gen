@@ -390,9 +390,31 @@ NADIA_SKIRT = {"lecture_hall": "He'll lose his place again.",
 NADIA_WIFE = {"library": "His wife came to the office. Everyone's saying. Was it you?",
               "canteen": "Eat your lunch and tell me the truth. His wife saw a girl walk out of his office, and this whole table wants to know who. Was it you?",
               "lecture_hall": "Don't look up. Half this row thinks a student was in his office when his wife came. Was it you?"}
+# gossip (DECISIONS 207): Nadia says what she heard to her face, from campus talk 25 (CoT: "I heard some rumors about
+# you", P:76784-76793), in the library, where nobody else is listening. One line, first match: the same things
+# gossip.py's WHAT remembers, behind the same flags.
+TALK = lambda op, n: trait("campus_talk", op, n)
+NADIA_HEARD = [
+    (cond(flag("talk_quad"), flag("team_saw_quad")), "People are saying Jake had you in his lap on the grass with his hands all over you, and the whole team watching. Tell me that's not true."),
+    (cond(flag("talk_class")), "Half the lecture hall says they've seen what's under your clothes. In class, @player. Is it true?"),
+    (cond(flag("talk_gym")), "Jake's whole team says you put on a show at the gym. A show. Is it true?"),
+    (cond(flag("talk_party"), trait("zoe_dares_done", "gte", 1)), "Apparently you take Zoe's dares now. In front of everyone. Is that true?"),
+    (cond(flag("talk_party"), flag("zoe_has_bra")), "Someone says you went braless on Zoe's balcony on purpose, with a guy watching through the glass. Is that true?"),
+    (cond(flag("talk_party")), "People are saying you were all over Jake's teammate at Zoe's. Were you?"),
+    (cond(flag("talk_quad")), "Everyone saw you and Jake on the grass. Everyone, @player."),
+]
+# From 40 she won't sit with her at lunch, where the table can see (the one door the talk closes, GS-D: with a way
+# back). The library, where nobody watches, stays open: its line says so.
+NADIA_AT_40 = {"canteen": [D(N, "Not here. Sorry. They talk about whoever sits with you, and I've got enough people looking at me."),
+                           P("She slides her tray down to the far end of the table and opens her textbook between you.")],
+               "library": [D(N, "In here's fine. Nobody in the library cares who you are.")]}
+NADIA_AT_40["canteen"].append(D(N, "Find me in the library."))
+# She asks once (reader, DECISIONS 207): the question shows until she has asked it, then one standing line.
+ASKED = "nadia_asked_talk"
 for cid, loc, name, setting in [("hub_nadia_library", "library", "Nadia, studying", "Nadia at a library table with her headphones round her neck."),
                                  ("hub_nadia_canteen", "canteen", "Nadia, at lunch", "Nadia at the end of a table with a salad and a textbook open beside it."),
                                  ("hub_nadia_lecture", "lecture_hall", "Nadia, beside you", "Nadia in the seat beside yours, her pen already moving.")]:
+    SIT = [TALK("lt", 40)] if loc == "canteen" else []
     out.append({
         "id": cid, "name": name,
         "description": f"Nadia's hub ({loc}): one line about Hale.",
@@ -400,11 +422,21 @@ for cid, loc, name, setting in [("hub_nadia_library", "library", "Nadia, studyin
                     "conditions": cond(flag("nadia_met"))},
         "nodes": [node("nadia", name, [
             P(setting),
-            NADIA_LINES[loc],
-            *([G(cond(trait("hale_step", "gte", 2), wd(0, 2, 4)), D(N, NADIA_ASKED[loc]))] if loc in NADIA_ASKED else []),
-            G(cond(SKIRT, trait("hale_step", "gte", 2)), D(N, NADIA_SKIRT[loc])),
-            G(cond(trait("hale_step", "gte", 4)), D(N, NADIA_WIFE[loc])),
-        ], [go("Talk a while.", loc=loc, mins=20), go("Leave her to her notes.", loc="campus")])]})   # pass 3 D39 (R7)
+            # at lunch from 40 she has moved down the table (NADIA_AT_40): her table talk stops there
+            G(cond(*SIT), NADIA_LINES[loc]),
+            *([G(cond(trait("hale_step", "gte", 2), wd(0, 2, 4), *SIT), D(N, NADIA_ASKED[loc]))] if loc in NADIA_ASKED else []),
+            G(cond(SKIRT, trait("hale_step", "gte", 2), *SIT), D(N, NADIA_SKIRT[loc])),
+            G(cond(trait("hale_step", "gte", 4), *SIT), D(N, NADIA_WIFE[loc])),
+            *([GC(cond(TALK("gte", 25), flag(ASKED, False), *c["items"]), D(N, line)) for c, line in NADIA_HEARD] if loc == "library" else []),
+            *([G(cond(TALK("gte", 25), flag(ASKED)), D(N, "People are still talking about you. I'm not asking again."))] if loc == "library" else []),
+            *([G(cond(TALK("gte", 40)), *NADIA_AT_40[loc])] if loc in NADIA_AT_40 else []),
+        ], ([go("Talk a while.", loc=loc, mins=20, cond_=cond(TALK("lt", 40)) if loc == "canteen" else None),
+             go("Leave her to her notes.", loc="campus")] if loc != "library" else
+            # in the library, leaving after she asked (25+) records that she asked
+            [go("Talk a while.", loc=loc, mins=20, cond_=cond(TALK("lt", 25))),
+             go("Leave her to her notes.", loc="campus", cond_=cond(TALK("lt", 25))),
+             go("Talk a while.", loc=loc, mins=20, cond_=cond(TALK("gte", 25)), flags=[fset(ASKED)]),
+             go("Leave her to her notes.", loc="campus", cond_=cond(TALK("gte", 25)), flags=[fset(ASKED)])]))]})   # pass 3 D39 (R7)
 
 cards = step_cards(H, {
     1: ("Monday, first class: Psychology.", "Go to Psychology on Monday morning, the lecture hall"),   # C3: no name before the meeting

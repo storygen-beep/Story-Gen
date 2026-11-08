@@ -603,6 +603,28 @@ def with_closed_line(canvas):
     return canvas
 
 
+# Gossip (DECISIONS 207): campus remembers WHAT it saw, not only how much. CoT keeps, per person, what each one
+# saw her do (`round10/cards/gossip.md`, memory row); we keep one flag per kind of thing, so a line can name it.
+# Every answer that already pays campus_talk on these canvases also sets its kind's flag. Matched by canvas-id
+# prefix; the business exam's "Copy." (cheating, not her body) and the party chat (talk, not a show) set none.
+TALK_KIND = [("class_acc_", "talk_class"), ("college_class_", "talk_class"), ("meet_", "talk_class"),
+             ("gym_", "talk_gym"), ("hub_jake_gym", "talk_gym"),
+             ("hub_jake_quad", "talk_quad"), ("jake_02_kiss_on_the_quad", "talk_quad"),
+             ("zoe_dares", "talk_party"), ("party_hookup", "talk_party"), ("zoe_02_", "talk_party")]
+
+
+def talk_remembers(canvas):
+    kind = next((f for p, f in TALK_KIND if canvas["id"].startswith(p)), None)
+    if not kind:
+        return
+    for n in canvas["nodes"]:
+        for c in n["choices"]:
+            if any(e.get("trait") == "campus_talk" and e.get("op") == "add" for e in c.get("effects") or []):
+                fl = c.setdefault("flagEffects", [])
+                if not any(x.get("flag") == kind for x in fl):
+                    fl.append(fset(kind))
+
+
 def emit(canvas):
     # The writer session's screens replace their PLACEHOLDER blocks here (writer.py; LO, 2026-10-09).
     from writer import fill
@@ -613,6 +635,7 @@ def emit(canvas):
         if n.get("pin"):
             n["blocks"] = pin_blocks(n["blocks"], *n.pop("pin"))
     canvas = voice_canvas(with_closed_line(canvas))
+    talk_remembers(canvas)
     L = ["\n[[canvases]]", f"id   = {q(canvas['id'])}", f"name = {q(canvas['name'])}"]
     if canvas.get("description"):
         L.append(f"description = {q(canvas['description'])}")

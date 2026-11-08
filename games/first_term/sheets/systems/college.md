@@ -1,4 +1,5 @@
 # [READY] System — college
+> Changed 2026-11-08 (DECISIONS 207, LO: "Go ahead"): gossip that matters, new section "Gossip" at the end. Signed by LO 2026-11-08 ("Sign it").
 > Changed 2026-11-08 (DECISIONS 205): everyday clothes by stage, new section below. Re-signed by LO 2026-11-08 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 203, LO: "Yess"): letting bare tits show is Watched (60); letting her bare pussy show is On Display (80), not written this release. Re-signed by LO 2026-11-08 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 202): accidents in class, new section below. Re-signed by LO 2026-11-08 ("Sign them").
@@ -230,3 +231,16 @@ The house at night stays open under the curfew. The door out says why it is shut
 | energy and grade moves per row | guess |
 | the energy lock at 20 | guess |
 | Zoe sits in Biology and figure drawing, and Jake in figure drawing: they get class rows (ledger change L27) | sweep A5-11 |
+
+## Gossip (DECISIONS 207, 2026-11-08)
+
+What campus says about her, read at four levels of Campus talk. One event a day on campus.
+
+| level | where | what happens |
+|---|---|---|
+| 10 | canteen at lunch, the quad | someone who saw her (at the gym, in class) tells his table while she's there; she lets him talk (spreads it, pays her to her stage's top) or shuts him up; Nadia at the canteen shuts him down first |
+| 25 | the quad, weekdays | three guys on the library steps ask her to show them: let them look (under 20), her bra (20), her bare tits for a moment (60), or keep walking |
+| 40 | Psychology or Business, as class starts | the rival emails the dean's office what campus says and tells the room; complaints +1, once |
+| 60 | the quad, every day | a stranger says her name and what he heard; she walks on, or smiles back from Showing (40) |
+
+The lines name the act only behind the flag that records it (the class, the gym, the quad, the party).

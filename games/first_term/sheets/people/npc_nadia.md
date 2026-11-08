@@ -1,4 +1,5 @@
 # [READY] Person — Nadia
+> Changed 2026-11-08 (DECISIONS 207, LO: "Go ahead"): gossip that matters, new section at the end. Signed by LO 2026-11-08 ("Sign it").
 > Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. New section: the walk-ins and acts the heat proposal built.
@@ -48,3 +49,9 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
 | Nadia kept | LO, 2026-10-02 |
 | her rows | LIVES §3 |
 | "He'll lose his place again." only after Hale B 2 (`hale_step` 2 or more); every line about a past event shows only behind the flag that records it | LO's play note (2026-10-08) · sweep A4-16, K7 |
+
+## What she's heard (DECISIONS 207, 2026-11-08)
+
+- From Campus talk 25, in the library: she asks once if it's true, naming the one thing she's heard (the quad, class, the gym, Zoe's party). After that: "People are still talking about you. I'm not asking again."
+- From 40, at lunch: "Not here. Sorry. They talk about whoever sits with you." She moves down the table and won't talk there: "Find me in the library." The library stays open: "In here's fine."
+- In the canteen, if someone tells his table about the gym while she's there, she shuts him down ("Hey. Gym boy. Nobody asked."), below Campus talk 40 only.
