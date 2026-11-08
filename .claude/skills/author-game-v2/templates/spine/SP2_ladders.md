@@ -10,7 +10,7 @@ keeps, `want.cast[].keeps`): at most two per person.
 
 **Heat** — the stage each kind of act opens at, in the field's order (`references/the-heat-ladder.md` H1; start
 from its table and move a row only with a reason): <stage 1 kinds> · <stage 2> · <stage 3> · <stage 4> ·
-<stage 5>. **Audience size sets the stage:** one person, or a group. **Step-family and anyone she lives with
+<stage 5>. **What shows sets the stage;** the audience grows with it and adds risk (H1). **Step-family and anyone she lives with
 start with accidents** (H2).
 
 One table per person. Record it in `board.characters[].ladder`. A gate's first rung sits near 5

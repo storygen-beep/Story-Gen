@@ -65,6 +65,13 @@ Name the states and key items in the ledger, so a check can count their readers:
 - One event per revealing state.
 - One line per state worth noticing.
 - One key garment per arc that uses clothes, with its reminder.
+- Clothes for one place (a gym, a pool, a job) only where the place's activity asks for them; most pieces are worn
+  anywhere (CoT: a pool takes swimwear, a workout area its own code, `exhibition_study/A_cot.md:185-195`). A
+  place with its own clothes is a place she can change in, or its ladder can't be worn there without crossing
+  every other door in it first (first_term's gym, DECISIONS 198). And a changing room holds no random or one-time
+  canvas (gate `nothing one-time at the shop or wardrobe`): open its accidents from its activity instead, as a
+  substitution at a chance.
+- Give each bought piece a `description` that says its risk ("Rides up when you lift"; engine.md §17).
 - Few items is fine if each one moves a state or the number. An item nothing reads is a defect; CoT carries 29%
   of those and IHOH 65%, and both are larger games that can afford it (ROUND9A §2, readers per item).
 

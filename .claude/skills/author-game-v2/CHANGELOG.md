@@ -5,6 +5,38 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-08 — what shows sets the stage, not how many watch
+
+- **`references/the-heat-ladder.md` H1:** the audience paragraph is rewritten. Was "a group, known or not, is stage 4"
+  (LO's 2026-10-07 call on posing naked for a class, B24). Now: what she shows sets the stage, and the audience grows with
+  it (a few at 2, a small group at 3, strangers or a crowd at 4, a large crowd at 5); more watchers for the same show add
+  risk or pay. Stage-4 row reworded to "her bare body in front of strangers or a crowd"; the flash row goes by the part shown.
+- **`templates/spine/SP2_ladders.md`** and **`references/the-spine.md`:** same rule in the Heat line.
+- **Why.** The scene reader flagged first_term's gym "let them look" (two guys, a sports bra, Exhibitionism 20) under the
+  old rule; LO kept it and asked where the rule came from. A read-only check of the studied games:
+  `~/Documents/Great_Games_Study_20260926/exhibition_study/AUDIENCE_SIZE_CHECK_20261108.md`. Five of five gate on what
+  shows (CoT's part numbers, CW's wave then flash to the same workers, UM's tease to four at one gate, IHOH's per-watcher
+  pay, SD's crowd job). LO chose "B" (fix the rule, and look at the class pose).
+- **Verified.** cite_check; skill tests; first_term rebuilt and gated.
+
+## 2026-11-08 — the gym clothes: a garment's shop line, clothes for one place, a worn_type correction
+
+- **Engine.** `apps/projects/services/template_import.py` and `generators/v2.py`: a `[[clothing]]` item's
+  `description`, shown on the shop stand and in Change Clothes under the worn slot's rail. Test
+  `apps/game_generation/tests/test_garment_description.py` (2: only when authored; the stand, no empty line, the rail).
+- **`references/engine.md`** (the room section): teaches `description`. Corrects a wrong sentence: the `worn_type`
+  *condition* matches a garment of that type in any slot (`setup.getWornTypes`); only a portrait row's
+  `when.worn_type` reads the dominant garment. Found while building first_term's gym, where track pants under a
+  T-shirt match `worn_type = "track_pants"` in a played build.
+- **`templates/cards/wardrobe.md`** (Amounts): clothes for one place only where its activity asks (CoT's pool and
+  workout codes); a place with its own clothes is a place she can change in; its accidents open from its activity
+  as a substitution, because a random event in a changing room hides the Change Clothes link (the gate caught this
+  in the first build); give each bought piece a `description`.
+- **Why.** LO, 2026-11-08: gym clothes from normal to slutty, aligned to how top games do it
+  (`~/Documents/Great_Games_Study_20260926/exhibition_study/GYM_CLOTHES_PLAN.md`).
+- **Verified.** Engine tests and the room tests green; first_term rebuilt, gates 0 real fails; a headless play of each step,
+  pay, cap, accident and shop line.
+
 ## 2026-11-08 — exhibition phase 1: the first gain, the step over a stage's top, a daily cap
 
 - **Engine.** `apps/projects/services/template_import.py` adds `_parse_daily_caps` and `generators/v2.py` adds `setup.dailyCapAllow`, read by `setup.applyAndNotifyTrait`, for `[engine.daily_caps.<trait>]`: a per-day cap by band, `hold_band_while` modifiers, and a first-gain notice. `references/engine.md` §53. Tests in `apps/game_generation/tests/test_daily_caps.py`.
