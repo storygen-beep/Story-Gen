@@ -12439,7 +12439,11 @@ setup.renderWardrobeRoom = function() {
     if (sel === 'dress' && (eq.top || eq.bottom)) hint = 'Takes off your top and bottom';
     if ((sel === 'top' || sel === 'bottom') && eq.dress) hint = 'Takes off the dress';
     h += '<div class="cr-rail-head"><span class="cr-rail-title">' + setup.CR_LABELS[sel] + ' &middot; ' + owned.length + '</span>' +
-        (hint ? '<span class="cr-rail-hint">' + hint + '</span>' : '') + '</div><div class="cr-rail">';
+        (hint ? '<span class="cr-rail-hint">' + hint + '</span>' : '') + '</div>';
+    // What the worn piece in this slot does, in the author's words (the shop told her first).
+    var worn = eq[sel] ? setup._crItem(eq[sel]) : null;
+    if (worn && worn.description) h += '<p class="cr-desc">' + esc(worn.name) + ': ' + esc(worn.description) + '</p>';
+    h += '<div class="cr-rail">';
     // "Nothing": takes the slot off. Drawn as worn when the slot is empty; dead when the
     // slot may never be empty (always_required).
     var canOff = !!eq[sel] && setup.canRemoveSlot(sel);
@@ -12493,6 +12497,7 @@ setup.renderShopRoom = function() {
         '<span class="cr-stand-name">' + esc(pick.name) + '</span>' +
         '<span class="cr-stand-slot">' + (setup.CR_LABELS[pick.slot] || esc(pick.slot)) + '</span>' +
         '<span class="cr-stand-price">$' + (pick.price || 0) + '</span>' +
+        (pick.description ? '<span class="cr-stand-desc">' + esc(pick.description) + '</span>' : '') +
         (rule ? '<span class="cr-stand-rule">' + esc(rule) + '</span>' : '');
     if (why) h += '<span class="cr-stand-why">' + esc(why) + '</span>';
     else h += '<span class="cr-stand-btns"><button type="button" class="cr-buy" data-buy="' + esc(pick.id) + '">Buy</button>' +
@@ -12638,6 +12643,8 @@ jQuery(document).on('click', '.cr-buy', function(e) {
 .cr-stand-info { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
 .cr-stand-name { font-size: 18px; font-weight: 700; line-height: 1.2; }
 .cr-stand-slot, .cr-stand-rule { font-size: 13px; color: var(--theme-text-muted, #9aa0ab); }
+.cr-stand-desc, .cr-desc { font-size: 14px; line-height: 1.35; }
+.cr-desc { margin: 0 0 8px; color: var(--theme-text-muted, #9aa0ab); }
 .cr-stand-price { font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; }
 .cr-stand-why { font-size: 14px; color: var(--theme-danger); }
 .cr-stand-btns { display: flex; flex-direction: column; gap: 6px; margin-top: auto; }

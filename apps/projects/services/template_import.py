@@ -299,6 +299,8 @@ class TemplateClothingItem:
     # content only — never mutates the global player.corruption core_trait.
     type: str = ""  # Optional category tag ("swim", "costume", etc.); read by `worn_type`
     # predicate. Doc 72 / Doc 71 R2. Empty string = untyped; worn_type matches return false.
+    description: str = ""  # One line the shop stand and Change Clothes show: what it does,
+    # the risk she takes in it ("Rides up when you bend over"), told before she pays.
     locked_text: str = ""  # [ui] clothes_layout = "room": why it is locked, in words
     # ("Held in the garage"). Shown when its conditions are unmet and no trait gate explains
     # it (an unmet trait is named first: "Needs Exhibitionism 15+"). Empty: "Locked".
@@ -3165,6 +3167,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     type=_require_str(c_raw, "type", ""),
                     exposure=_require_int(c_raw, "exposure", 0),
                     locked_text=_require_str(c_raw, "locked_text", ""),
+                    description=_require_str(c_raw, "description", ""),
                 )
             )
 
@@ -8733,6 +8736,7 @@ def _assemble_project_metadata(project, template):
                     "exposure": ci.exposure,  # 0 covers / 1 underwear-level / 2 bare
                     # Written only when authored, so a game without it keeps its metadata.
                     **({"locked_text": ci.locked_text} if ci.locked_text else {}),
+                    **({"description": ci.description} if ci.description else {}),
                 }
                 for ci in template.clothing_items
             ],
