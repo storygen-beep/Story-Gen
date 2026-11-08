@@ -823,7 +823,7 @@ ALL_GARMENTS = ["plain_bra", "sports_bra", "plain_panties", "tshirt", "thin_top"
                 "gym_tank", "track_pants", "gym_shorts", "sheer_leggings", "crop_top", "bodycon_dress", "micro_shorts", "plunge_dress",   # everyday clothes (DECISIONS 205)
                   # the gym clothes (DECISIONS 198)
                 "sleep_shorts", "short_skirt", "sleep_shirt", "towel", "cafe_uniform_normal",
-                "cafe_uniform_sexy", "laura_blue_dress", "zoe_party_dress", "sneakers"]
+                "cafe_uniform_sexy", "cafe_uniform_short", "cafe_uniform_lowcut", "laura_blue_dress", "zoe_party_dress", "sneakers"]
 # LO, 2026-11-04: she leaves in what she came in. REMEMBER goes before the first thing that takes her clothes off;
 # DRESS_BACK is the way out. The plain set comes first so a garment taken since, or nothing kept, still leaves her
 # dressed. A towel or the sleep clothes are never kept, so "Get dressed." after a shower gives back what she wore before it.

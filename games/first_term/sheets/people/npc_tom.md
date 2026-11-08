@@ -1,4 +1,5 @@
 # [READY] Person — Tom
+> Changed 2026-11-08 (DECISIONS 206, LO: "She will buy. Completely her decision"): two café dresses she buys from Tom, new section at the end. Re-signed by LO 2026-11-08 ("Go ahead with 1 and 2").
 > Signed by LO: LO, 2026-11-04.
 > Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
 
@@ -164,3 +165,30 @@ Each follow-up waits for her reply (`after_round`), and a different answer follo
 | no clock time in his text | sweep R-row ("2:30") |
 | card goals are the step's real requirements | LO's play note, 2026-10-08 · sweep K8 and its 38 more cards |
 | pay she earns is never on the button: the scene says it, the card keeps it, the toast shows it | LO, D11 (2026-10-09) |
+
+## The café dresses she buys (2026-11-08, DECISIONS 206)
+
+LO, 2026-11-08: "She will buy. Completely her decision." Tom never pushes her clothes (DECISIONS 117 stands). He keeps two
+dresses under the counter because customers ask, and sells one only when she asks for it. Neither has a shop price, so the clothes shop doesn't stock them. Course of Temptation's bar
+brings skimpier uniforms in as its flirty score climbs (`guide_course-of-temptation_userjs.js:58427-58445`); here the
+score is the café's footfall, which her own acts raise, and the buying is hers.
+
+| dress | wearable at | Tom has it when | price | tips |
+|---|---|---|---|---|
+| Café uniform (normal) | any | her hire | free | x1 ($2-4 at level 1) |
+| Tight café uniform | any; she asks at Exhibitionism 20 | as built | free | x2 |
+| Short café dress | Exhibitionism 40 | footfall 10 | $30 | x3 |
+| Low-cut café dress | Exhibitionism 60 | footfall 25, and she owns the short one | $40 | x4 |
+
+The Friday close still doubles the tips. Clock-in keeps whichever uniform she has on; in her own clothes it puts the
+normal one on; clock-out takes all four off.
+
+- Her asks, at Tom's counter: "Ask Tom for something shorter." and "Ask Tom for something lower cut." Each has a
+  written no ("Leave it on the counter.").
+- On the shift: the short dress shows her panties when she bends (40); with no panties she keeps a hand on the hem all
+  shift and shows nothing. The low-cut dress with no bra: her tits move in it and a nipple edges out for a moment (60);
+  with a bra, its cups show in the V.
+- Accidents, 1 in 4 as she comes on: the top shelf in the short dress (panties; "Stay up there." Exhibitionism 40, cap
+  59), and the cut giving in the low-cut dress with no bra (a nipple out; "Finish pouring." Exhibitionism 60, cap 79).
+  A moment each, never topless (DECISIONS 204).
+- Tom's lines stay strict ("Bend from the knees. I'm not running a floor show."). Gary has a line for each.
