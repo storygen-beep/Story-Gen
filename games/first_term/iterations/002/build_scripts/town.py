@@ -68,6 +68,27 @@ out.append(town_event("town_event_jogger", "A jogger looks back", S("07:00", "10
     "Pretend you didn't see.",
     plain_after=[P("You keep your eyes front and pretend, but your face goes hot anyway, and you can feel exactly where on your ass his eyes landed, both times. He comes down this street most mornings. He'll look again.")],
     bolder=("Look back.", [CURIOUS], [], "You look back, and catch him doing it a third time, eyes on your ass. He nearly runs into a lamp post. He slows like he might turn round. You turn the corner first. He runs this street in the mornings, and now he knows your ass by sight.")))   # reader pass 3 b01: the hook (his window is 07:00-10:00)
+_PANTIES_ON = {"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}
+_BRA_OFF = {"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}
+# everyday clothes by stage (DECISIONS 205): the micro shorts on the bus-stop bench (Showing), the plunge dress
+# slipping (Watched). Letting it go on pays to the top of the stage it shows.
+out.append(town_event("town_event_micro_bench", "The bus-stop bench", S("07:00", "22:00"),
+    [{"type": "worn_type", "operator": "eq", "value": "micro_shorts"}, _PANTIES_ON],
+    [P("You sit down on the bus-stop bench to wait, and the micro shorts ride straight up. Both cheeks of your bare ass are on the cold seat, and your panties show at the leg. The guy at the other end of the bench stops scrolling his phone."),
+     WHO("Bus is late. Take your time.")],
+    "Stand up and wait.",
+    plain_after=[P("You stand up and wait on your feet, tugging the shorts down at the back, face hot. He keeps sitting there, but he's smiling at the empty seat. He waits for this bus every day. He'll keep a seat for you.")],
+    bolder=("Stay sitting.", [trait("exhibitionism", "gte", 40)], [dict(EXH1, cap=59)],
+            "You stay where you are. You cross your legs the other way, slow, and the shorts ride up further, your ass bare on the bench and your panties showing at the leg, and he gives up on his phone. The bus comes. He lets it go. He waits for this bus every day. He takes this bus most days. He'll remember the shorts."))) 
+out.append(town_event("town_event_plunge_slip", "The neckline slips", S("07:00", "22:00"),
+    [{"type": "worn_type", "operator": "eq", "value": "plunge_dress"}, _BRA_OFF],
+    [P("You step off the curb too fast and the plunge dress swings open. Your left tit comes right out of the neckline, bare, the nipple hard in the air, in front of the whole bus queue."),
+     WHO("Whoa. Lady. Your, um. Your.")],
+    "Tuck it back in.",
+    plain_after=[P("You shove it back inside the neckline and hold the dress shut with your hand flat over it, face on fire, and walk fast. The whole bus queue watches you go. They'll be at that stop again tomorrow.")],
+    bolder=("Let it be for a few steps.", [trait("exhibitionism", "gte", 60)], [dict(EXH1, cap=79)],
+            "You don't grab for it. You walk on three steps, four, with your bare tit out of the plunge and bouncing in front of the queue, before you tuck it back in, slow. The whole queue has turned round. Every one of them will remember the dress.")))
+
 # S6 (LO 2026-11-03): no "Nothing happens." random event on the street either.
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -218,6 +239,10 @@ PANTIES_OFF = {"type": "clothing_slot", "slot": "underwear", "operator": "unequi
 PANTIES_ON = {"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}
 DAYTIME, NIGHT = tod("08:00", "18:00"), tod("22:00", "08:00")
 CAFE_GIRL = {case: G(cond(trait("cafe_footfall", "gte", 10)), WHO(line)) for case, line in (
+    ("crop", "Hey, café girl. Didn't know you had abs under that apron."),
+    ("bodycon", "That's the waitress from the café. Wow. Okay."),
+    ("micro", "Café girl! I'm coming in for a coffee this week, swear to God."),
+    ("plunge", "Is that the café girl? Holy shit, it is."),
     ("skirt", "You're the girl from the café."),
     ("nobra", "Aren't you from the café? You look different out here."),
     ("nopanties", "Café girl, right? I'd come in more often for this."))}
@@ -233,10 +258,28 @@ STREET_CASES = [
      "A car slows beside you. The window comes down halfway, and the driver is staring at your tits. It stays with you to the end of the street, but you never look in, and it goes."),
     # false lines a3 #14 (DECISIONS 129): the breeze needs a skirt or a dress, so no jeans, leggings or shorts.
     # pass 4 (LO, 2026-11-04): "pussy" was past the strangers' ceiling (DECISIONS 41); the breeze is on her ass now.
-    ("nopanties", [PANTIES_OFF] + [{"type": "worn_type", "operator": "neq", "value": t} for t in ("jeans", "leggings", "shorts")], 2,
+    ("nopanties", [PANTIES_OFF] + [{"type": "worn_type", "operator": "neq", "value": t} for t in ("jeans", "leggings", "shorts", "micro_shorts")], 2,
      [P("A breeze comes down the street as you pass the landlord's gate, and there's nothing under your clothes to stop it. It lifts your hem and runs cool over your bare ass. Mr. Vance stands up off his chair with his eyes on your hips, and takes one step toward the gate, but you don't stop. Not tonight.")],
      "The shop guy drops his change on the step and stares at your ass, like he knows there's nothing under your clothes. \"Come in a minute.\" You don't. He doesn't pick the change up until you've turned the corner.",
      "A car slows, then stops. Someone inside whistles at your ass. \"Get in.\" You don't walk faster, and you don't get in."),
+    # everyday clothes by stage (DECISIONS 205): the crop top and the bodycon at Daring (20), the micro shorts at
+    # Showing (40), the plunge dress at Watched (60). Each piece's own row outranks the bra and panties rows.
+    ("crop", [trait("exhibitionism", "gte", 20), {"type": "worn_type", "operator": "eq", "value": "crop_top"}, BRA_ON], 1.5,
+     [P("Mr. Vance lowers his paper. His eyes go to the bare strip of your belly under the crop top, then up to where it stops, under your tits. He doesn't go back to the paper, but he takes his time saying anything."), D("npc_vance", "Bit chilly for that, Miss."), P("He pats the step beside him. Not tonight. You keep walking.")],
+     "The shop guy is out front with a broom, and he stops sweeping. His eyes are on your bare belly and the bottom edge of your crop top all the way past, waiting for it to ride up.",
+     "A car slows beside you. The driver leans over to look at your bare belly and the crop top stretched over your tits. It stays with you to the end of the street, and then it goes."),
+    ("bodycon", [trait("exhibitionism", "gte", 20), {"type": "worn_type", "operator": "eq", "value": "bodycon_dress"}, PANTIES_ON], 1.5,
+     [P("Mr. Vance puts the paper down altogether. The bodycon dress shows him every curve you've got, the shape of your tits and the round of your ass, and it stops an inch under it. He watches the hem climb with every step.")],
+     "The shop guy comes out of the door and just stands there. The tight dress hugs your ass so close he can see the line of your panties, and he watches it all the way past, but he doesn't come closer.",
+     "A car slows beside you. The driver is staring at your ass in the skin-tight dress, the hem riding up your thighs as you walk. It stays with you to the corner, then it goes."),
+    ("micro", [trait("exhibitionism", "gte", 40), {"type": "worn_type", "operator": "eq", "value": "micro_shorts"}, PANTIES_ON], 2.5,
+     [P("Mr. Vance stands up off his chair. The micro shorts leave the bottom half of your ass bare, both cheeks, and he watches them bounce out of the shorts all the way past his gate."), D("npc_vance", "Mark lets you out in those?")],
+     "The shop guy drops the box he's carrying. Your ass is hanging out of the bottom of your shorts, both cheeks, and he stares at it until you're past the corner.",
+     "A car slows, then crawls behind you, not beside you. The driver wants the view from the back: your bare cheeks under the micro shorts, every step. He honks twice before he goes."),
+    ("plunge", [trait("exhibitionism", "gte", 60), {"type": "worn_type", "operator": "eq", "value": "plunge_dress"}, BRA_OFF], 3,
+     [P("Mr. Vance gets up and comes down to his gate. The plunge dress is cut open to your navel, and with no bra under it your tits sit bare inside the neckline, the inside curve of each one on show, moving loose with every step. He grips the gate, but he doesn't open it. He watches them go by.")],
+     "The shop guy stops dead in his door. The neckline of your dress is open to your belly button, your bare tits loose inside it, and every step shows him more of the sides of them. He doesn't even pretend to sweep.",
+     "A car slows beside you and stays there. The driver is staring down the open front of your dress at your bare tits, loose in the plunge, nearly out of it with every step. He follows you to the end of the street."),
 ]
 # heat proposal A11 (DECISIONS 147): a _t4 pool on the two witness screens that show her body (media only)
 STREET_POOLS = {
@@ -246,16 +289,20 @@ STREET_POOLS = {
                       "no panties skirt wind street", "skirt blows up no panties walking", pool_dir="sex/street_seen_nopanties_t4")],
 }
 SHOP_NEXT = "He'll be out front tomorrow."
-SHOP_SAID = {"skirt": "Nice day for a skirt like that.", "nobra": "Cold out today, is it? Come in and warm up.",
+SHOP_SAID = {"crop": "Lift your arms for me, sweetheart. Just once.", "bodycon": "Painted on, that dress. Turn round.",
+             "micro": "You forgot the rest of your shorts.", "plunge": "Jesus. Does your mother know you're out in that?",
+             "skirt": "Nice day for a skirt like that.", "nobra": "Cold out today, is it? Come in and warm up.",
              "nopanties": "I mean it. Come in a minute. Just a minute."}
-CAR_SAID = {"skirt": "Hey, legs! Where are you walking to? I'll drive you.", "nobra": "Jesus, look at those. Get in, I'll give you a lift.",
+CAR_SAID = {"crop": "Nice stomach, baby. Show me the rest.", "bodycon": "Damn, that dress. Get in, I'll take you somewhere you can wear it.",
+            "micro": "Those cheeks! Get in, I'll give you a ride.", "plunge": "Lean in the window, baby. Just lean.",
+            "skirt": "Hey, legs! Where are you walking to? I'll drive you.", "nobra": "Jesus, look at those. Get in, I'll give you a lift.",
             "nopanties": "I said get in. I saw that breeze, legs."}
 CAR_NEXT = "The same car's parked at the corner the next time you look."
 for case, worn, lv, vance, shop, car in STREET_CASES:
-    first = f"street_first_l{lv}"
+    first = f"street_first_l{int(lv)}"
     # LO, 2026-11-04: a dress-code act pays to the top of the stage its dress code needs (world_data clothing rules: no bra
     # or a short skirt out needs a meter at 20, no panties out a meter at 40), on both meters.
-    cap = 39 if lv == 1 else 59
+    cap = {1: 39, 1.5: 39, 2: 59, 2.5: 59, 3: 79}[lv]   # crop and bodycon Daring, micro shorts Showing, plunge Watched (DECISIONS 205)
     # exhibition phase 1 (LO, 2026-11-08): going out is Exhibitionism's alone now, so the street pays it alone
     pay_first = [{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": cap}]
     pay_after = [{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": cap}]
@@ -268,9 +315,11 @@ for case, worn, lv, vance, shop, car in STREET_CASES:
                             flags=[fset("out_shown_today")] + ([fset(first)] if is_first else [])))
     out.append({
         "id": f"street_seen_{case}", "name": {"skirt": "Walk the street in your short skirt", "nobra": "Walk the street with no bra",
-                                              "nopanties": "Walk the street with no panties"}[case],   # pass 3 H33/H34 (the-voice.md R1, D11): the name says what happens if she clicks, and never hides the act
+                                              "nopanties": "Walk the street with no panties", "crop": "Walk the street in your crop top",
+                                              "bodycon": "Walk the street in your bodycon dress", "micro": "Walk the street in your micro shorts",
+                                              "plunge": "Walk the street in your plunge dress"}[case],   # pass 3 H33/H34 (the-voice.md R1, D11): the name says what happens if she clicks, and never hides the act
         "description": f"The street sees what she's wearing ({case}): one witness a day by the hour; Exhibitionism +1 (exhibition phase 1, 2026-11-08).",
-        "trigger": {"location": "street", "is_repeatable": True, "priority": 3 + lv, "is_active": True, "max_triggers_per_day": 1,
+        "trigger": {"location": "street", "is_repeatable": True, "priority": int(3 + 2 * lv), "is_active": True, "max_triggers_per_day": 1,
                     "conditions": cond(flag("out_shown_today", False), *worn)},
         "nodes": [node("seen", "Somebody's looking", [
             G(cond(VANCE_PORCH), *vance, P("He'll be on his porch tomorrow evening. He always is.")),

@@ -1,4 +1,5 @@
 # [READY] Scene — street_seen
+> Changed 2026-11-08 (DECISIONS 205): everyday clothes by stage, new section below. Re-signed by LO 2026-11-08 ("Sign them").
 > Signed by LO: LO, 2026-11-04.
 > Changed 2026-11-04, LO's answers: skirt and no bra cap at 39, no panties at 59, both meters (F); signed by LO 2026-11-04.
 > Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
@@ -162,3 +163,12 @@ A hook line, proposed (LO asked whether a line solves it). Each line names a thi
 
 - Rows 46–48 (hook). The corner-shop render now closes on "He'll be out front tomorrow." (the shop opens every day 07:00–22:00, `corner_shop.md`). Both car renders close on "The same car's parked at the corner the next time you look." (one line). This replaces the 2026-11-01 "no line" row above.
 - Row 55 (the no-panties offers refused in narration): accepted, call B. No change.
+
+## The new pieces (2026-11-08, DECISIONS 205)
+
+Four more looks, each gated on its piece's stage and paying Exhibitionism +1 to that stage's top: the crop top and the
+bodycon dress (20, cap 39), the micro shorts (40, cap 59), the plunge dress with no bra (60, cap 79). Same witnesses
+(Vance on his porch, the shop guy by day, a car at night), each with his own line. Two street accidents: the micro shorts
+on the bus-stop bench ("Stay sitting.", from 40, cap 59) and the plunge dress slipping ("Let it be for a few steps.", from
+60, cap 79). 1 in 4, one a day, with the other street events.
+

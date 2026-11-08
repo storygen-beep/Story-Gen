@@ -768,12 +768,12 @@ LAUNDRY_TEASES = [
     {"label": "Bend for the bottom drum.", "name": "The bottom drum",
      "gate": [CURIOUS, DARING, flag("mark_saw_her"), PANTIES_ON, NO_TOWEL],   # seen and sexual: both meters (meters.md rule 4)
      "eff": [want(M, 3), {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 39}],
-     "blocks": [*[GC(cond(_wt(t)), P(beat(MLT, "daring_skirt"))) for t in ("short_skirt", "laura_dress", "party_dress", "cafe_uniform")],
+     "blocks": [*[GC(cond(_wt(t)), P(beat(MLT, "daring_skirt"))) for t in ("short_skirt", "laura_dress", "party_dress", "cafe_uniform", "bodycon_dress", "plunge_dress")],
                 # truth pass (2026-11-03): "Laura's in the house." only while she is (her kitchen row, weekday evenings);
                 # on a Saturday in the garage she is out, and his line stops at "Jesus, @player."
                 GC(cond(SLEEP_SHIRT, here(L, "home_kitchen")), P(beat(MLT, "daring_shirt"))),
                 GC(cond(SLEEP_SHIRT), P(beat(MLT, "daring_shirt").replace(LAURA_IN_HOUSE_Q, '"Jesus, @player."'))),
-                *[GC(cond(_wt(t)), P(beat(MLT, "daring_jeans"))) for t in ("jeans", "leggings", "shorts", "track_pants", "gym_shorts", "sheer_leggings")],   # daring_jeans names no garment (mark_laundry_teases.md)
+                *[GC(cond(_wt(t)), P(beat(MLT, "daring_jeans"))) for t in ("jeans", "leggings", "shorts", "track_pants", "gym_shorts", "sheer_leggings", "micro_shorts")],   # daring_jeans names no garment (mark_laundry_teases.md)
                 VID("a girl bending over to load a front-loading washer, her skirt riding up, a man at a workbench watching", "girl bends over washing machine skirt rides up", "bending over laundry panties showing", pool_dir="sex/mark_laundry_bend_t4"),
                 # pass 3 B4: the garage talks
                 D(M, "Take your time down there. Find every sock."), ME("I'm looking, Mark."), D(M, "So am I.")]},

@@ -313,7 +313,7 @@ out.append({
             P("Zoe drags you into the hot tub on the back deck, laughing. Steam rolls off the water. Music thumps through the glass. Three of her friends are already in, drinks on the rim. \"Make room, babe's here.\" She doesn't need room. She sits right against you, her knee pressed to yours under the water. When you talk, she watches your mouth. All term she has dared you instead of asking, but you know what she wants. \"Your tits are floating, babe,\" she says, grinning. Your face goes hot, and it isn't the water. One of her friends stands up, restless. \"Going in for more drinks.\""),
         ], [go("Stay in the water.", node="alone", mins=15,
                wardrobe=[REMEMBER] + [{"action": "unequip", "item_id": g} for g in ("tshirt", "thin_top", "low_top", "gym_tank", "jeans", "leggings", "track_pants", "gym_shorts", "sheer_leggings", "sleep_shorts",
-                                                                       "short_skirt", "zoe_party_dress", "laura_blue_dress", "sneakers")])]),
+                                                                       "short_skirt", "zoe_party_dress", "laura_blue_dress", "sneakers", "crop_top", "bodycon_dress", "micro_shorts", "plunge_dress")])]),
         node("alone", "Just us", [
             # scene reader 2026-11-04: "Take it off" only with a bra on (Zoe may have kept it, zoe_has_bra); "I want to see
             # your tits" not after walkin_tub_zoe, when she has already sat naked against her (zoe_in_the_tub)
@@ -494,6 +494,22 @@ ZOE_HUB_LINES = {
 }
 
 
+ZOE_SEES = {   # two places, so each line lives on one screen (gate `one pool, one place`)
+    "quad": {   # she's lying with her head in your lap here; each line keeps a "not out here"
+        "crop_top": ("Zoe, with her head in your lap, pokes your bare belly under the crop top and grins up at the hem.", "One reach for the top shelf and the whole library gets underboob, babe. Not out here, though. Too many people."),
+        "bodycon_dress": ("Zoe looks up at you from your lap, all the way up the bodycon dress, and whistles.", "Painted on. Keep your knees together out here, babe. Save the rest for my party."),
+        "micro_shorts": ("Zoe turns her head in your lap and bites the bare skin of your thigh where the micro shorts stop.", "Half your ass is out on the quad, babe. I love it. Not here, though. Everyone's watching."),
+        "plunge_dress": ("Zoe looks straight up the open front of the plunge dress, from your lap, at your bare tits inside it.", "To class? In that? One wrong move and they're out. Not out here, babe. Save it for a party."),
+    },
+    "party_house": {
+        "crop_top": ("Zoe hooks a finger in the bottom of your crop top and tugs it an inch higher.", "There. Now you're dressed for my parties."),
+        "bodycon_dress": ("Zoe runs her eyes down the bodycon dress to where it stops on your thighs.", "Sit on the edge of this tub in that and I'll see everything from here. Just saying."),
+        "micro_shorts": ("Zoe leans on the rim of the tub to look at the backs of your micro shorts, and laughs.", "Wear those to the party. Every guy there will look at your ass twice. I'll count."),
+        "plunge_dress": ("Zoe takes in the plunge dress, the open neck, your bare tits loose inside it, and her eyebrows go up.", "Dance in that at my party and you'll fall out of it. Please dance in that."),
+    },
+}
+
+
 def zoe_state(where):
     say = ZOE_HUB_LINES[where]
     return [
@@ -501,6 +517,9 @@ def zoe_state(where):
         G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}, {"type": "worn_exposure", "operator": "eq", "value": 0}, {"type": "weekday", "weekdays": [0, 1, 2, 3, 4]}),
           P(say["tits"][0]), D(Z, say["tits"][1])),
         G(cond(PARTY_DRESS), P(say["dress"][0]), D(Z, say["dress"][1])),
+        # everyday clothes by stage (DECISIONS 205): Zoe sees each piece
+        *[G(cond({"type": "worn_type", "operator": "eq", "value": t}, *([{"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}] if t == "plunge_dress" else [])),
+            P(a), D(Z, b)) for t, (a, b) in ZOE_SEES.get(where, {}).items()],
     ]
 
 

@@ -34,7 +34,7 @@ def tod(a, b): return {"type": "time_of_day", "start_time": a, "end_time": b}
 NOT_SATURDAY = {"type": "weekday", "weekdays": [0, 1, 2, 3, 4, 6]}   # tomlw.wd: 0 = Monday, 5 = Saturday
 CLAIRE_MET = {"type": "flag", "subject": "player", "flag_key": "claire_met", "operator": "is_true"}
 BRA_ONLY = [slot("top", False), slot("dress", False), slot("bra")]
-TOPS_AND_BRAS = [{"action": "unequip", "item_id": i} for i in ("tshirt", "thin_top", "low_top", "gym_tank", "plain_bra", "sports_bra")]
+TOPS_AND_BRAS = [{"action": "unequip", "item_id": i} for i in ("tshirt", "thin_top", "low_top", "gym_tank", "crop_top", "plain_bra", "sports_bra")]
 
 # (file #, beat #, op, where, [conditions], [(speaker or None, line), ...])
 #   op "after_beat": its own beat after beat N · "after_sentence" / "replace_sentence": in the beat's

@@ -1604,3 +1604,9 @@ DECISIONS 202. Eleven accident scenes: six in class (`college.py`, `class_accide
 DECISIONS 203. Bare-tits answers from 60 (cap 79) in five scenes, gym strap included; the bare-skirt stairs answer removed (80). The reader's 11 truth and clothes fails from DECISIONS 202 fixed first (repeat-visit hooks, bra details the trigger doesn't check, table four vs Gary's booth four, the button's gate). Gates 118, 0 fails. Headless: every new gate shut at 59 and open at 60, the stairs answer never shows, bra answers open at any stage.
 
 Reader re-read of the 12 scenes: 7 fails (3 lines that claimed the class or the lunch rush before either happened, 4 café endings with no hook); all rewritten. Rebuilt; gates 118, 0 fails. Not re-read after that rewrite.
+
+## 2026-11-08 — everyday clothes by stage
+
+DECISIONS 205. Crop top, bodycon minidress, micro shorts, plunge dress; four street looks, class lines in Psychology and Figure drawing, Zoe's lines on the quad and at the party house, four accidents. First build: four gate fails (one Zoe line naming panties unchecked, a first-time phrase, class lines pasted into every class, street looks paying from 0); fixed. Reader: 12 fails, fixed, plus DECISIONS 41's words removed from the strangers' accidents (also the gym's and the class ones from 198 and 202). A fix to Zoe's lines first overwrote her old hub lines; restored from git before the build. After: gates 118, 0 fails; shape 22 pass; skill tests 1,017 pass; cites 0 wrong. Headless: each piece locked a point below its stage and wearable at it; each street look pays to its cap; class lines show; each accident's answer shut below its gate and open at it; the class accidents don't roll in Figure drawing.
+
+Second reader read: 5 fails fixed (the class accidents' exit is "Wait for class.", a bench hook, Vance's "Not tonight.", the sheer squats need panties). Gates 118, 0 fails; headless: the sheer squat button shows with panties at 60 and not without.
