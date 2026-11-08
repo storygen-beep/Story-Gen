@@ -299,6 +299,9 @@ class TemplateClothingItem:
     # content only — never mutates the global player.corruption core_trait.
     type: str = ""  # Optional category tag ("swim", "costume", etc.); read by `worn_type`
     # predicate. Doc 72 / Doc 71 R2. Empty string = untyped; worn_type matches return false.
+    locked_text: str = ""  # [ui] clothes_layout = "room": why it is locked, in words
+    # ("Held in the garage"). Shown when its conditions are unmet and no trait gate explains
+    # it (an unmet trait is named first: "Needs Exhibitionism 15+"). Empty: "Locked".
     exposure: int = 0  # How much of her this garment leaves showing: 0 covers, 1 shows
     # underwear-level skin, 2 leaves the region bare. Read by `worn_exposure`, which takes
     # the MAX across the outfit AND treats an empty core slot as bare — that second half is
@@ -604,6 +607,12 @@ class GameTemplate:
     # [ui] quests_layout — "cards" (default, one card per person in file order) or
     # "list" (short tap-to-open rows, ready first). Kept raw; validate() checks it.
     quests_layout: Any = "cards"
+    # [ui] clothes_layout — "table" (default: today's slot table and tier shop) or "room"
+    # (her portrait beside what she wears, a rail per slot; the shop as a stand and a rack).
+    # [ui] clothes_door — the location whose dress-code rules the room's "can she go out"
+    # line reads. Kept raw; validate() checks both.
+    clothes_layout: Any = "table"
+    clothes_door: Any = ""
     # [[ui.timetable]] — her classes, one row each: class, place, lecturer (optional NPC
     # id), weekdays (0 = Monday), from, to ("HH:MM"). Drawn by setup.timetableHtml as a
     # day-by-day table. Kept raw; validate() checks it. Empty = no timetable.
@@ -998,7 +1007,9 @@ class TemplateBank:
 @dataclass
 class TemplatePlayerPortraitOutfit:
     """One outfit rule for the state-reactive portrait: `image` shown when `when` matches.
-    `when` = { worn_type?, corruption?: {operator, value(LEVEL 0-4)}, flag? } — first-match wins."""
+    `when` = { worn_type?, wearing?, corruption?: {operator, value(LEVEL 0-4)}, flag? } — first-match wins.
+    `worn_type` reads the dominant garment only (dress, else top, else bottom); `wearing` matches
+    a garment of that type in any slot, so a short skirt under a T-shirt can have its own image."""
     image: str = ""
     when: Dict[str, Any] = field(default_factory=dict)
 
@@ -3153,6 +3164,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     corruption=_require_int(c_raw, "corruption", 0),
                     type=_require_str(c_raw, "type", ""),
                     exposure=_require_int(c_raw, "exposure", 0),
+                    locked_text=_require_str(c_raw, "locked_text", ""),
                 )
             )
 
@@ -3626,12 +3638,16 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     sidebar_hide_raw: Any = []
     phone_clock = False
     quests_layout_raw: Any = "cards"
+    clothes_layout_raw: Any = "table"
+    clothes_door_raw: Any = ""
     timetable_raw: Any = []
     timetable_button = False
     if isinstance(ui_raw, dict):
         sidebar_hide_raw = ui_raw.get("sidebar_hide") or []
         phone_clock = ui_raw.get("phone_clock") is True
         quests_layout_raw = ui_raw.get("quests_layout", "cards")
+        clothes_layout_raw = ui_raw.get("clothes_layout", "table")
+        clothes_door_raw = ui_raw.get("clothes_door", "")
         timetable_raw = ui_raw.get("timetable") or []
         timetable_button = ui_raw.get("timetable_button") is True
 
@@ -3827,6 +3843,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         sidebar_hide=sidebar_hide_raw,
         phone_clock=phone_clock,
         quests_layout=quests_layout_raw,
+        clothes_layout=clothes_layout_raw,
+        clothes_door=clothes_door_raw,
         timetable=timetable_raw,
         timetable_button=timetable_button,
         # This kwarg is the silent-no-op step: parse the block, forget the kwarg,
@@ -4109,10 +4127,12 @@ def validate(template: GameTemplate) -> List[str]:
     # grows); and a rule whose `worn_type` no clothing item carries is a dead rule.
     if (template.player_portrait is not None and template.player_portrait.enabled
             and template.clothing_enabled):
+        # `worn_type` and `wearing` both name a clothing type; either one covers it.
         _pp_rule_types = {
-            (o.when or {}).get("worn_type")
+            (o.when or {}).get(_k)
             for o in (template.player_portrait.outfits or [])
-            if isinstance(o.when, dict) and o.when.get("worn_type")
+            for _k in ("worn_type", "wearing")
+            if isinstance(o.when, dict) and o.when.get(_k)
         }
         for _ct in sorted(_known_clothing_types):
             if _ct not in _pp_rule_types:
@@ -4122,7 +4142,7 @@ def validate(template: GameTemplate) -> List[str]:
                 )
         for _rt in sorted(t for t in _pp_rule_types if t not in _known_clothing_types):
             _validate_warnings.append(
-                f"player_portrait: outfit rule worn_type '{_rt}' matches no [[clothing]] item's type "
+                f"player_portrait: outfit rule worn_type/wearing '{_rt}' matches no [[clothing]] item's type "
                 f"— dead rule (fix the tag or remove it)"
             )
 
@@ -6846,6 +6866,7 @@ def validate(template: GameTemplate) -> List[str]:
     errors.extend(_validate_cast_traits(template))
     errors.extend(_validate_sidebar_hide(template))
     errors.extend(_validate_quests_layout(template))
+    errors.extend(_validate_clothes_layout(template))
     errors.extend(_validate_timetable(template))
 
     # EN8 — decay toward a rest point; wait after contact.
@@ -7187,6 +7208,36 @@ def _validate_sidebar_hide(template) -> List[str]:
 
 
 QUESTS_LAYOUTS = ("cards", "list")
+
+
+CLOTHES_LAYOUTS = ("table", "room")
+
+
+def _validate_clothes_layout(template) -> List[str]:
+    """`[ui] clothes_layout` picks how the wardrobe and the clothes shop are drawn, and
+    `[ui] clothes_door` names the place whose dress code the room reads. A misspelt layout
+    would fall back to the table and say nothing; a door with no dress code would say "fine"
+    to everything. All of them are errors."""
+    errors: List[str] = []
+    raw = template.clothes_layout
+    door = template.clothes_door
+    if raw not in CLOTHES_LAYOUTS:
+        errors.append(f"[ui] clothes_layout must be one of {', '.join(CLOTHES_LAYOUTS)}, got {raw!r}")
+        return errors
+    if raw == "room" and not template.clothing_enabled:
+        errors.append('[ui] clothes_layout = "room" requires clothing to be enabled')
+    if door in ("", None):
+        return errors
+    if not isinstance(door, str):
+        return errors + [f"[ui] clothes_door must be a location id, got {door!r}"]
+    if raw != "room":
+        return errors + ['[ui] clothes_door is read only by clothes_layout = "room"']
+    loc = next((l for l in template.locations if l.id == door), None)
+    if loc is None:
+        errors.append(f"[ui] clothes_door: no location with id {door!r}")
+    elif not getattr(loc, "clothing_rules", None):
+        errors.append(f"[ui] clothes_door: location {door!r} has no clothing_rules, so every outfit would read as fine")
+    return errors
 
 
 def _validate_quests_layout(template) -> List[str]:
@@ -8680,6 +8731,8 @@ def _assemble_project_metadata(project, template):
                     "corruption": ci.corruption,
                     "type": ci.type,  # Doc 72 — outfit-category tag for worn_type predicate
                     "exposure": ci.exposure,  # 0 covers / 1 underwear-level / 2 bare
+                    # Written only when authored, so a game without it keeps its metadata.
+                    **({"locked_text": ci.locked_text} if ci.locked_text else {}),
                 }
                 for ci in template.clothing_items
             ],
@@ -8849,6 +8902,10 @@ def _assemble_project_metadata(project, template):
         project.metadata["phone_clock"] = True
     if template.quests_layout == "list":
         project.metadata["quests_layout"] = "list"
+    if template.clothes_layout == "room":
+        project.metadata["clothes_layout"] = "room"
+        if template.clothes_door:
+            project.metadata["clothes_door"] = template.clothes_door
     if template.timetable:
         project.metadata["timetable"] = [
             {"class": r["class"], "place": r["place"], "lecturer": r.get("lecturer", ""),

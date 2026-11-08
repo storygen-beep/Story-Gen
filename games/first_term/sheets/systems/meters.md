@@ -1,5 +1,5 @@
 # [READY] System — meters
-> Changed 2026-11-08 (DECISIONS 196): going out is Exhibitionism's alone; re-signed by LO 2026-11-08 ("Sign it").
+> Changed 2026-11-08 (DECISIONS 197): going out is Exhibitionism's alone; re-signed by LO 2026-11-08 ("Sign it").
 > Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. File and line cites removed.
@@ -30,13 +30,13 @@ Going out in a level for the first time needs Corruption **or** Exhibitionism at
 | a towel, the sleep shirt, underwear, naked | never, this release (as built) |
 
 - The door's message names the number: "Not in that skirt. Not yet. (Needs Exhibitionism 20.)" (DECISIONS 90).
-- **Changed 2026-11-08 (DECISIONS 196):** what she shows out of the house is Exhibitionism's alone, as in Course of
+- **Changed 2026-11-08 (DECISIONS 197):** what she shows out of the house is Exhibitionism's alone, as in Course of
   Temptation. Corruption no longer opens these doors. A drink still does, for that night, and pays nothing past her
   sober stage.
 
 ## Rule 2 · wearing it out raises both
 
-- **Each day out in it** pays **Exhibitionism +1**, once a day (2026-11-08: it no longer pays Corruption, DECISIONS 196).
+- **Each day out in it** pays **Exhibitionism +1**, once a day (2026-11-08: it no longer pays Corruption, DECISIONS 197).
 - Paid by a **street scene**, once a day: someone sees what she's wearing (Mr. Vance on his porch, a guy at the corner
   shop, a car slowing down). Its line changes by what she wears and her level.
 - Build: one repeatable canvas on `street`, once a day (`out_shown_today` cleared in the daily tick), with a

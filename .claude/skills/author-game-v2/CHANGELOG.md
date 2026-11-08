@@ -13,6 +13,12 @@ same turn: what changed, why, and how it was verified.
 - **Why.** LO: stuck at Exhibitionism 0 in first_term. Study: `~/Documents/Great_Games_Study_20260926/exhibition_study/`; LO okayed `PHASE1_PROPOSAL.md`.
 - **Verified.** On the game as it stood before (HEAD), the new start gate fails Exhibitionism; on the new build it passes. The description gate found two real claims; both fixed. Tests in `scripts/tests/test_gates_exhibition_phase1_20261108.py`. Not done this phase: a gate comparing a card's "opens at" with the build, a pace gate, and leave rules inside *every stage has a way up*.
 
+## 2026-11-05 — the wardrobe and the clothes shop as a dressing room
+
+- **`references/engine.md`.** New section `[ui] clothes_layout = "room"`, beside the quests_layout one, and a pointer from §17. It teaches the room pages, `[ui] clothes_door`, the 3:4 garment picture, `[[clothing]] locked_text` and the portrait's `when.wearing`. Why: LO picked the dressing-room redesign for first_term (DECISIONS 196).
+- **Cite repair across `references/`.** The new engine code shifted `v2.py`, so 129 cites pointed at the wrong line. `cite_check.py --fix` re-anchored them (the-arc, the-board, the-clock, the-economy, the-first-hour, the-meters, the-phone, the-release, the-returning-player, the-systems, engine). It also moved two of the new section's own cites onto `worn_type` and `validate()`, so those were reworded by hand and their lines put back.
+- **Verified.** `cite_check.py --strict`: 0 wrong in SKILL.md + references/ (baseline 0). The engine change has 12 tests in `apps/game_generation/tests/test_clothes_room.py`, all passing.
+
 ## 2026-11-05 — written lines no longer vanish into "No content"
 
 - **Engine.** `apps/projects/services/template_import.py`: the nesting cap in `_normalize_block_list` goes from 4 to 8, and its warning names what it drops. `apps/game_generation/management/commands/package_from_toml.py`: a build that holds the "No content" stand-in now stops with an error naming the screens. `references/engine.md` updated. Why: first_term lost 8 written lines on 3 screens (LO saw it on a café shift); a stand-alone group is a one-item pool holding a group, so ordinary shapes hit the old cap, and the only sign was a log warning.

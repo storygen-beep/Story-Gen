@@ -1,5 +1,5 @@
 # [READY] System — wardrobe
-> Changed 2026-11-08 (DECISIONS 196): going out is Exhibitionism's alone; re-signed by LO 2026-11-08 ("Sign it").
+> Changed 2026-11-08 (DECISIONS 197): going out is Exhibitionism's alone; re-signed by LO 2026-11-08 ("Sign it").
 > Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-04 to match the build; signed by LO 2026-11-04. The hot tub's way out gives back what she came in; Laura's lace set is built.
@@ -56,7 +56,7 @@ College clothes are her own outfits at three levels: normal, sexy, slutty. Never
 
 The door out says why and names the number: "Not in that skirt. Not yet. (Needs Exhibitionism 20.)" (`meters.md` rule 1, changed 2026-11-08).
 
-**The low-cut top** (2026-11-08, DECISIONS 196): $15 at the clothes shop, no meter lock, allowed out at 0. Read by the class looks, the street look and the living-room stretch.
+**The low-cut top** (2026-11-08, DECISIONS 197): $15 at the clothes shop, no meter lock, allowed out at 0. Read by the class looks, the street look and the living-room stretch.
 
 **Wearing it out pays** (`meters.md` rule 2): Exhibitionism +1, once a day, through the street scene's witness.
 

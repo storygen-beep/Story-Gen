@@ -1548,8 +1548,40 @@ The importer's nesting cap dropped 8 written lines on 3 screens; the cap went fr
 now fails (DECISIONS 194). Dev + debug rebuild: stand-ins 5 to 0. Then
 committed. Two reader reads on those screens, fixes in DECISIONS 195; the second read's fixes are not re-read.
 
+## 2026-11-05 — Change Clothes and the clothes shop as a dressing room
+
+LO picked the v3 dressing-room mockup ("Go ahead", DECISIONS 196). `[ui] clothes_layout = "room"` and
+`clothes_door = "street"` in `0_systems_spec.toml`; `image` on the 18 garments; `locked_text` on the three garage
+items; two portrait rows on the new `wearing`. Engine: the room pages, `when.wearing` and `locked_text`, and theme
+colours for the table pages in every game.
+
+Dev + debug rebuild. This container has no Tweego, so the build was compiled by a local stand-in that puts the new
+story data into the last real build's SugarCube. On the unchanged source it reproduced the committed `index.html` byte
+for byte. Rebuild with real Tweego before a public build. The missing-media count went from 28 to 48: the 18 garment
+pictures and the 2 new portraits, which the media pass is meant to find.
+
+Played in headless Chromium by script, not in Claude in Chrome. What it checked:
+- the slot column and the rail;
+- the door line in jeans, in the short skirt and in the towel;
+- the portrait pick in jeans, the skirt, the towel and the café uniform;
+- a held skirt that will not go on;
+- the dress swap;
+- the shop's reasons, Buy and wear, and the empty rack.
+No JS errors, no sideways scroll at 390px.
+
+Found and not changed: the street's last dress-code rule has no condition and requires bra, panties, top and bottom,
+but its message only says "Going out without a bra…". A girl in her underwear reads that line, here and on the
+ClothingBlock page.
+
 ## 2026-11-08 — Exhibitionism phase 1
 
-DECISIONS 196. The engine's daily cap, the leave rules on Exhibitionism alone, the low-cut top, six looks that pay at
-0, three bridges, the cards. Gates 111 pass, shape 22 pass. Dev + debug rebuild. Not committed. Two reader reads
-on the new scenes: 27 fails fixed, then 0.
+DECISIONS 197. The engine's daily cap, the leave rules on Exhibitionism alone, the low-cut top, six looks that pay at
+0, three bridges, the cards. Gates 111 pass, shape 22 pass. Dev + debug rebuild. Two reader reads on the new scenes:
+27 fails fixed, then 0. LO re-signed `meters.md` and `wardrobe.md` ("Sign it").
+
+Merged with main's dressing room (DECISIONS 196), so this row moved to 197. The low-cut top got a picture path
+(`clothing/low_top.jpg`) like the other garments; missing media is now 49 (main's 48 plus that one). Rebuilt with
+real Tweego after the merge, which replaces the stand-in-compiled build that main carried. After the merge: gates
+118, 0 real fails; shape 22 pass; engine tests 841 pass; skill tests 1,017 pass; importer the same 6 old failures;
+cites 0 wrong. Headless: every look pays, the cap and drink rules hold, the top buys in the new shop, shows on
+the Change Clothes rail and goes on, no sideways scroll at 390px; the pace play reaches 20 on day 7.

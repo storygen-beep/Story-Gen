@@ -10,7 +10,7 @@ TOWEL_RULE = {"conditions": cond({"type": "worn_type", "operator": "eq", "value"
 SLEEP_RULE = {"conditions": cond({"type": "worn_type", "operator": "eq", "value": "sleep_shirt"}),
               "slots_required": ["legwear"],
               "message": "Not in your sleep shirt. Get dressed first."}
-# What she shows out of the house is Exhibitionism's alone (LO, 2026-11-08, exhibition phase 1, DECISIONS 196;
+# What she shows out of the house is Exhibitionism's alone (LO, 2026-11-08, exhibition phase 1, DECISIONS 197;
 # replaces meters.md rule 1's "Corruption OR Exhibitionism", DECISIONS 121). Course of Temptation locks going out
 # by Exhibitionism only (exhibition_study/A_cot.md §4). Corruption still opens her private acts. The slot rules
 # are tried in order.
