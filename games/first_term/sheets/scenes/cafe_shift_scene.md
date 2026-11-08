@@ -1,5 +1,5 @@
-# [REVIEW] Scene — cafe_shift_scene
-> Changed 2026-11-05 (DECISIONS 195): the reader's fails on the recovered lines; Tom's apron line needs Want 15, not 30. Waits for LO's re-sign.
+# [READY] Scene — cafe_shift_scene
+> Changed 2026-11-05 (DECISIONS 195): the reader's fails on the recovered lines; Tom's apron line needs Want 15, not 30. Re-signed by LO 2026-11-05.
 > Signed by LO: LO, 2026-11-04.
 > Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
 

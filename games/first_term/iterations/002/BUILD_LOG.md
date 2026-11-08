@@ -1547,3 +1547,9 @@ Dev + debug rebuild. Not committed. The one new screen, the row's fallback, has 
 The importer's nesting cap dropped 8 written lines on 3 screens; the cap went from 4 to 8 and a build holding the stand-in
 now fails (DECISIONS 194). Dev + debug rebuild: stand-ins 5 to 0. Then
 committed. Two reader reads on those screens, fixes in DECISIONS 195; the second read's fixes are not re-read.
+
+## 2026-11-08 — Exhibitionism phase 1
+
+DECISIONS 196. The engine's daily cap, the leave rules on Exhibitionism alone, the low-cut top, six looks that pay at
+0, three bridges, the cards. Gates 111 pass, shape 22 pass. Dev + debug rebuild. Not committed. Two reader reads
+on the new scenes: 27 fails fixed, then 0.

@@ -779,7 +779,7 @@ LAUNDRY_TEASES = [
               {"type": "clothing_slot", "slot": "bra", "operator": "equipped"}],
      "eff": [want(M, 4), {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 59},
              {"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 59}],
-     "wardrobe": [{"action": "unequip", "item_id": g} for g in ("tshirt", "thin_top")],   # the top is in the washer
+     "wardrobe": [{"action": "unequip", "item_id": g} for g in ("tshirt", "thin_top", "low_top")],   # the top is in the washer
      # scene reader b03 (2026-11-03): "Laura shuts a cupboard" only while she is in the house (Saturday 09:00-16:00
      # she is out, and this tease plays in his garage row then); out of the house a car door does the same job
      "blocks": [GC(cond(*[here(L, r) for r in ("home_kitchen", "home_master_bedroom", "home_bathroom", "home_living_room", "home_hall")], logic="OR"), P(beat(MLT, "bold"))),

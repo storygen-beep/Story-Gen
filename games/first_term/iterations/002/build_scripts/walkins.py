@@ -471,7 +471,7 @@ LAUNDRY_ANSWERS = [go("Load it and go.", node="l_load", mins=2, flags=[fset("did
      go("Wash what you're wearing.", node="hub_mark_garage.hl_laundry_tease3",
         cond_=cond(BOLD, SHOWING, SAW, slot("top"), slot("bra")),
         eff=[npc_add(M, "want", 4), pay("exhibitionism", 59), pay("corruption", 59)], flags=[fset("did_laundry")],
-        wardrobe=[{"action": "unequip", "item_id": g} for g in ("tshirt", "thin_top")]),
+        wardrobe=[{"action": "unequip", "item_id": g} for g in ("tshirt", "thin_top", "low_top")]),
      go("Leave it for later.", node="l_later", mins=0)]
 walkin("walkin_laundry_mark", "Bent at the drum", "home_garage",
     "B4, Mark: back from dinner to his garage row, he finds her bent at the washer. His Lust +2 on the moment; her answers route into his laundry tease ladder (hub_mark_garage) with its own gates and pays.",

@@ -726,7 +726,7 @@ STAGE_WAY = {
     ("corruption", 40): "touch yourself in your bed, in the shower or in a college toilet stall; watch the couple in the park",
     ("corruption", 60): "get on Ryan's couch with him, pull Jake into the gym locker room, walk the street with nothing under your skirt",   # pass 4: the watched dares need Corruption 60 now
     # pass 4 G15: the park and street dress codes open no bra / a short skirt at Corruption 20 for a Covered player
-    ("exhibitionism", 20): "let someone walk in on your shower; once you're Curious, run in the park and walk the street",
+    ("exhibitionism", 20): "let them look: the living room, class, the café, the gym, the park, the street in the low-cut top; and when someone walks in on your shower",
     ("exhibitionism", 40): "let them look at the campus gym and in class, run in the park, walk the street in your short skirt, leave the changing-room curtain open, take your bra off in the college toilet, let the towel slip at home",
     ("exhibitionism", 60): "show off on the lounger in the garden, walk the street with no panties and let the wind have your skirt, drop the towel at home",
 }
@@ -819,7 +819,7 @@ def step_cards(npc, texts, met_flag=None, terminal_text=None, closed_text=None, 
     return out
 
 
-ALL_GARMENTS = ["plain_bra", "sports_bra", "plain_panties", "tshirt", "thin_top", "jeans", "leggings",
+ALL_GARMENTS = ["plain_bra", "sports_bra", "plain_panties", "tshirt", "thin_top", "low_top", "jeans", "leggings",
                 "sleep_shorts", "short_skirt", "sleep_shirt", "towel", "cafe_uniform_normal",
                 "cafe_uniform_sexy", "laura_blue_dress", "zoe_party_dress", "sneakers"]
 # LO, 2026-11-04: she leaves in what she came in. REMEMBER goes before the first thing that takes her clothes off;

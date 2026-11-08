@@ -110,9 +110,11 @@ SMALL_RUNGS = {
     ("corruption", 0): [(5, "Corruption 5: stay behind the shelf in the library's back stacks"),
                         (10, "Corruption 10: move one aisle closer in the library's back stacks"),
                         (15, "Corruption 15: turn the sound up on channel 5")],
-    ("exhibitionism", 0): [(5, "Exhibitionism 5: when someone walks in on your shower, don't grab the towel straight away"),
-                           (10, "Exhibitionism 10: leave the shower door unlocked"),
-                           (15, "Exhibitionism 15: keep leaving the shower door unlocked")],
+    # exhibition phase 1 (LO, 2026-11-08): the looks that pay at 0 name the way to 5; the shower door opens at 5,
+    # so it names the way to 10 (it showed at 10 before, a card against the build)
+    ("exhibitionism", 0): [(5, "Exhibitionism 5: let them look: stretch in the living room with someone home, wear the low-cut top to class or on the street, take your time at the café's table six, squat facing the gym's mirror, run past the bench in the park"),
+                           (10, "Exhibitionism 10: leave the shower door unlocked, and keep letting them look"),
+                           (15, "Exhibitionism 15: keep letting them look, at home, in class and out")],
 }
 
 # ── her two stages: what the next rung opens (the-voice.md R2; DECISIONS: stages at 20/40/60) ──
@@ -127,14 +129,14 @@ for trait_k, bands in [
                      "Reach Hungry (Corruption 60): get on Ryan's couch with him, pull Jake into the gym locker room"),   # pass 4: a watched dare now needs Corruption 60, so it pays nothing at Bold   # the street pays Corruption only on a level's first day out (played 2026-11-04), so no card sends her there for it
                     (60, 80, "Hungry. Shameless is the next release: a crowd, free use.",
                      "Shameless (Corruption 80) opens in the next release")]),
-    ("exhibitionism", [(0, 20, "Covered. Daring opens at 20: no bra, a short skirt out of the house, and bigger tips at the café if you let them look.",
+    ("exhibitionism", [(0, 20, "Covered. Exhibitionism goes up when people look at you and you let them: wear the low-cut top from the clothes shop and go where people are. Daring opens at 20: no bra, a short skirt out of the house, and bigger tips at the café if you let them look.",
                         # pass 3 G15: only places that pay her Exhibitionism while she is Covered (park_run, the
                         # street's looks, the shower walk-ins); the lecture hall pays nothing below Daring
-                        "Reach Daring (Exhibitionism 20): let someone walk in on your shower; once you're Curious, run in the park and walk the street"),   # pass 4 G15: the park and street dress codes need Curious while she is Covered   # round 2: "at home" named the whole house, which pays nothing at 0
-                       (20, 40, "Daring. Showing opens at 40: no panties out, naked for someone you know.",
+                        "Reach Daring (Exhibitionism 20): let them look, once a day each: the living room, class, the café, the gym, the park, the street; and when someone walks in on your shower"),   # pass 4 G15: the park and street dress codes need Curious while she is Covered   # round 2: "at home" named the whole house, which pays nothing at 0
+                       (20, 40, "Daring. Showing opens at 40: no panties out, naked for someone you know, your feed.",
                         # pass 3 G15: the garden pays only from Showing (garden_sun), so it is not a way through Daring
                         "Reach Showing (Exhibitionism 40): let them look at the campus gym and in the lecture hall, run in the park, walk the street in your short skirt, leave the changing-room curtain open, take your bra off in the women's toilet, let the towel slip in the kitchen or the living room"),   # LO, 2026-11-04: the street and park pay to 39 again; the curtain opens here
-                       (40, 60, "Showing. Watched opens at 60: a room watching, a stranger, your feed.",
+                       (40, 60, "Showing. Watched opens at 60: a room watching, a stranger.",
                         # what pays while she is Showing (garden_sun, the wind and the street with no panties, cap 59, the
                         # towel drops); the park stops at 39 (LO, 2026-11-04), and nothing repeatable pays it in the lecture hall or gym
                         "Reach Watched (Exhibitionism 60): show off on the lounger in the garden, walk the street with no panties and let the wind have your skirt, drop the towel in the kitchen or the living room"),

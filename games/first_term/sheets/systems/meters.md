@@ -1,4 +1,5 @@
 # [READY] System — meters
+> Changed 2026-11-08 (DECISIONS 196): going out is Exhibitionism's alone; re-signed by LO 2026-11-08 ("Sign it").
 > Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. File and line cites removed.
@@ -24,19 +25,18 @@ Going out in a level for the first time needs Corruption **or** Exhibitionism at
 
 | going out in | needs |
 |---|---|
-| a short skirt, or no bra | Corruption 20 **or** Exhibitionism 20 |
-| no panties | Corruption 40 **or** Exhibitionism 40 |
+| a short skirt, or no bra | Exhibitionism 20 |
+| no panties | Exhibitionism 40 |
 | a towel, the sleep shirt, underwear, naked | never, this release (as built) |
 
-- The door's message names both numbers: "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)"
-  (DECISIONS 90: name the number).
-- **Engine (no change):** each street-door rule gets a second `lt` item for
-  Corruption, so it blocks only when **both** are under the level. AND of two items; no nested condition (B70).
+- The door's message names the number: "Not in that skirt. Not yet. (Needs Exhibitionism 20.)" (DECISIONS 90).
+- **Changed 2026-11-08 (DECISIONS 196):** what she shows out of the house is Exhibitionism's alone, as in Course of
+  Temptation. Corruption no longer opens these doors. A drink still does, for that night, and pays nothing past her
+  sober stage.
 
 ## Rule 2 · wearing it out raises both
 
-- **The first day out in each level** pays Corruption +1 **and** Exhibitionism +1. After that, each day out in it pays
-  **Exhibitionism +1**, once a day.
+- **Each day out in it** pays **Exhibitionism +1**, once a day (2026-11-08: it no longer pays Corruption, DECISIONS 196).
 - Paid by a **street scene**, once a day: someone sees what she's wearing (Mr. Vance on his porch, a guy at the corner
   shop, a car slowing down). Its line changes by what she wears and her level.
 - Build: one repeatable canvas on `street`, once a day (`out_shown_today` cleared in the daily tick), with a

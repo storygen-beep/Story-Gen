@@ -1004,6 +1004,84 @@ _left = walkins.attach(out)
 assert _left == {"ryan_things"}, _left
 out += walkins.CANVASES
 
+# ── exhibition phase 1 (LO, 2026-11-08; exhibition_study/PHASE1_PROPOSAL.md): stretching on the living-room
+# floor. Stage 1 (the-heat-ladder.md H1): his look happens to her, and the pay is her letting it go on. Ryan or
+# Mark has to be in the room; his Want moves on the way in, whatever she does (H5). Once a day.
+_LEG = {"type": "worn_type", "operator": "eq", "value": "leggings"}
+_LOWTOP = {"type": "clothing_item", "item_id": "low_top", "operator": "equipped"}
+_RY_IN, _MK_IN = here("npc_ryan", "home_living_room"), here("npc_mark", "home_living_room")
+_RY_OUT, _MK_OUT = here("npc_ryan", "home_living_room", False), here("npc_mark", "home_living_room", False)
+_LA_IN, _LA_OUT = here("npc_laura", "home_living_room"), here("npc_laura", "home_living_room", False)
+_E_LO = trait("exhibitionism", "lt", 20)
+out += brake_canvas(solo("living_stretch", "Stretch on the living-room floor",
+    "Leggings on, a mat by the couch, 20 min. With Ryan, or Mark once he has seen her, in the room and her under Daring, holding the stretch while he looks pays Exhibitionism +1 (cap 19). Once a day.",
+    "home_living_room", [
+        node("mat", "The mat", [
+            P("You roll the mat out by the couch and start the routine, slow: hips up, back arched, one leg and then the other."),
+            G(cond(_RY_IN), P("Ryan has stopped pretending to watch the TV. His eyes are on your ass every time you fold forward, and he hasn't blinked."),
+              G(cond(_LOWTOP), P("When you come up, the low-cut top has slipped, and his eyes go straight to your tits."))),
+            G(cond(_RY_OUT, _MK_IN, flag("mark_saw_her", False)), P("Mark's in the armchair behind his paper. He doesn't look up.")),
+            # H7 (the-heat-ladder.md): a man she lives with covers his look at stage 1
+            G(cond(_RY_OUT, _MK_IN, flag("mark_saw_her")), P("Mark's paper lowers an inch in the armchair every time you fold forward. When you look round, it goes back up. A minute later it lowers again."),
+              G(cond(_LOWTOP), P("When you roll onto your back, the low-cut top gapes. The paper stops halfway up, and stays there."))),
+            G(cond(_RY_OUT, _MK_OUT, _LA_IN), P("Mom's on the couch with her wine and the TV. She doesn't look up from her show.")),
+            G(cond(_RY_OUT, _MK_OUT, _LA_OUT), P("Nobody's in. Just you, the mat and the ticking clock.")),
+        ], [
+            go("Hold the stretch.", node="held", mins=20, cond_=cond(_LEG, _E_LO, _RY_IN),
+               eff=[{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 19}, nadd("npc_ryan", "want", 1)], flags=[fset("stretched_today")]),
+            go("Hold the stretch.", node="held", mins=20, cond_=cond(_LEG, _E_LO, _RY_OUT, _MK_IN, flag("mark_saw_her")),
+               eff=[{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 19}, nadd("npc_mark", "want", 1)], flags=[fset("stretched_today")]),
+            go("Finish the routine.", node="done", mins=20, flags=[fset("stretched_today")]),
+            go("Roll up the mat.", loc="home_living_room", mins=1),
+        ]),
+        node("held", "Hold it", [
+            G(cond(_RY_IN), P("You hold it a breath longer than the routine says, your ass up in the air in those leggings. When you sit up, he's very busy with the remote and his face is red."),
+              D("npc_ryan", "What? I'm watching the game.")),
+            G(cond(_RY_OUT, _MK_IN, flag("mark_saw_her")), P("You hold it, longer than the routine says. The paper stays down in his lap. When you sit up, he clears his throat and turns a page he hasn't read."),
+              D("npc_mark", "Don't pull anything.")),
+            GC(cond(trait("exhibitionism", "lt", 5)), T("He was looking. You held it a second too long.")),
+            GC(cond(trait("exhibitionism", "lt", 10)), T("You knew he was looking, and you held it anyway.")),
+            GC(cond(trait("exhibitionism", "lt", 15)), T("You held it for him. You'll do the routine here again.")),
+            GC(cond(trait("exhibitionism", "lt", 20)), T("Next time you'll hold it longer, and not pretend it's for the stretch.")),
+            P("The mat lives behind the couch. Same time tomorrow, if he's in."),
+        ], [go("Roll up the mat.", loc="home_living_room", mins=1)]),
+        node("done", "The routine", [
+            P("You finish the routine and sit back on your heels, warm all over. The mat lives behind the couch."),
+            G(cond(_RY_IN), P("Ryan's eyes snap back to the TV the second you look round.")),
+            G(cond(_RY_OUT, _MK_IN, flag("mark_saw_her")), P("Mark's paper goes back up.")),
+        ], [go("Roll up the mat.", loc="home_living_room", mins=1)]),
+    ], prio=2), "stretched_today")
+
+# ── exhibition phase 1 (LO, 2026-11-08): the bridge at each stage's top (the-heat-ladder.md H6). Every act pays only
+# to the top of its stage (DECISIONS 188), so 19, 39 and 59 need one step over. Alone in her room, her own beat turns
+# what happened into a wish, and that carries her into the next stage (the bathroom mirror; her room is the wardrobe
+# room, gate `nothing one-time at the shop or wardrobe`). One time each, fires on entry, sober only
+# (a drink's +20 counts in the check, so the window reads 'lt' her next stage and fails while she's Tipsy).
+for _lo, _name, _beat, _wish in [
+    (19, "The mirror, after Covered",
+     [P("In the bathroom mirror you count up who looked at you this week, and how you let every one of them."),
+      P("You picture walking out tomorrow with no bra on: your tits loose, your nipples showing through whatever you wear, and every one of them looking.")],
+     "Tomorrow you could leave it off."),
+    (39, "The mirror, after Daring",
+     [P("In the mirror you think about panties like they're the last thing in the way."),
+      P("You picture the street tomorrow in a short skirt with nothing under it, the breeze on your bare ass, and whoever's on the street turning round. Your face is hot, and you don't stop picturing it.")],
+     "Tomorrow, nothing under it."),
+    (59, "The mirror, after Showing",
+     [P("You picture yourself naked in front of the mirror, turning slowly, the way you'd turn if someone was watching."),
+      P("One man at a time isn't enough any more. You want a room looking, all at once, and you want to know you let them.")],
+     "Next time, let a whole room watch."),
+]:
+    out.append({"id": f"exh_bridge_{_lo + 1}", "name": _name,
+        "description": f"One time, at the bathroom mirror, at Exhibitionism {_lo} (sober): her own beat turns the looks into a wish. Exhibitionism set to {_lo + 1}, into the next stage.",
+        "trigger": {"location": "home_bathroom", "is_repeatable": False, "priority": 9, "is_active": True,
+                    "conditions": cond(flag("opening_done"), trait("exhibitionism", "gte", _lo), trait("exhibitionism", "lt", _lo + 1),
+                                       *[here(n, "home_bathroom", False) for n in ("npc_ryan", "npc_mark", "npc_laura")])},
+        "nodes": [node("mirror", _name.split(",")[0].replace("The mirror", "The mirror"), [*_beat, T(_wish)],
+                       [go("Look a while longer.", loc="home_bathroom", mins=10,
+                           # `set`, not `add`: the daily cap counts adds, and this one-time step must not be eaten by it
+                           eff=[{"targetType": "player", "trait": "exhibitionism", "op": "set", "value": _lo + 1}],
+                           flags=[fset(f"exh_wish_{_lo + 1}")])])]})   # H6: the wish is recorded
+
 text = ("# =============================================================================\n"
         "# First Term — 5 · scenes · HOME (iteration 002, part 2): every house room's alone rows,\n"
         "# the master bedroom at night, the random events at home. sheets/systems/home_life.md,\n"
