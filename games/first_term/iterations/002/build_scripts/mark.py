@@ -22,7 +22,10 @@ SLEEP_SHIRT = {"type": "worn_type", "operator": "eq", "value": "sleep_shirt"}
 # Bare legs (LO, 2026-10-08, Q72): shorts, a skirt, the sleep shirt, a dress, or nothing below,
 # which is every outfit without jeans or leggings.
 BARE_LEGS = [{"type": "clothing_item", "item_id": "jeans", "operator": "unequipped"},
-             {"type": "clothing_item", "item_id": "leggings", "operator": "unequipped"}]
+             {"type": "clothing_item", "item_id": "leggings", "operator": "unequipped"},
+             # the gym clothes (DECISIONS 198): track pants and the sheer leggings cover her legs; the tiny shorts don't
+             {"type": "clothing_item", "item_id": "track_pants", "operator": "unequipped"},
+             {"type": "clothing_item", "item_id": "sheer_leggings", "operator": "unequipped"}]
 NOT_LATE = flag("came_home_late", False)
 LAURA_IN_BED = {"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_laura", "operator": "is_present"}   # "your mother sleeps" upstairs: she is in her bed, not on the stairs   # on a late night Laura is on the stairs, not asleep
 COUNT_CLEAR = [funset("ryan_covered"), funset("mark_money_week"), fset("sunday_counted_today"), funset("grades_seen")]
@@ -770,7 +773,7 @@ LAUNDRY_TEASES = [
                 # on a Saturday in the garage she is out, and his line stops at "Jesus, @player."
                 GC(cond(SLEEP_SHIRT, here(L, "home_kitchen")), P(beat(MLT, "daring_shirt"))),
                 GC(cond(SLEEP_SHIRT), P(beat(MLT, "daring_shirt").replace(LAURA_IN_HOUSE_Q, '"Jesus, @player."'))),
-                *[GC(cond(_wt(t)), P(beat(MLT, "daring_jeans"))) for t in ("jeans", "leggings", "shorts")],
+                *[GC(cond(_wt(t)), P(beat(MLT, "daring_jeans"))) for t in ("jeans", "leggings", "shorts", "track_pants", "gym_shorts", "sheer_leggings")],   # daring_jeans names no garment (mark_laundry_teases.md)
                 VID("a girl bending over to load a front-loading washer, her skirt riding up, a man at a workbench watching", "girl bends over washing machine skirt rides up", "bending over laundry panties showing", pool_dir="sex/mark_laundry_bend_t4"),
                 # pass 3 B4: the garage talks
                 D(M, "Take your time down there. Find every sock."), ME("I'm looking, Mark."), D(M, "So am I.")]},

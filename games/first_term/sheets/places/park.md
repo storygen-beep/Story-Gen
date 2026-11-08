@@ -1,4 +1,5 @@
 # [READY] Place — Park
+> Changed 2026-11-08 (DECISIONS 198, 199): the run reads the gym clothes, one line each, the pay unchanged; from Exhibitionism 40 no panties is fine here, as on the street. Re-signed by LO 2026-11-08 ("Sign 4 pages").
 > Signed by LO: LO, 2026-11-04.
 > Changed 2026-11-04, LO's answers: the run pays Exhibitionism +1, cap 39 (F); signed by LO 2026-11-04.
 
@@ -72,3 +73,14 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has h
 | the couple as the first explicit scene | LO, 2026-10-08 |
 | 10 minutes to walk there, its own cost | LO, 2026-10-08 (question 44, LO's note) |
 | the feed and the selfie live on the phone only | LO's play note, 2026-10-08 (sweep A1-34, K6) |
+
+## The gym clothes on the run (2026-11-08, DECISIONS 198)
+
+Lines only; the run pays as before. Track pants: nobody looks once. The gym tank: two guys on the benches watch both
+laps. Tiny shorts with the sports bra: the whole loop watches and somebody whistles; with a top: the men on the benches
+turn. Sheer leggings: her panties show in the sun, and someone says "Oh my God."; with no panties, everything shows.
+
+## Panties at the park (2026-11-08, DECISIONS 199)
+
+LO: "match the streets". The park's leave rules (shared with the gym): at Exhibitionism 20 she may run in a bra with
+nothing over it, with panties on; from 40 a bra and a bottom will do, panties or not, as on the street.

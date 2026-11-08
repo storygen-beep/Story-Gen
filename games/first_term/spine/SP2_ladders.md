@@ -1,4 +1,5 @@
 # [READY] SP2 · The ladders — First Term
+> Changed 2026-11-08, LO's call ("Move to 80", DECISIONS 201): posing naked for the whole figure-drawing class opens at On Display (Exhibitionism 80), as Course of Temptation gates its art-class nude model; what shows sets the stage (DECISIONS 200). Signed by LO 2026-11-08.
 > Signed by LO: LO, 2026-11-04.
 > Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Mark: nobody counts the rent twice (Q6); the paid route and goal 1's body route are cut.
 > Changed 2026-11-04: Ryan's Lust starts at 0 (Q1); his day-one final no is gone; Laura keeps no Want; one hall (Q7); Mark's and Tom's repeatables later (Q3). Waits for LO's re-sign.
@@ -56,9 +57,11 @@
   - Bold · Showing: private sexual contact with someone she knows (hands, oral, sex); naked by choice
     for someone she knows; paid at the first price; a first D/s night with a check-in.
   - Hungry · Watched: sex with strangers able to see; a threesome with known people; sharing; prices
-    past the first; the taboo act at home; naked or a flash for a group, known or not (posing for the
-    figure-drawing class; LO, 2026-10-07: the stage turns on how many see her).
-  - Shameless · On Display: sex in front of a crowd; group or free use; her own plan built on sex.
+    past the first; the taboo act at home; her bare body in front of strangers or a group (a flash of her
+    breasts). What shows sets the stage, and the audience grows with it (DECISIONS 200).
+  - Shameless · On Display: sex in front of a crowd; group or free use; her own plan built on sex; all of
+    her naked in front of a group (posing nude for the figure-drawing class; LO, 2026-11-08: "Move to 80",
+    as CoT gates its art-class nude model at its Exhibitionism 5).
   - At home, every person she lives with starts with an accident that happens to her; her first chosen act
     with him needs that accident's flag (`the-heat-ladder.md` H2). The accident watching scenes (the door
     crack, Laura's gaps, their door, the back stacks) stay at Good Girl: the look happens to her, and only

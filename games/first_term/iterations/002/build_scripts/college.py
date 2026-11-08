@@ -890,29 +890,78 @@ out.append({
 SPORTS_ONLY = [{"type": "clothing_item", "item_id": "sports_bra", "operator": "equipped"},
                {"type": "clothing_slot", "slot": "top", "operator": "unequipped"},
                {"type": "clothing_slot", "slot": "dress", "operator": "unequipped"}]
+# Gym clothes (LO, 2026-11-08, DECISIONS 198; exhibition_study/GYM_CLOTHES_PLAN.md): the gym's ladder from normal
+# to slutty. The floor reads what she trains in, one line per step, most daring first, each group closed off
+# from the others so no two show together. Track pants and the tank open on day 1; the tiny shorts need
+# Exhibitionism 40 and the sheer leggings 60 (their own wear locks, 0_systems_spec.toml).
+SHEER = {"type": "worn_type", "operator": "eq", "value": "sheer_leggings"}
+NOT_SHEER = {"type": "worn_type", "operator": "neq", "value": "sheer_leggings"}
+SHORTS = {"type": "worn_type", "operator": "eq", "value": "gym_shorts"}
+NOT_SHORTS = {"type": "worn_type", "operator": "neq", "value": "gym_shorts"}
+TANK = {"type": "clothing_item", "item_id": "gym_tank", "operator": "equipped"}
+NO_TANK = {"type": "clothing_item", "item_id": "gym_tank", "operator": "unequipped"}
+TRACK = {"type": "worn_type", "operator": "eq", "value": "track_pants"}
+LEGGINGS = {"type": "worn_type", "operator": "eq", "value": "leggings"}
+TOP_ON = {"type": "clothing_slot", "slot": "top", "operator": "equipped"}
+TSHIRT = {"type": "clothing_item", "item_id": "tshirt", "operator": "equipped"}
+
+
+GYM_ACC = "gym_accident_today"   # one gym accident a day, cleared at midnight (0_systems_spec.toml)
+
+
+def exh(cap):
+    return {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": cap}
+
+
+GYM_FLOOR_BY_CLOTHES = [
+    G(cond(SHEER),
+      P("The sheer leggings go see-through under the gym lights, and you knew they would. Your ass shows through them on every squat. The whole floor has stopped pretending. Two guys at the rack, the one on the rowing machine, and the guy wiping down the benches all watch your ass go down and come up again."),
+      WHO("Hey. Watch it. This is a college gym."),
+      P("That's the guy at the front desk. He says it loud, and then he stays at his desk. He keeps watching too.")),
+    G(cond(SHORTS, NOT_SHEER),
+      P("The tiny gym shorts ride up your ass by the second set and stay there. You don't pull them down. Three guys drift over from the rack to use the bench right next to yours, and none of them does a single rep.")),
+    G(cond(*SPORTS_ONLY, NOT_SHORTS, NOT_SHEER),
+      P("Just the sports bra and your bottoms. Your tits bounce in it with every step across the floor, and in the mirror wall you can see two guys at the rack stop counting their reps. One looks away when you catch him. The other doesn't.")),
+    G(cond(TANK, NOT_SHORTS, NOT_SHEER),
+      P("The gym tank is tight on you and shows off everything. In the mirror wall a guy at the rack is watching your tits instead of his form. He drops his bar too early.")),
+    G(cond(LEGGINGS, TSHIRT),
+      P("Leggings and a T-shirt. In the mirror wall the leggings show the whole shape of your ass every time you bend.")),
+    G(cond(TRACK, TSHIRT),
+      P("Track pants and a T-shirt. Nobody looks twice, and you get a proper workout in.")),
+    G(cond({"type": "clothing_item", "item_id": "jeans", "operator": "equipped"}), P("You're at the gym in jeans. It's stupid, and you'll feel it in every squat.")),
+]
+
 out.append({
     "id": "gym_workout", "name": "Work out",
-    "description": "The gym: 60 min, energy -15; in just a sports bra at Daring, exhibitionism +1 (campus_gym.md). Once a day.",
+    "description": "The gym: 60 min, energy -15. What she trains in decides who looks: leggings under 20 open the mirror squat (+1, cap 19); a sports bra alone at Daring, +1 cap 39; the tiny shorts at 40, +1 cap 59; the sheer leggings at 60, +1 cap 79 (campus_gym.md, DECISIONS 198). Once a day.",
     "trigger": {"location": "campus_gym", "is_repeatable": True, "priority": 4, "is_active": True,
-                "conditions": cond(flag("worked_out", False))},
+                "conditions": cond(flag("worked_out", False)),
+                # the gym accidents (below): 1 in 4 each, one a day; each checks its own clothes on its own trigger
+                "substitutions": [{"target_canvas_id": c, "chance": 0.25, "conditions": cond(flag(GYM_ACC, False))}
+                                  for c in ("gym_accident_shorts", "gym_accident_strap", "gym_accident_leggings")]},
     "nodes": [node("floor", "The gym floor", [
         P("Treadmill, then the weights, then the mats. The mirror wall shows you everything you're doing, and everyone else doing it too."),
         WHO("You using that bench, or can I jump in?"),   # LO 2026-11-03: someone on the gym floor
-        G(cond(*SPORTS_ONLY), P("Just the sports bra and your bottoms. Your tits bounce in it with every step across the floor, and in the mirror wall you can see two guys at the rack stop counting their reps. One looks away when you catch his eye. The other doesn't, but he doesn't come over either. Not yet.")),
-        G(cond({"type": "clothing_item", "item_id": "jeans", "operator": "equipped"}), P("You're at the gym in jeans. It's stupid, and you'll feel it in every squat.")),
+        *GYM_FLOOR_BY_CLOTHES,
     ], [
         # pass 3 D44 (the-surfaces.md R9): an act on her body ends on a screen of it, not a toast; the hour is on the button (H28)
         go("Work out.", node="worked", mins=60, costs=[{"trait": "energy", "value": 15}],
            eff=[add("energy", -15)], flags=[fset("worked_out")], cond_=cond(flag("worked_out", False))),
         go("Work out, and let them look.", node="looked", mins=60, costs=[{"trait": "energy", "value": 15}],
            # pass 4 E94: the two guys at the rack watch her, so campus talks (once a day, worked_out)
-           eff=[add("energy", -15), {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": CAP_DARING},
-                add("campus_talk", 1, clamp=False)],
-           flags=[fset("worked_out")], cond_=cond(flag("worked_out", False), trait("exhibitionism", "gte", 20), *SPORTS_ONLY)),
+           eff=[add("energy", -15), exh(CAP_DARING), add("campus_talk", 1, clamp=False)],
+           flags=[fset("worked_out")], cond_=cond(flag("worked_out", False), trait("exhibitionism", "gte", 20), *SPORTS_ONLY, NOT_SHORTS, NOT_SHEER)),
         # exhibition phase 1 (LO, 2026-11-08): under Daring, in leggings, a look happens; she lets it go on
         go("Squat facing the mirror wall.", node="set", mins=60, costs=[{"trait": "energy", "value": 15}],
-           eff=[add("energy", -15), {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 19}], flags=[fset("worked_out")],
-           cond_=cond(flag("worked_out", False), trait("exhibitionism", "lt", 20), {"type": "worn_type", "operator": "eq", "value": "leggings"})),
+           eff=[add("energy", -15), exh(19)], flags=[fset("worked_out")],
+           cond_=cond(flag("worked_out", False), trait("exhibitionism", "lt", 20), LEGGINGS)),
+        # gym clothes (DECISIONS 198): the shorts are a Showing act, the sheer leggings a stage-4 one; each pays to its stage's top
+        go("Stretch on the mats facing the rack.", node="mats", mins=60, costs=[{"trait": "energy", "value": 15}],
+           eff=[add("energy", -15), exh(CAP_BOLD), add("campus_talk", 1, clamp=False)], flags=[fset("worked_out")],
+           cond_=cond(flag("worked_out", False), trait("exhibitionism", "gte", 40), SHORTS, NOT_SHEER)),
+        go("Do your squats anyway.", node="sheer", mins=60, costs=[{"trait": "energy", "value": 15}],
+           eff=[add("energy", -15), exh(79), add("campus_talk", 1, clamp=False)], flags=[fset("worked_out")],
+           cond_=cond(flag("worked_out", False), trait("exhibitionism", "gte", 60), SHEER)),
         go("Not today.", loc="campus"),
     ]),
     node("set", "The mirror wall", [
@@ -925,14 +974,92 @@ out.append({
         P("The guys at the rack are in most afternoons. So is the mirror wall."),
     ], [go("Towel off.", loc="campus_gym")]),
     node("worked", "The last set", [
-        P("You come off the last set dripping, your thighs burning, sweat running down between your tits. In the mirror wall a guy wiping down the next bench watches your ass all the way to the water fountain. He doesn't come over. Not yet."),   # scene reader b03: the not-yet (H4.3)
+        G(cond({"type": "worn_type", "operator": "neq", "value": "track_pants"}),
+          P("You come off the last set dripping, your thighs burning, sweat running down between your tits. In the mirror wall a guy wiping down the next bench watches your ass all the way to the water fountain. He doesn't look away when you catch him.")),
+        # in track pants with anything but the T-shirt the floor already had someone looking, so he still is
+        G(cond(TRACK, {"type": "clothing_item", "item_id": "tshirt", "operator": "unequipped"}),
+          P("You come off the last set dripping, your thighs burning, sweat running down between your tits. In the mirror wall a guy wiping down the next bench watches your ass all the way to the water fountain. He doesn't look away when you catch him.")),
+        G(cond(TRACK, TSHIRT),
+          P("You come off the last set dripping, your thighs burning, sweat running down between your tits under the T-shirt. Nobody's watching. The track pants did their job.")),
+        P("The gym's open every day. The guys at the rack are in most afternoons."),
     ], [go("Towel off.", loc="campus_gym")]),
     node("looked", "Let them look", [
-        P("You do the mats last, in the sports bra and nothing over it, and you stretch your hamstrings with your ass up toward the rack. Your tits sit heavy and damp in the bra, and your nipples are hard through it. The two guys have stopped pretending to count."),
+        P("You do the mats last, in the sports bra and nothing over it, and you stretch your hamstrings with your ass up toward the rack. Your tits sit heavy and damp in the bra, and your nipples are hard through it. The two guys at the rack have given up on their sets."),
         WHO("Jesus."),
         P("You hear it under the clank of the plates, and you hold the stretch a breath longer for him."),
+        P("They're here most afternoons. They'll be looking for you tomorrow."),
+    ], [go("Towel off.", loc="campus_gym")]),
+    node("mats", "The mats", [
+        # a small group seeing underwear-level skin is stage 3, Showing (the-heat-ladder.md H1, audience check 2026-11-08)
+        P("You take the mat right in front of the bench and stretch out in the tiny shorts, legs wide, then folded over with your ass in the air. The shorts are up your crack, the bottom of your ass bare on both sides, and you leave them there. The three guys at the bench beside you aren't even holding their bars."),
+        WHO("Bro. Bro, look."),
+        P("You go into the next stretch slower, for all three of them. The back of your neck is hot, and between your legs is hotter."),
+        GC(cond(trait("exhibitionism", "lt", 60)), T("They'll tell everybody. It'll be all over campus. Good.")),
+        GC(cond({"type": "worn_exposure", "operator": "gte", "value": 0}), T("Let them talk. You'd do it again in less.")),
+    ], [go("Towel off.", loc="campus_gym")]),
+    node("sheer", "Squats in the sheer leggings", [
+        P("You do your squats anyway, facing the mirror wall, with the lights straight through the sheer leggings. Every time you go down your ass spreads in them, and the whole floor can see it."),
+        G(cond({"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}),
+          P("In the mirror you can see your own panties through the cloth, every line of them. So can the guy on the rowing machine. He's stopped rowing.")),
+        G(cond({"type": "clothing_slot", "slot": "underwear", "operator": "unequipped"}),
+          P("You're not wearing panties, and it shows. Your pussy shows through the sheer cloth when you go all the way down, and somebody behind you drops a plate.")),
+        WHO("I said watch it."),
+        P("The desk guy says it, and then he stays at the desk and watches the rest of your set with everybody else."),
+        T("He can warn you all he likes. He's still looking."),
+        P("Tomorrow the whole floor will be waiting to see what you wear."),
     ], [go("Towel off.", loc="campus_gym")]),
     ]})
+
+
+# Gym accidents (DECISIONS 198): one a day, 1 in 4 each when she starts a workout, and each reads what she trains in. Whoever sees pays on the moment: there is no meter for a stranger at the
+# rack, so the gym's talk goes to campus_talk on both answers (the-heat-ladder.md H5). Fixing it pays her nothing;
+# letting it be is her choice and pays to the top of the act's own stage (H1; the-arc.md A4).
+def gym_accident(cid, name, conds, blocks, fix, fix_text, let, let_gate, cap, let_text, hook):
+    done = [add("energy", -15), add("campus_talk", 1, clamp=False)]
+    flags = [fset(GYM_ACC), fset("worked_out")]
+    cost = [{"trait": "energy", "value": 15}]
+    return {"id": cid, "name": name,
+            "description": f"Random gym accident (campus_gym.md, DECISIONS 198): {name}. 1 in 4, one a day; campus talk +1 on both answers, letting it be +1 to cap {cap}.",
+            # opens from "Work out" (gym_workout's substitutions, 1 in 4), never on entry: the gym is a changing room now,
+            # and a random event there would hide its Change Clothes link (gate `nothing one-time at the shop or wardrobe`)
+            "trigger": {"location": "campus_gym", "is_repeatable": True, "priority": 5, "is_active": True, "substitution_only": True,
+                        "conditions": cond(flag("opening_done"), flag(GYM_ACC, False), flag("worked_out", False), *conds)},
+            "nodes": [
+                node("event", name, blocks, [
+                    go(fix, node="fix", mins=60, costs=cost, eff=list(done), flags=list(flags)),
+                    go(let, node="let", mins=60, costs=cost, eff=done + [exh(cap)], flags=list(flags), cond_=cond(*let_gate) if let_gate else None),
+                ]),
+                node("fix", fix.rstrip("."), [P(fix_text), P(hook)], [go("Towel off.", loc="campus_gym")]),
+                node("let", let.rstrip("."), [P(let_text), P(hook)], [go("Towel off.", loc="campus_gym")]),
+            ]}
+
+
+out.append(gym_accident("gym_accident_leggings", "The leggings go see-through", [LEGGINGS, TOP_ON, {"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}],
+    [P("You bend for the bar on your second set, and a guy on the next bench clears his throat."),
+     WHO("Hey. You know those go see-through, right? When you bend like that?"),
+     P("In the mirror wall you see it. Under the gym lights your leggings have gone thin as tights over your ass, and your panties show right through them.")],
+    "Pull your top down over your ass.",
+    "You tug your top down as far as it goes and keep it there with one hand for the rest of the workout, face on fire. He goes back to his bench. He keeps glancing at your hand.",
+    "Finish the set.", [], 19,
+    "You don't cover up. You finish the set, slow, bending all the way down every time, and you know exactly what he's seeing through the leggings. He forgets his own set. When you stand up he's still holding the bar.",
+    "He's on that bench most afternoons. He'll be watching what you wear next time."))
+
+out.append(gym_accident("gym_accident_strap", "The strap slips", [*SPORTS_ONLY, NOT_SHEER, trait("exhibitionism", "gte", 20)],
+    [P("You're two minutes into a hard run on the treadmill when the sports bra gives up. One strap slides off your shoulder, and your left tit bounces right out of the cup, nipple and all, in the mirror wall."),
+     P("The guy on the next treadmill nearly goes off the back of his.")],
+    "Fix it fast.",
+    "You slap the treadmill to a stop and yank the bra back up in one move, your face burning. He's still staring when you look round, and he doesn't pretend he wasn't.",
+    "Keep running a few steps.", [], CAP_DARING,
+    "You keep running. Three steps, four, five, your bare tit bouncing out of the bra for the whole row of treadmills, before you tuck it back in. You don't stop the machine. The guy next to you has stopped his.",
+    "He runs at this time most days. He'll take the treadmill next to yours again."))
+
+out.append(gym_accident("gym_accident_shorts", "The shorts ride up", [SHORTS, NOT_SHEER, trait("exhibitionism", "gte", 40), {"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}],
+    [P("You're on the leg press with your knees up to your chest, and the tiny shorts ride all the way up. The whole crotch of them has pulled to one side. From where the guys at the rack are standing, they can see your panties, pulled tight between your legs, and the bare curve of your ass on either side.")],
+    "Pull them down.",
+    "You let the sled down and pull the shorts straight, quick. Somebody at the rack laughs. Your cheeks are red, and not from the press.",
+    "Do the next rep.", [], CAP_BOLD,
+    "You don't touch them. You do the next rep, and the one after, knees to your chest each time, the shorts pulled aside, your panties tight over your pussy, and nobody at the rack is lifting a thing.",
+    "They train here most afternoons. Next time they'll find a reason to use the rack by the leg press."))
 
 out.append({
     "id": "lecture_timetable", "name": "Read the timetable on the door",

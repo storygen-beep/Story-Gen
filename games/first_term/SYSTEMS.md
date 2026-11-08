@@ -1,4 +1,5 @@
 # [READY] The systems — First Term (layer 4: systems as slots)
+> Changed 2026-11-08, LO's call ("Move to 80", DECISIONS 201): posing naked for the whole figure-drawing class opens at On Display (Exhibitionism 80), as Course of Temptation gates its art-class nude model; what shows sets the stage (DECISIONS 200). Signed by LO 2026-11-08.
 
 > [READY] · layer 4 · drafted 2026-10-06 · updated 2026-10-08 (§14, the park, at the end; the parties card, the page 7 line, needs not cards) · updated 2026-10-09 (the late keys, key 1 below). Changed 2026-10-09, signed by LO: LO, 2026-10-09.
 > A game-only page beside `DIRECTION.md` (layer 2) and `LIVES.md` (layer 3). Moved here from
@@ -81,9 +82,9 @@
   Under the signed heat table, where people could see it is Hungry (`SP2_ladders.md:41`).
 - **Figure drawing:** the class draws a nude model, and posing is the college exhibition ladder (LO,
   chat). The stages follow the heat table: naked for the art lecturer alone is Bold · Showing
-  (`SP2_ladders.md:39-40`); naked in front of the class is strangers able to see, Hungry · Watched
-  (`:41-43`). **kept (LO, 2026-10-07):** naked or a flash for a group is Hungry · Watched; signed SP2 says
-  so (`SP2_ladders.md:41-43`).
+  (`SP2_ladders.md:39-40`); naked in front of the whole class is On Display, Exhibitionism 80 (LO,
+  2026-11-08: "Move to 80", DECISIONS 201; CoT gates its art-class nude model at its Exhibitionism 5,
+  `heat_study/p2_cot.md:68`). Was Hungry · Watched (LO, 2026-10-07); what shows sets the stage now (DECISIONS 200).
 - **Exams:** midterms about weeks 7–8, finals about weeks 15–16 (`DIRECTION.md:119-120`).
   - A reminder comes a week before.
   - She makes one choice inside the exam (LO, chat 10-06): focus, or copy from the study guy. The lewd
@@ -102,7 +103,7 @@
     privately for her own drawings.
     - Curious · Daring: an F/F tease while she poses clothed (`SP2_ladders.md:37-38`).
     - Bold · Showing: naked for her alone (`:39-40`).
-    - Later: posing naked in front of the class, Hungry · Watched (`:41-43`).
+    - Later: posing naked in front of the whole class, On Display, Exhibitionism 80 (DECISIONS 201).
 
     The grade rises as a side effect, never as the price.
   - **The Biology TA (a woman, ~28):** she is the shy one, and Ella leads and seduces her, F/F. No grade

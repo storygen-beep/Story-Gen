@@ -24,7 +24,7 @@ starting_week = 1
 [settings]
 narration_person           = "second"      # IMMUTABLE once a release ships (ledger, DECISIONS 31)
 clothing_enabled           = true
-wardrobe_location          = ["home_ella_room", "cafe", "college_womens_toilet", "zoe_bedroom"]
+wardrobe_location          = ["home_ella_room", "cafe", "college_womens_toilet", "zoe_bedroom", "campus_gym"]   # the gym's locker room (DECISIONS 198)
 wardrobe_anywhere          = false         # the dress rules are real: change in a room that has her clothes
 wardrobe_change_on_refusal = true
 saved_outfits              = true
@@ -204,6 +204,8 @@ flagEffects = [
   { targetType = "player", flag = "gym_look_today", op = "unset" },
   { targetType = "player", flag = "park_look_today", op = "unset" },
   { targetType = "player", flag = "street_look_today", op = "unset" },
+  # gym clothes (DECISIONS 198): one gym accident a day
+  { targetType = "player", flag = "gym_accident_today", op = "unset" },
   # the sex scenes in the cold places, once a day each (heat proposal A1-A7, DECISIONS 147; heat_a.py, and A4 in
   # 3_activities.toml shop_try_on)
   { targetType = "player", flag = "jake_lockers_today", op = "unset" },
@@ -621,6 +623,7 @@ type = "sneakers"
 
 [[clothing]]
 id = "leggings"
+description = "Thin. Bend over in good light and they go see-through."
 name = "Leggings"
 slot = "bottom"
 image = "clothing/leggings.jpg"
@@ -656,6 +659,7 @@ exposure = 1
 
 [[clothing]]
 id = "short_skirt"
+description = "Short. One gust of wind and the street sees what's under it."
 locked_text = "Held in the garage"   # shown only when no trait gate explains the lock
 name = "Short skirt"
 slot = "bottom"
@@ -669,6 +673,7 @@ conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subjec
 
 [[clothing]]
 id = "thin_top"
+description = "Thin. Your bra shows right through it."
 locked_text = "Held in the garage"   # shown only when no trait gate explains the lock
 name = "Sheer blouse"
 slot = "top"
@@ -682,6 +687,7 @@ conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subjec
 
 [[clothing]]
 id = "low_top"
+description = "Cut low. Lean forward and they can see right down it."
 name = "Low-cut top"
 slot = "top"
 price = 15
@@ -693,6 +699,7 @@ image = "clothing/low_top.jpg"
 
 [[clothing]]
 id = "sports_bra"
+description = "Tight and small. Made for the gym, and it shows everything."
 locked_text = "Held in the garage"   # shown only when no trait gate explains the lock
 name = "Sports bra"
 slot = "bra"
@@ -702,6 +709,54 @@ type = "sports_bra"
 beauty = 1
 # the garage hold (rent_short_3, money_pressure.md, DECISIONS 121): while Mark keeps it, it can't be worn
 conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "garage_holds_sports_bra", operator = "is_false" } ] }
+
+# Gym clothes (LO, 2026-11-08, DECISIONS 198; exhibition_study/GYM_CLOTHES_PLAN.md): the gym's ladder from
+# normal to slutty. Track pants and the tank open on day 1; the shorts need Exhibitionism 40, the sheer
+# leggings 60 (Course of Temptation sells micro shorts at its level 3, sheer at 5: A_cot.md:212-213).
+# The gym reads them by type; the park and Jake's training read them too.
+[[clothing]]
+id = "track_pants"
+description = "Loose and comfortable. Nobody looks twice."
+name = "Track pants"
+slot = "bottom"
+image = "clothing/track_pants.jpg"
+price = 10
+type = "track_pants"
+
+[[clothing]]
+id = "gym_tank"
+description = "Fitted. It shows off everything you've got."
+name = "Gym tank"
+slot = "top"
+image = "clothing/gym_tank.jpg"
+price = 15
+type = "gym_tank"
+beauty = 1
+
+[[clothing]]
+id = "gym_shorts"
+description = "Tiny. They ride up every time you lift."
+name = "Tiny gym shorts"
+slot = "bottom"
+image = "clothing/gym_shorts.jpg"
+price = 20
+type = "gym_shorts"
+beauty = 2
+corruption = 1
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 } ] }
+
+[[clothing]]
+id = "sheer_leggings"
+description = "You can see right through them. Everybody can."
+name = "Sheer leggings"
+slot = "bottom"
+image = "clothing/sheer_leggings.jpg"
+price = 30
+type = "sheer_leggings"
+beauty = 2
+corruption = 2
+exposure = 1
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 } ] }
 
 [[clothing]]
 id = "cafe_uniform_normal"

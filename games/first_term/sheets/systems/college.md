@@ -1,4 +1,5 @@
 # [READY] System — college
+> Changed 2026-11-08, LO's call ("Move to 80", DECISIONS 201): posing naked for the whole figure-drawing class opens at On Display (Exhibitionism 80), as Course of Temptation gates its art-class nude model; what shows sets the stage (DECISIONS 200). Signed by LO 2026-11-08.
 > Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. File and line cites removed.
@@ -143,7 +144,8 @@ Every grade starts at 50 (guess). The exam result reads `intelligence` plus that
 | 2 · Curious · Daring | Exhibitionism or Corruption gte 20 | a flash for Hale (Hale B 2) · she watches the guy beside her |
 | 2, continued | the exam only | flirting for the study guy's paper · a flash for the cocky guy's answers |
 | 3 · Bold · Showing | Corruption gte 40 | a touch in Hale's office (Hale B 3–4) · her hand under the desk, unseen |
-| 4 · Hungry · Watched | locked in 0.1; the button says "Needs Corruption 60" | under the desk with the class there · posing nude for the class |
+| 4 · Hungry · Watched | locked in 0.1; the button says "Needs Corruption 60" | under the desk with the class there |
+| 5 · Shameless · On Display | a later release | posing nude for the whole figure-drawing class (Exhibitionism 80; LO, 2026-11-08) |
 
 **Waiting for 0.2** (SP5): the art lecturer's posing, the Biology TA, and the dean's route.
 In 0.1 the three of them are talk hubs with one line on her grade and one on her clothes.
