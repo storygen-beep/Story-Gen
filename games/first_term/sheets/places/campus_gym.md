@@ -1,4 +1,5 @@
 # [READY] Place — Gym
+> Changed 2026-11-08 (DECISIONS 203, LO: "Yess"): letting bare tits show is Watched (60); letting her bare pussy show is On Display (80), not written this release. Re-signed by LO 2026-11-08 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 198): the gym clothes, from normal to slutty; three accidents; the locker room is a changing room. Re-signed by LO 2026-11-08 ("Sign 4 pages").
 > Signed by LO: LO, 2026-11-04.
 > Changed 2026-11-04, LO's answers: "Finish your set." needs Exhibitionism 60 and pays to cap 79 (B); signed by LO 2026-11-04.
@@ -77,7 +78,7 @@ Both answers finish the workout (60 min, energy −15) and pay campus talk +1, b
 | accident | when | fix (0) | let it be |
 |---|---|---|---|
 | the leggings go see-through | leggings, a top, panties on; any stage | "Pull your top down over your ass." | "Finish the set." +1, cap 19 |
-| the strap slips | sports bra alone; Exhibitionism 20 | "Fix it fast." | "Keep running a few steps." +1, cap 39 |
+| the strap slips | sports bra alone; Exhibitionism 20 | "Fix it fast." | "Keep running a few steps." from 60, +1, cap 79 (DECISIONS 203) |
 | the shorts ride up | tiny gym shorts; Exhibitionism 40 | "Pull them down." | "Do the next rep." +1, cap 59 |
 
 Jake's training reads the same steps, one line each (`npc_jake.md`); so does the park run (`park.md`).

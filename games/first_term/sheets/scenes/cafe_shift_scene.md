@@ -1,4 +1,6 @@
 # [READY] Scene — cafe_shift_scene
+> Changed 2026-11-08 (DECISIONS 203, LO: "Yess"): letting bare tits show is Watched (60); letting her bare pussy show is On Display (80), not written this release. Re-signed by LO 2026-11-08 ("Sign them").
+> Changed 2026-11-08 (DECISIONS 202): accidents on the shift, new section at the end. Re-signed by LO 2026-11-08 ("Sign them").
 > Changed 2026-11-05 (DECISIONS 195): the reader's fails on the recovered lines; Tom's apron line needs Want 15, not 30. Re-signed by LO 2026-11-05.
 > Signed by LO: LO, 2026-11-04.
 > Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
@@ -248,3 +250,21 @@ Every screen the build counts as explicit (3+ words from the frozen list), word 
 - Row 57 (the lunch line): "A man at table two watches you bend over to set his plate down, and stops, eyes on your ass."
 
 > Changed 2026-11-02 (reader a3, older rows; DECISIONS 131; LO: "fix the older ones too"): the strangers' L3 lap (`L3_C`, the back table roars) only at Exhibitionism 60: a room watching is Watched; below it, `L3_A`.
+
+## Accidents on the shift (new 2026-11-08, DECISIONS 202)
+
+1 in 4 when she opens "Work a shift" in the day (08:00-18:00, Monday to Saturday) and a shift could start, once a day
+(`cafe_accident_today`). Tom sends her to the tables; the accident happens as she comes on. It pays no wage: both
+answers send her back to the counter in uniform, and the shift she works next pays as normal. The room seeing it pays
+café footfall +1; letting it be pays her Exhibitionism +1, capped at the stage it shows.
+
+| scene | she wears | what happens | fix it | let it be |
+|---|---|---|---|---|
+| The jug goes over | normal uniform, bra | table nine knocks the water jug down her; the uniform goes see-through to her bra | "Run for the back room." | "Finish the table." any stage, cap 19 |
+| The jug goes over | normal uniform, no bra | the same; her bare tits | the same | from 60, cap 79 |
+| The top button goes | tight uniform, bra | the top button pops at the counter; open to her bra | "Hold it shut." | "Leave it open." any stage, cap 19 |
+| The top button goes | tight uniform, no bra | the same; her bare tits | the same | from 60, cap 79 |
+| Under the table | normal uniform, panties | she bends for a dropped fork; the hem rides up over her ass for the booth | "Pull the hem down." | "Take your time down there." from 40, cap 59 |
+
+Why: Curse of the Abyss's first tavern shift is an accident (the tap sprays her, `exhibition_study/C_other_games.md:219`);
+CoT's water and malfunction marks (`A_cot.md:224`, `:227`).

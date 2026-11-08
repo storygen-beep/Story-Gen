@@ -254,6 +254,103 @@ out.append({
         D(GY, "Top me up when you've got a minute, doll."),
     ], [go("\"Coming.\"", loc="cafe", mins=5, flags=[fset("gary_met")])])]})
 
+# ═════════════ ACCIDENTS ON THE SHIFT (cafe_shift_scene.md "Accidents", DECISIONS 202) ═════════════
+# The uniform goes wrong as she comes on shift: a spilt jug soaks it see-through, the tight one's top button pops,
+# the normal one's hem rides up (CoT's malfunction marks, A_cot.md:224, and water, :227; Curse of the Abyss's first
+# tavern shift is the tap spraying her, C_other_games.md:219). 1 in 4, one a day, daytime only, opened from "Work a
+# shift" (cafe_shift's substitutions) where a shift could start. It pays no wage: both answers send her back to the
+# counter, in uniform, and the shift itself still pays (the shift stays the café's one way to earn; gate
+# `sinks >= sources`). The room seeing it pays the café's footfall +1 (H5: an accident pays whoever saw it);
+# letting it be pays her +1 Exhibitionism to the top of the stage it shows, gated there.
+CAFE_ACC = "cafe_accident_today"
+BRA_ON = {"type": "clothing_slot", "slot": "bra", "operator": "equipped"}
+BRA_OFF = {"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}
+PANTIES_ON = {"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}
+SEEN = add("cafe_footfall", 1, clamp=False)
+
+
+def cafe_accident(cid, name, conds, blocks, fix, fix_text, let, let_gate, cap, let_text, hook, dressed=False):
+    """dressed: she came in the tight uniform already; otherwise she changes into the normal one first."""
+    first = (go("Get to the tables.", node="event", mins=0) if dressed
+             else go("Get changed.", node="event", mins=5, wardrobe=CLOCK_IN))
+    done = [go("Back to the counter.", loc="cafe", mins=10)]
+    return {"id": cid, "name": name,
+            "description": f"Random shift accident (cafe_shift_scene.md, DECISIONS 202): {name}. 1 in 4, one a day, day shifts, as she comes on; no wage (the shift after it pays); footfall +1 on both answers, letting it be +1 Exhibitionism to cap {cap}.",
+            "trigger": {"location": "cafe", "is_repeatable": True, "priority": 4, "is_active": True, "substitution_only": True,
+                        "schedules": [{"weekdays": [0, 1, 2, 3, 4, 5], "start_time": "08:00", "end_time": "18:00"}],
+                        "conditions": cond(flag("cafe_job"), flag("cafe_shift_3_today", False), flag(CAFE_ACC, False),
+                                           trait("energy", "gte", 20), *conds)},
+            "nodes": [
+                node("counter", "The counter", [D(TM, "You're on, @player. The counter's yours. Go.") if dressed
+                                                else D(TM, "Uniform's in the back, @player. Table nine's waiting. Go.")], [first]),
+                node("event", name, blocks, [go(fix, node="fix", mins=0, eff=[SEEN], flags=[fset(CAFE_ACC)]),
+                                             go(let, node="let", mins=0, eff=[SEEN, capped_e("exhibitionism", 1, cap)], flags=[fset(CAFE_ACC)],
+                                                cond_=cond(*let_gate) if let_gate else None)]),
+                node("fix", fix.rstrip("."), [*fix_text, P(hook)], done),
+                node("let", let.rstrip("."), [*let_text, P(hook)], done),
+            ]}
+
+
+JUG = "Your first table of the shift, and the man at table nine swings round to wave at somebody and takes the water jug right out of your hand. The whole jug goes down your front."
+out.append(cafe_accident("cafe_acc_spill_bra", "The jug goes over", [SEXY_OFF, BRA_ON],
+    [P(JUG + " The uniform is soaked through in a second and goes see-through. It clings to you. Your bra shows through it, the shape of your tits in it and all."),
+     WHO("Oh God, sorry, love. Sorry. Hell of a view, though.")],
+    "Run for the back room.",
+    [P("You fold your arms over your chest and run for the back room, but the whole café saw. You wring the front out in the sink until it's only damp, then go back out. Tom watches you come out and says nothing."),
+     T("Three hours to go, and everyone remembers.")],
+    "Finish the table.", [], 19,
+    [P("You don't run. You finish the table soaking wet, your bra showing through the uniform, and you go on serving in it till it dries. Every table you go to looks. At the counter Tom watches and says nothing. Table nine says sorry three times and doesn't mean it once."),
+     GC(cond(trait("exhibitionism", "lt", 10)), T("It's only water. It'll dry.")),
+     GC(cond(trait("exhibitionism", "lt", 20)), T("They looked, and you let them.")),
+     GC(cond(trait("exhibitionism", "gte", 20)), T("You could have run. You didn't want to."))],
+    "He's a stranger, and he leaves with his eyes still on your chest. Three hours of shift to go, and every table in here saw it."))
+
+out.append(cafe_accident("cafe_acc_spill_bare", "The jug goes over", [SEXY_OFF, BRA_OFF],
+    [P(JUG + " The uniform is soaked through in a second and goes see-through, and there's no bra under it. It clings to your bare tits. Your nipples are hard from the cold water, dark through the wet cloth, for the whole room."),
+     WHO("Jesus. Sorry, love. Sorry. Christ.")],
+    "Run for the back room.",
+    [P("You cross your arms over your tits and run for the back room with the whole café watching you go. You stand in front of the hand dryer until the front stops showing everything, and you go back out with a tray held against your chest. Tom says nothing."),
+     T("No bra. Of course today.")],
+    "Finish the table.", [trait("exhibitionism", "gte", 60)], 79,
+    [P("You don't run. You finish the table soaking wet, your bare tits and your hard nipples right there through the uniform, and you keep serving in it. Every man in the place orders another coffee. At the counter Tom watches and says nothing."),
+     T("Everyone can see them. You don't want it to dry.")],
+    "He's a stranger, and he can't look at your face when he pays. The whole shift is still ahead of you, in a uniform that won't dry."))
+
+out.append(cafe_accident("cafe_acc_button_bra", "The top button goes", [SEXY_ON, BRA_ON],
+    [P("You're leaning over the counter with a man's change when the top button of the tight uniform gives up and pings off the coffee machine. The front falls open to your bra. He gets a long look at your tits pushed up in it."),
+     WHO("Well. Thank you, sweetheart.")],
+    "Hold it shut.",
+    [P("You grab the front together with one hand, but it gapes every time you move, so you hold it like that, fixing it every time you lean. Tom finds a safety pin in the till and hands it over without a word."),
+     T("A size smaller wasn't a great idea.")],
+    "Leave it open.", [], 19,
+    [P("You leave it. You go back to the tables with the uniform open to your bra, and you lean over every one a little further than you need to. Tom watches from the till and says nothing.")],
+    "He takes his change without counting it. Three hours to go, and that button isn't coming back.", dressed=True))
+
+out.append(cafe_accident("cafe_acc_button_bare", "The top button goes", [SEXY_ON, BRA_OFF],
+    [P("You're leaning over the counter with a man's change when the top button of the tight uniform gives up and pings off the coffee machine. There's no bra under it. The front falls open and your bare tits are right there, a nipple out of the gap, a foot from his face."),
+     WHO("Oh. Oh, sweetheart.")],
+    "Hold it shut.",
+    [P("You clutch the front shut and turn away, face burning, and go back out with one hand at your chest. Tom finds a safety pin in the till and hands it over without a word."),
+     T("No bra and a tight uniform. Great plan.")],
+    "Leave it open.", [trait("exhibitionism", "gte", 60)], 79,
+    [P("You leave it. The uniform hangs open, and every time you lean to pour, your bare tits swing in the gap, nipples and all. Tom watches from the till and says nothing. Men you've never seen before stay for a second coffee.")],
+    "He forgets his change on the counter. The men at the window seats saw it all, and they're staying for the rest of your shift.", dressed=True))
+
+out.append(cafe_accident("cafe_acc_hem", "Under the table", [SEXY_OFF, PANTIES_ON],
+    [P("A man in booth two knocks his fork off the table. You bend all the way over to get it from under the seat, and the uniform's hem rides right up over your ass. The whole booth behind you sees your panties, stretched tight over your pussy from behind."),
+     WHO("Take your time down there.")],
+    "Pull the hem down.",
+    [P("You come up with the fork, yank the hem down and walk off quick, face red, but the booth is already laughing. Tom watches from the counter and says nothing."),
+     T("Next time he can get his own fork.")],
+    "Take your time down there.", [trait("exhibitionism", "gte", 40)], 59,
+    [P("You take your time. You stay bent over, feeling under the seat for a fork you already found, your uniform up over your ass and your panties out to the whole booth. Then you stand, smooth it down and hand him a clean one. Tom watches from the counter and says nothing. The booth can't stop grinning at each other.")],
+    "The booth comes in on the same day every week. Somebody's going to drop a fork again."))
+
+CAFE_ACC_IDS = [c["id"] for c in out if c["id"].startswith("cafe_acc_")]
+_shift = next(c for c in out if c["id"] == "cafe_shift")
+_shift["trigger"]["substitutions"] += [{"target_canvas_id": a, "chance": 0.25, "conditions": cond(flag(CAFE_ACC, False))}
+                                       for a in CAFE_ACC_IDS]
+
 text = "# ── the café shift (sheets/systems/job.md) ──\n" + "".join(emit(c) for c in out)
 open(__import__("sys").argv[1], "w").write(text)
 print("cafe:", len(out), "canvases")
