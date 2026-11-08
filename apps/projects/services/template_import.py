@@ -558,6 +558,8 @@ class GameTemplate:
     quests_cards: List["QuestsCard"] = field(default_factory=list)
     # doc 45 G7 — optional corruption tier thresholds (default [0,5,15,30,45])
     corruption_tiers: Optional[List[int]] = None
+    # [engine.daily_caps.<trait>] — how much a player trait may rise in one day, by band (first_term, 2026-11-08).
+    daily_caps: Optional[Dict[str, Any]] = None
     # doc 45 G9 — economy: fast jobs + bank
     fast_jobs: List["TemplateFastJob"] = field(default_factory=list)
     bank: Optional["TemplateBank"] = None
@@ -3516,11 +3518,13 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
     # ── Stage helpers ── [[engine.stage_helpers]]
     stage_helpers: List[TemplateStageHelper] = []
     corruption_tiers_obj: Optional[List[int]] = None
+    daily_caps_obj: Optional[Dict[str, Any]] = None
     engine_raw = data.get("engine")
     if isinstance(engine_raw, dict):
         _ct_raw = engine_raw.get("corruption_tiers")
         if isinstance(_ct_raw, list) and _ct_raw:
             corruption_tiers_obj = [int(x) for x in _ct_raw]
+        daily_caps_obj = _parse_daily_caps(engine_raw.get("daily_caps"))
         dt_raw = engine_raw.get("daily_tick")
         if isinstance(dt_raw, dict):
             dt_flag_effs: List[TemplateFlagEffect] = []
@@ -3812,6 +3816,7 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
         daily_tick=daily_tick_obj,
         stage_helpers=stage_helpers,
         corruption_tiers=corruption_tiers_obj,
+        daily_caps=daily_caps_obj,
         fast_jobs=fast_jobs,
         bank=bank_obj,
         player_portrait=player_portrait_obj,
@@ -8416,6 +8421,39 @@ def _serialize_hint_template(t: TemplateHintTemplate) -> Dict[str, Any]:
     }
 
 
+_DAILY_CAP_KEYS = {"bands", "hold_band_while", "first_gain_message"}
+
+
+def _parse_daily_caps(raw: Any) -> Optional[Dict[str, Any]]:
+    """[engine.daily_caps.<trait>]: bands = [{below, cap}], hold_band_while = [modifier keys],
+    first_gain_message = text. A rise past today's cap for her band is cut; while a listed modifier is on, the
+    trait can't pass the top of the band her real value sits in (a drink opens doors, it doesn't climb)."""
+    if raw is None:
+        return None
+    if not isinstance(raw, dict):
+        raise ValueError("[engine.daily_caps] must be a table of traits")
+    out: Dict[str, Any] = {}
+    for trait, cfg in raw.items():
+        if not isinstance(cfg, dict):
+            raise ValueError(f"[engine.daily_caps.{trait}] must be a table")
+        unknown = set(cfg) - _DAILY_CAP_KEYS
+        if unknown:
+            raise ValueError(f"[engine.daily_caps.{trait}]: unknown key `{sorted(unknown)[0]}` "
+                             f"(allowed: {', '.join(sorted(_DAILY_CAP_KEYS))})")
+        bands = []
+        for b in cfg.get("bands") or []:
+            if not isinstance(b, dict) or set(b) != {"below", "cap"}:
+                raise ValueError(f"[engine.daily_caps.{trait}].bands: each band is {{ below = N, cap = N }}")
+            bands.append({"below": float(b["below"]), "cap": float(b["cap"])})
+        bands.sort(key=lambda b: b["below"])
+        out[str(trait)] = {
+            "bands": bands,
+            "hold_band_while": [str(m) for m in cfg.get("hold_band_while") or []],
+            "first_gain_message": str(cfg.get("first_gain_message") or ""),
+        }
+    return out or None
+
+
 def _normalize_block_list(
     raw_blocks: Any,
     max_depth: int = 8,
@@ -8672,6 +8710,8 @@ def _assemble_project_metadata(project, template):
     # Store corruption tiers if overridden (doc 45 G7)
     if template.corruption_tiers:
         project.metadata["corruption_tiers"] = template.corruption_tiers
+    if template.daily_caps:
+        project.metadata["daily_caps"] = template.daily_caps
     # Store fast jobs + bank (doc 45 G9)
     if template.fast_jobs:
         project.metadata["fast_jobs"] = [
