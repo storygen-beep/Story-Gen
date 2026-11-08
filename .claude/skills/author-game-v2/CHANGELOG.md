@@ -5,6 +5,14 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-08 — a swap uses up the host's daily visit
+
+- **`references/engine.md` §46 (`substitution_only`):** new warning. A substitution swaps in after the host's click has
+  already counted, and only the target is marked, so a daily-capped host (a class, `max_triggers_per_day = 1`) is spent
+  by the swap. Roll an interruption before a capped activity on arrival instead. Why: first_term's class accidents
+  (DECISIONS 202) were first built as swaps from the class and ate the class. Verified headless on the built game:
+  as a swap, the class button was gone after the accident; as an arrival roll, the class ran after it.
+
 ## 2026-11-08 — what shows sets the stage, not how many watch
 
 - **`references/the-heat-ladder.md` H1:** the audience paragraph is rewritten. Was "a group, known or not, is stage 4"

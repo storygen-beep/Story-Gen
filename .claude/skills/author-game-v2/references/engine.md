@@ -2981,6 +2981,14 @@ substitution on its dispatcher while never rendering as a standalone row.
 
 **`substitution_only = true` is the field for "dispatcher only, not a button."** Both fields now work; they mean different things.
 
+⚠️ **A swap uses up the host's daily visit.** The substitution check runs inside the host's first passage, after
+the click that opened it has already counted as a visit, and `checkAndSubstituteCanvas` marks only the target
+(`v2.py:6900-6945`). So a host with `max_triggers_per_day = 1` (a class) is spent when an accident swaps in, and its
+button is gone for the day when she comes back. A host with no daily cap (the gym's "Work out", the café shift) is
+fine. For an interruption before a capped activity, roll it on arrival instead (`trigger_mode = "random"` with the
+activity's start windows as `schedules`, in a room she can't change in). first_term DECISIONS 202, found headless
+2026-11-08.
+
 ---
 
 ## 47. The quest-card goal bullet — what the player actually reads under 🎯
