@@ -13246,6 +13246,16 @@ def _garment_vocab(game):
             continue
         words[c["id"]] = set(ws)
         by_noun.setdefault(ws[-1], set()).add(c["id"])
+    # A garment word that is also a slot's name ("your top", "your bra") means anything in that slot, not only the
+    # items whose names end in it: first_term's "Low-cut top" made every older "your top" read as that one item
+    # (2026-11-08). A modifier still narrows it ("your low-cut top").
+    slots = collections.defaultdict(set)
+    for c in game.get("clothing") or []:
+        if isinstance(c, dict) and c.get("id") and c.get("slot"):
+            slots[str(c["slot"]).lower()].add(c["id"])
+    for noun in list(by_noun):
+        if noun in slots:
+            by_noun[noun] = by_noun[noun] | slots[noun]
     return by_noun, words
 
 
@@ -17579,6 +17589,8 @@ def _group2_gates(gate, _N, model, game, state):
     gate("nothing one-time at the shop or wardrobe", *_shop_room_stays_open(game))
     gate("every card carries the met flag", *_card_carries_met_flag(game))
     gate("nobody waits for themselves", *_nobody_waits_for_themselves(game))
+    gate("a climb starts on a choice", *_climb_starts_on_a_choice(game, state))
+    gate("a description pays what it says", *_description_pays_what_it_says(game))
     gate("the skip sets what the opening sets", *_skip_sets_what_opening_sets(game))
     gate("one asset, one block", *_one_asset_one_block(game))
     gate("a refill place rolls an event", *_refill_rolls_event(game, state))
@@ -18469,6 +18481,109 @@ def _nobody_waits_for_themselves(game):
                         f"that meets them, or set the flag somewhere else")
     return not rows, (f"{len(rows)} person(s) can never arrive: their scenes wait for them, they wait for their scenes"
                       if rows else f"none of {checked} scheduled people with scenes waits on their own scene"), rows
+
+
+# ── a climb meter's start pays from a choice (exhibition study, 2026-11-08; the-meters.md "The first gain") ──
+def _leave_rules_block(choice_items, location):
+    """True when the place's clothing rules, read at every meter's start value (0), refuse the clothes the choice
+    needs. Rules are tried in order and the first that applies decides."""
+    off = {i.get("slot") for i in choice_items if i.get("type") == "clothing_slot" and i.get("operator") == "unequipped"}
+    worn = {i.get("value") for i in choice_items if i.get("type") == "worn_type" and i.get("operator") == "eq"}
+    for rule in (location or {}).get("clothing_rules") or []:
+        applies = True
+        for i in _cond_leaves(rule.get("conditions")):
+            if i.get("type") == "trait":
+                if _cmp(0, i.get("operator"), i.get("value")) is False:
+                    applies = False
+            elif i.get("type") == "worn_type":
+                if not (i.get("operator") == "eq" and i.get("value") in worn):
+                    applies = False
+            else:
+                applies = False
+        if applies:
+            # a rule keyed on the very garment the choice needs refuses that garment out of the house
+            keyed = any(i.get("type") == "worn_type" for i in _cond_leaves(rule.get("conditions")))
+            return keyed or bool(off & set(rule.get("slots_required") or []))
+    return False
+
+
+def _climb_starts_on_a_choice(game, state):
+    """(ok, headline, detail): each declared climb meter has a repeatable, unrolled choice that pays it at 0.
+    first_term's Exhibitionism started on 1-in-4 walk-ins and one-time scenes, and its few repeatable payers needed
+    clothes the leave rules refuse below 20; every gate passed."""
+    tiers = list(((state or {}).get("board") or {}).get("ascent_tiers") or [])
+    if not tiers:
+        return None, "no ascent_tiers declared in the board", []
+    locs = {l.get("id"): l for l in game.get("locations") or [] if isinstance(l, dict)}
+    found = {t: [] for t in tiers}
+    resources = {"energy", "hygiene", "money", "intelligence"}
+
+    def day_one(items):
+        """No progress needed: no flag that something must have happened (opening_done aside), no step or other
+        trait above its start (the body's resources aside)."""
+        for i in items:
+            if i.get("type") == "flag" and i.get("operator") == "is_true" and i.get("flag_key") != "opening_done":
+                return False
+            if i.get("type") == "trait" and i.get("trait_key") not in resources | set(tiers) \
+                    and _cmp(0, i.get("operator"), i.get("value")) is False:
+                return False
+        return True
+
+    for cv in _g2_canvases(game):
+        trig = cv.get("trigger") or {}
+        if not _rep_of(trig) or trig.get("trigger_mode") == "random" or trig.get("substitution_only"):
+            continue
+        tc = list(_cond_leaves(trig.get("conditions")))
+        ways_in = collections.defaultdict(list)       # node id -> the conditions of each button into it
+        for nd in cv.get("nodes") or []:
+            for ch in (nd.get("exit_block") or {}).get("choices") or []:
+                if ch.get("targetType") == "node" and ch.get("nodeId"):
+                    ways_in[str(ch["nodeId"]).split(".")[-1]].append(list(_cond_leaves(ch.get("conditions"))))
+        for nd in cv.get("nodes") or []:
+            entries = ways_in.get(nd.get("id")) or [[]]
+            for ch in (nd.get("exit_block") or {}).get("choices") or []:
+                for entry in entries:
+                    items = tc + entry + list(_cond_leaves(ch.get("conditions")))
+                    if day_one(items):
+                        break
+                else:
+                    continue
+                for e in ch.get("effects") or []:
+                    t = e.get("trait")
+                    if t not in found or e.get("op", "add") != "add" or not isinstance(e.get("value"), (int, float)) or e["value"] <= 0:
+                        continue
+                    floor = [i for i in items if (i.get("trait_key") == t) and _cmp(0, i.get("operator"), i.get("value")) is False]
+                    other = [i for i in items if i.get("type") == "trait" and i.get("trait_key") in tiers and i.get("trait_key") != t
+                             and _cmp(0, i.get("operator"), i.get("value")) is False]
+                    if floor or other or _leave_rules_block(items, locs.get(trig.get("location"))):
+                        continue
+                    found[t].append(f"{cv.get('id')}: \"{str(ch.get('text'))[:40]}\"")
+    rows = [f"{t}: no repeatable choice pays it at 0 without a roll, another meter, or clothes the leave rules refuse "
+            f"there; the start lives on chance and one-time scenes" for t, f in found.items() if not f]
+    return not rows, (f"{len(rows)} climb meter(s) start on chance" if rows else
+                      "; ".join(f"{t} starts on {len(f)} choice(s)" for t, f in found.items())), rows
+
+
+# ── a description says what the scene pays (exhibition study, 2026-11-08) ──
+def _description_pays_what_it_says(game):
+    """(ok, headline, detail): a canvas description that names "<Meter> +N" has a choice that raises that meter.
+    first_term's dress-code warning said "Exhibitionism +1" and paid nothing."""
+    names = {}
+    for k in ((game.get("player") or {}).get("core_traits") or {}):
+        names[str(k).replace("_", " ").lower()] = k
+    rows, n = [], 0
+    for cv in _g2_canvases(game):
+        desc = str(cv.get("description") or "")
+        paid = {e.get("trait") for _, e in _walk_paths(cv) if isinstance(e, dict) and isinstance(e.get("trait"), str)}
+        for m in re.finditer(r"\b([A-Za-z][A-Za-z ]{2,30}?) \+\d", desc):
+            key = names.get(m.group(1).strip().lower().split(" ")[-1]) or names.get(m.group(1).strip().lower())
+            if not key:
+                continue
+            n += 1
+            if key not in paid:
+                rows.append(f"{cv.get('id')}: the description says \"{m.group(0)}\", and nothing in it raises {key}")
+    return not rows, (f"{len(rows)} description(s) claim a pay the scene doesn't make" if rows else
+                      f"all {n} pay claims in descriptions are paid"), rows
 
 
 def main():

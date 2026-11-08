@@ -49,7 +49,7 @@ what their players quote:
 8. **What it opens, and the clip we can get.** Where this release stops, the arc's last quest card
    says so, and says what comes next if anything does ("Every release ends on an opening" below).
    Never gate a later step on a flag nothing sets: the build refuses a gate on a flag no canvas sets
-   (`validate_flag_chains()`, `v2.py:15196`). The live goal, mystery or rival beat it moves,
+   (`validate_flag_chains()`, `v2.py:15228`). The live goal, mystery or rival beat it moves,
    and a clip that exists or can be found for it — at the idea stage, `intent` (what to look for) is
    enough, and it is found later. A moment with no clip is a moment the game cannot show.
 
@@ -265,8 +265,8 @@ to know.
 *replaces* the default that would have interpolated the live number:
 
 ```
-v2.py:20657   <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
-v2.py:20661   <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
+v2.py:20689   <<print _rt.greeting || "Rent. " + _cur + _rent + ". You know how this works.">>
+v2.py:20693   <p>You have <<print _cur>><<print _money>>. Rent is <<print _cur>><<print _rent>>.</p>
 ```
 
 Four lines apart. Re-price to 150 and the collector says *"A hundred"* directly

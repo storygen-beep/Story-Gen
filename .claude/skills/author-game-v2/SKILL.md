@@ -326,6 +326,8 @@ how many fails are [off].
 | one garment per slot | one `initial` and one `equip` per slot (the last wins and equip grants); a warning | `engine.md` §17 |
 | a card shows the real gates | no goal on a step counter; each meter or other person the step reads is on its card; a `--ship` block | `the-voice.md` R3 |
 | a phone line is true | a follow-up waits on `after_round`; a call never says where she is or moves her; no text or call from someone asleep; a `--ship` block | `the-phone.md` |
+| a climb starts on a choice | each `board.ascent_tiers` meter has a repeatable choice that pays it at 0: no roll, no other meter, no progress first, and clothes the place's leave rules allow at 0 | `the-meters.md` W4b |
+| a description pays what it says | a canvas description naming "<Meter> +N" has a choice that raises that meter | `the-meters.md` W4b |
 | nobody waits for themselves | a person whose every schedule row waits on a flag that only scenes needing that person set can never arrive, so those scenes never open; a one-time scene that fires by itself is not counted, because it does not read `requires_npc` | `the-first-hour.md` |
 | no child framing next to sex | a child-frame phrase in a node that holds a frozen-list explicit word or a body word fails, and so does a parent figure's "good girl" anywhere (role or relationship says mom, mother, dad, father or step-); "my girl" counts only from a parent figure; canvas blocks and phone chats only, never trait labels or quest cards | `register.md` "Everyone is an adult" |
 | one pool, one place · the phone owns posting | no pool or long paragraph pasted into two canvases; no room button posts when the phone does; warnings | `the-phone.md` · `register.md` L3 |
