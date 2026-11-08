@@ -15113,7 +15113,7 @@ targetType = "node"
 nodeId = "mine"
 time_progression_minutes = 3
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 3, clamp = true, cap = 79 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "zoe_has_bra", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "zoe_has_bra", op = "set" }, { targetType = "player", flag = "talk_party", op = "set" }]
 wardrobeEffects = [{ action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }]
 
 [[canvases.nodes]]
@@ -15322,6 +15322,7 @@ targetType = "node"
 nodeId = "saturday"
 time_progression_minutes = 10
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 3, cap = 39 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "talk_party", op = "set" }]
 
 [[canvases.nodes]]
 id   = "saturday"
@@ -15648,6 +15649,7 @@ targetType = "node"
 nodeId = "saturday"
 time_progression_minutes = 10
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 3, cap = 39 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "talk_party", op = "set" }]
 
 [[canvases.nodes]]
 id   = "saturday"
@@ -19485,11 +19487,8 @@ content = "Nadia at a library table with her headphones round her neck."
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "dialog", content = "Thursday office hours are a trap, you know that?", props = { speaker = "npc", npcId = "npc_nadia" } },
-  { type = "dialog", content = "You want my notes? You can have my notes.", props = { speaker = "npc", npcId = "npc_nadia" } },
-  { type = "dialog", content = "Sit. I'll tell you which lecturers to avoid.", props = { speaker = "npc", npcId = "npc_nadia" } },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "block_pool", blocks = [{ type = "dialog", content = "Thursday office hours are a trap, you know that?", props = { speaker = "npc", npcId = "npc_nadia" } }, { type = "dialog", content = "You want my notes? You can have my notes.", props = { speaker = "npc", npcId = "npc_nadia" } }, { type = "dialog", content = "Sit. I'll tell you which lecturers to avoid.", props = { speaker = "npc", npcId = "npc_nadia" } }], props = { id = "nadia_lines", memory = "seen" } }] },
 ]
-props = { id = "nadia_lines", memory = "seen" }
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -19509,6 +19508,67 @@ blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "hale_step", operator = "gte", value = 4 }] }, blocks = [{ type = "dialog", content = "His wife came to the office. Everyone's saying. Was it you?", props = { speaker = "npc", npcId = "npc_nadia" } }] },
 ]
 
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 25 }, { type = "flag", subject = "player", flag_key = "nadia_asked_talk", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "talk_quad", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "team_saw_quad", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "People are saying Jake had you in his lap on the grass with his hands all over you, and the whole team watching. Tell me that's not true.", props = { speaker = "npc", npcId = "npc_nadia" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 25 }, { type = "flag", subject = "player", flag_key = "nadia_asked_talk", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "talk_class", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "Half the lecture hall says they've seen what's under your clothes. In class, @player. Is it true?", props = { speaker = "npc", npcId = "npc_nadia" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 25 }, { type = "flag", subject = "player", flag_key = "nadia_asked_talk", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "talk_gym", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "Jake's whole team says you put on a show at the gym. A show. Is it true?", props = { speaker = "npc", npcId = "npc_nadia" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 25 }, { type = "flag", subject = "player", flag_key = "nadia_asked_talk", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "talk_party", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "zoe_dares_done", operator = "gte", value = 1 }] }
+blocks = [
+  { type = "dialog", content = "Apparently you take Zoe's dares now. In front of everyone. Is that true?", props = { speaker = "npc", npcId = "npc_nadia" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 25 }, { type = "flag", subject = "player", flag_key = "nadia_asked_talk", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "talk_party", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "zoe_has_bra", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "Someone says you went braless on Zoe's balcony on purpose, with a guy watching through the glass. Is that true?", props = { speaker = "npc", npcId = "npc_nadia" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 25 }, { type = "flag", subject = "player", flag_key = "nadia_asked_talk", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "talk_party", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "People are saying you were all over Jake's teammate at Zoe's. Were you?", props = { speaker = "npc", npcId = "npc_nadia" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 25 }, { type = "flag", subject = "player", flag_key = "nadia_asked_talk", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "talk_quad", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "Everyone saw you and Jake on the grass. Everyone, @player.", props = { speaker = "npc", npcId = "npc_nadia" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 25 }, { type = "flag", subject = "player", flag_key = "nadia_asked_talk", operator = "is_true" }] }, blocks = [{ type = "dialog", content = "People are still talking about you. I'm not asking again.", props = { speaker = "npc", npcId = "npc_nadia" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 40 }] }, blocks = [{ type = "dialog", content = "In here's fine. Nobody in the library cares who you are.", props = { speaker = "npc", npcId = "npc_nadia" } }] },
+]
+
 [canvases.nodes.exit_block]
 type = "choices"
 
@@ -19517,11 +19577,28 @@ text = "Talk a while."
 targetType = "location"
 locationId = "library"
 time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 25 }] }
 
 [[canvases.nodes.exit_block.choices]]
 text = "Leave her to her notes."
 targetType = "location"
 locationId = "campus"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 25 }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Talk a while."
+targetType = "location"
+locationId = "library"
+time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 25 }] }
+flagEffects = [{ targetType = "player", flag = "nadia_asked_talk", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave her to her notes."
+targetType = "location"
+locationId = "campus"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 25 }] }
+flagEffects = [{ targetType = "player", flag = "nadia_asked_talk", op = "set" }]
 
 [[canvases]]
 id   = "hub_nadia_canteen"
@@ -19548,28 +19625,31 @@ content = "Nadia at the end of a table with a salad and a textbook open beside i
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "dialog", content = "Don't get the soup. And don't take his Thursday slot either.", props = { speaker = "npc", npcId = "npc_nadia" } },
-  { type = "dialog", content = "Everyone at this table has a story about a lecturer. Ask me which ones are true.", props = { speaker = "npc", npcId = "npc_nadia" } },
-  { type = "dialog", content = "Have my roll. I only got the salad so I could feel better about the roll.", props = { speaker = "npc", npcId = "npc_nadia" } },
-]
-props = { id = "nadia_lines_canteen", memory = "seen" }
-
-[[canvases.nodes.blocks]]
-type = "block_pool"
-blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "hale_step", operator = "gte", value = 2 }, { type = "weekday", weekdays = [0, 2, 4] }] }, blocks = [{ type = "dialog", content = "Hale asked me where you sit at lunch. Earlier, after his lecture. I said I didn't know.", props = { speaker = "npc", npcId = "npc_nadia" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 40 }] }, blocks = [{ type = "block_pool", blocks = [{ type = "dialog", content = "Don't get the soup. And don't take his Thursday slot either.", props = { speaker = "npc", npcId = "npc_nadia" } }, { type = "dialog", content = "Everyone at this table has a story about a lecturer. Ask me which ones are true.", props = { speaker = "npc", npcId = "npc_nadia" } }, { type = "dialog", content = "Have my roll. I only got the salad so I could feel better about the roll.", props = { speaker = "npc", npcId = "npc_nadia" } }], props = { id = "nadia_lines_canteen", memory = "seen" } }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "hale_step", operator = "gte", value = 2 }] }, blocks = [{ type = "dialog", content = "That skirt? He'll read the same slide twice. I'd pay to watch your legs do it to him.", props = { speaker = "npc", npcId = "npc_nadia" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "hale_step", operator = "gte", value = 2 }, { type = "weekday", weekdays = [0, 2, 4] }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 40 }] }, blocks = [{ type = "dialog", content = "Hale asked me where you sit at lunch. Earlier, after his lecture. I said I didn't know.", props = { speaker = "npc", npcId = "npc_nadia" } }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "hale_step", operator = "gte", value = 4 }] }, blocks = [{ type = "dialog", content = "Eat your lunch and tell me the truth. His wife saw a girl walk out of his office, and this whole table wants to know who. Was it you?", props = { speaker = "npc", npcId = "npc_nadia" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "hale_step", operator = "gte", value = 2 }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 40 }] }, blocks = [{ type = "dialog", content = "That skirt? He'll read the same slide twice. I'd pay to watch your legs do it to him.", props = { speaker = "npc", npcId = "npc_nadia" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "hale_step", operator = "gte", value = 4 }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 40 }] }, blocks = [{ type = "dialog", content = "Eat your lunch and tell me the truth. His wife saw a girl walk out of his office, and this whole table wants to know who. Was it you?", props = { speaker = "npc", npcId = "npc_nadia" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 40 }] }, blocks = [{ type = "dialog", content = "Not here. Sorry. They talk about whoever sits with you, and I've got enough people looking at me.", props = { speaker = "npc", npcId = "npc_nadia" } }, { type = "paragraph", content = "She slides her tray down to the far end of the table and opens her textbook between you." }, { type = "dialog", content = "Find me in the library.", props = { speaker = "npc", npcId = "npc_nadia" } }] },
 ]
 
 [canvases.nodes.exit_block]
@@ -19580,6 +19660,7 @@ text = "Talk a while."
 targetType = "location"
 locationId = "canteen"
 time_progression_minutes = 20
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 40 }] }
 
 [[canvases.nodes.exit_block.choices]]
 text = "Leave her to her notes."
@@ -19611,11 +19692,8 @@ content = "Nadia in the seat beside yours, her pen already moving."
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "dialog", content = "Watch his left hand. He turns the ring when he's looking at someone.", props = { speaker = "npc", npcId = "npc_nadia" } },
-  { type = "dialog", content = "I've got today's reading if you didn't do it. Copy fast.", props = { speaker = "npc", npcId = "npc_nadia" } },
-  { type = "dialog", content = "Keep your voice down. He hears everything from that lectern.", props = { speaker = "npc", npcId = "npc_nadia" } },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "block_pool", blocks = [{ type = "dialog", content = "Watch his left hand. He turns the ring when he's looking at someone.", props = { speaker = "npc", npcId = "npc_nadia" } }, { type = "dialog", content = "I've got today's reading if you didn't do it. Copy fast.", props = { speaker = "npc", npcId = "npc_nadia" } }, { type = "dialog", content = "Keep your voice down. He hears everything from that lectern.", props = { speaker = "npc", npcId = "npc_nadia" } }], props = { id = "nadia_lines_lecture", memory = "seen" } }] },
 ]
-props = { id = "nadia_lines_lecture", memory = "seen" }
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -19837,6 +19915,7 @@ targetType = "node"
 nodeId = "ask"
 time_progression_minutes = 3
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 3, clamp = true, cap = 79 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "talk_quad", op = "set" }]
 
 [[canvases.nodes]]
 id   = "ask"
@@ -21447,7 +21526,7 @@ nodeId = "a3_show"
 time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "flag", subject = "player", flag_key = "jake_quad_today", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
-flagEffects = [{ targetType = "player", flag = "jake_quad_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "jake_quad_today", op = "set" }, { targetType = "player", flag = "talk_quad", op = "set" }]
 costs = [{ trait = "energy", value = 10 }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -21457,7 +21536,7 @@ nodeId = "a3_do"
 time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "flag", subject = "player", flag_key = "jake_quad_today", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "hygiene", op = "add", value = -10, clamp = true }]
-flagEffects = [{ targetType = "player", flag = "jake_quad_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "jake_quad_today", op = "set" }, { targetType = "player", flag = "talk_quad", op = "set" }]
 costs = [{ trait = "energy", value = 10 }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -22037,7 +22116,7 @@ nodeId = "hips"
 time_progression_minutes = 30
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_gym_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "jake_gym_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "jake_gym_today", op = "set" }, { targetType = "player", flag = "talk_gym", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Pull him into the locker room."
@@ -25879,6 +25958,7 @@ nodeId = "risky"
 time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Let the TA see."
@@ -25887,6 +25967,7 @@ nodeId = "risky"
 time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Catch the TA's eye."
@@ -26705,6 +26786,7 @@ nodeId = "risky"
 time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Lean back so the row behind can see."
@@ -26713,6 +26795,7 @@ nodeId = "risky"
 time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Stretch for the guy behind you."
@@ -27029,6 +27112,7 @@ nodeId = "risky"
 time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Let the TA see."
@@ -27037,6 +27121,7 @@ nodeId = "risky"
 time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "worn_type", operator = "eq", value = "short_skirt" }] }
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Catch the TA's eye."
@@ -27890,6 +27975,80 @@ targetType = "location"
 locationId = "lecture_hall"
 time_progression_minutes = 5
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "dress_warned", operator = "is_true" }] }
+effects = [{ targetType = "player", trait = "complaints", op = "add", value = 1, clamp = false }]
+
+[[canvases]]
+id   = "gossip_rival_report"
+name = "The rival tells the dean"
+description = "Gossip's cost (DECISIONS 207): at campus_talk 40 the rival reports what campus says about her to the dean's office, once, as a Psychology or Business class starts. complaints +1 on either answer."
+
+[canvases.trigger]
+location = "lecture_hall"
+is_repeatable = false
+priority = 5
+is_active = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "rival_met", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 40 }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 2, 4]
+start_time = "08:30"
+end_time = "08:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [3]
+start_time = "13:00"
+end_time = "13:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 2]
+start_time = "10:15"
+end_time = "10:30"
+
+[[canvases.trigger.schedules]]
+weekdays = [1]
+start_time = "13:00"
+end_time = "13:15"
+
+[canvases.trigger.metadata]
+kind = "event"
+
+[[canvases.nodes]]
+id   = "report"
+name = "Before class"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The rival girl is waiting by your row with her phone in her hand. She holds it up so you can see the screen: an email, sent, to the dean's office."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "I wrote down what everyone's saying about you. All of it, word for word. Somebody had to."
+props = { speaker = "npc", npcId = "npc_rival" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Three rows of people heard her say it. Nobody pretends they didn't. A guy at the end of your row looks at you like he's trying to work out which part is true."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "A complaint with your name on it, on the dean's desk. And she said it to three rows of people first."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Enjoy your class.\""
+targetType = "location"
+locationId = "lecture_hall"
+time_progression_minutes = 5
+effects = [{ targetType = "player", trait = "complaints", op = "add", value = 1, clamp = false }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sit down and say nothing."
+targetType = "location"
+locationId = "lecture_hall"
+time_progression_minutes = 5
 effects = [{ targetType = "player", trait = "complaints", op = "add", value = 1, clamp = false }]
 
 [[canvases]]
@@ -29583,7 +29742,7 @@ time_progression_minutes = 60
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "worked_out", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_item", item_id = "sports_bra", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "worn_type", operator = "neq", value = "gym_shorts" }, { type = "worn_type", operator = "neq", value = "sheer_leggings" }] }
 costs = [{ trait = "energy", value = 15 }]
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "worked_out", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "worked_out", op = "set" }, { targetType = "player", flag = "talk_gym", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Squat facing the mirror wall (1h)."
@@ -29603,7 +29762,7 @@ time_progression_minutes = 60
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "worked_out", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "worn_type", operator = "eq", value = "gym_shorts" }, { type = "worn_type", operator = "neq", value = "sheer_leggings" }] }
 costs = [{ trait = "energy", value = 15 }]
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "worked_out", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "worked_out", op = "set" }, { targetType = "player", flag = "talk_gym", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Do your squats anyway (1h)."
@@ -29613,7 +29772,7 @@ time_progression_minutes = 60
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "worked_out", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "worn_type", operator = "eq", value = "sheer_leggings" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }] }
 costs = [{ trait = "energy", value = 15 }]
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "worked_out", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "worked_out", op = "set" }, { targetType = "player", flag = "talk_gym", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Not today."
@@ -29852,7 +30011,7 @@ nodeId = "fix"
 time_progression_minutes = 60
 costs = [{ trait = "energy", value = 15 }]
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "gym_accident_today", op = "set" }, { targetType = "player", flag = "worked_out", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "gym_accident_today", op = "set" }, { targetType = "player", flag = "worked_out", op = "set" }, { targetType = "player", flag = "talk_gym", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Finish the set (1h)."
@@ -29861,7 +30020,7 @@ nodeId = "let"
 time_progression_minutes = 60
 costs = [{ trait = "energy", value = 15 }]
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
-flagEffects = [{ targetType = "player", flag = "gym_accident_today", op = "set" }, { targetType = "player", flag = "worked_out", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "gym_accident_today", op = "set" }, { targetType = "player", flag = "worked_out", op = "set" }, { targetType = "player", flag = "talk_gym", op = "set" }]
 
 [[canvases.nodes]]
 id   = "fix"
@@ -29938,7 +30097,7 @@ nodeId = "fix"
 time_progression_minutes = 60
 costs = [{ trait = "energy", value = 15 }]
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "gym_accident_today", op = "set" }, { targetType = "player", flag = "worked_out", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "gym_accident_today", op = "set" }, { targetType = "player", flag = "worked_out", op = "set" }, { targetType = "player", flag = "talk_gym", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Keep running a few steps (1h)."
@@ -29948,7 +30107,7 @@ time_progression_minutes = 60
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
 costs = [{ trait = "energy", value = 15 }]
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }]
-flagEffects = [{ targetType = "player", flag = "gym_accident_today", op = "set" }, { targetType = "player", flag = "worked_out", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "gym_accident_today", op = "set" }, { targetType = "player", flag = "worked_out", op = "set" }, { targetType = "player", flag = "talk_gym", op = "set" }]
 
 [[canvases.nodes]]
 id   = "fix"
@@ -30021,7 +30180,7 @@ nodeId = "fix"
 time_progression_minutes = 60
 costs = [{ trait = "energy", value = 15 }]
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "gym_accident_today", op = "set" }, { targetType = "player", flag = "worked_out", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "gym_accident_today", op = "set" }, { targetType = "player", flag = "worked_out", op = "set" }, { targetType = "player", flag = "talk_gym", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Do the next rep (1h)."
@@ -30030,7 +30189,7 @@ nodeId = "let"
 time_progression_minutes = 60
 costs = [{ trait = "energy", value = 15 }]
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
-flagEffects = [{ targetType = "player", flag = "gym_accident_today", op = "set" }, { targetType = "player", flag = "worked_out", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "gym_accident_today", op = "set" }, { targetType = "player", flag = "worked_out", op = "set" }, { targetType = "player", flag = "talk_gym", op = "set" }]
 
 [[canvases.nodes]]
 id   = "fix"
@@ -30138,7 +30297,7 @@ targetType = "node"
 nodeId = "fix"
 time_progression_minutes = 0
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }, { targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Take your time with the pen."
@@ -30146,7 +30305,7 @@ targetType = "node"
 nodeId = "let"
 time_progression_minutes = 0
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
-flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }, { targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes]]
 id   = "fix"
@@ -30282,7 +30441,7 @@ targetType = "node"
 nodeId = "fix"
 time_progression_minutes = 0
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }, { targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Take your time with the pen."
@@ -30291,7 +30450,7 @@ nodeId = "let"
 time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }]
-flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }, { targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes]]
 id   = "fix"
@@ -30411,7 +30570,7 @@ targetType = "node"
 nodeId = "fix"
 time_progression_minutes = 0
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }, { targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Keep climbing."
@@ -30420,7 +30579,7 @@ nodeId = "let"
 time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
-flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }, { targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes]]
 id   = "fix"
@@ -30535,7 +30694,7 @@ targetType = "node"
 nodeId = "fix"
 time_progression_minutes = 0
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }, { targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes]]
 id   = "fix"
@@ -30629,7 +30788,7 @@ targetType = "node"
 nodeId = "fix"
 time_progression_minutes = 0
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }, { targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Let it dry on you."
@@ -30637,7 +30796,7 @@ targetType = "node"
 nodeId = "let"
 time_progression_minutes = 0
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 19 }]
-flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }, { targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes]]
 id   = "fix"
@@ -30773,7 +30932,7 @@ targetType = "node"
 nodeId = "fix"
 time_progression_minutes = 0
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }, { targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Let it dry on you."
@@ -30782,7 +30941,7 @@ nodeId = "let"
 time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }]
-flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }, { targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes]]
 id   = "fix"
@@ -31184,7 +31343,7 @@ targetType = "node"
 nodeId = "fix"
 time_progression_minutes = 0
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }, { targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Take your time with the bag."
@@ -31193,7 +31352,7 @@ nodeId = "let"
 time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }]
-flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }, { targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes]]
 id   = "fix"
@@ -31322,7 +31481,7 @@ targetType = "node"
 nodeId = "fix"
 time_progression_minutes = 0
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }, { targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Take your time with the bag."
@@ -31331,7 +31490,7 @@ nodeId = "let"
 time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }]
-flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }, { targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes]]
 id   = "fix"
@@ -31446,7 +31605,7 @@ targetType = "node"
 nodeId = "fix"
 time_progression_minutes = 0
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }, { targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Leave it where it is."
@@ -31455,7 +31614,7 @@ nodeId = "let"
 time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }]
-flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }, { targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes]]
 id   = "fix"
@@ -31570,7 +31729,7 @@ targetType = "node"
 nodeId = "fix"
 time_progression_minutes = 0
 effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "class_accident_today", op = "set" }, { targetType = "player", flag = "talk_class", op = "set" }]
 
 [[canvases.nodes]]
 id   = "fix"
@@ -32235,7 +32394,7 @@ locationId = "zoe_apartment"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_dared", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "zoe_dares_done", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "keg_guy_dared", op = "set" }, { targetType = "player", flag = "zoe_dared", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "keg_guy_dared", op = "set" }, { targetType = "player", flag = "zoe_dared", op = "set" }, { targetType = "player", flag = "talk_party", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Back to the party."
@@ -32375,7 +32534,7 @@ locationId = "zoe_apartment"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_dared", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "zoe_dares_done", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "cocky_guy_dared", op = "set" }, { targetType = "player", flag = "zoe_dared", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "cocky_guy_dared", op = "set" }, { targetType = "player", flag = "zoe_dared", op = "set" }, { targetType = "player", flag = "talk_party", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Back to the party."
@@ -32427,7 +32586,7 @@ locationId = "zoe_apartment"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_dared", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "zoe_dares_done", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "keg_guy_dared", op = "set" }, { targetType = "player", flag = "zoe_dared", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "keg_guy_dared", op = "set" }, { targetType = "player", flag = "zoe_dared", op = "set" }, { targetType = "player", flag = "talk_party", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Back to the party."
@@ -32585,7 +32744,7 @@ locationId = "zoe_apartment"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_dared", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "zoe_dares_done", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "cocky_guy_dared", op = "set" }, { targetType = "player", flag = "zoe_dared", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "cocky_guy_dared", op = "set" }, { targetType = "player", flag = "zoe_dared", op = "set" }, { targetType = "player", flag = "talk_party", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Back to the party."
@@ -32638,7 +32797,7 @@ locationId = "zoe_apartment"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_dared", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "zoe_dares_done", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "cocky_guy_dared", op = "set" }, { targetType = "player", flag = "zoe_dared", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "cocky_guy_dared", op = "set" }, { targetType = "player", flag = "zoe_dared", op = "set" }, { targetType = "player", flag = "talk_party", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Back to the party."
@@ -32778,7 +32937,7 @@ locationId = "zoe_apartment"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_dared", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "zoe_dares_done", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
-flagEffects = [{ targetType = "player", flag = "cocky_guy_dared", op = "set" }, { targetType = "player", flag = "zoe_dared", op = "set" }]
+flagEffects = [{ targetType = "player", flag = "cocky_guy_dared", op = "set" }, { targetType = "player", flag = "zoe_dared", op = "set" }, { targetType = "player", flag = "talk_party", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Back to the party."
@@ -32928,6 +33087,7 @@ targetType = "node"
 nodeId = "out"
 time_progression_minutes = 15
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "talk_party", op = "set" }]
 
 [[canvases.nodes]]
 id   = "sex"
@@ -32959,6 +33119,7 @@ targetType = "node"
 nodeId = "out"
 time_progression_minutes = 20
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "talk_party", op = "set" }]
 
 [[canvases.nodes]]
 id   = "out"
@@ -48937,3 +49098,1316 @@ text = "Walk on."
 targetType = "location"
 locationId = "street"
 time_progression_minutes = 2
+# =============================================================================
+# First Term — 5 · scenes · GOSSIP (DECISIONS 207; SYSTEMS.md §9, sheets/systems/college.md)
+# The spread scenes, the asks on the quad and at the party, the passer-by.
+# =============================================================================
+
+[[canvases]]
+id   = "gossip_spread_canteen"
+name = "Your name at the next table"
+description = "Gossip (DECISIONS 207): Your name at the next table. Someone who saw says it out loud while she is there (talk_gym); 1 in 3 on arrival, one a day. Letting him talk spreads it (campus_talk +1) and pays her to her stage's top; shutting him up spreads nothing; a friend in the room shuts him down first."
+
+[canvases.trigger]
+location = "canteen"
+is_repeatable = true
+priority = 5
+is_active = true
+trigger_mode = "random"
+chance = 0.35
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "gossip_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 10 }, { type = "flag", subject = "player", flag_key = "talk_gym", operator = "is_true" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4]
+start_time = "11:30"
+end_time = "14:00"
+
+[[canvases.nodes]]
+id   = "event"
+name = "Your name at the next table"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "A guy from the gym has the next table laughing. He doesn't lower his voice when you sit down. He raises it."
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_gym", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "She trains at the campus gym. Ask the guys in there what they've seen of her.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The whole table turns round to look at you. A girl at the end looks you up and down, slowly, like she's checking."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "canteen", npc_id = "npc_nadia", operator = "is_present" }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 40 }] }, blocks = [{ type = "paragraph", content = "Nadia puts her fork down." }, { type = "dialog", content = "Hey. Gym boy. Nobody asked.", props = { speaker = "npc", npcId = "npc_nadia" } }, { type = "paragraph", content = "He laughs, but he shuts up. Nadia goes back to her salad like nothing happened." }, { type = "dialog", content = "Eat your lunch. Ignore him.", props = { speaker = "npc", npcId = "npc_nadia" } }] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him talk."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "npc_at_location", location_id = "canteen", npc_id = "npc_nadia", operator = "is_absent" }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 19 }]
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him talk."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }, { type = "npc_at_location", location_id = "canteen", npc_id = "npc_nadia", operator = "is_absent" }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 39 }]
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him talk."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }, { type = "npc_at_location", location_id = "canteen", npc_id = "npc_nadia", operator = "is_absent" }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 59 }]
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him talk."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "npc_at_location", location_id = "canteen", npc_id = "npc_nadia", operator = "is_absent" }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Walk over and shut him up."
+targetType = "node"
+nodeId = "shut"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "canteen", npc_id = "npc_nadia", operator = "is_absent" }] }
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him talk."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "npc_at_location", location_id = "canteen", npc_id = "npc_nadia", operator = "is_present" }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 40 }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 19 }]
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him talk."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }, { type = "npc_at_location", location_id = "canteen", npc_id = "npc_nadia", operator = "is_present" }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 40 }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 39 }]
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him talk."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }, { type = "npc_at_location", location_id = "canteen", npc_id = "npc_nadia", operator = "is_present" }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 40 }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 59 }]
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him talk."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "npc_at_location", location_id = "canteen", npc_id = "npc_nadia", operator = "is_present" }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 40 }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Walk over and shut him up."
+targetType = "node"
+nodeId = "shut"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "canteen", npc_id = "npc_nadia", operator = "is_present" }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 40 }] }
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let her."
+targetType = "location"
+locationId = "canteen"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "canteen", npc_id = "npc_nadia", operator = "is_present" }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 40 }] }
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "let"
+name = "Let him talk"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You could say something, but you don't. You eat, and let them look. He goes on, and the table leans in, and every face at it keeps coming back to you: your chest, your legs, your face, your chest again."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Is that true?"
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He just grins at you over his tray. The next table along has stopped talking to listen."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Now they all know. And all of them are looking."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave them to it."
+targetType = "location"
+locationId = "canteen"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "shut"
+name = "Shut him up"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You put your tray down on his table, hard, right by his hand. He stops mid-word."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Finish that sentence. I dare you."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He holds his hands up, grinning. The table laughs, at him this time. He doesn't say it again, not while you're here."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "He's quiet now, but they heard the start of it. They're still looking."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave them to it."
+targetType = "location"
+locationId = "canteen"
+time_progression_minutes = 0
+
+[[canvases]]
+id   = "gossip_spread_quad"
+name = "The guy from your row"
+description = "Gossip (DECISIONS 207): The guy from your row. Someone who saw says it out loud while she is there (talk_class); 1 in 3 on arrival, one a day. Letting him talk spreads it (campus_talk +1) and pays her to her stage's top; shutting him up spreads nothing."
+
+[canvases.trigger]
+location = "quad"
+is_repeatable = true
+priority = 5
+is_active = true
+trigger_mode = "random"
+chance = 0.35
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "gossip_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 10 }, { type = "flag", subject = "player", flag_key = "talk_class", operator = "is_true" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4]
+start_time = "08:00"
+end_time = "18:00"
+
+[[canvases.nodes]]
+id   = "event"
+name = "The guy from your row"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "On the grass by the path, a guy who sits behind you in class is sitting with two girls. He sees you coming and leans in to them, and doesn't bother to whisper."
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_class", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "I sit two rows behind her in class. I've seen what's under her clothes.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Both girls look up at you at once. One of them covers her mouth. The other one doesn't look away."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him talk."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 19 }]
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him talk."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 39 }]
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him talk."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 59 }]
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him talk."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Walk over and shut him up."
+targetType = "node"
+nodeId = "shut"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "let"
+name = "Let him talk"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You walk past slow, right past them, close enough to hear the rest. You don't fold your arms and you don't look away. The girl who didn't look away watches your chest the whole way past."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Oh my god. She heard you."
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He should sound sorry, but he sounds pleased."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Half your class knows. By next week it'll be all of it."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave them to it."
+targetType = "location"
+locationId = "quad"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "shut"
+name = "Shut him up"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You stop right in front of him, so close your shadow's on his face."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Tell them what you were doing, staring up my clothes in class instead of taking notes."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The girls laugh, at him. He goes red to the neck and finds something to read on his phone."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "He'll still tell it, but not where you can hear."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave them to it."
+targetType = "location"
+locationId = "quad"
+time_progression_minutes = 0
+
+[[canvases]]
+id   = "gossip_spread_party"
+name = "Somebody tells the kitchen"
+description = "Gossip (DECISIONS 207): Somebody tells the kitchen. Someone who saw says it out loud while she is there (talk_party); 1 in 3 on arrival, one a day. Letting him talk spreads it (campus_talk +1) and pays her to her stage's top; shutting him up spreads nothing; a friend in the room shuts him down first."
+
+[canvases.trigger]
+location = "zoe_apartment"
+is_repeatable = true
+priority = 5
+is_active = true
+trigger_mode = "random"
+chance = 0.35
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "gossip_party_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 10 }, { type = "flag", subject = "player", flag_key = "talk_party", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "party_went", operator = "lt", value = 8 }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [4]
+start_time = "19:00"
+end_time = "00:00"
+
+[[canvases.trigger.schedules]]
+weekdays = [5]
+start_time = "00:00"
+end_time = "02:00"
+
+[[canvases.nodes]]
+id   = "event"
+name = "Somebody tells the kitchen"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "In Zoe's kitchen a girl with a red cup is holding court by the fridge. She sees you in the doorway and smiles, wide, and tells the room."
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_party", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "zoe_dares_done", operator = "gte", value = 1 }] }
+blocks = [
+  { type = "dialog", content = "She takes Zoe's dares. In the middle of the party, in front of everyone.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_party", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "zoe_has_bra", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "She pulled her bra off through her sleeve on Zoe's balcony. Gave Zoe the bra. Didn't put it back on.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_party", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "She was all over Jake's teammate at Zoe's party.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The kitchen goes quiet, then loud. Somebody whoops. Every face in there turns to you: guys you've never met, girls from your classes, a guy with a keg cup who looks at you like you're the next thing on the menu."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "zoe_apartment", npc_id = "npc_zoe", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "Zoe comes in from the living room, hears the end of it, and puts herself between you and the fridge." }, { type = "dialog", content = "Britt. My house, my friend. Say it again and you're out on the step.", props = { speaker = "npc", npcId = "npc_zoe" } }, { type = "paragraph", content = "Britt says nothing. Zoe hooks her arm through yours and steers you back out to the music." }, { type = "dialog", content = "She's jealous, babe. Look at you. Of course she is.", props = { speaker = "npc", npcId = "npc_zoe" } }] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let her talk."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }, { type = "npc_at_location", location_id = "zoe_apartment", npc_id = "npc_zoe", operator = "is_absent" }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 19 }]
+flagEffects = [{ targetType = "player", flag = "gossip_party_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let her talk."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }, { type = "npc_at_location", location_id = "zoe_apartment", npc_id = "npc_zoe", operator = "is_absent" }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 39 }]
+flagEffects = [{ targetType = "player", flag = "gossip_party_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let her talk."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }, { type = "npc_at_location", location_id = "zoe_apartment", npc_id = "npc_zoe", operator = "is_absent" }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 59 }]
+flagEffects = [{ targetType = "player", flag = "gossip_party_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let her talk."
+targetType = "node"
+nodeId = "let"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "npc_at_location", location_id = "zoe_apartment", npc_id = "npc_zoe", operator = "is_absent" }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "gossip_party_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Walk over and shut her up."
+targetType = "node"
+nodeId = "shut"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "zoe_apartment", npc_id = "npc_zoe", operator = "is_absent" }] }
+flagEffects = [{ targetType = "player", flag = "gossip_party_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let her."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "zoe_apartment", npc_id = "npc_zoe", operator = "is_present" }] }
+flagEffects = [{ targetType = "player", flag = "gossip_party_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "let"
+name = "Let her talk"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You stand in the doorway and let them look. You don't deny it. The guy with the keg cup raises it to you, and his eyes go to your tits and stay there."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Is she gonna do it again?"
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The girl by the fridge shrugs, smiling, like it's up to you."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, blocks = [{ type = "thought_bubble", content = "Your face is on fire. You want to be anywhere but this doorway, but your feet don't move.", props = { speaker = "player" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }] }, blocks = [{ type = "thought_bubble", content = "They're all going to tell it tomorrow. Your face burns, but you don't look away.", props = { speaker = "player" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }] }, blocks = [{ type = "thought_bubble", content = "They're all going to tell it tomorrow. You want them to tell it right.", props = { speaker = "player" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }, blocks = [{ type = "thought_bubble", content = "They're all going to tell it tomorrow. Good. Let them.", props = { speaker = "player" } }] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave them to it."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "shut"
+name = "Shut her up"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You walk straight up to her and take the red cup out of her hand and drink half of it."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "You weren't even there."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The kitchen laughs, at her. She snatches the cup back and goes looking for someone else to tell."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "It's a good line, but nobody in the kitchen believes it."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave them to it."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 0
+
+[[canvases]]
+id   = "gossip_ask_quad"
+name = "Three guys on the steps"
+description = "Gossip (DECISIONS 207): Three guys on the steps. Strangers who heard about her ask her to show them (campus_talk 25+). 1 in 3, one a day. Her answers by stage: let them look (under 20, to 19), her bra (20, to 39), her bare tits for a moment (60, to 79); a yes spreads it (campus_talk +1)."
+
+[canvases.trigger]
+location = "quad"
+is_repeatable = true
+priority = 5
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "gossip_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 25 }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4]
+start_time = "08:00"
+end_time = "18:00"
+
+[[canvases.nodes]]
+id   = "event"
+name = "Three guys on the steps"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Three guys on the library steps stop talking when you come up the path. One of them nudges the others and stands up."
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_quad", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "team_saw_quad", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "You're Jake's girl. The one in his lap on the grass, with the whole team watching.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_quad", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "You're Jake's girl. We saw you two on the grass.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_class", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "You sit in front of my buddy in class. He says he's seen everything.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_gym", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "You're the girl from the gym. The guys at the rack won't shut up about you.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_party", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "zoe_dares_done", operator = "gte", value = 1 }] }
+blocks = [
+  { type = "dialog", content = "You're the one who does Zoe's dares.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_party", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "zoe_has_bra", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "You're the one from Zoe's balcony. The guy at the window told everybody.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_party", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "You're the one who was all over Jake's teammate at Zoe's.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_class", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "talk_gym", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "talk_quad", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "talk_party", operator = "is_false" }] }
+blocks = [
+  { type = "dialog", content = "You're the new girl. The one everybody's talking about.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Go on. Show us."
+props = { speaker = "unknown" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Stop, and let them look."
+targetType = "node"
+nodeId = "look"
+time_progression_minutes = 2
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 19 }]
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Lift your top and flash your bra."
+targetType = "node"
+nodeId = "bra"
+time_progression_minutes = 2
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_slot", slot = "top", operator = "equipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "clothing_slot", slot = "bra", operator = "equipped" }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 39 }]
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Lift your top. Flash your tits."
+targetType = "node"
+nodeId = "bare"
+time_progression_minutes = 2
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "clothing_slot", slot = "top", operator = "equipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Keep walking."
+targetType = "node"
+nodeId = "no"
+time_progression_minutes = 1
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "look"
+name = "Let them look"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You stop on the path in front of them and stand there, and let them look. Your face is hot. They look at your chest and your legs and your mouth, all three of them, and nobody says anything for a second."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Okay. Okay, that's something."
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You want to stay, but you walk on before your nerve goes. Behind you one of them laughs, not mean, and says your name to the others like he's learning it."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "You didn't show them anything, but your heart's going like you did."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Walk on."
+targetType = "location"
+locationId = "quad"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "bra"
+name = "Your bra"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You look round once. Then you grab the hem of your top and pull it up to your collarbone, right there on the path, and hold it. Your tits in your bra, pushed up, for three guys and anyone else on the steps."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Holy shit. She did it."
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You count three and pull it down. The one standing sits down hard, like his legs went."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "By tonight that's all three of them telling it. You can feel the grin on your own face."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Walk on."
+targetType = "location"
+locationId = "quad"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "bare"
+name = "Your tits"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You don't look round. You pull your top up to your chin, nothing under it, and stand there with your bare tits out to the library steps, nipples hard in the air, while three guys forget how to breathe."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Oh my god. Oh my god."
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Two seconds. Three. You drop the top and walk on, not fast. Someone on the steps above them has a phone out, and you don't stop to see if it's pointed at you."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Everyone was right about you. You just proved it to their faces."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Walk on."
+targetType = "location"
+locationId = "quad"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "no"
+name = "Keep walking"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You walk past without slowing down, but you hear them laugh, and one of them calls after you."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Next time, then!"
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Next time. Like it's already decided."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Walk on."
+targetType = "location"
+locationId = "quad"
+time_progression_minutes = 0
+
+[[canvases]]
+id   = "gossip_ask_party"
+name = "A guy who heard"
+description = "Gossip (DECISIONS 207): A guy who heard. Strangers who heard about her ask her to show them (campus_talk 60+). 1 in 3, one a day. Her answers by stage: let them look (under 20, to 19), her bra (20, to 39), her bare tits for a moment (60, to 79); a yes spreads it (campus_talk +1)."
+
+[canvases.trigger]
+location = "zoe_apartment"
+is_repeatable = true
+priority = 5
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "gossip_party_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 60 }, { type = "hours_since_flag", subject = "player", flag_key = "party_went", operator = "lt", value = 8 }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [4]
+start_time = "19:00"
+end_time = "00:00"
+
+[[canvases.trigger.schedules]]
+weekdays = [5]
+start_time = "00:00"
+end_time = "02:00"
+
+[[canvases.nodes]]
+id   = "event"
+name = "A guy who heard"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "A guy you've never met finds you by the bathroom door in Zoe's hall. He's been looking for you; you can tell from how he smiles when he does."
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_quad", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "team_saw_quad", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "I heard Jake had you in his lap on the quad with the whole team watching.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_quad", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "I heard about you and Jake, on the grass, in front of everybody.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_class", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "I heard whoever sits behind you in class gets quite a view.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_gym", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "I heard you're the reason the guys at the gym can't finish a set.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_party", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "zoe_dares_done", operator = "gte", value = 1 }] }
+blocks = [
+  { type = "dialog", content = "I heard you do anything Zoe dares you.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_party", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "zoe_has_bra", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "I heard what happened on Zoe's balcony. The guy at the window saw everything.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_party", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "I heard about you and Jake's teammate.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_class", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "talk_gym", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "talk_quad", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "talk_party", operator = "is_false" }] }
+blocks = [
+  { type = "dialog", content = "I heard about you. Everybody's heard about you.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Go on. Show us."
+props = { speaker = "unknown" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Stop, and let them look."
+targetType = "node"
+nodeId = "look"
+time_progression_minutes = 2
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }
+effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 19 }]
+flagEffects = [{ targetType = "player", flag = "gossip_party_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Lift your top and flash your bra."
+targetType = "node"
+nodeId = "bra"
+time_progression_minutes = 2
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_slot", slot = "top", operator = "equipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "clothing_slot", slot = "bra", operator = "equipped" }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 39 }]
+flagEffects = [{ targetType = "player", flag = "gossip_party_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Lift your top. Flash your tits."
+targetType = "node"
+nodeId = "bare"
+time_progression_minutes = 2
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "clothing_slot", slot = "top", operator = "equipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "gossip_party_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Pull your dress down and flash your bra."
+targetType = "node"
+nodeId = "bra_d"
+time_progression_minutes = 2
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_slot", slot = "dress", operator = "equipped" }, { type = "clothing_slot", slot = "bra", operator = "equipped" }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 39 }]
+flagEffects = [{ targetType = "player", flag = "gossip_party_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Pull your dress down. Flash your tits."
+targetType = "node"
+nodeId = "bare_d"
+time_progression_minutes = 2
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "clothing_slot", slot = "dress", operator = "equipped" }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "gossip_party_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Keep walking."
+targetType = "node"
+nodeId = "no"
+time_progression_minutes = 1
+flagEffects = [{ targetType = "player", flag = "gossip_party_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "look"
+name = "Let them look"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You lean back on the wall and let him look. He takes his time about it: your legs, your chest, your mouth."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Yeah. They weren't lying."
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He goes back to the kitchen and tells them all you said hi."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "You didn't say anything. He'll tell it like you did."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the party."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "bra"
+name = "Your bra"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You check the hall, then pull your top up over your bra and let him look, against the wall, with the party right there through the doorway."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "They weren't lying."
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "When you pull it down he's already got his phone out, typing to someone."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Tomorrow the whole team knows. You want them to."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the party."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "bare"
+name = "Your tits"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You don't check anything. You pull your top up over your bare tits in the hallway at Zoe's and hold it there. He stares. Two guys coming out of the kitchen stop dead in the doorway."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "They weren't lying. Holy shit, they weren't lying."
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You let it drop and walk past all three of them back to the music, nipples hard against your top."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "They'll all tell it now. Every one of them saw it for himself."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the party."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "no"
+name = "Keep walking"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's cute, but you walk past him back to the music."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Worth a try. Everybody says you're up for it."
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Everybody says. You can still feel his eyes on your ass, all the way to the kitchen."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the party."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "bra_d"
+name = "Your bra"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You check the hall, then hook a finger in the neckline of your dress and pull it down over your bra, and let him look, against the wall, with the party right there through the doorway."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "They weren't lying."
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "When you tug it back up he's already got his phone out, typing to someone."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Tomorrow the whole team knows. You want them to."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the party."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "bare_d"
+name = "Your tits"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You don't check anything. You pull the front of your dress down under your bare tits in the hallway at Zoe's and hold it there. He stares. Two guys coming out of the kitchen stop dead in the doorway."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "They weren't lying. Holy shit, they weren't lying."
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You pull it back up and walk past all three of them to the music, nipples hard against the dress."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "They'll all tell it now. Every one of them saw it for himself."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Back to the party."
+targetType = "location"
+locationId = "zoe_apartment"
+time_progression_minutes = 0
+
+[[canvases]]
+id   = "gossip_passby"
+name = "A stranger says your name"
+description = "Gossip (DECISIONS 207): at campus_talk 60, a stranger on the quad says her name and what he heard. 1 in 4, one a day. Her line by Exhibitionism band. Smiling back (Showing, 40) spreads it and pays to her stage's top."
+
+[canvases.trigger]
+location = "quad"
+is_repeatable = true
+priority = 5
+is_active = true
+trigger_mode = "random"
+chance = 0.25
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "gossip_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 60 }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time = "20:00"
+
+[[canvases.nodes]]
+id   = "event"
+name = "Your name"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "A guy you've never seen in your life passes you on the path, slows down, and says your name, like he's been waiting to try it out."
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_quad", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "team_saw_quad", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "@player, right? You're the one in Jake's lap on the grass, with the whole team watching.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_quad", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "@player, right? You're the one all over Jake on the grass, in front of the whole team.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_class", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "@player, right? You're the one from the lecture hall. The guys in your row say they've seen what's under your clothes.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_gym", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "@player, right? You're the one from the gym. The guys in there can't stop talking about you.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_party", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "zoe_dares_done", operator = "gte", value = 1 }] }
+blocks = [
+  { type = "dialog", content = "@player, right? You're the one who takes Zoe's dares.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_party", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "zoe_has_bra", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "@player, right? You're the one from Zoe's balcony. With nothing on under your clothes, they say.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_party", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "@player, right? You're the one who was all over Jake's teammate at Zoe's.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "talk_class", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "talk_gym", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "talk_quad", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "talk_party", operator = "is_false" }] }
+blocks = [
+  { type = "dialog", content = "@player, right? Everybody's heard about you.", props = { speaker = "unknown" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, blocks = [{ type = "thought_bubble", content = "A total stranger. Your stomach drops. How many people have heard?", props = { speaker = "player" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 40 }] }, blocks = [{ type = "thought_bubble", content = "A total stranger knows. Your face burns, but under it there's something else.", props = { speaker = "player" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }] }, blocks = [{ type = "thought_bubble", content = "A total stranger knows. You thought you'd hate that, but you don't.", props = { speaker = "player" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }, blocks = [{ type = "thought_bubble", content = "A total stranger knows. Good.", props = { speaker = "player" } }] },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Keep walking."
+targetType = "node"
+nodeId = "walk"
+time_progression_minutes = 1
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Smile at him."
+targetType = "node"
+nodeId = "smile"
+time_progression_minutes = 1
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 60 }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 59 }]
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Smile at him."
+targetType = "node"
+nodeId = "smile"
+time_progression_minutes = 1
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }] }
+effects = [{ targetType = "player", trait = "campus_talk", op = "add", value = 1, clamp = false }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, clamp = true, cap = 79 }]
+flagEffects = [{ targetType = "player", flag = "gossip_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "walk"
+name = "Keep walking"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You walk on with your face hot. Behind you he says it again to his friend, laughing."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Everybody. Everybody's heard."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Walk on."
+targetType = "location"
+locationId = "quad"
+time_progression_minutes = 0
+
+[[canvases.nodes]]
+id   = "smile"
+name = "Smile at him"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You smile at him, slow, and let him look at you while you do it: your mouth, your chest, all the way down. He walks into the guy in front of him."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "She smiled at me. Dude. She smiled."
+props = { speaker = "unknown" }
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "Let him tell that one too."
+props = { speaker = "player" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Walk on."
+targetType = "location"
+locationId = "quad"
+time_progression_minutes = 0

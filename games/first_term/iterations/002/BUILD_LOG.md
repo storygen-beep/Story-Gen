@@ -1621,3 +1621,18 @@ canvases; the bought-flags nobody read), fixed. Reader: 7 fails, fixed. Gates 11
 wrong. Headless: the offers show at footfall 10 and 25 only; buying takes $30 and $40; locks shut at 39 and 59; on
 shift each dress stays on; tips $10/12/14/16 on "Not today, hon."; each accident's let is shut at 39/59, open at 40/60.
 Two pictures missing: clothing/cafe_uniform_short.jpg, clothing/cafe_uniform_lowcut.jpg.
+
+## 2026-11-08 — gossip that matters
+
+DECISIONS 207. New part `gossip.py` (in build_scenes.sh ALL_PARTS): three spread scenes, the asks on the quad (25) and
+at the party (60), the passer-by (60). `canv.py` talk_remembers sets talk_class / talk_gym / talk_quad / talk_party on
+every answer that pays campus_talk (TALK_KIND by canvas-id prefix). Nadia's library question and lunch refusal
+(hale.py), the rival's report (college.py gossip_rival_report), three feed posts (phone.py), the sidebar words and
+in_dump = false, the daily resets gossip_today / gossip_party_today. First builds: 4 gate fails (garment names in
+past-tense lines; lines copied across screens; the banded meter's number; `but` under the field p10), fixed. Reader:
+22 fails, fixed. Gates 118, 0 fails; shape 22 pass; cites 0 wrong. Headless: spreads fire at 10 with their flag only;
+let +1, shut 0; Nadia defends below 40 only, Zoe at the party; the quad ask's answers by stage (19 / bra at 20 / bare at
+60); the party ask in a dress at 60; the passer-by's smile from 40; the rival at 40 not 39, complaints +1; Nadia asks
+once, refuses lunch at 40, library open. Three pictures missing: phone/feed_talk_named.jpg, phone/feed_talk_slut.jpg,
+phone/feed_talk_rate.jpg.
+

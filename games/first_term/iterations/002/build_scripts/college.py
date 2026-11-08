@@ -581,6 +581,27 @@ out.append({
            eff=[add("complaints", 1, clamp=False)]),
     ])]})
 
+# ── gossip (DECISIONS 207): the cost. At campus talk 40 the rival takes what campus says to the dean's office, once,
+# in one of her classes (CoT: being talked about costs her; its rumor scenes cost humiliation, cot_40:1540-1543, and
+# its threats never land, which the study counts a weakness, SYNTHESIS.md §1 item 9). Here it lands: complaints +1,
+# which the dean's warning reads at 2 (dean_warning), and that sends the letter home. Both answers take the complaint;
+# it happens to her, so it pays nothing (H5). ──
+out.append({
+    "id": "gossip_rival_report", "event": True, "name": "The rival tells the dean",
+    "description": "Gossip's cost (DECISIONS 207): at campus_talk 40 the rival reports what campus says about her to the dean's office, once, as a Psychology or Business class starts. complaints +1 on either answer.",
+    "trigger": {"location": "lecture_hall", "is_repeatable": False, "priority": 5, "is_active": True,
+                "schedules": at_start(PSYCH + BUSI),
+                "conditions": cond(flag("opening_done"), flag("rival_met"), trait("campus_talk", "gte", 40))},
+    "nodes": [node("report", "Before class", [
+        P("The rival girl is waiting by your row with her phone in her hand. She holds it up so you can see the screen: an email, sent, to the dean's office."),
+        D(RIVAL, "I wrote down what everyone's saying about you. All of it, word for word. Somebody had to."),
+        P("Three rows of people heard her say it. Nobody pretends they didn't. A guy at the end of your row looks at you like he's trying to work out which part is true."),
+        T("A complaint with your name on it, on the dean's desk. And she said it to three rows of people first."),
+    ], [
+        go("\"Enjoy your class.\"", loc="lecture_hall", mins=5, eff=[add("complaints", 1, clamp=False)]),
+        go("Sit down and say nothing.", loc="lecture_hall", mins=5, eff=[add("complaints", 1, clamp=False)]),
+    ])]})
+
 # ── the midterms (college_exam): weeks 7-8, once per exam, in that subject's slot ──
 # reader a3 #24 (DECISIONS 131, call A): a no costs him Want +1. The cocky guy has no core traits in
 # people_data.py (core={}), and a pay to a trait he doesn't declare is a made-up stat (call B), so the pay

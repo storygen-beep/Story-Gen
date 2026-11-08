@@ -1,4 +1,5 @@
 # [READY] The systems — First Term (layer 4: systems as slots)
+> Changed 2026-11-08 (DECISIONS 207, LO: "Go ahead"): gossip that matters, §9. Signed by LO 2026-11-08 ("Sign it").
 > Changed 2026-11-08, LO's call ("Move to 80", DECISIONS 201): posing naked for the whole figure-drawing class opens at On Display (Exhibitionism 80), as Course of Temptation gates its art-class nude model; what shows sets the stage (DECISIONS 200). Signed by LO 2026-11-08.
 
 > [READY] · layer 4 · drafted 2026-10-06 · updated 2026-10-08 (§14, the park, at the end; the parties card, the page 7 line, needs not cards) · updated 2026-10-09 (the late keys, key 1 below). Changed 2026-10-09, signed by LO: LO, 2026-10-09.
@@ -350,6 +351,20 @@
   - goal 2;
   - who approaches her;
   - **feed posts about her** (`the-phone.md` P6, last paragraph).
+- **Gossip that matters (DECISIONS 207, 2026-11-08).** Course of Temptation's model (`round10/cards/gossip.md`):
+  - **What campus remembers:** four flags, set on every answer that already pays the talk: `talk_class`, `talk_gym`,
+    `talk_quad`, `talk_party`. Each line that names an act shows only behind its flag.
+  - **10, the spread:** in the canteen (the gym), on the quad (class) and at Zoe's (the party), someone who saw
+    says it out loud while she's there. Letting him talk spreads it (+1) and pays her to her stage's top; shutting
+    him up spreads nothing. Nadia (canteen) and Zoe (party) shut him down first.
+  - **25:** three guys on the quad ask her to show them (let them look under 20; her bra at 20; her bare tits for a
+    moment at 60). Nadia, in the library, asks if it's true. The feed names the class talk.
+  - **40, the cost:** the rival reports her to the dean's office once (complaints +1, which feeds the dean's
+    warning at 2). Nadia won't sit with her at lunch; the library stays open (the one door with a way back). A feed post.
+  - **60:** a guy at Zoe's asks for a show; strangers on the quad say her name and the act, and her line moves from
+    shame to pride by Exhibitionism band. A feed post about the dares.
+  - **Shown** on the sidebar in words with the number: "Nobody knows your name" to "Everyone has a story about you".
+  - One campus event a day, one at the party a night. No decay.
 
 ## 10. `laura_suspicion` (a meter)
 
@@ -489,7 +504,7 @@ tick runs at `:6947-6967`; `engine.md` §28.1). The cheat page's "Skip to mornin
 | `ryan_cancelled_kayla` | flag | Ryan A 11 | Ryan's gated row (`LIVES.md:125-126`), Ryan A 12 | never cleared by the tick (`SP1_time.md:28-31`) | ok |
 | `parents_away_night` · `laura_weekend_away` | flags | events (`LIVES.md:62-66`) | rows, Zoe A 6, Mark A 13–14 | never cleared by the tick (`SP1_time.md:28-31`) | ok |
 | `laura_at_fridays` | flag | Laura C 15 | her gated Friday row | kept | ok |
-| `campus_talk` | trait, no decay | parties, canteen, class, feed | goal 2, approaches, feed posts | kept | ok |
+| `campus_talk` | trait, no decay | parties, canteen, class, gym, quad, the spread scenes | goal 2, the spread scenes, the asks, the passer-by, Nadia, the rival's report, feed posts, the sidebar (DECISIONS 207) | kept | ok |
 | `laura_suspicion` | trait, no decay | home late, lies, grades, letters, missed calls | Ryan A 13 | kept | ok (thin) |
 | `followers` | trait | the feed | campus talk, offers | kept | ok if something reads it |
 | `jake_date_booked` · `jake_dates_off` | flags | Jake's thread, his no | the door steps | the scene clears it | ok |

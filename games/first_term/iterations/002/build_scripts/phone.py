@@ -194,6 +194,41 @@ search_queries = ["college house party crowd phone photo"]
 [phone.posts.trigger]
 conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "party_went", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 10 } ] }
 
+# gossip (DECISIONS 207): the feed says what campus says, one post a level, each behind the flag that makes it true
+# (CoT's six reputation posts on its feed, cot_20:6311-6350). No DECISIONS 41 words from strangers.
+[[phone.posts]]
+id          = "feed_talk_named"
+app         = "feed"
+poster_name = "@quad_watch"
+caption     = "lecture hall got a show again 👀 row behind the new girl, you know what you saw"
+likes       = 388
+image       = "phone/feed_talk_named.jpg"
+search_queries = ["college lecture hall students phone photo from behind"]
+[phone.posts.trigger]
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "talk_class", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 25 } ] }
+
+[[phone.posts]]
+id          = "feed_talk_slut"
+app         = "feed"
+poster_name = "@quad_watch"
+caption     = "everybody's heard about the new girl by now. slut or legend? comments open 🔥"
+likes       = 612
+image       = "phone/feed_talk_slut.jpg"
+search_queries = ["college campus girl walking phone photo candid"]
+[phone.posts.trigger]
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 40 } ] }
+
+[[phone.posts]]
+id          = "feed_talk_rate"
+app         = "feed"
+poster_name = "@campus_nights"
+caption     = "friday at zoe's: guess who took the dare again. rate her 1-10 👇"
+likes       = 905
+image       = "phone/feed_talk_rate.jpg"
+search_queries = ["house party kitchen crowd cheering phone photo"]
+[phone.posts.trigger]
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "talk_party", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "zoe_dares_done", operator = "gte", value = 1 }, { type = "trait", subject = "player", trait_key = "campus_talk", operator = "gte", value = 60 } ] }
+
 # Followers come only from her own posts, so a mirror pic exists once there are twenty of them.
 [[phone.posts]]
 id          = "feed_followers_dm"

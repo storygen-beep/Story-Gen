@@ -209,6 +209,9 @@ flagEffects = [
   # clothing accidents in class and on the shift (DECISIONS 202): one a day each
   { targetType = "player", flag = "class_accident_today", op = "unset" },
   { targetType = "player", flag = "cafe_accident_today", op = "unset" },
+  # gossip (DECISIONS 207): one campus gossip event a day, one at the party a night
+  { targetType = "player", flag = "gossip_today", op = "unset" },
+  { targetType = "player", flag = "gossip_party_today", op = "unset" },
   # the sex scenes in the cold places, once a day each (heat proposal A1-A7, DECISIONS 147; heat_a.py, and A4 in
   # 3_activities.toml shop_try_on)
   { targetType = "player", flag = "jake_lockers_today", op = "unset" },
@@ -293,6 +296,21 @@ bands = [
   { min = 80, max = 100, text = "On Display" },
 ]
 
+# gossip (DECISIONS 207): campus talk in words, like CoT's reputation tab (cot_53:5118-5188), with the number
+# beside it as every banded meter here shows (gates: a banded meter is shown once). Bands = the levels its scenes read.
+[[sidebar_items]]
+type       = "trait_words"
+trait      = "campus_talk"
+label      = "Campus talk"
+show_value = true
+bands = [
+  { min = 0,  max = 9,    text = "Nobody knows your name" },
+  { min = 10, max = 24,   text = "People know your name" },
+  { min = 25, max = 39,   text = "You're talked about" },
+  { min = 40, max = 59,   text = "Everyone's heard" },
+  { min = 60, max = 9999, text = "Everyone has a story about you" },
+]
+
 [[sidebar_items]]
 type  = "trait_bar"
 trait = "energy"
@@ -342,6 +360,7 @@ in_dump = false
 [[traits.labels]]
 key   = "campus_talk"
 label = "Campus talk"
+in_dump = false   # gossip (DECISIONS 207): the sidebar item shows its band and number once
 
 [[traits.labels]]
 key   = "laura_suspicion"
