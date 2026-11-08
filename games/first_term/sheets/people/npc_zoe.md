@@ -1,4 +1,5 @@
 # [READY] Person — Zoe
+> Changed 2026-11-08 (DECISIONS 205): everyday clothes by stage, new section below. Re-signed by LO 2026-11-08 ("Sign them").
 > Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Walk-ins add the women's toilet (the refill walk-in).
@@ -249,3 +250,9 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
 | messages per reply | LO's play note, 2026-10-08 (chats wait for her reply) · lines guess |
 | fix from the false-line sweep | sweep A4-09 (2026-10-08) |
 | card goals are the step's real requirements | LO's play note, 2026-10-08 · sweep K8 and its 38 more cards |
+
+## Zoe sees the new pieces (2026-11-08, DECISIONS 205)
+
+On the quad and at the party house, Zoe has a line and a spoken line for each of the crop top, the bodycon dress, the micro
+shorts and the plunge dress (`zoe.py` ZOE_SEES).
+

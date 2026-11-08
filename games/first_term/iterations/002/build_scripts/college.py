@@ -187,6 +187,27 @@ def eyes_blocks(pools):
             GC(cond(trait("exhibitionism", "lt", 20)), P(pools["eyes_plain"]))]
 
 
+# everyday clothes by stage (DECISIONS 205): the room sees each piece, one line, before her choice
+def _wt(t, op="eq"):
+    return {"type": "worn_type", "operator": op, "value": t}
+
+
+CLASS_CLOTHES = {   # two classes, so each line lives on one screen (gate `one pool, one place`)
+    "college_class_psych": [
+        G(cond(_wt("crop_top")), P("Front row, in the crop top, your belly's bare from the hem to your waistband. Every time you reach down for your pen, the guy in the row behind leans forward to see how far it rides up.")),
+        G(cond(_wt("bodycon_dress")), P("In the front-row seat the bodycon dress is halfway up your thighs, but you can't tug it down without the whole row seeing you do it. The guy behind you has stopped writing.")),
+        G(cond(_wt("micro_shorts")), P("Front row, in the micro shorts, your bare thighs right up to the crease of your ass on the seat. Every time you shift, the guy in the row behind looks down the back of them.")),
+        G(cond(_wt("plunge_dress"), BRALESS), P("The plunge dress is open to your navel, nothing under it, right in front of the lectern. Every time you lean to write, the neckline gapes off your bare tits, and Dr. Hale stares at the back wall for a long time.")),
+    ],
+    "college_class_figure": [
+        G(cond(_wt("crop_top")), P("Every time you reach up to the top of the paper, the crop top rides up your belly. The guy at the next easel is drawing your waist, not the model's.")),
+        G(cond(_wt("bodycon_dress")), P("On the stool the bodycon dress rides up your thighs, but you need both hands for the charcoal. The guy at the next easel isn't drawing the model any more.")),
+        G(cond(_wt("micro_shorts")), P("On the stool in the micro shorts, your bare cheeks spread on the seat. The guy at the next easel has turned his board a quarter toward you.")),
+        G(cond(_wt("plunge_dress"), BRALESS), P("The plunge dress gapes every time you lean in to the paper, your bare tits loose inside it. The guy at the next easel keeps losing his line.")),
+    ],
+}
+
+
 def class_row(cid, name, subj, grade, schedules, lecturer, meet_flags, opening, beside, risky_label, risky_text, extra_blocks=(),
               pools=None, chat_beside=None, her_line=(), said=None, risky_floor=20, risky_cap=CAP_DARING, risky_eff=(), mild=None,
               covered=None):
@@ -230,6 +251,7 @@ def class_row(cid, name, subj, grade, schedules, lecturer, meet_flags, opening, 
                 G(cond(trait("energy", "lt", 20)), T(pools["tired"])),
                 G(DARING_STATE, *eyes_blocks(pools)),
                 *cov_look,
+                *CLASS_CLOTHES.get(cid, []),
             ], [
                 # Shut under 20 energy, as the thought says (college.md "The lock", sweep A5-08)
                 go("Focus. (90 minutes, 10 energy)", node="focus", mins=0, costs=[{"trait": "energy", "value": 10}], flags=meet_flags,
@@ -961,7 +983,8 @@ out.append({
            cond_=cond(flag("worked_out", False), trait("exhibitionism", "gte", 40), SHORTS, NOT_SHEER)),
         go("Do your squats anyway.", node="sheer", mins=60, costs=[{"trait": "energy", "value": 15}],
            eff=[add("energy", -15), exh(79), add("campus_talk", 1, clamp=False)], flags=[fset("worked_out")],
-           cond_=cond(flag("worked_out", False), trait("exhibitionism", "gte", 60), SHEER)),
+           cond_=cond(flag("worked_out", False), trait("exhibitionism", "gte", 60), SHEER,
+                      {"type": "clothing_slot", "slot": "underwear", "operator": "equipped"})),   # with no panties it shows her bare: On Display (80), not this release (DECISIONS 205)
         go("Not today.", loc="campus"),
     ]),
     node("set", "The mirror wall", [
@@ -999,10 +1022,7 @@ out.append({
     ], [go("Towel off.", loc="campus_gym")]),
     node("sheer", "Squats in the sheer leggings", [
         P("You do your squats anyway, facing the mirror wall, with the lights straight through the sheer leggings. Every time you go down your ass spreads in them, and the whole floor can see it."),
-        G(cond({"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}),
-          P("In the mirror you can see your own panties through the cloth, every line of them. So can the guy on the rowing machine. He's stopped rowing.")),
-        G(cond({"type": "clothing_slot", "slot": "underwear", "operator": "unequipped"}),
-          P("You're not wearing panties, and it shows. Your pussy shows through the sheer cloth when you go all the way down, and somebody behind you drops a plate.")),
+        P("In the mirror you can see your own panties through the cloth, every line of them. So can the guy on the rowing machine. He's stopped rowing."),
         WHO("I said watch it."),
         P("The desk guy says it, and then he stays at the desk and watches the rest of your set with everybody else."),
         T("He can warn you all he likes. He's still looking."),
@@ -1058,7 +1078,7 @@ out.append(gym_accident("gym_accident_shorts", "The shorts ride up", [SHORTS, NO
     "Pull them down.",
     "You let the sled down and pull the shorts straight, quick. Somebody at the rack laughs. Your cheeks are red, and not from the press.",
     "Do the next rep.", [], CAP_BOLD,
-    "You don't touch them. You do the next rep, and the one after, knees to your chest each time, the shorts pulled aside, your panties tight over your pussy, and nobody at the rack is lifting a thing.",
+    "You don't touch them. You do the next rep, and the one after, knees to your chest each time, the shorts pulled aside, your panties pulled tight between your legs, and nobody at the rack is lifting a thing.",
     "They train here most afternoons. Next time they'll find a reason to use the rack by the leg press."))
 
 # ═════════════ CLASS ACCIDENTS (college.md "Accidents in class", DECISIONS 202) ═════════════
@@ -1092,8 +1112,8 @@ def class_accident(cid, name, conds, blocks, fix, fix_text, let, let_gate, cap, 
                     go(fix, node="fix", mins=0, eff=list(talk), flags=list(flags)),
                     *([go(let, node="let", mins=0, eff=talk + [exh(cap)], flags=list(flags), cond_=cond(*let_gate) if let_gate else None)] if let else []),
                 ]),
-                node("fix", fix.rstrip("."), [*fix_text, P(hook)], [go("Get to your seat.", loc="lecture_hall", mins=0)]),
-                *([node("let", let.rstrip("."), [*let_text, P(hook)], [go("Get to your seat.", loc="lecture_hall", mins=0)])] if let else []),
+                node("fix", fix.rstrip("."), [*fix_text, P(hook)], [go("Wait for class.", loc="lecture_hall", mins=0)]),
+                *([node("let", let.rstrip("."), [*let_text, P(hook)], [go("Wait for class.", loc="lecture_hall", mins=0)])] if let else []),
             ]}
 
 
@@ -1113,7 +1133,7 @@ out.append(class_accident("class_acc_downblouse_bra", "Down your top", [LOW_TOP,
 
 out.append(class_accident("class_acc_downblouse_bare", "Down your top", [LOW_TOP, BRALESS],
     [P(PEN + " With no bra under it, the low-cut top just falls open. Your tits swing free inside it, bare, nipples and all, and the guy in the row behind sees every inch of them."),
-     WHO("Oh, fuck me.")],
+     WHO("Oh, Jesus. Hello.")],
     "Hand over your neckline.",
     [P("You slap a hand over your chest and straighten up so fast your knee hits the desk. It doesn't help. He's still staring at the hand like it isn't there."),
      T("No bra. Of course today.")],
@@ -1134,10 +1154,10 @@ out.append(class_accident("class_acc_stairs_panties", "Up your skirt", [SHORT_SK
     "They sit in those rows every week. Every time you climb those steps in a skirt, they'll look up."))
 
 out.append(class_accident("class_acc_stairs_bare", "Up your skirt", [SHORT_SKIRT, PANTIES_OFF],
-    [P(STAIRS + " Under the short skirt there's nothing. From their seats they're looking straight up it at your bare ass and your pussy, every step you take."),
+    [P(STAIRS + " Under the short skirt there's nothing. From their seats they're looking straight up it at your bare ass and everything between your legs, every step you take."),
      WHO("Holy shit. She's not wearing any.")],
     "Hold your skirt down.",
-    [P("You slap a hand to the back of your skirt and take the rest of the steps sideways, pussy clenched, face on fire. The whispering starts behind you before you've sat down."),
+    [P("You slap a hand to the back of your skirt and take the rest of the steps sideways, thighs clamped, face on fire. The whispering starts behind you before you've sat down."),
      T("Everybody heard him say it.")],
     None, None, None, None,   # letting it be is On Display (80), not written this release (DECISIONS 203)
     "They sit in those rows every week. They know now what you wear under a skirt, or don't."))
@@ -1158,7 +1178,7 @@ out.append(class_accident("class_acc_water_bra", "Soaked through", [THIN_TOP, BR
 
 out.append(class_accident("class_acc_water_bare", "Soaked through", [THIN_TOP, BRALESS],
     [P(WATER + " The sheer blouse goes clear and sticks to your bare tits like wet paper. Your nipples are hard from the cold water, dark through the cloth, and everyone near enough can see all of it."),
-     WHO("Fuck. Sorry. Shit. I can see your, I'm sorry.")],
+     WHO("Shit. Sorry. Shit. I can see your, I'm sorry.")],
     "Cover up with your bag.",
     [P("You crush your bag to your chest and sit hunched behind it, cold and dripping, nipples aching under the wet cloth. He brings you a wad of paper towels and can't look at your face."),
      T("No bra. Of course today.")],
@@ -1249,8 +1269,55 @@ out.append({
             pid="cocky_class_talk", bag=True),
     ], [go("Back to your easel.", loc="lecture_hall", mins=20)])]})
 
+# everyday clothes by stage (DECISIONS 205): the crop top and the bodycon in the hall
+CROP = {"type": "worn_type", "operator": "eq", "value": "crop_top"}
+BODYCON = {"type": "worn_type", "operator": "eq", "value": "bodycon_dress"}
+RACK = "Your bag's on the coat rack over the back row, and you have to stretch both arms up to get it down."
+out.append(class_accident("class_acc_crop_bra", "The crop top rides up", [CROP, BRA_ON],
+    [P(RACK + " The crop top goes up with your arms, right up over your bra, and the whole back row gets your bra and the bottom of your tits in it."),
+     WHO("Don't stop on our account.")],
+    "Grab it down.",
+    [P("You yank the crop top down with one hand and get the bag with the other, face hot. You're quick, but not quick enough. Somebody in the back row claps, slowly."),
+     T("Next time, the bag goes under the seat.")],
+    "Take your time with the bag.", [trait("exhibitionism", "gte", 20)], CAP_DARING,   # the crop top is worn from 20; a bra flash is Daring (CoT's "Flash your bra" at its 2)
+    [P("You don't pull it down. You take your time getting the strap off the hook, both arms up, your bra out for the back row the whole while. Then you let the top fall and go to your seat."),
+     GC(cond(trait("exhibitionism", "lt", 25)), T("They looked, and you let them.")),
+     GC(cond(trait("exhibitionism", "gte", 25)), T("You hung that bag up there on purpose. Didn't you."))],
+    "The back row sits there every class. Now they watch that coat rack."))
+
+out.append(class_accident("class_acc_crop_bare", "The crop top rides up", [CROP, BRALESS],
+    [P(RACK + " There's no bra under the crop top, and it goes up with your arms. The bottoms of your bare tits slide out under the hem, full and heavy, nearly to the nipple."),
+     WHO("Oh my God. Underboob. Hello.")],
+    "Grab it down.",
+    [P("You slap the hem down over your tits and get the bag in one grab, face burning. The back row is laughing and nudging each other."),
+     T("No bra and a crop top. Genius.")],
+    "Take your time with the bag.", [trait("exhibitionism", "gte", 60)], 79,
+    [P("You keep your arms up. You work the strap off the hook as slow as you like while the bottoms of your bare tits hang out under the crop top for the whole back row, and a nipple slips out with them. Then you let it fall.")],
+    "The back row sits there every class. Now none of them ever looks at the board when you reach for anything."))
+
+SEAT = "You sit down, and the bodycon dress doesn't come with you. It rides up round your hips as you sit, and it stays there."
+out.append(class_accident("class_acc_bodycon_panties", "The dress rides up", [BODYCON, PANTIES_ON],
+    [P(SEAT + " The guy across the aisle has a straight view up it, to your panties pulled tight between your thighs."),
+     WHO("Nice. Very nice.")],
+    "Tug it down.",
+    [P("You wriggle the dress back down your thighs in your seat, which only makes it worse for a second, and cross your legs hard. It's too late, but you try. He grins at you across the aisle."),
+     T("This dress was a mistake. A tight, short mistake.")],
+    "Leave it where it is.", [trait("exhibitionism", "gte", 40)], 59,
+    [P("You leave it. You sit with the dress round your hips and your knees a little apart, your panties in plain view across the aisle, and you wait for the lecture to start.")],
+    "He sits across the aisle every class. He'll be waiting for you to sit down again."))
+
+out.append(class_accident("class_acc_bodycon_bare", "The dress rides up", [BODYCON, PANTIES_OFF],
+    [P(SEAT + " There's nothing under it. The guy across the aisle has a straight view up the dress, and there's nothing between him and everything."),
+     WHO("Oh my God. Nothing. She's got nothing on.")],
+    "Tug it down.",
+    [P("You shove the dress down and clamp your thighs shut, red to the roots of your hair. The whisper goes along the row before the lecturer has said a word."),
+     T("Everybody in this row knows now.")],
+    None, None, None, None,   # letting it be is On Display (80), not written this release (DECISIONS 203)
+    "He sits across the aisle every class. He knows what's under that dress now, or isn't."))
+
 # the class accidents roll in the class start windows (DECISIONS 202)
-_starts = [w for _c in out if _c["id"].startswith("college_class_") for w in _c["trigger"]["schedules"]]
+_starts = [w for _c in out if _c["id"].startswith("college_class_") and _c["id"] != "college_class_figure"
+           for w in _c["trigger"]["schedules"]]   # the accidents are written for the tiered hall, not the easels
 assert len(_starts) >= 4
 for _c in out:
     if _c["id"].startswith("class_acc_"):

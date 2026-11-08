@@ -1,4 +1,5 @@
 # [READY] Place — Gym
+> Changed 2026-11-08 (DECISIONS 205): "Do your squats anyway." in the sheer leggings needs panties; with none it would show her bare to the floor (80, not this release). Re-signed by LO 2026-11-08 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 203, LO: "Yess"): letting bare tits show is Watched (60); letting her bare pussy show is On Display (80), not written this release. Re-signed by LO 2026-11-08 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 198): the gym clothes, from normal to slutty; three accidents; the locker room is a changing room. Re-signed by LO 2026-11-08 ("Sign 4 pages").
 > Signed by LO: LO, 2026-11-04.

@@ -1,4 +1,5 @@
 # [READY] System — wardrobe
+> Changed 2026-11-08 (DECISIONS 205): everyday clothes by stage, new section below. Re-signed by LO 2026-11-08 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 198): four gym pieces, a shop line on every bought piece, and the gym's locker room. Re-signed by LO 2026-11-08 ("Sign 4 pages").
 > Changed 2026-11-08 (DECISIONS 197): going out is Exhibitionism's alone; re-signed by LO 2026-11-08 ("Sign it").
 > Signed by LO: LO, 2026-11-04.
@@ -176,3 +177,20 @@ and it shows everything." The line shows on the shop stand and under the slot in
 
 The gym is now a place she can change (its locker room). Read by the gym (`campus_gym.md`), the park run (`park.md`)
 and Jake's training (`npc_jake.md`). Track pants and the sheer leggings count as covering her legs; the tiny shorts don't.
+
+## Everyday clothes by stage (2026-11-08, DECISIONS 205)
+
+Locked by Exhibitionism on the garment itself (the rack says "Needs Exhibitionism N"), as Course of Temptation sells
+minidress and bodycon at its level 2, micro shorts at 3 and the plunging minidress at 4 (`exhibition_study/A_cot.md:204-212`;
+its 2, 3, 4 line up with our 20, 40, 60). No public topless or bottomless (DECISIONS 204).
+
+| piece | slot | stage | price | shop line | read by |
+|---|---|---|---|---|---|
+| Crop top | top | 20 | $15 | "Short. Lift your arms and it shows what's under it." | street look · Psychology and Figure drawing · Zoe on the quad and at the party house · class accident (the coat rack) |
+| Bodycon minidress | dress | 20 | $35 | "Skin-tight and short. Sit down wrong and the room sees." | the same three · class accident (the tiered seat) |
+| Micro shorts | bottom | 40 | $20 | "Half your ass hangs out the back." | the same three · street accident (the bus-stop bench) |
+| Plunge dress | dress | 60 | $45 | "Cut to your navel. No bra goes under it." | the same three · street accident (the neckline slips) |
+
+The two dresses are her party dresses too. Accidents: a bra seen, any stage; panties from 40; bare breasts from 60; a bare
+pussy only the fix this release (80). Four pictures go on the missing-media list.
+

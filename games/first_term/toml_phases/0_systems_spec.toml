@@ -761,6 +761,56 @@ corruption = 2
 exposure = 1
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 } ] }
 
+# Everyday clothes by stage (DECISIONS 205), as Course of Temptation sells by Exhibitionism: minidress and bodycon at
+# its 2 (our 20), micro shorts at 3 (40), the plunging minidress at 4 (60) (exhibition_study/A_cot.md:204-212).
+[[clothing]]
+id = "crop_top"
+description = "Short. Lift your arms and it shows what's under it."
+name = "Crop top"
+slot = "top"
+image = "clothing/crop_top.jpg"
+price = 15
+type = "crop_top"
+beauty = 1
+corruption = 1
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 } ] }
+
+[[clothing]]
+id = "bodycon_dress"
+description = "Skin-tight and short. Sit down wrong and the room sees."
+name = "Bodycon minidress"
+slot = "dress"
+image = "clothing/bodycon_dress.jpg"
+price = 35
+type = "bodycon_dress"
+beauty = 3
+corruption = 1
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 } ] }
+
+[[clothing]]
+id = "micro_shorts"
+description = "Half your ass hangs out the back."
+name = "Micro shorts"
+slot = "bottom"
+image = "clothing/micro_shorts.jpg"
+price = 20
+type = "micro_shorts"
+beauty = 2
+corruption = 2
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 } ] }
+
+[[clothing]]
+id = "plunge_dress"
+description = "Cut to your navel. No bra goes under it."
+name = "Plunge dress"
+slot = "dress"
+image = "clothing/plunge_dress.jpg"
+price = 45
+type = "plunge_dress"
+beauty = 3
+corruption = 2
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 } ] }
+
 [[clothing]]
 id = "cafe_uniform_normal"
 description = "Short in the hem. Bend over a table and the booth behind you sees everything."

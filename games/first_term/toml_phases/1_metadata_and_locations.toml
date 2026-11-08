@@ -255,6 +255,7 @@ flag_keys = [
   "stairs_event_today",
   "street_first_l1",
   "street_first_l2",
+  "street_first_l3",
   "street_look_today",
   "street_step_today",
   "stretched_today",

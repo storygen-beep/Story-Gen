@@ -337,7 +337,7 @@ out.append(cafe_accident("cafe_acc_button_bare", "The top button goes", [SEXY_ON
     "He forgets his change on the counter. The men at the window seats saw it all, and they're staying for the rest of your shift.", dressed=True))
 
 out.append(cafe_accident("cafe_acc_hem", "Under the table", [SEXY_OFF, PANTIES_ON],
-    [P("A man in booth two knocks his fork off the table. You bend all the way over to get it from under the seat, and the uniform's hem rides right up over your ass. The whole booth behind you sees your panties, stretched tight over your pussy from behind."),
+    [P("A man in booth two knocks his fork off the table. You bend all the way over to get it from under the seat, and the uniform's hem rides right up over your ass. The whole booth behind you sees your panties, stretched tight between your legs from behind."),
      WHO("Take your time down there.")],
     "Pull the hem down.",
     [P("You come up with the fork, yank the hem down and walk off quick, face red, but the booth is already laughing. Tom watches from the counter and says nothing."),

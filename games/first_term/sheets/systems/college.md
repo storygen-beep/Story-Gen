@@ -1,4 +1,5 @@
 # [READY] System — college
+> Changed 2026-11-08 (DECISIONS 205): everyday clothes by stage, new section below. Re-signed by LO 2026-11-08 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 203, LO: "Yess"): letting bare tits show is Watched (60); letting her bare pussy show is On Display (80), not written this release. Re-signed by LO 2026-11-08 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 202): accidents in class, new section below. Re-signed by LO 2026-11-08 ("Sign them").
 > Changed 2026-11-08, LO's call ("Move to 80", DECISIONS 201): posing naked for the whole figure-drawing class opens at On Display (Exhibitionism 80), as Course of Temptation gates its art-class nude model; what shows sets the stage (DECISIONS 200). Signed by LO 2026-11-08.
@@ -130,6 +131,16 @@ letting it be pays her Exhibitionism +1, capped at the stage it shows.
 
 Why: CoT's malfunction marks on clothes (downblouse 330, flip 189, nipslip 109) and water going see-through
 (`exhibition_study/A_cot.md:224`, `:227`).
+
+## The new pieces in class (2026-11-08, DECISIONS 205)
+
+Psychology (Dr. Hale at the lectern) and Figure drawing (the guy at the next easel) each have a line for the crop top, the
+bodycon dress, the micro shorts and the plunge dress. Two more class accidents: the crop top rides up at the coat rack (bra:
+any stage, cap 19; bare: from 60, cap 79) and the bodycon rides up in the tiered seat (panties: from 40, cap 59; bare: the
+fix only, 80).
+
+The class accidents are written for the tiered hall, so they roll in the Psychology, Business and Biology start
+windows, not in Figure drawing's (easels and stools).
 
 ## Pool (`pool[]`)
 
