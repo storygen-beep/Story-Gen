@@ -311,7 +311,7 @@ waiting to happen — a number on a screen that stops meaning anything. Give it 
 price that drops. If nothing reads it, do not count it.
 
 ⚠️ **`post_actions` cannot gate on place or on clothing today.** It reads `corruption_min`, against
-`gate_trait` when set (`engine.md` §51), and nothing else (`v2.py:3406`). A place rule ("only at home") is not
+`gate_trait` when set (`engine.md` §51), and nothing else (`v2.py:3408`). A place rule ("only at home") is not
 expressible, and neither is checking what she is actually wearing — even though `worn_exposure`
 exists (`v2.py:5126`) and is exactly the predicate for it. Until then, the rung labels carry the
 whole meaning, so write them as acts (`the-voice.md` R6). **The phone owns posting:** no room button
@@ -432,10 +432,10 @@ and a cleanup that expires dates she did not attend.
 That is this file's rule stated as architecture, and it is why that system does not read as bolted on.
 
 **The engine has the primitive.** A chat reply choice carries `effects`,
-`flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2965`).
-`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:7562`) pushes
+`flagEffects`, `questEffects` and **`scheduleEffects`** (`v2.py:2967`).
+`setup.scheduleEvent({delayDays, action, flag, quest, conversation, step})` (`v2.py:7594`) pushes
 onto `game_state.scheduled`; the day tick decrements `daysLeft` and fires at zero
-(`v2.py:7179-7180`), where `setup.fireScheduledEvent` (`v2.py:7576`) can set a flag, start a quest,
+(`v2.py:7182-7183`), where `setup.fireScheduledEvent` (`v2.py:7608`) can set a flag, start a quest,
 or deliver a conversation.
 
 ```toml
@@ -491,7 +491,7 @@ least 10 of the 17 top games with a phone, a call or a text starts a scene witho
 (Process Review, Round 1, numbers only). The failure is a phone that only holds Patreon, Discord
 and credits links.
 
-**In this engine** the phone's `launcher` app is the door (`setup._renderLauncher`, `v2.py:3724`):
+**In this engine** the phone's `launcher` app is the door (`setup._renderLauncher`, `v2.py:3726`):
 an option plays only when she is already in that canvas's room (`v2.py:3652`), and a canvas that
 requires him present needs him there. So a summon is a launcher option pointing at a canvas in
 **her** room, with no presence requirement on him — he arrives in the scene. `daily_topics` are

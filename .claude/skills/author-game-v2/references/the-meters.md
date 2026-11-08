@@ -236,7 +236,7 @@ non-initial garment at `price = 0` is invisible on the very shop page it sits be
 (`v2.py:2333` stocks only `!initial && price > 0`), so a check reading "a shop exists, therefore
 buyable" would pass a garment nobody can get.
 
-⚠️ **`shop_location` is never validated** (`template_import.py:3143` takes it as a bare string,
+⚠️ **`shop_location` is never validated** (`template_import.py:3145` takes it as a bare string,
 `v2.py:10717` compares it to each location's slug). A typo produces no error, no warning and no shop
 — the same silence as omitting it. After a build, `grep -c "Browse Clothes" <output>/index.html`
 must be 1.
@@ -291,6 +291,27 @@ A later release's content has **no button this release**: not a locked choice, n
 show it.
 
 ---
+
+### W4b · The first gain, and the step over each stage's top (exhibition study, 2026-11-08)
+
+> ⚠️ **EVIDENCE, not a template.** `~/Documents/Great_Games_Study_20260926/exhibition_study/` A–E and SYNTHESIS.md.
+> - CoT passes its level 1 at 0 on purpose, "otherwise it's very hard to level some things through use"
+>   (`cot_39_entity.js:12447-12455`).
+> - CoT caps a skill at 30, 21 and 18 a day out of 100 a level (`cot_34_database_skill.js:139`).
+> - IHOH's first exhibition gain is park yoga in leggings she owns from the start (`in-her-own-hands.txt:17462-17472`).
+
+- **A climb meter starts on a choice she can make on day 1.** It is repeatable and in a place she already goes,
+  with nothing rolled, no other meter, no progress first, and clothes the leave rules let her wear out at 0.
+  Chance can add to it, never carry it. first_term's Exhibitionism started on 1-in-4 walk-ins and stuck at 0.
+  Checked: gate *a climb starts on a choice*.
+- **Below the first stage, her choice is letting a look go on** (`the-heat-ladder.md` H1, stage 1): not fixing her
+  top, holding a stretch. Never a flash she chooses.
+- **Each stage's top needs a step over it.** When every act pays only to its stage's top, 19, 39 and 59 need one
+  step into the next stage. A one-time bridge in her own voice does it (H6), set with `op = "set"` so a daily cap
+  can't eat it. first_term stuck at 19, then at 39 once Corruption stopped opening the leave rules.
+- **Pace it with a daily cap per band** (`engine.md` §53), scaled from CoT's, and measure it by a scripted play from a new
+  game. first_term reached 20 on day 7, playing every day.
+- **A drink opens doors, not the climb.** With `hold_band_while` the meter can't pass its sober stage while she's Tipsy.
 
 ## W5 · A counterweight is rare, and it shuts doors
 

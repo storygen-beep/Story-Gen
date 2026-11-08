@@ -312,7 +312,7 @@ out.append({
         node("tub", "The hot tub", [
             P("Zoe drags you into the hot tub on the back deck, laughing. Steam rolls off the water. Music thumps through the glass. Three of her friends are already in, drinks on the rim. \"Make room, babe's here.\" She doesn't need room. She sits right against you, her knee pressed to yours under the water. When you talk, she watches your mouth. All term she has dared you instead of asking, but you know what she wants. \"Your tits are floating, babe,\" she says, grinning. Your face goes hot, and it isn't the water. One of her friends stands up, restless. \"Going in for more drinks.\""),
         ], [go("Stay in the water.", node="alone", mins=15,
-               wardrobe=[REMEMBER] + [{"action": "unequip", "item_id": g} for g in ("tshirt", "thin_top", "jeans", "leggings", "sleep_shorts",
+               wardrobe=[REMEMBER] + [{"action": "unequip", "item_id": g} for g in ("tshirt", "thin_top", "low_top", "jeans", "leggings", "sleep_shorts",
                                                                        "short_skirt", "zoe_party_dress", "laura_blue_dress", "sneakers")])]),
         node("alone", "Just us", [
             # scene reader 2026-11-04: "Take it off" only with a bra on (Zoe may have kept it, zoe_has_bra); "I want to see
@@ -677,7 +677,7 @@ out.append({
 
 out.append({
     "id": "hub_zoe_park", "name": "Zoe, running",
-    "description": "Zoe on her weekend run in the park. Her dare from Curious: a flash on the path (Exhibitionism +1, once a day).",
+    "description": "Zoe on her weekend run in the park: a lap with her, her eyes on your ass. Her flash dare on the path is its own scene (zoe_park_dare).",
     "trigger": {"location": "park", "npc": Z, "requires_npc": Z, "is_repeatable": True, "priority": 6, "is_active": True,
                 "conditions": cond(flag("zoe_met"))},
     "nodes": [

@@ -62,6 +62,14 @@ carry_response = "Short goes on top of next week's. Vance doesn't wait, so I don
 carry_closing = "The gap waits for next Sunday, on top of the rent."
 
 # ── the overnight list (SP1) — every per-day cap is a *_today flag cleared here ──
+# Exhibitionism phase 1 (LO, 2026-11-08): how far Exhibitionism may rise in a day, scaled from Course of
+# Temptation's caps of 30/21/18/15/12/9 out of 100 a level (cot_34_database_skill.js:139). While she's Tipsy it
+# can't pass the top of her sober stage: a drink opens the leave rules, it isn't a way up (DECISIONS 78, 197).
+[engine.daily_caps.exhibitionism]
+bands = [ { below = 20, cap = 3 }, { below = 40, cap = 2 }, { below = 60, cap = 2 }, { below = 80, cap = 1 }, { below = 101, cap = 1 } ]
+hold_band_while = ["drinks_boost"]
+first_gain_message = "Someone looked, and you let them. Exhibitionism goes up when people look and you don't hide."
+
 [engine.daily_tick]
 flagEffects = [
   { targetType = "player", flag = "zoe_park_dare_today", op = "unset" },
@@ -190,6 +198,12 @@ flagEffects = [
   # C2: the TV sound left up stays up for the day (DECISIONS 147); C5: the shop curtain pays once a day
   { targetType = "player", flag = "tv_loud", op = "unset" },
   { targetType = "player", flag = "shop_curtain_today", op = "unset" },
+  # Exhibitionism phase 1 (LO, 2026-11-08): each new look pays once a day
+  { targetType = "player", flag = "stretched_today", op = "unset" },
+  { targetType = "player", flag = "class_look_today", op = "unset" },
+  { targetType = "player", flag = "gym_look_today", op = "unset" },
+  { targetType = "player", flag = "park_look_today", op = "unset" },
+  { targetType = "player", flag = "street_look_today", op = "unset" },
   # the sex scenes in the cold places, once a day each (heat proposal A1-A7, DECISIONS 147; heat_a.py, and A4 in
   # 3_activities.toml shop_try_on)
   { targetType = "player", flag = "jake_lockers_today", op = "unset" },
@@ -665,6 +679,17 @@ beauty = 1
 # the garage hold (rent_short_3, money_pressure.md, DECISIONS 121): while Mark keeps it, it can't be worn
 # C6 (DECISIONS 147): and it needs Exhibitionism 15 (the rack shows "Needs Exhibitionism 15"); a save that owns it keeps it
 conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "garage_holds_thin_top", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 15 } ] }
+
+[[clothing]]
+id = "low_top"
+name = "Low-cut top"
+slot = "top"
+price = 15
+type = "low_top"
+beauty = 1
+image = "clothing/low_top.jpg"
+# Exhibitionism phase 1 (LO, 2026-11-08): the one showy piece open on day 1, no meter lock. Read by the class looks,
+# the street look and the living-room stretch (exhibition_study/PHASE1_PROPOSAL.md).
 
 [[clothing]]
 id = "sports_bra"

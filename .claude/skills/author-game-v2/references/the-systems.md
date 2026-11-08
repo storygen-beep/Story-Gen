@@ -394,7 +394,7 @@ to a traced game, in `templates/cards/`). A job is a system with a card. Five ru
    pool ids must be built): ≥20 events in a pool clicked daily, ≥4 lewd
    rungs, ≥2 acts per rung, and a seen event weighted down — Course of Temptation drops it to 1/10
    (round 9b, `cards/job.md`, `cards/streaming.md`). A pool weights a seen entry down with
-   `memory = "seen"` (`engine.md` §35, "A pool that remembers"; `setup.pickRememberedPoolEntry`, `v2.py:6341`).
+   `memory = "seen"` (`engine.md` §35, "A pool that remembers"; `setup.pickRememberedPoolEntry`, `v2.py:6344`).
 
 **Reputation is meters until the engine can remember who saw what.** Course of Temptation runs it on per-person
 memory, spread only in scenes she is in, one hop (round 10, `cards/gossip.md`). Until then: **one audience** with an

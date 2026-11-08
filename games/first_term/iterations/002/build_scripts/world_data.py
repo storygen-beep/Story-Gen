@@ -10,27 +10,22 @@ TOWEL_RULE = {"conditions": cond({"type": "worn_type", "operator": "eq", "value"
 SLEEP_RULE = {"conditions": cond({"type": "worn_type", "operator": "eq", "value": "sleep_shirt"}),
               "slots_required": ["legwear"],
               "message": "Not in your sleep shirt. Get dressed first."}
-# meters.md rule 1 (signed 2026-11-01, DECISIONS 121): the first time out in a level needs Corruption OR
-# Exhibitionism at that level. A rule blocks only when both are under (two `lt` items, AND; no nesting);
-# the slot rules are tried in order, so each "or" is a rule of its own.
+# What she shows out of the house is Exhibitionism's alone (LO, 2026-11-08, exhibition phase 1, DECISIONS 197;
+# replaces meters.md rule 1's "Corruption OR Exhibitionism", DECISIONS 121). Course of Temptation locks going out
+# by Exhibitionism only (exhibition_study/A_cot.md §4). Corruption still opens her private acts. The slot rules
+# are tried in order.
 SKIRT_RULE = {"conditions": cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"},
-                                trait("exhibitionism", "lt", 20), trait("corruption", "lt", 20)),
+                                trait("exhibitionism", "lt", 20)),
               "slots_required": ["legwear"],
-              "message": "Not in that skirt. Not yet. (Needs Corruption 20 or Exhibitionism 20.)"}
-NO_PANTIES_MSG = "Not like this. Not yet. (No panties out of the house needs Corruption 40 or Exhibitionism 40.)"
-NO_BRA_MSG = "Not like this. Not yet. (Going out without a bra needs Corruption 20 or Exhibitionism 20.)"
+              "message": "Not in that skirt. Not yet. (Needs Exhibitionism 20.)"}
+NO_PANTIES_MSG = "Not like this. Not yet. (No panties out of the house needs Exhibitionism 40.)"
+NO_BRA_MSG = "Not like this. Not yet. (Going out without a bra needs Exhibitionism 20.)"
 PUBLIC_RULES = [
     TOWEL_RULE, SLEEP_RULE, SKIRT_RULE,
     {"conditions": cond(trait("exhibitionism", "gte", 40)),
      "slots_required": ["top", "bottom"],
      "message": "Not like this. Not out there. Put something on."},
-    {"conditions": cond(trait("corruption", "gte", 40)),
-     "slots_required": ["top", "bottom"],
-     "message": "Not like this. Not out there. Put something on."},
     {"conditions": cond(trait("exhibitionism", "gte", 20)),
-     "slots_required": ["underwear", "top", "bottom"],
-     "message": NO_PANTIES_MSG},
-    {"conditions": cond(trait("corruption", "gte", 20)),
      "slots_required": ["underwear", "top", "bottom"],
      "message": NO_PANTIES_MSG},
     {"slots_required": ["bra", "underwear", "top", "bottom"],

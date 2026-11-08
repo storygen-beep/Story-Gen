@@ -99,7 +99,7 @@ def outcome_exits(tag, lo, hi, eff=(), flags=(), gary_flag=False):
             out_.append(go("Clock out.", loc="cafe", mins=180, wardrobe=CLOCK_OUT, cond_=when, eff=e, flags=list(flags) or None))
     return out_
 
-def level1_exits():
+def level1_exits(extra_eff=()):
     """Level 1, no choice: the room looks. $2-4 tips; meeting Gary sets gary_met (npc_gary.md)."""
     out_ = []
     # (bug fix 2026-11-03) level 1 is the normal uniform only (PARTS["L1"]); the tight-uniform rows of PAY_WHEN
@@ -108,7 +108,7 @@ def level1_exits():
         for gary in (True, False):
             out_.append(go("Clock out.", loc="cafe", mins=180, wardrobe=CLOCK_OUT,
                            cond_=cond(*when["items"], *PARTS["L1"][0], GARY_IN if gary else GARY_OUT),
-                           eff=[pay(2, 4, m), WORKED, SHIFT_SWEAT], flags=[fset("gary_met")] if gary else None))
+                           eff=[pay(2, 4, m), WORKED, SHIFT_SWEAT, *extra_eff], flags=[fset("gary_met")] if gary else None))
     return out_
 
 def money(n):
@@ -200,12 +200,23 @@ out.append({
                       extra=[flag("tom_window_rule")]),
             *at_level("L3", D(GY, GARY_AFTER), extra=[GARY_IN, flag("gary_let_it")]),
         ], level1_exits()
+           # exhibition phase 1 (LO, 2026-11-08): at level 1 a customer's look happens to her; her choice is to let it go on
+           + [go("Take your time with the table.", node="l1_table", mins=0, cond_=cond(*PARTS["L1"][0]))]
            + go_level("L2", "Play along.", "l2_play", extra=[trait("exhibitionism", "gte", 60)])   # a table and the counter watch: Watched (DECISIONS 124)
            + go_level("L2", "Flirt back.", "l2_flirt", extra=[C_HI])
            + go_level("L2", "\"Not today, hon.\"", "l2_no")
            + go_level("L3", "Let it.", "l3_let", extra=[trait("corruption", "gte", 40)])   # his hand on her, let: Bold; below it the grope still happens, and she refuses (DECISIONS 124)
            + go_level("L3", "\"Your food's here, sir.\"", "l3_pull")
            + go_level("L3", "Slap it away.", "l3_slap")),
+        node("l1_table", "Table six", [
+            P("You bend low over table six to wipe it, and the man there stops talking halfway through a sentence. His eyes are down the front of your uniform."),
+            P("You take your time. You wipe it twice, slow, and you don't straighten up until you're done."),
+            P("He leaves an extra dollar tucked under his plate and won't look you in the face on his way out."),
+            GC(cond(trait("exhibitionism", "lt", 5)), T("He was looking anyway. You just didn't stop him.")),
+            GC(cond(trait("exhibitionism", "lt", 10)), T("A dollar for a look. You let him have it.")),
+            GC(cond(trait("exhibitionism", "lt", 15)), T("He looked the whole time, and you let him.")),
+            GC(cond(trait("exhibitionism", "lt", 20)), T("You'd do table six like that every shift.")),
+        ], level1_exits(extra_eff=[{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 19}, {"targetType": "player", "trait": "money", "op": "add", "value": 1, "clamp": False}])),
         node("l2_play", "Play along", [P(L2_PLAY),
             VID("a waitress leaning low over a booth table, men looking down her uniform", "waitress leaning over table men staring cleavage", "waitress bends over booth customers look", pool_dir="sex/cafe_l2_play_t3")],
              outcome_exits("l2_play", 6, 10, eff=[capped_e("exhibitionism", 1, 79), add("cafe_footfall", 1, clamp=False), add("cafe_l2_shifts", 1, clamp=False)])),

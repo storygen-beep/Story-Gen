@@ -1572,3 +1572,16 @@ No JS errors, no sideways scroll at 390px.
 Found and not changed: the street's last dress-code rule has no condition and requires bra, panties, top and bottom,
 but its message only says "Going out without a bra…". A girl in her underwear reads that line, here and on the
 ClothingBlock page.
+
+## 2026-11-08 — Exhibitionism phase 1
+
+DECISIONS 197. The engine's daily cap, the leave rules on Exhibitionism alone, the low-cut top, six looks that pay at
+0, three bridges, the cards. Gates 111 pass, shape 22 pass. Dev + debug rebuild. Two reader reads on the new scenes:
+27 fails fixed, then 0. LO re-signed `meters.md` and `wardrobe.md` ("Sign it").
+
+Merged with main's dressing room (DECISIONS 196), so this row moved to 197. The low-cut top got a picture path
+(`clothing/low_top.jpg`) like the other garments; missing media is now 49 (main's 48 plus that one). Rebuilt with
+real Tweego after the merge, which replaces the stand-in-compiled build that main carried. After the merge: gates
+118, 0 real fails; shape 22 pass; engine tests 841 pass; skill tests 1,017 pass; importer the same 6 old failures;
+cites 0 wrong. Headless: every look pays, the cap and drink rules hold, the top buys in the new shop, shows on
+the Change Clothes rail and goes on, no sideways scroll at 390px; the pace play reaches 20 on day 7.

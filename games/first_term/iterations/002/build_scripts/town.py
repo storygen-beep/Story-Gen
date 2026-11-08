@@ -205,8 +205,8 @@ text = ("# =====================================================================
         "# =============================================================================\n")
 
 # ── the street sees what she wears (street_seen.md, signed 2026-11-01; meters.md rule 2; DECISIONS 121) ──
-# Once a day (out_shown_today, cleared in the daily tick). The first day out in each level pays both meters;
-# every day after, Exhibitionism only. One witness by the hour: Mr. Vance on his porch (his 18:00-22:00 row),
+# Once a day (out_shown_today, cleared in the daily tick). It pays Exhibitionism only (exhibition phase 1, LO
+# 2026-11-08; it paid Corruption too on a level's first day while Corruption could open the leave rules). One witness by the hour: Mr. Vance on his porch (his 18:00-22:00 row),
 # the corner-shop guy by day, a car slowing down at night.
 VANCE_PORCH = {"type": "npc_at_location", "location_id": "vance_house", "npc_id": "npc_vance", "operator": "is_present"}
 VANCE_AWAY = {"type": "npc_at_location", "location_id": "vance_house", "npc_id": "npc_vance", "operator": "is_absent"}
@@ -256,8 +256,8 @@ for case, worn, lv, vance, shop, car in STREET_CASES:
     # LO, 2026-11-04: a dress-code act pays to the top of the stage its dress code needs (world_data clothing rules: no bra
     # or a short skirt out needs a meter at 20, no panties out a meter at 40), on both meters.
     cap = 39 if lv == 1 else 59
-    pay_first = [{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": cap},
-                 {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": cap}]
+    # exhibition phase 1 (LO, 2026-11-08): going out is Exhibitionism's alone now, so the street pays it alone
+    pay_first = [{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": cap}]
     pay_after = [{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": cap}]
     exits = []
     for w_items, extra_eff in [([VANCE_PORCH], [nadd("npc_vance", "want", 2)]), ([VANCE_AWAY, DAYTIME], []),
@@ -269,7 +269,7 @@ for case, worn, lv, vance, shop, car in STREET_CASES:
     out.append({
         "id": f"street_seen_{case}", "name": {"skirt": "Walk the street in your short skirt", "nobra": "Walk the street with no bra",
                                               "nopanties": "Walk the street with no panties"}[case],   # pass 3 H33/H34 (the-voice.md R1, D11): the name says what happens if she clicks, and never hides the act
-        "description": f"The street sees what she's wearing ({case}): one witness a day by the hour; the first day out in level {lv} pays both meters, after that Exhibitionism (meters.md rule 2).",
+        "description": f"The street sees what she's wearing ({case}): one witness a day by the hour; Exhibitionism +1 (exhibition phase 1, 2026-11-08).",
         "trigger": {"location": "street", "is_repeatable": True, "priority": 3 + lv, "is_active": True, "max_triggers_per_day": 1,
                     "conditions": cond(flag("out_shown_today", False), *worn)},
         "nodes": [node("seen", "Somebody's looking", [
@@ -288,6 +288,31 @@ for case, worn, lv, vance, shop, car in STREET_CASES:
 import walkins_out
 _done = walkins_out.attach(out)
 assert _done == {"zoe_couch_alone", "zoe_bathroom_face"}, _done   # B24 (Q4): the loose bolt
+
+# ── exhibition phase 1 (LO, 2026-11-08): the low-cut top on the street, under Daring. A look happens to her (stage
+# 1); her choice is not to cover up. Shares out_shown_today with the other street rows, so one street look a day.
+out.append({
+    "id": "street_seen_lowtop", "name": "Walk the street in your low-cut top",
+    "description": "The street sees the low-cut top: a man at the bus stop looks; not covering up pays Exhibitionism +1 (cap 19). Once a day, shared with the other street looks.",
+    "trigger": {"location": "street", "is_repeatable": True, "priority": 3, "is_active": True, "max_triggers_per_day": 1,
+                "conditions": cond(flag("out_shown_today", False), {"type": "clothing_item", "item_id": "low_top", "operator": "equipped"},
+                                   BRA_ON, PANTIES_ON, SKIRT_OFF, trait("exhibitionism", "lt", 20))},
+    "nodes": [node("seen", "The bus stop", [
+        P("A man at the bus stop looks once, then again, longer, straight at your tits in the low-cut top. He doesn't pretend to read the timetable."),
+    ], [
+        go("Keep walking, and don't cover up.", node="walked", mins=2, flags=[fset("out_shown_today")],
+           eff=[{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 19}]),
+        go("Cross your arms and walk on.", node="covered", mins=2, flags=[fset("out_shown_today")]),
+    ]), node("covered", "Arms crossed", [
+        P("You fold your arms over your chest and walk faster. He laughs, low, and goes back to the timetable. The bus stop's on your way most days."),
+    ], [go("Walk on.", loc="street", mins=1)]), node("walked", "The corner", [
+        P("You don't fold your arms. You can feel his eyes on your tits all the way to the corner, and you don't walk any faster. He doesn't follow. Not today."),
+        GC(cond(trait("exhibitionism", "lt", 5)), T("People look. That's all it was.")),
+        GC(cond(trait("exhibitionism", "lt", 10)), T("He looked, and you let him.")),
+        GC(cond(trait("exhibitionism", "lt", 15)), T("You liked knowing he was still watching.")),
+        GC(cond(trait("exhibitionism", "lt", 20)), T("The top isn't enough any more. Something shorter, next time.")),
+        P("The bus stop's on your way most days."),
+    ], [go("Walk on.", loc="street", mins=2)])]})
 
 text += "".join(emit(c) for c in out)
 open(__import__("sys").argv[1], "w").write(text)

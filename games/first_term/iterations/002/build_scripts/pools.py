@@ -309,7 +309,11 @@ out.append({
         go("Run the loop. (10 energy)", node="run", mins=35, costs=[{"trait": "energy", "value": 10}], cond_=cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}), eff=[capped("exhibitionism", 1, CAP_CUR)]),   # LO, 2026-11-04: a dress-code act pays to the top of the stage its dress code needs (a meter at 20)
         go("Run the loop. (10 energy)", node="run", mins=35, costs=[{"trait": "energy", "value": 10}], cond_=cond({"type": "clothing_slot", "slot": "bra", "operator": "equipped"}, {"type": "clothing_slot", "slot": "top", "operator": "unequipped"}, {"type": "clothing_slot", "slot": "dress", "operator": "unequipped"}), eff=[capped("exhibitionism", 1, CAP_CUR)]),
         go("Run the loop. (10 energy)", node="run", mins=35, costs=[{"trait": "energy", "value": 10}], cond_=cond({"type": "clothing_slot", "slot": "bra", "operator": "equipped"}, {"type": "clothing_slot", "slot": "dress", "operator": "equipped"})),   # a dress empties the top slot, so it is not "no top": no dress code, no pay
-        go("Run the loop. (10 energy)", node="run", mins=35, costs=[{"trait": "energy", "value": 10}], cond_=cond({"type": "clothing_slot", "slot": "bra", "operator": "equipped"}, {"type": "clothing_slot", "slot": "top", "operator": "equipped"})),
+        # exhibition phase 1 (LO, 2026-11-08): dressed in leggings under Daring, the run has its own screen, so the third
+        # lap is the only pay on that way through (gate `a visit pays a meter once`)
+        go("Run the loop. (10 energy)", node="run_plain", mins=35, costs=[{"trait": "energy", "value": 10}], cond_=cond({"type": "clothing_slot", "slot": "bra", "operator": "equipped"}, {"type": "clothing_slot", "slot": "top", "operator": "equipped"}, {"type": "worn_type", "operator": "eq", "value": "leggings"}, trait("exhibitionism", "lt", 20))),
+        go("Run the loop. (10 energy)", node="run", mins=35, costs=[{"trait": "energy", "value": 10}], cond_=cond({"type": "clothing_slot", "slot": "bra", "operator": "equipped"}, {"type": "clothing_slot", "slot": "top", "operator": "equipped"}, {"type": "worn_type", "operator": "neq", "value": "leggings"})),
+        go("Run the loop. (10 energy)", node="run", mins=35, costs=[{"trait": "energy", "value": 10}], cond_=cond({"type": "clothing_slot", "slot": "bra", "operator": "equipped"}, {"type": "clothing_slot", "slot": "top", "operator": "equipped"}, {"type": "worn_type", "operator": "eq", "value": "leggings"}, trait("exhibitionism", "gte", 20))),
         go("Walk it instead.", node="walk", mins=20),
     ]),
         node("run", "A run", [
@@ -326,6 +330,23 @@ out.append({
           P("Zoe runs here weekends. She'd make you go further.")),
         G(cond(flag("zoe_met", False)), P("Same time tomorrow.")),
     ], [go("Cool down.", loc="park", mins=5)]),
+        # exhibition phase 1 (LO, 2026-11-08): in leggings and a top, under Daring, the man on the bench looks; she runs past him again
+        node("run_plain", "A run", [
+            P("Two laps in your leggings, and your lungs burn. The man on the bench by the pond watches your ass the whole way round, both times."),
+        ], [go("Run past his bench again.", node="lap3", mins=10,
+               eff=[{"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 19}]),
+            go("Cool down where he can't see.", node="cool_plain", mins=5)]),
+        node("cool_plain", "The gates", [
+            P("You stretch out at the gates with your back to his bench. When you look round, he's gone back to his paper. He's there most mornings."),
+        ], [go("Back to the park.", loc="park", mins=1)]),
+        node("lap3", "A third lap", [
+            P("He doesn't pretend otherwise when you come round again. You take a third lap, right past him. He lowers his paper and opens his mouth to say something, then doesn't. Not today. You don't look back, and your cheeks burn anyway."),
+            GC(cond(trait("exhibitionism", "lt", 5)), T("It's a public park. Anyone can look.")),
+            GC(cond(trait("exhibitionism", "lt", 10)), T("You went round again for him.")),
+            GC(cond(trait("exhibitionism", "lt", 15)), T("You slowed down past his bench.")),
+            GC(cond(trait("exhibitionism", "lt", 20)), T("Next time, something he can see more of.")),
+            P("He's on that bench most mornings."),
+        ], [go("Cool down.", loc="park", mins=5)]),
         node("walk", "A walk", [
             P("You walk the loop instead, slow, and let the runners go past you both ways, red-faced and blowing. A man on the bench by the pond watches you all the way round. His eyes go down your legs and back up to your tits, but he doesn't look away when you catch him."),
             # reader a3 verify (DECISIONS 131): her not-yet; scene reader 2026-11-04: the middle bands only

@@ -1279,6 +1279,8 @@ class TweeComprehensiveGeneratorV2:
         self.quests = (self.project.metadata or {}).get("quests", []) or []
         # doc 45 G7 — optional corruption tier thresholds ([engine].corruption_tiers).
         self.corruption_tiers = (self.project.metadata or {}).get("corruption_tiers")
+        # [engine.daily_caps] — per-day rise limits on player traits, read by setup.applyAndNotifyTrait.
+        self.daily_caps = (self.project.metadata or {}).get("daily_caps") or {}
         # doc 45 G9 — economy: fast jobs + bank.
         self.fast_jobs_data = (self.project.metadata or {}).get("fast_jobs", []) or []
         self.bank_data = (self.project.metadata or {}).get("bank")
@@ -4076,6 +4078,7 @@ setup.player_trait_decay = {json.dumps(self.player_trait_decay_config)};{self._d
 setup.daily_tick = {json.dumps(self.daily_tick)};
 setup.quests_data = {json.dumps(self.quests)};
 setup.corruption_tiers = {json.dumps(self.corruption_tiers)};
+setup.daily_caps = {json.dumps(self.daily_caps)};
 setup.fast_jobs_data = {json.dumps(self.fast_jobs_data)};
 setup.bank_data = {json.dumps(self.bank_data)};
 setup.stage_helpers = {json.dumps(self.stage_helpers)};
@@ -7467,8 +7470,33 @@ setup.getTraitValue = function(targetType, npcId, trait) {{
 }};
 
 // Apply trait and queue notification
+// [engine.daily_caps] — cut a player's rise to what today's band allows, and hold her band while a listed
+// modifier is on (first_term, 2026-11-08: a drink opens doors, it isn't a way up). Returns the value to add.
+setup.dailyCapAllow = function(trait, current, val) {{
+  var cfg = (setup.daily_caps || {{}})[trait];
+  if (!cfg || !(val > 0)) return val;
+  var bands = cfg.bands || [];
+  var band = null;
+  for (var i = 0; i < bands.length; i++) {{ if (current < bands[i].below) {{ band = bands[i]; break; }} }}
+  if (!band) return val;
+  var gs = State.variables.game_state = State.variables.game_state || {{}};
+  var day = (gs.time_state && gs.time_state.day) || 0;
+  var log = gs.daily_gain = gs.daily_gain || {{}};
+  if (!log[trait] || log[trait].day !== day) log[trait] = {{ day: day, used: 0 }};
+  var allowed = Math.max(0, band.cap - log[trait].used);
+  var held = (cfg.hold_band_while || []).some(function(m) {{ return setup.isModifierActive(m); }});
+  if (held) allowed = Math.min(allowed, Math.max(0, band.below - 1 - current));
+  var take = Math.min(val, allowed);
+  log[trait].used += take;
+  return take;
+}};
+
 setup.applyAndNotifyTrait = function(targetType, npcId, trait, op, val, clampFlag, cap) {{
   var oldVal = setup.getTraitValue(targetType, npcId, trait);
+  if (targetType === 'player' && (op || 'add') === 'add' && setup.daily_caps && setup.daily_caps[trait]) {{
+    val = setup.dailyCapAllow(trait, oldVal, Number(val));
+    if (!(val > 0)) return;
+  }}
   applyTraitEffect(targetType, npcId, trait, op, val, clampFlag, cap);
   var newVal = setup.getTraitValue(targetType, npcId, trait);
   var delta = newVal - oldVal;
@@ -7484,6 +7512,10 @@ setup.applyAndNotifyTrait = function(targetType, npcId, trait, op, val, clampFla
       var currentDay = (sv.game_state.time_state && sv.game_state.time_state.day) || 1;
       sv.game_state.stage_advancement_log[stageMatch[1]] = currentDay;
     }}
+  }}
+  if (targetType === 'player' && delta > 0 && setup.daily_caps && setup.daily_caps[trait] && setup.daily_caps[trait].first_gain_message) {{
+    var fg = State.variables.game_state.first_gain = State.variables.game_state.first_gain || {{}};
+    if (!fg[trait]) {{ fg[trait] = true; setup.queueGatedNotification(setup.daily_caps[trait].first_gain_message); }}
   }}
   if (delta !== 0) {{
     var npcName = '';

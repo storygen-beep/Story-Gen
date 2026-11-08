@@ -5,6 +5,14 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-08 — exhibition phase 1: the first gain, the step over a stage's top, a daily cap
+
+- **Engine.** `apps/projects/services/template_import.py` adds `_parse_daily_caps` and `generators/v2.py` adds `setup.dailyCapAllow`, read by `setup.applyAndNotifyTrait`, for `[engine.daily_caps.<trait>]`: a per-day cap by band, `hold_band_while` modifiers, and a first-gain notice. `references/engine.md` §53. Tests in `apps/game_generation/tests/test_daily_caps.py`.
+- **Doctrine.** `references/the-meters.md` W4b: a climb starts on a day-1 choice; below the first stage her choice is letting a look go on; each stage's top needs a one-time bridge; pace it by band and measure it; a drink opens doors, not the climb.
+- **Gates.** New *a climb starts on a choice* (`_climb_starts_on_a_choice`, with `_leave_rules_block` reading the place's clothing rules at 0) and *a description pays what it says*. `_garment_vocab`: a garment word that names a slot ("your top") means the whole slot; "Low-cut top" had made every "your top" read as that one item. `SKILL.md` rows.
+- **Why.** LO: stuck at Exhibitionism 0 in first_term. Study: `~/Documents/Great_Games_Study_20260926/exhibition_study/`; LO okayed `PHASE1_PROPOSAL.md`.
+- **Verified.** On the game as it stood before (HEAD), the new start gate fails Exhibitionism; on the new build it passes. The description gate found two real claims; both fixed. Tests in `scripts/tests/test_gates_exhibition_phase1_20261108.py`. Not done this phase: a gate comparing a card's "opens at" with the build, a pace gate, and leave rules inside *every stage has a way up*.
+
 ## 2026-11-05 — the wardrobe and the clothes shop as a dressing room
 
 - **`references/engine.md`.** New section `[ui] clothes_layout = "room"`, beside the quests_layout one, and a pointer from §17. It teaches the room pages, `[ui] clothes_door`, the 3:4 garment picture, `[[clothing]] locked_text` and the portrait's `when.wearing`. Why: LO picked the dressing-room redesign for first_term (DECISIONS 196).
