@@ -31,9 +31,14 @@ PUBLIC_RULES = [
     {"slots_required": ["bra", "underwear", "top", "bottom"],
      "message": NO_BRA_MSG},
 ]
-# The park: at Daring she may run in a bra with nothing over it (the park sheet).
+# The park: at Daring she may run in a bra with nothing over it (the park sheet). From Showing (40) the panties
+# rule matches the street's: a bra and a bottom will do (LO, 2026-11-08, DECISIONS 199: "match the streets").
 PARK_RULES = [
     TOWEL_RULE, SLEEP_RULE, SKIRT_RULE,
+    {"conditions": cond(trait("exhibitionism", "gte", 40),
+                        {"type": "clothing_slot", "slot": "bra", "operator": "equipped"}),
+     "slots_required": ["bottom"],
+     "message": "Not like this. Not out there. Put something on."},
     {"conditions": cond(trait("exhibitionism", "gte", 20),
                         {"type": "clothing_slot", "slot": "bra", "operator": "equipped"}),
      "slots_required": ["underwear", "bottom"],

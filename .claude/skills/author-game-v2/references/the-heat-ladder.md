@@ -35,12 +35,19 @@ where the field gates them. A game's SP2 page may move a row; it may not drop th
 | 1 | an accident, including a look that happens to her, even when she stays to watch (LO, 2026-11-03); overhearing; a brush or grope from him; borrowed or stolen clothes; his leak (H7) | accidents need no stat in CoT, only a day count (`home_kinds.md:157-161`); being groped needs no stat, the stat shapes her answer (`out_kinds.md:299`); hearing strangers is ungated (`home_kinds.md:336`) |
 | 2 | she watches by choice (a peek she goes after, a catch); what she wears at home, by her meter; a flirt with her body in it; a chosen flash or tease for one person she knows; a first dare; a photo short of nude | her peek at him has no gate or the first rung (`home_kinds.md:249`); flirt at Disinhibition 1, tease at 1–2 (`cot.md:33-34`); dares from Exhibitionism 2 with a bargain (`out_kinds.md:193`); the photo menu starts at a face shot (`out_kinds.md:466`) |
 | 3 | private contact with someone she knows; naked by choice for one person; asked to show, with a price; a tease with "not yet" and a bolder button beside it; paid at the first price | asked to show sits mid-ladder, CoT Exhibitionism 4 (`out_kinds.md:97`); "Okay, but *just* the top" at Exhibitionism 2 against "Yeah, why not?" at 4 (`cot:L67778-67779`) |
-| 4 | anything a group sees: a flash, a striptease, posing; known people together; sharing; the taboo act at home | striptease at CoT Exhibitionism 5, the top of its flash ladder (`out_kinds.md:373`) |
+| 4 | her bare body in front of strangers or a crowd: breasts, a flash, a striptease, posing; known people together; sharing; the taboo act at home | striptease at CoT Exhibitionism 5, the top of its flash ladder (`out_kinds.md:373`) |
 | 5 | a crowd; free use; her own plan built on sex | `SP2_ladders.md:44` |
 
-**Audience size sets the stage** (LO, 2026-10-07): one person is stage 2 (a flash) or 3 (naked, private); a
-group, known or not, is stage 4. Known against stranger is not the test (`SKILL_CHANGES_FROM_FIRST_TERM.md`
-B24).
+**What shows sets the stage; the audience grows with it** (audience check, 2026-11-08,
+`~/Documents/Great_Games_Study_20260926/exhibition_study/AUDIENCE_SIZE_CHECK_20261108.md`). Five of five studied games gate an
+exposure on what she shows or does, never on how many watch (CoT `A_cot.md:125-134`; CW, UM, IHOH, SD there §1). The
+audience comes with the stage: a few people seeing her in daring clothes is stage 2, a small group seeing underwear-level
+skin is stage 3, strangers or a crowd seeing her bare is stage 4, a large crowd and all of her is stage 5 (CoT's audience by
+level, `A_cot.md:140-147`). More people for the same show adds risk or pay, not a stage (CoT +0.2 caught at 3+, +0.4 at 5+,
+`round12_tease/out_kinds.md:393`; IHOH +1 attraction per watcher). A bigger show to the same people does raise it (CW: a
+wave at the workers at stage 0, a flash to them at stage 2). Known against stranger is not the test (LO, 2026-10-07,
+`SKILL_CHANGES_FROM_FIRST_TERM.md` B24). Replaces "a group, known or not, is stage 4", which the games do not do: two guys
+watching her in a sports bra is stage 2, not 4.
 
 **A sex act a group watches is a mixed act** (LO, 2026-11-03, PICKS A68 a). The act uses Corruption and the
 audience uses Exhibitionism, so it needs both meters at stage 4 (Corruption 60 and Exhibitionism 60) and pays
@@ -90,7 +97,7 @@ direction as this rule, at a later point.
 | peek or catch | her (she watches) or him | 2 (her peek) · later (catching him at it) | an object marks the line (a door ajar, a sock); the risk as a sentence | an option is added; being caught turns into a door | `home_kinds.md:170-258` |
 | wear at home | her | 2, by her meter | each housemate's reaction, by his level with her | his line climbs, not hers | `home_kinds.md:342-433` |
 | flirt | her | 2 | her body in it (the flirt that pays lust pays per visible item) | more of her shows | `cot.md:63` |
-| flash | her, or an accident | 2 for one person · 4 for a group | one named part, for a moment, to a watcher | the part ladder (H1) | `cot.md:127`, `cot_40_events.js:1397` |
+| flash | her, or an accident | by the part shown (bra 2, underwear 3, breasts 4, all of her 5); a bigger audience adds risk | one named part, for a moment, to a watcher | the part ladder (H1) | `cot.md:127`, `cot_40_events.js:1397` |
 | photo or sext | her, often asked | 2 short of nude | who will see it; a record that outlives the scene | the menu grows; her refusal line disappears | `out_kinds.md:379-467` |
 | dare | a friend or rival asks | 2 | an exit on every rung; a numbered ladder | one part at a time; she calls the next dare | `out_kinds.md:102-200` |
 | asked to show | someone asks | 3 | a price or a bargain; the asker and the watcher can differ | more of the ladder on the same screen | `out_kinds.md:28-100` |

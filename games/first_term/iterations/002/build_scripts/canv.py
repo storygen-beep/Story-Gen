@@ -820,6 +820,7 @@ def step_cards(npc, texts, met_flag=None, terminal_text=None, closed_text=None, 
 
 
 ALL_GARMENTS = ["plain_bra", "sports_bra", "plain_panties", "tshirt", "thin_top", "low_top", "jeans", "leggings",
+                "gym_tank", "track_pants", "gym_shorts", "sheer_leggings",   # the gym clothes (DECISIONS 198)
                 "sleep_shorts", "short_skirt", "sleep_shirt", "towel", "cafe_uniform_normal",
                 "cafe_uniform_sexy", "laura_blue_dress", "zoe_party_dress", "sneakers"]
 # LO, 2026-11-04: she leaves in what she came in. REMEMBER goes before the first thing that takes her clothes off;

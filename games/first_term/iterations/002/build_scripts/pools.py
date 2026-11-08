@@ -317,11 +317,29 @@ out.append({
         go("Walk it instead.", node="walk", mins=20),
     ]),
         node("run", "A run", [
-        G(cond({"type": "worn_type", "operator": "eq", "value": "leggings"}, {"type": "clothing_slot", "slot": "top", "operator": "equipped"}, {"type": "clothing_slot", "slot": "bra", "operator": "equipped"}),
+        G(cond({"type": "worn_type", "operator": "eq", "value": "leggings"}, {"type": "clothing_slot", "slot": "top", "operator": "equipped"}, {"type": "clothing_slot", "slot": "bra", "operator": "equipped"}, {"type": "clothing_item", "item_id": "gym_tank", "operator": "unequipped"}),
           P("Leggings and a top, the normal way. You run the loop twice and your lungs burn and nobody looks twice, except the old man on the bench who looks at everybody.")),
         G(cond(*SPORTS_ONLY["items"], {"type": "worn_type", "operator": "eq", "value": "leggings"}), P("Just the sports bra and your leggings, and it's like you've set off an alarm. Heads turn on the whole loop. A guy doing push-ups stops at the top of one and stays there, his eyes on your tits bouncing in the bra. He doesn't call anything after you. Not yet.")),   # scene reader b03: the not-yet (H4.3)
         G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}, {"type": "clothing_slot", "slot": "top", "operator": "equipped"}),
           P("No bra under your top, and every stride shows it: your tits bounce, your nipples hard against the cloth. A cyclist wobbles. A man walking his dog lets the dog walk him into a hedge. One of them calls something after you, but you don't slow down.")),
+        # the gym clothes (DECISIONS 198; GYM_CLOTHES_PLAN.md §6): the park reads each step too. Lines only; the park's pay is unchanged.
+        G(cond({"type": "worn_type", "operator": "eq", "value": "track_pants"}, {"type": "clothing_item", "item_id": "tshirt", "operator": "equipped"}, {"type": "clothing_slot", "slot": "bra", "operator": "equipped"}),
+          P("Track pants and a T-shirt. You run the loop twice and nobody looks at you once, which is what track pants are for.")),
+        G(cond({"type": "clothing_item", "item_id": "gym_tank", "operator": "equipped"}, {"type": "worn_type", "operator": "neq", "value": "gym_shorts"}),
+          P("The fitted gym tank shows every bounce. Two guys on the benches by the pond stop talking as you go past, both laps, and watch you all the way round.")),
+        G(cond({"type": "worn_type", "operator": "eq", "value": "gym_shorts"}, *SPORTS_ONLY["items"]),
+          P("Just the sports bra and the tiny shorts. The shorts are up your ass by the first bend and stay there. The whole loop watches you run it: a cyclist, two dog walkers, the guys at the pull-up bars. Somebody whistles, and you don't look round.")),
+        G(cond({"type": "worn_type", "operator": "eq", "value": "gym_shorts"}, {"type": "clothing_slot", "slot": "top", "operator": "equipped"}),
+          P("The tiny shorts ride up your ass with every stride, and you leave them there. The men on the benches turn their heads to watch you all the way round.")),
+        G(cond({"type": "clothing_item", "item_id": "plain_bra", "operator": "equipped"}, {"type": "clothing_slot", "slot": "top", "operator": "unequipped"},
+               {"type": "clothing_slot", "slot": "dress", "operator": "unequipped"}, {"type": "worn_type", "operator": "neq", "value": "leggings"}),
+          P("Just your bra on top. Every man on the loop looks at your tits bouncing in it, both laps, and a guy at the pull-up bars drops off the bar to watch.")),
+        G(cond(*SPORTS_ONLY["items"], {"type": "worn_type", "operator": "eq", "value": "track_pants"}),
+          P("Just the sports bra over your track pants. Your tits bounce in it on every stride, and the men on the benches by the pond watch you both laps.")),
+        G(cond({"type": "worn_type", "operator": "eq", "value": "sheer_leggings"}, {"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}),
+          P("In the sun the sheer leggings go see-through. Your panties show on every stride, and somebody behind you can't keep quiet about it."), WHO("Oh my God.")),
+        G(cond({"type": "worn_type", "operator": "eq", "value": "sheer_leggings"}, {"type": "clothing_slot", "slot": "underwear", "operator": "unequipped"}),
+          P("In the sun the sheer leggings go see-through, and there's nothing under them. Your ass and your pussy show on every stride. A man on a bench stands up to watch you go round.")),
         POOL(P("You finish at the gates with your hands on your knees, sweating, buzzing."), P("Your legs are jelly by the end. Your face is red and not only from running.")),
         # reader a3 #44 (DECISIONS 131): the hook. Zoe's park row is Saturday and Sunday 08:00-10:00 once met
         # (people_data.py); when she's out on the loop right now, the line says so.

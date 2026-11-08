@@ -41,7 +41,10 @@ ANY = [{"type": "worn_exposure", "operator": "gte", "value": 0}]          # alwa
 SKIRT = {"type": "worn_type", "operator": "eq", "value": "short_skirt"}
 NOT_SKIRT = {"type": "worn_type", "operator": "neq", "value": "short_skirt"}
 BARE_LEGS = [{"type": "clothing_item", "item_id": "jeans", "operator": "unequipped"},
-             {"type": "clothing_item", "item_id": "leggings", "operator": "unequipped"}]
+             {"type": "clothing_item", "item_id": "leggings", "operator": "unequipped"},
+             # the gym clothes (DECISIONS 198): track pants and the sheer leggings cover her legs; the tiny shorts don't
+             {"type": "clothing_item", "item_id": "track_pants", "operator": "unequipped"},
+             {"type": "clothing_item", "item_id": "sheer_leggings", "operator": "unequipped"}]
 IN_JEANS = {"type": "clothing_item", "item_id": "jeans", "operator": "equipped"}
 IN_LEGGINGS = {"type": "clothing_item", "item_id": "leggings", "operator": "equipped"}
 SPORTS_ONLY = [{"type": "clothing_item", "item_id": "sports_bra", "operator": "equipped"},
@@ -115,8 +118,12 @@ def res(nid, name, blocks, label, dest, mins, **kw):
 
 
 def legs_line(bare, jeans, leggings):
-    """Her legs as she has them on: bare, in jeans, in leggings (exactly one shows)."""
-    return [G(cond(*BARE_LEGS), P(bare)), G(cond(IN_JEANS), P(jeans)), G(cond(IN_LEGGINGS), P(leggings))]
+    """Her legs as she has them on: bare, in jeans, in leggings (exactly one shows). The gym's track pants and sheer
+    leggings (DECISIONS 198) take the leggings line with their own name in it."""
+    assert "your leggings" in leggings
+    return [G(cond(*BARE_LEGS), P(bare)), G(cond(IN_JEANS), P(jeans)), G(cond(IN_LEGGINGS), P(leggings)),
+            G(cond({"type": "clothing_item", "item_id": "track_pants", "operator": "equipped"}), P(leggings.replace("your leggings", "your track pants"))),
+            G(cond({"type": "clothing_item", "item_id": "sheer_leggings", "operator": "equipped"}), P(leggings.replace("your leggings", "your sheer leggings")))]
 
 
 # ═════════════════════════════════════════════════════════════════════════════

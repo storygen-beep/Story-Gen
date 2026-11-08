@@ -263,8 +263,8 @@ so restating the row's own name doubles it: *"Work the counter — The counter �
 one"*. The house shape is a bare phrase — lowercase, no restatement, no full stop:
 *"mornings, `<hour>` till `<hour>`"*, *"after `<hour>` at night"*.
 
-`show_when_blocked` and `cooldown_message` are read at `v2.py:15044-15048` and emitted as
-`showWhenBlocked` / `cooldownMessage` (`v2.py:15108-15109`). When `isCanvasValid` returns false —
+`show_when_blocked` and `cooldown_message` are read at `v2.py:15051-15055` and emitted as
+`showWhenBlocked` / `cooldownMessage` (`v2.py:15115-15116`). When `isCanvasValid` returns false —
 and it returns false on a **schedule miss** first of all (`v2.py:5919-5925`) — the renderer keeps
 the entry as a dimmed, non-clickable line carrying the author's message instead of dropping it
 (`v2.py:6482`, `:6488`, `:6527-6534`).

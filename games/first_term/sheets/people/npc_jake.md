@@ -1,4 +1,5 @@
 # [READY] Person — Jake
+> Changed 2026-11-08 (DECISIONS 198): at training he reads the gym clothes, one line each. Re-signed by LO 2026-11-08 ("Sign 4 pages").
 > Signed by LO: LO, 2026-11-04.
 > Changed 2026-11-04, LO's answers: his line after a date is "Every guy in that place was looking at you tonight." (D); signed by LO 2026-11-04.
 
@@ -211,3 +212,10 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
 | his gym rows | LO, 2026-10-08 (question 64) |
 | fix from the false-line sweep | sweep A4-03, A4-10, A4-40 (2026-10-08) |
 | card goals are the step's real requirements | LO's play note, 2026-10-08 · sweep K8 and its 38 more cards |
+
+## At training, what she wears (2026-11-08, DECISIONS 198)
+
+One line on his rack screen, by what she trains in: track pants ("Track pants? You're hiding everything. Come on."),
+the gym tank ("Nice. You actually came to train."), the sports bra alone (his eyes stay on her tits), the tiny shorts
+("You wore those here. On purpose. Jesus."), the sheer leggings ("Are you trying to get me killed? Coach is right there.").
+Jake has no meter of his own, so no line pays him.

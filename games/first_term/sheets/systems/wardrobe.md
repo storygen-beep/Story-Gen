@@ -1,4 +1,5 @@
 # [READY] System — wardrobe
+> Changed 2026-11-08 (DECISIONS 198): four gym pieces, a shop line on every bought piece, and the gym's locker room. Re-signed by LO 2026-11-08 ("Sign 4 pages").
 > Changed 2026-11-08 (DECISIONS 197): going out is Exhibitionism's alone; re-signed by LO 2026-11-08 ("Sign it").
 > Signed by LO: LO, 2026-11-04.
 
@@ -157,3 +158,21 @@ the kitchen and the hall; Jake's "tonight" line only at the door after a date).
 | the refusal line | guess |
 | the feed and the selfie live on the phone only | LO's play note, 2026-10-08 (sweep A1-34, K6) |
 | the selfie rungs gate on Exhibitionism, labels name the act | LO, 2026-10-08 (the engine reads only one meter for a post) |
+
+## The gym clothes and the shop lines (2026-11-08, DECISIONS 198)
+
+| piece | slot | price | lock to wear | shop line |
+|---|---|---|---|---|
+| Track pants | bottom | $10 | none | "Loose and comfortable. Nobody looks twice." |
+| Gym tank | top | $15 | none | "Fitted. It shows off everything you've got." |
+| Tiny gym shorts | bottom | $20 | Exhibitionism 40 | "Tiny. They ride up every time you lift." |
+| Sheer leggings | bottom | $30 | Exhibitionism 60 | "You can see right through them. Everybody can." |
+
+Old pieces got shop lines too: leggings "Thin. Bend over in good light and they go see-through.", short skirt "Short.
+One gust of wind and the street sees what's under it.", sheer blouse "Thin. Your bra shows right through it.",
+low-cut top "Cut low. Lean forward and they can see right down it.", sports bra "Tight and small. Made for the gym,
+and it shows everything." The line shows on the shop stand and under the slot in Change Clothes (engine field
+`description`). Course of Temptation's shop does the same (`exhibition_study/A_cot.md:222`).
+
+The gym is now a place she can change (its locker room). Read by the gym (`campus_gym.md`), the park run (`park.md`)
+and Jake's training (`npc_jake.md`). Track pants and the sheer leggings count as covering her legs; the tiny shorts don't.

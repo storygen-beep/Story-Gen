@@ -1,4 +1,5 @@
 # [READY] Place — Gym
+> Changed 2026-11-08 (DECISIONS 198): the gym clothes, from normal to slutty; three accidents; the locker room is a changing room. Re-signed by LO 2026-11-08 ("Sign 4 pages").
 > Signed by LO: LO, 2026-11-04.
 > Changed 2026-11-04, LO's answers: "Finish your set." needs Exhibitionism 60 and pays to cap 79 (B); signed by LO 2026-11-04.
 
@@ -20,13 +21,13 @@
 | hidden until | no |
 | fill — word budget | 1,500 words |
 | door | no |
-| dress code or wanted state | none · what she trains in is read (a sports bra is Daring) |
+| dress code or wanted state | the park's leave rules · what she trains in is read, one line per step (below) |
 
 ## On entering
 
 | auto-fires | who is here, and when | things to do alone | ways out |
 |---|---|---|---|
-| none | Jake: Tue, Thu 15:00–17:00, once she has met him (`jake_number`) | work out | Campus |
+| none | Jake: Tue, Thu 15:00–17:00, once she has met him (`jake_number`) | work out · Change Clothes (the locker room) | Campus |
 
 ## Rows (`serves`)
 
@@ -50,6 +51,39 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has h
 | what | where | buttons and pays |
 |---|---|---|
 | Jake in the locker room (A1) | his gym hub, at training | "Get on your knees." Bold 40, Corruption +1, cap 59 · "Against the lockers." Hungry 60, +1, cap 79 · "Not here, Jake." pays 0 |
+
+## The gym clothes (2026-11-08, DECISIONS 198)
+
+LO: "Each part can its clothing and clothing can be normal to slutty"; the plan, signed with his answers (prices yes, the
+sheer leggings go in, the desk guy's warning is a line only), is `~/Documents/Great_Games_Study_20260926/exhibition_study/GYM_CLOTHES_PLAN.md`.
+
+**The locker room.** The gym is a place she can change (`wardrobe_location`), so she can train in gym clothes without
+crossing campus in them. Leaving still runs the gym's leave rules.
+
+| step | what she trains in | lock to wear | the floor's line | her button, pay |
+|---|---|---|---|---|
+| Normal | track pants ($10) and a T-shirt | none | "Nobody looks twice, and you get a proper workout in." | Work out, 0 |
+| Cute | leggings (owned), or the fitted gym tank ($15) | none | leggings: the mirror shows the whole shape of her ass · tank: a guy at the rack drops his bar | under 20, in leggings: "Squat facing the mirror wall." +1, cap 19 |
+| Showy | the sports bra with nothing over it | the garage hold only | two guys stop counting reps | at 20: "Work out, and let them look." +1, cap 39, campus talk +1 |
+| Slutty | tiny gym shorts ($20) | Exhibitionism 40 | three guys drift over to the next bench (a small group seeing underwear-level skin is Showing, H1 as corrected 2026-11-08) | at 40: "Stretch on the mats facing the rack." +1, cap 59, campus talk +1 |
+| Slutty+ | sheer leggings ($30) | Exhibitionism 60 | the whole floor watches; the desk guy: "Hey. Watch it. This is a college gym." | at 60: "Do your squats anyway." +1, cap 79, campus talk +1 |
+
+The desk guy's warning is a line only and costs nothing (LO, 2026-11-08: "A").
+
+**Accidents.** When she starts a workout, one of these may swap in: 1 in 4 each, one a day (`gym_accident_today`).
+Both answers finish the workout (60 min, energy −15) and pay campus talk +1, because the guy who saw has no meter
+(the-heat-ladder.md H5). Letting it be pays her +1 to the top of the act's own stage.
+
+| accident | when | fix (0) | let it be |
+|---|---|---|---|
+| the leggings go see-through | leggings, a top, panties on; any stage | "Pull your top down over your ass." | "Finish the set." +1, cap 19 |
+| the strap slips | sports bra alone; Exhibitionism 20 | "Fix it fast." | "Keep running a few steps." +1, cap 39 |
+| the shorts ride up | tiny gym shorts; Exhibitionism 40 | "Pull them down." | "Do the next rep." +1, cap 59 |
+
+Jake's training reads the same steps, one line each (`npc_jake.md`); so does the park run (`park.md`).
+
+**Panties (LO, 2026-11-08, DECISIONS 199: "match the streets").** The gym and the park share the park's leave rules.
+From Exhibitionism 40 a bra and a bottom will do, as on the street; below 40 a bra still needs panties.
 
 ## Rows a gate needs
 

@@ -138,10 +138,11 @@ for trait_k, bands in [
                         "Reach Showing (Exhibitionism 40): let them look at the campus gym and in the lecture hall, run in the park, walk the street in your short skirt, leave the changing-room curtain open, take your bra off in the women's toilet, let the towel slip in the kitchen or the living room"),   # LO, 2026-11-04: the street and park pay to 39 again; the curtain opens here
                        (40, 60, "Showing. Watched opens at 60: a room watching, a stranger.",
                         # what pays while she is Showing (garden_sun, the wind and the street with no panties, cap 59, the
-                        # towel drops); the park stops at 39 (LO, 2026-11-04), and nothing repeatable pays it in the lecture hall or gym
-                        "Reach Watched (Exhibitionism 60): show off on the lounger in the garden, walk the street with no panties and let the wind have your skirt, drop the towel in the kitchen or the living room"),
-                       (60, 80, "Watched. Posing for the class and a crowd come in the next release.",
-                        "On Display (Exhibitionism 80) opens in the next release")])]:
+                        # towel drops); the park stops at 39 (LO, 2026-11-04), and nothing repeatable pays it in the lecture hall;
+                        # the gym's mats in the tiny shorts do, cap 59 (DECISIONS 198)
+                        "Reach Watched (Exhibitionism 60): show off on the lounger in the garden, walk the street with no panties and let the wind have your skirt, drop the towel in the kitchen or the living room, stretch on the gym mats in your tiny gym shorts"),
+                       (60, 80, "Watched. Do your squats at the gym in the sheer leggings. A crowd comes in the next release.",
+                        "On Display (Exhibitionism 80) opens in the next release: posing for the figure-drawing class")])]:
     for lo, hi, text, label in bands:
         card = {"group": f"tier_{trait_k}", "priority": 5, "text": text,
                 "when": [{"flag": "opening_done", "op": "is_true"},

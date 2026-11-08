@@ -1585,3 +1585,13 @@ real Tweego after the merge, which replaces the stand-in-compiled build that mai
 118, 0 real fails; shape 22 pass; engine tests 841 pass; skill tests 1,017 pass; importer the same 6 old failures;
 cites 0 wrong. Headless: every look pays, the cap and drink rules hold, the top buys in the new shop, shows on
 the Change Clothes rail and goes on, no sideways scroll at 390px; the pace play reaches 20 on day 7.
+
+## 2026-11-08 — the gym clothes
+
+DECISIONS 198. Engine: garment `description` (importer, the room's shop stand and rail; test
+`test_garment_description.py`). Game: four gym pieces, shop lines on every bought piece, the gym floor's line per
+step, two buttons, three accidents as substitutions from "Work out", the gym's locker room, park and Jake lines, the
+new pieces in the strip lists and the bare-legs checks. The first build failed three gates (a panties line with no
+panties check, random events in a changing room, a quoted line in a paragraph); all fixed, the accidents moved from
+random-on-entry to swaps from the workout. Dev + debug rebuild; missing media 53 (the 4 new pictures).
+
