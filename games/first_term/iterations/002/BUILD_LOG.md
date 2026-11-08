@@ -1610,3 +1610,14 @@ Reader re-read of the 12 scenes: 7 fails (3 lines that claimed the class or the 
 DECISIONS 205. Crop top, bodycon minidress, micro shorts, plunge dress; four street looks, class lines in Psychology and Figure drawing, Zoe's lines on the quad and at the party house, four accidents. First build: four gate fails (one Zoe line naming panties unchecked, a first-time phrase, class lines pasted into every class, street looks paying from 0); fixed. Reader: 12 fails, fixed, plus DECISIONS 41's words removed from the strangers' accidents (also the gym's and the class ones from 198 and 202). A fix to Zoe's lines first overwrote her old hub lines; restored from git before the build. After: gates 118, 0 fails; shape 22 pass; skill tests 1,017 pass; cites 0 wrong. Headless: each piece locked a point below its stage and wearable at it; each street look pays to its cap; class lines show; each accident's answer shut below its gate and open at it; the class accidents don't roll in Figure drawing.
 
 Second reader read: 5 fails fixed (the class accidents' exit is "Wait for class.", a bench hook, Vance's "Not tonight.", the sheer squats need panties). Gates 118, 0 fails; headless: the sheer squat button shows with panties at 60 and not without.
+
+## 2026-11-08 — café uniforms she buys
+
+DECISIONS 206. Two dresses Tom sells when she asks (short at Exhibitionism 40 and footfall 10, $30; low-cut at 60 and
+footfall 25, $40), no shop price. Tips x1/x2/x3/x4 by the uniform on; clock-in keeps any uniform she wears (cafe.py
+shift_choice, the accidents' counter, tom.py back()). Two accidents (cafe_acc_short_shelf, cafe_acc_lowcut_slip). First
+build: 3 gate fails (two dresses named "your uniform" in Hale's and Zoe's lines; the accidents' Tom line in three
+canvases; the bought-flags nobody read), fixed. Reader: 7 fails, fixed. Gates 118, 0 fails; shape 22 pass; cites 0
+wrong. Headless: the offers show at footfall 10 and 25 only; buying takes $30 and $40; locks shut at 39 and 59; on
+shift each dress stays on; tips $10/12/14/16 on "Not today, hon."; each accident's let is shut at 39/59, open at 40/60.
+Two pictures missing: clothing/cafe_uniform_short.jpg, clothing/cafe_uniform_lowcut.jpg.

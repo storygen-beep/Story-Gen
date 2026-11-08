@@ -6,13 +6,27 @@ from tomlw import tod, wd
 TM = "npc_tom"
 out = []
 # Clocking out: the uniform off, her own top and jeans back on (iteration 002: sweep A5-02).
-CLOCK_OUT = [{"action": "unequip", "item_id": "cafe_uniform_normal"}, {"action": "unequip", "item_id": "cafe_uniform_sexy"}, {"action": "equip", "item_id": "tshirt"}, {"action": "equip", "item_id": "jeans"}]
+CLOCK_OUT = [{"action": "unequip", "item_id": "cafe_uniform_normal"}, {"action": "unequip", "item_id": "cafe_uniform_sexy"}, {"action": "unequip", "item_id": "cafe_uniform_short"}, {"action": "unequip", "item_id": "cafe_uniform_lowcut"}, {"action": "equip", "item_id": "tshirt"}, {"action": "equip", "item_id": "jeans"}]
 # (release 1 fix) "equip" also ADDS the item (v2.py:17371, setup.addToWardrobe + equipItem), so equipping both uniforms
 # gave her the tight one on her first shift and put it on every time. Clock-in puts on the normal uniform, unless she
 # has changed into the tight one herself (her choice, job.md).
 CLOCK_IN = [{"action": "equip", "item_id": "cafe_uniform_normal"}]
 SEXY_ON = {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "equipped"}
 SEXY_OFF = {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "unequipped"}
+# DECISIONS 206 (LO, 2026-11-08: "She will buy. Completely her decision"): two more uniforms she buys from Tom, the
+# short dress (Exhibitionism 40) and the low-cut dress (60). Clock-in keeps whichever uniform she has on.
+SHORT_ON = {"type": "clothing_item", "item_id": "cafe_uniform_short", "operator": "equipped"}
+SHORT_OFF = {"type": "clothing_item", "item_id": "cafe_uniform_short", "operator": "unequipped"}
+LOW_ON = {"type": "clothing_item", "item_id": "cafe_uniform_lowcut", "operator": "equipped"}
+LOW_OFF = {"type": "clothing_item", "item_id": "cafe_uniform_lowcut", "operator": "unequipped"}
+SHOWY_OFF = [SEXY_OFF, SHORT_OFF, LOW_OFF]   # the normal uniform, or her own clothes before clock-in
+NORMAL_ON = {"type": "clothing_item", "item_id": "cafe_uniform_normal", "operator": "equipped"}
+IN_UNIFORM = {"type": "worn_type", "operator": "eq", "value": "cafe_uniform"}
+NOT_IN_UNIFORM = {"type": "worn_type", "operator": "neq", "value": "cafe_uniform"}
+BRA_ON = {"type": "clothing_slot", "slot": "bra", "operator": "equipped"}
+BRA_OFF = {"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}
+PANTIES_ON = {"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}
+PANTIES_OFF = {"type": "clothing_slot", "slot": "underwear", "operator": "unequipped"}
 NO_CURFEW = cond(NO_CURFEW_ITEM)
 FRI = [wd(4), tod("18:00", "19:00")]   # the Friday evening shift, as it starts (iteration 002: A5-04)
 
@@ -25,8 +39,8 @@ GARY_OUT = {"type": "npc_at_location", "location_id": "cafe", "npc_id": GY, "ope
 # and fails), so the three levels are five flat, mutually exclusive cases:
 E_LO, E_HI = trait("exhibitionism", "lt", 20), trait("exhibitionism", "gte", 20)
 C_LO, C_HI = trait("corruption", "lt", 20), trait("corruption", "gte", 20)
-PARTS = {"L1": [[E_LO, SEXY_OFF]],
-         "L2": [[E_LO, SEXY_ON], [E_HI, C_LO], [E_HI, C_HI, trait("cafe_l2_shifts", "lt", 3)]],
+PARTS = {"L1": [[E_LO, *SHOWY_OFF]],
+         "L2": [[E_LO, SEXY_ON], [E_LO, SHORT_ON], [E_LO, LOW_ON], [E_HI, C_LO], [E_HI, C_HI, trait("cafe_l2_shifts", "lt", 3)]],
          "L3": [[E_HI, C_HI, trait("cafe_l2_shifts", "gte", 3)]]}
 
 def at_level(lv, *blocks, extra=()):
@@ -65,12 +79,13 @@ GARY_AFTER = "Same booth, doll. Same time."
 
 # the pay: $8 a shift plus the tip; the sexy uniform and the Friday evening close each double it (as built:
 # 12 / 16 / 24, cafe.py before 2026-11-01; LO kept the Friday close, DECISIONS 121)
-PAY_WHEN = [(cond(SEXY_OFF, {"type": "weekday", "weekdays": [0, 1, 2, 3, 5]}), 1),
-            (cond(SEXY_OFF, wd(4), tod("08:00", "18:00")), 1),
-            (cond(SEXY_OFF, *FRI), 2),
-            (cond(SEXY_ON, {"type": "weekday", "weekdays": [0, 1, 2, 3, 5]}), 2),
-            (cond(SEXY_ON, wd(4), tod("08:00", "18:00")), 2),
-            (cond(SEXY_ON, *FRI), 4)]
+# DECISIONS 206: tips step with the uniform she has on: normal x1, tight x2, short x3, low-cut x4 (CoT's skimpier
+# uniforms draw more custom, guide_course-of-temptation_userjs.js:813-890). The normal rows carry SHOWY_OFF.
+TIP_TIERS = [(SHOWY_OFF, 1), ([SEXY_ON], 2), ([SHORT_ON], 3), ([LOW_ON], 4)]
+PAY_WHEN = [row for on, m in TIP_TIERS for row in (
+    (cond(*on, {"type": "weekday", "weekdays": [0, 1, 2, 3, 5]}), m),
+    (cond(*on, wd(4), tod("08:00", "18:00")), m),
+    (cond(*on, *FRI), 2 * m))]
 WORKED = add("cafe_shifts_worked", 1, clamp=False)   # pass 4 J4: a count is never clamped (the-meters.md)
 # three hours on her feet lower her hygiene (board.needs: hygiene "falls faster after work"; pass 3 E95)
 SHIFT_SWEAT = {"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}
@@ -104,7 +119,7 @@ def level1_exits(extra_eff=()):
     out_ = []
     # (bug fix 2026-11-03) level 1 is the normal uniform only (PARTS["L1"]); the tight-uniform rows of PAY_WHEN
     # here could never show (both equipped and unequipped). The tight one at E_LO pays on level 2's exits.
-    for when, m in [(w, m) for w, m in PAY_WHEN if SEXY_ON not in w["items"]]:
+    for when, m in [(w, m) for w, m in PAY_WHEN if SHORT_OFF in w["items"]]:   # the normal-uniform rows
         for gary in (True, False):
             out_.append(go("Clock out.", loc="cafe", mins=180, wardrobe=CLOCK_OUT,
                            cond_=cond(*when["items"], *PARTS["L1"][0], GARY_IN if gary else GARY_OUT),
@@ -114,11 +129,12 @@ def level1_exits(extra_eff=()):
 def money(n):
     return {"targetType": "player", "trait": "money", "op": "add", "value": n, "clamp": False}
 
-def shift_choice(label, k, extra=(), sexy=False):
+def shift_choice(label, k, extra=(), dressed=False):
+    """dressed: she has one of her four uniforms on already and keeps it; otherwise clock-in puts the normal one on."""
     prev = [flag(f"cafe_shift_{i}_today") for i in range(1, k)]
     return go(label, node="shift", mins=0, costs=[{"trait": "energy", "value": 20}],
-              cond_=cond(*prev, flag(f"cafe_shift_{k}_today", False), *extra, SEXY_ON if sexy else SEXY_OFF),
-              flags=[fset(f"cafe_shift_{k}_today")], wardrobe=None if sexy else CLOCK_IN)
+              cond_=cond(*prev, flag(f"cafe_shift_{k}_today", False), *extra, IN_UNIFORM if dressed else NOT_IN_UNIFORM),
+              flags=[fset(f"cafe_shift_{k}_today")], wardrobe=None if dressed else CLOCK_IN)
 
 # the evening shift is shut under the curfew (job sheet: "the evening shift says why")
 DAY = tod("08:00", "18:00")
@@ -129,13 +145,13 @@ BOOKED_PAY = [{"targetType": "player", "trait": "money", "op": "add", "value": 4
 choices = []
 for k in (1, 2, 3):
     for extra in ([DAY], [EVE, NO_CURFEW_ITEM]):
-        for sexy in (False, True):
-            c = shift_choice("Work a shift (3 hours, 20 energy).", k, extra, sexy)
+        for dressed in (False, True):
+            c = shift_choice("Work a shift (3 hours, 20 energy).", k, extra, dressed)
             choices += booked_split(c, "tom_shift_booked", eff=BOOKED_PAY) if k == 1 else [c]
 
 out.append({
     "id": "cafe_shift", "name": "Work a shift",
-    "description": "The café shift: 3 hours, 20 energy, $8 plus tips ($4 in the normal uniform, $8 in the tight one at Daring; Friday's close doubles tips). Up to three a day, Monday to Saturday; the evening shift is shut under the curfew.",
+    "description": "The café shift: 3 hours, 20 energy, $8 plus tips ($4 in the normal uniform, x2 in the tight one, x3 in the short dress, x4 in the low-cut dress; Friday's close doubles tips). Up to three a day, Monday to Saturday; the evening shift is shut under the curfew.",
     "trigger": {"location": "cafe", "is_repeatable": True, "priority": 4, "is_active": True,
                 "schedules": [{"weekdays": [0, 1, 2, 3, 4, 5], "start_time": "08:00", "end_time": "19:00"}],
                 "conditions": cond(flag("cafe_job"), flag("cafe_shift_3_today", False)),
@@ -149,7 +165,7 @@ out.append({
         node("counter", "The counter", [
             # reader 2026-11-05: his order shows only where a shift can start (the hours, no curfew, the energy), and
             # "Uniform's in the back" only while she isn't already wearing one
-            *[G(cond(*when, trait("energy", "gte", 20), SEXY_OFF, {"type": "clothing_item", "item_id": "cafe_uniform_normal", "operator": "unequipped"}),
+            *[G(cond(*when, trait("energy", "gte", 20), NOT_IN_UNIFORM),
                 D(TM, "Uniform's in the back, @player. Three hours. Smile.")) for when in ([DAY], [EVE, NO_CURFEW_ITEM])],
             *[G(cond(*when, trait("energy", "gte", 20), {"type": "worn_type", "operator": "eq", "value": "cafe_uniform"}),
                 D(TM, "You're dressed, @player. Three hours. Smile.")) for when in ([DAY], [EVE, NO_CURFEW_ITEM])],
@@ -182,7 +198,16 @@ out.append({
                 pid="cafe_shift_lines"),
             G(cond(SEXY_ON), P("In the tight uniform with the top button open, every man who orders leans a little further over the counter. Every one of them tips more."),
               WHO("Whatever you recommend. Keep the change, sugar. Buy yourself a smaller shirt.")),
-            G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}),
+            # DECISIONS 206: the two dresses she bought, each read on the shift
+            G(cond(SHORT_ON, PANTIES_ON), P("In the short dress you can't bend for anything. Every time you set a plate down, the hem rides up the backs of your thighs, and the booth behind you gets your panties. You could bend from the knees. You don't, and the tips come folded bigger."),
+              WHO("Drop something, love. Go on. We'll wait.")),
+            G(cond(SHORT_ON, PANTIES_OFF), P("Nothing under the short dress. Every time you bend over a table you keep one hand flat on the hem behind you, and the men at the counter watch that hand all shift, waiting for it to slip. It never does."),
+              T("One slip and the whole booth sees everything.")),
+            G(cond(LOW_ON, BRA_OFF), P("The low-cut dress is cut in a V most of the way to your belt, and with no bra under it your tits move in it every step. Pour a coffee and the counter sees nearly all of them. A nipple edges over the cut once, but you tuck it back before table three can say a word. Table three saw anyway."),
+              WHO("Same again, sweetheart. Pour it slow.")),
+            G(cond(LOW_ON, BRA_ON), P("The low-cut dress wasn't cut for a bra. Its cups show in the V every time you lean, but the men at the counter look at them like you meant it."),
+              WHO("Lose the bra, love. It's spoiling the dress.")),
+            G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}, LOW_OFF),
               P("No bra under the uniform, and your nipples show through it. Every time you lean to pour, a man's eyes drop to your tits."),
               WHO("Cold in here today, is it?")),
             # (cut 2026-11-01: Tom's "Booth four's going to tip big today." Tom is strict, DECISIONS 117)
@@ -263,16 +288,15 @@ out.append({
 # `sinks >= sources`). The room seeing it pays the café's footfall +1 (H5: an accident pays whoever saw it);
 # letting it be pays her +1 Exhibitionism to the top of the stage it shows, gated there.
 CAFE_ACC = "cafe_accident_today"
-BRA_ON = {"type": "clothing_slot", "slot": "bra", "operator": "equipped"}
-BRA_OFF = {"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}
-PANTIES_ON = {"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}
 SEEN = add("cafe_footfall", 1, clamp=False)
 
 
-def cafe_accident(cid, name, conds, blocks, fix, fix_text, let, let_gate, cap, let_text, hook, dressed=False):
+def cafe_accident(cid, name, conds, blocks, fix, fix_text, let, let_gate, cap, let_text, hook, dressed=False, table="Table nine's waiting."):
     """dressed: she came in the tight uniform already; otherwise she changes into the normal one first."""
-    first = (go("Get to the tables.", node="event", mins=0) if dressed
-             else go("Get changed.", node="event", mins=5, wardrobe=CLOCK_IN))
+    # plain (not dressed): in her own clothes she changes into the normal uniform; in the normal one she goes straight out
+    first = ([go("Get to the tables.", node="event", mins=0)] if dressed
+             else [go("Get changed.", node="event", mins=5, wardrobe=CLOCK_IN, cond_=cond(NOT_IN_UNIFORM)),
+                   go("Get to the tables.", node="event", mins=0, cond_=cond(NORMAL_ON))])
     done = [go("Back to the counter.", loc="cafe", mins=10)]
     return {"id": cid, "name": name,
             "description": f"Random shift accident (cafe_shift_scene.md, DECISIONS 202): {name}. 1 in 4, one a day, day shifts, as she comes on; no wage (the shift after it pays); footfall +1 on both answers, letting it be +1 Exhibitionism to cap {cap}.",
@@ -281,8 +305,9 @@ def cafe_accident(cid, name, conds, blocks, fix, fix_text, let, let_gate, cap, l
                         "conditions": cond(flag("cafe_job"), flag("cafe_shift_3_today", False), flag(CAFE_ACC, False),
                                            trait("energy", "gte", 20), *conds)},
             "nodes": [
-                node("counter", "The counter", [D(TM, "You're on, @player. The counter's yours. Go.") if dressed
-                                                else D(TM, "Uniform's in the back, @player. Table nine's waiting. Go.")], [first]),
+                node("counter", "The counter", [D(TM, "You're on, @player. The counter's yours. Go.")] if dressed
+                     else [G(cond(NOT_IN_UNIFORM), D(TM, f"Uniform's in the back, @player. {table} Go.")),
+                           G(cond(NORMAL_ON), D(TM, f"You're dressed, @player. {table} Go."))], first),
                 node("event", name, blocks, [go(fix, node="fix", mins=0, eff=[SEEN], flags=[fset(CAFE_ACC)]),
                                              go(let, node="let", mins=0, eff=[SEEN, capped_e("exhibitionism", 1, cap)], flags=[fset(CAFE_ACC)],
                                                 cond_=cond(*let_gate) if let_gate else None)]),
@@ -292,7 +317,7 @@ def cafe_accident(cid, name, conds, blocks, fix, fix_text, let, let_gate, cap, l
 
 
 JUG = "Your first table of the shift, and the man at table nine swings round to wave at somebody and takes the water jug right out of your hand. The whole jug goes down your front."
-out.append(cafe_accident("cafe_acc_spill_bra", "The jug goes over", [SEXY_OFF, BRA_ON],
+out.append(cafe_accident("cafe_acc_spill_bra", "The jug goes over", [*SHOWY_OFF, BRA_ON],
     [P(JUG + " The uniform is soaked through in a second and goes see-through. It clings to you. Your bra shows through it, the shape of your tits in it and all."),
      WHO("Oh God, sorry, love. Sorry. Hell of a view, though.")],
     "Run for the back room.",
@@ -305,7 +330,7 @@ out.append(cafe_accident("cafe_acc_spill_bra", "The jug goes over", [SEXY_OFF, B
      GC(cond(trait("exhibitionism", "gte", 20)), T("You could have run. You didn't want to."))],
     "He's a stranger, and he leaves with his eyes still on your chest. Three hours of shift to go, and every table in here saw it."))
 
-out.append(cafe_accident("cafe_acc_spill_bare", "The jug goes over", [SEXY_OFF, BRA_OFF],
+out.append(cafe_accident("cafe_acc_spill_bare", "The jug goes over", [*SHOWY_OFF, BRA_OFF],
     [P(JUG + " The uniform is soaked through in a second and goes see-through, and there's no bra under it. It clings to your bare tits. Your nipples are hard from the cold water, dark through the wet cloth, for the whole room."),
      WHO("Jesus. Sorry, love. Sorry. Christ.")],
     "Run for the back room.",
@@ -314,7 +339,7 @@ out.append(cafe_accident("cafe_acc_spill_bare", "The jug goes over", [SEXY_OFF, 
     "Finish the table.", [trait("exhibitionism", "gte", 60)], 79,
     [P("You don't run. You finish the table soaking wet, your bare tits and your hard nipples right there through the uniform, and you keep serving in it. Every man in the place orders another coffee. At the counter Tom watches and says nothing."),
      T("Everyone can see them. You don't want it to dry.")],
-    "He's a stranger, and he can't look at your face when he pays. The whole shift is still ahead of you, in a uniform that won't dry."))
+    "He's a stranger, and he can't look at your face when he pays. The whole shift is still ahead of you, in a uniform that won't dry.", table="Table nine wants water."))
 
 out.append(cafe_accident("cafe_acc_button_bra", "The top button goes", [SEXY_ON, BRA_ON],
     [P("You're leaning over the counter with a man's change when the top button of the tight uniform gives up and pings off the coffee machine. The front falls open to your bra. He gets a long look at your tits pushed up in it."),
@@ -336,7 +361,7 @@ out.append(cafe_accident("cafe_acc_button_bare", "The top button goes", [SEXY_ON
     [P("You leave it. The uniform hangs open, and every time you lean to pour, your bare tits swing in the gap, nipples and all. Tom watches from the till and says nothing. Men you've never seen before stay for a second coffee.")],
     "He forgets his change on the counter. The men at the window seats saw it all, and they're staying for the rest of your shift.", dressed=True))
 
-out.append(cafe_accident("cafe_acc_hem", "Under the table", [SEXY_OFF, PANTIES_ON],
+out.append(cafe_accident("cafe_acc_hem", "Under the table", [*SHOWY_OFF, PANTIES_ON],
     [P("A man in booth two knocks his fork off the table. You bend all the way over to get it from under the seat, and the uniform's hem rides right up over your ass. The whole booth behind you sees your panties, stretched tight between your legs from behind."),
      WHO("Take your time down there.")],
     "Pull the hem down.",
@@ -344,7 +369,31 @@ out.append(cafe_accident("cafe_acc_hem", "Under the table", [SEXY_OFF, PANTIES_O
      T("Next time he can get his own fork.")],
     "Take your time down there.", [trait("exhibitionism", "gte", 40)], 59,
     [P("You take your time. You stay bent over, feeling under the seat for a fork you already found, your uniform up over your ass and your panties out to the whole booth. Then you stand, smooth it down and hand him a clean one. Tom watches from the counter and says nothing. The booth can't stop grinning at each other.")],
-    "The booth comes in on the same day every week. Somebody's going to drop a fork again."))
+    "The booth comes in on the same day every week. Somebody's going to drop a fork again.", table="Booth two's waiting."))
+
+# DECISIONS 206: the two dresses she bought go wrong too (a moment each; no public topless, DECISIONS 204)
+out.append(cafe_accident("cafe_acc_short_shelf", "The top shelf", [SHORT_ON, PANTIES_ON],
+    [P("Table nine wants the honey, and the honey lives on the top shelf behind the counter. You go up on your toes for it, and the short dress comes up with you, right off your ass. The two men on the counter stools get your panties at eye level, the whole back of them."),
+     WHO("Higher shelf next time, Tom.")],
+    "Pull the dress down.",
+    [P("You grab the hem and come down off your toes fast, the honey in your other hand and your face hot. The two on the stools suddenly find their coffee very interesting. Tom wipes the same spot on the counter and doesn't look up."),
+     T("Thirty dollars for a dress that does that.")],
+    "Stay up there.", [trait("exhibitionism", "gte", 40)], 59,
+    [P("You stay up on your toes. You take your time choosing between two jars that are both honey, the dress up over your ass and your panties out to the counter, and you only come down once you've picked. Tom has stopped wiping. The two men order another coffee they don't want."),
+     GC(cond(trait("exhibitionism", "lt", 50)), T("They saw. You let them.")),
+     GC(cond(trait("exhibitionism", "gte", 50)), T("You'd reach for that shelf all day."))],
+    "They're on the same stools every week. They'll ask for something off the top shelf again.", dressed=True))
+
+out.append(cafe_accident("cafe_acc_lowcut_slip", "The cut gives", [LOW_ON, BRA_OFF],
+    [P("You lean in to pour for a man at the corner table at the back, and the low-cut dress gives up on the left side. Your nipple slides right out over the edge of the cut, bare and hard, a foot from his cup."),
+     WHO("Careful, love. You'll spill.")],
+    "Tug it back.",
+    [P("You set the pot down and tug the dress back over it, fast, with both hands, but he's already seen everything. Your face burns all the way back to the counter, where Tom is very busy with the till."),
+     T("No bra fits under it. You knew that when you paid for it.")],
+    "Finish pouring.", [trait("exhibitionism", "gte", 60)], 79,
+    [P("You don't tug it back. You finish pouring, slow, your nipple out over the cut and tight in the air, and you top up his friend's cup too before you straighten up and tuck it away. The corner table goes silent. Tom stares at the till like it owes him money."),
+     T("The whole corner saw it. You liked that they did.")],
+    "The corner table stays for the rest of your shift and watches the cut of your dress every time you pour.", dressed=True))
 
 CAFE_ACC_IDS = [c["id"] for c in out if c["id"].startswith("cafe_acc_")]
 _shift = next(c for c in out if c["id"] == "cafe_shift")

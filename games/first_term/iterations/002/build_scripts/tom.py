@@ -19,6 +19,10 @@ SEXY_OWNED = {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator
 CLOCK_IN = [{"action": "equip", "item_id": "cafe_uniform_normal"}]
 SEXY_WORN = {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "equipped"}
 SEXY_NOT_WORN = {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "unequipped"}
+SHORT_OWNED = {"type": "clothing_item", "item_id": "cafe_uniform_short", "operator": "owned"}
+SHORT_NOT_OWNED = {"type": "clothing_item", "item_id": "cafe_uniform_short", "operator": "not_owned"}
+LOW_NOT_OWNED = {"type": "clothing_item", "item_id": "cafe_uniform_lowcut", "operator": "not_owned"}
+NOT_IN_UNIFORM = {"type": "worn_type", "operator": "neq", "value": "cafe_uniform"}
 
 def back(next_node, change="You change in the back room in front of the staff mirror, between the mop bucket and the crates of milk."):
     """She changes in the back room: the uniform is equipped before any screen names it.
@@ -27,9 +31,10 @@ def back(next_node, change="You change in the back room in front of the staff mi
         P("Tom looks up from the till as you come in."),
         D(TM, "Uniform, @player. Back room."),
         # scene reader 2026-11-04: in the tight one (or the normal one) she has nothing to change out of
-        G(cond(SEXY_NOT_WORN, {"type": "clothing_item", "item_id": "cafe_uniform_normal", "operator": "unequipped"}), P(change)),
-    ], [go("Clock in.", node=next_node, mins=5, cond_=cond(SEXY_NOT_WORN), wardrobe=CLOCK_IN),
-        go("Clock in.", node=next_node, mins=5, cond_=cond(SEXY_WORN))])
+        # DECISIONS 206: any of her four uniforms already on is kept on (the short and low-cut dresses she bought)
+        G(cond(NOT_IN_UNIFORM), P(change)),
+    ], [go("Clock in.", node=next_node, mins=5, cond_=cond(NOT_IN_UNIFORM), wardrobe=CLOCK_IN),
+        go("Clock in.", node=next_node, mins=5, cond_=cond(UNIFORM))])
 
 # ── the job ask: meets Tom, the job, the uniform ──
 out.append({
@@ -210,6 +215,9 @@ out.append({
             G(cond({"type": "worn_type", "operator": "neq", "value": "cafe_uniform"}), D(TM, "Day off? Then you're a customer. Sit where I can see you.")),
             # release 1, strict (tom_01_the_apron.md, his counter): he never tells her to show
             G(cond(UNIFORM, {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "equipped"}), P("He looks once, at your tits in it, and makes himself look at the till."), D(TM, "Your choice. Tables don't wait.")),   # reader a3 #59 (DECISIONS 131)
+            # DECISIONS 206: the dresses she bought from him; he stays strict (DECISIONS 117)
+            G(cond(UNIFORM, {"type": "clothing_item", "item_id": "cafe_uniform_short", "operator": "equipped"}), P("His eyes go down the short dress to your thighs, once, and come straight back to the till."), D(TM, "Bend from the knees. I'm not running a floor show.")),
+            G(cond(UNIFORM, {"type": "clothing_item", "item_id": "cafe_uniform_lowcut", "operator": "equipped"}), P("He keeps his eyes on your face, hard, like it costs him something."), D(TM, "Watch the coffee pot in that.")),
             G(cond(UNIFORM, {"type": "clothing_item", "item_id": "cafe_uniform_normal", "operator": "equipped"}),
               P("He reties your apron from behind on his way past. His knuckles brush your ass. He takes his hand back fast, like the knot burned him."), D(TM, "Tables first.")),
             G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}, UNIFORM), D(TM, "Apron on. Keep it on.")),
@@ -226,6 +234,12 @@ out.append({
             # a build addition (release 1): with the uniform rule cut, asking is the only way to the tight top; her choice
             go("Ask for the tight dress.", node="tight", mins=2,
                cond_=cond(trait("exhibitionism", "gte", 20), {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "not_owned"}, tod("08:00", "22:00"))),
+            # DECISIONS 206 (LO: "She will buy. Completely her decision"): her ask, his stock, her money. He has them
+            # because customers ask (the café's footfall, as CoT's bar vibe brings its uniforms in); he never offers.
+            go("Ask Tom for something shorter.", node="short", mins=2,
+               cond_=cond(trait("exhibitionism", "gte", 40), trait("cafe_footfall", "gte", 10), SHORT_NOT_OWNED, tod("08:00", "22:00"))),
+            go("Ask Tom for something lower cut.", node="lowcut", mins=2,
+               cond_=cond(trait("exhibitionism", "gte", 60), trait("cafe_footfall", "gte", 25), SHORT_OWNED, LOW_NOT_OWNED, tod("08:00", "22:00"))),
             go("Sit at the counter a while.", loc="cafe", mins=20, cond_=cond({"type": "worn_type", "operator": "neq", "value": "cafe_uniform"}, tod("08:00", "21:30"))),
             go("Leave him to the till.", loc="town")]),
         node("tight", "The tight dress", [
@@ -233,6 +247,18 @@ out.append({
             D(TM, "Your choice. They tip more for it. They grab more too."),
         ], [go("Take it.", loc="cafe", mins=3, flags=[fset("uniform_sexy")], wardrobe=[{"action": "add", "item_id": "cafe_uniform_sexy"}]),
             # reader a3 #51 (DECISIONS 131): the written no. No pay: it's the uniform she turns down, not him.
+            go("Leave it on the counter.", node="leave_it", mins=1)]),
+        node("short", "Something shorter", [
+            P("Tom looks at you for a long second. Then he reaches under the counter and puts a folded dress on it, black like the others but half the length. His eyes go down to your thighs, to where it would stop, and come back up slow."),
+            D(TM, "People keep asking if the girls come in anything shorter. I keep one back. Thirty dollars. Your call, not mine."),
+        ], [go("Buy it ($30).", loc="cafe", mins=3, costs=[{"trait": "money", "value": 30}],
+               wardrobe=[{"action": "add", "item_id": "cafe_uniform_short"}]),
+            go("Leave it on the counter.", node="leave_it", mins=1)]),
+        node("lowcut", "Something lower", [
+            P("He doesn't even look up from the till first. He reaches under the counter, and the dress he puts down is cut in a V that goes most of the way to the belt. He looks once at your tits, at where it would open on them, and then hard at the till."),
+            D(TM, "Forty. Nothing goes under it, so don't ask me for a bra that fits. Your call."),
+        ], [go("Buy it ($40).", loc="cafe", mins=3, costs=[{"trait": "money", "value": 40}],
+               wardrobe=[{"action": "add", "item_id": "cafe_uniform_lowcut"}]),
             go("Leave it on the counter.", node="leave_it", mins=1)]),
         node("leave_it", "Not the dress", [D(TM, "Your call."), P("He folds it back under the counter without looking at it, or at you.")],
              [go("Leave him to his folding.", loc="cafe", mins=1)]),
@@ -248,6 +274,9 @@ out.append({
         node("booth", "Booth four", [
             P("Gary in booth four with his paper and his pot of black tea. He lowers the paper when you come near, an inch at a time."),
             POOL(D(GY, "There she is. Top me up, doll."), D(GY, "Slow day. I could use the company."), D(GY, "You look lovely today. You always look lovely."), pid="gary_lines"),
+            # DECISIONS 206: the dresses she bought
+            G(cond({"type": "clothing_item", "item_id": "cafe_uniform_short", "operator": "equipped"}), P("For the short dress the paper comes down a whole inch more. He looks at your thighs, then at the hem, and waits for you to bend.")),
+            G(cond({"type": "clothing_item", "item_id": "cafe_uniform_lowcut", "operator": "equipped"}), P("Gary sees the cut of the low-cut dress and lowers his paper all the way to the table. His eyes stay in the V.")),
             # (release 1: Gary's paid ten minutes are cut, DECISIONS 117)
         ], [go("Top up his tea.", node="poured", mins=10, flags=[fset("served_gary")]),   # read by Tom's palm line (part 9)
             # reader batch 4 (pass 3): his ask gets a written no

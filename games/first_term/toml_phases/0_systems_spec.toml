@@ -831,6 +831,29 @@ beauty = 2
 corruption = 1
 
 [[clothing]]
+id = "cafe_uniform_short"
+description = "Bend to wipe a table and your panties are the specials board."
+name = "Short café dress"
+slot = "dress"
+image = "clothing/cafe_uniform_short.jpg"
+# no price: a priced garment goes on the clothes shop rail (v2.py:12464, setup.shopRoomStock); Tom sells it (DECISIONS 206)
+type = "cafe_uniform"
+beauty = 2
+corruption = 2
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 } ] }
+
+[[clothing]]
+id = "cafe_uniform_lowcut"
+description = "Cut so low no bra fits under it. Pour slow."
+name = "Low-cut café dress"
+slot = "dress"
+image = "clothing/cafe_uniform_lowcut.jpg"
+type = "cafe_uniform"
+beauty = 3
+corruption = 3
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 } ] }
+
+[[clothing]]
 id = "laura_blue_dress"
 name = "Laura's blue dress"
 slot = "dress"

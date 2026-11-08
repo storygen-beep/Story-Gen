@@ -252,7 +252,7 @@ DRESS_OFF_HAND = (("You slide your hand inside your clothes.", "You slide your h
 
 # pass 4 reader (numbers/clothes): the café uniforms sit in the dress slot too, so a shift-clothes Thursday has
 # no "top" either; each one-piece names itself where the beat says "your top"
-ONE_PIECE = {**{d: "your dress" for d in DRESSES}, "cafe_uniform_normal": "your uniform", "cafe_uniform_sexy": "your uniform"}
+ONE_PIECE = {**{d: "your dress" for d in DRESSES}, "cafe_uniform_normal": "your uniform", "cafe_uniform_sexy": "your uniform", "cafe_uniform_short": "your dress", "cafe_uniform_lowcut": "your dress"}
 
 
 def _dress_off(text):

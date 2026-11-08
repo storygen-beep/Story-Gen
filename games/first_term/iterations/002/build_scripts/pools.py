@@ -148,7 +148,7 @@ LOW_DO_THOUGHT = [G(cond(trait("corruption", "lt", 40)), T("It's a dare. It does
 # scene reader b03 (2026-11-03): a dare beat that says "your top" is true only in a top. canv.top_or_dress keys on the
 # two going-out dresses being off, so in a cafe uniform, or in only a bra, it named a top she wasn't wearing. Here each
 # beat is worded for what is on: a top, a dress-slot item (the two dresses, the uniforms), a bra and nothing over it, bare.
-UNIFORMS = ("cafe_uniform_normal", "cafe_uniform_sexy")
+UNIFORMS = ("cafe_uniform_normal", "cafe_uniform_sexy", "cafe_uniform_short", "cafe_uniform_lowcut")
 def slot(s, on=True): return {"type": "clothing_slot", "slot": s, "operator": "equipped" if on else "unequipped"}
 NO_TOP_BRA = {   # (old, new) per beat: a bra and nothing over it
     "low_show": [("You grab your top and everything under it and yank it all up to your chin.", "You grab your bra and yank it up to your chin."),
@@ -179,7 +179,7 @@ def dare_by_top(key, text):
     # itself (an exact check, not worn_exposure): every case not above has some other dress-slot item on
     return chain_by_sentence([(cond(slot("top"), slot("dress", False)), text)]
             + [(cond({"type": "clothing_item", "item_id": d, "operator": "equipped"}), text.replace("your top", "your dress")) for d in DRESSES]
-            + [(cond({"type": "clothing_item", "item_id": u, "operator": "equipped"}), text.replace("your top", "your uniform")) for u in UNIFORMS]
+            + [(cond({"type": "clothing_item", "item_id": u, "operator": "equipped"}), text.replace("your top", "your dress" if u in ("cafe_uniform_short", "cafe_uniform_lowcut") else "your uniform")) for u in UNIFORMS]
             + [(cond(slot("top", False), slot("dress", False), slot("bra")), _swap(text, NO_TOP_BRA[key])),
                (cond(slot("top", False), slot("dress", False), slot("bra", False)), _swap(text, NO_TOP_BARE[key])),
                (cond(slot("dress")), text.replace("your top", "your clothes"))])   # any other dress-slot item
