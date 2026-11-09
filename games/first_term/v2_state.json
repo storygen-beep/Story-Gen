@@ -6236,7 +6236,7 @@
           ]
         },
         "in_release": true,
-        "hours": "Mon-Sat 18:00-00:00; Sat 00:00-02:00; Sun 20:00-00:00",
+        "hours": "Mon-Sat 18:00-00:00; Sat 00:00-02:00; Sun 21:00-00:00",
         "closed_text": "Zoe's out. Nobody answers.",
         "alone": "borrow a dress (in her bedroom)",
         "hidden_until": "zoe_met"
@@ -6261,7 +6261,7 @@
           ]
         },
         "in_release": true,
-        "hours": "Mon-Sat 18:00-00:00; Sat 00:00-02:00; Sun 20:00-00:00",
+        "hours": "Mon-Sat 18:00-00:00; Sat 00:00-02:00; Sun 21:00-00:00",
         "closed_text": "Zoe's out. Nobody answers.",
         "alone": "borrow Zoe's dress",
         "hidden_until": "zoe_met"
@@ -7893,9 +7893,9 @@
             "weekdays": [
               "Sun"
             ],
-            "from": "20:00",
+            "from": "21:00",
             "to": "00:00",
-            "note": "a Sunday night in bed after the weekend (reach audit 2026-11-09 (12_reach_audit.md), LO 'Go ahead' on Zoe and Jake)"
+            "note": "going to bed early on a Sunday night (scene reader 2026-11-10: 'she falls asleep' must be true; DECISIONS 220)"
           },
           {
             "where": "quad",
@@ -8382,9 +8382,9 @@
               "Thu"
             ],
             "from": "15:00",
-            "to": "17:30",
+            "to": "17:00",
             "when": "jake_number",
-            "note": "training, then the showers (reach audit 2026-11-09 (12_reach_audit.md), LO 'Go ahead' on Zoe and Jake)"
+            "note": "team training (the 17:30 showers half-hour reverted: scene reader 2026-11-10, DECISIONS 220)"
           },
           {
             "where": "lecture_hall",

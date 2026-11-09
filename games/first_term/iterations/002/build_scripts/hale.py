@@ -308,14 +308,14 @@ out.append({
             GC(cond(*[{"type": "clothing_item", "item_id": d, "operator": "unequipped"} for d in ONE_PIECE], {"type": "clothing_slot", "slot": "top", "operator": "equipped"}), POOL(P(beat("hale_thursday_session", "A a")), P(beat("hale_thursday_session", "A b")), P(beat("hale_thursday_session", "A c")), pid="hale_touch_low", bag=True)),
             *[GC(cond({"type": "clothing_item", "item_id": d, "operator": "equipped"}), POOL(*[P(beat("hale_thursday_session", k).replace("your top", ONE_PIECE[d])) for k in ("A a", "A b", "A c")], pid=f"hale_touch_low_{d}", bag=True)) for d in ONE_PIECE],
             VID("a professor's hands on a student over her clothes in his office, her answering him", "professor touches student over clothes office", "teacher hands on student body talking", pool_dir="sex/hale_thursday_low_t4")],
-            [go("\"Same time next week.\"", node="end", mins=15, eff=SESSION_PAY(59))]),
+            [go("\"Until next time.\"", node="end", mins=15, eff=SESSION_PAY(59))]),   # scene reader 2026-11-10: a booked hour promises no next week
         # scene reader b02 (2026-11-03): in a dress the top she pulls off is the dress, as touch_low already does
         node("touch_high", "Describe it", [GC(cond(*[{"type": "clothing_item", "item_id": d, "operator": "unequipped"} for d in ONE_PIECE], {"type": "clothing_slot", "slot": "top", "operator": "equipped"}), POOL(P(beat("hale_thursday_session", "B a")), P(beat("hale_thursday_session", "B b")), P(beat("hale_thursday_session", "B c")), pid="hale_touch_high", bag=True)),
             # fix_g3c: with the dress off over her head nothing says she has panties on, so the hand goes to her body
             # itself (her clit is the next word in all three), not "inside your panties"
             *[GC(cond({"type": "clothing_item", "item_id": d, "operator": "equipped"}), POOL(*[P(_dress_off(beat("hale_thursday_session", k).replace("your top", ONE_PIECE[d]))) for k in ("B a", "B b", "B c")], pid=f"hale_touch_high_{d}", bag=True)) for d in ONE_PIECE],
             VID("a topless student touching herself in her professor's office while he watches and takes notes", "student masturbates professor watches notes", "girl touches herself teacher watching office", pool_dir="sex/hale_thursday_high_t5")],
-            [go("\"Same time next week.\"", node="end", mins=15, eff=SESSION_PAY(79, 59))]),
+            [go("\"Until next time.\"", node="end", mins=15, eff=SESSION_PAY(79, 59))]),
         node("claire_car", "She's early", [
             P("His phone buzzes on the desk before he's touched you. He reads it and his face goes flat."),
             D(H, "She's early. She's in the parking lot."),
@@ -326,9 +326,12 @@ out.append({
         node("end", "Time", [
             P("He looks at the clock, and straightens his tie, and unlocks the door."),
             GC(cond(*THU), D(H, "Thursday."), P("Down in the parking lot his wife's car isn't there yet.")),
+            # scene reader 2026-11-10 (DECISIONS 220): a booked morning hour comes back only by his email
+            GC(cond(*NOT_THU, tod("10:00", "12:30")), D(H, "I'll email."), P("Out on the faculty floor the lecture changeover is starting, doors banging. Nobody looks at his door.")),
             GC(cond(*NOT_THU), D(H, "Same time."), P("Out on the faculty floor a door bangs, and somebody laughs on the stairs. Nobody looks at his door.")),
         ], [go("\"Thursday.\"", loc="faculty_floor", mins=2, cond_=cond(*THU)),
-            go("\"Same time.\"", loc="faculty_floor", mins=2, cond_=cond(*NOT_THU))]),
+            go("\"I'll watch for it.\"", loc="faculty_floor", mins=2, cond_=cond(*NOT_THU, tod("10:00", "12:30"))),
+            go("\"Same time.\"", loc="faculty_floor", mins=2, cond_=cond(*NOT_THU, tod("12:30", "10:00")))]),
         # scene reader b02 (2026-11-03): the no costs a grade point (grade_psych -1), so he says it goes down; no letter named
         node("isnt", "Not coaching", [
             ME("This isn't coaching."),

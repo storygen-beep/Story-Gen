@@ -1895,3 +1895,13 @@ Corruption) · 14 / 20". 0 page errors.
 - On Thursday he isn't there in the morning even when booked.
 - 0 page errors.
 - (`offered()` reads true unbooked too, because it does not check `requires_npc`; his absence is what keeps it shut.)
+
+## 2026-11-10 — scene reader on the reach changes (DECISIONS 220)
+
+- `v2-reader` read 33 canvases: 10 FAILs, all fixed over three re-reads, and the last read has none. The verdicts are in the session scratchpad (`reader_reach/`).
+- Files:
+  - `walkins_out.py`, `jake.py`, `heat_a.py`, `ryan.py`, `hale.py`, `home.py`, `people_data.py`;
+  - `v2_state.json` (Jake's gym row, Zoe's Sunday row and her rooms' hours);
+  - sheets `npc_jake.md`, `npc_zoe.md`, `hale_thursday_session.md`.
+- Gates: 114 pass, 3 decided, 1 fail (Laura's loop, held), 4 n/a. Shape: 22 pass. Cites: 0 wrong.
+- Loops: Ryan 20.5 h, Zoe 18.4, Hale 24.6, Jake 29.4.

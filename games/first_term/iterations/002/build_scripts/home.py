@@ -639,6 +639,11 @@ out.append({"id": "laura_alone_peek", "name": "Peek through the gap",
         P("You ease the door a finger's width wider. The lamp is off now."),
         # reader pass 4 b1 (low heat is on the body): her body, Ella's reaction, the not-yet
         P("Laura lies on her side with the sheet kicked down to her knees, breathing slow. Her nightdress is still rucked up over her hip, her bare ass pale in the dark, and her hand is still tucked between her thighs."),
+        # scene reader 2026-11-10: her want on the screen, and the next step
+        P("Her lips move against the pillow, on a name you can't hear, her face turned toward the hall and Ryan's door."),
+        # scene reader 2026-11-10 (DECISIONS 220): one step past the watch: the door moves, and she answers it without looking
+        GC(cond(flag("laura_04_done", False)), P("The door creaks. Laura's hand goes still. Without opening her eyes she draws the sheet up over her bare hip, slow, and lies there, listening.")),
+        GC(cond(flag("laura_04_done")), P("The door creaks. Laura doesn't reach for the sheet. She shifts her hip so the nightdress rides higher, and stays like that, her eyes shut.")),
         P("Your nipples go tight. You could go in. Not tonight."),
         P("Down the hall the TV mutters. You pull the door to without a sound."),
     ], [go("Close the door.", loc="home_hall", mins=2)])]})

@@ -204,7 +204,7 @@ ACTIVITIES = {
                  "asleep", "at the counter with his coffee"],   # Sat sleeping in, then coffee (LO, 2026-11-03, DECISIONS 152)
     "npc_tom": ["running the café", "closing up, the café shut"],
     "npc_zoe": ["at the party house", "at home", "at home, party night", "at home, the party after midnight",
-                "going to bed", "home on a Sunday night, in her room", "lying on the grass", "at lunch", "on her weekend run",
+                "going to bed", "going to bed early, a Sunday night", "lying on the grass", "at lunch", "on her weekend run",
                 "in class: figure drawing, then Biology", "in class: Biology", "in class: figure drawing"],
     "npc_hale": ["teaching Psychology", "teaching Psychology", "Thursday office hours", "office hours",
                  "a booked hour, his door locked"],

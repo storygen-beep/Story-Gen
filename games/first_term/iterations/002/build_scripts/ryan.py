@@ -263,7 +263,7 @@ out.append({
     "nodes": [
         node("knocks", "Two knocks", [
             # (reader fix) the measured beat knocks and opens the door itself: this screen only brings her to it
-            P("An evening he's home. His light is on under his door, and you both know why you're here."),
+            P("He's in his room. His light is on under his door, and you both know why you're here."),   # scene reader 2026-11-10 (DECISIONS 220): true across the wider window
         ], [
             go("Knock twice.", node="hand", mins=3),
             go("Leave him to it.", loc="home_hall", mins=2, retry=7),
@@ -798,7 +798,7 @@ RYAN_TOWEL_WORDS = {
         ],
         lines=[
             [P("He pauses the game with his thumb, looks at the towel, and unpauses it without a word. His neck has gone red."),
-             GC(cond(TOWEL_ON), P("Ryan looks at the TV, at the chips, at the wall behind your head."), D(R, "Seriously? It's not even dinner time, @player.nickname. Get dressed.")),
+             GC(cond(TOWEL_ON), P("Ryan looks at the TV, at the chips, at the wall behind your head."), D(R, "Seriously? In the living room, @player.nickname? Get dressed.")),   # scene reader 2026-11-10 (DECISIONS 220): true across the wider window
              P("He leans forward over the controller, so you can't see his lap, and plays very badly.")],
             [P("His game dies on screen and he doesn't notice. He's looking at your bare legs, all the way up to the towel."),
              GC(cond(TOWEL_ON), D(R, "You're blocking the TV with not much, @player.nickname."), P("He says it around a chip and keeps his eyes where they are.")),

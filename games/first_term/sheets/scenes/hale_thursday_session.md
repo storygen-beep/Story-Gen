@@ -16,7 +16,7 @@
 |---|---|
 | system · place | Hale · his office, `hale_office` |
 | want | he locks the door; the photo is already face-down |
-| next step | "Same time next week." Nothing past this step this release |
+| next step | "Until next time.", then the end screen's "Thursday." or "Same time." Nothing past this step this release |
 | hook | his quest card: "Hale, further. (Next release)" |
 | where · when | his office · Thursday, starts 18:30-19:05; Mon, Tue, Wed, Fri 15:00-19:00, his office hours (LO, 2026-11-09, DECISIONS 215); once a day |
 | gate | his step 4 · Corruption 40 · Exhibitionism 40 · `touch_high` at Corruption 60 |
@@ -43,8 +43,8 @@ One row per exit. Read from the build; it replaces the drafted map.
 | `roll` | He looks you over across the desk. | no | "Go on." (Claire's Thursday = 1) → `claire_car` | — |
 | | | | "Go on." (Claire's Thursday 2+ · Corruption under 60) → `touch_low` | Hygiene -10 |
 | | | | "Go on." (Claire's Thursday 2+ · Corruption 60+) → `touch_high` | Hygiene -10 |
-| `touch_low` | Dr. Hale stands behind your chair. | yes | "Same time next week." → `end` | Psychology grade +2 · Corruption +1 (cap 59) · Exhibitionism +1 (cap 59) |
-| `touch_high` | Dr. Hale says it like he is reading a page number. | yes | "Same time next week." → `end` | Psychology grade +2 · Corruption +1 (cap 79) · Exhibitionism +1 (cap 59) |
+| `touch_low` | Dr. Hale stands behind your chair. | yes | "Until next time." (was "Same time next week.", scene reader 2026-11-10) → `end` | Psychology grade +2 · Corruption +1 (cap 59) · Exhibitionism +1 (cap 59) |
+| `touch_high` | Dr. Hale says it like he is reading a page number. | yes | "Until next time." (was "Same time next week.", scene reader 2026-11-10) → `end` | Psychology grade +2 · Corruption +1 (cap 79) · Exhibitionism +1 (cap 59) |
 | `claire_car` | His phone buzzes on the desk before he's touched you. | no | "Next Thursday." → Faculty Floor | Psychology grade +2 · `hale_thursday_booked` cleared |
 | `end` | He looks at the clock, and straightens his tie, and unlocks the door. | no | "Thursday." → Faculty Floor | `hale_thursday_booked` cleared |
 | `isnt` | He turns the photo face-up and doesn't look at you while you turn the lock and go. | no | "Leave him to his photo." → Faculty Floor | `hale_thursday_booked` cleared |

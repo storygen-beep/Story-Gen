@@ -181,7 +181,7 @@ walkin("walkin_gym_team", "The team comes in", "campus_gym",
     [P("You're flat on your back on the bench with the bar over your chest, alone in the free-weights corner."),
      GC(cond(*SPORTS_ONLY), P("Just your sports bra and your bottoms. Your tits strain the bra every time you press the bar up.")),
      GC(cond(*ANY), P("Your clothes are stuck to you with sweat.")),
-     P("The double doors bang open and the team comes in off the pitch for weights, a dozen big guys in team jerseys, loud, sweating.")],
+     P("The double doors bang open and the team comes in for training, a dozen big guys in team jerseys, loud, bags over their shoulders.")],
     "They've seen you.",
     [GC(cond(*SPORTS_ONLY), P("The noise stops. A dozen of them look at you at once: your tits in the sports bra, your stomach, your legs spread either side of the bench. One of them whistles, long and low."),
        WHO("Bench is ours now, cutie, but take your time."),
@@ -218,8 +218,8 @@ walkin("walkin_gym_team", "The team comes in", "campus_gym",
                                          P("You rack the bar and sit up slow, and take your time wiping down the bench."),
                                          VID("a girl in a sports bra on a weight bench, a sports team standing round watching her", "girl in sports bra lifting team watching gym", "guys staring at girl working out gym bench", pool_dir="sex/walkin_gym_team_t4")],
             "Leave them staring.", "campus", 5, flags=[fset("worked_out")])],
-    when=[wd(1, 3), tod("15:00", "16:15")])   # reach audit 2026-11-09 (DECISIONS 218): the person's row, not 15 minutes
-rule("gym_workout", "walkin_gym_team", 0.25, wd(1, 3), tod("15:00", "16:15"))
+    when=[wd(1, 3), tod("15:00", "15:15")])   # scene reader 2026-11-10: his row has the team inside from 15:00, so this stays their arrival   # reach audit 2026-11-09 (DECISIONS 218): the person's row, not 15 minutes
+rule("gym_workout", "walkin_gym_team", 0.25, wd(1, 3), tod("15:00", "15:15"))
 
 # ═════════════════════════════════════════════════════════════════════════════
 # B11 · THE CANTEEN (hosts canteen_eat, canteen_listen), as their lunch rows start at 11:45 (built differently from
@@ -430,7 +430,7 @@ walkin("walkin_quad_team", "The team's spot", "quad",
     "B15, Jake and the team: arriving at their spot on the grass, they find her with her skirt ridden up. A group look that happens to her: fix it 0, leave it +1 cap 19 (Exhibitionism). Nobody has a meter.",
     [here(J, "quad"), flag("jake_met"), SKIRT],
     [P("You're lying back on the grass with your bag under your head and your eyes shut. Your skirt has ridden right up your thighs on the slope, but you haven't noticed."),
-     P("Then a shadow. Jake and the team, coming across the grass for their spot under the tree.")],
+     P("Then a shadow. Jake and the team, drifting over from their spot under the tree.")],   # scene reader 2026-11-10 (DECISIONS 220): true across the wider window
     "They've stopped.",
     [P("You open your eyes. Six of them, standing at your feet, looking straight up your thighs. Your skirt is round your hips."),
      G(cond(slot("underwear")), P("They can see your panties, and the shape of you through them.")),
@@ -590,7 +590,7 @@ rule("zoe_bedroom_look", "walkin_bedroom_zoe", 0.25, here(Z, "zoe_apartment"), w
 walkin("walkin_house_vance", "Out on his porch", "vance_house",
     "B19, Vance: he comes out onto his porch and looks at her legs on the sidewalk. His Lust +2 on the moment; hers on Exhibitionism: walk on 0, stay where he can see (Daring) +1 cap 39.",
     [here(V, "vance_house"), flag("vance_met"), *BARE_LEGS],
-    [P("You're on the sidewalk looking up at the house next door when the front door opens. Vance comes out onto his porch with his paper and lowers himself into the rocking chair.")],
+    [P("You're on the sidewalk looking up at the house next door when you feel someone looking. Vance is out on his porch in the rocking chair, his paper on his knee.")],   # scene reader 2026-11-10 (DECISIONS 220): true across the wider window
     "He looks at your legs.",
     [P("He doesn't open the paper. He looks at your bare legs, from your ankles all the way up, and takes his time."),
      G(cond(SKIRT), P("From up on the porch, in this skirt, he can see right up your thighs.")),
