@@ -1180,3 +1180,44 @@ composure.
 
 Built in first_term (DECISIONS 209, changed in 211; `iterations/002/build_scripts/drift.py`). Not gated: whether a
 loop's routine line says something new at each stage is a reading, not a count.
+
+## Showing off to get something (LO, 2026-11-09)
+
+She shows off to reach something that is not sex. The show is the price; the goal is the reason. This is the
+exposure version of `moment-library.md`'s body_as_payment, where the price is sex. A scout read 18 cases in 6 of
+the adults-only pass-list games (SKILL_NOTEBOOK N35). Cite forms are the study's (`exhibition_study/C_other_games.md`
+§0): `co:`/`cc:`/`um:` are the extracted HTML, `T:` is `round2/passages/course-of-temptation.txt`, `sd:`/`cw:` the
+round-2 passage files.
+
+**The kinds of goal, by how many games use them:**
+
+| goal | games | one case |
+|---|---|---|
+| money or tips | 4 | Course of Temptation, "$20 if you show your tits" (`T:42673-42680`) |
+| a discount or a free item | 3 | untangled-mind, the mall store's price drops by tier (`um:11719-11768`) |
+| recruiting people for a cause | 3 | curse-of-the-abyss, "You recruited N of 30 adventurers" (`co:3835-3845`) |
+| getting a job | 2 | corrupted-city, the roommate's outfit gets her hired (`cc:1172-1180`) |
+| a rule bent | 2 | Shady Deals, a jail bribe halved (`sd:21043-21056`) |
+| keeping a job, joining a group, a grade, followers | 1 each | corrupted-city's diner saved by a revealing outfit (`cc:9051-9092`) |
+
+**The rules:**
+- **A goal not about sex,** owned by her or by someone she knows (a friend, a boss, a cause). Someone else's
+  goal pulls her in: curse-of-the-abyss's queen, corrupted-city's roommate and boss.
+- **A plain way that always gets a no,** costs nothing and counts nothing. Asking nicely is a real button with a
+  written answer. corrupted-city and curse-of-the-abyss have no refusal at the ask; ours keeps one (the written-no
+  test).
+- **Each yes is a show at her stage,** paid to that stage's top, so the goal trains the meter.
+- **A count she can see, said on the screen** after each yes. Only three studied games print a running count to a
+  target: curse-of-the-abyss "N of 30", Course of Temptation's 30 pledge points (`T:53001`), Cupid's Way's "Only
+  $X to go" (`cw:26426-26488`). The rest print a payment per act.
+- **A payoff that ends it, and the next goal as a hook.** The reason fades once the goal is met
+  (`C_other_games.md:315`), so the payoff opens a bigger one or says plainly that it is over.
+- **Showing off may be one source among several.** In curse-of-the-abyss it brings 5 of the 30; her father's chores
+  and the bandits bring the rest (`co:3600-3611`, `co:4375-4381`).
+
+**Build lesson.** A phone text is the natural way for a friend to ask, but a trigger cannot read a flag that only a
+phone reply sets: the flag-chain check refuses the build ("MISSING HINT", `validate_flag_chains`, `engine.md` §28.2).
+Have the reply raise a hidden trait and gate the asks on that; keep the flag for cards and guards.
+
+Built in first_term (DECISIONS 210, `iterations/002/build_scripts/goals.py`): Zoe's crowd of ten (the recruiting
+kind) and the study guy's five chapters of notes for a grade (no exact model in the studied games).

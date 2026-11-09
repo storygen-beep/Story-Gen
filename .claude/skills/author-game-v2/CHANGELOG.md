@@ -5,6 +5,21 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-09 — showing off to get something; check her stage once
+
+- **`references/the-surfaces.md`:** new end section, "Showing off to get something". She shows off to reach a goal
+  that is not sex: the goal kinds by how many games use them (money or tips 4, a discount 3, recruiting 3, a job 2,
+  a rule bent 2, four more at 1), the rules (a goal not about sex; a plain way that always gets a no; each yes a
+  show at her stage; a count said on the screen; a payoff that ends it and opens the next), and the build lesson
+  that a trigger can't read a flag set only by a phone reply. Why: LO, 2026-11-09, "Go 2 and 3", after first_term's
+  DECISIONS 210 and a scout of 18 cases in 6 pass-list games (SKILL_NOTEBOOK N35). `moment-library.md` left alone:
+  `pitch_pack.py` parses it.
+- **`references/the-meters.md`:** new end section, "Check her stage once, then let her clothes decide": one stage
+  door per stage, clothing-only choices behind it, a written "Change your mind." way out. Why: the same build, where
+  per-variant stage checks took Gate 34's split to 24%; the doors and the study guy's want brought it to 25%.
+- Both appended at the ends of their files, so no cited line moved. Verified: cite_check --strict 0 wrong,
+  gates.py --selfcheck current, skill tests green, first_term gates unchanged.
+
 ## 2026-11-09 — a repeat: the first time, then routine
 
 - **`references/the-surfaces.md`:** new section at the end, "A repeat: the first time, then routine". A daily loop

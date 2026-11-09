@@ -1037,3 +1037,20 @@ decay_after_days = 2                # he starts cooling only after two days apar
 ```
 
 Seeing him resets the wait, and a man she saw that day never decays that night.
+
+## Check her stage once, then let her clothes decide (LO, 2026-11-09)
+
+One act often has several clothing variants: lift a short skirt, a split skirt or a dress; lift a top or pull a dress
+down, bra off. Writing her stage check on every variant counts the stage once per variant. On a game that declares
+`both`, those extra reads on her tiers move Gate 34's split without gating anything new.
+
+**The rule:** one button per stage, and the clothes behind it.
+- The stage sits on one door: "Give him a little more." at 40, "Flash him." at 60.
+- The screen behind the door has the variants, and their choices check only her clothes.
+- A "Change your mind." way out leaves with its own written reply, so the ask doesn't render a second time with
+  its arrival lines (the written-no and truth tests).
+
+**Measured on first_term (DECISIONS 210):** 887 stage reads on her tiers against 286 on the cast (24%, a FAIL)
+became 872 against 292 (25%, a pass) with the doors, plus the study guy's own `want`. Neither change alone was
+enough. A game sitting at the line trips it again on its next stage-heavy round, so read the split on every
+build, not only when it fails.
