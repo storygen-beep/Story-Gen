@@ -19014,7 +19014,7 @@ def main():
     tog_summary, tog_lints = lint_toggles_declared(game, state)
     joint_summary, joint_lints = lint_joints(game)
     groups_summary, groups_lints = lint_adjacent_groups(game)
-    life_summary, life_lints = lint_world_life(model, game)       # PLAYTEST 2026-11-09
+    life_summary, life_lints = lint_world_life(model, game); life_lints = life_lints + lint_random_depth(game)   # PLAYTEST 2026-11-09; 2026-11-10 depth
     hour_summary, hour_lints = lint_loop_names_its_hour(model, game, state)   # study 2026-11-09 (7_routine_time)
     pace_summary, pace_lints = lint_climb_pace(game, state)                    # study 2026-11-09 (10_pace)
     (pron_rows, pron_note), event_rows, (vl_rows, vl_seen) = lint_readable(game)
@@ -19980,6 +19980,35 @@ def _walkin_can_happen(game):
         return None, "no walk-in rule names a person", []
     return not rows, (f"{len(rows)} walk-in rule(s) can never fire" if rows else
                       f"{n}/{n} walk-in rules that name a person can fire"), rows
+
+
+def lint_random_depth(game):
+    """Part of `lint · the world around her` (2026-11-10, DECISIONS 221; study 13/14_random_scenes). A LIST,
+    never a score. For each place with random-mode scenes: how many can fire at once in the waking hours
+    they are live, by their trigger hours and the person they are bound to (flags, brakes and her stage are
+    not read, so it is the most that could qualify). Course of Temptation draws from 53-175 per place; a
+    place where only one can fire repeats the same scene every time it fires."""
+    where, parents = _tr_where(game), _tr_parents(game)
+    by_id = {c.get("id"): c for c in game.get("canvases") or [] if isinstance(c, dict) and c.get("id")}
+    per = collections.defaultdict(lambda: collections.Counter())
+    for c in by_id.values():
+        trig = c.get("trigger") or {}
+        if trig.get("trigger_mode") != "random" or _is_dev(c):
+            continue
+        lid, slots, _pin = _tr_canvas_window(game, where, c, by_id, parents)
+        for sl in slots:
+            if _ROUTINE_WAKE[0] <= sl[1] < _ROUTINE_WAKE[1]:
+                per[lid][sl] += 1
+    rows = []
+    for lid in sorted(per, key=str):
+        counts = sorted(per[lid].values())
+        if not counts:
+            continue
+        one = sum(1 for n in counts if n == 1) / len(counts)
+        rows.append(f"{lid}: random scenes live {len(counts) * _TR_STEP / 60:g} h a week; at once "
+                    f"{counts[0]}-{counts[-1]} (median {counts[len(counts) // 2]}); only one can fire in "
+                    f"{one:.0%} of those hours")
+    return rows
 
 
 if __name__ == "__main__":

@@ -5,6 +5,26 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-10 — random scenes are people, and a repeat moves (DECISIONS 221)
+
+Source: `~/Documents/Great_Games_Study_20260926/playtest_study_20261109/13_random_scenes_top.md` (the top games) and
+`14_random_scenes_ours.md` (first_term's 82 random scenes, 13 everyday, one live per place).
+
+- **`references/the-surfaces.md`:** a new paragraph before the walk-in rule.
+  - Random scenes are written per person she knows: everyday scenes, one played everyday or heat by his Want, and
+    a chain that opens one rung a day.
+  - Each answer moves a meter, or records something his hub reads.
+  - The CoT numbers and cites.
+- **`scripts/gates.py`:**
+  - New `lint_random_depth`, called on the *world around her* lint's own line (no cited line moved). Per place, it
+    lists how many random-mode scenes can fire at once in their live waking hours, and the share of hours where
+    only one can.
+  - It reads the trigger hours and the bound person only, not flags or stage, so a chain counts all its rungs.
+    Walk-ins are not in it.
+- **Tests:** 2 in `test_gates_reach_20261109.py`.
+- **Verified:** skill tests and the cite check (below). first_term's rows: the living room 4-5 at once, the kitchen
+  1-3, the canteen 1.
+
 ## 2026-11-10 — first_term's reach pass, folded into the checks (DECISIONS 214-218, SKILL_NOTEBOOK N37)
 
 Source: `~/Documents/Great_Games_Study_20260926/playtest_study_20261109/12_reach_audit.md` and the fixes it led to in

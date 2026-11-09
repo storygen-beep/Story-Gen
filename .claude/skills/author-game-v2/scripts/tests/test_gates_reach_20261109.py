@@ -94,3 +94,22 @@ def test_step_windows_keep_each_window_on_its_own_days():
 def test_step_windows_without_a_second_window():
     st = {"when": {"days": ["Thu"], "from": "18:00", "to": "19:30"}}
     assert gates._step_windows(st, "18:00", "19:30") == [([3], "18:00", "19:30")]
+
+
+# ── lint · the world around her: random-scene depth (2026-11-10) ─────────────
+def test_random_depth_lists_a_place_where_one_scene_fires():
+    npc = {"id": "npc_l", "name": "Laura", "schedules": [
+        {"location": "room", "weekdays": [0], "start_time": "18:00", "end_time": "20:00"}]}
+    one = cv("ev_a", [nd("a", [ch("Go.")])], trigger_mode="random", chance=0.3, requires_npc="npc_l")
+    g = game(one, npcs=[npc])
+    rows = gates.lint_random_depth(gates.build(copy.deepcopy(g))[1])
+    assert rows and rows[0].startswith("room:") and "only one can fire in 100%" in rows[0], rows
+
+
+def test_random_depth_counts_two_scenes_at_once():
+    npc = {"id": "npc_l", "name": "Laura", "schedules": [
+        {"location": "room", "weekdays": [0], "start_time": "18:00", "end_time": "20:00"}]}
+    a = cv("ev_a", [nd("a", [ch("Go.")])], trigger_mode="random", chance=0.3, requires_npc="npc_l")
+    b = cv("ev_b", [nd("a", [ch("Go.")])], trigger_mode="random", chance=0.3, requires_npc="npc_l")
+    rows = gates.lint_random_depth(gates.build(copy.deepcopy(game(a, b, npcs=[npc])))[1])
+    assert rows and "median 2" in rows[0] and "in 0%" in rows[0], rows

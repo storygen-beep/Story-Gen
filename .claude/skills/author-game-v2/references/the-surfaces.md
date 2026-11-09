@@ -289,6 +289,17 @@ against the `[[npcs.schedules]]` rows at that same location. She irons in the ki
 Hal is in the kitchen 07:00–09:00 — *someone can walk in on her*. Nobody decides that; it is
 already true in the board. The skill prints the list; the author picks from it.
 
+**Random scenes are people, and a repeat moves.** Course of Temptation, the model, draws a walk scene on 1 move
+in 6 from 53-175 per place: 48% everyday (65% early), most about one screen of about 45 words, 46% with a choice
+and 41% moving a relationship. The person is whoever is there, and what they want sets the tone: one hall bump is an
+apology, a grope or a shove (`playtest_study_20261109/13_random_scenes_top.md`, cot_20:2724). A repeat rests (a
+median day) or goes one step further, as its workers' five-scene chain does, the bolder answer behind her stage and
+a written way out always there. With no crowd, write them per person she knows, bound to that person in their own
+row's hours: a few everyday scenes, one that plays everyday or heat by his Want, and a chain that opens one rung a
+day. Each answer moves his or her meter, or records something his hub says the next day. first_term had 82 random
+scenes, 13 everyday and one live per place, so a repeat was always the same one (`14_random_scenes_ours.md`;
+DECISIONS 221). Listed: lint *the world around her* (random-scene depth per place).
+
 **A walk-in rolls across its walker's row, not in an arrival slot.** In Her Own Hands rolls its living-room
 walk-in on every entry while the person is home (3/25, `4_world.md`); Course of Temptation rolls on every
 move. first_term rolled most of its walk-ins in the 15 minutes before a row began, so each lived 15 minutes
