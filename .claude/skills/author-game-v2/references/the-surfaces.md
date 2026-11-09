@@ -289,6 +289,14 @@ against the `[[npcs.schedules]]` rows at that same location. She irons in the ki
 Hal is in the kitchen 07:00–09:00 — *someone can walk in on her*. Nobody decides that; it is
 already true in the board. The skill prints the list; the author picks from it.
 
+**A walk-in rolls across its walker's row, not in an arrival slot.** In Her Own Hands rolls its living-room
+walk-in on every entry while the person is home (3/25, `4_world.md`); Course of Temptation rolls on every
+move. first_term rolled most of its walk-ins in the 15 minutes before a row began, so each lived 15 minutes
+a week and most players never saw them. Write the moment as "comes through" from the room next door (and
+back), so it is true across the whole row, and keep the odds (about 1 in 4). Only a moment that truly
+happens once a day at a set time (bedtime, home from the bar) keeps a short window. Checked: gate *a walk-in
+can happen* (a rule whose person is never where it says, in its own hours, can never fire).
+
 **Floor: one per qualifying ROOM, not one per pair.** Filling the raw cross-product would rebuild the wall of buttons one layer
 down, which is the objects mistake in a new coat.
 
@@ -677,7 +685,9 @@ is the third axis: what the condition actually tests.
 
 Every condition in the field, classified by **shape** rather than by what the variable is about —
 because every game invents its own names and a domain lexicon leaves half of them unnamed
-(`findings_K_mirror.md` §1):
+(`~/Documents/Female_PC_Craft_Study_20260823/findings_K_mirror.md` §2, K2: every `<<if>>` condition in
+26 games, 155,765 conditions, not only gates; most of those 26 games are not on the adults-only pass
+list, so read it as numbers only):
 
 | shape | reads as | the field |
 |---|---|---|
@@ -691,6 +701,13 @@ because every game invents its own names and a domain lexicon leaves half of the
 / 1 (`findings_B_refusal.md` §3); measured over 3,346 conditions gating an *escalation* it is 48 / 38
 / 13 / 8 / 2 (`findings_K_mirror.md` §1). Two populations, two questions, five days apart, one
 distribution. **The flag chain and the meter are both load-bearing, together.**
+
+⚠️ **On the five pass-list games the split does not hold** (playtest study 2026-11-09, REPORT.md §5,
+`5_pull.md` §0.1). Counting only the clauses that gate a link, as equality / threshold: Course of
+Temptation 13 / 27 (function 50%), In Her Own Hands 24 / 35, Cupid's Way 55 / 44, Shady Deals
+33 / 55, untangled-mind 16 / 83. Equality beats threshold only in Cupid's Way. A threshold is not always her meter, though: hours, money and day
+counters are thresholds too. By what the variable is about, her sexual meter gates about 3–15% of
+the content in four of the five (`the-meters.md`, top).
 
 **What this asks of an author.** An arc that runs in steps should be gated on **which step it is
 on**, not on a pile of switches that each remember one thing. The field's equality is mostly a
@@ -883,6 +900,29 @@ the four to author, it is the only one that can replace the whole screen, and it
 location so it cannot spam (`references/engine.md` §7). **A random event always has content.** Never write
 a "Nothing happens." event; LO: *"no we dont want nothing happens random events anywhere in the game"*
 (2026-11-03).
+
+**The world is more than her body, and it has people in it** (LO's playtest, 2026-11-09: "the world feels
+empty"). first_term rolled about as many events a day as the top games (1–1.5 against 0.3–2.3), and still
+felt empty, for two reasons (study `playtest_study_20261109/8_everyday.md`, checked in `11_verify2.md`):
+- **Most of its events were about her body: 74 of 88.** About half of Course of Temptation's 271 walk events are
+  everyday life, about 65% early in the game, before its gated sex events open. They are other people's own
+  lives, a friend's news or plans, the weather or the place, small social moments, and the phone. The games
+  without random everyday events (In Her Own Hands, untangled-mind, Shady Deals) carry everyday life somewhere
+  else: the phone, a fixed routine, or a person's own lines.
+- **An everyday event does something.** In Course of Temptation about 4 in 10 move a relationship and about 1
+  in 10 open later content. Pure flavour is only for weather and for other people's lives, and those lives are
+  real: the event shows her a change the game's own simulation made that day.
+- **Its places were empty.** Named people could be in only 16% of first_term's waking place-hours. Course of
+  Temptation fills each place with generated people (`cot_54_peopleatlocation.js`), and 461 of its 1,738
+  event entries pick their person from whoever is there. Its exhibition witnesses come from that crowd too,
+  and an event with nobody there does not fire. Without a crowd, do it the cheaper way: room text that
+  changes with who is home on their own clock (In Her Own Hands, 19 such variants in 4 rooms), and a short
+  line pool per named person that changes with her stage (Shady Deals, 23 pools).
+- **One shared event can lean either way.** The same run-in plays as everyday or as a come-on depending on
+  what the person wants from her, so one event turns sexual once he wants it to.
+
+Reported by lint *the world around her*: the share of everyday-life events, the share of peopled place-hours,
+and the places nobody named can reach. It is a list until a second game gives a floor (REPORT.md §4).
 
 > ⚠️ **R5 and R6 are reported as LINTS, not gates, with no threshold.** The four mechanisms above
 > are what to look for.

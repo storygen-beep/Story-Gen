@@ -1579,7 +1579,7 @@ already above the cap it is left alone; the cap only refuses to *raise* it past 
 |---|---|
 | bounding a **restore** — a sleep rung that adds energy | ✅ this is what it is for |
 | bounding a repeatable **relation** or reputation grant so one rung cannot max a character | ✅ |
-| bounding one act on an **ascent tier** at its stage top | ✅ this is the stage rule (`the-arc.md` A4d: the act's `cap` sits at the top of its stage). A tier is broken only when no act can reach the top band of the stages **this release writes**; a cap that leaves no path to that band deletes content. A band above every cap this release pays is a later release's content, not a broken tier (LO, 2026-11-03; `the-meters.md` W1, `the-heat-ladder.md` H1) |
+| bounding one act on an **ascent tier** at the next stage's top | ✅ this is the stage rule (`the-arc.md` A4d: the act's `cap` sits at the top of the stage above the one it opens in; a cap at her own stage's top is the wall, playtest 2026-11-09). A tier is broken only when no act can reach the top band of the stages **this release writes**; a cap that leaves no path to that band deletes content. A band above every cap this release pays is a later release's content, not a broken tier (LO, 2026-11-03; `the-meters.md` W1, `the-heat-ladder.md` H1) |
 | **throttling how fast** anything rises | ❌ it does not touch the rate. See `the-meters.md` |
 
 `cap` and `clamp` are independent and both apply — clamp first, then cap.

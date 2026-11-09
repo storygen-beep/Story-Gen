@@ -371,7 +371,9 @@ for a boyfriend's dates (LO, 2026-11-03; round 9a §6):
   day — and she can call him whenever she wants (P12);
 - Shady Deals: callers reset daily, and their own stats move them on to new kinds of call.
 
-The arc names this thread as its loop (`the-arc.md` A1).
+The arc names this thread as its loop (`the-arc.md` A1). An invite opens the loop wherever he is, so a loop
+with one counts as open enough (gate *the loop is open enough hours*): her reply sets a flag the loop's
+trigger waits on, or a call's `accept` is the loop canvas.
 
 **Small talk that leads nowhere is filler.** Course of Temptation's phone menu has 13 links and 3
 lead anywhere — hang out, date, booty call; its friendly texts only nudge attitude, at most ±10 once

@@ -5,6 +5,173 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-10 — first_term's reach pass, folded into the checks (DECISIONS 214-218, SKILL_NOTEBOOK N37)
+
+Source: `~/Documents/Great_Games_Study_20260926/playtest_study_20261109/12_reach_audit.md` and the fixes it led to in
+first_term. The top games put a person's repeatable sex 18-112 hours a week (REPORT.md section 2) and roll walk-ins on
+entry while the person is around (`4_world.md`).
+
+- **`scripts/gates.py`, gate *the loop is open enough hours*:**
+  - `ROUTINE_HOURS_FLOOR` goes from 14 to 18, the top games' low end.
+  - A hub loop now counts only the hours its explicit screens can be reached through `_tr_node_times`, so a
+    time-gated button narrows the act. first_term's Jake gym act sat behind a 16:30-16:45 button in a 4-hour screen.
+  - Edited in place; no line moved.
+- **New gate *a walk-in can happen* (`_walkin_can_happen`, at the end of the file; registered on the loop gate's line
+  so no cited line moves):** a substitution rule that names a person must have a slot where its host renders, its
+  own time and weekday hold, and that person is where it says. It came from first_term's Laura channel-5 walk-in,
+  dead after her kitchen row was cut to 21:30, which nothing flagged.
+- **Gate *ladders move forward*:** the full-cover check now reads each window on its own days and hours
+  (`_step_windows`). It had added `when_also`'s days to `when`'s days and checked them all on `when`'s hours. Edited
+  in place; no line moved.
+- **Docs:**
+  - `references/the-arc.md` A1: the 18 floor, the act's own button, and a new paragraph: moving a person moves
+    everything bound to the place they leave.
+  - `references/the-surfaces.md` R3: a walk-in rolls across its walker's row, not in an arrival slot.
+  - `SKILL.md`: the loop row, plus a new row for *a walk-in can happen*.
+  - `references/state.md`: `ladder.loop` and `when_also`.
+- **Tests:**
+  - New `scripts/tests/test_gates_reach_20261109.py` (9 tests).
+  - `test_gates_playtest_20261109.py`: its evening fixture is 21 h now, and the fail reads "under 18".
+- **Verified:**
+  - Skill tests 1046 passed; cite check 0 wrong; selfcheck re-run below.
+  - first_term: *a walk-in can happen* passes, 155/155. The loop gate fails Laura (12.5 h) and Hale (16.6 h) under 18.
+
+## 2026-11-09 — the part-2 study's lessons (door and act, quest lines, pace, everyday life)
+
+Source: `~/Documents/Great_Games_Study_20260926/playtest_study_20261109/` 7_routine_time, 8_everyday, 9_quest_lines
+and 10_pace. 11_verify2 checked 12 claims against the game source: 6 hold, 5 are partly right (counts or lines
+off), and 1 is wrong. None changes a lesson.
+
+- **Fixed a wrong number in `references/the-surfaces.md`.** The world rule said "about 70% of Course of Temptation's
+  events are everyday life" and "all of [first_term's] events were about her body". The checked figures are about
+  half of 271 walk events (about 65% early, before the gated sex events open) and 74 of first_term's 88. The rule
+  also gains three findings:
+  - everyday events do something (about 4 in 10 move a relationship);
+  - people present are the event's cast and its witnesses;
+  - without a crowd, use the cheaper copy: room text by who is home, and per-person line pools.
+- **`references/the-arc.md` A1, new: "The hour goes on the door, not in the act."**
+  - A loop has a door screen (where he is, the hour, who is home) and an act with no hour in it. The after-talk
+    may branch on the hour.
+  - An act that must name its hour stays bound, and reach comes from a second act at another window.
+  - `the-clock.md` C2 points to it.
+- **`references/the-voice.md` R3, new: the quest-line shape.**
+  - A story beat with one act in it, about 12 words.
+  - No line opens with a number; a requirement comes last, in words.
+  - One voice for the page.
+  - A line with no next step says which stop it is.
+  - Never a bare lock.
+- **`references/the-meters.md`, new pace sub-bullets.**
+  - Keep about 2–3 paying acts a day at every stage, and never one a day (CoT's longest level is about 11 days).
+  - Players complain about grind on jobs and money, not about the sexual climb (2 of 1,941 comments).
+- **`scripts/gates.py`, two new lints** (lists, never scores; above `main()`, registered in main and in `--json`):
+  - ***a loop names its hour*:** the explicit beats of a declared loop that name an hour, a day or the dark.
+  - ***the climb's pace*:** days per stage at the daily cap, listing any stage over `PACE_SLOW_DAYS` = 14.
+  - Both are documented in SKILL.md's lint list, with 4 new tests in `test_gates_playtest_20261109.py`.
+- **Verified:**
+  - 1037 tests pass; `--selfcheck` 0; `cite_check --strict` 0 wrong.
+  - On first_term, the loop-hour lint lists 16 of 38 loop beats (Ryan's dark and asleep, Laura's after ten, Zoe's
+    asleep).
+
+## 2026-11-09 — step 3 (first_term) feedback into the skill
+
+- **`scripts/gates.py`, *every stage has a way up*:** the stage that holds the highest gate is judged one under that
+  gate, not at its top. Nothing above the highest gate is gated yet, and *meter ceiling* forbids paying past the
+  content. first_term has a gate at Corruption 70 inside Hungry (60-79): a cap of 99 failed *meter ceiling*, and a
+  cap of 79 failed the way-up check at 79. New test: `test_the_top_stage_is_judged_one_under_its_highest_gate`.
+- **`SKILL.md` frontmatter description:** "one ascent meter that buys access" now reads "people, time and money
+  opening most doors and an ascent meter that pays across each stage line opening the rest". The skill is
+  explicit-invoke only, so the trigger is unchanged. LO said go ahead on the step-2 report that raised it.
+- **`references/the-first-hour.md:223`:** the cite moved to `gates.py:18544`, the same line, shifted by the fix.
+- **Verified:**
+  - 1033 tests pass, `--selfcheck` is clean, and `cite_check --strict` has 0 wrong.
+  - first_term: 113 pass, 3 decided, 1 fail (*the loop is open enough hours*), 4 n/a.
+
+## 2026-11-09 — the playtest doctrine (step 2 of 3)
+
+The references now teach what step 1's gates check (REPORT.md, playtest study 2026-11-09).
+
+- **`references/the-arc.md`:**
+  - **A4:** the title and shape now read "carries her over the line". A scene's cap is the top of the stage
+    above. The family-ties "stops at the threshold" example is marked as no longer this skill's rule, with
+    Cupid's Way (`cupids-way.txt:19983-20010`) and CoT (`cot_34_database_skill.js:139-140`) beside it.
+  - **A4d** gains three bullets:
+    - acts pay across the line, capped at the next stage's top;
+    - every stage's top has a sober act that pays;
+    - a pay can happen.
+
+    The dress-code bullet moves up a stage, and the playtest measurement is added.
+  - **A1:** the loop is declared as `ladder.loop`, and it is open 14+ h a week or by invite. `engine.md` §19 is
+    given as the reason more places or windows are needed.
+- **`references/the-meters.md`:**
+  - The thesis line now says the meter is one of the doors, not the main one (3–15% in four of five pass-list
+    games).
+  - "Each stage's top needs a step over it" is now "Acts pay across the line".
+  - The daily cap per band is named as the pacing tool.
+- **`references/the-voice.md`:**
+  - **R3:** each person's card names that person's own step, and no one list is pasted onto every card.
+  - **R3b:** the number is printed beside that step's own act only, and a card names only people she has met.
+- **`references/the-surfaces.md`:**
+  - **The K_mirror cite** is fixed: it is §2 (all 155,765 conditions in 26 games, mostly off the pass list), with
+    the full path. A note adds the five pass-list games' link-gate shapes, where equality beats threshold only
+    in Cupid's Way.
+  - **New world rule** after the random-event floor: everyday-life events and people in the places.
+- **`references/the-phone.md` P9:** an invite opens the loop wherever he is.
+- **`references/state.md`:** documents `ladder.loop`.
+- **`references/engine.md:1582`:** the cap row now reads "next stage's top".
+- **`scripts/gates.py`, *the loop is open enough hours*:** a text-thread invite counts, meaning a loop trigger
+  that waits on a flag a phone conversation reply sets (P9). Before, only a call's `accept` counted.
+- **New test:** `test_a_text_thread_invite_counts_wherever_he_is`.
+- **Verified:**
+  - 1032 tests pass;
+  - `--selfcheck` has 0 undocumented and 0 gone;
+  - `cite_check --strict` has 0 wrong;
+  - a grep finds none of the old rule phrases left in references/, SKILL.md or templates/;
+  - the first_term and vesper gate results are unchanged from step 1.
+- **Not changed:** the SKILL.md frontmatter description still says "one ascent meter that buys access". It is the
+  trigger text, so it is LO's call.
+
+## 2026-11-09 — the playtest checks (step 1 of 3: checks, then doctrine, then first_term)
+
+LO's first_term playtest found a wall one point under every stage line, routines open one weekend afternoon,
+quest cards that paste one list onto every person, and an empty world. The study
+(`~/Documents/Great_Games_Study_20260926/playtest_study_20261109/REPORT.md`) traced each to a check that tested
+the easy moment. Checks first, so the build refuses the bug class before the doctrine changes.
+
+- **`scripts/gates.py`, *every stage has a way up*:** tests each stage's top (19, 39, 59) as well as its floor. At
+  the top a sober repeatable act must still pay; a cap at her own top was the wall.
+- **Gate renamed: *an act pays inside its own stage* is now *an act pays no further than the next stage*.** A
+  repeatable raise may pay across her own stage's line, capped at the top of the stage above;
+  `[engine.daily_caps]` sets the pace. The fail text and the SKILL.md row say so, and so does the-arc.md:257.
+  The cap doctrine itself (the-arc.md A4 and A4d) is rewritten in step 2.
+- **New gate, *a pay can happen*:** a capped raise that opens at or above its own cap never pays. The way in,
+  the step and flag setters and the dress code are all counted.
+- **New gate, *the loop is open enough hours*:** each ladder declares `ladder.loop` (or `"none: <why>"`). Each loop
+  screen must be repeatable and explicit, and the loop must render at least `ROUTINE_HOURS_FLOOR` = 14 h a week
+  between 08:00 and 24:00, unless a phone call's `accept` opens it. The 14 is the top games' low end (18), less a
+  margin.
+- **New gate, *a card line belongs to its person*:**
+  - It fails a goal line pasted onto 3 or more people's cards.
+  - It fails a goal line naming someone unmet. The card's `when` may wait on `<x>_met`, on a flag only set after
+    it (followed as a chain, with the person's presence counting as met), or the goal may be the meeting itself.
+  - It prints the share of meter-target goal lines.
+- **New lint, *the world around her*:** prints the share of everyday-life events and of waking place-hours where
+  a named person can be. It is a list, not a score.
+- **Registration and cites:**
+  - The new gates are called from `_group2_gates` and their code sits above `main()`.
+  - The-first-hour.md's `gates.py:18522` cite moved to `:18543`, the same line shifted.
+  - The changed fixtures are in test_gates_way_up / group2_checks / checks_round2 / pass6. Each changed fixture
+    now caps at the next stage's top.
+  - New tests are in `tests/test_gates_playtest_20261109.py`.
+- **Verified:**
+  - 1031 tests pass, `--selfcheck` 0 undocumented, `cite_check --strict` 0 wrong.
+  - first_term now fails exactly the playtest defects:
+    - the wall at C19/39/59/79 and E59;
+    - 10 raises that can never pay;
+    - 7 ladders with no declared loop;
+    - 3 pasted lists and 3 unmet names.
+  - vesper has n/a on the meter gates and 1 card hit (a chain through a trait counter that the static read does
+    not follow; possibly a false alarm).
+
 ## 2026-11-09 — a phone reply is a located flag setter (engine)
 
 - **Engine, `v2.py` `validate_flag_chains`:** both MISSING HINT checks (triggers and choices) now accept a setter

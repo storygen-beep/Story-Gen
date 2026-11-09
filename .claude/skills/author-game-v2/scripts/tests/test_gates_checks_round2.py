@@ -8,7 +8,7 @@ the way the skill already says, and each keeps the hit it was written for.
      the room; "Kayla's at her mom's tonight" says she is away, not here.
   3. an act pays on every way out — a choice into a node of ANOTHER canvas goes further; the
      screen that offers it is a decision screen, not the screen after the act.
-  4. an act pays inside its own stage — an act gated on a ladder step or a flag opens no lower
+  4. an act pays no further than the next stage — an act gated on a ladder step or a flag opens no lower
      than the exits that set that step or flag (followed back through their own waits).
   5. every stage has a way up (card places) — a goal line is live from the rung below it (the
      card's previous goal on that meter), and a building pays when a room inside it pays.
@@ -131,18 +131,19 @@ def test_the_same_button_as_a_way_out_is_still_red():
     assert r["pass_"] is False and "walkin#answer" in r["detail"][0], r
 
 
-# ── 4. an act pays inside its own stage: a ladder step's floor ───────────────
-STAGE = "an act pays inside its own stage"
+# ── 4. an act pays no further than the next stage: a ladder step's floor ─────
+# PLAYTEST 2026-11-09: an act now pays on to the NEXT stage's top (a cap at her own top was the wall).
+STAGE = "an act pays no further than the next stage"
 
 
-def ladder_game(step_gate):
+def ladder_game(step_gate, cap=39):
     """Step 2 is set behind heat `step_gate`; the repeatable act waits on step 2 and pays heat
-    capped at 39 (the Mid stage's top)."""
+    capped at `cap` (39 is the Mid stage's top)."""
     step = lambda key, v: {"targetType": "player", "trait": key, "op": "set", "value": v}  # noqa: E731
     return game(cv("step_1", [nd("a", [ch("Yes.", eff=[step("ryan_step", 1)])])], is_repeatable=False),
                 cv("step_2", [nd("a", [ch("Yes.", eff=[step("ryan_step", 2)])])], is_repeatable=False,
                    conditions=cond(trait("ryan_step", "eq", 1), trait("heat", "gte", step_gate))),
-                cv("knocks", [nd("a", [ch("Back to your room.", eff=[pay("heat", 1, 39)])])],
+                cv("knocks", [nd("a", [ch("Back to your room.", eff=[pay("heat", 1, cap)])])],
                    conditions=cond(trait("ryan_step", "eq", 2))),
                 player={"core_traits": {"heat": 0, "show": 0, "energy": 50, "money": 0, "ryan_step": 0}})
 
@@ -152,7 +153,7 @@ def test_an_act_behind_a_step_opens_at_the_steps_gate():
 
 
 def test_an_act_behind_a_step_set_at_zero_is_still_red():
-    r = g2t.row(ladder_game(0), STAGE)
+    r = g2t.row(ladder_game(0, cap=59), STAGE)          # opens at 0: the next top is 39
     assert r["pass_"] is False and "opens at heat 0" in r["detail"][0], r
 
 
@@ -182,7 +183,7 @@ SHOW = {"board": {"ascent_tiers": ["show"]}}
 def card_game(goals, home_rooms=False):
     """Show pays at the park from 0; the shop's curtain pays only from show 10, capped 19; the
     shower in the house pays from 10. Show stages: 0, 20, 40 (g2t.BANDS)."""
-    g = game(cv("park_walk", [nd("a", [ch("Flash.", eff=[pay("show", 1, 19)])])], location="park"),
+    g = game(cv("park_walk", [nd("a", [ch("Flash.", eff=[pay("show", 1, 39)])])], location="park"),
              cv("park_more", [nd("a", [ch("Flash.", eff=[pay("show", 1, 39)], conds=[trait("show", "gte", 20)])])],
                 location="park"),
              cv("curtain", [nd("a", [ch("Leave it open.", eff=[pay("show", 1, 19)],
