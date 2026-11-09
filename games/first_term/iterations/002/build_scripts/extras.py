@@ -126,7 +126,7 @@ for trait_k, bands in [
                      "Reach Bold (Corruption 40): touch yourself in your bed, in the shower or in a stall in the women's toilet; watch the couple in the park"),
                     # DECISIONS 124: release 1 reaches Hungry
                     (40, 60, "Bold. Hungry opens at 60: the taboo at home, strangers who can see, a room watching.",
-                     "Reach Hungry (Corruption 60): get on Ryan's couch with him, pull Jake into the gym locker room"),   # pass 4: a watched dare now needs Corruption 60, so it pays nothing at Bold   # the street pays Corruption only on a level's first day out (played 2026-11-04), so no card sends her there for it
+                     "Reach Hungry (Corruption 60): get on Ryan's couch with him, pull the guy who trains at the campus gym into the locker room"),   # playtest 2026-11-09: no unmet name on a card   # pass 4: a watched dare now needs Corruption 60, so it pays nothing at Bold   # the street pays Corruption only on a level's first day out (played 2026-11-04), so no card sends her there for it
                     (60, 80, "Hungry. Shameless is the next release: a crowd, free use.",
                      "Shameless (Corruption 80) opens in the next release")]),
     ("exhibitionism", [(0, 20, "Covered. Exhibitionism goes up when people look at you and you let them: wear the low-cut top from the clothes shop and go where people are. Daring opens at 20: no bra, a short skirt out of the house, and bigger tips at the café if you let them look.",

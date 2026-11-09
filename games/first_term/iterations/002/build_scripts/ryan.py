@@ -526,7 +526,16 @@ def stink_node(back):
         T("You can smell it on yourself now too."),
     ], [go("Go and shower.", loc=back, mins=2)])
 KAYLA_OUT = {"type": "npc_at_location", "location_id": "home_ryan_room", "npc_id": "npc_kayla", "operator": "is_absent"}
-HOT_ROOM = [  # his room, evenings he's home (Mon, Tue, Thu, Sun 19:00-22:00)
+# When each room act shows (reach audit 2026-11-09). The couch took his 19:00-20:30, so the evening is 20:30-22:00.
+# Row 1 is the doorway tease that says "Night, Ryan.", so it is evenings and nights (not Friday, Kayla's night, nor
+# Saturday, Laura waits up downstairs, as the knocks). Rows 4 and 5 name no hour, so they also take his weekend
+# mornings: Saturday once Kayla has gone (10:00), Sunday from 08:00.
+_EVE = [wd(0, 1, 3, 6), tod("20:30", "22:00")]
+_LATE = [wd(0, 1, 2, 3, 6), tod("22:00", "00:00")]
+_SAT_AM = [wd(5), tod("10:00", "14:00")]
+_SUN_AM = [wd(6), tod("08:00", "14:00")]
+HOT_ROOM_WINDOWS = {1: [_EVE, _LATE], 4: [_EVE, _SAT_AM, _SUN_AM], 5: [_EVE, _SAT_AM, _SUN_AM]}
+HOT_ROOM = [  # his room: see HOT_ROOM_WINDOWS
     (1, "Lean in his doorway.", [trait("ryan_step", "gte", 2), CUR, flag("ryan_hall_seen")], None,   # a first tease, Curious, after the hall accident (DECISIONS 124)
      [], [hot_exit("\"Night, Ryan.\"", "home_hall", 10, [cap("corruption", 1, 39)])]),
     (4, "Lie on his bed. He only watches.", [trait("ryan_step", "gte", 6), BOLD_, SHOW], STRIP,   # naked by choice for one: Bold (DECISIONS 124)
@@ -536,7 +545,7 @@ HOT_ROOM = [  # his room, evenings he's home (Mon, Tue, Thu, Sun 19:00-22:00)
      [VID("a naked girl watching a guy stroke his cock in his bedroom, telling him when", "naked girl watches guy jerk off", "she tells him when to cum", pool_dir="sex/ryan_hot5_t5")],
      [hot_exit("Get dressed.", "home_hall", 30, [cap("exhibitionism", 1, 59), cap("corruption", 1, 59)], wardrobe=DRESS_BACK)]),
 ]
-HOT_COUCH = [  # the couch, Sat/Sun 14:00-18:00
+HOT_COUCH = [  # the couch: Sat/Sun 14:00-18:00, Mon/Tue/Thu/Sun 19:00-20:30, Wed 19:00-21:00 (reach audit 2026-11-09)
     (2, "Put your feet in his lap.", [trait("ryan_step", "gte", 4), BOLD_],   # private contact: Bold (DECISIONS 124)
      [{"action": "unequip", "item_id": "sneakers"}],
      [VID("bare feet rubbing a guy's crotch through his shorts on a couch, a game on", "feet in his lap rubbing his cock couch", "footjob through shorts gaming couch", pool_dir="sex/ryan_hot2_t4")],
@@ -590,10 +599,10 @@ HOT7_FINISH = {
 HOT7_AFTER = {
     "inside": [P("He drops onto his back beside you, breathing hard, his cock wet and going soft on his stomach."),   # scene reader b02: 7f_inside already has him pull out
                D(R, "Walk slow on the way back. You're dripping, and Mom's door is right there."),
-               ME("Good. I want to feel you dripping out of me all the way to bed.")],   # fix_g3c: her answer (somebody speaks)
+               ME("Good. I want to feel you dripping out of me all the way to my room.")],   # fix_g3c: her answer (somebody speaks)
     "on": [P("He drops onto the bed beside you, chest heaving, and watches you rub his cum into your skin."),
            D(R, "Use my shirt. And don't let anyone see you in the hall like that."),
-           ME("No shirt. I'm wearing your cum to bed.")],
+           ME("No shirt. I'm wearing your cum back to my room.")],
     "mouth": [P("He sinks down onto the edge of the bed with his cock still wet from your mouth and pulls you up by the wrist."),
               D(R, "Fuck, @player.nickname. Kiss me before you go."),
               ME("Then kiss me. Taste yourself on my tongue.")],
@@ -604,22 +613,27 @@ FINISH_EXITS = [  # the day's pay split on ryan_hot_today, as built; dressed aga
 ]
 out.append({
     "id": "ryan_two_knocks", "name": "Two knocks on his door",
-    "description": "The repeat after Ryan step 8 (hot repeatable 7): a menu. A normal start, her pick of the act (more open by his Lust 70/80/90), a shy or eager voice by her Corruption, a near-catch screen, her pick of finish. Corruption +1, cap 79; Lust +3 once a day.",
+    "description": "The repeat after Ryan step 8 (hot repeatable 7), Sun-Thu nights and weekend mornings: a menu. A normal start, her pick of the act (more open by his Lust 70/80/90), a shy or eager voice by her Corruption, a near-catch screen, her pick of finish. Corruption +1, cap 79; Lust +3 once a day.",
     "trigger": {"location": "home_ryan_room", "requires_npc": R, "is_repeatable": True, "priority": 5,
                 "is_active": True, "max_triggers_per_day": 1,
-                "schedules": [{"weekdays": [0, 1, 2, 3, 6], "start_time": "22:00", "end_time": "00:00"}],
+                # reach audit 2026-11-09 (playtest_study_20261109/12_reach_audit.md): the loop was 10 h a week, nights only;
+                # his weekend mornings in his room (Saturday after Kayla goes at 10:00) add 10. The act names no hour; the
+                # door and the pools pick the lines that are true then. Still once a day.
+                "schedules": [{"weekdays": [0, 1, 2, 3, 6], "start_time": "22:00", "end_time": "00:00"},
+                              {"weekdays": [5], "start_time": "10:00", "end_time": "14:00"},
+                              {"weekdays": [6], "start_time": "08:00", "end_time": "14:00"}],
                 "conditions": cond(trait("ryan_step", "eq", 8))},
     "nodes": [
         node("door", "Two knocks", [P("Two knocks. Ryan's phone is face-down on the desk. It always is now."),
                                     # the-phone.md P10 (pass 3 group 2, round 2): her "coming" text is read where she meets it
                                     G(cond(flag("ryan_knock_booked")), D(R, "You said coming. I've been lying here listening for you."))], [
             go("Go in.", node="start", mins=2),
-            go("\"Not tonight.\"", node="no_door", mins=2),
+            go("\"Not now.\"", node="no_door", mins=2),
         ]),
         # scene reader b02 (2026-11-03): the no gets his reply on its own screen
-        node("no_door", "Not tonight", [
-            ME("Not tonight."),
-            D(R, "Seriously? Fine. Another night, then. I'm not going anywhere."),
+        node("no_door", "Not now", [
+            ME("Not now."),
+            D(R, "Seriously? Fine. Later, then. I'm not going anywhere."),
             P("Through the door you hear him drop back onto the bed, hard, and swear into his pillow."),
         ], [go("Back to your room.", loc="home_ella_room", mins=1)]),
         # scene reader b02: 7s_b has him half asleep, which can't follow "I've been lying here listening for you",
@@ -627,7 +641,9 @@ out.append({
         node("start", "His room", [
             GC(cond(flag("ryan_knock_booked")), POOL(*[GC({"version": "1.0", "logic": "AND", "items": []}, *spoken(f"7s_{k}")) for k in "ac"], pid="ryan_hot_7s_booked", bag=True)),
             # fix_g3c: the chain's else is the booking's own complement, not worn_exposure (a level, not a garment)
-            GC(cond(flag("ryan_knock_booked", False)), POOL(*[GC({"version": "1.0", "logic": "AND", "items": []}, *spoken(f"7s_{k}")) for k in "abc"], pid="ryan_hot_7s", bag=True))], [
+            # 7s_b has his room dark and him half asleep: only late (reach audit 2026-11-09); his mornings draw from a and c
+            GC(cond(tod("22:00", "00:00")), POOL(*[GC({"version": "1.0", "logic": "AND", "items": []}, *spoken(f"7s_{k}")) for k in "abc"], pid="ryan_hot_7s", bag=True)),
+            GC(cond({"type": "worn_exposure", "operator": "gte", "value": 0}), POOL(*[GC({"version": "1.0", "logic": "AND", "items": []}, *spoken(f"7s_{k}")) for k in "ac"], pid="ryan_hot_7s_day", bag=True))], [
             # pass 3 J16: the two higher acts are hidden until his Lust opens them, not greyed: this loop raises his Lust
             # itself, so a greyed rung here would be the scene reading out its own progress bar (engine.md §15 rule 1).
             # pass 3 E95: each act costs 10 energy (greyed "Requires 10 Energy" when she is spent) and lowers hygiene.
@@ -644,7 +660,7 @@ out.append({
         ], [go("Back to your room.", loc="home_ella_room", mins=1)]),
         node("suck", "On your knees", [*voices("suck"),
             VID("a girl on her knees by a bed sucking a guy's cock late at night", "blowjob kneeling by his bed night", "she sucks her stepbrother quietly", pool_dir="sex/ryan_hot7_suck_t5"),
-            D(R, "Fuck, your mouth. Every night. I want this every night."), ME("Then keep your door unlocked.")], TO_TWIST),
+            D(R, "Fuck, your mouth. I want this all the time."), ME("Then keep your door unlocked.")], TO_TWIST),
         node("ride", "On top", [*voices("ride"),
             VID("a girl riding a guy on his bed, the headboard knocking the wall", "girl rides him headboard knocking", "quiet riding sex late night", pool_dir="sex/ryan_hot7_ride_t5"),
             D(R, "Slow down. The headboard. Slow down."), ME("No. Hold my hips and take it.")], TO_TWIST),
@@ -656,7 +672,7 @@ out.append({
             D(R, "Look at you. Ass up for me, against your own wall."), ME("Harder. Make it knock.")], TO_TWIST),
         # truth pass (2026-11-03): 7t_b is Laura across the hall knocking ("Ryan? Are you up?"), true only while her row
         # has her in her bedroom (not on the stairs waiting up, came_home_late); without her the bag is a and c
-        node("twist", "Late", [
+        node("twist", "Close", [
             GC(cond(here_at("npc_laura", "home_master_bedroom")),
                POOL(*[GC({"version": "1.0", "logic": "AND", "items": []}, *spoken(f"7t_{k}")) for k in "abc"], pid="ryan_hot_7t", bag=True)),
             GC(cond({"type": "worn_exposure", "operator": "gte", "value": 0}),
@@ -686,7 +702,7 @@ RYAN_CAUGHT = {
                              P("You yank it tight and walk out past the TV. Nobody in that room says a word, but you can hear it all the way to the hall.")],
 }
 # gate `one pool, one place`: every room has its own words. His room, the one she sees most, keeps the first set; the
-# couch is afternoons (Sat, Sun 14:00-18:00); the table is dinner (18:00-19:00), Laura there, so its band lines, slip
+# couch is weekend afternoons and weekday evenings (his living-room rows); the table is dinner (18:00-19:00), Laura there, so its band lines, slip
 # and drop only show if her row ever leaves him alone there; the bathroom is his wet head round the door.
 # reader pass 4 b5: the towel can come from her wardrobe with no shower, so no line says she is wet from one.
 RYAN_TOWEL_WORDS = {
@@ -897,8 +913,11 @@ out.append({
                flags=[fset("ryan_covered"), fset("ryan_cover_today")],
                eff=[{"targetType": "player", "trait": "money", "op": "add", "value": 25, "clamp": False}, nadd(R, "warmth", 5)]),
             *RT_ROOM[1],
-            # the hot repeatables in his room (1, 4, 5), evenings he's home
-            *[c for n, label, gate, wardrobe, _m, _x in HOT_ROOM for c in hot_choice(n, label, gate + [wd(0, 1, 3, 6), tod("19:00", "22:00")], wardrobe)],
+            # the hot repeatables in his room (1, 4, 5): wherever his rows put him in here awake (reach audit 2026-11-09,
+            # playtest_study_20261109/12_reach_audit.md; the top games put the act where he is and the hour on the door).
+            # The windows never overlap, so a button shows once.
+            *[c for n, label, gate, wardrobe, _m, _x in HOT_ROOM for win in HOT_ROOM_WINDOWS[n]
+              for c in hot_choice(n, label, gate + win, wardrobe)],
             go("Leave him to it.", loc="home_hall"),
         ]),
         *RT_ROOM[2],
@@ -1007,7 +1026,7 @@ fc, fn = item("film", "Watch a film with him.", [], "movie_night", LR,
          P("He doesn't hit play until you're past the TV, and he looks at your ass the whole way.")], "Leave him the remote."))
 out.append({
     "id": "hub_ryan_living_room", "name": "Ryan, on the couch",
-    "description": "Ryan on weekend afternoons in the living room (Sat, Sun 14:00-18:00, Q55): his game or a film with him (home_life).",
+    "description": "Ryan on the couch (Sat, Sun 14:00-18:00, Q55; Mon, Tue, Thu, Sun 19:00-20:30 and Wed 19:00-21:00, reach audit 2026-11-09): his game or a film with him (home_life). The screen names no day or hour.",
     "trigger": {"location": LR, "npc": R, "requires_npc": R, "is_repeatable": True, "priority": 6, "is_active": True,
                 "conditions": cond(flag("opening_done"))},
     "nodes": [node("couch", "Ryan, on the couch", [
@@ -1022,7 +1041,7 @@ out.append({
        + [c for n, label, gate, wardrobe, _m, _x in HOT_COUCH for c in hot_choice(n, label, gate + [LAURA_NOT_HERE(LR)], wardrobe)]
        + [go("Leave him to it.", node="leave", cond_=cond(wd(0, 1, 2, 3, 4, 5))),
           go("Leave him to it.", loc="home_hall", cond_=cond(wd(6)))]),   # Sunday's screen is at the decision cap; his film offer still has its no
-       # the written no: "Want next game?" gets her words and his reply; the hook is his row, on the couch until 18:00
+       # the written no: "Want next game?" gets her words and his reply; the hook is his row, on the couch for the rest of it
        node("leave", "Keep your feet", [
            ME("Keep your feet, Ryan. I'm going."),
            D(R, "Your loss."),

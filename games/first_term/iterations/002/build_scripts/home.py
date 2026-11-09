@@ -443,7 +443,7 @@ out.append(solo("master_wardrobe", "Go through Laura's wardrobe",
 # conditions do not nest, so each "asleep" line is written once per piece of the night that skips it.
 ASLEEP_HOURS = [(wd(0, 1, 2, 3, 4, 5), tod("22:00", "07:00")), (wd(6), tod("22:00", "00:00")), (wd(6), tod("01:00", "07:00"))]
 # Laura is awake and alone Sun-Fri 22:00-23:00 (DECISIONS 82), so a line saying she is asleep skips that hour too.
-LAURA_ASLEEP_HOURS = [(wd(0, 1, 2, 3, 4), tod("23:00", "07:00")), (wd(5), tod("22:00", "07:00")), (wd(6), tod("23:00", "00:00")), (wd(6), tod("01:00", "07:00"))]
+LAURA_ASLEEP_HOURS = [(wd(0, 1, 2, 3, 4), tod("23:30", "07:00")), (wd(5), tod("22:00", "07:00")), (wd(6), tod("23:30", "00:00")), (wd(6), tod("01:00", "07:00"))]   # bedtime 23:30 (LO, 2026-11-09)
 out.append({"id": "master_asleep", "name": "Ease the door open",
     "description": "The door's 'Ease the door open' at night: one screen naming only who is asleep, then back to the hall (home_master_bedroom.md:47-54, Q58). Reached only by the door.",
     "trigger": {"location": "home_master_bedroom", "is_repeatable": True, "priority": 1, "is_active": True,
@@ -536,7 +536,7 @@ out.append({"id": "master_door_saturday_night", "name": "Their door's ajar",
 
 # Laura alone (DECISIONS 82, laura_alone_in_bed.md): Sun-Fri 22:00-23:00, Mark downstairs. The same walk-in
 # shape: the look pays nothing, "Keep watching." pays corruption +1, cap 19. Reached only by the door.
-LAURA_HOUR = [here(L, "home_master_bedroom"), here(M, "home_master_bedroom", False), wd(6, 0, 1, 2, 3, 4), tod("22:00", "23:00")]
+LAURA_HOUR = [here(L, "home_master_bedroom"), here(M, "home_master_bedroom", False), wd(6, 0, 1, 2, 3, 4), tod("22:00", "23:30")]   # bedtime 23:30 (LO, 2026-11-09)
 LAURA_GAP_OPEN = trait("laura_step", "gte", 2)   # LO 2b (2026-11-01): her want is shown first, then the gap
 LAURA_CRACK = ("Laura's door is open a hand's width. The bedside lamp is on low. Down the hall the TV mutters. Laura is alone in bed, the covers kicked down. Her nightdress is pushed up to her waist. Her knees are up and apart, her ass bare on the sheet. Two fingers rub slow circles on her clit. She is wet, and it shines in the lamplight. Her other hand squeezes her tit through the nightdress. Her nipple stands hard against the cotton. Her tits rise and fall faster. Her eyes are shut, her lip caught in her teeth. A small moan escapes her. Her hips lift into her fingers. She hasn't seen you. Your face burns. Heat pools low in your belly. You are wet, and your nipples go tight.")
 LAURA_WATCH = ("You stay. Your hand stays flat on the door frame. Laura pushes two fingers inside herself. Her thumb rubs her clit, faster now. Her other hand squeezes her tit and pinches the nipple. Her hips lift off the mattress. She bites the back of her hand so Mark won't hear. Her fingers pump in and out, wet and loud in the quiet. Then she comes. Her whole body shakes. Her thighs clamp hard on her hand. A moan leaks out around her teeth. Your nipples go tight and ache. You are wet, all at once. You press your thighs together. You do not touch yourself. You want to. Laura goes still, breathing hard, two fingers still inside her. Her tits rise and fall. You back away from the door before she opens her eyes, thighs pressed tight, nipples still hard.")
@@ -597,7 +597,10 @@ out.append({"id": "laura_shower_gap", "name": "The bathroom door won't shut",
     "description": "Saturday 16:30-17:00, Laura in the shower: through the steam her hand between her legs. Keep watching pays corruption +1, cap 19, and the gap counter (Laura's step 4).",
     "trigger": {"location": "home_bathroom", "npc": L, "requires_npc": L, "is_repeatable": True, "priority": 8, "is_active": True,
                 "max_triggers_per_day": 1,
-                "schedules": [{"weekdays": [5], "start_time": "16:30", "end_time": "17:00"}],
+                # LO, 2026-11-09 ("Bath + later bedtime"): her shower before bed on her kitchen nights too; part of her loop.
+                # The beats name no day; the hooks below say which.
+                "schedules": [{"weekdays": [5], "start_time": "16:30", "end_time": "17:00"},
+                              {"weekdays": [0, 1, 3, 4, 6], "start_time": "21:30", "end_time": "22:00"}],
                 "conditions": cond(flag("opening_done"), LAURA_GAP_OPEN)},
     "nodes": [
         node("steam", "Steam", [P(beat("laura_shower_gap", "steam")),
@@ -608,7 +611,9 @@ out.append({"id": "laura_shower_gap", "name": "The bathroom door won't shut",
                                               (40, "What does she think about in there? You want to know."),
                                               (60, "You could stay till she finishes. Nobody would know.")],
                                "Don't stop, Mom. You want to see all of it."),
-            P("She showers at this time every Saturday.")],   # reader batch 4 (pass 3): the hook, her Saturday row
+            # G, not GC: right after her thought bands, a GC would join their chain and never show
+            G(cond(wd(5)), P("She showers at this time every Saturday.")),
+            G(cond(wd(0, 1, 2, 3, 4, 6)), P("She showers at this time most nights, before bed."))],   # reader batch 4 (pass 3): the hook, her Saturday row
             # reader batch 4 (pass 3): the watch plays inside her half hour (fired at 16:56, a 5-minute button put the
             # watch screen at 17:01, when her row has her in the bedroom), so the minutes go on the way out instead
             [go("Keep watching.", node="watch", mins=0, flags=[fset("laura_shower_seen")]),
@@ -617,10 +622,11 @@ out.append({"id": "laura_shower_gap", "name": "The bathroom door won't shut",
             # reader 2026-11-04: shocked is her first Saturday's voice, not her voice at every level; a VID follows, so the chain ends
             *her_thought_bands("corruption", [(20, "You just watched your mom come. You're shocked, and your legs are shaking."),
                                               (40, "You want to know what she thinks about in there, to come that hard."),
-                                              (60, "You watched every second, and next Saturday you'll stay longer.")],
+                                              (60, "You watched every second, and next time you'll stay longer.")],
                                "You wanted her to turn round. You wanted her to see how wet you are."),
             VID("a naked woman coming in the shower, forehead on the tiles, a moan under the spray", "woman orgasm in shower forehead on tiles", "mom cums in shower", pool_dir="sex/laura_shower_watch_t5"),
-            P("Next Saturday she'll be in here again, and the lock will stick again.")],   # reader batch 4 (pass 3): the hook
+            GC(cond(wd(5)), P("Next Saturday she'll be in here again, and the lock will stick again.")),
+            GC(cond(wd(0, 1, 2, 3, 4, 6)), P("Another night she'll be in here again, and the lock will stick again."))],   # reader batch 4 (pass 3): the hook
             [go("Back to your room.", loc="home_ella_room", mins=10, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}, add("laura_gaps_watched", 1, clamp=False)], flags=[fset("laura_shower_seen")])]),
     ]})
 
@@ -881,8 +887,8 @@ out.append(solo("front_step", "Sit on the step", "Watch the street. Who passes r
 # room or bathroom, one a day. Each shows only when its person's row puts them there; with nobody
 # there it is the room's quiet line. One brake flag across all of them, read 24 hours.
 # ═════════════════════════════════════════════════════════════════════════════
-def event(cid, name, loc, sched, conds, blocks, plain, raise_eff, curious=None, bold=None, ph_name=None,
-          record=(), pay_her=False, entry_eff=(), plain_after=None):
+def event(cid, name, loc, sched, conds, blocks, plain, raise_eff, curious=None, bold=None, ph_name=None, her_cap=None,
+          record=(), pay_her=False, entry_eff=(), plain_after=None, chance=0.25):
     """entry_eff: his raise for what happened, paid on the way in: the event has no button into it, so it rides the
     trigger's `pre_substitution_effects`, which the engine runs unconditionally at the top of node 0
     (template_import.py:899-906, :2618-2622, :9404-9407; v2.py:16364-16397). His Want then pays for the moment and
@@ -890,7 +896,8 @@ def event(cid, name, loc, sched, conds, blocks, plain, raise_eff, curious=None, 
     effects only, so `record` (his flag for what happened) rides every exit alike: it records the moment, which
     happened whichever button she clicks. raise_eff rides every exit too (Laura's robe, a warmth beat on her side).
     pay_her: her go-further button also pays her Corruption +1, capped at the top of the stage it opens at
-    (39 Curious, 59 Bold); the way out pays her nothing (pass 3 G12).
+    (39 Curious, 59 Bold); recap.py then moves it one stage up (playtest 2026-11-09). `her_cap` overrides it
+    for an event that opens higher than its gate says. The way out pays her nothing (pass 3 G12).
     plain_after: pass 3 D44 (the-surfaces.md R9): the plain answer's own short screen (his or her reaction), so the
     moment does not end on a toast. Appended last, so nodes[1] stays the curious screen."""
     rec = [fset(f) for f in record]
@@ -906,13 +913,14 @@ def event(cid, name, loc, sched, conds, blocks, plain, raise_eff, curious=None, 
             continue
         label, ref, extra = spec
         her = ([{"targetType": "player", "trait": "corruption", "op": "add", "value": 1,
-                 "cap": 59 if BOLD in gate + list(extra) else 39}] if pay_her else [])
+                 "cap": her_cap or (59 if BOLD in gate + list(extra) else 39)}] if pay_her else [])
         exits.append(go(label, node=f"ev_{kind}", cond_=cond(*gate, *extra), eff=list(raise_eff) + her or None,
                         flags=[fset("home_event")] + rec))
         nodes.append(node(f"ev_{kind}", label.rstrip("."), [placeholder(ref, f"{ph_name or name}: {kind}")], [go("Go on.", loc=loc, mins=2)]))
-    c = {"id": cid, "name": name, "description": f"Random event at home (home_hall.md): {name}. 1 in 4, one a day.",
+    odds = "1 in 4" if chance == 0.25 else f"chance {chance}"
+    c = {"id": cid, "name": name, "description": f"Random event at home (home_hall.md): {name}. {odds}, one a day.",
          "trigger": {"location": loc, "is_repeatable": True, "priority": 4, "is_active": True,
-                     "trigger_mode": "random", "chance": 0.25, "conditions": cond(*conds)},
+                     "trigger_mode": "random", "chance": chance, "conditions": cond(*conds)},
          "nodes": [node("event", name, blocks, exits)] + nodes + nodes_after}
     if sched:
         c["trigger"]["schedules"] = sched
@@ -941,7 +949,10 @@ out += event("home_event_ryan_towel", "Ryan out of the shower", "home_hall", S([
              # buttons pay her
              "Step round him.", [], record=["ryan_saw_her_towel"], pay_her=True, entry_eff=[npc_add(R, "want", 2)],
              curious=("Walk past slowly.", "sheets/places/home_hall.md:44", [BOLD]),   # her tits brush his chest: a touch, Bold (DECISIONS 124)
-             bold=("Let him look.", "sheets/places/home_hall.md:44", [trait("ryan_step", "gte", 3)]))
+             bold=("Let him look.", "sheets/places/home_hall.md:44", [trait("ryan_step", "gte", 3)]),
+             # reach audit 2026-11-09 (playtest: "the towel slip timing"): she wakes about 07:00 and his row ends 07:30,
+             # so at 1 in 4 most players never met him. It is his habit, not luck: 3 in 4, and his card says when.
+             chance=0.75)
 out += event("home_event_laura_robe", "Laura's robe", "home_kitchen", S([0, 1, 2, 3, 4], "06:30", "08:00"),
              [here(L, "home_kitchen"), flag("opening_done")],
              [P("Laura reaches up for the cereal on the top shelf and her robe slips open over her tits. She ties it again fast, pink to the ears."),   # reader a3 #11 (DECISIONS 131)
@@ -993,6 +1004,9 @@ out += event("home_event_ryan_door", "Ryan's door, a hand's width", "home_hall",
              # way in and a record on every exit alike (A4d: an accident pays him); her look pays her
              "Go past.", [], record=["ryan_door_seen"], pay_her=True, entry_eff=[npc_add(R, "want", 1)],
              curious=("Stop and look in.", "sheets/places/home_hall.md:48", []),
+             # playtest 2026-11-09 (gate `a pay can happen`): ryan_step 7 is only set from Corruption 60, so the look
+             # opens at 60; capped at 39 it could never pay. 79 is this release's top.
+             her_cap=79,
              # reader pass 3 b01 (the written no): his "If you want" gets her spoken no and his reaction
              plain_after=([ME("Not tonight, Ryan."), D(R, "Yeah. Course. Night, then."),
                            P("Behind you the music goes up a notch, and his door stays exactly where it is, open a hand's width.")], "Leave him to his music."))

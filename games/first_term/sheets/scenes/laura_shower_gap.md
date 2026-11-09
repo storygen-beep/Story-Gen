@@ -13,7 +13,7 @@
 | row | answer |
 |---|---|
 | system · place | the way up (DECISIONS 78, 79, 82) · `home_bathroom`, from the hall door |
-| where · when | the bathroom door · Sat 16:30–17:00, Laura in the shower (new row in her schedule) · door option "The bathroom door won't shut." in place of the plain way in during that half hour |
+| where · when | the bathroom door · Sat 16:30–17:00, and Mon, Tue, Thu, Fri, Sun 21:30–22:00, her shower before bed (LO, 2026-11-09, "Bath + later bedtime"; DECISIONS 216); Laura in the shower · door option "The bathroom door won't shut." in place of the plain way in during that half hour |
 | gate | `laura_step` gte 2 · Laura present |
 | who | Laura, 41, her mother; she never sees her |
 | want | Laura's: her hand on her clit under the water, alone |

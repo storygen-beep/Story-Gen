@@ -55,7 +55,7 @@ OFFICE_CLOSED = "The office is locked. Office hours are on the door."
 # ── Laura's hour at her door (release 1): which canvas "The door's ajar." opens ──
 _L_IN = {"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_laura", "operator": "is_present"}
 _M_OUT = {"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_mark", "operator": "is_absent"}
-_HOUR = [_L_IN, _M_OUT, wd(6, 0, 1, 2, 3, 4), tod("22:00", "23:00")]
+_HOUR = [_L_IN, _M_OUT, wd(6, 0, 1, 2, 3, 4), tod("22:00", "23:30")]   # bedtime 23:30 (LO, 2026-11-09)
 _BRAKES = [flag("laura_alone_seen", False),
            {"type": "hours_since_flag", "subject": "player", "flag_key": "laura_alone_seen", "operator": "gte", "value": 20}]
 _STEP4_READY = [trait("laura_step", "eq", 3), trait("corruption", "gte", 20),
@@ -153,7 +153,7 @@ LOCATIONS = [
                  # door open" skips that hour too and "The door's ajar." opens laura_alone_in_bed.
                  dict(text="Ease the door open.",
                       conditions=cond({"type": "npc_at_location", "location_id": "home_master_bedroom", "operator": "is_present"},
-                                      wd(0, 1, 2, 3, 4), tod("23:00", "07:00")),
+                                      wd(0, 1, 2, 3, 4), tod("23:30", "07:00")),
                       goes_to={"type": "canvas", "canvas_id": "master_asleep"}),
                  dict(text="Ease the door open.",
                       conditions=cond({"type": "npc_at_location", "location_id": "home_master_bedroom", "operator": "is_present"},
@@ -165,7 +165,7 @@ LOCATIONS = [
                       goes_to={"type": "canvas", "canvas_id": "master_asleep"}),
                  dict(text="Ease the door open.",
                       conditions=cond({"type": "npc_at_location", "location_id": "home_master_bedroom", "operator": "is_present"},
-                                      wd(6), tod("23:00", "00:00")),
+                                      wd(6), tod("23:30", "00:00")),
                       goes_to={"type": "canvas", "canvas_id": "master_asleep"}),
                  # Laura's hour (DECISIONS 82, 84): once a night, the brake as two options with one text;
                  # after she watched, a peek that pays nothing.
@@ -176,7 +176,7 @@ LOCATIONS = [
                  dict(text="Peek through the gap.",
                       conditions=cond({"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_laura", "operator": "is_present"},
                                       {"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_mark", "operator": "is_absent"},
-                                      wd(6, 0, 1, 2, 3, 4), tod("22:00", "23:00"), {"type": "hours_since_flag", "subject": "player", "flag_key": "laura_alone_seen", "operator": "lt", "value": 20}),
+                                      wd(6, 0, 1, 2, 3, 4), tod("22:00", "23:30"), {"type": "hours_since_flag", "subject": "player", "flag_key": "laura_alone_seen", "operator": "lt", "value": 20}),
                       goes_to={"type": "canvas", "canvas_id": "laura_alone_peek"}),
                  dict(text="The door's ajar.",
                       conditions=cond({"type": "npc_at_location", "location_id": "home_master_bedroom", "npc_id": "npc_laura", "operator": "is_present"},
@@ -332,10 +332,10 @@ LOCATIONS = [
          description=("The faculty floor: one long corridor of office doors with name cards and office hours "
                       "taped to them. Your grades are posted on the doors.")),
     dict(id="hale_office", name="Dr. Hale's Office", entry_from="faculty_floor", kind="destination",
-         hours=[H([3], "17:00", "19:30")], closed_text=OFFICE_CLOSED, rules=PUBLIC_RULES,
+         hours=[H([0, 1, 2, 4], "10:00", "12:00"), H([0, 1, 2, 4], "15:00", "19:00"), H([3], "17:00", "19:30")], closed_text=OFFICE_CLOSED, rules=PUBLIC_RULES,   # Thursday + office hours (LO, 2026-11-09)
          description=("Dr. Hale's office: books to the ceiling, one window, a desk with a photo of his wife on "
-                      "it. He holds office hours on Thursday evenings, and his wife picks him up after. Your "
-                      "Psychology grade is pinned to the door.")),
+                      "it. He holds office hours most afternoons, and late on Thursdays, when his wife picks him "
+                      "up after. Your Psychology grade is pinned to the door.")),
     dict(id="art_office", name="Art Lecturer's Office", entry_from="faculty_floor", kind="destination",
          hours=[H([0, 1, 3, 4], "14:30", "18:00")], closed_text=OFFICE_CLOSED, rules=PUBLIC_RULES,
          description=("The art lecturer's office: canvases stacked against the walls, charcoal dust on "

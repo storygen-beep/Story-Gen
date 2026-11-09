@@ -334,6 +334,52 @@ out.append({
              [go("Go in.", loc="home_hall", mins=2, flags=[funset("jake_date_booked")])]),
     ]})
 
+# ── the booty call (reach audit 2026-11-09, playtest_study_20261109/12_reach_audit.md; LO "Go ahead" on Zoe and Jake):
+#    after his step 4 he texts "you up?" on the nights there's no date (Sun, Mon, Tue, Thu, phone.py jake_booty_text);
+#    her yes sets jake_coming (3 hours, people_data._LATCH_HOURS) and his row puts him at her front door 22:00-00:00.
+#    The top games' shape: Course of Temptation's booty call, any night 18:00-24:00, once a day (REPORT.md section 2).
+#    The act has its own two beats (jake_date_end.md `booty` a, b; they name no day); the near-catch is Mark's TV, whose row has him
+#    in the living room 22:00-00:00 those nights, or Ryan's code on the wall. ──
+out.append({
+    "id": "jake_booty_call", "name": "Jake at your door",
+    "description": "After Jake's step 4, on a night with no date: he texts \"you up?\", she answers \"door's unlocked\", and he's at the front door 22:00-00:00. Her room; Corruption +1, cap 59. Once a night.",
+    "trigger": {"location": "home_front_door", "npc": J, "requires_npc": J, "is_repeatable": True, "priority": 5, "is_active": True,
+                "max_triggers_per_day": 1,
+                "schedules": [{"weekdays": [0, 1, 3, 6], "start_time": "22:00", "end_time": "00:00"}],
+                "conditions": cond(flag("jake_coming"), trait("jake_step", "gte", 4))},
+    "nodes": [
+        node("door", "Your front step", [
+            P("Jake's on your front step with his hood up and his hands shoved in his pockets, grinning like he's already got away with something."),
+            D(J, "Told you twenty minutes, gorgeous."),
+            ME("Shh. Keep your voice down."),
+            D(J, "I'm whispering. This is me whispering."),
+            T("He came across town because you typed two words. You want him in your bed before anyone hears the door."),
+        ], [
+            go("\"Come in.\"", node="sneak", mins=5,
+               cond_=cond({"type": "npc_at_location", "location_id": "home_hall", "npc_id": "npc_laura", "operator": "is_absent"}),
+               costs=[{"trait": "energy", "value": 10}],
+               eff=[{"targetType": "player", "trait": "jake_catch_roll", "op": "set", "value": {"type": "random", "min": 1, "max": 8}},
+                    {"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}]),
+            go("\"Not tonight, Jake.\"", node="no", mins=2),
+        ]),
+        node("sneak", "Down the hall", [
+            POOL(P(beat("jake_date_end", "`booty` a")), P(beat("jake_date_end", "`booty` b")), pid="jake_booty_sneak", bag=True),   # gate one pool, one place: its own beats
+            G(cond(ROLL("eq", 1), here_at("npc_mark", "home_living_room")),
+              P("Down the hall Mark's TV goes quiet. You both stop breathing. Then a laugh track, loud, and he hasn't moved."),
+              D(J, "Your stepdad?"), ME("Shh.")),
+            G(cond(ROLL("eq", 2), flag("ryan_knock_code")), P("Through the wall, two slow knocks, and then nothing."), D(J, "Is that your brother?"), ME("Ignore him. Don't stop.")),
+            VID("a boyfriend snuck into her bedroom late, quiet sex on her bed", "boyfriend snuck in late quiet sex", "booty call sneak in her room", pool_dir="sex/jake_booty_t5"),
+            D(J, "Your bed's so loud. How is your bed this loud?"), ME("Then fuck me quieter next time."),
+            D(J, "Text me back next time too. I'll come running."),
+        ], [go("Let him out before dawn.", loc="home_ella_room", mins=300, eff=[CAP("corruption", 1, 59)])]),
+        node("no", "Not tonight", [
+            D(J, "You made me drive over here to say no?"),
+            ME("I made you drive over here. That's different."),
+            P("He laughs, low, kisses you once on the step, hard enough that you nearly change your mind, and jogs back down the path to his car."),
+        ], [go("Go in.", loc="home_hall", mins=2)]),
+    ]})
+clear_on_leave(out[-1], "jake_coming")
+
 # ── his hubs: the quad (mornings), the canteen (lunch), Zoe's party ──
 # One pool, one place (2026-11-04): each hub says these its own way. The quad keeps the first words, because its lap scene
 # answers them ("Forget later. Guys. Look at her.", heat_a A3). Gates stay in jake_state, one place. Rows: quad Mon/Wed/Fri

@@ -192,9 +192,11 @@ _DAY = {"Mon": 0, "Tue": 1, "Wed": 2, "Thu": 3, "Fri": 4, "Sat": 5, "Sun": 6}
 # truth gates read as sleeping (gates.py _TR_SLEEP).
 ACTIVITIES = {
     "npc_ryan": ["at dinner", "in the shower first (Laura's rule)", "home, weekend morning",
-                 "in his room for the night", "home in his room, evening", "in his room with Kayla",
+                 "in his room for the night",
+                 "on the couch, his game on", "on the couch, his game on", "home in his room, evening",   # reach audit 2026-11-09
+                 "home in his room, evening", "in his room with Kayla",
                  "watching TV, a film on"],
-    "npc_laura": ["waiting up in the dark hall", "making breakfast before work", "in the kitchen, evening",
+    "npc_laura": ["waiting up in the dark hall", "making breakfast before work", "in the kitchen, evening", "in the shower before bed",
                   "awake, alone", "awake, with Mark", "asleep", "asleep", "asleep", "in the shower", "dressing to go out", "waiting up in the dark"],
     "npc_mark": ["at dinner", "in the garage, evening", "up late with the TV on", "up late with the TV on",
                  "asleep", "asleep", "awake, with Laura", "asleep", "cooking, Wednesday", "in the garage, Saturday",
@@ -202,11 +204,13 @@ ACTIVITIES = {
                  "asleep", "at the counter with his coffee"],   # Sat sleeping in, then coffee (LO, 2026-11-03, DECISIONS 152)
     "npc_tom": ["running the café", "closing up, the café shut"],
     "npc_zoe": ["at the party house", "at home", "at home, party night", "at home, the party after midnight",
-                "going to bed", "lying on the grass", "at lunch", "on her weekend run",
+                "going to bed", "home on a Sunday night, in her room", "lying on the grass", "at lunch", "on her weekend run",
                 "in class: figure drawing, then Biology", "in class: Biology", "in class: figure drawing"],
-    "npc_hale": ["teaching Psychology", "teaching Psychology", "Thursday office hours"],
+    "npc_hale": ["teaching Psychology", "teaching Psychology", "Thursday office hours", "office hours",
+                 "a booked hour, his door locked"],
     "npc_jake": ["with the team", "at Zoe's party", "at lunch", "picking you up", "walking you home",
-                 "team training", "in class: figure drawing", "in class: figure drawing"],
+                 "team training", "in class: figure drawing", "in class: figure drawing",
+                 "at your door, hood up"],
     "npc_vance": ["at your front door", "on his porch"],
     "npc_nadia": ["beside you in Psychology", "beside you in Psychology", "studying", "at lunch"],
     "npc_gary": ["in booth four", "in booth four"],
@@ -226,7 +230,8 @@ _NO_MET = {"npc_ryan", "npc_laura", "npc_mark"}
 # A latch the ledger writes as a bare flag is read by hours since (gate: a latch flag is cleared): Jake's
 # booking lapses after a week (Q73), the night he took her out lasts 6 hours (jake_saturday_date sheet),
 # Vance knocks the Monday after a short Sunday (the rent is taken Sunday 00:00).
-_LATCH_HOURS = {"jake_date_booked": 168, "jake_date_went": 6, "rent_short": 48}
+_LATCH_HOURS = {"jake_date_booked": 168, "jake_date_went": 6, "rent_short": 48,
+                "jake_coming": 3, "hale_booked": 18}   # his "Tomorrow, ten" email, answered the evening before   # his "you up?" text: he comes by within the hour or two (reach audit 2026-11-09)
 
 
 def _ledger_when(w):

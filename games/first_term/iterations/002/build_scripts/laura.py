@@ -675,7 +675,7 @@ bd_choices, bd_nodes = item("hair", "Let her do your hair.", DRESSING, "made_up_
 # once per piece of the night because conditions do not nest.
 ASLEEP_HOURS = [(wd(0, 1, 2, 3, 4, 5), tod("22:00", "07:00")), (wd(6), tod("22:00", "00:00")), (wd(6), tod("01:00", "07:00"))]
 # Laura is awake and alone Sun-Fri 22:00-23:00 (DECISIONS 82), so a line saying she is asleep skips that hour too.
-LAURA_ASLEEP_HOURS = [(wd(0, 1, 2, 3, 4), tod("23:00", "07:00")), (wd(5), tod("22:00", "07:00")), (wd(6), tod("23:00", "00:00")), (wd(6), tod("01:00", "07:00"))]
+LAURA_ASLEEP_HOURS = [(wd(0, 1, 2, 3, 4), tod("23:30", "07:00")), (wd(5), tod("22:00", "07:00")), (wd(6), tod("23:30", "00:00")), (wd(6), tod("01:00", "07:00"))]   # bedtime 23:30 (LO, 2026-11-09)
 LT_BED = laura_towel("hub_laura_bedroom", "home_master_bedroom", "bedroom", when=DRESSING,
                      lines_when=[flag("laura_dress_chosen", False)])   # the lines have her in her slip, choosing; chosen, she's in the green
 out.append({
@@ -700,7 +700,7 @@ out.append({
                 P("Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. She doesn't stir."))
               for hrs in LAURA_ASLEEP_HOURS],
             # reader 2026-11-04: her awake rows outside DRESSING and outside the asleep hours, so the screen is never empty
-            G(cond(wd(0, 1, 2, 3, 4, 6), tod("22:00", "23:00")),
+            G(cond(wd(0, 1, 2, 3, 4, 6), tod("22:00", "23:30")),
               P("Laura's on the edge of the bed in her nightdress, wide awake, the lamp on low and a book open on her knees that she isn't reading."),
               D(L, "It's late, sweetheart. Go on to bed.")),
             G(cond(wd(5), tod("18:30", "19:00")),

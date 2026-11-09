@@ -65,10 +65,20 @@ carry_closing = "The gap waits for next Sunday, on top of the rent."
 # Exhibitionism phase 1 (LO, 2026-11-08): how far Exhibitionism may rise in a day, scaled from Course of
 # Temptation's caps of 30/21/18/15/12/9 out of 100 a level (cot_34_database_skill.js:139). While she's Tipsy it
 # can't pass the top of her sober stage: a drink opens the leave rules, it isn't a way up (DECISIONS 78, 197).
+# Study 2026-11-09 (playtest_study_20261109/10_pace.md): the top games keep about 3 paying acts a day at every
+# stage, and no stage over about 11-18 days. 1 a day from 60 made 20-day stages, so every band pays at least 2:
+# 6.7 / 6.7 / 10 / 10 / 10 days per stage at the cap (lint `the climb's pace`).
 [engine.daily_caps.exhibitionism]
-bands = [ { below = 20, cap = 3 }, { below = 40, cap = 2 }, { below = 60, cap = 2 }, { below = 80, cap = 1 }, { below = 101, cap = 1 } ]
+bands = [ { below = 20, cap = 3 }, { below = 40, cap = 3 }, { below = 60, cap = 2 }, { below = 80, cap = 2 }, { below = 101, cap = 2 } ]
 hold_band_while = ["drinks_boost"]
 first_gain_message = "Someone looked, and you let them. Exhibitionism goes up when people look and you don't hide."
+
+# Playtest 2026-11-09: repeatable acts now pay across each stage's line (cap at the next stage's
+# top, recap.py), so Corruption needs the same brake Exhibitionism has, or an easy act at 0 runs
+# her to 39 in an afternoon. Same bands as Exhibitionism (the-meters.md "Pace it with a daily cap").
+[engine.daily_caps.corruption]
+bands = [ { below = 20, cap = 3 }, { below = 40, cap = 3 }, { below = 60, cap = 2 }, { below = 80, cap = 2 }, { below = 101, cap = 2 } ]
+hold_band_while = ["drinks_boost"]
 
 [engine.daily_tick]
 flagEffects = [

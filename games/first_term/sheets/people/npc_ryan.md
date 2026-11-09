@@ -9,6 +9,8 @@
 > Changed 2026-11-04 (LO's answers Q1, Q7, Q14; PICKS 17): his Lust starts at 0; his room is shut while Kayla is over; no day-one final no; his short-skirt line and step 3's call name no stairs. Waits for LO's re-sign.
 
 > Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. Grid: weekend mornings from 06:45. The moment column names each step's kind and stage. His Want pays on what happened (step 1 and step 8); no locked step-9 button. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 8 runs Sun–Thu nights.
+>
+> Changed 2026-11-09 (reach audit, `playtest_study_20261109/12_reach_audit.md`; the top games put a person's act wherever he is, with the hour on the door): the couch also runs on weekday evenings (Mon, Tue, Thu, Sun 19:00–20:30, Wed 19:00–22:00); his room's acts take 20:30–22:00, late evenings and weekend mornings; the two-knocks repeat also runs on weekend mornings; the towel in the hall is 3 in 4 on weekday mornings, and his card says when.
 
 > **Changed 2026-11-02, signed by LO 2026-11-02** ("Signed, go with your recs, skip the play check"; DECISIONS 131, `sheets/READER_FAILS_A3.md`, Home): rows 7-8, 13: in the towel at his top band (Want 70+, "One pull, @player.nickname.") a written no, "Hold the knot.": she says "Not tonight." (18:00-06:00) or "Not now.", he says "Tease.", his Want +1 once a day (the towel's `ryan_towel_today`, no new flag); in his room, the kitchen and the couch. His towel event in the hall (`home_event_ryan_towel`) ends its Curious and Bold screens on "Not here. Mom's up."
 
@@ -53,7 +55,10 @@
 |---|---|---|---|---|
 | `home_bathroom` | Mon–Fri | 06:45 | 07:30 | he showers first (Laura's rule) |
 | `home_kitchen` | Mon, Tue, Thu, Sun | 18:00 | 19:00 | dinner with the family |
-| `home_ryan_room` | Mon, Tue, Thu, Sun | 19:00 | 22:00 | home from the yard |
+| `home_living_room` | Mon, Tue, Thu, Sun | 19:00 | 20:30 | the couch after dinner, his game on (reach audit 2026-11-09) |
+| `home_living_room` | Wed | 19:00 | 21:00 | the couch; no family dinner on Wednesdays (reach audit 2026-11-09; to 21:00, DECISIONS 218) |
+| `home_ryan_room` | Wed | 21:00 | 22:00 | his room after the couch (DECISIONS 218) |
+| `home_ryan_room` | Mon, Tue, Thu, Sun | 20:30 | 22:00 | home from the yard |
 | `home_ryan_room` | Fri | 18:00 | 22:00 | Kayla's night |
 | `home_ryan_room` | Sat, Sun | 06:45 | 14:00 | weekend mornings |
 | `home_living_room` | Sat, Sun | 14:00 | 18:00 | TV and a film |
@@ -74,11 +79,11 @@ His night row ends 06:45, so it doesn't overlap his bathroom row (LO, 2026-10-08
 |---|---|---|---|---|---|---|---|
 | 1 | `ryan_01_hall_first_morning` | `home_hall` | the opening | none | want add +10, on "Open the door." (the moment he sees her) | "Knock next time." (parked) | Your first morning: out of the bathroom, Ryan waiting in the hall. |
 | 2 | `ryan_02_phone_on_the_sink` | `home_bathroom` | Mon–Fri 06:45–07:30 | his Want 10 (Exhibitionism 20 dropped) | want add +5 · `knows_about_kayla` set | "Leave it." (parked) | A weekday morning in the bathroom: Ryan's phone buzzes on the sink. |
-| 3 | `ryan_03_shirt_off` | `home_ryan_room` | Mon, Tue, Thu, Sun 19:00–22:00 | Corruption 20 · his Want 20 | want add +5 · corruption add +1 · the two-knocks code | "Never mind." (parked) | Ryan's room, an evening he's home (not Wednesday or Friday): knock. |
+| 3 | `ryan_03_shirt_off` | `home_ryan_room` | Mon, Tue, Thu, Sun 20:30–00:00 (reach audit 2026-11-09) | Corruption 20 · his Want 20 | want add +5 · corruption add +1 · the two-knocks code | "Never mind." (parked) | Ryan's room, an evening he's in there, from half eight (not Wednesday, Friday or Saturday): knock. |
 | 4 | `ryan_04_feet_in_his_lap` | `home_ryan_room` | Mon, Tue, Wed, Thu, Sun 22:00–00:00 | Corruption 40 · his Want 30 (was Corruption 20) | want add +5 · corruption add +3, cap 79 | "Just saying goodnight." (parked) | Ryan's room, late at night (not Friday): two knocks. |
 | 5 | `ryan_05_thin_walls` | `home_ella_room` | Fri 22:00–00:00 | Corruption 20 · his Want 40 (was Exhibitionism 40) | want add +5 · corruption add +1 · `ryan_heard_her` set | "Put your headphones in." · "Roll over. Sleep." (parked) | Friday night in your bed: Kayla is over, and the wall is thin. |
 | 6 | `ryan_06_after_the_shower` | `home_bathroom` | Sat 08:00–10:00 | Exhibitionism 40 · his Want 50 | want add +5 · exhibitionism add +3, cap 79 | "Reach for the towel." (parked) | Saturday morning, the shower: Kayla is still in the house. |
-| 7 | `ryan_07_kayla_cant_know` (new) | `home_ryan_room` | Mon, Tue, Thu, Sun 19:00–22:00 | Corruption 60 · his Want 60 (was Corruption 40) | want add +5 · corruption add +3, cap 79 | on the step sheet (LO confirms) | Ryan's room, an evening he's home: two knocks. |
+| 7 | `ryan_07_kayla_cant_know` (new) | `home_ryan_room` | Mon, Tue, Thu, Sun 20:30–00:00 (reach audit 2026-11-09) | Corruption 60 · his Want 60 (was Corruption 40) | want add +5 · corruption add +3, cap 79 | on the step sheet (LO confirms) | Ryan's room, an evening he's home: two knocks. |
 | 8 | `ryan_08_two_knocks_first_sex` (new) | `home_ryan_room` | Sun–Thu 22:00–00:00 | Corruption 60 · his Want 70 (was Corruption 40) | want add +5, on the sex ("Lie there."); his terms and "(ends his path)" add 0 · the step-8 repeat opens | on the step sheet (LO confirms) · the final: "You're my brother, that's all." (ends his path) | Ryan's room, late, any night but Friday: two knocks. |
 | — | not written | — | — | — | — | — | no button; his card ends "More of Ryan in the next release." (DECISIONS 134) |
 
@@ -159,13 +164,13 @@ tick like `ryan_towel_today`). Each replays with a POOL of lines. None shows wit
 
 | opens after | where · when | what she does | gate | change from built |
 |---|---|---|---|---|
-| step 2 and the hall accident (`ryan_hall_seen`) | his doorway, evenings he's home | a first tease for one person (H3): she leans in his door in what she has on, names what he's looking at, and leaves on "not tonight"; his reaction written on his body (rewritten, `ryan_doorway_lean.md`) | Curious (was none) · pays Corruption +1, cap 39 | new |
-| step 4 (was 3) | the couch, Sat/Sun 14:00–18:00 | feet in his lap, rubbing him through his shorts until he's hard and the game's forgotten | Bold (was Curious) · cap 59 | built ("Put your feet in his lap"), pays +3 not +1, rewritten to go further |
+| step 2 and the hall accident (`ryan_hall_seen`) | his doorway, evenings and nights he's in (not Friday or Saturday) | a first tease for one person (H3): she leans in his door in what she has on, names what he's looking at, and leaves on "not tonight"; his reaction written on his body (rewritten, `ryan_doorway_lean.md`) | Curious (was none) · pays Corruption +1, cap 39 | new |
+| step 4 (was 3) | the couch, Sat/Sun 14:00–18:00 and weekday evenings (his living-room rows) | feet in his lap, rubbing him through his shorts until he's hard and the game's forgotten | Bold (was Curious) · cap 59 | built ("Put your feet in his lap"), pays +3 not +1, rewritten to go further |
 | step 4 | the couch | she watches his game in her underwear; he has to adjust himself, and she makes him say why | Daring | new |
-| step 6 (was 5) | his bed, evenings | she lies on his bed and touches herself until she comes; he isn't allowed to touch, only watch | Bold · Showing (was Curious · Daring) · cap 59 | new |
-| step 6 | his room, evenings | naked in his room; he strokes himself while she watches, and she tells him when he can come | Showing · cap 59 | new |
+| step 6 (was 5) | his bed, evenings and weekend mornings (Saturday after Kayla goes) | she lies on his bed and touches herself until she comes; he isn't allowed to touch, only watch | Bold · Showing (was Curious · Daring) · cap 59 | new |
+| step 6 | his room, evenings and weekend mornings | naked in his room; he strokes himself while she watches, and she tells him when he can come | Showing · cap 59 | new |
 | step 7 | the couch, under the blanket | a handjob to the end under the blanket, with Mark's radio on in the next room | Hungry (was Bold) · Daring · cap 79 | built ("Share the blanket"), pays +3 not +1, now finishes |
-| step 8 | his room, two knocks, not Friday | a menu (changed 2026-11-02): a kiss at the door, then her pick of the act, more opening as his Lust climbs (70 / 80 / 90); a near-catch screen (Laura knocks, Kayla calls, or nothing); her pick of finish | — (step 8 needs Corruption 60) · cap 79 (was 59) | new, replaces the built two-knocks repeat |
+| step 8 | his room, two knocks: Sun–Thu nights 22:00–00:00, Saturday 10:00–14:00, Sunday 08:00–14:00 (reach audit 2026-11-09) | a menu (changed 2026-11-02): a kiss at the door, then her pick of the act, more opening as his Lust climbs (70 / 80 / 90); a near-catch screen (Laura knocks, Kayla calls, or nothing); her pick of finish | — (step 8 needs Corruption 60) · cap 79 (was 59) | new, replaces the built two-knocks repeat |
 
 The towel slip and the drop (DECISIONS 98) stay as they are.
 

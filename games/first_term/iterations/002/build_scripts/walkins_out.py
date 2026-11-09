@@ -181,7 +181,7 @@ walkin("walkin_gym_team", "The team comes in", "campus_gym",
     [P("You're flat on your back on the bench with the bar over your chest, alone in the free-weights corner."),
      GC(cond(*SPORTS_ONLY), P("Just your sports bra and your bottoms. Your tits strain the bra every time you press the bar up.")),
      GC(cond(*ANY), P("Your clothes are stuck to you with sweat.")),
-     P("The double doors bang open and the team comes in for training, a dozen big guys in team jerseys, loud, bags over their shoulders.")],
+     P("The double doors bang open and the team comes in off the pitch for weights, a dozen big guys in team jerseys, loud, sweating.")],
     "They've seen you.",
     [GC(cond(*SPORTS_ONLY), P("The noise stops. A dozen of them look at you at once: your tits in the sports bra, your stomach, your legs spread either side of the bench. One of them whistles, long and low."),
        WHO("Bench is ours now, cutie, but take your time."),
@@ -218,8 +218,8 @@ walkin("walkin_gym_team", "The team comes in", "campus_gym",
                                          P("You rack the bar and sit up slow, and take your time wiping down the bench."),
                                          VID("a girl in a sports bra on a weight bench, a sports team standing round watching her", "girl in sports bra lifting team watching gym", "guys staring at girl working out gym bench", pool_dir="sex/walkin_gym_team_t4")],
             "Leave them staring.", "campus", 5, flags=[fset("worked_out")])],
-    when=[wd(1, 3), tod("15:00", "15:15")])
-rule("gym_workout", "walkin_gym_team", 0.25, wd(1, 3), tod("15:00", "15:15"))
+    when=[wd(1, 3), tod("15:00", "16:15")])   # reach audit 2026-11-09 (DECISIONS 218): the person's row, not 15 minutes
+rule("gym_workout", "walkin_gym_team", 0.25, wd(1, 3), tod("15:00", "16:15"))
 
 # ═════════════════════════════════════════════════════════════════════════════
 # B11 · THE CANTEEN (hosts canteen_eat, canteen_listen), as their lunch rows start at 11:45 (built differently from
@@ -254,7 +254,7 @@ walkin("walkin_canteen_zoe", "Budge up", "canteen",
                                       G(cond(wd(4)), D(Z, "Tonight, my place. No table in the way, babe.")),
                                       G(cond(wd(0, 2)), D(Z, "Friday, my place. No table in the way, babe."))],
             "Leave her to her fries.", "canteen", 10)],
-    when=[wd(0, 2, 4), tod("11:45", "12:00")])
+    when=[wd(0, 2, 4), tod("11:45", "12:45")])   # reach audit 2026-11-09 (DECISIONS 218): the person's row, not 15 minutes
 
 walkin("walkin_canteen_jake", "The team's table", "canteen",
     "B11, Jake: at the start of lunch he and two of the team drop their trays at her table; in a short skirt he shows her legs off to them. A group look that happens to her: skirt down 0, leave it +1 cap 19 (Exhibitionism).",
@@ -286,7 +286,7 @@ walkin("walkin_canteen_jake", "The team's table", "canteen",
         res("j_leave", "Leave it", [P("You leave it. You eat your lunch with your skirt up round your thighs and three of them staring at your legs, but you don't look up. Your face is on fire. Your nipples are hard, and the one on the left sees that too."),
                                     D(J, "Told you, didn't I?"), D(J, "Training's at three. Come and watch. Wear that.")],
             "Leave them to their trays.", "canteen", 10)],
-    when=[wd(1, 3), tod("11:45", "12:00")])
+    when=[wd(1, 3), tod("11:45", "12:45")])   # reach audit 2026-11-09 (DECISIONS 218): the person's row, not 15 minutes
 
 walkin("walkin_canteen_nadia", "Nadia sits down", "canteen",
     "B11, Nadia: at lunch she sits down opposite with a line about Dr. Hale. No heat, no pay.",
@@ -299,12 +299,12 @@ walkin("walkin_canteen_nadia", "Nadia sits down", "canteen",
      G(cond(trait("hale_step", "gte", 2)), D(N, "He knows yours already, doesn't he? I've seen him look.")),
      P("She stabs a tomato and doesn't look up.")],
     [go("Eat with her.", loc="canteen", mins=15)],
-    records=["nadia_canteen_hale"], when=[wd(0, 1, 2, 3, 4), tod("12:00", "12:15")])
+    records=["nadia_canteen_hale"], when=[wd(0, 1, 2, 3, 4), tod("12:00", "12:45")])   # reach audit 2026-11-09 (DECISIONS 218): the person's row, not 15 minutes
 
 for host in ("canteen_eat", "canteen_listen"):
-    rule(host, "walkin_canteen_zoe", 0.25, here(Z, "canteen"), wd(0, 2, 4), tod("11:45", "12:00"))
-    rule(host, "walkin_canteen_jake", 0.25, here(J, "canteen"), wd(1, 3), tod("11:45", "12:00"))
-    rule(host, "walkin_canteen_nadia", 0.25, here(N, "canteen"), flag("hale_met"), wd(0, 1, 2, 3, 4), tod("12:00", "12:15"))
+    rule(host, "walkin_canteen_zoe", 0.25, here(Z, "canteen"), wd(0, 2, 4), tod("11:45", "12:45"))
+    rule(host, "walkin_canteen_jake", 0.25, here(J, "canteen"), wd(1, 3), tod("11:45", "12:45"))
+    rule(host, "walkin_canteen_nadia", 0.25, here(N, "canteen"), flag("hale_met"), wd(0, 1, 2, 3, 4), tod("12:00", "12:45"))
 
 # ═════════════════════════════════════════════════════════════════════════════
 # B12 · THE LIBRARY (host library_study, not the stacks): Nadia, 14:30-14:45 on her library days, as her row there
@@ -315,7 +315,7 @@ SAW = flag("saw_the_library_couple")
 walkin("walkin_library_nadia", "Nadia sits down", "library",
     "B12, Nadia: in for her library afternoon, she sits beside her and talks about the back stacks. No pay; nadia_knows_stacks once she has seen them.",
     [here(N, "library"), flag("nadia_met")],
-    [P("You've got a desk under a green lamp and the Psychology reader open. Nadia comes in with her bag, drops into the chair beside yours and plugs her laptop into your socket without asking.")],
+    [P("You've got a desk under a green lamp and the Psychology reader open. Nadia comes back from the stacks with her bag, drops into the chair beside yours and plugs her laptop into your socket without asking.")],
     "She leans over.",
     [D(N, "This is the only desk with a plug. Don't take it personally."),
      GC(cond(SAW), P("She sees you glance at the back stacks, and her eyebrows go up."),
@@ -325,8 +325,8 @@ walkin("walkin_library_nadia", "Nadia sits down", "library",
         P("She doesn't say what kind. She doesn't have to."))],
     [go("Get back to work.", loc="library", mins=15, cond_=cond(SAW), flags=[fset("nadia_knows_stacks")]),
      go("Get back to work.", loc="library", mins=15, cond_=cond(flag("saw_the_library_couple", False)))],
-    when=[wd(0, 1, 2, 4), tod("14:30", "14:45")])
-rule("library_study", "walkin_library_nadia", 0.25, here(N, "library"), wd(0, 1, 2, 4), tod("14:30", "14:45"))
+    when=[wd(0, 1, 2, 4), tod("14:30", "17:45")])   # reach audit 2026-11-09 (DECISIONS 218): the person's row, not 15 minutes
+rule("library_study", "walkin_library_nadia", 0.25, here(N, "library"), wd(0, 1, 2, 4), tod("14:30", "17:45"))
 
 # ═════════════════════════════════════════════════════════════════════════════
 # B13 · THE PARK (hosts park_run, park_rest): Zoe, Saturday and Sunday 08:00-08:15, as her run row starts (built
@@ -353,7 +353,7 @@ walkin("walkin_run_zoe", "Race you", "park",
      D(Z, "Race you round the pond. I'll let you have the last stretch."),
      P("Your ass is still stinging where her hand was, and she knows it."),
      D(Z, "That one was free. Run with me, and I get to look at it all the way to the gates.")],   # reader pass 4 b1: the slap's price; scene reader 2026-11-04: what hub_zoe_park.lap does
-    park_answers(), records=["zoe_caught_up"], shared=("walkin_rest_zoe",), when=[wd(5, 6), tod("08:00", "08:15")],
+    park_answers(), records=["zoe_caught_up"], shared=("walkin_rest_zoe",), when=[wd(5, 6), tod("08:00", "09:45")],   # reach audit 2026-11-09 (DECISIONS 218): the person's row, not 15 minutes
     extra=[res("z_on", "Run on", [ME("Go on without me, Zo."), D(Z, "Your loss. That's a great view you're taking home."),
                                   P("She slaps your ass again on her way past, harder, and is off down the path before you can hit her back.")],
                "Watch her go.", "park", 2)])
@@ -366,12 +366,12 @@ walkin("walkin_rest_zoe", "Pillow", "park",
     [P("Zoe, in tiny shorts and a sports top, her ponytail spread across your thighs, her face turned in against your stomach. She's warm and smells of sun cream."),
      D(Z, "Five minutes. Then we run. Don't move, you're comfy."),
      P("Her cheek rubs against your thigh when she talks, and her hand settles on your hip.")],
-    park_answers(), records=["zoe_caught_up"], shared=("walkin_run_zoe",), when=[wd(5, 6), tod("08:00", "08:15")],
+    park_answers(), records=["zoe_caught_up"], shared=("walkin_run_zoe",), when=[wd(5, 6), tod("08:00", "09:45")],   # reach audit 2026-11-09 (DECISIONS 218)
     extra=[res("z_on", "Run on", [ME("I'm not running, Zo. Go."), D(Z, "Lazy. Fine. Keep my pillow warm."),
                                   P("She pats your thigh twice, rolls off the bench and jogs away backwards, grinning at you till the path bends.")],
                "Watch her go.", "park", 2)])
 for host, cid in (("park_run", "walkin_run_zoe"), ("park_rest", "walkin_rest_zoe")):
-    rule(host, cid, 0.25, here(Z, "park"), wd(5, 6), tod("08:00", "08:15"))
+    rule(host, cid, 0.25, here(Z, "park"), wd(5, 6), tod("08:00", "09:45"))
 
 # ═════════════════════════════════════════════════════════════════════════════
 # B14 · THE HOT TUB (host party_house_soak, Watched 60): Zoe, at the party house on her Saturday row, gets in beside
@@ -416,8 +416,8 @@ walkin("walkin_tub_zoe", "Zoe gets in", "party_house",
             "Get out, dripping.", "party_house", 30, **TUB_EXIT)],
     # pass 4 reader (true on every visit): Zoe leaves the party house at midnight, so the walk-in rolls till 23:45 and
     # its last screen (moment +2, tub_let +10) still lands before 00:00
-    when=[wd(5), tod("23:30", "23:45")], moment_wardrobe=STRIP)
-rule("party_house_soak", "walkin_tub_zoe", 0.25, here(Z, "party_house"), wd(5), tod("23:30", "23:45"))
+    when=[wd(5), tod("20:15", "23:45")], moment_wardrobe=STRIP)   # reach audit 2026-11-09 (DECISIONS 218): the person's row, not 15 minutes
+rule("party_house_soak", "walkin_tub_zoe", 0.25, here(Z, "party_house"), wd(5), tod("20:15", "23:45"))
 
 # ═════════════════════════════════════════════════════════════════════════════
 # B15 · THE QUAD (host quad_grass). Jake and the team, Mon, Wed, Fri 08:30-08:45 as their row starts, when her
@@ -453,7 +453,7 @@ walkin("walkin_quad_team", "The team's spot", "quad",
                                     # reader pass 3 b01: the hook; his rows have the team here Mon, Wed, Fri mornings
                                     D(J, "We're here Monday, Wednesday and Friday mornings, @player. Same spot. Same slope.")],
             "Get up.", "quad", 15)],
-    when=[wd(0, 2, 4), tod("08:30", "08:45")])
+    when=[wd(0, 2, 4), tod("08:30", "11:30")])   # reach audit 2026-11-09 (DECISIONS 218): the person's row, not 15 minutes
 
 walkin("walkin_quad_zoe", "Pillow", "quad",
     "B15, Zoe: arriving for her afternoon on the grass, she lies down with her head in her lap. Her answer on Corruption: sit up 0, leave her +1 cap 19, her hand on her thigh (Curious) +1 cap 39.",
@@ -478,9 +478,9 @@ walkin("walkin_quad_zoe", "Pillow", "quad",
                                     P("She's looking up at your face while she does it. Your nipples go hard, and she sees them, upside down, and grins. On the next blanket two guys have stopped talking."),
                                     D(Z, "Your face, babe. Your face right now."), ME("Zoe. People are looking."), D(Z, "Then let them.")],
             "Get up.", "quad", 10)],
-    when=[wd(1, 3, 4), tod("14:30", "14:45")])
-rule("quad_grass", "walkin_quad_team", 0.25, here(J, "quad"), SKIRT, wd(0, 2, 4), tod("08:30", "08:45"))
-rule("quad_grass", "walkin_quad_zoe", 0.25, here(Z, "quad"), wd(1, 3, 4), tod("14:30", "14:45"))
+    when=[wd(1, 3, 4), tod("14:30", "17:45")])   # reach audit 2026-11-09 (DECISIONS 218): the person's row, not 15 minutes
+rule("quad_grass", "walkin_quad_team", 0.25, here(J, "quad"), SKIRT, wd(0, 2, 4), tod("08:30", "11:30"))
+rule("quad_grass", "walkin_quad_zoe", 0.25, here(Z, "quad"), wd(1, 3, 4), tod("14:30", "17:45"))
 
 # ═════════════════════════════════════════════════════════════════════════════
 # B16 · THE LECTURE HALL (host lecture_timetable): Dr. Hale comes in for his Psychology lecture as his row starts,
@@ -610,8 +610,8 @@ walkin("walkin_house_vance", "Out on his porch", "vance_house",
                                            D(V, "Nice. Very nice. Same time tomorrow, Miss?"), ME("Maybe."), D(V, "I'll be out here either way."),
                                            P("When you finally walk on, you can feel his eyes on your ass all the way down the street.")],
             "Walk on.", "street", 5)],
-    when=[tod("18:00", "18:15")])
-rule("vance_house_look", "walkin_house_vance", 0.25, here(V, "vance_house"), tod("18:00", "18:15"))
+    when=[tod("18:00", "21:45")])   # reach audit 2026-11-09 (DECISIONS 218): the person's row, not 15 minutes
+rule("vance_house_look", "walkin_house_vance", 0.25, here(V, "vance_house"), tod("18:00", "21:45"))
 
 # ═════════════════════════════════════════════════════════════════════════════
 # B20 · THE FIVE OFFICE DOORS (hosts door_grade_*, door_dean_notice): the person in each office opens the door while
@@ -655,7 +655,7 @@ one_screen("walkin_door_dean", "The door opens", "dean_office",
      G(cond(slot("bra"), NOT_SKIRT), D(DEAN, "The list is on the door so that you read it, @player. Read it and move along. Make sure your name never goes on it, or you'll be sitting in my hard chair."))],
     "Step back out onto the faculty floor.", "faculty_floor", ["dean_door_seen"])
 one_screen("walkin_door_hale", "The door opens", "hale_office",
-    "B20, Dr. Hale: he opens his door in his Thursday hours; his line by his step. No pay.",
+    "B20, Dr. Hale: he opens his door in his office hours; his line by his step. No pay.",
     [here(H, "hale_office"), flag("hale_met")],
     [P("You've got your finger on your grade when Dr. Hale opens his door."),
      G(cond(trait("hale_step", "lt", 3)), P("He sees you there, and his eyes go down your legs before they come back up to your face."),
@@ -673,7 +673,7 @@ _hale_door[0]["choices"] = [go("Step back.", node="no")]
 _hale_door.append(node("no", "Step back", [
     G(cond(trait("hale_step", "lt", 3)), P("You step back. He watches your legs go, and lets the door swing shut.")),
     G(cond(trait("hale_step", "gte", 3)), P("You take a step back from his door."),
-      D(H, "Suit yourself. You know where I am on Thursdays."),
+      D(H, "Suit yourself. You know my office hours."),
       P("He shuts the door on you, quietly, and you hear him sit back down.")),
 ], [dict(_hale_out, text="Walk away.", locationId="faculty_floor")]))
 one_screen("walkin_door_business", "The door opens", "business_office",
