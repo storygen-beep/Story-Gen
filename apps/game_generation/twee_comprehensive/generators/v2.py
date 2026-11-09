@@ -15728,7 +15728,7 @@ document.addEventListener("click", function (ev) {
                         # Skip flags set by starting canvas (plays automatically)
                         if starting_canvas_id and info.get("canvas_id") == starting_canvas_id:
                             continue
-                        if not info.get("location") and not info.get("schedule"):
+                        if not info.get("location") and not info.get("schedule") and not info.get("is_phone"):  # a phone setter hints "📱 Check your messages"
                             errors.append({
                                 "flag_key": flag_key,
                                 "canvas_name": canvas.name,
@@ -15760,7 +15760,7 @@ document.addEventListener("click", function (ev) {
                                 info = flag_unlock_map[flag_key]
                                 if starting_canvas_id and info.get("canvas_id") == starting_canvas_id:
                                     continue
-                                if not info.get("location") and not info.get("schedule"):
+                                if not info.get("location") and not info.get("schedule") and not info.get("is_phone"):  # a phone setter hints "📱 Check your messages"
                                     errors.append({
                                         "flag_key": flag_key,
                                         "canvas_name": canvas.name,

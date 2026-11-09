@@ -1503,7 +1503,7 @@ A flag read as `is_false` and cleared here, with **no canvas setting it**, is a 
 closes. Nothing in the toolchain objects: the generator's flag-chain validator only reports a
 never-set flag when a condition requires it `is_true` (`validate_flag_chains()`, `v2.py:15621`; the
 test at `:14187`) — deliberately, since an
-`is_false` read is a re-entry guard rather than a prerequisite — so the gate simply fails open.
+`is_false` read is a re-entry guard rather than a prerequisite — so the gate simply fails open. A setter the validator accepts is a located canvas, an engine-set flag, or (since 2026-11-09) a phone reply, `on_ignore`, profile or call outcome (`"is_phone"`), which hints "📱 Check your messages".
 
 A talk screen capped this way stays clickable all day and out-earns the day-capped
 rungs it sits below. `scripts/gates.py` gate **`a day-cap closes`** exists for exactly this.

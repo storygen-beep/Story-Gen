@@ -1215,9 +1215,10 @@ round-2 passage files.
 - **Showing off may be one source among several.** In curse-of-the-abyss it brings 5 of the 30; her father's chores
   and the bandits bring the rest (`co:3600-3611`, `co:4375-4381`).
 
-**Build lesson.** A phone text is the natural way for a friend to ask, but a trigger cannot read a flag that only a
-phone reply sets: the flag-chain check refuses the build ("MISSING HINT", `validate_flag_chains`, `engine.md` §28.2).
-Have the reply raise a hidden trait and gate the asks on that; keep the flag for cards and guards.
+**A phone text can start it.** A text is the natural way for a friend to ask, and a trigger may read the flag her
+reply sets. Until 2026-11-09 the flag-chain check refused that ("MISSING HINT", `validate_flag_chains`) and the
+workaround was a hidden trait; the engine now counts a phone reply as a located setter, as its hint already did
+("📱 Check your messages"), so read the flag.
 
 Built in first_term (DECISIONS 210, `iterations/002/build_scripts/goals.py`): Zoe's crowd of ten (the recruiting
 kind) and the study guy's five chapters of notes for a grade (no exact model in the studied games).

@@ -5,6 +5,22 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-09 — a phone reply is a located flag setter (engine)
+
+- **Engine, `v2.py` `validate_flag_chains`:** both MISSING HINT checks (triggers and choices) now accept a setter
+  marked `"is_phone"`. `_build_flag_unlock_map` already registered phone replies, `on_ignore`, profiles and call
+  outcomes that way, and the runtime hint already said "📱 Check your messages"; only the check refused them.
+  Edited in place on the two lines, so no cited line moved. New test
+  `apps/game_generation/tests/test_flag_chain_phone_setter.py` (a phone setter passes; a triggerless canvas setter
+  still fails; the first test fails on the old engine).
+- **`references/the-surfaces.md`** "Showing off to get something": the build lesson now says a trigger may read the
+  flag a phone reply sets. **`references/engine.md` §28.2:** the end of an existing line names the setters the
+  validator accepts. No line moved.
+- Why: LO, 2026-11-09, "Continue" (item 4); first_term DECISIONS 210 had worked round it with a hidden trait, now
+  removed. Verified: new and existing engine tests pass; first_term builds with the asks reading `zoe_crowd_on`,
+  gates 118, 0 fails, headless asks open at 20 with the flag only; vesper built with the old and new engine is
+  byte-identical.
+
 ## 2026-11-09 — showing off to get something; check her stage once
 
 - **`references/the-surfaces.md`:** new end section, "Showing off to get something". She shows off to reach a goal

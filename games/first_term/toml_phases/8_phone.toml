@@ -524,8 +524,8 @@ content = "i'll make it worth it"
 type = "reply"
 round = 1
 choices = [
-  { text = "ten? easy", flagEffects = [{ targetType = "player", flag = "zoe_crowd_on", op = "set" }], effects = [{ targetType = "player", trait = "zoe_crowd_asked", op = "add", value = 1, clamp = true }] },
-  { text = "how do i get ten people", flagEffects = [{ targetType = "player", flag = "zoe_crowd_on", op = "set" }], effects = [{ targetType = "player", trait = "zoe_crowd_asked", op = "add", value = 1, clamp = true }] },
+  { text = "ten? easy", flagEffects = [{ targetType = "player", flag = "zoe_crowd_on", op = "set" }] },
+  { text = "how do i get ten people", flagEffects = [{ targetType = "player", flag = "zoe_crowd_on", op = "set" }] },
   { text = "not my thing" },
 ]
 [[phone.conversations.blocks]]

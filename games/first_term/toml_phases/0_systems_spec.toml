@@ -539,11 +539,6 @@ label  = "His notes"
 hidden = true
 
 [[traits.labels]]
-key    = "zoe_crowd_asked"
-label  = "Zoe asked"
-hidden = true
-
-[[traits.labels]]
 key    = "rep_garden"
 label  = "Times: garden"
 hidden = true
