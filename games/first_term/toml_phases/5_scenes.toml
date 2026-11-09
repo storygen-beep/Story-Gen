@@ -11568,7 +11568,7 @@ nodeId = "hl_laundry_tease3"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }, { type = "clothing_slot", slot = "top", operator = "equipped" }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "flag", subject = "player", flag_key = "did_laundry", operator = "is_false" }] }
 effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 4, cap = 100 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "rep_mark_laundry", op = "add", value = 1, clamp = false }]
 flagEffects = [{ targetType = "player", flag = "did_laundry", op = "set" }, { targetType = "player", flag = "rep_mark_laundry_now", op = "set" }]
-wardrobeEffects = [{ action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "low_top" }]
+wardrobeEffects = [{ action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "low_top" }, { action = "unequip", item_id = "gym_tank" }, { action = "unequip", item_id = "crop_top" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "Not now."

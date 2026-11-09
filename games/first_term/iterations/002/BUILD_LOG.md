@@ -1685,3 +1685,12 @@ The engine's flag-chain check now accepts a phone reply as a located setter (v2.
 apps/game_generation/tests/test_flag_chain_phone_setter.py). goals.py's three asks read zoe_crowd_on again; the hidden
 trait zoe_crowd_asked is gone from phone.py, gen_world.py and 0_systems_spec.toml. Build: all flag chains valid; gates
 118, 0 fails. Headless: the quad row shows at E20 with only zoe_crowd_on set, not at 19; the counts unchanged.
+
+## 2026-11-09 — Mark's laundry tease takes off every top
+
+The reader (DECISIONS 211 pass) found that hub_mark_garage's "Wash what you're wearing." took off only the t-shirt, the
+thin top and the low top, while its screen says her top is in the washer; in the crop top or the gym tank it stayed on.
+mark.py now unequips all five tops, as the walk-in copy (walkins.py) already did. Gates 118, 0 fails. Headless: in the
+crop top, the gym tank and the t-shirt, after the choice the top slot is empty, 0 page errors. The garden lounger's
+topless choice at 40 was checked with LO and stays (DECISIONS 124: topless by choice for one person she knows, at home,
+is Showing; DECISIONS 203 is about accidents and strangers).
