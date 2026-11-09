@@ -5,6 +5,22 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-09 — a repeat: the first time, then routine
+
+- **`references/the-surfaces.md`:** new section at the end, "A repeat: the first time, then routine". A daily loop
+  that pays her stage meter shows a first-time line once, then a routine line by her stage band (below 40, 40-59,
+  60+), as in Course of Temptation (first-time flag, then routine by meter, `cot_40_events.js:614-615`, `:1500-1508`).
+  Records curse-of-the-abyss's per-count shape and In Her Own Hands' count-plus-meter shape as the alternatives, and
+  that a 1 / 2-4 / 5+ split is in no studied game. Why: LO, 2026-11-09, "lets have it cot shaped. One time the
+  routine" ("Routine by stage"), after a scout checked first_term's DECISIONS 209 bands against the games
+  (SKILL_NOTEBOOK N34). Appended at the end so no cited line moves.
+- **`scripts/gates.py` `_voice_only_sites` (gate `the climb is where you said it is`):** a group that holds only
+  narration (`paragraph`) now counts as voice, like her thought or her line: text chosen by her level opens nothing.
+  Edited in place, the docstring's two lines and one condition line; no line moved. `references/the-meters.md`
+  Gate 34's sentence says so, same line. Why: LO, 2026-11-09, "Fix the check": first_term's routine lines by stage add
+  about 110 stage reads to narration and would have failed the climb split (25% to about 23%) without gating
+  anything. Verified: first_term gates 118, 0 fails after the routine rewrite; cite_check 0 wrong.
+
 ## 2026-11-08 — a swap uses up the host's daily visit
 
 - **`references/engine.md` §46 (`substitution_only`):** new warning. A substitution swaps in after the host's click has

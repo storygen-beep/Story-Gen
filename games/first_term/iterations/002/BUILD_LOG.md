@@ -1669,3 +1669,12 @@ no-panties lines that said "nothing under"; the table's nipple line with a bra o
 card's 2 AM; the notes row during his Business class; the low-Intelligence paper line beside "by heart"; his offer with no
 refusal), fixed. Re-read: 3 more (the gym's off line had her seated, the notes' off line fit neither path, exam_by_notes read
 on all four results), fixed. Final: gates 118, 0 fails; shape 22 pass; cites 0 wrong; headless as above, 0 page errors.
+
+## 2026-11-09 — the first time, then routine
+
+DECISIONS 211. drift.py: lines per loop are (first, shy, easy, proud); the chain shows the first line once by the counter, then the routine line by her stage meter (METER: corruption for home_event_ryan_door), fenced as before. 27 new Watched lines. Skill: gates.py _voice_only_sites counts narration-only groups as voice (edited in place, no line moved); the-meters.md Gate 34 line; the-surfaces.md new end section; CHANGELOG. First build: 3 gate fails (narration to dialogue, a person at midnight, the `but` rate), fixed with dialogue in goals.py and reworded lines. Gates 118, 0 fails; shape 22 pass; cites 0 wrong; skill selfcheck current, 107 tests passed. Headless: the street skirt shows the first line at count 0, the shy line at count 3 and E20, easy at E45, proud at E65 and at count 9; the gym shows first at count 0, shy at count 3 and E10.
+Reader on the routine lines: 37 paid nodes x 3 bands, 35 moot; of 76 live, 11 fails and 12 doubtful (lines that clashed
+with their screen, night hours with no one on the street, a choice of bare skin below 60), all rewritten. Re-read: 1 more
+(the shower's "nobody does" after a walk-in can try the handle), fixed. Final: gates 118, 0 fails; shape 22 pass; cites 0
+wrong; sweep 5,120 clicks, 0 page errors. Left as found, the scenes' own gates: garden_sun's topless choice opens at 40
+(DECISIONS 203 says 60), and Mark's laundry tease takes off only three kinds of top while its text says "your top".

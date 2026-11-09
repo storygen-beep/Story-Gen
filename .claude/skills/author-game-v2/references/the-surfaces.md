@@ -1152,3 +1152,31 @@ characters be differentiated *as people* would fail the seventh-ranked game in t
 
 > ⚠️ **Before adding a gate here, apply `SKILL.md`'s operating rule:** ask what a tired author would
 > build to satisfy it, and check that the answer is the thing you actually want.
+
+## A repeat: the first time, then routine (LO, 2026-11-09)
+
+A loop the player repeats daily, one that pays her stage meter, reads the same on the tenth visit as on the first
+unless something on its screen remembers. Course of Temptation's shape is the model: **a first time, once, then
+routine, and the routine reads her stage, not the count.** CoT keeps a first-time flag
+(`$firsttime.toplessserving`, set inside the unique event) and after it treats the act as routine: a store of the
+last day it happened (`setup.Events.register_event`, `memory[event] = day`, `cot_40_events.js:614-615`) and
+smaller needs on the repeat (`// this is... routine!`, `:1500-1508`), with her inclination choosing shame or
+composure.
+
+- **The first time** is its own line, shown once: picked by a hidden per-loop counter (or a flag) set by the answer
+  that pays her. It is true only once, so the gate `a repeat doesn't say it's the first time` holds.
+- **The routine** is one line per stage band of the meter the loop pays: below 40, 40 to 59, 60 and up in a
+  0-100 game. Each line says what this act has become for her at that stage (still tugging the hem; not touching
+  it; walking slow so they look). It is narration about her body and the watchers, not her thought, so a screen
+  that already has a stage thought doesn't get two.
+- **Narration chosen by her level opens nothing.** `the climb is where you said it is` skips a group that holds only
+  narration, her line or her thought (`the-meters.md` Gate 34), so stage-banded routine lines don't count as climb.
+- **What the other games do, so the choice is a choice:** curse-of-the-abyss branches on each exact count, one
+  line per repeat (1st, 2nd, 3rd, 4th and after, then a random pool), and ignores the count at the next
+  corruption level (`co:1543-1622 [GuildSex1]`, `co:1536-1539`); In Her Own Hands needs the count and her meter
+  together (`in-her-own-hands.txt:45969-46012`). A count-banded split such as 1 / 2-4 / 5+ is in no studied game.
+- **Fence it.** Adjacent condition groups join one if/elseif chain (`engine.md`; `v2.py:18686-18691`), so the
+  first-time-then-routine chain goes in its own one-item group, or it becomes the else of the screen's last group.
+
+Built in first_term (DECISIONS 209, changed in 211; `iterations/002/build_scripts/drift.py`). Not gated: whether a
+loop's routine line says something new at each stage is a reading, not a count.

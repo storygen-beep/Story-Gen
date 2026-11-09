@@ -1,4 +1,5 @@
 # [READY] Place — Gym
+> Changed 2026-11-09 (DECISIONS 211, LO: "lets have it cot shaped. One time the routine"): the Repeats section now reads the first time once, then routine by stage. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-09 (DECISIONS 210, LO: "Go ahead"): showing off to get something, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-09 (DECISIONS 209, LO: "Go ahead"): her reaction drifts when she does it again, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 205): "Do your squats anyway." in the sheer leggings needs panties; with none it would show her bare to the floor (80, not this release). Re-signed by LO 2026-11-08 ("Sign them").
@@ -111,6 +112,8 @@ From Exhibitionism 40 a bra and a bottom will do, as on the street; below 40 a b
 The gym's four looks ("let them look", the mats, the squats, the mirror wall) share one hidden visit count. The screen after her yes gets one paragraph that moves with it: the first time, the
 next few (2 to 4), and once it's a habit (5 and up). It's about her body's habit and the watchers' habit, so it is true at
 every stage; her stage thought stays as it was. Lines: `iterations/002/build_scripts/drift.py`.
+
+**Changed 2026-11-09 (DECISIONS 211).** Course of Temptation's shape now: the count only picks the first time, shown once. Every visit after is routine, and the routine line reads her stage: below 40 (Covered, Daring), 40 to 59 (Showing), 60 and up (Watched). The old "next few" and "habit" lines are the first two routine lines; each loop has a new line for Watched. (Ryan's door reads Corruption.)
 
 ## Zoe's crowd (2026-11-09, DECISIONS 210)
 

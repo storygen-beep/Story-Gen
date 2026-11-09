@@ -93,7 +93,7 @@ rest of this file follow from it.
 **Gate 34 · the climb is where you said it is.** Declare-then-check: the measured split must match
 the declaration (`player` ≥60% on her tiers · `cast` ≥60% on the cast · `both` ≥25% each). The cut
 points sit inside the corpus's own empty band, so nothing here was invented — but what is judged is
-the game against **its own declaration**, never against a number this file picked. A group holding only her own line or thought by level is not a gate here: her voice opens nothing, so the check skips it (LO, 2026-11-04).
+the game against **its own declaration**, never against a number this file picked. A group holding only narration, her own line or her thought by level is not a gate here: text opens nothing, so the check skips it (LO, 2026-11-04; narration added 2026-11-09).
 
 ### What each man keeps score of
 
