@@ -1,4 +1,5 @@
 # [READY] System — wardrobe
+> Changed 2026-11-09 (DECISIONS 208, LO: "I say we tackle 1st fewer cloths first"): more clothes, round 2, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 206, LO: "She will buy. Completely her decision"): two café dresses she buys from Tom, new section at the end. Re-signed by LO 2026-11-08 ("Go ahead with 1 and 2").
 > Changed 2026-11-08 (DECISIONS 205): everyday clothes by stage, new section below. Re-signed by LO 2026-11-08 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 198): four gym pieces, a shop line on every bought piece, and the gym's locker room. Re-signed by LO 2026-11-08 ("Sign 4 pages").
@@ -221,3 +222,20 @@ normal one on; clock-out takes all four off.
   59), and the cut giving in the low-cut dress with no bra (a nipple out; "Finish pouring." Exhibitionism 60, cap 79).
   A moment each, never topless (DECISIONS 204).
 - Tom's lines stay strict ("Bend from the knees. I'm not running a floor show."). Gary has a line for each.
+
+## More clothes, round 2 (2026-11-09, DECISIONS 208)
+
+Course of Temptation's side-split and minidress at its level 2 (our 20) and its backless minidress at its 4 (our 60)
+(`exhibition_study/A_cot.md:204-212`), and a lace set she buys, locked by Corruption as a private piece (DECISIONS 197
+rule 3). Legwear (tights, fishnets) waits for its own round, with an audit of the skirt lines that name bare legs
+(LO, 2026-11-09: "Skip legwear for now").
+
+| piece | slot | lock | price | shop line | read by |
+|---|---|---|---|---|---|
+| Split skirt | bottom | Exhibitionism 20 | $25 | "Slit to the hip. Every step shows your whole leg." | street look · Psychology and Figure drawing · Zoe on the quad and at the party house · Zoe at the party door · street accident (the wind in the slit, panties: letting it be at 40) |
+| Sequin party dress | dress | Exhibitionism 20 | $40 | "Short, tight, it catches every light. Made for Zoe's Friday." | the same · Mark's laundry · party accident (it rides up dancing, panties: letting it be at 40) |
+| Backless dress | dress | Exhibitionism 60 | $50 | "Short, and open to the base of your spine. No bra goes under it." | the same · Mark's laundry · party accident (the open side, the side of her bare tit: letting it be at 60) |
+| Black lace bra and panties | bra, underwear | Corruption 20 | $15 each | "Black lace, see-through where it counts. Not for anyone at college." | home only: the bathroom and hall mirrors, the mirror walk-ins (Ryan, Mark), Ryan's nap walk-in |
+
+The lace pieces have beauty 1, so underwear never counts as "something short" at Zoe's door. One party-dress accident a
+day. Five pictures go on the missing-media list.

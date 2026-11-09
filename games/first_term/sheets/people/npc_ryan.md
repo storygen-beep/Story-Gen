@@ -1,4 +1,6 @@
 # [READY] Person — Ryan
+> Changed 2026-11-09 (DECISIONS 209, LO: "Go ahead"): her reaction drifts when she does it again, new section at the end. Signed by LO 2026-11-09 ("Sign them").
+> Changed 2026-11-09 (DECISIONS 208, LO: "I say we tackle 1st fewer cloths first"): more clothes, round 2, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Walk-ins add her room (the refill walk-in at her nap).
@@ -286,3 +288,13 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
 | card goals are the step's real requirements | LO's play note, 2026-10-08 · sweep K8 and its 38 more cards |
 | his underwear line names Laura only when she is home | sweep A2-07 |
 
+## The lace set (2026-11-09, DECISIONS 208)
+
+The lace set she bought is read when Ryan catches her at the hall mirror and when he finds her asleep on her bed, before
+the plain bra-and-panties line.
+
+## Repeats (2026-11-09, DECISIONS 209)
+
+Stopping at Ryan's open door keeps a hidden visit count. The screen after her yes gets one paragraph that moves with it: the first time, the
+next few (2 to 4), and once it's a habit (5 and up). It's about her body's habit and the watchers' habit, so it is true at
+every stage; her stage thought stays as it was. Lines: `iterations/002/build_scripts/drift.py`.

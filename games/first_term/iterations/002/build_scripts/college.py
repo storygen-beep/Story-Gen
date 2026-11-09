@@ -198,12 +198,19 @@ CLASS_CLOTHES = {   # two classes, so each line lives on one screen (gate `one p
         G(cond(_wt("bodycon_dress")), P("In the front-row seat the bodycon dress is halfway up your thighs, but you can't tug it down without the whole row seeing you do it. The guy behind you has stopped writing.")),
         G(cond(_wt("micro_shorts")), P("Front row, in the micro shorts, your bare thighs right up to the crease of your ass on the seat. Every time you shift, the guy in the row behind looks down the back of them.")),
         G(cond(_wt("plunge_dress"), BRALESS), P("The plunge dress is open to your navel, nothing under it, right in front of the lectern. Every time you lean to write, the neckline gapes off your bare tits, and Dr. Hale stares at the back wall for a long time.")),
+        # more clothes, round 2 (DECISIONS 208)
+        G(cond(_wt("split_skirt")), P("You cross your legs in the front row and the slit in your skirt falls open off your thigh, your whole bare leg out to the hip. The guy in the row behind has stopped pretending to read the slides.")),
+        G(cond(_wt("sequin_dress")), P("In the front row the sequin dress catches the projector light every time you breathe. The guy at the end of your row has leaned forward to watch your tits sparkle instead of the slides, but you can't do a thing about it without him seeing.")),
+        G(cond(_wt("backless_dress"), BRALESS), P("The backless dress leaves you bare to the base of your spine in the front row. The guy behind you can see there's no bra, no strap, nothing, and when you lean to write he can see the side of your bare tit.")),
     ],
     "college_class_figure": [
         G(cond(_wt("crop_top")), P("Every time you reach up to the top of the paper, the crop top rides up your belly. The guy at the next easel is drawing your waist, not the model's.")),
         G(cond(_wt("bodycon_dress")), P("On the stool the bodycon dress rides up your thighs, but you need both hands for the charcoal. The guy at the next easel isn't drawing the model any more.")),
         G(cond(_wt("micro_shorts")), P("On the stool in the micro shorts, your bare cheeks spread on the seat. The guy at the next easel has turned his board a quarter toward you.")),
         G(cond(_wt("plunge_dress"), BRALESS), P("The plunge dress gapes every time you lean in to the paper, your bare tits loose inside it. The guy at the next easel keeps losing his line.")),
+        G(cond(_wt("split_skirt")), P("On the stool the split skirt falls open to the hip on the easel side, your bare leg out, and the guy at the next easel has started drawing it instead of the model.")),
+        G(cond(_wt("sequin_dress")), P("The sequin dress throws little lights all over the next easel every time you move your arm. The guy behind it has given up on the model and is drawing the dress, and what's in it.")),
+        G(cond(_wt("backless_dress"), BRALESS), P("Every time you reach for the top of the paper, the open side of the backless dress shows the curve of your bare tit. The guy at the next easel has drawn the same line four times.")),
     ],
 }
 

@@ -31,6 +31,7 @@ SLEEP_SHIRT = {"type": "worn_type", "operator": "eq", "value": "sleep_shirt"}
 SKIRT = {"type": "worn_type", "operator": "eq", "value": "short_skirt"}
 NAKED = [slot("top", False), slot("bottom", False), slot("dress", False), slot("bra", False), slot("underwear", False)]
 UNDIES = [slot("bra"), slot("underwear"), slot("top", False), slot("bottom", False), slot("dress", False)]
+LACE_SET = [{"type": "clothing_item", "item_id": "lace_bra", "operator": "equipped"}, {"type": "clothing_item", "item_id": "lace_panties", "operator": "equipped"}]   # DECISIONS 208
 COVERED = [{"type": "worn_exposure", "operator": "eq", "value": 0}]
 ANY = [{"type": "worn_exposure", "operator": "gte", "value": 0}]          # always true: the chain's else
 
@@ -197,6 +198,8 @@ out.append(solo("bathroom_mirror", "Look in the mirror", "The bathroom mirror: o
         node("mirror", "The mirror", [
             GC(cond(TOWEL), P("Wet hair, pink skin, the towel tucked over your tits, stopping at the top of your thighs. One tug and it's on the floor. You look at the girl in the mirror. She looks right back.")),
             GC(cond(*NAKED), P("Naked. You turn sideways, then the other way. You cup your tits and let them go. The mirror is small, so you stand on your toes to see the rest of you.")),
+            # more clothes, round 2 (DECISIONS 208): the lace set she bought for herself
+            GC(cond(*UNDIES, *LACE_SET), P("The black lace set. Your nipples show dark through the lace, and at the back it's a string and nothing else. You bought it for nobody. You turn round to look at your bare ass in it, and think about who you'd let see it.")),
             GC(cond(*UNDIES), P("Bra and panties, and the door doesn't lock properly. You look at yourself the way someone walking in would.")),
             GC(cond(*COVERED), P("Dressed. You fix your hair, check your teeth, smooth yourself down.")),
             GC(cond(*ANY), P("Half dressed, half not. You look at what's missing first, the way anyone walking in would.")),
@@ -211,6 +214,7 @@ out.append(solo("hall_mirror", "Check your clothes in the hall mirror", "One lin
         node("mirror", "The hall mirror", [
             GC(cond(TOWEL), P("A towel, in the hall, where anyone can come out of any door. Your heart beats in your throat.")),
             GC(cond(*NAKED), P("Naked in the hall. Every door off it could open.")),
+            GC(cond(*UNDIES, *LACE_SET), P("The black lace set, in the hall, your nipples dark through the lace and your ass bare round the string. Any door off it could open, and you're not sure you'd mind.")),
             GC(cond(*UNDIES), P("Bra and panties in the hall, where every door off it could open.")),
             GC(cond(SKIRT, slot("underwear", False)), P("Nothing under the skirt, and the hall is right there. Bend for anything out there, and anyone behind you gets everything.")),
             GC(cond(SKIRT, slot("underwear")), P("The skirt is short enough that the hall is a problem. Bend for anything out there, and anyone behind you gets your panties. You tug it down, but it doesn't help.")),

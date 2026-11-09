@@ -768,7 +768,7 @@ LAUNDRY_TEASES = [
     {"label": "Bend for the bottom drum.", "name": "The bottom drum",
      "gate": [CURIOUS, DARING, flag("mark_saw_her"), PANTIES_ON, NO_TOWEL],   # seen and sexual: both meters (meters.md rule 4)
      "eff": [want(M, 3), {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 39}],
-     "blocks": [*[GC(cond(_wt(t)), P(beat(MLT, "daring_skirt"))) for t in ("short_skirt", "laura_dress", "party_dress", "cafe_uniform", "bodycon_dress", "plunge_dress")],
+     "blocks": [*[GC(cond(_wt(t)), P(beat(MLT, "daring_skirt"))) for t in ("short_skirt", "laura_dress", "party_dress", "cafe_uniform", "bodycon_dress", "plunge_dress", "sequin_dress", "backless_dress")],
                 # truth pass (2026-11-03): "Laura's in the house." only while she is (her kitchen row, weekday evenings);
                 # on a Saturday in the garage she is out, and his line stops at "Jesus, @player."
                 GC(cond(SLEEP_SHIRT, here(L, "home_kitchen")), P(beat(MLT, "daring_shirt"))),

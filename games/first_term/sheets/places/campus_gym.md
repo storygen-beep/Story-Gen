@@ -1,4 +1,5 @@
 # [READY] Place — Gym
+> Changed 2026-11-09 (DECISIONS 209, LO: "Go ahead"): her reaction drifts when she does it again, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 205): "Do your squats anyway." in the sheer leggings needs panties; with none it would show her bare to the floor (80, not this release). Re-signed by LO 2026-11-08 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 203, LO: "Yess"): letting bare tits show is Watched (60); letting her bare pussy show is On Display (80), not written this release. Re-signed by LO 2026-11-08 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 198): the gym clothes, from normal to slutty; three accidents; the locker room is a changing room. Re-signed by LO 2026-11-08 ("Sign 4 pages").
@@ -103,3 +104,9 @@ From Exhibitionism 40 a bra and a bottom will do, as on the street; below 40 a b
 | a gym on campus | LO, 2026-10-08 (pick 8, question 64) · round 11, gym 7/12 (In Her Own Hands puts a man at his hours) |
 | Jake's training hours | LO, 2026-10-08 (question 64) |
 | costs and lines | guess, taken (question 68) |
+
+## Repeats (2026-11-09, DECISIONS 209)
+
+The gym's four looks ("let them look", the mats, the squats, the mirror wall) share one hidden visit count. The screen after her yes gets one paragraph that moves with it: the first time, the
+next few (2 to 4), and once it's a habit (5 and up). It's about her body's habit and the watchers' habit, so it is true at
+every stage; her stage thought stays as it was. Lines: `iterations/002/build_scripts/drift.py`.

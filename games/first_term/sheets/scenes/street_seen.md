@@ -1,4 +1,6 @@
 # [READY] Scene — street_seen
+> Changed 2026-11-09 (DECISIONS 209, LO: "Go ahead"): her reaction drifts when she does it again, new section at the end. Signed by LO 2026-11-09 ("Sign them").
+> Changed 2026-11-09 (DECISIONS 208, LO: "I say we tackle 1st fewer cloths first"): more clothes, round 2, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 205): everyday clothes by stage, new section below. Re-signed by LO 2026-11-08 ("Sign them").
 > Signed by LO: LO, 2026-11-04.
 > Changed 2026-11-04, LO's answers: skirt and no bra cap at 39, no panties at 59, both meters (F); signed by LO 2026-11-04.
@@ -172,3 +174,14 @@ bodycon dress (20, cap 39), the micro shorts (40, cap 59), the plunge dress with
 on the bus-stop bench ("Stay sitting.", from 40, cap 59) and the plunge dress slipping ("Let it be for a few steps.", from
 60, cap 79). 1 in 4, one a day, with the other street events.
 
+## More clothes, round 2 (2026-11-09, DECISIONS 208)
+
+Three new looks, once a day like the others: the split skirt and the sequin dress at Daring (20, pay to 39), the backless
+dress at Watched (60, pay to 79, no bra). Vance, the shop guy or a car, by the hour, each with his own line. One new
+random event: the wind in the slit of the split skirt shows her panties (the fix at any stage; letting it be at 40, to 59).
+
+## Repeats (2026-11-09, DECISIONS 209)
+
+Each of the 11 street looks (the skirt, no bra, no panties, the low-cut top, the crop top, the bodycon, the micro shorts, the plunge, the split skirt, the sequin and the backless dress) keeps a hidden visit count. The screen after her yes gets one paragraph that moves with it: the first time, the
+next few (2 to 4), and once it's a habit (5 and up). It's about her body's habit and the watchers' habit, so it is true at
+every stage; her stage thought stays as it was. Lines: `iterations/002/build_scripts/drift.py`.

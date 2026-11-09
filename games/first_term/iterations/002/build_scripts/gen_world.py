@@ -105,6 +105,8 @@ jake_catch_roll    = 0   # 1-8: on 1 or 2, a near-catch (jake_date_end)
 # their invites wait until it is full again (phone.py ZOE_WAIT, JAKE_WAIT)
 zoe_patience       = 6
 jake_patience      = 3
+# DECISIONS 209: one hidden visit counter per repeated loop (drift.py), so her reaction can move with the count
+DRIFTCOUNTERS
 
 [player.trait_decay]
 hygiene = 10
@@ -123,6 +125,8 @@ default = "El"
 """)
 
 L[0] = L[0].replace("flag_keys = FLAGKEYS", "flag_keys = " + vlist(sorted(FLAGS)))
+import drift
+L[0] = L[0].replace("DRIFTCOUNTERS", "\n".join(f"{k:<18} = 0" for k in drift.counters() if k != "zoe_dares_done"))
 
 # ── locations ──
 w("\n# ── the map: the street is the ground, the only root (board.map, the-map.md R0, R3) ──\n")

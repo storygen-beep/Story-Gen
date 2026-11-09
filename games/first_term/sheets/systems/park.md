@@ -1,4 +1,5 @@
 # [READY] System — park
+> Changed 2026-11-09 (DECISIONS 209, LO: "Go ahead"): her reaction drifts when she does it again, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Signed by LO: LO, 2026-11-04.
 > Changed 2026-11-04, LO's answers: the run pays Exhibitionism +1, cap 39 (F); signed by LO 2026-11-04.
 
@@ -121,3 +122,9 @@ new person: a written age, your yes and an SP5 re-sign.
 - Row 44 + 67 (`park_run`). The run now opens on the gates ("You stretch against the park gates…") with "Run the loop. (10 energy)" and "Walk it instead."; the run text shows only after "Run the loop." The walk has its own short screen: a man on the bench watching her legs and tits. The run ends on a hook: "Zoe runs here weekends. She'd make you go further." once `zoe_met` ("Zoe's still out on the loop somewhere…" while she is in the park), otherwise "Same time tomorrow."
 - Row 61 (`park_selfie`). The plain "Keep the best one." (was "Post it.") needs Exhibitionism 20 and posts nothing; no followers. Under it only "Delete them all." shows, with her thought "Put yourself up where anyone can look? Not yet."
 - Row 62 (`park_walk`). In the skirt under Exhibitionism 40 she grabs the hem and holds it down; "You let it be a problem." shows from 40.
+
+## Repeats (2026-11-09, DECISIONS 209)
+
+The run, counted only on the runs that pay (no bra or no top), keeps a hidden visit count. The screen after her yes gets one paragraph that moves with it: the first time, the
+next few (2 to 4), and once it's a habit (5 and up). It's about her body's habit and the watchers' habit, so it is true at
+every stage; her stage thought stays as it was. Lines: `iterations/002/build_scripts/drift.py`.

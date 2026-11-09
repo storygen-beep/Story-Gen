@@ -89,6 +89,17 @@ out.append(town_event("town_event_plunge_slip", "The neckline slips", S("07:00",
     bolder=("Let it be for a few steps.", [trait("exhibitionism", "gte", 60)], [dict(EXH1, cap=79)],
             "You don't grab for it. You walk on three steps, four, with your bare tit out of the plunge and bouncing in front of the queue, before you tuck it back in, slow. The whole queue has turned round. Every one of them will remember the dress.")))
 
+# more clothes, round 2 (DECISIONS 208): the split skirt in the wind (her panties: the fix at any stage, letting it be
+# at Showing, 40, to 59, DECISIONS 202-203)
+out.append(town_event("town_event_split_wind", "The wind in the slit", S("07:00", "22:00"),
+    [{"type": "worn_type", "operator": "eq", "value": "split_skirt"}, _PANTIES_ON],
+    [P("A gust comes off the corner and catches the slit in your skirt. It throws the whole front panel open to your waist, and your panties are out to the street, the front of them, to the whole street. A man waiting to cross stares straight at them."),
+     WHO("Oh. Hello there.")],
+    "Grab the skirt shut.",
+    plain_after=[P("You grab the panel and pin it to your thigh with your fist, face burning, and walk the rest of the way holding it shut. He's still grinning at the crossing when you look back. He crosses here every day.")],
+    bolder=("Let the wind have it.", [trait("exhibitionism", "gte", 40)], [dict(EXH1, cap=59)],
+            "You don't grab it. The wind holds the slit open, the front of your panties on show to the crossing, and you let it, three steps, four, before you smooth the skirt flat. The man at the crossing misses the green light. He'll be at this crossing tomorrow, and he'll know the skirt.")))
+
 # S6 (LO 2026-11-03): no "Nothing happens." random event on the street either.
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -243,6 +254,9 @@ CAFE_GIRL = {case: G(cond(trait("cafe_footfall", "gte", 10)), WHO(line)) for cas
     ("bodycon", "That's the waitress from the café. Wow. Okay."),
     ("micro", "Café girl! I'm coming in for a coffee this week, swear to God."),
     ("plunge", "Is that the café girl? Holy shit, it is."),
+    ("split", "Café girl! Look at those legs."),
+    ("sequin", "Café girl, all sparkly. Where are you off to?"),
+    ("backless", "Café girl! Where's the rest of your dress?"),
     ("skirt", "You're the girl from the café."),
     ("nobra", "Aren't you from the café? You look different out here."),
     ("nopanties", "Café girl, right? I'd come in more often for this."))}
@@ -280,6 +294,20 @@ STREET_CASES = [
      [P("Mr. Vance gets up and comes down to his gate. The plunge dress is cut open to your navel, and with no bra under it your tits sit bare inside the neckline, the inside curve of each one on show, moving loose with every step. He grips the gate, but he doesn't open it. He watches them go by.")],
      "The shop guy stops dead in his door. The neckline of your dress is open to your belly button, your bare tits loose inside it, and every step shows him more of the sides of them. He doesn't even pretend to sweep.",
      "A car slows beside you and stays there. The driver is staring down the open front of your dress at your bare tits, loose in the plunge, nearly out of it with every step. He follows you to the end of the street."),
+    # more clothes, round 2 (DECISIONS 208): the split skirt and the sequin dress at Daring (20), the backless dress at
+    # Watched (60): CoT's side-split and minidress at its 2, its backless minidress at its 4
+    ("split", [trait("exhibitionism", "gte", 20), {"type": "worn_type", "operator": "eq", "value": "split_skirt"}], 1.5,
+     [P("Mr. Vance looks up from his paper. The slit in your skirt falls open to your hip with every step, your whole bare leg out to the top of your thigh, and he watches it open and close all the way past his gate."), D("npc_vance", "That's some skirt, Miss.")],
+     "The shop guy leans in his doorway and watches the slit in your skirt. Every step it falls open to your hip, your bare leg all the way up, and every step he waits for the next one.",
+     "A car slows beside you on the side with the slit. The driver watches your bare leg come out of the skirt to the hip, step after step, all the way to the corner."),
+    ("sequin", [trait("exhibitionism", "gte", 20), {"type": "worn_type", "operator": "eq", "value": "sequin_dress"}, PANTIES_ON], 1.5,
+     [P("Mr. Vance takes his glasses off. The sequin dress throws the porch light back at him off every curve, your tits, your hips, the hem high on your thighs, and he watches you all the way past like you're on a stage."), D("npc_vance", "Going somewhere special, Miss?")],
+     "The shop guy comes out to watch. The sequin dress flashes with every step, tight over your tits and your ass, the hem barely past the top of your thighs, and he doesn't go back in until you're round the corner.",
+     "A car slows beside you. The sequins catch its lights, and the driver is looking at your ass, the hem riding up as you walk. It follows you to the corner."),
+    ("backless", [trait("exhibitionism", "gte", 60), {"type": "worn_type", "operator": "eq", "value": "backless_dress"}, BRA_OFF], 3,
+     [P("Mr. Vance stands up as you pass. The backless dress leaves you bare from your neck to the base of your spine, and with nothing under it the open side shows him the curve of your bare tit, moving with every step."), D("npc_vance", "Turn round for me, Miss. Just once.")],
+     "The shop guy watches you go past from his doorway. Your back is bare to the base of your spine, no strap anywhere, and as you turn the corner the open side shows him the curve of your bare tit.",
+     "A car slows behind you. The dress is open all the way down your back, bare to the top of your ass, and the driver follows close enough to see there's nothing under it."),
 ]
 # heat proposal A11 (DECISIONS 147): a _t4 pool on the two witness screens that show her body (media only)
 STREET_POOLS = {
@@ -291,10 +319,14 @@ STREET_POOLS = {
 SHOP_NEXT = "He'll be out front tomorrow."
 SHOP_SAID = {"crop": "Lift your arms for me, sweetheart. Just once.", "bodycon": "Painted on, that dress. Turn round.",
              "micro": "You forgot the rest of your shorts.", "plunge": "Jesus. Does your mother know you're out in that?",
+             "split": "That slit goes all the way up, doesn't it?", "sequin": "Where's the party, sweetheart? Can I come?",
+             "backless": "Nothing under that, is there? Not a thing.",
              "skirt": "Nice day for a skirt like that.", "nobra": "Cold out today, is it? Come in and warm up.",
              "nopanties": "I mean it. Come in a minute. Just a minute."}
 CAR_SAID = {"crop": "Nice stomach, baby. Show me the rest.", "bodycon": "Damn, that dress. Get in, I'll take you somewhere you can wear it.",
             "micro": "Those cheeks! Get in, I'll give you a ride.", "plunge": "Lean in the window, baby. Just lean.",
+            "split": "Show me the other leg, baby.", "sequin": "Nice dress. Get in, I'll take you to the party.",
+            "backless": "Turn round, baby. Show me the front.",
             "skirt": "Hey, legs! Where are you walking to? I'll drive you.", "nobra": "Jesus, look at those. Get in, I'll give you a lift.",
             "nopanties": "I said get in. I saw that breeze, legs."}
 CAR_NEXT = "The same car's parked at the corner the next time you look."
@@ -317,7 +349,8 @@ for case, worn, lv, vance, shop, car in STREET_CASES:
         "id": f"street_seen_{case}", "name": {"skirt": "Walk the street in your short skirt", "nobra": "Walk the street with no bra",
                                               "nopanties": "Walk the street with no panties", "crop": "Walk the street in your crop top",
                                               "bodycon": "Walk the street in your bodycon dress", "micro": "Walk the street in your micro shorts",
-                                              "plunge": "Walk the street in your plunge dress"}[case],   # pass 3 H33/H34 (the-voice.md R1, D11): the name says what happens if she clicks, and never hides the act
+                                              "plunge": "Walk the street in your plunge dress", "split": "Walk the street in your split skirt",
+                                              "sequin": "Walk the street in your sequin dress", "backless": "Walk the street in your backless dress"}[case],   # pass 3 H33/H34 (the-voice.md R1, D11): the name says what happens if she clicks, and never hides the act
         "description": f"The street sees what she's wearing ({case}): one witness a day by the hour; Exhibitionism +1 (exhibition phase 1, 2026-11-08).",
         "trigger": {"location": "street", "is_repeatable": True, "priority": int(3 + 2 * lv), "is_active": True, "max_triggers_per_day": 1,
                     "conditions": cond(flag("out_shown_today", False), *worn)},

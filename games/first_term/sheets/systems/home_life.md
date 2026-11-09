@@ -1,4 +1,5 @@
 # [READY] System — home_life
+> Changed 2026-11-09 (DECISIONS 209, LO: "Go ahead"): her reaction drifts when she does it again, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-04 (LO's answer Q6: Sunday breakfast comes before Mark's table, which counts nothing). Waits for LO's re-sign.
@@ -134,3 +135,9 @@ Round 11 cards: groceries 3/12 · study at home 5/12 · getting ready 3/12.
 | dinner hour and Ryan's TV afternoons | LO, 2026-10-08 (questions 54, 55) |
 | questions 53–61 | LO, 2026-10-08: as recommended |
 | items 7, 12, 15 with a person | LO, 2026-10-08 (picks) · numbers guess |
+
+## Repeats (2026-11-09, DECISIONS 209)
+
+The living-room stretch, the garden lounger and the unlocked shower door each keep a hidden visit count. The screen after her yes gets one paragraph that moves with it: the first time, the
+next few (2 to 4), and once it's a habit (5 and up). It's about her body's habit and the watchers' habit, so it is true at
+every stage; her stage thought stays as it was. Lines: `iterations/002/build_scripts/drift.py`.

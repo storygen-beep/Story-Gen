@@ -212,6 +212,8 @@ flagEffects = [
   # gossip (DECISIONS 207): one campus gossip event a day, one at the party a night
   { targetType = "player", flag = "gossip_today", op = "unset" },
   { targetType = "player", flag = "gossip_party_today", op = "unset" },
+  # more clothes, round 2 (DECISIONS 208): one party-dress accident a night
+  { targetType = "player", flag = "party_dress_acc_today", op = "unset" },
   # the sex scenes in the cold places, once a day each (heat proposal A1-A7, DECISIONS 147; heat_a.py, and A4 in
   # 3_activities.toml shop_try_on)
   { targetType = "player", flag = "jake_lockers_today", op = "unset" },
@@ -497,6 +499,122 @@ label  = "The café's name"
 [[traits.labels]]
 key    = "laura_gaps_watched"
 label  = "Times you watched Laura"
+hidden = true
+
+# DECISIONS 209: the visit counters her reaction reads (drift.py), hidden
+[[traits.labels]]
+key    = "rep_cafe_show"
+label  = "Times: cafe show"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_class_bio"
+label  = "Times: class bio"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_class_business"
+label  = "Times: class business"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_class_figure"
+label  = "Times: class figure"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_class_psych"
+label  = "Times: class psych"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_garden"
+label  = "Times: garden"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_gym"
+label  = "Times: gym"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_mark_laundry"
+label  = "Times: mark laundry"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_park_run"
+label  = "Times: park run"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_ryan_door"
+label  = "Times: ryan door"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_shower_door"
+label  = "Times: shower door"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_street_backless"
+label  = "Times: street backless"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_street_bodycon"
+label  = "Times: street bodycon"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_street_crop"
+label  = "Times: street crop"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_street_lowtop"
+label  = "Times: street lowtop"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_street_micro"
+label  = "Times: street micro"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_street_nobra"
+label  = "Times: street nobra"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_street_nopanties"
+label  = "Times: street nopanties"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_street_plunge"
+label  = "Times: street plunge"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_street_sequin"
+label  = "Times: street sequin"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_street_skirt"
+label  = "Times: street skirt"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_street_split"
+label  = "Times: street split"
+hidden = true
+
+[[traits.labels]]
+key    = "rep_stretch"
+label  = "Times: stretch"
 hidden = true
 
 [[traits.labels]]
@@ -829,6 +947,69 @@ type = "plunge_dress"
 beauty = 3
 corruption = 2
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 } ] }
+
+# more clothes, round 2 (DECISIONS 208): Course of Temptation's side-split and minidress at its level 2 (our 20) and
+# its backless minidress at its 4 (our 60) (exhibition_study/A_cot.md:204-212); a lace set she buys, locked by
+# Corruption as a private piece (DECISIONS 197 rule 3). Legwear waits for its own round (LO, 2026-11-09).
+[[clothing]]
+id = "split_skirt"
+description = "Slit to the hip. Every step shows your whole leg."
+name = "Split skirt"
+slot = "bottom"
+image = "clothing/split_skirt.jpg"
+price = 25
+type = "split_skirt"
+beauty = 2
+corruption = 1
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 } ] }
+
+[[clothing]]
+id = "sequin_dress"
+description = "Short, tight, it catches every light. Made for Zoe's Friday."
+name = "Sequin party dress"
+slot = "dress"
+image = "clothing/sequin_dress.jpg"
+price = 40
+type = "sequin_dress"
+beauty = 3
+corruption = 1
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 } ] }
+
+[[clothing]]
+id = "backless_dress"
+description = "Short, and open to the base of your spine. No bra goes under it."
+name = "Backless dress"
+slot = "dress"
+image = "clothing/backless_dress.jpg"
+price = 50
+type = "backless_dress"
+beauty = 3
+corruption = 2
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 } ] }
+
+[[clothing]]
+id = "lace_bra"
+description = "Black lace, see-through where it counts. Not for anyone at college."
+name = "Black lace bra"
+slot = "bra"
+image = "clothing/lace_bra.jpg"
+price = 15
+type = "lingerie"
+beauty = 1   # under the party door's 2 (worn_beauty is the max of anything on): underwear never makes her "short"
+corruption = 2
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 } ] }
+
+[[clothing]]
+id = "lace_panties"
+description = "Black lace, a string at the back. Not for anyone at college."
+name = "Black lace panties"
+slot = "underwear"
+image = "clothing/lace_panties.jpg"
+price = 15
+type = "lingerie"
+beauty = 1   # under the party door's 2 (worn_beauty is the max of anything on): underwear never makes her "short"
+corruption = 2
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 } ] }
 
 [[clothing]]
 id = "cafe_uniform_normal"

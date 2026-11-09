@@ -1,4 +1,6 @@
 # [READY] Person — Mark
+> Changed 2026-11-09 (DECISIONS 209, LO: "Go ahead"): her reaction drifts when she does it again, new section at the end. Signed by LO 2026-11-09 ("Sign them").
+> Changed 2026-11-09 (DECISIONS 208, LO: "I say we tackle 1st fewer cloths first"): more clothes, round 2, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Walk-ins add the garden (the refill walk-in); "Go and change."; his step 4 line as built.
@@ -236,3 +238,14 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
 | fix from the false-line sweep | sweep A3-05: the line names where Laura really is (2026-10-08) |
 | card goals are the step's real requirements | LO's play note, 2026-10-08 · sweep K8 and its 38 more cards |
 | pay she earns is never on the button: the scene says it, the card keeps it, the toast shows it | LO, D11 (2026-10-09) |
+
+## More clothes, round 2 (2026-11-09, DECISIONS 208)
+
+The laundry's "bottom drum" beat also plays in the sequin and backless dresses. The lace set is read when Mark catches
+her at the hall mirror.
+
+## Repeats (2026-11-09, DECISIONS 209)
+
+Mark's two laundry teases (the bottom drum, and washing what she's wearing, with its own lines) share one hidden visit count. The screen after her yes gets one paragraph that moves with it: the first time, the
+next few (2 to 4), and once it's a habit (5 and up). It's about her body's habit and the watchers' habit, so it is true at
+every stage; her stage thought stays as it was. Lines: `iterations/002/build_scripts/drift.py`.

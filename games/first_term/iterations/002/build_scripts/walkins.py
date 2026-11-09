@@ -52,6 +52,7 @@ ANY = [{"type": "worn_exposure", "operator": "gte", "value": 0}]          # alwa
 SAW_ = flag("mark_saw_her")   # every Mark walk-in waits for his first accident (the dryer, H2)
 COVERED = [{"type": "worn_exposure", "operator": "eq", "value": 0}]
 NAKED = [slot("top", False), slot("bottom", False), slot("dress", False), slot("bra", False), slot("underwear", False)]
+LACE_SET = [{"type": "clothing_item", "item_id": "lace_bra", "operator": "equipped"}, {"type": "clothing_item", "item_id": "lace_panties", "operator": "equipped"}]   # DECISIONS 208
 UNDIES = [slot("bra"), slot("underwear"), slot("top", False), slot("bottom", False), slot("dress", False)]
 TOWEL = wt("towel")
 SKIRT = wt("short_skirt")
@@ -540,6 +541,8 @@ def mirror_seen(who, frm):
     return [
         GC(cond(TOWEL), P(f"You're in a towel. {frm}, in the glass, {who} eyes go to the knot over your tits, then down your bare thighs.")),
         GC(cond(*NAKED), P(f"You're naked. {frm}, in the glass, {who} eyes go straight to your tits, then down to your pussy, and stay.")),
+        # more clothes, round 2 (DECISIONS 208): the lace set she bought, read only at home
+        GC(cond(*UNDIES, *LACE_SET), P(f"Your black lace set and nothing else. {frm}, {who} eyes go down your back to the string of the panties between your bare cheeks, and stay.")),
         GC(cond(*UNDIES), P(f"Bra and panties. {frm}, {who} eyes go down your back to your ass in your panties.")),
         GC(cond(SKIRT, slot("underwear", False)), P(f"Nothing under your skirt, and it's short. {frm}, {who} eyes go to the backs of your thighs and up, to where the hem stops.")),
         GC(cond(SKIRT), P(f"Your skirt is short. {frm}, {who} eyes go up the backs of your bare thighs to your hem.")),
@@ -748,6 +751,7 @@ SLEEP_SHIRT = wt("sleep_shirt")
 NAP_SEEN = [
     GC(cond(TOWEL), P("You fell asleep in your towel. In your sleep it has come undone down one side, and it's open from your hip to the side of your tits.")),
     GC(cond(*NAKED), P("You fell asleep naked on top of the covers, on your front, your bare ass to the door.")),
+    GC(cond(*UNDIES, *LACE_SET), P("The black lace set, on top of the covers. You fell asleep on your front in it, and the string of the panties leaves your ass bare to the door.")),
     GC(cond(*UNDIES), P("Bra and panties, on top of the covers. You've rolled onto your front in your sleep, and your panties have ridden up into the crack of your ass.")),
     GC(cond(SLEEP_SHIRT), P("Your sleep shirt has rucked up round your hips in your sleep, and the backs of your thighs are bare to the door.")),
     GC(cond(SKIRT), P("Your short skirt has ridden up in your sleep, all the way up the backs of your thighs.")),
