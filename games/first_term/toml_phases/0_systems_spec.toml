@@ -527,6 +527,22 @@ key    = "rep_class_psych"
 label  = "Times: class psych"
 hidden = true
 
+# DECISIONS 210: the counts toward a goal are said on the screen, not shown as numbers
+[[traits.labels]]
+key    = "zoe_crowd"
+label  = "Zoe's crowd"
+hidden = true
+
+[[traits.labels]]
+key    = "study_notes"
+label  = "His notes"
+hidden = true
+
+[[traits.labels]]
+key    = "zoe_crowd_asked"
+label  = "Zoe asked"
+hidden = true
+
 [[traits.labels]]
 key    = "rep_garden"
 label  = "Times: garden"

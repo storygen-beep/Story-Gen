@@ -1660,3 +1660,12 @@ shape 22 pass; cites 0 wrong. Headless: the street skirt row shows line 1 / 2 / 
 adds 1 per walk; the gym shows 1 / 2 / 2 / 3 after 1 / 2 / 4 / 5 visits, a "no" adds 0; the park run in track pants shows
 nothing and counts nothing, the paying runs count and show line 1.
 
+
+## 2026-11-09 — showing off to get something
+
+DECISIONS 210. New `goals.py` (added to ALL_PARTS): crowd_ask_quad, crowd_ask_gym, crowd_ask_canteen, party_crowd, study_notes, three guidance cards. phone.py: the zoe_crowd thread. pools.py: Zoe's door line at ten. college.py: two new Business midterm answers. people_data.py: the study guy gets a hidden `want`. gen_world.py: zoe_crowd, study_notes, zoe_crowd_asked, hidden in 0_systems_spec.toml. First build: the flag-chain check failed (a trigger on a phone-set flag), fixed with the hidden trait. Gates then: 10 fails (narration to dialogue 5.1:1, the climb at 24% on the cast, a consume_on step's exits, a clothes line, chat bubbles, Zoe at 02:00, two cards, a free ignore, `but` rate); all fixed. Gates 118, 0 fails; shape 22 pass; cites 0 wrong. Headless: the row shows at 20, not 19; a plain ask counts 0; the count lines at 1, 4 and 10; no row at 10; a short skirt gets the hem at 40, jeans get the thought; the flash with no bra, none with one; party_crowd at 10, not 9, sets zoe_crowd_done, campus talk 5; the notes row on day 22, not 20; his want lines; five chapters open the midterm answer, grade 50 to 58.
+Reader: 15 fails (a "Change your mind." that went back to the ask with no reply and re-rendered its arrival lines; three
+no-panties lines that said "nothing under"; the table's nipple line with a bra on; "half the gym" with no gym flag; the
+card's 2 AM; the notes row during his Business class; the low-Intelligence paper line beside "by heart"; his offer with no
+refusal), fixed. Re-read: 3 more (the gym's off line had her seated, the notes' off line fit neither path, exam_by_notes read
+on all four results), fixed. Final: gates 118, 0 fails; shape 22 pass; cites 0 wrong; headless as above, 0 page errors.

@@ -323,6 +323,16 @@ thread("zoe_party", Z, "📱 Zoe",
         ("can't. my mom", {}, "sneak out. kidding. kinda")],
        repeat=6, ignore=(1, {"effects": [pl_eff("zoe_patience", -ZOE_WAIT)], "flagEffects": [setf("zoe_ignored")]}),
        comment="Zoe: the party (Thursday; she's home till midnight, so 'tonight' holds)")
+# DECISIONS 210 (goals.py): Zoe's crowd. After her first party, at Daring; a no lets it come back in a week.
+thread("zoe_crowd", Z, "📱 Zoe",
+       [F("zoe_met"), F("party_went"), F("zoe_crowd_on", False), TRAIT_GTE("zoe_step", 1), TRAIT_GTE("exhibitionism", 20),
+        SINCE("party_went", 2), HOURS("12:00", "22:00")],
+       ["throwing a big one", "need bodies. bring me ten", "i'll make it worth it"],
+       [("ten? easy", {"flagEffects": [setf("zoe_crowd_on")], "effects": [pl_eff("zoe_crowd_asked", 1)]}, "quad, gym, canteen. go get them 😈"),
+        ("how do i get ten people", {"flagEffects": [setf("zoe_crowd_on")], "effects": [pl_eff("zoe_crowd_asked", 1)]}, "smile. show a little. you know how"),
+        ("not my thing", {}, "it will be. ask me next week")],
+       repeat=7, ignore=(2, {"effects": [pl_eff("zoe_patience", -ZOE_WAIT)], "flagEffects": [setf("zoe_ignored")]}),
+       comment="Zoe: her crowd (DECISIONS 210). A yes sets zoe_crowd_on; the asks are in goals.py")
 # (pass 3 F60, F61) a bail costs. Since Q5 (LO, 2026-11-04) it costs a few days, not every run: `zoe_bailed` only
 # colours her park line (zoe.py hub_zoe_park), and the wait is her patience. Ignoring the text counts as a bail;
 # "too early" costs nothing.

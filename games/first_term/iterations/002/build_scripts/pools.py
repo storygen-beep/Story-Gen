@@ -48,6 +48,8 @@ out.append({
         # more clothes, round 2 (DECISIONS 208): Zoe sees the dresses she bought for this
         G(cond(_WT("sequin_dress")), D(Z, "The disco ball's here. Everybody look.")),
         G(cond(_WT("backless_dress"), _BRA_OFF), P("Zoe makes you turn round in the doorway, and her hand goes flat on your bare back, all the way down."), D(Z, "Nothing under it. Oh my god. Get in.")),
+        # DECISIONS 210 (goals.py): the night her ten come
+        G(cond(trait("zoe_crowd", "gte", 10), flag("zoe_crowd_done", False)), D(Z, "They're all here. Every one you sent me. Get in here and see what you did.")),
         # her "obviously" to Thursday's text (phone.py zoe_party, DECISIONS 87), read for the next 30 hours
         G(cond(*PROMISED_SHORT, SHORT, _WT("split_skirt", "neq")), D(Z, "Told you. Short. Good girl.")),
         G(cond(*PROMISED_SHORT, _WT("split_skirt")), D(Z, "Told you. Slit to the hip. Good girl.")),

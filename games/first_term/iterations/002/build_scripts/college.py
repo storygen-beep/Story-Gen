@@ -663,15 +663,29 @@ for subj, grade, sch, code in [("Psychology", "grade_psych", PSYCH, "psych"), ("
                 P(f"The {subj} midterm. Desks pulled apart, bags at the front, a proctor reading a paperback by the door. The paper lands face-down in front of you, and the clock on the wall starts."),
                 WHO("Phones in your bags. Ninety minutes. Turn your papers over."),   # LO 2026-11-03: the proctor
                 WHO("And no talking. Anyone I catch looking at another paper gets a zero."),   # pass 3 B3: the proctor again
-                G(cond(trait("intelligence", "lt", 10)), T(EXAM_TEXT[code]["low"])),
+                # DECISIONS 210 (reader): with his five chapters she knows the Business paper even under Intelligence 10
+                G(cond(trait("intelligence", "lt", 10), *([trait("study_notes", "lt", 5)] if code == "business" else [])), T(EXAM_TEXT[code]["low"])),
+                *([G(cond(trait("intelligence", "lt", 10), trait("study_notes", "gte", 5)), T("Margins, break-even, the shoe company. It's his notes, every chapter, word for word, still in your head."))] if code == "business" else []),
                 G(cond(trait("intelligence", "gte", 10)), T(EXAM_TEXT[code]["high"])),
             ], [
                 go("Focus. Do it yourself.", node="result", mins=90, cond_=cond(trait("intelligence", "gte", 10)), eff=[add(grade, 6)]),
                 go("Focus. Do it yourself.", node="result", mins=90, cond_=cond(trait("intelligence", "lt", 10)), eff=[add(grade, 1)]),
+                # DECISIONS 210 (goals.py study_notes): all five chapters of his notes, learned, not copied
+                *([go("You know his notes by heart.", node="result", mins=90, cond_=cond(trait("study_notes", "gte", 5)), eff=[add(grade, 8)], flags=[fset("exam_by_notes")])]
+                  if code == "business" else []),
+                # DECISIONS 210: after all five chapters he doesn't need the flirt, only a look (his want, goals.py)
+                *([go("Catch the study guy's eye.", node="study_want", mins=5, cond_=cond(ntrait(STUDY, "want", "gte", 5), flag("study_guy_met")))]
+                  if code == "business" else []),
                 *([go("Flirt with the study guy for his paper.", node="study", mins=5, cond_=cond(trait("corruption", "gte", 20), flag("study_guy_met")))]
                   if code == "business" else []),
                 *([go("Look at the cocky guy.", node="price", mins=5, cond_=cond(trait("exhibitionism", "gte", 20), flag("cocky_guy_met")))] if code == "art" else []),
             ]),
+            *([node("study_want", "One look", [
+                P("You only have to look at him. He's been hoping you'd look over. He goes red, puts his pen down and moves his paper to the corner of his desk, angled your way, then looks at your chest across the gap like it's what he's owed."),
+                T("Five chapters of his notes, and he still wants more. He can look."),
+            ], [go("Copy.", node="result", mins=85, eff=[add(grade, 5), add("campus_talk", 1, clamp=False)]),
+                # reader (DECISIONS 210): his offer can be turned down
+                go("Look away and do your own.", node="result", mins=85, eff=[add(grade, 1)])])] if code == "business" else []),
             *([node("study", "The study guy", [
                 P("You catch the study guy's eye across the gap and bite your lip and look at his paper and back at him. He goes red to the ears. A minute later his paper is on the corner of his desk, angled your way, and he's staring at the ceiling like a saint."),
             ], [go("Copy.", node="result", mins=85, eff=[add(grade, 5), add("campus_talk", 1, clamp=False)])])] if code == "business" else []),
@@ -700,7 +714,9 @@ for subj, grade, sch, code in [("Psychology", "grade_psych", PSYCH, "psych"), ("
                 WHO("How'd you do? I left question four blank. The whole thing, blank."), ME("Don't ask me. I just want a drink."),   # pass 3 B3: the girl at the next desk
                 # scene reader 2026-11-04: the grade is the whole course, so she can know the paper and still sit under 40;
                 # the verdict agrees with the Intelligence line on the paper screen
-                G(cond(trait(grade, "lt", 40), trait("intelligence", "lt", 10)), T(EXAM_TEXT[code]["bad"])),
+                # reader (DECISIONS 210): exam_by_notes is the Business paper's only, so only its result reads it
+                G(cond(trait(grade, "lt", 40), trait("intelligence", "lt", 10), *([flag("exam_by_notes", False)] if code == "business" else [])), T(EXAM_TEXT[code]["bad"])),
+                *([G(cond(trait(grade, "lt", 40), trait("intelligence", "lt", 10), flag("exam_by_notes")), T(EXAM_TEXT[code]["bad_high"]))] if code == "business" else []),
                 G(cond(trait(grade, "lt", 40), trait("intelligence", "gte", 10)), T(EXAM_TEXT[code]["bad_high"])),
                 G(cond(trait(grade, "gte", 40), trait(grade, "lt", 70), trait("intelligence", "lt", 10)), T(EXAM_TEXT[code]["mid"])),
                 G(cond(trait(grade, "gte", 40), trait(grade, "lt", 70), trait("intelligence", "gte", 10)), T(EXAM_TEXT[code].get("mid_high", EXAM_TEXT[code]["mid"]))),

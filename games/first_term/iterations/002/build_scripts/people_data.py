@@ -162,7 +162,8 @@ PEOPLE = [
          core={}, show=[], schedules=[]),
     dict(id="npc_study_guy", name="The study guy", role="Business classmate", age=21,
          relationship="A guy in your Business and Biology classes, 21. Has the answers, wants your attention.",
-         tags=[], core={}, show=[], schedules=[]),
+         # DECISIONS 210: his want counts what she has shown him for his notes (goals.py study_notes); hidden
+         tags=[], core={"want": 0}, show=[], schedules=[]),
     dict(id="npc_cocky_guy", name="The cocky guy", role="Jake's teammate", age=21,
          relationship="Jake's teammate, 21. In your Figure drawing class. Trades answers for a look.", tags=[],
          core={}, show=[],

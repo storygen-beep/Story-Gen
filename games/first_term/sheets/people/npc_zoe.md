@@ -1,4 +1,5 @@
 # [READY] Person — Zoe
+> Changed 2026-11-09 (DECISIONS 210, LO: "Go ahead"): showing off to get something, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-09 (DECISIONS 209, LO: "Go ahead"): her reaction drifts when she does it again, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-09 (DECISIONS 208, LO: "I say we tackle 1st fewer cloths first"): more clothes, round 2, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 205): everyday clothes by stage, new section below. Re-signed by LO 2026-11-08 ("Sign them").
@@ -269,3 +270,9 @@ back in the backless one; "Told you. Slit to the hip." if she promised something
 Zoe's dares read the count she already keeps of them (`zoe_dares_done`). The screen after her yes gets one paragraph that moves with it: the first time, the
 next few (2 to 4), and once it's a habit (5 and up). It's about her body's habit and the watchers' habit, so it is true at
 every stage; her stage thought stays as it was. Lines: `iterations/002/build_scripts/drift.py`.
+
+## Her crowd (2026-11-09, DECISIONS 210)
+
+Zoe texts once she has been to one of her parties and is Daring (Exhibitionism 20): bring her ten people (`phone.py` `zoe_crowd`; a no lets the text come back in a week, ignoring it costs her patience). After a yes, the quad, the gym and the canteen each have one ask a day, "Find someone for Zoe's party", until ten are coming (hidden count `zoe_crowd`). Asking plainly always gets a no and counts nothing. A show at her stage gets a yes: close (20, pays to 39); her panties under a short hem, or a stretch on the gym mats (40, pays to 59, campus talk +1); her bare tits for three seconds (60, pays to 79, campus talk +1). The screen after each yes says the count in that place's words. Source: `iterations/002/build_scripts/goals.py`.
+
+The first Friday party after ten are coming, once: `party_crowd`. The people she brought cheer her in and say how she asked; Zoe dares her onto the coffee table in front of them (Showing, 40; at Watched, 60, her top or dress slides to the edge of her nipples and back). Every way out pays campus talk +5. Zoe ends it with "Next one's twice the size", a hook for a later release, not built. Zoe's door line that night: "They're all here. Every one you sent me."
