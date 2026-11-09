@@ -1,4 +1,5 @@
 # [READY] System — parties
+> Changed 2026-11-09 (DECISIONS 208, LO: "I say we tackle 1st fewer cloths first"): more clothes, round 2, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-04 (LO's answer Q7: one hall, so Laura waits up in the dark hall). Waits for LO's re-sign.
@@ -107,3 +108,9 @@ is off.
 | `party_hookup` | LO, 2026-10-08 |
 | Zoe A 3: her friends leave the hot tub first | LO, 2026-10-08 |
 | `late_party` | LO's play note, 2026-10-08 |
+
+## More clothes, round 2 (2026-11-09, DECISIONS 208)
+
+Two party-dress accidents at Zoe's, 1 in 4, one a day: the sequin dress rides up while she dances (her panties; letting
+it be at 40, to 59); the backless dress's open side swings away as she leans over the coffee table (the side of her bare
+tit; letting it be at 60, to 79, a moment). Neither pays campus talk.

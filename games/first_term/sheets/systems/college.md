@@ -1,4 +1,6 @@
 # [READY] System — college
+> Changed 2026-11-09 (DECISIONS 209, LO: "Go ahead"): her reaction drifts when she does it again, new section at the end. Signed by LO 2026-11-09 ("Sign them").
+> Changed 2026-11-09 (DECISIONS 208, LO: "I say we tackle 1st fewer cloths first"): more clothes, round 2, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 207, LO: "Go ahead"): gossip that matters, new section "Gossip" at the end. Signed by LO 2026-11-08 ("Sign it").
 > Changed 2026-11-08 (DECISIONS 205): everyday clothes by stage, new section below. Re-signed by LO 2026-11-08 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 203, LO: "Yess"): letting bare tits show is Watched (60); letting her bare pussy show is On Display (80), not written this release. Re-signed by LO 2026-11-08 ("Sign them").
@@ -244,3 +246,14 @@ What campus says about her, read at four levels of Campus talk. One event a day 
 | 60 | the quad, every day | a stranger says her name and what he heard; she walks on, or smiles back from Showing (40) |
 
 The lines name the act only behind the flag that records it (the class, the gym, the quad, the party).
+
+## More clothes, round 2 (2026-11-09, DECISIONS 208)
+
+Seat lines in Psychology and Figure drawing for the split skirt, the sequin dress and the backless dress (no bra), one
+line per class, as the DECISIONS 205 pieces have.
+
+## Repeats (2026-11-09, DECISIONS 209)
+
+Each class's risky answer (Psychology, Business, Biology, Figure drawing) keeps a hidden visit count. The screen after her yes gets one paragraph that moves with it: the first time, the
+next few (2 to 4), and once it's a habit (5 and up). It's about her body's habit and the watchers' habit, so it is true at
+every stage; her stage thought stays as it was. Lines: `iterations/002/build_scripts/drift.py`.

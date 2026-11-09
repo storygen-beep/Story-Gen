@@ -1636,3 +1636,27 @@ let +1, shut 0; Nadia defends below 40 only, Zoe at the party; the quad ask's an
 once, refuses lunch at 40, library open. Three pictures missing: phone/feed_talk_named.jpg, phone/feed_talk_slut.jpg,
 phone/feed_talk_rate.jpg.
 
+## 2026-11-09 — more clothes, round 2
+
+DECISIONS 208. Five garments in 0_systems_spec.toml (split_skirt, sequin_dress, backless_dress, lace_bra,
+lace_panties). Street looks and town_event_split_wind (town.py), seat lines (college.py CLASS_CLOTHES), Zoe's lines
+(zoe.py ZOE_SEES; party_arrive in pools.py), two party-dress accidents (pools.py party_dress_accident, daily reset
+party_dress_acc_today), Mark's laundry list, the lace lines at home (home.py, walkins.py LACE_SET), the strip lists.
+First build: gates 0 fails. Reader: 6 fails, fixed; one more gate fail after the fixes (a day word, "every Friday",
+on a Saturday screen), fixed. Gates 118, 0 fails; shape 22 pass; cites 0 wrong. Headless: each lock shut a point below
+and open at it (19/20, 59/60, Corruption 19/20); the shop stocks all five; buying the backless dress takes $50; the
+street looks show at their stage; the wind's and the party accidents' "let it be" open at 40/40/60, not 39/39/59; Zoe's
+door lines; the lace set under jeans gets "Not in that" at the door; the lace lines in both mirrors. Five pictures
+missing: clothing/split_skirt.jpg, sequin_dress.jpg, backless_dress.jpg, lace_bra.jpg, lace_panties.jpg.
+
+## 2026-11-09 — her reaction drifts when she does it again
+
+DECISIONS 209. New `drift.py` (DRIFT table, apply()), called from canv.emit; 23 new hidden counters declared in gen_world.py
+(DRIFTCOUNTERS) and labelled hidden in 0_systems_spec.toml; Zoe's dares read zoe_dares_done. Mode "in" raises the counter
+on the paid choice into the screen and sets `<counter>_now`, which an unpaid way in clears; mode "out" raises it on the paid
+exit and reads the count before. The chain is fenced in a one-item pool. First build: one gate fail (two lines read as
+arrivals), fixed. Reader: 20 fails, fixed; re-read: 6 more plus a shared-list bug in apply(), fixed. Gates 118, 0 fails;
+shape 22 pass; cites 0 wrong. Headless: the street skirt row shows line 1 / 2 / 2 / 3 / 3 at counts 0 / 1 / 3 / 4 / 9 and
+adds 1 per walk; the gym shows 1 / 2 / 2 / 3 after 1 / 2 / 4 / 5 visits, a "no" adds 0; the park run in track pants shows
+nothing and counts nothing, the paying runs count and show line 1.
+

@@ -1,4 +1,6 @@
 # [READY] Person — Zoe
+> Changed 2026-11-09 (DECISIONS 209, LO: "Go ahead"): her reaction drifts when she does it again, new section at the end. Signed by LO 2026-11-09 ("Sign them").
+> Changed 2026-11-09 (DECISIONS 208, LO: "I say we tackle 1st fewer cloths first"): more clothes, round 2, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 205): everyday clothes by stage, new section below. Re-signed by LO 2026-11-08 ("Sign them").
 > Signed by LO: LO, 2026-11-04.
 
@@ -256,3 +258,14 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
 On the quad and at the party house, Zoe has a line and a spoken line for each of the crop top, the bodycon dress, the micro
 shorts and the plunge dress (`zoe.py` ZOE_SEES).
 
+## More clothes, round 2 (2026-11-09, DECISIONS 208)
+
+Zoe sees the split skirt, the sequin dress and the backless dress on the quad ("Save it for my party") and at the party
+house. At her door on Friday: "The disco ball's here. Everybody look." for the sequin dress; her hand flat down her bare
+back in the backless one; "Told you. Slit to the hip." if she promised something short.
+
+## Repeats (2026-11-09, DECISIONS 209)
+
+Zoe's dares read the count she already keeps of them (`zoe_dares_done`). The screen after her yes gets one paragraph that moves with it: the first time, the
+next few (2 to 4), and once it's a habit (5 and up). It's about her body's habit and the watchers' habit, so it is true at
+every stage; her stage thought stays as it was. Lines: `iterations/002/build_scripts/drift.py`.

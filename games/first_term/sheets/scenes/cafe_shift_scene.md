@@ -1,4 +1,5 @@
 # [READY] Scene — cafe_shift_scene
+> Changed 2026-11-09 (DECISIONS 209, LO: "Go ahead"): her reaction drifts when she does it again, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 206, LO: "She will buy. Completely her decision"): two café dresses she buys from Tom, new section at the end. Re-signed by LO 2026-11-08 ("Go ahead with 1 and 2").
 > Changed 2026-11-08 (DECISIONS 203, LO: "Yess"): letting bare tits show is Watched (60); letting her bare pussy show is On Display (80), not written this release. Re-signed by LO 2026-11-08 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 202): accidents on the shift, new section at the end. Re-signed by LO 2026-11-08 ("Sign them").
@@ -296,3 +297,9 @@ normal one on; clock-out takes all four off.
   59), and the cut giving in the low-cut dress with no bra (a nipple out; "Finish pouring." Exhibitionism 60, cap 79).
   A moment each, never topless (DECISIONS 204).
 - Tom's lines stay strict ("Bend from the knees. I'm not running a floor show."). Gary has a line for each.
+
+## Repeats (2026-11-09, DECISIONS 209)
+
+The shift's four paid answers share one hidden visit count. The screen after her yes gets one paragraph that moves with it: the first time, the
+next few (2 to 4), and once it's a habit (5 and up). It's about her body's habit and the watchers' habit, so it is true at
+every stage; her stage thought stays as it was. Lines: `iterations/002/build_scripts/drift.py`.

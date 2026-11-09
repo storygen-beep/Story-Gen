@@ -636,6 +636,8 @@ def emit(canvas):
             n["blocks"] = pin_blocks(n["blocks"], *n.pop("pin"))
     canvas = voice_canvas(with_closed_line(canvas))
     talk_remembers(canvas)
+    import drift   # DECISIONS 209: her reaction drifts with the visit count
+    drift.apply(canvas)
     L = ["\n[[canvases]]", f"id   = {q(canvas['id'])}", f"name = {q(canvas['name'])}"]
     if canvas.get("description"):
         L.append(f"description = {q(canvas['description'])}")
@@ -844,6 +846,7 @@ def step_cards(npc, texts, met_flag=None, terminal_text=None, closed_text=None, 
 
 ALL_GARMENTS = ["plain_bra", "sports_bra", "plain_panties", "tshirt", "thin_top", "low_top", "jeans", "leggings",
                 "gym_tank", "track_pants", "gym_shorts", "sheer_leggings", "crop_top", "bodycon_dress", "micro_shorts", "plunge_dress",   # everyday clothes (DECISIONS 205)
+                "split_skirt", "sequin_dress", "backless_dress", "lace_bra", "lace_panties",   # more clothes (DECISIONS 208)
                   # the gym clothes (DECISIONS 198)
                 "sleep_shorts", "short_skirt", "sleep_shirt", "towel", "cafe_uniform_normal",
                 "cafe_uniform_sexy", "cafe_uniform_short", "cafe_uniform_lowcut", "laura_blue_dress", "zoe_party_dress", "sneakers"]

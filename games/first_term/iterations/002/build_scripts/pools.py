@@ -17,6 +17,14 @@ LATE_PARTY = [{"weekdays": [4], "start_time": "23:00", "end_time": "00:00"}, {"w
 SHORT = {"type": "worn_beauty", "operator": "gte", "value": 2}   # a short skirt or a dress for going out
 NOT_SHORT = {"type": "worn_beauty", "operator": "lt", "value": 2}
 
+def _WT(t, op="eq"):
+    return {"type": "worn_type", "operator": op, "value": t}
+
+
+_BRA_OFF = {"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}
+_PANTIES_ON = {"type": "clothing_slot", "slot": "underwear", "operator": "equipped"}
+
+
 def capped(k, n, cap):
     return {"targetType": "player", "trait": k, "op": "add", "value": n, "cap": cap}
 
@@ -37,8 +45,12 @@ out.append({
         G(cond(trait("energy", "lt", 20)), T("You're asleep on your feet. The party runs late. You could go home and sleep and come back.")),
         G(cond(NOT_SHORT), D(Z, "Not in that. Borrow mine. Bedroom. Go.")),
         G(cond(SHORT), D(Z, "Babe! Get in here. Now we're talking.")),
+        # more clothes, round 2 (DECISIONS 208): Zoe sees the dresses she bought for this
+        G(cond(_WT("sequin_dress")), D(Z, "The disco ball's here. Everybody look.")),
+        G(cond(_WT("backless_dress"), _BRA_OFF), P("Zoe makes you turn round in the doorway, and her hand goes flat on your bare back, all the way down."), D(Z, "Nothing under it. Oh my god. Get in.")),
         # her "obviously" to Thursday's text (phone.py zoe_party, DECISIONS 87), read for the next 30 hours
-        G(cond(*PROMISED_SHORT, SHORT), D(Z, "Told you. Short. Good girl.")),
+        G(cond(*PROMISED_SHORT, SHORT, _WT("split_skirt", "neq")), D(Z, "Told you. Short. Good girl.")),
+        G(cond(*PROMISED_SHORT, _WT("split_skirt")), D(Z, "Told you. Slit to the hip. Good girl.")),
         G(cond(*PROMISED_SHORT, NOT_SHORT), D(Z, "\"Obviously\", she said. That's not short, babe.")),
     ], [
         go("Go in. (15 energy)", loc="zoe_apartment", mins=10, costs=[{"trait": "energy", "value": 15}],
@@ -48,6 +60,40 @@ out.append({
         go("Borrow Zoe's dress first.", loc="zoe_bedroom", mins=2),
         go("Go home.", loc="street", mins=2),
     ])]})
+
+# more clothes, round 2 (DECISIONS 208): the two party dresses' accidents at Zoe's, one a night (party_dress_acc_today).
+# What shows sets the stage: her panties, letting it be at Showing (40, to 59); the side of her bare tit, letting it be
+# at Watched (60, to 79), a moment, not topless (DECISIONS 202-204). Nobody named saw, so neither pays the talk.
+def party_dress_accident(cid, name, conds, blocks, fix, fix_text, let, gate, cap, let_text):
+    once = [fset("party_dress_acc_today")]
+    return {"id": cid, "name": name,
+            "description": f"Party-dress accident at Zoe's (DECISIONS 208): {name}. 1 in 4, one a day; letting it be +1 to {cap}.",
+            "trigger": {"location": "zoe_apartment", "is_repeatable": True, "priority": 5, "is_active": True, "trigger_mode": "random",
+                        "chance": 0.25, "schedules": PARTY_SCHED, "conditions": cond(AT_PARTY, flag("party_dress_acc_today", False), *conds)},
+            "nodes": [node("event", name, blocks, [go(fix, node="fix", mins=2, flags=once),
+                                                   go(let, node="let", mins=2, flags=once, cond_=cond(*gate), eff=[capped("exhibitionism", 1, cap)])]),
+                      node("fix", fix.rstrip("."), fix_text, [go("Back to the party.", loc="zoe_apartment", mins=0)]),
+                      node("let", let.rstrip("."), let_text, [go("Back to the party.", loc="zoe_apartment", mins=0)])]}
+
+
+out.append(party_dress_accident("party_acc_sequin", "The dress rides up", [_WT("sequin_dress"), _PANTIES_ON],
+    [P("Somebody turns the music up and you end up dancing in the middle of Zoe's living room. The sequin dress rides up with every bounce, until the hem is up round your hips and your panties are out to the whole room."),
+     WHO("Yes! Keep going!")],
+    "Tug it down.",
+    [P("You grab the hem and drag it down over your ass, laughing to cover it, your face on fire. The guy who shouted is still grinning at you over his cup."),
+     T("Half the room saw your panties. They'll be watching that hem all night.")],
+    "Keep dancing.", [trait("exhibitionism", "gte", 40)], 59,
+    [P("You don't tug it down. You keep dancing with the hem up round your hips and your panties out to the room, and the room stops dancing to watch you do it. The guy who shouted has his phone out, but he isn't filming. He's forgotten it's in his hand."),
+     T("Let them look. You'll pull it down when the song ends.")]))
+out.append(party_dress_accident("party_acc_backless", "The open side", [_WT("backless_dress"), _BRA_OFF],
+    [P("You lean right over the coffee table in Zoe's living room for the bottle opener, and the open side of the backless dress swings away from you. The whole side of your left tit is out, bare, the nipple too, right in front of the guy on the couch pouring drinks."),
+     WHO("Oh. Oh, wow.")],
+    "Pull it back.",
+    [P("You straighten up fast and press the dress flat to your side with your arm, the opener forgotten. The guy on the couch overfills a cup and doesn't notice."),
+     T("He saw all of it. And you're wearing this dress all night.")],
+    "Reach for the opener anyway.", [trait("exhibitionism", "gte", 60)], 79,
+    [P("You stay leaning over the coffee table, your bare tit out of the side of the dress, and take your time finding the opener. The guy on the couch has stopped pouring. Then you stand up, and it falls back inside, and you open your beer."),
+     T("Three seconds. He'll tell it for a month.")]))
 
 out.append({
     "id": "party_chat", "name": "Work the room",
