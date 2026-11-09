@@ -1144,6 +1144,8 @@ for _c in out:
 sex_takes_needs(out, "ryan_07_kayla_cant_know", "after7", "Go to your room.")
 for _n in ("inside", "on", "mouth"):
     sex_takes_needs(out, "ryan_08_two_knocks_first_sex", _n, "Lie there.")
+import everyday   # DECISIONS 221: the day after an everyday scene, the hub remembers it
+everyday.hub_read(out)
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards)
 open(__import__("sys").argv[1], "w").write(text)
 print("ryan:", len(out), "canvases,", len(cards), "cards")

@@ -1905,3 +1905,42 @@ Corruption) · 14 / 20". 0 page errors.
   - sheets `npc_jake.md`, `npc_zoe.md`, `hale_thursday_session.md`.
 - Gates: 114 pass, 3 decided, 1 fail (Laura's loop, held), 4 n/a. Shape: 22 pass. Cites: 0 wrong.
 - Loops: Ryan 20.5 h, Zoe 18.4, Hale 24.6, Jake 29.4.
+
+## 2026-11-10 — everyday scenes at home, batch 1 (DECISIONS 221)
+
+**Changes:**
+- New part `everyday.py` (in `ALL_PARTS`): 20 random-mode canvases, `HUB_READS` and `hub_read()`, called by `ryan.py`, `laura.py` and `mark.py`.
+- `0_systems_spec.toml`: 23 daily flags in `[engine.daily_tick]`, and 2 hidden chain counters.
+- `gen_world.py`: `ev_ryan_bet_n` and `ev_mark_tv_n`.
+- New sheet `sheets/scenes/everyday_home.md` (the index).
+
+**First gate run: 9 fails, all fixed:**
+- clothes named with no check;
+- arrival lines;
+- "good girl" from a parent figure;
+- a morning word in an evening hub;
+- a cap past the next stage;
+- a pay on the wrong meter;
+- an id read as "work" by the needs gate;
+- the `but` rate under its floor.
+
+**v2-reader: 33 FAILs, then 2 plus 1 new, then 0.** The three causes were:
+- hub lines with no lower time bound;
+- the no setting the yes's flag;
+- a raise flipping the answer screen's band (bands are now buttons).
+
+**Checks:**
+- Gates: 114 pass, 3 decided, 1 fail (Laura's loop, held), 4 n/a. Shape: 22 pass. Cites: 0 wrong. Skill tests: 1048.
+
+**Headless:**
+- 13 of 14 sampled scenes are offered in their window. `ev_laura_list` is shut on Sunday, when Mark is in the kitchen all day, as written.
+- Every answer screen renders.
+- The bet chain opens only the next rung (counter 0 to 3 shows rung 1 to 4).
+- 0 page errors.
+
+**Week simulation** (study scripts `15_week_sim.py` and `15_week_classes.py`, rough):
+
+| route | everyday a week | total a week | was |
+|---|---|---|---|
+| the study's route | 4.8 | 18.6 | 2.2 / 14.5 |
+| evenings at home | 8.0 | 22.6 | 2.2 / 14.8 |

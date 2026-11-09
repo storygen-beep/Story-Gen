@@ -10,7 +10,7 @@ set -e
 HERE=${0:A:h}
 ROOT=${HERE:h:h:h:h:h}
 PH=$ROOT/games/first_term/toml_phases
-ALL_PARTS=(ryan laura mark tom zoe hale jake cafe college pools extras home town gossip goals)
+ALL_PARTS=(ryan laura mark tom zoe hale jake cafe college pools extras home town gossip goals everyday)
 cd $ROOT && source venv/bin/activate
 cd $HERE
 mkdir -p parts

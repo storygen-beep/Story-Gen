@@ -90,6 +90,30 @@ hold_band_while = ["drinks_boost"]
 
 [engine.daily_tick]
 flagEffects = [
+  # DECISIONS 221 (everyday.py): the everyday scenes at home, once a day each
+  { targetType = "player", flag = "everyday_home_today", op = "unset" },
+  { targetType = "player", flag = "ev_laura_did_you_eat_today", op = "unset" },
+  { targetType = "player", flag = "ev_laura_phone_call_today", op = "unset" },
+  { targetType = "player", flag = "ev_laura_list_today", op = "unset" },
+  { targetType = "player", flag = "ev_laura_shoulders_today", op = "unset" },
+  { targetType = "player", flag = "ev_ryan_cover_today", op = "unset" },
+  { targetType = "player", flag = "ev_ryan_shift_today", op = "unset" },
+  { targetType = "player", flag = "ev_ryan_dinner_kick_today", op = "unset" },
+  { targetType = "player", flag = "ev_ryan_hall_squeeze_today", op = "unset" },
+  { targetType = "player", flag = "ev_ryan_bet_today", op = "unset" },
+  { targetType = "player", flag = "ev_ryan_bet_1_today", op = "unset" },
+  { targetType = "player", flag = "ev_ryan_bet_2_today", op = "unset" },
+  { targetType = "player", flag = "ev_ryan_bet_3_today", op = "unset" },
+  { targetType = "player", flag = "ev_ryan_bet_4_today", op = "unset" },
+  { targetType = "player", flag = "ev_mark_bills_today", op = "unset" },
+  { targetType = "player", flag = "ev_mark_radio_today", op = "unset" },
+  { targetType = "player", flag = "ev_mark_chilli_today", op = "unset" },
+  { targetType = "player", flag = "ev_mark_creeper_today", op = "unset" },
+  { targetType = "player", flag = "ev_mark_tv_today", op = "unset" },
+  { targetType = "player", flag = "ev_mark_tv_1_today", op = "unset" },
+  { targetType = "player", flag = "ev_mark_tv_2_today", op = "unset" },
+  { targetType = "player", flag = "ev_mark_tv_3_today", op = "unset" },
+  { targetType = "player", flag = "ev_mark_tv_4_today", op = "unset" },
   { targetType = "player", flag = "zoe_park_dare_today", op = "unset" },
   # (alignment pass 2, 2026-11-03; gate `a booking can clear`) same-day plans clear at midnight
   { targetType = "player", flag = "said_eating_out", op = "unset" },
@@ -513,6 +537,16 @@ label  = "Café regulars"
 [[traits.labels]]
 key    = "cafe_name"
 label  = "The café's name"
+
+[[traits.labels]]
+key    = "ev_ryan_bet_n"
+label  = "Everyday chain: ev_ryan_bet_n"
+hidden = true
+
+[[traits.labels]]
+key    = "ev_mark_tv_n"
+label  = "Everyday chain: ev_mark_tv_n"
+hidden = true
 
 [[traits.labels]]
 key    = "laura_gaps_watched"
@@ -1222,6 +1256,57 @@ flag_keys = [
   "dress_code_today",
   "dress_warned",
   "eat_today",
+  "ev_laura_did_you_eat",
+  "ev_laura_did_you_eat_today",
+  "ev_laura_list",
+  "ev_laura_list_today",
+  "ev_laura_phone_call",
+  "ev_laura_phone_call_today",
+  "ev_laura_shoulders",
+  "ev_laura_shoulders_today",
+  "ev_mark_bills",
+  "ev_mark_bills_today",
+  "ev_mark_chilli",
+  "ev_mark_chilli_today",
+  "ev_mark_creeper",
+  "ev_mark_creeper_today",
+  "ev_mark_radio",
+  "ev_mark_radio_today",
+  "ev_mark_tv_1",
+  "ev_mark_tv_1_today",
+  "ev_mark_tv_1_yes",
+  "ev_mark_tv_2",
+  "ev_mark_tv_2_today",
+  "ev_mark_tv_2_yes",
+  "ev_mark_tv_3",
+  "ev_mark_tv_3_today",
+  "ev_mark_tv_3_yes",
+  "ev_mark_tv_4",
+  "ev_mark_tv_4_today",
+  "ev_mark_tv_4_yes",
+  "ev_mark_tv_today",
+  "ev_ryan_bet_1",
+  "ev_ryan_bet_1_today",
+  "ev_ryan_bet_1_yes",
+  "ev_ryan_bet_2",
+  "ev_ryan_bet_2_today",
+  "ev_ryan_bet_2_yes",
+  "ev_ryan_bet_3",
+  "ev_ryan_bet_3_today",
+  "ev_ryan_bet_3_yes",
+  "ev_ryan_bet_4",
+  "ev_ryan_bet_4_today",
+  "ev_ryan_bet_4_yes",
+  "ev_ryan_bet_today",
+  "ev_ryan_cover",
+  "ev_ryan_cover_today",
+  "ev_ryan_dinner_kick",
+  "ev_ryan_dinner_kick_today",
+  "ev_ryan_hall_squeeze",
+  "ev_ryan_hall_squeeze_today",
+  "ev_ryan_shift",
+  "ev_ryan_shift_today",
+  "everyday_home_today",
   "exam_art_done",
   "exam_bio_done",
   "exam_business_done",
@@ -1310,6 +1395,7 @@ flag_keys = [
   "laura_counted_twenty",
   "laura_dress_chosen",
   "laura_dress_invite",
+  "laura_fed_her",
   "laura_knows_ryan",
   "laura_lonely",
   "laura_love_today",
@@ -1318,10 +1404,13 @@ flag_keys = [
   "laura_said_ryan",
   "laura_saw_ch5",
   "laura_saw_wardrobe",
+  "laura_shoulders_rubbed",
   "laura_shower_seen",
   "laura_talk_today",
+  "laura_toast_saved",
   "laura_towel_today",
   "laura_wardrobe_today",
+  "laura_wine_listed",
   "letter_home",
   "made_up",
   "made_up_today",
@@ -1331,11 +1420,14 @@ flag_keys = [
   "mark_06_done",
   "mark_arrangement",
   "mark_asleep_seen",
+  "mark_blames_ryan",
   "mark_brushed_kitchen",
   "mark_brushed_reach",
   "mark_caught_ch5",
   "mark_dress_rule",
+  "mark_fed_her",
   "mark_laura_seen",
+  "mark_light_fetched",
   "mark_money_week",
   "mark_paid_look",
   "mark_saw_garden",
@@ -1343,6 +1435,7 @@ flag_keys = [
   "mark_saw_lingerie",
   "mark_saw_mirror",
   "mark_things_today",
+  "mark_told_car",
   "mark_towel_today",
   "mark_tv_paid",
   "mark_walked_in_laundry",
@@ -1406,13 +1499,17 @@ flag_keys = [
   "ryan_hall_today",
   "ryan_heard_her",
   "ryan_hot_today",
+  "ryan_kicked",
   "ryan_knock_booked",
   "ryan_knock_code",
   "ryan_knocked_back",
+  "ryan_owes_her",
   "ryan_path_closed",
   "ryan_saw_her_towel",
   "ryan_saw_mirror",
   "ryan_saw_nap",
+  "ryan_shift_saved",
+  "ryan_squeezed_hall",
   "ryan_talk_today",
   "ryan_terms_mine",
   "ryan_terms_secret",
@@ -1593,6 +1690,8 @@ zoe_refused        = 0   # her nos to Zoe (DECISIONS 124): a no moves this, neve
 release_2_written  = 0   # never raised: the "(Next release)" locks read it (DECISIONS 124)
 hale_claire_roll   = 0   # 1-4: on 1, Claire is early (hale_thursday_session)
 jake_catch_roll    = 0   # 1-8: on 1 or 2, a near-catch (jake_date_end)
+ev_ryan_bet_n      = 0   # the bet on his game: the rung she has reached (everyday.py, DECISIONS 221)
+ev_mark_tv_n       = 0   # his late TV: the rung she has reached (everyday.py, DECISIONS 221)
 # Q5 (LO, 2026-11-04): a no-show or an ignored invite empties the person's patience; one back each midnight, and
 # their invites wait until it is full again (phone.py ZOE_WAIT, JAKE_WAIT)
 zoe_patience       = 6
@@ -8557,6 +8656,24 @@ blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 0 }] }, blocks = [{ type = "thought_bubble", content = "You like it when he looks. You like it more when he tries not to.", props = { speaker = "player" } }] },
 ]
 
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ev_ryan_hall_squeeze", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "ev_ryan_hall_squeeze", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "ev_ryan_hall_squeeze", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "That hall's too small. I'm not complaining.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_walked_in_shower", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "ryan_walked_in_shower", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "ryan_walked_in_shower", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "Lock the bathroom, @player.nickname. I mean it. Or don't.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_brushed_kitchen", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "ryan_brushed_kitchen", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "ryan_brushed_kitchen", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "About the kitchen. That was an accident. Mostly.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
+]
+
 [canvases.nodes.exit_block]
 type = "choices"
 
@@ -9375,6 +9492,18 @@ blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_laura", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "Ryan's eyes drop to the knot over your tits and snap back up. Mom is right there in the kitchen, and he goes red to the ears." }] },
 ]
 
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_kicked", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "ryan_kicked", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "ryan_kicked", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "My shin's still purple. Thanks for that.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_saw_her_towel", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "ryan_saw_her_towel", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "ryan_saw_her_towel", operator = "lt", value = 30 }] }, blocks = [{ type = "paragraph", content = "Ryan doesn't look up from his plate at you once, and his ears are red the whole meal." }] },
+]
+
 [canvases.nodes.exit_block]
 type = "choices"
 
@@ -9814,6 +9943,48 @@ props = { id = "hub_ryan_living_room_towel_2", memory = "seen" }
 type = "block_pool"
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "Ryan's eyes drop to the knot over your tits and snap back up. Mom is right there in the living room, and he goes red to the ears." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_owes_her", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "ryan_owes_her", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "ryan_owes_her", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "I still owe you. Don't think I forgot.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_shift_saved", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "ryan_shift_saved", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "ryan_shift_saved", operator = "lt", value = 168 }] }, blocks = [{ type = "dialog", content = "Still got my Sunday off. Because of you.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ev_ryan_bet_1_yes", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "ev_ryan_bet_1_yes", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "ev_ryan_bet_1_yes", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "You still owe me two sugars.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ev_ryan_bet_2_yes", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "ev_ryan_bet_2_yes", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "ev_ryan_bet_2_yes", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "Danny Price. Behind the gym. I can't stop laughing.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ev_ryan_bet_3_yes", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "ev_ryan_bet_3_yes", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "ev_ryan_bet_3_yes", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "I'm still thinking about best of three.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ev_ryan_bet_4_yes", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "ev_ryan_bet_4_yes", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "ev_ryan_bet_4_yes", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "Rematch. Same seat.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_caught_ch5", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "ryan_caught_ch5", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "ryan_caught_ch5", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "I'm checking what channel it's on before I sit down. Every time now.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
 ]
 
 [canvases.nodes.exit_block]
@@ -11820,6 +11991,36 @@ blocks = [
 type = "block_pool"
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 70 }] }, blocks = [{ type = "paragraph", content = "She touches your hair when she passes. She's on your side, whatever you've done." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "laura_fed_her", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "laura_fed_her", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_fed_her", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "You cleared that plate I kept for you. I'm making it again.", props = { speaker = "npc", npcId = "npc_laura" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "laura_toast_saved", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "laura_toast_saved", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_toast_saved", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "Dennis got the file. Thursday, like I told him. Thank you for the toast.", props = { speaker = "npc", npcId = "npc_laura" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ev_laura_list", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "ev_laura_list", operator = "gte", value = 1 }, { type = "hours_since_flag", subject = "player", flag_key = "ev_laura_list", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "The list's on the fridge. Add anything I forgot.", props = { speaker = "npc", npcId = "npc_laura" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "laura_shoulders_rubbed", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "laura_shoulders_rubbed", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_shoulders_rubbed", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "My neck's still thanking you.", props = { speaker = "npc", npcId = "npc_laura" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "laura_saw_ch5", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "laura_saw_ch5", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_saw_ch5", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "We're not going to talk about the TV, are we. Good.", props = { speaker = "npc", npcId = "npc_laura" } }] },
 ]
 
 [canvases.nodes.exit_block]
@@ -16142,6 +16343,30 @@ blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "Mark's eyes go down the towel to your bare thighs and snap away, fast. Laura is right there in the living room with you both." }, { type = "dialog", content = "Go and put some clothes on, @player.", props = { speaker = "npc", npcId = "npc_mark" } }] },
 ]
 
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ev_mark_tv_1_yes", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "ev_mark_tv_1_yes", operator = "gte", value = 10 }, { type = "hours_since_flag", subject = "player", flag_key = "ev_mark_tv_1_yes", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "They all die at the end, by the way.", props = { speaker = "npc", npcId = "npc_mark" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ev_mark_tv_2_yes", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "ev_mark_tv_2_yes", operator = "gte", value = 10 }, { type = "hours_since_flag", subject = "player", flag_key = "ev_mark_tv_2_yes", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "Your mother found a can in the bin. I said it was mine.", props = { speaker = "npc", npcId = "npc_mark" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ev_mark_tv_3_yes", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "ev_mark_tv_3_yes", operator = "gte", value = 10 }, { type = "hours_since_flag", subject = "player", flag_key = "ev_mark_tv_3_yes", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "Film's on again tonight.", props = { speaker = "npc", npcId = "npc_mark" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ev_mark_tv_4_yes", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "ev_mark_tv_4_yes", operator = "gte", value = 10 }, { type = "hours_since_flag", subject = "player", flag_key = "ev_mark_tv_4_yes", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "Film's on again tonight. Same seat.", props = { speaker = "npc", npcId = "npc_mark" } }] },
+]
+
 [canvases.nodes.exit_block]
 type = "choices"
 
@@ -17079,6 +17304,30 @@ blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "want", operator = "gte", value = 50 }] }, blocks = [{ type = "thought_bubble", content = "He wants you. His hands have stopped on that engine part, and he isn't even pretending.", props = { speaker = "player" } }] },
 ]
 
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "mark_told_car", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "mark_told_car", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "mark_told_car", operator = "lt", value = 96 }] }, blocks = [{ type = "dialog", content = "The lake. It was a Tuesday. I'll tell you sometime.", props = { speaker = "npc", npcId = "npc_mark" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "mark_light_fetched", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "mark_light_fetched", operator = "gte", value = 12 }, { type = "hours_since_flag", subject = "player", flag_key = "mark_light_fetched", operator = "lt", value = 72 }] }, blocks = [{ type = "dialog", content = "Thanks for the light, the other day.", props = { speaker = "npc", npcId = "npc_mark" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "mark_walked_in_laundry", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "mark_walked_in_laundry", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "mark_walked_in_laundry", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "I'll knock next time you're at the machine. Maybe.", props = { speaker = "npc", npcId = "npc_mark" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "mark_walked_in_shower", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "mark_walked_in_shower", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "mark_walked_in_shower", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "That lock needs fixing. I've been meaning to.", props = { speaker = "npc", npcId = "npc_mark" } }] },
+]
+
 [canvases.nodes.exit_block]
 type = "choices"
 
@@ -17707,6 +17956,30 @@ props = { id = "hub_mark_kitchen_towel_2", memory = "seen" }
 type = "block_pool"
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_laura", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "Mark's eyes go down the towel to your bare thighs and snap away, fast. Laura is right there in the kitchen with you both." }, { type = "dialog", content = "Go and put some clothes on, @player.", props = { speaker = "npc", npcId = "npc_mark" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "mark_blames_ryan", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "mark_blames_ryan", operator = "gte", value = 1 }, { type = "hours_since_flag", subject = "player", flag_key = "mark_blames_ryan", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "I had a word with Ryan about that lamp of his.", props = { speaker = "npc", npcId = "npc_mark" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "mark_fed_her", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "mark_fed_her", operator = "gte", value = 8 }, { type = "hours_since_flag", subject = "player", flag_key = "mark_fed_her", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "Chilli's better the second day. There's a pot in the fridge.", props = { speaker = "npc", npcId = "npc_mark" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "mark_brushed_reach", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "mark_brushed_reach", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "mark_brushed_reach", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "You're always in front of the coffee, @player.", props = { speaker = "npc", npcId = "npc_mark" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "mark_brushed_kitchen", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "mark_brushed_kitchen", operator = "gte", value = 6 }, { type = "hours_since_flag", subject = "player", flag_key = "mark_brushed_kitchen", operator = "lt", value = 30 }] }, blocks = [{ type = "dialog", content = "Coffee's on. I'll get my own cup this time.", props = { speaker = "npc", npcId = "npc_mark" } }] },
 ]
 
 [canvases.nodes.exit_block]
@@ -59364,6 +59637,2932 @@ goals = [
   { type = "trait", subject = "player", trait = "study_notes", op = "gte", value = 5, label = "All five chapters of his notes" },
 ]
 ready_canvas = "study_notes"
+# =============================================================================
+# First Term — 5 · scenes · EVERYDAY AT HOME, batch 1 (everyday.py; DECISIONS 221)
+# =============================================================================
+
+[[canvases]]
+id   = "ev_laura_did_you_eat"
+name = "Did you eat?"
+description = "Everyday random scene at home (DECISIONS 221): Did you eat?. Chance 0.3, once a day."
+
+[canvases.trigger]
+location = "home_kitchen"
+is_repeatable = true
+priority = 3
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+seen_weight = 0.4
+requires_npc = "npc_laura"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ev_laura_did_you_eat_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "everyday_home_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "ate_dinner", operator = "is_false" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_absent" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_ryan", operator = "is_absent" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 3, 4, 6]
+start_time = "19:00"
+end_time = "21:15"
+
+[[canvases.nodes]]
+id   = "scene"
+name = "Did you eat?"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Laura's wiping down the counter. She looks you over, the way she does, top to toe."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Did you eat today? Real food. Not crisps out of the bag."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Define real."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Something with a plate under it, sweetheart."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Not really.\""
+targetType = "node"
+nodeId = "a0"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 2, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_laura_did_you_eat", op = "set" }, { targetType = "player", flag = "ev_laura_did_you_eat_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }, { targetType = "player", flag = "laura_fed_her", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"I had something at college.\""
+targetType = "node"
+nodeId = "a1"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 1, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_laura_did_you_eat", op = "set" }, { targetType = "player", flag = "ev_laura_did_you_eat_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"I'm not hungry, Mom.\""
+targetType = "node"
+nodeId = "a2"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "ev_laura_did_you_eat", op = "set" }, { targetType = "player", flag = "ev_laura_did_you_eat_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "a0"
+name = "Not really"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She's already pulling a plate out of the oven, where she kept it warm. She sits you down and sits across from you and watches you eat every bite."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Look at you. You're too thin for all those classes."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "I'm fine, Mom."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "You're fine when you've eaten."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She cooks most nights. There's always a plate."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1"
+name = "I had something at college"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She narrows her eyes at you, but she lets it go."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Then there's a plate in the oven for later. Don't let Ryan find it."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She cooks most nights. There's always a plate."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a2"
+name = "I'm not hungry, Mom"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "You never are."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She covers the plate with foil and puts it back in the oven anyway, and she pats your cheek on her way past."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "It'll be in there when you are."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She cooks most nights. There's always a plate."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "ev_laura_phone_call"
+name = "On the phone"
+description = "Everyday random scene at home (DECISIONS 221): On the phone. Chance 0.3, once a day."
+
+[canvases.trigger]
+location = "home_kitchen"
+is_repeatable = true
+priority = 3
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+seen_weight = 0.4
+requires_npc = "npc_laura"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ev_laura_phone_call_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "everyday_home_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_absent" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4]
+start_time = "07:00"
+end_time = "07:50"
+
+[[canvases.nodes]]
+id   = "scene"
+name = "On the phone"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Laura's at the counter in her work blouse with her phone clamped to her ear, toast burning under the grill behind her."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "No, I said Thursday. Thursday, Dennis. I sent it."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She sees the smoke, then you, and her eyes go wide over the phone: help."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Rescue the toast."
+targetType = "node"
+nodeId = "a0"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 2, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_laura_phone_call", op = "set" }, { targetType = "player", flag = "ev_laura_phone_call_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }, { targetType = "player", flag = "laura_toast_saved", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Mouth: you've got this."
+targetType = "node"
+nodeId = "a1"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 1, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_laura_phone_call", op = "set" }, { targetType = "player", flag = "ev_laura_phone_call_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave her to it."
+targetType = "node"
+nodeId = "a2"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "ev_laura_phone_call", op = "set" }, { targetType = "player", flag = "ev_laura_phone_call_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "a0"
+name = "Rescue the toast"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You whip the toast out and scrape the black off into the sink. She mouths thank you, and when she hangs up she kisses the top of your head."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "That man. I swear I'll strangle him with his own lanyard."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "You'll get him, Mom."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She takes his calls at the counter most mornings before work."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1"
+name = "Mouth: you've got this"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She rolls her eyes, but she stands up straighter, and her voice goes cool and sure."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Dennis. It's in your inbox. Thursday. Goodbye."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She hangs up and laughs, a little shaky."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Did I sound mean?"
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "You sounded great."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She takes his calls at the counter most mornings before work."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a2"
+name = "Leave her to it"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You take your coffee to the far end of the counter and leave her to it. She's still saying Thursday, louder each time."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Thursday!"
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She takes his calls at the counter most mornings before work."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "ev_laura_list"
+name = "The shopping list"
+description = "Everyday random scene at home (DECISIONS 221): The shopping list. Chance 0.3, once a day."
+
+[canvases.trigger]
+location = "home_kitchen"
+is_repeatable = true
+priority = 3
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+seen_weight = 0.4
+requires_npc = "npc_laura"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ev_laura_list_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "everyday_home_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_absent" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_ryan", operator = "is_absent" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 3, 4, 6]
+start_time = "19:00"
+end_time = "21:15"
+
+[[canvases.nodes]]
+id   = "scene"
+name = "The shopping list"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Laura's at the kitchen table with a pen and the back of an envelope, the shopping list half written."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Anything you want this week? Speak now, or it's Ryan's cereal again."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"The good yoghurt. The Greek one.\""
+targetType = "node"
+nodeId = "a0"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 1, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_laura_list", op = "set" }, { targetType = "player", flag = "ev_laura_list_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Wine. For you.\""
+targetType = "node"
+nodeId = "a1"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }
+effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 2, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_laura_list", op = "set" }, { targetType = "player", flag = "ev_laura_list_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }, { targetType = "player", flag = "laura_wine_listed", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Whatever. I don't mind.\""
+targetType = "node"
+nodeId = "a2"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "ev_laura_list", op = "set" }, { targetType = "player", flag = "ev_laura_list_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "a0"
+name = "The good yoghurt. The Greek one"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Fancy."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She writes it down and underlines it twice."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Don't tell Mark what it costs."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She does the list at this table every week."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1"
+name = "Wine. For you"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She laughs, surprised, and points the pen at you."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "For me. Of course."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She writes it down anyway, and her cheeks go pink, and she doesn't cross it out."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She does the list at this table every week."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a2"
+name = "Whatever. I don't mind"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "You'd mind if I bought the wrong shampoo."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "That's different."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "It always is."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She says it lightly, but she writes your shampoo down anyway."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She does the list at this table every week."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "ev_laura_shoulders"
+name = "Her shoulders"
+description = "Everyday random scene at home (DECISIONS 221): Her shoulders. Chance 0.3, once a day."
+
+[canvases.trigger]
+location = "home_kitchen"
+is_repeatable = true
+priority = 3
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+seen_weight = 0.4
+requires_npc = "npc_laura"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ev_laura_shoulders_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "everyday_home_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_absent" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_ryan", operator = "is_absent" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 3, 4, 6]
+start_time = "20:30"
+end_time = "21:15"
+
+[[canvases.nodes]]
+id   = "scene"
+name = "Her shoulders"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Laura's at the table with her shoes off and her feet on a chair, rolling her neck until it cracks."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Don't get old, sweetheart. Everything hurts."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "lt", value = 60 }] }
+blocks = [
+  { type = "dialog", content = "Be an angel and rub my shoulders for one minute.", props = { speaker = "npc", npcId = "npc_laura" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "dialog", content = "Come here. Your hands. My shoulders. Please.", props = { speaker = "npc", npcId = "npc_laura" } },
+  { type = "paragraph", content = "She's already undone the top two buttons of her blouse to give you room." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Rub her shoulders."
+targetType = "node"
+nodeId = "a0"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "lt", value = 60 }] }
+effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 2, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_laura_shoulders", op = "set" }, { targetType = "player", flag = "ev_laura_shoulders_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }, { targetType = "player", flag = "laura_shoulders_rubbed", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Rub her shoulders."
+targetType = "node"
+nodeId = "a1"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 60 }] }
+effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = 2, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_laura_shoulders", op = "set" }, { targetType = "player", flag = "ev_laura_shoulders_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }, { targetType = "player", flag = "laura_shoulders_rubbed", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Ask Mark.\""
+targetType = "node"
+nodeId = "a2"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "ev_laura_shoulders", op = "set" }, { targetType = "player", flag = "ev_laura_shoulders_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "a0"
+name = "Rub her shoulders"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You work your thumbs into the knots at the top of her back. She groans and drops her head forward."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Oh, that's the spot. Who taught you that?"
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "YouTube."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Bless YouTube."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Her shoulders always hurt after work."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1"
+name = "Rub her shoulders"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You work your thumbs into her shoulders, and she leans her head back against your stomach. Her blouse gapes open. From above you can see right down it to her tits, soft and heavy, rising when she breathes."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Lower. God, that's good. A bit lower."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Your hands slide down onto her collarbones. She doesn't stop you. Her nipples have gone hard against the cotton, and she has to know you can see."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "That's enough. That's. Thank you, sweetheart."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Her shoulders always hurt after work."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a2"
+name = "Ask Mark"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She snorts."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Mark's hands are for engines."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Fair."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She does her own neck, one-handed, and winces."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Her shoulders always hurt after work."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "ev_ryan_cover"
+name = "Cover for me"
+description = "Everyday random scene at home (DECISIONS 221): Cover for me. Chance 0.3, once a day."
+
+[canvases.trigger]
+location = "home_living_room"
+is_repeatable = true
+priority = 3
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+seen_weight = 0.4
+requires_npc = "npc_ryan"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ev_ryan_cover_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "everyday_home_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_absent" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 3, 6]
+start_time = "19:00"
+end_time = "20:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [2]
+start_time = "19:00"
+end_time = "20:45"
+
+[[canvases.nodes]]
+id   = "scene"
+name = "Cover for me"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Ryan pauses his game and twists round on the couch to look at you."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "If Mom asks about the noise Friday night, it was my game. The headset broke."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Was it?"
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Does it matter? Just say you heard the game."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Fine. You owe me.\""
+targetType = "node"
+nodeId = "a0"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 2, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_ryan_cover", op = "set" }, { targetType = "player", flag = "ev_ryan_cover_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }, { targetType = "player", flag = "ryan_owes_her", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Where were you really?\""
+targetType = "node"
+nodeId = "a1"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 1, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_ryan_cover", op = "set" }, { targetType = "player", flag = "ev_ryan_cover_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Lie to her yourself.\""
+targetType = "node"
+nodeId = "a2"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "ev_ryan_cover", op = "set" }, { targetType = "player", flag = "ev_ryan_cover_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "a0"
+name = "Fine. You owe me"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "I owe you. Write it down."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He unpauses the game, but he's grinning at the screen."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's on that couch most evenings after dinner."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1"
+name = "Where were you really?"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He looks at you for a long second."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "It wasn't the game. That's all you get."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "knows_about_kayla", operator = "is_true" }] }
+blocks = [
+  { type = "dialog", content = "Kayla?", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "dialog", content = "Who?", props = { speaker = "player" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "That's all you get, @player.nickname."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's on that couch most evenings after dinner."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a2"
+name = "Lie to her yourself"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Wow. Thanks. Family."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He unpauses the game and shoots something very hard."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's on that couch most evenings after dinner."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "ev_ryan_shift"
+name = "His shift"
+description = "Everyday random scene at home (DECISIONS 221): His shift. Chance 0.3, once a day."
+
+[canvases.trigger]
+location = "home_living_room"
+is_repeatable = true
+priority = 3
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+seen_weight = 0.4
+requires_npc = "npc_ryan"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ev_ryan_shift_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "everyday_home_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_absent" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [5, 6]
+start_time = "14:00"
+end_time = "17:45"
+
+[[canvases.nodes]]
+id   = "scene"
+name = "His shift"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Ryan's on the couch with his phone, typing with both thumbs, his jaw tight."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "My boss wants me in next Sunday. Six a.m. Again."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Help me say no without getting fired."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Write it for him."
+targetType = "node"
+nodeId = "a0"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 2, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_ryan_shift", op = "set" }, { targetType = "player", flag = "ev_ryan_shift_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }, { targetType = "player", flag = "ryan_shift_saved", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Just go in. It's money.\""
+targetType = "node"
+nodeId = "a1"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 1, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_ryan_shift", op = "set" }, { targetType = "player", flag = "ev_ryan_shift_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Not my problem.\""
+targetType = "node"
+nodeId = "a2"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "ev_ryan_shift", op = "set" }, { targetType = "player", flag = "ev_ryan_shift_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "a0"
+name = "Write it for him"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You take his phone and type it: sorry, family thing, happy to do next week. You hit send before he can argue."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "You just sent that."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "You're welcome."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "His phone buzzes. He reads it, and his whole face changes."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "He said fine. He said fine! You're a genius."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Weekends, the couch is his."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1"
+name = "Just go in. It's money"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Spoken like someone who's never been up at five."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "But he types yes, sighing, and drops the phone on his chest."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Weekends, the couch is his."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a2"
+name = "Not my problem"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Cold, @player.nickname."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He goes back to his phone, but he just types and deletes, types and deletes."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Weekends, the couch is his."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "ev_ryan_dinner_kick"
+name = "Under the table"
+description = "Everyday random scene at home (DECISIONS 221): Under the table. Chance 0.3, once a day."
+
+[canvases.trigger]
+location = "home_kitchen"
+is_repeatable = true
+priority = 3
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+seen_weight = 0.4
+requires_npc = "npc_ryan"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ev_ryan_dinner_kick_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "everyday_home_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_mark", operator = "is_present" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 3]
+start_time = "18:00"
+end_time = "18:45"
+
+[[canvases.nodes]]
+id   = "scene"
+name = "Under the table"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Dinner. Laura is asking Ryan about money again, the yard, his savings, and he's running out of answers."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "So how much is in it? Roughly."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Under the table his foot finds yours and presses, twice. He's staring at his plate. Help."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Change the subject."
+targetType = "node"
+nodeId = "a0"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 2, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_ryan_dinner_kick", op = "set" }, { targetType = "player", flag = "ev_ryan_dinner_kick_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }, { targetType = "player", flag = "ryan_owes_her", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Kick him back. Hard."
+targetType = "node"
+nodeId = "a1"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "ev_ryan_dinner_kick", op = "set" }, { targetType = "player", flag = "ev_ryan_dinner_kick_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }, { targetType = "player", flag = "ryan_kicked", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let him squirm."
+targetType = "node"
+nodeId = "a2"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "ev_ryan_dinner_kick", op = "set" }, { targetType = "player", flag = "ev_ryan_dinner_kick_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "a0"
+name = "Change the subject"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Mom, did you get that promotion thing sorted?"
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Laura lights up and talks for ten minutes. Mark grunts in the right places. Ryan eats fast."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "When she gets up for the salt he leans over."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "I owe you. Again."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Laura asks about money at most dinners."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1"
+name = "Kick him back. Hard"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He jerks and bangs his knee on the table. Everybody looks at him."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Something wrong with you?"
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Cramp."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Laura goes back to the savings. He glares at you across the potatoes."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Laura asks about money at most dinners."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a2"
+name = "Let him squirm"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You eat. He squirms. Laura gets a number out of him, a small one, and her mouth goes thin."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "We'll talk about it."
+props = { speaker = "npc", npcId = "npc_laura" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Laura asks about money at most dinners."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "ev_ryan_hall_squeeze"
+name = "In the hall"
+description = "Everyday random scene at home (DECISIONS 221): In the hall. Chance 0.3, once a day."
+
+[canvases.trigger]
+location = "home_hall"
+is_repeatable = true
+priority = 3
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+seen_weight = 0.4
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ev_ryan_hall_squeeze_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "everyday_home_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "npc_at_location", location_id = "home_hall", npc_id = "npc_laura", operator = "is_absent" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 6]
+start_time = "22:00"
+end_time = "23:45"
+
+[[canvases.nodes]]
+id   = "scene"
+name = "In the hall"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Ryan's door opens as you pass, and he comes out in his shorts on his way to the bathroom. The hall's too narrow for two."
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "lt", value = 40 }] }
+blocks = [
+  { type = "paragraph", content = "He backs up against the wall to let you by, his eyes on the ceiling." },
+  { type = "dialog", content = "Sorry. Go. You first.", props = { speaker = "npc", npcId = "npc_ryan" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "paragraph", content = "He doesn't back up. He stops right in the middle, so you'd have to squeeze past with your tits against his chest." },
+  { type = "dialog", content = "You first, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Slip past."
+targetType = "node"
+nodeId = "a0"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "lt", value = 40 }] }
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 1, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_ryan_hall_squeeze", op = "set" }, { targetType = "player", flag = "ev_ryan_hall_squeeze_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Squeeze past him."
+targetType = "node"
+nodeId = "a1"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 1, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_ryan_hall_squeeze", op = "set" }, { targetType = "player", flag = "ev_ryan_hall_squeeze_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }, { targetType = "player", flag = "ryan_squeezed_hall", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Move, Ryan.\""
+targetType = "node"
+nodeId = "a2"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "ev_ryan_hall_squeeze", op = "set" }, { targetType = "player", flag = "ev_ryan_hall_squeeze_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "a0"
+name = "Slip past"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You slip past. Your shoulder brushes his arm, and he goes red to the ears."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Night."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He goes to the bathroom about now most nights."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1"
+name = "Squeeze past him"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You turn side-on and squeeze past him. Your tits drag across his bare chest, slow, and your nipples go hard. He breathes in through his nose and holds it."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "By the time you're past, his shorts are tenting. He doesn't hide it."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Night, @player.nickname."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He goes into the bathroom and turns the lock. You stand in the dark hall with your nipples aching. Not tonight. Not in the hall."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He goes to the bathroom about now most nights."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a2"
+name = "Move, Ryan"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Moving."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He flattens himself against the wall, grinning, and lets you by without touching."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Thank you."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Anytime."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He goes to the bathroom about now most nights."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "ev_ryan_bet_1"
+name = "The bet (1)"
+description = "Everyday random scene at home (DECISIONS 221): The bet (1). Chance 0.3, once a day."
+
+[canvases.trigger]
+location = "home_living_room"
+is_repeatable = true
+priority = 3
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+seen_weight = 0.4
+requires_npc = "npc_ryan"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ev_ryan_bet_1_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "ev_ryan_bet_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_absent" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_mark", operator = "is_absent" }, { type = "trait", subject = "player", trait_key = "ev_ryan_bet_n", operator = "eq", value = 0 }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 3, 6]
+start_time = "19:00"
+end_time = "20:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [2]
+start_time = "19:00"
+end_time = "20:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [5, 6]
+start_time = "14:00"
+end_time = "17:45"
+
+[[canvases.nodes]]
+id   = "scene"
+name = "The bet (1)"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Ryan holds out the second controller without looking away from the screen."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "One round. Loser makes the tea."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Play."
+targetType = "node"
+nodeId = "a0"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "ev_ryan_bet_n", op = "set", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "ev_ryan_bet_1", op = "set" }, { targetType = "player", flag = "ev_ryan_bet_1_today", op = "set" }, { targetType = "player", flag = "ev_ryan_bet_today", op = "set" }, { targetType = "player", flag = "ev_ryan_bet_1_yes", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Make your own tea.\""
+targetType = "node"
+nodeId = "a1"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "ev_ryan_bet_1", op = "set" }, { targetType = "player", flag = "ev_ryan_bet_1_today", op = "set" }, { targetType = "player", flag = "ev_ryan_bet_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "a0"
+name = "Play"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You lose in ninety seconds. He makes you make the tea anyway, and he drinks it like a king."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Two sugars next time. Same bet tomorrow."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's on the couch most days, and he always wants a rematch."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1"
+name = "Make your own tea"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Coward."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He plays on alone, loudly winning."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's on the couch most days, and he always wants a rematch."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "ev_ryan_bet_2"
+name = "The bet (2)"
+description = "Everyday random scene at home (DECISIONS 221): The bet (2). Chance 0.3, once a day."
+
+[canvases.trigger]
+location = "home_living_room"
+is_repeatable = true
+priority = 3
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+seen_weight = 0.4
+requires_npc = "npc_ryan"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ev_ryan_bet_2_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "ev_ryan_bet_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_absent" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_mark", operator = "is_absent" }, { type = "trait", subject = "player", trait_key = "ev_ryan_bet_n", operator = "eq", value = 1 }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 3, 6]
+start_time = "19:00"
+end_time = "20:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [2]
+start_time = "19:00"
+end_time = "20:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [5, 6]
+start_time = "14:00"
+end_time = "17:45"
+
+[[canvases.nodes]]
+id   = "scene"
+name = "The bet (2)"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "New bet. Loser answers one question. Honestly."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's already holding out the controller."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Play."
+targetType = "node"
+nodeId = "a0"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "ev_ryan_bet_n", op = "set", value = 2 }]
+flagEffects = [{ targetType = "player", flag = "ev_ryan_bet_2", op = "set" }, { targetType = "player", flag = "ev_ryan_bet_2_today", op = "set" }, { targetType = "player", flag = "ev_ryan_bet_today", op = "set" }, { targetType = "player", flag = "ev_ryan_bet_2_yes", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"I'm not answering anything.\""
+targetType = "node"
+nodeId = "a1"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "ev_ryan_bet_2", op = "set" }, { targetType = "player", flag = "ev_ryan_bet_2_today", op = "set" }, { targetType = "player", flag = "ev_ryan_bet_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "a0"
+name = "Play"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You lose. Of course you lose."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "First kiss. Who, where."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Danny Price. Behind the gym. He tasted like crisps."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He laughs so hard he drops his controller. Then he stops laughing and looks at your mouth a second too long."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's on the couch most days, and he always wants a rematch."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1"
+name = "I'm not answering anything"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Then you can't lose. Boring."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He plays on."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's on the couch most days, and he always wants a rematch."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "ev_ryan_bet_3"
+name = "The bet (3)"
+description = "Everyday random scene at home (DECISIONS 221): The bet (3). Chance 0.3, once a day."
+
+[canvases.trigger]
+location = "home_living_room"
+is_repeatable = true
+priority = 3
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+seen_weight = 0.4
+requires_npc = "npc_ryan"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ev_ryan_bet_3_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "ev_ryan_bet_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_absent" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_mark", operator = "is_absent" }, { type = "trait", subject = "player", trait_key = "ev_ryan_bet_n", operator = "eq", value = 2 }, { type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 3, 6]
+start_time = "19:00"
+end_time = "20:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [2]
+start_time = "19:00"
+end_time = "20:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [5, 6]
+start_time = "14:00"
+end_time = "17:45"
+
+[[canvases.nodes]]
+id   = "scene"
+name = "The bet (3)"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Stakes. Loser takes something off. One thing."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He doesn't look at you when he says it. His ears have gone red."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Play."
+targetType = "node"
+nodeId = "a0"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "top", operator = "equipped" }, { type = "clothing_slot", slot = "bra", operator = "equipped" }] }
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 2, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "ev_ryan_bet_n", op = "set", value = 3 }]
+flagEffects = [{ targetType = "player", flag = "ev_ryan_bet_3", op = "set" }, { targetType = "player", flag = "ev_ryan_bet_3_today", op = "set" }, { targetType = "player", flag = "ev_ryan_bet_today", op = "set" }, { targetType = "player", flag = "ev_ryan_bet_3_yes", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Nice try.\""
+targetType = "node"
+nodeId = "a1"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "ev_ryan_bet_3", op = "set" }, { targetType = "player", flag = "ev_ryan_bet_3_today", op = "set" }, { targetType = "player", flag = "ev_ryan_bet_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "a0"
+name = "Play"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You lose. You take your top off and drop it on the floor, and play the next round in your bra with the controller in your lap."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He loses that one on purpose, staring at your tits instead of the screen. When it's over you pull your top back on, slow."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Best of three?"
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's on the couch most days, and he always wants a rematch."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1"
+name = "Nice try"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Worth asking."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He goes back to the game, but his knee is bouncing."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's on the couch most days, and he always wants a rematch."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "ev_ryan_bet_4"
+name = "The bet (4)"
+description = "Everyday random scene at home (DECISIONS 221): The bet (4). Chance 0.3, once a day."
+
+[canvases.trigger]
+location = "home_living_room"
+is_repeatable = true
+priority = 3
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+seen_weight = 0.4
+requires_npc = "npc_ryan"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ev_ryan_bet_4_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "ev_ryan_bet_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_absent" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_mark", operator = "is_absent" }, { type = "trait", subject = "player", trait_key = "ev_ryan_bet_n", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 4 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 3, 6]
+start_time = "19:00"
+end_time = "20:15"
+
+[[canvases.trigger.schedules]]
+weekdays = [2]
+start_time = "19:00"
+end_time = "20:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [5, 6]
+start_time = "14:00"
+end_time = "17:45"
+
+[[canvases.nodes]]
+id   = "scene"
+name = "The bet (4)"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Last bet. Loser plays the next round in the winner's lap."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He pats his thigh. He's not joking."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Play."
+targetType = "node"
+nodeId = "a0"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 2, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "ev_ryan_bet_n", op = "set", value = 4 }]
+flagEffects = [{ targetType = "player", flag = "ev_ryan_bet_4", op = "set" }, { targetType = "player", flag = "ev_ryan_bet_4_today", op = "set" }, { targetType = "player", flag = "ev_ryan_bet_today", op = "set" }, { targetType = "player", flag = "ev_ryan_bet_4_yes", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"In your dreams.\""
+targetType = "node"
+nodeId = "a1"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "ev_ryan_bet_4", op = "set" }, { targetType = "player", flag = "ev_ryan_bet_4_today", op = "set" }, { targetType = "player", flag = "ev_ryan_bet_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "a0"
+name = "Play"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You lose. You climb into his lap with your back to his chest and the controller in your hands, and he wraps his arms round you to hold his."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Every time you move, you grind on him, and he's rock hard against your ass through his shorts. You lose that round too. Neither of you looks at the score."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Again. Same seat."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's on the couch most days, and he always wants a rematch."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1"
+name = "In your dreams"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Every night."
+props = { speaker = "npc", npcId = "npc_ryan" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He says it to the screen, and he doesn't look round."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's on the couch most days, and he always wants a rematch."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "ev_mark_bills"
+name = "The bills"
+description = "Everyday random scene at home (DECISIONS 221): The bills. Chance 0.3, once a day."
+
+[canvases.trigger]
+location = "home_kitchen"
+is_repeatable = true
+priority = 3
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+seen_weight = 0.4
+requires_npc = "npc_mark"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ev_mark_bills_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "everyday_home_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_laura", operator = "is_absent" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [6]
+start_time = "10:00"
+end_time = "17:00"
+
+[[canvases.nodes]]
+id   = "scene"
+name = "The bills"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Mark's at the Sunday table with the bills spread out in front of him and a calculator older than you."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Somebody in this house leaves every light on. Every light, @player."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He holds up the electric bill like evidence."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Sorry. I'll turn them off.\""
+targetType = "node"
+nodeId = "a0"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "power", op = "add", value = 1, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_mark_bills", op = "set" }, { targetType = "player", flag = "ev_mark_bills_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"That's Ryan, not me.\""
+targetType = "node"
+nodeId = "a1"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "power", op = "add", value = -1, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_mark_bills", op = "set" }, { targetType = "player", flag = "ev_mark_bills_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }, { targetType = "player", flag = "mark_blames_ryan", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Not my bill, Mark.\""
+targetType = "node"
+nodeId = "a2"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "power", op = "add", value = -1, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_mark_bills", op = "set" }, { targetType = "player", flag = "ev_mark_bills_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "a0"
+name = "Sorry. I'll turn them off"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "That's all I ask."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He goes back to his sums, satisfied, and you feel about twelve."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Sundays he does the bills at this table."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1"
+name = "That's Ryan, not me"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He looks at you over his glasses."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Is it."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "He sleeps with his lamp on."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Huh."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He writes RYAN on the bill and circles it."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Sundays he does the bills at this table."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a2"
+name = "Not my bill, Mark"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Everything under this roof is your bill, @player."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He says it to the calculator, not to you."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Sundays he does the bills at this table."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "ev_mark_radio"
+name = "The garage radio"
+description = "Everyday random scene at home (DECISIONS 221): The garage radio. Chance 0.3, once a day."
+
+[canvases.trigger]
+location = "home_garage"
+is_repeatable = true
+priority = 3
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+seen_weight = 0.4
+requires_npc = "npc_mark"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ev_mark_radio_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "everyday_home_today", operator = "is_false" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 3, 4]
+start_time = "19:00"
+end_time = "21:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [5]
+start_time = "09:00"
+end_time = "16:45"
+
+[[canvases.nodes]]
+id   = "scene"
+name = "The garage radio"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Mark's under the car on his back, only his legs sticking out. The radio on the bench is playing something from before you were born."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Ten mill. On the bench. Pass it here."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "A hand comes out from under the car, open, black with oil."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Pass it, and stay."
+targetType = "node"
+nodeId = "a0"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "ev_mark_radio", op = "set" }, { targetType = "player", flag = "ev_mark_radio_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }, { targetType = "player", flag = "mark_told_car", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Pass it."
+targetType = "node"
+nodeId = "a1"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "power", op = "add", value = 1, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_mark_radio", op = "set" }, { targetType = "player", flag = "ev_mark_radio_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Get it yourself.\""
+targetType = "node"
+nodeId = "a2"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "power", op = "add", value = -1, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_mark_radio", op = "set" }, { targetType = "player", flag = "ev_mark_radio_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "a0"
+name = "Pass it, and stay"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You put the wrench in his hand and sit on the upturned bucket. He talks from under the car, about the first car he ever had, a rust bucket he loved more than his first wife."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Drove it into a lake once. Long story."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Tell me."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Another time."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "But he's smiling. You can hear it."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's out here most evenings with that radio."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_garage"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1"
+name = "Pass it"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You put the wrench in his hand."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Good."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The hand goes back under the car."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's out here most evenings with that radio."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_garage"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a2"
+name = "Get it yourself"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "A long pause. Then he slides out on the creeper, gets the wrench himself, and slides back under without a word."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Close the door on your way out."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's out here most evenings with that radio."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_garage"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "ev_mark_chilli"
+name = "Wednesday chilli"
+description = "Everyday random scene at home (DECISIONS 221): Wednesday chilli. Chance 0.3, once a day."
+
+[canvases.trigger]
+location = "home_kitchen"
+is_repeatable = true
+priority = 3
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+seen_weight = 0.4
+requires_npc = "npc_mark"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ev_mark_chilli_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "everyday_home_today", operator = "is_false" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [2]
+start_time = "18:15"
+end_time = "21:30"
+
+[[canvases.nodes]]
+id   = "scene"
+name = "Wednesday chilli"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Mark has every pan in the house out and the kitchen smells like it's on fire. He holds a spoon out to you over the pot."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Taste. Tell me the truth."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"It's good. Really.\""
+targetType = "node"
+nodeId = "a0"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "power", op = "add", value = 1, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_mark_chilli", op = "set" }, { targetType = "player", flag = "ev_mark_chilli_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }, { targetType = "player", flag = "mark_fed_her", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"It needs salt.\""
+targetType = "node"
+nodeId = "a1"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "power", op = "add", value = -1, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_mark_chilli", op = "set" }, { targetType = "player", flag = "ev_mark_chilli_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"I'll eat later.\""
+targetType = "node"
+nodeId = "a2"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "ev_mark_chilli", op = "set" }, { targetType = "player", flag = "ev_mark_chilli_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "a0"
+name = "It's good. Really"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "It's good. It's very hot. Your eyes water."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Told you."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He looks pleased in a way you don't see often, and he gives you a bowl to yourself."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Wednesdays, he cooks."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1"
+name = "It needs salt"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He tastes it himself. He frowns. He adds salt."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Fine. It needed salt."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "You're welcome."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Don't push it."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Wednesdays, he cooks."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a2"
+name = "I'll eat later"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Suit yourself. There won't be any."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He turns back to the pot, but he leaves a bowl out on the side."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Wednesdays, he cooks."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_kitchen"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "ev_mark_creeper"
+name = "The creeper"
+description = "Everyday random scene at home (DECISIONS 221): The creeper. Chance 0.3, once a day."
+
+[canvases.trigger]
+location = "home_garage"
+is_repeatable = true
+priority = 3
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+seen_weight = 0.4
+requires_npc = "npc_mark"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ev_mark_creeper_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "everyday_home_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 3, 4]
+start_time = "19:00"
+end_time = "21:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [5]
+start_time = "09:00"
+end_time = "16:45"
+
+[[canvases.nodes]]
+id   = "scene"
+name = "The creeper"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You're crossing the garage when Mark rolls out from under the car on the creeper, right at your feet."
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "want", operator = "lt", value = 40 }] }
+blocks = [
+  { type = "paragraph", content = "He looks up at your face and holds out a hand." },
+  { type = "dialog", content = "Light. Bench. Thanks.", props = { speaker = "npc", npcId = "npc_mark" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }] }
+blocks = [
+  { type = "paragraph", content = "He doesn't look at your face first. From down there he looks straight up your skirt, up your bare thighs, and takes his time about it." },
+  { type = "dialog", content = "Light's on the bench, @player.", props = { speaker = "npc", npcId = "npc_mark" } },
+]
+
+[[canvases.nodes.blocks]]
+type = "group"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
+blocks = [
+  { type = "paragraph", content = "He lies there and looks up the length of you, slow, from your ankles to your tits, before he gets to your face." },
+  { type = "dialog", content = "Light's on the bench, @player.", props = { speaker = "npc", npcId = "npc_mark" } },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Fetch the light."
+targetType = "node"
+nodeId = "a0"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "want", operator = "lt", value = 40 }] }
+flagEffects = [{ targetType = "player", flag = "ev_mark_creeper", op = "set" }, { targetType = "player", flag = "ev_mark_creeper_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }, { targetType = "player", flag = "mark_light_fetched", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Fetch the light, side-on to him."
+targetType = "node"
+nodeId = "a1"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "want", operator = "gte", value = 40 }] }
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_mark_creeper", op = "set" }, { targetType = "player", flag = "ev_mark_creeper_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }, { targetType = "player", flag = "mark_light_fetched", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Bend for it, your back to him."
+targetType = "node"
+nodeId = "a2"
+time_progression_minutes = 5
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "want", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_mark_creeper", op = "set" }, { targetType = "player", flag = "ev_mark_creeper_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }, { targetType = "player", flag = "mark_light_fetched", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Step over him."
+targetType = "node"
+nodeId = "a3"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "power", op = "add", value = -1, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "ev_mark_creeper", op = "set" }, { targetType = "player", flag = "ev_mark_creeper_today", op = "set" }, { targetType = "player", flag = "everyday_home_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "a0"
+name = "Fetch the light"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You hand it down. He clicks it on and rolls back under."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Cheers."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's under that car most evenings."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_garage"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1"
+name = "Fetch the light, side-on to him"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You get the light and hand it down without bending in front of him. His eyes go up you anyway, slow."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Cheers."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He doesn't roll back under until you've gone."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's under that car most evenings."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_garage"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a2"
+name = "Bend for it, your back to him"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You bend for the light with your back to him, and you know exactly what he can see from the floor. When you hand it down his fingers brush yours."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Cheers."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He doesn't roll back under until you've gone."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's under that car most evenings."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_garage"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a3"
+name = "Step over him"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You step over him and keep walking."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Watch the oil."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You hear the creeper roll back under."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's under that car most evenings."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_garage"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "ev_mark_tv_1"
+name = "Late TV (1)"
+description = "Everyday random scene at home (DECISIONS 221): Late TV (1). Chance 0.3, once a day."
+
+[canvases.trigger]
+location = "home_living_room"
+is_repeatable = true
+priority = 3
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+seen_weight = 0.4
+requires_npc = "npc_mark"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ev_mark_tv_1_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "ev_mark_tv_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_ryan", operator = "is_absent" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "ev_mark_tv_n", operator = "eq", value = 0 }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [6, 0, 1, 2, 3, 4]
+start_time = "22:00"
+end_time = "23:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4, 5]
+start_time = "00:00"
+end_time = "01:30"
+
+[[canvases.nodes]]
+id   = "scene"
+name = "Late TV (1)"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Mark's on the couch with the late film and a beer. He shifts his feet off the cushion without being asked."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Sit if you're sitting. It's nearly the good bit."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sit and watch."
+targetType = "node"
+nodeId = "a0"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "power", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "ev_mark_tv_n", op = "set", value = 1 }]
+flagEffects = [{ targetType = "player", flag = "ev_mark_tv_1", op = "set" }, { targetType = "player", flag = "ev_mark_tv_1_today", op = "set" }, { targetType = "player", flag = "ev_mark_tv_today", op = "set" }, { targetType = "player", flag = "ev_mark_tv_1_yes", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"I'm off to bed.\""
+targetType = "node"
+nodeId = "a1"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "ev_mark_tv_1", op = "set" }, { targetType = "player", flag = "ev_mark_tv_1_today", op = "set" }, { targetType = "player", flag = "ev_mark_tv_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "a0"
+name = "Sit and watch"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You sit at the other end. It's a war film. He knows every line and says half of them under his breath."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Same time tomorrow, if you want the ending."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He watches the late film most nights."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1"
+name = "I'm off to bed"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Night."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He turns the volume up a notch as you go."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He watches the late film most nights."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "ev_mark_tv_2"
+name = "Late TV (2)"
+description = "Everyday random scene at home (DECISIONS 221): Late TV (2). Chance 0.3, once a day."
+
+[canvases.trigger]
+location = "home_living_room"
+is_repeatable = true
+priority = 3
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+seen_weight = 0.4
+requires_npc = "npc_mark"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ev_mark_tv_2_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "ev_mark_tv_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_ryan", operator = "is_absent" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "ev_mark_tv_n", operator = "eq", value = 1 }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [6, 0, 1, 2, 3, 4]
+start_time = "22:00"
+end_time = "23:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4, 5]
+start_time = "00:00"
+end_time = "01:30"
+
+[[canvases.nodes]]
+id   = "scene"
+name = "Late TV (2)"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Mark's on the couch again with the film on. He holds a second can out to you without taking his eyes off the screen."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Don't tell your mother."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Take the beer."
+targetType = "node"
+nodeId = "a0"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "power", op = "add", value = 1, clamp = true }, { targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 1, clamp = true }, { targetType = "player", trait = "ev_mark_tv_n", op = "set", value = 2 }]
+flagEffects = [{ targetType = "player", flag = "ev_mark_tv_2", op = "set" }, { targetType = "player", flag = "ev_mark_tv_2_today", op = "set" }, { targetType = "player", flag = "ev_mark_tv_today", op = "set" }, { targetType = "player", flag = "ev_mark_tv_2_yes", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"I don't drink.\""
+targetType = "node"
+nodeId = "a1"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "ev_mark_tv_2", op = "set" }, { targetType = "player", flag = "ev_mark_tv_2_today", op = "set" }, { targetType = "player", flag = "ev_mark_tv_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "a0"
+name = "Take the beer"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You take it and sit closer than you did before, the middle cushion between you. He clinks his can on yours."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "When you tuck your feet up he looks at your legs, once, and then at the film."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He watches the late film most nights."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1"
+name = "I don't drink"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Smart."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He drinks yours too."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He watches the late film most nights."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "ev_mark_tv_3"
+name = "Late TV (3)"
+description = "Everyday random scene at home (DECISIONS 221): Late TV (3). Chance 0.3, once a day."
+
+[canvases.trigger]
+location = "home_living_room"
+is_repeatable = true
+priority = 3
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+seen_weight = 0.4
+requires_npc = "npc_mark"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ev_mark_tv_3_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "ev_mark_tv_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_ryan", operator = "is_absent" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "ev_mark_tv_n", operator = "eq", value = 2 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [6, 0, 1, 2, 3, 4]
+start_time = "22:00"
+end_time = "23:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4, 5]
+start_time = "00:00"
+end_time = "01:30"
+
+[[canvases.nodes]]
+id   = "scene"
+name = "Late TV (3)"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The film's on. Mark's arm is along the back of the couch, and he leaves it there."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Sitting?"
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sit in the middle."
+targetType = "node"
+nodeId = "a0"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 2, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "ev_mark_tv_n", op = "set", value = 3 }]
+flagEffects = [{ targetType = "player", flag = "ev_mark_tv_3", op = "set" }, { targetType = "player", flag = "ev_mark_tv_3_today", op = "set" }, { targetType = "player", flag = "ev_mark_tv_today", op = "set" }, { targetType = "player", flag = "ev_mark_tv_3_yes", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Take the end seat."
+targetType = "node"
+nodeId = "a1"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "ev_mark_tv_3", op = "set" }, { targetType = "player", flag = "ev_mark_tv_3_today", op = "set" }, { targetType = "player", flag = "ev_mark_tv_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "a0"
+name = "Sit in the middle"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You sit in the middle, right under his arm on the back of the couch. It doesn't come down. His fingers hang an inch above your shoulder."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Neither of you watches the film. When you lean back, your hair brushes his wrist, and he goes very still."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He watches the late film most nights."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1"
+name = "Take the end seat"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You take the end. His arm stays on the back of the couch, on nothing."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Suit yourself."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He watches the late film most nights."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases]]
+id   = "ev_mark_tv_4"
+name = "Late TV (4)"
+description = "Everyday random scene at home (DECISIONS 221): Late TV (4). Chance 0.3, once a day."
+
+[canvases.trigger]
+location = "home_living_room"
+is_repeatable = true
+priority = 3
+is_active = true
+trigger_mode = "random"
+chance = 0.3
+seen_weight = 0.4
+requires_npc = "npc_mark"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ev_mark_tv_4_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "ev_mark_tv_today", operator = "is_false" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_ryan", operator = "is_absent" }, { type = "npc_at_location", location_id = "home_living_room", npc_id = "npc_laura", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "ev_mark_tv_n", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [6, 0, 1, 2, 3, 4]
+start_time = "22:00"
+end_time = "23:45"
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4, 5]
+start_time = "00:00"
+end_time = "01:30"
+
+[[canvases.nodes]]
+id   = "scene"
+name = "Late TV (4)"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Mark's on the couch with the film. He pats the cushion right beside him."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Here."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sit right beside him."
+targetType = "node"
+nodeId = "a0"
+time_progression_minutes = 5
+effects = [{ targetType = "npc", npcId = "npc_mark", trait = "want", op = "add", value = 2, clamp = true }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "player", trait = "ev_mark_tv_n", op = "set", value = 4 }]
+flagEffects = [{ targetType = "player", flag = "ev_mark_tv_4", op = "set" }, { targetType = "player", flag = "ev_mark_tv_4_today", op = "set" }, { targetType = "player", flag = "ev_mark_tv_today", op = "set" }, { targetType = "player", flag = "ev_mark_tv_4_yes", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sit at the end."
+targetType = "node"
+nodeId = "a1"
+time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "ev_mark_tv_4", op = "set" }, { targetType = "player", flag = "ev_mark_tv_4_today", op = "set" }, { targetType = "player", flag = "ev_mark_tv_today", op = "set" }]
+
+[[canvases.nodes]]
+id   = "a0"
+name = "Sit right beside him"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You sit close at his side. Halfway through the film his hand comes off his knee and rests on the cushion, an inch from your thigh."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "When you shift, your leg brushes it, once. He doesn't move it, and he doesn't move closer. Your nipples are hard and he can see them, and the film goes on."
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Good film."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Yeah."
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He watches the late film most nights."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
+
+[[canvases.nodes]]
+id   = "a1"
+name = "Sit at the end"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Suit yourself."
+props = { speaker = "npc", npcId = "npc_mark" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He takes his hand back."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He watches the late film most nights."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go on."
+targetType = "location"
+locationId = "home_living_room"
+time_progression_minutes = 5
 
 # ══════════════════════════════════════════════════════════════════
 # Phase: 8_phone.toml

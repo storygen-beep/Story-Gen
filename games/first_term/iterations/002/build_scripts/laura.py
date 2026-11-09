@@ -856,6 +856,8 @@ text = ("# =====================================================================
         "# =============================================================================\n")
 # Iteration 002, part 3: leaving this outing after 22:00 sets late_date and came_home_late (Q69,
 # the street sheet "Why she's late"; canv.mark_late). Each is read for 4 hours; her bed clears them.
+import everyday   # DECISIONS 221: the day after an everyday scene, the hub remembers it
+everyday.hub_read(out)
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards)
 open(__import__("sys").argv[1], "w").write(text)
 print("laura:", len(out), "canvases,", len(cards), "cards")

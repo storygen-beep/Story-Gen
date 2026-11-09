@@ -82,6 +82,30 @@ hold_band_while = ["drinks_boost"]
 
 [engine.daily_tick]
 flagEffects = [
+  # DECISIONS 221 (everyday.py): the everyday scenes at home, once a day each
+  { targetType = "player", flag = "everyday_home_today", op = "unset" },
+  { targetType = "player", flag = "ev_laura_did_you_eat_today", op = "unset" },
+  { targetType = "player", flag = "ev_laura_phone_call_today", op = "unset" },
+  { targetType = "player", flag = "ev_laura_list_today", op = "unset" },
+  { targetType = "player", flag = "ev_laura_shoulders_today", op = "unset" },
+  { targetType = "player", flag = "ev_ryan_cover_today", op = "unset" },
+  { targetType = "player", flag = "ev_ryan_shift_today", op = "unset" },
+  { targetType = "player", flag = "ev_ryan_dinner_kick_today", op = "unset" },
+  { targetType = "player", flag = "ev_ryan_hall_squeeze_today", op = "unset" },
+  { targetType = "player", flag = "ev_ryan_bet_today", op = "unset" },
+  { targetType = "player", flag = "ev_ryan_bet_1_today", op = "unset" },
+  { targetType = "player", flag = "ev_ryan_bet_2_today", op = "unset" },
+  { targetType = "player", flag = "ev_ryan_bet_3_today", op = "unset" },
+  { targetType = "player", flag = "ev_ryan_bet_4_today", op = "unset" },
+  { targetType = "player", flag = "ev_mark_bills_today", op = "unset" },
+  { targetType = "player", flag = "ev_mark_radio_today", op = "unset" },
+  { targetType = "player", flag = "ev_mark_chilli_today", op = "unset" },
+  { targetType = "player", flag = "ev_mark_creeper_today", op = "unset" },
+  { targetType = "player", flag = "ev_mark_tv_today", op = "unset" },
+  { targetType = "player", flag = "ev_mark_tv_1_today", op = "unset" },
+  { targetType = "player", flag = "ev_mark_tv_2_today", op = "unset" },
+  { targetType = "player", flag = "ev_mark_tv_3_today", op = "unset" },
+  { targetType = "player", flag = "ev_mark_tv_4_today", op = "unset" },
   { targetType = "player", flag = "zoe_park_dare_today", op = "unset" },
   # (alignment pass 2, 2026-11-03; gate `a booking can clear`) same-day plans clear at midnight
   { targetType = "player", flag = "said_eating_out", op = "unset" },
@@ -505,6 +529,16 @@ label  = "Café regulars"
 [[traits.labels]]
 key    = "cafe_name"
 label  = "The café's name"
+
+[[traits.labels]]
+key    = "ev_ryan_bet_n"
+label  = "Everyday chain: ev_ryan_bet_n"
+hidden = true
+
+[[traits.labels]]
+key    = "ev_mark_tv_n"
+label  = "Everyday chain: ev_mark_tv_n"
+hidden = true
 
 [[traits.labels]]
 key    = "laura_gaps_watched"
