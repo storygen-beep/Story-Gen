@@ -45,6 +45,10 @@ flag_keys = [
   "college_for_grades",
   "couch_seen",
   "couch_today",
+  "crowd_campus_gym",
+  "crowd_canteen",
+  "crowd_flashed",
+  "crowd_quad",
   "curfew",
   "dean_door_seen",
   "dean_met",
@@ -63,6 +67,7 @@ flag_keys = [
   "exam_art_done",
   "exam_bio_done",
   "exam_business_done",
+  "exam_by_notes",
   "exam_psych_done",
   "exh_wish_20",
   "exh_wish_40",
@@ -365,6 +370,8 @@ flag_keys = [
   "zoe_caught_up",
   "zoe_changed_in_front",
   "zoe_couch_night",
+  "zoe_crowd_done",
+  "zoe_crowd_on",
   "zoe_dared",
   "zoe_face_today",
   "zoe_has_bra",
@@ -430,6 +437,10 @@ jake_catch_roll    = 0   # 1-8: on 1 or 2, a near-catch (jake_date_end)
 # their invites wait until it is full again (phone.py ZOE_WAIT, JAKE_WAIT)
 zoe_patience       = 6
 jake_patience      = 3
+# DECISIONS 210 (goals.py): the counts toward a goal
+zoe_crowd          = 0   # Zoe's party needs 10
+study_notes        = 0   # the study guy's 5 chapters
+zoe_crowd_asked    = 0   # 1 once she says yes to Zoe's text (phone.py zoe_crowd)
 # DECISIONS 209: one hidden visit counter per repeated loop (drift.py), so her reaction can move with the count
 rep_cafe_show      = 0
 rep_class_bio      = 0
@@ -2063,7 +2074,7 @@ description  = "A guy in your Business and Biology classes, 21. Has the answers,
 portrait     = "portraits/study_guy.jpg"
 relationship = "A guy in your Business and Biology classes, 21. Has the answers, wants your attention."
 role         = "Business classmate"
-core_traits  = {  }
+core_traits  = { want = 0 }
 
 [[npcs]]
 id           = "npc_cocky_guy"

@@ -1,4 +1,5 @@
 # [READY] Place — Library
+> Changed 2026-11-09 (DECISIONS 210, LO: "Go ahead"): showing off to get something, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. New section: what the heat proposal built here. Points at the copy fixes it took.
@@ -69,3 +70,7 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has h
 | Nadia's afternoons | LIVES §3 |
 | hours | LO took the guess, 2026-10-08 |
 | the study cap | guess |
+
+## His notes (2026-11-09, DECISIONS 210)
+
+Row "Sit with the study guy", weekdays 08:00-19:30, once a day. The study guy trades his Business notes in the library, one chapter a day, weekdays, from her fourth week until the Business midterm, once she is Daring (Exhibitionism 20). Asking nicely gets a no. A show at her stage gets a chapter: sitting on his notes (20, pays to 39); her panties under the table (40, pays to 59); a flash in the back stacks (60, pays to 79). Each chapter: hidden count `study_notes` +1, Intelligence +1, his hidden `want` +1 (his lines change with it). Five chapters open "You know his notes by heart." at the Business midterm (grade +8, more than copying); at his want 5 one look gets his paper. Source: `iterations/002/build_scripts/goals.py`, `college.py`.

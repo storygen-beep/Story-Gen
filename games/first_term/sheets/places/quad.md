@@ -1,4 +1,5 @@
 # [READY] Place — Quad
+> Changed 2026-11-09 (DECISIONS 210, LO: "Go ahead"): showing off to get something, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. New section: what the heat proposal built here. Points at the copy fixes it took.
@@ -69,3 +70,7 @@ The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`. What the build has h
 | Zoe's leak on the quad | ARC_IDEAS, Zoe A step 0 |
 | the grass row reads campus talk | LO, 2026-10-08 |
 | the campus page's 500 words land here | LO, 2026-10-08 (question 43) |
+
+## Zoe's crowd (2026-11-09, DECISIONS 210)
+
+Row "Find someone for Zoe's party", every day 08:00-20:00, once a day: a guy on the grass by the path. Zoe texts once she has been to one of her parties and is Daring (Exhibitionism 20): bring her ten people (`phone.py` `zoe_crowd`; a no lets the text come back in a week, ignoring it costs her patience). After a yes, the quad, the gym and the canteen each have one ask a day, "Find someone for Zoe's party", until ten are coming (hidden count `zoe_crowd`). Asking plainly always gets a no and counts nothing. A show at her stage gets a yes: close (20, pays to 39); her panties under a short hem, or a stretch on the gym mats (40, pays to 59, campus talk +1); her bare tits for three seconds (60, pays to 79, campus talk +1). The screen after each yes says the count in that place's words. Source: `iterations/002/build_scripts/goals.py`.

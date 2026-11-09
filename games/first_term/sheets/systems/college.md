@@ -1,4 +1,6 @@
 # [READY] System — college
+> Changed 2026-11-09 (DECISIONS 211, LO: "lets have it cot shaped. One time the routine"): the Repeats section now reads the first time once, then routine by stage. Signed by LO 2026-11-09 ("Sign them").
+> Changed 2026-11-09 (DECISIONS 210, LO: "Go ahead"): showing off to get something, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-09 (DECISIONS 209, LO: "Go ahead"): her reaction drifts when she does it again, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-09 (DECISIONS 208, LO: "I say we tackle 1st fewer cloths first"): more clothes, round 2, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 207, LO: "Go ahead"): gossip that matters, new section "Gossip" at the end. Signed by LO 2026-11-08 ("Sign it").
@@ -257,3 +259,11 @@ line per class, as the DECISIONS 205 pieces have.
 Each class's risky answer (Psychology, Business, Biology, Figure drawing) keeps a hidden visit count. The screen after her yes gets one paragraph that moves with it: the first time, the
 next few (2 to 4), and once it's a habit (5 and up). It's about her body's habit and the watchers' habit, so it is true at
 every stage; her stage thought stays as it was. Lines: `iterations/002/build_scripts/drift.py`.
+
+**Changed 2026-11-09 (DECISIONS 211).** Course of Temptation's shape now: the count only picks the first time, shown once. Every visit after is routine, and the routine line reads her stage: below 40 (Covered, Daring), 40 to 59 (Showing), 60 and up (Watched). The old "next few" and "habit" lines are the first two routine lines; each loop has a new line for Watched. (Ryan's door reads Corruption.)
+
+## Showing off for something (2026-11-09, DECISIONS 210)
+
+The study guy trades his Business notes in the library, one chapter a day, weekdays, from her fourth week until the Business midterm, once she is Daring (Exhibitionism 20). Asking nicely gets a no. A show at her stage gets a chapter: sitting on his notes (20, pays to 39); her panties under the table (40, pays to 59); a flash in the back stacks (60, pays to 79). Each chapter: hidden count `study_notes` +1, Intelligence +1, his hidden `want` +1 (his lines change with it). Five chapters open "You know his notes by heart." at the Business midterm (grade +8, more than copying); at his want 5 one look gets his paper. Source: `iterations/002/build_scripts/goals.py`, `college.py`.
+
+On the quad, at the gym and in the canteen: Zoe's crowd (`parties.md`).

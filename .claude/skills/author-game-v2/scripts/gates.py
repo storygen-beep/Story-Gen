@@ -18299,8 +18299,8 @@ def _met_by_one_time_scene(game):
 
 
 def _voice_only_sites(game):
-    """Trait reads on groups that hold only her own line or thought: her voice changing with her level
-    gates no access, so `the climb is where you said it is` does not count them as climb."""
+    """Trait reads on groups that hold only narration, her own line or her thought: text changing with her level
+    gates no access, so `the climb is where you said it is` does not count them as climb (LO, 2026-11-09)."""
     sites = collections.Counter()
 
     def rec(blocks):
@@ -18309,7 +18309,7 @@ def _voice_only_sites(game):
                 continue
             kids = b.get("blocks") or (b.get("props") or {}).get("blocks") or []
             if b.get("type") == "group" and kids and all(
-                    k.get("type") == "thought_bubble"
+                    k.get("type") in ("thought_bubble", "paragraph")
                     or (k.get("type") == "dialog" and (k.get("props") or {}).get("speaker") == "player") for k in kids):
                 for path, node in _walk_paths({k: v for k, v in b.items() if k != "blocks"}):
                     if node.get("type") == "trait" and node.get("subject") != "npc" and node.get("trait_key"):
