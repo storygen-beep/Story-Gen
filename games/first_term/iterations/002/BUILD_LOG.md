@@ -1678,3 +1678,10 @@ with their screen, night hours with no one on the street, a choice of bare skin 
 (the shower's "nobody does" after a walk-in can try the handle), fixed. Final: gates 118, 0 fails; shape 22 pass; cites 0
 wrong; sweep 5,120 clicks, 0 page errors. Left as found, the scenes' own gates: garden_sun's topless choice opens at 40
 (DECISIONS 203 says 60), and Mark's laundry tease takes off only three kinds of top while its text says "your top".
+
+## 2026-11-09 — Zoe's asks read her flag (engine fix)
+
+The engine's flag-chain check now accepts a phone reply as a located setter (v2.py validate_flag_chains; new test
+apps/game_generation/tests/test_flag_chain_phone_setter.py). goals.py's three asks read zoe_crowd_on again; the hidden
+trait zoe_crowd_asked is gone from phone.py, gen_world.py and 0_systems_spec.toml. Build: all flag chains valid; gates
+118, 0 fails. Headless: the quad row shows at E20 with only zoe_crowd_on set, not at 19; the counts unchanged.

@@ -51520,7 +51520,7 @@ is_active = true
 max_triggers_per_day = 1
 show_when_blocked = true
 cooldown_message = "Every day, 8 AM-8 PM"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "zoe_crowd_asked", operator = "gte", value = 1 }, { type = "trait", subject = "player", trait_key = "zoe_crowd", operator = "lt", value = 10 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_crowd_on", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "zoe_crowd", operator = "lt", value = 10 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
 
 [[canvases.trigger.schedules]]
 weekdays = [0, 1, 2, 3, 4, 5, 6]
@@ -51939,7 +51939,7 @@ is_active = true
 max_triggers_per_day = 1
 show_when_blocked = true
 cooldown_message = "Every day, 8 AM-9 PM"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "zoe_crowd_asked", operator = "gte", value = 1 }, { type = "trait", subject = "player", trait_key = "zoe_crowd", operator = "lt", value = 10 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_crowd_on", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "zoe_crowd", operator = "lt", value = 10 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
 
 [[canvases.trigger.schedules]]
 weekdays = [0, 1, 2, 3, 4, 5, 6]
@@ -52323,7 +52323,7 @@ is_active = true
 max_triggers_per_day = 1
 show_when_blocked = true
 cooldown_message = "Weekdays, 11:30 AM-2 PM"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "zoe_crowd_asked", operator = "gte", value = 1 }, { type = "trait", subject = "player", trait_key = "zoe_crowd", operator = "lt", value = 10 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_crowd_on", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "zoe_crowd", operator = "lt", value = 10 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }
 
 [[canvases.trigger.schedules]]
 weekdays = [0, 1, 2, 3, 4]

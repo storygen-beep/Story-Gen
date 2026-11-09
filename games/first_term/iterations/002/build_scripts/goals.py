@@ -63,9 +63,8 @@ def pay(key, cap, talk=False, extra=()):
 
 
 # ═════════════════════════════════════════════════════════════════════════════
-# A. ZOE'S CROWD: the asks. They read the hidden trait zoe_crowd_asked, not the flag: the flag is set by a phone
-# reply, which has no place, and the flag-chain check fails a trigger that needs a flag with no located setter
-# (v2.py validate_flag_chains). The flag stays for the card and the text's own guard.
+# A. ZOE'S CROWD: the asks, behind zoe_crowd_on (set by her reply to Zoe's text; since 2026-11-09 the flag-chain
+# check counts a phone reply as a located setter, v2.py validate_flag_chains).
 # ═════════════════════════════════════════════════════════════════════════════
 def crowd_ask(cid, name, loc, sched, place, close_label, intro, more_blocks, flash_blocks, off, plain_no, close, show, bare, bare_d, show_choice=None):
     """show_choice: (label, extra conditions) for the Showing answer where a hem isn't the way (the gym's mats)."""
@@ -103,7 +102,7 @@ def crowd_ask(cid, name, loc, sched, place, close_label, intro, more_blocks, fla
                            "Each yes: zoe_crowd +1, said on the screen.",
             "trigger": {"location": loc, "is_repeatable": True, "priority": 4, "is_active": True, "max_triggers_per_day": 1,
                         "schedules": sched,
-                        "conditions": cond(trait("zoe_crowd_asked", "gte", 1), trait("zoe_crowd", "lt", 10), EXH(20))},
+                        "conditions": cond(flag("zoe_crowd_on"), trait("zoe_crowd", "lt", 10), EXH(20))},
             "nodes": nodes}
 
 

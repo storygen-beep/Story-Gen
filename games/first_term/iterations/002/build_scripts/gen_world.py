@@ -108,7 +108,6 @@ jake_patience      = 3
 # DECISIONS 210 (goals.py): the counts toward a goal
 zoe_crowd          = 0   # Zoe's party needs 10
 study_notes        = 0   # the study guy's 5 chapters
-zoe_crowd_asked    = 0   # 1 once she says yes to Zoe's text (phone.py zoe_crowd)
 # DECISIONS 209: one hidden visit counter per repeated loop (drift.py), so her reaction can move with the count
 DRIFTCOUNTERS
 
