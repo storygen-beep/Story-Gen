@@ -1,4 +1,7 @@
 # [READY] Person — Jake
+> Changed 2026-11-10 (DECISIONS 227): the team showers in the gym's shared shower room; his act still takes her into the men's locker room. Re-signed by LO 2026-11-10 ("Sign them").
+> Changed 2026-11-10 (DECISIONS 226): his locker-room act (A1) moves into the men's locker room (`gym_mens_locker`), where the team showers next door. Re-signed by LO 2026-11-10 ("Sign them").
+> Changed 2026-11-10 (DECISIONS 225, LO: move the gym to the street): team training moves to the street gym's floor (`gym_floor`), same days and hours; the locker-room act (A1) moves to `gym_locker`; his first line there: "Coach moved us off campus. Better weights." Dex is his rival on the floor (`npc_dex.md`). Re-signed by LO 2026-11-10 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 198): at training he reads the gym clothes, one line each. Re-signed by LO 2026-11-08 ("Sign 4 pages").
 > Signed by LO: LO, 2026-11-04.
 > Changed 2026-11-04, LO's answers: his line after a date is "Every guy in that place was looking at you tonight." (D); signed by LO 2026-11-04.
@@ -50,7 +53,7 @@ A ceiling, never a floor. LO took these, 2026-10-08.
 | `quad` | Mon, Wed, Fri | 08:30 | 11:45 | with the team |
 | `zoe_apartment` | Fri | 19:00 | 00:00 | the Friday party, till midnight |
 | `canteen` | Mon–Fri | 11:45 | 13:00 | lunch |
-| `campus_gym` | Tue, Thu | 15:00 | 17:00 | team training (the 17:30 showers half-hour reverted, DECISIONS 220) · only when `jake_number` (met at Zoe's) |
+| `gym_floor` | Tue, Thu | 15:00 | 17:00 | team training at the street gym (moved from campus, DECISIONS 225) (the 17:30 showers half-hour reverted, DECISIONS 220) · only when `jake_number` (met at Zoe's) |
 | `home_front_door` | Mon, Tue, Thu, Sun | 22:00 | 00:00 | the booty call: only when `jake_coming` (her "door's unlocked" to his "you up?" text, 3 hours), after his step 4 (reach audit 2026-11-09, DECISIONS 217) |
 | `home_front_door` | Sat | 19:00 | 21:00 | picks her up · only when `jake_date_booked` (question 73) |
 | `lecture_hall` | Tue, Thu | 08:30 | 10:00 | figure drawing · only when `jake_number` |
@@ -193,8 +196,8 @@ Each follow-up waits for her reply (`after_round`), and a different answer follo
 
 ## Walk-ins and acts from the heat proposal (signed 2026-11-03, built)
 
-Walk-ins: `campus_gym`, `canteen`, `quad`. Each row (when, what pays) is on that place sheet.
-Acts: the locker room (A1, `campus_gym`), showing her off on the quad (A3, `quad`), Zoe's bathroom at the party (A7, `zoe_bathroom`).
+Walk-ins: `gym_floor`, `canteen`, `quad`. Each row (when, what pays) is on that place sheet.
+Acts: the locker room (A1, `gym_locker`), showing her off on the quad (A3, `quad`), Zoe's bathroom at the party (A7, `zoe_bathroom`).
 The plan: `proposals/FIRST_TERM_HEAT_PROPOSAL_20261103.md`.
 
 **Copy:** lines here were rewritten from `proposals/COPY_FIXES_A.md`, `proposals/COPY_FIXES_B.md` (signed with the a2 sheets, DECISIONS 125).
@@ -220,3 +223,14 @@ One line on his rack screen, by what she trains in: track pants ("Track pants? Y
 the gym tank ("Nice. You actually came to train."), the sports bra alone (his eyes stay on her tits), the tiny shorts
 ("You wore those here. On purpose. Jesus."), the sheer leggings ("Are you trying to get me killed? Coach is right there.").
 Jake has no meter of his own, so no line pays him.
+
+## His locker-room act moves (2026-11-10, DECISIONS 226)
+
+The gym on the street has a men's locker room now (`gym.md`). A1 ("Wait for him after training.") takes her into it:
+the team showers at the far end, behind one wall of lockers, which is what his lines already say ("Somebody shouts his
+name from the showers"). Pays and gates as signed.
+
+## The shared showers (2026-11-10, DECISIONS 227)
+
+The gym's showers are one shared room now (`gym.md`). The team showers there after training; his act still takes her
+into the men's locker room, round the end of the lockers from where they're changing.

@@ -425,9 +425,13 @@ _study_door, _study_nodes = item("study", "Study at the kitchen table.", HER_EVE
 STUDY_KITCHEN = {
     "id": "kitchen_study", "name": "Study at the kitchen table",
     "description": "Study at the kitchen table while Laura's there: 60 min, energy -10, one subject's grade +1, her Love (once a day with her hub). Work, so not in her hub (R1).",
-    "trigger": {"location": K, "requires_npc": L, "is_repeatable": True, "priority": 3, "is_active": True,
+    # DECISIONS 224: her own work with Laura only present (R1: work is never inside a hub), so a room link that
+    # reads Laura's presence as a condition, not `requires_npc`, which the gate `a person's scene is inside their
+    # portrait` reads as a scene done with her (engine_daygate_and_npc_canvas_limit, fix b)
+    "trigger": {"location": K, "is_repeatable": True, "priority": 3, "is_active": True,
                 "schedules": [{"weekdays": [0, 1, 3, 4, 6], "start_time": "19:00", "end_time": "22:00"}],
-                "conditions": cond(flag("opening_done"), flag("studied_home", False))},
+                "conditions": cond(flag("opening_done"), flag("studied_home", False),
+                                   {"type": "npc_at_location", "location_id": K, "npc_id": L, "operator": "is_present"})},
     "nodes": _study_nodes}
 # ── the towel at home (LO, 2026-10-31, DECISIONS 98): her reaction by her Love, every visit (<40, 40-69,
 #    70+, her hub's own cut points); "Let her fix it." pays her Love +2 once a day. No Daring gate: it's a

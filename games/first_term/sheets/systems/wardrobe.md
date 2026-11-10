@@ -1,4 +1,5 @@
 # [READY] System — wardrobe
+> Changed 2026-11-10 (DECISIONS 225, LO: move the gym to the street): the changing room is the street gym's locker room (`gym_locker`); working out needs a gym top and a gym bottom (`gym.md`); the sports bra alone passes the street from Exhibitionism 20. Re-signed by LO 2026-11-10 ("Sign them").
 > Changed 2026-11-09 (DECISIONS 208, LO: "I say we tackle 1st fewer cloths first"): more clothes, round 2, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 206, LO: "She will buy. Completely her decision"): two café dresses she buys from Tom, new section at the end. Re-signed by LO 2026-11-08 ("Go ahead with 1 and 2").
 > Changed 2026-11-08 (DECISIONS 205): everyday clothes by stage, new section below. Re-signed by LO 2026-11-08 ("Sign them").
@@ -177,7 +178,7 @@ low-cut top "Cut low. Lean forward and they can see right down it.", sports bra 
 and it shows everything." The line shows on the shop stand and under the slot in Change Clothes (engine field
 `description`). Course of Temptation's shop does the same (`exhibition_study/A_cot.md:222`).
 
-The gym is now a place she can change (its locker room). Read by the gym (`campus_gym.md`), the park run (`park.md`)
+The gym is now a place she can change (its locker room, `gym_locker`, on the street since DECISIONS 225). Read by the gym (`gym.md`), the park run (`park.md`)
 and Jake's training (`npc_jake.md`). Track pants and the sheer leggings count as covering her legs; the tiny shorts don't.
 
 ## Everyday clothes by stage (2026-11-08, DECISIONS 205)

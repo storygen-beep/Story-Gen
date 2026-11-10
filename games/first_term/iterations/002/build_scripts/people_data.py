@@ -1,4 +1,4 @@
-"""first_term — the 21 people. Source: sheets/people/*.md and board.characters (schedules in
+"""first_term — the 22 people. Source: sheets/people/*.md and board.characters (schedules in
 the sheets' order: the engine takes the first matching row)."""
 from tomlw import *
 
@@ -174,6 +174,11 @@ PEOPLE = [
     dict(id="npc_figure_model", name="The figure-drawing model", role="life model", age=25,
          relationship="The model in Figure drawing, 25. Paid to be drawn, naked, every class.", tags=[],
          core={}, show=[], schedules=[]),
+    # DECISIONS 225 (LO, 2026-11-10: "Gym trainer too"; sheets/people/npc_dex.md)
+    dict(id="npc_dex", name="Dex", role="personal trainer", age=34,
+         relationship="The trainer at the gym on your street, 34. Picks the clients who let him touch.",
+         tags=["Hands-on", "His hands on you, every rep", "Black staff tee", "Protein bars at the desk"],
+         core={}, show=[], schedules=[]),
 ]
 
 
@@ -219,9 +224,10 @@ ACTIVITIES = {
     "npc_bio_ta": ["teaching Biology", "teaching Biology", "office hours"],
     "npc_dean": ["in his office, early", "in his office"],
     "npc_cocky_guy": ["at Zoe's party", "at Zoe's party", "in Figure drawing", "in Figure drawing"],
+    "npc_dex": ["ending his shift in the sauna", "on shift at the gym"],
 }
 # The household is home from the first screen: no met gate (0.1 built them with none).
-_NO_MET = {"npc_ryan", "npc_laura", "npc_mark"}
+_NO_MET = {"npc_ryan", "npc_laura", "npc_mark", "npc_dex"}   # Dex: his step 1 is the meeting, at work (DECISIONS 225)
 
 
 # Laura's stairs row reads came_home_late for 4 hours, as the ledger writes it (L20). Since LO's

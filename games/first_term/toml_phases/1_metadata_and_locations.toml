@@ -45,9 +45,9 @@ flag_keys = [
   "college_for_grades",
   "couch_seen",
   "couch_today",
-  "crowd_campus_gym",
   "crowd_canteen",
   "crowd_flashed",
+  "crowd_gym_floor",
   "crowd_quad",
   "curfew",
   "dean_door_seen",
@@ -59,6 +59,11 @@ flag_keys = [
   "desk_guy_met",
   "desk_guy_refused",
   "desk_guy_today",
+  "dex_after_today",
+  "dex_first_time",
+  "dex_met",
+  "dex_paid_another_way",
+  "dex_session_today",
   "did_dishes",
   "did_laundry",
   "dinner_promised",
@@ -167,7 +172,11 @@ flag_keys = [
   "grocery_done_today",
   "grocery_list",
   "gym_accident_today",
+  "gym_card_bought",
+  "gym_hit_today",
+  "gym_in_today",
   "gym_look_today",
+  "gym_shower_today",
   "had_coffee",
   "had_drink_home",
   "hale02_took_them_off",
@@ -183,6 +192,7 @@ flag_keys = [
   "hale_office_booked",
   "hale_pen_picked",
   "hale_thursday_booked",
+  "hale_thursdays_today",
   "hale_touched",
   "heavy_night",
   "helped_cook",
@@ -210,6 +220,7 @@ flag_keys = [
   "jake_number",
   "jake_photo_taken",
   "jake_quad_today",
+  "jake_said_gym_moved",
   "jake_stood_up",
   "kayla_caught_her",
   "kayla_met",
@@ -274,6 +285,7 @@ flag_keys = [
   "mark_saw_her",
   "mark_saw_lingerie",
   "mark_saw_mirror",
+  "mark_sunday_table_today",
   "mark_things_today",
   "mark_told_car",
   "mark_towel_today",
@@ -293,6 +305,7 @@ flag_keys = [
   "opening_done",
   "out_shown_today",
   "park_flash_today",
+  "park_hidden_today",
   "park_look_today",
   "park_rest_today",
   "park_run_today",
@@ -359,8 +372,10 @@ flag_keys = [
   "ryan_things_found",
   "ryan_things_today",
   "ryan_towel_today",
+  "ryan_two_knocks_today",
   "ryan_walked_in_shower",
   "said_eating_out",
+  "sauna_today",
   "saw_laura_alone",
   "saw_mark_and_laura",
   "saw_ryan_alone",
@@ -415,6 +430,7 @@ flag_keys = [
   "vance_no_today",
   "vance_porch_look",
   "vance_saw_step",
+  "vance_walk_past_today",
   "vance_walk_today",
   "walkin_bedroom_zoe_today",
   "walkin_cafe_gary_today",
@@ -528,6 +544,7 @@ tom_step   = 0
 zoe_step   = 0
 hale_step  = 0
 jake_step  = 0
+dex_step   = 0   # DECISIONS 225: the trainer (npc_dex.md)
 # release 1 (2026-11-01, DECISIONS 112-121): the counters the redesigned sheets read
 rent_short_weeks   = 0   # the engine adds 1 every short Sunday (setup.carryRent)
 rent_late_fee      = 0   # part of next Sunday's due (rent_short_2: Vance's $15)
@@ -550,6 +567,7 @@ jake_patience      = 3
 # DECISIONS 210 (goals.py): the counts toward a goal
 zoe_crowd          = 0   # Zoe's party needs 10
 study_notes        = 0   # the study guy's 5 chapters
+dex_sessions       = 0   # DECISIONS 225: sessions with Dex since his last step (npc_dex.md: 2, then 3, then 3)
 # DECISIONS 209: one hidden visit counter per repeated loop (drift.py), so her reaction can move with the count
 rep_cafe_show      = 0
 rep_class_bio      = 0
@@ -598,20 +616,23 @@ default = "El"
 id          = "street"
 name        = "Your Street"
 kind        = "thoroughfare"
-description = "Your street: the way out to everything. Home is halfway down, with the porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this sidewalk, and every neighbor with a window sees what you wore to do it."
+description = "Your street: the way out to everything. Home is halfway down, with the porch next door, the corner shop on the corner, the gym across from it and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten, the gym five. Every trip out walks this sidewalk, and every neighbor with a window sees what you wore to do it."
 image       = "locations/street.jpg"
 image_search_queries = ["your street"]
-navigation_order = ["home", "vance_house", "park", "corner_shop", "campus", "town"]
+navigation_order = ["home", "vance_house", "park", "corner_shop", "gym", "campus", "town"]
 clothing_rules = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Needs Exhibitionism 20.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "sports_bra", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["top"], message = "Not in just the sports bra. Not yet. (Needs Exhibitionism 20.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "clothing_item", item_id = "sports_bra", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }] }, slots_required = ["bottom"], message = "Not like this. Not out there. Put something on." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_item", item_id = "sports_bra", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }] }, slots_required = ["underwear", "bottom"], message = "Not like this. Not yet." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Exhibitionism 40.)" },
   { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Exhibitionism 20.)" },
 ]
 description_variants = [
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "vance_met", operator = "is_true" }] }, text = "Your street: the way out to everything. Home is halfway down, with Mr. Vance's porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this sidewalk, and every neighbor with a window sees what you wore to do it." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "vance_met", operator = "is_true" }] }, text = "Your street: the way out to everything. Home is halfway down, with Mr. Vance's porch next door, the corner shop on the corner, the gym across from it and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten, the gym five. Every trip out walks this sidewalk, and every neighbor with a window sees what you wore to do it." },
 ]
 
 [[locations]]
@@ -957,6 +978,86 @@ clothing_rules = [
 ]
 
 [[locations]]
+id          = "gym"
+name        = "Gym"
+kind        = "thoroughfare"
+description = "The gym on your street: a desk out front, the floor, the locker room and a sauna at the back."
+image       = "locations/gym.jpg"
+image_search_queries = ["gym"]
+entry_from  = "street"
+is_container = true
+default_entry = "gym_floor"
+crossing_costs = { time = 5 }
+navigation_order = []
+
+[[locations]]
+id          = "gym_floor"
+name        = "Gym Floor"
+kind        = "destination"
+description = "The gym floor: racks of weights, a row of treadmills facing the mirror wall, mats in the corner and the desk by the door. Members and day passes only, and you train in gym clothes. What you train in is what everybody in that mirror sees."
+image       = "locations/gym_floor.jpg"
+image_search_queries = ["gym floor"]
+parent      = "gym"
+navigation_order = ["gym_locker"]
+hours = [{ weekdays = [0, 1, 2, 3, 4, 5, 6], open = "06:00", close = "21:00" }]
+closed_text = "The gym's shut. Opens at six."
+clothing_rules = [
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Needs Exhibitionism 20.)" },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }] }, slots_required = ["bottom"], message = "Not like this. Not out there. Put something on." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }] }, slots_required = ["underwear", "bottom"], message = "Not like this. Not yet." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
+  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Exhibitionism 40.)" },
+  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Exhibitionism 20.)" },
+]
+
+[[locations]]
+id          = "gym_locker"
+name        = "Locker Room"
+kind        = "destination"
+description = "The women's locker room: benches, a wall of lockers, three open showers at the back and a mirror that fogs. Change here, shower here. The door doesn't lock."
+image       = "locations/gym_locker.jpg"
+image_search_queries = ["locker room"]
+parent      = "gym"
+entry_from  = "gym_floor"
+navigation_order = ["gym_sauna", "gym_showers"]
+entry_conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "gym_in_today", operator = "is_true" }] }
+blocked_message = "Members only. The desk's out front."
+hours = [{ weekdays = [0, 1, 2, 3, 4, 5, 6], open = "06:00", close = "21:00" }]
+closed_text = "The gym's shut. Opens at six."
+
+[[locations]]
+id          = "gym_sauna"
+name        = "Sauna"
+kind        = "destination"
+description = "The sauna: two cedar benches, a glass door, heat that takes your breath. It's mixed, and it's towels only. The regulars sit with their eyes half shut. Not all the way shut."
+image       = "locations/gym_sauna.jpg"
+image_search_queries = ["sauna"]
+parent      = "gym"
+entry_from  = "gym_locker"
+navigation_order = []
+entry_conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "gym_in_today", operator = "is_true" }, { type = "worn_type", operator = "eq", value = "towel" }] }
+blocked_message = "Members only, and a towel only. Check in at the desk, then change in the locker room."
+hours = [{ weekdays = [0, 1, 2, 3, 4, 5, 6], open = "06:00", close = "21:00" }]
+closed_text = "The gym's shut. Opens at six."
+
+[[locations]]
+id          = "gym_showers"
+name        = "Showers"
+kind        = "destination"
+description = "The showers: one tiled room, a dozen heads along two walls, no stalls and no curtains, men and women together. Everyone showers together. It's that kind of gym."
+image       = "locations/gym_showers.jpg"
+image_search_queries = ["showers"]
+parent      = "gym"
+entry_from  = "gym_locker"
+navigation_order = []
+entry_conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "gym_in_today", operator = "is_true" }, { type = "worn_type", operator = "eq", value = "towel" }] }
+blocked_message = "Towel only past the lockers. The showers are shared."
+hours = [{ weekdays = [0, 1, 2, 3, 4, 5, 6], open = "06:00", close = "21:00" }]
+closed_text = "The gym's shut. Opens at six."
+
+[[locations]]
 id          = "campus"
 name        = "Campus"
 kind        = "thoroughfare"
@@ -966,7 +1067,7 @@ image_search_queries = ["campus"]
 entry_from  = "street"
 is_container = true
 crossing_costs = { time = 15 }
-navigation_order = ["quad", "lecture_hall", "library", "canteen", "college_womens_toilet", "college_mens_toilet", "campus_gym", "faculty_floor"]
+navigation_order = ["quad", "lecture_hall", "library", "canteen", "college_womens_toilet", "college_mens_toilet", "faculty_floor"]
 
 [[locations]]
 id          = "quad"
@@ -1085,29 +1186,6 @@ entry_from  = "campus"
 navigation_order = []
 hours = [{ weekdays = [0, 1, 2, 3, 4, 5, 6], open = "07:00", close = "22:00" }]
 closed_text = "The college gates are shut."
-
-[[locations]]
-id          = "campus_gym"
-name        = "Gym"
-kind        = "destination"
-description = "The college gym: racks of weights, a row of treadmills facing the mirror wall, mats in the corner and a locker room at the back. Work out here and you get fitter. What you train in is what everybody in that mirror sees."
-image       = "locations/campus_gym.jpg"
-image_search_queries = ["gym"]
-parent      = "campus"
-entry_from  = "campus"
-navigation_order = []
-hours = [{ weekdays = [0, 1, 2, 3, 4], open = "07:00", close = "21:00" }, { weekdays = [5, 6], open = "09:00", close = "17:00" }]
-closed_text = "The gym's locked."
-clothing_rules = [
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }] }, slots_required = ["legwear"], message = "Not in a towel. Get dressed first." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, slots_required = ["legwear"], message = "Not in your sleep shirt. Get dressed first." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "lt", value = 20 }] }, slots_required = ["legwear"], message = "Not in that skirt. Not yet. (Needs Exhibitionism 20.)" },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }] }, slots_required = ["bottom"], message = "Not like this. Not out there. Put something on." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_slot", slot = "bra", operator = "equipped" }] }, slots_required = ["underwear", "bottom"], message = "Not like this. Not yet." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }, slots_required = ["top", "bottom"], message = "Not like this. Not out there. Put something on." },
-  { conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }] }, slots_required = ["underwear", "top", "bottom"], message = "Not like this. Not yet. (No panties out of the house needs Exhibitionism 40.)" },
-  { slots_required = ["bra", "underwear", "top", "bottom"], message = "Not like this. Not yet. (Going out without a bra needs Exhibitionism 20.)" },
-]
 
 [[locations]]
 id          = "faculty_floor"
@@ -1914,7 +1992,7 @@ activity   = "walking you home"
 when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_date_went", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "jake_date_went", operator = "lt", value = 6 }] }
 
 [[npcs.schedules]]
-location   = "campus_gym"
+location   = "gym_floor"
 weekdays   = [1, 3]
 start_time = "15:00"
 end_time   = "17:00"
@@ -2294,6 +2372,31 @@ portrait     = "portraits/figure_model.jpg"
 relationship = "The model in Figure drawing, 25. Paid to be drawn, naked, every class."
 role         = "life model"
 core_traits  = {  }
+
+[[npcs]]
+id           = "npc_dex"
+name         = "Dex"
+description  = "The trainer at the gym on your street, 34. Picks the clients who let him touch. Age 34."
+portrait     = "portraits/dex.jpg"
+relationship = "The trainer at the gym on your street, 34. Picks the clients who let him touch."
+role         = "personal trainer"
+tags         = ["Hands-on", "His hands on you, every rep", "Black staff tee", "Protein bars at the desk"]
+core_traits  = {  }
+
+[[npcs.schedules]]
+location   = "gym_sauna"
+weekdays   = [0, 1, 2, 3, 4, 5]
+start_time = "20:00"
+end_time   = "20:45"
+activity   = "ending his shift in the sauna"
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "dex_met", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "dex_step", operator = "eq", value = 3 }] }
+
+[[npcs.schedules]]
+location   = "gym_floor"
+weekdays   = [0, 1, 2, 3, 4, 5]
+start_time = "10:00"
+end_time   = "21:00"
+activity   = "on shift at the gym"
 
 # ── the timetable screen (classes.py, college.md) ──
 

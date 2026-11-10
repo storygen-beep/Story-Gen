@@ -3,6 +3,7 @@ offer, his hubs. Source: sheets/scenes/mark_0*.md, sheets/people/npc_mark.md,
 sheets/systems/money_pressure.md. Explicit screens pasted as signed."""
 import os
 from canv import *
+import doors   # DECISIONS 224: a scene with a person opens from their portrait
 from tomlw import tod, wd
 
 M = "npc_mark"
@@ -278,18 +279,17 @@ BOLD_HERS = open(os.path.join(HERE, "beat_mark_table_look_hers_bold.txt")).read(
 out.append({
     "id": "mark_sunday_table", "name": "Sit down at the table",
     "description": "The Sunday table, the repeat after Mark's step 1, after the rent page has taken the money (no second count, LO 2026-11-04, Q6): his terms or hers by his Power; the streak counts here when no step has counted it. From Bold, after his step 7: \"Twenty, and you can look\", two voices, a stop exit. Once a Sunday.",
+    # DECISIONS 224 (LO, 2026-11-10): a button in his kitchen hub, not its own link; its gate (Sunday to 11:45, once
+    # a day) lives in doors.py
     "trigger": {"location": "home_kitchen", "requires_npc": M, "is_repeatable": True, "priority": 5,
-                "is_active": True, "max_triggers_per_day": 1,
-                # truth pass (2026-11-03): opens to 11:45, so the count's 15 minutes end before noon and "He doesn't
-                # say good morning" (the counted screen's bag) is still morning
-                "schedules": [{"weekdays": [6], "start_time": "08:00", "end_time": "11:45"}],
-                "conditions": cond(trait("mark_step", "gte", 1), flag("sunday_counted_today", False), flag("rent_starts"))},
+                "is_active": True, **doors.trigger("mark_sunday_table")},
     "nodes": [
         node("table", "The Sunday table", [
-            G(cond(HIS), P("Mark's at the table with the envelope, the way he is every Sunday, but he doesn't say good morning. He points at the chair across from him with his pen."),
+            # reader 2026-11-10 (DECISIONS 224): opened from his kitchen screen, where he has the paper and has said "Morning."
+            G(cond(HIS), P("Mark puts the paper down and pulls the envelope out from under it, the way he does every Sunday. He points at the chair across from him with his pen."),
               D(M, "Sit. My table, my Sunday.")),
-            G(cond(HERS), P("Mark's at the table with the envelope. He's on his feet, and he doesn't sit back down until you've sat."),
-              D(M, "Morning. Go on, then.")),
+            G(cond(HERS), P("Mark puts the paper down and pulls the envelope out from under it. He gets to his feet, and he doesn't sit back down until you've sat."),
+              D(M, "Go on, then.")),
             G(cond(flag("mark_dress_rule"), {"type": "worn_type", "operator": "eq", "value": "shorts"}),
               P("You're in the shorts. His rule. His eyes go down your bare thighs to where the hem cuts into them, and he forgets his coffee.")),   # scene reader b02: the look lands on her body
             G(cond(flag("mark_dress_rule"), {"type": "worn_type", "operator": "neq", "value": "shorts"}),
@@ -303,7 +303,7 @@ out.append({
                  D(M, "Your mother's out."), P("His eyes go down to your tits and stay there while he talks. He doesn't tell you to cover up."),
                  T("He'd have his hands on them if you let him. Not yet. Not at his table.")),
               GC(cond({"type": "worn_exposure", "operator": "gte", "value": 0}),
-                 P("You sit down half dressed before you think about it, and your arm goes across your chest. Mark looks at the envelope, only the envelope."),
+                 P("You only think about being half dressed once you're at his table, and your arm goes across your chest. Mark looks at the envelope, only the envelope."),
                  D(M, "Your mother's out. Put something on next time, @player."), ME("Sorry. I forgot."), D(M, "Next time."))),
             G(cond(flag("mark_arrangement", False), SHORT), P("It's short. He writes the gap on the envelope in pencil, slow, and taps it twice without a word.")),
             G(cond(flag("mark_arrangement"), SHORT), P("It's short, and he writes the gap on the envelope in pencil without a word.")),
@@ -942,6 +942,7 @@ for _c in out:
                 _n["blocks"] = lift_line(_n["blocks"], "I asked what the difference was worth. Here's my answer,", "player")
 import everyday   # DECISIONS 221: the day after an everyday scene, the hub remembers it
 everyday.hub_read(out)
+doors.apply(out)   # DECISIONS 224: seal the door-only scenes here, open the doors in the hubs here
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards)
 open(__import__("sys").argv[1], "w").write(text)
 print("mark:", len(out), "canvases,", len(cards), "cards", "(her table voice:", "placeholder" if HERS_LOOK == "PLACEHOLDER" else "written", ")")

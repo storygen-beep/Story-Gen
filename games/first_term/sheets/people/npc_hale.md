@@ -1,4 +1,5 @@
 # [READY] Person — Dr. Hale
+> Changed 2026-11-10 (DECISIONS 224, LO: "Should be inside her npc portrait activity not a separate link"): "Earn your grade in Dr. Hale's office" is a button on his office screen (`hub_hale_office`), not its own link. Same windows, once a day.
 > Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. The moment column names each step's kind and stage. No locked button past the session; only his card names it. New section: the walk-ins and acts the heat proposal built. Points at the copy fixes it took. The eight ladder rules are ticked from the build. Step 4 to 19:15; step 1 to 08:55.

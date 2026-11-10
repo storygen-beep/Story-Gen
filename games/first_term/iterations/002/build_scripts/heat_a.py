@@ -110,7 +110,7 @@ A1_MOUTH = (
     "Jake kicks the locker-room door shut behind you. You push him back against the lockers and drop to your knees "
     "on the wet tiles. You tug his shorts down, and his cock springs out, hard and flushed. You wrap your fist round "
     "the base and lick the head, slow, so he has to watch. He thumps his head back on the metal. Then you suck him in "
-    "deep, your hand pumping what your mouth can't take. The showers hiss on the other side of the wall. His hips jerk, "
+    "deep, your hand pumping what your mouth can't take. The showers hiss through the door. His hips jerk, "
     "and his cock throbs hot on your tongue.",
     "The door hasn't swung shut before your hand is inside his shorts. His cock is hot and heavy in your fist, slick "
     "with sweat. You stroke him slow, but he's already leaking, so you drop to your knees and take him in your mouth. "
@@ -122,7 +122,7 @@ A1_LOCKERS = (
     "Jake spins you round and pushes you face-first into the lockers. The metal is cold on your tits. He shoves "
     "everything you're wearing out of his way and kicks your feet apart. His cock slides along your ass, then into you "
     "in one hard thrust. He fucks you hard and fast, one hand over your mouth, the other gripping your hip. The locker "
-    "doors bang with every stroke. Through the wall the team laughs at something. He slams in to the hilt, and his cum "
+    "doors bang with every stroke. Through the shower-room door the team laughs at something. He slams in to the hilt, and his cum "
     "floods into you.",
     "Jake lifts you up against the lockers like you weigh nothing. Your clothes are in a heap on the bench. Your legs "
     "lock round his waist, and his cock pushes up into you, thick, stretching you open. He holds you pinned to the metal "
@@ -135,13 +135,13 @@ NEXT_GYM = [G(cond(wd(1)), D(J, "Thursday. Same time. Don't you dare say no.")),
 
 A1_BUTTON = go("Wait for him after training.", node="a1_offer", mins=0,
                # scene reader 2026-11-10 (DECISIONS 220): the 17:30 row was reverted (his hub has him lifting until 17:00)
-               cond_=cond(flag("jake_first_time"), BOLD, LOCKERS_FREE, tod("16:30", "16:45")))
+               cond_=cond(flag("jake_first_time"), BOLD, LOCKERS_FREE, tod("16:45", "17:00")))   # DECISIONS 226: as training winds down; the team showers from 16:45 (gym.py TEAM)
 A1_NODES = [
     node("a1_offer", "After training", [
-        P("Training ends. The team drifts off to the showers, loud, towels over their shoulders. Jake hangs back by the "
-          "locker-room door, and the sweat is still running down his neck."),
-        D(J, "Locker room's empty for ten minutes. Get in here, @player."),
-        T("Ten minutes, and his whole team on the other side of one wall. You want it more because of that."),
+        P("Training winds down. The team drifts off to the showers, loud, towels over their shoulders. Jake hangs back by the "
+          "men's locker-room door, and the sweat is still running down his neck."),
+        D(J, "They're all in the showers. The locker room's empty for fifteen minutes. Get in here, @player."),   # DECISIONS 226-227: the men's locker room; the showers are the shared room next door
+        T("Fifteen minutes, and his whole team one door away in the showers. You want it more because of that."),
     ], [
         go("Get on your knees.", node="a1_mouth", mins=0, cond_=cond(BOLD, LOCKERS_FREE)),
         go("\"Against the lockers.\"", node="a1_lockers", mins=0, cond_=cond(HUNGRY, LOCKERS_FREE)),
@@ -155,20 +155,20 @@ A1_NODES = [
         D(J, "Jesus, @player. Coach is going to smell you on me."),
         T("His whole team was through that wall. That was the best part."),
         *NEXT_GYM,
-    ], act_exits("Wipe your mouth. Go.", "campus", 15, LOCKERS, [pay("corruption", 59)], "Leave him to his shower.")),
+    ], act_exits("Wipe your mouth. Go.", "gym_floor", 15, LOCKERS, [pay("corruption", 59)], "Leave him to his shower.")),
     node("a1_lockers", "Against the lockers", [
         bag("jake_lockers_fuck", *A1_LOCKERS),
         VID("an athlete fucking his girlfriend against the lockers in an empty locker room, showers running next door",
             "fucked against lockers locker room", "athlete fucks girlfriend locker room after practice",
             pool_dir="sex/jake_lockers_fuck_t5"),
         D(J, "If Coach walks in, I'm telling him it was your idea."),
-        T("You'd let him fuck you in front of the whole team. You know that now."),
+        T("You'd let him fuck you in front of the whole team."),
         *NEXT_GYM,
-    ], act_exits("Go, before Coach comes.", "campus", 15, LOCKERS, [pay("corruption", 79)], "Leave him to his shower.")),
+    ], act_exits("Go, before Coach comes.", "gym_floor", 15, LOCKERS, [pay("corruption", 79)], "Leave him to his shower.")),
     node("a1_no", "Not here", [
         D(J, "Later, then. When Coach isn't next door."),
-        P("He grins, slaps the door frame and jogs off after the team. Through the wall they whistle at him."),
-    ], [go("\"Later.\"", loc="campus", mins=2)]),   # pass 3 reader: "Saturday." booked nothing; dates book on his phone thread   # pass 3 D39 (the-surfaces.md R7): the way out answers him
+        P("He grins, slaps the door frame and goes back to the rack to finish his set."),
+    ], [go("\"Later.\"", loc="gym_floor", mins=2, flags=[fset(LOCKERS)])]),   # DECISIONS 225: the street gym · pass 3 reader: "Saturday." booked nothing; dates book on his phone thread   # pass 3 D39 (the-surfaces.md R7): the way out answers him
 ]
 
 # ═════════════════════════════════════════════════════════════════════════════

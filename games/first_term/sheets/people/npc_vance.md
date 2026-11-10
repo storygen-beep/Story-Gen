@@ -1,4 +1,5 @@
 # [READY] Person — Mr. Vance
+> Changed 2026-11-10 (DECISIONS 224, LO: "Should be inside her npc portrait activity not a separate link"): "Walk past slowly." is a button on his porch screen (`hub_vance_porch`), not its own link. Once a day.
 > Signed by LO: LO, 2026-11-04.
 > Changed 2026-11-04, writing pass: lines brought to the build (fresh text per room, her voice by level, the reader's fixes); signed by LO 2026-11-04.
 

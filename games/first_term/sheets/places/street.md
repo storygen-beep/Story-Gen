@@ -1,4 +1,5 @@
 # [READY] Place — Your Street
+> Changed 2026-11-10 (DECISIONS 225, LO: move the gym to the street): the gym is on the street (`gym.md`, 5 minutes), and a new leave row: from Exhibitionism 20 the sports bra counts as her top (only the sports bra), so she can walk to the gym in it. Re-signed by LO 2026-11-10 ("Sign them").
 > Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. The quiet event is gone (DECISIONS 136). New section: what the heat proposal built here. Points at the copy fixes it took.
@@ -17,7 +18,7 @@
 | hidden until | no |
 | fill — word budget | 1,500 words (ledger, unchanged) |
 | door | no |
-| dress code or wanted state | none |
+| dress code or wanted state | the leave rules, plus (DECISIONS 225) the sports bra alone counts as a top from Exhibitionism 20: "Not in just the sports bra. Not yet. (Needs Exhibitionism 20.)" |
 
 ## On entering
 
@@ -25,7 +26,7 @@
 |---|---|---|---|
 | first evening, 18:00–22:00: Vance on his porch (the meeting) | nobody stays here | none needed: a thoroughfare | **Home** (the house; it opens in the hall) |
 |  |  |  | **Campus** (the college area) · **Town** (café, clothes shop, Zoe's flat, the party house) |
-|  |  |  | on the street itself: Vance's house (0 min), the park (10 min, its own cost), the corner shop (0 min) |
+|  |  |  | on the street itself: Vance's house (0 min), the park (10 min, its own cost), the corner shop (0 min), the gym (5 min) |
 
 **Areas and the walk** (LO's note, 2026-10-08: travel takes time). The street is the ground and is no
 area. Home, Campus and Town are areas: time is charged once, when she crosses **into** one, and

@@ -148,7 +148,7 @@ out.append(crowd_ask("crowd_ask_quad", "Find someone for Zoe's party", "quad",
      P("You pull the dress up and stand. Two guys on the library steps are on their feet, staring."),
      T("Three seconds. You could have got ten off the quad with that.")]))
 
-out.append(crowd_ask("crowd_ask_gym", "Find someone for Zoe's party", "campus_gym",
+out.append(crowd_ask("crowd_ask_gym", "Find someone for Zoe's party", "gym_floor",   # the street gym (DECISIONS 225)
     [{"weekdays": [0, 1, 2, 3, 4, 5, 6], "start_time": "08:00", "end_time": "21:00"}], "from the gym", "Sit on the end of his bench, close, and ask.",
     [P("A guy on the bench by the rack is between sets, red-faced, drinking from a bottle. He's been watching you in the mirror wall since you walked in."),
      WHO("You need the bench?"),
@@ -246,11 +246,11 @@ out.append({
         node("packed", "Packed", [
             P("Zoe's flat is packed to the walls. People on the stairs, people on the balcony, a line for the bathroom down the hall. Half the faces are ones you brought."),
             G(cond(flag("crowd_quad")), WHO("There she is! The girl off the quad!")),
-            G(cond(flag("crowd_campus_gym")), WHO("Gym girl! You said there'd be a party. You didn't say it'd be this good.")),
+            G(cond(flag("crowd_gym_floor")), WHO("Gym girl! You said there'd be a party. You didn't say it'd be this good.")),
             G(cond(flag("crowd_canteen")), WHO("She's the reason I'm here. Ask me how she asked.")),
             G(cond(flag("crowd_flashed")), P("Somebody by the speakers is telling the story of how you asked him, with his hands, and the guys round him look over at your chest when he gets to the end.")),
             WHO("Is that her? That's her. She's the one who told me about this place."),
-            G(cond(flag("crowd_campus_gym")), WHO("She told everybody. I heard she asked half the gym.")),
+            G(cond(flag("crowd_gym_floor")), WHO("She told everybody. I heard she asked half the gym.")),
             P("Zoe pushes through all of them and grabs your face in both hands."),
             D(Z, "Ten. I said ten and you got me ten. Look at this place. I didn't think you'd do it, but look."),
             D(Z, "They all came for you, babe. So give them something. Up on the table."),
@@ -418,6 +418,8 @@ cards = [
 text = ("# =============================================================================\n"
         "# First Term — 5 · scenes · GOALS (DECISIONS 210): Zoe's crowd and the study guy's notes\n"
         "# =============================================================================\n")
+# DECISIONS 225: the street gym's floor past the desk is for the checked in (her card or a day pass, today)
+next(c for c in out if c["id"] == "crowd_ask_gym")["trigger"]["conditions"]["items"].append(flag("gym_in_today"))
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards)
 open(__import__("sys").argv[1], "w").write(text)
 print("goals:", len(out), "canvases,", len(cards), "cards")

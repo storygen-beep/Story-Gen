@@ -1,6 +1,7 @@
 """Ryan — steps 2-8 (Ryan A 3-9), his hubs, his things, the two-knocks repeat.
 Source: sheets/scenes/ryan_0*.md, sheets/people/npc_ryan.md. Explicit screens pasted as signed."""
 from canv import *
+import doors   # DECISIONS 224: a scene with a person opens from their portrait
 from sheetbeats import beat, pool
 from tomlw import tod, wd
 def cap(k, n, c):   # (DECISIONS 124) used by the steps above the hot repeatables too
@@ -614,36 +615,31 @@ FINISH_EXITS = [  # the day's pay split on ryan_hot_today, as built; dressed aga
 out.append({
     "id": "ryan_two_knocks", "name": "Two knocks on his door",
     "description": "The repeat after Ryan step 8 (hot repeatable 7), Sun-Thu nights and weekend mornings: a menu. A normal start, her pick of the act (more open by his Lust 70/80/90), a shy or eager voice by her Corruption, a near-catch screen, her pick of finish. Corruption +1, cap 79; Lust +3 once a day.",
+    # DECISIONS 224 (LO, 2026-11-10): a button in his room hub, not its own link; its gate (nights and his weekend
+    # mornings, reach audit 2026-11-09; once a day) lives in doors.py
     "trigger": {"location": "home_ryan_room", "requires_npc": R, "is_repeatable": True, "priority": 5,
-                "is_active": True, "max_triggers_per_day": 1,
-                # reach audit 2026-11-09 (playtest_study_20261109/12_reach_audit.md): the loop was 10 h a week, nights only;
-                # his weekend mornings in his room (Saturday after Kayla goes at 10:00) add 10. The act names no hour; the
-                # door and the pools pick the lines that are true then. Still once a day.
-                "schedules": [{"weekdays": [0, 1, 2, 3, 6], "start_time": "22:00", "end_time": "00:00"},
-                              {"weekdays": [5], "start_time": "10:00", "end_time": "14:00"},
-                              {"weekdays": [6], "start_time": "08:00", "end_time": "14:00"}],
-                "conditions": cond(trait("ryan_step", "eq", 8))},
+                "is_active": True, **doors.trigger("ryan_two_knocks")},
     "nodes": [
-        node("door", "Two knocks", [P("Two knocks. Ryan's phone is face-down on the desk. It always is now."),
+        # reader 2026-11-10 (DECISIONS 224): opened from his room screen, so she is already in; the two knocks were
+        # on the way in, and the door is behind her
+        node("door", "Two knocks", [P("You knocked twice on the way in, and he knows what that means. You lean back against his door. Ryan's phone goes face-down on the desk."),
                                     # the-phone.md P10 (pass 3 group 2, round 2): her "coming" text is read where she meets it
-                                    G(cond(flag("ryan_knock_booked")), D(R, "You said coming. I've been lying here listening for you."))], [
-            go("Go in.", node="start", mins=2),
+                                    G(cond(flag("ryan_knock_booked")), D(R, "You said coming. I've been listening for you."))], [
+            go("Go to him.", node="start", mins=2),
             go("\"Not now.\"", node="no_door", mins=2),
         ]),
         # scene reader b02 (2026-11-03): the no gets his reply on its own screen
         node("no_door", "Not now", [
             ME("Not now."),
             D(R, "Seriously? Fine. Later, then. I'm not going anywhere."),
-            P("Through the door you hear him drop back onto the bed, hard, and swear into his pillow."),
+            P("You open his door again. Behind you he drops back onto the bed, hard, and swears into his pillow."),
         ], [go("Back to your room.", loc="home_ella_room", mins=1)]),
         # scene reader b02: 7s_b has him half asleep, which can't follow "I've been lying here listening for you",
         # so a booked night draws from a and c only
         node("start", "His room", [
-            GC(cond(flag("ryan_knock_booked")), POOL(*[GC({"version": "1.0", "logic": "AND", "items": []}, *spoken(f"7s_{k}")) for k in "ac"], pid="ryan_hot_7s_booked", bag=True)),
-            # fix_g3c: the chain's else is the booking's own complement, not worn_exposure (a level, not a garment)
-            # 7s_b has his room dark and him half asleep: only late (reach audit 2026-11-09); his mornings draw from a and c
-            GC(cond(tod("22:00", "00:00")), POOL(*[GC({"version": "1.0", "logic": "AND", "items": []}, *spoken(f"7s_{k}")) for k in "abc"], pid="ryan_hot_7s", bag=True)),
-            GC(cond({"type": "worn_exposure", "operator": "gte", "value": 0}), POOL(*[GC({"version": "1.0", "logic": "AND", "items": []}, *spoken(f"7s_{k}")) for k in "ac"], pid="ryan_hot_7s_day", bag=True))], [
+            # reader 2026-11-10 (DECISIONS 224): from his room screen he is up and she is in, so 7s_b (his room dark, him
+            # half asleep in bed) is never true; the start draws from a and c on every visit
+            POOL(*[GC({"version": "1.0", "logic": "AND", "items": []}, *spoken(f"7s_{k}")) for k in "ac"], pid="ryan_hot_7s", bag=True)], [
             # pass 3 J16: the two higher acts are hidden until his Lust opens them, not greyed: this loop raises his Lust
             # itself, so a greyed rung here would be the scene reading out its own progress bar (engine.md §15 rule 1).
             # pass 3 E95: each act costs 10 energy (greyed "Requires 10 Energy" when she is spent) and lowers hygiene.
@@ -881,7 +877,7 @@ out.append({
             G(cond({"type": "clothing_slot", "slot": "bra", "operator": "unequipped"}, {"type": "worn_exposure", "operator": "eq", "value": 0}),
               P("He talks to your face, hard, and fails. Twice.")),
             G(cond({"type": "worn_exposure", "operator": "eq", "value": 1}, {"type": "worn_type", "operator": "neq", "value": "towel"}),
-              D(R, "Jesus, @player.nickname."), P("He goes and shuts his door, then stands there with his hand on it, not opening it again.")),
+              D(R, "Jesus, @player.nickname."), P("He goes and shuts his door, then backs off from it, and from you.")),
             G(cond(ntrait(R, "warmth", "gte", 70)),
               P("He's on your side. He'd cover for you with Laura in a heartbeat, and you both know it.")),
             # reader pass 3 b00: Fri 18:00-Sat 10:00 Kayla is in this room, so the hub puts her on the page then,
@@ -1146,6 +1142,7 @@ for _n in ("inside", "on", "mouth"):
     sex_takes_needs(out, "ryan_08_two_knocks_first_sex", _n, "Lie there.")
 import everyday   # DECISIONS 221: the day after an everyday scene, the hub remembers it
 everyday.hub_read(out)
+doors.apply(out)   # DECISIONS 224: seal the door-only scenes here, open the doors in the hubs here
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards)
 open(__import__("sys").argv[1], "w").write(text)
 print("ryan:", len(out), "canvases,", len(cards), "cards")

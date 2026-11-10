@@ -1,4 +1,5 @@
 # [READY] Place — Gym
+> Changed 2026-11-10 (DECISIONS 225, LO: move the gym to the street): **moved.** The gym is on Your Street now, and this sheet is history: `gym.md` carries all of it, with the membership, the gym-clothes rule, the locker room, the sauna and Dex. Re-signed by LO 2026-11-10 ("Sign them").
 > Changed 2026-11-09 (DECISIONS 211, LO: "lets have it cot shaped. One time the routine"): the Repeats section now reads the first time once, then routine by stage. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-09 (DECISIONS 210, LO: "Go ahead"): showing off to get something, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-09 (DECISIONS 209, LO: "Go ahead"): her reaction drifts when she does it again, new section at the end. Signed by LO 2026-11-09 ("Sign them").

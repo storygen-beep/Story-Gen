@@ -17614,7 +17614,7 @@ def _group2_gates(gate, _N, model, game, state):
     gate("a refill place rolls an event", *_refill_rolls_event(game, state))
     # PLAYTEST 2026-11-09 (REPORT.md §1-3); defined above main().
     gate("a pay can happen", *_pay_can_happen(game, state))
-    gate("the loop is open enough hours", *_routine_open_hours(model, game, state)); gate("a walk-in can happen", *_walkin_can_happen(game))
+    gate("the loop is open enough hours", *_routine_open_hours(model, game, state)); gate("a walk-in can happen", *_walkin_can_happen(game)); gate("a person's scene is inside their portrait", *_scene_in_portrait(game))
     gate("a card line belongs to its person", *_card_line_is_its_own(game, state))
 
 
@@ -20009,6 +20009,40 @@ def lint_random_depth(game):
                     f"{counts[0]}-{counts[-1]} (median {counts[len(counts) // 2]}); only one can fire in "
                     f"{one:.0%} of those hours")
     return rows
+
+
+
+def _scene_in_portrait(game):
+    """Gate `a person's scene is inside their portrait` (first_term playtest 2026-11-10, DECISIONS 224;
+    the-surfaces.md R1). The portrait shows ONE canvas per person per room, the highest priority (v2.py
+    selectNpcPortraitCanvasesForLocation). A second repeatable scene with the same person there that has
+    `requires_npc` and no `npc` falls into the solo-link bucket and shows as its own link beside her face
+    (LO: "Dare me, Zo." "should be inside her npc portrait activity not a separate link"). FAIL on each such
+    scene unless it is a random scene (it fires on its own), a swap target (substitution_only) or door-only
+    (hidden_from_location: a button in the portrait's scene opens it). Her own work with someone only
+    present is a room link that reads them as an `npc_at_location` condition, not `requires_npc` (R1)."""
+    canvases = [c for c in game.get("canvases") or [] if isinstance(c, dict) and not _is_dev(c)]
+    portrait = set()
+    for c in canvases:
+        t = c.get("trigger") or {}
+        if t.get("npc") and t.get("is_repeatable", True) is not False and t.get("trigger_mode") != "random":
+            portrait.add((t.get("npc"), t.get("location")))
+    rows, n = [], 0
+    for c in canvases:
+        t = c.get("trigger") or {}
+        who, loc = t.get("requires_npc"), t.get("location")
+        if not who or t.get("npc") or t.get("is_repeatable", True) is False or t.get("trigger_mode") == "random":
+            continue
+        n += 1
+        if t.get("substitution_only") or t.get("hidden_from_location") or (who, loc) not in portrait:
+            continue
+        rows.append(f"{c.get('id')} ({c.get('name')}): {who} has a portrait scene in {loc}, and this shows as "
+                    f"its own link beside it — make it a button in that scene and the canvas door-only "
+                    f"(hidden_from_location), or read {who} as an npc_at_location condition if it is her own work")
+    if not n:
+        return None, "no repeatable scene names a person by requires_npc alone", []
+    return not rows, (f"{len(rows)} scene(s) with a person show as a link beside their portrait" if rows else
+                      f"{n}/{n} scenes with a person open from their portrait, fire on their own or are her own"), rows
 
 
 if __name__ == "__main__":

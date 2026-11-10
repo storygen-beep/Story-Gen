@@ -174,8 +174,10 @@ for days, a, b in (((0, 1, 2, 3, 4), "14:30", "18:00"), ((4,), "20:00", "22:00")
 # the team is strangers and he is not named.
 # A group look that happens to her in a sports bra. Her answer on Exhibitionism: go 0, finish your set (Watched) +1 cap 79.
 # ═════════════════════════════════════════════════════════════════════════════
-JN = here(J, "campus_gym")
-walkin("walkin_gym_team", "The team comes in", "campus_gym",
+JN = here(J, "gym_floor")   # the street gym (DECISIONS 225)
+from gymkit import BOTTOM_OK, NO_OTHER_TOP
+_GYM_DRESSED = BOTTOM_OK + NO_OTHER_TOP   # the walk-in finds her on the bench, so she is dressed to train
+walkin("walkin_gym_team", "The team comes in", "gym_floor",
     "B10, the team: in for training on Tuesday or Thursday at 15:00, they walk in on her at the bench. Jake leads them while his row has him there; nobody has a meter. Her answer on Exhibitionism: go 0, finish your set in her sports bra (Watched: a group seeing her is stage 4) +1 cap 79.",
     [],
     [P("You're flat on your back on the bench with the bar over your chest, alone in the free-weights corner."),
@@ -209,17 +211,17 @@ walkin("walkin_gym_team", "The team comes in", "campus_gym",
                            P("The noise starts up again behind you, and you hear the laugh."),
                            # reader batch 4 (pass 3): the team trains Tuesday and Thursday, so the next session is named by today
                            G(cond(wd(1)), WHO("Same time Thursday, cutie!")), G(cond(wd(3)), WHO("Same time Tuesday, cutie!"))],
-            "Keep walking.", "campus", 5),
+            "Keep walking.", "street", 5),
         res("t_set", "Finish your set", [P("You don't get up. You lie back down under the bar and finish your set, ten slow reps, with a dozen of them standing round watching you do it."),
                                          P("Every time you push the bar up your tits squeeze together in the sports bra, and every time you bring it down they bounce. Your nipples are hard through the cloth. You can feel every pair of eyes on them."),
                                          G(cond(JN), D(J, "Ten. Look at her. Ten.")),
-                                         G(cond(here(J, "campus_gym", False)), WHO("Ten. Jesus. Ten.")),
+                                         G(cond(here(J, "gym_floor", False)), WHO("Ten. Jesus. Ten.")),
                                          ME("All yours, boys."), WHO("Fuck. Okay. Somebody else go first."),
                                          P("You rack the bar and sit up slow, and take your time wiping down the bench."),
                                          VID("a girl in a sports bra on a weight bench, a sports team standing round watching her", "girl in sports bra lifting team watching gym", "guys staring at girl working out gym bench", pool_dir="sex/walkin_gym_team_t4")],
-            "Leave them staring.", "campus", 5, flags=[fset("worked_out")])],
-    when=[wd(1, 3), tod("15:00", "15:15")])   # scene reader 2026-11-10: his row has the team inside from 15:00, so this stays their arrival   # reach audit 2026-11-09 (DECISIONS 218): the person's row, not 15 minutes
-rule("gym_workout", "walkin_gym_team", 0.25, wd(1, 3), tod("15:00", "15:15"))
+            "Leave them staring.", "gym_floor", 5, flags=[fset("worked_out")])],
+    when=[wd(1, 3), tod("15:00", "15:15"), *_GYM_DRESSED])   # DECISIONS 225 reader: in gym clothes · scene reader 2026-11-10: his row has the team inside from 15:00, so this stays their arrival   # reach audit 2026-11-09 (DECISIONS 218): the person's row, not 15 minutes
+rule("gym_workout", "walkin_gym_team", 0.25, wd(1, 3), tod("15:00", "15:15"), *_GYM_DRESSED)
 
 # ═════════════════════════════════════════════════════════════════════════════
 # B11 · THE CANTEEN (hosts canteen_eat, canteen_listen), as their lunch rows start at 11:45 (built differently from

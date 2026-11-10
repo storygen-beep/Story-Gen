@@ -3,6 +3,7 @@
 stairs event. Sources: sheets/systems/parties.md, park.md, wardrobe.md; scenes party_*.md,
 park_*.md, touch_*.md. Explicit screens pasted as signed."""
 from canv import *
+import doors   # DECISIONS 224: a scene with a person opens from their portrait
 from tomlw import tod, wd
 
 Z, J, C = "npc_zoe", "npc_jake", "npc_cocky_guy"
@@ -250,13 +251,12 @@ for key in PAY:
 out.append({
     "id": "zoe_dares", "name": "Take Zoe's dare",   # pass 4 H33: a room-list label says what the click does
     "description": "Zoe's dares (release 1): after her step 4, one a party night at her Friday party, late. Zoe picks; a showing yes and a doing yes by her stage, the no; three tiers. Each yes counts toward her step 5. Corruption 60 locked.",
-    "trigger": {"location": "zoe_apartment", "requires_npc": Z, "is_repeatable": True, "priority": 4, "is_active": True,
-                # after midnight, so the day roll (which clears zoe_dared) can't open a second dare the same party night
-                "schedules": [{"weekdays": [5], "start_time": "00:00", "end_time": "01:50"}],   # false lines a3: a yes is 10 minutes, the cocky guy leaves at 02:00
-                "conditions": cond(AT_PARTY, flag("picks_the_dares"), flag("zoe_dared", False), flag("cocky_guy_met"))},
+    # DECISIONS 224 (LO, 2026-11-10): a button in her flat hub, not its own link; its gate (after midnight, one a
+    # party night) lives in doors.py
+    "trigger": {"location": "zoe_apartment", "requires_npc": Z, "is_repeatable": True, "priority": 4, "is_active": True, **doors.trigger("zoe_dares")},
     "nodes": [
         node("dare", "Zoe's dare", [
-            P("Zoe finds you in the crush, hooks her chin over your shoulder, and looks round the room like she's shopping."),
+            P("Zoe slides off the arm of the couch, hooks her chin over your shoulder, and looks round the room like she's shopping."),   # reader 2026-11-10 (DECISIONS 224): from her flat screen, where she sits on the couch arm
             *[G(cond(*items), D(Z, ZOE_LINE[t])) for t, cs in TIER.items() for items in cs],
             G(cond(flag("keg_guy_dared")), P("The guy at the keg sees you and grins."), WHO("You again. Back for more?")),
             G(cond(flag("cocky_guy_dared"), {"type": "npc_at_location", "location_id": "zoe_apartment", "npc_id": C, "operator": "is_present"}),
@@ -501,13 +501,11 @@ HIDDEN = ("Zoe drags you off the path into the hollow behind the rhododendrons. 
 out.append({
     "id": "park_hidden", "name": "Let Zoe finger you off the path",   # pass 3 H33/H34 (the-voice.md R1, D11): the name says what happens if she clicks, and never hides the act
     "description": "After the run with Zoe, weekend mornings (park_hidden): a hollow off the path, Zoe's hand, nobody sees. Bold, after Zoe A 3. Once a day.",
-    "trigger": {"location": "park", "requires_npc": Z, "is_repeatable": True, "priority": 5, "is_active": True, "max_triggers_per_day": 1,
-                "schedules": [{"weekdays": [5, 6], "start_time": "08:00", "end_time": "09:30"}],   # done before her park row ends at 10:00
-                # after a run with her (the "Run a lap with her" button, within the hour): park_hidden.md (part 8, reader)
-                "conditions": cond(trait("corruption", "gte", 60), trait("zoe_step", "gte", 3), flag("ran_with_zoe"),   # strangers able to see: Hungry (DECISIONS 124)
-                                   {"type": "hours_since_flag", "subject": "player", "flag_key": "ran_with_zoe", "operator": "lt", "value": 1})},
+    # DECISIONS 224 (LO, 2026-11-10): a button in her park hub, not its own link; its gate (after the run, within
+    # the hour, weekend mornings, once a day) lives in doors.py
+    "trigger": {"location": "park", "requires_npc": Z, "is_repeatable": True, "priority": 5, "is_active": True, **doors.trigger("park_hidden")},
     "nodes": [
-        node("pull", "After the run", [P("Zoe jogs to a stop beside you, pink and breathless, and grabs your wrist."), D(Z, "Come here. I know a place.")],
+        node("pull", "After the run", [P("Zoe stops running on the spot, pink and breathless, and grabs your wrist."), D(Z, "Come here. I know a place.")],
              [go("Follow her.", node="hidden", mins=5, costs=[{"trait": "energy", "value": 10}], eff=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}]), go("\"Not here, Zo.\"", node="no", mins=1)]),   # pass 3 E95
         node("hidden", "The hollow", [P("A man walking his dog slows on the path above the hollow, looks your way, and walks on."), P(HIDDEN),
             VID("two girls in running clothes hidden in bushes, one with her hand down the other's leggings, kissing against a tree", "girl fingers girlfriend in park bushes", "lesbian hidden in park hand down leggings", pool_dir="sex/park_hidden_t5")],
@@ -518,15 +516,8 @@ out.append({
 
 # ═════════════ TOUCHING HERSELF (from Curious; DECISIONS 13) ═════════════
 BED = ("Your door is shut, but someone's TV mutters down the hall. Under the sheet, you slide a hand up and squeeze your tits. You pinch a nipple until it goes hard between your fingers, and the jolt runs straight down to your clit. So you follow it down. You're wet already, and you want to know how much more you can take. Two fingers circle your clit, slow, until your hips start to lift. Then faster. Your heels dig in, your ass comes off the mattress, chasing your hand. The walls are thin, so you bite your lip hard to keep quiet. You come with your thighs clamped on your wrist, legs shaking, fingers still pressed to your clit.")
-SHOWER = ("You lock the door and step naked under the hot water. Footsteps cross the hall outside and keep going. The water runs down your tits and drips off your nipples. You soap them slowly, thumbs circling until they stand hard and ache. Your hand slides down your belly and between your legs. You are slick there, and not from the shower. Two fingers find your clit and press. The water drums on your back and your ass. You lean one hand on the tile and rub faster. Your hips jerk against your fingers. The orgasm hits hard, and you bite down on the moan. Your knees go weak, and you hold the tile while your clit throbs under your hand.")
 TOILET = ("You lock the stall and lean back against the cold wall. Your hand slides inside, and you are already wet. Two fingers find your clit and press. Your other hand clamps over your mouth. A faucet runs three feet away. A girl laughs at the mirror. You rock your hips against your fingers, slow, so the latch doesn't rattle. Your nipples go hard and tight. The door bangs, and you freeze with your fingers on your clit. Nobody knocks. So you keep going, faster, while the hand dryer roars. The moan stays trapped under your palm. The orgasm hits without a sound, and your thighs clamp shut on your hand.")
-# "Footsteps cross the hall" (touch_shower.md): only at hours somebody is up in the house, by their rows
-# (who_is_where: weeknights and Sunday 18-24, Mark up to 02:00, Mark in the garage Saturday 09-17,
-# Laura up on Saturday 22-24). Iteration 002, part 8 (reader).
-TOUCH_SHOWER_HOURS = [{"weekdays": [0, 1, 2, 3, 4, 6], "start_time": "18:00", "end_time": "00:00"},
-                      {"weekdays": [0, 1, 2, 3, 4, 5], "start_time": "00:00", "end_time": "02:00"},
-                      {"weekdays": [5], "start_time": "09:00", "end_time": "17:00"},
-                      {"weekdays": [5], "start_time": "22:00", "end_time": "00:00"}]
+# The shower touch moved into the shower with its hours (home.py, DECISIONS 224).
 # truth pass (2026-11-03): "someone's TV mutters downstairs" only while someone is in the living room (the any-NPC
 # presence item, v2.py:5244-5256); with nobody down there the sentence keeps its first clause. touch_bed has no hours.
 BED_TV = "Your door is shut, but someone's TV mutters down the hall."
@@ -536,13 +527,13 @@ BED_OPEN = [GC(cond({"type": "npc_at_location", "location_id": "home_living_room
             P(BED[len(BED_TV) + 1:])]
 for cid, loc, name, text, back, extra in [
         ("touch_bed", "home_ella_room", "Touch yourself", BED, "Lie still.", []),
-        ("touch_shower", "home_bathroom", "Touch yourself in the shower", SHOWER, "Done.", [{"type": "npc_at_location", "location_id": "home_bathroom", "operator": "is_absent"}]),   # hours when someone is up in the house: TOUCH_SHOWER_HOURS; the room empty, anyone (LO playtest 2026-11-10, DECISIONS 223: it showed while Laura showered)
+        # touch_shower is a choice inside the shower now (home.py bathroom_shower, DECISIONS 224)
         ("touch_toilet", "college_womens_toilet", "Touch yourself in a stall", TOILET, "Done.", [])]:
     out.append({
         "id": cid, "name": name,
         "description": f"Touching herself ({loc}): from Curious, once a day; Corruption +1 until past Curious.",
         "trigger": {"location": loc, "is_repeatable": True, "priority": 3, "is_active": True, "max_triggers_per_day": 1,
-                    "conditions": cond(CURIOUS, *extra), **({"schedules": TOUCH_SHOWER_HOURS} if cid == "touch_shower" else {})},
+                    "conditions": cond(CURIOUS, *extra)},
         "nodes": [node("touch", name, [*(BED_OPEN if cid == "touch_bed" else [P(text)]),
             VID(f"a girl touching herself alone ({loc.replace('_', ' ')})", "girl masturbating alone", f"solo girl {loc.split('_')[-1]} orgasm", pool_dir=f"sex/{cid}_t5")],
             [go(back, loc=loc, mins=20, eff=[capped("corruption", 1, CAP_CUR)])])]})
@@ -612,6 +603,7 @@ import walkins_out
 _done = walkins_out.attach(out)
 assert _done == {"park_run", "park_rest"}, _done
 
+doors.apply(out)   # DECISIONS 224: seal the door-only scenes here, open the doors in the hubs here
 text = "# ── the pool and system scenes: parties, the park, touching herself, the stairs ──\n" + "".join(emit(c) for c in out)
 open(__import__("sys").argv[1], "w").write(text)
 print("pools:", len(out), "canvases")
