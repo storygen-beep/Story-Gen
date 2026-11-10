@@ -91,7 +91,9 @@ out.append(solo("room_sleep", "Go to bed",
     metadata={"show_when_blocked": True, "cooldown_message": "Every day, 7 PM-7 AM",   # pass 3 H31: the hours, a bare phrase (C5)
               # Q2 (LO, 2026-11-04): Ryan's step 5 is her in bed on a Friday night, so it opens from going to bed,
               # not on entry, and her room's wardrobe link always shows
-              "substitutions": [on_activity("ryan_05_thin_walls", flag("opening_done"))]}))
+              "substitutions": [on_activity("ryan_05_thin_walls", flag("opening_done"))]
+                               # DECISIONS 229 (meters.md Rule 7): the night after a new stage, bed plays its moment
+                               + [on_activity(cid, flag("opening_done")) for cid in __import__("stages").IDS]}))
 
 out.append(solo("room_nap", "Take a nap", "A daytime nap: two hours, energy +30. Once a day.", "home_ella_room", [
     node("nap", "A nap", [
