@@ -18363,14 +18363,14 @@ ready_canvas = "zoe_01b_kiss_again"
 npc_id = "npc_zoe"
 priority = 10
 text = "Her eyes keep going to your bra strap. She has a dare."
-tip = "A Friday party at Zoe's, out on the balcony; not while tipsy; Daring, or Curious when a guy from Figure drawing is at the party"
+tip = "A Friday party at Zoe's, out on the balcony; not while tipsy; once you're more daring, or more curious when a guy from Figure drawing is at the party"
 when = [
   { type = "trait", subject = "player", trait = "zoe_step", op = "eq", value = 1 },
   { flag = "zoe_met", op = "is_true" },
 ]
 ready_canvas = "zoe_02_bra_through_the_sleeve"
 goals = [
-  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Reach Daring (Exhibitionism 20), or Curious (Corruption 20) with a guy from Figure drawing at the party" },
+  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Not yet: Zoe waits until you're more daring (your Exhibitionism), or more curious with a guy from Figure drawing there" },
 ]
 
 [[quest_cards]]
@@ -54618,7 +54618,7 @@ npc_id = "npc_zoe"
 priority = 6
 heading = "Zoe's big party"
 text = "Zoe wants ten people at her next party, and she wants you to find them."
-tip = "The quad and the gym any day, the canteen at lunch on weekdays. Asking nicely won't do it. Zoe asks once you're Daring (Exhibitionism 20)."
+tip = "The quad and the gym any day, the canteen at lunch on weekdays. Asking nicely won't do it. Zoe asks once you're more daring."
 when = [
   { flag = "zoe_met", op = "is_true" },
   { flag = "zoe_crowd_on", op = "is_true" },
@@ -54647,8 +54647,8 @@ ready_canvas = "party_crowd"
 npc_id = "npc_study_guy"
 priority = 6
 heading = "His notes"
-text = "He'll trade his Business notes before the midterm, a chapter at a time, once you're Daring (Exhibitionism 20). Not for a please."
-tip = "The library, weekdays, 8 AM to 7:30 PM except in Business class, from your fourth week, once you're Daring (Exhibitionism 20)"
+text = "He'll trade his Business notes before the midterm, a chapter at a time, once you're more daring. Not for a please."
+tip = "The library, weekdays, 8 AM to 7:30 PM except in Business class, from your fourth week, once you're more daring"
 when = [
   { flag = "study_guy_met", op = "is_true" },
   { flag = "exam_business_done", op = "is_false" },
@@ -61939,43 +61939,36 @@ locationId = "gym_locker"
 npc_id = "npc_dex"
 priority = 10
 text = "The trainer at the gym desk has been watching you in the mirror."
-tip = "The gym on your street, any day but Sunday, 10 to 8: check in at the desk, in gym clothes"
+tip = "The gym on your street, any day but Sunday, 10 to 8: check in at the desk, in gym clothes; check in at the desk first: your card, or a $5 day pass"
 when = [
   { type = "trait", subject = "player", trait = "dex_step", op = "eq", value = 0 },
   { flag = "dex_met", op = "is_false" },
 ]
 ready_canvas = "dex_01_free_session"
-goals = [
-  { flag = "gym_in_today", op = "is_true", label = "Check in at the gym desk today: your card, or a $5 day pass" },
-]
 heading = "The trainer at the gym"
 
 [[quest_cards]]
 npc_id = "npc_dex"
 priority = 10
 text = "The trainer at the gym desk has been watching you in the mirror."
-tip = "The gym on your street, any day but Sunday, 10 to 8: check in at the desk, in gym clothes"
+tip = "The gym on your street, any day but Sunday, 10 to 8: check in at the desk, in gym clothes; check in at the desk first: your card, or a $5 day pass"
 when = [
   { type = "trait", subject = "player", trait = "dex_step", op = "eq", value = 0 },
   { flag = "dex_met", op = "is_true" },
 ]
 ready_canvas = "dex_01_free_session"
-goals = [
-  { flag = "gym_in_today", op = "is_true", label = "Check in at the gym desk today: your card, or a $5 day pass" },
-]
 
 [[quest_cards]]
 npc_id = "npc_dex"
 priority = 10
 text = "\"Fifteen a session. You'll be back.\""
-tip = "Book sessions with Dex at the gym, then the mats; not while tipsy; not on a day you've already had a session; not after you've worked out that day"
+tip = "Book sessions with Dex at the gym, then the mats; check in at the desk first: your card, or a $5 day pass; not while tipsy; not on a day you've already had a session; not after you've worked out that day"
 when = [
   { type = "trait", subject = "player", trait = "dex_step", op = "eq", value = 1 },
   { flag = "dex_met", op = "is_true" },
 ]
 ready_canvas = "dex_02_the_mats"
 goals = [
-  { flag = "gym_in_today", op = "is_true", label = "Check in at the gym desk today: your card, or a $5 day pass" },
   { type = "trait", subject = "player", trait = "dex_sessions", op = "gte", value = 2, label = "Book sessions with Dex at the gym: $15, or another way" },
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 20, label = "Not yet: Dex waits until you're more curious (your Corruption)" },
 ]
@@ -61984,14 +61977,13 @@ goals = [
 npc_id = "npc_dex"
 priority = 10
 text = "\"Fifteen. Or we work something out.\""
-tip = "Book sessions with Dex at the gym; he'll stop taking your money; not while tipsy; not on a day you've already had a session; not after you've worked out that day"
+tip = "Book sessions with Dex at the gym; he'll stop taking your money; check in at the desk first: your card, or a $5 day pass; not while tipsy; not on a day you've already had a session; not after you've worked out that day"
 when = [
   { type = "trait", subject = "player", trait = "dex_step", op = "eq", value = 2 },
   { flag = "dex_met", op = "is_true" },
 ]
 ready_canvas = "dex_03_another_way"
 goals = [
-  { flag = "gym_in_today", op = "is_true", label = "Check in at the gym desk today: your card, or a $5 day pass" },
   { type = "trait", subject = "player", trait = "dex_sessions", op = "gte", value = 3, label = "Book sessions with Dex at the gym: $15, or another way" },
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Not yet: Dex waits until you're bolder (your Corruption)" },
 ]
@@ -62000,14 +61992,13 @@ goals = [
 npc_id = "npc_dex"
 priority = 10
 text = "\"I finish in the sauna most nights. It's empty by eight.\""
-tip = "The gym sauna in a towel, 8 to quarter to 9, Monday to Saturday; not while tipsy"
+tip = "The gym sauna in a towel, 8 to quarter to 9, Monday to Saturday; check in at the desk first: your card, or a $5 day pass; not while tipsy"
 when = [
   { type = "trait", subject = "player", trait = "dex_step", op = "eq", value = 3 },
   { flag = "dex_met", op = "is_true" },
 ]
 ready_canvas = "dex_04_the_sauna"
 goals = [
-  { flag = "gym_in_today", op = "is_true", label = "Check in at the gym desk today: your card, or a $5 day pass" },
   { type = "trait", subject = "player", trait = "dex_sessions", op = "gte", value = 3, label = "Book sessions with Dex at the gym: $15, or another way" },
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 60, label = "Not yet: Dex waits until you're hungrier (your Corruption)" },
 ]
@@ -62016,14 +62007,13 @@ goals = [
 npc_id = "npc_dex"
 priority = 10
 text = "\"Nine o'clock tomorrow. Stay when they lock up.\""
-tip = "The gym floor at half past eight, Monday to Saturday, when Dex locks up; not while tipsy"
+tip = "The gym floor at half past eight, Monday to Saturday, when Dex locks up; check in at the desk first: your card, or a $5 day pass; not while tipsy"
 when = [
   { type = "trait", subject = "player", trait = "dex_step", op = "eq", value = 4 },
   { flag = "dex_met", op = "is_true" },
 ]
 ready_canvas = "dex_05_after_hours"
 goals = [
-  { flag = "gym_in_today", op = "is_true", label = "Check in at the gym desk today: your card, or a $5 day pass" },
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 60, label = "Not yet: Dex waits until you're hungrier (your Corruption)" },
 ]
 

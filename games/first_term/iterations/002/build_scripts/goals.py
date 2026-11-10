@@ -394,7 +394,7 @@ out.append({
 cards = [
     {"npc_id": Z, "priority": 6, "heading": "Zoe's big party",
      "text": "Zoe wants ten people at her next party, and she wants you to find them.",
-     "tip": "The quad and the gym any day, the canteen at lunch on weekdays. Asking nicely won't do it. Zoe asks once you're Daring (Exhibitionism 20).",
+     "tip": "The quad and the gym any day, the canteen at lunch on weekdays. Asking nicely won't do it. Zoe asks once you're more daring.",
      "when": [{"flag": "zoe_met", "op": "is_true"}, {"flag": "zoe_crowd_on", "op": "is_true"}, {"type": "trait", "subject": "player", "trait": "zoe_crowd", "op": "lt", "value": 10}],
      "goals": [{"type": "trait", "subject": "player", "trait": "exhibitionism", "op": "gte", "value": 20, "label": "Not yet: Zoe asks once you're more daring (your Exhibitionism)"},   # DECISIONS 228: no number in the words
                {"type": "trait", "subject": "player", "trait": "zoe_crowd", "op": "gte", "value": 10, "label": "Find people for Zoe's party: the quad, the gym, the canteen at lunch"}],
@@ -405,8 +405,8 @@ cards = [
      "when": [{"flag": "zoe_met", "op": "is_true"}, {"flag": "zoe_crowd_done", "op": "is_false"}, {"type": "trait", "subject": "player", "trait": "zoe_crowd", "op": "gte", "value": 10}],
      "ready_canvas": "party_crowd"},
     {"npc_id": STUDY, "priority": 6, "heading": "His notes",
-     "text": "He'll trade his Business notes before the midterm, a chapter at a time, once you're Daring (Exhibitionism 20). Not for a please.",
-     "tip": "The library, weekdays, 8 AM to 7:30 PM except in Business class, from your fourth week, once you're Daring (Exhibitionism 20)",
+     "text": "He'll trade his Business notes before the midterm, a chapter at a time, once you're more daring. Not for a please.",
+     "tip": "The library, weekdays, 8 AM to 7:30 PM except in Business class, from your fourth week, once you're more daring",
      "when": [{"flag": "study_guy_met", "op": "is_true"}, {"flag": "exam_business_done", "op": "is_false"},
               {"type": "trait", "subject": "player", "trait": "study_notes", "op": "lt", "value": 5},
               {"type": "trait", "subject": "player", "trait": "exhibitionism", "op": "gte", "value": 20}],
