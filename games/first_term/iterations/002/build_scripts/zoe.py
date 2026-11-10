@@ -860,9 +860,9 @@ cards.insert(cards.index(_c1) + 1, {"npc_id": Z, "priority": 10,
                "label": "Not yet: Zoe's kiss dare waits until you're more curious (your Corruption)"}],   # study 2026-11-09: the need last, in words
     "ready_canvas": "zoe_01b_kiss_again"})
 _c2 = next(c for c in cards if c.get("ready_canvas") == "zoe_02_bra_through_the_sleeve")
-_c2["tip"] += "; Daring, or Curious when a guy from Figure drawing is at the party"   # playtest 2026-11-09: no unmet name
+_c2["tip"] += "; once you're more daring, or more curious when a guy from Figure drawing is at the party"   # DECISIONS 228: no stage number in the words   # playtest 2026-11-09: no unmet name
 _c2.setdefault("goals", []).append({"type": "trait", "subject": "player", "trait": "exhibitionism", "op": "gte", "value": 20,
-    "label": "Reach Daring (Exhibitionism 20), or Curious (Corruption 20) with a guy from Figure drawing at the party"})
+    "label": "Not yet: Zoe waits until you're more daring (your Exhibitionism), or more curious with a guy from Figure drawing there"})
 
 # heat proposal A2 (the canteen) and A5 (her bedroom), DECISIONS 147 chunk 2: screens inside her hubs (heat_a.py)
 import heat_a

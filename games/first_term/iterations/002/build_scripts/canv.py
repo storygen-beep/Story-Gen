@@ -785,6 +785,9 @@ FLAG_NOT_WORDS = {
     "dex_session_today": "not on a day you've already had a session",
     "worked_out": "not after you've worked out that day",
 }
+# A flag she sets fresh each day before the step (the gym's check-in). The Quests list shows a card's FIRST unmet goal
+# (quests_layout = "list", engine.md section 23), so as a goal it hid Dex's real step on every visit (LO 2026-11-11).
+TODAY_FIRST = {"gym_in_today": "check in at the desk first: your card, or a $5 day pass"}
 # A flag goal another goal on the same card already implies is not its own line: a hand can't stay, nor a busy
 # shift happen, without the café job (the-voice.md R3b, "one line per thing the step waits for").
 COVERED_BY = {
@@ -806,6 +809,9 @@ def card_goals(st, counter):
                 notes.append(FLAG_NOT_WORDS.get(f, "not after " + FLAG_WORDS.get(f, f.replace("_", " ")).lower()))
                 continue
             if COVERED_BY.get(f, set()) & {x.get("trait") for x in st.get("gate") or []}:
+                continue
+            if f in TODAY_FIRST:   # DECISIONS 228: a daily check-in goes in the tip, or the list shows only it, every day
+                notes.append(TODAY_FIRST[f])
                 continue
             if f == "came_home_late":
                 goals.append({"hours_since_flag": f, "op": "lt", "value": 4, "label": FLAG_WORDS[f]})
