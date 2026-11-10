@@ -178,6 +178,7 @@ flagEffects = [
   { targetType = "player", flag = "ryan_things_today", op = "unset" },
   { targetType = "player", flag = "mark_things_today", op = "unset" },
   { targetType = "player", flag = "laura_wardrobe_today", op = "unset" },
+  { targetType = "player", flag = "laura_robe_today", op = "unset" },   # DECISIONS 223
   { targetType = "player", flag = "hot_tub_today", op = "unset" },
   { targetType = "player", flag = "dress_code_today", op = "unset" },
   { targetType = "player", flag = "desk_guy_today", op = "unset" },

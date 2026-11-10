@@ -308,6 +308,17 @@ back), so it is true across the whole row, and keep the odds (about 1 in 4). Onl
 happens once a day at a set time (bedtime, home from the bar) keeps a short window. Checked: gate *a walk-in
 can happen* (a rule whose person is never where it says, in its own hours, can never fire).
 
+**A room someone can be in is written for them being in it.** Three slips from one first_term playtest
+(LO, 2026-11-10; DECISIONS 223):
+- **An "alone" act checks that the room is empty, not that one person is out.** The shower touch read "Ryan
+  absent" and played while Laura showered. Use the any-person form of `npc_at_location`, with no `npc_id`.
+- **A person whose rows put them in a room has a screen there, open from the start**, even one that pays
+  nothing: a door and a line, as Ryan's bathroom door. Without one, the card says she's in, and the room
+  shows no face and no sign of her.
+- **A moment inside a class is a swap from the class, and it pays the class.** As a button in the class's
+  first quarter hour it lived 15 minutes a slot, and taking it spent the class for no grade. The swap
+  counts as the class's one visit that day, so every way out pays the grade itself.
+
 **Floor: one per qualifying ROOM, not one per pair.** Filling the raw cross-product would rebuild the wall of buttons one layer
 down, which is the objects mistake in a new coat.
 

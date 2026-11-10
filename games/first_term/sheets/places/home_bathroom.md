@@ -1,4 +1,8 @@
 # [READY] Place — Bathroom
+
+> **Changed 2026-11-10** (LO's playtest; DECISIONS 223):
+> - Touching herself in the shower needs the room empty, so it no longer plays while Laura (or Mark) is in.
+> - Laura has her own door screen, `hub_laura_bathroom` ("Laura's in there"). It pays nothing; the shower gap still takes her face when it's open.
 > Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. New section: what the heat proposal built here. Points at the copy fixes it took.

@@ -630,6 +630,38 @@ out.append({"id": "laura_shower_gap", "name": "The bathroom door won't shut",
             [go("Back to your room.", loc="home_ella_room", mins=10, eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 19}, add("laura_gaps_watched", 1, clamp=False)], flags=[fset("laura_shower_seen")])]),
     ]})
 
+# ── Laura's in there (LO playtest 2026-11-10, DECISIONS 223: "see how ryan bathroom works"): her face at the door
+#    whenever her row has her in the bathroom, as Ryan's (ryan.py hub_ryan_bathroom). Pays nothing; the shower gap
+#    (priority 8) still wins her face while it is open. The lock sticking is the opening's fact. ──
+out.append({"id": "hub_laura_bathroom", "name": "Laura's in there",
+    "description": "Laura in the bathroom (her rows: weeknights and Sunday 21:30-22:00, Saturday 16:30-17:00): the door, one line. Passing her robe pays her warmth +1 once a day (laura_robe_today).",
+    "trigger": {"location": "home_bathroom", "npc": L, "requires_npc": L, "is_repeatable": True,
+                "priority": 6, "is_active": True, "conditions": cond(flag("opening_done"))},
+    "nodes": [
+        node("door", "The bathroom door", [
+            # reader 2026-11-10: the lock is the gap's fact ("the door stands open a few inches"), so this screen says it too
+            G(cond(flag("laura_robe_today", False)), P("The shower's running. The lock has stuck halfway, the way it always does, so the door stands open a few inches and steam rolls out through the gap. Her robe hangs on the hook outside.")),
+            # reader pass 2: after the robe, a second visit that window is not the first
+            G(cond(flag("laura_robe_today")), P("The lock has stuck halfway, the way it always does, so the door stands open a few inches. The robe's gone from the hook. Behind the door she's humming over the running water.")),
+            POOL(D(L, "Is that you, sweetheart? Give me a bit."),
+                 D(L, "If that's Ryan, the answer's no, and go and wait your turn."),
+                 D(L, "@player? Don't run the kitchen tap, honey, or I'll freeze in here."), pid="laura_bathroom_lines"),
+            # her voice at her level (reader 2026-11-10): the gap means nothing to her under Curious
+            G(cond(trait("corruption", "lt", 20)), T("You don't look through the gap. That's Mom in there.")),
+            G(cond(trait("corruption", "gte", 20), flag("laura_shower_seen")), T("You know exactly what you'd see through that gap.")),
+            G(cond(trait("corruption", "gte", 20), flag("laura_shower_seen", False)), T("You could look through the gap. You don't. Not yet.")),
+        ], [go("Pass her the robe.", node="robe", mins=2, cond_=cond(flag("laura_robe_today", False)),
+               eff=[nadd(L, "warmth", 1)], flags=[fset("laura_robe_today")]),
+            go("Wait your turn.", loc="home_hall", mins=10), go("Leave her to her shower.", loc="home_hall")]),
+        node("robe", "Her robe", [
+            P("You lift the robe off the hook and hold it through the gap without looking. Her wet hand finds it. For a second the door swings wider, and you see her bare shoulder, beaded with water, and the soft side of her breast before she pulls the robe in against it."),
+            D(L, "Thank you, sweetheart. You're an angel."),
+            *her_thought_bands("corruption", [(20, "You look at the floor until the door's pulled to."),
+                                              (40, "You saw more than you meant to. You don't mind as much as you should.")],
+                               "Next time you'll hold it a little further back, so she has to open the door wider."),
+        ], [go("Back to the hall.", loc="home_hall", mins=0)]),
+    ]})
+
 # Laura's hour after she watched (DECISIONS 84): one screen, pays nothing.
 out.append({"id": "laura_alone_peek", "name": "Peek through the gap",
     "description": "Sun-Fri 22:00-23:00, after she has watched Laura that night: one screen, pays nothing. Reached only by the door.",

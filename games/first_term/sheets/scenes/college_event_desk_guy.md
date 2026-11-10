@@ -1,6 +1,8 @@
 # [READY] Scene — college_event_desk_guy
 > Signed by LO: LO, 2026-11-04.
 
+> **Changed 2026-11-10** (LO's playtest, "Go with your picks"; DECISIONS 223). It is no longer a button. It is now a walk-in from "Attend the Psychology/Business lecture", 1 in 3, once a day. Every way out pays that class's grade +1, and the Psychology class now meets him too.
+
 > Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04.
 
 > The signed plans behind this page: `proposals/COPY_FIXES_B.md`.
@@ -16,15 +18,15 @@
 | row | answer |
 |---|---|
 | system · pool | college · `college_event_desk_guy` |
-| where · when | his seats: Mon, Wed, Fri 08:30 · Mon, Wed 10:15 · Tue, Thu 13:00 (first 15 minutes) |
+| where · when | inside the class: Attend Psychology (Mon, Wed, Fri 08:30 · Thu 13:00) or Business (Mon, Wed 10:15 · Tue 13:00), 1 in 3 |
 | gate | `desk_guy_met` · Corruption 20: she looks · Corruption 60: "Help him." (cap 79) |
 | who sees | a girl two seats down watches the look; on "Help him." the desk hides it |
 | want | "I'm hard. Help me out." |
 | next step | her hand under the desk, in a full hall |
 | hook | "Next time, then." He asks again the next class |
 | what she wears here | not named |
-| BRAKE | once a day, on the trigger |
-| raises | "Help him.": Corruption +1 (cap 79) · the look and the no pay nothing |
+| BRAKE | once a day (`desk_guy_today`) |
+| raises | every exit: the class grade +1 (half of Focus) · "Help him.": Corruption +1 (cap 79) as well |
 | the crude-word ceiling | tits, nipples, ass, cock, wet, clit · no cunt, fuck, cum, pussy (LO, 2026-10-08) |
 
 ## Branch map — as built (2026-11-03)

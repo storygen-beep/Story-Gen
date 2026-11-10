@@ -257,3 +257,40 @@ def test_the_shop_sells_only_what_she_can_still_buy(html):
         g.play("ShopPage")
         assert g.js("() => document.querySelector('.cr-empty-note').textContent") == "You have bought everything here."
         assert g.errors == []
+
+
+# ── first_term playtest 2026-11-10: Buy and wear in a room that refuses it, and the way out ──
+_STREET = "() => Object.keys(SugarCube.setup.passage_to_location).find(p => SugarCube.setup.passage_to_location[p] === 'loc_street')"
+
+
+@needs_browser
+def test_buy_and_wear_hides_where_she_stands_would_refuse_it(html):
+    with open_game(html) as g:
+        street = g.js(_STREET)
+        g.js("(p) => { SugarCube.State.variables.last_game_passage = p; }", street)
+        g.play("ShopPage")
+        # The mini breaks the street's rule: Buy only, and the stand says it goes in the bag.
+        assert g.js("() => document.querySelectorAll('.cr-buy-wear').length") == 0
+        assert g.js("() => document.querySelectorAll('.cr-stand .cr-buy').length") == 1
+        assert "It goes in your bag." in g.js("() => document.querySelector('.cr-stand').textContent")
+        g.js("() => document.querySelector('.cr-buy').click()")
+        g.page.wait_for_timeout(150)
+        assert g.sv("player.equipped.bottom") != "mini" and g.sv("player.wardrobe.mini") is not None
+        assert g.errors == []
+
+
+@needs_browser
+def test_go_back_never_returns_to_the_same_refusal(html):
+    with open_game(html) as g:
+        street = g.js(_STREET)
+        g.play(street)                                    # dressed: the room lets her in, the outfit is kept
+        kept = g.sv("player.equipped.bottom")
+        assert kept and g.sv("game_state.last_ok_outfit.bottom") == kept
+        g.js("() => { SugarCube.setup.addToWardrobe('mini'); SugarCube.setup.equipItem('mini'); }")
+        g.play(street)                                    # standing in it, now refused
+        assert g.js("() => SugarCube.State.passage") == "ClothingBlock"
+        g.js("() => [...document.querySelectorAll('#passages a')].find(a => a.textContent.trim() === 'Go back').click()")
+        g.page.wait_for_timeout(200)
+        assert g.js("() => SugarCube.State.passage") == street
+        assert g.sv("player.equipped.bottom") == kept
+        assert g.errors == []
