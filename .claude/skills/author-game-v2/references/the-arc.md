@@ -482,7 +482,7 @@ next step. If it is, and its conditions hold, it fires. Arc content does not que
 > through to the standard scenes.
 
 **This is available here, and precisely.** Entry-time auto-fire redirects the passage before the
-location screen renders (`getStoryCanvasRedirect`, `v2.py:6488`), and among the candidates
+location screen renders (`getStoryCanvasRedirect`, `v2.py:6511`), and among the candidates
 `selectAutoFireCanvasForLocation` (`v2.py:5895`) takes the **highest `priority`**
 (`v2.py:5210-5211`). So
 an arc beat is a one-shot at the location, priced above the other one-shots that could fire there.

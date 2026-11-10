@@ -6320,6 +6320,29 @@ setup.getNpcsPresentAtLocation = function(locationId) {{
     return result;
 }};
 
+// A building's card (a container: Home, Zoe's Flat) shows who is in ANY of its rooms, and NEW when any
+// room has a new scene (first_term playtest 2026-11-10: Zoe's Flat card was blank on party night while
+// she and Jake were in the living room). The ids are the card's location and every room under it,
+// computed at build time (_card_loc_ids). Only cards read these; conditions and doors keep exact ids.
+setup.getNpcsPresentAtLocations = function(locIds) {{
+    var out = [], seen = {{}};
+    for (var i = 0; i < (locIds || []).length; i++) {{
+        var here = setup.getNpcsPresentAtLocation(locIds[i]);
+        for (var j = 0; j < here.length; j++) {{
+            if (seen[here[j].id]) continue;
+            seen[here[j].id] = true;
+            out.push(here[j]);
+        }}
+    }}
+    return out;
+}};
+setup.locationsHaveNewCanvases = function(locIds) {{
+    for (var i = 0; i < (locIds || []).length; i++) {{
+        if (setup.locationHasNewCanvases(locIds[i])) return true;
+    }}
+    return false;
+}};
+
 // E2 — the chance a random canvas rolls with. `seenWeight` is emitted only when the
 // author set trigger.seen_weight; once the canvas has fired (trigger_history total > 0)
 // it multiplies `chance`, so an event she has already seen comes up less often. Both
@@ -12480,6 +12503,25 @@ setup.shopRoomReason = function(item) {
     if (money < (item.price || 0)) return 'Need $' + ((item.price || 0) - money) + ' more';
     return '';
 };
+// Would wearing this item out of the shop page be refused where she stands? A dry run of
+// equipItem's slot logic on a copy, read by the room's own clothing rules, then put back.
+// "Buy and wear" shows only when it passes (first_term playtest 2026-11-10: buy-and-wear on
+// a short skirt at Exhibitionism 0 left her refused by the shop she was standing in).
+setup.shopWearOkHere = function(item) {
+    try {
+        var p = State.variables.player || {};
+        if (!item || !p.equipped) return true;
+        var here = State.variables.last_game_passage;
+        if (!here || typeof setup.checkLocationClothing !== 'function') return true;
+        var saved = jQuery.extend({}, p.equipped);
+        if (item.slot === 'dress') { p.equipped.top = null; p.equipped.bottom = null; }
+        if (item.slot === 'top' || item.slot === 'bottom') p.equipped.dress = null;
+        p.equipped[item.slot] = item.id;
+        var refused = setup.checkLocationClothing(here);
+        p.equipped = saved;
+        return !refused;
+    } catch (e) { return true; }
+};
 setup.renderShopRoom = function() {
     var esc = setup._crEsc;
     var money = ((State.variables.player || {}).core_traits || {}).money || 0;
@@ -12500,8 +12542,10 @@ setup.renderShopRoom = function() {
         (pick.description ? '<span class="cr-stand-desc">' + esc(pick.description) + '</span>' : '') +
         (rule ? '<span class="cr-stand-rule">' + esc(rule) + '</span>' : '');
     if (why) h += '<span class="cr-stand-why">' + esc(why) + '</span>';
-    else h += '<span class="cr-stand-btns"><button type="button" class="cr-buy" data-buy="' + esc(pick.id) + '">Buy</button>' +
+    else if (setup.shopWearOkHere(pick)) h += '<span class="cr-stand-btns"><button type="button" class="cr-buy" data-buy="' + esc(pick.id) + '">Buy</button>' +
         '<button type="button" class="cr-buy cr-buy-wear" data-buy="' + esc(pick.id) + '" data-and-wear="1">Buy and wear</button></span>';
+    else h += '<span class="cr-stand-btns"><button type="button" class="cr-buy" data-buy="' + esc(pick.id) + '">Buy</button></span>' +
+        '<span class="cr-stand-why">Not out of the shop yet. It goes in your bag.</span>';
     h += '</div></div>';
 
     // Tabs: All, then each slot the shop has in stock, in body order.
@@ -12572,7 +12616,7 @@ jQuery(document).on('click', '.cr-buy', function(e) {
     var id = String(jQuery(this).attr('data-buy'));
     var item = setup._crItem(id);
     if (item && setup.buyItem(id)) {
-        var wore = jQuery(this).attr('data-and-wear') === '1' && setup.equipItem(id);
+        var wore = jQuery(this).attr('data-and-wear') === '1' && setup.shopWearOkHere(item) && setup.equipItem(id);
         var left = ((State.variables.player || {}).core_traits || {}).money || 0;
         setup.shopToast = 'Bought the ' + item.name.charAt(0).toLowerCase() + item.name.slice(1) +
             (wore ? ' and put it on' : '') + '. $' + left + ' left.';
@@ -20282,7 +20326,16 @@ setup.returnPassage = function (fallback) {
 Config.navigation.override = function (psg) {
     if (psg.indexOf("Location_") !== 0 || setup.infoPages.indexOf(psg) !== -1) return null;
     var clothingMsg = setup.checkLocationClothing(psg);
-    if (!clothingMsg) return null;
+    if (!clothingMsg) {
+        // The last outfit a room let her in wearing: ClothingBlock's way out when the room
+        // she came from refuses her too (she changed while standing in it, e.g. a shop's
+        // Buy and wear). first_term playtest 2026-11-10.
+        try {
+            var eqOk = (State.variables.player || {}).equipped;
+            if (eqOk && State.variables.game_state) State.variables.game_state.last_ok_outfit = jQuery.extend({}, eqOk);
+        } catch (eOk) {}
+        return null;
+    }
     State.variables._clothing_block_message = clothingMsg;
     State.variables._clothing_block_destination = psg;
     return "ClothingBlock";
@@ -20985,7 +21038,23 @@ if (clothingMsg) {
 <</script>><</link>>
 <br>
 """ + change_close + """<<link "Go back">><<script>>
-    Engine.play(State.variables.last_game_passage || "Navigation");
+    var back = State.variables.last_game_passage || "Navigation";
+    // The room she came from refuses her too (she changed while standing in it): she puts
+    // back on the last outfit a room let her in wearing, keeping only what she still owns.
+    // If that still fails, or there is none, the map. Never this same screen again.
+    if (back !== "Navigation" && setup.checkLocationClothing(back)) {
+        var ok = (State.variables.game_state || {}).last_ok_outfit;
+        var p = State.variables.player || {};
+        if (ok && p.equipped) {
+            for (var sl in ok) {
+                if (!ok.hasOwnProperty(sl)) continue;
+                var id = ok[sl];
+                p.equipped[sl] = (id && p.wardrobe && p.wardrobe[id]) ? id : null;
+            }
+        }
+        if (setup.checkLocationClothing(back)) back = "Navigation";
+    }
+    Engine.play(back);
 <</script>><</link>>
 </div>"""
 
@@ -24537,6 +24606,31 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
 <</widget>>
 """
 
+    def _card_loc_ids(self, loc):
+        """The location and every room under it (any depth, by parent_location). A card for a
+        container reads presence and NEW across all of them; a plain room is just itself."""
+        root = str(loc.id)
+        ids, frontier = [root], [root]
+        while frontier:
+            nxt = []
+            for other in self.locations:
+                parent = getattr(other, 'parent_location', None)
+                oid = str(other.id)
+                if parent is not None and str(parent.id) in frontier and oid not in ids:
+                    ids.append(oid)
+                    nxt.append(oid)
+            frontier = nxt
+        return ids
+
+    def _card_presence_calls(self, loc):
+        """(new-badge test, presence list) expressions for a nav card: the old single-id calls
+        for a plain room, so its output is unchanged; the many-id calls for a building."""
+        ids = self._card_loc_ids(loc)
+        if len(ids) == 1:
+            return (f'setup.locationHasNewCanvases("{ids[0]}")', f'setup.getNpcsPresentAtLocation("{ids[0]}")')
+        arr = json.dumps(ids).replace('"', "'")
+        return (f'setup.locationsHaveNewCanvases({arr})', f'setup.getNpcsPresentAtLocations({arr})')
+
     def _location_nav_slug(self, loc):
         """The runtime slug a location is keyed by in setup.locations (mirror of the
         locations_map build): properties['slug'] or a loc_<id> fallback."""
@@ -24571,10 +24665,11 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
             img_html = f'<div class="location-card-image" style="background-image: url(\'{video_path}/{image}\')"></div>'
         else:
             img_html = f'<div class="location-card-image location-card-placeholder">{self._get_location_placeholder_svg()}</div>'
+        new_call, npcs_call = self._card_presence_calls(loc)
         indicators = (
             f'<div class="location-card-indicators">'
-            f'<<if setup.locationHasNewCanvases("{loc_id}")>><span class="nav-new-badge">NEW</span><</if>>'
-            f'<<for _npc range setup.getNpcsPresentAtLocation("{loc_id}")>><<if _npc.portrait>><img @src="\'{video_path}/\' + _npc.portrait" class="nav-npc-badge" @alt="_npc.name"><</if>><</for>>'
+            f'<<if {new_call}>><span class="nav-new-badge">NEW</span><</if>>'
+            f'<<for _npc range {npcs_call}>><<if _npc.portrait>><img @src="\'{video_path}/\' + _npc.portrait" class="nav-npc-badge" @alt="_npc.name"><</if>><</for>>'
             f'</div>'
         )
         cost_tag = f'<<if setup.getLocationCostTag("{slug}")>><span class="nav-cost-tag"><<= setup.getLocationCostTag("{slug}")>></span><</if>>'
@@ -24612,10 +24707,11 @@ window.applyTraitEffect = function(targetType, npcId, trait, op, val, clampFlag,
         slug = self._location_nav_slug(loc)
         link_name = self._location_passage_name(loc)
         cost_tag = f'<<if setup.getLocationCostTag("{slug}")>> <span class="nav-cost-tag"><<= setup.getLocationCostTag("{slug}")>></span><</if>>'
+        new_call, npcs_call = self._card_presence_calls(loc)
         open_link = (
             f'[[{loc.name}->{link_name}]]'
-            f'<<if setup.locationHasNewCanvases("{loc_id}")>> <span class="nav-new">!</span><</if>>'
-            f'<<for _npc range setup.getNpcsPresentAtLocation("{loc_id}")>><<if _npc.portrait>> <img @src="\'{video_path}/\' + _npc.portrait" class="nav-npc-portrait" @alt="_npc.name"><</if>><</for>>'
+            f'<<if {new_call}>> <span class="nav-new">!</span><</if>>'
+            f'<<for _npc range {npcs_call}>><<if _npc.portrait>> <img @src="\'{video_path}/\' + _npc.portrait" class="nav-npc-portrait" @alt="_npc.name"><</if>><</for>>'
             f'{cost_tag}'
         )
         locked_link = f'<span class="nav-link-locked">{html.escape(loc.name)} — <<= setup.navDestBlockedReason("{slug}")>></span>'

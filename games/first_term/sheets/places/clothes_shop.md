@@ -1,4 +1,6 @@
 # [READY] Place — Clothes Shop
+
+> **Changed 2026-11-10** (LO's playtest; DECISIONS 223, engine): "Buy and wear" shows only when the shop would let her stand in it. The short skirt below Exhibitionism 20 is Buy only ("It goes in your bag"). If she is refused where she already stands, "Go back" puts her last allowed outfit back on.
 > Signed by LO: LO, 2026-11-04.
 > Changed 2026-11-04, LO's answers: the curtain needs Exhibitionism 20 and pays to cap 39 (B); signed by LO 2026-11-04.
 

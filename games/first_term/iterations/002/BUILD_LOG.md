@@ -1976,3 +1976,36 @@ Corruption) · 14 / 20". 0 page errors.
 |---|---|---|
 | the study's route | 9.0 | 23.5 |
 | evenings at home | 12.2 | 27.6 |
+
+## 2026-11-10 — six playtest fixes (DECISIONS 223)
+
+**Game:**
+- `pools.py` touch_shower: the any-person `npc_at_location` is_absent.
+- `home.py`: new `hub_laura_bathroom`, with door and robe screens.
+- `college.py`:
+  - `college_event_desk_guy` is now `substitution_only`, a 0.33 rule on both class rows, with `desk_guy_today`.
+  - `_desk_class_exit` pays `grade_psych` or `grade_business` +1 by the class row the clock is in.
+  - `DESK_HAND` is split so his lines come before he comes; `desk_guy_helped` is new.
+  - The Psychology row sets `desk_guy_met`.
+- `0_systems_spec.toml`: `laura_robe_today` is unset daily.
+
+**Engine (v2.py):**
+- `_card_loc_ids` and `_card_presence_calls`, plus the JS `getNpcsPresentAtLocations` and `locationsHaveNewCanvases`. Building cards only; a plain room's output is unchanged.
+- `game_state.last_ok_outfit` is recorded in the clothing override.
+- ClothingBlock's Go back falls back to that outfit, then to the map.
+- `shopWearOkHere` gates Buy and wear.
+
+**Tests:**
+- New `tests/test_container_card_presence.py` (4) and 2 new cases in `test_clothes_room.py`.
+- The game_generation suite: 851 passed, 17 skipped.
+
+**Checks:**
+- Gates: 114 pass, 3 decided, 1 fail (Laura's loop, held). Shape: 22 pass.
+- `cite_check --fix` moved the skill's shifted v2.py cites: 0 wrong.
+
+**Headless:**
+- Mon 21:35 bathroom: Laura's face, no touch and no shower. The robe pays warmth +1, and the button is gone the second time that day.
+- Fri 21:00 town: the Zoe's Flat card shows NEW, Zoe and Jake. The Home card at Tue 19:00 shows Laura, Ryan and Mark (before: nobody).
+- Shop at Exhibitionism 0: the short skirt is Buy only; the low-cut top keeps Buy and wear. Forced into the skirt in the shop, Go back puts the jeans back on and returns to the shop.
+- Attend Psychology: the desk guy came up in 26 of 60 tries; the grade is paid (+1) and the class is gone for the day.
+- 0 page errors.

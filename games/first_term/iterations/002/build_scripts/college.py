@@ -321,12 +321,13 @@ COVERED = {
 # ── Psychology (Hale; Nadia beside her; the guy beside her, the rival) ──
 out.append(class_row(
     "college_class_psych", "Attend the Psychology lecture", "Psychology", "grade_psych", PSYCH, H,
-    [fset("hale_met"), fset("nadia_met")],
+    [fset("hale_met"), fset("nadia_met"), fset("desk_guy_met")],   # DECISIONS 223: his line says "Psych", so Psych meets him too
     [G(cond(flag("hale_met"), flag("nadia_met")), P("Psychology. Dr. Hale at the lectern in his tweed, the slides already up. Nadia has saved you the seat beside her in the front row, like always.")),
      G(cond(flag("hale_met", False)), P("Psychology. A man in tweed at the lectern, slides already up: Dr. Hale, the timetable says. A girl in big glasses in the front row moves her bag off the seat beside her and pats it."),
        WHO("Sit here. I'm Nadia. Nobody sits at the front for him. You'll see why.")),
      G(cond(trait("hale_step", "gte", 2)), P("He finds you in the front row before he starts. He always does now.")),
      G(cond(trait("hale_step", "gte", 4)), P("He can't look at you for long. He keeps his eyes on the back wall when he talks.")),
+     G(cond(flag("desk_guy_met", False)), P("The guy on your other side leans over and copies the date off your page without asking."), D(DESK, "You're in my Business class too. Looks like I sit by you.")),
      G(cond(trait("grade_psych", "lt", 40)), D(H, "Some of you are failing this course. You know who you are.")),
      G(cond({"type": "worn_type", "operator": "eq", "value": "short_skirt"}), P("His eyes drop to your thighs. He loses the sentence, steps back behind the lectern, and starts it again.")),
      ],
@@ -523,17 +524,32 @@ into_class(MEETS["meet_business"], _seat_business, "Find a seat.")
 into_class(MEETS["meet_bio"], _seat_bio, "Find a seat.")
 into_class(MEETS["meet_figure"], _seat_figure, "Find your charcoal.", keep_opening=True)   # the pose is the class
 # ── the guy beside her (college_event_desk_guy; Psychology and Business; once a day) ──
-DESK_HAND = ("You check the room first. The lecturer faces the board. The row in front has its heads down. The desk hides everything below your elbows, so you slide your hand under it and open his jeans. His cock springs into your fingers, hot and thick, slick at the tip. You stroke his cock slow, root to head. He grips the desk edge and breathes through his nose so he won't make a sound. Your face burns, but you go faster. His cock throbs in your fist and his balls pull tight. He comes over your knuckles, under the desk where nobody sees. You wipe your palm on his thigh while his cock twitches against his open jeans.")
+# LO playtest 2026-11-10 (DECISIONS 223): it was a button in each class's first 15 minutes and spent the class for no
+# grade. Now a walk-in swap from "Attend" (1 in 3, once a day): it IS the class, so every way out pays the class's
+# grade +1 (half of Focus: he is the distraction). Which grade comes from the class row the clock is in (PSYCH and
+# BUSI never overlap). The swap counts as the class's one visit that day.
+def _desk_class_exit(text, eff=(), flags=()):
+    rows = [(r, "grade_psych") for r in PSYCH] + [(r, "grade_business") for r in BUSI]
+    return [go(text, loc="lecture_hall", mins=90, eff=[*eff, add(g, 1)], flags=[*flags, fset("desk_guy_today")],
+               cond_=cond(wd(*r["weekdays"]), tod(r["start_time"], r["end_time"]))) for r, g in rows]
+
+
+DESK_HAND_A = ("You check the room first. The lecturer faces the board. The row in front has its heads down. The desk hides everything below your elbows, so you slide your hand under it and open his jeans. His cock springs into your fingers, hot and thick, slick at the tip. You stroke his cock slow, root to head, your thumb slipping over the wet tip. He grips the desk edge and breathes through his nose so he won't make a sound. His balls are already drawn up tight. Your face burns and your nipples have gone hard, but you go faster.")
+DESK_HAND_B = ("His cock throbs in your fist and his ass lifts off the seat. He comes over your knuckles, under the desk where nobody sees. You wipe your palm on his thigh while his cock twitches against his open jeans.")
 out.append({
     "id": "college_event_desk_guy", "event": True, "name": "Notice the guy beside you is hard",   # pass 3 H33/H34 (the-voice.md R1, D11): the name says what happens if she clicks, and never hides the act
-    "description": "College event in Psychology and Business: the guy beside her is hard. Curious: she looks. Bold: her hand, unseen under the desk (explicit). Once a day.",
-    "trigger": {"location": "lecture_hall", "is_repeatable": True, "priority": 4, "is_active": True, "max_triggers_per_day": 1,
-                "schedules": at_start(PSYCH + BUSI), "conditions": cond(flag("desk_guy_met"), trait("corruption", "gte", 20))},
+    "description": "Walk-in on Attend Psychology / Business (1 in 3, once a day): the guy beside her is hard. Curious: she looks. Hungry: her hand, unseen under the desk (explicit). Every exit pays the class grade +1.",
+    "trigger": {"location": "lecture_hall", "is_repeatable": True, "priority": 4, "is_active": True, "substitution_only": True,
+                "schedules": PSYCH + BUSI, "conditions": cond(flag("desk_guy_met"), trait("corruption", "gte", 20), flag("desk_guy_today", False))},
     "nodes": [
         node("ask", "Beside you", [
             P("The guy who sits beside you has his jacket across his lap and his jaw clenched. He catches you looking and leans in."),
-            D(DESK, "I'm hard. Help me out."), ME("You're joking."), D(DESK, "Do I look like I'm joking? Look at it."),
-            T("He said it like he was asking for a pen."),
+            D(DESK, "I'm hard. Help me out."),
+            # reader 2026-11-10: a repeat after her hand is not a first time
+            G(cond(flag("desk_guy_helped", False)), ME("You're joking."), D(DESK, "Do I look like I'm joking? Look at it."),
+              T("He said it like he was asking for a pen.")),
+            G(cond(flag("desk_guy_helped")), ME("Again? Here?"), D(DESK, "You've done it before. Same row, same jacket."),
+              T("He's come in your hand in this row before, and nobody saw.")),
         ], [
             go("Look.", node="watch", mins=3),
             go("Help him.", node="hand", mins=3, cond_=cond(trait("corruption", "gte", 60)), costs=[{"trait": "energy", "value": 10}], eff=[{"targetType": "player", "trait": "hygiene", "op": "add", "value": -10, "clamp": True}]),   # pass 3 E95   # a handjob in a full hall: Hungry (DECISIONS 124)
@@ -544,16 +560,23 @@ out.append({
             P("You look. He moves the jacket an inch so you can see the shape of it straining his jeans, and watches you look, and grins at the board like nothing's happening."),
             P("Your thighs press together under the desk."),   # reader a3 #27 (DECISIONS 131): her body on the Look screen
             D(DESK, "Like what you see?"), ME("Shut up and take notes."), D(DESK, "Next time, then."),
-        ], [go("Back to the class.", loc="lecture_hall", mins=90)]),
+        ], _desk_class_exit("Back to the class.")),
         node("hand", "Under the desk", [
-            P(DESK_HAND),
+            P(DESK_HAND_A),
+            D(DESK, "Fuck. Fuck, don't stop. Somebody's turning round."), ME("Then keep your face still and come."),   # reader 2026-11-10: said before he comes
+            P(DESK_HAND_B),
             VID("under a lecture desk a girl's hand in a guy's open jeans, the class facing the front", "handjob under desk in class", "girl hand in guy jeans under lecture desk", pool_dir="sex/desk_guy_hand_t5"),
-            D(DESK, "Fuck. Fuck, don't stop. Somebody's turning round."), ME("Then keep your face still and come."),
-        ], [go("Wipe your hand.", loc="lecture_hall", mins=90,
-               eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 79}])]),
+            P("He zips up and goes back to copying the slides. Next class he'll be in that seat again, with his jacket on his lap."),   # the hook
+        ], _desk_class_exit("Wipe your hand.", flags=[fset("desk_guy_helped")], eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 79}])),
         node("no", "Not here", [D(DESK, "Worth a try."), P("Two seats down a girl smirks into her notes."), P("He shrugs and puts his jacket straight and copies the slide like a model student. He keeps glancing at your hands for the rest of the class.")],
-             [go("Back to the class.", loc="lecture_hall", mins=90, flags=[fset("desk_guy_refused")])]),
+             _desk_class_exit("Back to the class.", flags=[fset("desk_guy_refused")])),
     ]})
+
+# the swap rules on the two class rows (DECISIONS 223): 1 in 3; the target's own conditions carry the once a day
+for _c in out:
+    if _c["id"] in ("college_class_psych", "college_class_business"):
+        _c["trigger"]["substitutions"] = list(_c["trigger"].get("substitutions") or []) + [
+            {"target_canvas_id": "college_event_desk_guy", "chance": 0.33, "conditions": cond(flag("desk_guy_today", False))}]
 
 # ── the dress-code warning (wardrobe pool, in class; once a day). Twice is a complaint ──
 # It fires as the class starts (a class fills its window), and the lecturer is whoever teaches that slot.

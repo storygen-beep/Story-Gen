@@ -536,7 +536,7 @@ BED_OPEN = [GC(cond({"type": "npc_at_location", "location_id": "home_living_room
             P(BED[len(BED_TV) + 1:])]
 for cid, loc, name, text, back, extra in [
         ("touch_bed", "home_ella_room", "Touch yourself", BED, "Lie still.", []),
-        ("touch_shower", "home_bathroom", "Touch yourself in the shower", SHOWER, "Done.", [{"type": "npc_at_location", "location_id": "home_bathroom", "npc_id": R, "operator": "is_absent"}]),   # hours when someone is up in the house: TOUCH_SHOWER_HOURS
+        ("touch_shower", "home_bathroom", "Touch yourself in the shower", SHOWER, "Done.", [{"type": "npc_at_location", "location_id": "home_bathroom", "operator": "is_absent"}]),   # hours when someone is up in the house: TOUCH_SHOWER_HOURS; the room empty, anyone (LO playtest 2026-11-10, DECISIONS 223: it showed while Laura showered)
         ("touch_toilet", "college_womens_toilet", "Touch yourself in a stall", TOILET, "Done.", [])]:
     out.append({
         "id": cid, "name": name,

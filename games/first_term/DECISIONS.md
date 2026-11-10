@@ -805,3 +805,18 @@ Week simulation (rough), with both batches:
 - Everyday goes from 2.2 to 9.0 a week on the study's route, and to 12.2 on the evenings-at-home route.
 - The everyday share is 38-44% (target about 45%).
 - The total is 23.5-27.6 a week (3.4-3.9 a day), over the top games' 1-2.5. Ryan's towel is 3.5 of it, and LO kept it. | "okay go ahead" (2026-11-10) |
+| 223 | Six fixes from LO's playtest, 2026-11-10. LO picked them ("1 yes 2 yes like ryan 3 yess"; "Go with your picks. Go ahead fix them all."), and each one was reproduced headlessly first.
+1. **The touch in the shower checks that the room is empty.** It used to check only Ryan, so it played while Laura showered.
+2. **Laura has a door screen, `hub_laura_bathroom`, in every bathroom row,** so her face shows, as Ryan's does.
+   - The lock is stuck, the door stands a few inches open, and her thought follows her corruption.
+   - "Pass her the robe." is once a day and pays her warmth +1.
+   - The shower gap still takes her face when it's open.
+3. **Engine: a building's card shows the people and NEW of every room under it.** Zoe's Flat was blank on party night; Home showed nobody.
+4. **Engine: ClothingBlock's "Go back" never returns to the same refusal.** She puts her last allowed outfit back on, or goes to the map. Before, Buy and wear on the short skirt in the shop looped forever.
+5. **Engine: "Buy and wear" shows only where she stands would let her in it.** Otherwise it's Buy only: "It goes in your bag."
+6. **The desk guy is a walk-in on Attend Psychology/Business**, 1 in 3, once a day.
+   - Every exit pays the class grade +1.
+   - Psychology meets him too.
+   - A repeat after her hand reads `desk_guy_helped`.
+
+v2-reader, three passes: 5 FAILs, then 2, then 0. The desk guy's hand screen was split so his lines come before he comes; both halves are explicit (4 and 3 words). Gates: 114 pass, 1 fail (Laura's loop, held). | "Go with your picks. Go ahead fix them all." (2026-11-10) |

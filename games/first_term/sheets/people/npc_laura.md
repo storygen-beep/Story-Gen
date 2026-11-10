@@ -48,7 +48,7 @@
 | `home_hall` | every day | 23:00 | 02:00 | waiting up in the dark hall, the catch · only when `came_home_late` was set in the last 4 hours (question 69) |
 | `home_kitchen` | Mon–Fri | 06:30 | 08:00 | breakfast; home evenings |
 | `home_kitchen` | Mon, Tue, Thu, Fri, Sun | 18:00 | 21:30 | breakfast; home evenings (was to 22:00(LO, 2026-11-09, "Bath + later bedtime"; DECISIONS 216) |
-| `home_bathroom` | Mon, Tue, Thu, Fri, Sun | 21:30 | 22:00 | her shower before bed: `laura_shower_gap` (LO, 2026-11-09, "Bath + later bedtime"; DECISIONS 216) |
+| `home_bathroom` | Mon, Tue, Thu, Fri, Sun | 21:30 | 22:00 | her shower before bed: `laura_shower_gap` (LO, 2026-11-09, "Bath + later bedtime"; DECISIONS 216); her door screen `hub_laura_bathroom` in every bathroom row (DECISIONS 223) |
 | `home_master_bedroom` | Mon, Tue, Wed, Thu, Fri, Sun | 22:00 | 23:30 | awake and alone (to 23:30 (LO, 2026-11-09, "Bath + later bedtime"; DECISIONS 216)), Mark in the living room: `laura_alone_in_bed` (DECISIONS 82, changed 2026-10-29, re-signed by LO 2026-10-29) |
 | `home_master_bedroom` | Mon, Tue, Wed, Thu, Fri, Sun | 23:30 | 06:30 | sleeps; dresses Saturday |
 | `home_master_bedroom` | Sat | 00:00 | 07:00 | sleeps; dresses Saturday |

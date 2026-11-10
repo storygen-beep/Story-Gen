@@ -5,6 +5,28 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-10 — a room someone can be in is written for them (DECISIONS 223)
+
+Source: LO's first_term playtest on 2026-11-10. Each slip was reproduced headlessly against the built game first.
+
+- **`references/the-surfaces.md`:** a new paragraph after the walk-in row rule, with three rules.
+  - An "alone" act checks that the room is empty, using the any-person `npc_at_location`. The shower touch had
+    read only Ryan, so it played while Laura showered.
+  - A person whose rows put them in a room has a screen there that's open from the start. Laura had no face in
+    the bathroom until her step 2.
+  - A moment inside a class is a swap from the class and pays the class. The desk guy had been a 15-minute
+    button that spent the class for no grade.
+- **`references/*.md`, nine files** (engine, the-arc, the-clock, the-economy, the-first-hour, the-phone,
+  the-release, the-returning-player, the-systems): `cite_check.py --fix` moved the `v2.py` line cites that the
+  same day's engine edits shifted. Only line numbers changed.
+- **Verified:**
+  - `cite_check.py`: 0 wrong (176 confirmed).
+  - The skill tests: 1048 passed.
+  - `gates.py first_term`: 114 pass, 3 decided, 1 fail. The fail is Laura's loop hours, held by LO.
+  - `shape.py --finish`: 22 pass.
+
+---
+
 ## 2026-11-10 — random scenes are people, and a repeat moves (DECISIONS 221)
 
 Source: `~/Documents/Great_Games_Study_20260926/playtest_study_20261109/13_random_scenes_top.md` (the top games) and
