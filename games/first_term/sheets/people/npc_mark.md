@@ -1,4 +1,5 @@
 # [READY] Person — Mark
+> Changed 2026-11-10 (DECISIONS 224, LO: "Should be inside her npc portrait activity not a separate link"): The Sunday table is the button "Join him at the table." on his kitchen screen (`hub_mark_kitchen`), not its own link. Sunday 08:00-11:45, once a day.
 > Changed 2026-11-09 (DECISIONS 211, LO: "lets have it cot shaped. One time the routine"): the Repeats section now reads the first time once, then routine by stage. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-09 (DECISIONS 209, LO: "Go ahead"): her reaction drifts when she does it again, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-09 (DECISIONS 208, LO: "I say we tackle 1st fewer cloths first"): more clothes, round 2, new section at the end. Signed by LO 2026-11-09 ("Sign them").

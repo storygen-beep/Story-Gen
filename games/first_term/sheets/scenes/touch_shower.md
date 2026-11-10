@@ -1,4 +1,5 @@
 # [READY] Scene — touch_shower
+> Changed 2026-11-10 (DECISIONS 224, LO: "Touch in shower should be an option while she is taking shower not a separate option"): no longer its own canvas. It is the `touch` node of `bathroom_shower` (home.py), opened by "Touch yourself." on the shower's first screen, Curious. The beat opens under the water, so its first sentence ("You lock the door and step naked under the hot water.") is gone; "Footsteps cross the hall outside and keep going." is its own line, at the hours someone is up and never right after Ryan was at the door (he gets his own line then). Its ways out are the shower's, each with Corruption +1 and 10 more minutes; once a day because the shower is.
 > Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-03 to match the build (third alignment pass); signed by LO 2026-11-04. the explicit beats as built, measured.

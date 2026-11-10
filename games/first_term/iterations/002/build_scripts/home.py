@@ -11,6 +11,7 @@ way back is the hall), A1-25 (the bed's closed line), A1-31 (the room at night n
 there). Removed: room_feed and room_selfie (the phone owns them, wardrobe.md "On the phone"),
 hall_home_late (LO, 2026-10-09, Q75).
 """
+import json
 from canv import *
 from tomlw import tod, wd
 from home_items import *
@@ -192,6 +193,37 @@ out.append(solo("bathroom_shower", "Take a shower",
             P("You towel off with the lock off and the door open a crack, your nipples hard in the draft from the hall. Anybody coming down the hall gets the lot, and you take your time drying between your legs."),
         ], [go("Go out in the towel.", loc="home_hall")]),
     ], conds=[here(R, "home_bathroom", False), here(L, "home_bathroom", False)], prio=5, max_day=1))
+# ── touching herself in the shower is a choice inside the shower (LO's playtest, 2026-11-10, DECISIONS 224: "an
+#    option while she is taking shower not a separate option"). It was its own bathroom link (pools.py touch_shower,
+#    sheets/scenes/touch_shower.md). Curious, as it was; once a day because the shower is. Her ways out are the
+#    shower's own, each with the touch's pay (Corruption +1, capped at the top of Curious; recap.py moves the cap)
+#    and 10 more minutes. The beat opens under the water: the shower screen already put her there. ──
+# "Footsteps cross the hall" only at hours somebody is up in the house (who_is_where: weeknights and Sunday 18-24,
+# Mark up to 02:00, Mark in the garage Saturday 09-17, Laura up on Saturday 22-24; part 8, reader), and never right
+# after Ryan was at the door: the shower's peek lines run while he is in his room (Sat/Sun all day, weekdays outside
+# 06:25-06:45, when he bangs on the door instead).
+TOUCH_SHOWER_HOURS = [{"weekdays": [0, 1, 2, 3, 4, 6], "start_time": "18:00", "end_time": "00:00"},
+                      {"weekdays": [0, 1, 2, 3, 4, 5], "start_time": "00:00", "end_time": "02:00"},
+                      {"weekdays": [5], "start_time": "09:00", "end_time": "17:00"},
+                      {"weekdays": [5], "start_time": "22:00", "end_time": "00:00"}]
+RYAN_PEEKED = [[here(R, "home_ryan_room"), wd(5, 6)], [here(R, "home_ryan_room"), wd(0, 1, 2, 3, 4), tod("06:45", "06:25")]]
+SHOWER_TOUCH = ("The water runs down your tits and drips off your nipples. You soap them slowly, thumbs circling until they stand hard and ache. Your hand slides down your belly and between your legs. You are slick there, and not from the shower. Two fingers find your clit and press. The water drums on your back and your ass. You lean one hand on the tile and rub faster. Your hips jerk against your fingers. The orgasm hits hard, and you bite down on the moan. Your knees go weak, and you hold the tile while your clit throbs under your hand.")
+_shower = next(c for c in out if c["id"] == "bathroom_shower")
+_sh = next(n for n in _shower["nodes"] if n["id"] == "shower")
+_touch_ways = []
+for _ch in _sh["choices"]:
+    _w = json.loads(json.dumps(_ch))
+    _w["time_progression_minutes"] = (_w.get("time_progression_minutes") or 0) + 10
+    _w["effects"] = list(_w.get("effects") or []) + [{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 39}]
+    _touch_ways.append(_w)
+_sh["choices"].insert(0, go("Touch yourself.", node="touch", mins=0, cond_=cond(CURIOUS)))
+_shower["nodes"].insert(1, node("touch", "Touch yourself", [
+    *[G(cond(*c), P("Ryan's gone from the door, but your nipples are still hard from his eyes on them.")) for c in RYAN_PEEKED],
+    *[G(cond(wd(*r["weekdays"]), tod(r["start_time"], r["end_time"]), here(R, "home_ryan_room", False)),
+        P("Footsteps cross the hall outside and keep going.")) for r in TOUCH_SHOWER_HOURS],
+    P(SHOWER_TOUCH),
+    VID("a girl touching herself alone (home bathroom)", "girl masturbating alone", "solo girl bathroom orgasm", pool_dir="sex/touch_shower_t5"),
+], _touch_ways))
 
 out.append(solo("bathroom_mirror", "Look in the mirror", "The bathroom mirror: one line by what she has on, slot by slot.",
     "home_bathroom", [

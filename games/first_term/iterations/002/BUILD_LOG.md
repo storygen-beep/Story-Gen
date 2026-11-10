@@ -2009,3 +2009,27 @@ Corruption) · 14 / 20". 0 page errors.
 - Shop at Exhibitionism 0: the short skirt is Buy only; the low-cut top keeps Buy and wear. Forced into the skirt in the shop, Go back puts the jeans back on and returns to the shop.
 - Attend Psychology: the desk guy came up in 26 of 60 tries; the grade is paid (+1) and the class is gone for the day.
 - 0 page errors.
+
+## 2026-11-10 — scenes with a person open from their portrait (DECISIONS 224)
+
+**Game:**
+- New `build_scripts/doors.py`: the gates of seven door-only scenes, `trigger(sid)` for the scene's own trigger, and `apply(out)`. `apply` sets the `_today` flag on every way out and adds the hub buttons before the hub's first plain way out. zoe.py, pools.py, ryan.py, mark.py and hale.py import it and call `apply` before `emit`.
+- `3_activities.toml`: `vance_walk_past` is door-only and sets `vance_walk_past_today`. `hub_vance_porch` has "Walk past slowly.".
+- `laura.py` kitchen_study: Laura is an `npc_at_location` condition, not `requires_npc`.
+- `home.py`: the `touch` node in `bathroom_shower`, with `TOUCH_SHOWER_HOURS` moved here from pools.py. `pools.py`: touch_shower is gone.
+- `0_systems_spec.toml`: five new daily unsets (park_hidden, ryan_two_knocks, mark_sunday_table, hale_thursdays, vance_walk_past `_today`).
+- Button labels in doors.py: Ryan "Lean back on his door.", Mark "Join him at the table." (reader pass 2).
+- Opening lines rewritten after v2-reader passes 1-3 (8, then 7, then 3 FAILs; pass 4: 0): hale.py, mark.py, pools.py, zoe.py, ryan.py, 3_activities.toml, and `sheets/scenes/ryan_hot_repeatables.md` 7s_a / 7s_c.
+
+**Skill:** the-surfaces.md R1's other half. The gate `_scene_in_portrait` is at the end of gates.py and registered on the loop gate's line; its row is in SKILL.md.
+
+**Checks:**
+- Gates: 115 pass, 3 decided, 1 fail (Laura's loop, held).
+- `--selfcheck` 0. `cite_check --strict` 0 wrong. Skill tests: 1155 passed.
+- A rescan of the built TOML finds 0 person links beside a portrait.
+
+**Headless:**
+- Sat 08:05 park: no dare link. Zoe's screen has the dare; it pays Exhibitionism 65 to 66, and the button is gone the second time that day.
+- Ryan Sun 22:30, Mark Sun 09:00, Hale Thu 18:40, Vance Mon 19:30: each portrait has its button, and each opens on the new line.
+- Tue 23:30 bathroom, Curious: no touch link. Take a shower shows "Touch yourself."; Corruption 25 to 26.
+- 0 page errors.

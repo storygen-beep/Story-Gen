@@ -185,17 +185,19 @@ across the hall (Mark is in the living room with the TV); `7t_b` opens on the he
 `7t_c` turns the face-down phone over; the door line no longer puts him at the desk (`7s_b` has him in bed).
 Reach audit 2026-11-09 (`playtest_study_20261109/12_reach_audit.md`): row 7 also runs on weekend mornings (Saturday 10:00-14:00, Sunday 08:00-14:00), so its words name no hour and nobody who isn't home: `7suck_shy` listens for "feet in the hall" (was Laura's slippers), `7ride_shy` says "Someone will hear." (was "She's right across the hall."), `7t_c`'s phone is "loud in the quiet room" (was "loud in the dark"). `7s_b` (dark, half asleep) and `7t_b` (Laura knocks) stay, shown only when they are true. Row 5's thought is "for hours" (was "all night"), since row 5 now takes his weekend mornings too.
 
-**7s_a** · 80 words · explicit words 4 · median sentence 8
+Reader 2026-11-10 (DECISIONS 224, LO: the step-8 repeat is a button on his room screen, not its own link): she is already in his room when it opens, so `7s_a` opens "Ryan meets you halfway" (he stands an arm's length away on his room screen) and loses "before it's even shut" and "The door clicks closed behind your back", `7s_c` loses "waiting", "Took you long enough" and "Shut the door. You shut it.", and `7s_b` (his room dark, him half asleep) is out of every pool: from his room screen he is always up.
 
-> Ryan has you against the door before it's even shut. His mouth is on yours, hungry, and his hands go straight to your ass. The door clicks closed behind your back. "Hi, @player.nickname," he breathes into your neck. His cock is already hard against your belly. You drag his shirt over his head. He pulls your clothes off you, quick and rough, and drops them on the floor. Your nipples go tight. His cock presses hot into your bare stomach.
+**7s_a** · 74 words · explicit words 4 · median sentence 8
+
+> Ryan meets you halfway and walks you back against the door. His mouth is on yours, hungry, and his hands go straight to your ass. "Hi, @player.nickname," he breathes into your neck. His cock is already hard against your belly. You drag his shirt over his head. He pulls your clothes off you, quick and rough, and drops them on the floor. Your nipples go tight. His cock presses hot into your bare stomach.
 
 **7s_b** · 86 words · explicit words 3 · median sentence 7
 
 > Ryan's room is dark. He's in bed, half asleep, one arm over his eyes. "That you, @player.nickname?" His voice is thick. He lifts the covers without looking. You slide in, and he pulls you flat against him. He's warm all over. His hand slides down your back to your ass and squeezes. His cock stiffens against your thigh, slow, then all at once. "Awake now," he mumbles. He tugs your clothes off under the covers and kicks them away. Your bare tits press against his chest.
 
-**7s_c** · 79 words · explicit words 4 · median sentence 7
+**7s_c** · 80 words · explicit words 4 · median sentence 7
 
-> Ryan's sitting on the edge of his bed, elbows on his knees, waiting. "Took you long enough, @player.nickname." "Miss me?" "Shut the door." You shut it. He pulls you between his knees by the hips and looks up at you. His hands slide round to your ass. His cock is hard in his shorts. "Off," he says. You pull your clothes off and let them drop. He looks at your tits, then lower. His cock jerks against his shorts.
+> Ryan sits back down on the edge of his bed, elbows on his knees, and looks at you. "Come here, @player.nickname." "Miss me?" "Come here." You go. He pulls you between his knees by the hips and looks up at you. His hands slide round to your ass. His cock is hard in his shorts. "Off," he says. You pull your clothes off and let them drop. He looks at your tits, then lower. His cock jerks against his shorts.
 
 **7t_a** · 101 words · explicit words 8 · median sentence 5
 

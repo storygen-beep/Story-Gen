@@ -1,4 +1,5 @@
 # [READY] Person — Ryan
+> Changed 2026-11-10 (DECISIONS 224, LO: "Should be inside her npc portrait activity not a separate link"): The step-8 repeat ("Two knocks on his door") is the button "Lean back on his door." on his room screen (`hub_ryan_room`), not its own link; she knocked on the way in. Same hours (nights, his weekend mornings), once a day.
 > Changed 2026-11-09 (DECISIONS 211, LO: "lets have it cot shaped. One time the routine"): the Repeats section now reads the first time once, then routine by stage. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-09 (DECISIONS 209, LO: "Go ahead"): her reaction drifts when she does it again, new section at the end. Signed by LO 2026-11-09 ("Sign them").
 > Changed 2026-11-09 (DECISIONS 208, LO: "I say we tackle 1st fewer cloths first"): more clothes, round 2, new section at the end. Signed by LO 2026-11-09 ("Sign them").

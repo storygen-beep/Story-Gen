@@ -5,6 +5,29 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-10 — a scene with a person opens from their portrait (DECISIONS 224)
+
+Source: LO's first_term playtest on 2026-11-10. "Dare me, Zo." "should be inside her npc portrait activity not a
+separate link", and the shower touch "should be an option while she is taking shower not a separate option".
+
+- **`references/the-surfaces.md`, R1:** a new paragraph, "The other half of R1".
+  - A scene done with a person is a button on that person's portrait scene. It carries the scene's whole gate,
+    and the scene's canvas is door-only (`hidden_from_location`). The portrait shows one canvas per person per
+    room, so a second scene with only `requires_npc` showed as its own link beside her face.
+  - A solo act inside an activity is a choice in that activity.
+  - Her own work with someone only present reads them as an `npc_at_location` condition.
+- **`scripts/gates.py`:** a new gate, *a person's scene is inside their portrait* (`_scene_in_portrait`).
+  - It's at the end of the file and registered on the loop gate's line, so no cited line moved.
+  - On the last commit's first_term build it fails 8 scenes; on the fixed build it passes 10/10.
+- **`SKILL.md`:** the gate's row in the gate table, after *a walk-in can happen*.
+- **Verified:**
+  - `gates.py --selfcheck` exits 0.
+  - `cite_check.py --strict`: 0 wrong.
+  - The skill tests: 1155 passed, 1 skipped.
+  - `gates.py first_term`: 115 pass, 3 decided, 1 fail. The fail is Laura's loop hours, held by LO.
+
+---
+
 ## 2026-11-10 — a room someone can be in is written for them (DECISIONS 223)
 
 Source: LO's first_term playtest on 2026-11-10. Each slip was reproduced headlessly against the built game first.

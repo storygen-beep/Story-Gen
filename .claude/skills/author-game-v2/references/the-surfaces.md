@@ -142,6 +142,19 @@ to every day is not one.
 and does her own work is **at least two canvases**, plus a walk-in if anyone can interrupt her.
 Never put work inside a character's hub. Checked: lint *work inside a hub*.
 
+**The other half of R1: a scene done with a person opens from that person's portrait.** The portrait
+shows one canvas per person per room, the highest priority (`v2.py` `selectNpcPortraitCanvasesForLocation`).
+A second repeatable scene with the same person there, a dare, a session or a repeat, that has
+`requires_npc` and no `npc` shows as its own link beside her face. That is two doors to one person.
+Make the scene a button on the portrait scene's first screen, carrying the scene's whole gate (its
+conditions, one button per schedule row, its once-a-day flag), and make the scene's canvas door-only
+(`hidden_from_location`). A solo act that happens inside an activity is a choice inside that activity:
+she touches herself in the shower from the shower's own screen, not from a second bathroom link. Her own
+work with someone only present (studying while her mother cooks) stays a room link, and reads them as an
+`npc_at_location` condition, not `requires_npc`. Random scenes and swap targets fire on their own and are
+not links. Checked: gate *a person's scene is inside their portrait* (first_term playtest, 2026-11-10:
+"Dare me, Zo." "should be inside her npc portrait activity not a separate link"; eight scenes failed it).
+
 **R2 · A room's list is needs, systems and people — nothing else.**
 
 Write the room's job first: *what does her body need here, which systems live here, who is scheduled

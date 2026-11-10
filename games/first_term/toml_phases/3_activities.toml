@@ -163,6 +163,14 @@ blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", item
 [canvases.nodes.exit_block]
 type = "choices"
 
+# DECISIONS 224 (LO, 2026-11-10): walking past him slowly opens from his portrait, once a day
+[[canvases.nodes.exit_block.choices]]
+text       = "Walk past slowly."
+targetType = "node"
+nodeId     = "vance_walk_past.walk"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "vance_met", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "vance_walk_past_today", operator = "is_false" } ] }
+
 [[canvases.nodes.exit_block.choices]]
 text       = "\"Goodnight, Mr. Vance.\""
 targetType = "location"
@@ -286,7 +294,9 @@ requires_npc  = "npc_vance"
 is_repeatable = true
 priority      = 4
 is_active     = true
-max_triggers_per_day = 1
+# DECISIONS 224 (LO, 2026-11-10): a button in his porch hub, not its own link. Door-only here; the hub's button
+# carries vance_met and the once-a-day flag vance_walk_past_today (set on each way out below).
+hidden_from_location = true
 
 [canvases.trigger.conditions]
 version = "1.0"
@@ -297,21 +307,23 @@ subject   = "player"
 flag_key  = "vance_met"
 operator  = "is_true"
 
+# reader 2026-11-10 (DECISIONS 224): opened from his porch screen, where she stands at his steps and he has
+# already looked up and spoken, so the walk is her walking on, not arriving
 [[canvases.nodes]]
 id   = "walk"
 name = "Past his porch"
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
-blocks = [ { type = "group", conditions = { version = "1.0", logic = "OR", items = [ { type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "clothing_slot", slot = "bra", operator = "unequipped" } ] }, blocks = [ { type = "paragraph", content = "You take the long way past the landlord's gate, slow. The paper lowers. His eyes land on your ass and stay there, and he wets his lips. He half gets out of his chair, then sits back down. You don't stop for him. Not yet. You feel him watch you all the way to the corner." }, { type = "dialog", content = "Take your time, Miss. I'm not going anywhere.", props = { speaker = "npc", npcId = "npc_vance" } } ] } ]
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "OR", items = [ { type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "clothing_slot", slot = "bra", operator = "unequipped" } ] }, blocks = [ { type = "paragraph", content = "You don't stay. You start on past his gate, slow. His eyes land on your ass and stay there, and he wets his lips. You don't stop for him. Not yet." }, { type = "dialog", content = "Take your time, Miss. I'm not going anywhere.", props = { speaker = "npc", npcId = "npc_vance" } } ] } ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
-blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_type", operator = "neq", value = "short_skirt" }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "lt", value = 30 } ] }, blocks = [ { type = "paragraph", content = "You walk past his porch. A nod from the rocking chair. Nothing else. To him you're scenery." } ] } ]
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_type", operator = "neq", value = "short_skirt" }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "lt", value = 30 } ] }, blocks = [ { type = "paragraph", content = "You don't stay. You walk on past his gate, and he goes back to his paper before you reach the corner." } ] } ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # scene reader 2026-11-04: at his Want 30+ she is not scenery to him, whatever she has on
-blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_type", operator = "neq", value = "short_skirt" }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "gte", value = 30 } ] }, blocks = [ { type = "paragraph", content = "You walk past his porch. The paper comes down anyway. He looks at your ass all the way to the corner, and he doesn't say a word." } ] } ]
+blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "worn_type", operator = "neq", value = "short_skirt" }, { type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "trait", subject = "npc", npc_id = "npc_vance", trait_key = "want", operator = "gte", value = 30 } ] }, blocks = [ { type = "paragraph", content = "You don't stay. You walk on past his gate, and he looks at your ass all the way to the corner, and he doesn't say a word." } ] } ]
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -336,6 +348,7 @@ effects    = [ { targetType = "npc", npcId = "npc_vance", trait = "want", op = "
 text       = "Keep walking."
 targetType = "location"
 locationId = "street"
+flagEffects = [ { targetType = "player", flag = "vance_walk_past_today", op = "set" } ]
 
 [[canvases.nodes]]
 id   = "hips"
@@ -343,7 +356,7 @@ name = "Hips loose"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "You let your hips swing all the way past his gate, slow, and hear the rocking chair creak as he leans to keep you in sight. At the corner you glance back. The paper is flat on his knee, and his eyes are still on your ass."
+content = "You let your hips swing the rest of the way past his gate, slow, and hear the porch boards creak as he leans to keep you in sight. At the corner you glance back. His eyes are still on your ass."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -352,6 +365,7 @@ type = "choices"
 text       = "Turn the corner."
 targetType = "location"
 locationId = "street"
+flagEffects = [ { targetType = "player", flag = "vance_walk_past_today", op = "set" } ]
 
 
 # ─────────────────────────────────────────────────────────────────────────────

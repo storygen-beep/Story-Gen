@@ -2,6 +2,7 @@
 
 > **Changed 2026-11-10** (LO's playtest; DECISIONS 223):
 > - Touching herself in the shower needs the room empty, so it no longer plays while Laura (or Mark) is in.
+> - 2026-11-10, DECISIONS 224 (LO: "an option while she is taking shower not a separate option"): touching herself is a choice inside the shower, "Touch yourself." on the shower's first screen (Curious). The separate bathroom link `touch_shower` is gone. Its ways out are the shower's own, with Corruption +1 and 10 more minutes.
 > - Laura has her own door screen, `hub_laura_bathroom` ("Laura's in there"). It pays nothing; the shower gap still takes her face when it's open.
 > Signed by LO: LO, 2026-11-04.
 

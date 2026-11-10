@@ -1,6 +1,7 @@
 """Zoe — her meeting, steps 1-4 (Zoe A 1-4; step 1 = Jake B 1), her hubs, the meeting nudge.
 Source: sheets/scenes/zoe_0*.md, people/npc_zoe.md. Explicit screens pasted as signed."""
 from canv import *
+import doors   # DECISIONS 224: a scene with a person opens from their portrait
 from tomlw import tod, wd
 from home_items import placeholder
 from sheetbeats import beat
@@ -619,8 +620,9 @@ out.append({
           POOL(D(Z, "Stay. Watch trash with me."), D(Z, "Paint my nails. You've got steadier hands."), D(Z, "I'm bored. Dare me something."),
                D(Z, "You're my favorite friend at that whole college. Don't tell the others."), pid="zoe_home_lines"),
           ME("Budge up, then."), D(Z, "Only if you rub my feet.")),   # pass 3 B4
-        G(cond(flag("picks_the_dares"), wd(4), tod("23:00", "00:00"), trait("exhibitionism", "gte", 40), {"type": "hours_since_flag", "subject": "player", "flag_key": "party_went", "operator": "lt", "value": 8}), D(Z, "Go on, then. What's tonight's dare?")),
-        G(cond(flag("picks_the_dares"), *PARTY_LATE["items"], trait("exhibitionism", "gte", 40), {"type": "hours_since_flag", "subject": "player", "flag_key": "party_went", "operator": "lt", "value": 8}), D(Z, "Go on, then. What's tonight's dare?")),
+        G(cond(flag("picks_the_dares"), wd(4), tod("23:00", "00:00"), trait("exhibitionism", "gte", 40), {"type": "hours_since_flag", "subject": "player", "flag_key": "party_went", "operator": "lt", "value": 8}), D(Z, "After midnight I pick your dare. Don't go anywhere.")),
+        # reader 2026-11-10 (DECISIONS 224): "Take Zoe's dare" opens here, and Zoe names the dare herself
+        G(cond(flag("picks_the_dares"), *PARTY_LATE["items"], trait("exhibitionism", "gte", 40), flag("zoe_dared", False), flag("cocky_guy_met"), tod("00:00", "01:50"), {"type": "hours_since_flag", "subject": "player", "flag_key": "party_went", "operator": "lt", "value": 8}), D(Z, "It's past midnight. I've picked your dare. Ask me.")),   # the door closes at 01:50
         *zoe_state("apartment"), *zoe_leaks("apartment"),   # reader a3 #36 (DECISIONS 131): her own flat
     ], [
         go("Let her do your face.", node="face", mins=20, cond_=cond(*PRE_PARTY, flag("made_up_today", False)),
@@ -704,7 +706,7 @@ out.append({
 
 out.append({
     "id": "hub_zoe_park", "name": "Zoe, running",
-    "description": "Zoe on her weekend run in the park: a lap with her, her eyes on your ass. Her flash dare on the path is its own scene (zoe_park_dare).",
+    "description": "Zoe on her weekend run in the park: a lap with her, her eyes on your ass. Her flash dare (zoe_park_dare) and the hollow off the path (park_hidden) open from her first screen (doors.py, DECISIONS 224).",
     "trigger": {"location": "park", "npc": Z, "requires_npc": Z, "is_repeatable": True, "priority": 6, "is_active": True,
                 "conditions": cond(flag("zoe_met"))},
     "nodes": [
@@ -740,8 +742,8 @@ PARK_NEXT = [G(cond(wd(5)), D(Z, "Tomorrow I'm daring you again.")),
 out.append({
     "id": "zoe_park_dare", "name": "\"Dare me, Zo.\"",
     "description": "Zoe's dare on her run (the park sheet, Curious): a flash on the path. Exhibitionism +1, once a day.",
-    "trigger": {"location": "park", "requires_npc": Z, "is_repeatable": True, "priority": 4, "is_active": True, "max_triggers_per_day": 1,
-                "conditions": cond(flag("zoe_met"), {"type": "clothing_slot", "slot": "top", "operator": "equipped"})},
+    # DECISIONS 224 (LO, 2026-11-10): a button in her park hub, not its own link; its gate lives in doors.py
+    "trigger": {"location": "park", "requires_npc": Z, "is_repeatable": True, "priority": 4, "is_active": True, **doors.trigger("zoe_park_dare")},
     "nodes": [
         node("ask", "Her dare", [D(Z, "Flash me. Right here. Two seconds. There's a guy on the bench, so make it count."),
             *by_level("exhibitionism",
@@ -880,6 +882,7 @@ for _c in out:
 sex_takes_needs(out, "zoe_05_no_dare", "down", "Don't stop.")
 import everyday   # DECISIONS 222: the day after an everyday scene, the hub remembers it
 everyday.hub_read(out)
+doors.apply(out)   # DECISIONS 224: seal the door-only scenes here, open the doors in the hubs here
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards + story)
 open(__import__("sys").argv[1], "w").write(text)
 print("zoe:", len(out), "canvases,", len(cards) + len(story), "cards")

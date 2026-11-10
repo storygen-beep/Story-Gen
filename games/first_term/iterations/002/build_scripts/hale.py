@@ -1,6 +1,7 @@
 """Dr. Hale — steps 1-5 (Hale B 1-5), Thursdays at seven (the repeat), his office hub; Nadia's hubs.
 Source: sheets/scenes/hale_0*.md, people/npc_hale.md, people/npc_nadia.md. Explicit screens pasted as signed."""
 from canv import *
+import doors   # DECISIONS 224: a scene with a person opens from their portrait
 from tomlw import tod, wd
 
 H = "npc_hale"
@@ -270,24 +271,17 @@ out.append({
     "id": "hale_thursdays", "name": "Earn your grade in Dr. Hale's office",   # pass 3 H33/H34 (the-voice.md R1, D11): the name says what happens if she clicks, and never hides the act
     # reader a3, seen by the readers (DECISIONS 131): the stages match the trigger (Corruption 40, Exhibitionism 40)
     "description": "The session after Hale's step 4, Thursdays before his wife comes and his office hours on the other weekdays: his hands over her clothes (Bold and Showing: Corruption 40, Exhibitionism 40) or her top off and touching herself while he takes notes (Hungry: Corruption 60). Grade +2, both meters +1. Claire is early one Thursday in four (Thursdays only). Hale, further: next release.",
+    # DECISIONS 224 (LO, 2026-11-10): a button in his office hub, not its own link; its gate (Thursday before Claire,
+    # his office hours, the booked morning; once a day) lives in doors.py
     "trigger": {"location": "hale_office", "requires_npc": H, "is_repeatable": True, "priority": 5, "is_active": True,
-                "max_triggers_per_day": 1,
-                # Thursday is done before Claire at half past (as built). LO, 2026-11-09 ("Thursday + office hours"; the
-                # reach audit, 12_reach_audit.md, had the session at 0.6 h a week): it also runs in his office hours on the
-                # other weekdays, with no Claire. The act names no day; the door and the goodbye do.
-                "schedules": [{"weekdays": [3], "start_time": "18:30", "end_time": "19:05"},
-                              {"weekdays": [0, 1, 2, 4], "start_time": "15:00", "end_time": "19:00"},
-                              # LO, 2026-11-10 ("1 yes add it"): a booked morning hour; his row has him here only when
-                              # she answered his "Tomorrow, ten" email (phone.py hale_office_text)
-                              {"weekdays": [0, 1, 2, 4], "start_time": "10:00", "end_time": "12:00"}],
-                "conditions": cond(trait("hale_step", "eq", 4), trait("corruption", "gte", 40), trait("exhibitionism", "gte", 40))},
+                **doors.trigger("hale_thursdays")},
     "nodes": [
         node("door", "Twenty minutes", [
-            P("Dr. Hale's office door is unlocked. He locks it behind you without a word. The photo is already face-down."),
+            P("Dr. Hale gets up, goes past you and locks the office door without a word. The photo is already face-down."),   # reader 2026-11-10 (DECISIONS 224): entered from his portrait screen, where she is already in
             D(H, "Twenty minutes, @player."),
             G(cond(flag("hale_thursday_booked"), wd(3), tod("18:30", "18:40")), D(H, "Half past six, you wrote. You're on time.")),   # P10 (round 2): the booking read
-            G(cond(flag("hale_booked"), wd(0, 1, 2, 4), tod("10:00", "10:10")), D(H, "Ten o'clock, you wrote. Lock it behind you.")),   # the booking read (P10)
-            G(cond(flag("hale_booked"), wd(0, 1, 2, 4), tod("10:10", "12:00")), D(H, "Ten o'clock, you wrote. It's past ten, @player.")),
+            G(cond(flag("hale_booked"), wd(0, 1, 2, 4), tod("10:00", "10:10")), D(H, "Ten o'clock, I said. Good.")),   # reader pass 2: his email said ten; her reply only "I'll be there."   # the booking read (P10)
+            G(cond(flag("hale_booked"), wd(0, 1, 2, 4), tod("10:10", "12:00")), D(H, "Ten o'clock, I said. It's past ten, @player.")),
             G(cond(flag("hale_thursday_booked"), wd(3), tod("18:40", "19:05")), D(H, "Half past six, you wrote. You're late, @player. Don't be late again.")),   # scene reader b02: the window runs to 19:05
             # writing pass 2026-11-04, reader test 2: the session moves with her Corruption, as touch_low and touch_high do (both on "Let him.")
             G(cond(trait("corruption", "lt", 60)), D(H, "My hands, over your clothes. Your clothes stay on until you're further along than this, @player.")),
@@ -487,6 +481,7 @@ walkins_out.hub_read(out)
 sex_takes_needs(out, "hale_04_claire_knocks", "higher", "Wait.")
 import everyday   # DECISIONS 222: the day after an everyday scene, the hub remembers it
 everyday.hub_read(out)
+doors.apply(out)   # DECISIONS 224: seal the door-only scenes here, open the doors in the hubs here
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards)
 open(__import__("sys").argv[1], "w").write(text)
 print("hale:", len(out), "canvases,", len(cards), "cards")

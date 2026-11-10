@@ -2335,7 +2335,7 @@ requires_npc = "npc_ryan"
 is_repeatable = true
 priority = 5
 is_active = true
-max_triggers_per_day = 1
+hidden_from_location = true
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "ryan_step", operator = "eq", value = 8 }] }
 
 [[canvases.trigger.schedules]]
@@ -2359,19 +2359,19 @@ name = "Two knocks"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "Two knocks. Ryan's phone is face-down on the desk. It always is now."
+content = "You knocked twice on the way in, and he knows what that means. You lean back against his door. Ryan's phone goes face-down on the desk."
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_knock_booked", operator = "is_true" }] }, blocks = [{ type = "dialog", content = "You said coming. I've been lying here listening for you.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_knock_booked", operator = "is_true" }] }, blocks = [{ type = "dialog", content = "You said coming. I've been listening for you.", props = { speaker = "npc", npcId = "npc_ryan" } }] },
 ]
 
 [canvases.nodes.exit_block]
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
-text = "Go in."
+text = "Go to him."
 targetType = "node"
 nodeId = "start"
 time_progression_minutes = 2
@@ -2398,7 +2398,7 @@ props = { speaker = "npc", npcId = "npc_ryan" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "Through the door you hear him drop back onto the bed, hard, and swear into his pillow."
+content = "You open his door again. Behind you he drops back onto the bed, hard, and swears into his pillow."
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -2408,32 +2408,19 @@ text = "Back to your room."
 targetType = "location"
 locationId = "home_ella_room"
 time_progression_minutes = 1
-flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
+flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_two_knocks_today", op = "set" }]
 
 [[canvases.nodes]]
 id   = "start"
 name = "His room"
 
 [[canvases.nodes.blocks]]
-type = "group"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_knock_booked", operator = "is_true" }] }
+type = "block_pool"
 blocks = [
-  { type = "block_pool", blocks = [{ type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Ryan has you against the door before it's even shut. His mouth is on yours, hungry, and his hands go straight to your ass. The door clicks closed behind your back." }, { type = "dialog", content = "Hi, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He breathes into your neck. His cock is already hard against your belly. You drag his shirt over his head. He pulls your clothes off you, quick and rough, and drops them on the floor. Your nipples go tight. His cock presses hot into your bare stomach." }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Ryan's sitting on the edge of his bed, elbows on his knees, waiting." }, { type = "dialog", content = "Took you long enough, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "dialog", content = "Miss me?", props = { speaker = "player" } }, { type = "dialog", content = "Shut the door.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "You shut it. He pulls you between his knees by the hips and looks up at you. His hands slide round to your ass. His cock is hard in his shorts." }, { type = "dialog", content = "Off.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He says. You pull your clothes off and let them drop. He looks at your tits, then lower. His cock jerks against his shorts." }] }], props = { id = "ryan_hot_7s_booked", memory = "seen", seen_weight = 0 } },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Ryan meets you halfway and walks you back against the door. His mouth is on yours, hungry, and his hands go straight to your ass." }, { type = "dialog", content = "Hi, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He breathes into your neck. His cock is already hard against your belly. You drag his shirt over his head. He pulls your clothes off you, quick and rough, and drops them on the floor. Your nipples go tight. His cock presses hot into your bare stomach." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Ryan sits back down on the edge of his bed, elbows on his knees, and looks at you." }, { type = "dialog", content = "Come here, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "dialog", content = "Miss me?", props = { speaker = "player" } }, { type = "dialog", content = "Come here.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "You go. He pulls you between his knees by the hips and looks up at you. His hands slide round to your ass. His cock is hard in his shorts." }, { type = "dialog", content = "Off.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He says. You pull your clothes off and let them drop. He looks at your tits, then lower. His cock jerks against his shorts." }] },
 ]
-
-[[canvases.nodes.blocks]]
-type = "group"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "22:00", end_time = "00:00" }] }
-blocks = [
-  { type = "block_pool", blocks = [{ type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Ryan has you against the door before it's even shut. His mouth is on yours, hungry, and his hands go straight to your ass. The door clicks closed behind your back." }, { type = "dialog", content = "Hi, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He breathes into your neck. His cock is already hard against your belly. You drag his shirt over his head. He pulls your clothes off you, quick and rough, and drops them on the floor. Your nipples go tight. His cock presses hot into your bare stomach." }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Ryan's room is dark. He's in bed, half asleep, one arm over his eyes." }, { type = "dialog", content = "That you, @player.nickname?", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "His voice is thick. He lifts the covers without looking. You slide in, and he pulls you flat against him. He's warm all over. His hand slides down your back to your ass and squeezes. His cock stiffens against your thigh, slow, then all at once." }, { type = "dialog", content = "Awake now.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He mumbles. He tugs your clothes off under the covers and kicks them away. Your bare tits press against his chest." }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Ryan's sitting on the edge of his bed, elbows on his knees, waiting." }, { type = "dialog", content = "Took you long enough, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "dialog", content = "Miss me?", props = { speaker = "player" } }, { type = "dialog", content = "Shut the door.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "You shut it. He pulls you between his knees by the hips and looks up at you. His hands slide round to your ass. His cock is hard in his shorts." }, { type = "dialog", content = "Off.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He says. You pull your clothes off and let them drop. He looks at your tits, then lower. His cock jerks against his shorts." }] }], props = { id = "ryan_hot_7s", memory = "seen", seen_weight = 0 } },
-]
-
-[[canvases.nodes.blocks]]
-type = "group"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
-blocks = [
-  { type = "block_pool", blocks = [{ type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Ryan has you against the door before it's even shut. His mouth is on yours, hungry, and his hands go straight to your ass. The door clicks closed behind your back." }, { type = "dialog", content = "Hi, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He breathes into your neck. His cock is already hard against your belly. You drag his shirt over his head. He pulls your clothes off you, quick and rough, and drops them on the floor. Your nipples go tight. His cock presses hot into your bare stomach." }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Ryan's sitting on the edge of his bed, elbows on his knees, waiting." }, { type = "dialog", content = "Took you long enough, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "dialog", content = "Miss me?", props = { speaker = "player" } }, { type = "dialog", content = "Shut the door.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "You shut it. He pulls you between his knees by the hips and looks up at you. His hands slide round to your ass. His cock is hard in his shorts." }, { type = "dialog", content = "Off.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He says. You pull your clothes off and let them drop. He looks at your tits, then lower. His cock jerks against his shorts." }] }], props = { id = "ryan_hot_7s_day", memory = "seen", seen_weight = 0 } },
-]
+props = { id = "ryan_hot_7s", memory = "seen", seen_weight = 0 }
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -2510,7 +2497,7 @@ text = "Back to your room."
 targetType = "location"
 locationId = "home_ella_room"
 time_progression_minutes = 1
-flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
+flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_two_knocks_today", op = "set" }]
 
 [[canvases.nodes]]
 id   = "suck"
@@ -2845,7 +2832,7 @@ locationId = "home_ella_room"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 3, clamp = true }]
-flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
+flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_two_knocks_today", op = "set" }]
 wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -2856,7 +2843,7 @@ time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_true" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }]
 wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
-flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
+flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_two_knocks_today", op = "set" }]
 
 [[canvases.nodes]]
 id   = "f_on"
@@ -2926,7 +2913,7 @@ locationId = "home_ella_room"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 3, clamp = true }]
-flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
+flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_two_knocks_today", op = "set" }]
 wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -2937,7 +2924,7 @@ time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_true" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }]
 wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
-flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
+flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_two_knocks_today", op = "set" }]
 
 [[canvases.nodes]]
 id   = "f_mouth"
@@ -2994,7 +2981,7 @@ locationId = "home_ella_room"
 time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }, { targetType = "npc", npcId = "npc_ryan", trait = "want", op = "add", value = 3, clamp = true }]
-flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
+flagEffects = [{ targetType = "player", flag = "ryan_hot_today", op = "set" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_two_knocks_today", op = "set" }]
 wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
 
 [[canvases.nodes.exit_block.choices]]
@@ -3005,7 +2992,7 @@ time_progression_minutes = 20
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_true" }] }
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 79 }]
 wardrobeEffects = [{ action = "equip", item_id = "plain_bra" }, { action = "equip", item_id = "plain_panties" }, { action = "equip", item_id = "tshirt" }, { action = "equip", item_id = "jeans" }, { action = "equip", item_id = "sneakers" }, { action = "restore_outfit" }]
-flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }]
+flagEffects = [{ targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_knock_booked", op = "unset" }, { targetType = "player", flag = "ryan_two_knocks_today", op = "set" }]
 
 [[canvases]]
 id   = "hub_ryan_room"
@@ -3107,7 +3094,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "eq", value = 1 }, { type = "worn_type", operator = "neq", value = "towel" }] }, blocks = [{ type = "dialog", content = "Jesus, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He goes and shuts his door, then stands there with his hand on it, not opening it again." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "eq", value = 1 }, { type = "worn_type", operator = "neq", value = "towel" }] }, blocks = [{ type = "dialog", content = "Jesus, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He goes and shuts his door, then backs off from it, and from you." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -3473,6 +3460,27 @@ targetType = "node"
 nodeId = "ryan_stink"
 time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_hot_today", operator = "is_false" }, { type = "trait", subject = "player", trait_key = "ryan_step", operator = "gte", value = 6 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "08:00", end_time = "14:00" }, { type = "trait", subject = "player", trait_key = "hygiene", operator = "lt", value = 30 }, { type = "flag", subject = "player", flag_key = "hygiene_off", operator = "is_false" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Lean back on his door."
+targetType = "node"
+nodeId = "ryan_two_knocks.door"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "ryan_step", operator = "eq", value = 8 }, { type = "flag", subject = "player", flag_key = "ryan_two_knocks_today", operator = "is_false" }, { type = "weekday", weekdays = [0, 1, 2, 3, 6] }, { type = "time_of_day", start_time = "22:00", end_time = "00:00" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Lean back on his door."
+targetType = "node"
+nodeId = "ryan_two_knocks.door"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "ryan_step", operator = "eq", value = 8 }, { type = "flag", subject = "player", flag_key = "ryan_two_knocks_today", operator = "is_false" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "10:00", end_time = "14:00" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Lean back on his door."
+targetType = "node"
+nodeId = "ryan_two_knocks.door"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "ryan_step", operator = "eq", value = 8 }, { type = "flag", subject = "player", flag_key = "ryan_two_knocks_today", operator = "is_false" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "08:00", end_time = "14:00" }] }
 
 [[canvases.nodes.exit_block.choices]]
 text = "Leave him to it."
@@ -8770,11 +8778,12 @@ description = "Study at the kitchen table while Laura's there: 60 min, energy -1
 
 [canvases.trigger]
 location = "home_kitchen"
-requires_npc = "npc_laura"
 is_repeatable = true
 priority = 3
 is_active = true
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "studied_home", operator = "is_false" }] }
+show_when_blocked = true
+cooldown_message = "Mon, Tue, Thu, Fri, Sun, 7 PM-10 PM"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "studied_home", operator = "is_false" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_laura", operator = "is_present" }] }
 
 [[canvases.trigger.schedules]]
 weekdays = [0, 1, 3, 4, 6]
@@ -9874,7 +9883,7 @@ requires_npc = "npc_mark"
 is_repeatable = true
 priority = 5
 is_active = true
-max_triggers_per_day = 1
+hidden_from_location = true
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "mark_step", operator = "gte", value = 1 }, { type = "flag", subject = "player", flag_key = "sunday_counted_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "rent_starts", operator = "is_true" }] }
 
 [[canvases.trigger.schedules]]
@@ -9889,13 +9898,13 @@ name = "The Sunday table"
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "power", operator = "gte", value = 50 }] }, blocks = [{ type = "paragraph", content = "Mark's at the table with the envelope, the way he is every Sunday, but he doesn't say good morning. He points at the chair across from him with his pen." }, { type = "dialog", content = "Sit. My table, my Sunday.", props = { speaker = "npc", npcId = "npc_mark" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "power", operator = "gte", value = 50 }] }, blocks = [{ type = "paragraph", content = "Mark puts the paper down and pulls the envelope out from under it, the way he does every Sunday. He points at the chair across from him with his pen." }, { type = "dialog", content = "Sit. My table, my Sunday.", props = { speaker = "npc", npcId = "npc_mark" } }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "power", operator = "lt", value = 50 }] }, blocks = [{ type = "paragraph", content = "Mark's at the table with the envelope. He's on his feet, and he doesn't sit back down until you've sat." }, { type = "dialog", content = "Morning. Go on, then.", props = { speaker = "npc", npcId = "npc_mark" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "power", operator = "lt", value = 50 }] }, blocks = [{ type = "paragraph", content = "Mark puts the paper down and pulls the envelope out from under it. He gets to his feet, and he doesn't sit back down until you've sat." }, { type = "dialog", content = "Go on, then.", props = { speaker = "npc", npcId = "npc_mark" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -9925,7 +9934,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "eq", value = 1 }, { type = "worn_type", operator = "neq", value = "towel" }, { type = "worn_type", operator = "neq", value = "sleep_shirt" }] }, blocks = [{ type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }] }, blocks = [{ type = "dialog", content = "Your mother's out.", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "paragraph", content = "His eyes go down to your tits and stay there while he talks. He doesn't tell you to cover up." }, { type = "thought_bubble", content = "He'd have his hands on them if you let him. Not yet. Not at his table.", props = { speaker = "player" } }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }, blocks = [{ type = "paragraph", content = "You sit down half dressed before you think about it, and your arm goes across your chest. Mark looks at the envelope, only the envelope." }, { type = "dialog", content = "Your mother's out. Put something on next time, @player.", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "dialog", content = "Sorry. I forgot.", props = { speaker = "player" } }, { type = "dialog", content = "Next time.", props = { speaker = "npc", npcId = "npc_mark" } }] }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "eq", value = 1 }, { type = "worn_type", operator = "neq", value = "towel" }, { type = "worn_type", operator = "neq", value = "sleep_shirt" }] }, blocks = [{ type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }] }, blocks = [{ type = "dialog", content = "Your mother's out.", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "paragraph", content = "His eyes go down to your tits and stay there while he talks. He doesn't tell you to cover up." }, { type = "thought_bubble", content = "He'd have his hands on them if you let him. Not yet. Not at his table.", props = { speaker = "player" } }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }, blocks = [{ type = "paragraph", content = "You only think about being half dressed once you're at his table, and your arm goes across your chest. Mark looks at the envelope, only the envelope." }, { type = "dialog", content = "Your mother's out. Put something on next time, @player.", props = { speaker = "npc", npcId = "npc_mark" } }, { type = "dialog", content = "Sorry. I forgot.", props = { speaker = "player" } }, { type = "dialog", content = "Next time.", props = { speaker = "npc", npcId = "npc_mark" } }] }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -10045,6 +10054,7 @@ text = "Leave him to his envelope."
 targetType = "location"
 locationId = "home_kitchen"
 time_progression_minutes = 2
+flagEffects = [{ targetType = "player", flag = "mark_sunday_table_today", op = "set" }]
 
 [[canvases]]
 id   = "rent_short_1"
@@ -12554,6 +12564,13 @@ targetType = "node"
 nodeId = "towel_drop"
 time_progression_minutes = 5
 conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "towel" }, { type = "trait", subject = "npc", npc_id = "npc_mark", trait_key = "power", operator = "gte", value = 60 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "flag", subject = "player", flag_key = "mark_saw_her", operator = "is_true" }, { type = "npc_at_location", location_id = "home_kitchen", npc_id = "npc_laura", operator = "is_absent" }, { type = "flag", subject = "player", flag_key = "mark_towel_today", operator = "is_true" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Join him at the table."
+targetType = "node"
+nodeId = "mark_sunday_table.table"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "mark_step", operator = "gte", value = 1 }, { type = "flag", subject = "player", flag_key = "sunday_counted_today", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "rent_starts", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "mark_sunday_table_today", operator = "is_false" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "08:00", end_time = "11:45" }] }
 
 [[canvases.nodes.exit_block.choices]]
 text = "Leave him to it."
@@ -17389,13 +17406,13 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "picks_the_dares", operator = "is_true" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "23:00", end_time = "00:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "hours_since_flag", subject = "player", flag_key = "party_went", operator = "lt", value = 8 }] }, blocks = [{ type = "dialog", content = "Go on, then. What's tonight's dare?", props = { speaker = "npc", npcId = "npc_zoe" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "picks_the_dares", operator = "is_true" }, { type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "23:00", end_time = "00:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "hours_since_flag", subject = "player", flag_key = "party_went", operator = "lt", value = 8 }] }, blocks = [{ type = "dialog", content = "After midnight I pick your dare. Don't go anywhere.", props = { speaker = "npc", npcId = "npc_zoe" } }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "picks_the_dares", operator = "is_true" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "00:00", end_time = "02:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "hours_since_flag", subject = "player", flag_key = "party_went", operator = "lt", value = 8 }] }, blocks = [{ type = "dialog", content = "Go on, then. What's tonight's dare?", props = { speaker = "npc", npcId = "npc_zoe" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "picks_the_dares", operator = "is_true" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "00:00", end_time = "02:00" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "flag", subject = "player", flag_key = "zoe_dared", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "cocky_guy_met", operator = "is_true" }, { type = "time_of_day", start_time = "00:00", end_time = "01:50" }, { type = "hours_since_flag", subject = "player", flag_key = "party_went", operator = "lt", value = 8 }] }, blocks = [{ type = "dialog", content = "It's past midnight. I've picked your dare. Ask me.", props = { speaker = "npc", npcId = "npc_zoe" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -17460,6 +17477,13 @@ targetType = "node"
 nodeId = "face_no"
 time_progression_minutes = 0
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [4] }, { type = "time_of_day", start_time = "18:00", end_time = "19:00" }, { type = "flag", subject = "player", flag_key = "made_up_today", operator = "is_false" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Take Zoe's dare"
+targetType = "node"
+nodeId = "zoe_dares.dare"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "party_went", operator = "lt", value = 8 }, { type = "flag", subject = "player", flag_key = "picks_the_dares", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "zoe_dared", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "cocky_guy_met", operator = "is_true" }, { type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "00:00", end_time = "01:50" }] }
 
 [[canvases.nodes.exit_block.choices]]
 text = "Stay a while."
@@ -18030,7 +18054,7 @@ time_progression_minutes = 20
 [[canvases]]
 id   = "hub_zoe_park"
 name = "Zoe, running"
-description = "Zoe on her weekend run in the park: a lap with her, her eyes on your ass. Her flash dare on the path is its own scene (zoe_park_dare)."
+description = "Zoe on her weekend run in the park: a lap with her, her eyes on your ass. Her flash dare (zoe_park_dare) and the hollow off the path (park_hidden) open from her first screen (doors.py, DECISIONS 224)."
 
 [canvases.trigger]
 location = "park"
@@ -18101,6 +18125,20 @@ flagEffects = [{ targetType = "player", flag = "ran_with_zoe", op = "set" }, { t
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_run_booked", operator = "is_false" }] }
 
 [[canvases.nodes.exit_block.choices]]
+text = "\"Dare me, Zo.\""
+targetType = "node"
+nodeId = "zoe_park_dare.ask"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_met", operator = "is_true" }, { type = "clothing_slot", slot = "top", operator = "equipped" }, { type = "flag", subject = "player", flag_key = "zoe_park_dare_today", operator = "is_false" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Let Zoe finger you off the path"
+targetType = "node"
+nodeId = "park_hidden.pull"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "trait", subject = "player", trait_key = "zoe_step", operator = "gte", value = 3 }, { type = "flag", subject = "player", flag_key = "ran_with_zoe", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "ran_with_zoe", operator = "lt", value = 1 }, { type = "flag", subject = "player", flag_key = "park_hidden_today", operator = "is_false" }, { type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "08:00", end_time = "09:30" }] }
+
+[[canvases.nodes.exit_block.choices]]
 text = "Let her run on."
 targetType = "location"
 locationId = "street"
@@ -18153,7 +18191,7 @@ requires_npc = "npc_zoe"
 is_repeatable = true
 priority = 4
 is_active = true
-max_triggers_per_day = 1
+hidden_from_location = true
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_met", operator = "is_true" }, { type = "clothing_slot", slot = "top", operator = "equipped" }] }
 
 [[canvases.nodes]]
@@ -18248,6 +18286,7 @@ targetType = "location"
 locationId = "park"
 time_progression_minutes = 10
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_park_dare_today", operator = "is_true" }] }
+flagEffects = [{ targetType = "player", flag = "zoe_park_dare_today", op = "set" }]
 
 [[canvases.nodes]]
 id   = "no"
@@ -18282,6 +18321,7 @@ text = "Run after her."
 targetType = "location"
 locationId = "park"
 time_progression_minutes = 10
+flagEffects = [{ targetType = "player", flag = "zoe_park_dare_today", op = "set" }]
 
 [[quest_cards]]
 npc_id = "npc_zoe"
@@ -19415,7 +19455,7 @@ requires_npc = "npc_hale"
 is_repeatable = true
 priority = 5
 is_active = true
-max_triggers_per_day = 1
+hidden_from_location = true
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "hale_step", operator = "eq", value = 4 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }] }
 
 [[canvases.trigger.schedules]]
@@ -19439,7 +19479,7 @@ name = "Twenty minutes"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "Dr. Hale's office door is unlocked. He locks it behind you without a word. The photo is already face-down."
+content = "Dr. Hale gets up, goes past you and locks the office door without a word. The photo is already face-down."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -19455,13 +19495,13 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "hale_booked", operator = "is_true" }, { type = "weekday", weekdays = [0, 1, 2, 4] }, { type = "time_of_day", start_time = "10:00", end_time = "10:10" }] }, blocks = [{ type = "dialog", content = "Ten o'clock, you wrote. Lock it behind you.", props = { speaker = "npc", npcId = "npc_hale" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "hale_booked", operator = "is_true" }, { type = "weekday", weekdays = [0, 1, 2, 4] }, { type = "time_of_day", start_time = "10:00", end_time = "10:10" }] }, blocks = [{ type = "dialog", content = "Ten o'clock, I said. Good.", props = { speaker = "npc", npcId = "npc_hale" } }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "hale_booked", operator = "is_true" }, { type = "weekday", weekdays = [0, 1, 2, 4] }, { type = "time_of_day", start_time = "10:10", end_time = "12:00" }] }, blocks = [{ type = "dialog", content = "Ten o'clock, you wrote. It's past ten, @player.", props = { speaker = "npc", npcId = "npc_hale" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "hale_booked", operator = "is_true" }, { type = "weekday", weekdays = [0, 1, 2, 4] }, { type = "time_of_day", start_time = "10:10", end_time = "12:00" }] }, blocks = [{ type = "dialog", content = "Ten o'clock, I said. It's past ten, @player.", props = { speaker = "npc", npcId = "npc_hale" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -19726,7 +19766,7 @@ targetType = "location"
 locationId = "faculty_floor"
 time_progression_minutes = 5
 effects = [{ targetType = "player", trait = "grade_psych", op = "add", value = 2, clamp = true }]
-flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "unset" }, { targetType = "player", flag = "hale_booked", op = "unset" }]
+flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "unset" }, { targetType = "player", flag = "hale_booked", op = "unset" }, { targetType = "player", flag = "hale_thursdays_today", op = "set" }]
 
 [[canvases.nodes]]
 id   = "end"
@@ -19769,7 +19809,7 @@ targetType = "location"
 locationId = "faculty_floor"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [3] }] }
-flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "unset" }, { targetType = "player", flag = "hale_booked", op = "unset" }]
+flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "unset" }, { targetType = "player", flag = "hale_booked", op = "unset" }, { targetType = "player", flag = "hale_thursdays_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "\"I'll watch for it.\""
@@ -19777,7 +19817,7 @@ targetType = "location"
 locationId = "faculty_floor"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 4, 5, 6] }, { type = "time_of_day", start_time = "10:00", end_time = "12:30" }] }
-flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "unset" }, { targetType = "player", flag = "hale_booked", op = "unset" }]
+flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "unset" }, { targetType = "player", flag = "hale_booked", op = "unset" }, { targetType = "player", flag = "hale_thursdays_today", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
 text = "\"Same time.\""
@@ -19785,7 +19825,7 @@ targetType = "location"
 locationId = "faculty_floor"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 4, 5, 6] }, { type = "time_of_day", start_time = "12:30", end_time = "10:00" }] }
-flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "unset" }, { targetType = "player", flag = "hale_booked", op = "unset" }]
+flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "unset" }, { targetType = "player", flag = "hale_booked", op = "unset" }, { targetType = "player", flag = "hale_thursdays_today", op = "set" }]
 
 [[canvases.nodes]]
 id   = "isnt"
@@ -19813,7 +19853,7 @@ text = "Leave him to his photo."
 targetType = "location"
 locationId = "faculty_floor"
 time_progression_minutes = 2
-flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "unset" }, { targetType = "player", flag = "hale_booked", op = "unset" }]
+flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "unset" }, { targetType = "player", flag = "hale_booked", op = "unset" }, { targetType = "player", flag = "hale_thursdays_today", op = "set" }]
 
 [[canvases.nodes]]
 id   = "run"
@@ -19845,7 +19885,7 @@ text = "Keep walking."
 targetType = "location"
 locationId = "faculty_floor"
 time_progression_minutes = 2
-flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "unset" }, { targetType = "player", flag = "hale_booked", op = "unset" }]
+flagEffects = [{ targetType = "player", flag = "hale_thursday_booked", op = "unset" }, { targetType = "player", flag = "hale_booked", op = "unset" }, { targetType = "player", flag = "hale_thursdays_today", op = "set" }]
 
 [[canvases]]
 id   = "hub_hale_office"
@@ -19991,6 +20031,27 @@ text = "Ask him about your essay."
 targetType = "node"
 nodeId = "essay"
 time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Earn your grade in Dr. Hale's office"
+targetType = "node"
+nodeId = "hale_thursdays.door"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "hale_step", operator = "eq", value = 4 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "flag", subject = "player", flag_key = "hale_thursdays_today", operator = "is_false" }, { type = "weekday", weekdays = [3] }, { type = "time_of_day", start_time = "18:30", end_time = "19:05" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Earn your grade in Dr. Hale's office"
+targetType = "node"
+nodeId = "hale_thursdays.door"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "hale_step", operator = "eq", value = 4 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "flag", subject = "player", flag_key = "hale_thursdays_today", operator = "is_false" }, { type = "weekday", weekdays = [0, 1, 2, 4] }, { type = "time_of_day", start_time = "15:00", end_time = "19:00" }] }
+
+[[canvases.nodes.exit_block.choices]]
+text = "Earn your grade in Dr. Hale's office"
+targetType = "node"
+nodeId = "hale_thursdays.door"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "hale_step", operator = "eq", value = 4 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "flag", subject = "player", flag_key = "hale_thursdays_today", operator = "is_false" }, { type = "weekday", weekdays = [0, 1, 2, 4] }, { type = "time_of_day", start_time = "10:00", end_time = "12:00" }] }
 
 [[canvases.nodes.exit_block.choices]]
 text = "\"Bye, Dr. Hale.\""
@@ -33348,6 +33409,7 @@ requires_npc = "npc_zoe"
 is_repeatable = true
 priority = 4
 is_active = true
+hidden_from_location = true
 conditions = { version = "1.0", logic = "AND", items = [{ type = "hours_since_flag", subject = "player", flag_key = "party_went", operator = "lt", value = 8 }, { type = "flag", subject = "player", flag_key = "picks_the_dares", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "zoe_dared", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "cocky_guy_met", operator = "is_true" }] }
 
 [[canvases.trigger.schedules]]
@@ -33361,7 +33423,7 @@ name = "Zoe's dare"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "Zoe finds you in the crush, hooks her chin over your shoulder, and looks round the room like she's shopping."
+content = "Zoe slides off the arm of the couch, hooks her chin over your shoulder, and looks round the room like she's shopping."
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -35236,7 +35298,7 @@ requires_npc = "npc_zoe"
 is_repeatable = true
 priority = 5
 is_active = true
-max_triggers_per_day = 1
+hidden_from_location = true
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "trait", subject = "player", trait_key = "zoe_step", operator = "gte", value = 3 }, { type = "flag", subject = "player", flag_key = "ran_with_zoe", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "ran_with_zoe", operator = "lt", value = 1 }] }
 
 [[canvases.trigger.schedules]]
@@ -35250,7 +35312,7 @@ name = "After the run"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "Zoe jogs to a stop beside you, pink and breathless, and grabs your wrist."
+content = "Zoe stops running on the spot, pink and breathless, and grabs your wrist."
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -35330,6 +35392,7 @@ text = "\"Don't you be late.\""
 targetType = "location"
 locationId = "park"
 time_progression_minutes = 2
+flagEffects = [{ targetType = "player", flag = "park_hidden_today", op = "set" }]
 
 [[canvases.nodes]]
 id   = "no"
@@ -35352,6 +35415,7 @@ text = "Let her run on."
 targetType = "location"
 locationId = "park"
 time_progression_minutes = 5
+flagEffects = [{ targetType = "player", flag = "park_hidden_today", op = "set" }]
 
 [[canvases]]
 id   = "touch_bed"
@@ -35399,63 +35463,6 @@ type = "choices"
 text = "Lie still."
 targetType = "location"
 locationId = "home_ella_room"
-time_progression_minutes = 20
-effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }]
-
-[[canvases]]
-id   = "touch_shower"
-name = "Touch yourself in the shower"
-description = "Touching herself (home_bathroom): from Curious, once a day; Corruption +1 until past Curious."
-
-[canvases.trigger]
-location = "home_bathroom"
-is_repeatable = true
-priority = 3
-is_active = true
-max_triggers_per_day = 1
-show_when_blocked = true
-cooldown_message = "Mon, Tue, Wed, Thu, Fri, Sun, 6 PM-midnight; Mon, Tue, Wed, Thu, Fri, Sat, midnight-2 AM; Sat, 9 AM-5 PM; Sat, 10 PM-midnight"
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "npc_at_location", location_id = "home_bathroom", operator = "is_absent" }] }
-
-[[canvases.trigger.schedules]]
-weekdays = [0, 1, 2, 3, 4, 6]
-start_time = "18:00"
-end_time = "00:00"
-
-[[canvases.trigger.schedules]]
-weekdays = [0, 1, 2, 3, 4, 5]
-start_time = "00:00"
-end_time = "02:00"
-
-[[canvases.trigger.schedules]]
-weekdays = [5]
-start_time = "09:00"
-end_time = "17:00"
-
-[[canvases.trigger.schedules]]
-weekdays = [5]
-start_time = "22:00"
-end_time = "00:00"
-
-[[canvases.nodes]]
-id   = "touch"
-name = "Touch yourself in the shower"
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "You lock the door and step naked under the hot water. Footsteps cross the hall outside and keep going. The water runs down your tits and drips off your nipples. You soap them slowly, thumbs circling until they stand hard and ache. Your hand slides down your belly and between your legs. You are slick there, and not from the shower. Two fingers find your clit and press. The water drums on your back and your ass. You lean one hand on the tile and rub faster. Your hips jerk against your fingers. The orgasm hits hard, and you bite down on the moan. Your knees go weak, and you hold the tile while your clit throbs under your hand."
-
-[[canvases.nodes.blocks]]
-type = "video"
-props = { description = "a girl touching herself alone (home bathroom)", search_queries = ["girl masturbating alone", "solo girl bathroom orgasm"], pool_dir = "sex/touch_shower_t5" }
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text = "Done."
-targetType = "location"
-locationId = "home_bathroom"
 time_progression_minutes = 20
 effects = [{ targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }]
 
@@ -40032,6 +40039,13 @@ blocks = [
 type = "choices"
 
 [[canvases.nodes.exit_block.choices]]
+text = "Touch yourself."
+targetType = "node"
+nodeId = "touch"
+time_progression_minutes = 0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }] }
+
+[[canvases.nodes.exit_block.choices]]
 text = "Wrap up in a towel."
 targetType = "location"
 locationId = "home_bathroom"
@@ -40086,6 +40100,114 @@ locationId = "home_hall"
 time_progression_minutes = 30
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "06:25", end_time = "06:45" }] }
 effects = [{ targetType = "player", trait = "hygiene", op = "add", value = 50, cap = 100 }, { targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = -1, cap = 100 }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "low_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "gym_tank" }, { action = "unequip", item_id = "track_pants" }, { action = "unequip", item_id = "gym_shorts" }, { action = "unequip", item_id = "sheer_leggings" }, { action = "unequip", item_id = "crop_top" }, { action = "unequip", item_id = "bodycon_dress" }, { action = "unequip", item_id = "micro_shorts" }, { action = "unequip", item_id = "plunge_dress" }, { action = "unequip", item_id = "split_skirt" }, { action = "unequip", item_id = "sequin_dress" }, { action = "unequip", item_id = "backless_dress" }, { action = "unequip", item_id = "lace_bra" }, { action = "unequip", item_id = "lace_panties" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "cafe_uniform_short" }, { action = "unequip", item_id = "cafe_uniform_lowcut" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "towel" }]
+
+[[canvases.nodes]]
+id   = "touch"
+name = "Touch yourself"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [5, 6] }] }, blocks = [{ type = "paragraph", content = "Ryan's gone from the door, but your nipples are still hard from his eyes on them." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "06:45", end_time = "06:25" }] }, blocks = [{ type = "paragraph", content = "Ryan's gone from the door, but your nipples are still hard from his eyes on them." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4, 6] }, { type = "time_of_day", start_time = "18:00", end_time = "00:00" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_absent" }] }, blocks = [{ type = "paragraph", content = "Footsteps cross the hall outside and keep going." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4, 5] }, { type = "time_of_day", start_time = "00:00", end_time = "02:00" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_absent" }] }, blocks = [{ type = "paragraph", content = "Footsteps cross the hall outside and keep going." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "09:00", end_time = "17:00" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_absent" }] }, blocks = [{ type = "paragraph", content = "Footsteps cross the hall outside and keep going." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [5] }, { type = "time_of_day", start_time = "22:00", end_time = "00:00" }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_absent" }] }, blocks = [{ type = "paragraph", content = "Footsteps cross the hall outside and keep going." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The water runs down your tits and drips off your nipples. You soap them slowly, thumbs circling until they stand hard and ache. Your hand slides down your belly and between your legs. You are slick there, and not from the shower. Two fingers find your clit and press. The water drums on your back and your ass. You lean one hand on the tile and rub faster. Your hips jerk against your fingers. The orgasm hits hard, and you bite down on the moan. Your knees go weak, and you hold the tile while your clit throbs under your hand."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl touching herself alone (home bathroom)", search_queries = ["girl masturbating alone", "solo girl bathroom orgasm"], pool_dir = "sex/touch_shower_t5" }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Wrap up in a towel."
+targetType = "location"
+locationId = "home_bathroom"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "06:45", end_time = "06:25" }] }
+effects = [{ targetType = "player", trait = "hygiene", op = "add", value = 50, cap = 100 }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "low_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "gym_tank" }, { action = "unequip", item_id = "track_pants" }, { action = "unequip", item_id = "gym_shorts" }, { action = "unequip", item_id = "sheer_leggings" }, { action = "unequip", item_id = "crop_top" }, { action = "unequip", item_id = "bodycon_dress" }, { action = "unequip", item_id = "micro_shorts" }, { action = "unequip", item_id = "plunge_dress" }, { action = "unequip", item_id = "split_skirt" }, { action = "unequip", item_id = "sequin_dress" }, { action = "unequip", item_id = "backless_dress" }, { action = "unequip", item_id = "lace_bra" }, { action = "unequip", item_id = "lace_panties" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "cafe_uniform_short" }, { action = "unequip", item_id = "cafe_uniform_lowcut" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "towel" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Wrap up in a towel."
+targetType = "location"
+locationId = "home_bathroom"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [5, 6] }, { type = "time_of_day", start_time = "06:25", end_time = "06:45" }] }
+effects = [{ targetType = "player", trait = "hygiene", op = "add", value = 50, cap = 100 }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "low_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "gym_tank" }, { action = "unequip", item_id = "track_pants" }, { action = "unequip", item_id = "gym_shorts" }, { action = "unequip", item_id = "sheer_leggings" }, { action = "unequip", item_id = "crop_top" }, { action = "unequip", item_id = "bodycon_dress" }, { action = "unequip", item_id = "micro_shorts" }, { action = "unequip", item_id = "plunge_dress" }, { action = "unequip", item_id = "split_skirt" }, { action = "unequip", item_id = "sequin_dress" }, { action = "unequip", item_id = "backless_dress" }, { action = "unequip", item_id = "lace_bra" }, { action = "unequip", item_id = "lace_panties" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "cafe_uniform_short" }, { action = "unequip", item_id = "cafe_uniform_lowcut" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "towel" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Wrap up and get out."
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "06:25", end_time = "06:45" }] }
+effects = [{ targetType = "player", trait = "hygiene", op = "add", value = 50, cap = 100 }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "low_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "gym_tank" }, { action = "unequip", item_id = "track_pants" }, { action = "unequip", item_id = "gym_shorts" }, { action = "unequip", item_id = "sheer_leggings" }, { action = "unequip", item_id = "crop_top" }, { action = "unequip", item_id = "bodycon_dress" }, { action = "unequip", item_id = "micro_shorts" }, { action = "unequip", item_id = "plunge_dress" }, { action = "unequip", item_id = "split_skirt" }, { action = "unequip", item_id = "sequin_dress" }, { action = "unequip", item_id = "backless_dress" }, { action = "unequip", item_id = "lace_bra" }, { action = "unequip", item_id = "lace_panties" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "cafe_uniform_short" }, { action = "unequip", item_id = "cafe_uniform_lowcut" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "towel" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave the door unlocked."
+targetType = "node"
+nodeId = "unlocked"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 5 }] }
+show_when_locked = true
+effects = [{ targetType = "player", trait = "hygiene", op = "add", value = 50, cap = 100 }, { targetType = "player", trait = "exhibitionism", op = "add", value = 1, cap = 39 }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }, { targetType = "player", trait = "rep_shower_door", op = "add", value = 1, clamp = false }]
+flagEffects = [{ targetType = "player", flag = "shower_unlocked", op = "set" }, { targetType = "player", flag = "rep_shower_door_now", op = "set" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "low_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "gym_tank" }, { action = "unequip", item_id = "track_pants" }, { action = "unequip", item_id = "gym_shorts" }, { action = "unequip", item_id = "sheer_leggings" }, { action = "unequip", item_id = "crop_top" }, { action = "unequip", item_id = "bodycon_dress" }, { action = "unequip", item_id = "micro_shorts" }, { action = "unequip", item_id = "plunge_dress" }, { action = "unequip", item_id = "split_skirt" }, { action = "unequip", item_id = "sequin_dress" }, { action = "unequip", item_id = "backless_dress" }, { action = "unequip", item_id = "lace_bra" }, { action = "unequip", item_id = "lace_panties" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "cafe_uniform_short" }, { action = "unequip", item_id = "cafe_uniform_lowcut" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "towel" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Lock it again."
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "shower_unlocked", operator = "is_true" }] }
+effects = [{ targetType = "player", trait = "hygiene", op = "add", value = 50, cap = 100 }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }]
+flagEffects = [{ targetType = "player", flag = "shower_unlocked", op = "unset" }]
+wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "low_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "gym_tank" }, { action = "unequip", item_id = "track_pants" }, { action = "unequip", item_id = "gym_shorts" }, { action = "unequip", item_id = "sheer_leggings" }, { action = "unequip", item_id = "crop_top" }, { action = "unequip", item_id = "bodycon_dress" }, { action = "unequip", item_id = "micro_shorts" }, { action = "unequip", item_id = "plunge_dress" }, { action = "unequip", item_id = "split_skirt" }, { action = "unequip", item_id = "sequin_dress" }, { action = "unequip", item_id = "backless_dress" }, { action = "unequip", item_id = "lace_bra" }, { action = "unequip", item_id = "lace_panties" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "cafe_uniform_short" }, { action = "unequip", item_id = "cafe_uniform_lowcut" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "towel" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Five minutes.\""
+targetType = "location"
+locationId = "home_hall"
+time_progression_minutes = 40
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "06:25", end_time = "06:45" }] }
+effects = [{ targetType = "player", trait = "hygiene", op = "add", value = 50, cap = 100 }, { targetType = "npc", npcId = "npc_ryan", trait = "warmth", op = "add", value = -1, cap = 100 }, { targetType = "player", trait = "corruption", op = "add", value = 1, cap = 59 }]
 wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sleep_shirt", "sleep_shorts"] }, { action = "unequip", item_id = "plain_bra" }, { action = "unequip", item_id = "sports_bra" }, { action = "unequip", item_id = "plain_panties" }, { action = "unequip", item_id = "tshirt" }, { action = "unequip", item_id = "thin_top" }, { action = "unequip", item_id = "low_top" }, { action = "unequip", item_id = "jeans" }, { action = "unequip", item_id = "leggings" }, { action = "unequip", item_id = "gym_tank" }, { action = "unequip", item_id = "track_pants" }, { action = "unequip", item_id = "gym_shorts" }, { action = "unequip", item_id = "sheer_leggings" }, { action = "unequip", item_id = "crop_top" }, { action = "unequip", item_id = "bodycon_dress" }, { action = "unequip", item_id = "micro_shorts" }, { action = "unequip", item_id = "plunge_dress" }, { action = "unequip", item_id = "split_skirt" }, { action = "unequip", item_id = "sequin_dress" }, { action = "unequip", item_id = "backless_dress" }, { action = "unequip", item_id = "lace_bra" }, { action = "unequip", item_id = "lace_panties" }, { action = "unequip", item_id = "sleep_shorts" }, { action = "unequip", item_id = "short_skirt" }, { action = "unequip", item_id = "sleep_shirt" }, { action = "unequip", item_id = "cafe_uniform_normal" }, { action = "unequip", item_id = "cafe_uniform_sexy" }, { action = "unequip", item_id = "cafe_uniform_short" }, { action = "unequip", item_id = "cafe_uniform_lowcut" }, { action = "unequip", item_id = "laura_blue_dress" }, { action = "unequip", item_id = "zoe_party_dress" }, { action = "equip", item_id = "towel" }]
 
 [[canvases.nodes]]

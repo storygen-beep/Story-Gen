@@ -1,4 +1,5 @@
 # [READY] Place — Park
+> Changed 2026-11-10 (DECISIONS 224, LO: "Should be inside her npc portrait activity not a separate link"): Zoe's dare and the hollow off the path open from her screen (`hub_zoe_park`), not as links in the park's list.
 > Changed 2026-11-08 (DECISIONS 198, 199): the run reads the gym clothes, one line each, the pay unchanged; from Exhibitionism 40 no panties is fine here, as on the street. Re-signed by LO 2026-11-08 ("Sign 4 pages").
 > Signed by LO: LO, 2026-11-04.
 > Changed 2026-11-04, LO's answers: the run pays Exhibitionism +1, cap 39 (F); signed by LO 2026-11-04.

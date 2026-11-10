@@ -820,3 +820,19 @@ Week simulation (rough), with both batches:
    - A repeat after her hand reads `desk_guy_helped`.
 
 v2-reader, three passes: 5 FAILs, then 2, then 0. The desk guy's hand screen was split so his lines come before he comes; both halves are explicit (4 and 3 words). Gates: 114 pass, 1 fail (Laura's loop, held). | "Go with your picks. Go ahead fix them all." (2026-11-10) |
+| 224 | A scene with a person opens from that person's portrait, and the shower touch is inside the shower (LO's playtest, 2026-11-10: "Touch in shower should be an option while she is taking shower not a separate option"; "\"Dare me, Zo.\" Should be inside her npc portrait activity not a separate link"; then "B": fix every case and the skill).
+1. **The shower:** "Touch yourself." is a choice on the shower's first screen (Curious). The separate bathroom link `touch_shower` is gone. The beat opens under the water. Ryan gets his own line right after a peek; the footsteps line shows only when someone is up and Ryan isn't in his room. Its ways out are the shower's, with Corruption +1 and 10 more minutes.
+2. **Eight scenes were links beside a person's face.** The portrait shows one scene per person per room, and these had `requires_npc` with no `npc`. Seven are now buttons on the person's screen, with door-only canvases (`hidden_from_location`). `doors.py` holds their gates: conditions, one button per schedule row, and a `_today` flag set on every way out and cleared daily.
+   - Zoe: "Dare me, Zo." and "Let Zoe finger you off the path" (park), "Take Zoe's dare" (her flat).
+   - Ryan: "Lean back on his door." (was the link "Two knocks on his door"). Mark: "Join him at the table." (was "Sit down at the table"). Hale: "Earn your grade in Dr. Hale's office". Vance: "Walk past slowly." (by hand in 3_activities.toml).
+   - The eighth, `kitchen_study`, is her own work with Laura only present (R1), so it stays a link. It now reads Laura as an `npc_at_location` condition.
+3. **Openings rewritten for arriving from the person's screen.** v2-reader, four passes, all on "true on every visit": 8 FAILs, then 7, then 3, then 0.
+   - Vance's walk is her walking on, not arriving.
+   - Ryan's door screen: she knocked on the way in. His start beats `7s_a` and `7s_c` lose "before it's even shut", "Took you long enough" and "Shut the door". `7s_b` (dark, half asleep) is out of the pools.
+   - Mark puts the paper down for the envelope. Hale gets up and locks the door.
+   - Zoe slides off the couch arm to give her dare, and her "What's tonight's dare?" became her naming it.
+   - Zoe stops running on the spot for the hollow.
+   - Later passes: Vance's walk starts past the gate and "hips" finishes it. Ryan backs off from his door. Mark's half-dressed line no longer sits her twice. Hale says "Ten o'clock, I said." (his email said ten). Zoe's "Ask me" stops at 01:50 with the door.
+4. **Skill:** R1's other half in the-surfaces.md, and a new gate, *a person's scene is inside their portrait*. It fails the last commit's build on all 8 scenes and passes this one 10/10.
+
+Gates: 115 pass, 3 decided, 1 fail (Laura's loop, held). | "B" (2026-11-10) |
