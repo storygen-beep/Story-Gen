@@ -730,23 +730,26 @@ def _spec_trait_labels():
 SPEC_LABEL = _spec_trait_labels()
 # A counter whose name alone doesn't say what to do: the goal says how it moves (cafe.py l2_play, l2_flirt, l3_let).
 COUNTER_WORDS = {
-    "cafe_footfall": "Café regulars {v}: play along or flirt back on a busy shift, or let a hand stay",
-    # (Chrome play 2026-11-03: "The café's name -5" read as a number, not a task)
-    "cafe_name": "Let customers' hands stay on café shifts, until the café gets a name for it",
-    "cafe_shifts_worked": "Work {v} café shifts",
-    "rent_short_weeks": "A Sunday short on the rent",
+    # DECISIONS 228 (the-voice.md R3b, LO 2026-11-11): a goal is her story line with one act at a place, and no
+    # number; the engine prints "— 4 / 15" after it (v2.py:19994-19996), so a {v} here printed the target twice.
+    "cafe_footfall": "Work the busy café shifts: play along, flirt back, or let a hand stay",
+    # (Chrome play 2026-11-03: "The café's name -5" read as a number, not a task; 2026-11-11: it counts up now)
+    "cafe_name": "Let a customer's hand stay on your shifts. Tom watches from the counter",
+    "cafe_shifts_worked": "Work your café shifts. Tom's watching how you do",
+    "rent_short_weeks": "Come up short on the rent one Sunday",
     # pass 3 J36 (engine.md:1074-1075): a counter goal says where, what to do and when, not a bare number
-    "zoe_dares_done": "Take {v} of Zoe's dares at her Friday party, late",
-    "laura_gaps_watched": "Watch Laura through her door or the bathroom door at night, {v} times",
-    "dex_sessions": "Book {v} sessions with Dex at the gym ($15 each, or another way)",   # DECISIONS 225
+    "zoe_dares_done": "Take Zoe's dares at her Friday party, late",
+    "laura_gaps_watched": "Watch Laura through her door or the bathroom door at night",
+    "dex_sessions": "Book sessions with Dex at the gym: $15, or another way",   # DECISIONS 225
 }
 # pass 3 J36: a meter goal names its feeder (the-voice.md R3: a place, a person, a verb, and the window when there is
 # one). NPC_FEED is what raises his or her meter (the feeders in the build: hub_ryan_*, walkin_*_ryan, home_event_ryan_*,
 # garden_sun; hub_laura_*, home_event_laura_robe). STAGE_WAY is what pays her in the stage BELOW the value, the same acts
 # extras.py's tier cards name (engine.md section 23: never the button the value itself opens).
 NPC_FEED = {
-    ("npc_ryan", "want"): "let him see you at home: your towel in the hall when he's out of the shower, weekdays before half seven, the shower, the lounger under his window, the couch with him in the evenings and at weekends, his room at night",
-    ("npc_laura", "warmth"): "spend time with her: breakfast on weekday mornings, cooking, dinner and the dishes on her evenings in the kitchen",
+    # DECISIONS 228: about 15 words, the line itself (the-voice.md R3b); the room text says the rest
+    ("npc_ryan", "want"): "Let Ryan see you at home: a towel in the hall, the couch, his room at night",
+    ("npc_laura", "warmth"): "Spend time with Laura: breakfast, cooking, and the dishes in the evening",
 }
 STAGE_WAY = {
     ("corruption", 20): "stay and look: the park couple, the library stacks, a door left open at home at night",
@@ -773,7 +776,21 @@ def MY_CARD(key):
 def counter_label(key, val):
     if key in COUNTER_WORDS:
         return COUNTER_WORDS[key].format(v=val)
-    return f"{TRAIT_NAME.get(key) or SPEC_LABEL.get(key, key)} {val}"
+    return f"Raise your {TRAIT_NAME.get(key) or SPEC_LABEL.get(key, key)}"   # DECISIONS 228: the engine prints the number
+
+
+# DECISIONS 228 (the-voice.md R3b): a gate that must be FALSE is a bullet whose check shows while she has NOT done
+# it (engine.md 47.4: Dex's card ticked "Worked out" on days she hadn't), so it goes in the tip, in words.
+FLAG_NOT_WORDS = {
+    "dex_session_today": "not on a day you've already had a session",
+    "worked_out": "not after you've worked out that day",
+}
+# A flag goal another goal on the same card already implies is not its own line: a hand can't stay, nor a busy
+# shift happen, without the café job (the-voice.md R3b, "one line per thing the step waits for").
+COVERED_BY = {
+    "cafe_let_it": {"cafe_name"},
+    "cafe_job": {"cafe_footfall", "cafe_name", "cafe_shifts_worked"},
+}
 
 
 def card_goals(st, counter):
@@ -785,6 +802,11 @@ def card_goals(st, counter):
             continue
         if g.get("flag"):
             f = g["flag"]
+            if g.get("op") == "is_false":
+                notes.append(FLAG_NOT_WORDS.get(f, "not after " + FLAG_WORDS.get(f, f.replace("_", " ")).lower()))
+                continue
+            if COVERED_BY.get(f, set()) & {x.get("trait") for x in st.get("gate") or []}:
+                continue
             if f == "came_home_late":
                 goals.append({"hours_since_flag": f, "op": "lt", "value": 4, "label": FLAG_WORDS[f]})
             else:
@@ -800,10 +822,9 @@ def card_goals(st, counter):
             continue
         if g.get("npc"):
             goals.append({"type": "trait", "subject": "npc", "npc_id": g["npc"], "trait": key, "op": g["op"],
-                          "value": val, "label": f"{NPC_NAME.get(g['npc'], g['npc'])}'s {TRAIT_NAME.get(key, key)} {val}"
-                                                  + (f": {NPC_FEED[(g['npc'], key)]}" if (g["npc"], key) in NPC_FEED else "")})
+                          "value": val, "label": NPC_FEED.get((g["npc"], key))   # DECISIONS 228: no number, no list
+                                                  or f"Win {NPC_NAME.get(g['npc'], g['npc'])}'s {TRAIT_NAME.get(key, key)}"})
         else:
-            stage = STAGE.get(key, {}).get(val)
             # playtest 2026-11-09 (the-voice.md R3/R3b, gate `a card line belongs to its person`): the stage's
             # list of places was pasted onto every person's card, so the Quests page read as one checklist. A
             # person's card says only that their step waits on her number; the meter's own card says where it pays.
@@ -811,8 +832,9 @@ def card_goals(st, counter):
             # last, in words. The engine prints "— 14 / 40" after a trait goal's label, so the number is still there.
             owner = NPC_NAME.get(COUNTER_OWNER.get(counter), "they")
             quality = QUALITY.get((key, val))
+            # DECISIONS 228: no "(Bold)" and no "X's next step waits for it" tail: the card is already that person's
             label = (f"Not yet: {owner} waits until you're {quality} (your {TRAIT_NAME.get(key, key)})" if quality
-                     else counter_label(key, val) + (f" ({stage})" if stage else "") + f": {owner}'s next step waits for it")
+                     else counter_label(key, val))
             goals.append({"type": "trait", "subject": "player", "trait": key, "op": g["op"], "value": val, "label": label})
     return goals, notes
 

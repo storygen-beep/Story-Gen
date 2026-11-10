@@ -1206,7 +1206,7 @@ when     = [ { flag = "opening_done", op = "is_true" }, { days_since_flag = "ope
 goals    = [
   { flag = "hale_met", op = "is_true", label = "Go to your first class: Psychology, Monday morning, in the lecture hall" },
   { flag = "cafe_job", op = "is_true", label = "Ask for a job at the café" },
-  { type = "trait", subject = "player", trait = "money", op = "gte", value = 75, label = "Have $75 by Sunday" },
+  { type = "trait", subject = "player", trait = "money", op = "gte", value = 75, label = "Save the rent for Mark from your café pay, by Sunday" },
 ]
 
 [[quest_cards]]

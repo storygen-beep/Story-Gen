@@ -5371,9 +5371,8 @@
         "labels": [
           "public"
         ],
-        "read_by": "Tom's step 3 (cafe_name -5 or lower): the café has a name for what she lets the customers do",
-        "note": "falls -1 a shift she lets them touch, never rises this release; it opens a step at the bottom, so it is not a performance meter (2026-11-03)",
-        "opens_at_bottom": true
+        "read_by": "Tom's step 3 (cafe_name 5 or more): the café has a name for what she lets the customers do",
+        "note": "rises +1 a shift she lets them touch, never falls this release. It counted down to -5 until DECISIONS 228 (LO 2026-11-11): the card printed '0 / -5' (engine.md 47.4)"
       }
     ],
     "infrastructure": [
@@ -7922,8 +7921,8 @@
                 },
                 {
                   "trait": "cafe_name",
-                  "op": "lte",
-                  "value": -5
+                  "op": "gte",
+                  "value": 5
                 },
                 {
                   "flag": "cafe_let_it",

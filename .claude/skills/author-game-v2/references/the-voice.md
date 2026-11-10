@@ -255,6 +255,29 @@ nothing but its label, and with no label it prints its raw key — which gate
 **Print the number beside that step's own act, and nowhere else.** The number answers "how much
 more for *this*": it sits on the card of the person whose step needs it, next to the act that raises
 it (untangled-mind's hints work this way). It is not a stage target repeated across the page.
+
+**R3 and R3b are one rule: the label is the story line, and the engine prints the count after it.**
+The trait goal is still the shape (R3b), but the engine appends `— 4 / 15` itself, so the words never
+carry the number (R3). first_term followed R3b alone, and its page read as a meter checklist: 59 of 81
+goal lines were counters, 25 had a number in their first three words (*"Café regulars 15: …"*), 9 ended *"…: Tom's next step
+waits for it"*, and 11 cards carried 3–5 lines (LO, 2026-11-11: *"its not just toms card"*). Printing
+the number was never what saves the player: lost-player comments run about 1–3% whether a game prints
+it or not (`playtest_study_20261109/REPORT.md` §3). Every goal label, then:
+- **Reads as a line of her story with one act in it, at a place, in about 12–17 words** (CoT 12, IHOH 15,
+  UM 17 without its hint bracket; `9_quest_lines.md` §5). *"Work the busy café shifts: play along, flirt
+  back, or let a hand stay."*
+- **Carries no number and no stage name.** The engine prints the count; a number in the words doubles
+  it and puts it first, which no top game does (`9_quest_lines.md` §1).
+- **Has no shared tail.** *"X's next step waits for it"* on every line is a menu label, not a step.
+- **Is one line per thing the step waits for.** A gate another goal on the card already implies is not
+  its own line: *"let a hand stay"* needs the café job, so the job is not a second bullet.
+- **Is never a condition that must be false.** `once a day` or `not after a workout` is an `is_false`
+  flag, and a bullet reads as a to-do whose ✓ shows when she has *not* done it (first_term's Dex card
+  ticked *"Worked out"* on days she hadn't). Say it in the `tip`, in words.
+- **Counts up, to a positive target.** The engine prints the raw value and target for any operator, so a
+  counter that falls to `lte -5` renders *"0 / -5"* (`engine.md` §47.4).
+
+Checked: gate *a goal line reads the way it works*.
 **And a card names only people she has met.** Course of Temptation hides people she hasn't met, and
 In Her Own Hands shows a nameless tile, 113 times. A goal line that sends her to someone she
 hasn't met waits on their `<x>_met`, or is itself the meeting (*"Talk to Dace"*). first_term's Ryan card

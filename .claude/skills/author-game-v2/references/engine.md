@@ -3045,6 +3045,15 @@ the person's name wherever the card is listed by person, and the cast row hides 
 requirement can live is a goal item's `label` — or, in prose, in `text` / `ready_text` / `tip`.
 Do not reach for a field that is not there.
 
+**47.4 · The suffix and the ✓ read the condition, never the words.** Read 2026-11-11 at
+`v2.py:19898-19913` (`evaluateGoals`) and `v2.py:19994-19996` (the suffix). The suffix prints the raw
+`currentValue / goal.value` for every counted goal, whatever its operator, so a counter that falls to
+`lte -5` renders `— 0 / -5` (first_term's Tom card). And `met` is the condition itself, so a flag goal
+with `is_false` draws ✓ while the flag is **unset**: first_term's Dex card ticked *"Worked out"* on
+days she had not worked out. So a counted goal counts up to a positive target, and a must-be-false
+gate goes in the `tip` in words (`the-voice.md` R3b). Checked: gate *a goal line reads the way it
+works*.
+
 ## 48. `[ui.cheat_page]` — free rows and the three time-savers
 
 One page (`v2.py:11932`); each `[[ui.cheat_page.grants]]` row is a button.

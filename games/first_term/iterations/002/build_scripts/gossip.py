@@ -44,7 +44,7 @@ KIND_OF = {"lap": "talk_quad", "kiss": "talk_quad", "class": "talk_class", "gym"
            "dares": "talk_party", "bra": "talk_party", "teammate": "talk_party"}
 SPREAD = {   # the teller, to his table
     "class": "I sit two rows behind her in class. I've seen what's under her clothes.",
-    "gym": "She trains at the campus gym. Ask the guys in there what they've seen of her.",
+    "gym": "She trains at the gym on her street. Ask the guys in there what they've seen of her.",
     "dares": "She takes Zoe's dares. In the middle of the party, in front of everyone.",
     "bra": "She pulled her bra off through her sleeve on Zoe's balcony. Gave Zoe the bra. Didn't put it back on.",
     "teammate": "She was all over Jake's teammate at Zoe's party."}
