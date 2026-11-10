@@ -1,6 +1,11 @@
 # The Meters — which ones exist, what the climb costs, and what the player reads off it
 
-The ascent tiers are this skill's whole thesis: **a meter that buys access.** Every other file here
+The ascent tiers are one of this skill's doors: **a meter that buys access.** It is not the only door,
+and in the top games it is not the main one. People open most of them (his step, him being there),
+then time and money. Her own sexual meter gates about 3–15% of the content in four of the five
+pass-list games we measured, and 27–32% in first_term, whose players read the game as "get the number
+to X" (playtest 2026-11-09, `~/Documents/Great_Games_Study_20260926/playtest_study_20261109/REPORT.md`
+§5). Build the person's step first and let the meter be one gate among several. Every other file here
 is about *what* the meter unlocks. This one is about the meters themselves.
 
 **Meters live inside systems.** A meter is what a system writes and reads (`the-systems.md` SY1): the
@@ -306,11 +311,24 @@ show it.
   Checked: gate *a climb starts on a choice*.
 - **Below the first stage, her choice is letting a look go on** (`the-heat-ladder.md` H1, stage 1): not fixing her
   top, holding a stretch. Never a flash she chooses.
-- **Each stage's top needs a step over it.** When every act pays only to its stage's top, 19, 39 and 59 need one
-  step into the next stage. A one-time bridge in her own voice does it (H6), set with `op = "set"` so a daily cap
-  can't eat it. first_term stuck at 19, then at 39 once Corruption stopped opening the leave rules.
-- **Pace it with a daily cap per band** (`engine.md` §53), scaled from CoT's, and measure it by a scripted play from a new
+- **Acts pay across the line.** A repeatable act caps at the top of the stage *above* the one it opens in, so
+  repeating it carries her over 19, 39 and 59 (`the-arc.md` A4d). A one-time bridge in her own voice (H6) is still a
+  good reward at the line, set with `op = "set"` so a daily cap can't eat it, but it is never the only way over.
+  first_term capped every act at its own top and stood at 19, then 39, with nothing that paid (LO's playtest,
+  2026-11-09). Checked: gates *every stage has a way up* (at the floor and the top) and *an act pays no further
+  than the next stage*.
+- **Pace it with a daily cap per band** (`engine.md` §53), scaled from CoT's. Now that acts pay across the line,
+  this is what keeps an easy act from racing her up. Measure it by a scripted play from a new
   game. first_term reached 20 on day 7, playing every day.
+  - **Keep about 2–3 paying acts a day at every stage.** Shrink the pay and the cap together as she climbs, as
+    CoT does (pay 10→3 and cap 30→9 a day over 100 a level, `cot_34_database_skill.js:139-140`). But never let
+    a stage drop to one paying act a day. CoT always pays about 3 on-level acts a day, and its longest level is
+    about 11 days; Cupid's Way's slowest stage is roughly 9–18. first_term's bands of 1 a day from 60 made 20-day
+    stages (`playtest_study_20261109/10_pace.md`, checked in `11_verify2.md`). Listed by lint *the climb's pace*,
+    which flags any stage over 14 days at the cap.
+  - **Players don't mind a slow sexual climb; they mind a grind.** Across 1,941 comments in the five pass-list
+    games, 2 complain about the pace of her sexual meter, and the grind complaints are about jobs and money. CoT
+    also gives the player a pace setting (a gain slider and a cap switch); offer one if the engine allows it.
 - **A drink opens doors, not the climb.** With `hold_band_while` the meter can't pass its sober stage while she's Tipsy.
 
 ## W5 · A counterweight is rare, and it shuts doors

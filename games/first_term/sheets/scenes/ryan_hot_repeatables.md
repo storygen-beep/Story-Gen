@@ -39,7 +39,7 @@ repeats until all have shown). None shows with Laura in the room (Laura's rule).
 | 4 | step 6 (was 5) | his bed, evenings he's home | she lies on his bed and touches herself until she comes; he isn't allowed to touch, only watch | Bold · Showing (was Curious · Daring; naked by choice for one is Bold) | both add +1, cap 59 | yes · middle | "Not tonight." | new |
 | 5 | step 6 | his room, evenings he's home | naked in his room; he strokes himself while she watches, and she tells him when he can come | Showing | exhibitionism add +1 · corruption add +1, cap 59 | yes · late (cum) | "Not tonight." | new |
 | 6 | step 7 | the couch, under the blanket (Sun 14:00–18:00) | a handjob to the end under the blanket, with Mark's radio on in the next room | Hungry · Daring (was Bold; the taboo act at home is Hungry, SP2) | corruption add +1, cap 79 · exhibitionism add +1, cap 39 | yes · late (cum) | "Just the film." | built ("Share the blanket"): pays +3 not +1, now finishes |
-| 7 | step 8 | his room, two knocks, not Friday, 22:00–00:00 | a menu (below): a kiss at the door, then her pick of the act; more open as his Lust climbs; a near-catch screen; her pick of finish | — (step 8 needs Corruption 60) · acts by his Lust 70 / 80 / 90 | corruption add +1, cap 79 | yes · whole late | "Not tonight." | changed 2026-11-02: was one pool of three whole scenes |
+| 7 | step 8 | his room, two knocks, not Friday, 22:00–00:00; Saturday 10:00–14:00, Sunday 08:00–14:00 (reach audit 2026-11-09) | a menu (below): a kiss at the door, then her pick of the act; more open as his Lust climbs; a near-catch screen; her pick of finish | — (step 8 needs Corruption 60) · acts by his Lust 70 / 80 / 90 | corruption add +1, cap 79 | yes · whole late | "Not tonight." | changed 2026-11-02: was one pool of three whole scenes |
 
 **Gates as signed** (`npc_ryan.md`): the stage column is the gate. Row 6's "Bold" is signed; "· Daring" is the mixed
 rule (`meters.md` rule 4: seen and sexual needs both) applied, confirmed by LO 2026-11-01 ("Continue").
@@ -160,7 +160,7 @@ entry is true in whatever she wears. A tease screen, not explicit, by design.
 
 **5c** · 122 words · explicit words 8 · median sentence 11
 
-> You lie back on Ryan's bed, naked, knees up and open. He kneels between them with his cock in his hand, close enough to touch you. He isn't allowed to. "Ask," you tell him. He strokes hard and fast. "Can I come, @player.nickname?" "No. Look at my cunt first." He looks. You spread yourself with two fingers so he sees how wet you are. His fist slams down his cock and his stomach goes tight. *You could keep him here all night.* "Ask me nicely." "Please. Please let me." "Go on. Right there." He aims his cock at you and comes with a choked groan. His cum hits your cunt hot and thick and slides down over your ass onto his sheets.
+> You lie back on Ryan's bed, naked, knees up and open. He kneels between them with his cock in his hand, close enough to touch you. He isn't allowed to. "Ask," you tell him. He strokes hard and fast. "Can I come, @player.nickname?" "No. Look at my cunt first." He looks. You spread yourself with two fingers so he sees how wet you are. His fist slams down his cock and his stomach goes tight. *You could keep him here for hours.* "Ask me nicely." "Please. Please let me." "Go on. Right there." He aims his cock at you and comes with a choked groan. His cum hits your cunt hot and thick and slides down over your ass onto his sheets.
 
 ### 6 · under the blanket · late column
 
@@ -183,6 +183,7 @@ into her, so the twist screens (which assume he's in her) are true after every a
 (not true against the wall); `7t_c`'s thought reworded, since Kayla's call is never answered. Reader pass 2026-11-02: `7ride_shy` names only Laura
 across the hall (Mark is in the living room with the TV); `7t_b` opens on the headboard waking her (she's asleep from 23:00);
 `7t_c` turns the face-down phone over; the door line no longer puts him at the desk (`7s_b` has him in bed).
+Reach audit 2026-11-09 (`playtest_study_20261109/12_reach_audit.md`): row 7 also runs on weekend mornings (Saturday 10:00-14:00, Sunday 08:00-14:00), so its words name no hour and nobody who isn't home: `7suck_shy` listens for "feet in the hall" (was Laura's slippers), `7ride_shy` says "Someone will hear." (was "She's right across the hall."), `7t_c`'s phone is "loud in the quiet room" (was "loud in the dark"). `7s_b` (dark, half asleep) and `7t_b` (Laura knocks) stay, shown only when they are true. Row 5's thought is "for hours" (was "all night"), since row 5 now takes his weekend mornings too.
 
 **7s_a** · 80 words · explicit words 4 · median sentence 8
 
@@ -206,11 +207,11 @@ across the hall (Mark is in the living room with the TV); `7t_b` opens on the he
 
 **7t_c** · 105 words · explicit words 6 · median sentence 6
 
-> His phone buzzes face-down on the desk. He turns it over. KAYLA, with a heart. It buzzes against the wood, loud in the dark. You both look at it. Ryan doesn't reach for it. "Let it ring," he says, rough. His hands grip your ass harder. You don't stop. *You want her to keep calling while he's inside you.* The phone buzzes and buzzes. Your wet cunt clenches. Your tits ache, the nipples tight. He groans low and doesn't care who hears. "Fuck, @player.nickname." The ringing stops. The screen goes dark. His breath is ragged now. His whole body goes tight, and his cock swells hard.
+> His phone buzzes face-down on the desk. He turns it over. KAYLA, with a heart. It buzzes against the wood, loud in the quiet room. You both look at it. Ryan doesn't reach for it. "Let it ring," he says, rough. His hands grip your ass harder. You don't stop. *You want her to keep calling while he's inside you.* The phone buzzes and buzzes. Your wet cunt clenches. Your tits ache, the nipples tight. He groans low and doesn't care who hears. "Fuck, @player.nickname." The ringing stops. The screen goes dark. His breath is ragged now. His whole body goes tight, and his cock swells hard.
 
 **7suck_shy** · 121 words · explicit words 5 · median sentence 11
 
-> You kneel on the rug by his bed and glance at the door. Shut. You still listen for Laura's slippers. Ryan sits on the edge of the mattress with his cock hard in his fist. "Come here, @player.nickname," he whispers. You lick the head once, then take it in your mouth. He's hot and salty on your tongue. *This is Ryan.* You suck him deeper anyway. Your lips slide down his shaft until he bumps the back of your throat. He grabs a fistful of your hair and bites back a groan. You keep it slow and quiet, your hand wrapped tight round the base. Your tits brush his knees every time you bob. His cock swells hard against your tongue. Then he pulls you up onto the bed, and his wet cock pushes deep into your cunt.
+> You kneel on the rug by his bed and glance at the door. Shut. You still listen for feet in the hall. Ryan sits on the edge of the mattress with his cock hard in his fist. "Come here, @player.nickname," he whispers. You lick the head once, then take it in your mouth. He's hot and salty on your tongue. *This is Ryan.* You suck him deeper anyway. Your lips slide down his shaft until he bumps the back of your throat. He grabs a fistful of your hair and bites back a groan. You keep it slow and quiet, your hand wrapped tight round the base. Your tits brush his knees every time you bob. His cock swells hard against your tongue. Then he pulls you up onto the bed, and his wet cock pushes deep into your cunt.
 
 **7suck_eager** · 121 words · explicit words 9 · median sentence 8
 
@@ -218,7 +219,7 @@ across the hall (Mark is in the living room with the TV); `7t_b` opens on the he
 
 **7ride_shy** · 116 words · explicit words 7 · median sentence 7
 
-> Ryan lies back on his pillow and you climb on top of him, one eye on the door. "Slow," you whisper. "She's right across the hall." You lower yourself onto his cock. He stretches your cunt open inch by inch until you're sitting on him. You ride him small and careful. His headboard taps your wall anyway. Knock. Knock. You freeze and listen. Nothing. *This is Ryan.* You rock down on him harder. He grabs your ass and pulls you onto him. Your tits bounce over his face. He catches a nipple in his mouth. You bite your lip to keep quiet. Your wet cunt clenches tight around his cock with every tap of the headboard.
+> Ryan lies back on his pillow and you climb on top of him, one eye on the door. "Slow," you whisper. "Someone will hear." You lower yourself onto his cock. He stretches your cunt open inch by inch until you're sitting on him. You ride him small and careful. His headboard taps your wall anyway. Knock. Knock. You freeze and listen. Nothing. *This is Ryan.* You rock down on him harder. He grabs your ass and pulls you onto him. Your tits bounce over his face. He catches a nipple in his mouth. You bite your lip to keep quiet. Your wet cunt clenches tight around his cock with every tap of the headboard.
 
 **7ride_eager** · 115 words · explicit words 7 · median sentence 8
 

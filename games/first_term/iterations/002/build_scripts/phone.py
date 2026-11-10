@@ -370,6 +370,15 @@ noshow("hale_office_noshow", H, "📧 College email: Dr. Hale", "hale_office_boo
        extra=[DAYS(4), HOURS("09:00", "17:00"),
               {"type": "trait", "subject": "player", "trait_key": "hale_step", "operator": "eq", "value": 2}],
        comment="Hale: she said she'd come to office hours and didn't (DECISIONS 87)")
+# LO, 2026-11-10 ("1 yes add it"; DECISIONS 219): after his step 4, the booked hour. The evening before a weekday
+# that isn't Thursday he emails; her yes puts him in his office 10:00-12:00 the next morning (people_data latch 18 h).
+thread("hale_office_text", H, "📧 College email: Dr. Hale",
+       [F("hale_04_done"), SINCE("hale_04_done", 1), F("hale_booked", False), DAYS(6, 0, 1, 3), HOURS("19:00", "22:00")],
+       ["Tomorrow, ten. My office.", "Lock the door behind you. — H."],
+       [("I'll be there.", {"flagEffects": [setf("hale_booked")]}, "Good. — H."),
+        ("I can't tomorrow.", {}, "Then office hours. — H.")],
+       repeat=2, ignore=(1, {"effects": [pl_eff("grade_psych", -1)]}),   # an unanswered email from your lecturer is marked (as hale_office_hours)
+       comment="Dr. Hale: the booked morning hour, after his step 4")
 thread("hale_thursday", H, "📧 College email: Dr. Hale",
        [F("hale_04_done"), SINCE("hale_04_done", 1), DAYS(2), HOURS("09:00", "17:00")],
        ["Thursday, my office. Half past six."],
@@ -420,6 +429,16 @@ thread("jake_date_wed", J, "📱 Jake",
        repeat=6, ignore=(1, {"effects": [pl_eff("jake_patience", -JAKE_WAIT)], "flagEffects": [setf("jake_ignored")]}),
        comment="Jake (W8, LO 2026-11-03): the midweek date, booked here.",
        round2=(2, [("yes", BOOK, "front door. eight."), ("no", {}, "saturday then")]))
+
+# Reach audit 2026-11-09 (LO "Go ahead" on Zoe and Jake): after his step 4, on the nights with no date, Jake's booty
+# call (Course of Temptation's shape, REPORT.md section 2). Her yes puts him at her door 22:00-00:00 (jake.py jake_booty_call).
+thread("jake_booty_text", J, "📱 Jake",
+       [F("jake_04_done"), SINCE("jake_04_done", 1), F("jake_coming", False), DAYS(0, 1, 3, 6), HOURS("21:00", "22:30")],
+       ["you up? 😏", "i can be at yours in twenty"],
+       [("door's unlocked", {"flagEffects": [setf("jake_coming")]}, "on my way"),
+        ("not tonight", {}, "your loss gorgeous")],
+       repeat=2, ignore=(1, {"effects": [pl_eff("jake_patience", -JAKE_WAIT)], "flagEffects": [setf("jake_ignored")]}),   # gate: ignoring costs more than a no
+       comment="Jake's booty call, after his step 4 (the nights with no date)")
 
 # Q5 (LO, 2026-11-04): an invite left unanswered gets one short text the day it closes, saying the next one
 # waits. Fired by the ignore's own flag, which clears at midnight ([engine.daily_tick]); the replies change nothing

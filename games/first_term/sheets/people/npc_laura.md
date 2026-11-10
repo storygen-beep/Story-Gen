@@ -47,9 +47,10 @@
 |---|---|---|---|---|
 | `home_hall` | every day | 23:00 | 02:00 | waiting up in the dark hall, the catch · only when `came_home_late` was set in the last 4 hours (question 69) |
 | `home_kitchen` | Mon–Fri | 06:30 | 08:00 | breakfast; home evenings |
-| `home_kitchen` | Mon, Tue, Thu, Fri, Sun | 18:00 | 22:00 | breakfast; home evenings |
-| `home_master_bedroom` | Mon, Tue, Wed, Thu, Fri, Sun | 22:00 | 23:00 | awake and alone, Mark in the living room: `laura_alone_in_bed` (DECISIONS 82, changed 2026-10-29, re-signed by LO 2026-10-29) |
-| `home_master_bedroom` | Mon, Tue, Wed, Thu, Fri, Sun | 23:00 | 06:30 | sleeps; dresses Saturday |
+| `home_kitchen` | Mon, Tue, Thu, Fri, Sun | 18:00 | 21:30 | breakfast; home evenings (was to 22:00(LO, 2026-11-09, "Bath + later bedtime"; DECISIONS 216) |
+| `home_bathroom` | Mon, Tue, Thu, Fri, Sun | 21:30 | 22:00 | her shower before bed: `laura_shower_gap` (LO, 2026-11-09, "Bath + later bedtime"; DECISIONS 216) |
+| `home_master_bedroom` | Mon, Tue, Wed, Thu, Fri, Sun | 22:00 | 23:30 | awake and alone (to 23:30 (LO, 2026-11-09, "Bath + later bedtime"; DECISIONS 216)), Mark in the living room: `laura_alone_in_bed` (DECISIONS 82, changed 2026-10-29, re-signed by LO 2026-10-29) |
+| `home_master_bedroom` | Mon, Tue, Wed, Thu, Fri, Sun | 23:30 | 06:30 | sleeps; dresses Saturday |
 | `home_master_bedroom` | Sat | 00:00 | 07:00 | sleeps; dresses Saturday |
 | `home_master_bedroom` | Sun | 00:00 | 01:00 | awake, with Mark: `master_door_saturday_night` (DECISIONS 80) |
 | `home_master_bedroom` | Sun | 01:00 | 07:00 | asleep |
@@ -69,10 +70,10 @@ her, and she lies awake after (`master_door_saturday_night`). It is its own sche
 
 | n | canvas | where | when | gate | raises | the no | guidance card line |
 |---|---|---|---|---|---|---|---|
-| 1 | `laura_01_blue_dress` | `home_master_bedroom` | Tue 18:00–22:00 | none | warmth add +5 · exhibitionism add +3 (was want +10) | "I can't take this." (parked) | Tuesday evening: Laura is in the kitchen, and she has a dress for you in her room. |
-| 2 | `laura_03_wine_in_the_kitchen` | `home_kitchen` | Mon, Tue, Thu, Fri 20:00–22:00 | her Love 10 (only) | warmth add +5 | "I'm tired, Mom." (parked) | Late evening in the kitchen: Laura has a glass of wine. |
+| 1 | `laura_01_blue_dress` | `home_master_bedroom` | Tue 18:00–21:30 | none | warmth add +5 · exhibitionism add +3 (was want +10) | "I can't take this." (parked) | Tuesday evening: Laura is in the kitchen, and she has a dress for you in her room. |
+| 2 | `laura_03_wine_in_the_kitchen` | `home_kitchen` | Mon, Tue, Thu, Fri 20:00–21:30 | her Love 10 (only) | warmth add +5 | "I'm tired, Mom." (parked) | Late evening in the kitchen: Laura has a glass of wine. |
 | 3 | `laura_06_take_me_with_you`, reworked as **All dressed up** | `home_master_bedroom` | Sat 17:00–18:30 | her Love 20 | warmth add +5 · `laura_lonely` set | "Ask Mark." (parked) | Saturday early evening: Laura is dressing up. Zip her up. |
-| 4 | `laura_04_she_saw_you` (new, top step) | `home_master_bedroom` (her door gap) | Sun–Fri 22:00–23:00 | Corruption 20 · her Love 30 · step 3 · Ella watched through a gap 3 times (bedroom or shower) | warmth add +5 · `laura_said_ryan` set · "Stay where you are." Corruption +1, cap 59 (a one-time step may carry her over a line: SP2) | "Step back from the gap." | A weeknight, late: Laura's door is open a gap again. |
+| 4 | `laura_04_she_saw_you` (new, top step) | `home_master_bedroom` (her door gap) | Sun–Fri 22:00–23:30 | Corruption 20 · her Love 30 · step 3 · Ella watched through a gap 3 times (bedroom or shower) | warmth add +5 · `laura_said_ryan` set · "Stay where you are." Corruption +1, cap 59 (a one-time step may carry her over a line: SP2) | "Step back from the gap." | A weeknight, late: Laura's door is open a gap again. |
 
 Every step's gate also says the drinks boost is off. Stage numbers: 20 is Curious or Daring, 40 Bold or Showing.
 
@@ -149,7 +150,7 @@ watching her be lonely." Both on each step sheet.
 
 | gap | where · when | pays | status |
 |---|---|---|---|
-| `laura_alone_in_bed` | her door, Sun–Fri 22:00–23:00, Mark in the living room | "Keep watching": corruption add +1, cap 19 · the step-4 counter +1 | built (DECISIONS 82) |
+| `laura_alone_in_bed` | her door, Sun–Fri 22:00–23:30, Mark in the living room | "Keep watching": corruption add +1, cap 19 · the step-4 counter +1 | built (DECISIONS 82) |
 | `master_door_saturday_night` | her door, Sun 00:00–01:00 | staying: corruption add +1, cap 19 | built (DECISIONS 79–80) |
 | the shower | `home_bathroom`, Sat 16:30–17:00; the lock sticks halfway, the door doesn't close; through the steam, her hand between her legs | "Keep watching": corruption add +1, cap 19 · the step-4 counter +1 · once a week | **new** |
 

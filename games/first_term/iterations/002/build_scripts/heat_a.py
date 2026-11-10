@@ -134,6 +134,7 @@ NEXT_GYM = [G(cond(wd(1)), D(J, "Thursday. Same time. Don't you dare say no.")),
             G(cond(wd(3)), D(J, "Tuesday. Same time. Don't you dare say no."))]
 
 A1_BUTTON = go("Wait for him after training.", node="a1_offer", mins=0,
+               # scene reader 2026-11-10 (DECISIONS 220): the 17:30 row was reverted (his hub has him lifting until 17:00)
                cond_=cond(flag("jake_first_time"), BOLD, LOCKERS_FREE, tod("16:30", "16:45")))
 A1_NODES = [
     node("a1_offer", "After training", [
@@ -297,7 +298,7 @@ A2_NODES = [
 ]
 
 # ═════════════════════════════════════════════════════════════════════════════
-# A5 · ZOE'S BEDROOM · Zoe (hub_zoe_bedroom, her Mon-Thu 22:00-00:00 row). "Stay over." After zoe_together.
+# A5 · ZOE'S BEDROOM · Zoe (hub_zoe_bedroom, her Mon-Thu 22:00-00:00 and Sun 20:00-00:00 rows). "Stay over." After zoe_together.
 # Bold: her mouth on her tits, her fingers in her (Zoe's middle column: tits, nipples, wet; cap 59). Hungry adds her
 # pick of the act (Zoe's late column: pussy, clit, fuck; cap 79). Out to the street: the flat shuts at midnight.
 # ═════════════════════════════════════════════════════════════════════════════
@@ -329,7 +330,10 @@ A5_HERS = ("You push Zoe onto her back and drag her T-shirt up over her tits. Sh
 A5_AFTER = [P("She falls asleep with her face in your neck and one leg thrown over yours."),
             T("Her bed smells like her. You don't want to get out of it.")]
 A5_BUTTON = go("Get into her bed.", node="a5_offer", mins=0,
-               cond_=cond(flag("zoe_together"), BOLD, BED_FREE, tod("22:00", "23:45")))
+               cond_=cond(flag("zoe_together"), BOLD, BED_FREE, wd(0, 1, 2, 3), tod("22:00", "23:45")))
+# reach audit 2026-11-09: her Sunday night in bed (20:00-00:00); the two buttons never overlap
+A5_BUTTON_SUN = go("Get into her bed.", node="a5_offer", mins=0,
+                   cond_=cond(flag("zoe_together"), BOLD, BED_FREE, wd(6), tod("21:00", "23:45")))   # scene reader 2026-11-10: her Sunday row is going to bed early, from 21:00
 A5_NODES = [
     node("a5_offer", "Stay over", [
         P("Zoe lifts the edge of her duvet without looking up from her phone."),
@@ -377,6 +381,7 @@ pay_on_the_way_in(A5_NODES)
 def attach_zoe(out):
     _add_button(_canvas(out, "hub_zoe_canteen"), A2_BUTTON, A2_NODES)
     _add_button(_canvas(out, "hub_zoe_bedroom"), A5_BUTTON, A5_NODES)
+    _add_button(_canvas(out, "hub_zoe_bedroom"), A5_BUTTON_SUN, [])
 
 
 # ═════════════════════════════════════════════════════════════════════════════

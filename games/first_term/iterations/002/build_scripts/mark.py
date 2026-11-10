@@ -940,6 +940,8 @@ for _c in out:
                 _n["blocks"] = lift_line(_n["blocks"], "You asked what the difference was worth, @player. Here it is.", M)
                 _n["blocks"] = lift_line(_n["blocks"], "Five for every inch my hand climbs your bare thigh. Cash. Twenty tops.", M)
                 _n["blocks"] = lift_line(_n["blocks"], "I asked what the difference was worth. Here's my answer,", "player")
+import everyday   # DECISIONS 221: the day after an everyday scene, the hub remembers it
+everyday.hub_read(out)
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards)
 open(__import__("sys").argv[1], "w").write(text)
 print("mark:", len(out), "canvases,", len(cards), "cards", "(her table voice:", "placeholder" if HERS_LOOK == "PLACEHOLDER" else "written", ")")

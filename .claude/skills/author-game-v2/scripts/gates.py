@@ -4867,10 +4867,10 @@ def ladder_problems(game, state, notes=None):
                     # is not him being there for the step. `_window_uncovered` is the helper
                     # `shape.py` uses for the same question on the ledger. Since-dated
                     # under LO B (`SHIP_SINCE["full_cover"]`).
-                    missing = _window_uncovered(
-                        days, frm, to,
+                    missing = sorted(set().union(*[_window_uncovered(   # each window on its own days (2026-11-09)
+                        wd_, a_, b_,
                         [(r.get("weekdays") or None, r.get("start_time", "00:00"),
-                          r.get("end_time", "23:59")) for r in rows])
+                          r.get("end_time", "23:59")) for r in rows]) for wd_, a_, b_ in _step_windows(st, frm, to)]))
                     if missing:
                         problems.append(f"{tag}: bound to {npc_id}, whose schedule does not fully "
                                         f"cover {st.get('where')} {frm}-{to} on "
@@ -15618,6 +15618,19 @@ def _stage_way_up(game, state):
                 detail.append(f"    pay {t} here but need another meter first: {', '.join(other[:8])}")
             if not rep:
                 walls.append(label)
+            # PLAYTEST 2026-11-09: the floor is the easy moment. first_term paid at 0, 20 and 40
+            # and nothing repeatable paid at 19, 39 or 59, so the player stood one point under
+            # every line. The stage's top is where she has to cross from — or, in the stage that holds
+            # the highest gate, one under that gate: nothing above it is gated yet (gate `meter ceiling`).
+            top = min(nxt, top_gate) - 1
+            if rep and top > floor:
+                reach_top = _wu_reachable(game, holders, t, top, tiers, {})
+                at_top = sorted({h["canvas"] for h, amt, cap in mine
+                                 if h["repeatable"] and pays(h, cap, t, top, {}, reach_top, tiers)})
+                detail.append(f"    at {top} (the stage's top): {len(at_top)} repeatable act(s) still pay sober"
+                              + (f" — {', '.join(at_top[:8])}" if at_top else ""))
+                if not at_top:
+                    walls.append(f"{t} {top}, the top of {name or 'its stage'}")
     # What the Quests page promises, beside what pays (a report: free text cannot be matched).
     for card in game.get("quest_cards") or []:
         for g in card.get("goals") or []:
@@ -15634,10 +15647,12 @@ def _stage_way_up(game, state):
     if not checked:
         return None, "no stage sits below a gate", detail, 0
     detail.append("(the-arc.md A4d — only her choice pays, and every stage below the highest gate "
-                  "needs repeatable acts that pay sober. Give the stage a button where she goes "
-                  "further, +1 and capped at the stage's top; a drink's boost is not a way up)")
-    head = (f"{len(walls)} of {checked} stage(s) have no repeatable act that pays sober: " + "; ".join(walls)
-            if walls else f"all {checked} stage(s) below a gate have a repeatable act that pays sober")
+                  "needs repeatable acts that pay sober, at its floor and at its top. Give the stage a "
+                  "button where she goes further, +1 and capped at the next stage's top; a drink's "
+                  "boost is not a way up)")
+    head = (f"{len(walls)} place(s) on the climb where no repeatable act pays sober: " + "; ".join(walls)
+            if walls else f"all {checked} stage(s) below a gate have a repeatable act that pays sober, "
+                          f"at the floor and at the top")
     if card_rows:
         head += f" · {len(card_rows)} card line(s) name a place that pays nothing at that stage"
     return (not walls and not card_rows), head, detail, checked
@@ -16570,7 +16585,7 @@ def _act_pays_every_way_out(model, game, state):
                       f"{n}/{n} act screens pay the same on every way out"), rows
 
 
-# ── G8 · G13 · an act pays inside its own stage (the-arc.md A4 · A4d) ───────────────────────
+# ── G8 · G13 · an act pays no further than the next stage (the-arc.md A4 · A4d) ───────────────────────
 def _g2_setter_floor(holders, t, need, tiers, memo=None, seen=frozenset()):
     """The lowest `t` at which something can set what `need` waits on. An act gated on a ladder
     step (`ryan_step` eq 8) or a flag opens no lower than the exits that set that step or flag:
@@ -16706,10 +16721,13 @@ def _act_pays_inside_its_stage(game, state):
             floor = min(max(need[0].get(t, 0.0), _g2_setter_floor(holders, t, need, tiers, memo))
                         for need in h["needs"])
             floor = max(floor, _dress_code_floor(game, by_id.get(h["canvas"]) or {}, h["holder"], t, dress_memo))
-            above = [f for f in floors if f > floor]
+            above = sorted(f for f in floors if f > floor)
             if not above:
                 continue                      # the top stage: nothing above it to cross into
-            top = min(above) - 1
+            # PLAYTEST 2026-11-09: a cap at her own stage's top is the wall at 19/39/59. The act
+            # pays on across the line and stops at the top of the stage above; the daily caps
+            # (`[engine.daily_caps]`) set the pace, not the cap.
+            top = (above[1] - 1) if len(above) > 1 else _WAY_UP_TOP - 1
             n += 1
             reach = float(cap) if isinstance(cap, (int, float)) and not isinstance(cap, bool) else math.inf
             belows = [need[1].get(t) for need in h["needs"]]
@@ -16722,11 +16740,11 @@ def _act_pays_inside_its_stage(game, state):
                 seen.add(key)
                 capt = "no cap" if reach == math.inf else f"cap {cap:g}" if isinstance(cap, (int, float)) else f"reaches {reach:g}"
                 rows.append(f"{h['canvas']}: \"{str(h['holder'].get('text'))[:40]}\" opens at {t} {floor:g} "
-                            f"and pays +{amt:g} with {capt}, past its stage's top {top:g} — cap it at {top:g}")
+                            f"and pays +{amt:g} with {capt}, past the next stage's top {top:g} — cap it at {top:g}")
     if not n:
         return None, "no repeatable act pays a declared meter below its top stage", []
-    return not rows, (f"{len(rows)} repeatable act(s) pay past the top of the stage they open in" if rows else
-                      f"{n}/{n} repeatable acts are capped inside their stage"), rows
+    return not rows, (f"{len(rows)} repeatable act(s) pay past the top of the stage above the one they open in"
+                      if rows else f"{n}/{n} repeatable acts stop by the next stage's top"), rows
 
 
 # ── A48 · an act pays the meter it uses (the-heat-ladder.md "Two meters, one act") ──────────
@@ -17573,7 +17591,7 @@ def _group2_gates(gate, _N, model, game, state):
     """The group-2 gates, each called by its literal name so `--selfcheck` can see it."""
     gate("a visit pays a meter once", *_visit_pays_once(game, state))
     gate("an act pays on every way out", *_act_pays_every_way_out(model, game, state))
-    gate("an act pays inside its own stage", *_act_pays_inside_its_stage(game, state))
+    gate("an act pays no further than the next stage", *_act_pays_inside_its_stage(game, state))
     gate("an act pays the meter it uses", *_act_pays_its_meter(game, state))
     gate("a need falls where it says", *_need_falls_where_it_says(model, game, state))
     gate("a deduction is gated or priced", *_deduction_is_gated(game, state))
@@ -17594,6 +17612,10 @@ def _group2_gates(gate, _N, model, game, state):
     gate("the skip sets what the opening sets", *_skip_sets_what_opening_sets(game))
     gate("one asset, one block", *_one_asset_one_block(game))
     gate("a refill place rolls an event", *_refill_rolls_event(game, state))
+    # PLAYTEST 2026-11-09 (REPORT.md §1-3); defined above main().
+    gate("a pay can happen", *_pay_can_happen(game, state))
+    gate("the loop is open enough hours", *_routine_open_hours(model, game, state)); gate("a walk-in can happen", *_walkin_can_happen(game))
+    gate("a card line belongs to its person", *_card_line_is_its_own(game, state))
 
 
 # ── the group-2 lints: a LIST each, never a score (a hit needs a human to judge it) ─────────
@@ -18586,6 +18608,300 @@ def _description_pays_what_it_says(game):
                       f"all {n} pay claims in descriptions are paid"), rows
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# PLAYTEST 2026-11-09 (first_term). LO's playtest found a wall one point under every stage
+# line, routines open one weekend afternoon, quest cards that paste one list onto every person,
+# and a world with nobody in it. The study (~/Documents/Great_Games_Study_20260926/
+# playtest_study_20261109/REPORT.md) traced each to a check that tested the easy moment — a
+# stage's floor, one event per place, a card naming a place — instead of the real one. These
+# test the real one. They live here, above main(), so the docs' `gates.py:NNN` cites stay put.
+# ─────────────────────────────────────────────────────────────────────────────
+
+def _pay_can_happen(game, state):
+    """Gate `a pay can happen`: a raise whose way in opens at or above its own cap never pays.
+    first_term had two: the couch's underwear choice (opens at 40, cap 39) and Jake's car_low."""
+    tiers = _g2_tiers(game, state)
+    if not tiers:
+        return None, "no declared ascent tier with stages (board.ascent_tiers)", []
+    holders = _wu_holders(game)
+    by_id = {c.get("id"): c for c in _g2_canvases(game)}
+    rows, n, seen, memo, dress_memo = [], 0, set(), {}, {}
+    for t in tiers:
+        for h, amt, cap in _her_raises(holders, t):
+            if not isinstance(cap, (int, float)) or isinstance(cap, bool) or not h["needs"]:
+                continue
+            n += 1
+            floor = min(max(need[0].get(t, 0.0), _g2_setter_floor(holders, t, need, tiers, memo))
+                        for need in h["needs"])
+            floor = max(floor, _dress_code_floor(game, by_id.get(h["canvas"]) or {}, h["holder"], t, dress_memo))
+            key = (h["canvas"], str(h["holder"].get("text")), t)
+            if floor >= cap and key not in seen:
+                seen.add(key)
+                rows.append(f"{h['canvas']}: \"{str(h['holder'].get('text'))[:40]}\" opens at {t} {floor:g} "
+                            f"and pays +{amt:g} capped at {cap:g} — it can never pay; raise the cap or "
+                            f"open it lower")
+    if not n:
+        return None, "no capped raise of a declared tier", []
+    return not rows, (f"{len(rows)} raise(s) open at or above their own cap and never pay" if rows else
+                      f"{n}/{n} capped raises can pay"), rows
+
+
+# REPORT.md §2: a person's repeatable sex is reachable 18-112 hours a week in the top games
+# (IHOH's Bobby ~18 at the low end), 08:00-24:00. The floor is that low end (was 14 with a margin,
+# raised 2026-11-09 after first_term's reach fixes, DECISIONS 214-218). Ours ran 1-20 before.
+ROUTINE_HOURS_FLOOR = 18
+_ROUTINE_WAKE = (8 * 60, 24 * 60)
+
+
+def _routine_open_hours(model, game, state):
+    """Gate `the loop is open enough hours`. Each ladder in the ledger names its loop
+    (`board.characters[].ladder.loop`: canvas or `canvas.node` ids, the repeatable sex the last
+    step opens — the-arc.md A1), or `"none: <why>"`. Each loop screen must be repeatable and
+    explicit; the hours a week (08:00-24:00) the loop can render, by the person's schedule and the
+    trigger's time, must reach ROUTINE_HOURS_FLOOR, unless a phone invite opens one loop canvas: a
+    call's `accept`, or a trigger that waits on a flag a text thread's reply sets (the-phone.md P9).
+    An invite does not wait on where he is. Meter and step locks are not counted."""
+    chars = [c for c in (((state or {}).get("board") or {}).get("characters") or [])
+             if isinstance(c, dict) and isinstance(c.get("ladder"), dict) and c["ladder"].get("steps")]
+    if not chars:
+        return None, "no declared ladder (board.characters[].ladder)", []
+    by_id = {c.get("id"): c for c in _g2_canvases(game)}
+    where, parents, calls = _tr_where(game), _tr_parents(game), _tr_call_canvases(game)
+    convs = {cv.get("id") for cv in ((game.get("phone") or {}).get("conversations") or []) if cv.get("id")}
+    flag_sets = _tr_flag_ops(game)[0]
+    texted = {f for f, ids in flag_sets.items() if convs & set(ids)}        # flags a reply sets
+    expl = {(cm["id"], b.node) for cm in model for b in cm["beats"] if b.explicit >= 3}
+    rows, detail, n = [], [], 0
+    for ch in chars:
+        npc, lad = ch.get("id"), ch["ladder"]
+        steps = [s for s in lad["steps"] if isinstance(s, dict) and isinstance(s.get("n"), (int, float))]
+        last = max(steps, key=lambda s: s["n"]) if steps else {}
+        loop = lad.get("loop")
+        if isinstance(loop, str) and loop.strip().lower().startswith("none"):
+            detail.append(f"{npc}: no loop — {loop.strip()}")
+            continue
+        if last.get("canvas") not in by_id and not loop:
+            detail.append(f"{npc}: the last step ({last.get('canvas')}) is not in this build — not judged")
+            continue
+        n += 1
+        if not loop:
+            rows.append(f"{npc}: the ladder names no loop — declare `ladder.loop` (the repeatable sex its "
+                        f"last step opens) or `\"none: <why>\"`")
+            continue
+        slots, bad, invite = set(), [], False
+        for ref in ([loop] if isinstance(loop, str) else loop):
+            cid, _dot, nid = str(ref).partition(".")
+            c = by_id.get(cid)
+            if not c:
+                bad.append(f"{ref} is not a canvas")
+                continue
+            if not _rep_of(c.get("trigger")):
+                bad.append(f"{ref} is not repeatable")
+                continue
+            nids = [nid] if nid else [x.get("id") for x in c.get("nodes") or []]
+            if not any((cid, x) in expl for x in nids):
+                bad.append(f"{ref} has no explicit beat")
+                continue
+            invite = invite or cid in calls or any(
+                _cond_parts(it)[0] == "flag" and _cond_parts(it)[1] in texted
+                and (it.get("operator") or it.get("op")) in ("is_true", None)
+                for it in _conditions_of(c.get("trigger") or {}))
+            lid, sl, _pinned = _tr_canvas_window(game, where, c, by_id, parents)
+            nt = _tr_node_times(c, sl)[0]   # a time-gated button narrows the act inside its hub (2026-11-09)
+            sl = set().union(*[nt.get(x, set()) for x in nids if (cid, x) in expl]) if nt else sl
+            slots |= {s for s in sl if _ROUTINE_WAKE[0] <= s[1] < _ROUTINE_WAKE[1]}
+        hours = round(len(slots) * _TR_STEP / 60, 1)
+        days = sorted({d for d, _m in slots})
+        detail.append(f"{npc}: {hours:g} h a week on {len(days)} day(s)" + (" · a phone invite" if invite else ""))
+        for b in bad:
+            rows.append(f"{npc}: loop {b}")
+        if hours < ROUTINE_HOURS_FLOOR and not invite:
+            rows.append(f"{npc}: the loop can be reached {hours:g} h a week (08:00-24:00), under "
+                        f"{ROUTINE_HOURS_FLOOR} — give it another place or window, or a phone invite "
+                        f"(the-phone.md P9; engine.md §19 allows one repeatable per person, place and window)")
+    if not n:
+        return None, "no ladder with a loop in this build", detail
+    return not rows, (f"{len(rows)} loop problem(s) across {n} ladder(s)" if rows else
+                      f"{n}/{n} loops are open {ROUTINE_HOURS_FLOOR}+ h a week or by invite"), rows + detail
+
+
+def _card_people(game):
+    """({npc id: (short, name regex, name)}, {npc id: flags only set after meeting them}) for each
+    person with a `<short>_met` flag, read as the gate `no one is named before they're met` reads
+    them: a flag every setter of which meets the person, or waits on one of their own flags, implies
+    the meeting."""
+    sets, _clears, _tick = _tr_flag_ops(game)
+    by_id = {c.get("id"): c for c in game.get("canvases") or [] if c.get("id")}
+    read = set(_pr_collect(game, lambda d: d.get("flag_key") if isinstance(d.get("flag_key"), str) else None, set()))
+    out = {}
+    for p in game.get("npcs") or []:
+        short = str(p.get("id", "")).replace("npc_", "", 1)
+        if f"{short}_met" in sets or f"{short}_met" in read:
+            name = str(p.get("name") or "")
+            words = re.sub(r"^(?:dr|mr|mrs|ms|miss|prof|the)\.?\s+", "", name, flags=re.I)
+            if len(words) >= 3:
+                out[p["id"]] = (short, re.compile(r"\b%s\b" % re.escape(words)), name)
+    implied = {}
+    for pid, (short, _rx, _name) in out.items():
+        have = {f"{short}_met"}
+        changed = True
+        while changed:                       # a chain: met, then a flag only set after it, then ...
+            changed = False
+            for f, cids in sets.items():
+                if f in have or not cids:
+                    continue
+                if all(cid in sets.get(f"{short}_met", ()) or any(
+                        str(_cond_parts(it)[1] or "").startswith(short + "_")
+                        or (it.get("npc_id") == pid and it.get("operator") == "is_present")
+                        or (_cond_parts(it)[0] == "flag" and _cond_parts(it)[1] in have
+                            and it.get("operator") in ("is_true", None))
+                        for it in _conditions_of((by_id.get(cid) or {}).get("trigger") or {}))
+                       for cid in set(cids)):
+                    have.add(f)
+                    changed = True
+        implied[pid] = have
+    return out, implied
+
+
+def _card_line_is_its_own(game, state):
+    """Gate `a card line belongs to its person` (REPORT.md §3). A goal line pasted word for word
+    onto three or more people's cards is a per-stage list, not that person's next step; a goal
+    line that names someone else fails unless the card waits for meeting them (or for a flag only
+    set after it), or the goal is the meeting itself. The share
+    of goal lines that are her own meter target is printed."""
+    cards = [c for c in game.get("quest_cards") or [] if isinstance(c, dict)]
+    goals = [(c, g) for c in cards for g in c.get("goals") or [] if isinstance(g, dict)]
+    if not goals:
+        return None, "no quest card has a goal", []
+    tiers = set(_g2_tiers(game, state) or [])
+    people, implied = _card_people(game)
+    owners = collections.defaultdict(set)
+    for c, g in goals:
+        text = str(g.get("label") or "").split(":", 1)[-1].strip()
+        if len(text) >= 20:
+            owners[text].add(c.get("npc_id") or "(no person)")
+    rows = [f"pasted onto {len(o)} people's cards ({', '.join(sorted(o)[:5])}): \"{t[:90]}\" — write each "
+            f"person's own next step" for t, o in sorted(owners.items()) if len(o) >= 3]
+    seen = set()
+    for c in cards:
+        met = {str(w.get("flag") or w.get("flag_key")) for w in c.get("when") or []
+               if isinstance(w, dict) and (w.get("op") or w.get("operator") or "is_true") == "is_true"}
+        # Goal lines only: a card's tip may point her to someone new ("find the machinist"). A
+        # goal that IS the meeting (`<x>_met`) names who to meet.
+        goal_flags = {str(g.get("flag") or g.get("flag_key")) for g in c.get("goals") or [] if isinstance(g, dict)}
+        texts = [str(g.get("label") or "") for g in c.get("goals") or [] if isinstance(g, dict)]
+        for pid, (short, rx, name) in people.items():
+            if pid == c.get("npc_id") or (met | goal_flags) & implied[pid]:
+                continue
+            hit = next((t for t in texts if rx.search(t)), None)
+            if hit and (c.get("npc_id"), pid) not in seen:
+                seen.add((c.get("npc_id"), pid))
+                rows.append(f"{c.get('npc_id') or 'a tier card'}: names {name} with no `{short}_met` in its "
+                            f"`when` — \"{hit[:80]}\"")
+    meter = sum(1 for _c, g in goals if (g.get("subject") or "player") == "player"
+                and (g.get("trait") or g.get("trait_key")) in tiers)
+    detail = [f"{meter} of {len(goals)} goal lines are her own meter target ({100 * meter // len(goals)}%) — "
+              f"the top games print her meter beside a step's own act, if at all (REPORT.md §3, §5)"]
+    return not rows, (f"{len(rows)} card line(s) are not their person's own" if rows else
+                      f"{len(goals)} goal lines, none pasted or naming someone unmet"), rows + detail
+
+
+# The study of 2026-11-09 (`playtest_study_20261109/7_routine_time.md`): the top games keep the hour out of a
+# routine's act. The room screen before it says what time it is and who is home (In Her Own Hands' Shaun: 61
+# routine passages, 0 time words); an act that names its hour is bound to that window (untangled-mind's
+# sleeping scene). first_term's loops named theirs ("dark", "half asleep", "Thursday", "after ten"), so their
+# windows could not widen.
+_LOOP_HOUR = re.compile(r"\b(?:tonight|midnight|night|nights|morning|mornings|evening|afternoon|dark|asleep|"
+                        r"after (?:ten|eleven|midnight)|monday|tuesday|wednesday|thursday|friday|saturday|sunday|"
+                        r"weekend|everyone'?s (?:asleep|in bed)|house is (?:quiet|asleep))\b", re.I)
+
+
+def lint_loop_names_its_hour(model, game, state):
+    """A LIST, never a score. The explicit beats of each declared loop (`board.characters[].ladder.loop`) that
+    name an hour, a day or the dark. Each such word ties the loop to one window: move it to the door, the screen
+    before the act, or the after-talk, or keep the act bound and add a second act at another window."""
+    chars = [c for c in (((state or {}).get("board") or {}).get("characters") or [])
+             if isinstance(c, dict) and isinstance(c.get("ladder"), dict) and isinstance(c["ladder"].get("loop"), list)]
+    if not chars:
+        return "no declared loop", []
+    by_canvas = {cm["id"]: cm for cm in model}
+    rows, n = [], 0
+    for ch in chars:
+        for ref in ch["ladder"]["loop"]:
+            cid, _dot, nid = str(ref).partition(".")
+            for b in (by_canvas.get(cid) or {}).get("beats") or []:
+                if b.explicit < 3 or (nid and b.node != nid):
+                    continue
+                n += 1
+                text = " ".join(t for t in (b.text if isinstance(b.text, list) else [b.text]) if isinstance(t, str))
+                words = sorted({m.group(0).lower() for m in _LOOP_HOUR.finditer(text)})
+                if words:
+                    rows.append(f"{ch.get('id')} · {cid}#{b.node}: names {', '.join(words[:5])} — move it to the door "
+                                f"or the after-talk, or keep the act bound and add a second act at another window")
+    return (f"{len(rows)} of {n} explicit loop beat(s) name an hour, a day or the dark" if n else
+            "no explicit beat in a declared loop"), rows
+
+
+# Study 2026-11-09 (`playtest_study_20261109/10_pace.md`, checked in 11_verify2.md): Course of Temptation lets about
+# 3 on-level acts a day pay at every level and no level takes more than about 11 days; Cupid's Way's slowest stage
+# is roughly 9-18. first_term's 1-a-day bands made 20-day stages.
+PACE_SLOW_DAYS = 14
+
+
+def lint_climb_pace(game, state):
+    """A LIST, never a score. Days per stage of each declared tier at its daily cap (`[engine.daily_caps]`), the
+    floor a player who does everything each day can reach (one-time steps that set the meter are not counted)."""
+    tiers = _g2_tiers(game, state) or []
+    caps = ((game.get("engine") or {}).get("daily_caps")) or {}
+    rows, parts = [], []
+    for t in tiers:
+        bands = sorted((b for b in (caps.get(t) or {}).get("bands") or [] if isinstance(b, dict)),
+                       key=lambda b: b.get("below", 0))
+        stages = [f for f, _n in _stage_bounds(game, t)]
+        if not bands or not stages:
+            continue
+        days = []
+        for i, lo in enumerate(stages):
+            hi = stages[i + 1] if i + 1 < len(stages) else _WAY_UP_TOP
+            band = next((b for b in bands if lo < b.get("below", 0)), None)
+            per = float((band or {}).get("cap") or 0)
+            d = math.inf if per <= 0 else round((hi - lo) / per, 1)
+            days.append(d)
+            if d > PACE_SLOW_DAYS:
+                rows.append(f"{t} {lo}-{hi - 1}: {d:g} days at {per:g} a day — the top games stay under about "
+                            f"{PACE_SLOW_DAYS} (CoT's longest level is about 11 days)")
+        parts.append(f"{t} " + " / ".join("never" if d == math.inf else f"{d:g}" for d in days))
+    if not parts:
+        return "no daily cap on a declared tier", []
+    return "days per stage at the daily cap: " + " · ".join(parts), rows
+
+
+def lint_world_life(model, game):
+    """A LIST, never a score (REPORT.md §4; a floor waits for a second game's numbers).
+    (1) the share of events and walk-ins with no body in them — CoT's are about 70% everyday life;
+    (2) the share of waking (08:00-24:00) open place-hours where a named person can be."""
+    targets = {s.get("target_canvas_id") for c in game.get("canvases") or []
+               for s in (c.get("trigger") or {}).get("substitutions") or [] if isinstance(s, dict)}
+    events = [cm for cm in model if cm.get("random") or cm["id"] in targets]
+    life = [cm["id"] for cm in events if all(b.explicit == 0 for b in cm["beats"])]
+    where = _tr_where(game)
+    rows, open_n, peopled = [], 0, 0
+    for loc in game.get("locations") or []:
+        lid = loc.get("id")
+        slots = {s for s in _tr_open_slots(game, lid) if _ROUTINE_WAKE[0] <= s[1] < _ROUTINE_WAKE[1]}
+        if not slots:
+            continue
+        here = {s for s in slots if any(lid in _tr_places(tbl, s) for tbl in where.values())}
+        open_n += len(slots)
+        peopled += len(here)
+        if not here:
+            rows.append(f"{lid}: nobody named can be here in any waking hour")
+    ev = (f"{len(life)} of {len(events)} events are everyday life, with no body in them"
+          if events else "no events")
+    pr = f"a named person can be in {100 * peopled // open_n}% of waking place-hours" if open_n else "no open place"
+    return f"{ev} · {pr}", rows
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -18698,6 +19014,9 @@ def main():
     tog_summary, tog_lints = lint_toggles_declared(game, state)
     joint_summary, joint_lints = lint_joints(game)
     groups_summary, groups_lints = lint_adjacent_groups(game)
+    life_summary, life_lints = lint_world_life(model, game); life_lints = life_lints + lint_random_depth(game)   # PLAYTEST 2026-11-09; 2026-11-10 depth
+    hour_summary, hour_lints = lint_loop_names_its_hour(model, game, state)   # study 2026-11-09 (7_routine_time)
+    pace_summary, pace_lints = lint_climb_pace(game, state)                    # study 2026-11-09 (10_pace)
     (pron_rows, pron_note), event_rows, (vl_rows, vl_seen) = lint_readable(game)
     # The slug, for the one lint that reads the ARTEFACT rather than the source.
     # A bare `<slug>` argument is the slug; a `.toml` path is two directories under it.
@@ -19372,6 +19691,29 @@ def main():
               " group is the <<else>> and first match wins — the-want.md, the placement trap)")
 
     print(f"  {'─'*72}")
+    print(f"  lint · the climb's pace — {pace_summary}")
+    for h in _rows(pace_lints, 12):
+        print(f"          · {h}")
+    print("          (a LIST, never a score. Keep about 2-3 paying acts a day at every stage; the-meters.md,"
+          " \"Pace it with a daily cap\")")
+    print(f"  {'─'*72}")
+    print(f"  lint · a loop names its hour — {hour_summary}")
+    for h in _rows(hour_lints, 12):
+        print(f"          · {h}")
+    if len(hour_lints) > 12:
+        print(f"          · … and {len(hour_lints) - 12} more")
+    print("          (a LIST, never a score. The top games put the hour on the door and keep it out of the act;"
+          " the-arc.md A1, the-clock.md C2)")
+    print(f"  {'─'*72}")
+    print(f"  lint · the world around her — {life_summary}")
+    for h in _rows(life_lints, 12):
+        print(f"          · {h}")
+    if len(life_lints) > 12:
+        print(f"          · … and {len(life_lints) - 12} more")
+    print("          (a LIST, never a score. Everyday-life events and people in the places make the world;"
+          " the-surfaces.md, REPORT.md §4)")
+
+    print(f"  {'─'*72}")
     print(f"  lint · a pronoun with nobody to point at — "
           f"{pron_note or f'{len(pron_rows)} screen(s) or place(s)'}")
     for h in _rows(pron_rows, 10):
@@ -19543,6 +19885,11 @@ def main():
                                                "findings": joint_lints},
                                     "adjacent_groups": {"summary": groups_summary,
                                                         "findings": groups_lints},
+                                    "world_life": {"summary": life_summary,
+                                                   "findings": life_lints},
+                                    "climb_pace": {"summary": pace_summary, "findings": pace_lints},
+                                    "loop_names_its_hour": {"summary": hour_summary,
+                                                            "findings": hour_lints},
                                     "pronoun_nobody": {"note": pron_note,
                                                        "findings": pron_rows},
                                     "past_event_not_given": {"findings": event_rows},
@@ -19583,6 +19930,85 @@ def main():
     # Parked and too-few are in `denom` and never passes, so either keeps this non-zero. A
     # DECIDED gate is LO's signed call and does not; `--ship` is where `later release` bites.
     sys.exit(0 if denom and npass + ndec == denom else 1)
+
+
+# ── first_term's reach fixes (2026-11-09, DECISIONS 214-218) ──────────────────────────────────
+
+def _step_windows(st, frm, to):
+    """[(days, from, to)] a ladder step declares: its `when` and, if any, its `when_also`, each
+    with its own days and hours. `ladders move forward` used to check the second window's days
+    against the first window's hours, so a step with a late window on another day read as
+    uncovered (first_term Ryan steps 3 and 7, N37)."""
+    out = [([_ladder_day(d) for d in ((st.get("when") or {}).get("days") or [])], frm, to)]
+    also = st.get("when_also") or {}
+    if also.get("days") and also.get("from") and also.get("to"):
+        out.append(([_ladder_day(d) for d in also["days"]], also["from"], also["to"]))
+    return [(d, a, b) for d, a, b in out if d and None not in d]
+
+
+def _walkin_can_happen(game):
+    """Gate `a walk-in can happen`. A substitution rule that names a person (`npc_at_location`
+    with an `npc_id`) fires only in the slots where its host canvas can render, its own time and
+    weekday items hold, and that person's rows put them where the rule says (as `_tr_narrow`
+    reads them). A rule with no such slot can never fire: first_term's Laura channel-5 walk-in
+    read her in the kitchen until 21:58 after her kitchen row was cut to 21:30 (DECISIONS 216,
+    218), and nothing said so. Moving a person must not strand the walk-ins that read them."""
+    where, parents = _tr_where(game), _tr_parents(game)
+    by_id = {c.get("id"): c for c in game.get("canvases") or [] if isinstance(c, dict) and c.get("id")}
+    rows, n = [], 0
+    for host in by_id.values():
+        if _is_dev(host):
+            continue
+        rules = [r for r in ((host.get("trigger") or {}).get("substitutions") or []) if isinstance(r, dict)]
+        rules = [r for r in rules if any(it.get("type") == "npc_at_location" and it.get("npc_id") in where
+                                         and it.get("operator", "is_present") == "is_present"
+                                         for it in _conditions_of(r))]
+        if not rules:
+            continue
+        _lid, hslots, _pin = _tr_canvas_window(game, where, host, by_id, parents)
+        for r in rules:
+            n += 1
+            tgt = by_id.get(r.get("target_canvas_id")) or {}
+            items = list(_conditions_of(r)) + list(_conditions_of(tgt.get("trigger") or {}))
+            if not _tr_narrow(set(hslots), items, where, {}):
+                who = sorted({it.get("npc_id") for it in _conditions_of(r) if it.get("type") == "npc_at_location"
+                              and it.get("operator", "is_present") == "is_present" and it.get("npc_id")})
+                rows.append(f"{host.get('id')} -> {r.get('target_canvas_id')}: no hour where the host is open, the "
+                            f"rule's time holds and {', '.join(who)} is where it says — it can never fire; "
+                            f"move its window to their row")
+    if not n:
+        return None, "no walk-in rule names a person", []
+    return not rows, (f"{len(rows)} walk-in rule(s) can never fire" if rows else
+                      f"{n}/{n} walk-in rules that name a person can fire"), rows
+
+
+def lint_random_depth(game):
+    """Part of `lint · the world around her` (2026-11-10, DECISIONS 221; study 13/14_random_scenes). A LIST,
+    never a score. For each place with random-mode scenes: how many can fire at once in the waking hours
+    they are live, by their trigger hours and the person they are bound to (flags, brakes and her stage are
+    not read, so it is the most that could qualify). Course of Temptation draws from 53-175 per place; a
+    place where only one can fire repeats the same scene every time it fires."""
+    where, parents = _tr_where(game), _tr_parents(game)
+    by_id = {c.get("id"): c for c in game.get("canvases") or [] if isinstance(c, dict) and c.get("id")}
+    per = collections.defaultdict(lambda: collections.Counter())
+    for c in by_id.values():
+        trig = c.get("trigger") or {}
+        if trig.get("trigger_mode") != "random" or _is_dev(c):
+            continue
+        lid, slots, _pin = _tr_canvas_window(game, where, c, by_id, parents)
+        for sl in slots:
+            if _ROUTINE_WAKE[0] <= sl[1] < _ROUTINE_WAKE[1]:
+                per[lid][sl] += 1
+    rows = []
+    for lid in sorted(per, key=str):
+        counts = sorted(per[lid].values())
+        if not counts:
+            continue
+        one = sum(1 for n in counts if n == 1) / len(counts)
+        rows.append(f"{lid}: random scenes live {len(counts) * _TR_STEP / 60:g} h a week; at once "
+                    f"{counts[0]}-{counts[-1]} (median {counts[len(counts) // 2]}); only one can fire in "
+                    f"{one:.0%} of those hours")
+    return rows
 
 
 if __name__ == "__main__":

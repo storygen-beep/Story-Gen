@@ -63,6 +63,36 @@ turns the act into something she can simply do · doing *that* repeatedly opens 
 The repeatable surface is the **reward for finishing the arc**, not the starting position.
 After the sex step, the arc's phone thread becomes the repeatable invite (`the-phone.md` P9). Checked: gate *the last step opens a repeatable*; lint *a set flag is read*.
 
+**The loop is open most days, not one slot a week.** The ledger names it: `board.characters[].ladder.loop`
+lists the canvas or `canvas.node` ids of the repeatable sex the last step opens, or reads `"none: <why>"`.
+The loop renders at least 18 hours a week between 08:00 and 24:00 (the top games' low end), by the person's schedule and the
+trigger's hours, and inside a hub only the hours its explicit screens can be reached count (a button gated to
+16:30-16:45 makes a quarter-hour act, whatever the hub's row says), or a phone invite opens it wherever he is (`the-phone.md` P9). The top games run 18–112
+hours a week, and most add an invite: Course of Temptation's booty call, In Her Own Hands' call him
+whenever she wants. Their limit is once a day per person, never one weekly slot. first_term's Ryan
+couch ran Sat/Sun 14:00–18:00, 8 hours. The engine allows one repeatable per person, per place, per
+window (`engine.md` §19), so reach comes from more places and windows (his room in the evening, the
+kitchen after dinner) or an invite, not from a bigger node (REPORT.md §2, playtest 2026-11-09).
+Checked: gate *the loop is open enough hours*.
+
+**Moving a person moves everything bound to the place they leave.** first_term's reach pass (DECISIONS
+214-218) moved Ryan to the couch on weekday evenings, and it took the hours from his room's acts and two
+story steps and shut Mark's TV walk-in; cutting Laura's kitchen evening to 21:30 killed a walk-in that read
+her there until 21:58. Before a row moves, list every act, step and walk-in that reads that person at that
+place and hour, and give each its hours back or move it with them. Checked: gates *ladders move forward*
+(each step window on its own days, `when_also` included), *a walk-in can happen*, *the loop is open enough hours*.
+
+**The hour goes on the door, not in the act.** A loop is two parts. The **door** is the screen before the act:
+where he is, what time it is and who is home ("It's late, the house is quiet"; "Saturday morning, Mom's
+downstairs"). It can have one short version per window. The **act** is the sex, written with no hour, day or
+dark in it, so the same act is true at every window it opens in. The after-talk may branch on the hour ("stay the
+night" only late). In Her Own Hands' Shaun has 61 routine passages with 0 time words; his room screen picks
+dressing, awake, asleep or not home by the hour, and sex opens only from awake. No top game branches on the hour
+inside the act itself. An act that must name its hour (a scene with him half asleep in the dark) is bound to that
+window, like untangled-mind's sleeping scene. Reach then comes from a second act at another window, which is how
+Cupid's Way does it, not from widening the first act (`playtest_study_20261109/7_routine_time.md`). Listed by lint
+*a loop names its hour*.
+
 The same split governs the prose (added 2026-09-24): the full loud version of a moment — the
 reveal, the conversation, the hook — belongs on the one-time step, and the repeatable it converts
 into stays short but still speaks. `register.md` L3.
@@ -150,11 +180,12 @@ is stay silent about which kind it is.**
 
 ---
 
-## A4 · The step raises the number that opens the step after it — and only while she is under it
+## A4 · The step raises the number that opens the step after it — and carries her over the line
 
-**The shape:** the scene grants the meter it is gated on, capped at the next threshold, so
-repeating a scene at the bottom walks the player up it. The climb is fed by the content it
-opens, not only bought elsewhere.
+**The shape:** the scene grants the meter it is gated on, so repeating a scene at the bottom
+walks the player up it and over the next line. Its cap is the top of the stage *above* the one it
+opens in, never its own stage's top. The daily cap per band (`engine.md` §53) sets the pace. The
+climb is fed by the content it opens, not only bought elsewhere.
 
 `the-meters.md` M1–M5 owns the other half of this — every meter a gate reads carries a brake on
 the rungs that raise it. **This is the same seam from the other side, and the two must be read
@@ -172,7 +203,10 @@ together or the result is either a free elevator or a wall.**
 > Two refinements have one example, in one game (`family-ties`, numbers only), on top of the +1
 > unit (`the-meters.md` W1b-i): the grant is scaled by where she already is (+5 below 30, +10
 > above), and the raise stops at the next threshold, so she cannot climb past a rung by repeating
-> the one below it.
+> the one below it. ⚠️ **Not this skill's rule since 2026-11-09.** Stopping at her own threshold is
+> the wall LO's first_term playtest hit (A4d). The pass-list games keep paying across the line: Cupid's
+> Way changes stage the morning after the number crosses (`cupids-way.txt:19983-20010`), and Course
+> of Temptation shrinks the pay instead of stopping it (`cot_34_database_skill.js:139-140`).
 
 Two exits per page is the whole navigation of a five-page scene. Compare the act-menu figures
 in `the-surfaces.md` R3b — field median 2 options, span 1. **The same narrowness, applied down
@@ -241,12 +275,21 @@ something that happens *to* her.
   to — a second look, staying a moment longer — and that button pays. The way out ("Run", "Close the
   door") pays nothing and is always there. The event's raise goes to **him**: it moves his meter and sets
   a flag, and the way out leaves that standing (`the-heat-ladder.md` H5, LO 2026-11-01).
-- **Each act pays only inside its own stage.** +1 for an everyday act, +3 for a big one-time step, and
-  the act's `cap` sits at the top of its stage (19, 39, 59 on a 20-point ladder), so repeating an easy
-  act cannot carry her past it. This is A4's "only while she is under it", stated for the stage.
+- **Each act pays across its own stage's line, and stops at the top of the stage above.** +1 for an
+  everyday act, +3 for a big one-time step. An act that opens at 0 caps at 39, one that opens at 20
+  caps at 59, and one at 40 caps at 79, on a 20-point ladder. The daily cap per band (`engine.md` §53)
+  keeps an easy act from racing her up; the cap only keeps it from carrying her two stages. Checked:
+  gate *an act pays no further than the next stage*.
+- **Every stage's top has an act that still pays, sober.** At 19, 39 and 59 at least one repeatable
+  act she can reach without a drink still pays. Checked: gate *every stage has a way up*, which tests
+  the stage's floor and its top.
+- **A pay can happen.** No act opens at or above its own cap: one that needs 40 and caps at 39 never
+  pays. Count the way in, the steps and flags it waits on, and the dress code. Checked: gate *a pay
+  can happen*.
 - **An act whose way in is a dress code sits at the stage the dress code needs** (LO, 2026-11-04, G76), and pays
-  up to that stage's top. A street walk in a garment the street's `clothing_rules` let out at 20 can cap at 39; one
-  that needs 40 can cap at 59. The gate reads the rules for the garment state the canvas requires, one meter at a time.
+  up to the top of the stage above it. A street walk in a garment the street's `clothing_rules` let out at 20 can
+  cap at 59; one that needs 40 can cap at 79. The gate reads the rules for the garment state the canvas requires,
+  one meter at a time.
 - **Every stage below the highest gate carries repeatable acts that pay, sober.** A temporary boost (a
   drink's `trait_offsets`) can let her try the next stage early, and that act's raise is kept, but it is
   not the way up: a stage whose only paying acts need the boost is a wall with a hidden door.
@@ -254,7 +297,14 @@ something that happens *to* her.
   (`{ type = "modifier", modifier_key = "drinks_boost", operator = "is_inactive" }`), so one drink closes it for the
   night, only when its quest card says so in words: *"not while tipsy"*. A sober-only step whose card is silent
   about it is a lock the player cannot see.
-- **The Quests page names only sources that pay at the stage it is shown in.** Checked: gates *a visit pays a meter once*, *an act pays on every way out*, *an act pays inside its own stage* and *an accident pays him*; *every stage has a way up* fails a card line that names a place where nothing pays at its stage.
+- **The Quests page names only sources that pay at the stage it is shown in.** Checked: gates *a visit pays a meter once*, *an act pays on every way out*, *an act pays no further than the next stage* and *an accident pays him*; *every stage has a way up* fails a card line that names a place where nothing pays at its stage.
+
+⚠️ **Measured, first_term, 2026-11-09 (LO's playtest).** Every repeatable act was capped at its own
+stage's top, so at Corruption 19, 39 and 59 no sober repeatable act paid. Exhibitionism had 4 at 19,
+1 at 39 and 0 at 59. The only way over each line was a one-time step or a drink, and the player stood
+at 39 with nothing to do. The old gate tested only each stage's floor, where everything paid. Ten more
+acts could never pay at all, because each opened at or above its own cap
+(`~/Documents/Great_Games_Study_20260926/playtest_study_20261109/REPORT.md` §1).
 
 ⚠️ **Measured, first_term, 2026-10-13.** All 36 Corruption raises needed Corruption 20 or 40. The
 signed park sheet paid "stage 1: none" for walking into the couple, and the home accidents raised only

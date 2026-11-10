@@ -652,7 +652,7 @@ out.append({
 # Moved here from 3_activities' zoe_borrow_dress: an item with a person is a choice in her hub, and her face is here.
 out.append({
     "id": "hub_zoe_bedroom", "name": "Zoe, going to bed",
-    "description": "Zoe in her bedroom on weeknights, going to bed: her wardrobe, and the dress she lends (zoe_party_dress).",
+    "description": "Zoe in her bedroom on weeknights and Sunday nights, going to bed: her wardrobe, and the dress she lends (zoe_party_dress).",
     "trigger": {"location": "zoe_bedroom", "npc": Z, "requires_npc": Z, "is_repeatable": True, "priority": 6, "is_active": True,
                 "conditions": cond(flag("zoe_met"))},
     "nodes": [
@@ -855,12 +855,12 @@ cards.insert(cards.index(_c1) + 1, {"npc_id": Z, "priority": 10,
     "when": [{"type": "trait", "subject": "player", "trait": "zoe_step", "op": "eq", "value": 0},
              {"flag": "zoe_kiss_refused", "op": "is_true"}, {"flag": "zoe_met", "op": "is_true"}],   # pass 3 C38: every card after the meeting carries it
     "goals": [{"type": "trait", "subject": "player", "trait": "corruption", "op": "gte", "value": 20,
-               "label": "Reach Curious (Corruption 20): " + STAGE_WAY[("corruption", 20)]}],   # pass 3 J36: the feeder, not a bare number
+               "label": "Not yet: Zoe's kiss dare waits until you're more curious (your Corruption)"}],   # study 2026-11-09: the need last, in words
     "ready_canvas": "zoe_01b_kiss_again"})
 _c2 = next(c for c in cards if c.get("ready_canvas") == "zoe_02_bra_through_the_sleeve")
-_c2["tip"] += "; Daring, or Curious when Jake's teammate is at the party"
+_c2["tip"] += "; Daring, or Curious when a guy from Figure drawing is at the party"   # playtest 2026-11-09: no unmet name
 _c2.setdefault("goals", []).append({"type": "trait", "subject": "player", "trait": "exhibitionism", "op": "gte", "value": 20,
-    "label": "Reach Daring (Exhibitionism 20), or Curious (Corruption 20) with Jake's teammate at the party"})
+    "label": "Reach Daring (Exhibitionism 20), or Curious (Corruption 20) with a guy from Figure drawing at the party"})
 
 # heat proposal A2 (the canteen) and A5 (her bedroom), DECISIONS 147 chunk 2: screens inside her hubs (heat_a.py)
 import heat_a
@@ -878,6 +878,8 @@ for _c in out:
 
 # pass 4 E95: the one-time sex step takes energy and hygiene like the repeatable acts (board.needs)
 sex_takes_needs(out, "zoe_05_no_dare", "down", "Don't stop.")
+import everyday   # DECISIONS 222: the day after an everyday scene, the hub remembers it
+everyday.hub_read(out)
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards + story)
 open(__import__("sys").argv[1], "w").write(text)
 print("zoe:", len(out), "canvases,", len(cards) + len(story), "cards")

@@ -50,7 +50,8 @@ A ceiling, never a floor. LO took these, 2026-10-08.
 | `quad` | Mon, Wed, Fri | 08:30 | 11:45 | with the team |
 | `zoe_apartment` | Fri | 19:00 | 00:00 | the Friday party, till midnight |
 | `canteen` | Mon–Fri | 11:45 | 13:00 | lunch |
-| `campus_gym` | Tue, Thu | 15:00 | 17:00 | team training · only when `jake_number` (met at Zoe's) |
+| `campus_gym` | Tue, Thu | 15:00 | 17:00 | team training (the 17:30 showers half-hour reverted, DECISIONS 220) · only when `jake_number` (met at Zoe's) |
+| `home_front_door` | Mon, Tue, Thu, Sun | 22:00 | 00:00 | the booty call: only when `jake_coming` (her "door's unlocked" to his "you up?" text, 3 hours), after his step 4 (reach audit 2026-11-09, DECISIONS 217) |
 | `home_front_door` | Sat | 19:00 | 21:00 | picks her up · only when `jake_date_booked` (question 73) |
 | `lecture_hall` | Tue, Thu | 08:30 | 10:00 | figure drawing · only when `jake_number` |
 | `lecture_hall` | Wed | 13:00 | 14:30 | figure drawing · only when `jake_number` |

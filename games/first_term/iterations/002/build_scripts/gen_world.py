@@ -101,6 +101,8 @@ zoe_refused        = 0   # her nos to Zoe (DECISIONS 124): a no moves this, neve
 release_2_written  = 0   # never raised: the "(Next release)" locks read it (DECISIONS 124)
 hale_claire_roll   = 0   # 1-4: on 1, Claire is early (hale_thursday_session)
 jake_catch_roll    = 0   # 1-8: on 1 or 2, a near-catch (jake_date_end)
+ev_ryan_bet_n      = 0   # the bet on his game: the rung she has reached (everyday.py, DECISIONS 221)
+ev_mark_tv_n       = 0   # his late TV: the rung she has reached (everyday.py, DECISIONS 221)
 # Q5 (LO, 2026-11-04): a no-show or an ignored invite empties the person's patience; one back each midnight, and
 # their invites wait until it is full again (phone.py ZOE_WAIT, JAKE_WAIT)
 zoe_patience       = 6

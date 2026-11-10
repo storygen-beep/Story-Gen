@@ -46,6 +46,8 @@ A ceiling, never a floor. LO took these, 2026-10-08.
 | `lecture_hall` | Mon, Wed, Fri | 08:30 | 10:00 | teaches Psychology |
 | `lecture_hall` | Thu | 13:00 | 14:30 | teaches Psychology |
 | `hale_office` | Thu | 17:00 | 19:30 | Thursday office hours |
+| `hale_office` | Mon, Tue, Wed, Fri | 15:00 | 19:00 | office hours; no wife pickup (LO, 2026-11-09, "Thursday + office hours"; DECISIONS 215) |
+| `hale_office` | Mon, Tue, Wed, Fri | 10:00 | 12:00 | a booked hour: only when `hale_booked` (her "I'll be there." to his "Tomorrow, ten" email the evening before; 18 h) (LO, 2026-11-10; DECISIONS 219) |
 
 ## Ladder — one guidance card per step
 

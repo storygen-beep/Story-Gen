@@ -64,6 +64,84 @@ flag_keys = [
   "dress_code_today",
   "dress_warned",
   "eat_today",
+  "ev_jake_knee",
+  "ev_jake_knee_today",
+  "ev_jake_mum",
+  "ev_jake_mum_today",
+  "ev_jake_photo",
+  "ev_jake_photo_today",
+  "ev_laura_did_you_eat",
+  "ev_laura_did_you_eat_today",
+  "ev_laura_list",
+  "ev_laura_list_today",
+  "ev_laura_phone_call",
+  "ev_laura_phone_call_today",
+  "ev_laura_shoulders",
+  "ev_laura_shoulders_today",
+  "ev_mark_bills",
+  "ev_mark_bills_today",
+  "ev_mark_chilli",
+  "ev_mark_chilli_today",
+  "ev_mark_creeper",
+  "ev_mark_creeper_today",
+  "ev_mark_radio",
+  "ev_mark_radio_today",
+  "ev_mark_tv_1",
+  "ev_mark_tv_1_today",
+  "ev_mark_tv_1_yes",
+  "ev_mark_tv_2",
+  "ev_mark_tv_2_today",
+  "ev_mark_tv_2_yes",
+  "ev_mark_tv_3",
+  "ev_mark_tv_3_today",
+  "ev_mark_tv_3_yes",
+  "ev_mark_tv_4",
+  "ev_mark_tv_4_today",
+  "ev_mark_tv_4_yes",
+  "ev_mark_tv_today",
+  "ev_nadia_essay",
+  "ev_nadia_essay_today",
+  "ev_nadia_notes",
+  "ev_nadia_notes_today",
+  "ev_nadia_watcher",
+  "ev_nadia_watcher_today",
+  "ev_ryan_bet_1",
+  "ev_ryan_bet_1_today",
+  "ev_ryan_bet_1_yes",
+  "ev_ryan_bet_2",
+  "ev_ryan_bet_2_today",
+  "ev_ryan_bet_2_yes",
+  "ev_ryan_bet_3",
+  "ev_ryan_bet_3_today",
+  "ev_ryan_bet_3_yes",
+  "ev_ryan_bet_4",
+  "ev_ryan_bet_4_today",
+  "ev_ryan_bet_4_yes",
+  "ev_ryan_bet_today",
+  "ev_ryan_cover",
+  "ev_ryan_cover_today",
+  "ev_ryan_dinner_kick",
+  "ev_ryan_dinner_kick_today",
+  "ev_ryan_hall_squeeze",
+  "ev_ryan_hall_squeeze_today",
+  "ev_ryan_shift",
+  "ev_ryan_shift_today",
+  "ev_tom_machine",
+  "ev_tom_machine_today",
+  "ev_tom_pastries",
+  "ev_tom_pastries_today",
+  "ev_tom_sister",
+  "ev_tom_sister_today",
+  "ev_zoe_fries",
+  "ev_zoe_fries_today",
+  "ev_zoe_mum",
+  "ev_zoe_mum_today",
+  "ev_zoe_smoothie",
+  "ev_zoe_smoothie_today",
+  "ev_zoe_sunscreen",
+  "ev_zoe_sunscreen_today",
+  "everyday_home_today",
+  "everyday_out_today",
   "exam_art_done",
   "exam_bio_done",
   "exam_business_done",
@@ -96,6 +174,7 @@ flag_keys = [
   "hale_02_done",
   "hale_03_done",
   "hale_04_done",
+  "hale_booked",
   "hale_coaching_offered",
   "hale_door_seen",
   "hale_early_look",
@@ -116,15 +195,19 @@ flag_keys = [
   "jake_03_done",
   "jake_04_done",
   "jake_bathroom_today",
+  "jake_coming",
   "jake_date_booked",
   "jake_date_went",
   "jake_first_time",
   "jake_gym_today",
   "jake_ignored",
   "jake_kissed",
+  "jake_knee_kept",
   "jake_lockers_today",
   "jake_met",
+  "jake_mum_met",
   "jake_number",
+  "jake_photo_taken",
   "jake_quad_today",
   "jake_stood_up",
   "kayla_caught_her",
@@ -150,6 +233,7 @@ flag_keys = [
   "laura_counted_twenty",
   "laura_dress_chosen",
   "laura_dress_invite",
+  "laura_fed_her",
   "laura_knows_ryan",
   "laura_lonely",
   "laura_love_today",
@@ -158,10 +242,13 @@ flag_keys = [
   "laura_said_ryan",
   "laura_saw_ch5",
   "laura_saw_wardrobe",
+  "laura_shoulders_rubbed",
   "laura_shower_seen",
   "laura_talk_today",
+  "laura_toast_saved",
   "laura_towel_today",
   "laura_wardrobe_today",
+  "laura_wine_listed",
   "letter_home",
   "made_up",
   "made_up_today",
@@ -171,11 +258,14 @@ flag_keys = [
   "mark_06_done",
   "mark_arrangement",
   "mark_asleep_seen",
+  "mark_blames_ryan",
   "mark_brushed_kitchen",
   "mark_brushed_reach",
   "mark_caught_ch5",
   "mark_dress_rule",
+  "mark_fed_her",
   "mark_laura_seen",
+  "mark_light_fetched",
   "mark_money_week",
   "mark_paid_look",
   "mark_saw_garden",
@@ -183,6 +273,7 @@ flag_keys = [
   "mark_saw_lingerie",
   "mark_saw_mirror",
   "mark_things_today",
+  "mark_told_car",
   "mark_towel_today",
   "mark_tv_paid",
   "mark_walked_in_laundry",
@@ -193,6 +284,9 @@ flag_keys = [
   "nadia_canteen_hale",
   "nadia_knows_stacks",
   "nadia_met",
+  "nadia_notes_shared",
+  "nadia_owes_her",
+  "nadia_saw_legs",
   "on_probation",
   "opening_done",
   "out_shown_today",
@@ -246,13 +340,17 @@ flag_keys = [
   "ryan_hall_today",
   "ryan_heard_her",
   "ryan_hot_today",
+  "ryan_kicked",
   "ryan_knock_booked",
   "ryan_knock_code",
   "ryan_knocked_back",
+  "ryan_owes_her",
   "ryan_path_closed",
   "ryan_saw_her_towel",
   "ryan_saw_mirror",
   "ryan_saw_nap",
+  "ryan_shift_saved",
+  "ryan_squeezed_hall",
   "ryan_talk_today",
   "ryan_terms_mine",
   "ryan_terms_secret",
@@ -299,7 +397,10 @@ flag_keys = [
   "tom_01_done",
   "tom_03_done",
   "tom_03b_done",
+  "tom_gave_pastries",
+  "tom_machine_fixed",
   "tom_met",
+  "tom_owes_her",
   "tom_shift_booked",
   "tom_window_rule",
   "touch_bed_today",
@@ -369,11 +470,13 @@ flag_keys = [
   "zoe_canteen_knee",
   "zoe_caught_up",
   "zoe_changed_in_front",
+  "zoe_coffee_stolen",
   "zoe_couch_night",
   "zoe_crowd_done",
   "zoe_crowd_on",
   "zoe_dared",
   "zoe_face_today",
+  "zoe_fed",
   "zoe_has_bra",
   "zoe_ignored",
   "zoe_in_the_tub",
@@ -381,11 +484,14 @@ flag_keys = [
   "zoe_lap_quad",
   "zoe_let_him_watch",
   "zoe_met",
+  "zoe_mum_stayed",
   "zoe_number",
   "zoe_park_dare_today",
   "zoe_party_promised",
   "zoe_run_booked",
   "zoe_saw_toilet",
+  "zoe_smoothie_drunk",
+  "zoe_sunscreen_done",
   "zoe_table_today",
   "zoe_together",
 ]
@@ -433,6 +539,8 @@ zoe_refused        = 0   # her nos to Zoe (DECISIONS 124): a no moves this, neve
 release_2_written  = 0   # never raised: the "(Next release)" locks read it (DECISIONS 124)
 hale_claire_roll   = 0   # 1-4: on 1, Claire is early (hale_thursday_session)
 jake_catch_roll    = 0   # 1-8: on 1 or 2, a near-catch (jake_date_end)
+ev_ryan_bet_n      = 0   # the bet on his game: the rung she has reached (everyday.py, DECISIONS 221)
+ev_mark_tv_n       = 0   # his late TV: the rung she has reached (everyday.py, DECISIONS 221)
 # Q5 (LO, 2026-11-04): a no-show or an ignored invite empties the person's patience; one back each midnight, and
 # their invites wait until it is full again (phone.py ZOE_WAIT, JAKE_WAIT)
 zoe_patience       = 6
@@ -575,7 +683,7 @@ goes_to = { type = "enter" }
 
 [[locations.door.options]]
 text = "Ease the door open."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "23:00", end_time = "07:00" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", operator = "is_present" }, { type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "23:30", end_time = "07:00" }] }
 goes_to = { type = "canvas", canvas_id = "master_asleep" }
 
 [[locations.door.options]]
@@ -590,72 +698,72 @@ goes_to = { type = "canvas", canvas_id = "master_asleep" }
 
 [[locations.door.options]]
 text = "Ease the door open."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "23:00", end_time = "00:00" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", operator = "is_present" }, { type = "weekday", weekdays = [6] }, { type = "time_of_day", start_time = "23:30", end_time = "00:00" }] }
 goes_to = { type = "canvas", canvas_id = "master_asleep" }
 
 [[locations.door.options]]
 text = "The door's ajar."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 30 }, { type = "trait", subject = "player", trait_key = "laura_gaps_watched", operator = "gte", value = 3 }, { type = "flag", subject = "player", flag_key = "laura_alone_seen", operator = "is_false" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:30" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 30 }, { type = "trait", subject = "player", trait_key = "laura_gaps_watched", operator = "gte", value = 3 }, { type = "flag", subject = "player", flag_key = "laura_alone_seen", operator = "is_false" }] }
 goes_to = { type = "canvas", canvas_id = "laura_04_she_saw_you" }
 
 [[locations.door.options]]
 text = "The door's ajar."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 30 }, { type = "trait", subject = "player", trait_key = "laura_gaps_watched", operator = "gte", value = 3 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "gte", value = 20 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:30" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 30 }, { type = "trait", subject = "player", trait_key = "laura_gaps_watched", operator = "gte", value = 3 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "gte", value = 20 }] }
 goes_to = { type = "canvas", canvas_id = "laura_04_she_saw_you" }
 
 [[locations.door.options]]
 text = "The door's ajar."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "gte", value = 4 }, { type = "flag", subject = "player", flag_key = "laura_alone_seen", operator = "is_false" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:30" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "gte", value = 4 }, { type = "flag", subject = "player", flag_key = "laura_alone_seen", operator = "is_false" }] }
 goes_to = { type = "canvas", canvas_id = "laura_alone_after" }
 
 [[locations.door.options]]
 text = "The door's ajar."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "gte", value = 4 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "gte", value = 20 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:30" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "gte", value = 4 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "gte", value = 20 }] }
 goes_to = { type = "canvas", canvas_id = "laura_alone_after" }
 
 [[locations.door.options]]
 text = "The door's ajar."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "gte", value = 2 }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "lt", value = 3 }, { type = "flag", subject = "player", flag_key = "laura_alone_seen", operator = "is_false" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:30" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "gte", value = 2 }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "lt", value = 3 }, { type = "flag", subject = "player", flag_key = "laura_alone_seen", operator = "is_false" }] }
 goes_to = { type = "canvas", canvas_id = "laura_alone_in_bed" }
 
 [[locations.door.options]]
 text = "The door's ajar."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "gte", value = 2 }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "lt", value = 3 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "gte", value = 20 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:30" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "gte", value = 2 }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "lt", value = 3 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "gte", value = 20 }] }
 goes_to = { type = "canvas", canvas_id = "laura_alone_in_bed" }
 
 [[locations.door.options]]
 text = "The door's ajar."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }, { type = "flag", subject = "player", flag_key = "laura_alone_seen", operator = "is_false" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:30" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }, { type = "flag", subject = "player", flag_key = "laura_alone_seen", operator = "is_false" }] }
 goes_to = { type = "canvas", canvas_id = "laura_alone_in_bed" }
 
 [[locations.door.options]]
 text = "The door's ajar."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "gte", value = 20 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:30" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "lt", value = 20 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "gte", value = 20 }] }
 goes_to = { type = "canvas", canvas_id = "laura_alone_in_bed" }
 
 [[locations.door.options]]
 text = "The door's ajar."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "lt", value = 30 }, { type = "flag", subject = "player", flag_key = "laura_alone_seen", operator = "is_false" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:30" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "lt", value = 30 }, { type = "flag", subject = "player", flag_key = "laura_alone_seen", operator = "is_false" }] }
 goes_to = { type = "canvas", canvas_id = "laura_alone_in_bed" }
 
 [[locations.door.options]]
 text = "The door's ajar."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "lt", value = 30 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "gte", value = 20 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:30" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "lt", value = 30 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "gte", value = 20 }] }
 goes_to = { type = "canvas", canvas_id = "laura_alone_in_bed" }
 
 [[locations.door.options]]
 text = "The door's ajar."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 30 }, { type = "trait", subject = "player", trait_key = "laura_gaps_watched", operator = "lt", value = 3 }, { type = "flag", subject = "player", flag_key = "laura_alone_seen", operator = "is_false" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:30" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 30 }, { type = "trait", subject = "player", trait_key = "laura_gaps_watched", operator = "lt", value = 3 }, { type = "flag", subject = "player", flag_key = "laura_alone_seen", operator = "is_false" }] }
 goes_to = { type = "canvas", canvas_id = "laura_alone_in_bed" }
 
 [[locations.door.options]]
 text = "The door's ajar."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 30 }, { type = "trait", subject = "player", trait_key = "laura_gaps_watched", operator = "lt", value = 3 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "gte", value = 20 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:30" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 3 }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "trait", subject = "npc", npc_id = "npc_laura", trait_key = "warmth", operator = "gte", value = 30 }, { type = "trait", subject = "player", trait_key = "laura_gaps_watched", operator = "lt", value = 3 }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "gte", value = 20 }] }
 goes_to = { type = "canvas", canvas_id = "laura_alone_in_bed" }
 
 [[locations.door.options]]
 text = "Peek through the gap."
-conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:00" }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "lt", value = 20 }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_laura", operator = "is_present" }, { type = "npc_at_location", location_id = "home_master_bedroom", npc_id = "npc_mark", operator = "is_absent" }, { type = "weekday", weekdays = [6, 0, 1, 2, 3, 4] }, { type = "time_of_day", start_time = "22:00", end_time = "23:30" }, { type = "hours_since_flag", subject = "player", flag_key = "laura_alone_seen", operator = "lt", value = 20 }] }
 goes_to = { type = "canvas", canvas_id = "laura_alone_peek" }
 
 [[locations.door.options]]
@@ -1024,13 +1132,13 @@ clothing_rules = [
 id          = "hale_office"
 name        = "Dr. Hale's Office"
 kind        = "destination"
-description = "Dr. Hale's office: books to the ceiling, one window, a desk with a photo of his wife on it. He holds office hours on Thursday evenings, and his wife picks him up after. Your Psychology grade is pinned to the door."
+description = "Dr. Hale's office: books to the ceiling, one window, a desk with a photo of his wife on it. He holds office hours most afternoons, and late on Thursdays, when his wife picks him up after. Your Psychology grade is pinned to the door."
 image       = "locations/hale_office.jpg"
 image_search_queries = ["dr. hale's office"]
 parent      = "campus"
 entry_from  = "faculty_floor"
 navigation_order = []
-hours = [{ weekdays = [3], open = "17:00", close = "19:30" }]
+hours = [{ weekdays = [0, 1, 2, 4], open = "10:00", close = "12:00" }, { weekdays = [0, 1, 2, 4], open = "15:00", close = "19:00" }, { weekdays = [3], open = "17:00", close = "19:30" }]
 closed_text = "The office is locked. Office hours are on the door."
 hidden_until = { flag = "hale_met" }
 clothing_rules = [
@@ -1210,7 +1318,7 @@ image       = "locations/zoe_apartment.jpg"
 image_search_queries = ["zoe's living room"]
 parent      = "zoe_flat"
 navigation_order = ["zoe_kitchen", "zoe_bathroom", "zoe_bedroom"]
-hours = [{ weekdays = [0, 1, 2, 3, 4, 5], open = "18:00", close = "24:00" }, { weekdays = [5], open = "00:00", close = "02:00" }]
+hours = [{ weekdays = [0, 1, 2, 3, 4, 5], open = "18:00", close = "24:00" }, { weekdays = [5], open = "00:00", close = "02:00" }, { weekdays = [6], open = "21:00", close = "24:00" }]
 closed_text = "Zoe's out. Nobody answers."
 hidden_until = { flag = "zoe_met" }
 clothing_rules = [
@@ -1260,7 +1368,7 @@ image_search_queries = ["zoe's bedroom"]
 parent      = "zoe_flat"
 entry_from  = "zoe_apartment"
 navigation_order = []
-hours = [{ weekdays = [0, 1, 2, 3, 4, 5], open = "18:00", close = "24:00" }, { weekdays = [5], open = "00:00", close = "02:00" }]
+hours = [{ weekdays = [0, 1, 2, 3, 4, 5], open = "18:00", close = "24:00" }, { weekdays = [5], open = "00:00", close = "02:00" }, { weekdays = [6], open = "21:00", close = "24:00" }]
 closed_text = "Zoe's out. Nobody answers."
 hidden_until = { flag = "zoe_met" }
 
@@ -1324,9 +1432,30 @@ end_time   = "06:45"
 activity   = "in his room for the night"
 
 [[npcs.schedules]]
-location   = "home_ryan_room"
+location   = "home_living_room"
 weekdays   = [0, 1, 3, 6]
 start_time = "19:00"
+end_time   = "20:30"
+activity   = "on the couch, his game on"
+
+[[npcs.schedules]]
+location   = "home_living_room"
+weekdays   = [2]
+start_time = "19:00"
+end_time   = "21:00"
+activity   = "on the couch, his game on"
+
+[[npcs.schedules]]
+location   = "home_ryan_room"
+weekdays   = [2]
+start_time = "21:00"
+end_time   = "22:00"
+activity   = "home in his room, evening"
+
+[[npcs.schedules]]
+location   = "home_ryan_room"
+weekdays   = [0, 1, 3, 6]
+start_time = "20:30"
 end_time   = "22:00"
 activity   = "home in his room, evening"
 
@@ -1374,14 +1503,21 @@ activity   = "making breakfast before work"
 location   = "home_kitchen"
 weekdays   = [0, 1, 3, 4, 6]
 start_time = "18:00"
-end_time   = "22:00"
+end_time   = "21:30"
 activity   = "in the kitchen, evening"
+
+[[npcs.schedules]]
+location   = "home_bathroom"
+weekdays   = [0, 1, 3, 4, 6]
+start_time = "21:30"
+end_time   = "22:00"
+activity   = "in the shower before bed"
 
 [[npcs.schedules]]
 location   = "home_master_bedroom"
 weekdays   = [6, 0, 1, 2, 3, 4]
 start_time = "22:00"
-end_time   = "23:00"
+end_time   = "23:30"
 activity   = "awake, alone"
 
 [[npcs.schedules]]
@@ -1394,7 +1530,7 @@ activity   = "awake, with Mark"
 [[npcs.schedules]]
 location   = "home_master_bedroom"
 weekdays   = [6, 0, 1, 2, 3, 4]
-start_time = "23:00"
+start_time = "23:30"
 end_time   = "06:30"
 activity   = "asleep"
 
@@ -1620,6 +1756,14 @@ activity   = "going to bed"
 when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_met", operator = "is_true" }] }
 
 [[npcs.schedules]]
+location   = "zoe_bedroom"
+weekdays   = [6]
+start_time = "21:00"
+end_time   = "00:00"
+activity   = "going to bed early, a Sunday night"
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_met", operator = "is_true" }] }
+
+[[npcs.schedules]]
 location   = "quad"
 weekdays   = [1, 3, 4]
 start_time = "14:30"
@@ -1701,6 +1845,22 @@ end_time   = "19:30"
 activity   = "Thursday office hours"
 when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "hale_met", operator = "is_true" }] }
 
+[[npcs.schedules]]
+location   = "hale_office"
+weekdays   = [0, 1, 2, 4]
+start_time = "15:00"
+end_time   = "19:00"
+activity   = "office hours"
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "hale_met", operator = "is_true" }] }
+
+[[npcs.schedules]]
+location   = "hale_office"
+weekdays   = [0, 1, 2, 4]
+start_time = "10:00"
+end_time   = "12:00"
+activity   = "a booked hour, his door locked"
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "hale_booked", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "hale_booked", operator = "lt", value = 18 }] }
+
 [[npcs]]
 id           = "npc_jake"
 name         = "Jake"
@@ -1774,6 +1934,14 @@ start_time = "13:00"
 end_time   = "14:30"
 activity   = "in class: figure drawing"
 when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_number", operator = "is_true" }] }
+
+[[npcs.schedules]]
+location   = "home_front_door"
+weekdays   = [0, 1, 3, 6]
+start_time = "22:00"
+end_time   = "00:00"
+activity   = "at your door, hood up"
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_coming", operator = "is_true" }, { type = "hours_since_flag", subject = "player", flag_key = "jake_coming", operator = "lt", value = 3 }] }
 
 [[npcs.schedules]]
 location   = "home_front_door"

@@ -190,13 +190,32 @@ goes blank. A `gte`-only set matches every card at once and priority silently de
 ### R3 · Name the feeder, not the number
 
 The sidebar already prints `exposure 22`. **What the player cannot see is which repeatable click
-moves it** — and in a game where every gate is a meter, that is the whole of navigation.
+moves it**, and where a gate is a meter, that is the navigation.
 
 Every guidance line names a **place, a person where there is one, and a verb**. *"Flash him at the
 depot"* works. *"Prove yourself to Tom"* fails — no place, no clickable action. If the step is
 schedule-gated the window rides along: *"Catch him in the garage — weekday evenings."*
 
 Atmosphere belongs in the card's narrative line. The goal label is load-bearing navigation.
+
+**Each person's card names that person's own next step.** One goal line, about him: his place, his
+window, the verb, written as a line of their story (*"Sit with Ryan through the whole match on
+Sunday"*). **The shape the top games use** (`playtest_study_20261109/9_quest_lines.md`, 140 lines tagged by hand
+across five games):
+- **A story beat with one act in it,** plus who, where and when where they matter. It runs about 12 words, and
+  13 in In Her Own Hands, where every tip is her own thought.
+- **No game opens a person's line with a number.** A requirement, when it shows, comes **last** and in words: a
+  quality she lacks or a feeling he has (*"not that much of an exhibitionist… yet"*, *"if he trusted you more"*).
+  The one exception is untangled-mind's trailing "(Hint: …)" bracket.
+- **One voice for the whole page:** her thought, or "you" plus an imperative. Don't mix them.
+- **A line with no next step says which stop it is:** done (with a recap), keep doing X (at a place and time),
+  wait for Y, closed by your choices, or the end of content for now. Never a bare lock: In Her Own Hands' 113
+  silent "locked until you have completed another task" lines are the field's known failure. The top games all do this: one step per person, mostly as story (Course of Temptation: 0
+of 106 hint lines print a number). **Never paste one list of places onto every card.** first_term
+built its goal lines from one fixed sentence per stage, so 42 of its 64 goal lines were a meter target
+and four people's cards carried the same *"stay and look: the park couple, the library stacks…"*. The
+player read the Quests page as a checklist and asked what to do if Jake wasn't progressed (LO's
+playtest, 2026-11-09; REPORT.md §3). Checked: gate *a card line belongs to its person*.
 
 **A card cannot name a person the player can rename.** `@` tokens resolve in block content, a
 location's description and blocked message, choice text and an NPC's role, and nowhere else
@@ -232,6 +251,15 @@ Three attested ways to say it, all from the field:
 `label — 14 / 20` for you with no author involvement (`engine.md` §47.1). A flag goal prints
 nothing but its label, and with no label it prints its raw key — which gate
 **`a goal says what it wants`** now fails.
+
+**Print the number beside that step's own act, and nowhere else.** The number answers "how much
+more for *this*": it sits on the card of the person whose step needs it, next to the act that raises
+it (untangled-mind's hints work this way). It is not a stage target repeated across the page.
+**And a card names only people she has met.** Course of Temptation hides people she hasn't met, and
+In Her Own Hands shows a nameless tile, 113 times. A goal line that sends her to someone she
+hasn't met waits on their `<x>_met`, or is itself the meeting (*"Talk to Dace"*). first_term's Ryan card
+said *"pull Jake into the gym locker room"* to a player who might not know Jake. Checked: gate *a card
+line belongs to its person*.
 
 ### R4 · A wall shows the want; the card shows the route
 

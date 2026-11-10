@@ -375,14 +375,15 @@ def mark_tv(cid, here_item, from_where, mother_line, when, opening, scene, lines
                                     D(M, "Your mother doesn't watch this one."), ME("I'm not my mother."), D(M, "I know. Turn it off, @player."), P(cover["gg_end"])],
                 "Get up.", "home_hall", 2),
             res("m_cur", "Leave it on", [P(lines[3]), P(lines[4]),
-                                         D(M, mother_line), ME("So go to bed, Mark."), P("You say it, but he doesn't go."), D(M, "In a minute."),
+                                         D(M, mother_line), ME("So go, Mark."), P("You say it, but he doesn't go."), D(M, "In a minute."),
                                          VID("porn on a living room TV at night, a girl watching from the couch, a man standing behind her", "girl keeps watching porn while stepdad watches", "watching porn on tv man behind couch", pool_dir=f"sex/{cid}_leave_t5")],
                 "Turn it off.", "home_hall", 5)])
     return cid
 
 
-# Mon, Tue, Thu, Fri 21:30-22:00 Laura is in the kitchen (her evening row); on Wednesday she has no row, she is out
-mark_tv("walkin_tv_mark_garage", here(M, "home_garage"), "the garage", "Not with your mother in the house, @player.", [wd(0, 1, 3, 4), tod("21:30", "22:00")],
+# Mon, Tue, Thu, Fri 19:15-21:45 Laura is in the kitchen until 21:30, then in her shower (her rows); on Wednesday she has no
+# row, she is out. The living-room host needs the room empty, so Ryan's couch rows (to 20:30, Wednesday to 21:00) close it.
+mark_tv("walkin_tv_mark_garage", here(M, "home_garage"), "the garage", "Not with your mother in the house, @player.", [wd(0, 1, 3, 4), tod("19:15", "21:45")],  # reach audit 2026-11-09 (DECISIONS 218): rolls while he is next door, not only on his arrival
         "You drop onto the couch and thumb the TV on, and it comes up on channel 5, where whoever had it last left it.",
         "A woman on her knees on a bed, a man behind her, his cock sliding in and out of her. Her tits swing with every thrust.",
         ["He looks at the screen. The man's cock drives into her, and she moans. Then Mark looks down at you.",
@@ -394,7 +395,7 @@ mark_tv("walkin_tv_mark_garage", here(M, "home_garage"), "the garage", "Not with
         dict(answer="He catches himself. His eyes come off you and go to the can in his hand, then the hall door, anywhere but the couch. He moves the beer down in front of his jeans.",
              off="He drinks with his eyes on the black screen, and he doesn't look at you until you're up.",
              gg_end="You turn it off. He breathes out through his nose and keeps his eyes on the hall door."))
-mark_tv("walkin_tv_mark_kitchen", here(M, "home_kitchen"), "the kitchen", "Your mother'll be back, @player.", [wd(2), tod("21:30", "22:00")],
+mark_tv("walkin_tv_mark_kitchen", here(M, "home_kitchen"), "the kitchen", "Your mother'll be back, @player.", [wd(2), tod("21:00", "21:45")],  # reach audit 2026-11-09 (DECISIONS 218): rolls while he is next door, not only on his arrival
         "The TV's on with nobody watching it, stuck on channel 5. You're on the couch before you see what's on it.",
         "Two women on a couch with one man between them. One rides his cock while the other one kisses her tits.",
         ["He smells of chilli and beer. He looks at the screen, at the girl bouncing on that cock, and then at you, curled up in front of it.",
@@ -416,11 +417,11 @@ walkin("walkin_tv_ryan", "Channel 5", "home_living_room",
     + [P("Ryan comes in from the hall for the TV and stops in the doorway.")],
     "He's seen the screen.",
     [P("He looks at the screen. She drops down on the man's cock, and she moans. Then he looks at you."),
-     D(R, "Seriously, @player.nickname? It's the middle of the day."), ME("And?"),
+     D(R, "Seriously, @player.nickname? It's broad daylight."), ME("And?"),
      P("He goes red, but he doesn't go back to his room. His eyes go to her tits on the screen, then to your chest, then away, fast, and he shoves his hands in his pockets."),
      D(R, "I'm not sitting down with that on. Not a chance."),   # writing pass: low heat (H4), the not-yet; "Leave it on." is where it gives way
      VID("a young man in the doorway staring at porn on the living room TV, a girl on the couch", "brother catches sister watching porn", "guy walks in girl watching porn couch", pool_dir="sex/walkin_tv_ryan_t5")],
-    CH5_ANS("r"), raise_=[lust(R)], records=["ryan_caught_ch5"], when=[wd(5, 6), tod("13:30", "14:00")], extra=[
+    CH5_ANS("r"), raise_=[lust(R)], records=["ryan_caught_ch5"], when=[wd(5, 6), tod("10:00", "13:45")], extra=[   # reach audit 2026-11-09: his weekend room hours (Saturday from 10:00, Kayla gone), not only before his TV row
         res("r_off", "Turn it off", [P("You jab the remote. The screen goes black. Ryan lets out a breath."), D(R, "My turn for the TV, then."), ME("Don't you dare tell anyone."), D(R, "Who would I tell? Mom?")],
             "Get up.", "home_hall", 2),
         res("r_gg", "Not yet", [P("You don't reach for the remote. Not yet. He comes and stands by the arm of the couch, and you both watch her ride him, her tits bouncing, your face hot."),
@@ -448,15 +449,15 @@ walkin("walkin_tv_laura", "Channel 5", "home_living_room",
      ME("Sorry, Mom. It was just on."), D(L, "Just on. Right. You're lucky I came through first and not Mark."),   # writing pass: low heat (H4), the price
      P("She goes back into the kitchen without another word."),
      # reader batch 4 (pass 3): the hook, her Sunday kitchen row (18:00-22:00, hub_laura_kitchen)
-     P("She'll be in the kitchen until ten.")],
-    [go("Turn it off.", loc="home_hall", mins=2)], records=["laura_saw_ch5"], when=[wd(6), tod("21:30", "21:58")])
+     P("She'll be in the kitchen until half nine.")],
+    [go("Turn it off.", loc="home_hall", mins=2)], records=["laura_saw_ch5"], when=[wd(6), tod("20:30", "21:28")])   # 2026-11-09: her kitchen ends 21:30; Ryan's couch to 20:30
 
 for chance, loud in ((0.25, TV_QUIET), (0.5, TV_LOUD)):
-    rule("living_tv", "walkin_tv_mark_garage", chance, loud, here(M, "home_garage"), wd(0, 1, 3, 4), tod("21:30", "22:00"))
-    rule("living_tv", "walkin_tv_mark_kitchen", chance, loud, here(M, "home_kitchen"), wd(2), tod("21:30", "22:00"))
-    rule("living_tv", "walkin_tv_ryan", chance, loud, here(R, "home_ryan_room"), wd(5, 6), tod("13:30", "14:00"))
-    # Laura's window stops at 21:58: the answer screen comes 2 minutes in and says she is in the kitchen, her row until 22:00
-    rule("living_tv", "walkin_tv_laura", chance, loud, here(L, "home_kitchen"), wd(6), tod("21:30", "21:58"))
+    rule("living_tv", "walkin_tv_mark_garage", chance, loud, here(M, "home_garage"), wd(0, 1, 3, 4), tod("19:15", "21:45"))
+    rule("living_tv", "walkin_tv_mark_kitchen", chance, loud, here(M, "home_kitchen"), wd(2), tod("21:00", "21:45"))
+    rule("living_tv", "walkin_tv_ryan", chance, loud, here(R, "home_ryan_room"), wd(5, 6), tod("10:00", "13:45"))
+    # Laura's window stops at 21:28: the answer screen comes 2 minutes in and says she is in the kitchen, her row until 21:30
+    rule("living_tv", "walkin_tv_laura", chance, loud, here(L, "home_kitchen"), wd(6), tod("20:30", "21:28"))
 
 # ═════════════════════════════════════════════════════════════════════════════
 # B4 · THE GARAGE (host garage_laundry): Mark back from dinner, bent at the drum. Her answers route into his
@@ -573,9 +574,9 @@ walkin("walkin_mirror_ryan", "In the mirror", "home_hall",
             "Go on.", "home_hall", 2)])
 
 walkin("walkin_mirror_mark", "In the mirror", "home_hall",
-    "B5, Mark: down the hall to bed after his late TV, he stops behind her at the hall mirror; after mark_saw_her. His Lust +2 on the moment; her answer on Exhibitionism: her room 0, stay +1 cap 19 / 39 / 59. Shares home_event.",
+    "B5, Mark: through the hall from his late TV to the bathroom, he stops behind her at the hall mirror; after mark_saw_her. His Lust +2 on the moment; her answer on Exhibitionism: her room 0, stay +1 cap 19 / 39 / 59. Shares home_event.",
     [here(M, "home_living_room"), SAW, flag("home_event", False)],
-    [P("You're at the hall mirror checking yourself over when the living-room door creaks. Mark, on his way to bed. In the glass you see him stop behind you.")],
+    [P("You're at the hall mirror checking yourself over when the living-room door creaks. Mark, through from his TV on his way to the bathroom. In the glass you see him stop behind you.")],
     "He's looking.",
     mirror_seen("his", "From behind you") + [
         P("His hands close into fists at his sides."),   # DO NOT DELETE: a non-group block, so his bands below are not elseifs of mirror_seen's
@@ -583,25 +584,27 @@ walkin("walkin_mirror_mark", "In the mirror", "home_hall",
            D(M, "Bit late to be standing there, @player. Bed."), ME("Night, Mark."), D(M, "Night.")),
         GC(cond(*ANY), P("He stands there and doesn't pretend he's doing anything else."),
            D(M, "Bit late to be standing there, @player.")),
-        P("He comes down this hall to bed at this hour most nights.")],   # writing pass: the hook (window Mon-Sat 01:30-02:00); a plain block, so it ends his chain
+        P("He comes through this hall from his TV most nights.")],   # writing pass: the hook (window: his TV rows, 22:00-01:45); a plain block, so it ends his chain
     mirror_answers("m"), raise_=[lust(M)], records=["mark_saw_mirror"], also_set=[fset("home_event")],
     # reader batch 4/5 (pass 3): not while Laura waits on the dark stairs after a late night (her hall row)
-    when=[wd(0, 1, 2, 3, 4, 5), tod("01:30", "02:00"), here(L, "home_hall", False)], extra=[
+    when=[here(L, "home_hall", False)], extra=[   # the hours are the two rules below (reach audit 2026-11-09)
         res("m_stay", "Stay at the mirror", [P("You stay at the mirror and take your time, and let him look at all of it. He comes down the hall. He stands right behind you, close enough that you feel the heat off him, but he doesn't touch."),
-                                             D(M, "Bed, @player."), ME("I'm not tired."), D(M, "I didn't ask if you were tired."), P("He goes past you into his room and shuts the door hard.")],
+                                             D(M, "Bed, @player."), ME("I'm not tired."), D(M, "I didn't ask if you were tired."), P("He goes past you into the bathroom and shuts the door hard.")],
             "Go on.", "home_hall", 2)])
 
 for host_rule in ((here(R, "home_ryan_room"), wd(5, 6), tod("07:30", "14:00")),
                   (here(R, "home_ryan_room"), wd(6, 0, 1, 2, 3), tod("19:00", "00:00"))):
     rule("hall_mirror", "walkin_mirror_ryan", 0.25, flag("home_event", False), *host_rule)
-rule("hall_mirror", "walkin_mirror_mark", 0.25, flag("home_event", False), here(M, "home_living_room"), here(L, "home_hall", False), wd(0, 1, 2, 3, 4, 5), tod("01:30", "02:00"))
+# reach audit 2026-11-09: his whole late-TV rows (Sun-Fri 22:00-00:00, Mon-Sat 00:00-02:00), not only the half hour before bed
+rule("hall_mirror", "walkin_mirror_mark", 0.25, flag("home_event", False), here(M, "home_living_room"), here(L, "home_hall", False), wd(6, 0, 1, 2, 3, 4), tod("22:00", "00:00"))
+rule("hall_mirror", "walkin_mirror_mark", 0.25, flag("home_event", False), here(M, "home_living_room"), here(L, "home_hall", False), wd(0, 1, 2, 3, 4, 5), tod("00:00", "01:45"))
 
 # ═════════════════════════════════════════════════════════════════════════════
 # B6 · LAURA'S WARDROBE (host master_wardrobe): Laura out of her Saturday shower, before she dresses at 17:00.
 # Good mom: one line by her Love, no heat, no pay.
 # ═════════════════════════════════════════════════════════════════════════════
 walkin("walkin_wardrobe_laura", "Laura's mirror", "home_master_bedroom",
-    "B6, Laura: out of her Saturday shower, she finds her daughter at her wardrobe with the red dress. A line by her Love; no heat, no pay.",
+    "B6, Laura: out of her shower (Saturday, or before bed), she finds her daughter at her wardrobe with the red dress. A line by her Love; no heat, no pay.",
     [here(L, "home_bathroom")],
     [P("You've got the red one from the back of Laura's wardrobe out of its plastic and held up against you in her long mirror. It would barely cover your ass."),
      P("The door opens. Laura, in her robe, her hair wet from the shower. She stops.")],
@@ -612,9 +615,11 @@ walkin("walkin_wardrobe_laura", "Laura's mirror", "home_master_bedroom",
         D(L, "I wore that once. I was about your age."), ME("Where did you wear it?"), D(L, "Somewhere I shouldn't have. Don't ask me where."),
         P("She smooths it down over your hip, then hangs it back up herself.")),
      # scene reader b02 (2026-11-03): the hook: her Saturday row has her dressing to go out from 17:00
-     D(L, "Now out, please. I have to get dressed for tonight. Come back in at five, if you want your hair done.")],   # writing pass: the hook, hub_laura_bedroom's hair (Sat 17:00-18:30)
-    [go("Leave her to it.", loc="home_hall", mins=5)], records=["laura_saw_wardrobe"], when=[wd(5), tod("16:45", "17:00")])
+     G(cond(wd(5)), D(L, "Now out, please. I have to get dressed for tonight. Come back in at five, if you want your hair done.")),   # writing pass: the hook, hub_laura_bedroom's hair (Sat 17:00-18:30)
+     G(cond(wd(0, 1, 3, 4, 6)), D(L, "Now out, please. I want my bed, and so should you."))],   # reach audit 2026-11-09: after her shower before bed
+    [go("Leave her to it.", loc="home_hall", mins=5)], records=["laura_saw_wardrobe"])
 rule("master_wardrobe", "walkin_wardrobe_laura", 0.25, here(L, "home_bathroom"), wd(5), tod("16:45", "17:00"))
+rule("master_wardrobe", "walkin_wardrobe_laura", 0.25, here(L, "home_bathroom"), wd(0, 1, 3, 4, 6), tod("21:45", "22:00"))   # her shower before bed (DECISIONS 216)
 
 # B6 Mark (DECISIONS 152): home from the bar, up to bed (his Saturday bedroom row starts at 22:00). The host needs the
 # room empty (home.py master_wardrobe, nobody in it) and the engine rolls at the clock she clicks on, so his arrival is
@@ -681,10 +686,10 @@ rule("master_wardrobe", "walkin_wardrobe_mark", 0.25, wd(5), tod("21:45", "22:00
 # B7 · RYAN'S THINGS (host ryan_things, Ryan out): Ryan up from dinner; Kayla early on a Friday.
 # ═════════════════════════════════════════════════════════════════════════════
 walkin("walkin_things_ryan", "Caught", "home_ryan_room",
-    "B7, Ryan: up from dinner, he catches her with the box from his drawer. His Lust +2 on the moment; her answer on Corruption: put it back 0, \"Explain this.\" (Curious, Corruption 20 up; LO 2026-11-04, Q15) +1 cap 39.",
-    [here(R, "home_kitchen")],
+    "B7, Ryan: up from the couch, he catches her with the box from his drawer. His Lust +2 on the moment; her answer on Corruption: put it back 0, \"Explain this.\" (Curious, Corruption 20 up; LO 2026-11-04, Q15) +1 cap 39.",
+    [here(R, "home_living_room")],
     [P("You've got Ryan's bedside drawer open and the box of condoms in your hand, opened, half gone, when the door opens behind you."),
-     P("Ryan, up from dinner.")],
+     P("Ryan, up from the couch.")],
     "He's caught you.",
     [GC(cond(ntrait(R, "want", "lt", 40)), D(R, "What the hell, @player.nickname? Get out of my stuff."),
         P("His eyes go to the box in your hand, then to your tits, then back to your face, fast, and he goes red."), ME("I was looking for a charger."), D(R, "In my condoms?")),
@@ -692,7 +697,7 @@ walkin("walkin_things_ryan", "Caught", "home_ryan_room",
         D(R, "Find what you were looking for?"), ME("Maybe. Half the box is gone, Ryan."), D(R, "Counting, are you?"))],
     [go("Put it back.", loc="home_hall", mins=5),
      go("Hold it up. \"Explain this.\"", node="explain", mins=3, eff=[pay("corruption", 39)], cond_=cond(CURIOUS))],
-    raise_=[lust(R)], records=["ryan_caught_snooping", "ryan_things_found"], when=[wd(6, 0, 1, 3), tod("18:45", "19:00")], extra=[
+    raise_=[lust(R)], records=["ryan_caught_snooping", "ryan_things_found"], when=[wd(6, 0, 1, 3), tod("19:00", "20:15")], extra=[   # reach audit 2026-11-09: his couch evenings (DECISIONS 214)
         res("explain", "Explain this", [ME("Explain this."),
                                         P("You hold the box up between you. Half gone. Ryan looks at it, then at you, and his ears go red."),
                                         G(cond(flag("knows_about_kayla")), D(R, "That's mine and Kayla's business.")),
@@ -712,7 +717,7 @@ walkin("walkin_things_kayla", "Caught", "home_ryan_room",
      P("Kayla drops the bag on Ryan's bed and looks at the box in your hand, then at you, up and down, slow, your tits, your legs."),
      D(K, "Relax. I won't tell him. He's the one who should be worried, with you across the hall."), ME("What's that supposed to mean?"), D(K, "You know exactly what it means. Put them back, @player.nickname.")],
     [go("Put it back.", loc="home_hall", mins=5)], records=["kayla_caught_her", "ryan_things_found"], when=[wd(4), tod("17:45", "18:00")])
-rule("ryan_things", "walkin_things_ryan", 0.25, here(R, "home_kitchen"), wd(6, 0, 1, 3), tod("18:45", "19:00"))
+rule("ryan_things", "walkin_things_ryan", 0.25, here(R, "home_living_room"), wd(6, 0, 1, 3), tod("19:00", "20:15"))
 rule("ryan_things", "walkin_things_kayla", 0.25, flag("kayla_met"), wd(4), tod("17:45", "18:00"))
 
 # ═════════════════════════════════════════════════════════════════════════════

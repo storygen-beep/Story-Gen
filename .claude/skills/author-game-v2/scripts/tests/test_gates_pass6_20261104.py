@@ -3,7 +3,7 @@
   13    gate `no child framing next to sex`       register.md "Everyone is an adult"
   B54   gate `her clothes are named exactly`      register.md rule 5
   E98   gate `a need falls where it says`         the-meters.md M8
-  G76   gate `an act pays inside its own stage`   the-arc.md A4d
+  G76   gate `an act pays no further than the next stage`   the-arc.md A4d
   J76   gate `a deduction is gated or priced`     engine.md §21
 
 Fixtures are built here; nothing in games/ is read.
@@ -129,7 +129,8 @@ def test_a_partnered_scene_that_takes_nothing_still_fails():
 
 
 # ── G76 · a dress code sets the stage ────────────────────────────────────────
-STAGE = "an act pays inside its own stage"
+# PLAYTEST 2026-11-09: an act now pays on to the NEXT stage's top (a cap at her own top was the wall).
+STAGE = "an act pays no further than the next stage"
 STAGE_STATE = {"board": {"ascent_tiers": ["heat"]}}
 STAGE_BANDS = [{"min": 0, "max": 19, "text": "A"}, {"min": 20, "max": 39, "text": "B"},
                {"min": 40, "max": 59, "text": "C"}, {"min": 60, "text": "D"}]
@@ -162,19 +163,19 @@ SKIRT = {"type": "worn_type", "operator": "eq", "value": "skirt"}
 NO_PANTIES = {"type": "clothing_slot", "slot": "underwear", "operator": "unequipped"}
 
 
-def test_a_garment_that_needs_20_can_cap_at_39_and_no_higher():
-    assert row(walk_game(SKIRT, 39), STAGE, STAGE_STATE)["pass_"] is True
-    assert row(walk_game(SKIRT, 59), STAGE, STAGE_STATE)["pass_"] is False
+def test_a_garment_that_needs_20_can_cap_at_59_and_no_higher():
+    assert row(walk_game(SKIRT, 59), STAGE, STAGE_STATE)["pass_"] is True
+    assert row(walk_game(SKIRT, 79), STAGE, STAGE_STATE)["pass_"] is False
 
 
-def test_a_garment_that_needs_40_can_cap_at_59_and_no_higher():
-    assert row(walk_game(NO_PANTIES, 59), STAGE, STAGE_STATE)["pass_"] is True
-    r = row(walk_game(NO_PANTIES, 79), STAGE, STAGE_STATE)
+def test_a_garment_that_needs_40_can_cap_at_79_and_no_higher():
+    assert row(walk_game(NO_PANTIES, 79), STAGE, STAGE_STATE)["pass_"] is True
+    r = row(walk_game(NO_PANTIES, None), STAGE, STAGE_STATE)   # no cap: past the top stage
     assert r["pass_"] is False and "opens at heat 40" in r["detail"][0]
 
 
 def test_with_no_dress_code_the_cap_stays_at_the_first_stage():
-    g = walk_game(SKIRT, 39)
+    g = walk_game(SKIRT, 59)                 # opens at 0 without the dress code: the next top is 39
     g["locations"][-1].pop("clothing_rules")
     assert row(g, STAGE, STAGE_STATE)["pass_"] is False
 

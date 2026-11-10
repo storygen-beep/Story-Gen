@@ -10,13 +10,14 @@ set -e
 HERE=${0:A:h}
 ROOT=${HERE:h:h:h:h:h}
 PH=$ROOT/games/first_term/toml_phases
-ALL_PARTS=(ryan laura mark tom zoe hale jake cafe college pools extras home town gossip goals)
+ALL_PARTS=(ryan laura mark tom zoe hale jake cafe college pools extras home town gossip goals everyday)
 cd $ROOT && source venv/bin/activate
 cd $HERE
 mkdir -p parts
 for p in ${=PARTS:-$ALL_PARTS}; do python3 $p.py parts/$p.toml; done
 for p in $ALL_PARTS; do [[ -s parts/$p.toml ]] || { echo "missing parts/$p.toml — run PARTS=$p first" >&2; exit 1; }; done
 { echo "# First Term — 5 · scenes. Generated: one section per person (sources in iterations/002/build_scripts)."; for p in $ALL_PARTS; do cat parts/$p.toml; done } > $PH/5_scenes.toml
+python3 recap.py $PH/5_scenes.toml   # playtest 2026-11-09: a repeatable act's cap moves to the next stage's top
 python3 phone.py $PH/8_phone.toml   # iteration 002, part 6: the phone is generated too   (before gen_world: it declares the phone's flags)
 python3 gen_world.py $PH/1_metadata_and_locations.toml
 cd $ROOT

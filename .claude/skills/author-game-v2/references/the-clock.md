@@ -64,6 +64,8 @@ hour.
 
 ## C2 · A beat may not say what time it is — turn the reading into a rule
 
+(For a loop, the stronger form is in `the-arc.md` A1: the hour goes on the door, never in the act.)
+
 A repeatable canvas fires at any minute of its window: `isCanvasValid` checks only that the
 schedule is active (`v2.py:5919-5925`), never which minute it is. So a beat cannot honestly state
 the current hour — a sentence that reads as a clock is wrong for almost the whole window it fires

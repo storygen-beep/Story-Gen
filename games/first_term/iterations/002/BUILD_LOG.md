@@ -1694,3 +1694,285 @@ mark.py now unequips all five tops, as the walk-in copy (walkins.py) already did
 crop top, the gym tank and the t-shirt, after the choice the top slot is empty, 0 page errors. The garden lounger's
 topless choice at 40 was checked with LO and stays (DECISIONS 124: topless by choice for one person she knows, at home,
 is Showing; DECISIONS 203 is about accidents and strangers).
+
+## 2026-11-09 — the playtest fixes (DECISIONS 212)
+
+This is step 3 of the playtest plan. Steps 1 and 2 changed the skill's checks and doctrine (skill CHANGELOG, 2026-11-09).
+
+**Changes:**
+- New `recap.py`, run by build_scenes.sh after the scenes are concatenated. It moves each repeatable canvas's stage-top cap
+  on Corruption and Exhibitionism up one stage (19 to 39, 39 to 59, 59 to 79): 345 caps. `3_activities.toml`'s five
+  raises were moved once by hand: the mirror and the changing room 39 to 59, the tub kept at 79.
+- `0_systems_spec.toml`: `[engine.daily_caps.corruption]`, the same bands as Exhibitionism.
+- `home.py`: `event()` takes `her_cap`, and home_event_ryan_door's look is capped at 79.
+- `canv.py` and `zoe.py`: person cards say "<name>'s next step waits for it" instead of the stage list. `extras.py`: the Hungry
+  tier line and the cocky guy's meeting line name no one unmet.
+- `v2_state.json`: `ladder.loop` for all seven ladders.
+
+**First build:**
+- 79 to 99 broke `meter ceiling`, so 79 stays.
+- The way-up check judged Hungry at 79 though the highest gate is 70. That was a gate fix in the skill: the top stage is judged
+  one under its highest gate.
+- The card pointer line was itself pasted onto five cards, so each line names the person now.
+
+**Final:**
+- Gates: 113 pass, 3 decided, 1 fail, 4 n/a. The fail is *the loop is open enough hours*: Ryan 10, Laura 6 and Hale 0.6 h a week.
+  Each loop's prose is tied to its hour (dark, half asleep; Thursday; after ten), so widening the trigger would make it untrue.
+  They wait for LO's pick.
+- Shape: 22 pass. Cites: 0 wrong. Skill tests: 1033 passed.
+- Headless: corruption +1 at 19, 39 and 59 with the old caps stays put. With the new caps it reaches 20, 21 / 40, 41 / 60 and
+  stops at the day's band allowance. 0 page errors.
+
+## 2026-11-09 — pace and quest lines from the part-2 study (DECISIONS 213)
+
+**Changes:**
+- `0_systems_spec.toml`: the daily caps for both meters are now 3/3/2/2/2 (they were 3/2/2/1/1).
+- `canv.py`: `QUALITY` holds the words for each stage. A person's meter goal now reads "Not yet: <name> waits until you're
+  <quality> (your <meter>)". `zoe.py` is the same for her kiss card.
+
+**Checks:**
+- Gates: 113 pass, 3 decided, 1 fail, 4 n/a. The one fail is still *the loop is open enough hours*: Ryan 10, Laura 6,
+  Hale 0.6.
+- New lints:
+  - *the climb's pace*: 6.7 / 6.7 / 10 / 10 / 10 days on both meters, with no stage over 14.
+  - *a loop names its hour*: 16 of 38 loop beats.
+- Shape: 22 pass. Cites: 0 wrong. Skill tests: 1037.
+
+**Headless:** at ryan_step 2 and Corruption 14 the Quests page shows "Not yet: Ryan waits until you're more curious (your
+Corruption) · 14 / 20". 0 page errors.
+
+## 2026-11-09 — Ryan's reach (DECISIONS 214)
+
+**Changes:**
+- `v2_state.json`: Ryan's schedule gets the couch rows (Mon, Tue, Thu, Sun 19:00-20:30; Wed 19:00-22:00); his room evening starts 20:30. Steps 3 and 7: `when` 20:30-22:00 and `when_also` 22:00-00:00 on Mon, Tue, Thu, Sun.
+- `people_data.py`: two Schedules-page lines, "on the couch, his game on".
+- `ryan.py`: `HOT_ROOM_WINDOWS` (act 1: evenings and late; acts 4 and 5: evenings and weekend mornings). `ryan_two_knocks` gets the weekend-morning schedules, the time-free no ("Not now."), the late-only 7s_b pool (`ryan_hot_7s_day` for mornings), "Close" for the twist title, and time-free lines.
+- `home.py`: `event(..., chance=)`; the towel in the hall at 0.75.
+- `canv.py`: Ryan's Want feeder line names the towel's hour and the couch.
+- Sheets: `npc_ryan.md` (grid, step windows, acts table, change note), `ryan_hot_repeatables.md` (three time-free lines, row 5's thought, row 7's window, a change note).
+
+**Checks:**
+- Gates: 113 pass, 3 decided, 1 fail, 4 n/a. *The loop is open enough hours*: Ryan 20 h on 6 days (was 10); Laura 6 and Hale 0.6 remain.
+- Shape: 22 pass. Cites: 0 wrong. Skill tests: 1037 passed.
+- Reach audit (`act_reach.py`): the couch 17 h on 6 days (was 8 on 2); the room hub 36; Ryan's union 57 h.
+
+**Headless** (playtest.py library):
+- Ryan is on the couch Mon 19:30, Wed 21:00, Sat 15:00; in his room Mon 21:00, Sat 11:00, Thu 23:00.
+- The couch screen is offered Tue 19:15.
+- The knock is offered Sat 11:00, Sun 09:00 and Mon 23:00; not Sat 09:00 (Kayla) or Fri 23:00.
+- Step 3 is offered Mon 21:00 and 23:00, not Mon 19:00 or Wed 23:00. Step 7 is offered Mon 21:00 and 23:00.
+- The room's bed acts show Sun 09:00, Sat 11:00 and Mon 21:00, not Sat 09:00 or Mon 19:00.
+- 0 page errors.
+
+## 2026-11-09 — Hale's reach (DECISIONS 215)
+
+**Changes:**
+- `v2_state.json`: a Hale row in `hale_office`, Mon, Tue, Wed, Fri 15:00-19:00; the office's hours and job.
+- `world_data.py`: the office's hours and description. `people_data.py`: "office hours".
+- `hale.py`: the session gets a second schedule; Claire's roll is Thursday only (`THU`, `NOT_THU`, `TOUCH_DAYS`); the end and run screens say the day only on Thursday; hub lines gated by day; the last card.
+- `walkins_out.py`: his door line.
+- Sheets: `npc_hale.md` (grid), `hale_thursday_session.md` (window, the roll, the new lines).
+
+**Checks:**
+- Gates: 113 pass, 3 decided, 1 fail, 4 n/a. *The loop is open enough hours*: Hale 16.6 h on 5 days (was 0.6); Laura 6 remains. An earlier build failed *every person here has a face* (his office was still shut on the new days in the ledger), fixed.
+- Shape: 22 pass. Cites: 0 wrong.
+
+**Headless:**
+- The session is offered Mon 15:30, Wed 18:30, Fri 16:00 and Thu 18:45; not Thu 17:30, Tue 19:30 or Sat 16:00.
+- With the roll at 1, Monday goes on to the act; Thursday goes to Claire. Monday's end is "Same time." with no wife; Thursday's is "Thursday." with her car.
+- 0 page errors.
+
+## 2026-11-09 — Laura's reach (DECISIONS 216)
+
+**Changes:**
+- `v2_state.json`: her kitchen evening ends 21:30; a bathroom row Mon, Tue, Thu, Fri, Sun 21:30-22:00; awake until 23:30, asleep from 23:30; steps 1 and 2 end 21:30, step 4 ends 23:30; loop is `laura_alone_after` and `laura_shower_gap`.
+- `people_data.py`: "in the shower before bed".
+- `home.py`: `LAURA_HOUR` and `LAURA_ASLEEP_HOURS` to 23:30; the shower gap gets the second schedule and day-aware hooks.
+- `laura.py`: `LAURA_ASLEEP_HOURS` and her bedroom's awake line to 23:30.
+- `world_data.py`: her door's windows to 23:30.
+- Sheets: `npc_laura.md` and `laura_shower_gap.md`.
+
+**Problems found and fixed:**
+- Shape failed *the person is there at the step's hour* (step 1 still ran to 22:00).
+- The new Saturday/weeknight hook lines first showed on neither day: as `GC` groups right after her thought bands, they joined that chain. They are `G` groups now.
+
+**Checks:**
+- Gates: 113 pass, 3 decided, 1 fail, 4 n/a. The fail is Laura's loop at 12 h on 7 days (was 6 on 6), under the 14 floor, as LO's pick said.
+- Shape: 22 pass. Cites: 0 wrong.
+
+**Headless:**
+- Laura is in the kitchen Mon 21:00, the bathroom Mon 21:45 and Sun 21:45, her room Mon 23:15 and 23:45, and nowhere Wed 21:45.
+- The shower gap is offered Mon 21:45, Sun 21:45 and Sat 16:45; on Monday it reads "most nights, before bed" and no "Saturday".
+- 0 page errors.
+- Her door options were not walked headless; the gate reads their windows, 9 h.
+
+## 2026-11-09 — Zoe's and Jake's reach (DECISIONS 217)
+
+**Changes:**
+- `v2_state.json`: Zoe gets a Sunday bedroom row, and her flat and bedroom open Sunday 20:00-00:00. Jake's gym row runs to 17:30. Jake gets a front-door row on Mon, Tue, Thu and Sun 22:00-00:00 behind `jake_coming`. His loop adds `jake_booty_call`.
+- `people_data.py`: the `jake_coming` latch (3 h); two activities.
+- `heat_a.py`: A1's button runs to 17:15; A5's weekday button; `A5_BUTTON_SUN`.
+- `zoe.py`: hub description.
+- `jake.py`: `jake_booty_call`. `phone.py`: `jake_booty_text`.
+- Sheets: `jake_date_end.md` (`booty` a and b), `npc_zoe.md`, `npc_jake.md`.
+
+**Fails along the way, all fixed:**
+- *a phone line is true*: "a Sunday night in bed" read as asleep, so the activity is renamed.
+- *one pool, one place*: the reused sneak-in beats and the Ryan-knocks line now have their own words.
+- *speech is a dialog block*: cleared by the new beats.
+- *ignoring a thread costs*: ignoring now costs his patience.
+
+**Checks:**
+- Gates: 113 pass, 3 decided, 1 fail (Laura's loop, 12 h), 4 n/a.
+- *The loop is open enough hours*: Zoe 18.5 h on 7 days, Jake 31.5 h on 7 days with a phone invite.
+- Shape: 22 pass. Cites: 0 wrong.
+- The ladder lint lists `jake_booty_call` as "opens on finish", as the date's sneak-in is.
+
+**Headless:**
+- Zoe is in her bedroom Sun 21:00 and Mon 22:30, and in her flat Mon 21:00. "Get into her bed." shows Sun 21:00 and Mon 22:30.
+- Jake is in the gym Tue 17:00 and 17:20.
+- Jake isn't at the door Mon 22:30 before her yes; after it he is, and the booty call is offered. It is not offered Wed 22:30. The door shows "Come in." and the no.
+- 0 page errors.
+
+## 2026-11-09 — the walk-ins (DECISIONS 218)
+
+**Changes:**
+- `walkins.py`, `walkins_out.py`: the rule windows, and the text fixes listed in DECISIONS 218.
+- `toml_phases/3_activities.toml`: the hand-written hosts' `substitutions` lines resynced: `canteen_eat`, `canteen_listen`, `library_study`, `party_house_soak`, `quad_grass`. The build's `check_toml_hosts` had stopped it.
+- `v2_state.json`, `people_data.py`, `ryan.py`, `npc_ryan.md`: Ryan's Wednesday couch to 21:00, then his room.
+
+**Found on the way:** Laura's Sunday channel-5 walk-in was dead after DECISIONS 216 (her kitchen row ends 21:30, the walk-in read her there until 21:58). Nothing flagged it. It is fixed (20:30-21:28).
+
+**Checks:**
+- Gates: 113 pass, 3 decided, 1 fail (Laura's loop, 12 h), 4 n/a.
+- Shape: 22 pass. Cites: 0 wrong.
+
+**Reach (act_reach.py, explicit walk-ins):**
+
+| walk-in | h a week | was |
+|---|---|---|
+| Mark's TV from the garage | 10 | 2 |
+| Mark at the mirror | 12 (08:00-24:00 only) | 0 |
+| Ryan's channel 5 | 7.5 | 1 |
+| Zoe in the tub | 3.5 | 0.2 |
+| Zoe's run | 3.5 | 0.5 |
+| Zoe in the canteen | 3 | 0.8 |
+
+- Still under 3: Mark's Saturday coffee 0.2, Mark's Wednesday TV 0.8, Zoe's bedtime 1, the cocky guy 1 (party night), Mark's Saturday shower 2.5. All are once-a-day moments, kept with their reason.
+- The audit script doesn't know a host can be shut (Mark's TV is shut while Ryan is on the couch), so its hours overstate that one.
+
+**Headless:**
+- `sample_dispatch` at a mid-window time draws the walk-in about 1 in 4: Mark TV Fri 20:00, Zoe tub Sat 21:00, Zoe run Sun 09:00, the canteen Wed 12:30, Nadia Mon 16:00, Mark mirror Mon 23:30, Laura TV Sun 21:00, Laura wardrobe Mon 21:50.
+- Mark's mirror doesn't draw Mon 21:00 (he's in the garage).
+- `offered`: the TV room is shut Mon 19:30 and Wed 20:00 (Ryan on the couch) and open Mon 20:45, Fri 20:00, Wed 21:15.
+- 0 page errors.
+- **Not done:** the simulated week of walk-ins a day that the plan named.
+
+## 2026-11-10 — the skill's checks after the reach pass (no game change)
+
+- With the skill fix (`author-game-v2/CHANGELOG.md`, 2026-11-10): gates 114 pass, 3 decided, 1 fail, 4 n/a.
+- New gate *a walk-in can happen*: 155/155 pass.
+- *The loop is open enough hours* is now at the top games' 18: Laura 12.5 h and Hale 16.6 h fail it. Ryan 20.5, Zoe 19.4 and Jake 30.4 pass, counted by their act screens.
+
+## 2026-11-10 — Hale's booked hour (DECISIONS 219)
+
+**Changes:**
+- `phone.py`: `hale_office_text`.
+- `hale.py`: the session's third schedule, the booking read, `hale_booked` cleared on leave, the last card.
+- `v2_state.json`, `world_data.py`: a Hale row and office hours, Mon, Tue, Wed and Fri 10:00-12:00.
+- `people_data.py`: the 18 h latch and an activity.
+- `npc_hale.md`: the grid.
+- `jake_date_end.md`: the booty beats are signed.
+
+**Checks:**
+- The first build failed *a chat is short and timed* (an 11-word bubble), so the email is two bubbles.
+- Gates: 114 pass, 3 decided, 1 fail (Laura 12.5 h, held by LO), 4 n/a.
+- Shape: 22 pass. Cites: 0 wrong.
+
+**Headless:**
+- Hale isn't in his office Tue 10:30 unbooked; booked, he is.
+- The door reads "Ten o'clock, you wrote." at 10:05.
+- On Thursday he isn't there in the morning even when booked.
+- 0 page errors.
+- (`offered()` reads true unbooked too, because it does not check `requires_npc`; his absence is what keeps it shut.)
+
+## 2026-11-10 — scene reader on the reach changes (DECISIONS 220)
+
+- `v2-reader` read 33 canvases: 10 FAILs, all fixed over three re-reads, and the last read has none. The verdicts are in the session scratchpad (`reader_reach/`).
+- Files:
+  - `walkins_out.py`, `jake.py`, `heat_a.py`, `ryan.py`, `hale.py`, `home.py`, `people_data.py`;
+  - `v2_state.json` (Jake's gym row, Zoe's Sunday row and her rooms' hours);
+  - sheets `npc_jake.md`, `npc_zoe.md`, `hale_thursday_session.md`.
+- Gates: 114 pass, 3 decided, 1 fail (Laura's loop, held), 4 n/a. Shape: 22 pass. Cites: 0 wrong.
+- Loops: Ryan 20.5 h, Zoe 18.4, Hale 24.6, Jake 29.4.
+
+## 2026-11-10 — everyday scenes at home, batch 1 (DECISIONS 221)
+
+**Changes:**
+- New part `everyday.py` (in `ALL_PARTS`): 20 random-mode canvases, `HUB_READS` and `hub_read()`, called by `ryan.py`, `laura.py` and `mark.py`.
+- `0_systems_spec.toml`: 23 daily flags in `[engine.daily_tick]`, and 2 hidden chain counters.
+- `gen_world.py`: `ev_ryan_bet_n` and `ev_mark_tv_n`.
+- New sheet `sheets/scenes/everyday_home.md` (the index).
+
+**First gate run: 9 fails, all fixed:**
+- clothes named with no check;
+- arrival lines;
+- "good girl" from a parent figure;
+- a morning word in an evening hub;
+- a cap past the next stage;
+- a pay on the wrong meter;
+- an id read as "work" by the needs gate;
+- the `but` rate under its floor.
+
+**v2-reader: 33 FAILs, then 2 plus 1 new, then 0.** The three causes were:
+- hub lines with no lower time bound;
+- the no setting the yes's flag;
+- a raise flipping the answer screen's band (bands are now buttons).
+
+**Checks:**
+- Gates: 114 pass, 3 decided, 1 fail (Laura's loop, held), 4 n/a. Shape: 22 pass. Cites: 0 wrong. Skill tests: 1048.
+
+**Headless:**
+- 13 of 14 sampled scenes are offered in their window. `ev_laura_list` is shut on Sunday, when Mark is in the kitchen all day, as written.
+- Every answer screen renders.
+- The bet chain opens only the next rung (counter 0 to 3 shows rung 1 to 4).
+- 0 page errors.
+
+**Week simulation** (study scripts `15_week_sim.py` and `15_week_classes.py`, rough):
+
+| route | everyday a week | total a week | was |
+|---|---|---|---|
+| the study's route | 4.8 | 18.6 | 2.2 / 14.5 |
+| evenings at home | 8.0 | 22.6 | 2.2 / 14.8 |
+
+## 2026-11-10 — everyday scenes away from home, batch 2 (DECISIONS 222)
+
+**Changes:**
+- `everyday.py`, BATCH 2: 13 canvases, `out_scene()` (met flags, the out brake), and `SUB_RULES` / `attach_subs()` for the café walk-ins.
+- Hub readers wired into `zoe.py`, `jake.py`, `hale.py` and `tom.py`; `extras.py` attaches the café rules.
+- `0_systems_spec.toml`: 14 more daily flags.
+
+**First gate run: 6 fails, all fixed:**
+- an arrival line;
+- a cap past the next stage;
+- a pay on the wrong meter;
+- an accident that paid him nothing;
+- random events in the uniform room (moved to walk-ins);
+- the `but` floor.
+
+**v2-reader:** 33 FAILs, then 4, then 0.
+
+**Checks:**
+- Gates: 114 pass, 3 decided, 1 fail (Laura's loop, held), 4 n/a. Shape: 22 pass. Cites: 0 wrong.
+
+**Headless:**
+- 9 of 9 sampled random scenes are offered with their person there, and every answer screen renders.
+- `cafe_coffee` draws Tom's machine 29% and his sister 20% of rolls at Tue 15:00.
+- 0 page errors.
+
+**Week simulation** (rough, both batches):
+
+| route | everyday a week | total a week |
+|---|---|---|
+| the study's route | 9.0 | 23.5 |
+| evenings at home | 12.2 | 27.6 |

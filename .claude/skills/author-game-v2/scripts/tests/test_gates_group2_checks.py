@@ -5,7 +5,7 @@ rule the skill already states; the ids are the third alignment pass's rows
 
   G75        a visit pays a meter once                the-arc.md A4d
   G74        an act pays on every way out             the-arc.md A4d · the-heat-ladder.md H5
-  G8 · G13   an act pays inside its own stage         the-arc.md A4 · A4d
+  G8 · G13   an act pays no further than the next stage the-arc.md A4 · A4d
   A48        an act pays the meter it uses            the-heat-ladder.md "Two meters, one act"
   E95        a need falls where it says               the-meters.md M8
   J5 · J73   a deduction is gated or priced           engine.md §21
@@ -183,24 +183,26 @@ def test_a_decision_screen_with_a_way_out_is_not_an_act_screen():
     assert row(g, EXITS)["na"] is True
 
 
-# ── G8 · G13 · an act pays inside its own stage ──────────────────────────────
-STAGE = "an act pays inside its own stage"
+# ── G8 · G13 · an act pays no further than the next stage ────────────────────
+# PLAYTEST 2026-11-09: an act now pays on to the NEXT stage's top (a cap at her own top was the wall).
+STAGE = "an act pays no further than the next stage"
 
 
-def test_a_cap_above_the_stage_top_fails():
-    g = game(cv("gym", [nd("a", [ch("Let it slip.", eff=[pay("show", 1, 59)], conds=[trait("show", "gte", 20)])])]))
+def test_a_cap_above_the_next_stage_top_fails():
+    """Opens at 0 (Low): the next stage, Mid, tops out at 39."""
+    g = game(cv("gym", [nd("a", [ch("Let it slip.", eff=[pay("show", 1, 59)])])]))
     r = row(g, STAGE)
     assert r["pass_"] is False and "top 39" in r["detail"][0], r
 
 
-def test_a_cap_at_the_stage_top_passes():
-    g = game(cv("gym", [nd("a", [ch("Let it slip.", eff=[pay("show", 1, 39)], conds=[trait("show", "gte", 20)])])]))
+def test_a_cap_at_the_next_stage_top_passes():
+    g = game(cv("gym", [nd("a", [ch("Let it slip.", eff=[pay("show", 1, 59)], conds=[trait("show", "gte", 20)])])]))
     assert row(g, STAGE)["pass_"] is True
 
 
 def test_an_upper_gate_inside_the_stage_holds_it():
-    g = game(cv("gym", [nd("a", [ch("Let it slip.", eff=[pay("show", 1, 59)],
-                                    conds=[trait("show", "gte", 20), trait("show", "lt", 39)])])]))
+    g = game(cv("gym", [nd("a", [ch("Let it slip.", eff=[pay("show", 1, 79)],
+                                    conds=[trait("show", "gte", 20), trait("show", "lt", 59)])])]))
     assert row(g, STAGE)["pass_"] is True
 
 
@@ -416,7 +418,7 @@ WAYUP = "every stage has a way up"
 
 
 def wayup_game(card_place):
-    return game(cv("park_walk", [nd("a", [ch("Flash.", eff=[pay("show", 1, 19)])])], location="park"),
+    return game(cv("park_walk", [nd("a", [ch("Flash.", eff=[pay("show", 1, 39)])])], location="park"),
                 cv("park_more", [nd("a", [ch("Flash.", eff=[pay("show", 1, 39)], conds=[trait("show", "gte", 20)])])],
                    location="park"),
                 cv("shop_try", [nd("a", [ch("Go.", eff=[pay("show", 1, 39)], conds=[trait("show", "gte", 20)])])],

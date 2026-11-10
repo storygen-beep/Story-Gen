@@ -58,6 +58,7 @@ A ceiling, never a floor. LO took these, 2026-10-08.
 | `zoe_apartment` (her living room) | Fri, Sat | 18:00 | 00:00 | Friday party · Saturday evening |
 | `zoe_apartment` (her living room) | Sat | 00:00 | 02:00 | the Friday party after midnight |
 | `zoe_bedroom` | Mon–Thu | 22:00 | 00:00 | going to bed: she lends the dress |
+| `zoe_bedroom` | Sun | 21:00 | 00:00 | going to bed early, a Sunday night: "Get into her bed." from 21:00 (reach audit 2026-11-09, DECISIONS 217, 220) |
 | `canteen` | Mon–Fri | 11:45 | 13:00 | lunch |
 | `park` | Sat, Sun | 08:00 | 10:00 | her weekend run |
 | `lecture_hall` | Tue, Thu | 08:30 | 11:45 | in class: figure drawing, then Biology |

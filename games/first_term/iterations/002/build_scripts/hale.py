@@ -244,6 +244,8 @@ out.append({
 LOW_CASES = [[trait("corruption", "lt", 60)]]
 HIGH = [trait("corruption", "gte", 60)]
 ROLL = lambda op, v: trait("hale_claire_roll", op, v)
+THU, NOT_THU = [wd(3)], [wd(0, 1, 2, 4, 5, 6)]
+TOUCH_DAYS = [THU + [ROLL("gte", 2)], NOT_THU]
 # fix_g3c: the high session in a dress, after "You pull your dress over your head": no garment is left to name for sure
 DRESS_OFF_HAND = (("You slide your hand inside your clothes.", "You slide your hand down to your cunt."),
                   ("His hand slides inside your clothes and rests flat on your belly.", "His hand slides down your bare belly and rests there, flat."),
@@ -267,17 +269,26 @@ SESSION_PAY = lambda c, e=None: [add("grade_psych", 2), CAP("corruption", 1, c),
 out.append({
     "id": "hale_thursdays", "name": "Earn your grade in Dr. Hale's office",   # pass 3 H33/H34 (the-voice.md R1, D11): the name says what happens if she clicks, and never hides the act
     # reader a3, seen by the readers (DECISIONS 131): the stages match the trigger (Corruption 40, Exhibitionism 40)
-    "description": "The Thursday session after Hale's step 4: his hands over her clothes (Bold and Showing: Corruption 40, Exhibitionism 40) or her top off and touching herself while he takes notes (Hungry: Corruption 60). Grade +2, both meters +1. Claire is early one Thursday in four. Hale, further: next release.",
+    "description": "The session after Hale's step 4, Thursdays before his wife comes and his office hours on the other weekdays: his hands over her clothes (Bold and Showing: Corruption 40, Exhibitionism 40) or her top off and touching herself while he takes notes (Hungry: Corruption 60). Grade +2, both meters +1. Claire is early one Thursday in four (Thursdays only). Hale, further: next release.",
     "trigger": {"location": "hale_office", "requires_npc": H, "is_repeatable": True, "priority": 5, "is_active": True,
                 "max_triggers_per_day": 1,
-                "schedules": [{"weekdays": [3], "start_time": "18:30", "end_time": "19:05"}],   # done before Claire at half past (as built)
+                # Thursday is done before Claire at half past (as built). LO, 2026-11-09 ("Thursday + office hours"; the
+                # reach audit, 12_reach_audit.md, had the session at 0.6 h a week): it also runs in his office hours on the
+                # other weekdays, with no Claire. The act names no day; the door and the goodbye do.
+                "schedules": [{"weekdays": [3], "start_time": "18:30", "end_time": "19:05"},
+                              {"weekdays": [0, 1, 2, 4], "start_time": "15:00", "end_time": "19:00"},
+                              # LO, 2026-11-10 ("1 yes add it"): a booked morning hour; his row has him here only when
+                              # she answered his "Tomorrow, ten" email (phone.py hale_office_text)
+                              {"weekdays": [0, 1, 2, 4], "start_time": "10:00", "end_time": "12:00"}],
                 "conditions": cond(trait("hale_step", "eq", 4), trait("corruption", "gte", 40), trait("exhibitionism", "gte", 40))},
     "nodes": [
         node("door", "Twenty minutes", [
             P("Dr. Hale's office door is unlocked. He locks it behind you without a word. The photo is already face-down."),
             D(H, "Twenty minutes, @player."),
-            G(cond(flag("hale_thursday_booked"), tod("18:30", "18:40")), D(H, "Half past six, you wrote. You're on time.")),   # P10 (round 2): the booking read
-            G(cond(flag("hale_thursday_booked"), tod("18:40", "19:05")), D(H, "Half past six, you wrote. You're late, @player. Don't be late again.")),   # scene reader b02: the window runs to 19:05
+            G(cond(flag("hale_thursday_booked"), wd(3), tod("18:30", "18:40")), D(H, "Half past six, you wrote. You're on time.")),   # P10 (round 2): the booking read
+            G(cond(flag("hale_booked"), wd(0, 1, 2, 4), tod("10:00", "10:10")), D(H, "Ten o'clock, you wrote. Lock it behind you.")),   # the booking read (P10)
+            G(cond(flag("hale_booked"), wd(0, 1, 2, 4), tod("10:10", "12:00")), D(H, "Ten o'clock, you wrote. It's past ten, @player.")),
+            G(cond(flag("hale_thursday_booked"), wd(3), tod("18:40", "19:05")), D(H, "Half past six, you wrote. You're late, @player. Don't be late again.")),   # scene reader b02: the window runs to 19:05
             # writing pass 2026-11-04, reader test 2: the session moves with her Corruption, as touch_low and touch_high do (both on "Let him.")
             G(cond(trait("corruption", "lt", 60)), D(H, "My hands, over your clothes. Your clothes stay on until you're further along than this, @player.")),
             G(cond(trait("corruption", "gte", 60)), D(H, "Over the clothes is finished, @player. Today it comes off, and you describe every second of it to me.")),   # scene reader 2026-11-04: true of all three touch_high screens, his hand or hers
@@ -287,23 +298,24 @@ out.append({
             go("\"This isn't coaching.\"", node="isnt", mins=2, eff=[add("grade_psych", -1) | {"clamp": True}]),
             go("Run.", node="run", mins=1, eff=[add("grade_psych", -2) | {"clamp": True}])]),   # clamp: the grade floors at 0
         node("roll", "His hands", [P("He looks you over across the desk.")],
-            [go("Go on.", node="claire_car", mins=1, cond_=cond(ROLL("eq", 1)))]
-            + [go("Go on.", node="touch_low", mins=1, cond_=cond(ROLL("gte", 2), *c), eff=[SEX_HYGIENE]) for c in LOW_CASES]
-            + [go("Go on.", node="touch_high", mins=1, cond_=cond(ROLL("gte", 2), *HIGH), eff=[SEX_HYGIENE])]),
+            # Claire only comes on Thursdays: on the other days the roll is ignored (the two day sets never overlap)
+            [go("Go on.", node="claire_car", mins=1, cond_=cond(wd(3), ROLL("eq", 1)))]
+            + [go("Go on.", node="touch_low", mins=1, cond_=cond(*day, *c), eff=[SEX_HYGIENE]) for c in LOW_CASES for day in TOUCH_DAYS]
+            + [go("Go on.", node="touch_high", mins=1, cond_=cond(*day, *HIGH), eff=[SEX_HYGIENE]) for day in TOUCH_DAYS]),
         node("touch_low", "Tell me what you feel", [
             # GC, not G: the three bands are exclusive (no dress / one dress / the other), and the cut speech
             # (canv.voice_canvas) puts each pool entry in a group; G's extra pool would pass the importer's depth 4.
             GC(cond(*[{"type": "clothing_item", "item_id": d, "operator": "unequipped"} for d in ONE_PIECE], {"type": "clothing_slot", "slot": "top", "operator": "equipped"}), POOL(P(beat("hale_thursday_session", "A a")), P(beat("hale_thursday_session", "A b")), P(beat("hale_thursday_session", "A c")), pid="hale_touch_low", bag=True)),
             *[GC(cond({"type": "clothing_item", "item_id": d, "operator": "equipped"}), POOL(*[P(beat("hale_thursday_session", k).replace("your top", ONE_PIECE[d])) for k in ("A a", "A b", "A c")], pid=f"hale_touch_low_{d}", bag=True)) for d in ONE_PIECE],
             VID("a professor's hands on a student over her clothes in his office, her answering him", "professor touches student over clothes office", "teacher hands on student body talking", pool_dir="sex/hale_thursday_low_t4")],
-            [go("\"Same time next week.\"", node="end", mins=15, eff=SESSION_PAY(59))]),
+            [go("\"Until next time.\"", node="end", mins=15, eff=SESSION_PAY(59))]),   # scene reader 2026-11-10: a booked hour promises no next week
         # scene reader b02 (2026-11-03): in a dress the top she pulls off is the dress, as touch_low already does
         node("touch_high", "Describe it", [GC(cond(*[{"type": "clothing_item", "item_id": d, "operator": "unequipped"} for d in ONE_PIECE], {"type": "clothing_slot", "slot": "top", "operator": "equipped"}), POOL(P(beat("hale_thursday_session", "B a")), P(beat("hale_thursday_session", "B b")), P(beat("hale_thursday_session", "B c")), pid="hale_touch_high", bag=True)),
             # fix_g3c: with the dress off over her head nothing says she has panties on, so the hand goes to her body
             # itself (her clit is the next word in all three), not "inside your panties"
             *[GC(cond({"type": "clothing_item", "item_id": d, "operator": "equipped"}), POOL(*[P(_dress_off(beat("hale_thursday_session", k).replace("your top", ONE_PIECE[d]))) for k in ("B a", "B b", "B c")], pid=f"hale_touch_high_{d}", bag=True)) for d in ONE_PIECE],
             VID("a topless student touching herself in her professor's office while he watches and takes notes", "student masturbates professor watches notes", "girl touches herself teacher watching office", pool_dir="sex/hale_thursday_high_t5")],
-            [go("\"Same time next week.\"", node="end", mins=15, eff=SESSION_PAY(79, 59))]),
+            [go("\"Until next time.\"", node="end", mins=15, eff=SESSION_PAY(79, 59))]),
         node("claire_car", "She's early", [
             P("His phone buzzes on the desk before he's touched you. He reads it and his face goes flat."),
             D(H, "She's early. She's in the parking lot."),
@@ -311,11 +323,15 @@ out.append({
             D(H, "Next Thursday."),
             P("From the window at the end of the faculty floor you can see a car with its engine running."),
         ], [go("\"Next Thursday.\"", loc="faculty_floor", mins=5, eff=[add("grade_psych", 2)])]),
-        node("end", "Thursday", [
+        node("end", "Time", [
             P("He looks at the clock, and straightens his tie, and unlocks the door."),
-            D(H, "Thursday."),
-            P("Down in the parking lot his wife's car isn't there yet."),
-        ], [go("\"Thursday.\"", loc="faculty_floor", mins=2)]),
+            GC(cond(*THU), D(H, "Thursday."), P("Down in the parking lot his wife's car isn't there yet.")),
+            # scene reader 2026-11-10 (DECISIONS 220): a booked morning hour comes back only by his email
+            GC(cond(*NOT_THU, tod("10:00", "12:30")), D(H, "I'll email."), P("Out on the faculty floor the lecture changeover is starting, doors banging. Nobody looks at his door.")),
+            GC(cond(*NOT_THU), D(H, "Same time."), P("Out on the faculty floor a door bangs, and somebody laughs on the stairs. Nobody looks at his door.")),
+        ], [go("\"Thursday.\"", loc="faculty_floor", mins=2, cond_=cond(*THU)),
+            go("\"I'll watch for it.\"", loc="faculty_floor", mins=2, cond_=cond(*NOT_THU, tod("10:00", "12:30"))),
+            go("\"Same time.\"", loc="faculty_floor", mins=2, cond_=cond(*NOT_THU, tod("12:30", "10:00")))]),
         # scene reader b02 (2026-11-03): the no costs a grade point (grade_psych -1), so he says it goes down; no letter named
         node("isnt", "Not coaching", [
             ME("This isn't coaching."),
@@ -324,14 +340,15 @@ out.append({
         ], [go("Leave him to his photo.", loc="faculty_floor", mins=2)]),
         node("run", "Run", [
             P("You turn the lock yourself and you're out of the door before he's out of his chair. Behind you, calm, not raised:"),
-            D(H, "Next Thursday, @player."),
+            GC(cond(*THU), D(H, "Next Thursday, @player.")),
+            GC(cond(*NOT_THU), D(H, "Office hours, @player. You know when.")),
         ], [go("Keep walking.", loc="faculty_floor", mins=2)]),
     ]})
 
 # ── his office hub (one line on her grade, one on her clothes; the start choice) ──
 out.append({
     "id": "hub_hale_office", "name": "Dr. Hale",
-    "description": "Hale's office hub on Thursdays: one line on her grade, one on her clothes, the start choice.",
+    "description": "Hale's office hub in his office hours: one line on her grade, one on her clothes, the start choice.",
     "trigger": {"location": "hale_office", "npc": H, "requires_npc": H, "is_repeatable": True, "priority": 6, "is_active": True,
                 "conditions": cond(flag("hale_met"))},
     "nodes": [node("office", "His office", [
@@ -356,8 +373,12 @@ out.append({
         # reader a3 #18 (DECISIONS 131): every step gets a line pointing at the next visit. This hub runs Thu 17:00-19:30.
         # Step 1: the next step is a Psychology class (Mon/Wed/Fri), and Friday's is tomorrow. Step 2: his step 3 opens
         # here at 18:00, so before six he says six. Step 3: his step 4 and the sessions are Thursdays at 18:30.
-        G(cond(trait("hale_step", "eq", 1)), D(H, "Front row tomorrow, @player. Where I can see you.")),
-        G(cond(trait("hale_step", "eq", 2), tod("17:00", "18:00")), D(H, "After six, @player. Not before.")),
+        # LO 2026-11-09 (office hours on the other weekdays): "tomorrow" is true only on Sunday, Tuesday and Thursday,
+        # and "after six" only on his step-3 Thursday
+        G(cond(trait("hale_step", "eq", 1), wd(1, 3, 6)), D(H, "Front row tomorrow, @player. Where I can see you.")),
+        G(cond(trait("hale_step", "eq", 1), wd(0, 2, 4, 5)), D(H, "Front row next class, @player. Where I can see you.")),
+        G(cond(trait("hale_step", "eq", 2), wd(3), tod("17:00", "18:00")), D(H, "After six, @player. Not before.")),
+        G(cond(trait("hale_step", "eq", 2), wd(0, 1, 2, 4)), D(H, "Thursday, @player. After six.")),
         G(cond(trait("hale_step", "eq", 3)), D(H, "Thursdays. Half past six, @player.")),
     ], [
         # S4 (LO 2026-11-03): in his office he isn't busy, so one choice aimed at him. An hour, Psychology +1, cap 69.
@@ -445,7 +466,7 @@ cards = step_cards(H, {
     # reader a3 (DECISIONS 131): the card names step 4's real gate, Corruption 40 and Exhibitionism 40
     4: ("\"Thursdays. Half past six. The door will be locked.\"", "Thursday, half past six: his office (Bold, Showing)"),
 }, met_flag="hale_met", pointer=(1, "Your Psychology lecturer"),
-   terminal_text=("Thursdays, half past six: his office, the door locked.", "Hale, further. (Next release)"))
+   terminal_text=("His office, the door locked: his office hours, weekday afternoons until seven, Thursdays at half past six before his wife comes, or ten in the morning when he emails.", "Hale, further. (Next release)"))
 for c in cards:
     c["when"].append({"flag": "opening_done", "op": "is_true"})
 
@@ -458,12 +479,14 @@ for _c in out:
     if _c["id"] == "hale_03_photo_face_down":
         clear_on_leave(_c, "hale_office_booked")
     if _c["id"] == "hale_thursdays":
-        clear_on_leave(_c, "hale_thursday_booked")
+        clear_on_leave(_c, "hale_thursday_booked", "hale_booked")
 # heat proposal B20 (DECISIONS 147 chunk 3): his office hub reads his door
 import walkins_out
 walkins_out.hub_read(out)
 # pass 4 E95: the one-time sex step takes energy and hygiene like the repeatable acts (board.needs)
 sex_takes_needs(out, "hale_04_claire_knocks", "higher", "Wait.")
+import everyday   # DECISIONS 222: the day after an everyday scene, the hub remembers it
+everyday.hub_read(out)
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards)
 open(__import__("sys").argv[1], "w").write(text)
 print("hale:", len(out), "canvases,", len(cards), "cards")

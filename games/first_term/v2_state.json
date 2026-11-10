@@ -6037,7 +6037,7 @@
         "id": "hale_office",
         "name": "Dr. Hale's Office",
         "kind": "destination",
-        "job": "Thursday evenings",
+        "job": "his office hours; Thursday evenings, before his wife comes",
         "anchor": false,
         "fill": 4000,
         "labels": [
@@ -6054,7 +6054,7 @@
           ]
         },
         "in_release": true,
-        "hours": "Thu 17:00-19:30",
+        "hours": "Mon,Tue,Wed,Fri 10:00-12:00; Mon,Tue,Wed,Fri 15:00-19:00; Thu 17:00-19:30",
         "closed_text": "The office is locked. Office hours are on the door.",
         "alone": "read her grade, posted on the door",
         "hidden_until": "hale_met"
@@ -6236,7 +6236,7 @@
           ]
         },
         "in_release": true,
-        "hours": "Mon-Sat 18:00-00:00; Sat 00:00-02:00",
+        "hours": "Mon-Sat 18:00-00:00; Sat 00:00-02:00; Sun 21:00-00:00",
         "closed_text": "Zoe's out. Nobody answers.",
         "alone": "borrow a dress (in her bedroom)",
         "hidden_until": "zoe_met"
@@ -6261,7 +6261,7 @@
           ]
         },
         "in_release": true,
-        "hours": "Mon-Sat 18:00-00:00; Sat 00:00-02:00",
+        "hours": "Mon-Sat 18:00-00:00; Sat 00:00-02:00; Sun 21:00-00:00",
         "closed_text": "Zoe's out. Nobody answers.",
         "alone": "borrow Zoe's dress",
         "hidden_until": "zoe_met"
@@ -6607,7 +6607,7 @@
             "release": "later (Ryan A 12)"
           },
           {
-            "where": "home_ryan_room",
+            "where": "home_living_room",
             "weekdays": [
               "Mon",
               "Tue",
@@ -6615,7 +6615,38 @@
               "Sun"
             ],
             "from": "19:00",
-            "to": "22:00"
+            "to": "20:30",
+            "note": "on the couch after dinner, his game on (reach audit 2026-11-09, playtest_study_20261109/12_reach_audit.md: his couch was weekends only, 8 h a week)"
+          },
+          {
+            "where": "home_living_room",
+            "weekdays": [
+              "Wed"
+            ],
+            "from": "19:00",
+            "to": "21:00",
+            "note": "Wednesday evening on the couch; Mark cooks, no family dinner (reach audit 2026-11-09); to 21:00 so Mark's Wednesday TV walk-in has the room (DECISIONS 218)"
+          },
+          {
+            "where": "home_ryan_room",
+            "weekdays": [
+              "Wed"
+            ],
+            "from": "21:00",
+            "to": "22:00",
+            "note": "his room after the couch (DECISIONS 218)"
+          },
+          {
+            "where": "home_ryan_room",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Thu",
+              "Sun"
+            ],
+            "from": "20:30",
+            "to": "22:00",
+            "note": "his room after the couch (reach audit 2026-11-09: the couch took 19:00-20:30)"
           },
           {
             "where": "home_ryan_room",
@@ -6646,6 +6677,9 @@
         ],
         "ladder": {
           "counter": "ryan_step",
+          "loop": [
+            "ryan_two_knocks"
+          ],
           "steps": [
             {
               "n": 1,
@@ -6712,7 +6746,7 @@
                   "Thu",
                   "Sun"
                 ],
-                "from": "19:00",
+                "from": "20:30",
                 "to": "22:00"
               },
               "gate": [
@@ -6733,13 +6767,24 @@
                   "npc": "npc_ryan"
                 }
               ],
-              "hint": "Ryan's room, an evening he's home (not Wednesday or Friday): knock.",
+              "hint": "Ryan's room, an evening he's in there, from half eight (not Friday or Saturday): knock.",
               "her_line_high": "You saw me. Shirt off.",
               "who_notices": "Ryan; she holds his secret",
               "refusal": "parked",
               "raises": {
                 "want": 10,
                 "corruption": 1
+              },
+              "when_also": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Thu",
+                  "Sun"
+                ],
+                "from": "22:00",
+                "to": "00:00",
+                "note": "reach audit 2026-11-09: the couch took 19:00-20:30, so the step also runs late in the evening on his evening days (not Wednesday: gate `ladders move forward` reads a second window only on the first window's hours; not Friday, Kayla's night; not Saturday, Laura waits up)"
               }
             },
             {
@@ -6881,7 +6926,7 @@
                   "Thu",
                   "Sun"
                 ],
-                "from": "19:00",
+                "from": "20:30",
                 "to": "22:00"
               },
               "gate": [
@@ -6909,6 +6954,17 @@
               "raises": {
                 "want": 10,
                 "corruption": 3
+              },
+              "when_also": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Thu",
+                  "Sun"
+                ],
+                "from": "22:00",
+                "to": "00:00",
+                "note": "reach audit 2026-11-09: the couch took 19:00-20:30, so the step also runs late in the evening on his evening days (not Wednesday: gate `ladders move forward` reads a second window only on the first window's hours; not Friday, Kayla's night; not Saturday, Laura waits up)"
               }
             },
             {
@@ -7028,7 +7084,21 @@
               "Sun"
             ],
             "from": "18:00",
-            "to": "22:00"
+            "to": "21:30",
+            "note": "the kitchen until half nine, then her shower (LO, 2026-11-09 ('Bath + later bedtime'; reach audit 12_reach_audit.md: her loop was 6 h a week))"
+          },
+          {
+            "where": "home_bathroom",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Thu",
+              "Fri",
+              "Sun"
+            ],
+            "from": "21:30",
+            "to": "22:00",
+            "note": "her shower before bed (LO, 2026-11-09 ('Bath + later bedtime'; reach audit 12_reach_audit.md: her loop was 6 h a week))"
           },
           {
             "where": "home_master_bedroom",
@@ -7041,8 +7111,8 @@
               "Fri"
             ],
             "from": "22:00",
-            "to": "23:00",
-            "note": "awake and alone, Mark downstairs: laura_alone_in_bed (LO, 2026-10-29, DECISIONS 82)"
+            "to": "23:30",
+            "note": "awake, alone, until half eleven (LO, 2026-11-09 ('Bath + later bedtime'; reach audit 12_reach_audit.md: her loop was 6 h a week))"
           },
           {
             "where": "home_master_bedroom",
@@ -7063,7 +7133,7 @@
               "Thu",
               "Fri"
             ],
-            "from": "23:00",
+            "from": "23:30",
             "to": "06:30"
           },
           {
@@ -7113,6 +7183,10 @@
         "occupancy_rows": [],
         "ladder": {
           "counter": "laura_step",
+          "loop": [
+            "laura_alone_after",
+            "laura_shower_gap"
+          ],
           "steps": [
             {
               "n": 1,
@@ -7123,7 +7197,7 @@
                   "Tue"
                 ],
                 "from": "18:00",
-                "to": "22:00"
+                "to": "21:30"
               },
               "seen_from": "home_kitchen",
               "gate": [],
@@ -7153,7 +7227,7 @@
                   "Fri"
                 ],
                 "from": "20:00",
-                "to": "22:00"
+                "to": "21:30"
               },
               "gate": [
                 {
@@ -7225,7 +7299,7 @@
                   "Fri"
                 ],
                 "from": "22:00",
-                "to": "23:00"
+                "to": "23:30"
               },
               "gate": [
                 {
@@ -7428,6 +7502,7 @@
         "occupancy_rows": [],
         "ladder": {
           "counter": "mark_step",
+          "loop": "none: his last step turns into a repeatable in the next release (decided, W4)",
           "steps": [
             {
               "n": 1,
@@ -7613,6 +7688,7 @@
         ],
         "ladder": {
           "counter": "tom_step",
+          "loop": "none: his last step turns into a repeatable in the next release (decided, W4)",
           "steps": [
             {
               "n": 1,
@@ -7813,6 +7889,15 @@
             "note": "going to bed; she lends the dress (Q48, narrowed: question 52)"
           },
           {
+            "where": "zoe_bedroom",
+            "weekdays": [
+              "Sun"
+            ],
+            "from": "21:00",
+            "to": "00:00",
+            "note": "going to bed early on a Sunday night (scene reader 2026-11-10: 'she falls asleep' must be true; DECISIONS 220)"
+          },
+          {
             "where": "quad",
             "weekdays": [
               "Tue",
@@ -7878,6 +7963,12 @@
         ],
         "ladder": {
           "counter": "zoe_step",
+          "loop": [
+            "hub_zoe_bedroom",
+            "hub_zoe_canteen",
+            "walkin_tub_zoe",
+            "zoe_dares"
+          ],
           "steps": [
             {
               "n": 1,
@@ -8081,10 +8172,38 @@
             ],
             "from": "17:00",
             "to": "19:30"
+          },
+          {
+            "where": "hale_office",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Fri"
+            ],
+            "from": "15:00",
+            "to": "19:00",
+            "note": "office hours (LO, 2026-11-09: 'Thursday + office hours'; reach audit 12_reach_audit.md: his session was 0.6 h a week). No wife pickup on these days."
+          },
+          {
+            "where": "hale_office",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Fri"
+            ],
+            "from": "10:00",
+            "to": "12:00",
+            "when": "hale_booked",
+            "note": "a booked hour: he emails 'Tomorrow, ten', she answers yes (LO, 2026-11-10: '1 yes add it'; DECISIONS 219)"
           }
         ],
         "ladder": {
           "counter": "hale_step",
+          "loop": [
+            "hale_thursdays"
+          ],
           "steps": [
             {
               "n": 1,
@@ -8265,7 +8384,7 @@
             "from": "15:00",
             "to": "17:00",
             "when": "jake_number",
-            "note": "team training, once she has met him (LO, 2026-10-08, Q64)"
+            "note": "team training (the 17:30 showers half-hour reverted: scene reader 2026-11-10, DECISIONS 220)"
           },
           {
             "where": "lecture_hall",
@@ -8287,10 +8406,30 @@
             "to": "14:30",
             "when": "jake_number",
             "note": "figure drawing"
+          },
+          {
+            "where": "home_front_door",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Thu",
+              "Sun"
+            ],
+            "from": "22:00",
+            "to": "00:00",
+            "when": "jake_coming",
+            "note": "he comes by when she answers his 'you up?' text (the top games' booty call: CoT setup.people.will_booty_call, 18:00-24:00 any night; reach audit 2026-11-09 (12_reach_audit.md), LO 'Go ahead' on Zoe and Jake)"
           }
         ],
         "ladder": {
           "counter": "jake_step",
+          "loop": [
+            "jake_party_bathroom",
+            "jake_saturday_date",
+            "hub_jake_quad",
+            "hub_jake_gym",
+            "jake_booty_call"
+          ],
           "steps": [
             {
               "n": 1,

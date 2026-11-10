@@ -81,6 +81,14 @@ Written by `v2-prose` and measured by `gates.py --beat`, 2026-11-01. Fixes after
 
 > You shut the door and push Jake down on your bed in the dark. He's grinning before his back hits the sheets. You climb on, already wet, and sink down onto his cock. You ride him slow, rolling your hips. His big hands find your tits, and his thumbs drag over your nipples. "Fuck, gorgeous," he says, way too loud. You clamp a hand over his mouth and ride him harder. The headboard knocks the thin wall. His hands drop to grip your ass and pull you down on every stroke. You grind your clit against him until your thighs shake. You come on his cock with your palm still over his mouth. He groans into your hand and holds your hips down hard. His cock pulses deep, and his cum fills you while you shake on top of him.
 
+**`booty` a** (the booty call, `jake_booty_call`; reach audit 2026-11-09; written by Claude, signed by LO 2026-11-10: "ok")
+
+> You pull Jake down the hall by the front of his hoodie and shut your door with your back. He has your clothes off before you reach the bed. He sits on the edge of it and pulls you into his lap, facing him. His cock is hard and hot against your belly. You lift up and sink down on it, slow, until he's all the way inside you. His hands grab your ass, and he bounces you on his cock, short and hard. Your bare tits press flat to his chest. You bite his shoulder to keep quiet. The bed creaks under every thrust. His thumb finds your clit and rubs. You come on his cock, shaking in his lap. He holds you down on him and fills you with cum, his face buried in your neck.
+
+**`booty` b** (the booty call; as `booty` a)
+
+> Jake pushes you face-down onto your bed before the door has even clicked shut. He drags your clothes down to your knees and kneels behind you. He spits in his hand, rubs it down his cock, and pushes into you in one long stroke. You bury your face in the pillow. He fucks you slow at first, then hard, one hand pinning the small of your back. Your headboard taps the wall. He reaches under you and squeezes your tit, pinching the nipple hard. You clench tight round his cock. You come into the pillow with your ass pushed back against him. He grunts, thrusts deep, and comes inside you. His cum drips down your thighs onto your sheets.
+
 ## The near-catch lines (mine, signed by LO 2026-11-01)
 
 - **1, Laura's door:** "Across the hall a door opens. Light under yours. You both stop breathing. Then Laura's slippers go to the bathroom, and back, and her door shuts." · Jake, into your neck: "Your mom?" · @player: "Shh."

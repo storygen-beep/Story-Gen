@@ -16,14 +16,14 @@
 |---|---|
 | system · place | Hale · his office, `hale_office` |
 | want | he locks the door; the photo is already face-down |
-| next step | "Same time next week." Nothing past this step this release |
+| next step | "Until next time.", then the end screen's "Thursday." or "Same time." Nothing past this step this release |
 | hook | his quest card: "Hale, further. (Next release)" |
-| where · when | his office · Thursday, starts 18:30-19:05, once a day |
+| where · when | his office · Thursday, starts 18:30-19:05; Mon, Tue, Wed, Fri 15:00-19:00, his office hours (LO, 2026-11-09, DECISIONS 215); once a day |
 | gate | his step 4 · Corruption 40 · Exhibitionism 40 · `touch_high` at Corruption 60 |
 | two tiers | `touch_low` (Corruption under 60): over her clothes, she says what she feels · `touch_high` (Corruption 60) |
 | pays | each session: Psychology grade +2 · Corruption +1 (cap 59, or 79 high) · Exhibitionism +1 (cap 59) |
 | the three answers | every session: "Let him." · "This isn't coaching." (`grade_psych` add −1) · Run. (`grade_psych` add −2). Each no costs only grade |
-| Claire in the parking lot | "Let him." rolls Claire's Thursday 1-4; on 1 his phone ends it, grade +2 |
+| Claire in the parking lot | "Let him." rolls Claire's Thursday 1-4; on 1 his phone ends it, grade +2. Thursdays only: on the other days the roll is ignored |
 | the pools | each tier is a `block_pool`, three entries, `memory = "seen"`, `seen_weight = 0` (the shuffle bag, DECISIONS 112) |
 | the crude-word ceiling | Hale's middle column (tits, nipples, cock: his, only hard under his trousers) with plain anatomy beside it (ass, thighs, wet, clit), as Ryan's signed sheets (DECISIONS 114) · no fuck, cum, pussy, cunt (his late column is not used: it goes no further) · the same as his step 4 |
 | truth | weekly: no "first time", no "again", no counting, no history |
@@ -43,8 +43,8 @@ One row per exit. Read from the build; it replaces the drafted map.
 | `roll` | He looks you over across the desk. | no | "Go on." (Claire's Thursday = 1) → `claire_car` | — |
 | | | | "Go on." (Claire's Thursday 2+ · Corruption under 60) → `touch_low` | Hygiene -10 |
 | | | | "Go on." (Claire's Thursday 2+ · Corruption 60+) → `touch_high` | Hygiene -10 |
-| `touch_low` | Dr. Hale stands behind your chair. | yes | "Same time next week." → `end` | Psychology grade +2 · Corruption +1 (cap 59) · Exhibitionism +1 (cap 59) |
-| `touch_high` | Dr. Hale says it like he is reading a page number. | yes | "Same time next week." → `end` | Psychology grade +2 · Corruption +1 (cap 79) · Exhibitionism +1 (cap 59) |
+| `touch_low` | Dr. Hale stands behind your chair. | yes | "Until next time." (was "Same time next week.", scene reader 2026-11-10) → `end` | Psychology grade +2 · Corruption +1 (cap 59) · Exhibitionism +1 (cap 59) |
+| `touch_high` | Dr. Hale says it like he is reading a page number. | yes | "Until next time." (was "Same time next week.", scene reader 2026-11-10) → `end` | Psychology grade +2 · Corruption +1 (cap 79) · Exhibitionism +1 (cap 59) |
 | `claire_car` | His phone buzzes on the desk before he's touched you. | no | "Next Thursday." → Faculty Floor | Psychology grade +2 · `hale_thursday_booked` cleared |
 | `end` | He looks at the clock, and straightens his tie, and unlocks the door. | no | "Thursday." → Faculty Floor | `hale_thursday_booked` cleared |
 | `isnt` | He turns the photo face-up and doesn't look at you while you turn the lock and go. | no | "Leave him to his photo." → Faculty Floor | `hale_thursday_booked` cleared |
@@ -91,9 +91,9 @@ thighs open). None of them has her come; the session stops at touching (LO: "thi
 
 **`door`:** "His office door is unlocked. He locks it behind you without a word. The photo is already face-down." · Dr. Hale: "Twenty minutes, @player."
 **`claire_car`:** "His phone buzzes on the desk before he's touched you. He reads it and his face goes flat." · Dr. Hale: "She's early. She's in the parking lot." · "He unlocks the door and holds it open." · Dr. Hale: "Next Thursday." · "From the corridor window you can see a car with its engine running."
-**`end`:** "He looks at the clock, and straightens his tie, and unlocks the door." · Dr. Hale: "Thursday." · "Down in the parking lot his wife's car isn't there yet."
+**`end`:** "He looks at the clock, and straightens his tie, and unlocks the door." · Dr. Hale: "Thursday." · "Down in the parking lot his wife's car isn't there yet." On the other days (2026-11-09): Dr. Hale: "Same time." · "Out on the faculty floor a door bangs, and somebody laughs on the stairs. Nobody looks at his door." · exit "Same time."
 **`isnt`:** @player: "This isn't coaching." · Dr. Hale: "Then you'll stay at a C." · "He turns the photo face-up and doesn't look at you while you turn the lock and go."
-**`run`:** "You turn the lock yourself and you're out of the door before he's out of his chair. Behind you, calm, not raised:" · Dr. Hale: "Next Thursday, @player."
+**`run`:** "You turn the lock yourself and you're out of the door before he's out of his chair. Behind you, calm, not raised:" · Dr. Hale: "Next Thursday, @player." On the other days (2026-11-09): "Office hours, @player. You know when."
 
 "his wife's car isn't there yet" is true: the session ends by 19:05 and her pickup is half past seven.
 

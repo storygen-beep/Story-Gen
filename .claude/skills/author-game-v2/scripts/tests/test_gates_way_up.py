@@ -36,12 +36,13 @@ def raise_(v, cap=None):
     return ef
 
 
-def park(run_pays=False, watch_gate=20):
-    """The park's shape: one screen, a run exit and a choice into the watching screen."""
+def park(run_pays=False, watch_gate=20, linger_cap=39):
+    """The park's shape: one screen, a run exit and a choice into the watching screen. Each raise is
+    capped at the NEXT stage's top (PLAYTEST 2026-11-09: a cap at her own top was the wall)."""
     run = {"text": "Run.", "targetType": "location", "locationId": "park"}
     if run_pays:
         run = {"text": "Look a second longer.", "targetType": "location", "locationId": "park",
-               "effects": [raise_(1, cap=19)]}
+               "effects": [raise_(1, cap=linger_cap)]}
     return {
         "id": "park_couple",
         "trigger": {"location": "park", "is_repeatable": True, "max_triggers_per_day": 1},
@@ -53,7 +54,7 @@ def park(run_pays=False, watch_gate=20):
             ]}},
             {"id": "watch", "exit_block": {"choices": [
                 {"text": "Leave.", "targetType": "location", "locationId": "park",
-                 "effects": [raise_(1, cap=39)]},
+                 "effects": [raise_(1, cap=59)]},
             ]}},
         ],
     }
@@ -100,9 +101,27 @@ def test_a_linger_button_at_stage_one_opens_it():
 
 def test_a_raise_capped_below_the_floor_does_not_count():
     # The linger button pays only to 19, so at Curious (20) only the watching exit counts.
-    _ok, _h, detail, _n = head_detail(game(park(run_pays=True, watch_gate=99)))
+    _ok, _h, detail, _n = head_detail(game(park(run_pays=True, watch_gate=99, linger_cap=19)))
     curious = next(l for l in detail.splitlines() if "Curious" in l)
     assert "0 repeatable act(s)" in curious
+
+
+def test_a_raise_capped_at_its_own_top_walls_the_top():
+    """PLAYTEST 2026-11-09, first_term: every repeatable act paid +1 capped at its own stage's
+    top, so at 19 nothing paid and the player stood one point under the line for good."""
+    ok, head, detail, _n = head_detail(game(park(run_pays=True, linger_cap=19)))
+    assert ok is False and "corruption 19, the top of Good Girl" in head, head
+    assert "at 19 (the stage's top): 0 repeatable act(s) still pay sober" in detail
+
+
+def test_the_top_stage_is_judged_one_under_its_highest_gate():
+    """first_term, 2026-11-09: a gate at 70 inside Hungry (60-79). Nothing is gated above 70, so the
+    stage is judged at 69, and an act capped at 79 there passes (gate `meter ceiling` forbids more)."""
+    g = game(park(run_pays=True))
+    g["canvases"][-1]["trigger"]["conditions"] = cond(corr("gte", 30))      # the highest gate: 30
+    ok, head, detail, _n = head_detail(g)
+    assert ok is True, head
+    assert "at 29 (the stage's top)" in detail
 
 
 def test_a_raise_open_only_with_a_drink_is_still_a_wall():

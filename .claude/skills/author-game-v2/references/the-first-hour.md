@@ -220,7 +220,7 @@ screen, and sets that branch's flags. It never takes a no that ends a path (LO, 
 
 The checker and the template both assume this shape. Gate `the opening opens a door`
 (gates.py:9700) judges the handover at the end of the capstone the funnel walks into (`_capstone_at`,
-gates.py:18522), and `templates/first-hour.toml` A1 is the boot and sets `opening_done`.
+gates.py:18544), and `templates/first-hour.toml` A1 is the boot and sets `opening_done`.
 
 The shape:
 

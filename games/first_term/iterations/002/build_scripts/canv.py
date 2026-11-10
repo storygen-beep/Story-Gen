@@ -710,7 +710,7 @@ FLAG_WORDS = {
     "jake_date_went": "Go out with Jake on a Saturday",
     "jake_date_booked": "Book a Saturday with Jake",
     # Zoe's step 5 needs him; he is met only at Figure drawing (LO 2026-11-02: the label said "Cocky guy met")
-    "cocky_guy_met": "Meet Jake's teammate at Figure drawing (Tuesday or Thursday morning, Wednesday after lunch)",
+    "cocky_guy_met": "Meet the cocky guy at Figure drawing (Tuesday or Thursday morning, Wednesday after lunch)",   # playtest 2026-11-09: no unmet name
     "mark_saw_her": "Mark's first accident: the garage, a Saturday",
     "cafe_let_it": "Let a customer's hand stay, on a café shift",
     "cafe_job": "Get the job at the café",
@@ -743,7 +743,7 @@ COUNTER_WORDS = {
 # garden_sun; hub_laura_*, home_event_laura_robe). STAGE_WAY is what pays her in the stage BELOW the value, the same acts
 # extras.py's tier cards name (engine.md section 23: never the button the value itself opens).
 NPC_FEED = {
-    ("npc_ryan", "want"): "let him see you at home: your towel in the hall, the shower, the lounger under his window, his room in the evenings",
+    ("npc_ryan", "want"): "let him see you at home: your towel in the hall when he's out of the shower, weekdays before half seven, the shower, the lounger under his window, the couch with him in the evenings and at weekends, his room at night",
     ("npc_laura", "warmth"): "spend time with her: breakfast on weekday mornings, cooking, dinner and the dishes on her evenings in the kitchen",
 }
 STAGE_WAY = {
@@ -755,6 +755,17 @@ STAGE_WAY = {
     ("exhibitionism", 40): "let them look at the campus gym and in class, run in the park, walk the street in your short skirt, leave the changing-room curtain open, take your bra off in the college toilet, let the towel slip at home",
     ("exhibitionism", 60): "show off on the lounger in the garden, walk the street with no panties and let the wind have your skirt, drop the towel at home",
 }
+
+
+# The quality she lacks, in words, for each stage line (the-voice.md R3, "a requirement comes last and in words").
+QUALITY = {("corruption", 20): "more curious", ("corruption", 40): "bolder", ("corruption", 60): "hungrier",
+           ("exhibitionism", 20): "more daring", ("exhibitionism", 40): "ready to show more",
+           ("exhibitionism", 60): "ready to be watched"}
+
+
+def MY_CARD(key):
+    """The pointer a person's card gives instead of a list: where her meter pays is on its own card."""
+    return f"the {TRAIT_NAME.get(key, key)} card on this page says what pays it"
 
 
 def counter_label(key, val):
@@ -791,8 +802,15 @@ def card_goals(st, counter):
                                                   + (f": {NPC_FEED[(g['npc'], key)]}" if (g["npc"], key) in NPC_FEED else "")})
         else:
             stage = STAGE.get(key, {}).get(val)
-            label = counter_label(key, val) + (f" ({stage})" if stage else "") \
-                + (f": {STAGE_WAY[(key, val)]}" if (key, val) in STAGE_WAY else "")
+            # playtest 2026-11-09 (the-voice.md R3/R3b, gate `a card line belongs to its person`): the stage's
+            # list of places was pasted onto every person's card, so the Quests page read as one checklist. A
+            # person's card says only that their step waits on her number; the meter's own card says where it pays.
+            # study 2026-11-09 (9_quest_lines.md): no top game opens a person's line with a number; the need comes
+            # last, in words. The engine prints "— 14 / 40" after a trait goal's label, so the number is still there.
+            owner = NPC_NAME.get(COUNTER_OWNER.get(counter), "they")
+            quality = QUALITY.get((key, val))
+            label = (f"Not yet: {owner} waits until you're {quality} (your {TRAIT_NAME.get(key, key)})" if quality
+                     else counter_label(key, val) + (f" ({stage})" if stage else "") + f": {owner}'s next step waits for it")
             goals.append({"type": "trait", "subject": "player", "trait": key, "op": g["op"], "value": val, "label": label})
     return goals, notes
 
