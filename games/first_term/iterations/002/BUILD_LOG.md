@@ -1944,3 +1944,35 @@ Corruption) · 14 / 20". 0 page errors.
 |---|---|---|---|
 | the study's route | 4.8 | 18.6 | 2.2 / 14.5 |
 | evenings at home | 8.0 | 22.6 | 2.2 / 14.8 |
+
+## 2026-11-10 — everyday scenes away from home, batch 2 (DECISIONS 222)
+
+**Changes:**
+- `everyday.py`, BATCH 2: 13 canvases, `out_scene()` (met flags, the out brake), and `SUB_RULES` / `attach_subs()` for the café walk-ins.
+- Hub readers wired into `zoe.py`, `jake.py`, `hale.py` and `tom.py`; `extras.py` attaches the café rules.
+- `0_systems_spec.toml`: 14 more daily flags.
+
+**First gate run: 6 fails, all fixed:**
+- an arrival line;
+- a cap past the next stage;
+- a pay on the wrong meter;
+- an accident that paid him nothing;
+- random events in the uniform room (moved to walk-ins);
+- the `but` floor.
+
+**v2-reader:** 33 FAILs, then 4, then 0.
+
+**Checks:**
+- Gates: 114 pass, 3 decided, 1 fail (Laura's loop, held), 4 n/a. Shape: 22 pass. Cites: 0 wrong.
+
+**Headless:**
+- 9 of 9 sampled random scenes are offered with their person there, and every answer screen renders.
+- `cafe_coffee` draws Tom's machine 29% and his sister 20% of rolls at Tue 15:00.
+- 0 page errors.
+
+**Week simulation** (rough, both batches):
+
+| route | everyday a week | total a week |
+|---|---|---|
+| the study's route | 9.0 | 23.5 |
+| evenings at home | 12.2 | 27.6 |

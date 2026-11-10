@@ -83,6 +83,20 @@ hold_band_while = ["drinks_boost"]
 [engine.daily_tick]
 flagEffects = [
   # DECISIONS 221 (everyday.py): the everyday scenes at home, once a day each
+  { targetType = "player", flag = "everyday_out_today", op = "unset" },   # DECISIONS 222
+  { targetType = "player", flag = "ev_zoe_fries_today", op = "unset" },   # DECISIONS 222
+  { targetType = "player", flag = "ev_zoe_mum_today", op = "unset" },   # DECISIONS 222
+  { targetType = "player", flag = "ev_zoe_smoothie_today", op = "unset" },   # DECISIONS 222
+  { targetType = "player", flag = "ev_zoe_sunscreen_today", op = "unset" },   # DECISIONS 222
+  { targetType = "player", flag = "ev_jake_photo_today", op = "unset" },   # DECISIONS 222
+  { targetType = "player", flag = "ev_jake_mum_today", op = "unset" },   # DECISIONS 222
+  { targetType = "player", flag = "ev_jake_knee_today", op = "unset" },   # DECISIONS 222
+  { targetType = "player", flag = "ev_nadia_notes_today", op = "unset" },   # DECISIONS 222
+  { targetType = "player", flag = "ev_nadia_essay_today", op = "unset" },   # DECISIONS 222
+  { targetType = "player", flag = "ev_nadia_watcher_today", op = "unset" },   # DECISIONS 222
+  { targetType = "player", flag = "ev_tom_machine_today", op = "unset" },   # DECISIONS 222
+  { targetType = "player", flag = "ev_tom_sister_today", op = "unset" },   # DECISIONS 222
+  { targetType = "player", flag = "ev_tom_pastries_today", op = "unset" },   # DECISIONS 222
   { targetType = "player", flag = "everyday_home_today", op = "unset" },
   { targetType = "player", flag = "ev_laura_did_you_eat_today", op = "unset" },
   { targetType = "player", flag = "ev_laura_phone_call_today", op = "unset" },

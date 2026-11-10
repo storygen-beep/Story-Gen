@@ -325,6 +325,8 @@ for _c in out:
 # heat proposal B9 (DECISIONS 147 chunk 3): Gary's booth reads his walk-in
 import walkins_out
 walkins_out.hub_read(out)
+import everyday   # DECISIONS 222: the day after an everyday scene, the hub remembers it
+everyday.hub_read(out)
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards)
 open(__import__("sys").argv[1], "w").write(text)
 print("tom:", len(out), "canvases,", len(cards), "cards")

@@ -878,6 +878,8 @@ for _c in out:
 
 # pass 4 E95: the one-time sex step takes energy and hygiene like the repeatable acts (board.needs)
 sex_takes_needs(out, "zoe_05_no_dare", "down", "Don't stop.")
+import everyday   # DECISIONS 222: the day after an everyday scene, the hub remembers it
+everyday.hub_read(out)
 text += "".join(emit(c) for c in out) + "".join(emit_card(c) for c in cards + story)
 open(__import__("sys").argv[1], "w").write(text)
 print("zoe:", len(out), "canvases,", len(cards) + len(story), "cards")

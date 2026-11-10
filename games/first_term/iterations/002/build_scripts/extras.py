@@ -164,6 +164,8 @@ for trait_k, bands in [
 # rules, and every walk-in canvas (emitted once, here).
 import os
 import walkins_out
+import everyday   # DECISIONS 222: Tom's everyday walk-ins on her coffee
+everyday.attach_subs(out)
 _done = walkins_out.attach(out)
 assert _done == {"cafe_coffee", "vance_house_look", "zoe_bedroom_look"}, _done
 walkins_out.check_toml_hosts(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "toml_phases", "3_activities.toml"))

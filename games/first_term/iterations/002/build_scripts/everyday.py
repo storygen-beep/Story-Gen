@@ -22,7 +22,7 @@ Mark's ceiling this release is looks and brushes (DECISIONS 107); his chain stop
 import sys
 from canv import *
 from tomlw import tod, wd
-from home_items import CURIOUS, BOLD, here, since
+from home_items import CURIOUS, BOLD, DARING, here, since
 
 R, L, M = "npc_ryan", "npc_laura", "npc_mark"
 K, LR, HALL, GAR = "home_kitchen", "home_living_room", "home_hall", "home_garage"
@@ -30,6 +30,7 @@ BRAKE = "everyday_home_today"
 DAILY_FLAGS = [BRAKE]       # every flag here that [engine.daily_tick] clears (0_systems_spec.toml)
 COUNTERS = []               # every chain counter (hidden player traits, gen_world.py + 0_systems_spec.toml)
 HUB_READS = {}              # hub id -> [group blocks]: the day after, his hub remembers
+SUB_RULES = {}              # host canvas id -> [substitution rules] (attach_subs, called by the host's part)
 out = []
 
 
@@ -44,7 +45,8 @@ def _remember(hub, rec, *blocks, lo=6, hi=30):
     HUB_READS.setdefault(hub, []).append(G(cond(flag(rec), since(rec, "gte", lo), since(rec, "lt", hi)), *blocks))
 
 
-def scene(cid, name, loc, who, sched, conds, lead, answers, hook, chance=0.3, plain=True, bound=True, rest=None):
+def scene(cid, name, loc, who, sched, conds, lead, answers, hook, chance=0.3, plain=True, bound=True, rest=None,
+          sub_host=None, entry=()):
     """One everyday or mixed scene. answers: [(label, cond_items, eff, reply_blocks, extra_flags[, back])].
     The answer screen's exit returns to the room (or `back`); the record flag `cid` rides every answer. A band
     that a meter decides is split into separate answers with their own conditions, because the answer's raise
@@ -53,9 +55,20 @@ def scene(cid, name, loc, who, sched, conds, lead, answers, hook, chance=0.3, pl
     DAILY_FLAGS.append(today)
     items = [flag("opening_done"), flag(today, False)] + ([flag(BRAKE, False)] if plain else []) \
         + ([flag(rest, False)] if rest else []) + list(conds)
-    trig = {"location": loc, "is_repeatable": True, "priority": 3, "is_active": True,
-            "trigger_mode": "random", "chance": chance, "seen_weight": 0.4,
-            "schedules": sched, "conditions": cond(*items)}
+    if sub_host:
+        # a walk-in on one of her acts there (the café: gate `nothing one-time at the shop or wardrobe` keeps random
+        # events out of the uniform room); the rule carries the hours, one rule per window
+        trig = {"location": loc, "is_repeatable": True, "priority": 1, "is_active": True,
+                "substitution_only": True, "conditions": cond(*items)}
+        for w in sched:
+            SUB_RULES.setdefault(sub_host, []).append({"target_canvas_id": cid, "chance": chance, "conditions": cond(
+                here(who, loc), wd(*w["weekdays"]), tod(w["start_time"], w["end_time"]))})
+    else:
+        trig = {"location": loc, "is_repeatable": True, "priority": 3, "is_active": True,
+                "trigger_mode": "random", "chance": chance, "seen_weight": 0.4,
+                "schedules": sched, "conditions": cond(*items)}
+    if entry:
+        trig["pre_substitution_effects"] = list(entry)   # his raise for what happened, on the way in (home.py event())
     if bound:
         trig["requires_npc"] = who
     choices, nodes = [], []
@@ -400,6 +413,218 @@ for _k, _l in ((1, "They all die at the end, by the way."), (2, "Your mother fou
     _remember("hub_mark_living_room", f"ev_mark_tv_{_k}_yes", D(M, _l), lo=10)
 
 # ═════════════════════════════════════════════════════════════════════════════
+# BATCH 2, OUT (LO, 2026-11-10: "okay go ahead"): Zoe, Jake, Nadia, Tom. Zoe, Jake and Nadia keep no meter of
+# their own, so their scenes move a flag their hub reads, or her own meter; Tom's Power. Their ladders already
+# escalate (Zoe's dares, Jake's dates), so batch 2 has no chains. Tom stays strict this release (npc_tom.md).
+# ═════════════════════════════════════════════════════════════════════════════
+BRAKE_OUT = "everyday_out_today"
+DAILY_FLAGS.append(BRAKE_OUT)
+Z, J, N, T_ = "npc_zoe", "npc_jake", "npc_nadia", "npc_tom"
+LUNCH = S([0, 1, 2, 3, 4], "11:45", "12:45")
+
+
+MET_FLAG = {Z: "zoe_met", J: "jake_met", N: "nadia_met", T_: "tom_met"}
+
+
+def out_scene(cid, name, loc, who, sched, conds, *a, **k):
+    """An everyday scene away from home: once a day each, one a day away from home in all, and only once she
+    has met the person (scene reader 2026-11-10: the rows alone are not the meeting)."""
+    c = scene(cid, name, loc, who, sched, [flag(MET_FLAG[who])] + list(conds), *a, plain=False, rest=BRAKE_OUT, **k)
+    c["description"] = c["description"].replace("at home", "away from home")
+    return c
+
+
+out_scene("ev_zoe_fries", "Your fries", "canteen", Z, S([0, 1, 2, 3], "11:45", "12:45"), [],
+          [P("You've barely sat down when a hand comes over your shoulder and steals three of your fries."),
+           D(Z, "Tax. You looked lonely."),
+           P("Zoe drops onto the bench beside you with nothing on her own tray but a coffee.")],
+          [("\"Get your own.\"", [], [],
+            [D(Z, "Rude."), P("She says it, but she steals two more anyway, and you let her.")], []),
+           ("Push the tray over.", [], [],
+            [P("She grins and pulls the whole tray into the middle."), D(Z, "This is why I love you. Also, I'm broke till Friday."),
+             ME("You're always broke till Friday."), D(Z, "And yet I always survive."),
+             D(Z, "Friday. Party at mine. You're coming. That's the payment for the fries.")], ["zoe_fed"]),
+           ("Steal her coffee back.", [], [],
+            [P("You take her coffee and drink half of it while she watches, outraged."), D(Z, "That was my whole lunch!"), ME("Tax.")], ["zoe_coffee_stolen"])],
+          P("She finds you at lunch most days."))
+_remember("hub_zoe_canteen", "zoe_fed", D(Z, "I owe you fries. I'm keeping a list."), lo=12)
+_remember("hub_zoe_canteen", "zoe_coffee_stolen", D(Z, "I'm guarding this coffee with my life."), lo=12)
+
+out_scene("ev_zoe_mum", "Her mum", "quad", Z, S([1, 3, 4], "14:30", "17:45"), [],
+          [P("Zoe's lying on the grass when her phone rings. She looks at the screen and groans."),
+           D(Z, "It's my mum. If I don't answer she'll call the college."),
+           P("She answers it with a face like she's swallowed a lemon.")],
+          [("Lie down beside her.", [], [],
+            [P("You lie down beside her on the grass while her mum talks and talks. Zoe says yes, Mum, no, Mum, and holds your hand the whole time without looking at you."),
+             P("When she hangs up she lets out a long breath."), D(Z, "She says hi. She thinks you're a good influence."), ME("I am a good influence."), D(Z, "God help us all.")], ["zoe_mum_stayed"]),
+           ("\"Want me to go?\"", [], [],
+            [D(Z, "No. Stay. Make faces at me."), P("You make faces at her while she says yes, Mum, and she nearly laughs down the phone.")], []),
+           ("Leave her to it.", [], [],
+            [P("You wave and leave her to it. Behind you she's saying no, Mum, I am eating, I promise.")], [], "campus")],
+          P("Her mum calls most weeks, always at the worst time."))
+_remember("hub_zoe_quad", "zoe_mum_stayed", D(Z, "My mum asked about you again. You're her favourite now."), lo=12, hi=96)
+
+out_scene("ev_zoe_smoothie", "The smoothie", "park", Z, S([5, 6], "08:00", "09:45"), [],
+          [P("Zoe's on the bench by the gates with two smoothies, sweaty from her run, holding one out to you."),
+           D(Z, "Kale and mango. Don't make that face. It's good for you.")],
+          [("Drink it.", [], [],
+            [P("It's awful. You drink all of it to make her happy, and she watches you like she knows."), D(Z, "Liar. You hate it."), ME("I love it."),
+             D(Z, "Then next weekend you run the whole loop with me. No stopping. That's the deal.")], ["zoe_smoothie_drunk"]),
+           ("\"What's actually in it?\"", [], [],
+            [D(Z, "Kale. Mango. Love. Don't ask about the rest."), P("You sip it. You stop asking.")], []),
+           ("\"I'll pass.\"", [], [],
+            [D(Z, "More for me."), P("She drinks both, one in each hand, staring you down.")], [])],
+          P("Weekend mornings she runs here."))
+_remember("hub_zoe_park", "zoe_smoothie_drunk", D(Z, "You drank the whole kale one. I'm still proud of you."), lo=20, hi=200)
+
+# MIXED: the sunscreen. Before they're together it's a friend's back; after, and Daring, her hands go under the
+# strap on the open quad.
+SUN_FRIEND = flag("zoe_together", False)
+out_scene("ev_zoe_sunscreen", "Sunscreen", "quad", Z, S([1, 3, 4], "14:30", "17:45"), [],
+          [P("Zoe's on her front on the grass with her top rolled up, holding a bottle of sunscreen over her shoulder."),
+           D(Z, "Do my back? I'm turning into a lobster.")],
+          [("Do her back.", [SUN_FRIEND], [],
+            [P("You kneel and rub it into her shoulders and down her back. She sighs into her arms."), D(Z, "You're hired. Daily."), ME("I charge."), D(Z, "Put it on my tab.")], ["zoe_sunscreen_done"]),
+           ("Do her back.", [flag("zoe_together")], [],
+            [P("You kneel and rub it into her back, slow. She unhooks her bra with one hand without lifting her head, so you can do all of it, and the straps fall loose on the grass."),
+             P("Two guys walking past slow right down. Zoe waves at them without looking up."), D(Z, "Don't stop. Let them look."),
+             P("Your hands slide down her sides, and she lifts off the grass enough that your fingers brush the sides of her bare tits. Your face is hot, and you're wet."),
+             D(Z, "That's enough for out here, babe. Later."), P("She hooks her bra back up without looking, grinning at the grass.")], ["zoe_sunscreen_done"]),
+           ("\"Do it yourself.\"", [], [],
+            [D(Z, "I literally can't reach."), P("She tries anyway, and gets most of it on her elbow.")], [])],
+          P("She sunbathes here when it's warm."))
+_remember("hub_zoe_quad", "zoe_sunscreen_done", D(Z, "No burn. You've got magic hands."), lo=12, hi=96)
+
+# Jake: he wants a girlfriend he can show off (npc_jake.md)
+out_scene("ev_jake_photo", "The team photo", "quad", J, S([0, 2, 4], "08:30", "11:30"), [],
+          [P("Jake's at the edge of the team on the grass, holding his phone up at you."),
+           GC(cond(flag("jake_photo_taken", False)), D(J, "Photo. For the team chat. They think I made you up.")),
+           GC(cond({"type": "worn_exposure", "operator": "gte", "value": 0}), D(J, "Another one. The last one's still the best thing in the team chat."))],
+          [("Smile for it.", [], [],
+            [P("You lean in beside him and smile. He takes about twenty."),
+             GC(cond(trait("jake_step", "gte", 3)), D(J, "Perfect. Look at that. That's my girl.")),
+             GC(cond({"type": "worn_exposure", "operator": "gte", "value": 0}), D(J, "Perfect. Look at that. They'll lose their minds.")),
+             P("The guys behind him whistle.")], ["jake_photo_taken"]),
+           ("Sit on his knee for it.", [DARING], [her("exhibitionism", 39)],
+            [P("You sit on his knee, and his arm goes round your waist, and his hand rests on your hip where everyone can see it. The guys go loud."),
+             D(J, "Oh, that's the one. That's going everywhere."), P("Your face is hot, and you don't get up straight away.")], ["jake_photo_taken"]),
+           ("\"No photos, Jake.\"", [], [],
+            [D(J, "Come on. One."), ME("No."), GC(cond(flag("jake_photo_taken", False)), D(J, "Fine. They'll keep thinking I made you up.")), GC(cond({"type": "worn_exposure", "operator": "gte", "value": 0}), D(J, "Fine. The last one'll have to do.")), P("He puts the phone away, sulking a little.")], [])],
+          P("The team's here three mornings a week."))
+_remember("hub_jake_quad", "jake_photo_taken", D(J, "That photo's the best thing in the team chat. Ever."), lo=6, hi=72)
+
+out_scene("ev_jake_mum", "His mum", "canteen", J, LUNCH, [],
+          [P("Jake's at the end of the table on the phone, one finger in his other ear."),
+           D(J, "Yes, Mum. Yes. I'm eating. There's a girl, yeah."),
+           P("He sees you and goes red, and he doesn't hang up.")],
+          [("Sit down next to him.", [], [],
+            [P("You sit down right beside him. He puts the phone on speaker without asking."), D(J, "Mum, say hi. She's here."),
+             P("His mum says hi so warmly that you both go red."), ME("Hi, Mrs. Jake's mum.")], ["jake_mum_met"]),
+           ("Sit across from him.", [], [],
+            [P("You sit across from him and eat your lunch while he tries to hang up for five minutes."), D(J, "Bye, Mum. Love you. Bye."),
+             D(J, "Sorry. She wants to meet you."), ME("Already?")], []),
+           ("Leave him to it.", [], [],
+            [P("You leave him to it. He's still on the phone when you go, telling his mum you're shy.")], [], "campus")],
+          P("His mum calls at lunch most days."))
+_remember("hub_jake_canteen", "jake_mum_met", D(J, "My mum hasn't stopped talking about you. She wants to meet you. One day."), lo=12, hi=168)
+
+out_scene("ev_jake_knee", "His knee", "quad", J, S([0, 2, 4], "08:30", "11:30"), [],
+          [P("Jake's sitting out at the edge of the grass with an ice pack strapped round his knee, scowling at the team."),
+           D(J, "Coach benched me. One bad landing.")],
+          [("Sit with him.", [], [],
+            [P("You sit with him and hold the ice pack while he complains about the coach. He leans his head on your shoulder after a while."),
+             D(J, "This is the best I've felt all morning. When this knee's better, I'm taking you out. Properly.")], ["jake_knee_kept"]),
+           ("\"You'll live.\"", [], [],
+            [D(J, "Harsh."), P("He scowls, but then he laughs, and he looks a bit less sorry for himself.")], []),
+           ("Leave him to sulk.", [], [],
+            [P("You leave him to sulk. He shouts after you that he's injured.")], [], "campus")],
+          P("The team's here three mornings a week."))
+_remember("hub_jake_quad", "jake_knee_kept", D(J, "Knee's fine. I'm telling coach you're the reason."), lo=12, hi=96)
+
+# Nadia: she knows things
+out_scene("ev_nadia_notes", "Her notes", "library", N, S([0, 1, 2, 4], "14:30", "17:45"), [],
+          [P("Nadia slides her notebook across the desk to you without looking up."),
+           D(N, "Psychology. In case you missed anything. You usually do.")],
+          [("Copy them.", [], [add("grade_psych", 1, cap=69)],
+            [P("You copy them out while she reads. They're better than the lecture."),
+             G(cond(flag("hale_met")), P("In the margin she's drawn Hale with horns."), D(N, "Don't copy the horns.")),
+             D(N, "Same deal next week. You buy the tea.")], ["nadia_notes_shared"]),
+           ("Quiz her on them instead.", [], [add("grade_psych", 1, cap=69)],
+            [P("You quiz her. She gets every one, then quizzes you back, and you get most. She looks pleased with you in a way that's almost a smile.")], ["nadia_notes_shared"]),
+           ("\"I'll be fine.\"", [], [],
+            [D(N, "You won't. But fine."), P("She takes the notebook back, but she leaves it open on the desk where you can see it.")], [])],
+          P("She studies here most afternoons."))
+_remember("hub_nadia_library", "nadia_notes_shared", D(N, "This week's notes are in my bag. Same deal."), lo=12, hi=168)
+
+out_scene("ev_nadia_essay", "Her essay", "canteen", N, LUNCH, [],
+          [P("Nadia has her laptop open on the lunch table and her head in her hands."),
+           D(N, "Two thousand words. Due tomorrow. I've got four hundred, and two of them are my name.")],
+          [("Help her with it.", [], [],
+            [P("You talk it through with her over lunch, and halfway through she starts typing fast and doesn't stop."),
+             D(N, "Okay. Okay. I can do this. I owe you."), ME("You owe me a tea.")], ["nadia_owes_her"]),
+           ("\"You always do this.\"", [], [],
+            [D(N, "I know. I always finish, too."), P("She cracks her knuckles and starts typing.")], []),
+           ("Leave her to panic.", [], [],
+            [P("You leave her to it. She doesn't notice you go.")], [], "campus")],
+          P("She leaves every essay to the last day."))
+_remember("hub_nadia_library", "nadia_owes_her", D(N, "I got a B plus. I owe you a tea. Don't let me forget."), lo=48, hi=168)
+
+# MIXED by her stage: the guy two desks over (in a skirt she can let him look)
+LIB_SKIRT = {"type": "worn_type", "operator": "eq", "value": "short_skirt"}
+out_scene("ev_nadia_watcher", "Two desks over", "library", N, S([0, 1, 2, 4], "14:30", "17:45"), [LIB_SKIRT],
+          [P("Nadia leans over without taking her eyes off her book."),
+           D(N, "Don't look. The guy two desks over has been staring at your legs for ten minutes."),
+           P("You don't look. You can feel it anyway, on the backs of your bare thighs under the skirt.")],
+          [("Tug your skirt down.", [], [],
+            [P("You tug your skirt down as far as it goes. Nadia nods, approving."), D(N, "Men. Honestly.")], []),
+           ("Cross your legs, slow.", [DARING], [her("exhibitionism", 39)],
+            [P("You cross your legs, slow, so the hem rides up another inch. Two desks over a chair creaks."),
+             P("Nadia's eyebrows go up behind her glasses."), D(N, "You did that on purpose."), ME("Did what?")], ["nadia_saw_legs"]),
+           ("Ignore it.", [], [],
+            [P("You go back to your reading. Nadia keeps glaring at him over her book until he leaves.")], [])],
+          P("She notices everything in here."))
+_remember("hub_nadia_library", "nadia_saw_legs", D(N, "Your fan came back today. Asked if you were coming in."), lo=20, hi=168)
+
+# Tom: strict this release; his Power is his say over her shifts
+CAFE = S([0, 1, 2, 3, 4, 5], "08:30", "21:45")
+out_scene("ev_tom_machine", "The machine", "cafe", T_, CAFE, [],
+          [P("The espresso machine hisses and dies. Tom hits it with the flat of his hand. It doesn't come back."),
+           D(T_, "Not today. Not with a queue.")],
+          [("Jiggle the steam valve.", [], [his(T_, "power", -1)],
+            [P("You reach past him and jiggle the steam valve, on a hunch. The machine coughs and comes back."),
+             P("Tom looks at you for a long second."), D(T_, "Fine. You can stay.")], ["tom_machine_fixed"]),
+           ("\"Want me to take the queue?\"", [], [his(T_, "power", 1)],
+            [D(T_, "Smile at them. Tell them five minutes."), P("You smile at the queue. He swears at the machine. Somehow it works.")], []),
+           ("Keep out of his way.", [], [],
+            [P("You keep well out of his way. He fixes it himself in ten minutes, and he's in a mood the whole time you're there.")], [])],
+          P("That machine breaks most weeks."), sub_host="cafe_coffee", entry=[his(T_, "want", 1)])
+_remember("hub_tom_cafe", "tom_machine_fixed", D(T_, "You and that steam valve. Don't let it go to your head."), lo=12, hi=168)
+
+out_scene("ev_tom_sister", "His sister", "cafe", T_, CAFE, [],
+          [P("Tom's in the back doorway with his phone, his voice low and tight."),
+           D(T_, "I can't, Jen. I'm on my own here till close."),
+           P("He sees you, covers the phone and looks at the counter, then at you.")],
+          [("\"Go. I'll watch the counter.\"", [], [his(T_, "power", -1), add("money", 5, clamp=False)],
+            [P("He's gone ten minutes. You sell two coffees and a muffin and nobody steals anything. When he comes back he puts a five on the counter."),
+             D(T_, "For the ten minutes. Don't tell anyone I'm soft.")], ["tom_owes_her"]),
+           ("Pretend you didn't hear.", [], [],
+            [P("You look at the menu board very hard. He finishes the call and comes back out, jaw tight, and doesn't say anything.")], [])],
+          P("His sister calls him at work. He always answers."), sub_host="cafe_coffee", entry=[his(T_, "want", 1)])
+_remember("hub_tom_cafe", "tom_owes_her", D(T_, "Jen says thanks. So. Thanks."), lo=12, hi=168)
+
+out_scene("ev_tom_pastries", "The leftovers", "cafe", T_, S([0, 1, 2, 3, 4, 5], "22:00", "22:45"), [],
+          [P("The café's shut, the sign turned. Tom's boxing up what didn't sell and holds the box out to you."),
+           D(T_, "Take these, or they go in the bin.")],
+          [("Take them.", [], [],
+            [P("You take the box. There's a cinnamon roll on top, the good one."), D(T_, "Don't say I never give you anything.")], ["tom_gave_pastries"]),
+           ("\"I'm good, thanks.\"", [], [],
+            [D(T_, "Suit yourself."), P("He tips the box into the bin without ceremony, but he saves the cinnamon roll and eats it himself.")], []),
+           ("\"Give them to Gary.\"", [flag("gary_met")], [],
+            [D(T_, "Gary doesn't need help eating."), P("He doesn't smile, but it's close. He puts the box on the counter for whoever wants it.")], [])],
+          P("He boxes up the leftovers every night at close."), sub_host="cafe_coffee", entry=[his(T_, "want", 1)])
+_remember("hub_tom_cafe", "tom_gave_pastries", D(T_, "Cinnamon rolls again tonight, if you're around at close."), lo=10, hi=48)
+
+# ═════════════════════════════════════════════════════════════════════════════
 # Readers for records nothing read (14_random_scenes_ours.md): the day after, his hub remembers.
 # ═════════════════════════════════════════════════════════════════════════════
 _remember("hub_ryan_kitchen", "ryan_saw_her_towel", P("Ryan doesn't look up from his plate at you once, and his ears are red the whole meal."))
@@ -411,6 +636,13 @@ _remember("hub_mark_kitchen", "mark_brushed_kitchen", D(M, "Coffee's on. I'll ge
 _remember("hub_mark_garage", "mark_walked_in_laundry", D(M, "I'll knock next time you're at the machine. Maybe."))
 _remember("hub_mark_garage", "mark_walked_in_shower", D(M, "That lock needs fixing. I've been meaning to."))
 _remember("hub_laura_kitchen", "laura_saw_ch5", D(L, "We're not going to talk about the TV, are we. Good."))
+
+
+def attach_subs(canvases):
+    """Put the everyday walk-in rules on their hosts (hosts not here are skipped)."""
+    for c in canvases:
+        for r in SUB_RULES.get(c.get("id"), []):
+            c["trigger"].setdefault("substitutions", []).append(r)
 
 
 def hub_read(canvases):

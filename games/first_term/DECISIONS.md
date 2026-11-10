@@ -787,3 +787,21 @@ Week simulation (rough; the study's assumed route; meters under 20):
 - The total is 18.6 or 22.6 a week (2.7-3.2 a day, over the top games' 1-2.5).
 
 v2-reader: three passes, 33 FAILs fixed, 0 at the end. Gates 114 pass, 1 fail (Laura's loop, held). | "Go ahead" (2026-11-10) |
+| 222 | Everyday random scenes away from home, batch 2 (LO, 2026-11-10: "okay go ahead"; "1 leave it" on Ryan's towel odds). 13 scenes in `everyday.py`.
+- Zoe (4): your fries, her mum on the phone, the smoothie, the sunscreen (mixed by `zoe_together`).
+- Jake (3): the team photo (her knee photo is Daring), his mum on the phone, his knee.
+- Nadia (3): her notes (Psychology +1, cap 69), her essay, the guy two desks over (her slow leg-cross is Daring).
+- Tom (3): the machine, his sister, the leftovers. These are walk-ins on her café coffee, because gate *nothing one-time at the shop or wardrobe* keeps random events out of the uniform room. Tom stays strict.
+
+Rules:
+- Each needs its met flag.
+- Once a day each, and `everyday_out_today` holds them to one a day away from home.
+- Each answer records a flag that the person's hub reads 6-168 hours later; Tom's raise his Want on the way in.
+- No chains: Zoe's dares and Jake's dates already escalate.
+
+v2-reader: 33 FAILs (none checked the meeting), then 4 new, then 0.
+
+Week simulation (rough), with both batches:
+- Everyday goes from 2.2 to 9.0 a week on the study's route, and to 12.2 on the evenings-at-home route.
+- The everyday share is 38-44% (target about 45%).
+- The total is 23.5-27.6 a week (3.4-3.9 a day), over the top games' 1-2.5. Ryan's towel is 3.5 of it, and LO kept it. | "okay go ahead" (2026-11-10) |
