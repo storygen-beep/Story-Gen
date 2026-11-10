@@ -18937,6 +18937,69 @@ def _goal_line_reads_true(game):
                       f"{len(goals)} goal lines read the way they work"), rows + info
 
 
+# LO, 2026-11-11 (DECISIONS 229, "Teach the gate"): a scene that only tells her what stage she has reached opens
+# nothing, the same way a line of hers by level opens nothing (_voice_only_sites, LO 2026-11-09). A canvas counts as such
+# a moment when it is one-time, every screen is narration or her thought, it never moves the meter it reads, and every
+# flag it sets is read by no other canvas. Its trait
+# reads are then voice, not climb. Rebinding _voice_only_sites here, above main(), keeps every cited line in place.
+_NARRATION = ("paragraph", "thought_bubble")
+
+
+def _level_moment_sites(game):
+    def narration_only(blocks):
+        for b in blocks or []:
+            if not isinstance(b, dict):
+                return False
+            if b.get("type") == "group":
+                if not narration_only(b.get("blocks") or (b.get("props") or {}).get("blocks")):
+                    return False
+            elif b.get("type") == "block_pool":
+                if not narration_only((b.get("props") or {}).get("blocks") or b.get("blocks")):
+                    return False
+            elif b.get("type") not in _NARRATION:
+                return False
+        return True
+
+    canvases = [c for c in game.get("canvases") or [] if isinstance(c, dict)]
+    readers = collections.defaultdict(set)
+    for c in canvases:
+        for _p, node in _walk_paths(c):
+            if node.get("type") == "flag" and node.get("flag_key"):
+                readers[str(node["flag_key"])].add(c.get("id"))
+    for _p, node in _walk_paths({k: v for k, v in game.items() if k != "canvases"}):
+        if node.get("type") == "flag" and node.get("flag_key"):
+            readers[str(node["flag_key"])].add("(outside a canvas)")
+    sites = collections.Counter()
+    for c in canvases:
+        nodes = c.get("nodes") or []
+        # one-time only: a repeatable narration canvas is an everyday act (toilet_mirror, kitchen_breakfast), and the
+        # meter on it gates that act
+        if (c.get("trigger") or {}).get("is_repeatable", True) is not False:
+            continue
+        if not nodes or not all(narration_only(nd.get("blocks")) for nd in nodes):
+            continue
+        sets = {str(fe.get("flag")) for _p, node in _walk_paths(nodes) for fe in node.get("flagEffects") or []
+                if isinstance(fe, dict) and fe.get("op") == "set" and fe.get("flag")}
+        if not sets or any(readers.get(f, set()) - {c.get("id")} for f in sets):
+            continue
+        # it never moves the meter it reads: first_term's exh_bridge_* lift her into the next stage, which is climb
+        read = {str(n.get("trait_key")) for _p, n in _walk_paths(c.get("trigger") or {}) if n.get("type") == "trait"}
+        if any(str(e.get("trait")) in read for _p, n in _walk_paths(nodes) for e in n.get("effects") or []
+               if isinstance(e, dict)):
+            continue
+        for _p, node in _walk_paths(c):
+            if node.get("type") == "trait" and node.get("subject") != "npc" and node.get("trait_key"):
+                sites[str(node["trait_key"])] += 1
+    return sites
+
+
+_voice_only_sites_lines = _voice_only_sites
+
+
+def _voice_only_sites(game):   # noqa: F811 — the lines-by-level reads plus the level moments
+    return _voice_only_sites_lines(game) + _level_moment_sites(game)
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)

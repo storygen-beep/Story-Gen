@@ -113,7 +113,7 @@ SMALL_RUNGS = {
                         (15, "Turn the sound up on channel 5 when you're alone")],
     # exhibition phase 1 (LO, 2026-11-08): the looks that pay at 0 name the way to 5; the shower door opens at 5,
     # so it names the way to 10 (it showed at 10 before, a card against the build)
-    ("exhibitionism", 0): [(5, "Let them look: stretch in the living room, the low-cut top out, table six at the café, the gym mirror, the park"),
+    ("exhibitionism", 0): [(5, "Let people look at you: at home, in class, at the café. Don't cover up"),
                            (10, "Leave the shower door unlocked, and keep letting them look"),
                            (15, "Keep letting them look, at home, in class and out")],
 }
@@ -121,27 +121,27 @@ SMALL_RUNGS = {
 # ── her two stages: what the next rung opens (the-voice.md R2; DECISIONS: stages at 20/40/60) ──
 for trait_k, bands in [
     ("corruption", [(0, 20, "Good Girl. Curious opens at 20: watching, touching yourself, a kiss, a dare.",
-                     "Stay and look: the park couple, the library stacks, a bedroom door left open at night"),
+                     "Look when you should look away: the park couple, the library stacks. Stay longer"),
                     (20, 40, "Curious. Bold opens at 40: hands, mouths, a price for a look.",
                      # pass 3 H43 (the-voice.md R3): every line names a place and a verb, not a list of rooms
-                     "Touch yourself in bed, in the shower or a college toilet stall; watch the park couple"),
+                     "Touch yourself: in bed, in the shower, in a college stall. Then watch again"),
                     # DECISIONS 124: release 1 reaches Hungry
                     (40, 60, "Bold. Hungry opens at 60: the taboo at home, strangers who can see, a room watching.",
-                     "Get on Ryan's couch with him, or pull the guy who trains at your gym into the locker room"),   # playtest 2026-11-09: no unmet name on a card   # pass 4: a watched dare now needs Corruption 60, so it pays nothing at Bold   # the street pays Corruption only on a level's first day out (played 2026-11-04), so no card sends her there for it
+                     "Go further with the ones who want you: Ryan's couch, the gym locker room"),   # playtest 2026-11-09: no unmet name on a card   # pass 4: a watched dare now needs Corruption 60, so it pays nothing at Bold   # the street pays Corruption only on a level's first day out (played 2026-11-04), so no card sends her there for it
                     (60, 80, "Hungry. Shameless is the next release: a crowd, free use.",
                      "Shameless (Corruption 80) opens in the next release")]),
-    ("exhibitionism", [(0, 20, "Covered. Exhibitionism goes up when people look at you and you let them: wear the low-cut top from the clothes shop and go where people are. Daring opens at 20: no bra, a short skirt out of the house, and bigger tips at the café if you let them look.",
+    ("exhibitionism", [(0, 20, "Covered. It goes up when people look and you let them. Daring opens at 20: no bra, a short skirt out, bigger tips.",
                         # pass 3 G15: only places that pay her Exhibitionism while she is Covered (park_run, the
                         # street's looks, the shower walk-ins); the lecture hall pays nothing below Daring
-                        "Let them look, once a day each: home, class, the café, the gym, the park, the street"),   # pass 4 G15: the park and street dress codes need Curious while she is Covered   # round 2: "at home" named the whole house, which pays nothing at 0
+                        "Let them look, everywhere you go. Every place pays once a day"),   # pass 4 G15: the park and street dress codes need Curious while she is Covered   # round 2: "at home" named the whole house, which pays nothing at 0
                        (20, 40, "Daring. Showing opens at 40: no panties out, naked for someone you know, your feed.",
                         # pass 3 G15: the garden pays only from Showing (garden_sun), so it is not a way through Daring
-                        "Let them look at the gym and in class; run in the park, the short skirt out, the curtain open, the towel slipping"),   # LO, 2026-11-04: the street and park pay to 39 again; the curtain opens here
+                        "Wear less out: the short skirt on the street, the curtain left open, the towel slipping"),   # LO, 2026-11-04: the street and park pay to 39 again; the curtain opens here
                        (40, 60, "Showing. Watched opens at 60: a room watching, a stranger.",
                         # what pays while she is Showing (garden_sun, the wind and the street with no panties, cap 59, the
                         # towel drops); the park stops at 39 (LO, 2026-11-04), and nothing repeatable pays it in the lecture hall;
                         # the gym's mats in the tiny shorts do, cap 59 (DECISIONS 198)
-                        "Show off on the garden lounger, the street with no panties, the towel dropped at home, the gym mats in tiny shorts"),
+                        "Show off where you could be caught: the garden lounger, the street with nothing under your skirt"),
                        (60, 80, "Watched. Do your squats at the gym in the sheer leggings. A crowd comes in the next release.",
                         "On Display (Exhibitionism 80) opens in the next release: posing for the figure-drawing class")])]:
     for lo, hi, text, label in bands:

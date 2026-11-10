@@ -5,6 +5,29 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-11 — a new stage is a moment, and a stage card says where in one line (DECISIONS 229)
+
+Source: LO on the study of how top games show her levels: "Yes c", then "Sign them" (first_term `meters.md` Rule 7);
+on the climb gate: "Teach the gate".
+
+- **`references/the-meters.md`:** a new end section, "A new stage is a moment, and her stage card says where in one
+  line".
+  - It covers CoT's Skills page and its one raise-by sentence, SD's rank word, and the fact that none of the five lists
+    every place that raises a meter.
+  - It sets Cupid's Way's stage pop-up as the model, built as a one-time bed substitution.
+  - W1 gets one sentence: such a moment is not climb.
+- **`scripts/gates.py`:** *the climb is where you said it is* no longer counts the meter reads of a level moment
+  (`_level_moment_sites`).
+  - A level moment is a one-time canvas whose screens are only narration or her thought, that never moves the meter
+    it reads, and whose flags no other canvas reads.
+  - It's defined above `main()` and folded into `_voice_only_sites` by rebinding, so no cited line moved.
+  - On the last commit's build it matches nothing (903 sites before and after). The first try also caught
+    `exh_bridge_*`, which lifts her meter into the next stage, and repeatable everyday acts; both rules were added to
+    keep those counted. On the new build it matches exactly first_term's 6 `stage_*` canvases.
+- **Verified:** see the next run line in first_term BUILD_LOG (DECISIONS 229).
+
+---
+
 ## 2026-11-11 — a quest line reads as her story, and the engine prints the count (DECISIONS 228)
 
 Source: LO on first_term's Tom card ("0 / -5", four lines): "What does it means??", then "its not just toms card",

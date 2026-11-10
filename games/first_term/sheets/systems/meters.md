@@ -83,6 +83,38 @@ stranger's look pays nothing to anyone; it is the street scene's line.
 | the street scene pays both, once a day | every clothing state is read |
 | each step sheet names its mixed buttons | the numbers, the body and the clothes agree |
 
+## Rule 7 · a new stage is a moment (2026-11-11, DECISIONS 229; signed by LO 2026-11-11, "Sign them")
+
+> LO, 2026-11-11, on the study of how top games show her stages: "Yes c" (shorter stage cards, and a moment when she
+> crosses a stage). The model is Cupid's Way: one pop-up per stage, with the stage's name, two or three lines about
+> who she has become, and "new things open" (`cupids-way.txt:19980-20010`). It fires on the sidebar's morning check
+> (`$time is 0`).
+
+| row | answer |
+|---|---|
+| what | one short screen per stage, with the stage name as its title, 2–3 lines of who she is now, then what opens |
+| where and when | her room, the first morning (06:00–11:00) after she crosses 20, 40 or 60, once per stage |
+| pays | nothing, because she already crossed; it only says so |
+| button | "Get up." (back to her room) |
+| 80 | next release; the stage cards already say so |
+
+**Built 2026-11-11, where the build differs:** her room is the wardrobe room, and nothing one-time may fire there on
+entry (gate *nothing one-time at the shop or wardrobe*). So the moment comes from going to bed: the first night after she
+crosses, "Go to bed" plays the stage's own sleep (`stages.py`, a substitution on `room_sleep`). Its bed line is the
+stage's own, and its morning screen is the moment above. It sleeps her the same way the bed does. When two stages are due,
+they come on two nights, Corruption first. The Showing line names her panties only while she wears them; bare, it
+reads *"You stand at the mirror with nothing on, longer than you need to, and think about who you'd let see this. Then you
+think about letting them."*
+
+| stage | the moment | what opens (the stage card's own words) |
+|---|---|---|
+| **Curious** (Corruption 20) | You wake up thinking about it again: the couple in the park, a door left open at night. You used to look away. This morning you don't want to. | Watching, touching yourself, a kiss, a dare. |
+| **Bold** (Corruption 40) | You lie with your hand flat on your stomach and you know it now. You'd let a hand stay. You'd put your mouth where you were asked to. | Hands, mouths, a price for a look. |
+| **Hungry** (Corruption 60) | You wake up wet, and it isn't a dream. It's this house: your brother across the hall, Mark at the table downstairs. You want what you aren't allowed, and you want someone to see you take it. | The taboo at home, strangers who can see, a room watching. |
+| **Daring** (Exhibitionism 20) | You pull on a top and leave the bra on the chair. Nobody told you to. You liked how they looked yesterday, and you want it again. | No bra, a short skirt out of the house, bigger tips at the café. |
+| **Showing** (Exhibitionism 40) | You stand at the mirror in your panties longer than you need to, and think about who you'd let see this. Then you think about taking the panties off too. | No panties out, naked for someone you know, your feed. |
+| **Watched** (Exhibitionism 60) | Being seen isn't enough now. You want to be watched: a room going quiet, a stranger who can't look away, and you not covering up. | A room watching, a stranger. |
+
 ## Not decided here
 
 - Whether underwear-only goes out at Showing in a later release (home-only now).

@@ -39534,7 +39534,7 @@ goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 5, label = "Stay behind the shelf in the library's back stacks and watch" },
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 10, label = "Move one aisle closer in the library's back stacks" },
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 15, label = "Turn the sound up on channel 5 when you're alone" },
-  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 20, label = "Stay and look: the park couple, the library stacks, a bedroom door left open at night" },
+  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 20, label = "Look when you should look away: the park couple, the library stacks. Stay longer" },
 ]
 
 [[quest_cards]]
@@ -39547,7 +39547,7 @@ when = [
   { type = "trait", subject = "player", trait = "corruption", op = "lt", value = 40 },
 ]
 goals = [
-  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Touch yourself in bed, in the shower or a college toilet stall; watch the park couple" },
+  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Touch yourself: in bed, in the shower, in a college stall. Then watch again" },
 ]
 
 [[quest_cards]]
@@ -39560,7 +39560,7 @@ when = [
   { type = "trait", subject = "player", trait = "corruption", op = "lt", value = 60 },
 ]
 goals = [
-  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 60, label = "Get on Ryan's couch with him, or pull the guy who trains at your gym into the locker room" },
+  { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 60, label = "Go further with the ones who want you: Ryan's couch, the gym locker room" },
 ]
 
 [[quest_cards]]
@@ -39578,17 +39578,17 @@ terminal_text = "Shameless (Corruption 80) opens in the next release"
 [[quest_cards]]
 group = "tier_exhibitionism"
 priority = 5
-text = "Covered. Exhibitionism goes up when people look at you and you let them: wear the low-cut top from the clothes shop and go where people are. Daring opens at 20: no bra, a short skirt out of the house, and bigger tips at the café if you let them look."
+text = "Covered. It goes up when people look and you let them. Daring opens at 20: no bra, a short skirt out, bigger tips."
 when = [
   { flag = "opening_done", op = "is_true" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 0 },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "lt", value = 20 },
 ]
 goals = [
-  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 5, label = "Let them look: stretch in the living room, the low-cut top out, table six at the café, the gym mirror, the park" },
+  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 5, label = "Let people look at you: at home, in class, at the café. Don't cover up" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 10, label = "Leave the shower door unlocked, and keep letting them look" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 15, label = "Keep letting them look, at home, in class and out" },
-  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Let them look, once a day each: home, class, the café, the gym, the park, the street" },
+  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Let them look, everywhere you go. Every place pays once a day" },
 ]
 
 [[quest_cards]]
@@ -39601,7 +39601,7 @@ when = [
   { type = "trait", subject = "player", trait = "exhibitionism", op = "lt", value = 40 },
 ]
 goals = [
-  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Let them look at the gym and in class; run in the park, the short skirt out, the curtain open, the towel slipping" },
+  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Wear less out: the short skirt on the street, the curtain left open, the towel slipping" },
 ]
 
 [[quest_cards]]
@@ -39614,7 +39614,7 @@ when = [
   { type = "trait", subject = "player", trait = "exhibitionism", op = "lt", value = 60 },
 ]
 goals = [
-  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 60, label = "Show off on the garden lounger, the street with no panties, the towel dropped at home, the gym mats in tiny shorts" },
+  { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 60, label = "Show off where you could be caught: the garden lounger, the street with nothing under your skirt" },
 ]
 
 [[quest_cards]]
@@ -39646,7 +39646,7 @@ priority = 5
 is_active = true
 show_when_blocked = true
 cooldown_message = "Every day, 7 PM-7 AM"
-substitutions = [{ target_canvas_id = "ryan_05_thin_walls", chance = 1.0, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }] } }]
+substitutions = [{ target_canvas_id = "ryan_05_thin_walls", chance = 1.0, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }] } }, { target_canvas_id = "stage_corruption_20", chance = 1.0, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }] } }, { target_canvas_id = "stage_corruption_40", chance = 1.0, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }] } }, { target_canvas_id = "stage_corruption_60", chance = 1.0, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }] } }, { target_canvas_id = "stage_exhibitionism_20", chance = 1.0, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }] } }, { target_canvas_id = "stage_exhibitionism_40", chance = 1.0, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }] } }, { target_canvas_id = "stage_exhibitionism_60", chance = 1.0, conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }] } }]
 
 [[canvases.trigger.schedules]]
 weekdays = [0, 1, 2, 3, 4, 5, 6]
@@ -62027,3 +62027,1053 @@ when = [
 ]
 terminal = true
 terminal_text = "Dex, further. (Next release)"
+# =============================================================================
+# First Term — 5 · scenes · HER STAGES (sheets/systems/meters.md Rule 7, DECISIONS 229)
+# One morning moment in her room per stage she crosses.
+# =============================================================================
+
+[[canvases]]
+id   = "stage_corruption_20"
+name = "Go to bed"
+description = "Her Corruption reaches 20 (Curious): the next night's sleep, whose morning is one screen of who she is now and what opens (meters.md Rule 7). Sleeps her as room_sleep does."
+
+[canvases.trigger]
+location = "home_ella_room"
+is_repeatable = false
+priority = 1
+is_active = true
+substitution_only = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "stage_corruption_20_seen", operator = "is_false" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time = "07:00"
+
+[[canvases.nodes]]
+id   = "bed"
+name = "Your bed"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You get under the covers and lie in the dark with your eyes open, replaying what you saw today."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (11h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 690
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "19:00", end_time = "20:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (10h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 630
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "20:00", end_time = "21:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (9h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 570
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "21:00", end_time = "22:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (8h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 510
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "22:00", end_time = "23:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (7h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 450
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "23:00", end_time = "00:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (6h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 390
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "00:00", end_time = "01:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (5h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 330
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "01:00", end_time = "02:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (4h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 270
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "02:00", end_time = "03:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (3h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 210
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "03:00", end_time = "04:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (2h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 150
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "04:00", end_time = "05:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (1h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 90
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "05:00", end_time = "06:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "06:00", end_time = "07:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Not yet. Get up."
+targetType = "location"
+locationId = "home_hall"
+
+[[canvases.nodes]]
+id   = "wake"
+name = "Curious"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You wake up thinking about it again: the couple in the park, a door left open at night. You used to look away. This morning you don't want to."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "New for you now: Watching, touching yourself, a kiss, a dare."
+props = { not_speech = true }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get up."
+targetType = "location"
+locationId = "home_ella_room"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "heavy_night", operator = "is_false" }] }
+flagEffects = [{ targetType = "player", flag = "stage_corruption_20_seen", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get up, slowly."
+targetType = "location"
+locationId = "home_ella_room"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "heavy_night", operator = "is_true" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = -30, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "heavy_night", op = "unset" }, { targetType = "player", flag = "stage_corruption_20_seen", op = "set" }]
+
+[[canvases]]
+id   = "stage_corruption_40"
+name = "Go to bed"
+description = "Her Corruption reaches 40 (Bold): the next night's sleep, whose morning is one screen of who she is now and what opens (meters.md Rule 7). Sleeps her as room_sleep does."
+
+[canvases.trigger]
+location = "home_ella_room"
+is_repeatable = false
+priority = 1
+is_active = true
+substitution_only = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 40 }, { type = "flag", subject = "player", flag_key = "stage_corruption_40_seen", operator = "is_false" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time = "07:00"
+
+[[canvases.nodes]]
+id   = "bed"
+name = "Your bed"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You get under the covers with your skin still buzzing, and you don't try to make it stop."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (11h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 690
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "19:00", end_time = "20:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (10h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 630
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "20:00", end_time = "21:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (9h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 570
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "21:00", end_time = "22:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (8h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 510
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "22:00", end_time = "23:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (7h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 450
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "23:00", end_time = "00:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (6h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 390
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "00:00", end_time = "01:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (5h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 330
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "01:00", end_time = "02:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (4h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 270
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "02:00", end_time = "03:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (3h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 210
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "03:00", end_time = "04:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (2h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 150
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "04:00", end_time = "05:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (1h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 90
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "05:00", end_time = "06:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "06:00", end_time = "07:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Not yet. Get up."
+targetType = "location"
+locationId = "home_hall"
+
+[[canvases.nodes]]
+id   = "wake"
+name = "Bold"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You lie with your hand flat on your stomach and you know it now. You'd let a hand stay. You'd put your mouth where you were asked to."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "New for you now: Hands, mouths, a price for a look."
+props = { not_speech = true }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get up."
+targetType = "location"
+locationId = "home_ella_room"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "heavy_night", operator = "is_false" }] }
+flagEffects = [{ targetType = "player", flag = "stage_corruption_40_seen", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get up, slowly."
+targetType = "location"
+locationId = "home_ella_room"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "heavy_night", operator = "is_true" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = -30, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "heavy_night", op = "unset" }, { targetType = "player", flag = "stage_corruption_40_seen", op = "set" }]
+
+[[canvases]]
+id   = "stage_corruption_60"
+name = "Go to bed"
+description = "Her Corruption reaches 60 (Hungry): the next night's sleep, whose morning is one screen of who she is now and what opens (meters.md Rule 7). Sleeps her as room_sleep does."
+
+[canvases.trigger]
+location = "home_ella_room"
+is_repeatable = false
+priority = 1
+is_active = true
+substitution_only = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "corruption", operator = "gte", value = 60 }, { type = "flag", subject = "player", flag_key = "stage_corruption_60_seen", operator = "is_false" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time = "07:00"
+
+[[canvases.nodes]]
+id   = "bed"
+name = "Your bed"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You lie in the dark and listen to the house, every door in it, and you know who is behind each one."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (11h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 690
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "19:00", end_time = "20:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (10h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 630
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "20:00", end_time = "21:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (9h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 570
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "21:00", end_time = "22:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (8h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 510
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "22:00", end_time = "23:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (7h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 450
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "23:00", end_time = "00:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (6h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 390
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "00:00", end_time = "01:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (5h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 330
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "01:00", end_time = "02:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (4h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 270
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "02:00", end_time = "03:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (3h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 210
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "03:00", end_time = "04:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (2h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 150
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "04:00", end_time = "05:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (1h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 90
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "05:00", end_time = "06:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "06:00", end_time = "07:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Not yet. Get up."
+targetType = "location"
+locationId = "home_hall"
+
+[[canvases.nodes]]
+id   = "wake"
+name = "Hungry"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You wake up wet, and it isn't a dream. It's this house: your brother across the hall, Mark at the table downstairs. You want what you aren't allowed, and you want someone to see you take it."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "New for you now: The taboo at home, strangers who can see, a room watching."
+props = { not_speech = true }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get up."
+targetType = "location"
+locationId = "home_ella_room"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "heavy_night", operator = "is_false" }] }
+flagEffects = [{ targetType = "player", flag = "stage_corruption_60_seen", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get up, slowly."
+targetType = "location"
+locationId = "home_ella_room"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "heavy_night", operator = "is_true" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = -30, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "heavy_night", op = "unset" }, { targetType = "player", flag = "stage_corruption_60_seen", op = "set" }]
+
+[[canvases]]
+id   = "stage_exhibitionism_20"
+name = "Go to bed"
+description = "Her Exhibitionism reaches 20 (Daring): the next night's sleep, whose morning is one screen of who she is now and what opens (meters.md Rule 7). Sleeps her as room_sleep does."
+
+[canvases.trigger]
+location = "home_ella_room"
+is_repeatable = false
+priority = 1
+is_active = true
+substitution_only = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "flag", subject = "player", flag_key = "stage_exhibitionism_20_seen", operator = "is_false" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time = "07:00"
+
+[[canvases.nodes]]
+id   = "bed"
+name = "Your bed"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You get into bed still feeling their eyes on you, warm, and you fall asleep smiling."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (11h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 690
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "19:00", end_time = "20:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (10h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 630
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "20:00", end_time = "21:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (9h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 570
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "21:00", end_time = "22:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (8h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 510
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "22:00", end_time = "23:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (7h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 450
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "23:00", end_time = "00:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (6h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 390
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "00:00", end_time = "01:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (5h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 330
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "01:00", end_time = "02:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (4h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 270
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "02:00", end_time = "03:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (3h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 210
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "03:00", end_time = "04:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (2h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 150
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "04:00", end_time = "05:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (1h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 90
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "05:00", end_time = "06:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "06:00", end_time = "07:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Not yet. Get up."
+targetType = "location"
+locationId = "home_hall"
+
+[[canvases.nodes]]
+id   = "wake"
+name = "Daring"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You pull on a top and leave the bra on the chair. Nobody told you to. You liked how they looked yesterday, and you want it again."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "New for you now: No bra, a short skirt out of the house, bigger tips at the café."
+props = { not_speech = true }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get up."
+targetType = "location"
+locationId = "home_ella_room"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "heavy_night", operator = "is_false" }] }
+flagEffects = [{ targetType = "player", flag = "stage_exhibitionism_20_seen", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get up, slowly."
+targetType = "location"
+locationId = "home_ella_room"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "heavy_night", operator = "is_true" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = -30, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "heavy_night", op = "unset" }, { targetType = "player", flag = "stage_exhibitionism_20_seen", op = "set" }]
+
+[[canvases]]
+id   = "stage_exhibitionism_40"
+name = "Go to bed"
+description = "Her Exhibitionism reaches 40 (Showing): the next night's sleep, whose morning is one screen of who she is now and what opens (meters.md Rule 7). Sleeps her as room_sleep does."
+
+[canvases.trigger]
+location = "home_ella_room"
+is_repeatable = false
+priority = 1
+is_active = true
+substitution_only = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "flag", subject = "player", flag_key = "stage_exhibitionism_40_seen", operator = "is_false" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time = "07:00"
+
+[[canvases.nodes]]
+id   = "bed"
+name = "Your bed"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You kick the duvet off and lie on top of it in the warm dark, and you like being bare to the room."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (11h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 690
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "19:00", end_time = "20:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (10h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 630
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "20:00", end_time = "21:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (9h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 570
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "21:00", end_time = "22:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (8h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 510
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "22:00", end_time = "23:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (7h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 450
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "23:00", end_time = "00:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (6h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 390
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "00:00", end_time = "01:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (5h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 330
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "01:00", end_time = "02:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (4h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 270
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "02:00", end_time = "03:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (3h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 210
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "03:00", end_time = "04:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (2h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 150
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "04:00", end_time = "05:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (1h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 90
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "05:00", end_time = "06:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "06:00", end_time = "07:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Not yet. Get up."
+targetType = "location"
+locationId = "home_hall"
+
+[[canvases.nodes]]
+id   = "wake"
+name = "Showing"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "underwear", operator = "equipped" }] }, blocks = [{ type = "paragraph", content = "You stand at the mirror in your panties longer than you need to, and think about who you'd let see this. Then you think about taking the panties off too." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "underwear", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "You stand at the mirror with nothing on, longer than you need to, and think about who you'd let see this. Then you think about letting them." }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "New for you now: No panties out, naked for someone you know, your feed."
+props = { not_speech = true }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get up."
+targetType = "location"
+locationId = "home_ella_room"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "heavy_night", operator = "is_false" }] }
+flagEffects = [{ targetType = "player", flag = "stage_exhibitionism_40_seen", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get up, slowly."
+targetType = "location"
+locationId = "home_ella_room"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "heavy_night", operator = "is_true" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = -30, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "heavy_night", op = "unset" }, { targetType = "player", flag = "stage_exhibitionism_40_seen", op = "set" }]
+
+[[canvases]]
+id   = "stage_exhibitionism_60"
+name = "Go to bed"
+description = "Her Exhibitionism reaches 60 (Watched): the next night's sleep, whose morning is one screen of who she is now and what opens (meters.md Rule 7). Sleeps her as room_sleep does."
+
+[canvases.trigger]
+location = "home_ella_room"
+is_repeatable = false
+priority = 1
+is_active = true
+substitution_only = true
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "opening_done", operator = "is_true" }, { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "flag", subject = "player", flag_key = "stage_exhibitionism_60_seen", operator = "is_false" }] }
+
+[[canvases.trigger.schedules]]
+weekdays = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time = "07:00"
+
+[[canvases.nodes]]
+id   = "bed"
+name = "Your bed"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You lie awake a long time, thinking about the faces that turned today, and how quiet they went."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (11h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 690
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "19:00", end_time = "20:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (10h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 630
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "20:00", end_time = "21:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (9h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 570
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "21:00", end_time = "22:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (8h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 510
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "22:00", end_time = "23:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (7h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 450
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "23:00", end_time = "00:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (6h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 390
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "00:00", end_time = "01:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (5h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 330
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "01:00", end_time = "02:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (4h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 270
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "02:00", end_time = "03:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (3h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 210
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "03:00", end_time = "04:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (2h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 150
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "04:00", end_time = "05:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning (1h 30m)."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 90
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "05:00", end_time = "06:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Sleep till morning."
+targetType = "node"
+nodeId = "wake"
+time_progression_minutes = 30
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "06:00", end_time = "07:00" }] }
+effects = [{ targetType = "player", trait = "energy", op = "set", value = 100 }]
+flagEffects = [{ targetType = "player", flag = "came_home_late", op = "unset" }, { targetType = "player", flag = "late_party", op = "unset" }, { targetType = "player", flag = "late_shift", op = "unset" }, { targetType = "player", flag = "late_date", op = "unset" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Not yet. Get up."
+targetType = "location"
+locationId = "home_hall"
+
+[[canvases.nodes]]
+id   = "wake"
+name = "Watched"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Being seen isn't enough now. You want to be watched: a room going quiet, a stranger who can't look away, and you not covering up."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "New for you now: A room watching, a stranger."
+props = { not_speech = true }
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get up."
+targetType = "location"
+locationId = "home_ella_room"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "heavy_night", operator = "is_false" }] }
+flagEffects = [{ targetType = "player", flag = "stage_exhibitionism_60_seen", op = "set" }]
+
+[[canvases.nodes.exit_block.choices]]
+text = "Get up, slowly."
+targetType = "location"
+locationId = "home_ella_room"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "heavy_night", operator = "is_true" }] }
+effects = [{ targetType = "player", trait = "energy", op = "add", value = -30, clamp = true }]
+flagEffects = [{ targetType = "player", flag = "heavy_night", op = "unset" }, { targetType = "player", flag = "stage_exhibitionism_60_seen", op = "set" }]

@@ -98,7 +98,7 @@ rest of this file follow from it.
 **Gate 34 · the climb is where you said it is.** Declare-then-check: the measured split must match
 the declaration (`player` ≥60% on her tiers · `cast` ≥60% on the cast · `both` ≥25% each). The cut
 points sit inside the corpus's own empty band, so nothing here was invented — but what is judged is
-the game against **its own declaration**, never against a number this file picked. A group holding only narration, her own line or her thought by level is not a gate here: text opens nothing, so the check skips it (LO, 2026-11-04; narration added 2026-11-09).
+the game against **its own declaration**, never against a number this file picked. A group holding only narration, her own line or her thought by level is not a gate here: text opens nothing, so the check skips it (LO, 2026-11-04; narration added 2026-11-09). So does a one-time scene that only tells her the stage she has reached: every screen is narration or her thought, it never moves the meter it reads, and no other canvas reads its flags (LO, 2026-11-11; see "A new stage is a moment" at the end of this file).
 
 ### What each man keeps score of
 
@@ -1072,3 +1072,30 @@ down, bra off. Writing her stage check on every variant counts the stage once pe
 became 872 against 292 (25%, a pass) with the doors, plus the study guy's own `want`. Neither change alone was
 enough. A game sitting at the line trips it again on its next stage-heavy round, so read the split on every
 build, not only when it fails.
+
+## A new stage is a moment, and her stage card says where in one line (LO, 2026-11-11)
+
+Source: the study of how top games show her levels (first_term DECISIONS 229). LO: "Yes c", then "Sign them".
+
+**What the field does.**
+- Course of Temptation keeps the number on its Skills page, as a level and a bar to the next one (`[Skills]`,
+  R2P:28145-28190). Each skill has one sentence on how it rises. For Exhibitionism: *"Early on, just getting checked
+  out will help you discover this. Then you'll have to take things into your own hands and push your boundaries."*
+  That sentence is in its data (`setup.Skills.mainskills`); where it is shown was not traced.
+- Shady Deals shows a rank word only.
+- Cupid's Way, In Her Own Hands and Untangled Mind print the raw number in the sidebar.
+- None of the five lists every place that raises a meter (`playtest_study_20261109/3_journal.md:190`).
+
+**So her meter's own card says where in one line,** with two or three places and no full list: *"Let people look at
+you: at home, in class, at the café. Don't cover up."*
+
+**And crossing a stage is a moment.** Cupid's Way gives each stage one pop-up, on its morning check
+(`cupids-way.txt:19980-20010`): the stage name, two or three lines of who she has become, and *"You've unlocked some new
+dialog options as well as new events."* In this engine that is a one-time scene, and it pays nothing because she has
+already crossed:
+- first_term's is a `substitution_only` canvas on going to bed. It sleeps her as the bed does, and its morning screen is
+  the moment.
+- Her room is the wardrobe room, so nothing one-time may fire there on entry (gate *nothing one-time at the shop or
+  wardrobe*).
+- *The climb is where you said it is* does not count its meter read as climb (see W1).
+
