@@ -836,3 +836,27 @@ v2-reader, three passes: 5 FAILs, then 2, then 0. The desk guy's hand screen was
 4. **Skill:** R1's other half in the-surfaces.md, and a new gate, *a person's scene is inside their portrait*. It fails the last commit's build on all 8 scenes and passes this one 10/10.
 
 Gates: 115 pass, 3 decided, 1 fail (Laura's loop, held). | "B" (2026-11-10) |
+| 225 | The gym moves to Your Street, with a membership, a gym-clothes rule, three rooms and a trainer (LO, 2026-11-10: "I want gym outside college in the streets. A gym membership too. Gym clothes are to be required for workouts. And some more room gym can have. Gym trainer too."). Sheets first; nothing built yet.
+1. **One gym, on the street.** "We want to shift campuss gym to street gym. Not have both." Everything the campus gym had (the five clothing steps, three accidents, Jake's training and locker room, the team walk-in, Zoe's crowd ask) moves to `gym.md`.
+2. **Three rooms.** "Only locker room and showers and. Sauna and gym thats it": the gym floor (the desk), the locker room and showers (change, shower), the sauna (towel only).
+3. **A membership counted in days.** "Dont count hrs count days": the engine's pass (`v2.py:5732`), a day pass $5 and 30 days $40 ("1yes").
+4. **Hours.** Every day 06:00–21:00, "independent of campuss or ither systems".
+5. **Gym clothes to work out**, and she can walk the street in them ("yes she can walk in gym cloths in streets"); the sports bra alone passes the street from Exhibitionism 20, only the sports bra ("Yes, from 20").
+6. **Dex, the trainer**, 34, five steps from a free session to after hours in the locker room ("you can decide one"; "Yes, go ahead"). `npc_dex.md`.
+
+Sheets: new `places/gym.md`, `people/npc_dex.md`; changed `npc_jake.md`, `wardrobe.md`, `campus.md`, `street.md`, `campus_gym.md` (moved), `money_pressure.md`. Signed by LO 2026-11-10 ("Sign them"). Built the same day: the "Built" sections on gym.md and npc_dex.md list where the build differs (the day pass is a $5 check-in; the sauna's door is in the locker room; after hours runs from the floor at 20:30; his repeat is the locker room on his shift; no phone thread yet). | LO, 2026-11-10 |
+| 226 | The gym gets a men's locker room and showers; the sauna stays mixed (LO, 2026-11-10: "Does men dont shower in the same shower??", then "I say as men's locker room too and shower too. Sauna stays same for both."; on the pitch: "Yes i like it").
+1. **A fourth room, `gym_mens_locker`**, off the floor. Blocked for her below the dare's gate ("That's the men's.").
+2. **Jake's locker-room act (A1) moves in there**: the team showers behind a wall of lockers, as his lines already say.
+3. **A new dare, "Walk through the men's showers."**: Watched (60), in a towel, checked in; the towel slips (a flash); +1 to cap 79, campus talk +1; once a day.
+4. **Dex's repeat** gets a men's-room variant.
+5. **The women's shower walk-in splits by her level**: "Keep washing." back turned, from 20, cap 39; "Turn round and let her look." from 60, cap 79 (the scene reader: full front to a stranger is Watched).
+
+Sheets: `gym.md`, `npc_jake.md`, `npc_dex.md` changed; re-signed by LO 2026-11-10 ("Sign them"). Built the same day; the men's door is off the women's locker room (she goes in a towel). | LO, 2026-11-10 |
+| 227 | One shared shower room for men and women at the gym, with a ladder and people hitting on her (LO, 2026-11-10: "we can remove this and make a common shower for men and women, she doesnt have any choice to bath here"; "it isnt being complete naked on streets. She is taking shower in a bathroom for both men and women"; "they can also offer her things, she can accept and give them her hand and body too ... multiple mens or one men too or a couple or a women or multiple women"; "Not money they offer"; the plan: "Yes").
+1. **`gym_showers`** replaces the women's showers, the walk-in, the men's-showers dare and the men's locker room as a room; hygiene +50, once a day; a bathroom, so not public topless (LO).
+2. **Her ladder while she showers**: cover 0 · back turned 20 (cap 39) · face them 40 (cap 59) · soap slowly 60 (cap 79).
+3. **Someone hits on her**, 1 in 3, once a day, no money: washed Bold 40 · her hand Bold 40, alone · her body Hungry 60 · a couple or two of them C60 and E60 · a group locked (Next release).
+4. **Dex's** showers variant moves into the shared room; **Jake's** team showers there.
+
+Sheets: `gym.md`, `npc_jake.md`, `npc_dex.md` changed; re-signed by LO 2026-11-10 ("Sign them"). Built the same day. The reader's two heat points, LO "Go ahead with your picks": face them stays at 40; washed by more than one with the room watching needs Corruption 40 and Exhibitionism 40. | LO, 2026-11-10 |

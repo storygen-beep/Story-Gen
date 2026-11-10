@@ -178,6 +178,11 @@
         "id": "npc_figure_model",
         "age": 25,
         "keeps": "none — inside the Figure drawing class"
+      },
+      {
+        "id": "npc_dex",
+        "age": 34,
+        "keeps": "step counter + memory flags"
       }
     ],
     "why_this_person": {
@@ -434,7 +439,8 @@
       "npc_zoe": 5,
       "npc_hale": 4,
       "npc_jake": 4,
-      "npc_tom": 3
+      "npc_tom": 3,
+      "npc_dex": 5
     },
     "places": [
       "home_hall",
@@ -473,7 +479,10 @@
       "zoe_bathroom",
       "home_garden",
       "corner_shop",
-      "campus_gym"
+      "gym_floor",
+      "gym_locker",
+      "gym_sauna",
+      "gym_showers"
     ],
     "weeks": 8,
     "promise_alive": "the Sunday table: each Sunday table says how many Sundays in a row she has paid her own way (goal 1; Mark's steps 1 and 3, and his Sunday table every week); Zoe's step 4 hands her the dares, which feed campus_talk (goal 2, whose end is release 2)",
@@ -491,7 +500,8 @@
       "npc_tom",
       "npc_zoe",
       "npc_hale",
-      "npc_jake"
+      "npc_jake",
+      "npc_dex"
     ],
     "door": null,
     "reader": {
@@ -4736,7 +4746,8 @@
         "deadline": "Sunday 00:00",
         "feeds": [
           "paid_full_streak",
-          "rent_short_weeks"
+          "rent_short_weeks",
+          "dex_sessions"
         ],
         "reads": [
           "money"
@@ -5090,7 +5101,7 @@
         "key": "corruption",
         "fed_at": [
           "cafe",
-          "campus_gym",
+          "gym_floor",
           "canteen",
           "clothes_shop",
           "college_womens_toilet",
@@ -5114,7 +5125,8 @@
           "zoe_apartment",
           "zoe_bathroom",
           "zoe_bedroom",
-          "zoe_kitchen"
+          "zoe_kitchen",
+          "gym_showers"
         ],
         "labels": [
           "public"
@@ -5128,7 +5140,7 @@
         "key": "exhibitionism",
         "fed_at": [
           "cafe",
-          "campus_gym",
+          "gym_floor",
           "canteen",
           "clothes_shop",
           "college_womens_toilet",
@@ -5150,7 +5162,8 @@
           "street",
           "vance_house",
           "zoe_apartment",
-          "zoe_bathroom"
+          "zoe_bathroom",
+          "gym_showers"
         ],
         "labels": [
           "she_can_undress",
@@ -5168,7 +5181,7 @@
           "lecture_hall",
           "quad",
           "zoe_apartment",
-          "campus_gym"
+          "gym_floor"
         ],
         "labels": [
           "zone:campus"
@@ -5522,7 +5535,8 @@
         "npc_rival": "offscreen",
         "npc_study_guy": "offscreen",
         "npc_cocky_guy": "offscreen",
-        "npc_figure_model": "offscreen"
+        "npc_figure_model": "offscreen",
+        "npc_dex": "offscreen"
       },
       "shared_homes": [
         [
@@ -5874,8 +5888,7 @@
           "canteen",
           "college_womens_toilet",
           "college_mens_toilet",
-          "faculty_floor",
-          "campus_gym"
+          "faculty_floor"
         ],
         "source": "LO, 2026-10-08 (everyday update, batch 1)"
       },
@@ -6501,31 +6514,144 @@
         "source": "LO, 2026-10-08 (everyday update, batch 1)"
       },
       {
-        "id": "campus_gym",
+        "id": "gym",
         "name": "Gym",
+        "kind": "thoroughfare",
+        "is_container": true,
+        "default_entry": "gym_floor",
+        "entry_from": "street",
+        "contains": [
+          "gym_floor",
+          "gym_locker",
+          "gym_sauna",
+          "gym_showers"
+        ],
+        "job": "the gym as a building: it opens on the floor",
+        "anchor": false,
+        "fill": 0,
+        "labels": [
+          "zone:street",
+          "public"
+        ],
+        "serves": {
+          "needs": [],
+          "work": [],
+          "people": []
+        },
+        "in_release": true,
+        "crossing_costs": {
+          "time": 5
+        },
+        "source": "LO, 2026-11-10 (DECISIONS 225: the gym moves to the street)"
+      },
+      {
+        "id": "gym_floor",
+        "name": "Gym Floor",
         "kind": "destination",
-        "entry_from": "campus",
-        "job": "work out; Jake's team trains Tue and Thu afternoons",
+        "job": "the desk (check in, the membership); work out; Dex; Jake's team trains Tue and Thu afternoons",
         "anchor": false,
         "fill": 1500,
         "labels": [
-          "zone:campus",
+          "zone:street",
           "public"
         ],
         "serves": {
           "needs": [],
           "work": [
-            "wardrobe"
+            "wardrobe",
+            "money_pressure"
           ],
           "people": [
+            "npc_dex",
             "npc_jake"
           ]
         },
         "in_release": true,
-        "hours": "Mon-Fri 07:00-21:00; Sat-Sun 09:00-17:00",
-        "closed_text": "The gym's locked.",
-        "alone": "work out",
-        "source": "LO, 2026-10-08 (everyday update, batch 3)"
+        "hours": "06:00-21:00",
+        "closed_text": "The gym's shut. Opens at six.",
+        "alone": "check in at the desk; work out",
+        "source": "LO, 2026-11-10 (DECISIONS 225: the gym moves to the street)"
+      },
+      {
+        "id": "gym_locker",
+        "name": "Locker Room",
+        "kind": "destination",
+        "entry_from": "gym_floor",
+        "job": "change clothes; shower; members only",
+        "anchor": false,
+        "fill": 500,
+        "labels": [
+          "zone:street",
+          "public"
+        ],
+        "serves": {
+          "needs": [
+            "hygiene"
+          ],
+          "work": [
+            "wardrobe"
+          ],
+          "people": []
+        },
+        "in_release": true,
+        "hours": "06:00-21:00",
+        "closed_text": "The gym's shut. Opens at six.",
+        "alone": "change; shower",
+        "source": "LO, 2026-11-10 (DECISIONS 225: the gym moves to the street)"
+      },
+      {
+        "id": "gym_sauna",
+        "name": "Sauna",
+        "kind": "destination",
+        "entry_from": "gym_locker",
+        "job": "sit in the heat in a towel; members only",
+        "anchor": false,
+        "fill": 500,
+        "labels": [
+          "zone:street",
+          "public"
+        ],
+        "serves": {
+          "needs": [
+            "energy"
+          ],
+          "work": [],
+          "people": [
+            "npc_dex"
+          ]
+        },
+        "in_release": true,
+        "hours": "06:00-21:00",
+        "closed_text": "The gym's shut. Opens at six.",
+        "alone": "sit in the sauna",
+        "source": "LO, 2026-11-10 (DECISIONS 225: the gym moves to the street)"
+      },
+      {
+        "id": "gym_showers",
+        "name": "Showers",
+        "kind": "destination",
+        "entry_from": "gym_locker",
+        "job": "the gym's only showers, shared by men and women: shower; her ladder by level; someone hits on her",
+        "anchor": false,
+        "fill": 1000,
+        "labels": [
+          "zone:street",
+          "public"
+        ],
+        "serves": {
+          "needs": [
+            "hygiene"
+          ],
+          "work": [],
+          "people": [
+            "npc_dex"
+          ]
+        },
+        "in_release": true,
+        "hours": "06:00-21:00",
+        "closed_text": "The gym's shut. Opens at six.",
+        "alone": "shower",
+        "source": "LO, 2026-11-10 (DECISIONS 227)"
       }
     ],
     "characters": [
@@ -8376,7 +8502,7 @@
             "note": "brings her home after the date she went on tonight (Q73)"
           },
           {
-            "where": "campus_gym",
+            "where": "gym_floor",
             "weekdays": [
               "Tue",
               "Thu"
@@ -8384,7 +8510,7 @@
             "from": "15:00",
             "to": "17:00",
             "when": "jake_number",
-            "note": "team training (the 17:30 showers half-hour reverted: scene reader 2026-11-10, DECISIONS 220)"
+            "note": "team training (the 17:30 showers half-hour reverted: scene reader 2026-11-10, DECISIONS 220) · moved to the street gym (DECISIONS 225)"
           },
           {
             "where": "lecture_hall",
@@ -8945,6 +9071,297 @@
         "name": "the figure-drawing model",
         "role": "the class's model",
         "schedule_rows": 0
+      },
+      {
+        "id": "npc_dex",
+        "name": "Dex",
+        "role": "personal trainer",
+        "schedule": [
+          {
+            "where": "gym_sauna",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri",
+              "Sat"
+            ],
+            "from": "20:00",
+            "to": "20:45",
+            "when": {
+              "version": "1.0",
+              "logic": "AND",
+              "items": [
+                {
+                  "type": "flag",
+                  "subject": "player",
+                  "flag_key": "dex_met",
+                  "operator": "is_true"
+                },
+                {
+                  "type": "trait",
+                  "subject": "player",
+                  "trait_key": "dex_step",
+                  "operator": "eq",
+                  "value": 3
+                }
+              ]
+            },
+            "note": "his step 4: he ends his shift in the sauna (npc_dex.md)"
+          },
+          {
+            "where": "gym_floor",
+            "weekdays": [
+              "Mon",
+              "Tue",
+              "Wed",
+              "Thu",
+              "Fri",
+              "Sat"
+            ],
+            "from": "10:00",
+            "to": "21:00",
+            "note": "his shift: the desk and his clients (npc_dex.md); until close, so his after-hours button can open at 20:30"
+          }
+        ],
+        "ladder": {
+          "counter": "dex_step",
+          "loop": [
+            "dex_after_hours"
+          ],
+          "steps": [
+            {
+              "n": 1,
+              "canvas": "dex_01_free_session",
+              "where": "gym_floor",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri",
+                  "Sat"
+                ],
+                "from": "10:00",
+                "to": "20:00"
+              },
+              "gate": [
+                {
+                  "flag": "gym_in_today",
+                  "op": "is_true"
+                }
+              ],
+              "hint": "The gym, any day but Sunday, 10 to 8: the trainer at the desk has been watching you in the mirror.",
+              "her_line_low": "He's just doing his job.",
+              "her_line_high": "Let him look. That's what he's paid for.",
+              "who_notices": "the floor",
+              "refusal": "parked",
+              "raises": {
+                "exhibitionism": 1
+              }
+            },
+            {
+              "n": 2,
+              "canvas": "dex_02_the_mats",
+              "where": "gym_floor",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri",
+                  "Sat"
+                ],
+                "from": "10:00",
+                "to": "20:00"
+              },
+              "gate": [
+                {
+                  "flag": "gym_in_today",
+                  "op": "is_true"
+                },
+                {
+                  "trait": "dex_sessions",
+                  "op": "gte",
+                  "value": 2
+                },
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 20
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "flag": "dex_session_today",
+                  "op": "is_false"
+                },
+                {
+                  "flag": "worked_out",
+                  "op": "is_false"
+                }
+              ],
+              "hint": "A session with Dex: the mats, and his hands.",
+              "her_line_low": "It's a stretch. People stretch.",
+              "her_line_high": "His hand's on your inner thigh and you want it higher.",
+              "who_notices": "two regulars on the bench",
+              "refusal": "parked",
+              "raises": {
+                "corruption": 1
+              },
+              "gate_note": "a day she hasn't had a session or trained yet (scene reader, DECISIONS 225: it fired straight after the session that unlocked it)"
+            },
+            {
+              "n": 3,
+              "canvas": "dex_03_another_way",
+              "where": "gym_floor",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri",
+                  "Sat"
+                ],
+                "from": "10:00",
+                "to": "20:00"
+              },
+              "gate": [
+                {
+                  "flag": "gym_in_today",
+                  "op": "is_true"
+                },
+                {
+                  "trait": "dex_sessions",
+                  "op": "gte",
+                  "value": 3
+                },
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 40
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                },
+                {
+                  "flag": "dex_session_today",
+                  "op": "is_false"
+                },
+                {
+                  "flag": "worked_out",
+                  "op": "is_false"
+                }
+              ],
+              "hint": "Dex says keep your money. The locker room, between his clients.",
+              "her_line_low": "Just this once, for fifteen dollars.",
+              "her_line_high": "You'd have done it for free.",
+              "who_notices": "a member could walk in",
+              "refusal": "parked",
+              "raises": {
+                "corruption": 1
+              },
+              "gate_note": "a day she hasn't had a session or trained yet (scene reader, DECISIONS 225: it fired straight after the session that unlocked it)"
+            },
+            {
+              "n": 4,
+              "canvas": "dex_04_the_sauna",
+              "where": "gym_sauna",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri",
+                  "Sat"
+                ],
+                "from": "20:00",
+                "to": "20:45"
+              },
+              "gate": [
+                {
+                  "flag": "gym_in_today",
+                  "op": "is_true"
+                },
+                {
+                  "trait": "dex_sessions",
+                  "op": "gte",
+                  "value": 3
+                },
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 60
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                }
+              ],
+              "hint": "The sauna, just before close: Dex ends his shift in there.",
+              "her_line_high": "The regulars left ten minutes ago. Probably.",
+              "who_notices": "the last regular, leaving",
+              "refusal": "parked",
+              "raises": {
+                "corruption": 1
+              }
+            },
+            {
+              "n": 5,
+              "canvas": "dex_05_after_hours",
+              "where": "gym_floor",
+              "when": {
+                "days": [
+                  "Mon",
+                  "Tue",
+                  "Wed",
+                  "Thu",
+                  "Fri",
+                  "Sat"
+                ],
+                "from": "20:30",
+                "to": "21:00"
+              },
+              "gate": [
+                {
+                  "flag": "gym_in_today",
+                  "op": "is_true"
+                },
+                {
+                  "trait": "corruption",
+                  "op": "gte",
+                  "value": 60
+                },
+                {
+                  "type": "modifier",
+                  "modifier_key": "drinks_boost",
+                  "operator": "is_inactive"
+                }
+              ],
+              "hint": "Half past eight, the gym about to close: Dex has the key.",
+              "her_line_high": "The whole gym dark, and him fucking you on the bench where you change.",
+              "who_notices": "nobody, then the cleaner's cart",
+              "refusal": "parked",
+              "raises": {
+                "corruption": 1
+              }
+            }
+          ],
+          "release1_note": "DECISIONS 225 (npc_dex.md, signed 2026-11-10): five steps; after hours is his repeat."
+        },
+        "schedule_rows": 2,
+        "source": "LO, 2026-11-10 (DECISIONS 225: the gym moves to the street)"
       }
     ],
     "resetting_flags": [

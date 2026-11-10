@@ -60,6 +60,12 @@ DOORS = {
         schedules=[{"weekdays": [3], "start_time": "18:30", "end_time": "19:05"},
                    {"weekdays": [0, 1, 2, 4], "start_time": "15:00", "end_time": "19:00"},
                    {"weekdays": [0, 1, 2, 4], "start_time": "10:00", "end_time": "12:00"}]),
+    # dex.py: his repeat after his top step (DECISIONS 225, npc_dex.md): the locker room with him, between clients on his
+    # shift, or after close from half eight (the scene runs on past nine). Once a day.
+    "dex_after_hours": dict(
+        npc="npc_dex", hub="hub_dex_gym", label="Go to the locker room with him.", first="start", today="dex_after_today",
+        conds=[trait("dex_step", "gte", 5), flag("gym_in_today")],   # step 5 needed Hungry already
+        schedules=[{"weekdays": [0, 1, 2, 3, 4, 5], "start_time": "10:00", "end_time": "21:00"}]),
 }
 
 

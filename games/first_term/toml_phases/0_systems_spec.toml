@@ -24,7 +24,7 @@ starting_week = 1
 [settings]
 narration_person           = "second"      # IMMUTABLE once a release ships (ledger, DECISIONS 31)
 clothing_enabled           = true
-wardrobe_location          = ["home_ella_room", "cafe", "college_womens_toilet", "zoe_bedroom", "campus_gym"]   # the gym's locker room (DECISIONS 198)
+wardrobe_location          = ["home_ella_room", "cafe", "college_womens_toilet", "zoe_bedroom", "gym_locker"]   # the gym's locker room (DECISIONS 198; on the street since DECISIONS 225)
 wardrobe_anywhere          = false         # the dress rules are real: change in a room that has her clothes
 wardrobe_change_on_refusal = true
 saved_outfits              = true
@@ -260,6 +260,13 @@ flagEffects = [
   { targetType = "player", flag = "street_look_today", op = "unset" },
   # gym clothes (DECISIONS 198): one gym accident a day
   { targetType = "player", flag = "gym_accident_today", op = "unset" },
+  # the street gym (DECISIONS 225): checked in today, the shower, the sauna, a session with Dex, after hours
+  { targetType = "player", flag = "gym_in_today", op = "unset" },
+  { targetType = "player", flag = "gym_shower_today", op = "unset" },
+  { targetType = "player", flag = "sauna_today", op = "unset" },
+  { targetType = "player", flag = "dex_session_today", op = "unset" },
+  { targetType = "player", flag = "dex_after_today", op = "unset" },
+  { targetType = "player", flag = "gym_hit_today", op = "unset" },   # DECISIONS 227: someone hits on her in the showers, once a day
   # clothing accidents in class and on the shift (DECISIONS 202): one a day each
   { targetType = "player", flag = "class_accident_today", op = "unset" },
   { targetType = "player", flag = "cafe_accident_today", op = "unset" },
@@ -325,6 +332,15 @@ when  = { wearing = "short_skirt" }
 image = "portraits/her_sheer_blouse.jpg"
 when  = { wearing = "thin_top" }
 
+# ── the gym membership (LO, 2026-11-10, DECISIONS 225: "Dont count hrs count days"; sheets/places/gym.md) ──
+# The engine's pass counts days: expires_day = the day she buys it + 30 (v2.py setup.purchasePass). The day pass is
+# not a pass: $5 at the desk checks her in for today (gym_in_today, cleared at midnight), as her card does.
+[[passes]]
+id            = "gym_month"
+name          = "Gym"
+cost          = 40
+duration_days = 30
+
 # ── the sidebar: her two stages, money, energy, hygiene, and what's next ──
 [[sidebar_items]]
 type       = "trait_words"
@@ -383,6 +399,10 @@ max   = 100
 show_when = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "hygiene_off", operator = "is_false" },
 ] }
+
+# DECISIONS 225: the gym card's days left (shows once she has bought one)
+[[sidebar_items]]
+type = "passes"
 
 [[sidebar_items]]
 type = "quest_next"
@@ -519,6 +539,16 @@ hidden = true
 [[traits.labels]]
 key    = "jake_step"
 label  = "Jake's step"
+hidden = true
+
+[[traits.labels]]
+key    = "dex_step"
+label  = "Dex's step"
+hidden = true
+
+[[traits.labels]]
+key    = "dex_sessions"
+label  = "Sessions with Dex"
 hidden = true
 
 # release 1 (DECISIONS 112-121): the redesign's counters

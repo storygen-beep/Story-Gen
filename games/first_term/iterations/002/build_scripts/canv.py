@@ -700,7 +700,7 @@ STAGE = {"corruption": {20: "Curious", 40: "Bold", 60: "Hungry"},
 TRAIT_NAME = {"corruption": "Corruption", "exhibitionism": "Exhibitionism", "want": "Lust", "warmth": "Love",
               "power": "Dominance", "laura_suspicion": "Mom's suspicion", "intelligence": "Intelligence"}
 NPC_NAME = {"npc_ryan": "Ryan", "npc_laura": "Laura", "npc_mark": "Mark", "npc_tom": "Tom", "npc_zoe": "Zoe",
-            "npc_hale": "Dr. Hale", "npc_jake": "Jake"}
+            "npc_hale": "Dr. Hale", "npc_jake": "Jake", "npc_dex": "Dex"}
 COUNTER_OWNER = {lad["counter"]: npc for npc, lad in LADDERS.items()}
 # A flag a step needs, said as what she has done (a goal renders its label, engine.md §44).
 FLAG_WORDS = {
@@ -714,6 +714,7 @@ FLAG_WORDS = {
     "mark_saw_her": "Mark's first accident: the garage, a Saturday",
     "cafe_let_it": "Let a customer's hand stay, on a café shift",
     "cafe_job": "Get the job at the café",
+    "gym_in_today": "Check in at the gym desk today: your card, or a $5 day pass",   # DECISIONS 225
 }
 
 
@@ -737,6 +738,7 @@ COUNTER_WORDS = {
     # pass 3 J36 (engine.md:1074-1075): a counter goal says where, what to do and when, not a bare number
     "zoe_dares_done": "Take {v} of Zoe's dares at her Friday party, late",
     "laura_gaps_watched": "Watch Laura through her door or the bathroom door at night, {v} times",
+    "dex_sessions": "Book {v} sessions with Dex at the gym ($15 each, or another way)",   # DECISIONS 225
 }
 # pass 3 J36: a meter goal names its feeder (the-voice.md R3: a place, a person, a verb, and the window when there is
 # one). NPC_FEED is what raises his or her meter (the feeders in the build: hub_ryan_*, walkin_*_ryan, home_event_ryan_*,
@@ -752,7 +754,7 @@ STAGE_WAY = {
     ("corruption", 60): "get on Ryan's couch with him, pull Jake into the gym locker room, walk the street with nothing under your skirt",   # pass 4: the watched dares need Corruption 60 now
     # pass 4 G15: the park and street dress codes open no bra / a short skirt at Corruption 20 for a Covered player
     ("exhibitionism", 20): "let them look: the living room, class, the café, the gym, the park, the street in the low-cut top; and when someone walks in on your shower",
-    ("exhibitionism", 40): "let them look at the campus gym and in class, run in the park, walk the street in your short skirt, leave the changing-room curtain open, take your bra off in the college toilet, let the towel slip at home",
+    ("exhibitionism", 40): "let them look at the gym and in class, run in the park, walk the street in your short skirt, leave the changing-room curtain open, take your bra off in the college toilet, let the towel slip at home",
     ("exhibitionism", 60): "show off on the lounger in the garden, walk the street with no panties and let the wind have your skirt, drop the towel at home",
 }
 

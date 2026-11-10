@@ -2033,3 +2033,45 @@ Corruption) · 14 / 20". 0 page errors.
 - Ryan Sun 22:30, Mark Sun 09:00, Hale Thu 18:40, Vance Mon 19:30: each portrait has its button, and each opens on the new line.
 - Tue 23:30 bathroom, Curious: no touch link. Take a shower shows "Touch yourself."; Corruption 25 to 26.
 - 0 page errors.
+
+## 2026-11-10 — the gym moves to Your Street, with a membership, gym clothes and Dex (DECISIONS 225)
+
+**Game:**
+- `world_data.py`: `campus_gym` is gone. New building `gym` on the street (5 minutes), opening on `gym_floor`; `gym_locker` off the floor (members only, no dress rules); `gym_sauna` off the locker room (members only, towel only). All open 06:00–21:00. The street has `STREET_RULES`: from Exhibitionism 20 the sports bra alone counts as her top (only the sports bra).
+- `0_systems_spec.toml`: `[[passes]] gym_month` ($40, 30 days), the sidebar's passes item, `wardrobe_location` gym_locker, labels for `dex_step` and `dex_sessions`, five daily unsets (gym_in_today, gym_shower_today, sauna_today, dex_session_today, dex_after_today).
+- New `gymkit.py`: what counts as gym clothes (two kits, because conditions have no OR) and `kits()`, used by college.py, jake.py and dex.py.
+- New `gym.py`: the desk (card, $5 day pass, $40 for 30 days), strip to a towel, the shower and its walk-in, the sauna and its towel slip.
+- New `dex.py`: Dex's five steps, his hub (sessions, "Keep your money."), the sauna hub, his repeat `dex_after_hours` (door-only, through doors.py), his cards.
+- Moved to the street gym: `gym_workout` and its three accidents (college.py), `hub_jake_gym` and Jake's A1 exits (jake.py, heat_a.py), `walkin_gym_team` (walkins_out.py), `crowd_ask_gym` (goals.py, flag now `crowd_gym_floor`).
+- Ledger: the four gym locations, Jake's row, Dex (character, ladder, home, cast, release steps), `dex_sessions` on money_pressure's feeds.
+- Sheets: "Built" sections on gym.md and npc_dex.md list where the build differs (day pass as a check-in, the sauna's door, after hours from the floor, his repeat's hours, no phone thread yet).
+
+**Checks:**
+- Gates: 115 pass, 3 decided, 1 fail (Laura's loop, held). `a person's scene is inside their portrait` 11/11.
+- `shape --finish` 22 pass. `cite_check --strict` 0 wrong.
+
+**Headless:**
+- Street 05:30: the gym is shut ("Opens at six"). Floor 09:00 with no pass: only the desk. 30 days takes $40 (100 to 60), expires day 31; the next day the desk shows "Show your card."; 31 days later "Your card's run out", and a day pass takes $5.
+- Work out in jeans: "Not in jeans." and only "Not today."; in tank and leggings: Work out and the mirror squat; in the sports bra alone at 25: Work out and "let them look".
+- Dex step 1 meets her on the floor (Exhibitionism 0 to 1, dex_step 1); a session takes $15 and counts 1; step 4 in the sauna and step 5 after hours each pay Corruption +1; his repeat opens from his portrait and is gone the second time that day.
+- Locker room in a towel: the Sauna door; the sauna: Sit in the sauna.
+- Street in the sports bra alone: blocked at 10 ("Needs Exhibitionism 20"), open at 25 and 45; a plain bra alone at 25 is still blocked.
+- Jake Tue 15:30 on the gym floor. 0 page errors.
+
+## 2026-11-10 — the men's locker room, and the shower walk-in split (DECISIONS 226)
+
+- `world_data.py`: `gym_mens_locker`, off the women's locker room (towel, checked in, Exhibitionism 60, `mens_walk_today` false). `0_systems_spec.toml`: `mens_walk_today` cleared at midnight.
+- `gym.py`: `gym_mens_walk` (Jake's team Tue/Thu 17:00–18:00, strangers otherwise; the towel slips three seconds; +1 cap 79, campus talk +1). `gym_shower_seen`: "Keep washing." back turned from 20 (cap 39), "Turn round and let her look." from 60 (cap 79).
+- `heat_a.py`: Jake's A1 offer names the men's locker room. `dex.py`: a men's-showers line in his repeat's bag.
+- Ledger: the room, the building's contains, the release page, exhibitionism fed at.
+- Checks: gates 115 pass, 3 decided, 1 fail (Laura's loop, held); shape 22 pass. Headless: the men's door shows in a towel at 65 and not at 40; the walk pays 65 to 66 and campus talk 0 to 1, and the door is gone after; the walk-in shows two answers at 25 and three at 65; 0 page errors.
+- Scene reader (6 FAILs, all fixed): the men's showers are round the end of the lockers, not behind a wall, so Jake's A1 lines say that; his A1 window moves 16:30-16:45 to 16:45-17:00, as training winds down, and the team showers 16:45-18:00 (gym.py TEAM); "fifteen minutes" now matches the 15-minute exits (A1, Dex's repeat); the team's "Same time" names the other training day; the walk-in's hook lines hold on a second visit; Dex's men's-showers line sends the men out first. Final: gates 115 pass, 3 decided, 1 fail (Laura, held); shape 22; cites 0 wrong; 0 page errors.
+
+## 2026-11-10 — one shared shower room (DECISIONS 227)
+
+- `world_data.py`: `gym_mens_locker` is gone; `gym_showers` (the only showers, men and women together) off the women's locker room, towel and checked in. Ledger swapped the same. `0_systems_spec.toml`: `gym_hit_today` cleared at midnight (replaces `mens_walk_today`).
+- `gym.py`: the women's shower, its walk-in and the men's-showers dare are gone. New `gym_shared_shower` (her ladder: face the wall 0, stop covering 20 cap 39, face them 40 cap 59, soap slowly 60 cap 79; hygiene +50, once a day) and six `gym_hit_*` swaps (1 in 3 together, once a day, no money): a man and a woman (alone, 06:00-16:45: washed Bold 40, hand Bold 40, body Hungry 60), a couple, two men, two women (washed Bold 40, both Corruption 60 and Exhibitionism 60), a group (washed Bold 40; all of them locked, next release).
+- `heat_a.py`: Jake's A1 lines put the team in the shower room next door. `dex.py`: his showers line is the shared room, emptied.
+- Checks: gates 115 pass, 3 decided, 1 fail (Laura, held); shape 22 pass. Headless: the Showers door shows in a towel; the ladder adds one button per level (1, 2, 3, 4 at 0/25/45/65); soap slowly pays 65 to 66 and hygiene 20 to 70; the man shows hand at C45 and body at C65; the couple's both needs C65 and E65; the group shows "All of them. (Next release)" locked; 0 page errors.
+- Scene reader (9 FAILs): fixed the 7 truth and hook ones (every hit and shower path points ahead; Jake's "Later." sets his locker day flag and he goes back to the rack; his repeat thought no longer re-realises; Dex's shower lines only after he locks up, his locker lines between clients; the six hit swaps 0.055 each, about 1 in 3). Two heat points left as LO signed them, for his call: "Turn round and face them." at Exhibitionism 40, and a couple or two of them washing her at Corruption 40 with the room watching. Built caps read one stage higher than the sheet (back 59, face 79, wash and hand 79): that is recap.py's game-wide rule (a repeatable act's cap moves to the next stage's top, playtest 2026-11-09). Gates 115 pass, 1 fail (Laura, held); shape 22; cites 0 wrong.
+- LO's picks ("Go ahead with your picks"): face them stays at 40; washed by more than one, the room watching, needs Corruption 40 and Exhibitionism 40 and pays both. That tipped `the climb is where you said it is` to 24.96% on the cast; three Dex gates that repeat what his step already holds (Curious on sessions past step 2, Bold on "Keep your money.", Hungry on his repeat) came off, back to 25.06% (302 of 1,205). Gates 115 pass, 1 fail (Laura, held); shape 22; cites 0 wrong; 0 page errors.

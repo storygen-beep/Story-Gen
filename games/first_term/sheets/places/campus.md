@@ -1,4 +1,5 @@
 # [READY] Place — Campus
+> Changed 2026-11-10 (DECISIONS 225, LO: move the gym to the street): the gym is gone from campus; it is on Your Street now (`gym.md`). Re-signed by LO 2026-11-10 ("Sign them").
 
 > Signed by LO: LO, 2026-10-09 (changed 2026-10-08).
 
@@ -21,7 +22,7 @@
 | auto-fires | who is here, and when | things to do alone | ways out |
 |---|---|---|---|
 | none: the Campus page lists its rooms | nobody stays here | none: an area has no rows | the quad, lecture hall, library, canteen |
-|  |  |  | the women's toilet, the faculty floor, the gym, the street |
+|  |  |  | the women's toilet, the faculty floor, the street |
 
 ## Rows (`serves`)
 

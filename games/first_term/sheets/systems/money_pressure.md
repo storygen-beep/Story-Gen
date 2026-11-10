@@ -1,4 +1,5 @@
 # [READY] System — money_pressure
+> Changed 2026-11-10 (DECISIONS 225, LO: move the gym to the street): a second sink, the gym membership: $5 a day or $40 for 30 days (`gym.md`), and Dex's $15 sessions (`npc_dex.md`). Re-signed by LO 2026-11-10 ("Sign them").
 > Signed by LO: LO, 2026-11-04.
 
 > Changed 2026-11-04 to match the build; signed by LO 2026-11-04. `money` is declared spent in the ledger; "her cut", as the rent rises.
@@ -42,7 +43,7 @@
 - **One shift a day on weekdays, two on Saturday.** College takes her mornings; the energy cost stays.
 - **The sexy uniform pays in tips, not wages.**
 - **Money has somewhere to go:** the skirt ($30), the sheer blouse ($20) and the sports bra ($25) raise her tips.
-  Rent now, or the skirt that tips better, later. No other sinks this release.
+  Rent now, or the skirt that tips better, later. The gym is the other sink (DECISIONS 225): $5 a day, $40 for 30 days, $15 a session with Dex.
 
 ## Week one is built to come up short
 

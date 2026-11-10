@@ -88,6 +88,7 @@ tom_step   = 0
 zoe_step   = 0
 hale_step  = 0
 jake_step  = 0
+dex_step   = 0   # DECISIONS 225: the trainer (npc_dex.md)
 # release 1 (2026-11-01, DECISIONS 112-121): the counters the redesigned sheets read
 rent_short_weeks   = 0   # the engine adds 1 every short Sunday (setup.carryRent)
 rent_late_fee      = 0   # part of next Sunday's due (rent_short_2: Vance's $15)
@@ -110,6 +111,7 @@ jake_patience      = 3
 # DECISIONS 210 (goals.py): the counts toward a goal
 zoe_crowd          = 0   # Zoe's party needs 10
 study_notes        = 0   # the study guy's 5 chapters
+dex_sessions       = 0   # DECISIONS 225: sessions with Dex since his last step (npc_dex.md: 2, then 3, then 3)
 # DECISIONS 209: one hidden visit counter per repeated loop (drift.py), so her reaction can move with the count
 DRIFTCOUNTERS
 

@@ -45,6 +45,24 @@ PARK_RULES = [
      "message": "Not like this. Not yet."},
 ] + PUBLIC_RULES[3:]
 
+# The street (LO, 2026-11-10, DECISIONS 225: "yes she can walk in gym cloths in streets"; the sports bra alone
+# "Yes, from 20"): the park's two bra rows, but for the sports bra only, so she can walk to the gym in it. Any other
+# bra alone still needs a top. The rows are tried in order, so these go before PUBLIC_RULES' generic ones.
+_SPORTS_ALONE = [{"type": "clothing_item", "item_id": "sports_bra", "operator": "equipped"},
+                 {"type": "clothing_slot", "slot": "top", "operator": "unequipped"}]
+STREET_RULES = [
+    TOWEL_RULE, SLEEP_RULE, SKIRT_RULE,
+    {"conditions": cond(*_SPORTS_ALONE, trait("exhibitionism", "lt", 20)),
+     "slots_required": ["top"],
+     "message": "Not in just the sports bra. Not yet. (Needs Exhibitionism 20.)"},
+    {"conditions": cond(trait("exhibitionism", "gte", 40), *_SPORTS_ALONE),
+     "slots_required": ["bottom"],
+     "message": "Not like this. Not out there. Put something on."},
+    {"conditions": cond(trait("exhibitionism", "gte", 20), *_SPORTS_ALONE),
+     "slots_required": ["underwear", "bottom"],
+     "message": "Not like this. Not yet."},
+] + PUBLIC_RULES[3:]
+
 H = lambda wds, a, b: {"weekdays": wds, "open": a, "close": b}
 ALL = [0, 1, 2, 3, 4, 5, 6]
 WEEK = [0, 1, 2, 3, 4]
@@ -76,21 +94,21 @@ LAURA_DOOR_OPTIONS = (
 # id, name, entry_from, kind, hours, closed_text, hidden_until, rules, costs, description
 LOCATIONS = [
     dict(id="street", name="Your Street", entry_from=None, kind="thoroughfare",
-         costs={"time": 10}, rules=PUBLIC_RULES,
+         costs={"time": 10}, rules=STREET_RULES,
          description=("Your street: the way out to everything. Your house is halfway down, with the landlord's porch "
-                      "next door. The town starts at the corner: the park, the café, the clothes shop, "
+                      "next door. The town starts at the corner: the park, the gym, the café, the clothes shop, "
                       "the flats and the college gates. Every trip out walks this sidewalk, and every "
                       "neighbor with a window sees what you wore to do it."),
          # (alignment pass 2, 2026-11-03) names only after the meetings
          variants=[
              (cond(flag("vance_met"), flag("zoe_met")),
               "Your street: the way out to everything. Your house is halfway down with Mr. Vance's porch "
-              "next door. The town starts at the corner: the park, the café, the clothes shop, "
+              "next door. The town starts at the corner: the park, the gym, the café, the clothes shop, "
               "Zoe's building and the college gates. Every trip out walks this sidewalk, and every "
               "neighbor with a window sees what you wore to do it."),
              (cond(flag("vance_met")),
               "Your street: the way out to everything. Your house is halfway down with Mr. Vance's porch "
-              "next door. The town starts at the corner: the park, the café, the clothes shop, "
+              "next door. The town starts at the corner: the park, the gym, the café, the clothes shop, "
               "the flats and the college gates. Every trip out walks this sidewalk, and every "
               "neighbor with a window sees what you wore to do it."),
          ]),
@@ -413,8 +431,8 @@ def _add(after_id, loc):
 # ── the street: the ground, no toll of its own; the minutes said once (Q65, exact words) ──
 _BY_ID["street"].pop("costs", None)
 # (alignment pass 2, 2026-11-03) no name before the meeting: the named text is a variant behind vance_met
-_set("street", description="Your street: the way out to everything. Home is halfway down, with the porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this sidewalk, and every neighbor with a window sees what you wore to do it.",
-     variants=[(cond(flag("vance_met")), "Your street: the way out to everything. Home is halfway down, with Mr. Vance's porch next door, the corner shop on the corner and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten. Every trip out walks this sidewalk, and every neighbor with a window sees what you wore to do it.")])
+_set("street", description="Your street: the way out to everything. Home is halfway down, with the porch next door, the corner shop on the corner, the gym across from it and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten, the gym five. Every trip out walks this sidewalk, and every neighbor with a window sees what you wore to do it.",
+     variants=[(cond(flag("vance_met")), "Your street: the way out to everything. Home is halfway down, with Mr. Vance's porch next door, the corner shop on the corner, the gym across from it and the park at the far end. Campus is fifteen minutes on foot. Town is the bus, fifteen. Home is ten, the gym five. Every trip out walks this sidewalk, and every neighbor with a window sees what you wore to do it.")])
 
 # ── Home: a building over the house rooms; the street shows "Home" and it opens in the hall ──
 _add("street", dict(
@@ -466,12 +484,45 @@ _add("college_womens_toilet", dict(
     kind="destination", hours=[H(ALL, "07:00", "22:00")], closed_text="The college gates are shut.",
     description=("The men's toilets across from the women's: a row of urinals, two stalls "
                  "and a mirror nobody looks in. There's nothing to do here right now.")))   # W12 (LO 2026-11-03): DECISIONS 76's empty room says so
-_add("college_mens_toilet", dict(
-    id="campus_gym", name="Gym", entry_from="campus", parent="campus", kind="destination",
-    rules=PARK_RULES,
-    description=("The college gym: racks of weights, a row of treadmills facing the mirror wall, mats in "
-                 "the corner and a locker room at the back. Work out here and you get fitter. What you "
+# ── the gym moved to Your Street (LO, 2026-11-10, DECISIONS 225; sheets/places/gym.md) ──
+# A building with three rooms. Every room past the desk needs her checked in today (`gym_in_today`, set at the
+# desk by her card or a day pass, cleared at midnight). The locker room has no dress rules (she changes there);
+# the sauna takes the towel only.
+GYM_HOURS = [H(ALL, "06:00", "21:00")]
+GYM_CLOSED = "The gym's shut. Opens at six."
+CHECKED_IN = flag("gym_in_today")
+_add("corner_shop", dict(
+    id="gym", name="Gym", entry_from="street", kind="thoroughfare",
+    is_container=True, default_entry="gym_floor", crossing_costs={"time": 5},
+    description="The gym on your street: a desk out front, the floor, the locker room and a sauna at the back."))
+_add("gym", dict(
+    id="gym_floor", name="Gym Floor", parent="gym",   # the building's default_entry: no entry_from kind="destination",
+    hours=GYM_HOURS, closed_text=GYM_CLOSED, rules=PARK_RULES,
+    description=("The gym floor: racks of weights, a row of treadmills facing the mirror wall, mats in the corner "
+                 "and the desk by the door. Members and day passes only, and you train in gym clothes. What you "
                  "train in is what everybody in that mirror sees.")))
+_add("gym_floor", dict(
+    id="gym_locker", name="Locker Room", entry_from="gym_floor", parent="gym", kind="destination",
+    hours=GYM_HOURS, closed_text=GYM_CLOSED,   # a changing room: no dress rules (she strips and showers here)
+    entry_conditions=cond(CHECKED_IN), blocked_message="Members only. The desk's out front.",
+    description=("The women's locker room: benches, a wall of lockers, three open showers at the back and a "
+                 "mirror that fogs. Change here, shower here. The door doesn't lock.")))
+_add("gym_locker", dict(
+    id="gym_sauna", name="Sauna", entry_from="gym_locker", parent="gym",   # off the locker room: she goes in a towel kind="destination",
+    hours=GYM_HOURS, closed_text=GYM_CLOSED,
+    entry_conditions=cond(CHECKED_IN, {"type": "worn_type", "operator": "eq", "value": "towel"}),
+    blocked_message="Members only, and a towel only. Check in at the desk, then change in the locker room.",
+    description=("The sauna: two cedar benches, a glass door, heat that takes your breath. It's mixed, and "
+                 "it's towels only. The regulars sit with their eyes half shut. Not all the way shut.")))
+# DECISIONS 227 (LO, 2026-11-10: "make a common shower for men and women, she doesnt have any choice to bath here"):
+# one shared shower room, the only showers in the gym, off the back corridor beside the sauna. She goes in a towel.
+_add("gym_sauna", dict(
+    id="gym_showers", name="Showers", entry_from="gym_locker", parent="gym", kind="destination",
+    hours=GYM_HOURS, closed_text=GYM_CLOSED,
+    entry_conditions=cond(CHECKED_IN, {"type": "worn_type", "operator": "eq", "value": "towel"}),
+    blocked_message="Towel only past the lockers. The showers are shared.",
+    description=("The showers: one tiled room, a dozen heads along two walls, no stalls and no curtains, men and "
+                 "women together. Everyone showers together. It's that kind of gym.")))
 
 # ── Town: an area off the street, the bus, 15 minutes, no fare (L3, Q45) ──
 _add("dean_office", dict(

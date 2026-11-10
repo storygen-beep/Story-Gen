@@ -491,7 +491,8 @@ for cid, loc, name, line in [("hub_jake_quad", "quad", "Jake, with the team", "J
                 G(cond(flag("jake_stood_up")), ME(JAKE_HUB_NO[cid][2]), D(J, JAKE_HUB_NO[cid][3])),
             ], [go(JAKE_HUB_NO[cid][4], loc={"quad": "campus", "canteen": "campus"}.get(loc, "town"))])]})
 
-# ── his face in figure drawing, and at the gym (ledger L18, L27; campus_gym.md) ──
+# ── his face in figure drawing, and at the gym (ledger L18, L27; gym.md: on the street since DECISIONS 225) ──
+from gymkit import CHECKED_IN, kits   # DECISIONS 225: training is a workout, so it needs the desk and gym clothes
 out.append({
     "id": "hub_jake_class", "name": "Jake, in figure drawing",
     "description": "Jake at the next easel in figure drawing (his lecture-hall rows, once she has his number).",
@@ -506,13 +507,15 @@ out.append({
 GYM_CAP = "jake_gym_today"   # once per window (the gym sheet): cleared at midnight
 out.append({
     "id": "hub_jake_gym", "name": "Jake, training",
-    "description": "Jake at team training in the gym, Tue and Thu afternoons (campus_gym.md): talk; Curious, his hands on her hips at the squat rack; Bold, after Jake B 2, a kiss against the lockers. Once a day.",
-    "trigger": {"location": "campus_gym", "npc": J, "requires_npc": J, "is_repeatable": True, "priority": 6, "is_active": True,
+    "description": "Jake at team training in the gym, Tue and Thu afternoons (gym.md, the street gym since DECISIONS 225): talk; Curious, his hands on her hips at the squat rack; Bold, after Jake B 2, a kiss against the lockers. Once a day.",
+    "trigger": {"location": "gym_floor", "npc": J, "requires_npc": J, "is_repeatable": True, "priority": 6, "is_active": True,
                 "conditions": cond(flag("jake_number"))},
     "nodes": [
         node("rack", "Jake, at the rack", [
             P("Jake's at the squat rack with the team, in a tank top soaked through. He racks the bar when he sees you and doesn't pick it up again."),
             D(J, "You lift? Come here. I'll show you."),
+            # DECISIONS 225: the team trains at the street gym now; he says why once
+            G(cond(flag("jake_said_gym_moved", False)), D(J, "Coach moved us off campus. Better weights.")),
             *jake_state("gym"),
             # the gym clothes (DECISIONS 198; GYM_CLOTHES_PLAN.md §6): what she trains in, read by the man she trains with.
             # Each group shuts out the others, so one line shows.
@@ -534,29 +537,29 @@ out.append({
             G(cond({"type": "worn_type", "operator": "eq", "value": "track_pants"}, {"type": "clothing_item", "item_id": "tshirt", "operator": "equipped"}),
               D(J, "Track pants? You're hiding everything. Come on.")),
         ], [
-            go("Train with him.", node="spot", mins=30, cond_=cond(flag(GYM_CAP, False)), flags=[fset(GYM_CAP)]),
+            *kits(go("Train with him.", node="spot", mins=30, cond_=cond(CHECKED_IN, flag(GYM_CAP, False)), flags=[fset(GYM_CAP), fset("jake_said_gym_moved")])),
             # his hands on her with the team whistling: the touch pays Corruption (its gate), being seen pays Exhibitionism,
             # both capped at the top of the stage it opens at (pass 3 A48, G8)
-            go("Let him fix your squat.", node="hips", mins=30, cond_=cond(flag(GYM_CAP, False), CURIOUS), flags=[fset(GYM_CAP)],
+            *kits(go("Let him fix your squat.", node="hips", mins=30, cond_=cond(CHECKED_IN, flag(GYM_CAP, False), CURIOUS), flags=[fset(GYM_CAP), fset("jake_said_gym_moved")],
                eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 39},
                     {"targetType": "player", "trait": "exhibitionism", "op": "add", "value": 1, "cap": 19},   # no Exhibitionism gate: stage 1 (G8)
-                    add("campus_talk", 1, clamp=False)]),   # pass 4 E94: the team whistles, so campus talks; once a day (GYM_CAP)
-            go("Pull him into the locker room.", node="lockers", mins=15, cond_=cond(flag(GYM_CAP, False), BOLD, trait("jake_step", "gte", 2)),
-               flags=[fset(GYM_CAP)], eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 59}]),
-            go("Leave him to his reps.", loc="campus"),
+                    add("campus_talk", 1, clamp=False)])),   # pass 4 E94: the team whistles, so campus talks; once a day (GYM_CAP)
+            go("Pull him into the locker room.", node="lockers", mins=15, cond_=cond(CHECKED_IN, flag(GYM_CAP, False), BOLD, trait("jake_step", "gte", 2)),
+               flags=[fset(GYM_CAP), fset("jake_said_gym_moved")], eff=[{"targetType": "player", "trait": "corruption", "op": "add", "value": 1, "cap": 59}]),
+            go("Leave him to his reps.", loc="gym_floor", flags=[fset("jake_said_gym_moved")]),
         ]),
         node("spot", "Spotting", [
             P("He spots you on the bench, counting your reps out loud, his hands an inch under the bar the whole time. The team pretends not to watch."),
             D(J, "Ten. Look at you. Ten."),
-        ], [go("Done.", loc="campus", mins=5)]),
+        ], [go("Done.", loc="gym_floor", mins=5)]),
         node("hips", "His hands on your hips", [
             P("He stands behind you at the rack and puts his hands on your hips to show you how low to go. They stay there on the way down, and on the way back up, and on the next one too. On the third rep your ass brushes him and he's hard, and he steps back fast. Somebody on the team whistles."),
             D(J, "Lower. Like that. But not here. Not with them watching."),
-        ], [go("Done.", loc="campus", mins=5)]),
+        ], [go("Done.", loc="gym_floor", mins=5)]),
         node("lockers", "Against the lockers", [
             P("You take his wrist and walk him into the empty locker room, and he lets you. He kisses you up against the lockers, hard enough that the metal rattles, his hands on your waist, until someone's voice just outside the locker room makes you both stop."),
             D(J, "You're going to get me thrown off the team."),
-        ], [go("Done.", loc="campus", mins=5)]),
+        ], [go("Done.", loc="gym_floor", mins=5)]),
     ]})
 
 cards = step_cards(J, {
