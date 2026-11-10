@@ -17615,7 +17615,7 @@ def _group2_gates(gate, _N, model, game, state):
     # PLAYTEST 2026-11-09 (REPORT.md §1-3); defined above main().
     gate("a pay can happen", *_pay_can_happen(game, state))
     gate("the loop is open enough hours", *_routine_open_hours(model, game, state)); gate("a walk-in can happen", *_walkin_can_happen(game)); gate("a person's scene is inside their portrait", *_scene_in_portrait(game))
-    gate("a card line belongs to its person", *_card_line_is_its_own(game, state))
+    gate("a card line belongs to its person", *_card_line_is_its_own(game, state)); gate("a goal line reads the way it works", *_goal_line_reads_true(game))
 
 
 # ── the group-2 lints: a LIST each, never a score (a hit needs a human to judge it) ─────────
@@ -18900,6 +18900,41 @@ def lint_world_life(model, game):
           if events else "no events")
     pr = f"a named person can be in {100 * peopled // open_n}% of waking place-hours" if open_n else "no open place"
     return f"{ev} · {pr}", rows
+
+
+# LO, 2026-11-11, on first_term's Tom card ("0 / -5") and Dex card ("Worked out" ticked on days she hadn't):
+# "its not just toms card". The engine prints the raw count after any counted goal and draws the check from the
+# condition itself (engine.md 47.4), so the words have to agree with how the line works (the-voice.md R3b).
+_GOAL_NEGATED = re.compile(r"\b(?:not|no|never|without|before|until)\b|n't", re.I)
+
+
+def _goal_line_reads_true(game):
+    """Gate `a goal line reads the way it works`. Red on: a flag goal with `is_false` whose label does not say
+    "not" (its check shows while she has NOT done it); a counted goal with a negative target or `lte`/`lt` (the
+    suffix renders "0 / -5"); a label whose first three words hold a digit (the engine prints the count last,
+    and no top game opens a line with a number, 9_quest_lines.md section 1). The share of counted lines is info."""
+    cards = [c for c in game.get("quest_cards") or [] if isinstance(c, dict)]
+    goals = [(c, g) for c in cards for g in c.get("goals") or [] if isinstance(g, dict)]
+    if not goals:
+        return None, "no quest card has a goal", []
+    rows = []
+    for c, g in goals:
+        who = c.get("npc_id") or c.get("ready_canvas") or "a card"
+        label = str(g.get("label") or "")
+        op = g.get("op") or g.get("operator")
+        if (g.get("flag") or g.get("flag_key")) and op == "is_false" and not _GOAL_NEGATED.search(label):
+            rows.append(f"{who}: \"{label[:60]}\" is an is_false gate, so it shows a check while she has not "
+                        f"done it; say it in the tip, in words")
+        counted = g.get("trait") or g.get("trait_key") or g.get("days_since_flag") or g.get("hours_since_flag")
+        if counted and (op in ("lte", "lt") or (isinstance(g.get("value"), (int, float)) and g["value"] < 0)):
+            rows.append(f"{who}: \"{label[:60]}\" counts down ({op} {g.get('value')}), so the page prints "
+                        f"\"{g.get('value')}\" as the target; count up to a positive number")
+        if re.search(r"\d", " ".join(label.split()[:3])):
+            rows.append(f"{who}: \"{label[:60]}\" opens with a number; the engine prints the count after the line")
+    counted_n = sum(1 for _c, g in goals if g.get("trait") or g.get("trait_key"))
+    info = [f"{counted_n} of {len(goals)} goal lines are counted (the engine prints their number last)"]
+    return not rows, (f"{len(rows)} goal line(s) read against how they work" if rows else
+                      f"{len(goals)} goal lines read the way they work"), rows + info
 
 
 def main():

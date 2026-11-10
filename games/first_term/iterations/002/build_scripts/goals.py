@@ -396,8 +396,8 @@ cards = [
      "text": "Zoe wants ten people at her next party, and she wants you to find them.",
      "tip": "The quad and the gym any day, the canteen at lunch on weekdays. Asking nicely won't do it. Zoe asks once you're Daring (Exhibitionism 20).",
      "when": [{"flag": "zoe_met", "op": "is_true"}, {"flag": "zoe_crowd_on", "op": "is_true"}, {"type": "trait", "subject": "player", "trait": "zoe_crowd", "op": "lt", "value": 10}],
-     "goals": [{"type": "trait", "subject": "player", "trait": "exhibitionism", "op": "gte", "value": 20, "label": "Daring (Exhibitionism 20)"},
-               {"type": "trait", "subject": "player", "trait": "zoe_crowd", "op": "gte", "value": 10, "label": "Ten people for Zoe's party"}],
+     "goals": [{"type": "trait", "subject": "player", "trait": "exhibitionism", "op": "gte", "value": 20, "label": "Not yet: Zoe asks once you're more daring (your Exhibitionism)"},   # DECISIONS 228: no number in the words
+               {"type": "trait", "subject": "player", "trait": "zoe_crowd", "op": "gte", "value": 10, "label": "Find people for Zoe's party: the quad, the gym, the canteen at lunch"}],
      "ready_canvas": "crowd_ask_quad"},
     {"npc_id": Z, "priority": 6, "heading": "Zoe's big party",
      "text": "Ten are coming. Zoe's party, Friday night.",
@@ -410,8 +410,8 @@ cards = [
      "when": [{"flag": "study_guy_met", "op": "is_true"}, {"flag": "exam_business_done", "op": "is_false"},
               {"type": "trait", "subject": "player", "trait": "study_notes", "op": "lt", "value": 5},
               {"type": "trait", "subject": "player", "trait": "exhibitionism", "op": "gte", "value": 20}],
-     "goals": [{"type": "trait", "subject": "player", "trait": "exhibitionism", "op": "gte", "value": 20, "label": "Daring (Exhibitionism 20)"},
-               {"type": "trait", "subject": "player", "trait": "study_notes", "op": "gte", "value": 5, "label": "All five chapters of his notes"}],
+     "goals": [{"type": "trait", "subject": "player", "trait": "exhibitionism", "op": "gte", "value": 20, "label": "Not yet: he trades once you're more daring (your Exhibitionism)"},
+               {"type": "trait", "subject": "player", "trait": "study_notes", "op": "gte", "value": 5, "label": "Trade him for his Business notes in the library, a chapter at a time"}],
      "ready_canvas": "study_notes"},
 ]
 

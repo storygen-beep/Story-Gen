@@ -5,6 +5,37 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-11 — a quest line reads as her story, and the engine prints the count (DECISIONS 228)
+
+Source: LO on first_term's Tom card ("0 / -5", four lines): "What does it means??", then "its not just toms card",
+then "Go ahead". Evidence: `playtest_study_20261109/9_quest_lines.md` (140 lines from five top games, hand-tagged).
+
+- **`references/the-voice.md`, R3b:** a new block, "R3 and R3b are one rule".
+  - The trait goal stays the shape, and the engine prints `— 4 / 15`, so the label carries no number or stage name
+    and has no shared "X's next step waits for it" tail.
+  - The label is one act at a place in about 12–17 words, with one line per thing the step waits for.
+  - A must-be-false gate goes in the tip, in words, and a counter counts up.
+  - It adds REPORT.md §3: lost-player comments run about 1–3% whether or not a game prints numbers.
+  - The cause: first_term followed R3b alone. 59 of its 81 goal lines were counters, and 25 had a number in their
+    first three words.
+- **`references/engine.md`, §47.4:** read at `v2.py:19898-19913` and `v2.py:19994-19996`.
+  - The suffix prints the raw value and target for any operator.
+  - The ✓ is the condition itself, so an `is_false` goal ticks while the flag is unset.
+- **`scripts/guidance_from_ladder.py`:**
+  - Trait goal drafts are "<the act at a place that raises X: write it>", no longer "X 15".
+  - `is_false` flags go to the tip draft.
+- **`scripts/gates.py`:** a new gate, *a goal line reads the way it works* (`_goal_line_reads_true`).
+  - It's defined above `main()` and registered on the line of *a card line belongs to its person*.
+  - On the last commit's build (HEAD 69daa322) it fails 30 lines: 4 `is_false` lines (Dex's two, on two cards), Tom's
+    count-down and 25 number-led lines. On the fixed build it passes 74/74.
+- **`SKILL.md`:** the gate's row in the gate table.
+- **Verified:**
+  - `cite_check.py --strict`: 0 wrong.
+  - The skill tests: 1048 passed.
+  - `gates.py first_term`: 116 pass, 3 decided, 1 fail. The fail is Laura's loop hours, held by LO.
+
+---
+
 ## 2026-11-10 — a scene with a person opens from their portrait (DECISIONS 224)
 
 Source: LO's first_term playtest on 2026-11-10. "Dare me, Zo." "should be inside her npc portrait activity not a

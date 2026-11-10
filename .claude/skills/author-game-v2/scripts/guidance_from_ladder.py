@@ -86,6 +86,11 @@ def goals_and_notes(gate, counters, trait_names, npc_names):
             continue
         if it.get("flag"):
             op = it.get("op") or "is_true"
+            if op == "is_false":
+                # the-voice.md R3b: a must-be-false gate is a bullet whose check shows when she has NOT done it
+                # (engine.md 47.4), so it goes in the tip, in words
+                notes.append(f"<when {it['flag']} must not be set, in words: write it>")
+                continue
             goals.append(f"{{ flag = {_q(it['flag'])}, op = {_q(op)}, "
                          f"label = {_q('<what she has done: ' + it['flag'] + ' — write it>')} }}")
             continue
@@ -99,11 +104,13 @@ def goals_and_notes(gate, counters, trait_names, npc_names):
             continue
         name = trait_names.get(key, key)
         if who:
-            label = f"{npc_names.get(who, who)}'s {name} {_num(it.get('value'))}"
+            # the-voice.md R3b: the label is her story line with one act at a place, and no number; the engine
+            # prints "— n / target" after it (engine.md 47.1)
+            label = f"<the act at a place that raises {npc_names.get(who, who)}'s {name}: write it>"
             goals.append(f"{{ type = \"trait\", subject = \"npc\", npc_id = {_q(who)}, trait = {_q(key)}, "
                          f"op = {_q(it.get('op'))}, value = {_num(it.get('value'))}, label = {_q(label)} }}")
         else:
-            label = f"{name} {_num(it.get('value'))}"
+            label = f"<the act at a place that raises {name}: write it>"
             goals.append(f"{{ type = \"trait\", subject = \"player\", trait = {_q(key)}, "
                          f"op = {_q(it.get('op'))}, value = {_num(it.get('value'))}, label = {_q(label)} }}")
     return goals, notes

@@ -860,3 +860,7 @@ Sheets: `gym.md`, `npc_jake.md`, `npc_dex.md` changed; re-signed by LO 2026-11-1
 4. **Dex's** showers variant moves into the shared room; **Jake's** team showers there.
 
 Sheets: `gym.md`, `npc_jake.md`, `npc_dex.md` changed; re-signed by LO 2026-11-10 ("Sign them"). Built the same day. The reader's two heat points, LO "Go ahead with your picks": face them stays at 40; washed by more than one with the room watching needs Corruption 40 and Exhibitionism 40. | LO, 2026-11-10 |
+| 228 | Quest lines read as her story, and the engine prints the count (LO, 2026-11-11, on Tom's "0 / -5": "What does it means??"; "its not just toms card"; to the fix, skill first: "Go ahead").
+1. **The skill** (the-voice.md R3b, engine.md §47.4, gate *a goal line reads the way it works*): a goal label is one act at a place in about 12–17 words. It carries no number, no stage name and no "waits for it" tail. A must-be-false gate goes in the tip, and a counter counts up. Source: `playtest_study_20261109/9_quest_lines.md`.
+2. **The game:** every card line is rewritten to that shape. Dex's "Worked out" and "Dex session today" bullets, which ticked while she had not done them, move to his tip as "not after you've worked out that day". Tom's `cafe_name` counts up to 5, and the duplicate café lines are gone. "Campus gym" is out of the cards and gossip.
+What a player loses: a save made before this with `cafe_name` below 0 needs that many extra "Let it" shifts for Tom's step 3. | LO, 2026-11-11 |
