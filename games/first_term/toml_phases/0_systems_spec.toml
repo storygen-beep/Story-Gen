@@ -182,6 +182,7 @@ flagEffects = [
   { targetType = "player", flag = "hot_tub_today", op = "unset" },
   { targetType = "player", flag = "dress_code_today", op = "unset" },
   { targetType = "player", flag = "desk_guy_today", op = "unset" },
+  { targetType = "player", flag = "class_late", op = "unset" },   # DECISIONS 235: late entry, cleared by every way out and at midnight
   { targetType = "player", flag = "park_hidden_today", op = "unset" },   # DECISIONS 224: a door in a hub, once a day (doors.py)
   { targetType = "player", flag = "ryan_two_knocks_today", op = "unset" },   # DECISIONS 224: a door in a hub, once a day (doors.py)
   { targetType = "player", flag = "mark_sunday_table_today", op = "unset" },   # DECISIONS 224: a door in a hub, once a day (doors.py)

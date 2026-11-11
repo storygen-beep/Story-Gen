@@ -11,7 +11,7 @@ Z, L = "npc_zoe", "npc_laura"
 out = []
 cards = []
 
-from classes import sched, PSYCH, BUSI, BIO, FIG   # one source with the timetable screen
+from classes import sched, PSYCH, BUSI, BIO, FIG, LATE_MINUTES   # one source with the timetable screen
 
 
 def at_start(rows, mins=15):
@@ -44,7 +44,7 @@ POOLS = {
     "psych": {
         "focus": ["You take notes on attachment theory until your hand cramps. Somewhere in the second half it clicks, and you feel smart. That part is new.",
                   "Dr. Hale walks through a case study, a man who couldn't feel fear. You write down every word of it, and you understand all of it."],
-        "chat": ["Nadia whispers through the whole lecture: who's seeing who, which TA cries in the parking lot. You learn nothing about psychology.",
+        "chat": ["Nadia whispers through the lecture: who's seeing who, which TA cries in the parking lot. You learn nothing about psychology.",
                  "You and Nadia pass notes in the margin of her reader. By the end the margin's full and the slides are a blur."],
         "doze": ["You sink down in your seat and let Dr. Hale's voice turn into a warm hum. You wake when the room starts packing up.",
                  "Your eyes close somewhere around the third slide. Nadia nudges you awake for the last five minutes."],
@@ -56,7 +56,7 @@ POOLS = {
         "chat": ["The guy in the row behind leans forward to whisper answers before the lecturer asks the questions. You learn more about him than about markets.",
                  "You whisper about Friday with the girl beside you until the lecturer says your name, flat, without looking up."],
         "doze": ["You prop your chin on your hand and drift. The lecturer's voice never changes pitch, which makes it easy.",
-                 "Ninety minutes of margins and percentages. You nod off twice, and you catch yourself both times."],
+                 "Margins and percentages, slide after slide. You nod off twice, and you catch yourself both times."],
         "eyes": "You can feel the study guy's eyes on the back of your neck. What you're wearing is doing its job.",
         "tired": "Too tired for margins and percentages. Doze, or skip."},
     "bio": {
@@ -69,7 +69,7 @@ POOLS = {
         "eyes": "From the front of the hall, the TA keeps looking and looking away. What you're wearing is doing its job.",
         "tired": "Too tired to label a single cell. Doze, or skip."},
     "figure": {
-        "focus": ["You draw for ninety minutes without looking up. By the end your page holds her shoulder, her hip, the line of her back, and it looks like a person.",
+        "focus": ["You draw without looking up until the lecturer calls time. By the end your page holds her shoulder, her hip, the line of her back, and it looks like a person.",
                   "You fill three sheets with fast, loose sketches. The last one is good, and you know it is."],
         "chat": ["You draw with one hand and whisper with the girl at the next easel. Your drawing is mostly elbows.",
                  "Charcoal on your fingers, you talk through the pose about everything but the model. The lecturer clears her throat at you twice."],
@@ -84,16 +84,16 @@ POOLS = {
 # place, writing pass 2026-11-04). "First class" only: the canvas waits for her first visit, whatever week that is.
 FIRST_POOLS = {
     "business": {
-        "focus": ["The gray man opens with a definition of profit and doesn't stop. You copy the course outline, the grading scheme and every heading. By the end you know how this class works.",
+        "focus": ["The gray man is on the definition of profit and doesn't stop. You copy the course outline, the grading scheme and every heading. By the end you know how this class works.",
                   "The gray man hands out the reading list and tells you which three chapters the exam comes from. You underline all three, twice, and you feel ahead of the whole row."],
         "chat": ["The guy with the highlighters whispers the whole course to you: which cases come back on the exam, which week is the killer, who got thrown out last year. You don't write down a word.",
                  "You lean over and ask the girl beside you if he's always like this. She says yes without moving her lips, and she tells you who to sit away from until the gray man stops talking and waits."],
-        "doze": ["The first slide says Introduction. The second says Introduction, continued. You rest your head on your fist, and you're gone by the third.",
+        "doze": ["One slide says Introduction. The next says Introduction, continued. You rest your head on your fist, and you're gone by the third.",
                  "You meant to stay awake for your first class in here. The gray voice doesn't rise or fall once, and your eyes stay shut until chairs start scraping."],
         "eyes": "The guy with the highlighters is leaning forward to look down your back. You didn't dress for a gray room like this, and it shows.",
         "tired": "Your first Business class, and you're too tired to follow one slide of it. Doze, or skip."},
     "bio": {
-        "focus": ["The TA starts at the very beginning, one cell on one slide. You draw it, label the parts and copy down what's on the midterm. It's easier than you expected, and you're pleased.",
+        "focus": ["The TA goes slowly, one cell on one slide. You draw it, label the parts and copy down what's on the midterm. It's easier than you expected, and you're pleased.",
                   "The TA walks you all through the syllabus, apologizing for it. You read every line and write your name at the top before anyone else does."],
         "chat": ["The girl beside you tells you which seats the TA can't see from and which ones she stares at. It's more useful than the syllabus, and you don't hear a word of the syllabus.",
                  "Somebody passes up a drawing of a skeleton in a party hat, and you have to ask why. You spend the next twenty minutes hearing about the TA's office."],
@@ -104,10 +104,10 @@ FIRST_POOLS = {
         "eyes_plain": "You look down at the syllabus with your ears burning, and you wish you'd picked something else to wear.",
         "tired": "Your first Biology class, and the diagrams swim the moment you look at them. Doze, or skip."},
     "figure": {
-        "focus": ["Your first hour at an easel. Your first drawing looks like a potato with arms. The lecturer says nothing and moves your hand an inch, and by the last pose your drawing has a spine.",
+        "focus": ["Your first class at an easel. Your first drawing looks like a potato with arms. The lecturer says nothing and moves your hand an inch, and by the last pose your drawing has a spine.",
                   "The lecturer calls ten poses at two minutes each, so there's no time to be embarrassed. You stop seeing a naked woman and start seeing weight. Your last sketch stands up by itself."],
         "chat": ["You ask the girl on your other side if this gets less weird. She says no, that's the point, and she spends the rest of the pose telling you who's asked the model out. You draw one knee.",
-                 "You whisper through the whole first pose about how long the model has to sit like that. The lecturer taps your worst sketch with one black finger, and you whisper quieter."],
+                 "You whisper through the pose about how long the model has to sit like that. The lecturer taps your worst sketch with one black finger, and you whisper quieter."],
         "doze": ["You've got a stool, a warm lamp across the room and two bad sketches on your page. You rest your head against the easel, and the scratching of charcoal puts you out.",
                  "You meant to rest your eyes through one pose. When you open them the model has moved twice, and your two sketches don't match anything on the stool."],
         "eyes": None,   # cut (reader 2026-11-05): needed cocky_guy_met false, but the button into this screen sets it; his pad line has him here
@@ -230,7 +230,8 @@ def class_row(cid, name, subj, grade, schedules, lecturer, meet_flags, opening, 
     # stage 1). Once a day across all classes (class_look_today).
     cov_cond = cond({"type": "clothing_item", "item_id": "low_top", "operator": "equipped"},
                     {"type": "clothing_slot", "slot": "bra", "operator": "equipped"},
-                    trait("exhibitionism", "lt", 20), flag("class_look_today", False))
+                    trait("exhibitionism", "lt", 20), flag("class_look_today", False),
+                    flag("class_late", False))   # late entry (DECISIONS 235): the look and its two buttons are on-time only
     cov_look, cov_button, cov_node = [], [], []
     if covered:
         cov_look = [G(cov_cond, *covered["look"])]
@@ -397,11 +398,12 @@ out.append(class_row(
 
 # ── Figure drawing (the model, nude; the art lecturer; Zoe; the cocky guy) — the pose beat every class ──
 POSE = ("The model drops her robe on the platform and steps up naked under the lamp. She sits on the stool and turns her shoulder to the room. Her tits are heavy. They sway when she settles. Her nipples are dark and tight in the cold air. Your charcoal follows the curve of her ass where it spreads on the stool. You draw her thighs, pressed together, and the soft crease between them. You can't stop looking. Your face burns. Your own nipples go hard. The lecturer walks the rows behind you. \"Look at the weight of her,\" she says. \"Draw that.\"")
+POSE_LATE = ("The model is already up on the stool, naked under the lamp, her shoulder turned to the room. " + POSE.split("turns her shoulder to the room. ", 1)[1])
 POSE_END = "You keep drawing the heavy swing of the model's tits, but it's your nipples that ache."
 fig = class_row(
     "college_class_figure", "Attend Figure drawing", "Figure drawing", "grade_art", FIG, ART,
     [],
-    [P(POSE),
+    [G(cond(flag("class_late", False)), P(POSE)), G(cond(flag("class_late")), P(POSE_LATE)),   # late entry: she comes in on the pose
      G(cond(flag("zoe_met")), P("Zoe kicks your ankle under the easel.")),
      G(cond(flag("zoe_met", False)), P("The girl at the next easel kicks your ankle and grins.")),
      P(POSE_END),
@@ -508,14 +510,15 @@ _seat_bio = class_row(
         P("She goes back a slide without looking up, and she keeps her eyes on the wall after that."),
         D(TA, "Sorry. Wrong one. Nobody saw that. The slide, I mean."), ME("I didn't see a thing."))))
 FIRST_POSE = ("The model caps her flask, shrugs the dressing gown off her shoulders and climbs onto the stool with nothing on. Her tits are full and hang low, and the left one rolls against her arm when she turns. Her nipples are wide and brown, and they pull tight in the draft. Her ass flattens on the stool. You draw her thighs and the dark hair where they meet. Your hand isn't steady. Your cheeks are hot, and your own nipples have gone hard. The lecturer comes along the horseshoe behind you. \"First thing you learn,\" she says. \"She's not a shape. Get that weight down, the tits, the thighs, all of it.\"")
+FIRST_POSE_LATE = ("The model is already on the stool with nothing on. " + FIRST_POSE.split("with nothing on. ", 1)[1])
 _seat_figure = class_row(
     "meet_figure", "", "Figure drawing", "grade_art", FIG, ART, [],
-    [P(FIRST_POSE),
+    [G(cond(flag("class_late", False)), P(FIRST_POSE)), G(cond(flag("class_late")), P(FIRST_POSE_LATE)),
      G(cond(flag("zoe_met")), P("Zoe leans around her easel, sees your face and laughs without making a sound.")),
      G(cond(flag("zoe_met", False)), P("The girl on your other side catches you staring and raises her eyebrows.")),
      P("Your page has her tits on it now, badly, twice, but your own nipples won't stop aching."),
      VID("a nude female life model posing on a stool under a lamp in an art class, students drawing at easels", "nude model posing art class students drawing", "life drawing class naked model on stool", pool_dir="sex/figure_class_pose_t4"),
-     G(cond(flag("cocky_guy_met")), P("The guy in that jacket has turned his pad so you can see it. He's rubbed the model out of it. It's your neck, and he's started on your chest.")),
+     G(cond(flag("cocky_guy_met")), P("The guy in the team jacket at the next easel has turned his pad so you can see it. He's rubbed the model out of it. It's your neck, and he's started on your chest.")),
      ],
     [D(ART, "That's a start. Now forget everything you think you know about a hip.")],
     "Lean into your easel and let him look.",
@@ -529,6 +532,124 @@ next(n for n in _seat_figure["nodes"] if n["id"] == "risky")["name"] = "Let him 
 into_class(MEETS["meet_business"], _seat_business, "Find a seat.")
 into_class(MEETS["meet_bio"], _seat_bio, "Find a seat.")
 into_class(MEETS["meet_figure"], _seat_figure, "Find your charcoal.", keep_opening=True)   # the pose is the class
+
+# ── late entry (LO playtest 2026-11-12, DECISIONS 235) ──
+# The timetable said 8:30-10:00 and the class only opened for 15 minutes, so a player at 8:50 found an empty hall.
+# Now each class is open for 45 minutes. In its first 15 she is on time. In the 30 after, the class swaps (a
+# substitution, the way the desk guy swaps in: still the one card and the one visit a day) to a short late screen,
+# her late line, and from there into the same class with `class_late` set. Late, she stays to the class's end, Focus
+# pays +1 instead of +2, and the risky, covered and mild buttons are on-time only. After 45 minutes the door is shut;
+# the card and the timetable both say so. The late screen holds only its own lines, so no pool or clip is pasted
+# twice (gates `one pool, one place`, `one asset, one block`).
+LATE_LINES = {
+    "college_class_psych": ([G(cond(flag("hale_met")), P("The door bangs behind you. Dr. Hale stops in the middle of a sentence, taps his pen on the lectern twice, and waits while you edge along the front row to your seat."),
+                               D(H, "Nice of you to join us, @player.")),
+                             G(cond(flag("hale_met", False)), P("The door bangs behind you. The man at the lectern stops in the middle of a sentence, taps his pen twice, and waits while you edge along the front row to a seat."),
+                               WHO("Nice of you to join us."))], "Sit down."),
+    "college_class_business": ([P("The register's already been called. The man at the front looks at you over his glasses and writes something next to your name."),
+                                D(BUS, "Late is absent with a coat on. Sit down.")], "Sit down."),
+    "college_class_bio": ([P("The TA is halfway through a diagram on the board when the door goes. She sees you, goes pink, and loses her place."),
+                           D(TA, "Just— sit anywhere. Quietly, please.")], "Sit anywhere."),
+    "college_class_figure": ([P("The door bangs behind you. The lecturer looks at the clock, then at you, and points her charcoal at the last free easel."),
+                              D(ART, "You've missed the warm-up, @player. Draw fast.")], "Take the last easel."),
+    # her first class, late: the meeting's own screen is an on-time welcome, so the late one meets the same people
+    # in its own words and goes straight to her seat (reader 2026-11-12: the welcome can't play half an hour in)
+    "meet_business": ([P("Your first Business class has already started when you come in. The man at the front is fifty, in a gray suit with no creases, and he stops talking and looks at you over the register."),
+                       D(BUS, "I don't do late. I don't do excuses. Sit down."),
+                       P("A sharp girl in the front row watches you find a seat and doesn't smile. The guy in the row behind, the one with three highlighters, goes red when you sit down in front of him.")], "Find a seat."),
+    "meet_bio": ([P("Your first Biology class has already started. The TA at the front is twenty-eight, in a lab coat and big earrings, halfway through a slide about cells. When the door bangs she jumps and goes pink."),
+                  D(TA, "Oh— hi. Sit anywhere. Please.")], "Find a seat."),
+    "meet_figure": ([P("Your first Figure drawing class has already started. Easels stand in a horseshoe round a platform, and the model is up on it, naked under the lamp. The lecturer is forty-five, charcoal on her hands, and she looks at the clock and then at you."),
+                     D(ART, "Bodies. You draw what's there. You're late, so draw fast.")], "Find your charcoal."),
+}
+LATE_ROWS = {"college_class_psych": (PSYCH, "grade_psych"), "college_class_business": (BUSI, "grade_business"),
+             "college_class_bio": (BIO, "grade_bio"), "college_class_figure": (FIG, "grade_art"),
+             "meet_business": (BUSI, "grade_business"), "meet_bio": (BIO, "grade_bio"), "meet_figure": (FIG, "grade_art")}
+ON_TIME_ONLY = ("risky", "risky_mild", "covered", "covered_no")   # the screens late doesn't reach
+LATE = "class_late"
+
+
+def _plus(t, mins):
+    h, m = map(int, t.split(":")); m += mins
+    return f"{h + m // 60:02d}:{m % 60:02d}"
+
+
+def _and(c, item):
+    """`c`'s conditions with one more AND item (a fresh copy: several choices share one condition dict)."""
+    cc = copy.deepcopy(c.get("conditions")) if c.get("conditions") else cond()
+    assert cc.get("logic", "AND") == "AND", (c.get("text"), "an OR condition can't take one more AND item")
+    cc.setdefault("items", []).append(item)
+    c["conditions"] = cc
+    return c
+
+
+def _late_exits(c, rows, grade, focus):
+    """The late twins of a 90-minute exit: she stays to the end of the class, so the minutes depend on when she came in.
+    One twin per 5 minutes of the late window, each spending what is left of the class from the start of its 5
+    minutes, so she leaves 0-4 minutes after the class ends (the engine moves the clock by a fixed amount only)."""
+    base = c["text"].replace(" (1h 30m)", "")
+    out_ = []
+    for st, en in sorted({(r["start_time"], r["end_time"]) for r in rows}):
+        length = int(en[:2]) * 60 + int(en[3:]) - int(st[:2]) * 60 - int(st[3:])
+        for k in range(15, LATE_MINUTES, 5):
+            tw = copy.deepcopy(c)
+            spend = length - k
+            tw["time_progression_minutes"] = spend
+            tw["text"] = with_duration(base, spend) if spend >= 60 else base
+            tw["flagEffects"] = list(tw.get("flagEffects") or []) + [funset(LATE)]
+            if focus:   # late Focus pays +1: the +2 on the way in, -1 on the way out
+                tw["effects"] = list(tw.get("effects") or []) + [add(grade, -1) | {"clamp": True}]
+            _and(tw, flag(LATE, True))
+            out_.append(_and(tw, tod(_plus(st, k), _plus(st, k + 5))))
+    return out_
+
+
+def late_entry(host, rows, grade):
+    """Open the host for 45 minutes, swap its late 30 to a late screen, and give its exits late twins."""
+    lines, button = LATE_LINES[host["id"]]
+    if host["id"].startswith("meet_"):
+        # straight to her seat, with the flags the meeting sets on its way into the class
+        into = next(c for n in host["nodes"] if n["id"] != "class" for c in n["choices"] if c.get("nodeId") == "class")
+        target, flags = "class", list(into.get("flagEffects") or [])
+    else:
+        target, flags = host["nodes"][0]["id"], []
+    late = {"id": host["id"] + "_late", "event": True, "name": (host["name"] or "Class") + ", late",
+            "description": f"Late entry to {host['id']} (DECISIONS 235): her late line, then the class with {LATE} set; she stays to its end, Focus +1.",
+            "trigger": {"location": "lecture_hall", "is_repeatable": host["trigger"].get("is_repeatable", True), "priority": host["trigger"].get("priority", 5),
+                        "is_active": True, "substitution_only": True,
+                        "schedules": [dict(r, start_time=_plus(r["start_time"], 15), end_time=_plus(r["start_time"], LATE_MINUTES)) for r in rows],
+                        # class_late off: her button sets it and may walk into the host's first screen, which runs the
+                        # swap check again; without this the late screen would swap in again, and again
+                        "conditions": _and({"conditions": host["trigger"].get("conditions")}, flag(LATE, False))["conditions"]},
+            "nodes": [node("late", "Late", list(lines), [go(button, node=f"{host['id']}.{target}", mins=0, flags=flags + [fset(LATE)])])]}
+    for n in host["nodes"]:
+        new = []
+        for c in n["choices"]:
+            if c.get("nodeId") in ON_TIME_ONLY:
+                new.append(_and(c, flag(LATE, False)))
+                continue
+            if c.get("nodeId") == "focus":
+                c["text"] = c["text"].replace("(90 minutes, 10 energy)", "(10 energy)")
+            if c.get("targetType") == "location" and c.get("time_progression_minutes") == 90:
+                twins = _late_exits(c, rows, grade, n["id"] == "focus")
+                new.append(_and(c, flag(LATE, False)))
+                new.extend(twins)
+                continue
+            if c.get("targetType") == "location" and n["id"] == "class":   # Skip it.
+                c["flagEffects"] = list(c.get("flagEffects") or []) + [funset(LATE)]
+            new.append(c)
+        n["choices"] = new
+    ht = host["trigger"]
+    ht["schedules"] = [dict(r, end_time=_plus(r["start_time"], LATE_MINUTES)) for r in rows]
+    late_tod = cond(*[tod(_plus(r["start_time"], 15), _plus(r["start_time"], LATE_MINUTES)) for r in rows], logic="OR")
+    ht["substitutions"] = [{"target_canvas_id": late["id"], "chance": 1.0, "conditions": late_tod}] + list(ht.get("substitutions") or [])
+    if ht.get("is_repeatable"):
+        ht["show_when_blocked"] = True
+        ht["cooldown_message"] = hours_phrase(ht["schedules"]) + " · late after the first 15 minutes"
+    return late
+
+
+out.extend([late_entry(next(c for c in out if c["id"] == cid), rows, grade) for cid, (rows, grade) in LATE_ROWS.items()])
 # ── the guy beside her (college_event_desk_guy; Psychology and Business; once a day) ──
 # LO playtest 2026-11-10 (DECISIONS 223): it was a button in each class's first 15 minutes and spent the class for no
 # grade. Now a walk-in swap from "Attend" (1 in 3, once a day): it IS the class, so every way out pays the class's
@@ -1402,8 +1523,8 @@ out.append(class_accident("class_acc_bodycon_bare", "The dress rides up", [BODYC
     "He sits across the aisle every class. He knows what's under that dress now, or isn't."))
 
 # the class accidents roll in the class start windows (DECISIONS 202)
-_starts = [w for _c in out if _c["id"].startswith("college_class_") and _c["id"] != "college_class_figure"
-           for w in _c["trigger"]["schedules"]]   # the accidents are written for the tiered hall, not the easels
+_starts = at_start(PSYCH + BUSI + BIO)   # the accidents are written for the tiered hall, not the easels; the class
+# starts, not the 45 minutes the class is now open for (late entry, DECISIONS 235)
 assert len(_starts) >= 4
 for _c in out:
     if _c["id"].startswith("class_acc_"):

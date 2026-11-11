@@ -182,3 +182,34 @@ def test_the_sidebar_button_opens_it(html):
         rows = _rows(g)
         assert [r[0] for r in rows] == ["Psychology Next · in 1 h 30 min", "Business"]
         assert g.errors == []
+
+
+# ── 3. late_until and the button's look (first_term DECISIONS 235, 237) ─────
+
+
+def test_late_until_is_accepted_and_reaches_the_page():
+    rows = [dict(r) for r in ROWS]
+    rows[0]["late_until"] = "09:15"
+    raw = _raw(rows)
+    assert _errors(raw) == []
+    assert '"late_until": "09:15"' in _twee(raw)
+
+
+@pytest.mark.parametrize("value, fragment", [
+    ("9:15", "'late_until' must be \"HH:MM\""),
+    ("08:30", "'late_until' must be after 'from'"),
+    ("10:30", "no later than 'to'"),
+])
+def test_a_bad_late_until_is_an_error(value, fragment):
+    rows = [dict(r) for r in ROWS]
+    rows[0]["late_until"] = value
+    errs = _errors(_raw(rows))
+    assert any(fragment in e for e in errs), errs
+
+
+def test_the_timetable_button_is_styled_like_the_others():
+    twee = _twee(_raw())
+    assert '<div id="timetable-btn-widget"><<link "Timetable">>' in twee and 'class="nav-i">🗓</span>' in twee
+    for sel in ("#timetable-btn-widget, #flags-btn-widget {", "#timetable-btn-widget a,",
+                "#timetable-btn-widget .nav-row {", "#timetable-btn-widget a:hover {"):
+        assert sel in twee, sel

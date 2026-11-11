@@ -59,6 +59,14 @@
 `lecture_hall`. Psychology is Dr. Hale, Business the Business lecturer, Biology the Biology TA, Figure drawing the art
 lecturer.
 
+**Late entry (new 2026-11-12, DECISIONS 235; LO: "1 yes"):** a class can be joined for its first 45 minutes. In the
+first 15 she is on time: the whole class, 90 minutes, Focus +2, and the risky, covered and mild buttons. From 15 to
+45 minutes in she is late: her late line, the same class screens, 45 minutes, Focus +1, and no risky, covered or mild
+button. After 45 minutes the door is shut. A late visit is still the class's one visit that day. Her first class can
+be late too (Business, Biology, Figure drawing; Hale's first lecture already plays late). The timetable row says
+"late until 9:15 AM", and its badge reads "Doors shut" once that time has passed; the hall's greyed card names the
+hours and says "late after the first 15 minutes".
+
 ## The first college day (new 2026-11-01)
 
 **What was wrong** (LO, 2026-10-31): the first class was easy to miss (the class scene opens only in its first 15

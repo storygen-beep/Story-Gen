@@ -265,7 +265,7 @@ from classes import timetable_rows
 w("\n# ── the timetable screen (classes.py, college.md) ──")
 for r in timetable_rows():
     w("\n[[ui.timetable]]")
-    for k in ("class", "place", "lecturer", "weekdays", "from", "to"):
+    for k in ("class", "place", "lecturer", "weekdays", "from", "to", "late_until"):
         w(f"{k:<8} = {v(r[k])}")
 
 open(OUT, "w").write("\n".join(L) + "\n")

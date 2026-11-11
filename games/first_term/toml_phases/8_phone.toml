@@ -25,6 +25,7 @@ label = "Messages"
 id    = "feed"
 type  = "social_feed"
 label = "Feed"
+release = 2   # DECISIONS 236 (LO, 2026-11-12): release 1 has Messages only; followers start next release
 post_actions = [
   { label = "Post a selfie", followers_min = 3, followers_max = 8, counter_trait = "followers", daily_cap = 1 },
   { label = "Post one in your bra", followers_min = 10, followers_max = 25, counter_trait = "followers", daily_cap = 1, corruption_min = 20, gate_trait = "exhibitionism" },
@@ -1150,6 +1151,7 @@ content = "ok."
 id    = "calls"
 type  = "calls"
 label = "Calls"
+release = 2   # DECISIONS 236 (LO, 2026-11-12): release 1 has Messages only
 
 [[phone.calls]]
 id           = "laura_curfew_call"

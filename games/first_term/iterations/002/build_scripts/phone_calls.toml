@@ -3,6 +3,7 @@
 id    = "calls"
 type  = "calls"
 label = "Calls"
+release = 2   # DECISIONS 236 (LO, 2026-11-12): release 1 has Messages only
 
 [[phone.calls]]
 id           = "laura_curfew_call"
