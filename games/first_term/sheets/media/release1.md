@@ -154,3 +154,25 @@
 **Signed:** LO, 2026-11-12 ("Sign it").
 
 **Built 2026-11-12:** 95 blocks in the game. The sheet's 93, minus the dropped shower door gap, plus three more because the class look is one block per class (4 names in place of 1). Every name lands exactly once.
+
+## Reader fixes (2026-11-12, after the build)
+The reader checked all 95 blocks: 73 passed, 22 failed. Most failures were a picture that showed on visits its
+description wasn't true for: a top picture, or a block after a line that comes in several versions. The fix is to
+describe only what every visit shares. Changed:
+- **Described plainly** (true on every visit):
+  - Laura's kitchen and Laura's bedroom (the room, not the toast or the green dress)
+  - Mark's kitchen (not "cooking, with a beer")
+  - the café shift (the counter, not her in the apron)
+  - the dean's door (him opening it, not the look)
+  - nap, breakfast, dinner, the park bench (no toast, no arm over her eyes)
+  - the master bedroom asleep and peek (someone in the bed; the lamp on)
+  - the changing room (no "underwear")
+  - the hose (no towel)
+  - the washer: her clips (no skirt) and his Saturday clip (the front of his jeans tight, every version)
+  - the wind (no panties)
+- **Changed name or format:**
+  - `garden_sun`'s top is now `life/garden_lounger_t0`, the lounger only, because one version is topless
+  - `look/run_sportsbra_t3` is a still (a `_t3` can't be a clip)
+  - Mark close behind her at the mirror is now `look/mirror_mark_close_t3`, a still, since it shows no skin
+  - `look/master_asleep_t3` and `look/jogger_looks_back_t3` are pools, since both screens repeat
+- **Fixed a number:** Tom is 31 (the ledger), not "in his forties".

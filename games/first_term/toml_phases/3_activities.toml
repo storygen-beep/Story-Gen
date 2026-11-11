@@ -1062,7 +1062,7 @@ blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", item
 # media sheet row (sheets/media/release1.md, signed 2026-11-12, DECISIONS 238)
 [[canvases.nodes.blocks]]
 type = "image"
-props = { description = "a girl in her underwear in a changing room whose curtain doesn't close, a man outside by the shirts", search_queries = ["changing room curtain gap girl underwear man looking"], pool_dir = "look/changing_gap_t3" }
+props = { description = "a girl changing behind a curtain that doesn't reach the wall, a man outside by the shirt rail", search_queries = ["changing room curtain gap man looking"], pool_dir = "look/changing_gap_t3" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"

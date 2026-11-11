@@ -6534,8 +6534,8 @@ content = "The changing room is a curtain that doesn't reach the wall on one sid
 type = "image"
 
 [canvases.nodes.blocks.props]
-description = "a girl in her underwear in a changing room whose curtain doesn't close, a man outside by the shirts"
-search_queries = ["changing room curtain gap girl underwear man looking"]
+description = "a girl changing behind a curtain that doesn't reach the wall, a man outside by the shirt rail"
+search_queries = ["changing room curtain gap man looking"]
 pool_dir = "look/changing_gap_t3"
 
 [[canvases.nodes.blocks]]
@@ -8815,8 +8815,8 @@ name = "The kitchen"
 type = "image"
 
 [canvases.nodes.blocks.props]
-description = "a woman of 41 in a work blouse, buttering toast, coffee in her other hand"
-search_queries = ["woman work blouse kitchen morning toast"]
+description = "a woman of 41 in her kitchen, at the counter"
+search_queries = ["woman in her forties home kitchen counter"]
 pool_dir = "people/laura_kitchen_t0"
 
 [[canvases.nodes.blocks]]
@@ -12344,8 +12344,8 @@ name = "Laura"
 type = "image"
 
 [canvases.nodes.blocks.props]
-description = "a woman of 41 at a long mirror in a green dress, putting in earrings"
-search_queries = ["woman green dress mirror earrings"]
+description = "a woman of 41 in her bedroom"
+search_queries = ["woman in her forties bedroom"]
 pool_dir = "people/laura_mirror_t0"
 
 [[canvases.nodes.blocks]]
@@ -18059,8 +18059,8 @@ name = "Mark, in the kitchen"
 type = "image"
 
 [canvases.nodes.blocks.props]
-description = "a heavy-set man of 46 cooking badly, a beer on the counter, an extractor fan"
-search_queries = ["middle aged man cooking beer kitchen"]
+description = "a heavy-set man of 46 in a home kitchen"
+search_queries = ["middle aged heavy man in kitchen"]
 pool_dir = "people/mark_cooking_t0"
 
 [[canvases.nodes.blocks]]
@@ -19724,8 +19724,8 @@ speaker = "player"
 type = "image"
 
 [canvases.nodes.blocks.props]
-description = "a dripping girl standing still in a garage, an older man's back turned, holding out a towel behind him"
-search_queries = ["wet girl garage man holding towel back turned"]
+description = "a girl dripping wet in a garage, her shirt soaked through, an older man with his back to her"
+search_queries = ["soaked girl garage man back turned"]
 file = "look/hose_stay_t3.jpg"
 
 [[canvases.nodes.blocks]]
@@ -20065,8 +20065,8 @@ name = "The counter"
 type = "image"
 
 [canvases.nodes.blocks.props]
-description = "a café owner in his forties behind the counter, a cloth over his shoulder"
-search_queries = ["cafe owner behind counter cloth shoulder"]
+description = "a café manager of 31 behind the counter, a cloth over his shoulder"
+search_queries = ["young cafe manager behind counter cloth shoulder"]
 pool_dir = "people/tom_counter_t0"
 
 [[canvases.nodes.blocks]]
@@ -21461,8 +21461,8 @@ name = "The counter"
 type = "image"
 
 [canvases.nodes.blocks.props]
-description = "a young waitress in an apron behind a busy café counter"
-search_queries = ["waitress apron coffee shop counter busy"]
+description = "a busy café counter: cups, plates, the coffee machine"
+search_queries = ["busy coffee shop counter cups"]
 pool_dir = "life/cafe_shift_t0"
 
 [[canvases.nodes.blocks]]
@@ -41264,7 +41264,7 @@ type = "paragraph"
 content = "Just the sports bra and your leggings, and it's like you've set off an alarm. Heads turn on the whole loop. A guy doing push-ups stops at the top of one and stays there, his eyes on your tits bouncing in the bra. He doesn't call anything after you. Not yet."
 
 [[canvases.nodes.blocks.blocks.blocks]]
-type = "video"
+type = "image"
 
 [canvases.nodes.blocks.blocks.blocks.props]
 description = "a girl running in a sports bra and leggings round a park pond, heads turning"
@@ -41817,8 +41817,8 @@ name = "A bench"
 type = "image"
 
 [canvases.nodes.blocks.props]
-description = "a girl on a park bench, face tipped up to the sun, eyes shut"
-search_queries = ["girl on park bench sun eyes closed"]
+description = "a girl resting on a park bench by a pond"
+search_queries = ["girl resting park bench pond"]
 pool_dir = "life/park_bench_rest_t0"
 
 [[canvases.nodes.blocks]]
@@ -43745,8 +43745,8 @@ content = "He looks you down and up, once, slowly, and stops on the hem of your 
 type = "image"
 
 [canvases.nodes.blocks.props]
-description = "an older man in a suit at an office door, a file under his arm, looking a student up and down"
-search_queries = ["older man suit looking student up and down office door"]
+description = "a man of 55 in a suit opening a heavy office door, a file under his arm"
+search_queries = ["older man suit opening office door file under arm"]
 pool_dir = "look/dean_door_look_t3"
 
 [[canvases.nodes.blocks]]
@@ -44499,8 +44499,8 @@ name = "A nap"
 type = "image"
 
 [canvases.nodes.blocks.props]
-description = "a girl asleep on top of her covers, one arm over her eyes, afternoon light"
-search_queries = ["girl napping afternoon arm over eyes"]
+description = "a girl asleep on top of her covers in daylight"
+search_queries = ["girl napping on bed daytime"]
 pool_dir = "life/room_nap_t0"
 
 [[canvases.nodes.blocks]]
@@ -46726,8 +46726,8 @@ name = "Breakfast"
 type = "image"
 
 [canvases.nodes.blocks.props]
-description = "toast at a kitchen counter in the morning, a radio, crumbs"
-search_queries = ["morning toast kitchen counter"]
+description = "breakfast at a kitchen counter in the morning"
+search_queries = ["breakfast kitchen counter morning"]
 pool_dir = "life/kitchen_breakfast_t0"
 
 [[canvases.nodes.blocks]]
@@ -46973,8 +46973,8 @@ name = "Dinner"
 type = "image"
 
 [canvases.nodes.blocks.props]
-description = "a girl eating a plate of leftovers alone at a kitchen table in the evening"
-search_queries = ["girl eating alone kitchen table evening"]
+description = "a girl eating alone in a kitchen in the evening"
+search_queries = ["girl eating alone kitchen evening"]
 pool_dir = "life/kitchen_dinner_alone_t0"
 
 [[canvases.nodes.blocks]]
@@ -48428,9 +48428,9 @@ content = "Laura's asleep on her side, curled toward the wall, one bare shoulder
 type = "image"
 
 [canvases.nodes.blocks.props]
-description = "a dark bedroom seen through a door gap, a woman asleep on her side, a man snoring beside her"
-search_queries = ["bedroom door gap couple asleep dark"]
-file = "look/master_asleep_t3.jpg"
+description = "a dark bedroom seen through a door gap, someone asleep in the bed"
+search_queries = ["dark bedroom door gap someone sleeping"]
+pool_dir = "look/master_asleep_t3"
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -49484,8 +49484,8 @@ content = "You ease the handle down and open the door a finger's width. The lamp
 type = "image"
 
 [canvases.nodes.blocks.props]
-description = "a couple's bedroom through a gap under a lamp, the man awake, the woman staring at the ceiling"
-search_queries = ["bedroom door ajar lamp couple awake"]
+description = "a bedroom seen through a door gap, the lamp on"
+search_queries = ["bedroom door ajar lamp on"]
 pool_dir = "look/master_door_peek_t3"
 
 [[canvases.nodes.blocks]]
@@ -49856,9 +49856,9 @@ name = "The lounger"
 type = "image"
 
 [canvases.nodes.blocks.props]
-description = "a girl lying on a lounger in a back garden in the sun, eyes shut, a low fence"
-search_queries = ["girl sunbathing lounger back garden"]
-pool_dir = "look/garden_sun_t3"
+description = "a sun lounger in a small back garden in the sun, a low fence"
+search_queries = ["sun lounger back garden low fence"]
+pool_dir = "life/garden_lounger_t0"
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -54375,8 +54375,8 @@ content = "You've got your basket on the garage floor and you're bent right over
 type = "video"
 
 [canvases.nodes.blocks.props]
-description = "a girl bent over a front-loading washer, short skirt riding up the backs of her thighs"
-search_queries = ["girl bent over washing machine short skirt", "bending over laundry upskirt"]
+description = "a girl bent right over at a front-loading washer, her ass up in the air"
+search_queries = ["girl bent over washing machine", "girl bending over laundry from behind"]
 pool_dir = "sex/washer_bent_her_t4"
 
 [[canvases.nodes.blocks]]
@@ -54754,8 +54754,8 @@ content = "Saturday morning. You've got your basket on the garage floor and you'
 type = "video"
 
 [canvases.nodes.blocks.props]
-description = "a girl bent at a washing machine drum in a short skirt, morning light"
-search_queries = ["girl bending laundry morning short skirt"]
+description = "a girl bent right over at a washing machine drum, her ass up, morning light"
+search_queries = ["girl bending over laundry morning"]
 pool_dir = "sex/washer_sat_bent_her_t4"
 
 [[canvases.nodes.blocks]]
@@ -54920,8 +54920,8 @@ content = "He takes his time over the first sip. The front of his jeans is tight
 type = "video"
 
 [canvases.nodes.blocks.props]
-description = "an older man in a doorway holding a coffee mug low in front of his jeans"
-search_queries = ["man coffee mug in front of crotch hiding erection"]
+description = "an older man in a garage doorway with a coffee mug, staring, the front of his jeans tight"
+search_queries = ["man coffee mug staring bulge jeans"]
 pool_dir = "sex/washer_sat_hard_him_t4"
 
 [[canvases.nodes.blocks]]
@@ -55901,12 +55901,12 @@ type = "paragraph"
 content = "You stay at the mirror and take your time, and let him look at all of it. He comes down the hall. He stands right behind you, close enough that you feel the heat off him, but he doesn't touch."
 
 [[canvases.nodes.blocks]]
-type = "video"
+type = "image"
 
 [canvases.nodes.blocks.props]
 description = "an older man standing close behind a girl at a mirror, not touching"
 search_queries = ["man standing close behind girl mirror tension"]
-pool_dir = "sex/mirror_mark_close_t4"
+pool_dir = "look/mirror_mark_close_t3"
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -58702,7 +58702,7 @@ content = "A gust comes down the street and gets right under your skirt and lift
 type = "video"
 
 [canvases.nodes.blocks.props]
-description = "wind lifting a girl's short skirt on a street, her panties showing, a man across the road"
+description = "wind lifting a girl's short skirt on a street, a man across the road"
 search_queries = ["wind blows skirt up street"]
 pool_dir = "sex/wind_skirt_t4"
 
@@ -58979,7 +58979,7 @@ type = "image"
 [canvases.nodes.blocks.props]
 description = "a jogger looking back over his shoulder at a girl's ass as they pass"
 search_queries = ["jogger turns to look at girl's butt"]
-file = "look/jogger_looks_back_t3.jpg"
+pool_dir = "look/jogger_looks_back_t3"
 
 [canvases.nodes.exit_block]
 type = "choices"
