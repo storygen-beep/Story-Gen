@@ -5445,6 +5445,7 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "in_vega", operator = "is_false" },   # 0.2.4: not while Wren wears Vega
   { type = "flag", subject = "player", flag_key = "the_site_open", operator = "is_true" },
   { type = "flag", subject = "player", flag_key = "marrow_known",  operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "cain_taken",    operator = "is_false" },   # 0.2.6: taken (cap_site_wrecked)
 ] }
 
 [[canvases.nodes]]
@@ -6540,3 +6541,332 @@ text = "Out at the gate."
 destinationType          = "specific"
 locationId               = "underworld_gate"
 time_progression_minutes = 30
+
+# ══ 0.2.6 YOU, FOR HIM — part six, THE TESTS (beat_0267). design_the_offer.md part six + "BLUEPRINT · Part six". ══
+# ⚠️ A LOCATED CARD ON holding_cell, 09:00-17:00 (the technician's day row). She is taken to the lab and brought
+# back: every exit lands in holding_cell, so test_lab is never reached on foot by day (the floor is locked until the
+# guard's drain).
+# ⚠️ ONE TEST A CALENDAR DAY, the kess_fitting shape: test_day re-stamped on every test, days_since_flag gte 1 on
+# every test after the first, and the "not today" band first in the chain (3_activities.toml kess_fitting).
+# ⚠️ tests_done moves ON THE CHOICE (choice effects fire on click). Each test is its own choice gated on the exact
+# value, the parts_out pattern, so no gate needs an OR. 4 is the daily test and does not move the counter.
+# ⚠️ THE CHARGE: from the machine test on, every test sets drain_charge 1 (LO, call 1 signed 2026-11-10). It is the
+# only refill inside. Energy -20 a test, clamped: a hard day leaves her too tired for the guard's 15.
+# ⚠️ SHE DOES NOT CHOOSE THEM. The only choice is "Go with them."; the card's job is to move the day.
+[[canvases]]
+id          = "activity_the_tests"
+name        = "The tests"
+description = "beat_0267 (0.2.6). Wren @holding_cell, repeatable, pri 5, 09:00-17:00, gated chairman_met. One test a calendar day (test_day): wired up, the machine, pain, the empty body, then the daily test. tests_done +1 per test to 4. From the machine on, each test sets drain_charge 1. Energy -20 a test. 420 minutes, back to holding_cell."
+[canvases.trigger]
+location      = "holding_cell"
+is_repeatable = true
+priority      = 5
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chairman_met", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "09:00"
+end_time   = "17:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "The tests"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "flag", subject = "player", flag_key = "test_day", operator = "is_true" },
+      { type = "days_since_flag", subject = "player", flag_key = "test_day", operator = "lt", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Nobody comes for her again today. They have what they wanted out of her for one day. Her body still hums with it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "tests_done", operator = "lt", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Nine o'clock. The glass slides back and two men in grey stand in the gap. Behind them, a younger one with a tablet, who does not look up from it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Subject up, please. We're on a schedule." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "tests_done", operator = "gte", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "Nine o'clock. The glass slides back. The technician with his tablet, and the two men in grey behind him, the same as every day now." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Up, please. Today's on the board." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Go with them."
+targetType = "node"
+nodeId     = "activity_the_tests.wired"
+effects    = [
+  { targetType = "player", trait = "tests_done", op = "add", value = 1,   clamp = true, cap = 4 },
+  { targetType = "player", trait = "energy",     op = "add", value = -20, clamp = true },
+]
+flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "lt", value = 1 },
+  { type = "flag",  subject = "player", flag_key  = "test_day",   operator = "is_false" },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Go with them."
+targetType = "node"
+nodeId     = "activity_the_tests.machine"
+effects    = [
+  { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
+  { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
+]
+flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "lt",  value = 2 },
+  { type = "days_since_flag", subject = "player", flag_key = "test_day", operator = "gte", value = 1 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Go with them."
+targetType = "node"
+nodeId     = "activity_the_tests.pain"
+effects    = [
+  { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
+  { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
+]
+flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "gte", value = 2 },
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "lt",  value = 3 },
+  { type = "days_since_flag", subject = "player", flag_key = "test_day", operator = "gte", value = 1 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Go with them."
+targetType = "node"
+nodeId     = "activity_the_tests.empty_body"
+effects    = [
+  { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
+  { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
+]
+flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "gte", value = 3 },
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "lt",  value = 4 },
+  { type = "days_since_flag", subject = "player", flag_key = "test_day", operator = "gte", value = 1 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Go with them."
+targetType = "node"
+nodeId     = "activity_the_tests.daily"
+effects    = [
+  { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
+]
+flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "gte", value = 4 },
+  { type = "days_since_flag", subject = "player", flag_key = "test_day", operator = "gte", value = 1 },
+] }
+[[canvases.nodes.exit_block.choices]]
+text       = "Wait for the night."
+targetType = "location"
+locationId = "holding_cell"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "test_day", operator = "is_true" },
+  { type = "days_since_flag", subject = "player", flag_key = "test_day", operator = "lt", value = 1 },
+] }
+
+# Test 1 — wired up. No sex (ceiling row: "sex" held out). His hands on her as on a machine.
+[[canvases.nodes]]
+id   = "wired"
+name = "Wired up"
+blocks = [
+  { type = "image", props = { file = "scenes/test_wired_up.jpg", description = "A naked young woman lying on a padded clinical table under bright lab lights, sensor pads and thin wires stuck all over her body, a young technician in a lab coat bent over her with a tablet.", search_queries = ["naked woman on medical table sensors wires bright lab", "woman wired with electrodes clinical table technician"] } },
+  { type = "paragraph", content = "The lab is bright enough to hurt. They strip her at the door and put her on the padded table, and the technician starts sticking sensors on her like stamps on a parcel. Her temples. Her throat. Under each breast. Her nipples. Her belly. The inside of each thigh." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Legs apart. Wider. I need the pads on the labia and I need them flat." },
+  { type = "paragraph", content = "He presses them on with two fingers, flat against her cunt, the way he'd press a seal on a jar. He checks every lead. He rolls her nipple between his finger and thumb and watches a line jump on the screen." },
+  { type = "dialog", props = { speaker = "player" }, content = "You could at least warm your hands." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Why? Units don't care about temperature." },
+  { type = "dialog", props = { speaker = "player" }, content = "I'm not a unit." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "That's what we're here to find out." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "There. Response. Write that down. She reacts to touch like a person." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Like a person. He said it like it was a fault." },
+  { type = "paragraph", content = "Seven hours of it. Touched, logged, touched again. When they peel the pads off her the skin underneath is red in neat little squares." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Same time tomorrow. Try not to move so much. It spoils the data." },
+  { type = "dialog", props = { speaker = "player" }, content = "Try touching me like I'm not furniture." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to the cell."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_cell"
+time_progression_minutes = 420
+
+# Test 2 — the machine. A device on her until she comes, the readings watched.
+[[canvases.nodes]]
+id   = "machine"
+name = "The machine"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/test_machine_t5", pool = 4, description = "A naked woman strapped to a padded clinical table with her legs held open, a mechanical vibrating device pressed to her clit on an arm, her body arching and shaking through an orgasm under bright lab lights while monitors glow beside her. Must show: restraints, a machine on her pussy, her climax. Avoid: a bedroom, avoid: a partner touching her.", search_queries = ["strapped woman machine vibrator orgasm clinical table", "restrained girl forced orgasm wand machine lab", "woman tied open legs vibrator arm orgasm shaking"] } },
+  { type = "paragraph", content = "Straps today, at her wrists and her ankles, her legs held open on the table. The technician wheels the machine in on an arm and sets the head of it right on her clit." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Baseline at forty percent. Then we go up until she peaks. I want every second of it on the board." },
+  { type = "paragraph", content = "It starts low and it does not stop. Her hips try to get away from it and the straps hold her. It goes up a notch and her cunt clenches on nothing, wet and swollen, and her thighs shake in the cuffs." },
+  { type = "dialog", props = { speaker = "player" }, content = "Stop. Stop, I can't. It's too much." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Fifty percent. Note the vocal response." },
+  { type = "dialog", props = { speaker = "player" }, content = "Please." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Note the please. Units never say please." },
+  { type = "paragraph", content = "She comes hard with three men watching a screen instead of her. Her back comes off the table, her tits shaking, a noise out of her she cannot stop. The machine keeps going straight through it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Peak at four minutes ten. Hold her there. Up again." },
+  { type = "dialog", props = { speaker = "player" }, content = "No. No, please, I can't." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Again. Same setting. I want to see if the second one is bigger." },
+  { type = "paragraph", content = "It is. So is the third. By the fourth she is sobbing and soaked, her clit raw, and something deep in her core has gone warm and full. The drain. Charged, off nothing but her own orgasms." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "They don't know what they just filled up in me. They're measuring the wrong thing." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to the cell."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_cell"
+time_progression_minutes = 420
+
+# Test 3 — pain. Held out (ceiling row): lasting injury; damage the game does not track.
+[[canvases.nodes]]
+id   = "pain"
+name = "Pain"
+blocks = [
+  { type = "image", props = { file = "scenes/test_pain.jpg", description = "A naked woman strapped down on a clinical table flinching hard, eyes squeezed shut, a technician beside her adjusting a dial on a machine, monitor lines spiking.", search_queries = ["strapped woman flinching clinical table monitor spike", "restrained woman pain test lab technician dial"] } },
+  { type = "paragraph", content = "The straps again, and a new machine with two leads that clip onto her nipples and one that goes inside her. The technician turns a dial." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "This one hurts. I'm telling you because the readings are better if you know it's coming." },
+  { type = "dialog", props = { speaker = "player" }, content = "Is that supposed to be kind?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "It's supposed to be accurate." },
+  { type = "paragraph", content = "It bites. Her nipples burn, her cunt clenches around the lead, her whole body jerks against the cuffs. The line on the screen goes straight up." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Look at that. Every unit on the line reads zero at this setting. Zero. She reads like a man with his hand in a fire." },
+  { type = "dialog", props = { speaker = "player" }, content = "Then stop." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "That's the point. You want me to stop. They never want anything." },
+  { type = "paragraph", content = "He turns it up one more notch, writes down what her body does, and turns it off. She is shaking for an hour after." },
+  { type = "dialog", props = { speaker = "player" }, content = "What is this for? What are you building?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Above my pay grade. I measure. Somebody upstairs decides." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to the cell."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_cell"
+time_progression_minutes = 420
+
+# Test 4 — the empty body. A line body fucks her and feels nothing. The step that shows what they are after.
+[[canvases.nodes]]
+id   = "empty_body"
+name = "The empty body"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/test_empty_body_t5", pool = 4, description = "A pale expressionless muscular man fucking a naked woman on a padded clinical table under bright lab lights, mechanical and steady, his face completely blank, her legs over his arms. Must show: vaginal sex, his blank face, the clinical setting. Avoid: a bedroom, avoid: kissing, avoid: him smiling.", search_queries = ["expressionless man fucking woman clinical table bright light", "robotic blank face man sex woman lab table", "emotionless guy pounding girl medical table"] } },
+  { type = "paragraph", content = "They bring one up from the line. A man's body, tall and perfect and grey under the light, walking like something being walked. Its eyes do not move to her. They do not move at all." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Full contact. Penetration. We're looking for transfer. Anything at all crossing from her to it." },
+  { type = "paragraph", content = "It climbs onto the table and its cock is already hard, because they made it that way. It pushes into her cunt in one long stroke and starts fucking her at exactly the same speed it will fuck her at for the next hour." },
+  { type = "paragraph", content = "It is thick and it fills her and it never changes. No breath. No noise. Her body answers it anyway, the way her body answers everything: her cunt gets wet around it, her hips lift, her tits bounce on every stroke, she comes on its cock twice with her teeth in her lip." },
+  { type = "dialog", props = { speaker = "player" }, content = "Look at me. Look at me, you're inside me, look at me." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "It can't. There's nobody in there to look. That's the problem we're paying you to solve." },
+  { type = "paragraph", content = "It feels none of it. It pulls out when the technician tells it to and stands there, still hard, still empty, dripping with her." },
+  { type = "dialog", props = { speaker = "player" }, content = "What is it? What did you make?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "A body. The best one we've got. And it's still nobody." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Nothing. She gave it everything and it took nothing. Log it. We go again tomorrow." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "They want it to feel what I feel. They're trying to pour me into it. Why would anyone want that?" },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to the cell."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_cell"
+time_progression_minutes = 420
+
+# The daily test — repeatable, a mix of the four. One of the pool's blocks on each visit.
+[[canvases.nodes]]
+id   = "daily"
+name = "The daily test"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/tests_daily_t5", pool = 4, description = "A naked woman strapped open on a padded clinical table under bright lab lights, a machine or an expressionless man working on her while technicians watch monitors. Must show: restraints, explicit sex or a machine on her, the clinical room. Avoid: a bedroom, avoid: tenderness.", search_queries = ["strapped woman clinical table machine sex monitors", "lab table restrained girl fucked technicians watching", "medical exam table woman vibrator machine orgasm"] } },
+  { type = "block_pool", props = { blocks = [
+    { type = "paragraph", content = "The machine again, the head of it on her clit, the straps tight. They run her up to the edge and hold her there for an hour before they let her come, just to see what it does to the line on the board. It does a lot. So does the drain, filling in her core while she screams." },
+    { type = "paragraph", content = "The grey body again. It fucks her from behind with her face on the padded table and her ass up, the same speed, the same nothing in it, while the technician times her orgasms with a stopwatch. Three in forty minutes. He writes it down like the weather." },
+    { type = "paragraph", content = "Sensors and fingers today. The technician works two fingers in and out of her cunt with his eyes on the screen and not on her, and talks to the men in grey about lunch, and makes her come with his other thumb on her clit just to log how long it takes." },
+    { type = "paragraph", content = "Pain first, then the machine, then pain again, to see if one changes the other. It does. By the end she cannot tell which one made her come, and neither can they, and that is the first thing all week they look pleased about." },
+  ] } },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Count out loud for me when you come. It helps the timing." },
+  { type = "dialog", props = { speaker = "player" }, content = "Fuck you. One." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Good. Same again tomorrow." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back to the cell."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_cell"
+time_progression_minutes = 420
+
+# ── activity_cell_sleep — the cradle's Power down, inside (beat_0267). Energy +100, 540 min, 19:00-05:00. ──
+[[canvases]]
+id          = "activity_cell_sleep"
+name        = "Sleep"
+description = "beat_0267 (0.2.6). Wren-solo @holding_cell, repeatable, pri 2, 19:00-05:00, gated in_custody. Energy +100 clamp (the cradle's Power down effect), 540 minutes."
+[canvases.trigger]
+location      = "holding_cell"
+is_repeatable = true
+priority      = 2
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time   = "05:00"
+
+[[canvases.nodes]]
+id   = "base"
+name = "Sleep"
+blocks = [
+  { type = "paragraph", content = "She lies down on the cot with the light on, because the light is always on, and her face to the wall, because the glass is always there. Sleep comes anyway. Her body takes what it can get." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Sleep."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_cell"
+time_progression_minutes = 540
+effects = [
+  { targetType = "player", trait = "energy", op = "add", value = 100, clamp = true },
+]
+
+# ── activity_cell_wait — time passing in the cell (beat_0268). Repeatable, pri 1, any hour, 60 min. ──
+# ⚠️ The cell has no other way to move the clock between the tests and the guard's shift, and every auto-fire inside
+# (Mercer's visit, the guard's news) needs an arrival render to fire. Each wait is one.
+[[canvases]]
+id          = "activity_cell_wait"
+name        = "Wait"
+description = "beat_0268 (0.2.6). Wren-solo @holding_cell, repeatable, pri 1, gated in_custody. One hour passes."
+[canvases.trigger]
+location      = "holding_cell"
+is_repeatable = true
+priority      = 1
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Wait"
+blocks = [
+  { type = "paragraph", content = "She sits on the cot with her back to the wall and watches the glass. An hour goes by the way they all go by in here: slowly, and lit." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Wait an hour."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_cell"
+time_progression_minutes = 60

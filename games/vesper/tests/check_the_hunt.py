@@ -70,7 +70,8 @@ def main():
     #    re-parents the rows with a green build (1_metadata_and_locations.toml:799, the Kess/Marsh bug).
     expected_rows = {
         "npc_grier": {"grier_room"},
-        "npc_sabin": {"the_rise_floor", "sabin_lab"},
+        # beat_0263 (0.2.6): Sabin gains sabin_study 18:00-21:00 while she is held (when in_custody), on purpose.
+        "npc_sabin": {"the_rise_floor", "sabin_lab", "sabin_study"},
         # beat_0224 (0.2.4): Kess gains the_site 22:00-23:59 for the study and the transfer, on purpose.
         "npc_kess": {"kess_berth", "the_site"},
         "npc_bastien": {"bastien_backroom", "the_cot"},

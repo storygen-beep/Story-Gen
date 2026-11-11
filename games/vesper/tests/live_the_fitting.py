@@ -285,7 +285,8 @@ def main():
         click("Sleep.")
         ok(flag("more_coming"), "more_coming")
         qt = play("QuestsPage")
-        ok(qt.count("Chapter complete") == 1 and "That is where this build ends" in qt and "still hunting you" in qt, "end card U, once")
+        # beat_0264 (0.2.6): U was converted in place into 0.2.6's first live card; 0.2.6's end card is AB.
+        ok("Chapter complete" not in qt and "Walk the strip at night" in qt and "still hunting you" in qt, "card U, now 0.2.6's first live card")
         ok("&amp;#x27;" not in qt and "&#x27;" not in qt, "no escaped apostrophes")
 
         # ── after the end: a later loss is the lost day home to the cot; Kess's repair says "they"
