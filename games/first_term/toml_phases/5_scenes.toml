@@ -5335,6 +5335,18 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 [[quest_cards]]
 npc_id = "npc_ryan"
 priority = 10
+text = "Your stepbrother. You met him in the hall, in a towel, on your first morning."
+when = [
+  { type = "trait", subject = "player", trait = "ryan_step", op = "eq", value = 1 },
+]
+terminal = true
+terminal_text = "Ryan's story goes on in the next release."
+release = 1
+release_until = 1
+
+[[quest_cards]]
+npc_id = "npc_ryan"
+priority = 10
 text = "Ryan looks at you, then away too fast. He showers first on weekday mornings, and his phone is always on the sink."
 tip = "Go into the bathroom while Ryan showers, a weekday morning; not while tipsy"
 when = [
@@ -5344,6 +5356,7 @@ ready_canvas = "ryan_02_phone_on_the_sink"
 goals = [
   { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 10, label = "Let Ryan see you at home: a towel in the hall, the couch, his room at night" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_ryan"
@@ -5358,6 +5371,7 @@ goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 20, label = "Not yet: Ryan waits until you're more curious (your Corruption)" },
   { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 20, label = "Let Ryan see you at home: a towel in the hall, the couch, his room at night" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_ryan"
@@ -5372,6 +5386,7 @@ goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Not yet: Ryan waits until you're bolder (your Corruption)" },
   { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 30, label = "Let Ryan see you at home: a towel in the hall, the couch, his room at night" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_ryan"
@@ -5386,6 +5401,7 @@ goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 20, label = "Not yet: Ryan waits until you're more curious (your Corruption)" },
   { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 40, label = "Let Ryan see you at home: a towel in the hall, the couch, his room at night" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_ryan"
@@ -5400,6 +5416,7 @@ goals = [
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Not yet: Ryan waits until you're ready to show more (your Exhibitionism)" },
   { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 50, label = "Let Ryan see you at home: a towel in the hall, the couch, his room at night" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_ryan"
@@ -5414,6 +5431,7 @@ goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 60, label = "Not yet: Ryan waits until you're hungrier (your Corruption)" },
   { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 60, label = "Let Ryan see you at home: a towel in the hall, the couch, his room at night" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_ryan"
@@ -5428,11 +5446,13 @@ goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 60, label = "Not yet: Ryan waits until you're hungrier (your Corruption)" },
   { type = "trait", subject = "npc", npc_id = "npc_ryan", trait = "want", op = "gte", value = 70, label = "Let Ryan see you at home: a towel in the hall, the couch, his room at night" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_ryan"
 priority = 10
 text = "Two knocks, late, Sunday to Thursday. His room, after ten."
+release = 2
 when = [
   { type = "trait", subject = "player", trait = "ryan_step", op = "gte", value = 8 },
 ]
@@ -5636,6 +5656,7 @@ consumes = true
 [[canvases]]
 id   = "laura_02_home_late"
 name = "Home late"
+release = 2
 description = "The curfew rule (laura_curfew_rule.md, release 1): every time she comes home late, Laura waiting up in the dark hall. Low Love (or suspicion 50+): the curfew. High: \"Did anyone look at you in it?\" No longer a step of her ladder."
 
 [canvases.trigger]
@@ -6382,6 +6403,7 @@ blocks = [
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
+release = 2
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [1] }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 0 }] }, blocks = [{ type = "paragraph", content = "She dries her hands on her apron and looks at you with a funny little smile." }, { type = "dialog", content = "Come to my room after. I have something for you.", props = { speaker = "npc", npcId = "npc_laura" } }] },
 ]
@@ -6638,6 +6660,7 @@ locationId = "home_master_bedroom"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [1] }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 0 }] }
 flagEffects = [{ targetType = "player", flag = "laura_dress_invite", op = "set" }]
+release = 2
 
 [[canvases.nodes.exit_block.choices]]
 text = "\"Not tonight, Mom.\""
@@ -6646,6 +6669,7 @@ nodeId = "not_tonight"
 time_progression_minutes = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [1] }, { type = "time_of_day", start_time = "18:00", end_time = "22:00" }, { type = "trait", subject = "player", trait_key = "laura_step", operator = "eq", value = 0 }] }
 effects = [{ targetType = "npc", npcId = "npc_laura", trait = "warmth", op = "add", value = -1, clamp = true }]
+release = 2
 
 [[canvases.nodes.exit_block.choices]]
 text = "Leave her to it."
@@ -8899,6 +8923,19 @@ locationId = "home_hall"
 [[quest_cards]]
 npc_id = "npc_laura"
 priority = 10
+text = "Your mom. She cooks, she worries, she wants this new family to work."
+when = [
+  { type = "trait", subject = "player", trait = "laura_step", op = "eq", value = 0 },
+  { flag = "opening_done", op = "is_true" },
+]
+terminal = true
+terminal_text = "Laura's story starts in the next release."
+release = 1
+release_until = 1
+
+[[quest_cards]]
+npc_id = "npc_laura"
+priority = 10
 text = "Laura has a dress for you in her room. She said so on Tuesday."
 tip = "Tuesday evening: find Laura in the kitchen, then go to her room"
 when = [
@@ -8906,6 +8943,7 @@ when = [
   { flag = "opening_done", op = "is_true" },
 ]
 ready_canvas = "laura_01_blue_dress"
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_laura"
@@ -8920,6 +8958,7 @@ ready_canvas = "laura_03_wine_in_the_kitchen"
 goals = [
   { type = "trait", subject = "npc", npc_id = "npc_laura", trait = "warmth", op = "gte", value = 10, label = "Spend time with Laura: breakfast, cooking, and the dishes in the evening" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_laura"
@@ -8934,6 +8973,7 @@ ready_canvas = "laura_06_take_me_with_you"
 goals = [
   { type = "trait", subject = "npc", npc_id = "npc_laura", trait = "warmth", op = "gte", value = 20, label = "Spend time with Laura: breakfast, cooking, and the dishes in the evening" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_laura"
@@ -8950,11 +8990,13 @@ goals = [
   { type = "trait", subject = "npc", npc_id = "npc_laura", trait = "warmth", op = "gte", value = 30, label = "Spend time with Laura: breakfast, cooking, and the dishes in the evening" },
   { type = "trait", subject = "player", trait = "laura_gaps_watched", op = "gte", value = 3, label = "Watch Laura through her door or the bathroom door at night" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_laura"
 priority = 10
 text = "She knows you watch. Her door is still open a gap."
+release = 2
 when = [
   { type = "trait", subject = "player", trait = "laura_step", op = "gte", value = 4 },
   { flag = "opening_done", op = "is_true" },
@@ -11765,7 +11807,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "You walk in here in your underwear, and he wipes his hands and says nothing about it." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "bra", operator = "equipped" }, { type = "clothing_slot", slot = "underwear", operator = "equipped" }, { type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "You're in his garage in your underwear, and he wipes his hands and says nothing about it." }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -11914,6 +11956,11 @@ content = "He looks at you like you're going to break the machine, and he goes b
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You bend over the basket and feed the drum, and behind you the wrench stops. When you straighten up, Mark is looking at your ass, and he goes back to the engine part like he never stopped."
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "He looked, and he won't say it. Not yet."
+props = { speaker = "player" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -13416,13 +13463,29 @@ goals = [
 [[quest_cards]]
 npc_id = "npc_mark"
 priority = 10
+text = "Mark takes the rent at the kitchen table every Sunday."
+when = [
+  { type = "trait", subject = "player", trait = "mark_step", op = "eq", value = 1 },
+  { flag = "opening_done", op = "is_true" },
+  { flag = "opening_done", op = "is_true" },
+]
+terminal = true
+terminal_text = "Mark's story goes on in the next release."
+release = 1
+release_until = 1
+
+[[quest_cards]]
+npc_id = "npc_mark"
+priority = 10
 text = "His eyes were on your hem at the table. He's on the phone a lot, late."
 tip = "Late at night: the kitchen drawer, Mark next door"
 when = [
   { type = "trait", subject = "player", trait = "mark_step", op = "eq", value = 1 },
   { flag = "opening_done", op = "is_true" },
+  { flag = "opening_done", op = "is_true" },
 ]
 ready_canvas = "mark_02_late_notice"
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_mark"
@@ -13439,6 +13502,7 @@ goals = [
   { type = "trait", subject = "player", trait = "rent_short_weeks", op = "gte", value = 1, label = "Come up short on the rent one Sunday" },
   { flag = "mark_saw_her", op = "is_true", label = "Mark's first accident: the garage, a Saturday" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_mark"
@@ -13450,11 +13514,13 @@ when = [
   { flag = "opening_done", op = "is_true" },
 ]
 ready_canvas = "mark_06_our_arrangement"
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_mark"
 priority = 10
 text = "The Sunday table, every week: his eyes on you."
+release = 2
 when = [
   { type = "trait", subject = "player", trait = "mark_step", op = "gte", value = 4 },
   { flag = "opening_done", op = "is_true" },
@@ -14271,27 +14337,6 @@ time_progression_minutes = 30
 conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "cafe_uniform" }, { type = "time_of_day", start_time = "08:00", end_time = "21:30" }] }
 
 [[canvases.nodes.exit_block.choices]]
-text = "Ask for the tight dress."
-targetType = "node"
-nodeId = "tight"
-time_progression_minutes = 2
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 }, { type = "clothing_item", item_id = "cafe_uniform_sexy", operator = "not_owned" }, { type = "time_of_day", start_time = "08:00", end_time = "22:00" }] }
-
-[[canvases.nodes.exit_block.choices]]
-text = "Ask Tom for something shorter."
-targetType = "node"
-nodeId = "short"
-time_progression_minutes = 2
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "cafe_footfall", operator = "gte", value = 10 }, { type = "clothing_item", item_id = "cafe_uniform_short", operator = "not_owned" }, { type = "time_of_day", start_time = "08:00", end_time = "22:00" }] }
-
-[[canvases.nodes.exit_block.choices]]
-text = "Ask Tom for something lower cut."
-targetType = "node"
-nodeId = "lowcut"
-time_progression_minutes = 2
-conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 }, { type = "trait", subject = "player", trait_key = "cafe_footfall", operator = "gte", value = 25 }, { type = "clothing_item", item_id = "cafe_uniform_short", operator = "owned" }, { type = "clothing_item", item_id = "cafe_uniform_lowcut", operator = "not_owned" }, { type = "time_of_day", start_time = "08:00", end_time = "22:00" }] }
-
-[[canvases.nodes.exit_block.choices]]
 text = "Sit at the counter a while."
 targetType = "location"
 locationId = "cafe"
@@ -14302,118 +14347,14 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", op
 text = "Leave him to the till."
 targetType = "location"
 locationId = "town"
-
-[[canvases.nodes]]
-id   = "tight"
-name = "The tight dress"
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "Tom reaches under the counter without a word and puts it on the counter between you: the black dress, tighter than the other one and cut for your tits. His eyes go to your chest once. He makes them go back to the till."
-
-[[canvases.nodes.blocks]]
-type = "dialog"
-content = "Your choice. They tip more for it. They grab more too."
-props = { speaker = "npc", npcId = "npc_tom" }
-
-[canvases.nodes.exit_block]
-type = "choices"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "22:00", end_time = "06:00" }] }
+flagEffects = [{ targetType = "player", flag = "late_shift", op = "set" }, { targetType = "player", flag = "came_home_late", op = "set" }]
 
 [[canvases.nodes.exit_block.choices]]
-text = "Take it."
+text = "Leave him to the till."
 targetType = "location"
-locationId = "cafe"
-time_progression_minutes = 3
-flagEffects = [{ targetType = "player", flag = "uniform_sexy", op = "set" }]
-wardrobeEffects = [{ action = "add", item_id = "cafe_uniform_sexy" }]
-
-[[canvases.nodes.exit_block.choices]]
-text = "Leave it on the counter."
-targetType = "node"
-nodeId = "leave_it"
-time_progression_minutes = 1
-
-[[canvases.nodes]]
-id   = "short"
-name = "Something shorter"
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "Tom looks at you for a long second. Then he reaches under the counter and puts a folded dress on it, black like the others but half the length. His eyes go down to your thighs, to where it would stop, and come back up slow."
-
-[[canvases.nodes.blocks]]
-type = "dialog"
-content = "People keep asking if the girls come in anything shorter. I keep one back. Thirty dollars. Your call, not mine."
-props = { speaker = "npc", npcId = "npc_tom" }
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text = "Buy it ($30)."
-targetType = "location"
-locationId = "cafe"
-time_progression_minutes = 3
-costs = [{ trait = "money", value = 30 }]
-wardrobeEffects = [{ action = "add", item_id = "cafe_uniform_short" }]
-
-[[canvases.nodes.exit_block.choices]]
-text = "Leave it on the counter."
-targetType = "node"
-nodeId = "leave_it"
-time_progression_minutes = 1
-
-[[canvases.nodes]]
-id   = "lowcut"
-name = "Something lower"
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "He doesn't even look up from the till first. He reaches under the counter, and the dress he puts down is cut in a V that goes most of the way to the belt. He looks once at your tits, at where it would open on them, and then hard at the till."
-
-[[canvases.nodes.blocks]]
-type = "dialog"
-content = "Forty. Nothing goes under it, so don't ask me for a bra that fits. Your call."
-props = { speaker = "npc", npcId = "npc_tom" }
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text = "Buy it ($40)."
-targetType = "location"
-locationId = "cafe"
-time_progression_minutes = 3
-costs = [{ trait = "money", value = 40 }]
-wardrobeEffects = [{ action = "add", item_id = "cafe_uniform_lowcut" }]
-
-[[canvases.nodes.exit_block.choices]]
-text = "Leave it on the counter."
-targetType = "node"
-nodeId = "leave_it"
-time_progression_minutes = 1
-
-[[canvases.nodes]]
-id   = "leave_it"
-name = "Not the dress"
-
-[[canvases.nodes.blocks]]
-type = "dialog"
-content = "Your call."
-props = { speaker = "npc", npcId = "npc_tom" }
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "He folds it back under the counter without looking at it, or at you."
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text = "Leave him to his folding."
-targetType = "location"
-locationId = "cafe"
-time_progression_minutes = 1
+locationId = "town"
+conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "06:00", end_time = "22:00" }] }
 
 [[canvases]]
 id   = "hub_gary_booth"
@@ -14541,6 +14482,19 @@ ready_canvas = "cafe_job_ask"
 [[quest_cards]]
 npc_id = "npc_tom"
 priority = 10
+text = "Tom gave you the job. Your shifts at the café pay the rent."
+when = [
+  { type = "trait", subject = "player", trait = "tom_step", op = "eq", value = 0 },
+  { flag = "tom_met", op = "is_true" },
+]
+terminal = true
+terminal_text = "Tom's story starts in the next release."
+release = 1
+release_until = 1
+
+[[quest_cards]]
+npc_id = "npc_tom"
+priority = 10
 text = "Tom gave you the job. Your first shift is waiting."
 tip = "Take a shift at the café, afternoon or evening, Monday to Saturday"
 when = [
@@ -14551,6 +14505,7 @@ ready_canvas = "tom_01_the_apron"
 goals = [
   { flag = "cafe_job", op = "is_true", label = "Get the job at the café" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_tom"
@@ -14565,6 +14520,7 @@ ready_canvas = "tom_03_the_tip_jar"
 goals = [
   { type = "trait", subject = "player", trait = "cafe_shifts_worked", op = "gte", value = 5, label = "Work your café shifts. Tom's watching how you do" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_tom"
@@ -14580,11 +14536,13 @@ goals = [
   { type = "trait", subject = "player", trait = "cafe_footfall", op = "gte", value = 15, label = "Work the busy café shifts: play along, flirt back, or let a hand stay" },
   { type = "trait", subject = "player", trait = "cafe_name", op = "gte", value = 5, label = "Let a customer's hand stay on your shifts. Tom watches from the counter" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_tom"
 priority = 10
 text = "The window rule: the street can't see."
+release = 2
 when = [
   { type = "trait", subject = "player", trait = "tom_step", op = "gte", value = 3 },
   { flag = "tom_met", op = "is_true" },
@@ -14599,6 +14557,7 @@ terminal_text = "Tom, later. (Next release) His Want and Power still count: what
 [[canvases]]
 id   = "zoe_00_quad_meeting"
 name = "The girl from Biology"
+release = 2
 description = "Meets Zoe on the quad, the first time she's there in Zoe's hours. Sets zoe_met (opens her apartment) and zoe_number. Both answers meet her."
 
 [canvases.trigger]
@@ -14756,6 +14715,7 @@ flagEffects = [{ targetType = "player", flag = "zoe_met", op = "set" }, { target
 [[canvases]]
 id   = "zoe_01_first_party"
 name = "Your first party"
+release = 2
 description = "Zoe step 1 = Jake step 1 (one canvas, it sets both). Zoe's dress, her first dare, and a guy who picks her out: Jake. Sets party_went, jake_met, jake_number."
 
 [canvases.trigger]
@@ -15140,6 +15100,7 @@ consumes = true
 [[canvases]]
 id   = "zoe_01b_kiss_again"
 name = "Same dare"
+release = 2
 description = "Zoe step 1 after a no at her first party: a later Friday party, from Curious, she asks the kiss again. A yes is her step 1; a no parks it a week."
 
 [canvases.trigger]
@@ -15328,6 +15289,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", 
 [[canvases]]
 id   = "zoe_02_bra_through_the_sleeve"
 name = "Through the sleeve"
+release = 2
 description = "Zoe step 2 (Zoe A 2): a dress dare on the balcony, the room behind the glass. Her bra comes off. Sets party_house_invite (opens the party house)."
 
 [canvases.trigger]
@@ -15841,6 +15803,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", 
 [[canvases]]
 id   = "zoe_02_balcony_curious"
 name = "Through the sleeve"
+release = 2
 description = "Zoe step 2, Curious under Daring: the balcony dare when only \"Dare me something else.\" can be a yes (the cocky guy is at the party). Same screens as zoe_02_bra_through_the_sleeve."
 
 [canvases.trigger]
@@ -16108,6 +16071,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", 
 [[canvases]]
 id   = "zoe_03_hot_tub"
 name = "The hot tub"
+release = 2
 description = "Zoe step 3 (Zoe A 3), the voice sample: the party house hot tub, her friends go in first; topless for Zoe alone and she kisses her. Home at three; Ryan at his door."
 
 [canvases.trigger]
@@ -16471,6 +16435,7 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", 
 [[canvases]]
 id   = "zoe_04_i_pick_the_dares"
 name = "I pick the dares"
+release = 2
 description = "Zoe step 4 (Zoe A 4), her couch any evening after the hot tub: she admits she dared instead of asking. Sets picks_the_dares (party nights are hers)."
 
 [canvases.trigger]
@@ -16631,6 +16596,7 @@ retry_after_days = 3
 [[canvases]]
 id   = "zoe_05_no_dare"
 name = "No dare"
+release = 2
 description = "Zoe step 5, the top step (release 1): after the party, her bedroom: \"No dare. I'm asking.\" The cocky guy at the door: \"Tell him to go.\" or \"Let him watch.\" Sets zoe_together."
 
 [canvases.trigger]
@@ -16867,6 +16833,7 @@ retry_after_days = 7
 [[canvases]]
 id   = "hub_zoe_quad"
 name = "Zoe, on the grass"
+release = 2
 description = "Zoe's hub on the quad: her want shown first, her head in her lap."
 
 [canvases.trigger]
@@ -17018,6 +16985,7 @@ locationId = "campus"
 [[canvases]]
 id   = "hub_zoe_canteen"
 name = "Zoe, at lunch"
+release = 2
 description = "Zoe at lunch in the canteen."
 
 [canvases.trigger]
@@ -17260,6 +17228,7 @@ time_progression_minutes = 30
 [[canvases]]
 id   = "hub_zoe_class"
 name = "Zoe, in class"
+release = 2
 description = "Zoe beside her in Biology and figure drawing (her lecture-hall rows, once met)."
 
 [canvases.trigger]
@@ -17343,6 +17312,7 @@ locationId = "campus"
 [[canvases]]
 id   = "hub_zoe_apartment"
 name = "Zoe, at home"
+release = 2
 description = "Zoe in her living room: getting ready on Friday before the party (she does your face), the Friday party, her couch other evenings."
 
 [canvases.trigger]
@@ -17562,6 +17532,7 @@ time_progression_minutes = 5
 [[canvases]]
 id   = "hub_zoe_bedroom"
 name = "Zoe, going to bed"
+release = 2
 description = "Zoe in her bedroom on weeknights and Sunday nights, going to bed: her wardrobe, and the dress she lends (zoe_party_dress)."
 
 [canvases.trigger]
@@ -17897,6 +17868,7 @@ time_progression_minutes = 2
 [[canvases]]
 id   = "hub_zoe_party_house"
 name = "Zoe, in the hot tub"
+release = 2
 description = "Zoe at the party house on Saturday night, in the hot tub with her friends (her face there; Zoe A 3 fires here)."
 
 [canvases.trigger]
@@ -18051,6 +18023,7 @@ time_progression_minutes = 20
 [[canvases]]
 id   = "hub_zoe_park"
 name = "Zoe, running"
+release = 2
 description = "Zoe on her weekend run in the park: a lap with her, her eyes on your ass. Her flash dare (zoe_park_dare) and the hollow off the path (park_hidden) open from her first screen (doors.py, DECISIONS 224)."
 
 [canvases.trigger]
@@ -18180,6 +18153,7 @@ locationId = "street"
 [[canvases]]
 id   = "zoe_park_dare"
 name = "\"Dare me, Zo.\""
+release = 2
 description = "Zoe's dare on her run (the park sheet, Curious): a flash on the path. Exhibitionism +1, once a day."
 
 [canvases.trigger]
@@ -18331,6 +18305,7 @@ when = [
   { flag = "zoe_met", op = "is_false" },
 ]
 ready_canvas = "zoe_00_quad_meeting"
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_zoe"
@@ -18343,6 +18318,7 @@ when = [
   { flag = "zoe_kiss_refused", op = "is_false" },
 ]
 ready_canvas = "zoe_01_first_party"
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_zoe"
@@ -18358,6 +18334,7 @@ goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 20, label = "Not yet: Zoe's kiss dare waits until you're more curious (your Corruption)" },
 ]
 ready_canvas = "zoe_01b_kiss_again"
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_zoe"
@@ -18369,6 +18346,7 @@ when = [
   { flag = "zoe_met", op = "is_true" },
 ]
 ready_canvas = "zoe_02_bra_through_the_sleeve"
+release = 2
 goals = [
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Not yet: Zoe waits until you're more daring (your Exhibitionism), or more curious with a guy from Figure drawing there" },
 ]
@@ -18387,6 +18365,7 @@ goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Not yet: Zoe waits until you're bolder (your Corruption)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Not yet: Zoe waits until you're ready to show more (your Exhibitionism)" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_zoe"
@@ -18398,6 +18377,7 @@ when = [
   { flag = "zoe_met", op = "is_true" },
 ]
 ready_canvas = "zoe_04_i_pick_the_dares"
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_zoe"
@@ -18414,11 +18394,13 @@ goals = [
   { type = "trait", subject = "player", trait = "zoe_dares_done", op = "gte", value = 4, label = "Take Zoe's dares at her Friday party, late" },
   { flag = "cocky_guy_met", op = "is_true", label = "Meet the cocky guy at Figure drawing (Tuesday or Thursday morning, Wednesday after lunch)" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_zoe"
 priority = 10
 text = "Her dares, every Friday: she joins in now."
+release = 2
 when = [
   { type = "trait", subject = "player", trait = "zoe_step", op = "gte", value = 5 },
   { flag = "zoe_met", op = "is_true" },
@@ -20103,7 +20085,7 @@ content = "Nadia at a library table with her headphones round her neck."
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "block_pool", blocks = [{ type = "dialog", content = "Thursday office hours are a trap, you know that?", props = { speaker = "npc", npcId = "npc_nadia" } }, { type = "dialog", content = "You want my notes? You can have my notes.", props = { speaker = "npc", npcId = "npc_nadia" } }, { type = "dialog", content = "Sit. I'll tell you which lecturers to avoid.", props = { speaker = "npc", npcId = "npc_nadia" } }], props = { id = "nadia_lines", memory = "seen" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "block_pool", blocks = [{ type = "dialog", content = "Thursday office hours are a trap, you know that?", props = { speaker = "npc", npcId = "npc_nadia" }, release = 2 }, { type = "dialog", content = "You want my notes? You can have my notes.", props = { speaker = "npc", npcId = "npc_nadia" } }, { type = "dialog", content = "Sit. I'll tell you which lecturers to avoid.", props = { speaker = "npc", npcId = "npc_nadia" } }], props = { id = "nadia_lines", memory = "seen" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -20259,7 +20241,7 @@ content = "Nadia at the end of a table with a salad and a textbook open beside i
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 40 }] }, blocks = [{ type = "block_pool", blocks = [{ type = "dialog", content = "Don't get the soup. And don't take his Thursday slot either.", props = { speaker = "npc", npcId = "npc_nadia" } }, { type = "dialog", content = "Everyone at this table has a story about a lecturer. Ask me which ones are true.", props = { speaker = "npc", npcId = "npc_nadia" } }, { type = "dialog", content = "Have my roll. I only got the salad so I could feel better about the roll.", props = { speaker = "npc", npcId = "npc_nadia" } }], props = { id = "nadia_lines_canteen", memory = "seen" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "campus_talk", operator = "lt", value = 40 }] }, blocks = [{ type = "block_pool", blocks = [{ type = "dialog", content = "Don't get the soup. And don't take his Thursday slot either.", props = { speaker = "npc", npcId = "npc_nadia" }, release = 2 }, { type = "dialog", content = "Don't get the soup.", props = { speaker = "npc", npcId = "npc_nadia" }, release_until = 1 }, { type = "dialog", content = "Everyone at this table has a story about a lecturer. Ask me which ones are true.", props = { speaker = "npc", npcId = "npc_nadia" } }, { type = "dialog", content = "Have my roll. I only got the salad so I could feel better about the roll.", props = { speaker = "npc", npcId = "npc_nadia" } }], props = { id = "nadia_lines_canteen", memory = "seen" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -20383,17 +20365,34 @@ ready_canvas = "hale_01_first_lecture"
 [[quest_cards]]
 npc_id = "npc_hale"
 priority = 10
+text = "Dr. Hale teaches your Psychology class."
+when = [
+  { type = "trait", subject = "player", trait = "hale_step", op = "eq", value = 1 },
+  { flag = "hale_met", op = "is_true" },
+  { flag = "opening_done", op = "is_true" },
+  { flag = "opening_done", op = "is_true" },
+]
+terminal = true
+terminal_text = "Dr. Hale's story goes on in the next release."
+release = 1
+release_until = 1
+
+[[quest_cards]]
+npc_id = "npc_hale"
+priority = 10
 text = "His eyes are on the front row every class."
 tip = "The next Psychology class, front row, Monday, Wednesday or Friday morning; not while tipsy"
 when = [
   { type = "trait", subject = "player", trait = "hale_step", op = "eq", value = 1 },
   { flag = "hale_met", op = "is_true" },
   { flag = "opening_done", op = "is_true" },
+  { flag = "opening_done", op = "is_true" },
 ]
 ready_canvas = "hale_02_lost_his_place"
 goals = [
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Not yet: Dr. Hale waits until you're more daring (your Exhibitionism)" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_hale"
@@ -20406,6 +20405,7 @@ when = [
   { flag = "opening_done", op = "is_true" },
 ]
 ready_canvas = "hale_03_photo_face_down"
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_hale"
@@ -20422,11 +20422,13 @@ goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Not yet: Dr. Hale waits until you're bolder (your Corruption)" },
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 40, label = "Not yet: Dr. Hale waits until you're ready to show more (your Exhibitionism)" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_hale"
 priority = 10
 text = "His office, the door locked: his office hours, weekday afternoons until seven, Thursdays at half past six before his wife comes, or ten in the morning when he emails."
+release = 2
 when = [
   { type = "trait", subject = "player", trait = "hale_step", op = "gte", value = 4 },
   { flag = "hale_met", op = "is_true" },
@@ -20443,6 +20445,7 @@ terminal_text = "Hale, further. (Next release)"
 [[canvases]]
 id   = "jake_02_kiss_on_the_quad"
 name = "The kiss on the quad"
+release = 2
 description = "Jake step 2 (Jake B 2): a kiss in front of his team; the first date booked. Ryan's Warmth -5 (choosing Jake)."
 
 [canvases.trigger]
@@ -20607,6 +20610,7 @@ retry_after_days = 2
 [[canvases]]
 id   = "jake_03_my_boyfriend"
 name = "My boyfriend"
+release = 2
 description = "Jake step 3 (release 1; built Jake 3 and Jake 4 = Laura 5 merged): Saturday night at the front door after a date; she names him to the house; Ryan opens the door; Laura watches from the dark living room."
 
 [canvases.trigger]
@@ -20936,6 +20940,7 @@ retry_after_days = 7
 [[canvases]]
 id   = "jake_date_pickup"
 name = "Jake's at the door"
+release = 2
 description = "A booked Wednesday or Saturday: Jake picks her up; dinner, a film, the walk back. Lands her at the front door after eleven (where his steps and the goodnight play). The curfew refuses it (SYSTEMS §12)."
 
 [canvases.trigger]
@@ -21186,6 +21191,7 @@ flagEffects = [{ targetType = "player", flag = "jake_date_booked", op = "unset" 
 [[canvases]]
 id   = "jake_04_sneak_him_in"
 name = "Sneak him in"
+release = 2
 description = "Jake step 4, the top step (release 1): she sneaks him up to her room; her headboard on Ryan's wall; the keyless door. Sets jake_first_time; Ryan's Lust +5."
 
 [canvases.trigger]
@@ -21503,6 +21509,7 @@ consumes = true
 [[canvases]]
 id   = "jake_saturday_date"
 name = "The end of a date"
+release = 2
 description = "The end of a Saturday date (release 1): the car outside the house by her stage, or after his step 4, her room. Both meters in the car (the street and Laura's window can see); Corruption behind her door. Once a date."
 
 [canvases.trigger]
@@ -21995,6 +22002,7 @@ flagEffects = [{ targetType = "player", flag = "jake_date_booked", op = "unset" 
 [[canvases]]
 id   = "jake_booty_call"
 name = "Jake at your door"
+release = 2
 description = "After Jake's step 4, on a night with no date: he texts \"you up?\", she answers \"door's unlocked\", and he's at the front door 22:00-00:00. Her room; Corruption +1, cap 59. Once a night."
 
 [canvases.trigger]
@@ -22143,6 +22151,7 @@ flagEffects = [{ targetType = "player", flag = "jake_coming", op = "unset" }]
 [[canvases]]
 id   = "hub_jake_quad"
 name = "Jake, with the team"
+release = 2
 description = "Jake's hub (quad): he shows her off."
 
 [canvases.trigger]
@@ -22452,6 +22461,7 @@ time_progression_minutes = 2
 [[canvases]]
 id   = "hub_jake_canteen"
 name = "Jake, at lunch"
+release = 2
 description = "Jake's hub (canteen): he shows her off."
 
 [canvases.trigger]
@@ -22587,6 +22597,7 @@ locationId = "campus"
 [[canvases]]
 id   = "hub_jake_party"
 name = "Jake, at the party"
+release = 2
 description = "Jake's hub (zoe_apartment): he shows her off."
 
 [canvases.trigger]
@@ -22716,6 +22727,7 @@ locationId = "town"
 [[canvases]]
 id   = "hub_jake_class"
 name = "Jake, in figure drawing"
+release = 2
 description = "Jake at the next easel in figure drawing (his lecture-hall rows, once she has his number)."
 
 [canvases.trigger]
@@ -22802,6 +22814,7 @@ locationId = "campus"
 [[canvases]]
 id   = "hub_jake_gym"
 name = "Jake, training"
+release = 2
 description = "Jake at team training in the gym, Tue and Thu afternoons (gym.md, the street gym since DECISIONS 225): talk; Curious, his hands on her hips at the squat rack; Bold, after Jake B 2, a kiss against the lockers. Once a day."
 
 [canvases.trigger]
@@ -23215,6 +23228,7 @@ when = [
   { flag = "jake_met", op = "is_true" },
 ]
 ready_canvas = "jake_02_kiss_on_the_quad"
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_jake"
@@ -23231,6 +23245,7 @@ goals = [
   { type = "trait", subject = "player", trait = "exhibitionism", op = "gte", value = 20, label = "Not yet: Jake waits until you're more daring (your Exhibitionism)" },
   { flag = "jake_date_went", op = "is_true", label = "Go out with Jake on a Saturday" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_jake"
@@ -23246,11 +23261,13 @@ goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Not yet: Jake waits until you're bolder (your Corruption)" },
   { flag = "jake_date_went", op = "is_true", label = "Go out with Jake on a Saturday" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_jake"
 priority = 10
 text = "Wednesdays and Saturdays: a date. Saturdays, your room after."
+release = 2
 when = [
   { type = "trait", subject = "player", trait = "jake_step", op = "gte", value = 4 },
   { flag = "jake_met", op = "is_true" },
@@ -25013,6 +25030,7 @@ flagEffects = [{ targetType = "player", flag = "gary_met", op = "set" }]
 [[canvases]]
 id   = "cafe_acc_spill_bra"
 name = "The jug goes over"
+release = 2
 description = "Random shift accident (cafe_shift_scene.md, DECISIONS 202): The jug goes over. 1 in 4, one a day, day shifts, as she comes on; no wage (the shift after it pays); footfall +1 on both answers, letting it be +1 Exhibitionism to cap 19."
 
 [canvases.trigger]
@@ -25167,6 +25185,7 @@ time_progression_minutes = 10
 [[canvases]]
 id   = "cafe_acc_spill_bare"
 name = "The jug goes over"
+release = 2
 description = "Random shift accident (cafe_shift_scene.md, DECISIONS 202): The jug goes over. 1 in 4, one a day, day shifts, as she comes on; no wage (the shift after it pays); footfall +1 on both answers, letting it be +1 Exhibitionism to cap 79."
 
 [canvases.trigger]
@@ -25306,6 +25325,7 @@ time_progression_minutes = 10
 [[canvases]]
 id   = "cafe_acc_button_bra"
 name = "The top button goes"
+release = 2
 description = "Random shift accident (cafe_shift_scene.md, DECISIONS 202): The top button goes. 1 in 4, one a day, day shifts, as she comes on; no wage (the shift after it pays); footfall +1 on both answers, letting it be +1 Exhibitionism to cap 19."
 
 [canvases.trigger]
@@ -25423,6 +25443,7 @@ time_progression_minutes = 10
 [[canvases]]
 id   = "cafe_acc_button_bare"
 name = "The top button goes"
+release = 2
 description = "Random shift accident (cafe_shift_scene.md, DECISIONS 202): The top button goes. 1 in 4, one a day, day shifts, as she comes on; no wage (the shift after it pays); footfall +1 on both answers, letting it be +1 Exhibitionism to cap 79."
 
 [canvases.trigger]
@@ -25541,6 +25562,7 @@ time_progression_minutes = 10
 [[canvases]]
 id   = "cafe_acc_hem"
 name = "Under the table"
+release = 2
 description = "Random shift accident (cafe_shift_scene.md, DECISIONS 202): Under the table. 1 in 4, one a day, day shifts, as she comes on; no wage (the shift after it pays); footfall +1 on both answers, letting it be +1 Exhibitionism to cap 59."
 
 [canvases.trigger]
@@ -25675,6 +25697,7 @@ time_progression_minutes = 10
 [[canvases]]
 id   = "cafe_acc_short_shelf"
 name = "The top shelf"
+release = 2
 description = "Random shift accident (cafe_shift_scene.md, DECISIONS 202): The top shelf. 1 in 4, one a day, day shifts, as she comes on; no wage (the shift after it pays); footfall +1 on both answers, letting it be +1 Exhibitionism to cap 59."
 
 [canvases.trigger]
@@ -25807,6 +25830,7 @@ time_progression_minutes = 10
 [[canvases]]
 id   = "cafe_acc_lowcut_slip"
 name = "The cut gives"
+release = 2
 description = "Random shift accident (cafe_shift_scene.md, DECISIONS 202): The cut gives. 1 in 4, one a day, day shifts, as she comes on; no wage (the shift after it pays); footfall +1 on both answers, letting it be +1 Exhibitionism to cap 79."
 
 [canvases.trigger]
@@ -26411,8 +26435,16 @@ props = { speaker = "npc", npcId = "npc_business_lecturer" }
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
+release = 2
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "grade_business", operator = "lt", value = 40 }] }, blocks = [{ type = "dialog", content = "Retakes are by appointment. Honest work only. I won't say it twice.", props = { speaker = "npc", npcId = "npc_business_lecturer" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+release_until = 1
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "grade_business", operator = "lt", value = 40 }] }, blocks = [{ type = "dialog", content = "Honest work only. I won't say it twice.", props = { speaker = "npc", npcId = "npc_business_lecturer" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -26778,6 +26810,7 @@ content = "Biology. The TA runs it, a shy woman in a lab coat who blushes when s
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
+release = 2
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_met", operator = "is_false" }] }, blocks = [{ type = "dialog", content = "Find me on the quad. I'm always there. Tuesdays, Thursdays, Fridays.", props = { speaker = "unknown" } }] },
 ]
@@ -26790,8 +26823,16 @@ blocks = [
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
+release = 2
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "grade_bio", operator = "lt", value = 40 }] }, blocks = [{ type = "dialog", content = "If anyone's struggling, my door's open Tuesday to Friday afternoons. Really.", props = { speaker = "npc", npcId = "npc_bio_ta" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+release_until = 1
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "grade_bio", operator = "lt", value = 40 }] }, blocks = [{ type = "dialog", content = "If anyone's struggling, ask me after class. Really.", props = { speaker = "npc", npcId = "npc_bio_ta" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -27537,6 +27578,12 @@ props = { speaker = "npc", npcId = "npc_cocky_guy" }
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "He means the model. Not yet, and not in front of the lecturer."
+release = 2
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He's at the easel beside yours every class. Next week he'll be there again, and so will his eyes."
+release_until = 1
 
 [[canvases.nodes.blocks]]
 type = "group"
@@ -27587,6 +27634,11 @@ content = "You pull your top straight and turn your easel an inch."
 type = "dialog"
 content = "Spoilsport. Same easel next week, though."
 props = { speaker = "npc", npcId = "npc_cocky_guy" }
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He shrugs and goes back to his pad. He'll be at the same easel next week."
+release_until = 1
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -27974,6 +28026,13 @@ content = "Her eyes go round the room and land on you and skip off you, fast, li
 [[canvases.nodes.blocks]]
 type = "dialog"
 content = "My door's open in the afternoons. If anyone. You know. Needs anything."
+release = 2
+props = { speaker = "npc", npcId = "npc_bio_ta" }
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "If anyone. You know. Needs anything."
+release_until = 1
 props = { speaker = "npc", npcId = "npc_bio_ta" }
 
 [[canvases.nodes.blocks]]
@@ -29074,6 +29133,7 @@ effects = [{ targetType = "player", trait = "complaints", op = "add", value = 1,
 [[canvases]]
 id   = "college_exam_psych"
 name = "The Psychology midterm"
+release = 2
 description = "The Psychology midterm (college_exam), weeks 7-8 in its class slot: Focus (reads intelligence), flirt for the study guy's paper (Curious), or a flash for the cocky guy's (Daring, explicit). Copying +5. Sets exam_psych_done and midterm_done."
 
 [canvases.trigger]
@@ -29208,6 +29268,7 @@ flagEffects = [{ targetType = "player", flag = "exam_psych_done", op = "set" }, 
 [[canvases]]
 id   = "college_exam_business"
 name = "The Business midterm"
+release = 2
 description = "The Business midterm (college_exam), weeks 7-8 in its class slot: Focus (reads intelligence), flirt for the study guy's paper (Curious), or a flash for the cocky guy's (Daring, explicit). Copying +5. Sets exam_business_done and midterm_done."
 
 [canvases.trigger]
@@ -29425,6 +29486,7 @@ flagEffects = [{ targetType = "player", flag = "exam_business_done", op = "set" 
 [[canvases]]
 id   = "college_exam_bio"
 name = "The Biology midterm"
+release = 2
 description = "The Biology midterm (college_exam), weeks 7-8 in its class slot: Focus (reads intelligence), flirt for the study guy's paper (Curious), or a flash for the cocky guy's (Daring, explicit). Copying +5. Sets exam_bio_done and midterm_done."
 
 [canvases.trigger]
@@ -29559,6 +29621,7 @@ flagEffects = [{ targetType = "player", flag = "exam_bio_done", op = "set" }, { 
 [[canvases]]
 id   = "college_exam_art"
 name = "The Figure drawing midterm"
+release = 2
 description = "The Figure drawing midterm (college_exam), weeks 7-8 in its class slot: Focus (reads intelligence), flirt for the study guy's paper (Curious), or a flash for the cocky guy's (Daring, explicit). Copying +5. Sets exam_art_done and midterm_done."
 
 [canvases.trigger]
@@ -29828,8 +29891,16 @@ content = "He's mid-lecture. He catches your eye once, then goes back to his sli
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
+release = 2
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "grade_psych", operator = "lt", value = 40 }] }, blocks = [{ type = "dialog", content = "You're behind, @player. Come and see me on Thursday.", props = { speaker = "npc", npcId = "npc_hale" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+release_until = 1
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "grade_psych", operator = "lt", value = 40 }] }, blocks = [{ type = "dialog", content = "You're behind, @player. Catch up.", props = { speaker = "npc", npcId = "npc_hale" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -29968,8 +30039,16 @@ content = "He's mid-lecture, and he doesn't stop for anyone."
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
+release = 2
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "grade_business", operator = "lt", value = 40 }] }, blocks = [{ type = "dialog", content = "Failing. Retakes by appointment.", props = { speaker = "npc", npcId = "npc_business_lecturer" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+release_until = 1
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "grade_business", operator = "lt", value = 40 }] }, blocks = [{ type = "dialog", content = "Failing. Honest work only.", props = { speaker = "npc", npcId = "npc_business_lecturer" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -29980,8 +30059,16 @@ blocks = [
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
+release = 2
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "grade_business", operator = "gte", value = 70 }] }, blocks = [{ type = "dialog", content = "Good. Keep it that way. My door's open in the afternoons.", props = { speaker = "npc", npcId = "npc_business_lecturer" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+release_until = 1
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "grade_business", operator = "gte", value = 70 }] }, blocks = [{ type = "dialog", content = "Good. Keep it that way.", props = { speaker = "npc", npcId = "npc_business_lecturer" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -30026,20 +30113,44 @@ content = "She gathers them up and hands them out, too busy to stop. She only ge
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
+release = 2
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "grade_bio", operator = "lt", value = 40 }] }, blocks = [{ type = "dialog", content = "You're, um. You're struggling. My door's open. If you want.", props = { speaker = "npc", npcId = "npc_bio_ta" } }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
+release_until = 1
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "grade_bio", operator = "lt", value = 40 }] }, blocks = [{ type = "dialog", content = "You're, um. You're struggling. Sorry.", props = { speaker = "npc", npcId = "npc_bio_ta" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+release = 2
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "grade_bio", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "grade_bio", operator = "lt", value = 70 }] }, blocks = [{ type = "dialog", content = "You're doing fine! Really fine. My door's open afternoons.", props = { speaker = "npc", npcId = "npc_bio_ta" } }] },
 ]
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
+release_until = 1
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "grade_bio", operator = "gte", value = 40 }, { type = "trait", subject = "player", trait_key = "grade_bio", operator = "lt", value = 70 }] }, blocks = [{ type = "dialog", content = "You're doing fine! Really fine.", props = { speaker = "npc", npcId = "npc_bio_ta" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+release = 2
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "grade_bio", operator = "gte", value = 70 }] }, blocks = [{ type = "dialog", content = "Top marks. Wow. Sorry. Top marks. My door's open afternoons.", props = { speaker = "npc", npcId = "npc_bio_ta" } }] },
+]
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+release_until = 1
+blocks = [
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "grade_bio", operator = "gte", value = 70 }] }, blocks = [{ type = "dialog", content = "Top marks. Wow. Sorry. Top marks.", props = { speaker = "npc", npcId = "npc_bio_ta" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -30669,6 +30780,7 @@ time_progression_minutes = 15
 [[canvases]]
 id   = "dean_warning"
 name = "The dean's office"
+release = 2
 description = "Her first trouble: the dean's warning, by phone. Meets the dean; sets dean_met, dean_summons, on_probation (if failing) and letter_home (laura_suspicion +10). Played by answering the dean's office's call; returns her to where she was."
 
 [canvases.trigger]
@@ -31417,6 +31529,7 @@ locationId = "gym_floor"
 [[canvases]]
 id   = "class_acc_downblouse_bra"
 name = "Down your top"
+release = 2
 description = "Random class accident (college.md, DECISIONS 202-203): Down your top. 1 in 4, one a day; campus talk +1 on both answers, letting it be +1 to cap 19."
 
 [canvases.trigger]
@@ -31561,6 +31674,7 @@ time_progression_minutes = 0
 [[canvases]]
 id   = "class_acc_downblouse_bare"
 name = "Down your top"
+release = 2
 description = "Random class accident (college.md, DECISIONS 202-203): Down your top. 1 in 4, one a day; campus talk +1 on both answers, letting it be +1 to cap 79."
 
 [canvases.trigger]
@@ -31690,6 +31804,7 @@ time_progression_minutes = 0
 [[canvases]]
 id   = "class_acc_stairs_panties"
 name = "Up your skirt"
+release = 2
 description = "Random class accident (college.md, DECISIONS 202-203): Up your skirt. 1 in 4, one a day; campus talk +1 on both answers, letting it be +1 to cap 59."
 
 [canvases.trigger]
@@ -31814,6 +31929,7 @@ time_progression_minutes = 0
 [[canvases]]
 id   = "class_acc_stairs_bare"
 name = "Up your skirt"
+release = 2
 description = "Random class accident (college.md, DECISIONS 202-203): Up your skirt. 1 in 4, one a day; campus talk +1; only the fix this release (letting it be is On Display, 80)."
 
 [canvases.trigger]
@@ -31908,6 +32024,7 @@ time_progression_minutes = 0
 [[canvases]]
 id   = "class_acc_water_bra"
 name = "Soaked through"
+release = 2
 description = "Random class accident (college.md, DECISIONS 202-203): Soaked through. 1 in 4, one a day; campus talk +1 on both answers, letting it be +1 to cap 19."
 
 [canvases.trigger]
@@ -32052,6 +32169,7 @@ time_progression_minutes = 0
 [[canvases]]
 id   = "class_acc_water_bare"
 name = "Soaked through"
+release = 2
 description = "Random class accident (college.md, DECISIONS 202-203): Soaked through. 1 in 4, one a day; campus talk +1 on both answers, letting it be +1 to cap 79."
 
 [canvases.trigger]
@@ -32463,6 +32581,7 @@ time_progression_minutes = 20
 [[canvases]]
 id   = "class_acc_crop_bra"
 name = "The crop top rides up"
+release = 2
 description = "Random class accident (college.md, DECISIONS 202-203): The crop top rides up. 1 in 4, one a day; campus talk +1 on both answers, letting it be +1 to cap 39."
 
 [canvases.trigger]
@@ -32601,6 +32720,7 @@ time_progression_minutes = 0
 [[canvases]]
 id   = "class_acc_crop_bare"
 name = "The crop top rides up"
+release = 2
 description = "Random class accident (college.md, DECISIONS 202-203): The crop top rides up. 1 in 4, one a day; campus talk +1 on both answers, letting it be +1 to cap 79."
 
 [canvases.trigger]
@@ -32725,6 +32845,7 @@ time_progression_minutes = 0
 [[canvases]]
 id   = "class_acc_bodycon_panties"
 name = "The dress rides up"
+release = 2
 description = "Random class accident (college.md, DECISIONS 202-203): The dress rides up. 1 in 4, one a day; campus talk +1 on both answers, letting it be +1 to cap 59."
 
 [canvases.trigger]
@@ -32849,6 +32970,7 @@ time_progression_minutes = 0
 [[canvases]]
 id   = "class_acc_bodycon_bare"
 name = "The dress rides up"
+release = 2
 description = "Random class accident (college.md, DECISIONS 202-203): The dress rides up. 1 in 4, one a day; campus talk +1; only the fix this release (letting it be is On Display, 80)."
 
 [canvases.trigger]
@@ -36849,6 +36971,7 @@ props = { speaker = "npc", npcId = "npc_nadia" }
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
+release = 2
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "hale_step", operator = "lt", value = 2 }] }, blocks = [{ type = "dialog", content = "And if he ever asks you to his office on Thursdays, say you're busy.", props = { speaker = "npc", npcId = "npc_nadia" } }] },
 ]
@@ -37960,6 +38083,13 @@ content = "He sets up his laptop at the lectern and doesn't look your way again,
 [[canvases.nodes.blocks]]
 type = "thought_bubble"
 content = "Thursday at five he has office hours, just him and a door that shuts. You could bring him a question."
+release = 2
+props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "He's always in before the rows fill. Come early again, and see if he looks up this time."
+release_until = 1
 props = { speaker = "player" }
 
 [canvases.nodes.exit_block]
@@ -38011,6 +38141,7 @@ content = "He doesn't tell you to get off it. He goes red to the collar and wait
 [[canvases.nodes.blocks]]
 type = "thought_bubble"
 content = "Thursday at five he has office hours, with the door shut. You want to see how red he goes in there."
+release = 2
 props = { speaker = "player" }
 
 [canvases.nodes.exit_block]
@@ -39408,6 +39539,18 @@ when = [
   { flag = "art_lecturer_met", op = "is_true" },
 ]
 ready_canvas = "hub_art_office"
+release = 2
+
+[[quest_cards]]
+npc_id = "npc_art_lecturer"
+priority = 5
+text = "Figure drawing. She wants to draw you."
+tip = "Figure drawing, Tuesday and Thursday mornings and Wednesday afternoon."
+when = [
+  { flag = "art_lecturer_met", op = "is_true" },
+]
+ready_canvas = "hub_art_class"
+release_until = 1
 
 [[quest_cards]]
 npc_id = "npc_business_lecturer"
@@ -39418,6 +39561,18 @@ when = [
   { flag = "business_lecturer_met", op = "is_true" },
 ]
 ready_canvas = "hub_business_office"
+release = 2
+
+[[quest_cards]]
+npc_id = "npc_business_lecturer"
+priority = 5
+text = "Business. Strict. Can't be bought."
+tip = "Business, in the lecture hall."
+when = [
+  { flag = "business_lecturer_met", op = "is_true" },
+]
+ready_canvas = "hub_business_class"
+release_until = 1
 
 [[quest_cards]]
 npc_id = "npc_bio_ta"
@@ -39428,6 +39583,18 @@ when = [
   { flag = "bio_ta_met", op = "is_true" },
 ]
 ready_canvas = "hub_ta_office"
+release = 2
+
+[[quest_cards]]
+npc_id = "npc_bio_ta"
+priority = 5
+text = "Biology. Shy. Looks, and hopes you won't notice."
+tip = "Biology, in the lecture hall."
+when = [
+  { flag = "bio_ta_met", op = "is_true" },
+]
+ready_canvas = "hub_ta_class"
+release_until = 1
 
 [[quest_cards]]
 npc_id = "npc_dean"
@@ -50232,7 +50399,7 @@ is_repeatable = true
 priority = 7
 is_active = true
 max_triggers_per_day = 1
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "out_shown_today", operator = "is_false" }, { type = "clothing_slot", slot = "underwear", operator = "unequipped" }, { type = "worn_type", operator = "neq", value = "jeans" }, { type = "worn_type", operator = "neq", value = "leggings" }, { type = "worn_type", operator = "neq", value = "shorts" }, { type = "worn_type", operator = "neq", value = "micro_shorts" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "out_shown_today", operator = "is_false" }, { type = "clothing_slot", slot = "underwear", operator = "unequipped" }, { type = "worn_type", operator = "neq", value = "jeans" }, { type = "worn_type", operator = "neq", value = "leggings" }, { type = "worn_type", operator = "neq", value = "shorts" }, { type = "worn_type", operator = "neq", value = "micro_shorts" }, { type = "worn_type", operator = "neq", value = "track_pants" }, { type = "worn_type", operator = "neq", value = "gym_shorts" }, { type = "worn_type", operator = "neq", value = "sheer_leggings" }] }
 
 [[canvases.nodes]]
 id   = "seen"
@@ -51367,6 +51534,7 @@ time_progression_minutes = 2
 [[canvases]]
 id   = "gossip_spread_canteen"
 name = "Your name at the next table"
+release = 2
 description = "Gossip (DECISIONS 207): Your name at the next table. Someone who saw says it out loud while she is there (talk_gym); 1 in 3 on arrival, one a day. Letting him talk spreads it (campus_talk +1) and pays her to her stage's top; shutting him up spreads nothing; a friend in the room shuts him down first."
 
 [canvases.trigger]
@@ -51572,6 +51740,7 @@ time_progression_minutes = 0
 [[canvases]]
 id   = "gossip_spread_quad"
 name = "The guy from your row"
+release = 2
 description = "Gossip (DECISIONS 207): The guy from your row. Someone who saw says it out loud while she is there (talk_class); 1 in 3 on arrival, one a day. Letting him talk spreads it (campus_talk +1) and pays her to her stage's top; shutting him up spreads nothing."
 
 [canvases.trigger]
@@ -51718,6 +51887,7 @@ time_progression_minutes = 0
 [[canvases]]
 id   = "gossip_spread_party"
 name = "Somebody tells the kitchen"
+release = 2
 description = "Gossip (DECISIONS 207): Somebody tells the kitchen. Someone who saw says it out loud while she is there (talk_party); 1 in 3 on arrival, one a day. Letting him talk spreads it (campus_talk +1) and pays her to her stage's top; shutting him up spreads nothing; a friend in the room shuts him down first."
 
 [canvases.trigger]
@@ -51917,6 +52087,7 @@ time_progression_minutes = 0
 [[canvases]]
 id   = "gossip_ask_quad"
 name = "Three guys on the steps"
+release = 2
 description = "Gossip (DECISIONS 207): Three guys on the steps. Strangers who heard about her ask her to show them (campus_talk 25+). 1 in 3, one a day. Her answers by stage: let them look (under 20, to 19), her bra (20, to 39), her bare tits for a moment (60, to 79); a yes spreads it (campus_talk +1)."
 
 [canvases.trigger]
@@ -52162,6 +52333,7 @@ time_progression_minutes = 0
 [[canvases]]
 id   = "gossip_ask_party"
 name = "A guy who heard"
+release = 2
 description = "Gossip (DECISIONS 207): A guy who heard. Strangers who heard about her ask her to show them (campus_talk 60+). 1 in 3, one a day. Her answers by stage: let them look (under 20, to 19), her bra (20, to 39), her bare tits for a moment (60, to 79); a yes spreads it (campus_talk +1)."
 
 [canvases.trigger]
@@ -52492,6 +52664,7 @@ time_progression_minutes = 0
 [[canvases]]
 id   = "gossip_passby"
 name = "A stranger says your name"
+release = 2
 description = "Gossip (DECISIONS 207): at campus_talk 60, a stranger on the quad says her name and what he heard. 1 in 4, one a day. Her line by Exhibitionism band. Smiling back (Showing, 40) spreads it and pays to her stage's top."
 
 [canvases.trigger]
@@ -59462,6 +59635,7 @@ time_progression_minutes = 5
 [[canvases]]
 id   = "gym_desk"
 name = "The front desk"
+release = 2
 description = "The street gym's desk (gym.md, DECISIONS 225): check in for today with her card (the 30-day pass, $40) or a $5 day pass. Everything past the desk needs it."
 
 [canvases.trigger]
@@ -59547,6 +59721,7 @@ locationId = "street"
 [[canvases]]
 id   = "gym_towel"
 name = "Strip down to a towel"
+release = 2
 description = "The locker room: undress and wrap a towel round her, for the sauna (towel only) or the showers. 2 minutes."
 
 [canvases.trigger]
@@ -59580,6 +59755,7 @@ wardrobeEffects = [{ action = "remember_outfit", unless_wearing = ["towel", "sle
 [[canvases]]
 id   = "gym_shared_shower"
 name = "Take a shower"
+release = 2
 description = "The gym's shared showers (gym.md, DECISIONS 227): hygiene +50, 15 min, once a day. Her ladder by Exhibitionism: face the wall 0; stop covering 20 (+1 cap 39); face them 40 (+1 cap 59); soap slowly for them 60 (+1 cap 79). 1 in 3 someone hits on her (gym_hit_*), once a day."
 
 [canvases.trigger]
@@ -59799,6 +59975,7 @@ flagEffects = [{ targetType = "player", flag = "gym_shower_today", op = "set" }]
 [[canvases]]
 id   = "gym_hit_man"
 name = "A man hits on you"
+release = 2
 description = "Someone hits on her in the shared showers (gym.md, DECISIONS 227): A man hits on you. 1 in 3 of her showers, once a day; no money. Washed Bold 40 (+1 cap 59); the rest by the table."
 
 [canvases.trigger]
@@ -59952,6 +60129,7 @@ flagEffects = [{ targetType = "player", flag = "gym_shower_today", op = "set" },
 [[canvases]]
 id   = "gym_hit_woman"
 name = "A woman hits on you"
+release = 2
 description = "Someone hits on her in the shared showers (gym.md, DECISIONS 227): A woman hits on you. 1 in 3 of her showers, once a day; no money. Washed Bold 40 (+1 cap 59); the rest by the table."
 
 [canvases.trigger]
@@ -60105,6 +60283,7 @@ flagEffects = [{ targetType = "player", flag = "gym_shower_today", op = "set" },
 [[canvases]]
 id   = "gym_hit_couple"
 name = "A couple hits on you"
+release = 2
 description = "Someone hits on her in the shared showers (gym.md, DECISIONS 227): A couple hits on you. 1 in 3 of her showers, once a day; no money. Washed Bold 40 (+1 cap 59); the rest by the table."
 
 [canvases.trigger]
@@ -60228,6 +60407,7 @@ flagEffects = [{ targetType = "player", flag = "gym_shower_today", op = "set" },
 [[canvases]]
 id   = "gym_hit_two_men"
 name = "Two men hit on you"
+release = 2
 description = "Someone hits on her in the shared showers (gym.md, DECISIONS 227): Two men hit on you. 1 in 3 of her showers, once a day; no money. Washed Bold 40 (+1 cap 59); the rest by the table."
 
 [canvases.trigger]
@@ -60351,6 +60531,7 @@ flagEffects = [{ targetType = "player", flag = "gym_shower_today", op = "set" },
 [[canvases]]
 id   = "gym_hit_two_women"
 name = "Two women hit on you"
+release = 2
 description = "Someone hits on her in the shared showers (gym.md, DECISIONS 227): Two women hit on you. 1 in 3 of her showers, once a day; no money. Washed Bold 40 (+1 cap 59); the rest by the table."
 
 [canvases.trigger]
@@ -60474,6 +60655,7 @@ flagEffects = [{ targetType = "player", flag = "gym_shower_today", op = "set" },
 [[canvases]]
 id   = "gym_hit_group"
 name = "Everyone wants a turn"
+release = 2
 description = "Someone hits on her in the shared showers (gym.md, DECISIONS 227): Everyone wants a turn. 1 in 3 of her showers, once a day; no money. Washed Bold 40 (+1 cap 59); the rest by the table."
 
 [canvases.trigger]
@@ -60575,6 +60757,7 @@ flagEffects = [{ targetType = "player", flag = "gym_shower_today", op = "set" },
 [[canvases]]
 id   = "gym_sauna_sit"
 name = "Sit in the sauna"
+release = 2
 description = "The sauna: 20 minutes, energy +10, once a day (gym.md, DECISIONS 225). 1 in 4 the towel slips (gym_sauna_slip), the day's one gym accident."
 
 [canvases.trigger]
@@ -60620,6 +60803,7 @@ flagEffects = [{ targetType = "player", flag = "sauna_today", op = "set" }]
 [[canvases]]
 id   = "gym_sauna_slip"
 name = "The towel slips"
+release = 2
 description = "Random gym accident in the sauna (gym.md, DECISIONS 225): the towel comes undone. Fix it 0; from Exhibitionism 60, let it slip for three seconds, +1 to cap 79. Both finish the sit (20 min, energy +10)."
 
 [canvases.trigger]
@@ -60742,6 +60926,7 @@ flagEffects = [{ targetType = "player", flag = "sauna_today", op = "set" }, { ta
 [[canvases]]
 id   = "dex_01_free_session"
 name = "The trainer at the desk"
+release = 2
 description = "Dex step 1 (npc_dex.md): he has watched her in the mirror and offers a free session; his hands on her hips at the squat rack in front of the mirror wall. Exhibitionism +1, cap 19. Meets Dex."
 
 [canvases.trigger]
@@ -60964,6 +61149,7 @@ retry_after_days = 1
 [[canvases]]
 id   = "dex_02_the_mats"
 name = "The mats"
+release = 2
 description = "Dex step 2 (npc_dex.md): a $15 session ends on the mats, her leg on his shoulder and his hand on her inner thigh, higher every rep, two regulars watching. Corruption +1, cap 39."
 
 [canvases.trigger]
@@ -61164,6 +61350,7 @@ retry_after_days = 2
 [[canvases]]
 id   = "dex_03_another_way"
 name = "Keep your money"
+release = 2
 description = "Dex step 3 (npc_dex.md): before her session he tells her to keep her $15; the locker room, between clients, her hand on his cock until he comes. Corruption +1, cap 59. Opens \"another way\" on every session."
 
 [canvases.trigger]
@@ -61321,6 +61508,7 @@ retry_after_days = 2
 [[canvases]]
 id   = "dex_04_the_sauna"
 name = "The sauna, before close"
+release = 2
 description = "Dex step 4 (npc_dex.md): just before close he ends his shift in the sauna; the last regular leaves, he opens her towel and fingers her until she comes. Corruption +1, cap 79."
 
 [canvases.trigger]
@@ -61432,6 +61620,7 @@ retry_after_days = 2
 [[canvases]]
 id   = "dex_05_after_hours"
 name = "Stay after close"
+release = 2
 description = "Dex step 5, his top step (npc_dex.md): she stays when the gym locks up; in the dark locker room he bends her over the bench and fucks her, cum on her ass. Corruption +1, cap 79. After hours becomes his repeat."
 
 [canvases.trigger]
@@ -61538,6 +61727,7 @@ retry_after_days = 1
 [[canvases]]
 id   = "dex_after_hours"
 name = "The locker room with Dex"
+release = 2
 description = "Dex's repeat after his step 5 (npc_dex.md; DECISIONS 225): from his portrait on the gym floor, Mon-Sat 10:00-21:00, once a day. Between clients the locker room door has no lock; from 20:30 he locks up. Hungry, Corruption +1 to cap 79."
 
 [canvases.trigger]
@@ -61642,6 +61832,7 @@ flagEffects = [{ targetType = "player", flag = "dex_after_today", op = "set" }]
 [[canvases]]
 id   = "hub_dex_gym"
 name = "Dex"
+release = 2
 description = "Dex's hub on the gym floor (npc_dex.md): his line by her clothes; $15 sessions (Exhibitionism +1 cap 19 at his step 1, Corruption +1 cap 39 from step 2, Curious); from step 3, Bold, \"Keep your money.\" (+1 cap 59); from step 5, Hungry, after hours 20:30-21:00 (+1 cap 79). Once a day each."
 
 [canvases.trigger]
@@ -61892,6 +62083,7 @@ time_progression_minutes = 2
 [[canvases]]
 id   = "hub_dex_sauna"
 name = "Dex, in the sauna"
+release = 2
 description = "Dex in the sauna at the end of his shift (his step-4 row, 20:00-20:45): his line. His step 4 shows here instead while it is ready."
 
 [canvases.trigger]
@@ -61945,6 +62137,7 @@ when = [
   { flag = "dex_met", op = "is_false" },
 ]
 ready_canvas = "dex_01_free_session"
+release = 2
 heading = "The trainer at the gym"
 
 [[quest_cards]]
@@ -61957,6 +62150,7 @@ when = [
   { flag = "dex_met", op = "is_true" },
 ]
 ready_canvas = "dex_01_free_session"
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_dex"
@@ -61972,6 +62166,7 @@ goals = [
   { type = "trait", subject = "player", trait = "dex_sessions", op = "gte", value = 2, label = "Book sessions with Dex at the gym: $15, or another way" },
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 20, label = "Not yet: Dex waits until you're more curious (your Corruption)" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_dex"
@@ -61987,6 +62182,7 @@ goals = [
   { type = "trait", subject = "player", trait = "dex_sessions", op = "gte", value = 3, label = "Book sessions with Dex at the gym: $15, or another way" },
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 40, label = "Not yet: Dex waits until you're bolder (your Corruption)" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_dex"
@@ -62002,6 +62198,7 @@ goals = [
   { type = "trait", subject = "player", trait = "dex_sessions", op = "gte", value = 3, label = "Book sessions with Dex at the gym: $15, or another way" },
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 60, label = "Not yet: Dex waits until you're hungrier (your Corruption)" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_dex"
@@ -62016,11 +62213,13 @@ ready_canvas = "dex_05_after_hours"
 goals = [
   { type = "trait", subject = "player", trait = "corruption", op = "gte", value = 60, label = "Not yet: Dex waits until you're hungrier (your Corruption)" },
 ]
+release = 2
 
 [[quest_cards]]
 npc_id = "npc_dex"
 priority = 10
 text = "After hours with Dex: the gym floor at half past eight, Monday to Saturday."
+release = 2
 when = [
   { type = "trait", subject = "player", trait = "dex_step", op = "gte", value = 5 },
   { flag = "dex_met", op = "is_true" },
@@ -63077,3 +63276,16 @@ locationId = "home_ella_room"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "heavy_night", operator = "is_true" }] }
 effects = [{ targetType = "player", trait = "energy", op = "add", value = -30, clamp = true }]
 flagEffects = [{ targetType = "player", flag = "heavy_night", op = "unset" }, { targetType = "player", flag = "stage_exhibitionism_60_seen", op = "set" }]
+# =============================================================================
+# First Term — 5 · RELEASE 1 (DECISIONS 230): the release note card
+# =============================================================================
+
+[[quest_cards]]
+group = "story_goals"
+priority = 30
+release_until = 1
+text = "This is release 1 of First Term."
+tip = "Meet the family, find a job, pay Mark on Sunday. Her stats and the people around her stay where they start for now. They start moving in the next release."
+when = [
+  { flag = "opening_done", op = "is_true" },
+]

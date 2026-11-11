@@ -6940,7 +6940,7 @@ def run_gates(model, game, state=None):
     anchor = max(per_loc) if per_loc else 0
     anchor_pct = 100 * anchor / total if total else 0
     anchor_id = max(declared, key=lambda l: wl.get(l, 0)) if declared else "—"
-    empty = sorted(l for l in declared if not wl.get(l))
+    empty = sorted(l for l in declared if not wl.get(l) and l not in _locked_places(state))
 
     # DECLARE-THEN-CHECK (2026-08-15, study 6). If the ledger declares a per-location
     # budget, each location is judged against ITS OWN number and the global constants are
@@ -12046,7 +12046,7 @@ def _ck7_rows(model, game, state):
                             "offscreen", [], 0)
     else:
         eo, unread = _ck7_exit_only(game)
-        bad = sorted((lid, s) for lid, s in eo.items() if s and not _says_nothing_to_do(places.get(lid)))
+        bad = sorted((lid, s) for lid, s in eo.items() if s and not _says_nothing_to_do(places.get(lid)) and lid not in _locked_places(state))
         rows[name] = (
             not bad,
             f"{len(denom) - len(bad)}/{len(denom)} destinations offer something she can do alone "
@@ -17615,7 +17615,7 @@ def _group2_gates(gate, _N, model, game, state):
     # PLAYTEST 2026-11-09 (REPORT.md §1-3); defined above main().
     gate("a pay can happen", *_pay_can_happen(game, state))
     gate("the loop is open enough hours", *_routine_open_hours(model, game, state)); gate("a walk-in can happen", *_walkin_can_happen(game)); gate("a person's scene is inside their portrait", *_scene_in_portrait(game))
-    gate("a card line belongs to its person", *_card_line_is_its_own(game, state)); gate("a goal line reads the way it works", *_goal_line_reads_true(game))
+    gate("a card line belongs to its person", *_card_line_is_its_own(game, state)); gate("a goal line reads the way it works", *_goal_line_reads_true(game)); gate("every kept thing can happen", *_every_kept_thing_can_happen(game, state))
 
 
 # ── the group-2 lints: a LIST each, never a score (a hit needs a human to judge it) ─────────
@@ -18998,6 +18998,217 @@ _voice_only_sites_lines = _voice_only_sites
 
 def _voice_only_sites(game):   # noqa: F811 — the lines-by-level reads plus the level moments
     return _voice_only_sites_lines(game) + _level_moment_sites(game)
+
+
+# ── release slices (LO + advisor, 2026-11-11; first_term DECISIONS 230) ─────────────────────────
+# A game ships in slices: scripts/release_filter.py cuts the merged game to release N, so these gates read
+# only what release N ships. The ledger carries the matching facts: `release_page.release` (the release
+# being built), `release` on each ladder step (the release it ships in; untagged = 1) and
+# `release_page.locked` (places shown on the map but shut this release). Rebinding `_declared_ladders`
+# here, above main(), scopes every ladder reader at once (ladder_problems, lint_arc_ladder,
+# step_hint_problems, _ship_ladders, _seen_from_next_room) and keeps every cited line in place.
+def _release_of(state):
+    r = ((state or {}).get("release_page") or {}).get("release")
+    return r if isinstance(r, (int, float)) and not isinstance(r, bool) else None
+
+
+def _locked_places(state):
+    """Places the release page declares shown-but-shut this release (`release_page.locked`)."""
+    return {str(p) for p in (((state or {}).get("release_page") or {}).get("locked") or []) if p}
+
+
+_declared_ladders_all = _declared_ladders
+
+
+def _declared_ladders(state):   # noqa: F811 — only the steps this release ships
+    """A person with no step in this release (first_term release 1: Laura and Tom at step 0) has no ladder in it."""
+    rel = _release_of(state)
+    out = []
+    for who, lad in _declared_ladders_all(state):
+        if rel is not None and isinstance(lad.get("steps"), list):
+            lad = dict(lad, steps=[s for s in lad["steps"]
+                                   if not isinstance(s, dict) or (s.get("release") or 1) <= rel])
+            if not lad["steps"]:
+                continue
+        out.append((who, lad))
+    return out
+
+
+# The flags the engine sets itself, never through a flagEffect: a final step's `<canvas>_closed`
+# (v2.py:17222, setup.decideCanvasStep), a cheat row's `cheat_<id>` (v2.py:13741) and the three it seeds
+# true at a new game (v2.py:1157-1163).
+_ENGINE_FLAGS = re.compile(r"^(?:.+_closed|cheat_.+|game_started|debug_mode|dev_mode_enabled)$")
+
+
+def _every_kept_thing_can_happen(game, state):
+    """Gate `every kept thing can happen` (DECISIONS 230). A slice can keep a scene, a button, a quest goal or a
+    phone item that waits on something only cut content caused, and it never fires, with no error anywhere. Red
+    on every reader nothing in this build can satisfy: a flag read true (a condition, a days/hours-since wait, a
+    quest item) that no flagEffect sets and the engine does not set itself; a player or NPC trait read above the
+    highest value this build can pay it (a positive add's cap, a set, or its start); a trigger's `requires_npc`
+    or `npc` that is not in the build. A place on `release_page.locked` is shut on purpose, so its own entry
+    conditions are not read. Judged on whatever build it is handed, so the full game is checked too."""
+    sets = set()
+    raise_caps = collections.defaultdict(list)      # ("player", trait) / ("npc", npc, trait) -> reachable tops
+    for _p, d in _walk_paths(game):
+        for fe in d.get("flagEffects") or []:
+            if isinstance(fe, dict) and fe.get("flag") and fe.get("op", "set") == "set":
+                sets.add(str(fe["flag"]))
+        if "trait" in d and "op" in d and "operator" not in d and d.get("targetType") in ("player", "npc", None):
+            val, op = d.get("value"), d.get("op")
+            key = ("npc", d.get("npcId"), d["trait"]) if d.get("targetType") == "npc" else ("player", d["trait"])
+            if op == "add" and (isinstance(val, dict) or (isinstance(val, (int, float)) and val > 0)):
+                cap = d.get("cap")
+                raise_caps[key].append(float(cap) if isinstance(cap, (int, float)) else math.inf)
+            elif op == "set" and isinstance(val, (int, float)) and not isinstance(val, bool):
+                raise_caps[key].append(float(val))
+            elif op == "set" and isinstance(val, dict) and isinstance(val.get("max"), (int, float)):
+                raise_caps[key].append(float(val["max"]))       # a roll: { type = "random", min, max }
+        if isinstance(d.get("counter_trait"), str):             # the phone's posts pay their counter (followers)
+            raise_caps[("player", d["counter_trait"])].append(math.inf)
+    start = ((game.get("player") or {}).get("core_traits") or {})
+    npc_start = {(n.get("id"), k): v for n in game.get("npcs") or [] for k, v in (n.get("core_traits") or {}).items()}
+    npc_ids = {n.get("id") for n in game.get("npcs") or []}
+    rp_rent = ((game.get("settings") or {}).get("rent") or {})
+    engine_traits = {"money", "energy", "hygiene"} | ({"rent_short_weeks", "rent_late_fee", "paid_full_streak"}
+                                                       if rp_rent.get("enabled") else set())
+    if rp_rent.get("enabled"):
+        sets.add("rent_short")      # setup.RENT_SHORT_FLAG, set by the engine every short Sunday (v2.py:15992)
+
+    def top(key):
+        tops = list(raise_caps.get(key, []))
+        if key[0] == "player":
+            tops.append(float(start.get(key[1], 0) or 0))
+        else:
+            tops.append(float(npc_start.get((key[1], key[2]), 0) or 0))
+            tops.extend(raise_caps.get(("npc", None, key[2]), []))
+        return max(tops)
+
+    locked = _locked_places(state)
+    canvas_ids = {c.get("id") for c in game.get("canvases") or []}
+    rows = []
+
+    def check(item, where):
+        if not isinstance(item, dict):
+            return
+        flag = (item.get("flag_key") or item.get("flag")) if item.get("type") in ("flag", "days_since_flag",
+                                                                                  "hours_since_flag") \
+            else (item.get("flag") if isinstance(item.get("flag"), str) else None)
+        op = item.get("operator") or item.get("op")
+        if flag and (op == "is_true" or item.get("type") in ("days_since_flag", "hours_since_flag")):
+            closed_gone = flag.endswith("_closed") and flag[:-len("_closed")] not in canvas_ids
+            if flag not in sets and (closed_gone or not _ENGINE_FLAGS.match(flag)):
+                rows.append(f"{where}: waits on flag `{flag}`, which nothing in this build sets")
+            return
+        trait = item.get("trait_key") if item.get("type") == "trait" else (
+            item.get("trait") if item.get("type") in (None, "trait") and "op" in item else None)
+        val = item.get("value")
+        if not trait or trait in engine_traits or op not in ("gte", "gt", "eq") or \
+                not isinstance(val, (int, float)) or isinstance(val, bool):
+            return
+        key = ("npc", item.get("npc_id"), trait) if item.get("subject") == "npc" else ("player", trait)
+        best = top(key)
+        if (op == "gt" and best <= val) or (op in ("gte", "eq") and best < val):
+            rows.append(f"{where}: waits on {trait} {op} {val:g}, and this build can pay it {best:g} at most")
+
+    def walk_conds(node, where):
+        # a button shown locked waits on purpose ("(Next release)", DECISIONS 124): its conditions are not read
+        shown_locked = {id(d.get("conditions")) for _p, d in _walk_paths(node) if d.get("show_when_locked")}
+        for p, d in _walk_paths(node):
+            if id(d) in shown_locked:
+                continue
+            items = d.get("items") if isinstance(d.get("items"), list) and "version" in d else None
+            if items and str(d.get("logic") or "AND").upper() == "OR":
+                # an OR block waits only when every one of its items does (rent_short OR mark_money_week)
+                before = len(rows)
+                for it in items:
+                    check(it, where)
+                if len(rows) - before < len(items):
+                    del rows[before:]
+                continue
+            for it in items or []:
+                check(it, where)
+
+    for c in game.get("canvases") or []:
+        t = c.get("trigger") or {}
+        where = c.get("id") or "?"
+        for k in ("npc", "requires_npc"):
+            if t.get(k) and t[k] not in npc_ids:
+                rows.append(f"{where}: needs {t[k]}, who is not in this build")
+        walk_conds(c, where)
+    for q in game.get("quest_cards") or []:
+        where = f"card {q.get('npc_id') or q.get('group') or '?'}: {str(q.get('text') or '')[:40]}"
+        for it in (q.get("when") or []) + (q.get("goals") or []):
+            check(it, where)
+    walk_conds(game.get("phone") or {}, "phone")
+    for n in game.get("npcs") or []:
+        walk_conds(n.get("schedules") or [], f"{n.get('id')} schedule")
+    for l in game.get("locations") or []:
+        if l.get("id") in locked:
+            continue
+        walk_conds({k: v for k, v in l.items() if k in ("entry_conditions", "door")}, f"place {l.get('id')}")
+    rows = sorted(set(rows))
+    if not (game.get("canvases") or []):
+        return None, "no canvases", []
+    return not rows, (f"{len(rows)} kept thing(s) wait on something this build cannot cause" if rows else
+                      "every kept scene, button, card and phone item can happen in this build"), rows
+
+
+
+# DECISIONS 231 (LO, 2026-11-11, "yes" to the skill fix): the gates that read the ledger's cast, loops, key
+# clothes and week income read the slice being built, not the full plan. Without this a release build fails for
+# people, loops and clothes it does not ship (first_term release 1: Zoe's home, Ryan's step-8 loop, the locked
+# uniform, the $848 week the tight uniform pays). Rebinding `score` here, above main(), scopes every gate it runs
+# at once and keeps every cited line in place. The full game (no `release_page.release`) is read as before.
+def _slice_state(game, state):
+    """The ledger as release N sees it, or `state` itself when no release is being built:
+    - board.characters and board.map.homes keep only the people in the build;
+    - a ladder keeps only this release's steps, and when later steps were cut its loop is not owed yet
+      (the loop is the repeatable its LAST step opens, the-arc.md A1);
+    - board.wardrobe.key_items keep only clothes in the build that something in it can unlock (a garment
+      shown locked on a flag nothing sets is not hers this release);
+    - `release_page.week_income`, when declared, stands for board.economy.week_income."""
+    rel = _release_of(state)
+    if rel is None or not isinstance(state, dict):
+        return state
+    st = json.loads(json.dumps(state))
+    board = st.get("board") or {}
+    in_game = {n.get("id") for n in game.get("npcs") or [] if isinstance(n, dict)}
+    chars = []
+    for c in board.get("characters") or []:
+        if not isinstance(c, dict) or c.get("id") not in in_game:
+            continue
+        lad = c.get("ladder")
+        if isinstance(lad, dict) and isinstance(lad.get("steps"), list):
+            kept = [x for x in lad["steps"] if not isinstance(x, dict) or (x.get("release") or 1) <= rel]
+            if len(kept) < len(lad["steps"]):
+                lad["loop"] = f"none: its last step ships in a later release (release {rel} is built)"
+            lad["steps"] = kept
+        chars.append(c)
+    board["characters"] = chars
+    homes = (board.get("map") or {}).get("homes")
+    if isinstance(homes, dict):
+        board["map"]["homes"] = {k: v for k, v in homes.items() if k in in_game}
+    wd = board.get("wardrobe")
+    if isinstance(wd, dict) and isinstance(wd.get("key_items"), list):
+        ever = _flags_ever_set(game)
+        def _can_unlock(cl):
+            items = ((cl.get("conditions") or {}).get("items")) or []
+            return not any(isinstance(i, dict) and i.get("type") == "flag" and i.get("operator") == "is_true"
+                           and i.get("flag_key") not in ever for i in items)
+        ok = {cl.get("id") for cl in game.get("clothing") or [] if isinstance(cl, dict) and _can_unlock(cl)}
+        wd["key_items"] = [i for i in wd["key_items"] if i in ok]
+    wk = (st.get("release_page") or {}).get("week_income")
+    if isinstance(wk, (int, float)) and isinstance(board.get("economy"), dict):
+        board["economy"]["week_income"] = wk
+    return st
+
+
+_score_full_ledger = score
+
+
+def score(model, game, state=None, game_dir=None):   # noqa: F811 — the ledger as this release sees it
+    return _score_full_ledger(model, game, _slice_state(game, state), game_dir)
 
 
 def main():

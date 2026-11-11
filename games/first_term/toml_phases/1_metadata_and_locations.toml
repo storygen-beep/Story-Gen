@@ -26,6 +26,7 @@ flag_keys = [
   "business_lecturer_met",
   "business_retake_used",
   "cafe_accident_today",
+  "cafe_dresses_open",
   "cafe_job",
   "cafe_let_it",
   "cafe_shift_1_today",
@@ -384,6 +385,7 @@ flag_keys = [
   "selfie_today",
   "served_gary",
   "shop_curtain_today",
+  "shop_skirt_open",
   "shop_touch_today",
   "shower_today",
   "shower_unlocked",
@@ -431,7 +433,6 @@ flag_keys = [
   "touch_toilet_today",
   "town_event",
   "tv_loud",
-  "uniform_sexy",
   "vance_met",
   "vance_no_today",
   "vance_porch_look",
@@ -985,6 +986,7 @@ clothing_rules = [
 
 [[locations]]
 id          = "gym"
+release     = 2
 name        = "Gym"
 kind        = "thoroughfare"
 description = "The gym on your street: a desk out front, the floor, the locker room and a sauna at the back."
@@ -997,7 +999,21 @@ crossing_costs = { time = 5 }
 navigation_order = []
 
 [[locations]]
+id          = "gym"
+release_until = 1
+name        = "Gym"
+kind        = "destination"
+description = "The gym on your street. The door is locked, and the sign on the glass says: Coming soon."
+image       = "locations/gym.jpg"
+image_search_queries = ["gym"]
+entry_from  = "street"
+navigation_order = []
+entry_conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "gym_open", operator = "is_true" }] }
+blocked_message = "Coming soon."
+
+[[locations]]
 id          = "gym_floor"
+release     = 2
 name        = "Gym Floor"
 kind        = "destination"
 description = "The gym floor: racks of weights, a row of treadmills facing the mirror wall, mats in the corner and the desk by the door. Members and day passes only, and you train in gym clothes. What you train in is what everybody in that mirror sees."
@@ -1020,6 +1036,7 @@ clothing_rules = [
 
 [[locations]]
 id          = "gym_locker"
+release     = 2
 name        = "Locker Room"
 kind        = "destination"
 description = "The women's locker room: benches, a wall of lockers, three open showers at the back and a mirror that fogs. Change here, shower here. The door doesn't lock."
@@ -1035,6 +1052,7 @@ closed_text = "The gym's shut. Opens at six."
 
 [[locations]]
 id          = "gym_sauna"
+release     = 2
 name        = "Sauna"
 kind        = "destination"
 description = "The sauna: two cedar benches, a glass door, heat that takes your breath. It's mixed, and it's towels only. The regulars sit with their eyes half shut. Not all the way shut."
@@ -1050,6 +1068,7 @@ closed_text = "The gym's shut. Opens at six."
 
 [[locations]]
 id          = "gym_showers"
+release     = 2
 name        = "Showers"
 kind        = "destination"
 description = "The showers: one tiled room, a dozen heads along two walls, no stalls and no curtains, men and women together. Everyone showers together. It's that kind of gym."
@@ -1182,6 +1201,7 @@ closed_text = "The college gates are shut."
 
 [[locations]]
 id          = "college_mens_toilet"
+release     = 2
 name        = "Men's Toilet"
 kind        = "destination"
 description = "The men's toilets across from the women's: a row of urinals, two stalls and a mirror nobody looks in. There's nothing to do here right now."
@@ -1216,6 +1236,7 @@ clothing_rules = [
 
 [[locations]]
 id          = "hale_office"
+release     = 2
 name        = "Dr. Hale's Office"
 kind        = "destination"
 description = "Dr. Hale's office: books to the ceiling, one window, a desk with a photo of his wife on it. He holds office hours most afternoons, and late on Thursdays, when his wife picks him up after. Your Psychology grade is pinned to the door."
@@ -1238,6 +1259,7 @@ clothing_rules = [
 
 [[locations]]
 id          = "art_office"
+release     = 2
 name        = "Art Lecturer's Office"
 kind        = "destination"
 description = "The art lecturer's office: canvases stacked against the walls, charcoal dust on everything, sketches of bodies pinned up to dry. Your Figure drawing grade is on the door."
@@ -1260,6 +1282,7 @@ clothing_rules = [
 
 [[locations]]
 id          = "business_office"
+release     = 2
 name        = "Business Lecturer's Office"
 kind        = "destination"
 description = "The Business lecturer's office: filing cabinets, a clock that ticks, nothing personal. He offers an honest retake, but nothing else. Your Business grade is on the door."
@@ -1282,6 +1305,7 @@ clothing_rules = [
 
 [[locations]]
 id          = "ta_office"
+release     = 2
 name        = "TA's Office"
 kind        = "destination"
 description = "The Biology TA's office: a shared room with two desks, a skeleton on a stand and a kettle. She keeps her door half open. Your Biology grade is on it."
@@ -1383,6 +1407,7 @@ clothing_rules = [
 
 [[locations]]
 id          = "zoe_flat"
+release     = 2
 name        = "Zoe's Flat"
 kind        = "thoroughfare"
 description = "Zoe's flat, three floors up. Her front door opens into the living room."
@@ -1397,6 +1422,7 @@ hidden_until = { flag = "zoe_met" }
 
 [[locations]]
 id          = "zoe_apartment"
+release     = 2
 name        = "Zoe's Living Room"
 kind        = "destination"
 description = "Zoe's living room: a couch, a balcony door, fairy lights and music always on. The kitchen, the bathroom and her bedroom open off it. On Fridays the whole flat is the party: music, drinks, half of campus and dares."
@@ -1418,6 +1444,7 @@ clothing_rules = [
 
 [[locations]]
 id          = "zoe_kitchen"
+release     = 2
 name        = "Zoe's Kitchen"
 kind        = "destination"
 description = "Zoe's kitchen: a counter crowded with bottles, a fridge covered in photos, and cups that are never clean. On party nights the drinks come from here."
@@ -1432,6 +1459,7 @@ hidden_until = { flag = "zoe_met" }
 
 [[locations]]
 id          = "zoe_bathroom"
+release     = 2
 name        = "Zoe's Bathroom"
 kind        = "destination"
 description = "Zoe's bathroom: a mirror ringed with bulbs and a shelf of make-up you could live on. Fix your face here. On party nights there's always somebody banging on the door."
@@ -1446,6 +1474,7 @@ hidden_until = { flag = "zoe_met" }
 
 [[locations]]
 id          = "zoe_bedroom"
+release     = 2
 name        = "Zoe's Bedroom"
 kind        = "destination"
 description = "Zoe's bedroom: an unmade bed, clothes on every surface and a full-length mirror. Her wardrobe is where the good dresses are, and she lends them when she's here. On party nights the door stays shut unless Zoe opens it."
@@ -1460,6 +1489,7 @@ hidden_until = { flag = "zoe_met" }
 
 [[locations]]
 id          = "party_house"
+release     = 2
 name        = "Party House"
 kind        = "destination"
 description = "A big house at the edge of town where Zoe's friends throw Saturday nights. Music inside, a garden out back and a hot tub steaming under the stars. Zoe's friends only."
@@ -1546,11 +1576,20 @@ end_time   = "22:00"
 activity   = "home in his room, evening"
 
 [[npcs.schedules]]
+release    = 2
 location   = "home_ryan_room"
 weekdays   = [4]
 start_time = "18:00"
 end_time   = "22:00"
 activity   = "in his room with Kayla"
+
+[[npcs.schedules]]
+release_until = 1
+location   = "home_ryan_room"
+weekdays   = [4]
+start_time = "18:00"
+end_time   = "22:00"
+activity   = "in his room"
 
 [[npcs.schedules]]
 location   = "home_living_room"
@@ -1571,6 +1610,7 @@ show_traits  = ["warmth"]
 core_traits  = { warmth = 50 }
 
 [[npcs.schedules]]
+release    = 2
 location   = "home_hall"
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "23:00"
@@ -1793,6 +1833,7 @@ when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 
 [[npcs]]
 id           = "npc_zoe"
+release      = 2
 name         = "Zoe"
 description  = "Your college friend, 19. Pulls you out, dares you instead of asking. Age 19."
 portrait     = "portraits/zoe.jpg"
@@ -1949,6 +1990,7 @@ when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 
 [[npcs]]
 id           = "npc_jake"
+release      = 2
 name         = "Jake"
 description  = "A guy from campus, 20. On the team. Wants a girlfriend he can show off. Age 20."
 portrait     = "portraits/jake.jpg"
@@ -1966,6 +2008,16 @@ activity   = "with the team"
 when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_met", operator = "is_true" }] }
 
 [[npcs.schedules]]
+release    = 2
+location   = "zoe_apartment"
+weekdays   = [4]
+start_time = "19:00"
+end_time   = "00:00"
+activity   = "at Zoe's party"
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "jake_met", operator = "is_true" }] }
+
+[[npcs.schedules]]
+release_until = 1
 location   = "zoe_apartment"
 weekdays   = [4]
 start_time = "19:00"
@@ -2270,6 +2322,7 @@ when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 
 [[npcs]]
 id           = "npc_kayla"
+release      = 2
 name         = "Kayla"
 description  = "Ryan's girlfriend, 21. Wants the house to know about her. Age 21."
 portrait     = "portraits/kayla.jpg"
@@ -2295,6 +2348,7 @@ when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 
 [[npcs]]
 id           = "npc_claire"
+release      = 2
 name         = "Claire"
 description  = "Dr. Hale's wife, 38. Picks him up after office hours. Age 38."
 portrait     = "portraits/claire.jpg"
@@ -2331,6 +2385,7 @@ core_traits  = { want = 0 }
 
 [[npcs]]
 id           = "npc_cocky_guy"
+release      = 2
 name         = "The cocky guy"
 description  = "Jake's teammate, 21. In your Figure drawing class. Trades answers for a look. Age 21."
 portrait     = "portraits/cocky_guy.jpg"
@@ -2339,6 +2394,7 @@ role         = "Jake's teammate"
 core_traits  = {  }
 
 [[npcs.schedules]]
+release    = 2
 location   = "zoe_apartment"
 weekdays   = [4]
 start_time = "23:00"
@@ -2347,6 +2403,25 @@ activity   = "at Zoe's party"
 when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cocky_guy_met", operator = "is_true" }] }
 
 [[npcs.schedules]]
+release_until = 1
+location   = "zoe_apartment"
+weekdays   = [4]
+start_time = "23:00"
+end_time   = "00:00"
+activity   = "at Zoe's party"
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cocky_guy_met", operator = "is_true" }] }
+
+[[npcs.schedules]]
+release    = 2
+location   = "zoe_apartment"
+weekdays   = [5]
+start_time = "00:00"
+end_time   = "02:00"
+activity   = "at Zoe's party"
+when       = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "cocky_guy_met", operator = "is_true" }] }
+
+[[npcs.schedules]]
+release_until = 1
 location   = "zoe_apartment"
 weekdays   = [5]
 start_time = "00:00"
@@ -2381,6 +2456,7 @@ core_traits  = {  }
 
 [[npcs]]
 id           = "npc_dex"
+release      = 2
 name         = "Dex"
 description  = "The trainer at the gym on your street, 34. Picks the clients who let him touch. Age 34."
 portrait     = "portraits/dex.jpg"

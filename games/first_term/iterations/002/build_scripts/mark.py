@@ -492,7 +492,7 @@ MARK_ROOM_WORDS = {
         shirt="The wrench slows in his hand. His eyes are on the hem of your sleep shirt, and he misses the bolt.",
         skirt="That skirt's got no business in a garage. Stand where I can see it.",
         nobra="Stand over there. I keep dropping the same damn bolt.",
-        under="You walk in here in your underwear, and he wipes his hands and says nothing about it.",
+        under="You're in his garage in your underwear, and he wipes his hands and says nothing about it.",
         normal="That place paying you yet, or just feeding you?",
         sexy="That's for the customers, is it? Don't get oil on it.",
         soft="He used to bark at you from this bench. Now he puts the wrench down and asks what you need.",
@@ -803,6 +803,7 @@ out.append(mark_hub("hub_mark_garage", G_, "Mark, in the garage", "the garage", 
      dict(plain_costs=[{"trait": "energy", "value": 5}],
           after=("Load the machine.", [P("He looks at you like you're going to break the machine, and he goes back to his bench."),
                                        P("You bend over the basket and feed the drum, and behind you the wrench stops. When you straighten up, Mark is looking at your ass, and he goes back to the engine part like he never stopped."),
+                                       T("He looked, and he won't say it. Not yet."),   # DECISIONS 233 (re-read, low heat: the not-yet)
                                        D(M, "Whites with whites. Fine. You proved it.")], "Leave him to his bench.", "home_hall"),
           tease=LAUNDRY_BASKET, teases=LAUNDRY_TEASES,
           # the written no: his "Whites with whites" gets an answer when she takes the basket away

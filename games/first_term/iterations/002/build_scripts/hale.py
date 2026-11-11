@@ -387,9 +387,10 @@ out.append({
 # Each room its own lines (gate one pool, one place). The library has her most hours, so it keeps the first words of
 # the pool; the lecture hall keeps "He'll lose his place again", the line that belongs to it.
 NADIA_LINES = {
-    "library": POOL(D(N, "Thursday office hours are a trap, you know that?"),
+    "library": POOL(dict(D(N, "Thursday office hours are a trap, you know that?"), release=2),   # DECISIONS 231 (reader): points at a place or person release 1 cuts
                     D(N, "You want my notes? You can have my notes."), D(N, "Sit. I'll tell you which lecturers to avoid."), pid="nadia_lines"),
-    "canteen": POOL(D(N, "Don't get the soup. And don't take his Thursday slot either."),
+    "canteen": POOL(dict(D(N, "Don't get the soup. And don't take his Thursday slot either."), release=2),   # DECISIONS 231 (reader): points at a place or person release 1 cuts
+                    dict(D(N, "Don't get the soup."), release_until=1),
                     D(N, "Everyone at this table has a story about a lecturer. Ask me which ones are true."),
                     D(N, "Have my roll. I only got the salad so I could feel better about the roll."), pid="nadia_lines_canteen"),
     "lecture_hall": POOL(D(N, "Watch his left hand. He turns the ring when he's looking at someone."),

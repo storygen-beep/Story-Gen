@@ -231,37 +231,10 @@ out.append({
             # after 22:00 the café is shut and Tom is closing up (his 22:00-23:00 row): no work lines (part 10, reader)
             G(cond(tod("22:00", "23:00")), P("The sign's turned to CLOSED. Tom's putting the chairs up on the tables.")),
         ], [go("Back to work.", loc="cafe", mins=30, cond_=cond(UNIFORM, tod("08:00", "21:30"))),
-            # a build addition (release 1): with the uniform rule cut, asking is the only way to the tight top; her choice
-            go("Ask for the tight dress.", node="tight", mins=2,
-               cond_=cond(trait("exhibitionism", "gte", 20), {"type": "clothing_item", "item_id": "cafe_uniform_sexy", "operator": "not_owned"}, tod("08:00", "22:00"))),
-            # DECISIONS 206 (LO: "She will buy. Completely her decision"): her ask, his stock, her money. He has them
-            # because customers ask (the café's footfall, as CoT's bar vibe brings its uniforms in); he never offers.
-            go("Ask Tom for something shorter.", node="short", mins=2,
-               cond_=cond(trait("exhibitionism", "gte", 40), trait("cafe_footfall", "gte", 10), SHORT_NOT_OWNED, tod("08:00", "22:00"))),
-            go("Ask Tom for something lower cut.", node="lowcut", mins=2,
-               cond_=cond(trait("exhibitionism", "gte", 60), trait("cafe_footfall", "gte", 25), SHORT_OWNED, LOW_NOT_OWNED, tod("08:00", "22:00"))),
+            # DECISIONS 230 (LO, 2026-11-11: "Uniform are not bought from tom but from clothing store"): the three
+            # showy uniforms are on the clothes shop rail now (0_systems_spec.toml [[clothing]]); Tom no longer sells them.
             go("Sit at the counter a while.", loc="cafe", mins=20, cond_=cond({"type": "worn_type", "operator": "neq", "value": "cafe_uniform"}, tod("08:00", "21:30"))),
             go("Leave him to the till.", loc="town")]),
-        node("tight", "The tight dress", [
-            P("Tom reaches under the counter without a word and puts it on the counter between you: the black dress, tighter than the other one and cut for your tits. His eyes go to your chest once. He makes them go back to the till."),
-            D(TM, "Your choice. They tip more for it. They grab more too."),
-        ], [go("Take it.", loc="cafe", mins=3, flags=[fset("uniform_sexy")], wardrobe=[{"action": "add", "item_id": "cafe_uniform_sexy"}]),
-            # reader a3 #51 (DECISIONS 131): the written no. No pay: it's the uniform she turns down, not him.
-            go("Leave it on the counter.", node="leave_it", mins=1)]),
-        node("short", "Something shorter", [
-            P("Tom looks at you for a long second. Then he reaches under the counter and puts a folded dress on it, black like the others but half the length. His eyes go down to your thighs, to where it would stop, and come back up slow."),
-            D(TM, "People keep asking if the girls come in anything shorter. I keep one back. Thirty dollars. Your call, not mine."),
-        ], [go("Buy it ($30).", loc="cafe", mins=3, costs=[{"trait": "money", "value": 30}],
-               wardrobe=[{"action": "add", "item_id": "cafe_uniform_short"}]),
-            go("Leave it on the counter.", node="leave_it", mins=1)]),
-        node("lowcut", "Something lower", [
-            P("He doesn't even look up from the till first. He reaches under the counter, and the dress he puts down is cut in a V that goes most of the way to the belt. He looks once at your tits, at where it would open on them, and then hard at the till."),
-            D(TM, "Forty. Nothing goes under it, so don't ask me for a bra that fits. Your call."),
-        ], [go("Buy it ($40).", loc="cafe", mins=3, costs=[{"trait": "money", "value": 40}],
-               wardrobe=[{"action": "add", "item_id": "cafe_uniform_lowcut"}]),
-            go("Leave it on the counter.", node="leave_it", mins=1)]),
-        node("leave_it", "Not the dress", [D(TM, "Your call."), P("He folds it back under the counter without looking at it, or at you.")],
-             [go("Leave him to his folding.", loc="cafe", mins=1)]),
     ]})
 
 # ── Gary's hub (booth four, his hours) ──
@@ -315,6 +288,20 @@ text = ("# =====================================================================
 for _c in out:
     if _c["id"] in ['tom_06_after_close_kiss', 'tom_after_close']:
         mark_late(_c, 'late_shift', split=False)
+# DECISIONS 231 (LO, 2026-11-11): tom_after_close is gone, so nothing set late_shift and Laura's "Tom kept you
+# late?" (laura.py LATE_REASON_LINES) never showed. Walking out while he closes up (his hub, 22:00-23:00) sets it.
+for _c in out:
+    if _c["id"] == "hub_tom_cafe":
+        for _n in _c["nodes"]:
+            _kept = []
+            for ch in _n["choices"]:
+                if ch.get("text") != "Leave him to the till.":
+                    _kept.append(ch)
+                    continue
+                _tmp = {"nodes": [{"choices": [ch]}]}
+                mark_late(_tmp, "late_shift", split=True)   # a 22:00-06:00 copy sets it, a 06:00-22:00 copy doesn't
+                _kept += _tmp["nodes"][0]["choices"]
+            _n["choices"] = _kept
 
 # (Iteration 002, part 7: no presence check on Gary here. Tom B 4 is where she meets him, and his row
 # waits for gary_met, so a check made the step unreachable: found by reach_all.py.)

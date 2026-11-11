@@ -29,6 +29,7 @@ flagEffects = [ { targetType = "player", flag = "laura_call_today", op = "set" }
 # ── the dean's office calls her in (npc_dean sheet: a call caused by her first trouble) ──
 [[phone.calls]]
 id           = "dean_call_complaints"
+release      = 2   # DECISIONS 230: the dean's calls are a later release
 app          = "calls"
 caller       = "npc_dean"
 accept       = "dean_warning"
@@ -48,6 +49,7 @@ effects = [ { targetType = "player", trait = "complaints", op = "add", value = 1
 
 [[phone.calls]]
 id           = "dean_call_grades"
+release      = 2   # DECISIONS 230: the dean's calls are a later release
 app          = "calls"
 caller       = "npc_dean"
 accept       = "dean_warning"

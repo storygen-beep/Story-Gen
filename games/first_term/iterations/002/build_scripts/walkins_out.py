@@ -297,7 +297,7 @@ walkin("walkin_canteen_nadia", "Nadia sits down", "canteen",
     "She leans in.",
     [D(N, "Word of advice. Don't sit in the front row for Hale. He learns the front row's names first, and then he learns their legs."),
      # reader batch 5 (pass 3): her line moves with his step: before his invite, a warning about his Thursday office
-     G(cond(trait("hale_step", "lt", 2)), D(N, "And if he ever asks you to his office on Thursdays, say you're busy.")),
+     dict(G(cond(trait("hale_step", "lt", 2)), D(N, "And if he ever asks you to his office on Thursdays, say you're busy.")), release=2),   # DECISIONS 233 (re-read): points at a place release 1 cuts
      G(cond(trait("hale_step", "gte", 2)), D(N, "He knows yours already, doesn't he? I've seen him look.")),
      P("She stabs a tomato and doesn't look up.")],
     [go("Eat with her.", loc="canteen", mins=15)],
@@ -511,14 +511,16 @@ walkin("walkin_hall_hale", "Before the lecture", "lecture_hall",
         res("h_seat", "A seat", [P("You go and sit in the third row while the seats fill up round you."), D(H, "Third row. Sensible."),
                                  P("He sets up his laptop at the lectern and doesn't look your way again, but you can tell it costs him."),
                                  # reader pass 4 b4: the hook (his office hours, Thursday 17:00-19:30, people_data.py)
-                                 T("Thursday at five he has office hours, just him and a door that shuts. You could bring him a question.")],
+                                 dict(T("Thursday at five he has office hours, just him and a door that shuts. You could bring him a question."), release=2),   # DECISIONS 231 (reader): points at a place or person release 1 cuts
+                                 # DECISIONS 233 (re-read, the hook): release 1's way on, true of this walk-in (he is in before the rows fill)
+                                 dict(T("He's always in before the rows fill. Come early again, and see if he looks up this time."), release_until=1)],
             "Take notes.", "lecture_hall", 5),
         res("h_desk", "The front desk", [P("You hop up onto the front desk, right beside his lectern, and cross your legs."),
                                          G(cond(SKIRT), P("Your skirt rides up your thighs, but you don't pull it down.")),
                                          P("He plugs his laptop in with his back to you. Then he turns round, and his eyes go straight to your legs and stay there, and the pen stops clicking. Behind you the rows are filling, and they can all see where he's looking."),
                                          D(H, "That's my desk."), ME("I'm only keeping it warm for you."), D(H, "Front row, @player. Now. Please."),
                                          P("He doesn't tell you to get off it. He goes red to the collar and waits until you slide down and take the front row, right in front of him."),
-                                         T("Thursday at five he has office hours, with the door shut. You want to see how red he goes in there.")],
+                                         dict(T("Thursday at five he has office hours, with the door shut. You want to see how red he goes in there."), release=2)],   # DECISIONS 231 (reader): points at a place or person release 1 cuts
             "Take notes.", "lecture_hall", 5)],
     )
 for days, a, b in (((0, 2, 4), "08:30", "08:45"), ((3,), "13:00", "13:15")):

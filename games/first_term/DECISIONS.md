@@ -869,3 +869,67 @@ What a player loses: a save made before this with `cafe_name` below 0 needs that
 1. **Stage cards** (`extras.py`): each line is one act with two or three places, in the CoT shape ("Let people look at you: at home, in class, at the café. Don't cover up"). The Covered card's 50-word text is now 20 words.
 2. **Six stage moments** (`stages.py`, `meters.md` Rule 7): Curious, Bold, Hungry, Daring, Showing, Watched. Cupid's Way is the model. The first night after she crosses, going to bed plays the stage's own sleep, and the morning screen says who she is now and what opens. They pay nothing.
 3. **The skill** (the-meters.md, gates.py): a level moment's meter read is not climb. First try matched too much; tightened to one-time, narration-only, never moves its meter, its flags read nowhere else. It matches only these 6, and the last commit's build counts the same. | LO, 2026-11-11 |
+| 230 | Release slices: release 1 is a small first look, cut from the full game, and nothing is deleted (LO and the advisor's release plan; LO's rulings in chat, 2026-11-11, then "Go").
+1. **How**: `scripts/release_filter.py` runs between the merge and the package. It cuts `7_final_game.toml` to one release. Inputs:
+   - `release` / `release_until` tags (`release_map.py`; `step_cards`; `gen_world.py`; `0_systems_spec.toml`)
+   - each ladder step's `release` (`v2_state.json`)
+   - `release_page.meters`
+
+   A plain build keeps everything and only strips the tags. `RELEASE=1 zsh build_scenes.sh` builds release 1 without `--dev`.
+2. **People**: Ryan 1 (the opening), Mark 1 (the first Sunday), Hale 1 (the first lecture). Laura and Tom stay at step 0: Tom's job ask and Laura's everyday life stay, and Laura's Tuesday invite buttons go. Zoe, Jake, Dex, Nadia, the cocky guy, Claire and Kayla ship later. The dean stays only for the opening's welcome ("Go to campus." walks her to him, `2_one_shots.toml:587`); his weekly rows, hub and calls are later.
+3. **Meters** (LO: "I dont want her changing in this release"; "Keep everything at zero her meters and moods all"):
+   - Corruption, Exhibitionism, every man's `want` and campus talk are capped at 0.
+   - Warmth and power are held at their start (50). Needs stay free.
+   - Everything that needs more is cut from the file, not hidden.
+4. **Places (27)**: home (11 rooms), the street, the corner shop, the park, the landlord's house, town, the café, the clothes shop. School is campus, quad, lecture hall, canteen, library, the women's toilet, plus the faculty floor and the dean's office for the opening. The gym is on the street map, locked: "Coming soon." (`release_page.locked`).
+5. **Café**: the job and level 1 shifts. No level 2/3 and no accidents (LO: "Shift only level 1", "Cut cafe accidents too"). The three showy uniforms move to the clothes shop rail **in every release** (LO: "Uniform are not bought from tom but from clothing store"), which reverses DECISIONS 206. Release 1 shows them locked; from release 2 they sell at their stage. Tom's ask rows are removed.
+6. **School**: no class accidents and no exams (LO: "I say cut these accidents too", "Exams goes to the next release too"). No offices, gossip or campus-talk goal.
+7. **Cards**: a release 1 note at the top of the Quests page. Each person's card stops where release 1 does ("…goes on / starts in the next release"). Texts are drafts in `release_map.py`, for LO to sign.
+8. **The skill** (author-game-v2 CHANGELOG 2026-11-11): the ladder gates read only the steps this release ships, a declared locked place isn't an empty one, and the new gate *every kept thing can happen*.
+What a player loses: in release 1 she does not change and nobody's feelings move. Every scene past step 1 waits. A release 1 save loads in the full build: tested headless, mid-scene, 0 errors; the people and counters a later release adds arrive by the save backfill. | LO, 2026-11-11 |
+| 231 | LO's answers to the 11 release 1 questions (2026-11-11: "1 yes · 2 bring her back · 3 yes · 4 make it 40 60 and 80 · 5 yes · 6 yes · 7 yes · 8–11 yess").
+1. **The card texts are signed**: the Quests page note and each person's "…next release" card (`release_map.py`). Renaming the engine's "Finished" heading is left for later.
+2. **Nadia is back** in release 1 as a classmate (`PEOPLE_RELEASE`); her three hubs ship.
+3. **Ryan's room** in release 1 stops at "You knock to go in." (`[release_overrides.1]`; the filter now takes a list item by id, `locations[home_ryan_room].description`). "Two knocks" comes with his later steps.
+4. **The shop dresses** are $40, $60 and $80 (tight, short, low-cut), locked in release 1. `job.md` updated and signed by LO 2026-11-11 ("Sign them").
+5. **SP7** carries a release 1 row: Ryan 1 · Mark 1 · Hale 1. The full plan is kept in the row below it. Re-signed 2026-11-11.
+6. **The frozen-meter fails are LO's decision**: 11 `decided` rows ("R1 frozen · …", later release) with one promise, "her meters, the men's want and campus talk move again (release 2)". The gates are unchanged.
+7. **The skill reads the slice** (author-game-v2 CHANGELOG, "release slices, part 2"): with `release_page.release` set, the gates read the ledger's cast, homes, loops, key clothes and week income for the build. `release_page.week_income` is release 1's own ceiling ($585).
+8. **The dean's office hangout ships** with his weekly rows. So do the notice on his door and his walk-in on it (LO: "Nope dont cut Dean walk in"). In release 1 the notice reads "Your name isn't on it. Not yet." His warning and calls stay later.
+9. **The garage line** now reads "You're in his garage in your underwear, …". It is true on every visit, so it needs no first-time check; the arrival words were what the gate caught. `tv_loud` is left as it is (a `decided` waive).
+10. **`late_shift` is set again**: walking out of Tom's hub while he closes up (22:00–23:00) sets it, so Laura's "Tom kept you late?" shows in the full game. In release 1 that scene (`laura_02_home_late`) and Laura's waiting-up row ship later. They are her story, and the scene's lie names Zoe.
+11. **The short skirt** is locked on release 1's rail ("Not yet. (Needs Exhibitionism 20.)"), since the street turns it away below 20. It was the only one she could buy and not wear out; every other showy piece already needs a meter to buy.
+LO accepted the three slice fails from cut content ("Park bench and women toilet cut is fine", "Intelligence and shifts are fine", "Marks debt is fine too"), recorded as `decided` waives: the park bench and the women's toilet roll no event (both were Zoe's walk-ins); `intelligence` and `cafe_shifts_worked` are raised and read by nothing kept (exams, level 2 shifts); the debt offer opens nothing kept. Also: "Zoe" (2) and "Jake" (1) in the engine's own code comments in the HTML. | LO, 2026-11-11 |
+| 232 | The engine's code comment no longer names Zoe and Jake (LO, 2026-11-11: "1 yes"). The note above `setup.getNpcsPresentAtLocations` (`v2.py:6323-6325`) ships in every game's HTML, so anyone reading the source could see later-release names. It's reworded line for line, so no line moves and no game plays differently. This is the one exception to the release plan's "no change to v2.py". Release 1's HTML: Zoe 0, Jake 0, Dex 0, Kayla 0. | LO, 2026-11-11 |
+| 233 | What the release 1 readers and the play-through found, and the fixes (2026-11-11, after LO's "Go ahead" on the reader and player runs).
+1. **The filter's bug** (`scripts/release_filter.py`): an always-true band in a line chain lost its condition, and the engine renders an empty group as the chain's `<<else>>` (`v2.py` `_render_group_chain`). So her top-band thoughts and the men's high-want reactions showed at 0, in about 40 scenes. Now the band keeps one condition in its place; a stand-alone always-true line is unwrapped.
+2. **Leaks of a frozen number, now stripped:** want raises in triggers' `pre_substitution_effects` (Ryan's towel, Mark's reach and asleep, Tom's machine, sister and pastries); every fall (Tom's want −1 on a no-show or an ignored text); the beer's "Tipsy" boost (Corruption and Exhibitionism +20 for 3 h). Two more `decided` rows (*a no-show costs*, *ignoring a thread costs*) fall under LO's frozen-meter ruling (DECISIONS 231, 6).
+3. **A cut person's dialogue goes:** the filter drops lines spoken by anyone the release doesn't ship (the cocky guy in Figure drawing), and the line that answered him is release 2.
+4. **Lines that pointed at cut places or people**, now release 2:
+   - Zoe's "Find me on the quad" in Biology
+   - Laura's Tuesday "Come to my room after"
+   - Nadia's two Thursday-office lines (release 1 keeps "Don't get the soup.")
+   - Hale's "Thursday at five" thoughts and "Come and see me on Thursday" (release 1: "Catch up.")
+   - the TA's "My door's open"
+   - the Business lecturer's retake line
+   - the three lecturers' card tips (release 1 names the lecture hall)
+5. **The play-through** (two in-game weeks, 1,502 clicks):
+   - 0 page errors, 0 dead ends, 0 no-op buttons.
+   - Every day-part has 9–19 places with something to start.
+   - Both Sundays' $75 is paid from café shifts ($10–12 each).
+   - Ryan 1, Hale 1 (the opening) and Mark 1 (first Sunday) all fire.
+
+   Seen and left as they are:
+   - The wait buttons move the clock without redrawing the room (engine, `v2.py:7043-7046`).
+   - Breakfast and dinner need an empty kitchen, so a weekday rarely offers them.
+   - The five main people sit under "Finished" on the Quests page (the label LO left for later, DECISIONS 231, 1).
+
+After: release 1 is 95 pass, 18 decided, 0 fail; shape 21 pass. The full game is 117 pass, 0 fail. Tests: 1063 passed. In the HTML, Zoe, Jake, Kayla, Dex and "Tipsy" are all 0. | LO, 2026-11-11 |
+| 234 | The re-read of the 48 scenes that failed (2026-11-11): 40 of the 44 earlier FAILs pass on the fixed build; the band order holds in all 49 chains. Fixed from what it found:
+1. The TA's Biology-class line "my door's open Tuesday to Friday afternoons" is release 2; release 1 says "ask me after class."
+2. Nadia's "if he ever asks you to his office on Thursdays" (her canteen walk-in) is release 2.
+3. Figure drawing's hook, lost with the cocky guy's lines: release 1 says he's at the easel beside hers every class, on both answers.
+4. Hale's early walk-in hook, lost with the office-hours thought: release 1's thought is "He's always in before the rows fill. Come early again, and see if he looks up this time."
+5. The garage laundry gets its not-yet: "He looked, and he won't say it. Not yet." (every release).
+6. The no-panties breeze line no longer fires in track pants, gym shorts or sheer leggings (every release).
+After: release 1 is 95 pass, 18 decided, 0 fail; shape 21 pass. The full game is 117 pass, 0 fail. Leak grep: 0 for Zoe, Jake, Kayla, Dex, Tipsy and the office lines. | LO, 2026-11-11 |

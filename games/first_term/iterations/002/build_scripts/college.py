@@ -312,8 +312,11 @@ COVERED = {
     "figure": {"look": [P("He's not even pretending now. Every time you shade, his eyes go down the front of your low-cut top to your tits.")],
                "result": [P("You keep shading and leave it as it is. He grins at you over his pad."),
                           D(COCKY, "Best view in the room. Don't tell her."),
-                          P("He means the model. Not yet, and not in front of the lecturer.")],
-               "no": [P("You pull your top straight and turn your easel an inch."), D(COCKY, "Spoilsport. Same easel next week, though.")],
+                          dict(P("He means the model. Not yet, and not in front of the lecturer."), release=2),   # DECISIONS 231: it answers his line, and he is release 2
+                          # DECISIONS 233 (re-read, the hook): his lines are release 2, so release 1 says what comes next itself
+                          dict(P("He's at the easel beside yours every class. Next week he'll be there again, and so will his eyes."), release_until=1)],
+               "no": [P("You pull your top straight and turn your easel an inch."), D(COCKY, "Spoilsport. Same easel next week, though."),
+                      dict(P("He shrugs and goes back to his pad. He'll be at the same easel next week."), release_until=1)],   # DECISIONS 233
                "thoughts": ["He's an idiot. It meant nothing.", "He looked, and you let him.",
                             "You let him look, and he knew you knew.", "You'll take the same easel next week."]},
 }
@@ -349,7 +352,8 @@ out.append(class_row(
      G(cond(flag("study_guy_met")), P("The study guy is already in the row behind you with three highlighters out.")),
      G(cond(flag("rival_met")), P("The rival girl sits where she can watch you.")),
      D(BUS, "Phones away. Eyes up. This is on the exam."),
-     G(cond(trait("grade_business", "lt", 40)), D(BUS, "Retakes are by appointment. Honest work only. I won't say it twice.")),
+     dict(G(cond(trait("grade_business", "lt", 40)), D(BUS, "Retakes are by appointment. Honest work only. I won't say it twice.")), release=2),   # DECISIONS 231 (reader): points at a place or person release 1 cuts
+     dict(G(cond(trait("grade_business", "lt", 40)), D(BUS, "Honest work only. I won't say it twice.")), release_until=1),
      ],
     [D(STUDY, "You want my notes? You can have my notes. Seriously, any time."),
      G(cond(flag("dress_warned"), flag("rival_met"), {"type": "clothing_slot", "slot": "bra", "operator": "equipped"},
@@ -369,13 +373,14 @@ out.append(class_row(
     "college_class_bio", "Attend the Biology lecture", "Biology", "grade_bio", BIO, TA,
     [],
     [P("Biology. The TA runs it, a shy woman in a lab coat who blushes when she has to say reproductive system out loud. The girl beside you whispers through the slides."),
-     G(cond(flag("zoe_met", False)), WHO("Find me on the quad. I'm always there. Tuesdays, Thursdays, Fridays.")),
+     dict(G(cond(flag("zoe_met", False)), WHO("Find me on the quad. I'm always there. Tuesdays, Thursdays, Fridays.")), release=2),   # DECISIONS 231 (reader): points at a place or person release 1 cuts
      G(cond(flag("zoe_met")), D(Z, "Babe. Look at the TA. She's staring at your legs again."),
        P("The TA catches you catching her. Her neck goes pink, but she only turns to her slide."),
        # the "eyes" line (DARING_STATE: no bra or a short skirt) has her still looking on this same screen
        GC(cond({"type": "clothing_slot", "slot": "bra", "operator": "equipped"}, {"type": "worn_type", "operator": "neq", "value": "short_skirt"}),
          P("She won't look at your legs again, not with the whole hall here."))),
-     G(cond(trait("grade_bio", "lt", 40)), D(TA, "If anyone's struggling, my door's open Tuesday to Friday afternoons. Really.")),
+     dict(G(cond(trait("grade_bio", "lt", 40)), D(TA, "If anyone's struggling, my door's open Tuesday to Friday afternoons. Really.")), release=2),   # DECISIONS 233 (re-read): points at a place release 1 cuts
+     dict(G(cond(trait("grade_bio", "lt", 40)), D(TA, "If anyone's struggling, ask me after class. Really.")), release_until=1),
      ],
     [G(cond(flag("zoe_met")), D(Z, "Party Friday. I'm not asking."))],
     "Let the TA see.",
@@ -434,7 +439,8 @@ out.append(first_class("meet_bio", "Your first Biology class", BIO, "bio_ta_met"
     P("Biology is taught by the TA, a shy woman of twenty-eight in a lab coat and big earrings, who blushes when she says reproductive."),
     D(TA, "Hi. I'm— I'll be taking you this term. Please don't eat the specimens. That was a joke. Sort of."),
     P("Her eyes go round the room and land on you and skip off you, fast, like she touched something hot."),
-    D(TA, "My door's open in the afternoons. If anyone. You know. Needs anything."),
+    dict(D(TA, "My door's open in the afternoons. If anyone. You know. Needs anything."), release=2),   # DECISIONS 231 (reader): points at a place or person release 1 cuts
+    dict(D(TA, "If anyone. You know. Needs anything."), release_until=1),
     P("She says it to all of you, but she's looking at your chest when she runs out of words. She turns to the slides before anyone can ask what she meant."),
 ]))
 out.append(first_class("meet_figure", "Your first Figure drawing class", FIG, "art_lecturer_met", ["cocky_guy_met", "figure_model_met"], [
@@ -764,10 +770,17 @@ def hub(cid, loc, npc, met, name, blocks, choices=None):
                         "conditions": cond(flag(met))},
             "nodes": [node("hub", name, blocks, choices or [go(HUB_CLOSE[npc], loc=LEAVE_TO[loc])])]}
 
-def grade_lines(npc, grade, low, mid, top):
-    return [G(cond(trait(grade, "lt", 40)), D(npc, low)),
-            G(cond(trait(grade, "gte", 40), trait(grade, "lt", 70)), D(npc, mid)),
-            G(cond(trait(grade, "gte", 70)), D(npc, top))]
+def grade_lines(npc, grade, low, mid, top, r1=None):
+    """r1 = (low, mid, top) for release 1, where the offices are cut (DECISIONS 231): a line that sends her to an
+    office ships later, and release 1 gets the copy without it."""
+    bands = [cond(trait(grade, "lt", 40)), cond(trait(grade, "gte", 40), trait(grade, "lt", 70)), cond(trait(grade, "gte", 70))]
+    out = []
+    for i, (c, line) in enumerate(zip(bands, (low, mid, top))):
+        if r1 and r1[i] != line:
+            out += [dict(G(c, D(npc, line)), release=2), dict(G(c, D(npc, r1[i])), release_until=1)]
+        else:
+            out.append(G(c, D(npc, line)))
+    return out
 
 def clothes_line(npc, line):
     return G(DARING_STATE, D(npc, line))
@@ -776,7 +789,8 @@ out.append(hub("hub_hale_class", "lecture_hall", H, "hale_met", "Dr. Hale, at th
     P("Dr. Hale is at the lectern with his notes, squaring the edges."),
     # S4 (LO 2026-11-03): he's teaching, so this screen is look-only, and it says why
     P("He's mid-lecture. He catches your eye once, then goes back to his slides."),
-    *grade_lines(H, "grade_psych", "You're behind, @player. Come and see me on Thursday.", "Good work. Could be better.", "Best paper in the room. Don't let it go to your head."),
+    *grade_lines(H, "grade_psych", "You're behind, @player. Come and see me on Thursday.", "Good work. Could be better.", "Best paper in the room. Don't let it go to your head.",
+                 r1=("You're behind, @player. Catch up.", "Good work. Could be better.", "Best paper in the room. Don't let it go to your head.")),
     # reader a3 #17 (DECISIONS 131): at grade 40+ a line points at his office. Office hours are Thu 17:00-19:30
     # (his rows); he names it only from his step 2 on, the step where he invites her. This hub fires Mon/Wed/Fri
     # mornings and Thursday 13:00-14:30, so on a Thursday the office is "tonight".
@@ -801,7 +815,8 @@ out.append(hub("hub_business_class", "lecture_hall", BUS, "business_lecturer_met
     P("He's mid-lecture, and he doesn't stop for anyone."),
     # reader batch 5 (pass 3): each band names the next rung, and 40+ names his office (his rows Mon/Wed/Thu/Fri 14:30-18:00)
     *grade_lines(BUS, "grade_business", "Failing. Retakes by appointment.", "Adequate. Seventy is good. You're not at seventy.",
-                 "Good. Keep it that way. My door's open in the afternoons."),
+                 "Good. Keep it that way. My door's open in the afternoons.",
+                 r1=("Failing. Honest work only.", "Adequate. Seventy is good. You're not at seventy.", "Good. Keep it that way.")),
     clothes_line(BUS, "This isn't a beach, @player."),
 ], [go("Leave him to his lecture.", loc=LEAVE_TO["lecture_hall"])]))
 out.append(hub("hub_ta_class", "lecture_hall", TA, "bio_ta_met", "The Biology TA", [
@@ -809,7 +824,8 @@ out.append(hub("hub_ta_class", "lecture_hall", TA, "bio_ta_met", "The Biology TA
     # S4 (LO 2026-11-03): she's running the class, so the screen is look-only and says why
     P("She gathers them up and hands them out, too busy to stop. She only gets a word in as she puts one on your desk."),   # reader pass 3 b01: she talks below, so "too busy to talk" was false
     # reader a3 #19 (DECISIONS 131): the 40+ bands point at her office too (her rows: ta_office Tue-Fri 14:30-18:00)
-    *grade_lines(TA, "grade_bio", "You're, um. You're struggling. My door's open. If you want.", "You're doing fine! Really fine. My door's open afternoons.", "Top marks. Wow. Sorry. Top marks. My door's open afternoons."),
+    *grade_lines(TA, "grade_bio", "You're, um. You're struggling. My door's open. If you want.", "You're doing fine! Really fine. My door's open afternoons.", "Top marks. Wow. Sorry. Top marks. My door's open afternoons.",
+                 r1=("You're, um. You're struggling. Sorry.", "You're doing fine! Really fine.", "Top marks. Wow. Sorry. Top marks.")),
     # writing pass 2026-11-04, reader test 2: how far she looks moves with Exhibitionism, her reaction to being seen
     G(cond(trait("exhibitionism", "lt", 20), {"type": "clothing_slot", "slot": "bra", "operator": "equipped"}, {"type": "worn_type", "operator": "neq", "value": "short_skirt"}), P("She puts your handout down and doesn't look at you at all, but her neck is already pink.")),
     G(cond(trait("exhibitionism", "gte", 20), trait("exhibitionism", "lt", 40)), P("She puts your handout down, and her eyes slip to your mouth before she catches them.")),

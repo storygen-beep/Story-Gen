@@ -68,9 +68,20 @@ light = [
     ("npc_dean", "dean_met", "Grades, complaints, probation.", "The dean's office, weekdays.", "hub_dean_office"),
 ]
 cards = []
+# DECISIONS 231 (reader): release 1 cuts the three offices, so release 1's cards say where they teach instead
+R1_TIPS = {"npc_art_lecturer": "Figure drawing, Tuesday and Thursday mornings and Wednesday afternoon.",
+           "npc_business_lecturer": "Business, in the lecture hall.",
+           "npc_bio_ta": "Biology, in the lecture hall."}
 for npc, met, text, tip, hub in light:
-    cards.append({"npc_id": npc, "priority": 5, "text": text, "tip": tip,
-                  "when": [{"flag": met, "op": "is_true"}], "ready_canvas": hub})
+    card = {"npc_id": npc, "priority": 5, "text": text, "tip": tip,
+            "when": [{"flag": met, "op": "is_true"}], "ready_canvas": hub}
+    if npc in R1_TIPS:
+        r1 = dict(card, tip=R1_TIPS[npc], ready_canvas=hub.replace("_office", "_class"), release_until=1)
+        if npc == "npc_business_lecturer":
+            r1["text"] = "Business. Strict. Can't be bought."
+        cards += [dict(card, release=2), r1]
+    else:
+        cards.append(card)
 # pass 3 H43/J34 (the-voice.md R3; engine.md 47.3): each of these had one card with flavour and nothing else, so
 # their section of the guidance page never said what to do. Each gets one guiding line (a place, the person, a verb)
 # and the existing canvas with a location where she finds them, so the card draws its frame (engine.md 47).

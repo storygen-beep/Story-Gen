@@ -137,9 +137,20 @@ L[0] = L[0].replace("DRIFTCOUNTERS", "\n".join(f"{k:<18} = 0" for k in drift.cou
 
 # ── locations ──
 w("\n# ── the map: the street is the ground, the only root (board.map, the-map.md R0, R3) ──\n")
+# DECISIONS 230: each place carries the release it ships in (release_map.py); release 1's gym is a locked copy
+from release_map import PLACE_RELEASE, PEOPLE_RELEASE, GYM_RELEASE_1, SCHEDULES_LATER, ROWS_LATER
+_locs = []
 for loc in LOCATIONS:
+    _locs.append(loc)
+    if loc["id"] == "gym":
+        _locs.append(GYM_RELEASE_1)
+for loc in _locs:
     w("\n[[locations]]")
     w(f"id          = {q(loc['id'])}")
+    if loc.get("release_until"):
+        w(f"release_until = {int(loc['release_until'])}")
+    elif PLACE_RELEASE.get(loc["id"]):
+        w(f"release     = {PLACE_RELEASE[loc['id']]}")
     w(f"name        = {q(loc['name'])}")
     w(f"kind        = {q(loc['kind'])}")
     w(f"description = {q(loc['description'])}")
@@ -155,7 +166,7 @@ for loc in LOCATIONS:
         w(f"default_entry = {q(loc['default_entry'])}")
     if loc.get("crossing_costs"):
         w(f"crossing_costs = {v(loc['crossing_costs'])}")
-    kids = children(loc["id"])
+    kids = [] if loc.get("release_until") else children(loc["id"])
     w(f"navigation_order = {v(kids)}")
     if loc.get("costs"):
         w(f"costs = {v(loc['costs'])}")
@@ -204,6 +215,8 @@ w("\n\n# ── the people: 21, everyone 18 or older (want.cast[].age, SP5) ─�
 for p in PEOPLE:
     w("\n[[npcs]]")
     w(f"id           = {q(p['id'])}")
+    if PEOPLE_RELEASE.get(p["id"]):
+        w(f"release      = {PEOPLE_RELEASE[p['id']]}")
     w(f"name         = {q(p['name'])}")
     w(f"description  = {q(p['relationship'] + ' Age ' + str(p['age']) + '.')}")
     w(f"portrait     = {q('portraits/' + p['id'].replace('npc_', '') + '.jpg')}")
@@ -214,8 +227,30 @@ for p in PEOPLE:
     if p["show"]:
         w(f"show_traits  = {v(p['show'])}")
     w(f"core_traits  = {v(p['core'])}")
+    _later_names = [q_["name"] for q_ in PEOPLE if PEOPLE_RELEASE.get(q_["id"])]
+    _rows = []
     for r in p["schedules"]:
+        # DECISIONS 230: a row that names a later-release person ("in his room with Kayla") ships with that person;
+        # release 1 gets the same row without the name
+        later = [n_ for n_ in _later_names if n_ in r["activity"]]
+        if p["id"] in SCHEDULES_LATER:
+            _rows.append(dict(r, release=2))
+        elif (p["id"], r["activity"]) in ROWS_LATER:
+            _rows.append(dict(r, release=ROWS_LATER[(p["id"], r["activity"])]))
+        elif later:
+            _rows.append(dict(r, release=2))
+            plain = r["activity"]
+            for n_ in later:
+                plain = plain.replace(" with " + n_, "").replace(n_ + " ", "")
+            _rows.append(dict(r, activity=plain, release_until=1))
+        else:
+            _rows.append(r)
+    for r in _rows:
         w("\n[[npcs.schedules]]")
+        if r.get("release"):
+            w(f"release    = {int(r['release'])}")
+        if r.get("release_until"):
+            w(f"release_until = {int(r['release_until'])}")
         w(f"location   = {q(r['location'])}")
         w(f"weekdays   = {v(r['weekdays'])}")
         w(f"start_time = {q(r['start_time'])}")
