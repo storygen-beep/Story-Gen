@@ -5579,6 +5579,14 @@ id = "porch"
 name = "The porch next door"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a man in his mid-fifties on his porch, cardigan, slippers, a newspaper on his knee"
+search_queries = ["older man porch cardigan newspaper"]
+file = "scenes/vance_meeting_t0.jpg"
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Next door, on his porch, the man who owns your house: Mr. Vance. Mid-fifties, a cardigan, slippers, a newspaper folded on his knee that he isn't reading. He watches you come down the path the way he watches everything on this street, like it's his. Most of it is."
 
@@ -5651,6 +5659,14 @@ operator = "is_true"
 [[canvases.nodes]]
 id = "porch"
 name = "His porch"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a man in his mid-fifties in a cardigan and slippers on a porch with the evening paper"
+search_queries = ["older man porch evening newspaper slippers"]
+pool_dir = "people/vance_porch_t0"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -5847,6 +5863,14 @@ id = "grass"
 name = "The grass"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "students lying on the grass of a college quad, bags under their heads"
+search_queries = ["students lying on grass campus quad"]
+pool_dir = "life/quad_grass_t0"
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You sit down on the grass with your bag under your head. All round you, campus talks: who hooked up, who's failing, whose party, which professor."
 
@@ -5907,6 +5931,14 @@ end_time = "12:45"
 [[canvases.nodes]]
 id = "tray"
 name = "A tray"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a college canteen counter: pasta, burgers, fries, trays"
+search_queries = ["college canteen food counter trays"]
+pool_dir = "life/canteen_tray_t0"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -6165,6 +6197,14 @@ id = "desk"
 name = "A desk"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a girl at a library desk under a green lamp, reading"
+search_queries = ["girl studying library green lamp"]
+pool_dir = "life/library_lamp_t0"
+
+[[canvases.nodes.blocks]]
 type = "block_pool"
 
 [[canvases.nodes.blocks.blocks]]
@@ -6274,6 +6314,14 @@ is_active = true
 [[canvases.nodes]]
 id = "mirror"
 name = "The long mirror"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a girl checking herself in a long lit mirror over college sinks"
+search_queries = ["girl checking reflection bathroom mirror college"]
+pool_dir = "look/toilet_mirror_t3"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -6483,6 +6531,14 @@ type = "paragraph"
 content = "The changing room is a curtain that doesn't reach the wall on one side. You pull it as far as it goes and strip down in the gap, and try on what you picked."
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a girl in her underwear in a changing room whose curtain doesn't close, a man outside by the shirts"
+search_queries = ["changing room curtain gap girl underwear man looking"]
+pool_dir = "look/changing_gap_t3"
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "By the shirt rail a man has stopped pretending to look at shirts. He's looking at your ass, but he doesn't look away when you catch him in the mirror."
 
@@ -6566,6 +6622,14 @@ end_time = "00:00"
 [[canvases.nodes]]
 id = "room"
 name = "Ryan's room"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a fit young man of 22 on his bed, headphones round his neck, phone in hand"
+search_queries = ["young man on bed headphones phone"]
+pool_dir = "people/ryan_room_t0"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -7276,6 +7340,14 @@ id = "table"
 name = "Ryan, at dinner"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a fit young man of 22 at a dinner table in a gym shirt, a full plate"
+search_queries = ["young man eating dinner gym shirt"]
+pool_dir = "people/ryan_table_t0"
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Ryan's at the table in a gym shirt, already on his second plate."
 
@@ -7785,6 +7857,14 @@ operator = "is_true"
 [[canvases.nodes]]
 id = "couch"
 name = "Ryan, on the couch"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a young man of 22 sprawled on a couch with a game controller, TV glow, chips on his chest"
+search_queries = ["guy on couch playing video games"]
+pool_dir = "people/ryan_couch_t0"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -8730,6 +8810,14 @@ operator = "is_true"
 [[canvases.nodes]]
 id = "kitchen"
 name = "The kitchen"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a woman of 41 in a work blouse, buttering toast, coffee in her other hand"
+search_queries = ["woman work blouse kitchen morning toast"]
+pool_dir = "people/laura_kitchen_t0"
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -11645,6 +11733,14 @@ id = "dark"
 name = "The dark living room"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a woman of 41 on a dark couch in a robe, knees up, a glass of wine"
+search_queries = ["woman robe dark couch glass of wine"]
+pool_dir = "people/laura_waiting_t0"
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "The lights are off. Laura is on the couch with her knees pulled up under her robe and a glass of wine she isn't drinking. From here she can see the front door and the path outside it."
 
@@ -12243,6 +12339,14 @@ operator = "is_true"
 [[canvases.nodes]]
 id = "mirror"
 name = "Laura"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a woman of 41 at a long mirror in a green dress, putting in earrings"
+search_queries = ["woman green dress mirror earrings"]
+pool_dir = "people/laura_mirror_t0"
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -13566,9 +13670,9 @@ name = "The kitchen table"
 type = "image"
 
 [canvases.nodes.blocks.props]
-file = "scenes/mark_01_table.jpg"
 description = "a man in his forties at a kitchen table with an envelope of cash and a coffee, Sunday morning light"
 search_queries = ["man counting cash kitchen table morning", "stepfather kitchen table envelope of money"]
+file = "scenes/mark_01_table.jpg"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -14665,6 +14769,14 @@ end_time = "22:00"
 [[canvases.nodes]]
 id = "letters"
 name = "The letters"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "final-notice letters fanned across a kitchen table, a man's hands flat beside them"
+search_queries = ["final notice letters kitchen table"]
+file = "scenes/debt_letters_t0.jpg"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -17428,6 +17540,14 @@ id = "hub"
 name = "Mark, in the garage"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a heavy-set man of 46 at a garage workbench with a radio and an engine part"
+search_queries = ["man garage workbench radio"]
+pool_dir = "people/mark_bench_t0"
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Mark's at his bench with the radio on, doing something to an engine part that doesn't need doing."
 
@@ -17934,6 +18054,14 @@ operator = "is_true"
 [[canvases.nodes]]
 id = "hub"
 name = "Mark, in the kitchen"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a heavy-set man of 46 cooking badly, a beer on the counter, an extractor fan"
+search_queries = ["middle aged man cooking beer kitchen"]
+pool_dir = "people/mark_cooking_t0"
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -19404,6 +19532,14 @@ content = "Tap's loose. Here."
 speaker = "npc"
 npcId = "npc_mark"
 
+[[canvases.nodes.blocks]]
+type = "video"
+
+[canvases.nodes.blocks.props]
+description = "a girl soaked by a burst washer hose, her wet top see-through, gasping"
+search_queries = ["girl soaked wet shirt see through gasping"]
+file = "sex/hose_soaked_t4.webm"
+
 [canvases.nodes.exit_block]
 type = "choices"
 
@@ -19585,6 +19721,14 @@ content = "He wanted to look. He made himself stop."
 speaker = "player"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a dripping girl standing still in a garage, an older man's back turned, holding out a towel behind him"
+search_queries = ["wet girl garage man holding towel back turned"]
+file = "look/hose_stay_t3.jpg"
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "You didn't have to turn round, Mark."
 
@@ -19669,9 +19813,9 @@ name = "STAFF WANTED"
 type = "image"
 
 [canvases.nodes.blocks.props]
-file = "scenes/cafe_job_ask.jpg"
 description = "a small cafe counter, a man in his thirties with rolled sleeves behind an espresso machine, a staff wanted sign in the window"
 search_queries = ["cafe manager behind counter espresso machine", "small cafe interior staff wanted sign"]
+file = "scenes/cafe_job_ask.jpg"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -19916,6 +20060,14 @@ end_time = "22:00"
 [[canvases.nodes]]
 id = "counter"
 name = "The counter"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a café owner in his forties behind the counter, a cloth over his shoulder"
+search_queries = ["cafe owner behind counter cloth shoulder"]
+pool_dir = "people/tom_counter_t0"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -20305,6 +20457,14 @@ id = "booth"
 name = "Booth four"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "an older man in a café booth with a folded newspaper and a pot of tea"
+search_queries = ["old man cafe booth newspaper tea"]
+pool_dir = "people/gary_booth_t0"
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Gary in booth four with his paper and his pot of black tea. He lowers the paper when you come near, an inch at a time."
 
@@ -20481,9 +20641,9 @@ name = "Late"
 type = "image"
 
 [canvases.nodes.blocks.props]
-file = "scenes/hale_01_lecture.jpg"
 description = "a lecture hall, a male professor in his late thirties at a lectern, students in raked seats, a girl in the front row"
 search_queries = ["professor at lectern lecture hall students", "college lecture hall front row professor"]
+file = "scenes/hale_01_lecture.jpg"
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -20898,6 +21058,14 @@ id = "nadia"
 name = "Nadia, studying"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a young woman of 20 at a library table, headphones round her neck"
+search_queries = ["college girl library headphones"]
+pool_dir = "people/nadia_library_t0"
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Nadia at a library table with her headphones round her neck."
 
@@ -21075,6 +21243,14 @@ id = "nadia"
 name = "Nadia, at lunch"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a sharp young woman of 20 at a canteen table with a salad and a textbook"
+search_queries = ["college girl lunch salad textbook"]
+pool_dir = "people/nadia_lunch_t0"
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Nadia at the end of a table with a salad and a textbook open beside it."
 
@@ -21160,6 +21336,14 @@ operator = "is_true"
 [[canvases.nodes]]
 id = "nadia"
 name = "Nadia, beside you"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a young woman of 20 in a lecture seat, pen moving"
+search_queries = ["college girl taking notes lecture"]
+pool_dir = "people/nadia_lecture_t0"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -21272,6 +21456,14 @@ end_time = "19:00"
 [[canvases.nodes]]
 id = "counter"
 name = "The counter"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a young waitress in an apron behind a busy café counter"
+search_queries = ["waitress apron coffee shop counter busy"]
+pool_dir = "life/cafe_shift_t0"
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -24061,6 +24253,14 @@ type = "paragraph"
 content = "An older man in booth four has a folded newspaper and a pot of tea, but he brings the paper down an inch when you go by, and his eyes drop to your ass and follow it to the end of the aisle. The paper's back up before you can catch him. Tom calls him Gary. He's the regular."
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "an older man in a café booth lowering his newspaper to watch a waitress walk past"
+search_queries = ["old man newspaper watching waitress"]
+file = "look/gary_first_look_t3.jpg"
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "Top me up when you've got a minute, doll."
 
@@ -24137,6 +24337,14 @@ end_time = "13:45"
 [[canvases.nodes]]
 id = "class"
 name = "Psychology"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a male professor in his late thirties in a tweed jacket at a lectern, a raked lecture hall, a girl in the front row"
+search_queries = ["professor tweed lectern lecture hall front row"]
+pool_dir = "life/class_psych_t0"
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -24346,6 +24554,14 @@ operator = "is_false"
 [[canvases.nodes.blocks.blocks.blocks]]
 type = "paragraph"
 content = "The guy on your other side keeps dropping his pen. Every time he leans down for it, his eyes come up level with the front of your low-cut top and stay there a second too long."
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.blocks.blocks.props]
+description = "a guy in a lecture seat leaning down for his pen, looking down the low-cut top of the girl beside him"
+search_queries = ["guy looking down girl's top in class"]
+pool_dir = "look/class_downblouse_psych_t3"
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -26705,6 +26921,14 @@ id = "class"
 name = "Business"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a stern gray-suited lecturer in his fifties with a register, a lecture hall"
+search_queries = ["strict older lecturer gray suit lecture"]
+pool_dir = "life/class_business_t0"
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Business. The lecturer is a gray man in a gray suit who calls the register and means it."
 
@@ -26892,6 +27116,14 @@ operator = "is_false"
 [[canvases.nodes.blocks.blocks.blocks]]
 type = "paragraph"
 content = "Every time you lean forward to write, the low-cut top gapes. In the row behind, the study guy has stopped highlighting. You can feel him looking down the front of it at your tits."
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.blocks.blocks.props]
+description = "a guy in the row behind looking down a girl's gaping low-cut top as she leans forward to write"
+search_queries = ["guy behind looking down girl's top lecture"]
+pool_dir = "look/class_downblouse_business_t3"
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -29142,6 +29374,14 @@ id = "class"
 name = "Biology"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a shy young woman TA in a lab coat and big earrings at a whiteboard, a cell diagram"
+search_queries = ["female teaching assistant lab coat whiteboard"]
+pool_dir = "life/class_bio_t0"
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Biology. The TA runs it, a shy woman in a lab coat who blushes when she has to say reproductive system out loud. The girl beside you whispers through the slides."
 
@@ -29253,6 +29493,14 @@ operator = "is_false"
 [[canvases.nodes.blocks.blocks.blocks]]
 type = "paragraph"
 content = "Halfway through, the TA leans over your bench to check your diagram, and her eyes slide off the page and down the front of your low-cut top to your tits. Her neck goes pink."
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.blocks.blocks.props]
+description = "a shy young woman TA leaning over a student's bench, her eyes sliding down the student's low-cut top"
+search_queries = ["teacher glancing at student cleavage lab"]
+pool_dir = "look/class_downblouse_bio_t3"
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -31581,6 +31829,14 @@ operator = "is_false"
 type = "paragraph"
 content = "He's not even pretending now. Every time you shade, his eyes go down the front of your low-cut top to your tits."
 
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.blocks.blocks.props]
+description = "a guy at the next easel looking down the front of a girl's low-cut top while she draws"
+search_queries = ["guy at easel looking down girl's top art class"]
+pool_dir = "look/class_downblouse_figure_t3"
+
 [[canvases.nodes.blocks]]
 type = "block_pool"
 
@@ -33847,6 +34103,14 @@ id = "first"
 name = "Your first Business class"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a gray lecturer in his fifties with a register in a gray lecture room"
+search_queries = ["strict lecturer register gray room"]
+file = "scenes/meet_business_t0.jpg"
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Business is a gray room with a gray man at the front of it: the Business lecturer, fifty, a suit with no creases, a register in his hand he actually calls."
 
@@ -35233,6 +35497,14 @@ end_time = "13:45"
 [[canvases.nodes]]
 id = "first"
 name = "Your first Biology class"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a shy young woman TA in a lab coat and big earrings, blushing at the front of a lecture hall"
+search_queries = ["teaching assistant lab coat blushing"]
+file = "scenes/meet_bio_t0.jpg"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -39116,6 +39388,14 @@ id = "hub"
 name = "Dr. Hale, at the lectern"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a professor in his late thirties squaring his notes at a lectern"
+search_queries = ["professor at lectern notes"]
+pool_dir = "people/hale_lectern_t0"
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Dr. Hale is at the lectern with his notes, squaring the edges."
 
@@ -39283,6 +39563,14 @@ operator = "is_true"
 [[canvases.nodes]]
 id = "hub"
 name = "The art lecturer"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a woman in her forties with charcoal on her hands, walking between easels"
+search_queries = ["art teacher between easels charcoal"]
+pool_dir = "people/art_easels_t0"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -39469,6 +39757,14 @@ id = "hub"
 name = "The Business lecturer"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a gray-suited lecturer in his fifties writing headings on a board"
+search_queries = ["older lecturer writing on board"]
+pool_dir = "people/business_board_t0"
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "The Business lecturer is writing headings on the board in long straight lines."
 
@@ -39620,6 +39916,14 @@ operator = "is_true"
 [[canvases.nodes]]
 id = "hub"
 name = "The Biology TA"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a shy young woman TA dropping a stack of handouts at the front of a hall"
+search_queries = ["shy teaching assistant handouts lecture hall"]
+pool_dir = "people/ta_handouts_t0"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -39836,6 +40140,14 @@ operator = "is_true"
 [[canvases.nodes]]
 id = "hub"
 name = "The dean"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a man of 55 at a big desk in a dean's office, not looking up"
+search_queries = ["dean behind desk office"]
+pool_dir = "people/dean_desk_t0"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -40119,6 +40431,14 @@ end_time = "09:00"
 [[canvases.nodes]]
 id = "wait"
 name = "The dean's office"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a dean writing at his desk, a girl standing in front of it, not asked to sit"
+search_queries = ["dean desk student standing"]
+file = "scenes/dean_office_first_t0.jpg"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -40530,6 +40850,14 @@ id = "path"
 name = "The path"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a path round a pond, ducks, a man on a bench with a newspaper"
+search_queries = ["park pond path bench"]
+pool_dir = "life/park_path_t0"
+
+[[canvases.nodes.blocks]]
 type = "block_pool"
 
 [[canvases.nodes.blocks.blocks]]
@@ -40935,6 +41263,14 @@ value = "leggings"
 type = "paragraph"
 content = "Just the sports bra and your leggings, and it's like you've set off an alarm. Heads turn on the whole loop. A guy doing push-ups stops at the top of one and stays there, his eyes on your tits bouncing in the bra. He doesn't call anything after you. Not yet."
 
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "video"
+
+[canvases.nodes.blocks.blocks.blocks.props]
+description = "a girl running in a sports bra and leggings round a park pond, heads turning"
+search_queries = ["girl jogging sports bra leggings park"]
+pool_dir = "look/run_sportsbra_t3"
+
 [[canvases.nodes.blocks]]
 type = "block_pool"
 
@@ -40958,6 +41294,14 @@ operator = "equipped"
 [[canvases.nodes.blocks.blocks.blocks]]
 type = "paragraph"
 content = "No bra under your top, and every stride shows it: your tits bounce, your nipples hard against the cloth. A cyclist wobbles. A man walking his dog lets the dog walk him into a hedge. One of them calls something after you, but you don't slow down."
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "video"
+
+[canvases.nodes.blocks.blocks.blocks.props]
+description = "a braless girl jogging, her tits bouncing under a thin top"
+search_queries = ["braless jogging bouncing"]
+pool_dir = "sex/run_nobra_t4"
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -41285,6 +41629,14 @@ name = "A run"
 type = "paragraph"
 content = "Two laps in your leggings, and your lungs burn. The man on the bench by the pond watches your ass the whole way round, both times."
 
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a girl in leggings jogging past an older man on a park bench who watches"
+search_queries = ["girl leggings jogging past man on bench"]
+pool_dir = "look/run_bench_man_t3"
+
 [canvases.nodes.exit_block]
 type = "choices"
 
@@ -41462,6 +41814,14 @@ id = "bench"
 name = "A bench"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a girl on a park bench, face tipped up to the sun, eyes shut"
+search_queries = ["girl on park bench sun eyes closed"]
+pool_dir = "life/park_bench_rest_t0"
+
+[[canvases.nodes.blocks]]
 type = "block_pool"
 
 [[canvases.nodes.blocks.blocks]]
@@ -41503,6 +41863,14 @@ max_triggers_per_day = 1
 [[canvases.nodes]]
 id = "photo"
 name = "A selfie"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a girl taking selfies by a willow, an older man on a bench watching"
+search_queries = ["girl taking selfie park man watching"]
+pool_dir = "look/park_selfie_t3"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -41952,6 +42320,14 @@ value = 20
 [[canvases.nodes]]
 id = "coffee"
 name = "A coffee"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a girl on a stool at the end of a café counter with a coffee, watching the room"
+search_queries = ["girl coffee café counter stool"]
+pool_dir = "life/cafe_stool_t0"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -42841,6 +43217,14 @@ type = "paragraph"
 content = "He looks at you, and then his eyes go down, to your legs, and stay there a second too long."
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a professor in his late thirties at a lecture-hall door, coffee in hand, eyes on a student's legs"
+search_queries = ["professor looking at student legs lecture hall"]
+pool_dir = "look/hale_door_legs_t3"
+
+[[canvases.nodes.blocks]]
 type = "block_pool"
 
 [[canvases.nodes.blocks.blocks]]
@@ -43358,6 +43742,14 @@ type = "paragraph"
 content = "He looks you down and up, once, slowly, and stops on the hem of your skirt and the bare tops of your thighs."
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "an older man in a suit at an office door, a file under his arm, looking a student up and down"
+search_queries = ["older man suit looking student up and down office door"]
+pool_dir = "look/dean_door_look_t3"
+
+[[canvases.nodes.blocks]]
 type = "block_pool"
 
 [[canvases.nodes.blocks.blocks]]
@@ -43454,6 +43846,14 @@ end_time = "07:00"
 [[canvases.nodes]]
 id = "bed"
 name = "Your bed"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a girl getting under the covers of a single bed, a dim small bedroom"
+search_queries = ["girl getting into bed night"]
+pool_dir = "life/room_bed_t0"
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -44096,6 +44496,14 @@ id = "nap"
 name = "A nap"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a girl asleep on top of her covers, one arm over her eyes, afternoon light"
+search_queries = ["girl napping afternoon arm over eyes"]
+pool_dir = "life/room_nap_t0"
+
+[[canvases.nodes.blocks]]
 type = "block_pool"
 
 [[canvases.nodes.blocks.blocks]]
@@ -44151,6 +44559,14 @@ operator = "is_false"
 [[canvases.nodes]]
 id = "desk"
 name = "Your desk"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a girl studying at a cluttered desk in a small bedroom"
+search_queries = ["girl studying desk bedroom"]
+pool_dir = "life/room_desk_t0"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -44299,6 +44715,14 @@ operator = "is_false"
 [[canvases.nodes]]
 id = "mirror"
 name = "Your mirror"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a girl doing her make-up at a bedroom mirror"
+search_queries = ["girl doing makeup bedroom mirror"]
+pool_dir = "life/room_makeup_t0"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -44525,6 +44949,14 @@ operator = "is_absent"
 [[canvases.nodes]]
 id = "shower"
 name = "The shower"
+
+[[canvases.nodes.blocks]]
+type = "video"
+
+[canvases.nodes.blocks.props]
+description = "a young woman alone in a small home shower, water running down her tits and back, eyes shut"
+search_queries = ["girl showering alone home bathroom", "woman under shower water eyes closed"]
+pool_dir = "sex/shower_daily_t4"
 
 [[canvases.nodes.blocks]]
 type = "group"
@@ -45370,6 +45802,14 @@ value = "towel"
 type = "paragraph"
 content = "Wet hair, pink skin, the towel tucked over your tits, stopping at the top of your thighs. One tug and it's on the floor. You look at the girl in the mirror. She looks right back."
 
+[[canvases.nodes.blocks.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.blocks.props]
+description = "a girl in a towel with wet hair at a steamy bathroom mirror"
+search_queries = ["girl wet hair towel bathroom mirror steam"]
+pool_dir = "look/bath_mirror_towel_t3"
+
 [[canvases.nodes.blocks]]
 type = "group"
 
@@ -45406,6 +45846,14 @@ operator = "unequipped"
 type = "paragraph"
 content = "Naked. You turn sideways, then the other way. You cup your tits and let them go. The mirror is small, so you stand on your toes to see the rest of you."
 
+[[canvases.nodes.blocks.blocks]]
+type = "video"
+
+[canvases.nodes.blocks.blocks.props]
+description = "a naked girl at a small bathroom mirror, cupping her tits, on her toes"
+search_queries = ["naked girl bathroom mirror cupping breasts"]
+pool_dir = "sex/bath_mirror_naked_t4"
+
 [[canvases.nodes.blocks]]
 type = "group"
 
@@ -45441,6 +45889,14 @@ operator = "unequipped"
 [[canvases.nodes.blocks.blocks]]
 type = "paragraph"
 content = "Bra and panties, and the door doesn't lock properly. You look at yourself the way someone walking in would."
+
+[[canvases.nodes.blocks.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.blocks.props]
+description = "a girl in bra and panties at a bathroom mirror, door open a crack behind"
+search_queries = ["girl underwear bathroom mirror door ajar"]
+pool_dir = "look/bath_mirror_panties_t3"
 
 [[canvases.nodes.blocks]]
 type = "group"
@@ -45669,6 +46125,14 @@ value = "towel"
 type = "paragraph"
 content = "A towel, in the hall, where anyone can come out of any door. Your heart beats in your throat."
 
+[[canvases.nodes.blocks.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.blocks.props]
+description = "a girl in a towel in a narrow house hallway, doors all round"
+search_queries = ["girl in towel hallway nervous"]
+pool_dir = "look/hall_mirror_towel_t3"
+
 [[canvases.nodes.blocks]]
 type = "group"
 
@@ -45705,6 +46169,14 @@ operator = "unequipped"
 type = "paragraph"
 content = "Naked in the hall. Every door off it could open."
 
+[[canvases.nodes.blocks.blocks]]
+type = "video"
+
+[canvases.nodes.blocks.blocks.props]
+description = "a naked girl standing in a house hallway, looking at the doors"
+search_queries = ["naked girl standing in hallway house"]
+pool_dir = "sex/hall_mirror_naked_t4"
+
 [[canvases.nodes.blocks]]
 type = "group"
 
@@ -45740,6 +46212,14 @@ operator = "unequipped"
 [[canvases.nodes.blocks.blocks]]
 type = "paragraph"
 content = "Bra and panties in the hall, where every door off it could open."
+
+[[canvases.nodes.blocks.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.blocks.props]
+description = "a girl in bra and panties in a hallway at a mirror"
+search_queries = ["girl bra panties hallway mirror"]
+pool_dir = "look/hall_mirror_panties_t3"
 
 [[canvases.nodes.blocks]]
 type = "group"
@@ -46243,6 +46723,14 @@ id = "eat"
 name = "Breakfast"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "toast at a kitchen counter in the morning, a radio, crumbs"
+search_queries = ["morning toast kitchen counter"]
+pool_dir = "life/kitchen_breakfast_t0"
+
+[[canvases.nodes.blocks]]
 type = "block_pool"
 
 [[canvases.nodes.blocks.blocks]]
@@ -46407,6 +46895,14 @@ id = "coffee"
 name = "Coffee"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a girl drinking coffee at a kitchen window"
+search_queries = ["girl coffee kitchen window"]
+pool_dir = "life/kitchen_window_coffee_t0"
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "The kettle, the jar, two sugars. You drink it at the window and watch the street go by. It's too hot, but you drink it anyway."
 
@@ -46472,6 +46968,14 @@ end_time = "20:00"
 [[canvases.nodes]]
 id = "eat"
 name = "Dinner"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a girl eating a plate of leftovers alone at a kitchen table in the evening"
+search_queries = ["girl eating alone kitchen table evening"]
+pool_dir = "life/kitchen_dinner_alone_t0"
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -46546,6 +47050,14 @@ end_time = "21:00"
 [[canvases.nodes]]
 id = "dishes"
 name = "The dishes"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a girl at a full sink of dishes, sleeves up"
+search_queries = ["girl washing dishes sink"]
+pool_dir = "life/kitchen_dishes_t0"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -46658,6 +47170,14 @@ value = 0
 [[canvases.nodes.blocks.blocks.blocks.blocks]]
 type = "paragraph"
 content = "The kitchen door goes, and you grab the cushion and hold it over your bra. Mark comes through with a drink and sees your bare legs and the cushion. He catches himself and looks at the blank TV."
+
+[[canvases.nodes.blocks.blocks.blocks.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.blocks.blocks.blocks.props]
+description = "a girl lying on a couch in her bra and panties, a cushion pulled over her chest, a man in the doorway"
+search_queries = ["girl underwear couch cushion man doorway"]
+pool_dir = "look/couch_bra_t3"
 
 [[canvases.nodes.blocks.blocks.blocks.blocks]]
 type = "dialog"
@@ -47537,6 +48057,14 @@ id = "film"
 name = "A film"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a girl under a blanket on a couch in the dark, a film's glow on her face"
+search_queries = ["girl blanket couch watching movie dark"]
+pool_dir = "life/living_film_t0"
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You pick a film nobody else in this house would sit through, pull the blanket off the back of the couch and turn the lights off. It's long, but you love it."
 
@@ -47895,6 +48423,14 @@ end_time = "07:00"
 [[canvases.nodes.blocks.blocks.blocks]]
 type = "paragraph"
 content = "Laura's asleep on her side, curled toward the wall, one bare shoulder out of the covers. Mark's on his back beside her, snoring."
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a dark bedroom seen through a door gap, a woman asleep on her side, a man snoring beside her"
+search_queries = ["bedroom door gap couple asleep dark"]
+file = "look/master_asleep_t3.jpg"
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -48603,6 +49139,14 @@ id = "door"
 name = "The bathroom door"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a bathroom door stuck a few inches open, steam rolling out, a shower running"
+search_queries = ["bathroom door ajar steam shower running"]
+pool_dir = "look/laura_shower_door_t3"
+
+[[canvases.nodes.blocks]]
 type = "block_pool"
 
 [[canvases.nodes.blocks.blocks]]
@@ -48852,6 +49396,14 @@ type = "paragraph"
 content = "Laura lies on her side with the sheet kicked down to her knees, breathing slow. Her nightdress is still rucked up over her hip, her bare ass pale in the dark, and her hand is still tucked between her thighs."
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "through a door gap, a woman in her forties asleep on her side, nightdress rucked up over her bare hip"
+search_queries = ["woman asleep nightdress rucked up door gap"]
+pool_dir = "sex/laura_alone_peek_t4"
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Her lips move against the pillow, on a name you can't hear, her face turned toward the hall and Ryan's door."
 
@@ -48927,6 +49479,14 @@ name = "Through the gap"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You ease the handle down and open the door a finger's width. The lamp is still on."
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a couple's bedroom through a gap under a lamp, the man awake, the woman staring at the ceiling"
+search_queries = ["bedroom door ajar lamp couple awake"]
+pool_dir = "look/master_door_peek_t3"
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -49179,6 +49739,14 @@ id = "washer"
 name = "The washer"
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "an old front-loading washer in a cluttered garage, a laundry basket on the floor"
+search_queries = ["old washing machine garage basket"]
+pool_dir = "life/garage_washer_t0"
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You sort your basket on the garage floor, darks and lights. The old machine sits there with its door hanging open."
 
@@ -49283,6 +49851,14 @@ operator = "is_false"
 [[canvases.nodes]]
 id = "sun"
 name = "The lounger"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a girl lying on a lounger in a back garden in the sun, eyes shut, a low fence"
+search_queries = ["girl sunbathing lounger back garden"]
+pool_dir = "look/garden_sun_t3"
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -49754,6 +50330,14 @@ type = "paragraph"
 content = "He laughs and shuts the window. Every time you stretch, the curtain moves."
 
 [[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a young man at an upstairs window looking down into a garden"
+search_queries = ["guy at window looking down at garden"]
+pool_dir = "look/garden_window_ryan_t3"
+
+[[canvases.nodes.blocks]]
 type = "block_pool"
 
 [[canvases.nodes.blocks.blocks]]
@@ -49818,6 +50402,14 @@ operator = "is_false"
 [[canvases.nodes]]
 id = "line"
 name = "The washing line"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a washing line in a back garden: jeans, towels, underwear pegged at the end"
+search_queries = ["washing line back garden underwear"]
+pool_dir = "life/washing_line_t0"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -50168,6 +50760,14 @@ name = "Ryan out of the shower"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "The bathroom door opens as you pass and Ryan steps out in a towel, wet, steam behind him. You nearly walk into his chest."
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a young man stepping out of a bathroom in a towel, wet, steam behind him, in a narrow hall"
+search_queries = ["guy in towel coming out of bathroom steam"]
+pool_dir = "look/ryan_towel_hall_t3"
 
 [[canvases.nodes.blocks]]
 type = "group"
@@ -53772,6 +54372,14 @@ type = "paragraph"
 content = "You've got your basket on the garage floor and you're bent right over at the drum, feeding it, your ass up in the air."
 
 [[canvases.nodes.blocks]]
+type = "video"
+
+[canvases.nodes.blocks.props]
+description = "a girl bent over a front-loading washer, short skirt riding up the backs of her thighs"
+search_queries = ["girl bent over washing machine short skirt", "bending over laundry upskirt"]
+pool_dir = "sex/washer_bent_her_t4"
+
+[[canvases.nodes.blocks]]
 type = "block_pool"
 
 [[canvases.nodes.blocks.blocks]]
@@ -53928,6 +54536,14 @@ npcId = "npc_mark"
 [[canvases.nodes.blocks.blocks]]
 type = "paragraph"
 content = "The front of his jeans is tight. He doesn't hide it, but he doesn't come any closer."
+
+[[canvases.nodes.blocks]]
+type = "video"
+
+[canvases.nodes.blocks.props]
+description = "a man in his forties in a garage doorway, beer in hand, the bulge in his jeans"
+search_queries = ["man bulge jeans watching", "guy getting hard in jeans"]
+pool_dir = "sex/washer_hard_him_t4"
 
 [[canvases.nodes.blocks]]
 type = "thought_bubble"
@@ -54135,6 +54751,14 @@ type = "paragraph"
 content = "Saturday morning. You've got your basket on the garage floor and you're bent right over at the drum, feeding it, your ass up in the air."
 
 [[canvases.nodes.blocks]]
+type = "video"
+
+[canvases.nodes.blocks.props]
+description = "a girl bent at a washing machine drum in a short skirt, morning light"
+search_queries = ["girl bending laundry morning short skirt"]
+pool_dir = "sex/washer_sat_bent_her_t4"
+
+[[canvases.nodes.blocks]]
 type = "block_pool"
 
 [[canvases.nodes.blocks.blocks]]
@@ -54291,6 +54915,14 @@ npcId = "npc_mark"
 [[canvases.nodes.blocks.blocks]]
 type = "paragraph"
 content = "He takes his time over the first sip. The front of his jeans is tight, and he stays where he is."
+
+[[canvases.nodes.blocks]]
+type = "video"
+
+[canvases.nodes.blocks.props]
+description = "an older man in a doorway holding a coffee mug low in front of his jeans"
+search_queries = ["man coffee mug in front of crotch hiding erection"]
+pool_dir = "sex/washer_sat_hard_him_t4"
 
 [[canvases.nodes.blocks]]
 type = "thought_bubble"
@@ -54533,6 +55165,14 @@ value = "towel"
 type = "paragraph"
 content = "You're in a towel. From his doorway, in the glass, his eyes go to the knot over your tits, then down your bare thighs."
 
+[[canvases.nodes.blocks.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.blocks.props]
+description = "a girl in a towel at a hall mirror; in the glass, a young man in a doorway behind her, staring"
+search_queries = ["girl towel hall mirror guy watching reflection"]
+pool_dir = "look/mirror_ryan_towel_t3"
+
 [[canvases.nodes.blocks]]
 type = "group"
 
@@ -54569,6 +55209,14 @@ operator = "unequipped"
 type = "paragraph"
 content = "You're naked. From his doorway, in the glass, his eyes go straight to your tits, then down to your pussy, and stay."
 
+[[canvases.nodes.blocks.blocks]]
+type = "video"
+
+[canvases.nodes.blocks.blocks.props]
+description = "a naked girl at a hall mirror, a young man in a doorway behind her in the glass"
+search_queries = ["naked girl mirror man watching from doorway"]
+pool_dir = "sex/mirror_ryan_naked_t4"
+
 [[canvases.nodes.blocks]]
 type = "group"
 
@@ -54604,6 +55252,14 @@ operator = "unequipped"
 [[canvases.nodes.blocks.blocks]]
 type = "paragraph"
 content = "Bra and panties. From his doorway, his eyes go down your back to your ass in your panties."
+
+[[canvases.nodes.blocks.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.blocks.props]
+description = "a girl in bra and panties at a mirror, seen from behind, a guy in the doorway"
+search_queries = ["girl bra panties mirror seen from behind guy doorway"]
+pool_dir = "look/mirror_ryan_panties_t3"
 
 [[canvases.nodes.blocks]]
 type = "group"
@@ -54763,6 +55419,14 @@ type = "paragraph"
 content = "You stay at the mirror. You fix your hair, slow, and turn a little side-on so he gets all of it. In the glass his hand goes to the front of his shorts and stays there."
 
 [[canvases.nodes.blocks]]
+type = "video"
+
+[canvases.nodes.blocks.props]
+description = "a young man in a doorway, hand pressing the bulge in his shorts, watching"
+search_queries = ["guy hand on bulge shorts watching girl"]
+pool_dir = "sex/mirror_ryan_shorts_t4"
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "Like what you see?"
 
@@ -54895,6 +55559,14 @@ value = "towel"
 type = "paragraph"
 content = "You're in a towel. From behind you, in the glass, his eyes go to the knot over your tits, then down your bare thighs."
 
+[[canvases.nodes.blocks.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.blocks.props]
+description = "a girl in a towel at a hall mirror, an older man in his forties behind her in the glass"
+search_queries = ["girl towel mirror older man behind"]
+pool_dir = "look/mirror_mark_towel_t3"
+
 [[canvases.nodes.blocks]]
 type = "group"
 
@@ -54931,6 +55603,14 @@ operator = "unequipped"
 type = "paragraph"
 content = "You're naked. From behind you, in the glass, his eyes go straight to your tits, then down to your pussy, and stay."
 
+[[canvases.nodes.blocks.blocks]]
+type = "video"
+
+[canvases.nodes.blocks.blocks.props]
+description = "a naked girl at a mirror, an older man close behind her, staring"
+search_queries = ["naked girl mirror older man behind her"]
+pool_dir = "sex/mirror_mark_naked_t4"
+
 [[canvases.nodes.blocks]]
 type = "group"
 
@@ -54966,6 +55646,14 @@ operator = "unequipped"
 [[canvases.nodes.blocks.blocks]]
 type = "paragraph"
 content = "Bra and panties. From behind you, his eyes go down your back to your ass in your panties."
+
+[[canvases.nodes.blocks.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.blocks.props]
+description = "a girl in bra and panties at a hall mirror, an older man passing behind"
+search_queries = ["girl underwear mirror older man walking past"]
+pool_dir = "look/mirror_mark_panties_t3"
 
 [[canvases.nodes.blocks]]
 type = "group"
@@ -55211,6 +55899,14 @@ name = "Stay at the mirror"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You stay at the mirror and take your time, and let him look at all of it. He comes down the hall. He stands right behind you, close enough that you feel the heat off him, but he doesn't touch."
+
+[[canvases.nodes.blocks]]
+type = "video"
+
+[canvases.nodes.blocks.props]
+description = "an older man standing close behind a girl at a mirror, not touching"
+search_queries = ["man standing close behind girl mirror tension"]
+pool_dir = "sex/mirror_mark_close_t4"
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -58002,6 +58698,14 @@ name = "The wind and your skirt"
 type = "paragraph"
 content = "A gust comes down the street and gets right under your skirt and lifts it, all the way, for a second and a half. Your ass is out to the whole street. Across the road a man stops dead with his keys in his hand."
 
+[[canvases.nodes.blocks]]
+type = "video"
+
+[canvases.nodes.blocks.props]
+description = "wind lifting a girl's short skirt on a street, her panties showing, a man across the road"
+search_queries = ["wind blows skirt up street"]
+pool_dir = "sex/wind_skirt_t4"
+
 [canvases.nodes.exit_block]
 type = "choices"
 
@@ -58090,6 +58794,14 @@ content = "Get in, baby. I'll give you a ride."
 
 [canvases.nodes.blocks.props]
 speaker = "unknown"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a car crawling beside a braless girl on a pavement, a guy leaning out of the window"
+search_queries = ["guy in car whistling at girl walking"]
+pool_dir = "look/car_whistle_t3"
 
 [[canvases.nodes.blocks]]
 type = "group"
@@ -58260,6 +58972,14 @@ name = "A jogger looks back"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "A jogger goes past in the other direction, and looks back over his shoulder at your ass, twice."
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a jogger looking back over his shoulder at a girl's ass as they pass"
+search_queries = ["jogger turns to look at girl's butt"]
+file = "look/jogger_looks_back_t3.jpg"
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -58522,6 +59242,14 @@ type = "paragraph"
 content = "A gust comes off the corner and catches the slit in your skirt. It throws the whole front panel open to your waist, and your panties are out to the street, the front of them, to the whole street. A man waiting to cross stares straight at them."
 
 [[canvases.nodes.blocks]]
+type = "video"
+
+[canvases.nodes.blocks.props]
+description = "wind throwing open the slit of a long skirt to the waist on a street corner"
+search_queries = ["wind slit skirt flies open"]
+pool_dir = "sex/wind_slit_t4"
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "Oh. Hello there."
 
@@ -58588,6 +59316,14 @@ operator = "is_false"
 [[canvases.nodes]]
 id = "till"
 name = "The till"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a corner-shop till: bread, milk, eggs, a bottle of wine, a bored clerk"
+search_queries = ["corner shop till groceries clerk"]
+pool_dir = "life/corner_shop_till_t0"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -58679,6 +59415,14 @@ npcId = "npc_vance"
 [[canvases.nodes.blocks.blocks.blocks]]
 type = "paragraph"
 content = "He doesn't pretend to read his paper. His eyes go up your legs to the hem of your skirt and stay there. He pats the step beside him. You keep walking."
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.blocks.blocks.props]
+description = "an older man on a porch with a newspaper watching a girl in a short skirt walk past"
+search_queries = ["old man porch watching girl short skirt walk by"]
+pool_dir = "look/porch_skirt_t3"
 
 [[canvases.nodes.blocks.blocks.blocks]]
 type = "paragraph"
@@ -60564,6 +61308,14 @@ name = "The bus stop"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "A man at the bus stop looks once, then again, longer, straight at your tits in the low-cut top. He doesn't pretend to read the timetable."
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a man at a bus stop staring at a girl's cleavage in a low-cut top"
+search_queries = ["man staring at cleavage bus stop"]
+pool_dir = "look/busstop_lowtop_t3"
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -62669,6 +63421,14 @@ value = 0
 [[canvases.nodes.blocks.blocks]]
 type = "paragraph"
 content = "He doesn't back up. He stops right in the middle, so you'd have to squeeze past with your tits against his chest."
+
+[[canvases.nodes.blocks.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.blocks.props]
+description = "a girl squeezing past a shirtless young man in a narrow hallway, chests nearly touching"
+search_queries = ["squeezing past shirtless guy narrow hallway"]
+pool_dir = "look/hall_squeeze_t3"
 
 [[canvases.nodes.blocks.blocks]]
 type = "dialog"

@@ -708,3 +708,5 @@ Experimental. The incumbent `author-game` skill keeps every ordinary request unt
 is promoted. Promotion criteria: a game v2 built clears the four commitments on measurement.
 The ledger of what changed and why is `CHANGELOG.md`, next to this file — every edit to any
 file in this skill gets a dated bullet there in the same turn.
+
+Which screens get a picture or clip, and where on the screen it goes: `references/media-blocks.md`.
