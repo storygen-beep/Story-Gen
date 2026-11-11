@@ -69,7 +69,7 @@ ROWS = [
      "man bulge jeans watching", "guy getting hard in jeans"),
     ("walkin_laundry_mark_sat", "moment", "your ass up in the air", "clip", "sex/washer_sat_bent_her_t4",
      "a girl bent right over at a washing machine drum, her ass up, morning light", "girl bending over laundry morning"),
-    ("walkin_laundry_mark_sat", "answer", "He holds the mug low, in front of his jeans", "clip", "sex/washer_sat_hard_him_t4",
+    ("walkin_laundry_mark_sat", "answer", "The front of his jeans is tight", "clip", "sex/washer_sat_hard_him_t4",   # the one version where he stays and it shows (reader 2026-11-12)
      "an older man in a garage doorway with a coffee mug, staring, the front of his jeans tight", "man coffee mug staring bulge jeans"),
     ("mark_00_the_dryer", "hose", "soaks you from the neck down", "clip", "sex/hose_soaked_t4.webm",
      "a girl soaked by a burst washer hose, her wet top see-through, gasping", "girl soaked wet shirt see through gasping"),

@@ -51144,11 +51144,8 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure"
 blocks = [
   { type = "dialog", content = "Saturday's my garage, @player. Carry on.", props = { speaker = "npc", npcId = "npc_mark" } },
   { type = "paragraph", content = "He takes his time over the first sip. The front of his jeans is tight, and he stays where he is." },
+  { type = "video", props = { description = "an older man in a garage doorway with a coffee mug, staring, the front of his jeans tight", search_queries = ["man coffee mug staring bulge jeans"], pool_dir = "sex/washer_sat_hard_him_t4" } },
 ]
-
-[[canvases.nodes.blocks]]
-type = "video"
-props = { description = "an older man in a garage doorway with a coffee mug, staring, the front of his jeans tight", search_queries = ["man coffee mug staring bulge jeans"], pool_dir = "sex/washer_sat_hard_him_t4" }
 
 [[canvases.nodes.blocks]]
 type = "block_pool"

@@ -2162,3 +2162,4 @@ Corruption) · 14 / 20". 0 page errors.
 - **Skill:** `references/media-blocks.md`, a pointer at the end of `SKILL.md`, CHANGELOG; selfcheck current, cites 0 wrong, skill tests 1057 passed.
 - **Open:** the decided row "R1 frozen · an explicit beat carries a clip" (LO-signed 2026-11-11) now has nothing to cover; left in place for LO to re-read.
 - **Reader fixes (DECISIONS 239):** 22 of 95 blocks failed the media read; all fixed in `media.py` / `3_activities.toml` (plain descriptions, tier and format, Tom 31). The stale decided row "R1 frozen · an explicit beat carries a clip" removed from `v2_state.json`. Gates after: full 117 pass, 0 fail; release 1 95 pass, 17 decided, 0 fail.
+- **Re-read (DECISIONS 239):** 21 of 22 fixed blocks pass; the last, Mark's Saturday washer clip, now sits only in the version where his jeans are tight. Gates unchanged: full 117 pass, 0 fail; release 1 95 pass, 17 decided, 0 fail.

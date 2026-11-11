@@ -176,3 +176,4 @@ describe only what every visit shares. Changed:
   - Mark close behind her at the mirror is now `look/mirror_mark_close_t3`, a still, since it shows no skin
   - `look/master_asleep_t3` and `look/jogger_looks_back_t3` are pools, since both screens repeat
 - **Fixed a number:** Tom is 31 (the ledger), not "in his forties".
+- **Re-read:** 21 of 22 passed. Mark's Saturday clip now sits only in the version where he stays and his jeans are tight (after "The front of his jeans is tight"). In the two versions where he looks away and hides it with the mug, only her clip shows.
