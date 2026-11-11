@@ -731,6 +731,17 @@ def one_pass(game, fz, gone, rep):
 
     # phone
     ph = game.get("phone") or {}
+    # an app cut by tag takes its posts and calls with it: the engine would draw them into an app
+    # the phone no longer has (first_term release 1 cuts Feed and Calls, DECISIONS 236)
+    app_ids = {a.get("id") for a in ph.get("apps") or [] if isinstance(a, dict)}
+    for key in ("conversations", "posts", "calls"):
+        items = ph.get(key)
+        if isinstance(items, list) and "apps" in ph:
+            kept = [it for it in items if not (isinstance(it, dict) and it.get("app") and it["app"] not in app_ids)]
+            for it in items:
+                if it not in kept:
+                    rep.drop(f"phone {key} (app cut)", it.get("id"))
+            ph[key] = kept
     for key, who in (("conversations", "npc"), ("posts", "npc"), ("calls", "caller"), ("profiles", "npc")):
         items = ph.get(key)
         if not isinstance(items, list):

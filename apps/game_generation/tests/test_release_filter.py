@@ -139,3 +139,26 @@ def test_a_band_that_always_holds_keeps_its_condition():
     groups = game["canvases"][0]["nodes"][0]["blocks"]
     assert all(g["conditions"]["items"] for g in groups)
     assert game["canvases"][0]["nodes"][0]["exit_block"]["choices"][0].get("effects") == []
+
+
+def test_a_cut_app_takes_its_posts_and_calls():
+    """DECISIONS 236: release 1 cuts the Feed and Calls apps; a post or call left behind would be drawn
+    into an app the phone no longer has, and the counter only the feed moved goes from the labels."""
+    game = _game()
+    game["traits"] = {"labels": [{"key": "followers", "label": "Followers"}]}
+    game["player"]["core_traits"]["followers"] = 0
+    game["phone"] = {"enabled": True, "apps": [
+        {"id": "messages", "type": "chat"},
+        {"id": "feed", "type": "social_feed", "release": 2,
+         "post_actions": [{"label": "Post a selfie", "counter_trait": "followers"}]},
+        {"id": "calls", "type": "calls", "release": 2}],
+        "posts": [{"id": "p", "app": "feed", "trigger": {"conditions": _cond(_trait("followers", "gte", 20))}}],
+        "calls": [{"id": "c", "app": "calls", "caller": "npc_ryan"}],
+        "conversations": [{"id": "m", "app": "messages", "npc": "npc_ryan"}]}
+    rep = rf.Report()
+    rf.filter_game(game, {"release_page": {"release": 1}}, 1, rep)
+    ph = game["phone"]
+    assert [a["id"] for a in ph["apps"]] == ["messages"]
+    assert ph["posts"] == [] and ph["calls"] == []
+    assert [c["id"] for c in ph["conversations"]] == ["m"]
+    assert game["traits"]["labels"] == [] and "followers" not in game["player"]["core_traits"]

@@ -7254,7 +7254,7 @@ def _validate_quests_layout(template) -> List[str]:
     return []
 
 
-TIMETABLE_KEYS = ("class", "place", "lecturer", "weekdays", "from", "to")
+TIMETABLE_KEYS = ("class", "place", "lecturer", "weekdays", "from", "to", "late_until")
 
 
 def _validate_timetable(template) -> List[str]:
@@ -7288,14 +7288,14 @@ def _validate_timetable(template) -> List[str]:
         if (not isinstance(wd, list) or not wd
                 or not all(isinstance(d, int) and not isinstance(d, bool) and 0 <= d <= 6 for d in wd)):
             errs.append(f"{ctx}: 'weekdays' must be a non-empty list of 0-6 (0 = Monday)")
-        for k in ("from", "to"):
+        for k in ("from", "to") + (("late_until",) if "late_until" in r else ()):
             v = r.get(k)
             if not isinstance(v, str) or not _re_for_stage_pattern.fullmatch(hhmm, v):
                 errs.append(f"{ctx}: '{k}' must be \"HH:MM\" (24-hour), got {v!r}")
         if (isinstance(r.get("from"), str) and isinstance(r.get("to"), str)
                 and r["from"] >= r["to"]):
             errs.append(f"{ctx}: 'from' must be before 'to' (a class does not cross midnight)")
-    return errs
+    return errs + _timetable_late_order(raw)
 
 
 def _validate_cast_traits(template) -> List[str]:
@@ -8913,7 +8913,7 @@ def _assemble_project_metadata(project, template):
     if template.timetable:
         project.metadata["timetable"] = [
             {"class": r["class"], "place": r["place"], "lecturer": r.get("lecturer", ""),
-             "weekdays": list(r["weekdays"]), "from": r["from"], "to": r["to"]}
+             "weekdays": list(r["weekdays"]), "from": r["from"], "to": r["to"], **({"late_until": r["late_until"]} if r.get("late_until") else {})}
             for r in template.timetable
         ]
     if template.timetable_button:
@@ -9897,3 +9897,16 @@ def _serialize_exit_block(eb: "TemplateExitBlock") -> Dict[str, Any]:
             for ch in eb.choices
         ]
     return d
+
+
+
+def _timetable_late_order(raw) -> List[str]:
+    """`late_until` (first_term DECISIONS 235): the last minute a class can still be joined, late. It sits
+    inside the class: after `from`, no later than `to`. Kept at the end of the file so no cited line moves."""
+    errs: List[str] = []
+    for i, r in enumerate(raw if isinstance(raw, list) else []):
+        lu = r.get("late_until") if isinstance(r, dict) else None
+        if isinstance(lu, str) and isinstance(r.get("from"), str) and isinstance(r.get("to"), str):
+            if not (r["from"] < lu <= r["to"]):
+                errs.append(f"[[ui.timetable]] row {i}: 'late_until' must be after 'from' and no later than 'to', got {lu!r}")
+    return errs

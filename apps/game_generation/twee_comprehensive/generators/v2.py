@@ -243,7 +243,7 @@ class TweeComprehensiveGeneratorV2:
             twee_sections.append(
                 ':: TimetableWidgets [widget nobr]\n'
                 '<<widget "timetableButton">>\n'
-                '<div id="timetable-btn-widget"><<link "Timetable">><<run setup.openTimetable()>><</link>></div>\n'
+                '<div id="timetable-btn-widget"><<link "Timetable">><<run setup.openTimetable()>><</link>><span class="nav-i">🗓</span></div>\n'
                 '<</widget>>\n'
             )
 
@@ -12154,7 +12154,7 @@ setup.timetableHtml = function (day) {
         var cls = "tt-row", badge = "";
         if (day === today) {
             var a = mins(r.from), b = mins(r.to);
-            if (nowMin >= a && nowMin < b) { cls += " is-now"; badge = "Now"; }
+            if (nowMin >= a && nowMin < b) { cls += " is-now"; badge = (r.late_until && nowMin >= mins(r.late_until)) ? "Doors shut" : "Now"; }
             else if (nowMin >= b) { cls += " is-over"; }
             else if (!nextSeen) {
                 nextSeen = true;
@@ -12167,7 +12167,7 @@ setup.timetableHtml = function (day) {
         return '<li class="' + cls + '"><span class="tt-time">' + esc(range(r.from, r.to)) +
             '</span><span class="tt-what"><span class="tt-class">' + esc(r["class"]) +
             (badge ? ' <span class="tt-badge">' + esc(badge) + "</span>" : "") + "</span>" +
-            '<span class="tt-where">' + esc(placeName(r.place)) + (who ? " · " + esc(who) : "") +
+            '<span class="tt-where">' + esc(placeName(r.place)) + (who ? " · " + esc(who) : "") + (r.late_until ? '<span class="tt-late"> · late until ' + esc(setup.formatHHMM(r.late_until, true)) + "</span>" : "") +
             "</span></span></li>";
     }).join("") : '<li class="tt-none">No classes this day.</li>';
     return '<div class="tt"><div class="tt-days">' + chips + '</div><ul class="tt-list">' +
@@ -22040,7 +22040,7 @@ if (clothingMsg) {
 #cheat-btn-widget,
 #stats-btn-widget,
 #schedule-btn-widget,
-#flags-btn-widget {
+#timetable-btn-widget, #flags-btn-widget {
     position: relative;          /* anchor the icon overlay + unread badge */
     background: var(--theme-surface);
     border: 1px solid rgba(255, 255, 255, 0.07);
@@ -22049,8 +22049,8 @@ if (clothingMsg) {
 }
 /* the clickable fill: <a> in nav state, .nav-row span on the current page */
 #phone-sidebar-btn a,
-#quests-btn-widget a, #journal-btn-widget a, #tips-btn-widget a, #cast-btn-widget a, #cheat-btn-widget a, #stats-btn-widget a, #schedule-btn-widget a, #flags-btn-widget a,
-#quests-btn-widget .nav-row, #journal-btn-widget .nav-row, #tips-btn-widget .nav-row, #cast-btn-widget .nav-row, #cheat-btn-widget .nav-row, #stats-btn-widget .nav-row, #schedule-btn-widget .nav-row, #flags-btn-widget .nav-row {
+#quests-btn-widget a, #journal-btn-widget a, #tips-btn-widget a, #cast-btn-widget a, #cheat-btn-widget a, #stats-btn-widget a, #schedule-btn-widget a, #flags-btn-widget a, #timetable-btn-widget a,
+#quests-btn-widget .nav-row, #journal-btn-widget .nav-row, #tips-btn-widget .nav-row, #cast-btn-widget .nav-row, #cheat-btn-widget .nav-row, #stats-btn-widget .nav-row, #schedule-btn-widget .nav-row, #flags-btn-widget .nav-row, #timetable-btn-widget .nav-row {
     display: block;
     width: 100%;
     box-sizing: border-box;
@@ -22061,7 +22061,7 @@ if (clothingMsg) {
     font-weight: 600;
 }
 #phone-sidebar-btn a:hover,
-#quests-btn-widget a:hover, #journal-btn-widget a:hover, #tips-btn-widget a:hover, #cast-btn-widget a:hover, #cheat-btn-widget a:hover, #stats-btn-widget a:hover, #schedule-btn-widget a:hover, #flags-btn-widget a:hover {
+#quests-btn-widget a:hover, #journal-btn-widget a:hover, #tips-btn-widget a:hover, #cast-btn-widget a:hover, #cheat-btn-widget a:hover, #stats-btn-widget a:hover, #schedule-btn-widget a:hover, #flags-btn-widget a:hover, #timetable-btn-widget a:hover {
     color: var(--theme-accent);
     text-decoration: none;
 }

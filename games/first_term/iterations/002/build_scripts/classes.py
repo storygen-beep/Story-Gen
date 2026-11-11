@@ -21,11 +21,19 @@ CLASSES = [
 ]
 
 
+LATE_MINUTES = 45   # a class can be joined until 45 minutes in, late after 15 (DECISIONS 235; college.py late_copy)
+
+
+def late_until(start):
+    h, m = map(int, start.split(":")); m += LATE_MINUTES
+    return f"{h + m // 60:02d}:{m % 60:02d}"
+
+
 def timetable_rows():
     """One [[ui.timetable]] row per class slot, sorted by day then hour."""
     rows = []
     for name, sch, place, lecturer in CLASSES:
         for r in sch:
             rows.append({"class": name, "place": place, "lecturer": lecturer, "weekdays": r["weekdays"],
-                         "from": r["start_time"], "to": r["end_time"]})
+                         "from": r["start_time"], "to": r["end_time"], "late_until": late_until(r["start_time"])})
     return sorted(rows, key=lambda r: (min(r["weekdays"]), r["from"]))

@@ -377,6 +377,10 @@
 
 ## 11. The phone (LO, chat)
 
+> **Release 1 (LO, 2026-11-12, DECISIONS 236):** the phone has Messages only. The Feed (posting and the posts about her)
+> and Calls (Laura's curfew call) ship next release; `followers` is not shown in release 1. Curfew still holds through
+> `curfew_days` (the café's late shifts).
+
 - **Kind:** infrastructure, a channel (`the-phone.md:18`; `templates/cards/phone.md:8-11`).
 - **Chats:**
   - one thread per person she is involved with (P1);
