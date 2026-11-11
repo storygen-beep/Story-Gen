@@ -10,11 +10,11 @@ set -e
 HERE=${0:A:h}
 ROOT=${HERE:h:h:h:h:h}
 PH=$ROOT/games/first_term/toml_phases
-ALL_PARTS=(ryan laura mark tom zoe hale jake cafe college pools extras home town gossip goals everyday gym dex stages)   # gym, dex: DECISIONS 225; stages: DECISIONS 229
+ALL_PARTS=(ryan laura mark tom zoe hale jake cafe college pools extras home town gossip goals everyday gym dex stages release1)   # gym, dex: DECISIONS 225; stages: DECISIONS 229; release1: DECISIONS 230
 cd $ROOT && source venv/bin/activate
 cd $HERE
 mkdir -p parts
-for p in ${=PARTS:-$ALL_PARTS}; do python3 $p.py parts/$p.toml; done
+for p in ${=PARTS:-$ALL_PARTS}; do FT_PART=$p python3 $p.py parts/$p.toml; done   # FT_PART: release_map.PART_RELEASE (DECISIONS 230)
 for p in $ALL_PARTS; do [[ -s parts/$p.toml ]] || { echo "missing parts/$p.toml — run PARTS=$p first" >&2; exit 1; }; done
 { echo "# First Term — 5 · scenes. Generated: one section per person (sources in iterations/002/build_scripts)."; for p in $ALL_PARTS; do cat parts/$p.toml; done } > $PH/5_scenes.toml
 python3 recap.py $PH/5_scenes.toml   # playtest 2026-11-09: a repeatable act's cap moves to the next stage's top
@@ -22,4 +22,8 @@ python3 phone.py $PH/8_phone.toml   # iteration 002, part 6: the phone is genera
 python3 gen_world.py $PH/1_metadata_and_locations.toml
 cd $ROOT
 python3 scripts/merge_toml_phases.py games/first_term --validate 2>&1 | tail -1
-python3 manage.py package_from_toml --file games/first_term/toml_phases/7_final_game.toml --output games/first_term/output --gen-version v2 --dev 2>&1 | grep -v "player_portrait: clothing type\|Location image not found\|uncommon type\|external media\|NOT copied\|video_folder\|BROKEN\|Re-run with" | grep -i "error\|fail\|❌\|  - \|warn\|✗\|Package ready" | head -40
+# DECISIONS 230 — the release slice. RELEASE=1 cuts the merged game to release 1 (and packages it without --dev);
+# unset, the filter keeps everything and only strips the release tags (authoring).
+python3 scripts/release_filter.py games/first_term --release ${RELEASE:-max}
+DEVFLAG=--dev; [[ -n "$RELEASE" ]] && DEVFLAG=
+python3 manage.py package_from_toml --file games/first_term/toml_phases/7_final_game.toml --output games/first_term/output --gen-version v2 $DEVFLAG 2>&1 | grep -v "player_portrait: clothing type\|Location image not found\|uncommon type\|external media\|NOT copied\|video_folder\|BROKEN\|Re-run with" | grep -i "error\|fail\|❌\|  - \|warn\|✗\|Package ready" | head -40

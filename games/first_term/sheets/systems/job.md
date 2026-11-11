@@ -1,6 +1,7 @@
 # [READY] System — job
+> Changed 2026-11-11 (DECISIONS 230-231): the showy uniforms move from Tom to the clothes shop at $40/$60/$80, locked in release 1. Signed by LO 2026-11-11 ("Sign them").
 > Changed 2026-11-08 (DECISIONS 206, LO: "She will buy. Completely her decision"): two café dresses she buys from Tom, new section at the end. Re-signed by LO 2026-11-08 ("Go ahead with 1 and 2").
-> Signed by LO: LO, 2026-11-04.
+> Signed by LO: LO, 2026-11-11.
 
 > Changed 2026-11-04 to match the build; signed by LO 2026-11-04. Levels 4 and up have no button (DECISIONS 132).
 
@@ -152,25 +153,28 @@ At **footfall 15 and name −5**, Tom's top step, "Not by the window" (`npc_tom.
 | leaving after Tom's close sets `late_shift` | LO's play note, 2026-10-08 |
 | Gary's $20, half to Tom | LO, 2026-10-07 (SP4) · **cut** 2026-11-01 |
 
-## The café dresses she buys (2026-11-08, DECISIONS 206)
+## The café dresses she buys (2026-11-08, DECISIONS 206; moved to the clothes shop 2026-11-11, DECISIONS 230-231)
 
-LO, 2026-11-08: "She will buy. Completely her decision." Tom never pushes her clothes (DECISIONS 117 stands). He keeps two
-dresses under the counter because customers ask, and sells one only when she asks for it. Neither has a shop price, so the clothes shop doesn't stock them. Course of Temptation's bar
-brings skimpier uniforms in as its flirty score climbs (`guide_course-of-temptation_userjs.js:58427-58445`); here the
-score is the café's footfall, which her own acts raise, and the buying is hers.
+LO, 2026-11-08: "She will buy. Completely her decision." Tom never pushes her clothes (DECISIONS 117 stands). Since
+2026-11-11 he doesn't sell them either (LO: "Uniform are not bought from tom but from clothing store"): the three showy
+uniforms hang on the clothes shop rail, and LO set the prices at $40, $60 and $80 (DECISIONS 231). Course of
+Temptation's bar brings skimpier uniforms in as its flirty score climbs
+(`guide_course-of-temptation_userjs.js:58427-58445`); here the stage is Exhibitionism, and the buying is hers.
 
-| dress | wearable at | Tom has it when | price | tips |
+| dress | where | she can buy it at | price | tips |
 |---|---|---|---|---|
-| Café uniform (normal) | any | her hire | free | x1 ($2-4 at level 1) |
-| Tight café uniform | any; she asks at Exhibitionism 20 | as built | free | x2 |
-| Short café dress | Exhibitionism 40 | footfall 10 | $30 | x3 |
-| Low-cut café dress | Exhibitionism 60 | footfall 25, and she owns the short one | $40 | x4 |
+| Café uniform (normal) | Tom, with the job | her hire | free | x1 ($2-4 at level 1) |
+| Tight café uniform | the clothes shop | Exhibitionism 20 | $40 | x2 |
+| Short café dress | the clothes shop | Exhibitionism 40 | $60 | x3 |
+| Low-cut café dress | the clothes shop | Exhibitionism 60 | $80 | x4 |
+
+Release 1 (DECISIONS 230): all three are on the rail but locked, with the line "Tom won't have this on his floor. Not
+yet." Her meters stay at 0 in release 1, so none of them opens.
 
 The Friday close still doubles the tips. Clock-in keeps whichever uniform she has on; in her own clothes it puts the
 normal one on; clock-out takes all four off.
 
-- Her asks, at Tom's counter: "Ask Tom for something shorter." and "Ask Tom for something lower cut." Each has a
-  written no ("Leave it on the counter.").
+- Her asks at Tom's counter ("Ask Tom for something shorter.", "…lower cut.") are gone with the move (DECISIONS 230).
 - On the shift: the short dress shows her panties when she bends (40); with no panties she keeps a hand on the hem all
   shift and shows nothing. The low-cut dress with no bra: her tits move in it and a nipple edges out for a moment (60);
   with a bra, its cups show in the V.

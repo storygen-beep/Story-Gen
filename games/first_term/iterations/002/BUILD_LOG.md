@@ -2091,3 +2091,55 @@ Corruption) · 14 / 20". 0 page errors.
 - Stage cards rewritten to one line each in `extras.py`. Six `stage_*` canvases added in the new `stages.py` (ALL_PARTS), as substitutions on `room_sleep` (`home.py`), each with its own bed line (gate *one pool, one place*) and a clothing-backed Showing line (gate *her clothes are backed*). They aren't at her room's entry, because it is the wardrobe room (gate *nothing one-time at the shop or wardrobe*).
 - The climb gate counted their 6 meter reads and fell to 24.94%. LO: "Teach the gate" (skill CHANGELOG 2026-11-11). Now 903 tier sites and 302 cast sites, the same count as before.
 - Gates 116 pass, 3 decided, 1 fail (Laura, held); shape 22; cites 0 wrong; skill tests 1048 passed; selfcheck 0. Probe (scratchpad probe229.py), Corruption 25 and Exhibitionism 45 from Tuesday 22:00: nights 1-3 play Curious, Daring and Showing, night 4 plays the plain `room_sleep`, and there are 0 page errors. v2-reader not run on the six canvases.
+
+## 2026-11-11 — release 1 as a slice (DECISIONS 230)
+
+- New `scripts/release_filter.py` (repo root), run by `build_scenes.sh` after the merge. A plain build is `max`: it keeps everything and strips the tags. `RELEASE=1` cuts to release 1 and packages without `--dev`.
+- The filter has its own TOML writer, tested by a round trip on the full game. Tests: `apps/game_generation/tests/test_release_filter.py` (4).
+- New `release_map.py` holds what ships when: parts, canvases, places, people, the locked gym copy, the stop-card and note-card drafts.
+  - `canv.emit` / `_emit_block` / `emit_card` / `step_cards` write the tags.
+  - `gen_world.py` tags places, people and schedule rows. A row naming a later person ("with Kayla") gets a plain release 1 copy.
+  - New part `release1.py` holds the note card.
+  - `laura.py`: the invite buttons are release 2. `tom.py`: the dress rows are gone.
+  - `0_systems_spec.toml`:
+    - the uniforms are priced on the rail, with release 1 copies locked
+    - the sequin dress has a release 1 copy without Zoe's name
+    - the campus card is release 2
+    - `[release_overrides.1]` sets the start-page blurb
+  - `phone_calls.toml`: the dean's calls are release 2.
+- **Release 1 build:** 150 canvases (of 348), 27 places, 15 people, 23 cards.
+  - Leak grep on the HTML: Dex, Kayla, sauna, exam, `zoe_step` and "(Next release)" are 0. "Zoe"/"Jake" appear only in engine comments. "Nadia" (13) and Ryan's "Two knocks means it's you." are left for LO.
+- **Gates on the slice:** 91 pass, with fails in three kinds:
+  - the frozen meters' consequences
+  - gates that read the ledger's full cast/loops
+  - a few slice items (all reported to LO)
+
+  shape: 1 fail, SP7's signed top steps (8/4/4) vs the release page's 1/1/1. cites 0 wrong; skill tests 1056 passed; selfcheck current.
+- **Probe** (scratchpad probe230.py / probe230b.py):
+  - The opening plays through to the dean's office, and the note card shows.
+  - The gym says "Coming soon.", and the tight uniform won't sell.
+  - A café shift pays $11, and Mark's Sunday is offered.
+  - After 7 days the meters are 0 and the moods 50. 0 page errors.
+- **Save carry-over:** a release 1 save made mid-scene loads in the full build, plays on, and gets the later people and counters. 0 errors.
+- **Full build:** unchanged at 348 canvases. The new gate finds one old stale reader: Laura's `late_shift` line, which nothing has set since `tom_after_close` was removed in 0.1.
+
+## 2026-11-11 — release 1, LO's 11 answers (DECISIONS 231)
+
+- **Changed:** `release_map.py` (Nadia back, the dean's hangout and rows back, `laura_02_home_late` and `ROWS_LATER` later, texts signed); `gen_world.py` (`ROWS_LATER`); `0_systems_spec.toml` (dress prices 40/60/80, the short skirt's locked release 1 copy, Ryan's room override); `mark.py` (the garage line); `tom.py` (the late close sets `late_shift`); `scripts/release_filter.py` (an override can name a list item by id); `spine/SP7_release.md`; `sheets/systems/job.md`; `v2_state.json` (SP7 date, 12 `decided` rows, a promise, `release_page.week_income`). Skill: `gates.py` `_slice_state` and the rebound `score`, `state.md`, CHANGELOG, a test.
+- **Release 1 build:** 160 canvases, 27 places, 16 people, 24 cards; the dean's notice and walk-in are back (LO: "Nope dont cut Dean walk in"). Gates: 96 pass, 17 decided, 0 fail (the three cut-content fails are LO's waives, DECISIONS 231). Headless, the walk-in fires on the notice and leaves to the faculty floor, 0 errors. shape 21 pass, 0 fail. Leak grep: Dex, Kayla, "Two knocks means" and "at Zoe" are 0; "Zoe" 2 and "Jake" 1 are only in engine comments.
+- **Full build:** 117 pass, 0 fail; *every kept thing can happen* passes now that `late_shift` is set.
+- **Tests:** skill 1057 passed; `test_release_filter.py` + `test_gates_release_slice.py` 14 passed; cites 0 wrong; selfcheck current.
+- **Probe** (scratchpad probe230.py, probe231.py): the opening plays through and the note card shows. A café shift pays $0→$10. Mark's Sunday is offered. After 7 days her meters are 0 and the moods 50. Nadia's three hubs and the dean's hub are in; Ryan's room reads "…You knock to go in."; the skirt shows "Not yet. (Needs Exhibitionism 20.)"; the uniforms are $40/$60/$80. 0 page errors.
+- Not run yet: v2-reader on the touched canvases, v2-player.
+
+## 2026-11-11 — release 1 reader and player runs, and the fixes (DECISIONS 233)
+
+- Readers (three, 136 changed canvases): 58 FAILs, nearly all from the filter's emptied band conditions. Player (two weeks): nothing broken.
+- Fixed in `scripts/release_filter.py` (and `test_release_filter.py`, 6 tests):
+  - band conditions keep their place
+  - stand-alone always-true lines unwrapped
+  - `pre_substitution_effects`, `traitEffects` and every non-zero add on a frozen meter stripped
+  - `modifier_effects` offsets on frozen meters stripped
+  - lines spoken by a cut person dropped
+- Fixed in the build scripts (release 2 tags with release 1 copies): `college.py` (`grade_lines(r1=…)`, Zoe's quad line, the retake line, the TA's door, the cocky guy's answer line), `laura.py` (the Tuesday invite line), `hale.py` (Nadia's Thursday lines), `walkins_out.py` (Hale's Thursday thoughts), `extras.py` (lecturer card tips).
+- After: release 1 is 95 pass, 18 decided, 0 fail; shape 21 pass. The full game is 117 pass, 0 fail. Skill and filter tests 1063 passed. Headless: the low bands render (Mark turns to the sink, Ryan goes red, Laura's "You look at the floor"); meters 0, moods 50 after 7 days; 0 errors. A re-read of the 48 scenes the readers failed is running.

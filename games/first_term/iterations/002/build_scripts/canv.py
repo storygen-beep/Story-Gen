@@ -543,6 +543,9 @@ def _emit_block(b, L):
     for k in ("type", "content"):
         if k in b:
             L.append(f"{k} = {q(b[k])}")
+    for k in ("release", "release_until"):   # DECISIONS 230
+        if k in b:
+            L.append(f"{k} = {int(b[k])}")
     if "conditions" in b:
         L.append(f"conditions = {v(b['conditions'])}")
     if "blocks" in b:
@@ -639,6 +642,13 @@ def emit(canvas):
     import drift   # DECISIONS 209: her reaction drifts with the visit count
     drift.apply(canvas)
     L = ["\n[[canvases]]", f"id   = {q(canvas['id'])}", f"name = {q(canvas['name'])}"]
+    # DECISIONS 230: the release this canvas ships in (release_map.py; untagged = release 1)
+    from release_map import canvas_release
+    rel = canvas.get("release") or canvas_release(canvas["id"])
+    if rel:
+        L.append(f"release = {int(rel)}")
+    if canvas.get("release_until"):
+        L.append(f"release_until = {int(canvas['release_until'])}")
     if canvas.get("description"):
         L.append(f"description = {q(canvas['description'])}")
     t = canvas.get("trigger")
@@ -683,6 +693,9 @@ def emit(canvas):
 
 
 def emit_card(card):
+    from release_map import part_release   # DECISIONS 230: a later part's cards ship with it
+    if part_release() and "release" not in card:
+        card = dict(card, release=part_release())
     L = ["\n[[quest_cards]]"]
     for k, val in card.items():
         if isinstance(val, list) and val and isinstance(val[0], dict):
@@ -845,6 +858,9 @@ def card_goals(st, counter):
     return goals, notes
 
 
+from release_map import STOP_CARDS as STOP_CARDS_FOR_RELEASE   # noqa: E402 (DECISIONS 230)
+
+
 def step_cards(npc, texts, met_flag=None, terminal_text=None, closed_text=None, skip=(), pointer=None):
     """One card per step (counter eq n-1): the tip names place and time (the step's hint), and the
     goals are the step's real requirements, never the counter (B84; gate `a card shows the real gates`).
@@ -869,6 +885,15 @@ def step_cards(npc, texts, met_flag=None, terminal_text=None, closed_text=None, 
         card = {"npc_id": npc, "priority": 10, "text": text, "tip": tip, "when": when, "ready_canvas": s["canvas"]}
         if goals:
             card["goals"] = goals
+        # DECISIONS 230: a card points at its step, so it ships with that step's release; where the release before
+        # it ends, the person's stop card (release_map.STOP_CARDS) stands in until then
+        rel, prev = s.get("release") or 1, (steps[steps.index(s) - 1].get("release") or 1) if steps.index(s) else 1
+        if rel > 1:
+            card["release"] = rel
+        if rel > prev and npc in STOP_CARDS_FOR_RELEASE:
+            line, end = STOP_CARDS_FOR_RELEASE[npc]
+            out.append({"npc_id": npc, "priority": 10, "text": line, "when": when, "terminal": True,
+                        "terminal_text": end, "release": prev, "release_until": rel - 1})
         if pointer and pointer[0] == n and met_flag:
             # (pass 3 C38, the-first-hour.md "every ladder card carries the met flag") the pointer card is the
             # unmet one: met flag is_false + heading. A meeting can come before the step (Hale: an ordinary
@@ -879,8 +904,9 @@ def step_cards(npc, texts, met_flag=None, terminal_text=None, closed_text=None, 
             card["heading"] = pointer[1]
         out.append(card)
     top = steps[-1]["n"]
+    top_rel = max(s.get("release") or 1 for s in steps)
     if terminal_text:
-        out.append({"npc_id": npc, "priority": 10, "text": terminal_text[0],
+        out.append({"npc_id": npc, "priority": 10, "text": terminal_text[0], **({"release": top_rel} if top_rel > 1 else {}),
                     "when": [{"type": "trait", "subject": "player", "trait": counter, "op": "gte", "value": top}]
                             + ([{"flag": met_flag, "op": "is_true"}] if met_flag else []),
                     "terminal": True, "terminal_text": terminal_text[1]})

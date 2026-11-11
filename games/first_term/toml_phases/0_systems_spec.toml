@@ -904,6 +904,7 @@ exposure = 1
 
 [[clothing]]
 id = "short_skirt"
+release = 2
 description = "Short. One gust of wind and the street sees what's under it."
 locked_text = "Held in the garage"   # shown only when no trait gate explains the lock
 name = "Short skirt"
@@ -915,6 +916,23 @@ beauty = 2
 corruption = 1
 # the garage hold (rent_short_3, money_pressure.md, DECISIONS 121): while Mark keeps it, it can't be worn
 conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "garage_holds_short_skirt", operator = "is_false" } ] }
+
+# DECISIONS 231 (LO, 2026-11-11): the street turns the skirt away below Exhibitionism 20 (world_data.py SKIRT_RULE),
+# and release 1 holds her at 0, so release 1's rail shows it locked rather than selling her a skirt she can't wear
+# out. `shop_skirt_open` is set by nothing.
+[[clothing]]
+id = "short_skirt"
+release_until = 1
+description = "Short. One gust of wind and the street sees what's under it."
+locked_text = "Not yet. (Needs Exhibitionism 20.)"
+name = "Short skirt"
+slot = "bottom"
+image = "clothing/short_skirt.jpg"
+price = 30
+type = "short_skirt"
+beauty = 2
+corruption = 1
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "shop_skirt_open", operator = "is_true" } ] }
 
 [[clothing]]
 id = "thin_top"
@@ -1068,8 +1086,23 @@ beauty = 2
 corruption = 1
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 } ] }
 
+# DECISIONS 230: Zoe isn't in release 1, so release 1's copy drops her name from the tag (same dress otherwise).
 [[clothing]]
 id = "sequin_dress"
+release_until = 1
+description = "Short, tight, it catches every light."
+name = "Sequin party dress"
+slot = "dress"
+image = "clothing/sequin_dress.jpg"
+price = 40
+type = "sequin_dress"
+beauty = 3
+corruption = 1
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 } ] }
+
+[[clothing]]
+id = "sequin_dress"
+release = 2
 description = "Short, tight, it catches every light. Made for Zoe's Friday."
 name = "Sequin party dress"
 slot = "dress"
@@ -1125,38 +1158,92 @@ image = "clothing/cafe_uniform_normal.jpg"
 type = "cafe_uniform"
 beauty = 1
 
+# DECISIONS 230 (LO, 2026-11-11): the showy uniforms are sold on the clothes shop rail, not by Tom (reverses
+# DECISIONS 206's "she buys from Tom"). A priced garment goes on the rail (v2.py:12464, setup.shopRoomStock).
+# Release 1 shows it locked (cafe_dresses_open is set by nothing); from release 2 it is for sale at its stage.
 [[clothing]]
 id = "cafe_uniform_sexy"
+release = 2
 description = "A size too small. The top button won't hold for long."
 name = "Tight café uniform"
 slot = "dress"
 image = "clothing/cafe_uniform_sexy.jpg"
 type = "cafe_uniform"
+price = 40
 beauty = 2
 corruption = 1
+conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 20 } ] }
 
 [[clothing]]
+id = "cafe_uniform_sexy"
+release_until = 1
+description = "Tom won't have this on his floor. Not yet."
+name = "Tight café uniform"
+slot = "dress"
+image = "clothing/cafe_uniform_sexy.jpg"
+type = "cafe_uniform"
+price = 40
+beauty = 2
+corruption = 1
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "cafe_dresses_open", operator = "is_true" } ] }
+
+# DECISIONS 230 (LO, 2026-11-11): the showy uniforms are sold on the clothes shop rail, not by Tom (reverses
+# DECISIONS 206's "she buys from Tom"). A priced garment goes on the rail (v2.py:12464, setup.shopRoomStock).
+# Release 1 shows it locked (cafe_dresses_open is set by nothing); from release 2 it is for sale at its stage.
+[[clothing]]
 id = "cafe_uniform_short"
+release = 2
 description = "Bend to wipe a table and your panties are the specials board."
 name = "Short café dress"
 slot = "dress"
 image = "clothing/cafe_uniform_short.jpg"
-# no price: a priced garment goes on the clothes shop rail (v2.py:12464, setup.shopRoomStock); Tom sells it (DECISIONS 206)
 type = "cafe_uniform"
+price = 60
 beauty = 2
 corruption = 2
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 40 } ] }
 
 [[clothing]]
+id = "cafe_uniform_short"
+release_until = 1
+description = "Tom won't have this on his floor. Not yet."
+name = "Short café dress"
+slot = "dress"
+image = "clothing/cafe_uniform_short.jpg"
+type = "cafe_uniform"
+price = 60
+beauty = 2
+corruption = 2
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "cafe_dresses_open", operator = "is_true" } ] }
+
+# DECISIONS 230 (LO, 2026-11-11): the showy uniforms are sold on the clothes shop rail, not by Tom (reverses
+# DECISIONS 206's "she buys from Tom"). A priced garment goes on the rail (v2.py:12464, setup.shopRoomStock).
+# Release 1 shows it locked (cafe_dresses_open is set by nothing); from release 2 it is for sale at its stage.
+[[clothing]]
 id = "cafe_uniform_lowcut"
+release = 2
 description = "Cut so low no bra fits under it. Pour slow."
 name = "Low-cut café dress"
 slot = "dress"
 image = "clothing/cafe_uniform_lowcut.jpg"
 type = "cafe_uniform"
+price = 80
 beauty = 3
 corruption = 3
 conditions = { version = "1.0", logic = "AND", items = [ { type = "trait", subject = "player", trait_key = "exhibitionism", operator = "gte", value = 60 } ] }
+
+[[clothing]]
+id = "cafe_uniform_lowcut"
+release_until = 1
+description = "Tom won't have this on his floor. Not yet."
+name = "Low-cut café dress"
+slot = "dress"
+image = "clothing/cafe_uniform_lowcut.jpg"
+type = "cafe_uniform"
+price = 80
+beauty = 3
+corruption = 3
+conditions = { version = "1.0", logic = "AND", items = [ { type = "flag", subject = "player", flag_key = "cafe_dresses_open", operator = "is_true" } ] }
 
 [[clothing]]
 id = "laura_blue_dress"
@@ -1222,8 +1309,16 @@ goals    = [
 # Goal 2 (want.promise.goals[1]) once goal 1 ends. Its end, Ella hosting the party everyone goes to (Zoe A 6), is a
 # later release, so the card says so and carries no goal this release can't reach (alignment pass 2, A1/I38/E63).
 [[quest_cards]]
+release  = 2   # DECISIONS 230: campus talk (Zoe, gossip, the gym) is a later release
 group    = "story_goals"
 priority = 10
 text     = "Her name on campus: what campus says about you."
 tip      = "Zoe's parties, her dares, the quad, the gym: what you do there is what campus talks about. Hosting the party everyone goes to comes in the next release."
 when     = [ { flag = "opening_done", op = "is_true" }, { flag = "pays_her_own_way", op = "is_true" } ]
+
+# DECISIONS 230 — a value swapped for one release only (scripts/release_filter.py; the table never ships).
+# Release 1 has no Zoe, so the start page leaves her dare out.
+[release_overrides.1]
+# DECISIONS 231 (LO, 2026-11-11): the secret knock is a later step, so release 1's room text stops at the door.
+"locations[home_ryan_room].description" = "Ryan's room: his bed, his weights in the corner, his phone always face-down. He's home most evenings and every night, and the door is usually shut. You knock to go in."
+"project.description" = "You're 18, in your first term of college and still living at home. From Sunday you pay your step-father rent. Your step-brother looks, your mom watches, and the café pays in tips."

@@ -5,6 +5,58 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-11 — release slices, part 2: the ledger is read as the slice (first_term DECISIONS 231)
+
+Source: LO's "yes" to decision 7 of the release 1 review ("fix the skill so those checks read only this release").
+On the release 1 build, five gates failed for things the release does not ship: *the loop is open enough hours*
+(Ryan's step 8 loop), *residents have homes* (Zoe's flat), *every clothing state is read three times* (the locked
+uniform, Laura's blue dress), and *the obligation is charged* (the $848 week the tight uniform pays).
+
+- `scripts/gates.py`, above `main()` (citation-safe; no cited line moved): `_slice_state(game, state)`, and `score` is
+  rebound to hand every gate the sliced ledger when `release_page.release` is set. It keeps the people in the build
+  (`board.characters`, `board.map.homes`), cuts each ladder to this release's steps and owes no loop on one cut short
+  (the loop is what the last step opens, the-arc.md A1), keeps the key items something in the build can unlock, and
+  reads `release_page.week_income` in place of `board.economy.week_income`. `_apply_decided` and the lints still get
+  the ledger as written. A build with no `release_page.release` is judged exactly as before.
+- `references/state.md`: the release-slices row says how the ledger is read, plus `release_page.week_income` and
+  `[release_overrides.N]` with a list item named by id (`scripts/release_filter.py`, repo root).
+- `scripts/tests/test_gates_release_slice.py`: `test_the_ledger_is_read_as_the_slice`.
+- Verified: first_term release 1 goes from 91 to 95 gates passing; those four gates pass or read n/a. The full game is
+  unchanged: 117 pass and 0 fail.
+
+## 2026-11-11 — release slices: the gates read the release being built (first_term DECISIONS 230)
+
+Source: LO and the advisor's release plan ("first_term ships in slices"), and LO's "Go" on the plan. A release build is
+cut by the new `scripts/release_filter.py` (repo root), so these gates must judge only what that release ships.
+
+- `scripts/gates.py`, above `main()` (citation-safe; no cited line moved):
+  - `_declared_ladders` is rebound to keep only the ladder steps whose `release` ≤ `release_page.release` (untagged
+    = 1). That scopes every ladder reader together.
+  - `_locked_places` reads `release_page.locked`. Two same-line edits in `run_gates` (the fill gate's `empty`) and
+    `_ck7_rows` (*a destination is never open and exit-only*) leave a locked place out.
+  - The new gate *every kept thing can happen* (`_every_kept_thing_can_happen`) is registered on the existing
+    `gate(...)` line beside *a goal line reads the way it works*. It is red on any kept reader nothing in the build can
+    satisfy:
+    - a flag read true with no setter and not engine-set (`_ENGINE_FLAGS`: `<canvas>_closed` v2.py:17222, `cheat_<id>`
+      v2.py:13741, the three start flags v2.py:1157-1163, and `rent_short` v2.py:15992)
+    - a trait read past what the build pays it (adds' caps, sets, `{type = random}` maxima, a phone post's
+      `counter_trait`)
+    - a missing `requires_npc`/`npc`
+
+    Exempt: an OR block whose other items can hold, a `show_when_locked` button, and a place on `locked`.
+- `scripts/shape.py`: `_ladders` is rebound above `main()` the same way, so row 8b compares `release_page.steps` with the
+  in-release steps. Also `_dep_in_release`, and a same-line filter on row 4's `deps`: a dependency FROM a later-release
+  step is that release's to check.
+- `_every_kept_thing_can_happen`: a `<canvas>_closed` flag counts as engine-set only while that canvas is in the build.
+- `SKILL.md`: a gate-table row. `references/state.md`: a row for `release_page.release` / `meters` / `locked`, the step
+  `release`, and the TOML `release` / `release_until` tags.
+- Tests: `scripts/tests/test_gates_release_slice.py` (8).
+- Verified:
+  - On first_term's full build the new gate finds one real stale reader: `laura_02_home_late`'s `late_shift` line,
+    which nothing has set since `tom_after_close` was removed in 0.1. That is reported to LO, not waived.
+  - On the release 1 slice it lists only what Phase C tags next.
+  - `gates.py --selfcheck` index current, `cite_check.py --strict` 0 wrong (baseline 0), skill tests green.
+
 ## 2026-11-11 — a new stage is a moment, and a stage card says where in one line (DECISIONS 229)
 
 Source: LO on the study of how top games show her levels: "Yes c", then "Sign them" (first_term `meters.md` Rule 7);

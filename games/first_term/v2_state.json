@@ -433,16 +433,12 @@
     "version": "0.1",
     "want_line": "To be wanted by the people she shouldn't want, at home first (WANT.md §3), with the goal that pulls the player: pay her own way on Sunday",
     "steps": {
-      "npc_ryan": 8,
-      "npc_laura": 4,
-      "npc_mark": 4,
-      "npc_zoe": 5,
-      "npc_hale": 4,
-      "npc_jake": 4,
-      "npc_tom": 3,
-      "npc_dex": 5
+      "npc_ryan": 1,
+      "npc_mark": 1,
+      "npc_hale": 1
     },
     "places": [
+      "home",
       "home_hall",
       "home_kitchen",
       "home_living_room",
@@ -450,39 +446,25 @@
       "home_ella_room",
       "home_ryan_room",
       "home_bathroom",
-      "street",
-      "vance_house",
-      "park",
-      "campus",
-      "lecture_hall",
-      "library",
-      "quad",
-      "cafe",
-      "zoe_apartment",
       "home_garage",
-      "hale_office",
-      "zoe_bedroom",
-      "party_house",
       "home_front_door",
-      "canteen",
-      "college_womens_toilet",
-      "faculty_floor",
-      "art_office",
-      "business_office",
-      "ta_office",
-      "dean_office",
-      "clothes_shop",
-      "home",
-      "town",
-      "zoe_flat",
-      "zoe_kitchen",
-      "zoe_bathroom",
       "home_garden",
+      "street",
       "corner_shop",
-      "gym_floor",
-      "gym_locker",
-      "gym_sauna",
-      "gym_showers"
+      "park",
+      "vance_house",
+      "town",
+      "cafe",
+      "clothes_shop",
+      "campus",
+      "quad",
+      "lecture_hall",
+      "canteen",
+      "library",
+      "college_womens_toilet",
+      "dean_office",
+      "faculty_floor",
+      "gym"
     ],
     "weeks": 8,
     "promise_alive": "the Sunday table: each Sunday table says how many Sundays in a row she has paid her own way (goal 1; Mark's steps 1 and 3, and his Sunday table every week); Zoe's step 4 hands her the dares, which feed campus_talk (goal 2, whose end is release 2)",
@@ -495,13 +477,8 @@
     ],
     "people": [
       "npc_ryan",
-      "npc_laura",
       "npc_mark",
-      "npc_tom",
-      "npc_zoe",
-      "npc_hale",
-      "npc_jake",
-      "npc_dex"
+      "npc_hale"
     ],
     "door": null,
     "reader": {
@@ -4095,7 +4072,40 @@
       "by": "LO",
       "at": "2026-11-04",
       "note": "\"Sign it\": the whole page list, one signature. His release play is still owed."
-    }
+    },
+    "release": 1,
+    "release_note": "DECISIONS 230 (LO, 2026-11-11): first_term ships in slices. Release 1 is the first look: Ryan 1, Mark 1, Hale 1; Laura and Tom at step 0; her meters and the men's want frozen at 0, moods held at their start; home, town, the café (level 1 shifts), a minimal school, and the gym shown locked. scripts/release_filter.py cuts the build; release = 2 on a step means 'later', re-planned when release 2 is.",
+    "locked": [
+      "gym"
+    ],
+    "meters": {
+      "corruption": {
+        "cap": 0
+      },
+      "exhibitionism": {
+        "cap": 0
+      },
+      "release_2_written": {
+        "cap": 0
+      },
+      "want": {
+        "cap": 0,
+        "npc": true
+      },
+      "warmth": {
+        "hold": true,
+        "npc": true
+      },
+      "power": {
+        "hold": true,
+        "npc": true
+      },
+      "campus_talk": {
+        "cap": 0
+      }
+    },
+    "week_income": 585,
+    "week_income_working": "release 1's own week as gates.py's _week_income measures it on the release 1 build (2026-11-11): a ceiling of about $585 (at most $621), every shift at its best exit and Ryan's $25 counted daily. Level 1 shifts in the plain uniform; the showy uniforms are locked (DECISIONS 231). board.economy.week_income (848) is the full game's."
   },
   "spine": {
     "pages": [
@@ -4155,9 +4165,10 @@
         "id": "SP7",
         "status": "READY",
         "drafted_at": "2026-10-07",
-        "updated_at": "2026-10-08",
+        "updated_at": "2026-11-11",
         "signed_by": "LO",
-        "signed_at": "2026-11-04"
+        "signed_at": "2026-11-11",
+        "changed_at": "2026-11-11"
       }
     ]
   },
@@ -6820,7 +6831,8 @@
               "refusal": "parked",
               "raises": {
                 "want": 10
-              }
+              },
+              "release": 1
             },
             {
               "n": 2,
@@ -6857,7 +6869,8 @@
               "refusal": "parked",
               "raises": {
                 "want": 10
-              }
+              },
+              "release": 2
             },
             {
               "n": 3,
@@ -6910,7 +6923,8 @@
                 "from": "22:00",
                 "to": "00:00",
                 "note": "reach audit 2026-11-09: the couch took 19:00-20:30, so the step also runs late in the evening on his evening days (not Wednesday: gate `ladders move forward` reads a second window only on the first window's hours; not Friday, Kayla's night; not Saturday, Laura waits up)"
-              }
+              },
+              "release": 2
             },
             {
               "n": 4,
@@ -6957,7 +6971,8 @@
                 {
                   "flag": "kayla_met"
                 }
-              ]
+              ],
+              "release": 2
             },
             {
               "n": 5,
@@ -6997,7 +7012,8 @@
               "raises": {
                 "want": 10,
                 "corruption": 1
-              }
+              },
+              "release": 2
             },
             {
               "n": 6,
@@ -7037,7 +7053,8 @@
               "raises": {
                 "want": 10,
                 "exhibitionism": 3
-              }
+              },
+              "release": 2
             },
             {
               "n": 7,
@@ -7090,7 +7107,8 @@
                 "from": "22:00",
                 "to": "00:00",
                 "note": "reach audit 2026-11-09: the couch took 19:00-20:30, so the step also runs late in the evening on his evening days (not Wednesday: gate `ladders move forward` reads a second window only on the first window's hours; not Friday, Kayla's night; not Saturday, Laura waits up)"
-              }
+              },
+              "release": 2
             },
             {
               "n": 8,
@@ -7137,7 +7155,8 @@
                 {
                   "flag": "kayla_met"
                 }
-              ]
+              ],
+              "release": 2
             }
           ],
           "release1_note": "Release 1 (npc_ryan.md, signed 2026-11-01; DECISIONS 99-114). Step 8 runs Sun-Thu, not 'any night but Friday': its screens put Laura across the hall, and on Saturday nights she waits up downstairs (a build fix, BUILD_LOG slice B)."
@@ -7338,7 +7357,8 @@
                 {
                   "flag": "laura_dress_invite"
                 }
-              ]
+              ],
+              "release": 2
             },
             {
               "n": 2,
@@ -7374,7 +7394,8 @@
               "raises": {
                 "want": 10
               },
-              "arc_step": "Laura R1 2"
+              "arc_step": "Laura R1 2",
+              "release": 2
             },
             {
               "n": 3,
@@ -7407,7 +7428,8 @@
               "raises": {
                 "want": 10
               },
-              "arc_step": "Laura R1 3"
+              "arc_step": "Laura R1 3",
+              "release": 2
             },
             {
               "n": 4,
@@ -7458,7 +7480,8 @@
                 {
                   "flag": "laura_alone_seen"
                 }
-              ]
+              ],
+              "release": 2
             }
           ],
           "release1_note": "Release 1 (npc_laura.md, signed 2026-11-01; DECISIONS 113, 115): four steps, her lock is Love. The old steps 2, 4, 5 moved to their owners (the curfew rule, Ryan's 'Laura opens the door', Jake's step 3); 7 and 8 cut."
@@ -7652,7 +7675,8 @@
               "refusal": "parked",
               "raises": {
                 "want": 10
-              }
+              },
+              "release": 1
             },
             {
               "n": 2,
@@ -7678,7 +7702,8 @@
               "refusal": "parked",
               "raises": {
                 "want": 10
-              }
+              },
+              "release": 2
             },
             {
               "n": 3,
@@ -7718,7 +7743,8 @@
               "raises": {
                 "want": 10,
                 "exhibitionism": 3
-              }
+              },
+              "release": 2
             },
             {
               "n": 4,
@@ -7753,7 +7779,8 @@
               "raises": {
                 "want": 10
               },
-              "arc_step": "Mark R1 4"
+              "arc_step": "Mark R1 4",
+              "release": 2
             }
           ],
           "release1_note": "Release 1 (npc_mark.md, signed 2026-11-01; DECISIONS 116): four steps, paced by Sundays and her short weeks; no sex and no money for her body. Mark A 4, 5, 7, 8, 9 cut; the arrangement (built step 6) is the top step."
@@ -7844,7 +7871,8 @@
               "raises": {
                 "want": 10
               },
-              "when_note": "while a shift can still start (a reader fix, 2026-11-01: no shift starts after 19:00)"
+              "when_note": "while a shift can still start (a reader fix, 2026-11-01: no shift starts after 19:00)",
+              "release": 2
             },
             {
               "n": 2,
@@ -7885,7 +7913,8 @@
               "raises": {
                 "want": 10
               },
-              "arc_step": "Tom R1 2"
+              "arc_step": "Tom R1 2",
+              "release": 2
             },
             {
               "n": 3,
@@ -7937,7 +7966,8 @@
                 {
                   "flag": "cafe_let_it"
                 }
-              ]
+              ],
+              "release": 2
             }
           ],
           "release1_note": "Release 1 (npc_tom.md, signed 2026-11-01; DECISIONS 117): three steps, strict; Tom B 2 and B 4 cut, B 5 and B 6 a later release."
@@ -8119,7 +8149,8 @@
               "refusal": "parked",
               "raises": {
                 "exhibitionism": 3
-              }
+              },
+              "release": 2
             },
             {
               "n": 2,
@@ -8153,7 +8184,8 @@
                   "op": "gte",
                   "value": 20
                 }
-              ]
+              ],
+              "release": 2
             },
             {
               "n": 3,
@@ -8190,7 +8222,8 @@
               "raises": {
                 "exhibitionism": 3,
                 "corruption": 3
-              }
+              },
+              "release": 2
             },
             {
               "n": 4,
@@ -8223,7 +8256,8 @@
                 ],
                 "from": "18:00",
                 "to": "20:00"
-              }
+              },
+              "release": 2
             },
             {
               "n": 5,
@@ -8260,7 +8294,8 @@
               ],
               "hint": "After a Friday party, Zoe's bedroom: no dare.",
               "note": "fires at her apartment after midnight, where her row is, and moves to her bedroom inside the scene",
-              "who_notices": "the party through the door; the cocky guy in the doorway, and if she says stay, he watches"
+              "who_notices": "the party through the door; the cocky guy in the doorway, and if she says stay, he watches",
+              "release": 2
             }
           ],
           "release1_note": "Release 1 (npc_zoe.md, signed 2026-11-01; DECISIONS 119): five steps after the quad; step 5 'No dare' is the top; the dares are her hot repeatable (zoe_dares, Friday parties)."
@@ -8345,7 +8380,8 @@
               "hint": "Monday, first class: Psychology with Dr. Hale.",
               "her_line_low": "Did he just—?",
               "who_notices": "Nadia, beside her",
-              "refusal": "parked"
+              "refusal": "parked",
+              "release": 1
             },
             {
               "n": 2,
@@ -8378,7 +8414,8 @@
               "refusal": "parked",
               "raises": {
                 "exhibitionism": 3
-              }
+              },
+              "release": 2
             },
             {
               "n": 3,
@@ -8401,7 +8438,8 @@
               "hint": "Thursday after six: Dr. Hale's office hours. He wants to talk about your grade.",
               "her_line_high": "Is that a no on my paper, or a yes?",
               "who_notices": "the photo on his desk; Laura sees the grade",
-              "refusal": "parked"
+              "refusal": "parked",
+              "release": 2
             },
             {
               "n": 4,
@@ -8438,7 +8476,8 @@
               "raises": {
                 "exhibitionism": 3
               },
-              "arc_step": "Hale R1 4"
+              "arc_step": "Hale R1 4",
+              "release": 2
             }
           ],
           "release1_note": "Release 1 (npc_hale.md, signed 2026-11-01; DECISIONS 118): four steps; Hale B 5 (seven-twenty) cut; the Thursday session is his repeatable after step 4."
@@ -8577,7 +8616,8 @@
               "hint": "Friday evening at Zoe's party: a guy across the room won't stop looking.",
               "her_line_high": "You've been staring since I came in.",
               "who_notices": "his teammates; Zoe",
-              "refusal": "parked"
+              "refusal": "parked",
+              "release": 2
             },
             {
               "n": 2,
@@ -8606,7 +8646,8 @@
               "raises": {
                 "exhibitionism": 3
               },
-              "gate_note": "Curious OR Daring: read on the screen, by its yes"
+              "gate_note": "Curious OR Daring: read on the screen, by its yes",
+              "release": 2
             },
             {
               "n": 3,
@@ -8643,7 +8684,8 @@
               "hint": "Saturday night: a date with Jake, back to the front door. The house is home.",
               "her_line_high": "Ryan, this is Jake. My boyfriend.",
               "who_notices": "Ryan, walking in",
-              "refusal": "parked"
+              "refusal": "parked",
+              "release": 2
             },
             {
               "n": 4,
@@ -8675,7 +8717,8 @@
               ],
               "hint": "Saturday night, after your date: sneak him up to your room.",
               "note": "takes the date-end slot that night",
-              "who_notices": "Ryan through the wall her headboard hits; a footstep in the hall, at a door with no key"
+              "who_notices": "Ryan through the wall her headboard hits; a footstep in the hall, at a door with no key",
+              "release": 2
             }
           ],
           "release1_note": "Release 1 (npc_jake.md, signed 2026-11-01; DECISIONS 120): built Jake 3 and Jake 4 (= Laura 5) are one step; step 4 'Sneak him in' is the top step; the end of a date is his repeatable."
@@ -9159,7 +9202,8 @@
               "refusal": "parked",
               "raises": {
                 "exhibitionism": 1
-              }
+              },
+              "release": 2
             },
             {
               "n": 2,
@@ -9214,7 +9258,8 @@
               "raises": {
                 "corruption": 1
               },
-              "gate_note": "a day she hasn't had a session or trained yet (scene reader, DECISIONS 225: it fired straight after the session that unlocked it)"
+              "gate_note": "a day she hasn't had a session or trained yet (scene reader, DECISIONS 225: it fired straight after the session that unlocked it)",
+              "release": 2
             },
             {
               "n": 3,
@@ -9269,7 +9314,8 @@
               "raises": {
                 "corruption": 1
               },
-              "gate_note": "a day she hasn't had a session or trained yet (scene reader, DECISIONS 225: it fired straight after the session that unlocked it)"
+              "gate_note": "a day she hasn't had a session or trained yet (scene reader, DECISIONS 225: it fired straight after the session that unlocked it)",
+              "release": 2
             },
             {
               "n": 4,
@@ -9314,7 +9360,8 @@
               "refusal": "parked",
               "raises": {
                 "corruption": 1
-              }
+              },
+              "release": 2
             },
             {
               "n": 5,
@@ -9354,7 +9401,8 @@
               "refusal": "parked",
               "raises": {
                 "corruption": 1
-              }
+              },
+              "release": 2
             }
           ],
           "release1_note": "DECISIONS 225 (npc_dex.md, signed 2026-11-10): five steps; after hours is his repeat."
@@ -10675,6 +10723,145 @@
       "decision": "waive",
       "why": "26 labels wait for later systems",
       "signed": "LO 2026-11-04"
+    },
+    {
+      "id": "R1 frozen · an explicit beat carries a clip",
+      "gate": "an explicit beat carries a clip",
+      "match": null,
+      "decision": "later release",
+      "why": "release 1 is an introduction: her meters, every man's want and campus talk are held at 0 and moods at 50 (LO: \"Keep everything at zero her meters and moods all\"), so the heat, the climb and the men's numbers wait for release 2; the gate is unchanged",
+      "signed": "LO 2026-11-11"
+    },
+    {
+      "id": "R1 frozen · traversal heat",
+      "gate": "traversal heat",
+      "match": null,
+      "decision": "later release",
+      "why": "release 1 is an introduction: her meters, every man's want and campus talk are held at 0 and moods at 50 (LO: \"Keep everything at zero her meters and moods all\"), so the heat, the climb and the men's numbers wait for release 2; the gate is unchanged",
+      "signed": "LO 2026-11-11"
+    },
+    {
+      "id": "R1 frozen · explicit pools by place",
+      "gate": "explicit pools by place",
+      "match": null,
+      "decision": "later release",
+      "why": "release 1 is an introduction: her meters, every man's want and campus talk are held at 0 and moods at 50 (LO: \"Keep everything at zero her meters and moods all\"), so the heat, the climb and the men's numbers wait for release 2; the gate is unchanged",
+      "signed": "LO 2026-11-11"
+    },
+    {
+      "id": "R1 frozen · the men's numbers are read",
+      "gate": "the men's numbers are read",
+      "match": null,
+      "decision": "later release",
+      "why": "release 1 is an introduction: her meters, every man's want and campus talk are held at 0 and moods at 50 (LO: \"Keep everything at zero her meters and moods all\"), so the heat, the climb and the men's numbers wait for release 2; the gate is unchanged",
+      "signed": "LO 2026-11-11"
+    },
+    {
+      "id": "R1 frozen · an accident pays him",
+      "gate": "an accident pays him",
+      "match": null,
+      "decision": "later release",
+      "why": "release 1 is an introduction: her meters, every man's want and campus talk are held at 0 and moods at 50 (LO: \"Keep everything at zero her meters and moods all\"), so the heat, the climb and the men's numbers wait for release 2; the gate is unchanged",
+      "signed": "LO 2026-11-11"
+    },
+    {
+      "id": "R1 frozen · a climb starts on a choice",
+      "gate": "a climb starts on a choice",
+      "match": null,
+      "decision": "later release",
+      "why": "release 1 is an introduction: her meters, every man's want and campus talk are held at 0 and moods at 50 (LO: \"Keep everything at zero her meters and moods all\"), so the heat, the climb and the men's numbers wait for release 2; the gate is unchanged",
+      "signed": "LO 2026-11-11"
+    },
+    {
+      "id": "R1 frozen · a description pays what it says",
+      "gate": "a description pays what it says",
+      "match": null,
+      "decision": "later release",
+      "why": "release 1 is an introduction: her meters, every man's want and campus talk are held at 0 and moods at 50 (LO: \"Keep everything at zero her meters and moods all\"), so the heat, the climb and the men's numbers wait for release 2; the gate is unchanged",
+      "signed": "LO 2026-11-11"
+    },
+    {
+      "id": "R1 frozen · every stage has a way up",
+      "gate": "every stage has a way up",
+      "match": null,
+      "decision": "later release",
+      "why": "release 1 is an introduction: her meters, every man's want and campus talk are held at 0 and moods at 50 (LO: \"Keep everything at zero her meters and moods all\"), so the heat, the climb and the men's numbers wait for release 2; the gate is unchanged",
+      "signed": "LO 2026-11-11"
+    },
+    {
+      "id": "R1 frozen · ascent tiers expand the world",
+      "gate": "ascent tiers expand the world",
+      "match": null,
+      "decision": "later release",
+      "why": "release 1 is an introduction: her meters, every man's want and campus talk are held at 0 and moods at 50 (LO: \"Keep everything at zero her meters and moods all\"), so the heat, the climb and the men's numbers wait for release 2; the gate is unchanged",
+      "signed": "LO 2026-11-11"
+    },
+    {
+      "id": "R1 frozen · guidance exists",
+      "gate": "guidance exists",
+      "match": null,
+      "decision": "later release",
+      "why": "release 1 is an introduction: her meters, every man's want and campus talk are held at 0 and moods at 50 (LO: \"Keep everything at zero her meters and moods all\"), so the heat, the climb and the men's numbers wait for release 2; the gate is unchanged",
+      "signed": "LO 2026-11-11"
+    },
+    {
+      "id": "R1 frozen · the climb is where you said it is",
+      "gate": "the climb is where you said it is",
+      "match": null,
+      "decision": "later release",
+      "why": "release 1 is an introduction: her meters, every man's want and campus talk are held at 0 and moods at 50 (LO: \"Keep everything at zero her meters and moods all\"), so the heat, the climb and the men's numbers wait for release 2; the gate is unchanged",
+      "signed": "LO 2026-11-11"
+    },
+    {
+      "id": "R1 tv_loud",
+      "gate": "a day-cap closes",
+      "match": [
+        "`tv_loud`",
+        "the-meters.md M5"
+      ],
+      "decision": "waive",
+      "why": "release 1 cuts the TV rung that sets tv_loud; the read and the daily clear are harmless, left as they are (LO, DECISIONS 231)",
+      "signed": "LO 2026-11-11"
+    },
+    {
+      "id": "R1 refills",
+      "gate": "a refill place rolls an event",
+      "match": null,
+      "decision": "waive",
+      "why": "the park bench's and the women's toilet's events are Zoe's walk-ins, and Zoe is not in release 1 (LO: \"Park bench and women toilet cut is fine\")",
+      "signed": "LO 2026-11-11"
+    },
+    {
+      "id": "R1 unread meters",
+      "gate": "a meter is read",
+      "match": null,
+      "decision": "waive",
+      "why": "intelligence (read by the exams) and cafe_shifts_worked (read by the level 2 shifts) have no reader in release 1, which cuts both (LO: \"Intelligence and shifts are fine\")",
+      "signed": "LO 2026-11-11"
+    },
+    {
+      "id": "R1 debt offer",
+      "gate": "milestones open something",
+      "match": null,
+      "decision": "waive",
+      "why": "Mark's debt offer opens nothing kept in release 1; its answer was already parked for a later release (LO: \"Marks debt is fine too\")",
+      "signed": "LO 2026-11-11"
+    },
+    {
+      "id": "R1 frozen · a no-show costs",
+      "gate": "a no-show costs",
+      "match": null,
+      "decision": "later release",
+      "why": "release 1 is an introduction: her meters, every man's want and campus talk are held at 0 and moods at 50 (LO: \"Keep everything at zero her meters and moods all\"), so the heat, the climb and the men's numbers wait for release 2; the gate is unchanged; Tom's want −1 on a no-show or an ignored text is a frozen change too",
+      "signed": "LO 2026-11-11"
+    },
+    {
+      "id": "R1 frozen · ignoring a thread costs",
+      "gate": "ignoring a thread costs",
+      "match": null,
+      "decision": "later release",
+      "why": "release 1 is an introduction: her meters, every man's want and campus talk are held at 0 and moods at 50 (LO: \"Keep everything at zero her meters and moods all\"), so the heat, the climb and the men's numbers wait for release 2; the gate is unchanged; Tom's want −1 on a no-show or an ignored text is a frozen change too",
+      "signed": "LO 2026-11-11"
     }
   ],
   "promises": [
@@ -10844,6 +11031,27 @@
       "paid_in": null,
       "pays_with": "one repeatable scene each, opened by their last step",
       "decided": "Q3"
+    },
+    {
+      "text": "Her meters, the men's want and campus talk move again (release 2)",
+      "made_in": "release 1",
+      "paid_in": null,
+      "pays_with": "release 2 lifts release_page.meters; the heat and climb gates are judged on it",
+      "decided": [
+        "R1 frozen · an explicit beat carries a clip",
+        "R1 frozen · traversal heat",
+        "R1 frozen · explicit pools by place",
+        "R1 frozen · the men's numbers are read",
+        "R1 frozen · an accident pays him",
+        "R1 frozen · a climb starts on a choice",
+        "R1 frozen · a description pays what it says",
+        "R1 frozen · every stage has a way up",
+        "R1 frozen · ascent tiers expand the world",
+        "R1 frozen · guidance exists",
+        "R1 frozen · the climb is where you said it is",
+        "R1 frozen · a no-show costs",
+        "R1 frozen · ignoring a thread costs"
+      ]
     }
   ]
 }

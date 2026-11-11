@@ -1,5 +1,7 @@
 # [READY] SP7 · The release page — First Term
-> Signed by LO: LO, 2026-11-04.
+> Signed by LO: LO, 2026-11-11 (the release 1 row, DECISIONS 231).
+
+> Changed 2026-11-11 for release slices (DECISIONS 230, 231): release 1 ships Ryan, Mark and Hale to step 1 each; the full plan stays in the row below it. Signed by LO 2026-11-11.
 
 > Changed 2026-11-04 to match the build; signed by LO 2026-11-04. LO's waivers beside the BLOCK list; padding cut (the ledger's `her_moment` note is in DECISIONS, where the sheets and the ledger differ, row 13).
 > Changed 2026-11-04 to match the build; signed by LO 2026-11-04. What the ledger's `her_moment` lists.
@@ -12,7 +14,8 @@
 | decision | answer |
 |---|---|
 | version | 0.1 |
-| people, and each one's top step (built) | Ryan 8 (the first sex, two knocks) · Laura 4 (she saw you) · Mark 4 (our arrangement) · Tom 3 (not by the window) · Zoe 5 (no dare) · Jake 4 (sneak him in) · Hale 4 (Claire knocks). 32 steps (DECISIONS 101, 106–109). Her stages 1–4. The rest: SP5 |
+| people, and each one's top step (release 1) | Ryan 1 (the opening) · Mark 1 (the first Sunday count) · Hale 1 (the first lecture). Laura and Tom stay at step zero; Zoe, Jake and Dex are not in it (DECISIONS 230). Her meters stay at zero |
+| the full plan, each one's last step (all releases) | Ryan 8 (the first sex, two knocks) · Laura 4 (she saw you) · Mark 4 (our arrangement) · Tom 3 (not by the window) · Zoe 5 (no dare) · Jake 4 (sneak him in) · Hale 4 (Claire knocks). 32 steps (DECISIONS 101, 106–109). Her stages 1–4. The rest: SP5 |
 | places | all 38 built places; the men's toilet is built empty (DECISIONS 76) |
 | the door it ends on | none (DECISIONS 134). Every arc's last quest card says where this release ends |
 | **the end cards** | Ryan: "More of Ryan in the next release." · Laura: "Whether the gap gets wider is the next release." · Mark, Tom: "…, later." · Zoe, Hale, Jake: "(Next release)" · goal 2 and her top stages name what comes next |

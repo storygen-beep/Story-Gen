@@ -560,9 +560,9 @@ out.append({
             G(cond(tod("18:00", "22:00"), flag("college_for_grades")), D(L, "How are the grades? You said grades. I'm holding you to it.")),
             G(cond(tod("18:00", "22:00"), flag("college_for_fun")), D(L, "Having fun yet? You said fun. Don't have too much.")),
             G(cond(tod("18:00", "22:00"), flag("college_for_freedom")), D(L, "Freedom, you said, but you still live in my house, you know.")),
-            G(cond(wd(1), tod("18:00", "22:00"), trait("laura_step", "eq", 0)),
+            dict(G(cond(wd(1), tod("18:00", "22:00"), trait("laura_step", "eq", 0)),
               P("She dries her hands on her apron and looks at you with a funny little smile."),
-              D(L, "Come to my room after. I have something for you.")),
+              D(L, "Come to my room after. I have something for you.")), release=2),   # DECISIONS 231: her invite buttons are release 2 (DECISIONS 230)
             # release 1: the leak before each of her four steps (npc_laura.md, "Leak and promise")
             G(cond(trait("laura_step", "eq", 1)), P("Her eyes go to you and stay a second too long. She keeps a second glass on the counter now.")),
             G(cond(trait("laura_step", "gte", 2), trait("ryan_step", "gte", 2)), D(L, "How's Ryan? You two seem close lately.")),
@@ -585,11 +585,12 @@ out.append({
             go("Talk to her.", node="talk", mins=20, cond_=cond(flag("laura_talk_today", False)),
                flags=[fset("laura_talk_today")],
                eff=[{"targetType": "npc", "npcId": L, "trait": "warmth", "op": "add", "value": 2, "cap": 100}]),
-            go("Follow her to her room.", loc="home_master_bedroom", mins=2, flags=[fset("laura_dress_invite")],
-               cond_=cond(wd(1), tod("18:00", "22:00"), trait("laura_step", "eq", 0))),
+            # DECISIONS 230: her invite opens step 1 (the blue dress), which is release 2; both buttons ship with it
+            dict(go("Follow her to her room.", loc="home_master_bedroom", mins=2, flags=[fset("laura_dress_invite")],
+                    cond_=cond(wd(1), tod("18:00", "22:00"), trait("laura_step", "eq", 0))), release=2),
             # reader a3 #4 (DECISIONS 131): her invite gets a written no; it costs her Love -1
-            go("\"Not tonight, Mom.\"", node="not_tonight", mins=2, eff=[nadd(L, "warmth", -1)],
-               cond_=cond(wd(1), tod("18:00", "22:00"), trait("laura_step", "eq", 0))),
+            dict(go("\"Not tonight, Mom.\"", node="not_tonight", mins=2, eff=[nadd(L, "warmth", -1)],
+                    cond_=cond(wd(1), tod("18:00", "22:00"), trait("laura_step", "eq", 0))), release=2),
             go("Leave her to it.", loc="home_hall"),
         ]),
         node("talk", "Talk", [

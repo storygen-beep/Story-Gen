@@ -6320,9 +6320,9 @@ setup.getNpcsPresentAtLocation = function(locationId) {{
     return result;
 }};
 
-// A building's card (a container: Home, Zoe's Flat) shows who is in ANY of its rooms, and NEW when any
-// room has a new scene (first_term playtest 2026-11-10: Zoe's Flat card was blank on party night while
-// she and Jake were in the living room). The ids are the card's location and every room under it,
+// A building's card (a container, such as Home) shows who is in ANY of its rooms, and NEW when any
+// room has a new scene (playtest 2026-11-10: a building's card was blank while people were in one of
+// its rooms). Names stay out: this comment ships in every game's HTML. The ids are the card's location and every room under it,
 // computed at build time (_card_loc_ids). Only cards read these; conditions and doors keep exact ids.
 setup.getNpcsPresentAtLocations = function(locIds) {{
     var out = [], seen = {{}};

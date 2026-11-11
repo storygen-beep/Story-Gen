@@ -173,7 +173,7 @@ def check(state, strict=False, slug=None, root=None):
             f"{len(mdecl) - len(bare)}/{len(mdecl)} meters typed", bare)
 
     # 4 · dependencies resolve (SP3)
-    deps = [d for d in (state.get("dependencies") or []) if isinstance(d, dict)]
+    deps = [d for d in (state.get("dependencies") or []) if isinstance(d, dict) and _dep_in_release(d, state)]
     if not deps:
         row("dependencies resolve", None, "n/a — no dependencies declared")
     else:
@@ -814,6 +814,35 @@ def is_strict(state, finish=False):
 def _status(ok):
     return ("n/a " if ok is None else "WARN" if ok == "warn" else "DECIDED" if ok == "decided"
             else "PASS" if ok else "FAIL")
+
+
+# Release slices (DECISIONS 230 in first_term): with `release_page.release` set, a ladder is judged by the steps that
+# release ships (`release` on each step, untagged = 1), the same scope gates.py gives `_declared_ladders`. A ladder
+# with no step in this release is left out, so row 8b compares `release_page.steps` to what ships.
+_ladders_all = _ladders
+
+
+def _dep_in_release(dep, state):
+    """A dependency FROM a step a later release ships is that release's to check (release slices)."""
+    rel = gates._release_of(state)
+    frm = dep.get("from") or {}
+    if rel is None:
+        return True
+    lad = _ladders_all(state).get(frm.get("npc")) or {}
+    step = next((s for s in lad.get("steps") or [] if isinstance(s, dict) and s.get("n") == frm.get("step")), None)
+    return step is None or (step.get("release") or 1) <= rel
+
+
+def _ladders(state):   # noqa: F811
+    rel = gates._release_of(state)
+    if rel is None:
+        return _ladders_all(state)
+    out = {}
+    for npc, lad in _ladders_all(state).items():
+        steps = [s for s in lad.get("steps") or [] if not isinstance(s, dict) or (s.get("release") or 1) <= rel]
+        if steps:
+            out[npc] = dict(lad, steps=steps)
+    return out
 
 
 def main(argv=None):
