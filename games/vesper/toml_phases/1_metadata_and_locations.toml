@@ -395,6 +395,30 @@ parts_out         = 0
 parts_settled     = 0
 cain_nights       = 0
 cain_asked        = 0
+# 0.2.6 (beat_0263) — YOU, FOR HIM's counters (design_the_offer.md "BLUEPRINT · The numbers"). All extend-only; a
+# save from 0.2.5.1 reads 0 for each and nothing in the city reads any of them.
+#   • tests_done 0-4 — the day tests at the Rise (wired up, the machine, pain, the empty body); 4 = the daily test.
+#     +1 once per calendar day from the located test card (days_since_flag test_day), never inside a loop.
+#   • guard_nights 0-6 / tech_nights 0-5 / sabin_nights 0-5 / keeper_nights 0-7 — one step per visit per calendar
+#     day on each man's located card (the cain_nights rule). The last value opens that man's drain.
+#   • guard_drains_done / tech_drains_done / sabin_custody_drains / keeper_drains_done — the first-drain counters,
+#     TRAITS so the next step can read them with gte 1 (the sabin_drains_done reason). sabin_custody_drains is new on
+#     purpose: sabin_drains_done may already be 1+ from Whose Hand.
+#   • floor_door / study_door / records_door 0-1 — the locks on the sealed inside (holding_floor, sabin_study,
+#     records_room). TRAITS, not flags: the Room's trap 2 (the cell_door note below). Set by the guard's, the
+#     technician's and Sabin's first drain.
+tests_done           = 0
+guard_nights         = 0
+tech_nights          = 0
+sabin_nights         = 0
+keeper_nights        = 0
+guard_drains_done    = 0
+tech_drains_done     = 0
+sabin_custody_drains = 0
+keeper_drains_done   = 0
+floor_door           = 0
+study_door           = 0
+records_door         = 0
 
 # ─── Daily decay (engine-applied at every day rollover) ───────────────────────
 # advanceDay subtracts each value from its trait and floors at 0 (v2.py:5532-5544); parsed at
@@ -422,6 +446,11 @@ weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "08:00"
 end_time   = "23:00"
 activity   = "in his penthouse — running the assets"
+# 0.2.6 (beat_0263): off once he is dead (mercer_dead, set by cap_guard_news). Unset reads false, so every earlier
+# save keeps this row exactly as before.
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "mercer_dead", operator = "is_false" },
+] }
 
 # ── beat_0072 (rev 117) — Mercer's SECOND schedule row: his night hours down in the underworld. ──────────
 # ⚠️ PLACEMENT IS LOAD-BEARING. This block must stay directly under Mercer's penthouse row, ABOVE the next
@@ -460,6 +489,11 @@ weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "23:00"
 end_time   = "08:00"
 activity   = "keeping night hours behind his own stall"
+# 0.2.6 (beat_0263): off once he is dead. (The "a schedule row carries NO conditions" note above predates rev 225;
+# rows take a `when` now — Cain's and Dace's rows use one.)
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "mercer_dead", operator = "is_false" },
+] }
 
 # ── Renner — Mission 1 target (the cold boss she seduces from the bottom) ─────
 [[npcs]]
@@ -853,6 +887,7 @@ end_time   = "23:59"
 activity   = "at the far end of the lab with the lamp on"
 when = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "the_site_open", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "cain_taken",    operator = "is_false" },   # 0.2.6: taken (cap_site_wrecked)
 ] }
 
 [[npcs.schedules]]
@@ -863,6 +898,7 @@ end_time   = "03:00"
 activity   = "at the far end of the lab with the lamp on"
 when = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "the_site_open", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "cain_taken",    operator = "is_false" },   # 0.2.6: taken (cap_site_wrecked)
 ] }
 
 # ── Grier + Sabin — WHOSE HAND (beat_0122, rev 174). DECLARED, SCHEDULELESS, SPEAKERS ONLY. ───────────
@@ -927,6 +963,9 @@ weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "08:00"
 end_time   = "11:00"
 activity   = "handing out the day's reading"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_false" },   # 0.2.6: she is inside
+] }
 
 # ⚠️ ADDED beat_0130 (rev 180). HIS SECOND ROW, AND IT MUST STAY DIRECTLY UNDER THE FIRST ONE — same
 # [[npcs.schedules]] orphan trap, and now there are two rows between npc_sabin and the clothing catalog for
@@ -948,6 +987,22 @@ weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "11:00"
 end_time   = "22:00"
 activity   = "at the bench with the archive open"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_false" },   # 0.2.6: she is inside
+] }
+
+# ⚠️ ADDED beat_0263 (0.2.6). HIS THIRD ROW, DIRECTLY UNDER THE TWO ABOVE (the orphan trap). While she is held
+# inside he works his evenings in sabin_study, where his 0.2.6 ladder is. The two rows above are off by the same
+# flag, so he is in exactly one place.
+[[npcs.schedules]]
+location   = "sabin_study"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "21:00"
+activity   = "in his study with the plans out"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+] }
 
 # ── beat_0171 (rev 222), THE WAY DOWN — npc_loder. THE MAN WHO RUNS THE ROOM. ────────────────────────
 # ⚠️ ZERO SCHEDULE ROWS, THE npc_enns SHAPE — and here it is not a preference, it is the only legal option.
@@ -1026,6 +1081,113 @@ activity   = "at the rail over the pit with a glass"
 when = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "crew_refused", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "dace_met",     operator = "is_false" },
+] }
+
+# ══ 0.2.6 (beat_0263) — YOU, FOR HIM: the four people inside (design_the_offer.md "BLUEPRINT · People"). ══════════
+# ⚠️ Appended BELOW Dace's row, never between (the [[npcs.schedules]] orphan trap). Each row sits directly under its
+# own NPC. Every row is `when in_custody is_true`, so none of them is on any map or the Schedules page in any save
+# until she gives herself up. End times are exclusive; a night across midnight is two rows.
+
+# ── The Chairman. ONE SCENE (cap_chairman_talk), self-firing, so NO schedule row: no row, no badge. ──
+[[npcs]]
+id          = "npc_chairman"
+name        = "Aldous Vance"
+description = "The Chairman of Vance Dynamics. Old, calm and polite, and he never raises his voice. He has built a thousand bodies that feel nothing, and he wants the one that does."
+portrait    = "chairman.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["The Chairman"]
+
+# ── The night guard on her cell. His hub is at holding_cell; his ladder is one step a night. ──
+[[npcs]]
+id          = "npc_guard"
+name        = "The Guard"
+description = "The night guard on her cell. Big, bored, ordinary. He has been told she is company property, a machine and not a person, and he has been watching her through the glass for weeks."
+portrait    = "guard.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["The night guard"]
+
+[[npcs.schedules]]
+location   = "holding_cell"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "23:00"
+end_time   = "23:59"
+activity   = "on the chair outside her glass"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+] }
+
+[[npcs.schedules]]
+location   = "holding_cell"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "00:00"
+end_time   = "05:00"
+activity   = "on the chair outside her glass"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+] }
+
+# ── The technician. Runs the tests by day; works late alone in the lab. ──
+# His day row is at holding_cell, not test_lab (beat_0274): the test card is on the cell and he is the man who comes to
+# her glass for it, so the line he speaks there is true at the hour it shows. By night he is alone in the lab.
+[[npcs]]
+id          = "npc_technician"
+name        = "The Technician"
+description = "Young and careful, and he runs her tests every day. He was trained to see her as a machine and he talks to her like one, because if she is only a machine then nothing he does to her counts."
+portrait    = "technician.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["The technician"]
+
+[[npcs.schedules]]
+location   = "holding_cell"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "09:00"
+end_time   = "17:00"
+activity   = "at her glass with his tablet, for the day's test"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+] }
+
+[[npcs.schedules]]
+location   = "test_lab"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "22:00"
+end_time   = "23:59"
+activity   = "working late, alone, with the lights half down"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+] }
+
+# ── The keeper of records. The Chairman's most loyal man; the sealed files. ──
+[[npcs]]
+id          = "npc_keeper"
+name        = "The Keeper"
+description = "The Chairman's most loyal man, thirty years at his side. He keeps the sealed files, and he wants nothing from anyone except the Chairman's approval."
+portrait    = "keeper.jpg"
+core_traits = { relation = 0 }
+flag_keys   = []
+arc_stages  = ["The keeper of records"]
+
+[[npcs.schedules]]
+location   = "records_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "21:00"
+end_time   = "23:59"
+activity   = "at the long table with the files"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+] }
+
+[[npcs.schedules]]
+location   = "records_room"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "00:00"
+end_time   = "02:00"
+activity   = "at the long table with the files"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
 ] }
 
 # ─── Clothing — the worn-state COVER catalog (beat_0015) ──────────────────────
@@ -1806,6 +1968,91 @@ entry_conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "cell_door", operator = "gte", value = 1 },
 ] }
 blocked_message = "The door does not open for her."
+
+# ══ 0.2.6 (beat_0263) — YOU, FOR HIM: the sealed inside (design_the_offer.md "BLUEPRINT · The places"). ═══════════
+# The Room's pattern (above), not in_vega's: the two roots have NO entry_from, so they sit on no map and have no
+# "Leave", and she reaches them only by a scene's teleport. The city is never touched because she cannot reach it.
+# The children attach by entry_from ONLY (trap 1), their locks are TRAITS (trap 2), every block carries
+# version = "1.0" (trap 3). NOT the_rise_floor / sabin_lab: both have unconditional way-out cards to spire_plaza.
+# ⚠️ Known, not fixed here: the undo arrow walks her out of any sealed room (design_captivity_the_room.md:280-303,
+# the fix parked as beat_0045).
+# ⚠️ Nothing reaches these rooms until beat_0265 ("Go with him.") and beat_0266 (the talk). Until then they hold no
+# content, which is why they are unreachable.
+[[locations]]
+id          = "chairmans_room"
+name        = "The Chairman's Room"
+description = "A long quiet room at the top of the Spire. One desk, two chairs, the whole city under the glass. Nothing in it is there by accident."
+image       = "locations/chairmans_room.jpg"
+image_search_queries = ["luxury executive office night city view floor to ceiling windows", "minimal dark corporate penthouse office single desk"]
+auto_exit   = false
+
+# The Chairman's Room gets ONE locked child, as the Room has captive_door. auto_exit = false above already stops the
+# list-every-location fallback (v2.py, `if not navigation_html and auto_exit`; the bastien_backroom note); the door
+# makes the room's grid non-empty as well, so the seal does not rest on one key. Locked on cell_door, the trait
+# nothing ever sets (declared beat_0035). She leaves by the talk's own exit, never by this door.
+[[locations]]
+id          = "chairmans_door"
+name        = "The Door"
+description = "Two men outside it. It opens when he wants it to."
+image       = "locations/chairmans_door.jpg"
+image_search_queries = ["tall dark executive double door two security guards", "corporate office door guarded night"]
+entry_from  = "chairmans_room"
+entry_conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "cell_door", operator = "gte", value = 1 },
+] }
+blocked_message = "The door is his, not hers."
+
+[[locations]]
+id          = "holding_cell"
+name        = "The Cell"
+description = "A clean white room high in the Rise. A cot, a drain, one wall of glass, and a chair on the other side of it."
+image       = "locations/holding_cell.jpg"
+image_search_queries = ["white clinical holding cell glass wall bed", "sterile laboratory isolation room glass partition"]
+auto_exit   = false
+
+[[locations]]
+id          = "holding_floor"
+name        = "The Floor at Night"
+description = "The corridor outside the cell, half the lights off after midnight. Doors on both sides, all of them shut."
+image       = "locations/holding_floor.jpg"
+image_search_queries = ["empty clinical corridor night dim lights doors", "laboratory hallway at night half lit"]
+entry_from  = "holding_cell"
+entry_conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "floor_door", operator = "gte", value = 1 },
+] }
+blocked_message = "The glass does not open from this side."
+
+[[locations]]
+id          = "test_lab"
+name        = "The Test Lab"
+description = "Bright, cold, and full of machines that watch. A padded table in the middle with straps on it, and a screen for every one of her readings."
+image       = "locations/test_lab.jpg"
+image_search_queries = ["bright clinical laboratory padded examination table monitors", "sci fi test lab medical table screens"]
+entry_from  = "holding_floor"
+
+[[locations]]
+id          = "sabin_study"
+name        = "Sabin's Study"
+description = "A small room off the floor, stacked with plans. A lamp, a bench, and the drawings of every body on the line."
+image       = "locations/sabin_study.jpg"
+image_search_queries = ["cluttered engineer study blueprints desk lamp night", "small office stacked technical drawings lamp"]
+entry_from  = "holding_floor"
+entry_conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "study_door", operator = "gte", value = 1 },
+] }
+blocked_message = "Locked. She does not have his hours yet."
+
+[[locations]]
+id          = "records_room"
+name        = "The Records Room"
+description = "A long room of locked cabinets and one long table. The sealed files are kept here, and one man keeps them."
+image       = "locations/records_room.jpg"
+image_search_queries = ["archive room rows of locked cabinets long table lamp", "old records room filing cabinets dim light"]
+entry_from  = "holding_floor"
+entry_conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "records_door", operator = "gte", value = 1 },
+] }
+blocked_message = "Locked. Nobody has told her where it is yet."
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # THE FACE (beat_0094, rev 145) — CAIN'S LAB. The chapter's last room, and the release's last passage.

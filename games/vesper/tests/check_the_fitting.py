@@ -364,7 +364,12 @@ if mc:
     check("Bastien's men saw them" in mt and "can't make" in mt, "0260: why he came (Bastien's men in the stalls), and what she is that they can't make")
     check("Chairman" not in mt, "0260: the Chairman stays off screen (deferred)")
 terms = [c for c in story if c.get("terminal")]
-check(len(terms) == 1 and terms[0].get("when") == [{"flag": "more_coming", "op": "is_true"}], "0260: end card U is the only terminal story card")
+# beat_0264 (0.2.6): U was converted in place into 0.2.6's first live card (when more_coming + cain_taken is_false),
+# as O became S here. 0.2.6's own end card (AB, when wife_file_read) is the only terminal story card from beat_0273.
+check(any(c.get("when") == [{"flag": "more_coming", "op": "is_true"}, {"flag": "cain_taken", "op": "is_false"}]
+          and not c.get("terminal") for c in story), "0260/0264: card U is live from the end of 0.2.5 until cain_taken")
+check(len(terms) <= 1 and all({"flag": "wife_file_read", "op": "is_true"} in t.get("when", []) for t in terms),
+      "0260/0273: the only terminal story card is 0.2.6's end card")
 if terms:
     check("'" not in terms[0].get("terminal_text", ""), "0260: no apostrophe in terminal_text")
 # The story cards are exclusive across the chapter: exactly one live in each state.

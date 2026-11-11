@@ -804,6 +804,43 @@ hidden = true
 [[traits.labels]]
 key    = "cain_round"
 hidden = true
+# 0.2.6 (beat_0263) — YOU, FOR HIM's counters, all hidden (the cards name the next step).
+[[traits.labels]]
+key    = "tests_done"
+hidden = true
+[[traits.labels]]
+key    = "guard_nights"
+hidden = true
+[[traits.labels]]
+key    = "tech_nights"
+hidden = true
+[[traits.labels]]
+key    = "sabin_nights"
+hidden = true
+[[traits.labels]]
+key    = "keeper_nights"
+hidden = true
+[[traits.labels]]
+key    = "guard_drains_done"
+hidden = true
+[[traits.labels]]
+key    = "tech_drains_done"
+hidden = true
+[[traits.labels]]
+key    = "sabin_custody_drains"
+hidden = true
+[[traits.labels]]
+key    = "keeper_drains_done"
+hidden = true
+[[traits.labels]]
+key    = "floor_door"
+hidden = true
+[[traits.labels]]
+key    = "study_door"
+hidden = true
+[[traits.labels]]
+key    = "records_door"
+hidden = true
 [[traits.labels]]
 key    = "vega_cell"
 label  = "Vega's cell"
