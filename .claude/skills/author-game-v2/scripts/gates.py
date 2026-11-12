@@ -19211,6 +19211,34 @@ def score(model, game, state=None, game_dir=None):   # noqa: F811 — the ledger
     return _score_full_ledger(model, game, _slice_state(game, state), game_dir)
 
 
+# ── a screen without media (references/media-blocks.md "Every screen, not every scene"; LO, 2026-11-12) ──
+def _screen_without_media_rows(game):
+    """Every screen (node) that carries no image or video block of its own. A LIST, never a score: a door or a
+    notice is rightly none, and the reason belongs on the game's media sheet. Counted by screen, never by scene:
+    a scene with one picture on its first screen still leaves every other screen bare."""
+    rows, n = [], 0
+    for c in _g2_canvases(game):
+        for nd in c.get("nodes") or []:
+            n += 1
+            if not any(b.get("type") in MEDIA_BLOCKS for b in _flat_blocks(nd.get("blocks"))):
+                rows.append(f"{c.get('id')}#{nd.get('id')}")
+    return rows, n
+
+
+def _screen_without_media_lint(game):
+    rows, n = _screen_without_media_rows(game)
+    if not rows:
+        return
+    print(f"  {'─'*72}")
+    print(f"  lint · a screen without media — {len(rows)} of {n} screen(s) carry no picture or clip of their own")
+    for h in _rows(rows, 12):
+        print(f"          · {h}")
+    if len(rows) > 12:
+        print(f"          · … and {len(rows)-12} more")
+    print("          (references/media-blocks.md — every screen gets a block, or a reason on the media sheet;"
+          " the hub picture is gone once a choice opens the next screen)")
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -20086,7 +20114,7 @@ def main():
               " Walk-ins and windowed scenes are legitimate hits, which is why this cannot"
               " fail anything)")
 
-    _group2_lints(model, game, state)               # LO 2026-11-03 group 2; above main()
+    _group2_lints(model, game, state); _screen_without_media_lint(game)   # LO 2026-11-03 group 2; media 2026-11-12; above main()
     if tok_summary:
         print(f"  {'─'*72}")
         print(f"  lint · a token the engine never resolves — {tok_summary}")

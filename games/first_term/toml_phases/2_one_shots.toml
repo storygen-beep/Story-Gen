@@ -128,6 +128,13 @@ name = "Seventy-five"
 
 # Q10 (LO, 2026-11-04): Mark has left before breakfast, so his words are last night's, said in his own voice here
 [[canvases.nodes.blocks]]
+type = "image"
+[canvases.nodes.blocks.props]
+pool_dir       = "people/ryan01_rent_dinner_mark_t0"
+description    = "a man of 46 at a family dinner table with his fork put down, talking about money"
+search_queries = ["stern man at family dinner table", "father talking money at dinner"]   # every screen (LO, 2026-11-12; DECISIONS 243)
+
+[[canvases.nodes.blocks]]
 type    = "paragraph"
 content = "Last night Mark put his fork down at dinner and said it like he'd been saving it."
 
@@ -565,6 +572,13 @@ type    = "paragraph"
 content = "Down the hall the shower is running again: Ryan, in the bathroom now, taking his turn. Laura looks toward the sound, then at your wet hair, then toward the sound again."
 
 [[canvases.nodes.blocks]]
+type = "image"
+[canvases.nodes.blocks.props]
+pool_dir       = "people/ryan01_rule_laura_coffee_t0"
+description    = "a woman of 41 at the kitchen table with both hands round her mug, reacting to what her daughter, hair still wet, just told her"
+search_queries = ["mother with coffee in kitchen looking down hall", "woman at breakfast table daughter wet hair"]   # every screen (LO, 2026-11-12; DECISIONS 243)
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "Ryan showers first from now on. Before you're up. I'll tell him. I'm not having the two of you in that hall in towels."
 [canvases.nodes.blocks.props]
@@ -596,6 +610,13 @@ flagEffects = [ { targetType = "player", flag = "laura_rule_ryan_first", op = "s
 [[canvases.nodes]]
 id   = "card"
 name = "Your first week"
+
+[[canvases.nodes.blocks]]
+type = "image"
+[canvases.nodes.blocks.props]
+pool_dir       = "life/ryan01_card_bag_door_t0"
+description    = "A young woman with her bag on her shoulder heading out the front door for her first day of college."
+search_queries = ["young woman leaving house with bag morning", "college student going out front door"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 
 [[canvases.nodes.blocks]]
 type    = "paragraph"
