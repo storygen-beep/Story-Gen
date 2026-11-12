@@ -817,9 +817,6 @@ hidden = true
 key    = "tests_done"
 hidden = true
 [[traits.labels]]
-key    = "guard_nights"
-hidden = true
-[[traits.labels]]
 key    = "tech_nights"
 hidden = true
 [[traits.labels]]
@@ -841,7 +838,16 @@ hidden = true
 key    = "keeper_drains_done"
 hidden = true
 [[traits.labels]]
-key    = "floor_door"
+key    = "lab_door"
+hidden = true
+[[traits.labels]]
+key    = "guard_step"
+hidden = true
+[[traits.labels]]
+key    = "showers_door"
+hidden = true
+[[traits.labels]]
+key    = "yard_door"
 hidden = true
 [[traits.labels]]
 key    = "study_door"
@@ -1422,16 +1428,25 @@ cain_asked        = 0
 # save from 0.2.5.1 reads 0 for each and nothing in the city reads any of them.
 #   • tests_done 0-4 — the day tests at the Rise (wired up, the machine, pain, the empty body); 4 = the daily test.
 #     +1 once per calendar day from the located test card (days_since_flag test_day), never inside a loop.
-#   • guard_nights 0-6 / tech_nights 0-5 / sabin_nights 0-5 / keeper_nights 0-7 — one step per visit per calendar
+#   • tech_nights 0-5 / sabin_nights 0-5 / keeper_nights 0-7 — one step per visit per calendar
 #     day on each man's located card (the cain_nights rule). The last value opens that man's drain.
+#     (Replaced man by man by the REWORK, design_the_offer.md "REWORK BLUEPRINT": the guard first.)
+#   • guard_step 0-4 (beat_0275, the REWORK) — the guard's climb. One step a calendar day on his Post hub, and only
+#     once HIS corruption (npc_guard's own `corruption`, filled by her teases) reaches the step's threshold:
+#     0 watches · 20 hands · 45 knees · 70 the first fuck. The drain is offered from the first fuck on.
 #   • guard_drains_done / tech_drains_done / sabin_custody_drains / keeper_drains_done — the first-drain counters,
 #     TRAITS so the next step can read them with gte 1 (the sabin_drains_done reason). sabin_custody_drains is new on
 #     purpose: sabin_drains_done may already be 1+ from Whose Hand.
-#   • floor_door / study_door / records_door 0-1 — the locks on the sealed inside (holding_floor, sabin_study,
-#     records_room). TRAITS, not flags: the Room's trap 2 (the cell_door note below). Set by the guard's, the
-#     technician's and Sabin's first drain.
+#   • showers_door / yard_door / lab_door / study_door / records_door 0-1 — the locks on the sealed inside
+#     (block_showers; block_laundry + block_yard; test_lab + block_gallery; sabin_study; records_room). TRAITS, not
+#     flags: the Room's trap 2 (the cell_door note below). showers_door and yard_door are set by the guard's steps 2
+#     and 3, lab_door by his first drain, study_door and records_door by the technician's and Sabin's first drain.
+#     lab_door replaces 0.2.6's floor_door (unreleased, no save carries it): the Post is open from the start now.
 tests_done           = 0
-guard_nights         = 0
+guard_step           = 0
+showers_door         = 0
+yard_door            = 0
+lab_door             = 0
 tech_nights          = 0
 sabin_nights         = 0
 keeper_nights        = 0
@@ -1439,7 +1454,6 @@ guard_drains_done    = 0
 tech_drains_done     = 0
 sabin_custody_drains = 0
 keeper_drains_done   = 0
-floor_door           = 0
 study_door           = 0
 records_door         = 0
 
@@ -2121,32 +2135,115 @@ core_traits = { relation = 0 }
 flag_keys   = []
 arc_stages  = ["The Chairman"]
 
-# ── The night guard on her cell. His hub is at holding_cell; his ladder is one step a night. ──
+# ── The guard: her keeper on the block (beat_0275, the REWORK — design_the_offer.md "REWORK BLUEPRINT · The guard's
+# day"). He is in ONE room at a time, so his rows ARE the block's routine: the wash hour, the yard hour, the laundry
+# hour, and the Post (his desk outside her glass) the rest of the day and night. gates.py's "a named person is where
+# the line says" holds every guard line to these rows, which is why he walks the routine instead of sitting still.
+# His climb runs on his own `corruption` (her teases fill it) and guard_step (one step a day; 1_metadata counters).
+# Rows sit directly under him (the orphan trap); the night is two rows across midnight.
 [[npcs]]
 id          = "npc_guard"
 name        = "The Guard"
-description = "The night guard on her cell. Big, bored, ordinary. He has been told she is company property, a machine and not a person, and he has been watching her through the glass for weeks."
+description = "Her keeper on the block, day and night. Big, bored, ordinary. He has been told she is company property, a machine and not a person, and he has been watching her through the glass for weeks."
 portrait    = "guard.jpg"
-core_traits = { relation = 0 }
+core_traits = { relation = 0, corruption = 0 }
 flag_keys   = []
-arc_stages  = ["The night guard"]
+arc_stages  = ["Her keeper"]
+
+# His routine hours follow her locks: until a room is open to her he spends that hour at the Post, so the Schedules
+# page never sends her to a door she cannot open, and his Post hub is there for her in those hours too.
+[[npcs.schedules]]
+location   = "block_showers"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "07:00"
+end_time   = "08:00"
+activity   = "at the shower door for the wash hour"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "showers_door", operator = "gte", value = 1 },
+] }
 
 [[npcs.schedules]]
-location   = "holding_cell"
+location   = "holding_floor"
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "23:00"
-end_time   = "23:59"
-activity   = "on the chair outside her glass"
+start_time = "07:00"
+end_time   = "08:00"
+activity   = "at his desk outside her glass"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "showers_door", operator = "lt", value = 1 },
+] }
+
+[[npcs.schedules]]
+location   = "holding_floor"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "17:00"
+activity   = "at his desk outside her glass"
 when = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
 ] }
 
 [[npcs.schedules]]
-location   = "holding_cell"
+location   = "block_yard"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "18:00"
+activity   = "by the wall for the yard hour"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "yard_door", operator = "gte", value = 1 },
+] }
+
+[[npcs.schedules]]
+location   = "holding_floor"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "18:00"
+activity   = "at his desk outside her glass"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "yard_door", operator = "lt", value = 1 },
+] }
+
+[[npcs.schedules]]
+location   = "block_laundry"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "19:00"
+activity   = "in the laundry doorway for the laundry hour"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "yard_door", operator = "gte", value = 1 },
+] }
+
+[[npcs.schedules]]
+location   = "holding_floor"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "19:00"
+activity   = "at his desk outside her glass"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "yard_door", operator = "lt", value = 1 },
+] }
+
+[[npcs.schedules]]
+location   = "holding_floor"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time   = "23:59"
+activity   = "at his desk outside her glass"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+] }
+
+[[npcs.schedules]]
+location   = "holding_floor"
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "00:00"
-end_time   = "05:00"
-activity   = "on the chair outside her glass"
+end_time   = "07:00"
+activity   = "at his desk outside her glass"
 when = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
 ] }
@@ -3033,17 +3130,17 @@ image       = "locations/holding_cell.jpg"
 image_search_queries = ["white clinical holding cell glass wall bed", "sterile laboratory isolation room glass partition"]
 auto_exit   = false
 
+# ── The Post (beat_0275, the REWORK). Was "The Floor at Night", locked on floor_door until the guard's drain. The
+# REWORK opens the block from the start: this is the guard's desk outside her glass and the centre of the block, so it
+# carries NO lock, and every room of the block hangs off it by entry_from. The locks moved onto the rooms themselves
+# (each a TRAIT set by one of the guard's steps or his drain), so a room never opens or shuts as his meter moves.
 [[locations]]
 id          = "holding_floor"
-name        = "The Floor at Night"
-description = "The corridor outside the cell, half the lights off after midnight. Doors on both sides, all of them shut."
+name        = "The Post"
+description = "The corridor outside her glass. His desk, his chair, a screen with her cell on it. Doors off both sides, and he has the keys to all of them."
 image       = "locations/holding_floor.jpg"
-image_search_queries = ["empty clinical corridor night dim lights doors", "laboratory hallway at night half lit"]
+image_search_queries = ["security guard desk corridor outside glass cell", "clinical corridor guard station monitors doors"]
 entry_from  = "holding_cell"
-entry_conditions = { version = "1.0", items = [
-  { type = "trait", subject = "player", trait_key = "floor_door", operator = "gte", value = 1 },
-] }
-blocked_message = "The glass does not open from this side."
 
 [[locations]]
 id          = "test_lab"
@@ -3052,6 +3149,12 @@ description = "Bright, cold, and full of machines that watch. A padded table in 
 image       = "locations/test_lab.jpg"
 image_search_queries = ["bright clinical laboratory padded examination table monitors", "sci fi test lab medical table screens"]
 entry_from  = "holding_floor"
+# beat_0275 (the REWORK): the Post is open now, so the lab carries its own lock. By day the test card still TELEPORTS
+# her here (a lock does not stop a teleport); on foot she gets in only after the guard's first drain.
+entry_conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "lab_door", operator = "gte", value = 1 },
+] }
+blocked_message = "Locked at night. He has the key."
 
 [[locations]]
 id          = "sabin_study"
@@ -3076,6 +3179,58 @@ entry_conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "records_door", operator = "gte", value = 1 },
 ] }
 blocked_message = "Locked. Nobody has told her where it is yet."
+
+# ── The block's rooms (beat_0275, the REWORK — design_the_offer.md "REWORK BLUEPRINT · The places"). All off the
+# Post by entry_from (trap 1), each locked on a TRAIT (trap 2) with version = "1.0" (trap 3). A locked room still
+# shows on the Post's grid as a greyed card with its blocked_message: the promise is the point. Opened by the guard's
+# step 2 (showers_door), step 3 (yard_door: the Laundry and the Yard) and his first drain (lab_door: the Gallery).
+[[locations]]
+id          = "block_showers"
+name        = "The Showers"
+description = "A tiled room with six heads and no curtains worth the name. The door has a window in it, at his height."
+image       = "locations/block_showers.jpg"
+image_search_queries = ["prison shower room white tiles open showers", "institutional shower block tiled room door window"]
+entry_from  = "holding_floor"
+entry_conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "showers_door", operator = "gte", value = 1 },
+] }
+blocked_message = "He hasn't let you near the showers yet."
+
+[[locations]]
+id          = "block_laundry"
+name        = "The Laundry"
+description = "Washing machines in a row, the grey shifts on a rail, the air warm and damp. One way in, and he stands in it."
+image       = "locations/block_laundry.jpg"
+image_search_queries = ["institutional laundry room row of washing machines", "prison laundry room machines grey uniforms rail"]
+entry_from  = "holding_floor"
+entry_conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "yard_door", operator = "gte", value = 1 },
+] }
+blocked_message = "Not without him. Not yet."
+
+[[locations]]
+id          = "block_yard"
+name        = "The Yard"
+description = "A square of concrete with walls on four sides and the sky on top. An hour of air a day, and he watches all of it."
+image       = "locations/block_yard.jpg"
+image_search_queries = ["prison exercise yard concrete high walls sky", "walled concrete courtyard institutional building"]
+entry_from  = "holding_floor"
+entry_conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "yard_door", operator = "gte", value = 1 },
+] }
+blocked_message = "Not without him. Not yet."
+
+[[locations]]
+id          = "block_gallery"
+name        = "The Gallery"
+description = "A long glass walkway over the line. Below it, row after row of bodies on their racks, made to look like people and empty inside."
+image       = "locations/block_gallery.jpg"
+image_search_queries = ["glass walkway above factory production line robots", "observation gallery over rows of humanoid robots on racks"]
+entry_from  = "holding_floor"
+entry_conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "lab_door", operator = "gte", value = 1 },
+] }
+blocked_message = "Locked at night. He has the key."
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # THE FACE (beat_0094, rev 145) — CAIN'S LAB. The chapter's last room, and the release's last passage.
@@ -10254,7 +10409,7 @@ time_progression_minutes = 30
 
 # ══ 0.2.6 YOU, FOR HIM — part six, THE TESTS (beat_0267). design_the_offer.md part six + "BLUEPRINT · Part six". ══
 # ⚠️ A LOCATED CARD ON holding_cell, 09:00-17:00 (the technician's day row). She is taken to the lab and brought
-# back: every exit lands in holding_cell, so test_lab is never reached on foot by day (the floor is locked until the
+# back: every exit lands in holding_cell, so test_lab is never reached on foot by day (the lab is locked on lab_door until the
 # guard's drain).
 # ⚠️ ONE TEST A CALENDAR DAY, the kess_fitting shape: test_day re-stamped on every test, days_since_flag gte 1 on
 # every test after the first, and the "not today" band first in the chain (3_activities.toml kess_fitting).
@@ -36754,15 +36909,16 @@ destinationType          = "specific"
 locationId               = "holding_cell"
 time_progression_minutes = 60
 
-# ── cap_guard_news — the next night, the guard says it in passing. Auto-fire @holding_cell, pri 10, ONE-SHOT. ──
-# ⚠️ GUARD PRESENT (npc_at_location): the line is his, and his rows are 23:00-05:00 when in_custody.
+# ── cap_guard_news — the next day, the guard says it in passing. Auto-fire @holding_floor (the Post), pri 10, ONE-SHOT. ──
+# ⚠️ GUARD PRESENT (npc_at_location): the line is his. Moved from the cell to the Post at beat_0278 (the REWORK): his
+# rows hold him at the Post most of the day, and never in the cell.
 # SETS mercer_dead, which switches off Mercer's nine canvases, three cards and two rows (beat_0263, beat_0268).
 [[canvases]]
 id          = "cap_guard_news"
 name        = "The Guard"
-description = "beat_0268 (0.2.6). Auto-fire @holding_cell, pri 10, one-shot, gated mercer_last_visit + mercer_dead is_false + days_since_flag mercer_last_visit gte 1 + the guard present. 'Your old owner. Went off the roof of his own building.' SETS mercer_dead. 10 min."
+description = "beat_0268 (0.2.6). Auto-fire @holding_floor (the Post), pri 10, one-shot, gated mercer_last_visit + mercer_dead is_false + days_since_flag mercer_last_visit gte 1 + the guard present. 'Your old owner. Went off the roof of his own building.' SETS mercer_dead. 10 min."
 [canvases.trigger]
-location      = "holding_cell"
+location      = "holding_floor"
 is_repeatable = false
 priority      = 10
 is_active     = true
@@ -36770,14 +36926,14 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "mercer_last_visit", operator = "is_true"  },
   { type = "flag", subject = "player", flag_key = "mercer_dead",       operator = "is_false" },
   { type = "days_since_flag", subject = "player", flag_key = "mercer_last_visit", operator = "gte", value = 1 },
-  { type = "npc_at_location", location_id = "holding_cell", npc_id = "npc_guard", operator = "is_present" },
+  { type = "npc_at_location", location_id = "holding_floor", npc_id = "npc_guard", operator = "is_present" },
 ] }
 
 [[canvases.nodes]]
 id   = "base"
 name = "The Guard"
 blocks = [
-  { type = "paragraph", content = "The guard drops into his chair outside the glass and puts his feet up. He looks at her the way he always looks at her, then at his paper." },
+  { type = "paragraph", content = "The guard is in his chair at the desk with his feet up. He looks at her the way he always looks at her, then at his paper." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Your old owner. Went off the roof of his own building today. Forty floors. They're saying he jumped." },
   { type = "paragraph", content = "He turns a page." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Nobody jumps the week they get their office back." },
@@ -36795,19 +36951,24 @@ flagEffects = [
 ]
 
 
-# ══ 0.2.6 part seven — THE GUARD (beat_0269). design_the_offer.md "The worked example — the guard" + BLUEPRINT. ══
-# The Sabin rig's shape (hub + triggerless loop + finisher + drain canvas), generated from one spec so the four men
-# in this release share one set of exits. One step per calendar day on the HUB (the cain_nights rule); the loop
-# never moves a counter. Steps cost 15 energy (costs grey the choice): a hard test day leaves her too tired.
-# guard_nights: 0 he watches · 1 hands · 2 her knees · 3+ the loop (the first time at 3) · 6 the drain.
-# ⚠️ The drain needs guard_nights 6 as well as the weapon and the charge: before that the ass finish is just a finish
-# ("he isn't yours yet"). The first drain sets floor_door 1, which opens holding_floor (beat_0263's lock).
+# ══ 0.2.6 part seven — THE GUARD (beat_0269; REWORKED beat_0276). design_the_offer.md "REWORK BLUEPRINT · The guard". ══
+# His climb is a GRIND now, not a calendar (LO 2026-11-12). Her teases fill HIS corruption (npc_guard.corruption,
+# +4..+8 a tease, 20 energy and an hour each); a step opens only when his corruption reaches its threshold AND a day
+# has passed since the last step (guard_day, the cain_nights rule): 0 he watches · 20 his hands · 45 her knees ·
+# 70 the first fuck. guard_step counts the steps. Step 2 sets showers_door, step 3 yard_door (the Laundry and the
+# Yard). The drain is offered from the first fuck on: no ladder gate on the finisher (Sabin's rig never had one);
+# his first drain sets lab_door, which opens the lab at night and the Gallery, and ends her curfew.
+# ⚠️ The hub lives at the Post (holding_floor), where his rows hold him most of the day. ONE portrait canvas per
+# person per place (the build refuses a second), so the steps AND the teases here are choices on this one hub. His
+# routine-room teases (the Showers, the Laundry, the Yard) are their own hubs at those places (beat_0277).
+# ⚠️ The tease and step choices carry their effects ON THE CHOICE (on click), never on a node: a node's exit fires on
+# render. The band chain below is one if/elseif chain (adjacent groups merge), so every band is exclusive.
 [[canvases]]
 id          = "hub_guard"
 name        = "The Guard"
-description = "beat_0269 (0.2.6). The guard's hub @holding_cell, npc + requires_npc npc_guard (his 23:00-05:00 rows), repeatable, pri 4, gated in_custody + chairman_met. One step a calendar day (guard_day): watch, hands, knees, then the loop (the first time), which keeps stepping him to guard_nights 6. The drain lands at 6 and sets floor_door."
+description = "beat_0276 (0.2.6 REWORK). The guard's hub @holding_floor (the Post), npc + requires_npc npc_guard, repeatable, pri 4, gated in_custody + chairman_met. Steps on his corruption 0/20/45/70 + one a calendar day (guard_day); teases (flash +4, strip +5, touch +8, whisper +7; 20 energy each) fill it. Step 2 sets showers_door, step 3 yard_door; the loop from step 3 on, the drain on the first fuck."
 [canvases.trigger]
-location      = "holding_cell"
+location      = "holding_floor"
 requires_npc  = "npc_guard"
 npc           = "npc_guard"
 is_repeatable = true
@@ -36825,59 +36986,93 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "guard_day", operator = "is_true" },
       { type = "days_since_flag", subject = "player", flag_key = "guard_day", operator = "lt", value = 1 },
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 4 },
     ] } }, blocks = [
-    { type = "paragraph", content = "He is out there in his chair again. He has had what he came for tonight, and he looks at her through the glass like a man who has already eaten." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Tomorrow. I'm on again tomorrow." },
+    { type = "paragraph", content = "He has had his one thing from her today, and he looks at her like a man already counting the hours to tomorrow." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Tomorrow. Give me a reason and tomorrow I'll do more." },
   ] },
-  { type = "paragraph", content = "The chair outside the glass creaks. The night guard, big and bored, his feet up, his eyes on her." },
+  { type = "paragraph", content = "His desk outside her glass, his chair, a screen with her cell on it. He looks up every time she moves." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "guard_nights", operator = "gte", value = 0 },
-      { type = "trait", subject = "player", trait_key = "guard_nights", operator = "lt", value = 1 },
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 1 },
     ] } }, blocks = [
     { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Don't mind me. I'm paid to look at you. Nobody said I had to pretend I don't like it." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "guard_nights", operator = "gte", value = 1 },
-      { type = "trait", subject = "player", trait_key = "guard_nights", operator = "lt", value = 2 },
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 2 },
+      { type = "trait", subject = "npc", npc_id = "npc_guard", trait_key = "corruption", operator = "lt", value = 20 },
     ] } }, blocks = [
-    { type = "paragraph", content = "He doesn't bother with his paper any more. He watches her the whole shift." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Same time as last night, then. I've been thinking about it all day." },
+    { type = "paragraph", content = "He watches her the whole day now. He still doesn't get up." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Go on, then. Give me something to look at." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "guard_nights", operator = "gte", value = 2 },
-      { type = "trait", subject = "player", trait_key = "guard_nights", operator = "lt", value = 3 },
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 2 },
+      { type = "trait", subject = "npc", npc_id = "npc_guard", trait_key = "corruption", operator = "gte", value = 20 },
     ] } }, blocks = [
-    { type = "paragraph", content = "He has a key on his belt for the glass, and he plays with it while he looks at her." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "You know what I want. You knew last night." },
+    { type = "paragraph", content = "He keeps touching the keys on his belt while he looks at her." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "I could come in there and check you over. Nobody would know." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "guard_nights", operator = "gte", value = 3 },
-      { type = "trait", subject = "player", trait_key = "guard_nights", operator = "lt", value = 6 },
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 2 },
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 3 },
+      { type = "trait", subject = "npc", npc_id = "npc_guard", trait_key = "corruption", operator = "lt", value = 45 },
     ] } }, blocks = [
-    { type = "paragraph", content = "He is already standing when she looks up, the key in the lock." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Get over here. I've been hard since my shift started." },
+    { type = "paragraph", content = "He has had his hands all over her once, and he keeps looking at them. He still won't open his belt." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Don't push it. I've got a job to keep." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "guard_nights", operator = "gte", value = 6 },
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 2 },
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 3 },
+      { type = "trait", subject = "npc", npc_id = "npc_guard", trait_key = "corruption", operator = "gte", value = 45 },
     ] } }, blocks = [
-    { type = "paragraph", content = "He comes in without being asked now, and sits on her cot like it's his." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "You. Every night. I can't think about anything else in this place." },
+    { type = "paragraph", content = "He has the key to the glass out on the desk in front of him." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "You know what I want. You've known for days." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 3 },
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 4 },
+      { type = "trait", subject = "npc", npc_id = "npc_guard", trait_key = "corruption", operator = "lt", value = 70 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He has had her on her knees, and he has not stopped thinking about it. He still hasn't fucked her." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "One of these days I'm going to forget I'm on shift." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 3 },
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 4 },
+      { type = "trait", subject = "npc", npc_id = "npc_guard", trait_key = "corruption", operator = "gte", value = 70 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He is already standing when she comes out, the key in his hand, his cock hard against his trousers." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Inside. Now. I'm done waiting." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 4 },
+      { type = "trait", subject = "player", trait_key = "lab_door", operator = "lt", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He fucks her whenever he wants now, and he wants her every time he sees her." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "You. Every day. I can't think about anything else in this place." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "lab_door", operator = "gte", value = 1 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He sits on his desk with his legs open and the keys hanging off his finger, and the glass stands open behind her." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Doors are open. Go where you want. Come back to me." },
   ] },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
 [[canvases.nodes.exit_block.choices]]
-text       = "Let him look."
+text       = "Let him watch you at the glass."
 targetType = "node"
 nodeId     = "hub_guard.rung0"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "guard_nights", operator = "gte", value = 0 },
-  { type = "trait", subject = "player", trait_key = "guard_nights", operator = "lt", value = 1 },
+  { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 1 },
   { type = "flag", subject = "player", flag_key = "guard_day", operator = "is_false" },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "guard_nights", op = "add", value = 1, clamp = true, cap = 6 },
+  { targetType = "player", trait = "guard_step", op = "add", value = 1, clamp = true, cap = 4 },
 ]
 flagEffects = [{ targetType = "player", flag = "guard_day", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -36885,13 +37080,15 @@ text       = "Let him in."
 targetType = "node"
 nodeId     = "hub_guard.rung1"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "guard_nights", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "guard_nights", operator = "lt", value = 2 },
+  { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 2 },
   { type = "days_since_flag", subject = "player", flag_key = "guard_day", operator = "gte", value = 1 },
+  { type = "trait", subject = "npc", npc_id = "npc_guard", trait_key = "corruption", operator = "gte", value = 20 },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "guard_nights", op = "add", value = 1, clamp = true, cap = 6 },
+  { targetType = "player", trait = "guard_step", op = "add", value = 1, clamp = true, cap = 4 },
+  { targetType = "player", trait = "showers_door", op = "set", value = 1, clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "guard_day", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -36899,13 +37096,15 @@ text       = "Get on your knees for him."
 targetType = "node"
 nodeId     = "hub_guard.rung2"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "guard_nights", operator = "gte", value = 2 },
-  { type = "trait", subject = "player", trait_key = "guard_nights", operator = "lt", value = 3 },
+  { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 2 },
+  { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 3 },
   { type = "days_since_flag", subject = "player", flag_key = "guard_day", operator = "gte", value = 1 },
+  { type = "trait", subject = "npc", npc_id = "npc_guard", trait_key = "corruption", operator = "gte", value = 45 },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "guard_nights", op = "add", value = 1, clamp = true, cap = 6 },
+  { targetType = "player", trait = "guard_step", op = "add", value = 1, clamp = true, cap = 4 },
+  { targetType = "player", trait = "yard_door", op = "set", value = 1, clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "guard_day", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -36913,13 +37112,14 @@ text       = "Let him have you."
 targetType = "node"
 nodeId     = "loop_guard.intro"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "guard_nights", operator = "gte", value = 3 },
-  { type = "trait", subject = "player", trait_key = "guard_nights", operator = "lt", value = 6 },
+  { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 3 },
+  { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 4 },
   { type = "days_since_flag", subject = "player", flag_key = "guard_day", operator = "gte", value = 1 },
+  { type = "trait", subject = "npc", npc_id = "npc_guard", trait_key = "corruption", operator = "gte", value = 70 },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "guard_nights", op = "add", value = 1, clamp = true, cap = 6 },
+  { targetType = "player", trait = "guard_step", op = "add", value = 1, clamp = true, cap = 4 },
   { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
@@ -36932,8 +37132,7 @@ text       = "Let him have you."
 targetType = "node"
 nodeId     = "loop_guard.intro"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "guard_nights", operator = "gte", value = 3 },
-  { type = "days_since_flag", subject = "player", flag_key = "guard_day", operator = "lt", value = 1 },
+  { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 4 },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
@@ -36944,35 +37143,161 @@ effects = [
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
 ]
 [[canvases.nodes.exit_block.choices]]
-text       = "Let him have you."
+text       = "Flash him."
 targetType = "node"
-nodeId     = "loop_guard.intro"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "guard_nights", operator = "gte", value = 6 },
-  { type = "days_since_flag", subject = "player", flag_key = "guard_day", operator = "gte", value = 1 },
-] }
-costs      = [{ trait = "energy", value = 15 }]
+nodeId     = "hub_guard.tease_flash"
+costs      = [{ trait = "energy", value = 20 }]
 effects = [
-  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+  { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "add", value = 4, clamp = true },
 ]
-flagEffects = [{ targetType = "player", flag = "guard_day", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
-text       = "Turn your back on him."
+text       = "Show him everything at the glass."
+targetType = "node"
+nodeId     = "hub_guard.tease_strip"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 1 },
+] }
+costs      = [{ trait = "energy", value = 20 }]
+effects = [
+  { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "add", value = 5, clamp = true },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Touch yourself where he can see."
+targetType = "node"
+nodeId     = "hub_guard.tease_touch"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 1 },
+] }
+costs      = [{ trait = "energy", value = 20 }]
+effects = [
+  { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "add", value = 8, clamp = true },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Whisper what you'd do to him."
+targetType = "node"
+nodeId     = "hub_guard.tease_whisper"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 2 },
+] }
+costs      = [{ trait = "energy", value = 20 }]
+effects = [
+  { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "add", value = 7, clamp = true },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Go back into your cell."
 targetType = "location"
 locationId = "holding_cell"
+
+
+[[canvases.nodes]]
+id   = "tease_flash"
+name = "Flash him"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/guard_tease_flash_t4", pool = 4, description = "A naked young woman in a grey prison shift standing at a guard's desk lifting the shift up to her chin, bare breasts and shaved pussy on show, a uniformed guard staring from his chair. Must show: the shift held up, her bare body, the seated guard. Avoid: a bedroom.", search_queries = ["girl lifting dress flashing tits and pussy at guard desk", "woman flashing naked body under shift security guard watching"] } },
+  { type = "paragraph", content = "She walks up to his desk and lifts the grey shift to her chin. Nothing under it. Her tits, her belly, her bare cunt, a foot from his face." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Put that down. There's a camera on this desk." },
+  { type = "dialog", props = { speaker = "player" }, content = "Then it's getting a good look too." },
+  { type = "dialog", props = { speaker = "player" }, content = "Look all you want. It's what you've been doing for weeks." },
+  { type = "paragraph", content = "She holds it there and lets him stare. His hand goes under the desk to the front of his trousers and stays there." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "You're going to get me sacked." },
+  { type = "dialog", props = { speaker = "player" }, content = "Not if you're quick." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Christ. Put it down before I do something." },
+  { type = "paragraph", content = "She drops the shift and walks away slowly, her ass moving under the thin cloth, his eyes on it the whole way." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Walk away from him."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_floor"
 time_progression_minutes = 60
 
+
+[[canvases.nodes]]
+id   = "tease_strip"
+name = "At the glass"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/guard_tease_strip_t4", pool = 4, description = "A naked woman pressing her bare breasts flat against a glass wall from inside a white cell, then bending over with her ass to the glass, a uniformed guard standing close on the other side. Must show: breasts on the glass, the guard behind the glass. Avoid: a bedroom.", search_queries = ["naked woman pressing tits against glass man watching", "girl bending over against glass wall showing ass guard"] } },
+  { type = "paragraph", content = "She goes back behind the glass, stands right up against it and peels the shift off over her head. She presses her tits flat to the glass so he can watch them squash." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "You do this on purpose." },
+  { type = "dialog", props = { speaker = "player" }, content = "Every time. Come closer." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "I'm not supposed to stand this close." },
+  { type = "dialog", props = { speaker = "player" }, content = "Then step back. Go on, I dare you." },
+  { type = "paragraph", content = "He gets up and stands on his side of the glass, his breath fogging it. She turns round, bends over and spreads her ass with both hands, her cunt open an inch from the glass." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Fuck. I can see everything." },
+  { type = "dialog", props = { speaker = "player" }, content = "That's the idea." },
+  { type = "dialog", props = { speaker = "player" }, content = "Look at it. That's what you're not allowed to have. Yet." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Yet?" },
+  { type = "dialog", props = { speaker = "player" }, content = "Yet." },
+  { type = "paragraph", content = "She stays bent over until she hears him groan through the glass, his hand rubbing his cock through his trousers." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Put the shift back on."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_cell"
+time_progression_minutes = 60
+
+
+[[canvases.nodes]]
+id   = "tease_touch"
+name = "For him"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/guard_tease_touch_t5", pool = 4, description = "A naked woman lying on a narrow cot in a white cell with her legs spread wide toward a glass wall, fingering herself to orgasm, a uniformed guard watching through the glass. Must show: masturbation with fingers inside, legs open to the glass. Avoid: toys, a bedroom.", search_queries = ["girl masturbating legs spread on cot watched through glass", "woman fingering herself orgasm in cell man watching", "solo masturbation spread legs facing window"] } },
+  { type = "paragraph", content = "She lies back on the cot facing the glass, opens her legs wide and puts her fingers on her cunt. She is already wet." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "What are you doing?" },
+  { type = "dialog", props = { speaker = "player" }, content = "What does it look like? Watch me." },
+  { type = "paragraph", content = "She rubs her clit in slow circles, then pushes two fingers into herself and fucks them in and out, wet and loud, her hips lifting off the cot." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Jesus. Don't stop." },
+  { type = "dialog", props = { speaker = "player" }, content = "I'm thinking about your cock. I'm thinking about you in here with me." },
+  { type = "paragraph", content = "She comes with her eyes on his, her thighs shaking, her cunt clenching on her fingers, and she does not look away once." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "You're going to kill me, you know that?" },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Lie there for him."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_cell"
+time_progression_minutes = 60
+
+
+[[canvases.nodes]]
+id   = "tease_whisper"
+name = "In his ear"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/guard_tease_whisper_t4", pool = 4, description = "A woman in a thin grey shift leaning over a security desk, her breasts loose under the cloth, whispering in a seated uniformed guard's ear while her hand rubs his crotch. Must show: her lips at his ear, her hand on his crotch, the desk. Avoid: a bedroom.", search_queries = ["woman whispering in man's ear rubbing his crotch desk", "girl groping guard through trousers whispering"] } },
+  { type = "paragraph", content = "She leans over his desk, her tits hanging loose in the shift, her mouth at his ear." },
+    { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 3 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "player" }, content = "I want your cock in my mouth. I want to get on my knees on that cold floor and suck you until you come." },
+  ] },
+    { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 3 },
+    ] } }, blocks = [
+    { type = "dialog", props = { speaker = "player" }, content = "I want your cock in my mouth again. I want you to hold my head and fuck my throat." },
+  ] },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Keep your voice down." },
+  { type = "dialog", props = { speaker = "player" }, content = "Then I want you to bend me over the cot and fuck me until I can't stand up." },
+  { type = "paragraph", content = "Her hand goes under the desk and finds his cock, hard as wood in his trousers. She squeezes it once, slow, and lets go." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Soon. You hear me? Soon." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave him like that."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_floor"
+time_progression_minutes = 60
 
 [[canvases.nodes]]
 id   = "rung0"
 name = "He watches"
 blocks = [
   { type = "image", props = { file = "scenes/guard_watches.jpg", description = "A naked young woman standing in a white glass-walled cell at night slowly undressing, a big uniformed guard sitting in a chair on the other side of the glass watching her.", search_queries = ["woman undressing behind glass wall guard watching", "naked woman in glass cell man sitting watching night"] } },
-  { type = "paragraph", content = "She stands up where he can see all of her, and takes off the grey shift they put her in. Slow. Her tits first, then her belly, then all of it on the floor." },
+  { type = "paragraph", content = "She goes back into her cell and stands at the glass, right in front of his desk, where he can see all of her. She takes off the grey shift they put her in. Slow. Her tits first, then her belly, then all of it on the floor." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Hey. Hey. What are you doing?" },
   { type = "dialog", props = { speaker = "player" }, content = "You've been looking for weeks. Look properly." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Fuck me. Turn round." },
@@ -37005,7 +37330,7 @@ blocks = [
   { type = "paragraph", content = "She lets him. She leans back into him and lets him finger her until she is dripping on his hand, and then she steps away." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Christ. Christ, you're soaking." },
   { type = "dialog", props = { speaker = "player" }, content = "Then come back and do something about it." },
-  { type = "dialog", props = { speaker = "player" }, content = "Your shift's nearly over." },
+  { type = "dialog", props = { speaker = "player" }, content = "You've got all day." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -37025,8 +37350,12 @@ blocks = [
   { type = "dialog", props = { speaker = "player" }, content = "No count tonight?" },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Fuck the count." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "On your knees." },
+  { type = "dialog", props = { speaker = "player" }, content = "Ask me nicely." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Get on your fucking knees. Please." },
   { type = "paragraph", content = "She kneels on the cold floor and takes his cock out of his trousers. It's thick and already leaking. She licks it from the balls to the tip and takes it in her mouth, all the way, until her nose is in his uniform." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Jesus. Jesus Christ. Don't stop." },
+  { type = "dialog", props = { speaker = "player" }, content = "Look at me while I do it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Fuck. Look at you. Look at that mouth." },
   { type = "paragraph", content = "She doesn't. She sucks him slow and wet with the open door behind him, and when he comes he holds her head and comes down her throat, and she swallows every drop of it." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Same time tomorrow. I'm not asking." },
 ]
@@ -37050,8 +37379,8 @@ name = "Let him have you"
 blocks = [
   { type = "video", props = { pool_dir = "sex/guard_loop_intro_t4", pool = 4, description = "A big man in a guard uniform pushing a naked woman back against a white cell wall, kissing her neck, his hands on her body. Must show: the uniform, the white wall, his hands on her. Avoid: a bedroom.", search_queries = ["guard pushing naked woman against wall kissing neck", "man in uniform pins naked girl against white wall"] } },
   { type = "paragraph", content = "He comes through the glass and shoves her up against the wall of the cell with his whole weight, his mouth on her neck, his hands everywhere." },
-  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Every night. Every fucking night I think about this." },
-  { type = "thought_bubble", props = { speaker = "player" }, content = "Every night he gets a little more of me. And every night I get a little more of him." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Every day. Every fucking hour I think about this." },
+  { type = "thought_bubble", props = { speaker = "player" }, content = "Every time he gets a little more of me. And every time I get a little more of him." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
@@ -37222,7 +37551,7 @@ effects = [
 [[canvases]]
 id          = "loop_guard_finisher"
 name        = "Let him finish"
-description = "Triggerless finisher for loop_guard. Three exclusive bands facial(0)/inside(1)/ass(2). The ass finish drains only with equipped_weapon 1 + drain_charge gte 1 + guard_nights gte 6; the first drain bumps guard_drains_done and sets floor_door."
+description = "Triggerless finisher for loop_guard. Three exclusive bands facial(0)/inside(1)/ass(2). The ass finish drains with equipped_weapon 1 + drain_charge gte 1 (the loop is reached only from his step 3, so there is no ladder gate here: the drain is offered from the first fuck, REWORK beat_0276); the first drain bumps guard_drains_done and sets lab_door."
 
 [[canvases.nodes]]
 id   = "climax"
@@ -37301,24 +37630,6 @@ effects = [
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
 ]
 [[canvases.nodes.exit_block.choices]]
-text       = "Let it go. He isn't yours yet. Not tonight."
-targetType = "location"
-locationId = "holding_cell"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
-  { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 },
-  { type = "trait", subject = "player", trait_key = "drain_charge", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "guard_nights", operator = "lt", value = 6 },
-] }
-time_progression_minutes = 60
-effects = [
-  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
-]
-[[canvases.nodes.exit_block.choices]]
 text       = "Take what he carries."
 targetType = "node"
 nodeId     = "guard_drain_canvas.d0"
@@ -37326,14 +37637,13 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
   { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 },
   { type = "trait", subject = "player", trait_key = "drain_charge", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "guard_nights", operator = "gte", value = 6 },
   { type = "trait", subject = "player", trait_key = "guard_drains_done", operator = "lt", value = 1 },
 ] }
 time_progression_minutes = 60
 effects = [
   { targetType = "player", trait = "guard_drains_done", op = "add", value = 1, clamp = true },
   { targetType = "player", trait = "drain_charge", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "floor_door", op = "set", value = 1, clamp = false },
+  { targetType = "player", trait = "lab_door", op = "set", value = 1, clamp = false },
   { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
@@ -37348,7 +37658,6 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
   { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 },
   { type = "trait", subject = "player", trait_key = "drain_charge", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "guard_nights", operator = "gte", value = 6 },
   { type = "trait", subject = "player", trait_key = "guard_drains_done", operator = "gte", value = 1 },
 ] }
 time_progression_minutes = 60
@@ -37382,14 +37691,14 @@ blocks = [
         { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "I need you. Yes. I need you." },
     ] },
     { advance_text = "Ask for the door.", blocks = [
-        { type = "dialog", props = { speaker = "player" }, content = "Leave the glass open. An hour a night. After your rounds." },
+        { type = "dialog", props = { speaker = "player" }, content = "No more curfew. Leave the glass open at night. And give me the keys to the lab." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "They'd have my job." },
-        { type = "dialog", props = { speaker = "player" }, content = "They'd never know. And you'd have me every night." },
-        { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "An hour. After my rounds. I can do an hour." },
+        { type = "dialog", props = { speaker = "player" }, content = "They'd never know. And you'd have me whenever you want." },
+        { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Nights are yours. The doors too. I've got all the keys." },
     ] },
     { advance_text = "Let him go.", blocks = [
-        { type = "paragraph", content = "He gets dressed with shaking hands and goes back out to his chair. He doesn't lock the glass behind him." },
-        { type = "thought_bubble", props = { speaker = "player" }, content = "One door. Now I go and see what's behind the others." },
+        { type = "paragraph", content = "He gets dressed with shaking hands and goes back out to his desk. He leaves the glass open behind him, and the keys to the lab and the gallery on the desk where she can reach them." },
+        { type = "thought_bubble", props = { speaker = "player" }, content = "One man. Now I go and see what's behind the other doors." },
     ] },
   ] } },
 ]
@@ -37418,6 +37727,447 @@ locationId               = "holding_cell"
 time_progression_minutes = 30
 
 
+# ══ 0.2.6 REWORK — THE GUARD'S ROUTINE ROOMS (beat_0277). design_the_offer.md "REWORK BLUEPRINT · The guard". ══
+# Each room off the Post has three canvases:
+#   • hub_guard_<room> — his portrait hub there, live only in his hour in that room (his rows: the Showers 07-08,
+#     the Yard 17-18, the Laundry 18-19), with that room's tease (20 energy, an hour, + his corruption on the CHOICE).
+#   • a solo card — something real to do there alone, any hour. It is also the DISPATCHER for the curfew.
+#   • drag_back_<room> — substitution_only, reached from the solo card's substitution when she uses the room after
+#     curfew. He walks in and takes her back to the cell: his corruption -5, an hour.
+# ⚠️ WHY A WALK-IN AND NOT A RANDOM EVENT (correction to the signed blueprint): after curfew he is at the Post by his
+# rows, so a random scene with his lines in this room fails gates.py "a named person is where the line says"
+# (gates.py:14296). A walk-in (substitution_only) is the gate's own exemption (_tr_walkers, B51): the arrival is the
+# presence. It carries no npc / requires_npc on purpose — he is NOT in the room until the scene says he walks in.
+# ⚠️ Curfew bands are separate time windows (time_of_day cannot be negated; an end before the start wraps midnight):
+# step 2 -> 22:00-07:00, step 3+ -> 00:00-07:00, none once lab_door is set (his drain). The Post has no curfew.
+
+[[canvases]]
+id          = "hub_guard_showers"
+name        = "The Guard"
+description = "beat_0277 (0.2.6 REWORK). The guard's hub @block_showers, npc + requires_npc npc_guard (his row there, 07:00-08:00), repeatable, pri 4, gated in_custody + showers_door gte 1. One tease: 'Wash with the curtain open.' (20 energy, +8 his corruption on the choice)."
+[canvases.trigger]
+location      = "block_showers"
+requires_npc  = "npc_guard"
+npc           = "npc_guard"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "showers_door", operator = "gte", value = 1 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The Guard"
+blocks = [
+  { type = "paragraph", content = "He stands in the doorway for the wash hour with his arms folded, and he watches every head that is running." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Hurry it up. Wash hour's an hour." },
+  { type = "dialog", props = { speaker = "player" }, content = "Are you going to stand there the whole hour?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "That's the job. Best job in the building." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Wash with the curtain open."
+targetType = "node"
+nodeId     = "hub_guard_showers.tease"
+costs      = [{ trait = "energy", value = 20 }]
+effects = [
+  { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "add", value = 8, clamp = true },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Go back out to the Post."
+targetType = "location"
+locationId = "holding_floor"
+
+[[canvases.nodes]]
+id   = "tease"
+name = "The curtain open"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/guard_tease_shower_t5", pool = 4, description = "A naked woman soaping her breasts under a shower in a white tiled prison shower room with the curtain pulled back, a uniformed guard watching from the doorway or standing in the spray behind her. Must show: her wet naked body, the open shower, the guard. Avoid: a home bathroom.", search_queries = ["naked woman showering curtain open guard watching", "girl soaping tits in prison shower man in uniform", "wet naked woman tiled shower man behind her"] } },
+  { type = "paragraph", content = "She pulls the curtain all the way back and stands under the water facing him. Soap on her tits, her hands working it over her nipples, then down her belly and between her legs." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Curtain stays shut. That's the rule." },
+  { type = "dialog", props = { speaker = "player" }, content = "Then come and shut it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Turn round. Wash it slower." },
+  { type = "dialog", props = { speaker = "player" }, content = "Like this? Is this slow enough for you?" },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 3 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He doesn't move. He stands in the doorway with his hand on the front of his trousers and watches the water run down her ass." },
+    { type = "dialog", props = { speaker = "player" }, content = "You can look. You can't touch. Not yet." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Fuck the rule." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 3 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He comes in, uniform and all, and stands in the spray behind her. His hands slide over her wet tits and his cock pushes up against her ass through his soaked trousers." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Look what you made me do. I'm wet through." },
+    { type = "dialog", props = { speaker = "player" }, content = "Don't stop. Hands on my tits." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Christ, you're slippery all over." },
+  ] },
+  { type = "paragraph", content = "She bends to rinse her legs, slow, her cunt on show between her wet thighs, and lets him look until the hour is up." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Same time tomorrow. Curtain open." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Turn the water off."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_floor"
+time_progression_minutes = 60
+
+
+[[canvases]]
+id          = "activity_wash_alone"
+name        = "Wash alone"
+description = "beat_0277 (0.2.6 REWORK). Wren-solo @block_showers, repeatable, pri 1, gated in_custody. An hour alone. Also the curfew dispatcher: after curfew a substitution sends it to drag_back_showers."
+[canvases.trigger]
+location      = "block_showers"
+is_repeatable = true
+priority      = 1
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "drag_back_showers"
+chance           = 1.0
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 2 },
+  { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 3 },
+  { type = "time_of_day", start_time = "22:00", end_time = "07:00" },
+] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "drag_back_showers"
+chance           = 1.0
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 3 },
+  { type = "trait", subject = "player", trait_key = "lab_door", operator = "lt", value = 1 },
+  { type = "time_of_day", start_time = "00:00", end_time = "07:00" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Wash alone"
+blocks = [
+  { type = "paragraph", content = "She stands under the hot water on her own and washes the day off her skin: her hair, her tits, the sticky pads of the test sensors, between her legs." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Turn the water off."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_floor"
+time_progression_minutes = 60
+
+
+[[canvases]]
+id          = "drag_back_showers"
+name        = "Caught"
+description = "beat_0277 (0.2.6 REWORK). substitution_only walk-in @block_showers, target of activity_wash_alone's curfew substitutions. The guard walks in and takes her back to the cell; his corruption -5, 60 min. Bands by guard_step."
+[canvases.trigger]
+location          = "block_showers"
+substitution_only = true
+is_repeatable     = true
+is_active         = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Caught"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 3 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The water is still running when he comes in. He shuts it off, takes her by the arm and walks her out naked and dripping, his other hand on her bare ass the whole way down the corridor." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Curfew was ten. You know where you're meant to be." },
+    { type = "dialog", props = { speaker = "player" }, content = "I was only washing." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Wash in your cell. Walk." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 3 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He comes in, shuts the water off and shoves her up against the wet tiles, his body pinning hers, his hand round the back of her neck and his cock hard against her ass." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Midnight. I said midnight. Next time I won't wait." },
+    { type = "dialog", props = { speaker = "player" }, content = "You came all this way just to grab my ass?" },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "I came to put you back where you belong." },
+  ] },
+  { type = "paragraph", content = "He marches her back down the corridor, naked and wet, and locks the glass behind her." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back in your cell."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_cell"
+time_progression_minutes = 60
+effects = [
+  { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "add", value = -5, clamp = true },
+]
+
+
+[[canvases]]
+id          = "hub_guard_laundry"
+name        = "The Guard"
+description = "beat_0277 (0.2.6 REWORK). The guard's hub @block_laundry, npc + requires_npc npc_guard (his row there, 18:00-19:00), repeatable, pri 4, gated in_custody + yard_door gte 1. One tease: 'Bend over the machines in front of him.' (20 energy, +8 his corruption on the choice)."
+[canvases.trigger]
+location      = "block_laundry"
+requires_npc  = "npc_guard"
+npc           = "npc_guard"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "yard_door", operator = "gte", value = 1 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The Guard"
+blocks = [
+  { type = "paragraph", content = "He leans in the laundry doorway for the hour, his keys hanging off one finger." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Fold your things. I've not got all night." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Bend over the machines in front of him."
+targetType = "node"
+nodeId     = "hub_guard_laundry.tease"
+costs      = [{ trait = "energy", value = 20 }]
+effects = [
+  { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "add", value = 8, clamp = true },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Go back out to the Post."
+targetType = "location"
+locationId = "holding_floor"
+
+[[canvases.nodes]]
+id   = "tease"
+name = "Over the machine"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/guard_tease_laundry_t5", pool = 4, description = "A woman in a short grey shift bent over the front of a washing machine with her bare ass exposed, a uniformed guard behind her fingering her from behind. Must show: bent over a washing machine, bare ass, his hand between her legs. Avoid: a home kitchen.", search_queries = ["girl bent over washing machine fingered from behind", "woman bent over laundry machine bare ass man behind", "fingering from behind over washer"] } },
+  { type = "paragraph", content = "She bends over the front of the machine to pull the wet shifts out, slow, and her own shift rides up over her ass. Nothing under it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "You've done that on purpose." },
+  { type = "dialog", props = { speaker = "player" }, content = "Help me with these. They're heavy." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Bend over like that again and I'm not helping with anything." },
+  { type = "dialog", props = { speaker = "player" }, content = "Come and find out." },
+  { type = "paragraph", content = "He comes up behind her and his hand goes between her legs, two fingers sliding into her cunt from behind while the machine shakes under her tits." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Soaking. You're always soaking for me." },
+  { type = "dialog", props = { speaker = "player" }, content = "Deeper. Two fingers isn't enough." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Greedy." },
+  { type = "dialog", props = { speaker = "player" }, content = "For you? Always." },
+  { type = "paragraph", content = "She grinds back onto his fingers with her ass in the air, her cunt clenching on them, until the drum stops." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Pull your shift down."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_floor"
+time_progression_minutes = 60
+
+
+[[canvases]]
+id          = "activity_do_washing"
+name        = "Do your washing"
+description = "beat_0277 (0.2.6 REWORK). Wren-solo @block_laundry, repeatable, pri 1, gated in_custody. An hour alone. Also the curfew dispatcher: after curfew a substitution sends it to drag_back_laundry."
+[canvases.trigger]
+location      = "block_laundry"
+is_repeatable = true
+priority      = 1
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "drag_back_laundry"
+chance           = 1.0
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 3 },
+  { type = "trait", subject = "player", trait_key = "lab_door", operator = "lt", value = 1 },
+  { type = "time_of_day", start_time = "00:00", end_time = "07:00" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Do your washing"
+blocks = [
+  { type = "paragraph", content = "She loads the grey shifts into the machine and sits up on top of it while it runs, the drum thumping away under her." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Take the shifts out."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_floor"
+time_progression_minutes = 60
+
+
+[[canvases]]
+id          = "drag_back_laundry"
+name        = "Caught"
+description = "beat_0277 (0.2.6 REWORK). substitution_only walk-in @block_laundry, target of activity_do_washing's curfew substitutions. The guard walks in and takes her back to the cell; his corruption -5, 60 min. Bands by guard_step."
+[canvases.trigger]
+location          = "block_laundry"
+substitution_only = true
+is_repeatable     = true
+is_active         = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Caught"
+blocks = [
+  { type = "paragraph", content = "He finds her in the laundry after midnight. He pins her face down over the machine, one hand twisting her arm up behind her back, the other squeezing her ass through the shift." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Midnight means midnight. Next time I won't wait." },
+  { type = "dialog", props = { speaker = "player" }, content = "I lost track of the time." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "No, you didn't. You wanted me to come and get you." },
+  { type = "dialog", props = { speaker = "player" }, content = "Maybe I did." },
+  { type = "paragraph", content = "He marches her back to the cell by the arm, his hand still on her ass, and locks the glass." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back in your cell."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_cell"
+time_progression_minutes = 60
+effects = [
+  { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "add", value = -5, clamp = true },
+]
+
+
+[[canvases]]
+id          = "hub_guard_yard"
+name        = "The Guard"
+description = "beat_0277 (0.2.6 REWORK). The guard's hub @block_yard, npc + requires_npc npc_guard (his row there, 17:00-18:00), repeatable, pri 4, gated in_custody + yard_door gte 1. One tease: 'Nothing under the shift.' (20 energy, +7 his corruption on the choice)."
+[canvases.trigger]
+location      = "block_yard"
+requires_npc  = "npc_guard"
+npc           = "npc_guard"
+is_repeatable = true
+priority      = 4
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "yard_door", operator = "gte", value = 1 },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The Guard"
+blocks = [
+  { type = "paragraph", content = "He stands by the wall for the yard hour and watches her walk." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Ten more minutes. Make them count." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Nothing under the shift."
+targetType = "node"
+nodeId     = "hub_guard_yard.tease"
+costs      = [{ trait = "energy", value = 20 }]
+effects = [
+  { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "add", value = 7, clamp = true },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Go back out to the Post."
+targetType = "location"
+locationId = "holding_floor"
+
+[[canvases.nodes]]
+id   = "tease"
+name = "In the yard"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/guard_tease_yard_t4", pool = 4, description = "A woman in a thin short grey shift in a walled concrete yard lifting the hem to show her bare pussy to a uniformed guard standing by the wall, the wind pressing the cloth to her breasts. Must show: the lifted hem, her bare body underneath, the guard, the concrete yard. Avoid: a beach, a park.", search_queries = ["woman lifting dress outdoors flashing pussy to guard", "girl no underwear lifting skirt concrete courtyard man watching"] } },
+  { type = "paragraph", content = "She walks the yard in front of him in nothing but the grey shift, and the wind does the rest. It blows the cloth flat against her tits and up over her bare ass." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "You're not wearing anything under that." },
+  { type = "dialog", props = { speaker = "player" }, content = "No. The wind's doing all the work." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Turn round. Slowly." },
+  { type = "dialog", props = { speaker = "player" }, content = "No. Do you want to check?" },
+  { type = "paragraph", content = "She stops right in front of him and lifts the hem an inch, then another, until he can see her cunt in the daylight." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Christ. Anyone up on the roof can see you." },
+  { type = "dialog", props = { speaker = "player" }, content = "Then let them look." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Inside. Before the cameras get a look." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go back in."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_floor"
+time_progression_minutes = 60
+
+
+[[canvases]]
+id          = "activity_walk_yard"
+name        = "Walk the yard"
+description = "beat_0277 (0.2.6 REWORK). Wren-solo @block_yard, repeatable, pri 1, gated in_custody. An hour alone. Also the curfew dispatcher: after curfew a substitution sends it to drag_back_yard."
+[canvases.trigger]
+location      = "block_yard"
+is_repeatable = true
+priority      = 1
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+] }
+[[canvases.trigger.substitutions]]
+target_canvas_id = "drag_back_yard"
+chance           = 1.0
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 3 },
+  { type = "trait", subject = "player", trait_key = "lab_door", operator = "lt", value = 1 },
+  { type = "time_of_day", start_time = "00:00", end_time = "07:00" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Walk the yard"
+blocks = [
+  { type = "paragraph", content = "She walks the four walls of the yard and looks up at the square of sky. The air is cold on her bare legs." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Go back in."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_floor"
+time_progression_minutes = 60
+
+
+[[canvases]]
+id          = "drag_back_yard"
+name        = "Caught"
+description = "beat_0277 (0.2.6 REWORK). substitution_only walk-in @block_yard, target of activity_walk_yard's curfew substitutions. The guard walks in and takes her back to the cell; his corruption -5, 60 min. Bands by guard_step."
+[canvases.trigger]
+location          = "block_yard"
+substitution_only = true
+is_repeatable     = true
+is_active         = true
+
+[[canvases.nodes]]
+id   = "base"
+name = "Caught"
+blocks = [
+  { type = "paragraph", content = "He comes out into the dark yard and pins her to the wall with his whole weight, his hand shoved between her legs." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Out here after midnight? Next time I won't wait." },
+  { type = "dialog", props = { speaker = "player" }, content = "I wanted to see the sky." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "You can see it from your cell. Move." },
+  { type = "paragraph", content = "He walks her back inside by the arm and locks her in." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Back in your cell."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_cell"
+time_progression_minutes = 60
+effects = [
+  { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "add", value = -5, clamp = true },
+]
+
 
 
 # ══ 0.2.6 part seven — THE TECHNICIAN (beat_0270). design_the_offer.md "Man 2 — the technician". ══
@@ -37427,7 +38177,7 @@ time_progression_minutes = 30
 [[canvases]]
 id          = "hub_technician"
 name        = "The Technician"
-description = "beat_0270 (0.2.6). The technician's hub @test_lab, npc + requires_npc npc_technician, repeatable, pri 4, 22:00-23:59 only (his late row; by day he runs the tests from the cell's card), gated in_custody + floor_door gte 1. One step a calendar day (tech_day): she comes to him, the test table, then the loop (from tech_nights 2); he says her name at 3; the drain lands at 4 and sets study_door."
+description = "beat_0270 (0.2.6). The technician's hub @test_lab, npc + requires_npc npc_technician, repeatable, pri 4, 22:00-23:59 only (his late row; by day he runs the tests from the cell's card), gated in_custody + lab_door gte 1 (the guard's first drain). One step a calendar day (tech_day): she comes to him, the test table, then the loop (from tech_nights 2); he says her name at 3; the drain lands at 4 and sets study_door."
 [canvases.trigger]
 location      = "test_lab"
 requires_npc  = "npc_technician"
@@ -37437,7 +38187,7 @@ priority      = 4
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
-  { type = "trait", subject = "player", trait_key = "floor_door", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "lab_door", operator = "gte", value = 1 },
 ] }
 
 [[canvases.trigger.schedules]]
@@ -39369,32 +40119,98 @@ when = [
   { flag = "in_custody", op = "is_false" },
 ]
 
-# ── X · THE TESTS. beat_0267 (0.2.6). From the Chairman's room until the guard opens the floor. ──
+# ── X · THE TESTS. beat_0267 (0.2.6); REWORKED beat_0278. From the Chairman's room until the guard's drain. ──
 [[quest_cards]]
 priority   = 10
-text       = "Cain is free. You are the company's test subject, high in the Rise, and the Chairman wants to know how what you feel was put in you. By day they test you. By night there is a guard outside your glass, and he has been watching you for weeks."
-tip        = "The tests come to your cell from nine in the morning, one a day. The guard sits outside your glass from eleven at night to five in the morning. Start with him."
+text       = "Cain is free. You are the company's test subject, high in the Rise, and the Chairman wants to know how what you feel was put in you. By day they test you. The rest of the time there is a guard at a desk outside your glass, and he has been watching you for weeks."
+tip        = "The tests come to your cell from nine in the morning, one a day. The guard is at his desk outside your glass, the Post, most of the day and all night. Start with him."
 when = [
   { flag = "chairman_met", op = "is_true" },
-  { trait = "floor_door", subject = "player", op = "lt", value = 1 },
+  { trait = "lab_door", subject = "player", op = "lt", value = 1 },
 ]
 
-# ── The guard's card. beat_0269 (0.2.6). His next step and his hours, until his drain. ──
+# ── The guard's cards. beat_0278 (the REWORK): one card per step, each naming what moves him now. ──
+# His climb is his corruption (her teases) plus one step a calendar day. The goal rows read his corruption the way
+# Renner's ladder does (the shipped tease-grind pattern, 5_scenes.toml Renner cards). Exclusive on guard_step.
 [[quest_cards]]
 npc_id     = "npc_guard"
 priority   = 9
-text       = "The night guard outside your glass. He has been told you are a machine, and he watches you like a man who knows better."
-tip        = "He is in his chair from eleven at night to five in the morning. One step with him a night: let him look, let him in, your knees, then all of you. On the sixth night, finish him in your ass with the drain charged, and he is yours."
+text       = "Your keeper. He sits at his desk outside your glass, day and night, and he has been told you are a machine. He watches you like a man who knows better."
+tip        = "Go out to his desk, the Post, and let him watch you at the glass. That is the first step. After it, one step a day, and only once he wants it badly enough: tease him to make him want it."
 when = [
   { flag = "in_vega", op = "is_false" },
   { flag = "in_custody", op = "is_true" },
-  { trait = "guard_drains_done", subject = "player", op = "lt", value = 1 },
+  { trait = "guard_step", subject = "player", op = "lt", value = 1 },
 ]
+goals = [
+  { trait = "guard_step", subject = "player", op = "gte", value = 1, label = "Let him watch you at the glass" },
+]
+
 [[quest_cards]]
 npc_id     = "npc_guard"
 priority   = 9
-text       = "The guard is yours. He leaves the glass open an hour a night, and he would let you do anything."
-tip        = "The floor outside your cell is open to you now. He is still in his chair, eleven to five, if you want him."
+text       = "He watched. Now he wants to touch, and he is scared of his job. Make him want it more than the job."
+tip        = "At the Post: flash him, show him everything at the glass, touch yourself where he can see. Each costs 20 Charge and an hour. When he wants it enough, let him in. One step a day."
+when = [
+  { flag = "in_vega", op = "is_false" },
+  { flag = "in_custody", op = "is_true" },
+  { trait = "guard_step", subject = "player", op = "gte", value = 1 },
+  { trait = "guard_step", subject = "player", op = "lt", value = 2 },
+]
+goals = [
+  { trait = "corruption", subject = "npc", npc_id = "npc_guard", op = "gte", value = 20, label = "Make him want to come in: tease him" },
+]
+
+[[quest_cards]]
+npc_id     = "npc_guard"
+priority   = 9
+text       = "He has had his hands all over you, and he has opened the showers to you. The wash hour is seven to eight, and he watches from the door."
+tip        = "Tease him at the Post, whisper what you would do to him, wash with the curtain open in the wash hour. Curfew is ten at night: be back in your cell by then, or he comes for you."
+when = [
+  { flag = "in_vega", op = "is_false" },
+  { flag = "in_custody", op = "is_true" },
+  { trait = "guard_step", subject = "player", op = "gte", value = 2 },
+  { trait = "guard_step", subject = "player", op = "lt", value = 3 },
+]
+goals = [
+  { trait = "corruption", subject = "npc", npc_id = "npc_guard", op = "gte", value = 45, label = "Get him to open his belt: tease him" },
+]
+
+[[quest_cards]]
+npc_id     = "npc_guard"
+priority   = 9
+text       = "You have had him in your mouth, and now the yard and the laundry are yours at his hours: the yard five to six, the laundry six to seven."
+tip        = "Every tease counts: the Post, the showers, the laundry, the yard. Curfew is midnight. When he wants you enough, let him have you, and finish him in your ass with the drain charged: the drain works the first time."
+when = [
+  { flag = "in_vega", op = "is_false" },
+  { flag = "in_custody", op = "is_true" },
+  { trait = "guard_step", subject = "player", op = "gte", value = 3 },
+  { trait = "guard_step", subject = "player", op = "lt", value = 4 },
+]
+goals = [
+  { trait = "corruption", subject = "npc", npc_id = "npc_guard", op = "gte", value = 70, label = "Make him take you: tease him" },
+]
+
+[[quest_cards]]
+npc_id     = "npc_guard"
+priority   = 9
+text       = "He fucks you whenever he likes now. One finish in your ass with the drain charged, and he is yours."
+tip        = "At the Post, let him have you and finish him in your ass. The drain needs charge, and the tests fill it."
+when = [
+  { flag = "in_vega", op = "is_false" },
+  { flag = "in_custody", op = "is_true" },
+  { trait = "guard_step", subject = "player", op = "gte", value = 4 },
+  { trait = "guard_drains_done", subject = "player", op = "lt", value = 1 },
+]
+goals = [
+  { trait = "guard_drains_done", subject = "player", op = "gte", value = 1, label = "Drain him" },
+]
+
+[[quest_cards]]
+npc_id     = "npc_guard"
+priority   = 9
+text       = "The guard is yours. No more curfew: he leaves your glass open at night, and the keys to the lab and the gallery on his desk."
+tip        = "The Test Lab and the Gallery are open to you now. He is still at his desk if you want him."
 terminal      = true
 terminal_text = "He leaves the glass open."
 when = [
@@ -39406,10 +40222,10 @@ when = [
 # ── Y · THE TECHNICIAN. beat_0270 (0.2.6). From the open floor until Sabin's door. ──
 [[quest_cards]]
 priority   = 10
-text       = "The guard leaves your glass open an hour a night. The floor is yours to walk. The technician who tests you every day works late in the lab, alone, with every screen showing you."
-tip        = "Walk the floor to the Test Lab late at night, ten to midnight. He is there alone. One step with him a night; on the fourth, finish him in your ass with the drain charged."
+text       = "The guard has given you the nights and the keys. The technician who tests you every day works late in the lab, alone, with every screen showing you."
+tip        = "Go from the Post to the Test Lab late at night, ten to midnight. He is there alone. One step with him a night; on the fourth, finish him in your ass with the drain charged."
 when = [
-  { trait = "floor_door", subject = "player", op = "gte", value = 1 },
+  { trait = "lab_door", subject = "player", op = "gte", value = 1 },
   { trait = "study_door", subject = "player", op = "lt", value = 1 },
 ]
 
@@ -39418,7 +40234,7 @@ when = [
 npc_id     = "npc_technician"
 priority   = 9
 text       = "He tests you every day and tells himself you are a machine, because then nothing he does to you counts."
-tip        = "By day he runs your tests from nine. Late at night, ten to midnight, he is alone in the Test Lab, once the floor is open to you. One step a night; on the fourth, the drain."
+tip        = "By day he runs your tests from nine. Late at night, ten to midnight, he is alone in the Test Lab, once the guard has given you the lab. One step a night; on the fourth, the drain."
 when = [
   { flag = "in_vega", op = "is_false" },
   { flag = "in_custody", op = "is_true" },
@@ -43122,7 +43938,10 @@ effects = [
   { targetType = "player", trait = "undertow_build",      op = "set", value = 3 },
   # ── 0.2.6 keys at rest (beat_0274) ──
   { targetType = "player", trait = "tests_done", op = "set", value = 0 },
-  { targetType = "player", trait = "guard_nights", op = "set", value = 0 },
+  { targetType = "player", trait = "guard_step", op = "set", value = 0 },          # REWORK (beat_0275)
+  { targetType = "player", trait = "showers_door", op = "set", value = 0 },
+  { targetType = "player", trait = "yard_door", op = "set", value = 0 },
+  { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "set", value = 0 },
   { targetType = "player", trait = "tech_nights", op = "set", value = 0 },
   { targetType = "player", trait = "sabin_nights", op = "set", value = 0 },
   { targetType = "player", trait = "keeper_nights", op = "set", value = 0 },
@@ -43130,7 +43949,7 @@ effects = [
   { targetType = "player", trait = "tech_drains_done", op = "set", value = 0 },
   { targetType = "player", trait = "sabin_custody_drains", op = "set", value = 0 },
   { targetType = "player", trait = "keeper_drains_done", op = "set", value = 0 },
-  { targetType = "player", trait = "floor_door", op = "set", value = 0 },
+  { targetType = "player", trait = "lab_door", op = "set", value = 0 },
   { targetType = "player", trait = "study_door", op = "set", value = 0 },
   { targetType = "player", trait = "records_door", op = "set", value = 0 },
 ]
@@ -43450,7 +44269,10 @@ effects = [
   { targetType = "player", trait = "undertow_build",      op = "set", value = 3 },
   # ── 0.2.6 keys at rest (beat_0274) ──
   { targetType = "player", trait = "tests_done", op = "set", value = 0 },
-  { targetType = "player", trait = "guard_nights", op = "set", value = 0 },
+  { targetType = "player", trait = "guard_step", op = "set", value = 0 },          # REWORK (beat_0275)
+  { targetType = "player", trait = "showers_door", op = "set", value = 0 },
+  { targetType = "player", trait = "yard_door", op = "set", value = 0 },
+  { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "set", value = 0 },
   { targetType = "player", trait = "tech_nights", op = "set", value = 0 },
   { targetType = "player", trait = "sabin_nights", op = "set", value = 0 },
   { targetType = "player", trait = "keeper_nights", op = "set", value = 0 },
@@ -43458,7 +44280,7 @@ effects = [
   { targetType = "player", trait = "tech_drains_done", op = "set", value = 0 },
   { targetType = "player", trait = "sabin_custody_drains", op = "set", value = 0 },
   { targetType = "player", trait = "keeper_drains_done", op = "set", value = 0 },
-  { targetType = "player", trait = "floor_door", op = "set", value = 0 },
+  { targetType = "player", trait = "lab_door", op = "set", value = 0 },
   { targetType = "player", trait = "study_door", op = "set", value = 0 },
   { targetType = "player", trait = "records_door", op = "set", value = 0 },
 ]
@@ -43776,7 +44598,10 @@ effects = [
   { targetType = "player", trait = "undertow_build",      op = "set", value = 3 },
   # ── 0.2.6 keys at rest (beat_0274) ──
   { targetType = "player", trait = "tests_done", op = "set", value = 0 },
-  { targetType = "player", trait = "guard_nights", op = "set", value = 0 },
+  { targetType = "player", trait = "guard_step", op = "set", value = 0 },          # REWORK (beat_0275)
+  { targetType = "player", trait = "showers_door", op = "set", value = 0 },
+  { targetType = "player", trait = "yard_door", op = "set", value = 0 },
+  { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "set", value = 0 },
   { targetType = "player", trait = "tech_nights", op = "set", value = 0 },
   { targetType = "player", trait = "sabin_nights", op = "set", value = 0 },
   { targetType = "player", trait = "keeper_nights", op = "set", value = 0 },
@@ -43784,7 +44609,7 @@ effects = [
   { targetType = "player", trait = "tech_drains_done", op = "set", value = 0 },
   { targetType = "player", trait = "sabin_custody_drains", op = "set", value = 0 },
   { targetType = "player", trait = "keeper_drains_done", op = "set", value = 0 },
-  { targetType = "player", trait = "floor_door", op = "set", value = 0 },
+  { targetType = "player", trait = "lab_door", op = "set", value = 0 },
   { targetType = "player", trait = "study_door", op = "set", value = 0 },
   { targetType = "player", trait = "records_door", op = "set", value = 0 },
 ]
@@ -44108,7 +44933,10 @@ effects = [
   { targetType = "player", trait = "undertow_build",      op = "set", value = 3 },
   # ── 0.2.6 keys at rest (beat_0274) ──
   { targetType = "player", trait = "tests_done", op = "set", value = 0 },
-  { targetType = "player", trait = "guard_nights", op = "set", value = 0 },
+  { targetType = "player", trait = "guard_step", op = "set", value = 0 },          # REWORK (beat_0275)
+  { targetType = "player", trait = "showers_door", op = "set", value = 0 },
+  { targetType = "player", trait = "yard_door", op = "set", value = 0 },
+  { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "set", value = 0 },
   { targetType = "player", trait = "tech_nights", op = "set", value = 0 },
   { targetType = "player", trait = "sabin_nights", op = "set", value = 0 },
   { targetType = "player", trait = "keeper_nights", op = "set", value = 0 },
@@ -44116,7 +44944,7 @@ effects = [
   { targetType = "player", trait = "tech_drains_done", op = "set", value = 0 },
   { targetType = "player", trait = "sabin_custody_drains", op = "set", value = 0 },
   { targetType = "player", trait = "keeper_drains_done", op = "set", value = 0 },
-  { targetType = "player", trait = "floor_door", op = "set", value = 0 },
+  { targetType = "player", trait = "lab_door", op = "set", value = 0 },
   { targetType = "player", trait = "study_door", op = "set", value = 0 },
   { targetType = "player", trait = "records_door", op = "set", value = 0 },
 ]

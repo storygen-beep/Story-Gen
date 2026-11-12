@@ -6544,7 +6544,7 @@ time_progression_minutes = 30
 
 # ══ 0.2.6 YOU, FOR HIM — part six, THE TESTS (beat_0267). design_the_offer.md part six + "BLUEPRINT · Part six". ══
 # ⚠️ A LOCATED CARD ON holding_cell, 09:00-17:00 (the technician's day row). She is taken to the lab and brought
-# back: every exit lands in holding_cell, so test_lab is never reached on foot by day (the floor is locked until the
+# back: every exit lands in holding_cell, so test_lab is never reached on foot by day (the lab is locked on lab_door until the
 # guard's drain).
 # ⚠️ ONE TEST A CALENDAR DAY, the kess_fitting shape: test_day re-stamped on every test, days_since_flag gte 1 on
 # every test after the first, and the "not today" band first in the chain (3_activities.toml kess_fitting).
