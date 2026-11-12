@@ -63426,8 +63426,8 @@ content = "He doesn't back up. He stops right in the middle, so you'd have to sq
 type = "image"
 
 [canvases.nodes.blocks.blocks.props]
-description = "a girl squeezing past a shirtless young man in a narrow hallway, chests nearly touching"
-search_queries = ["squeezing past shirtless guy narrow hallway"]
+description = "a young man in just his shorts blocking a narrow hallway, a girl about to squeeze past him"
+search_queries = ["guy in shorts blocking narrow hallway"]
 pool_dir = "look/hall_squeeze_t3"
 
 [[canvases.nodes.blocks.blocks]]
