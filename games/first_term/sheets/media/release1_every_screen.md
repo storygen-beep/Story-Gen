@@ -334,3 +334,26 @@ The v2-reader checked all 318 blocks: 299 passed and 19 failed. Six showed a mom
 to after its line; thirteen named something a version contradicts (a time of day, a waitress who is a customer, a
 beam on one of three answers, pounds instead of dollars, Mark "alone" when Laura is in the kitchen). The re-read
 passed 16 of the 19; the last three (Tom's queue, Mark in the garden, Laura at the table) were fixed in place.
+
+## The lecturers' offices (DECISIONS 244)
+Back in release 1 (LO, 2026-11-12: "On campuss add what can be added"). The reader passed all 14.
+
+| scene · screen | where | name | it shows |
+|---|---|---|---|
+| hub_hale_office · office | top | people/hale_office_desk_t0 | a professor of 39 at his office desk behind a pile of papers, a beach photo of him and a dark-haired woman face-up beside him |
+| hub_hale_office · essay | after "He reads your essay at the desk" | people/hale_office_essay_t0 | a professor of 39 at his desk reading a student's essay with his pen out, a young woman sitting beside the desk |
+| hub_art_office · hub | top | people/art_office_canvases_t0 | a woman of 45 in an office crowded with canvases, looking up from a sketch of a woman's back |
+| hub_art_office · book | after "She turns the pages slowly" | people/art_office_book_t0 | an art lecturer of 45 correcting a figure drawing in a student's sketchbook with a pencil |
+| hub_business_office · retake | after "He hands you a paper and points at a chair" | people/business_retake_t0 | a gray-suited lecturer of 50 sitting watching a young woman write a test paper on a chair in his office |
+| hub_ta_office · hub | top | people/ta_office_skeleton_t0 | a shy young woman of 28 looking up from her desk in a small office, a skeleton in a party hat in the corner |
+| hub_ta_office · fine | after "She sits back down too fast" | people/ta_office_fine_t0 | a red-faced young woman of 28 sitting back at her desk, staring hard at her screen |
+| hub_ta_office · help | after "She pulls her chair round to your side of the desk" | people/ta_office_help_t0 | a young woman of 28 sitting close beside a student at a desk, going through a lab report with a pencil, their knees touching |
+| walkin_door_art · door | after "Measuring." | look/art_door_measuring_t3 | an art lecturer of 45 in her office doorway with a mug, head on one side, looking a young woman up and down |
+| walkin_door_ta · door | after "Her neck goes pink." | look/ta_door_look_t3 | a young woman of 28 in an office doorway holding a kettle, her eyes running down a student, her neck pink |
+| walkin_door_ta · no | after "pulls the door half shut with her foot" | look/ta_door_no_t3 | a pink-faced young woman of 28 pulling an office door half shut with her foot, glancing at a student's legs |
+| walkin_door_hale · door | after "his eyes go down your legs before" | look/hale_office_door_legs_t3 | a professor of 39 opening his office door, his eyes going down a young woman's legs |
+| walkin_door_hale · no | after "You step back." | look/hale_door_watch_t3 | a professor of 39 in his office doorway watching a young woman walk away, the door swinging shut |
+| walkin_door_business · door | after "and not at you once" | people/business_door_sheet_t0 | a gray-suited lecturer of 50 in his office doorway reading a grade sheet taped to the door, not looking at the student beside it |
+
+None, with the reason: `door_grade_psych`, `door_grade_art`, `door_grade_business`, `door_grade_bio` (a grade
+sheet on a door, a notice like the dean's).

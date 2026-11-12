@@ -1003,7 +1003,7 @@ out[-1]["nodes"].append(node("retake", "The retake", [
     D(BUS, "Honest work. Thank you."),
 ], [go("Hand it in.", loc="faculty_floor", mins=60, eff=[add("grade_business", 5)])]))
 out.append(hub("hub_ta_office", "ta_office", TA, "bio_ta_met", "The TA's office", [
-    P("The TA's office is half a room with a skeleton in the corner wearing a party hat. She jumps when you knock."),
+    P("The TA's office is half a room with a skeleton in the corner wearing a party hat. She looks up from her desk, a little pink."),   # reader 2026-11-12: true after the door walk-in too (DECISIONS 244)
     *grade_lines(TA, "grade_bio", "Oh! Hi. Your grade. Um. We should fix your grade. Sit?", "You're doing well. Do you want tea?", "You're my best student. Don't tell anyone I said that."),
     G(cond(BRALESS), P("She can't keep her eyes off your chest."),
       D(TA, "I like your— never mind. Sit down. Please."),
@@ -1018,7 +1018,7 @@ _ta = out[-1]
 _ta["nodes"][0]["choices"] = [go("Ask her to help you with Biology.", node="help", mins=0), go("\"It's fine. Really.\"", node="fine", mins=1)]
 # scene reader b02 (2026-11-03): the no lands on a screen with her reply, and the hour of help it costs is said
 _ta["nodes"].append(node("fine", "It's fine", [
-    D(TA, "Oh. Okay. Sure. The offer's there. Afternoons, I'm always here."),
+    D(TA, "Oh. Okay. Sure. I'm here in my office hours, if you change your mind."),
     P("She sits back down too fast and stares at her screen, red to the ears. No help today, and your Biology stays where it is."),
 ], [go("Leave her to it.", loc=LEAVE_TO["ta_office"])]))
 _ta["nodes"].append(node("help", "Her help", [

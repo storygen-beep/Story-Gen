@@ -515,7 +515,27 @@ op = "unset"
 
 [[engine.daily_tick.flagEffects]]
 targetType = "player"
+flag = "walkin_door_art_today"
+op = "unset"
+
+[[engine.daily_tick.flagEffects]]
+targetType = "player"
+flag = "walkin_door_ta_today"
+op = "unset"
+
+[[engine.daily_tick.flagEffects]]
+targetType = "player"
 flag = "walkin_door_dean_today"
+op = "unset"
+
+[[engine.daily_tick.flagEffects]]
+targetType = "player"
+flag = "walkin_door_hale_today"
+op = "unset"
+
+[[engine.daily_tick.flagEffects]]
+targetType = "player"
+flag = "walkin_door_business_today"
 op = "unset"
 
 [[engine.daily_tick.flagEffects]]
@@ -1864,7 +1884,7 @@ id = "player"
 name = "Ella"
 customizable = true
 description = "You, 18. First term of college, still living at home."
-flag_keys = ["art_lecturer_met", "ate_breakfast", "ate_dinner", "bio_ta_met", "business_lecturer_met", "cafe_dresses_open", "cafe_job", "cafe_shift_1_today", "cafe_shift_2_today", "cafe_shift_3_today", "came_home_late", "class_late", "class_look_today", "cocky_guy_met", "college_for_freedom", "college_for_fun", "college_for_grades", "curfew", "dean_door_seen", "dean_met", "debt_offer_seen", "debt_refused", "desk_guy_met", "did_dishes", "did_laundry", "dress_warned", "ev_laura_did_you_eat", "ev_laura_did_you_eat_today", "ev_laura_list", "ev_laura_list_today", "ev_laura_phone_call", "ev_laura_phone_call_today", "ev_laura_shoulders", "ev_laura_shoulders_today", "ev_mark_bills", "ev_mark_bills_today", "ev_mark_chilli", "ev_mark_chilli_today", "ev_mark_creeper", "ev_mark_creeper_today", "ev_mark_radio", "ev_mark_radio_today", "ev_mark_tv_1", "ev_mark_tv_1_today", "ev_mark_tv_1_yes", "ev_mark_tv_2", "ev_mark_tv_2_today", "ev_mark_tv_2_yes", "ev_mark_tv_today", "ev_nadia_essay", "ev_nadia_essay_today", "ev_nadia_notes", "ev_nadia_notes_today", "ev_nadia_watcher", "ev_nadia_watcher_today", "ev_ryan_bet_1", "ev_ryan_bet_1_today", "ev_ryan_bet_1_yes", "ev_ryan_bet_2", "ev_ryan_bet_2_today", "ev_ryan_bet_2_yes", "ev_ryan_bet_today", "ev_ryan_cover", "ev_ryan_cover_today", "ev_ryan_dinner_kick", "ev_ryan_dinner_kick_today", "ev_ryan_hall_squeeze", "ev_ryan_hall_squeeze_today", "ev_ryan_shift", "ev_ryan_shift_today", "ev_tom_machine", "ev_tom_machine_today", "ev_tom_pastries", "ev_tom_pastries_today", "ev_tom_sister", "ev_tom_sister_today", "everyday_home_today", "everyday_out_today", "failing_noticed", "figure_model_met", "garage_holds_short_skirt", "garage_holds_sports_bra", "garage_holds_thin_top", "gary_met", "gary_sat_with_her", "grades_seen", "groceries_bought", "grocery_asked_today", "grocery_done_today", "grocery_list", "had_coffee", "had_drink_home", "hale_01_done", "hale_early_look", "hale_met", "hale_pen_picked", "heavy_night", "helped_cook", "her_door_unlocked", "home_event", "hung_washing", "hygiene_off", "late_date", "late_party", "late_shift", "laura_04_done", "laura_call_today", "laura_counted_twenty", "laura_dress_chosen", "laura_fed_her", "laura_love_today", "laura_portal_today", "laura_robe_today", "laura_rule_ryan_first", "laura_saw_ch5", "laura_saw_wardrobe", "laura_shoulders_rubbed", "laura_talk_today", "laura_toast_saved", "laura_towel_today", "made_up", "made_up_today", "mark_01_done", "mark_asleep_seen", "mark_blames_ryan", "mark_brushed_kitchen", "mark_brushed_reach", "mark_caught_ch5", "mark_fed_her", "mark_laura_seen", "mark_light_fetched", "mark_money_week", "mark_saw_garden", "mark_saw_her", "mark_saw_lingerie", "mark_saw_mirror", "mark_sunday_table_today", "mark_told_car", "mark_walked_in_laundry", "mark_walked_in_shower", "movie_night", "nadia_canteen_hale", "nadia_knows_stacks", "nadia_met", "nadia_notes_shared", "nadia_owes_her", "on_probation", "opening_done", "out_shown_today", "pays_her_own_way", "rent_short", "rent_starts", "rep_park_run_now", "rep_street_lowtop_now", "rep_stretch_now", "rival_met", "room_tidy", "ryan_brushed_kitchen", "ryan_caught_ch5", "ryan_caught_snooping", "ryan_cover_today", "ryan_covered", "ryan_door_seen", "ryan_hall_knock", "ryan_hall_seen", "ryan_hall_talked", "ryan_kicked", "ryan_knock_code", "ryan_owes_her", "ryan_saw_her_towel", "ryan_saw_mirror", "ryan_saw_nap", "ryan_shift_saved", "ryan_talk_today", "ryan_things_found", "ryan_walked_in_shower", "saw_mark_and_laura", "saw_ryan_alone", "saw_the_couple", "saw_the_library_couple", "served_gary", "shop_skirt_open", "shower_unlocked", "street_first_l1", "street_first_l2", "stretched_today", "studied_home", "study_guy_met", "sunday_counted_today", "sunned", "tom_gave_pastries", "tom_machine_fixed", "tom_met", "tom_owes_her", "tom_shift_booked", "town_event", "tv_loud", "vance_met", "vance_porch_look", "vance_saw_step", "vance_walk_past_today", "walkin_cafe_gary_today", "walkin_canteen_nadia_today", "walkin_door_dean_today", "walkin_garden_mark_today", "walkin_hall_hale_today", "walkin_house_vance_today", "walkin_kitchen_mark_today", "walkin_kitchen_ryan_today", "walkin_laundry_mark_sat_today", "walkin_laundry_mark_today", "walkin_library_nadia_today", "walkin_mirror_mark_today", "walkin_mirror_ryan_today", "walkin_nap_ryan_today", "walkin_shower_mark_today", "walkin_shower_ryan_today", "walkin_step_vance_today", "walkin_things_ryan_today", "walkin_tv_laura_today", "walkin_tv_mark_garage_today", "walkin_tv_mark_kitchen_today", "walkin_tv_ryan_today", "walkin_wardrobe_laura_today", "walkin_wardrobe_mark_today", "watched_tv"]
+flag_keys = ["art_door_seen", "art_lecturer_met", "ate_breakfast", "ate_dinner", "bio_ta_met", "business_door_seen", "business_lecturer_met", "business_retake_used", "cafe_dresses_open", "cafe_job", "cafe_shift_1_today", "cafe_shift_2_today", "cafe_shift_3_today", "came_home_late", "class_late", "class_look_today", "cocky_guy_met", "college_for_freedom", "college_for_fun", "college_for_grades", "curfew", "dean_door_seen", "dean_met", "debt_offer_seen", "debt_refused", "desk_guy_met", "did_dishes", "did_laundry", "dress_warned", "ev_laura_did_you_eat", "ev_laura_did_you_eat_today", "ev_laura_list", "ev_laura_list_today", "ev_laura_phone_call", "ev_laura_phone_call_today", "ev_laura_shoulders", "ev_laura_shoulders_today", "ev_mark_bills", "ev_mark_bills_today", "ev_mark_chilli", "ev_mark_chilli_today", "ev_mark_creeper", "ev_mark_creeper_today", "ev_mark_radio", "ev_mark_radio_today", "ev_mark_tv_1", "ev_mark_tv_1_today", "ev_mark_tv_1_yes", "ev_mark_tv_2", "ev_mark_tv_2_today", "ev_mark_tv_2_yes", "ev_mark_tv_today", "ev_nadia_essay", "ev_nadia_essay_today", "ev_nadia_notes", "ev_nadia_notes_today", "ev_nadia_watcher", "ev_nadia_watcher_today", "ev_ryan_bet_1", "ev_ryan_bet_1_today", "ev_ryan_bet_1_yes", "ev_ryan_bet_2", "ev_ryan_bet_2_today", "ev_ryan_bet_2_yes", "ev_ryan_bet_today", "ev_ryan_cover", "ev_ryan_cover_today", "ev_ryan_dinner_kick", "ev_ryan_dinner_kick_today", "ev_ryan_hall_squeeze", "ev_ryan_hall_squeeze_today", "ev_ryan_shift", "ev_ryan_shift_today", "ev_tom_machine", "ev_tom_machine_today", "ev_tom_pastries", "ev_tom_pastries_today", "ev_tom_sister", "ev_tom_sister_today", "everyday_home_today", "everyday_out_today", "failing_noticed", "figure_model_met", "garage_holds_short_skirt", "garage_holds_sports_bra", "garage_holds_thin_top", "gary_met", "gary_sat_with_her", "grades_seen", "groceries_bought", "grocery_asked_today", "grocery_done_today", "grocery_list", "had_coffee", "had_drink_home", "hale_01_done", "hale_door_seen", "hale_early_look", "hale_met", "hale_pen_picked", "heavy_night", "helped_cook", "her_door_unlocked", "home_event", "hung_washing", "hygiene_off", "late_date", "late_party", "late_shift", "laura_04_done", "laura_call_today", "laura_counted_twenty", "laura_dress_chosen", "laura_fed_her", "laura_love_today", "laura_portal_today", "laura_robe_today", "laura_rule_ryan_first", "laura_saw_ch5", "laura_saw_wardrobe", "laura_shoulders_rubbed", "laura_talk_today", "laura_toast_saved", "laura_towel_today", "made_up", "made_up_today", "mark_01_done", "mark_asleep_seen", "mark_blames_ryan", "mark_brushed_kitchen", "mark_brushed_reach", "mark_caught_ch5", "mark_fed_her", "mark_laura_seen", "mark_light_fetched", "mark_money_week", "mark_saw_garden", "mark_saw_her", "mark_saw_lingerie", "mark_saw_mirror", "mark_sunday_table_today", "mark_told_car", "mark_walked_in_laundry", "mark_walked_in_shower", "movie_night", "nadia_canteen_hale", "nadia_knows_stacks", "nadia_met", "nadia_notes_shared", "nadia_owes_her", "on_probation", "opening_done", "out_shown_today", "pays_her_own_way", "rent_short", "rent_starts", "rep_park_run_now", "rep_street_lowtop_now", "rep_stretch_now", "rival_met", "room_tidy", "ryan_brushed_kitchen", "ryan_caught_ch5", "ryan_caught_snooping", "ryan_cover_today", "ryan_covered", "ryan_door_seen", "ryan_hall_knock", "ryan_hall_seen", "ryan_hall_talked", "ryan_kicked", "ryan_knock_code", "ryan_owes_her", "ryan_saw_her_towel", "ryan_saw_mirror", "ryan_saw_nap", "ryan_shift_saved", "ryan_talk_today", "ryan_things_found", "ryan_walked_in_shower", "saw_mark_and_laura", "saw_ryan_alone", "saw_the_couple", "saw_the_library_couple", "served_gary", "shop_skirt_open", "shower_unlocked", "street_first_l1", "street_first_l2", "stretched_today", "studied_home", "study_guy_met", "sunday_counted_today", "sunned", "ta_door_seen", "tom_gave_pastries", "tom_machine_fixed", "tom_met", "tom_owes_her", "tom_shift_booked", "town_event", "tv_loud", "vance_met", "vance_porch_look", "vance_saw_step", "vance_walk_past_today", "walkin_cafe_gary_today", "walkin_canteen_nadia_today", "walkin_door_art_today", "walkin_door_business_today", "walkin_door_dean_today", "walkin_door_hale_today", "walkin_door_ta_today", "walkin_garden_mark_today", "walkin_hall_hale_today", "walkin_house_vance_today", "walkin_kitchen_mark_today", "walkin_kitchen_ryan_today", "walkin_laundry_mark_sat_today", "walkin_laundry_mark_today", "walkin_library_nadia_today", "walkin_mirror_mark_today", "walkin_mirror_ryan_today", "walkin_nap_ryan_today", "walkin_shower_mark_today", "walkin_shower_ryan_today", "walkin_step_vance_today", "walkin_things_ryan_today", "walkin_tv_laura_today", "walkin_tv_mark_garage_today", "walkin_tv_mark_kitchen_today", "walkin_tv_ryan_today", "walkin_wardrobe_laura_today", "walkin_wardrobe_mark_today", "watched_tv"]
 
 [player.core_traits]
 corruption = 0
@@ -2987,7 +3007,7 @@ image = "locations/campus.jpg"
 image_search_queries = ["campus"]
 entry_from = "street"
 is_container = true
-navigation_order = ["quad", "lecture_hall", "library", "canteen", "college_womens_toilet", "faculty_floor"]
+navigation_order = ["quad", "lecture_hall", "library", "canteen", "college_womens_toilet", "college_mens_toilet", "faculty_floor"]
 
 [locations.crossing_costs]
 time = 15
@@ -3417,6 +3437,23 @@ open = "07:00"
 close = "22:00"
 
 [[locations]]
+id = "college_mens_toilet"
+name = "Men's Toilet"
+kind = "destination"
+description = "The men's toilets across from the women's: a row of urinals, two stalls and a mirror nobody looks in. There's nothing to do here right now."
+image = "locations/college_mens_toilet.jpg"
+image_search_queries = ["men's toilet"]
+parent = "campus"
+entry_from = "campus"
+navigation_order = []
+closed_text = "The college gates are shut."
+
+[[locations.hours]]
+weekdays = [0, 1, 2, 3, 4, 5, 6]
+open = "07:00"
+close = "22:00"
+
+[[locations]]
 id = "faculty_floor"
 name = "Faculty Floor"
 kind = "thoroughfare"
@@ -3425,13 +3462,423 @@ image = "locations/faculty_floor.jpg"
 image_search_queries = ["faculty floor"]
 parent = "campus"
 entry_from = "campus"
-navigation_order = ["dean_office"]
+navigation_order = ["hale_office", "art_office", "business_office", "ta_office", "dean_office"]
 closed_text = "The faculty floor is locked."
 
 [[locations.hours]]
 weekdays = [0, 1, 2, 3, 4]
 open = "08:00"
 close = "19:30"
+
+[[locations.clothing_rules]]
+slots_required = ["legwear"]
+message = "Not in a towel. Get dressed first."
+
+[locations.clothing_rules.conditions]
+version = "1.0"
+logic = "AND"
+
+[[locations.clothing_rules.conditions.items]]
+type = "worn_type"
+operator = "eq"
+value = "towel"
+
+[[locations.clothing_rules]]
+slots_required = ["legwear"]
+message = "Not in your sleep shirt. Get dressed first."
+
+[locations.clothing_rules.conditions]
+version = "1.0"
+logic = "AND"
+
+[[locations.clothing_rules.conditions.items]]
+type = "worn_type"
+operator = "eq"
+value = "sleep_shirt"
+
+[[locations.clothing_rules]]
+slots_required = ["legwear"]
+message = "Not in that skirt. Not yet. (Needs Exhibitionism 20.)"
+
+[locations.clothing_rules.conditions]
+version = "1.0"
+logic = "AND"
+
+[[locations.clothing_rules.conditions.items]]
+type = "worn_type"
+operator = "eq"
+value = "short_skirt"
+
+[[locations.clothing_rules.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "exhibitionism"
+operator = "lt"
+value = 20
+
+[[locations.clothing_rules]]
+slots_required = ["top", "bottom"]
+message = "Not like this. Not out there. Put something on."
+
+[locations.clothing_rules.conditions]
+version = "1.0"
+logic = "AND"
+
+[[locations.clothing_rules.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "exhibitionism"
+operator = "gte"
+value = 40
+
+[[locations.clothing_rules]]
+slots_required = ["underwear", "top", "bottom"]
+message = "Not like this. Not yet. (No panties out of the house needs Exhibitionism 40.)"
+
+[locations.clothing_rules.conditions]
+version = "1.0"
+logic = "AND"
+
+[[locations.clothing_rules.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "exhibitionism"
+operator = "gte"
+value = 20
+
+[[locations.clothing_rules]]
+slots_required = ["bra", "underwear", "top", "bottom"]
+message = "Not like this. Not yet. (Going out without a bra needs Exhibitionism 20.)"
+
+[[locations]]
+id = "hale_office"
+name = "Dr. Hale's Office"
+kind = "destination"
+description = "Dr. Hale's office: books to the ceiling, one window, a desk with a photo of his wife on it. He holds office hours most afternoons, and late on Thursdays, when his wife picks him up after. Your Psychology grade is pinned to the door."
+image = "locations/hale_office.jpg"
+image_search_queries = ["dr. hale's office"]
+parent = "campus"
+entry_from = "faculty_floor"
+navigation_order = []
+closed_text = "The office is locked. Office hours are on the door."
+
+[[locations.hours]]
+weekdays = [0, 1, 2, 4]
+open = "10:00"
+close = "12:00"
+
+[[locations.hours]]
+weekdays = [0, 1, 2, 4]
+open = "15:00"
+close = "19:00"
+
+[[locations.hours]]
+weekdays = [3]
+open = "17:00"
+close = "19:30"
+
+[locations.hidden_until]
+flag = "hale_met"
+
+[[locations.clothing_rules]]
+slots_required = ["legwear"]
+message = "Not in a towel. Get dressed first."
+
+[locations.clothing_rules.conditions]
+version = "1.0"
+logic = "AND"
+
+[[locations.clothing_rules.conditions.items]]
+type = "worn_type"
+operator = "eq"
+value = "towel"
+
+[[locations.clothing_rules]]
+slots_required = ["legwear"]
+message = "Not in your sleep shirt. Get dressed first."
+
+[locations.clothing_rules.conditions]
+version = "1.0"
+logic = "AND"
+
+[[locations.clothing_rules.conditions.items]]
+type = "worn_type"
+operator = "eq"
+value = "sleep_shirt"
+
+[[locations.clothing_rules]]
+slots_required = ["legwear"]
+message = "Not in that skirt. Not yet. (Needs Exhibitionism 20.)"
+
+[locations.clothing_rules.conditions]
+version = "1.0"
+logic = "AND"
+
+[[locations.clothing_rules.conditions.items]]
+type = "worn_type"
+operator = "eq"
+value = "short_skirt"
+
+[[locations.clothing_rules.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "exhibitionism"
+operator = "lt"
+value = 20
+
+[[locations.clothing_rules]]
+slots_required = ["top", "bottom"]
+message = "Not like this. Not out there. Put something on."
+
+[locations.clothing_rules.conditions]
+version = "1.0"
+logic = "AND"
+
+[[locations.clothing_rules.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "exhibitionism"
+operator = "gte"
+value = 40
+
+[[locations.clothing_rules]]
+slots_required = ["underwear", "top", "bottom"]
+message = "Not like this. Not yet. (No panties out of the house needs Exhibitionism 40.)"
+
+[locations.clothing_rules.conditions]
+version = "1.0"
+logic = "AND"
+
+[[locations.clothing_rules.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "exhibitionism"
+operator = "gte"
+value = 20
+
+[[locations.clothing_rules]]
+slots_required = ["bra", "underwear", "top", "bottom"]
+message = "Not like this. Not yet. (Going out without a bra needs Exhibitionism 20.)"
+
+[[locations]]
+id = "art_office"
+name = "Art Lecturer's Office"
+kind = "destination"
+description = "The art lecturer's office: canvases stacked against the walls, charcoal dust on everything, sketches of bodies pinned up to dry. Your Figure drawing grade is on the door."
+image = "locations/art_office.jpg"
+image_search_queries = ["art lecturer's office"]
+parent = "campus"
+entry_from = "faculty_floor"
+navigation_order = []
+closed_text = "The office is locked. Office hours are on the door."
+
+[[locations.hours]]
+weekdays = [0, 1, 3, 4]
+open = "14:30"
+close = "18:00"
+
+[locations.hidden_until]
+flag = "art_lecturer_met"
+
+[[locations.clothing_rules]]
+slots_required = ["legwear"]
+message = "Not in a towel. Get dressed first."
+
+[locations.clothing_rules.conditions]
+version = "1.0"
+logic = "AND"
+
+[[locations.clothing_rules.conditions.items]]
+type = "worn_type"
+operator = "eq"
+value = "towel"
+
+[[locations.clothing_rules]]
+slots_required = ["legwear"]
+message = "Not in your sleep shirt. Get dressed first."
+
+[locations.clothing_rules.conditions]
+version = "1.0"
+logic = "AND"
+
+[[locations.clothing_rules.conditions.items]]
+type = "worn_type"
+operator = "eq"
+value = "sleep_shirt"
+
+[[locations.clothing_rules]]
+slots_required = ["legwear"]
+message = "Not in that skirt. Not yet. (Needs Exhibitionism 20.)"
+
+[locations.clothing_rules.conditions]
+version = "1.0"
+logic = "AND"
+
+[[locations.clothing_rules.conditions.items]]
+type = "worn_type"
+operator = "eq"
+value = "short_skirt"
+
+[[locations.clothing_rules.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "exhibitionism"
+operator = "lt"
+value = 20
+
+[[locations.clothing_rules]]
+slots_required = ["top", "bottom"]
+message = "Not like this. Not out there. Put something on."
+
+[locations.clothing_rules.conditions]
+version = "1.0"
+logic = "AND"
+
+[[locations.clothing_rules.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "exhibitionism"
+operator = "gte"
+value = 40
+
+[[locations.clothing_rules]]
+slots_required = ["underwear", "top", "bottom"]
+message = "Not like this. Not yet. (No panties out of the house needs Exhibitionism 40.)"
+
+[locations.clothing_rules.conditions]
+version = "1.0"
+logic = "AND"
+
+[[locations.clothing_rules.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "exhibitionism"
+operator = "gte"
+value = 20
+
+[[locations.clothing_rules]]
+slots_required = ["bra", "underwear", "top", "bottom"]
+message = "Not like this. Not yet. (Going out without a bra needs Exhibitionism 20.)"
+
+[[locations]]
+id = "business_office"
+name = "Business Lecturer's Office"
+kind = "destination"
+description = "The Business lecturer's office: filing cabinets, a clock that ticks, nothing personal. He offers an honest retake, but nothing else. Your Business grade is on the door."
+image = "locations/business_office.jpg"
+image_search_queries = ["business lecturer's office"]
+parent = "campus"
+entry_from = "faculty_floor"
+navigation_order = []
+closed_text = "The office is locked. Office hours are on the door."
+
+[[locations.hours]]
+weekdays = [0, 2, 3, 4]
+open = "14:30"
+close = "18:00"
+
+[locations.hidden_until]
+flag = "business_lecturer_met"
+
+[[locations.clothing_rules]]
+slots_required = ["legwear"]
+message = "Not in a towel. Get dressed first."
+
+[locations.clothing_rules.conditions]
+version = "1.0"
+logic = "AND"
+
+[[locations.clothing_rules.conditions.items]]
+type = "worn_type"
+operator = "eq"
+value = "towel"
+
+[[locations.clothing_rules]]
+slots_required = ["legwear"]
+message = "Not in your sleep shirt. Get dressed first."
+
+[locations.clothing_rules.conditions]
+version = "1.0"
+logic = "AND"
+
+[[locations.clothing_rules.conditions.items]]
+type = "worn_type"
+operator = "eq"
+value = "sleep_shirt"
+
+[[locations.clothing_rules]]
+slots_required = ["legwear"]
+message = "Not in that skirt. Not yet. (Needs Exhibitionism 20.)"
+
+[locations.clothing_rules.conditions]
+version = "1.0"
+logic = "AND"
+
+[[locations.clothing_rules.conditions.items]]
+type = "worn_type"
+operator = "eq"
+value = "short_skirt"
+
+[[locations.clothing_rules.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "exhibitionism"
+operator = "lt"
+value = 20
+
+[[locations.clothing_rules]]
+slots_required = ["top", "bottom"]
+message = "Not like this. Not out there. Put something on."
+
+[locations.clothing_rules.conditions]
+version = "1.0"
+logic = "AND"
+
+[[locations.clothing_rules.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "exhibitionism"
+operator = "gte"
+value = 40
+
+[[locations.clothing_rules]]
+slots_required = ["underwear", "top", "bottom"]
+message = "Not like this. Not yet. (No panties out of the house needs Exhibitionism 40.)"
+
+[locations.clothing_rules.conditions]
+version = "1.0"
+logic = "AND"
+
+[[locations.clothing_rules.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "exhibitionism"
+operator = "gte"
+value = 20
+
+[[locations.clothing_rules]]
+slots_required = ["bra", "underwear", "top", "bottom"]
+message = "Not like this. Not yet. (Going out without a bra needs Exhibitionism 20.)"
+
+[[locations]]
+id = "ta_office"
+name = "TA's Office"
+kind = "destination"
+description = "The Biology TA's office: a shared room with two desks, a skeleton on a stand and a kettle. She keeps her door half open. Your Biology grade is on it."
+image = "locations/ta_office.jpg"
+image_search_queries = ["ta's office"]
+parent = "campus"
+entry_from = "faculty_floor"
+navigation_order = []
+closed_text = "The office is locked. Office hours are on the door."
+
+[[locations.hours]]
+weekdays = [1, 2, 3, 4]
+open = "14:30"
+close = "18:00"
+
+[locations.hidden_until]
+flag = "bio_ta_met"
 
 [[locations.clothing_rules]]
 slots_required = ["legwear"]
@@ -4218,6 +4665,40 @@ subject = "player"
 flag_key = "hale_met"
 operator = "is_true"
 
+[[npcs.schedules]]
+location = "hale_office"
+weekdays = [3]
+start_time = "17:00"
+end_time = "19:30"
+activity = "Thursday office hours"
+
+[npcs.schedules.when]
+version = "1.0"
+logic = "AND"
+
+[[npcs.schedules.when.items]]
+type = "flag"
+subject = "player"
+flag_key = "hale_met"
+operator = "is_true"
+
+[[npcs.schedules]]
+location = "hale_office"
+weekdays = [0, 1, 2, 4]
+start_time = "15:00"
+end_time = "19:00"
+activity = "office hours"
+
+[npcs.schedules.when]
+version = "1.0"
+logic = "AND"
+
+[[npcs.schedules.when.items]]
+type = "flag"
+subject = "player"
+flag_key = "hale_met"
+operator = "is_true"
+
 [[npcs]]
 id = "npc_vance"
 name = "Mr. Vance"
@@ -4442,6 +4923,23 @@ subject = "player"
 flag_key = "art_lecturer_met"
 operator = "is_true"
 
+[[npcs.schedules]]
+location = "art_office"
+weekdays = [0, 1, 3, 4]
+start_time = "14:30"
+end_time = "18:00"
+activity = "office hours"
+
+[npcs.schedules.when]
+version = "1.0"
+logic = "AND"
+
+[[npcs.schedules.when.items]]
+type = "flag"
+subject = "player"
+flag_key = "art_lecturer_met"
+operator = "is_true"
+
 [[npcs]]
 id = "npc_business_lecturer"
 name = "The Business lecturer"
@@ -4487,6 +4985,23 @@ subject = "player"
 flag_key = "business_lecturer_met"
 operator = "is_true"
 
+[[npcs.schedules]]
+location = "business_office"
+weekdays = [0, 2, 3, 4]
+start_time = "14:30"
+end_time = "18:00"
+activity = "office hours"
+
+[npcs.schedules.when]
+version = "1.0"
+logic = "AND"
+
+[[npcs.schedules.when.items]]
+type = "flag"
+subject = "player"
+flag_key = "business_lecturer_met"
+operator = "is_true"
+
 [[npcs]]
 id = "npc_bio_ta"
 name = "The Biology TA"
@@ -4521,6 +5036,23 @@ weekdays = [0]
 start_time = "13:00"
 end_time = "14:30"
 activity = "teaching Biology"
+
+[npcs.schedules.when]
+version = "1.0"
+logic = "AND"
+
+[[npcs.schedules.when.items]]
+type = "flag"
+subject = "player"
+flag_key = "bio_ta_met"
+operator = "is_true"
+
+[[npcs.schedules]]
+location = "ta_office"
+weekdays = [1, 2, 3, 4]
+start_time = "14:30"
+end_time = "18:00"
+activity = "office hours"
 
 [npcs.schedules.when]
 version = "1.0"
@@ -6512,6 +7044,459 @@ text = "Walk out to campus."
 targetType = "location"
 locationId = "campus"
 time_progression_minutes = 2
+
+[[canvases]]
+id = "door_grade_psych"
+name = "Read your grade on the door"
+description = "Reads grade_psych. Writes nothing."
+
+[canvases.trigger]
+location = "hale_office"
+is_repeatable = true
+priority = 2
+is_active = true
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_door_hale"
+chance = 0.25
+
+[canvases.trigger.substitutions.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.trigger.substitutions.conditions.items]]
+type = "npc_at_location"
+location_id = "hale_office"
+npc_id = "npc_hale"
+operator = "is_present"
+
+[[canvases.nodes]]
+id = "door"
+name = "Psychology grades"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "A printed list taped to Dr. Hale's door, student numbers and grades. You find yours with your finger."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_psych"
+operator = "lt"
+value = 40
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "Failing. In red pen, with a circle round it. Laura is going to see this."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_psych"
+operator = "gte"
+value = 40
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_psych"
+operator = "lt"
+value = 70
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "A pass. Middle of the list. Nobody would look twice."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_psych"
+operator = "gte"
+value = 70
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "Near the top. A small tick beside it in his pen, like he wanted you to see he'd noticed."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Step back."
+targetType = "location"
+locationId = "hale_office"
+
+[[canvases]]
+id = "door_grade_art"
+name = "Read your grade on the door"
+description = "Reads grade_art. Writes nothing."
+
+[canvases.trigger]
+location = "art_office"
+is_repeatable = true
+priority = 2
+is_active = true
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_door_art"
+chance = 0.25
+
+[canvases.trigger.substitutions.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.trigger.substitutions.conditions.items]]
+type = "npc_at_location"
+location_id = "art_office"
+npc_id = "npc_art_lecturer"
+operator = "is_present"
+
+[[canvases.nodes]]
+id = "door"
+name = "Figure drawing grades"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The art lecturer has pinned the grades to her door with a drawing pin through a charcoal nude. You find your number on the sheet."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_art"
+operator = "lt"
+value = 40
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "Failing. Underneath, in pencil: \"Look at the body. Really look.\""
+
+[canvases.nodes.blocks.blocks.blocks.props]
+not_speech = true
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_art"
+operator = "gte"
+value = 40
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_art"
+operator = "lt"
+value = 70
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "A pass. \"Better proportions\" written beside it."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+not_speech = true
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_art"
+operator = "gte"
+value = 70
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "A top mark, with a star, but also \"come and see me\" in the margin."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Step back."
+targetType = "location"
+locationId = "art_office"
+
+[[canvases]]
+id = "door_grade_business"
+name = "Read your grade on the door"
+description = "Reads grade_business. Writes nothing."
+
+[canvases.trigger]
+location = "business_office"
+is_repeatable = true
+priority = 2
+is_active = true
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_door_business"
+chance = 0.25
+
+[canvases.trigger.substitutions.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.trigger.substitutions.conditions.items]]
+type = "npc_at_location"
+location_id = "business_office"
+npc_id = "npc_business_lecturer"
+operator = "is_present"
+
+[[canvases.nodes]]
+id = "door"
+name = "Business grades"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "A typed list in a plastic sleeve, squared to the edge of the door. No comments. No ticks."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_business"
+operator = "lt"
+value = 40
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "Failing. Below the list: \"Retakes by appointment. Honest work only.\""
+
+[canvases.nodes.blocks.blocks.blocks.props]
+not_speech = true
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_business"
+operator = "gte"
+value = 40
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_business"
+operator = "lt"
+value = 70
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "A pass. Exactly what you earned, and the Business lecturer never hands out a point more."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_business"
+operator = "gte"
+value = 70
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "Top of the list. From him, that's practically a medal."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Step back."
+targetType = "location"
+locationId = "business_office"
+
+[[canvases]]
+id = "door_grade_bio"
+name = "Read your grade on the door"
+description = "Reads grade_bio. Writes nothing."
+
+[canvases.trigger]
+location = "ta_office"
+is_repeatable = true
+priority = 2
+is_active = true
+
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walkin_door_ta"
+chance = 0.25
+
+[canvases.trigger.substitutions.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.trigger.substitutions.conditions.items]]
+type = "npc_at_location"
+location_id = "ta_office"
+npc_id = "npc_bio_ta"
+operator = "is_present"
+
+[[canvases.nodes]]
+id = "door"
+name = "Biology grades"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The TA has written the Biology grades out by hand on lined paper and stuck them up with tape that's already peeling."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_bio"
+operator = "lt"
+value = 40
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "Failing. She's drawn a tiny sad face beside it, and then crossed the face out."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_bio"
+operator = "gte"
+value = 40
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_bio"
+operator = "lt"
+value = 70
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "A pass, in her round handwriting."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_bio"
+operator = "gte"
+value = 70
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "Near the top, and underlined, twice."
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Step back."
+targetType = "location"
+locationId = "ta_office"
 
 [[canvases]]
 id = "door_dean_notice"
@@ -21893,6 +22878,389 @@ text = "\"After class.\""
 targetType = "location"
 locationId = "campus"
 time_progression_minutes = 5
+
+[[canvases]]
+id = "hub_hale_office"
+name = "Dr. Hale"
+description = "Hale's office hub in his office hours: one line on her grade, one on her clothes, the start choice."
+
+[canvases.trigger]
+location = "hale_office"
+npc = "npc_hale"
+requires_npc = "npc_hale"
+is_repeatable = true
+priority = 6
+is_active = true
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "hale_met"
+operator = "is_true"
+
+[[canvases.nodes]]
+id = "office"
+name = "His office"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a professor of 39 at his office desk behind a pile of papers, a beach photo of him and a dark-haired woman face-up beside him"
+search_queries = ["professor office desk papers", "lecturer at desk looking up"]
+pool_dir = "people/hale_office_desk_t0"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Dr. Hale looks up from a pile of papers."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The photo on his desk is face-up: him and a woman with short dark hair, laughing on a beach."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_psych"
+operator = "lt"
+value = 40
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "You're failing my course, @player. That isn't like you."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_hale"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_psych"
+operator = "gte"
+value = 40
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_psych"
+operator = "lt"
+value = 70
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "A pass. You could do better. You know you could."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_hale"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_psych"
+operator = "gte"
+value = 70
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "Top of the class. I'd say I'm proud, but you'd make something of it."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_hale"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "worn_type"
+operator = "eq"
+value = "short_skirt"
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "His eyes drop to your thighs, and his neck goes red. He loses the sentence, pulls his chair in tight under the desk, and starts it again."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "clothing_slot"
+slot = "bra"
+operator = "unequipped"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "worn_exposure"
+operator = "eq"
+value = 0
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "His eyes go to your chest and stay there a second too long. He keeps the desk between you."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "college_for_grades"
+operator = "is_true"
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "You're here for the grades. I can always tell the ones who are."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_hale"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "college_for_fun"
+operator = "is_true"
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "You're here for the fun, aren't you? Is this fun?"
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_hale"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "college_for_freedom"
+operator = "is_true"
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "You look like someone who came here to get away from something."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_hale"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "hale_step"
+operator = "eq"
+value = 1
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "weekday"
+weekdays = [1, 3, 6]
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "Front row tomorrow, @player. Where I can see you."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_hale"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "hale_step"
+operator = "eq"
+value = 1
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "weekday"
+weekdays = [0, 2, 4, 5]
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "Front row next class, @player. Where I can see you."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_hale"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "hale_door_seen"
+operator = "is_true"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "hours_since_flag"
+subject = "player"
+flag_key = "hale_door_seen"
+operator = "lt"
+value = 1
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "You were reading your grade very carefully."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_hale"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Ask him about your essay."
+targetType = "node"
+nodeId = "essay"
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"Bye, Dr. Hale.\""
+targetType = "location"
+locationId = "faculty_floor"
+
+[[canvases.nodes]]
+id = "essay"
+name = "Your essay"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He reads your essay at the desk with his pen out, and talks you through it line by line, but he doesn't touch you once. He doesn't need to."
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a professor of 39 at his desk reading a student's essay with his pen out, a young woman sitting beside the desk"
+search_queries = ["professor reading student essay office", "teacher going through essay with student"]
+pool_dir = "people/hale_office_essay_t0"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Your argument's here, @player. You buried it on page three. Lead with it."
+
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId = "npc_hale"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Thank him (1h)."
+targetType = "location"
+locationId = "faculty_floor"
+time_progression_minutes = 60
+
+[[canvases.nodes.exit_block.choices.effects]]
+targetType = "player"
+trait = "grade_psych"
+op = "add"
+value = 1
+cap = 69
 
 [[canvases]]
 id = "hub_nadia_library"
@@ -41331,6 +42699,942 @@ targetType = "location"
 locationId = "campus"
 
 [[canvases]]
+id = "hub_art_office"
+name = "The art lecturer's office"
+description = "The art lecturer's office: one line on her grade, one on her clothes."
+
+[canvases.trigger]
+location = "art_office"
+npc = "npc_art_lecturer"
+requires_npc = "npc_art_lecturer"
+is_repeatable = true
+priority = 6
+is_active = true
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "art_lecturer_met"
+operator = "is_true"
+
+[[canvases.nodes]]
+id = "hub"
+name = "The art lecturer's office"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a woman of 45 in an office crowded with canvases, looking up from a sketch of a woman's back"
+search_queries = ["art teacher office canvases", "woman artist studio sketching"]
+pool_dir = "people/art_office_canvases_t0"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Canvases against every wall. The art lecturer looks up from a sketch of a woman's back."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_art"
+operator = "lt"
+value = 40
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "Sit. Show me your book. Ah. Yes. We have work to do."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_art_lecturer"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_art"
+operator = "gte"
+value = 40
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_art"
+operator = "lt"
+value = 70
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "You're improving. Draw every day."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_art_lecturer"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_art"
+operator = "gte"
+value = 70
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "You have an eye. Come and sit for me some time."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_art_lecturer"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "clothing_slot"
+slot = "bra"
+operator = "unequipped"
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "Stand by the window a moment. The light's good on you."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_art_lecturer"
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "She's already looking at your tits under what you're wearing, the way she looks at the model, pencil moving."
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "Clothes on today. Some day you'll sit for me properly."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_art_lecturer"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "clothing_slot"
+slot = "bra"
+operator = "equipped"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "worn_type"
+operator = "eq"
+value = "short_skirt"
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "Stand by the window a moment. The light's good on you."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_art_lecturer"
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "She's already looking at your bare legs below the skirt, pencil moving."
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "Clothes on today. Some day you'll sit for me properly."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_art_lecturer"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "art_door_seen"
+operator = "is_true"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "hours_since_flag"
+subject = "player"
+flag_key = "art_door_seen"
+operator = "lt"
+value = 1
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "You stood very well at my door. Remember how."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_art_lecturer"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Show her your sketchbook."
+targetType = "node"
+nodeId = "book"
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave her to her drawings."
+targetType = "location"
+locationId = "faculty_floor"
+
+[[canvases.nodes]]
+id = "book"
+name = "Your sketchbook"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She turns the pages slowly, and stops on the figures. She takes a pencil and corrects a hip with three lines, without asking."
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "an art lecturer of 45 correcting a figure drawing in a student's sketchbook with a pencil"
+search_queries = ["art teacher correcting sketchbook", "drawing lesson pencil sketchbook"]
+pool_dir = "people/art_office_book_t0"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "There. You keep drawing what you think a body does. Draw what it's doing."
+
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId = "npc_art_lecturer"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Thank her (1h)."
+targetType = "location"
+locationId = "faculty_floor"
+time_progression_minutes = 60
+
+[[canvases.nodes.exit_block.choices.effects]]
+targetType = "player"
+trait = "grade_art"
+op = "add"
+value = 1
+cap = 69
+
+[[canvases]]
+id = "hub_business_office"
+name = "The Business lecturer's office"
+description = "The Business lecturer's office: one line on her grade, one on her clothes."
+
+[canvases.trigger]
+location = "business_office"
+npc = "npc_business_lecturer"
+requires_npc = "npc_business_lecturer"
+is_repeatable = true
+priority = 6
+is_active = true
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "business_lecturer_met"
+operator = "is_true"
+
+[[canvases.nodes]]
+id = "hub"
+name = "The Business lecturer's office"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The Business lecturer looks up from his marking and doesn't smile."
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a gray-suited lecturer of 50 at his desk, eyes flicking up from his marking"
+search_queries = ["lecturer at desk looking up"]
+pool_dir = "look/business_office_look_t3"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_business"
+operator = "lt"
+value = 40
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "business_retake_used"
+operator = "is_true"
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "Failing. You've had your retake. Nothing else."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_business_lecturer"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_business"
+operator = "lt"
+value = 40
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "business_retake_used"
+operator = "is_false"
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "Failing. I can offer an honest retake. Nothing else."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_business_lecturer"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_business"
+operator = "gte"
+value = 40
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_business"
+operator = "lt"
+value = 70
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "You're passing. Keep it honest."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_business_lecturer"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_business"
+operator = "gte"
+value = 70
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "Good work. Honest work."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_business_lecturer"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_business"
+operator = "gte"
+value = 40
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "I'll see you in lecture, @player. Front half of the room."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_business_lecturer"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "clothing_slot"
+slot = "bra"
+operator = "unequipped"
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "His eyes drop to your tits once, to your nipples pushing at the fabric, and come straight back up to your face. His pen doesn't stop."
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "You can wear what you like. It won't change your grade. Nothing does."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_business_lecturer"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "clothing_slot"
+slot = "bra"
+operator = "equipped"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "worn_type"
+operator = "eq"
+value = "short_skirt"
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "His eyes go down your bare thighs to the hem of your skirt once, and come straight back up to your face. His pen doesn't stop."
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "You can wear what you like. It won't change your grade. Nothing does."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_business_lecturer"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "business_door_seen"
+operator = "is_true"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "hours_since_flag"
+subject = "player"
+flag_key = "business_door_seen"
+operator = "lt"
+value = 1
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "You read it. Good. Now earn the next one."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_business_lecturer"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"I'll take the retake.\""
+targetType = "node"
+nodeId = "retake"
+time_progression_minutes = 5
+
+[canvases.nodes.exit_block.choices.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.exit_block.choices.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_business"
+operator = "lt"
+value = 40
+
+[[canvases.nodes.exit_block.choices.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "business_retake_used"
+operator = "is_false"
+
+[[canvases.nodes.exit_block.choices.flagEffects]]
+targetType = "player"
+flag = "business_retake_used"
+op = "set"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave him to his marking."
+targetType = "location"
+locationId = "faculty_floor"
+
+[[canvases.nodes]]
+id = "retake"
+name = "The retake"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He hands you a paper and points at a chair, and sits watching you for an hour without blinking. You know more than you thought."
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a gray-suited lecturer of 50 sitting watching a young woman write a test paper on a chair in his office"
+search_queries = ["student taking test in professor office", "lecturer watching student write exam"]
+pool_dir = "people/business_retake_t0"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Honest work. Thank you."
+
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId = "npc_business_lecturer"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Hand it in (1h)."
+targetType = "location"
+locationId = "faculty_floor"
+time_progression_minutes = 60
+
+[[canvases.nodes.exit_block.choices.effects]]
+targetType = "player"
+trait = "grade_business"
+op = "add"
+value = 5
+clamp = true
+
+[[canvases]]
+id = "hub_ta_office"
+name = "The TA's office"
+description = "The TA's office: one line on her grade, one on her clothes."
+
+[canvases.trigger]
+location = "ta_office"
+npc = "npc_bio_ta"
+requires_npc = "npc_bio_ta"
+is_repeatable = true
+priority = 6
+is_active = true
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "bio_ta_met"
+operator = "is_true"
+
+[[canvases.nodes]]
+id = "hub"
+name = "The TA's office"
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a shy young woman of 28 looking up from her desk in a small office, a skeleton in a party hat in the corner"
+search_queries = ["shy teaching assistant small office", "biology office skeleton party hat"]
+pool_dir = "people/ta_office_skeleton_t0"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The TA's office is half a room with a skeleton in the corner wearing a party hat. She looks up from her desk, a little pink."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_bio"
+operator = "lt"
+value = 40
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "Oh! Hi. Your grade. Um. We should fix your grade. Sit?"
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_bio_ta"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_bio"
+operator = "gte"
+value = 40
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_bio"
+operator = "lt"
+value = 70
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "You're doing well. Do you want tea?"
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_bio_ta"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_bio"
+operator = "gte"
+value = 70
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "You're my best student. Don't tell anyone I said that."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_bio_ta"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "clothing_slot"
+slot = "bra"
+operator = "unequipped"
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "She can't keep her eyes off your chest."
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "I like your— never mind. Sit down. Please."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_bio_ta"
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "She gets up to shut the door, stops with her hand on it, and leaves it open."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "clothing_slot"
+slot = "bra"
+operator = "equipped"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "worn_type"
+operator = "eq"
+value = "short_skirt"
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "Her eyes go down your legs when you sit, and stay."
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "I like your— never mind. Sit down. Please."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_bio_ta"
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "paragraph"
+content = "She gets up to shut the door, stops with her hand on it, and leaves it open."
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "ta_door_seen"
+operator = "is_true"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "hours_since_flag"
+subject = "player"
+flag_key = "ta_door_seen"
+operator = "lt"
+value = 1
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "Sorry about the door. I wasn't staring. I was. Sorry."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_bio_ta"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Ask her to help you with Biology."
+targetType = "node"
+nodeId = "help"
+time_progression_minutes = 0
+
+[[canvases.nodes.exit_block.choices]]
+text = "\"It's fine. Really.\""
+targetType = "node"
+nodeId = "fine"
+time_progression_minutes = 1
+
+[[canvases.nodes]]
+id = "fine"
+name = "It's fine"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Oh. Okay. Sure. I'm here in my office hours, if you change your mind."
+
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId = "npc_bio_ta"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She sits back down too fast and stares at her screen, red to the ears. No help today, and your Biology stays where it is."
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a red-faced young woman of 28 sitting back at her desk, staring hard at her screen"
+search_queries = ["embarrassed woman staring at computer screen", "blushing assistant at desk"]
+pool_dir = "people/ta_office_fine_t0"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Leave her to it."
+targetType = "location"
+locationId = "faculty_floor"
+
+[[canvases.nodes]]
+id = "help"
+name = "Her help"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She pulls her chair round to your side of the desk and goes through your last lab with a pencil, too close, apologising every time her knee touches yours."
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a young woman of 28 sitting close beside a student at a desk, going through a lab report with a pencil, their knees touching"
+search_queries = ["tutor sitting close helping student desk", "teaching assistant helping with lab report"]
+pool_dir = "people/ta_office_help_t0"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "See? You had it, but you didn't believe it."
+
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId = "npc_bio_ta"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Thank her (1h)."
+targetType = "location"
+locationId = "faculty_floor"
+time_progression_minutes = 60
+
+[[canvases.nodes.exit_block.choices.effects]]
+targetType = "player"
+trait = "grade_bio"
+op = "add"
+value = 1
+cap = 69
+
+[[canvases]]
 id = "hub_dean_office"
 name = "The dean"
 description = "The dean: one line on her grade, one on her clothes."
@@ -43127,93 +45431,6 @@ trait = "energy"
 op = "add"
 value = 5
 cap = 100
-
-[[canvases]]
-id = "park_selfie"
-name = "Take a selfie on the path"
-description = "Photos on the path, a man on a bench watching her pose: Exhibitionism +1. Once a day. Posting is the phone's (pass 3 F64): followers move only on the Feed."
-
-[canvases.trigger]
-location = "park"
-is_repeatable = true
-priority = 3
-is_active = true
-max_triggers_per_day = 1
-
-[[canvases.nodes]]
-id = "photo"
-name = "A selfie"
-
-[[canvases.nodes.blocks]]
-type = "image"
-
-[canvases.nodes.blocks.props]
-description = "a girl taking selfies by a willow, an older man on a bench watching"
-search_queries = ["girl taking selfie park man watching"]
-pool_dir = "look/park_selfie_t3"
-
-[[canvases.nodes.blocks]]
-type = "paragraph"
-content = "You find a spot by the willow and take twenty photos to get one. A man on a bench watches you do it, every angle, his eyes on your ass each time you bend for the shot. He folds his paper into his lap. Whatever you post stays up for anyone to see."
-
-[[canvases.nodes.blocks]]
-type = "block_pool"
-
-[[canvases.nodes.blocks.blocks]]
-type = "group"
-
-[canvases.nodes.blocks.blocks.conditions]
-version = "1.0"
-logic = "AND"
-
-[[canvases.nodes.blocks.blocks.conditions.items]]
-type = "worn_type"
-operator = "eq"
-value = "short_skirt"
-
-[[canvases.nodes.blocks.blocks.blocks]]
-type = "paragraph"
-content = "The best one is the one where the wind has the skirt, and your ass is half out of it. Post that, and everyone who follows you sees it, for good."
-
-[[canvases.nodes.blocks]]
-type = "block_pool"
-
-[[canvases.nodes.blocks.blocks]]
-type = "group"
-
-[canvases.nodes.blocks.blocks.conditions]
-version = "1.0"
-logic = "AND"
-
-[[canvases.nodes.blocks.blocks.conditions.items]]
-type = "clothing_item"
-item_id = "sports_bra"
-operator = "equipped"
-
-[[canvases.nodes.blocks.blocks.conditions.items]]
-type = "clothing_slot"
-slot = "top"
-operator = "unequipped"
-
-[[canvases.nodes.blocks.blocks.blocks]]
-type = "paragraph"
-content = "Sports bra, sweat, the pond behind you."
-
-[[canvases.nodes.blocks]]
-type = "thought_bubble"
-content = "Put yourself up where anyone can look? Not yet."
-
-[canvases.nodes.blocks.props]
-speaker = "player"
-
-[canvases.nodes.exit_block]
-type = "choices"
-
-[[canvases.nodes.exit_block.choices]]
-text = "Delete them all."
-targetType = "location"
-locationId = "park"
-time_progression_minutes = 5
 
 [[canvases]]
 id = "park_watch_the_couple"
@@ -45075,6 +47292,243 @@ locationId = "street"
 time_progression_minutes = 0
 
 [[canvases]]
+id = "walkin_door_art"
+name = "The door opens"
+description = "B20, the art lecturer: she opens her door and looks at her the way she looks at the model. No pay."
+
+[canvases.trigger]
+location = "art_office"
+is_repeatable = true
+priority = 1
+is_active = true
+substitution_only = true
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "opening_done"
+operator = "is_true"
+
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "walkin_door_art_today"
+operator = "is_false"
+
+[[canvases.trigger.conditions.items]]
+type = "npc_at_location"
+location_id = "art_office"
+npc_id = "npc_art_lecturer"
+operator = "is_present"
+
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "art_lecturer_met"
+operator = "is_true"
+
+[[canvases.nodes]]
+id = "door"
+name = "The door opens"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You're reading your grade when the door opens under your finger. The art lecturer, with a mug in her hand."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She stops and looks at you with her head on one side, the way she looks at the model before she draws: your shoulders, your hips, the length of your legs, the shape of your tits under what you're wearing. Measuring."
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "an art lecturer of 45 in her office doorway with a mug, head on one side, looking a young woman up and down"
+search_queries = ["woman in doorway looking girl up and down", "artist measuring model with eyes"]
+pool_dir = "look/art_door_measuring_t3"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Hold that. Don't move. Hm. Another time."
+
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId = "npc_art_lecturer"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Step back."
+targetType = "location"
+locationId = "art_office"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices.flagEffects]]
+targetType = "player"
+flag = "walkin_door_art_today"
+op = "set"
+
+[[canvases.nodes.exit_block.choices.flagEffects]]
+targetType = "player"
+flag = "art_door_seen"
+op = "set"
+
+[[canvases]]
+id = "walkin_door_ta"
+name = "The door opens"
+description = "B20, the TA: she opens her door, looks her over and catches herself. No pay."
+
+[canvases.trigger]
+location = "ta_office"
+is_repeatable = true
+priority = 1
+is_active = true
+substitution_only = true
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "opening_done"
+operator = "is_true"
+
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "walkin_door_ta_today"
+operator = "is_false"
+
+[[canvases.trigger.conditions.items]]
+type = "npc_at_location"
+location_id = "ta_office"
+npc_id = "npc_bio_ta"
+operator = "is_present"
+
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "bio_ta_met"
+operator = "is_true"
+
+[[canvases.nodes]]
+id = "door"
+name = "The door opens"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The half-open door swings wide. The TA, with her kettle."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "Her eyes go down you, all the way down, your tits, your legs, and snap back up to your face. Her neck goes pink."
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a young woman of 28 in an office doorway holding a kettle, her eyes running down a student, her neck pink"
+search_queries = ["shy woman doorway checking out girl", "blushing woman holding kettle doorway"]
+pool_dir = "look/ta_door_look_t3"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Oh! Hi. It's, um. It's up to date. The grades. Sorry."
+
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId = "npc_bio_ta"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "The kettle's just boiled. You can come in, if you want."
+
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId = "npc_bio_ta"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Go in."
+targetType = "location"
+locationId = "ta_office"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices.flagEffects]]
+targetType = "player"
+flag = "walkin_door_ta_today"
+op = "set"
+
+[[canvases.nodes.exit_block.choices.flagEffects]]
+targetType = "player"
+flag = "ta_door_seen"
+op = "set"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Step back."
+targetType = "node"
+nodeId = "no"
+
+[[canvases.nodes]]
+id = "no"
+name = "Step back"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "I only came for my grade. Thanks."
+
+[canvases.nodes.blocks.props]
+speaker = "player"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "No. Yes. Of course. The grade. Right. The kettle will keep."
+
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId = "npc_bio_ta"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "She looks at your legs one more time, goes pink to the ears, and pulls the door half shut with her foot."
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a pink-faced young woman of 28 pulling an office door half shut with her foot, glancing at a student's legs"
+search_queries = ["blushing woman closing office door", "woman glancing at girl's legs doorway"]
+pool_dir = "look/ta_door_no_t3"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Walk away."
+targetType = "location"
+locationId = "faculty_floor"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices.flagEffects]]
+targetType = "player"
+flag = "walkin_door_ta_today"
+op = "set"
+
+[[canvases.nodes.exit_block.choices.flagEffects]]
+targetType = "player"
+flag = "ta_door_seen"
+op = "set"
+
+[[canvases]]
 id = "walkin_door_dean"
 name = "The door opens"
 description = "B20, the dean: he opens his door and reads her clothes. No pay."
@@ -45246,6 +47700,363 @@ op = "set"
 [[canvases.nodes.exit_block.choices.flagEffects]]
 targetType = "player"
 flag = "dean_door_seen"
+op = "set"
+
+[[canvases]]
+id = "walkin_door_hale"
+name = "The door opens"
+description = "B20, Dr. Hale: he opens his door in his office hours; his line by his step. No pay."
+
+[canvases.trigger]
+location = "hale_office"
+is_repeatable = true
+priority = 1
+is_active = true
+substitution_only = true
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "opening_done"
+operator = "is_true"
+
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "walkin_door_hale_today"
+operator = "is_false"
+
+[[canvases.trigger.conditions.items]]
+type = "npc_at_location"
+location_id = "hale_office"
+npc_id = "npc_hale"
+operator = "is_present"
+
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "hale_met"
+operator = "is_true"
+
+[[canvases.nodes]]
+id = "door"
+name = "The door opens"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You've got your finger on your grade when Dr. Hale opens his door."
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "He sees you there, and his eyes go down your legs before they come back up to your face."
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a professor of 39 opening his office door, his eyes going down a young woman's legs"
+search_queries = ["professor opening door looking at student legs", "man in doorway eyes on girl's legs"]
+pool_dir = "look/hale_office_door_legs_t3"
+
+[[canvases.nodes.blocks]]
+type = "dialog"
+content = "Checking up on me, @player?"
+
+[canvases.nodes.blocks.props]
+speaker = "npc"
+npcId = "npc_hale"
+
+[[canvases.nodes.blocks]]
+type = "thought_bubble"
+content = "He wants a lot more than a look at your legs. Not in a corridor. Not yet."
+
+[canvases.nodes.blocks.props]
+speaker = "player"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Step back."
+targetType = "node"
+nodeId = "no"
+
+[[canvases.nodes]]
+id = "no"
+name = "Step back"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "You step back. He watches your legs go, and lets the door swing shut."
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a professor of 39 in his office doorway watching a young woman walk away, the door swinging shut"
+search_queries = ["man watching woman walk away doorway", "professor office door closing"]
+pool_dir = "look/hale_door_watch_t3"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Walk away."
+targetType = "location"
+locationId = "faculty_floor"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices.flagEffects]]
+targetType = "player"
+flag = "walkin_door_hale_today"
+op = "set"
+
+[[canvases.nodes.exit_block.choices.flagEffects]]
+targetType = "player"
+flag = "hale_door_seen"
+op = "set"
+
+[[canvases]]
+id = "walkin_door_business"
+name = "The door opens"
+description = "B20, the Business lecturer: he opens his door and looks at the grade, not at her. No pay."
+
+[canvases.trigger]
+location = "business_office"
+is_repeatable = true
+priority = 1
+is_active = true
+substitution_only = true
+
+[canvases.trigger.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "opening_done"
+operator = "is_true"
+
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "walkin_door_business_today"
+operator = "is_false"
+
+[[canvases.trigger.conditions.items]]
+type = "npc_at_location"
+location_id = "business_office"
+npc_id = "npc_business_lecturer"
+operator = "is_present"
+
+[[canvases.trigger.conditions.items]]
+type = "flag"
+subject = "player"
+flag_key = "business_lecturer_met"
+operator = "is_true"
+
+[[canvases.nodes]]
+id = "door"
+name = "The door opens"
+
+[[canvases.nodes.blocks]]
+type = "paragraph"
+content = "The door opens. The Business lecturer looks at the grade sheet, then at your number on it, and not at you once."
+
+[[canvases.nodes.blocks]]
+type = "image"
+
+[canvases.nodes.blocks.props]
+description = "a gray-suited lecturer of 50 in his office doorway reading a grade sheet taped to the door, not looking at the student beside it"
+search_queries = ["lecturer reading grade sheet on door", "professor office door grades list"]
+pool_dir = "people/business_door_sheet_t0"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_business"
+operator = "lt"
+value = 40
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "Retakes by appointment."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_business_lecturer"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_business"
+operator = "gte"
+value = 40
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_business"
+operator = "lt"
+value = 70
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "It's accurate. Get it to seventy in my lecture, not at my door."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_business_lecturer"
+
+[[canvases.nodes.blocks]]
+type = "block_pool"
+
+[[canvases.nodes.blocks.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "grade_business"
+operator = "gte"
+value = 70
+
+[[canvases.nodes.blocks.blocks.blocks]]
+type = "dialog"
+content = "It's accurate. Keep it up there, @player."
+
+[canvases.nodes.blocks.blocks.blocks.props]
+speaker = "npc"
+npcId = "npc_business_lecturer"
+
+[[canvases.nodes.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "corruption"
+operator = "lt"
+value = 20
+
+[[canvases.nodes.blocks.blocks]]
+type = "thought_bubble"
+content = "Read the number and go. Don't make him look up."
+
+[canvases.nodes.blocks.blocks.props]
+speaker = "player"
+
+[[canvases.nodes.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "corruption"
+operator = "lt"
+value = 40
+
+[[canvases.nodes.blocks.blocks]]
+type = "thought_bubble"
+content = "He hasn't looked at you once. You wonder if he ever looks at anyone."
+
+[canvases.nodes.blocks.blocks.props]
+speaker = "player"
+
+[[canvases.nodes.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.conditions.items]]
+type = "trait"
+subject = "player"
+trait_key = "corruption"
+operator = "lt"
+value = 60
+
+[[canvases.nodes.blocks.blocks]]
+type = "thought_bubble"
+content = "Not one look. You could stand here in less, and you want to know if it would change his face."
+
+[canvases.nodes.blocks.blocks.props]
+speaker = "player"
+
+[[canvases.nodes.blocks]]
+type = "group"
+
+[canvases.nodes.blocks.conditions]
+version = "1.0"
+logic = "AND"
+
+[[canvases.nodes.blocks.conditions.items]]
+type = "worn_exposure"
+operator = "gte"
+value = 0
+
+[[canvases.nodes.blocks.blocks]]
+type = "thought_bubble"
+content = "Not one look. You want this man to look up, and you know nothing you've got will make him."
+
+[canvases.nodes.blocks.blocks.props]
+speaker = "player"
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Step back."
+targetType = "location"
+locationId = "faculty_floor"
+time_progression_minutes = 2
+
+[[canvases.nodes.exit_block.choices.flagEffects]]
+targetType = "player"
+flag = "walkin_door_business_today"
+op = "set"
+
+[[canvases.nodes.exit_block.choices.flagEffects]]
+targetType = "player"
+flag = "business_door_seen"
 op = "set"
 
 [[canvases]]

@@ -923,7 +923,7 @@ name = "Figure drawing grades"
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
-content = "The art lecturer has pinned the grades to her door with a drawing pin through a charcoal nude. Your number is near the bottom of the sheet."
+content = "The art lecturer has pinned the grades to her door with a drawing pin through a charcoal nude. You find your number on the sheet."
 
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
