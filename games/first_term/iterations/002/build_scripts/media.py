@@ -402,6 +402,20 @@ ROWS = [
      "a girl stretching on a gym mat in a sports bra, ass up, guys at the rack watching", "girl stretching sports bra gym"),
     ("gym_workout", "mats", "stretch out in the tiny shorts", "pic", "look/gym_mats_shorts_t3",
      "a girl stretching in tiny shorts in front of a bench, legs wide", "girl stretching tiny shorts gym"),
+    # ══ The opening (LO, 2026-11-12: "Add media blocks to the starting scenes"; DECISIONS 241) ══
+    # the opening's Ryan morning (ryan_01_hall_first_morning) is hand-written in 2_one_shots.toml; its 6 blocks are there
+    ("mark_01_count_it_slowly", "table", "He looks up, and his eyes go", "pic", "look/mark_01_legs_t3.jpg",
+     "an older man of 46 at a kitchen table, a rent envelope and a cold coffee in front of him, looking up at a girl's legs",
+     "older man kitchen table staring at girl's legs"),
+    ("mark_00_the_dryer", "basket", None, "pic", "scenes/mark_00_garage_t0.jpg",
+     "a man in his forties at a garage workbench with his back turned, a radio on, a washing machine by the wall",
+     "man at garage workbench back turned"),
+    ("mark_00_the_dryer", "covered", "You take the towel and hold it over your chest", "pic", "look/hose_covered_t3.jpg",
+     "a soaked girl holding a towel over her chest in a garage, an older man bent over his workbench, red ears",
+     "soaked girl holding towel garage"),
+    ("hale_01_first_lecture", "pen", "You bend down for it, all the way", "clip", "sex/hale_pen_hard_t4.webm",
+     "a professor of 39 at a lecture stage, the line of his hard cock against his trousers, a girl coming back up from bending for his pen",
+     "professor bulge trousers lecture", "teacher hard student bending"),
 ]
 
 
@@ -452,3 +466,12 @@ def apply(canvas):
             top = max(h[0][1] for h in hits)
             node["blocks"].insert(_past_chain(node["blocks"], top) + 1, blk)
     return canvas
+
+
+def check_landed(merged_toml):
+    """Every row's block must be in the merged game. apply() only sees the canvases the build scripts emit, so a row
+    for a hand-written canvas (2_one_shots.toml, 3_activities.toml) would otherwise be dropped without a word
+    (the opening's Ryan morning, 2026-11-12)."""
+    text = open(merged_toml).read()
+    lost = [r[4] for r in ROWS if f'"{r[4]}"' not in text]
+    assert not lost, f"media.py: {len(lost)} row(s) never landed (is the canvas hand-written?): {lost}"

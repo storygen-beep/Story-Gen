@@ -9119,6 +9119,10 @@ blocks = [
 ]
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "an older man of 46 at a kitchen table, a rent envelope and a cold coffee in front of him, looking up at a girl's legs", search_queries = ["older man kitchen table staring at girl's legs"], file = "look/mark_01_legs_t3.jpg" }
+
+[[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, blocks = [{ type = "paragraph", content = "You came in your sleep shirt. It stops mid-thigh. He watches the hem the whole way to the table." }] },
@@ -13319,6 +13323,10 @@ id   = "basket"
 name = "Laundry"
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a man in his forties at a garage workbench with his back turned, a radio on, a washing machine by the wall", search_queries = ["man at garage workbench back turned"], file = "scenes/mark_00_garage_t0.jpg" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You carry your basket down the hall to the garage. Mark's at his bench with the radio on, his back to you. He grunts at you without turning round."
 
@@ -13388,6 +13396,10 @@ content = "You take the towel and hold it over your chest. Mark is already bent 
 type = "thought_bubble"
 content = "He looked. Mom's husband looked at your tits, and then he turned his back like they burned him."
 props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a soaked girl holding a towel over her chest in a garage, an older man bent over his workbench, red ears", search_queries = ["soaked girl holding towel garage"], file = "look/hose_covered_t3.jpg" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -18634,6 +18646,10 @@ name = "His pen"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You bend down for it, all the way, and when you come back up his eyes are on your chest, not your face. He's hard. You can see the line of it against his trousers from the front row. He sees you see it, and steps back behind the lectern."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a professor of 39 at a lecture stage, the line of his hard cock against his trousers, a girl coming back up from bending for his pen", search_queries = ["professor bulge trousers lecture", "teacher hard student bending"], file = "sex/hale_pen_hard_t4.webm" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"

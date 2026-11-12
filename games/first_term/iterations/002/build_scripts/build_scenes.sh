@@ -22,6 +22,7 @@ python3 phone.py $PH/8_phone.toml   # iteration 002, part 6: the phone is genera
 python3 gen_world.py $PH/1_metadata_and_locations.toml
 cd $ROOT
 python3 scripts/merge_toml_phases.py games/first_term --validate 2>&1 | tail -1
+(cd $HERE && python3 -c "import media; media.check_landed('$PH/7_final_game.toml')")   # every media row landed (DECISIONS 241)
 # DECISIONS 230 — the release slice. RELEASE=1 cuts the merged game to release 1 (and packages it without --dev);
 # unset, the filter keeps everything and only strips the release tags (authoring).
 python3 scripts/release_filter.py games/first_term --release ${RELEASE:-max}
