@@ -6542,117 +6542,57 @@ destinationType          = "specific"
 locationId               = "underworld_gate"
 time_progression_minutes = 30
 
-# ══ 0.2.6 YOU, FOR HIM — part six, THE TESTS (beat_0267). design_the_offer.md part six + "BLUEPRINT · Part six". ══
-# ⚠️ A LOCATED CARD ON holding_cell, 09:00-17:00 (the technician's day row). She is taken to the lab and brought
-# back: every exit lands in holding_cell, so test_lab is never reached on foot by day (the lab is locked on lab_door until the
-# guard's drain).
-# ⚠️ ONE TEST A CALENDAR DAY, the kess_fitting shape: test_day re-stamped on every test, days_since_flag gte 1 on
-# every test after the first, and the "not today" band first in the chain (3_activities.toml kess_fitting).
-# ⚠️ tests_done moves ON THE CHOICE (choice effects fire on click). Each test is its own choice gated on the exact
-# value, the parts_out pattern, so no gate needs an OR. 4 is the daily test and does not move the counter.
-# ⚠️ THE CHARGE: from the machine test on, every test sets drain_charge 1 (LO, call 1 signed 2026-11-10). It is the
-# only refill inside. Energy -20 a test, clamped: a hard day leaves her too tired for the guard's 15.
-# ⚠️ SHE DOES NOT CHOOSE THEM. The only choice is "Go with them."; the card's job is to move the day.
+# ══ 0.2.6 YOU, FOR HIM — part six, THE TESTS (beat_0267; made automatic at beat_0279b). design_the_offer.md part six. ══
+# ⚠️ AUTOMATIC SINCE beat_0279b (LO 2026-11-12, "2 yess automatic"; window 09:00-12:00, "1 yess"). She does not
+# choose the tests and no longer gets a button for them. This canvas holds every test's scene (wired, machine,
+# pain, empty_body, daily). Its own trigger is the cell's DAILY test, on the random path at chance 1.0: the engine
+# auto-fires only one-time canvases (selectAutoFireCanvasForLocation skips repeatable and random, v2.py:5902-5903).
+# The four named tests fire as one-shots (cap_test_*_cell / cap_test_*_post, below) and route here by nodeId; the
+# Post's daily test is rand_test_daily_post. At the Post the GUARD calls her for every test (his row holds the Post
+# 08:00-17:00); the technician's row holds the cell, so he speaks only on the cell's arrivals and in the lab scenes.
+# ⚠️ THE RANDOM PATH'S REST IS OFF. After a random canvas fires, the engine rests that room for 3 arrivals, and
+# the test's own return to the cell was eating the next morning's test (measured: it came on the third arrival).
+# random_cooldown = 0 (engine key, 2026-11-12, LO "2nd first") turns the rest off for both daily tests, so they come
+# on her first arrival from 09:00. live_you_for_him.py checks every morning's test comes on the first arrival.
+# ⚠️ Every exit lands in holding_cell after 420 minutes, so test_lab is never reached by day. Started by noon, she
+# is back by 19:00 and the evening stays the guard's.
+# ⚠️ ONE TEST A CALENDAR DAY: test_day is stamped on every "Go with them.", days_since_flag gte 1 on every test after
+# the first. tests_done moves on the choice; 4 is the daily test and does not move the counter.
+# ⚠️ THE CHARGE: from the machine on, every test sets drain_charge 1 (LO, call 1 signed 2026-11-10). It is the only
+# refill inside, and every drain in the climb needs it. Energy -20 a test, clamped.
+# ⚠️ The technician speaks on this base: his day row is holding_cell 09:00-17:00.
 [[canvases]]
 id          = "activity_the_tests"
-name        = "The tests"
-description = "beat_0267 (0.2.6). Wren @holding_cell, repeatable, pri 5, 09:00-17:00, gated chairman_met. One test a calendar day (test_day): wired up, the machine, pain, the empty body, then the daily test. tests_done +1 per test to 4. From the machine on, each test sets drain_charge 1. Energy -20 a test. 420 minutes, back to holding_cell."
+name        = "The daily test"
+description = "beat_0267 (0.2.6), automatic since beat_0279b. Holds every test scene (wired, machine, pain, empty_body, daily; each 420 min, back to holding_cell). Its own trigger is the cell's daily test: random path, chance 1.0, repeatable, pri 5, 09:00-12:00, gated chairman_met + in_custody + tests_done gte 4 + days_since_flag test_day gte 1. 'Go with them.' energy -20, drain_charge 1, stamps test_day. The four named tests are the one-shots cap_test_*_cell / cap_test_*_post; the Post's daily test is rand_test_daily_post."
 [canvases.trigger]
 location      = "holding_cell"
+trigger_mode  = "random"
+chance        = 1.0
+random_cooldown = 0
 is_repeatable = true
 priority      = 5
+requires_npc  = "npc_technician"
 is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "chairman_met", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "in_custody",   operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "gte", value = 4 },
+  { type = "days_since_flag", subject = "player", flag_key = "test_day", operator = "gte", value = 1 },
+  { type = "time_of_day", start_time = "09:00", end_time = "12:00" },
 ] }
-[[canvases.trigger.schedules]]
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "09:00"
-end_time   = "17:00"
 
 [[canvases.nodes]]
 id   = "base"
-name = "The tests"
+name = "The daily test"
 blocks = [
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "flag", subject = "player", flag_key = "test_day", operator = "is_true" },
-      { type = "days_since_flag", subject = "player", flag_key = "test_day", operator = "lt", value = 1 },
-    ] } }, blocks = [
-    { type = "paragraph", content = "Nobody comes for her again today. They have what they wanted out of her for one day. Her body still hums with it." },
-  ] },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "tests_done", operator = "lt", value = 1 },
-    ] } }, blocks = [
-    { type = "paragraph", content = "Nine o'clock. The glass slides back and two men in grey stand in the gap. Behind them, a younger one with a tablet, who does not look up from it." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Subject up, please. We're on a schedule." },
-  ] },
-  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "tests_done", operator = "gte", value = 1 },
-    ] } }, blocks = [
-    { type = "paragraph", content = "Nine o'clock. The glass slides back. The technician with his tablet, and the two men in grey behind him, the same as every day now." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Up, please. Today's on the board." },
-  ] },
+  { type = "paragraph", content = "The glass slides back. The technician with his tablet, and the two men in grey behind him, the same as every morning now." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Up, please. Today's on the board." },
+  { type = "dialog", props = { speaker = "player" }, content = "And if I say no?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Then they carry you, and I write down that you said no. Up." },
 ]
 [canvases.nodes.exit_block]
 type = "choices"
-[[canvases.nodes.exit_block.choices]]
-text       = "Go with them."
-targetType = "node"
-nodeId     = "activity_the_tests.wired"
-effects    = [
-  { targetType = "player", trait = "tests_done", op = "add", value = 1,   clamp = true, cap = 4 },
-  { targetType = "player", trait = "energy",     op = "add", value = -20, clamp = true },
-]
-flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "tests_done", operator = "lt", value = 1 },
-  { type = "flag",  subject = "player", flag_key  = "test_day",   operator = "is_false" },
-] }
-[[canvases.nodes.exit_block.choices]]
-text       = "Go with them."
-targetType = "node"
-nodeId     = "activity_the_tests.machine"
-effects    = [
-  { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
-  { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
-  { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
-]
-flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "tests_done", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "tests_done", operator = "lt",  value = 2 },
-  { type = "days_since_flag", subject = "player", flag_key = "test_day", operator = "gte", value = 1 },
-] }
-[[canvases.nodes.exit_block.choices]]
-text       = "Go with them."
-targetType = "node"
-nodeId     = "activity_the_tests.pain"
-effects    = [
-  { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
-  { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
-  { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
-]
-flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "tests_done", operator = "gte", value = 2 },
-  { type = "trait", subject = "player", trait_key = "tests_done", operator = "lt",  value = 3 },
-  { type = "days_since_flag", subject = "player", flag_key = "test_day", operator = "gte", value = 1 },
-] }
-[[canvases.nodes.exit_block.choices]]
-text       = "Go with them."
-targetType = "node"
-nodeId     = "activity_the_tests.empty_body"
-effects    = [
-  { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
-  { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
-  { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
-]
-flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "tests_done", operator = "gte", value = 3 },
-  { type = "trait", subject = "player", trait_key = "tests_done", operator = "lt",  value = 4 },
-  { type = "days_since_flag", subject = "player", flag_key = "test_day", operator = "gte", value = 1 },
-] }
 [[canvases.nodes.exit_block.choices]]
 text       = "Go with them."
 targetType = "node"
@@ -6662,18 +6602,6 @@ effects    = [
   { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "tests_done", operator = "gte", value = 4 },
-  { type = "days_since_flag", subject = "player", flag_key = "test_day", operator = "gte", value = 1 },
-] }
-[[canvases.nodes.exit_block.choices]]
-text       = "Wait for the night."
-targetType = "location"
-locationId = "holding_cell"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "flag", subject = "player", flag_key = "test_day", operator = "is_true" },
-  { type = "days_since_flag", subject = "player", flag_key = "test_day", operator = "lt", value = 1 },
-] }
 
 # Test 1 — wired up. No sex (ceiling row: "sex" held out). His hands on her as on a machine.
 [[canvases.nodes]]
@@ -6805,6 +6733,384 @@ text = "Back to the cell."
 destinationType          = "specific"
 locationId               = "holding_cell"
 time_progression_minutes = 420
+
+# ── beat_0279b — THE TESTS COME FOR HER (LO 2026-11-12: "2 yess automatic", window "1 yess" 09:00-12:00). ──
+# The four named tests are one-shot auto-fires, each written twice, at the cell and at the Post: she roams the block
+# now, and every block room exits through the Post, so the two places catch every morning. Gated on the exact
+# tests_done value, so whichever twin fires first spends the other. The Post's daily test is the random path at
+# chance 1.0 (the engine auto-fires only one-time canvases, v2.py:5902-5903). At the Post the caller is always the
+# guard: the technician's day row holds the cell, and gates.py judges a speaker by his row. Each arrival has its own
+# text; the two daily tests carry requires_npc on their caller (the random path honours it). The scenes themselves
+# are activity_the_tests' nodes, reached by nodeId.
+[[canvases]]
+id          = "cap_test_wired_cell"
+name        = "Wired up"
+description = "beat_0279b (0.2.6). Test 1 (Wired up) comes for her at the cell: auto-fire one-shot, pri 9, 09:00-12:00, gated chairman_met + in_custody + tests_done == 0 + test_day is_false. 'Go with them.' moves tests_done, energy -20, stamps test_day, and routes to activity_the_tests.wired. Its twin at the Post is spent by the same tests_done gate."
+[canvases.trigger]
+location      = "holding_cell"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chairman_met", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "in_custody",   operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "lt",  value = 1 },
+  { type = "flag", subject = "player", flag_key = "test_day", operator = "is_false" },
+  { type = "time_of_day", start_time = "09:00", end_time = "12:00" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Wired up"
+blocks = [
+  { type = "paragraph", content = "The glass slides back and two men in grey stand in the gap. Behind them, a younger one with a tablet, who does not look up from it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Subject up, please. We're on a schedule." },
+  { type = "dialog", props = { speaker = "player" }, content = "Where are you taking me?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Down the hall. You'll see. Up." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Go with them."
+targetType = "node"
+nodeId     = "activity_the_tests.wired"
+effects    = [
+  { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
+  { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+]
+flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
+
+[[canvases]]
+id          = "cap_test_wired_post"
+name        = "Wired up"
+description = "beat_0279b (0.2.6). Test 1 (Wired up) comes for her at the Post: auto-fire one-shot, pri 9, 09:00-12:00, gated chairman_met + in_custody + tests_done == 0 + test_day is_false. 'Go with them.' moves tests_done, energy -20, stamps test_day, and routes to activity_the_tests.wired. Its twin at the cell is spent by the same tests_done gate. At the Post the guard calls her (his row holds the Post by day); the technician waits in the lab."
+[canvases.trigger]
+location      = "holding_floor"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chairman_met", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "in_custody",   operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "lt",  value = 1 },
+  { type = "flag", subject = "player", flag_key = "test_day", operator = "is_false" },
+  { type = "time_of_day", start_time = "09:00", end_time = "12:00" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Wired up"
+blocks = [
+  { type = "paragraph", content = "Two men in grey come down the corridor and stop at the desk. The guard looks up from his screen and jerks his chin at her." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "They want you down the hall. Go on. It's the first one." },
+  { type = "dialog", props = { speaker = "player" }, content = "What do they do down there?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Not my floor. Go." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Go with them."
+targetType = "node"
+nodeId     = "activity_the_tests.wired"
+effects    = [
+  { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
+  { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+]
+flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
+
+[[canvases]]
+id          = "cap_test_machine_cell"
+name        = "The machine"
+description = "beat_0279b (0.2.6). Test 2 (The machine) comes for her at the cell: auto-fire one-shot, pri 9, 09:00-12:00, gated chairman_met + in_custody + tests_done == 1 + days_since_flag test_day gte 1. 'Go with them.' moves tests_done, energy -20, drain_charge 1, stamps test_day, and routes to activity_the_tests.machine. Its twin at the Post is spent by the same tests_done gate."
+[canvases.trigger]
+location      = "holding_cell"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chairman_met", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "in_custody",   operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "lt",  value = 2 },
+  { type = "days_since_flag", subject = "player", flag_key = "test_day", operator = "gte", value = 1 },
+  { type = "time_of_day", start_time = "09:00", end_time = "12:00" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The machine"
+blocks = [
+  { type = "paragraph", content = "The glass slides back. The technician again, and the two men in grey. He looks pleased with himself, like a man with a new toy." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Up, please. Today we try something with a motor in it." },
+  { type = "dialog", props = { speaker = "player" }, content = "Lucky me." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Lucky data. Up." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Go with them."
+targetType = "node"
+nodeId     = "activity_the_tests.machine"
+effects    = [
+  { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
+  { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
+]
+flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
+
+[[canvases]]
+id          = "cap_test_machine_post"
+name        = "The machine"
+description = "beat_0279b (0.2.6). Test 2 (The machine) comes for her at the Post: auto-fire one-shot, pri 9, 09:00-12:00, gated chairman_met + in_custody + tests_done == 1 + days_since_flag test_day gte 1. 'Go with them.' moves tests_done, energy -20, drain_charge 1, stamps test_day, and routes to activity_the_tests.machine. Its twin at the cell is spent by the same tests_done gate. At the Post the guard calls her (his row holds the Post by day); the technician waits in the lab."
+[canvases.trigger]
+location      = "holding_floor"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chairman_met", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "in_custody",   operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "lt",  value = 2 },
+  { type = "days_since_flag", subject = "player", flag_key = "test_day", operator = "gte", value = 1 },
+  { type = "time_of_day", start_time = "09:00", end_time = "12:00" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The machine"
+blocks = [
+  { type = "paragraph", content = "The men in grey come down the corridor again, the same two. The guard is already on his feet when they reach the desk." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Your appointment. Don't make them wait for you." },
+  { type = "dialog", props = { speaker = "player" }, content = "Do you ever wonder what they do to me?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "No. Go on." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Go with them."
+targetType = "node"
+nodeId     = "activity_the_tests.machine"
+effects    = [
+  { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
+  { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
+]
+flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
+
+[[canvases]]
+id          = "cap_test_pain_cell"
+name        = "Pain"
+description = "beat_0279b (0.2.6). Test 3 (Pain) comes for her at the cell: auto-fire one-shot, pri 9, 09:00-12:00, gated chairman_met + in_custody + tests_done == 2 + days_since_flag test_day gte 1. 'Go with them.' moves tests_done, energy -20, drain_charge 1, stamps test_day, and routes to activity_the_tests.pain. Its twin at the Post is spent by the same tests_done gate."
+[canvases.trigger]
+location      = "holding_cell"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chairman_met", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "in_custody",   operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "gte", value = 2 },
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "lt",  value = 3 },
+  { type = "days_since_flag", subject = "player", flag_key = "test_day", operator = "gte", value = 1 },
+  { type = "time_of_day", start_time = "09:00", end_time = "12:00" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Pain"
+blocks = [
+  { type = "paragraph", content = "The glass slides back, and the technician does not come in this time. He waits in the gap and lets the men in grey take her arms." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Up. Today is a hard one. I would rather you walked." },
+  { type = "dialog", props = { speaker = "player" }, content = "And if I don't?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Then it's the same, and they carry you." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Go with them."
+targetType = "node"
+nodeId     = "activity_the_tests.pain"
+effects    = [
+  { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
+  { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
+]
+flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
+
+[[canvases]]
+id          = "cap_test_pain_post"
+name        = "Pain"
+description = "beat_0279b (0.2.6). Test 3 (Pain) comes for her at the Post: auto-fire one-shot, pri 9, 09:00-12:00, gated chairman_met + in_custody + tests_done == 2 + days_since_flag test_day gte 1. 'Go with them.' moves tests_done, energy -20, drain_charge 1, stamps test_day, and routes to activity_the_tests.pain. Its twin at the cell is spent by the same tests_done gate. At the Post the guard calls her (his row holds the Post by day); the technician waits in the lab."
+[canvases.trigger]
+location      = "holding_floor"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chairman_met", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "in_custody",   operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "gte", value = 2 },
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "lt",  value = 3 },
+  { type = "days_since_flag", subject = "player", flag_key = "test_day", operator = "gte", value = 1 },
+  { type = "time_of_day", start_time = "09:00", end_time = "12:00" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "Pain"
+blocks = [
+  { type = "paragraph", content = "The men in grey come for her at the desk. The guard watches them take her by the arms, and he does not sit back down until they are gone." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Walk. It's easier on you if you walk." },
+  { type = "dialog", props = { speaker = "player" }, content = "You've seen this one before." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "I've heard it. Go." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Go with them."
+targetType = "node"
+nodeId     = "activity_the_tests.pain"
+effects    = [
+  { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
+  { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
+]
+flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
+
+[[canvases]]
+id          = "cap_test_empty_body_cell"
+name        = "The empty body"
+description = "beat_0279b (0.2.6). Test 4 (The empty body) comes for her at the cell: auto-fire one-shot, pri 9, 09:00-12:00, gated chairman_met + in_custody + tests_done == 3 + days_since_flag test_day gte 1. 'Go with them.' moves tests_done, energy -20, drain_charge 1, stamps test_day, and routes to activity_the_tests.empty_body. Its twin at the Post is spent by the same tests_done gate."
+[canvases.trigger]
+location      = "holding_cell"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chairman_met", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "in_custody",   operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "gte", value = 3 },
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "lt",  value = 4 },
+  { type = "days_since_flag", subject = "player", flag_key = "test_day", operator = "gte", value = 1 },
+  { type = "time_of_day", start_time = "09:00", end_time = "12:00" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The empty body"
+blocks = [
+  { type = "paragraph", content = "The glass slides back. The technician has a second tablet under his arm, and for once he looks at her when he talks." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Up, please. Today is the one they actually pay me for." },
+  { type = "dialog", props = { speaker = "player" }, content = "And the other days?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Practice. Up." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Go with them."
+targetType = "node"
+nodeId     = "activity_the_tests.empty_body"
+effects    = [
+  { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
+  { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
+]
+flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
+
+[[canvases]]
+id          = "cap_test_empty_body_post"
+name        = "The empty body"
+description = "beat_0279b (0.2.6). Test 4 (The empty body) comes for her at the Post: auto-fire one-shot, pri 9, 09:00-12:00, gated chairman_met + in_custody + tests_done == 3 + days_since_flag test_day gte 1. 'Go with them.' moves tests_done, energy -20, drain_charge 1, stamps test_day, and routes to activity_the_tests.empty_body. Its twin at the cell is spent by the same tests_done gate. At the Post the guard calls her (his row holds the Post by day); the technician waits in the lab."
+[canvases.trigger]
+location      = "holding_floor"
+is_repeatable = false
+priority      = 9
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chairman_met", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "in_custody",   operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "gte", value = 3 },
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "lt",  value = 4 },
+  { type = "days_since_flag", subject = "player", flag_key = "test_day", operator = "gte", value = 1 },
+  { type = "time_of_day", start_time = "09:00", end_time = "12:00" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The empty body"
+blocks = [
+  { type = "paragraph", content = "Three men in grey come down the corridor today. The guard stands up when he sees the third one." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "They want you. Today they want you badly. Go." },
+  { type = "dialog", props = { speaker = "player" }, content = "You sound worried for me." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "I sound like a man who wants his corridor back. Go." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Go with them."
+targetType = "node"
+nodeId     = "activity_the_tests.empty_body"
+effects    = [
+  { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
+  { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
+]
+flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
+
+[[canvases]]
+id          = "rand_test_daily_post"
+name        = "The daily test"
+description = "beat_0279b (0.2.6). The daily test at the Post: random path, chance 1.0, repeatable, pri 5, 09:00-12:00, gated chairman_met + in_custody + tests_done gte 4 + days_since_flag test_day gte 1. The guard calls her (his row holds the Post by day). 'Go with them.' energy -20, drain_charge 1, stamps test_day, routes to activity_the_tests.daily. The cell's twin is activity_the_tests itself."
+[canvases.trigger]
+location      = "holding_floor"
+trigger_mode  = "random"
+chance        = 1.0
+random_cooldown = 0
+is_repeatable = true
+priority      = 5
+requires_npc  = "npc_guard"
+is_active     = true
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "chairman_met", operator = "is_true" },
+  { type = "flag", subject = "player", flag_key = "in_custody",   operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "tests_done", operator = "gte", value = 4 },
+  { type = "days_since_flag", subject = "player", flag_key = "test_day", operator = "gte", value = 1 },
+  { type = "time_of_day", start_time = "09:00", end_time = "12:00" },
+] }
+
+[[canvases.nodes]]
+id   = "base"
+name = "The daily test"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 2 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The men in grey are at the end of the corridor. The guard does not get up. He points at them with his pen." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Your appointment. Go on, before they make me walk you there." },
+    { type = "dialog", props = { speaker = "player" }, content = "You'd like that." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "I'd like my chair. Go." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 2 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "The men in grey are at the end of the corridor. The guard looks at them, then at her, longer than he needs to." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "They're here for you. Go on. I'll be at the desk when they bring you back." },
+    { type = "dialog", props = { speaker = "player" }, content = "Keep the chair warm for me." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Go, before I do something stupid in front of them." },
+  ] },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Go with them."
+targetType = "node"
+nodeId     = "activity_the_tests.daily"
+effects    = [
+  { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
+]
+flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
 
 # ── activity_cell_sleep — the cell's cot, two tiers like the Berth cot (beat_0267, reworked beat_0279a). ──
 # LO 2026-11-12: "Make it similar like the cot in berth." The rework made her day expensive (a tease 20, a step 15,

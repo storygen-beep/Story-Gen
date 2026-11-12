@@ -1124,3 +1124,34 @@ and his, Sabin's and the keeper's ladders are still the old calendar ladders unt
 - **gates.py:** FAIL count unchanged (49); "a named person is where the line says" unchanged at 60 rows with no guard
   line among them; explicit floor 14.7% to 15.6%.
 - **Narration to dialogue** on the guard's scenes: 1.75:1 together, no node over 3:1.
+
+# AFTER THE GUARD — two changes LO called on 2026-11-12
+
+## 0279a — the cell's cot (committed 0bbfd3cb)
+LO: "In the cot we should add a way for her to charge herself", then "Make it similar like the cot in berth." The
+cell's Sleep card became "The cot" at every hour, in activity_kess_cot's shape: "Lie down a couple of hours. (Half a
+charge.)" +40, 120 minutes, any hour; "Sleep the night. (Full charge.)" +100, 540 minutes, 19:00-05:00. No coin in the
+cell, so the night stays free.
+
+## 0279b — the tests come for her
+LO: "The tests should run like automatic ... I think automatic." Calls: window 09:00-12:00 ("1 yess"), the daily
+test automatic too ("2 yess automatic").
+- **The four named tests** (wired, the machine, pain, the empty body) are one-shot auto-fires, written twice: at the
+  cell and at the Post, because she roams the block and every room exits through the Post. Each is gated on the exact
+  tests_done value, so whichever twin fires first spends the other. Each has its own arrival text.
+- **The daily test** repeats, and the engine auto-fires only one-time canvases (v2.py:5902-5903), so it is the random
+  path at chance 1.0: activity_the_tests itself at the cell, rand_test_daily_post at the Post.
+- **Who calls her:** at the cell the technician (his day row holds the cell); at the Post the guard (his row holds the
+  Post by day). gates.py judges a speaker by his row, so the technician never speaks on the Post's arrivals.
+- **Test hours:** the Showers, Laundry and Yard solo cards are greyed 09:00-12:00 with "Not in test hours. They come
+  for you between nine and noon.", so a morning cannot be sat out in a side room.
+- **Kept:** one test a calendar day, tests_done on the choice, -20 Charge, the drain refill from the machine on, 420
+  minutes, back to the cell. Started by noon, she is back by 19:00.
+- **What the player lost:** choosing whether and when to be tested, and skipping a test to save Charge.
+- **The engine's random rest, fixed.** After a random canvas fires, the engine rested that room for 3 arrivals
+  (`checkRandomEncounters`), and in the live test the daily test came only on the third cell arrival every day after
+  the first, so a player who arrived once in the window could miss a day. LO: "2nd first". A new engine trigger key,
+  `random_cooldown` (random canvases only; absent keeps the engine's 3), is set to 0 on both daily tests. Measured
+  after: the test came on her first arrival from 09:00 on every one of 21 mornings.
+- **gates.py:** FAIL count unchanged (49). The two daily tests add rows to "an event with a person in it raises
+  nothing for him"; that waits for the technician's corruption meter (beats 0279-0282).

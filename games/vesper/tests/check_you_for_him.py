@@ -186,16 +186,66 @@ for line in ("Sit. You've been running a long time.", "Not one has ever been afr
 check("wife" not in t.lower(), "0266: he never says why (the wife stays out of his mouth)")
 check(sets("cap_chairman_talk", "chairman_met"), "0266: sets chairman_met")
 
-# ── 0267: part six
+# ── 0267: part six, the tests — automatic since 0279b (LO 2026-11-12: "2 yess automatic", window 09:00-12:00)
 tc = canv.get("activity_the_tests") or {}
-check(trig("activity_the_tests").get("location") == "holding_cell", "0267: the tests card is on the cell")
-gw = [c for c in choices(node(tc, "base")) if c.get("text") == "Go with them."]
-check(len(gw) == 5, f"0267: five test choices, one per step ({len(gw)})")
-for c in gw:
+for nid in ("wired", "machine", "pain", "empty_body", "daily"):
+    n = node(tc, nid)
+    ex = (n.get("exit_block") or {}).get("config") or {}
+    check(n and ex.get("locationId") == "holding_cell" and ex.get("time_progression_minutes") == 420,
+          f"0267: the {nid} scene is 420 min and lands back in the cell")
+WIN = dict(type="time_of_day", start_time="09:00", end_time="12:00")
+TESTS = [(0, "wired", False), (1, "machine", True), (2, "pain", True), (3, "empty_body", True)]
+gw_all = []
+for n, nid, refill in TESTS:
+    for loc, tag in (("holding_cell", "cell"), ("holding_floor", "post")):
+        cid = f"cap_test_{nid}_{tag}"
+        t = trig(cid)
+        g = tgate(cid)
+        check(t.get("location") == loc and t.get("is_repeatable") is False and (t.get("trigger_mode") or "manual") == "manual",
+              f"0279b: {cid} is a one-shot auto-fire at {loc}")
+        check(has(g, **WIN) and has(g, flag_key="chairman_met", operator="is_true") and has(g, flag_key="in_custody", operator="is_true"),
+              f"0279b: {cid} fires 09:00-12:00, inside, after the Chairman")
+        check(has(g, trait_key="tests_done", operator="lt", value=n + 1) and (n == 0 or has(g, trait_key="tests_done", operator="gte", value=n)),
+              f"0279b: {cid} is gated on tests_done == {n}")
+        check(has(g, flag_key="test_day", operator="is_false") if n == 0 else
+              has(g, type="days_since_flag", flag_key="test_day", operator="gte", value=1), f"0279b: {cid} one test a calendar day")
+        ch = choices(node(canv.get(cid), "base"))
+        check(len(ch) == 1 and ch[0].get("text") == "Go with them." and ch[0].get("nodeId") == f"activity_the_tests.{nid}",
+              f"0279b: {cid} has one choice, 'Go with them.', to activity_the_tests.{nid}")
+        gw_all += ch
+        check(any(e.get("trait") == "tests_done" and e.get("value") == 1 for e in ch[0].get("effects", [])) if ch else False,
+              f"0279b: {cid} moves tests_done")
+        check(any(e.get("trait") == "drain_charge" and e.get("value") == 1 for e in ch[0].get("effects", [])) == refill if ch else False,
+              f"0279b: {cid} refills the drain {'' if refill else 'not '}(from the machine on)")
+for cid, loc in (("activity_the_tests", "holding_cell"), ("rand_test_daily_post", "holding_floor")):
+    t = trig(cid)
+    g = tgate(cid)
+    check(t.get("location") == loc and t.get("trigger_mode") == "random" and t.get("chance") == 1.0 and t.get("is_repeatable") is True,
+          f"0279b: {cid} is the daily test on the random path at chance 1.0, at {loc}")
+    check(has(g, **WIN) and has(g, trait_key="tests_done", operator="gte", value=4)
+          and has(g, type="days_since_flag", flag_key="test_day", operator="gte", value=1), f"0279b: {cid} 09:00-12:00, after the four, once a day")
+    check(not t.get("schedules"), f"0279b: {cid} carries its window as a condition, not a schedule")
+    check(t.get("random_cooldown") == 0, f"0279b: {cid} turns the room's random rest off (random_cooldown = 0)")
+    ch = choices(node(canv.get(cid), "base"))
+    check(len(ch) == 1 and ch[0].get("nodeId") == "activity_the_tests.daily", f"0279b: {cid} goes to the daily scene")
+    gw_all += ch
+check(len(gw_all) == 10, f"0279b: ten 'Go with them.' choices across the cell and the Post ({len(gw_all)})")
+for c in gw_all:
     check({"targetType": "player", "flag": "test_day", "op": "set"} in c.get("flagEffects", []), "0267: every test stamps test_day")
     check(any(e.get("trait") == "energy" and e.get("value") == -20 for e in c.get("effects", [])), "0267: every test costs 20 energy")
-refills = [c for c in gw if any(e.get("trait") == "drain_charge" and e.get("value") == 1 for e in c.get("effects", []))]
-check(len(refills) == 4, "0267: every test from the machine on refills the drain")
+spk = {(b.get("props") or {}).get("npcId") for b in walk(node(canv.get("rand_test_daily_post"), "base"), []) if (b.get("props") or {}).get("speaker") == "npc"}
+check(spk == {"npc_guard"}, f"0279b: at the Post the daily test's caller is the guard, whose row holds the Post ({spk})")
+for _, nid, _ in TESTS:
+    sp = {(b.get("props") or {}).get("npcId") for b in walk(node(canv.get(f"cap_test_{nid}_post"), "base"), []) if (b.get("props") or {}).get("speaker") == "npc"}
+    check(sp == {"npc_guard"}, f"0279b: cap_test_{nid}_post is called by the guard, not the technician ({sp})")
+check(trig("activity_the_tests").get("requires_npc") == "npc_technician" and trig("rand_test_daily_post").get("requires_npc") == "npc_guard",
+      "0279b: each daily test is presence-gated on its caller")
+check("Nine o'clock" not in text_of(tc), "0279b: no clock hour in the tests' arrival prose")
+for cid in ("activity_wash_alone", "activity_do_washing", "activity_walk_yard"):
+    t = trig(cid)
+    check(t.get("show_when_blocked") is True and t.get("cooldown_message")
+          and any(s.get("start_time") == "12:00" and s.get("end_time") == "09:00" for s in t.get("schedules", [])),
+          f"0279b: {cid} is greyed 09:00-12:00 (test hours)")
 check("activity_cell_sleep" in canv and "activity_cell_wait" in canv, "0267/0268: sleep and wait in the cell")
 
 # ── 0279a: the cell's cot has the Berth cot's two tiers (LO 2026-11-12)

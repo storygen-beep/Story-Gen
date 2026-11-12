@@ -27079,15 +27079,24 @@ time_progression_minutes = 60
 [[canvases]]
 id          = "activity_wash_alone"
 name        = "Wash alone"
-description = "beat_0277 (0.2.6 REWORK). Wren-solo @block_showers, repeatable, pri 1, gated in_custody. An hour alone. Also the curfew dispatcher: after curfew a substitution sends it to drag_back_showers."
+description = "beat_0277 (0.2.6 REWORK). Wren-solo @block_showers, repeatable, pri 1, gated in_custody. An hour alone. Also the curfew dispatcher: after curfew a substitution sends it to drag_back_showers. Shut 09:00-12:00, greyed (test hours, beat_0279b)."
+# ⚠️ beat_0279b — TEST HOURS. The tests come for her 09:00-12:00 at the cell or the Post, and every block room
+# exits through the Post. Shut by the clock in those hours (greyed, with the reason) so she cannot sit out a
+# morning in here; a test started by noon has her back by 19:00, so nothing else is lost.
 [canvases.trigger]
 location      = "block_showers"
 is_repeatable = true
 priority      = 1
 is_active     = true
+show_when_blocked = true
+cooldown_message  = "Not in test hours. They come for you between nine and noon."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
 ] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "12:00"
+end_time   = "09:00"
 [[canvases.trigger.substitutions]]
 target_canvas_id = "drag_back_showers"
 chance           = 1.0
@@ -27231,15 +27240,24 @@ time_progression_minutes = 60
 [[canvases]]
 id          = "activity_do_washing"
 name        = "Do your washing"
-description = "beat_0277 (0.2.6 REWORK). Wren-solo @block_laundry, repeatable, pri 1, gated in_custody. An hour alone. Also the curfew dispatcher: after curfew a substitution sends it to drag_back_laundry."
+description = "beat_0277 (0.2.6 REWORK). Wren-solo @block_laundry, repeatable, pri 1, gated in_custody. An hour alone. Also the curfew dispatcher: after curfew a substitution sends it to drag_back_laundry. Shut 09:00-12:00, greyed (test hours, beat_0279b)."
+# ⚠️ beat_0279b — TEST HOURS. The tests come for her 09:00-12:00 at the cell or the Post, and every block room
+# exits through the Post. Shut by the clock in those hours (greyed, with the reason) so she cannot sit out a
+# morning in here; a test started by noon has her back by 19:00, so nothing else is lost.
 [canvases.trigger]
 location      = "block_laundry"
 is_repeatable = true
 priority      = 1
 is_active     = true
+show_when_blocked = true
+cooldown_message  = "Not in test hours. They come for you between nine and noon."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
 ] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "12:00"
+end_time   = "09:00"
 [[canvases.trigger.substitutions]]
 target_canvas_id = "drag_back_laundry"
 chance           = 1.0
@@ -27362,15 +27380,24 @@ time_progression_minutes = 60
 [[canvases]]
 id          = "activity_walk_yard"
 name        = "Walk the yard"
-description = "beat_0277 (0.2.6 REWORK). Wren-solo @block_yard, repeatable, pri 1, gated in_custody. An hour alone. Also the curfew dispatcher: after curfew a substitution sends it to drag_back_yard."
+description = "beat_0277 (0.2.6 REWORK). Wren-solo @block_yard, repeatable, pri 1, gated in_custody. An hour alone. Also the curfew dispatcher: after curfew a substitution sends it to drag_back_yard. Shut 09:00-12:00, greyed (test hours, beat_0279b)."
+# ⚠️ beat_0279b — TEST HOURS. The tests come for her 09:00-12:00 at the cell or the Post, and every block room
+# exits through the Post. Shut by the clock in those hours (greyed, with the reason) so she cannot sit out a
+# morning in here; a test started by noon has her back by 19:00, so nothing else is lost.
 [canvases.trigger]
 location      = "block_yard"
 is_repeatable = true
 priority      = 1
 is_active     = true
+show_when_blocked = true
+cooldown_message  = "Not in test hours. They come for you between nine and noon."
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
 ] }
+[[canvases.trigger.schedules]]
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "12:00"
+end_time   = "09:00"
 [[canvases.trigger.substitutions]]
 target_canvas_id = "drag_back_yard"
 chance           = 1.0
@@ -27435,7 +27462,7 @@ effects = [
 [[canvases]]
 id          = "hub_technician"
 name        = "The Technician"
-description = "beat_0270 (0.2.6). The technician's hub @test_lab, npc + requires_npc npc_technician, repeatable, pri 4, 22:00-23:59 only (his late row; by day he runs the tests from the cell's card), gated in_custody + lab_door gte 1 (the guard's first drain). One step a calendar day (tech_day): she comes to him, the test table, then the loop (from tech_nights 2); he says her name at 3; the drain lands at 4 and sets study_door."
+description = "beat_0270 (0.2.6). The technician's hub @test_lab, npc + requires_npc npc_technician, repeatable, pri 4, 22:00-23:59 only (his late row; by day he comes for her at the cell or the Post for the tests), gated in_custody + lab_door gte 1 (the guard's first drain). One step a calendar day (tech_day): she comes to him, the test table, then the loop (from tech_nights 2); he says her name at 3; the drain lands at 4 and sets study_door."
 [canvases.trigger]
 location      = "test_lab"
 requires_npc  = "npc_technician"
@@ -29381,7 +29408,7 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "Cain is free. You are the company's test subject, high in the Rise, and the Chairman wants to know how what you feel was put in you. By day they test you. The rest of the time there is a guard at a desk outside your glass, and he has been watching you for weeks."
-tip        = "The tests come to your cell from nine in the morning, one a day. The guard is at his desk outside your glass, the Post, most of the day and all night. Start with him."
+tip        = "Between nine and noon they come for you for the tests, at your cell or at the Post, one a day. The guard is at his desk outside your glass, the Post, most of the day and all night. Start with him."
 when = [
   { flag = "chairman_met", op = "is_true" },
   { trait = "lab_door", subject = "player", op = "lt", value = 1 },
