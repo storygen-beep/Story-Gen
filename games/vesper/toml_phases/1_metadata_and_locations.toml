@@ -399,9 +399,11 @@ cain_asked        = 0
 # save from 0.2.5.1 reads 0 for each and nothing in the city reads any of them.
 #   • tests_done 0-4 — the day tests at the Rise (wired up, the machine, pain, the empty body); 4 = the daily test.
 #     +1 once per calendar day from the located test card (days_since_flag test_day), never inside a loop.
-#   • tech_nights 0-5 / sabin_nights 0-5 / keeper_nights 0-7 — one step per visit per calendar
-#     day on each man's located card (the cain_nights rule). The last value opens that man's drain.
-#     (Replaced man by man by the REWORK, design_the_offer.md "REWORK BLUEPRINT": the guard first.)
+#   • tech_step 0-3 / sabin_step 0-4 / keeper_step 0-6 (beat_0279, the REWORK; were tech_nights / sabin_nights /
+#     keeper_nights, unreleased) — each man's climb, the guard's shape. One step a calendar day on his hub, and only
+#     once HIS corruption (filled by her teases; the technician's also by every test, +2) reaches the threshold:
+#     technician 0/40/75, Sabin 0 (sets his corruption to 15) /30/45/65, keeper 0/15/30/50/70/90. The last step is
+#     the first fuck, and the drain is offered from it on.
 #   • guard_step 0-4 (beat_0275, the REWORK) — the guard's climb. One step a calendar day on his Post hub, and only
 #     once HIS corruption (npc_guard's own `corruption`, filled by her teases) reaches the step's threshold:
 #     0 watches · 20 hands · 45 knees · 70 the first fuck. The drain is offered from the first fuck on.
@@ -418,9 +420,9 @@ guard_step           = 0
 showers_door         = 0
 yard_door            = 0
 lab_door             = 0
-tech_nights          = 0
-sabin_nights         = 0
-keeper_nights        = 0
+tech_step            = 0
+sabin_step           = 0
+keeper_step          = 0
 guard_drains_done    = 0
 tech_drains_done     = 0
 sabin_custody_drains = 0
@@ -1227,7 +1229,7 @@ id          = "npc_technician"
 name        = "The Technician"
 description = "Young and careful, and he runs her tests every day. He was trained to see her as a machine and he talks to her like one, because if she is only a machine then nothing he does to her counts."
 portrait    = "technician.jpg"
-core_traits = { relation = 0 }
+core_traits = { relation = 0, corruption = 0 }
 flag_keys   = []
 arc_stages  = ["The technician"]
 
@@ -1257,7 +1259,7 @@ id          = "npc_keeper"
 name        = "The Keeper"
 description = "The Chairman's most loyal man, thirty years at his side. He keeps the sealed files, and he wants nothing from anyone except the Chairman's approval."
 portrait    = "keeper.jpg"
-core_traits = { relation = 0 }
+core_traits = { relation = 0, corruption = 0 }
 flag_keys   = []
 arc_stages  = ["The keeper of records"]
 

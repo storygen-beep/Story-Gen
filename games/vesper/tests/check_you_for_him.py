@@ -78,7 +78,7 @@ story = [c for c in cards if not c.get("npc_id")]
 traits = g.get("player", {}).get("core_traits", {})
 
 # ── 0263: the numbers, the places, the people
-NEW_TRAITS = ["tests_done", "guard_step", "tech_nights", "sabin_nights", "keeper_nights", "guard_drains_done",
+NEW_TRAITS = ["tests_done", "guard_step", "tech_step", "sabin_step", "keeper_step", "guard_drains_done",
               "tech_drains_done", "sabin_custody_drains", "keeper_drains_done", "showers_door", "yard_door", "lab_door",
               "study_door", "records_door"]
 for t in NEW_TRAITS:
@@ -86,7 +86,7 @@ for t in NEW_TRAITS:
 # 0275 (the REWORK): guard_nights and floor_door are gone from the game, not just unused.
 with open(GAME, encoding="utf-8") as fh:
     raw = fh.read()
-for gone in ("guard_nights", "floor_door"):
+for gone in ("guard_nights", "floor_door", "tech_nights", "sabin_nights", "keeper_nights"):
     check(not re.search(r'(trait_key|trait)\s*=\s*"%s"' % gone, raw) and gone not in traits, f"0275: {gone} is read and written nowhere")
 for root in ("chairmans_room", "holding_cell"):
     L = locs.get(root) or {}
@@ -272,41 +272,82 @@ for c in cards:
     if c.get("npc_id") == "npc_mercer":
         check({"flag": "mercer_dead", "op": "is_false"} in c.get("when", []), "0268: Mercer's cards close at mercer_dead")
 
-# ── 0269-0272: the four rigs
-RIGS = (("technician", "test_lab", "tech_nights", "tech_day", 2, 4, "tech_drains_done", "study_door"),
-        ("sabin_study", "sabin_study", "sabin_nights", "sabin_day", 3, 4, "sabin_custody_drains", "records_door"),
-        ("keeper", "records_room", "keeper_nights", "keeper_day", 5, 7, "keeper_drains_done", None))
-for rid, loc, nights, day, op, top, drains, lock in RIGS:
+# ── 0269-0272, REWORKED 0279: the other three rigs climb on HIS corruption, one step a day, the drain at the first fuck
+# (rid, room, npc, step key, day flag, thresholds per step taken (0 = none), drains key, lock, teases {text: (plus, from step)})
+RIGS = (("technician", "test_lab", "npc_technician", "tech_step", "tech_day", [0, 40, 75], "tech_drains_done", "study_door",
+         {"Undress for his cameras.": (4, 0), "Wire yourself up.": (6, 0), "Sit on his desk.": (5, 1),
+          "Make him take a reading by hand.": (8, 1)}),
+        ("sabin_study", "sabin_study", "npc_sabin", "sabin_step", "sabin_day", [0, 30, 45, 65], "sabin_custody_drains", "records_door",
+         {"Ask him to explain a drawing.": (5, 1), "Let him measure you.": (7, 2), "Tell him he's a genius.": (5, 3),
+          "Kiss him while he talks.": (6, 3)}),
+        ("keeper", "records_room", "npc_keeper", "keeper_step", "keeper_day", [0, 15, 30, 50, 70, 90], "keeper_drains_done", None,
+         {"Read with him.": (3, 1), "Undress at the far end of the table.": (5, 2), "Sit in his lap while he reads.": (7, 3),
+          "Put his hand on you.": (8, 4)}))
+for rid, loc, npc, key, day, TH, drains, lock, TEASE in RIGS:
     hub, fin = canv.get(f"hub_{rid}"), canv.get(f"loop_{rid}_finisher")
     check(hub and fin and f"loop_{rid}" in canv and f"{rid}_drain_canvas" in canv, f"{rid}: the four canvases exist")
     if not (hub and fin):
         continue
-    check(hub["trigger"].get("location") == loc and has(items(hub["trigger"]["conditions"]), flag_key="in_custody", operator="is_true"), f"{rid}: hub at {loc}, inside only")
+    check(hub["trigger"].get("location") == loc and hub["trigger"].get("npc") == npc and hub["trigger"].get("requires_npc") == npc
+          and has(items(hub["trigger"]["conditions"]), flag_key="in_custody", operator="is_true"), f"{rid}: hub at {loc}, his portrait, inside only")
     for cid in (f"loop_{rid}", f"loop_{rid}_finisher", f"{rid}_drain_canvas"):
         check(not canv[cid].get("trigger"), f"{rid}: {cid} is triggerless")
-    steppers = [c for c in choices(node(hub, "base")) if any(e.get("trait") == nights and e.get("op") == "add" for e in c.get("effects", []))]
-    for c in steppers:
+    bc = choices(node(hub, "base"))
+    steppers = [c for c in bc if any(e.get("trait") == key and e.get("op") == "add" for e in c.get("effects", []))]
+    check(len(steppers) == len(TH), f"{rid}: {len(TH)} steps ({len(steppers)})")
+    for k, c in enumerate(steppers):
         ci = items(c.get("conditions"))
-        check({"targetType": "player", "flag": day, "op": "set"} in c.get("flagEffects", []), f"{rid}: every step stamps {day}")
-        check(has(ci, type="days_since_flag", flag_key=day, operator="gte", value=1) or has(ci, flag_key=day, operator="is_false"), f"{rid}: every step waits a calendar day ('{c['text']}')")
-        check(c.get("costs") == [{"trait": "energy", "value": 15}], f"{rid}: every step costs 15 energy")
-    check(len(steppers) == op + 1, f"{rid}: {op} rungs and one stepping loop entry ({len(steppers)})")
+        check(has(ci, trait_key=key, operator="lt", value=k + 1), f"{rid}: step {k} only from its own band")
+        check({"targetType": "player", "flag": day, "op": "set"} in c.get("flagEffects", []), f"{rid}: step {k} stamps {day}")
+        check(has(ci, flag_key=day, operator="is_false") if k == 0 else has(ci, type="days_since_flag", flag_key=day, operator="gte", value=1),
+              f"{rid}: step {k} waits a calendar day")
+        check(k == 0 or has(ci, type="trait", subject="npc", npc_id=npc, trait_key="corruption", operator="gte", value=TH[k]),
+              f"{rid}: step {k} needs his corruption {TH[k]}")
+        check(c.get("costs") == [{"trait": "energy", "value": 15}], f"{rid}: step {k} costs 15 energy")
+    check(steppers and steppers[-1].get("nodeId") == f"loop_{rid}.intro", f"{rid}: the last step is the first fuck")
+    if rid == "sabin_study":
+        check(any(e.get("npcId") == npc and e.get("op") == "set" and e.get("value") == 15 for e in steppers[0].get("effects", [])),
+              "sabin: the first step sets his corruption to 15 (it carries Whose Hand points)")
+    got = {}
+    for c in bc:
+        fx = [e for e in c.get("effects", []) if e.get("targetType") == "npc" and e.get("npcId") == npc and e.get("op") == "add"]
+        if fx:
+            got[c["text"]] = (fx[0]["value"], c)
+    check(set(got) == set(TEASE), f"{rid}: teases {sorted(got)}")
+    for t, (plus, at) in TEASE.items():
+        if t not in got:
+            continue
+        v, c = got[t]
+        check(v == plus and c.get("costs") == [{"trait": "energy", "value": 20}], f"{rid}: '{t}' costs 20 and adds {plus}")
+        check(has(items(c.get("conditions")), trait_key=key, operator="gte", value=at) if at else not c.get("conditions"),
+              f"{rid}: '{t}' opens at step {at}")
+        tgt = node(hub, c["nodeId"].split(".")[1])
+        check(tgt and len(EXPLICIT.findall(text_of(tgt))) >= 3, f"{rid}: '{t}' stays on the body")
+        cfg = ((tgt or {}).get("exit_block") or {}).get("config") or {}
+        check(cfg.get("locationId") == loc and cfg.get("time_progression_minutes") == 60, f"{rid}: '{t}' takes an hour in {loc}")
     for d in walk(canv[f"loop_{rid}"], []):
         for e in d.get("effects") or []:
             if isinstance(e, dict):
-                check(e.get("trait") != nights, f"{rid}: the loop never moves {nights}")
+                check(e.get("trait") != key, f"{rid}: the loop never moves {key}")
     fc = choices(node(fin, "climax"))
+    check(not any("isn't yours yet" in c.get("text", "") for c in fc), f"{rid}: no 'not yours yet' exit")
     d0 = next((c for c in fc if c.get("nodeId") == f"{rid}_drain_canvas.d0"), {})
     di = items(d0.get("conditions"))
-    check(has(di, trait_key=nights, operator="gte", value=top) and has(di, trait_key="drain_charge", operator="gte", value=1)
-          and has(di, trait_key="equipped_weapon", operator="eq", value=1) and has(di, trait_key=drains, operator="lt", value=1), f"{rid}: the first drain needs the top of the ladder, the weapon and the charge")
+    check(has(di, trait_key="drain_charge", operator="gte", value=1) and has(di, trait_key="equipped_weapon", operator="eq", value=1)
+          and has(di, trait_key=drains, operator="lt", value=1) and not [i for i in di if i.get("trait_key") == key],
+          f"{rid}: the first drain needs the weapon and the charge only (the loop is the gate)")
     eff = d0.get("effects", [])
     check(any(e.get("trait") == drains and e.get("op") == "add" for e in eff), f"{rid}: the first drain bumps {drains}")
     if lock:
         check(any(e.get("trait") == lock and e.get("value") == 1 for e in eff), f"{rid}: the first drain opens {lock}")
-    check(any(has(items(c.get("conditions")), trait_key=nights, operator="lt", value=top) for c in fc), f"{rid}: below the top the ass finish lets go")
     body = sum(1 for n in canv[f"loop_{rid}"]["nodes"] for _ in [0] if len(EXPLICIT.findall(text_of(n))) >= 3)
     check(body >= 3, f"{rid}: the loop's poses stay on the body (3+ explicit words in {body} nodes)")
+    mc = [c for c in cards if c.get("npc_id") == npc and any(w.get("trait") == key for w in c.get("when", []))]
+    check(len(mc) == len(TH) + 1, f"{rid}: one card per step plus the drain card ({len(mc)})")
+# 0279: every test wears on the technician, +2
+gw = [c for cid, cv in canv.items() for n in cv.get("nodes", []) for c in choices(n) if c.get("text") == "Go with them."]
+check(len(gw) == 10 and all(any(e.get("npcId") == "npc_technician" and e.get("trait") == "corruption" and e.get("value") == 2
+                                 for e in c.get("effects", [])) for c in gw), f"0279: every test adds +2 to the technician ({len(gw)})")
 check(has(tgate("hub_sabin"), flag_key="in_custody", operator="is_false"), "0271: hub_sabin closes inside")
 
 # ── 0276-0277 (the REWORK): the guard climbs on HIS corruption, one step a day, the drain at the first fuck

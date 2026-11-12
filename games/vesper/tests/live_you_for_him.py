@@ -109,47 +109,68 @@ def main():
                 click("Back to the cell.")
             return offered
 
-        def ladder(man, hub, hour, minute, loop_label, drains, top, rung_exits, drain_exit):
-            """Climb one man to his first drain, one step per calendar day. Returns the number of nights it took."""
-            nights = 0
-            for _ in range(top + 4):
-                nights += 1
+        def ncorr(npc):
+            return pg.evaluate(f"SugarCube.State.variables.npcs['{npc}'].core_traits.corruption || 0")
+
+        def grind(man, npc, hub, hour, minute, key, steps, need, teases, tease_exits, rung_exits, drains, drain_exit):
+            """The REWORK (beat 0279): climb one man to his first drain on HIS corruption. Each day: the test, then his
+            hours; tease him until he wants the next step, take it, check no second step that day. The last step is
+            the first fuck, and the drain works on it. Returns (days, teases spent)."""
+            days = spent = 0
+            for k in range(len(steps)):
+                days += 1
                 next_day(9)
                 test_day()
                 setv("energy", 100)
                 at(hour, minute)
                 play(hub)
-                ls = labels()
-                if loop_label in ls:
-                    click(loop_label)
-                    names = [l for l in labels() if "ass" in l.lower() or "bend" in l.lower() or "turn" in l.lower() or "face" in l.lower()]
-                    click(names[0])
-                    for _ in range(12):
-                        fin = [l for l in labels() if l.startswith("Let him come in your ass")]
-                        if fin:
-                            click(fin[0])
+                if k > 0:
+                    ok(steps[k] not in labels() or ncorr(npc) >= need[k], f"{man} step {k}: refused below his corruption {need[k]} ({ncorr(npc)})")
+                    while ncorr(npc) < need[k] and spent < 80:
+                        best = [x for x in teases if x in labels()]
+                        ok(bool(best), f"{man} step {k}: a tease on offer ({labels()})")
+                        if not best:
                             break
-                        click("Take it.")
-                    if "Take what he carries." in labels():
-                        click("Take what he carries.")
-                        ok(walk(drain_exit), f"{man}: the first drain walks to '{drain_exit}'")
-                        click(drain_exit)
-                        return nights
-                    notyet = [l for l in labels() if l.startswith("Let it go. He isn't yours yet")]
-                    ok(bool(notyet), f"{man}: before the top of his ladder the ass finish does not drain ({labels()})")
-                    click(notyet[0])
-                else:
-                    step = [l for l in ls if l not in ("Turn your back on him.", "Not tonight.")]
-                    ok(len(step) == 1, f"{man}: exactly one step on offer on night {nights} ({ls})")
-                    click(step[0])
+                        before = ncorr(npc)
+                        setv("energy", 100)
+                        click(best[-1])
+                        ex = next((e for e in tease_exits if e in labels()), None)
+                        ok(ex is not None, f"{man}: '{best[-1]}' walks to its exit ({labels()})")
+                        click(ex)
+                        ok(ncorr(npc) > before, f"{man}: '{best[-1]}' raises his corruption ({before} to {ncorr(npc)})")
+                        spent += 1
+                        at(hour, minute)
+                        play(hub)
+                ok(steps[k] in labels(), f"{man} step {k}: '{steps[k]}' on offer ({labels()})")
+                setv("energy", 100)
+                click(steps[k])
+                if k < len(steps) - 1:
                     ex = next((e for e in rung_exits if e in labels()), None)
-                    ok(ex is not None, f"{man}: the rung on night {nights} walks to its exit")
+                    ok(ex is not None, f"{man} step {k}: the rung walks to its exit ({labels()})")
                     click(ex)
-                    # same night again: no second step
+                    ok(tr(key) == k + 1, f"{man}: {key} {k + 1} ({tr(key)})")
+                    at(hour, minute)
                     play(hub)
-                    ok(not [l for l in labels() if l not in ("Turn your back on him.", "Not tonight.", loop_label)],
-                       f"{man}: the same night offers no second step ({labels()})")
-            return nights
+                    ok(not [l for l in labels() if l in steps], f"{man} step {k}: no second step the same day ({labels()})")
+            # the last step is the first fuck: the drain works the first time
+            setv("drain_charge", 1)
+            setv("equipped_weapon", 1)
+            names = [l for l in labels() if "ass" in l.lower() or "bend" in l.lower() or "turn" in l.lower() or "face" in l.lower()]
+            ok(bool(names), f"{man}: the loop offers her ass ({labels()})")
+            click(names[0])
+            for _ in range(12):
+                fin = [l for l in labels() if l.startswith("Let him come in your ass")]
+                if fin:
+                    click(fin[0])
+                    break
+                click("Take it.")
+            ok(not [l for l in labels() if "isn't yours yet" in l], f"{man}: no 'isn't yours yet' at the first fuck")
+            ok("Take what he carries." in labels(), f"{man}: the first fuck, the drain is offered ({labels()})")
+            click("Take what he carries.")
+            ok(walk(drain_exit), f"{man}: the first drain walks to '{drain_exit}'")
+            click(drain_exit)
+            ok(tr(drains) == 1, f"{man}: {drains} 1")
+            return days, spent
 
         pg.goto(URL)
         pg.evaluate("localStorage.clear()")
@@ -364,15 +385,27 @@ def main():
         play("Location_block_showers")
         click("Wash alone")
         ok(psg() == "Canvas_activity_wash_alone_Node_base", f"no curfew after his drain ({psg()})")
-        n = ladder("technician", "Canvas_hub_technician_Node_base", 22, 30, "Get on his table.", "tech_drains_done", 4,
-                   ["Leave him with his screens.", "Leave him wanting it."], "Take the code.")
-        ok(tr("tech_drains_done") == 1 and tr("study_door") == 1, f"the technician is drained and Sabin's door opens ({n} nights)")
-        n = ladder("Sabin", "Canvas_hub_sabin_study_Node_base", 19, 0, "Clear his plans.", "sabin_custody_drains", 4,
-                   ["Leave him staring.", "Leave him talking.", "Leave him wanting it."], "Take the key.")
-        ok(tr("sabin_custody_drains") == 1 and tr("records_door") == 1, f"Sabin is drained and the records room opens ({n} nights)")
-        n = ladder("keeper", "Canvas_hub_keeper_Node_base", 21, 30, "Lock the door.", "keeper_drains_done", 7,
-                   ["Leave him reading.", "Leave him looking.", "Leave him the chair.", "Leave him shaking.", "Leave him."], "Go to the last cabinet.")
-        ok(tr("keeper_drains_done") == 1, f"the keeper is drained ({n} nights)")
+        ok(ncorr("npc_technician") >= 2 * days, f"every test so far wore on the technician ({ncorr('npc_technician')} after {days} days)")
+        d, n = grind("technician", "npc_technician", "Canvas_hub_technician_Node_base", 22, 0, "tech_step",
+                     ["Go to him.", "Get up on the table.", "Get on his table."], [0, 40, 75],
+                     ["Undress for his cameras.", "Wire yourself up.", "Sit on his desk.", "Make him take a reading by hand."],
+                     ["Put the shift back on.", "Peel the pads off.", "Get down off his desk.", "Let go of his wrist."],
+                     ["Leave him with his screens.", "Leave him wanting it."], "tech_drains_done", "Take the code.")
+        ok(tr("study_door") == 1, f"the technician is drained and Sabin's door opens ({d} days, {n} teases)")
+        d, n = grind("Sabin", "npc_sabin", "Canvas_hub_sabin_study_Node_base", 18, 0, "sabin_step",
+                     ["Let him see you.", "Ask him about his work.", "Tell him what it is.", "Clear his plans."], [0, 30, 45, 65],
+                     ["Ask him to explain a drawing.", "Let him measure you.", "Tell him he's a genius.", "Kiss him while he talks."],
+                     ["Let him roll it up.", "Step down.", "Leave him at the bench.", "Climb off him."],
+                     ["Leave him staring.", "Leave him talking.", "Leave him wanting it."], "sabin_custody_drains", "Take the key.")
+        ok(tr("records_door") == 1, f"Sabin is drained and the records room opens ({d} days, {n} teases)")
+        d, n = grind("keeper", "npc_keeper", "Canvas_hub_keeper_Node_base", 21, 30, "keeper_step",
+                     ["Sit with him.", "Make him look.", "Stay.", "Put his hands on you.", "Get on your knees for him.", "Lock the door."],
+                     [0, 15, 30, 50, 70, 90],
+                     ["Read with him.", "Undress at the far end of the table.", "Sit in his lap while he reads.", "Put his hand on you."],
+                     ["Pull the shift back up.", "Get down off the table.", "Get up out of his lap.", "Let go of him."],
+                     ["Leave him reading.", "Leave him looking.", "Leave him the chair.", "Leave him shaking.", "Leave him."],
+                     "keeper_drains_done", "Go to the last cabinet.")
+        ok(tr("keeper_drains_done") == 1, f"the keeper is drained ({d} days, {n} teases)")
 
         # ── part eight: the file
         ok(psg() == "Canvas_cap_the_wifes_file_Node_base", f"the file fires in the records room ({psg()})")
