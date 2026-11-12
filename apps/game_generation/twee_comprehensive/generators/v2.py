@@ -6880,7 +6880,9 @@ setup.checkRandomEncounters = function(locationId) {{
             if (Math.random() < chance) {{
                 // Hit — mark as triggered, set cooldown, and return passage name
                 setup.markCanvasTriggered(canvas.id);
-                cooldowns[locKey] = 3;
+                // The room rests 3 arrivals unless the canvas set trigger.random_cooldown
+                // (payload randomCooldown; 0 = a daily event that must not eat the next day).
+                cooldowns[locKey] = (typeof canvas.randomCooldown === 'number') ? canvas.randomCooldown : 3;
                 return canvas.passageName;
             }}
         }}
@@ -15183,6 +15185,12 @@ document.addEventListener("click", function (ev) {
                 _seen_weight = (trigger.metadata or {}).get("seen_weight") if trigger else None
                 if _seen_weight is not None:
                     location_canvas_list[-1]["seenWeight"] = float(_seen_weight)
+                # The room's rest after this random canvas fires (trigger.random_cooldown).
+                # Added ONLY when set, so a game that authors none emits a byte-identical
+                # payload; checkRandomEncounters reads a missing key as the engine's 3.
+                _random_cooldown = (trigger.metadata or {}).get("random_cooldown") if trigger else None
+                if _random_cooldown is not None:
+                    location_canvas_list[-1]["randomCooldown"] = int(_random_cooldown)
 
                 # Add to canvas-to-activity mapping for shared daily limits
                 help_data["canvasIdToActivityName"][str(canvas.id)] = canvas.name

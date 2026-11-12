@@ -579,7 +579,7 @@ who arrives at R5 by way of a money bug does not leave thinking money was the wh
 > ```
 >
 > A `[[traits.labels]] key = "money"` label does reach the sidebar: `trait_bar` reads
-> `_item.label || setup.traitLabel(_tbKey)` (`v2.py:21491`), and `setup.traitLabel` reads the trait
+> `_item.label || setup.traitLabel(_tbKey)` (`v2.py:21499`), and `setup.traitLabel` reads the trait
 > labels (`v2.py:4701`, `engine.md` §33.3).
 
 **The field's mechanism is one printer.** Measured across the 25-game corpus, the games with a real

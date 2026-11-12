@@ -106,6 +106,7 @@ placed at canvas level they are silently ignored (`references/toml-gotchas.md` "
 | `costs` | list | `[]` | `[{trait, value}]` — **how you GATE a resource** on entry: affordability-checked, dims the button `(N Energy)`, deducts on entry. `:1695-1699`. Full model: `references/toml-gotchas.md` "Resource gating". |
 | `show_when_blocked` | bool | `false` | Render a grayed entry on the Quests page when a daily cooldown blocks. `:1700`. |
 | `cooldown_message` | str? | — | Blocked-entry text. `:1701`. |
+| `random_cooldown` | int? | — (engine 3) | **Random path only.** Arrivals the room skips its random roll after THIS canvas fires; `0` = no rest. For a chance-1.0 event that must come on the first arrival of a window every day (Vesper's daily test). Absent = the engine's 3. Misuse is a build error (`_validate_random_cooldown`). |
 | `entry_only_from` | list | `[]` | Lane 2 anti-toggle: fire only if the previous location matched. `:1705-1709`. |
 | `substitutions` | list | `[]` | **Lane 3 dispatcher rules** — §2.4. `:1715-1735`. |
 | `substitution_only` | bool | `false` | Excluded from portrait/solo/auto-fire grids; reachable ONLY via a substitution rule. `:1736`. |

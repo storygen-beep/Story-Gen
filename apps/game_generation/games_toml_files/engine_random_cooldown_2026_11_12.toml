@@ -1,0 +1,108 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+#  ENGINE FIXTURE — trigger.random_cooldown (2026-11-12)
+#
+#  Media-free. After a random canvas fires, checkRandomEncounters rests that room for
+#  3 arrivals. A random canvas may set trigger.random_cooldown to choose the rest.
+#    random_rest     chance 1.0 at loc_quiet, random_cooldown = 0: fires on every arrival.
+#    random_control  chance 1.0 at loc_busy, no key: the engine's 3-arrival rest.
+#    plain_card      a manual canvas, for the "read only on the random path" error.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+schema_version  = "0.2"
+starting_canvas = "scene_start"
+
+[project]
+id          = "engine_random_cooldown"
+title       = "Engine Random Cooldown"
+description = "Engine fixture for trigger.random_cooldown."
+
+[time]
+enabled       = true
+starting_hour = 9
+starting_day  = "Monday"
+starting_week = 1
+
+[player]
+id          = "player"
+name        = "Mara"
+description = "Fixture protagonist."
+core_traits = { energy = 100 }
+flag_keys   = ["started"]
+
+[[locations]]
+id               = "loc_home"
+name             = "Home"
+description      = "Her room."
+navigation_order = ["loc_quiet", "loc_busy"]
+
+[[locations]]
+id          = "loc_quiet"
+name        = "Quiet room"
+description = "The quiet room."
+entry_from  = "loc_home"
+
+[[locations]]
+id          = "loc_busy"
+name        = "Busy room"
+description = "The busy room."
+entry_from  = "loc_home"
+
+[[canvases]]
+id   = "scene_start"
+name = "Start"
+
+[[canvases.nodes]]
+id     = "intro"
+name   = "Intro"
+blocks = [ { type = "paragraph", content = "Fixture start." } ]
+exit_block = { type = "location", text = "Go home", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0, flagEffects = [ { targetType = "player", flag = "started" } ] } }
+
+[[canvases]]
+id   = "random_rest"
+name = "Every time"
+
+[canvases.trigger]
+location        = "loc_quiet"
+is_repeatable   = true
+is_active       = true
+trigger_mode    = "random"
+chance          = 1.0
+random_cooldown = 0
+
+[[canvases.nodes]]
+id     = "meet"
+name   = "Meet"
+blocks = [ { type = "paragraph", content = "REST_FIRED" } ]
+exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_quiet", time_progression_minutes = 0 } }
+
+[[canvases]]
+id   = "random_control"
+name = "Now and then"
+
+[canvases.trigger]
+location      = "loc_busy"
+is_repeatable = true
+is_active     = true
+trigger_mode  = "random"
+chance        = 1.0
+
+[[canvases.nodes]]
+id     = "meet"
+name   = "Meet"
+blocks = [ { type = "paragraph", content = "CONTROL_FIRED" } ]
+exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_busy", time_progression_minutes = 0 } }
+
+[[canvases]]
+id   = "plain_card"
+name = "A card"
+
+[canvases.trigger]
+location      = "loc_home"
+is_repeatable = true
+is_active     = true
+
+[[canvases.nodes]]
+id     = "look"
+name   = "Look"
+blocks = [ { type = "paragraph", content = "A card." } ]
+exit_block = { type = "location", text = "Back", config = { destinationType = "specific", locationId = "loc_home", time_progression_minutes = 0 } }
