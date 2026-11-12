@@ -18,7 +18,17 @@ where 24 of 167 shipped screens had media and the everyday screens had none.
 | a screen she sees often (class, shift, dinner, bed, the park) | one rotating pool, first on the screen |
 | a person's hub (his room, her kitchen) | one rotating picture of that person, first on the screen |
 | a one-time step | one picture or clip on its key line |
-| a door, a notice, a system screen, a one-line chore, a short talk at a hub that already has the person | none, written down as none with the reason |
+| a talk screen at a hub (each choice opens one) | one picture of that person doing what the screen says; the hub's own picture is gone once the choice opens the new screen |
+| a door, a notice, a system screen | none, written down as none with the reason |
+
+## Every screen, not every scene
+Count by screen. A scene with a picture on its first screen still leaves every other screen bare, and each choice
+opens a new screen: the picture before it is gone. Taught from first_term (LO, 2026-11-12: "Mark in living room also
+didn't have media for all interaction with him… I think there could be a lot more similar scenes"), where two passes
+counted a scene as done once any of its screens had a block, and 320 of release 1's 448 screens had none.
+
+A canvas written by hand in a phase file, not by the build scripts, takes its blocks in that file. A build that
+places blocks from a table must stop when a row never lands, or the row is lost without a word.
 
 ## The rules
 
@@ -50,6 +60,8 @@ where 24 of 167 shipped screens had media and the everyday screens had none.
    person who owns the game asks for them.
 
 ## How it is checked
+- `lint · a screen without media`: every screen with no block of its own, listed (a door is rightly none, so it
+  never fails). Read the list each release; each name on it has a block or a reason on the media sheet.
 - `an explicit beat carries a clip`: at least 50% of explicit beats carry their own clip. Its report lists every
   screen still missing one, so read the list, not only the number.
 - `one asset, one block` and `repeatable explicit media cycles`, as above.

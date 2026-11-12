@@ -326,6 +326,13 @@ id   = "walk"
 name = "Past his porch"
 
 [[canvases.nodes.blocks]]
+type = "image"
+[canvases.nodes.blocks.props]
+pool_dir       = "people/vance_porch_walkpast_t0"
+description    = "A man, 54, sitting on his front porch behind a garden gate as a young woman walks past on the sidewalk."
+search_queries = ["older man on porch watching woman walk by", "neighbor on front porch woman walking past gate"]   # every screen (LO, 2026-11-12; DECISIONS 243)
+
+[[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
 blocks = [ { type = "group", conditions = { version = "1.0", logic = "OR", items = [ { type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "clothing_slot", slot = "bra", operator = "unequipped" } ] }, blocks = [ { type = "paragraph", content = "You don't stay. You start on past his gate, slow. His eyes land on your ass and stay there, and he wets his lips. You don't stop for him. Not yet." }, { type = "dialog", content = "Take your time, Miss. I'm not going anywhere.", props = { speaker = "npc", npcId = "npc_vance" } } ] } ]
 
@@ -493,6 +500,13 @@ id   = "not_hungry"
 name = "Not hungry"
 
 [[canvases.nodes.blocks]]
+type = "image"
+[canvases.nodes.blocks.props]
+pool_dir       = "life/canteen_line_step_out_t0"
+description    = "A college canteen serving line, students with trays queueing at the hot counter."
+search_queries = ["college cafeteria serving line trays", "university canteen queue at counter"]   # every screen (LO, 2026-11-12; DECISIONS 243)
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "I'm good, thanks. Not hungry."
 props = { speaker = "player" }
@@ -518,6 +532,13 @@ time_progression_minutes = 2
 [[canvases.nodes]]
 id   = "eaten"
 name = "Eaten"
+
+[[canvases.nodes.blocks]]
+type = "image"
+[canvases.nodes.blocks.props]
+pool_dir       = "life/canteen_eaten_meal_t0"
+description    = "A cheap canteen meal on a tray in a busy college canteen, students eating around it."
+search_queries = ["college cafeteria food on tray", "university canteen lunch busy"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -551,6 +572,13 @@ substitutions = [{ target_canvas_id = "walkin_canteen_zoe", chance = 0.25, condi
 [[canvases.nodes]]
 id   = "listen"
 name = "The canteen"
+
+[[canvases.nodes.blocks]]
+type = "image"
+[canvases.nodes.blocks.props]
+pool_dir       = "life/canteen_wall_listen_t0"
+description    = "A young woman, 18, sitting with her back to the wall in a busy college canteen while the table behind her laughs."
+search_queries = ["college canteen students gossiping table", "girl eavesdropping in cafeteria"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -604,6 +632,13 @@ end_time   = "13:00"
 [[canvases.nodes]]
 id   = "table"
 name = "The table"
+
+[[canvases.nodes.blocks]]
+type = "image"
+[canvases.nodes.blocks.props]
+pool_dir       = "life/canteen_long_table_t0"
+description    = "College students around 19 and 20 crowded loudly round a long canteen table by the windows at lunch."
+search_queries = ["college students loud lunch table canteen", "friends long cafeteria table windows"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -715,6 +750,13 @@ substitutions = [{ target_canvas_id = "walkin_toilet_zoe", chance = 0.25, condit
 [[canvases.nodes]]
 id   = "sink"
 name = "The sink"
+
+[[canvases.nodes.blocks]]
+type = "image"
+[canvases.nodes.blocks.props]
+pool_dir       = "life/toilet_wash_sink_t0"
+description    = "A young woman, 18, splashing cold water on her face at a public restroom sink."
+search_queries = ["woman washing face public restroom sink", "girl splashing water face bathroom"]   # every screen (LO, 2026-11-12; DECISIONS 243)
 
 [[canvases.nodes.blocks]]
 type = "paragraph"

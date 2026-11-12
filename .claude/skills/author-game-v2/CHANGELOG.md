@@ -5,6 +5,23 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-12 — media: every screen, not every scene (first_term DECISIONS 243)
+
+Source: LO, 2026-11-12: "Mark in living room also didn't have media for all interaction with him. Why have we missed
+these scenes?? I think there could be a lot more similar scenes", then "Sign all of them. And go ahead". Two media
+passes counted a scene as covered once any screen had a block, and the old table said a short talk at a hub gets
+none; each choice opens a new screen, so those screens were bare (320 of release 1's 448).
+- `references/media-blocks.md`: new section "Every screen, not every scene"; a hub talk screen now gets a picture
+  of that person; only doors, notices and system screens are none; a hand-written canvas takes its blocks in its
+  phase file, and a table-placing build must stop on a row that never lands.
+- `scripts/gates.py`: `lint · a screen without media`, a list (never a score) of every screen with no block of its
+  own. The helper sits just above `main()`, and the call is a same-line edit on the `_group2_lints` line, so no
+  cited line moves.
+- `scripts/tests/test_gates_screen_without_media.py`: 2 tests (a scene's bare screens are listed; a block in a group
+  or pool counts).
+- `SKILL.md`: the lint is named in the lints line (same-line edit), so `--selfcheck` documents 71/71.
+- Verified: the new tests pass; `--selfcheck` green; `cite_check --strict` 0 wrong.
+
 ## 2026-11-12 — media blocks: which screens get one, and where (first_term DECISIONS 238)
 
 Source: LO, 2026-11-12: "We have not been mentioning the media blocks at all", then "Yes, teach + report". first_term's
