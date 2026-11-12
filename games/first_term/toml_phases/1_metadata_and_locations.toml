@@ -1202,7 +1202,6 @@ closed_text = "The college gates are shut."
 
 [[locations]]
 id          = "college_mens_toilet"
-release     = 2
 name        = "Men's Toilet"
 kind        = "destination"
 description = "The men's toilets across from the women's: a row of urinals, two stalls and a mirror nobody looks in. There's nothing to do here right now."
@@ -1237,7 +1236,6 @@ clothing_rules = [
 
 [[locations]]
 id          = "hale_office"
-release     = 2
 name        = "Dr. Hale's Office"
 kind        = "destination"
 description = "Dr. Hale's office: books to the ceiling, one window, a desk with a photo of his wife on it. He holds office hours most afternoons, and late on Thursdays, when his wife picks him up after. Your Psychology grade is pinned to the door."
@@ -1260,7 +1258,6 @@ clothing_rules = [
 
 [[locations]]
 id          = "art_office"
-release     = 2
 name        = "Art Lecturer's Office"
 kind        = "destination"
 description = "The art lecturer's office: canvases stacked against the walls, charcoal dust on everything, sketches of bodies pinned up to dry. Your Figure drawing grade is on the door."
@@ -1283,7 +1280,6 @@ clothing_rules = [
 
 [[locations]]
 id          = "business_office"
-release     = 2
 name        = "Business Lecturer's Office"
 kind        = "destination"
 description = "The Business lecturer's office: filing cabinets, a clock that ticks, nothing personal. He offers an honest retake, but nothing else. Your Business grade is on the door."
@@ -1306,7 +1302,6 @@ clothing_rules = [
 
 [[locations]]
 id          = "ta_office"
-release     = 2
 name        = "TA's Office"
 kind        = "destination"
 description = "The Biology TA's office: a shared room with two desks, a skeleton on a stand and a kettle. She keeps her door half open. Your Biology grade is on it."

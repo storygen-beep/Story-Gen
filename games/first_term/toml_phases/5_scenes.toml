@@ -20345,6 +20345,10 @@ id   = "office"
 name = "His office"
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a professor of 39 at his office desk behind a pile of papers, a beach photo of him and a dark-haired woman face-up beside him", search_queries = ["professor office desk papers", "lecturer at desk looking up"], pool_dir = "people/hale_office_desk_t0" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Dr. Hale looks up from a pile of papers."
 
@@ -20504,6 +20508,10 @@ name = "Your essay"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "He reads your essay at the desk with his pen out, and talks you through it line by line, but he doesn't touch you once. He doesn't need to."
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a professor of 39 at his desk reading a student's essay with his pen out, a young woman sitting beside the desk", search_queries = ["professor reading student essay office", "teacher going through essay with student"], pool_dir = "people/hale_office_essay_t0" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -35141,6 +35149,10 @@ id   = "hub"
 name = "The art lecturer's office"
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a woman of 45 in an office crowded with canvases, looking up from a sketch of a woman's back", search_queries = ["art teacher office canvases", "woman artist studio sketching"], pool_dir = "people/art_office_canvases_t0" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Canvases against every wall. The art lecturer looks up from a sketch of a woman's back."
 
@@ -35201,6 +35213,10 @@ name = "Your sketchbook"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "She turns the pages slowly, and stops on the figures. She takes a pencil and corrects a hip with three lines, without asking."
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "an art lecturer of 45 correcting a figure drawing in a student's sketchbook with a pencil", search_queries = ["art teacher correcting sketchbook", "drawing lesson pencil sketchbook"], pool_dir = "people/art_office_book_t0" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -35316,6 +35332,10 @@ type = "paragraph"
 content = "He hands you a paper and points at a chair, and sits watching you for an hour without blinking. You know more than you thought."
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a gray-suited lecturer of 50 sitting watching a young woman write a test paper on a chair in his office", search_queries = ["student taking test in professor office", "lecturer watching student write exam"], pool_dir = "people/business_retake_t0" }
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "Honest work. Thank you."
 props = { speaker = "npc", npcId = "npc_business_lecturer" }
@@ -35349,8 +35369,12 @@ id   = "hub"
 name = "The TA's office"
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a shy young woman of 28 looking up from her desk in a small office, a skeleton in a party hat in the corner", search_queries = ["shy teaching assistant small office", "biology office skeleton party hat"], pool_dir = "people/ta_office_skeleton_t0" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
-content = "The TA's office is half a room with a skeleton in the corner wearing a party hat. She jumps when you knock."
+content = "The TA's office is half a room with a skeleton in the corner wearing a party hat. She looks up from her desk, a little pink."
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -35409,12 +35433,16 @@ name = "It's fine"
 
 [[canvases.nodes.blocks]]
 type = "dialog"
-content = "Oh. Okay. Sure. The offer's there. Afternoons, I'm always here."
+content = "Oh. Okay. Sure. I'm here in my office hours, if you change your mind."
 props = { speaker = "npc", npcId = "npc_bio_ta" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "She sits back down too fast and stares at her screen, red to the ears. No help today, and your Biology stays where it is."
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a red-faced young woman of 28 sitting back at her desk, staring hard at her screen", search_queries = ["embarrassed woman staring at computer screen", "blushing assistant at desk"], pool_dir = "people/ta_office_fine_t0" }
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -35431,6 +35459,10 @@ name = "Her help"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "She pulls her chair round to your side of the desk and goes through your last lab with a pencil, too close, apologising every time her knee touches yours."
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a young woman of 28 sitting close beside a student at a desk, going through a lab report with a pencil, their knees touching", search_queries = ["tutor sitting close helping student desk", "teaching assistant helping with lab report"], pool_dir = "people/ta_office_help_t0" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -40210,6 +40242,7 @@ effects = [{ targetType = "player", trait = "energy", op = "add", value = 5, cap
 [[canvases]]
 id   = "park_selfie"
 name = "Take a selfie on the path"
+release = 2
 description = "Photos on the path, a man on a bench watching her pose: Exhibitionism +1. Once a day. Posting is the phone's (pass 3 F64): followers move only on the Feed."
 
 [canvases.trigger]
@@ -43825,6 +43858,10 @@ type = "paragraph"
 content = "She stops and looks at you with her head on one side, the way she looks at the model before she draws: your shoulders, your hips, the length of your legs, the shape of your tits under what you're wearing. Measuring."
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "an art lecturer of 45 in her office doorway with a mug, head on one side, looking a young woman up and down", search_queries = ["woman in doorway looking girl up and down", "artist measuring model with eyes"], pool_dir = "look/art_door_measuring_t3" }
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "Hold that. Don't move. Hm. Another time."
 props = { speaker = "npc", npcId = "npc_art_lecturer" }
@@ -43863,6 +43900,10 @@ content = "The half-open door swings wide. The TA, with her kettle."
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Her eyes go down you, all the way down, your tits, your legs, and snap back up to your face. Her neck goes pink."
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a young woman of 28 in an office doorway holding a kettle, her eyes running down a student, her neck pink", search_queries = ["shy woman doorway checking out girl", "blushing woman holding kettle doorway"], pool_dir = "look/ta_door_look_t3" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -43906,6 +43947,10 @@ props = { speaker = "npc", npcId = "npc_bio_ta" }
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "She looks at your legs one more time, goes pink to the ears, and pulls the door half shut with her foot."
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a pink-faced young woman of 28 pulling an office door half shut with her foot, glancing at a student's legs", search_queries = ["blushing woman closing office door", "woman glancing at girl's legs doorway"], pool_dir = "look/ta_door_no_t3" }
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -44000,7 +44045,7 @@ content = "You've got your finger on your grade when Dr. Hale opens his door."
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "hale_step", operator = "lt", value = 3 }] }, blocks = [{ type = "paragraph", content = "He sees you there, and his eyes go down your legs before they come back up to your face." }, { type = "dialog", content = "Checking up on me, @player?", props = { speaker = "npc", npcId = "npc_hale" } }, { type = "thought_bubble", content = "He wants a lot more than a look at your legs. Not in a corridor. Not yet.", props = { speaker = "player" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "hale_step", operator = "lt", value = 3 }] }, blocks = [{ type = "paragraph", content = "He sees you there, and his eyes go down your legs before they come back up to your face." }, { type = "image", props = { description = "a professor of 39 opening his office door, his eyes going down a young woman's legs", search_queries = ["professor opening door looking at student legs", "man in doorway eyes on girl's legs"], pool_dir = "look/hale_office_door_legs_t3" } }, { type = "dialog", content = "Checking up on me, @player?", props = { speaker = "npc", npcId = "npc_hale" } }, { type = "thought_bubble", content = "He wants a lot more than a look at your legs. Not in a corridor. Not yet.", props = { speaker = "player" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -44024,7 +44069,7 @@ name = "Step back"
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "hale_step", operator = "lt", value = 3 }] }, blocks = [{ type = "paragraph", content = "You step back. He watches your legs go, and lets the door swing shut." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "hale_step", operator = "lt", value = 3 }] }, blocks = [{ type = "paragraph", content = "You step back. He watches your legs go, and lets the door swing shut." }, { type = "image", props = { description = "a professor of 39 in his office doorway watching a young woman walk away, the door swinging shut", search_queries = ["man watching woman walk away doorway", "professor office door closing"], pool_dir = "look/hale_door_watch_t3" } }] },
 ]
 
 [[canvases.nodes.blocks]]
@@ -44063,6 +44108,10 @@ name = "The door opens"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "The door opens. The Business lecturer looks at the grade sheet, then at your number on it, and not at you once."
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a gray-suited lecturer of 50 in his office doorway reading a grade sheet taped to the door, not looking at the student beside it", search_queries = ["lecturer reading grade sheet on door", "professor office door grades list"], pool_dir = "people/business_door_sheet_t0" }
 
 [[canvases.nodes.blocks]]
 type = "block_pool"

@@ -24,12 +24,17 @@ CANVAS_RELEASE = {c: 2 for c in ("dean_warning",
                                   # Laura waiting up when she's home late. Release 1 never had it (nothing set
                                   # came_home_late); DECISIONS 231's late_shift fix would bring it in, with its lie
                                   # "I was at Zoe's.", while Laura stays at step 0. It comes with her story.
-                                  "laura_02_home_late")}
+                                  "laura_02_home_late",
+                                  # the park selfie posts to the Feed, and the Feed app is cut (DECISIONS 236): with
+                                  # its posting choices gone it was one dead button (LO, 2026-11-12; DECISIONS 244)
+                                  "park_selfie")}
 
 # Places (LO's minimal school: campus, quad, lecture hall, canteen, library, women's toilet; the gym's rooms).
 PLACE_RELEASE = {p: 2 for p in (
-    # faculty_floor and dean_office stay: the opening's "Go to campus." walks her to the dean (2_one_shots.toml:587)
-    "hale_office", "art_office", "business_office", "ta_office", "college_mens_toilet",
+    # faculty_floor and dean_office stay: the opening's "Go to campus." walks her to the dean (2_one_shots.toml:587).
+    # The four lecturers' offices and the men's toilet are back in release 1 (LO, 2026-11-12: "On campuss add what
+    # can be added"; DECISIONS 244): an office hub and its door walk-in need only the met flag release 1 sets; Hale's
+    # later steps go with their steps, and the grade notices wait on the exams, which are cut.
     "zoe_flat", "zoe_apartment", "zoe_kitchen", "zoe_bathroom", "zoe_bedroom", "party_house",
     "gym", "gym_floor", "gym_locker", "gym_sauna", "gym_showers")}
 
