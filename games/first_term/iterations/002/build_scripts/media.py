@@ -416,6 +416,16 @@ ROWS = [
     ("hale_01_first_lecture", "pen", "You bend down for it, all the way", "clip", "sex/hale_pen_hard_t4.webm",
      "a professor of 39 at a lecture stage, the line of his hard cock against his trousers, a girl coming back up from bending for his pen",
      "professor bulge trousers lecture", "teacher hard student bending"),
+    # the hall at night, the versions without one (LO, 2026-11-12: "Slip past doesn't have media"; DECISIONS 242)
+    ("ev_ryan_hall_squeeze", "scene", "He backs up against the wall to let you by", "pic", "look/hall_backs_up_t3",
+     "a young man in just his shorts backed flat against a narrow hallway wall at night, eyes on the ceiling, letting a girl pass",
+     "guy backed against hallway wall letting girl pass"),
+    ("ev_ryan_hall_squeeze", "a0", "You slip past. Your shoulder brushes his arm", "pic", "look/hall_slip_past_t3",
+     "a girl slipping past a young man in his shorts in a narrow dark hallway, her shoulder brushing his arm, him red to the ears",
+     "girl slipping past guy narrow hallway night"),
+    ("ev_ryan_hall_squeeze", "a2", "He flattens himself against the wall, grinning", "pic", "look/hall_move_ryan_t3",
+     "a young man in his shorts flattened against a hallway wall, grinning, as a girl walks by without touching him",
+     "guy flat against wall grinning girl walks by"),
 ]
 
 
