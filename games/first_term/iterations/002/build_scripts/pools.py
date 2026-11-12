@@ -564,8 +564,8 @@ out.append({
           D(L, "Who are you dressed up for?")),
         G(cond(SKIRT, NO_PANTIES), P("There's nothing under the skirt. Anyone behind you in this hall gets your bare ass and your pussy."),
           # heat proposal A12 (DECISIONS 147): a _t4 pool on the no-panties screen (media only)
-          VID("a girl in a short skirt and no panties bending over in a hallway, a man behind her looking straight up it",
-              "upskirt bending over no panties hallway", "girl bends over short skirt man behind looks", pool_dir="sex/stairs_skirt_t4")),
+          VID("a girl in a short skirt and no panties bending over in a narrow house hallway, seen from behind",
+              "upskirt bending over no panties hallway", "girl bending over short skirt from behind", pool_dir="sex/stairs_skirt_t4")),
     ], [  # DECISIONS 124 (H5): a way out that pays her nothing; the watcher's look moves his meter; only her going slower pays her
         go("Hold your skirt down.", node="down", mins=2),   # C1 (LO 2026-11-03): her no never raises his Want; reader batch 4 (pass 3): he answers it
         # pass 3 D44 (the-surfaces.md R9): going slower for him lands on his look, not a toast (Mark is below: the trigger)

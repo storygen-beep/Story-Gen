@@ -1266,6 +1266,10 @@ type = "paragraph"
 content = "The phone buzzes again by his hip. His ass lifts off the bed. His cock throbs in your fist, swollen and hot, the head leaking over your knuckles. You twist your grip over the tip and pump him harder. His cock jerks up into your fist with every stroke."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl stroking a young man's cock on his bed while his phone buzzes beside his hip", search_queries = ["handjob on bed phone ringing"], pool_dir = "sex/ryan_phone_handjob_t5" }
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "Look at me, not the phone. She's not the one with her hand on you."
 props = { speaker = "player" }
@@ -2417,7 +2421,7 @@ name = "His room"
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Ryan meets you halfway and walks you back against the door. His mouth is on yours, hungry, and his hands go straight to your ass." }, { type = "dialog", content = "Hi, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He breathes into your neck. His cock is already hard against your belly. You drag his shirt over his head. He pulls your clothes off you, quick and rough, and drops them on the floor. Your nipples go tight. His cock presses hot into your bare stomach." }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Ryan meets you halfway and walks you back against the door. His mouth is on yours, hungry, and his hands go straight to your ass." }, { type = "dialog", content = "Hi, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He breathes into your neck. His cock is already hard against your belly. You drag his shirt over his head. He pulls your clothes off you, quick and rough, and drops them on the floor. Your nipples go tight. His cock presses hot into your bare stomach." }, { type = "video", props = { description = "a young man of 22 pressing a girl against a bedroom door, kissing her, pulling her clothes off", search_queries = ["making out against door undressing"], pool_dir = "sex/ryan_knocks_start_t5" } }] },
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "Ryan sits back down on the edge of his bed, elbows on his knees, and looks at you." }, { type = "dialog", content = "Come here, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "dialog", content = "Miss me?", props = { speaker = "player" } }, { type = "dialog", content = "Come here.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "You go. He pulls you between his knees by the hips and looks up at you. His hands slide round to your ass. His cock is hard in his shorts." }, { type = "dialog", content = "Off.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He says. You pull your clothes off and let them drop. He looks at your tits, then lower. His cock jerks against his shorts." }] },
 ]
 props = { id = "ryan_hot_7s", memory = "seen", seen_weight = 0 }
@@ -2483,6 +2487,10 @@ props = { speaker = "npc", npcId = "npc_ryan" }
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "He lets go of your ass, his cock still hard and pointing at you, and watches you pull your clothes back on without taking his eyes off your tits once."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a young man, still hard, watching a girl pull her clothes back on in his bedroom", search_queries = ["guy hard watching girl get dressed"], pool_dir = "sex/ryan_knocks_stop_t4" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -3561,6 +3569,10 @@ props = { speaker = "npc", npcId = "npc_ryan" }
 type = "paragraph"
 content = "He grins, and he doesn't hide what the towel has done to the front of his shorts. His cock is hard under the cotton, and his eyes stay on the knot."
 
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a young man in his room grinning, hard in his shorts, staring at a girl in a towel", search_queries = ["guy hard in shorts girl in towel"], pool_dir = "sex/ryan_room_towel_t4" }
+
 [canvases.nodes.exit_block]
 type = "choices"
 
@@ -3638,6 +3650,10 @@ blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [] }, blocks = [{ type = "paragraph", content = "You hang in Ryan's door with one hand on the frame." }, { type = "dialog", content = "Hey. What's Kayla worth to you? Out of ten.", props = { speaker = "player" } }, { type = "dialog", content = "Ten. Obviously.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "dialog", content = "Liar. You put your phone down when I walked in.", props = { speaker = "player" } }, { type = "paragraph", content = "He did. He's looking at your ass in the doorway. You bend, slowly, for a sock on his floor, and toss it at him. He catches it against the front of his shorts and leaves it there." }, { type = "thought_bubble", content = "He's hard. For you.", props = { speaker = "player" } }, { type = "dialog", content = "Not tonight, Ryan. Keep the sock.", props = { speaker = "player" } }] },
 ]
 props = { id = "ryan_hot_1", memory = "seen", seen_weight = 0 }
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl leaning in a young man's bedroom doorway, posing for him while he stares from his room", search_queries = ["girl leaning in bedroom doorway teasing guy"], pool_dir = "look/ryan_door_stretch_t3" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -4295,6 +4311,10 @@ props = { speaker = "npc", npcId = "npc_ryan" }
 type = "paragraph"
 content = "He laughs, short, and scoots his chair in until the table covers his lap. His cock is hard under there, and he can't look anywhere but the knot."
 
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a young man at a kitchen table pulling his chair in, a girl in a towel leaning back", search_queries = ["guy kitchen table girl in towel"], pool_dir = "look/ryan_table_towel_t3" }
+
 [canvases.nodes.exit_block]
 type = "choices"
 
@@ -4897,6 +4917,10 @@ props = { speaker = "npc", npcId = "npc_ryan" }
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "He drops the controller on the cushion and lets you see it. His cock is hard in his shorts, and he's still staring at your knot."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a young man on a couch, hard in his shorts, a girl in a towel stepping back over his legs", search_queries = ["guy couch hard girl in towel"], pool_dir = "sex/ryan_couch_towel_t4" }
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -9095,6 +9119,10 @@ blocks = [
 ]
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "an older man of 46 at a kitchen table, a rent envelope and a cold coffee in front of him, looking up at a girl's legs", search_queries = ["older man kitchen table staring at girl's legs"], file = "look/mark_01_legs_t3.jpg" }
+
+[[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "sleep_shirt" }] }, blocks = [{ type = "paragraph", content = "You came in your sleep shirt. It stops mid-thigh. He watches the hem the whole way to the table." }] },
@@ -12868,6 +12896,10 @@ type = "paragraph"
 content = "So you go slower. Sauce runs down your thumb, and you lick it off while he watches your mouth. He puts his fork down and doesn't pick it up again."
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl at a dinner table licking sauce off her thumb, an older man across the table staring at her mouth", search_queries = ["girl licking thumb dinner man staring"], pool_dir = "look/dinner_lick_t3" }
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "That's enough, @player. Not here."
 props = { speaker = "npc", npcId = "npc_mark" }
@@ -13291,6 +13323,10 @@ id   = "basket"
 name = "Laundry"
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a man in his forties at a garage workbench with his back turned, a radio on, a washing machine by the wall", search_queries = ["man at garage workbench back turned"], file = "scenes/mark_00_garage_t0.jpg" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You carry your basket down the hall to the garage. Mark's at his bench with the radio on, his back to you. He grunts at you without turning round."
 
@@ -13360,6 +13396,10 @@ content = "You take the towel and hold it over your chest. Mark is already bent 
 type = "thought_bubble"
 content = "He looked. Mom's husband looked at your tits, and then he turned his back like they burned him."
 props = { speaker = "player" }
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a soaked girl holding a towel over her chest in a garage, an older man bent over his workbench, red ears", search_queries = ["soaked girl holding towel garage"], file = "look/hose_covered_t3.jpg" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -15512,6 +15552,10 @@ blocks = [
 ]
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl on a party balcony at night with her bra in her hand, nipples hard, the party behind the glass", search_queries = ["girl took bra off at party balcony"], pool_dir = "sex/zoe_bra_off_t4" }
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "Slower. Make the window wait for it."
 props = { speaker = "npc", npcId = "npc_zoe" }
@@ -16317,6 +16361,10 @@ props = { speaker = "npc", npcId = "npc_zoe" }
 type = "paragraph"
 content = "You grab the back of her neck and pull her in. You kiss her hard, open-mouthed, until she moans into you. Her tits press flat against your bare tits. Her wet nipples drag across yours. Her thigh slides between your thighs under the water and presses up, slow. Your hands run down her slick back to her ass, and you squeeze it and pull her nipples tight against yours."
 
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "two topless girls kissing in a hot tub at night, steam, tits pressed together", search_queries = ["topless girls kissing hot tub night"], pool_dir = "sex/zoe_tub_kiss_t4" }
+
 [canvases.nodes.exit_block]
 type = "choices"
 
@@ -16900,6 +16948,10 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 [[canvases.nodes]]
 id   = "grass"
 name = "The grass"
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl of 19 lying on the grass of a quad with her head in another girl's lap, shoes off", search_queries = ["college girl lying on grass head in lap"], pool_dir = "people/zoe_quad_t0" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -17601,6 +17653,10 @@ id   = "bed"
 name = "Her bedroom"
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl of 19 on her stomach on her bed in a big T-shirt, chin in her hands", search_queries = ["girl lying on bed big t-shirt"], pool_dir = "people/zoe_bed_t0" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Zoe's on her bed on her stomach in a big T-shirt, chin in her hands, half ready for sleep and nowhere near it."
 
@@ -17935,6 +17991,10 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 [[canvases.nodes]]
 id   = "deck"
 name = "The deck"
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl of 19 in a hot tub on a back deck at night with two friends, a drink on the rim, steam", search_queries = ["girls hot tub deck night"], pool_dir = "look/zoe_tub_deck_t3" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -18586,6 +18646,10 @@ name = "His pen"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You bend down for it, all the way, and when you come back up his eyes are on your chest, not your face. He's hard. You can see the line of it against his trousers from the front row. He sees you see it, and steps back behind the lectern."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a professor of 39 at a lecture stage, the line of his hard cock against his trousers, a girl coming back up from bending for his pen", search_queries = ["professor bulge trousers lecture", "teacher hard student bending"], file = "sex/hale_pen_hard_t4.webm" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -22895,6 +22959,10 @@ id   = "rack"
 name = "Jake, at the rack"
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a college athlete of 20 in a soaked tank top at a squat rack with his team", search_queries = ["college athlete squat rack"], pool_dir = "people/jake_rack_t0" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Jake's at the squat rack with the team, in a tank top soaked through. He racks the bar when he sees you and doesn't pick it up again."
 
@@ -25318,6 +25386,10 @@ type = "paragraph"
 content = "Your first table of the shift, and the man at table nine swings round to wave at somebody and takes the water jug right out of your hand. The whole jug goes down your front. The uniform is soaked through in a second and goes see-through, and there's no bra under it. It clings to your bare tits. Your nipples are hard from the cold water, dark through the wet cloth, for the whole room."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a waitress soaked by a water jug, her uniform gone see-through on her bare tits", search_queries = ["waitress soaked see through uniform"], pool_dir = "sex/cafe_spill_t4" }
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "Jesus. Sorry, love. Sorry. Christ."
 props = { speaker = "unknown" }
@@ -25375,6 +25447,10 @@ name = "Finish the table"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You don't run. You finish the table soaking wet, your bare tits and your hard nipples right there through the uniform, and you keep serving in it. Every man in the place orders another coffee. At the counter Tom watches and says nothing."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a waitress serving a table in a soaked see-through uniform, nipples showing", search_queries = ["waitress wet see through serving"], pool_dir = "sex/cafe_spill_stay_t4" }
 
 [[canvases.nodes.blocks]]
 type = "thought_bubble"
@@ -25617,6 +25693,10 @@ name = "Leave it open"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You leave it. The uniform hangs open, and every time you lean to pour, your bare tits swing in the gap, nipples and all. Tom watches from the till and says nothing. Men you've never seen before stay for a second coffee."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a waitress pouring coffee, her uniform open, bare tits swinging", search_queries = ["waitress uniform open pouring coffee"], pool_dir = "sex/cafe_button_open_t4" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -34640,6 +34720,10 @@ type = "paragraph"
 content = "The Business lecturer looks up from his marking and doesn't smile."
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a gray-suited lecturer of 50 at his desk, eyes flicking up from his marking", search_queries = ["lecturer at desk looking up"], pool_dir = "look/business_office_look_t3" }
+
+[[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "player", trait_key = "grade_business", operator = "lt", value = 40 }, { type = "flag", subject = "player", flag_key = "business_retake_used", operator = "is_true" }] }, blocks = [{ type = "dialog", content = "Failing. You've had your retake. Nothing else.", props = { speaker = "npc", npcId = "npc_business_lecturer" } }] },
@@ -35195,6 +35279,10 @@ id   = "floor"
 name = "The gym floor"
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a gym floor with a mirror wall: treadmills, weights, mats", search_queries = ["gym floor mirror wall"], pool_dir = "life/gym_floor_t0" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Treadmill, then the weights, then the mats. The mirror wall shows you everything you're doing, and everyone else doing it too."
 
@@ -35464,6 +35552,10 @@ blocks = [
 ]
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl coming off her last set, sweaty, in a gym", search_queries = ["sweaty girl after workout gym"], pool_dir = "look/gym_after_set_t3" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "The gym's open every day. The guys at the rack are in most afternoons."
 
@@ -35482,6 +35574,10 @@ name = "Let them look"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You do the mats last, in the sports bra and nothing over it, and you stretch your hamstrings with your ass up toward the rack. Your tits sit heavy and damp in the bra, and your nipples are hard through it. The two guys at the rack have given up on their sets."
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl stretching on a gym mat in a sports bra, ass up, guys at the rack watching", search_queries = ["girl stretching sports bra gym"], pool_dir = "look/gym_mats_sportsbra_t3" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -35517,6 +35613,10 @@ name = "The mats"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You take the mat right in front of the bench and stretch out in the tiny shorts, legs wide, then folded over with your ass in the air. The shorts are up your crack, the bottom of your ass bare on both sides, and you leave them there. The three guys at the bench beside you aren't even holding their bars."
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl stretching in tiny shorts in front of a bench, legs wide", search_queries = ["girl stretching tiny shorts gym"], pool_dir = "look/gym_mats_shorts_t3" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -36058,6 +36158,10 @@ type = "paragraph"
 content = "You drop your pen in the aisle and bend straight down for it from the hip. With no bra under it, the low-cut top just falls open. Your tits swing free inside it, bare, nipples and all, and the guy in the row behind sees every inch of them."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl bending for a pen in a lecture aisle, her low-cut top falling open, no bra", search_queries = ["girl bending low cut top falls open"], pool_dir = "sex/class_downblouse_bare_t4" }
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "Oh, Jesus. Hello."
 props = { speaker = "unknown" }
@@ -36115,6 +36219,10 @@ name = "Take your time with the pen"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You stay bent over. You let your bare tits hang in the open top for him while you fish for the pen, your nipples gone hard in the air of the hall. Then you come up and sit down like nothing happened, but your face is hot."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl staying bent over in a lecture aisle, her bare tits hanging in her open top", search_queries = ["girl bent over top open no bra"], pool_dir = "sex/class_downblouse_stay_t4" }
 
 [[canvases.nodes.blocks]]
 type = "thought_bubble"
@@ -36553,6 +36661,10 @@ type = "paragraph"
 content = "You're unscrewing your water bottle when the guy squeezing past knocks your elbow, and half of it goes straight down your front. The sheer blouse goes clear and sticks to your bare tits like wet paper. Your nipples are hard from the cold water, dark through the cloth, and everyone near enough can see all of it."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl in a lecture seat, water spilled down a sheer blouse, see-through on bare tits", search_queries = ["girl water spilled sheer blouse"], pool_dir = "sex/class_water_bare_t4" }
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "Shit. Sorry. Shit. I can see your, I'm sorry."
 props = { speaker = "unknown" }
@@ -36610,6 +36722,10 @@ name = "Let it dry on you"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You don't cover up. You sit in the wet blouse with your bare tits and your hard nipples showing right through it, and you get your things out like nothing happened. The guy who knocked you can't stop looking."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl sitting in a lecture seat in a soaked sheer blouse, nipples showing through", search_queries = ["girl wet see through blouse class"], pool_dir = "sex/class_water_stay_t4" }
 
 [[canvases.nodes.blocks]]
 type = "thought_bubble"
@@ -40117,7 +40233,7 @@ blocks = [
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
-  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "clothing_slot", slot = "underwear", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "There's nothing under the skirt. Anyone behind you in this hall gets your bare ass and your pussy." }, { type = "video", props = { description = "a girl in a short skirt and no panties bending over in a hallway, a man behind her looking straight up it", search_queries = ["upskirt bending over no panties hallway", "girl bends over short skirt man behind looks"], pool_dir = "sex/stairs_skirt_t4" } }] },
+  { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_type", operator = "eq", value = "short_skirt" }, { type = "clothing_slot", slot = "underwear", operator = "unequipped" }] }, blocks = [{ type = "paragraph", content = "There's nothing under the skirt. Anyone behind you in this hall gets your bare ass and your pussy." }, { type = "video", props = { description = "a girl in a short skirt and no panties bending over in a narrow house hallway, seen from behind", search_queries = ["upskirt bending over no panties hallway", "girl bending over short skirt from behind"], pool_dir = "sex/stairs_skirt_t4" } }] },
 ]
 
 [canvases.nodes.exit_block]
@@ -40148,6 +40264,10 @@ effects = [{ targetType = "player", trait = "exhibitionism", op = "add", value =
 [[canvases.nodes]]
 id   = "slower"
 name = "Slower"
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl bent forward in a narrow house hallway catching her bag strap, her skirt riding up from behind", search_queries = ["girl bent over hallway skirt riding up"], pool_dir = "sex/stairs_bend_t4" }
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -40571,6 +40691,10 @@ name = "His hand"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "His hand comes off the paper and settles on your thigh, high up, big and warm. His thumb moves, slow, back and forth, an inch from your crotch."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "an older man on the stool next to a girl at a café counter, his hand settled on her thigh", search_queries = ["old man hand on girl thigh cafe counter"], pool_dir = "sex/gary_hand_thigh_t4" }
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -41031,6 +41155,10 @@ name = "Let it stay"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You let it stay. Her hand slides up the inside of your thigh, slow, until her little finger is an inch from your crotch, and stops there. Your pussy clenches. Your nipples go hard, and she sees them do it."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "under a canteen table, a girl's hand sliding up another girl's inner thigh", search_queries = ["girl hand up friend's thigh under table"], pool_dir = "sex/zoe_canteen_thigh_t4" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -41758,6 +41886,10 @@ type = "paragraph"
 content = "You strip on the cold deck and get in. You're naked in the water up to your tits, the steam going up into the dark. Zoe slides over beside you, so close her thigh is against yours."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "two girls naked in a hot tub at night, steam, the water up to their tits", search_queries = ["girls naked hot tub night"], pool_dir = "sex/zoe_tub_naked_t4" }
+
+[[canvases.nodes.blocks]]
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "zoe_together", operator = "is_true" }] }
 blocks = [
@@ -41950,6 +42082,10 @@ name = "The team's spot"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You open your eyes. Six of them, standing at your feet, looking straight up your thighs. Your skirt is round your hips."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "six college guys standing over a girl lying on the grass, her skirt round her hips", search_queries = ["guys standing over girl on grass skirt"], pool_dir = "sex/quad_team_upskirt_t4" }
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -42275,6 +42411,10 @@ name = "Her hand"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Her hand slides from the outside of your thigh to the inside, slow, and keeps going, and stops high, her fingers pressing in right next to your pussy."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "two girls on the grass, one's head in the other's lap, her hand high between the other's thighs", search_queries = ["girl hand between friend's thighs on grass"], pool_dir = "sex/zoe_quad_thigh_t4" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -42655,6 +42795,10 @@ type = "paragraph"
 content = "You pull her down on top of you. She lands with a laugh and her whole weight on you, her bare thighs either side of yours, her tits squashed soft against yours through her shirt."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl in a sleep shirt lying on top of another girl on a couch, bare thighs, faces close", search_queries = ["girl lying on top of girl couch"], pool_dir = "sex/zoe_couch_ontop_t4" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "She stops laughing. Her nipples are hard against you. Her hips settle, and press down, once, and you feel the heat of her through your clothes."
 
@@ -42833,6 +42977,10 @@ type = "paragraph"
 content = "You watch. She turns round so you get all of it: her tits, her stomach, the line of her panties low on her hips. She stretches with her arms over her head, slow, and her tits lift."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl changing in her bedroom, topless in her panties, stretching, before pulling a sleep shirt on", search_queries = ["girl topless panties stretching bedroom"], pool_dir = "sex/zoe_bedroom_undress_t4" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Then she pulls the sleep shirt on, and her nipples poke through it."
 
@@ -42990,6 +43138,10 @@ name = "Where he can see"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You stay. You lean back against his gatepost with one knee bent, your bare legs right where he can see them, but you don't look at him."
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl with bare legs leaning back on a gatepost, an older man of 54 in a rocking chair watching", search_queries = ["girl leaning on gate older man porch"], pool_dir = "look/vance_gatepost_t3" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -43625,6 +43777,10 @@ name = "The loose bolt"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Party night. You slide the bolt on Zoe's bathroom door, but it wobbles in its screws. You lean over the sink into her ring of bulbs to fix your liner, your ass pushed out behind you."
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl leaning over a bathroom sink at a party to fix her eyeliner, her ass out", search_queries = ["girl leaning over sink eyeliner party"], pool_dir = "look/zoebath_mirror_t3" }
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -45496,6 +45652,10 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot"
 blocks = [
   { type = "paragraph", content = "Ten minutes later Ryan comes out again and sits on the arm of the couch, right by your feet. His eyes go down you slow, your tits, your panties, the inside of your raised knee. His cock is hard in his shorts, and he doesn't hide it." },
 ]
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl on a couch in bra and panties, one knee up, a young man staring at her", search_queries = ["girl underwear couch guy staring"], pool_dir = "look/couch_stay_ryan_t3" }
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -47686,6 +47846,10 @@ blocks = [
 ]
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl lying on her front on a garden lounger, a young man kneeling, rubbing lotion on her back", search_queries = ["guy rubbing lotion on girl's back"], pool_dir = "sex/garden_lotion_t4" }
+
+[[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }, { type = "npc_at_location", location_id = "home_ryan_room", npc_id = "npc_ryan", operator = "is_present" }] }, blocks = [{ type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "time_of_day", start_time = "07:00", end_time = "19:00" }] }, blocks = [{ type = "dialog", content = "Somebody's going to look out a window.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He says, low." }, { type = "dialog", content = "Let them.", props = { speaker = "player" } }, { type = "thought_bubble", content = "Your step-brother's hands are on you in broad daylight. You want them lower.", props = { speaker = "player" } }] }, { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }, blocks = [{ type = "dialog", content = "Somebody's going to look out a window.", props = { speaker = "npc", npcId = "npc_ryan" } }, { type = "paragraph", content = "He says, low." }, { type = "dialog", content = "Let them.", props = { speaker = "player" } }, { type = "thought_bubble", content = "Your step-brother's hands are on you out in the open garden. You want them lower.", props = { speaker = "player" } }] }] },
@@ -47891,6 +48055,10 @@ blocks = [
 ]
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl sitting on a front step in a short skirt with her knees open, seen from the sidewalk", search_queries = ["girl sitting step knees apart short skirt"], pool_dir = "sex/front_step_knees_t4" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "A man coming up the sidewalk with his shopping sees. He slows right down. His eyes go between your knees and stay there, and he walks into the gate post two doors down. He goes past twice."
 
@@ -48054,6 +48222,10 @@ type = "paragraph"
 content = "Ryan's still in the bathroom doorway in his towel, steam rolling out behind him. He hasn't moved. The hall is narrow. You walk past him slowly anyway, so close that your tits brush his bare chest. He sucks in a breath. His hand goes tight on the knot of his towel."
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl brushing past a young man in a towel in a narrow hallway", search_queries = ["girl squeezing past guy in towel"], pool_dir = "look/ryan_towel_pass_t3" }
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "Not free yet, @player.nickname."
 props = { speaker = "npc", npcId = "npc_ryan" }
@@ -48097,6 +48269,10 @@ name = "Let him look"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You stop in the hall and don't move out of his way. Ryan's eyes drop. They go to your tits and stay there, then down your stomach, over your hips. You turn, slow, so he gets your ass too. The front of his towel is tenting. He's hard under it, and he doesn't cover it up."
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl in a narrow hall not moving aside, a young man in a towel staring at her chest", search_queries = ["guy in towel staring at girl hallway"], pool_dir = "look/ryan_towel_stop_t3" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -48563,6 +48739,10 @@ name = "Stop and look in"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Ryan's door is open a hand's width. The music is low and the lamp is on. You stop and look in. He's on his bed with his back against the wall, and he's watching the door. He's watching you. His eyes go down from your face to your tits and back up, slow. His cock is hard in his sweats, and he doesn't hide it. His hand rests on his thigh, an inch from it."
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "through a door gap, a young man on his bed with his back to the wall, looking back", search_queries = ["guy on bed through door gap"], pool_dir = "look/ryan_door_ajar_watch_t3" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -49747,6 +49927,10 @@ name = "Push back into him"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You push back into him. Your ass grinds right back against his cock, slow, once, and his hand grips the edge of the counter beside yours."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl at a kitchen counter pushing her ass back into a young man pressed behind her in boxers", search_queries = ["girl grinding ass against guy kitchen"], pool_dir = "sex/kitchen_ryan_grind_t4" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -52614,6 +52798,10 @@ type = "paragraph"
 content = "You roll onto your back, slow, and stretch your arms up over your head, and give him the whole front of you."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl lying on her bed, rolled onto her back, arms over her head, showing herself to a young man in her room", search_queries = ["girl lying on bed arms up guy watching"], pool_dir = "sex/nap_ryan_show_t4" }
+
+[[canvases.nodes.blocks]]
 type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "top", operator = "unequipped" }, { type = "clothing_slot", slot = "bottom", operator = "unequipped" }, { type = "clothing_slot", slot = "dress", operator = "unequipped" }, { type = "clothing_slot", slot = "bra", operator = "unequipped" }, { type = "clothing_slot", slot = "underwear", operator = "unequipped" }] }
 blocks = [
@@ -55028,6 +55216,10 @@ id   = "seen"
 name = "Somebody's looking"
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl walking down a residential street in a crop top, her belly bare, seen from where a man watches", search_queries = ["girl crop top walking street"], pool_dir = "look/street_crop_t3" }
+
+[[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "Mr. Vance lowers his paper. His eyes go to the bare strip of your belly under the crop top, then up to where it stops, under your tits. He doesn't go back to the paper, but he takes his time saying anything." }, { type = "dialog", content = "Bit chilly for that, Miss.", props = { speaker = "npc", npcId = "npc_vance" } }, { type = "paragraph", content = "He pats the step beside him. Not tonight. You keep walking." }, { type = "paragraph", content = "He'll be on his porch tomorrow evening. He always is." }] },
@@ -55154,6 +55346,10 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 [[canvases.nodes]]
 id   = "seen"
 name = "Somebody's looking"
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl walking down a residential street in a tight bodycon dress, seen from where a man watches", search_queries = ["girl bodycon dress walking street"], pool_dir = "look/street_bodycon_t3" }
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -55284,6 +55480,10 @@ id   = "seen"
 name = "Somebody's looking"
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl walking down a residential street in micro shorts, the bottom of her ass bare", search_queries = ["girl micro shorts walking street"], pool_dir = "look/street_micro_t3" }
+
+[[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "Mr. Vance stands up off his chair. The micro shorts leave the bottom half of your ass bare, both cheeks, and he watches them bounce out of the shorts all the way past his gate." }, { type = "dialog", content = "Mark lets you out in those?", props = { speaker = "npc", npcId = "npc_vance" } }, { type = "paragraph", content = "He'll be on his porch tomorrow evening. He always is." }] },
@@ -55410,6 +55610,10 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 [[canvases.nodes]]
 id   = "seen"
 name = "Somebody's looking"
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl walking down a residential street in a plunge dress cut to her navel, no bra", search_queries = ["girl plunge dress walking street"], pool_dir = "look/street_plunge_t3" }
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -55540,6 +55744,10 @@ id   = "seen"
 name = "Somebody's looking"
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl walking down a residential street in a skirt slit to the hip, her bare leg out with every step", search_queries = ["girl high slit skirt walking"], pool_dir = "look/street_split_t3" }
+
+[[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "Mr. Vance looks up from his paper. The slit in your skirt falls open to your hip with every step, your whole bare leg out to the top of your thigh, and he watches it open and close all the way past his gate." }, { type = "dialog", content = "That's some skirt, Miss.", props = { speaker = "npc", npcId = "npc_vance" } }, { type = "paragraph", content = "He'll be on his porch tomorrow evening. He always is." }] },
@@ -55668,6 +55876,10 @@ id   = "seen"
 name = "Somebody's looking"
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl walking down a residential street in a short sequin dress", search_queries = ["girl sequin dress walking street"], pool_dir = "look/street_sequin_t3" }
+
+[[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
   { type = "group", conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", location_id = "vance_house", npc_id = "npc_vance", operator = "is_present" }] }, blocks = [{ type = "paragraph", content = "Mr. Vance takes his glasses off. The sequin dress throws the porch light back at him off every curve, your tits, your hips, the hem high on your thighs, and he watches you all the way past like you're on a stage." }, { type = "dialog", content = "Going somewhere special, Miss?", props = { speaker = "npc", npcId = "npc_vance" } }, { type = "paragraph", content = "He'll be on his porch tomorrow evening. He always is." }] },
@@ -55794,6 +56006,10 @@ conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject
 [[canvases.nodes]]
 id   = "seen"
 name = "Somebody's looking"
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl walking down a residential street in a backless dress, bare from her neck to the base of her spine", search_queries = ["girl backless dress walking street"], pool_dir = "look/street_backless_t3" }
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -56775,6 +56991,10 @@ type = "paragraph"
 content = "You don't look round. You pull your top up to your chin, nothing under it, and stand there with your bare tits out to the library steps, nipples hard in the air, while three guys forget how to breathe."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl on a campus quad, top pulled up to her chin, bare tits, guys on steps", search_queries = ["girl top pulled up campus flash"], pool_dir = "sex/flash_quad_steps_t4" }
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "Oh my god. Oh my god."
 props = { speaker = "unknown" }
@@ -57044,6 +57264,10 @@ type = "paragraph"
 content = "You don't check anything. You pull your top up over your bare tits in the hallway at Zoe's and hold it there. He stares. Two guys coming out of the kitchen stop dead in the doorway."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl in a party hallway holding her top up over her bare tits, two guys stopping dead", search_queries = ["girl flashing party hallway"], pool_dir = "sex/flash_party_top_t4" }
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "They weren't lying. Holy shit, they weren't lying."
 props = { speaker = "unknown" }
@@ -57131,6 +57355,10 @@ name = "Your tits"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You don't check anything. You pull the front of your dress down under your bare tits in the hallway at Zoe's and hold it there. He stares. Two guys coming out of the kitchen stop dead in the doorway."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl in a party hallway holding her dress down under her bare tits, two guys stopping dead", search_queries = ["girl flashing party dress down"], pool_dir = "sex/flash_party_dress_t4" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -57692,6 +57920,10 @@ type = "paragraph"
 content = "You check the path once. Then you kneel over him on the grass and pull your top up, and your bare tits are right there over his face for three seconds, nipples tight in the open air."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl kneeling on the grass pulling her top up over a guy's face, bare tits", search_queries = ["girl flashing tits on grass"], pool_dir = "sex/flash_quad_top_t4" }
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "Oh my god. Yes. I'm coming. I'm definitely coming."
 props = { speaker = "unknown" }
@@ -57732,6 +57964,10 @@ name = "A flash"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You check the path once. Then you kneel over him on the grass and pull the front of your dress down, and your bare tits are right there over his face for three seconds, nipples tight in the open air."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl kneeling on the grass pulling the front of her dress down over a guy's face, bare tits", search_queries = ["girl pulls dress down flash grass"], pool_dir = "sex/flash_quad_dress_t4" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -58076,6 +58312,10 @@ type = "paragraph"
 content = "You check the door once. Then you stand in front of his bench and pull your top up, and your bare tits are right there in front of his face for three seconds, nipples hard, and in the mirror wall the whole gym sees them too."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl in a gym pulling her top up, flashing her bare tits at a guy on a bench", search_queries = ["girl flashing tits at gym"], pool_dir = "sex/flash_gym_top_t4" }
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "Holy shit. Yes. Wherever it is, yes."
 props = { speaker = "unknown" }
@@ -58116,6 +58356,10 @@ name = "A flash"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You check the door once. Then you stand in front of his bench and pull the front of your dress down, and your bare tits are right there in front of his face for three seconds, nipples hard, and in the mirror wall the whole gym sees them too."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl in a gym pulling the front of her dress down, flashing her bare tits at a guy on a bench", search_queries = ["girl flashing gym dress down"], pool_dir = "sex/flash_gym_dress_t4" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -58490,6 +58734,10 @@ type = "paragraph"
 content = "You check the room once. Then you lean down over his tray and lift your top, and your bare tits are right there for three seconds, between him and his textbook, nipples hard, with the whole canteen behind you."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl leaning over a canteen table, pulling her top up to flash her tits at a guy with a tray", search_queries = ["girl flashing tits cafeteria"], pool_dir = "sex/flash_canteen_top_t4" }
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "Jesus. Yes. Yes, I'll come."
 props = { speaker = "unknown" }
@@ -58530,6 +58778,10 @@ name = "A flash"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You check the room once. Then you lean down over his tray and pull the front of your dress down, and your bare tits are right there for three seconds, between him and his textbook, nipples hard, with the whole canteen behind you."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl leaning over a canteen table, pulling her dress down to flash her tits at a guy with a tray", search_queries = ["girl flashing cafeteria dress"], pool_dir = "sex/flash_canteen_dress_t4" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -59205,6 +59457,10 @@ type = "paragraph"
 content = "You lift your top, and your bare tits are right there in front of him for three seconds between the shelves, nipples hard in the cold library air."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl lifting her top to flash her bare tits at a guy between library shelves", search_queries = ["girl flashing library shelves"], pool_dir = "sex/flash_library_top_t4" }
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "Oh. Oh, wow. Okay. I didn't think you'd actually do it."
 props = { speaker = "npc", npcId = "npc_study_guy" }
@@ -59245,6 +59501,10 @@ name = "In the stacks"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You pull the front of your dress down, and your bare tits are right there in front of him for three seconds between the shelves, nipples hard in the cold library air."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl pulling her dress down to flash her bare tits at a guy between library shelves", search_queries = ["girl flashing library dress down"], pool_dir = "sex/flash_library_dress_t4" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -60525,7 +60785,7 @@ type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 0 }] }
 blocks = [
   { type = "paragraph", content = "He doesn't back up. He stops right in the middle, so you'd have to squeeze past with your tits against his chest." },
-  { type = "image", props = { description = "a girl squeezing past a shirtless young man in a narrow hallway, chests nearly touching", search_queries = ["squeezing past shirtless guy narrow hallway"], pool_dir = "look/hall_squeeze_t3" } },
+  { type = "image", props = { description = "a young man in just his shorts blocking a narrow hallway, a girl about to squeeze past him", search_queries = ["guy in shorts blocking narrow hallway"], pool_dir = "look/hall_squeeze_t3" } },
   { type = "dialog", content = "You first, @player.nickname.", props = { speaker = "npc", npcId = "npc_ryan" } },
 ]
 
@@ -60590,6 +60850,10 @@ name = "Squeeze past him"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You turn side-on and squeeze past him. Your tits drag across his bare chest, slow, and your nipples go hard. He breathes in through his nose and holds it."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl squeezing past a shirtless young man, her chest dragging across his, his shorts tenting", search_queries = ["girl squeezing past shirtless guy hallway"], pool_dir = "sex/hall_squeeze_drag_t4" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -64266,6 +64530,10 @@ id   = "in"
 name = "The showers"
 
 [[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a shared gym shower room, naked men and women under the heads", search_queries = ["coed shower room naked"], pool_dir = "sex/gym_shower_in_t4" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You hang your towel on the hook by the door. Then you're naked, in a room full of people who are naked too."
 
@@ -64415,6 +64683,10 @@ type = "paragraph"
 content = "You turn round and rinse facing the room. Your tits are bare, your nipples hard under the water, and the water runs down your stomach and between your legs where everyone can see."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a naked girl rinsing facing a shared shower room, a man two heads down watching, getting hard", search_queries = ["naked girl shower facing room man watching"], pool_dir = "sex/gym_shower_face_t4" }
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "Jesus. Okay."
 props = { speaker = "unknown" }
@@ -64446,6 +64718,10 @@ name = "Slowly"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You soap yourself slowly for them: your tits in both hands, your nipples between your fingers, down your stomach, between your legs, your hand slow on your pussy like you're alone. You're not alone. Half the room has stopped to watch, and one man has his hand on his cock."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a naked girl in a shared shower soaping her tits and between her legs while people watch", search_queries = ["girl soaping herself shower people watching"], pool_dir = "sex/gym_shower_soap_t5" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -64497,6 +64773,10 @@ props = { speaker = "unknown" }
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "His cock is half hard and he doesn't care that you see it."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a big naked man in his forties walking over in an emptying gym shower, half hard", search_queries = ["naked man shower approaching half hard"], pool_dir = "sex/gym_man_ask_t4" }
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -64561,6 +64841,10 @@ type = "paragraph"
 content = "You turn round and let him. He soaps your back slowly with both hands, down to your ass, and then his hands come round the front and he's soaping your tits from behind, his cock pressed against your ass, his thumbs on your nipples. You lean back into him and let him."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a man behind a girl in a shower soaping her back, then her tits from behind", search_queries = ["man soaping girl's breasts from behind shower"], pool_dir = "sex/gym_man_wash_t4" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "He's in here most mornings. He'll find you under the water again."
 
@@ -64584,6 +64868,10 @@ type = "paragraph"
 content = "You reach back and take his cock in your wet hand. He's thick, and he gets hard fast in your fist. You stroke him under the water with your back against his chest, slow, then fast, until he comes over your fingers and the tiles with a groan he can't keep in."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "in a gym shower, a girl with her back to a big man in his forties, stroking his cock under the water", search_queries = ["shower handjob from behind", "girl stroking man in shower"], pool_dir = "sex/gym_man_hand_t5" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "He's in here most mornings. He'll find you under the water again."
 
@@ -64605,6 +64893,10 @@ name = "All of you"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "He turns you to the wall and lifts one of your legs, and pushes his cock into your cunt from behind, under the water. He fucks you hard against the tiles, his hand on your tit, the slap of it echoing round the empty room, until you come with your cheek on the wet wall. He pulls out and comes on your ass, and the water washes it off."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a man fucking a girl from behind against shower tiles, one of her legs lifted, water running", search_queries = ["shower sex from behind leg up", "fucked against shower wall"], pool_dir = "sex/gym_man_fuck_t5" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -64715,6 +65007,10 @@ type = "paragraph"
 content = "She washes your hair first, her fingers slow on your scalp, her tits pressed to your back. Then her soapy hands go down over your shoulders and onto your tits, and she cups them and rubs your nipples with her thumbs until you're breathing hard."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a woman behind a girl in a shower washing her hair, then cupping her soapy tits", search_queries = ["woman washing girl's hair shower soapy breasts"], pool_dir = "sex/gym_woman_wash_t4" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "She trains most mornings. She'll find you again."
 
@@ -64738,6 +65034,10 @@ type = "paragraph"
 content = "You turn round and slide your hand between her legs. She's wet, and not from the shower. You rub her clit while she holds onto your shoulders, and she comes fast, biting your neck to stay quiet."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "two women in a gym shower, one fingering the other's clit, the other holding her shoulders", search_queries = ["lesbian shower fingering", "women shower touching"], pool_dir = "sex/gym_woman_hand_t5" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "She trains most mornings. She'll find you again."
 
@@ -64759,6 +65059,10 @@ name = "All of you"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "She pushes you back against the tiles, kisses you, and goes down on her knees under the water. She eats your pussy with her tongue on your clit and two fingers inside you, slow and then hard, until you come with your hand in her hair. Then she stands up and makes you do her the same way."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a woman on her knees in a shower eating out a girl pressed against the tiles", search_queries = ["lesbian shower pussy licking kneeling"], pool_dir = "sex/gym_woman_lick_t5" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -64885,6 +65189,10 @@ type = "paragraph"
 content = "She kneels and licks your pussy while he holds your tits from behind, and then he bends you over and fucks your cunt while she kisses you. Everyone in the room is watching. You come on his cock with her tongue in your mouth, and he pulls out and comes on her tits and yours."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a threesome in a shower: a woman kneeling licking a girl while a man holds her tits from behind, then fucks her", search_queries = ["shower threesome mmf", "couple and girl shower sex"], pool_dir = "sex/gym_couple_t5" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "They'll be back, and they'll ask again."
 
@@ -65007,6 +65315,10 @@ name = "Both of them"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "One of them fucks your cunt from behind while you suck the other's cock under the water, the whole room watching. They swap. You come on the second one's cock, and they both come on your tits and stomach, and you stand under the water and let it run off you."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl in a gym shower fucked from behind while sucking a second man's cock, others watching", search_queries = ["shower spitroast", "two men one girl shower"], pool_dir = "sex/gym_two_men_t5" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -65133,6 +65445,10 @@ type = "paragraph"
 content = "One of them kisses you and plays with your tits while the other kneels and eats your pussy, her fingers inside you, and the men along the wall stop pretending. You come with your back on the tiles, and then they make you go down on each of them in turn while the room watches."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "three women in a shower: one kissing her and playing with her tits, one kneeling licking her pussy", search_queries = ["three girls shower lesbian"], pool_dir = "sex/gym_two_women_t5" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "They'll be looking for you next time."
 
@@ -65235,6 +65551,10 @@ type = "paragraph"
 content = "You let them. Hands everywhere, too many to count, soap on your tits and your ass and between your legs, someone kissing your shoulder, someone else's fingers sliding over your pussy, while you stand in the middle of them and let it happen."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl in a crowded gym shower, many soapy hands on her tits, ass and between her legs", search_queries = ["group shower soaping girl many hands"], pool_dir = "sex/gym_group_wash_t5" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Next time there'll be more of them."
 
@@ -65318,6 +65638,10 @@ type = "paragraph"
 content = "You lean back on the top bench and the wet towel comes untucked. It drops open to your waist. Your tits are bare, slick with sweat, your nipples hard in the heat."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a girl in a sauna, her towel fallen open to her waist, topless and sweating, two men on the bench below", search_queries = ["sauna towel falls open girl"], pool_dir = "sex/sauna_towel_slip_t4" }
+
+[[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Both men on the bench below have their eyes open now."
 
@@ -65393,6 +65717,10 @@ name = "Three seconds"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You don't grab it. You sit there with your bare tits out in the heat for one, two, three seconds, sweat running between them, both men staring at your nipples."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a topless girl sitting still in a sauna, two men staring, one covering his lap with a towel", search_queries = ["topless girl sauna men staring"], pool_dir = "sex/sauna_stay_t4" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -65766,6 +66094,10 @@ type = "paragraph"
 content = "His hand is flat on your inner thigh to hold you there. Every rep it's higher. By the fourth his thumb is right over your pussy through the cloth, and he presses."
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "on a gym mat, a trainer kneeling between a girl's legs, her leg on his shoulder, his thumb pressing between her legs through her gym clothes", search_queries = ["trainer leg on shoulder stretch thumb crotch"], pool_dir = "sex/dex_mats_first_t4" }
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "You're tight here. Breathe out."
 props = { speaker = "npc", npcId = "npc_dex" }
@@ -65922,6 +66254,10 @@ name = "Another way"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "The locker room door has no lock. He leans back against the lockers and pushes his shorts down, and his cock comes out thick and heavy, already hard, the head dark and wet. He takes your hand and wraps it round him. You stroke him slow while he watches the door over your shoulder, then fast when he tells you to, his hips pushing into your fist. He comes in under two minutes, hot over your fingers and onto the tiles."
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a fit man of 34 leaning on lockers with his shorts down, a girl taking his hard cock in her hand", search_queries = ["gym locker room handjob first time"], pool_dir = "sex/dex_first_hand_t5" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -66291,7 +66627,7 @@ blocks = [
 
 [[canvases.nodes.blocks]]
 type = "video"
-props = { description = "a muscular trainer fucking a woman in an empty gym locker room", search_queries = ["fucked in gym locker room", "trainer fucks client locker room"], pool_dir = "sex/dex_locker_t5" }
+props = { description = "a muscular trainer of 34 fucking a woman in a gym locker room or its shower room", search_queries = ["fucked in gym locker room", "trainer fucks client locker room"], pool_dir = "sex/dex_locker_t5" }
 
 [[canvases.nodes.blocks]]
 type = "block_pool"
@@ -66536,6 +66872,10 @@ blocks = [
 props = { id = "dex_stretch_lines", memory = "seen" }
 
 [[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a fit trainer of 34 stretching a girl on a gym mat, his hands on her thighs and ass", search_queries = ["trainer stretching girl hands on thighs"], pool_dir = "sex/dex_stretch_t4" }
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "Breathe out, @player.nickname."
 props = { speaker = "npc", npcId = "npc_dex" }
@@ -66560,6 +66900,10 @@ blocks = [
   { type = "paragraph", content = "In the locker room he sits on the bench and you kneel between his feet on the wet tiles. You get his cock out and stroke it with both hands while he watches the door, and he comes on your fingers with a grunt." },
 ]
 props = { id = "dex_another_lines", memory = "seen" }
+
+[[canvases.nodes.blocks]]
+type = "video"
+props = { description = "a locker room: a girl jerking off a fit trainer of 34 with her hands, the man leaning on the lockers or sitting on the bench", search_queries = ["locker room handjob trainer"], pool_dir = "sex/dex_hub_locker_t5" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"

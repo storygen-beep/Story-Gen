@@ -93,6 +93,13 @@ type    = "paragraph"
 content = "You get the bathroom first, before anyone. When you come out in the towel, Ryan is in the hall. His eyes drop down your bare legs and come back up slow, and stop on the knot at your chest. He doesn't move out of your way."
 
 [[canvases.nodes.blocks]]
+type = "image"
+[canvases.nodes.blocks.props]
+file           = "look/opening_skip_hall_t3.jpg"
+description    = "a young woman in a towel stepping out of a bathroom, a young man of 22 in the hall staring at the knot at her chest"
+search_queries = ["girl in towel leaving bathroom guy in hallway staring"]   # opening media (LO, 2026-11-12; DECISIONS 241)
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "First day of college, huh. Look at you."
 [canvases.nodes.blocks.props]
@@ -168,6 +175,13 @@ type    = "paragraph"
 content = "You stand under the water until it runs hot, and you let yourself have one minute. Then the handle rattles."
 
 [[canvases.nodes.blocks]]
+type = "video"
+[canvases.nodes.blocks.props]
+file           = "sex/opening_shower_t4.webm"
+description    = "a young woman alone in a small, old home shower, eyes shut under the hot water"
+search_queries = ["girl showering alone small bathroom eyes closed"]   # opening media (LO, 2026-11-12; DECISIONS 241)
+
+[[canvases.nodes.blocks]]
 type = "dialog"
 content = "Some of us have places to be, @player.nickname."
 [canvases.nodes.blocks.props]
@@ -184,6 +198,13 @@ speaker = "player"
 [[canvases.nodes.blocks]]
 type    = "paragraph"
 content = "Ryan. Your step-brother, through the door, right outside it. You turn the water off and wrap the towel round yourself and tuck it in over your tits. It covers you. Mostly."
+
+[[canvases.nodes.blocks]]
+type = "image"
+[canvases.nodes.blocks.props]
+file           = "look/opening_towel_tuck_t3.jpg"
+description    = "a wet girl in a small bathroom tucking a towel in over her chest, looking at the door"
+search_queries = ["wet girl tucking towel bathroom door"]   # opening media (LO, 2026-11-12; DECISIONS 241)
 
 [canvases.nodes.exit_block]
 type = "choices"
@@ -276,6 +297,13 @@ npcId   = "npc_ryan"
 type    = "paragraph"
 content = "You hold the towel shut with both hands and go, fast, past him, close enough to smell his sleep. Your face is burning. You feel his eyes on the backs of your legs the whole way down the hall, and you don't look round, but you know he's still watching when your door shuts."
 
+[[canvases.nodes.blocks]]
+type = "image"
+[canvases.nodes.blocks.props]
+file           = "look/opening_towel_run_t3.jpg"
+description    = "a girl in a towel hurrying down a narrow house hallway, seen from behind, her legs bare"
+search_queries = ["girl in towel walking down hallway from behind"]   # opening media (LO, 2026-11-12; DECISIONS 241)
+
 # pass 4 B3: the door is narration, so it is a paragraph; the thoughts below keep only what she thinks
 [[canvases.nodes.blocks]]
 type    = "paragraph"
@@ -331,6 +359,13 @@ npcId   = "npc_ryan"
 [[canvases.nodes.blocks]]
 type    = "paragraph"
 content = "He says sorry, but he doesn't step back. His eyes drop to your towel once, and then he makes himself look at the carpet until you're past him, red to the ears. Your face is still hot when you shut your door."
+
+[[canvases.nodes.blocks]]
+type = "image"
+[canvases.nodes.blocks.props]
+file           = "look/opening_towel_knock_t3.jpg"
+description    = "a young man in a narrow hall looking at the carpet, red-faced, as a girl in a towel squeezes past"
+search_queries = ["embarrassed guy girl in towel hallway"]   # opening media (LO, 2026-11-12; DECISIONS 241)
 
 # H6 (pass 3 A63): after the accident, her own voice turns it into a wish, behind the flag the accident sets
 # reader batch 4 (pass 3): her voice at her level (W1b): pushback below Curious, the wish at Curious and up
@@ -393,6 +428,13 @@ npcId   = "npc_ryan"
 [[canvases.nodes.blocks]]
 type    = "paragraph"
 content = "He's the only one in this house who asked. Then his eyes slip down to where the towel is tucked, and he catches himself and drags them back up to your face, and goes red, and grins like he got caught."
+
+[[canvases.nodes.blocks]]
+type = "image"
+[canvases.nodes.blocks.props]
+file           = "look/opening_towel_talk_t3.jpg"
+description    = "a girl in a towel standing in a bathroom doorway, a young man in the hall grinning, caught looking"
+search_queries = ["girl in towel doorway guy caught looking"]   # opening media (LO, 2026-11-12; DECISIONS 241)
 
 # H6 (pass 3 A63): after the accident, her own voice turns it into a wish, behind the flag the accident sets
 # reader batch 4 (pass 3): her voice at her level (W1b): pushback below Curious, the wish at Curious and up

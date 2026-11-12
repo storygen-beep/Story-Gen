@@ -279,7 +279,7 @@ out.append({
         node("act", "The locker room", [
             G(cond(CLIENTS), AFTER_LINES),
             G(cond(CLOSING), CLOSE_LINES),
-            VID("a muscular trainer fucking a woman in an empty gym locker room", "fucked in gym locker room",
+            VID("a muscular trainer of 34 fucking a woman in a gym locker room or its shower room", "fucked in gym locker room",
                 "trainer fucks client locker room", pool_dir="sex/dex_locker_t5"),
             G(cond(CLIENTS), D(DX, "Back out there. My client's waiting. Next time, same fifteen minutes.")),
             G(cond(CLOSING), D(DX, "Next time, stay again.")),
