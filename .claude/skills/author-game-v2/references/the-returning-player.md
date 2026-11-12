@@ -37,7 +37,7 @@ that already exists.
 
 ## §1 — What the engine repairs for you, and what it cannot
 
-`setup.backfillStateDefaults` (`v2.py:20474`) runs from the `:passagestart` handler (`v2.py:20627`)
+`setup.backfillStateDefaults` (`v2.py:20482`) runs from the `:passagestart` handler (`v2.py:20635`)
 on **every passage**, and fill-if-absent merges the current default skeleton
 (`setup.stateDefaults`, `v2.py:4043`) into whatever the save carries. It never overwrites a value
 the player earned, and it is idempotent.

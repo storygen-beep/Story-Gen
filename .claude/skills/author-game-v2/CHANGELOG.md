@@ -5,6 +5,21 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-12 — engine: `trigger.random_cooldown` (Vesper 0.2.6 automatic tests)
+
+Source: LO, 2026-11-12, on the daily test that now comes for her on the random path: "2nd first" (fix the engine
+before shipping). After any random canvas fires, `checkRandomEncounters` rested that room for a hard-coded 3
+arrivals, and in Vesper's live test the daily test came only on the third cell arrival every day after the first.
+- Engine (not this skill's files): new opt-in trigger key `random_cooldown`, random canvases only, parsed and
+  validated in `template_import.py` (`_validate_random_cooldown`), carried by both writers, emitted as
+  `randomCooldown` only where set, read in `checkRandomEncounters`. A game without the key builds the same canvas
+  index (first_term built before and after: the only difference is the engine line itself).
+- `references/engine.md`: a paragraph after `seen_weight` on the room's rest and the key.
+- `cite_check.py --fix` moved 88 cites in `references/` (engine.md, the-clock, the-economy, the-first-hour,
+  the-meters, the-phone, the-release, the-returning-player) that the engine edit had shifted; strict back to 0.
+- Verified: `apps/game_generation/tests/test_random_cooldown.py` (14 tests, two headless; the "fires on every
+  arrival" test fails on the old engine line), cite_check --strict 0, gates.py --selfcheck.
+
 ## 2026-11-12 — media: every screen, not every scene (first_term DECISIONS 243)
 
 Source: LO, 2026-11-12: "Mark in living room also didn't have media for all interaction with him. Why have we missed

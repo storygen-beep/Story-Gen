@@ -40,7 +40,7 @@ it is the player's pace.
 grep -E 'target_hour|advance_to|until_time|time_target' v2.py     0 hits
 ```
 
-`advanceTime(minutes)` (`v2.py:7002`) adds minutes to `time_state` and rolls the day when the hours
+`advanceTime(minutes)` (`v2.py:7004`) adds minutes to `time_state` and rolls the day when the hours
 pass 24. That is the whole time API. There is **no way to send the clock to a named hour**, and no
 way to print the current one into prose either — `_resolve_at_references` (`v2.py:16998`) resolves
 `@player` and `@<npc>` and nothing else, so there is no `@time` token to fall back on.
@@ -54,7 +54,7 @@ The clock is not hidden — `<<timeDisplay>>` sits at the top of `StoryCaption` 
 (`v2.py:18883`, `:18900`), rendering a live reading through `<<timeFormatted>>`
 (`v2.py:19326`) — 12-hour by default, 24-hour if the player ticks it in Settings (`setup.formatTime`
 is the one formatter every engine-printed time goes through) — and it carries **wait buttons**: `>` is 10 minutes, `>>` is an hour, `>>>>>` is a
-day (`v2.py:21369-21391`, `waitTime` at `v2.py:7043`). The player can always see the time and can
+day (`v2.py:21369-21391`, `waitTime` at `v2.py:7045`). The player can always see the time and can
 always move it. That is exactly why the prose must not compete with it.
 
 **What C1 licenses.** The opening's first node, before any exit has fired, may state the starting
@@ -266,7 +266,7 @@ one"*. The house shape is a bare phrase — lowercase, no restatement, no full s
 *"mornings, `<hour>` till `<hour>`"*, *"after `<hour>` at night"*.
 
 `show_when_blocked` and `cooldown_message` are read at `v2.py:15095-15099` and emitted as
-`showWhenBlocked` / `cooldownMessage` (`v2.py:15159-15160`). When `isCanvasValid` returns false —
+`showWhenBlocked` / `cooldownMessage` (`v2.py:15161-15162`). When `isCanvasValid` returns false —
 and it returns false on a **schedule miss** first of all (`v2.py:5919-5925`) — the renderer keeps
 the entry as a dimmed, non-clickable line carrying the author's message instead of dropping it
 (`v2.py:6482`, `:6488`, `:6527-6534`).
@@ -349,7 +349,7 @@ to one?"*); excluding `one` leaves **0**.
 ## Cheat sheet
 
 - **Name a time only where the engine pins it.** It pins exactly one: `[time] starting_hour`.
-- **There is no absolute-time advance** — `advanceTime(minutes)` is the whole API (`v2.py:7002`),
+- **There is no absolute-time advance** — `advanceTime(minutes)` is the whole API (`v2.py:7004`),
   and there is no `@time` token to print the clock either (`v2.py:16998`).
 - **A beat may not say what time it is.** A repeatable canvas fires at any minute of its window.
 - **Turn the reading into a rule.** *"Doors open at nine"* → *"The doors open at nine."*

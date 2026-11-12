@@ -372,6 +372,8 @@ def build_game_graph(
                             "retry_after_days": c.trigger.retry_after_days,
                             # E2 — opt-in seen-weighting of a random canvas
                             "seen_weight": c.trigger.seen_weight,
+                            # opt-in room rest after a random canvas fires (absent unless authored)
+                            "random_cooldown": c.trigger.random_cooldown,
                             "pre_substitution_effects": (
                                 c.trigger.pre_substitution_effects
                                 if c.trigger.pre_substitution_effects

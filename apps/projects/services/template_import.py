@@ -930,6 +930,11 @@ class TemplateTrigger:
     # fired (trigger_history[id].total > 0) its `chance` is multiplied by this, so an
     # event she has already seen comes up less often than one she has not.
     seen_weight: Optional[float] = None
+    # Opt-in, random canvases only (2026-11-12, Vesper's daily test). How many arrivals
+    # the room skips its random roll after THIS canvas fires. Absent = the engine's 3
+    # (checkRandomEncounters). 0 = no rest: a chance-1.0 daily event that must come on
+    # her first arrival of the window sets 0, so the last firing does not eat it.
+    random_cooldown: Optional[int] = None
 
 
 @dataclass
@@ -2640,6 +2645,8 @@ def normalize(data: Dict[str, Any]) -> GameTemplate:
                     retry_after_days=trig_def.get("retry_after_days"),
                     # E2 — kept raw; validate() owns the type and range checks.
                     seen_weight=trig_def.get("seen_weight"),
+                    # Kept raw; _validate_random_cooldown owns the type and range checks.
+                    random_cooldown=trig_def.get("random_cooldown"),
                 )
                 # Doc 69 Item 2 — validate pre_substitution_effects field names
                 # + trait declarations (reuses Phase 1 + Phase 2 validators).
@@ -6855,6 +6862,7 @@ def validate(template: GameTemplate) -> List[str]:
     # `retry_after_days`). Every key is otherwise silently dead, so misuse errors.
     errors.extend(_validate_step_consumption(template))
     errors.extend(_validate_seen_memory(template))
+    errors.extend(_validate_random_cooldown(template))
 
     # EN3 — location opening hours.
     errors.extend(_validate_location_hours(template))
@@ -7471,6 +7479,29 @@ def _validate_phone_effect_set(raw: Any, ctx: str, npc_ids: Set[str]) -> List[st
                 errors.append(f"{ectx}.targetType must be 'player' or 'npc'")
             if eff.get("targetType") == "npc" and eff.get("npcId") not in npc_ids:
                 errors.append(f"{ectx}.npcId {eff.get('npcId')!r} not found in npcs")
+    return errors
+
+
+def _validate_random_cooldown(template: GameTemplate) -> List[str]:
+    """`trigger.random_cooldown` — arrivals a room skips after this random canvas fires.
+
+    Errors, for the EN1 reason: on a canvas that is not on the random path the key
+    would build clean and do nothing, and a negative or non-integer value has no
+    meaning for a count of arrivals.
+    """
+    errors: List[str] = []
+    for ci, c in enumerate(template.canvases or []):
+        trig = c.trigger
+        if not trig or trig.random_cooldown is None:
+            continue
+        where = f"canvases[{ci}] '{c.id}'"
+        v = trig.random_cooldown
+        if trig.trigger_mode != "random":
+            errors.append(f"{where}: trigger.random_cooldown is read only with "
+                          f"trigger_mode = \"random\"")
+        elif not (isinstance(v, int) and not isinstance(v, bool) and v >= 0):
+            errors.append(f"{where}: trigger.random_cooldown must be a whole number >= 0 "
+                          f"(got {v!r})")
     return errors
 
 
@@ -9513,6 +9544,8 @@ def create_project_from_template(
                             "retry_after_days": c.trigger.retry_after_days,
                             # E2 — opt-in seen-weighting of a random canvas
                             "seen_weight": c.trigger.seen_weight,
+                            # opt-in room rest after a random canvas fires (absent unless authored)
+                            "random_cooldown": c.trigger.random_cooldown,
                             # Doc 69 Item 2 — Pattern C pre-substitution effects.
                             # Engine reads from canvas metadata + emits
                             # <<script>>setup.applyAndNotifyTrait(...)<</script>>

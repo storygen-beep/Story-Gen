@@ -8,6 +8,13 @@ how it was verified if relevant (grep / build / live-play).
 
 Convention lives in `story_gen_django/CLAUDE.md` → "Skill ledger".
 
+## 2026-11-12
+- **`references/engine-reference.md` trigger table — new row `random_cooldown`.** A new engine trigger key (random
+  canvases only): the arrivals a room rests after THAT canvas fires, 0 = no rest; absent = the engine's 3. Why: Vesper's
+  0.2.6 daily test is a chance-1.0 random canvas, and the hard-coded 3-arrival rest made it skip mornings (LO, "2nd
+  first"). Verified by `apps/game_generation/tests/test_random_cooldown.py` (14 pass; headless test fails on the old
+  engine line).
+
 ## 2026-10-31
 - **`references/engine-reference.md` choice table — new row `hide_current_value`.** This is a new engine choice field
   that drops "(you have N)" from a greyed number lock, so it reads `Force past him. (Fighting 15+)`. Why: F95 posts

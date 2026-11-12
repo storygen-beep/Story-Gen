@@ -86,10 +86,22 @@ def main():
             pg.evaluate("window.advanceTime(1440)")
             at(h, m)
 
-        def test_day():
-            """The day's test, from the cell's card. Returns the label set offered first."""
-            at(10)
-            play("Canvas_activity_the_tests_Node_base")
+        arrivals_needed = []
+
+        def test_day(where="Location_holding_cell"):
+            """The day's test, automatic since 0279b: she arrives (at the cell, or the Post) between 09:00 and 12:00 and
+            they come for her. Each arrival is an hour on, the way Wait moves the clock. Returns the labels the test's
+            arrival offered, or [] if nobody came by noon. The arrivals it took go in arrivals_needed (the daily
+            test is on the random path with the room's rest turned off, random_cooldown = 0)."""
+            for k in range(3):
+                at(9 + k)
+                play(where)
+                if psg().startswith("Canvas_") and "test" in psg():
+                    break
+            else:
+                arrivals_needed.append(None)
+                return []
+            arrivals_needed.append(k + 1)
             offered = labels()
             if "Go with them." in offered:
                 click("Go with them.")
@@ -196,17 +208,26 @@ def main():
         ok("All locations" not in cell and "Waterfront" not in cell and "The Underground" not in cell, "the cell is sealed: no city on its grid")
 
         # ── part six: the tests, one a day
+        next_day(8)
+        play("Location_holding_cell")
+        ok(psg() == "Location_holding_cell", f"08:00: nobody comes before nine ({psg()})")
         offered = test_day()
-        ok(offered.count("Go with them.") == 1, f"one test on offer on day 1 ({offered})")
+        ok(offered == ["Go with them."], f"day 1: they come for her, one choice, no button to refuse ({offered})")
         ok(tr("tests_done") == 1, "tests_done 1")
-        play("Canvas_activity_the_tests_Node_base")
-        ok(labels() == ["Wait for the night."], f"the same day: no second test ({labels()})")
+        at(11)
+        play("Location_holding_cell")
+        ok(psg() == "Location_holding_cell", f"the same day: no second test ({psg()})")
+        ok(not [l for l in labels() if "test" in l.lower()], f"no tests card left in the cell ({labels()})")
         e0 = tr("energy")
         setv("drain_charge", 0)
         next_day(9)
-        test_day()
+        offered = test_day("Location_holding_floor")
+        ok(psg() == "Location_holding_cell" and offered == ["Go with them."], "day 2: they come for her at the Post, and bring her back to the cell")
         ok(tr("tests_done") == 2 and tr("drain_charge") == 1, "the machine: tests_done 2, the drain charged")
         ok(tr("energy") <= e0, "a test costs energy")
+        next_day(12)
+        play("Location_holding_cell")
+        ok(psg() == "Location_holding_cell", f"day 3 at noon: the window is shut, nobody comes ({psg()})")
 
         # ── 0279a: the cell's cot, the Berth cot's two tiers (half a charge any hour, the full night 19:00-05:00)
         rough_t, night_t = "Lie down a couple of hours. (Half a charge.)", "Sleep the night. (Full charge.)"
@@ -365,6 +386,8 @@ def main():
         ok("&#x27;" not in qt, "no escaped apostrophes")
         b.close()
     ok(not errs, f"js errors {errs[:3]}")
+    print(f"tests: arrivals needed per day {arrivals_needed}")
+    ok(arrivals_needed and all(a == 1 for a in arrivals_needed), "every morning the test came on her first arrival from nine, the daily test included (random_cooldown = 0)")
     print("LIVE YOU, FOR HIM: " + ("OK" if not fails else f"{len(fails)} FAILED"))
     sys.exit(1 if fails else 0)
 
