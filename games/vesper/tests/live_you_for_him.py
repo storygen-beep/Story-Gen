@@ -208,6 +208,19 @@ def main():
         ok(tr("tests_done") == 2 and tr("drain_charge") == 1, "the machine: tests_done 2, the drain charged")
         ok(tr("energy") <= e0, "a test costs energy")
 
+        # ── 0279a: the cell's cot, the Berth cot's two tiers (half a charge any hour, the full night 19:00-05:00)
+        rough_t, night_t = "Lie down a couple of hours. (Half a charge.)", "Sleep the night. (Full charge.)"
+        setv("energy", 30)
+        at(12)
+        play("Canvas_activity_cell_sleep_Node_base")
+        ok(rough_t in labels() and night_t not in labels(), f"the cot at noon: half a charge only ({labels()})")
+        click(rough_t)
+        ok(tr("energy") == 70, f"half a charge: +40 ({tr('energy')})")
+        ok(click("Up.") and pg.evaluate(f"{TS}.current_hour") == 14, "a couple of hours: 120 min on the clock")
+        at(21)
+        play("Canvas_activity_cell_sleep_Node_base")
+        ok(rough_t in labels() and night_t in labels(), f"the cot at night: both tiers ({labels()})")
+
         # ── part four: Mercer's last visit, the guard's news
         at(20, 30)
         play("Location_holding_cell")

@@ -198,6 +198,20 @@ refills = [c for c in gw if any(e.get("trait") == "drain_charge" and e.get("valu
 check(len(refills) == 4, "0267: every test from the machine on refills the drain")
 check("activity_cell_sleep" in canv and "activity_cell_wait" in canv, "0267/0268: sleep and wait in the cell")
 
+# ── 0279a: the cell's cot has the Berth cot's two tiers (LO 2026-11-12)
+cot = canv.get("activity_cell_sleep") or {}
+check(not trig("activity_cell_sleep").get("schedules"), "0279a: the cot card shows at every hour (no card schedule)")
+cot_ch = {c.get("text"): c for c in choices(node(cot, "base"))}
+rough = cot_ch.get("Lie down a couple of hours. (Half a charge.)") or {}
+night = cot_ch.get("Sleep the night. (Full charge.)") or {}
+check(any(e.get("trait") == "energy" and e.get("value") == 40 for e in rough.get("effects", [])), "0279a: the rough tier gives +40")
+check(not rough.get("conditions"), "0279a: the rough tier is open at any hour")
+check(any(e.get("trait") == "energy" and e.get("value") == 100 for e in night.get("effects", [])), "0279a: the night tier gives +100")
+check(any(i.get("type") == "time_of_day" and i.get("start_time") == "19:00" and i.get("end_time") == "05:00"
+          for i in (night.get("conditions") or {}).get("items", [])), "0279a: the night tier is 19:00-05:00 only")
+mins = {n.get("id"): ((n.get("exit_block") or {}).get("config") or {}).get("time_progression_minutes") for n in cot.get("nodes", [])}
+check(mins.get("rough") == 120 and mins.get("night") == 540, f"0279a: rough takes 120 min, night 540 ({mins})")
+
 # ── 0268: part four
 check(sets("cap_mercer_last_visit", "mercer_last_visit") and sets("cap_guard_news", "mercer_dead"), "0268: the last visit and the news set their flags")
 check(has(tgate("cap_guard_news"), type="npc_at_location", npc_id="npc_guard", operator="is_present"), "0268: the news is the guard's line")

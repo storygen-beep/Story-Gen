@@ -10671,11 +10671,18 @@ destinationType          = "specific"
 locationId               = "holding_cell"
 time_progression_minutes = 420
 
-# ── activity_cell_sleep — the cradle's Power down, inside (beat_0267). Energy +100, 540 min, 19:00-05:00. ──
+# ── activity_cell_sleep — the cell's cot, two tiers like the Berth cot (beat_0267, reworked beat_0279a). ──
+# LO 2026-11-12: "Make it similar like the cot in berth." The rework made her day expensive (a tease 20, a step 15,
+# a test 20) and the only refill was Sleep, 19:00-05:00, so a player who spent the morning on the guard had
+# nothing to do but Wait until evening. activity_kess_cot (above) is the shape: a free rough tier any hour
+# (+40, 120 min) and the full night (+100). The cell has no coin and no feed line, so the night tier stays free
+# and keeps its own clock window, now on the choice, not on the card, so the card itself shows at every hour.
+# ⚠️ time_of_day cannot be negated and its end is exclusive (v2.py:4406); 19:00->05:00 wraps past midnight,
+# which is the same window the card used to carry on its schedule.
 [[canvases]]
 id          = "activity_cell_sleep"
-name        = "Sleep"
-description = "beat_0267 (0.2.6). Wren-solo @holding_cell, repeatable, pri 2, 19:00-05:00, gated in_custody. Energy +100 clamp (the cradle's Power down effect), 540 minutes."
+name        = "The cot"
+description = "beat_0267 (0.2.6), reworked to the Berth cot's two tiers at beat_0279a (LO 2026-11-12). Wren-solo @holding_cell, repeatable, pri 2, gated in_custody, any hour. 'Lie down a couple of hours.' +40 Charge, 120 min, any hour (activity_kess_cot's Crash rough). 'Sleep the night.' +100 Charge, 540 min, 19:00-05:00 only (the old card's window, moved onto the choice)."
 [canvases.trigger]
 location      = "holding_cell"
 is_repeatable = true
@@ -10684,16 +10691,52 @@ is_active     = true
 conditions = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
 ] }
-[[canvases.trigger.schedules]]
-weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "19:00"
-end_time   = "05:00"
 
 [[canvases.nodes]]
 id   = "base"
+name = "The cot"
+blocks = [
+  { type = "paragraph", content = "The cot, a thin pad on a white shelf, and the light that never goes off. There is a charge point set in the wall above it, the same company fitting as the cradle in her old room, and it takes her whether she sleeps or not." },
+]
+[canvases.nodes.exit_block]
+type = "choices"
+[[canvases.nodes.exit_block.choices]]
+text       = "Lie down a couple of hours. (Half a charge.)"
+targetType = "node"
+nodeId     = "activity_cell_sleep.rough"
+effects    = [{ targetType = "player", trait = "energy", op = "add", value = 40, clamp = true }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Sleep the night. (Full charge.)"
+targetType = "node"
+nodeId     = "activity_cell_sleep.night"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "time_of_day", start_time = "19:00", end_time = "05:00" },
+] }
+effects    = [{ targetType = "player", trait = "energy", op = "add", value = 100, clamp = true }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Leave it."
+targetType = "location"
+locationId = "holding_cell"
+
+[[canvases.nodes]]
+id   = "rough"
+name = "A couple of hours"
+blocks = [
+  { type = "paragraph", content = "She lies down on her side with her back to the glass and lets the wall point pull at her cells. Two hours of half-sleep with the light on her eyelids. She comes up at half a charge, enough to stand and go out there and do it again." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Up."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "holding_cell"
+time_progression_minutes = 120
+
+[[canvases.nodes]]
+id   = "night"
 name = "Sleep"
 blocks = [
-  { type = "paragraph", content = "She lies down on the cot with the light on, because the light is always on, and her face to the wall, because the glass is always there. Sleep comes anyway. Her body takes what it can get." },
+  { type = "paragraph", content = "She lies down on the cot with the light on, because the light is always on, and her face to the wall, because the glass is always there. Sleep comes anyway. The wall point fills her all the way while she is under, and her body takes what it can get." },
 ]
 [canvases.nodes.exit_block]
 type = "location"
@@ -10702,9 +10745,6 @@ text = "Sleep."
 destinationType          = "specific"
 locationId               = "holding_cell"
 time_progression_minutes = 540
-effects = [
-  { targetType = "player", trait = "energy", op = "add", value = 100, clamp = true },
-]
 
 # ── activity_cell_wait — time passing in the cell (beat_0268). Repeatable, pri 1, any hour, 60 min. ──
 # ⚠️ The cell has no other way to move the clock between the tests and the guard's shift, and every auto-fire inside
