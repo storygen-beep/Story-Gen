@@ -60777,6 +60777,7 @@ type = "group"
 conditions = { version = "1.0", logic = "AND", items = [{ type = "trait", subject = "npc", npc_id = "npc_ryan", trait_key = "want", operator = "lt", value = 40 }] }
 blocks = [
   { type = "paragraph", content = "He backs up against the wall to let you by, his eyes on the ceiling." },
+  { type = "image", props = { description = "a young man in just his shorts backed flat against a narrow hallway wall at night, eyes on the ceiling, letting a girl pass", search_queries = ["guy backed against hallway wall letting girl pass"], pool_dir = "look/hall_backs_up_t3" } },
   { type = "dialog", content = "Sorry. Go. You first.", props = { speaker = "npc", npcId = "npc_ryan" } },
 ]
 
@@ -60824,6 +60825,10 @@ name = "Slip past"
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You slip past. Your shoulder brushes his arm, and he goes red to the ears."
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl slipping past a young man in his shorts in a narrow dark hallway, her shoulder brushing his arm, him red to the ears", search_queries = ["girl slipping past guy narrow hallway night"], pool_dir = "look/hall_slip_past_t3" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
@@ -60893,6 +60898,10 @@ props = { speaker = "npc", npcId = "npc_ryan" }
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "He flattens himself against the wall, grinning, and lets you by without touching."
+
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a young man in his shorts flattened against a hallway wall, grinning, as a girl walks by without touching him", search_queries = ["guy flat against wall grinning girl walks by"], pool_dir = "look/hall_move_ryan_t3" }
 
 [[canvases.nodes.blocks]]
 type = "dialog"
