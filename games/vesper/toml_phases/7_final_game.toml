@@ -817,13 +817,13 @@ hidden = true
 key    = "tests_done"
 hidden = true
 [[traits.labels]]
-key    = "tech_nights"
+key    = "tech_step"
 hidden = true
 [[traits.labels]]
-key    = "sabin_nights"
+key    = "sabin_step"
 hidden = true
 [[traits.labels]]
-key    = "keeper_nights"
+key    = "keeper_step"
 hidden = true
 [[traits.labels]]
 key    = "guard_drains_done"
@@ -1428,9 +1428,11 @@ cain_asked        = 0
 # save from 0.2.5.1 reads 0 for each and nothing in the city reads any of them.
 #   • tests_done 0-4 — the day tests at the Rise (wired up, the machine, pain, the empty body); 4 = the daily test.
 #     +1 once per calendar day from the located test card (days_since_flag test_day), never inside a loop.
-#   • tech_nights 0-5 / sabin_nights 0-5 / keeper_nights 0-7 — one step per visit per calendar
-#     day on each man's located card (the cain_nights rule). The last value opens that man's drain.
-#     (Replaced man by man by the REWORK, design_the_offer.md "REWORK BLUEPRINT": the guard first.)
+#   • tech_step 0-3 / sabin_step 0-4 / keeper_step 0-6 (beat_0279, the REWORK; were tech_nights / sabin_nights /
+#     keeper_nights, unreleased) — each man's climb, the guard's shape. One step a calendar day on his hub, and only
+#     once HIS corruption (filled by her teases; the technician's also by every test, +2) reaches the threshold:
+#     technician 0/40/75, Sabin 0 (sets his corruption to 15) /30/45/65, keeper 0/15/30/50/70/90. The last step is
+#     the first fuck, and the drain is offered from it on.
 #   • guard_step 0-4 (beat_0275, the REWORK) — the guard's climb. One step a calendar day on his Post hub, and only
 #     once HIS corruption (npc_guard's own `corruption`, filled by her teases) reaches the step's threshold:
 #     0 watches · 20 hands · 45 knees · 70 the first fuck. The drain is offered from the first fuck on.
@@ -1447,9 +1449,9 @@ guard_step           = 0
 showers_door         = 0
 yard_door            = 0
 lab_door             = 0
-tech_nights          = 0
-sabin_nights         = 0
-keeper_nights        = 0
+tech_step            = 0
+sabin_step           = 0
+keeper_step          = 0
 guard_drains_done    = 0
 tech_drains_done     = 0
 sabin_custody_drains = 0
@@ -2256,7 +2258,7 @@ id          = "npc_technician"
 name        = "The Technician"
 description = "Young and careful, and he runs her tests every day. He was trained to see her as a machine and he talks to her like one, because if she is only a machine then nothing he does to her counts."
 portrait    = "technician.jpg"
-core_traits = { relation = 0 }
+core_traits = { relation = 0, corruption = 0 }
 flag_keys   = []
 arc_stages  = ["The technician"]
 
@@ -2286,7 +2288,7 @@ id          = "npc_keeper"
 name        = "The Keeper"
 description = "The Chairman's most loyal man, thirty years at his side. He keeps the sealed files, and he wants nothing from anyone except the Chairman's approval."
 portrait    = "keeper.jpg"
-core_traits = { relation = 0 }
+core_traits = { relation = 0, corruption = 0 }
 flag_keys   = []
 arc_stages  = ["The keeper of records"]
 
@@ -10464,6 +10466,7 @@ targetType = "node"
 nodeId     = "activity_the_tests.daily"
 effects    = [
   { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
@@ -10642,6 +10645,7 @@ nodeId     = "activity_the_tests.wired"
 effects    = [
   { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
   { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 2, clamp = true },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
 
@@ -10680,6 +10684,7 @@ nodeId     = "activity_the_tests.wired"
 effects    = [
   { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
   { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 2, clamp = true },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
 
@@ -10719,6 +10724,7 @@ nodeId     = "activity_the_tests.machine"
 effects    = [
   { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
   { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
@@ -10759,6 +10765,7 @@ nodeId     = "activity_the_tests.machine"
 effects    = [
   { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
   { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
@@ -10799,6 +10806,7 @@ nodeId     = "activity_the_tests.pain"
 effects    = [
   { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
   { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
@@ -10839,6 +10847,7 @@ nodeId     = "activity_the_tests.pain"
 effects    = [
   { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
   { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
@@ -10879,6 +10888,7 @@ nodeId     = "activity_the_tests.empty_body"
 effects    = [
   { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
   { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
@@ -10919,6 +10929,7 @@ nodeId     = "activity_the_tests.empty_body"
 effects    = [
   { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
   { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
@@ -10973,6 +10984,7 @@ targetType = "node"
 nodeId     = "activity_the_tests.daily"
 effects    = [
   { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
@@ -37906,6 +37918,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/guard_finish_facial_t5", pool = 4, description = "A big man in a guard uniform cumming on the face and breasts of a naked woman kneeling on the floor of a white cell, holding her by the hair. Must show: her kneeling, him standing over her, cum on her face and tits. Avoid: a bedroom, avoid: her swallowing instead.", search_queries = ["guard cums on her face and tits kneeling gif", "facial cumshot holding her hair kneeling woman gif", "man in uniform facial on naked girl"] } },
     { type = "paragraph", content = "He pulls out of her mouth and comes all over her face and her tits, groaning, holding her by the hair so she can't move away from it." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Look at you. Look at the state of you." },
     { type = "dialog", props = { speaker = "player" }, content = "All of it. On me." },
@@ -37913,6 +37926,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/guard_finish_inside_t5", pool = 4, description = "A big man in a guard uniform fucking a naked woman standing against a white cell wall, one of her legs hooked over his arm, cumming deep inside her. Must show: standing sex against a wall, him finishing inside her. Avoid: pulling out, avoid: a bed.", search_queries = ["standing creampie against wall leg up gif", "man cums inside her pinned to wall gif", "guard fucks girl against cell wall creampie"] } },
     { type = "paragraph", content = "He slams her into the wall one last time and comes deep in her cunt, his whole body shaking, his face in her neck." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Fuck. Oh, fuck. Same time tomorrow." },
     { type = "dialog", props = { speaker = "player" }, content = "Inside me. Every drop." },
@@ -37920,6 +37934,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/guard_finish_anal_t5", pool = 4, description = "A big man in a guard uniform cumming in the ass of a naked woman bent over a narrow cot in a white cell, his fingers digging into her hips. Must show: her bent over the cot, anal, him finishing inside. Avoid: vaginal, avoid: a big soft bed.", search_queries = ["anal creampie bent over cot gripping hips gif", "man cums in her ass bent over bed gif", "guard anal creampie prison cell"] } },
     { type = "paragraph", content = "He comes in her ass with a groan she feels all the way through her, his fingers digging into her hips, pumping into her until he's empty." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "God. God, what are you." },
     { type = "dialog", props = { speaker = "player" }, content = "That's it. Give it to me." },
@@ -38028,6 +38043,7 @@ name = "The door"
 blocks = [
   { type = "cascade", props = { beats = [
     { blocks = [
+        { type = "video", props = { file = "sex/guard_drain_first_t5.webm", description = "A big man in a guard uniform cumming in the ass of a naked woman on all fours on a narrow cot, then collapsing forward onto her back, spent. Must show: anal finish, him falling forward onto her, the cot. Avoid: vaginal, avoid: a big soft bed.", search_queries = ["anal creampie then collapses on her back gif", "man cums in her ass and collapses on top gif", "spent after anal creampie lying on her"] } },
         { type = "paragraph", content = "This time, when he comes in her ass, the drain opens. It takes his cum and then it takes him: his breath, his strength, the will in his legs. He falls forward onto her back, and holds on." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "What... what did you do. I can't. My legs." },
     ] },
@@ -38131,7 +38147,7 @@ locationId = "holding_floor"
 id   = "tease"
 name = "The curtain open"
 blocks = [
-  { type = "video", props = { pool_dir = "sex/guard_tease_shower_t5", pool = 4, description = "A naked woman soaping her breasts under a shower in a white tiled prison shower room with the curtain pulled back, a uniformed guard watching from the doorway or standing in the spray behind her. Must show: her wet naked body, the open shower, the guard. Avoid: a home bathroom.", search_queries = ["naked woman showering curtain open guard watching", "girl soaping tits in prison shower man in uniform", "wet naked woman tiled shower man behind her"] } },
+  { type = "video", props = { pool_dir = "sex/guard_tease_shower_t5", pool = 4, description = "A naked woman soaping her breasts under a shower in a white tiled prison shower room with the curtain pulled back, a uniformed guard watching her from the doorway. Must show: her wet naked body, the open shower, the guard in the doorway. Avoid: him touching her, avoid: a home bathroom.", search_queries = ["naked woman showering curtain open guard watching", "girl soaping tits in prison shower man in uniform", "wet naked woman in tiled shower man watching from door"] } },
   { type = "paragraph", content = "She pulls the curtain all the way back and stands under the water facing him. Soap on her tits, her hands working it over her nipples, then down her belly and between her legs." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Curtain stays shut. That's the rule." },
   { type = "dialog", props = { speaker = "player" }, content = "Then come and shut it." },
@@ -38147,6 +38163,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 3 },
     ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/guard_grope_shower_t5", pool = 4, description = "A uniformed guard soaked through standing in a tiled prison shower behind a naked wet woman, groping her soapy breasts with both hands, pressed up against her ass. Must show: his hands on her wet tits, him clothed behind her, the shower spray. Avoid: a home bathroom, avoid: him naked.", search_queries = ["man groping wet tits from behind in shower", "clothed man behind naked woman in shower grabbing breasts", "guard groping naked girl in prison shower"] } },
     { type = "paragraph", content = "He comes in, uniform and all, and stands in the spray behind her. His hands slide over her wet tits and his cock pushes up against her ass through his soaked trousers." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Look what you made me do. I'm wet through." },
     { type = "dialog", props = { speaker = "player" }, content = "Don't stop. Hands on my tits." },
@@ -38234,6 +38251,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "guard_step", operator = "lt", value = 3 },
     ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/guard_caught_shower_walk_t4", pool = 4, description = "A uniformed guard walking a naked dripping wet woman out of a prison shower room and down a corridor by the arm, his other hand on her bare ass. Must show: her naked and wet, him clothed, his hand on her ass, being led away. Avoid: a home, avoid: sex.", search_queries = ["guard leading naked wet girl by the arm", "naked woman marched down prison corridor", "man escorting naked wet girl hand on ass"] } },
     { type = "paragraph", content = "The water is still running when he comes in. He shuts it off, takes her by the arm and walks her out naked and dripping, his other hand on her bare ass the whole way down the corridor." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Curfew was ten. You know where you're meant to be." },
     { type = "dialog", props = { speaker = "player" }, content = "I was only washing." },
@@ -38242,6 +38260,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "guard_step", operator = "gte", value = 3 },
     ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/guard_caught_shower_tiles_t5", pool = 4, description = "A uniformed guard pinning a naked wet woman face first against white shower tiles, his hand round the back of her neck, his body grinding against her ass. Must show: her pinned to wet tiles, him clothed behind her, his hand on her neck. Avoid: a home bathroom.", search_queries = ["man pins naked girl against shower wall from behind", "guard pins wet naked woman to tiles hand on neck", "pinned against shower wall grinding ass"] } },
     { type = "paragraph", content = "He comes in, shuts the water off and shoves her up against the wet tiles, his body pinning hers, his hand round the back of her neck and his cock hard against her ass." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Midnight. I said midnight. Next time I won't wait." },
     { type = "dialog", props = { speaker = "player" }, content = "You came all this way just to grab my ass?" },
@@ -38384,6 +38403,7 @@ is_active         = true
 id   = "base"
 name = "Caught"
 blocks = [
+  { type = "video", props = { pool_dir = "sex/guard_caught_laundry_t5", pool = 4, description = "A uniformed guard pinning a woman in a short grey shift face down over a washing machine at night, one arm twisted up behind her back, his other hand squeezing her ass. Must show: her bent over the machine, arm behind her back, his hand on her ass. Avoid: a home kitchen.", search_queries = ["man pins girl over washing machine arm behind back", "bent over washing machine ass grabbed", "guard pins woman face down over machine"] } },
   { type = "paragraph", content = "He finds her in the laundry after midnight. He pins her face down over the machine, one hand twisting her arm up behind her back, the other squeezing her ass through the shift." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Midnight means midnight. Next time I won't wait." },
   { type = "dialog", props = { speaker = "player" }, content = "I lost track of the time." },
@@ -38524,6 +38544,7 @@ is_active         = true
 id   = "base"
 name = "Caught"
 blocks = [
+  { type = "video", props = { pool_dir = "sex/guard_caught_yard_t5", pool = 4, description = "A uniformed guard pinning a woman in a thin grey shift against a concrete wall in a dark yard at night, his hand shoved between her legs. Must show: her pinned to the wall, his hand between her legs, night. Avoid: daylight, avoid: a bedroom.", search_queries = ["man pins girl against wall hand between her legs night", "pinned against concrete wall fingered outside", "guard pins woman to wall groping her pussy"] } },
   { type = "paragraph", content = "He comes out into the dark yard and pins her to the wall with his whole weight, his hand shoved between her legs." },
   { type = "dialog", props = { speaker = "npc", npcId = "npc_guard" }, content = "Out here after midnight? Next time I won't wait." },
   { type = "dialog", props = { speaker = "player" }, content = "I wanted to see the sky." },
@@ -38543,14 +38564,19 @@ effects = [
 
 
 
-# ══ 0.2.6 part seven — THE TECHNICIAN (beat_0270). design_the_offer.md "Man 2 — the technician". ══
-# riglib's shape (the guard's). By day he runs her tests (activity_the_tests); by night he works late alone and she
-# walks the floor to him. He wants to prove she is only a machine; the turn is that he starts saying her name.
-# tech_nights: 0 she comes to him · 1 the test table · 2+ the loop · 3 her name · 4 the drain (sets study_door).
+# ══ 0.2.6 part seven — THE TECHNICIAN (beat_0270; REWORKED beat_0279). design_the_offer.md "Man 2 — the technician". ══
+# By day he runs her tests (activity_the_tests); by night he works late alone and she walks the floor to him. He wants
+# to prove she is only a machine; the turn is that he starts saying her name.
+# His climb is a GRIND now, the guard's shape (LO 2026-11-12: "yes corruption meter", "do the same for the other twos").
+# Her teases fill HIS corruption (npc_technician.corruption, +4..+8 a tease, 20 energy and an hour each), and every
+# test adds +2 (3_activities.toml, "Go with them."). A step opens only when his corruption reaches its threshold AND a
+# day has passed since the last step (tech_day): 0 she comes to him · 40 his mouth on the table · 75 the first fuck.
+# tech_step counts the steps (0-3). The drain is offered from the first fuck on (no ladder gate on the finisher); his
+# first drain sets study_door. Teases and steps carry their effects ON THE CHOICE; the bands are one exclusive chain.
 [[canvases]]
 id          = "hub_technician"
 name        = "The Technician"
-description = "beat_0270 (0.2.6). The technician's hub @test_lab, npc + requires_npc npc_technician, repeatable, pri 4, 22:00-23:59 only (his late row; by day he comes for her at the cell or the Post for the tests), gated in_custody + lab_door gte 1 (the guard's first drain). One step a calendar day (tech_day): she comes to him, the test table, then the loop (from tech_nights 2); he says her name at 3; the drain lands at 4 and sets study_door."
+description = "beat_0270 (0.2.6), REWORKED beat_0279. The technician's hub @test_lab, npc + requires_npc npc_technician, repeatable, pri 4, 22:00-23:59 only (his late row), gated in_custody + lab_door gte 1. Steps on his corruption 0/40/75 + one a calendar day (tech_day); teases (cameras +4, wires +6, desk +5, by hand +8; 20 energy each) and every test (+2) fill it. The loop from step 2 on, the drain on the first fuck."
 [canvases.trigger]
 location      = "test_lab"
 requires_npc  = "npc_technician"
@@ -38575,32 +38601,52 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "tech_day", operator = "is_true" },
       { type = "days_since_flag", subject = "player", flag_key = "tech_day", operator = "lt", value = 1 },
+      { type = "trait", subject = "player", trait_key = "tech_step", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "tech_step", operator = "lt", value = 3 },
     ] } }, blocks = [
     { type = "paragraph", content = "He looks up from his screens and away again, fast, colour in his face." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Not tonight. I have to log what happened last night first. I have to work out how to log it." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Not again tonight. I still have to work out how to log the last time." },
   ] },
   { type = "paragraph", content = "The lab at night, half the lights off. The technician alone at his bank of screens, every one of them showing her." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "tech_nights", operator = "gte", value = 0 },
-      { type = "trait", subject = "player", trait_key = "tech_nights", operator = "lt", value = 1 },
+      { type = "trait", subject = "player", trait_key = "tech_step", operator = "gte", value = 0 },
+      { type = "trait", subject = "player", trait_key = "tech_step", operator = "lt", value = 1 },
     ] } }, blocks = [
     { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "You're not supposed to be out of the cell. You're not supposed to be anywhere I don't put you." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "tech_nights", operator = "gte", value = 1 },
-      { type = "trait", subject = "player", trait_key = "tech_nights", operator = "lt", value = 2 },
+      { type = "trait", subject = "player", trait_key = "tech_step", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "tech_step", operator = "lt", value = 2 },
+      { type = "trait", subject = "npc", npc_id = "npc_technician", trait_key = "corruption", operator = "lt", value = 40 },
     ] } }, blocks = [
     { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "You keep coming back. Units don't come back. They go where they're sent." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "tech_nights", operator = "gte", value = 2 },
-      { type = "trait", subject = "player", trait_key = "tech_nights", operator = "lt", value = 3 },
+      { type = "trait", subject = "player", trait_key = "tech_step", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "tech_step", operator = "lt", value = 2 },
+      { type = "trait", subject = "npc", npc_id = "npc_technician", trait_key = "corruption", operator = "gte", value = 40 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He has taken the straps off the test table and put them away in a drawer." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "I couldn't concentrate today. Every reading I took, I was thinking about tonight." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "tech_step", operator = "gte", value = 2 },
+      { type = "trait", subject = "player", trait_key = "tech_step", operator = "lt", value = 3 },
+      { type = "trait", subject = "npc", npc_id = "npc_technician", trait_key = "corruption", operator = "lt", value = 75 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He keeps touching his own mouth while he works, and he won't look at the table." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "That was data. What you let me do. I logged it as data." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "tech_step", operator = "gte", value = 2 },
+      { type = "trait", subject = "player", trait_key = "tech_step", operator = "lt", value = 3 },
+      { type = "trait", subject = "npc", npc_id = "npc_technician", trait_key = "corruption", operator = "gte", value = 75 },
     ] } }, blocks = [
     { type = "paragraph", content = "He has already cleared the test table." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Subject. Come here." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "tech_nights", operator = "gte", value = 3 },
+      { type = "trait", subject = "player", trait_key = "tech_step", operator = "gte", value = 3 },
     ] } }, blocks = [
     { type = "paragraph", content = "He stands up when she comes in. He has stopped pretending he doesn't." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Wren. You're here." },
@@ -38613,13 +38659,12 @@ text       = "Go to him."
 targetType = "node"
 nodeId     = "hub_technician.rung0"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "tech_nights", operator = "gte", value = 0 },
-  { type = "trait", subject = "player", trait_key = "tech_nights", operator = "lt", value = 1 },
+  { type = "trait", subject = "player", trait_key = "tech_step", operator = "lt", value = 1 },
   { type = "flag", subject = "player", flag_key = "tech_day", operator = "is_false" },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "tech_nights", op = "add", value = 1, clamp = true, cap = 4 },
+  { targetType = "player", trait = "tech_step", op = "add", value = 1, clamp = true, cap = 3 },
 ]
 flagEffects = [{ targetType = "player", flag = "tech_day", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -38627,13 +38672,14 @@ text       = "Get up on the table."
 targetType = "node"
 nodeId     = "hub_technician.rung1"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "tech_nights", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "tech_nights", operator = "lt", value = 2 },
+  { type = "trait", subject = "player", trait_key = "tech_step", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "tech_step", operator = "lt", value = 2 },
   { type = "days_since_flag", subject = "player", flag_key = "tech_day", operator = "gte", value = 1 },
+  { type = "trait", subject = "npc", npc_id = "npc_technician", trait_key = "corruption", operator = "gte", value = 40 },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "tech_nights", op = "add", value = 1, clamp = true, cap = 4 },
+  { targetType = "player", trait = "tech_step", op = "add", value = 1, clamp = true, cap = 3 },
 ]
 flagEffects = [{ targetType = "player", flag = "tech_day", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -38641,18 +38687,19 @@ text       = "Get on his table."
 targetType = "node"
 nodeId     = "loop_technician.intro"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "tech_nights", operator = "gte", value = 2 },
-  { type = "trait", subject = "player", trait_key = "tech_nights", operator = "lt", value = 4 },
+  { type = "trait", subject = "player", trait_key = "tech_step", operator = "gte", value = 2 },
+  { type = "trait", subject = "player", trait_key = "tech_step", operator = "lt", value = 3 },
   { type = "days_since_flag", subject = "player", flag_key = "tech_day", operator = "gte", value = 1 },
+  { type = "trait", subject = "npc", npc_id = "npc_technician", trait_key = "corruption", operator = "gte", value = 75 },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "tech_nights", op = "add", value = 1, clamp = true, cap = 4 },
+  { targetType = "player", trait = "tech_step", op = "add", value = 1, clamp = true, cap = 3 },
   { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage", op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin", op = "set", value = 0, clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "tech_day", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -38660,34 +38707,54 @@ text       = "Get on his table."
 targetType = "node"
 nodeId     = "loop_technician.intro"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "tech_nights", operator = "gte", value = 2 },
-  { type = "days_since_flag", subject = "player", flag_key = "tech_day", operator = "lt", value = 1 },
+  { type = "trait", subject = "player", trait_key = "tech_step", operator = "gte", value = 3 },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
   { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage", op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin", op = "set", value = 0, clamp = false },
 ]
 [[canvases.nodes.exit_block.choices]]
-text       = "Get on his table."
+text       = "Undress for his cameras."
 targetType = "node"
-nodeId     = "loop_technician.intro"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "tech_nights", operator = "gte", value = 4 },
-  { type = "days_since_flag", subject = "player", flag_key = "tech_day", operator = "gte", value = 1 },
-] }
-costs      = [{ trait = "energy", value = 15 }]
+nodeId     = "hub_technician.tease_cameras"
+costs      = [{ trait = "energy", value = 20 }]
 effects = [
-  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 4, clamp = true },
 ]
-flagEffects = [{ targetType = "player", flag = "tech_day", op = "set" }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Wire yourself up."
+targetType = "node"
+nodeId     = "hub_technician.tease_wires"
+costs      = [{ trait = "energy", value = 20 }]
+effects = [
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 6, clamp = true },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit on his desk."
+targetType = "node"
+nodeId     = "hub_technician.tease_desk"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tech_step", operator = "gte", value = 1 },
+] }
+costs      = [{ trait = "energy", value = 20 }]
+effects = [
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 5, clamp = true },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Make him take a reading by hand."
+targetType = "node"
+nodeId     = "hub_technician.tease_hand"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "tech_step", operator = "gte", value = 1 },
+] }
+costs      = [{ trait = "energy", value = 20 }]
+effects = [
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 8, clamp = true },
+]
 [[canvases.nodes.exit_block.choices]]
 text       = "Not tonight."
 targetType = "location"
@@ -38730,6 +38797,92 @@ blocks = [
 [canvases.nodes.exit_block]
 type = "location"
 text = "Leave him wanting it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "test_lab"
+time_progression_minutes = 60
+
+
+[[canvases.nodes]]
+id   = "tease_cameras"
+name = "For his cameras"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/tech_tease_cameras_t4", pool = 4, description = "A naked young woman stripping in front of a security camera in a dark lab, her body shown on a bank of monitors, a young man in a lab coat watching the screens with his hand on his crotch. Must show: her naked on the monitors, him watching the screens. Avoid: a bedroom.", search_queries = ["woman stripping for camera man watching monitors", "naked girl on security screens guy watching", "voyeur cctv naked woman lab monitors"] } },
+  { type = "paragraph", content = "She stands in front of the camera over the test table, where he can see her on every screen at once, and pulls the shift off over her head. Her tits, her belly, her cunt, twelve times over on his monitors." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Get out of the frame. That camera records." },
+  { type = "dialog", props = { speaker = "player" }, content = "Then keep the tape. Watch it when I'm back in my cell." },
+  { type = "paragraph", content = "She turns slowly so every camera gets her: her ass, her nipples hard in the cold air, her hand sliding down between her legs. He doesn't look at her. He looks at the screens, with his hand pressed flat on his cock under the desk." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "You're doing this to the data on purpose." },
+  { type = "dialog", props = { speaker = "player" }, content = "I'm doing it to you." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Put the shift back on."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "test_lab"
+time_progression_minutes = 60
+
+
+[[canvases.nodes]]
+id   = "tease_wires"
+name = "Her own readings"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/tech_tease_wires_t5", pool = 4, description = "A naked woman lying on a padded clinical table with sensor pads and wires stuck to her own nipples and pussy, rubbing her clit, monitors beside her spiking. Must show: the wires on her body, her masturbating, the clinical table. Avoid: a bedroom.", search_queries = ["naked woman wired sensors masturbating on table", "girl with electrodes on nipples rubbing clit", "medical table masturbation wires monitors"] } },
+  { type = "paragraph", content = "She gets up on the test table, takes the sensor pads off his tray and sticks them on herself: one on each nipple, two flat on the lips of her cunt, the way he does it to her at every test." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Those are calibrated. Take them off. Take them..." },
+  { type = "paragraph", content = "She lies back and rubs her clit in slow circles with the leads trailing off her body, and every line on his screens starts to climb." },
+  { type = "dialog", props = { speaker = "player" }, content = "Read it out. What does it say?" },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Arousal at sixty. Seventy. God. Eighty-one." },
+  { type = "paragraph", content = "She comes with her heels on the edge of the table and two fingers deep in her cunt, and the readings go off the top of the screen. He is standing now. He doesn't remember standing up." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "I'll have to log that. I don't know what I'd call it." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Peel the pads off."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "test_lab"
+time_progression_minutes = 60
+
+
+[[canvases.nodes]]
+id   = "tease_desk"
+name = "On his desk"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/tech_tease_desk_t5", pool = 4, description = "A naked woman sitting on an office desk with her legs spread wide over the keyboard, a young man in a lab coat in his chair in front of her staring at her pussy. Must show: her spread on the desk, him seated close, the screens. Avoid: a bedroom.", search_queries = ["naked girl spreading legs on desk in front of man", "woman sitting on keyboard legs open guy in chair", "spread pussy on office desk man staring"] } },
+  { type = "paragraph", content = "She sits up on his desk in front of his chair, right on his keyboard, and opens her legs. Her cunt is a foot from his face and wet already." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "That's my work. You're sitting on my work." },
+  { type = "dialog", props = { speaker = "player" }, content = "So log me. Write down what you see." },
+  { type = "paragraph", content = "He types with his eyes on her cunt, one key at a time. She spreads herself open with two fingers so he can see all of it, pink and shining, her clit standing out." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Labia swollen. Clitoris erect. Lubrication... Christ. Lubrication heavy." },
+  { type = "dialog", props = { speaker = "player" }, content = "Good. Now read it back to me." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get down off his desk."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "test_lab"
+time_progression_minutes = 60
+
+
+[[canvases.nodes]]
+id   = "tease_hand"
+name = "By hand"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/tech_tease_fingers_t5", pool = 4, description = "A young man in a lab coat fingering a naked woman lying on her back on a padded clinical table in a dark lab, her thighs clamped round his wrist. Must show: his fingers in her pussy, the lab coat, the clinical table. Avoid: a bedroom.", search_queries = ["man in lab coat fingering woman on exam table", "doctor fingers naked girl on medical table", "fingering on clinical table dark room"] } },
+  { type = "paragraph", content = "She lies back on the test table, takes his wrist and puts his hand between her legs." },
+  { type = "dialog", props = { speaker = "player" }, content = "The pads miss things. Measure me yourself." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "This isn't a procedure. There's no procedure for this." },
+  { type = "paragraph", content = "But he pushes two fingers into her cunt anyway, slow, then deeper, and curls them the way a man does when he has read about it and never done it. She moans, clenches her cunt on his fingers and grinds down on his hand, and his thumb finds her clit." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Internal temperature high. Contractions. You're contracting on me." },
+  { type = "dialog", props = { speaker = "player" }, content = "Don't stop. Faster. Feel me come." },
+  { type = "paragraph", content = "She comes on his fingers with her thighs locked round his wrist, and he keeps them inside her through all of it, staring at her face and not at the screens." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let go of his wrist."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "test_lab"
@@ -38922,7 +39075,7 @@ effects = [
 [[canvases]]
 id          = "loop_technician_finisher"
 name        = "Let him finish"
-description = "Triggerless finisher for loop_technician. Three exclusive bands facial(0)/inside(1)/ass(2). The ass finish drains only with equipped_weapon 1 + drain_charge gte 1 + tech_nights gte 4; the first drain bumps tech_drains_done and sets study_door."
+description = "Triggerless finisher for loop_technician. Three exclusive bands facial(0)/inside(1)/ass(2). The ass finish drains with equipped_weapon 1 + drain_charge gte 1 (no ladder gate: the loop is the gate, REWORK beat_0279); the first drain bumps tech_drains_done and sets study_door."
 
 [[canvases.nodes]]
 id   = "climax"
@@ -38931,6 +39084,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/tech_finish_facial_t5", pool = 4, description = "A young man in an open lab coat cumming on the face and breasts of a naked woman on a padded clinical table in a dark lab, then staring at her. Must show: the lab coat, the clinical table, cum on her face and tits. Avoid: a bedroom, avoid: an older man.", search_queries = ["lab coat guy facial on naked girl on table gif", "cum on her face and tits on exam table gif", "doctor facial cumshot clinic table"] } },
     { type = "paragraph", content = "He pulls out and comes on her face and her tits with a sound like he's been hit, and then just stares at her, at what he did." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "Wren. I... Wren." },
     { type = "dialog", props = { speaker = "player" }, content = "Look at me. Not the screens. Me." },
@@ -38938,6 +39092,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/tech_finish_inside_t5", pool = 4, description = "A young man in an open lab coat cumming inside a naked woman lying on her back on a padded clinical table, his forehead on her chest. Must show: missionary on the table, him finishing inside. Avoid: pulling out, avoid: a bed.", search_queries = ["creampie on exam table missionary gif", "lab coat man cums inside her on table gif", "doctor creampie clinic table"] } },
     { type = "paragraph", content = "He comes inside her cunt with his forehead on her chest, shaking, saying her name into her skin." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "I'm not logging that. I'm not logging any of this." },
     { type = "dialog", props = { speaker = "player" }, content = "Say it while you come." },
@@ -38945,6 +39100,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/tech_finish_anal_t5", pool = 4, description = "A young man in an open lab coat cumming in the ass of a naked woman bent over a padded clinical table in a dark lab, his hands on her hips. Must show: her bent over the table, anal, him finishing inside. Avoid: vaginal, avoid: a bed.", search_queries = ["anal creampie bent over exam table gif", "doctor cums in her ass over table gif", "lab coat anal creampie"] } },
     { type = "paragraph", content = "He comes in her ass hard, his hands on her hips, gasping, and stays there inside her until he goes soft." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "What are you. What are you really." },
     { type = "dialog", props = { speaker = "player" }, content = "I'm right here. All of me." },
@@ -39001,24 +39157,6 @@ effects = [
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
 ]
 [[canvases.nodes.exit_block.choices]]
-text       = "Let it go. He isn't yours yet."
-targetType = "location"
-locationId = "test_lab"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
-  { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 },
-  { type = "trait", subject = "player", trait_key = "drain_charge", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "tech_nights", operator = "lt", value = 4 },
-] }
-time_progression_minutes = 60
-effects = [
-  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
-]
-[[canvases.nodes.exit_block.choices]]
 text       = "Take what he carries."
 targetType = "node"
 nodeId     = "technician_drain_canvas.d0"
@@ -39026,7 +39164,6 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
   { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 },
   { type = "trait", subject = "player", trait_key = "drain_charge", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "tech_nights", operator = "gte", value = 4 },
   { type = "trait", subject = "player", trait_key = "tech_drains_done", operator = "lt", value = 1 },
 ] }
 time_progression_minutes = 60
@@ -39048,7 +39185,6 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
   { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 },
   { type = "trait", subject = "player", trait_key = "drain_charge", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "tech_nights", operator = "gte", value = 4 },
   { type = "trait", subject = "player", trait_key = "tech_drains_done", operator = "gte", value = 1 },
 ] }
 time_progression_minutes = 60
@@ -39073,6 +39209,7 @@ name = "Her records"
 blocks = [
   { type = "cascade", props = { beats = [
     { blocks = [
+        { type = "video", props = { file = "sex/tech_drain_first_t5.webm", description = "A young man in an open lab coat cumming in the ass of a naked woman bent over a padded clinical table, then folding forward onto her back, spent. Must show: anal finish on the table, him collapsing onto her. Avoid: vaginal, avoid: a bed.", search_queries = ["anal creampie bent over exam table collapses on her gif", "man cums in her ass and falls on her back gif", "lab coat anal creampie spent"] } },
         { type = "paragraph", content = "The drain opens on him when he comes in her ass. It takes his cum and his breath and his will, and he folds forward onto her back on the test table." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_technician" }, content = "I can't. I can't move. What did you do to me." },
     ] },
@@ -39119,16 +39256,19 @@ time_progression_minutes = 30
 
 
 
-# ══ 0.2.6 part seven — SABIN (beat_0271). design_the_offer.md "Man 3 — Sabin" (LO 2026-11-10: "A"). ══
-# riglib's shape. He built the line. He knows her: in Whose Hand she was his best reader, under a cover, and slept with
-# him in his lab. The twist: his best reader was the subject all along. What he wants is admiration. NOT the Sabin
-# pitch LO turned down: no deal, no "study" sex. hub_sabin (Whose Hand) is closed while in_custody, so the old hub and
-# this one never stand together.
-# sabin_nights: 0 he knows her · 1 the plans · 2 the praise · 3+ his bench, the loop · 4 the drain (sets records_door).
+# ══ 0.2.6 part seven — SABIN (beat_0271; REWORKED beat_0279). design_the_offer.md "Man 3 — Sabin" (LO 2026-11-10: "A"). ══
+# He built the line. He knows her: in Whose Hand she was his best reader, under a cover, and slept with him in his lab.
+# The twist: his best reader was the subject all along. What he wants is admiration. hub_sabin (Whose Hand) is closed
+# while in_custody, so the old hub and this one never stand together.
+# His climb is a GRIND now, the guard's shape (LO 2026-11-12). Her teases fill HIS corruption (npc_sabin.corruption).
+# ⚠️ That trait already carries Whose Hand points (its middle rungs pay +2 with no cap), so the first step SETS it to
+# 15: he wanted her once already, and every save starts the climb from the same place. Then a step opens only when it
+# reaches its threshold AND a day has passed (sabin_day): 30 the plans · 45 the praise · 65 his bench, the first fuck.
+# sabin_step counts the steps (0-4). The drain is offered from the first fuck on; his first drain sets records_door.
 [[canvases]]
 id          = "hub_sabin_study"
 name        = "Sabin"
-description = "beat_0271 (0.2.6). Sabin's hub @sabin_study, npc + requires_npc npc_sabin (his 18:00-21:00 row when in_custody), repeatable, pri 4, gated in_custody + study_door gte 1. One step a calendar day (sabin_day): he knows her, the plans, the praise, then the loop on his bench (from sabin_nights 3); the drain lands at 4 and sets records_door. A new loop, not loop_sabin_lab: that loop's lines are about his lab in Whose Hand."
+description = "beat_0271 (0.2.6), REWORKED beat_0279. Sabin's hub @sabin_study, npc + requires_npc npc_sabin (his 18:00-21:00 row when in_custody), repeatable, pri 4, gated in_custody + study_door gte 1. The first step sets his corruption to 15 (it carries Whose Hand points); then steps on 30/45/65 + one a calendar day (sabin_day); teases (drawing +5, measure +7, genius +5, kiss +6; 20 energy each) fill it. The loop on his bench from step 3 on, the drain on the first fuck. A new loop, not loop_sabin_lab."
 [canvases.trigger]
 location      = "sabin_study"
 requires_npc  = "npc_sabin"
@@ -39148,34 +39288,70 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "sabin_day", operator = "is_true" },
       { type = "days_since_flag", subject = "player", flag_key = "sabin_day", operator = "lt", value = 1 },
+      { type = "trait", subject = "player", trait_key = "sabin_step", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "sabin_step", operator = "lt", value = 4 },
     ] } }, blocks = [
     { type = "paragraph", content = "He has his back to her, bent over a drawing, and he does not turn round." },
-    { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Tomorrow. I need tonight to think about what you said. Nobody has ever said anything to me about my work that I needed a night to think about." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Tomorrow. I need tonight to think. Nobody has ever said anything to me about my work that I needed a night to think about." },
   ] },
   { type = "paragraph", content = "Sabin's study, the lamp on, the plans of every body on the line stacked to the ceiling. Sabin in the middle of them, talking before she is close enough to be talked to." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "sabin_nights", operator = "gte", value = 0 },
-      { type = "trait", subject = "player", trait_key = "sabin_nights", operator = "lt", value = 1 },
+      { type = "trait", subject = "player", trait_key = "sabin_step", operator = "gte", value = 0 },
+      { type = "trait", subject = "player", trait_key = "sabin_step", operator = "lt", value = 1 },
     ] } }, blocks = [
     { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Who let you in? Nobody comes in here. I lock it so nobody comes in here." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "sabin_nights", operator = "gte", value = 1 },
-      { type = "trait", subject = "player", trait_key = "sabin_nights", operator = "lt", value = 2 },
+      { type = "trait", subject = "player", trait_key = "sabin_step", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "sabin_step", operator = "lt", value = 2 },
+      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "corruption", operator = "lt", value = 30 },
     ] } }, blocks = [
     { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "You. Again. Sit. No, stand, you will want to see this, you are the only person in the building who would." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "sabin_nights", operator = "gte", value = 2 },
-      { type = "trait", subject = "player", trait_key = "sabin_nights", operator = "lt", value = 3 },
+      { type = "trait", subject = "player", trait_key = "sabin_step", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "sabin_step", operator = "lt", value = 2 },
+      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "corruption", operator = "gte", value = 30 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He has a drawing already pulled out for her before she reaches the bench." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "I want to show you everything. All of it. Nobody has ever wanted to see it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sabin_step", operator = "gte", value = 2 },
+      { type = "trait", subject = "player", trait_key = "sabin_step", operator = "lt", value = 3 },
+      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "corruption", operator = "lt", value = 45 },
     ] } }, blocks = [
     { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "I have been thinking all day about what you said. All day. I did not do any work." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "sabin_nights", operator = "gte", value = 3 },
+      { type = "trait", subject = "player", trait_key = "sabin_step", operator = "gte", value = 2 },
+      { type = "trait", subject = "player", trait_key = "sabin_step", operator = "lt", value = 3 },
+      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "corruption", operator = "gte", value = 45 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He stops talking when she comes in. He has never once stopped talking." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Say something about my work. Anything. I want to hear you say it." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sabin_step", operator = "gte", value = 3 },
+      { type = "trait", subject = "player", trait_key = "sabin_step", operator = "lt", value = 4 },
+      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "corruption", operator = "lt", value = 65 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He kissed her and he has not forgotten it. He keeps his hands flat on the bench where she can see them." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Properly, I said. I want to do it properly. I don't know how." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sabin_step", operator = "gte", value = 3 },
+      { type = "trait", subject = "player", trait_key = "sabin_step", operator = "lt", value = 4 },
+      { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "corruption", operator = "gte", value = 65 },
     ] } }, blocks = [
     { type = "paragraph", content = "He clears a space on the bench when he sees her. He does it without stopping talking." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "There you are. There you are." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "sabin_step", operator = "gte", value = 4 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He shuts the door behind her and pushes the plans off the bench himself." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "I can't think about anything else. I've stopped working. Look what you've done to me." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -39185,13 +39361,13 @@ text       = "Let him see you."
 targetType = "node"
 nodeId     = "hub_sabin_study.rung0"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "sabin_nights", operator = "gte", value = 0 },
-  { type = "trait", subject = "player", trait_key = "sabin_nights", operator = "lt", value = 1 },
+  { type = "trait", subject = "player", trait_key = "sabin_step", operator = "lt", value = 1 },
   { type = "flag", subject = "player", flag_key = "sabin_day", operator = "is_false" },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "sabin_nights", op = "add", value = 1, clamp = true, cap = 4 },
+  { targetType = "player", trait = "sabin_step", op = "add", value = 1, clamp = true, cap = 4 },
+  { targetType = "npc", npcId = "npc_sabin", trait = "corruption", op = "set", value = 15, clamp = true },
 ]
 flagEffects = [{ targetType = "player", flag = "sabin_day", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -39199,13 +39375,14 @@ text       = "Ask him about his work."
 targetType = "node"
 nodeId     = "hub_sabin_study.rung1"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "sabin_nights", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "sabin_nights", operator = "lt", value = 2 },
+  { type = "trait", subject = "player", trait_key = "sabin_step", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "sabin_step", operator = "lt", value = 2 },
   { type = "days_since_flag", subject = "player", flag_key = "sabin_day", operator = "gte", value = 1 },
+  { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "corruption", operator = "gte", value = 30 },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "sabin_nights", op = "add", value = 1, clamp = true, cap = 4 },
+  { targetType = "player", trait = "sabin_step", op = "add", value = 1, clamp = true, cap = 4 },
 ]
 flagEffects = [{ targetType = "player", flag = "sabin_day", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -39213,13 +39390,14 @@ text       = "Tell him what it is."
 targetType = "node"
 nodeId     = "hub_sabin_study.rung2"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "sabin_nights", operator = "gte", value = 2 },
-  { type = "trait", subject = "player", trait_key = "sabin_nights", operator = "lt", value = 3 },
+  { type = "trait", subject = "player", trait_key = "sabin_step", operator = "gte", value = 2 },
+  { type = "trait", subject = "player", trait_key = "sabin_step", operator = "lt", value = 3 },
   { type = "days_since_flag", subject = "player", flag_key = "sabin_day", operator = "gte", value = 1 },
+  { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "corruption", operator = "gte", value = 45 },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "sabin_nights", op = "add", value = 1, clamp = true, cap = 4 },
+  { targetType = "player", trait = "sabin_step", op = "add", value = 1, clamp = true, cap = 4 },
 ]
 flagEffects = [{ targetType = "player", flag = "sabin_day", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -39227,18 +39405,19 @@ text       = "Clear his plans."
 targetType = "node"
 nodeId     = "loop_sabin_study.intro"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "sabin_nights", operator = "gte", value = 3 },
-  { type = "trait", subject = "player", trait_key = "sabin_nights", operator = "lt", value = 4 },
+  { type = "trait", subject = "player", trait_key = "sabin_step", operator = "gte", value = 3 },
+  { type = "trait", subject = "player", trait_key = "sabin_step", operator = "lt", value = 4 },
   { type = "days_since_flag", subject = "player", flag_key = "sabin_day", operator = "gte", value = 1 },
+  { type = "trait", subject = "npc", npc_id = "npc_sabin", trait_key = "corruption", operator = "gte", value = 65 },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "sabin_nights", op = "add", value = 1, clamp = true, cap = 4 },
+  { targetType = "player", trait = "sabin_step", op = "add", value = 1, clamp = true, cap = 4 },
   { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage", op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin", op = "set", value = 0, clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "sabin_day", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -39246,34 +39425,60 @@ text       = "Clear his plans."
 targetType = "node"
 nodeId     = "loop_sabin_study.intro"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "sabin_nights", operator = "gte", value = 3 },
-  { type = "days_since_flag", subject = "player", flag_key = "sabin_day", operator = "lt", value = 1 },
+  { type = "trait", subject = "player", trait_key = "sabin_step", operator = "gte", value = 4 },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
   { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage", op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin", op = "set", value = 0, clamp = false },
 ]
 [[canvases.nodes.exit_block.choices]]
-text       = "Clear his plans."
+text       = "Ask him to explain a drawing."
 targetType = "node"
-nodeId     = "loop_sabin_study.intro"
+nodeId     = "hub_sabin_study.tease_drawing"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "sabin_nights", operator = "gte", value = 4 },
-  { type = "days_since_flag", subject = "player", flag_key = "sabin_day", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "sabin_step", operator = "gte", value = 1 },
 ] }
-costs      = [{ trait = "energy", value = 15 }]
+costs      = [{ trait = "energy", value = 20 }]
 effects = [
-  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+  { targetType = "npc", npcId = "npc_sabin", trait = "corruption", op = "add", value = 5, clamp = true },
 ]
-flagEffects = [{ targetType = "player", flag = "sabin_day", op = "set" }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Let him measure you."
+targetType = "node"
+nodeId     = "hub_sabin_study.tease_measure"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "sabin_step", operator = "gte", value = 2 },
+] }
+costs      = [{ trait = "energy", value = 20 }]
+effects = [
+  { targetType = "npc", npcId = "npc_sabin", trait = "corruption", op = "add", value = 7, clamp = true },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Tell him he's a genius."
+targetType = "node"
+nodeId     = "hub_sabin_study.tease_genius"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "sabin_step", operator = "gte", value = 3 },
+] }
+costs      = [{ trait = "energy", value = 20 }]
+effects = [
+  { targetType = "npc", npcId = "npc_sabin", trait = "corruption", op = "add", value = 5, clamp = true },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Kiss him while he talks."
+targetType = "node"
+nodeId     = "hub_sabin_study.tease_kiss"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "sabin_step", operator = "gte", value = 3 },
+] }
+costs      = [{ trait = "energy", value = 20 }]
+effects = [
+  { targetType = "npc", npcId = "npc_sabin", trait = "corruption", op = "add", value = 6, clamp = true },
+]
 [[canvases.nodes.exit_block.choices]]
 text       = "Not tonight."
 targetType = "location"
@@ -39337,6 +39542,92 @@ blocks = [
 [canvases.nodes.exit_block]
 type = "location"
 text = "Leave him wanting it."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "sabin_study"
+time_progression_minutes = 60
+
+
+[[canvases.nodes]]
+id   = "tease_drawing"
+name = "Explain it to me"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/sabin_tease_drawing_t4", pool = 4, description = "A naked woman bending over a desk covered in blueprints under a lamp, her breasts hanging over the drawings, an older man beside her pointing at the plans and staring at her body. Must show: her naked and bent over the plans, him beside her. Avoid: a bedroom.", search_queries = ["naked woman bent over desk blueprints man beside her", "girl leaning over drawings tits hanging older man", "naked woman over office desk man staring"] } },
+  { type = "paragraph", content = "She drops her shift on his chair, pulls a drawing off the stack and leans over the bench to look at it, naked, her tits hanging down over the plan and brushing the paper." },
+  { type = "dialog", props = { speaker = "player" }, content = "This one. What is it? Explain it to me." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "The hand. The hand took me a year. Twenty-seven joints, and every one of them..." },
+  { type = "paragraph", content = "He talks and she leans closer, her ass pushed out toward him, and his voice goes up half a tone every time her nipple drags across the drawing. By the end of it his cock is hard in his trousers and he is talking faster to hide it." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "You're not listening to a word." },
+  { type = "dialog", props = { speaker = "player" }, content = "I'm listening to all of it. Keep going." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let him roll it up."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "sabin_study"
+time_progression_minutes = 60
+
+
+[[canvases.nodes]]
+id   = "tease_measure"
+name = "His tape"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/sabin_tease_measure_t5", pool = 4, description = "An older man measuring a naked woman's breasts, waist and thighs with a tape measure in a lamp-lit study, his hands on her body. Must show: the tape measure on her naked body, his hands on her. Avoid: a tailor shop, avoid: clothes on her.", search_queries = ["man measuring naked woman with tape measure", "tape measure around naked breasts older man", "measuring naked girl body hands on her"] } },
+  { type = "paragraph", content = "She drops the shift and stands on the low platform where he poses his drawings, arms out, like one of his bodies." },
+  { type = "dialog", props = { speaker = "player" }, content = "You've measured eleven thousand of them. Measure the real one." },
+  { type = "paragraph", content = "He gets his tape. He measures round her tits and his knuckles drag over her nipples, then her waist, her hips, the inside of her thigh all the way up to her cunt. He writes every number down, and the pencil shakes in his hand." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Your proportions are wrong. They're all wrong. They're better than mine." },
+  { type = "dialog", props = { speaker = "player" }, content = "Then touch them. Make sure." },
+  { type = "paragraph", content = "He puts both hands flat on her bare ass and holds them there, breathing hard, and calls it checking." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Step down."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "sabin_study"
+time_progression_minutes = 60
+
+
+[[canvases.nodes]]
+id   = "tease_genius"
+name = "Genius"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/sabin_tease_genius_t4", pool = 4, description = "A woman in a thin shift standing close behind an older man sitting at a cluttered desk, her mouth at his ear, her hand rubbing his crotch through his trousers. Must show: her hand on his crotch, him seated, the desk lamp. Avoid: a bedroom.", search_queries = ["woman rubbing man crotch through trousers at desk", "girl whispering in ear hand on his cock pants", "rubbing his bulge from behind office chair"] } },
+  { type = "paragraph", content = "She stands close behind his chair while he works, puts her mouth by his ear and licks it." },
+  { type = "dialog", props = { speaker = "player" }, content = "You're a genius. Do you know that? Nobody in this building is half of what you are." },
+  { type = "paragraph", content = "Her hand slides down his chest to the front of his trousers and finds his cock, already hard, and rubs it slowly through the cloth while she says it again." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Say it again. No. Don't. I can't work when you say it." },
+  { type = "dialog", props = { speaker = "player" }, content = "Genius. You made eleven thousand of them. Nobody else could." },
+  { type = "paragraph", content = "He grips the edge of the bench and nearly comes in his trousers, and she takes her hand off his cock just before he does." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "That was cruel." },
+  { type = "dialog", props = { speaker = "player" }, content = "Tomorrow I'll be kinder." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Leave him at the bench."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "sabin_study"
+time_progression_minutes = 60
+
+
+[[canvases.nodes]]
+id   = "tease_kiss"
+name = "Mid-sentence"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/sabin_tease_lap_t5", pool = 4, description = "A woman in a thin shift pulled up round her waist straddling an older man's lap on a desk chair, kissing him, grinding on him, his hands on her breasts. Must show: her straddling him, the kiss, his hands on her tits. Avoid: a bed.", search_queries = ["woman straddling man on office chair grinding kissing", "girl in his lap grinding hands on her tits", "lap grinding kiss desk chair"] } },
+  { type = "paragraph", content = "He is explaining the spine again. She climbs into his lap in the middle of a sentence, her knees either side of him on the chair, her shift up round her waist and her bare cunt pressed down on his hard cock through his trousers." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "The vertebrae are... the vertebrae..." },
+  { type = "dialog", props = { speaker = "player" }, content = "Keep talking." },
+  { type = "paragraph", content = "She kisses him open-mouthed while he tries, and grinds on him slow, and his hands come up and fill themselves with her tits." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "I've lost my place. I never lose my place." },
+  { type = "dialog", props = { speaker = "player" }, content = "Then find it again tomorrow." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Climb off him."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "sabin_study"
@@ -39527,7 +39818,7 @@ effects = [
 [[canvases]]
 id          = "loop_sabin_study_finisher"
 name        = "Let him finish"
-description = "Triggerless finisher for loop_sabin_study. Three exclusive bands facial(0)/inside(1)/ass(2). The ass finish drains only with equipped_weapon 1 + drain_charge gte 1 + sabin_nights gte 4; the first drain bumps sabin_custody_drains and sets records_door."
+description = "Triggerless finisher for loop_sabin_study. Three exclusive bands facial(0)/inside(1)/ass(2). The ass finish drains with equipped_weapon 1 + drain_charge gte 1 (no ladder gate: the loop is the gate, REWORK beat_0279); the first drain bumps sabin_custody_drains and sets records_door."
 
 [[canvases.nodes]]
 id   = "climax"
@@ -39536,6 +39827,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/sabin_study_finish_facial_t5", pool = 4, description = "An older man cumming on the face of a naked woman kneeling on a floor strewn with paper drawings in a lamp-lit study. Must show: her kneeling, him standing, cum on her face, papers around them. Avoid: a bedroom, avoid: a young man.", search_queries = ["older man facial kneeling girl in study gif", "cum on her face kneeling on office floor gif", "mature man facial cumshot desk lamp"] } },
     { type = "paragraph", content = "He comes on her face with a cry and then grabs a page off the floor to wipe her with, and then stops, because it is a plan, and laughs at himself." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "I have never once in my life used my work to clean anything up." },
     { type = "dialog", props = { speaker = "player" }, content = "Use your plans. Go on." },
@@ -39543,6 +39835,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/sabin_study_finish_inside_t5", pool = 4, description = "An older man cumming inside a naked woman lying back on a cluttered workbench covered in paper plans, holding her thighs open. Must show: her on the bench, him standing between her thighs, finishing inside. Avoid: pulling out, avoid: a bed.", search_queries = ["creampie on desk holding her thighs older man gif", "mature man cums inside her on workbench gif", "creampie on cluttered desk"] } },
     { type = "paragraph", content = "He comes deep in her cunt on his bench, holding her thighs, and stays in her, breathing, his forehead on her chest." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Again tomorrow. Please. I will think of nothing else." },
     { type = "dialog", props = { speaker = "player" }, content = "Again tomorrow. I want it again tomorrow." },
@@ -39550,6 +39843,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/sabin_study_finish_anal_t5", pool = 4, description = "An older man cumming in the ass of a naked woman bent over a desk covered in paper drawings, his whole weight on her back. Must show: her bent over the desk, anal, him finishing inside. Avoid: vaginal, avoid: a bed.", search_queries = ["anal creampie bent over desk older man gif", "mature man cums in her ass over desk gif", "bent over office desk anal creampie"] } },
     { type = "paragraph", content = "He comes in her ass bent over his own plans, groaning, his whole weight on her back." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Remarkable. You are remarkable." },
     { type = "dialog", props = { speaker = "player" }, content = "Say it. Remarkable." },
@@ -39607,24 +39901,6 @@ effects = [
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
 ]
 [[canvases.nodes.exit_block.choices]]
-text       = "Let it go. He isn't yours yet."
-targetType = "location"
-locationId = "sabin_study"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
-  { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 },
-  { type = "trait", subject = "player", trait_key = "drain_charge", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "sabin_nights", operator = "lt", value = 4 },
-] }
-time_progression_minutes = 60
-effects = [
-  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
-]
-[[canvases.nodes.exit_block.choices]]
 text       = "Take what he carries."
 targetType = "node"
 nodeId     = "sabin_study_drain_canvas.d0"
@@ -39632,7 +39908,6 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
   { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 },
   { type = "trait", subject = "player", trait_key = "drain_charge", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "sabin_nights", operator = "gte", value = 4 },
   { type = "trait", subject = "player", trait_key = "sabin_custody_drains", operator = "lt", value = 1 },
 ] }
 time_progression_minutes = 60
@@ -39654,7 +39929,6 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
   { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 },
   { type = "trait", subject = "player", trait_key = "drain_charge", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "sabin_nights", operator = "gte", value = 4 },
   { type = "trait", subject = "player", trait_key = "sabin_custody_drains", operator = "gte", value = 1 },
 ] }
 time_progression_minutes = 60
@@ -39679,6 +39953,7 @@ name = "The project"
 blocks = [
   { type = "cascade", props = { beats = [
     { blocks = [
+        { type = "video", props = { file = "sex/sabin_study_drain_first_t5.webm", description = "An older man cumming in the ass of a naked woman bent over a desk covered in paper drawings, then sliding down her back to the floor, spent. Must show: anal finish over the desk, him sagging off her. Avoid: vaginal, avoid: a bed.", search_queries = ["anal creampie over desk then collapses gif", "older man cums in her ass and slumps gif", "spent after anal creampie office desk"] } },
         { type = "paragraph", content = "The drain opens on him when he comes in her ass. It takes his cum and then the strength out of him, and he slides down her back to the floor among his plans." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_sabin" }, content = "Fascinating. I cannot feel my legs. That is fascinating. What was that?" },
     ] },
@@ -39725,15 +40000,18 @@ time_progression_minutes = 30
 
 
 
-# ══ 0.2.6 part seven — THE KEEPER OF RECORDS (beat_0272). design_the_offer.md "Man 4". ══
-# riglib's shape. Thirty years at the Chairman's side; he wants nothing from her but the Chairman's approval, so his
-# loyalty is the lock and the climb is the slowest of the four. No lock trait: his first drain is what part eight
-# reads (keeper_drains_done gte 1).
-# keeper_nights: 0 will not look · 1 looks · 2 lets her stay · 3 hands · 4 her mouth · 5+ the loop · 7 the drain.
+# ══ 0.2.6 part seven — THE KEEPER OF RECORDS (beat_0272; REWORKED beat_0279). design_the_offer.md "Man 4". ══
+# Thirty years at the Chairman's side; he wants nothing from her but the Chairman's approval, so his loyalty is the
+# lock and the climb is the slowest of the four. No lock trait: his first drain is what part eight reads
+# (keeper_drains_done gte 1).
+# His climb is a GRIND now, the guard's shape (LO 2026-11-12). Her teases fill HIS corruption (npc_keeper.corruption,
+# +3..+8 a tease, 20 energy and an hour each). A step opens only when it reaches its threshold AND a day has passed
+# (keeper_day): 0 he will not look · 15 he looks · 30 he lets her stay · 50 his hands · 70 her mouth · 90 the first
+# fuck. keeper_step counts the steps (0-6). The drain is offered from the first fuck on.
 [[canvases]]
 id          = "hub_keeper"
 name        = "The Keeper"
-description = "beat_0272 (0.2.6). The keeper's hub @records_room, npc + requires_npc npc_keeper (his 21:00-02:00 rows when in_custody), repeatable, pri 4, gated in_custody + records_door gte 1. The slowest climb: one step a calendar day (keeper_day) through five rungs (he will not look, he looks, he lets her stay, his hands, her mouth), then the loop from keeper_nights 5; the drain lands at 7 and opens part eight (cap_the_wifes_file reads keeper_drains_done)."
+description = "beat_0272 (0.2.6), REWORKED beat_0279. The keeper's hub @records_room, npc + requires_npc npc_keeper (his 21:00-02:00 rows when in_custody), repeatable, pri 4, gated in_custody + records_door gte 1. The slowest climb: steps on his corruption 0/15/30/50/70/90 + one a calendar day (keeper_day); teases (read +3, undress +5, lap +7, his hand +8; 20 energy each) fill it. The loop from step 5 on, the drain on the first fuck; it opens part eight (cap_the_wifes_file reads keeper_drains_done)."
 [canvases.trigger]
 location      = "records_room"
 requires_npc  = "npc_keeper"
@@ -39753,41 +40031,66 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "flag", subject = "player", flag_key = "keeper_day", operator = "is_true" },
       { type = "days_since_flag", subject = "player", flag_key = "keeper_day", operator = "lt", value = 1 },
+      { type = "trait", subject = "player", trait_key = "keeper_step", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "keeper_step", operator = "lt", value = 6 },
     ] } }, blocks = [
     { type = "paragraph", content = "He does not look up from the file in front of him." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "Once a night is already more than Mr. Vance would forgive. Go back to your cell." },
   ] },
   { type = "paragraph", content = "The long room of locked cabinets, one lamp, one long table. The keeper at the end of it, old and straight-backed, turning pages." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "gte", value = 0 },
-      { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "lt", value = 1 },
+      { type = "trait", subject = "player", trait_key = "keeper_step", operator = "gte", value = 0 },
+      { type = "trait", subject = "player", trait_key = "keeper_step", operator = "lt", value = 1 },
     ] } }, blocks = [
     { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "You should not be in here. Nobody is in here. That is what the room is for." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "gte", value = 1 },
-      { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "lt", value = 2 },
+      { type = "trait", subject = "player", trait_key = "keeper_step", operator = "gte", value = 1 },
+      { type = "trait", subject = "player", trait_key = "keeper_step", operator = "lt", value = 2 },
     ] } }, blocks = [
     { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "You again. I have told Mr. Vance's people the door sticks. It does not stick." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "gte", value = 2 },
-      { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "lt", value = 3 },
+      { type = "trait", subject = "player", trait_key = "keeper_step", operator = "gte", value = 2 },
+      { type = "trait", subject = "player", trait_key = "keeper_step", operator = "lt", value = 3 },
     ] } }, blocks = [
     { type = "paragraph", content = "He has put a second chair at the long table. He does not mention it." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "gte", value = 3 },
-      { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "lt", value = 5 },
+      { type = "trait", subject = "player", trait_key = "keeper_step", operator = "gte", value = 3 },
+      { type = "trait", subject = "player", trait_key = "keeper_step", operator = "lt", value = 4 },
     ] } }, blocks = [
     { type = "paragraph", content = "He closes the file when she comes in and takes his glasses off." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "Thirty years, and nobody has ever come into this room for me." },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
-      { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "gte", value = 5 },
+      { type = "trait", subject = "player", trait_key = "keeper_step", operator = "gte", value = 4 },
+      { type = "trait", subject = "player", trait_key = "keeper_step", operator = "lt", value = 5 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He watches the door more than the files now. When she sits down he moves his chair closer, and then he moves it back." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "Mr. Vance's man. I keep telling myself. Mr. Vance's man." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "keeper_step", operator = "gte", value = 5 },
+      { type = "trait", subject = "player", trait_key = "keeper_step", operator = "lt", value = 6 },
+      { type = "trait", subject = "npc", npc_id = "npc_keeper", trait_key = "corruption", operator = "lt", value = 90 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He has had her mouth, and he sits very straight to make up for it. His hands are flat on the table and they are not still." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "Once is a mistake. Twice is a decision. I have not made it yet." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "keeper_step", operator = "gte", value = 5 },
+      { type = "trait", subject = "player", trait_key = "keeper_step", operator = "lt", value = 6 },
+      { type = "trait", subject = "npc", npc_id = "npc_keeper", trait_key = "corruption", operator = "gte", value = 90 },
     ] } }, blocks = [
     { type = "paragraph", content = "He stands when she comes in. His hands are not quite steady." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "Lock the door behind you. Please." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
+      { type = "trait", subject = "player", trait_key = "keeper_step", operator = "gte", value = 6 },
+    ] } }, blocks = [
+    { type = "paragraph", content = "He locks the door himself now, before she has sat down." },
+    { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "Mr. Vance can have the files. Not this." },
   ] },
 ]
 [canvases.nodes.exit_block]
@@ -39797,13 +40100,12 @@ text       = "Sit with him."
 targetType = "node"
 nodeId     = "hub_keeper.rung0"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "gte", value = 0 },
-  { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "lt", value = 1 },
+  { type = "trait", subject = "player", trait_key = "keeper_step", operator = "lt", value = 1 },
   { type = "flag", subject = "player", flag_key = "keeper_day", operator = "is_false" },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "keeper_nights", op = "add", value = 1, clamp = true, cap = 7 },
+  { targetType = "player", trait = "keeper_step", op = "add", value = 1, clamp = true, cap = 6 },
 ]
 flagEffects = [{ targetType = "player", flag = "keeper_day", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -39811,13 +40113,14 @@ text       = "Make him look."
 targetType = "node"
 nodeId     = "hub_keeper.rung1"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "lt", value = 2 },
+  { type = "trait", subject = "player", trait_key = "keeper_step", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "keeper_step", operator = "lt", value = 2 },
   { type = "days_since_flag", subject = "player", flag_key = "keeper_day", operator = "gte", value = 1 },
+  { type = "trait", subject = "npc", npc_id = "npc_keeper", trait_key = "corruption", operator = "gte", value = 15 },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "keeper_nights", op = "add", value = 1, clamp = true, cap = 7 },
+  { targetType = "player", trait = "keeper_step", op = "add", value = 1, clamp = true, cap = 6 },
 ]
 flagEffects = [{ targetType = "player", flag = "keeper_day", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -39825,13 +40128,14 @@ text       = "Stay."
 targetType = "node"
 nodeId     = "hub_keeper.rung2"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "gte", value = 2 },
-  { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "lt", value = 3 },
+  { type = "trait", subject = "player", trait_key = "keeper_step", operator = "gte", value = 2 },
+  { type = "trait", subject = "player", trait_key = "keeper_step", operator = "lt", value = 3 },
   { type = "days_since_flag", subject = "player", flag_key = "keeper_day", operator = "gte", value = 1 },
+  { type = "trait", subject = "npc", npc_id = "npc_keeper", trait_key = "corruption", operator = "gte", value = 30 },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "keeper_nights", op = "add", value = 1, clamp = true, cap = 7 },
+  { targetType = "player", trait = "keeper_step", op = "add", value = 1, clamp = true, cap = 6 },
 ]
 flagEffects = [{ targetType = "player", flag = "keeper_day", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -39839,13 +40143,14 @@ text       = "Put his hands on you."
 targetType = "node"
 nodeId     = "hub_keeper.rung3"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "gte", value = 3 },
-  { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "lt", value = 4 },
+  { type = "trait", subject = "player", trait_key = "keeper_step", operator = "gte", value = 3 },
+  { type = "trait", subject = "player", trait_key = "keeper_step", operator = "lt", value = 4 },
   { type = "days_since_flag", subject = "player", flag_key = "keeper_day", operator = "gte", value = 1 },
+  { type = "trait", subject = "npc", npc_id = "npc_keeper", trait_key = "corruption", operator = "gte", value = 50 },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "keeper_nights", op = "add", value = 1, clamp = true, cap = 7 },
+  { targetType = "player", trait = "keeper_step", op = "add", value = 1, clamp = true, cap = 6 },
 ]
 flagEffects = [{ targetType = "player", flag = "keeper_day", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -39853,13 +40158,14 @@ text       = "Get on your knees for him."
 targetType = "node"
 nodeId     = "hub_keeper.rung4"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "gte", value = 4 },
-  { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "lt", value = 5 },
+  { type = "trait", subject = "player", trait_key = "keeper_step", operator = "gte", value = 4 },
+  { type = "trait", subject = "player", trait_key = "keeper_step", operator = "lt", value = 5 },
   { type = "days_since_flag", subject = "player", flag_key = "keeper_day", operator = "gte", value = 1 },
+  { type = "trait", subject = "npc", npc_id = "npc_keeper", trait_key = "corruption", operator = "gte", value = 70 },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "keeper_nights", op = "add", value = 1, clamp = true, cap = 7 },
+  { targetType = "player", trait = "keeper_step", op = "add", value = 1, clamp = true, cap = 6 },
 ]
 flagEffects = [{ targetType = "player", flag = "keeper_day", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -39867,18 +40173,19 @@ text       = "Lock the door."
 targetType = "node"
 nodeId     = "loop_keeper.intro"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "gte", value = 5 },
-  { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "lt", value = 7 },
+  { type = "trait", subject = "player", trait_key = "keeper_step", operator = "gte", value = 5 },
+  { type = "trait", subject = "player", trait_key = "keeper_step", operator = "lt", value = 6 },
   { type = "days_since_flag", subject = "player", flag_key = "keeper_day", operator = "gte", value = 1 },
+  { type = "trait", subject = "npc", npc_id = "npc_keeper", trait_key = "corruption", operator = "gte", value = 90 },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
-  { targetType = "player", trait = "keeper_nights", op = "add", value = 1, clamp = true, cap = 7 },
+  { targetType = "player", trait = "keeper_step", op = "add", value = 1, clamp = true, cap = 6 },
   { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage", op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin", op = "set", value = 0, clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "keeper_day", op = "set" }]
 [[canvases.nodes.exit_block.choices]]
@@ -39886,34 +40193,60 @@ text       = "Lock the door."
 targetType = "node"
 nodeId     = "loop_keeper.intro"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "gte", value = 5 },
-  { type = "days_since_flag", subject = "player", flag_key = "keeper_day", operator = "lt", value = 1 },
+  { type = "trait", subject = "player", trait_key = "keeper_step", operator = "gte", value = 6 },
 ] }
 costs      = [{ trait = "energy", value = 15 }]
 effects = [
   { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_stage", op = "set", value = 0, clamp = false },
   { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "anal_active", op = "set", value = 0, clamp = false },
+  { targetType = "player", trait = "sex_entry_origin", op = "set", value = 0, clamp = false },
 ]
 [[canvases.nodes.exit_block.choices]]
-text       = "Lock the door."
+text       = "Read with him."
 targetType = "node"
-nodeId     = "loop_keeper.intro"
+nodeId     = "hub_keeper.tease_read"
 conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "gte", value = 7 },
-  { type = "days_since_flag", subject = "player", flag_key = "keeper_day", operator = "gte", value = 1 },
+  { type = "trait", subject = "player", trait_key = "keeper_step", operator = "gte", value = 1 },
 ] }
-costs      = [{ trait = "energy", value = 15 }]
+costs      = [{ trait = "energy", value = 20 }]
 effects = [
-  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
+  { targetType = "npc", npcId = "npc_keeper", trait = "corruption", op = "add", value = 3, clamp = true },
 ]
-flagEffects = [{ targetType = "player", flag = "keeper_day", op = "set" }]
+[[canvases.nodes.exit_block.choices]]
+text       = "Undress at the far end of the table."
+targetType = "node"
+nodeId     = "hub_keeper.tease_undress"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "keeper_step", operator = "gte", value = 2 },
+] }
+costs      = [{ trait = "energy", value = 20 }]
+effects = [
+  { targetType = "npc", npcId = "npc_keeper", trait = "corruption", op = "add", value = 5, clamp = true },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Sit in his lap while he reads."
+targetType = "node"
+nodeId     = "hub_keeper.tease_lap"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "keeper_step", operator = "gte", value = 3 },
+] }
+costs      = [{ trait = "energy", value = 20 }]
+effects = [
+  { targetType = "npc", npcId = "npc_keeper", trait = "corruption", op = "add", value = 7, clamp = true },
+]
+[[canvases.nodes.exit_block.choices]]
+text       = "Put his hand on you."
+targetType = "node"
+nodeId     = "hub_keeper.tease_hand"
+conditions = { version = "1.0", logic = "AND", items = [
+  { type = "trait", subject = "player", trait_key = "keeper_step", operator = "gte", value = 4 },
+] }
+costs      = [{ trait = "energy", value = 20 }]
+effects = [
+  { targetType = "npc", npcId = "npc_keeper", trait = "corruption", op = "add", value = 8, clamp = true },
+]
 [[canvases.nodes.exit_block.choices]]
 text       = "Not tonight."
 targetType = "location"
@@ -40010,6 +40343,88 @@ blocks = [
 [canvases.nodes.exit_block]
 type = "location"
 text = "Leave him."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "records_room"
+time_progression_minutes = 60
+
+
+[[canvases.nodes]]
+id   = "tease_read"
+name = "Reading with him"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/keeper_tease_read_t4", pool = 4, description = "A young woman in a loose thin shift sitting at a long lamp-lit archive table reading a file, the shift slipping off both shoulders and baring her breasts, an old man at the far end watching over his file. Must show: her breasts slipping out of the shift, the long table, the old man watching. Avoid: a bedroom.", search_queries = ["woman shirt slipping off showing breasts reading at table", "nip slip reading at desk old man watching", "girl lets dress fall off shoulders at table lamp"] } },
+  { type = "paragraph", content = "She takes a file from his pile and reads it across the long table from him, and lets the shift slip off one shoulder while she does. Then the other. It hangs off her tits by the nipples." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "Your... your garment." },
+  { type = "dialog", props = { speaker = "player" }, content = "It's warm in here. Read your file." },
+  { type = "paragraph", content = "He reads the same page four times. Every time she leans to turn hers, the shift slides lower and her tits come out of it, bare and full in the lamplight, and he watches them over the top of the page." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "Mr. Vance would have you put back in your cell for this." },
+  { type = "dialog", props = { speaker = "player" }, content = "Mr. Vance isn't reading with you. I am." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Pull the shift back up."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "records_room"
+time_progression_minutes = 60
+
+
+[[canvases.nodes]]
+id   = "tease_undress"
+name = "At the far end"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/keeper_tease_undress_t4", pool = 4, description = "A naked young woman sitting on the end of a long polished wooden table in lamp light with her legs open toward an old man sitting at the far end watching her. Must show: her naked on the table edge with her legs open, the old man at the far end. Avoid: a bedroom, avoid: a young man.", search_queries = ["naked girl sitting on table legs open old man watching", "naked woman on edge of long table spread", "old man watching naked girl on desk"] } },
+  { type = "paragraph", content = "She takes the shift off at the far end of the long table, slowly, and sits up on the edge of it naked in the lamplight with her legs open toward him." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "I asked you to put that back on. The first night, I asked you." },
+  { type = "dialog", props = { speaker = "player" }, content = "You didn't mean it." },
+  { type = "paragraph", content = "She leans back on her hands so he can see all of her: her tits, her belly, her cunt open and wet at the end of his table, twenty feet of polished wood between them. He doesn't get up. He takes his glasses off and looks until his hands shake." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "Thirty years of files on this table. Nothing like you." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get down off the table."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "records_room"
+time_progression_minutes = 60
+
+
+[[canvases.nodes]]
+id   = "tease_lap"
+name = "In his lap"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/keeper_tease_lap_t5", pool = 4, description = "A naked young woman sitting in an old man's lap in a chair at a lamp-lit table, grinding on him, his hand high on her bare thigh, a file in his other hand. Must show: her naked in his lap, his hand on her thigh, the old man. Avoid: a young man, avoid: a bed.", search_queries = ["naked girl sitting in old man lap grinding", "naked woman on old man lap hand on thigh", "lap grind old young chair"] } },
+  { type = "paragraph", content = "She sits in his lap while he reads, naked, her bare ass on his thighs and her back against his chest. He holds the file out past her shoulder and reads it aloud." },
+  { type = "paragraph", content = "His voice keeps stopping. She shifts in his lap, slow, and his cock gets hard under her, and she grinds down on it until he can't find the line." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "I have lost my page." },
+  { type = "dialog", props = { speaker = "player" }, content = "Then put your hand here while you look for it." },
+  { type = "paragraph", content = "She puts his old hand on her thigh, high up, an inch from her cunt, and he leaves it there trembling for the rest of the hour." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Get up out of his lap."
+[canvases.nodes.exit_block.config]
+destinationType          = "specific"
+locationId               = "records_room"
+time_progression_minutes = 60
+
+
+[[canvases.nodes]]
+id   = "tease_hand"
+name = "His hand"
+blocks = [
+  { type = "video", props = { pool_dir = "sex/keeper_tease_hand_t5", pool = 4, description = "An old man sitting in a chair fingering a naked young woman standing beside him at a lamp-lit table, her hand over his, her thighs clamped on his hand. Must show: his fingers in her pussy, her standing, the old man. Avoid: a young man, avoid: a bed.", search_queries = ["old man fingering standing naked girl", "old man hand between her legs fingering", "girl rides old man fingers standing"] } },
+  { type = "paragraph", content = "She stands beside his chair, takes his hand and puts it on her tit, then slides it down her belly and between her legs, and holds it there." },
+  { type = "dialog", props = { speaker = "player" }, content = "You've done it once. Your hand remembers." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "It does. God help me, it does." },
+  { type = "paragraph", content = "His fingers find her clit and rub it, clumsy and then better. She opens her legs wider, pushes two of his fingers inside her cunt herself and rides them standing up, her hand over his." },
+  { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "You are so warm. Nothing in this room is warm." },
+  { type = "paragraph", content = "She comes standing with her thighs clamped on his hand and her nails in his shoulder, and he holds her up with his other arm round her hips." },
+]
+[canvases.nodes.exit_block]
+type = "location"
+text = "Let go of him."
 [canvases.nodes.exit_block.config]
 destinationType          = "specific"
 locationId               = "records_room"
@@ -40200,7 +40615,7 @@ effects = [
 [[canvases]]
 id          = "loop_keeper_finisher"
 name        = "Let him finish"
-description = "Triggerless finisher for loop_keeper. Three exclusive bands facial(0)/inside(1)/ass(2). The ass finish drains only with equipped_weapon 1 + drain_charge gte 1 + keeper_nights gte 7; the first drain bumps keeper_drains_done."
+description = "Triggerless finisher for loop_keeper. Three exclusive bands facial(0)/inside(1)/ass(2). The ass finish drains with equipped_weapon 1 + drain_charge gte 1 (no ladder gate: the loop is the gate, REWORK beat_0279); the first drain bumps keeper_drains_done."
 
 [[canvases.nodes]]
 id   = "climax"
@@ -40209,6 +40624,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 0 },
     ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/keeper_finish_facial_t5", pool = 4, description = "An old grey-haired man cumming on the face and breasts of a naked young woman kneeling by a long table in a lamp-lit records room, then sinking into his chair. Must show: the old man, her kneeling, cum on her face and tits. Avoid: a young man, avoid: a bedroom.", search_queries = ["old man facial on young girl kneeling gif", "grandpa cums on her face and tits gif", "old man cumshot on kneeling girl by chair"] } },
     { type = "paragraph", content = "He comes on her face and her tits and then sits down hard in his chair, staring at her, his hand over his mouth." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "What have I become. What have you made me." },
     { type = "dialog", props = { speaker = "player" }, content = "You made yourself into a man again. That's all." },
@@ -40216,6 +40632,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 1 },
     ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/keeper_finish_inside_t5", pool = 4, description = "An old grey-haired man cumming inside a naked young woman lying on a long wooden table in a records room, holding her, his face in her neck. Must show: the old man, her on the table, finishing inside. Avoid: pulling out, avoid: a young man.", search_queries = ["old man creampie young girl on table gif", "old man cums inside her on wooden table gif", "old young creampie missionary table"] } },
     { type = "paragraph", content = "He comes deep in her cunt on the long table, holding her, his face in her neck, and for a long time after he doesn't let go." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "Do not tell him. Whatever happens, do not tell him." },
     { type = "dialog", props = { speaker = "player" }, content = "I won't tell him. Not a word." },
@@ -40223,6 +40640,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [
       { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
     ] } }, blocks = [
+    { type = "video", props = { pool_dir = "sex/keeper_finish_anal_t5", pool = 4, description = "An old grey-haired man cumming in the ass of a naked young woman bent over a long table spread with files, both hands on her hips. Must show: the old man, her bent over the table, anal, finishing inside. Avoid: vaginal, avoid: a young man.", search_queries = ["old man anal creampie young girl bent over table gif", "old man cums in her ass gif", "old young anal over desk"] } },
     { type = "paragraph", content = "He comes in her ass over the files, gasping, both hands on her hips, his whole old body shaking." },
     { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "Thirty years. Thirty years of nothing." },
     { type = "dialog", props = { speaker = "player" }, content = "Thirty years. And now this." },
@@ -40279,24 +40697,6 @@ effects = [
   { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
 ]
 [[canvases.nodes.exit_block.choices]]
-text       = "Let it go. He isn't yours yet."
-targetType = "location"
-locationId = "records_room"
-conditions = { version = "1.0", logic = "AND", items = [
-  { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
-  { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 },
-  { type = "trait", subject = "player", trait_key = "drain_charge", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "lt", value = 7 },
-] }
-time_progression_minutes = 60
-effects = [
-  { targetType = "player", trait = "loop_npc_pleasure", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_stage",         op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_finisher_type", op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "anal_active",       op = "set", value = 0, clamp = false },
-  { targetType = "player", trait = "sex_entry_origin",  op = "set", value = 0, clamp = false },
-]
-[[canvases.nodes.exit_block.choices]]
 text       = "Take what he carries."
 targetType = "node"
 nodeId     = "keeper_drain_canvas.d0"
@@ -40304,7 +40704,6 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
   { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 },
   { type = "trait", subject = "player", trait_key = "drain_charge", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "gte", value = 7 },
   { type = "trait", subject = "player", trait_key = "keeper_drains_done", operator = "lt", value = 1 },
 ] }
 time_progression_minutes = 60
@@ -40325,7 +40724,6 @@ conditions = { version = "1.0", logic = "AND", items = [
   { type = "trait", subject = "player", trait_key = "sex_finisher_type", operator = "eq", value = 2 },
   { type = "trait", subject = "player", trait_key = "equipped_weapon", operator = "eq", value = 1 },
   { type = "trait", subject = "player", trait_key = "drain_charge", operator = "gte", value = 1 },
-  { type = "trait", subject = "player", trait_key = "keeper_nights", operator = "gte", value = 7 },
   { type = "trait", subject = "player", trait_key = "keeper_drains_done", operator = "gte", value = 1 },
 ] }
 time_progression_minutes = 60
@@ -40350,6 +40748,7 @@ name = "The sealed drawer"
 blocks = [
   { type = "cascade", props = { beats = [
     { blocks = [
+        { type = "video", props = { file = "sex/keeper_drain_first_t5.webm", description = "An old grey-haired man in a chair cumming in the ass of a naked young woman riding him reverse in his lap, then sinking back into the chair, spent, still holding her. Must show: the old man in a chair, her in his lap, anal finish. Avoid: vaginal, avoid: a young man.", search_queries = ["old man anal creampie reverse cowgirl chair gif", "old man cums in her ass she sits in his lap gif", "old young anal in armchair"] } },
         { type = "paragraph", content = "The drain opens when he comes in her ass. It takes his cum and his breath, and thirty years of holding on go out of him all at once. He sinks into his chair with her still in his lap." },
         { type = "dialog", props = { speaker = "npc", npcId = "npc_keeper" }, content = "Whatever you want. Whatever you want from this room. It is yours." },
     ] },
@@ -40596,7 +40995,7 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "The guard has given you the nights and the keys. The technician who tests you every day works late in the lab, alone, with every screen showing you."
-tip        = "Go from the Post to the Test Lab late at night, ten to midnight. He is there alone. One step with him a night; on the fourth, finish him in your ass with the drain charged."
+tip        = "Go from the Post to the Test Lab late at night, ten to midnight. He is there alone. Tease him until he wants you, one step a day, and the first time he has you, finish him in your ass with the drain charged."
 when = [
   { trait = "lab_door", subject = "player", op = "gte", value = 1 },
   { trait = "study_door", subject = "player", op = "lt", value = 1 },
@@ -40607,11 +41006,59 @@ when = [
 npc_id     = "npc_technician"
 priority   = 9
 text       = "He tests you every day and tells himself you are a machine, because then nothing he does to you counts."
-tip        = "By day he runs your tests from nine. Late at night, ten to midnight, he is alone in the Test Lab, once the guard has given you the lab. One step a night; on the fourth, the drain."
+tip        = "Late at night, ten to midnight, he is alone in the Test Lab, once the guard has given you the lab. Go to him. That is the first step. After it, one step a day, and only once he wants it badly enough."
 when = [
   { flag = "in_vega", op = "is_false" },
   { flag = "in_custody", op = "is_true" },
+  { trait = "tech_step", subject = "player", op = "lt", value = 1 },
+]
+goals = [
+  { trait = "tech_step", subject = "player", op = "gte", value = 1, label = "Go to him in the lab at night" },
+]
+
+[[quest_cards]]
+npc_id     = "npc_technician"
+priority   = 9
+text       = "You touched him, and he called it a physiological response. Make him want more than his data."
+tip        = "In the lab at night: undress for his cameras, wire yourself up, sit on his desk, make him take a reading by hand. Each costs 20 Charge and an hour. The tests wear on him too. When he wants it enough, get up on the table. One step a day."
+when = [
+  { flag = "in_vega", op = "is_false" },
+  { flag = "in_custody", op = "is_true" },
+  { trait = "tech_step", subject = "player", op = "gte", value = 1 },
+  { trait = "tech_step", subject = "player", op = "lt", value = 2 },
+]
+goals = [
+  { trait = "corruption", subject = "npc", npc_id = "npc_technician", op = "gte", value = 40, label = "Make him put his mouth on you: tease him" },
+]
+
+[[quest_cards]]
+npc_id     = "npc_technician"
+priority   = 9
+text       = "He has had his mouth on you, and he logged it as data. He knows it wasn't."
+tip        = "Keep teasing him in the lab at night, ten to midnight. When he wants you enough, get on his table and finish him in your ass with the drain charged: the drain works the first time."
+when = [
+  { flag = "in_vega", op = "is_false" },
+  { flag = "in_custody", op = "is_true" },
+  { trait = "tech_step", subject = "player", op = "gte", value = 2 },
+  { trait = "tech_step", subject = "player", op = "lt", value = 3 },
+]
+goals = [
+  { trait = "corruption", subject = "npc", npc_id = "npc_technician", op = "gte", value = 75, label = "Make him take you: tease him" },
+]
+
+[[quest_cards]]
+npc_id     = "npc_technician"
+priority   = 9
+text       = "He fucks you on his test table now. One finish in your ass with the drain charged, and he is yours."
+tip        = "In the lab at night, get on his table and finish him in your ass. The drain needs charge, and the tests fill it."
+when = [
+  { flag = "in_vega", op = "is_false" },
+  { flag = "in_custody", op = "is_true" },
+  { trait = "tech_step", subject = "player", op = "gte", value = 3 },
   { trait = "tech_drains_done", subject = "player", op = "lt", value = 1 },
+]
+goals = [
+  { trait = "tech_drains_done", subject = "player", op = "gte", value = 1, label = "Drain him" },
 ]
 [[quest_cards]]
 npc_id     = "npc_technician"
@@ -40630,7 +41077,7 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "One body, built special, out of you, for someone. Sabin runs it. He built the line, and he does not yet know that the best reader he ever hired is the woman he has been studying."
-tip        = "Sabin's Study is off the floor. He is there in the evening, six to nine. One step with him a day; on the fourth, finish him in your ass with the drain charged."
+tip        = "Sabin's Study is off the floor. He is there in the evening, six to nine. Tease him until he wants you, one step a day, and the first time he has you, finish him in your ass with the drain charged."
 when = [
   { trait = "study_door", subject = "player", op = "gte", value = 1 },
   { trait = "records_door", subject = "player", op = "lt", value = 1 },
@@ -40641,12 +41088,75 @@ when = [
 npc_id     = "npc_sabin"
 priority   = 9
 text       = "He built the line, eleven thousand bodies from your record. All he has ever wanted is for somebody to understand what he did."
-tip        = "His study, off the floor, six to nine in the evening. One step a day; on the fourth, the drain."
+tip        = "His study, off the floor, six to nine in the evening. Let him see you. That is the first step. After it, one step a day, and only once he wants it badly enough."
 when = [
   { flag = "in_vega", op = "is_false" },
   { flag = "in_custody", op = "is_true" },
+  { trait = "sabin_step", subject = "player", op = "lt", value = 1 },
   { trait = "study_door", subject = "player", op = "gte", value = 1 },
+]
+goals = [
+  { trait = "sabin_step", subject = "player", op = "gte", value = 1, label = "Let him see you" },
+]
+
+[[quest_cards]]
+npc_id     = "npc_sabin"
+priority   = 9
+text       = "He knows you now: his best reader, and the record he was reading. He wants someone to understand his work."
+tip        = "In his study, six to nine: ask him to explain a drawing. It costs 20 Charge and an hour. When he wants it enough, ask him about his work. One step a day."
+when = [
+  { flag = "in_vega", op = "is_false" },
+  { flag = "in_custody", op = "is_true" },
+  { trait = "sabin_step", subject = "player", op = "gte", value = 1 },
+  { trait = "sabin_step", subject = "player", op = "lt", value = 2 },
+]
+goals = [
+  { trait = "corruption", subject = "npc", npc_id = "npc_sabin", op = "gte", value = 30, label = "Make him want to show you: tease him" },
+]
+
+[[quest_cards]]
+npc_id     = "npc_sabin"
+priority   = 9
+text       = "He showed you everything he made, and talked for two hours. Nobody had ever asked him."
+tip        = "Ask him about a drawing, let him measure you. Each costs 20 Charge and an hour. When he wants it enough, tell him what it is. One step a day."
+when = [
+  { flag = "in_vega", op = "is_false" },
+  { flag = "in_custody", op = "is_true" },
+  { trait = "sabin_step", subject = "player", op = "gte", value = 2 },
+  { trait = "sabin_step", subject = "player", op = "lt", value = 3 },
+]
+goals = [
+  { trait = "corruption", subject = "npc", npc_id = "npc_sabin", op = "gte", value = 45, label = "Make him need to hear it: tease him" },
+]
+
+[[quest_cards]]
+npc_id     = "npc_sabin"
+priority   = 9
+text       = "He kissed you on his bench and stopped himself. He wants to do it properly."
+tip        = "Tell him he's a genius, kiss him while he talks, let him measure you. When he wants it enough, clear his plans and finish him in your ass with the drain charged: the drain works the first time."
+when = [
+  { flag = "in_vega", op = "is_false" },
+  { flag = "in_custody", op = "is_true" },
+  { trait = "sabin_step", subject = "player", op = "gte", value = 3 },
+  { trait = "sabin_step", subject = "player", op = "lt", value = 4 },
+]
+goals = [
+  { trait = "corruption", subject = "npc", npc_id = "npc_sabin", op = "gte", value = 65, label = "Make him take you on his bench: tease him" },
+]
+
+[[quest_cards]]
+npc_id     = "npc_sabin"
+priority   = 9
+text       = "He fucks you on his bench now, over his own plans. One finish in your ass with the drain charged, and he is yours."
+tip        = "In his study, six to nine, clear his plans and finish him in your ass. The drain needs charge, and the tests fill it."
+when = [
+  { flag = "in_vega", op = "is_false" },
+  { flag = "in_custody", op = "is_true" },
+  { trait = "sabin_step", subject = "player", op = "gte", value = 4 },
   { trait = "sabin_custody_drains", subject = "player", op = "lt", value = 1 },
+]
+goals = [
+  { trait = "sabin_custody_drains", subject = "player", op = "gte", value = 1, label = "Drain him" },
 ]
 [[quest_cards]]
 npc_id     = "npc_sabin"
@@ -40665,7 +41175,7 @@ when = [
 [[quest_cards]]
 priority   = 10
 text       = "Project Second Life: one body that feels, built on your pattern, for one client. They tried it once before with an empty body, and the subject died on the table. The file is sealed in the records room, and the Chairman's oldest man keeps it."
-tip        = "The Records Room is off the floor. The keeper sits in it at night, nine to two. He is the slowest of them all: one step a night, and on the seventh, finish him in your ass with the drain charged."
+tip        = "The Records Room is off the floor. The keeper sits in it at night, nine to two. He is the slowest of them all: tease him, one step a day, and the first time he has you, finish him in your ass with the drain charged."
 when = [
   { trait = "records_door", subject = "player", op = "gte", value = 1 },
   { trait = "keeper_drains_done", subject = "player", op = "lt", value = 1 },
@@ -40689,12 +41199,119 @@ when = [
 npc_id     = "npc_keeper"
 priority   = 9
 text       = "Thirty years at the Chairman's side, and he wants nothing but the Chairman's approval. His loyalty is the lock."
-tip        = "The Records Room, nine at night to two in the morning. One step a night; on the seventh, the drain."
+tip        = "The Records Room, nine at night to two in the morning. Sit with him. That is the first step. After it, one step a day, and only once he wants it badly enough."
 when = [
   { flag = "in_vega", op = "is_false" },
   { flag = "in_custody", op = "is_true" },
+  { trait = "keeper_step", subject = "player", op = "lt", value = 1 },
   { trait = "records_door", subject = "player", op = "gte", value = 1 },
   { trait = "keeper_drains_done", subject = "player", op = "lt", value = 1 },
+]
+goals = [
+  { trait = "keeper_step", subject = "player", op = "gte", value = 1, label = "Sit with him" },
+]
+
+[[quest_cards]]
+npc_id     = "npc_keeper"
+priority   = 9
+text       = "He will not look at you, because if he looks he will have to report you. He has not reported you."
+tip        = "In the Records Room, nine at night to two: read with him. It costs 20 Charge and an hour. When he wants it enough, make him look. One step a day."
+when = [
+  { flag = "in_vega", op = "is_false" },
+  { flag = "in_custody", op = "is_true" },
+  { trait = "keeper_step", subject = "player", op = "gte", value = 1 },
+  { trait = "keeper_step", subject = "player", op = "lt", value = 2 },
+]
+goals = [
+  { trait = "corruption", subject = "npc", npc_id = "npc_keeper", op = "gte", value = 15, label = "Make him look: tease him" },
+]
+
+[[quest_cards]]
+npc_id     = "npc_keeper"
+priority   = 9
+text       = "He looked. He told you to go back to your cell, and he said it kindly."
+tip        = "Read with him, undress at the far end of the table. Each costs 20 Charge and an hour. When he wants it enough, stay. One step a day."
+when = [
+  { flag = "in_vega", op = "is_false" },
+  { flag = "in_custody", op = "is_true" },
+  { trait = "keeper_step", subject = "player", op = "gte", value = 2 },
+  { trait = "keeper_step", subject = "player", op = "lt", value = 3 },
+]
+goals = [
+  { trait = "corruption", subject = "npc", npc_id = "npc_keeper", op = "gte", value = 30, label = "Make him let you stay: tease him" },
+]
+
+[[quest_cards]]
+npc_id     = "npc_keeper"
+priority   = 9
+text       = "He put a second chair at his table and read to you. His hand stayed an inch from your thigh."
+tip        = "Read with him, undress for him, sit in his lap while he reads. When he wants it enough, put his hands on you. One step a day."
+when = [
+  { flag = "in_vega", op = "is_false" },
+  { flag = "in_custody", op = "is_true" },
+  { trait = "keeper_step", subject = "player", op = "gte", value = 3 },
+  { trait = "keeper_step", subject = "player", op = "lt", value = 4 },
+]
+goals = [
+  { trait = "corruption", subject = "npc", npc_id = "npc_keeper", op = "gte", value = 50, label = "Make him touch you: tease him" },
+]
+
+[[quest_cards]]
+npc_id     = "npc_keeper"
+priority   = 9
+text       = "His hands have been on you, and he called himself Mr. Vance's man while they were."
+tip        = "Every tease counts now, his hand on you most of all. When he wants it enough, get on your knees for him. One step a day."
+when = [
+  { flag = "in_vega", op = "is_false" },
+  { flag = "in_custody", op = "is_true" },
+  { trait = "keeper_step", subject = "player", op = "gte", value = 4 },
+  { trait = "keeper_step", subject = "player", op = "lt", value = 5 },
+]
+goals = [
+  { trait = "corruption", subject = "npc", npc_id = "npc_keeper", op = "gte", value = 70, label = "Make him want your mouth: tease him" },
+]
+
+[[quest_cards]]
+npc_id     = "npc_keeper"
+priority   = 9
+text       = "He came in your mouth like a much younger man and asked God to forgive him. He has not decided yet."
+tip        = "He is the slowest of them all. Keep at him. When he wants it enough, lock the door and finish him in your ass with the drain charged: the drain works the first time."
+when = [
+  { flag = "in_vega", op = "is_false" },
+  { flag = "in_custody", op = "is_true" },
+  { trait = "keeper_step", subject = "player", op = "gte", value = 5 },
+  { trait = "keeper_step", subject = "player", op = "lt", value = 6 },
+]
+goals = [
+  { trait = "corruption", subject = "npc", npc_id = "npc_keeper", op = "gte", value = 90, label = "Make him lock the door: tease him" },
+]
+
+[[quest_cards]]
+npc_id     = "npc_keeper"
+priority   = 9
+text       = "He locks the door for you now. One finish in your ass with the drain charged, and he is yours."
+tip        = "In the Records Room, nine to two, lock the door and finish him in your ass. The drain needs charge, and the tests fill it."
+when = [
+  { flag = "in_vega", op = "is_false" },
+  { flag = "in_custody", op = "is_true" },
+  { trait = "keeper_step", subject = "player", op = "gte", value = 6 },
+  { trait = "keeper_drains_done", subject = "player", op = "lt", value = 1 },
+]
+goals = [
+  { trait = "keeper_drains_done", subject = "player", op = "gte", value = 1, label = "Drain him" },
+]
+
+[[quest_cards]]
+npc_id     = "npc_keeper"
+priority   = 9
+text       = "He is yours. Thirty years of Mr. Vance's secrets, and he opened the last cabinet for you."
+tip        = "The Records Room, nine at night to two in the morning, if you want him."
+terminal      = true
+terminal_text = "He opened the last cabinet."
+when = [
+  { flag = "in_vega", op = "is_false" },
+  { flag = "in_custody", op = "is_true" },
+  { trait = "keeper_drains_done", subject = "player", op = "gte", value = 1 },
 ]
 
 # ══════════════════════════════════════════════════════════════════
@@ -44315,9 +44932,9 @@ effects = [
   { targetType = "player", trait = "showers_door", op = "set", value = 0 },
   { targetType = "player", trait = "yard_door", op = "set", value = 0 },
   { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "set", value = 0 },
-  { targetType = "player", trait = "tech_nights", op = "set", value = 0 },
-  { targetType = "player", trait = "sabin_nights", op = "set", value = 0 },
-  { targetType = "player", trait = "keeper_nights", op = "set", value = 0 },
+  { targetType = "player", trait = "tech_step", op = "set", value = 0 },
+  { targetType = "player", trait = "sabin_step", op = "set", value = 0 },
+  { targetType = "player", trait = "keeper_step", op = "set", value = 0 },
   { targetType = "player", trait = "guard_drains_done", op = "set", value = 0 },
   { targetType = "player", trait = "tech_drains_done", op = "set", value = 0 },
   { targetType = "player", trait = "sabin_custody_drains", op = "set", value = 0 },
@@ -44646,9 +45263,9 @@ effects = [
   { targetType = "player", trait = "showers_door", op = "set", value = 0 },
   { targetType = "player", trait = "yard_door", op = "set", value = 0 },
   { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "set", value = 0 },
-  { targetType = "player", trait = "tech_nights", op = "set", value = 0 },
-  { targetType = "player", trait = "sabin_nights", op = "set", value = 0 },
-  { targetType = "player", trait = "keeper_nights", op = "set", value = 0 },
+  { targetType = "player", trait = "tech_step", op = "set", value = 0 },
+  { targetType = "player", trait = "sabin_step", op = "set", value = 0 },
+  { targetType = "player", trait = "keeper_step", op = "set", value = 0 },
   { targetType = "player", trait = "guard_drains_done", op = "set", value = 0 },
   { targetType = "player", trait = "tech_drains_done", op = "set", value = 0 },
   { targetType = "player", trait = "sabin_custody_drains", op = "set", value = 0 },
@@ -44975,9 +45592,9 @@ effects = [
   { targetType = "player", trait = "showers_door", op = "set", value = 0 },
   { targetType = "player", trait = "yard_door", op = "set", value = 0 },
   { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "set", value = 0 },
-  { targetType = "player", trait = "tech_nights", op = "set", value = 0 },
-  { targetType = "player", trait = "sabin_nights", op = "set", value = 0 },
-  { targetType = "player", trait = "keeper_nights", op = "set", value = 0 },
+  { targetType = "player", trait = "tech_step", op = "set", value = 0 },
+  { targetType = "player", trait = "sabin_step", op = "set", value = 0 },
+  { targetType = "player", trait = "keeper_step", op = "set", value = 0 },
   { targetType = "player", trait = "guard_drains_done", op = "set", value = 0 },
   { targetType = "player", trait = "tech_drains_done", op = "set", value = 0 },
   { targetType = "player", trait = "sabin_custody_drains", op = "set", value = 0 },
@@ -45310,9 +45927,9 @@ effects = [
   { targetType = "player", trait = "showers_door", op = "set", value = 0 },
   { targetType = "player", trait = "yard_door", op = "set", value = 0 },
   { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "set", value = 0 },
-  { targetType = "player", trait = "tech_nights", op = "set", value = 0 },
-  { targetType = "player", trait = "sabin_nights", op = "set", value = 0 },
-  { targetType = "player", trait = "keeper_nights", op = "set", value = 0 },
+  { targetType = "player", trait = "tech_step", op = "set", value = 0 },
+  { targetType = "player", trait = "sabin_step", op = "set", value = 0 },
+  { targetType = "player", trait = "keeper_step", op = "set", value = 0 },
   { targetType = "player", trait = "guard_drains_done", op = "set", value = 0 },
   { targetType = "player", trait = "tech_drains_done", op = "set", value = 0 },
   { targetType = "player", trait = "sabin_custody_drains", op = "set", value = 0 },

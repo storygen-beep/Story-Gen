@@ -6599,6 +6599,7 @@ targetType = "node"
 nodeId     = "activity_the_tests.daily"
 effects    = [
   { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
@@ -6777,6 +6778,7 @@ nodeId     = "activity_the_tests.wired"
 effects    = [
   { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
   { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 2, clamp = true },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
 
@@ -6815,6 +6817,7 @@ nodeId     = "activity_the_tests.wired"
 effects    = [
   { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
   { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 2, clamp = true },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
 
@@ -6854,6 +6857,7 @@ nodeId     = "activity_the_tests.machine"
 effects    = [
   { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
   { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
@@ -6894,6 +6898,7 @@ nodeId     = "activity_the_tests.machine"
 effects    = [
   { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
   { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
@@ -6934,6 +6939,7 @@ nodeId     = "activity_the_tests.pain"
 effects    = [
   { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
   { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
@@ -6974,6 +6980,7 @@ nodeId     = "activity_the_tests.pain"
 effects    = [
   { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
   { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
@@ -7014,6 +7021,7 @@ nodeId     = "activity_the_tests.empty_body"
 effects    = [
   { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
   { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
@@ -7054,6 +7062,7 @@ nodeId     = "activity_the_tests.empty_body"
 effects    = [
   { targetType = "player", trait = "tests_done",   op = "add", value = 1,   clamp = true, cap = 4 },
   { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]
@@ -7108,6 +7117,7 @@ targetType = "node"
 nodeId     = "activity_the_tests.daily"
 effects    = [
   { targetType = "player", trait = "energy",       op = "add", value = -20, clamp = true },
+  { targetType = "npc", npcId = "npc_technician", trait = "corruption", op = "add", value = 2, clamp = true },
   { targetType = "player", trait = "drain_charge", op = "set", value = 1,   clamp = false },
 ]
 flagEffects = [{ targetType = "player", flag = "test_day", op = "set" }]

@@ -1155,3 +1155,29 @@ test automatic too ("2 yess automatic").
   after: the test came on her first arrival from 09:00 on every one of 21 mornings.
 - **gates.py:** FAIL count unchanged (49). The two daily tests add rows to "an event with a person in it raises
   nothing for him"; that waits for the technician's corruption meter (beats 0279-0282).
+- **0279c, media for the bare scenes (LO, 2026-11-12):** a sweep of the release found explicit acts with no
+  clip. Added 22 video blocks: the shower grope (inside his step 3+ group, with the top shower clip narrowed to him
+  watching from the doorway), three endings each on the four new finishers, the three Caught curfew scenes (the
+  shower one per band), and the four first drains (beat 0 of each cascade). Each block has its own folder; the
+  media itself waits for LO's harvest.
+
+# THE OTHER THREE MEN — the guard's rework applied (beat 0279, LO 2026-11-12)
+
+LO played the technician: *"There is no grind and if there is grind it is too easy to raise plus he doesnt cum
+inside her."* All four men had been generated from one spec, and only the guard had been rebuilt. LO's calls: the
+drain fix ("1 yes"), a corruption meter ("2 yes"), the same for Sabin and the keeper, and no exception to the one-shot
+charge ("charge was the issue then its fine").
+
+| man | steps on his corruption | teases (+ his corruption, from step) | measured live |
+|---|---|---|---|
+| the technician | 0 · 40 his mouth · 75 the first fuck | cameras +4, wires +6 (0); desk +5, by hand +8 (1); every test +2 | 3 days, 8 teases |
+| Sabin | 0 (sets him to 15) · 30 the plans · 45 the praise · 65 his bench | drawing +5 (1); measure +7 (2); genius +5, kiss +6 (3) | 4 days, 9 teases |
+| the keeper | 0 · 15 looks · 30 stays · 50 hands · 70 mouth · 90 the first fuck | read +3 (1); undress +5 (2); lap +7 (3); his hand +8 (4) | 6 days, 16 teases |
+
+- One step a calendar day stays as the cap; every tease is 20 energy and an hour, every step 15.
+- **The drain at the first fuck** for all three: the finishers no longer read the step counter, and the "He isn't
+  yours yet" exit is gone. The drain still needs the drain carried and loaded: one shot, refilled by the morning test.
+- Sabin's corruption already carries Whose Hand points with no cap, so his first step sets it to 15 and every save
+  starts his climb from the same place.
+- The live hours limit the pace more than the calendar does: two teases a night for the technician (22:00-24:00),
+  three for Sabin (18:00-21:00), up to five for the keeper (21:00-02:00, energy permitting).

@@ -809,13 +809,13 @@ hidden = true
 key    = "tests_done"
 hidden = true
 [[traits.labels]]
-key    = "tech_nights"
+key    = "tech_step"
 hidden = true
 [[traits.labels]]
-key    = "sabin_nights"
+key    = "sabin_step"
 hidden = true
 [[traits.labels]]
-key    = "keeper_nights"
+key    = "keeper_step"
 hidden = true
 [[traits.labels]]
 key    = "guard_drains_done"
