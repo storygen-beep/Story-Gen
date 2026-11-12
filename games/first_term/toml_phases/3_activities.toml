@@ -61,6 +61,12 @@ operator    = "is_absent"
 id   = "porch"
 name = "The porch next door"
 
+# media sheet row (sheets/media/release1.md, signed 2026-11-12, DECISIONS 238)
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a man in his mid-fifties on his porch, cardigan, slippers, a newspaper on his knee", search_queries = ["older man porch cardigan newspaper"], file = "scenes/vance_meeting_t0.jpg" }
+
+
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "Next door, on his porch, the man who owns your house: Mr. Vance. Mid-fifties, a cardigan, slippers, a newspaper folded on his knee that he isn't reading. He watches you come down the path the way he watches everything on this street, like it's his. Most of it is."
@@ -126,6 +132,12 @@ operator  = "is_true"
 [[canvases.nodes]]
 id   = "porch"
 name = "His porch"
+
+# media sheet row (sheets/media/release1.md, signed 2026-11-12, DECISIONS 238)
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a man in his mid-fifties in a cardigan and slippers on a porch with the evening paper", search_queries = ["older man porch evening newspaper slippers"], pool_dir = "people/vance_porch_t0" }
+
 
 # pass 3 D32 (the-surfaces.md R6): ONE constant opener; his Want band only changes what he does after it.
 # pass 3 C45 (the-first-hour.md F10): it says who he is, the landlord, on the surface she re-enters.
@@ -389,6 +401,12 @@ substitutions = [{ target_canvas_id = "walkin_quad_team", chance = 0.25, conditi
 id   = "grass"
 name = "The grass"
 
+# media sheet row (sheets/media/release1.md, signed 2026-11-12, DECISIONS 238)
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "students lying on the grass of a college quad, bags under their heads", search_queries = ["students lying on grass campus quad"], pool_dir = "life/quad_grass_t0" }
+
+
 [[canvases.nodes.blocks]]
 type = "paragraph"
 content = "You sit down on the grass with your bag under your head. All round you, campus talks: who hooked up, who's failing, whose party, which professor."
@@ -436,6 +454,12 @@ max_triggers_per_day = 1
 [[canvases.nodes]]
 id   = "tray"
 name = "A tray"
+
+# media sheet row (sheets/media/release1.md, signed 2026-11-12, DECISIONS 238)
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a college canteen counter: pasta, burgers, fries, trays", search_queries = ["college canteen food counter trays"], pool_dir = "life/canteen_tray_t0" }
+
 
 # Iteration 002, part 8 (reader): the counter first; she eats only after "Eat".
 [[canvases.nodes.blocks]]
@@ -639,6 +663,12 @@ max_triggers_per_day = 2
 id   = "desk"
 name = "A desk"
 
+# media sheet row (sheets/media/release1.md, signed 2026-11-12, DECISIONS 238)
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl at a library desk under a green lamp, reading", search_queries = ["girl studying library green lamp"], pool_dir = "life/library_lamp_t0" }
+
+
 [[canvases.nodes.blocks]]
 type = "block_pool"
 blocks = [
@@ -715,6 +745,12 @@ is_active     = true
 [[canvases.nodes]]
 id   = "mirror"
 name = "The long mirror"
+
+# media sheet row (sheets/media/release1.md, signed 2026-11-12, DECISIONS 238)
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl checking herself in a long lit mirror over college sinks", search_queries = ["girl checking reflection bathroom mirror college"], pool_dir = "look/toilet_mirror_t3" }
+
 
 [[canvases.nodes.blocks]]
 type = "paragraph"
@@ -1022,6 +1058,11 @@ blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", item
 [[canvases.nodes.blocks]]
 type = "block_pool"   # one-item pool: keeps this group out of the chain beside it
 blocks = [ { type = "group", conditions = { version = "1.0", logic = "AND", items = [ { type = "clothing_slot", slot = "underwear", operator = "unequipped" } ] }, blocks = [ { type = "paragraph", content = "The changing room is a curtain that doesn't reach the wall on one side. You pull it as far as it goes and strip down in the gap, and try on what you picked." } ] } ]
+
+# media sheet row (sheets/media/release1.md, signed 2026-11-12, DECISIONS 238)
+[[canvases.nodes.blocks]]
+type = "image"
+props = { description = "a girl changing behind a curtain that doesn't reach the wall, a man outside by the shirt rail", search_queries = ["changing room curtain gap man looking"], pool_dir = "look/changing_gap_t3" }
 
 [[canvases.nodes.blocks]]
 type = "paragraph"

@@ -79,6 +79,9 @@ def main():
                 pg.wait_for_timeout(120)
             return False
 
+        def gc():
+            return pg.evaluate("SugarCube.State.variables.npcs['npc_guard'].core_traits.corruption || 0")
+
         def next_day(h, m=0):
             pg.evaluate("window.advanceTime(1440)")
             at(h, m)
@@ -215,8 +218,8 @@ def main():
         click("Let him go back up.")
         ok(flag("mercer_last_visit"), "mercer_last_visit")
         next_day(0, 30)
-        play("Location_holding_cell")
-        ok(psg() == "Canvas_cap_guard_news_Node_base", f"the guard's news the next night ({psg()})")
+        play("Location_holding_floor")
+        ok(psg() == "Canvas_cap_guard_news_Node_base", f"the guard's news the next night, at the Post ({psg()})")
         ok("Went off the roof of his own building" in text(), "the line")
         click("Lie down.")
         ok(flag("mercer_dead"), "mercer_dead")
@@ -226,11 +229,107 @@ def main():
         # ── part seven: the four men
         # 00:30, not 23:30: a rung begun before midnight ends after it and the next step opens the same night (the
         # midnight double-step, LO's call 3 signed 2026-11-10, Cain's loop has it too). Measured from after midnight.
-        n = ladder("guard", "Canvas_hub_guard_Node_base", 0, 30, "Let him have you.", "guard_drains_done", 6,
-                   ["Let him watch.", "Let him go.", "Wipe your mouth."], "Get up.")
-        ok(tr("guard_drains_done") == 1 and tr("floor_door") == 1, f"the guard is drained and the floor opens ({n} nights)")
+        # ── the guard (the REWORK, beats 0275-0278): his corruption, filled by teases; one step a calendar day
+        HUB = "Canvas_hub_guard_Node_base"
+        STEPS = ["Let him watch you at the glass.", "Let him in.", "Get on your knees for him.", "Let him have you."]
+        TEASES = ["Flash him.", "Show him everything at the glass.", "Touch yourself where he can see.", "Whisper what you'd do to him."]
+        NEED = [0, 20, 45, 70]
         play("Location_holding_cell")
-        ok("The Floor at Night" in text(), "the floor is on the cell's grid")
+        ok("The Post" in text(), "the Post is on the cell's grid from the start")
+        play("Location_holding_floor")
+        t = text()
+        ok("The Showers" in t and "The Test Lab" in t, "the block's rooms show on the Post's grid, locked")
+
+        def tease(label):
+            setv("energy", 100)
+            before = gc()
+            play(HUB)
+            if not click(label):
+                return None
+            for _ in range(6):
+                ex = [l for l in labels() if l in ("Walk away from him.", "Put the shift back on.", "Lie there for him.", "Leave him like that.")]
+                if ex:
+                    click(ex[0])
+                    break
+            return gc() - before
+
+        days = 0
+        for k in range(4):
+            days += 1
+            next_day(9)
+            test_day()
+            setv("energy", 100)
+            at(12)
+            play(HUB)
+            if k > 0:
+                ok(STEPS[k] not in labels() or gc() >= NEED[k], f"guard step {k}: refused below his corruption {NEED[k]} ({gc()})")
+                spent = 0
+                while gc() < NEED[k] and spent < 30:
+                    best = [x for x in TEASES if x in labels()]
+                    d = tease(best[-1])
+                    ok(d and d > 0, f"guard: '{best[-1]}' raises his corruption ({d})")
+                    spent += 1
+                    at(12)
+                    play(HUB)
+                ok(gc() >= NEED[k], f"guard step {k}: teased to {NEED[k]} in {spent} teases ({gc()})")
+                play(HUB)
+            ok(STEPS[k] in labels(), f"guard step {k}: '{STEPS[k]}' on offer ({labels()})")
+            setv("energy", 100)
+            click(STEPS[k])
+            if k < 3:
+                ex = [l for l in labels() if l in ("Let him watch.", "Let him go.", "Wipe your mouth.")]
+                ok(bool(ex), f"guard step {k}: the rung walks to its exit ({labels()})")
+                click(ex[0])
+                ok(tr("guard_step") == k + 1, f"guard_step {k + 1}")
+                at(13)
+                play(HUB)
+                ok(not [l for l in labels() if l in STEPS], f"guard step {k}: no second step the same day ({labels()})")
+            if k == 1:
+                ok(tr("showers_door") == 1, "his hands open the showers")
+                # the showers: his wash hour, his tease, then the curfew
+                next_day(7, 10)
+                play("Location_block_showers")
+                ok("Wash alone" in text(), f"the showers' solo card ({labels()})")
+                play("Canvas_hub_guard_showers_Node_base")
+                before = gc()
+                setv("energy", 100)
+                click("Wash with the curtain open.")
+                ok(gc() - before == 8, "the curtain open: +8")
+                click("Turn the water off.")
+                at(21)
+                play("Location_block_showers")
+                click("Wash alone")
+                ok(psg() == "Canvas_activity_wash_alone_Node_base", f"before curfew the showers are hers ({psg()})")
+                at(23)
+                play("Location_block_showers")
+                before = gc()
+                click("Wash alone")
+                ok(psg() == "Canvas_drag_back_showers_Node_base", f"after curfew he comes for her ({psg()})")
+                click("Back in your cell.")
+                ok(psg() == "Location_holding_cell" and gc() - before == -5, f"back in the cell, his corruption -5 ({gc() - before})")
+            if k == 2:
+                ok(tr("yard_door") == 1, "her knees open the laundry and the yard")
+        # the fourth step is the first fuck, and the drain works the first time
+        setv("drain_charge", 1)
+        setv("equipped_weapon", 1)
+        names = [l for l in labels() if "bend" in l.lower()]
+        ok(bool(names), f"the loop offers her ass ({labels()})")
+        click(names[0])
+        for _ in range(12):
+            fin = [l for l in labels() if l.startswith("Let him come in your ass")]
+            if fin:
+                click(fin[0])
+                break
+            click("Take it.")
+        ok("Take what he carries." in labels(), f"the first fuck: the drain is offered ({labels()})")
+        click("Take what he carries.")
+        ok(walk("Get up."), "the first drain walks to 'Get up.'")
+        click("Get up.")
+        ok(tr("guard_drains_done") == 1 and tr("lab_door") == 1 and tr("guard_step") == 4, f"the guard is drained and the lab opens ({days} days)")
+        at(23)
+        play("Location_block_showers")
+        click("Wash alone")
+        ok(psg() == "Canvas_activity_wash_alone_Node_base", f"no curfew after his drain ({psg()})")
         n = ladder("technician", "Canvas_hub_technician_Node_base", 22, 30, "Get on his table.", "tech_drains_done", 4,
                    ["Leave him with his screens.", "Leave him wanting it."], "Take the code.")
         ok(tr("tech_drains_done") == 1 and tr("study_door") == 1, f"the technician is drained and Sabin's door opens ({n} nights)")

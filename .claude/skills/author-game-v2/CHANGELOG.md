@@ -5,6 +5,23 @@ same turn: what changed, why, and how it was verified.
 
 ---
 
+## 2026-11-12 — media blocks: which screens get one, and where (first_term DECISIONS 238)
+
+Source: LO, 2026-11-12: "We have not been mentioning the media blocks at all", then "Yes, teach + report". first_term's
+release 1 shipped 24 of 167 screens with media; the everyday screens, the people's hubs and most looks had none,
+because the skill never said which screens need a block.
+
+- New `references/media-blocks.md`: what gets a block (body moment: on its line; frequent screen and person's hub:
+  a rotating pool first on the screen; one-time step: its key line; doors and notices: none, said so), and the rules:
+  on the line, not the top; the picture agrees with the words on every visit (one block per clothing version; never
+  after a line that comes in many versions); two body moments, two clips; one asset, one block; a repeatable explicit
+  screen cycles; the tier sets the format; describe for the search, as adults; no harvest while writing.
+- `SKILL.md`: one pointer line appended at the end (no cited line moved).
+- The "report" LO asked for already exists: `an explicit beat carries a clip` lists each screen missing a clip. The
+  reference says to read that list. No gate changed.
+- Verified: first_term after the pass has 99 of 167 release 1 screens with media; gates 95 pass, 17 decided, 0 fail on
+  release 1, and 117 pass, 0 fail on the full game; `cite_check --strict` 0 wrong.
+
 ## 2026-11-11 — release slices, part 2: the ledger is read as the slice (first_term DECISIONS 231)
 
 Source: LO's "yes" to decision 7 of the release 1 review ("fix the skill so those checks read only this release").

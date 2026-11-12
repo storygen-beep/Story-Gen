@@ -684,7 +684,7 @@ and no missing-media list is made until LO asks "release ready?".
 
 ---
 
-# BUILT — 2026-11-11, beats 0263–0274 (uncommitted)
+# BUILT — 2026-11-11, beats 0263–0274 (committed 1e5c278b, 2026-11-12)
 
 Everything in the blueprint is in the dev build except the media harvest, which is LO's. Nothing is committed.
 Version is still 0.2.5.1 in `[project]` and `games-data.js`; the bump to 0.2.6, the codes, the guide and the
@@ -743,3 +743,384 @@ Version is still 0.2.5.1 in `[project]` and `games-data.js`; the bump to 0.2.6, 
    the next step open the same night. The live test measures his ladder from 00:30.
 6. **Warnings in the dev build:** 24 "Error extracting trait effects" lines name older canvases this release did not
    touch (Cain's, Sabin's and others' loops). Not checked against a build from before beat 0263.
+
+---
+
+# REWORK — the block and the climb (agreed with LO 2026-11-12; blueprint SIGNED 2026-11-12)
+
+> Supersedes part seven's ladder mechanics, the "about seven nights" guard shape, the `*_nights` counters, the night-6
+> drain gate and the single-room cell. Parts one to six (minus the cell's shape) and part eight stand as built.
+> 0.2.6 is not released, so every key this release added may still be renamed or dropped.
+
+## Why
+
+LO, reading the built climb: *"on guard grind, it isn't any grind, she just wait one night and then it progress
+automatically. She should tease him masticate herself flash and whatever, like invite him that makes a grind. And why
+she didn't drain the first time she can drain him."*
+
+Read in the build, he was right on both counts:
+
+- **No grind.** The cell has four things in it: the tests, Sleep, Wait and the guard's card (`3_activities.toml:6557`,
+  `:6811`, `:6848`; `hub_guard`, `5_scenes.toml:26219`). Each night the card shows one step choice, gated only by
+  `days_since_flag guard_day gte 1`. A night is Wait until 23:00, one click, Sleep. All four men were generated from
+  one spec, so all four ladders are calendars, not climbs.
+- **A drain gate with no story behind it.** From night 4 he fucks her, but the drain needs `guard_nights gte 6`
+  (`5_scenes.toml:26742`); nights 4 and 5 offer "Let it go. He isn't yours yet." (`:26717`). Sabin's original drain has
+  no ladder gate (`:17707-17726`), and Mercer's last visit drains on the first time. The gate came from the signed
+  table ("Night 7: the drain. He is hers") turned into a number.
+- **One room.** She is a prisoner in a single cell with a six-hour guard window. LO: *"She is like a prisoner here just
+  one room. I say she can have some rooms here not just one. She can roam around freely. Guard is always present and
+  she have to report to him, initially he restrict her too much but as things moves he becomes loose."* And: *"in this
+  way she can interact with him whenever she wants."*
+
+## LO's calls (2026-11-12)
+
+1. Every one of the four men climbs on a meter filled by her teasing, and the meter is his **corruption**
+   ("1 on all 4 men. Name it corruption"). It is the engine's per-NPC `corruption`, already read and moved in this game
+   for Renner, Calloway and Sabin.
+2. The drain opens **at the first fuck** ("2 yes first fuck").
+3. One step per day stays as a cap ("1 yes"); the teases fill the meter at any hour.
+4. Curfew, with a drag-back when she breaks it ("2 yess").
+5. Rooms: the Showers, the Yard, the Laundry and a Gallery over the line. **No mess hall** ("3 not mess. Yes for all
+   others").
+
+## The block
+
+She is no longer kept in one room. The cell is her root, and a small block of rooms opens off the guard's post. The
+block is still sealed in the Room's pattern: no way back to the city.
+
+| room | its job | opens at |
+|---|---|---|
+| The Cell | sleep, wait; the tests start here | always |
+| The Post | the guard's desk outside the cell; where she reports; his tease card | always |
+| The Showers | she washes while he watches; later he comes in "to check" | guard corruption 15 |
+| The Laundry | the racks and the machines; she flashes him, bends over the machines | guard corruption 35 |
+| The Yard | an hour outside; later where he takes her | guard corruption 35 |
+| The Gallery | glass over the line, rows of empty bodies; plants the next release | the guard's drain |
+
+Every room is one step from the Post. The lab at night, Sabin's study and the records room stay behind the climb, each
+opened by a drain as before.
+
+## The guard
+
+He is no longer the night guard. He is her keeper, at the Post all day. (The engine places a person in one room per
+schedule row, so he cannot follow her; he sits at the centre of the block, and every room is one step from him.)
+
+| his corruption | the step (one per day) | what opens | curfew |
+|---|---|---|---|
+| 0 | he watches; she undresses at the glass | the Cell, the Post | 20:00 |
+| 15 | his hands, "the check" | the Showers | 22:00 |
+| 35 | on her knees | the Laundry, the Yard | 00:00 |
+| 55 | the first fuck. **The drain is possible that same night** | — | — |
+| his drain | he is hers | the lab at night, the Gallery | none; he leaves the door open |
+
+**The teases.** Repeatable, each costs energy and an hour, each unlocks once he has reached its step:
+
+| tease | where | his corruption |
+|---|---|---|
+| Undress at the glass, slowly | the Cell | +5 |
+| Flash him | the Post | +5 |
+| Touch yourself where he can see, and come for him | the Cell | +12 |
+| Shower with the curtain open | the Showers | +10 |
+| Bend over the machines in front of him | the Laundry | +10 |
+| Whisper what she would do to him (after his hands) | the Post | +10 |
+
+**The pace.** A hard test day leaves her about 60 energy, which is two or three teases a night. The guard takes about
+six to eight days: the signed length, but every day now turns on what she chose to do.
+
+**Reporting to him: the curfew.** She has to be back in the cell by his curfew. Out of it after the hour, he comes and
+drags her back: a scene, a teleport to the cell, his corruption −5. The curfew grows later with his corruption and goes
+away at his drain. (A plain time lock on the rooms is the wrong tool: the 0.2.6 build already found that it strands her
+in a room when the window shuts, `design_the_offer.md` BUILT, correction 3.)
+
+**The day.** Report in the morning, the test, free time in the block working on him, back by curfew, the night.
+
+## The other three
+
+Same shape as the guard: his corruption 0–100, filled by her teases, one step per day at a threshold, the drain at the
+first fuck, and his drain opens the next door.
+
+- **The technician.** His teases live inside the tests by day ("arch into his hands", "say his name back to him"). His
+  step comes at night, in the lab, once the guard's drain has opened it.
+- **Sabin.** The tease is praise for his work, in his study. His corruption already moves in Whose Hand (+2 a visit,
+  `5_scenes.toml:17376`, `:17432`), so in an old save it could be anywhere. It is **set** to 15 when she goes in: a fixed
+  head start, true to the story (he has slept with her before), with no save running away with it. While she is inside,
+  only his old hub reads that value, and it is already switched off by `in_custody`.
+- **The keeper of records.** The slowest: the highest thresholds, and his teases only start to work after many visits.
+
+## What is rewritten (unreleased, so it costs work only)
+
+- The guard's rows run all day at the Post; his description and every "night guard" / "same time tomorrow" line change.
+- The `*_nights` counters and the night-6 drain gate are replaced by each man's corruption plus a day flag.
+- The rung scenes stay mostly as written; they become the threshold steps.
+- New: the four rooms, their tease scenes, the curfew drag-backs, the Gallery.
+- Quest cards X to AA name his tier and the next tease; the two 0.2.6 tests and the dev jump are redone.
+- Standing as built: the tests, Mercer's last visit, the guard's news, the file, the end card.
+
+## Left for the blueprint
+
+1. Exact thresholds and tease values for the technician, Sabin and the keeper.
+2. Which rooms carry a drag-back (one auto-fire scene per room) and what the drag-back looks like at each tier.
+3. The ids: the Post and the four rooms, and how `holding_floor` (today the corridor locked on `floor_door`) maps into
+   the block, plus the new lock on the lab at night now that the floor is open from the start.
+4. The quest cards' new text.
+5. The ceiling rows for the new teases (masturbation for him, the showers, the laundry, the drag-back).
+
+Build order once signed: the guard first, played by LO, then the other three.
+
+---
+
+# REWORK BLUEPRINT (drafted 2026-11-12; SIGNED by LO 2026-11-12, "Yes to all 5. Sign the blueprint")
+
+> Places the REWORK above. Nothing below is built. LO signs the numbers, the ceiling rows and the flip-able calls
+> before the first beat. Cites are `toml_phases/` files unless named otherwise.
+
+## Engine facts this rests on
+
+- **One portrait card per person per room.** Two repeatable canvases bound to the same person at the same place and
+  hours are refused by the build ("Only one repeatable canvas is allowed … Put multiple interactions inside a single
+  canvas as choices"). So each man's steps AND his teases at one place are choices on ONE hub. A man may have a hub in
+  each room he has a row in.
+- **A named person must be where the line says** (`author-game-v2/scripts/gates.py:14296`). That is why the
+  technician's day row moved to the cell in the build (BUILT, correction 2). A guard line in the Showers needs a guard
+  row in the Showers. So he does not just sit at the Post: **he runs the block's routine**, and he is in each room at
+  its hour (below).
+- **A locked room still shows** as a greyed card with its `blocked_message` (`1_metadata_and_locations.toml`, the Rise
+  note: "a door you cannot open yet is the loop"). The rooms she has not earned sit on the Post's grid as promises.
+- **The lock is a trait set by a step**, the Room's proven pattern (trap 2, `1_metadata_and_locations.toml:1770-1777`).
+  The rooms open on a man's STEP, never on his raw corruption, so a room never opens or shuts as the meter moves.
+- **A teleport is not stopped by a lock.** The test card already takes her from the cell to `test_lab` while the floor
+  is locked. That stays true.
+- **The day cap** is the existing day flag: the first step needs the flag unset, every later one
+  `days_since_flag gte 1`, and a "tomorrow" band first in the hub (`hub_guard`, `5_scenes.toml:26238-26244`).
+  `days_since_flag` reads false when the flag was never set, which is why the first step uses `is_false`.
+- **The drag-back** is a random-path scene (`trigger_mode = "random"`, `chance = 1.0`, `max_triggers_per_day = 1`), the
+  same path as `rand_units_street` (`5_scenes.toml:25690-25704`), gated on `time_of_day` past curfew. The random path
+  has a per-place cooldown; whether one drag-back a day per room is enough is checked live in the first guard beat.
+  `time_of_day` cannot be negated, so each curfew band is written as its own window.
+- **No new engine work.** NPC `corruption` is already read and moved in this game (Renner 48 reads, Sabin 4).
+
+## The places
+
+0.2.6 is unreleased, so the corridor is re-used and re-named, not added.
+
+| id | name | joined | lock | change |
+|---|---|---|---|---|
+| `holding_cell` | The Cell | sealed root | none | sleep, wait, the tests; the guard's hub moves OUT of here |
+| `holding_floor` | **The Post** (was "The Floor at Night") | `entry_from = "holding_cell"` | **none now** | the guard's desk; the centre of the block |
+| `block_showers` | The Showers | `entry_from = "holding_floor"` | `showers_door gte 1` | new |
+| `block_laundry` | The Laundry | `entry_from = "holding_floor"` | `yard_door gte 1` | new |
+| `block_yard` | The Yard | `entry_from = "holding_floor"` | `yard_door gte 1` | new |
+| `block_gallery` | The Gallery | `entry_from = "holding_floor"` | `lab_door gte 1` | new |
+| `test_lab` | The Test Lab | `entry_from = "holding_floor"` | **`lab_door gte 1`** (new: the floor is open now) | by day she is still taken there |
+| `sabin_study` | Sabin's Study | as built | `study_door gte 1` | — |
+| `records_room` | The Records Room | as built | `records_door gte 1` | — |
+
+`floor_door` is retired (nothing reads it after this) and `lab_door` takes its job. Blocked messages say what opens
+them in his terms: Showers *"He hasn't let you near the showers yet."*; Laundry / Yard *"Not without him. Not yet."*;
+Gallery and Lab *"Locked at night. He has the key."*
+
+## The guard's day
+
+He is in one room at a time, so his rows ARE the block's routine. Every row `when in_custody is_true`, every weekday.
+
+| hours | where | what |
+|---|---|---|
+| 07:00–08:00 | the Showers | the wash hour |
+| 08:00–17:00 | the Post | the day; the technician takes her for the test |
+| 17:00–18:00 | the Yard | the hour outside |
+| 18:00–19:00 | the Laundry | the laundry hour |
+| 19:00–23:59, 00:00–07:00 | the Post | the night |
+
+The midnight split is the two-row rule (`1_metadata_and_locations.toml:848-866`). The hours show on the Schedules page,
+so the player can plan around him.
+
+## The numbers
+
+| key | kind | range | moved by |
+|---|---|---|---|
+| `npc_guard`, `npc_technician`, `npc_keeper` corruption | NPC trait | 0–100, clamp | her teases; the drag-back −5 |
+| `npc_sabin` corruption | NPC trait | 0–100, clamp | **set to 15** on "Go with him."; then her teases |
+| `guard_step`, `tech_step`, `sabin_step`, `keeper_step` | trait, hidden | 0–n | the step choice, +1, once per day (replace the `*_nights` keys) |
+| `guard_day`, `tech_day`, `sabin_day`, `keeper_day` | day flags | — | as built |
+| `showers_door`, `yard_door`, `lab_door` | lock traits | 0–1 | the guard's steps and his drain |
+| `*_drains_done`, `study_door`, `records_door` | as built | | as built |
+
+The four `*_nights` keys and `floor_door` are removed from the TOML (unreleased, no save carries them). Each new
+person's `core_traits` gains `corruption = 0`.
+
+## The economy of a day
+
+- Sleep +100 energy (as built). A test −20 (as built). A step −15 (as built). **A tease −20 and one hour.**
+- So a day holds the test, the step and three teases. At about +6 a tease, a man gains about 18 a day.
+- Every tease choice is time-gated to before curfew where curfew applies, so a tease can never be the thing that
+  strands her past it.
+
+## The guard
+
+| `guard_step` | step (needs his corruption) | the step opens | curfew after it |
+|---|---|---|---|
+| 0 → 1 | he watches; she undresses at the glass (0) | — | 20:00 |
+| 1 → 2 | his hands, "the check" (20) | `showers_door` | 22:00 |
+| 2 → 3 | on her knees (45) | `yard_door` (the Laundry and the Yard) | 00:00 |
+| 3 → 4 | the first fuck (70). **The drain is offered that night** | — | 00:00 |
+| first drain | he is hers | `lab_door` (the lab at night, the Gallery) | none |
+
+Curfew applies to the Showers, the Laundry and the Yard only. The Post is his desk: she can always stand in front of
+him. Expected length: five to seven days, longer with tired days and drag-backs.
+
+**The teases** (his corruption). Each is a choice on that room's guard hub, so each room has its own short list:
+
+| tease | where | opens at | + |
+|---|---|---|---|
+| Flash him | the Post | start | +4 |
+| Go back to the glass and undress for him | the Post | start | +5 |
+| Touch yourself at the glass, and come for him | the Post | step 1 | +8 |
+| Whisper what you would do to him | the Post | step 2 | +7 |
+| Wash with the curtain open | the Showers (07:00–08:00) | step 2 | +8 |
+| Bend over the machines in front of him | the Laundry (18:00–19:00) | step 3 | +8 |
+| Nothing under the shift in the Yard | the Yard (17:00–18:00) | step 3 | +7 |
+
+**The steps** stay the built rung scenes (`5_scenes.toml:26383-26452`), re-staged: his chair is at the Post outside
+her glass. "Tomorrow." stays as the band after a step.
+
+**The drain at the first fuck.** The loop is reached only from step 3, so the finisher's drain needs only the usual
+gear, charge and first-time checks; the `guard_nights gte 6` checks and the "He isn't yours yet" exit
+(`5_scenes.toml:26717-26733`) go. After the drain he leaves the Post's door open at night and her curfew is gone.
+
+**The drag-back.** One random-path scene each in the Showers, the Laundry and the Yard, for each curfew window. He
+walks in, takes her arm and marches her back to the cell; one band by step (step 1: cold, by the arm; step 2: his hand
+on her ass the whole way; step 3: up against the corridor wall first, *"Next time I won't wait."*). Teleport to the
+cell, his corruption −5, 60 minutes.
+
+## The technician (opens at `lab_door`)
+
+| `tech_step` | step (his corruption) | | 
+|---|---|---|
+| 0 → 1 | she comes to him in the lab at night (0) | |
+| 1 → 2 | the test table: hands and mouth (20) | |
+| 2 → 3 | the first fuck (45). Drain offered that night | the drain opens `study_door` |
+
+Teases: two choices on the test card by day, his hands in the test (`activity_the_tests`, `3_activities.toml:6557`)
+— *"Arch into his hands"* +6, and *"Say his name back to him"* +6 after step 1 — and one in the lab at night,
+*"Sit on the table and open your legs for his readings"* +8. "He says her name" becomes a line band on the loop at
+his corruption 60.
+
+## Sabin (opens at `study_door`)
+
+| `sabin_step` | step (his corruption) |
+|---|---|
+| 0 → 1 | he knows her: his best reader was the subject (15, which he starts at) |
+| 1 → 2 | he shows her the plans (30) |
+| 2 → 3 | his bench, on top of the plans: the first fuck (50). Drain offered that night; it opens `records_door` |
+
+Teases in the study: *"Ask about his work"* +6, *"Tell him it's beautiful"* +7 after step 1, *"Read over his shoulder,
+pressed against him"* +8 after step 2.
+
+## The keeper (opens at `records_door`)
+
+| `keeper_step` | step (his corruption) |
+|---|---|
+| 0 → 1 | he will not look at her (0) |
+| 1 → 2 | he looks (15) |
+| 2 → 3 | he lets her stay while he works (30) |
+| 3 → 4 | his hands (50) |
+| 4 → 5 | her mouth (70) |
+| 5 → 6 | the first fuck (90). Drain offered that night; it opens the file |
+
+The slowest climb: his only tease until step 3 is *"Sit with him while he works"* +3; after it *"Undress while he
+reads"* +7; after step 4 *"Kneel under the table"* +8. Expected eight to ten days.
+
+## What else moves
+
+- `hub_guard` moves from `holding_cell` to `holding_floor` (the Post) and to one hub per room he has a row in.
+- `cap_guard_news` reads the guard at the Post, not the cell (`5_scenes.toml:26186`).
+- `activity_cell_wait` and Sleep stay on the cell. The cell's "Walk the floor." exit goes; the Post is on her grid
+  from the start.
+- The guard's `description` and `arc_stages` lose "night guard"; every "same time as last night" line is re-read.
+- Mercer's last visit (cell, 20:00–23:00) and the tests stand as built.
+
+## Quest cards
+
+| card | when | goal |
+|---|---|---|
+| X | `chairman_met`, `lab_door lt 1` | the guard: what tease works now, his next step, his rooms and hours, tonight's curfew |
+| Y | `lab_door gte 1`, `study_door lt 1` | the technician: by day in the tests, by night in the lab 22:00–23:59 |
+| Z | `study_door gte 1`, `records_door lt 1` | Sabin, his study, 18:00–21:00 |
+| AA | `records_door gte 1`, `wife_file_read is_false` | the keeper, 21:00–02:00 |
+| AB | as built | as built |
+
+Each man's own card names his next step and what moves him. No numbers on screen (the truth rule): the card says
+*"He wants more before he'll let you near the showers"*, not a value.
+
+## Ceiling rows to sign
+
+| scene | who | on the page | vocabulary | held out |
+|---|---|---|---|---|
+| the Post teases | Wren, the guard | flashing, stripping, masturbating to orgasm at the glass for him | the game's maximum | — |
+| the Showers | Wren, the guard | naked, washing, watched; later his hands | the game's maximum | — |
+| the Laundry, the Yard | Wren, the guard | bent over in front of him; bare under the shift outside | the game's maximum | — |
+| the drag-back | Wren, the guard | rough handling, groping, pinned to a wall | the game's maximum | injury |
+| technician, Sabin, keeper teases | as their loops | as their loops | the game's maximum | — |
+
+## Build order
+
+| beat | what |
+|---|---|
+| 0275 | the places (Post renamed, four rooms, the lab lock), the keys, the guard's routine rows, `corruption` on the new people, the removed keys. Green, nothing new reachable |
+| 0276 | the guard's Post hub: steps on corruption, the Post teases, the day cap, the drain at the first fuck, `lab_door` |
+| 0277 | the Showers, the Laundry and the Yard hubs and teases; the drag-backs; the live check of the random-path cooldown |
+| 0278 | card X, the guard's own card, `cap_guard_news` at the Post, the guard's lines re-read; guards and live test for the guard. **LO plays the guard here.** |
+| 0279 | the technician: test-card teases, lab hub, steps, drain, card Y |
+| 0280 | Sabin: the set-to-15, study hub, steps, drain, card Z |
+| 0281 | the keeper, card AA |
+| 0282 | the Gallery (one first-visit scene, then a quiet room), `check_you_for_him.py` and `live_you_for_him.py` redone, the dev jump |
+
+## Calls LO can flip (my pick first) — all five signed as picked, LO 2026-11-12
+
+1. **Rooms open by step, not by raw corruption.** *Pick:* by step, so a room never shuts when a drag-back drops the
+   meter.
+2. **The drag-back costs −5 of his corruption.** *Pick:* yes. Alternative: it costs her the next day's step instead.
+3. **The Post has no curfew.** *Pick:* yes, she can always stand in front of him. Alternative: after curfew even the
+   Post sends her back, which leaves the night steps nowhere to happen until his drain.
+4. **Tease cost 20 energy.** *Pick:* 20, three a day. 15 would allow four and shorten every man by about a quarter.
+5. **The Gallery** is a quiet room with one first-visit scene (the line from above). *Pick:* yes, no tease there.
+
+---
+
+# REWORK BUILT — the guard (2026-11-12, beats 0275–0278, uncommitted)
+
+The guard is built to the REWORK BLUEPRINT and is ready for LO to play from the "0.2.6: start" jump. The technician,
+Sabin, the keeper and the Gallery are beats 0279–0282 and are not built: the technician's hub now opens on `lab_door`,
+and his, Sabin's and the keeper's ladders are still the old calendar ladders until their beats.
+
+## Where the build corrected the blueprint
+
+1. **The drag-back is a walk-in, not a random event.** After curfew the guard is at the Post by his rows, so a random
+   scene with his lines in the Showers fails gates.py "a named person is where the line says" (`gates.py:14296`). A
+   `substitution_only` walk-in is that gate's own exemption (`_tr_walkers`, B51). Each curfew room has a solo card
+   (*Wash alone*, *Do your washing*, *Walk the yard*); after curfew its substitution sends it to the drag-back. So he
+   comes for her when she *does something* in the room after curfew, not merely when she stands in it.
+2. **His routine follows her locks.** While a room is shut to her he spends that hour at the Post instead (each room row
+   carries its lock in `when`), so the Schedules page never sends her to a door she cannot open, and his Post hub is
+   there in those hours.
+3. **Two step labels renamed** so they don't read as clothing changes the game never makes: *"Let him watch you at the
+   glass."* and *"Show him everything at the glass."*
+4. **The undress tease opens at step 1**, not at the start: before the first step, "again" would be false.
+5. **cap_guard_news moved to the Post**, since his rows never put him in the cell now.
+
+## Measured
+
+- **Green:** merge `--validate`; all six static guards, with the new guard section negative-tested (a threshold of 44
+  and a curfew at 21:00 both fail it); package `--dev --debug` (Validation passed, All flag chains valid);
+  `live_you_for_him.py` OK with 0 JS errors.
+- **The live run:** step 0 on day one; each later step refused below his corruption and refused twice in a day;
+  teases raise him (+8 touch, +7 whisper, +8 the curtain); the Showers open at step 2, the Laundry and the Yard at
+  step 3; at 21:00 the showers are hers, at 23:00 he drags her back (−5); the first fuck offers the drain, which
+  opens the lab and ends the curfew.
+- **Length:** 4 days with energy topped up. In play, three teases a day (60 of the energy left after a test and a
+  step) clear each threshold, so **the day cap is what binds and the guard takes 4–5 days**, short of the 5–7 the
+  blueprint estimated. Raising the thresholds is a one-line change for each.
+- **gates.py:** FAIL count unchanged (49); "a named person is where the line says" unchanged at 60 rows with no guard
+  line among them; explicit floor 14.7% to 15.6%.
+- **Narration to dialogue** on the guard's scenes: 1.75:1 together, no node over 3:1.

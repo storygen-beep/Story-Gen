@@ -3608,7 +3608,10 @@ effects = [
   { targetType = "player", trait = "undertow_build",      op = "set", value = 3 },
   # ── 0.2.6 keys at rest (beat_0274) ──
   { targetType = "player", trait = "tests_done", op = "set", value = 0 },
-  { targetType = "player", trait = "guard_nights", op = "set", value = 0 },
+  { targetType = "player", trait = "guard_step", op = "set", value = 0 },          # REWORK (beat_0275)
+  { targetType = "player", trait = "showers_door", op = "set", value = 0 },
+  { targetType = "player", trait = "yard_door", op = "set", value = 0 },
+  { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "set", value = 0 },
   { targetType = "player", trait = "tech_nights", op = "set", value = 0 },
   { targetType = "player", trait = "sabin_nights", op = "set", value = 0 },
   { targetType = "player", trait = "keeper_nights", op = "set", value = 0 },
@@ -3616,7 +3619,7 @@ effects = [
   { targetType = "player", trait = "tech_drains_done", op = "set", value = 0 },
   { targetType = "player", trait = "sabin_custody_drains", op = "set", value = 0 },
   { targetType = "player", trait = "keeper_drains_done", op = "set", value = 0 },
-  { targetType = "player", trait = "floor_door", op = "set", value = 0 },
+  { targetType = "player", trait = "lab_door", op = "set", value = 0 },
   { targetType = "player", trait = "study_door", op = "set", value = 0 },
   { targetType = "player", trait = "records_door", op = "set", value = 0 },
 ]
@@ -3936,7 +3939,10 @@ effects = [
   { targetType = "player", trait = "undertow_build",      op = "set", value = 3 },
   # ── 0.2.6 keys at rest (beat_0274) ──
   { targetType = "player", trait = "tests_done", op = "set", value = 0 },
-  { targetType = "player", trait = "guard_nights", op = "set", value = 0 },
+  { targetType = "player", trait = "guard_step", op = "set", value = 0 },          # REWORK (beat_0275)
+  { targetType = "player", trait = "showers_door", op = "set", value = 0 },
+  { targetType = "player", trait = "yard_door", op = "set", value = 0 },
+  { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "set", value = 0 },
   { targetType = "player", trait = "tech_nights", op = "set", value = 0 },
   { targetType = "player", trait = "sabin_nights", op = "set", value = 0 },
   { targetType = "player", trait = "keeper_nights", op = "set", value = 0 },
@@ -3944,7 +3950,7 @@ effects = [
   { targetType = "player", trait = "tech_drains_done", op = "set", value = 0 },
   { targetType = "player", trait = "sabin_custody_drains", op = "set", value = 0 },
   { targetType = "player", trait = "keeper_drains_done", op = "set", value = 0 },
-  { targetType = "player", trait = "floor_door", op = "set", value = 0 },
+  { targetType = "player", trait = "lab_door", op = "set", value = 0 },
   { targetType = "player", trait = "study_door", op = "set", value = 0 },
   { targetType = "player", trait = "records_door", op = "set", value = 0 },
 ]
@@ -4262,7 +4268,10 @@ effects = [
   { targetType = "player", trait = "undertow_build",      op = "set", value = 3 },
   # ── 0.2.6 keys at rest (beat_0274) ──
   { targetType = "player", trait = "tests_done", op = "set", value = 0 },
-  { targetType = "player", trait = "guard_nights", op = "set", value = 0 },
+  { targetType = "player", trait = "guard_step", op = "set", value = 0 },          # REWORK (beat_0275)
+  { targetType = "player", trait = "showers_door", op = "set", value = 0 },
+  { targetType = "player", trait = "yard_door", op = "set", value = 0 },
+  { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "set", value = 0 },
   { targetType = "player", trait = "tech_nights", op = "set", value = 0 },
   { targetType = "player", trait = "sabin_nights", op = "set", value = 0 },
   { targetType = "player", trait = "keeper_nights", op = "set", value = 0 },
@@ -4270,7 +4279,7 @@ effects = [
   { targetType = "player", trait = "tech_drains_done", op = "set", value = 0 },
   { targetType = "player", trait = "sabin_custody_drains", op = "set", value = 0 },
   { targetType = "player", trait = "keeper_drains_done", op = "set", value = 0 },
-  { targetType = "player", trait = "floor_door", op = "set", value = 0 },
+  { targetType = "player", trait = "lab_door", op = "set", value = 0 },
   { targetType = "player", trait = "study_door", op = "set", value = 0 },
   { targetType = "player", trait = "records_door", op = "set", value = 0 },
 ]
@@ -4594,7 +4603,10 @@ effects = [
   { targetType = "player", trait = "undertow_build",      op = "set", value = 3 },
   # ── 0.2.6 keys at rest (beat_0274) ──
   { targetType = "player", trait = "tests_done", op = "set", value = 0 },
-  { targetType = "player", trait = "guard_nights", op = "set", value = 0 },
+  { targetType = "player", trait = "guard_step", op = "set", value = 0 },          # REWORK (beat_0275)
+  { targetType = "player", trait = "showers_door", op = "set", value = 0 },
+  { targetType = "player", trait = "yard_door", op = "set", value = 0 },
+  { targetType = "npc", npcId = "npc_guard", trait = "corruption", op = "set", value = 0 },
   { targetType = "player", trait = "tech_nights", op = "set", value = 0 },
   { targetType = "player", trait = "sabin_nights", op = "set", value = 0 },
   { targetType = "player", trait = "keeper_nights", op = "set", value = 0 },
@@ -4602,7 +4614,7 @@ effects = [
   { targetType = "player", trait = "tech_drains_done", op = "set", value = 0 },
   { targetType = "player", trait = "sabin_custody_drains", op = "set", value = 0 },
   { targetType = "player", trait = "keeper_drains_done", op = "set", value = 0 },
-  { targetType = "player", trait = "floor_door", op = "set", value = 0 },
+  { targetType = "player", trait = "lab_door", op = "set", value = 0 },
   { targetType = "player", trait = "study_door", op = "set", value = 0 },
   { targetType = "player", trait = "records_door", op = "set", value = 0 },
 ]

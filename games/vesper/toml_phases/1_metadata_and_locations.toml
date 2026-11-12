@@ -399,16 +399,25 @@ cain_asked        = 0
 # save from 0.2.5.1 reads 0 for each and nothing in the city reads any of them.
 #   • tests_done 0-4 — the day tests at the Rise (wired up, the machine, pain, the empty body); 4 = the daily test.
 #     +1 once per calendar day from the located test card (days_since_flag test_day), never inside a loop.
-#   • guard_nights 0-6 / tech_nights 0-5 / sabin_nights 0-5 / keeper_nights 0-7 — one step per visit per calendar
+#   • tech_nights 0-5 / sabin_nights 0-5 / keeper_nights 0-7 — one step per visit per calendar
 #     day on each man's located card (the cain_nights rule). The last value opens that man's drain.
+#     (Replaced man by man by the REWORK, design_the_offer.md "REWORK BLUEPRINT": the guard first.)
+#   • guard_step 0-4 (beat_0275, the REWORK) — the guard's climb. One step a calendar day on his Post hub, and only
+#     once HIS corruption (npc_guard's own `corruption`, filled by her teases) reaches the step's threshold:
+#     0 watches · 20 hands · 45 knees · 70 the first fuck. The drain is offered from the first fuck on.
 #   • guard_drains_done / tech_drains_done / sabin_custody_drains / keeper_drains_done — the first-drain counters,
 #     TRAITS so the next step can read them with gte 1 (the sabin_drains_done reason). sabin_custody_drains is new on
 #     purpose: sabin_drains_done may already be 1+ from Whose Hand.
-#   • floor_door / study_door / records_door 0-1 — the locks on the sealed inside (holding_floor, sabin_study,
-#     records_room). TRAITS, not flags: the Room's trap 2 (the cell_door note below). Set by the guard's, the
-#     technician's and Sabin's first drain.
+#   • showers_door / yard_door / lab_door / study_door / records_door 0-1 — the locks on the sealed inside
+#     (block_showers; block_laundry + block_yard; test_lab + block_gallery; sabin_study; records_room). TRAITS, not
+#     flags: the Room's trap 2 (the cell_door note below). showers_door and yard_door are set by the guard's steps 2
+#     and 3, lab_door by his first drain, study_door and records_door by the technician's and Sabin's first drain.
+#     lab_door replaces 0.2.6's floor_door (unreleased, no save carries it): the Post is open from the start now.
 tests_done           = 0
-guard_nights         = 0
+guard_step           = 0
+showers_door         = 0
+yard_door            = 0
+lab_door             = 0
 tech_nights          = 0
 sabin_nights         = 0
 keeper_nights        = 0
@@ -416,7 +425,6 @@ guard_drains_done    = 0
 tech_drains_done     = 0
 sabin_custody_drains = 0
 keeper_drains_done   = 0
-floor_door           = 0
 study_door           = 0
 records_door         = 0
 
@@ -1098,32 +1106,115 @@ core_traits = { relation = 0 }
 flag_keys   = []
 arc_stages  = ["The Chairman"]
 
-# ── The night guard on her cell. His hub is at holding_cell; his ladder is one step a night. ──
+# ── The guard: her keeper on the block (beat_0275, the REWORK — design_the_offer.md "REWORK BLUEPRINT · The guard's
+# day"). He is in ONE room at a time, so his rows ARE the block's routine: the wash hour, the yard hour, the laundry
+# hour, and the Post (his desk outside her glass) the rest of the day and night. gates.py's "a named person is where
+# the line says" holds every guard line to these rows, which is why he walks the routine instead of sitting still.
+# His climb runs on his own `corruption` (her teases fill it) and guard_step (one step a day; 1_metadata counters).
+# Rows sit directly under him (the orphan trap); the night is two rows across midnight.
 [[npcs]]
 id          = "npc_guard"
 name        = "The Guard"
-description = "The night guard on her cell. Big, bored, ordinary. He has been told she is company property, a machine and not a person, and he has been watching her through the glass for weeks."
+description = "Her keeper on the block, day and night. Big, bored, ordinary. He has been told she is company property, a machine and not a person, and he has been watching her through the glass for weeks."
 portrait    = "guard.jpg"
-core_traits = { relation = 0 }
+core_traits = { relation = 0, corruption = 0 }
 flag_keys   = []
-arc_stages  = ["The night guard"]
+arc_stages  = ["Her keeper"]
+
+# His routine hours follow her locks: until a room is open to her he spends that hour at the Post, so the Schedules
+# page never sends her to a door she cannot open, and his Post hub is there for her in those hours too.
+[[npcs.schedules]]
+location   = "block_showers"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "07:00"
+end_time   = "08:00"
+activity   = "at the shower door for the wash hour"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "showers_door", operator = "gte", value = 1 },
+] }
 
 [[npcs.schedules]]
-location   = "holding_cell"
+location   = "holding_floor"
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
-start_time = "23:00"
-end_time   = "23:59"
-activity   = "on the chair outside her glass"
+start_time = "07:00"
+end_time   = "08:00"
+activity   = "at his desk outside her glass"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "showers_door", operator = "lt", value = 1 },
+] }
+
+[[npcs.schedules]]
+location   = "holding_floor"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "08:00"
+end_time   = "17:00"
+activity   = "at his desk outside her glass"
 when = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
 ] }
 
 [[npcs.schedules]]
-location   = "holding_cell"
+location   = "block_yard"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "18:00"
+activity   = "by the wall for the yard hour"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "yard_door", operator = "gte", value = 1 },
+] }
+
+[[npcs.schedules]]
+location   = "holding_floor"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "17:00"
+end_time   = "18:00"
+activity   = "at his desk outside her glass"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "yard_door", operator = "lt", value = 1 },
+] }
+
+[[npcs.schedules]]
+location   = "block_laundry"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "19:00"
+activity   = "in the laundry doorway for the laundry hour"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "yard_door", operator = "gte", value = 1 },
+] }
+
+[[npcs.schedules]]
+location   = "holding_floor"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "18:00"
+end_time   = "19:00"
+activity   = "at his desk outside her glass"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+  { type = "trait", subject = "player", trait_key = "yard_door", operator = "lt", value = 1 },
+] }
+
+[[npcs.schedules]]
+location   = "holding_floor"
+weekdays   = [0, 1, 2, 3, 4, 5, 6]
+start_time = "19:00"
+end_time   = "23:59"
+activity   = "at his desk outside her glass"
+when = { version = "1.0", logic = "AND", items = [
+  { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
+] }
+
+[[npcs.schedules]]
+location   = "holding_floor"
 weekdays   = [0, 1, 2, 3, 4, 5, 6]
 start_time = "00:00"
-end_time   = "05:00"
-activity   = "on the chair outside her glass"
+end_time   = "07:00"
+activity   = "at his desk outside her glass"
 when = { version = "1.0", logic = "AND", items = [
   { type = "flag", subject = "player", flag_key = "in_custody", operator = "is_true" },
 ] }
@@ -2010,17 +2101,17 @@ image       = "locations/holding_cell.jpg"
 image_search_queries = ["white clinical holding cell glass wall bed", "sterile laboratory isolation room glass partition"]
 auto_exit   = false
 
+# ── The Post (beat_0275, the REWORK). Was "The Floor at Night", locked on floor_door until the guard's drain. The
+# REWORK opens the block from the start: this is the guard's desk outside her glass and the centre of the block, so it
+# carries NO lock, and every room of the block hangs off it by entry_from. The locks moved onto the rooms themselves
+# (each a TRAIT set by one of the guard's steps or his drain), so a room never opens or shuts as his meter moves.
 [[locations]]
 id          = "holding_floor"
-name        = "The Floor at Night"
-description = "The corridor outside the cell, half the lights off after midnight. Doors on both sides, all of them shut."
+name        = "The Post"
+description = "The corridor outside her glass. His desk, his chair, a screen with her cell on it. Doors off both sides, and he has the keys to all of them."
 image       = "locations/holding_floor.jpg"
-image_search_queries = ["empty clinical corridor night dim lights doors", "laboratory hallway at night half lit"]
+image_search_queries = ["security guard desk corridor outside glass cell", "clinical corridor guard station monitors doors"]
 entry_from  = "holding_cell"
-entry_conditions = { version = "1.0", items = [
-  { type = "trait", subject = "player", trait_key = "floor_door", operator = "gte", value = 1 },
-] }
-blocked_message = "The glass does not open from this side."
 
 [[locations]]
 id          = "test_lab"
@@ -2029,6 +2120,12 @@ description = "Bright, cold, and full of machines that watch. A padded table in 
 image       = "locations/test_lab.jpg"
 image_search_queries = ["bright clinical laboratory padded examination table monitors", "sci fi test lab medical table screens"]
 entry_from  = "holding_floor"
+# beat_0275 (the REWORK): the Post is open now, so the lab carries its own lock. By day the test card still TELEPORTS
+# her here (a lock does not stop a teleport); on foot she gets in only after the guard's first drain.
+entry_conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "lab_door", operator = "gte", value = 1 },
+] }
+blocked_message = "Locked at night. He has the key."
 
 [[locations]]
 id          = "sabin_study"
@@ -2053,6 +2150,58 @@ entry_conditions = { version = "1.0", items = [
   { type = "trait", subject = "player", trait_key = "records_door", operator = "gte", value = 1 },
 ] }
 blocked_message = "Locked. Nobody has told her where it is yet."
+
+# ── The block's rooms (beat_0275, the REWORK — design_the_offer.md "REWORK BLUEPRINT · The places"). All off the
+# Post by entry_from (trap 1), each locked on a TRAIT (trap 2) with version = "1.0" (trap 3). A locked room still
+# shows on the Post's grid as a greyed card with its blocked_message: the promise is the point. Opened by the guard's
+# step 2 (showers_door), step 3 (yard_door: the Laundry and the Yard) and his first drain (lab_door: the Gallery).
+[[locations]]
+id          = "block_showers"
+name        = "The Showers"
+description = "A tiled room with six heads and no curtains worth the name. The door has a window in it, at his height."
+image       = "locations/block_showers.jpg"
+image_search_queries = ["prison shower room white tiles open showers", "institutional shower block tiled room door window"]
+entry_from  = "holding_floor"
+entry_conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "showers_door", operator = "gte", value = 1 },
+] }
+blocked_message = "He hasn't let you near the showers yet."
+
+[[locations]]
+id          = "block_laundry"
+name        = "The Laundry"
+description = "Washing machines in a row, the grey shifts on a rail, the air warm and damp. One way in, and he stands in it."
+image       = "locations/block_laundry.jpg"
+image_search_queries = ["institutional laundry room row of washing machines", "prison laundry room machines grey uniforms rail"]
+entry_from  = "holding_floor"
+entry_conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "yard_door", operator = "gte", value = 1 },
+] }
+blocked_message = "Not without him. Not yet."
+
+[[locations]]
+id          = "block_yard"
+name        = "The Yard"
+description = "A square of concrete with walls on four sides and the sky on top. An hour of air a day, and he watches all of it."
+image       = "locations/block_yard.jpg"
+image_search_queries = ["prison exercise yard concrete high walls sky", "walled concrete courtyard institutional building"]
+entry_from  = "holding_floor"
+entry_conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "yard_door", operator = "gte", value = 1 },
+] }
+blocked_message = "Not without him. Not yet."
+
+[[locations]]
+id          = "block_gallery"
+name        = "The Gallery"
+description = "A long glass walkway over the line. Below it, row after row of bodies on their racks, made to look like people and empty inside."
+image       = "locations/block_gallery.jpg"
+image_search_queries = ["glass walkway above factory production line robots", "observation gallery over rows of humanoid robots on racks"]
+entry_from  = "holding_floor"
+entry_conditions = { version = "1.0", items = [
+  { type = "trait", subject = "player", trait_key = "lab_door", operator = "gte", value = 1 },
+] }
+blocked_message = "Locked at night. He has the key."
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # THE FACE (beat_0094, rev 145) — CAIN'S LAB. The chapter's last room, and the release's last passage.

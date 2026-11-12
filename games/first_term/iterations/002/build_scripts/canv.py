@@ -196,8 +196,14 @@ def POOL(*blocks, pid=None, bag=False):
     return b
 
 
-def IMG(file, desc, *queries):
-    return {"type": "image", "props": {"file": file, "description": desc, "search_queries": list(queries)}}
+def IMG(file, desc, *queries, pool_dir=None):
+    """A still. `pool_dir` (media sheet, DECISIONS 238) makes it a rotating pool: the engine cycles one file a visit."""
+    props = {"description": desc, "search_queries": list(queries)}
+    if pool_dir:
+        props["pool_dir"] = pool_dir
+    else:
+        props["file"] = file
+    return {"type": "image", "props": props}
 
 
 def VID(desc, *queries, file=None, pool_dir=None):
@@ -632,6 +638,10 @@ def emit(canvas):
     # The writer session's screens replace their PLACEHOLDER blocks here (writer.py; LO, 2026-10-09).
     from writer import fill
     canvas = fill(canvas)
+    # The signed media sheet's blocks (sheets/media/release1.md, DECISIONS 238), placed before the voicing splits
+    # paragraphs, so each row's anchor line is still whole
+    import media
+    canvas = media.apply(canvas)
     # A node may carry `pin`: presence items put on its whole screen AFTER the writer's screen is swapped in
     # (pin_blocks; first_term truth pass, 2026-11-03)
     for n in canvas["nodes"]:

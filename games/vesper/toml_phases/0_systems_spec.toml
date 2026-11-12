@@ -809,9 +809,6 @@ hidden = true
 key    = "tests_done"
 hidden = true
 [[traits.labels]]
-key    = "guard_nights"
-hidden = true
-[[traits.labels]]
 key    = "tech_nights"
 hidden = true
 [[traits.labels]]
@@ -833,7 +830,16 @@ hidden = true
 key    = "keeper_drains_done"
 hidden = true
 [[traits.labels]]
-key    = "floor_door"
+key    = "lab_door"
+hidden = true
+[[traits.labels]]
+key    = "guard_step"
+hidden = true
+[[traits.labels]]
+key    = "showers_door"
+hidden = true
+[[traits.labels]]
+key    = "yard_door"
 hidden = true
 [[traits.labels]]
 key    = "study_door"
