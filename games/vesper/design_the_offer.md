@@ -1181,3 +1181,44 @@ charge ("charge was the issue then its fine").
   starts his climb from the same place.
 - The live hours limit the pace more than the calendar does: two teases a night for the technician (22:00-24:00),
   three for Sabin (18:00-21:00), up to five for the keeper (21:00-02:00, energy permitting).
+
+## The technician in five steps (beat 0280, LO 2026-11-13)
+
+LO: *"Technician after just one night get on his table it get it to sleep with him just after that. Grind feels too
+quick."* The night count was not the fault (about seven real nights before this change); the ladder was. Three steps
+(she comes to him, his mouth, the first fuck) read as "the table, then sex", with nothing between his mouth on her and
+fucking her. Now five, on his corruption:
+
+| step | his corruption | what happens |
+|---|---|---|
+| 0 | 0 | she comes to him at his screens (rung0) |
+| 1 | 25 | his mouth on her on the test table (rung1) |
+| 2 | 45 | **her hand**: she kneels at his chair and jerks him off; he comes up his lab coat (rung2) |
+| 3 | 65 | **her mouth**: she sucks him on the lab floor for his cameras and swallows (rung3) |
+| 4 | 85 | the first fuck on his table, and the drain |
+
+- "Make him take a reading by hand." now opens after his mouth (step 2), not at step 1.
+- Each step has its own low/high line in the hub, so every night between steps says where he is.
+- Measured live with the clock reset per tease: 5 days, 9 teases. Real play, two actions a night in his window: about
+  eight nights, with five visible changes in him instead of three.
+
+## Tease steps first (beat 0280b, LO 2026-11-13)
+
+LO: *"Add some more rungs tease first. Like she can start fingering herself"*, for both the technician and Sabin, two
+tease steps before the first touch.
+
+| step | the technician (his corruption) | Sabin (his corruption; the first step sets it to 15) |
+|---|---|---|
+| 0 | she comes to him | he knows her |
+| 1 | 15 · she strips in front of his chair | 25 · the plans |
+| 2 | 30 · she fingers herself on the test table for him | 35 · she poses spread for him and he draws her from life |
+| 3 | 45 · his mouth on her | 45 · she fingers herself on top of his plans |
+| 4 | 60 · her hand | 55 · the praise and the kiss |
+| 5 | 75 · her mouth | 65 · her hand |
+| 6 | 90 · the first fuck, the drain | 77 · her mouth |
+| 7 | | 90 · the first fuck on his bench, the drain |
+
+- Teases open behind the steps they follow: the technician's desk at step 2 and "by hand" at step 4; Sabin's tape at
+  step 3, genius and kiss at step 5.
+- Measured live with the clock reset per tease: technician 7 days and 10 teases, Sabin 8 days and 13 teases. Real
+  play is slower (the technician gets two actions a night, Sabin three).

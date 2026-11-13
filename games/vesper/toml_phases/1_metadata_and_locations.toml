@@ -399,7 +399,7 @@ cain_asked        = 0
 # save from 0.2.5.1 reads 0 for each and nothing in the city reads any of them.
 #   • tests_done 0-4 — the day tests at the Rise (wired up, the machine, pain, the empty body); 4 = the daily test.
 #     +1 once per calendar day from the located test card (days_since_flag test_day), never inside a loop.
-#   • tech_step 0-3 / sabin_step 0-4 / keeper_step 0-6 (beat_0279, the REWORK; were tech_nights / sabin_nights /
+#   • tech_step 0-7 (seven since beat_0280b) / sabin_step 0-8 (eight since beat_0280b) / keeper_step 0-6 (beat_0279, the REWORK; were tech_nights / sabin_nights /
 #     keeper_nights, unreleased) — each man's climb, the guard's shape. One step a calendar day on his hub, and only
 #     once HIS corruption (filled by her teases; the technician's also by every test, +2) reaches the threshold:
 #     technician 0/40/75, Sabin 0 (sets his corruption to 15) /30/45/65, keeper 0/15/30/50/70/90. The last step is

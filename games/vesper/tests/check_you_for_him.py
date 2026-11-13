@@ -274,12 +274,12 @@ for c in cards:
 
 # ── 0269-0272, REWORKED 0279: the other three rigs climb on HIS corruption, one step a day, the drain at the first fuck
 # (rid, room, npc, step key, day flag, thresholds per step taken (0 = none), drains key, lock, teases {text: (plus, from step)})
-RIGS = (("technician", "test_lab", "npc_technician", "tech_step", "tech_day", [0, 40, 75], "tech_drains_done", "study_door",
-         {"Undress for his cameras.": (4, 0), "Wire yourself up.": (6, 0), "Sit on his desk.": (5, 1),
-          "Make him take a reading by hand.": (8, 1)}),
-        ("sabin_study", "sabin_study", "npc_sabin", "sabin_step", "sabin_day", [0, 30, 45, 65], "sabin_custody_drains", "records_door",
-         {"Ask him to explain a drawing.": (5, 1), "Let him measure you.": (7, 2), "Tell him he's a genius.": (5, 3),
-          "Kiss him while he talks.": (6, 3)}),
+RIGS = (("technician", "test_lab", "npc_technician", "tech_step", "tech_day", [0, 15, 30, 45, 60, 75, 90], "tech_drains_done", "study_door",
+         {"Undress for his cameras.": (4, 0), "Wire yourself up.": (6, 0), "Sit on his desk.": (5, 2),
+          "Make him take a reading by hand.": (8, 4)}),
+        ("sabin_study", "sabin_study", "npc_sabin", "sabin_step", "sabin_day", [0, 25, 35, 45, 55, 65, 77, 90], "sabin_custody_drains", "records_door",
+         {"Ask him to explain a drawing.": (5, 1), "Let him measure you.": (7, 3), "Tell him he's a genius.": (5, 5),
+          "Kiss him while he talks.": (6, 5)}),
         ("keeper", "records_room", "npc_keeper", "keeper_step", "keeper_day", [0, 15, 30, 50, 70, 90], "keeper_drains_done", None,
          {"Read with him.": (3, 1), "Undress at the far end of the table.": (5, 2), "Sit in his lap while he reads.": (7, 3),
           "Put his hand on you.": (8, 4)}))

@@ -387,16 +387,19 @@ def main():
         ok(psg() == "Canvas_activity_wash_alone_Node_base", f"no curfew after his drain ({psg()})")
         ok(ncorr("npc_technician") >= 2 * days, f"every test so far wore on the technician ({ncorr('npc_technician')} after {days} days)")
         d, n = grind("technician", "npc_technician", "Canvas_hub_technician_Node_base", 22, 0, "tech_step",
-                     ["Go to him.", "Get up on the table.", "Get on his table."], [0, 40, 75],
+                     ["Go to him.", "Undress in front of him.", "Touch yourself in front of him.", "Get up on the table.", "Take him in your hand.", "Get on your knees for him.", "Get on his table."],
+                     [0, 15, 30, 45, 60, 75, 90],
                      ["Undress for his cameras.", "Wire yourself up.", "Sit on his desk.", "Make him take a reading by hand."],
                      ["Put the shift back on.", "Peel the pads off.", "Get down off his desk.", "Let go of his wrist."],
-                     ["Leave him with his screens.", "Leave him wanting it."], "tech_drains_done", "Take the code.")
+                     ["Leave him with his screens.", "Leave him wanting it.", "Wipe your hand on his coat.", "Wipe your mouth.", "Pick up your shift.", "Close your legs."], "tech_drains_done", "Take the code.")
         ok(tr("study_door") == 1, f"the technician is drained and Sabin's door opens ({d} days, {n} teases)")
         d, n = grind("Sabin", "npc_sabin", "Canvas_hub_sabin_study_Node_base", 18, 0, "sabin_step",
-                     ["Let him see you.", "Ask him about his work.", "Tell him what it is.", "Clear his plans."], [0, 30, 45, 65],
+                     ["Let him see you.", "Ask him about his work.", "Pose for him.", "Touch yourself on his bench.", "Tell him what it is.",
+                      "Take him in your hand.", "Go down on him.", "Clear his plans."], [0, 25, 35, 45, 55, 65, 77, 90],
                      ["Ask him to explain a drawing.", "Let him measure you.", "Tell him he's a genius.", "Kiss him while he talks."],
                      ["Let him roll it up.", "Step down.", "Leave him at the bench.", "Climb off him."],
-                     ["Leave him staring.", "Leave him talking.", "Leave him wanting it."], "sabin_custody_drains", "Take the key.")
+                     ["Leave him staring.", "Leave him talking.", "Leave him wanting it.", "Climb down.", "Get off the plans.", "Let go of him.",
+                      "Get up off your knees."], "sabin_custody_drains", "Take the key.")
         ok(tr("records_door") == 1, f"Sabin is drained and the records room opens ({d} days, {n} teases)")
         d, n = grind("keeper", "npc_keeper", "Canvas_hub_keeper_Node_base", 21, 30, "keeper_step",
                      ["Sit with him.", "Make him look.", "Stay.", "Put his hands on you.", "Get on your knees for him.", "Lock the door."],
