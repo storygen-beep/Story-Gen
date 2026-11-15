@@ -172,6 +172,66 @@ def main():
             ok(tr(drains) == 1, f"{man}: {drains} 1")
             return days, spent
 
+        def grind_chain(man, npc, hub, hour, key, nexts, offs, drains, drain_exit, runs_a_night=3):
+            """0280c: the technician's table is one chain. Each night: the test, then up to three runs from his hour
+            on, the clock moving by itself (each run ends with an hour in the lab). Each run goes as deep as is open;
+            every link gone through adds +3; at most one new link a night. The last link is the first fuck, and the
+            drain works on it. Returns (nights, runs)."""
+            nights = runs = 0
+            fucked = False
+            while not fucked and nights < 40:
+                nights += 1
+                next_day(9)
+                test_day()
+                at(hour, 0)
+                step0 = tr(key)
+                for r in range(runs_a_night):
+                    setv("energy", 100)
+                    play(hub)
+                    ok(psg() == hub, f"{man} night {nights}: run {r + 1} still fits the night ({psg()})")
+                    if psg() != hub:
+                        break
+                    ok("Get on his table." in labels() and "Not tonight." in labels(), f"{man}: the table and not tonight on his screen ({labels()})")
+                    c0, links = ncorr(npc), 0
+                    click("Get on his table.")
+                    runs += 1
+                    while True:
+                        nx = [l for l in labels() if l in nexts]
+                        if not nx:
+                            break
+                        click(nx[0])
+                        links += 1
+                        if nx[0] == nexts[-1]:
+                            fucked = True
+                            break
+                    ok(min(100, c0 + 3 * links) == ncorr(npc), f"{man}: +3 a link ({c0} + {links} links = {ncorr(npc)})")
+                    if fucked:
+                        break
+                    off = [l for l in labels() if l in offs]
+                    ok(len(off) == 1, f"{man}: one get-off at the end of the run ({labels()})")
+                    if not off:
+                        break
+                    click(off[0])
+                ok(tr(key) - step0 <= 1, f"{man} night {nights}: at most one new link ({step0} to {tr(key)})")
+            ok(fucked and tr(key) == 7, f"{man}: the chain reaches the first fuck ({tr(key)} after {nights} nights)")
+            setv("drain_charge", 1)
+            setv("equipped_weapon", 1)
+            names = [l for l in labels() if "ass" in l.lower() or "bend" in l.lower() or "turn" in l.lower() or "face" in l.lower()]
+            ok(bool(names), f"{man}: the loop offers her ass ({labels()})")
+            click(names[0])
+            for _ in range(12):
+                fin = [l for l in labels() if l.startswith("Let him come in your ass")]
+                if fin:
+                    click(fin[0])
+                    break
+                click("Take it.")
+            ok("Take what he carries." in labels(), f"{man}: the first fuck, the drain is offered ({labels()})")
+            click("Take what he carries.")
+            ok(walk(drain_exit), f"{man}: the first drain walks to '{drain_exit}'")
+            click(drain_exit)
+            ok(tr(drains) == 1, f"{man}: {drains} 1")
+            return nights, runs
+
         pg.goto(URL)
         pg.evaluate("localStorage.clear()")
         pg.reload()
@@ -386,13 +446,13 @@ def main():
         click("Wash alone")
         ok(psg() == "Canvas_activity_wash_alone_Node_base", f"no curfew after his drain ({psg()})")
         ok(ncorr("npc_technician") >= 2 * days, f"every test so far wore on the technician ({ncorr('npc_technician')} after {days} days)")
-        d, n = grind("technician", "npc_technician", "Canvas_hub_technician_Node_base", 22, 0, "tech_step",
-                     ["Go to him.", "Undress in front of him.", "Touch yourself in front of him.", "Get up on the table.", "Take him in your hand.", "Get on your knees for him.", "Get on his table."],
-                     [0, 15, 30, 45, 60, 75, 90],
-                     ["Undress for his cameras.", "Wire yourself up.", "Sit on his desk.", "Make him take a reading by hand."],
-                     ["Put the shift back on.", "Peel the pads off.", "Get down off his desk.", "Let go of his wrist."],
-                     ["Leave him with his screens.", "Leave him wanting it.", "Wipe your hand on his coat.", "Wipe your mouth.", "Pick up your shift.", "Close your legs."], "tech_drains_done", "Take the code.")
-        ok(tr("study_door") == 1, f"the technician is drained and Sabin's door opens ({d} days, {n} teases)")
+        d, n = grind_chain("technician", "npc_technician", "Canvas_hub_technician_Node_base", 21, "tech_step",
+                           ["Undress.", "Touch yourself.", "Let him put his fingers in you.", "Let him put his mouth on your clit.",
+                            "Take him in your hand.", "Take him in your mouth.", "Let him fuck you."],
+                           ["Get off the table.", "Pick up your shift.", "Close your legs.", "Let go of his wrist.", "Leave him wanting it.",
+                            "Wipe your hand on his coat.", "Wipe your mouth."], "tech_drains_done", "Take the code.")
+        ok(tr("study_door") == 1, f"the technician is drained and Sabin's door opens ({d} nights, {n} runs)")
+        print(f"TECHNICIAN CHAIN: {d} nights, {n} runs to the first drain")
         d, n = grind("Sabin", "npc_sabin", "Canvas_hub_sabin_study_Node_base", 18, 0, "sabin_step",
                      ["Let him see you.", "Ask him about his work.", "Pose for him.", "Touch yourself on his bench.", "Tell him what it is.",
                       "Take him in your hand.", "Go down on him.", "Clear his plans."], [0, 25, 35, 45, 55, 65, 77, 90],
