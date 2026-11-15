@@ -275,8 +275,7 @@ for c in cards:
 # ── 0269-0272, REWORKED 0279: the other three rigs climb on HIS corruption, one step a day, the drain at the first fuck
 # (rid, room, npc, step key, day flag, thresholds per step taken (0 = none), drains key, lock, teases {text: (plus, from step)})
 RIGS = (("technician", "test_lab", "npc_technician", "tech_step", "tech_day", [0, 15, 30, 45, 60, 75, 90], "tech_drains_done", "study_door",
-         {"Undress for his cameras.": (4, 0), "Wire yourself up.": (6, 0), "Sit on his desk.": (5, 2),
-          "Make him take a reading by hand.": (8, 4)}),
+         {}),  # since 0280c his steps and teases are one chain on his table, checked in its own block below
         ("sabin_study", "sabin_study", "npc_sabin", "sabin_step", "sabin_day", [0, 25, 35, 45, 55, 65, 77, 90], "sabin_custody_drains", "records_door",
          {"Ask him to explain a drawing.": (5, 1), "Let him measure you.": (7, 3), "Tell him he's a genius.": (5, 5),
           "Kiss him while he talks.": (6, 5)}),
@@ -294,7 +293,9 @@ for rid, loc, npc, key, day, TH, drains, lock, TEASE in RIGS:
         check(not canv[cid].get("trigger"), f"{rid}: {cid} is triggerless")
     bc = choices(node(hub, "base"))
     steppers = [c for c in bc if any(e.get("trait") == key and e.get("op") == "add" for e in c.get("effects", []))]
-    check(len(steppers) == len(TH), f"{rid}: {len(TH)} steps ({len(steppers)})")
+    if rid == "technician":
+        steppers = []  # the chain block below checks his steps
+    check(rid == "technician" or len(steppers) == len(TH), f"{rid}: {len(TH)} steps ({len(steppers)})")
     for k, c in enumerate(steppers):
         ci = items(c.get("conditions"))
         check(has(ci, trait_key=key, operator="lt", value=k + 1), f"{rid}: step {k} only from its own band")
@@ -304,7 +305,7 @@ for rid, loc, npc, key, day, TH, drains, lock, TEASE in RIGS:
         check(k == 0 or has(ci, type="trait", subject="npc", npc_id=npc, trait_key="corruption", operator="gte", value=TH[k]),
               f"{rid}: step {k} needs his corruption {TH[k]}")
         check(c.get("costs") == [{"trait": "energy", "value": 15}], f"{rid}: step {k} costs 15 energy")
-    check(steppers and steppers[-1].get("nodeId") == f"loop_{rid}.intro", f"{rid}: the last step is the first fuck")
+    check(rid == "technician" or (steppers and steppers[-1].get("nodeId") == f"loop_{rid}.intro"), f"{rid}: the last step is the first fuck")
     if rid == "sabin_study":
         check(any(e.get("npcId") == npc and e.get("op") == "set" and e.get("value") == 15 for e in steppers[0].get("effects", [])),
               "sabin: the first step sets his corruption to 15 (it carries Whose Hand points)")
@@ -344,6 +345,51 @@ for rid, loc, npc, key, day, TH, drains, lock, TEASE in RIGS:
     check(body >= 3, f"{rid}: the loop's poses stay on the body (3+ explicit words in {body} nodes)")
     mc = [c for c in cards if c.get("npc_id") == npc and any(w.get("trait") == key for w in c.get("when", []))]
     check(len(mc) == len(TH) + 1, f"{rid}: one card per step plus the drain card ({len(mc)})")
+# ── 0280c: the technician's screen is one chain on his table (LO 2026-11-15)
+TT = [0, 15, 30, 45, 60, 75, 90]                 # link k (1..7) needs his corruption TT[k-1]
+LINKS = ["table", "rung_strip", "rung_self", "rung_fingers", "rung1", "rung2", "rung3"]
+th = canv.get("hub_technician") or {}
+check([s.get("start_time") for s in th.get("trigger", {}).get("schedules", [])] == ["21:00"], "0280c: his hub opens at 21:00")
+row = [r for r in npcs["npc_technician"].get("schedules", []) if r.get("location") == "test_lab"]
+check([r.get("start_time") for r in row] == ["21:00"], f"0280c: his lab row starts at 21:00 ({[r.get('start_time') for r in row]})")
+bc = choices(node(th, "base"))
+check([c.get("text") for c in bc] == ["Get on his table.", "Get on his table.", "Not tonight."], f"0280c: two buttons on his screen ({[c.get('text') for c in bc]})")
+check(bc and bc[0].get("nodeId") == "hub_technician.table" and has(items(bc[0].get("conditions")), trait_key="tech_step", operator="lt", value=7)
+      and bc[0].get("costs") == [{"trait": "energy", "value": 15}], "0280c: before the first fuck the table opens the chain, 15 energy")
+check(len(bc) > 1 and bc[1].get("nodeId") == "loop_technician.intro" and has(items(bc[1].get("conditions")), trait_key="tech_step", operator="gte", value=7),
+      "0280c: from the first fuck on the table goes straight to the loop")
+check(not any(e.get("npcId") == "npc_technician" for c in bc for e in c.get("effects", [])), "0280c: no teases left on his screen")
+for gone in ("rung0", "tease_cameras", "tease_wires", "tease_desk", "tease_hand"):
+    check(node(th, gone) is None, f"0280c: {gone} is gone")
+for k, nid in enumerate(LINKS):
+    n = node(th, nid)
+    check(n is not None, f"0280c: link {k} node {nid} exists")
+    if n is None:
+        continue
+    ch = choices(n)
+    off = [c for c in ch if c.get("targetType") == "location"]
+    check(len(off) == 1 and off[0].get("locationId") == "test_lab" and off[0].get("time_progression_minutes") == 60,
+          f"0280c: {nid} has one get-off exit, an hour in the lab")
+    if k > 0:
+        check(len(EXPLICIT.findall(text_of(n))) >= 3, f"0280c: {nid} stays on the body")
+    nxt = [c for c in ch if c.get("targetType") == "node"]
+    tgt = "loop_technician.intro" if k == 6 else f"hub_technician.{LINKS[k + 1]}"
+    check(nxt and all(c.get("nodeId") == tgt for c in nxt), f"0280c: {nid} leads on to {tgt}")
+    check(all(any(e.get("npcId") == "npc_technician" and e.get("trait") == "corruption" and e.get("value") == 3 for e in c.get("effects", []))
+              for c in nxt), f"0280c: every link out of {nid} adds +3")
+    new = [c for c in nxt if any(e.get("trait") == "tech_step" and e.get("op") == "add" for e in c.get("effects", []))]
+    check(len(new) == 1, f"0280c: one new-tonight button out of {nid} ({len(new)})")
+    if new:
+        ci = items(new[0].get("conditions"))
+        check(has(ci, trait_key="tech_step", operator="lt", value=k + 1) and has(ci, trait_key="tech_step", operator="gte", value=k),
+              f"0280c: link {k + 1} opens only from step {k}")
+        check({"targetType": "player", "flag": "tech_day", "op": "set"} in new[0].get("flagEffects", []), f"0280c: link {k + 1} stamps tech_day")
+        check(has(ci, flag_key="tech_day", operator="is_false") if k == 0 else has(ci, type="days_since_flag", flag_key="tech_day", operator="gte", value=1),
+              f"0280c: link {k + 1} waits a calendar day")
+        check(k == 0 or has(ci, type="trait", subject="npc", npc_id="npc_technician", trait_key="corruption", operator="gte", value=TT[k]),
+              f"0280c: link {k + 1} needs his corruption {TT[k]}")
+        check(k == 0 or has(ci, type="time_of_day", start_time="21:00", end_time="23:59"),
+              f"0280c: link {k + 1} opens only inside his hours (a run past midnight is not the next night)")
 # 0279: every test wears on the technician, +2
 gw = [c for cid, cv in canv.items() for n in cv.get("nodes", []) for c in choices(n) if c.get("text") == "Go with them."]
 check(len(gw) == 10 and all(any(e.get("npcId") == "npc_technician" and e.get("trait") == "corruption" and e.get("value") == 2

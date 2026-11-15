@@ -1222,3 +1222,23 @@ tease steps before the first touch.
   step 3, genius and kiss at step 5.
 - Measured live with the clock reset per tease: technician 7 days and 10 teases, Sabin 8 days and 13 teases. Real
   play is slower (the technician gets two actions a night, Sabin three).
+
+## The technician's table as one chain (beat 0280c, LO 2026-11-15)
+
+LO played the tease steps and found the technician's screen messy: two buttons that both undressed her, every step a
+separate trip from the menu, and only two actions in a night. His screen now has two buttons, "Get on his table." and
+"Not tonight.". The table is one chain, and every link has its own way off:
+
+1. Undress. (his corruption 0)
+2. Touch yourself. (15)
+3. Let him put his fingers in you. (30; this was the tease "Make him take a reading by hand.")
+4. Let him put his mouth on your clit. (45)
+5. Take him in your hand. (60)
+6. Take him in your mouth. (75)
+7. Let him fuck you. (90; the first fuck, and the drain works on it)
+
+There are no teases any more. Every link she goes through adds +3 to his corruption, and every test still adds +2, so
+going as far as he allows is the grind. One new link opens a night, and only during his hours, which now run from
+21:00 to 23:59 so three runs fit. Links already open stay open on every run. Her hand and her mouth stop him just
+before he comes when the next link is open to her; otherwise he comes. After the first fuck the table goes straight
+to the repeat loop. Measured live: seven nights and nineteen runs to the first drain. Sabin gets the same shape next.
